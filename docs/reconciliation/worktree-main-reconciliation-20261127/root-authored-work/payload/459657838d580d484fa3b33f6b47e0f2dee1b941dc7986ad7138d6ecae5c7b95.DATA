@@ -1,0 +1,103 @@
+#!/usr/bin/env python3
+"""Prospectively freeze and run zero-provider original nomination controls."""
+from __future__ import annotations
+import argparse
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+
+HERE=Path(__file__).resolve().parent
+sys.path.insert(0,str(HERE))
+from request_contract import EVALS,CORPUS,CORPUS_SHA256,canonical,sha,read,source_runtime
+from service import save
+from evidence import PLAN
+from procedure import NATIVE
+
+def parent_fixture():
+    state=EVALS/'integrated_v1/controller_qualification/requests-cold-v2/state'
+    pointer_path=state/'native_repository_sealing/store/current_seals/a62aa255cccabb0e85811cbb95e0290c5afb3df9370293157396c60bf8c1e5bc.json'
+    pack_path=state/'native_repository_sealing/store/objects/checkpoint_seal/fd/fdc0efcac1a19d59de3f3c370a84e375517de896d746a0c75d96daf716568454.blob'
+    event_path=state/'events/requests-cold-v2-d-5414/result.json'
+    pointer=read(pointer_path)['pointer'];event=read(event_path);publication=event['evidence']['seal_publish']
+    if pointer['seal_cid']!='sha256:'+sha(pack_path.read_bytes()) or publication['seal_cid']!=pointer['seal_cid'] or not publication['published'] or not event['accepted_for_next_state']:
+        raise ValueError('actual retained native pointer/accepted pack join changed')
+    projection={'trajectory_id':event['trajectory'],'event_id':event['event_id'],'generation':pointer['generation'],'seal_cid':pointer['seal_cid']}
+    return {'schema':'ns-original-nomination-parent-codec-fixture/v1','projection':projection,
+        'source_sha256':{str(path):sha(path.read_bytes()) for path in (pointer_path,pack_path,event_path)},
+        'scope':'Exact real accepted Requests pointer tests wire/descriptor compatibility only. It grants no original-task publication authority; caller must join its own current trajectory/source and CAS.'}
+
+def request_for(task,endpoint,endpoint_path,index,cache,version):
+    inventory=source_runtime.original_adapter_inventory(Path(task['source_root']));original=sha(canonical(inventory))
+    record=next(row for row in endpoint['tasks'] if row['task_id']==task['task_id']);namespace='qualification-'+version+'-'+task['task_id']+'-'+str(index)+'-'+cache
+    scorer={'protocol':'ns-original-candidate-score/v1','operation':'score','evaluation_id':namespace,'task_id':task['task_id'],'base_commit':task['base_commit'],
+        'objective_record_sha256':task['objective_record_sha256'],'objective_text_sha256':task['objective_text_sha256'],
+        'configuration_sha256':task['events'][0 if index==0 else index-1]['configuration_sha256'],'sealed_candidate_tree_path':task['source_root'],
+        'expected_candidate_source_tree_sha256':original,'scorer_profile_sha256':endpoint['scorer_profile_sha256']}
+    return {'schema':'ns-original-validation-plan-request/v1','operation':'plan_validation','corpus_sha256':CORPUS_SHA256,
+        'trajectory_id':namespace,'arm':'D','cache_profile':cache,'cache_namespace':namespace,'operation_id':namespace,
+        'task_id':task['task_id'],'event_index':index,'scorer_request':scorer,'source_inventory_format':'original-adapter-path-keyed/v1',
+        'source_inventory_sha256':original,'generic_source_tree_sha256':task['source_tree_sha256'],
+        'environment_profile_sha256':record['environment_profile_sha256'],'endpoint_contract_sha256':sha(endpoint_path.read_bytes()),'expected_publication_parent':None}
+
+def main():
+    start=time.perf_counter();parser=argparse.ArgumentParser();parser.add_argument('--version',required=True);parser.add_argument('--run',type=Path,required=True);args=parser.parse_args()
+    directory=HERE/'native_profiles'/args.version;directory.mkdir(parents=True)
+    args.run.mkdir();endpoint=EVALS/'recruitment/original_acceptance_v1/endpoint_declaration_v4.json';declaration=read(endpoint)
+    for name in ('request_contract.py','procedure.py','evidence.py','runtime.py','service.py','qualify_nomination_v1.py'):shutil.copy2(HERE/name,directory/name)
+    keydir=Path(tempfile.mkdtemp(prefix='original-nomination-test-key-'));keypath=keydir/'key';keypath.write_bytes(os.urandom(32));keypath.chmod(0o600)
+    sources=set(directory.glob('*.py'))|{CORPUS,endpoint,Path(source_runtime.__file__).resolve()}
+    for package in ('ipfs_accelerate_py','ipfs_datasets_py'):
+        sources.update(path.resolve() for path in (NATIVE/package).rglob('*.py') if path.is_file())
+    for name in ('repository_retrieval_v1.py','repository_retrieval_v2.py'):
+        path=Path(source_runtime.__file__).with_name(name)
+        if path.exists():sources.add(path.resolve())
+    profile={'schema':'ns-original-nomination-service-profile/v1','version':args.version,'service_path':str(directory/'service.py'),
+        'sources_sha256':{str(p.resolve()):sha(p.read_bytes()) for p in sorted(sources)},'corpus_sha256':CORPUS_SHA256,
+        'endpoint_contract_sha256':sha(endpoint.read_bytes()),'evidence_plan':PLAN,'process_bound_seconds':120,
+        'test_signer_id':'original-nomination-test-issuer@1','test_signer_key_path':str(keypath),'test_signer_key_sha256':sha(keypath.read_bytes()),
+        'production_authority':False,'registry_promoted':False,'provider_calls':0,'scorer_calls':0}
+    profile_path=directory/'profile.json';save(profile_path,profile)
+    cases=[]
+    for task in read(CORPUS)['tasks']:
+        for index,cache in ((0,'warm'),(2,'cold'),(5,'warm')):cases.append(request_for(task,declaration,endpoint,index,cache,args.version))
+    fixture=parent_fixture();save(args.run/'actual_parent_fixture.json',fixture)
+    descriptor_case=request_for(read(CORPUS)['tasks'][0],declaration,endpoint,6,'cold',args.version)
+    descriptor_case['trajectory_id']=fixture['projection']['trajectory_id'];descriptor_case['expected_publication_parent']=fixture['projection'];cases.append(descriptor_case)
+    save(args.run/'prospective_requests.json',cases)
+    freeze={'schema':'ns-original-nomination-qualification-freeze/v1','profile_sha256':sha(profile_path.read_bytes()),
+        'request_list_sha256':sha(canonical(cases)),'process_bound_seconds':120,'cases':len(cases),'provider_calls':0,'scorer_calls':0,
+        'actual_parent_fixture_sha256':sha((args.run/'actual_parent_fixture.json').read_bytes()),
+        'scope':'Exact four original public base sources, both API configurations and explicit warm priming, plus one real native parent wire fixture; fresh native signing/execution for each; no original scorer calls or CALL reuse.'}
+    save(args.run/'freeze.json',freeze);rows=[]
+    for ordinal,request in enumerate(cases):
+        request_path=args.run/(f'request_{ordinal}.json');save(request_path,request);out=args.run/f'case_{ordinal}'
+        command=[sys.executable,'-B',str(directory/'service.py'),'--profile',str(profile_path),'--endpoint',str(endpoint),'--request',str(request_path),'--run',str(out)]
+        env={k:v for k,v in os.environ.items() if k not in ('PYTHONPATH','PYTEST_ADDOPTS') and not k.startswith(('IPFS_','NS_'))}
+        env.update(IPFS_ACCEL_SKIP_CORE='1',IPFS_ACCEL_AUTO_INSTALL='0',PYTHONDONTWRITEBYTECODE='1')
+        tick=time.perf_counter()
+        try:proc=subprocess.run(command,env=env,capture_output=True,timeout=120);returncode=proc.returncode;stdout=proc.stdout;stderr=proc.stderr;timeout=False
+        except subprocess.TimeoutExpired as exc:returncode=None;stdout=exc.stdout or b'';stderr=exc.stderr or b'';timeout=True
+        elapsed=time.perf_counter()-tick
+        (args.run/f'process_{ordinal}.stdout').write_bytes(stdout);(args.run/f'process_{ordinal}.stderr').write_bytes(stderr)
+        row={'ordinal':ordinal,'task_id':request['task_id'],'event_index':request['event_index'],'cache_profile':request['cache_profile'],
+            'command':command,'returncode':returncode,'timed_out':timeout,'bound_seconds':120,'enclosing_process_seconds':elapsed,
+            'stdout_sha256':sha(stdout),'stderr_sha256':sha(stderr)};save(args.run/f'process_{ordinal}.json',row);rows.append(row)
+        if returncode!=0:
+            save(args.run/'terminal_failure.json',{'case':ordinal,'returncode':returncode,'timed_out':timeout,'completed_processes':rows,'enclosing_driver_seconds':time.perf_counter()-start})
+            print(json.dumps({'passed':False,'case':ordinal,'run':str(args.run)}));return 1
+        summary=read(out/'summary.json')
+        if summary['native_status']!='succeeded' or summary['native_dispatches']!=5 or summary['provider_calls'] or summary['scorer_calls'] or summary['scoring_passed']:raise ValueError('native nomination outcome invalid')
+    for path,digest in profile['sources_sha256'].items():
+        if sha(Path(path).read_bytes())!=digest:raise ValueError('frozen source drift after qualification')
+    summary={'schema':'ns-original-nomination-qualification/v1','all_positive_controls_passed':True,'cases':rows,'profile_sha256':freeze['profile_sha256'],
+        'freeze_sha256':sha((args.run/'freeze.json').read_bytes()),'enclosing_process_seconds':sum(row['enclosing_process_seconds'] for row in rows),
+        'enclosing_driver_seconds':time.perf_counter()-start,'provider_calls':0,'scorer_calls':0,'native_interpreter_invocations':len(rows),
+        'native_operation_dispatches':5*len(rows),'scope':freeze['scope'],'independent_negative_audit_complete':False}
+    save(args.run/'summary.json',summary);print(canonical(summary).decode());return 0
+
+if __name__=='__main__':raise SystemExit(main())

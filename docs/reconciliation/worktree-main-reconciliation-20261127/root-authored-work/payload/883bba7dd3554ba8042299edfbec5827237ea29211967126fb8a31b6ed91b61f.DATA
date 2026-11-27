@@ -1,0 +1,92 @@
+import Init
+
+namespace CodebaseIntegerLowering
+
+set_option autoImplicit false
+
+-- Source-AST grammar theorem only; parsing, physical origin and CPython equivalence remain unproved.
+
+def translationEvidence : String := "{\"adapter_metadata\":{\"adapter\":\"SourceSoftwareVerificationAdapter@1\",\"language\":\"python\",\"path\":\"callee.py\"},\"assumptions\":[\"The argument is an exact built-in Python int, excluding bool and subclasses; source annotations do not enforce this.\",\"Integer arithmetic uses the unbounded mathematical model; allocation failure, resource exhaustion and asynchronous interruption are excluded from modeled execution.\",\"The captured function is called directly with one supplied argument in sequential execution; module loading, rebinding and concurrent code changes are outside the model.\"],\"behavior_authority\":false,\"claim\":\"Closed source-AST grammar to mathematical Int target lowering only; byte parsing and CPython/runtime semantics are outside the theorem.\",\"compiled_cid\":\"baguqeeraahpmbudrleh5nemptnrwelulmj6ulkxyfjk4lke5gzbito6ud3xq\",\"completion_authority\":false,\"contract\":{\"function_name\":\"increment\",\"offset\":1,\"parameter\":\"n\",\"path\":\"callee.py\",\"profile\":\"python-integer-offset@1\",\"schema\":\"codebase-integer-offset-contract@1\"},\"contract_cid\":\"baguqeerapb2xgw4fvao2wmyqrajhhsbmf4vloojyfw5zlyfqftakto5xlq5a\",\"cpython_equivalence_proved\":false,\"effect_mapping\":{\"basis\":\"Closed one-return AST; conservative native summaries retained without rewriting.\",\"model\":{\"reads\":[\"symbol:increment.n.parameter\"],\"returns\":\"Lean.Int\",\"writes\":[]},\"native_function\":{\"allocates\":[],\"deallocates\":[],\"nondeterministic\":false,\"performs_io\":false,\"raises\":[],\"reads\":[\"symbol:increment.n.parameter\"],\"synchronizes\":false,\"writes\":[]},\"native_return\":{\"allocates\":[],\"deallocates\":[],\"nondeterministic\":false,\"performs_io\":false,\"raises\":[],\"reads\":[],\"synchronizes\":false,\"writes\":[]}},\"executable_expression_ids\":[\"expr:6\",\"expr:8\",\"expr:9\"],\"execution_authority\":false,\"frontend\":{\"claim\":\"Selected frontend implementation files; no parser, CPython, or transitive dependency correctness theorem.\",\"dependency_scope\":\"selected Python implementation files and native executables; ambient shared libraries are not attested\",\"environment\":{\"HOME\":\"private-workspace\",\"LANG\":\"C\",\"LC_ALL\":\"C\",\"PATH\":\"/usr/bin:/bin\",\"TEMP\":\"private-workspace\",\"TMP\":\"private-workspace\",\"TMPDIR\":\"private-workspace\"},\"frontend_python\":{\"path\":\"/usr/local/bin/python3.12\",\"sha256\":\"7863a4d5e03fde7791c7f8c2c304cf3522f435e19745364ad18a6b7a0458af57\",\"size_bytes\":67608},\"implementation\":\"cpython\",\"machine\":\"aarch64\",\"parser\":\"cpython-312\",\"python\":\"3.12.15 (main, Oct  1 2026, 21:42:26) [GCC 12.2.0]\",\"release\":\"6.17.0-1014-nvidia\",\"resource_helper\":{\"kind\":\"linux-prlimit\",\"sha256\":\"03ae4ab1fa182e0770c335a7929b100c47d83eb5ad5a8971ddc5c8a20e22f655\"},\"source_sha256\":{\"ipfs_datasets_py.logic.backends.process\":\"cc2741550e16966292dc8b64a634a7b0a493e2a43e909fae326e1205715c9626\",\"ipfs_datasets_py.logic.backends.smt.compiler\":\"9b14183c071fb9eaed29a18e0bdd6483f71e152a82c88732bc0ae0a6d2321be5\",\"ipfs_datasets_py.logic.backends.smt.differential\":\"a1df37ffd82c35e9bb89e2541238bc9e481c4515512571cee7fba411e36dbf2e\",\"ipfs_datasets_py.logic.software_contracts.cache\":\"d708bb536860334a43a97244652765bf926d949286207cc25ff68788bf85751f\",\"ipfs_datasets_py.logic.software_contracts.codebase_integer_lowering_lean\":\"c2f55e9c96d504ab357ce4fb8d8bd8044f6277a965812458784714de1a91dda3\",\"ipfs_datasets_py.logic.software_contracts.codebase_integer_model_lean\":\"ab1e5bba2c9b63767068b5f5709af09145efd30e730c40d2474bb7143e369217\",\"ipfs_datasets_py.logic.software_contracts.codebase_integer_profile\":\"a059472331b2fbc0b5b0778bbd311912dffefb0d8f6c6557c4978070fc89e283\",\"ipfs_datasets_py.logic.software_contracts.content\":\"c27c4e3cd4a5ee12ff5c3967a7f57e421ea1bb26ff36b66c7547e9d1e3cde2df\",\"ipfs_datasets_py.logic.software_verification.pipeline\":\"f9311299d1b9cccb6ba954aa5687b0494f2997472223f93e93b5c7071ab1f3f6\",\"ipfs_datasets_py.logic.software_verification.program\":\"f051f42d64c5f993451972924953cc7eaa6d17df097235ddabfd5d791d406f91\",\"ipfs_datasets_py.logic.software_verification.source_adapters\":\"aef42730598f74d35e232f460637560be71b55ddc459d555df9105d17fcfc003\",\"ipfs_datasets_py.logic.software_verification.vc\":\"bc738a32af07afb4cc787d0ea5f743dc01e99d52230a45669bb04222e6cf7bf9\"},\"system\":\"Linux\"},\"head\":{\"ast_revision_id\":\"rev:authored:stage-aa:admitted-checked-caller:snapshot:baguqeeraiy3f7lahvqgmkccwuq36h2z2gztjzzimstot3qeuc3m6fasopxlq\",\"generation\":1,\"manifest_cid\":\"baguqeeraayntohnvgpjqsuaddvdalembx4ch5ixxlxotexavyauuny2zle5q\",\"receipt_cid\":\"baguqeeraw4o4g33zfwvet5g4amtxnvdkasbzt5dn2nsvbk6kqm4uvzdm7xia\",\"repository_id\":\"authored:stage-aa:admitted-checked-caller\",\"schema\":\"codebase-head@1\",\"snapshot_cid\":\"baguqeeraiy3f7lahvqgmkccwuq36h2z2gztjzzimstot3qeuc3m6fasopxlq\"},\"lowered_source_syntax\":{\"kind\":\"add\",\"left\":{\"kind\":\"parameter\"},\"right\":{\"kind\":\"literal\",\"value\":1}},\"mutation_authority\":false,\"native_program\":{\"commands\":[{\"attributes\":{},\"command_id\":\"command:10\",\"effects\":{\"allocates\":[],\"deallocates\":[],\"nondeterministic\":false,\"performs_io\":false,\"raises\":[],\"reads\":[],\"synchronizes\":false,\"writes\":[]},\"evaluation_order\":[\"expr:9\"],\"expression_ids\":[\"expr:9\"],\"kind\":\"return\",\"source_ref_ids\":[\"source:callee.py\"],\"span_ids\":[\"span:increment.stmt.3\"],\"target_symbol_ids\":[],\"undefined_behavior\":[]}],\"expressions\":[{\"attributes\":{},\"evaluation_order\":[],\"expression_id\":\"expr:6\",\"kind\":\"symbol\",\"operand_ids\":[],\"operator\":\"\",\"source_ref_ids\":[\"source:callee.py\"],\"span_ids\":[\"span:increment.expr.5\"],\"symbol_ids\":[\"symbol:increment.n.parameter\"],\"type_ref\":\"any\"},{\"attributes\":{\"value\":1},\"evaluation_order\":[],\"expression_id\":\"expr:8\",\"kind\":\"literal\",\"operand_ids\":[],\"operator\":\"\",\"source_ref_ids\":[\"source:callee.py\"],\"span_ids\":[\"span:increment.expr.7\"],\"symbol_ids\":[],\"type_ref\":\"int\"},{\"attributes\":{},\"evaluation_order\":[\"expr:6\",\"expr:8\"],\"expression_id\":\"expr:9\",\"kind\":\"binary\",\"operand_ids\":[\"expr:6\",\"expr:8\"],\"operator\":\"add\",\"source_ref_ids\":[\"source:callee.py\"],\"span_ids\":[\"span:increment.expr.4\"],\"symbol_ids\":[],\"type_ref\":\"any\"},{\"attributes\":{},\"evaluation_order\":[\"expr:pipeline:name:2:increment\",\"expr:pipeline:lit:3:increment\"],\"expression_id\":\"expr:pipeline:bin:4:increment\",\"kind\":\"binary\",\"operand_ids\":[\"expr:pipeline:name:2:increment\",\"expr:pipeline:lit:3:increment\"],\"operator\":\"add\",\"source_ref_ids\":[\"source:callee.py\"],\"span_ids\":[\"span:function.increment.1\"],\"symbol_ids\":[],\"type_ref\":\"integer\"},{\"attributes\":{},\"evaluation_order\":[\"expr:pipeline:name:1:increment\",\"expr:pipeline:bin:4:increment\"],\"expression_id\":\"expr:pipeline:cmp:5:increment\",\"kind\":\"binary\",\"operand_ids\":[\"expr:pipeline:name:1:increment\",\"expr:pipeline:bin:4:increment\"],\"operator\":\"eq\",\"source_ref_ids\":[\"source:callee.py\"],\"span_ids\":[\"span:function.increment.1\"],\"symbol_ids\":[],\"type_ref\":\"boolean\"},{\"attributes\":{\"value\":1},\"evaluation_order\":[],\"expression_id\":\"expr:pipeline:lit:3:increment\",\"kind\":\"literal\",\"operand_ids\":[],\"operator\":\"\",\"source_ref_ids\":[\"source:callee.py\"],\"span_ids\":[\"span:function.increment.1\"],\"symbol_ids\":[],\"type_ref\":\"integer\"},{\"attributes\":{},\"evaluation_order\":[],\"expression_id\":\"expr:pipeline:name:1:increment\",\"kind\":\"result\",\"operand_ids\":[],\"operator\":\"\",\"source_ref_ids\":[\"source:callee.py\"],\"span_ids\":[\"span:function.increment.1\"],\"symbol_ids\":[\"symbol:increment.result.result\"],\"type_ref\":\"int\"},{\"attributes\":{},\"evaluation_order\":[],\"expression_id\":\"expr:pipeline:name:2:increment\",\"kind\":\"symbol\",\"operand_ids\":[],\"operator\":\"\",\"source_ref_ids\":[\"source:callee.py\"],\"span_ids\":[\"span:function.increment.1\"],\"symbol_ids\":[\"symbol:increment.n.parameter\"],\"type_ref\":\"int\"}],\"functions\":[{\"cfg\":{\"blocks\":[{\"block_id\":\"block:entry\",\"command_ids\":[\"command:10\"],\"source_ref_ids\":[\"source:callee.py\"],\"span_ids\":[\"span:function.increment.1\"]}],\"edges\":[],\"entry_block_id\":\"block:entry\",\"exceptional_exit_block_ids\":[],\"graph_id\":\"cfg:increment\",\"normal_exit_block_ids\":[\"block:entry\"]},\"declared_exceptions\":[],\"effects\":{\"allocates\":[],\"deallocates\":[],\"nondeterministic\":false,\"performs_io\":false,\"raises\":[],\"reads\":[\"symbol:increment.n.parameter\"],\"synchronizes\":false,\"writes\":[]},\"exception_symbol_ids\":[],\"function_id\":\"function:increment\",\"local_symbol_ids\":[],\"name\":\"increment\",\"parameter_symbol_ids\":[\"symbol:increment.n.parameter\"],\"purity\":\"pure\",\"result_symbol_id\":\"symbol:increment.result.result\",\"return_type\":\"int\",\"source_ref_ids\":[\"source:callee.py\"],\"span_ids\":[\"span:function.increment.1\"]}],\"global_symbol_ids\":[],\"metadata\":{\"adapter\":\"SourceSoftwareVerificationAdapter@1\",\"language\":\"python\",\"path\":\"callee.py\"},\"program_id\":\"bafkreibqhs4kgpk66z2smboo3hdtjddtt3ylf73jgizz7fx4eduafstpti\",\"schema_version\":\"program-ir/v1\",\"sources\":[{\"container_sha256\":\"\",\"container_uri\":\"\",\"content_cid\":\"\",\"content_sha256\":\"dab1f2e184164f685f25b7b514b053e3c3cdcc7ddff0e36389072bae85b2b3ac\",\"license_expression\":\"\",\"metadata\":{\"byte_length\":47,\"language\":\"python\",\"path\":\"callee.py\"},\"ref_id\":\"source:callee.py\",\"review_status\":\"unreviewed\",\"source_id\":\"callee.py\",\"source_revision\":\"snapshot:baguqeeraiy3f7lahvqgmkccwuq36h2z2gztjzzimstot3qeuc3m6fasopxlq\",\"source_uri\":\"file:///callee.py\"}],\"spans\":[{\"end_byte\":46,\"end_char\":null,\"end_column\":16,\"end_line\":2,\"metadata\":{},\"source_ref_id\":\"source:callee.py\",\"span_id\":\"span:function.increment.1\",\"start_byte\":0,\"start_char\":null,\"start_column\":1,\"start_line\":1},{\"end_byte\":46,\"end_char\":null,\"end_column\":16,\"end_line\":2,\"metadata\":{},\"source_ref_id\":\"source:callee.py\",\"span_id\":\"span:increment.expr.4\",\"start_byte\":41,\"start_char\":null,\"start_column\":12,\"start_line\":2},{\"end_byte\":42,\"end_char\":null,\"end_column\":12,\"end_line\":2,\"metadata\":{},\"source_ref_id\":\"source:callee.py\",\"span_id\":\"span:increment.expr.5\",\"start_byte\":41,\"start_char\":null,\"start_column\":12,\"start_line\":2},{\"end_byte\":46,\"end_char\":null,\"end_column\":16,\"end_line\":2,\"metadata\":{},\"source_ref_id\":\"source:callee.py\",\"span_id\":\"span:increment.expr.7\",\"start_byte\":45,\"start_char\":null,\"start_column\":16,\"start_line\":2},{\"end_byte\":20,\"end_char\":null,\"end_column\":20,\"end_line\":1,\"metadata\":{},\"source_ref_id\":\"source:callee.py\",\"span_id\":\"span:increment.param.n.2\",\"start_byte\":14,\"start_char\":null,\"start_column\":15,\"start_line\":1},{\"end_byte\":46,\"end_char\":null,\"end_column\":16,\"end_line\":2,\"metadata\":{},\"source_ref_id\":\"source:callee.py\",\"span_id\":\"span:increment.stmt.3\",\"start_byte\":34,\"start_char\":null,\"start_column\":5,\"start_line\":2}],\"symbols\":[{\"attributes\":{},\"kind\":\"parameter\",\"name\":\"n\",\"source_ref_ids\":[\"source:callee.py\"],\"span_ids\":[\"span:increment.param.n.2\"],\"symbol_id\":\"symbol:increment.n.parameter\",\"type_ref\":\"int\"},{\"attributes\":{},\"kind\":\"result\",\"name\":\"result\",\"source_ref_ids\":[\"source:callee.py\"],\"span_ids\":[\"span:function.increment.1\"],\"symbol_id\":\"symbol:increment.result.result\",\"type_ref\":\"int\"}]},\"native_program_cid\":\"baguqeerauygdr6dw34aufcpfwvr6ks44s22ywn7lsqkvstglmsob7hvug34a\",\"native_target_correspondence_proved\":false,\"native_target_syntax\":{\"kind\":\"add\",\"left\":{\"kind\":\"parameter\"},\"right\":{\"kind\":\"literal\",\"value\":1}},\"native_target_syntax_cid\":\"baguqeera7xggt2s7yjrwdezijmee2rcwplabxsbfzmnsqxcoo26pwex6ca2q\",\"operational_expression\":{\"kind\":\"add\",\"left\":{\"kind\":\"parameter\"},\"right\":{\"kind\":\"literal\",\"value\":1}},\"profile\":\"guarded-python-integer-offset-ast-lowering@2\",\"proof_authority\":false,\"requested_offset\":1,\"retained_contract_expression_ids\":[\"expr:pipeline:bin:4:increment\",\"expr:pipeline:cmp:5:increment\",\"expr:pipeline:lit:3:increment\",\"expr:pipeline:name:1:increment\",\"expr:pipeline:name:2:increment\"],\"revision\":\"snapshot:baguqeeraiy3f7lahvqgmkccwuq36h2z2gztjzzimstot3qeuc3m6fasopxlq\",\"runtime_behavior_verified\":false,\"schema\":\"codebase-integer-ast-lowering-translation@1\",\"scope\":\"formal_ast_lowering_correctness\",\"source_adapter_metadata\":{\"byte_length\":47,\"language\":\"python\",\"path\":\"callee.py\"},\"source_ast_lowering_proved\":false,\"source_ast_syntax\":{\"kind\":\"add\",\"literal\":{\"kind\":\"literal\",\"value\":1}},\"source_ast_syntax_cid\":\"baguqeerahocmiqotr7irxjqpzcyxuto3tg64y6eembf6zkqgbb3svoa2mpba\",\"source_cid\":\"bafkreig2whzodbawj5uf6jnxwuklau7dypg4y7o76drwhcihfoxilmvtvq\",\"source_offset\":1,\"source_origin_proved\":false,\"source_parser_correctness_proved\":false,\"source_semantics_verified\":false,\"source_sha256\":\"dab1f2e184164f685f25b7b514b053e3c3cdcc7ddff0e36389072bae85b2b3ac\",\"training_convergence_proved\":false,\"translation_correctness_proved\":false,\"translation_correspondence_checked\":true,\"type_mapping\":{\"expressions\":[{\"basis\":\"closed AST and exact built-in integer input assumption\",\"expression_id\":\"expr:9\",\"model_type\":\"Lean.Int\",\"source_type\":\"any\",\"span_ids\":[\"span:increment.expr.4\"]},{\"basis\":\"closed AST and exact built-in integer input assumption\",\"expression_id\":\"expr:6\",\"model_type\":\"Lean.Int\",\"source_type\":\"any\",\"span_ids\":[\"span:increment.expr.5\"]},{\"basis\":\"closed AST and exact built-in integer input assumption\",\"expression_id\":\"expr:8\",\"model_type\":\"Lean.Int\",\"source_type\":\"int\",\"span_ids\":[\"span:increment.expr.7\"]}],\"symbols\":[{\"model_type\":\"Lean.Int\",\"source_type\":\"int\",\"symbol_id\":\"symbol:increment.n.parameter\"},{\"model_type\":\"Lean.Int\",\"source_type\":\"int\",\"symbol_id\":\"symbol:increment.result.result\"}]},\"universal_runtime_behavior_proved\":false,\"whole_program_semantics_verified\":false}"
+
+inductive SignedLiteral where
+  | literal (value : Int)
+  | positive (value : Int)
+  | negative (value : Int)
+
+inductive SourceBody where
+  | identity
+  | add (literal : SignedLiteral)
+  | sub (literal : SignedLiteral)
+
+inductive TargetExpr where
+  | parameter
+  | literal (value : Int)
+  | add (left right : TargetExpr)
+  | sub (left right : TargetExpr)
+  | neg (operand : TargetExpr)
+  | pos (operand : TargetExpr)
+
+def sourceLiteralEval : SignedLiteral → Int
+  | .literal value => value
+  | .positive value => value
+  | .negative value => -value
+
+def sourceEval : SourceBody → Int → Int
+  | .identity, input => input
+  | .add literal, input => input + sourceLiteralEval literal
+  | .sub literal, input => input - sourceLiteralEval literal
+
+def targetEval : TargetExpr → Int → Int
+  | .parameter, input => input
+  | .literal value, _ => value
+  | .add left right, input => targetEval left input + targetEval right input
+  | .sub left right, input => targetEval left input - targetEval right input
+  | .neg operand, input => -(targetEval operand input)
+  | .pos operand, input => targetEval operand input
+
+def lowerLiteral : SignedLiteral → TargetExpr
+  | .literal value => .literal value
+  | .positive value => .pos (.literal value)
+  | .negative value => .neg (.literal value)
+
+def lower : SourceBody → TargetExpr
+  | .identity => .parameter
+  | .add literal => .add .parameter (lowerLiteral literal)
+  | .sub literal => .sub .parameter (lowerLiteral literal)
+
+theorem signed_literal_lowering_correct : ∀ literal : SignedLiteral, ∀ input : Int,
+    targetEval (lowerLiteral literal) input = sourceLiteralEval literal := by
+  intro literal input
+  cases literal <;> rfl
+
+theorem lowering_correct : ∀ body : SourceBody, ∀ input : Int,
+    targetEval (lower body) input = sourceEval body input := by
+  intro body input
+  cases body with
+  | identity => rfl
+  | add literal => simp only [lower, targetEval, sourceEval, signed_literal_lowering_correct]
+  | sub literal => simp only [lower, targetEval, sourceEval, signed_literal_lowering_correct]
+
+
+def capturedSourceBody : SourceBody := (SourceBody.add (SignedLiteral.literal (1 : Int)))
+
+def nativeTargetExpression : TargetExpr := (TargetExpr.add TargetExpr.parameter (TargetExpr.literal (1 : Int)))
+
+theorem native_target_correspondence : nativeTargetExpression = lower capturedSourceBody := by rfl
+
+theorem captured_ast_target_equivalence : ∀ input : Int, targetEval nativeTargetExpression input = sourceEval capturedSourceBody input := by
+  intro input
+  rw [native_target_correspondence]
+  exact lowering_correct capturedSourceBody input
+
+def run (input : Int) : Int := targetEval nativeTargetExpression input
+
+theorem source_offset_identity : ∀ input : Int, run input = input + (1 : Int) := by
+  intro input
+  simp only [run, captured_ast_target_equivalence, capturedSourceBody, sourceEval, sourceLiteralEval]
+  <;> omega
+
+theorem requested_offset_identity : ∀ input : Int, run input = input + (1 : Int) := source_offset_identity
+
+end CodebaseIntegerLowering
+

@@ -1,0 +1,91 @@
+"""Public six-event input transitions, separate from acceptance/publication.
+
+The caller must independently validate acceptance and bind complete records.
+This helper never treats a candidate's own status field as scorer authority.
+"""
+from pathlib import Path
+import repository_runtime_v2 as R
+
+
+def source_input(task, event, previous, destination):
+    index = event["event_index"]
+    if event["task_id"] != task["task_id"] or index not in range(1, 7):
+        raise ValueError("event does not belong to frozen family sequence")
+    expected_event = task["events"][index - 1]
+    if event != expected_event:
+        raise ValueError("event differs from frozen template")
+    base = Path(task["source_root"])
+    if index == 1:
+        if previous is not None:
+            raise ValueError("initial event cannot consume a predecessor")
+        source = base
+        expected = task["source_tree_sha256"]
+        origin = "public_base"
+        failed_dependencies = []
+        transforms = []
+    else:
+        if (previous is None or previous["task_id"] != task["task_id"]
+                or previous["event_index"] != index - 1 or previous.get("terminal") is not True):
+            raise ValueError("exact terminal predecessor required")
+        if previous["accepted_for_next_state"]:
+            source = Path(previous["accepted_tree_path"])
+            expected = previous["accepted_tree_sha256"]
+            origin = "immediate_predecessor_accepted_source"
+        else:
+            source = Path(previous["input_tree_path"])
+            expected = previous["input_tree_sha256"]
+            origin = "immediate_predecessor_public_input"
+        failed_dependencies = list(previous["failed_repair_dependencies"])
+        if index == 3 and not previous["accepted_for_next_state"]:
+            failed_dependencies.append({"event_index": 2, "status": previous["status"],
+                                        "result_sha256": previous["result_sha256"]})
+        transforms = list(previous["public_transform_history"])
+    if R.inventory(source)["tree_sha256"] != expected:
+        raise ValueError("previous input or accepted source receipt changed")
+    edits = None
+    if index == 4:
+        transform = event["public_source_transform"]
+        transform_hash = R.sha(R.canonical(transform))
+        if any(row["transform_sha256"] == transform_hash for row in transforms):
+            raise ValueError("public comment must apply exactly once")
+        name = transform["path"]
+        old = R.text(R.production(source, name, task["source_policy"], edit=True))
+        edits = [{"path": name, "old": old, "new": old + transform["bytes_utf8"]}]
+        transforms.append({"event_index": index, "transform_sha256": transform_hash,
+                           "path": name, "input_source_sha256": R.sha(old.encode())})
+    result = R.materialize_candidate(base, source, destination, task["source_policy"],
+                                     expected_current_tree_sha256=expected, edits=edits)
+    config = task["configurations"][1 if index >= 5 else 0]
+    config_hash = R.sha(R.canonical(config))
+    if config_hash != event["configuration_sha256"]:
+        raise ValueError("configuration differs from frozen event")
+    return {"schema": "ns-original-sequence-source-transition/v1", "task_id": task["task_id"],
+            "event_index": index, "source_origin": origin, "predecessor_source_tree_sha256": expected,
+            "input_tree_path": str(Path(destination).resolve()), "input_tree_sha256": result["source_tree"]["tree_sha256"],
+            "input_transport": result, "configuration": config, "configuration_sha256": config_hash,
+            "failed_repair_dependencies": failed_dependencies, "public_transform_history": transforms,
+            "no_failed_candidate_adopted": True,
+            "accepted_publication_pointer_is_separate_from_public_input": True}
+
+
+def recovery_schedule(event, *, validation_complete, validation_passed, publication_admitted,
+                      interrupted_after_seal, recovered_root_advanced, stale_branch_validation_passed):
+    """Freeze boundary reachability without fabricating successful repair state."""
+    if event["event_index"] != 6:
+        raise ValueError("recovery schedule belongs to event six")
+    can_publish = validation_complete and validation_passed and publication_admitted
+    if not validation_complete:
+        return {"status": "infrastructure_unresolved", "fault_boundary_reached": False,
+                "recovery": "not_reached", "stale_branch": "dependency_unresolved", "continuation": "dependency_unresolved"}
+    if not can_publish:
+        return {"status": "fault_boundary_unreached", "fault_boundary_reached": False,
+                "recovery": "not_reached", "stale_branch": "dependency_unresolved", "continuation": "dependency_unresolved"}
+    if not interrupted_after_seal:
+        return {"status": "awaiting_actual_publication_boundary", "fault_boundary_reached": False,
+                "recovery": "not_reached", "stale_branch": "not_reached", "continuation": "not_reached"}
+    if not recovered_root_advanced:
+        return {"status": "recovery_unresolved", "fault_boundary_reached": True,
+                "recovery": "pending_or_failed", "stale_branch": "dependency_unresolved", "continuation": "dependency_unresolved"}
+    return {"status": "actual_stale_cas_and_continuation_required", "fault_boundary_reached": True,
+            "recovery": "advanced_root", "stale_branch": "dispatch_actual_cas" if stale_branch_validation_passed else "validation_unresolved",
+            "continuation": "consume_fresh_recovered_root"}

@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+"""Materialize a second explicit native source profile for fixed-CID encoding."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import difflib
+
+HERE = Path(__file__).resolve().parent
+def sha(b): return hashlib.sha256(b).hexdigest()
+
+def main():
+    source = HERE / "runtime_merkle_index_v1/ipfs_datasets_py"
+    destination = HERE / "runtime_merkle_fastcid_v2"
+    if destination.exists(): raise SystemExit("variant exists; never overwrite")
+    relative = Path("logic/software_contracts/content.py")
+    before = (source / relative).read_text()
+    old = '''    from multiformats import CID, multihash
+
+    if codec not in _ALLOWED_READ_CODECS:
+        raise ContentIdentityError(
+            f"codec {codec!r} is outside the software-contract CID profile"
+        )
+    digest = multihash.digest(data, MULTIHASH_TYPE)
+    return str(CID(CID_BASE, CID_VERSION, codec, digest))
+'''
+    new = '''    from base64 import b32encode
+    from multiformats import CID, multicodec, multihash
+
+    if codec not in _ALLOWED_READ_CODECS:
+        raise ContentIdentityError(
+            f"codec {codec!r} is outside the software-contract CID profile"
+        )
+    # Recompute the native multihash on every call; never cache input or digest.
+    digest = multihash.digest(data, MULTIHASH_TYPE)
+    # The normative fixed profile has two reviewed unsigned-varint headers.
+    # Preserve the original generic path for different constants/registrations.
+    prefixes = {"raw": (0x55, b"\\x01\\x55"), "dag-json": (0x129, b"\\x01\\xa9\\x02")}
+    expected_code, header = prefixes[codec]
+    if (CID_BASE == "base32" and CID_VERSION == 1
+            and MULTIHASH_TYPE == "sha2-256"
+            and multicodec.get(codec).code == expected_code
+            and type(digest) is bytes and len(digest) == 34
+            and digest[:2] == b"\\x12\\x20"):
+        return "b" + b32encode(header + digest).decode("ascii").lower().rstrip("=")
+    return str(CID(CID_BASE, CID_VERSION, codec, digest))
+'''
+    assert before.count(old) == 1
+    after = before.replace(old, new)
+    compile(after, str(destination / "ipfs_datasets_py" / relative), "exec")
+    destination.mkdir()
+    shutil.copytree(source, destination / "ipfs_datasets_py", copy_function=os.link, symlinks=True, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+    target = destination / "ipfs_datasets_py" / relative
+    temporary = target.with_suffix(".py.new"); temporary.write_text(after); os.replace(temporary, target)
+    assert (source / relative).read_text() == before
+    assert os.stat(source / relative).st_ino != os.stat(target).st_ino
+    patch = "".join(difflib.unified_diff(before.splitlines(True), after.splitlines(True), fromfile="a/ipfs_datasets_py/" + str(relative), tofile="b/ipfs_datasets_py/" + str(relative)))
+    (HERE / "fixed_cid_encoding_v2.patch").write_text(patch)
+    receipt = {"schema": "ns-context-native-source-variant/v2", "variant_package": str(destination / "ipfs_datasets_py"), "parent_variant": str(HERE / "runtime_merkle_index_v1_manifest.json"), "parent_variant_sha256": sha((HERE / "runtime_merkle_index_v1_manifest.json").read_bytes()), "changed_file": str(relative), "original_sha256": sha(before.encode()), "variant_sha256": sha(after.encode()), "materializer_sha256": sha(Path(__file__).read_bytes()), "upstream_files_modified": False, "input_digest_caching": False, "native_multihash_recomputed_every_call": True, "normal_profile": "CIDv1,base32lower,raw or dag-json,sha2-256/32bytes", "scope": "normal registered base32 codec semantics; arbitrary dynamically overridden multibase encoders are not admitted", "validation_status_at_materialization": "not yet executed", "provider_calls": 0}
+    (HERE / "runtime_merkle_fastcid_v2_manifest.json").write_text(json.dumps(receipt, indent=2) + "\n")
+    print(json.dumps(receipt, indent=2))
+
+if __name__ == "__main__": main()

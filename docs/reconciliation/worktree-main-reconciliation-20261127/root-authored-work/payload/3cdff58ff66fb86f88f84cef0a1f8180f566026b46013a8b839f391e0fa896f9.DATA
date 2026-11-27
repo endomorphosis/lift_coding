@@ -1,0 +1,304 @@
+"""Authored local deployment/policy controls, never actual Docker qualification.
+
+FakeEnv does not install a worker, sign an admission, exercise sudo or invoke a
+provider. Embedded guard/parser tests execute their actual code in an authored
+namespace; filesystem ownership and namespace success are not inferred.
+"""
+import argparse
+import asyncio
+import hashlib
+import json
+import os
+from pathlib import Path
+import sys
+from types import SimpleNamespace
+
+import pytest
+
+from benchmarks.agent_supervisor.container_coding import container_worker_deployment as deployment
+
+
+def wire(value):
+    return (json.dumps(value, sort_keys=True, separators=(",", ":")) + "\n").encode()
+
+
+def observer_args(extra=()):
+    return ["--observe-model-input-only", "--semantic-repository", "/app",
+        "--public-instruction-artifact", "/app/.runtime/instruction.json",
+        "--public-instruction-sha256", "a" * 64, "--public-instruction-task-cid", "task:authored",
+        *extra]
+
+
+def checked_args(extra=()):
+    return observer_args(["--semantic-transport", "native", "--checked-context-artifact",
+        "/app/.runtime/checked.json", "--checked-context-sha256", "b" * 64,
+        "--checked-context-task-cid", "task:authored", *extra])
+
+
+def guard(profile=None):
+    namespace = {}
+    exec(compile(deployment.PROFILE_GUARD, "<actual-profile-guard>", "exec"), namespace)
+    boundary = b"authored exact boundary bytes\n"
+    value = {"schema": deployment.PROFILE_SCHEMA, "observer_only": True,
+        "boundary_sha256": hashlib.sha256(boundary).hexdigest()}
+    if profile is not None:
+        value = profile(value)
+    namespace["_profile_read"] = lambda path: boundary if path.name == "container-boundary.json" else wire(value)
+    absence = []
+    namespace["_observer_absence"] = lambda root, role: absence.append(role)
+    return namespace, absence
+
+
+@pytest.mark.parametrize("role", ["owner", "worker"])
+@pytest.mark.parametrize("argv", [observer_args(), checked_args(), ["--preflight"],
+    ["--preflight", "--preflight-sleep", "30"]])
+def test_actual_profile_allows_only_selected_observer_or_fixed_preflight(role, argv):
+    namespace, absence = guard()
+    assert namespace["_worker_profile"](Path(deployment.ROOT), role, argv)["observer_only"] is True
+    assert absence == [role]
+
+
+def test_actual_profile_cleanup_worker_only_and_validation_refused():
+    namespace, absence = guard()
+    assert namespace["_worker_profile"](Path(deployment.ROOT), "worker", ["--cleanup"])["observer_only"]
+    assert absence == []  # Cleanup grants no asset-absence claim.
+    for role, args in [("owner", ["--cleanup"]), ("validation", ["/usr/bin/true"])]:
+        with pytest.raises(SystemExit):
+            namespace["_worker_profile"](Path(deployment.ROOT), role, args)
+
+
+@pytest.mark.parametrize("argv", [[], ["--model", "pinned"],
+    observer_args(["--purpose", "planning"]), observer_args(["--observe-model-input-only"]),
+    observer_args(["--model=pinned"]), observer_args(["--model"]),
+    observer_args(["--doctor-candidate-artifact", "/candidate"]),
+    observer_args(["--doctor-contract-artifact", "/contract"]),
+    observer_args(["--finite-repository-artifact", "/finite"]),
+    observer_args(["--finite-proof-query-context", "/proof"]),
+    ["--preflight", "--preflight-sleep", "1"], ["--preflight", "--model", "pinned"],
+    ["--validate", "/usr/bin/true"], ["--cleanup", "--observe-model-input-only"]])
+def test_actual_profile_refuses_provider_planning_duplicates_and_alternate_routes(argv):
+    namespace, _ = guard()
+    with pytest.raises(SystemExit):
+        namespace["_worker_profile"](Path(deployment.ROOT), "owner", argv)
+
+
+@pytest.mark.parametrize("field", ["--semantic-repository", "--public-instruction-artifact",
+    "--public-instruction-sha256", "--public-instruction-task-cid"])
+def test_actual_profile_requires_all_instruction_pins(field):
+    argv = observer_args(); offset = argv.index(field); del argv[offset:offset + 2]
+    namespace, _ = guard()
+    with pytest.raises(SystemExit):
+        namespace["_worker_profile"](Path(deployment.ROOT), "worker", argv)
+
+
+@pytest.mark.parametrize("change", [lambda p: dict(p, observer_only=1),
+    lambda p: dict(p, extra=False), lambda p: dict(p, schema="unknown"),
+    lambda p: dict(p, boundary_sha256="0" * 64)])
+def test_actual_profile_rejects_rehashed_or_untyped_deployment_choice(change):
+    namespace, _ = guard(change)
+    with pytest.raises(SystemExit):
+        namespace["_worker_profile"](Path(deployment.ROOT), "worker", observer_args())
+
+
+def test_default_profile_keeps_routes_and_does_not_claim_provider_absence():
+    namespace, absence = guard(lambda p: dict(p, observer_only=False))
+    assert namespace["_worker_profile"](Path(deployment.ROOT), "owner", ["--purpose", "planning"])["observer_only"] is False
+    assert absence == []
+
+
+@pytest.mark.parametrize("raw", [b'{"a":1,"a":2}\n', b'{ "a":1}\n', b'null\n', b'{}', b'not json'])
+def test_actual_profile_json_refuses_duplicates_or_noncanonical_bytes(raw):
+    namespace, _ = guard()
+    if raw == b'null\n':
+        namespace["_profile_read"] = lambda _: raw
+        with pytest.raises(SystemExit):namespace["_worker_profile"](Path(deployment.ROOT), "worker", observer_args())
+    else:
+        with pytest.raises(SystemExit):namespace["_profile_json"](raw)
+
+
+def test_actual_protected_reader_refuses_unprotected_local_file(tmp_path):
+    namespace, _ = guard()
+    # Recreate the real reader, without replacing file ownership or namespaces.
+    exec(compile(deployment.PROFILE_GUARD, "<actual-profile-guard>", "exec"), namespace)
+    path = tmp_path / "worker-profile.json"; path.write_bytes(b"{}\n"); path.chmod(0o444)
+    with pytest.raises(SystemExit, match="protected"):
+        namespace["_profile_read"](path)
+
+
+@pytest.mark.parametrize("relative", ["codex-auth/auth.json", "codex-auth/other-secret",
+    "home/.codex/auth.json", "worker-home/.codex/auth.json", "native-codex",
+    "native-codex.manifest.json", "provider-bin/codex", "home/.nvm"])
+def test_actual_absence_check_rejects_existing_assets_without_reading_or_removing(tmp_path, relative):
+    namespace, _ = guard()
+    exec(compile(deployment.PROFILE_GUARD, "<actual-profile-guard>", "exec"), namespace)
+    path = tmp_path / relative; path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(b"synthetic noncredential fixture\n")
+    with pytest.raises(SystemExit, match="refuses"):
+        namespace["_observer_absence"](tmp_path, "worker" if relative.startswith("worker-home/") else "owner")
+    assert path.read_bytes() == b"synthetic noncredential fixture\n"
+
+
+def test_worker_absence_check_does_not_guess_inaccessible_owner_credentials(tmp_path):
+    namespace, _ = guard()
+    exec(compile(deployment.PROFILE_GUARD, "<actual-profile-guard>", "exec"), namespace)
+    reads = []
+    original = Path.lstat
+    def tracked(path):
+        reads.append(path)
+        if path == tmp_path / "codex-auth":raise PermissionError("authored private directory")
+        if not path.is_relative_to(tmp_path):raise FileNotFoundError("authored global provider paths absent")
+        return original(path)
+    from unittest.mock import patch
+    with patch.object(Path, "lstat", tracked):
+        namespace["_observer_absence"](tmp_path, "worker")
+    assert tmp_path / "codex-auth" not in reads
+
+
+def test_owner_does_not_guess_inaccessible_worker_home(tmp_path):
+    namespace, _ = guard()
+    exec(compile(deployment.PROFILE_GUARD, "<actual-profile-guard>", "exec"), namespace)
+    reads = []; original = Path.lstat
+    def tracked(path):
+        reads.append(path)
+        if path.is_relative_to(tmp_path / "worker-home"):raise PermissionError("authored worker-private home")
+        if not path.is_relative_to(tmp_path):raise FileNotFoundError("authored global provider paths absent")
+        return original(path)
+    from unittest.mock import patch
+    with patch.object(Path, "lstat", tracked):
+        namespace["_observer_absence"](tmp_path, "owner")
+    assert not any(path.is_relative_to(tmp_path / "worker-home") for path in reads)
+
+
+def parser(argv, monkeypatch):
+    monkeypatch.setattr(sys, "argv", ["worker-entry", *argv])
+    script = deployment.WORKER_ENTRY
+    segment = script[script.index("parser=argparse.ArgumentParser()"):script.index("if args.preflight:\n")]
+    namespace = {"argparse": argparse, "pathlib": __import__("pathlib"), "sys": sys}
+    exec(compile(segment, "<actual-worker-parser>", "exec"), namespace)
+    return namespace
+
+
+def test_actual_worker_forwards_checked_triplet_exactly_once(monkeypatch):
+    namespace = parser(checked_args(), monkeypatch)
+    from ipfs_accelerate_py.agent_supervisor.runtime import router_implementation_runner as router
+    calls = []; monkeypatch.setattr(router, "main", lambda: calls.append(sys.argv[:]) or 75)
+    namespace.update(artifact=Path(deployment.ROOT) / "container-boundary.json", digest="d" * 64)
+    script = deployment.WORKER_ENTRY
+    segment = script[script.index(" from ipfs_accelerate_py.agent_supervisor.runtime.router_implementation_runner import main"):]
+    segment = "\n".join(line[1:] if line.startswith(" ") else line for line in segment.splitlines())
+    with pytest.raises(SystemExit) as stopped:exec(compile(segment, "<actual-router-branch>", "exec"), namespace)
+    assert stopped.value.code == 75 and len(calls) == 1
+    for flag, value in [("--checked-context-artifact", "/app/.runtime/checked.json"),
+        ("--checked-context-sha256", "b" * 64), ("--checked-context-task-cid", "task:authored")]:
+        assert calls[0].count(flag) == 1 and calls[0][calls[0].index(flag) + 1] == value
+
+
+@pytest.mark.parametrize("extra", [["--purpose", "planning"], ["--preflight"],
+    ["--intent-requirements-transport", "compact"], ["--code-retrieval-codec", "compact"],
+    ["--code-retrieval-wire-delivery", "materialized"],
+    ["--doctor-residual-artifact", "/residual", "--doctor-residual-sha256", "c" * 64,
+     "--doctor-residual-task-cid", "task:authored"]])
+def test_actual_checked_context_refuses_other_transports_before_router(monkeypatch, extra):
+    with pytest.raises(SystemExit, match="checked context requires"):
+        parser(checked_args(extra), monkeypatch)
+    namespace, _ = guard()
+    with pytest.raises(SystemExit):
+        namespace["_worker_profile"](Path(deployment.ROOT), "owner", checked_args(extra))
+
+
+@pytest.mark.parametrize("missing", ["--observe-model-input-only", "--semantic-transport",
+    "--checked-context-artifact", "--checked-context-sha256", "--checked-context-task-cid"])
+def test_actual_checked_context_refuses_partial_or_provider_invocation(monkeypatch, missing):
+    argv = checked_args(); offset = argv.index(missing)
+    del argv[offset:offset + (1 if missing == "--observe-model-input-only" else 2)]
+    with pytest.raises(SystemExit, match="checked context requires"):
+        parser(argv, monkeypatch)
+
+
+class FakeEnv:
+    """Authored API recorder: no container or deployment success is established."""
+    def __init__(self, fail_absence=False):
+        self.commands = []; self.uploads = {}; self.fail_absence = fail_absence
+    async def exec(self, **kwargs):
+        self.commands.append(kwargs); command = kwargs["command"]
+        if "json.dumps({k:os.readlink" in command:
+            return SimpleNamespace(stdout=json.dumps({k: "ns:" + k for k in ("pid", "mnt", "net")}), stderr="", return_code=0)
+        failed = self.fail_absence and "_observer_absence(root" in command
+        return SimpleNamespace(stdout="", stderr="authored refusal" if failed else "", return_code=int(failed))
+    async def upload_file(self, source, target):
+        self.uploads[target] = Path(source).read_bytes()
+
+
+def fake_engine(monkeypatch):
+    def inspect(argv, **kwargs):
+        assert argv[:2] == ["docker", "inspect"] and "Env" not in argv[3]
+        return " ".join(json.dumps(value) for value in ("1" * 64, "sha256:" + "2" * 64, 12345, True, False))
+    monkeypatch.setattr(deployment.subprocess, "check_output", inspect)
+    monkeypatch.setattr(os, "readlink", lambda path: "ns:" + path.rsplit("/", 1)[-1])
+    monkeypatch.setattr(deployment, "native_codex_exposure_script", lambda: "authored native Codex exposure marker")
+
+
+@pytest.mark.parametrize("observer", [False, True])
+def test_authored_install_keeps_default_or_omits_provider_assets(monkeypatch, tmp_path, observer):
+    fake_engine(monkeypatch); environment = FakeEnv()
+    result = asyncio.run(deployment.install_worker_boundary(environment,
+        container_name="authored-container", output=tmp_path / "installation", observer_only=observer))
+    commands = [row["command"] for row in environment.commands]
+    account = next(command for command in commands if "useradd --uid 1001" in command)
+    assert ("apt-get" in account) is not observer
+    assert ("install -o benchmarkworker -g supervisor -m 0600" in account) is not observer
+    assert any("authored native Codex exposure marker" in command for command in commands) is not observer
+    profile_raw = environment.uploads[deployment.PROFILE_PATH]
+    profile = json.loads(profile_raw)
+    assert profile == {"schema": deployment.PROFILE_SCHEMA, "observer_only": observer,
+        "boundary_sha256": hashlib.sha256(environment.uploads[deployment.ROOT + "/container-boundary.json"]).hexdigest()}
+    assert wire(profile) == profile_raw
+    assert "chown root:root " + deployment.PROFILE_PATH + " && chmod 0444 " + deployment.PROFILE_PATH in commands
+    assert result["qualified"] is False and result["provider_calls"] == 0
+    assert result["observer_only"] is observer and result["provider_assets_required"] is not observer
+
+
+def test_authored_presence_refusal_precedes_account_creation(monkeypatch, tmp_path):
+    fake_engine(monkeypatch); environment = FakeEnv(fail_absence=True)
+    with pytest.raises(RuntimeError, match="provider-absence"):
+        asyncio.run(deployment.install_worker_boundary(environment,
+            container_name="authored-container", output=tmp_path / "installation", observer_only=True))
+    assert not environment.uploads and not any("useradd" in row["command"] for row in environment.commands)
+
+
+@pytest.mark.parametrize("value", [0, 1, None, "true", {}])
+def test_install_rejects_untyped_profile_before_any_setup(tmp_path, value):
+    environment = FakeEnv()
+    with pytest.raises(ValueError, match="exact Boolean"):
+        asyncio.run(deployment.install_worker_boundary(environment,
+            container_name="authored", output=tmp_path / "untouched", observer_only=value))
+    assert not environment.commands and not (tmp_path / "untouched").exists()
+
+
+def test_all_embedded_entries_enforce_profile_before_delegation_or_native_imports():
+    for script in (deployment.OWNER_ENTRY, deployment.WORKER_ENTRY, deployment.VALIDATION_ENTRY):
+        compile(script, "<embedded-worker-entry>", "exec")
+        guard_offset = script.index("profile=_worker_profile(")
+        for operation in ("subprocess.Popen(command)", "os.execvpe(",
+            "from ipfs_accelerate_py.agent_supervisor.runtime.container_worker_boundary import"):
+            if operation in script:assert guard_offset < script.index(operation)
+
+
+@pytest.mark.parametrize("observer", [False, True])
+def test_authored_deploy_forwards_profile_to_installer(monkeypatch, tmp_path, observer):
+    seen = []
+    async def resolve(service):assert service == "main";return "authored-container"
+    async def install(environment, **kwargs):
+        seen.append(kwargs);return {"qualified": False, "observer_only": kwargs["observer_only"]}
+    async def qualify(environment, **kwargs):return {"qualified": True, "authored_stub_only": True}
+    monkeypatch.setattr(deployment, "install_worker_boundary", install)
+    monkeypatch.setattr(deployment, "qualify_worker_boundary", qualify)
+    environment = SimpleNamespace(_platform=SimpleNamespace(_resolve_service_container=resolve))
+    result = asyncio.run(deployment.deploy_worker_boundary(environment, output=tmp_path / "deploy", observer_only=observer))
+    assert seen[0]["observer_only"] is observer and result["qualification"]["authored_stub_only"] is True
+
+
+def test_deploy_rejects_untyped_profile_before_environment_access(tmp_path):
+    with pytest.raises(ValueError, match="exact Boolean"):
+        asyncio.run(deployment.deploy_worker_boundary(object(), output=tmp_path / "untouched", observer_only=1))
+    assert not (tmp_path / "untouched").exists()

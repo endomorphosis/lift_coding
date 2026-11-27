@@ -1,0 +1,113 @@
+"""Real metadata FD custody only; no owner/SDK/claim doubles or native admission."""
+import fcntl
+import hashlib
+import os
+import subprocess
+import sys
+
+import pytest
+import ipfs_accelerate_py.cli_runtime.grok_production_handoff as handoff
+import ipfs_accelerate_py.cli_runtime.grok_private_m1_offline_worker as worker
+
+
+def inert_request(tmp_path):
+    # These are inert syntax fixtures, never a native capability or task claim.
+    root = tmp_path / 'accelerator'
+    pin = lambda path: dict(path=str(path), bytes=1, sha256='0' * 64)
+    value = dict(schema=worker.SCHEMA, mode='offline-ACK-only', one_shot=True, attempt_cap=1,
+        provider_dispatch_allowed=False, private_task_alias='private-M1a-' + 'a' * 32,
+        database_task_cid='inert-task', allocation_session_id='inert-session',
+        accelerator_root=str(root), workspace=str(tmp_path / 'workspace'),
+        receipt_directory=str(tmp_path / 'receipts'),
+        source_generation='grok-automatic-named-session/private-M1a-' + 'a' * 32,
+        work_deadline_monotonic=1000.0, native_deadline_monotonic=1060.0,
+        worker_pin=pin(root / worker.WORKER_RELATIVE), owner_client_pin=pin(root / worker.CLIENT_RELATIVE),
+        source_profile_pin=pin(tmp_path / 'source-profile.json'), capsule_pin=pin(tmp_path / 'capsule.json'))
+    value['owner_client_pin']['sha256'] = worker.REQUIRED_CLIENT_SHA256
+    return value
+
+
+def sealed(raw, *, cloexec=True):
+    flags = os.MFD_ALLOW_SEALING | (os.MFD_CLOEXEC if cloexec else 0)
+    descriptor = os.memfd_create('private-M1-borrowed-inert-test', flags)
+    try:
+        assert os.write(descriptor, raw) == len(raw)
+        fcntl.fcntl(descriptor, fcntl.F_ADD_SEALS, worker.SEALS)
+        return descriptor
+    except BaseException:
+        os.close(descriptor)
+        raise
+
+
+def observe(descriptor, raw, *, identity=None):
+    return handoff._read_private_offline_descriptor(worker_module=worker, descriptor=descriptor,
+        request_sha256=hashlib.sha256(raw).hexdigest(), identity=identity)
+
+
+def test_actual_borrowed_sealed_metadata_read_retains_exact_descriptor_and_cloexec(tmp_path):
+    value = inert_request(tmp_path)
+    raw = worker.canonical(value)
+    descriptor = sealed(raw)
+    try:
+        before = os.fstat(descriptor)
+        decoded, identity = observe(descriptor, raw)
+        assert decoded == value
+        assert observe(descriptor, raw, identity=identity) == (value, identity)
+        after = os.fstat(descriptor)
+        assert (before.st_dev, before.st_ino) == (after.st_dev, after.st_ino) == identity[:2]
+        assert fcntl.fcntl(descriptor, fcntl.F_GETFD) & fcntl.FD_CLOEXEC
+        assert os.pread(descriptor, len(raw) + 1, 0) == raw
+    finally:
+        os.close(descriptor)
+
+
+def test_recycled_actual_descriptor_rejects_identical_bytes_from_another_memfd(tmp_path):
+    raw = worker.canonical(inert_request(tmp_path))
+    descriptor, replacement = sealed(raw), sealed(raw)
+    try:
+        _, identity = observe(descriptor, raw)
+        os.dup2(replacement, descriptor, inheritable=False)
+        assert os.pread(descriptor, len(raw) + 1, 0) == raw
+        with pytest.raises(handoff.ProductionHandoffRefusal,
+                           match='handoff_private_metadata_descriptor_replaced'):
+            observe(descriptor, raw, identity=identity)
+    finally:
+        os.close(replacement)
+        os.close(descriptor)
+
+
+def test_actual_sealed_descriptor_without_cloexec_is_refused(tmp_path):
+    raw = worker.canonical(inert_request(tmp_path))
+    descriptor = sealed(raw, cloexec=False)
+    try:
+        assert not fcntl.fcntl(descriptor, fcntl.F_GETFD) & fcntl.FD_CLOEXEC
+        with pytest.raises(handoff.ProductionHandoffRefusal,
+                           match='handoff_private_metadata_descriptor_must_be_CLOEXEC'):
+            observe(descriptor, raw)
+    finally:
+        os.close(descriptor)
+
+
+@pytest.mark.parametrize('explicit_inheritance', [False, True])
+def test_real_child_requires_explicit_metadata_descriptor_inheritance(tmp_path, explicit_inheritance):
+    raw = worker.canonical(inert_request(tmp_path))
+    descriptor = sealed(raw)
+    # Stdlib-only child: no metadata is promoted into owner/native authority.
+    script = (
+        'import hashlib,os,sys\n'
+        'try: raw=os.pread(int(sys.argv[1]),65537,0)\n'
+        'except OSError: print("unavailable")\n'
+        'else: print(hashlib.sha256(raw).hexdigest())\n'
+    )
+    try:
+        _, identity = observe(descriptor, raw)
+        completed = subprocess.run([sys.executable, '-I', '-B', '-c', script, str(descriptor)],
+            stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            pass_fds=(descriptor,) if explicit_inheritance else (), check=False, timeout=3.0)
+        assert completed.returncode == 0 and completed.stderr == b''
+        expected = hashlib.sha256(raw).hexdigest() if explicit_inheritance else 'unavailable'
+        assert completed.stdout.decode('ascii').strip() == expected
+        assert observe(descriptor, raw, identity=identity)[1] == identity
+        assert fcntl.fcntl(descriptor, fcntl.F_GETFD) & fcntl.FD_CLOEXEC
+    finally:
+        os.close(descriptor)

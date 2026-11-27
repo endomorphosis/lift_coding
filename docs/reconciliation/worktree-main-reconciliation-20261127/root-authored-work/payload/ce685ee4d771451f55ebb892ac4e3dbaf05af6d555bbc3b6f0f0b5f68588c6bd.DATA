@@ -1,0 +1,89 @@
+#!/usr/bin/env python3
+"""Independent retained-artifact, expansion and altered-equation audit."""
+import argparse
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+import sys
+
+sys.dont_write_bytecode = True
+HERE = Path(__file__).resolve().parent
+
+
+def load_module(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--results", type=Path, default=HERE / "results_v1")
+    parser.add_argument("--output", type=Path, default=HERE / "audit_v1.json")
+    args = parser.parse_args()
+    if args.output.exists(): raise SystemExit("audit output exists; choose a new path")
+    current = load_module("native_eval", HERE / "run_native_context.py")
+    prior = load_module("context_eval", HERE.parent / "run_context_eval.py")
+    import tiktoken
+    import z3
+    summary = json.loads((args.results / "summary.json").read_text())
+    assert summary["evaluation_source_sha256"] == hashlib.sha256((HERE / "run_native_context.py").read_bytes()).hexdigest()
+    assert summary["protocol_sha256"] == hashlib.sha256((HERE / "protocol.json").read_bytes()).hexdigest()
+    counts = {arm: {name: 0 for name in ("o200k_base", "cl100k_base")} for arm in summary["message_content_token_totals"]}
+    verified_requests = mutant_rejections = exact_expansions = stale_expansion_rejections = 0
+    preparation_wall_seconds = preparation_cpu_seconds = 0
+    for family in ("invoice", "polynomial", "units"):
+        folder = args.results / family
+        row = json.loads((folder / "row.json").read_text())
+        source = json.loads((folder / "sources" / "unchanged.json").read_text())
+        raw = json.loads((folder / "requests" / "A_raw.json").read_text())
+        projection = json.loads((folder / "requests" / "D_verified_equations.json").read_text())
+        manifest = json.loads((folder / "evidence_manifest.json").read_text())
+        assert projection["evidence_manifest_sha256"] == current.sha(current.canon(manifest))
+        for arm in counts:
+            request = json.loads((folder / "requests" / (arm + ".json")).read_text())
+            assert request["required_source"] == {p: source[p] for p in ("target.py", "test_target.py")}
+            assert request["obligations"] == raw["obligations"] and len(request["obligations"]) == 1
+            wire = current.canon(request)
+            assert row["requests"][arm]["sha256"] == current.sha(wire)
+            for name in counts[arm]:
+                tokens = len(tiktoken.get_encoding(name).encode(wire.decode()))
+                assert tokens == row["requests"][arm]["tokens"][name]
+                counts[arm][name] += tokens
+            verified_requests += 1
+        dependency = source["dependency.py"]
+        reference = {"path": "dependency.py", "source_sha256": current.sha(dependency.encode()), "text_sha256": current.sha(dependency.encode()), "start_line": 1, "end_line": len(dependency.splitlines())}
+        assert prior.expand_source(reference, source) == dependency
+        exact_expansions += 1
+        try:
+            prior.expand_source(reference, {**source, "dependency.py": dependency + "# stale\n"})
+        except ValueError:
+            stale_expansion_rejections += 1
+        else:
+            raise AssertionError("stale source expansion was accepted")
+        for equation in projection["verified_integer_equations"]:
+            current.verify_projection(dependency, equation, z3)
+            altered = {**equation, "return_expression": "(" + equation["return_expression"] + ") + 1"}
+            try:
+                current.verify_projection(dependency, altered, z3)
+            except AssertionError:
+                mutant_rejections += 1
+            else:
+                raise AssertionError("incorrect equation admitted")
+        assert all(t["cold_state_cid"] == t["incremental_state_cid"] and t["cold_root_cid"] == t["incremental_root_cid"] for t in row["transitions"])
+        assert all(t["incremental_diagnostics"]["previous_state_accepted"] for t in row["transitions"])
+        for t in row["transitions"]:
+            if t["transition"].startswith("dependency_"):
+                assert all(a["freshness"] == "stale" and a["admission"] == "raw_source_required" for a in t["old_capsule_assessments"])
+        for value in row["preparation"].values():
+            preparation_wall_seconds += value["wall_seconds"]
+            preparation_cpu_seconds += value["cpu_seconds"]
+    assert counts == summary["message_content_token_totals"]
+    result = {"schema": "ns-native-context-independent-artifact-audit/v1", "evaluation_source_sha256": summary["evaluation_source_sha256"], "audit_source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(), "summary_sha256": hashlib.sha256((args.results / "summary.json").read_bytes()).hexdigest(), "verified_request_artifacts": verified_requests, "incorrect_equations_rejected": mutant_rejections, "exact_real_dependency_expansions": exact_expansions, "stale_dependency_expansions_rejected": stale_expansion_rejections, "retokenization_matches": True, "source_and_obligation_retention_matches": True, "all_cold_incremental_roots_equal": True, "all_dependency_edits_invalidate_old_capsules": True, "measured_initial_preparation_wall_seconds_sum": preparation_wall_seconds, "measured_initial_preparation_cpu_seconds_sum": preparation_cpu_seconds, "all_checks_passed": True, "provider_calls": 0}
+    current.write_json(args.output, result)
+    print(json.dumps(result, indent=2))
+
+
+if __name__ == "__main__": main()

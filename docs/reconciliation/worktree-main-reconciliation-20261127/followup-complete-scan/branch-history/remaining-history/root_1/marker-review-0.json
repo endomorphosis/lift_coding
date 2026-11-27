@@ -1,0 +1,19 @@
+{
+  "blob_bytes_scanned": 7598653,
+  "blobs_scanned": 51,
+  "git_child_returncode": 0,
+  "incremental_inventory_sha256": "ba01b0254f265e8a071972df999d1072f7175fa212792b096683817300d0f861",
+  "marker_families_scanned": [
+    "aws_access_key",
+    "credential_url",
+    "github_token",
+    "hf_token",
+    "private_key",
+    "provider_token"
+  ],
+  "marker_hits": [],
+  "restored_bundle_receipt_sha256": "b959aa4d1c1ccda5b73df18d111704d075fbec1d8c7c086c00fbeacd5a2871ab",
+  "schema": "git-recovery-payload-marker-scan/v1",
+  "scope": "Static credential markers on exact incremental Git blob bytes. No payload was executed or interpreted as database/model input.",
+  "secret_values_printed": false
+}

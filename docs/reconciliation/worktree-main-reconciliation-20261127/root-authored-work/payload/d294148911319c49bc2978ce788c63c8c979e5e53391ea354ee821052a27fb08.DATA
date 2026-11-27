@@ -1,0 +1,114 @@
+# Native dependency context development measurement
+
+Three authored Python repositories exercise actual native dependency capsule
+production, admission, context packing and incremental state reconstruction.
+The editable target is separate from unchanged integer-arithmetic dependency
+functions and protected tests. This is a deliberately narrow mechanism study;
+the arithmetic and repair tasks were authored for this development evaluation.
+
+`results_v1` was produced in one complete run and is source-bound. The native
+producer and consumer import normally from the original paper worktree; no
+namespace/import shims are installed. `GIT_CEILING_DIRECTORIES` restricts fixture
+discovery so the producer scans the declared three-file repository rather than
+the enclosing research checkout. Source snapshots, native module hashes,
+capsules, admissions and request payloads are retained.
+
+## What ran
+
+For each repository the actual scanner builds a semantic index and a verified
+semantic-state bundle. Six unchanged dependency functions receive fresh
+`exact_substitute` admissions. Native `read_required_source` materializes their
+source with producer-state checks; the actual `ContextPacker` retains each
+explicit authored acceptance obligation and the declared protected source
+references. Target/test bytes and the full obligation content are independently
+preserved in each materialized request.
+
+Full native capsules include detailed AST and provenance. A **new bounded
+evaluation projection** reads the AST from the native capsule, accepts only pure
+straight-line integer assignments/returns, and factors the resulting polynomial
+with SymPy. It exposes function signatures, domain restrictions, return equations
+and a source/evidence-manifest binding. This is explicitly additional integration
+code; a native CID-only context pack does not itself produce the shorter text.
+
+An independent interpreter of the original Python source AST proves each
+projected return equation equivalent with Z3 over mathematical integers. Six
+proofs return `unsat` for source/result inequality. Actual execution of the
+authored dependency functions agrees on 252 Cartesian-grid inputs. A separate
+audit changes every equation by +1 and confirms all six are rejected. The scope
+excludes floats, custom objects/overloaded operators, unsupported syntax, side
+effects and resource exhaustion.
+
+## Token measurements
+
+Counts are exact tokenization of canonical context-content strings with
+`tiktoken 0.12.0`, `o200k_base`. They are not provider usage, do not include a chat
+template or output, and do not establish model quality.
+
+| Authored repository | Raw | Raw + native capsules | Full native substitution | Verified integer equations | Plain AST source |
+|---|---:|---:|---:|---:|---:|
+| invoice | 479 | 2,944 | 2,788 | 440 | 478 |
+| polynomial | 491 | 3,043 | 2,885 | 457 | 490 |
+| units | 497 | 2,884 | 2,726 | 456 | 496 |
+| **Total** | **1,467** | **8,871** | **8,399** | **1,353** | **1,464** |
+
+The equation projection is **7.77% shorter** than raw context; plain AST source
+compaction is 0.20% shorter. Complete native capsule substitution is **5.73 times
+the raw context size**. Under `cl100k_base`, the totals are 1,457 / 8,570 / 8,098 /
+1,327 / 1,454; equation projection is 8.92% shorter. These are bounded transport
+results on intentionally simplifiable arithmetic, not whole-system savings.
+
+## Invalidation, equality and overhead
+
+Each repository compares cold and incremental preparation for four states:
+unchanged, a target-only comment edit, a dependency arithmetic edit, and a
+dependency call to an unknown external function. Every comparison supplies the
+same original baseline as previous state; these are twelve paired reconstruction
+checks, not twelve independent repositories or a restart experiment.
+
+- **12/12** semantic-index CIDs and verified bundle-root CIDs match cold results.
+- Unchanged scans reuse all three source paths; target comment edits reanalyze
+  only the target; dependency edits reanalyze only the dependency. Resolution is
+  recomputed in every case.
+- Old dependency capsules stay fresh after target comment edits. Both capsules
+  in each changed dependency file become stale and raw-required after either
+  dependency mutation. This conservative invalidation includes the function
+  whose body did not change because the binding covers the source file.
+- **3/3** unknown-call mutations cause the affected function to require raw
+  source or fail the bounded projection admission. This is an exercised
+  admission decision; no model sees a mutated context in this offline run.
+- The independent audit restores all three real dependency files through the
+  hash-checked local expansion endpoint and rejects all three stale variants.
+
+Measured initial preparation across the three repositories totals **1.250 s
+wall / 1.231 s CPU** for scan, bundle, admission/projection/verification and pack
+stages. Initial imports add 0.791 s wall. The full run, including all mutation
+comparisons, took 13.309 s wall. Per-stage and cold/incremental timings remain in
+the rows; single ordered observations do not establish a speedup. No model
+performs setup or projection, so these are host-compute costs, not hidden model
+tokens. Authoring and implementation effort is not included.
+
+There are three explicit **authored** acceptance obligations, one per repository;
+this result does not claim native obligation generation. Nothing in this
+experiment establishes empirical repair parity under a model, dynamic source
+expansion behavior, persistent workflow savings, or general software coverage.
+
+## Reproduce
+
+Existing result directories cannot be overwritten:
+
+```bash
+python3 papers/revisions/neurosymbolic_system_scope_20260914/evals/context/native_development/run_native_context.py --output papers/revisions/neurosymbolic_system_scope_20260914/evals/context/native_development/results_v2
+python3 papers/revisions/neurosymbolic_system_scope_20260914/evals/context/native_development/verify_native_context.py --results papers/revisions/neurosymbolic_system_scope_20260914/evals/context/native_development/results_v2 --output papers/revisions/neurosymbolic_system_scope_20260914/evals/context/native_development/audit_v2.json
+```
+
+`results_v1/summary.json` binds evaluator, fixture, protocol and loaded native
+module source hashes. Each family folder contains full native capsule evidence,
+all five request payloads, all four source states, native pack and mutation
+receipts. `audit_v1.json` records independent retokenization of all fifteen
+requests, equation negative controls and actual expansion checks.
+
+The next bounded live pilot compares raw and verified-equation contexts using
+the same target source and independent cold scorer. Its separate frozen profile
+and receipts live in `../live_v1`. Even equal quality in that small pilot would
+only qualify transport for this constructed profile; the supplied objectives
+make the repairs easy, and informative broader tasks remain necessary.

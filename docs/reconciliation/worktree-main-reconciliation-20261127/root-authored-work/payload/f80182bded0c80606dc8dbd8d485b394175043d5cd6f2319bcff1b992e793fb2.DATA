@@ -1,0 +1,269 @@
+#!/usr/bin/env python3
+"""Freeze, produce, independently admit, sign and execute the native TEST path."""
+from __future__ import annotations
+import argparse
+from dataclasses import asdict, replace
+import itertools
+import json
+import os
+from pathlib import Path
+import random
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+import traceback
+from common import HERE, PROCEDURES, SOURCE, Artifacts, canonical, cid, query_identity, frozen_guard, independent_decision, read, saved_candidate, sha, write_new
+
+def trust_for(run):
+    from ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.trust import SignerTrustRecord, SignerTrustRegistry
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.certificate import CertificateKeyRing, ProcedureCertificateVerifier
+    frozen = frozen_guard(run); key = Path(frozen["test_key_path"]).read_bytes()
+    if sha(key) != frozen["test_key_sha256"]: raise ValueError("test issuer key commitment mismatch")
+    issuer = "bounded-native-test-issuer-v1"
+    registry = SignerTrustRegistry((SignerTrustRecord(issuer, frozenset({"procedure-certificate"}), trusted=True, test_only=True),), production=False)
+    keyring = CertificateKeyRing({issuer: key})
+    return registry, keyring, ProcedureCertificateVerifier(registry, keyring), issuer
+
+def policy_and_family(run, candidate):
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.contracts import TaskFamily, TaskFamilyBoundary, EffectClass, RiskClass
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.verifier import VerificationPolicy
+    freeze = read(run / "freeze.json"); corpus = read(run / "corpora.json")
+    effects = (EffectClass.VALIDATION, EffectClass.RECEIPT_EMIT)
+    examples = read(run / "family_examples.json")
+    if not independent_decision(examples["positive"]) or independent_decision(examples["negative"]) or not independent_decision(examples["boundary"]): raise ValueError("family example semantics invalid")
+    boundary = TaskFamilyBoundary((cid(examples["positive"]),), (cid(examples["negative"]),), (cid(examples["boundary"]),), (), RiskClass.OBSERVATION_ONLY,
+        (candidate.bindings.repository_id,), ("python",), ("bounded-json",), effects)
+    family = TaskFamily(bindings=candidate.bindings, name=candidate.procedure.task_family_id,
+        goal_semantics=("compute-bounded-sequence-decision",), precondition_shape=("exact-source-and-immutable-query",), affected_artifact_classes=("immutable-test-query",),
+        effect_classes=effects, required_operation_contracts=tuple(s.operation_contract for s in candidate.procedure.steps),
+        validation_structure=("all-three-concrete-checks-and-independent-decision",), failure_signatures=("source-input-evidence-mismatch",),
+        postcondition_shape=("decision-computed-correctly-including-false",), rollback_structure=("read-only-no-source-rollback",), boundary=boundary)
+    revision = cid({"schema": "ns-native-test-verification-policy/v1", "freeze_sha256": sha((run / "freeze.json").read_bytes()), "family": family.to_dict()})
+    policy = VerificationPolicy(revision=revision, bindings=candidate.bindings,
+        operation_catalog_revision=freeze["operation_catalog_revision"], effect_policy_revision=freeze["effect_policy_revision"],
+        authority_policy_revision=candidate.bindings.policy_revision, required_test_contracts=("sequence-budget@1",), required_proof_contracts=(),
+        require_adversarial=True, require_held_out=True, require_shadow=True, max_risk_ceiling=RiskClass.OBSERVATION_ONLY, review_horizon_ms=3600000)
+    return policy, family
+
+def verify_and_issue(run):
+    from evidence import admit_artifacts, negative_controls
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.verifier import AdmittedReceipt, IndependentEvidence, ProcedureVerifier
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.certificate import ProcedureCertificateIssuer, CurrentCertificateContext
+    started=time.perf_counter();candidate, manifest, admitted = admit_artifacts(run)
+    costs={"fresh_artifact_admission_seconds":time.perf_counter()-started}
+    started=time.perf_counter()
+    negative_controls(run, manifest, admitted)
+    costs["evidence_negative_controls_seconds"]=time.perf_counter()-started
+    policy, family = policy_and_family(run, candidate); now = int(time.time()*1000)
+    receipts = []
+    for kind, identity in manifest.items():
+        receipt_id = candidate.counterexample_set_cid if kind == "counterexample_set" else identity
+        receipts.append(AdmittedReceipt(receipt_id, kind, "independent-bounded-artifact-reader-v1", candidate.bindings, now, now+3600000, admitted[kind].get("contract_id", "")))
+    evidence = IndependentEvidence(producer_id="independent-bounded-artifact-reader-v1", task_family=family,
+        source_episode_cids=tuple(candidate.source_episode_cids)+(manifest["source_episode"],), specification_cids=(manifest["specification"],),
+        counterexample_set_cid=candidate.counterexample_set_cid, proof_receipt_cids=(manifest["proof"],), test_receipt_cids=(manifest["test"],),
+        adversarial_assurance_cids=(manifest["adversarial"],), held_out_evaluation_cid=manifest["held_out"], shadow_evaluation_cid=manifest["shadow"],
+        repository_families=(candidate.bindings.repository_id,), supported_language_classes=("python",), supported_framework_classes=("bounded-json",),
+        known_limitations=("test-only-unpromoted-no-production-authority", "fresh-constructed-postdevelopment-corpus-not-population-generalization", "symbolic-contract-proof-plus-concrete-bridge-not-arbitrary-python-theorem", "legacy-episode-aliases-bound-to-original-saved-artifacts"), observed_at_ms=now, receipts=tuple(receipts))
+    started=time.perf_counter();verification = ProcedureVerifier().verify(candidate, evidence, policy, now_ms=now)
+    costs["native_seven_layer_verification_seconds"]=time.perf_counter()-started
+    write_new(run / "native_verification.json", {"accepted": verification.accepted, "candidate_cid": candidate.content_id, "procedure_cid": candidate.procedure.content_id, "layers": [layer.to_facts() for layer in verification.layers], "artifact": verification.artifact.to_dict()})
+    if not verification.accepted: raise ValueError("native independent verification rejected")
+    registry, keyring, verifier, issuer = trust_for(run)
+    started=time.perf_counter();certificate = ProcedureCertificateIssuer(registry, keyring, issuer_id=issuer).issue(candidate, verification, evidence, policy, now_ms=now)
+    costs["native_issue_and_reverification_seconds"]=time.perf_counter()-started
+    started=time.perf_counter();verdict = verifier.verify(certificate, CurrentCertificateContext.from_policy(policy, now_ms=now))
+    costs["native_certificate_admission_seconds"]=time.perf_counter()-started
+    if not verdict.accepted or not verdict.usable or verdict.grants_authority or verdict.grants_promotion: raise ValueError("native test certificate not correctly admitted")
+    write_new(run / "certificate.json", certificate.to_dict()); write_new(run / "certificate_admission.json", verdict.to_dict())
+    write_new(run / "evidence_admission.json", {"actual_artifact_payloads_recomputed_before_signing": True, "manifest": manifest,
+        "native_admitted_receipts": [r.to_dict() for r in receipts], "counterexample_alias_binding": {candidate.counterexample_set_cid: manifest["counterexample_set"]},
+        "legacy_source_aliases_bound": list(candidate.source_episode_cids), "native_verification_policy_revision": policy.revision,
+        "family": family.to_dict(), "test_only_signer": True, "production_registry": False, "registry_promoted": False})
+    family_store = Artifacts(run / "evidence_objects")
+    for example in read(run / "family_examples.json").values(): family_store.put(example)
+    family_store.put(family.to_dict())
+    write_new(run/"native_verification_costs.json",costs)
+
+def execute(run):
+    from evidence import admit_artifacts
+    from runtime import NativeTestRuntime
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.contracts import ProcedureCertificate
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.interpreter import ExecutionMode
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.certificate import CurrentCertificateContext
+    candidate, _, _ = admit_artifacts(run); policy, _ = policy_and_family(run, candidate)
+    _, _, verifier, _ = trust_for(run); certificate = ProcedureCertificate.from_dict(read(run / "certificate.json"))
+    runtime = NativeTestRuntime(candidate, certificate, verifier, policy)
+    corpus = read(run / "corpora.json"); rows = []; ordinal = 0; first = None
+    trace_store = Artifacts(run / "native_objects")
+    for partition in ("test", "adversarial", "held_out", "shadow"):
+        for payload in corpus[partition]:
+            started=time.perf_counter();invocation, result, decision = runtime.execute(payload, ordinal); elapsed=time.perf_counter()-started;ordinal += 1
+            if first is None: first = (invocation, payload)
+            row = {"partition": partition, "query_cid": query_identity(payload), "invocation_cid": invocation.content_id,
+                "outcome_status": result.outcome.status.value, "decision": decision, "expected": independent_decision(payload), "native_prepare_and_execute_seconds":elapsed,
+                "native_outcome_cid": trace_store.put(result.outcome.to_dict()), "native_trace_cid": trace_store.put(result.trace.to_dict()),
+                "native_receipt_cid": trace_store.put(result.receipt.to_dict()), "cost": asdict(result.cost), "resumed": result.resumed,
+                "failure": None if result.failure is None else result.failure.to_dict()}
+            rows.append(row)
+            # Persist each actual outcome before a terminal assertion.
+            write_new(run / "invocations" / (str(ordinal).zfill(4)+".json"), row)
+            if result.outcome.status.value != "succeeded" or decision is not row["expected"]: raise ValueError("native TEST execution did not compute expected decision")
+    controls = []
+    def control(name, fn):
+        fn(); controls.append({"control": name, "passed": True})
+    def rejected_before_dispatch(owner, invocation, current, mode):
+        from ipfs_accelerate_py.agent_supervisor.procedure_compiler.interpreter import ProcedureInterpreterError
+        before = len(owner.dispatches)
+        try: result = owner.interpreter.execute(owner.procedure, invocation, certificate, current, mode=mode)
+        except ProcedureInterpreterError as exc:
+            detail = {"exception": type(exc).__name__, "reason": str(exc)}
+        else:
+            if result.outcome.status.value == "succeeded": raise ValueError("negative invocation succeeded")
+            detail = {"outcome": result.outcome.to_dict()}
+        if len(owner.dispatches) != before: raise ValueError("negative invocation dispatched")
+        controls.append({"negative_native_admission": detail})
+    def forged():
+        changed = replace(certificate, signature=certificate.signature[:-1]+("0" if certificate.signature[-1] != "0" else "1"))
+        if verifier.verify(changed, CurrentCertificateContext.from_policy(policy, now_ms=int(time.time()*1000))).accepted: raise ValueError("forged signature accepted")
+    control("native forged-signature rejection", forged)
+    def stale():
+        if verifier.verify(certificate, CurrentCertificateContext.from_policy(policy, now_ms=certificate.expires_at_ms)).accepted: raise ValueError("expired certificate accepted")
+    control("native expired-certificate rejection", stale)
+    def drift():
+        context=replace(CurrentCertificateContext.from_policy(policy, now_ms=int(time.time()*1000)), operation_catalog_revision="changed-catalog")
+        if verifier.verify(certificate, context).accepted: raise ValueError("changed catalog accepted")
+    control("native catalog-drift rejection", drift)
+    def production():
+        inv, current = runtime.prepare_invocation({"values":[3], "budget":6}, ordinal+1)
+        rejected_before_dispatch(runtime, inv, current, ExecutionMode.LIVE)
+    control("LIVE admission rejected before dispatch", production)
+    def observation():
+        bad=NativeTestRuntime(candidate,certificate,verifier,policy,fault="changed_type_observation")
+        _, result, _=bad.execute({"values":[3],"budget":6},10001)
+        if result.outcome.status.value == "succeeded": raise ValueError("changed type observation admitted")
+        controls.append({"control":"changed type native failure detail","outcome":result.outcome.to_dict(),"failure":None if result.failure is None else result.failure.to_dict()})
+    control("native changed-check-observation rejection", observation)
+    def descriptor():
+        bad=NativeTestRuntime(candidate,certificate,verifier,policy,fault="substituted_descriptor")
+        _,result,_=bad.execute({"values":[3],"budget":6},10006)
+        if result.outcome.status.value == "succeeded" or any(row["operation"] in ("CHECK_POSTCONDITION","EMIT_RECEIPT") for row in bad.dispatches):raise ValueError("substituted descriptor reached completion")
+        controls.append({"descriptor_native_failure":result.outcome.to_dict(),"trace":result.trace.to_dict(),"admissions":bad.admissions})
+    control("native substituted query descriptor rejection",descriptor)
+    def prior_observation():
+        bad=NativeTestRuntime(candidate,certificate,verifier,policy)
+        _,first_result,_=bad.execute({"values":[3],"budget":6},10007)
+        if first_result.outcome.status.value != "succeeded":raise ValueError("receipt donor did not execute")
+        bad.fault="cross_invocation_type_observation"
+        _,result,_=bad.execute({"values":[6],"budget":6},10008)
+        if result.outcome.status.value == "succeeded":raise ValueError("prior invocation type receipt admitted")
+        controls.append({"cross_invocation_observation_native_failure":result.outcome.to_dict(),"trace":result.trace.to_dict(),"admissions":bad.admissions})
+    control("native prior invocation check receipt rejected",prior_observation)
+    def changed_query():
+        bad=NativeTestRuntime(candidate,certificate,verifier,policy);inv,current=bad.prepare_invocation({"values":[3],"budget":6},10002)
+        query_id=bad.query_records[inv.content_id];bad.store.bodies[query_id]+=b" "
+        rejected_before_dispatch(bad, inv, current, ExecutionMode.TEST)
+    control("native changed-query-CID rejection before dispatch",changed_query)
+    def swapped_query():
+        bad=NativeTestRuntime(candidate,certificate,verifier,policy);a,current=bad.prepare_invocation({"values":[3],"budget":6},10003);b,_=bad.prepare_invocation({"values":[9],"budget":6},10004)
+        bad.binding_records[a.content_id]=bad.binding_records[b.content_id]
+        rejected_before_dispatch(bad, a, current, ExecutionMode.TEST)
+    control("native cross-invocation input rejection",swapped_query)
+    for label,payload in (("length",{"values":[0]*7,"budget":6}),("budget",{"values":[3],"budget":26}),("value",{"values":[10],"budget":6})):
+        try:runtime.prepare_invocation(payload,10005)
+        except ValueError:controls.append({"control":"certified-domain "+label+" rejected before dispatch","passed":True})
+        else:raise ValueError("out-of-domain query admitted")
+    # Exact original invocation resumes native checkpoint without operation replay.
+    inv,payload=first;current=runtime.prepare_invocation(payload,20000)[1]
+    current=replace(current,now_ms=int(time.time()*1000));before=len(runtime.dispatches)
+    result=runtime.interpreter.execute(runtime.procedure,inv,certificate,current,mode=ExecutionMode.TEST)
+    if not result.resumed or result.outcome.status.value!="succeeded" or len(runtime.dispatches)!=before:raise ValueError("native exact checkpoint reuse failed")
+    controls.append({"control":"native exact invocation checkpoint reused without redispatch","passed":True})
+    for identity,body in runtime.store.bodies.items():
+        if trace_store.put(json.loads(body)) != identity:raise ValueError("runtime artifact storage changed identity")
+    write_new(run/"runtime_controls.json",controls)
+    write_new(run/"runtime_summary.json",{"all_checks_passed":True,"invocations":len(rows),"computed_true":sum(row["decision"] is True for row in rows),"computed_false":sum(row["decision"] is False for row in rows),
+        "native_dispatches":len(runtime.dispatches),"native_admissions":len(runtime.admissions),"rows":rows,"controls":controls,
+        "actual_native_interpreter":"ProcedureInterpreter.execute(mode=TEST)","registry_promoted":False,"production_authority":False,"provider_calls":0,"model_tokens":0})
+
+def prepare(run):
+    import z3
+    if HERE.parent.name != "profiles": raise ValueError("run only a separately copied immutable profiles/<version> source directory")
+    run.mkdir();(run/"invocations").mkdir()
+    old=read(PROCEDURES/"matrix.json")["training"]+read(PROCEDURES/"results/fresh_queries.json")
+    old_keys={canonical(q) for q in old};used=set(old_keys);rng=random.Random(202609141305)
+    def collect(values,lengths,budgets,count=None,force=()):
+        pool=[{"values":list(items),"budget":budget} for length in lengths for items in itertools.product(values,repeat=length) for budget in budgets]
+        rng.shuffle(pool);pool=list(force)+pool;rows=[]
+        for q in pool:
+            key=canonical(q)
+            if key in used:continue
+            rows.append(q);used.add(key)
+            if count is not None and len(rows)==count:break
+        if count is not None and len(rows)!=count:raise ValueError("insufficient fresh corpus")
+        return rows
+    corpus={"proof_bridge":collect((-2,0,3,6,7,9,False,2.5,"x"),range(4),(-1,1,5,13,25)),
+        "test":collect((-2,0,3,6,7,9),range(4),(2,6,14),32,({"values":[3],"budget":6},{"values":[9],"budget":6})),
+        "adversarial":collect((True,False,1.25,2.5,"x",-2,9),(1,2,3),(4,7,15),24),
+        "held_out":collect((0,3,6,7,9),(4,5),(2,6,14,18,25),48,({"values":[0]*4,"budget":2},{"values":[9,0,0,0],"budget":2})),
+        "shadow":collect((-2,0,1,3,6,7,9),(6,),(4,10,19,25),32,({"values":[0]*6,"budget":4},{"values":[3]*6,"budget":19}))}
+    write_new(run/"corpora.json",corpus)
+    write_new(run/"family_examples.json",{"positive":{"values":[3,0,0,0],"budget":6},"negative":{"values":[9,0,0,0],"budget":6},"boundary":{"values":[7,7],"budget":14}})
+    candidate,_,_=saved_candidate()
+    sources={p.resolve() for p in HERE.glob('*.py')}|{(HERE/'PROTOCOL.md').resolve(),(PROCEDURES/'catalog_v1.py').resolve(),(PROCEDURES/'results/cold_synthesis-prime.json').resolve(),(PROCEDURES/'matrix.json').resolve(),(PROCEDURES/'results/fresh_queries.json').resolve()}
+    for root in (SOURCE/'ipfs_accelerate_py', SOURCE/'ipfs_datasets_py'):
+        sources.update(p.resolve() for p in root.rglob('*.py') if p.is_file())
+    zroot=Path(z3.__file__).resolve().parent
+    sources.update(p.resolve() for p in zroot.rglob('*') if p.is_file() and (p.suffix=='.py' or p.name.startswith('libz3')))
+    fd,keypath=tempfile.mkstemp(prefix='ns-native-procedure-test-key-',suffix='.bin');key=os.urandom(32);os.write(fd,key);os.close(fd)
+    source_hashes={str(p):sha(p.read_bytes()) for p in sorted(sources)}
+    catalog_revision=cid({'schema':'ns-native-test-catalog-profile/v1','source_sha256':source_hashes[str(HERE/'runtime.py')],'original_catalog_sha256':candidate.bindings.repository_commit,'contracts':[s.operation_contract for s in candidate.procedure.steps]})
+    freeze={'schema':'ns-native-procedure-test-freeze/v1','frozen_at_unix':time.time(),'candidate_cid':candidate.content_id,'procedure_cid':candidate.procedure.content_id,
+        'sources_sha256':source_hashes,'input_files_sha256':{name:sha((run/name).read_bytes()) for name in ('corpora.json','family_examples.json')},'corpus_counts':{k:len(v) for k,v in corpus.items()},
+        'fresh_corpus_disjoint_from_original_training_and_exposed_pool':True,'partition_corpora_mutually_disjoint':True,'old_exposed_unique_inputs':len(old_keys),
+        'operation_catalog_revision':catalog_revision,'effect_policy_revision':cid({'read_only':True,'effects':['validation','receipt_emit'],'production_authority':False}),
+        'test_key_path':keypath,'test_key_sha256':sha(key),'test_only_key':True,'key_not_in_published_evidence':True,
+        'worker_bound_seconds':120,'python_executable':sys.executable,'python_executable_sha256':sha(Path(sys.executable).read_bytes()),'python_version':sys.version,'z3_version':z3.get_full_version(),
+        'claim_limit':'Native signed TEST/read-only integration under separately checked bounded evidence; no native promotion, production authority, arbitrary-Python proof or model savings.'}
+    write_new(run/'freeze.json',freeze)
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--run',type=Path,default=HERE/'results_attempt1');parser.add_argument('--worker',choices=('produce','verify_issue','execute'));args=parser.parse_args();run=args.run.resolve()
+    if args.worker:
+        try:
+            frozen_guard(run)
+            if args.worker=='produce':
+                from evidence import produce
+                produce(run)
+            elif args.worker=='verify_issue':verify_and_issue(run)
+            else:execute(run)
+            frozen_guard(run)
+            imports = {}
+            for name, module in tuple(sys.modules.items()):
+                raw = getattr(module, '__file__', None)
+                if not raw: continue
+                path=Path(raw).resolve()
+                if path.is_file(): imports[name]={'path':str(path),'sha256':sha(path.read_bytes())}
+            write_new(run/(args.worker+'_imports.json'),imports)
+        except Exception as exc:
+            write_new(run/(args.worker+'_failure.json'),{'type':type(exc).__name__,'message':str(exc),'traceback':traceback.format_exc()});raise
+        return
+    setup_tick=time.perf_counter();prepare(run);setup_seconds=time.perf_counter()-setup_tick;processes=[]
+    for role in ('produce','verify_issue','execute'):
+        command=[sys.executable,'-B',str(Path(__file__)), '--run',str(run),'--worker',role];tick=time.perf_counter()
+        env=dict(os.environ,IPFS_ACCEL_SKIP_CORE='1',PYTHONDONTWRITEBYTECODE='1')
+        try:
+            proc=subprocess.run(command,cwd='/tmp',env=env,capture_output=True,timeout=120)
+            row={'role':role,'returncode':proc.returncode,'timed_out':False};stdout,stderr=proc.stdout,proc.stderr
+        except subprocess.TimeoutExpired as exc:
+            row={'role':role,'returncode':None,'timed_out':True};stdout,stderr=exc.stdout or b'',exc.stderr or b''
+        (run/(role+'.stdout')).write_bytes(stdout);(run/(role+'.stderr')).write_bytes(stderr)
+        row.update(command=command,bound_seconds=120,wall_seconds=time.perf_counter()-tick);write_new(run/(role+'.process.json'),row);processes.append(row);print(json.dumps(row),flush=True)
+        if row['returncode']!=0:break
+    complete=len(processes)==3 and all(r['returncode']==0 for r in processes)
+    write_new(run/'summary.json',{'schema':'ns-native-procedure-test-result/v1','completed':complete,'preparation_and_freeze_seconds':setup_seconds,'processes':processes,'freeze_sha256':sha((run/'freeze.json').read_bytes()),'runtime':read(run/'runtime_summary.json') if complete else None,'registry_promoted':False,'production_authority':False,'provider_calls':0,'model_tokens':0})
+    if not complete:raise SystemExit(1)
+
+if __name__=='__main__':main()

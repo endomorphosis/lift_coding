@@ -1,0 +1,45 @@
+{
+  "baseline_manifest_sha256": "fdaded9fa0e30bdfa9abed06bdcc52ef3b4aa0bbcd285fc7eec343d891af8011",
+  "clock": {
+    "driver_cleanup_reserve_seconds": 40,
+    "original_agent_seconds": 300,
+    "outer_teardown_excluded": true,
+    "report_publication_whole_wall_qualification": false,
+    "retry_or_state_reset_allowed": false,
+    "setup_excluded": true
+  },
+  "hypothesis": "A fresh exact rendered-input replay can select bounded STOP before native task completion, without settling the callback or asserting task or provider success.",
+  "limits": {
+    "full_task_satisfaction_established": false,
+    "global_model_convergence_proved": false,
+    "hidden_tests_solution_or_oracle_accessed": false,
+    "lean_toolchain_used_in_this_increment": false,
+    "provider_total_session_token_savings_established": false,
+    "provider_usage_or_billing_complete": false,
+    "real_credentials_used": false,
+    "source_equivalence_proved": false,
+    "task_completed": false
+  },
+  "native_owner_status_polling_in_observer_wait": false,
+  "observation_path": "protected current-run first claimed pass -> exact attempt implementation log -> closed observation -> independent historical replay -> STOP -> file recheck -> cleanup -> final independent replay",
+  "qualification": {
+    "actual_training_codebase_autoencoder": true,
+    "all_declared_runtime_imports_join_archive": true,
+    "contract": "public-task-inputs/reviewed-intent-contract.json",
+    "exact_model_input_verified_before_and_after_stop": true,
+    "fresh_harbor_environment": true,
+    "intent_autoencoder_disabled": true,
+    "network_detached_after_setup_local_unix_control_retained": true,
+    "one_start_setup_prepare_review_resume_stop": true,
+    "original_bottle_and_head_ancestry_preserved": true,
+    "public_task_recipe_image_id": "sha256:a205942bb930949f5a43220964fc9859fe35acd55ea0956e62f9c2ef79892c44"
+  },
+  "schema": "terminal-observer-stop-experiment-plan@1",
+  "scope_extension_reason": "The legacy diagnostic teardown fixture now explicitly stubs observer eligibility; its original bytes were captured before this test-only adaptation.",
+  "source_scope": {
+    "existing": 4,
+    "new": 2,
+    "runtime": 3,
+    "tests": 3
+  }
+}

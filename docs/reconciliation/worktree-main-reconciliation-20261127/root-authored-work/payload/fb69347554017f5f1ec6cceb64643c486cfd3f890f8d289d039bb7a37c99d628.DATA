@@ -1,0 +1,97 @@
+"""Independent audit of frozen execution artifacts; does not rerun task policy."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-id", required=True)
+    args = parser.parse_args()
+    run = HERE / "runs" / args.run_id
+    protocol = json.loads((HERE / "protocol.json").read_text())
+    summary = json.loads((run / "summary.json").read_text())
+    freeze = json.loads((run / "prerun_freeze.json").read_text())
+    checks = []
+
+    def check(name, condition, evidence=None):
+        checks.append({"name": name, "passed": bool(condition), "evidence": evidence})
+
+    for relative, expected in freeze["files"].items():
+        check("pre-run file unchanged: " + relative, sha(HERE / relative) == expected)
+    rows = summary["rows"]
+    check("one seed and full four-arm matrix", len(rows) == 1 + len(protocol["arms"]) * len(protocol["cases"]))
+    check("one distinct consumer process per invocation", len({row["pid"] for row in rows}) == len(rows))
+    check("common seed paid three real action executions", summary["seed"]["action_process_count"] == 3)
+    seed_index = json.loads((run / "seed_store/evaluation_index.json").read_text())
+    seed_plain = json.loads((run / "seed_store" / seed_index["seed"]["plain_record"]).read_text())
+    expected_cases = {case["id"]: case for case in protocol["cases"]}
+    profiles = {}
+    queries = {}
+    for row in rows:
+        label = row["arm"] + "/" + row["case_id"]
+        result = json.loads(Path(row["result"]).read_text())
+        case = result["case"]
+        query = json.loads(Path(result["query_path"]).read_text())
+        queries[(row["arm"], row["case_id"])] = query
+        check(label + " actual successful output", row["returncode"] == 0 and result["passed"] and result["attempts"][-1]["observed"]["value"] == case["target"])
+        check(label + " count equals retained subprocess records", result["action_process_count"] == len(result["attempts"]))
+        check(label + " action execution never bypassed", result["action_process_count"] >= 1)
+        check(label + " elapsed is measured and inclusive", row["process_elapsed_seconds"] >= result["elapsed_seconds"]["consumer_body"] > 0 and result["elapsed_seconds"]["actions"] > 0)
+        for index, attempt in enumerate(result["attempts"]):
+            output = json.loads(Path(attempt["stdout"]).read_text())
+            check(label + f" action {index} raw stdout hash", sha(attempt["stdout"]) == attempt["stdout_sha256"])
+            check(label + f" action {index} raw stderr hash", sha(attempt["stderr"]) == attempt["stderr_sha256"])
+            correct = attempt["returncode"] == 0 and type(output.get("value")) is int and output["value"] == case["target"] and output["action"] == attempt["action"]
+            check(label + f" action {index} independent output verdict", correct == attempt["independent_output_check"])
+            check(label + f" action {index} no label to process", len(attempt["command"]) == 4 and attempt["command"][-1] == str(case["value"]))
+        for module in result["runtime_profile"]["modules"]:
+            profiles[module["path"]] = module
+        if row["arm"] == "producer":
+            continue
+        expected = expected_cases[row["case_id"]]
+        expected_count = expected["expected_no_memory_calls"] if row["arm"] == "no_memory" else expected["expected_native_calls"]
+        check(label + " preregistered count", result["action_process_count"] == expected_count)
+        arm_seed = json.loads((run / "stores" / row["arm"] / seed_index["seed"]["plain_record"]).read_text())
+        check(label + " shared seed evidence unchanged", arm_seed == seed_plain)
+        if row["arm"] != "no_memory":
+            gate = result["gate"]
+            check(label + " preregistered gate", gate["decision"] == expected["expected_gate"])
+            check(label + " evidence produced by earlier process", gate["producer_execution_pid"] != gate["consumer_pid"] == result["pid"])
+            if gate["decision"] == "admitted":
+                check(label + " suggested action actually executed first", result["proposed_action"] == result["attempts"][0]["action"] == result["executed_successful_action"])
+            else:
+                check(label + " rejected suggestion caused discovery", result["proposed_action"] is None and result["attempts"][0]["action"] == protocol["action_catalog_order"][0])
+            if row["arm"] == "native_memory":
+                compiler = gate["native_compilation"]
+                check(label + " native compilation remains unadmitted proposal", compiler["proposal_only"] is True and compiler["admitted"] is False)
+                if gate["decision"] == "stale":
+                    check(label + " native current binding rejected", gate["candidate_bound"] is False and "candidate_binding_error" in gate)
+    for path, module in profiles.items():
+        check("actual imported source hash: " + module["module"], sha(path) == module["sha256"])
+    for case in protocol["cases"]:
+        these = [queries[(arm, case["id"])] for arm in protocol["arms"]]
+        check(case["id"] + " identical current query across all arms", all(query == these[0] for query in these))
+        counts = {row["arm"]: row["action_process_count"] for row in rows if row["case_id"] == case["id"]}
+        check(case["id"] + " ordinary retrieval/template parity", counts["native_memory"] == counts["exact_json"] == counts["condition_template"])
+    base = queries[("native_memory", "warm_a")]
+    for case_id, field in (("stale_state", "current_state_cid"), ("source_changed", "current_source_cid"), ("environment_changed", "environment_binding_cid")):
+        current = queries[("native_memory", case_id)]
+        differences = sorted(key for key in base if base[key] != current[key])
+        check(case_id + " isolates named binding dimension", differences == sorted([field, "query_cid"]), differences)
+    check("no provider calls or token-saving estimate", summary["provider_calls"] == 0 and summary["tokens"] == 0)
+    output = {"schema": "world-memory-development-validation@1", "run_id": args.run_id, "passed": all(check["passed"] for check in checks), "check_count": len(checks), "failed": [check for check in checks if not check["passed"]], "checks": checks, "actual_native_import_count": len(profiles), "runtime_sources": list(profiles.values())}
+    (run / "validation.json").write_text(json.dumps(output, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({key: output[key] for key in ("run_id", "passed", "check_count", "failed", "actual_native_import_count")}))
+    raise SystemExit(0 if output["passed"] else 1)
+
+
+if __name__ == "__main__":
+    main()

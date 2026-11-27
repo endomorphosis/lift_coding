@@ -1,0 +1,99 @@
+"""Real producer -> JSON/native compiler -> action-consumer continuation."""
+import argparse
+from datetime import datetime, timezone
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+from evaluation_consumer import execute
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[4]
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def write(path, value):
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    Path(path).write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-id", required=True)
+    args = parser.parse_args()
+    run = HERE / "runs" / args.run_id
+    run.mkdir(parents=True, exist_ok=False)
+    protocol = json.loads((HERE / "protocol.json").read_text())
+    bound_files = [HERE / name for name in ("protocol.json", "continuation_protocol.json", "evaluation_consumer.py", "run_continuation.py", "service.py", "test_compiler_identity.py", "source_profiles/compiler_identity_v1/profile.json", "source_profiles/compiler_identity_v1/source.diff", "source_profiles/compiler_identity_v1/ipfs_accelerate_py/agent_supervisor/semantic_state/program_world_adapters.py", "sources/service_v1.py", "sources/service_v2.py")]
+    write(run / "prerun_freeze.json", {"created_utc": datetime.now(timezone.utc).isoformat(), "files": {str(path.relative_to(HERE)): sha(path) for path in bound_files}, "original_artifact_manifest_sha256": sha(HERE / "development-v1-artifact-manifest.json")})
+    environment = {"PATH": os.environ.get("PATH", ""), "LANG": "C.UTF-8", "PYTHONDONTWRITEBYTECODE": "1"}
+    operations = []
+    outcomes = []
+
+    def service_call(case_id, operation, request):
+        ordinal = len(operations)
+        directory = run / "service_operations" / f"{ordinal:02d}-{case_id}-{operation}"
+        directory.mkdir(parents=True)
+        request = {"schema": "world-memory-service-request@1", "operation": operation, "request_id": f"{case_id}-{operation}-{ordinal}", "store_dir": str(run / "store"), **request}
+        write(directory / "request.json", request)
+        start = time.perf_counter()
+        completed = subprocess.run([sys.executable, str(HERE / "service.py")], input=json.dumps(request), text=True, capture_output=True, cwd=ROOT, env=environment, timeout=90)
+        elapsed = time.perf_counter() - start
+        (directory / "stdout").write_text(completed.stdout)
+        (directory / "stderr").write_text(completed.stderr)
+        row = {"case_id": case_id, "operation": operation, "returncode": completed.returncode, "process_elapsed_seconds": elapsed, "request_path": str(directory / "request.json"), "response_path": str(directory / "response.json"), "stdout_path": str(directory / "stdout"), "stderr_path": str(directory / "stderr")}
+        operations.append(row)
+        write(run / "execution_log.json", operations)
+        if completed.returncode:
+            raise RuntimeError(f"Preserved service failure at {directory}")
+        response = json.loads(completed.stdout)
+        write(directory / "response.json", response)
+        row.update({"status": response["status"], "service_pid": response["service_pid"], "query_cid": response["query"]["query_cid"]})
+        write(run / "execution_log.json", operations)
+        return response
+
+    def task_context(case):
+        path = HERE / "sources" / case["source"]
+        return {"context": {"subject": {"name": "frozen_three_action_integer_service"}, "source": {"text": path.read_text(), "sha256": sha(path)}, "environment": {"WORLD_MEMORY_EVAL_SIGN": case["environment_sign"], "python_sha256": sha(sys.executable)}, "state": {"value": case["value"], "target": case["target"]}, "policy": {"catalog_order": protocol["action_catalog_order"], "check": "actual output equals current target", "always_execute": True, "authority": "local evaluation controller"}}, "actions": [{"name": action} for action in protocol["action_catalog_order"]]}
+
+    original_execution = None
+    cases = [{"id": "seed", **protocol["seed"]}] + protocol["cases"]
+    for case in cases:
+        directory = run / "cases" / case["id"]
+        directory.mkdir(parents=True)
+        started = time.perf_counter()
+        context = task_context(case)
+        if case.get("observation_control"):
+            service_call(case["id"], "record", {**context, "observation_status": "inferred_untrusted", "execution": original_execution})
+        proposal = service_call(case["id"], "propose", context)
+        selected = proposal["selected_action"]
+        order = ([selected] if selected else []) + [name for name in protocol["action_catalog_order"] if name != selected]
+        attempts = []
+        for number, action in enumerate(order):
+            attempted = execute(case, action, directory, number)
+            attempts.append(attempted)
+            if attempted["independent_output_check"]:
+                break
+        if not attempts[-1]["independent_output_check"]:
+            raise RuntimeError(f"Failed actual behavioral outcome in {case['id']}")
+        execution = {"selected_action": attempts[-1]["action"], "passed": True, "output": attempts[-1]["observed"], "producer_pid": os.getpid(), "evidence": [{"case_id": case["id"], "action": item["action"], "returncode": item["returncode"], "stdout": Path(item["stdout"]).read_text(), "stderr": Path(item["stderr"]).read_text(), "passed": item["independent_output_check"], "source_sha256": context["context"]["source"]["sha256"], "environment": context["context"]["environment"]} for item in attempts]}
+        record = service_call(case["id"], "record", {**context, "execution": execution})
+        if case["id"] in {"seed", "original_return"}:
+            original_execution = execution
+        outcome = {"case": case, "passed": True, "proposed_action": selected, "successful_action": attempts[-1]["action"], "action_count": len(attempts), "attempts": attempts, "proposal": proposal, "publication": record["publication"], "elapsed_seconds": time.perf_counter() - started, "controller_pid": os.getpid()}
+        write(directory / "result.json", outcome)
+        outcomes.append(outcome)
+        write(run / "outcomes.json", outcomes)
+        print(json.dumps({"case_id": case["id"], "passed": True, "action_count": len(attempts), "proposed_action": selected, "gate": proposal["reason"]}), flush=True)
+    write(run / "summary.json", {"schema": "world-memory-compiler-continuation-summary@1", "run_id": args.run_id, "case_count_including_seed": len(outcomes), "passed": sum(row["passed"] for row in outcomes), "action_calls_including_seed": sum(row["action_count"] for row in outcomes), "service_process_count": len(operations), "service_process_seconds": sum(row["process_elapsed_seconds"] for row in operations), "action_process_seconds": sum(item["elapsed_seconds"] for row in outcomes for item in row["attempts"]), "case_elapsed_seconds": sum(row["elapsed_seconds"] for row in outcomes), "source_profile": "compiler_identity_v1", "provider_calls": 0, "tokens": 0, "scope": "Native compiler-output identity is now the actual evaluation dispatch input; all actions still execute and are independently checked. No production or learned-model claim."})
+
+
+if __name__ == "__main__":
+    main()

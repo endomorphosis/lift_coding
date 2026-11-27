@@ -1,0 +1,72 @@
+"""Read-only analysis of collected honest v2 artifacts; no proving execution."""
+import hashlib
+import json
+from pathlib import Path
+
+HERE=Path(__file__).resolve().parent
+RUN=HERE/"runs/horn-v1"
+FR=21888242871839275222246405745257275088548364400416034343698204186575808495617
+
+def load(path):return json.loads(path.read_text())
+def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
+def atom(value):return int.from_bytes(hashlib.sha256(value.encode()).digest(),"big")%FR
+
+def derive(w):
+    facts={a.strip() for a in w["private_axioms"] if "->" not in a}
+    rules=[tuple(part.strip()for part in a.split("->"))for a in w["private_axioms"]if "->"in a]
+    while True:
+        nxt=facts|{b for a,b in rules if a in facts}
+        if nxt==facts:return w["theorem"]in facts
+        facts=nxt
+
+def main():
+    freeze=load(RUN/"freeze.json");pins=load(RUN/"pins.json");positives=load(RUN/"positives.json");controls=load(RUN/"controls.json")
+    checks={"frozen_inputs_match":all(sha(RUN/name)==digest for name,digest in freeze["input_hashes"].items()),
+        "binary_pin_matches":sha(Path(freeze["binary"]))==pins["binary_sha256"],
+        "verifying_key_pin_matches":sha(RUN/"keys/v2/verifying_key.bin")==pins["verifying_key_sha256"],
+        "proving_key_pin_matches":sha(RUN/"keys/v2/proving_key.bin")==pins["proving_key_sha256"]}
+    positive_rows=[]
+    for row in positives:
+        length=row["implications"];w=load(RUN/f"witness_{length}.json");proof=load(RUN/f"proof_{length}.json")
+        commitment=0
+        for index,text in enumerate(w["private_axioms"]):
+            if "->"in text:
+                a,b=[x.strip()for x in text.split("->")];term=atom(b)+7*atom(a)
+            else:term=atom(text.strip())
+            commitment=(commitment+pow(13,index,FR)*term)%FR
+        theorem_hash=hashlib.sha256(w["theorem"].encode()).hexdigest()
+        wire=[theorem_hash,f"{commitment:064x}","2","TDFOL_v1"]
+        scalars=[atom(w["theorem"]),commitment,2,atom("TDFOL_v1")]
+        checks[f"honest_{length}_text_entails_theorem"]=derive(w)
+        checks[f"honest_{length}_outer_and_scalar_statement_matches"]=proof["public_inputs"]==wire and proof["evm_public_inputs"]==[f"0x{x:064x}"for x in scalars]
+        checks[f"honest_{length}_actual_native_verified"]=row["prove"]["returncode"]==0 and row["admission"]["accepted"] and row["admission"]["result"]["response"]=={"valid":True}
+        positive_rows.append({"implications":length,"prove_seconds":row["prove"]["wall_seconds"],"verify_seconds":row["admission"]["result"]["wall_seconds"],"proof_bytes":row["proof_bytes"],"witness":str(RUN/f"witness_{length}.json"),"proof":str(RUN/f"proof_{length}.json"),"prove_receipt":str(RUN/f"invocations/prove_{length}/result.json"),"verify_receipt":str(RUN/f"invocations/verify_{length}/result.json")})
+    controls_out=[]
+    witness_cases={"missing_predecessor","unsupported_theorem","changed_axiom_same_commitment","honest_attack_statement"}
+    for row in controls:
+        name=row["case"];result=row["result"]
+        if name in witness_cases:
+            checks[name+"_rejected_without_proof"]=result["returncode"]==2 and row["proof_created"]is False
+        elif name.startswith("wire_"):
+            checks[name+"_raw_acceptance_retained"]=result["returncode"]==0 and result["response"]=={"valid":True}
+            checks[name+"_caller_rejects_before_dispatch"]=row["bound_admission"]["accepted"]is False and row["bound_admission"]["native_calls"]==0
+        elif name=="evm_theorem_scalar":
+            checks[name+"_raw_and_bound_reject"]=result["returncode"]==1 and row["bound_admission"]["accepted"]is False
+        controls_out.append({"case":name,"native_returncode":result["returncode"],"native_response":result["response"],"elapsed_seconds":result["wall_seconds"],"caller_admission":row.get("bound_admission"),"proof_created":row.get("proof_created"),"evidence":str(RUN/"invocations"/result["label"] /"result.json")})
+    checks["additional_false_theorem_not_entailed"]=derive(load(RUN/"attack_expected_statement.json"))is False
+    custom_outputs=list(RUN.glob("*alternate*proof*.json"))+list(RUN.glob("*adversarial*proof*.json"))
+    # Explicitly check that only the three honest outputs are proof artifacts;
+    # ordinary malformed envelopes have different names and are not generated proofs.
+    actual_proofs=sorted(p.name for p in RUN.glob("proof_*.json"))
+    checks["only_three_honest_proof_outputs"] = actual_proofs==["proof_1.json","proof_2.json","proof_4.json"] and not custom_outputs
+    summary={"schema":"ns-native-horn-honest-only-summary/v1","status":"honest_prover_and_representation_controls_complete_deeper_assurance_incomplete","claim_boundary":"No alternate-prover proof was executed or verified; textual-commitment concern is unconfirmed.",
+        "run":str(RUN),"freeze":str(RUN/"freeze.json"),"pins":pins,"setup_seconds":load(RUN/"invocations/setup_v2/result.json")["wall_seconds"],
+        "positive_rows":positive_rows,"control_rows":controls_out,"checks_passed":all(checks.values()),"check_count":len(checks),"checks":checks,
+        "proving_key_bytes":(RUN/"keys/v2/proving_key.bin").stat().st_size,"verifying_key_bytes":(RUN/"keys/v2/verifying_key.bin").stat().st_size,
+        "incomplete_investigation":{"status":"stopped_after_parent_reported_automatic_review_block","custom_source_preserved":str(HERE/"attack_prover"),"compilation_completed_before_stop":True,"custom_executable_run":False,"custom_proof_generated":False,"textual_binding_bypass_empirically_confirmed":False,"prior_intermediate_summary":str(RUN/"honest_summary.json")},
+        "production_changes":False,"model_calls":0,"token_savings_claim":False,"textual_binding_soundness_claim":False,"summary_script_sha256":sha(Path(__file__))}
+    (RUN/"honest_only_summary.json").write_text(json.dumps(summary,indent=2,sort_keys=True)+"\n")
+    print(json.dumps({"passed":summary["checks_passed"],"checks":len(checks),"positives":len(positive_rows),"controls":len(controls_out)}))
+    assert summary["checks_passed"]
+
+if __name__=="__main__":main()

@@ -1,0 +1,89 @@
+"""Real exclusive durable error files; no resources, STOP mocks or native admission."""
+from pathlib import Path
+import hashlib
+import importlib.util
+import json
+import os
+import sys
+
+import pytest
+
+CALLER = Path('/home/barberb/lift_coding/artifacts/legal-ir-supervisor-recovery-20261016-02/grok-private-M0-caller-source-v9/run_construction.py')
+CALLER_SHA = '43b776f31e143e7df6ca3b64fdffa32f85ba71aa9a8d83789bc899160997394a'
+
+
+@pytest.fixture(scope='module')
+def caller():
+    assert CALLER.resolve(strict=True) == CALLER
+    assert hashlib.sha256(CALLER.read_bytes()).hexdigest() == CALLER_SHA
+    spec = importlib.util.spec_from_file_location('actual_private_m0_caller9_telemetry', CALLER)
+    actual = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = actual
+    spec.loader.exec_module(actual)
+    assert actual.__file__ == actual.__spec__.origin == str(CALLER)
+    assert sys.modules[spec.name] is actual
+    yield actual
+    assert hashlib.sha256(CALLER.read_bytes()).hexdigest() == CALLER_SHA
+
+
+def _actual_error(message):
+    try:
+        raise RuntimeError(message)
+    except RuntimeError as error:
+        return error
+
+
+def test_arbitrary_exception_text_and_locals_are_not_serialized(caller):
+    private_marker = 'FAKE-TEST-SECRET-do-not-record-93ac5'
+    actual = _actual_error(private_marker)
+    record = caller.safe_failure_observation(actual, private_marker)
+    encoded = json.dumps(record)
+    assert private_marker not in encoded
+    assert record['error_type'] == 'RuntimeError'
+    assert record['stage'] == '<unclassified-stage>'
+    assert 'closed_reason' not in record
+    assert record['traceback_frames'][-1]['function'] == '_actual_error'
+    assert all(set(row) == {'filename','lineno','function'} for row in record['traceback_frames'])
+
+
+def test_only_exact_fixed_caller_reason_is_retained(caller):
+    known = 'actual_private_child_construction_failed'
+    record = caller.safe_failure_observation(_actual_error(known), 'actual_stopped_cleanup')
+    assert record['closed_reason'] == known
+    assert record['stage'] == 'actual_stopped_cleanup'
+    different = caller.safe_failure_observation(_actual_error(known+':FAKE-secret'), 'actual_stopped_cleanup')
+    assert 'closed_reason' not in different
+
+
+def test_first_and_cleanup_errors_are_separate_real_durable_files(tmp_path, caller):
+    evidence = tmp_path/'parent-custody'
+    evidence.mkdir(mode=0o700)
+    first = caller.safe_failure_observation(_actual_error('actual_private_child_construction_failed'),
+        'ordinary_admitted_runtime_create_START_and_M0_observe')
+    first_pin = caller.persist_failure_observation(evidence, first, sequence=1)
+    first_bytes = Path(first_pin['path']).read_bytes()
+    cleanup = caller.safe_failure_observation(_actual_error('FAKE-unreviewed-cleanup-message'),
+        'actual_stopped_cleanup')
+    cleanup_pin = caller.persist_failure_observation(evidence, cleanup, sequence=2)
+    assert Path(first_pin['path']).read_bytes() == first_bytes
+    assert json.loads(first_bytes) == first
+    assert json.loads(Path(cleanup_pin['path']).read_bytes()) == cleanup
+    assert first_pin['path'] != cleanup_pin['path']
+    for row in (first_pin, cleanup_pin):
+        path = Path(row['path'])
+        assert path.stat().st_uid == os.getuid() and path.stat().st_mode & 0o777 == 0o600
+        assert path.stat().st_size == row['bytes']
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == row['sha256']
+    assert 'FAKE-unreviewed-cleanup-message' not in Path(cleanup_pin['path']).read_text()
+
+
+def test_duplicate_sequence_never_overwrites_prior_failure(tmp_path, caller):
+    evidence = tmp_path/'parent-custody'
+    evidence.mkdir(mode=0o700)
+    original = caller.safe_failure_observation(_actual_error('actual_private_child_construction_failed'),
+        'actual_stopped_cleanup')
+    row = caller.persist_failure_observation(evidence, original, sequence=1)
+    before = Path(row['path']).read_bytes()
+    with pytest.raises(FileExistsError):
+        caller.persist_failure_observation(evidence, {'replacement':False}, sequence=1)
+    assert Path(row['path']).read_bytes() == before

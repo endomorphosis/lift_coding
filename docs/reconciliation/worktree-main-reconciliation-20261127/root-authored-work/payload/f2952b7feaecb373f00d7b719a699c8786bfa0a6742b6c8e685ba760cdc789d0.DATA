@@ -1,0 +1,322 @@
+"""Root-invoked cached archive build; importing this module performs no I/O.
+
+Only the genuine production builder writes archive bytes. The caller supplies
+the qualified detached source checkout and its live resource/source guard.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+import tarfile
+import time
+
+SCHEMA = "matched-evaluation-cached-archive-build@1"
+BUILDER_SHA = "740cedb9db485343e8c6e6ce6bf5c9ff6f321fc355050ccf91d97b4561ef129d"
+GROK_SHA = "45b0943e736f00a249b9cf02af2be9e0749d97c09a6f55cfcf3029a1a836f23e"
+WHEEL_SHA = "6f307c2c32d764ffc6ff6893b801fad6d4752f3e67966cb8abf1843427c02604"
+WHEEL_NAME = "torch-2.13.0+cpu-cp312-cp312-manylinux_2_28_aarch64.whl"
+MAX_FILES = 100000
+MAX_FILE_BYTES = 512 * 1024**2
+MAX_TOTAL_BYTES = 8 * 1024**3
+_OPTIONAL = ("model_snapshot", "security_initializer", "canonical_cve_export",
+    "canonical_cve_manifest_sha256", "security_checkpoint", "security_checkpoint_manifest_sha256",
+    "security_checkpoint_hub_descriptor", "security_checkpoint_cache", "formula_decoder",
+    "header_protocol", "intent_checkpoint", "intent_projection_request", "intent_action_384_config",
+    "source384_config", "numerical_selection_config", "setup_cache_policy")
+_ERRORS = frozenset({"ValueError", "TypeError", "RuntimeError", "OSError", "PermissionError",
+    "FileNotFoundError", "MemoryError", "TimeoutError", "KeyboardInterrupt", "SystemExit"})
+
+
+def _need(condition, reason):
+    if not condition:
+        raise ValueError(reason)
+
+
+def _json(value):
+    return json.dumps(value, sort_keys=True, indent=2, ensure_ascii=True, allow_nan=False).encode() + b"\n"
+
+
+def _identity(info):
+    return {key: getattr(info, key) for key in ("st_dev", "st_ino", "st_mode", "st_nlink",
+        "st_size", "st_mtime_ns", "st_ctime_ns", "st_uid", "st_gid")}
+
+
+def _canonical(path, *, exists=True):
+    path = Path(path)
+    _need(path.is_absolute() and ".." not in path.parts and path.resolve(strict=exists) == path,
+        "canonical_build_path_required")
+    return path
+
+
+def _pin(path, *, maximum=MAX_FILE_BYTES):
+    path = _canonical(path)
+    descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+    with os.fdopen(descriptor, "rb") as stream:
+        before = os.fstat(stream.fileno())
+        _need(stat.S_ISREG(before.st_mode) and before.st_nlink == 1
+            and 0 <= before.st_size <= maximum, "bounded_single_link_build_input_required")
+        digest = hashlib.file_digest(stream, "sha256").hexdigest()
+        after = os.fstat(stream.fileno())
+    _need(_identity(before) == _identity(after) == _identity(path.lstat()), "build_input_changed_while_hashing")
+    return dict(path=str(path), sha256=digest, bytes=before.st_size,
+        mode=stat.S_IMODE(before.st_mode), identity=_identity(before))
+
+
+def _write(path, value):
+    raw = _json(value)
+    descriptor = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+    with os.fdopen(descriptor, "wb") as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+    return dict(path=str(path), sha256=hashlib.sha256(raw).hexdigest(), bytes=len(raw))
+
+
+def _inputs(options, guard):
+    """Match the pinned genuine builder's complete selected file population."""
+    rows = {}
+
+    def add(path, member, *, fixed_mode=None, logical=None):
+        _need(member not in rows and len(rows) < MAX_FILES, "unique_bounded_build_population_required")
+        row = _pin(path)
+        row["archive_mode"] = fixed_mode if fixed_mode is not None else (0o755 if os.access(path, os.X_OK) else 0o644)
+        if logical is not None and logical.is_symlink():
+            row["logical_symlink"] = dict(path=str(logical), target=os.readlink(logical),
+                identity=_identity(logical.lstat()))
+        rows[member] = row
+        if len(rows) % 128 == 0:
+            guard()
+
+    for root, package, destination in ((options["source"], "ipfs_accelerate_py", "source"),
+            (options["datasets"], "ipfs_datasets_py", "datasets"), (options["kit"], "ipfs_kit_py", "kit")):
+        root = _canonical(root)
+        _need((root / package).is_dir(), "genuine_build_package_required")
+        for path in sorted((root / package).rglob("*")):
+            if not path.is_file() or path.is_symlink():
+                continue
+            relative = path.relative_to(root)
+            if any(part in {"__pycache__", ".git", "node_modules", ".venv"} for part in relative.parts):
+                continue
+            if path.suffix not in {".py", ".lean", ".sql", ".lark"} and not (
+                    path.suffix == ".json" and ("schemas" in relative.parts or path.name == "intelligence_index_v4_3.json")):
+                continue
+            add(path, destination + "/" + relative.as_posix())
+        if destination == "source":
+            for relative in ("benchmarks/__init__.py", "benchmarks/agent_supervisor/__init__.py"):
+                add(root / relative, "source/" + relative)
+            for path in sorted((root / "benchmarks/agent_supervisor/container_coding").glob("*.py")):
+                if not path.name.startswith("test_"):
+                    add(path, "source/" + path.relative_to(root).as_posix())
+    for extension in ("ducklake", "httpfs", "quack"):
+        add(options["extension_dir"] / (extension + ".duckdb_extension"), "extensions/" + extension + ".duckdb_extension")
+    add(options["grok_binary"], "providers/grok/grok")
+    add(options["torch_cpu_wheel"], "runtime-wheels/torch-cpu/" + WHEEL_NAME, fixed_mode=0o644)
+    toolchain = options["lean_toolchain"]
+    if toolchain is not None:
+        toolchain = _canonical(toolchain)
+        _need((toolchain / "bin/lean").is_file(), "cached_lean_executable_required")
+        for part in ("bin", "lib"):
+            for logical in sorted((toolchain / part).rglob("*")):
+                if not logical.is_file():
+                    continue
+                resolved = logical.resolve(strict=True)
+                _need(resolved.is_relative_to(toolchain), "lean_asset_escapes_cached_toolchain")
+                add(resolved, "toolchains/lean/" + logical.relative_to(toolchain).as_posix(), logical=logical)
+    _need(sum(row["bytes"] for row in rows.values()) <= MAX_TOTAL_BYTES, "total_build_input_bound")
+    guard()
+    return rows
+
+
+def _fence(output, state):
+    """Deny execution/network and writes outside this fresh artifact directory."""
+    def inside(value):
+        if isinstance(value, int):
+            if type(value) is not int or not 0 <= value < 1048576:
+                return False
+            try:
+                path = Path(os.readlink(f"/proc/self/fd/{value}"))
+                if not path.is_absolute() or path.resolve(strict=True) != path or not path.is_relative_to(output):
+                    return False
+                descriptor = os.fstat(value)
+                visible = path.lstat()
+                repeated = os.fstat(value)
+                return all(stat.S_ISREG(info.st_mode) and info.st_nlink == 1
+                    and info.st_uid == os.geteuid() for info in (descriptor, visible, repeated)) and (
+                    descriptor.st_dev, descriptor.st_ino) == (visible.st_dev, visible.st_ino) == (
+                    repeated.st_dev, repeated.st_ino)
+            except (TypeError, ValueError, OSError):
+                return False
+        try:
+            path = Path(os.fsdecode(value))
+            return path.is_absolute() and path.resolve(strict=False).is_relative_to(output)
+        except (TypeError, ValueError, OSError):
+            return False
+
+    def hook(event, args):
+        if not state["active"]:
+            return
+        denied = False
+        if event.startswith("socket.") or event in {"subprocess.Popen", "os.system", "os.exec",
+                "os.posix_spawn", "os.fork", "os.forkpty"}:
+            denied = True
+        elif event == "import" and str(args[0]).split(".")[0] in {
+                "torch", "transformers", "tensorflow", "sentence_transformers"}:
+            denied = True
+        elif event == "open":
+            mode, flags = args[1:3]
+            writable = isinstance(mode, str) and any(char in mode for char in "wax+")
+            writable = writable or isinstance(flags, int) and bool(flags & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND))
+            denied = writable and not inside(args[0])
+            if not isinstance(args[0], int):
+                selected = Path(os.fsdecode(args[0]))
+                denied = denied or bool({".grok", ".codex", ".ssh", ".aws"} & set(selected.parts))
+                denied = denied or selected.name in {"auth.json", "credentials", "credentials.json", "id_rsa", "id_ed25519"}
+        elif event in {"os.mkdir", "os.rmdir", "os.remove", "os.chmod", "os.chown", "os.utime", "os.truncate"}:
+            denied = not inside(args[0])
+        elif event in {"os.rename", "os.link", "os.symlink"}:
+            denied = not all(inside(value) for value in args[:2])
+        if denied:
+            state["denied"].append(event)
+            raise PermissionError("unreleased_build_effect_refused")
+    sys.addaudithook(hook)
+
+
+def run_archive_build(*, output_dir: Path, source: Path, recipe: dict, guard: callable):
+    """Build only after root qualification and under its independently held lease."""
+    _need(callable(guard) and type(recipe) is dict and recipe.get("schema") == "matched-evaluation-cached-runtime-build-recipe@1",
+        "root_build_recipe_and_guard_required")
+    recipe_raw = _json(recipe)
+    recipe = json.loads(recipe_raw)
+    guard()
+    source, output = _canonical(source), _canonical(output_dir, exists=False)
+    _need(not os.path.lexists(output) and output.parent.is_dir() and (source / ".git").is_file()
+        and not (source / ".git").is_symlink(), "fresh_output_and_genuine_detached_source_required")
+    options = dict(recipe["kwargs"])
+    expected_keys = {*_OPTIONAL, "output", "source", "datasets", "kit", "extension_dir", "lean_toolchain",
+        "grok_binary", "torch_cpu_wheel", "torch_cpu_wheel_sha256"}
+    _need(set(options) == expected_keys and all(options[name] is None for name in _OPTIONAL), "closed_cached_asset_selection_required")
+    options.update(source=source, output=output / "archive")
+    for key in ("datasets", "kit", "extension_dir", "grok_binary", "torch_cpu_wheel"):
+        options[key] = _canonical(options[key])
+    if options["lean_toolchain"] is not None:
+        options["lean_toolchain"] = _canonical(options["lean_toolchain"])
+        _need(str(options["lean_toolchain"]) == recipe["lean_candidate_metadata"]["path"], "independently_declared_lean_path_required")
+    for path in (source, options["datasets"], options["kit"], options["extension_dir"],
+            options["grok_binary"].parent, options["torch_cpu_wheel"].parent, options["lean_toolchain"]):
+        if path is not None:
+            _need(not output.is_relative_to(path) and not path.is_relative_to(output), "build_output_must_be_disjoint")
+    output.mkdir(mode=0o700)
+    state = dict(active=True, denied=[])
+    _fence(output, state)
+    stage, before, after = "input_capture", None, None
+    started = time.monotonic()
+    try:
+        before = _inputs(options, guard)
+        builder = source / "benchmarks/agent_supervisor/container_coding/terminal_deployment.py"
+        _need(_pin(builder)["sha256"] == BUILDER_SHA == recipe["genuine_builder"]["sha256"], "qualified_builder_source_differs")
+        expected_assets = [recipe["grok_binary"], recipe["cpu_wheel"], *recipe["extensions"]]
+        for expected in expected_assets:
+            actual = _pin(expected["path"])
+            _need(actual["sha256"] == expected["sha256"] and actual["bytes"] == expected["bytes"], "independent_cached_asset_pin_differs")
+        _need(before["providers/grok/grok"]["sha256"] == GROK_SHA
+            and before["providers/grok/grok"]["bytes"] == 142867512
+            and before["providers/grok/grok"]["archive_mode"] == 0o755
+            and before["runtime-wheels/torch-cpu/" + WHEEL_NAME]["sha256"] == WHEEL_SHA
+            and before["runtime-wheels/torch-cpu/" + WHEEL_NAME]["bytes"] == 155005253
+            and options["torch_cpu_wheel_sha256"] == WHEEL_SHA, "native_grok_and_cpu_wheel_pin_required")
+        opening = _write(output / "input-rows-before.json", before)
+        guard()
+        stage = "genuine_builder"
+        from benchmarks.agent_supervisor.container_coding import terminal_deployment as deployment
+        from benchmarks.agent_supervisor.container_coding.terminal_grok_deployment import verify_grok_archive
+        from ipfs_accelerate_py import __file__ as accelerate_origin
+        from ipfs_datasets_py import __file__ as datasets_origin
+        from ipfs_kit_py import __file__ as kit_origin
+        import benchmarks
+        import benchmarks.agent_supervisor
+        _need(Path(deployment.__file__).resolve() == builder
+            and Path(accelerate_origin).resolve() == source / "ipfs_accelerate_py/__init__.py"
+            and Path(datasets_origin).resolve() == options["datasets"] / "ipfs_datasets_py/__init__.py"
+            and Path(kit_origin).resolve() == options["kit"] / "ipfs_kit_py/__init__.py"
+            and Path(benchmarks.__file__).resolve() == source / "benchmarks/__init__.py"
+            and Path(benchmarks.agent_supervisor.__file__).resolve() == source / "benchmarks/agent_supervisor/__init__.py",
+            "genuine_frozen_package_origins_required")
+        manifest = deployment.build_runtime_archive(**options)
+        guard()
+        stage = "archive_verification"
+        rows = manifest.get("files")
+        _need(manifest.get("schema") == "terminal-supervisor-runtime-archive@1" and type(rows) is list
+            and len(rows) == len(before), "genuine_manifest_population_differs")
+        expected_rows = {name: dict(path=name, sha256=row["sha256"], bytes=row["bytes"], mode=row["archive_mode"])
+            for name, row in before.items()}
+        observed_rows = {}
+        for row in rows:
+            _need(type(row) is dict and set(row) == {"path", "sha256", "bytes", "mode"}
+                and row.get("path") in expected_rows and row["path"] not in observed_rows
+                and row == expected_rows[row["path"]], "genuine_manifest_source_or_asset_row_differs")
+            observed_rows[row["path"]] = row
+        archive, manifest_path = options["output"] / "runtime.tar.gz", options["output"] / "manifest.json"
+        manifest_raw = manifest_path.read_bytes()
+        _need(json.loads(manifest_raw) == manifest, "retained_genuine_manifest_differs")
+        archive_pin = _pin(archive, maximum=MAX_TOTAL_BYTES)
+        _need(archive_pin["sha256"] == manifest["archive_sha256"], "genuine_archive_sha256_differs")
+        verified, total_bytes = set(), 0
+        with tarfile.open(archive, "r:gz") as bundle:
+            for member in bundle:
+                _need(member.name in observed_rows and member.name not in verified and member.isfile()
+                    and member.uid == member.gid == 0 and member.uname == member.gname == "root" and member.mtime == 0,
+                    "unique_regular_normalized_archive_member_required")
+                expected = observed_rows[member.name]
+                _need(member.size == expected["bytes"] and member.mode == expected["mode"], "archive_size_or_mode_differs")
+                with bundle.extractfile(member) as stream:
+                    digest = hashlib.file_digest(stream, "sha256").hexdigest()
+                _need(digest == expected["sha256"], "archive_content_differs")
+                verified.add(member.name)
+                total_bytes += member.size
+                _need(total_bytes <= MAX_TOTAL_BYTES, "archive_uncompressed_bound")
+                if len(verified) % 128 == 0:
+                    guard()
+        _need(verified == set(before), "archive_member_census_incomplete")
+        verify_grok_archive(archive, manifest, required=True)
+        _need(deployment.verify_torch_cpu_wheel_archive(archive, manifest) == manifest["torch_cpu_wheel"], "native_cpu_wheel_binding_differs")
+        stage = "closing_custody"
+        guard()
+        after = _inputs(options, guard)
+        _need(after == before and _pin(archive, maximum=MAX_TOTAL_BYTES) == archive_pin and manifest_path.read_bytes() == manifest_raw
+            and not state["denied"], "build_source_asset_or_output_custody_changed")
+        closing = _write(output / "input-rows-after.json", after)
+        guard()
+        result = dict(schema=SCHEMA, built_and_verified=True, provider_calls=0,
+            archive=dict(path=str(archive), sha256=archive_pin["sha256"], bytes=archive_pin["bytes"]),
+            manifest=dict(path=str(manifest_path), sha256=hashlib.sha256(manifest_raw).hexdigest(), bytes=len(manifest_raw)),
+            input_rows_before=opening, input_rows_after=closing, input_rows_unchanged=True,
+            archive_members=len(verified), source_members=sum(name.startswith(("source/", "datasets/", "kit/")) for name in verified),
+            uncompressed_bytes=total_bytes, all_unique_regular_members_verified=True,
+            grok_binding=manifest["grok_cli_assets"], cpu_wheel_binding=manifest["torch_cpu_wheel"],
+            lean_selected=options["lean_toolchain"] is not None,
+            lean_members=sum(name.startswith("toolchains/lean/") for name in verified),
+            builder_sha256=BUILDER_SHA, supplied_recipe_sha256=hashlib.sha256(recipe_raw).hexdigest(),
+            project_import_origins=dict(accelerate=str(accelerate_origin), datasets=str(datasets_origin),
+                kit=str(kit_origin), benchmark=str(deployment.__file__)), seconds=time.monotonic() - started,
+            denied_effect_attempts=list(state["denied"]), guard_before_after_and_every_128_members=True,
+            credentials_accessed=False, installs=0, downloads=0, model_inference_calls=0,
+            build_time_training_performed=False, historical_lifecycle_qualification_transferred=False,
+            new_runtime_deployment_qualified=False, task_accepted=False, whole_task_token_savings=None)
+        _write(output / "result.json", result)
+        return result
+    except BaseException as error:
+        try:
+            _write(output / "failure.json", dict(schema=SCHEMA, built_and_verified=False, stage=stage,
+                failure_type=type(error).__name__ if type(error).__name__ in _ERRORS else "other",
+                input_rows_before_available=before is not None, input_rows_after_available=after is not None,
+                denied_effect_attempts=list(state["denied"]), partial_outputs_retained=True,
+                provider_calls=0, qualification_claimed=False))
+        except BaseException:
+            pass
+        raise
+    finally:
+        state["active"] = False

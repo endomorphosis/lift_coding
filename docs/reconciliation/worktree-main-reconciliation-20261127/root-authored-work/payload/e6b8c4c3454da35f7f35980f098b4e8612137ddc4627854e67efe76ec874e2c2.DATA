@@ -1,0 +1,556 @@
+import ObjectiveContainerCore
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+UNCOMPILED, UNQUALIFIED SOURCE-ONLY FOUNDATION.
+
+This increment checks a type-indexed named exact-real syntax against a mixed
+context and lowers names to intrinsic typed slots. The source and target
+interpreters recurse independently. Scalar operations, checked finite indexing,
+container length and ordered exact-real sum are supported; container bodies
+(map/zip/range), dynamic JSON type inference, and the original objective prefix
+are not compiled by this foundation. Unsupported syntax refuses explicitly.
+
+SourceTerm's index is validated by the Lean constructor types. It is not proof
+that an external JSON annotation or Python input shape is correct. All proofs
+are restricted to successful compilation; syntax in both conditional branches
+is checked, whereas evaluation selects only one branch. No source equivalence,
+Python Float/libm/fsum semantics, training, convergence, task satisfaction,
+metadata hydration or planner activation is claimed by this file.
+-/
+
+namespace RankerObjectivePrefixIR
+
+noncomputable section
+
+open RankerObjectiveIR (SliceError mapOne mapTwo mapThree applyOne applyTwo
+  exactDivision exactLog1p)
+
+inductive Ty where
+  | scalar
+  | nat
+  | index (bound : ℕ)
+  | vector (length : ℕ)
+  | matrix (rows columns : ℕ)
+  deriving DecidableEq
+
+def Denote : Ty → Type
+  | .scalar => ℝ
+  | .nat => ℕ
+  | .index bound => Fin bound
+  | .vector length => Fin length → ℝ
+  | .matrix rows columns => Fin rows → Fin columns → ℝ
+
+abbrev Context := List (String × Ty)
+abbrev Schema := List (String × Ty)
+
+def contextNames (context : Context) : List String := context.map Prod.fst
+
+def contextUnique (context : Context) : Prop := (contextNames context).Nodup
+
+inductive Slot : Context → Ty → Type where
+  | here {name : String} {τ : Ty} {tail : Context} : Slot ((name, τ) :: tail) τ
+  | there {name : String} {σ τ : Ty} {tail : Context} :
+      Slot tail τ → Slot ((name, σ) :: tail) τ
+
+inductive Environment : Context → Type where
+  | nil : Environment []
+  | cons {name : String} {τ : Ty} {tail : Context} :
+      Denote τ → Environment tail → Environment ((name, τ) :: tail)
+
+def readSlot : {context : Context} → {τ : Ty} →
+    Slot context τ → Environment context → Denote τ
+  | _, _, .here, .cons value _ => value
+  | _, _, .there slot, .cons _ rest => readSlot slot rest
+
+def castSlot {context : Context} {σ τ : Ty} (same : σ = τ)
+    (slot : Slot context σ) : Slot context τ := same ▸ slot
+
+def castValue {σ τ : Ty} (same : σ = τ) (value : Denote σ) : Denote τ := same ▸ value
+
+/-- Name lookup stops at the first matching name and checks its entire type,
+including every vector/matrix/index dimension. A wrong type does not fall
+through to an older binding with the same name. -/
+def lookupSlot : (context : Context) → (name : String) → (τ : Ty) →
+    Except SliceError (Slot context τ)
+  | [], name, _ => .error (.unknownName name)
+  | (head, σ) :: tail, name, τ =>
+      if name = head then
+        if same : σ = τ then .ok (castSlot same .here)
+        else .error (.unsupportedNode ("typeMismatch:" ++ name))
+      else mapOne Slot.there (lookupSlot tail name τ)
+
+abbrev NamedEnvironment := (name : String) → (τ : Ty) → Except SliceError (Denote τ)
+
+def namesFromScope {context : Context} (environment : Environment context) : NamedEnvironment :=
+  fun name τ => mapOne (fun slot => readSlot slot environment) (lookupSlot context name τ)
+
+def extendNames {τ : Ty} (name : String) (value : Denote τ)
+    (rest : NamedEnvironment) : NamedEnvironment :=
+  fun query σ =>
+    if query = name then
+      if same : τ = σ then .ok (castValue same value)
+      else .error (.unsupportedNode ("typeMismatch:" ++ query))
+    else rest query σ
+
+inductive UnaryOp where
+  | neg | abs | exp | log1p
+  deriving DecidableEq
+
+inductive BinaryOp where
+  | add | sub | mul | div | max
+  deriving DecidableEq
+
+/-- The existing qualified scalar backend supplies the partial domain policy.
+This is exact Real evaluation, with no Float/libm refinement claim. -/
+def evalUnary : UnaryOp → ℝ → Except SliceError ℝ
+  | .neg, value => .ok (-value)
+  | .abs, value => .ok |value|
+  | .exp, value => .ok (Real.exp value)
+  | .log1p, value => exactLog1p value
+
+def evalBinary : BinaryOp → ℝ → ℝ → Except SliceError ℝ
+  | .add, left, right => .ok (left + right)
+  | .sub, left, right => .ok (left - right)
+  | .mul, left, right => .ok (left * right)
+  | .div, left, right => exactDivision left right
+  | .max, left, right => .ok (max left right)
+
+inductive SourceTerm : Ty → Type where
+  | var {τ : Ty} (name : String) : SourceTerm τ
+  | scalarLiteral (value : ℚ) : SourceTerm .scalar
+  | natLiteral (value : ℕ) : SourceTerm .nat
+  | indexLiteral {bound : ℕ} (value : Fin bound) : SourceTerm (.index bound)
+  | scalarUnary (op : UnaryOp) (value : SourceTerm .scalar) : SourceTerm .scalar
+  | scalarBinary (op : BinaryOp) (left right : SourceTerm .scalar) : SourceTerm .scalar
+  | ifNonneg (condition thenBranch elseBranch : SourceTerm .scalar) : SourceTerm .scalar
+  | lengthVector {length : ℕ} (values : SourceTerm (.vector length)) : SourceTerm .nat
+  | lengthMatrix {rows columns : ℕ} (values : SourceTerm (.matrix rows columns)) : SourceTerm .nat
+  | natToScalar (value : SourceTerm .nat) : SourceTerm .scalar
+  | indexVector {length : ℕ} (values : SourceTerm (.vector length))
+      (index : SourceTerm (.index length)) : SourceTerm .scalar
+  | fsumExact {length : ℕ} (values : SourceTerm (.vector length)) : SourceTerm .scalar
+  | unsupported {τ : Ty} (tag : String) : SourceTerm τ
+
+inductive Term (context : Context) : Ty → Type where
+  | var {τ : Ty} (slot : Slot context τ) : Term context τ
+  | scalarLiteral (value : ℚ) : Term context .scalar
+  | natLiteral (value : ℕ) : Term context .nat
+  | indexLiteral {bound : ℕ} (value : Fin bound) : Term context (.index bound)
+  | scalarUnary (op : UnaryOp) (value : Term context .scalar) : Term context .scalar
+  | scalarBinary (op : BinaryOp) (left right : Term context .scalar) : Term context .scalar
+  | ifNonneg (condition thenBranch elseBranch : Term context .scalar) : Term context .scalar
+  | lengthVector {length : ℕ} (values : Term context (.vector length)) : Term context .nat
+  | lengthMatrix {rows columns : ℕ} (values : Term context (.matrix rows columns)) : Term context .nat
+  | natToScalar (value : Term context .nat) : Term context .scalar
+  | indexVector {length : ℕ} (values : Term context (.vector length))
+      (index : Term context (.index length)) : Term context .scalar
+  | fsumExact {length : ℕ} (values : Term context (.vector length)) : Term context .scalar
+
+/-- Internal structural compilation. Public admission below additionally
+checks that the initial context has unique names. No runtime values or desired
+semantic equations occur in compilation or its accepted-program premises. -/
+def compileTermAux (context : Context) : {τ : Ty} → SourceTerm τ → Except SliceError (Term context τ)
+  | _, .var name => mapOne Term.var (lookupSlot context name _)
+  | _, .scalarLiteral value => .ok (.scalarLiteral value)
+  | _, .natLiteral value => .ok (.natLiteral value)
+  | _, .indexLiteral value => .ok (.indexLiteral value)
+  | _, .scalarUnary op value => mapOne (Term.scalarUnary op) (compileTermAux context value)
+  | _, .scalarBinary op left right =>
+      mapTwo (Term.scalarBinary op) (compileTermAux context left) (compileTermAux context right)
+  | _, .ifNonneg condition thenBranch elseBranch =>
+      mapThree Term.ifNonneg (compileTermAux context condition)
+        (compileTermAux context thenBranch) (compileTermAux context elseBranch)
+  | _, .lengthVector values => mapOne Term.lengthVector (compileTermAux context values)
+  | _, .lengthMatrix values => mapOne Term.lengthMatrix (compileTermAux context values)
+  | _, .natToScalar value => mapOne Term.natToScalar (compileTermAux context value)
+  | _, .indexVector values index =>
+      mapTwo Term.indexVector (compileTermAux context values) (compileTermAux context index)
+  | _, .fsumExact values => mapOne Term.fsumExact (compileTermAux context values)
+  | _, .unsupported tag => .error (.unsupportedNode tag)
+
+def compileTerm (context : Context) {τ : Ty} (source : SourceTerm τ) :
+    Except SliceError (Term context τ) :=
+  if contextUnique context then compileTermAux context source
+  else .error (.unsupportedNode "duplicateContextName")
+
+/-- Independent named interpretation; it does not call a compiler or the
+target evaluator. Names are supplied by the caller's typed source environment. -/
+def evalSourceTerm (environment : NamedEnvironment) : {τ : Ty} →
+    SourceTerm τ → Except SliceError (Denote τ)
+  | _, .var name => environment name _
+  | _, .scalarLiteral value => .ok (value : ℝ)
+  | _, .natLiteral value => .ok value
+  | _, .indexLiteral value => .ok value
+  | _, .scalarUnary op value => applyOne (evalUnary op) (evalSourceTerm environment value)
+  | _, .scalarBinary op left right =>
+      applyTwo (evalBinary op) (evalSourceTerm environment left) (evalSourceTerm environment right)
+  | _, .ifNonneg condition thenBranch elseBranch =>
+      applyOne (fun value => if 0 ≤ value then evalSourceTerm environment thenBranch
+        else evalSourceTerm environment elseBranch) (evalSourceTerm environment condition)
+  | _, .lengthVector (length := length) values =>
+      mapOne (fun _ => length) (evalSourceTerm environment values)
+  | _, .lengthMatrix (rows := rows) values =>
+      mapOne (fun _ => rows) (evalSourceTerm environment values)
+  | _, .natToScalar value => mapOne (fun value : ℕ => (value : ℝ)) (evalSourceTerm environment value)
+  | _, .indexVector values index =>
+      mapTwo (fun values index => values index)
+        (evalSourceTerm environment values) (evalSourceTerm environment index)
+  | _, .fsumExact values =>
+      mapOne (fun values => RankerObjectiveContainerIR.orderedFsum (List.ofFn values))
+        (evalSourceTerm environment values)
+  | _, .unsupported tag => .error (.unsupportedNode tag)
+
+/-- Independent slot interpretation. Every read has the statically checked
+type and finite bound; names do not participate in target evaluation. -/
+def evalTerm {context : Context} (environment : Environment context) : {τ : Ty} →
+    Term context τ → Except SliceError (Denote τ)
+  | _, .var slot => .ok (readSlot slot environment)
+  | _, .scalarLiteral value => .ok (value : ℝ)
+  | _, .natLiteral value => .ok value
+  | _, .indexLiteral value => .ok value
+  | _, .scalarUnary op value => applyOne (evalUnary op) (evalTerm environment value)
+  | _, .scalarBinary op left right =>
+      applyTwo (evalBinary op) (evalTerm environment left) (evalTerm environment right)
+  | _, .ifNonneg condition thenBranch elseBranch =>
+      applyOne (fun value => if 0 ≤ value then evalTerm environment thenBranch
+        else evalTerm environment elseBranch) (evalTerm environment condition)
+  | _, .lengthVector (length := length) values => mapOne (fun _ => length) (evalTerm environment values)
+  | _, .lengthMatrix (rows := rows) values => mapOne (fun _ => rows) (evalTerm environment values)
+  | _, .natToScalar value => mapOne (fun value : ℕ => (value : ℝ)) (evalTerm environment value)
+  | _, .indexVector values index =>
+      mapTwo (fun values index => values index) (evalTerm environment values) (evalTerm environment index)
+  | _, .fsumExact values =>
+      mapOne (fun values => RankerObjectiveContainerIR.orderedFsum (List.ofFn values))
+        (evalTerm environment values)
+
+private theorem oneAccepted {α β : Type} (f : α → β)
+    (input : Except SliceError α) (output : β) (accepted : mapOne f input = .ok output) :
+    ∃ value, input = .ok value ∧ output = f value := by
+  cases input with
+  | error problem => simp [mapOne] at accepted
+  | ok value => exact ⟨value, rfl, (Except.ok.inj accepted).symm⟩
+
+private theorem twoAccepted {α β γ : Type} (f : α → β → γ)
+    (left : Except SliceError α) (right : Except SliceError β) (output : γ)
+    (accepted : mapTwo f left right = .ok output) :
+    ∃ a b, left = .ok a ∧ right = .ok b ∧ output = f a b := by
+  cases left with
+  | error problem => simp [mapTwo] at accepted
+  | ok a =>
+    cases right with
+    | error problem => simp [mapTwo] at accepted
+    | ok b => exact ⟨a, b, rfl, rfl, (Except.ok.inj accepted).symm⟩
+
+private theorem threeAccepted {α β γ δ : Type} (f : α → β → γ → δ)
+    (first : Except SliceError α) (second : Except SliceError β) (third : Except SliceError γ)
+    (output : δ) (accepted : mapThree f first second third = .ok output) :
+    ∃ a b c, first = .ok a ∧ second = .ok b ∧ third = .ok c ∧ output = f a b c := by
+  cases first with
+  | error problem => simp [mapThree] at accepted
+  | ok a =>
+    cases second with
+    | error problem => simp [mapThree] at accepted
+    | ok b =>
+      cases third with
+      | error problem => simp [mapThree] at accepted
+      | ok c => exact ⟨a, b, c, rfl, rfl, rfl, (Except.ok.inj accepted).symm⟩
+
+private theorem compileTermAux_sound (context : Context) (environment : Environment context)
+    {τ : Ty} (source : SourceTerm τ) (program : Term context τ)
+    (accepted : compileTermAux context source = .ok program) :
+    evalSourceTerm (namesFromScope environment) source = evalTerm environment program := by
+  induction source generalizing program with
+  | var name =>
+    rcases oneAccepted _ _ _ accepted with ⟨slot, found, rfl⟩
+    simp only [evalSourceTerm, namesFromScope, found, mapOne, evalTerm]
+  | scalarLiteral value =>
+    have same : program = .scalarLiteral value := (Except.ok.inj accepted).symm
+    subst program
+    rfl
+  | natLiteral value =>
+    have same : program = .natLiteral value := (Except.ok.inj accepted).symm
+    subst program
+    rfl
+  | indexLiteral value =>
+    have same : program = .indexLiteral value := (Except.ok.inj accepted).symm
+    subst program
+    rfl
+  | scalarUnary op value ih =>
+    rcases oneAccepted _ _ _ accepted with ⟨valueProgram, valueAccepted, rfl⟩
+    simp only [evalSourceTerm, evalTerm]
+    rw [ih valueProgram valueAccepted]
+  | scalarBinary op left right leftIH rightIH =>
+    rcases twoAccepted _ _ _ _ accepted with ⟨leftProgram, rightProgram, leftAccepted, rightAccepted, rfl⟩
+    simp only [evalSourceTerm, evalTerm]
+    rw [leftIH leftProgram leftAccepted, rightIH rightProgram rightAccepted]
+  | ifNonneg condition thenBranch elseBranch conditionIH thenIH elseIH =>
+    rcases threeAccepted _ _ _ _ _ accepted with
+      ⟨conditionProgram, thenProgram, elseProgram, conditionAccepted, thenAccepted, elseAccepted, rfl⟩
+    simp only [evalSourceTerm, evalTerm]
+    rw [conditionIH conditionProgram conditionAccepted,
+      thenIH thenProgram thenAccepted, elseIH elseProgram elseAccepted]
+  | lengthVector values ih =>
+    rcases oneAccepted _ _ _ accepted with ⟨valuesProgram, valuesAccepted, rfl⟩
+    simp only [evalSourceTerm, evalTerm]
+    rw [ih valuesProgram valuesAccepted]
+  | lengthMatrix values ih =>
+    rcases oneAccepted _ _ _ accepted with ⟨valuesProgram, valuesAccepted, rfl⟩
+    simp only [evalSourceTerm, evalTerm]
+    rw [ih valuesProgram valuesAccepted]
+  | natToScalar value ih =>
+    rcases oneAccepted _ _ _ accepted with ⟨valueProgram, valueAccepted, rfl⟩
+    simp only [evalSourceTerm, evalTerm]
+    rw [ih valueProgram valueAccepted]
+  | indexVector values index valuesIH indexIH =>
+    rcases twoAccepted _ _ _ _ accepted with
+      ⟨valuesProgram, indexProgram, valuesAccepted, indexAccepted, rfl⟩
+    simp only [evalSourceTerm, evalTerm]
+    rw [valuesIH valuesProgram valuesAccepted, indexIH indexProgram indexAccepted]
+  | fsumExact values ih =>
+    rcases oneAccepted _ _ _ accepted with ⟨valuesProgram, valuesAccepted, rfl⟩
+    simp only [evalSourceTerm, evalTerm]
+    rw [ih valuesProgram valuesAccepted]
+  | unsupported tag => simp [compileTermAux] at accepted
+
+/-- Public successful-compilation preservation for the foundational typed
+named source language. It does not certify the external JSON/AST decoder. -/
+theorem compile_term_sound (context : Context) (environment : Environment context)
+    {τ : Ty} (source : SourceTerm τ) (program : Term context τ)
+    (accepted : compileTerm context source = .ok program) :
+    evalSourceTerm (namesFromScope environment) source = evalTerm environment program := by
+  by_cases unique : contextUnique context
+  · simp only [compileTerm, unique, if_true] at accepted
+    exact compileTermAux_sound context environment source program accepted
+  · simp [compileTerm, unique] at accepted
+
+theorem namesFromScope_extend {context : Context} (environment : Environment context)
+    {τ : Ty} (name : String) (value : Denote τ) :
+    namesFromScope (Environment.cons (name := name) value environment) =
+      extendNames name value (namesFromScope environment) := by
+  funext query σ
+  by_cases sameName : query = name
+  · by_cases sameType : τ = σ
+    · subst σ
+      simp [namesFromScope, lookupSlot, extendNames, sameName, castSlot, castValue, mapOne, readSlot]
+    · simp [namesFromScope, lookupSlot, extendNames, sameName, sameType, mapOne]
+  · simp only [namesFromScope, lookupSlot, extendNames, sameName, if_false]
+    cases lookupSlot context query σ <;> rfl
+
+inductive SourceFields : Schema → Type where
+  | nil : SourceFields []
+  | cons {name : String} {τ : Ty} {rest : Schema} :
+      SourceTerm τ → SourceFields rest → SourceFields ((name, τ) :: rest)
+
+inductive Fields (context : Context) : Schema → Type where
+  | nil : Fields context []
+  | cons {name : String} {τ : Ty} {rest : Schema} :
+      Term context τ → Fields context rest → Fields context ((name, τ) :: rest)
+
+inductive RecordValues : Schema → Type where
+  | nil : RecordValues []
+  | cons {name : String} {τ : Ty} {rest : Schema} :
+      Denote τ → RecordValues rest → RecordValues ((name, τ) :: rest)
+
+def compileFields (context : Context) : {schema : Schema} → SourceFields schema →
+    Except SliceError (Fields context schema)
+  | _, .nil => .ok .nil
+  | _, .cons (name := name) (rest := rest) value fields =>
+      if name ∈ contextNames rest then .error (.unsupportedNode ("duplicateFieldName:" ++ name))
+      else mapTwo Fields.cons (compileTermAux context value) (compileFields context fields)
+
+def evalSourceFields (environment : NamedEnvironment) : {schema : Schema} →
+    SourceFields schema → Except SliceError (RecordValues schema)
+  | _, .nil => .ok .nil
+  | _, .cons value rest =>
+      mapTwo RecordValues.cons (evalSourceTerm environment value) (evalSourceFields environment rest)
+
+def evalFields {context : Context} (environment : Environment context) : {schema : Schema} →
+    Fields context schema → Except SliceError (RecordValues schema)
+  | _, .nil => .ok .nil
+  | _, .cons value rest =>
+      mapTwo RecordValues.cons (evalTerm environment value) (evalFields environment rest)
+
+private theorem compileFields_sound (context : Context) (environment : Environment context)
+    {schema : Schema} (source : SourceFields schema) (program : Fields context schema)
+    (accepted : compileFields context source = .ok program) :
+    evalSourceFields (namesFromScope environment) source = evalFields environment program := by
+  induction source generalizing program with
+  | nil =>
+    have same : program = .nil := (Except.ok.inj accepted).symm
+    subst program
+    rfl
+  | @cons name τ rest value fields ih =>
+    by_cases repeated : name ∈ contextNames rest
+    · simp [compileFields, repeated] at accepted
+    · simp only [compileFields, repeated, if_false] at accepted
+      rcases twoAccepted _ _ _ _ accepted with ⟨valueProgram, fieldsProgram, valueAccepted, fieldsAccepted, rfl⟩
+      simp only [evalSourceFields, evalFields]
+      rw [compileTermAux_sound context environment value valueProgram valueAccepted,
+        ih fieldsProgram fieldsAccepted]
+
+inductive SourcePrefix (schema : Schema) where
+  | record (fields : SourceFields schema)
+  | letBind {τ : Ty} (name : String) (rhs : SourceTerm τ) (body : SourcePrefix schema)
+
+inductive PrefixIR : Context → Schema → Type where
+  | record {context : Context} {schema : Schema} (fields : Fields context schema) : PrefixIR context schema
+  | letBind {context : Context} {schema : Schema} {τ : Ty} (name : String)
+      (rhs : Term context τ) (body : PrefixIR ((name, τ) :: context) schema) : PrefixIR context schema
+
+def compilePrefixAux (context : Context) {schema : Schema} : SourcePrefix schema →
+    Except SliceError (PrefixIR context schema)
+  | .record fields => mapOne PrefixIR.record (compileFields context fields)
+  | .letBind (τ := τ) name rhs body =>
+      if name ∈ contextNames context then .error (.unsupportedNode ("duplicateBinderName:" ++ name))
+      else mapTwo (PrefixIR.letBind name) (compileTermAux context rhs)
+        (compilePrefixAux ((name, τ) :: context) body)
+
+def compilePrefix (context : Context) {schema : Schema} (source : SourcePrefix schema) :
+    Except SliceError (PrefixIR context schema) :=
+  if contextUnique context then compilePrefixAux context source
+  else .error (.unsupportedNode "duplicateContextName")
+
+def evalSourcePrefix (environment : NamedEnvironment) {schema : Schema} :
+    SourcePrefix schema → Except SliceError (RecordValues schema)
+  | .record fields => evalSourceFields environment fields
+  | .letBind name rhs body => applyOne
+      (fun value => evalSourcePrefix (extendNames name value environment) body)
+      (evalSourceTerm environment rhs)
+
+def evalPrefix : {context : Context} → (environment : Environment context) → {schema : Schema} →
+    PrefixIR context schema → Except SliceError (RecordValues schema)
+  | _, environment, _, .record fields => evalFields environment fields
+  | _, environment, _, .letBind _ rhs body =>
+      applyOne (fun value => evalPrefix (.cons value environment) body) (evalTerm environment rhs)
+
+private theorem compilePrefixAux_sound (context : Context) (environment : Environment context)
+    {schema : Schema} (source : SourcePrefix schema) (program : PrefixIR context schema)
+    (accepted : compilePrefixAux context source = .ok program) :
+    evalSourcePrefix (namesFromScope environment) source = evalPrefix environment program := by
+  induction source generalizing context with
+  | record fields =>
+    rcases oneAccepted _ _ _ accepted with ⟨fieldsProgram, fieldsAccepted, rfl⟩
+    exact compileFields_sound context environment fields fieldsProgram fieldsAccepted
+  | @letBind τ name rhs body ih =>
+    by_cases repeated : name ∈ contextNames context
+    · simp [compilePrefixAux, repeated] at accepted
+    · simp only [compilePrefixAux, repeated, if_false] at accepted
+      rcases twoAccepted _ _ _ _ accepted with ⟨rhsProgram, bodyProgram, rhsAccepted, bodyAccepted, rfl⟩
+      simp only [evalSourcePrefix, evalPrefix]
+      rw [compileTermAux_sound context environment rhs rhsProgram rhsAccepted]
+      cases result : evalTerm environment rhsProgram with
+      | error problem => rfl
+      | ok value =>
+        simp only [applyOne]
+        rw [← namesFromScope_extend environment name value]
+        exact ih ((name, τ) :: context) (.cons value environment) bodyProgram bodyAccepted
+
+theorem compile_prefix_sound (context : Context) (environment : Environment context)
+    {schema : Schema} (source : SourcePrefix schema) (program : PrefixIR context schema)
+    (accepted : compilePrefix context source = .ok program) :
+    evalSourcePrefix (namesFromScope environment) source = evalPrefix environment program := by
+  by_cases unique : contextUnique context
+  · simp only [compilePrefix, unique, if_true] at accepted
+    exact compilePrefixAux_sound context environment source program accepted
+  · simp [compilePrefix, unique] at accepted
+
+private theorem lookupSlot_absent (context : Context) (name : String) (τ : Ty)
+    (absent : name ∉ contextNames context) :
+    lookupSlot context name τ = .error (.unknownName name) := by
+  induction context with
+  | nil => rfl
+  | cons head rest ih =>
+    rcases head with ⟨headName, headType⟩
+    have parts : name ≠ headName ∧ name ∉ contextNames rest := by
+      simpa [contextNames] using absent
+    simp [lookupSlot, parts.1, ih parts.2, mapOne]
+
+/-- Initial duplicate-context refusal precedes variable lookup, so the explicit
+uniqueness premise belongs to this particular refusal statement. -/
+theorem compile_unknown_name_refuses (context : Context) (name : String) (τ : Ty)
+    (unique : contextUnique context) (absent : name ∉ contextNames context) :
+    compileTerm context (SourceTerm.var (τ := τ) name) = .error (.unknownName name) := by
+  simp [compileTerm, unique, compileTermAux, lookupSlot_absent context name τ absent, mapOne]
+
+theorem compile_wrong_type_refuses (context : Context) (name : String) (σ τ : Ty)
+    (unique : contextUnique ((name, σ) :: context)) (different : σ ≠ τ) :
+    compileTerm ((name, σ) :: context) (SourceTerm.var (τ := τ) name) =
+      .error (.unsupportedNode ("typeMismatch:" ++ name)) := by
+  simp [compileTerm, unique, compileTermAux, lookupSlot, different, mapOne]
+
+/-- The unselected branch may have any runtime domain error. Successful
+compilation still traverses both branches before this runtime rule applies. -/
+theorem if_nonneg_selected_branch_only {context : Context} (environment : Environment context)
+    (condition thenBranch elseBranch : Term context .scalar) (value : ℝ)
+    (conditionSuccess : evalTerm environment condition = .ok value) :
+    evalTerm environment (.ifNonneg condition thenBranch elseBranch) =
+      if 0 ≤ value then evalTerm environment thenBranch else evalTerm environment elseBranch := by
+  simp [evalTerm, conditionSuccess, applyOne]
+
+/-- Ordered partial map output length is proved from actual successful
+evaluation, without a body-success or desired-objective premise. -/
+theorem map_exact_success_length {α β : Type} (body : α → Except SliceError β)
+    (inputs : List α) (outputs : List β)
+    (accepted : RankerObjectiveContainerIR.mapExact body inputs = .ok outputs) :
+    outputs.length = inputs.length := by
+  induction inputs generalizing outputs with
+  | nil =>
+    have same : outputs = [] := (Except.ok.inj accepted).symm
+    subst outputs
+    rfl
+  | cons first rest ih =>
+    cases firstResult : body first with
+    | error problem => simp [RankerObjectiveContainerIR.mapExact, firstResult] at accepted
+    | ok value =>
+      cases restResult : RankerObjectiveContainerIR.mapExact body rest with
+      | error problem => simp [RankerObjectiveContainerIR.mapExact, firstResult, restResult] at accepted
+      | ok values =>
+        have same : outputs = value :: values := by
+          simpa [RankerObjectiveContainerIR.mapExact, firstResult, restResult] using accepted.symm
+        subst outputs
+        simp only [List.length_cons]
+        rw [ih values restResult]
+
+/-- Unequal zip input lengths truncate to the minimum. Success is not
+misrepresented as an equality-of-lengths premise. -/
+theorem zip_exact_success_min_length {α β γ : Type} (body : α → β → Except SliceError γ)
+    (left : List α) (right : List β) (outputs : List γ)
+    (accepted : RankerObjectiveContainerIR.zipMapExact body left right = .ok outputs) :
+    outputs.length = min left.length right.length := by
+  induction left generalizing right outputs with
+  | nil =>
+    have same : outputs = [] := (Except.ok.inj accepted).symm
+    subst outputs
+    simp
+  | cons first rest ih =>
+    cases right with
+    | nil =>
+      have same : outputs = [] := (Except.ok.inj accepted).symm
+      subst outputs
+      simp
+    | cons firstRight restRight =>
+      cases firstResult : body first firstRight with
+      | error problem => simp [RankerObjectiveContainerIR.zipMapExact, firstResult] at accepted
+      | ok value =>
+        cases restResult : RankerObjectiveContainerIR.zipMapExact body rest restRight with
+        | error problem => simp [RankerObjectiveContainerIR.zipMapExact, firstResult, restResult] at accepted
+        | ok values =>
+          have same : outputs = value :: values := by
+            simpa [RankerObjectiveContainerIR.zipMapExact, firstResult, restResult] using accepted.symm
+          subst outputs
+          have lengthRest := ih restRight values restResult
+          simp only [List.length_cons]
+          omega
+
+#print axioms compile_term_sound
+#print axioms compile_prefix_sound
+#print axioms compile_unknown_name_refuses
+#print axioms if_nonneg_selected_branch_only
+#print axioms map_exact_success_length
+#print axioms zip_exact_success_min_length
+
+end
+
+end RankerObjectivePrefixIR

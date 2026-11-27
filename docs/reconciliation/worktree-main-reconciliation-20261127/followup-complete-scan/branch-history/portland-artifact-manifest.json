@@ -1,0 +1,76 @@
+{
+  "schema": "portland-historical-branch-preservation/v1",
+  "matched_original_missing_ref_tips": 7680,
+  "bundle_distinct_advertised_tips": 7683,
+  "restore_verified": true,
+  "actual_credential_markers_unresolved": 0,
+  "historical_failed_validation_labels_preserved": true,
+  "live_integration_or_qualification": false,
+  "files": [
+    {
+      "path": "four-ref-enumeration-normal-command-readback.json",
+      "bytes": 2947,
+      "sha256": "203becedbfce7740cc84c32c89c20ca12fdeec21bdb32649c7a86790bfdb88d6"
+    },
+    {
+      "path": "initial-gap-datasets-outside-portland-bundle-unproven.json",
+      "bytes": 23791,
+      "sha256": "3dcbe69d386ba93d861c1e6129ddc8c611a693523ecae4373aaffaafc5e3b4c1"
+    },
+    {
+      "path": "initial-gap-ipfs_accelerate_py-unproven.json",
+      "bytes": 21451,
+      "sha256": "878d7a62a451d9bf24ee24f4ef7a751fc60c29089b8d0b5f28cf0c91cdebbedb"
+    },
+    {
+      "path": "initial-gap-ipfs_datasets_py-unproven.json",
+      "bytes": 4260742,
+      "sha256": "033186050b4292ad200adc92e8f7499ab3576d34223a8c31653abcd3dbb351ea"
+    },
+    {
+      "path": "initial-gap-ipfs_kit_py-unproven.json",
+      "bytes": 13294,
+      "sha256": "319f0a1e2e704c6abae32302cfc2fa4a6f3a6cd01def9816597d9cc255294343"
+    },
+    {
+      "path": "initial-gap-lift_coding-unproven.json",
+      "bytes": 902,
+      "sha256": "cbbeb7834495763aae3e2039de373ad0200dc664dacf467a565dd243d5777d94"
+    },
+    {
+      "path": "initial-gap-manifest.json",
+      "bytes": 4944,
+      "sha256": "31ac29f5f8b22126b46e305cc249597253906e956dff27a916c0488a0af25451"
+    },
+    {
+      "path": "initial-gap-swissknife-unproven.json",
+      "bytes": 743,
+      "sha256": "0e025fad54a92d2d758bc2efe044c91f3047e89c91952a58b95c99301754079b"
+    },
+    {
+      "path": "portland-datasets-older-branches.bundle",
+      "bytes": 16656573,
+      "sha256": "22aa27828922d70ab13a27753960447a89610c6ca489d11430a990589e043db5"
+    },
+    {
+      "path": "portland-history-marker-fixture-review.json",
+      "bytes": 7321,
+      "sha256": "5445bfbb4f4389658c6e0ee221c085251d7651749c852f23337fed4cb8ae810f"
+    },
+    {
+      "path": "portland-history-marker-scan.json",
+      "bytes": 2817,
+      "sha256": "cb5981ca990419c32285ae769e6256a834951d2367fc4838e0550bc19d8cd184"
+    },
+    {
+      "path": "portland-restore-proof.json",
+      "bytes": 1148696,
+      "sha256": "0b9cb6feb713ca86ea3dc056e59eec3d5b460658321ec4eb389fda82b455ecc0"
+    },
+    {
+      "path": "scan_history_payload.py.DATA",
+      "bytes": 2670,
+      "sha256": "6840cb72a7199bef92177d743111dce96b5b7f1a0f077db41ae26f487d23533e"
+    }
+  ]
+}

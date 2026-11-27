@@ -1,0 +1,79 @@
+"""Run preregistered sequence with one new process for each case and arm."""
+import argparse
+from datetime import datetime, timezone
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[4]
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def write(path, value):
+    Path(path).parent.mkdir(parents=True, exist_ok=True)
+    Path(path).write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-id", required=True)
+    args = parser.parse_args()
+    run = HERE / "runs" / args.run_id
+    run.mkdir(parents=True, exist_ok=False)
+    protocol = json.loads((HERE / "protocol.json").read_text())
+    freeze = {"created_utc": datetime.now(timezone.utc).isoformat(), "files": {str(path.relative_to(HERE)): sha(path) for path in sorted(HERE.rglob("*")) if path.is_file() and "runs" not in path.parts and "__pycache__" not in path.parts}, "source_head": subprocess.check_output(["git", "-C", str(ROOT / protocol["source_profile"]), "rev-parse", "HEAD"], text=True).strip(), "provider_calls": 0}
+    write(run / "prerun_freeze.json", freeze)
+    all_rows = []
+
+    def invoke(arm, case, store):
+        output = run / "results" / arm / case
+        output.mkdir(parents=True)
+        command = [sys.executable, str(HERE / "evaluation_consumer.py"), "--arm", arm, "--case", case, "--store", str(store), "--output", str(output)]
+        started = time.perf_counter()
+        # Minimal process environment excludes provider credentials and optional
+        # remote configuration; all supported packages import normally.
+        environment = {"PATH": os.environ.get("PATH", ""), "LANG": "C.UTF-8", "PYTHONDONTWRITEBYTECODE": "1"}
+        process = subprocess.run(command, env=environment, cwd=ROOT, capture_output=True, text=True, timeout=120)
+        row = {"arm": arm, "case_id": case, "command": command, "returncode": process.returncode, "process_elapsed_seconds": time.perf_counter() - started, "stdout": str(output / "consumer.stdout"), "stderr": str(output / "consumer.stderr"), "result": str(output / "result.json")}
+        Path(row["stdout"]).write_text(process.stdout)
+        Path(row["stderr"]).write_text(process.stderr)
+        if process.returncode == 0:
+            result = json.loads(Path(row["result"]).read_text())
+            row.update({key: result[key] for key in ("passed", "action_process_count", "proposed_action", "executed_successful_action", "elapsed_seconds", "pid", "query_cid")})
+            row["gate"] = result["gate"]["decision"]
+        all_rows.append(row)
+        write(run / "execution_log.json", all_rows)
+        print(json.dumps({key: row.get(key) for key in ("arm", "case_id", "returncode", "passed", "action_process_count", "gate")}), flush=True)
+        if process.returncode:
+            raise RuntimeError(f"Preserved failed process logs at {output}")
+        return row
+
+    seed_store = run / "seed_store"
+    seed = invoke("producer", "seed", seed_store)
+    for arm in protocol["arms"]:
+        shutil.copytree(seed_store, run / "stores" / arm)
+    # Case-major rotation avoids assigning every first/last timing position to
+    # one arm. It is deterministic, preregistered arms order rotated by index.
+    for index, case in enumerate(protocol["cases"]):
+        arms = protocol["arms"][index % 4:] + protocol["arms"][:index % 4]
+        for arm in arms:
+            invoke(arm, case["id"], run / "stores" / arm)
+    totals = {}
+    for arm in protocol["arms"]:
+        rows = [row for row in all_rows if row["arm"] == arm]
+        files = [path for path in (run / "stores" / arm).rglob("*") if path.is_file()]
+        totals[arm] = {"cases": len(rows), "passed": sum(row["passed"] for row in rows), "action_processes": sum(row["action_process_count"] for row in rows), "action_processes_including_shared_seed": seed["action_process_count"] + sum(row["action_process_count"] for row in rows), "process_elapsed_seconds": sum(row["process_elapsed_seconds"] for row in rows), "process_elapsed_including_shared_seed": seed["process_elapsed_seconds"] + sum(row["process_elapsed_seconds"] for row in rows), "action_elapsed_seconds": sum(row["elapsed_seconds"]["actions"] for row in rows), "retrieval_gate_elapsed_seconds": sum(row["elapsed_seconds"]["retrieval_and_gate"] for row in rows), "persistent_store_bytes": sum(path.stat().st_size for path in files), "persistent_store_files": len(files)}
+    write(run / "summary.json", {"schema": "world-memory-development-summary@1", "run_id": args.run_id, "status": "bounded_development_sequence_complete", "seed": seed, "totals": totals, "rows": all_rows, "provider_calls": 0, "tokens": 0, "claim_scope": "Constructed closed-catalog action-search reduction with mandatory execution checks; no learned model, transfer, production integration or token-saving evidence."})
+
+
+if __name__ == "__main__":
+    main()

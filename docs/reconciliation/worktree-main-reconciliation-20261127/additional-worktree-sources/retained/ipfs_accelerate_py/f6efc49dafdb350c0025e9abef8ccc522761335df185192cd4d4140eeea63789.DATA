@@ -1,0 +1,85 @@
+"""Five real file/process/clock control-flow tests; no native STOP proof.
+
+The real lifecycle code invokes ordinary callbacks here. No runtime, native
+owner, SDK capability, claim, credential, task or provider is doubled.
+"""
+import hashlib
+import importlib.util
+from pathlib import Path
+import subprocess
+import sys
+
+SOURCE=Path('/home/barberb/lift_coding/artifacts/legal-ir-supervisor-recovery-20261018-03/private-M1-independent-acceptance-source-v4/run_m1_lifecycle.py')
+assert hashlib.sha256(SOURCE.read_bytes()).hexdigest()=='dda117061581f26f0cb68e54b9a00fa25be66a6419f5116f313987462ea56bd9'
+spec=importlib.util.spec_from_file_location('private_M1_actual_finite_lifecycle_STOP_order',SOURCE)
+lifecycle=importlib.util.module_from_spec(spec)
+sys.modules[spec.name]=lifecycle
+spec.loader.exec_module(lifecycle)
+assert hashlib.sha256(SOURCE.read_bytes()).hexdigest()=='dda117061581f26f0cb68e54b9a00fa25be66a6419f5116f313987462ea56bd9'
+
+
+def test_missing_unpublished_context_still_reaches_actual_owned_child_drain(tmp_path):
+    import time
+    child=subprocess.Popen([sys.executable,'-I','-B','-c',
+        'import sys;sys.stdin.buffer.read(1)'],stdin=subprocess.PIPE,
+        stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True)
+    called=[]
+    def passive():
+        (tmp_path/'never-published-owner-context.json').read_bytes()
+    def stop():
+        called.append('ordinary-owned-child-drain')
+        child.communicate(input=b'x',timeout=3.0)
+    try:
+        passive_error,stop_error=lifecycle.run_original_cleanup_stages(
+            passive=passive,stop=stop,stop_cutoff=time.monotonic()+4.0)
+        assert type(passive_error) is FileNotFoundError and stop_error is None
+        assert called==['ordinary-owned-child-drain'] and child.returncode==0
+        # The helper returns errors only; it cannot manufacture child/native
+        # closure, an owner context, an ACK, or task acceptance.
+        assert not (tmp_path/'never-published-owner-context.json').exists()
+    finally:
+        if child.poll() is None:child.kill()
+        child.wait(timeout=3.0)
+
+def test_passive_and_stop_file_errors_are_both_preserved(tmp_path):
+    import time
+    called=[]
+    def passive():(tmp_path/'missing-passive').read_bytes()
+    def stop():
+        called.append('stop-stage-reached')
+        (tmp_path/'missing-stop').read_bytes()
+    passive_error,stop_error=lifecycle.run_original_cleanup_stages(
+        passive=passive,stop=stop,stop_cutoff=time.monotonic()+1.0)
+    assert type(passive_error) is FileNotFoundError and type(stop_error) is FileNotFoundError
+    assert passive_error is not stop_error and called==['stop-stage-reached']
+
+def test_successful_passive_observation_cannot_hide_actual_stop_error(tmp_path):
+    import time
+    record=tmp_path/'passive-observed';record.write_bytes(b'inert-observation')
+    def passive():assert record.read_bytes()==b'inert-observation'
+    def stop():(tmp_path/'missing-stop').read_bytes()
+    passive_error,stop_error=lifecycle.run_original_cleanup_stages(
+        passive=passive,stop=stop,stop_cutoff=time.monotonic()+1.0)
+    assert passive_error is None and type(stop_error) is FileNotFoundError
+
+def test_expired_original_STOP_reserve_is_not_renewed(tmp_path):
+    import time
+    reached=[]
+    def passive():reached.append('passive')
+    def stop():raise AssertionError('expired-stage-must-not-run')
+    passive_error,stop_error=lifecycle.run_original_cleanup_stages(
+        passive=passive,stop=stop,stop_cutoff=time.monotonic()-1.0)
+    assert passive_error is None and type(stop_error) is RuntimeError
+    assert stop_error.args==('original_parent_STOP30_plus5_reserve_exhausted',)
+    assert reached==['passive']
+
+def test_passive_latency_cannot_create_fresh_STOP_clock(tmp_path):
+    import time
+    reached=[]
+    original_cutoff=time.monotonic()+0.01
+    def passive():time.sleep(0.03)
+    def stop():reached.append('must-not-run')
+    passive_error,stop_error=lifecycle.run_original_cleanup_stages(
+        passive=passive,stop=stop,stop_cutoff=original_cutoff)
+    assert passive_error is None and type(stop_error) is RuntimeError
+    assert stop_error.args==('original_parent_STOP30_plus5_reserve_exhausted',) and reached==[]

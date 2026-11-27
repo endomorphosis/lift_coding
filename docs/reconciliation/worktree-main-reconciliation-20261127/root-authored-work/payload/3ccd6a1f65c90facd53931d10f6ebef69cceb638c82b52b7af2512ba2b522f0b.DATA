@@ -1,0 +1,67 @@
+# Current repository context service v1
+
+`repository_context_v1.py` enrolls a declared complete public source inventory,
+captures its current bytes and Git executable status, and invokes the frozen native
+producer and consumer in separate subprocesses. A new preparation directory is
+required for every source or objective revision. It never executes repository code
+or invokes a provider. Every raw file remains available, including unresolved and
+opaque dependencies; symlinks are retained as opaque metadata and never followed.
+
+The request example is `repository_service_qualification_v1/request.json`. Its
+closed schema contains task/repository identities, an absolute current source root,
+the complete public path list, target paths, public objective title/text/authority,
+and provenance. The path list is caller authority: undeclared file contents are
+never read. Inventory mismatch rejects the preparation. The root `.git` entry is
+excluded; other unlisted files require explicit public enrollment. Only ordinary
+files and opaque symlinks are admitted. This is a quiescent workspace profile,
+with current-source checks before and after operations, not an atomic concurrent
+filesystem snapshot service.
+
+```sh
+/usr/bin/python3 -B repository_context_v1.py prepare \
+  --request /absolute/public_request.json \
+  --profile /absolute/runtime_source_manifest.json \
+  --run /absolute/new_run
+
+/usr/bin/python3 -B repository_context_v1.py read \
+  --run /absolute/new_run \
+  --expected-request-sha256 REQUEST_HASH \
+  --expected-freeze-sha256 FREEZE_HASH \
+  --path package/target.py
+```
+
+Preparation returns a summary and binds source, objective, policy, environment,
+runtime source files, adapter bytes and the native pack. Its fixed per-process
+bound is 600 seconds; errors preserve logs and an incomplete outcome. Reads return
+the public objective and requested source bodies as base64, with hashes and the
+native pack CID. They check caller request/freeze identities, every runtime source
+hash, current original inventory/bytes/executable status/link targets, and the
+native source-preserving expansion. All source bundles and members are reverified
+by that expansion. The unchanged frozen native consumer's missing required-source
+mapping check remains covered by the explicit caller guard.
+
+The native minimal pack is descriptive unsigned context. Its built-in sufficiency
+flag and fixed token costs confer no execution, omission, proof-reuse or token
+measurement authority. All reads report `execution_reuse_authorized: false`.
+There is no signed receipt, published current root, repository repair evaluation,
+or provider call in this service.
+
+`repository_service_qualification_v1/qualification.json` records three actual full
+16-file XML native preparations: baseline, authored source-comment revision, and
+public-objective revision. The twelve checks pass: exact raw bytes; rejection of
+source, added-file, executable-status, request and freeze drift; changed source
+changes native state/root/pack; objective-only revision keeps state/root and changes
+the pack. Each native consumer also performs the existing eleven admission and
+tampering controls. The original source copy was restored. A first driver control
+incorrectly toggled only one executable bit; its preserved record explains why
+that did not change Git executable status. The corrected control toggles all bits.
+
+This is an existing exposed development repository, with locally authored control
+mutations. The generic CLI is available. The separately retained five earlier full
+Pyparsing producer profiles hit their process deadline. The later explicit
+immutable-state profile completes the full native Pyparsing producer/consumer
+roundtrip; `REPORT_V12.md` reports its scope, controls and 569.609/1.740-second
+process costs. A caller must freeze any successor runtime profile and prepare a
+new pack; old Requests enrollments retain their original profile. These context
+qualifications are not a complete repair caller or a multi-step trajectory
+quality/token evaluation.

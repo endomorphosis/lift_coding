@@ -1,0 +1,28 @@
+The pyparsing development task now has a concrete public objective and a replay
+of its reported defect. `public_issue_reproduction_v1/objective.json` freezes the
+current public issue 633 body, its hash, authorized edit surface and pinned
+pre-fix source. This is a new development objective; it does not alter any
+historical request or establish the issue body's exact bytes at the base date.
+
+The public report specifies a first numeric character followed by a colon and
+`match_previous_expr(first)`. The expression should match `1:1` and reject
+`1:2` and `1:a`, with default, nonrecursive and recursive whitespace handling.
+The independently invoked public source reproduces all nine report examples:
+eight conform to that expectation, while recursive whitespace incorrectly
+allows `1:2`. The worker loads eleven actual pyparsing modules from the pinned
+tree, and all 286 regular source files remain unchanged. The documentation
+symlink is recorded as opaque metadata. No reference patch, hidden scorer or
+provider is used. This establishes a reproducible public requirement, not
+complete acceptance coverage or a new independent family.
+
+The initial public-reference fetch remains in `public_task_authority_v1/`.
+Click reference 2365 is a pull request, so its body was not admitted as an issue
+objective. The original XML, OAuthlib and Click title/generic-hidden-acceptance
+descriptions still require self-contained public specifications before live
+integrated repair evaluation. Public source context qualification alone does
+not fill that authority requirement.
+
+Reproduction: `python evals/integrated_v1/qualify_public_issue.py` from the
+revision root, in a fresh copy with no existing `public_issue_reproduction_v1`
+directory. The script freezes its source, objective, source inventory and nine
+expectations before execution, then retains raw output and source bindings.

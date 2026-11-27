@@ -1,0 +1,124 @@
+"""Recompute archive commitments and check retained native reads/proof receipts."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import time
+
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "run-v1"
+PROOF = HERE.parent
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True).encode()
+
+
+def main():
+    checks = []
+    inputs = {}
+
+    def check(name, value):
+        checks.append({"name": name, "passed": bool(value)})
+        if not value:
+            raise AssertionError(name)
+
+    def read(path):
+        inputs[str(path.relative_to(OUT))] = sha(path)
+        return json.loads(path.read_text())
+
+    freeze = read(OUT / "freeze.json")
+    result = read(OUT / "summary.json")
+    statement = read(OUT / "statement.json")
+    statement_freeze = read(OUT / "statement_freeze.json")
+    events = read(OUT / "events.json")
+    check("exact runtime freeze", result["freeze_sha256"] == sha(OUT / "freeze.json"))
+    for path, digest in freeze["source_pins"].items():
+        check("runtime " + path, sha(path) == digest)
+    check("statement frozen", statement_freeze["statement_sha256"] == sha(OUT / "statement.json"))
+    check("events frozen", statement_freeze["events_sha256"] == sha(OUT / "events.json"))
+    check("four accepted events", len(events) == 4 and [r["seal_cid"] for r in events] == freeze["expected_ordered_seals"])
+    leaf_digests = []
+    for i, event in enumerate(events):
+        check("complete units " + str(i), sorted(event["receipt_cids"]) == freeze["required_units"])
+        check("accepted parent " + str(i), event["parent_seal_cid"] == (None if i == 0 else events[i - 1]["seal_cid"]))
+        check("source binding " + str(i), event["source_sha256"] == event["binding"]["source_sha256"])
+        leaf_digests.append(hashlib.sha256(canonical(event)).digest())
+    check("witness digests", statement["event_digests_hex"] == [v.hex() for v in leaf_digests])
+    leaves = [hashlib.sha256(v).digest() for v in leaf_digests]
+    left = hashlib.sha256(leaves[0] + leaves[1]).digest()
+    right = hashlib.sha256(leaves[2] + leaves[3]).digest()
+    root = hashlib.sha256(left + right).hexdigest()
+    check("independent full Merkle root", root == statement["event_dag_merkle_root_hex"])
+    check("declared relation", statement["circuit_version"] == 3 and statement["event_count"] == 4)
+    profile_path = Path(freeze["controller_profile"])
+    check("controller profile unchanged", sha(profile_path) == freeze["controller_profile_sha256"])
+    profile = json.loads(profile_path.read_text())
+    original = Path(profile["output_root"]) / "native_sealing"
+    for path, digest in freeze["original_archive_sha256"].items():
+        check("original archive " + path, sha(original / path) == digest)
+    check("original ledger unchanged", sha(Path(profile["output_root"]) / "ledger.sqlite3") == freeze["controller_ledger_sha256"])
+    closure = dict(freeze["source_pins"])
+    for label in ("producer", "fresh_consumer"):
+        folder = OUT / "reads" / label
+        process = read(folder / "process.json")
+        response = read(folder / "stdout.json")
+        check(label + " completed", process["returncode"] == 0 and response["accepted"])
+        check(label + " exact output", process["stdout_sha256"] == sha(folder / "stdout.json"))
+        check(label + " entire archive records", response["events"] == events)
+        check(label + " accepted pointer", response["pointer"] == freeze["expected_pointer"])
+        check(label + " no behavioral/model dispatch", response["fresh_scorer_calls"] == response["provider_calls"] == 0)
+        for path, record in response["imports"].items():
+            check(label + " import " + path, sha(path) == record["sha256"] == profile["sealing_native_files"][path])
+            closure[path] = record["sha256"]
+    expected_errors = {"missing_receipt": "not_found", "changed_receipt": "corrupted",
+                       "incomplete_leaf_inventory": "incomplete external required unit inventory",
+                       "stale_parent": "accepted parent identity mismatch"}
+    for row in result["controls"]:
+        check("rejection " + row["case"], row["rejected"] and row["native_verify_calls"] == 0)
+        if row["case"] in expected_errors:
+            folder = OUT / "reads" / row["case"]
+            receipt = read(folder / "process.json")
+            check("specific rejection " + row["case"], receipt["returncode"] == 1 and expected_errors[row["case"]] in (folder / "stderr.log").read_text().splitlines()[-1])
+            check("negative receipt " + row["case"], receipt == row["read_process"] and sha(folder / "stderr.log") == receipt["stderr_sha256"])
+    proof = read(OUT / "proof.json")
+    check("proof exact public root/count", proof["version"] == 3 and proof["public_inputs"] == [root, "4"])
+    binary = PROOF / "bin/groth16"
+    keys = PROOF / "runs/source-built-v1/keys_primary"
+    check("binary bound", sha(binary) == freeze["backend_pins"]["binary_sha256"])
+    check("verifying key bound", sha(keys / "v3/verifying_key.bin") == freeze["backend_pins"]["verifying_key_sha256"])
+    check("proving key bound", sha(keys / "v3/proving_key.bin") == freeze["backend_pins"]["proving_key_sha256"])
+    command = [str(binary), "verify", "--proof", str(OUT / "proof.json"), "--json"]
+    started = time.perf_counter()
+    process = subprocess.run(command, capture_output=True, timeout=30, env={"PATH": "/usr/local/bin:/usr/bin:/bin", "LANG": "C.UTF-8", "GROTH16_BACKEND_ARTIFACTS_ROOT": str(keys), "RAYON_NUM_THREADS": "2"})
+    elapsed = time.perf_counter() - started
+    (OUT / "audit_verify_stdout.log").write_bytes(process.stdout)
+    (OUT / "audit_verify_stderr.log").write_bytes(process.stderr)
+    check("fresh native verify", process.returncode == 0 and json.loads(process.stdout) == {"valid": True})
+    code_archive = OUT / "audited_source_archive"
+    code_archive.mkdir()
+    source_rows = []
+    for index, (path, digest) in enumerate(sorted(closure.items())):
+        target = code_archive / (str(index).zfill(3) + "-" + Path(path).name)
+        shutil.copyfile(path, target)
+        check("archived source " + path, sha(target) == digest)
+        source_rows.append({"original": path, "archive": str(target.relative_to(OUT)), "sha256": digest})
+    output = {"schema": "ns-native-archive-proof-audit/v1", "all_checks_passed": True,
+              "check_count": len(checks), "checks": checks, "input_sha256": inputs,
+              "native_pairing_verifications_added": 1, "audit_verification_seconds": elapsed,
+              "audit_verification_command": command, "auditor_sha256": sha(__file__),
+              "archived_sources": source_rows, "independent_cryptographic_backend": False,
+              "original_archive_unchanged": True, "provider_calls": 0, "fresh_scorer_calls": 0}
+    with (OUT / "audit.json").open("x") as handle:
+        handle.write(json.dumps(output, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({"all_checks_passed": True, "checks": len(checks), "archived_sources": len(source_rows), "native_verify_seconds": elapsed}))
+
+
+if __name__ == "__main__":
+    main()

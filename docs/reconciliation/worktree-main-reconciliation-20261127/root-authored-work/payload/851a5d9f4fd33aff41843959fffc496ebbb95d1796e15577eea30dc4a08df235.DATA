@@ -1,0 +1,28 @@
+{
+  "authority": {
+    "convergence_proved": false,
+    "network_isolation_enforced": false,
+    "production_admitted": false,
+    "provider_calls": 0,
+    "public_terminal_bench_task_satisfied": false,
+    "runtime_behavior_verified": false,
+    "source_body_executed": false,
+    "training_steps": 0,
+    "worker_launched": false
+  },
+  "input": "fresh authored public source fixtures; no hidden benchmark solutions/tests/oracles",
+  "intended_operations": [
+    "exact conditional CNL to native IntentIR",
+    "fresh authored repository native index",
+    "fresh real Lean callee/caller closure",
+    "read-only current-head DuckDB query",
+    "replayed conditional proof capsule",
+    "actual model-off supervisor planning-service preview",
+    "whole-packet offline tokenizer measurement",
+    "negative grounding and staleness controls"
+  ],
+  "predecessor": "sealed Stage T",
+  "preservation": "explicit sealed T files and baseline dependencies; no writable T owner access",
+  "schema": "terminal-intent-proof-capsule-experiment-plan@1",
+  "transport": "local read-only DuckDB; Quack transport not qualified in this increment"
+}

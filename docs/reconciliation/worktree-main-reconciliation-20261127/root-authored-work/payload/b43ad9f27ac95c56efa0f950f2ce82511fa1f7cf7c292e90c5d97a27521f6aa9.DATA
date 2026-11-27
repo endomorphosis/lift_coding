@@ -1,0 +1,4 @@
+from callee import increment
+
+def twice(n: int) -> int:
+    return increment(increment(n))

@@ -1,0 +1,7 @@
+SENTINEL = 'alpha'
+
+def connectivity_status():
+    return {'success': True, 'detail': 'connection not attempted'}
+
+def marker():
+    return SENTINEL

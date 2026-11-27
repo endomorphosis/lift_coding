@@ -1,0 +1,27 @@
+{
+  "allowed_hosts": [
+    "api.github.com",
+    "raw.githubusercontent.com"
+  ],
+  "eligibility_rule_sha256": "7976a8b20eae08911bd35be0852bd233e86bca793d3672b8401611e7cd750796",
+  "max_concurrent_rows": 3,
+  "max_metadata_bytes": 1048576,
+  "max_request_timeout_seconds": 15,
+  "max_source_file_bytes": 524288,
+  "max_source_files_per_revision": 3,
+  "max_total_response_bytes": 33554432,
+  "model_calls": 0,
+  "no_silent_retries": true,
+  "rows": [
+    130,
+    150,
+    151,
+    152,
+    153
+  ],
+  "scientific_cells": 0,
+  "scope": "Complete only the five previously unclassified rows using unchanged prospective source criteria.",
+  "source_or_model_code_executed": false,
+  "source_screen_sha256": "f4cc76163c20f2486750547c5b948e0373815ceb8026c8ac75874781dbcd1588",
+  "upstream_policy_sha256": "cd751c1f3c10bc0b116a3c50351053c57d797e7a158d2baa53dc30135eb76cf8"
+}

@@ -1,0 +1,81 @@
+#!/usr/bin/env python3
+"""Frozen targeted scorer-integrity evaluation; no model calls."""
+import hashlib,importlib.util,json
+from pathlib import Path
+import sys
+import isolated_scorer as stronger
+HERE=Path(__file__).resolve().parent
+BASE=HERE.parent
+ROOT=HERE.parents[4]
+
+def canonical(x):return json.dumps(x,sort_keys=True,separators=(',',':')).encode()
+def sha(x):return hashlib.sha256(x).hexdigest()
+def write(path,value):
+    with Path(path).open('xb') as f:f.write(canonical(value)+b'\n')
+def load_module(name,path):
+    spec=importlib.util.spec_from_file_location(name,path);module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module);return module
+routing=load_module('original_routing_scorer',BASE/'routing_v2/run_eval.py')
+context=load_module('original_context_scorer',BASE/'context/live_v1/run_live_context.py')
+TASKS={r['id']:r for r in json.loads((BASE/'routing_v2/cases.json').read_bytes())['cases']}
+EXPORTS={'unobserved_status':['connectivity_status','marker'],'swallowed_backend_error':['upload_piece','marker'],'clamp_interval':['clamp'],'stable_deduplication':['unique_in_order']}
+
+def definition(profile,task,source):
+    if profile=='routing':return {'profile':profile,'task':task,'source':source,'validation':TASKS[task]['audit_validation'],'entrypoints':EXPORTS[task],'dependency':None}
+    deps=json.loads((BASE/'context/native_development/results_v1'/task/'sources/unchanged.json').read_bytes())
+    return {'profile':profile,'task':task,'source':source,'validation':context.ORACLES[task],'entrypoints':['total'],'dependency':deps['dependency.py']}
+
+def registry():
+    rows=[]
+    attacks=json.loads((HERE/'adversarial_candidates.json').read_bytes())['cases']
+    for attack in attacks:
+        rows.append({'id':attack['id'],'kind':'adversarial','expected_correct':False,'mechanism':attack['mechanism'],**definition(attack['profile'],attack['task'],attack['source'])})
+    for task,case in TASKS.items():rows.append({'id':'seed-routing-'+task,'kind':'unfixed_control','expected_correct':False,**definition('routing',task,case['source'])})
+    for task in context.ORACLES:
+        source=json.loads((BASE/'context/native_development/results_v1'/task/'sources/unchanged.json').read_bytes())['target.py']
+        rows.append({'id':'seed-context-'+task,'kind':'unfixed_control','expected_correct':False,**definition('context',task,source)})
+    saved=[]
+    for p in sorted((BASE/'routing_v2/results').glob('*.json')):
+        r=json.loads(p.read_bytes())
+        saved.append({'saved_id':r['cell_id'],'study':'routing','original_success':r['success'],'source_record':str(p.relative_to(ROOT)),'source_record_sha256':sha(p.read_bytes()),**definition('routing',r['case_id'],r['candidate_source'])})
+    for p in sorted((BASE/'context/live_v1/results').glob('*.json')):
+        r=json.loads(p.read_bytes())
+        saved.append({'saved_id':r['call_id'],'study':'context','original_success':r['success'],'source_record':str(p.relative_to(ROOT)),'source_record_sha256':sha(p.read_bytes()),**definition('context',r['family'],r['candidate_source'])})
+    seen={}
+    for row in saved:
+        identity=sha(canonical({k:row[k] for k in ['profile','source','dependency','validation','entrypoints']}))
+        row['evaluation_id']='saved-'+identity[:16]
+        if identity not in seen:
+            seen[identity]=row['evaluation_id']
+            rows.append({'id':row['evaluation_id'],'kind':'saved_control','expected_correct':row['original_success'],**{k:row[k] for k in ['profile','task','source','dependency','validation','entrypoints']}})
+    return rows,saved
+
+def main():
+    output=HERE/'results';output.mkdir()
+    rows,saved=registry()
+    registry_value={'schema':'ns-scorer-integrity-candidate-registry/v1','evaluation_units':rows,'saved_record_mapping':saved}
+    write(HERE/'candidate_registry.json',registry_value)
+    files=[Path(__file__),HERE/'isolated_scorer.py',HERE/'adversarial_candidates.json',HERE/'candidate_registry.json',BASE/'routing_v2/run_eval.py',BASE/'routing_v2/cases.json',BASE/'context/live_v1/run_live_context.py']
+    freeze={'schema':'ns-scorer-integrity-freeze/v1','files':{str(p.relative_to(ROOT)):sha(p.read_bytes()) for p in files},'image':stronger.IMAGE,'adversarial_candidates':6,'unfixed_controls':7,'saved_records':len(saved),'unique_saved_evaluation_units':sum(r['kind']=='saved_control' for r in rows),'old_scorers_preserved':True,'provider_calls':0,'scope':'targeted namespace/import/termination controls plus supplementary rescore; no complete adversarial security claim','strengthening':'separate trusted oracle process, candidate worker receives no oracle code, typed observations, exact declared dependency exports, no success from exit code alone'}
+    write(HERE/'freeze.json',freeze)
+    results=[]
+    for case in rows:
+        old=routing.check(case['source'],case['validation']) if case['profile']=='routing' else context.score(case['source'],case['dependency'],case['validation'])
+        new=stronger.score(case['source'],case['validation'],profile=case['profile'],entrypoints=case['entrypoints'],dependency=case['dependency'])
+        result={'id':case['id'],'kind':case['kind'],'profile':case['profile'],'task':case['task'],'expected_correct':case['expected_correct'],'old':old,'stronger':new}
+        write(output/(case['id']+'.json'),result);results.append(result)
+        print(json.dumps({'id':case['id'],'kind':case['kind'],'old_pass':old['passed'],'stronger_pass':new['passed']}),flush=True)
+    by_id={r['id']:r for r in results}
+    supplement=[{'saved_id':r['saved_id'],'study':r['study'],'source_record':r['source_record'],'source_record_sha256':r['source_record_sha256'],'evaluation_id':r['evaluation_id'],'original_success':r['original_success'],'old_scorer_recheck':by_id[r['evaluation_id']]['old']['passed'],'stronger_scorer_success':by_id[r['evaluation_id']]['stronger']['passed']} for r in saved]
+    write(HERE/'saved_rescore.json',supplement)
+    summary={'schema':'ns-scorer-integrity-summary/v1','provider_calls':0,'categories':{},'saved_records':len(saved),'unique_saved_candidate_bodies':len({r['source'] for r in saved}),'unique_saved_evaluation_units':len({r['evaluation_id'] for r in saved}),'supplementary_quality':{}}
+    for kind in ['adversarial','unfixed_control','saved_control']:
+        group=[r for r in results if r['kind']==kind]
+        summary['categories'][kind]={'units':len(group),'old_passes':sum(r['old']['passed'] for r in group),'stronger_passes':sum(r['stronger']['passed'] for r in group),'old_false_admissions':sum(r['old']['passed'] and not r['expected_correct'] for r in group),'stronger_false_admissions':sum(r['stronger']['passed'] and not r['expected_correct'] for r in group)}
+    for study in ['routing','context']:
+        group=[r for r in supplement if r['study']==study]
+        summary['supplementary_quality'][study]={'records':len(group),'original_successes':sum(r['original_success'] for r in group),'rescored_successes':sum(r['stronger_scorer_success'] for r in group),'changed_results':sum(r['original_success']!=r['stronger_scorer_success'] for r in group)}
+    summary['frozen_files_match']=all(sha((ROOT/path).read_bytes())==expected for path,expected in freeze['files'].items())
+    assert summary['frozen_files_match']
+    write(HERE/'summary.json',summary);print(json.dumps(summary),flush=True)
+
+if __name__=='__main__':main()

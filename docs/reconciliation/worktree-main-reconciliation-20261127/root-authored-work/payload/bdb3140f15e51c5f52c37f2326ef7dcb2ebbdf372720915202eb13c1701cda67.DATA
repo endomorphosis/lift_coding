@@ -1,0 +1,57 @@
+import ObjectiveContainerSource
+
+/-! SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+Intrinsic slots and body scopes, with generic finite dimensions. -/
+
+namespace RankerObjectiveContainerLanguage
+
+open RankerObjectivePrefixIR (Ty Term UnaryOp BinaryOp Context Schema)
+
+inductive Expr : Context → Ty → Type where
+  | leaf {context : Context} {τ : Ty} (value : Term context τ) : Expr context τ
+  | scalarUnary {context : Context} (op : UnaryOp) (value : Expr context .scalar) : Expr context .scalar
+  | scalarBinary {context : Context} (op : BinaryOp) (left right : Expr context .scalar) : Expr context .scalar
+  | ifNonneg {context : Context} (condition thenBranch elseBranch : Expr context .scalar) : Expr context .scalar
+  | lengthVector {context : Context} {length : ℕ} (values : Expr context (.vector length)) : Expr context .nat
+  | lengthMatrix {context : Context} {rows columns : ℕ}
+      (values : Expr context (.matrix rows columns)) : Expr context .nat
+  | natToScalar {context : Context} (value : Expr context .nat) : Expr context .scalar
+  | indexVector {context : Context} {length : ℕ} (values : Expr context (.vector length))
+      (index : Expr context (.index length)) : Expr context .scalar
+  | fsumExact {context : Context} {length : ℕ} (values : Expr context (.vector length)) : Expr context .scalar
+  | mapRows {context : Context} {rows columns : ℕ} (binder : String)
+      (values : Expr context (.matrix rows columns))
+      (body : Expr ((binder, .vector columns) :: context) .scalar) : Expr context (.vector rows)
+  | mapVector {context : Context} {length : ℕ} (binder : String)
+      (values : Expr context (.vector length))
+      (body : Expr ((binder, .scalar) :: context) .scalar) : Expr context (.vector length)
+  | zipMap {context : Context} {leftLength rightLength : ℕ} (leftName rightName : String)
+      (left : Expr context (.vector leftLength)) (right : Expr context (.vector rightLength))
+      (body : Expr ((rightName, .scalar) :: (leftName, .scalar) :: context) .scalar) :
+      Expr context (.vector (min leftLength rightLength))
+  | zipRowsMap {context : Context} {leftLength rows columns : ℕ} (scalarName rowName : String)
+      (left : Expr context (.vector leftLength)) (right : Expr context (.matrix rows columns))
+      (body : Expr ((rowName, .vector columns) :: (scalarName, .scalar) :: context) .scalar) :
+      Expr context (.vector (min leftLength rows))
+  | rangeMap {context : Context} {length : ℕ} (binder : String)
+      (boundVector : Expr context (.vector length))
+      (body : Expr ((binder, .index length) :: context) .scalar) : Expr context (.vector length)
+
+inductive Fields (context : Context) : Schema → Type where
+  | nil : Fields context []
+  | cons {name : String} {τ : Ty} {rest : Schema} :
+      Expr context τ → Fields context rest → Fields context ((name, τ) :: rest)
+
+inductive PrefixIR : Context → Schema → Type where
+  | record {context : Context} {schema : Schema} (fields : Fields context schema) : PrefixIR context schema
+  | letBind {context : Context} {schema : Schema} {τ : Ty} (name : String)
+      (rhs : Expr context τ) (body : PrefixIR ((name, τ) :: context) schema) : PrefixIR context schema
+
+/-- Supporting dimension fact only; no equality-of-input-length premise. -/
+theorem typed_zip_right_index_bound {leftLength rightLength : ℕ}
+    (index : Fin (min leftLength rightLength)) : index.val < rightLength := by
+  exact Nat.lt_of_lt_of_le index.isLt (Nat.min_le_right _ _)
+
+#print axioms typed_zip_right_index_bound
+
+end RankerObjectiveContainerLanguage

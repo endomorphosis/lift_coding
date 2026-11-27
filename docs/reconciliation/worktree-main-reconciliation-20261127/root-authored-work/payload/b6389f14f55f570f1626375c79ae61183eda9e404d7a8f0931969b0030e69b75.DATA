@@ -1,0 +1,54 @@
+# Full Pyparsing fallback guard v14
+
+The isolated v6 guard completes the changed cold/incremental comparison with
+identical serialized state/root and all **67,872 actual blocks**, totaling
+**112,728,034 bytes per output**. The independent auditor also compares every
+block and state/root to the retained v13 cold output: it is exactly unchanged.
+The v13 failed incremental result, all earlier deadlines and original runtime
+profiles remain retained.
+
+The complete source inventory is 286 regular files, 154 Python files and one
+opaque symlink. The changed source contains 11,701,447 bytes; native graph scope
+is 3,957 symbols and 55,859 edges. Nine new native source-read controls pass,
+including fresh reads, stale expected state, old bytes, changed bytes and a
+between-read source change; the original baseline control remains retained.
+No source omissions, provider calls or execution reuse occur.
+
+The guarded incremental scan actually reuses **20 paths, 172 symbols and 1,428
+eligible prior frontend edges** and rescans **134 paths**. Whole-inventory graph
+resolution still reruns. Projected graph edges are not claimed to be lossless
+frontend observations, and the graph edge count is not substituted for the
+number of newly extracted original edges.
+
+Both new processes finish within the original 900-second bound. Cold wall time
+is **437.699 seconds**, incremental wall time **614.522 seconds**. These workers
+ran concurrently on the shared host. Incremental includes **107.173 seconds**
+of actual baseline restoration and full native re-verification. Its scan takes
+55.736 seconds; the concurrent cold scan takes 52.590 seconds. The original v13
+baseline preparation cost of **656.008 seconds** remains paid and recorded.
+Native build, verification, guards, persistence and process exit are included
+in the worker costs; one-time v14 driver copying/freeze setup was not separately
+timed. Nested stage times must not be added again to worker totals.
+
+Seven changing-inventory controls pass under v6 and reproduce the defect under
+v5. The unchanged native regression suite records **187 passed, one failed**:
+the failed test expects unchanged `mutable.py` to avoid reanalysis, whereas this
+correctness fallback intentionally rescans it. The original test and failure
+output are preserved. This is a correctness control with a measured reuse
+tradeoff, not E01/E03 incremental economy, a token-saving claim or an execution
+soundness theorem.
+
+Changed state CID:
+`baguqeeranjttve5gvcofbuul5dmg3ybzfgcdhy2weckh63wm2p3tuqbvqs7a`.
+
+Changed root CID:
+`baguqeeraqojykf3qjoxqrlclww3hqrgwz4lun4usmlsu2yl7oid4kyy6froa`.
+
+Ordered exact block fingerprint:
+`b4e3db6cc5c7ea798a7eee421ffbd9d95f2659d9c8182d0136ec94cd9e617ec4`.
+
+Authoritative artifacts are `results_v14_full_pyparsing_resolution_guard/summary.json`,
+`full_pyparsing_resolution_guard_v14_audit.json`, its independent auditor source,
+`runtime_resolution_reuse_v6_manifest.json`, `resolution_reuse_v6.patch`,
+`resolution_reuse_validation_v6_attempt2/summary.json`, and
+`resolution_reuse_native_regression_v6/{result.json,stdout.log}`.

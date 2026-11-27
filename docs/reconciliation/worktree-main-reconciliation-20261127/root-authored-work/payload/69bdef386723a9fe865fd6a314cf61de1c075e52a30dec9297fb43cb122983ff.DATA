@@ -1,0 +1,68 @@
+#!/usr/bin/env python3
+"""Enroll only public source/objective/visible validation from four constructed cases."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import time
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[5]
+EVALS = HERE.parents[1]
+def sha(b): return hashlib.sha256(b).hexdigest()
+def write(p, x): p.write_text(json.dumps(x, indent=2, sort_keys=True) + "\n")
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", type=Path, default=HERE / "routing_enrollment_v1")
+    args = parser.parse_args()
+    if args.output.exists(): raise SystemExit("output exists; choose a new version")
+    out = args.output.resolve(); out.mkdir(parents=True)
+    registry = EVALS / "routing_v2/cases.json"
+    # Explicit projection: audit_validation is never passed to the native service or reader.
+    parsed = json.loads(registry.read_text())
+    public = [{key: row[key] for key in ("id", "source", "objective", "visible_validation")} for row in parsed["cases"]]
+    del parsed
+    assert len(public) == 4
+    write(out / "public_projection.json", public)
+    profile_source = HERE / "results_v6_bounded_index/runtime_source_manifest.json"
+    shutil.copyfile(profile_source, out / "runtime_source_manifest.json")
+    profile = json.loads(profile_source.read_text())
+    jobs = []
+    for row in public:
+        folder = out / row["id"]; folder.mkdir()
+        tree = folder / "public_source"; tree.mkdir()
+        for path, body in {"target.py": row["source"], "test_visible.py": row["visible_validation"]}.items(): (tree / path).write_text(body)
+        gitdir = folder / "source_objects.git"
+        subprocess.run(["git", "init", "--bare", "--quiet", str(gitdir)], check=True)
+        git = ["git", "--git-dir=" + str(gitdir), "--work-tree=" + str(tree)]
+        subprocess.run(git + ["-c", "core.autocrlf=false", "add", "--all", "--force", "."], cwd=tree, check=True)
+        tree_oid = subprocess.check_output(git + ["write-tree"], cwd=tree, text=True).strip()
+        manifest = {"task_id": row["id"], "tree": str(tree), "files": {p.name: {"bytes": len(p.read_bytes()), "sha256": sha(p.read_bytes()), "executable": False} for p in tree.iterdir()}, "opaque_symlinks": {}, "computed_git_tree_oid": tree_oid, "provenance": "locally authored routing_v2 development case; explicit public projection; not historical or held out"}
+        case = {"task_id": row["id"], "family_id": "constructed-routing-v2:" + row["id"], "upstream_repo": "constructed-routing-v2:" + row["id"], "issue_title": row["id"], "public_specification": row["objective"], "admitted_paths": ["target.py"], "unchanged_package_python_candidates": [], "role": "existing_constructed_development", "original_split": "development"}
+        write(folder / "case.json", case); write(folder / "public_source_manifest.json", manifest)
+        jobs.append({"task_id": row["id"], "folder": str(folder), "case_sha256": sha((folder / "case.json").read_bytes()), "source_manifest_sha256": sha((folder / "public_source_manifest.json").read_bytes())})
+    freeze = {"schema": "ns-integrated-context-service-freeze/v1", "frozen_at_unix": time.time(), "evaluation_sources": {p.name: sha(p.read_bytes()) for p in (HERE / "native_service.py", Path(__file__), HERE / "context_read_v1.py")}, "runtime_manifest_sha256": sha((out / "runtime_source_manifest.json").read_bytes()), "registry_sha256": sha(registry.read_bytes()), "public_projection_sha256": sha((out / "public_projection.json").read_bytes()), "heldback_fields_projected_to_producer": False, "jobs": jobs, "semantic_scope": "all", "identity_checks": False, "provider_calls": 0}
+    write(out / "freeze.json", freeze)
+    env = {k: os.environ[k] for k in ("PATH", "LANG", "HOME") if k in os.environ}
+    env.update(PYTHONPATH=":".join(profile["pythonpath"]), PYTHONDONTWRITEBYTECODE="1", IPFS_ACCEL_SKIP_CORE="1", GIT_CEILING_DIRECTORIES=str(out))
+    executions = []
+    for job in jobs:
+        for role in ("produce", "consume"):
+            command = ["/usr/bin/python3", "-B", str(HERE / "native_service.py"), role, "--run", str(out), "--case", job["task_id"]]
+            started = time.perf_counter(); process = subprocess.run(command, cwd="/tmp", env=env, capture_output=True, text=True, timeout=60)
+            folder = Path(job["folder"])
+            (folder / (role + ".stdout")).write_text(process.stdout); (folder / (role + ".stderr")).write_text(process.stderr)
+            receipt = {"task_id": job["task_id"], "role": role, "returncode": process.returncode, "command": command, "wall_seconds": time.perf_counter() - started}
+            write(folder / (role + "_process.json"), receipt); executions.append(receipt)
+            print(json.dumps(receipt), flush=True)
+            if process.returncode: raise SystemExit("native context service failed; retain attempt")
+    assert all(sha(Path(path).read_bytes()) == digest for path, digest in profile["files"].items())
+    summary = {"schema": "ns-context-routing-enrollment/v1", "freeze_sha256": sha((out / "freeze.json").read_bytes()), "cases": [j["task_id"] for j in jobs], "native_producer_consumer_roundtrips": len(jobs), "executions": executions, "raw_source_retained": True, "heldback_fields_projected_to_producer": False, "provider_calls": 0, "full_caller_ready": False}
+    write(out / "summary.json", summary)
+    print(json.dumps(summary), flush=True)
+
+if __name__ == "__main__": main()

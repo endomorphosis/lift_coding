@@ -1,0 +1,15 @@
+# Literal aliases s0 and $semantic_ref are not identifiers to translate.
+def lengthy_first_function(value):
+    '''Keep comment and literal spelling s0 exactly.'''
+    return value + 1
+
+def lengthy_second_function(value):
+    return lengthy_first_function(value)
+
+class FirstNamespace:
+    def shared_method_name(self):
+        return 's0'
+
+class SecondNamespace:
+    def shared_method_name(self):
+        return '$semantic_ref'

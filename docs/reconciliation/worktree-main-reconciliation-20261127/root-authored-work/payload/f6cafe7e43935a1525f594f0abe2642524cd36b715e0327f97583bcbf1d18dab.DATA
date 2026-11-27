@@ -1,0 +1,208 @@
+"""Exact original-repository service bindings shared by caller and sealer."""
+import base64
+import importlib.util
+import json
+import os
+from pathlib import Path
+import re
+import sys
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import repository_runtime_v2 as R
+
+IDENTIFIER = re.compile(r"[A-Za-z0-9][A-Za-z0-9_.:-]{0,191}")
+NATIVE_SEAL = re.compile(r"sha256:[0-9a-f]{64}")
+PARENT_KEYS = ("trajectory_id", "event_id", "generation", "seal_cid")
+
+
+def load(name, path):
+    spec = importlib.util.spec_from_file_location(name, path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def codec(profile):
+    binding = profile["original_inventory_codec"]
+    if R.sha(Path(binding["path"]).read_bytes()) != binding["sha256"]:
+        raise ValueError("original inventory codec changed")
+    return load("original_public_inventory_codec", binding["path"])
+
+
+def original_inventory(profile, root):
+    adapter = codec(profile)
+    value = adapter.inventory(Path(root).resolve())
+    return {"entries": value, "sha256": adapter.digest(value)}
+
+
+def task_for(profile, task_id):
+    return next(task for task in profile["tasks"] if task["task_id"] == task_id)
+
+
+def event_for(profile, event_id):
+    return next(event for event in profile["events"] if event["event_id"] == event_id)
+
+
+def verify_profile(profile_path, expected=None):
+    path = Path(profile_path).resolve()
+    digest = R.sha(path.read_bytes())
+    if expected is not None and digest != expected:
+        raise ValueError("profile identity changed")
+    profile = json.loads(path.read_bytes())
+    if profile["schema"] != "ns-original-controller-profile/v1":
+        raise ValueError("wrong original caller profile schema")
+    for filename, value in profile["evaluation_files"].items():
+        if R.sha(Path(filename).read_bytes()) != value:
+            raise ValueError("frozen caller/service source changed: " + filename)
+    if R.sha(Path(profile["corpus_path"]).read_bytes()) != profile["corpus_sha256"]:
+        raise ValueError("public corpus changed")
+    return profile, digest
+
+
+def scorer_binding(profile, trajectory):
+    mode = "reuse" if trajectory["features"]["lifecycle_reuse"] else "cold"
+    binding = profile["scorer_services"][mode]
+    if R.sha(Path(binding["profile_path"]).read_bytes()) != binding["profile_sha256"]:
+        raise ValueError("scorer service profile changed")
+    if binding.get("qualified") is not True:
+        raise ValueError("scorer service not qualified")
+    admission = json.loads(Path(binding["admission_path"]).read_bytes())
+    if R.sha(Path(binding["admission_path"]).read_bytes()) != binding["admission_sha256"]:
+        raise ValueError("scorer admission changed")
+    if admission.get("qualified") is not True:
+        raise ValueError("scorer admission did not pass")
+    return binding
+
+
+def closed_canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=True, allow_nan=False).encode()
+
+
+def identifier(value, name="identifier"):
+    if not (isinstance(value, str) and IDENTIFIER.fullmatch(value)):
+        raise ValueError("invalid " + name)
+    return value
+
+
+def score_request(profile, event, tree, evaluation_id):
+    task = task_for(profile, event["task_id"])
+    trajectory = next(row for row in profile["trajectories"] if row["trajectory_id"] == event["trajectory_id"])
+    service = scorer_binding(profile, trajectory)
+    return {"protocol": "ns-original-candidate-score/v1", "operation": "score",
+            "evaluation_id": identifier(evaluation_id, "evaluation_id"), "task_id": task["task_id"], "base_commit": task["base_commit"],
+            "objective_record_sha256": task["objective_record_sha256"], "objective_text_sha256": task["objective_text_sha256"],
+            "configuration_sha256": event["configuration_sha256"], "sealed_candidate_tree_path": str(Path(tree).resolve()),
+            "expected_candidate_source_tree_sha256": original_inventory(profile, tree)["sha256"],
+            "scorer_profile_sha256": service["profile_sha256"]}
+
+
+def publication_parent(parent):
+    if parent is None or not parent.get("seal_cid"):
+        return None
+    projected = {key: parent[key] for key in PARENT_KEYS}
+    if set(projected) != set(PARENT_KEYS):
+        raise ValueError("incomplete native publication parent")
+    identifier(projected["trajectory_id"], "parent.trajectory_id")
+    identifier(projected["event_id"], "parent.event_id")
+    if type(projected["generation"]) is not int or projected["generation"] < 0:
+        raise ValueError("invalid parent generation")
+    if not (isinstance(projected["seal_cid"], str) and NATIVE_SEAL.fullmatch(projected["seal_cid"])):
+        raise ValueError("parent seal is not the actual native Kit sha256:<64hex> form")
+    return projected
+
+
+def plan_validation_request(profile, event, scorer_request, parent, *, operation_id, cache_namespace):
+    tree = Path(scorer_request["sealed_candidate_tree_path"])
+    inventory = original_inventory(profile, tree)
+    generic = R.inventory(tree)["tree_sha256"]
+    if inventory["sha256"] != scorer_request["expected_candidate_source_tree_sha256"]:
+        raise ValueError("scorer source inventory differs from original adapter inventory")
+    service = profile["procedure_service"]
+    projected = publication_parent(parent)
+    if projected is not None and projected["trajectory_id"] != event["trajectory_id"]:
+        raise ValueError("parent trajectory differs from current request")
+    return {"schema": "ns-original-validation-plan-request/v1", "operation": "plan_validation",
+            "corpus_sha256": profile["corpus_sha256"], "trajectory_id": identifier(event["trajectory_id"], "trajectory_id"),
+            "arm": event["arm"], "cache_profile": event["cache_profile"],
+            "cache_namespace": identifier(cache_namespace, "cache_namespace"),
+            "operation_id": identifier(operation_id, "operation_id"), "task_id": event["task_id"],
+            "event_index": event["horizon"], "scorer_request": scorer_request,
+            "source_inventory_format": "original-adapter-path-keyed/v1",
+            "source_inventory_sha256": inventory["sha256"], "generic_source_tree_sha256": generic,
+            "environment_profile_sha256": service["environment_profile_sha256"],
+            "endpoint_contract_sha256": service["endpoint_sha256"], "expected_publication_parent": projected}
+
+
+def procedure_environment(base):
+    env = {key: value for key, value in base.items() if key != "PYTHONPATH" and not key.startswith(("IPFS_", "NS_"))}
+    env["IPFS_ACCEL_SKIP_CORE"] = "1"
+    env["IPFS_ACCEL_AUTO_INSTALL"] = "0"
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    return env
+
+
+def validate_score_response(profile, request, response):
+    if response.get("protocol") != request["protocol"] or response.get("evaluation_id") != request["evaluation_id"]:
+        raise ValueError("scorer protocol/evaluation response mismatch")
+    if response.get("status") != "completed":
+        return False
+    required = {"task_id": request["task_id"], "configuration_sha256": request["configuration_sha256"],
+                "scorer_profile_sha256": request["scorer_profile_sha256"],
+                "request_sha256": R.sha(closed_canonical(request)),
+                "candidate_sha256": request["expected_candidate_source_tree_sha256"],
+                "source_unchanged": True, "source_bound_before_hidden": True}
+    if any(response.get(key) != value for key, value in required.items()):
+        raise ValueError("completed scorer source/request binding mismatch")
+    if type(response.get("passed")) is not bool or type(response.get("original_native_passed")) is not bool:
+        raise ValueError("scorer pass flags are not booleans")
+    return True
+
+
+def public_grade(response):
+    return {"status": response.get("status"), "passed": response.get("passed"),
+            "visible_total": response.get("visible_collected"), "visible_passed": response.get("visible_passed"),
+            "hidden_total": response.get("hidden_designated"), "hidden_passed": response.get("hidden_passed"),
+            "public_total": response.get("public_objective_cases"), "public_passed": response.get("public_objective_passed"),
+            "configuration_total": 1 if response.get("public_configuration_executed") else None,
+            "configuration_passed": int(response["public_configuration_passed"]) if type(response.get("public_configuration_passed")) is bool else None}
+
+
+def source_payload(profile, root):
+    inv = original_inventory(profile, root)
+    entries = inv["entries"]
+    return {"original_inventory": inv, "generic_inventory": R.inventory(root),
+            "files": {name: base64.b64encode((Path(root) / name).read_bytes()).decode()
+                      for name, row in entries.items() if row["kind"] == "file"},
+            "symlinks": {name: row["target"] for name, row in entries.items() if row["kind"] == "symlink"}}
+
+
+def materialize_payload(profile, payload, destination):
+    destination = Path(destination)
+    if destination.exists():
+        if source_payload(profile, destination) != payload:
+            raise ValueError("retained native source differs")
+        return
+    destination.mkdir(parents=True)
+    entries = payload["original_inventory"]["entries"]
+    if set(payload["files"]) | set(payload["symlinks"]) != set(entries):
+        raise ValueError("native source payload population differs")
+    for name, row in entries.items():
+        R.normalized(name)
+        if row["kind"] != "file":
+            continue
+        body = base64.b64decode(payload["files"][name], validate=True)
+        if R.sha(body) != row["sha256"] or len(body) != row["bytes"]:
+            raise ValueError("native source payload content differs")
+        path = destination / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(body)
+        path.chmod(row["mode"])
+    for name, target in payload["symlinks"].items():
+        path = destination / name
+        if os.path.isabs(target) or not (path.parent / target).resolve().is_relative_to(destination.resolve()):
+            raise ValueError("native source link escapes restored root")
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.symlink_to(target)
+    if source_payload(profile, destination) != payload:
+        raise ValueError("restored native source inventory differs")

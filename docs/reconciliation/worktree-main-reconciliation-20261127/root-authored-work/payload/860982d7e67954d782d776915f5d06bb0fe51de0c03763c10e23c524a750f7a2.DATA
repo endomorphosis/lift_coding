@@ -1,0 +1,143 @@
+import ObjectiveContainerEvaluationBridge
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+
+Generic success rules for the independent named source evaluator. Input and
+body premises describe primitive partial evaluation at actual coordinates.
+Concrete original-source proofs must derive these premises from the actual
+source graph, rather than assume desired objective/gradient values.
+
+Minimum zip, finite bounds, ordered first-error traversal and range bound
+evaluation remain unchanged. No Python arithmetic or convergence claim.
+-/
+
+namespace RankerObjectiveSourceContainerSuccess
+
+noncomputable section
+
+open scoped BigOperators
+open RankerObjectiveIR (SliceError mapOne mapTwo applyOne applyTwo)
+open RankerObjectivePrefixIR (Ty Denote NamedEnvironment extendNames)
+open RankerObjectiveContainerLanguage (SourceExpr evalSourceExpr)
+open RankerObjectiveContainerEvaluationBridge (leftZipIndex rightZipIndex
+  mapToVector_ofFn_success zipToVector_ofFn_min_success orderedFsum_ofFn_eq_sum)
+
+theorem eval_source_mapRows_success {rows columns : ℕ} (environment : NamedEnvironment)
+    (binder : String) (source : SourceExpr (.matrix rows columns)) (body : SourceExpr .scalar)
+    (inputs : Fin rows → Fin columns → ℝ) (outputs : Fin rows → ℝ)
+    (inputSuccess : evalSourceExpr environment source = .ok inputs)
+    (bodySuccess : ∀ index, evalSourceExpr
+      (extendNames (τ := .vector columns) binder (inputs index) environment) body = .ok (outputs index)) :
+    evalSourceExpr environment (.mapRows binder source body) = .ok outputs := by
+  simp only [evalSourceExpr, inputSuccess, applyOne]
+  exact mapToVector_ofFn_success
+    (fun row => evalSourceExpr (extendNames (τ := .vector columns) binder row environment) body)
+    inputs outputs bodySuccess
+
+theorem eval_source_mapVector_success {length : ℕ} (environment : NamedEnvironment)
+    (binder : String) (source : SourceExpr (.vector length)) (body : SourceExpr .scalar)
+    (inputs outputs : Fin length → ℝ)
+    (inputSuccess : evalSourceExpr environment source = .ok inputs)
+    (bodySuccess : ∀ index, evalSourceExpr
+      (extendNames (τ := .scalar) binder (inputs index) environment) body = .ok (outputs index)) :
+    evalSourceExpr environment (.mapVector binder source body) = .ok outputs := by
+  simp only [evalSourceExpr, inputSuccess, applyOne]
+  exact mapToVector_ofFn_success
+    (fun value => evalSourceExpr (extendNames (τ := .scalar) binder value environment) body)
+    inputs outputs bodySuccess
+
+theorem eval_source_zipMap_min_success {leftLength rightLength : ℕ}
+    (environment : NamedEnvironment) (leftName rightName : String)
+    (leftSource : SourceExpr (.vector leftLength)) (rightSource : SourceExpr (.vector rightLength))
+    (body : SourceExpr .scalar) (left : Fin leftLength → ℝ) (right : Fin rightLength → ℝ)
+    (outputs : Fin (min leftLength rightLength) → ℝ)
+    (leftSuccess : evalSourceExpr environment leftSource = .ok left)
+    (rightSuccess : evalSourceExpr environment rightSource = .ok right)
+    (bodySuccess : ∀ index, evalSourceExpr
+      (extendNames (τ := .scalar) rightName (right (rightZipIndex index))
+        (extendNames (τ := .scalar) leftName (left (leftZipIndex index)) environment)) body =
+      .ok (outputs index)) :
+    evalSourceExpr environment (.zipMap leftName rightName leftSource rightSource body) = .ok outputs := by
+  simp only [evalSourceExpr, leftSuccess, rightSuccess, applyTwo]
+  exact zipToVector_ofFn_min_success
+    (fun a b => evalSourceExpr (extendNames (τ := .scalar) rightName b
+      (extendNames (τ := .scalar) leftName a environment)) body) left right outputs bodySuccess
+
+theorem eval_source_zipRowsMap_min_success {leftLength rows columns : ℕ}
+    (environment : NamedEnvironment) (scalarName rowName : String)
+    (leftSource : SourceExpr (.vector leftLength)) (rightSource : SourceExpr (.matrix rows columns))
+    (body : SourceExpr .scalar) (left : Fin leftLength → ℝ) (right : Fin rows → Fin columns → ℝ)
+    (outputs : Fin (min leftLength rows) → ℝ)
+    (leftSuccess : evalSourceExpr environment leftSource = .ok left)
+    (rightSuccess : evalSourceExpr environment rightSource = .ok right)
+    (bodySuccess : ∀ index, evalSourceExpr
+      (extendNames (τ := .vector columns) rowName (right (rightZipIndex index))
+        (extendNames (τ := .scalar) scalarName (left (leftZipIndex index)) environment)) body =
+      .ok (outputs index)) :
+    evalSourceExpr environment (.zipRowsMap scalarName rowName leftSource rightSource body) = .ok outputs := by
+  simp only [evalSourceExpr, leftSuccess, rightSuccess, applyTwo]
+  exact zipToVector_ofFn_min_success
+    (fun scalar row => evalSourceExpr (extendNames (τ := .vector columns) rowName row
+      (extendNames (τ := .scalar) scalarName scalar environment)) body) left right outputs bodySuccess
+
+theorem eval_source_rangeMap_success {length : ℕ} (environment : NamedEnvironment)
+    (binder : String) (boundSource : SourceExpr (.vector length)) (body : SourceExpr .scalar)
+    (boundVector outputs : Fin length → ℝ)
+    (boundSuccess : evalSourceExpr environment boundSource = .ok boundVector)
+    (bodySuccess : ∀ index : Fin length, evalSourceExpr
+      (extendNames (τ := .index length) binder index environment) body = .ok (outputs index)) :
+    evalSourceExpr environment (.rangeMap binder boundSource body) = .ok outputs := by
+  simp only [evalSourceExpr, boundSuccess, applyOne]
+  exact mapToVector_ofFn_success
+    (fun index : Fin length => evalSourceExpr (extendNames (τ := .index length) binder index environment) body)
+    (fun index : Fin length => index) outputs bodySuccess
+
+theorem eval_source_fsum_success {length : ℕ} (environment : NamedEnvironment)
+    (source : SourceExpr (.vector length)) (values : Fin length → ℝ)
+    (inputSuccess : evalSourceExpr environment source = .ok values) :
+    evalSourceExpr environment (.fsumExact source) = .ok (∑ index, values index) := by
+  simp only [evalSourceExpr, inputSuccess, mapOne, orderedFsum_ofFn_eq_sum]
+
+theorem eval_source_lengthVector_success {length : ℕ} (environment : NamedEnvironment)
+    (source : SourceExpr (.vector length)) (values : Fin length → ℝ)
+    (inputSuccess : evalSourceExpr environment source = .ok values) :
+    evalSourceExpr environment (.lengthVector source) = .ok length := by
+  simp only [evalSourceExpr, inputSuccess, mapOne]
+
+theorem eval_source_lengthMatrix_success {rows columns : ℕ} (environment : NamedEnvironment)
+    (source : SourceExpr (.matrix rows columns)) (values : Fin rows → Fin columns → ℝ)
+    (inputSuccess : evalSourceExpr environment source = .ok values) :
+    evalSourceExpr environment (.lengthMatrix source) = .ok rows := by
+  simp only [evalSourceExpr, inputSuccess, mapOne]
+
+theorem eval_source_indexVector_success {length : ℕ} (environment : NamedEnvironment)
+    (source : SourceExpr (.vector length)) (indexSource : SourceExpr (.index length))
+    (values : Fin length → ℝ) (index : Fin length)
+    (inputSuccess : evalSourceExpr environment source = .ok values)
+    (indexSuccess : evalSourceExpr environment indexSource = .ok index) :
+    evalSourceExpr environment (.indexVector source indexSource) = .ok (values index) := by
+  simp only [evalSourceExpr, inputSuccess, indexSuccess, mapTwo]
+
+theorem eval_source_natToScalar_success (environment : NamedEnvironment)
+    (source : SourceExpr .nat) (value : ℕ)
+    (inputSuccess : evalSourceExpr environment source = .ok value) :
+    evalSourceExpr environment (.natToScalar source) = .ok (value : ℝ) := by
+  simp only [evalSourceExpr, inputSuccess, mapOne]
+
+#print axioms eval_source_mapRows_success
+#print axioms eval_source_mapVector_success
+#print axioms eval_source_zipMap_min_success
+#print axioms eval_source_zipRowsMap_min_success
+#print axioms eval_source_rangeMap_success
+#print axioms eval_source_fsum_success
+#print axioms eval_source_lengthVector_success
+#print axioms eval_source_lengthMatrix_success
+#print axioms eval_source_indexVector_success
+#print axioms eval_source_natToScalar_success
+
+end
+
+end RankerObjectiveSourceContainerSuccess

@@ -1,0 +1,69 @@
+The additional metadata projection supplies 21,336 SWE-rebench rows from 3,468
+repository names and 731 SWE-bench Pro rows from 11 other names. These are
+candidate records, not newly solved tasks or confirmed independent families.
+No cross-dataset task deduplication or absence of training contamination is
+claimed. The exact dataset revisions and Git LFS hashes are frozen in
+`additional_metadata_v1/`; all three downloads match their published bytes.
+
+The projector decodes nine SWE-rebench metadata fields and five Pro fields.
+Issue bodies, hints, reference patches, test patches, designated test sets and
+model quality scores remain undecoded. The raw Parquet files contain those
+fields and stay in owner-only curator custody. The whole SWE-rebench test split
+was projected; its separately provided filtered split was not used.
+
+SWE-rebench's observed metadata dates range from 2014-04-30 to 2025-04-30.
+Only 6,542 of its 21,336 rows have nonempty published image metadata. All 731
+Pro rows have image tags; the selected Pro fields supply no task dates. Three
+of its eleven repositories are declared Python, with the others declared Go,
+JavaScript or TypeScript. These field values are dataset observations, not
+independent environment or language qualification.
+
+`rebench_screen_v1/` freezes a further qualification queue before source or
+scorer outcomes. It requires metadata dates from 2025 onward, image metadata
+and at least two different base commits. It conservatively excludes all
+sixteen original and twelve previously cataloged Verified repository names,
+and their owner names. The first stage uses one repository per owner and
+orders families by a fixed SHA-256 seed. It selects the two latest eligible
+metadata rows with different base commits in each family. Fifty-three pairs
+meet these rules; sixteen are the primary screening tranche and 37 remain
+ordered reserves. Image availability is a convenience filter that may reflect
+upstream selection. No treatment/model outcome selected these families.
+
+Native Git checks prove forward base-commit ancestry for all first sixteen
+pairs. Each fetch requests `blob:none`; the checker reads commit graphs and
+does not open source or patch blobs. A separate current GitHub audit resolves
+all sixteen candidates plus 28 prior repositories. The 448 candidate/prior
+comparisons share no repository, declared-fork or owner identity. Candidates
+also have sixteen distinct current repository and owner IDs, and all current
+primary-language fields say Python. The old `ethereum/web3.py` name now
+resolves to `ApeWorX/web3.py`; that redirect is retained.
+
+These checks narrow specific identity and ancestry uncertainties. They do not
+establish historical derivative independence, shared dependency independence,
+portfolio exposure, model-training novelty, source/issue authority, usable
+environments or adequate scoring. The metadata date has no timezone suffix;
+its upstream event semantics remain unverified. Event ordering in a future
+trajectory must follow proved source ancestry. Earlier failed repairs remain
+failed when a later upstream snapshot arrives.
+
+All sampled image names explicitly contain `x86_64`. Image metadata alone does
+not establish a runnable ARM environment on this host; port or executor
+qualification remains necessary. **No additional confirmatory family or
+complete natural trajectory is enrolled yet.** The two Requests nodes remain
+the current development pair, whose separate environment profiles and failures
+are documented in `arm64_qualification/`.
+
+Reproduction, from a fresh revision copy with unused output directories:
+
+```sh
+python evals/recruitment/project_additional_metadata.py
+python evals/recruitment/plan_rebench_screen.py
+python evals/recruitment/check_ancestry.py --output rebench_ancestry_v1 --screen rebench_screen_v1/queue.json --limit 16
+python evals/recruitment/audit_repository_identity.py --output rebench_identity_v1 --resume-from repository_identity_v2 --screen rebench_screen_v1/queue.json --limit 16
+```
+
+`rebench_screen_audit.json` verifies 175 artifact, selection, identity and
+actual-command checks. The source and environment/scorer phase is the next
+qualification step; removing difficult families without their prescribed
+failure records or treating a reserve as an already qualified task would
+invalidate the queue's purpose.

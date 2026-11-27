@@ -1,0 +1,12 @@
+import hashlib,json,sys
+from pathlib import Path
+import pytest
+result=pytest.main(sys.argv[1:])
+modules={}
+for name,module in sorted(sys.modules.copy().items()):
+    if name.startswith(('ipfs_accelerate_py.','ipfs_datasets_py.','ipfs_kit_py.')):
+        p=Path(getattr(module,'__file__','') or '')
+        if p.is_file():
+            modules[name]={'path':str(p.resolve()),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+Path(__file__).with_name('loaded_sources.json').write_text(json.dumps(modules,indent=2)+'\n')
+raise SystemExit(result)

@@ -1,0 +1,121 @@
+import ObjectiveContainerPrefixGenerated
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+
+A structural scalar-source injection and independent evaluator equality for
+mixed named environments. This joins primitive scalar syntax and the already
+qualified stable loss/factor backend. It does not assume a desired objective,
+gradient, descent, or convergence result. The imported generated whole-prefix
+module must be genuinely qualified before this candidate may be invoked.
+
+Actual container/whole-prefix evaluation, preparation, Python arithmetic,
+training, cache admission and planner activation remain open here.
+-/
+
+namespace RankerObjectiveSourceScalarLift
+
+noncomputable section
+
+open RankerObjectiveIR (SliceError SourceScalar evalSourceExact evalExact
+  stableLossBody stableFactorBody scalarEnvironment mapOne mapTwo applyOne applyTwo)
+open RankerObjectivePrefixIR (NamedEnvironment evalSourceTerm evalUnary evalBinary)
+open RankerObjectiveContainerLanguage (SourceExpr evalSourceExpr)
+
+def scalarNames (environment : NamedEnvironment) (name : String) : Except SliceError ℝ :=
+  environment name .scalar
+
+def liftSourceScalar : SourceScalar → SourceExpr .scalar
+  | .num value => .leaf (.scalarLiteral value)
+  | .var name => .leaf (.var name)
+  | .neg value => .scalarUnary .neg (liftSourceScalar value)
+  | .abs value => .scalarUnary .abs (liftSourceScalar value)
+  | .add left right => .scalarBinary .add (liftSourceScalar left) (liftSourceScalar right)
+  | .sub left right => .scalarBinary .sub (liftSourceScalar left) (liftSourceScalar right)
+  | .mul left right => .scalarBinary .mul (liftSourceScalar left) (liftSourceScalar right)
+  | .div left right => .scalarBinary .div (liftSourceScalar left) (liftSourceScalar right)
+  | .max left right => .scalarBinary .max (liftSourceScalar left) (liftSourceScalar right)
+  | .exp value => .scalarUnary .exp (liftSourceScalar value)
+  | .log1p value => .scalarUnary .log1p (liftSourceScalar value)
+  | .ifNonneg condition thenBranch elseBranch =>
+      .ifNonneg (liftSourceScalar condition) (liftSourceScalar thenBranch) (liftSourceScalar elseBranch)
+  | .unsupported tag => .leaf (.unsupported tag)
+
+/-- Independent source interpreters agree on a deterministic syntax injection.
+No compilation, evaluation result, or semantic certificate is an input premise. -/
+theorem eval_lift_scalar_source (environment : NamedEnvironment) (source : SourceScalar) :
+    evalSourceExpr environment (liftSourceScalar source) =
+      evalSourceExact (scalarNames environment) source := by
+  induction source with
+  | num value => rfl
+  | var name => rfl
+  | neg value ih =>
+    simp only [liftSourceScalar, evalSourceExpr, evalUnary, evalSourceExact, ih, applyOne, mapOne]
+  | abs value ih =>
+    simp only [liftSourceScalar, evalSourceExpr, evalUnary, evalSourceExact, ih, applyOne, mapOne]
+  | add left right leftIH rightIH =>
+    simp only [liftSourceScalar, evalSourceExpr, evalBinary, evalSourceExact,
+      leftIH, rightIH, applyTwo, mapTwo]
+  | sub left right leftIH rightIH =>
+    simp only [liftSourceScalar, evalSourceExpr, evalBinary, evalSourceExact,
+      leftIH, rightIH, applyTwo, mapTwo]
+  | mul left right leftIH rightIH =>
+    simp only [liftSourceScalar, evalSourceExpr, evalBinary, evalSourceExact,
+      leftIH, rightIH, applyTwo, mapTwo]
+  | div left right leftIH rightIH =>
+    simp only [liftSourceScalar, evalSourceExpr, evalBinary, evalSourceExact, leftIH, rightIH]
+    rfl
+  | max left right leftIH rightIH =>
+    simp only [liftSourceScalar, evalSourceExpr, evalBinary, evalSourceExact,
+      leftIH, rightIH, applyTwo, mapTwo]
+  | exp value ih =>
+    simp only [liftSourceScalar, evalSourceExpr, evalUnary, evalSourceExact, ih, applyOne, mapOne]
+  | log1p value ih =>
+    simp only [liftSourceScalar, evalSourceExpr, evalUnary, evalSourceExact, ih]
+    rfl
+  | ifNonneg condition thenBranch elseBranch conditionIH thenIH elseIH =>
+    simp only [liftSourceScalar, evalSourceExpr, evalSourceExact, conditionIH, thenIH, elseIH]
+  | unsupported tag => rfl
+
+/-- These scalar literals are joined structurally to the actual generated
+prefix bodies in ObjectiveOriginalPrefixParts, not assumed to be that prefix. -/
+def oldStableLossSource : SourceScalar :=
+  .add (.max (.num (0 / 1)) (.neg (.var "z")))
+    (.log1p (.exp (.neg (.abs (.var "z")))))
+
+def oldStableFactorSource : SourceScalar :=
+  .ifNonneg (.var "z")
+    (.div (.exp (.neg (.var "z"))) (.add (.num (1 / 1)) (.exp (.neg (.var "z")))))
+    (.div (.num (1 / 1)) (.add (.num (1 / 1)) (.exp (.var "z"))))
+
+theorem named_stable_loss_success (environment : NamedEnvironment) (margin : ℝ)
+    (binding : environment "z" .scalar = .ok margin) :
+    evalSourceExpr environment (liftSourceScalar oldStableLossSource) =
+      .ok (RankerRealCurvature.realStablePairLoss margin) := by
+  rw [eval_lift_scalar_source]
+  simpa [oldStableLossSource, evalSourceExact, scalarNames, binding,
+    stableLossBody, evalExact, scalarEnvironment] using
+    RankerObjectiveIR.stableLoss_eval_success margin
+
+theorem named_stable_factor_success (environment : NamedEnvironment) (margin : ℝ)
+    (binding : environment "z" .scalar = .ok margin) :
+    evalSourceExpr environment (liftSourceScalar oldStableFactorSource) =
+      .ok (RankerRealCurvature.realStableLogisticP margin) := by
+  rw [eval_lift_scalar_source]
+  simpa [oldStableFactorSource, evalSourceExact, scalarNames, binding,
+    stableFactorBody, evalExact, scalarEnvironment] using
+    RankerObjectiveIR.stableFactor_eval_success margin
+
+#print axioms eval_lift_scalar_source
+#print axioms named_stable_loss_success
+#print axioms named_stable_factor_success
+
+end
+
+end RankerObjectiveSourceScalarLift
+
+#print axioms _root_.RankerObjectiveSourceScalarLift.eval_lift_scalar_source
+#print axioms _root_.RankerObjectiveSourceScalarLift.named_stable_loss_success
+#print axioms _root_.RankerObjectiveSourceScalarLift.named_stable_factor_success

@@ -1,0 +1,38 @@
+"""Bounded public import compatibility only; no tests, oracle or provider."""
+import hashlib,importlib.metadata,importlib.util,json,os,platform,shutil,subprocess,sys,time
+from pathlib import Path
+H=Path(__file__).resolve().parent;REPO=Path('/home/barberb/lift_coding');NATIVE=REPO/'.worktrees/pctdd-g9-reviewed-deploy/external';IMAGE='sha256:74c4a6ff67f397f8a10b058851d218896b2f1ee0f2cddf47741219b734de93a6'
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+def dump(p,x):
+ with Path(p).open('x') as f:f.write(json.dumps(x,sort_keys=True,indent=2)+'\n')
+def main():
+ output=H/'environment_probe_v1';output.mkdir();snapshot=H/'native_source_v1';snapshot.mkdir();sources={}
+ for repo,package in [('ipfs_accelerate','ipfs_accelerate_py'),('ipfs_datasets','ipfs_datasets_py')]:
+  base=NATIVE/repo
+  for p in sorted((base/package).rglob('*.py')):
+   if not p.is_file():continue
+   target=snapshot/repo/p.relative_to(base);target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(p.read_bytes());sources[str(p)]={'snapshot':str(target.relative_to(snapshot)),'sha256':sha(p)}
+ dump(H/'native_source_manifest_v1.json',sources)
+ probe='''import hashlib,importlib.metadata,json,os,platform,sys,traceback
+from pathlib import Path
+sys.path[:0]=['/native/ipfs_accelerate','/native/ipfs_datasets']
+before={d.metadata['Name']:d.version for d in importlib.metadata.distributions()}
+result={'python':sys.version,'platform':platform.platform(),'machine':platform.machine(),'distributions':before,'imports':{}}
+try:
+ from ipfs_accelerate_py.testing.proof_reuse import setup_bound_execution_key as a,post_setup_call_reuse as r,signed_runner_attestations as s
+ from ipfs_datasets_py.logic.zkp.pctdd import test_execution_key_v2 as d,composite_phase_receipt_contracts as c
+ result['native_contracts_available']=a.datasets_contracts_available() and r.datasets_contracts_available() and s.datasets_contracts_available()
+except Exception as exc:
+ result.update(native_contracts_available=False,exception_type=type(exc).__name__,diagnostic=traceback.format_exc())
+for name,module in tuple(sys.modules.items()):
+ if name in ('ipfs_accelerate_py','ipfs_datasets_py') or name.startswith(('ipfs_accelerate_py.','ipfs_datasets_py.')):
+  path=getattr(module,'__file__',None)
+  if path and Path(path).is_file():result['imports'][name]={'path':path,'sha256':hashlib.sha256(Path(path).read_bytes()).hexdigest()}
+Path('/results/result.json').write_text(json.dumps(result,sort_keys=True,indent=2)+'\\n')
+'''
+ (output/'probe.py').write_text(probe);available=shutil.disk_usage(H).free
+ freeze={'schema':'ns-original-native-call-import-probe/v1','frozen_at_ns':time.time_ns(),'source_manifest_sha256':sha(H/'native_source_manifest_v1.json'),'native_python_file_count':len(sources),'probe_sha256':sha(output/'probe.py'),'image_id':IMAGE,'max_import_probe_containers':1,'per_probe_wall_seconds':60,'max_grader_calls':0,'provider_calls':0,'network':'none','free_storage_bytes_before_probe':available,'image_acquisitions':0,'large_builds':0}
+ dump(output/'freeze.json',freeze)
+ argv=['docker','--host=unix:///var/run/docker.sock','run','--rm','--network=none','--read-only','--cap-drop=ALL','--security-opt=no-new-privileges','--cpus=1','--memory=2g','--pids-limit=32','--user',str(os.getuid())+':'+str(os.getgid()),'--tmpfs','/tmp:rw,nosuid,nodev,size=268435456','--mount','type=bind,src='+str(snapshot)+',dst=/native,readonly','--mount','type=bind,src='+str(output)+',dst=/results','--entrypoint=/usr/bin/env',IMAGE,'-i','HOME=/tmp','PATH=/usr/local/bin:/usr/bin:/bin','PYTHONDONTWRITEBYTECODE=1','IPFS_ACCEL_SKIP_CORE=1','IPFS_ACCEL_AUTO_INSTALL=0','IPFS_TEST_PROOF_REUSE_AUTO_INSTALL=0','IPFS_DATASETS_AUTO_INSTALL=0','IPFS_DATASETS_PY_AUTO_GROTH16_BUILD=0','IPFS_KIT_AUTO_INSTALL_DEPS=0','python3','-I','-B','/results/probe.py']
+ t=time.monotonic();r=subprocess.run(argv,capture_output=True,timeout=60);(output/'stdout').write_bytes(r.stdout);(output/'stderr').write_bytes(r.stderr);result=json.loads((output/'result.json').read_text()) if (output/'result.json').exists() else {};summary={'schema':'ns-original-native-call-import-probe-result/v1','qualified':r.returncode==0 and result.get('native_contracts_available') is True,'returncode':r.returncode,'elapsed_seconds':time.monotonic()-t,'python':result.get('python'),'native_import_count':len(result.get('imports',{})),'exception_type':result.get('exception_type'),'freeze_sha256':sha(output/'freeze.json'),'result_sha256':sha(output/'result.json') if result else None,'native_grader_calls':0,'provider_calls':0};dump(output/'summary.json',summary);print(json.dumps(summary))
+if __name__=='__main__':main()

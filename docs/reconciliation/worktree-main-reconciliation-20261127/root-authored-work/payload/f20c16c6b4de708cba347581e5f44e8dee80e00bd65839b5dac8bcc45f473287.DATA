@@ -1,0 +1,98 @@
+import OriginalPrefixModelProjection
+import GeneratedNumericSlices
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+
+Compose the actual computed numeric-prefix gradient with the historically
+AST-emitted source update. The first result retains the old compiler's Option
+inside the new evaluator's Except; the second explicitly checks that Option.
+No mathematical gradient or desired update result is supplied by the caller.
+
+This specializes the ordinary real weights to recorded original differences,
+source L2 ratio and eta. It does not translate _prepare, the source finite
+guards/return, mutable training loop, CPython Float/libm/fsum or convergence.
+The parent actual gradient projection is prospective until genuinely qualified.
+No proof/cache/planner/task authority is granted by these source bodies.
+-/
+
+namespace RankerObjectiveOriginalComputedSourceUpdate
+
+noncomputable section
+
+open RankerObjectiveIR (SliceError mapOne applyOne)
+open RankerSourceSemantics (runUpdateSource)
+open RankerSourceSemanticsGenerated (emittedUpdateBody emitted_originalRealStep_join)
+open RankerObjectiveOriginalModelProjection (computedGradientResult
+  actual_computed_gradient_projection_eq source_L2_eq_originalRealMu)
+
+/-- The old named scalar compiler has an Option result, while the actual
+numeric-prefix evaluator has Except. Retain both layers without coercion. -/
+def actualComputedUpdateWithCompilation (weights : Fin 80 → ℝ) :
+    Except SliceError (Option (List ℝ)) :=
+  mapOne (fun gradient => runUpdateSource emittedUpdateBody
+    RankerRealCurvature.originalRealEta (List.ofFn weights) (List.ofFn gradient))
+    (computedGradientResult weights RankerRealCurvature.originalRealDifferences)
+
+/-- Explicit adapter refusal. No caller-supplied certificate turns none into
+a successful vector, and no finite conversion precedes a success-length fact. -/
+def actualComputedUpdate (weights : Fin 80 → ℝ) : Except SliceError (List ℝ) :=
+  applyOne (fun result => match result with
+    | none => .error (.unsupportedNode "updateCompilationRefusal")
+    | some values => .ok values) (actualComputedUpdateWithCompilation weights)
+
+/-- Ordinary weights only. The gradient is obtained from actual source-record
+evaluation, then substituted into the independently emitted update body. -/
+theorem actual_computed_update_with_compilation_eq (weights : Fin 80 → ℝ) :
+    actualComputedUpdateWithCompilation weights =
+      .ok (some (List.ofFn (RankerRealCurvature.realGradientStep
+        RankerRealCurvature.originalRealMu RankerRealCurvature.originalRealEta
+        RankerRealCurvature.originalRealDifferences weights))) := by
+  unfold actualComputedUpdateWithCompilation
+  rw [actual_computed_gradient_projection_eq, source_L2_eq_originalRealMu]
+  simp only [mapOne, emitted_originalRealStep_join]
+
+/-- Actual source-update list, with compilation refusal excluded by the
+actual historical emitted-body compilation theorem, not an assumption. -/
+theorem actual_computed_update_eq (weights : Fin 80 → ℝ) :
+    actualComputedUpdate weights =
+      .ok (List.ofFn (RankerRealCurvature.realGradientStep
+        RankerRealCurvature.originalRealMu RankerRealCurvature.originalRealEta
+        RankerRealCurvature.originalRealDifferences weights)) := by
+  simp only [actualComputedUpdate, actual_computed_update_with_compilation_eq, applyOne]
+
+/-- Length is obtained from actual successful evaluation. A later finite
+vector adapter may use this fact; it is not an input to the update theorem. -/
+theorem actual_computed_update_success_length (weights : Fin 80 → ℝ) :
+    mapOne List.length (actualComputedUpdate weights) = .ok 80 := by
+  rw [actual_computed_update_eq]
+  simp only [mapOne, List.length_ofFn]
+
+/-- One exact-real update and its fixed-profile safe decrease. This is a
+single-step source/model join, not an actual finite/infinite training theorem. -/
+theorem actual_computed_update_has_safe_descent (weights : Fin 80 → ℝ) :
+    ∃ next : Fin 80 → ℝ,
+      actualComputedUpdate weights = .ok (List.ofFn next) ∧
+      RankerRealCurvature.realObjective RankerRealCurvature.originalRealMu
+          RankerRealCurvature.originalRealDifferences next ≤
+        RankerRealCurvature.realObjective RankerRealCurvature.originalRealMu
+          RankerRealCurvature.originalRealDifferences weights -
+          (RankerRealCurvature.originalRealEta / 2) *
+            RankerRealCurvature.squaredEuclideanNorm
+              (RankerRealCurvature.realCoordinateGradient RankerRealCurvature.originalRealMu
+                RankerRealCurvature.originalRealDifferences weights) := by
+  refine ⟨RankerRealCurvature.realGradientStep RankerRealCurvature.originalRealMu
+    RankerRealCurvature.originalRealEta RankerRealCurvature.originalRealDifferences weights,
+    actual_computed_update_eq weights, ?_⟩
+  exact RankerRealCurvature.originalReal_safe_descent weights
+
+#print axioms actual_computed_update_with_compilation_eq
+#print axioms actual_computed_update_eq
+#print axioms actual_computed_update_success_length
+#print axioms actual_computed_update_has_safe_descent
+
+end
+
+end RankerObjectiveOriginalComputedSourceUpdate

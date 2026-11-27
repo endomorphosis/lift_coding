@@ -1,0 +1,223 @@
+"""Run frozen development reuse cases and preserve every invocation in a new run."""
+from __future__ import annotations
+
+import argparse
+import copy
+import hashlib
+import json
+import os
+import platform
+import statistics
+import subprocess
+import sys
+import time
+from dataclasses import replace
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[4]
+ACCELERATE = ROOT / "external/ipfs_accelerate"
+sys.path[:0] = [str(ACCELERATE), str(ROOT / "external/ipfs_datasets"), str(ROOT / "external/ipfs_kit")]
+import adapter
+from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
+from ipfs_accelerate_py.agent_supervisor.proof import test_execution_contracts as contracts
+from ipfs_accelerate_py.testing.proof_reuse import runner_pass_attestation as attest
+
+BASE_FILES = {
+    "arithmetic.py": "def weighted_sum(n):\n    result = 0\n    for i in range(n):\n        result += (i * 17) % 97\n    return result\n",
+    "test_work.py": "from arithmetic import weighted_sum\n\ndef test_work(payload):\n    assert weighted_sum(600_000) + sum(payload) == EXPECTED\n",
+    "conftest.py": '''import json
+import os
+from pathlib import Path
+import pytest
+
+@pytest.fixture
+def payload():
+    print("NS_SETUP_EFFECT", flush=True)
+    assert os.environ.get("NS_REUSE_SETUP_FAIL", "0") == "0", "setup failure"
+    data = json.loads(Path("fixture_data.json").read_text())
+    config = json.loads(Path("settings.json").read_text())
+    value = tuple(data) + (config["offset"], int(os.environ["NS_REUSE_FACTOR"]) - 1)
+    yield value
+    print("NS_TEARDOWN_EFFECT", flush=True)
+    assert os.environ.get("NS_REUSE_TEARDOWN_FAIL", "0") == "0", "teardown failure"
+''',
+    "fixture_data.json": "[0, 0]\n",
+    "settings.json": '{"offset": 0}\n',
+    "requirements.lock": "python>=3.12\n",
+    "pytest.ini": "[pytest]\n",
+}
+# The sum uses period 97; this closed-form oracle differs from the loop under test.
+BASE_FILES["test_work.py"] = BASE_FILES["test_work.py"].replace("EXPECTED", str((600_000 // 97) * sum(range(97)) + sum((i * 17) % 97 for i in range(600_000 % 97))))
+
+
+def save(path, obj):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(obj, indent=2, sort_keys=True) + "\n")
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def run_process(project, output, spec, env_changes=None, native=False):
+    output.mkdir(parents=True)
+    spec = dict(spec, observation=str(output / "observation.json"))
+    save(output / "spec.json", spec)
+    env = {"PATH": "/usr/local/bin:/usr/bin:/bin", "LANG": "C.UTF-8", "LC_ALL": "C.UTF-8", "PYTHONHASHSEED": "0", "PYTHONDONTWRITEBYTECODE": "1", "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1", "NS_REUSE_FACTOR": "1", "NS_REUSE_SPEC": str(output / "spec.json"), "PYTHONPATH": os.pathsep.join([str(HERE), str(ACCELERATE), str(ROOT / "external/ipfs_datasets"), str(ROOT / "external/ipfs_kit"), str(project)])}
+    env.update(env_changes or {})
+    plugin = "ipfs_accelerate_py.testing.proof_reuse.plugin" if native else "adapter"
+    command = [sys.executable, "-m", "pytest", "-p", plugin, "-p", "no:cacheprovider", "-q", "-s", "-rs", "test_work.py::test_work"]
+    if native:
+        env.update({"IPFS_TEST_PROOF_REUSE_MODE": spec["mode"], "IPFS_TEST_PROOF_REUSE_CACHE_DIR": str(output.parent / "native-cache"), "IPFS_TEST_PROOF_REUSE_AUTO_INSTALL": "0", "IPFS_DATASETS_PY_AUTO_GROTH16_BUILD": "0", "IPFS_DATASETS_ENABLE_GROTH16": "0"})
+    start = time.perf_counter()
+    proc = subprocess.run(command, cwd=project, env=env, capture_output=True, text=True, timeout=90)
+    wall = time.perf_counter() - start
+    (output / "stdout.log").write_text(proc.stdout)
+    (output / "stderr.log").write_text(proc.stderr)
+    observation = json.loads((output / "observation.json").read_text()) if (output / "observation.json").exists() else {}
+    result = {"command": command, "cwd": str(project), "environment": env, "returncode": proc.returncode, "wall_seconds": wall,
+        "whole": "pass" if proc.returncode == 0 else "fail", "body_calls": observation.get("body_calls"), "decision": observation.get("decision"), "reason": observation.get("reason"),
+        "setup_markers": sum(line == "NS_SETUP_EFFECT" for line in proc.stdout.splitlines()), "teardown_markers": sum(line == "NS_TEARDOWN_EFFECT" for line in proc.stdout.splitlines()),
+        "reports": observation.get("reports", []), "lookup_wall_seconds": observation.get("lookup_wall_seconds"), "stdout_sha256": sha(output / "stdout.log"), "stderr_sha256": sha(output / "stderr.log")}
+    save(output / "result.json", result)
+    return result, observation
+
+
+def issue(observation, signer, policy, cache_policy):
+    assert observation["exitstatus"] == 0
+    assert [r["phase"] for r in observation["reports"]] == ["setup", "call", "teardown"]
+    assert all(r["outcome"] == "passed" for r in observation["reports"])
+    assert observation["body_calls"] == 1 and observation["decision"] == "RUN"
+    key = contracts.TestExecutionKey.from_dict(observation["execution_key"])
+    pub = attest.RunnerPublicKey.from_public_key(signer.public_key())
+    receipt = contracts.TestPassReceipt(execution_key_cid=key.execution_key_id, locator_cid=key.locator_cid,
+        static_trace_root_cid=key.static_trace_root_cid, runtime_trace_root_cid=key.runtime_trace_root_cid,
+        completeness_receipt_cid=adapter.cid({"profile": "closed-enrollment", "observation": observation}),
+        dependency_forest_cid=key.repository_forest_cid, issuer_key_id=pub.cid, policy_cid=policy.cid,
+        trust_domain=policy.trust_domain, runner_identity="actual-local-pytest-subprocess-v1",
+        setup_duration_ms=round(observation["reports"][0]["duration_seconds"]*1000), call_duration_ms=round(observation["reports"][1]["duration_seconds"]*1000), teardown_duration_ms=round(observation["reports"][2]["duration_seconds"]*1000))
+    attestation = attest.attest_test_pass_receipt(receipt, private_key=signer, policy=policy,
+        candidate_context_cid=adapter.cid({"profile": "enrolled-pure-call-v1", "key": key.execution_key_id}))
+    public_inputs = {name: cache_policy[name] for name in ["policy_cid", "statement_cid", "circuit_cid", "verifying_key_cid", "proof_system_id"]}
+    public_inputs.update(receipt_cid=receipt.receipt_id, execution_key_cid=key.execution_key_id, issuer_id=policy.trust_domain, issuer_key_id=pub.cid, epoch="1", setup_outcome="pass", call_outcome="pass", teardown_outcome="pass")
+    certificate = contracts.TestProofCertificate(receipt_cid=receipt.receipt_id, execution_key_cid=key.execution_key_id,
+        statement_cid=cache_policy["statement_cid"], circuit_cid=cache_policy["circuit_cid"], verifying_key_cid=pub.cid,
+        proof_system_id=cache_policy["proof_system_id"], proof_artifact_cid=attestation.cid,
+        proof_digest=hashlib.sha256(attestation.canonical_bytes()).hexdigest(), issuer_id=policy.trust_domain, policy_cid=policy.cid,
+        epoch="1", public_inputs=public_inputs)
+    return {"receipt": receipt.to_dict(), "certificate": certificate.to_dict(), "attestation_hex": attestation.canonical_bytes().hex()}
+
+
+def restore(project):
+    project.mkdir(parents=True, exist_ok=True)
+    for name, value in BASE_FILES.items():
+        (project / name).write_text(value)
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-id", required=True)
+    args = parser.parse_args()
+    output = HERE / "runs" / args.run_id
+    output.mkdir(parents=True, exist_ok=False)
+    # Freeze executable bytes and matrix before first process; never overwrite a run.
+    for name in ["protocol.json", "run.py", "adapter.py"]:
+        (output / name).write_bytes((HERE / name).read_bytes())
+    protocol = json.loads((HERE / "protocol.json").read_text())
+    freeze = {"created_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), "inputs": {name: sha(HERE / name) for name in ["protocol.json", "run.py", "adapter.py"]}, "workspace_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(), "external_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ACCELERATE, text=True).strip(), "python": sys.version, "interpreter": sys.executable, "platform": platform.platform()}
+    save(output / "freeze.json", freeze)
+    project = output / "project"
+    restore(project)
+    enrollment = {name: sha(project / name) for name in ["arithmetic.py", "test_work.py", "conftest.py"]}
+    signer = Ed25519PrivateKey.generate()
+    public = attest.RunnerPublicKey.from_public_key(signer.public_key())
+    now = int(time.time())
+    key_record = attest.RunnerKeyRecord(public.cid, public.multicodec_bytes(), "1", now-60, now+86400)
+    policy = attest.RunnerTrustPolicy("ns-local-evaluation-only", "1", (key_record,))
+    cache_policy = {"policy_cid": policy.cid, "statement_cid": adapter.cid({"statement": "actual-cold-pytest-pass-under-enrolled-pure-call-profile"}), "circuit_cid": adapter.cid({"algorithm": "Ed25519-runner-attestation-no-Groth16"}), "verifying_key_cid": public.cid, "proof_system_id": "ed25519-trusted-runner-attestation", "trusted_issuer_ids": [policy.trust_domain], "allowed_epochs": ["1"]}
+    spec = {"mode": "cold", "enrollment": enrollment, "cache_policy": cache_policy, "trust_policy_hex": policy.canonical_bytes().hex()}
+    save(output / "profile.json", spec)
+    baseline, obs = run_process(project, output / "prime", spec)
+    if baseline["whole"] != "pass":
+        save(output / "summary.json", {"status": "priming_failed", "prime": baseline})
+        raise RuntimeError("actual cold priming failed; retained")
+    started = time.perf_counter()
+    bundle = issue(obs, signer, policy, cache_policy)
+    issuance_seconds = time.perf_counter()-started
+    save(output / "candidate.json", bundle)
+    rows = []
+    for case in protocol["cases"]:
+        name = case["id"]
+        restore(project)
+        env_changes = {}
+        warm = dict(spec, mode="warm", candidate=str(output / "candidate.json"))
+        if name == "direct_dependency":
+            (project / "arithmetic.py").write_text(BASE_FILES["arithmetic.py"].replace("return result", "return result + 1"))
+        elif name == "test_body":
+            (project / "test_work.py").write_text(BASE_FILES["test_work.py"].replace("sum(payload)", "sum(payload) + 1"))
+        elif name == "fixture_definition":
+            (project / "conftest.py").write_text(BASE_FILES["conftest.py"].replace("yield value", "yield value + (1,)"))
+        elif name == "fixture_data":
+            (project / "fixture_data.json").write_text("[0, 1]\n")
+        elif name == "configuration":
+            (project / "settings.json").write_text('{"offset": 1}\n')
+        elif name == "call_environment":
+            env_changes["NS_REUSE_FACTOR"] = "2"
+        elif name == "dependency_lock":
+            (project / "requirements.lock").write_text("python>=3.13\n")
+        elif name == "unknown_fixture_value":
+            (project / "conftest.py").write_text(BASE_FILES["conftest.py"].replace("yield value", "yield object()"))
+        elif name == "missing_candidate":
+            warm["candidate"] = None
+        elif name == "tampered_signature":
+            bad = copy.deepcopy(bundle)
+            attestation = attest.RunnerPassAttestation.from_bytes(bytes.fromhex(bundle["attestation_hex"]))
+            attestation = replace(attestation, signature=bytes([attestation.signature[0] ^ 1])+attestation.signature[1:])
+            bad["attestation_hex"] = attestation.canonical_bytes().hex()
+            bad["certificate"]["proof_digest"] = hashlib.sha256(attestation.canonical_bytes()).hexdigest()
+            bad["certificate"]["proof_artifact_cid"] = attestation.cid
+            save(output / "tampered_candidate.json", bad)
+            warm["candidate"] = str(output / "tampered_candidate.json")
+        elif name == "revoked_key":
+            warm["cache_policy"] = dict(cache_policy, revoked_issuer_ids=[policy.trust_domain])
+        elif name == "setup_failure":
+            env_changes["NS_REUSE_SETUP_FAIL"] = "1"
+        elif name == "teardown_failure_after_reuse":
+            env_changes["NS_REUSE_TEARDOWN_FAIL"] = "1"
+        reused, _ = run_process(project, output / name / "warm", warm, env_changes)
+        cold, _ = run_process(project, output / name / "cold_oracle", spec, env_changes)
+        matches = reused["decision"] == case["call"] and reused["whole"] == case["whole"] and cold["whole"] == case["whole"] and reused["setup_markers"] == cold["setup_markers"] == 1 and reused["teardown_markers"] == cold["teardown_markers"]
+        row = {"case": name, "expected": case, "warm": reused, "cold_oracle": cold, "matches_frozen_expectation": matches,
+            "false_whole_pass": reused["whole"] == "pass" and cold["whole"] != "pass"}
+        rows.append(row)
+        save(output / "cases.json", rows)
+        print(json.dumps({"case": name, "decision": reused["decision"], "whole": reused["whole"], "oracle": cold["whole"], "qualified": matches}), flush=True)
+    restore(project)
+    timing = []
+    for index in range(5):
+        arms = ["warm", "cold"] if index % 2 == 0 else ["cold", "warm"]
+        pair = {}
+        for arm in arms:
+            current = dict(spec, mode=arm, candidate=str(output / "candidate.json"))
+            pair[arm], _ = run_process(project, output / "timing" / str(index) / arm, current)
+        timing.append(pair)
+    save(output / "timing.json", timing)
+    # Unmodified production plugin probe uses the actual native path, with no
+    # service injection, no audit vocabulary mutation, no build/install effects.
+    native = []
+    for mode in ["write-only", "read-write"]:
+        result, _ = run_process(project, output / "native" / mode, dict(spec, mode=mode), native=True)
+        native.append(result)
+    save(output / "native_probe.json", native)
+    import_hashes = {name: {"path": str(Path(module.__file__).resolve()), "sha256": sha(Path(module.__file__))} for name, module in list(sys.modules.items()) if getattr(module, "__file__", None) and str(ROOT / "external") in str(module.__file__) and Path(module.__file__).is_file()}
+    save(output / "source_imports.json", import_hashes)
+    cold_total = sum(pair["cold"]["wall_seconds"] for pair in timing)
+    warm_total = sum(pair["warm"]["wall_seconds"] for pair in timing)
+    summary = {"status": "qualified" if all(row["matches_frozen_expectation"] for row in rows) else "qualification_failed", "case_count": len(rows), "matched_cases": sum(row["matches_frozen_expectation"] for row in rows), "false_whole_passes": sum(row["false_whole_pass"] for row in rows), "warm_call_reuses": sum(row["warm"]["decision"] == "SKIP" for row in rows), "prime_wall_seconds": baseline["wall_seconds"], "issuance_wall_seconds": issuance_seconds, "timing_pairs": len(timing), "cold_wall_total_seconds": cold_total, "warm_wall_total_seconds": warm_total, "warm_vs_cold_wall_reduction": 1-warm_total/cold_total, "timing_correct": all(pair["warm"]["decision"] == "SKIP" and pair["warm"]["whole"] == pair["cold"]["whole"] == "pass" for pair in timing), "model_calls": 0, "model_token_savings_claim": False, "population_false_reuse_rate_claim": False, "default_production_plugin_positive_reuse_claim": False, "source_import_count": len(import_hashes)}
+    save(output / "summary.json", summary)
+    print(json.dumps(summary, indent=2), flush=True)
+
+
+if __name__ == "__main__":
+    main()

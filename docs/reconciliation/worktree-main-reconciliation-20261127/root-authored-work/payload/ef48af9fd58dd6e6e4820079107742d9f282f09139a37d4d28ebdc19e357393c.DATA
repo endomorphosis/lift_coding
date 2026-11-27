@@ -1,0 +1,48 @@
+"""Recover fixed original controls from saved custody objects; expose hashes/counts only."""
+import copy,hashlib,importlib.util,json,os,shutil,subprocess,time,traceback
+from pathlib import Path
+H=Path(__file__).resolve().parent;C=H/'curator_custody';I=H.parents[1]/'integrated_v1'
+A_PATH=Path('/home/barberb/lift_coding/papers/completion/runtime_bootstrap/unblock_20260912/historical_adapter/adapter.py')
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def dump(p,x):p.write_text(json.dumps(x,sort_keys=True,indent=2)+'\n')
+def main():
+ spec=importlib.util.spec_from_file_location('historical_adapter_qualified',A_PATH);A=importlib.util.module_from_spec(spec);spec.loader.exec_module(A)
+ original=json.loads((C/'historical_registry.private.json').read_text());selected=json.loads((C/'selected_registry_rows.json').read_text());contracts=I/'public_contracts_v2/objectives-v1.json';assert sha(contracts)=='072fa95465ddb62a29e6b89fb44198eb50cfa1f4f035264b388d595614cb8dff'
+ objectives={x['task_id']:x for x in json.loads(contracts.read_text())['tasks']};ppfile=I/'public_issue_reproduction_v1/objective.json';pp=json.loads(ppfile.read_text());objectives[pp['task_id']]={'base_commit':pp['base_commit'],'repair_surface':pp['authorized_paths'],'new_public_objective':pp['statement'],'objective_sha256':hashlib.sha256(json.dumps(pp,sort_keys=True,separators=(',',':')).encode()).hexdigest(),'record_for_hash':pp,'authority':pp['authority_scope']}
+ for p,d in original['source_bindings'].items():assert sha(Path(p))==d
+ code=[A_PATH,A_PATH.with_name('cold_scorer.py')];source_bindings={str(p):sha(p) for p in code}
+ oldmask=os.umask(0o022)
+ try:
+  units={};rows=[]
+  for selectedrow in selected:
+   uid=selectedrow['task_id'];node=C/uid;obj=objectives[uid];m=copy.deepcopy(original['units'][uid]);assert m['source_archive']['pre_fix_commit']==obj['base_commit'] and m['allowed_edit_paths']==obj['repair_surface']
+   record=obj.get('record_for_hash',{k:v for k,v in obj.items() if k!='objective_sha256'});assert hashlib.sha256(json.dumps(record,sort_keys=True,separators=(',',':')).encode()).hexdigest()==obj['objective_sha256'];text_sha=hashlib.sha256(obj['new_public_objective'].encode()).hexdigest()
+   m['source_archive']['path']=str(node/'source.tar.gz');m['prompt']=obj['new_public_objective'];m['objective_record_sha256']=obj['objective_sha256'];m['objective_text_sha256']=text_sha;m['public_objective_authority']=obj['authority']
+   for key,item in m['custody_objects'].items():item['path']=str(C/'objects'/key);assert sha(Path(item['path']))==key
+   for kind in ['capture_plugin','dependency_wheel']:p=Path(m[kind]['path']);assert sha(p)==m[kind]['sha256'];source_bindings[str(p)]=sha(p)
+   assert m['scorer_driver_sha256']==source_bindings[str(code[1])]
+   material=node/'materialization_v4';material.mkdir(mode=0o700);source=material/'unfixed_source';prior=os.umask(0o022)
+   try:observed=A.archive_tree(node/'source.tar.gz',m['source_archive']['sha256'],source)
+   finally:os.umask(prior)
+   assert observed==m['full_source_files']
+   full=material/'full_reference_source';projected=material/'reference_source';shutil.copytree(source,full,symlinks=True);shutil.copytree(source,projected,symlinks=True)
+   env={**os.environ,'GIT_CEILING_DIRECTORIES':str(C),'GIT_CONFIG_NOSYSTEM':'1','GIT_CONFIG_GLOBAL':'/dev/null'}
+   for dest,patch,label in [(full,node/'reference.patch','full_reference'),(projected,node/'reference-source-projection.patch','source_projection')]:
+    for operation,flags in [('check',['--check']),('apply',[])]:
+     out=material/(label+'-'+operation+'.stdout');err=material/(label+'-'+operation+'.stderr');start=time.monotonic()
+     with out.open('wb') as o,err.open('wb') as e:r=subprocess.run(['git','apply',*flags,str(patch)],cwd=dest,env=env,stdout=o,stderr=e,timeout=30)
+     dump(material/(label+'-'+operation+'.json'),{'returncode':r.returncode,'seconds':time.monotonic()-start,'git_ceiling_directories':str(C)});assert r.returncode==0
+   assert all((full/p).read_bytes()==(projected/p).read_bytes() for p in m['allowed_edit_paths'])
+   for path in m['allowed_edit_paths']:(projected/path).chmod(m['full_source_files'][path]['mode'])
+   for path in m['allowed_edit_paths']:assert sha(projected/path)!=m['full_source_files'][path]['sha256']
+   basebinding=A.candidate_binding(source,m);fixedbinding=A.candidate_binding(projected,m);assert not basebinding['changed_paths'] and fixedbinding['changed_paths']==m['allowed_edit_paths']
+   dump(material/'manifest.json',m);dump(material/'unfixed_binding.json',basebinding);dump(material/'reference_binding.json',fixedbinding);units[uid]=m
+   rows.append({'task_id':uid,'base_commit':obj['base_commit'],'objective_record_sha256':obj['objective_sha256'],'objective_text_sha256':text_sha,'manifest_sha256':A.digest(m),'public_tree_entries':len(basebinding['files']),'base_source_tree_sha256':basebinding['sha256'],'reference_source_tree_sha256':fixedbinding['sha256'],'reference_projection_matches_full_reference_on_entire_authorized_source':True,'authorized_changed_file_count':len(fixedbinding['changed_paths']),'visible_count':m['expected_visible_collected_count'],'hidden_count':m['expected_hidden_count']})
+  dump(C/'selected_registry_v4.json',{'schema':'ns-historical-private-host-registry/v1','source_bindings':source_bindings,'units':units,'pilot_final_execution_admitted':False})
+ finally:os.umask(oldmask)
+ dump(H/'preparation-summary-v4.json',{'schema':'ns-original-acceptance-preparation/v1','prepared':True,'tasks':rows,'source_bindings':source_bindings,'private_registry_sha256':sha(C/'selected_registry_v4.json'),'public_objective_input_sha256':{str(p):sha(p) for p in [contracts,ppfile]},'runner_sha256':sha(Path(__file__)),'image_id':A.IMAGE,'docker_endpoint':'unix:///var/run/docker.sock','provider_calls':0,'grader_calls':0,'original_reference_projection_explicit':True})
+ print(json.dumps({'prepared':True,'tasks':rows,'grader_calls':0},sort_keys=True))
+if __name__=='__main__':
+ try:main()
+ except Exception:
+  (C/'preparation-failure-v4.txt').write_text(traceback.format_exc());(C/'preparation-failure-v4.txt').chmod(0o600);dump(H/'preparation-failure-v4.json',{'failed':True,'evidence_sha256':sha(C/'preparation-failure-v4.txt'),'private_diagnostic_retained':True,'provider_calls':0,'grader_calls':0});print('Preparation failed; private diagnostic retained.');raise SystemExit(1)

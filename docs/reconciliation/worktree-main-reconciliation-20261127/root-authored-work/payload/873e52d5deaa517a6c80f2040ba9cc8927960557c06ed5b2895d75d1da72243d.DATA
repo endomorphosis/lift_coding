@@ -1,0 +1,390 @@
+"""Data-only observer fixtures exercise live budget control, never child origin."""
+from copy import copy, deepcopy
+import hashlib
+import json
+from pathlib import Path
+from threading import Event
+
+import pytest
+
+
+def _module():
+    from benchmarks.agent_supervisor.container_coding import terminal_checked_worker_budget
+    return terminal_checked_worker_budget
+
+
+def _cid(name):
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_structured
+    return cid_for_structured({"authored_untrusted_worker_budget_fixture": name})
+
+
+def _owner(*, fixture_view_name="view", **limits):
+    from ipfs_datasets_py.duckdb_control.codebase_catalog import CodebaseHead
+    module = _module().budgets
+    snapshot = _cid("snapshot")
+    head = CodebaseHead("repository:authored-worker-budget", 1, _cid("manifest"), snapshot,
+        f"rev:repository:authored-worker-budget:snapshot:{snapshot}", _cid("receipt"))
+    binding = module.build_context_budget_binding(head=head, view_id=_cid(fixture_view_name),
+        reference_basis_cid=_cid("reference"), native_root_cid=_cid("root"),
+        capsule_set_id=_cid("set"), state_cid=_cid("state"))
+    return module.create_semantic_context_budget(binding=binding, policy=module.ContextBudgetPolicy(**limits))
+
+
+def _arguments(**changes):
+    return {"event_id": "initial:1", "native_prompt": "Exact original native task α.\n",
+        "worker_workspace": Path("/opt/ipfs-supervisor/worktrees/authored-data-only"),
+        "router_prompt": "Exact original native task α.\nLiteral public instruction.\n",
+        "checked_suffix": "", "task_cid": _cid("task"),
+        "instruction_receipt": {"schema": "supervisor-public-instruction-inclusion@1",
+            "manifest_signature_verified": True, "verbatim_utf8": True, "source_freshness_verified": True,
+            "semantic_minification_applied": False, "historical_replay": False, "completion_authority": False,
+            "scope_expansion_authority": False, "artifact_sha256": "2" * 64, "source_sha256": "3" * 64,
+            "block_sha256": "4" * 64, "task_cid": _cid("task")},
+        "boundary": {"schema": "supervisor-container-worker-boundary@1", "container_id": "1" * 64,
+            "image_id": "sha256:" + "7" * 64, "namespaces": {"mnt": "mnt:[123]", "pid": "pid:[124]", "net": "net:[125]"},
+            "owner_uid": 1000, "worker_uid": 1001, "purpose": "coding", "manifest_sha256": "5" * 64,
+            "completion_authority": False}, "boundary_sha256": "5" * 64, **changes}
+
+
+def _prepare(owner, **changes):
+    return _module().prepare_checked_worker_budget_event(budget_owner=owner, **_arguments(**changes))
+
+
+def _receipt(preparation, **changes):
+    material, basis = preparation["materialization"], preparation["basis"]
+    value = {"schema": "supervisor-model-input-observation@1", "observation_id": "1" * 32,
+        "status": "observed", "error_type": None, "requested_provider": "codex_cli", "requested_model": "fixture",
+        "reasoning_effort": "high", "purpose": "coding", "workspace": basis["worker_workspace"],
+        "semantic_transport": "native", "intent_requirements_transport": "expanded", "code_retrieval_codec": "expanded",
+        "code_retrieval_wire_delivery": "inline", "code_retrieval_projection": None,
+        "semantic_context_verification": {"schema": "semantic-router-source-verification@1", "freshness_checked": True,
+            "task_id": "authored-task", "scope_cid": "authored-scope", "semantic_root_cid": "authored-root",
+            "semantic_sha256": "f" * 64, "native_prompt_sha256": material["native_prompt"]["sha256"],
+            "native_prompt_bytes": material["native_prompt"]["bytes"]},
+        "semantic_translation": None, "doctor_residual_context": None, "public_instruction": deepcopy(basis["instruction_receipt"]),
+        "reviewed_source_nomination_context": None, "timeout_seconds": 90, "requested_output_tokens": 4096,
+        "provider_attempted": False, "router_calls": 0, "usage": None, "native_rollout_usage": None,
+        "execution_authority": False, "proof_authority": False, "completion_authority": False,
+        "external_container_boundary": deepcopy(basis["boundary"]), "final_custody_guard_verified": True,
+        "wire_delivery_post_observation_verified": None, "wire_delivery_cleanup_status": None, "seconds": 1.23456789012345}
+    for prefix in ("native_prompt", "router_prompt", "model_prompt", "workspace_advisory"):
+        for metric in ("sha256", "bytes"):
+            value[prefix + "_" + metric] = material[prefix][metric]
+    value.update(prompt_sha256=value["native_prompt_sha256"], prompt_bytes=value["native_prompt_bytes"], **changes)
+    return value
+
+
+def _launch(preparation, **changes):
+    return {"returncode": 75, "stdout": json.dumps(_receipt(preparation, **changes), ensure_ascii=False), "stderr": ""}
+
+
+def _checked_prepare(owner):
+    from ipfs_accelerate_py.agent_supervisor.runtime import checked_audit_context as checked
+    arguments = _arguments()
+    arguments["instruction_receipt"].update(task_id="authored-task", context_cid=_cid("instruction-context"),
+        source_path="task.txt", source_bytes=28)
+    arguments["checked_suffix"] = checked.PREFIX + '{"authored_untrusted_fixture":true}' + checked.SUFFIX
+    return _module().prepare_checked_worker_budget_event(budget_owner=owner, **arguments)
+
+
+def _checked_receipt(owner, preparation):
+    from ipfs_accelerate_py.agent_supervisor.runtime import checked_audit_context as checked
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_bytes
+    receipt = _receipt(preparation)
+    basis = preparation["basis"]; instruction = basis["instruction_receipt"]
+    context = basis["checked_suffix"][len(checked.PREFIX):-len(checked.SUFFIX)]
+    signed = {"path": instruction["source_path"], "sha256": instruction["source_sha256"], "bytes": instruction["source_bytes"]}
+    inclusion = {"schema": checked.INCLUSION_SCHEMA, "artifact": "/authored/.runtime/checked-audit-context/fixture.json",
+        "artifact_sha256": "9" * 64, "artifact_bytes": 1000, "extension_cid": _cid("extension"),
+        "task_id": "authored-task", "task_cid": basis["task_cid"], "admission_manifest_cid": _cid("admission-manifest"),
+        "admission_cid": _cid("admission"), "native_prompt_sha256": receipt["native_prompt_sha256"],
+        "native_prompt_bytes": receipt["native_prompt_bytes"], "instruction_context_cid": instruction["context_cid"],
+        "instruction_artifact_sha256": instruction["artifact_sha256"], "instruction_source_path": instruction["source_path"],
+        "instruction_source_sha256": instruction["source_sha256"], "instruction_source_bytes": instruction["source_bytes"],
+        "checked_binding": owner.binding, "native_semantic": deepcopy(receipt["semantic_context_verification"]),
+        "budget_policy": owner.policy.to_dict(), "context_sha256": hashlib.sha256(context.encode()).hexdigest(),
+        "context_bytes": len(context.encode()), "suffix_sha256": hashlib.sha256(basis["checked_suffix"].encode()).hexdigest(),
+        "suffix_bytes": len(basis["checked_suffix"].encode()),
+        "source_scope": [{"path": path, "sha256": "a" * 64, "bytes": 1, "source_cid": cid_for_bytes(b"x")}
+            for path in ("callee.py", "caller.py", "dynamic.py")],
+        "signed_instruction": signed, "worker_binding": {"workspace": basis["worker_workspace"], "boundary": deepcopy(basis["boundary"])},
+        "inventory_domains": deepcopy(checked.INVENTORY_DOMAINS), "scope": checked.SCOPE,
+        "manifest_signature_verified": True, "source_inventory_join_verified": True, "packet_bytes_bound": True,
+        **{key: False for key in checked.AUTHORITY}}
+    receipt.update(schema="supervisor-model-input-observation@2", checked_context=inclusion)
+    return receipt
+
+
+def _checked_launch(owner, preparation):
+    return {"returncode": 75, "stdout": json.dumps(_checked_receipt(owner, preparation)), "stderr": ""}
+
+
+def _transact(owner, preparation, callback=None, **changes):
+    return _module().transact_checked_worker_observation(budget_owner=owner, preparation=preparation,
+        launch_observer=callback or (lambda: _launch(preparation)), **changes)
+
+
+def _aborted(owner):
+    snapshot = owner.snapshot()
+    assert snapshot["records"][-1]["status"] == "aborted"
+    assert snapshot["totals"]["model_calls"] >= 1
+    return snapshot
+
+
+def test_native_coding_render_and_exact_pinned_cost_are_complete_and_non_authoritative():
+    owner = _owner(); preparation = _prepare(owner)
+    event = preparation["event"]; basis = preparation["basis"]
+    expected, advisory = _module().native_runner.render_model_prompt(prompt=basis["router_prompt"],
+        purpose="coding", workspace=Path(basis["worker_workspace"]), semantic_transport=False, code_retrieval_projected=False)
+    assert event["new_content"] == owner.measure_text(basis["router_prompt"])
+    assert event["rendered_input"] == owner.measure_text(expected)
+    assert expected == advisory + event["new_content"]["text"]
+    assert event["rendered_input"]["tokens"] > event["new_content"]["tokens"]
+    assert owner.snapshot()["records"] == []
+    assert all(preparation["materialization"][key] is False for key in _module().AUTHORITY)
+    owner.close()
+
+
+def test_reservation_precedes_each_guard_and_launch_receipt_preserves_float_and_denies_origin():
+    owner = _owner(); preparation = _prepare(owner); calls = []
+    def guard():
+        assert owner.snapshot()["records"][-1]["status"] == "reserved"
+        calls.append("guard")
+    def launch():
+        assert owner.snapshot()["totals"]["rendered_input_tokens"] == preparation["event"]["rendered_input"]["tokens"]
+        calls.append("launch"); return _launch(preparation)
+    result = _transact(owner, preparation, launch, current_guard=guard)
+    assert calls == ["guard", "launch", "guard"]
+    assert result["budget_snapshot"]["records"][-1]["status"] == "committed"
+    observation = result["observation"]
+    raw = observation["canonical_json"].encode()
+    assert observation["sha256"] == hashlib.sha256(raw).hexdigest() and observation["bytes"] == len(raw)
+    assert json.loads(raw) == _receipt(preparation)
+    assert json.loads(raw)["seconds"] == 1.23456789012345
+    assert result["worker_receipt_data_validated"] is True
+    assert result["worker_origin_independently_verified"] is False
+    assert result["provider_adapter_calls"] == 0 and result["provider_usage"] is None
+    assert all(result[key] is False for key in _module().AUTHORITY)
+    owner.close()
+
+
+@pytest.mark.parametrize("dimension", ["rendered_input_tokens", "new_content_tokens", "rendered_input_bytes", "new_content_bytes", "model_calls", "events"])
+def test_overbudget_never_launches_or_calls_guard(dimension):
+    owner = _owner(**{"max_" + dimension: 0}); preparation = _prepare(owner); calls = []; before = owner.snapshot()
+    with pytest.raises(_module().budgets.SemanticContextBudgetExceeded):
+        _transact(owner, preparation, lambda: calls.append("launch"), current_guard=lambda: calls.append("guard"))
+    assert calls == [] and owner.snapshot() == before
+    owner.close()
+
+
+def test_failed_observation_retry_charges_complete_input_again_and_keeps_attempt_history():
+    owner = _owner(); first = _prepare(owner)
+    with pytest.raises(RuntimeError):
+        _transact(owner, first, lambda: (_ for _ in ()).throw(RuntimeError("launch failure")))
+    spent = _aborted(owner)
+    retry = _prepare(owner, event_id="retry:1", kind="retry", retry_of=first["event"]["event_id"])
+    result = _transact(owner, retry)
+    assert retry["event"]["history_event_ids"] == ["initial:1"]
+    assert retry["event"]["new_content"] == first["event"]["new_content"]
+    assert retry["event"]["rendered_input"] == first["event"]["rendered_input"]
+    for dimension in ("rendered_input_tokens", "new_content_tokens", "rendered_input_bytes", "new_content_bytes"):
+        assert result["budget_snapshot"]["totals"][dimension] == 2 * spent["totals"][dimension]
+    assert result["budget_snapshot"]["totals"]["retry_calls"] == 1
+    owner.close()
+
+
+def test_exact_total_boundary_rejects_retry_before_launch_and_does_not_refund_first_attempt():
+    sample = _owner(); tokens = _prepare(sample)["event"]["rendered_input"]["tokens"]; sample.close()
+    owner = _owner(max_rendered_input_tokens=tokens); first = _prepare(owner); _transact(owner, first)
+    retry = _prepare(owner, event_id="retry:1", kind="retry", retry_of="initial:1"); calls = []
+    with pytest.raises(_module().budgets.SemanticContextBudgetExceeded):
+        _transact(owner, retry, lambda: calls.append("launch"))
+    assert calls == [] and owner.snapshot()["totals"]["rendered_input_tokens"] == tokens
+    owner.close()
+
+
+@pytest.mark.parametrize("field,value", [("native_prompt_sha256", "a" * 64), ("router_prompt_sha256", "b" * 64),
+    ("model_prompt_sha256", "c" * 64), ("workspace_advisory_sha256", "d" * 64),
+    ("workspace", "/opt/ipfs-supervisor/worktrees/foreign"), ("router_calls", 1),
+    ("provider_attempted", True), ("usage", {"input_tokens": 0}), ("seconds", True),
+    ("seconds", float("nan")), ("execution_authority", True), ("schema", "unknown@2"),
+    ("intent_requirements_transport", "compact"), ("code_retrieval_wire_delivery", "materialized")])
+def test_observed_mismatch_or_authority_aborts_without_refund(field, value):
+    owner = _owner(); preparation = _prepare(owner)
+    with pytest.raises(ValueError):
+        _transact(owner, preparation, lambda: _launch(preparation, **{field: value}))
+    assert _aborted(owner)["totals"]["rendered_input_tokens"] == preparation["event"]["rendered_input"]["tokens"]
+    owner.close()
+
+
+@pytest.mark.parametrize("mutation", ["instruction", "boundary", "missing", "extra", "duplicate", "two_receipts", "prefix", "returncode", "bool_returncode", "stderr_size", "stdout_size", "refusal"])
+def test_closed_launch_receipt_and_all_public_bindings_are_required(mutation):
+    owner = _owner(); preparation = _prepare(owner); launch = _launch(preparation); receipt = json.loads(launch["stdout"])
+    if mutation == "instruction": receipt["public_instruction"]["artifact_sha256"] = "6" * 64
+    elif mutation == "boundary": receipt["external_container_boundary"]["container_id"] = "foreign-container"
+    elif mutation == "missing": receipt.pop("seconds")
+    elif mutation == "extra": receipt["fake_child_origin"] = True
+    elif mutation == "refusal": receipt.update(status="refused", error_type="ValueError", final_custody_guard_verified=False)
+    else: receipt = None
+    if receipt is not None: launch["stdout"] = json.dumps(receipt)
+    elif mutation == "duplicate": launch["stdout"] = launch["stdout"][:-1] + ',"seconds":2}'
+    elif mutation == "two_receipts": launch["stdout"] += "\n" + launch["stdout"]
+    elif mutation == "prefix": launch["stdout"] = "worker log\n" + launch["stdout"]
+    elif mutation == "returncode": launch["returncode"] = 0
+    elif mutation == "bool_returncode": launch["returncode"] = True
+    elif mutation == "stderr_size": launch["stderr"] = "x" * 65537
+    elif mutation == "stdout_size": launch["stdout"] = " " * 65537
+    with pytest.raises(ValueError): _transact(owner, preparation, lambda: launch)
+    _aborted(owner); owner.close()
+
+
+@pytest.mark.parametrize("mutation", ["token", "binding", "source", "suffix", "snapshot", "head", "extra"])
+def test_preparation_strict_replay_rejects_forgery_before_launch(mutation):
+    owner = _owner(); preparation = _prepare(owner); calls = []
+    if mutation == "token": preparation["event"]["rendered_input"]["tokens"] += 1
+    elif mutation == "binding": preparation["event"]["binding_cid"] = _cid("foreign")
+    elif mutation == "source": preparation["basis"]["native_prompt"] += "changed"
+    elif mutation == "suffix": preparation["basis"]["checked_suffix"] = "changed checked facts"
+    elif mutation == "snapshot": preparation["owner_snapshot_cid"] = _cid("foreign")
+    elif mutation == "head": preparation["materialization"]["current_owner_verified"] = True
+    elif mutation == "extra": preparation["launch_authority"] = True
+    with pytest.raises(ValueError): _transact(owner, preparation, lambda: calls.append("launch"))
+    assert calls == [] and owner.snapshot()["records"] == []
+    owner.close()
+
+
+def test_late_preparation_mutation_aborts_before_launch_after_guard():
+    owner = _owner(); preparation = _prepare(owner); calls = []
+    def guard(): preparation["basis"]["router_prompt"] += "changed"
+    with pytest.raises(ValueError, match="changed before observer"):
+        _transact(owner, preparation, lambda: calls.append("launch"), current_guard=guard)
+    assert calls == []; _aborted(owner); owner.close()
+
+
+def test_observer_callback_mutation_cannot_commit_a_valid_receipt_with_changed_preparation():
+    owner = _owner(); preparation = _prepare(owner)
+    def launch():
+        result = _launch(preparation)
+        preparation["event"]["new_content"]["text"] += "changed during callback"
+        return result
+    with pytest.raises(ValueError, match="changed during observation"):
+        _transact(owner, preparation, launch)
+    _aborted(owner); owner.close()
+
+
+def test_reentrant_observation_never_enters_another_launch_callback():
+    owner = _owner(); preparation = _prepare(owner); calls = []
+    def launch():
+        calls.append("outer")
+        with pytest.raises(ValueError, match="unfinished reservation"):
+            _transact(owner, preparation, lambda: calls.append("inner"))
+        return _launch(preparation)
+    result = _transact(owner, preparation, launch)
+    assert calls == ["outer"] and result["budget_snapshot"]["totals"]["model_calls"] == 1
+    owner.close()
+
+
+@pytest.mark.parametrize("phase", ["before", "guard", "launch"])
+def test_cancellation_before_and_after_reservation_keeps_correct_spend(phase):
+    owner = _owner(); preparation = _prepare(owner); cancel = Event(); calls = []
+    if phase == "before": cancel.set()
+    def guard():
+        calls.append("guard")
+        if phase == "guard": cancel.set()
+    def launch():
+        calls.append("launch"); cancel.set(); return _launch(preparation)
+    with pytest.raises(ValueError):
+        _transact(owner, preparation, launch, current_guard=guard, cancel_event=cancel)
+    if phase == "before": assert calls == [] and owner.snapshot()["records"] == []
+    else:
+        _aborted(owner)
+        assert ("launch" in calls) is (phase == "launch")
+    owner.close()
+
+
+@pytest.mark.parametrize("phase", ["before_launch", "after_receipt"])
+def test_current_guard_failure_is_charged_and_gates_launch_or_commit(phase):
+    owner = _owner(); preparation = _prepare(owner); guards = []; calls = []
+    def guard():
+        guards.append(1)
+        if len(guards) == (1 if phase == "before_launch" else 2): raise RuntimeError("original source changed")
+    def launch(): calls.append(1); return _launch(preparation)
+    with pytest.raises(RuntimeError): _transact(owner, preparation, launch, current_guard=guard)
+    assert bool(calls) is (phase == "after_receipt")
+    _aborted(owner); owner.close()
+
+
+def test_owner_snapshot_and_copied_owner_never_authorize_launch():
+    owner = _owner(); preparation = _prepare(owner); calls = []
+    with pytest.raises(ValueError):
+        _module().transact_checked_worker_observation(budget_owner=owner.snapshot(), preparation=preparation,
+            launch_observer=lambda: calls.append(1))
+    with pytest.raises(ValueError): copy(owner)
+    with pytest.raises(ValueError): deepcopy(owner)
+    assert calls == []
+    owner.close()
+    with pytest.raises(ValueError): _transact(owner, preparation, lambda: calls.append(1))
+
+
+def test_changed_owner_history_and_foreign_binding_refuse_before_launch():
+    owner = _owner(); preparation = _prepare(owner); _transact(owner, preparation); calls = []
+    with pytest.raises(ValueError): _transact(owner, preparation, lambda: calls.append(1))
+    assert calls == []; owner.close()
+    owner = _owner(); preparation = _prepare(owner)
+    foreign = _owner(fixture_view_name="foreign")
+    with pytest.raises(ValueError): _transact(foreign, preparation, lambda: calls.append(1))
+    assert calls == [] and foreign.snapshot()["records"] == []
+    owner.close(); foreign.close()
+
+
+def test_checked_suffix_cannot_commit_using_legacy_receipt_without_inclusion():
+    owner = _owner(); preparation = _prepare(owner, checked_suffix="\nComplete checked audit packet.\n")
+    assert preparation["event"]["new_content"]["text"].endswith("Complete checked audit packet.\n")
+    with pytest.raises(ValueError, match="versioned checked-context"):
+        _transact(owner, preparation)
+    _aborted(owner); owner.close()
+
+
+def test_native_versioned_checked_inclusion_binds_exact_suffix_budget_policy_and_worker_bytes():
+    owner = _owner(); preparation = _checked_prepare(owner)
+    from ipfs_accelerate_py.agent_supervisor.runtime.model_input_observation_receipt import validate_model_input_observation
+    assert validate_model_input_observation(_checked_receipt(owner, preparation))["schema"] == "supervisor-model-input-observation@2"
+    result = _transact(owner, preparation, lambda: _checked_launch(owner, preparation))
+    receipt = json.loads(result["observation"]["canonical_json"])
+    assert receipt["checked_context"]["checked_binding"] == owner.binding
+    assert receipt["checked_context"]["budget_policy"] == owner.policy.to_dict()
+    assert receipt["checked_context"]["suffix_bytes"] == len(preparation["basis"]["checked_suffix"].encode())
+    assert result["worker_origin_independently_verified"] is False
+    assert result["proof_authority"] is False and result["provider_usage"] is None
+    owner.close()
+
+
+@pytest.mark.parametrize("mutation", ["suffix_sha", "suffix_bytes", "context_sha", "context_bytes", "policy", "head",
+    "view", "worker_workspace", "worker_boundary", "semantic_scope", "task", "source_instruction"])
+def test_checked_inclusion_does_not_rebind_an_exact_original_budget_or_context(mutation):
+    owner = _owner(); preparation = _checked_prepare(owner); receipt = _checked_receipt(owner, preparation)
+    inclusion = receipt["checked_context"]
+    if mutation == "suffix_sha": inclusion["suffix_sha256"] = "b" * 64
+    elif mutation == "suffix_bytes": inclusion["suffix_bytes"] += 1
+    elif mutation == "context_sha": inclusion["context_sha256"] = "b" * 64
+    elif mutation == "context_bytes": inclusion["context_bytes"] += 1
+    elif mutation == "policy": inclusion["budget_policy"]["max_model_calls"] += 1
+    elif mutation == "head": inclusion["checked_binding"]["head"]["generation"] += 1
+    elif mutation == "view": inclusion["checked_binding"]["view_id"] = _cid("foreign")
+    elif mutation == "worker_workspace": inclusion["worker_binding"]["workspace"] = "/opt/ipfs-supervisor/worktrees/foreign"
+    elif mutation == "worker_boundary": inclusion["worker_binding"]["boundary"]["container_id"] = "b" * 64
+    elif mutation == "semantic_scope": inclusion["native_semantic"]["scope_cid"] = "foreign-scope"
+    elif mutation == "task": inclusion["task_cid"] = _cid("foreign")
+    elif mutation == "source_instruction": inclusion["instruction_source_sha256"] = "b" * 64
+    with pytest.raises(ValueError):
+        _transact(owner, preparation, lambda: {"returncode": 75, "stdout": json.dumps(receipt), "stderr": ""})
+    _aborted(owner); owner.close()
+
+
+@pytest.mark.parametrize("changes", [{"worker_workspace": Path("relative")}, {"worker_workspace": "/absolute/string"},
+    {"router_prompt": "Missing original task"}, {"native_prompt": ""}, {"boundary_sha256": "bad"},
+    {"task_cid": _cid("foreign")}, {"kind": "expansion"}, {"checked_suffix": "x" * 256001}])
+def test_invalid_preparation_rejected_without_spend(changes):
+    owner = _owner()
+    with pytest.raises(ValueError): _prepare(owner, **changes)
+    assert owner.snapshot()["records"] == []; owner.close()

@@ -1,0 +1,270 @@
+import ObjectiveContainerCompiler
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+
+Successful structural compilation preserves independent named and intrinsic
+exact-real interpretation for the full compositional container language.
+The only main theorem premise is the actual successful compiler equation.
+No desired objective, gradient, evaluation, or convergence equation is stored
+in source syntax, target IR, the compiler, or its acceptance criterion.
+
+These prospective theorem bodies have not been checked. Even qualification
+would leave external decoder/source-AST correspondence, Python arithmetic,
+preparation, original whole objective/gradient equivalence and convergence open.
+-/
+
+namespace RankerObjectiveContainerLanguage
+
+noncomputable section
+
+open RankerObjectiveIR (SliceError mapOne mapTwo mapThree applyOne)
+open RankerObjectivePrefixIR (Ty Context Schema Environment namesFromScope
+  namesFromScope_extend contextNames contextUnique)
+
+private theorem oneAccepted {α β : Type} (f : α → β)
+    (input : Except SliceError α) (output : β) (accepted : mapOne f input = .ok output) :
+    ∃ value, input = .ok value ∧ output = f value := by
+  cases input with
+  | error problem => simp [mapOne] at accepted
+  | ok value => exact ⟨value, rfl, (Except.ok.inj accepted).symm⟩
+
+private theorem twoAccepted {α β γ : Type} (f : α → β → γ)
+    (left : Except SliceError α) (right : Except SliceError β) (output : γ)
+    (accepted : mapTwo f left right = .ok output) :
+    ∃ a b, left = .ok a ∧ right = .ok b ∧ output = f a b := by
+  cases left with
+  | error problem => simp [mapTwo] at accepted
+  | ok a =>
+    cases right with
+    | error problem => simp [mapTwo] at accepted
+    | ok b => exact ⟨a, b, rfl, rfl, (Except.ok.inj accepted).symm⟩
+
+private theorem threeAccepted {α β γ δ : Type} (f : α → β → γ → δ)
+    (first : Except SliceError α) (second : Except SliceError β) (third : Except SliceError γ)
+    (output : δ) (accepted : mapThree f first second third = .ok output) :
+    ∃ a b c, first = .ok a ∧ second = .ok b ∧ third = .ok c ∧ output = f a b c := by
+  cases first with
+  | error problem => simp [mapThree] at accepted
+  | ok a =>
+    cases second with
+    | error problem => simp [mapThree] at accepted
+    | ok b =>
+      cases third with
+      | error problem => simp [mapThree] at accepted
+      | ok c => exact ⟨a, b, c, rfl, rfl, rfl, (Except.ok.inj accepted).symm⟩
+
+private theorem compileExprAux_sound (context : Context) (environment : Environment context)
+    {τ : Ty} (source : SourceExpr τ) (program : Expr context τ)
+    (accepted : compileExprAux context source = .ok program) :
+    evalSourceExpr (namesFromScope environment) source = evalExpr environment program := by
+  induction source generalizing context with
+  | leaf value =>
+    rcases oneAccepted _ _ _ accepted with ⟨valueProgram, valueAccepted, rfl⟩
+    exact RankerObjectivePrefixIR.compile_term_sound context environment value valueProgram valueAccepted
+  | scalarUnary op value ih =>
+    rcases oneAccepted _ _ _ accepted with ⟨valueProgram, valueAccepted, rfl⟩
+    simp only [evalSourceExpr, evalExpr]
+    rw [ih context environment valueProgram valueAccepted]
+  | scalarBinary op left right leftIH rightIH =>
+    rcases twoAccepted _ _ _ _ accepted with
+      ⟨leftProgram, rightProgram, leftAccepted, rightAccepted, rfl⟩
+    simp only [evalSourceExpr, evalExpr]
+    rw [leftIH context environment leftProgram leftAccepted, rightIH context environment rightProgram rightAccepted]
+  | ifNonneg condition thenBranch elseBranch conditionIH thenIH elseIH =>
+    rcases threeAccepted _ _ _ _ _ accepted with
+      ⟨conditionProgram, thenProgram, elseProgram, conditionAccepted, thenAccepted, elseAccepted, rfl⟩
+    simp only [evalSourceExpr, evalExpr]
+    rw [conditionIH context environment conditionProgram conditionAccepted,
+      thenIH context environment thenProgram thenAccepted, elseIH context environment elseProgram elseAccepted]
+  | lengthVector values ih =>
+    rcases oneAccepted _ _ _ accepted with ⟨valuesProgram, valuesAccepted, rfl⟩
+    simp only [evalSourceExpr, evalExpr]
+    rw [ih context environment valuesProgram valuesAccepted]
+  | lengthMatrix values ih =>
+    rcases oneAccepted _ _ _ accepted with ⟨valuesProgram, valuesAccepted, rfl⟩
+    simp only [evalSourceExpr, evalExpr]
+    rw [ih context environment valuesProgram valuesAccepted]
+  | natToScalar value ih =>
+    rcases oneAccepted _ _ _ accepted with ⟨valueProgram, valueAccepted, rfl⟩
+    simp only [evalSourceExpr, evalExpr]
+    rw [ih context environment valueProgram valueAccepted]
+  | indexVector values index valuesIH indexIH =>
+    rcases twoAccepted _ _ _ _ accepted with
+      ⟨valuesProgram, indexProgram, valuesAccepted, indexAccepted, rfl⟩
+    simp only [evalSourceExpr, evalExpr]
+    rw [valuesIH context environment valuesProgram valuesAccepted, indexIH context environment indexProgram indexAccepted]
+  | fsumExact values ih =>
+    rcases oneAccepted _ _ _ accepted with ⟨valuesProgram, valuesAccepted, rfl⟩
+    simp only [evalSourceExpr, evalExpr]
+    rw [ih context environment valuesProgram valuesAccepted]
+  | @mapRows rows columns binder values body valuesIH bodyIH =>
+    by_cases repeated : binder ∈ contextNames context
+    · simp [compileExprAux, repeated] at accepted
+    · simp only [compileExprAux, repeated, if_false] at accepted
+      rcases twoAccepted _ _ _ _ accepted with
+        ⟨valuesProgram, bodyProgram, valuesAccepted, bodyAccepted, rfl⟩
+      simp only [evalSourceExpr, evalExpr]
+      rw [valuesIH context environment valuesProgram valuesAccepted]
+      have bodies : (fun row => evalSourceExpr (RankerObjectivePrefixIR.extendNames (τ := .vector columns) binder row
+          (namesFromScope environment)) body) =
+          (fun row => evalExpr (Environment.cons (name := binder) (τ := .vector columns) row environment) bodyProgram) := by
+        funext row
+        rw [← namesFromScope_extend (τ := .vector columns) environment binder row]
+        exact bodyIH ((binder, .vector columns) :: context)
+          (.cons (name := binder) (τ := .vector columns) row environment) bodyProgram bodyAccepted
+      rw [bodies]
+  | @mapVector length binder values body valuesIH bodyIH =>
+    by_cases repeated : binder ∈ contextNames context
+    · simp [compileExprAux, repeated] at accepted
+    · simp only [compileExprAux, repeated, if_false] at accepted
+      rcases twoAccepted _ _ _ _ accepted with
+        ⟨valuesProgram, bodyProgram, valuesAccepted, bodyAccepted, rfl⟩
+      simp only [evalSourceExpr, evalExpr]
+      rw [valuesIH context environment valuesProgram valuesAccepted]
+      have bodies : (fun value => evalSourceExpr (RankerObjectivePrefixIR.extendNames (τ := .scalar) binder value
+          (namesFromScope environment)) body) =
+          (fun value => evalExpr (Environment.cons (name := binder) (τ := .scalar) value environment) bodyProgram) := by
+        funext value
+        rw [← namesFromScope_extend (τ := .scalar) environment binder value]
+        exact bodyIH ((binder, .scalar) :: context)
+          (.cons (name := binder) (τ := .scalar) value environment) bodyProgram bodyAccepted
+      rw [bodies]
+  | @zipMap leftLength rightLength leftName rightName left right body leftIH rightIH bodyIH =>
+    by_cases repeated : leftName = rightName ∨ leftName ∈ contextNames context ∨ rightName ∈ contextNames context
+    · simp [compileExprAux, repeated] at accepted
+    · simp only [compileExprAux, repeated, if_false] at accepted
+      rcases threeAccepted _ _ _ _ _ accepted with
+        ⟨leftProgram, rightProgram, bodyProgram, leftAccepted, rightAccepted, bodyAccepted, rfl⟩
+      simp only [evalSourceExpr, evalExpr]
+      rw [leftIH context environment leftProgram leftAccepted, rightIH context environment rightProgram rightAccepted]
+      have bodies : (fun a b => evalSourceExpr (RankerObjectivePrefixIR.extendNames (τ := .scalar) rightName b
+          (RankerObjectivePrefixIR.extendNames (τ := .scalar) leftName a (namesFromScope environment))) body) =
+          (fun a b => evalExpr (Environment.cons (name := rightName) (τ := .scalar) b
+            (Environment.cons (name := leftName) (τ := .scalar) a environment)) bodyProgram) := by
+        funext a b
+        rw [← namesFromScope_extend (τ := .scalar) environment leftName a,
+          ← namesFromScope_extend (τ := .scalar)
+            (.cons (name := leftName) (τ := .scalar) a environment) rightName b]
+        exact bodyIH ((rightName, .scalar) :: (leftName, .scalar) :: context)
+          (.cons (name := rightName) (τ := .scalar) b
+            (.cons (name := leftName) (τ := .scalar) a environment)) bodyProgram bodyAccepted
+      rw [bodies]
+  | @zipRowsMap leftLength rows columns scalarName rowName left right body leftIH rightIH bodyIH =>
+    by_cases repeated : scalarName = rowName ∨ scalarName ∈ contextNames context ∨ rowName ∈ contextNames context
+    · simp [compileExprAux, repeated] at accepted
+    · simp only [compileExprAux, repeated, if_false] at accepted
+      rcases threeAccepted _ _ _ _ _ accepted with
+        ⟨leftProgram, rightProgram, bodyProgram, leftAccepted, rightAccepted, bodyAccepted, rfl⟩
+      simp only [evalSourceExpr, evalExpr]
+      rw [leftIH context environment leftProgram leftAccepted, rightIH context environment rightProgram rightAccepted]
+      have bodies : (fun scalar row => evalSourceExpr (RankerObjectivePrefixIR.extendNames (τ := .vector columns) rowName row
+          (RankerObjectivePrefixIR.extendNames (τ := .scalar) scalarName scalar (namesFromScope environment))) body) =
+          (fun scalar row => evalExpr (Environment.cons (name := rowName) (τ := .vector columns) row
+            (Environment.cons (name := scalarName) (τ := .scalar) scalar environment)) bodyProgram) := by
+        funext scalar row
+        rw [← namesFromScope_extend (τ := .scalar) environment scalarName scalar,
+          ← namesFromScope_extend (τ := .vector columns)
+            (.cons (name := scalarName) (τ := .scalar) scalar environment) rowName row]
+        exact bodyIH ((rowName, .vector columns) :: (scalarName, .scalar) :: context)
+          (.cons (name := rowName) (τ := .vector columns) row
+            (.cons (name := scalarName) (τ := .scalar) scalar environment)) bodyProgram bodyAccepted
+      rw [bodies]
+  | @rangeMap length binder boundVector body boundIH bodyIH =>
+    by_cases repeated : binder ∈ contextNames context
+    · simp [compileExprAux, repeated] at accepted
+    · simp only [compileExprAux, repeated, if_false] at accepted
+      rcases twoAccepted _ _ _ _ accepted with
+        ⟨boundProgram, bodyProgram, boundAccepted, bodyAccepted, rfl⟩
+      simp only [evalSourceExpr, evalExpr]
+      rw [boundIH context environment boundProgram boundAccepted]
+      have bodies : (fun index => evalSourceExpr (RankerObjectivePrefixIR.extendNames (τ := .index length) binder index
+          (namesFromScope environment)) body) =
+          (fun index => evalExpr (Environment.cons (name := binder) (τ := .index length) index environment) bodyProgram) := by
+        funext index
+        rw [← namesFromScope_extend (τ := .index length) environment binder index]
+        exact bodyIH ((binder, .index length) :: context)
+          (.cons (name := binder) (τ := .index length) index environment) bodyProgram bodyAccepted
+      rw [bodies]
+
+theorem compile_expr_sound (context : Context) (environment : Environment context)
+    {τ : Ty} (source : SourceExpr τ) (program : Expr context τ)
+    (accepted : compileExpr context source = .ok program) :
+    evalSourceExpr (namesFromScope environment) source = evalExpr environment program := by
+  by_cases unique : contextUnique context
+  · simp only [compileExpr, unique, if_true] at accepted
+    exact compileExprAux_sound context environment source program accepted
+  · simp [compileExpr, unique] at accepted
+
+private theorem compileFields_sound (context : Context) (environment : Environment context)
+    {schema : Schema} (source : SourceFields schema) (program : Fields context schema)
+    (accepted : compileFields context source = .ok program) :
+    evalSourceFields (namesFromScope environment) source = evalFields environment program := by
+  induction source with
+  | nil =>
+    have same : program = .nil := (Except.ok.inj accepted).symm
+    subst program
+    rfl
+  | @cons name τ rest value fields ih =>
+    by_cases repeated : name ∈ contextNames rest
+    · simp [compileFields, repeated] at accepted
+    · simp only [compileFields, repeated, if_false] at accepted
+      rcases twoAccepted _ _ _ _ accepted with
+        ⟨valueProgram, fieldsProgram, valueAccepted, fieldsAccepted, rfl⟩
+      simp only [evalSourceFields, evalFields]
+      rw [compileExprAux_sound context environment value valueProgram valueAccepted,
+        ih fieldsProgram fieldsAccepted]
+
+private theorem compilePrefixAux_sound (context : Context) (environment : Environment context)
+    {schema : Schema} (source : SourcePrefix schema) (program : PrefixIR context schema)
+    (accepted : compilePrefixAux context source = .ok program) :
+    evalSourcePrefix (namesFromScope environment) source = evalPrefix environment program := by
+  induction source generalizing context with
+  | record fields =>
+    rcases oneAccepted _ _ _ accepted with ⟨fieldsProgram, fieldsAccepted, rfl⟩
+    exact compileFields_sound context environment fields fieldsProgram fieldsAccepted
+  | @letBind τ name rhs body ih =>
+    by_cases repeated : name ∈ contextNames context
+    · simp [compilePrefixAux, repeated] at accepted
+    · simp only [compilePrefixAux, repeated, if_false] at accepted
+      rcases twoAccepted _ _ _ _ accepted with
+        ⟨rhsProgram, bodyProgram, rhsAccepted, bodyAccepted, rfl⟩
+      simp only [evalSourcePrefix, evalPrefix]
+      rw [compileExprAux_sound context environment rhs rhsProgram rhsAccepted]
+      cases result : evalExpr environment rhsProgram with
+      | error problem => rfl
+      | ok value =>
+        simp only [applyOne]
+        rw [← namesFromScope_extend (τ := τ) environment name value]
+        exact ih ((name, τ) :: context)
+          (.cons (name := name) (τ := τ) value environment) bodyProgram bodyAccepted
+
+theorem compile_prefix_sound (context : Context) (environment : Environment context)
+    {schema : Schema} (source : SourcePrefix schema) (program : PrefixIR context schema)
+    (accepted : compilePrefix context source = .ok program) :
+    evalSourcePrefix (namesFromScope environment) source = evalPrefix environment program := by
+  by_cases unique : contextUnique context
+  · simp only [compilePrefix, unique, if_true] at accepted
+    exact compilePrefixAux_sound context environment source program accepted
+  · simp [compilePrefix, unique] at accepted
+
+theorem if_nonneg_selected_branch_only {context : Context} (environment : Environment context)
+    (condition thenBranch elseBranch : Expr context .scalar) (value : ℝ)
+    (conditionSuccess : evalExpr environment condition = .ok value) :
+    evalExpr environment (.ifNonneg condition thenBranch elseBranch) =
+      if 0 ≤ value then evalExpr environment thenBranch else evalExpr environment elseBranch := by
+  simp [evalExpr, conditionSuccess, applyOne]
+
+#print axioms compile_expr_sound
+#print axioms compile_prefix_sound
+#print axioms if_nonneg_selected_branch_only
+
+end
+
+end RankerObjectiveContainerLanguage
+
+#print axioms _root_.RankerObjectiveContainerLanguage.compile_expr_sound
+#print axioms _root_.RankerObjectiveContainerLanguage.compile_prefix_sound
+#print axioms _root_.RankerObjectiveContainerLanguage.if_nonneg_selected_branch_only

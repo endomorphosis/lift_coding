@@ -1,0 +1,32 @@
+{
+  "schema": "encrypted-exact-history-retention/v1",
+  "artifact_kind": "tar-gzip",
+  "original_archive_sha256": "6365447bcb35776f4303b21ab840c6a091619bad5ac7ed06fa6d4ce84e0f93b3",
+  "original_archive_bytes": 175849,
+  "original_commit_tips": [],
+  "reason": "Unresolved credential-like text; exact original bytes retained encrypted.",
+  "cipher": "GnuPG AES256 symmetric encryption",
+  "ciphertext_sha256": "17f34627081c32fb51ca854565fae7a03e747a30464b7aae8cc84959aeeff94c",
+  "ciphertext_bytes": 175963,
+  "encryption_returncode": 0,
+  "decryption_returncode": 0,
+  "decrypted_bytes_match_exact_original": true,
+  "key_local_path": "/home/barberb/.local/state/lift-coding-git-recovery/20261127-86d805ij/historical-bundle.passphrase",
+  "key_is_in_git": false,
+  "key_values_disclosed": false,
+  "owned_crypto_helper": {
+    "pid": 26883,
+    "birth_start_ticks": "477697425",
+    "returncode": 0,
+    "cleanup_confirmed": true,
+    "private_home": "/tmp/git-main-followup-20261127-zYjieLmd/root-withheld-authored-sources-v01-gnupg"
+  },
+  "parts_in_concatenation_order": [
+    {
+      "path": "root-withheld-authored-sources-v01.archive.gpg.part-000.DATA",
+      "bytes": 175963,
+      "sha256": "17f34627081c32fb51ca854565fae7a03e747a30464b7aae8cc84959aeeff94c"
+    }
+  ],
+  "restore_instruction": "Concatenate the listed parts, decrypt with gpg using the local passphrase file, verify the original archive SHA-256, then use the accompanying restore receipt."
+}

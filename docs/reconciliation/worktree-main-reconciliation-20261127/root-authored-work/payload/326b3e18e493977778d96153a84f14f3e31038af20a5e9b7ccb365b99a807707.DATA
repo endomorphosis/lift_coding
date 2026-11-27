@@ -1,0 +1,219 @@
+"""Custody-only environment qualifier. Never print hidden task/test values.
+
+The agent may inspect public Docker recipes and sanitized JSON, never custody
+patches, evaluation script, expected test IDs or raw evaluation/build logs.
+"""
+import difflib
+import hashlib
+import importlib
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+import sys
+import time
+import traceback
+import types
+
+import pyarrow.parquet as pq
+import yaml
+
+HERE=Path(__file__).resolve().parent
+RECRUIT=HERE.parents[1]
+TASK_REPO=RECRUIT/'verified_metadata_v1/curator_custody/task_source'
+TASK=TASK_REPO/'tasks/psf__requests-5414'
+HARNESS=RECRUIT/'harness_source'
+RESOURCE=HARNESS/'swebench/resources/swebench-og/psf__requests/5414'
+PROTOCOL=json.loads((HERE/'protocol-v4.json').read_text())
+OUT=HERE/'run-v4'
+CUSTODY=OUT/'curator_custody'
+STAGE='startup'
+
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def dump(path,value):
+    path.parent.mkdir(parents=True,exist_ok=True)
+    path.write_text(json.dumps(value,indent=2,sort_keys=True)+'\n')
+
+
+def event(value):
+    print(json.dumps(value,sort_keys=True),flush=True)
+
+
+def command(argv,tag,timeout=60,cwd=None):
+    logs=CUSTODY/'logs'
+    logs.mkdir(parents=True,exist_ok=True)
+    start=time.perf_counter()
+    with (logs/(tag+'.stdout')).open('w') as stdout,(logs/(tag+'.stderr')).open('w') as stderr:
+        try:
+            result=subprocess.run(argv,cwd=cwd,stdout=stdout,stderr=stderr,timeout=timeout)
+            code,timed_out=result.returncode,False
+        except subprocess.TimeoutExpired:
+            code,timed_out=None,True
+    receipt={'tag':tag,'argv':argv,'returncode':code,'timed_out':timed_out,'elapsed_seconds':time.perf_counter()-start}
+    dump(logs/(tag+'.json'),receipt)
+    return receipt
+
+
+def quiet_value(argv):
+    return subprocess.check_output(argv,stderr=subprocess.DEVNULL).decode().strip()
+
+
+def protected_row():
+    rows=pq.read_table(RECRUIT/'verified_metadata_v1/curator_custody/dataset.parquet').to_pylist()
+    selected=[r for r in rows if r['instance_id']==PROTOCOL['instance_id']]
+    assert len(selected)==1
+    return selected[0]
+
+
+def parse_list(value):
+    return json.loads(value) if isinstance(value,str) else list(value)
+
+
+def prepare():
+    global STAGE
+    STAGE='prepare'
+    OUT.mkdir()
+    CUSTODY.mkdir(mode=0o700)
+    shutil.copyfile(__file__,OUT/'curator_snapshot.py')
+    row=protected_row()
+    tests=json.loads((TASK/'tests.json').read_text())
+    for key in ('FAIL_TO_PASS','PASS_TO_PASS'):
+        assert isinstance(tests[key],list)
+    assert row['base_commit']==PROTOCOL['source_commit']
+    assert quiet_value(['git','-C',str(TASK_REPO),'rev-parse','HEAD'])==PROTOCOL['task_source_commit']
+    assert quiet_value(['git','-C',str(HARNESS),'rev-parse','HEAD'])==PROTOCOL['harness_source_commit']
+    public_docker=(TASK/'Dockerfile').read_text()
+    assert 'git reset --hard '+PROTOCOL['source_commit'] in public_docker
+    custody_hashes={name:sha((TASK/name).read_bytes()) for name in ('gold.patch','test.patch','eval.sh','tests.json','problem_statement.md','task.yaml')}
+    reconciliation={
+        'task_gold_sha256':custody_hashes['gold.patch'],'dataset_gold_sha256':sha(row['patch'].encode()),
+        'task_test_patch_sha256':custody_hashes['test.patch'],'dataset_test_patch_sha256':sha(row['test_patch'].encode()),
+        'gold_bytes_equal':(TASK/'gold.patch').read_bytes()==row['patch'].encode(),
+        'test_patch_bytes_equal':(TASK/'test.patch').read_bytes()==row['test_patch'].encode(),
+        'expected_test_sets_equal':all(set(tests[k])==set(parse_list(row[k])) for k in ('FAIL_TO_PASS','PASS_TO_PASS')),
+        'task_protected_file_hashes':custody_hashes,
+        'dataset_parquet_sha256':sha((RECRUIT/'verified_metadata_v1/curator_custody/dataset.parquet').read_bytes()),
+        'task_source_commit':PROTOCOL['task_source_commit'],'harness_source_commit':PROTOCOL['harness_source_commit'],
+        'base_commit_matches_public_dockerfile':True,
+    }
+    # The exact script is opaque to the agent. Change only conda activation lines.
+    original=(TASK/'eval.sh').read_text()
+    permitted={
+        'source /opt/miniconda3/bin/activate',
+        'source /opt/miniconda3/etc/profile.d/conda.sh',
+        'conda activate testbed',
+    }
+    lines=original.splitlines(keepends=True)
+    removed=[line for line in lines if line.strip() in permitted]
+    modified=''.join(line for line in lines if line.strip() not in permitted)
+    remaining_conda=sum('conda' in line and not line.lstrip().startswith('#') for line in modified.splitlines())
+    assert remaining_conda==0
+    (CUSTODY/'eval-original.sh').write_text(original)
+    (CUSTODY/'eval-arm.sh').write_text(modified)
+    (CUSTODY/'eval-prologue.diff').write_text(''.join(difflib.unified_diff(original.splitlines(True),modified.splitlines(True),fromfile='eval-original.sh',tofile='eval-arm.sh')))
+    shutil.copyfile(TASK/'gold.patch',CUSTODY/'gold.patch')
+    shutil.copyfile(TASK/'test.patch',CUSTODY/'test.patch')
+    shutil.copyfile(TASK/'tests.json',CUSTODY/'tests.json')
+    dump(CUSTODY/'row.json',row)
+    reconciliation.update(eval_original_sha256=sha(original.encode()),eval_ported_sha256=sha(modified.encode()),
+        removed_conda_prologue_lines=len(removed),remaining_conda_lines=remaining_conda,
+        eval_contains_exact_test_patch=(TASK/'test.patch').read_text().strip() in original,
+        expected_fail_to_pass_count=len(tests['FAIL_TO_PASS']),expected_pass_to_pass_count=len(tests['PASS_TO_PASS']))
+    assert reconciliation['gold_bytes_equal'] and reconciliation['test_patch_bytes_equal'] and reconciliation['expected_test_sets_equal']
+    dump(OUT/'custody_reconciliation.json',reconciliation)
+    # Public environment port retains every Python package version exactly.
+    env=yaml.safe_load((RESOURCE/'environment.yml').read_text())
+    names={'exceptiongroup','iniconfig','packaging','pip','pluggy','setuptools','tomli','wheel'}
+    pinned=['MarkupSafe==2.0.1','pytest-cov==4.1.0']
+    excluded=[]
+    for item in env['dependencies']:
+        if isinstance(item,dict):
+            pinned.extend(item['pip'])
+        else:
+            fields=item.split('=')
+            if fields[0] in names:
+                pinned.append(fields[0]+'=='+fields[1])
+            elif fields[0]=='python':
+                assert fields[1]==PROTOCOL['python_version']
+            else:
+                excluded.append(item)
+    build=OUT/'build_context'
+    build.mkdir()
+    (build/'pinned-python.txt').write_text('\n'.join(sorted(pinned))+'\n')
+    dockerfile='''FROM BASE_IMAGE
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1 PYTHONDONTWRITEBYTECODE=1
+RUN apt-get update && apt-get install -y --no-install-recommends git ca-certificates && rm -rf /var/lib/apt/lists/*
+COPY pinned-python.txt /opt/pinned-python.txt
+RUN python -m pip install --no-cache-dir --no-deps -r /opt/pinned-python.txt
+COPY source /testbed
+WORKDIR /testbed
+RUN git config --global --add safe.directory /testbed && git config --global user.email setup@swebench.com && git config --global user.name SWE-bench
+RUN python -m pip install --no-cache-dir --no-deps --no-build-isolation .
+RUN python -m pip install --no-cache-dir -c /opt/pinned-python.txt -r requirements-dev.txt && python -m pip check
+RUN python -c 'import trustme; import pytest_httpbin; import httpbin; import pytest'
+RUN pytest --version
+'''.replace('BASE_IMAGE',PROTOCOL['base_image'])
+    (build/'Dockerfile').write_text(dockerfile)
+    (OUT/'Dockerfile.port.diff').write_text(''.join(difflib.unified_diff(public_docker.splitlines(True),dockerfile.splitlines(True),fromfile='original-public-Dockerfile',tofile='ARM-Dockerfile')))
+    dump(OUT/'environment_port.json',{'python':PROTOCOL['python_version'],'pinned_python_packages':sorted(pinned),
+        'python_package_count':len(pinned),'removed_conda_system_specs':excluded,
+        'substitute_system_stack':'Pinned arm64 Python Debian bookworm base plus apt git/ca-certificates; exact installed versions captured after build.',
+        'source_public_environment_sha256':sha((RESOURCE/'environment.yml').read_bytes()),
+        'task_environment_matches_harness_resource':(TASK/'environment.yml').read_bytes()==(RESOURCE/'environment.yml').read_bytes(),
+        'original_architecture':'x86_64','ported_architecture':'arm64','published_x86_image_equivalence_claimed':False})
+    source=build/'source'
+    source.mkdir()
+    for tag,argv in [('git-init',['git','init',str(source)]),
+        ('git-fetch',['git','-C',str(source),'fetch','--depth=1','https://github.com/psf/requests',PROTOCOL['source_commit']]),
+        ('git-checkout',['git','-C',str(source),'checkout','--detach',PROTOCOL['source_commit']])]:
+        receipt=command(argv,tag,timeout=120)
+        assert receipt['returncode']==0
+    assert quiet_value(['git','-C',str(source),'rev-parse','HEAD'])==PROTOCOL['source_commit']
+    source_files={str(p.relative_to(source)):sha(p.read_bytes()) for p in source.rglob('*') if p.is_file() and '.git' not in p.parts}
+    frozen={'schema':'ns-arm64-qualification-freeze/v1','frozen_at_ns':time.time_ns(),'protocol':PROTOCOL,
+        'curator_sha256':sha(Path(__file__).read_bytes()),'protocol_sha256':sha((HERE/'protocol-v4.json').read_bytes()),
+        'dockerfile_sha256':sha((build/'Dockerfile').read_bytes()),'python_requirements_sha256':sha((build/'pinned-python.txt').read_bytes()),
+        'source_file_count':len(source_files),'source_files':source_files,
+        'native_grader_sources':{str(p.relative_to(HARNESS)):sha(p.read_bytes()) for p in (HARNESS/'swebench/harness').rglob('*.py')},
+        'reconciliation_sha256':sha((OUT/'custody_reconciliation.json').read_bytes()),
+        'selection':'One previously nominated environment qualification; hidden outcomes do not choose a method or enroll a model task.'}
+    dump(OUT/'freeze.json',frozen)
+    event({'stage':STAGE,'prepared':True,'python_packages_pinned':len(pinned),
+        'reference_custody_reconciled':True,'conda_prologue_lines_removed':len(removed),
+        'protected_values_emitted':False})
+
+
+def build():
+    global STAGE
+    STAGE='build'
+    assert not (OUT/'build_summary.json').exists()
+    image='ns-arm64-requests5414:qualification-v4'
+    receipt=command(['docker','build','--platform','linux/arm64','--tag',image,str(OUT/'build_context')],
+        'docker-build',timeout=PROTOCOL['build_timeout_seconds'])
+    summary={'stage':STAGE,'build_returncode':receipt['returncode'],'timed_out':receipt['timed_out'],'elapsed_seconds':receipt['elapsed_seconds']}
+    if receipt['returncode']==0:
+        inspect=json.loads(quiet_value(['docker','image','inspect',image]))[0]
+        summary.update(image_tag=image,image_id=inspect['Id'],architecture=inspect['Architecture'])
+        metadata=command(['docker','run','--rm','--network','none',inspect['Id'],'bash','-c',
+            'python --version && python -m pip list --format=json && dpkg-query -W'], 'image-packages',timeout=30)
+        summary['metadata_returncode']=metadata['returncode']
+    dump(OUT/'build_summary.json',summary)
+    event(summary)
+
+
+
+if __name__=='__main__':
+    try:
+        {'prepare':prepare,'build':build}[sys.argv[1]]()
+    except BaseException as exc:
+        CUSTODY.mkdir(parents=True,exist_ok=True,mode=0o700)
+        (CUSTODY/(STAGE+'-exception.txt')).write_text(traceback.format_exc())
+        event({'stage':STAGE,'status':'error','exception_type':type(exc).__name__,
+               'details_retained_in_curator_custody':True,'protected_values_emitted':False})
+        raise SystemExit(1)

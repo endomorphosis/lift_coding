@@ -1,0 +1,15 @@
+{
+  "scope": "Static fixture footprint preflight; no product/test execution or resource admission.",
+  "source_payload_files": 88,
+  "raw_source_payload_bytes_per_fixture": 6853646,
+  "one_existing_parameterized_test_axes": [
+    42,
+    3
+  ],
+  "cases_in_that_test": 126,
+  "minimum_repeated_source_bytes_for_that_test": 863559396,
+  "remaining_file_cases_not_included_in_minimum": true,
+  "source_input_roles": "The full worker-capability file remains pending; all source payloads must be pinned as archive inputs in its own request.",
+  "proposed_fixture_change": "Build the unchanged hermetic archive once as an immutable module fixture, then give each parameter case independent copies of archive bytes and manifest. Keep every case and every mutation assertion; no hardlinks or symlinks.",
+  "resource_policy": "No active/exhausted reservation or global cap is changed. Any future complete-file storage estimate must be declared before its first admitted run."
+}

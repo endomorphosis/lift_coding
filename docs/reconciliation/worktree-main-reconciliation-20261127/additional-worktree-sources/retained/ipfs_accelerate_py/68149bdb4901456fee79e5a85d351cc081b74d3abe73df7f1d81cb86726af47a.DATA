@@ -1,0 +1,114 @@
+"""Inert real-file QA metadata rejection tests, never native qualification.
+
+No capability, scheduler, runtime, owner, credential or database is doubled.
+The actual source-pinned stdlib checker reads test-owned evidence bytes.
+"""
+from pathlib import Path
+import copy
+import hashlib
+import importlib.util
+import json
+import sys
+
+import pytest
+
+W=Path('/home/barberb/lift_coding')
+D=W/'artifacts/legal-ir-supervisor-recovery-20261018-03/private-M1-provisioning-caller-source-v1'
+C=W/'artifacts/legal-ir-supervisor-recovery-20261018-03/private-M1-independent-acceptance-source-v1'
+
+
+def load(name,path):
+    spec=importlib.util.spec_from_file_location(name,path)
+    module=importlib.util.module_from_spec(spec);sys.modules[name]=module;spec.loader.exec_module(module)
+    return module
+
+
+caller=load('private_M1_caller_metadata_under_test',D/'run_offline_m1.py')
+check=load('private_M1_actual_stdlib_metadata_checker',C/'check_offline_m1.py')
+
+
+def write(path,value):
+    path.write_text(json.dumps(value,sort_keys=True)+'\n');path.chmod(0o600)
+    return check.pin(path)
+
+
+@pytest.fixture
+def metadata(tmp_path):
+    # This fabricated QA metadata is explicitly inert. Positive validation
+    # means only that the reader accepts its closed shape, never real QA.
+    files={f'test_inert_{i}.py':12 for i in range(16)}
+    files['test_inert_selected.py']=28
+    assert sum(files.values())==220
+    selected={'test_inert_selected.py':tuple('case_'+str(i) for i in range(8))}
+    driver=tmp_path/'inert_driver.py'
+    driver.write_text('TESTS = '+repr(files)+'\nEXISTING_SELECTION = '+repr(selected)+'\n')
+    driver_pin=check.pin(driver)
+    viewroot=tmp_path/'inert-view';viewroot.mkdir()
+    prepared=write(tmp_path/'prepared.json',{'metadata_only':True})
+    collection=[]
+    for name,count in files.items():
+        for i in range(count):
+            collection.append(dict(nodeid='test/api/'+name+'::case_'+str(i),path=str(viewroot/'test/api'/name)))
+    reports=[dict(nodeid=row['nodeid'],when=phase,outcome='passed') for row in collection
+        for phase in ('setup','call','teardown')]
+    invariants={name:True for name in ('exact_220_unique_cases','exact_file_case_counts',
+        'focused_five_real_SDK_components_first','complete_660_unique_phase_pairs','all_phases_pass',
+        'exact_reviewed_existing_eight_nodeids','all_three_real_conftest_objects_retained',
+        'normal_core_objects_specs_sources_unchanged','pytest_entry_environment_restored',
+        'dynamic_board_loader_disposition_and_alias_sources_observed')}
+    tests=dict(schema='private-M1-entry-normal220-tests/v1',successful=True,pytest_exit_code=0,
+        view_pins={'path':prepared['path'],'sha256':prepared['sha256']},required_invariants=invariants,
+        collection=collection,reports=reports,actual_counts=files,
+        actual_existing_nodeids=['test/api/test_inert_selected.py::case_'+str(i) for i in range(8)],
+        focused_component_cases_first=True,normal_imports_before={str(i):{'inert':True} for i in range(19)},
+        normal_imports_after={str(i):{'inert':True} for i in range(19)},actual_environment_delta_after_pytest=[])
+    owner=dict(schema='private-M1-entry-normal220-owner/v1',successful=True,source_leases_released=True,
+        actual_original_source_kernel_keys_released=True,descendants_drained=True,child_returncode=0)
+    junit=tmp_path/'pytest.xml';junit.write_text('<testsuites><testsuite tests="220" failures="0" errors="0" skipped="0"/></testsuites>')
+    reference=dict(schema='private-M1-entry-normal220-QA-reference/v1',view_root=str(viewroot),prepared_pin=prepared,
+        owner_result=write(tmp_path/'owner.json',owner),tests_report=write(tmp_path/'tests.json',tests),
+        JUnit=check.pin(junit),QA_driver=driver_pin)
+    return dict(reference=reference,tests=tests,prepared=prepared,view={'view_root':str(viewroot)},driver=driver_pin,
+        tests_path=tmp_path/'tests.json',junit=junit)
+
+
+def invoke(value):
+    return caller.require_normal_QA(check=check,reference=value['reference'],view_pin=value['prepared'],
+        view=value['view'],driver_pin=value['driver'])
+
+
+def test_inert_closed_QA_shape_reader_only(metadata):
+    assert invoke(metadata)['tests_report']==metadata['reference']['tests_report']
+
+
+def test_same_QA_reference_cannot_be_rebound_to_other_prepared_bytes(metadata,tmp_path):
+    metadata['prepared']=write(tmp_path/'other-prepared.json',{'metadata_only':'different'})
+    with pytest.raises(check.OfflineM1CheckFailed,match='actual220_QA_reference_must_join'):
+        invoke(metadata)
+
+
+def test_duplicate_actual_case_metadata_is_not_complete_population(metadata):
+    metadata['tests']['collection'][1]=dict(metadata['tests']['collection'][0])
+    metadata['reference']['tests_report']=write(metadata['tests_path'],metadata['tests'])
+    with pytest.raises(check.OfflineM1CheckFailed,match='actual_unique_cases_and_complete_phase_coverage_required'):
+        invoke(metadata)
+
+
+def test_duplicate_passing_phase_metadata_is_not_complete_coverage(metadata):
+    metadata['tests']['reports'][1]=dict(metadata['tests']['reports'][0])
+    metadata['reference']['tests_report']=write(metadata['tests_path'],metadata['tests'])
+    with pytest.raises(check.OfflineM1CheckFailed,match='actual_unique_cases_and_complete_phase_coverage_required'):
+        invoke(metadata)
+
+
+def test_renamed_true_invariant_cannot_replace_reviewed_gate(metadata):
+    value=metadata['tests']['required_invariants'];value['invented_gate']=value.pop('pytest_entry_environment_restored')
+    metadata['reference']['tests_report']=write(metadata['tests_path'],metadata['tests'])
+    with pytest.raises(check.OfflineM1CheckFailed,match='exact_selected_driver_population_and_invariants_required'):
+        invoke(metadata)
+
+
+def test_real_QA_evidence_file_tamper_without_repin_is_refused(metadata):
+    metadata['tests_path'].write_text('{}\n')
+    with pytest.raises(check.OfflineM1CheckFailed,match='evidence_pin_mismatch'):
+        invoke(metadata)

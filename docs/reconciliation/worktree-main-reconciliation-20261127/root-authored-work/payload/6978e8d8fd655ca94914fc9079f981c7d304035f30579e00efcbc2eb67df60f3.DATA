@@ -1,0 +1,69 @@
+#!/usr/bin/env python3
+"""Verify saved service results and execute their frozen source-expansion commands."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+
+HERE = Path(__file__).resolve().parent
+def sha(data): return hashlib.sha256(data).hexdigest()
+def read(path): return json.loads(path.read_text())
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--results", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    if args.output.exists(): raise SystemExit("audit exists; choose a fresh output")
+    freeze = read(args.results / "freeze.json")
+    summary = read(args.results / "summary.json")
+    profile = read(args.results / "runtime_source_manifest.json")
+    assert summary["freeze_sha256"] == sha((args.results / "freeze.json").read_bytes())
+    assert freeze["runtime_manifest_sha256"] == sha((args.results / "runtime_source_manifest.json").read_bytes())
+    assert all(sha((HERE / name).read_bytes()) == digest for name, digest in freeze["evaluation_sources"].items())
+    assert all(sha(Path(path).read_bytes()) == digest for path, digest in profile["files"].items())
+    cases = []
+    for row in summary["rows"]:
+        folder = args.results / row["task_id"]
+        source = read(folder / "public_source_manifest.json")
+        retained = read(folder / "retained_raw_inventory.json")
+        producer = read(folder / "producer.json"); consumer = read(folder / "consumer.json")
+        assert row["producer"] == producer and row["consumer"] == consumer
+        assert set(retained) == set(source["files"])
+        assert all(value["sha256"] == source["files"][path]["sha256"] and value["bytes"] == source["files"][path]["bytes"] for path, value in retained.items())
+        assert len(retained) == consumer["raw_files_materialized_from_kit"] == producer["declared_files"]
+        assert sum(item["bytes"] for item in retained.values()) == producer["declared_bytes"] == consumer["raw_bytes_materialized_from_kit"]
+        assert producer["raw_substitutions"] == consumer["raw_substitutions"] == 0
+        assert consumer["signed_receipts"] == 0 and not producer["current_root_published"]
+        assert len(consumer["negative_controls"]) == 11
+        scope = read(folder / "semantic_scope.json")
+        envelope = read(folder / "envelope.json")
+        assert scope["policy"] == freeze["semantic_scope"]
+        assert all("unparsed-raw-python:" + path in envelope["questions"]["missing_evidence"] for path in scope["unparsed_raw_python_paths"])
+        assert all(path in retained for path in scope["unparsed_raw_python_paths"])
+        identity_checks = read(folder / "cold_incremental_identity_checks.json") if freeze["identity_checks"] else []
+        if freeze["identity_checks"]:
+            assert {row["change"] for row in identity_checks} == {"unchanged", "target_comment"}
+            assert all(row["cold_state_cid"] == row["incremental_state_cid"] and row["cold_root_cid"] == row["incremental_root_cid"] and row["reachable_blocks_equal"] for row in identity_checks)
+        expanded = []
+        for specification in read(folder / "expansion_commands.json"):
+            env = {key: os.environ[key] for key in ("PATH", "LANG", "HOME") if key in os.environ}
+            result = subprocess.run(specification["command"], cwd="/tmp", env=env, capture_output=True, timeout=60)
+            assert result.returncode == 0, result.stderr[-1000:]
+            path = specification["path"]
+            assert sha(result.stdout) == source["files"][path]["sha256"]
+            expanded.append({"path": path, "bytes": len(result.stdout), "sha256": sha(result.stdout), "exact_match": True})
+        bad = list(read(folder / "expansion_commands.json")[0]["command"])
+        bad[-1] = "../../outside-declared-source.py"
+        failed = subprocess.run(bad, cwd="/tmp", env=env, capture_output=True, timeout=60)
+        assert failed.returncode != 0 and not failed.stdout
+        native_imports = {role: read(folder / (role + "_imports.json")) for role in ("produce", "consume")}
+        assert all(all(profile["files"][item["path"]] == item["sha256"] for item in imports.values()) for imports in native_imports.values())
+        cases.append({"task_id": row["task_id"], "semantic_scope": scope["policy"], "unparsed_python_paths_retained": len(scope["unparsed_raw_python_paths"]), "cold_incremental_equal_cases": len(identity_checks), "exact_expansions": expanded, "outside_scope_expansion_rejected": True, "native_negative_controls": 11, "source_retention_verified": True, "normal_import_module_counts": {role: len(imports) for role, imports in native_imports.items()}, "opaque_symlinks_retained": len(source["opaque_symlinks"])})
+    report = {"schema": "ns-integrated-context-qualification-audit/v1", "audit_source_sha256": sha(Path(__file__).read_bytes()), "summary_sha256": sha((args.results / "summary.json").read_bytes()), "source_hashes_match": True, "cases": cases, "all_checks_passed": True, "provider_calls": 0, "ready_full_caller": False}
+    args.output.write_text(json.dumps(report, indent=2) + "\n")
+    print(json.dumps(report, indent=2))
+
+if __name__ == "__main__": main()

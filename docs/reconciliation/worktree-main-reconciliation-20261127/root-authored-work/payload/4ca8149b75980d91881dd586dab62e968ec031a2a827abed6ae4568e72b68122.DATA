@@ -1,0 +1,512 @@
+"""Native hook routing controls; authored child handles establish no real birth."""
+import shlex
+from types import SimpleNamespace
+
+import pytest
+
+from ipfs_accelerate_py.agent_supervisor.entrypoints.admitted_benchmark_runtime import (
+    AdmittedBenchmarkRuntime, _require_observer_diagnostic_command, _checked_budget_spawn_environment,
+    CHECKED_CONTEXT_ENV_NAMES, CHECKED_CONTEXT_WRAPPER_ENV,
+)
+from ipfs_accelerate_py.agent_supervisor.todo_daemon import supervisor_runtime as stream
+
+
+def _coordination_fixture(monkeypatch, root):
+    import json
+    from ipfs_accelerate_py.agent_supervisor.runtime import checked_context_dispatch as dispatch
+    for name in (*CHECKED_CONTEXT_ENV_NAMES,
+                 "IPFS_ACCELERATE_FINITE_PROOF_QUERY_DISPATCH_SOCKET",
+                 "IPFS_ACCELERATE_FINITE_PROOF_QUERY_CONTEXT_CID"):
+        monkeypatch.delenv(name, raising=False)
+    endpoint = root / "owner.sock"
+    monkeypatch.setenv(dispatch.SOCKET_ENV, str(endpoint))
+    monkeypatch.setenv(dispatch.CONTEXT_ENV, "cid:authored-routing-only")
+    monkeypatch.setenv(dispatch.OWNER_ENV, json.dumps(dispatch.owner_dispatch_identity(), sort_keys=True, separators=(",", ":")))
+    calls = []
+    daemon = SimpleNamespace(_typed_quack_authority_binding=object(), authority_mode="quack",
+        task_shard_count=1, task_shard_index=0, _require_live_typed_owner=lambda: calls.append("live-typed-owner"))
+    return endpoint, daemon, calls
+
+
+@pytest.mark.parametrize("change", [None, "partial-socket", "partial-context", "partial-birth",
+    "untyped", "multiple-lanes", "wrong-lane", "public-parent", "public-socket", "mixed", "bad-owner-birth"])
+def test_checked_route_requires_shared_native_coordination_and_complete_owner_routing(monkeypatch, change):
+    import socket
+    import tempfile
+    from pathlib import Path
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        DatabaseImplementationDaemon, DatabaseImplementationAuthorityError,
+    )
+    # A real private socket under a short owned directory exercises native
+    # endpoint checks without relying on a pytest path fitting AF_UNIX.
+    with tempfile.TemporaryDirectory(prefix="aa-coor-") as directory:
+        root = Path(directory)
+        endpoint, daemon, calls = _coordination_fixture(monkeypatch, root)
+        with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as channel:
+            channel.bind(str(endpoint))
+            endpoint.chmod(0o600)
+            if change == "partial-socket": monkeypatch.delenv(CHECKED_CONTEXT_ENV_NAMES[0])
+            elif change == "partial-context": monkeypatch.delenv(CHECKED_CONTEXT_ENV_NAMES[1])
+            elif change == "partial-birth": monkeypatch.delenv(CHECKED_CONTEXT_ENV_NAMES[2])
+            elif change == "untyped": daemon._typed_quack_authority_binding = None
+            elif change == "multiple-lanes": daemon.task_shard_count = 2
+            elif change == "wrong-lane": daemon.task_shard_index = 1
+            elif change == "public-parent": root.chmod(0o755)
+            elif change == "public-socket": endpoint.chmod(0o666)
+            elif change == "mixed": monkeypatch.setenv("IPFS_ACCELERATE_FINITE_PROOF_QUERY_CONTEXT_CID", "cid:another-route")
+            elif change == "bad-owner-birth": monkeypatch.setenv(CHECKED_CONTEXT_ENV_NAMES[2], '{"pid":true}')
+            if change is None:
+                assert DatabaseImplementationDaemon._checked_context_serialized_coordinator(daemon) is True
+                assert calls == ["live-typed-owner"]
+            else:
+                with pytest.raises(DatabaseImplementationAuthorityError):
+                    DatabaseImplementationDaemon._checked_context_serialized_coordinator(daemon)
+                assert calls == []
+
+
+def test_absent_checked_route_keeps_existing_coordinator_selection(monkeypatch):
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import DatabaseImplementationDaemon
+    for name in CHECKED_CONTEXT_ENV_NAMES:
+        monkeypatch.delenv(name, raising=False)
+    assert DatabaseImplementationDaemon._checked_context_serialized_coordinator(SimpleNamespace()) is False
+
+
+def test_checked_routing_cannot_replace_live_typed_owner_authority(monkeypatch):
+    import socket
+    import tempfile
+    from pathlib import Path
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import (
+        DatabaseImplementationDaemon, DatabaseImplementationAuthorityError,
+    )
+    with tempfile.TemporaryDirectory(prefix="aa-coor-") as directory:
+        endpoint, daemon, calls = _coordination_fixture(monkeypatch, Path(directory))
+        def refuse():
+            calls.append("refused")
+            raise DatabaseImplementationAuthorityError("authored unavailable native grant")
+        daemon._require_live_typed_owner = refuse
+        with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as channel:
+            channel.bind(str(endpoint)); endpoint.chmod(0o600)
+            with pytest.raises(DatabaseImplementationAuthorityError, match="unavailable native grant"):
+                DatabaseImplementationDaemon._checked_context_serialized_coordinator(daemon)
+        assert calls == ["refused"]
+
+
+def command():
+    return ["/opt/ipfs-supervisor/bin/router-worker", "--model", "authored-offline-observer",
+        "--observe-model-input-only", "--purpose", "coding", "--semantic-repository", "/app",
+        "--semantic-transport", "native", "--public-instruction-artifact", "/app/.runtime/instruction.json",
+        "--public-instruction-sha256", "a"*64, "--public-instruction-task-cid", "cid:task",
+        "--checked-context-owner-scope-cid", "cid:owner-scope"]
+
+
+@pytest.mark.parametrize("selected", [False, True])
+def test_only_signed_profile_selects_checked_owner_routing(selected):
+    ambient={name:"ambient" for name in (*CHECKED_CONTEXT_ENV_NAMES,CHECKED_CONTEXT_WRAPPER_ENV)}
+    ambient["PUBLIC_SETTING"]="preserved"
+    signed={name:"signed-"+str(index) for index,name in enumerate(CHECKED_CONTEXT_ENV_NAMES)} if selected else None
+    result=_checked_budget_spawn_environment(ambient,signed)
+    assert result == {"PUBLIC_SETTING":"preserved",**(signed or {})}
+    assert ambient[CHECKED_CONTEXT_WRAPPER_ENV]=="ambient"
+
+
+@pytest.mark.parametrize("change", ["missing", "extra", "empty", "untyped"])
+def test_partial_signed_routing_refuses_before_native_spawn(change):
+    signed={name:"signed" for name in CHECKED_CONTEXT_ENV_NAMES}
+    if change=="missing":signed.pop(CHECKED_CONTEXT_ENV_NAMES[0])
+    elif change=="extra":signed[CHECKED_CONTEXT_WRAPPER_ENV]="ambient-ticket"
+    elif change=="empty":signed[CHECKED_CONTEXT_ENV_NAMES[0]]=""
+    else:signed[CHECKED_CONTEXT_ENV_NAMES[0]]=[]
+    with pytest.raises(ValueError,match="signed checked budget routing"):
+        _checked_budget_spawn_environment({},signed)
+
+
+@pytest.mark.parametrize("change", [None, "partial", "duplicate", "equals", "mixed", "identifiers", "planning", "residual"])
+def test_signed_observer_recipe_selects_only_closed_owner_context_route(change):
+    args=command()
+    if change == "partial": args.pop()
+    elif change == "duplicate": args += args[-2:]
+    elif change == "equals": args[-2:] = ["--checked-context-owner-scope-cid=cid:owner-scope"]
+    elif change == "mixed": args += ["--checked-context-artifact", "/checked", "--checked-context-sha256", "b"*64, "--checked-context-task-cid", "cid:task"]
+    elif change == "identifiers": args[args.index("--semantic-transport")+1]="identifiers"
+    elif change == "planning": args[args.index("--purpose")+1]="planning"
+    elif change == "residual": args += ["--doctor-residual-artifact", "/residual"]
+    kwargs=dict(implement=True,context_bundle={"authored":True},candidate_runner={"authored":True})
+    if change is None:
+        selected=_require_observer_diagnostic_command(shlex.join(args),**kwargs)
+        assert selected["--checked-context-owner-scope-cid"] == "cid:owner-scope"
+        assert "--checked-context-artifact" not in selected
+    else:
+        with pytest.raises(ValueError): _require_observer_diagnostic_command(shlex.join(args),**kwargs)
+
+
+@pytest.mark.parametrize("flag", ["--checked-context-owner-scope-cid", "--checked-context-owner-scope-cid=cid:foreign"])
+def test_budget_marker_without_original_scope_refuses_before_state_creation(tmp_path,flag):
+    args=command()[:-2]+[flag]
+    if "=" not in flag: args.append("cid:owner-scope")
+    with pytest.raises(ValueError,match="original owner scope"):
+        AdmittedBenchmarkRuntime.create(tmp_path/"launch",admission=None,server=None,source=None,
+            implement=True,implementation_command=shlex.join(args),native_dispatch_diagnostics=True)
+    assert not (tmp_path/"launch").exists()
+
+
+def test_native_prelaunch_uses_owner_derived_command_and_actual_input(monkeypatch,tmp_path):
+    from ipfs_accelerate_py.agent_supervisor.runtime import checked_context_dispatch as dispatch
+    order=[];args=command();derived=args[:-2]+["--checked-context-artifact","/checked",
+        "--checked-context-sha256","b"*64,"--checked-context-task-cid","cid:task"]
+    child=SimpleNamespace(pid=12345)
+    class Guard:
+        command=derived
+        def child_environment(self): return {dispatch.WRAPPER_ENV:"authored-routing-ticket"}
+        def note_spawned(self,value): assert value is child;order.append("birth-ack")
+        def abort(self): order.append("abort")
+    def require(**kwargs):
+        assert kwargs["input_text"] == "the actual daemon stdin\n"
+        assert kwargs["dispatch_binding"] == {"authored":"native-attempt"}
+        assert kwargs["command"] == args and kwargs["worktree"] == tmp_path
+        order.append("owner-reserved");return Guard()
+    def popen(actual,**kwargs):
+        assert order == ["owner-reserved"] and actual == derived
+        assert kwargs["env"][dispatch.WRAPPER_ENV] == "authored-routing-ticket"
+        order.append("popen");return child
+    monkeypatch.setattr(dispatch,"require_checked_context_worker_dispatch",require)
+    monkeypatch.setattr(stream.subprocess,"Popen",popen)
+    actual=stream.launch_process_child(args,cwd=tmp_path,inherit_environment=False,
+        checked_context_input="the actual daemon stdin\n",dispatch_binding={"authored":"native-attempt"})
+    assert actual is child and order == ["owner-reserved","popen","birth-ack"]
+
+
+@pytest.mark.parametrize("failure", ["prepare", "popen"])
+def test_prelaunch_refusal_never_launches_or_refunds_owner_attempt(monkeypatch,tmp_path,failure):
+    from ipfs_accelerate_py.agent_supervisor.runtime import checked_context_dispatch as dispatch
+    calls=[]
+    class Guard:
+        command=command()[:-2]
+        def child_environment(self):return {}
+        def abort(self):calls.append("charged-abort")
+    def require(**kwargs):
+        calls.append("prepare")
+        if failure == "prepare":raise ValueError("owner refused")
+        return Guard()
+    def popen(*args,**kwargs):
+        calls.append("popen");raise OSError("authored Popen failure")
+    monkeypatch.setattr(dispatch,"require_checked_context_worker_dispatch",require)
+    monkeypatch.setattr(stream.subprocess,"Popen",popen)
+    with pytest.raises((ValueError,OSError)):
+        stream.launch_process_child(command(),cwd=tmp_path,inherit_environment=False,
+            checked_context_input="actual stdin")
+    assert calls == (["prepare"] if failure == "prepare" else ["prepare","popen","charged-abort"])
+
+
+def test_stream_forwards_same_stdin_before_literal_launch(monkeypatch,tmp_path):
+    import errno
+    seen=[]
+    class Child:
+        pid=31415926;returncode=75
+        def communicate(self,*,input,timeout):seen.append(("communicate",input,timeout));return None,None
+    def launch(args,**kwargs):seen.append(("launch",kwargs));return Child()
+    def absent_group(pid,signum):
+        assert pid==31415926 and signum==0
+        raise OSError(errno.ESRCH,"authored group absent")
+    monkeypatch.setattr(stream,"launch_process_child",launch)
+    monkeypatch.setattr(stream.os,"killpg",absent_group)
+    result=stream.run_process_group_stream(command(),cwd=tmp_path,stdout=None,input_text="original stdin",
+        inherit_environment=False,timeout_seconds=2,dispatch_binding={"authored":"attempt"})
+    assert seen[0][1]["checked_context_input"] == seen[1][1] == "original stdin"
+    assert seen[0][1]["dispatch_binding"] == {"authored":"attempt"} and result.returncode==75
+
+
+def test_legacy_child_has_unchanged_popen_arguments(monkeypatch,tmp_path):
+    seen=[];child=object()
+    monkeypatch.setattr(stream.subprocess,"Popen",lambda args,**kwargs:(seen.append((args,kwargs)) or child))
+    assert stream.launch_process_child(["/usr/bin/true"],cwd=tmp_path,inherit_environment=False) is child
+    assert seen[0][0] == ["/usr/bin/true"] and seen[0][1]["env"] == {}
+
+
+def test_owner_monitor_ack_failure_fences_and_cleans_isolated_child(monkeypatch):
+    from benchmarks.agent_supervisor.container_coding import container_worker_deployment as deployment
+    import signal,subprocess
+    order=[]
+    class Child:
+        def terminate(self):order.append("terminate")
+        def wait(self,**kwargs):order.append("wait");return 75
+    class Guard:
+        def note_spawned(self,process):order.append("ack");raise ValueError("authored lost ACK")
+        def abort(self):order.append("charged-abort")
+    monkeypatch.setattr(signal,"signal",lambda *args:None)
+    monkeypatch.setattr(subprocess,"Popen",lambda args:(order.append("popen") or Child()))
+    monkeypatch.setattr(subprocess,"run",lambda *args,**kwargs:(order.append("cleanup") or SimpleNamespace(returncode=0)))
+    with pytest.raises(ValueError,match="lost ACK"):
+        exec(compile(deployment.OWNER_MONITOR,"<native-owner-monitor>","exec"),
+            {"command":["authored-worker"],"checked_context_guard":Guard()})
+    assert order == ["popen","ack","terminate","wait","cleanup","charged-abort"]
+
+
+def _worktree_owner_fixture(monkeypatch, tmp_path):
+    """Authored same-UID response and custody mocks; no actual kernel authority."""
+    import hashlib,json,os
+    from pathlib import PurePosixPath
+    from benchmarks.agent_supervisor.container_coding import container_worker_deployment as deployment
+    workspace="/opt/ipfs-supervisor/worktrees/authored"
+    marker="/opt/ipfs-supervisor/bin/worker-entry"
+    identity={"pid":13,"uid":1001,"parent_pid":12,"start_time_ticks":101,
+        "process_birth_id":"birth:"+"a"*32,"command":["/opt/ipfs-supervisor/venv/bin/python","-I",marker,"--observe-model-input-only"]}
+    response={"schema":"checked-worker-kernel-worktree-observation@1",
+        **{k:identity[k] for k in ("pid","uid","parent_pid","start_time_ticks","process_birth_id")},
+        "boot_id":"00000000-0000-0000-0000-000000000000","worktree":workspace,
+        "command_sha256":hashlib.sha256(json.dumps(identity['command'],sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()).hexdigest(),
+        "namespaces":{"pid":"pid:[1]","mnt":"mnt:[2]","net":"net:[3]"},
+        "metadata_only":True,"execution_authority":False,"proof_authority":False,
+        "completion_authority":False,"source_body_executed":False,"provider_calls":0}
+    state={"calls":[],"symlink":False,"helper_changed":False}
+    class MetadataPath(PurePosixPath):
+        def resolve(self,strict=False):return MetadataPath('/different') if state['symlink'] else self
+        def is_dir(self):return True
+        def is_symlink(self):return state['symlink']
+    monkeypatch.setattr(deployment,'Path',MetadataPath)
+    held=tmp_path/'held-helper-fd';held.write_bytes(b'authored mock helper')
+    def custody():
+        fd=os.open(held,os.O_RDONLY)
+        def guard():
+            state['calls'].append('helper-custody')
+            if state['helper_changed']:raise deployment.WorkerWorktreeObservationError('authored helper changed')
+        return fd,guard
+    monkeypatch.setattr(deployment,'_worker_entry_custody',custody)
+    def run(argv,**kwargs):
+        state['calls'].append(('sudo',argv,kwargs))
+        return SimpleNamespace(returncode=0,stdout=(json.dumps(response,sort_keys=True,separators=(',',':'),ensure_ascii=False)+'\n').encode())
+    monkeypatch.setattr(deployment.subprocess,'run',run)
+    return deployment,identity,workspace,response,state
+
+
+def test_fixed_same_uid_metadata_route_is_bounded_and_joins_captured_identity(monkeypatch,tmp_path):
+    deployment,identity,workspace,response,state=_worktree_owner_fixture(monkeypatch,tmp_path)
+    assert deployment.observe_worker_kernel_worktree(worker_identity=identity,expected_worktree=workspace)==response
+    calls=[row for row in state['calls'] if isinstance(row,tuple)]
+    assert len(calls)==1
+    _,argv,kwargs=calls[0]
+    assert argv==['/usr/bin/sudo','-n','-u','benchmarkworker','--','/opt/ipfs-supervisor/bin/worker-entry',
+        '--observe-worker-worktree','13','101','birth:'+'a'*32,workspace]
+    assert kwargs=={'cwd':'/','env':{'PATH':'/usr/bin:/bin','LANG':'C','LC_ALL':'C'},
+        'stdin':deployment.subprocess.DEVNULL,'stdout':deployment.subprocess.PIPE,
+        'stderr':deployment.subprocess.DEVNULL,'timeout':3.0,'check':False}
+    assert state['calls'][0]==state['calls'][-1]=='helper-custody'
+
+
+@pytest.mark.parametrize('change',['pid','uid','parent','ticks','birth','cwd','command','schema','extra',
+    'authority','metadata','source','provider-bool','provider','namespace','boot','bool-pid','no-response','oversize','nonzero'])
+def test_same_uid_metadata_refusals_cannot_replace_captured_worker(monkeypatch,tmp_path,change):
+    deployment,identity,workspace,response,state=_worktree_owner_fixture(monkeypatch,tmp_path)
+    if change in ('pid','uid'):response[change]+=1
+    elif change=='parent':response['parent_pid']+=1
+    elif change=='ticks':response['start_time_ticks']+=1
+    elif change=='birth':response['process_birth_id']='birth:'+'b'*32
+    elif change=='cwd':response['worktree']+='/other'
+    elif change=='command':response['command_sha256']='f'*64
+    elif change=='schema':response['schema']='other'
+    elif change=='extra':response['extra']='untrusted'
+    elif change=='authority':response['execution_authority']=True
+    elif change=='metadata':response['metadata_only']=False
+    elif change=='source':response['source_body_executed']=True
+    elif change=='provider-bool':response['provider_calls']=False
+    elif change=='provider':response['provider_calls']=1
+    elif change=='namespace':response['namespaces']['extra']='pid:[4]'
+    elif change=='boot':response['boot_id']='invalid'
+    elif change=='bool-pid':response['pid']=True
+    else:
+        def run(*args,**kwargs):
+            state['calls'].append('authored-run')
+            return SimpleNamespace(returncode=1 if change=='nonzero' else 0,
+                stdout=b'' if change=='no-response' else b'x'*16385)
+        monkeypatch.setattr(deployment.subprocess,'run',run)
+    with pytest.raises(deployment.WorkerWorktreeObservationError):
+        deployment.observe_worker_kernel_worktree(worker_identity=identity,expected_worktree=workspace)
+    assert state['calls'][-1]=='helper-custody'
+
+
+@pytest.mark.parametrize('change',['uid','pid-bool','ticks-bool','missing','extra','marker','metadata-worker','relative','outside','dotdot','symlink'])
+def test_invalid_metadata_request_refuses_before_existing_sudo_route(monkeypatch,tmp_path,change):
+    deployment,identity,workspace,response,state=_worktree_owner_fixture(monkeypatch,tmp_path)
+    if change=='uid':identity['uid']=1000
+    elif change=='pid-bool':identity['pid']=True
+    elif change=='ticks-bool':identity['start_time_ticks']=False
+    elif change=='missing':identity.pop('parent_pid')
+    elif change=='extra':identity['executable']='/untrusted'
+    elif change=='marker':identity['command']=['/untrusted']
+    elif change=='metadata-worker':identity['command'].append('--observe-worker-worktree')
+    elif change=='relative':workspace='relative'
+    elif change=='outside':workspace='/app'
+    elif change=='dotdot':workspace='/opt/ipfs-supervisor/worktrees/../state'
+    elif change=='symlink':state['symlink']=True
+    with pytest.raises(deployment.WorkerWorktreeObservationError):
+        deployment.observe_worker_kernel_worktree(worker_identity=identity,expected_worktree=workspace)
+    assert state['calls']==[]
+
+
+@pytest.mark.parametrize('keyword',['proc_root','executable','environment','timeout','command'])
+def test_metadata_observer_accepts_no_helper_or_proc_substitution(monkeypatch,tmp_path,keyword):
+    deployment,identity,workspace,response,state=_worktree_owner_fixture(monkeypatch,tmp_path)
+    with pytest.raises(TypeError):deployment.observe_worker_kernel_worktree(
+        worker_identity=identity,expected_worktree=workspace,**{keyword:'/untrusted'})
+    assert state['calls']==[]
+
+
+def test_installed_helper_drift_after_subprocess_is_refused(monkeypatch,tmp_path):
+    deployment,identity,workspace,response,state=_worktree_owner_fixture(monkeypatch,tmp_path)
+    def run(*args,**kwargs):
+        state['helper_changed']=True
+        return SimpleNamespace(returncode=0,stdout=b'{}\n')
+    monkeypatch.setattr(deployment.subprocess,'run',run)
+    with pytest.raises(deployment.WorkerWorktreeObservationError,match='helper changed'):
+        deployment.observe_worker_kernel_worktree(worker_identity=identity,expected_worktree=workspace)
+
+
+def _embedded_metadata_fixture(change=None):
+    """Execute only the embedded stdlib function over wholly authored proc data."""
+    import hashlib,json,os,pathlib,stat
+    from benchmarks.agent_supervisor.container_coding import container_worker_deployment as deployment
+    root='/opt/ipfs-supervisor';workspace=root+'/worktrees/authored';boot='00000000-0000-0000-0000-000000000000'
+    namespaces={'pid':'pid:[1]','mnt':'mnt:[2]','net':'net:[3]'}
+    boundary={'schema':'supervisor-container-worker-boundary@1','container_id':'a'*64,'image_id':'sha256:'+'b'*64,
+        'owner_uid':1000,'worker_uid':1001,'single_worker':True,'namespaces':namespaces,
+        'allowed_worktree_roots':[root+'/worktrees'],'owner_private_paths':[root+'/state',root+'/home',root+'/codex-auth'],
+        'validation_repository_roots':['/app']}
+    state={'stat_reads':0,'cwd_reads':0}
+    if change=='not-single':boundary['single_worker']=False
+    command=['/opt/ipfs-supervisor/venv/bin/python','-I',root+'/bin/worker-entry','--observe-model-input-only']
+    if change=='marker':command[2]='/different/worker-entry'
+    if change=='metadata-worker':command+=['--observe-worker-worktree']
+    def status(uid=1001):return ('Uid:\t'+('\t'.join([str(uid)]*4))+'\nCapEff:\t0\nCapPrm:\t0\nCapAmb:\t0\nNoNewPrivs:\t1\n').encode()
+    class KernelPath(pathlib.PurePosixPath):
+        def read_bytes(self):
+            name=str(self)
+            if name=='/proc/13/stat':
+                state['stat_reads']+=1
+                start=102 if change=='reuse' and state['stat_reads']>1 else 101
+                facts=['Z' if change=='zombie' else 'S','12']+['0']*17+[str(start)]
+                return ('13 (authored worker) '+' '.join(facts)).encode()
+            if name=='/proc/13/status':return status(1000 if change=='uid' else 1001)
+            if name=='/proc/13/cmdline':return b'\0'.join(part.encode() for part in command)+b'\0'
+            if name=='/proc/self/status':return status()
+            if name=='/proc/sys/kernel/random/boot_id':return boot.encode()
+            raise FileNotFoundError(name)
+        def read_text(self):return self.read_bytes().decode()
+        def resolve(self,strict=False):return KernelPath('/different') if change=='symlink' and str(self)==workspace else self
+        def is_symlink(self):return change=='symlink' and str(self)==workspace
+        def is_dir(self):return True
+        def lstat(self):
+            private=str(self) in boundary['owner_private_paths']
+            return SimpleNamespace(st_mode=stat.S_IFDIR|(0o700 if private else 0o755),st_uid=1000 if private else 0)
+    def readlink(path):
+        path=str(path)
+        if path=='/proc/13/cwd':
+            state['cwd_reads']+=1
+            return workspace+'/other' if change=='cwd' or (change=='late-cwd' and state['cwd_reads']>1) else workspace
+        if '/ns/' in path:
+            key=path.rsplit('/',1)[1]
+            return 'pid:[9]' if change=='namespace' and path=='/proc/13/ns/pid' else namespaces[key]
+        raise FileNotFoundError(path)
+    ns={'root':KernelPath(root),'pathlib':SimpleNamespace(Path=KernelPath),'json':json,'stat':stat,'hashlib':hashlib,
+        'os':SimpleNamespace(readlink=readlink,access=lambda *a:False,W_OK=os.W_OK,R_OK=os.R_OK,X_OK=os.X_OK),
+        '_profile_read':lambda path:json.dumps(boundary).encode()}
+    exec(compile(deployment.WORKER_WORKTREE_OBSERVER,'<authored-kernel-metadata-function>','exec'),ns)
+    birth='birth:'+hashlib.sha256(('13:101:'+boot+':12').encode()).hexdigest()[:32]
+    return ns['_observe_worker_worktree'],(13,101,birth,workspace),state
+
+
+def test_embedded_metadata_observer_rechecks_same_uid_birth_command_and_actual_cwd():
+    import json
+    observe,args,state=_embedded_metadata_fixture()
+    value=json.loads(observe(args))
+    assert state=={'stat_reads':2,'cwd_reads':2}
+    assert value['pid']==13 and value['uid']==1001 and value['worktree']==args[-1]
+    assert value['metadata_only']is True and value['provider_calls']==0
+    assert all(value[name]is False for name in ('execution_authority','proof_authority','completion_authority','source_body_executed'))
+
+
+@pytest.mark.parametrize('change',['reuse','uid','cwd','late-cwd','symlink','namespace','marker','metadata-worker','not-single','zombie'])
+def test_embedded_metadata_observer_refuses_authored_kernel_drift(change):
+    observe,args,state=_embedded_metadata_fixture(change)
+    with pytest.raises(SystemExit):observe(args)
+
+
+@pytest.mark.parametrize('observer_only',[False,True])
+def test_metadata_mode_is_closed_and_allowed_without_provider_execution_in_both_profiles(observer_only):
+    import ast,hashlib,json,pathlib
+    from benchmarks.agent_supervisor.container_coding import container_worker_deployment as deployment
+    tree=ast.parse(deployment.PROFILE_GUARD)
+    chosen=[node for node in tree.body if isinstance(node,ast.FunctionDef) and node.name in
+        ('_worktree_observation_arguments','_worker_profile')]
+    boundary=b'authored protected boundary bytes'
+    profile={'schema':deployment.PROFILE_SCHEMA,'observer_only':observer_only,'boundary_sha256':hashlib.sha256(boundary).hexdigest()}
+    ns={'pathlib':pathlib,'hashlib':hashlib,'_profile_read':lambda path:boundary if path.name=='container-boundary.json'else b'profile',
+        '_profile_json':lambda raw:profile,'_observer_absence':lambda *args:pytest.fail('metadata mode touched provider paths')}
+    exec(compile(ast.Module(body=chosen,type_ignores=[]),'<closed-profile-mode>','exec'),ns)
+    args=['--observe-worker-worktree','13','101','birth:'+'a'*32,'/opt/ipfs-supervisor/worktrees/authored']
+    assert ns['_worker_profile'](pathlib.Path('/opt/ipfs-supervisor'),'worker',args)==profile
+    for malformed in (args[:-1],args+['--model','other'],[args[0]+'=13',*args[2:]],
+                      [args[0],'true',*args[2:]],[args[0],'013',*args[2:]],
+                      [*args[:-1],'/opt/ipfs-supervisor/worktrees/../state']):
+        with pytest.raises(SystemExit):ns['_worker_profile'](pathlib.Path('/opt/ipfs-supervisor'),'worker',malformed)
+    assert deployment.WORKER_ENTRY.index('if observation_arguments is not None:')<deployment.WORKER_ENTRY.index(
+        'from ipfs_accelerate_py.agent_supervisor.runtime.container_worker_boundary import')
+
+
+def _installed_entry_fixture(monkeypatch,tmp_path,change=None):
+    """Real entry bytes/inodes/FDs with explicitly authored root ownership stat."""
+    import os,stat
+    from pathlib import PurePosixPath
+    from benchmarks.agent_supervisor.container_coding import container_worker_deployment as deployment
+    installed=tmp_path/'worker-entry'
+    installed.write_bytes(deployment.WORKER_ENTRY.encode());installed.chmod(0o555)
+    if change=='bytes':installed.chmod(0o755);installed.write_bytes(b'wrong helper');installed.chmod(0o555)
+    elif change=='mode':installed.chmod(0o777)
+    elif change=='symlink':
+        target=tmp_path/'actual';installed.rename(target);installed.symlink_to(target)
+    elif change=='hardlink':os.link(installed,tmp_path/'extra-link')
+    fixed='/opt/ipfs-supervisor/bin/worker-entry'
+    def root_stat(info):
+        values={name:getattr(info,name) for name in ('st_dev','st_ino','st_mode','st_uid','st_gid',
+            'st_nlink','st_size','st_mtime_ns','st_ctime_ns')}
+        values['st_uid']=1000 if change=='owner' else 0
+        return SimpleNamespace(**values)
+    class InstalledPath(PurePosixPath):
+        def __fspath__(self):return str(installed) if str(self)==fixed else str(self)
+        def resolve(self,strict=False):return InstalledPath('/different') if installed.is_symlink() and str(self)==fixed else self
+        def lstat(self):
+            if str(self)==fixed:return root_stat(installed.lstat())
+            return SimpleNamespace(st_mode=stat.S_IFDIR|(0o777 if change=='parent-mode' else 0o755),
+                st_uid=1000 if change=='parent-owner' else 0)
+    opened=[]
+    def open_file(path,flags):opened.append(flags);return os.open(path,flags)
+    monkeypatch.setattr(deployment,'Path',InstalledPath)
+    monkeypatch.setattr(deployment,'os',SimpleNamespace(open=open_file,fstat=lambda fd:root_stat(os.fstat(fd)),
+        pread=os.pread,close=os.close,O_RDONLY=os.O_RDONLY,O_NONBLOCK=os.O_NONBLOCK,O_NOFOLLOW=os.O_NOFOLLOW))
+    return deployment,installed,opened
+
+
+def test_installed_worker_entry_custody_reopens_original_protected_bytes(monkeypatch,tmp_path):
+    import os
+    deployment,installed,opened=_installed_entry_fixture(monkeypatch,tmp_path)
+    fd,guard=deployment._worker_entry_custody()
+    try:guard()
+    finally:os.close(fd)
+    assert len(opened)>=3 and all(flags & os.O_NOFOLLOW for flags in opened)
+
+
+@pytest.mark.parametrize('change',['bytes','mode','owner','parent-mode','parent-owner','symlink','hardlink'])
+def test_unprotected_or_substituted_installed_helper_refuses(monkeypatch,tmp_path,change):
+    deployment,installed,opened=_installed_entry_fixture(monkeypatch,tmp_path,change)
+    with pytest.raises(deployment.WorkerWorktreeObservationError):deployment._worker_entry_custody()
+
+
+@pytest.mark.parametrize('change',['bytes','inode'])
+def test_retained_installed_helper_detects_change_even_when_replacement_bytes_match(monkeypatch,tmp_path,change):
+    import os
+    deployment,installed,opened=_installed_entry_fixture(monkeypatch,tmp_path)
+    fd,guard=deployment._worker_entry_custody()
+    try:
+        if change=='inode':
+            installed.rename(tmp_path/'old-entry');installed.write_bytes(deployment.WORKER_ENTRY.encode());installed.chmod(0o555)
+        else:installed.chmod(0o755);installed.write_bytes(b'changed');installed.chmod(0o555)
+        with pytest.raises(deployment.WorkerWorktreeObservationError):guard()
+    finally:os.close(fd)

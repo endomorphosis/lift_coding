@@ -1,0 +1,23 @@
+{
+  "path": "/tmp/additional-worktree-source-retention-20261127-ofnpftDm/staged-variants.json",
+  "bytes": 4035530,
+  "sha256": "18d3e015bb5f74b1f3544db05c46eaa76d9e50940b77fccf8ab0eeb8ce9d9864",
+  "files": [
+    {
+      "family": "ipfs_accelerate_py",
+      "relative_path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+      "bytes": 3391478,
+      "sha256": "83f3e9040262e8b1c072af63d7eb6f7909d85f57bcde10cafba9f89069d63701",
+      "disposition": "exact-reachable-main-history",
+      "new_payload": null
+    },
+    {
+      "family": "ipfs_datasets_py",
+      "relative_path": "ipfs_datasets_py/processors/domains/uspto/prior_art_search_client.py",
+      "bytes": 52973,
+      "sha256": "5e66c5339850c96305d25dac400e732ffd6a16fcefd14574e8333a3d86148337",
+      "disposition": "exact-reachable-main-history",
+      "new_payload": null
+    }
+  ]
+}

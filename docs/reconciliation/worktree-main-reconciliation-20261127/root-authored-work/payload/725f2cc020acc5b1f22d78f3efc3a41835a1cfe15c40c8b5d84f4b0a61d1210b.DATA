@@ -1,0 +1,198 @@
+"""One JSON request per fresh ordinary-native-grader process; stdout is sanitized.
+
+The service is trusted curator code. It never grants a proposal container access
+to protected inputs. Candidate execution remains the original in-process native
+SWE-bench test model; this is not an adversarial execution-integrity claim.
+"""
+import contextlib,hashlib,json,os,re,shutil,subprocess,sys,time,traceback
+from pathlib import Path,PurePosixPath
+H=Path(__file__).resolve().parent
+R=H.parent
+ARM=R/'arm64_qualification'
+ROOT=H/'results'
+HASH=re.compile(r'^[0-9a-f]{64}$')
+ID=re.compile(r'^[a-zA-Z0-9][a-zA-Z0-9_.-]{0,95}$')
+class Rejected(Exception):
+    def __init__(self,code): self.code=code
+
+def sha(data): return hashlib.sha256(data).hexdigest()
+def dump(p,v): p.write_text(json.dumps(v,sort_keys=True,indent=2)+'\n')
+def reject(code): raise Rejected(code)
+def run(argv,custody,tag,timeout=30):
+    started=time.monotonic()
+    with (custody/(tag+'.stdout')).open('wb') as out,(custody/(tag+'.stderr')).open('wb') as err:
+        try:
+            p=subprocess.run(argv,stdout=out,stderr=err,timeout=timeout)
+            result={'returncode':p.returncode,'timed_out':False}
+        except subprocess.TimeoutExpired:
+            result={'returncode':None,'timed_out':True}
+    result.update(elapsed_seconds=time.monotonic()-started,argv=argv)
+    dump(custody/(tag+'.json'),result)
+    return result
+
+def validate_patch(data):
+    from unidiff import PatchSet
+    if len(data)>1048576: reject('candidate_too_large')
+    try: text=data.decode('utf-8'); patch=PatchSet(text)
+    except Exception: reject('invalid_unified_diff')
+    if data and not len(patch): reject('nonempty_patch_without_file_changes')
+    if any(x in text for x in ['GIT binary patch','new file mode 120000','new mode 120000','old mode 120000']): reject('unsupported_patch_mode')
+    paths=set()
+    for part in patch:
+        for raw in [part.source_file,part.target_file]:
+            if raw=='/dev/null': continue
+            if not raw.startswith(('a/','b/')): reject('patch_path_prefix')
+            name=raw[2:]
+            if '\x00' in name or '\\' in name or any(x in ('','..','.') for x in name.split('/')): reject('unsafe_patch_path')
+            path=PurePosixPath(name)
+            if path.is_absolute() or len(path.parts)<2 or path.parts[0]!='requests' or path.suffix!='.py': reject('patch_outside_requests_python_scope')
+            if any(x=='.git' or x.startswith('.ns-curator') for x in path.parts): reject('protected_patch_path')
+            paths.add(name)
+    return len(paths)
+
+def import_grader(profile):
+    if Path(sys.prefix).resolve()!=(ARM/'grader_venv').resolve(): reject('wrong_grader_environment')
+    sys.path.insert(0,str(R/'harness_source'))
+    from swebench.harness import grading
+    from swebench.types import TestSpec
+    import swebench
+    if swebench.__version__!='5.0.2': reject('native_version_mismatch')
+    loaded={name:{'path':str(Path(m.__file__).resolve()),'sha256':sha(Path(m.__file__).read_bytes())}
+        for name,m in sys.modules.copy().items() if name.startswith('swebench.') and getattr(m,'__file__',None)}
+    expected=profile['native_loaded_sources']
+    if any(name not in loaded or loaded[name]!=v for name,v in expected.items()): reject('native_loaded_source_mismatch')
+    if 'swebench.harness' not in loaded: reject('native_initializer_not_loaded')
+    return grading,TestSpec,loaded
+
+def execute(req,out,custody):
+    registry_bytes=(H/'registry.json').read_bytes();registry=json.loads(registry_bytes)
+    if req.get('service_profile_sha256')!=sha(registry_bytes): reject('service_profile_mismatch')
+    for name,expected in registry['service_sources'].items():
+        if sha((H/name).read_bytes())!=expected: reject('service_source_mismatch')
+    if req.get('schema')!='ns-curator-candidate-score/v1' or req.get('operation')!='score': reject('request_schema')
+    instance=req.get('instance_id')
+    if instance not in registry['profiles']: reject('unknown_instance')
+    cfg=registry['profiles'][instance]
+    for name in ['base_commit','image_id','qualification_profile_sha256']:
+        if req.get(name)!=cfg[name]: reject('request_profile_mismatch')
+    for name in ['objective_sha256','candidate_patch_sha256']:
+        if not isinstance(req.get(name),str) or not HASH.fullmatch(req[name]): reject('invalid_'+name)
+    profile_path=R/cfg['qualification_profile']
+    profile_bytes=profile_path.read_bytes()
+    if sha(profile_bytes)!=cfg['qualification_profile_sha256']: reject('qualification_profile_changed')
+    profile=json.loads(profile_bytes)
+    metadata_path=R/cfg['image_metadata']
+    if sha(metadata_path.read_bytes())!=cfg['image_metadata_sha256']: reject('image_metadata_changed')
+    image_packages=json.loads(metadata_path.read_text())['python_packages']
+    for name,expected in cfg['protected_input_sha256'].items():
+        if sha((R/cfg['custody']/name).read_bytes())!=expected: reject('protected_input_changed')
+    candidate=Path(req.get('sealed_candidate_patch_path',''))
+    if not candidate.is_absolute() or not candidate.is_file() or candidate.is_symlink(): reject('candidate_path_invalid')
+    # Read once; all subsequent operations consume this exact byte snapshot.
+    data=candidate.read_bytes()
+    if sha(data)!=req['candidate_patch_sha256']: reject('candidate_hash_mismatch')
+    count=validate_patch(data)
+    sealed=custody/'candidate.patch';sealed.write_bytes(data);sealed.chmod(0o444)
+    grading,TestSpec,loaded=import_grader(profile)
+    protected=R/cfg['custody']
+    row=json.loads((protected/'row.json').read_text());tests=json.loads((protected/'tests.json').read_text())
+    spec=TestSpec(instance_id=instance,image=cfg['image_id'],eval_script_list=[],repo=row['repo'],version=row['version'],
+        FAIL_TO_PASS=tests['FAIL_TO_PASS'],PASS_TO_PASS=tests['PASS_TO_PASS'],log_parser=row['log_parser'],eval_type=row['eval_type'])
+    expected=set(tests['FAIL_TO_PASS'])|set(tests['PASS_TO_PASS'])
+    if not expected or not tests['FAIL_TO_PASS']: reject('empty_designated_profile')
+    spec_image=run(['docker','image','inspect',cfg['image_id']],custody,'image-inspect')
+    if spec_image['returncode']!=0: reject('image_unavailable')
+    image=json.loads((custody/'image-inspect.stdout').read_text())[0]
+    if image['Id']!=cfg['image_id'] or image['Architecture']!='arm64': reject('image_identity_mismatch')
+    shutil.copyfile(protected/'eval-arm.sh',custody/'eval-arm.sh')
+    shutil.copyfile(H/'inventory.py',custody/'inventory.py')
+    wrapper='#!/bin/bash\nset -euo pipefail\ncd /testbed\n'
+    if data: wrapper+='git apply --check /curator/candidate.patch\ngit apply /curator/candidate.patch\n'
+    wrapper+='python /curator/inventory.py\nset +e\nbash /curator/eval-arm.sh\ncontrol_status=$?\npython -m pip list --format=json > /tmp/ns-packages-after.json\nexit "$control_status"\n'
+    (custody/'run.sh').write_text(wrapper)
+    intent={'schema':'ns-candidate-score-dispatch-intent/v1','request_sha256':sha(json.dumps(req,sort_keys=True,separators=(',',':')).encode()),
+        'registry_sha256':sha(registry_bytes),'candidate_patch_sha256':sha(data),'candidate_changed_path_count':count,
+        'image_id':cfg['image_id'],'native_loaded_sources':loaded,'dispatched_at_ns':time.time_ns()}
+    dump(out/'dispatch_intent.json',intent)
+    name='ns-score-'+req['evaluation_id'].lower()
+    create=run(['docker','create','--name',name,'--network',cfg['network_mode'],'--cpus','2','--memory','2g','--pids-limit','128',
+        '--security-opt','no-new-privileges','--mount','type=bind,src='+str(custody)+',dst=/curator,readonly',
+        cfg['image_id'],'bash','/curator/run.sh'],custody,'create')
+    if create['returncode']!=0: reject('container_create_failed')
+    try:
+        started=time.monotonic()
+        with (custody/'evaluation.raw').open('wb') as stream:
+            try:
+                p=subprocess.run(['docker','start','--attach',name],stdout=stream,stderr=subprocess.STDOUT,timeout=180)
+                code,timeout=p.returncode,False
+            except subprocess.TimeoutExpired:
+                code,timeout=None,True
+                run(['docker','kill',name],custody,'kill')
+        elapsed=time.monotonic()-started
+        inspected=run(['docker','inspect',name],custody,'inspect')
+        if inspected['returncode']!=0: reject('container_inspection_failed')
+        state=json.loads((custody/'inspect.stdout').read_text())[0]['State']
+        pre=run(['docker','cp',name+':/tmp/ns-candidate-state.json',str(custody/'candidate-source-state.json')],custody,'copy-source-state')
+        post=run(['docker','cp',name+':/tmp/ns-packages-after.json',str(custody/'packages-after.json')],custody,'copy-packages')
+        raw=(custody/'evaluation.raw').read_bytes();decoded=raw.decode(errors='replace');log=custody/'evaluation-native.log';log.write_text(decoded)
+        statuses,found=grading.get_logs_eval(spec,str(log))
+        native=grading.get_eval_report(spec,{'instance_id':instance,'model_name_or_path':'sealed-candidate-service','model_patch':data.decode()},str(log),include_tests_status=True)[instance]
+        dump(custody/'native_report.json',native);dump(custody/'status_map.json',statuses)
+        resolved_keys={grading._resolve_case(test,statuses) for test in expected}
+        values=[statuses.get(grading._resolve_case(test,statuses),'MISSING') for test in expected]
+        designated={k:values.count(k) for k in ['PASSED','FAILED','XFAIL','ERROR','SKIPPED','MISSING']}
+        complete=sum(v in ['PASSED','FAILED','XFAIL'] for v in values)
+        source=json.loads((custody/'candidate-source-state.json').read_text()) if pre['returncode']==0 else None
+        after=json.loads((custody/'packages-after.json').read_text()) if post['returncode']==0 else None
+        before_versions={x['name'].lower():x['version'] for x in image_packages}
+        after_versions={x['name'].lower():x['version'] for x in after} if after is not None else {}
+        environment_unchanged=before_versions==after_versions
+        source_bound=source is not None and source['base_commit']==cfg['base_commit']
+        clean=found and complete==len(expected) and not timeout and not state['OOMKilled'] and source_bound and environment_unchanged
+        passed=bool(clean and native['resolved'] and designated['PASSED']==len(expected))
+        result={'schema':'ns-curator-candidate-score-receipt/v1','status':'completed' if clean else 'incomplete','passed':passed,
+            'evaluation_id':req['evaluation_id'],'instance_id':instance,'base_commit':cfg['base_commit'],
+            'objective_sha256':req['objective_sha256'],'candidate_patch_sha256':sha(data),
+            'request_sha256':intent['request_sha256'],'qualification_profile_sha256':cfg['qualification_profile_sha256'],
+            'registry_sha256':sha(registry_bytes),'service_profile_sha256':sha(registry_bytes),'environment_versions_unchanged':environment_unchanged,'image_id':cfg['image_id'],'network_mode':cfg['network_mode'],
+            'candidate_source_tree_sha256':source['tree_sha256'] if source else None,'candidate_source_file_count':source['file_count'] if source else None,
+            'candidate_changed_path_count':count,'native_resolved':native['resolved'],'native_logs_found':found,
+            'designated_total':len(expected),'designated_completed':complete,'designated_status_counts':designated,
+            'outside_designated_status_counts':{k:sum(v==k and name not in resolved_keys for name,v in statuses.items()) for k in sorted(set(statuses.values()))},
+            'test_exit_code':grading.parse_test_exit_code(decoded),'container_exit_code':state['ExitCode'],
+            'timed_out':timeout,'oom_killed':state['OOMKilled'],'elapsed_seconds':elapsed,
+            'raw_log_sha256':sha(raw),'decoded_log_sha256':sha(log.read_bytes()),
+            'post_setup_distributions_sha256':sha((custody/'packages-after.json').read_bytes()) if after else None,
+            'native_grader_version':'5.0.2','ordinary_native_imports':True,'python_executable':sys.executable,'python_version':sys.version,
+            'command_receipt':'curator_custody/create.json','native_source_receipt':'dispatch_intent.json',
+            'resource_limits':{'cpus':2,'memory_bytes':2147483648,'pids':128,'timeout_seconds':180},
+            'provider_calls':0,'protected_values_emitted':False,'adversarial_candidate_oracle_integrity_qualified':False}
+        return result
+    finally:
+        run(['docker','rm','--force',name],custody,'remove')
+
+def main():
+    raw=sys.stdin.buffer.read(65537)
+    if len(raw)>65536: reject('request_too_large')
+    try: req=json.loads(raw)
+    except Exception: reject('invalid_json')
+    if not isinstance(req,dict) or not isinstance(req.get('evaluation_id'),str) or not ID.fullmatch(req['evaluation_id']): reject('invalid_evaluation_id')
+    if req.get('output_root') not in (None,str(ROOT)): reject('output_root_not_service_owned')
+    ROOT.mkdir(exist_ok=True)
+    out=ROOT/req['evaluation_id']
+    try: out.mkdir()
+    except FileExistsError: reject('duplicate_evaluation_id')
+    custody=out/'curator_custody';custody.mkdir(mode=0o700)
+    dump(custody/'request.json',req)
+    try:
+        with (custody/'service-stderr.log').open('w') as err,contextlib.redirect_stderr(err): result=execute(req,out,custody)
+    except Rejected as exc:
+        result={'schema':'ns-curator-candidate-score-receipt/v1','status':'rejected','passed':False,'evaluation_id':req['evaluation_id'],'reason':exc.code,'provider_calls':0}
+    except BaseException as exc:
+        (custody/'exception.txt').write_text(traceback.format_exc())
+        result={'schema':'ns-curator-candidate-score-receipt/v1','status':'error','passed':False,'evaluation_id':req['evaluation_id'],'reason':'internal_error','exception_type':type(exc).__name__,'details_retained_in_custody':True,'provider_calls':0}
+    result['receipt_path']=str(out/'receipt.json');dump(out/'receipt.json',result)
+    print(json.dumps(result,sort_keys=True))
+if __name__=='__main__':
+    try: main()
+    except Rejected as exc: print(json.dumps({'status':'rejected','passed':False,'reason':exc.code,'provider_calls':0},sort_keys=True))

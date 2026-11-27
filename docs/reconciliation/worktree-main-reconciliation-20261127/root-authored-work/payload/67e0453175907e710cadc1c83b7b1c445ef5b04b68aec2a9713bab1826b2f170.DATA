@@ -1,0 +1,102 @@
+"""Read-only custody verification. Only aggregate checks and profile identities leave custody."""
+from pathlib import Path
+import hashlib,json,sys,traceback
+H=Path(__file__).resolve().parent
+
+def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+def main(version):
+    run=H/('run-v'+str(version)); custody=run/'curator_custody'
+    out=run/'artifact_audit.json'
+    assert not out.exists()
+    checks=[]
+    def ck(name,ok):
+        checks.append({'check':name,'passed':bool(ok)})
+        assert ok,name
+    freeze=json.loads((run/'freeze.json').read_text())
+    protocol=freeze['protocol']
+    cs='curator.py' if version==1 else 'curator_v'+str(version)+'.py'
+    ss='native_scorer.py' if version==1 else 'native_scorer_v'+str(version)+'.py'
+    ck('curator code frozen',sha(H/cs)==sha(run/'curator_snapshot.py')==freeze['curator_sha256'])
+    for p,h in freeze['source_files'].items():
+        ck('public source '+p,sha(run/'build_context/source'/p)==h)
+    for p,h in freeze['native_grader_sources'].items():
+        ck('native source '+p,sha(H.parents[1]/'harness_source'/p)==h)
+    ck('private custody mode',custody.stat().st_mode&0o777==0o700)
+    row=json.loads((custody/'row.json').read_text()); tests=json.loads((custody/'tests.json').read_text())
+    expected=set(tests['FAIL_TO_PASS'])|set(tests['PASS_TO_PASS'])
+    ck('nonempty frozen designated checks',len(expected)==131 and len(tests['FAIL_TO_PASS'])==1 and len(tests['PASS_TO_PASS'])==130)
+    for k in ['FAIL_TO_PASS','PASS_TO_PASS']:
+        ck('dataset designated set '+k,set(tests[k])==set(json.loads(row[k]) if isinstance(row[k],str) else row[k]))
+    ck('source commit matches dataset',row['base_commit']==protocol['source_commit'])
+    for name,key in [('gold.patch','patch'),('test.patch','test_patch'),('eval-original.sh','eval_script')]:
+        ck('exact custody '+name,(custody/name).read_text()==row[key])
+    permitted={'source /opt/miniconda3/bin/activate','source /opt/miniconda3/etc/profile.d/conda.sh','conda activate testbed'}
+    original=(custody/'eval-original.sh').read_text()
+    ported=''.join(line for line in original.splitlines(keepends=True) if line.strip() not in permitted)
+    ck('only exact permitted conda prologue removal',ported==(custody/'eval-arm.sh').read_text())
+    ck('hidden test patch retained',row['test_patch'].strip() in ported)
+    built=json.loads((run/'build_summary.json').read_text())
+    qualified=False; controls=[]
+    if built['build_returncode']==0:
+        ck('ARM build identity',built['architecture']=='arm64' and built['image_id'].startswith('sha256:'))
+        scorer=json.loads((run/'native_scorer_freeze.json').read_text())
+        ck('scorer code frozen',sha(H/ss)==sha(run/'native_scorer_snapshot.py')==scorer['scorer_sha256'])
+        ck('scorer binds environment freeze',sha(run/'freeze.json')==scorer['environment_freeze_sha256'])
+        ck('scorer binds image',built['image_id']==scorer['image_id'])
+        ck('ordinary imports',scorer['ordinary_package_import'] and not scorer['sys_modules_initializer_bypass_used'])
+        ck('native package initializer actually loaded','swebench.harness' in scorer['native_loaded_sources'])
+        for name,v in scorer['native_loaded_sources'].items():
+            ck('loaded native source '+name,sha(Path(v['path']))==v['sha256'])
+        rawmeta=(custody/'logs/image-packages.stdout').read_text()
+        packages,end=json.JSONDecoder().raw_decode(rawmeta[rawmeta.index('['):])
+        installed={p['name'].lower():p['version'] for p in packages}
+        requested={line.split('==')[0].lower():line.split('==')[1] for line in (run/'build_context/pinned-python.txt').read_text().splitlines()}
+        ck('Python version','Python 3.9.20'==rawmeta.splitlines()[0])
+        ck('all explicit package constraints match',all(installed.get(k)==v for k,v in requested.items()))
+        if version>=3:
+            ck('public dev dependency pytest bound',installed['pytest']=='6.2.5')
+            ck('local fixture and TLS deps present',all(k in installed for k in ['trustme','httpbin','pytest-httpbin']))
+            ck('compatibility pin',installed['markupsafe']=='2.0.1')
+            ck('complete image distribution freeze',packages==scorer['image_distributions_before_controls'])
+        metadata={'python':rawmeta.splitlines()[0],'python_packages':packages,'explicit_constraints_matched':len(requested),
+            'system_packages':[line for line in rawmeta[rawmeta.index('[')+end:].splitlines() if '\t' in line]}
+        (run/'image_package_metadata.json').write_text(json.dumps(metadata,indent=2)+'\n')
+        summary=json.loads((run/'score_summary.json').read_text()); qualified=summary['qualified'];controls=summary['controls']
+        ck('qualification aggregate exact',qualified==all(r['qualification_control_passed'] for r in controls))
+        ck('both control identities',[r['control'] for r in controls]==['unfixed','gold'])
+        for r in controls:
+            arm=r['control']; d=custody/('native-'+arm)
+            raw=(d/'evaluation.log').read_bytes(); decoded=(d/'evaluation-native-decoded.log').read_bytes()
+            ck(arm+' raw receipt hash',hashlib.sha256(raw).hexdigest()==r['raw_log_sha256'])
+            ck(arm+' exact native decoder',raw.decode(errors='replace').encode()==decoded)
+            ck(arm+' decoded receipt hash',hashlib.sha256(decoded).hexdigest()==r['decoded_log_sha256'])
+            statuses=json.loads((d/'status_map.json').read_text())
+            ck(arm+' reported status counts',{s:sum(v==s for v in statuses.values()) for s in sorted(set(statuses.values()))}==r['parsed_status_counts'])
+            ck(arm+' designated missing count exact',sum(name not in statuses for name in expected)==r['expected_missing'])
+            native=json.loads((d/'native_report.json').read_text())
+            ck(arm+' native grade retained',native['resolved']==r['native_resolved'])
+            if r['qualification_control_passed']:
+                ck(arm+' qualified completeness',r['expected_checks_completed']==len(expected) and r['expected_errors']==r['expected_missing']==r['expected_skipped']==0)
+            if version>=3:
+                ck(arm+' post execution distributions retained',sha(d/'packages-after.json')==r['distributions_after_sha256'])
+        ck('gold patch actually supplied',(custody/'native-gold/gold.patch').read_text()==row['patch'] and len(row['patch'])>0)
+        if version==1:
+            ck('original offline gold failure retained',not qualified and not controls[1]['native_resolved'])
+    else:
+        ck('build failure no scores admitted',version==2 and not (run/'score_summary.json').exists())
+    # Public summaries/scripts must not contain hidden patch bodies or designated IDs.
+    public=[p for p in H.glob('*') if p.is_file() and p.suffix in ['.py','.json','.md']]
+    public += [p for p in run.glob('*') if p.is_file() and p.suffix in ['.py','.json','.md','.diff']]
+    ck('no hidden payload in public artifacts',all(row['patch'] not in p.read_text() and row['test_patch'] not in p.read_text() and not any(t in p.read_text() for t in expected) for p in public))
+    result={'schema':'ns-arm64-5414-audit/v1','run_version':version,'checks_passed':len(checks),'checks':checks,
+        'build_succeeded':built['build_returncode']==0,'qualified':qualified,'provider_calls':0,'new_control_executions':0,
+        'auditor_sha256':sha(Path(__file__)),'protected_values_emitted':False}
+    out.write_text(json.dumps(result,indent=2)+'\n')
+    print(json.dumps({k:v for k,v in result.items() if k!='checks'}))
+if __name__=='__main__':
+    version=int(sys.argv[1])
+    try: main(version)
+    except BaseException as exc:
+        (H/('run-v'+str(version))/'curator_custody/audit-exception.txt').write_text(traceback.format_exc())
+        print(json.dumps({'audit':'failed','version':version,'exception_type':type(exc).__name__,'details_in_custody':True}))
+        raise SystemExit(1)

@@ -1,0 +1,14 @@
+def decorate(function):
+    return function
+
+class HeaderDict:
+    @decorate
+    def _hkey(self, key):
+        """Exact café🔒 # source."""
+        return key.title()
+
+    def _hval(self, value):
+        return str(value)
+
+def other(value):
+    return value.other()

@@ -1,0 +1,83 @@
+"""Audit actual JSON operation receipts, outputs, identities and frozen sources."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-id", required=True)
+    args = parser.parse_args()
+    run = HERE / "runs" / args.run_id
+    freeze = json.loads((run / "prerun_freeze.json").read_text())
+    original = json.loads((HERE / "development-v1-artifact-manifest.json").read_text())
+    outcomes = json.loads((run / "outcomes.json").read_text())
+    operations = json.loads((run / "execution_log.json").read_text())
+    checks = []
+    sources = {}
+
+    def check(name, condition):
+        checks.append({"name": name, "passed": bool(condition)})
+
+    for path, digest in freeze["files"].items():
+        check("preregistered source unchanged " + path, sha(HERE / path) == digest)
+    check("original manifest unchanged", sha(HERE / "development-v1-artifact-manifest.json") == freeze["original_artifact_manifest_sha256"])
+    for artifact in original["artifacts"]:
+        check("original evidence unchanged " + artifact["path"], sha(HERE / artifact["path"]) == artifact["sha256"])
+    check("original report unchanged", sha(HERE / "README.md") == original["report_sha256"])
+    check("all expected seed/continuation cases", len(outcomes) == 12)
+    check("each JSON service operation a fresh interpreter", len(operations) == len({row["service_pid"] for row in operations}) == 25)
+    for operation in operations:
+        response = json.loads(Path(operation["response_path"]).read_text())
+        request = json.loads(Path(operation["request_path"]).read_text())
+        check(operation["case_id"] + "/" + operation["operation"] + " actual JSON success", operation["returncode"] == 0 and response["request_id"] == request["request_id"])
+        check(request["request_id"] + " positive measured elapsed", operation["process_elapsed_seconds"] >= response["elapsed_seconds"] > 0)
+        for source in response["runtime_profile"]["imports"]:
+            sources[source["path"]] = source
+    for path, source in sources.items():
+        check("normal-import source hash " + source["module"], sha(path) == source["sha256"])
+    for outcome in outcomes:
+        case = outcome["case"]
+        proposal = outcome["proposal"]
+        label = case["id"]
+        expected_count = 3 if label == "seed" else case["expected_native_calls"]
+        expected_reason = "empty" if label == "seed" else case["expected_gate"]
+        check(label + " preregistered action count and gate", outcome["action_count"] == expected_count and proposal["reason"] == expected_reason)
+        check(label + " actual independent behavioral success", outcome["passed"] and outcome["attempts"][-1]["observed"]["value"] == case["target"])
+        for number, attempt in enumerate(outcome["attempts"]):
+            stdout = Path(attempt["stdout"])
+            observed = json.loads(stdout.read_text())
+            actual_pass = attempt["returncode"] == 0 and type(observed["value"]) is int and observed["value"] == case["target"] and observed["action"] == attempt["action"]
+            check(label + f"/{number} raw stdout identity", sha(stdout) == attempt["stdout_sha256"])
+            check(label + f"/{number} raw stderr identity", sha(attempt["stderr"]) == attempt["stderr_sha256"])
+            check(label + f"/{number} independent check", attempt["independent_output_check"] == actual_pass)
+        if proposal["status"] == "proposal":
+            compiled = proposal["compilation"]
+            check(label + " actual compiler candidate CID resolved", compiled["candidate_cid"] == proposal["resolved_candidate_cid"] == proposal["retrieved"]["candidate_cid"] != compiled["query_cid"])
+            check(label + " actual compiler observation CID resolved", compiled["observation_cid"] == proposal["resolved_observation_cid"] == proposal["retrieved"]["observation_cid"] != compiled["query_cid"])
+            check(label + " compiler remains proposal only", compiled["proposal_only"] and not compiled["admitted"] and not compiled["prediction_authoritative"])
+            check(label + " proposed action actually executes first", proposal["selected_action"] == outcome["attempts"][0]["action"] == outcome["successful_action"])
+            check(label + " current execution requirement explicit", proposal["requires_current_execution_and_validation"] is True)
+        else:
+            check(label + " rejection cannot supply an executable suggestion", proposal["selected_action"] is None and "compilation" not in proposal and outcome["attempts"][0]["action"] == "identity")
+    base = outcomes[1]["proposal"]["query"]
+    for case_id, field in (("stale_state", "current_state_cid"), ("source_changed", "current_source_cid"), ("environment_changed", "environment_binding_cid")):
+        outcome = next(row for row in outcomes if row["case"]["id"] == case_id)
+        proposal = outcome["proposal"]
+        differences = sorted(key for key in base if base[key] != proposal["query"][key])
+        check(case_id + " isolated current binding control", differences == sorted([field, "query_cid"]) and not proposal["candidate_bound"] and "binding_error" in proposal)
+    result = {"schema": "world-memory-compiler-continuation-validation@1", "run_id": args.run_id, "passed": all(check["passed"] for check in checks), "check_count": len(checks), "failed": [check for check in checks if not check["passed"]], "checks": checks, "runtime_sources": list(sources.values())}
+    (run / "validation.json").write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({key: result[key] for key in ("run_id", "passed", "check_count", "failed")}))
+    raise SystemExit(0 if result["passed"] else 1)
+
+
+if __name__ == "__main__":
+    main()

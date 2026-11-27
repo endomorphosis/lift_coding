@@ -1,0 +1,22 @@
+import ObjectivePrefixIR
+
+namespace RankerObjectivePrefixProjections
+
+noncomputable section
+open RankerObjectivePrefixIR
+
+def loss_denominator_scope : Context := [("margins", (.vector 4))]
+def loss_denominator_source : SourceTerm .scalar := (SourceTerm.natToScalar (SourceTerm.lengthVector (SourceTerm.var (τ := (.vector 4)) "margins")))
+
+def gradient_denominator_scope : Context := [("differences", (.matrix 4 80))]
+def gradient_denominator_source : SourceTerm .scalar := (SourceTerm.natToScalar (SourceTerm.lengthMatrix (SourceTerm.var (τ := (.matrix 4 80)) "differences")))
+
+def weight_coordinate_scope : Context := [("weights", (.vector 80)), ("i", (.index 80))]
+def weight_coordinate_source : SourceTerm .scalar := (SourceTerm.indexVector (SourceTerm.var (τ := (.vector 80)) "weights") (SourceTerm.var (τ := (.index 80)) "i"))
+
+def source_L2_scope : Context := []
+def source_L2_source : SourceTerm .scalar := (SourceTerm.scalarLiteral ((5764607523034235 : ℚ) / 576460752303423488))
+
+-- Source literals only: generated compilation/evaluation proofs are a later batch.
+end
+end RankerObjectivePrefixProjections

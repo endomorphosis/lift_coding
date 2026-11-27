@@ -1,0 +1,215 @@
+"""Derive the Portal identity of an independently verified signed IntentIR task.
+
+This is a pure identity projection, not signature verification or owner-state
+authentication. The caller must first replay the signed graph and selected task
+specification. Database task CID, Portal canonical CID and captured task revision
+are distinct namespaces. No constructors, files, target code or owner APIs run.
+"""
+from __future__ import annotations
+
+from functools import wraps
+import json
+from pathlib import Path, PurePosixPath
+import re
+from types import SimpleNamespace
+
+
+SCHEMA = "supervisor-native-task-identity@1"
+PROFILE = "signed-intent-portal-projection@1"
+FIELDS = frozenset(("schema", "profile", "task_id", "database_task_cid",
+    "canonical_task_cid", "manifest_cid", "graph_cid", "planning_receipt_cid", "context_cid"))
+MAX_INPUT_BYTES = 262_144
+MAX_TEXT_BYTES = 65_536
+MAX_ROWS = 64
+_SPEC_FIELDS = frozenset(("task_key", "scope_paths", "outputs", "validations", "acceptance", "dependencies"))
+
+
+class NativeTaskIdentityError(ValueError):
+    """A public task is outside the exact supported projection profile."""
+
+
+def _without_metadata(function):
+    @wraps(function)
+    def wrapped(*args, **kwargs):
+        from .supervisor_meta_index import public_replay_without_metadata
+        with public_replay_without_metadata():
+            return function(*args, **kwargs)
+    return wrapped
+
+
+def _text(value, *, maximum=MAX_TEXT_BYTES, empty=False):
+    if type(value) is not str or (not empty and not value) or "\0" in value:
+        raise NativeTaskIdentityError("native task identity requires bounded UTF-8 text")
+    try:
+        if len(value.encode("utf-8")) > maximum:
+            raise NativeTaskIdentityError("native task identity text exceeds its bound")
+    except UnicodeEncodeError:
+        raise NativeTaskIdentityError("native task identity requires bounded UTF-8 text") from None
+    return value
+
+
+def _identifier(value):
+    text = _text(value, maximum=512)
+    if text != text.strip() or any(c.isspace() or ord(c) < 33 or ord(c) > 126 for c in text):
+        raise NativeTaskIdentityError("native task identity requires an exact identifier")
+    return text
+
+
+def _wire(value):
+    try:
+        return json.dumps(value, sort_keys=True, separators=(",", ":"),
+            ensure_ascii=False, allow_nan=False).encode("utf-8")
+    except (TypeError, ValueError, UnicodeEncodeError):
+        raise NativeTaskIdentityError("native task identity requires strict public JSON") from None
+
+
+def _list(value, *, nonempty=False):
+    if type(value) is not list or len(value) > MAX_ROWS or (nonempty and not value):
+        raise NativeTaskIdentityError("native task identity requires a bounded declaration inventory")
+    return value
+
+
+def _path(value, *, dot=False):
+    value = _text(value, maximum=4096)
+    path = PurePosixPath(value)
+    if value == "." and dot:
+        return value
+    if (not path.parts or path.is_absolute() or path.as_posix() != value
+            or any(part in (".", "..") for part in path.parts)
+            or "\\" in value or any(c in value for c in "\r\n")
+            or ":" in path.parts[0]):
+        raise NativeTaskIdentityError("native task identity requires canonical relative paths")
+    return value
+
+
+def _spec(spec):
+    if type(spec) is not dict or set(spec) != _SPEC_FIELDS:
+        raise NativeTaskIdentityError("unsupported signed native task declaration profile")
+    _identifier(spec["task_key"])
+    for name in ("scope_paths", "dependencies"):
+        for value in _list(spec[name]):
+            _path(value) if name == "scope_paths" else _identifier(value)
+    if len(set(spec["scope_paths"])) != len(spec["scope_paths"]) or len(set(spec["dependencies"])) != len(spec["dependencies"]):
+        raise NativeTaskIdentityError("native task identity has duplicate declarations")
+    for row in _list(spec["outputs"], nonempty=True):
+        if type(row) is not dict or set(row) != {"path", "effect", "media_type"}:
+            raise NativeTaskIdentityError("unsupported native task output declaration")
+        _path(row["path"])
+        if row["path"] not in spec["scope_paths"] or row["effect"] not in ("modify", "create") or type(row["effect"]) is not str:
+            raise NativeTaskIdentityError("unsupported native task output declaration")
+        _text(row["media_type"], maximum=256)
+    keys = []
+    for row in _list(spec["validations"], nonempty=True):
+        if type(row) is not dict or set(row) != {"validation_key", "argv", "cwd", "expected_exit_codes", "policy_cid"}:
+            raise NativeTaskIdentityError("unsupported native task validation declaration")
+        keys.append(_identifier(row["validation_key"]))
+        _path(row["cwd"], dot=True)
+        _identifier(row["policy_cid"])
+        for value in _list(row["argv"], nonempty=True):
+            _text(value, maximum=4096)
+            if any(c in value for c in "\r\n"):
+                raise NativeTaskIdentityError("unsupported native task validation argv")
+        if type(row["expected_exit_codes"]) is not list or len(row["expected_exit_codes"]) != 1 or type(row["expected_exit_codes"][0]) is not int or row["expected_exit_codes"][0] != 0:
+            raise NativeTaskIdentityError("unsupported native task validation exit codes")
+    if len(set(keys)) != len(keys):
+        raise NativeTaskIdentityError("native task identity has duplicate validation declarations")
+    criterion_keys = []
+    for row in _list(spec["acceptance"], nonempty=True):
+        if type(row) is not dict or set(row) != {"criterion_key", "criterion", "evidence_cids", "validation_keys"}:
+            raise NativeTaskIdentityError("unsupported native task acceptance declaration")
+        criterion_keys.append(_identifier(row["criterion_key"]))
+        _text(row["criterion"])
+        for value in _list(row["evidence_cids"]):
+            _identifier(value)
+        for value in _list(row["validation_keys"], nonempty=True):
+            if _identifier(value) not in keys:
+                raise NativeTaskIdentityError("native task acceptance references an undeclared validation")
+    if len(set(criterion_keys)) != len(criterion_keys) or len(_wire(spec)) > MAX_INPUT_BYTES:
+        raise NativeTaskIdentityError("native task identity exceeds its declaration bounds")
+
+
+@_without_metadata
+def derive_native_task_identity(*, task, spec, database_task_cid, manifest_cid,
+        graph_cid, planning_receipt_cid, context_cid):
+    """Replay the exact native projection/parser from previously verified inputs.
+
+    Only the signed local IntentIR materialization profile is supported. Scope
+    paths are not converted to allowed paths. Projection-private attempt fields
+    are inert placeholders, excluded by the native canonical identity algorithm.
+    """
+    from ..prompt.prompt_workflow import PromptTaskRecord, PromptTaskRecordV2
+    from ..todo_daemon.database_portal_bridge import DatabasePortalExecutionBridge
+    from ..todo_daemon.implementation_daemon import PortalImplementationDaemon, parse_task_text
+
+    if type(task) not in (PromptTaskRecord, PromptTaskRecordV2):
+        raise NativeTaskIdentityError("native task identity requires a verified graph task record")
+    _spec(spec)
+    database_task_cid = _identifier(database_task_cid)
+    if task.task_cid != database_task_cid or task.task_key != spec["task_key"]:
+        raise NativeTaskIdentityError("signed task identity differs from the selected database task")
+    _identifier(task.task_key)
+    objective = _text(task.objective)
+    if not objective.strip():
+        raise NativeTaskIdentityError("native task identity requires the signed task objective")
+    for name in ("outputs", "validations", "acceptance"):
+        names = tuple(spec[name][0])
+        observed = [{key: list(getattr(row, key)) if isinstance(getattr(row, key), tuple) else getattr(row, key)
+            for key in names} for row in getattr(task, name)]
+        if sorted(map(_wire, observed)) != sorted(map(_wire, spec[name])):
+            raise NativeTaskIdentityError("signed graph task differs from its selected declaration")
+    if sorted(task.scope_paths) != sorted(spec["scope_paths"]):
+        raise NativeTaskIdentityError("signed graph task differs from its selected scope")
+    identities = {name: _identifier(value) for name, value in (
+        ("manifest_cid", manifest_cid), ("graph_cid", graph_cid),
+        ("planning_receipt_cid", planning_receipt_cid), ("context_cid", context_cid))}
+    record = SimpleNamespace(task_alias=task.task_key, body={"title": objective},
+        outputs=spec["outputs"], validations=spec["validations"], acceptance=spec["acceptance"],
+        dependencies=())
+    attempt = SimpleNamespace(task_cid=database_task_cid, attempt_id="identity:attempt",
+        claim_id="identity:claim", attempt_number=1, lease_id="identity:lease",
+        owner_session_id="identity:owner", fencing_token=1, fence_epoch=1)
+    try:
+        projection = DatabasePortalExecutionBridge._render_projection_seed(attempt, record,
+            board_namespace="signed-intent-identity")
+        if len(projection.encode("utf-8")) > MAX_INPUT_BYTES:
+            raise NativeTaskIdentityError("native task projection exceeds its byte bound")
+        path = Path("signed-intent-identity.md")
+        parsed = parse_task_text(projection, path=path, task_header_prefix="## " + task.task_key)
+        if len(parsed) != 1 or parsed[0].task_id != task.task_key:
+            raise NativeTaskIdentityError("native task projection has no unique parsed task")
+        canonical = PortalImplementationDaemon._identity_for_task(SimpleNamespace(todo_path=path), parsed[0])
+    except NativeTaskIdentityError:
+        raise
+    except (ValueError, TypeError, KeyError, AttributeError):
+        raise NativeTaskIdentityError("native task identity projection cannot be replayed") from None
+    return {"schema": SCHEMA, "profile": PROFILE, "task_id": task.task_key,
+        "database_task_cid": database_task_cid, "canonical_task_cid": canonical.canonical_task_cid,
+        **identities}
+
+
+@_without_metadata
+def validate_native_task_identity(mapping, instruction_receipt):
+    """Validate a closed derived mapping against an independently verified receipt.
+
+    This checks identity joins, not a signature on the mapping or current owner
+    state. Extra public-instruction receipt fields do not affect these joins.
+    """
+    if type(mapping) is not dict or set(mapping) != FIELDS or mapping.get("schema") != SCHEMA or mapping.get("profile") != PROFILE:
+        raise NativeTaskIdentityError("unsupported native task identity mapping")
+    for name, value in mapping.items():
+        _identifier(value)
+    if not re.fullmatch(r"baguqeera[a-z2-7]{52}", mapping["canonical_task_cid"]):
+        raise NativeTaskIdentityError("native task identity has a malformed Portal CID")
+    if type(instruction_receipt) is not dict or type(instruction_receipt.get("intent_requirements")) is not dict:
+        raise NativeTaskIdentityError("native task identity requires the verified intent instruction receipt")
+    requirements = instruction_receipt["intent_requirements"]
+    expected = {"task_id": instruction_receipt.get("task_id"),
+        "database_task_cid": instruction_receipt.get("task_cid"),
+        "manifest_cid": instruction_receipt.get("manifest_cid"),
+        "context_cid": instruction_receipt.get("context_cid"),
+        "graph_cid": requirements.get("graph_cid"),
+        "planning_receipt_cid": requirements.get("planning_receipt_cid")}
+    for name, value in expected.items():
+        if _identifier(value) != mapping[name]:
+            raise NativeTaskIdentityError("native task identity differs from the verified instruction receipt")
+    return dict(mapping)

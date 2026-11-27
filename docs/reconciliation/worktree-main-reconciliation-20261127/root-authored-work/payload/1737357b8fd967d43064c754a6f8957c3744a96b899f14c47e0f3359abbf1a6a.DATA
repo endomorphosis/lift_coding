@@ -1,0 +1,632 @@
+"""SOURCE-ONLY draft: pinned AST -> generic JSON numeric-prefix tree.
+
+The caller supplies source/binding buffers. There is no file access, source
+evaluation, project import, process/model call, typed Lean term or interpreter.
+Names/types below are host annotations; their kernel interpretation is OPEN.
+The unbound APIs deliberately cannot claim an original-source bridge. This
+source has not been imported, tested, executed or native-qualified.
+"""
+import ast
+import hashlib
+import json
+import re
+
+SOURCE_SHA256 = '3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a'
+SOURCE_BYTES = 16391
+BINDINGS_SHA256 = 'd6cb9f35169351848198d3919a7e794cee89429b07a2879ea680cb8511bfa8b8'
+BINDINGS_BYTES = 25170
+MODULE_AST_SHA256 = '61ae9578f4a087b1b181af6fe4f78c3d811bbaa09368f833f6240384d085407b'
+OBJECTIVE_AST_SHA256 = '129da31ae6856167478c7f030a059d0f477b8362bb8fa478221eac7bac6031c2'
+DOT_AST_SHA256 = '3ff8d47ab6f2e375b3bd4b81c6a39e364cd5a15ec859ca383b5e41504250de1e'
+L2_AST_SHA256 = '791882c75bb080d1ea081d4689f765d92b9269255a66d4fb4bca50fba6153a2c'
+L2_NUMERATOR = '5764607523034235'
+L2_DENOMINATOR = '576460752303423488'
+MAX_SOURCE_BYTES = 262144
+MAX_MODULE_NODES = 4096
+MAX_EXPRESSION_NODES = 512
+MAX_MODULE_DEPTH = 96
+MAX_EXPRESSION_DEPTH = 64
+MAX_INTEGER_BITS = 256
+MAX_JSON_BYTES = 262144
+MAX_JSON_NODES = 16384
+MAX_JSON_DEPTH = 96
+MAX_JSON_STRING = 16384
+MAX_SHAPE_DIMENSION = 4096
+_IDENTIFIER = re.compile(r'[A-Za-z_][A-Za-z_0-9]{0,63}\Z')
+_SHA = re.compile(r'[0-9a-f]{64}\Z')
+_RESERVED = frozenset({'math', 'abs', 'max', 'len', 'zip', 'range', '_dot', 'L2'})
+_GLOBALS = {'math': 'module:math', 'abs': 'builtin:abs', 'max': 'builtin:max',
+            'len': 'builtin:len', 'zip': 'builtin:zip', 'range': 'builtin:range',
+            '_dot': 'pinned-source-callee', 'L2': 'pinned-source-literal'}
+_AST_TYPES = frozenset(value for value in vars(ast).values()
+                       if isinstance(value, type) and issubclass(value, ast.AST))
+_AST_LEAVES = (ast.operator, ast.unaryop, ast.boolop, ast.cmpop, ast.expr_context)
+PREFIX_NAMES = ('margins', 'data', 'regularizer', 'factors', 'gradient')
+ALL_BINDING_NAMES = frozenset(PREFIX_NAMES + ('nonfinite_guard', 'return_tuple',
+    'margin_body', 'loss_body', 'loss_denominator', 'regularizer_body',
+    'factor_body', 'gradient_coordinate', 'gradient_denominator',
+    'gradient_sum_body', 'gradient_sum_zip', 'coordinate_range'))
+
+
+class CompileRefusal(ValueError):
+    """Structured refusal, without a fallback to source execution."""
+
+    def __init__(self, reason_code, message, node=None):
+        self.reason_code = reason_code
+        self.node_kind = type(node).__name__ if node is not None else None
+        self.span = ([node.lineno, node.col_offset, node.end_lineno, node.end_col_offset]
+                     if type(node) in _AST_TYPES and all(hasattr(node, field) for field in
+                        ('lineno', 'col_offset', 'end_lineno', 'end_col_offset')) else None)
+        super().__init__(message)
+
+
+def _need(condition, reason, message, node=None):
+    if condition is not True:
+        raise CompileRefusal(reason, message, node)
+
+
+def _identifier(name):
+    _need(type(name) is str and len(name) <= 64 and _IDENTIFIER.fullmatch(name) is not None,
+          'binderShape', 'bounded identifier required')
+    return name
+
+
+def _sha_argument(value):
+    _need(type(value) is str and len(value) == 64 and _SHA.fullmatch(value) is not None,
+          'sourcePinMismatch', 'exact lowercase SHA256 argument required')
+    return value
+
+
+def _bounded_wire(value):
+    """Bound JSON before serialization; cycles, wide queues and huge strings fail."""
+    pending, count, text_bytes = [(value, 1, ())], 0, 0
+    while pending:
+        current, depth, ancestors = pending.pop()
+        count += 1
+        _need(count <= MAX_JSON_NODES and depth <= MAX_JSON_DEPTH,
+              'budget', 'JSON node/depth cap exceeded')
+        if type(current) is str:
+            _need(len(current) <= MAX_JSON_STRING, 'budget', 'JSON string cap exceeded')
+            try:
+                text_bytes += len(current.encode('utf-8'))
+            except UnicodeEncodeError:
+                raise CompileRefusal('irSchema', 'UTF8 JSON strings required') from None
+            _need(text_bytes <= MAX_JSON_BYTES, 'budget', 'aggregate JSON text cap exceeded')
+        elif type(current) is int:
+            _need(abs(current).bit_length() <= MAX_INTEGER_BITS, 'budget', 'JSON integer cap exceeded')
+        elif current is None or type(current) is bool:
+            pass
+        elif type(current) in (dict, list):
+            _need(id(current) not in ancestors, 'budget', 'cyclic JSON refused')
+            width = 2 * len(current) if type(current) is dict else len(current)
+            _need(count + len(pending) + width <= MAX_JSON_NODES,
+                  'budget', 'JSON width/pending cap exceeded')
+            lineage = ancestors + (id(current),)
+            if type(current) is dict:
+                for key, child in current.items():
+                    _need(type(key) is str, 'irSchema', 'JSON keys must be strings')
+                    pending.append((key, depth + 1, lineage))
+                    pending.append((child, depth + 1, lineage))
+            else:
+                for child in current:
+                    pending.append((child, depth + 1, lineage))
+        else:
+            raise CompileRefusal('irSchema', 'only bounded JSON primitives permitted')
+    raw = json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('utf-8')
+    _need(len(raw) <= MAX_JSON_BYTES, 'budget', 'serialized JSON byte cap exceeded')
+    return raw
+
+
+def _ast_bounds(node, *, max_nodes=MAX_EXPRESSION_NODES, max_depth=MAX_EXPRESSION_DEPTH):
+    _need(type(max_nodes) is int and 1 <= max_nodes <= MAX_MODULE_NODES
+          and type(max_depth) is int and 1 <= max_depth <= MAX_MODULE_DEPTH,
+          'budget', 'bounded AST caps required')
+    pending, seen, count = [(node, 1)], set(), 0
+    while pending:
+        current, depth = pending.pop()
+        count += 1
+        _need(type(current) in _AST_TYPES, 'unsupportedNode', 'standard AST nodes only')
+        _need(count <= max_nodes and depth <= max_depth, 'budget', 'AST node/depth cap exceeded', current)
+        _need(type(current._fields) is tuple and current._fields == type(current)._fields,
+              'unsupportedNode', 'altered AST field schema refused', current)
+        _need(all(hasattr(current, field) for field in current._fields),
+              'unsupportedNode', 'malformed AST field set refused', current)
+        if not isinstance(current, _AST_LEAVES):
+            _need(id(current) not in seen, 'budget', 'cyclic/shared AST nodes refused', current)
+            seen.add(id(current))
+        for _, value in ast.iter_fields(current):
+            if type(value) is str:
+                _need(len(value) <= 4096, 'budget', 'AST string cap exceeded', current)
+            elif type(value) is int:
+                _need(abs(value).bit_length() <= MAX_INTEGER_BITS, 'budget', 'AST integer cap exceeded', current)
+            elif type(value) is list:
+                _need(count + len(pending) + len(value) <= max_nodes, 'budget', 'AST width cap exceeded', current)
+                for child in value:
+                    if type(child) in _AST_TYPES:
+                        pending.append((child, depth + 1))
+                    else:
+                        _need(child is None or type(child) is str and len(child) <= 4096,
+                              'unsupportedNode', 'non-AST list field refused', current)
+            elif type(value) in _AST_TYPES:
+                _need(count + len(pending) < max_nodes, 'budget', 'AST pending cap exceeded', current)
+                pending.append((value, depth + 1))
+            else:
+                _need(value is None or type(value) in (float, bool, bytes, complex),
+                      'unsupportedNode', 'nonstandard AST field refused', current)
+                if type(value) is bytes:
+                    _need(len(value) <= 4096, 'budget', 'AST byte string cap exceeded', current)
+    return count
+
+
+def _ast_sha(node):
+    return hashlib.sha256(ast.dump(node, annotate_fields=True, include_attributes=False).encode('utf-8')).hexdigest()
+
+
+def _ratio(value, node=None, *, nonfinite_reason='nonfiniteInput'):
+    _need(type(value) in (int, float), 'unsupportedLiteral', 'integer or binary64 literal required', node)
+    if type(value) is int:
+        _need(abs(value).bit_length() <= MAX_INTEGER_BITS, 'budget', 'integer literal cap exceeded', node)
+        numerator, denominator = value, 1
+    else:
+        try:
+            numerator, denominator = value.as_integer_ratio()
+        except (OverflowError, ValueError):
+            raise CompileRefusal(nonfinite_reason, 'nonfinite binary64 refused', node) from None
+        _need(abs(numerator).bit_length() <= MAX_INTEGER_BITS and denominator.bit_length() <= MAX_INTEGER_BITS,
+              'budget', 'exact ratio cap exceeded', node)
+    return {'numerator': str(numerator), 'denominator': str(denominator)}
+
+
+def _type(kind, **dimensions):
+    return {'kind': kind, **dimensions}
+
+
+def _validate_type(value):
+    _need(type(value) is dict and 1 <= len(value) <= 3, 'typeMismatch', 'closed type annotation required')
+    _need(all(type(key) is str and len(key) <= 32 for key in value),
+          'typeMismatch', 'bounded string type fields required')
+    kind = value.get('kind')
+    _need(type(kind) is str and len(kind) <= 32, 'typeMismatch', 'bounded type name required')
+    keys = {'scalar': set(), 'nat': set(), 'index': {'bound'}, 'vector': {'length'},
+            'matrix': {'rows', 'columns'}}.get(kind)
+    _need(keys is not None and set(value) == keys | {'kind'}, 'typeMismatch', 'unsupported type annotation')
+    for key in keys:
+        _need(type(value[key]) is int and 0 <= value[key] <= MAX_SHAPE_DIMENSION,
+              'shapeMismatch', 'bounded natural dimensions required')
+    return dict(value)
+
+
+def _term(kind, annotation, **fields):
+    return {'kind': kind, 'type': dict(annotation), **fields}
+
+
+def _shape(shape, *, fixed):
+    _need(type(shape) is dict and len(shape) == 3
+          and all(type(key) is str and len(key) <= 16 for key in shape)
+          and set(shape) == {'weights', 'rows', 'columns'},
+          'shapeMismatch', 'weights/rows/columns shape required')
+    _need(all(type(value) is int and 0 <= value <= MAX_SHAPE_DIMENSION for value in shape.values()),
+          'shapeMismatch', 'bounded natural shape dimensions required')
+    _need(shape['rows'] != 0, 'divisionByZero', 'empty admitted mean refused')
+    _need(shape['weights'] == shape['columns'], 'shapeMismatch', 'coordinate dimensions must join')
+    if fixed:
+        _need(shape == {'weights': 80, 'rows': 4, 'columns': 80},
+              'shapeMismatch', 'original bridge admission is only prospective 4x80')
+    return dict(shape)
+
+
+def admit_original_numeric_domain(weights, differences):
+    """Prospective external admission only, not original Python error semantics."""
+    _need(type(weights) in (list, tuple) and type(differences) in (list, tuple),
+          'shapeMismatch', 'plain finite input sequences required')
+    _need(len(differences) != 0, 'divisionByZero', 'empty mean refused')
+    _need(len(weights) == 80 and len(differences) == 4, 'shapeMismatch', 'only 80 weights and 4 rows admitted')
+    for row in differences:
+        _need(type(row) in (list, tuple) and len(row) == 80, 'shapeMismatch', 'ragged/non-80 row refused')
+    for value in weights:
+        _ratio(value)
+    for row in differences:
+        for value in row:
+            _ratio(value)
+    return {'status': 'prospective_domain_admitted_only', 'coordinates_checked': 400,
+            'shape': {'weights': 80, 'rows': 4, 'columns': 80},
+            'Python_runtime_guard_equivalence_proved': False}
+
+
+class _Lowerer:
+    def __init__(self, lexical_globals, dot_callee=None, l2_literal=None):
+        _need(type(lexical_globals) is dict and len(lexical_globals) == len(_GLOBALS)
+              and all(type(key) is str and len(key) <= 64 and type(value) is str and len(value) <= 64
+                      for key, value in lexical_globals.items()) and lexical_globals == _GLOBALS,
+              'unknownName', 'global lexical roles differ from declared prototype')
+        self.dot_callee = dot_callee
+        self.l2_literal = l2_literal
+        self.inline_calls = 0
+        if dot_callee is not None:
+            _ast_bounds(dot_callee)
+            _need(type(dot_callee) is ast.FunctionDef and _ast_sha(dot_callee) == DOT_AST_SHA256,
+                  'contextHashMismatch', 'actual pinned callee AST required', dot_callee)
+        if l2_literal is not None:
+            _need(type(l2_literal) is ast.Constant and _ratio(l2_literal.value, l2_literal) ==
+                  {'numerator': L2_NUMERATOR, 'denominator': L2_DENOMINATOR},
+                  'contextHashMismatch', 'actual source L2 exact ratio required', l2_literal)
+
+    def scalar(self, term, node):
+        if term['type']['kind'] == 'nat':
+            return _term('natToScalar', _type('scalar'), value=term)
+        _need(term['type']['kind'] == 'scalar', 'typeMismatch', 'scalar operand required', node)
+        return term
+
+    def binder(self, target, scope, annotation):
+        _need(type(target) is ast.Name and type(target.ctx) is ast.Store,
+              'binderShape', 'one name binder required', target)
+        name = _identifier(target.id)
+        _need(name not in _RESERVED and name not in scope, 'unknownName', 'shadowed lexical binder refused', target)
+        scope[name] = _term('var', annotation, name=name)
+        return name
+
+    def comprehension(self, node, scope):
+        _need(type(node) in (ast.GeneratorExp, ast.ListComp) and len(node.generators) == 1,
+              'binderShape', 'one synchronous comprehension required', node)
+        generator = node.generators[0]
+        _need(type(generator) is ast.comprehension and generator.ifs == []
+              and type(generator.is_async) is int and generator.is_async == 0,
+              'binderShape', 'filters/async comprehensions refused', generator)
+        iterator, local = generator.iter, dict(scope)
+        if type(iterator) is ast.Call and type(iterator.func) is ast.Name and iterator.func.id == 'zip':
+            _need(type(iterator.func.ctx) is ast.Load and iterator.keywords == [] and len(iterator.args) == 2,
+                  'wrongArity', 'zip requires two positional containers', iterator)
+            left, right = (self.lower(argument, scope) for argument in iterator.args)
+            lt, rt = left['type'], right['type']
+            _need(lt['kind'] == 'vector' and rt['kind'] in ('vector', 'matrix'),
+                  'typeMismatch', 'zip requires vector then vector or matrix', iterator)
+            _need(type(generator.target) is ast.Tuple and type(generator.target.ctx) is ast.Store
+                  and len(generator.target.elts) == 2, 'binderShape', 'two paired zip binders required', generator.target)
+            first = self.binder(generator.target.elts[0], local, _type('scalar'))
+            second_type = _type('scalar') if rt['kind'] == 'vector' else _type('vector', length=rt['columns'])
+            second = self.binder(generator.target.elts[1], local, second_type)
+            body = self.scalar(self.lower(node.elt, local), node.elt)
+            shorter = min(lt['length'], rt['length'] if rt['kind'] == 'vector' else rt['rows'])
+            return _term('zipMap' if rt['kind'] == 'vector' else 'zipRowsMap',
+                         _type('vector', length=shorter), left=left, right=right,
+                         binders=[first, second], body=body, truncation='minimum_length')
+        if type(iterator) is ast.Call and type(iterator.func) is ast.Name and iterator.func.id == 'range':
+            _need(type(iterator.func.ctx) is ast.Load and iterator.keywords == [] and len(iterator.args) == 1,
+                  'unsupportedNode', 'only range(len(vector)) admitted', iterator)
+            length_call = iterator.args[0]
+            _need(type(length_call) is ast.Call and type(length_call.func) is ast.Name
+                  and length_call.func.id == 'len' and type(length_call.func.ctx) is ast.Load
+                  and length_call.keywords == [] and len(length_call.args) == 1,
+                  'unsupportedNode', 'only ascending range(len(vector)) admitted', iterator)
+            _need(type(length_call.args[0]) is ast.Name and type(length_call.args[0].ctx) is ast.Load,
+                  'unsupportedNode', 'range length must read an established lexical vector', iterator)
+            source = self.lower(length_call.args[0], scope)
+            _need(source['type']['kind'] == 'vector', 'typeMismatch', 'range index requires vector length', iterator)
+            bound = source['type']['length']
+            name = self.binder(generator.target, local, _type('index', bound=bound))
+            body = self.scalar(self.lower(node.elt, local), node.elt)
+            return _term('rangeMap', _type('vector', length=bound), length=bound,
+                         binder=name, index_bound=bound, order='ascending_zero_to_bound_exclusive', body=body)
+        source = self.lower(iterator, scope)
+        annotation = source['type']
+        _need(annotation['kind'] in ('vector', 'matrix'), 'typeMismatch', 'map iterator must be a container', iterator)
+        binder_type = _type('scalar') if annotation['kind'] == 'vector' else _type('vector', length=annotation['columns'])
+        name = self.binder(generator.target, local, binder_type)
+        body = self.scalar(self.lower(node.elt, local), node.elt)
+        return _term('mapVector' if annotation['kind'] == 'vector' else 'mapRows',
+                     _type('vector', length=annotation['length'] if annotation['kind'] == 'vector' else annotation['rows']),
+                     source=source, binder=name, body=body, order='ascending')
+
+    def lower(self, node, scope):
+        if type(node) is ast.Name:
+            _need(type(node.ctx) is ast.Load, 'unknownName', 'non-load name refused', node)
+            name = _identifier(node.id)
+            if name == 'L2':
+                _need(self.l2_literal is not None, 'unknownName', 'pinned source literal unavailable', node)
+                return _term('scalarLiteral', _type('scalar'), ratio=_ratio(self.l2_literal.value, self.l2_literal))
+            _need(name in scope and name not in _RESERVED, 'unknownName', 'unresolved lexical value', node)
+            return scope[name]
+        if type(node) is ast.Constant:
+            return _term('scalarLiteral', _type('scalar'), ratio=_ratio(node.value, node))
+        if type(node) is ast.BinOp:
+            operator = {ast.Add: 'add', ast.Sub: 'sub', ast.Mult: 'mul', ast.Div: 'div'}.get(type(node.op))
+            _need(operator is not None, 'unsupportedNode', 'unsupported scalar operator', node)
+            left = self.scalar(self.lower(node.left, scope), node.left)
+            right = self.scalar(self.lower(node.right, scope), node.right)
+            return _term('scalarOp', _type('scalar'), operator=operator, arguments=[left, right])
+        if type(node) is ast.UnaryOp:
+            _need(type(node.op) is ast.USub, 'unsupportedNode', 'only scalar unary minus admitted', node)
+            return _term('scalarOp', _type('scalar'), operator='neg',
+                         arguments=[self.scalar(self.lower(node.operand, scope), node.operand)])
+        if type(node) in (ast.ListComp, ast.GeneratorExp):
+            return self.comprehension(node, scope)
+        if type(node) is ast.Subscript:
+            _need(type(node.ctx) is ast.Load, 'unsupportedNode', 'non-load subscript refused', node)
+            vector = self.lower(node.value, scope)
+            _need(vector['type']['kind'] == 'vector', 'typeMismatch', 'only vector index admitted', node)
+            bound = vector['type']['length']
+            if type(node.slice) is ast.Constant and type(node.slice.value) is int:
+                _need(0 <= node.slice.value < bound, 'indexOutOfBounds', 'static index outside vector', node)
+                raise CompileRefusal('unsupportedNode', 'only established lexical finite indices admitted', node)
+            if type(node.slice) is ast.UnaryOp and type(node.slice.op) is ast.USub:
+                raise CompileRefusal('indexOutOfBounds', 'negative vector indices refused', node)
+            index = self.lower(node.slice, scope)
+            _need(index['type'] == _type('index', bound=bound), 'indexOutOfBounds',
+                  'index bound must match vector length', node)
+            return _term('indexVector', _type('scalar'), vector=vector, index=index)
+        if type(node) is ast.IfExp:
+            test = node.test
+            _need(type(test) is ast.Compare and len(test.ops) == len(test.comparators) == 1
+                  and type(test.ops[0]) is ast.GtE and type(test.comparators[0]) is ast.Constant
+                  and type(test.comparators[0].value) in (int, float) and test.comparators[0].value == 0,
+                  'unsupportedComparison', 'only scalar >= zero condition admitted', test)
+            condition = self.scalar(self.lower(test.left, scope), test.left)
+            yes = self.scalar(self.lower(node.body, scope), node.body)
+            no = self.scalar(self.lower(node.orelse, scope), node.orelse)
+            return _term('scalarOp', _type('scalar'), operator='ifNonneg', arguments=[condition, yes, no],
+                         syntax_policy='both_branches_checked', evaluation_policy='only_selected_branch')
+        if type(node) is ast.Call:
+            _need(node.keywords == [] and all(type(argument) is not ast.Starred for argument in node.args),
+                  'unsupportedNode', 'keyword/star calls refused', node)
+            function = node.func
+            if type(function) is ast.Name:
+                name = _identifier(function.id)
+                _need(type(function.ctx) is ast.Load and name in _GLOBALS and name not in scope,
+                      'unknownName', 'unresolved/shadowed call target', function)
+                if name == '_dot':
+                    _need(len(node.args) == 2 and self.dot_callee is not None,
+                          'contextHashMismatch', 'pinned callee and two arguments required', node)
+                    arguments = [self.lower(argument, scope) for argument in node.args]
+                    _need(all(argument['type']['kind'] == 'vector' for argument in arguments),
+                          'typeMismatch', 'callee arguments must be vectors', node)
+                    self.inline_calls += 1
+                    return self.lower(self.dot_callee.body[0].value, {'a': arguments[0], 'b': arguments[1]})
+                if name == 'len':
+                    _need(len(node.args) == 1, 'wrongArity', 'len requires one container', node)
+                    source = self.lower(node.args[0], scope)
+                    _need(source['type']['kind'] in ('vector', 'matrix'), 'typeMismatch', 'len requires container', node)
+                    return _term('length', _type('nat'), source=source)
+                _need(name in ('abs', 'max'), 'unsupportedNode', 'call only allowed within specific iterator form', node)
+                arity = 1 if name == 'abs' else 2
+            elif type(function) is ast.Attribute:
+                _need(type(function.ctx) is ast.Load and type(function.value) is ast.Name
+                      and type(function.value.ctx) is ast.Load and function.value.id == 'math'
+                      and 'math' not in scope and function.attr in ('exp', 'log1p', 'fsum'),
+                      'unknownName', 'only declared unshadowed math calls admitted', function)
+                name, arity = function.attr, 1
+                if name == 'fsum':
+                    _need(len(node.args) == 1 and type(node.args[0]) is ast.GeneratorExp,
+                          'binderShape', 'fsum requires one scalar generator', node)
+                    values = self.comprehension(node.args[0], scope)
+                    return _term('fsumExact', _type('scalar'), values=values, order='ascending_exact_real_addition')
+            else:
+                raise CompileRefusal('unsupportedNode', 'unsupported call target', function)
+            _need(len(node.args) == arity, 'wrongArity', 'scalar call arity differs', node)
+            arguments = [self.scalar(self.lower(argument, scope), argument) for argument in node.args]
+            return _term('scalarOp', _type('scalar'), operator=name, arguments=arguments)
+        raise CompileRefusal('unsupportedNode', 'unsupported AST form: ' + type(node).__name__, node)
+
+
+def _scope(lexical_types):
+    _need(type(lexical_types) is dict and 1 <= len(lexical_types) <= 16,
+          'binderShape', 'bounded closed lexical type scope required')
+    scope = {}
+    for name, annotation in lexical_types.items():
+        name = _identifier(name)
+        _need(name not in _RESERVED, 'unknownName', 'shadowed declared global refused')
+        scope[name] = _term('var', _validate_type(annotation), name=name)
+    return scope
+
+
+def lower_generic_expression(node, lexical_types, *, lexical_globals=None,
+                             dot_callee=None, l2_literal=None,
+                             max_nodes=MAX_EXPRESSION_NODES, max_depth=MAX_EXPRESSION_DEPTH):
+    """UNBOUND structural lowering only; never a source or typed-kernel bridge."""
+    _need(type(max_nodes) is int and 1 <= max_nodes <= MAX_EXPRESSION_NODES
+          and type(max_depth) is int and 1 <= max_depth <= MAX_EXPRESSION_DEPTH,
+          'budget', 'expression caps exceed declared limits')
+    count = _ast_bounds(node, max_nodes=max_nodes, max_depth=max_depth)
+    lowerer = _Lowerer(dict(_GLOBALS) if lexical_globals is None else lexical_globals, dot_callee, l2_literal)
+    tree = lowerer.lower(node, _scope(lexical_types))
+    result = {'schema': 'ranker-objective-container-unbound-expression-draft@1',
+              'status': 'UNBOUND_UNQUALIFIED_UNCOMPILED', 'original_source_bridge': False,
+              'kernel_checked': False, 'tree': tree, 'AST_nodes_checked': count,
+              'callee_AST_inline_calls': lowerer.inline_calls, 'source_function_execution_calls': 0}
+    _bounded_wire(result)
+    return result
+
+
+def lower_unbound_numeric_prefix(statements, dot_callee, l2_literal, shape_specification):
+    """UNBOUND mutation control API; five assignments only, no full function."""
+    _need(type(statements) is list and len(statements) == 5, 'unsupportedNode', 'exact five-statement prefix required')
+    module = ast.Module(body=statements, type_ignores=[])
+    count = _ast_bounds(module, max_nodes=MAX_EXPRESSION_NODES)
+    shape = _shape(shape_specification, fixed=False)
+    lowerer = _Lowerer(dict(_GLOBALS), dot_callee, l2_literal)
+    scope = _scope({'weights': _type('vector', length=shape['weights']),
+                    'differences': _type('matrix', rows=shape['rows'], columns=shape['columns'])})
+    expected_types = (_type('vector', length=shape['rows']), _type('scalar'), _type('scalar'),
+                      _type('vector', length=shape['rows']), _type('vector', length=shape['columns']))
+    lowered, summaries = [], []
+    for position, name in enumerate(PREFIX_NAMES):
+        statement = statements[position]
+        _need(type(statement) is ast.Assign and len(statement.targets) == 1
+              and type(statement.targets[0]) is ast.Name and type(statement.targets[0].ctx) is ast.Store
+              and statement.targets[0].id == name, 'unsupportedNode', 'ordered source assignment targets required', statement)
+        value = lowerer.lower(statement.value, scope)
+        _need(value['type'] == expected_types[position], 'typeMismatch', 'assignment type/shape differs: ' + name, statement)
+        lowered.append((name, value))
+        scope[name] = _term('var', value['type'], name=name)
+        summaries.append({'name': name, 'type': dict(value['type']), 'assignment_AST_sha256': _ast_sha(statement)})
+    record_type = _type('numericPrefixRecord', rows=shape['rows'], columns=shape['columns'])
+    tree = _term('prefixRecord', record_type,
+                 fields=[{'name': name, 'value': scope[name]} for name in PREFIX_NAMES])
+    for name, value in reversed(lowered):
+        tree = _term('letBind', record_type, binder=name, value=value, body=tree, evaluation_order='rhs_then_body')
+    result = {'schema': 'ranker-objective-container-unbound-prefix-draft@1',
+              'status': 'UNBOUND_UNQUALIFIED_UNCOMPILED', 'original_source_bridge': False,
+              'kernel_checked': False, 'shape': shape, 'tree': tree, 'assignments': summaries,
+              'AST_nodes_checked': count, 'callee_AST_inline_calls': lowerer.inline_calls,
+              'source_function_execution_calls': 0}
+    _bounded_wire(result)
+    return result
+
+
+def _source_record(node, source, path, role):
+    segment = ast.get_source_segment(source, node)
+    _need(type(segment) is str, 'contextHashMismatch', 'source span unavailable', node)
+    raw = segment.encode('utf-8')
+    return {'ast_dump': ast.dump(node, annotate_fields=True, include_attributes=False),
+            'ast_path': path, 'ast_sha256': _ast_sha(node), 'node_kind': type(node).__name__,
+            'role': role, 'source_segment': segment, 'source_segment_utf8_bytes': len(raw),
+            'source_segment_utf8_sha256': hashlib.sha256(raw).hexdigest(),
+            'span': [node.lineno, node.col_offset, node.end_lineno, node.end_col_offset]}
+
+
+def _extract_pinned_context(source_bytes, bindings_bytes, expected_source_sha256,
+                            expected_bindings_sha256, expected_objective_ast_sha256):
+    _need(_sha_argument(expected_source_sha256) == SOURCE_SHA256
+          and _sha_argument(expected_bindings_sha256) == BINDINGS_SHA256
+          and _sha_argument(expected_objective_ast_sha256) == OBJECTIVE_AST_SHA256,
+          'sourcePinMismatch', 'caller cannot redefine the original-source pins')
+    _need(type(source_bytes) is bytes and len(source_bytes) <= MAX_SOURCE_BYTES,
+          'budget', 'bounded source byte buffer required')
+    _need(len(source_bytes) == SOURCE_BYTES and hashlib.sha256(source_bytes).hexdigest() == SOURCE_SHA256,
+          'sourcePinMismatch', 'original source bytes differ')
+    _need(type(bindings_bytes) is bytes and len(bindings_bytes) <= 65536,
+          'budget', 'bounded binding byte buffer required')
+    _need(len(bindings_bytes) == BINDINGS_BYTES and hashlib.sha256(bindings_bytes).hexdigest() == BINDINGS_SHA256,
+          'sourcePinMismatch', 'original P7 binding bytes differ')
+    try:
+        source = source_bytes.decode('utf-8')
+        bindings = json.loads(bindings_bytes)
+        module = ast.parse(source)
+    except (UnicodeError, ValueError, SyntaxError, RecursionError):
+        raise CompileRefusal('contextHashMismatch', 'pinned source/binding syntax unreadable') from None
+    _bounded_wire(bindings)
+    module_count = _ast_bounds(module, max_nodes=MAX_MODULE_NODES, max_depth=MAX_MODULE_DEPTH)
+    _need(_ast_sha(module) == MODULE_AST_SHA256 == bindings['module_ast_sha256'],
+          'contextHashMismatch', 'whole-module AST differs')
+    _need(type(module.body[3]) is ast.Import and ast.dump(module.body[3], include_attributes=False) ==
+          "Import(names=[alias(name='math')])", 'contextHashMismatch', 'actual math import differs')
+    objective, dot, l2 = module.body[24], module.body[23], module.body[11]
+    _need(type(objective) is ast.FunctionDef and objective.name == '_objective' and len(objective.body) == 7
+          and _ast_sha(objective) == OBJECTIVE_AST_SHA256 and _ast_sha(dot) == DOT_AST_SHA256
+          and _ast_sha(l2) == L2_AST_SHA256, 'contextHashMismatch', 'whole objective/callee/L2 context differs')
+    expected_objective = _source_record(objective, source, 'module.body[24]', 'whole_context_pin_only')
+    expected_dot = _source_record(dot, source, 'module.body[23]',
+        'existing Q4 admitted callee source; future inlining must join actual literal and all lexical names')
+    expected_l2 = _source_record(l2, source, 'module.body[11]',
+        'exact literal source binding; float-to-exact-real projection only')
+    expected_l2['literal_exact_ratio'] = _ratio(l2.value.value, l2.value)
+    _need(bindings['objective'] == expected_objective and bindings['dot_callee'] == expected_dot
+          and bindings['source_L2'] == expected_l2 and bindings['schema'] == 'ranker-objective-container-source-bindings@1'
+          and bindings['source']['sha256'] == SOURCE_SHA256 and bindings['source']['bytes'] == SOURCE_BYTES,
+          'contextHashMismatch', 'whole context/source binding records differ')
+    assignments = objective.body[:5]
+    numeric = dict(zip(PREFIX_NAMES, assignments))
+    gradient_elt = numeric['gradient'].value.elt
+    gradient_gen = gradient_elt.right.left.args[0]
+    components = {'margin_body': numeric['margins'].value.elt,
+        'loss_body': numeric['data'].value.left.args[0].elt,
+        'loss_denominator': numeric['data'].value.right,
+        'regularizer_body': numeric['regularizer'].value,
+        'factor_body': numeric['factors'].value.elt,
+        'gradient_coordinate': gradient_elt,
+        'gradient_denominator': gradient_elt.right.right,
+        'gradient_sum_body': gradient_gen.elt,
+        'gradient_sum_zip': gradient_gen.generators[0].iter,
+        'coordinate_range': numeric['gradient'].value.generators[0].iter}
+    expected = {}
+    for position, name in enumerate(PREFIX_NAMES):
+        expected[name] = _source_record(assignments[position], source,
+            'module.body[24].body[' + str(position) + ']', 'numeric_prefix_candidate')
+    for position, name in ((5, 'nonfinite_guard'), (6, 'return_tuple')):
+        expected[name] = _source_record(objective.body[position], source,
+            'module.body[24].body[' + str(position) + ']', 'context_only_not_accepted_in_first_stage')
+    for name, node in components.items():
+        expected[name] = _source_record(node, source, 'under module.body[24] / ' + name, 'exact_AST_component_candidate')
+    _need(set(bindings['bindings']) == ALL_BINDING_NAMES and bindings['bindings'] == expected,
+          'contextHashMismatch', 'all 17 AST/segment/span bindings must join actual source bytes')
+    returned = objective.body[6].value
+    _need(type(returned) is ast.Tuple and len(returned.elts) == 2
+          and type(returned.elts[0]) is ast.Dict and [key.value for key in returned.elts[0].keys] ==
+          ['objective', 'pair_logistic_loss', 'L2_penalty', 'gradient_norm']
+          and type(returned.elts[1]) is ast.Name and returned.elts[1].id == 'gradient',
+          'contextHashMismatch', 'original return context differs')
+    return objective, dot, l2.value, module_count, expected
+
+
+def compile_objective_numeric_prefix(source_bytes, bindings_bytes, *,
+        expected_source_sha256=SOURCE_SHA256, expected_bindings_sha256=BINDINGS_SHA256,
+        expected_objective_ast_sha256=OBJECTIVE_AST_SHA256,
+        shape_specification=None, raw_numeric_inputs=None):
+    """Pinned original prefix -> draft JSON only; unsupported suffix stays context."""
+    shape = _shape({'weights': 80, 'rows': 4, 'columns': 80} if shape_specification is None
+                   else shape_specification, fixed=True)
+    objective, dot, l2, module_count, bindings = _extract_pinned_context(source_bytes, bindings_bytes,
+        expected_source_sha256, expected_bindings_sha256, expected_objective_ast_sha256)
+    admission = {'status': 'shape_specification_only_no_input_coordinates_supplied',
+                 'coordinates_checked': 0, 'Python_runtime_guard_equivalence_proved': False}
+    if raw_numeric_inputs is not None:
+        _need(type(raw_numeric_inputs) is dict and len(raw_numeric_inputs) == 2
+              and all(type(key) is str and len(key) <= 16 for key in raw_numeric_inputs)
+              and set(raw_numeric_inputs) == {'weights', 'differences'},
+              'shapeMismatch', 'only explicit raw input pair accepted')
+        admission = admit_original_numeric_domain(raw_numeric_inputs['weights'], raw_numeric_inputs['differences'])
+    lowered = lower_unbound_numeric_prefix(objective.body[:5], dot, l2, shape)
+    result = {'schema': 'ranker-objective-container-pinned-prefix-draft@1',
+        'status': 'DRAFT_JSON_UNQUALIFIED_UNCOMPILED', 'format': 'draft_JSON_generic_operation_tree',
+        'original_source_AST_pins_checked': True, 'original_source_semantics_proved': False,
+        'kernel_checked': False, 'source': {'bytes': SOURCE_BYTES, 'sha256': SOURCE_SHA256},
+        'P7_bindings': {'bytes': BINDINGS_BYTES, 'sha256': BINDINGS_SHA256},
+        'module_AST_sha256': MODULE_AST_SHA256, 'objective_AST_sha256': OBJECTIVE_AST_SHA256,
+        'callee_AST_sha256': DOT_AST_SHA256, 'L2_exact_ratio': _ratio(l2.value, l2),
+        'shape': shape, 'admission': admission, 'tree': lowered['tree'], 'assignments': lowered['assignments'],
+        'checked_bindings': {name: {'AST_sha256': record['ast_sha256'],
+            'segment_sha256': record['source_segment_utf8_sha256'], 'span': record['span']}
+            for name, record in bindings.items()},
+        'module_AST_nodes_checked': module_count, 'prefix_AST_nodes_checked': lowered['AST_nodes_checked'],
+        'source_AST_parse_calls': 1, 'renderer_additional_source_AST_parse_calls': 0,
+        'callee_AST_inline_calls': lowered['callee_AST_inline_calls'], 'source_function_execution_calls': 0,
+        'accepted_numeric_statements': 5, 'checked_context_statements': 7,
+        'context_only_suffix': ['nonfinite_guard', 'return_tuple'],
+        'runtime_policy_proposal': {'assignments': 'source_order_first_error',
+            'scalar_if': 'syntax_both_branches_eager_evaluation_selected_branch_only',
+            'zip': 'shorter_minimum_length', 'fsum': 'ordered_exact_real_addition',
+            'mean_empty': 'divisionByZero', 'source_suffix': 'not_compiled'},
+        'typed_Lean_SourcePrefix_exists': False, 'host_parser_correctness_theorem_proved': False,
+        'Python_Float_semantics_proved': False, 'CPython_math_fsum_semantics_proved': False,
+        'Python_libm_semantics_proved': False, 'full_gradient_semantics_proved': False,
+        'full_objective_semantics_proved': False, 'source_error_order_equivalence_proved': False,
+        'optimizer_source_convergence_proved': False, 'global_autoencoder_convergence_proved': False,
+        'full_task_satisfaction': 'unknown', 'official_benchmark_score': None,
+        'all32_governing_RPI_exits': 'OPEN', 'new_native_jobs': 0, 'new_training_jobs': 0,
+        'proof_authority': False, 'formalization_authority': False, 'execution_authority': False,
+        'mutation_authority': False, 'completion_authority': False, 'omission_authority': False,
+        'strict_cache_admission': False, 'planner_activation': False, 'theorem_qualified': False}
+    _bounded_wire(result)
+    return result
+
+
+def render_generated_objective_prefix(compilation, source_bytes, bindings_bytes, *, raw_numeric_inputs=None):
+    """Reextract identical pinned bytes; compare whole receipt/tree; emit JSON only."""
+    supplied = _bounded_wire(compilation)
+    _need(type(compilation) is dict and compilation.get('schema') == 'ranker-objective-container-pinned-prefix-draft@1',
+          'irSchema', 'only pinned original-prefix drafts can be rendered')
+    fresh = compile_objective_numeric_prefix(source_bytes, bindings_bytes,
+        shape_specification=compilation.get('shape'), raw_numeric_inputs=raw_numeric_inputs)
+    fresh_wire = _bounded_wire(fresh)
+    _need(supplied == fresh_wire, 'irForgery', 'entire caller draft must match fresh extraction from same buffer')
+    text = fresh_wire.decode('utf-8') + '\n'
+    return {'schema': 'ranker-objective-container-draft-JSON-render@1', 'format': 'draft_JSON_generic_operation_tree',
+        'text': text, 'text_utf8_bytes': len(text.encode('utf-8')), 'text_sha256': hashlib.sha256(text.encode('utf-8')).hexdigest(),
+        'source_AST_parse_calls_in_original_compilation': 1, 'renderer_additional_source_AST_parse_calls': 1,
+        'same_buffer_source_function_execution_calls': 0, 'typed_Lean_SourcePrefix_exists': False,
+        'status': 'UNQUALIFIED_JSON_RENDER_ONLY', 'proof_authority': False, 'execution_authority': False}
+
+
+def compile_full_objective(source_bytes, bindings_bytes, **keywords):
+    """Refuse the guard/return boundary explicitly, never silently skip suffix."""
+    compile_objective_numeric_prefix(source_bytes, bindings_bytes, **keywords)
+    raise CompileRefusal('unsupportedNode', 'full-function API refuses nonfinite guard and return/sqrt suffix')

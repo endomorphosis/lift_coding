@@ -1,0 +1,103 @@
+{
+  "execution_concurrency": "Two independent Harbor containers overlap on shared host; each retained job has one trial and one worker. Timing is descriptive.",
+  "hidden_verifier_or_solution_read": false,
+  "matched_actual_input_established_here": false,
+  "outcomes_pending": true,
+  "provider_calls": 0,
+  "raw_prompts_or_credentials_read": false,
+  "same_adapter_source_hashes": true,
+  "same_task_input_hashes": true,
+  "schema": "terminal-intent-pair-independent-preparation-review@1",
+  "trials": {
+    "compact": {
+      "agent_setup_timeout_seconds": 1800.0,
+      "agent_timeout_seconds": 300.0,
+      "attempts": 1,
+      "concurrent_workers_per_job": 1,
+      "config_integrity": true,
+      "config_sha256": "ba802ba8f144b63e0ca73b3ce181b9d3bd58a63e7a706330bad4386ca48d8b4a",
+      "contract_schema": "intent-plan-requirement-contract@2",
+      "controls": {
+        "agent_timeout_seconds": 300,
+        "archive_sha256": "39f405e3714f877019b0fc0bb9771160094ad2a1d5a52bc3296a97dc3109e038",
+        "arm": "full",
+        "cli_version": "0.158.0",
+        "code_retrieval_transport": "full",
+        "doctor_profile": "generic",
+        "intent_requirement_contract_cid": "baguqeerak6ccqwupu4v2gdlftnyqbyqokqwqwsejapu2f6o5zyjv6aum2a2q",
+        "intent_requirement_contract_sha256": "5784285a8fa72ba30d659b7100e20e542d0b488903e9a2f9ddce135f028cd035",
+        "intent_requirements_transport": "compact",
+        "manifest_sha256": "91c1d780659124ed3ebbf9ff6f87e08f0045863063366417496676c31a1d579f",
+        "model": "gpt-5.6-sol",
+        "planning_strategy": "intent_symbolic",
+        "prepared": true,
+        "reasoning_effort": "high",
+        "semantic_transport": "native"
+      },
+      "directory": "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/pilot/intent-compact-01",
+      "ledger_sha256": "248e9277132b6861d3c43b4978e041a89894d88caf2293cf71d48b192d5e9273",
+      "modalities": {
+        "permitted": 2,
+        "required": 17
+      },
+      "preparation_sha256": "37c67f2bb423eebb3f580158a3e0833b959f8905ef90a704e9920b2f061e67ab",
+      "retries": 0,
+      "retry_excluded_exception_population": [
+        "AgentAuthenticationError",
+        "AgentSafetyRefusalError",
+        "AgentTimeoutError",
+        "ApiUsageLimitError",
+        "ModelNotFoundError",
+        "RewardFileEmptyError",
+        "RewardFileNotFoundError",
+        "VerifierOutputParseError",
+        "VerifierTimeoutError"
+      ]
+    },
+    "expanded": {
+      "agent_setup_timeout_seconds": 1800.0,
+      "agent_timeout_seconds": 300.0,
+      "attempts": 1,
+      "concurrent_workers_per_job": 1,
+      "config_integrity": true,
+      "config_sha256": "abdee0dde46a2b328cf6b3e9a2442c4e415f795b8fe0123f0584bef134b03347",
+      "contract_schema": "intent-plan-requirement-contract@2",
+      "controls": {
+        "agent_timeout_seconds": 300,
+        "archive_sha256": "39f405e3714f877019b0fc0bb9771160094ad2a1d5a52bc3296a97dc3109e038",
+        "arm": "full",
+        "cli_version": "0.158.0",
+        "code_retrieval_transport": "full",
+        "doctor_profile": "generic",
+        "intent_requirement_contract_cid": "baguqeerak6ccqwupu4v2gdlftnyqbyqokqwqwsejapu2f6o5zyjv6aum2a2q",
+        "intent_requirement_contract_sha256": "5784285a8fa72ba30d659b7100e20e542d0b488903e9a2f9ddce135f028cd035",
+        "intent_requirements_transport": "expanded",
+        "manifest_sha256": "91c1d780659124ed3ebbf9ff6f87e08f0045863063366417496676c31a1d579f",
+        "model": "gpt-5.6-sol",
+        "planning_strategy": "intent_symbolic",
+        "prepared": true,
+        "reasoning_effort": "high",
+        "semantic_transport": "native"
+      },
+      "directory": "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/pilot/intent-expanded-01",
+      "ledger_sha256": "248e9277132b6861d3c43b4978e041a89894d88caf2293cf71d48b192d5e9273",
+      "modalities": {
+        "permitted": 2,
+        "required": 17
+      },
+      "preparation_sha256": "2c00f438fb0e0e2a7b36147d300c690061b324eadfc49fb65d3d7cd85893ae44",
+      "retries": 0,
+      "retry_excluded_exception_population": [
+        "AgentAuthenticationError",
+        "AgentSafetyRefusalError",
+        "AgentTimeoutError",
+        "ApiUsageLimitError",
+        "ModelNotFoundError",
+        "RewardFileEmptyError",
+        "RewardFileNotFoundError",
+        "VerifierOutputParseError",
+        "VerifierTimeoutError"
+      ]
+    }
+  }
+}

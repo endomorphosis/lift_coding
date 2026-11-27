@@ -1,0 +1,24 @@
+# Actual Requests accepted archive and honest native v3 proof
+
+The frozen run-v1 consumes the actual accepted D5414 archive from Requests cold-v2. Its single accepted checkpoint has four required receipt units: accepted source, native behavior, semantic preparation and complete non-sealing controller effects. D6028 failed and supplies no accepted event. This is a post-cohort integration qualification; it does not retroactively add inline proof use to the Requests experiment.
+
+Producer and consumer are distinct fresh Python processes. Each reads an exact archive clone through the original native verified-byte store and repository admission, recomputes the original source/patch/effect/scorer/context bindings, and restores all 97 public source files with exact bytes and raw modes. The original ledger and all 118 archive files remain unchanged. The explicit lower-level load uses replay_id=None, so original local receipts supply the execution observations and no new grader is dispatched. This read is not the original controller read operation, which included fresh native grading.
+
+The canonical event commits the original seal/parent, full source inventory, objective/environment/profile bindings, all four receipt CIDs and the complete pack digest. The existing standard source-built v3 backend proves its one-event root/count relation, with the circuit's other three leaves zero-padded. The caller requires exact full public root/count and binary/key identities before native pairing verification. This does not prove arbitrary source or tests executed correctly, establish production authority, or replace custody of the original receipts. The earlier raw scalar-alias limitation remains relevant and the exact outer binder remains mandatory. No custom v2 investigation is used.
+
+| Measured operation | Seconds |
+|---|---:|
+| Producer native archive read and source restore | 0.419219178 |
+| Honest standard v3 proving | 11.978556225 |
+| Fresh consumer native archive read and source restore | 0.423701583 |
+| Native pairing verification | 0.005255706 |
+| Complete driver, including copies, hashes and controls | 14.737743117 |
+| Independent audit, including one extra native verify | 0.278575860 |
+
+Driver components are nested and must not be added to the complete driver. The audit is additional. Previously metered key setup (7.810 seconds), backend build and historical cohort costs are separate; no new setup runs. The 1,484-byte proof adds proving/verification work to a consumer that still checks/restores the archive. The direct read/restore measurement is available above, but this single qualification is not an amortization or scaling benchmark. No provider calls, model tokens, avoided graders or savings are attributed to it. The original archive occupies 12,514,534 apparent bytes; this includes its receipts and source, not just the proof statement.
+
+All eight frozen negatives reject: missing behavior receipt, corrupted behavior bytes, incomplete required units, changed parent, changed source binding, changed committed event, changed full public root and changed public count. The changed-parent case requests the original checkpoint CID under delta kind and fails at native kind-qualified lookup before cycle traversal; it is not evidence that the cycle detector itself was reached. The three statement negatives reject before pairing. There is one honest proof, one driver verification, and one additional audit verification (0.007364014 seconds).
+
+The independent audit passes 1,462 checks, recomputes padded Merkle/source roots, checks both complete restored trees, binds original metadata and all loaded native source, and archives 514 source files. It shares the cryptographic backend. The initial auditor incorrectly expected an explicit kind/cycle error for changed-parent metadata; its failure remains in run-v1/audit_attempt1_failure.json, and validate.py remains prospectively frozen. Separate validate_v2.py admits only the observed earlier native lookup failure and verifies the exact metadata mutation. No experiment or proof was rerun to fix that audit expectation.
+
+Run and audit outputs are immutable. For reproduction in a new profile, choose a fresh output directory and freeze its exact source paths before execution; the existing commands intentionally reject overwriting run-v1 or the one-shot audit intent.

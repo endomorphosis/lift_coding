@@ -1,0 +1,228 @@
+"""Concrete TEST-only interpreter ports over immutable invocation-bound inputs."""
+from __future__ import annotations
+from dataclasses import asdict
+import json
+from pathlib import Path
+import time
+from common import PROCEDURES, canonical, cid, query_record, independent_decision, original_catalog, sha, validate_query
+from ipfs_accelerate_py.agent_supervisor.procedure_compiler.certificate import CurrentCertificateContext
+from ipfs_accelerate_py.agent_supervisor.procedure_compiler.contracts import ProcedureInvocation, ValueType
+from ipfs_accelerate_py.agent_supervisor.procedure_compiler.interpreter import (
+    AdmissionDecision, AdmissionKind, BudgetReservation, ExecutionMode,
+    InMemoryCheckpointStore, InMemoryIdempotencyStore, InterpreterAdmissionPorts,
+    IsolationReservation, OperationResult, ProcedureInterpreter, RuntimeCost,
+    RuntimeIdentity, TrustedOperation, TrustedOperationCatalog,
+)
+
+CHECKS = {"RUN_SELECTED_TESTS": "test-result", "RUN_STATIC_ANALYSIS": "run-static-analysis-result", "RUN_TYPE_CHECK": "run-type-check-result"}
+
+class MemoryArtifacts:
+    """Procedure callbacks append immutable memory records; harness persists later."""
+    def __init__(self): self.bodies = {}
+    def put(self, value):
+        identity = cid(value); body = canonical(value)
+        if identity in self.bodies and self.bodies[identity] != body: raise ValueError("memory artifact collision")
+        self.bodies[identity] = body; return identity
+    def get(self, identity):
+        body = self.bodies[identity]; value = json.loads(body)
+        if canonical(value) != body or cid(value) != identity: raise ValueError("changed memory artifact")
+        return value
+
+class LocalReservations:
+    """Actual exclusive local read-only and bounded accounting reservations."""
+    def __init__(self, owner): self.owner = owner; self.active = {}; self.budgets = {}
+    def acquire(self, request):
+        self.owner.input_for(request.invocation_cid)
+        if not request.read_only or request.worktree_required or request.lease_id or request.fencing_token or tuple(request.scope_paths) != ("policy",): raise ValueError("only immutable TEST source reservation permitted")
+        if request.invocation_cid in self.active: raise ValueError("input reservation already active")
+        identity = self.owner.store.put({"schema": "ns-native-test-isolation/v1", "request": asdict(request), "actual_source_sha256": self.owner.source_sha, "read_only": True})
+        reservation = IsolationReservation(identity, "", 0, ("policy",), "immutable-test-source:" + self.owner.source_sha, True, identity)
+        self.active[request.invocation_cid] = reservation; return reservation
+    def compensate(self, reservation, *, reason_code):
+        raise ValueError("read-only TEST operation has no compensating source mutation")
+    def release(self, reservation, *, consumed=None):
+        if consumed is None:
+            keys = [key for key, value in self.active.items() if value == reservation]
+            if len(keys) != 1: raise ValueError("unknown isolation reservation")
+            del self.active[keys[0]]
+        else:
+            if reservation.reservation_id not in self.budgets: raise ValueError("unknown budget reservation")
+            if consumed.token_count or consumed.resource_units > reservation.resource_limit or consumed.elapsed_ms > reservation.time_limit_ms: raise ValueError("actual native cost exceeds test reservation")
+            del self.budgets[reservation.reservation_id]
+    def reserve(self, request):
+        self.owner.input_for(request.invocation_cid)
+        if request.token_limit != 0 or request.resource_limit > 60000 or request.time_limit_ms > 60000: raise ValueError("test resource request exceeds frozen host policy")
+        identity = self.owner.store.put({"schema": "ns-native-test-budget/v1", "invocation_cid": request.invocation_cid, "procedure_cid": request.procedure_cid, "token_limit": 0, "resource_limit": request.resource_limit, "time_limit_ms": request.time_limit_ms})
+        if identity in self.budgets: raise ValueError("budget already reserved")
+        reservation = BudgetReservation(identity, 0, request.resource_limit, request.time_limit_ms, identity)
+        self.budgets[identity] = reservation; return reservation
+
+class NativeTestRuntime:
+    def __init__(self, candidate, certificate, certificate_verifier, policy, *, fault=None):
+        self.candidate = candidate; self.procedure = candidate.procedure; self.certificate = certificate
+        self.certificate_verifier = certificate_verifier; self.policy = policy; self.fault = fault
+        self.store = MemoryArtifacts(); self.invocations = {}; self.binding_records = {}; self.query_records = {}
+        self.check_records = {}; self.decisions = {}; self.dispatches = []; self.admissions = []
+        self.catalog = original_catalog(); self.source_sha = sha((PROCEDURES / "catalog_v1.py").read_bytes())
+        self.selection = self.store.put({"schema": "ns-native-test-selection/v1", "state": "test-only-unpromoted", "procedure_cid": self.procedure.content_id, "certificate_cid": certificate.content_id, "bindings": self.procedure.bindings.to_dict(), "operation_catalog_revision": policy.operation_catalog_revision})
+        operations = []
+        for step in self.procedure.steps:
+            name = step.operation.value
+            input_types = {key: ValueType.STRUCTURED for key in step.input_bindings}
+            output_types = {key: ValueType.STRUCTURED for key in step.output_bindings}
+            operations.append(TrustedOperation(name, step.operation_contract, self.handle,
+                allowed_effect_ids=tuple(step.declared_effect_ids), read_only=True, maximum_timeout_ms=30000,
+                input_types=input_types, output_types=output_types))
+        ports = InterpreterAdmissionPorts(certificate=self, compatibility=self, authority=self, evidence=self)
+        self.checkpoints = InMemoryCheckpointStore(); reservations = LocalReservations(self)
+        self.interpreter = ProcedureInterpreter(operation_catalog=TrustedOperationCatalog(policy.operation_catalog_revision, operations), admissions=ports,
+            isolation=reservations, budget_reservations=reservations, checkpoints=self.checkpoints, idempotency=InMemoryIdempotencyStore())
+
+    def prepare_invocation(self, payload, ordinal):
+        # Authority commits immutable query bytes; invocation commits authority.
+        # The subsequent mapping binds exact invocation CID without a CID cycle.
+        validate_query(payload)
+        query_cid = self.store.put(query_record(payload))
+        now = int(time.time() * 1000)
+        authority = {"schema": "ns-native-test-authority/v1", "query_cid": query_cid,
+            "procedure_cid": self.procedure.content_id, "certificate_cid": self.certificate.content_id,
+            "bindings": self.procedure.bindings.to_dict(), "mode": "test", "scope": ["policy"],
+            "capability": "capability.validation", "source_sha256": self.source_sha,
+            "virtual_source": {"path": "policy/sequence.json", "query_cid": query_cid},
+            "ordinal": ordinal, "observed_at_ms": now, "expires_at_ms": now + 60000}
+        authority_cid = self.store.put(authority)
+        invocation = ProcedureInvocation(bindings=self.procedure.bindings, procedure_cid=self.procedure.content_id,
+            certificate_cid=self.certificate.content_id, registry_revision=self.selection, parameters={}, requested_scope=("policy",),
+            authority_receipt_cids=(authority_cid,), idempotency_key=cid({"query": query_cid, "ordinal": ordinal, "authority": authority_cid}), dry_run=False, requested_at_ms=now)
+        identity = invocation.content_id
+        self.invocations[identity] = invocation
+        self.binding_records[identity] = self.store.put({"schema": "ns-native-test-input-binding/v1", "invocation_cid": identity, "authority_cid": authority_cid, "query_cid": query_cid})
+        self.query_records[identity] = query_cid
+        runtime = RuntimeIdentity(**{key: getattr(self.procedure.bindings, key) for key in ("repository_id", "repository_commit", "tree_id", "objective_id", "task_id", "contract_revision", "policy_revision", "environment_id")}, registry_revision=self.selection, operation_catalog_revision=self.policy.operation_catalog_revision, now_ms=now)
+        return invocation, runtime
+
+    def input_for(self, invocation_cid):
+        if invocation_cid not in self.invocations: raise ValueError("unknown exact invocation")
+        invocation = self.invocations[invocation_cid]
+        if invocation.content_id != invocation_cid: raise ValueError("invocation body changed")
+        binding = self.store.get(self.binding_records[invocation_cid])
+        if binding["invocation_cid"] != invocation_cid or tuple(invocation.authority_receipt_cids) != (binding["authority_cid"],): raise ValueError("input/authority invocation mismatch")
+        authority = self.store.get(binding["authority_cid"])
+        if authority["query_cid"] != binding["query_cid"] or authority["query_cid"] != self.query_records[invocation_cid]: raise ValueError("query substituted between invocations")
+        if authority["procedure_cid"] != self.procedure.content_id or authority["certificate_cid"] != self.certificate.content_id or authority["bindings"] != self.procedure.bindings.to_dict(): raise ValueError("input authority binding stale")
+        if authority["mode"] != "test" or authority["scope"] != ["policy"] or authority["capability"] != "capability.validation": raise ValueError("unsupported input authority scope")
+        if authority["virtual_source"] != {"path": "policy/sequence.json", "query_cid": binding["query_cid"]}: raise ValueError("virtual public source mapping changed")
+        if not authority["observed_at_ms"] <= int(time.time() * 1000) < authority["expires_at_ms"]: raise ValueError("input authority expired")
+        if sha((PROCEDURES / "catalog_v1.py").read_bytes()) != authority["source_sha256"] or authority["source_sha256"] != self.procedure.bindings.repository_commit: raise ValueError("actual operation source changed")
+        record = self.store.get(binding["query_cid"])
+        payload = json.loads(record["payload_json"])
+        if record != query_record(payload): raise ValueError("query text encoding changed")
+        validate_query(payload)
+        return payload, binding, authority
+
+    def check_record(self, invocation_cid, operation, value):
+        payload, binding, _ = self.input_for(invocation_cid)
+        if type(value) is not dict or set(value) != {"receipt_cid", "observed"}: raise ValueError("closed typed check result required")
+        record = self.store.get(value["receipt_cid"])
+        step = next(s for s in self.procedure.steps if s.operation.value == operation)
+        actual = self.catalog.run(operation, payload, 7)
+        expected = {"schema": "ns-native-test-operation-observation/v1", "invocation_cid": invocation_cid,
+            "query_cid": binding["query_cid"], "procedure_cid": self.procedure.content_id,
+            "step_id": step.step_id, "operation": operation, "contract": step.operation_contract,
+            "observed": actual, "source_sha256": self.source_sha}
+        if record != expected: raise ValueError("check evidence contract, invocation or source mismatch")
+        if type(value["observed"]) is not bool or record["observed"] != actual or value["observed"] != actual: raise ValueError("check receipt does not match actual operation")
+        return actual, value["receipt_cid"]
+
+    def complete_decision(self, invocation_cid, variables=None):
+        checked = []; receipts = []
+        for operation, local in CHECKS.items():
+            value = self.check_records.get((invocation_cid, operation)) if variables is None else variables.get(local)
+            observed, receipt = self.check_record(invocation_cid, operation, value)
+            checked.append(observed); receipts.append(receipt)
+        payload, _, _ = self.input_for(invocation_cid)
+        decision = all(checked)
+        if decision != independent_decision(payload): raise ValueError("all-check decision differs from independent specification")
+        return decision, receipts
+
+    def handle(self, request):
+        started = time.perf_counter()
+        if request.mode is not ExecutionMode.TEST or request.dry_run or request.scope_paths != ("policy",): raise ValueError("handler is TEST-only")
+        payload, binding, _ = self.input_for(request.invocation_cid)
+        step = next(s for s in self.procedure.steps if s.step_id == request.step_id)
+        if step.operation.value != request.operation or step.operation_contract != request.operation_contract or request.procedure_cid != self.procedure.content_id: raise ValueError("operation identity mismatch")
+        name = request.operation; outputs = {}; receipts = []; reads = ()
+        if name == "READ_STATE": outputs = {"state": {"query_cid":binding["query_cid"]}}; reads = ("policy/sequence.json",)
+        elif name in CHECKS:
+            if dict(request.inputs["state"]) != {"query_cid":binding["query_cid"]}: raise ValueError("operation state differs from bound query")
+            observed = self.catalog.run(name, payload, 7)
+            identity = self.store.put({"schema": "ns-native-test-operation-observation/v1", "invocation_cid": request.invocation_cid,
+                "query_cid": binding["query_cid"], "procedure_cid": self.procedure.content_id, "step_id": request.step_id,
+                "operation": name, "contract": request.operation_contract, "observed": observed, "source_sha256": self.source_sha})
+            value = {"receipt_cid": identity, "observed": observed}
+            self.check_records[(request.invocation_cid, name)] = value
+            if self.fault == "changed_type_observation" and name == "RUN_TYPE_CHECK": value = {"receipt_cid": identity, "observed": not observed}
+            outputs = {"result": value}; receipts = [identity]
+        elif name == "CHECK_POSTCONDITION":
+            self.check_record(request.invocation_cid, "RUN_SELECTED_TESTS", dict(request.inputs["result"]))
+            decision, receipts = self.complete_decision(request.invocation_cid)
+            self.decisions[request.invocation_cid] = decision
+        elif name == "EMIT_RECEIPT":
+            decision, receipts = self.complete_decision(request.invocation_cid)
+            if self.decisions.get(request.invocation_cid) is not decision: raise ValueError("receipt emitted before independently checked decision")
+            emitted = self.store.put({"schema":"ns-native-test-emitted-decision/v1","invocation_cid":request.invocation_cid,
+                "query_cid":binding["query_cid"],"procedure_cid":self.procedure.content_id,"certificate_cid":self.certificate.content_id,
+                "decision":decision,"checked_receipt_cids":receipts,"source_sha256":self.source_sha})
+            receipts = [*receipts, emitted]
+        else: raise ValueError("unknown exact operation")
+        self.dispatches.append({"invocation_cid": request.invocation_cid, "step_id": request.step_id, "operation": name})
+        return OperationResult(True, outputs=outputs, observed_effect_ids=tuple(step.declared_effect_ids), read_paths=reads,
+            evidence_cids=tuple(receipts), cost=RuntimeCost(elapsed_ms=int((time.perf_counter() - started) * 1000)), new_evidence=bool(receipts))
+
+    def admit(self, request):
+        evidence = []; reason = "actual-test-evidence-checked"
+        try:
+            if request.mode is not ExecutionMode.TEST: raise ValueError("no production or shadow runtime authority in this TEST fixture")
+            identity = request.invocation.content_id; payload, binding, _ = self.input_for(identity)
+            if request.procedure.content_id != self.procedure.content_id or request.certificate.content_id != self.certificate.content_id or request.invocation.registry_revision != self.selection or request.runtime.registry_revision != self.selection: raise ValueError("current runtime identity mismatch")
+            if request.kind is AdmissionKind.TEST_CERTIFICATE:
+                verdict = self.certificate_verifier.verify(request.certificate, CurrentCertificateContext.from_policy(self.policy, now_ms=int(time.time()*1000)))
+                if not verdict.accepted or not verdict.usable: raise ValueError("native certificate verification rejected")
+                evidence.append(request.certificate.content_id)
+            elif request.kind is AdmissionKind.COMPATIBILITY:
+                selected = self.store.get(self.selection)
+                if selected["state"] != "test-only-unpromoted" or selected["procedure_cid"] != self.procedure.content_id or selected["certificate_cid"] != self.certificate.content_id: raise ValueError("test selection drift")
+                evidence.append(self.selection)
+            elif request.kind is AdmissionKind.AUTHORITY:
+                evidence.append(binding["authority_cid"])
+            elif request.kind is AdmissionKind.PRECONDITION:
+                if request.subject.condition_id != "current-source" or request.subject.binding != "binding:tree_id": raise ValueError("unknown precondition contract")
+                evidence.append(self.binding_records[identity])
+            elif request.kind is AdmissionKind.OBSERVATION:
+                name = request.subject.observation_id
+                local = request.subject.output_binding.removeprefix("local:")
+                if name == "observation.postcondition":
+                    decision, evidence = self.complete_decision(identity, request.variables)
+                    if self.decisions.get(identity) is not decision: raise ValueError("postcondition operation was not observed")
+                else:
+                    matches = [op for op, key in CHECKS.items() if key == local]
+                    if len(matches) != 1: raise ValueError("unknown observation binding")
+                    _, receipt = self.check_record(identity, matches[0], request.variables.get(local)); evidence.append(receipt)
+            elif request.kind in (AdmissionKind.VALIDATION, AdmissionKind.POSTCONDITION):
+                decision, evidence = self.complete_decision(identity, request.variables)
+                if self.decisions.get(identity) is not decision: raise ValueError("missing current decision")
+            elif request.kind is AdmissionKind.CHECKPOINT:
+                decision, evidence = self.complete_decision(identity, request.subject.variables)
+            else: raise ValueError("unsupported admission kind")
+            receipt = self.store.put({"schema": "ns-native-test-admission/v1", "kind": request.kind.value, "invocation_cid": identity,
+                "query_cid": binding["query_cid"], "procedure_cid": self.procedure.content_id, "checked_evidence_cids": sorted(evidence), "admitted": True})
+            self.admissions.append({"kind": request.kind.value, "invocation_cid": identity, "admitted": True, "receipt_cid": receipt})
+            return AdmissionDecision(True, request.kind, (receipt,), reason, int(time.time()*1000), True)
+        except (ValueError, KeyError, TypeError) as exc:
+            self.admissions.append({"kind": request.kind.value, "invocation_cid": request.invocation.content_id, "admitted": False, "reason": str(exc)})
+            return AdmissionDecision(False, request.kind, reason_code=str(exc), observed_at_ms=int(time.time()*1000), predicate_value=False)
+
+    def execute(self, payload, ordinal):
+        invocation, current = self.prepare_invocation(payload, ordinal)
+        result = self.interpreter.execute(self.procedure, invocation, self.certificate, current, mode=ExecutionMode.TEST)
+        return invocation, result, self.decisions.get(invocation.content_id)

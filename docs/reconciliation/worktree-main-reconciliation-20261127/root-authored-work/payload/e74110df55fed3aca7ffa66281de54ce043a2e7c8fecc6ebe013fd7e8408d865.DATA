@@ -1,0 +1,108 @@
+"""Read-only audit of actual joined controller/sealer artifacts."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import sqlite3
+
+HERE = Path(__file__).resolve().parent.parent
+
+
+def canon(value):
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
+
+
+def sha(path):
+    archive = Path(__file__).resolve().parent
+    manifest = json.loads((archive / 'frozen_source_manifest.json').read_text())
+    source = next((row for row in manifest['sources'] if row['original_path'] == str(Path(path).resolve())), None)
+    actual = archive / source['snapshot_path'] if source else Path(path)
+    return hashlib.sha256(actual.read_bytes()).hexdigest()
+
+
+def main():
+    parser=argparse.ArgumentParser(); parser.add_argument('run_id'); args=parser.parse_args()
+    run=HERE/args.run_id
+    profile=json.loads((run/'profile.json').read_text())
+    db=sqlite3.connect('file:'+str(run/'state/ledger.sqlite3')+'?mode=ro',uri=True)
+    checks=[]; effects={}; loaded={}; replays=[]
+    def check(name,passed): checks.append({'name':name,'passed':bool(passed)})
+    for path,expected in profile['evaluation_files'].items():
+        check('frozen evaluation '+path,sha(path)==expected)
+    previous=None
+    for seq,prior,body,digest in db.execute('SELECT * FROM journal ORDER BY seq'):
+        row=json.loads(body)
+        check('journal '+str(seq),prior==previous and row['previous_hash']==prior and hashlib.sha256(body.encode()).hexdigest()==digest)
+        previous=digest
+    for effect_id,event_id,stage,request_hash,status,result_path,result_hash in db.execute('SELECT * FROM effects'):
+        directory=run/'state/effects'/effect_id
+        request=json.loads((directory/'request.json').read_text())
+        check(effect_id+' request',hashlib.sha256(canon(request)).hexdigest()==request_hash)
+        check(effect_id+' stage',hashlib.sha256(canon({'event_id':event_id,'stage':stage,'request_hash':request_hash})).hexdigest()==effect_id)
+        check(effect_id+' complete',status=='terminal' and sha(result_path)==result_hash)
+        completed=json.loads(Path(result_path).read_text()); response=completed['response']
+        check(effect_id+' binding',completed['effect_id']==effect_id and completed['event_id']==event_id and completed['stage']==stage and completed['request_hash']==request_hash)
+        process=json.loads((directory/'process.json').read_text())
+        if completed.get('reconciled_from_native_recovery'):
+            check('native publisher actually terminated',stage=='seal_publish' and process['returncode']==94 and not completed['original_publish_completed_normally'])
+        else:
+            check(effect_id+' actual process',process['returncode']==0 and json.loads(process['stdout'])==response)
+        effects[event_id,stage]={'request':request,'response':response,'completion':completed}
+        pins=profile['sealing_native_files'] if stage.startswith('seal_') else profile['native_files']
+        for path,record in response.get('imports',{}).items():
+            check(record['module']+' enrolled native source',pins.get(path)==record['sha256'])
+            loaded[path]=record['sha256']
+        for record in response.get('runtime_profile',{}).get('imports',[]):
+            check(record['module']+' separate world source',profile['world_memory_files'].get(record['path'])==record['sha256'])
+            loaded[record['path']]=record['sha256']
+        if stage in ('prepare','prepare_accepted'):
+            check(event_id+'/'+stage+' accepted raw scan',response['source_preserved']==request['source'] and response['source_sha256']==hashlib.sha256(request['source'].encode()).hexdigest())
+            check(event_id+'/'+stage+' closed inventory',response['snapshot']['mode']=='filesystem' and [x['path'] for x in response['snapshot']['entries']]==['target.py'])
+        if stage.startswith('seal_'):
+            check(event_id+'/'+stage+' honest proof scope',response['proof_mode']=='integrity_only' and response['signed_receipts'] is False and response['provider_calls']==0)
+            if not completed.get('reconciled_from_native_recovery'):
+                replays.extend(response['independent_replays'])
+    for path,expected in loaded.items(): check('loaded bytes '+path,sha(path)==expected)
+    outcomes={}
+    for event in profile['events']:
+        result=json.loads((run/'state/events'/event['event_id']/'result.json').read_text())
+        outcomes[event['event_id']]=result
+        check(event['event_id']+' fixed outcome',result['status']==event['expected_status'])
+        check(event['event_id']+' no model dispatch',result['provider_calls']==0 and result['provider_total_tokens']==0)
+        if result['status'] in ('accepted','stale_parent'):
+            check(event['event_id']+' exact candidate bytes',sha(result['accepted_source_path'])==result['accepted_source_sha256'])
+            prep=effects.get((event['event_id'],'prepare_accepted'),effects[event['event_id'],'prepare'])['response']
+            check(event['event_id']+' accepted semantic binding',prep['source_sha256']==result['accepted_source_sha256'] and result['accepted_semantic_root_cid']==prep['semantic_root_cid'])
+            check(event['event_id']+' native publish decision',result['publication']['native_sealing_called'] and result['publication']['published']==result['accepted'])
+        if event['source'].startswith('parent'):
+            read=effects[event['event_id'],'seal_read']['response']
+            prepared=effects[event['event_id'],'prepare']['request']['source']
+            expected=read['source']+('\n# Frozen development source identity change.\n' if event['source']=='parent_comment' else '')
+            check(event['event_id']+' native stored bytes actually consumed',prepared==expected and read['recursive_chain_verified'])
+            check(event['event_id']+' native declared parent',read['seal_cid']==outcomes[event['parent_event']]['publication']['seal_cid'])
+    crash=json.loads((run/'state/native_sealing/crashes/native-recover.json').read_text()); replays.extend(crash['replays'])
+    recovery=effects['native-recover','seal_recover']['response']
+    check('native pre-CAS crash and fresh recovery',crash['boundary']=='after_seal_persistence' and crash['pid']!=recovery['pid'] and recovery['cas_swapped'])
+    check('exact recovered terminal receipt',effects['native-recover','seal_publish']['response']==recovery)
+    check('pending seal generation2 continued',recovery['pending_before']['phase']=='seal_persistence' and recovery['pointer']['generation']==2)
+    check('fresh next event consumed recovery',effects['native-next','seal_read']['response']['pointer']==recovery['pointer'] and outcomes['native-next']['publication']['pointer']['generation']==3)
+    check('stale publication preserved current native root',outcomes['native-stale']['publication']['pointer']==outcomes['native-next']['publication']['pointer'])
+    for row in replays:
+        response=json.loads(row['stdout'])
+        check(row['event_id']+'/'+row['validation_kind']+' independent replay',row['returncode']==0 and row['passed'] and response['result']['passed'] and response['image']==profile['scorer_image'])
+    pointers=[json.loads(p.read_text()) for p in (run/'state/native_sealing/store/current_seals').glob('*.json')]
+    check('two actual native current pointers',len(pointers)==2)
+    for envelope in pointers:
+        p=envelope['pointer']
+        check('native pointer envelope digest',hashlib.sha256(canon(p)).hexdigest()==envelope['payload_digest'])
+        check('published native pointer '+p['repository_id'],p==outcomes['native-next' if p['repository_id'].endswith('/native') else 'ordinary-revisit']['publication']['pointer'])
+    actions=[json.loads(body) for (body,) in db.execute('SELECT record_json FROM journal') if json.loads(body)['kind']=='world_action_consumed']
+    scorer=[v for (e,s),v in effects.items() if s in ('current_visible','candidate_visible','candidate_audit','residual_visible')]
+    summary={'schema':'ns-controller-native-sealing-readonly-audit@1','checks':checks,'check_count':len(checks),'all_passed':all(x['passed'] for x in checks),'actual_loaded_sources':len(loaded),'loaded_source_hashes':loaded,'controller_scorer_processes':len(scorer),'additional_sealing_scorer_processes':len(replays),'all_actual_scorer_processes':len(scorer)+len(replays),'actual_world_compiled_actions_consumed':len(actions),'provider_dispatches':0}
+    (run/'archived_audit_v3.json').write_text(json.dumps(summary,indent=2,sort_keys=True)+'\n')
+    print(json.dumps({k:v for k,v in summary.items() if k not in ('checks','loaded_source_hashes')}))
+    db.close()
+    if not summary['all_passed']: raise RuntimeError('retained failed audit')
+
+
+if __name__=='__main__': main()

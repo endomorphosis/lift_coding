@@ -1,0 +1,33 @@
+"""Trusted pre-oracle source snapshot inside the isolated evaluation container."""
+import hashlib,json,os,stat,subprocess
+from pathlib import Path
+root=Path('/testbed')
+paths=subprocess.check_output(['git','ls-files','--cached','--others','--exclude-standard','-z'],cwd=root).split(b'\0')
+paths.extend(name.encode('utf-8') for name in json.loads(Path('/curator/candidate-paths.json').read_text()))
+entries=[]
+for raw in sorted(set(paths)):
+    if not raw: continue
+    name=raw.decode('utf-8'); path=root/name
+    if not path.exists() and not path.is_symlink(): continue
+    mode=path.lstat().st_mode
+    if stat.S_ISLNK(mode): data=os.readlink(path).encode();kind='symlink'
+    elif stat.S_ISREG(mode): data=path.read_bytes();kind='file'
+    else: raise ValueError('unsupported_source_entry')
+    entries.append({'path':name,'kind':kind,'mode':stat.S_IMODE(mode),'sha256':hashlib.sha256(data).hexdigest()})
+encoded=json.dumps(entries,sort_keys=True,separators=(',',':')).encode()
+baseline=json.loads(Path('/curator/baseline-source-inventory.json').read_text())
+assert hashlib.sha256(json.dumps(baseline['entries'],sort_keys=True,separators=(',',':')).encode()).hexdigest()==baseline['tree_sha256']
+old={x['path']:x for x in baseline['entries']};new={x['path']:x for x in entries}
+changed=[name for name in set(old)|set(new) if old.get(name)!=new.get(name)]
+def allowed(name):
+    parts=name.split('/')
+    entry=new.get(name,old.get(name))
+    return len(parts)>=2 and parts[0]=='requests' and name.endswith('.py') and all(x not in ('','.','..','.git') for x in parts) and entry['kind']=='file' and entry['mode'] in (0o644,0o755)
+scope_allowed=all(allowed(name) for name in changed)
+expected_tree=json.loads(Path('/curator/expected-source.json').read_text())['tree_sha256']
+source_matches=hashlib.sha256(encoded).hexdigest()==expected_tree
+accepted=scope_allowed and source_matches
+Path('/tmp/ns-source-admission.json').write_text(json.dumps({'accepted':accepted,'changed_path_count':len(changed),'source_matches_expected':source_matches,'reason':None if accepted else ('resulting_tree_outside_requests_python_scope' if not scope_allowed else 'resulting_tree_hash_mismatch')})+'\n')
+if not accepted: raise SystemExit(42)
+
+Path('/tmp/ns-candidate-state.json').write_text(json.dumps({'schema':'ns-candidate-source-tree/v1','base_commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=root).decode().strip(),'file_count':len(entries),'tree_sha256':hashlib.sha256(encoded).hexdigest(),'entries':entries},sort_keys=True)+'\n')

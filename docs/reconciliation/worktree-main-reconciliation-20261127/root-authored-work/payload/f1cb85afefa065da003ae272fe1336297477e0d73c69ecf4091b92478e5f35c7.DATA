@@ -1,0 +1,277 @@
+"""Pinned authored candidates for the complete original public Bottle request.
+
+Native IntentIR and symbolic effects select a task to own reviewed requirements.
+They do not prove natural-language equivalence, behavior, or task completion.
+The fixed review inventory is independent of any supplied contract or ledger.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+from pathlib import Path
+
+SCHEMA = "terminal-public-intent-profile@1"
+PUBLIC_INSTRUCTION_SHA256 = "89b1abdf0af19399f720233b5cdf6b2e8e0ff7b6e3fe3e2a3af0d4d298a8641a"
+REVIEW_REF = "reviewed:terminal-public-bottle-instruction@1"
+SOURCE_PATH = ".supervisor-instruction.md"
+TASK_KEY = "TB-CODE-TASK"
+VALIDATION_KEY = "public-structural-smoke"
+_AUTHORITY = {key: False for key in (
+    "semantic_alignment_verified", "source_semantics_verified", "proof_authority",
+    "execution_authority", "mutation_authority", "completion_authority",
+    "behavioral_satisfaction_verified", "official_reward_measured")}
+
+# Explicit authored review choices, never learned extraction or a whole-prompt
+# wrapper. Spans select the original bytes, including all contextual regions.
+_UNITS = (
+    ("summary", 0, 111, "interpreted_candidate", "required_summary"),
+    ("introduction", 111, 422, "non_requirement", "repository_context_and_request_heading"),
+    ("repository-analysis", 422, 471, "interpreted_candidate", "required_repository_reading_and_analysis"),
+    ("cwe-knowledge", 471, 555, "interpreted_candidate", "required_learn_or_recall_alternative"),
+    ("identify", 555, 637, "interpreted_candidate", "required_scoped_identification"),
+    ("report", 637, 919, "interpreted_candidate", "required_reporting_with_unresolved_field_count"),
+    ("report-example", 919, 1026, "non_requirement", "contextual_format_example_with_placeholder_values"),
+    ("repair", 1026, 1255, "interpreted_candidate", "required_repair_and_invalid_input_error_behavior"),
+    ("pytest-permission", 1255, 1349, "interpreted_candidate", "permitted_verification_command_not_mandatory_execution"),
+    ("hint-heading", 1349, 1356, "non_requirement", "separator_and_context_heading"),
+    ("repository-root", 1356, 1394, "non_requirement", "explicit_repository_root_context"),
+    ("exact-report-identities", 1394, 1480, "interpreted_candidate", "required_exact_file_and_cwe_identities"),
+    ("overwrite-permission", 1480, 1526, "interpreted_candidate", "permitted_overwrite_not_mandatory_execution"),
+    ("tests", 1526, 1555, "interpreted_candidate", "required_all_test_cases_pass"),
+    ("cwe-reference", 1555, 3873, "non_requirement", "separator_and_possible_cwe_reference_glossary_not_findings"),
+)
+
+# (unit, atom ID, predicate, arguments, modality, exact source span)
+_ATOMS = (
+    ("summary", "identify-summary", "identify_code_vulnerability", ("agent", "code", "CWE"), "required", 0, 110),
+    ("summary", "repair-summary", "fix_code_vulnerability", ("agent", "code", "CWE"), "required", 0, 110),
+    ("repository-analysis", "read-repository", "read_repository", ("agent", "/app"), "required", 427, 469),
+    ("repository-analysis", "analyze-repository", "analyze_repository_carefully", ("agent", "/app"), "required", 427, 469),
+    ("cwe-knowledge", "learn-or-recall-cwe", "learn_or_recall_cwe_knowledge", ("agent", "CWE", "learn_or_recall"), "required", 476, 554),
+    ("identify", "identify-bottle", "identify_code_vulnerability_in_file", ("agent", "/app/bottle.py", "CWE"), "required", 560, 636),
+    ("report", "create-report", "create_report_file", ("agent", "/app/report.jsonl", "/app"), "required", 642, 723),
+    ("report", "report-vulnerability", "report_code_vulnerability", ("agent", "/app/report.jsonl", "code_vulnerability"), "required", 642, 723),
+    ("report", "vulnerable-items", "report_contains_vulnerable_items", ("/app/report.jsonl", "vulnerable_items"), "required", 724, 759),
+    ("report", "literal-three-keys", "vulnerable_item_key_count", ("each_vulnerable_item", "3"), "required", 760, 811),
+    ("report", "file-path-field", "vulnerable_item_file_path_field", ("each_vulnerable_item", "file_path", "string", "path_of_vulnerable_file"), "required", 812, 861),
+    ("report", "cwe-id-field", "vulnerable_item_cwe_id_field", ("each_vulnerable_item", "cwe_id", "list", "CWE_IDs"), "required", 866, 917),
+    ("repair", "modify-vulnerable-source", "modify_code_file_to_fix_vulnerability", ("agent", "/app/bottle.py", "code_vulnerability"), "required", 1031, 1093),
+    ("repair", "invalid-input-error", "raise_correct_error_type_for_invalid_inputs", ("function", "invalid_inputs", "correct_error_type_unspecified", "exclude_silent_ignoring", "exclude_generic_exception"), "required", 1098, 1254),
+    ("pytest-permission", "run-public-pytest", "run_verification_command", ("agent", "pytest", "-rA"), "permitted", 1322, 1348),
+    ("exact-report-identities", "report-exact-files", "report_exact_vulnerable_files", ("/app/report.jsonl", "exact_vulnerable_files"), "required", 1398, 1479),
+    ("exact-report-identities", "report-exact-cwes", "report_exact_cwe_ids", ("/app/report.jsonl", "exact_CWE_IDs_unspecified"), "required", 1398, 1479),
+    ("overwrite-permission", "overwrite-original", "overwrite_original_code_file", ("agent", "original_code_file"), "permitted", 1484, 1525),
+    ("tests", "all-tests-pass", "make_all_test_cases_pass", ("agent", "all_test_cases"), "required", 1530, 1554),
+)
+
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _wire(value, *, native_report=False):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"),
+                      ensure_ascii=native_report, allow_nan=False).encode("utf-8")
+
+
+def _source(source_text):
+    if type(source_text) is not str:
+        raise ValueError("exact original public Bottle instruction text required")
+    try:
+        raw = source_text.encode("utf-8")
+    except UnicodeError as error:
+        raise ValueError("exact original public Bottle instruction text required") from error
+    if len(raw) != 3873 or _sha(raw) != PUBLIC_INSTRUCTION_SHA256:
+        raise ValueError("exact original public Bottle instruction text required")
+    return raw
+
+
+def _reviewed_report(source_text):
+    from ipfs_datasets_py.logic.intent_ir.schema import (
+        IntentIRDocument, IntentKind, IntentModality, IntentStatement,
+        NodeGrounding, ReviewStatus, SourceRef, SourceSpan, StatementKind,
+    )
+    units, candidates = [], []
+    for name, left, right, disposition, reason in _UNITS:
+        unit_id = "public-bottle:unit:" + name
+        text = source_text[left:right]
+        units.append({"unit_id": unit_id, "start_char": left, "end_char": right,
+            "start_byte": len(source_text[:left].encode()), "end_byte": len(source_text[:right].encode()),
+            "text": text, "sha256": _sha(text.encode()), "disposition": disposition,
+            "reason": "explicitly_authored_candidate:" + reason})
+        sources, statements = [], []
+        for unit, atom, predicate, arguments, modality, start, end in _ATOMS:
+            if unit != name:
+                continue
+            ref_id = "public-bottle:source:" + atom
+            sources.append(SourceRef(ref_id=ref_id,
+                source_uri="terminal-bench-public-instruction://fix-code-vulnerability/instruction.md",
+                source_id=PUBLIC_INSTRUCTION_SHA256, source_revision=PUBLIC_INSTRUCTION_SHA256,
+                content_sha256=PUBLIC_INSTRUCTION_SHA256,
+                review_status=ReviewStatus.MACHINE_EXTRACTED, span=SourceSpan(start, end)))
+            statements.append(IntentStatement(statement_id="public-bottle:statement:" + atom,
+                kind=StatementKind.GOAL, modality=IntentModality(modality),
+                normalized_text=source_text[start:end], source_ref_ids=(ref_id,),
+                predicate=predicate, arguments=arguments, confidence=0.0,
+                review_status=ReviewStatus.MACHINE_EXTRACTED, grounding=NodeGrounding.INFERRED))
+        if statements:
+            document = IntentIRDocument(document_id="public-bottle:document:" + name,
+                title="Explicit authored original-public-instruction candidate: " + name,
+                intent_kind=IntentKind.DECLARATIVE, sources=tuple(sources), statements=tuple(statements),
+                tags=("explicitly-authored-candidate", "administrative-task-coverage-only"))
+            document.validate()
+            candidates.append({"unit_id": unit_id, "candidate_intent_ir": document.to_dict()})
+    report = {"schema": "intent-reviewed-source-report@1",
+        "source_sha256": PUBLIC_INSTRUCTION_SHA256, "source_bytes": len(source_text.encode()),
+        "source_characters": len(source_text),
+        "producer": {"name": "terminal-public-explicit-authored-candidates", "revision": REVIEW_REF},
+        "interpretation_status": "reviewed_candidate", "units": units, "candidates": candidates,
+        "proof_authority": False, "execution_authority": False,
+        "completion_authority": False, "source_semantics_verified": False}
+    report["report_sha256"] = _sha(_wire(report, native_report=True))
+    return report
+
+
+def build_terminal_public_intent_profile(*, source_text: str) -> dict:
+    """Rebuild the fixed full-public review without providers, proofs or writes."""
+    from ipfs_datasets_py.logic.intent_ir.formalize.requirements import build_intent_requirement_ledger
+    from ipfs_accelerate_py.agent_supervisor.prompt.intent_plan_coverage import build_intent_requirement_contract
+
+    raw = _source(source_text)
+    report = _reviewed_report(source_text)
+    ledger = build_intent_requirement_ledger(source_text, source_report=report,
+        source_identity={"path": SOURCE_PATH, "revision": PUBLIC_INSTRUCTION_SHA256,
+                         "origin": "exact_public_terminal_bench_instruction"})
+    statements = {statement["statement_id"]: statement
+        for candidate in report["candidates"] for statement in candidate["candidate_intent_ir"]["statements"]}
+    requirement_by_statement = {row["statement_ids"][0]: row for row in ledger["requirements"]}
+    outputs = [{"path": "bottle.py", "effect": "modify", "media_type": "text/x-python"},
+               {"path": "report.jsonl", "effect": "create", "media_type": "text/plain"}]
+    groundings, matchers = [], []
+    for row in ledger["requirements"]:
+        if row["modality"] != "required":
+            continue
+        statement = statements[row["statement_ids"][0]]
+        groundings.append({"requirement_id": row["requirement_id"],
+            "outputs": [dict(item) for item in outputs], "validation_keys": [VALIDATION_KEY],
+            "dependency_requirement_ids": []})
+        matchers.append({"requirement_id": row["requirement_id"],
+            "native_document_sha256": row["native_document_sha256"],
+            "statement_id": statement["statement_id"], "predicate": statement["predicate"],
+            "arguments": statement["arguments"], "modality": statement["modality"]})
+    operations = {"schema": "intent-symbolic-operation-contract@1",
+        "ledger_sha256": ledger["ledger_sha256"], "review_ref": REVIEW_REF,
+        "interpretation_scope": "administrative_requirement_task_coverage",
+        "operations": [{"operation_id": "operation:public-bottle-requirement-ownership", "task_key": TASK_KEY,
+            "matchers": matchers, "outputs": outputs, "validation_keys": [VALIDATION_KEY],
+            "dependency_operation_ids": []}],
+        "semantic_alignment_verified": False, "proof_authority": False,
+        "execution_authority": False, "completion_authority": False}
+    contract = build_intent_requirement_contract(source_path=SOURCE_PATH, ledger=ledger,
+        requirements=groundings, source_text=source_text, symbolic_operations=operations)
+    inventory = []
+    for unit in report["units"]:
+        atoms = []
+        for name, atom, predicate, arguments, modality, start, end in _ATOMS:
+            if unit["unit_id"] != "public-bottle:unit:" + name:
+                continue
+            statement_id = "public-bottle:statement:" + atom
+            atoms.append({"statement_id": statement_id,
+                "requirement_id": requirement_by_statement[statement_id]["requirement_id"],
+                "predicate": predicate, "arguments": list(arguments), "modality": modality,
+                "start_char": start, "end_char": end})
+        inventory.append({**unit, "atoms": atoms})
+    return {"schema": SCHEMA, "source_sha256": PUBLIC_INSTRUCTION_SHA256,
+        "source_bytes": len(raw), "review_ref": REVIEW_REF, "ledger": ledger,
+        "contract": contract, "clause_inventory": inventory,
+        "ambiguities": [{"ambiguity_id": "report-item-key-count", "status": "unresolved",
+            "declared_key_count": 3, "named_keys": ["file_path", "cwe_id"], "example_key_count": 2,
+            "source_spans": [[760, 811], [812, 861], [866, 917], [969, 1025]],
+            "resolution": None, "third_key_invented": False,
+            "structural_smoke_resolves_ambiguity": False},
+            {"ambiguity_id": "correct-error-type", "status": "unspecified_in_public_instruction",
+             "source_spans": [[1098, 1254]], "required_exception_class": None},
+            {"ambiguity_id": "exact-cwe-identities", "status": "requires_code_analysis",
+             "source_spans": [[1398, 1479]], "required_cwe_ids": None}],
+        "limitations": {
+            "interpretation_origin": "explicitly_authored_source_bound_candidates_not_learned_inference",
+            "interpretation_scope": "administrative_requirement_task_coverage",
+            "native_review_status": "machine_extracted_candidate_not_human_reviewed",
+            "procedure_order": "retained_in_original_text_not_enforced_by_native_edges",
+            "grounding_scope": "shared_task_ownership_of_declared_outputs_and_partial_checks",
+            "public_structural_smoke": "partial_syntax_and_two_named_key_report_check",
+            "public_structural_smoke_authority": "no_exact_cwe_error_type_or_all_tests_behavior_authority",
+            "public_structural_smoke_key_count_choice": "two_named_example_keys_conflicts_with_literal_three_key_clause",
+            "behavioral_requirements_verified": False, "exact_cwe_ids_verified": False,
+            "correct_error_type_verified": False, "all_test_cases_pass_verified": False,
+            "complete_natural_language_equivalence_verified": False,
+            "permitted_clauses": "retained_without_groundings_or_symbolic_effects"},
+        "provider_calls": 0, "training_steps": 0, "solver_calls": 0, **_AUTHORITY}
+
+
+def validate_terminal_public_intent_contract(contract, *, source_text: str) -> dict:
+    """Reject substitutions by rebuilding the independent pinned review."""
+    expected = build_terminal_public_intent_profile(source_text=source_text)["contract"]
+    if type(contract) is not dict:
+        raise ValueError("exact independently rebuilt public Bottle intent contract required")
+    # Bounded strict JSON comparison distinguishes False from 0 and rejects
+    # unknown fields, non-finite values and rehashed inventory substitutions.
+    pending, count = [(contract, 0)], 0
+    while pending:
+        item, depth = pending.pop()
+        count += 1
+        if depth > 64 or count > 100_000:
+            raise ValueError("bounded strict public Bottle contract JSON required")
+        if type(item) is dict:
+            if any(type(key) is not str for key in item):
+                raise ValueError("strict public Bottle contract JSON keys required")
+            pending.extend((child, depth + 1) for child in item.values())
+        elif type(item) is list:
+            pending.extend((child, depth + 1) for child in item)
+        elif type(item) not in (str, int, float, bool, type(None)):
+            raise ValueError("strict public Bottle contract JSON types required")
+    try:
+        candidate_bytes = _wire(contract)
+    except (ValueError, TypeError, RecursionError, UnicodeError) as error:
+        raise ValueError("bounded strict public Bottle contract JSON required") from error
+    if len(candidate_bytes) > 4 * 1024 * 1024 or candidate_bytes != _wire(expected):
+        raise ValueError("contract differs from independently rebuilt public Bottle review inventory")
+    return expected
+
+
+def public_intent_profile_observation(contract, *, source_text: str) -> dict | None:
+    """Retain the pinned interpretation's limitations in execution receipts."""
+    if contract is None or contract.get("schema") != "intent-plan-requirement-contract@2":
+        return None
+    if (_sha(source_text.encode()) != PUBLIC_INSTRUCTION_SHA256
+            and contract["symbolic_operations"]["review_ref"] != REVIEW_REF):
+        return None
+    validate_terminal_public_intent_contract(contract, source_text=source_text)
+    profile = build_terminal_public_intent_profile(source_text=source_text)
+    return {key: profile[key] for key in (
+        "schema", "source_sha256", "source_bytes", "review_ref", "ambiguities", "limitations",
+        *_AUTHORITY,
+    )} | {"required_goals": 17, "permitted_goals": 2}
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("source", type=Path, help="exact original public instruction")
+    parser.add_argument("--output", required=True, type=Path, help="fresh output directory")
+    args = parser.parse_args(argv)
+    profile = build_terminal_public_intent_profile(source_text=args.source.read_bytes().decode("utf-8"))
+    args.output.mkdir(parents=True, exist_ok=False)
+    for name, value in (("profile.json", profile), ("contract.json", profile["contract"])):
+        (args.output / name).write_text(json.dumps(value, sort_keys=True, indent=2,
+            ensure_ascii=False, allow_nan=False) + "\n", encoding="utf-8")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
+
+
+__all__ = ["build_terminal_public_intent_profile", "validate_terminal_public_intent_contract",
+           "public_intent_profile_observation",
+           "PUBLIC_INSTRUCTION_SHA256", "REVIEW_REF", "SOURCE_PATH", "SCHEMA"]

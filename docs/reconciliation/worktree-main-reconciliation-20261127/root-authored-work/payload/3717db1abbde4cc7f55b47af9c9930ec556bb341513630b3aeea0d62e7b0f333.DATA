@@ -1,0 +1,31 @@
+{
+  "schema": "terminal-source-ir-lowering-experiment-plan@1",
+  "objective": "Qualify the native closed Python integer AST to ProgramIR lowering against current authored public source and hydrate native metadata plus an advisory checked-artifact candidate.",
+  "source_scope": ["callee.py", "caller.py"],
+  "admitted_callee": "One exactly annotated int-to-int synchronous function returning its parameter plus or minus a signed integer literal.",
+  "formal_claim": "Lean evaluation preservation for every constructor of the explicit source AST grammar, and correspondence of the independently reconstructed concrete ProgramIR target.",
+  "required_controls": [
+    "Genuine native current-head proof of callee increment(n)=n+1 with retained source and adapter witnesses.",
+    "Genuine native refutation of requested increment(n)=n+2 against unchanged increment(n)=n+1 source.",
+    "Actual bounded Lean rejection after changing only the native target syntax literal, preserving captured source AST syntax.",
+    "Separate bounded axiom inventory importing the exact retained native .olean without modifying native proof artifacts.",
+    "Source mutation refuses native cold validation and misses the current-source advisory cache.",
+    "Fresh process validates the actual durable native head, native proof and DuckDB/DuckLake metadata and advisory cache.",
+    "All scheduler leases released; source and selected runtime bytes unchanged after restoration."
+  ],
+  "unresolved": [
+    "Caller imports, calls, dynamic eval and whole-program behavior.",
+    "Correctness of Python byte parsing and frontend implementation in Lean.",
+    "CPython dispatch, annotations, allocation failures, resource failures, interruption and concurrency.",
+    "Training, autoencoder convergence, full Terminal-Bench satisfaction and production supervisor admission.",
+    "Loaded module code or transitive dependency attestation and operating-system atomicity."
+  ],
+  "source_execution": false,
+  "provider_calls": 0,
+  "training_steps": 0,
+  "network_isolation_enforced": false,
+  "original_terminal_task_deadline_qualified": false,
+  "benchmark_oracle_used": false,
+  "private_data_used": false,
+  "publication_requested_this_stage": false
+}

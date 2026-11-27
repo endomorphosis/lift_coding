@@ -1,0 +1,59 @@
+"""Recompute independent statement bytes and rerun actual pairing checks."""
+import argparse
+import hashlib
+import json
+import os
+import subprocess
+from pathlib import Path
+
+
+def load(path): return json.loads(path.read_text())
+def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument("run_dir",type=Path);args=parser.parse_args()
+    root=args.run_dir.resolve();freeze=load(root/"freeze.json");pins=load(root/"pins.json")
+    binary=Path(freeze["binary"]);keys=root/"keys_primary"
+    checks={"binary_matches_freeze":sha(binary)==freeze["binary_sha256"]==pins["binary_sha256"],
+        "source_snapshot_matches_freeze":all(sha(root/"source_snapshot"/name)==digest for name,digest in freeze["source_hashes"].items()),
+        "frozen_protocol_and_runner_match":all(sha(root/name)==digest for name,digest in freeze["input_hashes"].items()),
+        "key_artifacts_match":all(sha(root/name)==record["sha256"] and (root/name).stat().st_size==record["bytes"] for name,record in load(root/"key_artifacts.json").items())}
+    validation=root/"validation";validation.mkdir(exist_ok=False)
+    native=[]
+    for count in [1,2,4]:
+        witness=load(root/f"witness_{count}.json");proof=load(root/f"proof_{count}.json")
+        # Independent fixed-shape formulation of the four-leaf relation.
+        leaves=[bytes.fromhex(x) for x in witness["event_digests_hex"]]+[bytes(32)]*(4-count)
+        h=[hashlib.sha256(x).digest()for x in leaves]
+        expected=hashlib.sha256(hashlib.sha256(h[0]+h[1]).digest()+hashlib.sha256(h[2]+h[3]).digest()).hexdigest()
+        checks[f"count_{count}_exact_statement"] = witness["event_count"]==count and len(witness["event_digests_hex"])==count and witness["event_dag_merkle_root_hex"]==expected and proof["public_inputs"]==[expected,str(count)]
+        env={"PATH":"/usr/bin:/bin","GROTH16_BACKEND_ARTIFACTS_ROOT":str(keys),"RAYON_NUM_THREADS":"2"}
+        command=[str(binary),"verify","--proof",str(root/f"proof_{count}.json"),"--json"]
+        process=subprocess.run(command,env=env,capture_output=True,text=True,timeout=30)
+        (validation/f"verify_{count}.stdout.log").write_text(process.stdout);(validation/f"verify_{count}.stderr.log").write_text(process.stderr)
+        result={"count":count,"command":command,"returncode":process.returncode,"response":json.loads(process.stdout)};native.append(result)
+        checks[f"count_{count}_fresh_native_verification"] = process.returncode==0 and result["response"]=={"valid":True}
+    negatives=load(root/"negatives.json")
+    expected_cases={"private_digest","witness_length","public_root","public_count","evm_public_input","proof_point","field_equivalent_root","wrong_valid_key","truncated_key"}
+    checks["all_mutation_cases_retained"]={n["case"]for n in negatives}==expected_cases
+    for negative in negatives:
+        name=negative["case"]
+        if name!="field_equivalent_root":
+            checks[name+"_rejected"]=negative["result"]["returncode"] in [1,2]
+        if "proof_created" in negative: checks[name+"_no_proof_output"] = not negative["proof_created"]
+        if "bound_admission" in negative: checks[name+"_caller_rejects"] = negative["bound_admission"]["accepted"] is False
+    alias=load(root/"bad_field_equivalent_root.json");original=load(root/"proof_2.json")
+    modulus=21888242871839275222246405745257275088548364400416034343698204186575808495617
+    checks["alias_changes_bytes_preserves_scalar"]=alias["public_inputs"][0]!=original["public_inputs"][0] and int(alias["public_inputs"][0],16)%modulus==int(original["public_inputs"][0],16)%modulus
+    alias_row=next(n for n in negatives if n["case"]=="field_equivalent_root")
+    checks["scalar_alias_accepted_raw_rejected_before_bound_dispatch"]=alias_row["result"]["returncode"]==0 and alias_row["bound_admission"]=={"accepted":False,"native_calls":0,"reason":"expected_statement_or_local_pin_mismatch"}
+    checks["independent_setup_produced_distinct_keys"]=sha(root/"keys_primary/v3/verifying_key.bin")!=sha(root/"keys_alternate/v3/verifying_key.bin")
+    report={"schema":"ns-native-proof-artifact-validation/v1","passed":all(checks.values()),"check_count":len(checks),"checks":checks,"fresh_native_results":native,
+        "validator_sha256":sha(Path(__file__)),"independent_cryptographic_implementation":False,
+        "scope":"Independent Python root computation and artifact assertions; actual fresh pairing verification with the same pinned native backend."}
+    (root/"independent_validation.json").write_text(json.dumps(report,indent=2,sort_keys=True)+"\n")
+    print(json.dumps({"passed":report["passed"],"checks":len(checks),"failures":[k for k,v in checks.items()if not v]}));assert report["passed"]
+
+
+if __name__=="__main__":main()

@@ -1,0 +1,353 @@
+#!/usr/bin/env python3
+"""Bounded real-producer dependency context development evaluation."""
+from __future__ import annotations
+
+import argparse
+import ast
+import copy
+import hashlib
+import importlib.metadata
+import itertools
+import json
+import os
+from pathlib import Path
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[5]
+sys.dont_write_bytecode = True
+
+
+def canon(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+
+
+def sha(value):
+    return hashlib.sha256(value).hexdigest()
+
+
+def write_json(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(json.dumps(value, indent=2, sort_keys=True).encode() + b"\n")
+
+
+FIXTURES = {
+    "invoice": {
+        "dependency.py": """def invoice(quantity: int, unit_price: int) -> int:
+    subtotal = quantity * unit_price
+    credit_per_unit = 2
+    credit = quantity * credit_per_unit
+    discounted_subtotal = subtotal - credit
+    handling_per_unit = 3
+    handling = quantity * handling_per_unit
+    total = discounted_subtotal + handling
+    return total
+
+
+def surcharge(quantity: int, base: int) -> int:
+    first_charge = quantity * 3
+    second_charge = quantity * 2
+    combined_charge = first_charge + second_charge
+    refund = quantity * 4
+    remaining_charge = combined_charge - refund
+    total = remaining_charge + base
+    return total
+""",
+        "target.py": "from dependency import invoice, surcharge\n\ndef total(quantity: int, unit_price: int, base: int) -> int:\n    return invoice(quantity, unit_price) - surcharge(quantity, base)\n",
+        "test_target.py": "from target import total\n\ndef test_invoice_total():\n    assert total(2, 10, 4) == 28\n",
+        "objective": "Repair total so that invoice and surcharge are added. Preserve arbitrary-precision integer behavior and all unchanged dependencies.",
+    },
+    "polynomial": {
+        "dependency.py": """def square_sum(left: int, right: int) -> int:
+    left_square = left * left
+    right_square = right * right
+    left_cross = left * right
+    right_cross = right * left
+    all_cross_terms = left_cross + right_cross
+    square_terms = left_square + right_square
+    result = square_terms + all_cross_terms
+    return result
+
+
+def difference_squares(left: int, right: int) -> int:
+    sum_value = left + right
+    difference_value = left - right
+    product = sum_value * difference_value
+    correction = left * right
+    adjusted_product = product + correction
+    restored_product = adjusted_product - correction
+    return restored_product
+""",
+        "target.py": "from dependency import square_sum, difference_squares\n\ndef total(left: int, right: int) -> int:\n    return square_sum(left, right) - difference_squares(left, right)\n",
+        "test_target.py": "from target import total\n\ndef test_polynomial_total():\n    assert total(3, 2) == 30\n",
+        "objective": "Repair total so that square_sum and difference_squares are added. Inputs are mathematical integers represented as Python int.",
+    },
+    "units": {
+        "dependency.py": """def minutes_to_seconds(minutes: int) -> int:
+    first_half = minutes * 30
+    second_half = minutes * 30
+    combined_seconds = first_half + second_half
+    offset = minutes * 5
+    shifted_seconds = combined_seconds + offset
+    restored_seconds = shifted_seconds - offset
+    return restored_seconds
+
+
+def adjusted_blocks(blocks: int, spare: int) -> int:
+    nominal_units = blocks * 12
+    unusable_units = blocks * 2
+    useful_units = nominal_units - unusable_units
+    replacement_units = blocks * 1
+    adjusted_units = useful_units + replacement_units
+    with_spares = adjusted_units + spare
+    return with_spares
+""",
+        "target.py": "from dependency import minutes_to_seconds, adjusted_blocks\n\ndef total(minutes: int, blocks: int, spare: int) -> int:\n    return minutes_to_seconds(minutes) - adjusted_blocks(blocks, spare)\n",
+        "test_target.py": "from target import total\n\ndef test_unit_total():\n    assert total(2, 3, 4) == 157\n",
+        "objective": "Repair total so that minutes_to_seconds and adjusted_blocks are added. The declared interface accepts only Python int inputs.",
+    },
+}
+
+
+def native_expression(node, names, sp):
+    kind = node.get("_type")
+    if kind == "Name" and node["id"] in names:
+        return names[node["id"]]
+    if kind == "Constant" and type(node["value"]) is int:
+        return sp.Integer(node["value"])
+    if kind == "UnaryOp" and node["op"]["_type"] in {"USub", "UAdd"}:
+        value = native_expression(node["operand"], names, sp)
+        return -value if node["op"]["_type"] == "USub" else value
+    if kind == "BinOp" and node["op"]["_type"] in {"Add", "Sub", "Mult"}:
+        a, b = native_expression(node["left"], names, sp), native_expression(node["right"], names, sp)
+        return {"Add": lambda: a + b, "Sub": lambda: a - b, "Mult": lambda: a * b}[node["op"]["_type"]]()
+    raise ValueError("unsupported_native_integer_expression:" + str(kind))
+
+
+def project_capsule(capsule, sp):
+    facets = capsule["metadata"]["facets"]
+    if len(facets) != 1:
+        raise ValueError("multiple_native_facets")
+    node = facets[0]["version_evidence"]
+    if node["_type"] != "FunctionDef" or node["decorator_list"]:
+        raise ValueError("not_plain_function")
+    signature = capsule["signature"]
+    parameters = signature["parameters"]
+    if capsule["effects"] or signature["return"] != "int" or any(p["annotation"] != "int" or p["kind"] != "positional_or_keyword" or p["default_kind"] != "none" for p in parameters):
+        raise ValueError("outside_pure_integer_interface")
+    args = [p["name"] for p in parameters]
+    names = {p: sp.Symbol(p, integer=True) for p in args}
+    body = node["body"]
+    if not body or body[-1]["_type"] != "Return":
+        raise ValueError("missing_final_return")
+    for statement in body[:-1]:
+        if statement["_type"] != "Assign" or len(statement["targets"]) != 1 or statement["targets"][0]["_type"] != "Name":
+            raise ValueError("outside_straightline_assignments")
+        names[statement["targets"][0]["id"]] = native_expression(statement["value"], names, sp)
+    expression = sp.factor(native_expression(body[-1]["value"], names, sp))
+    return {"name": node["name"], "parameters": args, "return_expression": str(expression), "domain": "int"}
+
+
+def python_expression(node, environment):
+    """Independent interpreter over Python AST, not native capsule structure."""
+    if isinstance(node, ast.Name) and node.id in environment:
+        return environment[node.id]
+    if isinstance(node, ast.Constant) and type(node.value) is int:
+        return node.value
+    if isinstance(node, ast.UnaryOp) and isinstance(node.op, (ast.UAdd, ast.USub)):
+        value = python_expression(node.operand, environment)
+        return -value if isinstance(node.op, ast.USub) else value
+    if isinstance(node, ast.BinOp):
+        a, b = python_expression(node.left, environment), python_expression(node.right, environment)
+        if isinstance(node.op, ast.Add): return a + b
+        if isinstance(node.op, ast.Sub): return a - b
+        if isinstance(node.op, ast.Mult): return a * b
+        if isinstance(node.op, ast.Pow) and isinstance(node.right, ast.Constant) and type(b) is int and 0 <= b <= 16:
+            value = 1
+            for _ in range(b): value = value * a
+            return value
+    raise ValueError("unsupported_independent_expression")
+
+
+def verify_projection(source, projection, z3):
+    functions = [n for n in ast.parse(source).body if isinstance(n, ast.FunctionDef)]
+    node = next(n for n in functions if n.name == projection["name"])
+    arguments = [a.arg for a in node.args.args]
+    assert arguments == projection["parameters"]
+    names = {name: z3.Int(name) for name in arguments}
+    assignment = dict(names)
+    for statement in node.body[:-1]:
+        assert isinstance(statement, ast.Assign) and len(statement.targets) == 1 and isinstance(statement.targets[0], ast.Name)
+        assignment[statement.targets[0].id] = python_expression(statement.value, assignment)
+    assert isinstance(node.body[-1], ast.Return)
+    original = python_expression(node.body[-1].value, assignment)
+    normalized = python_expression(ast.parse(projection["return_expression"], mode="eval").body, names)
+    solver = z3.Solver()
+    solver.set(timeout=5000)
+    solver.add(original != normalized)
+    result = solver.check()
+    assert result == z3.unsat, (projection["name"], str(result))
+    # Execute only the locally authored dependency, not any historical source.
+    namespace = {}
+    exec(compile(source, "authored_dependency.py", "exec"), namespace)
+    function = namespace[projection["name"]]
+    concrete = 0
+    for values in itertools.product(range(-3, 4), repeat=len(arguments)):
+        environment = dict(zip(arguments, values))
+        expected = python_expression(ast.parse(projection["return_expression"], mode="eval").body, environment)
+        assert function(*values) == expected
+        concrete += 1
+    return {"source_function": projection["name"], "solver_result": "unsat", "solver_formula_sha256": sha(solver.sexpr().encode()), "integer_domain": "all mathematical integers for the supported pure profile", "concrete_input_count": concrete}
+
+
+def timed(call):
+    wall, cpu = time.perf_counter(), time.process_time()
+    result = call()
+    return result, {"wall_seconds": time.perf_counter() - wall, "cpu_seconds": time.process_time() - cpu}
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--worktree", type=Path, default=ROOT / ".worktrees/vericodegen-neurosymbolic_supervision-2026")
+    parser.add_argument("--output", type=Path, default=HERE / "results_v1")
+    args = parser.parse_args()
+    if args.output.exists():
+        raise SystemExit("output already exists; use a new development run directory")
+    args.output.mkdir(parents=True)
+    started = time.perf_counter()
+    # Prevent the fixture's parent repository from becoming its scan universe.
+    os.environ["GIT_CEILING_DIRECTORIES"] = str(HERE)
+    for package in ("ipfs_accelerate", "ipfs_datasets", "ipfs_kit"):
+        sys.path.insert(0, str(args.worktree / "external" / package))
+    import sympy as sp
+    import z3
+    import tiktoken
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_bytes, cid_for_structured
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.scanner import RepositoryScanner
+    from ipfs_datasets_py.logic.software_contracts.semantic_state import build_semantic_state, verify_semantic_state_bundle, view_semantic_state_bundle, assess_capsule_freshness, read_required_source
+    from ipfs_accelerate_py.agent_supervisor.semantic_state.capsules import admit_capsule
+    from ipfs_accelerate_py.agent_supervisor.semantic_state.context_pack import ContextPacker
+    from ipfs_accelerate_py.agent_supervisor.context.context_contracts import ContextBudget
+    native_import_seconds = time.perf_counter() - started
+    encodings = {name: tiktoken.get_encoding(name) for name in ("o200k_base", "cl100k_base")}
+    rows = []
+    for family, fixture in FIXTURES.items():
+        folder = HERE / "runtime" / family
+        folder.mkdir(parents=True, exist_ok=True)
+        files = {path: text for path, text in fixture.items() if path.endswith(".py")}
+        for path, text in files.items(): (folder / path).write_text(text)
+        scanner = RepositoryScanner()
+        state, scan_time = timed(lambda: scanner.scan(folder))
+        assert {s.module_path for s in state.symbols} <= set(files), "scan escaped declared fixture"
+        bundle, bundle_time = timed(lambda: build_semantic_state(state))
+        verify_semantic_state_bundle(bundle)
+        view = view_semantic_state_bundle(bundle)
+        blobs = {cid_for_bytes(text.encode()): text.encode() for text in files.values()}
+        records, admissions, capsules, projections, proof_checks = [], [], [], [], []
+        unknown_ids = {edge.source_id for edge in state.edges if edge.target_id not in {symbol.stable_id for symbol in state.symbols}}
+        projection_started, projection_cpu = time.perf_counter(), time.process_time()
+        for symbol in sorted(state.symbols, key=lambda s: s.qualified_name):
+            if symbol.module_path != "dependency.py" or symbol.kind != "function": continue
+            capsule = view.capsule(symbol.stable_id)
+            materialized = read_required_source(state, symbol.stable_id, expected_producer_state_cid=state.state_cid, read_source_blob=lambda cid: blobs[cid])
+            assert materialized.source_bytes == files["dependency.py"].encode()
+            assessment = assess_capsule_freshness(capsule, current_state=view)
+            admission = admit_capsule(capsule, semantic_state_root_cid=bundle.root.root_cid, assessment=assessment)
+            assert admission.admission == "exact_substitute" and admission.freshness == "fresh"
+            assert symbol.stable_id not in unknown_ids
+            payload = capsule.to_dict()
+            projection = project_capsule(payload, sp)
+            checks = verify_projection(files["dependency.py"], projection, z3)
+            capsules.append(payload)
+            admissions.append(admission)
+            projections.append(projection)
+            proof_checks.append(checks)
+            records.append({"capsule_cid": capsule.capsule_cid, "source_cid": symbol.source_cid, "source_evidence": materialized.evidence.to_dict(), "admission": admission.to_dict(), "projection": projection, "verification": checks})
+        assert len(capsules) == 2
+        projection_time = {"wall_seconds": time.perf_counter() - projection_started, "cpu_seconds": time.process_time() - projection_cpu}
+        # Explicit authored acceptance obligations, not fabricated native proofs.
+        obligation = {"schema": "ns-authored-acceptance-obligation/v1", "objective": fixture["objective"], "domain": "Python int inputs only; arbitrary precision; no overloaded operators", "protected_paths": ["dependency.py", "test_target.py"], "public_tests_sha256": sha(files["test_target.py"].encode())}
+        obligation_cid = cid_for_structured(obligation)
+        common = {"objective": fixture["objective"], "allowed_edit_paths": ["target.py"], "required_source": {p: files[p] for p in ("target.py", "test_target.py")}, "obligations": [{"cid": obligation_cid, "payload": obligation}]}
+        manifest = {"semantic_state_root_cid": bundle.root.root_cid, "source_sha256": sha(files["dependency.py"].encode()), "records": records}
+        manifest_sha = sha(canon(manifest))
+        common["dependency_identity"] = {"path": "dependency.py", "source_sha256": sha(files["dependency.py"].encode()), "expansion": "hash-checked full public dependency source available locally"}
+        shared_kwargs = dict(objective=fixture["objective"], target_source_cid=cid_for_bytes(files["target.py"].encode()), surrounding_source_cid=cid_for_structured({"source": "separate dependency module", "path": "dependency.py"}), test_source_cid=cid_for_bytes(files["test_target.py"].encode()), obligation_cids=[obligation_cid], delta_cid=cid_for_structured({"editable": ["target.py"]}), assumptions=["Pure integer dependency development profile; protected source retained."])
+        packer = ContextPacker(budget=ContextBudget(max_input_tokens=100000, reserved_output_tokens=4096, reserved_tool_tokens=0))
+        pack, pack_time = timed(lambda: packer.pack(**shared_kwargs, dependency_admissions=admissions))
+        assert pack.coverage_satisfied and not pack.budget_exceeded and pack.pack.obligation_cids == (obligation_cid,)
+        assert len(pack.pack.dependency_capsule_cids) == 2
+        raw = {**common, "dependency_source": files["dependency.py"]}
+        additive = {**raw, "native_capsules": capsules}
+        full = {**common, "native_capsules": capsules}
+        projected = {**common, "verified_integer_equations": projections, "projection_profile": "native-capsule-straightline-integer/v1", "evidence_manifest_sha256": manifest_sha}
+        syntax = {**common, "dependency_source": ast.unparse(ast.parse(files["dependency.py"])) + "\n"}
+        requests = {"A_raw": raw, "B_native_additive": additive, "C_full_native_substitution": full, "D_verified_equations": projected, "E_plain_ast_source": syntax}
+        metrics = {}
+        for arm, request in requests.items():
+            assert request["required_source"] == common["required_source"] and request["obligations"] == common["obligations"]
+            payload = canon(request)
+            metrics[arm] = {"sha256": sha(payload), "bytes": len(payload), "tokens": {name: len(enc.encode(payload.decode(), disallowed_special=())) for name, enc in encodings.items()}}
+            write_json(args.output / family / "requests" / (arm + ".json"), request)
+        # Exact dependency source remains materializable after substitution.
+        expansion = {"path": "dependency.py", "source_sha256": sha(files["dependency.py"].encode()), "content": files["dependency.py"]}
+        assert sha(expansion["content"].encode()) == expansion["source_sha256"]
+        write_json(args.output / family / "expansion.json", expansion)
+        write_json(args.output / family / "evidence_manifest.json", manifest)
+        write_json(args.output / family / "native_pack.json", pack.to_dict())
+        transitions = []
+        for transition in ("unchanged", "target_comment", "dependency_arithmetic", "dependency_unknown_call"):
+            current_files = dict(files)
+            if transition == "target_comment": current_files["target.py"] += "\n# Independent comment-only target update.\n"
+            if transition == "dependency_arithmetic": current_files["dependency.py"] = files["dependency.py"].replace("return ", "return 1 + ", 1)
+            if transition == "dependency_unknown_call": current_files["dependency.py"] = files["dependency.py"].replace("return ", "return unknown_external_transform(", 1).replace("\n\n\n", ")\n\n\n", 1)
+            for path, text in current_files.items(): (folder / path).write_text(text)
+            cold_scanner, inc_scanner = RepositoryScanner(), RepositoryScanner()
+            cold, cold_time = timed(lambda: cold_scanner.scan(folder))
+            incremental, inc_time = timed(lambda: inc_scanner.scan(folder, previous_state=state))
+            cold_bundle, cb_time = timed(lambda: build_semantic_state(cold))
+            inc_bundle, ib_time = timed(lambda: build_semantic_state(incremental, previous_bundle=bundle))
+            verify_semantic_state_bundle(cold_bundle)
+            verify_semantic_state_bundle(inc_bundle)
+            assert cold.state_cid == incremental.state_cid and cold_bundle.root.root_cid == inc_bundle.root.root_cid
+            current_view = view_semantic_state_bundle(cold_bundle)
+            old_assessments = []
+            for old_capsule in capsules:
+                old = view.capsule(old_capsule["stable_symbol_id"])
+                assessment = assess_capsule_freshness(old, current_state=current_view)
+                admitted = admit_capsule(old, semantic_state_root_cid=cold_bundle.root.root_cid, assessment=assessment)
+                old_assessments.append(admitted.to_dict())
+            fallbacks = []
+            for symbol in cold.symbols:
+                if symbol.module_path != "dependency.py" or symbol.kind != "function": continue
+                cap = current_view.capsule(symbol.stable_id)
+                assessment = assess_capsule_freshness(cap, current_state=current_view)
+                admitted = admit_capsule(cap, semantic_state_root_cid=cold_bundle.root.root_cid, assessment=assessment)
+                frontier = [edge.to_dict() for edge in cold.edges if edge.source_id == symbol.stable_id and edge.target_id not in {s.stable_id for s in cold.symbols}]
+                reason = None
+                if admitted.admission != "exact_substitute" or frontier: reason = "native_raw_or_unknown_frontier"
+                else:
+                    try: project_capsule(cap.to_dict(), sp)
+                    except ValueError as exc: reason = str(exc)
+                fallbacks.append({"symbol": symbol.qualified_name, "retain_raw": reason is not None, "reason": reason, "admission": admitted.admission, "frontier_edges": len(frontier)})
+            if transition == "dependency_unknown_call": assert any(x["retain_raw"] for x in fallbacks)
+            transitions.append({"transition": transition, "source_inventory": {p: sha(t.encode()) for p, t in current_files.items()}, "cold_state_cid": cold.state_cid, "incremental_state_cid": incremental.state_cid, "cold_root_cid": cold_bundle.root.root_cid, "incremental_root_cid": inc_bundle.root.root_cid, "roots_equal": True, "cold_scan": cold_time, "incremental_scan": inc_time, "cold_bundle": cb_time, "incremental_bundle": ib_time, "incremental_diagnostics": inc_scanner.last_reuse_diagnostics.to_dict(), "old_capsule_assessments": old_assessments, "current_fallbacks": fallbacks})
+            write_json(args.output / family / "sources" / (transition + ".json"), current_files)
+        for path, text in files.items(): (folder / path).write_text(text)
+        row = {"family": family, "authored_development": True, "native_state_cid": state.state_cid, "native_root_cid": bundle.root.root_cid, "dependency_capsules": len(capsules), "native_exact_admissions": len(admissions), "explicit_authored_obligations": 1, "native_derived_obligations": 0, "all_required_source_and_obligations_retained": True, "proof_checks": proof_checks, "preparation": {"cold_scan": scan_time, "cold_bundle": bundle_time, "admission_projection_and_validation": projection_time, "native_context_pack": pack_time}, "requests": metrics, "transitions": transitions}
+        rows.append(row)
+        write_json(args.output / family / "row.json", row)
+    module_sources = {}
+    for name, module in sorted(sys.modules.items()):
+        path = getattr(module, "__file__", None)
+        if path and name.startswith(("ipfs_datasets_py.logic.software_contracts", "ipfs_accelerate_py.agent_supervisor.semantic_state", "ipfs_accelerate_py.agent_supervisor.context")) and Path(path).suffix == ".py":
+            module_sources[str(Path(path).resolve())] = sha(Path(path).read_bytes())
+    totals = {arm: {name: sum(row["requests"][arm]["tokens"][name] for row in rows) for name in encodings} for arm in rows[0]["requests"]}
+    summary = {"schema": "ns-native-dependency-development-results/v1", "evaluation_source_sha256": sha(Path(__file__).read_bytes()), "protocol_sha256": sha((HERE / "protocol.json").read_bytes()), "fixture_definition_sha256": sha(canon(FIXTURES)), "development_cohort_size": len(rows), "native_exact_dependency_admissions": sum(r["native_exact_admissions"] for r in rows), "explicit_authored_obligations": len(rows), "native_derived_obligations": 0, "cold_incremental_root_matches": sum(t["roots_equal"] for r in rows for t in r["transitions"]), "cold_incremental_comparisons": 12, "integer_equivalence_proofs": len([p for r in rows for p in r["proof_checks"]]), "concrete_execution_cases": sum(p["concrete_input_count"] for r in rows for p in r["proof_checks"]), "unknown_call_cases_retaining_raw": sum(any(x["retain_raw"] for x in r["transitions"][-1]["current_fallbacks"]) for r in rows), "message_content_token_totals": totals, "reduction_vs_raw": {arm: {name: 1 - value / totals["A_raw"][name] for name, value in counts.items()} for arm, counts in totals.items()}, "native_import_seconds": native_import_seconds, "elapsed_seconds": time.perf_counter() - started, "environment": {"python": sys.version, "executable": sys.executable, "tiktoken": importlib.metadata.version("tiktoken"), "sympy": sp.__version__, "z3": z3.get_version_string(), "git_ceiling_directories": os.environ["GIT_CEILING_DIRECTORIES"]}, "native_module_sources": module_sources, "provider_calls": 0, "provider_usage": None, "normal_native_imports": True, "import_shims": [], "limitations": ["Authored three-repository bounded development cohort; no representative task-quality or end-to-end savings claim.", "New equation projection is an evaluation integration; the native pack itself contains CID references.", "Cold/incremental times are single ordered measurements without randomized repetitions; do not infer speedup.", "Z3 checks integer arithmetic semantics only; Python custom objects, floats, side effects, resource exhaustion and unsupported syntax excluded.", "No model has consumed these contexts or used source expansion. All explicit obligations are authored acceptance criteria, not native-generated proof obligations."]}
+    write_json(args.output / "summary.json", summary)
+    print(json.dumps({k: v for k, v in summary.items() if k != "native_module_sources"}, indent=2))
+
+
+if __name__ == "__main__":
+    main()

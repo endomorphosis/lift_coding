@@ -1,0 +1,3 @@
+from pathlib import Path
+Path('/home/barberb/lift_coding/maintenance/terminal-nomination-lifecycle-20261012-01/model-input-audit-attempt-03/tmp/test_owner_child_does_not_impo0/task-checkout/unsafe-import-executed').write_text('wrong import boundary')
+raise RuntimeError('task module imported by owner')

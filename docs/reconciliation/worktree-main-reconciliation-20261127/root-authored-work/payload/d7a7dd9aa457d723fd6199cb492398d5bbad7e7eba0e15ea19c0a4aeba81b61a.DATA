@@ -1,0 +1,93 @@
+#!/usr/bin/env python3
+"""Real-process native session continuity with actual symbolic scan work.
+
+No fake durable port, event-log shim, provider, root, or verified publication is
+injected. The native scan executor callback executes analysis/CEGIS and checks a
+candidate. This study qualifies scheduling/restart only.
+"""
+from __future__ import annotations
+import argparse
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+HERE=Path(__file__).resolve().parent
+sys.path.insert(0,str(HERE.parent/'routing_v2'))
+import run_eval as routing
+from ipfs_accelerate_py.agent_supervisor.semantic_state.session import SemanticStateSession, SessionPolicy
+from ipfs_accelerate_py.mcp_server.mcplusplus.kubo_cid import cid_for_bytes
+from metered_provider import canonical,digest,write_new
+
+OUTPUT=HERE/'results'
+
+def append(path,record):
+    with path.open('ab') as stream:
+        stream.write(canonical(record)+b'\n');stream.flush();os.fsync(stream.fileno())
+
+def cases():
+    return [c for c in json.loads((HERE.parent/'routing_v2/cases.json').read_bytes())['cases'] if c['family']]
+
+def snapshots():
+    return {cid_for_bytes(canonical({'source':c['source'],'objective':c['objective'],'public_validation':c['visible_validation']})):c for c in cases()}
+
+def source_binding():
+    files=[Path(__file__),HERE.parent/'routing_v2/cases.json',HERE.parent/'routing_v2/run_eval.py',routing.ROOT/'external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/semantic_state/session.py',routing.ROOT/'external/ipfs_accelerate/ipfs_accelerate_py/agent_supervisor/runtime/event_log.py']
+    result={str(f.relative_to(routing.ROOT)):digest(f.read_bytes()) for f in files}
+    result.update(json.loads((HERE.parent/'routing_v2/freeze.json').read_bytes())['files'])
+    return result
+
+def child(stage):
+    snap=snapshots()
+    def actual_scan(**kwargs):
+        began=time.monotonic();case=snap[kwargs['snapshot_cid']]
+        evidence=routing.symbolic(case)
+        assert evidence['next_action']=='accept_deterministic_candidate'
+        audit=routing.check(evidence['candidate_source'],case['audit_validation'])
+        assert audit['passed']
+        record={'stage':stage,'pid':os.getpid(),'snapshot_cid':kwargs['snapshot_cid'],'attempt_id':kwargs['attempt_id'],'case_id':case['id'],'evidence':evidence,'audit':audit,'elapsed_seconds':time.monotonic()-began,'provider_calls':0}
+        record_cid=cid_for_bytes(canonical(record));write_new(OUTPUT/'artifacts'/(record_cid+'.json'),record)
+        append(OUTPUT/'executions.jsonl',{'stage':stage,'pid':os.getpid(),'case_id':case['id'],'snapshot_cid':kwargs['snapshot_cid'],'attempt_id':kwargs['attempt_id'],'output_cid':record_cid,'provider_calls':0,'audit_pass':audit['passed']})
+        return {'status':'completed','output_artifact_cids':[record_cid],'verified':False,'new_root_cid':None,'diagnostic':'real symbolic candidate independently checked; no root-publication authority'}
+    policy=SessionPolicy.from_dict({'repository_id':'ns-development/restart-continuity','event_log_path':str(OUTPUT/'native-events.jsonl'),'checkpoint_path':str(OUTPUT/'native-checkpoint.json'),'mode':'development','worker_enabled':False,'debounce_ms':0,'fence_ttl_ms':60000,'fail_closed_on_corrupt_log':True})
+    session=SemanticStateSession(policy,scan_executor=actual_scan)
+    report={'stage':stage,'pid':os.getpid()}
+    if stage=='first':
+        keys=sorted(snap)
+        report['watch_acks']=[session.notify_watch(keys[0]).to_dict(),session.notify_watch(keys[1]).to_dict(),session.notify_watch(keys[0]).to_dict()]
+        report['before']=session.status().to_dict()
+        report['drained']=[r.to_dict() for r in session.process_pending(limit=1)]
+        report['after']=session.status().to_dict()
+        write_new(OUTPUT/(stage+'.json'),report)
+        os._exit(73)  # Deliberate abrupt process exit: no session.shutdown/finalizers.
+    report['restart_status']=session.restart().to_dict()
+    if stage=='second':
+        report['drained']=[r.to_dict() for r in session.drain()]
+    elif stage=='third':
+        report['initial_drain']=[r.to_dict() for r in session.drain()]
+        report['repeat_watch']=session.notify_watch(sorted(snap)[0]).to_dict()
+        report['repeated_drain']=[r.to_dict() for r in session.drain()]
+    report['after']=session.status().to_dict()
+    write_new(OUTPUT/(stage+'.json'),report)
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--stage',choices=['first','second','third']);args=parser.parse_args()
+    if args.stage:return child(args.stage)
+    OUTPUT.mkdir();(OUTPUT/'artifacts').mkdir()
+    freeze={'schema':'ns-native-session-restart-freeze/v1','source_files':source_binding(),'scenario':'enqueue two different source snapshots and one duplicate; execute one; abrupt process exit73; restart in fresh process and drain remainder; restart again then repeat a completed source notification','required_observations':['pending_duplicate_coalesced','completed_work_not_restarted','unfinished_work_resumed','repeat_notification_behavior_measured'],'provider_calls':0,'fake_ports':False,'canonical_root_publication':False,'comparison_scope':'restart continuity and scheduling only, not token savings or accepted-state reuse'}
+    write_new(HERE/'freeze.json',freeze)
+    for stage,expected in [('first',73),('second',0),('third',0)]:
+        began=time.monotonic();p=subprocess.run([sys.executable,str(Path(__file__)), '--stage',stage],capture_output=True,timeout=60)
+        write_new(OUTPUT/(stage+'-process.json'),{'returncode':p.returncode,'expected_returncode':expected,'stdout':p.stdout.decode(errors='replace'),'stderr':p.stderr.decode(errors='replace'),'elapsed_seconds':time.monotonic()-began})
+        assert p.returncode==expected,(stage,p.returncode,p.stderr.decode(errors='replace'))
+    first,second,third=[json.loads((OUTPUT/(name+'.json')).read_bytes()) for name in ['first','second','third']]
+    executions=[json.loads(line) for line in (OUTPUT/'executions.jsonl').read_bytes().splitlines()]
+    observations={'distinct_processes':len({first['pid'],second['pid'],third['pid']})==3,'duplicate_pending_coalesced':first['watch_acks'][2]['coalesced'],'first_process_completed':len(first['drained']),'second_process_resumed':len(second['drained']),'third_restart_no_pending':not third['initial_drain'],'repeat_completed_snapshot_scheduled':third['repeat_watch']['scheduled'],'repeat_completed_snapshot_executed':len(third['repeated_drain']),'total_actual_symbolic_executions':len(executions),'every_execution_independently_passed':all(x['audit_pass'] for x in executions),'same_attempt_not_executed_twice':len({x['attempt_id'] for x in executions})==len(executions),'provider_calls':sum(x['provider_calls'] for x in executions),'root_publications':0}
+    assert observations['distinct_processes'] and observations['duplicate_pending_coalesced'] and observations['first_process_completed']==1 and observations['second_process_resumed']==1 and observations['third_restart_no_pending'] and observations['every_execution_independently_passed'] and observations['same_attempt_not_executed_twice']
+    assert freeze['source_files']==source_binding()
+    write_new(HERE/'summary.json',{'schema':'ns-native-session-restart-summary/v1','observations':observations,'interpretation':'Native journal continuity works for this interruption; a fresh watch of a completed snapshot schedules new analysis. No cross-task result memoization or token savings established.'})
+    print(json.dumps(observations),flush=True)
+
+if __name__=='__main__':main()

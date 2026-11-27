@@ -1,0 +1,234 @@
+"""Pure/AST qualification for the fresh external initializer caller.
+
+No SDK, owner RPC, namespace ioctl, DB, worker or provider is executed here.
+Actual kernel/initializer evidence belongs to the separately owned native run.
+"""
+import ast
+import hashlib
+import importlib.util
+import json
+from types import SimpleNamespace
+from pathlib import Path
+import sys
+
+import pytest
+
+ROOT=Path('/home/barberb/lift_coding/artifacts/legal-ir-supervisor-recovery-20261019-01')
+SOURCE=ROOT/'genuine-private-M2-provisioning-source-v1'
+BASE=ROOT/'private-fake-credential-authenticated-integration-source-v3/postimages'
+
+
+def load(name):
+    path=SOURCE/name
+    spec=importlib.util.spec_from_file_location('_private_m2_source_test_'+path.stem,path)
+    module=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def function(name):
+    tree=ast.parse((SOURCE/'run_private_m2.py').read_text())
+    return next(node for node in tree.body if isinstance(node,ast.FunctionDef) and node.name==name)
+
+
+@pytest.mark.parametrize('rows',[
+    b'0 1000 1\n',b'0 1000 1\n1 100000 65536\n',b'0 1000 1\n1 100000 16\n32 200000 16\n'])
+def test_restricted_maps_accept_real_disjoint_extents(rows):
+    result=load('namespace_entry.py').parse_map(rows)
+    assert result[0]==[0,1000,1] and sum(row[2] for row in result)<4294967295
+
+
+@pytest.mark.parametrize('raw',[
+    b'',b'0 0 4294967295\n',b'0 0 0\n',b'-1 1000 1\n',b'0 1000 -1\n',
+    b'0 1000 1 extra\n',b'0 1000\n',b'0 1000 2\n1 2000 1\n',
+    b'0 1000 1\n1 1000 1\n',b'4294967295 1000 2\n',b'0 4294967295 2\n',
+    b'0 1000 1\n0 1000 1\n',b'0 1 1\n1 2 1\n2 3 1\n3 4 1\n4 5 1\n5 6 1\n6 7 1\n7 8 1\n8 9 1\n',
+])
+def test_restricted_maps_refuse_invalid_or_initial_extents(raw):
+    with pytest.raises((RuntimeError,UnicodeError)):
+        load('namespace_entry.py').parse_map(raw)
+
+
+def valid_clock():
+    return dict(schema='private-M2-original-outer-epoch/v1',original_started_monotonic=10.0,
+        work_deadline_monotonic=250.0,native_deadline_monotonic=310.0,parent_native_deadline_monotonic=370.0,
+        outer_owner_pid=123,outer_owner_birth=456,outer_network_namespace=dict(device=4,inode=5),
+        outer_source_lock_observations=[dict(path='/tmp/source-'+str(n),device=4,inode=8+n,
+            kernel_key='00:04:'+str(8+n),owner_pid=123,owner_birth=456) for n in (0,1,2)])
+
+
+def test_original_epoch_accepts_exact_unrenewed_windows(monkeypatch):
+    module=load('namespace_entry.py');monkeypatch.setattr(module.time,'monotonic',lambda:20.0)
+    value=valid_clock();assert module.original_clock(value) is value
+
+
+@pytest.mark.parametrize('key,value',[
+    ('original_started_monotonic',21.0),('work_deadline_monotonic',251.0),
+    ('native_deadline_monotonic',311.0),('parent_native_deadline_monotonic',371.0),
+    ('outer_owner_pid',True),('outer_owner_birth','abc'),('work_deadline_monotonic',float('nan')),
+    ('schema','private-M1-clock/v1'),('outer_network_namespace',dict(device=0,inode=5)),
+])
+def test_original_epoch_refuses_renewal_and_malformed_metadata(monkeypatch,key,value):
+    module=load('namespace_entry.py');monkeypatch.setattr(module.time,'monotonic',lambda:20.0)
+    clock=valid_clock();clock[key]=value
+    with pytest.raises(RuntimeError):module.original_clock(clock)
+
+
+@pytest.mark.parametrize('nonce',['0'*32,'abc12345'*4,'f'*32])
+def test_public_fake_nonce_binds_existing_fingerprint_without_key_override(nonce):
+    module=load('run_private_m2.py');row=module.private_owner_credential_metadata(nonce)
+    assert row['credential_fingerprint']==hashlib.sha256(('INVALID_PRIVATE_LOOPBACK_FIXTURE_ONLY_'+nonce).encode()).hexdigest()[:16]
+    assert row['credential_slot']=='private-M2-fixture-'+nonce[:16]
+
+
+@pytest.mark.parametrize('nonce',['', '0'*31, '0'*33, 'X'*32, True, None])
+def test_public_fake_nonce_invalid_inputs_refuse(nonce):
+    with pytest.raises(RuntimeError):load('run_private_m2.py').private_owner_credential_metadata(nonce)
+
+
+@pytest.mark.parametrize('relative,constant',[
+    ('ipfs_accelerate_py/cli_runtime/grok_private_same_pid_m2.py','PRIVATE_HELPER_SOURCE_SHA256'),
+    ('ipfs_accelerate_py/agent_supervisor/runtime/private_same_pid_m2_entry.py','M2_SOURCE_SHA256')])
+def test_product_rebinding_changes_only_one_constant_and_no_function(relative,constant):
+    before=ast.parse((BASE/relative).read_text());after=ast.parse((SOURCE/'postimages'/relative).read_text())
+    def normalized(tree):
+        count=0
+        for node in tree.body:
+            if isinstance(node,ast.Assign) and any(isinstance(target,ast.Name) and target.id==constant for target in node.targets):
+                node.value=ast.Constant('<SOURCE_PIN>');count+=1
+        assert count==1
+        return ast.dump(tree,include_attributes=False)
+    assert normalized(before)==normalized(after)
+
+
+def test_caller_uses_genuine_admitted_capture_and_initializer_lifecycle():
+    main=ast.unparse(function('main'))
+    assert 'admitted.AdmittedBenchmarkRuntime.create' in main
+    assert 'private_same_pid_capture=request_pin' in main
+    assert 'lifecycle.run_initializer_lifecycle' in main
+    assert 'private_same_pid_offline=' not in main
+    assert 'owner.build_server' in main and 'local.materialize_local_benchmark_plan' in main
+
+
+def test_separate_component_diagnostic_never_accepts_native_task_or_lean():
+    main=ast.unparse(function('main'))
+    assert 'successful = False' in main and 'native_capture_accepted=False' in main
+    assert 'task_completion_accepted=False' in main and 'Lean_admitted=False' in main
+    assert "lifecycle_result['phase_failure']" in main
+    assert "accepted['initializer_diagnostic_passed']" in main
+
+
+def test_source_selection_preserves_baseline_and_exact_four_changed_roles():
+    module=load('run_private_m2.py')
+    assert len(module.SELECTED_RELATIVES)==7 and len(module.CHANGED_RELATIVES)==4
+    assert module.WORKER_RELATIVE not in module.CHANGED_RELATIVES
+    body=ast.unparse(function('require_prepared_view'))
+    assert 'CHANGED_RELATIVES' in body and "'normal_qa_audit_pin'" in body
+    assert "'baseline_qa_audit_pin'" in body and 'source_controls(view, check)' in body
+
+
+def test_namespace_readiness_keeps_actual_kernel_apis_and_explicit_exec():
+    body=ast.parse((SOURCE/'namespace_entry.py').read_text())
+    rendered=ast.unparse(body)
+    assert 'fcntl.ioctl(net, NS_GET_USERNS)' in rendered
+    assert "'/proc/self/ns/user'" in rendered and "'/proc/self/uid_map'" in rendered
+    assert 'socket.if_nameindex()' in rendered and "'/proc/net/ipv6_route'" in rendered
+    assert "'/usr/bin/python3', '-P', '-B', str(caller), *argv" in rendered
+    assert 'raw=ioctl' in rendered and 'os.execv(str(tracer)' in rendered
+    assert "'-I'" not in rendered
+
+
+@pytest.mark.parametrize('missing_or_false',[None,False])
+def test_QA_baseline400_invariant_is_mandatory(tmp_path,missing_or_false):
+    module=load('run_private_m2.py')
+    selection=json.loads((ROOT/'private-M2-initializer-source-selection-v1/source-selection.json').read_bytes())
+    qa=json.loads(Path(selection['normal_qa_reference_pin']['path']).read_bytes())
+    tests=json.loads(Path(qa['tests_report']['path']).read_bytes())
+    if missing_or_false is None:tests['required_invariants'].pop('unchanged_all400_actual_nodeids')
+    else:tests['required_invariants']['unchanged_all400_actual_nodeids']=False
+    raw=(json.dumps(tests,sort_keys=True)+'\n').encode();path=tmp_path/'negative-QA-metadata.json';path.write_bytes(raw)
+    qa['tests_report']=dict(path=str(path),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+    def read_metadata(pin):
+        body=Path(pin['path']).read_bytes()
+        assert len(body)==pin['bytes'] and hashlib.sha256(body).hexdigest()==pin['sha256']
+        return body
+    def require(value,reason):
+        if not value:raise RuntimeError(reason)
+    metadata=SimpleNamespace(read_pin=read_metadata,need=require)
+    view=json.loads(Path(selection['prepared_view_pin']['path']).read_bytes())
+    with pytest.raises(RuntimeError,match='all_selected_normal_cases_and_phase_reports_required'):
+        module.require_normal_QA(check=metadata,reference=qa,view_pin=selection['prepared_view_pin'],
+            view=view,driver_pin=selection['normal_qa_driver_pin'])
+
+
+@pytest.mark.parametrize('raw,expected',[
+    ('21 1.000001 connect(5, {sa_family=AF_INET, sin_port=htons(1), sin_addr=inet_addr("127.0.0.1")}, 16) = -1 ECONNREFUSED (Connection refused)\n',1),
+    ('21 1.000001 connect(5, {sa_family=AF_INET, <unfinished ...>\n21 1.000002 <... connect resumed>sin_addr=inet_addr("127.0.0.1")}, 16) = 0\n',1),
+    ('21 1.000001 close(5) = 0\n22 1.000002 exit_group(0) = ?\n',2),
+])
+def test_outer_trace_metadata_formatter_joins_real_records(raw,expected):
+    rows,pending=load('outer_owner.py').trace_records(raw.encode())
+    assert len(rows)==expected and not pending
+
+
+@pytest.mark.parametrize('raw',[
+    b'21 1.000001 <... connect resumed>0) = 0\n',
+    b'21 1.000001 read(5, <unfinished ...>\n21 1.000002 <... connect resumed>0) = 0\n',
+    b'21 1.000001 read(5, <unfinished ...>\n21 1.000002 connect(6, <unfinished ...>\n'])
+def test_outer_trace_metadata_formatter_refuses_unmatched_or_contradictory_records(raw):
+    with pytest.raises(RuntimeError):load('outer_owner.py').trace_records(raw)
+
+
+def test_outer_reservation_envelope_accounts_runtime_inputs_and_full_caller():
+    module=load('outer_owner.py')
+    assert module.STORAGE_BYTES==642*1024**2 and module.ARTIFACT_BYTES==128*1024**2
+    assert module.RUNTIME_BYTES==module.INPUT_BYTES==1024**2
+    assert module.CALLER_FIXTURE_BYTES==512*1024**2 and module.TRACE_BYTES==40*1024**2
+    assert module.PROCESS_SLOTS==8 and module.MEMORY_MB==4096
+
+
+def test_outer_does_not_use_old_probe_owner_or_copy_DuckDB():
+    tree=ast.parse((SOURCE/'outer_owner.py').read_text());main=next(node for node in tree.body if isinstance(node,ast.FunctionDef)and node.name=='main')
+    calls={ast.unparse(node.func)for node in ast.walk(main)if isinstance(node,ast.Call)}
+    assert 'helper.owner' not in calls and 'helper.inner' not in calls and 'helper.stage_dependencies' not in calls
+    assert 'drain_owned' in calls and 'reservation.account_external_bytes' in calls
+    assert 'scheduler.acquire' in calls and 'root_lease.acquire_child' in calls
+
+
+def test_trace_excludes_network_and_file_payload_syscalls():
+    tree=ast.parse((SOURCE/'namespace_entry.py').read_text());main=next(node for node in tree.body if isinstance(node,ast.FunctionDef)and node.name=='main')
+    assignment=next(node for node in ast.walk(main)if isinstance(node,ast.Assign)and any(isinstance(t,ast.Name)and t.id=='calls'for t in node.targets))
+    calls=set(ast.literal_eval(assignment.value).split(','))
+    assert not calls&{'read','write','sendto','sendmsg','sendmmsg','recvfrom','recvmsg','recvmmsg'}
+    assert {'socket','connect','bind','listen','accept','accept4','ioctl','close','fcntl','execve'}<=calls
+
+
+def test_runtime_configured_upper_bound_uses_genuine_exact_original_clock_clamp():
+    main=ast.unparse(function('main'))
+    assert 'lifetime_seconds=360' in main
+    entry=ast.parse((SOURCE/'postimages/ipfs_accelerate_py/agent_supervisor/runtime/private_same_pid_m2_entry.py').read_text())
+    cutoff=next(n for n in entry.body if isinstance(n,ast.FunctionDef)and n.name=='original_runtime_deadline')
+    rendered=ast.unparse(cutoff)
+    assert "return request['parent_native_deadline_monotonic']" in rendered
+    assert "request['parent_native_deadline_monotonic'] <= native_ceiling" in rendered
+    assert "request['work_deadline_monotonic'] == work_deadline_monotonic" in rendered
+
+
+
+
+
+
+
+
+
+
+def test_whole_caller_original_clock_and_native_source_caps_are_not_replaced():
+    body=ast.unparse(function('main'))
+    assert "256 * 1024 ** 2 if key == 'binary' else 65536" in body
+    tree=ast.parse((SOURCE/'outer_owner.py').read_text())
+    main=ast.unparse(next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name=='main'))
+    drain=ast.unparse(next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name=='drain_owned'))
+    assert "time.monotonic() < epoch + 360" in main
+    assert "cutoff = min(stop_started + 30, epoch + 360)" in drain
+    assert "need(now < cutoff" in drain
+    assert "stop_started + 360" not in drain

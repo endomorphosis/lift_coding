@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+"""Reproduce all recorded primary proof counts and the fixed family bootstrap.
+
+Uses Python's standard library only; it does not rerun Lean or any model.
+"""
+import argparse
+from collections import Counter
+import hashlib
+import json
+from pathlib import Path
+import random
+
+HERE = Path(__file__).resolve().parent
+
+
+def read(path):
+    return json.loads(path.read_text())
+
+
+def verify(root):
+    root = root.resolve()
+    manifest = read(root / 'MANIFEST.json')
+    for item in manifest['files']:
+        path = (root / item['bundle_path']).resolve()
+        assert path.is_relative_to(root), 'Unsafe bundle path'
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == item['bundle_sha256'], item['bundle_path']
+    protocol = read(root / 'frozen_protocol.json')
+    rows = read(root / 'comparison.json')
+    goals = {goal['goal_id']: goal for goal in protocol['goals']}
+    assert len(rows) == len(goals) == 64
+    assert {row['goal_id'] for row in rows} == set(goals)
+    assert len({row['goal_id'] for row in rows}) == 64
+    assert [row['goal_id'] for row in rows] == [goal['goal_id'] for goal in protocol['goals']]
+    for row in rows:
+        goal = goals[row['goal_id']]
+        assert goal['split'] == 'prospective_constructed_test'
+        for key in ('family', 'pair_id', 'expected_provable'):
+            assert row[key] == goal[key]
+        assert type(row['expected_provable']) is bool
+        native = read(root / 'native' / row['goal_id'] / 'result.json')
+        model = read(root / 'model' / row['goal_id'] / 'result.json')
+        assert row['baseline'] == native['baseline'] and row['hammer'] == native['hammer']
+        assert row['model'] == model['model']
+        for result in (row['baseline'], row['hammer'], row['model']['checker']):
+            assert type(result['accepted']) is bool
+    families = sorted({row['family'] for row in rows})
+    assert len(families) == 8
+    assert Counter((row['family'], row['expected_provable']) for row in rows) == Counter({(family, label): 4 for family in families for label in (False, True)})
+    summary = dict(scope=protocol['scope'], natural_final_test_accessed=False,
+                   planned_new_goals=64, valid_goals=32, invalid_goals=32, families=8,
+                   model_calls=sum(row['model']['status'] != 'not_run' for row in rows),
+                   model_responses=sum(row['model']['status'] == 'response_received' for row in rows),
+                   model_wall_seconds=sum(row['model'].get('wall_seconds', 0) for row in rows),
+                   model_prompt_tokens=sum(row['model'].get('usage', {}).get('prompt_tokens', 0) for row in rows),
+                   model_completion_tokens=sum(row['model'].get('usage', {}).get('completion_tokens', 0) for row in rows), arms={})
+    for arm in ('baseline', 'hammer', 'model'):
+        def get(row):
+            return row['model']['checker'] if arm == 'model' else row[arm]
+        summary['arms'][arm] = dict(
+            valid_native_accepted=sum(row['expected_provable'] and get(row)['accepted'] for row in rows),
+            invalid_native_accepted=sum(not row['expected_provable'] and get(row)['accepted'] for row in rows),
+            statuses=dict(Counter(get(row)['status'] for row in rows)),
+            by_family={family: dict(
+                valid_native_accepted=sum(row['family'] == family and row['expected_provable'] and get(row)['accepted'] for row in rows),
+                valid_denominator=4,
+                invalid_native_accepted=sum(row['family'] == family and not row['expected_provable'] and get(row)['accepted'] for row in rows),
+                invalid_denominator=4) for family in families})
+    # Exact original random.Random algorithm, draw count and order statistics.
+    assert protocol['seed'] == 20260914
+    rng = random.Random(protocol['seed'])
+    bootstrap = []
+    for _ in range(2000):
+        sampled = [rng.choice(families) for _ in families]
+        sample = [row for family in sampled for row in rows if row['family'] == family and row['expected_provable']]
+        bootstrap.append(sum(int(row['model']['checker']['accepted']) - int(row['baseline']['accepted']) for row in sample) / len(sample))
+    bootstrap.sort()
+    summary['model_minus_baseline_valid_family_bootstrap'] = dict(
+        draws=2000, seed=20260914,
+        point=sum(int(row['model']['checker']['accepted']) - int(row['baseline']['accepted']) for row in rows if row['expected_provable']) / 32,
+        percentile95=[bootstrap[49], bootstrap[1949]], cluster='semantic_family')
+    expected = read(root / 'summary.json')
+    assert summary == {key: value for key, value in expected.items() if key != 'completed_at'}, 'Primary proof summary differs'
+    qualification = read(root / 'qualification/summary.json')
+    qualification_rows = []
+    assert len(protocol['qualification_goals']) == 5
+    for goal in protocol['qualification_goals']:
+        assert goal['goal_id'] not in goals
+        result = read(root / 'qualification' / goal['goal_id'] / 'result.json')
+        assert result['goal_id'] == goal['goal_id'] and result['split'] == 'historical_qualification'
+        model = result['model']
+        qualification_rows.append(dict(goal_id=goal['goal_id'], model_status=model['status'],
+                                       wall_seconds=model['wall_seconds'], usage=model.get('usage'),
+                                       checker_status=model['checker']['status'], accepted=model['checker']['accepted']))
+    assert qualification['records'] == qualification_rows
+    assert qualification['qualification_model_calls'] == 5
+    assert qualification['primary_model_calls'] == 64 and qualification['qualification_excluded_from_primary'] is True
+    assert qualification['inference_wall_seconds'] == sum(row['wall_seconds'] for row in qualification_rows)
+    assert qualification['native_proofs_accepted'] == sum(row['accepted'] for row in qualification_rows)
+    return dict(passed=True, exact_primary_summary_match=True, attempted_goals=64,
+                valid_goals=32, invalid_goals=32, families=8, family_bootstrap_draws=2000,
+                model_calls=0, native_checker_calls=0,
+                primary_model_valid_accepted=summary['arms']['model']['valid_native_accepted'],
+                separate_historical_qualification_calls=5,
+                separate_qualification_inference_seconds=qualification['inference_wall_seconds'],
+                scope='Recorded primary outcomes and exact bootstrap only. Post-hoc additional acceptances remain excluded; no independent proof replay or semantic evaluation.')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--bundle', type=Path, default=HERE)
+    parser.add_argument('--output', type=Path)
+    args = parser.parse_args()
+    report = verify(args.bundle)
+    if args.output:
+        with args.output.open('x') as stream:
+            stream.write(json.dumps(report, indent=2) + '\n')
+    print(json.dumps(report, indent=2))

@@ -1,0 +1,35 @@
+[tox]
+skip_missing_interpreters=true
+envlist =
+    py39-unit,py{310,311,312,313,314,314t,315,py3}-{unit,doctest},mypy-check
+isolated_build = True
+
+[testenv]
+deps =
+    unit: pytest
+    #unit: matplotlib; implementation_name != 'pypy' and python_version <= '3.14'
+    doctest: sphinx
+    doctest: myst-parser
+    doctest: alabaster
+extras = unit: diagrams
+setenv =
+    PYTHONPATH = {env:PYTHONPATH}{:}{toxinidir}
+commands =
+    unit: pytest tests examples/tiny/tests {posargs}
+    doctest: sphinx-build -b doctest docs docs/_build/doctest
+allowlist_externals =
+    pytest
+    python
+    sphinx-build
+
+[testenv:py314t-unit]
+description = Run tests with the free-threaded Python 3.14 interpreter.
+base_python = python3.14t
+
+[testenv:py314t-doctest]
+description = Run doctests with the free-threaded Python 3.14 interpreter.
+base_python = python3.14t
+
+[testenv:mypy-check]
+deps = mypy
+commands = mypy --show-error-codes --warn-unused-ignores pyparsing

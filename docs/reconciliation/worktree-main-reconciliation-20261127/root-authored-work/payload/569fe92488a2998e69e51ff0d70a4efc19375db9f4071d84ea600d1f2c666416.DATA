@@ -1,0 +1,5 @@
+# Preserve this canonical comment.
+def increment(value):
+    return value + 2
+
+SENTINEL = 'unchanged'

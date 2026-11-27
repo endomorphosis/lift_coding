@@ -1,0 +1,236 @@
+import OriginalPrefixFactorsEvaluation
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+
+Actual fifth assignment evaluated from derived stable factors, ordinary source
+weights/differences and the actual finite range index. Scalar row products,
+ordered zip/sum, positive-four division and the outer range are proved from
+primitive bindings. No desired gradient equality is an input premise.
+No Python arithmetic/preparation/guard/return/convergence claim.
+-/
+
+namespace RankerObjectiveOriginalGradientEvaluation
+
+noncomputable section
+
+open scoped BigOperators
+open RankerObjectiveIR (SliceError applyTwo exactDivision)
+open RankerObjectivePrefixIR (NamedEnvironment extendNames castValue evalSourceTerm evalBinary)
+open RankerObjectiveContainerLanguage (SourceExpr evalSourceExpr)
+open RankerObjectiveContainerEvaluationBridge (leftZipIndex rightZipIndex)
+open RankerObjectiveSourceContainerSuccess (eval_source_zipRowsMap_min_success eval_source_fsum_success
+  eval_source_indexVector_success eval_source_lengthMatrix_success eval_source_natToScalar_success
+  eval_source_rangeMap_success)
+open RankerObjectiveOriginalMarginsEvaluation (exactMargins actual_weights_binding actual_differences_binding)
+open RankerObjectiveOriginalLossRegularizerEvaluation (sourceL2Rat afterMarginsEnvironment
+  afterDataEnvironment afterRegularizerEnvironment)
+open RankerObjectiveOriginalFactorsEvaluation (exactFactors afterFactorsEnvironment after_factors_factors_binding)
+
+def rowMultiplyCoordinateSource : SourceExpr .scalar :=
+  .scalarBinary .mul (.leaf (.var (τ := .scalar) "f"))
+    (.indexVector (.leaf (.var (τ := .vector 80) "row"))
+      (.leaf (.var (τ := .index 80) "i")))
+
+def summedRowsSource : SourceExpr .scalar :=
+  .fsumExact (.zipRowsMap "f" "row"
+    (.leaf (.var (τ := .vector 4) "factors"))
+    (.leaf (.var (τ := .matrix 4 80) "differences")) rowMultiplyCoordinateSource)
+
+def gradientCoordinateSource : SourceExpr .scalar :=
+  .scalarBinary .sub
+    (.scalarBinary .mul (.leaf (.scalarLiteral sourceL2Rat))
+      (.indexVector (.leaf (.var (τ := .vector 80) "weights"))
+        (.leaf (.var (τ := .index 80) "i"))))
+    (.scalarBinary .div summedRowsSource
+      (.natToScalar (.lengthMatrix (.leaf (.var (τ := .matrix 4 80) "differences")))))
+
+def exactGradient (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ)
+    (factors : Fin 4 → ℝ) : Fin 80 → ℝ :=
+  fun coordinate => (sourceL2Rat : ℝ) * weights coordinate -
+    (∑ row, factors row * differences row coordinate) / 4
+
+theorem actual_gradient_source_decomposition :
+    RankerObjectiveOriginalPrefixParts.gradientSource =
+      SourceExpr.rangeMap "i" (.leaf (.var (τ := .vector 80) "weights")) gradientCoordinateSource := by
+  rfl
+
+theorem summed_rows_source_success (environment : NamedEnvironment)
+    (differences : Fin 4 → Fin 80 → ℝ) (factors : Fin 4 → ℝ) (coordinate : Fin 80)
+    (differencesBinding : environment "differences" (.matrix 4 80) = .ok differences)
+    (factorsBinding : environment "factors" (.vector 4) = .ok factors)
+    (indexBinding : environment "i" (.index 80) = .ok coordinate) :
+    evalSourceExpr environment summedRowsSource =
+      .ok (∑ row, factors row * differences row coordinate) := by
+  let products : Fin (min 4 4) → ℝ :=
+    fun index => factors (leftZipIndex index) * differences (rightZipIndex index) coordinate
+  have bodySuccess : ∀ index : Fin (min 4 4), evalSourceExpr
+      (extendNames (τ := .vector 80) "row" (differences (rightZipIndex index))
+        (extendNames (τ := .scalar) "f" (factors (leftZipIndex index)) environment))
+      rowMultiplyCoordinateSource = .ok (products index) := by
+    intro index
+    let bodyEnvironment := extendNames (τ := .vector 80) "row" (differences (rightZipIndex index))
+      (extendNames (τ := .scalar) "f" (factors (leftZipIndex index)) environment)
+    have rowSuccess : evalSourceExpr bodyEnvironment
+        (.leaf (.var (τ := .vector 80) "row")) = .ok (differences (rightZipIndex index)) := by
+      simp [bodyEnvironment, evalSourceExpr, evalSourceTerm, extendNames, castValue]
+    have indexSuccess : evalSourceExpr bodyEnvironment
+        (.leaf (.var (τ := .index 80) "i")) = .ok coordinate := by
+      simpa [bodyEnvironment, evalSourceExpr, evalSourceTerm, extendNames] using indexBinding
+    have coordinateSuccess := eval_source_indexVector_success bodyEnvironment
+      (.leaf (.var (τ := .vector 80) "row")) (.leaf (.var (τ := .index 80) "i"))
+      (differences (rightZipIndex index)) coordinate rowSuccess indexSuccess
+    have factorSuccess : evalSourceExpr bodyEnvironment
+        (.leaf (.var (τ := .scalar) "f")) = .ok (factors (leftZipIndex index)) := by
+      simp [bodyEnvironment, evalSourceExpr, evalSourceTerm, extendNames, castValue]
+    change applyTwo (evalBinary .mul)
+      (evalSourceExpr bodyEnvironment (.leaf (.var (τ := .scalar) "f")))
+      (evalSourceExpr bodyEnvironment (.indexVector (.leaf (.var (τ := .vector 80) "row"))
+        (.leaf (.var (τ := .index 80) "i")))) = .ok (products index)
+    rw [factorSuccess, coordinateSuccess]
+    rfl
+  have leftSuccess : evalSourceExpr environment
+      (.leaf (.var (τ := .vector 4) "factors")) = .ok factors := by
+    exact factorsBinding
+  have rightSuccess : evalSourceExpr environment
+      (.leaf (.var (τ := .matrix 4 80) "differences")) = .ok differences := by
+    exact differencesBinding
+  have zipSuccess := eval_source_zipRowsMap_min_success environment "f" "row"
+    (.leaf (.var (τ := .vector 4) "factors")) (.leaf (.var (τ := .matrix 4 80) "differences"))
+    rowMultiplyCoordinateSource factors differences products leftSuccess rightSuccess bodySuccess
+  have sumSuccess := eval_source_fsum_success environment
+    (.zipRowsMap "f" "row" (.leaf (.var (τ := .vector 4) "factors"))
+      (.leaf (.var (τ := .matrix 4 80) "differences")) rowMultiplyCoordinateSource) products zipSuccess
+  have productEquality : products =
+      (fun index : Fin 4 => factors index * differences index coordinate) := by
+    funext index
+    have leftIndex : leftZipIndex (leftLength := 4) (rightLength := 4) index = index := by
+      apply Fin.ext
+      rfl
+    have rightIndex : rightZipIndex (leftLength := 4) (rightLength := 4) index = index := by
+      apply Fin.ext
+      rfl
+    simp only [products, leftIndex, rightIndex]
+  rw [productEquality] at sumSuccess
+  have sumEquality : (∑ index : Fin (min 4 4), factors index * differences index coordinate) =
+      (∑ row : Fin 4, factors row * differences row coordinate) := by
+    have minRows : min (4 : ℕ) 4 = 4 := Nat.min_self 4
+    first
+    | rfl
+    | simp only [minRows]
+  exact sumSuccess.trans
+    (congrArg (Except.ok : ℝ → Except SliceError ℝ) sumEquality)
+
+theorem gradient_coordinate_source_success (environment : NamedEnvironment)
+    (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ)
+    (factors : Fin 4 → ℝ) (coordinate : Fin 80)
+    (weightsBinding : environment "weights" (.vector 80) = .ok weights)
+    (differencesBinding : environment "differences" (.matrix 4 80) = .ok differences)
+    (factorsBinding : environment "factors" (.vector 4) = .ok factors)
+    (indexBinding : environment "i" (.index 80) = .ok coordinate) :
+    evalSourceExpr environment gradientCoordinateSource = .ok (exactGradient weights differences factors coordinate) := by
+  have weightsSuccess : evalSourceExpr environment
+      (.leaf (.var (τ := .vector 80) "weights")) = .ok weights := by
+    exact weightsBinding
+  have indexSuccess : evalSourceExpr environment
+      (.leaf (.var (τ := .index 80) "i")) = .ok coordinate := by
+    exact indexBinding
+  have coordinateSuccess := eval_source_indexVector_success environment
+    (.leaf (.var (τ := .vector 80) "weights")) (.leaf (.var (τ := .index 80) "i"))
+    weights coordinate weightsSuccess indexSuccess
+  have regularizerSuccess : evalSourceExpr environment
+      (.scalarBinary .mul (.leaf (.scalarLiteral sourceL2Rat))
+        (.indexVector (.leaf (.var (τ := .vector 80) "weights"))
+          (.leaf (.var (τ := .index 80) "i")))) = .ok ((sourceL2Rat : ℝ) * weights coordinate) := by
+    change applyTwo (evalBinary .mul) (.ok (sourceL2Rat : ℝ))
+      (evalSourceExpr environment (.indexVector (.leaf (.var (τ := .vector 80) "weights"))
+        (.leaf (.var (τ := .index 80) "i")))) = .ok ((sourceL2Rat : ℝ) * weights coordinate)
+    rw [coordinateSuccess]
+    rfl
+  have sumSuccess := summed_rows_source_success environment differences factors coordinate
+    differencesBinding factorsBinding indexBinding
+  have matrixSuccess : evalSourceExpr environment
+      (.leaf (.var (τ := .matrix 4 80) "differences")) = .ok differences := by
+    exact differencesBinding
+  have lengthSuccess := eval_source_lengthMatrix_success environment
+    (.leaf (.var (τ := .matrix 4 80) "differences")) differences matrixSuccess
+  have denominatorSuccess := eval_source_natToScalar_success environment
+    (.lengthMatrix (.leaf (.var (τ := .matrix 4 80) "differences"))) 4 lengthSuccess
+  have meanSuccess : evalSourceExpr environment
+      (.scalarBinary .div summedRowsSource
+        (.natToScalar (.lengthMatrix (.leaf (.var (τ := .matrix 4 80) "differences"))))) =
+      .ok ((∑ row, factors row * differences row coordinate) / 4) := by
+    change applyTwo (evalBinary .div) (evalSourceExpr environment summedRowsSource)
+      (evalSourceExpr environment (.natToScalar (.lengthMatrix
+        (.leaf (.var (τ := .matrix 4 80) "differences"))))) =
+      .ok ((∑ row, factors row * differences row coordinate) / 4)
+    rw [sumSuccess, denominatorSuccess]
+    change exactDivision (∑ row, factors row * differences row coordinate) (4 : ℝ) =
+      .ok ((∑ row, factors row * differences row coordinate) / 4)
+    simp [exactDivision]
+  change applyTwo (evalBinary .sub)
+    (evalSourceExpr environment (.scalarBinary .mul (.leaf (.scalarLiteral sourceL2Rat))
+      (.indexVector (.leaf (.var (τ := .vector 80) "weights"))
+        (.leaf (.var (τ := .index 80) "i")))))
+    (evalSourceExpr environment (.scalarBinary .div summedRowsSource
+      (.natToScalar (.lengthMatrix (.leaf (.var (τ := .matrix 4 80) "differences")))))) =
+    .ok (exactGradient weights differences factors coordinate)
+  rw [regularizerSuccess, meanSuccess]
+  rfl
+
+theorem gradient_source_success (environment : NamedEnvironment) (weights : Fin 80 → ℝ)
+    (differences : Fin 4 → Fin 80 → ℝ) (factors : Fin 4 → ℝ)
+    (weightsBinding : environment "weights" (.vector 80) = .ok weights)
+    (differencesBinding : environment "differences" (.matrix 4 80) = .ok differences)
+    (factorsBinding : environment "factors" (.vector 4) = .ok factors) :
+    evalSourceExpr environment RankerObjectiveOriginalPrefixParts.gradientSource =
+      .ok (exactGradient weights differences factors) := by
+  rw [actual_gradient_source_decomposition]
+  have boundSuccess : evalSourceExpr environment
+      (.leaf (.var (τ := .vector 80) "weights")) = .ok weights := by
+    exact weightsBinding
+  have coordinateSuccess : ∀ coordinate : Fin 80, evalSourceExpr
+      (extendNames (τ := .index 80) "i" coordinate environment) gradientCoordinateSource =
+      .ok (exactGradient weights differences factors coordinate) := by
+    intro coordinate
+    apply gradient_coordinate_source_success
+    · simpa [extendNames] using weightsBinding
+    · simpa [extendNames] using differencesBinding
+    · simpa [extendNames] using factorsBinding
+    · simp [extendNames, castValue]
+  exact eval_source_rangeMap_success environment "i"
+    (.leaf (.var (τ := .vector 80) "weights")) gradientCoordinateSource weights
+    (exactGradient weights differences factors) boundSuccess coordinateSuccess
+
+theorem after_factors_weights_binding (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    afterFactorsEnvironment weights differences "weights" (.vector 80) = .ok weights := by
+  simpa [afterFactorsEnvironment, afterRegularizerEnvironment, afterDataEnvironment,
+    afterMarginsEnvironment, extendNames] using actual_weights_binding weights differences
+
+theorem after_factors_differences_binding (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    afterFactorsEnvironment weights differences "differences" (.matrix 4 80) = .ok differences := by
+  simpa [afterFactorsEnvironment, afterRegularizerEnvironment, afterDataEnvironment,
+    afterMarginsEnvironment, extendNames] using actual_differences_binding weights differences
+
+/-- Actual fifth source assignment after all preceding derived source values. -/
+theorem actual_gradient_eval_success (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    evalSourceExpr (afterFactorsEnvironment weights differences)
+      RankerObjectiveOriginalPrefixParts.gradientSource =
+      .ok (exactGradient weights differences (exactFactors (exactMargins weights differences))) := by
+  exact gradient_source_success (afterFactorsEnvironment weights differences) weights differences
+    (exactFactors (exactMargins weights differences)) (after_factors_weights_binding weights differences)
+    (after_factors_differences_binding weights differences) (after_factors_factors_binding weights differences)
+
+#print axioms actual_gradient_source_decomposition
+#print axioms summed_rows_source_success
+#print axioms gradient_coordinate_source_success
+#print axioms gradient_source_success
+#print axioms after_factors_weights_binding
+#print axioms after_factors_differences_binding
+#print axioms actual_gradient_eval_success
+
+end
+
+end RankerObjectiveOriginalGradientEvaluation

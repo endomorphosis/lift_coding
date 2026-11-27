@@ -1,0 +1,149 @@
+#!/usr/bin/env python3
+"""Compare public XML states/blocks and immutable identity controls in fresh processes."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+def write(path, value): path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+def worker(args):
+    from dataclasses import FrozenInstanceError, replace
+    from ipfs_datasets_py.logic.software_contracts import content
+    from ipfs_datasets_py.logic.software_contracts.semantic_index import models
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.scanner import RepositoryScanner
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.snapshot import snapshot_repository
+    from ipfs_datasets_py.logic.software_contracts.semantic_state import build_semantic_state, verify_semantic_state_bundle, read_required_source
+    assert Path(models.__file__).is_relative_to(args.profile)
+    source_file = HERE / "results_v11_full_literal_union/ns-hist-01-xmltodict/public_source_manifest.json"
+    source = read(source_file); case = read(source_file.parent / "case.json")
+    raw = {p: (Path(source["tree"]) / p).read_bytes() for p in source["files"]}
+    assert all(sha(b) == source["files"][p]["sha256"] for p, b in raw.items())
+    snapshot = snapshot_repository(source["tree"], repository_id=case["family_id"], exclusions=())
+    scanner = RepositoryScanner(repository_id=case["family_id"])
+    started = time.perf_counter(); states = []; rows = []
+    base = scanner.scan_snapshot(snapshot, raw)
+    for label in ("baseline", "comment_cold", "comment_incremental"):
+        if label == "baseline": state = base
+        else:
+            target = case["admitted_paths"][0]
+            altered = dict(raw); altered[target] += b"\n# state identity qualification comment\n"
+            changed = replace(snapshot, entries=tuple(
+                replace(e, source_cid=content.cid_for_bytes(altered[target]), size_bytes=len(altered[target]), captured_bytes=altered[target], witness=None)
+                if e.path == target else e for e in snapshot.entries))
+            state = scanner.scan_snapshot(changed, altered, previous_state=base if label.endswith("incremental") else None)
+        bundle = build_semantic_state(state); verify_semantic_state_bundle(bundle)
+        payload = state.identity_payload()
+        assert state.state_cid == content.cid_for_structured(payload)
+        serialized = state.to_dict()
+        restored = models.RepositoryState.from_dict(serialized)
+        assert restored.state_cid == state.state_cid
+        assert set(serialized) == models.RepositoryState._FIELDS
+        digest = hashlib.sha256()
+        for cid, body in sorted(bundle.blocks.items()):
+            digest.update(cid.encode()); digest.update(len(body).to_bytes(8, "big")); digest.update(body)
+        rows.append({"case": label, "state_cid": state.state_cid, "root_cid": bundle.root.root_cid,
+                     "all_blocks_sha256": digest.hexdigest(), "blocks": len(bundle.blocks),
+                     "serialized_sha256": sha(content.canonical_dag_json_bytes(serialized))})
+        states.append(state)
+    assert rows[1]["state_cid"] == rows[2]["state_cid"] != rows[0]["state_cid"]
+    assert rows[1]["root_cid"] == rows[2]["root_cid"] != rows[0]["root_cid"]
+    assert rows[1]["all_blocks_sha256"] == rows[2]["all_blocks_sha256"]
+    # Reference serialization returns detached data; external edits cannot affect the state.
+    detached = base.to_dict(); detached["repository_id"] += "-tampered"
+    original = base.state_cid
+    assert base.state_cid == original
+    try: base.repository_id = "changed"
+    except FrozenInstanceError: pass
+    else: raise AssertionError("frozen state mutated")
+    try: base.symbols[0].metadata["changed"] = True
+    except TypeError: pass
+    else: raise AssertionError("frozen child metadata mutated")
+    # Changed construction and tampered restoration must not inherit cached identity.
+    replacement = replace(base, extractor_version="state-identity-control-v5")
+    assert replacement.state_cid != base.state_cid
+    tampered = base.to_dict(); tampered["extractor_version"] += "-tampered"
+    try: models.RepositoryState.from_dict(tampered)
+    except models.SemanticIndexModelError: pass
+    else: raise AssertionError("changed state admitted old identity")
+    # Every actual native read still fetches/reverifies current source twice.
+    symbol = next(s for s in base.symbols if s.source_cid is not None)
+    blob = raw[symbol.module_path]; reads = 0; successful = 0; rejected = 0
+    def fetch(cid):
+        nonlocal reads
+        reads += 1
+        assert cid == symbol.source_cid
+        return blob
+    for _ in range(20):
+        materialized = read_required_source(base, symbol.stable_id,
+            expected_producer_state_cid=base.state_cid, read_source_blob=fetch)
+        assert materialized.source_bytes == blob; successful += 1
+        try:
+            read_required_source(base, symbol.stable_id,
+                expected_producer_state_cid=base.state_cid,
+                read_source_blob=lambda cid: blob + b"\n# changed")
+        except ValueError: rejected += 1
+        else: raise AssertionError("changed raw source accepted")
+    assert reads == 40 and successful == rejected == 20
+    # A subclass can override identity behavior; it stays on the uncached path.
+    class VariableState(models.RepositoryState):
+        def identity_payload(self):
+            value = super().identity_payload(); value["repository_id"] = changing[0]; return value
+    changing = ["one"]
+    unusual = VariableState("subclass")
+    first = unusual.state_cid; changing[0] = "two"
+    assert unusual.state_cid != first
+    # Count actual identity computations after replacing the codec function. The
+    # process is only a diagnostic; no runtime record from this process is enrolled.
+    calls = 0; native = models.cid_for_structured
+    def measured(payload):
+        nonlocal calls
+        calls += 1; return native(payload)
+    measured_state = models.RepositoryState("counter")
+    models.cid_for_structured = measured
+    observed = [measured_state.state_cid for _ in range(20)]
+    models.cid_for_structured = native
+    assert len(set(observed)) == 1
+    expected = 1 if args.profile.name == "runtime_state_identity_v5" else 20
+    assert calls == expected
+    write(args.result, {"rows": rows, "raw_source_reads": reads, "successful_materializations": successful,
+          "changed_source_rejections": rejected, "immutable_and_detached_serialization_controls": 5,
+          "subclass_dynamic_identity_preserved": True, "identity_computations_for_20_accesses": calls,
+          "all_checks_passed": True, "wall_seconds": time.perf_counter() - started, "provider_calls": 0})
+
+def main():
+    parser = argparse.ArgumentParser(); parser.add_argument("--worker", action="store_true")
+    parser.add_argument("--profile", type=Path); parser.add_argument("--result", type=Path)
+    args = parser.parse_args()
+    if args.worker: return worker(args)
+    out = HERE / "state_identity_validation_v5"; out.mkdir()
+    prior = read(HERE / "results_v11_full_literal_union/runtime_source_manifest.json")
+    write(out / "freeze.json", {"driver_sha256": sha(Path(__file__).read_bytes()),
+          "variant_manifest_sha256": sha((HERE / "runtime_state_identity_v5_manifest.json").read_bytes()),
+          "public_source_manifest_sha256": sha((HERE / "results_v11_full_literal_union/ns-hist-01-xmltodict/public_source_manifest.json").read_bytes())})
+    for name in ("runtime_literal_union_v4", "runtime_state_identity_v5"):
+        profile = HERE / name
+        command = [sys.executable, "-B", str(Path(__file__)), "--worker", "--profile", str(profile), "--result", str(out / (name + ".json"))]
+        env = dict(os.environ, PYTHONPATH=":".join([str(profile)] + prior["pythonpath"][1:]),
+            IPFS_ACCEL_SKIP_CORE="1", PYTHONDONTWRITEBYTECODE="1",
+            GIT_CEILING_DIRECTORIES=str(HERE.parents[5] / "papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache"))
+        tick = time.perf_counter(); proc = subprocess.run(command, env=env, cwd="/tmp", capture_output=True, timeout=240)
+        (out / (name + ".stdout")).write_bytes(proc.stdout); (out / (name + ".stderr")).write_bytes(proc.stderr)
+        write(out / (name + ".process.json"), {"command": command, "returncode": proc.returncode, "wall_seconds": time.perf_counter() - tick})
+        if proc.returncode: raise SystemExit("qualification failed; logs retained")
+    baseline = read(out / "runtime_literal_union_v4.json"); variant = read(out / "runtime_state_identity_v5.json")
+    assert baseline["rows"] == variant["rows"]
+    result = {"schema": "ns-immutable-state-identity-qualification/v5", "baseline": baseline,
+              "variant": variant, "all_state_root_block_and_serialized_identities_equal": True,
+              "all_checks_passed": True, "provider_calls": 0,
+              "limit": "Exact immutable native record profile; deliberate reflection mutation of frozen objects is outside profile. No execution/proof result reuse."}
+    write(out / "summary.json", result); print(json.dumps(result))
+
+if __name__ == "__main__": main()

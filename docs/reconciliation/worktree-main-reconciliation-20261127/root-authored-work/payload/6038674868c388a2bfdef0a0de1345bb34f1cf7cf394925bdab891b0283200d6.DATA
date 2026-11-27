@@ -1,0 +1,128 @@
+#!/usr/bin/env python3
+"""Version the full comparison with durable original frontend observations."""
+import difflib
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+def main():
+    source = HERE / "full_pyparsing_resolution_guard_v14.py"
+    target = HERE / "full_pyparsing_frontend_observations_v15.py"
+    if target.exists(): raise SystemExit("preserve existing driver")
+    before = source.read_text(); after = before
+    def replace(old, new, count=1):
+        nonlocal after
+        assert after.count(old) == count, (old, after.count(old))
+        after = after.replace(old, new)
+    replace('OUT = HERE / "results_v14_full_pyparsing_resolution_guard"', 'OUT = HERE / "results_v15_full_pyparsing_frontend_observations"')
+    replace('''    previous_state = previous_bundle = None''', '''    previous_state = previous_bundle = None
+    previous_observations = previous_observations_cid = None''')
+    replace('''        previous_state, previous_bundle = stage("native_restore_and_full_reverify", restore)
+    scanner = RepositoryScanner(repository_id=frozen["repository_id"])
+    state = stage("native_full_scan", lambda: scanner.scan_snapshot(snapshot, raw, previous_state=previous_state))''', '''        previous_state, previous_bundle = stage("native_restore_and_full_reverify", restore)
+        previous_observations = stage("read_exact_parent_observation_bytes", lambda: (OUT / "baseline/frontend_observations.json").read_bytes())
+        previous_observations_cid = binding["frontend_observations_cid"]
+    scanner = RepositoryScanner(repository_id=frozen["repository_id"], frontend_profile_sha256=frozen["runtime_manifest_sha256"])
+    state = stage("native_full_scan_with_observation_encode_decode", lambda: scanner.scan_snapshot(
+        snapshot, raw, previous_state=previous_state,
+        previous_frontend_observations=previous_observations,
+        expected_previous_frontend_observations_cid=previous_observations_cid))''')
+    replace('''    bundle = stage("native_full_bundle_build", lambda: build_semantic_state(state, previous_bundle=previous_bundle))''', '''    if role == "baseline":
+        def exact_baseline_bundle():
+            retained = OUT / "retained_v13_baseline"
+            for name, digest in frozen["retained_baseline_artifact_sha256"].items():
+                assert sha((retained / name).read_bytes()) == digest
+            restored = RepositoryState.from_dict(read(retained / "state.json"))
+            assert restored.to_dict() == state.to_dict()
+            assert canonical(state.to_dict()) + b"\\n" == (retained / "state.json").read_bytes()
+            root = SemanticStateRoot.from_dict(read(retained / "root.json"))
+            conn = sqlite3.connect((retained / "blocks.sqlite").as_uri() + "?mode=ro", uri=True)
+            blocks = {cid: bytes(body) for cid, body in conn.execute("SELECT cid,body FROM blocks ORDER BY cid")}
+            conn.close()
+            bundle = SemanticStateBundle(root=root, blocks=blocks)
+            verify_semantic_state_bundle(bundle)
+            assert root.root_cid == frozen["expected_baseline_root_cid"]
+            return bundle
+        bundle = stage("reuse_exact_baseline_artifacts_with_native_restore_and_full_reverify", exact_baseline_bundle)
+    else:
+        bundle = stage("native_full_bundle_build", lambda: build_semantic_state(state, previous_bundle=previous_bundle))''')
+    replace('''        write(folder / "state.json", state.to_dict()); write(folder / "root.json", bundle.root.to_dict())''', '''        write(folder / "state.json", state.to_dict()); write(folder / "root.json", bundle.root.to_dict())
+        assert type(scanner.last_frontend_observations) is bytes
+        (folder / "frontend_observations.json").write_bytes(scanner.last_frontend_observations)''')
+    replace('''"previous_state_and_bundle_actually_supplied": role == "changed_incremental",''', '''"previous_state_and_bundle_actually_supplied": role == "changed_incremental",
+              "frontend_observation_diagnostics": scanner.last_frontend_observation_diagnostics,
+              "baseline_bundle_reused_only_after_current_full_scan_exact_equality_and_full_native_verify": role == "baseline",''')
+    replace('''for name in ("state.json", "root.json", "blocks.sqlite")},''', '''for name in ("state.json", "root.json", "blocks.sqlite", "frontend_observations.json")},''')
+    replace('''    assert (OUT / "changed_cold/root.json").read_bytes() == (OUT / "changed_incremental/root.json").read_bytes()''', '''    assert (OUT / "changed_cold/root.json").read_bytes() == (OUT / "changed_incremental/root.json").read_bytes()
+    assert (OUT / "changed_cold/frontend_observations.json").read_bytes() == (OUT / "changed_incremental/frontend_observations.json").read_bytes()''')
+    start = after.index('def main():\n'); end = after.index('\nif __name__', start)
+    after = after[:start] + '''def main():
+    parser = argparse.ArgumentParser(); parser.add_argument("--worker", choices=ROLES)
+    args = parser.parse_args()
+    if args.worker: return worker(args.worker)
+    if OUT.exists(): raise SystemExit("output exists; preserve previous run")
+    OUT.mkdir(); enrollment_start = time.perf_counter()
+    prior = HERE / "results_v13_full_pyparsing_incremental"
+    for role in (*ROLES, "retained_v13_baseline"): (OUT / role).mkdir()
+    retained = OUT / "retained_v13_baseline"
+    for name in ("state.json", "root.json", "blocks.sqlite", "result.json", "process.json", "stages.jsonl", "stdout.log", "stderr.log"):
+        shutil.copyfile(prior / "baseline" / name, retained / name)
+    baseline_result = read(retained / "result.json")
+    for name, digest in baseline_result["artifact_sha256"].items(): assert sha((retained / name).read_bytes()) == digest
+    for name in ("baseline_source.json", "changed_source.json"):
+        shutil.copyfile(prior / name, OUT / name); capture(read(OUT / name))
+    shutil.copyfile(HERE / "frontend_observations_validation_v7/runtime_source_manifest.json", OUT / "runtime_source_manifest.json")
+    profile = read(OUT / "runtime_source_manifest.json")
+    assert all(sha(Path(path).read_bytes()) == digest for path, digest in profile["files"].items())
+    frozen = read(prior / "freeze.json")
+    frozen.update(schema="ns-full-pyparsing-original-frontend-freeze/v15", frozen_at_unix=time.time(),
+                  protocol_sha256=sha((HERE / "FULL_PYPARSING_ORIGINAL_FRONTENDS_PROTOCOL_V15.md").read_bytes()),
+                  qualification_summary_sha256=sha((HERE / "frontend_observations_validation_v7/summary.json").read_bytes()),
+                  driver_sha256=sha(Path(__file__).read_bytes()), runtime_manifest_sha256=sha((OUT / "runtime_source_manifest.json").read_bytes()),
+                  source_manifest_sha256={name: sha((OUT / name).read_bytes()) for name in ("baseline_source.json", "changed_source.json")},
+                  parent_freeze_sha256=sha((prior / "freeze.json").read_bytes()),
+                  source_profile_change="closed exact-CID parent/profile/source-bound original Python scanner observations before pytest unification and graph projection",
+                  retained_baseline_artifact_sha256=baseline_result["artifact_sha256"],
+                  retained_baseline_original_preparation_receipt_sha256=sha((retained / "process.json").read_bytes()),
+                  baseline_reused_from=str(prior / "baseline"), new_worker_roles=list(ROLES),
+                  comparison="baseline original-observation bootstrap and changed cold concurrently; incremental starts only after successful bootstrap; old bundle reused only after exact full current cold state equality and native full reverify",
+                  prospective_timing="every worker bounded900seconds; separately time enrollment copying/guards/freeze preparation; original v13 baseline656.008seconds remains a paid cost")
+    write(OUT / "freeze.json", frozen)
+    write(OUT / "enrollment_process.json", {"wall_seconds": time.perf_counter() - enrollment_start,
+          "scope": "directory creation, copy all original baseline artifacts and source manifests, complete source capture, runtime copy/rehash and freeze write; no provider calls"})
+    env = {k: os.environ[k] for k in ("PATH", "LANG", "LC_ALL", "HOME") if k in os.environ}
+    env.update(PYTHONPATH=":".join(profile["pythonpath"]), IPFS_ACCEL_SKIP_CORE="1", PYTHONDONTWRITEBYTECODE="1",
+               GIT_CEILING_DIRECTORIES=":".join([str(HERE.parents[5] / "papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache"), str(prior)]))
+    tick = time.perf_counter(); processes = []
+    with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+        baseline_future = pool.submit(invoke, "baseline", env)
+        cold_future = pool.submit(invoke, "changed_cold", env)
+        baseline_process = baseline_future.result(); processes.append(baseline_process)
+        if baseline_process["returncode"] == 0:
+            baseline_result = read(OUT / "baseline/result.json")
+            write(OUT / "changed_incremental/parent_binding.json", {
+                "parent_role": "baseline", "state_cid": baseline_result["state_cid"], "root_cid": baseline_result["root_cid"],
+                "frontend_observations_cid": baseline_result["frontend_observation_diagnostics"]["output_observation_cid"],
+                "parent_artifact_sha256": {**baseline_result["artifact_sha256"], "result.json": sha((OUT / "baseline/result.json").read_bytes())}})
+            processes.append(invoke("changed_incremental", env))
+        processes.append(cold_future.result())
+    complete = len(processes) == 3 and all(row["returncode"] == 0 for row in processes)
+    result = {"schema": "ns-full-pyparsing-original-frontend-result/v15", "workers_complete": complete,
+              "processes": processes, "original_baseline_preparation_receipt_retained_from_v13": read(retained / "process.json"),
+              "new_workers_wall_seconds": time.perf_counter() - tick, "enrollment": read(OUT / "enrollment_process.json"),
+              "freeze_sha256": sha((OUT / "freeze.json").read_bytes()), "provider_calls": 0, "raw_substitutions": 0,
+              "timing_scope": "900-second workers on shared host; bootstrap and changed-cold concurrent, incremental starts after bootstrap; original baseline656.008seconds already paid; all actual cache creation/storage/restore and native verification costs included; enrollment separately timed",
+              "claim_limit": "Observed exact-state/full-block equivalence and operational reuse under honest producer custody; no execution theorem, provider token savings or general speedup claim"}
+    if complete:
+        try:
+            result.update(compare()); result["cold_incremental_equivalence_passed"] = True
+            result["original_frontend_sidecar_exactly_equal"] = True
+        except AssertionError as exc:
+            result.update(cold_incremental_equivalence_passed=False, comparison_failure=repr(exc), all_checks_passed=False)
+    write(OUT / "summary.json", result); print(json.dumps({key: result.get(key) for key in ("workers_complete", "cold_incremental_equivalence_passed", "blocks_compared", "block_bytes_compared", "new_workers_wall_seconds")}))
+    if not result.get("cold_incremental_equivalence_passed"): raise SystemExit(1)
+''' + after[end:]
+    compile(after, str(target), "exec"); target.write_text(after)
+    (HERE / "full_pyparsing_frontend_observations_v15_driver.patch").write_text("".join(difflib.unified_diff(before.splitlines(True), after.splitlines(True), fromfile=source.name, tofile=target.name)))
+    print(target)
+
+if __name__ == "__main__": main()

@@ -1,0 +1,32 @@
+{
+  "HF_gate_input": {
+    "bytes": 846,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-private-git-preparation-20261005-01/hf-gate-01.json",
+    "sha256": "67de8096f1f6e46e8ca94ae1af17f3371509758b1f72851b45133dd67d3a6591"
+  },
+  "created_at_utc": "2026-10-05T17:35:18.637819+00:00",
+  "expected_parent": "ac5e4793df10f9c33a854b459a370f6f52a02924",
+  "object_source": "/home/barberb/lift_coding/maintenance/ranker-source-slices-private-git-preparation-20261005-01/root",
+  "original_HEAD_index_mutations": 0,
+  "schema": "ranker-objective-scalar-private-checkout-preparation@1",
+  "shared_object_database_reads_only": true,
+  "status": "started_after_actual_HF_gate",
+  "verified_HF_gate": {
+    "commit": "57c2bbf12ab14a597148cfbc874947ca17481ca3",
+    "ledger": {
+      "bytes": 5053,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/release-publication-ledger-01.json",
+      "sha256": "6f50ab1c4a5bb32a23bd5d24e66274c4261e3adf0abba6b0de942ffe96cbfb11"
+    },
+    "public_readback": {
+      "bytes": 3498,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/hf-public-readback-01.json",
+      "sha256": "2fe870f67b608fa682d8ff6beff6e0e211f3166a370634dde3c7623b25ac2507"
+    },
+    "publication_closed": {
+      "bytes": 889,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-objective-scalar-publication-root-20261005-01/hf-publication-01/closed.json",
+      "sha256": "360769276b3688789027cef091537d2680bd01b82ba9a602dcaef7b8da417a1b"
+    }
+  }
+}

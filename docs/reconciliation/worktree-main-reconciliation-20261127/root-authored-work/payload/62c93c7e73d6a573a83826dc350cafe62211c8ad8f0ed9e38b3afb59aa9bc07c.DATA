@@ -1,0 +1,22 @@
+{
+  "time": "2026-11-10T04:44:08.154550+00:00",
+  "path": "test/api/test_grok_pruning.py",
+  "prepared_source": "/tmp/lift-sync-pruning-grok-fixture-prepared-source-20261110-v01.py.txt",
+  "source_sha256": "531cfb4dba9df40a97925ccf650aa801445202119a88d4d7057f6b9ae97420f4",
+  "original_source_sha256": "dc03fb02ee41139025d17ff2979eebe1963f2e67caf6cae47ce9a11329ada946",
+  "original_test_functions": 30,
+  "original_parameter_cases_and_assertions_retained": true,
+  "physical_fixture_cases": 5,
+  "retirement_variants": [
+    "hardlink",
+    "fifo",
+    "symlink-file",
+    "symlink-parent",
+    "symlink-root"
+  ],
+  "retirement_only_after_original_negative_assertions": true,
+  "failed_assertions_keep_original_entries": true,
+  "production_owners_changed": false,
+  "qualified": false,
+  "applied": false
+}

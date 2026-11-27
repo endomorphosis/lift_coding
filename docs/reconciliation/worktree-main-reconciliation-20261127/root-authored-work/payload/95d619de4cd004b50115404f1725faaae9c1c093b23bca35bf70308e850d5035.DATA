@@ -1,0 +1,620 @@
+"""One source-bound six-event original-repository caller; no inference on import."""
+import argparse
+import base64
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import repository_runtime_v2 as R
+import repository_retrieval_v2 as Q
+import original_messages_v1 as M
+import original_sequence_v1 as SEQUENCE
+import original_services_v1 as O
+
+C = O.load("original_shared_ledger", HERE.parent / "controller.py")
+PURPOSES = {"planning", "formalization", "proposal", "source_expansion", "review", "retry", "recovery"}
+
+
+class InfrastructureUnresolved(RuntimeError):
+    pass
+
+
+class InterruptedPublication(RuntimeError):
+    pass
+
+
+def nullable_all(values):
+    if any(value is False for value in values):
+        return False
+    return None if any(value is None for value in values) else True
+
+
+class Caller:
+    def __init__(self, profile_path, event_id):
+        self.profile_path = Path(profile_path).resolve()
+        self.profile, self.profile_hash = O.verify_profile(self.profile_path)
+        self.event = O.event_for(self.profile, event_id)
+        self.task = O.task_for(self.profile, self.event["task_id"])
+        self.trajectory = next(row for row in self.profile["trajectories"] if row["trajectory_id"] == self.event["trajectory_id"])
+        self.features = self.trajectory["features"]
+        self.output = Path(self.profile["output_root"])
+        self.directory = self.output / "events" / event_id
+        self.directory.mkdir(parents=True, exist_ok=True)
+        self.ledger = C.Ledger(self.output)
+        self.ledger.db.executescript("""
+          CREATE TABLE IF NOT EXISTS original_roots(trajectory_id TEXT PRIMARY KEY, pointer_json TEXT NOT NULL);
+          CREATE TABLE IF NOT EXISTS original_slots(trajectory_id TEXT NOT NULL,ordinal INTEGER NOT NULL,call_id TEXT NOT NULL UNIQUE,owner_event_id TEXT NOT NULL,phase TEXT NOT NULL,purpose TEXT NOT NULL,request_hash TEXT NOT NULL,PRIMARY KEY(trajectory_id,ordinal));
+        """)
+        C.write_new(self.output / "profile_binding.json", {"profile_sha256": self.profile_hash, "controller_sha256": R.sha(Path(__file__).read_bytes())})
+        self.phase_name = "main"
+        self.started = time.perf_counter()
+        self.local_failures = []
+        self.scorers = []
+        self.providers = []
+        self.phase_results = {}
+        self.transition = None
+        self.previous = None
+        self.configuration = self.task["configurations"][1 if self.event["horizon"] >= 5 else 0]
+        self.objective = M.public_objective(self.task, Path(self.profile["corpus_path"]).parent)
+        self.provider_profile = json.loads(Path(self.profile["provider"]["profile_path"]).read_bytes())
+        if R.sha(Path(self.profile["provider"]["profile_path"]).read_bytes()) != self.profile["provider"]["profile_sha256"]:
+            raise ValueError("provider profile changed")
+
+    @property
+    def scope(self):
+        return self.event["event_id"] + "--" + self.phase_name
+
+    def root(self):
+        row = self.ledger.db.execute("SELECT pointer_json FROM original_roots WHERE trajectory_id=?", (self.event["trajectory_id"],)).fetchone()
+        return None if row is None else json.loads(row[0])
+
+    def effect_record(self, stage):
+        row = self.ledger.db.execute("SELECT effect_id,state,result_path,result_hash FROM effects WHERE event_id=? AND stage=?", (self.scope, stage)).fetchone()
+        if row is None:
+            return None
+        return dict(zip(("effect_id", "state", "result_path", "result_hash"), row))
+
+    def subprocess(self, command, request, directory, timeout, env=None):
+        C.write_new(directory / "service_request.json", request)
+        started = time.perf_counter()
+        process = subprocess.run(command, input=R.canonical(request), capture_output=True, cwd=C.ROOT,
+                                 env=C.clean_environment() if env is None else env, timeout=timeout)
+        elapsed = time.perf_counter() - started
+        C.write_new(directory / "process.json", {"command": command, "returncode": process.returncode, "elapsed_seconds": elapsed,
+                     "stdout": process.stdout.decode(errors="replace"), "stderr": process.stderr.decode(errors="replace")})
+        if process.returncode == 94:
+            raise InterruptedPublication("actual service pre-CAS exit")
+        if process.returncode != 0:
+            raise InfrastructureUnresolved("service process failed; exact receipt retained")
+        response = json.loads(process.stdout)
+        C.write_new(directory / "response.json", response)
+        return response
+
+    def effect(self, stage, request, command=None, *, service_kind="local", timeout=240, invoke=None, env=None):
+        wrapped = {"owner_event_id": self.event["event_id"], "trajectory_id": self.event["trajectory_id"],
+                   "effect_scope_id": self.scope, "service_kind": service_kind, "service_request": request}
+        before = self.effect_record(stage)
+        effect_hash = R.sha(R.canonical({"event_id": self.scope, "stage": stage, "request_hash": R.sha(R.canonical(wrapped))}))
+        effect_dir = self.output / "effects" / effect_hash
+        if stage == "seal_publish" and before and before["state"] != "terminal" and not (effect_dir / "completion.json").exists():
+            recovered = self.effect("seal_recover", {**request, "operation": "recover", "operation_id": request["operation_id"] + "-recover", "crash_at": None}, command, service_kind="native_sealing", timeout=timeout, env=env)
+            interruption = json.loads((effect_dir / "interruption.json").read_bytes()) if (effect_dir / "interruption.json").exists() else {}
+            C.write_new(effect_dir / "completion.json", {"effect_id": effect_hash, "event_id": self.scope, "stage": stage,
+                         "request_hash": R.sha(R.canonical(wrapped)), "response": recovered,
+                         "elapsed_seconds": interruption.get("elapsed_seconds"), "original_publication_interrupted": True,
+                         "reconciled_from_distinct_recovery_effect": True})
+        started = time.perf_counter()
+        try:
+            response = self.ledger.effect(self.scope, stage, wrapped,
+                lambda directory: invoke(directory) if invoke is not None else self.subprocess(command, request, directory, timeout, env=env))
+        except InterruptedPublication:
+            C.write_new(effect_dir / "interruption.json", {"effect_id": effect_hash, "owner_event_id": self.event["event_id"],
+                         "elapsed_seconds": time.perf_counter() - started, "boundary": "actual_native_after_seal_persistence_before_CAS", "returncode": 94})
+            os._exit(94)
+        for path, row in response.get("imports", {}).items():
+            pins = self.profile["sealing_native_files"] if service_kind == "native_sealing" else self.profile["native_files"]
+            if pins.get(path) != row["sha256"]:
+                raise ValueError("unfrozen actual native import")
+        return response
+
+    def native_parent(self, pointer, stage="seal_read"):
+        if pointer is None or not pointer.get("seal_cid"):
+            raise ValueError("native accepted parent required")
+        request = {"operation": "read", "operation_id": self.scope + "-" + stage,
+                   "profile_path": str(self.profile_path), "profile_sha256": self.profile_hash,
+                   "event_id": self.event["event_id"], "phase": self.phase_name,
+                   "expected_seal_cid": pointer["seal_cid"], "expected_revision": pointer["revision"]}
+        response = self.effect(stage, request, [sys.executable, self.profile["sealing_service"]["entrypoint"]], service_kind="native_sealing", timeout=300)
+        if response["source_tree_sha256"] != pointer["source_tree_sha256"]:
+            raise ValueError("actual native parent source differs from accepted pointer")
+        return response["restored_source_path"]
+
+    def nomination(self, stage, request, parent):
+        if not self.features["procedures"]:
+            return
+        service = self.profile["procedure_service"]
+        if service.get("qualified") is not True:
+            raise ValueError("native repository procedure service not qualified")
+        body = O.plan_validation_request(self.profile, self.event, request, parent,
+                                         operation_id=self.scope + "-" + stage, cache_namespace=self.event["trajectory_id"])
+        run = self.directory / (self.phase_name + "_" + stage + "_procedure")
+        command = [service["python"], service["entrypoint"], "--profile", service["profile_path"], "--endpoint", service["endpoint_path"], "--request", "-", "--run", str(run)]
+        nominated = self.effect("procedure_" + stage, body, command, service_kind="native_procedure",
+                                timeout=service["timeout_seconds"], env=O.procedure_environment(C.clean_environment()))
+        if (nominated.get("status") != "nominated" or not nominated.get("dispatch_allowed") or nominated.get("scorer_request") != request
+                or nominated.get("scorer_request_sha256") != R.sha(O.closed_canonical(request))
+                or nominated.get("operation_id") != body["operation_id"] or nominated.get("scoring_passed") is not False):
+            raise InfrastructureUnresolved("native nomination did not admit the exact current scorer request")
+
+    def score(self, stage, tree, parent, kind="current"):
+        evaluation_id = "nsorigscore-" + R.sha(R.canonical({"profile": self.profile_hash, "scope": self.scope, "stage": stage}))[:40]
+        request = O.score_request(self.profile, {**self.event, "configuration_sha256": R.sha(R.canonical(self.configuration))}, tree, evaluation_id)
+        self.nomination(stage, request, parent)
+        service = O.scorer_binding(self.profile, self.trajectory)
+        response = self.effect(stage, request, [service["python"], service["entrypoint"]], service_kind="scorer", timeout=service["timeout_seconds"])
+        record = self.effect_record(stage)
+        path = Path(record["result_path"]).parent
+        self.scorers.append({"evaluation_id": evaluation_id, "kind": kind, "operation_id": self.scope + "-" + stage,
+                             "request_path": str(path / "service_request.json"), "request_sha256": R.sha(O.closed_canonical(request)),
+                             "response_path": str(path / "response.json"), "response_sha256": R.sha((path / "response.json").read_bytes()),
+                             "receipt_path": str(path / "response.json"), "receipt_sha256": R.sha((path / "response.json").read_bytes()), "effect_id": record["effect_id"]})
+        if not O.validate_score_response(self.profile, request, response):
+            raise InfrastructureUnresolved("incomplete or rejected scoring is not repair evidence")
+        return response, str(path / "response.json")
+
+    def context(self, stage, tree, sources):
+        service = self.profile["context_service"]
+        objective = self.objective["statement"] + "\nAdditional current public API configuration:\n" + R.canonical(self.configuration).decode()
+        identity = {"source_tree_sha256": R.inventory(tree)["tree_sha256"], "native_objective_sha256": R.sha(objective.encode()),
+                    "runtime_profile_sha256": service["runtime_profile_sha256"]}
+        cache_key = R.sha(R.canonical(identity))
+        cache = self.output / "caches" / self.event["trajectory_id"] / "context" / (cache_key + ".json")
+        may_reuse = self.features["persistent_semantic_state"] or (self.event["cache_profile"] == "warm" and self.event["horizon"] == 1)
+        preparation = None
+        if may_reuse and cache.exists():
+            preparation = json.loads(cache.read_bytes())
+            if preparation["identity"] != identity or preparation["trajectory_id"] != self.event["trajectory_id"]:
+                raise ValueError("cross-state or cross-trajectory context cache")
+            run = Path(preparation["run"])
+        else:
+            template = json.loads(Path(self.task["context_request_template"]).read_bytes())
+            template["repository_root"] = str(Path(tree).resolve())
+            template["public_source_paths"] = [row["path"] for row in R.inventory(tree)["entries"]]
+            template["target_paths"] = self.task["source_policy"]["edit_paths"]
+            template["objective"]["text"] = objective
+            request_path = self.directory / (self.phase_name + "_" + stage + "_context_request.json")
+            C.write_new(request_path, template)
+            run = self.directory / (self.phase_name + "_" + stage + "_context")
+            prepared = self.effect(stage + "_context_prepare", {**identity, "request_path": str(request_path), "request_sha256": R.sha(request_path.read_bytes())},
+                [service["python"], service["entrypoint"], "prepare", "--request", str(request_path), "--profile", service["runtime_profile"], "--run", str(run)],
+                service_kind="native_context", timeout=service["timeout_seconds"])
+            if not prepared.get("complete") or not prepared["consumer"]["all_checks_passed"]:
+                raise InfrastructureUnresolved("full native context preparation incomplete")
+            preparation = {"identity": identity, "trajectory_id": self.event["trajectory_id"], "run": str(run),
+                           "request_sha256": prepared["request_sha256"], "freeze_sha256": prepared["context_freeze_sha256"],
+                           "semantic_root_cid": prepared["producer"]["native_semantic_root_cid"], "prepare_effect": self.effect_record(stage + "_context_prepare")}
+            if self.features["persistent_semantic_state"] or self.event["horizon"] == 0:
+                C.write_new(cache, preparation)
+        command = [service["python"], service["entrypoint"], "read", "--run", str(run), "--expected-request-sha256", preparation["request_sha256"], "--expected-freeze-sha256", preparation["freeze_sha256"]]
+        for source in sources:
+            command += ["--path", source["path"]]
+        response = self.effect(stage + "_context_read", {**identity, "run": str(run), "paths": [source["path"] for source in sources],
+                      "request_sha256": preparation["request_sha256"], "freeze_sha256": preparation["freeze_sha256"]}, command,
+                      service_kind="native_context", timeout=service["timeout_seconds"])
+        decoded = {row["path"]: base64.b64decode(row["base64"], validate=True).decode() for row in response["sources"]}
+        if decoded != {row["path"]: row["source"] for row in sources}:
+            raise ValueError("native source fallback differs from exact current public source")
+        if R.inventory(tree)["tree_sha256"] != identity["source_tree_sha256"]:
+            raise ValueError("current source changed during context preparation/read")
+        return {**preparation, **identity, "objective_text_sha256": self.task["objective_text_sha256"],
+                "configuration_sha256": R.sha(R.canonical(self.configuration)), "semantic_pack_cid": response["semantic_pack_cid"],
+                "source_substitutions": 0, "prepared_state_reused": may_reuse and self.effect_record(stage + "_context_prepare") is None}
+
+    def world(self, stage, operation, tree, receipt_path=None):
+        if not self.features["world_memory"]:
+            return None
+        request = {"schema": "world-memory-service-request@1", "operation": operation, "request_id": self.scope + "-" + stage,
+                   "store_dir": str(self.output / "world_memory" / self.event["trajectory_id"]),
+                   "context": {"subject": {"repository": self.task["task_id"]}, "source": {"tree_sha256": R.inventory(tree)["tree_sha256"]},
+                       "environment": {"scorer_profile_sha256": O.scorer_binding(self.profile, self.trajectory)["profile_sha256"]},
+                       "state": {"objective_record_sha256": self.task["objective_record_sha256"], "configuration_sha256": R.sha(R.canonical(self.configuration))},
+                       "policy": {"profile_sha256": self.profile_hash, "requires_current_execution": True}},
+                   "actions": [{"name": "validate_current_source"}]}
+        if receipt_path is not None:
+            request["execution"] = {"selected_action": "validate_current_source", "passed": True,
+                 "evidence": [{"receipt_path": receipt_path, "receipt_sha256": R.sha(Path(receipt_path).read_bytes())}],
+                 "output": {"passed": True, "candidate_tree_sha256": R.inventory(tree)["tree_sha256"]}, "producer_pid": os.getpid()}
+        response = self.effect(stage, request, [sys.executable, self.profile["world_memory_service"]], service_kind="native_world")
+        if operation == "propose" and response.get("status") == "proposal" and response.get("selected_action") != "validate_current_source":
+            raise ValueError("unenrolled world-memory action")
+        return response
+
+    def provider(self, ordinal, purpose, messages):
+        if purpose not in PURPOSES:
+            raise ValueError("unfrozen provider purpose")
+        trajectory_id = self.event["trajectory_id"]
+        call_id = "nsorig-" + R.sha(R.canonical({"trajectory_id": trajectory_id, "slot": ordinal}))[:40]
+        request = {"slot": ordinal, "call_id": call_id, "purpose": purpose, "messages": messages,
+                   "profile_sha256": self.profile_hash, "provider_profile_sha256": self.profile["provider"]["profile_sha256"]}
+        request_hash = R.sha(R.canonical(request))
+        existing = self.ledger.db.execute("SELECT call_id,owner_event_id,phase,purpose,request_hash FROM original_slots WHERE trajectory_id=? AND ordinal=?", (trajectory_id, ordinal)).fetchone()
+        wanted = (call_id, self.event["event_id"], self.phase_name, purpose, request_hash)
+        if existing and existing != wanted:
+            raise ValueError("provider slot ownership/request changed")
+        if not 0 <= ordinal < self.profile["max_provider_slots_per_trajectory"] or call_id not in self.provider_profile["call_ids"]:
+            raise ValueError("provider slot exceeds frozen cohort budget")
+        if len(M.wire_for(self.provider_profile, messages)) > self.provider_profile["max_request_bytes"]:
+            raise ValueError("exact complete provider wire exceeds frozen bound")
+        if not self.profile["provider"]["enabled"]:
+            C.write_new(self.directory / (self.phase_name + "_pending_slot_" + str(ordinal) + ".json"), request)
+            return {"status": "provider_disabled", "call_id": call_id, "attempted_posts": 0}
+        if not existing:
+            self.ledger.db.execute("INSERT INTO original_slots VALUES(?,?,?,?,?,?,?)", (trajectory_id, ordinal, *wanted))
+        stage = "provider_slot_" + str(ordinal)
+        transport_dir = self.output / "provider" / call_id
+        wrapped = {"owner_event_id": self.event["event_id"], "trajectory_id": trajectory_id, "effect_scope_id": self.scope,
+                   "service_kind": "provider", "service_request": request}
+        effect_id = R.sha(R.canonical({"event_id": self.scope, "stage": stage, "request_hash": R.sha(R.canonical(wrapped))}))
+        effect_dir = self.output / "effects" / effect_id
+        before = self.effect_record(stage)
+        if before and before["state"] != "terminal" and not (effect_dir / "completion.json").exists() and (transport_dir / "result.json").exists():
+            terminal = json.loads((transport_dir / "result.json").read_bytes())
+            sent = json.loads((transport_dir / "request.json").read_bytes())
+            if terminal["call_id"] != call_id or sent["messages"] != messages or terminal["request_sha256"] != R.sha(R.canonical(sent)):
+                raise ValueError("transport reconciliation differs from frozen slot")
+            C.write_new(effect_dir / "completion.json", {"effect_id": effect_id, "event_id": self.scope, "stage": stage,
+                         "request_hash": R.sha(R.canonical(wrapped)), "response": terminal, "elapsed_seconds": terminal.get("elapsed_seconds"), "reconciled_transport": True})
+        transport = O.load("original_metered_transport", self.profile["provider"]["transport_path"])
+        response = self.effect(stage, request, service_kind="provider", invoke=lambda directory: transport.call(Path(self.profile["provider"]["profile_path"]), self.output / "provider", call_id, messages))
+        self.providers.append({"slot": ordinal, "call_id": call_id, "purpose": purpose, "effect_id": effect_id,
+                               "transport_receipt_path": str(transport_dir / "result.json"), "transport_receipt_sha256": R.sha((transport_dir / "result.json").read_bytes())})
+        if response.get("attempted_posts") and response.get("normalized_usage", {}).get("total_tokens") is None:
+            raise InfrastructureUnresolved("actual provider effect has unknown usage; retain occupied slot")
+        return response
+
+    def publish(self, tree, response_path, context, parent, *, crash):
+        revision = self.scope
+        manifest = {"trajectory_id": self.event["trajectory_id"], "event_id": self.event["event_id"], "revision": revision,
+                    "source_tree_path": str(Path(tree).resolve()), "source_tree_sha256": R.inventory(tree)["tree_sha256"],
+                    "original_inventory_sha256": O.original_inventory(self.profile, tree)["sha256"], "configuration_sha256": R.sha(R.canonical(self.configuration)),
+                    "expected_parent": parent, "scorer_response_path": response_path, "scorer_response_sha256": R.sha(Path(response_path).read_bytes())}
+        C.write_new(self.directory / (self.phase_name + "_validated_manifest.json"), manifest)
+        seal_cid = None
+        publication = None
+        if self.features["native_publication"]:
+            request = {"operation": "publish", "operation_id": revision + "-publish", "publication_id": revision,
+                "profile_path": str(self.profile_path), "profile_sha256": self.profile_hash, "event_id": self.event["event_id"], "phase": self.phase_name,
+                "accepted_tree_path": str(tree), "scorer_response_path": response_path, "context": context,
+                "configuration_sha256": R.sha(R.canonical(self.configuration)), "parent_seal_cid": None if parent is None else parent["seal_cid"],
+                "parent_revision": None if parent is None else parent["revision"], "crash_at": "after_seal_persistence" if crash else None}
+            publication = self.effect("seal_publish", request, [sys.executable, self.profile["sealing_service"]["entrypoint"]], service_kind="native_sealing", timeout=300)
+            if not publication["published"]:
+                return {"published": False, "status": "native_stale_parent_rejected", "native": publication, "pointer": self.root()}
+            seal_cid = publication["seal_cid"]
+        elif crash:
+            marker = self.directory / (self.phase_name + "_ordinary_pre_cas_interruption.json")
+            if not marker.exists():
+                C.write_new(marker, {"boundary": "durable_validated_manifest_before_local_CAS", "manifest_sha256": R.sha(R.canonical(manifest)), "returncode": 94})
+                os._exit(94)
+        pointer = {"trajectory_id": self.event["trajectory_id"], "event_id": self.event["event_id"], "revision": revision,
+                   "generation": 0 if parent is None else parent["generation"] + 1, "seal_cid": seal_cid,
+                   "source_tree_path": str(Path(tree).resolve()), "source_tree_sha256": R.inventory(tree)["tree_sha256"],
+                   "original_inventory_sha256": O.original_inventory(self.profile, tree)["sha256"], "configuration_sha256": R.sha(R.canonical(self.configuration))}
+
+        def compare_and_swap(directory):
+            self.ledger.db.execute("BEGIN IMMEDIATE")
+            try:
+                actual = self.root()
+                if actual != parent:
+                    result = {"published": False, "status": "local_stale_parent_rejected", "pointer": actual}
+                else:
+                    self.ledger.db.execute("INSERT OR REPLACE INTO original_roots VALUES(?,?)", (self.event["trajectory_id"], R.canonical(pointer).decode()))
+                    self.ledger.append("original_accepted_root_CAS", {"owner_event_id": self.event["event_id"], "phase": self.phase_name, "expected": parent, "new": pointer})
+                    result = {"published": True, "status": "published", "pointer": pointer}
+                self.ledger.db.execute("COMMIT")
+            except BaseException:
+                self.ledger.db.execute("ROLLBACK")
+                raise
+            return result
+        local = self.effect("seal_local_commit", {"expected_parent": parent, "new_pointer": pointer}, invoke=compare_and_swap)
+        return {**local, "native": publication}
+
+    def phase(self, phase, tree, parent, *, allow_model=True, crash=False):
+        self.phase_name = phase
+        saved = self.directory / (phase + "_phase_result.json")
+        if saved.exists():
+            result = json.loads(saved.read_bytes())
+            if result["input_tree_sha256"] != R.inventory(tree)["tree_sha256"] or result["expected_parent"] != parent:
+                raise ValueError("phase restart source/parent differs")
+            return result
+        phase_start = self.directory / (phase + "_phase_start.json")
+        C.write_new(phase_start, {"input_tree_path": str(tree), "input_tree_sha256": R.inventory(tree)["tree_sha256"], "expected_parent": parent, "crash": crash})
+        self.world("world_propose", "propose", tree)
+        current, response_path = self.score("current_check", tree, parent)
+        candidate = tree if current["passed"] else None
+        grade = current
+        context = None
+        history = [] if self.previous is None else self.previous["public_history"]
+        feedback = None
+        wire = lambda rows: M.wire_for(self.provider_profile, M.messages_for(self.task, self.objective, rows, history, O.public_grade(current), self.configuration, feedback=feedback))
+        selection = Q.select(tree, self.objective["statement"], self.task["source_policy"]["edit_paths"], self.profile["retrieval"]["max_files"], self.profile["retrieval"]["max_source_bytes"], self.provider_profile["max_request_bytes"], wire, self.task["source_policy"])
+        C.write_new(self.directory / (phase + "_retrieval.json"), selection)
+        selected = selection["sources"]
+        if candidate is None and not selection["admitted"]:
+            return self.save_phase(saved, tree, parent, None, current, None, "source_context_unresolved")
+        if candidate is None and self.features["native_context"]:
+            context = self.context("input", tree, selected)
+        if candidate is None and self.features["symbolic_routing"]:
+            analysis = self.effect("native_symbolic", {"schema": "ns-repository-native-analysis-request@1", "event_id": self.scope,
+                "objective": self.objective["statement"], "sources": selected, "candidate_budget": 1,
+                "context_token_estimate": (sum(len(row["source"].encode()) for row in selected) + 3) // 4},
+                [sys.executable, self.profile["symbolic_service"]], service_kind="native_symbolic")
+            edits = analysis.get("candidate_edits", [])
+            if edits:
+                try:
+                    replacements = [{"path": row["path"], "old": R.text(R.production(tree, row["path"], self.task["source_policy"], edit=True)), "new": row["source"]} for row in edits]
+                    proposed = self.directory / (phase + "_native_candidate")
+                    R.materialize_candidate(self.task["source_root"], tree, proposed, self.task["source_policy"], expected_current_tree_sha256=R.inventory(tree)["tree_sha256"], edits=replacements)
+                    grade, path = self.score("native_candidate_check", proposed, parent, "candidate")
+                    if grade["passed"]:
+                        candidate, response_path = proposed, path
+                except ValueError as exc:
+                    self.local_failures.append({"phase": phase, "stage": "native_candidate", "type": type(exc).__name__, "reason": str(exc)})
+            routing = analysis["routing"]
+            if candidate is None and (routing["halt_before_dispatch"] or not routing["requires_provider"] or self.profile["native_route_provider_map"].get(routing["route"]) != self.provider_profile["model"]):
+                return self.save_phase(saved, tree, parent, None, grade, None, "native_route_unresolved")
+        existing_slots = self.ledger.db.execute("SELECT ordinal,owner_event_id,phase FROM original_slots WHERE trajectory_id=? ORDER BY ordinal", (self.event["trajectory_id"],)).fetchall()
+        phase_slots = [row[0] for row in existing_slots if row[1:] == (self.event["event_id"], phase)]
+        start_slot = min(phase_slots) if phase_slots else len(existing_slots)
+        purpose = "proposal"
+        for slot in range(start_slot, self.profile["max_provider_slots_per_trajectory"]):
+            if candidate is not None or not allow_model:
+                break
+            messages = M.messages_for(self.task, self.objective, selected, history, O.public_grade(current), self.configuration, feedback=feedback)
+            C.write_new(self.directory / (phase + "_prompt_slot_" + str(slot) + ".json"), {"messages": messages, "source_tree_sha256": R.inventory(tree)["tree_sha256"], "purpose": purpose, "slot": slot})
+            if len(M.wire_for(self.provider_profile, messages)) > self.provider_profile["max_request_bytes"]:
+                return self.save_phase(saved, tree, parent, None, grade, None, "source_context_unresolved")
+            response = self.provider(slot, purpose, messages)
+            if response.get("status") != "response":
+                return self.save_phase(saved, tree, parent, None, grade, None, "residual_pending" if response.get("status") == "provider_disabled" else "provider_unresolved")
+            feedback = {"assistant_output": response["text"], "current_check": O.public_grade(grade)}
+            try:
+                value = json.loads(response["text"])
+                if isinstance(value, dict) and set(value) == {"expand"}:
+                    feedback["local_validation"] = "expansion_requested"
+                    expanded = Q.expand(tree, value["expand"], [], self.provider_profile["max_request_bytes"], wire, self.task["source_policy"])
+                    C.write_new(self.directory / (phase + "_expansion_slot_" + str(slot) + ".json"), expanded)
+                    if not expanded["admitted"]:
+                        return self.save_phase(saved, tree, parent, None, grade, None, "source_context_unresolved")
+                    selected = expanded["sources"]
+                    purpose = "source_expansion"
+                    continue
+                if not isinstance(value, dict) or set(value) != {"edits"}:
+                    raise ValueError("closed edit/expansion schema required")
+                proposed = self.directory / (phase + "_candidate_slot_" + str(slot))
+                R.materialize_candidate(self.task["source_root"], tree, proposed, self.task["source_policy"], expected_current_tree_sha256=R.inventory(tree)["tree_sha256"], edits=value["edits"])
+                grade, path = self.score("candidate_check_slot_" + str(slot), proposed, parent, "candidate")
+                feedback["current_check"] = O.public_grade(grade)
+                if grade["passed"]:
+                    candidate, response_path = proposed, path
+            except (ValueError, TypeError, KeyError) as exc:
+                self.local_failures.append({"phase": phase, "stage": "candidate_slot_" + str(slot), "type": type(exc).__name__, "reason": str(exc)})
+                feedback["local_validation"] = "transport_rejected"
+            purpose = "retry"
+        if candidate is None:
+            return self.save_phase(saved, tree, parent, None, grade, None, "not_accepted")
+        if self.features["native_publication"]:
+            accepted_sources = Q.sources_for(candidate, self.task["source_policy"]["edit_paths"], self.task["source_policy"])
+            context = self.context("accepted", candidate, accepted_sources)
+        self.world("world_record", "record", candidate, response_path)
+        publication = self.publish(candidate, response_path, context, parent, crash=crash)
+        return self.save_phase(saved, tree, parent, candidate, grade, publication, "accepted" if publication["published"] else "stale_parent_rejected")
+
+    def save_phase(self, path, tree, parent, candidate, grade, publication, status):
+        result = {"phase": self.phase_name, "status": status, "input_tree_path": str(tree), "input_tree_sha256": R.inventory(tree)["tree_sha256"],
+                  "expected_parent": parent, "candidate_tree_path": None if candidate is None else str(candidate),
+                  "candidate_tree_sha256": None if candidate is None else R.inventory(candidate)["tree_sha256"],
+                  "candidate_grading_passed": bool(grade and grade.get("passed")),
+                  "independent_original_repair_passed": bool(grade and grade.get("original_native_passed")), "grade": grade,
+                  "publication": publication, "accepted_for_next_state": bool(publication and publication["published"])}
+        C.write_new(path, result)
+        return result
+
+    def finish(self, status, obligations, subinvocations=None):
+        rows = self.ledger.db.execute("SELECT effect_id,event_id,stage,state,result_path,result_hash FROM effects WHERE event_id LIKE ? ORDER BY event_id,stage", (self.event["event_id"] + "--%",)).fetchall()
+        effects = []
+        unknown = []
+        scorers = {}
+        providers = {}
+        components = {name: {"called": False, "effect_ids": []} for name in ("native_context", "native_symbolic", "native_world", "native_procedure", "lifecycle_reuse", "native_publication", "proof_consumption")}
+        for effect_id, scope, stage, state, path, digest in rows:
+            request_path = self.output / "effects" / effect_id / "request.json"
+            request = json.loads(request_path.read_bytes())
+            if request["owner_event_id"] != self.event["event_id"] or request["trajectory_id"] != self.event["trajectory_id"]:
+                raise ValueError("effect crossed trajectory ownership")
+            effects.append({"effect_id": effect_id, "owner_event_id": self.event["event_id"], "effect_scope_id": scope, "stage": stage})
+            kind = request["service_kind"]
+            component = "native_publication" if kind == "native_sealing" else kind
+            if component in components:
+                components[component]["called"] = True
+                components[component]["effect_ids"].append(effect_id)
+            if state != "terminal":
+                unknown.append(effect_id)
+                continue
+            if R.sha(Path(path).read_bytes()) != digest:
+                raise ValueError("effect completion changed before event finalization")
+            response = json.loads(Path(path).read_bytes())["response"]
+            if kind == "provider":
+                req = request["service_request"]
+                receipt = self.output / "provider" / req["call_id"] / "result.json"
+                providers[req["call_id"]] = {"slot": req["slot"], "call_id": req["call_id"], "purpose": req["purpose"], "effect_id": effect_id,
+                    "transport_receipt_path": str(receipt) if receipt.exists() else None, "transport_receipt_sha256": R.sha(receipt.read_bytes()) if receipt.exists() else None}
+            if kind == "scorer":
+                req = request["service_request"]
+                directory = request_path.parent
+                scorers[req["evaluation_id"]] = {"evaluation_id": req["evaluation_id"], "kind": "current" if stage == "current_check" else "candidate", "operation_id": scope + "-" + stage,
+                    "request_path": str(directory / "service_request.json"), "request_sha256": R.sha(O.closed_canonical(req)),
+                    "response_path": str(directory / "response.json"), "response_sha256": R.sha((directory / "response.json").read_bytes()),
+                    "receipt_path": str(directory / "response.json"), "receipt_sha256": R.sha((directory / "response.json").read_bytes()), "effect_id": effect_id}
+                components["lifecycle_reuse"]["called"] |= bool(response.get("validation_call_reuse_hook_executed"))
+            for replay in response.get("independent_replays", []):
+                evaluation_id = replay["evaluation_id"]
+                scorers[evaluation_id] = {"evaluation_id": evaluation_id, "kind": "recovery_replay" if stage == "seal_recover" else "read_replay" if stage.startswith("seal_read") else "publication_replay",
+                    "operation_id": scope + "-" + stage, "request_path": replay["request_path"], "request_sha256": replay["request_sha256"],
+                    "response_path": replay["completion_path"], "response_sha256": replay["completion_sha256"], "receipt_path": replay["completion_path"], "receipt_sha256": replay["completion_sha256"], "effect_id": effect_id}
+        pointer = self.root()
+        current_phase = self.phase_results.get("continuation", self.phase_results.get("recover_target", self.phase_results.get("main")))
+        accepted = bool(current_phase and current_phase["accepted_for_next_state"])
+        grade = None if current_phase is None else current_phase["grade"]
+        history = [] if self.previous is None else list(self.previous["public_history"])
+        history.append({"event_index": self.event["horizon"], "accepted_for_next_state": accepted,
+                        "current_check": {} if grade is None else O.public_grade(grade), "public_comment_applied": self.event["horizon"] >= 4,
+                        "configuration_sha256": R.sha(R.canonical(self.configuration))})
+        transition = self.transition or {}
+        result = {"schema": "ns-original-caller-event/v1", "run_id": self.profile["run_id"], **{key: self.event[key] for key in ("trajectory_id", "event_id", "horizon", "task_id", "arm", "cache_profile", "control")},
+            "profile_sha256": self.profile_hash, "corpus_sha256": self.profile["corpus_sha256"], "event_request_sha256": R.sha(R.canonical(self.event)),
+            "terminal": True, "event_index": self.event["horizon"], "status": status, "event_obligations_passed": nullable_all([row["passed"] for row in obligations if row["required"]]),
+            "required_obligation_outcomes": obligations, "plan_coverage_qualified": False, "plan_coverage_passed": None,
+            "candidate_grading_passed": bool(grade and grade.get("passed")), "independent_original_repair_passed": bool(grade and grade.get("original_native_passed")),
+            "accepted_for_next_state": accepted, "native_publication_required": self.features["native_publication"],
+            "native_publication_passed": bool(accepted and pointer and pointer.get("seal_cid")) if self.features["native_publication"] else None,
+            "accepted_pointer": pointer, "source_transition": transition, "public_history": history,
+            "failed_repair_dependencies": transition.get("failed_repair_dependencies", []), "public_transform_history": transition.get("public_transform_history", []),
+            "input_tree_path": transition.get("input_tree_path"), "input_tree_sha256": transition.get("input_tree_sha256"),
+            "input_original_inventory_sha256": None if not transition.get("input_tree_path") else O.original_inventory(self.profile, transition["input_tree_path"])["sha256"],
+            "accepted_tree_path": pointer["source_tree_path"] if accepted else None, "accepted_tree_sha256": pointer["source_tree_sha256"] if accepted else None,
+            "accepted_original_inventory_sha256": pointer["original_inventory_sha256"] if accepted else None,
+            "objective_record_sha256": self.task["objective_record_sha256"], "objective_text_sha256": self.task["objective_text_sha256"],
+            "configuration_sha256": R.sha(R.canonical(self.configuration)), "effect_ids": [row["effect_id"] for row in effects], "effect_ownership": effects,
+            "provider_attempts": list(providers.values()), "scorer_attempts": list(scorers.values()), "components": components,
+            "local_failures": self.local_failures, "unknown_effect_ids": unknown, "infrastructure_unresolved": status in ("infrastructure_unresolved", "effect_unknown"),
+            "recovery_subinvocations": subinvocations or [], "controller_elapsed_seconds": time.perf_counter() - self.started,
+            "phase_results": self.phase_results, "source_substitutions": 0, "qualification_results_are_not_live_outcomes": True}
+        result["result_sha256"] = R.sha(R.canonical(result))
+        path = self.directory / "terminal.json"
+        C.write_new(path, result)
+        self.ledger.db.execute("UPDATE events SET status=?,result_path=? WHERE event_id=?", (status, str(path), self.event["event_id"]))
+        self.ledger.append("event_terminal", {"event_id": self.event["event_id"], "result_path": str(path), "result_hash": R.sha(path.read_bytes()), "status": status})
+        return result
+
+    def execute(self):
+        event_id = self.event["event_id"]
+        existing = self.ledger.db.execute("SELECT request_hash,status,result_path FROM events WHERE event_id=?", (event_id,)).fetchone()
+        if existing and existing[0] != R.sha(R.canonical(self.event)):
+            raise ValueError("frozen event changed")
+        if existing and existing[1] != "started":
+            return json.loads(Path(existing[2]).read_bytes())
+        if not existing:
+            self.ledger.db.execute("INSERT INTO events VALUES(?,?,?,?)", (event_id, R.sha(R.canonical(self.event)), "started", None))
+            self.ledger.append("event_started", {"event": self.event, "profile_sha256": self.profile_hash})
+        obligations = []
+        subinvocations = []
+        try:
+            horizon = self.event["horizon"]
+            if horizon > 1:
+                previous_id = self.event["trajectory_id"] + "--h" + str(horizon - 1).zfill(2)
+                row = self.ledger.db.execute("SELECT status,result_path FROM events WHERE event_id=?", (previous_id,)).fetchone()
+                if not row or row[0] == "started":
+                    raise ValueError("exact predecessor not terminal")
+                self.previous = json.loads(Path(row[1]).read_bytes())
+            tree = self.directory / "input_tree"
+            if horizon == 0:
+                R.materialize_candidate(self.task["source_root"], self.task["source_root"], tree, self.task["source_policy"], expected_current_tree_sha256=self.task["source_tree_sha256"])
+                self.transition = {"input_tree_path": str(tree), "input_tree_sha256": R.inventory(tree)["tree_sha256"], "source_origin": "original_public_base_prime", "failed_repair_dependencies": [], "public_transform_history": []}
+                self.phase_name = "prime"
+                self.effect("setup_identity", {"source_tree_sha256": self.transition["input_tree_sha256"], "profile_sha256": self.profile_hash}, invoke=lambda directory: {"source_verified": O.original_inventory(self.profile, tree)["sha256"] == self.task["original_adapter_inventory_sha256"], "accepted_source_published": False})
+                if self.event["cache_profile"] == "warm":
+                    selected = Q.sources_for(tree, self.task["source_policy"]["edit_paths"], self.task["source_policy"])
+                    if self.features["native_context"]:
+                        self.context("prime", tree, selected)
+                    self.world("world_propose", "propose", tree)
+                    self.score("prime_current_check", tree, None, "current")
+                obligations = [{"obligation_id": "metered_setup_prime", "required": True, "passed": True, "evidence_refs": []}]
+                return self.finish("setup_complete", obligations)
+            self.phase_name = "input"
+            previous = self.previous
+            if previous and previous["accepted_for_next_state"] and self.features["native_publication"]:
+                loaded = self.native_parent(previous["accepted_pointer"])
+                previous = {**previous, "accepted_tree_path": loaded}
+            self.transition = SEQUENCE.source_input(self.task, self.task["events"][horizon - 1], previous, tree)
+            C.write_new(self.directory / "source_transition.json", self.transition)
+            if horizon == 1:
+                self.phase_name = "plan"
+                plan = {"objective_record_sha256": self.task["objective_record_sha256"], "objective_text_sha256": self.task["objective_text_sha256"],
+                        "source_tree_sha256": R.inventory(tree)["tree_sha256"], "repair_surface": self.task["source_policy"]["edit_paths"],
+                        "obligations": self.profile["public_plan_obligations"][self.task["task_id"]], "coverage_authority": "public obligation projection; independent plan coverage not supplied"}
+                self.effect("public_plan_projection", plan, invoke=lambda directory: {"projected": True, "plan": plan, "plan_coverage_qualified": False, "plan_coverage_passed": None})
+                if self.features["native_context"]:
+                    self.context("plan", tree, Q.sources_for(tree, self.task["source_policy"]["edit_paths"], self.task["source_policy"]))
+                obligations = [{"obligation_id": "public_objective_and_source_bound", "required": True, "passed": True, "evidence_refs": []},
+                               {"obligation_id": "independent_plan_coverage", "required": True, "passed": None, "evidence_refs": [], "reason": "independent coverage authority not enrolled"}]
+                return self.finish("plan_projected", obligations)
+            parent_path = self.directory / "starting_parent.json"
+            if not parent_path.exists():
+                C.write_new(parent_path, {"parent": self.root()})
+            parent = json.loads(parent_path.read_bytes())["parent"]
+            if horizon < 6:
+                result = self.phase("main", tree, parent)
+                self.phase_results["main"] = result
+                obligations = [{"obligation_id": "independent_current_acceptance", "required": True, "passed": result["candidate_grading_passed"], "evidence_refs": []},
+                               {"obligation_id": "accepted_source_publication", "required": True, "passed": result["accepted_for_next_state"], "evidence_refs": []}]
+                return self.finish(result["status"], obligations)
+            recovery = self.phase("recover_target", tree, parent, crash=True)
+            self.phase_results["recover_target"] = recovery
+            recovered = recovery["accepted_for_next_state"]
+            subinvocations = [{"subinvocation_id": name, "status": "dependency_unresolved", "boundary_reached": False,
+                               "precondition_satisfied": False, "postcondition_passed": False, "candidate_grading_passed": False,
+                               "accepted_for_next_state": False, "source_tree_sha256": None, "expected_parent": parent, "observed_parent": self.root(),
+                               "effect_ids": [], "invocation_ids": [], "evidence_refs": []}
+                              for name in ("capture_parent_and_validate", "publish_interrupt", "fresh_recovery", "stale_parent_branch", "fresh_parent_continuation")]
+            subinvocations[0].update(status="validated" if recovery["candidate_grading_passed"] else "validation_failed", boundary_reached=True, precondition_satisfied=True,
+                                     postcondition_passed=recovery["candidate_grading_passed"], candidate_grading_passed=recovery["candidate_grading_passed"])
+            if recovered:
+                for row in subinvocations[1:3]:
+                    row.update(status="completed", boundary_reached=True, precondition_satisfied=True, postcondition_passed=True, accepted_for_next_state=True)
+                # A stale branch independently revalidates the same passed source
+                # but submits the captured old parent after recovery advanced it.
+                recovered_pointer = recovery["publication"]["pointer"]
+                stale = self.phase("stale_parent", Path(recovery["candidate_tree_path"]), parent, allow_model=False)
+                self.phase_results["stale_parent"] = stale
+                stale_passed = stale["candidate_grading_passed"] and not stale["accepted_for_next_state"] and stale["status"] == "stale_parent_rejected"
+                subinvocations[3].update(status=stale["status"], boundary_reached=stale["candidate_grading_passed"], precondition_satisfied=True,
+                    postcondition_passed=stale_passed, candidate_grading_passed=stale["candidate_grading_passed"], accepted_for_next_state=False)
+                self.phase_name = "continuation"
+                continuation_source = self.native_parent(recovered_pointer) if self.features["native_publication"] else recovered_pointer["source_tree_path"]
+                continued = self.phase("continuation", Path(continuation_source), recovered_pointer, allow_model=False)
+                self.phase_results["continuation"] = continued
+                subinvocations[4].update(status=continued["status"], boundary_reached=True, precondition_satisfied=True,
+                    postcondition_passed=continued["accepted_for_next_state"], candidate_grading_passed=continued["candidate_grading_passed"], accepted_for_next_state=continued["accepted_for_next_state"])
+            obligations = [{"obligation_id": "recovery_" + row["subinvocation_id"], "required": True, "passed": row["postcondition_passed"], "evidence_refs": row["evidence_refs"]} for row in subinvocations]
+            return self.finish("accepted" if all(row["postcondition_passed"] for row in subinvocations) else "recovery_obligations_unresolved", obligations, subinvocations)
+        except C.UnknownEffect as exc:
+            self.local_failures.append({"stage": self.phase_name, "type": "UnknownEffect", "effect_id": str(exc)})
+            return self.finish("effect_unknown", [{"obligation_id": "complete_required_effects", "required": True, "passed": None, "evidence_refs": []}], subinvocations)
+        except InfrastructureUnresolved as exc:
+            self.local_failures.append({"stage": self.phase_name, "type": type(exc).__name__, "reason": str(exc)})
+            return self.finish("infrastructure_unresolved", [{"obligation_id": "complete_required_effects", "required": True, "passed": None, "evidence_refs": []}], subinvocations)
+        except Exception as exc:
+            self.local_failures.append({"stage": self.phase_name, "type": type(exc).__name__, "reason": str(exc)})
+            return self.finish("controller_error", [{"obligation_id": "caller_execution", "required": True, "passed": False, "evidence_refs": []}], subinvocations)
+        finally:
+            self.ledger.db.close()
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--profile", type=Path, required=True)
+    parser.add_argument("--event", required=True)
+    args = parser.parse_args()
+    caller = Caller(args.profile, args.event)
+    print(json.dumps(caller.execute(), sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

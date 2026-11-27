@@ -1,0 +1,137 @@
+import Init
+namespace SchedulerConstraint
+set_option autoImplicit false
+structure Request where
+  id : String
+  prompt : Nat
+  generated : Nat
+  deriving DecidableEq, BEq, Repr
+structure Shape where
+  seq : Nat
+  heads : Nat
+  hidden : Nat
+  deriving DecidableEq, BEq, Repr
+structure Row where
+  id : String
+  batch : String
+  shape : Shape
+  deriving DecidableEq, BEq, Repr
+structure Fraction where
+  numerator : Nat
+  denominator : Nat
+  deriving DecidableEq, Repr
+structure Metrics where
+  cost : Fraction
+  padding : Fraction
+  latency : Fraction
+  sequential : Fraction
+  deriving DecidableEq, Repr
+structure Bucket where
+  requests : List Request
+  rows : List Row
+  metrics : Metrics
+  before : String
+  after : String
+  deriving DecidableEq, Repr
+
+def inputIDs (requests : List Request) : List String := requests.map Request.id
+def outputIDs (rows : List Row) : List String := rows.map Row.id
+def coverageCheck (requests : List Request) (rows : List Row) : Bool :=
+  (outputIDs rows).isPerm (inputIDs requests)
+def ceil64 (prompt : Nat) : Nat := ((prompt + 63) / 64) * 64
+
+def shapeCheck (request : Request) (row : Row) : Bool :=
+  decide (row.shape.heads = 32 ∧ row.shape.hidden = 4096 ∧
+    row.shape.seq % 64 = 0 ∧ ceil64 request.prompt ≤ row.shape.seq)
+def allShapeCheck (requests : List Request) (rows : List Row) : Bool :=
+  rows.all (fun row => requests.any (fun request => request.id == row.id && shapeCheck request row))
+def batchCheck (rows : List Row) : Bool :=
+  rows.all (fun a => rows.all (fun b => a.batch != b.batch || a.shape == b.shape))
+def usedShapes (a b : List Row) : List Shape := ((a ++ b).map Row.shape).eraseDups
+def globalCapCheck (a b : List Row) : Bool := decide ((usedShapes a b).length ≤ 8)
+def fractionBelowCheck (value : Fraction) (numerator denominator : Nat) : Bool :=
+  decide (0 < value.denominator ∧ 0 < denominator ∧
+    value.numerator * denominator < numerator * value.denominator)
+def thresholdCheck (metrics : Metrics) (bucket : Nat) : Bool :=
+  if bucket = 1 then
+    fractionBelowCheck metrics.cost 300000000000 1 &&
+    fractionBelowCheck metrics.padding 55 1000 &&
+    fractionBelowCheck metrics.latency 2100000 1 &&
+    fractionBelowCheck metrics.sequential 270000000 1
+  else
+    fractionBelowCheck metrics.cost 48000000000 1 &&
+    fractionBelowCheck metrics.padding 15 100 &&
+    fractionBelowCheck metrics.latency 210000 1 &&
+    fractionBelowCheck metrics.sequential 32000000 1
+
+def bucketCheck (bucket : Bucket) (bucketID : Nat) : Bool :=
+  coverageCheck bucket.requests bucket.rows &&
+  decide (inputIDs bucket.requests).Nodup &&
+  allShapeCheck bucket.requests bucket.rows && batchCheck bucket.rows &&
+  thresholdCheck bucket.metrics bucketID && decide (bucket.before = bucket.after)
+def modelAccept (a b : Bucket) : Bool :=
+  bucketCheck a 1 && bucketCheck b 2 && globalCapCheck a.rows b.rows
+
+theorem coverage_permutation (requests : List Request) (rows : List Row)
+    (accepted : coverageCheck requests rows = true) :
+    (outputIDs rows).Perm (inputIDs requests) := by
+  exact List.isPerm_iff.mp accepted
+
+theorem accepted_ids_have_count_one (requests : List Request) (rows : List Row)
+    (accepted : coverageCheck requests rows = true)
+    (uniqueInput : (inputIDs requests).Nodup) (id : String)
+    (member : id ∈ inputIDs requests) : (outputIDs rows).count id = 1 := by
+  exact ((coverage_permutation requests rows accepted).count_eq id).trans
+    (uniqueInput.count_of_mem member)
+
+theorem accepted_cardinality (requests : List Request) (rows : List Row)
+    (accepted : coverageCheck requests rows = true) : rows.length = requests.length := by
+  simpa [inputIDs, outputIDs] using (coverage_permutation requests rows accepted).length_eq
+
+theorem accepted_no_unexpected_ids (requests : List Request) (rows : List Row)
+    (accepted : coverageCheck requests rows = true) (id : String)
+    (member : id ∈ outputIDs rows) : id ∈ inputIDs requests := by
+  exact (coverage_permutation requests rows accepted).mem_iff.mp member
+
+theorem accepted_output_ids_nodup (requests : List Request) (rows : List Row)
+    (accepted : coverageCheck requests rows = true)
+    (uniqueInput : (inputIDs requests).Nodup) : (outputIDs rows).Nodup := by
+  exact (coverage_permutation requests rows accepted).symm.nodup uniqueInput
+
+theorem shape_check_sound (request : Request) (row : Row)
+    (accepted : shapeCheck request row = true) :
+    row.shape.heads = 32 ∧ row.shape.hidden = 4096 ∧
+    row.shape.seq % 64 = 0 ∧ ceil64 request.prompt ≤ row.shape.seq := by
+  exact of_decide_eq_true accepted
+
+theorem aligned_ceiling_covers_prompt (prompt : Nat) : prompt ≤ ceil64 prompt := by
+  unfold ceil64
+  omega
+
+theorem global_cap_check_sound (a b : List Row) (accepted : globalCapCheck a b = true) :
+    (usedShapes a b).length ≤ 8 := by
+  exact of_decide_eq_true accepted
+
+theorem batch_check_sound (rows : List Row) (accepted : batchCheck rows = true)
+    (a b : Row) (ha : a ∈ rows) (hb : b ∈ rows) (sameBatch : a.batch = b.batch) :
+    a.shape = b.shape := by
+  have outer := List.all_eq_true.mp accepted a ha
+  have inner := List.all_eq_true.mp outer b hb
+  simpa [sameBatch] using inner
+
+theorem fraction_below_check_sound (value : Fraction) (numerator denominator : Nat)
+    (accepted : fractionBelowCheck value numerator denominator = true) :
+    0 < value.denominator ∧ 0 < denominator ∧
+    value.numerator * denominator < numerator * value.denominator := by
+  exact of_decide_eq_true accepted
+#print axioms coverage_permutation
+#print axioms accepted_ids_have_count_one
+#print axioms accepted_cardinality
+#print axioms accepted_no_unexpected_ids
+#print axioms accepted_output_ids_nodup
+#print axioms shape_check_sound
+#print axioms aligned_ceiling_covers_prompt
+#print axioms global_cap_check_sound
+#print axioms batch_check_sound
+#print axioms fraction_below_check_sound
+end SchedulerConstraint

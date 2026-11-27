@@ -1,0 +1,366 @@
+{
+  "schema": "supervisor-total-token-reduction-plan@1",
+  "title": "Use indexed source and formal evidence to reduce the entire Terminal Bench coding conversation",
+  "objective": "Reduce total observed input + output tokens across all supervisor/provider attempts while preserving task success and the literal public instruction, source freshness, task scope, and mandatory obligations.",
+  "recommendation": "Store full source and AST/KG/vector/contract/proof records outside the model prompt. Use IntentIR to nominate and qualify the task's dependencies, compile the smallest useful descriptive capsule, and expose bounded verified source/fact expansion. Apply read-only minification only when the complete delivered envelope becomes smaller. Evaluate the coding session, including tool output and retries, rather than the first prompt.",
+  "current_findings": [
+    "Current measured intent_symbolic planning uses zero provider calls and supplies zero source-semantic observed facts. Further planner call removal cannot save coding-model tokens on this path.",
+    "select_worker_capsules ranks optional capsules lexically and bounds bytes; it does not derive a complete source dependency slice.",
+    "The five-hit retrieval prompt contains paths, spans, ranks, hashes and AST references, not complete source bodies. Source minification affects later reads or a deliberately changed source-delivery route.",
+    "compact_code_retrieval currently restores the full native prompt on readback. A single-row/source-fact inspector should avoid that amplification.",
+    "DuckDB/DuckLake catalog linkage and hydration describe persisted observations. They do not establish current source semantics, contract verification or active proof authority.",
+    "Existing SemanticDependencyGraph, retrieve_proof_directed and DecisionContextCompiler can close and budget an admitted graph; complete graph-relative closure is not complete Python behavior."
+  ],
+  "built_this_stage": [
+    {
+      "component": "read-only code-view preview",
+      "location": "/home/barberb/lift_coding/maintenance/terminal-token-reduction-20261007-01/checkout/ipfs_accelerate_py/agent_supervisor/runtime/code_view_minification.py",
+      "behavior": "Preserve identifiers, operators, literal/docstring spellings, protected notices, physical line numbers and original source; compare full-module AST and meaningful tokens; emit omitted-comment digest sidecar and byte fallback.",
+      "production_integration": false
+    },
+    {
+      "component": "pure session-budget ledger",
+      "location": "/home/barberb/lift_coding/maintenance/terminal-token-reduction-20261007-01/checkout/ipfs_accelerate_py/agent_supervisor/runtime/session_budget_ledger.py",
+      "behavior": "Measure supplied bounded synthetic/native-layout record populations using string-byte totals, call/output joins and cumulative usage checkpoints; preserve unknown counters; export no raw tool payloads.",
+      "production_integration": false
+    },
+    {
+      "component": "source-pinned static dependency preview",
+      "location": "/home/barberb/lift_coding/maintenance/terminal-context-budget-20261011-01/task-dependency-preview.py",
+      "behavior": "Use native Bottle AST, a fresh stage-local DuckDB and the existing graph traversal to nominate 36 of 426 symbols; keep 35 unresolved frontier entries and duplicate-definition/source-change refusal controls.",
+      "production_integration": false
+    },
+    {
+      "component": "complete-envelope local experiment",
+      "location": "/home/barberb/lift_coding/maintenance/terminal-context-budget-20261011-01/context-budget-preview.py",
+      "behavior": "Independently replay exact source spans, count literal instruction + guidance + metadata + source using pinned offline o200k_base, and reject excerpt minification when overhead outweighs savings.",
+      "production_integration": false
+    }
+  ],
+  "architecture": [
+    {
+      "step": 1,
+      "input": "Literal public prompt and reviewed task contract",
+      "output": "IntentIR required/permitted/prohibited requirements, dependencies and task identity",
+      "rule": "Keep literal instruction and mandatory requirement meaning available. Learned interpretation is a nomination until independently qualified.",
+      "existing": "planning/intent_symbolic_planning.py; terminal_indexed_preparation.py"
+    },
+    {
+      "step": 2,
+      "input": "Repository under test at exact revision plus candidate overlay",
+      "output": "Source content IDs, native AST units/spans, typed dependency nominations, vector ranking, contract/property/proof scopes",
+      "rule": "Bind every row to source bytes and scanner/index/model/toolchain versions. Do not use hidden verifier/oracle/solution files for indexing or training.",
+      "existing": "terminal_codebase_repository_index.py; code_symbol_vector_index.resolve_code_symbol_ast_facts"
+    },
+    {
+      "step": 3,
+      "input": "IntentIR requirement + exact current source/index roots",
+      "output": "Qualified requirement-to-source bindings and an explicit unresolved dependency frontier",
+      "rule": "Unique names and similarity ranks do not verify receivers, imports, aliases, module initialization, control/data flow or dynamic dispatch.",
+      "missing": "Resolver from requirement nominations and qualified native facts into a task-specific graph; explicit source-semantic fact seam into symbolic planner"
+    },
+    {
+      "step": 4,
+      "input": "Qualified mandatory graph and current proof/residual state",
+      "output": "Budgeted semantic capsule with required facts/open obligations and bounded public expansion handles",
+      "rule": "Mandatory dependencies cannot be removed to meet a byte budget. Split, expand or fall back. Keep missing-analysis boundaries inline.",
+      "existing": "SemanticDependencyGraph.mandatory_closure; retrieve_proof_directed; DecisionContextCompiler.compile; compile_code_proof_context_capsule"
+    },
+    {
+      "step": 5,
+      "input": "One source row/span or explicit source-fact question",
+      "output": "Bounded read-only exact source/signature/call/effect evidence",
+      "rule": "Requalify source/hash/AST/span and original query/result selection; refuse ambiguous/stale rows. Return continuation handle instead of silent truncation.",
+      "missing": "Dedicated source/fact readback tool; existing frontier returns hit metadata and decoder returns whole prompt"
+    },
+    {
+      "step": 6,
+      "input": "Optional source display view",
+      "output": "Original or conservative minified view selected by complete-envelope token and byte comparison",
+      "rule": "Use original source before edits. No identifier renaming, docstring/literal removal or candidate rewriting. AST equality is structural, not behavioral equivalence."
+    },
+    {
+      "step": 7,
+      "input": "Patch, changed source roots, current failures and validated parent context",
+      "output": "Fresh index delta, invalidated proof scopes and bounded retry/residual capsule",
+      "rule": "Send deltas only if the native session actually retains the qualified parent; otherwise send a full mandatory fallback.",
+      "existing": "compile_retry_context; compile_context_delta; compile_code_proof_context_delta"
+    },
+    {
+      "step": 8,
+      "input": "Every admitted provider attempt and its native completion/usage record",
+      "output": "Whole-session token/byte/completeness ledger joined to task outcome",
+      "rule": "Count each latest native cumulative input + output total once. Cached input and reasoning output are subsets, not additional tokens."
+    }
+  ],
+  "storage_contract": {
+    "duckdb": "Local task/revision-scoped typed source, symbol, span, dependency, requirement-binding, vector-index and contract/proof tables; deterministic bounded joins select task evidence.",
+    "quack": "Use typed, owner-controlled selector/readback operations and allowlisted queries. SQL query text and row presence do not confer evidence authority. Expose qualified results or bounded public handles rather than arbitrary database access.",
+    "ducklake": "Persist versioned observation/catalog manifests, source/index provenance, capsule and proof references, and trial-ledger observations for reuse and comparison. Freshness must be independently checked against the current candidate overlay.",
+    "content_addressed_artifacts": "Full source/AST/KG/vector/proof payloads remain in qualified storage. Prompt carries a concise task-specific projection, source/root digests and expansion contract. An artifact handle alone is not evidence that its content was read.",
+    "suggested_tables": [
+      "source_versions",
+      "symbol_definitions",
+      "source_spans",
+      "dependency_nominations",
+      "unresolved_frontier",
+      "intent_requirements",
+      "requirement_source_bindings",
+      "vector_index_versions",
+      "contract_obligations",
+      "proof_scopes",
+      "proof_receipts",
+      "context_capsules",
+      "expansion_receipts",
+      "session_budget_ledger"
+    ],
+    "preview_hydration_scope": {
+      "native_ast_symbols": 426,
+      "native_static_call_facts": 1188,
+      "selected_static_kg_edges": 50,
+      "vectors": 0,
+      "behavioral_contracts": 0,
+      "proofs": 0,
+      "production_quack_hydrated": false,
+      "production_ducklake_hydrated": false
+    }
+  },
+  "inline_context_contract": {
+    "always_include": [
+      "Literal public task instruction",
+      "Required/prohibited obligation meaning and current unresolved coverage",
+      "Task/write scope and validation commands",
+      "Current relevant failure/counterexample facts",
+      "Source revision/root identities and stale/ambiguity refusal rule",
+      "Module/global initialization and control/data-flow analysis gaps until qualified"
+    ],
+    "include_when_needed": [
+      "Exact qualified AST units and source spans",
+      "Qualified contracts or proof summaries matching the current property and assumptions",
+      "Single-source-span expansions",
+      "Changed source/failure/proof deltas with retained parent identity"
+    ],
+    "keep_in_index": [
+      "Full native AST and KG",
+      "Complete vector snapshots and learned weights",
+      "Full proof certificates and prover traces",
+      "Unselected source and catalog payloads",
+      "Repeated raw test logs and broad directory/source dumps"
+    ],
+    "do_not_suppress": "A size cap must not hide a necessary requirement, counterexample, dependency or failed validation. Summaries need bounded exact readback."
+  },
+  "proof_cache": {
+    "key_fields": [
+      "repository/task scope",
+      "source bytes/CID + revision + overlay root",
+      "AST producer/version/configuration + symbol/span identity",
+      "CodebaseIR schema/model/checkpoint + translation version",
+      "IntentIR requirement/policy/assumption identities",
+      "Property/contract and logic-family projection",
+      "Prover/Lean/toolchain/library/options versions",
+      "Active proof-scope identity and verification receipt",
+      "Capsule/query/result/projection version"
+    ],
+    "reuse_rule": "Reuse a checked certificate only for the exact source/property/assumptions/toolchain scope it verifies. Changed source, obligations, dependencies or assumptions invalidate that scope; unresolved scopes remain residual obligations.",
+    "prompt_projection": "Expose concise property/assumptions/result plus a qualified certificate handle; retain open obligations and counterexamples. Avoid asking the model to repeat already checked derivations.",
+    "authority_rule": "A learned embedding, reconstruction, projection, database row, AST identity or Lean theorem about an unrelated abstraction is not a proof of Python source equivalence or whole task satisfaction.",
+    "formal_projection_plan": "Use native ipfs_datasets_py logic-family adapters only for supported CodebaseIR constructs. Record exact emitted proposition, source/IR mapping, assumptions and unsupported effects. Check Lean compilation/proof admission with pinned toolchain and reject unapproved axioms/sorry/admit. Keep language semantics and source-to-IR translation obligations separate."
+  },
+  "codebase_ir_training": {
+    "current_evidence": "Earlier retained security-code autoencoder run used 358 samples and 24 epochs; observed reconstruction loss fell from 0.02193685047141167 to 0.004241029939070531. Heldout performance and source-semantic/formal translation authority were not established; current retrieval used lexical fallback.",
+    "pipeline": "Train/version a task-repository structural representation over public code units and native features; nominate candidate units and formalizations. Qualify source bindings deterministically and check supported contracts/projections independently.",
+    "on_the_fly_rule": "Train in a revision-scoped namespace and atomically admit a new model/index version after receipts and source freshness checks. Do not mutate an active model/index behind a capsule's pinned identity.",
+    "evaluation": [
+      "Heldout repository/task split decided before training",
+      "Retrieval recall of reviewed mandatory requirement dependencies",
+      "Unsupported/dynamic frontier preservation",
+      "Source-span and contract binding correctness",
+      "Formal projection/prover acceptance for supported subsets",
+      "Total trial tokens/time including training, remote embedding/model calls and refreshes"
+    ],
+    "convergence_rule": "Finite observed loss decrease is empirical optimization progress. A mathematical convergence claim requires a specified algorithm/objective/assumptions and an applicable theorem; source equivalence and task success are separate claims."
+  },
+  "provider_free_experiment": {
+    "source_sha256": "761756ce31753e526c48d28ccbca13a5d2493b16fe37aff3e1e4d2efaf3a2bba",
+    "tokenizer": "Pinned offline o200k_base; local surrogate counts, not configured provider-native or billed totals",
+    "literal_instruction_bytes": 3873,
+    "results_local_tokens": {
+      "whole_task_plus_module": 40014,
+      "whole_task_plus_minified_module": 37854,
+      "task_plus_selected_exact_code": 2523,
+      "task_plus_selected_code_and_compact_metadata": 3110,
+      "task_plus_selected_code_and_verbose_metadata": 5911,
+      "task_plus_minified_selected_display_and_compact_metadata": 3493
+    },
+    "interpretation": "Selecting exact task-focused source has a larger potential effect than minification. Compact metadata avoids repeating full symbol/frontier rows. Even on identical original location/hash labels, minified excerpt guidance increases 3467 to 3493 local tokens; the complete-envelope gate rejects it.",
+    "qualification_limits": [
+      "36 symbols are authored task-focused nominations, not verified requirement completeness",
+      "35 unresolved frontier entries remain",
+      "Fresh preview DuckDB stores AST/static calls/selected KG only",
+      "No provider/model/prover/training/task-verifier invocation in this stage",
+      "No default runtime route changed"
+    ]
+  },
+  "prior_native_observations": [
+    {
+      "treatment": "optional capsule selection 3 to 2",
+      "initial_bytes": [
+        57248,
+        53620
+      ],
+      "native_total_tokens": [
+        436765,
+        603061
+      ],
+      "success": "both passed and inputs audited",
+      "interpretation": "Smaller initial context increased observed total by 38.07%; no general efficacy claim.",
+      "artifact": "/home/barberb/lift_coding/maintenance/terminal-indexed-context-live-20261011-02/aggregate.json"
+    },
+    {
+      "treatment": "expanded to compact IntentIR v9",
+      "initial_bytes": [
+        104937,
+        81172
+      ],
+      "native_total_tokens": [
+        565786,
+        402169
+      ],
+      "success": "both passed; audits timed out",
+      "interpretation": "One favorable 28.92% observed reduction, with audit limits and no general/causal claim.",
+      "artifact": "/home/barberb/lift_coding/maintenance/terminal-frontier-runtime-20261011-01/token-reduction-summary.json"
+    },
+    {
+      "treatment": "metadata ABBA",
+      "mean_native_total_tokens": [
+        396893.5,
+        369732
+      ],
+      "success": "four passed/audited runs",
+      "interpretation": "Mean observed reduction 6.84%, but paired effects reversed (-45.01%, +43.99%); unstable evidence.",
+      "artifact": "/home/barberb/lift_coding/maintenance/terminal-metadata-context-20261011-01/campaign-conclusion.json"
+    },
+    {
+      "treatment": "expanded to compact retrieval v13",
+      "initial_bytes": [
+        81172,
+        79323
+      ],
+      "native_total_tokens": [
+        481373,
+        936650
+      ],
+      "success": "both passed and inputs audited; compact metadata refresh incomplete",
+      "interpretation": "Initial bytes decreased 2.28%, observed native total increased 94.58%. Refresh completeness has a separate flag.",
+      "artifact": "/home/barberb/lift_coding/maintenance/terminal-compact-retrieval-20261011-02/result-summary.json"
+    }
+  ],
+  "milestones": [
+    {
+      "id": 1,
+      "priority": "next",
+      "name": "Qualify and integrate whole-session accounting",
+      "implementation": "Connect pure ledger only inside the existing exact-thread/cwd bounded native-usage reader after native-layout qualification. Store scalar receipts, not transcripts.",
+      "acceptance": [
+        "Known synthetic tool joins, non-string payloads, unknown types, duplicate/unmatched IDs, malformed usage, counter regression and bounds controls pass",
+        "Native installed fixture confirms full known/missing field semantics without raw content export",
+        "All attempts retained; latest cumulative snapshot counted once; unknown totals remain unavailable",
+        "No claimed hard native token budget unless actual CLI/provider enforcement is qualified"
+      ]
+    },
+    {
+      "id": 2,
+      "priority": "next",
+      "name": "Bounded single-source-span/fact inspector",
+      "implementation": "Add opt-in read-only retrieval CLI to qualified row/source/query replay, then exact source span or explicit facts. Avoid full prompt decode. Proposed complete response caps 8192 UTF-8 bytes and 2048 qualified local tokens, continuation for oversized units.",
+      "acceptance": [
+        "Public source/span/decorator/hash replay verified",
+        "Stale source, duplicate binding, foreign task, changed query/index/result and path escape refused",
+        "No executable target imports or candidate writes",
+        "Complete output cap includes guidance/metadata; no silent truncation"
+      ]
+    },
+    {
+      "id": 3,
+      "priority": "next",
+      "name": "Ground IntentIR into current code and dependency frontier",
+      "implementation": "Add a report seam from reviewed IntentIR requirements to qualified source nominations, then an opt-in dependency selector. Include source-qualified contract/proof facts in symbolic planning when available.",
+      "acceptance": [
+        "All required/prohibited obligations map to evidence or explicit unknowns",
+        "Receiver/import/global/control/data-flow gaps are required inline frontiers",
+        "Graph closure only claims completeness relative to admitted dependencies",
+        "Mandatory overflow splits/falls back rather than drops evidence"
+      ]
+    },
+    {
+      "id": 4,
+      "priority": "after source/readback qualification",
+      "name": "Compile a smaller useful capsule",
+      "implementation": "Use existing DecisionContextCompiler and proof-directed retrieval; remove repeated catalogs/row details from inline projection; preserve deterministic qualified readback handles.",
+      "acceptance": [
+        "Complete prompt/token budget measured with configured-model tokenizer or explicitly labelled surrogate",
+        "Exact original task and mandatory facts remain reconstructable and admitted",
+        "Fallback when projected context is larger, stale, ambiguous or insufficient",
+        "Opt-in runtime installed qualification before any provider trial"
+      ]
+    },
+    {
+      "id": 5,
+      "priority": "after capsule qualification",
+      "name": "Read-only minification and parent-bound deltas",
+      "implementation": "Expose tested code-view preview only through source inspector. Select original/minified complete envelopes; use existing retry/proof delta compiler only in retained native context.",
+      "acceptance": [
+        "No candidate/source rewriting or identifier/string/docstring changes",
+        "Original coordinates and omitted-comment digests remain recoverable",
+        "Small excerpt minification is rejected when overhead grows",
+        "Fresh CLI/thread or missing parent uses full mandatory context"
+      ]
+    },
+    {
+      "id": 6,
+      "priority": "parallel scoped research",
+      "name": "Version CodebaseIR training and formal proof cache",
+      "implementation": "Train native structural representations on public code, evaluate heldout retrieval/source binding, qualify supported logic projections and cache independently checked scoped certificates.",
+      "acceptance": [
+        "Training/model/index versions pinned and active overlays freshly checked",
+        "Vectors/similarity nominate but never discharge obligations",
+        "Lean proof meaning binds source/IR/property/assumptions; unsupported constructs remain residual",
+        "No full-source equivalence, task completion or convergence claim from AST equality/reconstruction loss alone"
+      ]
+    },
+    {
+      "id": 7,
+      "priority": "after installed qualification",
+      "name": "Repeated total-cost Terminal Bench comparison",
+      "implementation": "Run repeated randomized paired/ABBA trials on multiple public tasks, one treatment at a time, pinned model/runtime/input/tooling/source variants and declared stopping budget.",
+      "acceptance": [
+        "Retain setup failures, interrupted sessions and all attempts; unknown usage not converted to zero",
+        "Same literal instruction/task scope and mandatory obligations audited",
+        "Measure official reward, native completion, input/output/cache counters, tool bytes, reads/expansions/retries/time and refresh/training/embedding completeness",
+        "Report paired differences, mean/median/tail cost and success together; do not promote from a single favorable run",
+        "Defaults change only after repeated qualified reduction with acceptable task success"
+      ]
+    }
+  ],
+  "total_cost_measurement": {
+    "primary": "Sum per-attempt latest observed native input_tokens + output_tokens when both are known and the population is qualified. Flag aggregate completeness independently.",
+    "subset_fields": "cached_input_tokens is inside input_tokens; reasoning_output_tokens is inside output_tokens. Neither is added again.",
+    "diagnostics": [
+      "Recorded STRING argument/output bytes and maxima",
+      "Duplicate/unmatched/unclassified events",
+      "Adjacent cumulative-counter deltas without turn/tool attribution",
+      "Repeated broad reads and readback volume only where natively qualified",
+      "Source/index freshness and expansion/capsule choices",
+      "Task outcome, retries, provider attempts, wall time and refresh/training completeness"
+    ],
+    "unknowns": "One CLI invocation is not one model turn. Recorded output bytes are not attributable native tokens or exact network payload. Provider hard token cap, per-tool token attribution, billing total and causal effects remain unknown until independently qualified."
+  },
+  "completion_status": {
+    "provider_token_reduction_established": false,
+    "source_to_model_equivalence_established": false,
+    "full_task_satisfaction_proved": false,
+    "model_convergence_proved": false,
+    "production_default_changed": false,
+    "live_trial_or_remote_publication_this_stage": false
+  }
+}

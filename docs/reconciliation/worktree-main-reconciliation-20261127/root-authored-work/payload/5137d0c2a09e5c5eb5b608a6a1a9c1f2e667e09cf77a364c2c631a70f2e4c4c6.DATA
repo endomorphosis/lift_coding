@@ -1,0 +1,243 @@
+"""Validate bounded observational input claims without provider-call authority.
+
+These records describe a worker's rendered packet, not a provider invocation,
+native token usage, current owner revision, behavioral proof or completed task.
+Source/packet replay and independently pinned producer origin remain separate.
+"""
+from __future__ import annotations
+
+import json
+import math
+from pathlib import PurePosixPath
+import re
+
+SCHEMA = "supervisor-model-input-observation@1"
+CHECKED_SCHEMA = "supervisor-model-input-observation@2"
+SUPPORTED_SCHEMAS = frozenset({SCHEMA, CHECKED_SCHEMA})
+MAX_RECEIPT_BYTES = 65536
+OBSERVATION_FIELDS = frozenset((
+    "schema", "observation_id", "status", "error_type", "requested_provider", "requested_model",
+    "reasoning_effort", "purpose", "prompt_sha256", "prompt_bytes", "native_prompt_sha256",
+    "native_prompt_bytes", "model_prompt_sha256", "model_prompt_bytes", "workspace_advisory_sha256",
+    "workspace_advisory_bytes", "workspace", "router_prompt_sha256", "router_prompt_bytes",
+    "semantic_transport", "intent_requirements_transport", "code_retrieval_codec",
+    "code_retrieval_wire_delivery", "code_retrieval_projection", "semantic_context_verification",
+    "semantic_translation", "doctor_residual_context", "public_instruction", "reviewed_source_nomination_context",
+    "timeout_seconds", "requested_output_tokens", "provider_attempted", "router_calls", "usage",
+    "native_rollout_usage", "execution_authority", "proof_authority", "completion_authority",
+    "external_container_boundary", "final_custody_guard_verified", "wire_delivery_post_observation_verified",
+    "wire_delivery_cleanup_status", "seconds",
+))
+CHECKED_OBSERVATION_FIELDS = OBSERVATION_FIELDS | {"checked_context"}
+
+SEMANTIC_BINDINGS = ("task_id", "scope_cid", "semantic_root_cid", "semantic_sha256",
+    "native_prompt_sha256", "native_prompt_bytes")
+
+
+class ModelInputObservationError(ValueError):
+    pass
+
+
+def _require(condition, message):
+    if not condition:
+        raise ModelInputObservationError(message)
+
+
+def _digest(value):
+    _require(type(value) is str and re.fullmatch(r"[0-9a-f]{64}", value) is not None,
+        "exact SHA-256 input identity required")
+
+
+def _text(value, maximum=4096):
+    _require(type(value) is str and 0 < len(value.encode("utf-8")) <= maximum
+        and all(ord(char) >= 32 and ord(char) != 127 for char in value), "bounded printable identity required")
+
+
+def _integer(value, minimum, maximum):
+    _require(type(value) is int and minimum <= value <= maximum, "bounded non-Boolean integer required")
+
+
+def _bounded_json(value):
+    pending, count, strings = [(value, 0)], 0, 0
+    while pending:
+        item, depth = pending.pop()
+        count += 1
+        _require(count <= 8192 and depth <= 24, "observation tree exceeds bound")
+        if type(item) is dict:
+            _require(all(type(key) is str for key in item), "JSON string keys required")
+            _require(len(item) * 2 + len(pending) <= 8192 - count, "observation tree exceeds bound")
+            pending.extend((child, depth + 1) for pair in item.items() for child in pair)
+        elif type(item) is list:
+            _require(len(item) + len(pending) <= 8192 - count, "observation tree exceeds bound")
+            pending.extend((child, depth + 1) for child in item)
+        elif type(item) is str:
+            _require(len(item) <= MAX_RECEIPT_BYTES, "observation string exceeds bound")
+            try:
+                strings += len(item.encode("utf-8"))
+            except UnicodeError as exc:
+                raise ModelInputObservationError("UTF-8 observation strings required") from exc
+            _require(strings <= MAX_RECEIPT_BYTES, "aggregate observation strings exceed bound")
+        else:
+            _require(item is None or type(item) in (str, bool, int)
+                or (type(item) is float and math.isfinite(item)), "finite plain JSON values required")
+    try:
+        raw = json.dumps(value, sort_keys=True, separators=(",", ":"),
+            ensure_ascii=False, allow_nan=False).encode("utf-8")
+    except (ValueError, TypeError, UnicodeError) as exc:
+        raise ModelInputObservationError("finite UTF-8 observation JSON required") from exc
+    _require(len(raw) <= MAX_RECEIPT_BYTES, "complete observation exceeds byte bound")
+    return raw
+
+
+def validate_model_input_observation(value):
+    """Return an independent canonical copy; never inspect files or provider state."""
+    raw = _bounded_json(value)
+    _require(type(value) is dict and value.get("schema") in SUPPORTED_SCHEMAS
+        and set(value) == (CHECKED_OBSERVATION_FIELDS if value["schema"] == CHECKED_SCHEMA else OBSERVATION_FIELDS),
+        "closed distinct model-input observation required")
+    _require(type(value["observation_id"]) is str
+        and re.fullmatch(r"[0-9a-f]{32}", value["observation_id"]) is not None, "observation identity required")
+    _require(type(value["status"]) is str and value["status"] in {"observed", "refused"} and value["purpose"] == "coding",
+        "explicit coding observation status required")
+    for field in ("provider_attempted", "execution_authority", "proof_authority", "completion_authority"):
+        _require(value[field] is False, "observation cannot grant provider or execution authority")
+    _integer(value["router_calls"], 0, 0)
+    _require(value["usage"] is None and value["native_rollout_usage"] is None, "observation cannot carry provider usage")
+    _require(value["requested_provider"] == "codex_cli", "explicit unattempted route required")
+    _text(value["requested_model"], 256)
+    _require(type(value["reasoning_effort"]) is str and value["reasoning_effort"] in {"low", "medium", "high", "xhigh", "max"}, "unknown reasoning control")
+    _integer(value["timeout_seconds"], 1, 600)
+    _integer(value["requested_output_tokens"], 1, 16384)
+    _require(type(value["seconds"]) in (int, float) and 0 <= value["seconds"] <= 86400
+        and math.isfinite(value["seconds"]), "finite observed interval required")
+    success = value["status"] == "observed"
+    _require(value["final_custody_guard_verified"] is success, "status differs from final custody assertion")
+    if success:
+        _require(value["error_type"] is None, "successful observation cannot carry failure")
+    else:
+        _require(type(value["error_type"]) is str
+            and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]{0,127}", value["error_type"]) is not None,
+            "refusal requires a bounded exception class")
+    for prefix, maximum in (("prompt", 256000), ("native_prompt", 256000),
+            ("model_prompt", 256000), ("router_prompt", 256000), ("workspace_advisory", 8192)):
+        _digest(value[prefix + "_sha256"])
+        _integer(value[prefix + "_bytes"], 1, maximum)
+    _require(value["prompt_sha256"] == value["native_prompt_sha256"]
+        and value["prompt_bytes"] == value["native_prompt_bytes"]
+        and value["router_prompt_bytes"] + value["workspace_advisory_bytes"] == value["model_prompt_bytes"],
+        "complete rendered input identities differ")
+    _text(value["workspace"])
+    workspace = PurePosixPath(value["workspace"])
+    _require(workspace.is_absolute() and ".." not in workspace.parts and str(workspace) == value["workspace"],
+        "canonical absolute allocated workspace required")
+    boundary = value["external_container_boundary"]
+    boundary_fields = {"schema", "container_id", "image_id", "namespaces", "owner_uid", "worker_uid",
+        "purpose", "manifest_sha256", "completion_authority"}
+    _require(type(boundary) is dict and set(boundary) == boundary_fields
+        and boundary["schema"] == "supervisor-container-worker-boundary@1"
+        and boundary["purpose"] == "coding" and boundary["completion_authority"] is False,
+        "closed declared external coding boundary required")
+    _integer(boundary["owner_uid"], 1, 2**31 - 1)
+    _integer(boundary["worker_uid"], 1, 2**31 - 1)
+    _require(boundary["owner_uid"] != boundary["worker_uid"], "separate worker identity required")
+    for field in ("container_id", "image_id"):
+        _text(boundary[field], 512)
+    _digest(boundary["manifest_sha256"])
+    _require(type(boundary["namespaces"]) is dict and bool(boundary["namespaces"]), "declared namespace witnesses required")
+    for key, item in boundary["namespaces"].items():
+        _text(key, 32)
+        _text(item, 256)
+    _require(type(value["semantic_transport"]) is str and value["semantic_transport"] in {"native", "identifiers"}, "verified semantic coding route required")
+    verification = value["semantic_context_verification"]
+    _require(type(verification) is dict and set(verification) == {"schema", "freshness_checked", *SEMANTIC_BINDINGS}
+        and verification["schema"] == "semantic-router-source-verification@1"
+        and verification["freshness_checked"] is True, "closed semantic verification required")
+    for field in ("task_id", "scope_cid", "semantic_root_cid"):
+        _text(verification[field])
+    for field in ("semantic_sha256", "native_prompt_sha256"):
+        _digest(verification[field])
+    _integer(verification["native_prompt_bytes"], 1, 256000)
+    _require(verification["native_prompt_sha256"] == value["native_prompt_sha256"]
+        and verification["native_prompt_bytes"] == value["native_prompt_bytes"], "semantic native identity differs")
+    translation = value["semantic_translation"]
+    _require((translation is not None) == (value["semantic_transport"] == "identifiers"), "translation control differs")
+    if translation is not None:
+        _require(type(translation) is dict and translation.get("schema") == "supervisor-semantic-router-encoding@1"
+            and translation.get("freshness_checked") is True
+            and all(translation.get(key) == verification[key] for key in SEMANTIC_BINDINGS), "translation bindings differ")
+    _require(type(value["intent_requirements_transport"]) is str and value["intent_requirements_transport"] in {"expanded", "compact"}
+        and type(value["code_retrieval_codec"]) is str and value["code_retrieval_codec"] in {"expanded", "compact"}
+        and type(value["code_retrieval_wire_delivery"]) is str and value["code_retrieval_wire_delivery"] in {"inline", "materialized"}, "unknown packet controls")
+    projection = value["code_retrieval_projection"]
+    _require((projection is not None) == (value["code_retrieval_codec"] == "compact"), "retrieval projection control differs")
+    if projection is not None:
+        _require(type(projection) is dict and value["semantic_transport"] == "native", "compact native projection required")
+        _require(projection.get("schema") in ("supervisor-code-retrieval-prompt-projection@1",
+            "supervisor-code-retrieval-prompt-projection@2", "supervisor-code-retrieval-prompt-projection@3")
+            and projection.get("native_prompt_sha256") == value["native_prompt_sha256"]
+            and type(projection.get("native_prompt_bytes")) is int
+            and projection["native_prompt_bytes"] == value["native_prompt_bytes"]
+            and projection.get("exact_native_roundtrip_verified") is True, "native retrieval projection binding differs")
+        for field in ("source_authentication_claimed", "native_authentication_claimed", "proof_authority",
+                "execution_authority", "completion_authority", "publication_authority"):
+            _require(projection.get(field) is False, "retrieval projection cannot grant authority")
+    instruction = value["public_instruction"]
+    _require(type(instruction) is dict and instruction.get("schema") in {
+        "supervisor-public-instruction-inclusion@1", "supervisor-public-instruction-inclusion@2", "supervisor-public-instruction-inclusion@6"},
+        "verified public instruction required")
+    for key in ("manifest_signature_verified", "verbatim_utf8", "source_freshness_verified"):
+        _require(instruction.get(key) is True, "public instruction verification differs")
+    for key in ("semantic_minification_applied", "historical_replay", "completion_authority", "scope_expansion_authority"):
+        _require(instruction.get(key) is False, "public instruction cannot grant authority")
+    for key in ("artifact_sha256", "source_sha256", "block_sha256"):
+        _digest(instruction.get(key))
+    if projection is not None:
+        _require(projection.get("source_sha256") == instruction["source_sha256"], "retrieval literal source binding differs")
+    _text(instruction.get("task_cid"))
+    residual = value["doctor_residual_context"]
+    _require(residual is None or (type(residual) is dict and residual.get("schema") == "doctor-residual-router-context@1"
+        and residual.get("candidate_only") is True), "invalid residual observation")
+    nomination = value["reviewed_source_nomination_context"]
+    if nomination is not None:
+        from .reviewed_source_nomination_audit import validate_reviewed_source_nomination_receipt
+        validate_reviewed_source_nomination_receipt(nomination, native_sha256=value["native_prompt_sha256"],
+            native_bytes=value["native_prompt_bytes"], instruction=instruction, semantic_verification=verification)
+    verified = value["wire_delivery_post_observation_verified"]
+    cleanup = value["wire_delivery_cleanup_status"]
+    _require(verified is None or type(verified) is bool, "exact optional wire verification required")
+    _require(cleanup is None or (type(cleanup) is str and cleanup in {"removed", "failed"}), "known optional wire cleanup required")
+    _require((verified is None) == (cleanup is None), "wire lifecycle observations must be paired")
+    actual_handle = (type(projection) is dict
+        and projection.get("schema") == "supervisor-code-retrieval-prompt-projection@3"
+        and projection.get("selected_transport") == "compact")
+    if success and actual_handle:
+        _require(value["code_retrieval_wire_delivery"] == "materialized"
+            and verified is True and cleanup == "removed",
+            "observed materialized input requires complete verified wire lifecycle")
+    if verified is not None:
+        _require(value["code_retrieval_wire_delivery"] == "materialized" and projection is not None, "wire lifecycle lacks selected route")
+        if success:
+            _require(verified is True and cleanup == "removed", "successful wire observation must close custody")
+    if value["schema"] == CHECKED_SCHEMA:
+        from .checked_audit_context import validate_checked_audit_context_inclusion
+        checked = validate_checked_audit_context_inclusion(value["checked_context"])
+        _require(value["semantic_transport"] == "native"
+            and value["intent_requirements_transport"] == "expanded"
+            and value["code_retrieval_codec"] == "expanded"
+            and value["code_retrieval_wire_delivery"] == "inline"
+            and value["doctor_residual_context"] is None
+            and value["reviewed_source_nomination_context"] is None
+            and checked["native_prompt_sha256"] == value["native_prompt_sha256"]
+            and checked["native_prompt_bytes"] == value["native_prompt_bytes"]
+            and checked["task_id"] == value["public_instruction"].get("task_id")
+            and checked["task_cid"] == value["public_instruction"].get("task_cid")
+            and checked["native_semantic"] == value["semantic_context_verification"]
+            and checked["instruction_source_path"] == value["public_instruction"].get("source_path")
+            and checked["instruction_source_bytes"] == value["public_instruction"].get("source_bytes")
+            and checked["instruction_context_cid"] == value["public_instruction"].get("context_cid")
+            and checked["instruction_artifact_sha256"] == value["public_instruction"].get("artifact_sha256")
+            and checked["instruction_source_sha256"] == value["public_instruction"].get("source_sha256")
+            and checked["worker_binding"]["workspace"] == value["workspace"]
+            and checked["worker_binding"]["boundary"] == value["external_container_boundary"],
+            "checked audit inclusion differs from native observed route")
+    return json.loads(raw)

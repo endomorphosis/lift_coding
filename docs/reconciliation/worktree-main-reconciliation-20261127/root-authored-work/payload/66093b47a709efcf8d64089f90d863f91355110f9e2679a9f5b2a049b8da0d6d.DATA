@@ -1,0 +1,92 @@
+"""Qualify candidate temporal ordering using Git commit graphs, never patch data."""
+from concurrent.futures import ThreadPoolExecutor
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import time
+
+ROOT=Path(__file__).resolve().parent
+
+
+def dump(path, value):
+    path.write_text(json.dumps(value,indent=2,sort_keys=True)+'\n')
+
+
+def main():
+    output=ROOT/'ancestry_v1'
+    output.mkdir()
+    metadata=ROOT/'verified_metadata_v1/public_metadata.json'
+    rows=json.loads(metadata.read_text())
+    groups={}
+    for row in rows:
+        groups.setdefault(row['repo'],[]).append(row)
+    cases=[{'repo':repo,'tasks':sorted(members,key=lambda r:(r['created_at'],r['instance_id']))[-2:]}
+           for repo,members in sorted(groups.items()) if len(members)>=2]
+    freeze={'schema':'ns-public-temporal-candidate-custody/v1',
+            'rule':'Two latest PR creation dates in every dataset repository with at least two records; tie by instance_id. No outcome or issue-content selection.',
+            'cases':cases,'depth_schedule':[512,2048,8192], 'parallel_fetches':3,
+            'per_command_deadline_seconds':120,'fetch_object_filter':'blob:none',
+            'metadata_sha256':hashlib.sha256(metadata.read_bytes()).hexdigest(),
+            'script_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            'frozen_at_ns':time.time_ns()}
+    dump(output/'freeze.json',freeze)
+    shutil.copyfile(__file__,output/'check_ancestry.py')
+    env=dict(os.environ, GIT_TERMINAL_PROMPT='0', GIT_CONFIG_NOSYSTEM='1')
+    def one(case):
+        folder=output/case['repo'].replace('/','__')
+        folder.mkdir()
+        repository=folder/'graph.git'
+        operations=[]
+        def command(args):
+            started=time.perf_counter()
+            try:
+                result=subprocess.run(args,stdout=subprocess.PIPE,stderr=subprocess.PIPE,env=env,timeout=120,text=True)
+                row={'argv':args,'returncode':result.returncode,'stdout':result.stdout,'stderr':result.stderr,'elapsed_seconds':time.perf_counter()-started}
+            except subprocess.TimeoutExpired:
+                row={'argv':args,'returncode':None,'timeout':True,'elapsed_seconds':time.perf_counter()-started}
+            operations.append(row)
+            dump(folder/'commands.json',operations)
+            return row
+        command(['git','init','--bare',str(repository)])
+        command(['git','-C',str(repository),'remote','add','origin','https://github.com/'+case['repo']+'.git'])
+        # Mark the filtered remote explicitly so accidental source reads must
+        # still request content. This script invokes only commit-graph commands.
+        command(['git','-C',str(repository),'config','remote.origin.promisor','true'])
+        command(['git','-C',str(repository),'config','remote.origin.partialclonefilter','blob:none'])
+        earlier,later=[r['base_commit'] for r in case['tasks']]
+        state='unresolved'
+        for depth in freeze['depth_schedule']:
+            fetched=command(['git','-C',str(repository),'fetch','--no-tags','--filter=blob:none','--depth='+str(depth),'origin',earlier,later])
+            if fetched['returncode']!=0:
+                state='fetch_failed';break
+            relation=command(['git','-C',str(repository),'merge-base','--is-ancestor',earlier,later])
+            if relation['returncode']==0:
+                state='earlier_base_is_ancestor';break
+            reverse=command(['git','-C',str(repository),'merge-base','--is-ancestor',later,earlier])
+            if reverse['returncode']==0:
+                state='later_base_is_ancestor_or_equal';break
+            if relation['returncode']!=1 or reverse['returncode']!=1:
+                state='graph_check_error';break
+            if not (repository/'shallow').exists():
+                state='non_ancestral_bases';break
+        row={'repo':case['repo'],'tasks':[r['instance_id'] for r in case['tasks']],
+             'base_commits':[earlier,later],'status':state,
+             'positive_ancestry_proved':state=='earlier_base_is_ancestor',
+             'qualified_trajectory':False,
+             'missing':'Source and environment/scorer qualification; explicit handling of intervening upstream changes and retained earlier failures.',
+             'model_calls':0,'reference_or_test_columns_read':False}
+        dump(folder/'result.json',row)
+        return row
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        results=list(pool.map(one,cases))
+    summary={'schema':'ns-public-temporal-candidate-ancestry-results/v1',
+             'candidate_pairs':len(results),'positive_ancestry_pairs':sum(r['positive_ancestry_proved'] for r in results),
+             'qualified_trajectories':0,'model_calls':0,'results':results}
+    dump(output/'summary.json',summary)
+    print(json.dumps({k:v for k,v in summary.items() if k!='results'}))
+
+
+if __name__=='__main__':main()

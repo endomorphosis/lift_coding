@@ -1,0 +1,91 @@
+import GeneratedPythonAstScalarSource
+import PyAstNumericPreservation
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED SCALAR-BODY CANDIDATE.
+
+The imported GeneratedPythonAstScalarSource contains the actual independently
+transported RAW scalar bodies and their scoped binders. Its three binding
+queries are genuinely qualified; exact source/receipt/owned dependency pins
+are recorded in the candidate interface. These three new scalar queries still
+require independent source review and root-owned native qualification.
+No scope identifiers are guessed here.
+
+The expected target trees contain ordinary scalar syntax only. Their equality
+to the actual structural lowerer outputs is proved, never an input premise.
+The observation theorems use only ordinary scoped lookup/value transport.
+Parsing, host binding provenance, global purity, Python effects/Float,
+containers, normalization and whole source/task claims remain open.
+-/
+
+namespace RankerOriginalPythonScalarBodies
+
+noncomputable section
+
+open RankerSupportedPythonAstReal
+open RankerObjectivePrefixIR (NamedEnvironment)
+open RankerObjectiveContainerLanguage (SourceExpr evalSourceExpr)
+open GeneratedPythonAstScalarSource
+
+def lossTarget : SourceExpr .scalar :=
+  .scalarBinary .add
+    (.scalarBinary .max (.leaf (.scalarLiteral 0))
+      (.scalarUnary .neg (.leaf (.var lossBinder.spelling))))
+    (.scalarUnary .log1p
+      (.scalarUnary .exp
+        (.scalarUnary .neg (.scalarUnary .abs (.leaf (.var lossBinder.spelling))))))
+
+def factorTarget : SourceExpr .scalar :=
+  .ifNonneg (.leaf (.var factorBinder.spelling))
+    (.scalarBinary .div
+      (.scalarUnary .exp (.scalarUnary .neg (.leaf (.var factorBinder.spelling))))
+      (.scalarBinary .add (.leaf (.scalarLiteral 1))
+        (.scalarUnary .exp (.scalarUnary .neg (.leaf (.var factorBinder.spelling))))))
+    (.scalarBinary .div (.leaf (.scalarLiteral 1))
+      (.scalarBinary .add (.leaf (.scalarLiteral 1))
+        (.scalarUnary .exp (.leaf (.var factorBinder.spelling)))))
+
+/-- These are actual compiler equations over the imported independent raw
+scalar literals. The two scopes are singleton actual lexical identities. -/
+theorem actual_scalar_bodies_lower :
+    lowerSupportedAst lossScope actualLossBody = .ok lossTarget ∧
+    lowerSupportedAst factorScope actualFactorBody = .ok factorTarget := by
+  constructor
+  · simp [actualLossBody, lossScope, lossBinder, lossTarget,
+      lowerSupportedAst, scalarScopeValid, scopeSpellings, reservedGlobal,
+      lowerSupportedAstAux, lowerSupportedArguments, lowerBinaryOpcode,
+      lowerPrimitive, lowerOne, lowerTwo, lowerThree, resolveFixedCallee]
+  · simp [actualFactorBody, factorScope, factorBinder, factorTarget,
+      lowerSupportedAst, scalarScopeValid, scopeSpellings, reservedGlobal,
+      lowerSupportedAstAux, lowerSupportedArguments, lowerBinaryOpcode,
+      lowerPrimitive, lowerOne, lowerTwo, lowerThree, resolveFixedCallee]
+
+/-- This preserves successful values and selected errors together; no
+successful evaluation or desired formula is a premise. -/
+theorem actual_loss_body_observation
+    (sourceEnvironment : PyEnvironment) (targetEnvironment : NamedEnvironment)
+    (related : StructuralEnvRel lossScope sourceEnvironment targetEnvironment) :
+    observeNumber (evalSupportedAstReal sourceEnvironment actualLossBody) =
+      evalSourceExpr targetEnvironment lossTarget := by
+  exact lower_supported_ast_observation_preserved lossScope
+    sourceEnvironment targetEnvironment related actualLossBody lossTarget
+    actual_scalar_bodies_lower.1
+
+/-- Both conditional branches were structurally accepted, while the own
+interpreter and target evaluate only the selected branch. -/
+theorem actual_factor_body_observation
+    (sourceEnvironment : PyEnvironment) (targetEnvironment : NamedEnvironment)
+    (related : StructuralEnvRel factorScope sourceEnvironment targetEnvironment) :
+    observeNumber (evalSupportedAstReal sourceEnvironment actualFactorBody) =
+      evalSourceExpr targetEnvironment factorTarget := by
+  exact lower_supported_ast_observation_preserved factorScope
+    sourceEnvironment targetEnvironment related actualFactorBody factorTarget
+    actual_scalar_bodies_lower.2
+
+#print axioms actual_scalar_bodies_lower
+#print axioms actual_loss_body_observation
+#print axioms actual_factor_body_observation
+
+end
+
+end RankerOriginalPythonScalarBodies

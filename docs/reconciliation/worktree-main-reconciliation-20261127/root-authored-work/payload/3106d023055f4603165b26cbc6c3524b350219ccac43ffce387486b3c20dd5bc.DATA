@@ -1,0 +1,180 @@
+"""Native repository seal admission with exact source and ordinary grader replay.
+
+Unsigned local development receipts; native integrity mode is not a theorem proof
+or adversarial oracle-integrity claim. All required leaves are rebuilt/replaced.
+"""
+import base64,hashlib,json,os,sqlite3,subprocess,sys,time
+from pathlib import Path
+HERE=Path(__file__).resolve().parent
+sys.path.insert(0,str(HERE))
+import repository_runtime_v1 as R
+import sealing_service_v1 as S
+UNITS={'accepted_source':'source_integrity','semantic_preparation':'static_analysis','effect_inventory':'release_invariant','behavior_native':'integration_test'}
+IDS=tuple(sorted(UNITS));REPLAYS=[]
+encoded=S.encoded;digest=S.digest;fhash=S.fhash;save_new=S.save_new
+
+def profile_for(request):
+    p=Path(request['profile_path']);profile=json.loads(p.read_text())
+    if fhash(p)!=request['profile_sha256'] or not profile['native_repository_sealing_enrolled']: raise ValueError('profile binding')
+    if profile['sealing_required_units']!=list(IDS): raise ValueError('external required unit inventory')
+    for name,h in profile['evaluation_files'].items():
+        if fhash(name)!=h: raise ValueError('evaluation source changed')
+    for name,row in S.loaded_sources().items():
+        if profile['sealing_native_files'].get(name)!=row['sha256']: raise ValueError('unfrozen native seal import')
+    return profile
+
+def source_payload(root):
+    inv=R.inventory(root)
+    if any(r['kind']!='file' for r in inv['entries']): raise ValueError('regular public source profile only')
+    return {'inventory':inv,'files':{r['path']:base64.b64encode((Path(root)/r['path']).read_bytes()).decode() for r in inv['entries']}}
+
+def materialize_payload(payload,directory):
+    if directory.exists():
+        if source_payload(directory)!=payload: raise ValueError('restored native source changed')
+        return
+    directory.mkdir(parents=True)
+    for row in payload['inventory']['entries']:
+        name=row['path'];p=directory/name
+        if Path(name).is_absolute() or '..' in Path(name).parts or '.git' in Path(name).parts: raise ValueError('invalid stored public source path')
+        body=base64.b64decode(payload['files'][name],validate=True)
+        if R.sha(body)!=row['sha256']: raise ValueError('stored source content changed')
+        p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(body);p.chmod(row['mode'])
+    if R.inventory(directory)!=payload['inventory']: raise ValueError('restored full source differs')
+
+def effects(profile,event_id):
+    db=sqlite3.connect('file:'+str(Path(profile['output_root'])/'ledger.sqlite3')+'?mode=ro',uri=True)
+    rows=db.execute('SELECT effect_id,event_id,stage,state,result_path,result_hash FROM effects ORDER BY event_id,stage').fetchall();db.close();result={}
+    for effect_id,actual_event,stage,status,path,h in rows:
+        if actual_event!=event_id and not actual_event.startswith(event_id+'-residual-'): continue
+        if stage.startswith('seal_'): continue
+        if status!='terminal' or fhash(path)!=h: raise ValueError('incomplete/changed controller effect')
+        request=json.loads((Path(path).parent/'request.json').read_text());completion=json.loads(Path(path).read_text())
+        if completion['effect_id']!=effect_id or completion['event_id']!=actual_event or completion['stage']!=stage: raise ValueError('effect binding')
+        result[actual_event+':'+stage]={'event_id':actual_event,'stage':stage,'effect_id':effect_id,'result_sha256':h,'request':request,'completion':completion}
+    return result
+
+def produce(profile,request):
+    event=next(e for e in profile['events'] if e['event_id']==request['event_id']);task=profile['tasks'][event['instance_id']]
+    inv=effects(profile,event['event_id']);stages={r['stage'] for r in inv.values()}
+    if not {'world_propose','world_record'}<=stages: raise ValueError('world-memory evidence missing')
+    source=source_payload(request['accepted_tree_path']);patch=Path(request['accepted_patch_path']).read_bytes()
+    if patch!=R.cumulative_patch(Path(task['source_root']),Path(request['accepted_tree_path'])): raise ValueError('accepted patch does not represent full resulting source')
+    receipt=json.loads(Path(request['scorer_receipt_path']).read_text())
+    if receipt.get('status')!='completed' or not receipt.get('passed') or receipt.get('candidate_source_tree_sha256')!=source['inventory']['tree_sha256'] or receipt['candidate_patch_sha256']!=R.sha(patch): raise ValueError('accepted scorer receipt not source-bound')
+    if receipt['objective_sha256']!=task['objective_sha256'] or receipt['image_id']!=task['image_id'] or receipt['service_profile_sha256']!=profile['scorer_service']['profile_sha256']: raise ValueError('scorer profile/objective differs')
+    matched=[r for r in inv.values() if r['completion']['response']==receipt]
+    if len(matched)!=1: raise ValueError('actual scorer receipt absent/ambiguous in complete event evidence')
+    context=request['context'];run=Path(context['run']);creq=json.loads((run/'request.json').read_text());summary=json.loads((run/'summary.json').read_text())
+    if fhash(run/'request.json')!=context['request_sha256'] or fhash(run/'freeze.json')!=context['freeze_sha256']: raise ValueError('context request/freeze changed')
+    if Path(creq['repository_root']).resolve()!=Path(request['accepted_tree_path']).resolve() or context['source_tree_sha256']!=source['inventory']['tree_sha256']: raise ValueError('accepted context source differs')
+    if R.sha(creq['objective']['text'].encode())!=task['objective_sha256'] or not summary['complete'] or not summary['consumer']['all_checks_passed']: raise ValueError('context objective/native admission differs')
+    if summary['producer']['native_semantic_root_cid']!=context['semantic_root_cid']: raise ValueError('semantic root differs')
+    if not any(r['stage'].endswith('_context_prepare') and r['completion']['response']==summary for r in inv.values()): raise ValueError('actual accepted context preparation absent')
+    parent_event=None
+    if request.get('parent_seal_cid'):
+        predecessor=next(e for e in profile['events'] if e['event_id']==event['parent_event']);parent_event=predecessor['event_id']
+    binding={'repository_id':'ns-requests-development/'+event['trajectory'],'event_id':event['event_id'],'instance_id':event['instance_id'],'parent_event':parent_event,'profile_sha256':request['profile_sha256'],'source_tree_sha256':source['inventory']['tree_sha256'],'objective_sha256':task['objective_sha256'],'base_commit':task['base_commit'],'environment':{'image_id':task['image_id'],'service_profile_sha256':profile['scorer_service']['profile_sha256']}}
+    inputs={k:request[k] for k in ('event_id','profile_sha256','parent_seal_cid','accepted_tree_path','accepted_patch_path','scorer_receipt_path','context')}
+    receipts={'accepted_source':{'binding':binding,'source':source,'patch_base64':base64.b64encode(patch).decode()},'semantic_preparation':{'binding':binding,'context':context,'summary':summary},'effect_inventory':{'binding':binding,'effects':inv},'behavior_native':{'binding':binding,'receipt':receipt,'effect':matched[0]}}
+    return {'binding':binding,'inputs':inputs,'receipts':receipts,'parent_seal_cid':request.get('parent_seal_cid'),'transition_id':'ns-repository:'+event['event_id']}
+
+def state(pack):
+    b=pack['binding'];return S.RepositoryStateView(repository_id=b['repository_id'],revision=b['event_id'],source_root_cid=digest(pack['receipts']['accepted_source']['source']['inventory']),repository_state_cid=digest(b),environment_cid=digest(b['environment']),parent_revision_ids=() if b['parent_event'] is None else (b['parent_event'],))
+def policy(pack): return S.VerificationPolicyView(policy_cid=digest({'profile_sha256':pack['binding']['profile_sha256'],'required_unit_ids':IDS,'admission':'complete-public-repository-effects-native-grader-replay@1','mode':'integrity_only'}))
+def build(pack,parent):
+    units=[]
+    for unit,receipt in sorted(pack['receipts'].items()):
+        args={'unit_id':unit,'proof_object_cid':digest(receipt),'category':UNITS[unit],'freshly_verified':True}
+        units.append(S.RequiredUnitEvidence(**args) if parent is None else S.DeltaUnitEvidence(**args,disposition='replace',parent_proof_object_cid=digest(parent['receipts'][unit]),newly_admitted=True,cache_key_unchanged=False))
+    if parent is None: return S.create_full_checkpoint(state(pack),policy(pack),units=units,expected_unit_ids=IDS),units,None
+    p=S.parent_view(parent);new=state(pack)
+    old={r['path']:r for r in parent['receipts']['accepted_source']['source']['inventory']['entries']};current={r['path']:r for r in pack['receipts']['accepted_source']['source']['inventory']['entries']}
+    changes={name:{'old':old.get(name),'new':current.get(name)} for name in sorted(set(old)|set(current)) if old.get(name)!=current.get(name)}
+    statement=S.DeltaTransitionStatement(schema=S.TRANSITION_SCHEMA,parent_seal_cid=p.seal_cid,branch_id='main',old_source_root_cid=p.source_root_cid,old_repository_state_cid=p.repository_state_cid,old_manifest_root_cid=p.manifest_root_cid,old_forest_root_cid=p.forest_root_cid,old_aggregation_root=p.aggregation_root,new_source_root_cid=new.source_root_cid,new_repository_state_cid=new.repository_state_cid,new_revision=new.revision,parent_revision_ids=(p.revision,),diff=S.DiffCommitmentView(diff_algorithm='ns-public-exact-source-inventory@1',changed_artifact_commitment=digest(changes),complete=True,changed_paths=tuple(changes)),expected_manifest_unit_ids=IDS,expected_surviving_leaf_ids=IDS,forest_rebuilt=True,aggregation_rebuilt=True,logical_epoch=p.logical_epoch+1,transition_id=pack['transition_id'])
+    return S.build_delta_seal(p,new,policy(pack),statement,units=units),units,statement
+
+def replay(profile,pack,operation_id):
+    original=pack['receipts']['behavior_native']['effect']['request'];req={**original,'evaluation_id':'nsseal-'+R.sha(encoded({'operation_id':operation_id,'event':pack['binding']['event_id'],'tree':pack['binding']['source_tree_sha256']}))[:36]}
+    store=Path(profile['output_root'])/'native_repository_sealing'/'replays'/req['evaluation_id'];store.mkdir(parents=True,exist_ok=True)
+    save_new(store/'request.json',req);saved=store/'completion.json'
+    if saved.exists():
+        row=json.loads(saved.read_text())
+    else:
+        intent=store/'dispatch_intent.json'
+        if intent.exists(): raise ValueError('scorer replay has unknown prior effect; no retry')
+        save_new(intent,{'request_sha256':R.sha(encoded(req)),'started_at_ns':time.time_ns()});started=time.perf_counter()
+        p=subprocess.run([profile['scorer_service']['python'],profile['scorer_service']['entrypoint']],input=encoded(req),capture_output=True,timeout=240)
+        (store/'stdout').write_bytes(p.stdout);(store/'stderr').write_bytes(p.stderr)
+        response=json.loads(p.stdout) if p.returncode==0 else None
+        row={'request_sha256':R.sha(encoded(req)),'returncode':p.returncode,'elapsed_seconds':time.perf_counter()-started,'response':response};save_new(saved,row)
+    REPLAYS.append(row)
+    response=row['response']
+    if row['request_sha256']!=R.sha(encoded(req)) or not response or not response.get('passed') or response.get('candidate_source_tree_sha256')!=pack['binding']['source_tree_sha256'] or response.get('candidate_patch_sha256')!=original['candidate_patch_sha256']: raise ValueError('fresh ordinary native grading did not accept exact source')
+
+def check(profile,pack,parent,replay_id=None):
+    if set(pack['receipts'])!=set(IDS): raise ValueError('required unit inventory differs')
+    rebuilt=produce(profile,pack['inputs'])
+    if any(pack[key]!=rebuilt[key] for key in ('binding','inputs','receipts','parent_seal_cid','transition_id')): raise ValueError('stored admission differs from complete current effects/source')
+    if parent is None:
+        if pack['parent_seal_cid'] or pack['binding']['parent_event']: raise ValueError('unexpected accepted parent')
+    elif parent['seal_cid']!=pack['parent_seal_cid'] or parent['binding']['event_id']!=pack['binding']['parent_event']: raise ValueError('parent differs')
+    if replay_id is not None: replay(profile,pack,replay_id)
+    seal,units,statement=build(pack,parent)
+    if 'seal' in pack and (seal.to_canonical()!=pack['seal'] or seal.seal_cid()!=pack['seal_cid']): raise ValueError('native seal rebuild differs')
+    if not seal.sealed: raise ValueError('native seal not sealed')
+    raw=seal.to_canonical();b=pack['binding']
+    proofs=[S.UnitProofView(unit_id=u,proof_object_cid=digest(r),proof_bytes=encoded(r),public_input_cid=digest(b),observed_public_input_cid=digest(b),proof_system_id='integrity',freshly_verified=True) for u,r in pack['receipts'].items()]
+    verdict=S.verify_seal(raw,trusted_keys=['n/a'],verification_policy=policy(pack),parent_seal=None if parent is None else S.parent_view(parent),parent_chain=() if parent is None else (parent['seal_cid'],),unit_proofs=proofs,expected_source_root_cid=state(pack).source_root_cid,expected_repository_state_cid=state(pack).repository_state_cid,expected_manifest_root_cid=raw.get('manifest_root_cid',raw.get('new_manifest_root_cid')),expected_forest_root_cid=raw.get('repository_proof_root',raw.get('new_forest_root_cid')))
+    if not verdict.accepted: raise ValueError('native integrity verifier rejected')
+    return seal,units,statement,verdict.to_canonical()
+
+def load(profile,sealer,directory,cid,replay_id=None,seen=()):
+    if cid in seen or len(seen)>=32: raise ValueError('cyclic/excessive chain')
+    meta=json.loads((directory/'packs'/(cid.split(':')[1]+'.json')).read_text());kind=S.ArtifactKind.CHECKPOINT_SEAL if meta['parent_seal_cid'] is None else S.ArtifactKind.DELTA_SEAL
+    raw=sealer.store.get_verified_bytes(S.ArtifactReference(cid=cid,kind=kind))
+    if digest(raw)!=cid: raise ValueError('stored native seal differs')
+    pack={**meta,'seal':json.loads(raw)['payload'],'seal_cid':cid,'receipts':{}}
+    for u,h in meta['receipt_cids'].items(): pack['receipts'][u]=json.loads(sealer.store.get_verified_bytes(S.ArtifactReference(cid=h,kind=S.ArtifactKind.PROOF_OBJECT)))
+    parent=None if meta['parent_seal_cid'] is None else load(profile,sealer,directory,meta['parent_seal_cid'],seen=seen+(cid,))
+    check(profile,pack,parent,replay_id);return pack
+
+def execute(request):
+    started=time.perf_counter();profile=profile_for(request);event=next(e for e in profile['events'] if e['event_id']==request['event_id']);directory=Path(profile['output_root'])/'native_repository_sealing';repo='ns-requests-development/'+event['trajectory'];operation=request['operation']
+    def crash_at(name,*args):
+        if request.get('crash_at')==name: save_new(directory/'crashes'/(event['event_id']+'.json'),{'boundary':name,'replays':REPLAYS});os._exit(94)
+    sealer=S.IncrementalProofSealer(directory/'store',crash_injector=crash_at if request.get('crash_at') else None);current=sealer.get_current_seal(repo)
+    try:
+        if operation=='read':
+            if current is None or current.seal_cid!=request['expected_seal_cid'] or event['parent_event']!=request['expected_event_id']: raise ValueError('current native parent differs')
+            pack=load(profile,sealer,directory,current.seal_cid,replay_id=event['event_id']+'-read')
+            if pack['binding']['event_id']!=request['expected_event_id']: raise ValueError('stored event differs')
+            restored=directory/'reads'/event['event_id'];materialize_payload(pack['receipts']['accepted_source']['source'],restored)
+            result={'operation':'read','seal_cid':pack['seal_cid'],'pointer':current.to_dict(),'source_tree_sha256':R.inventory(restored)['tree_sha256'],'restored_source_path':str(restored),'recursive_native_chain_verified':True}
+        elif operation in ('publish','recover'):
+            cid=request.get('parent_seal_cid');parent=None if cid is None else load(profile,sealer,directory,cid)
+            expected=None if parent is None else S.CurrentSealPointer(repository_id=repo,branch_id='main',seal_cid=cid,seal_kind=S.ArtifactKind.CHECKPOINT_SEAL if parent['parent_seal_cid'] is None else S.ArtifactKind.DELTA_SEAL,generation=parent['seal'].get('logical_epoch',0),parent_seal_cid=parent['parent_seal_cid'] or '')
+            if operation=='publish':
+                pack=produce(profile,request);seal,units,statement,verdict=check(profile,pack,parent,replay_id=event['event_id']+'-publish');pack.update(seal=seal.to_canonical(),seal_cid=seal.seal_cid())
+                refs=S.persist(sealer,pack);save_new(directory/'packs'/(pack['seal_cid'].split(':')[1]+'.json'),{k:pack[k] for k in ('binding','inputs','parent_seal_cid','transition_id')}|{'receipt_cids':{u:digest(r) for u,r in pack['receipts'].items()}})
+                args={'units':units,'transition_id':pack['transition_id'],'expected_current':expected}
+                pub=sealer.publish_full_checkpoint(state(pack),policy(pack),expected_unit_ids=IDS,**args) if parent is None else sealer.publish_delta_seal(S.parent_view(parent),state(pack),policy(pack),statement,**args)
+                result={'operation':'publish','published':pub.published,'publication':pub.to_canonical(),'seal_cid':pack['seal_cid'],'admission':verdict,'persisted_artifacts':refs}
+            else:
+                pending=sealer.wal.get_transition('ns-repository:'+event['event_id'])
+                if pending is None or pending.state is not S.SealTransitionState.IN_PROGRESS or pending.phase is not S.SealTransitionPhase.SEAL_PERSISTENCE: raise ValueError('not qualified pre-CAS pending boundary')
+                if current!=expected or pending.generation!=(0 if current is None else current.generation+1): raise ValueError('pending/current parent mismatch')
+                pack=load(profile,sealer,directory,pending.new_seal_cid,replay_id=event['event_id']+'-recover')
+                if pack['binding']['event_id']!=event['event_id'] or pack['parent_seal_cid']!=cid: raise ValueError('pending source/event differs')
+                pointer=S.CurrentSealPointer(repository_id=repo,branch_id='main',seal_cid=pending.new_seal_cid,seal_kind=pending.new_seal_kind,generation=pending.generation,parent_seal_cid='' if current is None else current.seal_cid)
+                cas=sealer.pointers.compare_and_swap_current_seal_result(current,pointer)
+                if not cas.swapped: raise ValueError('recovery CAS lost')
+                args={'new_seal_cid':pending.new_seal_cid,'new_seal_kind':pending.new_seal_kind,'generation':pending.generation}
+                S.record_phase(sealer.wal,pending.transition_id,S.SealTransitionPhase.CURRENT_ROOT_CAS,**args);committed=S.commit_transition(sealer.wal,pending.transition_id,phase=S.SealTransitionPhase.CLEANUP,**args)
+                result={'operation':'recover','published':True,'seal_cid':pending.new_seal_cid,'cas_swapped':cas.swapped,'committed':committed.to_dict()}
+            pointer=sealer.get_current_seal(repo);result['pointer']=None if pointer is None else pointer.to_dict()
+        else: raise ValueError('unsupported operation')
+        result.update(schema='ns-native-repository-sealing-development@1',imports=S.loaded_sources(),independent_replays=REPLAYS,provider_calls=0,proof_mode='integrity_only',signed_receipts=False,pid=os.getpid(),elapsed_seconds=time.perf_counter()-started)
+        return result
+    finally: sealer.close()
+
+if __name__=='__main__': print(json.dumps(execute(json.load(sys.stdin)),sort_keys=True))

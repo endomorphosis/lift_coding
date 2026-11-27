@@ -1,0 +1,648 @@
+"""Synthetic observer diagnostics at the driver and signed launch boundaries.
+
+No native owner, credential, target code, real log, provider or subprocess is
+opened. Protected sidecar fixtures are authored under fresh test namespaces.
+"""
+from copy import deepcopy
+import builtins
+import hashlib
+import json
+from pathlib import Path
+import shlex
+from types import SimpleNamespace
+
+import pytest
+
+from benchmarks.agent_supervisor.container_coding import terminal_container_supervisor as driver
+from benchmarks.agent_supervisor.container_coding.test_terminal_nomination_entrypoint import (
+    fresh_public_namespaces, review_case,
+)
+from benchmarks.agent_supervisor.container_coding.test_terminal_source_nomination_budget import run_case, invoke
+from ipfs_accelerate_py.agent_supervisor.entrypoints import admitted_benchmark_runtime as admitted
+
+
+def observer_command(**overrides):
+    flags = {
+        '--semantic-repository': '/app',
+        '--public-instruction-artifact': '.runtime/public/instruction.json',
+        '--public-instruction-sha256': 'a' * 64,
+        '--public-instruction-task-cid': 'cid:authored-task',
+    }
+    flags.update(overrides)
+    parts = ['/opt/ipfs-supervisor/bin/router-worker', '--observe-model-input-only']
+    for name, value in flags.items():
+        if value is not None:
+            parts += [name, value]
+    return shlex.join(parts)
+
+
+def test_ordinary_spawn_strips_ambient_scope_without_import_or_file_read(monkeypatch):
+    environment = {'PATH': '/synthetic/bin', admitted.NATIVE_DISPATCH_DIAGNOSTICS_ENV: '1',
+                   'SYNTHETIC_UNRELATED': 'retained'}
+    original_import = builtins.__import__
+    def imported(name, *args, **kwargs):
+        if 'native_dispatch_diagnostics' in name:
+            pytest.fail('ordinary launch imported diagnostic helper')
+        return original_import(name, *args, **kwargs)
+    monkeypatch.setattr(builtins, '__import__', imported)
+    monkeypatch.setattr(Path, 'read_bytes', lambda *_: pytest.fail('ordinary launch read a file'))
+    monkeypatch.setattr(builtins, 'open', lambda *_a, **_k: pytest.fail('ordinary launch opened a file'))
+    result = admitted._diagnostic_spawn_environment(environment, None)
+    assert result == {'PATH': '/synthetic/bin', 'SYNTHETIC_UNRELATED': 'retained'}
+    assert environment[admitted.NATIVE_DISPATCH_DIAGNOSTICS_ENV] == '1'
+
+
+def test_spawn_scope_replaces_ambient_payload_with_exact_canonical_signed_binding():
+    scope = {'schema': 'native-dispatch-diagnostic-scope@1', 'run_id': 'admitted-' + '1' * 32,
+        'task_cid': 'cid:authored-task', 'command_sha256': 'a' * 64,
+        'producer_source_sha256': 'b' * 64}
+    original = deepcopy(scope)
+    result = admitted._diagnostic_spawn_environment(
+        {admitted.NATIVE_DISPATCH_DIAGNOSTICS_ENV: '{"task_cid":"foreign"}'}, scope)
+    expected = json.dumps(scope, sort_keys=True, separators=(',', ':'))
+    assert result == {admitted.NATIVE_DISPATCH_DIAGNOSTICS_ENV: expected}
+    assert json.loads(result[admitted.NATIVE_DISPATCH_DIAGNOSTICS_ENV]) == original
+    assert scope == original
+
+
+@pytest.mark.parametrize('flag', [None, 0, 1, 'true', [], {}, 1.0])
+def test_diagnostic_enable_requires_exact_bool_before_admission_or_state_creation(tmp_path, monkeypatch, flag):
+    monkeypatch.setattr(admitted, 'verify_local_benchmark_admission',
+        lambda *_a, **_k: pytest.fail('read admission for invalid diagnostic control'))
+    with pytest.raises(ValueError, match='exact Boolean'):
+        admitted.AdmittedBenchmarkRuntime.create(tmp_path / 'launch', admission=None, server=None,
+            source=None, native_dispatch_diagnostics=flag)
+    assert not (tmp_path / 'launch').exists()
+
+
+@pytest.mark.parametrize('invalid', ['not_implementing', 'implement_alias', 'no_bundle', 'no_candidate',
+    'different_launcher', 'missing_observer', 'double_observer', 'missing_binding', 'double_binding',
+    'flag_as_binding'])
+def test_diagnostic_route_guard_rejects_nonobserver_or_ambiguous_commands(invalid):
+    command = observer_command()
+    kwargs = {'implement': True, 'context_bundle': {}, 'candidate_runner': object()}
+    if invalid == 'not_implementing': kwargs['implement'] = False
+    elif invalid == 'implement_alias': kwargs['implement'] = 1
+    elif invalid == 'no_bundle': kwargs['context_bundle'] = None
+    elif invalid == 'no_candidate': kwargs['candidate_runner'] = None
+    elif invalid == 'different_launcher': command = command.replace('/opt/ipfs-supervisor/bin/router-worker', '/tmp/worker')
+    elif invalid == 'missing_observer': command = command.replace(' --observe-model-input-only', '')
+    elif invalid == 'double_observer': command += ' --observe-model-input-only'
+    elif invalid == 'missing_binding': command = observer_command(**{'--public-instruction-task-cid': None})
+    elif invalid == 'double_binding': command += ' --public-instruction-task-cid cid:foreign'
+    elif invalid == 'flag_as_binding': command = observer_command(**{'--public-instruction-task-cid': '--execute'})
+    with pytest.raises(ValueError):
+        admitted._require_observer_diagnostic_command(command, **kwargs)
+
+
+def test_diagnostic_route_guard_accepts_explicit_observer_without_dispatching():
+    binding = admitted._require_observer_diagnostic_command(observer_command(), implement=True,
+        context_bundle={}, candidate_runner=object())
+    assert binding == {'--semantic-repository': '/app',
+        '--public-instruction-artifact': '.runtime/public/instruction.json',
+        '--public-instruction-sha256': 'a' * 64, '--public-instruction-task-cid': 'cid:authored-task'}
+
+
+@pytest.mark.parametrize('invalid', ['foreign_task', 'foreign_repository', 'zero_tasks', 'two_tasks'])
+def test_runtime_joins_command_to_one_admitted_task_before_helper_read_or_launch(tmp_path, monkeypatch, invalid):
+    from ipfs_accelerate_py.agent_supervisor.runtime import candidate_execution
+    monkeypatch.setattr(candidate_execution, 'bind_candidate_runner', lambda _: object())
+    tasks = [SimpleNamespace(task_cid='cid:authored-task')]
+    if invalid == 'zero_tasks': tasks = []
+    elif invalid == 'two_tasks': tasks += [SimpleNamespace(task_cid='cid:second-task')]
+    verified = {'graph': SimpleNamespace(tasks=tasks), 'manifest': {'repository': '/app'}}
+    monkeypatch.setattr(admitted, 'verify_local_benchmark_admission', lambda *_a, **_k: verified)
+    command = observer_command(**({'--public-instruction-task-cid': 'cid:foreign'} if invalid == 'foreign_task'
+        else {'--semantic-repository': '/foreign'} if invalid == 'foreign_repository' else {}))
+    original_import = builtins.__import__
+    def imported(name, *args, **kwargs):
+        if 'native_dispatch_diagnostics' in name:
+            pytest.fail('imported diagnostic producer before task/repository match')
+        return original_import(name, *args, **kwargs)
+    monkeypatch.setattr(builtins, '__import__', imported)
+    monkeypatch.setattr(Path, 'read_bytes', lambda *_: pytest.fail('read helper before task/repository match'))
+    with pytest.raises(ValueError, match='one admitted task|differs from admitted task or repository'):
+        admitted.AdmittedBenchmarkRuntime.create(tmp_path / 'launch', admission={}, server=None, source=None,
+            implement=True, implementation_command=command, context_bundle={},
+            candidate_runner_argv=('synthetic-candidate',), native_dispatch_diagnostics=True)
+    assert not (tmp_path / 'launch').exists()
+
+
+def test_default_factory_does_not_import_diagnostic_helper_or_read_its_body_before_admission(tmp_path, monkeypatch):
+    class SyntheticAdmissionStop(Exception): pass
+    def verification(*_args, **_kwargs): raise SyntheticAdmissionStop()
+    monkeypatch.setattr(admitted, 'verify_local_benchmark_admission', verification)
+    original_import = builtins.__import__
+    def imported(name, *args, **kwargs):
+        if 'native_dispatch_diagnostics' in name:
+            pytest.fail('default factory imported diagnostic helper')
+        return original_import(name, *args, **kwargs)
+    monkeypatch.setattr(builtins, '__import__', imported)
+    monkeypatch.setattr(Path, 'read_bytes', lambda *_: pytest.fail('default factory read diagnostic source'))
+    with pytest.raises(SyntheticAdmissionStop):
+        admitted.AdmittedBenchmarkRuntime.create(tmp_path / 'launch', admission={}, server=None, source=None)
+    assert not (tmp_path / 'launch').exists()
+
+
+@pytest.fixture
+def diagnostic_case(tmp_path):
+    from ipfs_accelerate_py.agent_supervisor.runtime import native_dispatch_diagnostics as diagnostic
+    from ipfs_accelerate_py.agent_supervisor.entrypoints.isolated_benchmark_runtime import _digest
+    state = tmp_path / 'runtime-state'; state.mkdir(mode=0o700)
+    run = state / 'run'; run.mkdir(mode=0o700)
+    scope = diagnostic.validate_diagnostic_scope({'schema': diagnostic.SCOPE_SCHEMA,
+        'run_id': 'admitted-' + '1' * 32, 'task_cid': 'cid:authored-task',
+        'command_sha256': hashlib.sha256(observer_command().encode()).hexdigest(),
+        'producer_source_sha256': 'b' * 64})
+    message = 'SYNTHETIC message body must never be exported'
+    bridge = {'schema': diagnostic.BRIDGE_SCHEMA, 'settlement_authority': False,
+        'exceptions': [{'exception_type': 'SyntheticCallbackError',
+            'message_sha256': hashlib.sha256(message.encode()).hexdigest(),
+            'frames': [{'file': 'database_portal_bridge.py', 'line': 42, 'function': 'dispatch'}]}]}
+    source = {'active_task_id': 'AUTHORED', 'claimed_task_cid': scope['task_cid'],
+        'attempt_id': 'attempt:authored-one', 'write_count': 1,
+        'implementation_result': {'task_cid': scope['task_cid'], 'attempt_id': 'attempt:authored-one',
+            'status': 'blocked', 'reason': 'provider_callback_outcome_unknown', 'deferred': True,
+            'bridge_unknown_diagnostic': bridge, 'raw_message': message, 'prompt': 'SYNTHETIC prompt'}}
+    def build(result=None, sequence=1):
+        return diagnostic.build_first_claimed_pass_diagnostic(scope=scope, sequence=sequence,
+            result=source if result is None else result, process_instance_id='birth:authored',
+            owner_session_id='owner:authored')
+    record = build()
+    manifest = {'native_dispatch_diagnostic_scope': scope,
+        'environment': [[diagnostic.ENV, json.dumps(scope, sort_keys=True, separators=(',', ':'))]]}
+    runtime = SimpleNamespace(state=state, run_id=scope['run_id'], manifest=manifest, manifest_id=_digest(manifest))
+    report = {'source_nomination_phase': 'resume',
+        'source_nomination_controls': {'observe_model_input_only': True},
+        'doctor_dispatch': {'task_cid': scope['task_cid']}, 'task_completed': False,
+        'provider_invocations': [{'synthetic_independent_failed_invocation': True}],
+        'provider_usage': None, 'unreceipted_provider_attempt': {'purpose': 'planning', 'usage': None}}
+    return SimpleNamespace(diagnostic=diagnostic, scope=scope, source=source, record=record,
+        build=build, runtime=runtime, report=report, run=run, message=message, digest=_digest)
+
+
+def collect(case):
+    driver._collect_native_dispatch_diagnostics(case.runtime, case.report)
+    return case.report['native_dispatch_diagnostics']
+
+
+def publish(case, record=None):
+    return case.diagnostic.publish_first_claimed_pass_diagnostic(run_root=case.run,
+        record=case.record if record is None else record)
+
+
+def test_driver_keeps_first_claimed_pass_separate_from_latest_and_all_provider_authority(diagnostic_case):
+    case = diagnostic_case; prior = deepcopy(case.report)
+    assert publish(case) is True
+    later = deepcopy(case.source)
+    later['attempt_id'] = later['implementation_result']['attempt_id'] = 'attempt:authored-later'
+    later['active_task_id'] = 'LATER'; later['implementation_result']['status'] = 'succeeded'
+    second = case.build(later, sequence=9)
+    assert publish(case, second) is False
+    (case.run / 'admitted_database_daemon_pass_heartbeat.json').write_text(json.dumps({
+        'active_task_id': 'UNRELATED', 'claimed_task_cid': 'cid:foreign', 'sequence': 99,
+        'implementation_result': {'status': 'succeeded'}}))
+    observed = collect(case)
+    assert observed['status'] == 'observed_first_claimed_pass' and observed['source_scope_matched'] is True
+    assert observed['first_claimed_pass'] == case.record
+    assert observed['first_claimed_pass']['attempt_id'] == 'attempt:authored-one'
+    assert observed['first_claimed_pass']['sequence'] == 1
+    assert all(observed[key] is False for key in ('provider_population_complete',
+        'provider_transmission_verified', 'provider_usage_measured', 'task_progress_authority',
+        'proof_authority', 'execution_authority', 'completion_authority', 'raw_messages_or_prompts_exported'))
+    assert all(case.report[key] == value for key, value in prior.items())
+    encoded = json.dumps(observed)
+    assert case.message not in encoded and 'SYNTHETIC prompt' not in encoded
+    assert 'UNRELATED' not in encoded and 'attempt:authored-later' not in encoded
+
+
+@pytest.mark.parametrize('controls', [
+    {}, {'source_nomination_phase': 'prepare_only'},
+    {'source_nomination_phase': 'resume', 'source_nomination_controls': {}},
+    {'source_nomination_phase': 'resume', 'source_nomination_controls': {'observe_model_input_only': False}},
+    {'source_nomination_phase': 'resume', 'source_nomination_controls': {'observe_model_input_only': 1}},
+])
+def test_default_or_unrequested_collection_preserves_schema_without_helper_import_or_io(monkeypatch, controls):
+    report = {'schema': 'legacy-public-report@1', **deepcopy(controls)}; before = deepcopy(report)
+    original_import = builtins.__import__
+    def imported(name, *args, **kwargs):
+        if 'native_dispatch_diagnostics' in name:
+            pytest.fail('default collection imported diagnostic helper')
+        return original_import(name, *args, **kwargs)
+    monkeypatch.setattr(builtins, '__import__', imported)
+    monkeypatch.setattr(Path, 'read_bytes', lambda *_: pytest.fail('default collection read source/file'))
+    monkeypatch.setattr(builtins, 'open', lambda *_a, **_k: pytest.fail('default collection opened file'))
+    driver._collect_native_dispatch_diagnostics(SimpleNamespace(), report)
+    assert report == before and 'native_dispatch_diagnostics' not in report
+
+
+@pytest.mark.parametrize('invalid', ['manifest', 'run', 'task', 'scope_command', 'scope_producer',
+    'scope_extra', 'missing_env', 'double_env', 'foreign_env', 'env_boolean'])
+def test_driver_rejects_unsigned_or_foreign_scope_before_reading_sidecar(diagnostic_case, monkeypatch, invalid):
+    case = diagnostic_case; scope = case.runtime.manifest['native_dispatch_diagnostic_scope']
+    if invalid == 'manifest': case.runtime.manifest['unreviewed_mutation'] = True
+    elif invalid == 'run': case.runtime.run_id = 'admitted-' + '2' * 32
+    elif invalid == 'task': case.report['doctor_dispatch']['task_cid'] = 'cid:foreign'
+    elif invalid == 'scope_command': scope['command_sha256'] = False
+    elif invalid == 'scope_producer': scope['producer_source_sha256'] = 'f' * 63
+    elif invalid == 'scope_extra': scope['auth'] = True
+    elif invalid == 'missing_env': case.runtime.manifest['environment'] = []
+    elif invalid == 'double_env': case.runtime.manifest['environment'] *= 2
+    elif invalid == 'foreign_env':
+        foreign = {**scope, 'task_cid': 'cid:foreign'}
+        case.runtime.manifest['environment'][0][1] = json.dumps(foreign)
+    elif invalid == 'env_boolean': case.runtime.manifest['environment'][0][1] = 'false'
+    if invalid != 'manifest': case.runtime.manifest_id = case.digest(case.runtime.manifest)
+    monkeypatch.setattr(case.diagnostic, 'read_first_claimed_pass_diagnostic',
+        lambda **_: pytest.fail('read sidecar before independently scoped controls match'))
+    observed = collect(case)
+    assert observed['status'] == 'unknown' and observed['first_claimed_pass'] is None
+    assert observed['source_scope_matched'] is False
+    assert observed['reason'] == 'first_claimed_pass_invalid_or_unavailable'
+    assert observed['provider_population_complete'] is False and case.report['provider_usage'] is None
+
+
+def test_absent_first_pass_stays_unknown_without_implying_no_provider_call(diagnostic_case):
+    case = diagnostic_case; prior = deepcopy(case.report)
+    observed = collect(case)
+    assert observed['status'] == 'unknown' and observed['first_claimed_pass'] is None
+    assert observed['reason'] == 'first_claimed_pass_unavailable'
+    assert observed['provider_population_complete'] is False
+    assert all(case.report[key] == value for key, value in prior.items())
+
+
+@pytest.mark.parametrize('invalid', ['extra', 'authority_alias', 'authority_true', 'boolean_sequence',
+    'malformed_id', 'large_id', 'large_reason', 'foreign_scope', 'noncanonical', 'duplicate',
+    'file_symlink', 'file_hardlink', 'directory_symlink', 'file_mode', 'directory_mode', 'oversized'])
+def test_driver_refuses_malformed_unsafe_or_foreign_first_pass_without_exporting_body(diagnostic_case, invalid):
+    case = diagnostic_case; record = deepcopy(case.record)
+    path = case.run / case.diagnostic.FIRST_PASS_NAME
+    if invalid == 'extra': record['auth_reference'] = 'SYNTHETIC private-looking body'
+    elif invalid == 'authority_alias': record['worker_birth_established'] = 0
+    elif invalid == 'authority_true': record['completion_authority'] = True
+    elif invalid == 'boolean_sequence': record['sequence'] = True
+    elif invalid == 'malformed_id': record['attempt_id'] = {'injected': True}
+    elif invalid == 'large_id': record['attempt_id'] = 'x' * 257
+    elif invalid == 'large_reason': record['implementation']['reason'] = 'x' * 4097
+    elif invalid == 'foreign_scope': record['scope']['run_id'] = 'admitted-' + '2' * 32
+    raw = json.dumps(record, sort_keys=True, separators=(',', ':')).encode()
+    if invalid == 'noncanonical': raw += b'\n'
+    elif invalid == 'duplicate': raw = raw[:-1] + b',"sequence":1}'
+    elif invalid == 'oversized': raw = b'x' * (case.diagnostic.MAX_RECORD_BYTES + 1)
+    if invalid == 'file_symlink':
+        other = case.runtime.state / 'synthetic-payload'; other.write_bytes(raw); other.chmod(0o600)
+        path.symlink_to(other)
+    else:
+        path.write_bytes(raw); path.chmod(0o600)
+    if invalid == 'file_hardlink':
+        import os
+        os.link(path, case.runtime.state / 'duplicate-inode')
+    elif invalid == 'directory_symlink':
+        replacement = case.runtime.state / 'moved-run'; case.run.rename(replacement); case.run.symlink_to(replacement)
+    elif invalid == 'file_mode': path.chmod(0o644)
+    elif invalid == 'directory_mode': case.run.chmod(0o755)
+    observed = collect(case)
+    assert observed['status'] == 'unknown' and observed['source_scope_matched'] is False
+    assert observed['first_claimed_pass'] is None
+    assert observed['reason'] == 'first_claimed_pass_invalid_or_unavailable'
+    assert 'SYNTHETIC private-looking body' not in json.dumps(observed)
+    assert observed['provider_population_complete'] is False and case.report['task_completed'] is False
+
+
+@pytest.mark.parametrize('key', ['claimed_task_cid', 'attempt_id'])
+@pytest.mark.parametrize('value', [False, 0, [], {}, ''])
+def test_first_pass_builder_does_not_fallback_from_malformed_outer_ids(diagnostic_case, key, value):
+    source = deepcopy(diagnostic_case.source); source[key] = value
+    with pytest.raises(ValueError):
+        diagnostic_case.build(source)
+
+
+def test_unknown_native_strings_are_hashed_and_classified_without_exporting_source_body(diagnostic_case):
+    case = diagnostic_case; source = deepcopy(case.source)
+    source['implementation_result']['status'] = 'SYNTHETIC arbitrary native status text'
+    source['implementation_result']['reason'] = 'SYNTHETIC arbitrary native reason text'
+    record = case.build(source)
+    assert record['implementation']['status'] == 'unclassified_native_status'
+    assert record['implementation']['reason'] == 'unclassified_native_reason'
+    assert 'SYNTHETIC arbitrary' not in json.dumps(record)
+    assert record['implementation']['reason_bytes'] == len(source['implementation_result']['reason'].encode())
+
+
+@pytest.mark.parametrize('observe', [False, True])
+def test_driver_opts_runtime_diagnostics_only_for_trusted_observer_resume(run_case, monkeypatch, observe):
+    from contextlib import contextmanager
+    from ipfs_accelerate_py.agent_supervisor.runtime import router_public_instruction as public
+    captured = []
+    monkeypatch.setattr(driver, 'implementation_argv', lambda **_: ['/opt/ipfs-supervisor/bin/router-worker', '--purpose', 'coding'])
+    monkeypatch.setattr(driver, 'verify_local_benchmark_admission', lambda *_a, **_k: {
+        'graph': SimpleNamespace(tasks=[SimpleNamespace(task_cid='cid:unit', task_key='UNIT')]),
+        'manifest': {'sources': {driver.preparation.INSTRUCTION: {'sha256': 'a' * 64}},
+            'repository_cid': 'cid:repository'}})
+    monkeypatch.setattr(public, 'prepare_public_instruction_context', lambda **_: {
+        'artifact': '.runtime/public/instruction.json', 'sha256': 'b' * 64})
+    @contextmanager
+    def owner(**kwargs): yield SimpleNamespace(server=object(), source=object())
+    monkeypatch.setattr(driver, 'open_existing_native_owner', owner)
+    def create(*args, **kwargs):
+        captured.append(kwargs)
+        raise RuntimeError('synthetic stop before native START')
+    monkeypatch.setattr(driver.AdmittedBenchmarkRuntime, 'create', create)
+    result = invoke(run_case, observe_model_input_only=observe)
+    assert len(captured) == 1
+    if observe:
+        assert captured[0]['native_dispatch_diagnostics'] is True
+        assert '--observe-model-input-only' in captured[0]['implementation_command']
+    else:
+        assert 'native_dispatch_diagnostics' not in captured[0]
+        assert '--observe-model-input-only' not in captured[0]['implementation_command']
+    assert result['provider_invocations'] == [] and 'start' not in result
+    assert 'native_dispatch_diagnostics' not in result and result['task_completed'] is False
+
+
+@pytest.mark.parametrize('suffix', [
+    '--pur planning', '--purpose=planning', '--public-instruction-task-ci cid:foreign',
+    '--semantic-reposit /foreign', '--public-instruction-task-cid=cid:foreign',
+    '--semantic-repository=/foreign', '--public-instruction-artifact=.runtime/foreign.json',
+    '--public-instruction-sha256=' + 'f' * 64, '--observe-model-input-only=true',
+    '--purpose coding --purpose=coding', '--model=foreign', '--model one --model two',
+    '--doctor-candidate-artifact .runtime/candidate.json',
+    '--doctor-candidate-artifact=.runtime/candidate.json', '--doctor-candidate-sha256=' + 'f' * 64,
+    '--doctor-task-cid=cid:foreign', '--doctor-contract-artifact=.runtime/foreign.json',
+    '--finite-repository-artifact=.runtime/finite.json', '--finite-proof-query-context=.runtime/query.json',
+    '--preflight', '--preflight-sleep=1', 'unbound-positional', '--',
+])
+def test_exact_diagnostic_command_grammar_refuses_abbreviation_equals_duplicate_and_candidate_routes(suffix):
+    command = shlex.join([*shlex.split(observer_command()), *shlex.split(suffix)])
+    with pytest.raises(ValueError):
+        admitted._require_observer_diagnostic_command(command, implement=True,
+            context_bundle={}, candidate_runner=object())
+
+
+@pytest.mark.parametrize('scope_kind', ['finite', 'inventory'])
+@pytest.mark.parametrize('flag', [True, 1])
+def test_public_factory_refuses_diagnostic_candidate_scope_before_receiving_callback(
+        tmp_path, monkeypatch, scope_kind, flag):
+    if scope_kind == 'finite':
+        from ipfs_accelerate_py.agent_supervisor.runtime.finite_repository_execution import FrozenFiniteRepositoryExecutionScope as Scope
+        name = 'finite_execution_scope'
+    else:
+        from ipfs_accelerate_py.agent_supervisor.runtime.codebase_inventory_execution import FrozenInventoryExecutionScope as Scope
+        name = 'inventory_execution_scope'
+    scope = object.__new__(Scope)
+    monkeypatch.setattr(Scope, '_uses_paired_receiving', lambda *_: pytest.fail('entered receiving callback'))
+    monkeypatch.setattr(admitted.AdmittedBenchmarkRuntime, '_create',
+        lambda *_a, **_k: pytest.fail('entered implementation before public control guard'))
+    with pytest.raises(ValueError, match='candidate execution scope|exact Boolean'):
+        admitted.AdmittedBenchmarkRuntime.create(tmp_path / 'launch', admission={}, server=None,
+            source=None, native_dispatch_diagnostics=flag, **{name: scope})
+    assert not (tmp_path / 'launch').exists()
+
+
+@pytest.mark.parametrize('collector_raises', [False, True])
+def test_diagnostic_finally_is_independent_of_legacy_parser_and_always_closes_runtime(
+        run_case, diagnostic_case, monkeypatch, collector_raises):
+    from contextlib import contextmanager
+    from ipfs_accelerate_py.agent_supervisor.runtime import router_public_instruction as public
+    case = diagnostic_case; lifecycle = []
+    publish(case)
+    monkeypatch.setattr(driver, 'implementation_argv', lambda **_: ['/opt/ipfs-supervisor/bin/router-worker', '--purpose', 'coding'])
+    monkeypatch.setattr(driver, 'verify_local_benchmark_admission', lambda *_a, **_k: {
+        'graph': SimpleNamespace(tasks=[SimpleNamespace(task_cid=case.scope['task_cid'], task_key='UNIT')]),
+        'manifest': {'sources': {driver.preparation.INSTRUCTION: {'sha256': 'a' * 64}},
+            'repository_cid': 'cid:repository'}})
+    monkeypatch.setattr(driver, 'prepare_terminal_doctor_dispatch', lambda **_: {
+        'route': 'model_router', 'task_cid': case.scope['task_cid']})
+    monkeypatch.setattr(public, 'prepare_public_instruction_context', lambda **_: {
+        'artifact': '.runtime/public/instruction.json', 'sha256': 'b' * 64})
+    @contextmanager
+    def owner(**kwargs):
+        yield SimpleNamespace(server=object(), source=SimpleNamespace(get_task=lambda _:
+            SimpleNamespace(status='failed', revision=1)))
+    monkeypatch.setattr(driver, 'open_existing_native_owner', owner)
+    class Reply:
+        def to_dict(self): return {'status': 'succeeded'}
+    case.runtime.start = lambda: (lifecycle.append('start'), Reply())[1]
+    case.runtime.stop = lambda: (lifecycle.append('stop'), Reply())[1]
+    case.runtime.observe = lambda: {'status': 'synthetic native observation'}
+    case.runtime.profile = object()
+    case.runtime.process = SimpleNamespace(snapshot=lambda _: SimpleNamespace(members=[]))
+    case.runtime.close = lambda: lifecycle.append('close')
+    monkeypatch.setattr(driver.AdmittedBenchmarkRuntime, 'create', lambda *_a, **_k: case.runtime)
+    monkeypatch.setattr(driver, '_refresh_completed_context', lambda *_a, **_k: None)
+    class SyntheticLegacyParserError(Exception): pass
+    def legacy(*_a, **_k): raise SyntheticLegacyParserError('SYNTHETIC unexported parser body')
+    monkeypatch.setattr(driver, '_native_diagnostics', legacy)
+    if collector_raises:
+        class SyntheticDiagnosticError(Exception): pass
+        def collection(*_a, **_k):
+            lifecycle.append('diagnostic'); raise SyntheticDiagnosticError('SYNTHETIC unexported diagnostic body')
+        monkeypatch.setattr(driver, '_collect_native_dispatch_diagnostics', collection)
+    result = invoke(run_case, observe_model_input_only=True)
+    assert lifecycle[:2] == ['start', 'stop'] and lifecycle[-1] == 'close'
+    assert result['native_diagnostics_error'] == 'SyntheticLegacyParserError'
+    assert result['provider_invocations'] == [] and result['task_completed'] is False
+    if collector_raises:
+        assert lifecycle == ['start', 'stop', 'diagnostic', 'close']
+        assert result['error']['type'] == 'SyntheticDiagnosticError'
+    else:
+        assert result['native_dispatch_diagnostics']['status'] == 'observed_first_claimed_pass'
+        assert result['native_dispatch_diagnostics']['first_claimed_pass'] == case.record
+
+
+@pytest.mark.parametrize('returncode', [None, 0, 1, 75, -2147483648, 2147483647])
+def test_version2_portal_result_preserves_exact_returncodes_and_unknowns_without_body(diagnostic_case, returncode):
+    case = diagnostic_case; source = deepcopy(case.source)
+    raw_portal = {'skipped': False, 'provider_dispatched': True,
+        'attempt_consumed': False, 'reason': 'portal_provider_failed',
+        'stdout': 'SYNTHETIC excluded worker body', 'error': 'SYNTHETIC excluded exception body'}
+    if returncode is not None: raw_portal['returncode'] = returncode
+    source['implementation_result']['bridge_portal_implementation'] = case.diagnostic.project_portal_implementation_summary(
+        {'implementation': raw_portal})
+    record = case.build(source)
+    assert record['schema'] == 'native-dispatch-first-claimed-pass@2'
+    portal = record['portal_implementation']
+    assert set(portal) == {'returncode', 'deferred', 'skipped', 'provider_dispatched',
+        'provider_call_allowed', 'attempt_consumed', 'reason', 'reason_sha256', 'reason_bytes'}
+    assert portal['returncode'] == returncode and type(portal['returncode']) is type(returncode)
+    assert portal['deferred'] is None and portal['provider_call_allowed'] is None
+    assert portal['skipped'] is False and portal['provider_dispatched'] is True
+    assert portal['reason'] == 'portal_provider_failed'
+    assert portal['reason_sha256'] == hashlib.sha256(b'portal_provider_failed').hexdigest()
+    assert portal['reason_bytes'] == len(b'portal_provider_failed')
+    assert 'SYNTHETIC excluded' not in json.dumps(record)
+    assert all(record[key] is False for key in case.diagnostic.FALSE_FIELDS)
+    assert publish(case, record) is True
+    observed = collect(case)
+    assert observed['first_claimed_pass']['portal_implementation'] == portal
+    assert observed['first_claimed_pass']['worker_birth_established'] is False
+    assert observed['provider_usage_measured'] is False and case.report['provider_usage'] is None
+
+
+def test_version2_absent_portal_summary_preserves_unknown_instead_of_zero(diagnostic_case):
+    case = diagnostic_case
+    assert case.record['schema'] == 'native-dispatch-first-claimed-pass@2'
+    assert case.record['portal_implementation'] is None
+    source = deepcopy(case.source)
+    source['implementation_result']['bridge_portal_implementation'] = case.diagnostic.project_portal_implementation_summary({'implementation': {}})
+    portal = case.build(source)['portal_implementation']
+    assert portal == {'returncode': None, 'deferred': None, 'skipped': None,
+        'provider_dispatched': None, 'provider_call_allowed': None, 'attempt_consumed': None,
+        'reason': None, 'reason_sha256': None, 'reason_bytes': 0}
+
+
+@pytest.mark.parametrize('value', [None, True, False, 1.0, '75', -2147483649, 2147483648, [], {}])
+def test_portal_returncode_rejects_booleans_aliases_and_outside_signed32(diagnostic_case, value):
+    with pytest.raises(ValueError):
+        diagnostic_case.diagnostic.project_portal_implementation_summary({'implementation': {'returncode': value}})
+
+
+@pytest.mark.parametrize('field', ['deferred', 'skipped', 'provider_dispatched', 'provider_call_allowed', 'attempt_consumed'])
+@pytest.mark.parametrize('value', [None, 0, 1, 'false', [], {}])
+def test_portal_flags_require_exact_optional_booleans(diagnostic_case, field, value):
+    with pytest.raises(ValueError):
+        diagnostic_case.diagnostic.project_portal_implementation_summary({'implementation': {field: value}})
+
+
+@pytest.mark.parametrize('invalid', ['extra', 'bool_returncode', 'alias_flag', 'bad_digest',
+    'size_alias', 'oversized_reason', 'mixed_legacy', 'missing_version2_field'])
+def test_version2_validator_refuses_malformed_portal_or_mixed_schema(diagnostic_case, invalid):
+    case = diagnostic_case; source = deepcopy(case.source)
+    source['implementation_result']['bridge_portal_implementation'] = case.diagnostic.project_portal_implementation_summary(
+        {'implementation': {'returncode': 75, 'reason': 'portal_provider_failed'}})
+    record = case.build(source); portal = record['portal_implementation']
+    if invalid == 'extra': portal['stdout'] = 'SYNTHETIC body'
+    elif invalid == 'bool_returncode': portal['returncode'] = True
+    elif invalid == 'alias_flag': portal['deferred'] = 0
+    elif invalid == 'bad_digest': portal['reason_sha256'] = 'F' * 64
+    elif invalid == 'size_alias': portal['reason_bytes'] = True
+    elif invalid == 'oversized_reason': portal['reason_bytes'] = 4097
+    elif invalid == 'mixed_legacy': record['schema'] = 'native-dispatch-first-claimed-pass@1'
+    elif invalid == 'missing_version2_field': record.pop('portal_implementation')
+    with pytest.raises(ValueError): case.diagnostic.validate_first_claimed_pass_diagnostic(record)
+
+
+def test_legacy_first_pass_schema_remains_exact_and_cannot_invent_portal_result(diagnostic_case):
+    case = diagnostic_case; legacy = deepcopy(case.record)
+    legacy['schema'] = 'native-dispatch-first-claimed-pass@1'; legacy.pop('portal_implementation')
+    assert case.diagnostic.validate_first_claimed_pass_diagnostic(legacy) == legacy
+    assert publish(case, legacy) is True
+    observed = collect(case)
+    assert observed['first_claimed_pass'] == legacy and 'portal_implementation' not in observed['first_claimed_pass']
+    mixed = {**legacy, 'portal_implementation': None}
+    with pytest.raises(ValueError): case.diagnostic.validate_first_claimed_pass_diagnostic(mixed)
+
+
+def test_portal_unknown_reason_has_hash_and_byte_census_without_body_export(diagnostic_case):
+    case = diagnostic_case; source = deepcopy(case.source)
+    reason = 'SYNTHETIC unknown callback control reason'
+    source['implementation_result']['bridge_portal_implementation'] = case.diagnostic.project_portal_implementation_summary(
+        {'implementation': {'returncode': 1, 'reason': reason}})
+    portal = case.build(source)['portal_implementation']
+    assert portal['reason'] == 'unclassified_native_reason'
+    assert portal['reason_sha256'] == hashlib.sha256(reason.encode()).hexdigest()
+    assert portal['reason_bytes'] == len(reason.encode())
+    assert reason not in json.dumps(portal)
+
+
+@pytest.fixture
+def error_scan_case(tmp_path):
+    state = tmp_path / 'synthetic-log-state'; state.mkdir()
+    log = state / 'synthetic-command.log'
+    report = {'provider_invocations': [], 'source_nomination_phase': 'resume',
+        'source_nomination_controls': {'observe_model_input_only': True},
+        'provider_usage': None, 'task_completed': False,
+        'unreceipted_provider_attempt': {'purpose': 'planning', 'usage': None}}
+    def write(rows):
+        log.write_text('\n'.join(json.dumps(row, separators=(',', ':')) for row in rows) + '\n')
+    def scan(): driver._collect_worker_receipts(report, state)
+    return SimpleNamespace(state=state, log=log, report=report, write=write, scan=scan)
+
+
+def test_class_only_error_collection_has_no_body_or_scope_worker_provider_authority(error_scan_case):
+    case = error_scan_case
+    case.write([{'schema': 'router-implementation-error@1', 'error_type': 'SyntheticValueError'}])
+    case.scan(); observed = case.report['model_input_worker_error_diagnostics']
+    assert observed['schema'] == 'terminal-model-input-worker-error-diagnostics@1'
+    assert observed['status'] == 'observed_unattributed_router_errors'
+    assert observed['error_types'] == ['SyntheticValueError'] and observed['error_types_truncated'] is False
+    assert all(observed[key] is False for key in ('source_scope_matched', 'worker_birth_established',
+        'provider_population_complete', 'provider_transmission_verified', 'provider_usage_measured',
+        'proof_authority', 'execution_authority', 'completion_authority', 'raw_messages_or_prompts_exported'))
+    assert case.report['provider_invocations'] == [] and case.report['provider_usage'] is None
+    assert case.report['unreceipted_provider_attempt'] == {'purpose': 'planning', 'usage': None}
+    case.report.update(coding_dispatch_possible=True, implementation_route='model_router')
+    driver._mark_missing_coding_receipt(case.report, observe_model_input_only=True)
+    assert case.report['unreceipted_model_input_observation']['status'] == 'unknown'
+
+
+@pytest.mark.parametrize('invalid', ['extra', 'bool', 'int', 'list', 'dict', 'none',
+    'newline', 'path', 'big', 'schema_list', 'schema_dict', 'foreign_schema'])
+def test_malformed_class_only_errors_never_export_message_or_abort_scan(error_scan_case, invalid):
+    case = error_scan_case; row = {'schema': 'router-implementation-error@1', 'error_type': 'SyntheticValueError'}
+    if invalid == 'extra': row['message'] = 'SYNTHETIC excluded private-looking body'
+    elif invalid == 'bool': row['error_type'] = True
+    elif invalid == 'int': row['error_type'] = 0
+    elif invalid == 'list': row['error_type'] = []
+    elif invalid == 'dict': row['error_type'] = {}
+    elif invalid == 'none': row['error_type'] = None
+    elif invalid == 'newline': row['error_type'] = 'SyntheticError\nbody'
+    elif invalid == 'path': row['error_type'] = '/synthetic/private/file.py'
+    elif invalid == 'big': row['error_type'] = 'x' * 129
+    elif invalid == 'schema_list': row['schema'] = []
+    elif invalid == 'schema_dict': row['schema'] = {}
+    elif invalid == 'foreign_schema': row['schema'] = 'router-implementation-error@2'
+    case.write([row]); case.scan()
+    assert 'model_input_worker_error_diagnostics' not in case.report
+    assert case.report['provider_invocations'] == [] and case.report['provider_usage'] is None
+    assert 'model_input_observations' not in case.report
+
+
+@pytest.mark.parametrize('count', [16, 17])
+def test_worker_error_class_census_is_unique_sorted_and_overflow_explicit(error_scan_case, count):
+    case = error_scan_case
+    rows = [{'schema': 'router-implementation-error@1', 'error_type': f'SyntheticError{i:02d}'} for i in range(count)]
+    case.write([rows[0], *rows, rows[-1]])
+    case.scan(); observed = case.report['model_input_worker_error_diagnostics']
+    assert len(observed['error_types']) == 16 and observed['error_types'] == sorted(observed['error_types'])
+    assert observed['error_types_truncated'] is (count > 16)
+
+
+@pytest.mark.parametrize('observe', [True, False])
+def test_error_scan_uses_exact_existing_read_population_without_new_log_io(error_scan_case, monkeypatch, observe):
+    case = error_scan_case; counts = {'enumeration': 0, 'stat': 0, 'read': 0}
+    case.report['source_nomination_controls']['observe_model_input_only'] = observe
+    raw = json.dumps({'schema': 'router-implementation-error@1', 'error_type': 'SyntheticValueError'})
+    class NamedLog:
+        def stat(self): counts['stat'] += 1; return SimpleNamespace(st_size=len(raw))
+        def read_text(self, **_kwargs): counts['read'] += 1; return raw
+    class NamedState:
+        def rglob(self, pattern):
+            assert pattern == '*.log'; counts['enumeration'] += 1; return iter([NamedLog()])
+    driver._collect_worker_receipts(case.report, NamedState())
+    assert counts == {'enumeration': 1, 'stat': 1, 'read': 1}
+    assert ('model_input_worker_error_diagnostics' in case.report) is observe
+
+
+@pytest.mark.parametrize('control', ['default', 'prepare', 'false', 'alias'])
+def test_error_receipts_do_not_change_default_report_schema_or_select_observer(error_scan_case, control):
+    case = error_scan_case
+    if control == 'default': case.report.pop('source_nomination_phase'); case.report.pop('source_nomination_controls')
+    elif control == 'prepare': case.report['source_nomination_phase'] = 'prepare_only'
+    elif control == 'false': case.report['source_nomination_controls']['observe_model_input_only'] = False
+    elif control == 'alias': case.report['source_nomination_controls']['observe_model_input_only'] = 1
+    sentinel = {'schema': 'SYNTHETIC pre-existing field'}
+    case.report['model_input_worker_error_diagnostics'] = deepcopy(sentinel)
+    case.write([{'schema': 'router-implementation-error@1', 'error_type': 'SyntheticValueError'}]); case.scan()
+    assert case.report['model_input_worker_error_diagnostics'] == sentinel
+    assert case.report['provider_invocations'] == [] and 'model_input_observations' not in case.report
+
+
+def test_optin_error_recollection_clears_stale_diagnostics_and_preserves_genuine_calls(error_scan_case):
+    case = error_scan_case
+    case.report['model_input_worker_error_diagnostics'] = {'schema': 'stale'}
+    call = {'schema': 'router-implementation-invocation@1', 'invocation_id': 'a' * 32,
+        'status': 'failed', 'usage': None}
+    case.write([call]); case.scan()
+    assert 'model_input_worker_error_diagnostics' not in case.report
+    assert case.report['provider_invocations'] == [{'phase': 'coding', **call}]
+    assert case.report['provider_usage'] is None

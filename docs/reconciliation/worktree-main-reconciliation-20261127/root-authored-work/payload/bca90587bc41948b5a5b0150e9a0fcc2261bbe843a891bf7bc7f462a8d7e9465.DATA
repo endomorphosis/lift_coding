@@ -1,0 +1,169 @@
+#!/usr/bin/env python3
+"""Native CEGIS with concrete validation-plan execution and explicit dev storage.
+
+No fake proof/test success, certificate, registry promotion, or native live
+interpreter admission. The custom bounded executor performs actual checks.
+"""
+from __future__ import annotations
+from dataclasses import replace, asdict
+import hashlib
+import itertools
+import importlib.util
+import json
+from pathlib import Path
+import sys
+import time
+
+HERE=Path(__file__).resolve().parent
+ROOT=HERE.parents[4]
+SOURCE=ROOT/'.worktrees/proof-carrying-procedure-compiler-v1'
+sys.path.insert(0,str(SOURCE));sys.path.insert(1,str(SOURCE/'ipfs_datasets_py'))
+from ipfs_accelerate_py.agent_supervisor.procedure_compiler.cegis import ProcedureCegis, ProcedureSynthesisPlan, SynthesisRequest, ValidationFinding, CounterexampleKind, NarrowingConstraints, CegisError
+from ipfs_accelerate_py.agent_supervisor.procedure_compiler.contracts import ArtifactBindings, ArtifactState, ConditionOperator, EffectClass, ProcedureAuthorityEnvelope, ProcedureEffect, ProcedureLocal, ProcedureObservation, ProcedurePostcondition, ProcedurePrecondition, ProcedureResourceEnvelope, ProcedureSpec, ProcedureStep, ProcedureValidationPlan, ProcedureVersion, RiskClass, StepOperation, ValueType
+from ipfs_accelerate_py.agent_supervisor.procedure_compiler.procedure_ir import validate_procedure_spec
+
+def canonical(x):return json.dumps(x,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
+def digest(x):return hashlib.sha256(x).hexdigest()
+def write(path,x):
+    with Path(path).open('xb') as f:f.write(canonical(x)+b'\n')
+
+def bindings(unit):
+    source_bytes=(HERE/('catalog_'+unit['source']+'.py')).read_bytes()
+    policy_bytes=canonical({k:unit[k] for k in ['policy','maximum','even_total']})
+    return ArtifactBindings(repository_id='ns-procedure-development',repository_commit=digest(source_bytes),tree_id='tree:'+digest(source_bytes),objective_id='NS-E05',task_id='NS-E05-validation',contract_revision='bounded-sequence-v1',policy_revision=digest(policy_bytes),environment_id='system-python-bounded-plan-v1')
+
+def scaffold(unit):
+    b=bindings(unit)
+    steps=(ProcedureStep(step_id='read',operation=StepOperation.READ_STATE,operation_contract='state-reader@1',output_bindings={'state':'local:state'},next_step_id='tests'),
+      ProcedureStep(step_id='tests',operation=StepOperation.RUN_SELECTED_TESTS,operation_contract='test-runner@1',input_bindings={'state':'local:state'},output_bindings={'result':'local:test-result'},declared_effect_ids=('effect.validation',),required_authority_ids=('authority.execute',),evidence_outputs=('observation.tests',),next_step_id='postcondition'),
+      ProcedureStep(step_id='postcondition',operation=StepOperation.CHECK_POSTCONDITION,operation_contract='postcondition-checker@1',input_bindings={'result':'local:test-result'},declared_effect_ids=('effect.validation',),required_authority_ids=('authority.execute',),evidence_outputs=('observation.postcondition',),next_step_id='receipt'),
+      ProcedureStep(step_id='receipt',operation=StepOperation.EMIT_RECEIPT,operation_contract='receipt-emitter@1',declared_effect_ids=('effect.receipt',),required_authority_ids=('authority.execute',),evidence_outputs=('receipt.execution',)))
+    spec=ProcedureSpec(bindings=b,name='sequence-validation-scaffold',version=ProcedureVersion(major=1),task_family_id=unit['family'],entry_step_id='read',locals=(ProcedureLocal('state',ValueType.STRUCTURED),ProcedureLocal('test-result',ValueType.STRUCTURED)),
+      preconditions=(ProcedurePrecondition(condition_id='current-source',binding='binding:tree_id',operator=ConditionOperator.CURRENT,evidence_producer='source-reader@1',evidence_type='source-digest@1'),),
+      declared_reads=('policy/sequence.json',),declared_effects=(ProcedureEffect(effect_id='effect.validation',effect_class=EffectClass.VALIDATION),ProcedureEffect(effect_id='effect.receipt',effect_class=EffectClass.RECEIPT_EMIT)),steps=steps,
+      postconditions=(ProcedurePostcondition(condition_id='decision-ready',binding='local:test-result',operator=ConditionOperator.ADMITTED,evidence_producer='postcondition-checker@1',evidence_type='decision@1'),),
+      observations=(ProcedureObservation(observation_id='observation.tests',producer_contract='test-runner@1',output_binding='local:test-result',operator=ConditionOperator.ADMITTED,evidence_type='test-receipt@1'),ProcedureObservation(observation_id='observation.postcondition',producer_contract='postcondition-checker@1',output_binding='local:test-result',operator=ConditionOperator.ADMITTED,evidence_type='decision@1')),
+      validation=ProcedureValidationPlan(required_step_ids=('tests','postcondition'),required_observation_ids=('observation.tests','observation.postcondition'),required_test_contracts=('sequence-budget@1',)),
+      authority=ProcedureAuthorityEnvelope(authority_policy_revision=b.policy_revision,requirement_ids=('authority.execute',),required_capability_ids=('capability.validation',),allowed_operations=tuple(s.operation for s in steps),risk_ceiling=RiskClass.OBSERVATION_ONLY),
+      resources=ProcedureResourceEnvelope(wall_time_ms=60000,cpu_time_ms=60000,memory_bytes=128000000,disk_bytes=0,model_token_limit=0,model_call_limit=0,subprocess_limit=0),terminal_step_ids=('receipt',),scope_paths=('policy',),provenance_cids=('development-scaffold-v1',),state=ArtifactState.CANDIDATE)
+    return validate_procedure_spec(spec)
+
+def plan(unit):
+    return ProcedureSynthesisPlan(bindings=bindings(unit),task_family_id=unit['family'],max_candidates=32,max_steps=12,max_validation=32,max_proof=0,max_model_calls=0,max_tokens=0)
+
+CATALOGS={}
+for version in ['v1','v2']:
+    definition=importlib.util.spec_from_file_location('ns_catalog_'+version,HERE/('catalog_'+version+'.py'))
+    module=importlib.util.module_from_spec(definition);definition.loader.exec_module(module);CATALOGS[version]=module
+
+def replay(spec,payload,unit):
+    """Development operation catalog: concrete checks, not successful callbacks.
+
+    Follows the synthesized next-step graph; all observations contribute to
+    postcondition. This adapter does not claim native signed runtime admission.
+    """
+    steps={s.step_id:s for s in spec.steps};key=spec.entry_step_id;seen=set();checks=[];trace=[];state=None;decision=None
+    while key:
+        if key in seen or key not in steps:raise ValueError('cycle or missing plan step')
+        seen.add(key);step=steps[key];op=step.operation;observed=None
+        if op is StepOperation.READ_STATE:state=payload
+        elif op in {StepOperation.RUN_SELECTED_TESTS,StepOperation.RUN_STATIC_ANALYSIS,StepOperation.RUN_TYPE_CHECK,StepOperation.RUN_ADVERSARIAL_ASSURANCE,StepOperation.CHECK_SCOPE}:
+            observed=CATALOGS[unit['source']].run(op.value,state,unit['maximum']);checks.append(observed)
+        elif op is StepOperation.CHECK_POSTCONDITION:decision=bool(checks) and all(checks)
+        elif op is StepOperation.EMIT_RECEIPT:
+            if decision is None:raise ValueError('receipt before decision')
+        else:raise ValueError('operation unavailable in this bounded catalog')
+        trace.append({'step_id':key,'operation':op.value,'observed':observed});key=step.next_step_id
+    if decision is None:raise ValueError('no computed decision')
+    return decision,trace
+
+def independent_oracle(payload,unit):
+    """Separate predicate implementation; receives no procedure or trace."""
+    tally=0
+    for item in payload['values']:
+        if type(item)!=int:return False
+        if item<0:return False
+        if item>unit['maximum']:return False
+        tally+=item
+    if tally>payload['budget']:return False
+    if unit['even_total'] and tally%2:return False
+    return True
+
+def synthesize(unit,training):
+    runs=[]
+    def validate(candidate,_counterexamples):
+        for payload in training:
+            obtained,trace=replay(candidate.procedure,payload,unit);expected=independent_oracle(payload,unit)
+            runs.append({'candidate_cid':candidate.procedure.content_id,'input':payload,'observed':obtained,'expected':expected,'trace':trace})
+            if obtained!=expected:
+                need=[];values=payload['values']
+                if any(type(v) is not int for v in values):need=[StepOperation.RUN_TYPE_CHECK]
+                elif any(v<0 or v>unit['maximum'] for v in values):need=[StepOperation.RUN_STATIC_ANALYSIS]
+                return ValidationFinding(kind=CounterexampleKind.REPLAY,obligation='bounded-sequence-decision',witness={'input':payload,'expected':expected,'observed':obtained},constraints=NarrowingConstraints(required_operations=tuple(need)))
+        return None
+    began=time.perf_counter()
+    result=ProcedureCegis(clock_ms=lambda:int(time.monotonic()*1000),validator=validate).synthesize(SynthesisRequest(plan=plan(unit),enumerative_seeds=(scaffold(unit),)))
+    record={'status':result.status.value,'stop_reason':result.stop_reason.value,'elapsed_seconds':time.perf_counter()-began,'usage':asdict(result.usage),'counterexamples':[c.to_artifact(bindings(unit)).to_dict() for c in result.counterexamples],'replay_rows':runs,'candidate_artifacts':[c.to_dict() for c in result.candidate_artifacts]}
+    return (result.surviving_candidates[0].procedure if result.converged else None),record
+
+class DevelopmentBodyStore:
+    """Explicit new adapter. No certificate/promotion claims; candidate IR only."""
+    def __init__(self,root):self.root=root;root.mkdir(exist_ok=True)
+    def save(self,spec):
+        body=canonical(spec.to_dict());sha=digest(body);(self.root/(sha+'.json')).write_bytes(body);(self.root/'head.json').write_bytes(canonical({'sha256':sha,'procedure_cid':spec.content_id}))
+    def load(self,unit):
+        if not (self.root/'head.json').exists():return None,'empty'
+        head=json.loads((self.root/'head.json').read_bytes());body=(self.root/(head['sha256']+'.json')).read_bytes()
+        if digest(body)!=head['sha256']:return None,'corrupt_content_digest'
+        spec=ProcedureSpec.from_dict(json.loads(body));validate_procedure_spec(spec)
+        if spec.content_id!=head['procedure_cid']:return None,'corrupt_procedure_cid'
+        try:
+            # Native exact source/policy/family bindings are checked before reuse.
+            SynthesisRequest(plan=plan(unit),enumerative_seeds=(spec,))
+        except CegisError as error:return None,'native_inapplicable: '+str(error)
+        return spec,'native_exact_bindings_match'
+    def corrupt(self):
+        head=json.loads((self.root/'head.json').read_bytes());p=self.root/(head['sha256']+'.json');p.write_bytes(p.read_bytes()+b' ')
+
+def main():
+    matrix=json.loads((HERE/'matrix.json').read_bytes());out=HERE/'results';out.mkdir()
+    tracked=[Path(__file__),HERE/'matrix.json',HERE/'catalog_v1.py',HERE/'catalog_v2.py',*sorted((SOURCE/'ipfs_accelerate_py/agent_supervisor/procedure_compiler').glob('*.py'))]
+    freeze={'schema':'ns-procedure-development-freeze/v1','source_profile':str(SOURCE),'files':{str(p.relative_to(ROOT)):digest(p.read_bytes()) for p in tracked},'matrix':matrix,'native_caller':'ProcedureCegis.synthesize and SynthesisRequest exact binding check','development_adapters':['DevelopmentBodyStore','replay concrete bounded operation catalog'],'promotion':False,'provider_calls':0}
+    write(HERE/'freeze.json',freeze)
+    training=matrix['training'];training_keys={canonical(x) for x in training}
+    domain=matrix['audit_domain'];queries=[]
+    for length in domain['lengths']:
+        for values in itertools.product(domain['values'],repeat=length):
+            for budget in domain['budgets']:
+                payload={'values':list(values),'budget':budget}
+                if canonical(payload) not in training_keys:queries.append(payload)
+    write(out/'fresh_queries.json',queries)
+    store=DevelopmentBodyStore(out/'body-store');rows=[]
+    for index,unit in enumerate(matrix['units']):
+        fresh=queries[index::len(matrix['units'])]
+        for arm in matrix['arms']:
+            cell={'unit_id':unit['id'],'arm':arm,'synthesis_calls':0,'lookup':None,'provider_calls':0,'tokens':0}
+            spec=None
+            if arm=='stored_candidate':
+                if unit.get('corrupt_store'):store.corrupt()
+                spec,cell['lookup']=store.load(unit)
+            if spec is None:
+                spec,cell['synthesis']=synthesize(unit,training);cell['synthesis_calls']=1
+                if arm=='stored_candidate' and spec is not None:store.save(spec)
+            cell['procedure']=None if spec is None else spec.to_dict()
+            decisions=[]
+            for query in fresh:
+                expected=independent_oracle(query,unit)
+                observed=None if spec is None else replay(spec,query,unit)[0]
+                decisions.append({'expected':expected,'observed':observed})
+            cell['fresh_query_count']=len(fresh);cell['agreement']=sum(x['observed']==x['expected'] for x in decisions);cell['false_admissions']=sum(x['observed'] is True and x['expected'] is False for x in decisions);cell['abstentions']=sum(x['observed'] is None for x in decisions);cell['success']=spec is not None and cell['agreement']==len(fresh);cell['decisions']=decisions
+            write(out/(arm+'-'+unit['id']+'.json'),cell);rows.append(cell)
+            print(json.dumps({k:cell[k] for k in ['unit_id','arm','lookup','synthesis_calls','success','fresh_query_count','false_admissions','abstentions']}),flush=True)
+    summary={'schema':'ns-procedure-development-summary/v1','arms':{},'fresh_query_pool':len(queries),'provider_calls':0,'tokens':0,'scope':'native plan synthesis + development body store and bounded plan execution; no production procedure authority or model savings'}
+    for arm in matrix['arms']:
+        group=[r for r in rows if r['arm']==arm]
+        summary['arms'][arm]={'units':len(group),'successful_units':sum(r['success'] for r in group),'synthesis_calls':sum(r['synthesis_calls'] for r in group),'synthesis_candidates_tried':sum(r.get('synthesis',{}).get('usage',{}).get('candidates_tried',0) for r in group),'fresh_queries':sum(r['fresh_query_count'] for r in group),'agreement':sum(r['agreement'] for r in group),'false_admissions':sum(r['false_admissions'] for r in group),'abstentions':sum(r['abstentions'] for r in group)}
+    assert freeze['files']=={str(p.relative_to(ROOT)):digest(p.read_bytes()) for p in tracked}
+    write(HERE/'summary.json',summary);print(json.dumps(summary),flush=True)
+
+if __name__=='__main__':main()

@@ -1,0 +1,196 @@
+"""Closed original-caller nomination requests; no scorer or provider dispatch."""
+import argparse
+import json
+from pathlib import Path
+import shutil
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+PROCEDURE = HERE.parents[1] / "procedures" / "original_repository_validation_v1"
+sys.path.insert(0, str(HERE))
+sys.path.insert(0, str(PROCEDURE))
+import repository_runtime_v2 as R
+import original_services_v1 as O
+import request_contract as Contract
+
+
+ENDPOINT = HERE.parents[1] / "recruitment" / "original_acceptance_v1" / "endpoint_declaration_v4.json"
+ADMISSION = HERE.parents[1] / "recruitment" / "original_acceptance_v1" / "candidate_endpoint_v2" / "admission_v2.json"
+CODEC = HERE.parents[1] / "recruitment" / "original_acceptance_v1" / "public_bases_v1" / "inventory_codec_v1.py"
+SERVICE_PROFILE = PROCEDURE / "native_profiles" / "v2" / "profile.json"
+SERVICE_ENTRY = PROCEDURE / "native_profiles" / "v2" / "service.py"
+
+
+def save(path, value):
+    with Path(path).open("xb") as stream:
+        stream.write(R.canonical(value) + b"\n")
+
+
+def stub_profile(corpus, endpoint, admission):
+    codec_hash = R.sha(CODEC.read_bytes())
+    endpoint_hash = R.sha(ENDPOINT.read_bytes())
+    return {
+        "schema": "ns-original-controller-profile/v1",
+        "corpus_path": str(Contract.CORPUS),
+        "corpus_sha256": Contract.CORPUS_SHA256,
+        "original_inventory_codec": {"path": str(CODEC), "sha256": codec_hash},
+        "procedure_service": {
+            "qualified": True,
+            "python": "/usr/bin/python3.12",
+            "entrypoint": str(SERVICE_ENTRY),
+            "profile_path": str(SERVICE_PROFILE),
+            "endpoint_path": str(ENDPOINT),
+            "endpoint_sha256": endpoint_hash,
+            "environment_profile_sha256": endpoint["environment_profile_sha256"],
+            "timeout_seconds": 120,
+        },
+        "scorer_services": {
+            "cold": {
+                "qualified": True,
+                "python": "/usr/bin/python3",
+                "entrypoint": admission["entrypoint"],
+                "profile_path": str(HERE.parents[1] / "recruitment/original_acceptance_v1/candidate_endpoint_v2/profile.json"),
+                "profile_sha256": admission["profile_sha256"],
+                "admission_path": str(ADMISSION),
+                "admission_sha256": R.sha(ADMISSION.read_bytes()),
+            }
+        },
+        "trajectories": [{"trajectory_id": "caller-nom-v1--" + task["task_id"] + "--D--" + cache + "--primary",
+                          "features": {"lifecycle_reuse": False}}
+                         for task in corpus["tasks"] for cache in ("cold", "warm")],
+        "tasks": corpus["tasks"],
+    }
+
+
+def event_for(profile, task, index, cache):
+    trajectory_id = "caller-nom-v1--" + task["task_id"] + "--D--" + cache + "--primary"
+    return {"trajectory_id": trajectory_id, "event_id": trajectory_id + "--h" + str(index).zfill(2),
+            "horizon": index, "task_id": task["task_id"], "arm": "D", "cache_profile": cache,
+            "configuration_sha256": task["events"][0 if index == 0 else index - 1]["configuration_sha256"]}
+
+
+def rejects(name, fn, checks):
+    try:
+        fn()
+    except (ValueError, TypeError, KeyError):
+        checks.append({"name": name, "passed": True})
+        return True
+    checks.append({"name": name, "passed": False})
+    return False
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    output = args.output.resolve()
+    output.mkdir(parents=True, exist_ok=False)
+    started = time.perf_counter()
+    corpus = json.loads(Contract.CORPUS.read_bytes())
+    endpoint = json.loads(ENDPOINT.read_bytes())
+    admission = json.loads(ADMISSION.read_bytes())
+    sources = [Path(__file__), HERE / "original_services_v1.py", HERE / "original_controller_v1.py",
+               HERE / "repository_runtime_v2.py", PROCEDURE / "request_contract.py", ENDPOINT, ADMISSION, CODEC, Contract.CORPUS]
+    save(output / "freeze.json", {"schema": "ns-original-caller-nomination-controls-freeze/v1",
+                                  "created_at_ns": time.time_ns(),
+                                  "sources": {str(path): R.sha(path.read_bytes()) for path in sources},
+                                  "corpus_sha256": Contract.CORPUS_SHA256,
+                                  "endpoint_sha256": R.sha(ENDPOINT.read_bytes()),
+                                  "admission_sha256": R.sha(ADMISSION.read_bytes()),
+                                  "provider_calls": 0, "scorer_calls": 0, "native_procedure_calls": 0,
+                                  "scope": "Caller request construction against the closed nomination contract only."})
+    for path in sources:
+        target = output / "sources" / path.name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(path, target)
+    profile = stub_profile(corpus, endpoint, admission)
+    checks = []
+    rows = []
+
+    def check(name, value):
+        checks.append({"name": name, "passed": bool(value)})
+        if not value:
+            raise AssertionError(name)
+
+    check("endpoint_and_admission_are_qualified",
+          endpoint.get("status") == "qualified" and admission.get("qualified") is True)
+    check("controller_uses_plan_validation_request",
+          "O.plan_validation_request(" in (HERE / "original_controller_v1.py").read_text())
+    check("controller_does_not_use_path_cache_namespace",
+          "caches" not in (HERE / "original_controller_v1.py").read_text().split("plan_validation_request", 1)[1][:800])
+    for task in corpus["tasks"]:
+        for index, cache in ((0, "warm"), (2, "cold"), (3, "cold"), (4, "warm"), (5, "cold"), (6, "warm")):
+            event = event_for(profile, task, index, cache)
+            evaluation_id = event["event_id"] + "-current"
+            scorer = O.score_request(profile, event, task["source_root"], evaluation_id)
+            parent = None
+            if index == 6:
+                parent = {"trajectory_id": event["trajectory_id"], "event_id": event["trajectory_id"] + "--h05",
+                          "generation": 0, "seal_cid": "sha256:" + ("ab" * 32), "source_tree_sha256": task["source_tree_sha256"]}
+            body = O.plan_validation_request(profile, event, scorer, parent,
+                                             operation_id=event["event_id"] + "--main-current_check",
+                                             cache_namespace=event["trajectory_id"])
+            admitted = Contract.validate_request(body, ENDPOINT)
+            check(task["task_id"] + ":" + cache + ":event" + str(index) + ":closed_request_admitted",
+                  admitted["scoring_passed"] is False and admitted["scorer_request"] == scorer)
+            check(task["task_id"] + ":" + cache + ":event" + str(index) + ":generic_and_original_inventories_distinct_or_equal_as_observed",
+                  body["source_inventory_sha256"] == scorer["expected_candidate_source_tree_sha256"]
+                  and body["generic_source_tree_sha256"] == task["source_tree_sha256"]
+                  and body["source_inventory_format"] == "original-adapter-path-keyed/v1")
+            rows.append({"task_id": task["task_id"], "event_index": index, "cache_profile": cache,
+                         "request_sha256": admitted["request_sha256"], "scorer_request_sha256": admitted["scorer_request_sha256"],
+                         "source_inventory_sha256": body["source_inventory_sha256"],
+                         "generic_source_tree_sha256": body["generic_source_tree_sha256"],
+                         "parent_present": body["expected_publication_parent"] is not None})
+            save(output / (event["event_id"] + ".json"), body)
+
+    sample_task = corpus["tasks"][0]
+    sample_event = event_for(profile, sample_task, 2, "cold")
+    sample_scorer = O.score_request(profile, sample_event, sample_task["source_root"], sample_event["event_id"] + "-current")
+    valid = O.plan_validation_request(profile, sample_event, sample_scorer, None,
+                                      operation_id=sample_event["event_id"] + "--main-current_check",
+                                      cache_namespace=sample_event["trajectory_id"])
+    incomplete = {key: value for key, value in valid.items() if key not in ("source_inventory_format", "generic_source_tree_sha256")}
+    incomplete["source_inventory_sha256"] = sample_scorer["expected_candidate_source_tree_sha256"]
+    incomplete["cache_namespace"] = "/tmp/caches/" + sample_event["trajectory_id"]
+    rejects("prior_incomplete_path_namespace_request_is_rejected",
+            lambda: Contract.validate_request(incomplete, ENDPOINT), checks)
+    rejects("path_cache_namespace",
+            lambda: O.plan_validation_request(profile, sample_event, sample_scorer, None,
+                                              operation_id=sample_event["event_id"] + "--main-current_check",
+                                              cache_namespace="/tmp/caches/" + sample_event["trajectory_id"]), checks)
+    rejects("event_one_is_not_a_validation_nomination",
+            lambda: Contract.validate_request({**valid, "event_index": 1}, ENDPOINT), checks)
+    rejects("cid_without_sha256_prefix",
+            lambda: O.publication_parent({"trajectory_id": sample_event["trajectory_id"], "event_id": sample_event["event_id"],
+                                          "generation": 0, "seal_cid": "fdc0efcac1a19d59de3f3c370a84e375517de896d746a0c75d96daf716568454"}), checks)
+    rejects("cross_trajectory_parent",
+            lambda: O.plan_validation_request(profile, sample_event, sample_scorer,
+                                              {"trajectory_id": "other-trajectory", "event_id": "other-event",
+                                               "generation": 0, "seal_cid": "sha256:" + ("cd" * 32)},
+                                              operation_id=sample_event["event_id"] + "--main-current_check",
+                                              cache_namespace=sample_event["trajectory_id"]), checks)
+    extra = dict(valid)
+    extra["expected_publication_parent"] = {"trajectory_id": sample_event["trajectory_id"], "event_id": sample_event["event_id"],
+                                            "generation": 0, "seal_cid": "sha256:" + ("ab" * 32), "revision": "extra"}
+    rejects("parent_with_extra_fields", lambda: Contract.validate_request(extra, ENDPOINT), checks)
+    local_only = O.plan_validation_request(profile, sample_event, sample_scorer,
+                                           {"trajectory_id": sample_event["trajectory_id"], "event_id": sample_event["event_id"],
+                                            "generation": 0, "seal_cid": None},
+                                           operation_id=sample_event["event_id"] + "--main-current_check",
+                                           cache_namespace=sample_event["trajectory_id"])
+    check("local_pointer_without_native_seal_omits_parent", local_only["expected_publication_parent"] is None)
+    Contract.validate_request(local_only, ENDPOINT)
+    check("local_pointer_without_native_seal_still_closed", True)
+    check("no_failed_checks", all(row["passed"] for row in checks))
+    save(output / "summary.json", {"schema": "ns-original-caller-nomination-controls/v1", "passed": True,
+                                   "checks": checks, "rows": rows, "provider_calls": 0, "scorer_calls": 0,
+                                   "native_procedure_calls": 0, "elapsed_seconds": time.perf_counter() - started,
+                                   "scope": "Closed caller nomination request construction. Does not execute native TEST, original scoring, publication or models."})
+    print(json.dumps({"passed": True, "checks": len(checks), "admitted_requests": len(rows),
+                      "elapsed_seconds": time.perf_counter() - started}, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

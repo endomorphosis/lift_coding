@@ -1,0 +1,152 @@
+#!/usr/bin/env python3
+"""Changing-inventory, original-confidence, pytest and cache-custody controls."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import time
+
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "frontend_observations_validation_v7"
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+def canonical(value): return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+def write(path, value): path.write_bytes(canonical(value) + b"\n")
+
+def worker():
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_bytes
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.models import RepositoryState
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.scanner import RepositoryScanner
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.frontend_observations import FrontendObservationError
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.snapshot import snapshot_repository
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.explain import _edge_limitations
+    from ipfs_datasets_py.logic.software_contracts.semantic_state import build_semantic_state, verify_semantic_state_bundle
+    profile = read(OUT / "runtime_source_manifest.json"); profile_id = sha((OUT / "runtime_source_manifest.json").read_bytes())
+    assert all(sha(Path(path).read_bytes()) == digest for path, digest in profile["files"].items())
+    cases = []; negatives = []; started = time.perf_counter()
+    with tempfile.TemporaryDirectory(prefix="ns-original-frontends-v7-") as tmp:
+        tree = Path(tmp); (tree / "tests").mkdir()
+        initial = {"a.py": b"def go(): return 1\n", "b.py": b"def go(): return 2\n",
+                   "caller.py": b"def caller(value):\n    return value.go()\n", "safe.py": b"def identity(value):\n    return value\n",
+                   "importer.py": b"import a\ndef run(): return a.go()\n",
+                   "tests/conftest.py": b"import pytest\n@pytest.fixture\ndef value(): return 1\n",
+                   "tests/test_run.py": b"def test_run(value):\n    assert value == 1\n",
+                   "opaque.py": b"def broken(:\n"}
+        for path, body in initial.items(): (tree / path).write_bytes(body)
+        def inputs():
+            return snapshot_repository(tree, repository_id="repo:original-frontends-v7", exclusions=()), {str(p.relative_to(tree)): p.read_bytes() for p in tree.rglob("*.py")}
+        def scan(previous=None, body=None, expected=None, profile_sha=profile_id, namespace=None, supplied=None):
+            snapshot, raw = inputs(); scanner = RepositoryScanner(repository_id="repo:original-frontends-v7", namespace=namespace, frontend_profile_sha256=profile_sha)
+            state = scanner.scan_snapshot(snapshot, raw if supplied is None else supplied, previous_state=previous,
+                previous_frontend_observations=body, expected_previous_frontend_observations_cid=expected)
+            return state, scanner.last_frontend_observations, scanner.last_reuse_diagnostics.to_dict(), scanner.last_frontend_observation_diagnostics
+        baseline, prior_body, _, _ = scan(); prior = baseline; prior_bundle = build_semantic_state(prior)
+        assert any(e.metadata.get("resolution") == "finite_may" for e in baseline.edges)
+        baseline_original = json.loads(prior_body)
+        assert any(e["confidence"] == "exact" and e["target_id"].startswith("module:") for e in baseline_original["paths"]["importer.py"]["edges"])
+        mutations = [
+            ("same_inventory", lambda: None),
+            ("comment_only", lambda: (tree / "safe.py").write_bytes(initial["safe.py"] + b"# public comment\n")),
+            ("third_candidate_added", lambda: (tree / "c.py").write_bytes(b"def go(): return 3\n")),
+            ("candidate_removed", lambda: (tree / "b.py").unlink()),
+            ("last_competing_candidate_removed", lambda: (tree / "c.py").unlink()),
+            ("all_candidates_removed_import_unresolved", lambda: (tree / "a.py").unlink()),
+            ("new_candidate_after_unresolved_import_exact_restored", lambda: (tree / "a.py").write_bytes(initial["a.py"])),
+            ("fixture_signature_changed", lambda: (tree / "tests/conftest.py").write_bytes(b"import pytest\n@pytest.fixture(scope='module')\ndef value(): return 2\n")),
+            ("pytest_configuration_added", lambda: (tree / "pytest.ini").write_bytes(b"[pytest]\naddopts = -q\n")),
+            ("opaque_python_fixed", lambda: (tree / "opaque.py").write_bytes(b"def now_valid(): return 3\n")),
+        ]
+        # Include configuration bytes in the explicit source mapping as well.
+        def inputs():
+            return snapshot_repository(tree, repository_id="repo:original-frontends-v7", exclusions=()), {str(p.relative_to(tree)): p.read_bytes() for p in tree.rglob("*") if p.is_file()}
+        for name, mutate in mutations:
+            mutate(); cold, cold_body, _, _ = scan()
+            # Durable state/cache roundtrip: consumer objects are newly restored.
+            restored = RepositoryState.from_dict(json.loads(canonical(prior.to_dict())))
+            (OUT / (name + ".parent.observations.json")).write_bytes(prior_body)
+            persisted = (OUT / (name + ".parent.observations.json")).read_bytes()
+            inc, body, diag, observations = scan(restored, persisted, cid_for_bytes(prior_body))
+            assert cold.to_dict() == inc.to_dict() and cold_body == body
+            cold_bundle = build_semantic_state(cold)
+            inc_bundle = build_semantic_state(inc, previous_bundle=prior_bundle)
+            verify_semantic_state_bundle(cold_bundle); verify_semantic_state_bundle(inc_bundle)
+            assert cold_bundle.root == inc_bundle.root and dict(cold_bundle.blocks) == dict(inc_bundle.blocks)
+            assert {v for e in cold.edges for v in _edge_limitations(e)} == {v for e in inc.edges for v in _edge_limitations(e)}
+            assert "caller.py" in diag["reused_paths"] and "caller.py" not in diag["analyzed_paths"]
+            cases.append({"case": name, "state_cid": inc.state_cid, "root_cid": inc_bundle.root.root_cid,
+                          "state_root_all_blocks_and_original_sidecar_equal": True, "blocks": len(inc_bundle.blocks),
+                          "bytes": sum(map(len, inc_bundle.blocks.values())), "reuse": diag, "observations": observations,
+                          "import_confidences": sorted({e.confidence for e in inc.edges if e.relation == "imports" and e.span and e.span.path == "importer.py"})})
+            prior, prior_body, prior_bundle = inc, body, inc_bundle
+        assert cases[5]["import_confidences"] == ["conservative"] and cases[6]["import_confidences"] == ["exact"]
+        def reject(name, body=prior_body, expected=None, previous=prior, profile_sha=profile_id, namespace=None):
+            try: scan(previous, body, cid_for_bytes(body) if expected is None else expected, profile_sha=profile_sha, namespace=namespace)
+            except FrontendObservationError as exc: negatives.append({"control": name, "rejected": True, "reason": str(exc)})
+            else: raise AssertionError(name)
+        reject("changed bytes under original CID", body=prior_body + b" ", expected=cid_for_bytes(prior_body))
+        reject("noncanonical exact-CID payload", body=prior_body + b"\n")
+        reject("wrong expected CID", expected=cid_for_bytes(b"wrong"))
+        reject("wrong parent state", previous=baseline)
+        reject("wrong runtime profile", profile_sha="0" * 64)
+        reject("wrong namespace", namespace="other")
+        for name, change in (
+            ("extra envelope field", lambda v: v.update(extra=True)),
+            ("wrong repository", lambda v: v.update(repository_id="repo:wrong")),
+            ("wrong extractor", lambda v: v.update(extractor_version="999")),
+            ("wrong bound parent CID", lambda v: v.update(parent_state_cid=baseline.state_cid)),
+            ("wrong original path source CID", lambda v: v["paths"]["caller.py"].update(source_cid=cid_for_bytes(b"wrong"))),
+            ("extra original path field", lambda v: v["paths"]["caller.py"].update(extra=True)),
+        ):
+            value = json.loads(prior_body); change(value); reject(name, body=canonical(value))
+        for name, body, expected in (("missing expected CID", prior_body, None), ("missing cache bytes", None, cid_for_bytes(prior_body))):
+            try: scan(prior, body, expected)
+            except FrontendObservationError: negatives.append({"control": name, "rejected": True})
+            else: raise AssertionError(name)
+        value = json.loads(prior_body); del value["paths"]["caller.py"]
+        partial = canonical(value); rebuilt, _, diag, _ = scan(prior, partial, cid_for_bytes(partial))
+        assert rebuilt.to_dict() == prior.to_dict() and "caller.py" in diag["analyzed_paths"]
+        negatives.append({"control": "missing per-path observations safely reanalyzed", "rejected_for_reuse": True})
+        _, raw = inputs(); raw["caller.py"] += b"# wrong bytes for frozen snapshot\n"
+        opaque, _, diag, _ = scan(prior, prior_body, cid_for_bytes(prior_body), supplied=raw)
+        assert "caller.py" not in diag["reused_paths"] and any(a.metadata.get("opaque_reason") == "source_cid_mismatch" for a in opaque.artifacts)
+        negatives.append({"control": "wrong current source bytes do not reuse original cache", "rejected_for_reuse": True})
+    assert all(sha(Path(path).read_bytes()) == digest for path, digest in profile["files"].items())
+    result = {"schema": "ns-original-frontend-observation-controls/v7", "all_checks_passed": True,
+              "cases": cases, "negative_controls": negatives, "full_equivalence_cases": len(cases),
+              "negative_controls_passed": len(negatives), "caller_reused_during_all_inventory_changes": True,
+              "original_exact_import_confidence_restored_after_unresolved_parent": True,
+              "runtime_files_rehashed": len(profile["files"]), "profile_sha256": profile_id,
+              "wall_seconds": time.perf_counter() - started, "provider_calls": 0}
+    write(OUT / "result.json", result); print(json.dumps({k: result[k] for k in ("all_checks_passed", "full_equivalence_cases", "negative_controls_passed", "wall_seconds")}))
+
+def main():
+    parser = argparse.ArgumentParser(); parser.add_argument("--worker", action="store_true"); args = parser.parse_args()
+    if args.worker: return worker()
+    OUT.mkdir()
+    profile = read(HERE / "results_v14_full_pyparsing_resolution_guard/runtime_source_manifest.json")
+    old = str(HERE / "runtime_resolution_reuse_v6"); new = str(HERE / "runtime_frontend_observations_v7")
+    profile["roots"]["ipfs_datasets_py"] = new; profile["pythonpath"][0] = new
+    profile["files"] = {p.replace(old, new): sha(Path(p.replace(old, new)).read_bytes()) for p in profile["files"]}
+    path = HERE / "runtime_frontend_observations_v7/ipfs_datasets_py/logic/software_contracts/semantic_index/frontend_observations.py"
+    profile["files"][str(path)] = sha(path.read_bytes())
+    profile["datasets_variant_manifest_sha256"] = sha((HERE / "runtime_frontend_observations_v7_manifest.json").read_bytes())
+    write(OUT / "runtime_source_manifest.json", profile)
+    write(OUT / "freeze.json", {"driver_sha256": sha(Path(__file__).read_bytes()), "runtime_manifest_sha256": sha((OUT / "runtime_source_manifest.json").read_bytes()), "worker_bound_seconds": 180})
+    env = dict(os.environ, PYTHONPATH=":".join(profile["pythonpath"]), IPFS_ACCEL_SKIP_CORE="1", PYTHONDONTWRITEBYTECODE="1")
+    command = [sys.executable, "-B", str(Path(__file__)), "--worker"]; tick = time.perf_counter()
+    try:
+        proc = subprocess.run(command, env=env, cwd="/tmp", capture_output=True, timeout=180)
+        process = {"returncode": proc.returncode, "timed_out": False}; stdout, stderr = proc.stdout, proc.stderr
+    except subprocess.TimeoutExpired as exc:
+        process = {"returncode": None, "timed_out": True}; stdout, stderr = exc.stdout or b"", exc.stderr or b""
+    (OUT / "stdout.log").write_bytes(stdout); (OUT / "stderr.log").write_bytes(stderr)
+    process.update(command=command, bound_seconds=180, wall_seconds=time.perf_counter() - tick)
+    write(OUT / "process.json", process); print(json.dumps(process))
+    if process["returncode"] != 0: raise SystemExit(1)
+    write(OUT / "summary.json", {"all_checks_passed": True, "result": read(OUT / "result.json"), "process": process})
+
+if __name__ == "__main__": main()

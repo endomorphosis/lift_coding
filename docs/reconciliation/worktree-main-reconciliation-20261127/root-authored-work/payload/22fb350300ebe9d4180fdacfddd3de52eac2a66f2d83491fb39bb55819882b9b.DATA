@@ -1,0 +1,11 @@
+# Public semantic review of the new OAuth exact-set predicate
+
+The exact `code/token/none` equality is **not independently qualified as mandatory original repair behavior**. It remains a new author-imposed assumption. Preserve its observed result as a diagnostic and keep the original oracle unchanged.
+
+The pristine public source provides stronger evidence than a dictionary key alone: `Server` routes `none` to the authorization-code handler; validation accepts that response type; the shared response builder suppresses code/token output for `none`, retaining state. However, the grant class declares `response_types = ['code']`, server documentation requires an application validator, and the example instantiates the abstract `RequestValidator` rather than proving a deployed authorization flow. No exposed library contract was found requiring default discovery metadata to equal every internal dispatch key.
+
+RFC 8414 defines discovery metadata in terms of response types supported by the authorization server. It does not specify how a library must derive that list from its dispatch table. [RFC 8414 §2](https://www.rfc-editor.org/rfc/rfc8414.html#section-2).
+
+The official response-type specification defines and registers `none`; it generally returns no authorization code or tokens and preserves supplied state. Therefore, a claim that `none` is universally forbidden in this metadata would also be unsupported. [OAuth Multiple Response Type Encoding Practices §4](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#none).
+
+This review does not establish that omission is correct for a deployment that actually supports `none`. It separates a plausible new default-advertising requirement from a demonstrated historical repair obligation. It uses only pristine public source/docs and official standards, with no protected predicate or reference-code basis and no new target execution. Public files, document bodies and SHA256 receipts are retained here.

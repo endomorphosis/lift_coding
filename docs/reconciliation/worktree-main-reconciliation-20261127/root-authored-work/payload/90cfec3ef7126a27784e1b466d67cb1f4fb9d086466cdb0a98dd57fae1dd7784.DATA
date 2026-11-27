@@ -1,0 +1,1264 @@
+"""Bounded historical context/input audit, without exporting prompt contents.
+
+The supervisor calls this after collecting router receipts and before Harbor
+removes the container. Receipt workspaces remain usable as input identities
+after workers exit or their worktrees are removed. This is observation only:
+neither successful reconstruction nor a provider receipt grants authority or
+establishes task correctness.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path, PurePosixPath
+import re
+import shlex
+import stat
+import subprocess
+import sys
+import tempfile
+import time
+
+
+SCHEMA = "terminal-final-context-audit@1"
+KINDS = ("semantic-context", "code-retrieval-context", "intent-world-context")
+MAX_FILE_BYTES = 2_000_000
+MAX_INVENTORY_ENTRIES = 20_000
+MAX_CAPSULES = 32
+MAX_RECEIPTS = 16
+MAX_DEPTH = 32
+MAX_REQUEST_BYTES = 65_536
+MAX_RESULT_BYTES = 262_144
+RECEIPT_FIELDS = (
+    "schema", "phase", "invocation_id", "purpose", "workspace",
+    "prompt_sha256", "prompt_bytes", "native_prompt_sha256", "native_prompt_bytes",
+    "model_prompt_sha256", "model_prompt_bytes", "workspace_advisory_sha256",
+    "workspace_advisory_bytes",
+)
+TRANSLATION_FIELDS = ("router_prompt_sha256", "router_prompt_bytes", "semantic_translation",
+    "semantic_transport", "semantic_context_verification", "doctor_residual_context", "public_instruction",
+    "reviewed_source_nomination_context",
+    "code_retrieval_codec", "code_retrieval_projection", "code_retrieval_wire_delivery",
+    "wire_delivery_cleanup_status", "wire_delivery_post_provider_verified")
+SEMANTIC_BINDINGS = ("task_id", "scope_cid", "semantic_root_cid", "semantic_sha256",
+    "native_prompt_sha256", "native_prompt_bytes")
+COMPACT_INCLUSION_SCHEMA = "supervisor-public-instruction-inclusion@6"
+PROJECTION_FIELDS = frozenset({"schema", "codec_schema", "requested_transport", "transport",
+    "requirements_context_cid", "source_sha256", "source_bytes", "expanded_sha256",
+    "expanded_bytes", "wire_sha256", "wire_bytes", "expanded_block_bytes", "selected_block_bytes",
+    "canonical_roundtrip_verified", "proof_authority", "execution_authority", "completion_authority"})
+
+
+def validate_intent_projection_receipt(instruction: dict) -> dict | None:
+    """Validate recorded projection measurements, without establishing trust."""
+    projection = instruction.get("intent_requirements_projection")
+    if instruction.get("schema") != COMPACT_INCLUSION_SCHEMA:
+        if projection is not None:
+            raise ValueError("compact IntentIR projection needs its versioned inclusion receipt")
+        return None
+    if (type(projection) is not dict or set(projection) != PROJECTION_FIELDS
+            or projection["schema"] != "supervisor-intent-requirements-projection@1"
+            or projection["codec_schema"] != "supervisor-compact-task-intent-requirements@1"
+            or projection["requested_transport"] != "compact"
+            or type(projection["transport"]) is not str
+            or projection["transport"] not in {"expanded", "compact"}
+            or projection["canonical_roundtrip_verified"] is not True
+            or any(projection[key] is not False for key in
+                   ("proof_authority", "execution_authority", "completion_authority"))):
+        raise ValueError("invalid compact IntentIR projection receipt")
+    for key in ("source_sha256", "expanded_sha256", "wire_sha256"):
+        _digest(projection[key])
+    _identity(projection["requirements_context_cid"])
+    for key, bound in (("source_bytes", 32768), ("expanded_bytes", 131072), ("wire_bytes", 131072),
+                       ("expanded_block_bytes", 262144), ("selected_block_bytes", 262144)):
+        if type(projection[key]) is not int or not 0 < projection[key] <= bound:
+            raise ValueError("invalid compact IntentIR projection byte count")
+    requirements = instruction.get("intent_requirements")
+    if (type(requirements) is not dict
+            or projection["requirements_context_cid"] != requirements.get("requirements_context_cid")
+            or projection["source_sha256"] != instruction.get("source_sha256")
+            or type(instruction.get("source_bytes")) is not int
+            or projection["source_bytes"] != instruction["source_bytes"]
+            or type(instruction.get("block_bytes")) is not int
+            or instruction["block_bytes"] <= projection["selected_block_bytes"] + projection["source_bytes"]
+            or projection["expanded_block_bytes"] <= projection["expanded_bytes"]
+            or projection["selected_block_bytes"] <= projection["wire_bytes"]):
+        raise ValueError("compact IntentIR projection differs from native inclusion bindings")
+    if projection["transport"] == "compact":
+        if projection["selected_block_bytes"] >= projection["expanded_block_bytes"]:
+            raise ValueError("compact IntentIR projection exceeded its byte-benefit gate")
+    elif (projection["selected_block_bytes"] != projection["expanded_block_bytes"]
+            or projection["wire_sha256"] != projection["expanded_sha256"]
+            or projection["wire_bytes"] != projection["expanded_bytes"]):
+        raise ValueError("expanded IntentIR fallback differs from its canonical representation")
+    return dict(projection)
+
+
+CODE_PROJECTION_FIELDS = frozenset({"schema", "requested_transport", "selected_transport", "reason",
+    "wire_schema", "wire_sha256", "wire_bytes", "native_prompt_sha256", "native_prompt_bytes",
+    "source_sha256", "source_bytes", "code_context_sha256", "code_context_bytes", "code_chunk_count",
+    "code_hit_count", "candidate_prompt_bytes", "selected_prompt_bytes", "selected_prompt_sha256",
+    "exact_native_roundtrip_verified", "source_authentication_claimed", "native_authentication_claimed",
+    "proof_authority", "execution_authority", "completion_authority", "publication_authority",
+    "native_verification", "decoder_command"})
+CODE_VERIFICATION_FIELDS = frozenset({"schema", "task_id", "repository_id", "tree_id",
+    "native_prompt_sha256", "native_prompt_bytes", "native_suffix_sha256", "code_context_sha256",
+    "code_context_bytes", "source_sha256", "source_bytes", "artifact", "observed_artifact_sha256",
+    "artifact_nomination_signature_verified", "captured_public_native_replay_verified",
+    "original_custody_rechecked", "native_source_scope_matches_semantic_declarations",
+    "expected_source_scope_supplied", "native_query_matches_literal_source", "metadata_owner_suppressed",
+    "index_id", "query_id", "result_id", "code_chunk_count", "code_hit_count", "source_hashes",
+    "input_witnesses", "source_authentication_claimed", "semantic_producer_authentication_claimed",
+    "proof_authority", "execution_authority", "completion_authority", "publication_authority",
+    "scope_expansion_authority"})
+CODE_AUTHORITY = ("proof_authority", "execution_authority", "completion_authority", "publication_authority")
+CODE_DELIVERY_FIELDS = frozenset({"schema", "mode", "path", "wire_sha256", "wire_bytes",
+    "source_sha256", "native_prompt_sha256", "owner_custody", "materialized", *CODE_AUTHORITY})
+CODE_DELIVERY_PATH = re.compile(
+    r"/opt/ipfs-supervisor/worker-home/context-wires/([0-9a-f]{32})/([0-9a-f]{64})\.json")
+
+
+def _validate_wire_delivery_observation(projection: dict, receipt: dict) -> None:
+    """Bind a scalar delivery observation without opening its live path.
+
+    Materialization does not grant owner custody or authenticate native/source
+    admission. Post-provider mutation and cleanup failure remain observations;
+    neither invalidates reconstruction of the initially captured model input.
+    """
+    version_three = projection["schema"] == "supervisor-code-retrieval-prompt-projection@3"
+    actual_handle = version_three and projection["selected_transport"] == "compact"
+    if version_three:
+        delivery = projection["wire_delivery"]
+        if (type(delivery) is not dict or set(delivery) != CODE_DELIVERY_FIELDS
+                or delivery["schema"] != "supervisor-code-retrieval-wire-delivery@1"
+                or delivery["mode"] != "materialized"
+                or any(delivery[key] is not False for key in ("owner_custody", *CODE_AUTHORITY))
+                or type(delivery["materialized"]) is not bool
+                or delivery["materialized"] is not actual_handle
+                or projection["decoder_command"] is None):
+            raise ValueError("invalid compact retrieval wire delivery observation")
+        match = CODE_DELIVERY_PATH.fullmatch(delivery["path"]) if type(delivery["path"]) is str else None
+        if (match is None or type(receipt.get("invocation_id")) is not str
+                or match[1] != receipt["invocation_id"] or match[2] != projection["wire_sha256"]):
+            raise ValueError("materialized wire path differs from its invocation or digest")
+        for key in ("wire_sha256", "wire_bytes", "source_sha256", "native_prompt_sha256"):
+            if type(delivery[key]) is not type(projection[key]) or delivery[key] != projection[key]:
+                raise ValueError("materialized wire binding differs from native projection")
+    if "wire_delivery_cleanup_status" in receipt:
+        value = receipt["wire_delivery_cleanup_status"]
+        if not actual_handle or type(value) is not str or value not in {"removed", "failed"}:
+            raise ValueError("invalid materialized wire cleanup observation")
+    if "wire_delivery_post_provider_verified" in receipt:
+        if not actual_handle or type(receipt["wire_delivery_post_provider_verified"]) is not bool:
+            raise ValueError("invalid materialized wire post-provider observation")
+    if "wire_delivery_post_observation_verified" in receipt:
+        if (receipt.get("schema") != "supervisor-model-input-observation@1" or not actual_handle
+                or type(receipt["wire_delivery_post_observation_verified"]) is not bool):
+            raise ValueError("invalid materialized wire post-render observation")
+
+
+def _public_relative(value: object, *, directory=False) -> str:
+    from ipfs_accelerate_py.agent_supervisor.runtime.verified_code_retrieval_projection import _relative
+    if directory and value == ".":
+        return value
+    return _relative(value)
+
+
+def _decoder_prefix(command: object, *, source_path: str, source_sha256: str,
+        native_sha256: str, repository: Path | None = None) -> None:
+    if command is None:
+        return
+    if type(command) is not str or not 0 < len(command.encode()) <= 8192:
+        raise ValueError("invalid compact retrieval decoder prefix")
+    argv = shlex.split(command)
+    if (len(argv) != 14 or shlex.join(argv) != command or argv[0] != "/usr/bin/env"
+            or not argv[1].startswith("PYTHONPATH=") or argv[2] != "PYTHONDONTWRITEBYTECODE=1"
+            or argv[4:9] != ["-P", "-m", "ipfs_accelerate_py.agent_supervisor.runtime.compact_code_retrieval", "decode", "--source"]
+            or argv[10:] != ["--expected-source-sha256", source_sha256, "--expected-native-sha256", native_sha256]):
+        raise ValueError("compact retrieval decoder prefix differs from its pinned operation")
+    for path in (*argv[1][len("PYTHONPATH="):].split(os.pathsep), argv[3], argv[9]):
+        if not path or not Path(path).is_absolute() or ".." in Path(path).parts or str(Path(path)) != path:
+            raise ValueError("compact retrieval decoder environment is not canonical")
+    if (re.fullmatch(r"python(?:[0-9]+(?:\.[0-9]+)?)?", Path(argv[3]).name) is None
+            or not argv[9].endswith("/" + source_path)
+            or repository is not None and argv[9] != str(repository / source_path)):
+        raise ValueError("compact retrieval decoder source or interpreter differs")
+
+
+def validate_code_retrieval_projection_receipt(raw_router_receipt: dict) -> dict | None:
+    """Validate bounded recorded measurements; this does not authenticate them.
+
+    Return only scalar measurements for comparison. Custody maps are checked
+    but cannot establish historical source freshness or grant any authority.
+    """
+    if type(raw_router_receipt) is not dict:
+        raise ValueError("invalid router receipt")
+    flag = raw_router_receipt.get("code_retrieval_codec", "expanded")
+    projection = raw_router_receipt.get("code_retrieval_projection")
+    delivery_control = raw_router_receipt.get("code_retrieval_wire_delivery", "inline")
+    if type(delivery_control) is not str or delivery_control not in {"inline", "materialized"}:
+        raise ValueError("invalid code retrieval wire delivery control")
+    if type(flag) is not str or flag not in {"expanded", "compact"}:
+        raise ValueError("invalid code retrieval codec")
+    if flag == "expanded":
+        if (delivery_control != "inline" or any(key in raw_router_receipt for key in
+                ("wire_delivery_cleanup_status", "wire_delivery_post_provider_verified"))):
+            raise ValueError("expanded code retrieval cannot claim materialized wire delivery")
+        if projection is not None:
+            raise ValueError("expanded code retrieval cannot claim a compact projection")
+        return None
+    projection_schema = projection.get("schema") if type(projection) is dict else None
+    version_two = projection_schema == "supervisor-code-retrieval-prompt-projection@2"
+    version_three = projection_schema == "supervisor-code-retrieval-prompt-projection@3"
+    projection_fields = (CODE_PROJECTION_FIELDS
+        | ({"guidance_version"} if version_two or version_three else set())
+        | ({"wire_delivery"} if version_three else set()))
+    if (type(projection) is not dict or set(projection) != projection_fields
+            or type(projection_schema) is not str
+            or projection_schema not in {"supervisor-code-retrieval-prompt-projection@1", "supervisor-code-retrieval-prompt-projection@2", "supervisor-code-retrieval-prompt-projection@3"}
+            or (version_two or version_three) and (type(projection["guidance_version"]) is not int
+                or projection["guidance_version"] != (3 if version_three else 2))
+            or (delivery_control == "materialized") != version_three
+            or projection["wire_schema"] != "supervisor-compact-code-retrieval-prompt@1"
+            or projection["requested_transport"] != "compact"
+            or type(projection["selected_transport"]) is not str
+            or projection["selected_transport"] not in {"compact", "expanded"}
+            or projection["exact_native_roundtrip_verified"] is not True
+            or any(projection[key] is not False for key in
+                   (*CODE_AUTHORITY, "source_authentication_claimed", "native_authentication_claimed"))
+            or raw_router_receipt.get("semantic_transport") != "native"
+            or raw_router_receipt.get("semantic_translation") is not None):
+        raise ValueError("invalid compact code retrieval projection receipt")
+    for key in ("wire_sha256", "native_prompt_sha256", "source_sha256", "code_context_sha256", "selected_prompt_sha256"):
+        _digest(projection[key])
+    bounds = {"wire_bytes": 512000, "native_prompt_bytes": 256000, "source_bytes": 32768,
+        "code_context_bytes": 65536, "candidate_prompt_bytes": 528384, "selected_prompt_bytes": 256000,
+        "code_chunk_count": 128, "code_hit_count": 20}
+    for key, maximum in bounds.items():
+        if type(projection[key]) is not int or not (0 if key == "code_hit_count" else 1) <= projection[key] <= maximum:
+            raise ValueError("invalid compact retrieval count")
+    if projection["candidate_prompt_bytes"] <= projection["wire_bytes"]:
+        raise ValueError("compact retrieval guidance is absent from its byte count")
+    if projection["selected_transport"] == "compact":
+        if (projection["reason"] != "complete_projection_smaller"
+                or projection["selected_prompt_bytes"] != projection["candidate_prompt_bytes"]
+                or projection["selected_prompt_bytes"] >= projection["native_prompt_bytes"]):
+            raise ValueError("compact retrieval exceeded its complete byte-benefit gate")
+    elif (projection["reason"] != "complete_projection_not_smaller"
+            or projection["candidate_prompt_bytes"] < projection["native_prompt_bytes"]
+            or projection["selected_prompt_bytes"] != projection["native_prompt_bytes"]
+            or projection["selected_prompt_sha256"] != projection["native_prompt_sha256"]):
+        raise ValueError("expanded retrieval fallback differs from native input")
+    _validate_wire_delivery_observation(projection, raw_router_receipt)
+    instruction = raw_router_receipt.get("public_instruction")
+    semantic = raw_router_receipt.get("semantic_context_verification")
+    if (type(instruction) is not dict or type(semantic) is not dict
+            or instruction.get("schema") not in {"supervisor-public-instruction-inclusion@1", "supervisor-public-instruction-inclusion@2", COMPACT_INCLUSION_SCHEMA}
+            or any(instruction.get(key) is not True for key in
+                   ("manifest_signature_verified", "verbatim_utf8", "source_freshness_verified"))
+            or any(instruction.get(key) is not False for key in
+                   ("semantic_minification_applied", "historical_replay", "completion_authority", "scope_expansion_authority"))
+            or set(semantic) != {"schema", "freshness_checked", *SEMANTIC_BINDINGS}
+            or semantic.get("schema") != "semantic-router-source-verification@1"
+            or semantic.get("freshness_checked") is not True
+            or any(projection[key] != raw_router_receipt.get(key) for key in ("native_prompt_sha256", "native_prompt_bytes"))
+            or type(raw_router_receipt.get("native_prompt_bytes")) is not int
+            or any(projection[key] != instruction.get(key) for key in ("source_sha256", "source_bytes"))
+            or type(instruction.get("source_bytes")) is not int
+            or any(semantic.get(key) != projection[key] for key in ("native_prompt_sha256", "native_prompt_bytes"))):
+        raise ValueError("compact retrieval differs from native or signed-source receipt")
+    for key in ("task_id", "scope_cid", "semantic_root_cid"):
+        _identity(semantic[key])
+    _digest(semantic["semantic_sha256"])
+    if type(semantic["native_prompt_bytes"]) is not int:
+        raise ValueError("invalid semantic byte count")
+    _decoder_prefix(projection["decoder_command"], source_path=_public_relative(instruction.get("source_path")),
+        source_sha256=projection["source_sha256"], native_sha256=projection["native_prompt_sha256"])
+    verification = projection["native_verification"]
+    if (type(verification) is not dict or set(verification) != CODE_VERIFICATION_FIELDS
+            or verification["schema"] != "supervisor-code-retrieval-native-verification@1"
+            or any(verification[key] is not False for key in (*CODE_AUTHORITY, "scope_expansion_authority",
+                "source_authentication_claimed", "semantic_producer_authentication_claimed", "artifact_nomination_signature_verified"))
+            or any(verification[key] is not True for key in ("captured_public_native_replay_verified",
+                "original_custody_rechecked", "native_source_scope_matches_semantic_declarations",
+                "native_query_matches_literal_source", "metadata_owner_suppressed"))
+            or type(verification["expected_source_scope_supplied"]) is not bool
+            or verification["task_id"] != semantic.get("task_id")):
+        raise ValueError("invalid compact retrieval native verification")
+    for key in ("native_prompt_sha256", "native_prompt_bytes", "source_sha256", "source_bytes",
+                "code_context_sha256", "code_context_bytes", "code_chunk_count", "code_hit_count"):
+        if type(verification[key]) is not type(projection[key]) or verification[key] != projection[key]:
+            raise ValueError("compact retrieval native verification binding differs")
+    for key in ("native_suffix_sha256", "observed_artifact_sha256"):
+        _digest(verification[key])
+    for key in ("task_id", "repository_id", "tree_id", "index_id", "query_id", "result_id"):
+        _identity(verification[key])
+    _public_relative(verification["artifact"])
+    sources, witnesses = verification["source_hashes"], verification["input_witnesses"]
+    if (type(sources) is not dict or not 1 <= len(sources) <= 64
+            or type(witnesses) is not dict or not 2 <= len(witnesses) <= 322
+            or len(json.dumps(witnesses, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()) > 256000):
+        raise ValueError("invalid compact retrieval custody census")
+    stat_fields = {"st_dev", "st_ino", "st_mode", "st_uid", "st_gid", "st_nlink", "st_size", "st_mtime_ns", "st_ctime_ns"}
+    files = {}
+    for name, witness in witnesses.items():
+        if type(name) is not str or type(witness) is not dict or witness.get("kind") not in {"file", "directory"}:
+            raise ValueError("invalid compact retrieval custody witness")
+        is_file = witness["kind"] == "file"
+        prefix = "file:" if is_file else "directory:"
+        if (not name.startswith(prefix) or set(witness) != {"kind", *stat_fields, *({"bytes", "sha256"} if is_file else set())}
+                or any(type(witness[key]) is not int or witness[key] < 0 for key in stat_fields)):
+            raise ValueError("invalid compact retrieval custody fields")
+        path = _public_relative(name[len(prefix):], directory=not is_file)
+        if (stat.S_IMODE(witness["st_mode"]) & 0o022
+                or not (stat.S_ISREG(witness["st_mode"]) if is_file else stat.S_ISDIR(witness["st_mode"]))
+                or stat.S_IMODE(witness["st_mode"]) & (0o004 if is_file else 0o005) != (0o004 if is_file else 0o005)):
+            raise ValueError("invalid compact retrieval custody mode")
+        if is_file:
+            if (type(witness["bytes"]) is not int or not 0 < witness["bytes"] <= 128 * 1024 * 1024
+                    or witness["bytes"] != witness["st_size"] or witness["st_nlink"] != 1):
+                raise ValueError("invalid compact retrieval file count")
+            files[path] = _digest(witness["sha256"])
+    if (len(files) > 66 or len(witnesses) - len(files) > 256
+            or files.get(verification["artifact"]) != verification["observed_artifact_sha256"]):
+        raise ValueError("compact retrieval artifact custody differs")
+    for path, digest in sources.items():
+        if files.get(_public_relative(path)) != _digest(digest):
+            raise ValueError("compact retrieval source custody differs")
+    return {**{key: value for key, value in projection.items() if key != "native_verification"},
+        "native_verification": {key: value for key, value in verification.items()
+                                if key not in {"source_hashes", "input_witnesses"}}}
+
+
+def _sha(raw: bytes) -> str:
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _base(status="unknown", reason="observation_unavailable") -> dict:
+    return {"schema": SCHEMA, "status": status, "reason": reason,
+        "any_native_input_verified": None, "any_model_input_verified": None,
+        "all_observed_coding_inputs_verified": None,
+        "capsules": [], "invocations": [], "matches": [], "read_errors": [],
+        "world_scope": "sealed historical capture; claims may supersede its intent revision",
+        "input_scope": "router task prompt; provider harness/system context is outside this digest",
+        "raw_prompts_exported": False, "provider_calls": 0,
+        "execution_authority": False, "completion_authority": False,
+        "task_correctness_established": False}
+
+
+def _open_directory(path: Path) -> int:
+    """Open every absolute directory component without following a symlink."""
+    path = Path(path).absolute()
+    if ".." in path.parts:
+        raise ValueError("noncanonical directory")
+    fd = os.open("/", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        for part in path.parts[1:]:
+            next_fd = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW,
+                              dir_fd=fd)
+            os.close(fd)
+            fd = next_fd
+        return fd
+    except BaseException:
+        os.close(fd)
+        raise
+
+
+def _read_at(root_fd: int, relative: str, limit=MAX_FILE_BYTES) -> bytes:
+    """Race-safe, bounded regular-file read under the already opened state."""
+    parts = PurePosixPath(relative).parts
+    if not parts or relative.startswith("/") or any(p in {".", ".."} for p in parts):
+        raise ValueError("invalid state-relative file")
+    parent = os.dup(root_fd)
+    fd = None
+    try:
+        for part in parts[:-1]:
+            next_fd = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW,
+                              dir_fd=parent)
+            os.close(parent)
+            parent = next_fd
+        # NONBLOCK prevents a substituted FIFO from blocking before fstat.
+        fd = os.open(parts[-1], os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=parent)
+        before = os.fstat(fd)
+        if not stat.S_ISREG(before.st_mode) or not 0 <= before.st_size <= limit:
+            raise ValueError("nonregular or oversized state file")
+        with os.fdopen(fd, "rb", closefd=False) as stream:
+            raw = stream.read(limit + 1)
+        after = os.fstat(fd)
+        fields = ("st_dev", "st_ino", "st_size", "st_mtime_ns", "st_ctime_ns")
+        if len(raw) > limit or any(getattr(before, k) != getattr(after, k) for k in fields):
+            raise ValueError("state file changed during observation")
+        return raw
+    finally:
+        if fd is not None:
+            os.close(fd)
+        os.close(parent)
+
+
+def _json(raw: bytes):
+    def unique(pairs):
+        value = {}
+        for key, item in pairs:
+            if key in value:
+                raise ValueError("duplicate JSON key")
+            value[key] = item
+        return value
+    return json.loads(raw, object_pairs_hook=unique)
+
+
+def _identity(value: object) -> str:
+    if not isinstance(value, str) or re.fullmatch(r"[A-Za-z0-9_:./-]{1,512}", value) is None:
+        raise ValueError("invalid context identity")
+    return value
+
+
+def _digest(value: object) -> str:
+    if not isinstance(value, str) or re.fullmatch(r"[0-9a-f]{64}", value) is None:
+        raise ValueError("invalid digest")
+    return value
+
+
+def _capsule_paths(root_fd: int) -> list[str]:
+    result, entries = [], 0
+    def failed(error):
+        raise error
+    for directory, dirs, files, _ in os.fwalk(".", topdown=True, follow_symlinks=False,
+                                             dir_fd=root_fd, onerror=failed):
+        entries += len(dirs) + len(files)
+        if entries > MAX_INVENTORY_ENTRIES or len(PurePosixPath(directory).parts) > MAX_DEPTH:
+            raise ValueError("state inventory exceeds audit bound")
+        dirs.sort()
+        for name in sorted(files):
+            if name.endswith("-base-context-capsule.json"):
+                result.append((PurePosixPath(directory) / name).as_posix())
+                if len(result) > MAX_CAPSULES:
+                    raise ValueError("capsule inventory exceeds audit bound")
+    return result
+
+
+def _receipt(item: dict, workspace_root: Path) -> dict:
+    if not isinstance(item, dict) or item.get("schema") != "router-implementation-invocation@1":
+        raise ValueError("invalid router receipt")
+    if item.get("phase") != "coding" or item.get("purpose") != "coding":
+        raise ValueError("non-coding router receipt")
+    return _input_bindings(item, workspace_root)
+
+
+def _input_bindings(item: dict, workspace_root: Path) -> dict:
+    """Shared scalar replay facts; the caller separately validates record kind."""
+    result = {key: item[key] for key in RECEIPT_FIELDS}
+    result.update({key: item[key] for key in TRANSLATION_FIELDS if key in item})
+    if item.get("schema") == "supervisor-model-input-observation@1" and "wire_delivery_post_observation_verified" in item:
+        result["wire_delivery_post_observation_verified"] = item["wire_delivery_post_observation_verified"]
+    _identity(result["invocation_id"])
+    location = result["workspace"]
+    if not isinstance(location, str) or len(location.encode()) > 4096:
+        raise ValueError("invalid workspace identity")
+    workspace, root = Path(location), Path(workspace_root)
+    if (not workspace.is_absolute() or ".." in workspace.parts
+            or str(workspace) != location or not root.is_absolute()
+            or workspace == root or not workspace.is_relative_to(root)):
+        raise ValueError("workspace outside configured allocation root")
+    for field in ("prompt_sha256", "native_prompt_sha256", "model_prompt_sha256", "workspace_advisory_sha256"):
+        _digest(result[field])
+    for field in ("prompt_bytes", "native_prompt_bytes", "model_prompt_bytes", "workspace_advisory_bytes"):
+        if type(result[field]) is not int or not 0 < result[field] <= 262_144:
+            raise ValueError("invalid input byte count")
+    translated = result.get("semantic_translation") is not None
+    transport = result.get("semantic_transport")
+    verification = result.get("semantic_context_verification")
+    if "semantic_transport" in result:
+        if transport not in {"none", "identifiers", "native"}:
+            raise ValueError("invalid semantic transport")
+        if translated != (transport == "identifiers"):
+            raise ValueError("semantic transport differs from translation receipt")
+        if (verification is not None) != (transport in {"identifiers", "native"}):
+            raise ValueError("semantic transport lacks matching source verification")
+    elif verification is not None:
+        raise ValueError("semantic source verification lacks transport identity")
+    if verification is not None:
+        if (not isinstance(verification, dict)
+                or set(verification) != {"schema", "freshness_checked", *SEMANTIC_BINDINGS}
+                or verification.get("schema") != "semantic-router-source-verification@1"
+                or verification.get("freshness_checked") is not True):
+            raise ValueError("invalid semantic source verification receipt")
+        for key in ("task_id", "scope_cid", "semantic_root_cid"):
+            _identity(verification[key])
+        for key in ("semantic_sha256", "native_prompt_sha256"):
+            _digest(verification[key])
+        if (verification.get("native_prompt_sha256") != result["native_prompt_sha256"]
+                or type(verification.get("native_prompt_bytes")) is not int
+                or verification["native_prompt_bytes"] != result["native_prompt_bytes"]):
+            raise ValueError("semantic source verification differs from native input")
+    instruction = result.get("public_instruction")
+    router_bytes = result.get("router_prompt_bytes", result["native_prompt_bytes"])
+    if translated or verification is not None or instruction is not None:
+        _digest(result["router_prompt_sha256"])
+        if type(router_bytes) is not int or not 0 < router_bytes <= 262_144:
+            raise ValueError("invalid translated input byte count")
+    if translated:
+        translation = result["semantic_translation"]
+        if (not isinstance(translation, dict)
+                or translation.get("schema") != "supervisor-semantic-router-encoding@1"
+                or translation.get("freshness_checked") is not True):
+            raise ValueError("invalid semantic translation receipt")
+        _identity(translation["translation_cid"])
+        if verification is not None and any(translation.get(key) != verification[key]
+                for key in SEMANTIC_BINDINGS):
+            raise ValueError("semantic translation differs from source verification")
+    elif instruction is None and result.get("doctor_residual_context") is None and (router_bytes != result["native_prompt_bytes"]
+          or result.get("router_prompt_sha256", result["native_prompt_sha256"]) != result["native_prompt_sha256"]):
+        raise ValueError("unexplained router projection")
+    residual = result.get("doctor_residual_context")
+    if residual is not None:
+        if (not (translated or verification is not None) or not isinstance(residual, dict)
+                or residual.get("schema") != "doctor-residual-router-context@1"
+                or residual.get("candidate_only") is not True):
+            raise ValueError("invalid Doctor residual receipt")
+        for key in ("artifact_sha256", "advisory_sha256"):
+            _digest(residual[key])
+        _identity(residual["task_cid"])
+    if instruction is not None:
+        if (not isinstance(instruction, dict)
+                or instruction.get("schema") not in {"supervisor-public-instruction-inclusion@1", "supervisor-public-instruction-inclusion@2", COMPACT_INCLUSION_SCHEMA}
+                or any(instruction.get(k) is not True for k in
+                       ("manifest_signature_verified", "verbatim_utf8", "source_freshness_verified"))
+                or any(instruction.get(k) is not False for k in
+                       ("semantic_minification_applied", "historical_replay", "completion_authority", "scope_expansion_authority"))):
+            raise ValueError("invalid public instruction inclusion receipt")
+        for key in ("artifact_sha256", "source_sha256", "block_sha256"):
+            _digest(instruction[key])
+        _identity(instruction["task_cid"])
+        validate_intent_projection_receipt(instruction)
+        if instruction["schema"] in {"supervisor-public-instruction-inclusion@2", COMPACT_INCLUSION_SCHEMA}:
+            requirements = instruction.get("intent_requirements")
+            if (not isinstance(requirements, dict) or requirements.get("admission_graph_verified") is not True
+                    or any(requirements.get(key) is not False for key in ("native_persistence_verified_here",
+                        "source_semantics_verified", "semantic_alignment_verified", "proof_authority",
+                        "execution_authority", "completion_authority"))):
+                raise ValueError("invalid task-specific intent requirement receipt")
+            for key in ("requirements_context_cid", "contract_cid", "graph_cid", "coverage_cid", "planning_receipt_cid"):
+                _identity(requirements[key])
+            _digest(requirements["ledger_sha256"])
+            for key in ("requirement_ids", "dependency_requirement_ids", "prohibition_requirement_ids"):
+                if (not isinstance(requirements.get(key), list) or len(requirements[key]) > 512
+                        or any(not isinstance(item, str) for item in requirements[key])
+                        or len(set(requirements[key])) != len(requirements[key])):
+                    raise ValueError("invalid intent requirement identity population")
+                for requirement_id in requirements[key]:
+                    _identity(requirement_id)
+    validate_code_retrieval_projection_receipt(result)
+    if "reviewed_source_nomination_context" in result:
+        if instruction is None or verification is None:
+            raise ValueError("reviewed source inclusion requires verified semantic and public instruction receipts")
+        from ipfs_accelerate_py.agent_supervisor.runtime.reviewed_source_nomination_audit import validate_reviewed_source_nomination_receipt
+        validate_reviewed_source_nomination_receipt(result["reviewed_source_nomination_context"],
+            native_sha256=result["native_prompt_sha256"], native_bytes=result["native_prompt_bytes"],
+            instruction=instruction, semantic_verification=verification)
+        if result["model_prompt_bytes"] > 256_000:
+            raise ValueError("complete reviewed source model input exceeds live router bound")
+    if (result["prompt_sha256"] != result["native_prompt_sha256"]
+            or result["prompt_bytes"] != result["native_prompt_bytes"]
+            or router_bytes + result["workspace_advisory_bytes"] != result["model_prompt_bytes"]):
+        raise ValueError("inconsistent router input identities")
+    return result
+
+
+def _native_semantic_bindings(*, prompt: str, repository: Path) -> dict:
+    """Use the same immutable producer checks without making unused aliases."""
+    from ipfs_accelerate_py.agent_supervisor.runtime import semantic_router_translation as semantic
+    root = Path(repository).absolute()
+    if root.resolve(strict=True) != root:
+        raise ValueError("semantic repository must be canonical")
+    wire, _, _, _, text, artifact = semantic._prompt_parts(prompt)
+    payload, _ = semantic._verified_semantic(root, artifact=artifact, text=text,
+        task_id=wire["objective_id"], current=False)
+    # Retain the existing typed population bound; no wire alias is produced.
+    semantic._slots(payload)
+    return {"task_id": wire["objective_id"], "scope_cid": payload["scope_cid"],
+        "semantic_root_cid": payload["semantic_root_cid"], "semantic_sha256": _sha(text.encode()),
+        "native_prompt_sha256": _sha(prompt.encode()), "native_prompt_bytes": len(prompt.encode())}
+
+
+def _model_projection(*, rendered: str, receipt: dict, repository: Path | None,
+        prepared: dict | None = None, expected: dict | None = None):
+    """Reconstruct historical bytes without opening configured metadata owners."""
+    from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import public_replay_without_metadata
+    with public_replay_without_metadata():
+        return _replay_model_projection(rendered=rendered, receipt=receipt, repository=repository,
+            prepared=prepared, expected=expected)
+
+
+def _replay_model_projection(*, rendered: str, receipt: dict, repository: Path | None,
+        prepared: dict | None, expected: dict | None):
+    """Reconstruct historical provider bytes without granting freshness."""
+    from ipfs_accelerate_py.agent_supervisor.runtime.router_implementation_runner import render_model_prompt
+    translated = receipt.get("semantic_translation") is not None
+    verification = receipt.get("semantic_context_verification")
+    from ipfs_accelerate_py.agent_supervisor.runtime.reviewed_source_nomination_context import nomination_pointer
+    pointer = nomination_pointer(rendered)
+    catalog_present = "reviewed_source_nomination_context" in receipt
+    if (pointer is not None) != catalog_present:
+        raise ValueError("reviewed nomination pointer and inclusion receipt must be present together")
+    if catalog_present and (verification is None or receipt.get("public_instruction") is None):
+        raise ValueError("reviewed source catalog requires verified semantic and public instruction receipts")
+    if pointer is None and isinstance(expected, dict) and "source_nomination" in expected:
+        if repository is None or prepared is None:
+            raise ValueError("marked source nomination requires its captured preparation")
+        _captured_code_metadata(repository=repository, prepared=prepared, expected=expected,
+            require_source_nomination=True)
+        raise ValueError("captured source nomination was dropped from native input")
+    catalog, catalog_guard, bundle_guards = "", None, []
+    instruction_block, residual_block = "", ""
+    router_prompt, checks = rendered, {}
+    if translated or verification is not None:
+        if repository is None:
+            raise ValueError("semantic receipt requires canonical artifact repository")
+        if translated:
+            from ipfs_accelerate_py.agent_supervisor.runtime.semantic_router_translation import replay_semantic_router_prompt_for_audit
+            encoded = replay_semantic_router_prompt_for_audit(prompt=rendered, repository=repository)
+            bindings = encoded.receipt
+        else:
+            bindings = _native_semantic_bindings(prompt=rendered, repository=repository)
+        if verification is not None:
+            checks.update({"semantic_context_" + key: bindings[key] == verification[key]
+                for key in SEMANTIC_BINDINGS})
+        if translated:
+            router_prompt = encoded.provider_prompt
+            checks["semantic_translation_cid"] = encoded.table.translation_cid == receipt["semantic_translation"]["translation_cid"]
+            # Older receipts lacked the neutral verification object. Check
+            # every immutable encoding measurement they did retain.
+            checks.update({"semantic_translation_" + key: encoded.receipt[key] == value
+                for key, value in receipt["semantic_translation"].items()
+                if key in encoded.receipt and key != "freshness_checked"})
+    residual = receipt.get("doctor_residual_context")
+    if residual is not None:
+        from ipfs_accelerate_py.agent_supervisor.runtime.doctor_residual_context import load_doctor_residual_advisory
+        if not (translated or verification is not None) or repository is None:
+            raise ValueError("Doctor residual requires a canonical semantic repository")
+        advisory, observed = load_doctor_residual_advisory(artifact=Path(residual["artifact"]),
+            expected_sha256=residual["artifact_sha256"], repository=repository,
+            task_cid=residual["task_cid"], prompt=rendered, require_current_source=False)
+        router_prompt += advisory
+        residual_block = advisory
+        for field in ("context_cid", "native_capsule_id", "advisory_sha256", "advisory_bytes"):
+            checks["doctor_residual_" + field] = observed[field] == residual[field]
+    instruction = receipt.get("public_instruction")
+    if instruction is not None:
+        from ipfs_accelerate_py.agent_supervisor.runtime.router_public_instruction import load_public_instruction
+        if repository is None:
+            raise ValueError("public instruction requires a canonical artifact repository")
+        block, observed = load_public_instruction(artifact=Path(instruction["artifact"]),
+            expected_sha256=instruction["artifact_sha256"], repository=repository,
+            task_cid=instruction["task_cid"], prompt=rendered, require_current_source=False,
+            requirements_transport="compact" if instruction["schema"] == COMPACT_INCLUSION_SCHEMA else "expanded")
+        projection = receipt.get("code_retrieval_projection")
+        if projection is not None:
+            from ipfs_accelerate_py.agent_supervisor.runtime import compact_code_retrieval as codec
+            from ipfs_accelerate_py.agent_supervisor.runtime.verified_code_retrieval_projection import extract_verified_public_instruction_source
+            validate_code_retrieval_projection_receipt(receipt)
+            if prepared is None or expected is None:
+                raise ValueError("compact retrieval needs the captured native preparation")
+            _decoder_prefix(projection["decoder_command"], source_path=instruction["source_path"],
+                source_sha256=instruction["source_sha256"], native_sha256=receipt["native_prompt_sha256"],
+                repository=repository)
+            source = extract_verified_public_instruction_source(block, instruction)
+            _historical_code_native(rendered=rendered, projection=projection, repository=repository,
+                prepared=prepared, expected=expected)
+            guidance_version = {"supervisor-code-retrieval-prompt-projection@1": 1,
+                "supervisor-code-retrieval-prompt-projection@2": 2,
+                "supervisor-code-retrieval-prompt-projection@3": 3}[projection["schema"]]
+            delivery_args = ({"delivered_wire_path": projection["wire_delivery"]["path"]}
+                if guidance_version == 3 else {})
+            selected, projected = codec.project_code_retrieval_prompt(rendered, source,
+                decoder_command=projection["decoder_command"], guidance_version=guidance_version,
+                **delivery_args)
+            if guidance_version == 3:
+                # Pure replay describes the planned path. The captured scalar
+                # says it was materialized before dispatch; no live wire is
+                # needed or treated as historical admission/custody authority.
+                projected["wire_delivery"] = {**projected["wire_delivery"],
+                    "materialized": projection["selected_transport"] == "compact"}
+            checks["code_retrieval_historical_native_replay"] = True
+            checks["code_retrieval_projection"] = projected == {
+                key: value for key, value in projection.items() if key not in {"native_verification", "decoder_command"}}
+            router_prompt = selected + (advisory if residual is not None else "")
+        if catalog_present:
+            from ipfs_accelerate_py.agent_supervisor.runtime.reviewed_source_nomination_audit import replay_reviewed_source_nomination_context
+            from ipfs_accelerate_py.agent_supervisor.runtime.verified_code_retrieval_projection import extract_verified_public_instruction_source
+            if prepared is None or expected is None:
+                raise ValueError("reviewed source catalog requires its captured native preparation")
+            nominations = _captured_code_metadata(repository=repository, prepared=prepared, expected=expected,
+                require_source_nomination=True, _guards=bundle_guards)
+            catalog, catalog_observations, catalog_guard = replay_reviewed_source_nomination_context(
+                prompt=rendered, receipt=receipt["reviewed_source_nomination_context"], repository=repository,
+                source_text=extract_verified_public_instruction_source(block, instruction),
+                instruction_receipt=instruction, semantic_verification=verification, nominations=nominations,
+                baseline_commit=prepared["manifest"]["payload"]["baseline_commit"])
+            # Historical observations include truthful false authority/freshness
+            # flags and valid zero counts. Convert them to explicit assertions;
+            # their raw truthiness cannot decide exact input reconstruction.
+            from ipfs_accelerate_py.agent_supervisor.runtime.reviewed_source_nomination_audit import HISTORICAL_SCHEMA
+            checks["reviewed_source_historical_schema"] = catalog_observations.get("schema") == HISTORICAL_SCHEMA
+            for field in ("present", "catalog_bytes_exact", "native_query_and_ast_replayed",
+                    "original_signed_source_hashes_matched", "metadata_original_witnesses_rechecked",
+                    "same_trusted_runtime_command_prefix"):
+                checks["reviewed_source_" + field] = catalog_observations.get(field) is True
+            for field in ("current_worktree_sources_read", "current_owner_database_read", "current_dispatch_authority",
+                    "current_freshness_verified", "review_authentication_claimed", "source_authentication_claimed",
+                    "semantic_equivalence_verified", "behavioral_requirements_satisfied", "proof_authority",
+                    "execution_authority", "completion_authority"):
+                checks["reviewed_source_" + field + "_false"] = catalog_observations.get(field) is False
+            recorded_catalog = receipt["reviewed_source_nomination_context"]
+            checks["reviewed_source_block_sha256"] = (catalog_observations.get("block_sha256")
+                == recorded_catalog["block_sha256"] == _sha(catalog.encode()))
+            for field in ("block_bytes", "row_count", "residual_requirement_count"):
+                checks["reviewed_source_" + field] = (type(catalog_observations.get(field)) is int
+                    and catalog_observations[field] == recorded_catalog[field])
+            checks["reviewed_source_complete_block_bytes"] = len(catalog.encode()) == recorded_catalog["block_bytes"]
+            router_prompt += catalog
+        instruction_block = block
+        router_prompt += block
+        for field in ("schema", "context_cid", "manifest_cid", "task_id", "source_path", "source_sha256",
+                      "source_bytes", "block_sha256", "block_bytes"):
+            checks["public_instruction_" + field] = observed[field] == instruction[field]
+        if instruction["schema"] in {"supervisor-public-instruction-inclusion@2", COMPACT_INCLUSION_SCHEMA}:
+            checks["public_instruction_intent_requirements"] = observed.get("intent_requirements") == instruction["intent_requirements"]
+        if instruction["schema"] == COMPACT_INCLUSION_SCHEMA:
+            checks["public_instruction_intent_requirements_projection"] = (
+                observed.get("intent_requirements_projection") == instruction["intent_requirements_projection"])
+    if translated or verification is not None or instruction is not None:
+        checks.update(router_prompt_sha256=_sha(router_prompt.encode()) == receipt["router_prompt_sha256"],
+            router_prompt_bytes=len(router_prompt.encode()) == receipt["router_prompt_bytes"])
+    model, advisory = render_model_prompt(prompt=router_prompt, purpose="coding",
+        workspace=Path(receipt["workspace"]), semantic_transport=translated,
+        code_retrieval_projected=(receipt.get("code_retrieval_projection") or {}).get("selected_transport") == "compact")
+    checks.update(model_prompt_sha256=_sha(model.encode()) == receipt["model_prompt_sha256"],
+        model_prompt_bytes=len(model.encode()) == receipt["model_prompt_bytes"],
+        workspace_advisory_sha256=_sha(advisory.encode()) == receipt["workspace_advisory_sha256"],
+        workspace_advisory_bytes=len(advisory.encode()) == receipt["workspace_advisory_bytes"])
+    if catalog_present:
+        checks["reviewed_source_complete_model_byte_bound"] = len(model.encode()) <= 256_000
+        if (receipt.get("code_retrieval_projection") or {}).get("selected_transport") == "compact":
+            expanded, _ = render_model_prompt(prompt=rendered + residual_block + catalog + instruction_block,
+                purpose="coding", workspace=Path(receipt["workspace"]))
+            checks["reviewed_source_complete_compact_model_gain"] = len(model.encode()) < len(expanded.encode())
+        for guard in bundle_guards:
+            guard()
+        catalog_guard()
+    return model, advisory, checks
+
+
+def _captured_code_metadata(*, repository: Path, prepared: dict, expected: dict,
+        require_source_nomination: bool = False, _guards: list | None = None) -> dict:
+    """Derive retrieval pins from the captured native bundle, never a projection.
+
+    The real context producer stores a digest-bound task context bundle instead
+    of duplicating its metadata in context-result.json. Replay the exact bundle
+    bytes through its native parser in private scratch, with original public
+    file/directory custody checked before and after parsing. Older authored
+    captures with independently recorded metadata remain replayable.
+    """
+    from ipfs_accelerate_py.agent_supervisor.runtime import task_context_bundle as bundles
+    from ipfs_accelerate_py.agent_supervisor.runtime import verified_code_retrieval_projection as verified
+
+    if type(expected) is not dict or type(prepared) is not dict:
+        raise ValueError("captured retrieval preparation required")
+    if require_source_nomination and "context_bundle" not in expected:
+        raise ValueError("reviewed source nomination requires its genuine captured context bundle")
+    recorded = expected.get("metadata")
+    if "context_bundle" in expected:
+        nomination = expected["context_bundle"]
+        if type(nomination) is not dict or set(nomination) != {"artifact", "sha256"}:
+            raise ValueError("captured context bundle nomination differs")
+        artifact = _public_relative(nomination["artifact"])
+        digest = _digest(nomination["sha256"])
+        root = verified._root(repository)
+        witnesses = {}
+        raw = verified._capture(root, artifact, bundles.MAX_BYTES, witnesses)
+        if _sha(raw) != digest:
+            raise ValueError("captured context bundle digest differs")
+        task_cid = _identity(expected.get("task_cid"))
+        spec = prepared.get("spec")
+        if type(spec) is not dict:
+            raise ValueError("captured task specification required")
+        task_id = _identity(spec.get("task_key"))
+        with tempfile.TemporaryDirectory(prefix="terminal-historical-context-bundle-") as directory:
+            replay = Path(directory)
+            destination = replay / artifact
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(raw)
+            metadata = bundles.load_task_context_nomination(repository=replay, artifact=artifact,
+                expected_sha256=digest, task_cid=task_cid, task_id=task_id)
+            if destination.read_bytes() != raw:
+                raise ValueError("captured context bundle changed during replay")
+        if verified._capture(root, artifact, bundles.MAX_BYTES, witnesses) != raw:
+            raise ValueError("captured context bundle custody differs")
+        if _guards is not None:
+            def verify_bundle(_root=root, _artifact=artifact, _raw=raw, _witnesses=witnesses):
+                if verified._capture(_root, _artifact, bundles.MAX_BYTES, _witnesses) != _raw:
+                    raise ValueError("captured context bundle changed after model rendering")
+            _guards.append(verify_bundle)
+        if recorded is not None:
+            redundant = bundles._normalize(recorded)
+            keys = ("code retrieval artifact", "code retrieval sha256")
+            if require_source_nomination:
+                keys += ("code source nomination artifact", "code source nomination sha256",
+                         "code retrieval frontier artifact", "code retrieval frontier sha256")
+            if any(redundant.get(key) != metadata.get(key) for key in keys):
+                raise ValueError("captured metadata differs from its native context bundle")
+    else:
+        if type(recorded) is not dict:
+            raise ValueError("captured context bundle or independent metadata required")
+        metadata = bundles._normalize(recorded)
+    artifact = _public_relative(metadata.get("code retrieval artifact"))
+    digest = _digest(metadata.get("code retrieval sha256"))
+    result = {"Code retrieval artifact": artifact, "Code retrieval sha256": digest}
+    if require_source_nomination:
+        result.update({"Code source nomination artifact": _public_relative(metadata.get("code source nomination artifact")),
+                       "Code source nomination sha256": _digest(metadata.get("code source nomination sha256"))})
+        if "code retrieval frontier artifact" in metadata or "code retrieval frontier sha256" in metadata:
+            result.update({"Code retrieval frontier artifact": _public_relative(metadata.get("code retrieval frontier artifact")),
+                           "Code retrieval frontier sha256": _digest(metadata.get("code retrieval frontier sha256"))})
+    return result
+
+
+def _captured_code_nomination(*, repository: Path, prepared: dict, expected: dict) -> dict:
+    """Preserve the exact legacy retrieval pair without fabricating an appendix."""
+    return _captured_code_metadata(repository=repository, prepared=prepared, expected=expected)
+
+
+def _historical_code_native(*, rendered: str, projection: dict, repository: Path,
+        prepared: dict, expected: dict) -> None:
+    """Replay full native hits from the protected capture and original Git blob.
+
+    Recorded current-custody assertions are never treated as historical proof.
+    No current published source, configured owner, or cache database is opened.
+    """
+    from ipfs_accelerate_py.agent_supervisor.runtime import compact_code_retrieval as codec
+    from ipfs_accelerate_py.agent_supervisor.runtime import code_retrieval_context as native
+    capsule, suffix = codec._native(rendered)
+    selected, _, text = codec._chunks(capsule)
+    context = _json(text.encode())
+    verification = projection["native_verification"]
+    metadata = _captured_code_nomination(repository=repository, prepared=prepared, expected=expected)
+    artifact = verification["artifact"]
+    if (type(metadata) is not dict or metadata.get("Code retrieval artifact") != artifact
+            or metadata.get("Code retrieval sha256") != verification["observed_artifact_sha256"]
+            or any(row["path"] != artifact for _, row in selected)
+            or context.get("schema") != native.SCHEMA or context.get("status") != "current"
+            or context.get("task_id") != prepared["spec"]["task_key"]
+            or context.get("query_text") != prepared["query"]
+            or verification["repository_id"] != capsule["repository_id"]
+            or verification["tree_id"] != capsule["tree_id"]
+            or verification["native_suffix_sha256"] != _sha(suffix.encode())
+            or verification["code_context_sha256"] != _sha(text.encode())
+            or verification["code_context_bytes"] != len(text.encode())
+            or verification["code_chunk_count"] != len(selected)
+            or type(context.get("hits")) is not list
+            or verification["code_hit_count"] != len(context["hits"])):
+        raise ValueError("historical full retrieval differs from captured native preparation")
+    root_fd = _open_directory(repository)
+    captures = {}
+    try:
+        source_raw = _read_at(root_fd, _public_relative(artifact), native.MAX_ARTIFACT_BYTES)
+        if _sha(source_raw) != _digest(metadata["Code retrieval sha256"]):
+            raise ValueError("historical full retrieval artifact digest differs")
+        captures[artifact] = source_raw
+        source = _json(source_raw)
+        referenced = source.get("schema") == native.REFERENCED_SCHEMA
+        if (set(source) != {"schema", "task_id", "query_text", "source_sha256", "result",
+                          "snapshot_ref" if referenced else "snapshot"}
+                or source["schema"] not in {native.SCHEMA, native.REFERENCED_SCHEMA}
+                or source["task_id"] != context["task_id"] or source["query_text"] != prepared["query"]):
+            raise ValueError("historical full retrieval schema differs")
+        if referenced:
+            ref = source["snapshot_ref"]
+            if (type(ref) is not dict or set(ref) != {"path", "sha256", "bytes", "index_id"}
+                    or type(ref["bytes"]) is not int or not 0 < ref["bytes"] <= native.MAX_SNAPSHOT_BYTES
+                    or ref["index_id"] != expected["index_id"]):
+                raise ValueError("historical full snapshot reference differs")
+            snapshot_raw = _read_at(root_fd, _public_relative(ref["path"]), ref["bytes"])
+            if len(snapshot_raw) != ref["bytes"] or _sha(snapshot_raw) != _digest(ref["sha256"]):
+                raise ValueError("historical full snapshot digest differs")
+            if ref["path"] in captures:
+                raise ValueError("historical artifact and snapshot paths collide")
+            captures[ref["path"]] = snapshot_raw
+        hashes = source["source_sha256"]
+        declared = prepared["manifest"]["payload"]
+        if (type(hashes) is not dict or set(hashes) != {"bottle.py"}
+                or hashes != context.get("source_sha256") or hashes != verification["source_hashes"]
+                or any(_digest(digest) != declared["sources"][name]["sha256"] for name, digest in hashes.items())):
+            raise ValueError("historical full source census differs")
+        baseline = declared["baseline_commit"]
+        if type(baseline) is not str or re.fullmatch(r"[0-9a-f]{40,64}", baseline) is None:
+            raise ValueError("historical full source baseline differs")
+        for name, digest in hashes.items():
+            blob = subprocess.run(["git", "-C", str(repository), "cat-file", "blob", baseline + ":" + name],
+                check=True, capture_output=True, timeout=10).stdout
+            if name in captures or len(blob) > native.MAX_ARTIFACT_BYTES or _sha(blob) != digest:
+                raise ValueError("historical full source blob differs")
+            captures[name] = blob
+        with tempfile.TemporaryDirectory(prefix="terminal-historical-native-code-") as directory:
+            replay = Path(directory)
+            for name, raw in captures.items():
+                destination = replay / _public_relative(name)
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_bytes(raw)
+            observed = native.load_code_retrieval_context(repository=replay, artifact=artifact,
+                expected_sha256=metadata["Code retrieval sha256"], task_id=context["task_id"])
+            if observed != text:
+                raise ValueError("historical full native query or AST replay differs")
+        for name, raw in captures.items():
+            if name not in hashes and _read_at(root_fd, name, len(raw)) != raw:
+                raise ValueError("historical full captured artifact changed during replay")
+    finally:
+        os.close(root_fd)
+    for key in ("index_id", "query_id", "result_id"):
+        if context.get(key) != verification[key] or key == "index_id" and context[key] != expected["index_id"]:
+            raise ValueError("historical full native index identity differs")
+
+
+def _historical_frontier(packet: dict, *, paths: set[str], expected: dict, prepared: dict) -> dict:
+    """Rebuild captured nominations from protected artifacts and baseline blobs.
+
+    Publication can change the current checkout. This replay uses the captured
+    original tree and never opens the mutable cache/owner or grants freshness.
+    """
+    from ipfs_accelerate_py.agent_supervisor.runtime import code_retrieval_frontier as frontier
+    from ipfs_accelerate_py.agent_supervisor.runtime import code_retrieval_context as native
+    from ipfs_accelerate_py.agent_supervisor.analysis.code_symbol_vector_index import (
+        CodeVectorIndexSnapshot, CodeVectorSearchResult,
+    )
+    from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import public_replay_without_metadata
+
+    fields = {"schema", "task_cid", "task_revision", "repository_id", "tree_id", "manifest_cid",
+              "source_artifact_sha256", "retrieval", "frontier", "expansion",
+              "proof_authority", "execution_authority", "completion_authority"}
+    if (type(packet) is not dict or set(packet) != fields or packet["schema"] != frontier.PACKET_SCHEMA
+            or any(packet[key] is not False for key in ("proof_authority", "execution_authority", "completion_authority"))
+            or packet["task_cid"] != expected["task_cid"] or len(paths) != 1):
+        raise ValueError("invalid historical retrieval frontier wrapper")
+    observation = expected.get("code_retrieval_frontier")
+    if (type(observation) is not dict or observation.get("schema") != frontier.ARTIFACT_SCHEMA
+            or any(observation.get(key) is not False for key in ("proof_authority", "execution_authority", "completion_authority"))):
+        raise ValueError("frontier requires the independently captured preparation")
+    for key in ("complete_hit_count", "included_hit_count", "omitted_hit_count", "source_bytes", "frontier_bytes", "selected_bytes"):
+        if type(observation.get(key)) is not int or observation[key] < 0:
+            raise ValueError("invalid captured frontier count")
+    nomination = observation["metadata"]
+    artifact = nomination["Code retrieval frontier artifact"]
+    artifact_digest = _digest(nomination["Code retrieval frontier sha256"])
+    root = Path(prepared["repository"])
+    if not root.is_absolute() or root.resolve(strict=True) != root:
+        raise ValueError("historical frontier repository must be canonical")
+    fd = _open_directory(root)
+    try:
+        raw = _read_at(fd, artifact, frontier.MAX_FILE_BYTES)
+        if _sha(raw) != artifact_digest:
+            raise ValueError("historical frontier artifact digest differs")
+        spec = _json(raw)
+        if (type(spec) is not dict or set(spec) != frontier.FIELDS or spec["schema"] != frontier.ARTIFACT_SCHEMA
+                or spec["task_cid"] != expected["task_cid"]
+                or spec["task_id"] != prepared["spec"]["task_key"]
+                or spec["source_artifact"] != next(iter(paths))
+                or spec["source_sha256"] != packet["source_artifact_sha256"]):
+            raise ValueError("historical frontier nomination differs")
+        frontier._bounds(spec["max_hits"], spec["max_bytes"], spec["max_tokens"])
+        source_raw = _read_at(fd, spec["source_artifact"], native.MAX_ARTIFACT_BYTES)
+        if _sha(source_raw) != _digest(spec["source_sha256"]):
+            raise ValueError("historical native retrieval artifact digest differs")
+        source = _json(source_raw)
+        referenced = source.get("schema") == native.REFERENCED_SCHEMA
+        source_fields = {"schema", "task_id", "query_text", "source_sha256", "result",
+                         "snapshot_ref" if referenced else "snapshot"}
+        if (set(source) != source_fields or source["schema"] not in {native.SCHEMA, native.REFERENCED_SCHEMA}
+                or source["task_id"] != spec["task_id"] or source["query_text"] != prepared["query"]):
+            raise ValueError("historical native retrieval schema or public query differs")
+        if referenced:
+            ref = source["snapshot_ref"]
+            if (type(ref) is not dict or set(ref) != {"path", "sha256", "bytes", "index_id"}
+                    or type(ref["bytes"]) is not int or not 0 < ref["bytes"] <= native.MAX_SNAPSHOT_BYTES):
+                raise ValueError("historical snapshot reference differs")
+            snapshot_raw = _read_at(fd, ref["path"], ref["bytes"])
+            if len(snapshot_raw) != ref["bytes"] or _sha(snapshot_raw) != _digest(ref["sha256"]):
+                raise ValueError("historical snapshot digest differs")
+            snapshot_value = _json(snapshot_raw)
+        else:
+            snapshot_value = source["snapshot"]
+    finally:
+        os.close(fd)
+    # The signed source census is historical: no current workspace/source read.
+    source_hashes = source["source_sha256"]
+    declared = prepared["manifest"]["payload"]
+    if (type(source_hashes) is not dict or set(source_hashes) != {"bottle.py"}
+            or any(_digest(digest) != declared["sources"][name]["sha256"] for name, digest in source_hashes.items())):
+        raise ValueError("historical native source census differs")
+    baseline = declared["baseline_commit"]
+    if type(baseline) is not str or re.fullmatch(r"[0-9a-f]{40,64}", baseline) is None:
+        raise ValueError("historical native source baseline differs")
+    original = {}
+    for name, digest in source_hashes.items():
+        blob = subprocess.run(["git", "-C", str(root), "cat-file", "blob", baseline + ":" + name],
+                              check=True, capture_output=True, timeout=10).stdout
+        if len(blob) > native.MAX_ARTIFACT_BYTES or _sha(blob) != digest:
+            raise ValueError("historical native source blob differs")
+        original[name] = blob.decode("utf-8")
+    with public_replay_without_metadata():
+        snapshot = CodeVectorIndexSnapshot.from_dict(snapshot_value)
+        result = CodeVectorSearchResult.from_dict(source["result"])
+        if (snapshot.index_id != expected["index_id"]
+                or referenced and snapshot.index_id != ref["index_id"]
+                or frontier._json(snapshot.to_dict()) != frontier._json(snapshot_value)
+                or frontier._json(result.to_dict()) != frontier._json(source["result"])):
+            raise ValueError("historical native index or result identity differs")
+        native._replay(snapshot, result)
+        native._verified_sources(snapshot, original)
+    full = {"schema": native.SCHEMA, "task_id": spec["task_id"], "status": "current", "stale_paths": [],
+            "index_id": snapshot.index_id, "query_id": result.query.query_id, "result_id": result.result_id,
+            "query_text": source["query_text"], "nomination_only": True, "semantic_authority": False,
+            "execution_authority": False, "completion_authority": False, "source_sha256": source_hashes,
+            "hits": [{"path": hit.row.path, "symbol": hit.row.qualified_symbol,
+                      "line_start": hit.row.line_start, "line_end": hit.row.line_end,
+                      "rank": hit.rank, "score": hit.score, "row_id": hit.row.row_id,
+                      "ast_record_id": hit.row.sidecar.ast_record_id,
+                      "signature_refs": hit.row.sidecar.signature_refs, "call_refs": hit.row.sidecar.call_refs,
+                      "effect_refs": hit.row.sidecar.effect_refs} for hit in result.hits]}
+    if _sha(frontier._json(full).encode()) != _digest(spec["source_context_sha256"]):
+        raise ValueError("historical full native hit census differs")
+    manifest = frontier._manifest(spec, full)
+    if manifest.manifest_cid != spec["manifest_cid"] or manifest.manifest_cid != observation["manifest_cid"]:
+        raise ValueError("historical frontier manifest differs from native census")
+    rebuilt = frontier._packet(spec, full, manifest, artifact, artifact_digest, root)
+    if (frontier._json(packet) != rebuilt
+            or len(rebuilt.encode()) >= len(frontier._json(full).encode())
+            or observation["selected_transport"] != "frontier"
+            or observation["complete_hit_count"] != len(full["hits"])
+            or observation["included_hit_count"] != len(packet["retrieval"]["hits"])
+            or observation["omitted_hit_count"] != len(manifest.omitted_members())
+            or observation["source_bytes"] != len(frontier._json(full).encode())
+            or observation["frontier_bytes"] != len(rebuilt.encode())
+            or observation["selected_bytes"] != len(rebuilt.encode())):
+        raise ValueError("historical frontier selection or wrapper differs")
+    return packet["retrieval"]
+
+
+def _capsule(raw: bytes, *, expected: dict, prepared: dict) -> tuple[dict, str]:
+    from ipfs_accelerate_py.agent_supervisor.context.context_contracts import (
+        ContextCapsule, canonical_context_json_bytes,
+    )
+    from ipfs_accelerate_py.agent_supervisor.context.context_compiler import render_context_capsule
+
+    capsule = ContextCapsule.from_dict(_json(raw))
+    rendered = render_context_capsule(capsule)
+    wire = _json(rendered.encode())
+    contexts, chunks, paths = {}, {}, {}
+    for kind in KINDS:
+        refs = sorted((row for row in wire["evidence"] if row["kind"] == kind),
+                      key=lambda row: row["reference_id"])
+        if not refs or not all(row["metadata"].get("required") is True for row in refs):
+            raise ValueError("required context missing")
+        text = "".join(row["summary"] for row in refs)
+        artifact = "sha256:" + _sha(canonical_context_json_bytes({"text": text}))
+        for index, row in enumerate(refs):
+            if (row["metadata"].get("chunk_index") != index
+                    or row["metadata"].get("chunk_count") != len(refs)
+                    or row["metadata"].get("artifact_content_id") != artifact
+                    or row["referenced_content_id"] != "sha256:" + _sha(row["summary"].encode())):
+                raise ValueError("context chunk identity mismatch")
+        contexts[kind] = _json(text.encode())
+        paths[kind] = {row["path"] for row in refs}
+        chunks[kind] = {"count": len(refs), "bytes": len(text.encode()), "sha256": _sha(text.encode())}
+    semantic, retrieval, world = (contexts[kind] for kind in KINDS)
+    if retrieval.get("schema") == "supervisor-code-retrieval-frontier-context@1":
+        retrieval = _historical_frontier(retrieval, paths=paths["code-retrieval-context"],
+                                        expected=expected, prepared=prepared)
+    query = prepared["query"]
+    if not isinstance(query, str) or len(query.encode()) > 32768:
+        raise ValueError("invalid public query")
+    sources = prepared["manifest"]["payload"]["sources"]
+    source_hashes = retrieval["source_sha256"]
+    if not isinstance(source_hashes, dict) or set(source_hashes) != {"bottle.py"}:
+        raise ValueError("unexpected retrieval source scope")
+    tasks = [row for row in world.get("tasks", []) if row.get("task_cid") == expected["task_cid"]]
+    checks = {
+        "task_alias": semantic["task_id"] == retrieval["task_id"] == wire["objective_id"] == prepared["spec"]["task_key"],
+        "semantic_root": semantic["semantic_root_cid"] == expected["semantic_root_cid"] == world["semantic_root_cid"],
+        "vector_root": retrieval["index_id"] == expected["index_id"],
+        "world_root": world["world_snapshot_cid"] == expected["world_snapshot_cid"],
+        "public_query": retrieval["query_text"] == query,
+        "source_hashes": all(_digest(digest) == sources[path]["sha256"] for path, digest in source_hashes.items()),
+        "semantic_source_hashes": all(semantic["manifest"][path]["sha256"] == digest for path, digest in source_hashes.items()),
+        "semantic_input_scope": set(semantic["manifest"]) == set(prepared["worker_inputs"]),
+        "current_retrieval_at_capture": retrieval["status"] == "current",
+        "nomination_only": retrieval.get("nomination_only") is True,
+        "no_retrieval_authority": all(retrieval.get(k) is False for k in ("semantic_authority", "execution_authority", "completion_authority")),
+        "no_world_authority": all(world.get(k) is False for k in ("execution_authority", "completion_authority")),
+        "no_semantic_completion": semantic.get("completion_authority") is False,
+        "canonical_task_contract": len(tasks) == 1 and bool(tasks[0].get("body", {}).get("local_planning_contract_cid")),
+    }
+    result = {"capsule_id": _identity(capsule.capsule_id), "persisted_capsule_sha256": _sha(raw),
+        "native_prompt_sha256": _sha(rendered.encode()), "native_prompt_bytes": len(rendered.encode()),
+        "context_chunks": chunks, "checks": checks, "all_context_checks_passed": all(checks.values()),
+        "semantic_root_cid": _identity(semantic["semantic_root_cid"]),
+        "index_id": _identity(retrieval["index_id"]), "retrieval_result_id": _identity(retrieval["result_id"]),
+        "retrieval_query_id": _identity(retrieval["query_id"]),
+        "world_snapshot_cid": _identity(world["world_snapshot_cid"]),
+        "plan_projection_cid": _identity(world["plan_projection_cid"]),
+        "task_cid": _identity(expected["task_cid"]), "public_query_sha256": _sha(query.encode()),
+        "source_sha256": {key: _digest(value) for key, value in source_hashes.items()},
+        "intent_freshness_checked": world.get("intent_freshness_checked") is True}
+    if len(tasks) == 1:
+        result["local_contract_cid"] = _identity(tasks[0].get("body", {}).get("local_planning_contract_cid"))
+    return result, rendered
+
+
+def audit_terminal_context(*, state: Path, receipts: list[dict], workspace_root: Path) -> dict:
+    """Read historical evidence and compare exact native and model input bytes."""
+    from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import public_replay_without_metadata
+    with public_replay_without_metadata():
+        return _audit_terminal_context(state=state, receipts=receipts, workspace_root=workspace_root)
+
+
+def _audit_terminal_context(*, state: Path, receipts: list[dict], workspace_root: Path,
+        input_parser=None) -> dict:
+
+    result = _base()
+    if len(receipts) > MAX_RECEIPTS:
+        raise ValueError("receipt inventory exceeds audit bound")
+    parsed, seen = [], set()
+    result["coding_receipts_seen"] = len(receipts)
+    for item in receipts:
+        try:
+            value = (_receipt if input_parser is None else input_parser)(item, workspace_root)
+            if value["invocation_id"] in seen:
+                raise ValueError("duplicate router invocation")
+            seen.add(value["invocation_id"])
+            parsed.append(value)
+        except (ValueError, KeyError, TypeError):
+            result["read_errors"].append({"kind": "receipt", "error_type": "InvalidReceipt"})
+    result["usable_coding_receipts"] = len(parsed)
+    if not parsed:
+        result["reason"] = "no_usable_coding_receipt"
+        return result
+    result["invocations"] = [{"invocation_id": row["invocation_id"],
+        "semantic_transport": row.get("semantic_transport", "identifiers" if row.get("semantic_translation") else "none"),
+        "native_input_verified": None, "model_input_verified": None,
+        "status": "unverified", "reason": "native_capsule_unavailable"} for row in parsed]
+    root_fd = _open_directory(state)
+    try:
+        expected_raw = _read_at(root_fd, "context-result.json")
+        prepared_raw = _read_at(root_fd, "prepared.json")
+        expected, prepared = _json(expected_raw), _json(prepared_raw)
+        result.update(context_result_sha256=_sha(expected_raw), prepared_state_sha256=_sha(prepared_raw))
+        paths = _capsule_paths(root_fd)
+        if not paths:
+            result["reason"] = "native_capsule_unavailable"
+            return result
+        for relative in paths:
+            try:
+                observed, rendered = _capsule(_read_at(root_fd, relative), expected=expected, prepared=prepared)
+                result["capsules"].append(observed)
+                if not observed["all_context_checks_passed"]:
+                    continue
+                for receipt in parsed:
+                    if (observed["native_prompt_sha256"] != receipt["native_prompt_sha256"]
+                            or observed["native_prompt_bytes"] != receipt["native_prompt_bytes"]):
+                        continue
+                    model, advisory, checks = _model_projection(rendered=rendered, receipt=receipt,
+                        repository=Path(prepared["repository"]) if prepared.get("repository") else None,
+                        prepared=prepared, expected=expected)
+                    result["matches"].append({"capsule_id": observed["capsule_id"],
+                        "invocation_id": receipt["invocation_id"],
+                        "workspace_sha256": _sha(receipt["workspace"].encode()),
+                        "native_prompt_sha256": observed["native_prompt_sha256"],
+                        "native_prompt_bytes": observed["native_prompt_bytes"],
+                        "model_prompt_sha256": _sha(model.encode()), "model_prompt_bytes": len(model.encode()),
+                        "workspace_advisory_sha256": _sha(advisory.encode()),
+                        "workspace_advisory_bytes": len(advisory.encode()),
+                        "model_input_checks": checks, "model_input_verified": all(checks.values())})
+            except Exception as error:
+                result["read_errors"].append({"kind": "capsule", "error_type": type(error).__name__})
+    finally:
+        os.close(root_fd)
+    for invocation in result["invocations"]:
+        matching = [row for row in result["matches"] if row["invocation_id"] == invocation["invocation_id"]]
+        invocation["native_input_verified"] = bool(matching)
+        invocation["model_input_verified"] = any(row["model_input_verified"] for row in matching)
+        invocation["status"] = ("verified_exact_model_input" if invocation["model_input_verified"]
+            else "verified_native_input_only" if matching else "unverified")
+        invocation["reason"] = ("exact_context_and_input_digests_match" if invocation["model_input_verified"]
+            else "model_projection_mismatch" if matching else "no_exact_stored_capsule_match")
+    result["any_native_input_verified"] = any(row["native_input_verified"] for row in result["invocations"])
+    result["any_model_input_verified"] = any(row["model_input_verified"] for row in result["invocations"])
+    result["all_observed_coding_inputs_verified"] = (len(parsed) == len(receipts)
+        and all(row["model_input_verified"] for row in result["invocations"]))
+    result["status"] = ("verified_all_observed_model_inputs" if result["all_observed_coding_inputs_verified"]
+        else "verified_some_observed_model_inputs" if result["any_model_input_verified"]
+        else "verified_native_input_only" if result["any_native_input_verified"] else "unverified")
+    result["reason"] = "per_invocation_context_and_input_comparison"
+    return result
+
+
+def collect_terminal_context_audit(*, state: Path, receipts: list[dict],
+        workspace_root: Path, timeout_seconds: float = 3.0) -> dict:
+    """Run in a time-bounded child; collection failure cannot affect completion."""
+    started = time.monotonic()
+    if timeout_seconds < .1:
+        return _base(reason="audit_budget_unavailable")
+    try:
+        rows = [{key: row[key] for key in (*RECEIPT_FIELDS, *TRANSLATION_FIELDS) if key in row}
+                for row in receipts if isinstance(row, dict) and row.get("phase") == "coding"]
+        request = json.dumps(rows).encode()
+        if len(rows) > MAX_RECEIPTS or len(request) > MAX_REQUEST_BYTES:
+            return _base(reason="audit_request_exceeds_bound")
+        if not rows:
+            return _base(reason="no_coding_receipt")
+        # The owner may still have the task checkout as cwd. Never prepend
+        # that worker-controlled directory to the trusted module search path.
+        process = subprocess.run([sys.executable, "-B", "-P", "-m", __name__, "--state", str(state),
+            "--workspace-root", str(workspace_root)], input=request, capture_output=True,
+            timeout=min(30.0 if any("reviewed_source_nomination_context" in row for row in rows) else 10.0,
+                        timeout_seconds), check=False,
+            env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
+        if process.returncode or len(process.stdout) > MAX_RESULT_BYTES:
+            return _base(reason="audit_process_unavailable")
+        result = _json(process.stdout)
+        if not isinstance(result, dict) or result.get("schema") != SCHEMA:
+            return _base(reason="audit_result_invalid")
+        result["seconds"] = time.monotonic() - started
+        return result
+    except subprocess.TimeoutExpired:
+        return _base(reason="audit_timeout")
+    except Exception as error:
+        result = _base(reason="audit_unavailable")
+        result["error_type"] = type(error).__name__
+        return result
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--state", required=True, type=Path)
+    parser.add_argument("--workspace-root", required=True, type=Path)
+    args = parser.parse_args()
+    try:
+        raw = sys.stdin.buffer.read(MAX_REQUEST_BYTES + 1)
+        if len(raw) > MAX_REQUEST_BYTES:
+            raise ValueError("audit request exceeds bound")
+        receipts = _json(raw)
+        if not isinstance(receipts, list):
+            raise ValueError("audit receipts must be a list")
+        result = audit_terminal_context(state=args.state, receipts=receipts, workspace_root=args.workspace_root)
+    except Exception as error:
+        result = _base(reason="audit_unavailable")
+        result["error_type"] = type(error).__name__
+    encoded = json.dumps(result, sort_keys=True)
+    if len(encoded.encode()) > MAX_RESULT_BYTES:
+        encoded = json.dumps(_base(reason="audit_result_exceeds_bound"))
+    print(encoded)
+
+
+if __name__ == "__main__":
+    main()

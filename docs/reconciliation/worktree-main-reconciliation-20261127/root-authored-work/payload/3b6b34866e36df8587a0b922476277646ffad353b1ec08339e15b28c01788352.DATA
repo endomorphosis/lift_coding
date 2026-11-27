@@ -1,0 +1,43 @@
+# Targeted scorer integrity and supplementary rescoring
+
+The original development scorers have reproducible candidate-interference defects. Four incorrect routing candidates passed by shadowing helpers used by the oracle. One incorrect context candidate passed by obtaining unrestricted builtins through a private dependency import and terminating the scorer with exit code zero. **All saved development candidates still pass the stronger supplementary scorer:** eight routing records and six context records, representing ten unique candidate bodies.
+
+| Frozen category | Distinct evaluated candidates | Original scorer passes | Stronger scorer passes |
+|---|---:|---:|---:|
+| Targeted incorrect adversaries | 6 | 5 | 0 |
+| Original unrepaired programs | 7 | 0 | 0 |
+| Unique saved candidate controls | 10 | 10 | 10 |
+
+The six adversaries were deliberately constructed to test identified boundaries. These counts are not estimates of attack prevalence or a general false-admission rate. The context namespace-shadow case is a negative control: it failed under both scorers.
+
+## Confirmed failures
+
+The routing scorer executes its oracle with `namespace.copy()`, retaining candidate-defined globals. A candidate-defined `range` can skip the clamp test grid; candidate-defined `range` and `isinstance` can bypass status checks; an alias from `RuntimeError` to `Exception` changes the oracle's exception catch; and candidate-defined `str` can hide an incorrect exception message. All four programs violate the requested behavior, yet each produced the original scorer's positive result.
+
+The context scorer already places only `total` in separate oracle globals, so direct helper shadowing did not reproduce there. Its dependency module, however, received unrestricted builtins from `exec`. The permitted `from dependency import ...` path did not reject a private imported name. The adversarial candidate imported the dependency's builtins under a public alias and exited the process before returning a value. The original scorer reported success from return code zero even though stdout was empty and no positive validation result was produced.
+
+These findings concern the **new development routing/context scorers** inspected here. This experiment does not establish an exploit against the historical cold-repair scorer, and does not certify that older experiment's adversarial integrity.
+
+## Stronger supplementary adapter
+
+`isolated_scorer.py` runs a trusted oracle process and a separate candidate worker inside the same pinned Docker sandbox. The worker receives candidate/dependency source and function-call arguments; it never receives oracle source. Typed serialized values, exceptions, argument mutations and identity observations cross back to the oracle process. Oracle helper names and exception classes consequently come from the trusted process, irrespective of candidate globals.
+
+Dependency imports are limited to the trusted dependency's declared public functions; private imports and wildcard expansion are rejected. Dependency code also receives a restricted builtin environment. The outer scorer requires a positive oracle-completion record, at least one observed function call, and successful worker termination. An empty zero-exit result is insufficient.
+
+The adapter preserves the existing Docker image digest, disabled network, no mounts, read-only filesystem, unprivileged user and resource bounds. It retains the existing bounded language profile and adds stricter dependency-import checks. List mutation and return-object identity observations are carried across the process boundary so the deduplication oracle's behavioral requirements are not silently removed. This transport covers the scalar, byte, list, tuple and dictionary values in these tasks; it is not a general Python execution protocol.
+
+## Saved-result audit
+
+`candidate_registry.json` records every source, oracle, dependency, expected control behavior and original record hash before outcomes. Duplicate saved candidate bodies with identical evaluation conditions are executed once and mapped back to their original records in `saved_rescore.json`.
+
+- Routing: 8 original records, 7 unique candidate bodies, all pass supplementary rescoring.
+- Context: 6 original records, 3 unique candidate bodies, all pass supplementary rescoring.
+- Combined: 14 records, 10 unique candidate bodies and 10 distinct source/dependency/oracle evaluation units. No saved quality result changed.
+
+Provider token usage and original candidate bytes were not changed. No new inference occurred. The original study records and frozen scorers remain preserved; the stronger results are supplementary evidence for their saved candidates. The unchanged quality counts support retaining the narrowly scoped development token comparisons, while the discovered scorer defects rule out claiming that the original scorer boundaries were robust to candidate interference.
+
+## Artifacts and remaining boundary
+
+`freeze.json` binds the original scorers, new adapter, adversarial matrix and candidate registry. `results/` contains every original/stronger scorer result, including exit codes and diagnostics. `summary.json` records the category counts, source-integrity check and rescore totals. All frozen files matched after execution.
+
+This closes targeted development checks for oracle-global interference, expected-exception contamination, private dependency imports and premature successful exit. It does not certify arbitrary Python isolation, cover all dependency mutations or process attacks, prove the completeness of the behavioral oracles, or replace a wider adversarial campaign. Future experiments can use the stronger adapter under a new freeze, with additional attacks admitted explicitly. The original frozen runners must not be edited in place.

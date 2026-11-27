@@ -1,0 +1,13 @@
+{
+  "time": "2026-11-10T05:52:08.253641+00:00",
+  "owning_files": [
+    "test/api/test_candidate_round_policy.py"
+  ],
+  "conservative_static_source_files": 268,
+  "source_control_pins": 271,
+  "source_pin_cap": 256,
+  "request_created": false,
+  "request_admitted": false,
+  "qualified": false,
+  "scope": "Complete round-policy owning file. Terminal Doctor dispatch imports and conservatively reachable owners exceed current capture cap; no tests omitted or code guards relaxed."
+}

@@ -1,0 +1,276 @@
+"""Exact catalog replay after publication and retirement from original Git blobs."""
+from copy import deepcopy
+import importlib.util
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+import pytest
+
+from test.api.test_reviewed_source_nomination_context import make_case, load, modified_prompt, other_revision_catalog
+from test.api.test_intent_source_nomination import SOURCE, wire, sha
+from ipfs_accelerate_py.agent_supervisor.runtime import reviewed_source_nomination_audit as audit
+from ipfs_accelerate_py.agent_supervisor.runtime import reviewed_source_nomination_context as catalog
+from ipfs_accelerate_py.agent_supervisor.runtime import code_source_inspection as source
+
+
+@pytest.fixture(autouse=True)
+def fresh_namespaces(tmp_path, monkeypatch):
+    monkeypatch.setenv('IPFS_ACCELERATE_META_INDEX_DUCKDB', str(tmp_path / 'fresh-meta.duckdb'))
+    monkeypatch.setenv('IPFS_ACCELERATE_PYTEST_SEAL_DUCKDB', str(tmp_path / 'fresh-seal.duckdb'))
+    monkeypatch.delenv('IPFS_ACCELERATE_META_INDEX_DUCKLAKE', raising=False)
+
+
+def historical_case(tmp_path, empty=False, frontier=False, catalog_revision=None):
+    original = SOURCE
+    if frontier:
+        original += '\n' + '\n\n'.join(f'def extra_{n}(payload):\n    return payload.extra_{n}()' for n in range(20)) + '\n'
+    case = make_case(tmp_path, empty=empty, source_text=original,
+        max_results=20 if frontier else 1, transport='frontier' if frontier else 'full')
+    root = case['root']
+    def git(*args):
+        return subprocess.check_output(['/usr/bin/git', '-C', str(root), *args], stderr=subprocess.DEVNULL)
+    git('init');git('add', 'worker.py', 'instruction.md')
+    git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-m', 'original public source')
+    baseline = git('rev-parse', 'HEAD').decode().strip()
+    block, receipt, _ = load(case)
+    if catalog_revision is not None:
+        prepared,prompt,semantic=other_revision_catalog(case,catalog_revision)
+        case.update(prepared=prepared,prompt=prompt,semantic=semantic)
+        receipt={**receipt,'artifact':prepared['artifact'],'artifact_sha256':prepared['sha256'],
+            'native_prompt_sha256':sha(prompt.encode()),'native_prompt_bytes':len(prompt.encode())}
+    metadata = {**case['prepared']['metadata'], 'Code retrieval artifact': 'retrieval.json',
+        'Code retrieval sha256': case['prepared']['native_bindings']['source_artifact_sha256']}
+    workspace = tmp_path / 'allocated-worktree'
+    git('worktree', 'add', '--detach', str(workspace), 'HEAD')
+    (root / 'worker.py').write_bytes(b'def published_replacement():\n    return "later tree"\n')
+    git('add', 'worker.py')
+    git('-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid', 'commit', '-m', 'later public tree')
+    git('worktree', 'remove', str(workspace))
+    case.update(baseline=baseline, block_expected=block, receipt=receipt, metadata=metadata, retired_workspace=workspace)
+    case['arguments'] = dict(prompt=case['prompt'], receipt=receipt, repository=root,
+        source_text=case['inputs']['source_text'], instruction_receipt=case['public'],
+        semantic_verification=case['semantic'], nominations=metadata, baseline_commit=baseline)
+    return case
+
+
+@pytest.fixture
+def case(tmp_path):
+    return historical_case(tmp_path)
+
+
+def replay(case, **extra):
+    return audit.replay_reviewed_source_nomination_context(**{**case['arguments'], **extra})
+
+
+@pytest.mark.parametrize('empty,frontier', [(False, False), (True, False), (False, True)])
+def test_historical_changed_source_retired_worktree_exact_catalog_without_current_reads(tmp_path, monkeypatch, empty, frontier):
+    case = historical_case(tmp_path, empty=empty, frontier=frontier)
+    read, seen = source._PublicCapture.read, []
+    def guarded(self, name, maximum, **kwargs):
+        seen.append((str(self.root), name))
+        if self.root == case['root']:
+            assert name != 'worker.py'
+        return read(self, name, maximum, **kwargs)
+    monkeypatch.setattr(source._PublicCapture, 'read', guarded)
+    before = (case['root'] / 'worker.py').read_bytes()
+    block, checks, guard = replay(case)
+    assert block == case['block_expected'] and sha(block.encode()) == case['receipt']['block_sha256']
+    assert not case['retired_workspace'].exists() and (case['root'] / 'worker.py').read_bytes() == before
+    assert checks['catalog_bytes_exact'] is True and checks['current_worktree_sources_read'] is False
+    assert checks['current_freshness_verified'] is False and checks['current_dispatch_authority'] is False
+    assert checks['proof_authority'] is False and checks['completion_authority'] is False
+    assert guard() is None and seen
+
+
+def test_historical_revision_replays_original_capture_separately_from_task_cid(case):
+    capsule=json.loads(case['prompt'])
+    assert capsule['objective_revision'] == case['inputs']['task_revision']
+    assert capsule['objective_revision'] != case['receipt']['task_cid']
+    block,checks,guard=replay(case)
+    assert block==case['block_expected'] and checks['catalog_bytes_exact'] is True
+    assert checks['current_freshness_verified'] is False
+    assert checks['current_dispatch_authority'] is False and guard() is None
+
+
+@pytest.mark.parametrize('revision',['task:nomination','revision:foreign','',None,True,1,1.0,[],{}])
+def test_historical_revision_cannot_alias_task_cid_with_refreshed_prompt_pins(case,revision):
+    prompt,semantic=modified_prompt(case,lambda capsule:capsule.__setitem__('objective_revision',revision))
+    receipt={**case['receipt'],'native_prompt_sha256':sha(prompt.encode()),'native_prompt_bytes':len(prompt.encode())}
+    with pytest.raises(source.CodeSourceInspectionError,match='namespace bindings differ'):
+        replay(case,prompt=prompt,receipt=receipt,semantic_verification=semantic)
+
+
+def test_historical_task_cid_cannot_alias_original_revision_even_when_receipts_agree(case):
+    # Scalar and instruction receipts agree; the independently pinned native
+    # wrapper still binds the real task CID, rather than its revision.
+    foreign=case['inputs']['task_revision']
+    receipt={**case['receipt'],'task_cid':foreign}
+    instruction={**case['public'],'task_cid':foreign}
+    with pytest.raises(source.CodeSourceInspectionError,match='native binding differs'):
+        replay(case,receipt=receipt,instruction_receipt=instruction)
+
+
+def test_historical_rehashed_catalog_frontier_revision_cannot_replace_original_capsule(tmp_path):
+    case=historical_case(tmp_path,catalog_revision='revision:foreign')
+    assert case['prepared']['nomination']['bindings']['task_revision']=='revision:foreign'
+    assert json.loads(case['prompt'])['objective_revision']=='revision:1'
+    assert not case['retired_workspace'].exists()
+    with pytest.raises(source.CodeSourceInspectionError,match='namespace bindings differ'):replay(case)
+
+
+@pytest.mark.parametrize('field',['task_cid','task_revision'])
+def test_historical_loaded_catalog_preserves_independent_cid_revision_join(case,monkeypatch,field):
+    from ipfs_accelerate_py.agent_supervisor.runtime import intent_source_inspection as reader
+    real=reader.load_intent_source_nomination_catalog
+    calls=[]
+    def substituted(**kwargs):
+        loaded=deepcopy(real(**kwargs));calls.append(True)
+        loaded['nomination']['bindings'][field]='task:foreign' if field=='task_cid' else 'revision:foreign'
+        return loaded
+    monkeypatch.setattr(reader,'load_intent_source_nomination_catalog',substituted)
+    with pytest.raises(source.CodeSourceInspectionError,match='namespace bindings differ'):replay(case)
+    assert calls==[True]
+
+
+def test_exact_k_renderer_source_golden_shape_bytes_and_cli_unchanged(tmp_path):
+    case = make_case(tmp_path)
+    baseline = Path('/home/barberb/lift_coding/maintenance/terminal-nomination-audit-20261012-01/baseline/ipfs_accelerate_py/agent_supervisor/runtime/reviewed_source_nomination_context.py')
+    assert sha(baseline.read_bytes()) == 'c79be56d189aad387aa1d115004fdbfb0df6d3f091f730a2dc4c27faa7b3d793'
+    spec = importlib.util.spec_from_file_location('ipfs_accelerate_py.agent_supervisor.runtime.reviewed_source_nomination_context_k', baseline)
+    legacy = importlib.util.module_from_spec(spec);spec.loader.exec_module(legacy)
+    args = dict(prompt=case['prompt'], repository=case['root'], source_text=case['inputs']['source_text'],
+        instruction_receipt=case['public'], semantic_verification=case['semantic'])
+    # The frozen legacy loader expected the erroneous CID-as-revision capsule.
+    # Compare its renderer with the corrected revision capsule, retaining the
+    # old receipt and normalizing only the intentionally changed native pins.
+    old_prompt,old_semantic=modified_prompt(case,lambda capsule:capsule.__setitem__('objective_revision',case['inputs']['task_cid']))
+    old_block, old_receipt, _ = legacy.load_reviewed_source_nomination_context(**{
+        **args,'prompt':old_prompt,'semantic_verification':old_semantic})
+    block, receipt, _ = catalog.load_reviewed_source_nomination_context(**args)
+    assert old_receipt['native_prompt_sha256'] != receipt['native_prompt_sha256']
+    assert block == old_block
+    normalized={**old_receipt,'native_prompt_sha256':receipt['native_prompt_sha256'],'native_prompt_bytes':receipt['native_prompt_bytes']}
+    assert wire(receipt) == wire(normalized)
+    assert audit.validate_reviewed_source_nomination_receipt(receipt) == receipt
+
+
+@pytest.mark.parametrize('field', sorted(audit.TRUE_FIELDS | audit.FALSE_FIELDS))
+def test_scalar_boolean_alias_refused(case, field):
+    value = deepcopy(case['receipt']);value[field] = int(value[field])
+    with pytest.raises(ValueError):
+        audit.validate_reviewed_source_nomination_receipt(value)
+
+
+@pytest.mark.parametrize('field', ['native_prompt_bytes', 'block_bytes', 'row_count', 'residual_requirement_count'])
+@pytest.mark.parametrize('kind', ['float', 'bool'])
+def test_scalar_integer_alias_refused(case, field, kind):
+    value = deepcopy(case['receipt']);value[field] = float(value[field]) if kind == 'float' else True
+    with pytest.raises(ValueError):
+        audit.validate_reviewed_source_nomination_receipt(value)
+
+
+@pytest.mark.parametrize('change', ['extra', 'missing', 'schema', 'path', 'sha', 'zero_native', 'many_rows'])
+def test_closed_scalar_shape_bounds_and_identity_refused(case, change):
+    value = deepcopy(case['receipt'])
+    if change == 'extra': value['recorded_command_prefix'] = 'foreign'
+    elif change == 'missing': value.pop('block_bytes')
+    elif change == 'schema': value['schema'] = 'supervisor-reviewed-source-nomination-inclusion@2'
+    elif change == 'path': value['artifact'] = '.codex/auth.json'
+    elif change == 'sha': value['ledger_sha256'] = 'A' * 64
+    elif change == 'zero_native': value['native_prompt_bytes'] = 0
+    else: value['row_count'] = 257
+    with pytest.raises(ValueError):
+        audit.validate_reviewed_source_nomination_receipt(value)
+
+
+@pytest.mark.parametrize('change', ['receipt_missing', 'foreign_task', 'foreign_ledger', 'foreign_contract', 'instruction_not_signed',
+    'instruction_changed', 'foreign_semantic', 'foreign_nomination_sha', 'foreign_native_sha', 'missing_bundle', 'orphan_pair', 'wrong_baseline', 'small_cap'])
+def test_independent_original_task_source_bundle_baseline_join_refused(case, change):
+    args = deepcopy(case['arguments'])
+    if change == 'receipt_missing': args['receipt'] = None
+    elif change == 'foreign_task': args['instruction_receipt']['task_cid'] = 'task:foreign'
+    elif change == 'foreign_ledger': args['instruction_receipt']['intent_requirements']['ledger_sha256'] = '0' * 64
+    elif change == 'foreign_contract': args['instruction_receipt']['intent_requirements']['contract_cid'] = 'foreign'
+    elif change == 'instruction_not_signed': args['instruction_receipt']['manifest_signature_verified'] = False
+    elif change == 'instruction_changed': args['source_text'] += ' '
+    elif change == 'foreign_semantic': args['semantic_verification']['scope_cid'] = 'scope:foreign'
+    elif change == 'foreign_nomination_sha': args['nominations']['Code source nomination sha256'] = '0' * 64
+    elif change == 'foreign_native_sha': args['nominations']['Code retrieval sha256'] = '0' * 64
+    elif change == 'missing_bundle': args['nominations'] = {}
+    elif change == 'orphan_pair': args['nominations'].pop('Code source nomination sha256')
+    elif change == 'wrong_baseline': args['baseline_commit'] = '0' * 40
+    else: args['max_bytes'] = 1024
+    with pytest.raises(ValueError):
+        audit.replay_reviewed_source_nomination_context(**args)
+
+
+def test_absent_pointer_default_without_io_and_orphan_receipt_refused(case, monkeypatch):
+    prompt, semantic = modified_prompt(case, lambda capsule: capsule['evidence'].__setitem__(slice(None), [row for row in capsule['evidence'] if row['kind'] != catalog.KIND]))
+    monkeypatch.setattr(source._PublicCapture, 'read', lambda *a, **k: pytest.fail('absent pointer read metadata'))
+    block, checks, guard = replay(case, prompt=prompt, receipt=None, semantic_verification=semantic)
+    assert block == '' and checks['present'] is False and guard is None
+    with pytest.raises(ValueError):
+        replay(case, prompt=prompt, semantic_verification=semantic)
+
+
+@pytest.mark.parametrize('role', ['contract', 'review', 'instruction', 'nomination', 'native'])
+def test_captured_metadata_tamper_refused_without_live_source_fallback(case, role):
+    path = case['root'] / ('retrieval.json' if role == 'native' else case['prepared']['artifact'] if role == 'nomination' else case['prepared']['inputs'][role]['path'])
+    path.write_bytes(path.read_bytes() + b' ')
+    with pytest.raises(ValueError):
+        replay(case)
+
+
+def test_original_git_blob_hash_and_size_preflight_refused_before_scratch(case, monkeypatch):
+    calls, real = [], audit._git_blob
+    def foreign(*args): calls.append(True);return b'def foreign():\n    return 0\n'
+    monkeypatch.setattr(audit, '_git_blob', foreign)
+    monkeypatch.setattr(audit.tempfile, 'TemporaryDirectory', lambda *a, **k: pytest.fail('foreign source created scratch'))
+    with pytest.raises(ValueError):
+        replay(case)
+    assert calls
+    monkeypatch.setattr(audit, '_git_blob', real)
+    with pytest.raises(source.CodeSourceInspectionBoundsError):
+        audit._git_blob(case['root'], case['baseline'], 'worker.py', 1)
+
+
+@pytest.mark.parametrize('drift', ['python', 'roots', 'opaque'])
+def test_trusted_runtime_command_prefix_drift_refused_by_exact_block_hash(case, monkeypatch, drift):
+    real = catalog._command_prefix
+    def changed(*args):
+        prefix = real(*args)
+        if drift == 'python': return prefix.replace(sys.executable, '/usr/bin/foreign-python')
+        if drift == 'roots': return prefix.replace('PYTHONPATH=', 'PYTHONPATH=/foreign/runtime:')
+        return 'echo opaque-prefix'
+    monkeypatch.setattr(catalog, '_command_prefix', changed)
+    with pytest.raises(ValueError):
+        replay(case)
+
+
+def test_final_guard_after_command_prefix_callback_write_restore_refused(case, monkeypatch):
+    target = case['root'] / case['prepared']['artifact'];raw = target.read_bytes();real = catalog._command_prefix
+    def mutated(*args):
+        prefix = real(*args);target.write_bytes(raw + b' ');target.write_bytes(raw);return prefix
+    monkeypatch.setattr(catalog, '_command_prefix', mutated)
+    with pytest.raises(ValueError):
+        replay(case)
+
+
+def test_returned_guard_covers_post_helper_model_render_inode_replacement(case):
+    _, _, guard = replay(case)
+    path = case['root'] / case['prepared']['inputs']['review']['path'];raw = path.read_bytes()
+    replacement = path.with_name('replacement-review.json')
+    replacement.write_bytes(raw);replacement.chmod(0o644);replacement.replace(path)
+    with pytest.raises(ValueError):
+        guard()
+
+
+def test_metadata_factory_bypassed_and_scope_restored_on_success_and_failure(case, monkeypatch):
+    from ipfs_accelerate_py.agent_supervisor.runtime import supervisor_meta_index as metadata
+    calls = [];owner = object()
+    monkeypatch.setattr(metadata.SupervisorMetaIndex, 'from_env', lambda: calls.append(True) or owner)
+    assert replay(case)[0] == case['block_expected'] and calls == []
+    with pytest.raises(ValueError): replay(case, baseline_commit='0' * 40)
+    assert calls == [] and metadata._active() is owner and len(calls) == 1

@@ -1,0 +1,348 @@
+"""Evaluation-only admission caller over native complete ASEH sealing.
+
+Receipts describe execution by a trusted local test producer. They are not
+signed attestations or mathematical proofs. The native verifier's actual mode
+is integrity; correctness over the finite domain is checked here separately.
+"""
+import copy
+import hashlib
+import itertools
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+SOURCE = Path('/home/barberb/lift_coding/.worktrees/agent-supervisor-efficiency-and-state-hardening-v1')
+for p in (SOURCE, SOURCE/'ipfs_datasets_py', SOURCE/'ipfs_kit_py'):
+    sys.path.insert(0, str(p))
+
+from ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.full_checkpoint import (
+    RepositoryStateView, VerificationPolicyView, RequiredUnitEvidence,
+    create_full_checkpoint, FOREST_CATEGORIES,
+)
+from ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.delta_seal import (
+    ParentSealView, DeltaUnitEvidence, DeltaTransitionStatement, DiffCommitmentView,
+    build_delta_seal, TRANSITION_SCHEMA,
+)
+from ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.sealer import IncrementalProofSealer
+from ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.verification import verify_seal, UnitProofView
+from ipfs_kit_py.proof_seal_store.contracts import ArtifactKind, ArtifactReference, CurrentSealPointer
+
+PROTOCOL = json.loads((HERE/'protocol.json').read_text())
+IDS = tuple(PROTOCOL['unit_ids'])
+
+
+def encoded(value):
+    return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=True).encode()
+
+
+def digest(value):
+    return 'sha256:' + hashlib.sha256(value if isinstance(value, bytes) else encoded(value)).hexdigest()
+
+
+def save(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, indent=2, sort_keys=True)+'\n')
+
+
+def inputs(unit):
+    if unit == 'clamp':
+        return list(range(PROTOCOL['clamp_inputs']['minimum'], PROTOCOL['clamp_inputs']['maximum']+1))
+    return [list(v) for n in range(PROTOCOL['energy_inputs']['maximum_length']+1)
+            for v in itertools.product(PROTOCOL['energy_inputs']['alphabet'], repeat=n)]
+
+
+def oracle(unit, value, revision):
+    # Deliberately different implementations from the operation source.
+    if unit == 'clamp':
+        return sorted((PROTOCOL['revisions'][revision], value, PROTOCOL['upper_clamp']))[1]
+    return sum(sum(abs(item) for _ in range(abs(item))) for item in value)
+
+
+def source_map(output, revision):
+    return {unit: digest((output/'snapshots'/revision/(unit+'.py')).read_bytes()) for unit in IDS}
+
+
+def policy():
+    return VerificationPolicyView(policy_cid=digest({'protocol': PROTOCOL,
+        'mode': 'integrity_only', 'admission': 'exact-source-input-policy-and-finite-replay'}))
+
+
+def binding(output, revision, unit):
+    return {'unit_id': unit, 'source_cid': source_map(output, revision)[unit],
+            'inputs_cid': digest(inputs(unit)), 'policy_cid': policy().policy_cid,
+            'python': sys.version, 'worker_cid': digest((HERE/'computation_worker.py').read_bytes())}
+
+
+def produce(output, revision, unit, source_override=None):
+    expected_binding = binding(output, revision, unit)
+    operation_path=source_override or output/'snapshots'/revision/(unit+'.py')
+    expected_binding['source_cid']=digest(operation_path.read_bytes())
+    started = time.perf_counter()
+    result = subprocess.run([sys.executable, '-I', str(HERE/'computation_worker.py'),
+                             str(operation_path)],
+        input=encoded(inputs(unit)), capture_output=True, timeout=10,
+        env={'PATH': os.environ['PATH'], 'PYTHONHASHSEED': '0'})
+    observed = json.loads(result.stdout) if result.returncode == 0 else {}
+    assert result.returncode == 0 and observed.get('completed') is True
+    receipt = {'schema': 'ns-bounded-execution-receipt/v1', 'binding': expected_binding,
+               'inputs': inputs(unit), 'outputs': observed['outputs'], 'calls': observed['calls']}
+    return receipt, {'operation_processes': 1, 'operation_calls': observed['calls'],
+                     'elapsed_seconds': time.perf_counter()-started,
+                     'stderr': result.stderr.decode(), 'returncode': result.returncode}
+
+
+def check_receipt(output, revision, unit, receipt):
+    failures = []
+    if receipt.get('binding') != binding(output, revision, unit):
+        failures.append('binding_mismatch')
+    values = inputs(unit)
+    if receipt.get('inputs') != values or receipt.get('calls') != len(values):
+        failures.append('input_coverage_mismatch')
+    observed = receipt.get('outputs', [])
+    expected = [oracle(unit, value, revision) for value in values]
+    if len(observed) != len(expected) or any(type(a) is not int or a != b for a,b in zip(observed, expected)):
+        failures.append('output_oracle_mismatch')
+    return {'accepted': not failures, 'failures': failures, 'checked_inputs': len(values)}
+
+
+def state(output, revision, parent=None):
+    mapping = source_map(output, revision)
+    return RepositoryStateView(repository_id='ns-development/bounded-seal-lifecycle',
+        revision=revision, source_root_cid=digest(mapping),
+        repository_state_cid=digest({'revision':revision, 'sources':mapping, 'required_unit_ids':IDS}),
+        environment_cid=digest({'python':sys.version, 'worker':digest((HERE/'computation_worker.py').read_bytes())}),
+        parent_revision_ids=() if parent is None else (parent['revision'],))
+
+
+def parent_view(pack):
+    s = pack['seal']
+    return ParentSealView(seal_cid=pack['seal_cid'], accepted=True,
+        seal_status=s['seal_status'], repository_id=s['repository_id'], branch_id='main',
+        revision=s['revision'], source_root_cid=s['source_root_cid'],
+        repository_state_cid=s['repository_state_cid'], environment_cid=s['environment_cid'],
+        policy_cid=s['policy_cid'], manifest_root_cid=s.get('manifest_root_cid',s.get('new_manifest_root_cid')),
+        forest_root_cid=s.get('repository_proof_root',s.get('new_forest_root_cid')),
+        aggregation_root=s.get('aggregation_root',s.get('new_aggregation_root')),
+        required_unit_ids=tuple(s['required_unit_ids']),
+        unit_proof_cids={unit:digest(receipt) for unit,receipt in pack['receipts'].items()},
+        logical_epoch=s.get('logical_epoch',0))
+
+
+def transition(output, revision, parent, tid):
+    p = parent_view(parent)
+    new = state(output, revision, parent)
+    old_map, new_map = source_map(output,parent['revision']), source_map(output, revision)
+    changes = {unit+'.py': {'old':old_map[unit], 'new':new_map[unit]}
+               for unit in IDS if old_map[unit] != new_map[unit]}
+    return DeltaTransitionStatement(schema=TRANSITION_SCHEMA, parent_seal_cid=p.seal_cid,
+        branch_id='main', old_source_root_cid=p.source_root_cid,
+        old_repository_state_cid=p.repository_state_cid, old_manifest_root_cid=p.manifest_root_cid,
+        old_forest_root_cid=p.forest_root_cid, old_aggregation_root=p.aggregation_root,
+        new_source_root_cid=new.source_root_cid, new_repository_state_cid=new.repository_state_cid,
+        new_revision=revision, parent_revision_ids=(p.revision,),
+        diff=DiffCommitmentView(diff_algorithm='ns-development/exact-file-map-sha256@1',
+            changed_artifact_commitment=digest(changes), complete=True,
+            changed_paths=tuple(sorted(changes))),
+        expected_manifest_unit_ids=IDS, expected_surviving_leaf_ids=IDS,
+        forest_rebuilt=True, aggregation_rebuilt=True, logical_epoch=p.logical_epoch+1,
+        transition_id=tid)
+
+
+def build(output, revision, receipts, parent=None, tid=''):
+    checked = {unit:check_receipt(output,revision,unit,receipt) for unit,receipt in receipts.items()}
+    units = []
+    for unit, receipt in sorted(receipts.items()):
+        args = {'unit_id':unit, 'proof_object_cid':digest(receipt),
+                'freshly_verified':checked[unit]['accepted']}
+        if parent is None:
+            units.append(RequiredUnitEvidence(**args))
+        else:
+            previous = parent['receipts'][unit]
+            reuse = digest(receipt) == digest(previous)
+            units.append(DeltaUnitEvidence(**args, disposition='reuse' if reuse else 'replace',
+                parent_proof_object_cid=digest(previous), newly_admitted=not reuse,
+                cache_key_unchanged=previous['binding']==receipt['binding']))
+    if parent is None:
+        seal = create_full_checkpoint(state(output,revision),policy(),units=units,expected_unit_ids=IDS)
+        statement = None
+    else:
+        statement = transition(output,revision,parent,tid)
+        seal = build_delta_seal(parent_view(parent),state(output,revision,parent),policy(),statement,units=units)
+    return seal, units, statement, checked
+
+
+def native_verify(output, pack, parent=None, receipt_bytes=None):
+    proofs=[]
+    for unit, receipt in pack['receipts'].items():
+        raw = encoded(receipt) if receipt_bytes is None else receipt_bytes[unit]
+        proofs.append(UnitProofView(unit_id=unit, proof_object_cid=digest(receipt),
+            proof_bytes=raw, public_input_cid=receipt['binding']['inputs_cid'],
+            observed_public_input_cid=digest(inputs(unit)), proof_system_id='integrity',
+            freshly_verified=True))
+    s=pack['seal']
+    return verify_seal(s, trusted_keys=['n/a'], verification_policy=policy(),
+        parent_seal=None if parent is None else parent_view(parent),
+        parent_chain=() if parent is None else (parent['seal_cid'],), unit_proofs=proofs,
+        expected_source_root_cid=state(output,pack['revision'],parent).source_root_cid,
+        expected_repository_state_cid=state(output,pack['revision'],parent).repository_state_cid,
+        expected_manifest_root_cid=s.get('manifest_root_cid',s.get('new_manifest_root_cid')),
+        expected_forest_root_cid=s.get('repository_proof_root',s.get('new_forest_root_cid')))
+
+
+def admit(output, pack, parent=None):
+    parent_ok=True
+    if parent is not None:
+        grandparent=None if parent['parent_pack'] is None else json.loads((output/'packs'/(parent['parent_pack']+'.json')).read_text())
+        parent_verdict,*_=admit(output,parent,grandparent)
+        parent_ok=parent_verdict['accepted']
+    seal, units, statement, checks = build(output,pack['revision'],pack['receipts'],parent,pack['transition_id'])
+    native = native_verify(output,pack,parent)
+    checks_pass = set(pack['receipts']) == set(IDS) and all(c['accepted'] for c in checks.values())
+    exact = seal.to_canonical()==pack['seal'] and seal.seal_cid()==pack['seal_cid']
+    return {'accepted':parent_ok and checks_pass and exact and seal.sealed and native.accepted,
+            'receipt_checks':checks, 'complete_manifest':set(pack['receipts'])==set(IDS),
+            'parent_independently_revalidated':parent_ok,
+            'rebuilt_seal_matches':exact, 'native':native.to_canonical()}, seal, units, statement
+
+
+def prepare(output, revision, parent=None, tid=''):
+    receipts={}
+    measurements={}
+    for unit in IDS:
+        previous = None if parent is None else parent['receipts'][unit]
+        if previous is not None and previous['binding']==binding(output,revision,unit):
+            receipts[unit]=previous
+            measurements[unit]={'operation_processes':0,'operation_calls':0,'receipt_reused':True}
+        else:
+            receipts[unit],measurements[unit]=produce(output,revision,unit)
+    seal,units,statement,checks=build(output,revision,receipts,parent,tid)
+    pack={'revision':revision,'parent_pack':None if parent is None else parent['revision'],
+          'seal':seal.to_canonical(),'seal_cid':seal.seal_cid(),'receipts':receipts,
+          'transition_id':tid,'operation_measurements':measurements}
+    verdict,*_=admit(output,pack,parent)
+    assert verdict['accepted'], verdict
+    pack['admission']=verdict
+    save(output/'packs'/(revision+'.json'),pack)
+    return pack
+
+
+def persist_phase_artifacts(sealer, pack):
+    """Actually persist bytes for every CID journaled by the native sealer."""
+    s=pack['seal']
+    full='repository_proof_root' in s
+    prefix='ips.full_checkpoint' if full else 'ips.delta_seal'
+    category_roots=s['category_roots']
+    common=['repository_id','revision','source_root_cid','repository_state_cid','environment_cid',
+            'policy_cid','proof_schema_version','canonicalization_version','dependency_graph_schema_version',
+            'circuit_id','verification_key_id','parent_seal_cid','parent_revision_ids']
+    forest={key:s[key] for key in common}
+    forest.update(domain=prefix+('.repository.v1' if full else '.forest.v1'),
+                  manifest_root_cid=s.get('manifest_root_cid',s.get('new_manifest_root_cid')),
+                  category_roots=category_roots)
+    if not full:
+        forest.update(branch_id=s['branch_id'],logical_epoch=s['logical_epoch'])
+    aggregate={'domain':prefix+'.aggregation.v1','label':'manifest_aggregation',
+               'required_unit_ids':s['required_unit_ids'],'category_roots':category_roots}
+    expected_forest=s.get('repository_proof_root',s.get('new_forest_root_cid'))
+    expected_aggregate=s.get('aggregation_root',s.get('new_aggregation_root'))
+    assert digest(forest)==expected_forest and digest(aggregate)==expected_aggregate
+    refs=[]
+    for value,kind,claimed in [(r,ArtifactKind.PROOF_OBJECT,digest(r)) for r in pack['receipts'].values()]+[
+        (forest,ArtifactKind.MERKLE_NODE,expected_forest),
+        (aggregate,ArtifactKind.PROOF_MANIFEST,expected_aggregate)]:
+        raw=encoded(value)
+        ref=sealer.store.put_immutable(kind,raw,claimed_cid=claimed)
+        assert sealer.store.get_verified_bytes(ref)==raw
+        refs.append(ref.to_dict())
+    return refs
+
+
+def publish(output, store_path, pack, parent=None, expected=None, crash=None):
+    verdict,seal,units,statement=admit(output,pack,parent)
+    assert verdict['accepted'], verdict
+    def crash_at(name,*args):
+        if name==crash:
+            save(output/'events'/(crash+'.json'), {'boundary':name,'transition_id':pack['transition_id'],
+                'seal_cid':pack['seal_cid'],'pid':os.getpid(),'exit_code':91})
+            os._exit(91)
+    sealer=IncrementalProofSealer(store_path,crash_injector=crash_at if crash else None)
+    refs=persist_phase_artifacts(sealer,pack)
+    args={'units':units, 'transition_id':pack['transition_id'], 'expected_current':expected}
+    started=time.perf_counter()
+    if parent is None:
+        result=sealer.publish_full_checkpoint(state(output,pack['revision']),policy(),expected_unit_ids=IDS,**args)
+    else:
+        result=sealer.publish_delta_seal(parent_view(parent),state(output,pack['revision'],parent),policy(),statement,**args)
+    pointer=sealer.get_current_seal(state(output,pack['revision']).repository_id)
+    sealer.close()
+    return {'publication':result.to_canonical(),'pointer':None if pointer is None else pointer.to_dict(),
+            'admission':verdict,'persisted_phase_artifacts':refs,'elapsed_seconds':time.perf_counter()-started}
+
+
+def loaded_sources():
+    found={}
+    for name,module in sorted(sys.modules.copy().items()):
+        if name.startswith(('ipfs_accelerate_py.','ipfs_datasets_py.','ipfs_kit_py.')):
+            p=Path(getattr(module,'__file__','') or '')
+            if p.is_file():
+                found[name]={'path':str(p.resolve()),'sha256':hashlib.sha256(p.read_bytes()).hexdigest()}
+    return found
+
+
+def verify_persisted(output,store_path):
+    sealer=IncrementalProofSealer(store_path)
+    pointer=sealer.get_current_seal(state(output,'r0').repository_id)
+    packs={p['seal_cid']:p for path in (output/'packs').glob('*.json') for p in [json.loads(path.read_text())]}
+    visited=[]
+    def walk(cid):
+        pack=packs[cid]
+        parent=None if pack['parent_pack'] is None else json.loads((output/'packs'/(pack['parent_pack']+'.json')).read_text())
+        if parent is not None:
+            walk(parent['seal_cid'])
+        kind=ArtifactKind.CHECKPOINT_SEAL if parent is None else ArtifactKind.DELTA_SEAL
+        raw=sealer.store.get_verified_bytes(ArtifactReference(cid=cid,kind=kind))
+        assert digest(raw)==cid and json.loads(raw)['payload']==pack['seal']
+        for unit,receipt in pack['receipts'].items():
+            raw_receipt=sealer.store.get_verified_bytes(ArtifactReference(cid=digest(receipt),kind=ArtifactKind.PROOF_OBJECT))
+            assert raw_receipt==encoded(receipt)
+        verdict,*_=admit(output,pack,parent)
+        assert verdict['accepted'], verdict
+        visited.append({'revision':pack['revision'],'seal_cid':cid,'admission':verdict})
+    walk(pointer.seal_cid)
+    sealer.close()
+    return {'pointer':pointer.to_dict(),'verified_chain':visited,'accepted':True}
+
+
+def recover(output,store_path,tag):
+    sealer=IncrementalProofSealer(store_path)
+    before=sealer.get_current_seal(state(output,'r0').repository_id).to_dict()
+    report=sealer.recover_publication(apply_mutations=True)
+    after=sealer.get_current_seal(state(output,'r0').repository_id).to_dict()
+    sealer.close()
+    result={'before':before,'after':after,'recovery':report.to_dict(),
+            'persisted_chain':verify_persisted(output,store_path),'sources':loaded_sources(),'pid':os.getpid()}
+    save(output/'results'/(tag+'.json'),result)
+    return result
+
+
+def main():
+    mode,output_arg=sys.argv[1:3]
+    output=Path(output_arg)
+    if mode=='crash':
+        boundary,store_arg=sys.argv[3:5]
+        parent=json.loads((output/'packs/r1.json').read_text())
+        pack=json.loads((output/'packs/r2a.json').read_text())
+        publish(output,Path(store_arg),pack,parent,crash=boundary)
+        raise AssertionError('crash did not occur')
+    if mode=='recover':
+        recover(output,Path(sys.argv[3]),sys.argv[4])
+    if mode=='audit':
+        save(output/'results'/(sys.argv[4]+'.json'),verify_persisted(output,Path(sys.argv[3])))
+
+
+if __name__=='__main__':
+    main()

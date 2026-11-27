@@ -1,0 +1,19 @@
+{
+  "schema": "la-candidate-source-recovery-policy/v1",
+  "status": "PROSPECTIVE_BEFORE_DOWNLOADS",
+  "authorization": "Root authorized bounded public immutable source/test recovery on 2026-09-14; no models, paid services, final release or native registration.",
+  "languages": ["Python"],
+  "selection": "Retain the source-grounded candidate repository list from the pre-model ascending-row inspection. Download availability does not silently authorize replacement; failures remain unqualified.",
+  "repository_count": 12,
+  "maximum_primary_or_test_files_per_revision_per_repository": 3,
+  "maximum_source_file_bytes": 524288,
+  "maximum_metadata_or_license_bytes": 1048576,
+  "maximum_total_retained_response_bytes": 33554432,
+  "maximum_single_request_seconds": 15,
+  "maximum_concurrent_repositories": 3,
+  "allowed_hosts": ["api.github.com", "raw.githubusercontent.com"],
+  "immutable_identity": "Use the exact dataset fix commit, retain its GitHub commit metadata/tree/parent identity, and retrieve selected full files at the fix and first parent. Multiple-parent ambiguity or missing full files prevents original-system reproduction claims.",
+  "source_scope": "Recover full relevant source modules, relevant tests when present among recorded changed files, and the exact-commit root license. A few recovered modules are not a complete installed/qualified upstream system; record remaining dependency/context gaps.",
+  "execution": "Source and tests are inert during retrieval. AST syntax inspection is permitted; no upstream test, candidate program, model or repository hook executes.",
+  "failure_policy": "Retain URL/status/error/observed bytes and all partial results. Do not retry an ambiguous request silently or infer successful original-code recovery from a diff/index/URL."
+}

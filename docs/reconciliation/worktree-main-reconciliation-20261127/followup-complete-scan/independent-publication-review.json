@@ -1,0 +1,151 @@
+{
+  "accounting_sum_verified": true,
+  "additional123payloads_verified": true,
+  "additional_payload_bytes": 27045746,
+  "all_staged_files_regular": true,
+  "all_whitelisted_restore_and_marker_receipts_exact": true,
+  "coverage_limit": "10,087 is observed repository/OID accounting. Explicit cache/fixture/generated/provenance/permission-denied exclusions remain. This does not assert every filesystem byte was discovered, integrated, or preserved.",
+  "encrypted_other_bundle_pairs": 1,
+  "encrypted_recovery_checks": [
+    {
+      "artifact_kind": "git-bundle",
+      "ciphertext_bytes": 283329098,
+      "ciphertext_sha256": "2b536cdeeee7438798cd0a1c3771e2b04198d5f2c1ce758ddae138e49cee4180",
+      "metadata_path": "followup-complete-scan/branch-history/encrypted-accelerate-commit/encrypted-recovery.json",
+      "metadata_sha256": "ff8804d983c5c18cf2692e08414c6647bec5ef66e2d0d017c10df6823834bec9",
+      "no_decryption_rerun": true,
+      "original_sha256": "be9250573417c383d40770a1505bfa7a8eeebab5a0243bb2e4cbec2681ccee91",
+      "parts": [
+        {
+          "bytes": 90000000,
+          "path": "followup-complete-scan/branch-history/encrypted-accelerate-commit/accelerate-sensitive-historical-commit-v02.archive.gpg.part-000.DATA",
+          "sha256": "2487b03d8a3beab692c00181b299008b4463817b3e9dd54552692a3d72a26af6"
+        },
+        {
+          "bytes": 90000000,
+          "path": "followup-complete-scan/branch-history/encrypted-accelerate-commit/accelerate-sensitive-historical-commit-v02.archive.gpg.part-001.DATA",
+          "sha256": "8c89fb90eac37385a5e794b586c9e77e763aa77c4e7941c1f7bdad76040db16e"
+        },
+        {
+          "bytes": 90000000,
+          "path": "followup-complete-scan/branch-history/encrypted-accelerate-commit/accelerate-sensitive-historical-commit-v02.archive.gpg.part-002.DATA",
+          "sha256": "8d1cbac315954288e8ab61921c4190c280f963e6e02cc0c96fc673a4cc2481bc"
+        },
+        {
+          "bytes": 13329098,
+          "path": "followup-complete-scan/branch-history/encrypted-accelerate-commit/accelerate-sensitive-historical-commit-v02.archive.gpg.part-003.DATA",
+          "sha256": "daf11ff494463dc7be622233346762f88b346ab446b4ed3a5badaa29d8a90cf3"
+        }
+      ],
+      "passphrase_file_opened": false,
+      "passphrase_path_external_by_metadata": true,
+      "receipt_decrypted_bytes_match_exact_original": true,
+      "receipt_decryption_rc": 0,
+      "receipt_encryption_rc": 0,
+      "receipt_owned_helper": {
+        "birth_start_ticks": "477696431",
+        "cleanup_confirmed": true,
+        "pid": 25747,
+        "private_home": "/tmp/git-main-followup-20261127-zYjieLmd/accelerate-sensitive-historical-commit-v02-gnupg",
+        "returncode": 0
+      }
+    },
+    {
+      "artifact_kind": "tar-gzip",
+      "ciphertext_bytes": 175963,
+      "ciphertext_sha256": "17f34627081c32fb51ca854565fae7a03e747a30464b7aae8cc84959aeeff94c",
+      "metadata_path": "root-authored-work/encrypted-sources/encrypted-recovery.json",
+      "metadata_sha256": "beb83554257ea779b541e7c1fb80158ae20a50b6df1ef3984b64c2a617c935c8",
+      "no_decryption_rerun": true,
+      "original_sha256": "6365447bcb35776f4303b21ab840c6a091619bad5ac7ed06fa6d4ce84e0f93b3",
+      "parts": [
+        {
+          "bytes": 175963,
+          "path": "root-authored-work/encrypted-sources/root-withheld-authored-sources-v01.archive.gpg.part-000.DATA",
+          "sha256": "17f34627081c32fb51ca854565fae7a03e747a30464b7aae8cc84959aeeff94c"
+        }
+      ],
+      "passphrase_file_opened": false,
+      "passphrase_path_external_by_metadata": true,
+      "receipt_decrypted_bytes_match_exact_original": true,
+      "receipt_decryption_rc": 0,
+      "receipt_encryption_rc": 0,
+      "receipt_owned_helper": {
+        "birth_start_ticks": "477697425",
+        "cleanup_confirmed": true,
+        "pid": 26883,
+        "private_home": "/tmp/git-main-followup-20261127-zYjieLmd/root-withheld-authored-sources-v01-gnupg",
+        "returncode": 0
+      }
+    }
+  ],
+  "handoff": {
+    "bytes": 8524,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/final-private-publication-handoff.json",
+    "sha256": "5dc63b6ea392a044d708cc8756d951e2db9f1f448e9ad5ad95f69cf0090995d1"
+  },
+  "largest_staged_file_bytes": 90000000,
+  "max_file_limit_bytes": 99614720,
+  "metadata_documents_observed": {
+    "final_report_sha256": "b834adbdd5e0dc8d90f810ad99c13d88c7a5babd4c7153852b1171d6792a6a86",
+    "readme_sha256": "4c98b5502004308dc8f67f41db792cf73d947d3aa99ca697fafc9dd79a1f2ae3"
+  },
+  "metadata_update_boundary": "Root may correct FINAL-REPORT/README and final roster/manifest metadata only. Protected payload bytes, whitelist, encryption parts and own123payloads must remain exact. This review does not pre-claim a push or final changed-document hashes.",
+  "observed_repository_commit_pairs": 10087,
+  "payload_root": "/tmp/git-main-followup-20261127-zYjieLmd/publication/docs/reconciliation/worktree-main-reconciliation-20261127",
+  "plaintext_bundle_whitelist": [
+    {
+      "bytes": 16656573,
+      "path": "followup-complete-scan/branch-history/portland-datasets-older-branches.bundle",
+      "sha256": "22aa27828922d70ab13a27753960447a89610c6ca489d11430a990589e043db5"
+    },
+    {
+      "bytes": 40479704,
+      "path": "followup-complete-scan/branch-history/remaining-history/accelerate_34/history.bundle",
+      "sha256": "ed8c180d702e2c92ff2166ca77faec13130e809262dd8866af3613c07fe6cb52"
+    },
+    {
+      "bytes": 5396,
+      "path": "followup-complete-scan/branch-history/remaining-history/accelerate_detached_1/history.bundle",
+      "sha256": "36a3eac68c18ab7de909e11e1ff5eaa193b625da556ea8bd40488d668aa3e2aa"
+    },
+    {
+      "bytes": 7597493,
+      "path": "followup-complete-scan/branch-history/remaining-history/datasets_35/history.bundle",
+      "sha256": "182cceb3a5a93b3a9c043333cc3af92a23896e5183b2d8d87edf7e6c73346dee"
+    },
+    {
+      "bytes": 5904318,
+      "path": "followup-complete-scan/branch-history/remaining-history/kit_11/history.bundle",
+      "sha256": "db5b8579093a4336269ff95c92956ec70499e1426a39032322f3fe6895cfc789"
+    },
+    {
+      "bytes": 1913663,
+      "path": "followup-complete-scan/branch-history/remaining-history/root_1/history.bundle",
+      "sha256": "e121273507abff97b6eb07135fc0c1e715bc0fccfc819c65ce5999b7c8d19e64"
+    },
+    {
+      "bytes": 794393,
+      "path": "followup-complete-scan/branch-history/remaining-history/swiss_1/history.bundle",
+      "sha256": "b165fc6f56518f644d2657c8e546f89d9492b669687cd4cb073cb14d9f465ad8"
+    }
+  ],
+  "plaintext_other_bundle_pairs": 83,
+  "required_metadata_corrections": [],
+  "restricted_A1_only_ciphertext_parts_and_metadata": true,
+  "restricted_original_plaintext_bundle_file_absent": true,
+  "result": "PASS",
+  "reviewed_staged_bytes": 478791866,
+  "reviewed_staged_files": 2284,
+  "root_marker_held_distinct_source_plaintext_files_absent": true,
+  "root_marker_held_source_mappings": 365,
+  "root_marker_held_unique_source_files": 20,
+  "schema": "independent-staged-publication-review/v1",
+  "scope": "Staged bytes and already-closed metadata receipts only. No original source/bundle/secret-file reads, Git calls/mutations, decryption, helper polling, model/runtime/tests, network, or scientific claim.",
+  "staged_roster": {
+    "bytes": 510960,
+    "path": "/tmp/independent-final-publication-review-20261127-JrWy750a/reviewed-staged-roster.json",
+    "sha256": "d5f8e2d0d3eadeb82b8d7a65786c9cf4374ff44f0be4118e6e98dc79b0fe0d0e"
+  },
+  "symlinks": 0
+}

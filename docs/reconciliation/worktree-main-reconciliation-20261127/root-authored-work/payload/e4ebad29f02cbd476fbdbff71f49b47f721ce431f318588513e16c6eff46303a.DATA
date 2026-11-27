@@ -1,0 +1,6 @@
+set_option maxHeartbeats 100000
+set_option maxRecDepth 512
+theorem recovery_goal : ∀ (p : (Nat → Nat) → Prop), p id → p id := by
+  intro p h
+  exact h
+#print axioms recovery_goal

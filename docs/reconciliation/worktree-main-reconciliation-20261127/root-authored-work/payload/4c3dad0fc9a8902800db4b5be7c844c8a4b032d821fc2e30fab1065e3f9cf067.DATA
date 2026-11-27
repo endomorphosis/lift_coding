@@ -1,0 +1,151 @@
+#!/usr/bin/env python3
+"""Independent full byte/custody/cost audit of the original-observation profile."""
+import base64
+import hashlib
+import json
+import os
+from pathlib import Path
+import sqlite3
+import time
+
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "results_v15_full_pyparsing_frontend_observations"
+PRIOR = HERE / "results_v13_full_pyparsing_incremental"
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+def canonical(value): return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode()
+
+def main():
+    started = time.perf_counter(); output = HERE / "full_pyparsing_frontend_observations_v15_audit.json"
+    if output.exists(): raise SystemExit("preserve completed audit")
+    inputs = {}
+    def bind(path):
+        digest = sha(path.read_bytes()); inputs[str(path.relative_to(HERE))] = digest
+        return digest
+    frozen = read(OUT / "freeze.json"); summary = read(OUT / "summary.json")
+    assert bind(OUT / "freeze.json") == summary["freeze_sha256"]
+    assert bind(HERE / "full_pyparsing_frontend_observations_v15.py") == frozen["driver_sha256"]
+    assert bind(HERE / "FULL_PYPARSING_ORIGINAL_FRONTENDS_PROTOCOL_V15.md") == frozen["protocol_sha256"]
+    assert bind(HERE / "frontend_observations_validation_v7/summary.json") == frozen["qualification_summary_sha256"]
+    assert bind(PRIOR / "freeze.json") == frozen["parent_freeze_sha256"]
+    assert bind(OUT / "runtime_source_manifest.json") == frozen["runtime_manifest_sha256"]
+    profile = read(OUT / "runtime_source_manifest.json")
+    assert all(sha(Path(path).read_bytes()) == digest for path, digest in profile["files"].items())
+    variant = read(HERE / "runtime_frontend_observations_v7_manifest.json")
+    assert bind(HERE / "runtime_frontend_observations_v7_manifest.json") == profile["datasets_variant_manifest_sha256"]
+    assert bind(HERE / "materialize_frontend_observations_v7.py") == variant["materializer_sha256"]
+    for name in ("frontend_observations_v7.py", "frontend_observations_v7.patch", "ORIGINAL_FRONTEND_OBSERVATIONS_V7.md", "full_pyparsing_frontend_observations_v15_driver.patch", "materialize_full_frontend_observations_v15.py"): bind(HERE / name)
+    assert summary["workers_complete"] and summary["cold_incremental_equivalence_passed"] and summary["original_frontend_sidecar_exactly_equal"]
+    bind(OUT / "summary.json"); bind(OUT / "enrollment_process.json")
+    results = {}; costs = {}; observations = {}
+    for role in ("baseline", "changed_cold", "changed_incremental"):
+        folder = OUT / role; result = read(folder / "result.json"); process = read(folder / "process.json")
+        assert process["returncode"] == 0 and not process["timed_out"]
+        assert process["bound_seconds"] == 900 and 0 < process["wall_seconds"] < 900
+        assert result["all_checks_passed"] and result["provider_calls"] == result["raw_substitutions"] == 0
+        assert (result["regular_files"], result["python_files"], result["opaque_symlinks"], result["symbols"], result["edges"], result["blocks"]) == (286, 154, 1, 3957, 55859, 67872)
+        assert result["previous_state_and_bundle_actually_supplied"] == (role == "changed_incremental")
+        assert result["baseline_bundle_reused_only_after_current_full_scan_exact_equality_and_full_native_verify"] == (role == "baseline")
+        for name, expected in result["artifact_sha256"].items(): assert bind(folder / name) == expected
+        for name in ("result.json", "process.json", "stages.jsonl", "stdout.log", "stderr.log", "scan_reuse_diagnostics.json"): bind(folder / name)
+        assert read(folder / "scan_reuse_diagnostics.json") == result["scan_reuse_diagnostics"]
+        body = (folder / "frontend_observations.json").read_bytes(); value = json.loads(body)
+        assert canonical(value) == body
+        assert value["parent_state_cid"] == result["state_cid"] and value["repository_id"] == frozen["repository_id"]
+        assert value["profile_sha256"] == frozen["runtime_manifest_sha256"]
+        assert len(value["paths"]) == result["frontend_observation_diagnostics"]["observation_paths"] == 154
+        assert len(body) == result["frontend_observation_diagnostics"]["output_observation_bytes"]
+        observations[role] = value; results[role] = result
+        costs[role] = {"process_wall_seconds": process["wall_seconds"], "worker_wall_seconds": result["wall_seconds_including_guards_and_persistence"],
+                       "worker_cpu_seconds": result["cpu_seconds_including_guards_and_persistence"], "stages": result["stages"],
+                       "sidecar_bytes": len(body), "sidecar_sha256": sha(body)}
+    retained = OUT / "retained_v13_baseline"
+    for path in retained.iterdir():
+        assert path.read_bytes() == (PRIOR / "baseline" / path.name).read_bytes(); bind(path)
+    for name, digest in frozen["retained_baseline_artifact_sha256"].items(): assert sha((retained / name).read_bytes()) == digest
+    assert bind(retained / "process.json") == frozen["retained_baseline_original_preparation_receipt_sha256"]
+    source = {}
+    for name, expected in frozen["source_manifest_sha256"].items():
+        assert bind(OUT / name) == expected
+        manifest = read(OUT / name); tree = Path(manifest["tree"])
+        assert {str(p.relative_to(tree)) for p in tree.rglob("*") if p.is_file() and not p.is_symlink()} == set(manifest["files"])
+        assert {str(p.relative_to(tree)) for p in tree.rglob("*") if p.is_symlink()} == set(manifest["opaque_symlinks"])
+        for path, row in manifest["files"].items():
+            p = tree / path; body = p.read_bytes()
+            assert sha(body) == row["sha256"] and len(body) == row["bytes"] and bool(p.stat().st_mode & 0o111) == row["executable"]
+        for path, row in manifest["opaque_symlinks"].items(): assert os.readlink(tree / path) == row["link_target"]
+        source[name] = manifest
+    before, after = source["baseline_source.json"], source["changed_source.json"]
+    assert set(before["files"]) == set(after["files"]) and before["opaque_symlinks"] == after["opaque_symlinks"]
+    changed = [p for p in before["files"] if before["files"][p] != after["files"][p]]
+    assert changed == [frozen["mutation"]["path"]]
+    path = changed[0]
+    assert (Path(after["tree"]) / path).read_bytes() == (Path(before["tree"]) / path).read_bytes() + base64.b64decode(frozen["mutation"]["appended_comment_base64"], validate=True)
+    parent = read(OUT / "changed_incremental/parent_binding.json"); bind(OUT / "changed_incremental/parent_binding.json")
+    for name, digest in parent["parent_artifact_sha256"].items(): assert sha((OUT / "baseline" / name).read_bytes()) == digest
+    base, cold, inc = (results[r] for r in ("baseline", "changed_cold", "changed_incremental"))
+    assert parent["state_cid"] == base["state_cid"] == frozen["expected_baseline_state_cid"]
+    assert parent["root_cid"] == base["root_cid"] == frozen["expected_baseline_root_cid"]
+    assert parent["frontend_observations_cid"] == base["frontend_observation_diagnostics"]["output_observation_cid"] == inc["frontend_observation_diagnostics"]["parent_observation_cid"]
+    assert cold["state_cid"] == inc["state_cid"] != base["state_cid"]
+    assert cold["root_cid"] == inc["root_cid"] != base["root_cid"]
+    assert cold["snapshot_cid"] == inc["snapshot_cid"] != base["snapshot_cid"]
+    for name in ("state.json", "root.json"):
+        assert (OUT / "baseline" / name).read_bytes() == (retained / name).read_bytes()
+        assert (OUT / "changed_cold" / name).read_bytes() == (OUT / "changed_incremental" / name).read_bytes() == (PRIOR / "changed_cold" / name).read_bytes()
+    assert (OUT / "changed_cold/frontend_observations.json").read_bytes() == (OUT / "changed_incremental/frontend_observations.json").read_bytes()
+    def compare_blocks(roots):
+        conns = [sqlite3.connect((root / "blocks.sqlite").as_uri() + "?mode=ro", uri=True) for root in roots]
+        cursors = [c.execute("SELECT cid,body FROM blocks ORDER BY cid") for c in conns]
+        count = byte_count = 0; fingerprint = hashlib.sha256()
+        while True:
+            rows = [c.fetchone() for c in cursors]
+            assert all(row == rows[0] for row in rows[1:])
+            if rows[0] is None: break
+            cid, body = rows[0]; count += 1; byte_count += len(body)
+            fingerprint.update(cid.encode()); fingerprint.update(len(body).to_bytes(8, "big")); fingerprint.update(body)
+        for c in conns: c.close()
+        return {"blocks": count, "block_bytes": byte_count, "ordered_block_fingerprint": fingerprint.hexdigest(), "outputs_compared": len(roots)}
+    baseline_blocks = compare_blocks((OUT / "baseline", retained))
+    changed_blocks = compare_blocks((OUT / "changed_cold", OUT / "changed_incremental", PRIOR / "changed_cold"))
+    assert baseline_blocks["blocks"] == base["blocks"] and baseline_blocks["block_bytes"] == base["block_bytes"]
+    assert changed_blocks["blocks"] == cold["blocks"] == inc["blocks"]
+    assert changed_blocks["block_bytes"] == cold["block_bytes"] == inc["block_bytes"]
+    assert changed_blocks["ordered_block_fingerprint"] == summary["ordered_block_fingerprint"]
+    diag = inc["scan_reuse_diagnostics"]; obs_diag = inc["frontend_observation_diagnostics"]
+    reused = set(diag["reused_paths"]); analyzed = set(diag["analyzed_paths"])
+    assert analyzed == {path} and len(reused) == 153 and not reused & analyzed
+    assert reused | analyzed == set(observations["changed_incremental"]["paths"])
+    assert reused == set(obs_diag["original_observation_reused_paths"])
+    assert all(observations["baseline"]["paths"][p] == observations["changed_incremental"]["paths"][p] for p in reused)
+    changed_observation_paths = [p for p in observations["baseline"]["paths"] if observations["baseline"]["paths"][p] != observations["changed_incremental"]["paths"][p]]
+    assert changed_observation_paths == [path]
+    reused_edges = sum(len(observations["baseline"]["paths"][p]["edges"]) for p in reused)
+    analyzed_edges = sum(len(observations["changed_incremental"]["paths"][p]["edges"]) for p in analyzed)
+    assert reused_edges == obs_diag["original_observation_reused_edges"]
+    assert analyzed_edges == obs_diag["original_observation_analyzed_edges"]
+    reused_original_symbols = sum(len(observations["baseline"]["paths"][p]["symbols"]) for p in reused)
+    assert reused_original_symbols == len(diag["reused_symbol_ids"])
+    controls = read(HERE / "frontend_observations_validation_v7/summary.json")
+    assert controls["all_checks_passed"] and controls["result"]["full_equivalence_cases"] == 10 and controls["result"]["negative_controls_passed"] == 16
+    for name in ("freeze.json", "runtime_source_manifest.json", "process.json", "result.json", "stdout.log", "stderr.log"): bind(HERE / "frontend_observations_validation_v7" / name)
+    result = {"schema": "ns-full-pyparsing-original-frontend-audit/v15", "all_audit_checks_passed": True,
+              "cold_incremental_equivalence_passed": True, "original_observations_exactly_equal": True,
+              "v13_cold_output_also_exactly_equal": True, "state_cid": cold["state_cid"], "root_cid": cold["root_cid"],
+              "counts": {k: cold[k] for k in ("regular_files", "python_files", "opaque_symlinks", "raw_bytes", "symbols", "edges")},
+              "baseline_blocks": baseline_blocks, "changed_blocks": changed_blocks,
+              "reuse": {"reused_paths": len(reused), "rescanned_paths": len(analyzed), "reused_original_symbols": reused_original_symbols,
+                        "reused_original_edges": reused_edges, "newly_analyzed_original_edges": analyzed_edges,
+                        "whole_graph_resolution_recomputed": diag["resolution_recomputed"], "changed_observation_paths": changed_observation_paths},
+              "source_controls_passed": sum(len(r["source_controls"]) for r in results.values()),
+              "costs": costs, "enrollment": summary["enrollment"], "original_v13_baseline_preparation": read(retained / "process.json"),
+              "new_workers_wall_seconds": summary["new_workers_wall_seconds"], "timing_scope": summary["timing_scope"],
+              "timing_limit": "Observation encode/decode included in named native scan stage; sidecar storage in persistence stage. No separate cache-only microtiming is inferred. Nested stages overlap parent process total; baseline bootstrap and changed cold overlap on shared host.",
+              "audit_wall_seconds": time.perf_counter() - started, "runtime_files_rehashed": len(profile["files"]),
+              "inputs_sha256": inputs, "audit_source_sha256": sha(Path(__file__).read_bytes()),
+              "claim_limit": "Exact operational equality and actual original-observation reuse on this authored public source change under frozen honest producer custody; all paid bootstrap/restore/storage costs retained. No execution theorem, provider token saving or general incremental speedup claimed.",
+              "provider_calls": 0, "raw_substitutions": 0}
+    output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({"all_audit_checks_passed": True, "reuse": result["reuse"], "changed_blocks": changed_blocks, "costs": {role: row["process_wall_seconds"] for role, row in costs.items()}}))
+
+if __name__ == "__main__": main()

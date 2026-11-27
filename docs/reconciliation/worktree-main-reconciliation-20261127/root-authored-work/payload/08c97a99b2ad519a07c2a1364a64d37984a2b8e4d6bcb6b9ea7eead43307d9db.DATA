@@ -1,0 +1,92 @@
+# Original repository validation nomination API
+
+Use the immutable `native_profiles/v2/service.py` with its adjacent
+`profile.json`. The qualified endpoint declaration is
+`evals/recruitment/original_acceptance_v1/endpoint_declaration_v4.json`.
+The endpoint profile is `d729f7cc0b906642cbf28745a1625156dc36a4d035009519046a313651de71f4`.
+The service never invokes that endpoint itself.
+
+```text
+/usr/bin/python3.12 -B <absolute native_profiles/v2/service.py>
+  --profile <absolute native_profiles/v2/profile.json>
+  --endpoint <absolute endpoint_declaration_v4.json>
+  --request -
+  --run <new absolute directory outside candidate source>
+```
+
+Send one JSON object on stdin and read one JSON result on stdout. The caller
+must pin the profile, source and endpoint hashes before dispatch and impose the
+qualified 120-second subprocess bound. The process runs with
+`IPFS_ACCEL_SKIP_CORE=1`, `IPFS_ACCEL_AUTO_INSTALL=0`,
+`PYTHONDONTWRITEBYTECODE=1`, and without inherited `PYTHONPATH` or other
+`IPFS_`/`NS_` overrides. The full command and outer subprocess duration belong
+in the caller effect ledger. Nonzero exit, missing summary, unknown schema,
+changed profile or changed source provides no admitted nomination. Preserve the
+failed effect and take the caller's explicitly measured ordinary validation
+fallback when its own current-input checks permit it.
+
+`nomination_results_attempt2/request_1.json` is an exact event-2 example;
+`request_0.json` is warm priming; `request_12.json` exercises an actual retained
+native parent descriptor as a wire compatibility control only.
+
+The closed request has `schema=ns-original-validation-plan-request/v1`,
+`operation=plan_validation`, `corpus_sha256`, `trajectory_id`, `arm`,
+`cache_profile`, `cache_namespace`, `operation_id`, `task_id`, `event_index`,
+`scorer_request`, `source_inventory_format`, `source_inventory_sha256`,
+`generic_source_tree_sha256`, `environment_profile_sha256`,
+`endpoint_contract_sha256`, and `expected_publication_parent`.
+
+The original inventory format is `original-adapter-path-keyed/v1`: canonical
+JSON with sorted keys, ASCII escapes, no whitespace and no trailing newline.
+Regular files are `{kind:file,sha256,bytes,mode:S_IMODE}`; symlinks are
+`{kind:symlink,target}`. The service independently observes the complete source
+population and exact modes, restricts content changes to frozen public repair
+paths, and checks the separate generic masked-mode tree hash. It rechecks the
+current source after native execution. Trusted quiescent local source custody
+is required; this is not isolation against hostile concurrent Python.
+
+The scorer request uses the curator's unchanged
+`ns-original-candidate-score/v1` protocol and all its exact request fields.
+Nomination evidence and output bind the complete canonical scorer request.
+The returned `scorer_request_sha256` must match the caller's own hash before
+dispatch. Successful nomination is `status=nominated`,
+`dispatch_allowed=true`, `native_status=succeeded`; `scoring_passed=false`
+is an explicit statement that no scorer has run here.
+
+Events 2–6 use the exact corresponding corpus configuration. Event 0 is
+explicitly warm priming: `cache_profile=warm`, exact unfixed original public
+base, first frozen configuration, original objective and null publication
+parent. Event 0 creates no accepted source, publication or public repair
+history. It is not relabeled event 2.
+
+An optional parent is exactly
+`{trajectory_id,event_id,generation,seal_cid}`. The trajectory must match the
+request; generation is a nonnegative integer; the actual qualified native Kit
+seal format is `sha256:` followed by 64 lowercase hex characters. This service
+preserves that caller-supplied descriptor. It does not read a publication store
+or prove parent freshness. The caller's actual current-pointer read and native
+publication CAS remain mandatory.
+
+`operation_id` is caller-frozen input. Join it to the actual ledger effect ID
+externally; putting a self-derived effect ID into its own request is circular.
+Every trajectory/arm/cache namespace is committed to the native query and
+action. No cross-process procedure or checkpoint reuse is admitted: both cold
+and warm requests repeat real evidence execution, verification, signing and
+native TEST interpretation. Per-run immutable artifacts are separate. The
+TEST-only signing key remains in the private local path committed by the
+profile and is not an exported result or production credential.
+
+Charge `enclosing_service_seconds` only as a nested diagnostic within the
+caller's complete process effect duration. Its `nested_components_seconds`
+must not be added again. Source/profile checks, current evidence production,
+independent reexecution, certificate verification/issuance, five operation
+dispatches and artifact persistence are real costs. Profile preparation and
+any cold fallback/scorer invocation are separate charged work.
+
+The optional lifecycle hook is a separate integration. The retained
+`lifecycle_profiles/v2/curator_lifecycle.py` passed authored current
+setup/CALL/teardown controls but is not mounted in the qualified cold endpoint.
+It has no eligible CALL-reuse population and always runs the body. Any positive
+CALL reuse needs the curator's separately qualified native post-setup key,
+signed evidence, original child-launch profile and current setup/teardown.
+Hidden test IDs and payloads remain in curator custody.

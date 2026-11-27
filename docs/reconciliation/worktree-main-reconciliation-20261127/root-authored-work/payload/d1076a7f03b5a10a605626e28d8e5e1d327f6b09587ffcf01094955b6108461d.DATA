@@ -1,0 +1,85 @@
+import Init
+namespace TerminalAlignment
+set_option autoImplicit false
+
+inductive SourceExpr where
+  | parameter (index : Nat)
+  | literal (value : Int)
+  | add (left right : SourceExpr)
+  | sub (left right : SourceExpr)
+  | mul (left right : SourceExpr)
+  | floorDiv (left right : SourceExpr)
+
+inductive TargetExpr where
+  | parameter (index : Nat)
+  | literal (value : Int)
+  | add (left right : TargetExpr)
+  | sub (left right : TargetExpr)
+  | mul (left right : TargetExpr)
+  | ediv (left right : TargetExpr)
+
+-- Both functions define mathematical integer semantics; no CPython theorem.
+-- Euclidean quotient agrees with floor only for positive divisors. The concrete
+-- admitted alignment denominator is always 64; zero/negative g are excluded.
+def sourceEval : SourceExpr → (Nat → Int) → Int
+  | .parameter index, env => env index
+  | .literal value, _ => value
+  | .add left right, env => sourceEval left env + sourceEval right env
+  | .sub left right, env => sourceEval left env - sourceEval right env
+  | .mul left right, env => sourceEval left env * sourceEval right env
+  | .floorDiv left right, env => sourceEval left env / sourceEval right env
+
+def targetEval : TargetExpr → (Nat → Int) → Int
+  | .parameter index, env => env index
+  | .literal value, _ => value
+  | .add left right, env => targetEval left env + targetEval right env
+  | .sub left right, env => targetEval left env - targetEval right env
+  | .mul left right, env => targetEval left env * targetEval right env
+  | .ediv left right, env => targetEval left env / targetEval right env
+
+def lower : SourceExpr → TargetExpr
+  | .parameter index => .parameter index
+  | .literal value => .literal value
+  | .add left right => .add (lower left) (lower right)
+  | .sub left right => .sub (lower left) (lower right)
+  | .mul left right => .mul (lower left) (lower right)
+  | .floorDiv left right => .ediv (lower left) (lower right)
+
+theorem closed_integer_lowering_correct (expression : SourceExpr) (env : Nat → Int) :
+    targetEval (lower expression) env = sourceEval expression env := by
+  induction expression <;> simp_all [lower, sourceEval, targetEval]
+
+def projectionIdentity : String := "cbcda931793d620371c3f59c1b26d59e1422fa4da9076c4d2a6c4cc2c89cb067"
+def parentSourceSHA256 : String := "0cf417fd5ff0112defcd46970d37a290c0763c5a9092e91cb3ebb86c3f20e6ce"
+def capturedSourceExpression : SourceExpr := (SourceExpr.mul (SourceExpr.floorDiv (SourceExpr.sub (SourceExpr.add (SourceExpr.parameter 0) (SourceExpr.parameter 1)) (SourceExpr.literal (1 : Int))) (SourceExpr.parameter 1)) (SourceExpr.parameter 1))
+def nativeTargetExpression : TargetExpr := (TargetExpr.mul (TargetExpr.ediv (TargetExpr.sub (TargetExpr.add (TargetExpr.parameter 0) (TargetExpr.parameter 1)) (TargetExpr.literal (1 : Int))) (TargetExpr.parameter 1)) (TargetExpr.parameter 1))
+
+theorem native_target_correspondence : nativeTargetExpression = lower capturedSourceExpression := by rfl
+
+theorem captured_ast_target_equivalence (env : Nat → Int) :
+    targetEval nativeTargetExpression env = sourceEval capturedSourceExpression env := by
+  rw [native_target_correspondence]
+  exact closed_integer_lowering_correct capturedSourceExpression env
+
+def inputs (x : Int) (index : Nat) : Int := if index = 0 then x else 64
+def run (x : Int) : Int := targetEval nativeTargetExpression (inputs x)
+
+theorem alignment_rounding_bounds : ∀ x : Int, x ≤ run x ∧ run x < x + 64 := by
+  intro x
+  simp [run, nativeTargetExpression, targetEval, inputs]
+  omega
+
+theorem alignment_divisible : ∀ x : Int, run x % 64 = 0 := by
+  intro x
+  simp [run, nativeTargetExpression, targetEval, inputs]
+
+theorem alignment_negative_input : run (-65) = -64 := by decide
+theorem alignment_zero_input : run 0 = 0 := by decide
+#print axioms closed_integer_lowering_correct
+#print axioms native_target_correspondence
+#print axioms captured_ast_target_equivalence
+#print axioms alignment_rounding_bounds
+#print axioms alignment_divisible
+#print axioms alignment_negative_input
+#print axioms alignment_zero_input
+end TerminalAlignment

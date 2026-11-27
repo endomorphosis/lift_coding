@@ -1,0 +1,75 @@
+"""Independent artifact checks for the bounded development campaign."""
+import argparse
+import hashlib
+import json
+import re
+import sys
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[4]
+sys.path.insert(0, str(ROOT / "external/ipfs_accelerate"))
+from ipfs_accelerate_py.agent_supervisor.proof.test_execution_contracts import TestExecutionKey, TestPassReceipt
+from ipfs_accelerate_py.testing.proof_reuse import runner_pass_attestation as attest
+
+
+def load(path):
+    return json.loads(path.read_text())
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("run_dir", type=Path)
+    args = parser.parse_args()
+    root = args.run_dir.resolve()
+    checks = {}
+    freeze = load(root / "freeze.json")
+    checks["frozen_bytes_match"] = all(hashlib.sha256((root / name).read_bytes()).hexdigest() == value for name, value in freeze["inputs"].items())
+    rows = load(root / "cases.json")
+    expected = load(root / "protocol.json")["cases"]
+    checks["all_prespecified_cases_retained"] = [r["case"] for r in rows] == [r["id"] for r in expected]
+    prime = load(root / "prime/observation.json")
+    bundle = load(root / "candidate.json")
+    policy = attest.RunnerTrustPolicy.from_bytes(bytes.fromhex(load(root / "profile.json")["trust_policy_hex"]))
+    attestation = attest.RunnerPassAttestation.from_bytes(bytes.fromhex(bundle["attestation_hex"]))
+    receipt = TestPassReceipt.from_dict(bundle["receipt"])
+    key = TestExecutionKey.from_dict(prime["execution_key"])
+    checks["receipt_bound_to_actual_cold_key"] = receipt.execution_key_cid == key.execution_key_id
+    checks["actual_cold_all_phases_pass"] = prime["exitstatus"] == 0 and prime["body_calls"] == 1 and [(r["phase"], r["outcome"]) for r in prime["reports"]] == [(x, "passed") for x in ("setup", "call", "teardown")]
+    checks["real_native_signature_verifies"] = attest.verify_runner_pass_attestation(attestation, receipt=receipt, policy=policy,
+        pinned_policy_cid=policy.cid, current_execution_key_cid=key.execution_key_id,
+        current_candidate_context_cid=attestation.candidate_context_cid, now=attestation.issued_at).valid
+    for row, case in zip(rows, expected):
+        name = row["case"]
+        warm = load(root / name / "warm/observation.json")
+        cold = load(root / name / "cold_oracle/observation.json")
+        warm_success = warm["exitstatus"] == 0 and all(r["outcome"] == "passed" for r in warm["reports"])
+        cold_success = cold["exitstatus"] == 0 and all(r["outcome"] == "passed" for r in cold["reports"])
+        checks[name+"_outcome"] = warm_success == cold_success == (case["whole"] == "pass")
+        checks[name+"_action"] = warm["decision"] == case["call"]
+        checks[name+"_body_count"] = warm["body_calls"] == (1 if case["call"] == "RUN" else 0) and cold["body_calls"] == (0 if name == "setup_failure" else 1)
+        for arm in ["warm", "cold_oracle"]:
+            text = (root / name / arm / "stdout.log").read_text()
+            setup = sum(bool(re.fullmatch(r"[.FE]*NS_SETUP_EFFECT", line)) for line in text.splitlines())
+            teardown = sum(bool(re.fullmatch(r"[.FE]*NS_TEARDOWN_EFFECT", line)) for line in text.splitlines())
+            checks[name+"_"+arm+"_effects"] = setup == 1 and teardown == (0 if name == "setup_failure" else 1)
+    unchanged = load(root / "unchanged/warm/observation.json")
+    checks["positive_is_exact_state_reuse"] = unchanged["execution_key"] == prime["execution_key"] and unchanged["attestation_verification"]["valid"] is True
+    teardown = load(root / "teardown_failure_after_reuse/warm/observation.json")
+    checks["valid_reuse_does_not_hide_bad_teardown"] = teardown["execution_key"] == prime["execution_key"] and teardown["attestation_verification"]["valid"] and teardown["reports"][-1]["outcome"] == "failed" and teardown["exitstatus"] == 1
+    invalid = load(root / "tampered_signature/warm/observation.json")
+    checks["bad_signature_actually_verified_and_rejected"] = invalid["attestation_verification"]["valid"] is False
+    revoked_spec = load(root / "revoked_key/warm/spec.json")
+    revoked_policy = attest.RunnerTrustPolicy.from_bytes(bytes.fromhex(revoked_spec["trust_policy_hex"]))
+    checks["exact_signer_key_revoked_in_native_policy"] = attestation.signer_key_cid in revoked_policy.revoked_key_cids and revoked_spec["cache_policy"]["policy_cid"] == revoked_policy.cid and revoked_policy.cid != policy.cid
+    checks["native_probe_enabled_and_observed"] = all(load(root / "native" / mode / "observation.json")["resolved_mode"] == mode for mode in ("write", "readwrite"))
+    results = {"schema": "ns-reuse-independent-artifact-check/v1", "passed": all(checks.values()), "checks": checks,
+        "check_count": len(checks), "validator_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "scope": "Artifact consistency plus real Ed25519 verification and actual phase/body/effect observations; not independent validation of arbitrary dependency completeness."}
+    (root / "independent_validation.json").write_text(json.dumps(results, indent=2, sort_keys=True)+"\n")
+    print(json.dumps({"passed": results["passed"], "checks": len(checks), "failures": [k for k,v in checks.items() if not v]}))
+    assert results["passed"]
+
+
+if __name__ == "__main__":
+    main()

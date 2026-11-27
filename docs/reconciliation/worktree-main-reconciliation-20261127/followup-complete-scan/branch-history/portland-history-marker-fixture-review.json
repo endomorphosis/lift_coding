@@ -1,0 +1,143 @@
+{
+  "conclusion": "All nine supplied blobs contain intentional test fixtures. The supplied marker roster needs no source redaction. This review covers only the named blobs and these marker families.",
+  "input_scan": {
+    "bytes": 2817,
+    "file": "portland-history-marker-scan.json",
+    "sha256": "cb5981ca990419c32285ae769e6256a834951d2367fc4838e0550bc19d8cd184"
+  },
+  "marker_roster": {
+    "credential_url": 7,
+    "private_key": 1,
+    "provider_token": 1
+  },
+  "records": [
+    {
+      "bytes": 10909,
+      "classification": "test_fixture",
+      "fixture_hostname": "127.0.0.1",
+      "marker_line": 169,
+      "oid": "35a447959055919627be420b2c424c5073d2f809",
+      "path": "tests/unit/processors/test_playwright_limiter_state_laws_proxy.py",
+      "reason": "A loopback URL with plain placeholder userinfo appears in a parametrize input for the test that requires rejection of a credentialed proxy.",
+      "scanner_marker_families": [
+        "credential_url"
+      ],
+      "sha256": "ae13c0d0ee0c1528011f83ca3655c0e501673a70c1cc08800bb3f82245dbf80c",
+      "test_context": "test_nonexact_or_credentialed_proxy_is_always_rejected"
+    },
+    {
+      "bytes": 16603,
+      "classification": "test_fixture",
+      "fixture_hostname": "proxy.invalid",
+      "marker_line": 258,
+      "oid": "7d35c58d47cdde6f8ea949de458946db4b620ba7",
+      "path": "tests/unit/scripts/test_state_laws_reindex_live_runner.py",
+      "reason": "The test injects placeholder userinfo into a proxy environment variable through monkeypatch and expects the trusted child-environment builder to raise. The hostname is reserved for invalid examples.",
+      "scanner_marker_families": [
+        "credential_url"
+      ],
+      "sha256": "a5c2a5bb4da10a2d55756411da2689b894d44e57834fb14ecd088ab6b5257e75",
+      "test_context": "test_live_child_environment_rejects_proxy_credentials"
+    },
+    {
+      "bytes": 16569,
+      "classification": "test_fixture",
+      "fixture_hostname": "proxy.invalid",
+      "marker_line": 257,
+      "oid": "9fcec1c04b2f1aa9639f9a7e0583f2341786a85a",
+      "path": "tests/unit/scripts/test_state_laws_reindex_live_runner.py",
+      "reason": "The test injects placeholder userinfo into a proxy environment variable through monkeypatch and expects the trusted child-environment builder to raise. The hostname is reserved for invalid examples.",
+      "scanner_marker_families": [
+        "credential_url"
+      ],
+      "sha256": "2566fee4fe34c27810b47f14e9d86b186a85c619cdd58a0b48121f424bd1d111",
+      "test_context": "test_live_child_environment_rejects_proxy_credentials"
+    },
+    {
+      "bytes": 14542,
+      "classification": "test_fixture",
+      "fixture_hostname": "proxy.invalid",
+      "marker_line": 257,
+      "oid": "2b5d612bcf4bd2f7891cc69416fdb171c8d095c0",
+      "path": "tests/unit/scripts/test_state_laws_reindex_live_runner.py",
+      "reason": "The test injects placeholder userinfo into a proxy environment variable through monkeypatch and expects the trusted child-environment builder to raise. The hostname is reserved for invalid examples.",
+      "scanner_marker_families": [
+        "credential_url"
+      ],
+      "sha256": "f220b15180d10e154f4cc9f177471bc46ced24990ee482e56e593fe6806816fd",
+      "test_context": "test_live_child_environment_rejects_proxy_credentials"
+    },
+    {
+      "bytes": 14414,
+      "classification": "test_fixture",
+      "fixture_hostname": "proxy.invalid",
+      "marker_line": 255,
+      "oid": "e7c129eaf6acae036b012ee6dff26285be37c6c4",
+      "path": "tests/unit/scripts/test_state_laws_reindex_live_runner.py",
+      "reason": "The test injects placeholder userinfo into a proxy environment variable through monkeypatch and expects the trusted child-environment builder to raise. The hostname is reserved for invalid examples.",
+      "scanner_marker_families": [
+        "credential_url"
+      ],
+      "sha256": "85f7580ed480327e1010ff214f75ee208ce71205ff615bc7100a44e41ca0e0e8",
+      "test_context": "test_live_child_environment_rejects_proxy_credentials"
+    },
+    {
+      "bytes": 9951,
+      "classification": "test_fixture",
+      "fixture_hostname": "127.0.0.1",
+      "marker_line": 164,
+      "oid": "e8c3379b01c0bbb5ec48472ac4b6d7bb86e7a051",
+      "path": "tests/unit/processors/test_playwright_limiter_state_laws_proxy.py",
+      "reason": "A loopback URL with plain placeholder userinfo appears in a parametrize input for the test that requires rejection of a credentialed proxy.",
+      "scanner_marker_families": [
+        "credential_url"
+      ],
+      "sha256": "ebe79e6025e6942029e86aff5c74e6afc852b369a5f201a61ea2b6e0ab6eabb0",
+      "test_context": "test_nonexact_or_credentialed_proxy_is_always_rejected"
+    },
+    {
+      "bytes": 6523,
+      "classification": "test_fixture",
+      "fixture_hostname": "127.0.0.1",
+      "marker_line": 108,
+      "oid": "bf9929e2f53164cf37c15963c462684739080825",
+      "path": "tests/unit/processors/test_playwright_limiter_state_laws_proxy.py",
+      "reason": "A loopback URL with plain placeholder userinfo appears in a parametrize input for the test that requires rejection of a credentialed proxy.",
+      "scanner_marker_families": [
+        "credential_url"
+      ],
+      "sha256": "de52cd6a3020ebdd0cc583e1323c0571ec3e897133a4bd3fe28dd4f905d7f5df",
+      "test_context": "test_nonexact_or_credentialed_proxy_is_always_rejected"
+    },
+    {
+      "bytes": 16000,
+      "classification": "test_fixture",
+      "marker_line": 66,
+      "oid": "f03fe209792aed9e1c45e766c78d5f0dcc285e5b",
+      "path": "tests/integration/processors/domains/uspto/test_live_contract_canary.py",
+      "reason": "The only full-length token-shaped string is a plain-text sentinel assigned to _SECRET_CANARY and used in offline RecordedHttpTransport and redaction tests. Line 343 has an additional shorter placeholder used solely in a negative serialization assertion. The redaction suite also checks that a short prefix is absent.",
+      "scanner_marker_families": [
+        "provider_token"
+      ],
+      "sha256": "e6569cdf8f1b35a02cca862dd5d9261063f9f3749de5e242cf198238f09382c2",
+      "test_context": "TestOfflineRecordedCanary.test_api_key_secret_not_serialized_in_result"
+    },
+    {
+      "bytes": 35412,
+      "classification": "test_fixture",
+      "marker_line": 663,
+      "oid": "2b47098ebc0f948a160ca609fec552f45750bc57",
+      "path": "tests/security/test_patent_hf_release_v2.py",
+      "reason": "A test hex-encodes an intentionally incomplete RSA PEM marker fixture and asserts a rejection. The PEM has no closing marker. Only 24 decoded bytes exist and the declared DER sequence body is 1,187 bytes. It stops within the first public modulus, so it contains no private exponent or other private key components.",
+      "scanner_marker_families": [
+        "private_key"
+      ],
+      "sha256": "050b181c696137ea4e75e84f91b64ec99f8adda89c649fa0497a1d77d69660bc",
+      "test_context": "test_hex_encoded_private_key_rejected"
+    }
+  ],
+  "schema": "git-recovery-marker-fixture-review/v1",
+  "scope": "Nine exact test blobs named by the supplied marker scan, read from datasets-restore-proof.git. Both extent and Git SHA-1 matched the scan. Tested source parsed as AST for static inspection.",
+  "total_inspected_bytes": 140923,
+  "unresolved_marker_blobs": []
+}

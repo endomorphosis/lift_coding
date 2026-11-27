@@ -1,0 +1,33 @@
+# Original XML cold A six-event caller, providers disabled
+
+This is the first execution of the original six-event caller against the
+qualified original scorer. Providers were disabled. The trajectory is ordinary
+raw arm A on XMLtodict, cold namespace. It is not a token-savings result, not a
+complete original matrix, and not a D-system run.
+
+`profile.json` SHA-256
+`3e43d5687074dcf749780ca27d1405e8a95c894d077482961691d1dcc1cac77a`.
+Driver wall time **8.388 seconds**. Five actual original scorer calls, zero
+provider receipts, zero unknown effects.
+
+| Horizon | Status | Input tree | Independent original grade | Public examples | API configuration |
+|---|---|---|---|---|---|
+| 0 setup | `setup_complete` | unfixed public base `1a7e99648f77…` | not scored | — | first |
+| 1 plan | `plan_projected` | same base | not scored; independent plan coverage remains null | — | first |
+| 2 repair | `residual_pending` | same base | completed fail: visible 34/34, hidden 0/1, native false | 2/4 | false |
+| 3 revisit | `residual_pending` | same base; failed repair not adopted | identical fail | 2/4 | false |
+| 4 comment | `residual_pending` | commented `763dc9e926a0…` | completed fail | 2/4 | false |
+| 5 configuration | `residual_pending` | same commented tree | completed fail | 2/4 | **true** |
+| 6 recovery | `recovery_obligations_unresolved` | same commented tree | completed fail; interrupt/stale/continuation unreached | 2/4 | true |
+
+Horizon 5 is the intended configuration/repair split: the exact second API
+configuration probe passed while original hidden and public-objective
+conjunction still failed. Passing the configured control did not count as a
+repair. Horizon 6 reached current-source validation, found it failing, and
+retained the later recovery boundaries as unreached instead of synthesizing a
+passing candidate.
+
+Arm A has no native context, symbolic routing, world memory, procedures or
+publication. Those remain required for the full original D trajectory. Native
+CALL reuse is still unqualified. The other three families and warm/one-factor
+arms are not enrolled here.

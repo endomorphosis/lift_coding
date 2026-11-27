@@ -1,0 +1,2 @@
+def compute(value):
+    return min(3, max(-3, value))

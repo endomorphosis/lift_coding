@@ -1,0 +1,45 @@
+import hashlib,json
+from pathlib import Path
+H=Path('/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/context_qualification')
+def read(p):return json.loads(p.read_text())
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+rows=[];inputs={};checks=[]
+for name in ('results_v5','results_v7_full_index','results_v8_full_fastcid','results_v9_full_syntax_cache','results_v11_full_literal_union'):
+    out=H/name
+    freeze=read(out/'freeze.json')
+    inputs[str((out/'freeze.json').relative_to(H))]=sha(out/'freeze.json')
+    cases=[]
+    for task in ('ns-hist-01-xmltodict','ns-hist-02-pyparsing'):
+        folder=out/task
+        prod=read(folder/'producer.json') if (folder/'producer.json').exists() else None
+        proc=read(folder/'produce_process.json')
+        scan=read(folder/'scan_stage.json')
+        consume=read(folder/'consumer.json') if (folder/'consumer.json').exists() else None
+        for p in (folder/'producer.json',folder/'produce_process.json',folder/'scan_stage.json',folder/'consumer.json'):
+            if p.exists():inputs[str(p.relative_to(H))]=sha(p)
+        cases.append({'task':task,'scan_seconds':scan['seconds'],'native_state_cid':scan['native_state_cid'],'producer_process':proc,'producer_result_present':prod is not None,'consumer_result_present':consume is not None,'consumer_checks_passed':consume['all_checks_passed'] if consume else None,'snapshot_scan_bundle_seconds':prod['snapshot_scan_bundle_wall_seconds'] if prod else None,'preparation_seconds_excluding_import':prod['preparation_wall_seconds_excluding_import'] if prod else None,'native_semantic_root_cid':prod['native_semantic_root_cid'] if prod else None,'raw_substitutions':prod['raw_substitutions'] if prod else None})
+    rows.append({'profile':name,'cases':cases})
+xml=[r['cases'][0] for r in rows];py=[r['cases'][1] for r in rows]
+assert len({r['native_state_cid'] for r in xml})==1
+assert len({r['native_semantic_root_cid'] for r in xml})==1
+assert len({r['native_state_cid'] for r in py})==1
+assert all(r['consumer_checks_passed'] for r in xml)
+assert all(r['producer_process'].get('timed_out') is True for r in py)
+assert all(not r['consumer_result_present'] for r in py)
+assert py[-1]['producer_result_present']
+checks += ['full XML state/root equality across five profiles','five XML native consumers passed','full Pyparsing state equality across five profiles','five full Pyparsing process deadlines retained','no Pyparsing consumer result in deadline runs','v11 producer result exists before terminal process timeout']
+control=read(H/'literal_union_actual_full_v4/controls.json');pred=read(H/'literal_union_actual_full_v4/actual_predicate.json');full=read(H/'literal_union_actual_full_v4/full_result.json');reg=read(H/'literal_union_native_regression_v4/result.json')
+assert control['all_checks_passed'] and control['constructed_predicate_equalities']==1235
+assert pred['all_equal'] and pred['actual_link_payloads_compared']==55859 and pred['actual_node_cids']==3957 and pred['embedded_actual_cid_rejected']
+assert full['all_checks_passed'] and full['blocks']==67872
+assert full['native_state_cid']==py[-1]['native_state_cid'] and full['native_semantic_root_cid']==py[-1]['native_semantic_root_cid']
+assert reg['returncode']==0
+log=H/'literal_union_native_regression_v4/stdout.log'
+assert '64 passed' in log.read_text()
+inputs[str(log.relative_to(H))]=sha(log)
+for p in [H/'literal_union_actual_full_v4'/n for n in ('controls.json','actual_predicate.json','full_result.json')]+[H/'literal_union_native_regression_v4/result.json']:
+    inputs[str(p.relative_to(H))]=sha(p)
+checks+=['1,235 constructed literal predicate controls pass','55,859 actual predicates equal and embedded actual CID rejected','67,872-block full native bundle verified','full audited bundle roots equal v11 producer','native regression subprocess succeeds']
+result={'schema':'ns-full-context-profile-audit/v11','profiles':rows,'literal_union_constructed_controls':control,'literal_union_actual_predicates':pred,'literal_union_full_bundle':full,'native_regression_process':reg,'native_regression_passed':64,'all_checks_passed':True,'checks':checks,'input_sha256':inputs,'provider_calls':0,'raw_substitutions':0,'full_pyparsing_roundtrip_complete':False,'timeout_interpretation':'Terminal process deadline is pipeline incompletion. v11 producer result was written before deadline; no native consumer was dispatched. Earlier missing producer files do not identify the timed-out pipeline stage. Independent v5 stage diagnostic had assembled and verified a full bundle before source-binding reads.','timing_limit':'One run per profile on a shared nonexclusive host. Predicate times are diagnostic subsets; they are not end-to-end speedup estimates.'}
+(H/'full_context_profiles_v11_audit.json').write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
+print(json.dumps({'checks':len(checks),'inputs':len(inputs),'path':str(H/'full_context_profiles_v11_audit.json')}))

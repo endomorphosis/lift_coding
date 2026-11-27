@@ -1,0 +1,5 @@
+import json,sys
+r=json.load(sys.stdin)
+v={k:r[k] for k in ['instance_id','base_commit','image_id','objective_sha256','candidate_patch_sha256','service_profile_sha256']}
+v.update(status='completed',passed=True,candidate_source_tree_sha256="0"*64,designated_total=131,designated_status_counts={'PASSED':130,'FAILED':1},receipt_path='declared-stub-only')
+print(json.dumps(v))

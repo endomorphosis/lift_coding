@@ -1,0 +1,133 @@
+{
+  "base_commit_ancestor_count": 2163,
+  "bundle": {
+    "bytes": 794393,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/swissknife-historical-tips.bundle",
+    "sha256": "b165fc6f56518f644d2657c8e546f89d9492b669687cd4cb073cb14d9f465ad8"
+  },
+  "exact_source_refs": [
+    {
+      "all_refs": [
+        {
+          "committer_timestamp": 1794192360,
+          "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/swissknife",
+          "ref": "refs/heads/sync-preserved/20261109-afb698779b41"
+        }
+      ],
+      "any_failed_validation_rescue_ref": false,
+      "oid": "7e7c69c939f79825821b647c44044a3c8029f053",
+      "representative": {
+        "committer_timestamp": 1794192360,
+        "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/swissknife",
+        "ref": "refs/heads/sync-preserved/20261109-afb698779b41"
+      }
+    }
+  ],
+  "family": "swissknife",
+  "git_bundle_verify_stderr": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/swissknife-historical-tips.bundle is okay\n",
+  "git_bundle_verify_stdout": "The bundle contains this ref:\n7e7c69c939f79825821b647c44044a3c8029f053 refs/heads/retained/7e7c69c939f79825821b647c44044a3c8029f053\nThe bundle requires this ref:\ndf11f08fae17d35153e420fdcdc5b38d9f6b9a7f \nThe bundle uses this hash algorithm: sha1\n",
+  "live_code_adoption": false,
+  "private_source_alternates": [
+    "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/swissknife/objects"
+  ],
+  "provided_object_delta_bases": [],
+  "publication_files_in_reassembly_order": [
+    {
+      "bytes": 794393,
+      "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/swissknife-historical-tips.bundle",
+      "sha256": "b165fc6f56518f644d2657c8e546f89d9492b669687cd4cb073cb14d9f465ad8"
+    }
+  ],
+  "published_base": "453a30b01e62b6acdd1c54070821dbacfbf7908e",
+  "published_base_object_db": "/tmp/git-main-followup-20261127-zYjieLmd/swissknife-main-proof.git",
+  "readonly_inputs": true,
+  "restore_uses_published_base_alternate_only": true,
+  "restored_exact_incremental_object_ids": {
+    "bytes": 5166,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/exact-delta-object-ids.txt",
+    "sha256": "bce72a446d80e2e9f086f8e72e090e2695a349a7940b7528ddc1102a5efe0502"
+  },
+  "restored_pack_objects": 126,
+  "sizing": {
+    "object_counts_by_type": {
+      "blob": 103,
+      "commit": 2,
+      "tree": 21
+    },
+    "objects": 126,
+    "sum_storage_bytes_in_aggregate": 959866,
+    "ten_largest_objects": [
+      [
+        116215,
+        "c8a43fb93dd713bea94eebeb75bf7e319d9a0c1c",
+        "blob"
+      ],
+      [
+        111655,
+        "fc1041bc53855b34ffe4512054c0b786269be3ea",
+        "blob"
+      ],
+      [
+        107854,
+        "550f8ee6ec8343eb68c1f0d7ad0b39a4420a68b1",
+        "blob"
+      ],
+      [
+        91735,
+        "09c70f5b05350472601879a32533fd743d2d7f93",
+        "blob"
+      ],
+      [
+        83611,
+        "9f4be728e5a84484c980177e31e3a6ff4ba13438",
+        "blob"
+      ],
+      [
+        83593,
+        "3e3f8ddbd51d6d656942863137fc2b4d9294f5fe",
+        "blob"
+      ],
+      [
+        78745,
+        "7d35036689c4fe18d68ab431c989a67f94ea3549",
+        "blob"
+      ],
+      [
+        77794,
+        "d842ef169a6a35e1ea257cffb05ec020f0c8a70d",
+        "blob"
+      ],
+      [
+        74814,
+        "1c313537ef7c3bf46144407af16118869a84db76",
+        "blob"
+      ],
+      [
+        73585,
+        "894d941a48bf683d3762396d4f5f9e661e3c343a",
+        "blob"
+      ]
+    ],
+    "uncompressed_bytes_by_type": {
+      "blob": 3861335,
+      "commit": 621,
+      "tree": 49014
+    },
+    "uncompressed_object_bytes": 3910970
+  },
+  "sizing_receipt": {
+    "bytes": 1209,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/pre-pack-object-sizes.json",
+    "sha256": "057740090e93263894a5f96e39f318248362eddb328a2b424be725325e3914af"
+  },
+  "source_roster": {
+    "bytes": 743,
+    "path": "/tmp/git-wide-retention-gap-20261127-ppyrr7zt/swissknife-unproven.json",
+    "sha256": "0e025fad54a92d2d758bc2efe044c91f3047e89c91952a58b95c99301754079b"
+  },
+  "status": "RESTORE_VERIFIED",
+  "tip_count": 1,
+  "tips": [
+    "7e7c69c939f79825821b647c44044a3c8029f053"
+  ]
+}

@@ -1,0 +1,340 @@
+"""Finite datasets SemanticCapsules bound to an exact structural manifest.
+
+This pure adapter never observes a live tree. Its caller must hold the original
+source and producer witnesses, observe the current native owner before and
+after use, and retain the separate checked-call proof capsule. Native freshness
+is reported faithfully but grants no source omission or proof authority here.
+"""
+from __future__ import annotations
+
+from dataclasses import dataclass
+import hashlib
+import importlib
+import json
+from pathlib import Path
+
+from ipfs_datasets_py.duckdb_control.codebase_catalog import CodebaseHead
+from ipfs_datasets_py.logic.software_contracts.codebase_ir import CodebaseIRManifest, CodebaseUnit
+from ipfs_datasets_py.logic.software_contracts.content import canonical_dag_json_bytes, cid_for_structured
+from ipfs_datasets_py.logic.software_contracts.semantic_index.models import (
+    ArtifactRecord, DependencyEdge, RepositoryState, SourceSpan, SymbolRecord,
+)
+from ipfs_datasets_py.logic.software_contracts.semantic_index.snapshot import RepositorySnapshot, SnapshotEntry
+from ipfs_datasets_py.logic.software_contracts.semantic_state.api import (
+    build_semantic_state, verify_semantic_state_bundle, view_semantic_state_bundle,
+)
+from ipfs_datasets_py.logic.software_contracts.semantic_state.bindings import (
+    build_environment_binding_set, relevant_binding_projection_for_symbol,
+)
+from ipfs_datasets_py.logic.software_contracts.semantic_state.capsules import (
+    compile_semantic_capsules, verify_capsule_compile_result,
+)
+from ipfs_datasets_py.logic.software_contracts.semantic_state.freshness import (
+    assess_capsule_freshness, is_safe_substitute, requires_raw_source,
+)
+from ipfs_datasets_py.logic.software_contracts.semantic_state.models import (
+    AnalysisLimitation, EnvironmentBinding, EnvironmentBindingSet,
+    RelevantBindingProjection, SemanticStateBundle, SemanticStateProducer,
+)
+
+SCHEMA = "terminal-native-semantic-capsule-set@1"
+LIMITS = {"max_symbols": 64, "max_entries": 64, "max_edges": 256,
+          "max_bindings": 64, "max_blocks": 512, "max_native_block_bytes": 4194304,
+          "max_source_file_bytes": 65536, "max_source_total_bytes": 262144,
+          "max_state_bytes": 1048576, "max_output_bytes": 8388608}
+AUTHORITY = {"proof_authority": False, "runtime_behavior_verified": False,
+    "source_semantics_verified": False, "current_owner_verified": False,
+    "source_origin_verified": False, "omission_authority": False,
+    "execution_authority": False, "mutation_authority": False,
+    "completion_authority": False, "production_admitted": False,
+    "convergence_proved": False, "full_task_satisfaction": False}
+# Closed profile matching the pinned native scanner's default selection policy.
+# A policy names paths outside the admitted inventory; it is not an inventory
+# of paths that were actually present, inspected or omitted on this checkout.
+DEFAULT_SNAPSHOT_EXCLUSION_POLICY = tuple(sorted((".git", ".hg", ".svn", "__pycache__",
+    ".pytest_cache", ".mypy_cache", ".ruff_cache", ".tox", ".nox", ".venv", "venv", "env",
+    "build", "dist", ".eggs", "htmlcov", "coverage", "node_modules", "vendor", "third_party",
+    "third-party", "external", "site-packages", ".semantic-index", "semantic-index-state", ".semantic_index")))
+_PRODUCER_MODULES = (
+    "ipfs_datasets_py.duckdb_control.codebase_catalog",
+    "ipfs_datasets_py.logic.software_contracts.codebase_ir",
+    "ipfs_datasets_py.logic.software_contracts.content",
+    "ipfs_datasets_py.logic.software_contracts.semantic_index.models",
+    "ipfs_datasets_py.logic.software_contracts.semantic_index.identity",
+    "ipfs_datasets_py.logic.software_contracts.semantic_index.snapshot",
+    "ipfs_datasets_py.logic.software_contracts.semantic_state.api",
+    "ipfs_datasets_py.logic.software_contracts.semantic_state.bindings",
+    "ipfs_datasets_py.logic.software_contracts.semantic_state.capsules",
+    "ipfs_datasets_py.logic.software_contracts.semantic_state.freshness",
+    "ipfs_datasets_py.logic.software_contracts.semantic_state.merkle",
+    "ipfs_datasets_py.logic.software_contracts.semantic_state.models",
+)
+
+
+class NativeSemanticCapsuleError(ValueError):
+    """Structural input or complete native replay failed."""
+
+
+def native_semantic_capsule_producer_paths() -> tuple[Path, ...]:
+    """Explicit called producer files for the caller's retained-FD protocol.
+
+    This list does not attest loaded code or the entire Python import closure.
+    It neither opens source files nor changes their permissions.
+    """
+    paths = [Path(__file__).resolve()]
+    for name in _PRODUCER_MODULES:
+        paths.append(Path(importlib.import_module(name).__file__).resolve())
+    return tuple(sorted(set(paths)))
+
+
+def _bytes(value: object) -> bytes:
+    try:
+        return canonical_dag_json_bytes(value)
+    except (TypeError, ValueError) as exc:
+        raise NativeSemanticCapsuleError("expected finite canonical DAG JSON data") from exc
+
+
+def _digest(raw: bytes) -> str:
+    return hashlib.sha256(raw).hexdigest()
+
+
+@dataclass(frozen=True, slots=True)
+class _NativeInput:
+    """Immutable complete RepositoryState projection plus explicit producer."""
+    repository_id: str
+    symbols: tuple
+    artifacts: tuple
+    edges: tuple
+    extractor_name: str
+    extractor_version: str
+    schema: str
+    producer: SemanticStateProducer
+    analysis_limitations: tuple
+
+
+def _inputs(manifest: CodebaseIRManifest, expected_head: CodebaseHead,
+            environment_bindings: tuple) -> tuple[CodebaseIRManifest, CodebaseHead, tuple]:
+    # Reject converters and subclasses before calling user-overridable methods.
+    if type(manifest) is not CodebaseIRManifest or type(expected_head) is not CodebaseHead:
+        raise NativeSemanticCapsuleError("exact native manifest and full head required")
+    if type(environment_bindings) is not tuple or any(type(item) is not EnvironmentBinding for item in environment_bindings):
+        raise NativeSemanticCapsuleError("bindings must be a tuple of exact native EnvironmentBinding records")
+    if len(environment_bindings) > LIMITS["max_bindings"]:
+        raise NativeSemanticCapsuleError("environment binding bound exceeded")
+    if len({item.binding_id for item in environment_bindings}) != len(environment_bindings):
+        raise NativeSemanticCapsuleError("duplicate environment binding identity")
+    snapshot, state = manifest.snapshot, manifest.semantic_state
+    if type(state) is not RepositoryState or type(snapshot) is not RepositorySnapshot:
+        raise NativeSemanticCapsuleError("exact native RepositoryState and RepositorySnapshot required")
+    for values, native_type in ((snapshot.entries, SnapshotEntry), (manifest.units, CodebaseUnit),
+            (state.symbols, SymbolRecord), (state.artifacts, ArtifactRecord), (state.edges, DependencyEdge)):
+        if any(type(item) is not native_type for item in values):
+            raise NativeSemanticCapsuleError("exact native nested structural records required")
+    if any(item.span is not None and type(item.span) is not SourceSpan for item in (*state.symbols, *state.edges)):
+        raise NativeSemanticCapsuleError("exact native original source spans required")
+    if len(state.symbols) > LIMITS["max_symbols"] or len(state.edges) > LIMITS["max_edges"] or len(snapshot.entries) > LIMITS["max_entries"]:
+        raise NativeSemanticCapsuleError("semantic inventory bound exceeded")
+    if tuple(snapshot.exclusions) not in ((), DEFAULT_SNAPSHOT_EXCLUSION_POLICY):
+        raise NativeSemanticCapsuleError("snapshot exclusion policy is outside the bounded profile")
+    if any(entry.size_bytes is None or entry.size_bytes > LIMITS["max_source_file_bytes"] for entry in snapshot.entries):
+        raise NativeSemanticCapsuleError("source file bound unavailable or exceeded")
+    if sum(entry.size_bytes for entry in snapshot.entries) > LIMITS["max_source_total_bytes"]:
+        raise NativeSemanticCapsuleError("total source byte bound exceeded")
+    # Native round trips recheck all source, state, unit, revision and coverage joins.
+    original_manifest, original_head = _bytes(manifest.to_dict()), _bytes(expected_head.to_dict())
+    manifest = CodebaseIRManifest.from_dict(json.loads(original_manifest))
+    expected_head = CodebaseHead.from_dict(json.loads(original_head))
+    if (manifest.cid != expected_head.manifest_cid
+            or manifest.snapshot.snapshot_cid != expected_head.snapshot_cid
+            or manifest.snapshot.repository_id != expected_head.repository_id
+            or manifest.ast_revision_id != expected_head.ast_revision_id):
+        raise NativeSemanticCapsuleError("complete manifest does not bind exact native head")
+    bindings = tuple(EnvironmentBinding.from_dict(item.to_dict()) for item in environment_bindings)
+    return manifest, expected_head, bindings
+
+
+def _limitations(state: RepositoryState) -> tuple[AnalysisLimitation, ...]:
+    # RepositoryState has no separate limitation field. Preserve its complete
+    # bytes and explicitly project only confidence boundaries from those bytes.
+    values = [AnalysisLimitation(code="structural_only_no_behavior_or_proof",
+        message="Native capsule extraction and freshness are structural; original source, all checked-call assumptions and proof expansion remain required.",
+        confidence="opaque")]
+    for symbol in state.symbols:
+        if symbol.confidence != "exact":
+            values.append(AnalysisLimitation(code="symbol_confidence:" + symbol.confidence,
+                message="Original native symbol confidence retained; no exact source substitution is admitted by this adapter.",
+                subject_id=symbol.stable_id, confidence=symbol.confidence))
+    for edge in state.edges:
+        if edge.confidence != "exact":
+            values.append(AnalysisLimitation(code="edge_confidence:" + edge.confidence,
+                message="Original dependency confidence retained, including unresolved targets.",
+                subject_id=edge.edge_id, confidence=edge.confidence))
+    return tuple(sorted(values, key=lambda item: item.limitation_cid))
+
+
+def _complete_projection_blocks(bundle: SemanticStateBundle, state: RepositoryState,
+                                binding_set: EnvironmentBindingSet) -> SemanticStateBundle:
+    """Add the native projection records the pinned compiler omits by design.
+
+    Native binding functions retain sole ownership of scope membership. These
+    supplemental blocks preserve the original root and capsule identities; they
+    are explicitly reported, fully hashed and required by this adapter.
+    """
+    view, blocks = view_semantic_state_bundle(bundle), dict(bundle.blocks)
+    for symbol in state.symbols:
+        membership = relevant_binding_projection_for_symbol(symbol, binding_set)
+        selected = EnvironmentBindingSet(bindings=tuple(item for item in binding_set.bindings
+            if item.binding_id in membership.binding_ids))
+        projection = relevant_binding_projection_for_symbol(symbol, selected)
+        if projection.projection_cid != view.capsule(symbol.stable_id).relevant_binding_projection_cid:
+            raise NativeSemanticCapsuleError("native relevant binding projection CID changed")
+        raw = _bytes(projection.identity_payload())
+        prior = blocks.get(projection.projection_cid)
+        if prior is not None and prior != raw:
+            raise NativeSemanticCapsuleError("native relevant binding projection block changed")
+        blocks[projection.projection_cid] = raw
+    return SemanticStateBundle(root=bundle.root, blocks=blocks)
+
+
+def build_native_semantic_capsule_set(*, manifest: CodebaseIRManifest,
+        expected_head: CodebaseHead, environment_bindings: tuple[EnvironmentBinding, ...] = ()) -> dict:
+    """Compile, fully verify and retain every finite native capsule in memory.
+
+    No file, database, provider, training job, prover or repository source body
+    is accessed. The full native head is an input binding, not a live receipt.
+    """
+    manifest, expected_head, bindings = _inputs(manifest, expected_head, environment_bindings)
+    snapshot, state = manifest.snapshot, manifest.semantic_state
+    state_bytes = _bytes(state.to_dict())
+    if len(state_bytes) > LIMITS["max_state_bytes"]:
+        raise NativeSemanticCapsuleError("repository state byte bound exceeded")
+    producer = SemanticStateProducer(repository_state_cid=state.state_cid,
+        repository_snapshot_cid=snapshot.snapshot_cid,
+        source_manifest_cid=manifest.cid, git_commit_oid_or_null=snapshot.git_commit,
+        git_tree_oid_or_null=snapshot.git_tree, semantic_index_schema=state.schema,
+        extractor_name=state.extractor_name, extractor_version=state.extractor_version)
+    limitations = _limitations(state)
+    native_input = _NativeInput(state.repository_id, tuple(state.symbols), tuple(state.artifacts),
+        tuple(state.edges), state.extractor_name, state.extractor_version, state.schema,
+        producer, limitations)
+    cold = build_semantic_state(native_input, environment_bindings=bindings)
+    verify_semantic_state_bundle(cold)
+    if cold.root.producer.to_dict() != producer.to_dict():
+        raise NativeSemanticCapsuleError("native producer binding changed")
+    if len(cold.blocks) > LIMITS["max_blocks"] or sum(map(len, cold.blocks.values())) > LIMITS["max_native_block_bytes"]:
+        raise NativeSemanticCapsuleError("native bundle byte or block bound exceeded")
+    incremental = build_semantic_state(native_input, environment_bindings=bindings, previous_bundle=cold)
+    verify_semantic_state_bundle(incremental)
+    if cold.root.to_dict() != incremental.root.to_dict() or dict(cold.blocks) != dict(incremental.blocks):
+        raise NativeSemanticCapsuleError("verified cold and incremental native bytes diverged")
+    binding_set = build_environment_binding_set(bindings, repository_state=state)
+    if binding_set.binding_set_cid != cold.root.environment_binding_set_cid:
+        raise NativeSemanticCapsuleError("native environment binding set changed")
+    original_native_cids = frozenset(cold.blocks)
+    cold = _complete_projection_blocks(cold, state, binding_set)
+    incremental = _complete_projection_blocks(incremental, state, binding_set)
+    verify_semantic_state_bundle(cold)
+    verify_semantic_state_bundle(incremental)
+    if cold.root.to_dict() != incremental.root.to_dict() or dict(cold.blocks) != dict(incremental.blocks):
+        raise NativeSemanticCapsuleError("complete cold and incremental projection bytes diverged")
+    if len(cold.blocks) > LIMITS["max_blocks"] or sum(map(len, cold.blocks.values())) > LIMITS["max_native_block_bytes"]:
+        raise NativeSemanticCapsuleError("complete bundle byte or block bound exceeded")
+    view = view_semantic_state_bundle(cold)
+    compiled = compile_semantic_capsules(state, binding_set=binding_set)
+    verify_capsule_compile_result(compiled)
+    if compiled.capsule_index_cid != cold.root.capsule_index_cid:
+        raise NativeSemanticCapsuleError("native capsule index changed")
+    entries = {entry.path: entry for entry in snapshot.entries}
+    units = {unit.source_key: unit for unit in manifest.units}
+    capsules = []
+    for symbol in state.symbols:
+        capsule = view.capsule(symbol.stable_id)
+        fact = view.symbol_fact(symbol.stable_id)
+        if capsule.to_dict() != compiled.capsule(symbol.stable_id).to_dict():
+            raise NativeSemanticCapsuleError("native capsule compile and verified view differ")
+        if (capsule.version_cid != symbol.version_cid or capsule.source_cid != symbol.source_cid
+                or capsule.symbol_fact_cid != fact.fact_cid or fact.symbol.to_dict() != symbol.to_dict()):
+            raise NativeSemanticCapsuleError("native symbol/capsule/fact join changed")
+        # Native freshness permits an absent projection block. This profile
+        # requires its presence, typed canonical identity and complete binding
+        # membership. Use native scope selection on both full and selected sets.
+        projection_cid = capsule.relevant_binding_projection_cid
+        if projection_cid is None or projection_cid not in cold.blocks:
+            raise NativeSemanticCapsuleError("native relevant binding projection block absent")
+        projection = RelevantBindingProjection.from_dict({**json.loads(view.get_block(projection_cid)), "projection_cid": projection_cid})
+        membership = relevant_binding_projection_for_symbol(symbol, binding_set)
+        selected = EnvironmentBindingSet(bindings=tuple(item for item in binding_set.bindings if item.binding_id in membership.binding_ids))
+        expected_projection = relevant_binding_projection_for_symbol(symbol, selected)
+        if projection.to_dict() != expected_projection.to_dict():
+            raise NativeSemanticCapsuleError("native relevant binding projection join changed")
+        assessment = assess_capsule_freshness(capsule, current_state=view)
+        entry = entries[symbol.module_path]
+        unit = units[entry.source_key]
+        capsules.append({"capsule": capsule.to_dict(), "native_freshness": assessment.to_dict(),
+            "native_requires_raw_source": requires_raw_source(assessment),
+            "native_safe_substitute": is_safe_substitute(assessment),
+            "relevant_binding_projection": projection.to_dict(),
+            "original_source_expansion": {"path": symbol.module_path, "source_key": entry.source_key,
+                "source_cid": symbol.source_cid, "entry_cid": entry.entry_cid,
+                "source_bytes": entry.size_bytes, "span": None if symbol.span is None else symbol.span.to_dict(),
+                "qualified_name": symbol.qualified_name, "stable_symbol_id": symbol.stable_id,
+                "version_cid": symbol.version_cid, "ast_cid": unit.ast_cid,
+                "ast_revision_id": manifest.ast_revision_id, "snapshot_cid": snapshot.snapshot_cid,
+                "raw_source_required_by_adapter": True, "proof_transfer": False}})
+    # Resolve every original artifact/link/limitation through the native view,
+    # including opaque or unresolved records; no reachable family is elided.
+    artifacts = [view.artifact_fact(item.artifact_id).to_dict() for item in state.artifacts]
+    links = [view.semantic_link(item.edge_id).to_dict() for item in state.edges]
+    retained_limitations = [view.analysis_limitation(item.limitation_cid).to_dict() for item in limitations]
+    value = {"schema": SCHEMA, "head": expected_head.to_dict(), "producer": producer.to_dict(),
+        "repository_state": {"state_cid": state.state_cid, "canonical_json": state_bytes.decode("utf-8"),
+            "bytes": len(state_bytes), "sha256": _digest(state_bytes)},
+        "snapshot": snapshot.to_dict(), "units": [item.to_dict() for item in manifest.units],
+        "coverage": manifest.coverage, "native_root": cold.root.to_dict(),
+        "environment_bindings": binding_set.to_dict(), "capsules": capsules,
+        "artifact_facts": artifacts, "semantic_links": links,
+        "analysis_limitations": retained_limitations,
+        "blocks": [{"cid": cid, "bytes": len(raw), "sha256": _digest(raw),
+                    "canonical_json": raw.decode("utf-8")} for cid, raw in sorted(cold.blocks.items())],
+        "cold_incremental": {"equal_root": True, "equal_complete_block_map": True,
+            "root_cid": cold.root.root_cid, "block_count": len(cold.blocks),
+            "native_block_bytes": sum(map(len, cold.blocks.values()))},
+        "binding_projection_completion": {
+            "pinned_native_compiler_stores_projection_blocks": False,
+            "producer": "native relevant_binding_projection_for_symbol over full and selected native binding sets",
+            "original_native_cold_incremental_equal": True,
+            "original_native_block_count": len(original_native_cids),
+            "supplemental_projection_cids": sorted(set(cold.blocks) - original_native_cids),
+            "root_and_capsule_identity_preserved": True},
+        "source_scope": {"paths": sorted(entries), "all_snapshot_entries_retained": True,
+            "all_symbols_retained": True, "all_dependencies_retained": True,
+            "all_artifacts_retained": True, "selected_omissions": [],
+            "inventory_scope": "native_admitted_snapshot_entries_only",
+            "snapshot_exclusion_policy": list(snapshot.exclusions),
+            "excluded_paths_observed": False, "whole_filesystem_coverage": False,
+            "raw_source_required_by_adapter": True, "checked_call_proof_is_separate": True},
+        "limits": dict(LIMITS), "provider_calls": 0, "training_steps": 0,
+        "prover_invocations": 0, "source_body_executed": False, "database_accessed": False,
+        **AUTHORITY}
+    value["capsule_set_id"] = cid_for_structured(value)
+    if len(_bytes(value)) > LIMITS["max_output_bytes"]:
+        raise NativeSemanticCapsuleError("complete semantic capsule output bound exceeded")
+    return value
+
+
+def validate_native_semantic_capsule_set(value: dict, *, manifest: CodebaseIRManifest,
+        expected_head: CodebaseHead, environment_bindings: tuple[EnvironmentBinding, ...] = ()) -> dict:
+    """Rebuild every native block and compare exact canonical complete bytes."""
+    if type(value) is not dict:
+        raise NativeSemanticCapsuleError("semantic capsule set must be a plain dictionary")
+    raw = _bytes(value)
+    if len(raw) > LIMITS["max_output_bytes"]:
+        raise NativeSemanticCapsuleError("complete semantic capsule output bound exceeded")
+    rebuilt = build_native_semantic_capsule_set(manifest=manifest, expected_head=expected_head,
+                                               environment_bindings=environment_bindings)
+    if raw != _bytes(rebuilt):
+        raise NativeSemanticCapsuleError("complete native semantic capsule replay changed")
+    return {"schema": "terminal-native-semantic-capsule-validation@1",
+        "capsule_set_id": rebuilt["capsule_set_id"], "native_root_cid": rebuilt["native_root"]["root_cid"],
+        "data_validated": True, "complete_native_replay": True,
+        "cold_incremental_bytes_equal": True, **AUTHORITY}

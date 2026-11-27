@@ -1,0 +1,286 @@
+import PyFiniteBindings
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED NUMERIC-COMPREHENSION CANDIDATE.
+
+The sole local dependency PyFiniteBindings is prospective until root genuinely
+qualifies it. No target syntax/interpreter or mathematical model is imported.
+
+Own scalar bodies read the mixed finite environment at each selected Name;
+they do not project every free name or pre-evaluate unselected branches.
+Primitive numeric operations come from the independent own scalar backend.
+Prepared generators store source syntax, captured own bindings and actual
+finite inputs, never desired outputs, target callbacks or proof certificates.
+
+One synchronous, unfiltered Name-target/Name-iterable comprehension and
+immediate exact-real math.fsum consumption are supported. Other clauses,
+tuple targets, consumers and nested collection bodies refuse explicitly.
+The source interpreter preserves numeric/error observations within a fixed
+pure binding model, not CPython protocols, parsing/global purity, Float/fsum
+rounding, effects/timing, full source/task or global convergence.
+-/
+
+namespace RankerSupportedPythonOwnComprehensions
+
+noncomputable section
+
+open RankerSupportedPythonAstReal (PyName PyNumber PyExpr PyArgs PyComprehension
+  PyTarget PyCalleeRef PyEvalError negateNumber numericBinary invokePrimitive resolveFixedCallee)
+open RankerSupportedPythonFiniteBindings (PyFiniteValue PyFiniteEnvironment PyFiniteError
+  lookupFiniteValue lookupFiniteScalar)
+
+inductive PyComprehensionError where
+  | binding (problem : PyFiniteError)
+  | scalar (problem : PyEvalError)
+  | unsupported (tag : String)
+  | binderCollision (identifier : PyName)
+  | reboundCallee (identifier : PyName)
+
+def ownBind {α β : Type} (result : Except PyComprehensionError α)
+    (next : α → Except PyComprehensionError β) : Except PyComprehensionError β :=
+  match result with
+  | .error problem => .error problem
+  | .ok value => next value
+
+def liftBinding {α : Type} : Except PyFiniteError α → Except PyComprehensionError α
+  | .error problem => .error (.binding problem)
+  | .ok value => .ok value
+
+def liftScalar {α : Type} : Except PyEvalError α → Except PyComprehensionError α
+  | .error problem => .error (.scalar problem)
+  | .ok value => .ok value
+
+def calleeIdentity : PyCalleeRef → Option PyName
+  | .name identifier => some identifier
+  | .attribute base _ => some base
+  | .unsupported _ => none
+
+def bindingPresent (environment : PyFiniteEnvironment) (identifier : PyName) : Prop :=
+  ∃ binding ∈ environment, binding.1 = identifier
+
+instance (environment : PyFiniteEnvironment) (identifier : PyName) :
+    Decidable (bindingPresent environment identifier) := by
+  unfold bindingPresent
+  infer_instance
+
+/-- Fixed primitive identity is checked against own local bindings before
+arguments. This is a specified pure model, not a Python global-purity proof. -/
+def checkScalarCallee (environment : PyFiniteEnvironment) (callee : PyCalleeRef) :
+    Except PyComprehensionError RankerSupportedPythonAstReal.PyPrimitive :=
+  match calleeIdentity callee with
+  | none => .error (.unsupported "calleeIdentity")
+  | some identifier =>
+      if bindingPresent environment identifier then .error (.reboundCallee identifier)
+      else match resolveFixedCallee callee with
+        | none => .error (.unsupported "scalarCalleeRegistry")
+        | some primitive => .ok primitive
+
+mutual
+  def evalOwnScalar (environment : PyFiniteEnvironment) :
+      PyExpr → Except PyComprehensionError PyNumber
+    | .name identifier => liftBinding (lookupFiniteScalar environment identifier)
+    | .integer value => .ok (.integer value)
+    | .floatLiteral _ ratio => .ok (.real (ratio : ℝ))
+    | .unary .usub operand => ownBind (evalOwnScalar environment operand)
+        (fun value => .ok (negateNumber value))
+    | .unary (.unsupported tag) _ => .error (.unsupported ("unary:" ++ tag))
+    | .binary op left right => ownBind (evalOwnScalar environment left) (fun a =>
+        ownBind (evalOwnScalar environment right) (fun b => liftScalar (numericBinary op a b)))
+    | .call callee arguments => ownBind (checkScalarCallee environment callee) (fun primitive =>
+        ownBind (evalOwnScalarArguments environment arguments)
+          (fun values => liftScalar (invokePrimitive primitive values)))
+    | .ifExp test thenBranch elseBranch => ownBind (evalOwnScalarTest environment test)
+        (fun selected => if selected then evalOwnScalar environment thenBranch
+          else evalOwnScalar environment elseBranch)
+    | .compare _ _ _ => .error (.unsupported "nonNumericComparison")
+    | .subscript _ _ => .error (.unsupported "indexOutsideNumericBodyStage")
+    | .listComp _ _ => .error (.unsupported "nestedListOutsideNumericBodyStage")
+    | .generatorExp _ _ => .error (.unsupported "escapingGeneratorBody")
+    | .unsupported tag => .error (.scalar (.unsupported tag))
+  def evalOwnScalarArguments (environment : PyFiniteEnvironment) :
+      PyArgs → Except PyComprehensionError (List PyNumber)
+    | .nil => .ok []
+    | .cons first rest => ownBind (evalOwnScalar environment first) (fun value =>
+        ownBind (evalOwnScalarArguments environment rest) (fun values => .ok (value :: values)))
+  def evalOwnScalarTest (environment : PyFiniteEnvironment) :
+      PyExpr → Except PyComprehensionError Bool
+    | .compare .ge left right => ownBind (evalOwnScalar environment left) (fun a =>
+        ownBind (evalOwnScalar environment right) (fun b => .ok (decide (b.toReal ≤ a.toReal))))
+    | _ => .error (.unsupported "nonBooleanTest")
+end
+
+def numericElements : List PyFiniteValue → Except PyComprehensionError (List PyNumber)
+  | [] => .ok []
+  | .number value :: rest => ownBind (numericElements rest) (fun values => .ok (value :: values))
+  | .sequence _ :: _ => .error (.unsupported "numericIterableElementKind")
+
+/-- The first stage admits only an ordinary own numeric sequence by Name.
+Zip/range/row/index stages are explicit future work. -/
+def evalOwnNumericIterable (environment : PyFiniteEnvironment) :
+    PyExpr → Except PyComprehensionError (List PyNumber)
+  | .name identifier => ownBind (liftBinding (lookupFiniteValue environment identifier))
+      (fun value => match value with
+        | .number _ => .error (.binding (.wrongKind identifier .sequence .scalar))
+        | .sequence values => numericElements values)
+  | _ => .error (.unsupported "numericIterableMustBeName")
+
+def freshBinder (environment : PyFiniteEnvironment) (identifier : PyName) : Prop :=
+  identifier.scope ≠ 0 ∧ ∀ binding ∈ environment, binding.1 ≠ identifier
+
+instance (environment : PyFiniteEnvironment) (identifier : PyName) :
+    Decidable (freshBinder environment identifier) :=
+  inferInstanceAs (Decidable (identifier.scope ≠ 0 ∧
+    ∀ binding ∈ environment, binding.1 ≠ identifier))
+
+structure PreparedNumericGenerator where
+  body : PyExpr
+  binder : PyName
+  captured : PyFiniteEnvironment
+  inputs : List PyNumber
+
+/-- Resolve/evaluate the iterable in the outer environment first. Target
+freshness is checked without installing a binding or evaluating the body. -/
+def prepareNumericGenerator (environment : PyFiniteEnvironment) (body : PyExpr) :
+    List PyComprehension → Except PyComprehensionError PreparedNumericGenerator
+  | [.forIn (.name binder) iterable .nil false] =>
+      ownBind (evalOwnNumericIterable environment iterable) (fun inputs =>
+        if freshBinder environment binder then .ok ⟨body, binder, environment, inputs⟩
+        else .error (.binderCollision binder))
+  | [.forIn _ _ _ true] => .error (.unsupported "asyncComprehension")
+  | [.forIn _ _ (.cons _ _) false] => .error (.unsupported "filteredComprehension")
+  | [.forIn (.tuple _) _ .nil false] => .error (.unsupported "tupleRequiresZipStage")
+  | [.forIn (.unsupported tag) _ .nil false] => .error (.unsupported ("target:" ++ tag))
+  | _ => .error (.unsupported "exactlyOneComprehensionRequired")
+
+def evalPreparedBody (prepared : PreparedNumericGenerator) (value : PyNumber) :
+    Except PyComprehensionError PyNumber :=
+  evalOwnScalar ((prepared.binder, .number value) :: prepared.captured) prepared.body
+
+private def orderedNumericMap (body : PyNumber → Except PyComprehensionError PyNumber) :
+    List PyNumber → Except PyComprehensionError (List PyNumber)
+  | [] => .ok []
+  | value :: rest => ownBind (body value) (fun output =>
+      ownBind (orderedNumericMap body rest) (fun outputs => .ok (output :: outputs)))
+
+private def exactNumericSum (accumulator : ℝ) : List PyNumber → ℝ
+  | [] => accumulator
+  | value :: rest => exactNumericSum (accumulator + value.toReal) rest
+
+private def orderedNumericConsume
+    (body : PyNumber → Except PyComprehensionError PyNumber) (accumulator : ℝ) :
+    List PyNumber → Except PyComprehensionError PyNumber
+  | [] => .ok (.real accumulator)
+  | value :: rest => ownBind (body value)
+      (fun output => orderedNumericConsume body (accumulator + output.toReal) rest)
+
+def materializePrepared (prepared : PreparedNumericGenerator) :
+    Except PyComprehensionError (List PyNumber) :=
+  orderedNumericMap (evalPreparedBody prepared) prepared.inputs
+
+def consumePrepared (prepared : PreparedNumericGenerator) :
+    Except PyComprehensionError PyNumber :=
+  orderedNumericConsume (evalPreparedBody prepared) 0 prepared.inputs
+
+def materializedExactFsum (prepared : PreparedNumericGenerator) :
+    Except PyComprehensionError PyNumber :=
+  ownBind (materializePrepared prepared) (fun outputs => .ok (.real (exactNumericSum 0 outputs)))
+
+def evalOwnListComp (environment : PyFiniteEnvironment) :
+    PyExpr → Except PyComprehensionError (List PyNumber)
+  | .listComp body clauses => ownBind (prepareNumericGenerator environment body clauses)
+      materializePrepared
+  | _ => .error (.unsupported "expectedListComprehension")
+
+/-- Only immediate math.fsum(GeneratorExp), with exact arity and pure model
+identity, consumes a generator. Other consumers are refused explicitly. -/
+def evalOwnImmediateFsum (environment : PyFiniteEnvironment) :
+    PyExpr → Except PyComprehensionError PyNumber
+  | .call (.attribute ⟨0, "math"⟩ "fsum")
+      (.cons (.generatorExp body clauses) .nil) =>
+      if bindingPresent environment ⟨0, "math"⟩ then
+        .error (.reboundCallee ⟨0, "math"⟩)
+      else ownBind (prepareNumericGenerator environment body clauses) consumePrepared
+  | _ => .error (.unsupported "onlyImmediateMathFsumGeneratorConsumer")
+
+private theorem numericElements_number_map (values : List PyNumber) :
+    numericElements (values.map PyFiniteValue.number) = .ok values := by
+  induction values with
+  | nil => rfl
+  | cons first rest ih => simp only [List.map_cons, numericElements, ih, ownBind]
+
+/-- For arbitrary source body syntax (including a failing body), setup uses
+the outer sequence and captures the unchanged own environment. No binder/body
+evaluation result is assumed; names and ordinary numeric input are the data. -/
+theorem generator_setup_precedes_target_binding (outer binder : PyName)
+    (values : List PyNumber) (body : PyExpr)
+    (nonGlobal : binder.scope ≠ 0) (distinct : outer ≠ binder) :
+    prepareNumericGenerator
+      [(outer, .sequence (values.map PyFiniteValue.number))] body
+      [.forIn (.name binder) (.name outer) .nil false] =
+        .ok ⟨body, binder, [(outer, .sequence (values.map PyFiniteValue.number))], values⟩ := by
+  have fresh : freshBinder
+      [(outer, .sequence (values.map PyFiniteValue.number))] binder := by
+    constructor
+    · exact nonGlobal
+    · intro binding present
+      have same : binding = (outer, PyFiniteValue.sequence (values.map PyFiniteValue.number)) := by
+        simpa only [List.mem_singleton] using present
+      subst binding
+      exact distinct
+  simp only [prepareNumericGenerator, evalOwnNumericIterable, lookupFiniteValue,
+    if_pos rfl, ite_true, liftBinding, ownBind, numericElements_number_map, if_pos fresh]
+
+private def branchErrorBody (binder : PyName) (firstTag laterTag : String) : PyExpr :=
+  .ifExp (.compare .ge (.name binder) (.integer 0))
+    (.unsupported firstTag) (.unsupported laterTag)
+
+/-- Concrete own source evaluation chooses the first error in list order.
+Reversing the first two ordinary inputs changes the selected error label.
+Neither callback failure nor any desired evaluation equality is a premise. -/
+theorem ordered_body_first_error (binder : PyName) (firstTag laterTag : String)
+    (rest : List PyNumber) :
+    materializePrepared
+        ⟨branchErrorBody binder firstTag laterTag, binder, [],
+          .integer 0 :: .integer (-1) :: rest⟩ = .error (.scalar (.unsupported firstTag)) ∧
+      consumePrepared
+        ⟨branchErrorBody binder firstTag laterTag, binder, [],
+          .integer 0 :: .integer (-1) :: rest⟩ = .error (.scalar (.unsupported firstTag)) ∧
+      materializePrepared
+        ⟨branchErrorBody binder firstTag laterTag, binder, [],
+          .integer (-1) :: .integer 0 :: rest⟩ = .error (.scalar (.unsupported laterTag)) := by
+  simp [materializePrepared, consumePrepared, orderedNumericMap, orderedNumericConsume,
+    evalPreparedBody, branchErrorBody, evalOwnScalar, evalOwnScalarTest,
+    lookupFiniteScalar, liftBinding, ownBind, PyNumber.toReal]
+
+private theorem ordered_consume_materialization
+    (body : PyNumber → Except PyComprehensionError PyNumber) (inputs : List PyNumber)
+    (accumulator : ℝ) :
+    orderedNumericConsume body accumulator inputs =
+      ownBind (orderedNumericMap body inputs)
+        (fun outputs => .ok (.real (exactNumericSum accumulator outputs))) := by
+  induction inputs generalizing accumulator with
+  | nil => rfl
+  | cons first rest ih =>
+    cases evaluated : body first with
+    | error problem => simp only [orderedNumericConsume, orderedNumericMap, evaluated, ownBind]
+    | ok output =>
+      simp only [orderedNumericConsume, orderedNumericMap, evaluated, ownBind]
+      rw [ih]
+      cases remainder : orderedNumericMap body rest with
+      | error problem => rfl
+      | ok outputs => rfl
+
+/-- Eager list materialization and direct generator consumption preserve
+own exact-real values and first selected errors. The callback is fixed here
+to the own syntax/captured-environment interpreter, with no target/model input. -/
+theorem pure_immediate_fsum_materialization (prepared : PreparedNumericGenerator) :
+    consumePrepared prepared = materializedExactFsum prepared := by
+  exact ordered_consume_materialization (evalPreparedBody prepared) prepared.inputs 0
+
+#print axioms generator_setup_precedes_target_binding
+#print axioms ordered_body_first_error
+#print axioms pure_immediate_fsum_materialization
+
+end
+
+end RankerSupportedPythonOwnComprehensions

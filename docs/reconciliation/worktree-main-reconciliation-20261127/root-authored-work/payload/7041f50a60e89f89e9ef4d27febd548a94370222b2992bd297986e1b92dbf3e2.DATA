@@ -1,0 +1,54 @@
+{
+  "time": "2026-11-10T03:55:52.138007+00:00",
+  "input_tree": "5e60538de14a802b9ce5c922482b40f6acc615a9",
+  "files": [
+    {
+      "path": "benchmarks/agent_supervisor/container_coding/full_supervisor_benchmark.py",
+      "prepared_source": "/tmp/lift-sync-pruning-route-integrated-source-20261110-v01/full_supervisor_benchmark.py.txt",
+      "sha256": "30ec02d1c9f1b2f34a2563cc4e2306bcbbcece7598a346c2b5e7de7a34d5fa5d",
+      "syntax_parsed": true
+    },
+    {
+      "path": "benchmarks/agent_supervisor/container_coding/full_supervisor_harbor_agent.py",
+      "prepared_source": "/tmp/lift-sync-pruning-route-integrated-source-20261110-v01/full_supervisor_harbor_agent.py.txt",
+      "sha256": "3970371c30602ae8531de64f69d144119510847e8ffb53c76303bcda0ec6e50f",
+      "syntax_parsed": true
+    },
+    {
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_container_supervisor.py",
+      "prepared_source": "/tmp/lift-sync-pruning-route-integrated-source-20261110-v01/terminal_container_supervisor.py.txt",
+      "sha256": "fd09fa012411a535899dd4ba5c2c8215974c6589757f5dccf8a652e4c31a9b14",
+      "syntax_parsed": true
+    },
+    {
+      "path": "benchmarks/agent_supervisor/container_coding/container_worker_deployment.py",
+      "prepared_source": "/tmp/lift-sync-pruning-route-integrated-source-20261110-v01/container_worker_deployment.py.txt",
+      "sha256": "2a3254cae8f2c9b66d91e624a2495dc13249e42d1fdd4f520619c60b9a3a84ab",
+      "syntax_parsed": true
+    },
+    {
+      "path": "benchmarks/agent_supervisor/container_coding/terminal_decision_policy.py",
+      "prepared_source": "/tmp/lift-sync-pruning-route-integrated-source-20261110-v01/terminal_decision_policy.py.txt",
+      "sha256": "bfbe730f9937e91f67ccc86a26553a179df0c3b770ab31d077f184a7922fd150",
+      "syntax_parsed": true
+    },
+    {
+      "path": "test/api/test_current_decision_configuration.py",
+      "prepared_source": "/tmp/lift-sync-pruning-route-integrated-source-20261110-v01/test_current_decision_configuration.py.txt",
+      "sha256": "817d61adc7aecd241ed2ba9792d9b89ba683b9d441eda7776efde57cb87b3624",
+      "syntax_parsed": true
+    }
+  ],
+  "semantic_route_defaults_added": {
+    "candidate_rounds": 1,
+    "doctor_coding_policy": null,
+    "working_set_census_only": false,
+    "grok_pruning_profile": "legacy"
+  },
+  "existing_before_io_parameter_cases_retained": true,
+  "new_before_io_cases": 4,
+  "new_frozen_receipt_cases": 4,
+  "source_refs_updated": false,
+  "applied": false,
+  "qualified": false
+}

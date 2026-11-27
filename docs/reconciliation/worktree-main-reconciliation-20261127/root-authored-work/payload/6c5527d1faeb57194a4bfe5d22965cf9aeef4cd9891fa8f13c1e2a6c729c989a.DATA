@@ -1,0 +1,21 @@
+[package]
+name = "ns_horn_alternate_field_witness"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+groth16_backend = { path = "../runs/bundled-v1/source_snapshot" }
+ark-groth16 = "0.6"
+ark-bn254 = "0.6"
+ark-ff = "0.6"
+ark-relations = "0.6"
+ark-serialize = "0.6"
+ark-snark = "0.6"
+rand = "0.8"
+sha2 = "0.10"
+serde_json = "1.0"
+hex = "0.4"
+
+[profile.release]
+opt-level = 3
+lto = true

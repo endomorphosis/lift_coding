@@ -1,0 +1,133 @@
+"""Real private resource/log components; never an admitted M0 composition.
+
+The SDK fixtures create real private scheduler policy and disk claims. They do
+not patch proof samplers, grant types or thresholds. The log observer retains
+the actual Popen returned by the unmodified real launcher; it creates no fake
+process, native lease, Quack capability or admission result.
+"""
+from pathlib import Path
+import os
+import sys
+
+import pytest
+from ipfs_accelerate_py.cli_runtime import grok_private_same_pid_m0 as m0
+from ipfs_accelerate_py.agent_supervisor.todo_daemon import implementation_supervisor as implementation
+from ipfs_accelerate_py.agent_supervisor.todo_daemon import supervisor_runtime as supervised
+from ipfs_datasets_py.optimizers.logic_theorem_optimizer import resource_scheduler as sdk
+from ipfs_datasets_py.optimizers.logic_theorem_optimizer import autoencoder_daemon_resources as disk
+from tests.unit.optimizers.logic_theorem_optimizer import test_strict_parented_resource_deadlines as fixtures
+from tests.unit.optimizers.logic_theorem_optimizer.test_strict_parented_resource_deadlines import (
+    private_scheduler, private_parented, _owner, _work, _ledger, _state,
+)
+
+# Imported ordinary pytest fixtures keep their real original SDK contracts.
+assert Path(fixtures.__file__) == Path('/home/barberb/lift_coding/external/ipfs_datasets/tests/unit/optimizers/logic_theorem_optimizer/test_strict_parented_resource_deadlines.py')
+assert fixtures.__spec__.origin == fixtures.__file__
+
+
+def test_real_partial_enter_stays_strict_then_releases_actual_retained_claim(private_parented):
+    private = private_parented
+    dated = private['attempt']/'dated.log'
+    dated.write_bytes(b'actual private dated log evidence\n')
+    alias = private['attempt']/'latest.log'
+    alias.symlink_to(dated.name)
+    try:
+        with _work(private, 1):
+            owner = _owner(private)
+            with pytest.raises(disk.DaemonResourceError, match='symlink in attempt inventory'):
+                owner.__enter__()
+        # The base really entered before the strict wrapper failed. Its leaf
+        # really retired, while its durable charge remains retained.
+        assert owner._entered is True
+        assert owner._record['status'] == 'retained'
+        assert owner._record['artifacts_durable_asserted'] is False
+        actual_leaf = owner._lease
+        assert type(actual_leaf) is sdk.ResourceLease and actual_leaf.released
+        assert not private['root'].released and not private['phase'].released
+        retained_bytes = private['ledger'].read_bytes()
+        with sdk.resource_cleanup_deadline(native_deadline_monotonic=private['native_deadline']):
+            with pytest.raises(disk.DaemonResourceError, match='symlink in attempt inventory'):
+                m0._release_owned_phase_disk(owner, parent_lease=private['phase'])
+        assert private['ledger'].read_bytes() == retained_bytes
+        assert _ledger(private)['reservations'][owner.reservation_id]['status'] == 'retained'
+    finally:
+        # Only this fixture owns this link; no active/current-run artifact is
+        # altered. The production helper itself never deletes/ignores links.
+        assert alias.is_symlink() and os.readlink(alias) == dated.name
+        alias.unlink()
+    with sdk.resource_cleanup_deadline(native_deadline_monotonic=private['native_deadline']):
+        assert m0._release_owned_phase_disk(owner, parent_lease=private['phase']) == 'released'
+    row = _ledger(private)['reservations'][owner.reservation_id]
+    assert row['status'] == 'released' and row['artifacts_durable_asserted'] is True
+    assert row['final_attempt_bytes'] == dated.stat().st_size
+    assert actual_leaf.released and not private['phase'].released and not private['root'].released
+    assert set(_state(private)['leases']) == {private['root'].lease_id, private['phase'].lease_id}
+
+
+def test_real_unentered_component_requires_actual_durable_absence(private_parented):
+    private = private_parented
+    with _work(private, 1):
+        owner = _owner(private)
+    assert owner._record is None and owner._entered is False and owner._lease is None
+    assert owner.reservation_id not in _ledger(private)['reservations']
+    before = private['ledger'].read_bytes()
+    with sdk.resource_cleanup_deadline(native_deadline_monotonic=private['native_deadline']):
+        assert m0._release_owned_phase_disk(owner, parent_lease=private['phase']) == 'absent'
+    assert private['ledger'].read_bytes() == before
+    assert not private['root'].released and not private['phase'].released
+
+
+def test_real_entered_component_releases_leaf_without_releasing_ancestors(private_parented):
+    private = private_parented
+    with _work(private, 1):
+        owner = _owner(private)
+        owner.__enter__()
+        actual_leaf = owner._lease
+        assert type(actual_leaf) is sdk.ResourceLease and not actual_leaf.released
+    with sdk.resource_cleanup_deadline(native_deadline_monotonic=private['native_deadline']):
+        assert m0._release_owned_phase_disk(owner, parent_lease=private['phase']) == 'released'
+    assert actual_leaf.released
+    assert _ledger(private)['reservations'][owner.reservation_id]['status'] == 'released'
+    assert set(_state(private)['leases']) == {private['root'].lease_id, private['phase'].lease_id}
+
+
+@pytest.mark.parametrize('private_selected', [False, True], ids=['ordinary-default-alias', 'private-dated-only'])
+def test_actual_log_selector_and_real_launcher_keep_dated_log(tmp_path, monkeypatch, private_selected):
+    state = tmp_path/'state'
+    state.mkdir()
+    dated = state/'admitted_managed_daemon_20000101T000000Z.log'
+    latest = implementation._managed_daemon_latest_log_path(
+        state_dir=state, prefix='admitted', private_fixture_selected=private_selected)
+    default_alias = state/'admitted_managed_daemon.latest.log'
+    assert latest == (None if private_selected else default_alias)
+    if not private_selected:
+        assert implementation._managed_daemon_latest_log_path(
+            state_dir=state, prefix='admitted') == default_alias
+    actual_processes = []
+    real_launch = supervised.launch_process_child
+    def retain_actual_process(*args, **kwargs):
+        actual = real_launch(*args, **kwargs)
+        actual_processes.append(actual)
+        return actual
+    monkeypatch.setattr(supervised, 'launch_process_child', retain_actual_process)
+    try:
+        child = supervised.launch_supervised_child(supervised.SupervisedChildSpec(
+            repo_root=tmp_path,
+            command=(sys.executable, '-B', '-c', 'print("actual dated-log evidence", flush=True)'),
+            log_path=dated, child_pid_path=state/'child.pid', latest_log_path=latest,
+        ))
+        assert len(actual_processes) == 1 and child.pid == actual_processes[0].pid
+        assert actual_processes[0].wait(timeout=3) == 0
+        assert dated.is_file() and not dated.is_symlink()
+        assert b'actual dated-log evidence' in dated.read_bytes()
+        assert child.log_path == dated and child.latest_log_path == latest
+        if private_selected:
+            assert not default_alias.exists() and not default_alias.is_symlink()
+        else:
+            assert default_alias.is_symlink() and os.readlink(default_alias) == dated.name
+            assert default_alias.resolve(strict=True) == dated
+    finally:
+        for actual in actual_processes:
+            if actual.poll() is None:
+                actual.kill()
+            actual.wait(timeout=2)

@@ -1,0 +1,60 @@
+"""Verify retained payloads and seal exact restore mappings. No source adoption."""
+from collections import Counter
+from hashlib import sha1, sha256
+import json
+import os
+from pathlib import Path
+import stat
+import subprocess
+
+OUT=Path(__file__).parent
+BASE=OUT/'retention-manifest.json'
+SUPPLEMENT=OUT/'retention-supplement.json'
+base=json.loads(BASE.read_text())
+extra=json.loads(SUPPLEMENT.read_text())
+staged=json.loads((OUT/'staged-variants.json').read_text())
+rows=base['files']+extra['files']+staged['files']
+retained=[row for row in rows if row['disposition']=='retained-inert-version']
+payloads={}
+restore=[]
+for row in retained:
+    rel=row['archive']
+    path=OUT/rel
+    if path.is_symlink() or not path.is_file():raise RuntimeError('Invalid retained payload')
+    raw=path.read_bytes()
+    if len(raw)!=row['bytes'] or sha256(raw).hexdigest()!=row['sha256']:
+        raise RuntimeError('Retained payload differs from source receipt')
+    oid=sha1(f'blob {len(raw)}\0'.encode()+raw).hexdigest()
+    if oid!=row['git_blob']:raise RuntimeError('Retained Git blob differs')
+    payloads[rel]={'path':rel,'bytes':len(raw),'sha256':row['sha256'],'git_blob':oid}
+    restore.append({k:row[k] for k in ('worktree','family','relative_path','bytes','sha256','git_blob','archive','full9')})
+
+link_proofs=[]
+proofrepo='/tmp/git-main-followup-20261127-zYjieLmd/datasets-current-main-proof.git'
+tip='3bdfec5b148ad6c4ac53281ceb02ecd8377643e0'
+for row in extra['files']:
+    if row['disposition']!='capture-refused' or row.get('reason')!='source path has symlink component':continue
+    path=Path(row['worktree'])/row['relative_path']
+    before=path.lstat()
+    if not stat.S_ISLNK(before.st_mode):raise RuntimeError('Expected refused entry to remain symlink')
+    target=os.readlink(path).encode('utf-8','surrogateescape')
+    after=path.lstat()
+    if (before.st_ino,before.st_size,before.st_mtime_ns,before.st_ctime_ns)!=(after.st_ino,after.st_size,after.st_mtime_ns,after.st_ctime_ns):raise RuntimeError('Symlink metadata drift')
+    blob=sha1(f'blob {len(target)}\0'.encode()+target).hexdigest()
+    relative=row['relative_path'].removeprefix('ipfs_datasets_py/')
+    p=subprocess.run(['git','-c','protocol.allow=never','--git-dir',proofrepo,'ls-tree','-z',tip,'--',relative],capture_output=True,env=dict(os.environ,GIT_OPTIONAL_LOCKS='0',GIT_TERMINAL_PROMPT='0',GIT_NO_LAZY_FETCH='1'),check=True)
+    entry=p.stdout.rstrip(b'\0')
+    metadata,name=entry.split(b'\t',1)
+    mode,kind,current_oid=metadata.decode().split()
+    if mode!='120000' or kind!='blob' or current_oid!=blob:raise RuntimeError('No exact selected-main symbolic-link proof')
+    link_proofs.append({'source':str(path),'source_mode':before.st_mode,'source_inode':before.st_ino,'source_size':before.st_size,'link_target_sha256':sha256(target).hexdigest(),'link_target_git_blob':blob,'no_target_followed':True,'no_symlink_payload_created':True,'selected_family':'ipfs_datasets_py','selected_main':tip,'main_relative_path':relative,'main_mode':mode,'disposition':'exact-current-main-symbolic-link-metadata'})
+
+artifacts=[]
+for name in ('preserve.py','preserve.stdout','preserve.stderr','retention-manifest.json','supplement.py','supplement.stdout','supplement.stderr','retention-supplement.json','staged.py','staged.stdout','staged.stderr','staged-variants.json','finalize_v02.py'):
+    path=OUT/name
+    raw=path.read_bytes()
+    artifacts.append({'path':name,'bytes':len(raw),'sha256':sha256(raw).hexdigest()})
+result={'schema':'additional-authored-work-exact-byte-restore/v1','scope':'Preservation record for additional worktree source/config/docs/tests. Inert DATA files have no adoption, execution, test, legal, model, or runtime authority. Maintained integration is separate. Original working copies, indexes, refs, and locks were not modified.','base_report_sha256':sha256(BASE.read_bytes()).hexdigest(),'supplement_report_sha256':sha256(SUPPLEMENT.read_bytes()).hexdigest(),'selected_main_tips':{family:meta['selected_main_commit'] for family,meta in base['selected_main_metadata'].items()},'payloads':[payloads[key] for key in sorted(payloads)],'restore_mappings':restore,'symbolic_link_metadata_proofs':link_proofs,'counts':{'unique_payloads':len(payloads),'unique_payload_bytes':sum(row['bytes'] for row in payloads.values()),'restore_mappings':len(restore),'all_selected_regular_file_mappings':len(rows)-len(link_proofs),'exact_main_history_or_published_object_mappings':sum(row['disposition'].startswith('exact-') for row in rows),'credential_marker_holds':sum(row['disposition']=='held-credential-marker-review' for row in rows),'binary_holds':sum(row['disposition']=='held-binary-content-review' for row in rows),'unresolved_capture_refusals':sum(row['disposition']=='capture-refused' for row in rows)-len(link_proofs),'limit_refusals':sum(row['disposition']=='retention-bound-exceeded' for row in rows),'same_source_epoch_not_adopted':True},'artifact_hashes':artifacts,'restore_instructions':['Verify the selected payload SHA256 and byte length against this manifest.','Choose the original source working-copy context and relative_path explicitly. Multiple versions and source roots are retained, so no automatic canonical destination is inferred.','Copy the DATA bytes only under a separately selected integration/restore operation. The recorded full9.mode preserves the original permission/executable-bit metadata.','This package contains inert source text and metadata only. No Git metadata, Source locks, runtime data, model weights, or databases are selected. No recognizable scanned credential markers were found in newly retained files; this is a bounded marker scan.'],'remaining_gaps':['Reachable-object histories incomplete in local partial clones are recorded explicitly; preserved unmatched versions are not claimed new.','The two distinct MM index-only variants in the selected95groups were inspected separately and both exactly match selected-main reachable history. Index stages outside this scope remain with their owning reconciliation.','Excluded raw/runtime/model/binary inputs and untracked non-source directories remain excluded by explicit recorded selection.','This package does not itself qualify or integrate old source variants.']}
+p=OUT/'restore-v02.json'
+p.write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
+print(json.dumps({'restore_manifest':str(p),'bytes':p.stat().st_size,'sha256':sha256(p.read_bytes()).hexdigest(),'counts':result['counts'],'symbolic_link_proofs':len(link_proofs)},indent=2))

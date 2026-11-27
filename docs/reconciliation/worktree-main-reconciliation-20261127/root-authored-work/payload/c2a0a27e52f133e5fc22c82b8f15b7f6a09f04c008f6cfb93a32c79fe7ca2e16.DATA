@@ -1,0 +1,376 @@
+"""Lossless representation transport for an already checked task IntentIR view.
+
+This codec neither interprets the source nor authenticates an admission. Callers
+must bind the decoded context to the independently replayed signed context. The
+original public instruction remains literal outside the compact JSON. Only
+typed identity slots and exact repeated JSON values are interned; names, paths,
+arguments, modalities, source bytes and validation contracts stay unchanged.
+"""
+from __future__ import annotations
+
+from collections import Counter
+import hashlib
+import json
+import math
+
+
+SCHEMA = "supervisor-compact-task-intent-requirements@1"
+NATIVE_SCHEMA = "supervisor-task-intent-requirements@1"
+MAX_EXPANDED_BYTES = 131_072
+MAX_SOURCE_BYTES = 32_768
+MAX_COMPACT_BYTES = 262_144
+MAX_REQUIREMENTS = 512
+MAX_DEPTH = 40
+MAX_NODES = 50_000
+MAX_TABLE_ITEMS = 4096
+AUTHORITY_FIELDS = frozenset({
+    "source_semantics_verified", "semantic_alignment_verified", "proof_authority",
+    "execution_authority", "completion_authority", "publication_authority",
+    "scope_expansion_authority",
+})
+ROW_FIELDS = frozenset({
+    "requirement_id", "kind", "modality", "representation", "semantic_support",
+    "interpretation_status", "source_unit", "native_atom", "outputs",
+    "validation_keys", "dependency_requirement_ids", "binding", *AUTHORITY_FIELDS,
+})
+UNIT_FIELDS = frozenset({
+    "unit_id", "start_char", "end_char", "start_byte", "end_byte", "text", "sha256",
+})
+ATOM_FIELDS = frozenset({
+    "requirement_id", "native_document_sha256", "statement_id", "predicate", "arguments", "modality",
+})
+CONTEXT_FIELDS = frozenset({
+    "schema", "task_cid", "task_id", "contract_cid", "ledger_sha256", "graph_cid",
+    "coverage_cid", "source_path", "source_sha256", "requirement_ids", "requirements",
+    "dependency_requirements", "global_prohibitions", "operations", "task_contract",
+    "official_reward", "native_persistence_verified_here", "requirements_context_cid", *AUTHORITY_FIELDS,
+})
+COMPACT_FIELDS = frozenset({
+    "schema", "source_sha256", "expanded_sha256", "expanded_bytes", "requirements_context_cid",
+    "source_units", "identities", "object_keys", "shared_values", "context",
+})
+REF_KEYS = frozenset({"$unit", "$id", "$value", "$row"})
+IDENTITY_FIELDS = frozenset({
+    "requirement_id", "requirement_ids", "dependency_requirement_ids", "task_cid", "task_cids",
+    "dependency_task_cids", "contract_cid", "graph_cid", "coverage_cid", "requirements_context_cid",
+    "ledger_sha256", "source_sha256", "native_document_sha256", "policy_cid", "evidence_cids",
+    "validation_cids", "acceptance_cids",
+})
+INSTRUCTIONS = (
+    "This is an exact representation of the checked task-specific candidate IntentIR context. "
+    "Objects containing only $id, $value or $unit reference the corresponding zero-based "
+    "identities, shared_values or source_units table. A $row object holds [object_keys index, "
+    "values in that exact key order]. Source-unit text is the original public instruction's "
+    "start_char:end_char slice; its UTF-8 bytes also match start_byte:end_byte and sha256. "
+    "Expand references without changing any modality, argument, literal, path, dependency, "
+    "output or check. Permitted guidance remains optional; required/intended and prohibited "
+    "requirements retain their native meanings. This transport adds no requirement or "
+    "permission. Source interpretation remains candidate evidence; native admission, output "
+    "scope and validation retain authority. Aliases confer no proof or completion authority."
+)
+
+
+class CompactIntentRequirementsError(ValueError):
+    """A source selector, exact context binding or bounded representation differs."""
+
+
+def _fail(message):
+    raise CompactIntentRequirementsError(message)
+
+
+def _wire(value):
+    try:
+        return json.dumps(value, sort_keys=True, separators=(",", ":"),
+                          ensure_ascii=False, allow_nan=False).encode("utf-8")
+    except (TypeError, ValueError, UnicodeError, RecursionError) as error:
+        raise CompactIntentRequirementsError("canonical UTF-8 JSON required") from error
+
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _bounded_json(value, *, maximum, allow_refs=False):
+    count, active = 0, set()
+    def visit(item, depth):
+        nonlocal count
+        count += 1
+        if depth > MAX_DEPTH or count > MAX_NODES:
+            _fail("JSON depth or node budget exceeded")
+        if type(item) in (dict, list):
+            if id(item) in active:
+                _fail("cyclic JSON value")
+            active.add(id(item))
+            if type(item) is dict:
+                if any(type(key) is not str for key in item):
+                    _fail("JSON object keys must be strings")
+                if not allow_refs and set(item) & REF_KEYS:
+                    _fail("literal object collides with reserved compact reference")
+                children = item.values()
+            else:
+                children = item
+            for child in children:
+                visit(child, depth + 1)
+            active.remove(id(item))
+        elif type(item) not in (str, int, bool, float, type(None)):
+            _fail("exact JSON types required")
+        elif type(item) is float and not math.isfinite(item):
+            _fail("nonfinite JSON number")
+    visit(value, 0)
+    raw = _wire(value)
+    if len(raw) > maximum:
+        _fail("JSON byte budget exceeded")
+    return raw
+
+
+def _source(source_text):
+    if type(source_text) is not str:
+        _fail("literal original source text required")
+    try:
+        raw = source_text.encode("utf-8")
+    except UnicodeError as error:
+        raise CompactIntentRequirementsError("source is not valid UTF-8") from error
+    if not raw or len(raw) > MAX_SOURCE_BYTES:
+        _fail("source byte budget exceeded")
+    return raw
+
+
+def _source_unit(unit, source_text, source_raw, *, retained_text):
+    fields = UNIT_FIELDS if retained_text else UNIT_FIELDS - {"text"}
+    if type(unit) is not dict or set(unit) != fields:
+        _fail("exact source-unit fields required")
+    if type(unit["unit_id"]) is not str or not unit["unit_id"]:
+        _fail("source unit identity required")
+    names = ("start_char", "end_char", "start_byte", "end_byte")
+    if any(type(unit[key]) is not int for key in names):
+        _fail("exact character and byte source selectors required")
+    sc, ec, sb, eb = (unit[key] for key in names)
+    if not (0 <= sc <= ec <= len(source_text) and 0 <= sb <= eb <= len(source_raw)):
+        _fail("source selector outside original source")
+    text = source_text[sc:ec]
+    if (len(source_text[:sc].encode()) != sb or len(source_text[:ec].encode()) != eb
+            or text.encode() != source_raw[sb:eb] or _sha(text.encode()) != unit["sha256"]
+            or (retained_text and unit["text"] != text)):
+        _fail("source character/UTF-8 selector, text or hash differs")
+    return {**unit, "text": text}
+
+
+def _native(context, source_text):
+    raw = _bounded_json(context, maximum=MAX_EXPANDED_BYTES)
+    source_raw = _source(source_text)
+    if type(context) is not dict or set(context) != CONTEXT_FIELDS or context["schema"] != NATIVE_SCHEMA:
+        _fail("exact native task IntentIR context required")
+    if (context["source_sha256"] != _sha(source_raw)
+            or context["official_reward"] is not None
+            or context["native_persistence_verified_here"] is not False):
+        _fail("native source binding or observation authority differs")
+    for key in AUTHORITY_FIELDS:
+        if context[key] is not False:
+            _fail("native context authority must remain false")
+    rows, population = [], set()
+    units = {}
+    for name in ("requirements", "dependency_requirements", "global_prohibitions"):
+        items = context[name]
+        if type(items) is not list or len(items) > MAX_REQUIREMENTS:
+            _fail("requirement population exceeds bound")
+        seen = set()
+        for row in items:
+            if type(row) is not dict or set(row) != ROW_FIELDS:
+                _fail("exact native requirement fields required")
+            key = row["requirement_id"]
+            if type(key) is not str or not key or key in seen:
+                _fail("duplicate or missing requirement identity")
+            seen.add(key)
+            population.add(key)
+            if any(row[field] is not False for field in AUTHORITY_FIELDS):
+                _fail("requirement authority must remain false")
+            atom = row["native_atom"]
+            if (type(atom) is not dict or set(atom) != ATOM_FIELDS
+                    or atom["requirement_id"] != key or atom["modality"] != row["modality"]):
+                _fail("native atom identity or modality differs")
+            if name == "global_prohibitions" and row["modality"] != "prohibited":
+                _fail("global prohibition modality differs")
+            if name != "global_prohibitions" and row["modality"] not in ("required", "intended"):
+                _fail("optional or prohibited atom cannot become task coverage")
+            unit = _source_unit(row["source_unit"], source_text, source_raw, retained_text=True)
+            if unit["unit_id"] in units and units[unit["unit_id"]] != unit:
+                _fail("conflicting source-unit identity")
+            units[unit["unit_id"]] = unit
+            rows.append(row)
+    if len(population) > MAX_REQUIREMENTS:
+        _fail("unique requirement population exceeds bound")
+    if (type(context["requirement_ids"]) is not list
+            or context["requirement_ids"] != [row["requirement_id"] for row in context["requirements"]]
+            or not context["requirements"]):
+        _fail("selected requirement population differs")
+    if type(context["operations"]) is not list or type(context["task_contract"]) is not dict:
+        _fail("native operations and task contract required")
+    from ..proof.formal_verification_contracts import content_identity
+    if content_identity({key: value for key, value in context.items()
+                         if key != "requirements_context_cid"}) != context["requirements_context_cid"]:
+        _fail("native requirements context CID differs")
+    return raw, source_raw, rows, units
+
+
+def encode_task_intent_requirements(context: dict, *, source_text: str) -> dict:
+    """Encode an exact native task view after source/hash/authority checks."""
+    expanded, source_raw, _, units = _native(context, source_text)
+    body = json.loads(expanded)
+    source_units = sorted(({key: value for key, value in unit.items() if key != "text"}
+                           for unit in units.values()), key=_wire)
+    unit_indexes = {unit["unit_id"]: index for index, unit in enumerate(source_units)}
+    for name in ("requirements", "dependency_requirements", "global_prohibitions"):
+        for row in body[name]:
+            row["source_unit"] = {"$unit": unit_indexes[row["source_unit"]["unit_id"]]}
+    identities, shapes, values = Counter(), Counter(), Counter()
+    retained = {}
+    def collect(value, field=None):
+        if type(value) is str and field in IDENTITY_FIELDS and len(value.encode()) >= 40:
+            identities[value] += 1
+        elif type(value) is list:
+            raw = _wire(value)
+            if len(raw) >= 96:
+                values[raw] += 1
+                retained[raw] = value
+            for child in value:
+                collect(child, field)
+        elif type(value) is dict and set(value) != {"$unit"}:
+            raw = _wire(value)
+            if len(raw) >= 96:
+                values[raw] += 1
+                retained[raw] = value
+            shapes[tuple(sorted(value))] += 1
+            for key, child in value.items():
+                collect(child, key)
+    collect(body)
+    identity_table = sorted(value for value, count in identities.items() if count > 1)
+    object_keys = [list(keys) for keys, count in sorted(shapes.items())
+                   if count > 1 and sum(len(key.encode()) + 3 for key in keys) * (count - 1) > 24 * count]
+    shared = sorted((raw for raw, count in values.items() if count > 1), key=lambda raw: (len(raw), raw))
+    if len(source_units) + len(identity_table) + len(object_keys) + len(shared) > MAX_TABLE_ITEMS:
+        _fail("compact table budget exceeded")
+    ids = {value: index for index, value in enumerate(identity_table)}
+    keys = {tuple(value): index for index, value in enumerate(object_keys)}
+    shared_indexes = {value: index for index, value in enumerate(shared)}
+    def project(value, field=None, own=None):
+        if type(value) in (dict, list):
+            raw = _wire(value)
+            if raw in shared_indexes and raw != own:
+                return {"$value": shared_indexes[raw]}
+        if type(value) is str and field in IDENTITY_FIELDS and value in ids:
+            return {"$id": ids[value]}
+        if type(value) is list:
+            return [project(child, field) for child in value]
+        if type(value) is dict:
+            if set(value) == {"$unit"}:
+                return value
+            shape = tuple(sorted(value))
+            if shape in keys:
+                return {"$row": [keys[shape], [project(value[key], key) for key in shape]]}
+            return {key: project(child, key) for key, child in value.items()}
+        return value
+    result = {
+        "schema": SCHEMA, "source_sha256": _sha(source_raw), "expanded_sha256": _sha(expanded),
+        "expanded_bytes": len(expanded), "requirements_context_cid": context["requirements_context_cid"],
+        "source_units": source_units, "identities": identity_table, "object_keys": object_keys,
+        "shared_values": [project(retained[raw], own=raw) for raw in shared], "context": project(body),
+    }
+    _bounded_json(result, maximum=MAX_COMPACT_BYTES, allow_refs=True)
+    return result
+
+
+def decode_task_intent_requirements(compact: dict, *, source_text: str) -> dict:
+    """Expand bounded typed references and verify the exact original context.
+
+    Self-consistency is representation evidence. A caller must still compare
+    the restored CID/bytes with its independently checked native admission.
+    """
+    _bounded_json(compact, maximum=MAX_COMPACT_BYTES, allow_refs=True)
+    source_raw = _source(source_text)
+    if type(compact) is not dict or set(compact) != COMPACT_FIELDS or compact["schema"] != SCHEMA:
+        _fail("unknown or malformed compact task IntentIR schema")
+    if (compact["source_sha256"] != _sha(source_raw)
+            or type(compact["expanded_bytes"]) is not int
+            or not 0 < compact["expanded_bytes"] <= MAX_EXPANDED_BYTES):
+        _fail("compact source identity or expanded byte bound differs")
+    tables = ("source_units", "identities", "object_keys", "shared_values")
+    if (any(type(compact[name]) is not list for name in tables)
+            or sum(len(compact[name]) for name in tables) > MAX_TABLE_ITEMS):
+        _fail("compact table budget exceeded")
+    for name in tables:
+        if len({_wire(value) for value in compact[name]}) != len(compact[name]):
+            _fail("duplicate compact table item")
+    units = [_source_unit(unit, source_text, source_raw, retained_text=False)
+             for unit in compact["source_units"]]
+    if len({unit["unit_id"] for unit in units}) != len(units):
+        _fail("duplicate source-unit identity")
+    ids, keys, shared = (compact[name] for name in ("identities", "object_keys", "shared_values"))
+    if any(type(value) is not str or len(value.encode()) < 40 for value in ids):
+        _fail("typed identity table requires long identity strings")
+    for shape in keys:
+        if (type(shape) is not list or not shape or any(type(key) is not str for key in shape)
+                or shape != sorted(set(shape)) or set(shape) & REF_KEYS):
+            _fail("invalid compact object-key template")
+    nodes, byte_budget = 0, 0
+    def charge(value, depth):
+        nonlocal nodes, byte_budget
+        nodes += 1
+        if depth > MAX_DEPTH or nodes > MAX_NODES:
+            _fail("decoded depth or node budget exceeded")
+        byte_budget += (2 if type(value) in (dict, list) else len(_wire(value)))
+        if byte_budget > MAX_EXPANDED_BYTES:
+            _fail("decoded byte budget exceeded")
+    def index(value, table):
+        if type(value) is not int or not 0 <= value < len(table):
+            _fail("unknown compact reference")
+        return value
+    def expand(value, field=None, depth=0, limit=None, ref_depth=0):
+        nonlocal byte_budget
+        if ref_depth > MAX_DEPTH:
+            _fail("compact reference expansion depth exceeded")
+        if type(value) is dict and set(value) & REF_KEYS:
+            if len(value) != 1:
+                _fail("compact reference collides with literal object")
+            tag, reference = next(iter(value.items()))
+            if tag == "$id":
+                if field not in IDENTITY_FIELDS:
+                    _fail("identity reference outside typed identity slot")
+                value = ids[index(reference, ids)]
+            elif tag == "$unit":
+                if field != "source_unit":
+                    _fail("source-unit reference outside native source slot")
+                return expand(units[index(reference, units)], field, depth, limit, ref_depth + 1)
+            elif tag == "$value":
+                selected = index(reference, shared)
+                if limit is not None and selected >= limit:
+                    _fail("cyclic or forward shared-value reference")
+                return expand(shared[selected], field=None, depth=depth, limit=selected, ref_depth=ref_depth + 1)
+            elif tag == "$row":
+                if type(reference) is not list or len(reference) != 2 or type(reference[1]) is not list:
+                    _fail("invalid compact object row")
+                shape = keys[index(reference[0], keys)]
+                if len(shape) != len(reference[1]):
+                    _fail("compact object row population differs")
+                value = dict(zip(shape, reference[1]))
+        charge(value, depth)
+        if type(value) is list:
+            byte_budget += max(0, len(value) - 1)
+            return [expand(child, field, depth + 1, limit, ref_depth) for child in value]
+        if type(value) is dict:
+            byte_budget += sum(len(_wire(key)) + 1 for key in value) + max(0, len(value) - 1)
+            if byte_budget > MAX_EXPANDED_BYTES:
+                _fail("decoded byte budget exceeded")
+            return {key: expand(child, key, depth + 1, limit, ref_depth) for key, child in value.items()}
+        return value
+    context = expand(compact["context"], limit=len(shared))
+    expanded, _, _, _ = _native(context, source_text)
+    if (len(expanded) != compact["expanded_bytes"] or _sha(expanded) != compact["expanded_sha256"]
+            or context["requirements_context_cid"] != compact["requirements_context_cid"]):
+        _fail("expanded context bytes, hash or CID differs")
+    if _wire(encode_task_intent_requirements(context, source_text=source_text)) != _wire(compact):
+        _fail("noncanonical compact tables, references or population")
+    return context
+
+
+__all__ = ["SCHEMA", "INSTRUCTIONS", "CompactIntentRequirementsError",
+           "encode_task_intent_requirements", "decode_task_intent_requirements"]

@@ -1,0 +1,143 @@
+"""Pin further candidate metadata without decoding issue, patch or test fields.
+
+All rows of the declared splits are retained. Scores, issue text, hints,
+reference patches and hidden checks cannot influence this discovery step.
+"""
+import concurrent.futures
+import hashlib
+import json
+from pathlib import Path
+import shutil
+import time
+import urllib.request
+
+import pyarrow.parquet as pq
+
+ROOT = Path(__file__).resolve().parent
+DATASETS = [
+    {"id": "nebius/SWE-rebench", "revision": "89cdfbab4ab1bd8f5a658bb212d1b63624f4f881",
+     "catalog": "nebius__SWE-rebench.structural_metadata.json", "split": "test",
+     "columns": ["repo", "instance_id", "base_commit", "created_at", "environment_setup_commit",
+                 "version", "license_name", "docker_image", "image_name"]},
+    {"id": "ScaleAI/SWE-bench_Pro", "revision": "7ab5114912baf22bb098818e604c02fe7ad2c11f",
+     "catalog": "ScaleAI__SWE-bench_Pro.structural_metadata.json", "split": "test",
+     "columns": ["repo", "instance_id", "base_commit", "repo_language", "dockerhub_tag"]},
+]
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def dump(path, value):
+    path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+
+def download(item, output):
+    dataset, entry = item
+    name = dataset["id"].replace("/", "__") + "__" + Path(entry["path"]).name
+    path = output / "curator_custody" / name
+    url = f'https://huggingface.co/datasets/{dataset["id"]}/resolve/{dataset["revision"]}/{entry["path"]}'
+    started = time.perf_counter()
+    size = 0
+    hasher = hashlib.sha256()
+    request = urllib.request.Request(url, headers={"User-Agent": "ns-public-metadata-projection/2"})
+    with urllib.request.urlopen(request, timeout=60) as response, path.open("xb") as handle:
+        path.chmod(0o600)
+        while chunk := response.read(1024 * 1024):
+            size += len(chunk)
+            if size > entry["size"]:
+                raise ValueError("download exceeds frozen catalog size")
+            hasher.update(chunk)
+            handle.write(chunk)
+    sha256 = hasher.hexdigest()
+    receipt = {"dataset": dataset["id"], "url": url, "file": name, "bytes": size,
+               "sha256": sha256, "elapsed_seconds": time.perf_counter() - started,
+               "expected_size": entry["size"], "expected_sha256": entry["lfs"]["oid"]}
+    dump(output / (name + ".receipt.json"), receipt)
+    if size != entry["size"] or sha256 != entry["lfs"]["oid"]:
+        raise ValueError("download disagrees with pinned Git LFS identity")
+    columns = dataset["columns"]
+    table = pq.read_table(path, columns=columns)
+    if table.column_names != columns:
+        raise ValueError("unexpected projection")
+    rows = table.to_pylist()
+    print(json.dumps({"dataset": dataset["id"], "file": name, "projected_rows": len(rows),
+                      "protected_columns_decoded": False}), flush=True)
+    return dataset["id"], rows
+
+
+def main():
+    output = ROOT / "additional_metadata_v1"
+    output.mkdir()
+    (output / "curator_custody").mkdir(mode=0o700)
+    jobs, catalogs = [], {}
+    for dataset in DATASETS:
+        path = ROOT / "additional_catalogs_v1" / dataset["catalog"]
+        catalogs[str(path)] = digest(path)
+        metadata = json.loads(path.read_text())
+        for entry in metadata["tree"]["projection"]:
+            if Path(entry["path"]).name.startswith(dataset["split"] + "-"):
+                jobs.append((dataset, entry))
+    assert sum(row["size"] for _, row in jobs) < 300 * 1024 * 1024
+    freeze = {"schema": "ns-additional-metadata-freeze/v1", "frozen_at_ns": time.time_ns(),
+              "datasets": DATASETS, "downloads": jobs, "catalog_hashes": catalogs,
+              "script_sha256": digest(Path(__file__)),
+              "selection": "All rows in each pinned test split; do not use upstream filtered split, issue text, hints, patch/test content, model scores or outcomes.",
+              "model_calls": 0, "protected_columns_decoded": False}
+    dump(output / "freeze.json", freeze)
+    shutil.copyfile(__file__, output / Path(__file__).name)
+    collected = {dataset["id"]: [] for dataset in DATASETS}
+    with concurrent.futures.ThreadPoolExecutor(max_workers=3) as pool:
+        for dataset_id, rows in pool.map(lambda item: download(item, output), jobs):
+            collected[dataset_id].extend(rows)
+    original = json.loads((ROOT.parent / "next_stage_candidate_registry.json").read_text())
+    prior = {row["family_id"].removeprefix("upstream:").casefold() for row in original["historical_candidates"]}
+    literature = json.loads((ROOT / "literature_exposure_v1.json").read_text())
+    exposed = set(literature["conservative_family_development_exclusions"])
+    original_owners = {repo.split("/")[0] for repo in prior}
+    summaries = []
+    for dataset in DATASETS:
+        rows = collected[dataset["id"]]
+        ids = [row["instance_id"] for row in rows]
+        assert len(set(ids)) == len(ids), "retain duplicate identifiers for investigation; no silent deduplication"
+        groups = {}
+        for row in rows:
+            groups.setdefault(row["repo"], []).append(row)
+        families = []
+        for repo, members in sorted(groups.items()):
+            dates = sorted(row["created_at"] for row in members if row.get("created_at"))
+            language_values = sorted({row["repo_language"] for row in members if row.get("repo_language")})
+            families.append({"repo": repo, "task_count": len(members),
+                             "exact_original_overlap": repo.casefold() in prior,
+                             "shared_original_owner_name": repo.split("/")[0].casefold() in original_owners,
+                             "literature_exposed_family": repo.casefold() in exposed,
+                             "current_requests_development_family": repo.casefold() == "psf/requests",
+                             "first_created_at": dates[0] if dates else None,
+                             "last_created_at": dates[-1] if dates else None,
+                             "declared_language_values": language_values,
+                             "confirmed_independent": False, "confirmatory_enrolled": False})
+        public_path = output / (dataset["id"].replace("/", "__") + ".public_metadata.json")
+        dump(public_path, sorted(rows, key=lambda row: (row["repo"], row.get("created_at", ""), row["instance_id"])))
+        summary = {"dataset": dataset["id"], "revision": dataset["revision"], "split": dataset["split"],
+                   "candidate_tasks": len(rows), "candidate_repository_names": len(families),
+                   "families": families, "public_metadata_sha256": digest(public_path),
+                   "protected_columns_decoded": False, "provider_calls": 0, "confirmatory_enrolled_families": 0}
+        summaries.append(summary)
+        dump(output / (dataset["id"].replace("/", "__") + ".summary.json"), summary)
+    all_repos = {row["repo"] for summary in summaries for row in summary["families"]}
+    result = {"schema": "ns-additional-candidate-metadata/v1", "datasets": [
+        {key: val for key, val in summary.items() if key != "families"} for summary in summaries],
+        "unique_repository_names_across_catalogs": len(all_repos),
+        "candidate_rows_not_deduplicated_across_datasets": sum(s["candidate_tasks"] for s in summaries),
+        "confirmatory_enrolled_families": 0, "qualified_natural_trajectories": 0,
+        "model_calls": 0, "scorer_calls": 0,
+        "scope": "Candidate discovery; repository alias/ancestry, portfolio exposure, date semantics, source/environment/scorer qualification, and prospective split remain necessary. Public availability does not prove model-training novelty."}
+    dump(output / "summary.json", result)
+    dump(output / "public_artifact_manifest.json", {str(p.relative_to(output)): digest(p)
+         for p in sorted(output.iterdir()) if p.is_file()})
+    print(json.dumps(result, indent=2))
+
+
+if __name__ == "__main__":
+    main()

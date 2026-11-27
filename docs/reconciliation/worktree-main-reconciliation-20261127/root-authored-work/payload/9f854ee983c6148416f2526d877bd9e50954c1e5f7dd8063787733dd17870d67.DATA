@@ -1,0 +1,135 @@
+#!/usr/bin/env python3
+"""Reproduce frozen T4 metrics from observations; no model or native-check reruns."""
+import argparse, collections, hashlib, json, math, statistics
+from pathlib import Path
+HERE = Path(__file__).resolve().parent
+SEEDS = (104729, 130363, 155921)
+CHECKS = ('modal_well_formedness', 'provenance_preservation')
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def digest(value):
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+
+
+# The following two pure functions are copied unchanged from the frozen collector.
+def outcomes(receipt):return {r['check']:r['result'] for r in receipt['checks_executed']}
+
+def summarize(rows):
+ counts=collections.Counter();timing={key:[] for key in ('off','on','rollback')};paired=[]
+ for row in rows:
+  counts['records']+=1
+  if row['C_compile_status']=='measured':counts['C_compiled']+=1
+  if row['formula_count']>0:counts['nonempty_candidates']+=1
+  if row['on']['learned_parameters_consumed']:counts['learned_consumptions']+=1
+  if row['on']['order_changed']:counts['order_changes']+=1
+  if row['outcomes_unchanged']:counts['outcomes_unchanged']+=1
+  if row['rollback_passed']:counts['rollback_passed']+=1
+  if row['on']['all_passed']:counts['all_structural_checks_pass']+=1
+  if row['eligible']:counts['eligible_nonempty_checked_candidates']+=1
+  before,after=row['off']['first_failure_index'],row['on']['first_failure_index']
+  if before is not None and after is not None:
+   counts['records_with_failure']+=1
+   if after<before:counts['first_failure_earlier']+=1
+   elif after>before:counts['first_failure_later']+=1
+   else:counts['first_failure_same_position']+=1
+  for condition in timing:timing[condition].append(row[condition]['wall_seconds'])
+  paired.append(row['on']['wall_seconds']-row['off']['wall_seconds'])
+  for c in ('off','on','rollback'):
+   counts['actual_check_calls']+=len(row[c]['checks_executed'])
+   counts['check_execution_errors']+=sum(r['status']=='error' for r in row[c]['checks_executed'])
+ return {'counts':dict(counts),'wall_seconds':{k:{'sum':sum(v),'mean':statistics.mean(v),'median':statistics.median(v)} for k,v in timing.items()},'mean_paired_on_minus_off_seconds':statistics.mean(paired),'interpretation':'Order is the treatment. Identical outcomes do not show semantic improvement; all checks run, fixed condition order prevents a speedup claim.'}
+
+def validate_row(row, seed):
+    if row['seed'] != seed:
+        raise ValueError('Wrong seed in paired observation')
+    for name in ('off', 'on', 'rollback'):
+        receipt = row[name]
+        calls = receipt['checks_executed']
+        if (receipt['record_id'] != row['record_id'] or (name == 'on' and receipt['seed'] != seed)
+                or receipt['enabled'] != (name == 'on')):
+            raise ValueError('Condition/source identity mismatch')
+        order = [call['check'] for call in calls]
+        if len(order) != 2 or set(order) != set(CHECKS) or order != receipt['check_order']:
+            raise ValueError('Missing, duplicate, or reordered callback receipt')
+        for call in calls:
+            if digest(call['result']) != call['result_sha256']:
+                raise ValueError('Callback result digest mismatch')
+            if not math.isfinite(call['wall_seconds']) or call['wall_seconds'] < 0:
+                raise ValueError('Invalid recorded callback time')
+        first = next((i for i, c in enumerate(calls) if c['status'] != 'passed'), None)
+        if first != receipt['first_failure_index']:
+            raise ValueError('Incorrect first-failure position')
+        if receipt['all_passed'] != all(c['status'] == 'passed' for c in calls):
+            raise ValueError('Acceptance flag contradicts callback outcomes')
+        if receipt['canonical_mutated'] or receipt['checker_mutated'] or not receipt['all_required_checks_executed']:
+            raise ValueError('Unchanged-check contract violation')
+    if row['off']['check_order'] != list(CHECKS) or row['rollback']['check_order'] != list(CHECKS):
+        raise ValueError('Baseline or rollback order differs')
+    same = outcomes(row['off']) == outcomes(row['on']) == outcomes(row['rollback'])
+    restored = row['rollback']['check_order'] == row['off']['check_order'] and outcomes(row['rollback']) == outcomes(row['off'])
+    if not same or not restored or row['outcomes_unchanged'] != same or row['rollback_passed'] != restored:
+        raise ValueError('Changed outcomes or invalid rollback flag')
+    candidates = {row[c]['canonical_sha256'] for c in ('off', 'on', 'rollback')}
+    contracts = {row[c]['checker_contract_sha256'] for c in ('off', 'on', 'rollback')}
+    if len(candidates) != 1 or len(contracts) != 1:
+        raise ValueError('Conditions refer to different candidate/checker identities')
+    eligible = row['C_compile_status'] == 'measured' and row['formula_count'] > 0 and row['on']['all_passed']
+    if row['eligible'] != eligible:
+        raise ValueError('Empty or failed candidate counted as eligible')
+    on = row['on']
+    if on['learned_parameters_consumed']:
+        probabilities = on['native_head']['probabilities']
+        if set(probabilities) != set(CHECKS) or not all(math.isfinite(v) and 0 <= v <= 1 for v in probabilities.values()):
+            raise ValueError('Invalid consumed learned prior')
+        expected_order = sorted(CHECKS, key=lambda c: (-probabilities[c], CHECKS.index(c)))
+        if on['check_order'] != expected_order:
+            raise ValueError('Actual order differs from the recorded learned prior')
+    if on['order_changed'] != (on['check_order'] != row['off']['check_order']):
+        raise ValueError('Order-change flag mismatch')
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=Path('reproduced_guidance.json'))
+    args = parser.parse_args()
+    manifest = json.loads((HERE / 'MANIFEST.json').read_text())
+    for item in manifest['files']:
+        path = (HERE / item['bundle_path']).resolve()
+        if not path.is_relative_to(HERE) or sha(path) != item['bundle_sha256']:
+            raise ValueError('Artifact identity mismatch: ' + item['bundle_path'])
+    recorded = json.loads((HERE / 'summary.json').read_text())
+    if recorded['split'] != 'final':
+        raise ValueError('Expected final cohort')
+    reports = {}
+    all_rows = []
+    source_ids = None
+    for seed in SEEDS:
+        rows = [json.loads(line) for line in (HERE / f'paired_seed{seed}.jsonl').read_text().splitlines()]
+        ids = [row['record_id'] for row in rows]
+        if len(ids) != 1913 or len(set(ids)) != 1913:
+            raise ValueError('Incomplete source population')
+        if source_ids is not None and ids != source_ids:
+            raise ValueError('Seed source populations or order differ')
+        source_ids = ids
+        for row in rows:
+            validate_row(row, seed)
+        reports[str(seed)] = summarize(rows)
+        all_rows.extend(rows)
+    pooled = summarize(all_rows)
+    if reports != recorded['seed_reports'] or pooled != recorded['pooled_descriptive']:
+        raise ValueError('Recomputed metrics differ from the frozen recorded summary')
+    output = {'schema': 'portable-guidance-metric-reproduction/v1', 'split': 'final',
+              'seed_reports': reports, 'pooled_descriptive': pooled,
+              'exact_summary_match': True, 'model_calls': 0, 'native_check_calls': 0,
+              'scope': 'Recomputed metrics and internal receipt consistency; no new semantic judgments or proof checking'}
+    with args.output.open('x') as stream:
+        stream.write(json.dumps(output, indent=2) + '\n')
+    print(json.dumps({'exact_summary_match': True, 'counts': pooled['counts']}))
+
+
+if __name__ == '__main__':
+    main()

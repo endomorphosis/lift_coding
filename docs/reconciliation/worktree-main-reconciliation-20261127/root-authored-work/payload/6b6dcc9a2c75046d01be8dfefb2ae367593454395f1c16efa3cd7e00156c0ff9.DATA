@@ -1,0 +1,76 @@
+"""Native IR for original repository validation-action nomination only."""
+from __future__ import annotations
+from pathlib import Path
+import sys
+from request_contract import EVALS, canonical, sha
+
+WORKSPACE=EVALS.parents[3]
+NATIVE=WORKSPACE/'.worktrees/proof-carrying-procedure-compiler-v1'
+sys.path.insert(0,str(NATIVE))
+from ipfs_accelerate_py.agent_supervisor.proof.formal_verification_contracts import content_identity
+from ipfs_accelerate_py.agent_supervisor.procedure_compiler import contracts as C
+from ipfs_accelerate_py.agent_supervisor.procedure_compiler.procedure_ir import validate_procedure_spec
+
+FAMILY='ORIGINAL_REPOSITORY_VALIDATION_NOMINATION'
+OPERATIONS=(('read','READ_STATE','original-validation-request-reader@1'),
+            ('policy','CHECK_POLICY','original-scorer-binding-checker@1'),
+            ('nominate','SELECT_EVIDENCE','original-current-scorer-nominator@1'),
+            ('postcondition','CHECK_POSTCONDITION','original-nomination-postcondition@1'),
+            ('receipt','EMIT_RECEIPT','original-nomination-receipt-emitter@1'))
+
+def cid(value):return content_identity(value)
+
+def build(validated, adapter_profile_sha256):
+    """No arithmetic candidate/template/authority participates in this IR."""
+    task=validated['task'];scorer=validated['scorer_request'];endpoint=validated['endpoint_task']
+    policy_identity=cid({'schema':'ns-original-nomination-policy/v1','adapter_profile_sha256':adapter_profile_sha256,
+        'objective_record_sha256':scorer['objective_record_sha256'],'objective_text_sha256':scorer['objective_text_sha256'],
+        'configuration_sha256':scorer['configuration_sha256'],'scorer_profile_sha256':scorer['scorer_profile_sha256'],
+        'test_selection_sha256':endpoint['original_test_selection_sha256'],'endpoint_contract_sha256':validated['endpoint_contract_sha256'],
+        'only_action':'execute_current_scorer','scoring_passed':False,'whole_grader_reuse':False})
+    bindings=C.ArtifactBindings(repository_id=task['task_id'],repository_commit=task['base_commit'],
+        tree_id=validated['source_inventory_sha256'],objective_id=scorer['objective_record_sha256'],task_id=task['task_id'],
+        contract_revision='ns-original-validation-nomination/v1',policy_revision=policy_identity,
+        environment_id=endpoint['environment_profile_sha256'])
+    steps=[]
+    for index,(step_id,name,contract) in enumerate(OPERATIONS):
+        inputs={} if name=='READ_STATE' else {'request':'local:request'}
+        outputs={'request':'local:request'} if name=='READ_STATE' else ({'action':'local:action'} if name=='SELECT_EVIDENCE' else {})
+        if name=='CHECK_POSTCONDITION':inputs={'request':'local:request','action':'local:action'}
+        observation_ids=('observation.nomination',) if name=='CHECK_POSTCONDITION' else ()
+        if name=='EMIT_RECEIPT':observation_ids=('receipt.nomination',)
+        steps.append(C.ProcedureStep(step_id=step_id,operation=C.StepOperation(name),operation_contract=contract,
+            input_bindings=inputs,output_bindings=outputs,declared_effect_ids=('effect.nomination-receipt',) if name=='EMIT_RECEIPT' else (('effect.nomination-validation',) if name=='CHECK_POSTCONDITION' else ()),
+            required_authority_ids=('authority.nominate-current-validation',),evidence_outputs=observation_ids,
+            next_step_id=OPERATIONS[index+1][0] if index+1<len(OPERATIONS) else '',timeout_ms=30000,
+            idempotency=C.IdempotencyClass.PURE,retry_policy=C.RetryPolicy(max_attempts=1),failure_transition=C.FailureTransition.ABORT))
+    procedure=C.ProcedureSpec(bindings=bindings,name='original-repository-current-validation-action',version=C.ProcedureVersion(1,0,0),
+        task_family_id=FAMILY,entry_step_id='read',parameters=(C.ProcedureParameter('request-cid',C.ValueType.CID),),
+        locals=(C.ProcedureLocal('request',C.ValueType.STRUCTURED),C.ProcedureLocal('action',C.ValueType.STRUCTURED)),
+        preconditions=(C.ProcedurePrecondition('current-public-bindings','binding:tree_id',C.ConditionOperator.CURRENT,
+            evidence_producer='original-source-observer@1',evidence_type='original-source-request-binding@1'),),
+        declared_reads=('.validation/request.json',),declared_effects=(C.ProcedureEffect('effect.nomination-receipt',C.EffectClass.RECEIPT_EMIT),C.ProcedureEffect('effect.nomination-validation',C.EffectClass.VALIDATION)),
+        steps=tuple(steps),postconditions=(C.ProcedurePostcondition('current-scorer-nominated','local:action',C.ConditionOperator.ADMITTED,
+            evidence_producer='original-nomination-postcondition@1',evidence_type='current-scorer-nomination@1'),),
+        observations=(C.ProcedureObservation('observation.nomination','original-nomination-postcondition@1','local:action',
+            C.ConditionOperator.ADMITTED,evidence_type='current-scorer-nomination@1'),),
+        validation=C.ProcedureValidationPlan(required_step_ids=('postcondition',),required_observation_ids=('observation.nomination',),
+            required_test_contracts=('original-nomination-input-output@1',),required_proof_contracts=('original-nomination-authority-boundary@1',)),
+        authority=C.ProcedureAuthorityEnvelope(requirement_ids=('authority.nominate-current-validation',),required_capability_ids=('capability.validation-nomination',),
+            allowed_operations=tuple(C.StepOperation(name) for _,name,_ in OPERATIONS),risk_ceiling=C.RiskClass.OBSERVATION_ONLY,
+            authority_policy_revision=policy_identity,confirmation_required=False),
+        resources=C.ProcedureResourceEnvelope(wall_time_ms=60000,cpu_time_ms=60000,memory_bytes=128000000,disk_bytes=0,
+            model_token_limit=0,model_call_limit=0,subprocess_limit=0,network_request_limit=0),
+        terminal_step_ids=('receipt',),scope_paths=('.validation',),provenance_cids=(cid({'corpus_sha256':validated['corpus_sha256'],
+            'objective_record_sha256':scorer['objective_record_sha256'],'test_selection_sha256':endpoint['original_test_selection_sha256']}),))
+    validate_procedure_spec(procedure)
+    return procedure
+
+def expected_action(request):
+    return {'schema':'ns-original-validation-action/v1','action':'execute_current_scorer',
+        'validation_request_sha256':sha(canonical(request)),'scorer_request':request['scorer_request'],
+        'scorer_request_sha256':sha(canonical(request['scorer_request'])),'trajectory_id':request['trajectory_id'],
+        'arm':request['arm'],'cache_profile':request['cache_profile'],'cache_namespace':request['cache_namespace'],
+        'operation_id':request['operation_id'],'expected_publication_parent':request['expected_publication_parent'],
+        'scoring_passed':False,'publication_authority':False,'whole_grader_reused':False,
+        'call_reuse_disposition':'requires_current_native_lifecycle_admission_inside_scorer'}

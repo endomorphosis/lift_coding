@@ -1,0 +1,44 @@
+# Native symbolic routing development comparison
+
+On four constructed development problems, both arms passed all four independent execution oracles. The model-first arm made four requests and used 4,865 provider-reported total tokens; the new symbolic-first evaluation caller made two requests and used 2,430 tokens, a 50.05% reduction on this suite. This is a small mechanism demonstration, not an estimate for general software work or the complete system.
+
+| Case | Model-first tokens | Symbolic-first tokens | Symbolic-first action | Independent result, each arm |
+|---|---:|---:|---|---|
+| Unobserved connectivity success | 1,105 | 0 | IPA finding → fixed-grammar CEGIS repair → visible execution → native deterministic route | Pass |
+| Swallowed backend error | 1,177 | 0 | IPA finding → fixed-grammar CEGIS repair → visible execution → native deterministic route | Pass |
+| Reversed interval clamp | 1,263 | 1,101 | No supported finding; native route dispatched the common model | Pass |
+| Stable-order deduplication | 1,320 | 1,329 | No supported finding; native route dispatched the common model | Pass |
+| **Total** | **4,865** | **2,430** | **Four vs. two actual requests** | **4/4 vs. 4/4** |
+
+The two avoided requests account for 2,282 baseline tokens. The additional net 153-token difference comes from variation between separate residual responses. It must not be attributed to another symbolic mechanism. The residual prompts are identical across arms for each case. The system does not receive the independent audit programs.
+
+## What actually ran
+
+`freeze.json` binds the cases, profile, caller, common transport, native source files and Docker image before outcomes. `run_eval.py` imports the current native `analyze_python_source`, `run_bounded_cegis`, and `route_model`. It applies the computed repaired source; no reference patch or hardcoded expected replacement is supplied to CEGIS. A public execution check establishes whether the candidate has discharged the declared bounded behavior, then the native route determines the caller's next action. The functional cases demonstrate a real neural residual with actual downstream success rather than a mocked invocation.
+
+The native CEGIS module's internal proof gate is a hermetic marker/hash check. It is **not** counted as a theorem proof: `available_proofs=0` throughout. Deterministic routing uses zero unresolved obligations only after the public behavioral check succeeds. This is a new development caller integrating existing modules, not evidence that the production daemon already consumes CEGIS this way. Routing tier selection is not evaluated: all requested neural work uses the same frozen model profile.
+
+Candidate execution uses a pinned `python:3.12-slim` image by content digest, no network or mounts, read-only filesystem, an unprivileged user, and resource limits. The candidate Python subset excludes imports, private names/attributes, classes, decorators and global/nonlocal declarations. Both arms use the same independent audit. The clamp audit checks a finite integer grid and invalid intervals; the deduplication audit checks multiple hashable types, input preservation and list identity; the supported cases check observable error/status behavior. The preceding identical-case `../routing/oracle_sensitivity.json` records that both public and audit validators reject every original program. These bounded checks do not prove arbitrary-input correctness.
+
+## Metering and scope
+
+Six response receipts in `results/provider/*/result.json` contain complete API usage. `metering_audit.json` retains every raw usage object and sums the provider's total, avoiding assumptions about whether reasoning is included in completion tokens.
+
+| API field | Model-first | Symbolic-first |
+|---|---:|---:|
+| Input tokens | 3,430 | 1,703 |
+| Completion tokens as exposed | 194 | 108 |
+| Reasoning tokens as exposed | 1,241 | 619 |
+| Cached input tokens (subset) | 2,048 | 1,280 |
+| Provider total tokens | 4,865 | 2,430 |
+| API-reported charge, USD | 0.00421532 | 0.00198832 |
+
+The workflow has deterministic objective mapping, analysis, synthesis, validation and routing; only repair proposals use a model. There are no model-assisted setup, critic, planning, expansion or retry calls in this profile. Human/agent experiment construction and software implementation effort are outside this runtime measurement. Provider caches were not experimentally controlled; exposed cached-input counts are preserved. Charges are API-reported request charges, not separate account settlement. Full host compute, end-to-end latency, procedure acquisition, long-horizon amortization and persistent-state benefits were not evaluated.
+
+The initial `../routing/` attempt is retained: its primary credential was expired, all six intended model effects stopped before any POST, and no comparison was established. After ordinary CLI credential refresh, this fresh generation reran the same frozen cases with a new output ledger. It did not retry any ambiguous effect or revise cases based on model outcomes.
+
+These four intentionally chosen families and one observation per arm provide no defensible general-population uncertainty interval. Required next work includes held-out families and task sequences, quality/budget curves, realistic unknown frontiers, persistence/recovery, procedure controls, validation reuse and integrated ablations. Keep this development result separate from the historical cold additive-context A/B study.
+
+## Reproduction
+
+From the repository root, `python3 papers/revisions/neurosymbolic_system_scope_20260914/evals/routing_v2/run_eval.py` checks frozen source bindings and reads existing terminal results without sending duplicate requests. A new independent repetition requires a newly frozen directory and budget; existing provider effect identities are never reused. `summary.json` is machine readable. An observed reduction here does not close the broader evaluation gap.

@@ -1,0 +1,49 @@
+# Original four-family prospective analysis
+
+`metrics.py` implements fixed-cohort arithmetic for the original 32 primary and
+28 one-factor trajectories. `numerical_contract_v1.json` preserves its estimands
+and accounting rules before model outcomes. This is analysis preparation, not
+an executed repository study or qualified live-receipt adapter.
+
+`qualification-v1` passes 44 checks, including 20 malformed-export rejections.
+All input outcomes, receipts, durations and calls in these controls are explicitly
+synthetic. They are never paper repair observations. The retained source archive
+and fixture permit exact reproduction without calling any model or grader.
+
+The engine counts six required event outcomes per trajectory and separately
+meters horizon0 setup/prime. Initial repair, eventual repair, final repair and
+complete operational success are distinct. Every required obligation must match
+its frozen inventory. Unknown independent plan coverage cannot pass, and an
+unreached stale/recovery boundary cannot pass vacuously. A later successful repair
+does not rewrite the initial failure. Zero-success ratios remain undefined.
+
+Provider totals are authoritative. Input/output/reasoning/cache fields are not
+summed to synthesize totals. Unknown possible dispatch/usage remains unknown;
+known subtotals do not replace it. Exact repeated receipt aliases are counted
+once, while orphan costs, duplicate authoritative records and cross-event
+misattribution reject. Unique enclosing invocation intervals include interrupted
+and resumed work; nested stage clocks are separate breakdowns. Host and container
+CPU remain separate, and absent measurements are not zeroed.
+
+Every primary B/C/D profile compares to A at the same cache setting. Each warm
+one-factor control compares to its corresponding full B/D profile. The reported
+fraction is `1 - treatment_tokens / baseline_tokens`; for component controls the
+treatment is the disabled/additive/template variant, so positive does not mean
+that the removed component helped. Unconditional spending differences remain
+visible even if quality fails. Conditional descriptive reduction requires every
+pair to complete the trajectory with an independently valid initial repair.
+No population noninferiority follows from that observed gate.
+
+The exact family bootstrap uses 256 four-family resamples (four two-family draws
+for the first tranche), preserving all dependent event/cache observations in a
+family. It is descriptive development uncertainty, not a power calculation or
+360 independent tasks. Observed cumulative break-even includes prime costs and
+requires non-higher token expenditure at every remaining measured horizon under
+the complete-quality gate; no future horizon is extrapolated.
+
+Before live use, an independently qualified file adapter must bind this engine
+to the actual caller profile and original receipts. The current prospective
+caller interface is `original_caller_output_contract_v2.json`. `make_schedule`
+constructs identities/horizons from corpus v3, but actual required obligation IDs
+must come from the frozen caller. The fixture's synthetic obligation must never
+be used as that inventory. No model dispatch is enabled by this preparation.

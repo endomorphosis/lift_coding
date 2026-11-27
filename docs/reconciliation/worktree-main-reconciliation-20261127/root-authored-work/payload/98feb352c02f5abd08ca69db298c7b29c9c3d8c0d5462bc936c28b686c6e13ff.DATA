@@ -1,0 +1,66 @@
+# Incremental reuse evaluation, 2026-09-14
+
+This development increment supplies a positive, measured lifecycle reuse example that was missing from the historical evaluation. It does **not** establish production reuse, generic Python dependency completeness, a false-admission rate, or whole-system token savings.
+
+The retained result is `runs/development-v6/`. `protocol.json` freezes 14 cases before outcomes. `adapter.py` is a **new evaluation-only pytest integration** using unmodified native `TestProofCache`, `TestPassReceipt`, and `RunnerPassAttestation` implementations. It is not the default production plugin. Normal package imports succeeded without module stubs, monkeypatches, injected success callbacks, or fabricated cold outcomes.
+
+## What actually executed
+
+The constructed test computes a deterministic integer reduction through an imported Python dependency and checks it against a period-based arithmetic oracle. Its fixture reads a data file, configuration, and a declared call environment variable. The fixture performs observable setup and teardown effects on every invocation.
+
+One real cold pytest subprocess executes setup, the test body, and teardown. Only after all three reports pass does the parent controller issue a native Ed25519 runner attestation over the actual receipt and execution key. The private signing key exists only in controller memory; warm processes receive the public policy and signed artifact. The verifier checks the signature and locally pinned policy. A deliberately corrupted signature, with its outer digest updated, actually reaches that verifier and is rejected.
+
+The adapter's supported profile is deliberately narrow: exact enrollment of the three reviewed Python files, every project file's content hash, immutable observed fixture arguments, declared call environment, Python/pytest versions, and adapter bytes. Native contract fields named `static_trace_root_cid`, `runtime_trace_root_cid`, and `completeness_receipt_cid` describe **this explicitly bounded source/state snapshot policy**. They are not outputs of the generic production runtime dependency tracer. This distinction is necessary because a cryptographic signature authenticates a runner's receipt; it does not prove that arbitrary Python programs have complete dependency traces.
+
+Warm admission happens after real setup and suppresses only the call body. Pytest still performs teardown and determines the whole item's outcome. The teardown-only failure control is deliberately excluded from *call* identity because its behavior always executes; it must never be reused as a whole-item success. The failing-teardown case retains the same valid call key and signature, reuses the call, executes teardown, and exits with failure. Setup failure never reaches the call decision.
+
+Each case also runs in a separate cold pytest process using the same current files and relevant environment. Those cold runs are independent of the reuse lookup, but they use the same constructed test oracle. They are experimental audit overhead, not deployment work. No hidden real-repository task scorer is claimed here.
+
+## Retained results
+
+All 14 prespecified development cases matched their required call action and whole-item cold outcome. There were two admitted call reuses in the case matrix: unchanged/pass and unchanged-call/failing-teardown. Both preserved their required lifecycle effects. All source, fixture, data, configuration, environment, lock, missing-candidate, signature, and revocation controls either executed or never reached the call. The matrix had no warm-pass/cold-fail disagreement; this is a constructed control result, not an estimated false-reuse rate.
+
+Five additional warm/cold pairs alternated arm order. Both arms passed all five cases and each performed five setup effects and five teardown effects.
+
+| Measurement | Cold | Warm |
+|---|---:|---:|
+| Actual test-body executions | 5 | 0 |
+| Total subprocess wall seconds | 1.281302 | 1.240342 |
+| Median subprocess wall seconds | 0.259604 | 0.243431 |
+| Sum of pytest call-phase seconds, including lookup | 0.131343 | 0.102954 |
+
+The 3.20% aggregate wall difference is descriptive and too small, with this workload and sample, to establish a useful speedup. All five pairs, order, raw logs, phase durations, and process timings are retained. Cold priming took 0.256051 seconds; receipt issuance took another 0.005823 seconds. The five warm executions do not repay this priming/issuance cost when it is charged as additional setup. These data demonstrate avoided test-body execution, not an amortized wall-time benefit. Earlier development-v5 measured a 0.45% wall difference before the key-revocation correction, which illustrates timing variability; v6 was selected by implementation correctness, not favorable timing.
+
+There were zero model calls. This evaluation says nothing about token savings: it measures validation work, and does not assign synthetic token credit to omitted arithmetic loops.
+
+## Existing production path and historical evidence
+
+The unmodified default production plugin was separately invoked in actual `write` and `readwrite` modes with an observation-only plugin. It executed the body once in each process and reported zero verified/skipped items and zero cache bytes written. Groth16 was explicitly disabled in this fallback probe; it is not a positive native proof test. A separate discovery call found the bundled ARM Groth16 binary and **missing v5 proving/verifying keys** at standard paths. No build, key generation, installation, or audit-event weakening was performed.
+
+Historical `.worktrees/vericodegen-neurosymbolic_supervision-2026/papers/completion/neurosymbolic_supervision/qualification/reuse_analysis.json` remains unchanged. It records the NS-011 mocked-verifier population's false reuse of `stale_key_presented_without_rebind` (1/26 all attempted), and the corrected NS-027 decision `enforced_full_cold_removal` with no reuse witness. The new receipt profile's real signature verification and actual lifecycle processes address part of that qualification deficit. They do not retrospectively rehabilitate those old results or authorize the final repair study to omit validation.
+
+## Reproduce and inspect
+
+From the workspace root, use a fresh run ID (existing runs are never overwritten):
+
+```sh
+.venv/bin/python papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/run.py --run-id development-next
+.venv/bin/python papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/validate.py papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-next
+```
+
+`validate.py` passed 80 checks for development-v6. It rechecks frozen inputs, actual phase/body/effect observations, cold/warm actions and outcomes, baseline signature verification, corrupted-signature rejection, exact-key revocation in the native trust policy, and enabled native probe modes. This independently written artifact checker does not independently prove the closed profile's semantic completeness.
+
+Primary evidence is `runs/development-v6/{freeze,profile,cases,timing,summary,independent_validation,native_probe,native_capability,source_imports}.json`. Each subprocess retains its command, environment, stdout/stderr, observation, and timing. Source imports name actual external paths and SHA-256 hashes; the external accelerate HEAD was `5d79bbf8bb61e027fbda76920580cb9d4fd919c1`. Unrelated pre-existing modifications in that external checkout were not edited. Applicable AGENTS files were searched; none applied to this evaluation directory or the imported accelerate source.
+
+All development iterations remain present:
+
+- v1: pre-invocation API property error; no pytest outcome occurred.
+- v2: actual cold priming failed because a scalar was passed to a native mapping-only CID utility; raw failure retained.
+- v3: positive outcomes existed, but lifecycle marker parsing undercounted pytest-prefixed teardown markers, and misspelled native modes disabled the native probe. It is superseded, with review notes retained.
+- v4: corrected lifecycle results; native observation failed when serializing metrics and native git discovery traversed the enclosing repository. It is superseded. v5 fixes the observer and gives the native probe an isolated committed project.
+- v5: complete observations and independent artifact validation, but review found that the case named key revocation tested issuer revocation. Results and correction are retained.
+- v6: actual signer-key revocation through `RunnerTrustPolicy.revoked_key_cids` and the updated pinned policy; retained final development result with 80 artifact checks passing.
+
+## Remaining required work
+
+The broader claim remains open. A production integration needs an admitted native profile or explicit adoption of a trusted-runner profile, general dependency/fixture/hook/environment invalidation, side-effect handling, independent source custody, and caller-level consumption in the actual supervision runner. Efficacy then requires held-out real repository tasks, matched cold and warm validation, sufficient independent workloads for uncertainty, and startup/amortization measurements. Model token savings require separate end-to-end provider receipts and useful task progress; no percentage can be inferred from this increment.

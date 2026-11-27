@@ -1,0 +1,92 @@
+"""Project audited sanitized endpoint admission and report; no new execution."""
+import hashlib,json,time
+from pathlib import Path
+H=Path(__file__).resolve().parent;E=H/'candidate_endpoint_v1'
+def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def read(path):return json.loads(Path(path).read_text())
+def digest(x):return hashlib.sha256(json.dumps(x,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+def dump(path,x):
+ with Path(path).open('x') as f:f.write(json.dumps(x,sort_keys=True,indent=2)+'\n')
+def main():
+ audit=read(H/'audit_v1/summary.json');profile=read(E/'profile.json');summary=read(E/'qualification_v2/summary.json');assert audit['qualified'] and summary['qualified']
+ assert audit['endpoint_profile_sha256']==sha(E/'profile.json') and audit['endpoint_summary_sha256']==sha(E/'qualification_v2/summary.json')
+ env={'image_id':profile['image_id'],'native_and_public_resources':profile['execution_identity'],'lifecycle':profile['lifecycle']}
+ declaration=read(H/'endpoint_declaration_pending_v1.json');declaration.update(schema='ns-original-scorer-endpoint-declaration/v2',created_at_ns=time.time_ns(),status='qualified',callable_endpoint=str(E/'service_v1.py'),entrypoint_argv=['/usr/bin/python3','-B',str(E/'service_v1.py')],input_transport='One UTF-8 JSON object on stdin; complete source directory remains caller-owned and is copied into private scorer custody before execution.',output_transport='One sanitized JSON object on stdout; diagnostic/source/test artifacts remain curator-owned.',scorer_profile_path=str(E/'profile.json'),scorer_profile_sha256=sha(E/'profile.json'),qualified_task_ids=list(profile['tasks']),pending_gates=[],environment_profile=env,environment_profile_sha256=digest(env),inventory_codec_path=str(H/'public_bases_v1/inventory_codec_v1.py'),inventory_codec_sha256=sha(H/'public_bases_v1/inventory_codec_v1.py'),source_index_path=str(H/'public_bases_v1/admission.json'),source_index_sha256=sha(H/'public_bases_v1/admission.json'),corpus_sha256=profile['corpus_sha256'],public_objectives_sha256=profile['public_objectives_sha256'],qualified_for='Original four development tasks, both frozen configurations, complete immutable-base source transport, original criteria plus corrected public objective conjunction. No model, trajectory, publication, adversarial-oracle or reuse qualification.',qualification_summary_sha256=sha(E/'qualification_v2/summary.json'),independent_audit_sha256=sha(H/'audit_v1/summary.json'))
+ declaration['lifecycle']=profile['lifecycle']
+ declaration['response_contract']={'status_values':['completed','rejected','infrastructure_unresolved'],'passed':'Boolean; true only when original native acceptance, every exposed objective example and exact configured API probe all pass with complete process/source checks.','quality_fields':['original_native_passed','native_classification','visible_collected','visible_passed','visible_skipped','hidden_designated','hidden_completed','hidden_passed','hidden_failed','hidden_selection_completed','public_objective_cases','public_objective_passed','public_configuration_executed','public_configuration_passed'],'binding_fields':['request_sha256','scorer_profile_sha256','candidate_sha256','configuration_sha256','native_host_receipt_sha256','public_receipt_sha256','original_visible_observation_sha256','original_hidden_observation_sha256'],'timing_fields':{'native_score_elapsed_seconds':'Original adapter phase including source/custody preparation, container execution, checks and cleanup; nested inside service.','public_probe_elapsed_seconds':'Separate public objective/configuration container execution and cleanup; disjoint from native phase, nested inside service.','score_phases_outer_elapsed_seconds':'Encloses native/public phases and intervening checks.','service_outer_elapsed_seconds':'Full service invocation after process startup; encloses all previous intervals. Do not sum nested fields.'},'counters':['native_grader_calls','public_probe_processes','provider_calls'],'infrastructure_exception_counters':'A partial execution returns native_dispatch_recorded/public_dispatch_recorded flags. Account retained intents even without complete phase receipts; never infer zero cost from missing duration.','rejections':'Closed sanitized rejection_code, no test/candidate bodies. Unique evaluation ID is consumed by first received request; duplicates are rejected without overwriting the first receipt.','lifecycle_reuse':'whole_grader_reuse=false and validation_call_reuse=false; current profile has no optional hook.'}
+ declaration['tasks']=[]
+ old={r['task_id']:r for r in read(H/'endpoint_declaration_pending_v1.json')['tasks']}
+ for uid,task in profile['tasks'].items():
+  row={key:value for key,value in task.items() if key not in ['public_examples','private_manifest_sha256','configurations']};row.update(endpoint_qualified=True,original_native_control_qualified=True,native_environment_profile_sha256=old[uid]['environment_profile_sha256'],environment_profile_sha256=digest(env),configuration_sha256s=list(task['configurations']))
+  declaration['tasks'].append(row)
+ dump(H/'endpoint_declaration_v2.json',declaration)
+ admission={'schema':'ns-original-candidate-scorer-admission/v1','qualified':True,'created_at_ns':time.time_ns(),'publisher_sha256':sha(Path(__file__)),'entrypoint':str(E/'service_v1.py'),'entrypoint_sha256':sha(E/'service_v1.py'),'profile_sha256':sha(E/'profile.json'),'endpoint_declaration_sha256':sha(H/'endpoint_declaration_v2.json'),'qualification_summary_sha256':sha(E/'qualification_v2/summary.json'),'independent_audit_sha256':sha(H/'audit_v1/summary.json'),'source_bindings':profile['source_bindings'],'task_ids':list(profile['tasks']),'configurations':8,'native_source_configuration_controls':16,'predispatch_negative_controls':14,'independent_checks':audit['checks'],'native_selection_unchanged':True,'whole_grader_cache_allowed':False,'call_reuse_qualified':False,'publication_qualified':False,'model_trajectory_qualified':False,'provider_calls':0}
+ dump(E/'admission_v1.json',admission)
+ results=[]
+ labels=read(E/'configuration_label_map_v1.json')['rows'];index={(r['task_id'],r['configuration_sha256']):r['corpus_configuration_index'] for r in labels}
+ for row in summary['rows']:
+  if row['kind']!='native':continue
+  response=row['response'];results.append({'task_id':response['task_id'],'corpus_configuration_index':index[(response['task_id'],response['configuration_sha256'])],'configuration_sha256':response['configuration_sha256'],'control':'unfixed' if row['expected'] is False else 'unchanged_reference_source_projection','evaluation_id':response['evaluation_id'],'status':response['status'],'passed':response['passed'],'visible_passed':response['visible_passed'],'visible_collected':response['visible_collected'],'hidden_passed':response['hidden_passed'],'hidden_designated':response['hidden_designated'],'public_objective_passed':response['public_objective_passed'],'public_objective_cases':response['public_objective_cases'],'public_configuration_passed':response['public_configuration_passed'],'request_sha256':response['request_sha256'],'canonical_response_sha256':row['response_sha256'],'native_receipt_sha256':response['native_host_receipt_sha256'],'public_receipt_sha256':response['public_receipt_sha256'],'native_phase_seconds':response['native_score_elapsed_seconds'],'public_phase_seconds':response['public_probe_elapsed_seconds'],'service_outer_seconds':response['service_outer_elapsed_seconds'],'invocation_outer_seconds':row['outer_elapsed_seconds']})
+ dump(E/'quality_cost_projection_v1.json',{'schema':'ns-original-endpoint-quality-cost-projection/v1','source_summary_sha256':sha(E/'qualification_v2/summary.json'),'configuration_label_map_sha256':sha(E/'configuration_label_map_v1.json'),'rows':sorted(results,key=lambda r:(r['task_id'],r['corpus_configuration_index'],r['control'])),'timing':audit['timing'],'native_grader_calls':16,'public_probe_processes':16,'provider_calls':0,'all_source_control_costs_included':True,'savings_or_model_performance_claim':False})
+ lines=[
+ '# Original four-family acceptance and candidate endpoint',
+ '',
+ 'The original native development acceptance criteria are retained and executable for XMLtodict, Pyparsing, OAuthlib and Click. Eight standalone source controls qualified. The separately frozen candidate endpoint then qualified all 16 combinations of four tasks, two source controls and two exact API configurations, plus 14 rejection controls. An independent read-only audit passed 710 checks over 7,552 private evidence files. No model/provider calls were made.',
+ '',
+ '| Family | Complete source entries | Original visible suite | Designated hidden: base → reference | Exposed objectives: base → reference |',
+ '|---|---:|---:|---:|---:|',
+ '| XMLtodict | 16 | 34/34 | 0/1 → 1/1 | 2/4 → 4/4 |',
+ '| Pyparsing | 287 | 2,044/2,044 | 2/3 → 3/3 | 8/9 → 9/9 |',
+ '| OAuthlib | 199 | 3/3 | 0/1 → 1/1 | 1/4 → 4/4 under prospective v3 |',
+ '| Click | 145 | 113/113 | 0/5 → 5/5 | 2/4 → 4/4 |',
+ '',
+ 'Every reference projection passed the original criterion, all exposed examples, and each configured API probe. Each unchanged base failed joint acceptance. A passing control is not a model success or an independent family replication. Pyparsing already passes two of its three designated hidden cases before repair; calling all three baseline failures would be incorrect.',
+ '',
+ '## Prospective OAuth public correction',
+ '',
+ 'The previously authored v2 combined-Server example required exact advertised response keys code/token/none. Its unchanged saved reference passed 3/4 public examples while passing original native acceptance. A separate curator-authored candidate preserving all configured keys passed that superseded public predicate but failed the unchanged original hidden criterion. Both observations remain retained; they do not establish that all possible implementations are logically incompatible.',
+ '',
+ 'Independent review used only pristine public source/documentation and official specifications. The public Server exposes none routing, but a constructor with an abstract RequestValidator does not establish that every internal routing key must appear in default discovery metadata. RFC 8414 describes supported server response types, while the OAuth response-type specification defines none; neither supplies that library constructor equality guarantee. [RFC 8414 §2](https://www.rfc-editor.org/rfc/rfc8414.html#section-2), [OAuth response type none](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#none).',
+ '',
+ 'Root authorized prospective v3 using that public semantic review: actual endpoint construction and HTTP 200, a nonempty list of nonempty string response types drawn from the configured public keys for combined Server, and exact preservation of explicitly supplied metadata claims. The prior exact-key predicate remains an unqualified diagnostic. Two new public-only controls produced base 1/4 and unchanged reference 4/4; original native acceptance was not revised. The v3 objective text/record and driver are separately frozen, and corpus v3 binds the new authority.',
+ '',
+ '## Source, execution and interface',
+ '',
+ 'The endpoint accepts a complete caller-sealed source directory and exact original-adapter inventory digest, with explicit task/base/objective text/objective record/configuration/profile identities and a unique evaluation ID. It verifies all source entries and copies the source into private custody before hidden material is loaded. Cumulative source content is compared to the immutable original base, including reversions. Raw base permissions are preserved; path population, symlink targets, file types and permissions cannot change, and only the public one-file repair surface per task can change content, within the original 16 KiB cumulative patch bound.',
+ '',
+ 'The saved full reference patches contain test and, for Click, ancillary edits. Controls use explicit public repair-surface projections, independently proven byte-equivalent to the full saved reference across the entire authorized implementation surface. This is not full-reference-patch transport or general arbitrary-file editing. All remaining public files are inventoried and immutable. New public base materializations correct only archive permissions from checkout 0664/0775 to scorer 0644/0755; all content hashes, path populations and symlink targets remain unchanged, and old checkouts remain retained.',
+ '',
+ 'The original native Docker image is pinned on unix:///var/run/docker.sock; source, driver and custody mounts are read-only, networking is disabled, and execution uses one CPU, 2 GiB and 32 PIDs. The original visible suite and designated hidden selection are unchanged. Original historical behavior can omit hidden execution after a visible regression. Each actual endpoint control completed both populations. A separate container executes every exposed example and the exact API configuration. CALL reuse and whole-grader caching are absent. This is honest-process/custody qualification, not an adversarial oracle-integrity proof.',
+ '',
+ 'The rejected controls cover wrong base, objective record, objective text, configuration, profile, expected tree, task, operation, extra request field, file mode, added test path, changed original public test, escaping symlink, and duplicate evaluation ID. The duplicate check is included in the 14 total because there are six identity-field controls. Every rejection preceded native/public process dispatch. Unique IDs and retained request/intents/receipts support later caller accounting.',
+ '',
+ 'Configuration control filenames enumerate sorted profile-digest order, which reverses the corpus index in this freeze. configuration_label_map_v1.json and quality_cost_projection_v1.json explicitly map each exact digest to the authoritative corpus configuration index; no bytes or executions were relabeled silently.',
+ '',
+ '## Costs and retained failures',
+ '',
+ f"The eight standalone native controls consumed {audit['timing']['standalone_eight_native_outer_seconds']:.6f} measured outer seconds. The 16 endpoint controls consumed {audit['timing']['endpoint_sixteen_native_inner_seconds']:.6f} seconds in the native adapter phase and {audit['timing']['endpoint_sixteen_public_inner_seconds']:.6f} seconds in the disjoint public phase. Both are nested within {audit['timing']['endpoint_sixteen_service_outer_seconds']:.6f} service seconds. All 30 qualification invocations, including 14 negatives, consumed {audit['timing']['endpoint_thirty_invocation_outer_seconds']:.6f} measured outer seconds. Native phase time includes source/custody preparation, execution and cleanup; it is not pure container runtime. Audit/archive overhead is separate. Do not add nested intervals.",
+ '',
+ 'Retained setup failures include the initial objective-record/text hash confusion, archive/patch permission mismatches under umask 077, eight failed original public-driver launches at an insufficiently deep mount path, a supplemental public inventory-ordering assertion and its report-writer failure, and the endpoint qualification-v1 source/output directory collision after nine successful rejection calls and zero grader/public process dispatches. The corrected v2 qualification wrapper changed only fixture output naming; service/profile bytes stayed fixed. No failed run was overwritten or automatically retried until passing.',
+ '',
+ 'Across this original acceptance work, 25 native grader calls were made: eight standalone, one failed supplemental candidate, and 16 endpoint controls. Public objective/configuration process attempts total 36: eight failed initial public launches, eight corrected unchanged-predicate launches, two supplemental public attempts, two prospective OAuth v3 controls, and 16 endpoint public processes. One supplemental native attempt and its failed public probe lost in-memory elapsed durations before the wrapper wrote them; their durations remain null/unknown, never zero. This missing historical measurement prevents a complete wall-time total for all attempts.',
+ '',
+ 'No token-savings result follows from these controls. They establish a usable original-family scorer for subsequent six-event model/controller, cold/warm cache, configuration-change, publication/recovery and one-factor evaluations. Native fixture-bearing validation reuse and generic publication are separate qualification tasks.',
+ '',
+ '## Authoritative artifacts',
+ '',
+ '- [Qualified endpoint declaration](endpoint_declaration_v2.json)',
+ '- [Endpoint admission](candidate_endpoint_v1/admission_v1.json)',
+ '- [Independent audit](audit_v1/summary.json)',
+ '- [Quality/cost projection](candidate_endpoint_v1/quality_cost_projection_v1.json)',
+ '- [Corrected public objectives](public_contract_v3/objectives.json)',
+ '- [OAuth v3 controls](oauth_public_controls_v3/summary.json)',
+ '- [Public semantic review](oauth_public_semantics_v1/REPORT.md)',
+ '- [Original native controls](native_controls_v1/summary.json)',
+ '- [Retained v2 public mismatch](public_contract_controls_v2/summary.json)',
+ '- [Retained supplemental native attempt](oauth_supplement_v1/retained_attempt_v1.json)',
+ '- [Public base source index](public_bases_v1/admission.json)',
+ ''
+ ]
+ (H/'ACCEPTANCE_REPORT.md').write_text('\n'.join(lines))
+ print(json.dumps({'admission_sha256':sha(E/'admission_v1.json'),'declaration_sha256':sha(H/'endpoint_declaration_v2.json'),'audit_sha256':sha(H/'audit_v1/summary.json'),'quality_cost_projection_sha256':sha(E/'quality_cost_projection_v1.json'),'report_sha256':sha(H/'ACCEPTANCE_REPORT.md')}))
+if __name__=='__main__':main()

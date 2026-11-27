@@ -1,0 +1,39 @@
+{
+  "recorded_at": "2026-11-10T22:14:11.822186+00:00",
+  "groups": [
+    {
+      "name": "pruning-semantic-pack-retained-v02",
+      "original_root": "/tmp/pytest-of-barberb/legal-ir-pruning-semantic-pack-retained-20261110-v02/attempt/pytest",
+      "files": 2685,
+      "original_file_bytes": 9217102,
+      "archive_bytes": 3404740,
+      "manifest_bytes": 1300576,
+      "net_file_bytes_freed": 4510516,
+      "archive_sha256": "2b839b92f356997cafb5804ff807c9b20ea1348f4067d19bf36c582fbb936a70",
+      "manifest_sha256": "7b363ebfec16c723ea4ef3a4e9a018452111001c556de799ec205a0941361fc8",
+      "locator": "/tmp/pytest-of-barberb/legal-ir-pruning-semantic-pack-retained-20261110-v02/attempt/pytest/ARCHIVE.json",
+      "preserved_nonfixture_files": 22,
+      "ledger_record_sha256": "c4172a5356157286602d4ec6b67b56713ad18343825d3a3d1a65d2303864a7a9"
+    },
+    {
+      "name": "pruning-inline-evidence-retained-v01",
+      "original_root": "/tmp/pytest-of-barberb/legal-ir-pruning-inline-evidence-retained-20261110-v01/attempt/pytest",
+      "files": 2508,
+      "original_file_bytes": 8672296,
+      "archive_bytes": 3188852,
+      "manifest_bytes": 1213554,
+      "net_file_bytes_freed": 4268614,
+      "archive_sha256": "a46d2ae4f9c935bf803c1efedf6103fcf76ec69cd127d7043907e9f8a68a88d1",
+      "manifest_sha256": "0d35a7f999ae04c60d769edc4ec8a2ba3f0d396d37ef048f7f9274f42c41d84e",
+      "locator": "/tmp/pytest-of-barberb/legal-ir-pruning-inline-evidence-retained-20261110-v01/attempt/pytest/ARCHIVE.json",
+      "preserved_nonfixture_files": 22,
+      "ledger_record_sha256": "05797177e214f68b0f826215eb2309739b67349a9ee8290f5a9402a659d9eae7"
+    }
+  ],
+  "net_file_bytes_freed": 8779130,
+  "no_ledger_mutation": true,
+  "no_failed_attempt_changed": true,
+  "no_storage_reservation_released": true,
+  "no_budget_or_test_scope_change": true,
+  "new_test_qualification": false
+}

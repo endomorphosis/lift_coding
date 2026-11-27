@@ -1,0 +1,57 @@
+import ObjectiveContainerPreservation
+
+namespace «GeneratedOriginalObjectiveContainerPrefix»
+
+open RankerObjectivePrefixIR
+open RankerObjectiveContainerLanguage
+
+noncomputable section
+
+def emittedContext : Context := [("weights", (.vector 80)), ("differences", (.matrix 4 80))]
+
+def emittedPrefix : RankerObjectiveContainerLanguage.SourcePrefix [("margins", (.vector 4)), ("data", .scalar), ("regularizer", .scalar), ("factors", (.vector 4)), ("gradient", (.vector 80))] :=
+  (RankerObjectiveContainerLanguage.SourcePrefix.letBind (τ := (.vector 4)) "margins" (SourceExpr.mapRows "row" (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.matrix 4 80)) "differences")) (SourceExpr.fsumExact (SourceExpr.zipMap "x" "y" (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "weights")) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "row")) (SourceExpr.scalarBinary .mul (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "x")) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "y")))))) (RankerObjectiveContainerLanguage.SourcePrefix.letBind (τ := .scalar) "data" (SourceExpr.scalarBinary .div (SourceExpr.fsumExact (SourceExpr.mapVector "z" (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 4)) "margins")) (SourceExpr.scalarBinary .add (SourceExpr.scalarBinary .max (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral ((0 : ℚ) / (1 : ℚ)))) (SourceExpr.scalarUnary .neg (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "z")))) (SourceExpr.scalarUnary .log1p (SourceExpr.scalarUnary .exp (SourceExpr.scalarUnary .neg (SourceExpr.scalarUnary .abs (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "z"))))))))) (SourceExpr.natToScalar (SourceExpr.lengthVector (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 4)) "margins"))))) (RankerObjectiveContainerLanguage.SourcePrefix.letBind (τ := .scalar) "regularizer" (SourceExpr.scalarBinary .div (SourceExpr.scalarBinary .mul (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral ((5764607523034235 : ℚ) / (576460752303423488 : ℚ)))) (SourceExpr.fsumExact (SourceExpr.zipMap "x" "y" (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "weights")) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "weights")) (SourceExpr.scalarBinary .mul (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "x")) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "y")))))) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral ((2 : ℚ) / (1 : ℚ))))) (RankerObjectiveContainerLanguage.SourcePrefix.letBind (τ := (.vector 4)) "factors" (SourceExpr.mapVector "z" (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 4)) "margins")) (SourceExpr.ifNonneg (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "z")) (SourceExpr.scalarBinary .div (SourceExpr.scalarUnary .exp (SourceExpr.scalarUnary .neg (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "z")))) (SourceExpr.scalarBinary .add (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral ((1 : ℚ) / (1 : ℚ)))) (SourceExpr.scalarUnary .exp (SourceExpr.scalarUnary .neg (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "z")))))) (SourceExpr.scalarBinary .div (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral ((1 : ℚ) / (1 : ℚ)))) (SourceExpr.scalarBinary .add (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral ((1 : ℚ) / (1 : ℚ)))) (SourceExpr.scalarUnary .exp (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "z"))))))) (RankerObjectiveContainerLanguage.SourcePrefix.letBind (τ := (.vector 80)) "gradient" (SourceExpr.rangeMap "i" (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "weights")) (SourceExpr.scalarBinary .sub (SourceExpr.scalarBinary .mul (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.scalarLiteral ((5764607523034235 : ℚ) / (576460752303423488 : ℚ)))) (SourceExpr.indexVector (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "weights")) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.index 80)) "i")))) (SourceExpr.scalarBinary .div (SourceExpr.fsumExact (SourceExpr.zipRowsMap "f" "row" (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 4)) "factors")) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.matrix 4 80)) "differences")) (SourceExpr.scalarBinary .mul (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "f")) (SourceExpr.indexVector (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "row")) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.index 80)) "i")))))) (SourceExpr.natToScalar (SourceExpr.lengthMatrix (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.matrix 4 80)) "differences"))))))) (RankerObjectiveContainerLanguage.SourcePrefix.record (RankerObjectiveContainerLanguage.SourceFields.cons (name := "margins") (τ := (.vector 4)) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 4)) "margins")) (RankerObjectiveContainerLanguage.SourceFields.cons (name := "data") (τ := .scalar) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "data")) (RankerObjectiveContainerLanguage.SourceFields.cons (name := "regularizer") (τ := .scalar) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := .scalar) "regularizer")) (RankerObjectiveContainerLanguage.SourceFields.cons (name := "factors") (τ := (.vector 4)) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 4)) "factors")) (RankerObjectiveContainerLanguage.SourceFields.cons (name := "gradient") (τ := (.vector 80)) (SourceExpr.leaf (RankerObjectivePrefixIR.SourceTerm.var (τ := (.vector 80)) "gradient")) RankerObjectiveContainerLanguage.SourceFields.nil)))))))))))
+
+/-! SOURCE-ONLY GENERATED-PREFIX QUERIES; UNCOMPILED AND UNQUALIFIED.
+The first claim admits the actual emitted structural syntax. The second derives
+partial exact-Real preservation from that actual acceptance and the independent
+named/typed generic theorem. No desired objective/gradient/convergence equation
+is a premise. The Python/JSON lowering and original guard/return remain open. -/
+
+theorem emitted_prefix_compiles :
+    ∃ program, RankerObjectiveContainerLanguage.compilePrefix
+      emittedContext emittedPrefix = .ok program := by
+  simp [emittedContext, emittedPrefix,
+    RankerObjectiveContainerLanguage.compilePrefix,
+    RankerObjectiveContainerLanguage.compilePrefixAux,
+    RankerObjectiveContainerLanguage.compileFields,
+    RankerObjectiveContainerLanguage.compileExprAux,
+    RankerObjectivePrefixIR.compileTerm,
+    RankerObjectivePrefixIR.compileTermAux,
+    RankerObjectivePrefixIR.lookupSlot,
+    RankerObjectivePrefixIR.castSlot,
+    RankerObjectivePrefixIR.contextUnique,
+    RankerObjectivePrefixIR.contextNames,
+    RankerObjectiveIR.mapOne,
+    RankerObjectiveIR.mapTwo,
+    RankerObjectiveIR.mapThree]
+
+theorem emitted_prefix_preserves (environment : Environment emittedContext) :
+    ∃ program,
+      RankerObjectiveContainerLanguage.compilePrefix emittedContext emittedPrefix = .ok program ∧
+      RankerObjectiveContainerLanguage.evalSourcePrefix
+        (RankerObjectivePrefixIR.namesFromScope environment) emittedPrefix =
+      RankerObjectiveContainerLanguage.evalPrefix environment program := by
+  rcases emitted_prefix_compiles with ⟨program, accepted⟩
+  exact ⟨program, accepted,
+    RankerObjectiveContainerLanguage.compile_prefix_sound
+      emittedContext environment emittedPrefix program accepted⟩
+
+#print axioms emitted_prefix_compiles
+#print axioms emitted_prefix_preserves
+
+end
+end «GeneratedOriginalObjectiveContainerPrefix»
+
+#print axioms _root_.GeneratedOriginalObjectiveContainerPrefix.emitted_prefix_compiles
+#print axioms _root_.GeneratedOriginalObjectiveContainerPrefix.emitted_prefix_preserves

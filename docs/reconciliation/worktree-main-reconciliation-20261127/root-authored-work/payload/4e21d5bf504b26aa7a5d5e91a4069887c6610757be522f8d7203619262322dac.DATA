@@ -1,0 +1,229 @@
+"""Deterministic numerical/fault controls; these are not repository outcomes."""
+import copy
+import hashlib
+import json
+from pathlib import Path
+import time
+
+import metrics as M
+
+HERE = Path(__file__).resolve().parent
+CONTROLLER = HERE.parent / "controller_qualification"
+CORPUS = CONTROLLER / "original-corpus-v3/corpus.json"
+OUT = HERE / "qualification-v1"
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def save(path, value):
+    with path.open("x") as handle:
+        handle.write(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+
+def set_outcome(event, value):
+    event["event_obligations_passed"] = value
+    for outcome in event["required_obligation_outcomes"]:
+        outcome["passed"] = value
+
+
+def fixture(schedule):
+    export = {"schema": "ns-original-analysis-export/v1", "selection": "full",
+              "synthetic_only": True, "events": [], "provider_calls": [], "invocations": []}
+    for trajectory in schedule:
+        tid = trajectory["trajectory_id"]
+        for horizon in trajectory["horizons"]:
+            h = horizon["horizon"]
+            event = {key: trajectory[key] for key in ("run_id", "trajectory_id", "task_id", "arm", "cache_profile", "control")}
+            event.update(event_id=horizon["event_id"], horizon=h, configuration_sha256=horizon["configuration_sha256"],
+                         terminal=True, accepted_for_next_state=h >= 2,
+                         event_obligations_passed=True, independent_original_repair_passed=None if h < 2 else True,
+                         plan_coverage_qualified=True, plan_coverage_passed=True if h == 1 else None,
+                         false_admissions=0, invalidation_misses=0, repeated_dispatches=0,
+                         provider_attempts=[], required_obligation_outcomes=[
+                             {"obligation_id": name, "required": True, "passed": True,
+                              "evidence_refs": [{"path": "synthetic-only-not-a-real-receipt", "sha256": "00" * 32}]}
+                             for name in horizon["required_obligation_ids"]],
+                         recovery_subinvocations=[] if h != 6 else [
+                             {"subinvocation_id": name, "boundary_reached": True, "precondition_satisfied": True,
+                              "postcondition_passed": True, "accepted_for_next_state": name != "stale_parent_branch"}
+                             for name in M.RECOVERY_IDS])
+            export["events"].append(event)
+            export["invocations"].append({"invocation_id": event["event_id"] + "--invoke-0", "event_id": event["event_id"],
+                                          "elapsed_seconds": 1.0, "host_waited_cpu_seconds": .25, "container_cpu_seconds": None})
+    replace_calls(export, {row["trajectory_id"]: [(2, 100)] for row in schedule})
+    return export
+
+
+def replace_calls(export, specification):
+    export["provider_calls"] = []
+    for event in export["events"]:
+        event["provider_attempts"] = []
+    by_event = {(event["trajectory_id"], event["horizon"]): event for event in export["events"]}
+    for tid, rows in specification.items():
+        for slot, (horizon, tokens) in enumerate(sorted(rows)):
+            event = by_event[tid, horizon]
+            cid = "nsorig-" + M.digest({"trajectory_id": tid, "slot": slot})[:40]
+            event["provider_attempts"].append({"slot": slot, "call_id": cid})
+            export["provider_calls"].append({"call_id": cid, "event_id": event["event_id"], "trajectory_id": tid,
+                                             "slot": slot, "attempted_posts": 1,
+                                             "normalized_usage": {"total_tokens": tokens, "input_tokens": 70,
+                                                                  "output_tokens": 20, "reasoning_tokens": 30,
+                                                                  "cached_input_tokens": 50, "api_reported_cost_ticks": 1000}})
+
+
+def main():
+    OUT.mkdir()
+    started = time.perf_counter()
+    corpus = json.loads(CORPUS.read_text())
+    schedule = M.make_schedule(corpus, "synthetic-analysis-qualification")
+    for trajectory in schedule:
+        for horizon in trajectory["horizons"]:
+            horizon["required_obligation_ids"] = ["synthetic_control_obligation"]
+    inputs = [Path(__file__), HERE / "metrics.py", CORPUS, CONTROLLER / "original_caller_output_contract_v2.json"]
+    freeze = {"schema": "ns-original-analysis-qualification-freeze/v1", "created_before_controls_ns": time.time_ns(),
+              "source_sha256": {str(path): sha(path) for path in inputs}, "schedule_sha256": M.digest(schedule),
+              "synthetic_only": True, "actual_repository_or_model_outcomes": False,
+              "provider_calls": 0, "scorer_calls": 0, "live_receipt_adapter_qualified": False}
+    save(OUT / "freeze.json", freeze)
+    save(OUT / "schedule.json", schedule)
+    base = fixture(schedule)
+    save(OUT / "synthetic_fixture.json", base)
+    checks = []
+
+    def check(name, predicate):
+        checks.append({"name": name, "passed": bool(predicate)})
+        if not predicate:
+            raise AssertionError(name)
+
+    baseline = M.analyze(schedule, base)
+    check("all 60 trajectories and 360 dependent events retained", baseline["scheduled_trajectories"] == 60 and baseline["scheduled_event_observations"] == 360 and baseline["family_clusters"] == 4)
+    check("all 60 setup/prime rows metered", baseline["metered_setup_prime_rows"] == 60 and baseline["unique_enclosing_invocations"] == 420)
+    check("provider totals authoritative despite overlapping components/cache", baseline["complete_total_tokens"] == 6000)
+    check("full-quality synthetic ratios defined", all(row["tokens_per_complete_trajectory"] == 100 for row in baseline["groups"]))
+    check("exact four-family bootstrap, not 360 independent events", all(row["descriptive_family_bootstrap"]["resamples"] == 256 for row in baseline["comparisons"]))
+    first = copy.deepcopy(base)
+    first["selection"] = "first_tranche"
+    first_tids = {row["trajectory_id"] for row in schedule if row["first_tranche"]}
+    first["events"] = [row for row in first["events"] if row["trajectory_id"] in first_tids]
+    first_ids = {row["event_id"] for row in first["events"]}
+    first["provider_calls"] = [row for row in first["provider_calls"] if row["event_id"] in first_ids]
+    first["invocations"] = [row for row in first["invocations"] if row["event_id"] in first_ids]
+    first_result = M.analyze(schedule, first)
+    check("first tranche is frozen eight cold trajectories", first_result["scheduled_trajectories"] == 8 and first_result["scheduled_event_observations"] == 48 and first_result["complete_total_tokens"] == 800)
+    check("first tranche two family blocks", first_result["family_clusters"] == 2 and all(row["descriptive_family_bootstrap"]["resamples"] == 4 for row in first_result["comparisons"]))
+    target = next(row for row in schedule if row["arm"] == "D" and row["cache_profile"] == "cold" and row["control"] == "primary")
+    tid = target["trajectory_id"]
+    def event_of(export, h=2):
+        return next(row for row in export["events"] if row["trajectory_id"] == tid and row["horizon"] == h)
+    def trajectory_of(result):
+        return next(row for row in result["trajectories"] if row["trajectory_id"] == tid)
+    def comparison_of(result):
+        return next(row for row in result["comparisons"] if row["arm"] == "D" and row["cache_profile"] == "cold" and row["control"] == "primary")
+    variants = []
+    prime = copy.deepcopy(base)
+    spec = {row["trajectory_id"]: [(2, 100)] for row in schedule}
+    spec[tid] = [(0, 50), (2, 100)]
+    replace_calls(prime, spec)
+    result = M.analyze(schedule, prime)
+    check("prime charged from horizon zero", trajectory_of(result)["horizons"][0]["usage"]["total_tokens"] == 50 and result["complete_total_tokens"] == 6050)
+    check("no invented amortization for added prime", comparison_of(result)["observed_sustained_token_break_even_horizon"] is None)
+    variants.append({"case": "metered_prime", "input_sha256": M.digest(prime), "result": result})
+    late = copy.deepcopy(base)
+    event_of(late)["independent_original_repair_passed"] = False
+    event_of(late)["accepted_for_next_state"] = False
+    set_outcome(event_of(late), False)
+    result = M.analyze(schedule, late)
+    check("late repair cannot rewrite event2", trajectory_of(result)["repair_at_event2"] is False and trajectory_of(result)["eventually_repaired"] is True and trajectory_of(result)["complete_trajectory"] is False)
+    check("late repair cannot create matched-quality credit", comparison_of(result)["conditional_descriptive_token_reduction"] is None)
+    variants.append({"case": "late_repair", "input_sha256": M.digest(late), "result": result})
+    unknown = copy.deepcopy(base)
+    call = next(row for row in unknown["provider_calls"] if row["trajectory_id"] == tid)
+    call["attempted_posts"] = None
+    call["normalized_usage"] = {name: None for name in M.USAGE_FIELDS}
+    result = M.analyze(schedule, unknown)
+    check("unknown dispatch cost remains unknown", result["complete_total_tokens"] is None and trajectory_of(result)["horizons"][-1]["possible_unknown_posts"] == 1)
+    check("unknown cost blocks reduction and break-even", comparison_of(result)["unconditional_token_difference_fraction"] is None and comparison_of(result)["observed_sustained_token_break_even_horizon"] is None)
+    variants.append({"case": "unknown_dispatch", "input_sha256": M.digest(unknown), "result": result})
+    alias = copy.deepcopy(base)
+    event_of(alias)["provider_attempts"].append(copy.deepcopy(event_of(alias)["provider_attempts"][0]))
+    result = M.analyze(schedule, alias)
+    check("same-event receipt alias is not a new call", result["complete_total_tokens"] == 6000 and result["unique_provider_slots"] == 60 and result["repeated_provider_receipt_aliases"] == 1)
+    variants.append({"case": "receipt_alias", "input_sha256": M.digest(alias), "result": result})
+    failed = copy.deepcopy(base)
+    replace_calls(failed, {})
+    for event in failed["events"]:
+        if event["horizon"] >= 2:
+            event["independent_original_repair_passed"] = False
+            event["accepted_for_next_state"] = False
+            set_outcome(event, False)
+            for sub in event["recovery_subinvocations"]:
+                sub.update(boundary_reached=False, precondition_satisfied=False, postcondition_passed=None)
+    result = M.analyze(schedule, failed)
+    check("zero-call failures retain entire denominator", result["scheduled_trajectories"] == 60 and result["scheduled_event_observations"] == 360 and result["complete_total_tokens"] == 0)
+    check("zero success ratios undefined", all(row["tokens_per_initial_repair_success"] is None and row["tokens_per_complete_trajectory"] is None for row in result["groups"]))
+    check("cheap all-failed run has no quality-preserving benefit", all(row["conditional_descriptive_token_reduction"] is None for row in result["comparisons"]))
+    variants.append({"case": "zero_call_failures", "input_sha256": M.digest(failed), "result": result})
+    unknown_time = copy.deepcopy(base)
+    unknown_time["invocations"][0]["elapsed_seconds"] = None
+    result = M.analyze(schedule, unknown_time)
+    first_tid = schedule[0]["trajectory_id"]
+    check("missing outer timer stays null", next(row for row in result["trajectories"] if row["trajectory_id"] == first_tid)["horizons"][-1]["enclosing_invocation_seconds"] is None)
+    nested = copy.deepcopy(base)
+    nested["nested_service_timing_breakdown"] = [{"effect_id": "synthetic", "seconds": 100000}]
+    result = M.analyze(schedule, nested)
+    check("nested service clocks are not added to enclosing invocations", all(row["horizons"][-1]["enclosing_invocation_seconds"] == 7 for row in result["trajectories"]))
+    plan = copy.deepcopy(base)
+    event_of(plan, 1).update(plan_coverage_qualified=False, plan_coverage_passed=None)
+    set_outcome(event_of(plan, 1), None)
+    result = M.analyze(schedule, plan)
+    check("unknown independent plan coverage blocks complete trajectory", trajectory_of(result)["complete_trajectory"] is None and comparison_of(result)["conditional_descriptive_token_reduction"] is None)
+    bad_cases = []
+    def reject(name, mutate, text):
+        changed = copy.deepcopy(base)
+        mutate(changed)
+        try:
+            M.analyze(schedule, changed)
+        except ValueError as error:
+            check(name, text in str(error))
+            bad_cases.append({"case": name, "input_sha256": M.digest(changed), "reason": str(error)})
+        else:
+            raise AssertionError("negative accepted: " + name)
+    reject("missing scheduled event", lambda x: x["events"].pop(), "scheduled event")
+    reject("duplicate scheduled event", lambda x: x["events"].append(copy.deepcopy(x["events"][0])), "scheduled event")
+    reject("duplicate authoritative provider receipt", lambda x: x["provider_calls"].append(copy.deepcopy(x["provider_calls"][0])), "duplicate authoritative call")
+    reject("orphan incurred provider cost", lambda x: event_of(x)["provider_attempts"].clear(), "orphan provider")
+    reject("receipt charged across horizons", lambda x: event_of(x, 3)["provider_attempts"].extend(copy.deepcopy(event_of(x)["provider_attempts"])), "multiple event horizons")
+    reject("duplicate outer interval", lambda x: x["invocations"].append(copy.deepcopy(x["invocations"][0])), "duplicate enclosing")
+    reject("missing outer invocation observation", lambda x: x["invocations"].pop(), "missing enclosing")
+    reject("wrong cache identity", lambda x: event_of(x).__setitem__("cache_profile", "warm"), "event identity mismatch")
+    reject("wrong configuration identity", lambda x: event_of(x).__setitem__("configuration_sha256", "00" * 32), "event identity mismatch")
+    reject("missing required obligation", lambda x: event_of(x)["required_obligation_outcomes"].clear(), "obligation inventory changed")
+    reject("changed declared event quality", lambda x: event_of(x).__setitem__("event_obligations_passed", False), "quality differs")
+    reject("passing claim without evidence reference", lambda x: event_of(x)["required_obligation_outcomes"][0]["evidence_refs"].clear(), "lacks evidence reference")
+    reject("unqualified plan silently passes", lambda x: event_of(x, 1).__setitem__("plan_coverage_qualified", False), "unqualified plan")
+    reject("solved repair injected at prime", lambda x: event_of(x, 0).__setitem__("accepted_for_next_state", True), "prime injected")
+    reject("missing recovery subinvocation", lambda x: event_of(x, 6)["recovery_subinvocations"].pop(), "recovery branch")
+    reject("unreached stale branch counted as pass", lambda x: event_of(x, 6)["recovery_subinvocations"][3].__setitem__("boundary_reached", False), "unreached branch")
+    reject("nonfinite enclosing duration", lambda x: x["invocations"][0].__setitem__("elapsed_seconds", float("inf")), "invalid nonnegative")
+    reject("negative token value", lambda x: x["provider_calls"][0]["normalized_usage"].__setitem__("total_tokens", -1), "invalid nonnegative")
+    reject("boolean token value", lambda x: x["provider_calls"][0]["normalized_usage"].__setitem__("total_tokens", True), "invalid nonnegative")
+    reject("unfrozen outcome-selected subset", lambda x: x.__setitem__("selection", "successful_only"), "unfrozen outcome selection")
+    for path, expected in freeze["source_sha256"].items():
+        check("unchanged source " + path, sha(Path(path)) == expected)
+    save(OUT / "numerical_variant_results.json", variants)
+    save(OUT / "negative_controls.json", bad_cases)
+    save(OUT / "base_metrics.json", baseline)
+    summary = {"schema": "ns-original-analysis-qualification/v1", "all_checks_passed": True,
+               "checks": checks, "check_count": len(checks), "rejection_controls": len(bad_cases),
+               "wall_seconds": time.perf_counter() - started, "freeze_sha256": sha(OUT / "freeze.json"),
+               "synthetic_only": True, "actual_provider_calls": 0, "actual_scorer_calls": 0,
+               "numerical_projection_qualified": True, "live_receipt_adapter_qualified": False,
+               "scope": "Accounting arithmetic and malformed-export controls only. No original family repair or model result is fabricated or admitted."}
+    save(OUT / "summary.json", summary)
+    print(json.dumps({k: summary[k] for k in ("all_checks_passed", "check_count", "rejection_controls", "wall_seconds", "synthetic_only")}))
+
+
+if __name__ == "__main__":
+    main()

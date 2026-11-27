@@ -1,0 +1,254 @@
+"""Native source/IR preparation controls; no Lean or solver proof jobs."""
+import ast
+from dataclasses import replace
+import hashlib
+import json
+
+import pytest
+
+from benchmarks.agent_supervisor.container_coding import terminal_source_ir_projection as projection
+from ipfs_datasets_py.duckdb_control.codebase_catalog import CodebaseHead
+from ipfs_datasets_py.logic.software_contracts import (
+    codebase_integer_profile as integer, codebase_integer_lowering_lean as lowering,
+    content,
+)
+
+
+def _head():
+    repository = "repository:source-projection-fixture"
+    snapshot = content.cid_for_structured({"snapshot": "public-synthetic-identity"})
+    return CodebaseHead(repository_id=repository, generation=1,
+        manifest_cid=content.cid_for_structured({"manifest": "public-synthetic-identity"}),
+        snapshot_cid=snapshot, ast_revision_id=f"rev:{repository}:snapshot:{snapshot}",
+        receipt_cid=content.cid_for_structured({"receipt": "public-synthetic-identity"})).to_dict()
+
+
+def _contract(offset=1):
+    return integer.IntegerOffsetContract("inc.py", "increment", "n", offset).to_dict()
+
+
+def _source(expression="n + 1", prefix=""):
+    return (prefix + "def increment(n: int) -> int:\n    return " + expression + "\n").encode("ascii")
+
+
+def _build(expression="n + 1", offset=1, source=None, **kwargs):
+    return projection.build_source_ir_projection(source=source if source is not None else _source(expression),
+        contract=kwargs.pop("contract", _contract(offset)), head=kwargs.pop("head", _head()), **kwargs)
+
+
+@pytest.mark.parametrize("expression,offset,kind,literal", [
+    ("n", 0, "identity", None), ("n + 7", 7, "add", {"kind": "literal", "value": 7}),
+    ("n + +7", 7, "add", {"kind": "positive", "value": 7}),
+    ("n + -7", -7, "add", {"kind": "negative", "value": 7}),
+    ("n - 7", -7, "sub", {"kind": "literal", "value": 7}),
+    ("n - +7", -7, "sub", {"kind": "positive", "value": 7}),
+    ("n - -7", 7, "sub", {"kind": "negative", "value": 7}),
+])
+def test_all_seven_native_grammar_modes_retain_independent_source_and_target(expression, offset, kind, literal):
+    result = _build(expression, offset)
+    expected = {"kind": kind}
+    if literal is not None:
+        expected["literal"] = literal
+    assert result["source_ast_syntax"] == expected
+    assert result["translation"]["lowered_source_syntax"] == result["native_target_syntax"]
+    assert result["translation"]["native_program"] == result["native_program"]
+    assert result["compiled"]["body_offset"] == offset
+    assert result["translation"]["requested_offset"] == offset
+    assert result["source_sha256"] == hashlib.sha256(_source(expression)).hexdigest()
+    assert result["source_cid"] == content.cid_for_bytes(_source(expression))
+    assert result["compiled"]["revision"] == "snapshot:" + _head()["snapshot_cid"]
+    assert result["native_program"]["sources"][0]["content_sha256"] == result["source_sha256"]
+    assert result["native_contracts"] and result["native_vc_sets"] and result["source_correspondence"]
+    assert "lowering_correct" in result["theorems"]
+    assert "requested_offset_identity" in result["theorems"]
+    assert "inductive SourceBody" in result["lean_source"]
+    assert result["checker_invocations"] == result["training_steps"] == 0
+    assert all(result[name] is False for name in projection.AUTHORITY)
+    assert all(row["checker_executed"] is False and row["proof_claimed"] is False for row in result["family_statuses"])
+
+
+def test_complete_projection_is_deterministic_and_content_identified():
+    result = _build()
+    assert _build() == result
+    body = {name: value for name, value in result.items() if name != "projection_id"}
+    assert result["projection_id"] == content.cid_for_structured(body)
+    assert json.loads(projection._wire(result)) == result
+    assert result["producer"]["loaded_module_code_attested"] is False
+    assert any(row["path"].endswith("terminal_source_ir_projection.py") for row in result["producer"]["files"])
+    assert all(row["status"] == "projected" for row in result["family_statuses"])
+    assert set(result["family_projections"]) == set(result["family_bundle"]["families"])
+
+
+def test_wrong_requested_offset_generates_refutation_without_claiming_a_proof():
+    result = _build("n + 1", 2)
+    assert result["compiled"]["body_offset"] == 1 and result["contract"]["offset"] == 2
+    assert "requested_goal_refuted" in result["theorems"]
+    assert "requested_offset_counterexample" in result["lean_source"]
+    assert result["requested_model_theorem_proved"] is False
+    assert result["family_bundle"]["operation"] == "refute_offset_with_declared_domain_witness"
+
+
+def test_native_64_bit_offset_survives_optional_finite_tla_restriction():
+    value = 2**64 - 1
+    result = _build(f"n + {value}", value)
+    assert result["compiled"]["body_offset"] == value
+    assert result["family_bundle"] is None
+    status = {row["family"]: row["status"] for row in result["family_statuses"]}
+    assert status == {"smt_lia": "projected", "lean4": "projected", "rocq": "projected",
+                      "isabelle_hol": "projected", "tla_plus": "unsupported"}
+    assert "TLC integer constants" in result["family_projections"]["tla_plus"]["reason"]
+    assert result["family_projections"]["tla_plus"]["mathematical_integer_projection_discarded"] is False
+
+
+@pytest.mark.parametrize("cookie,canonical", [("utf-8", "utf-8"), ("utf8", "utf-8"),
+                                               ("ascii", "ascii"), ("us-ascii", "ascii")])
+def test_admitted_encoding_cookie_replays_original_bytes(cookie, canonical):
+    source = _source(prefix=f"# coding: {cookie}\n")
+    result = _build(source=source)
+    assert result["source_decode_check"]["canonical_encoding"] == canonical
+    assert result["source_decode_check"]["original_and_decoded_ast_equal"] is True
+    assert result["source_sha256"] == hashlib.sha256(source).hexdigest()
+
+
+@pytest.mark.parametrize("cookie", ["utf-16", "utf-32", "latin-1", "cp1252", "rot13", "unknown-codec"])
+def test_foreign_or_unknown_encoding_cannot_be_ignored_as_ascii(cookie):
+    with pytest.raises(ValueError, match="encoding"):
+        _build(source=_source(prefix=f"# coding: {cookie}\n"))
+
+
+@pytest.mark.parametrize("source", [b"", b"\xff", b"\xef\xbb\xbfdef increment(n: int) -> int:\n    return n + 1\n",
+                                     b"def increment(:\n", b"def increment(n: int) -> int:\r\n    return n + 1\r\n",
+                                     b"\0", "source text", b"#" * (integer.MAX_SOURCE_BYTES + 1)])
+def test_nonexact_malformed_nonascii_or_overbound_sources_reject(source):
+    with pytest.raises(ValueError):
+        _build(source=source)
+
+
+def test_native_ast_population_bound_is_enforced():
+    source = b"pass\n" * integer.MAX_AST_NODES + _source()
+    assert len(source) < integer.MAX_SOURCE_BYTES
+    with pytest.raises(ValueError, match="AST node bound"):
+        _build(source=source)
+
+
+@pytest.mark.parametrize("expression", ["n + True", "n + 1.0", "n * n", "eval('n + 1')", "n + (1 + 2)",
+                                      "n + " + str(2**64)])
+def test_unsupported_expressions_never_generate_a_projection(expression):
+    with pytest.raises(ValueError):
+        _build(expression)
+
+
+@pytest.mark.parametrize("source", [
+    b"def increment(n):\n    return n + 1\n",
+    b"def increment(n: int = 0) -> int:\n    return n + 1\n",
+    b"@decorator\ndef increment(n: int) -> int:\n    return n + 1\n",
+    b"async def increment(n: int) -> int:\n    return n + 1\n",
+    b"import callee\ndef increment(n: int) -> int:\n    return n + 1\n",
+    b"def increment(n: int) -> int:\n    value = n\n    return value + 1\n",
+])
+def test_unsupported_signatures_statements_and_module_imports_reject(source):
+    with pytest.raises(ValueError):
+        _build(source=source)
+
+
+def test_contract_bool_and_forged_head_shape_reject():
+    contract = _contract()
+    contract["offset"] = True
+    with pytest.raises(ValueError):
+        _build(contract=contract)
+    for key, value in [("generation", True), ("ast_revision_id", "rev:wrong"), ("snapshot_cid", "not-a-cid")]:
+        head = _head()
+        head[key] = value
+        with pytest.raises(ValueError):
+            _build(head=head)
+    head = _head()
+    head["extra"] = False
+    with pytest.raises(ValueError):
+        _build(head=head)
+
+
+def test_original_byte_and_ascii_ast_disagreement_is_rejected(monkeypatch):
+    original = ast.parse
+
+    def parse(source, *args, **kwargs):
+        result = original(source, *args, **kwargs)
+        if type(source) is bytes:
+            result.body[0].body[0].value.right.value = 2
+        return result
+
+    monkeypatch.setattr(projection.ast, "parse", parse)
+    with pytest.raises(ValueError, match="ASTs differ"):
+        _build()
+
+
+@pytest.mark.parametrize("mutation", ["literal", "literal_bool", "return_expression", "source_span", "effects"])
+def test_mutated_native_ir_is_refused_by_independent_lowering_checks(monkeypatch, mutation):
+    original = integer.compile_integer_offset
+
+    def compile(*args, **kwargs):
+        compiled = original(*args, **kwargs)
+        native = compiled.pipeline.program
+        if mutation in {"literal", "literal_bool"}:
+            values = list(native.expressions)
+            position = next(i for i, value in enumerate(values) if value.kind.value == "literal" and value.attributes.get("value") == 1)
+            values[position] = replace(values[position], attributes={"value": True if mutation == "literal_bool" else 2})
+            native = replace(native, expressions=tuple(values))
+        elif mutation == "return_expression":
+            command = native.commands[0]
+            literal_id = next(value.expression_id for value in native.expressions if value.kind.value == "literal" and value.attributes.get("value") == 1)
+            native = replace(native, commands=(replace(command, expression_ids=(literal_id,), evaluation_order=(literal_id,)),))
+        elif mutation == "source_span":
+            spans = list(native.spans)
+            position = next(i for i, value in enumerate(spans) if value.end_byte > value.start_byte)
+            spans[position] = replace(spans[position], start_byte=spans[position].start_byte + 1)
+            native = replace(native, spans=tuple(spans))
+        else:
+            function = native.functions[0]
+            native = replace(native, functions=(replace(function, effects=replace(function.effects, performs_io=True)),))
+        return replace(compiled, pipeline=replace(compiled.pipeline, program=native))
+
+    monkeypatch.setattr(integer, "compile_integer_offset", compile)
+    with pytest.raises(ValueError):
+        _build()
+
+
+def test_selected_producer_same_byte_write_restore_is_refused(tmp_path, monkeypatch):
+    path = tmp_path / "terminal_source_ir_projection.py"
+    path.write_bytes(b"# synthetic producer witness only\n")
+    original = lowering._lean
+
+    def emit(translation):
+        raw = path.read_bytes()
+        path.write_bytes(raw)
+        return original(translation)
+
+    monkeypatch.setattr(projection, "__file__", str(path))
+    monkeypatch.setattr(lowering, "_lean", emit)
+    with pytest.raises(ValueError, match="producer changed"):
+        _build()
+
+
+def test_original_caller_declaration_mutation_is_refused(monkeypatch):
+    contract, head = _contract(), _head()
+    original = lowering._lean
+
+    def emit(translation):
+        contract["offset"] = 99
+        return original(translation)
+
+    monkeypatch.setattr(lowering, "_lean", emit)
+    with pytest.raises(ValueError, match="caller declaration changed"):
+        _build(contract=contract, head=head)
+
+
+def test_public_native_projection_suppresses_metadata_owner_and_restores_on_error(monkeypatch):
+    from ipfs_accelerate_py.agent_supervisor.runtime import supervisor_meta_index
+
+    def forbidden(*args, **kwargs):
+        pytest.fail("projection attempted to activate a metadata owner")
+
+    monkeypatch.setattr(supervisor_meta_index.SupervisorMetaIndex, "from_env", forbidden)
+    _build()
+    with pytest.raises(ValueError):
+        _build("eval('n')")
+    assert supervisor_meta_index._PUBLIC_REPLAY_OWNER.get() is None

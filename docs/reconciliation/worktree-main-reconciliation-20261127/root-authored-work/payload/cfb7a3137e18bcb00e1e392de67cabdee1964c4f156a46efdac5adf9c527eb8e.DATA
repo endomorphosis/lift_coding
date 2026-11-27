@@ -1,0 +1,125 @@
+"""Export only audited code identities and aggregate curator qualification results."""
+import hashlib
+import json
+import shutil
+import sqlite3
+from pathlib import Path
+
+H = Path(__file__).resolve().parent
+O = H / 'repository_sealing_qualification_v1'
+C = O / 'curator_custody'
+SERVICES = H.parent.parent / 'integrated_v1/controller_qualification'
+checks = []
+def sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+def dump(path, data): Path(path).write_text(json.dumps(data, sort_keys=True, indent=2) + '\n')
+def check(name, condition):
+    checks.append({'check': name, 'passed': bool(condition)})
+    if not condition:
+        raise AssertionError(name)
+
+summary = json.loads((O / 'summary.json').read_text())
+profile = json.loads((C / 'profile.json').read_text())
+freeze = json.loads((O / 'freeze.json').read_text())
+check('qualification runner unchanged', freeze['runner_sha256'] == sha(H / 'qualify_repository_sealing_v1.py'))
+check('private profile bound', freeze['profile_sha256'] == sha(C / 'profile.json') == summary['profile_sha256'])
+check('qualification completed', summary['qualified'] is True)
+check('exactly six actual scorer invocations', summary['actual_native_scorer_invocations'] == 6 == freeze['maximum_fresh_native_scorer_invocations'])
+check('no model calls', summary['provider_calls'] == freeze['provider_calls'] == 0)
+check('not an execution theorem', summary['proof_mode'] == 'integrity_only' and not summary['signed_receipts'] and not summary['adversarial_candidate_oracle_integrity_qualified'])
+for path, expected in profile['evaluation_files'].items():
+    check('pinned evaluation code ' + Path(path).name, sha(path) == expected)
+
+service_sources = {str(SERVICES / name): sha(SERVICES / name)
+                   for name in ['repository_sealing_v1.py', 'repository_runtime_v1.py', 'sealing_service_v1.py']}
+native_sources = {}
+replays = []
+responses = {}
+for name in ['first-publish', 'second-recover', 'third-read']:
+    directory = C / 'operations' / name
+    response = json.loads((directory / 'response.json').read_text())
+    execution = json.loads((directory / 'execution.json').read_text())
+    check('native process succeeded ' + name, execution['returncode'] == 0)
+    check('native stdout bound ' + name, execution['stdout_sha256'] == sha(directory / 'stdout'))
+    check('native stderr bound ' + name, execution['stderr_sha256'] == sha(directory / 'stderr'))
+    for path, row in response['imports'].items():
+        check('loaded native source ' + name + ' ' + Path(path).name, row['sha256'] == sha(path) == profile['sealing_native_files'][path])
+        if path in native_sources:
+            check('same native import across processes ' + name + ' ' + Path(path).name, native_sources[path] == row['sha256'])
+        native_sources[path] = row['sha256']
+    replays.extend(response['independent_replays'])
+    responses[name] = response
+check('initial native generation zero', responses['first-publish']['published'] and responses['first-publish']['pointer']['generation'] == 0)
+crash_dir = C / 'operations/second-pre-cas-crash'
+crash = json.loads((C / 'state/native_repository_sealing/crashes/curator-seal6028-v1-1.json').read_text())
+check('actual pre-CAS process exit', json.loads((crash_dir / 'execution.json').read_text())['returncode'] == 94 and crash['boundary'] == 'after_seal_persistence')
+replays.extend(crash['replays'])
+check('four fresh scorer replays', len(replays) == 4)
+check('native recovery CAS completed', responses['second-recover']['cas_swapped'] and responses['second-recover']['committed']['state'] == 'committed' and responses['second-recover']['pointer']['generation'] == 1)
+check('fresh native read verified accepted chain', responses['third-read']['recursive_native_chain_verified'] and responses['third-read']['pointer']['generation'] == 1)
+
+db = sqlite3.connect('file:' + str(C / 'state/ledger.sqlite3') + '?mode=ro', uri=True)
+rows = db.execute('SELECT event_id,stage,state,result_path,result_hash FROM effects').fetchall()
+db.close()
+check('eight actual terminal controller effects', len(rows) == 8 and all(x[2] == 'terminal' for x in rows))
+initial_scores = []
+context_count = world_count = 0
+for event, stage, status, path, expected in rows:
+    check('terminal effect digest ' + event + ' ' + stage, sha(path) == expected)
+    result = json.loads(Path(path).read_text())['response']
+    if stage == 'accepted_check':
+        initial_scores.append(result)
+    elif stage == 'accepted_context_prepare':
+        context_count += 1
+        check('native context completed ' + event, result['complete'] and result['consumer']['all_checks_passed'])
+    elif stage in ['world_propose', 'world_record']:
+        world_count += 1
+        check('actual native memory process ' + event + ' ' + stage, bool(result.get('runtime_profile', {}).get('imports')))
+check('two native contexts and four memory operations', context_count == 2 and world_count == 4)
+scores = initial_scores + [x['response'] for x in replays]
+check('six distinct scorer dispatches', len(scores) == 6 and len({x['evaluation_id'] for x in scores}) == 6)
+for ordinal, receipt in enumerate(scores):
+    check('fresh native grade ' + str(ordinal), receipt['status'] == 'completed' and receipt['passed'] and receipt['designated_completed'] == receipt['designated_total'] == 187 and receipt['designated_status_counts']['PASSED'] == 187)
+    check('exact source admission ' + str(ordinal), receipt['candidate_source_tree_sha256'] == receipt['expected_candidate_source_tree_sha256'] and receipt['resulting_tree_admission']['accepted'])
+    check('qualified scorer bytes ' + str(ordinal), receipt['service_profile_sha256'] == profile['scorer_service']['profile_sha256'])
+    check('actual scorer receipt retained ' + str(ordinal), json.loads(Path(receipt['receipt_path']).read_text()) == receipt)
+    check('all97 source files present ' + str(ordinal), receipt['candidate_source_file_count'] == 97)
+for item in summary['negative_controls']:
+    name = 'negative-' + item['case']
+    execution = json.loads((C / 'operations' / name / 'execution.json').read_text())
+    check('negative admission control ' + item['case'], item['rejected_before_scorer_replay'] and execution['returncode'] == 1 and execution['expected_rejection_observed'])
+
+closure = O / 'public_code_closure'
+closure.mkdir(exist_ok=True)
+for path, expected in {**service_sources, **native_sources}.items():
+    destination = closure / (expected + '.py')
+    if not destination.exists():
+        shutil.copyfile(path, destination)
+    check('archive exact code ' + Path(path).name, sha(destination) == expected)
+source_inventory = {'schema': 'ns-qualified-repository-sealing-code-identities/v1',
+                    'service_sources': service_sources, 'native_loaded_sources': native_sources}
+dump(O / 'qualified_source_inventory_v1.json', source_inventory)
+private_files = {str(path.relative_to(C)): sha(path) for path in sorted(C.rglob('*'))
+                 if path.is_file() and path.name != 'private_artifact_manifest.json'}
+dump(C / 'private_artifact_manifest.json', {'schema': 'ns-curator-private-artifact-manifest/v1', 'files': private_files})
+audit = {'schema': 'ns-repository-sealing-qualification-audit/v1', 'passed': True,
+         'check_count': len(checks), 'checks': checks, 'provider_calls': 0,
+         'private_artifact_count': len(private_files), 'private_manifest_sha256': sha(C / 'private_artifact_manifest.json'),
+         'public_code_archive_count': len(list(closure.glob('*.py'))),
+         'native_scorer_container_seconds_sum': sum(x['elapsed_seconds'] for x in scores),
+         'source_inventory_sha256': sha(O / 'qualified_source_inventory_v1.json')}
+dump(O / 'audit.json', audit)
+admission = {'schema': 'ns-repository-sealing-qualified-admission/v1', 'qualified': True,
+             'qualification_summary_sha256': sha(O / 'summary.json'), 'qualification_audit_sha256': sha(O / 'audit.json'),
+             'qualification_freeze_sha256': sha(O / 'freeze.json'),
+             'source_inventory_sha256': sha(O / 'qualified_source_inventory_v1.json'),
+             'service_sources': service_sources, 'native_loaded_sources': native_sources,
+             'actual_native_scorer_invocations': 6, 'native_context_preparations': 2,
+             'negative_admission_controls': 4, 'actual_crash_exit': 94,
+             'actual_native_publications': 2, 'fresh_accepted_source_read': True,
+             'all_transition_leaves_replaced': True, 'provider_calls': 0,
+             'scope': 'Curator service fixture; actual integrity publication/recovery and ordinary grading; no model, adversarial oracle-integrity, theorem, or full-controller efficacy claim',
+             'reference_or_hidden_payloads_exported': False}
+dump(O / 'qualification_admission_v1.json', admission)
+print(json.dumps({'qualified': True, 'audit_checks': len(checks), 'native_loaded_code_files': len(native_sources),
+                  'private_artifact_count': len(private_files), 'admission_sha256': sha(O / 'qualification_admission_v1.json'),
+                  'source_inventory_sha256': sha(O / 'qualified_source_inventory_v1.json'), 'provider_calls': 0}, sort_keys=True))

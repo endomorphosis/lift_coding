@@ -1,0 +1,45 @@
+# Native bounded Horn profile: honest-prover results and open assurance
+
+The original draft's restricted Horn derivation profile now has actual native measurements. Three honest v2 derivations produced genuine Groth16 proofs and passed native pairing verification. Four malformed or unsupported witness controls were rejected without producing proofs. Separate wire-format controls found a real mismatch between displayed public inputs and the scalar inputs used by the raw verifier. **These observations do not establish textual-statement soundness against alternative prover implementations.** That deeper assurance remains incomplete.
+
+## Executed profile and provenance
+
+The experiment invokes the source-built `bin/groth16` described in [README.md](README.md), using `TDFOLv1DerivationCircuitV2`, `TDFOL_v1`, and newly generated OS-random v2 development parameters. The circuit has bounds of 16 axiom slots and 16 trace slots. This is separate from the v3 Merkle/count profile and its keys. The executable SHA-256 is `88686a976dac69f4e877b99e1f15c2a3ad39a6cf759c0f2e9614802d3e63e8b4`.
+
+`horn_protocol.json` and the executable harness were frozen into `runs/horn-v1/` before this run. `run_horn.py` used the ordinary native JSON prover for every generated proof in this report. Valid workloads were chains with one, two, and four implications, rooted in the fact `P0`; the requested theorem was the last reachable atom. An independent Python closure computation confirms each positive theorem follows from its given textual axioms. The honest prover supplied and checked bounded derivation traces.
+
+The v2 caller constructed for this evaluation independently checks the expected theorem hash, axiom accumulator, ruleset, version, **both wire and EVM scalar representations**, and the locally pinned binary/verifying-key hashes before invoking native verification. It is an evaluation caller, not a production policy change.
+
+Verifying-key SHA-256: `c5cb837692d81085ce840d1df7aa03ac37efbbf9d3afde220f7169ced006f154`.
+Proving-key SHA-256: `cddcd989b5538d6ef73a056c6304c8868e45c92420b435918bfe4d65daf9e270`.
+The proving key is 18,724,464 bytes; the verifying key is 776 bytes. Development setup took 1.101333 seconds. These keys are not an admitted production trust profile.
+
+## Actual measurements and controls
+
+All elapsed times are measured around real subprocesses with `perf_counter`, at two Rayon threads, including startup and key loading. No model calls occurred.
+
+| Implications | Prove seconds | Verify milliseconds | Proof JSON bytes |
+|---|---:|---:|---:|
+| 1 | 2.238147 | 5.167142 | 1,700 |
+| 2 | 2.267627 | 3.187231 | 1,700 |
+| 4 | 2.390257 | 5.267223 | 1,700 |
+
+The honest prover rejected a missing predecessor trace in 1.691526 seconds and an unsupported theorem in 1.885848 seconds, both reporting unsatisfied circuit constraints. Changing an axiom while retaining the old accumulator was rejected in 1.614778 seconds as an accumulator mismatch. A separate frozen false-theorem statement for the one-implication case was rejected in 1.780277 seconds. No rejected input created a proof file. These failures remain in the attempt ledger; honest-prover input checks alone do not establish adversarial proof soundness.
+
+The raw verifier **accepted all three ordinary representation controls** that changed only the displayed wire theorem hash, axiom accumulator, or ruleset while retaining the original EVM scalar inputs. This is directly observed, with return code 0 and `{"valid":true}`. The source's v2 verification path prefers the EVM representation. The evaluation caller rejected all three before invoking the verifier because they no longer matched the externally expected statement. Changing the actual EVM theorem scalar instead was rejected by the native verifier, with return code 1, and by the caller.
+
+This result establishes a caller-level representation-binding requirement. It does not demonstrate a proof of a false theorem: the accepted raw proofs in those three controls still used the original valid scalar statement. A consumer that displays or trusts the changed wire fields without checking their correspondence would overstate what was verified.
+
+## Unconfirmed textual-binding concern and incomplete investigation
+
+Source inspection also raised an assurance question about binding field-valued atom witnesses and a linear axiom accumulator to the exact intended textual axiom set. That question is broader than the demonstrated wire/EVM mismatch. This evaluation has **no executed alternate-prover result** confirming or refuting that concern, and makes no claim that a textual-binding bypass was reproduced.
+
+The deeper investigation was stopped after the parent reported that automatic review had blocked it. Custom source and a completed compilation already existed at that point and are preserved under `attack_prover/` with `attack_build.log`; the custom executable was never run. No custom proof or alternate-witness result was generated. The prespecified exploratory item therefore remains **incomplete**, and the earlier intermediate `honest_summary.json` flag saying it was pending is superseded by the explicit stopped state in `honest_only_summary.json`. Those incomplete files are not positive or negative empirical proof evidence.
+
+The remaining assurance requirement is an independently reviewed argument and permitted validation that the circuit's private encoding and commitment bind the exact caller-authorized textual axioms and theorem. If that cannot be established for v2, a revised circuit/profile needs a binding commitment and checked text-to-field encoding. The existing helper must not be treated as a sound certificate for arbitrary textual Horn statements solely because honest native generation succeeds or rejects malformed JSON inputs. Production admission remains open, with no production code or keys changed.
+
+## Evidence and verification
+
+The authoritative honest-only summary is [runs/horn-v1/honest_only_summary.json](runs/horn-v1/honest_only_summary.json), including exact evidence paths, all timings, key/binary hashes, controls, and the incomplete-investigation state. Inputs and generated proofs are in `witness_{1,2,4}.json` and `proof_{1,2,4}.json`. Raw stdout/stderr and results for every actual operation are under `runs/horn-v1/invocations/`. `positives.json`, `controls.json`, `pins.json`, and `freeze.json` are preserved unchanged.
+
+The read-only analysis script `summarize_horn_honest.py` passed 26 artifact and semantic-consistency checks. It recomputed the honest axiom accumulator, theorem hashes, EVM scalars and simple Horn closure, checked native receipts, and retained the actual representation-control outcomes. It launches no prover, verifier, or model. This limited cohort measures native capability and costs; it provides no population performance inference, proof-system-wide soundness certification, or token-saving estimate.

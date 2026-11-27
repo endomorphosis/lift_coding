@@ -1,0 +1,160 @@
+import PyAstNumericSemantics
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED FINITE-BINDING CANDIDATE.
+
+Own finite mixed values and first-binding lookup preserve the full PyName
+identity, including scope. Scalar projection checks the first visible binding
+of each requested name; a wrong-kind first binding is never skipped in favour
+of an older scalar. Only already resolved identities are removed from scope.
+
+The admissibility predicate describes ordinary binding structure and value
+kinds. It contains no lookup-success, expression-evaluation, model or desired
+output fields, and permits requested names to be absent. Projection success
+and lookup/error correspondence are derived conclusions.
+
+The sole import is the genuinely qualified independent scalar-source module.
+No target syntax, target interpreter or model is imported or evaluated. This
+stage interprets no comprehension or arithmetic expression and changes no
+existing numeric operation. Parser/global purity/Float, whole source/task,
+training/convergence, metadata/cache and planner claims remain open.
+-/
+
+namespace RankerSupportedPythonFiniteBindings
+
+open RankerSupportedPythonAstReal (PyName PyNumber PyEnvironment PyEvalError lookupNumber)
+
+inductive PyFiniteKind where
+  | scalar
+  | sequence
+  deriving DecidableEq
+
+inductive PyFiniteValue where
+  | number (value : PyNumber)
+  | sequence (values : List PyFiniteValue)
+
+def PyFiniteValue.kind : PyFiniteValue → PyFiniteKind
+  | .number _ => .scalar
+  | .sequence _ => .sequence
+
+inductive PyFiniteError where
+  | unknownName (identifier : PyName)
+  | wrongKind (identifier : PyName) (expected actual : PyFiniteKind)
+  deriving DecidableEq
+
+abbrev PyFiniteEnvironment := List (PyName × PyFiniteValue)
+
+/-- Own first-binding lookup; full scoped identity is compared. -/
+def lookupFiniteValue : PyFiniteEnvironment → PyName → Except PyFiniteError PyFiniteValue
+  | [], identifier => .error (.unknownName identifier)
+  | (head, value) :: rest, identifier =>
+      if identifier = head then .ok value else lookupFiniteValue rest identifier
+
+/-- The first name match fixes the value kind. Wrong kinds stop lookup. -/
+def lookupFiniteScalar : PyFiniteEnvironment → PyName → Except PyFiniteError PyNumber
+  | [], identifier => .error (.unknownName identifier)
+  | (head, value) :: rest, identifier =>
+      if identifier = head then
+        match value with
+        | .number number => .ok number
+        | .sequence _ => .error (.wrongKind identifier .scalar .sequence)
+      else lookupFiniteScalar rest identifier
+
+/-- Remove all copies of an already resolved scoped identity. -/
+def removeScalarName (scope : List PyName) (identifier : PyName) : List PyName :=
+  scope.filter (fun candidate => decide (candidate ≠ identifier))
+
+/-- Project requested first bindings, retaining exact own numeric tags.
+Unrequested mixed values are ignored. A requested first sequence is an error;
+older bindings of an already resolved name never affect the projection. -/
+def scalarProjection (scope : List PyName) :
+    PyFiniteEnvironment → Except PyFiniteError PyEnvironment
+  | [] => .ok []
+  | (identifier, value) :: rest =>
+      if identifier ∈ scope then
+        match value with
+        | .sequence _ => .error (.wrongKind identifier .scalar .sequence)
+        | .number number =>
+            match scalarProjection (removeScalarName scope identifier) rest with
+            | .error problem => .error problem
+            | .ok projected => .ok ((identifier, number) :: projected)
+      else scalarProjection scope rest
+
+/-- Structural typing of requested visible bindings. Missing names are
+allowed; their unknown-name lookup observations are also preserved. -/
+inductive ScalarBindingsAdmissible : List PyName → PyFiniteEnvironment → Prop where
+  | nil (scope : List PyName) : ScalarBindingsAdmissible scope []
+  | skip (scope : List PyName) (identifier : PyName) (value : PyFiniteValue)
+      (rest : PyFiniteEnvironment) (outside : identifier ∉ scope)
+      (admitted : ScalarBindingsAdmissible scope rest) :
+      ScalarBindingsAdmissible scope ((identifier, value) :: rest)
+  | number (scope : List PyName) (identifier : PyName) (value : PyNumber)
+      (rest : PyFiniteEnvironment) (present : identifier ∈ scope)
+      (admitted : ScalarBindingsAdmissible (removeScalarName scope identifier) rest) :
+      ScalarBindingsAdmissible scope ((identifier, .number value) :: rest)
+
+def translateFiniteBindingError : PyFiniteError → PyEvalError
+  | .unknownName identifier => .unknownName identifier.spelling
+  | .wrongKind identifier _ _ => .unsupported ("finiteBindingKind:" ++ identifier.spelling)
+
+/-- Numeric values retain their original own tags. Only error representation
+is mapped to the older independent scalar-source error family. -/
+def observeFiniteScalarLookup : Except PyFiniteError PyNumber → Except PyEvalError PyNumber
+  | .ok number => .ok number
+  | .error problem => .error (translateFiniteBindingError problem)
+
+/-- A wrong-typed first binding refuses both scalar lookup and projection,
+regardless of any older binding with that same scoped identity. -/
+theorem own_first_binding_checks_kind (scope : List PyName) (identifier : PyName)
+    (elements : List PyFiniteValue) (rest : PyFiniteEnvironment)
+    (requested : identifier ∈ scope) :
+    lookupFiniteScalar ((identifier, .sequence elements) :: rest) identifier =
+        .error (.wrongKind identifier .scalar .sequence) ∧
+      scalarProjection scope ((identifier, .sequence elements) :: rest) =
+        .error (.wrongKind identifier .scalar .sequence) := by
+  constructor
+  · simp only [lookupFiniteScalar, if_pos rfl, ite_true]
+  · simp only [scalarProjection, if_pos requested]
+
+/-- Projection acceptance and every requested numeric/unknown-name lookup
+observation follow from structural visible-binding admissibility alone. -/
+theorem scalar_projection_preserves_admitted_lookup (scope : List PyName)
+    (environment : PyFiniteEnvironment)
+    (admitted : ScalarBindingsAdmissible scope environment) :
+    ∃ projected : PyEnvironment,
+      scalarProjection scope environment = .ok projected ∧
+        ∀ identifier ∈ scope,
+          observeFiniteScalarLookup (lookupFiniteScalar environment identifier) =
+            lookupNumber projected identifier := by
+  induction admitted with
+  | nil scope =>
+    refine ⟨[], rfl, ?_⟩
+    intro identifier present
+    rfl
+  | skip scope head value rest outside admitted ih =>
+    rcases ih with ⟨projected, accepted, related⟩
+    refine ⟨projected, ?_, ?_⟩
+    · simpa only [scalarProjection, if_neg outside] using accepted
+    · intro identifier present
+      have different : identifier ≠ head := by
+        intro same
+        subst identifier
+        exact outside present
+      simpa only [lookupFiniteScalar, if_neg different] using related identifier present
+  | number scope head value rest present admitted ih =>
+    rcases ih with ⟨projected, accepted, related⟩
+    refine ⟨(head, value) :: projected, ?_, ?_⟩
+    · simp only [scalarProjection, if_pos present, accepted]
+    · intro identifier member
+      by_cases same : identifier = head
+      · subst identifier
+        simp only [lookupFiniteScalar, lookupNumber, if_pos rfl, observeFiniteScalarLookup, ite_true]
+      · have remaining : identifier ∈ removeScalarName scope head := by
+          simp [removeScalarName, member, same]
+        simpa only [lookupFiniteScalar, lookupNumber, if_neg same] using
+          related identifier remaining
+
+#print axioms own_first_binding_checks_kind
+#print axioms scalar_projection_preserves_admitted_lookup
+
+end RankerSupportedPythonFiniteBindings

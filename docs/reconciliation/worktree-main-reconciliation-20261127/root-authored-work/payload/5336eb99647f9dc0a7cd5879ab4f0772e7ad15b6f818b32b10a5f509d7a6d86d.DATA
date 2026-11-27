@@ -1,0 +1,89 @@
+#!/usr/bin/env python3
+"""Isolate memoization of one exact immutable RepositoryState's identity."""
+import difflib
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+
+HERE = Path(__file__).resolve().parent
+def sha(body): return hashlib.sha256(body).hexdigest()
+
+def main():
+    source = HERE / "runtime_literal_union_v4/ipfs_datasets_py"
+    destination = HERE / "runtime_state_identity_v5"
+    if destination.exists(): raise SystemExit("variant exists; never overwrite")
+    relative = Path("logic/software_contracts/semantic_index/models.py")
+    before = (source / relative).read_text()
+    start = before.index("class RepositoryState:")
+    end = before.index("class RepositoryStateDelta:")
+    section = before[start:end]
+    marker = '    schema: str = SEMANTIC_INDEX_SCHEMA\n'
+    assert section.count(marker) == 1
+    section = section.replace(marker, marker + '''    # Private process-local optimization, absent from durable identity/schema.
+    _identity_cache: Any = field(default=None, init=False, repr=False, compare=False)
+
+''')
+    old = '    def state_cid(self) -> str: return cid_for_structured(self.identity_payload())\n'
+    new = '''    def state_cid(self) -> str:
+        # The native constructors copy and deeply freeze all structured fields.
+        # Subclasses may override value behavior and retain the uncached path.
+        exact_records = (
+            type(self) is RepositoryState
+            and all(type(item) is SymbolRecord and
+                    (item.span is None or type(item.span) is SourceSpan)
+                    for item in self.symbols)
+            and all(type(item) is ArtifactRecord for item in self.artifacts)
+            and all(type(item) is DependencyEdge and
+                    (item.span is None or type(item.span) is SourceSpan)
+                    for item in self.edges)
+        )
+        if not exact_records:
+            return cid_for_structured(self.identity_payload())
+        cached = self._identity_cache
+        if cached is None or cached[0] is not cid_for_structured:
+            value = cid_for_structured(self.identity_payload())
+            object.__setattr__(self, "_identity_cache", (cid_for_structured, value))
+            return value
+        return cached[1]
+'''
+    assert section.count(old) == 1
+    section = section.replace(old, new)
+    after = before[:start] + section + before[end:]
+    compile(after, str(destination / "ipfs_datasets_py" / relative), "exec")
+    destination.mkdir()
+    shutil.copytree(source, destination / "ipfs_datasets_py", copy_function=os.link,
+                    symlinks=True, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+    target = destination / "ipfs_datasets_py" / relative
+    temporary = target.with_suffix(".py.new"); temporary.write_text(after)
+    os.replace(temporary, target)
+    assert (source / relative).read_text() == before
+    assert os.stat(source / relative).st_ino != os.stat(target).st_ino
+    patch = "".join(difflib.unified_diff(before.splitlines(True), after.splitlines(True),
+                    fromfile="a/ipfs_datasets_py/" + str(relative),
+                    tofile="b/ipfs_datasets_py/" + str(relative)))
+    (HERE / "state_identity_v5.patch").write_text(patch)
+    parent = HERE / "runtime_literal_union_v4_manifest.json"
+    result = {
+        "schema": "ns-context-native-source-variant/v5",
+        "variant_package": str(destination / "ipfs_datasets_py"),
+        "parent_variant": str(parent), "parent_variant_sha256": sha(parent.read_bytes()),
+        "changed_file": str(relative), "original_sha256": sha(before.encode()),
+        "variant_sha256": sha(after.encode()),
+        "materializer_sha256": sha(Path(__file__).read_bytes()),
+        "upstream_files_modified": False,
+        "cache_scope": "one exact deeply immutable native RepositoryState instance; no serialized cache",
+        "subclass_behavior": "uncached for RepositoryState or nested record/span subclasses",
+        "all_native_source_read_and_freshness_guards_retained": True,
+        "profile_assumptions": [
+            "closed frozen native source and content codec configuration",
+            "no object.__setattr__ or reflection mutation bypass of frozen value objects",
+            "source changes construct/rescan new states; no semantic result cache across states"
+        ],
+        "execution_or_proof_reuse": False, "provider_calls": 0
+    }
+    (HERE / "runtime_state_identity_v5_manifest.json").write_text(json.dumps(result, indent=2) + "\n")
+    print(json.dumps(result))
+
+if __name__ == "__main__": main()

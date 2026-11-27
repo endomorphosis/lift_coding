@@ -1,0 +1,15 @@
+-- Generated candidate embedding. No semantic axioms or program proofs are asserted.
+namespace IntentProjection
+
+structure Interpretation where
+  atom : String → List String → Prop
+  intended : Prop → Prop
+  required : Prop → Prop
+  prohibited : Prop → Prop
+  permitted : Prop → Prop
+  recommended : Prop → Prop
+
+def statement_9293cd120872ecaf6420a87bbd3e397d4d3c97cef76fdde56440932e542a23aa (i : Interpretation) : Prop :=
+  i.required (i.atom "implement_attack" ["agent", "chosen_plaintext_attack"])
+
+end IntentProjection

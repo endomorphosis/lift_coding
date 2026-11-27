@@ -1,0 +1,177 @@
+"""Versioned local development JSON service for integrated evaluation callers.
+
+Record/propose are generic over canonical JSON context and action descriptors.
+This service trusts the evaluation controller's execution declarations; it does
+not mint production authority, signatures or execution proofs.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+from pathlib import Path
+import platform
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[4]
+BASE = ROOT / ".worktrees/semantic-addressed-world-model-r2"
+OVERLAY = HERE / "source_profiles/compiler_identity_v1"
+IDENTITY_FILE = OVERLAY / "ipfs_accelerate_py/agent_supervisor/semantic_state/program_world_adapters.py"
+
+
+def sha(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def load_native():
+    profile = json.loads((OVERLAY / "profile.json").read_text())
+    if sha(IDENTITY_FILE) != profile["patched_sha256"]:
+        raise ValueError("isolated compiler profile hash mismatch")
+    if sha(profile["original_file"]) != profile["original_sha256"]:
+        raise ValueError("base compiler profile hash mismatch")
+    sys.path[:0] = [str(OVERLAY), str(BASE), str(BASE / "ipfs_datasets_py"), str(BASE / "ipfs_kit_py")]
+    os.environ["IPFS_DATASETS_PY_MINIMAL_IMPORTS"] = "1"
+    os.environ["IPFS_DATASETS_AUTO_INSTALL"] = "0"
+    os.environ["IPFS_KIT_AUTO_INSTALL_DEPS"] = "0"
+    from ipfs_datasets_py.logic.software_contracts.semantic_state import program_transition as T
+    from ipfs_kit_py.semantic_world_store.graph_history import ProgramTransitionLog, HistoryRecordKind
+    from ipfs_kit_py.mcp_server.mcplusplus.coordination_storage import DurableCoordinationStore
+    from ipfs_accelerate_py.agent_supervisor.semantic_state.program_world_adapters import ExecutionTransitionCompiler, DatasetsProgramWorldAdapter, ProgramWorldAdapterError
+    import ipfs_accelerate_py.agent_supervisor.semantic_state.program_world_adapters as loaded_adapter
+    if Path(loaded_adapter.__file__).resolve() != IDENTITY_FILE:
+        raise ValueError("isolated compiler module was not normally imported")
+    return T, ProgramTransitionLog, HistoryRecordKind, DurableCoordinationStore, ExecutionTransitionCompiler, DatasetsProgramWorldAdapter, ProgramWorldAdapterError
+
+
+def runtime_profile():
+    imports = []
+    for name, module in sorted(sys.modules.items()):
+        filename = getattr(module, "__file__", None)
+        if not filename:
+            continue
+        path = Path(filename).resolve()
+        if path.is_file() and (path.is_relative_to(BASE) or path.is_relative_to(OVERLAY)):
+            imports.append({"module": name, "path": str(path), "sha256": sha(path)})
+    return {"profile": "compiler_identity_v1", "base_head": "40451b52c133b943818515a86e0deb95d9fab812", "patched_compiler_sha256": sha(IDENTITY_FILE), "service_sha256": sha(__file__), "python": sys.version, "executable_sha256": sha(sys.executable), "platform": platform.platform(), "imports": imports, "normal_imports": True, "production_source_changed": False}
+
+
+def put(store, kind, value):
+    return store.put({"schema": "world-memory-service-development/" + kind + "@1", "value": value}, replicate=False)["cid"]
+
+
+def make_query(T, store, request):
+    context = request["context"]
+    if set(context) != {"subject", "source", "environment", "state", "policy"}:
+        raise ValueError("context must provide subject, source, environment, state and policy")
+    actions = request["actions"]
+    names = [action["name"] for action in actions]
+    if not actions or len(set(names)) != len(names):
+        raise ValueError("actions require distinct names in a nonempty closed catalog")
+    ids = {key: put(store, key, value) for key, value in context.items()}
+    action_ids = {action["name"]: put(store, "action", action) for action in actions}
+    query = T.ProgramTransitionQuery(query_family="next_call", language="python", subject_cid=ids["subject"], current_source_cid=ids["source"], environment_binding_cid=ids["environment"], policy_cid=ids["policy"], current_state_cid=ids["state"], allowed_symbol_cids=tuple(action_ids.values()))
+    return query, action_ids
+
+
+def admit(T, old_query, current_query, observation):
+    return T.admit_program_transition(old_query, current_subject_cid=current_query.subject_cid, current_source_cid=current_query.current_source_cid, current_environment_binding_cid=current_query.environment_binding_cid, current_state_cid=current_query.current_state_cid, current_graph_cid=current_query.current_graph_cid, current_trace_cid=current_query.current_trace_cid, observation=observation)
+
+
+def load_candidate(T, log, Kind, cid):
+    return T.ProgramTransitionCandidate.from_dict(dict(log.blocks.get_verified_record(cid, expected_kind=Kind.TRANSITION_CANDIDATE)["payload"]))
+
+
+def handle(request):
+    started = time.perf_counter()
+    if request.get("schema") != "world-memory-service-request@1":
+        raise ValueError("request schema must be world-memory-service-request@1")
+    operation = request["operation"]
+    if operation not in {"record", "propose"}:
+        raise ValueError("operation must be record or propose")
+    T, Log, Kind, Store, Compiler, _, _ = load_native()
+    store_path = Path(request["store_dir"]).resolve()
+    # Only local revision evaluation data are supported by this service.
+    if not store_path.is_relative_to(HERE.parent):
+        raise ValueError("development store must be under the revision evals directory")
+    store = Store(storage_dir=store_path / "native")
+    log = Log(store)
+    index_path = store_path / "evaluation_index.json"
+    index = json.loads(index_path.read_text()) if index_path.exists() else {"entries": {}, "first_by_subject": {}}
+    query, actions = make_query(T, store, request)
+    result = {"schema": "world-memory-service-response@1", "operation": operation, "query": query.to_dict(), "service_pid": os.getpid(), "request_id": request.get("request_id"), "provider_calls": 0, "tokens": 0, "observation_trust": "local evaluation controller declaration; not a signed runner receipt or cryptographic execution proof"}
+    try:
+        if operation == "record":
+            execution = request["execution"]
+            selected = execution["selected_action"]
+            if selected not in actions or execution.get("passed") is not True or not execution.get("evidence"):
+                raise ValueError("record requires allowed action, actual passed declaration and nonempty execution evidence")
+            observation_status = request.get("observation_status", "observed")
+            if observation_status not in {"observed", "inferred_untrusted"}:
+                raise ValueError("unsupported development observation status")
+            evidence_cids = [put(store, "execution-evidence", evidence) for evidence in execution["evidence"]]
+            observed_cid = put(store, "observed-result", {"query_cid": query.query_cid, "selected_action_cid": actions[selected], "output": execution["output"], "passed": True, "producer_pid": execution["producer_pid"]})
+            candidate = T.select_and_parameterize_candidate(query, candidate_kind="call_target", selected_cid=actions[selected])
+            observation = T.observe_program_transition(query, observed_cid=observed_cid, evidence_cids=evidence_cids, observation_status=observation_status)
+            admission = admit(T, query, query, observation)
+            written = log.append_transition_receipt(query=query, candidates=(candidate,), observation=observation, admission=admission)
+            entry = {"query_cid": query.query_cid, "candidate_cid": candidate.candidate_cid, "observation_cid": observation.observation_cid, "receipt_cid": written.cid, "log_entry_cid": written.log_entry_cid}
+            index["entries"][query.query_cid] = entry
+            index["first_by_subject"].setdefault(query.subject_cid, entry)
+            index_path.write_text(json.dumps(index, indent=2, sort_keys=True) + "\n")
+            result.update({"status": "recorded", "publication": entry, "admission": admission.to_dict()})
+        else:
+            old = index["entries"].get(query.query_cid, index["first_by_subject"].get(query.subject_cid))
+            result.update({"status": "fallback", "selected_action": None, "reason": "empty", "exact_query_hit": query.query_cid in index["entries"]})
+            if old is not None:
+                old_query = log.get_verified_query(old["query_cid"])
+                old_observation = log.get_verified_observation(old["observation_cid"])
+                old_candidate = load_candidate(T, log, Kind, old["candidate_cid"])
+                admission = admit(T, old_query, query, old_observation)
+                result.update({"reason": admission.verdict, "admission": admission.to_dict(), "retrieved": old})
+                bound = False
+                try:
+                    T.bind_candidate_to_query(query, old_candidate)
+                    bound = True
+                except T.ProgramTransitionError as error:
+                    result["binding_error"] = str(error)
+                result["candidate_bound"] = bound
+                if T.may_influence_planning(admission) and bound:
+                    compiled = Compiler().compile(query, candidate=old_candidate, observation=old_observation)
+                    result["compilation"] = compiled.to_dict()
+                    if not compiled.proposal_only or compiled.admitted or compiled.prediction_authoritative:
+                        raise ValueError("compiler changed proposal authority")
+                    # This is the continuation under qualification: resolution
+                    # happens by the compiler's IDs. The precompiled candidate
+                    # must not supply the dispatched action.
+                    resolved = load_candidate(T, log, Kind, compiled.candidate_cid)
+                    resolved_observation = log.get_verified_observation(compiled.observation_cid)
+                    T.bind_candidate_to_query(query, resolved)
+                    if compiled.query_cid != query.query_cid or resolved_observation.query_cid != query.query_cid:
+                        raise ValueError("compiled result is not bound to current query")
+                    observed = store.get(resolved_observation.observed_cid)["value"]
+                    if observed["selected_action_cid"] != resolved.selected_cid or observed["passed"] is not True:
+                        raise ValueError("stored independent observation does not match compiled action")
+                    selected = next(name for name, cid in actions.items() if cid == resolved.selected_cid)
+                    result.update({"status": "proposal", "selected_action": selected, "resolved_candidate_cid": resolved.candidate_cid, "resolved_observation_cid": resolved_observation.observation_cid, "producer_execution_pid": observed["producer_pid"], "requires_current_execution_and_validation": True})
+    finally:
+        log.close()
+    result["elapsed_seconds"] = time.perf_counter() - started
+    result["runtime_profile"] = runtime_profile()
+    return result
+
+
+def main():
+    try:
+        request = json.load(sys.stdin)
+        response = handle(request)
+    except Exception as error:
+        response = {"schema": "world-memory-service-response@1", "status": "error", "error_type": type(error).__name__, "error": str(error), "provider_calls": 0}
+        print(json.dumps(response, sort_keys=True))
+        raise SystemExit(1)
+    print(json.dumps(response, sort_keys=True))
+
+
+if __name__ == "__main__":
+    main()

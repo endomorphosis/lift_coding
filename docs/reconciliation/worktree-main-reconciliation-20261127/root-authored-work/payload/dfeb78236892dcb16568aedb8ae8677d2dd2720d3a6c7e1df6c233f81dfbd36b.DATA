@@ -1,0 +1,394 @@
+"""Bounded current-source metadata for revision-sensitive cache experiments.
+
+All supplied Python bytes are accounted. Native AST, semantic graph and lexical
+vector producers are retained without importing the target source. Dependency
+resolution records syntax only; neither a resolved edge nor a storage label is
+a proof of source behavior. Unsupported sites remain explicit.
+"""
+from __future__ import annotations
+
+import ast
+from collections import Counter
+from contextlib import contextmanager
+import hashlib
+import json
+import os
+from pathlib import Path, PurePosixPath
+import stat
+import sys
+
+
+SCHEMA = "terminal-revision-metadata@1"
+LIMITS = {"files": 16, "source_bytes": 262144, "total_source_bytes": 1048576,
+          "ast_nodes": 20000, "symbols": 2048, "native_facts_per_file": 20000,
+          "metadata_bytes": 32 * 1024**2, "producer_bytes": 8 * 1024**2}
+AUTHORITY = {"proof_authority": False, "execution_authority": False,
+             "completion_authority": False, "source_semantics_verified": False}
+
+
+class RevisionMetadataError(ValueError):
+    """Malformed, ambiguous in scope, or over-bound source metadata."""
+
+
+def _require(condition, message):
+    if not condition:
+        raise RevisionMetadataError(message)
+
+
+def _wire(value):
+    try:
+        raw = json.dumps(value, sort_keys=True, separators=(",", ":"),
+                         ensure_ascii=False, allow_nan=False).encode("utf-8")
+    except (TypeError, ValueError, UnicodeError, RecursionError) as exc:
+        raise RevisionMetadataError("finite UTF8 metadata required") from exc
+    _require(len(raw) <= LIMITS["metadata_bytes"], "metadata byte bound exceeded")
+    return raw
+
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _identity(value):
+    return "sha256:" + _sha(_wire(value))
+
+
+def _row(value, field):
+    return {**value, field: _identity(value)}
+
+
+def _sources(sources):
+    _require(type(sources) is dict and 1 <= len(sources) <= LIMITS["files"],
+             "bounded nonempty exact source mapping required")
+    result, trees, total = {}, {}, 0
+    for path, raw in sorted(sources.items(), key=lambda item: str(item[0])):
+        _require(type(path) is str and bool(path) and len(path.encode("utf-8")) <= 512
+                 and "\\" not in path and "\0" not in path,
+                 "canonical relative Python path required")
+        pure = PurePosixPath(path)
+        _require(not pure.is_absolute() and str(pure) == path and ".." not in pure.parts
+                 and path.endswith(".py"), "canonical relative Python path required")
+        _require(type(raw) is bytes and 0 < len(raw) <= LIMITS["source_bytes"],
+                 "bounded nonempty exact source bytes required")
+        total += len(raw)
+        _require(total <= LIMITS["total_source_bytes"], "total source byte bound exceeded")
+        try:
+            text = raw.decode("utf-8")
+            # Parsing decoded text deliberately refuses non-UTF8 coding-cookie
+            # reinterpretation. These are the same bytes retained in metadata.
+            tree = ast.parse(text, filename=path)
+        except (UnicodeError, SyntaxError, ValueError, RecursionError) as exc:
+            raise RevisionMetadataError("malformed UTF8 Python source: " + path) from exc
+        count = sum(1 for _ in ast.walk(tree))
+        _require(count <= LIMITS["ast_nodes"], "AST node bound exceeded")
+        result[path], trees[path] = raw, tree
+    return result, trees
+
+
+def _span(raw, node):
+    # CPython AST columns are UTF8 byte offsets, including for non-ASCII text.
+    lines = raw.splitlines(keepends=True)
+    offsets = [0]
+    for line in lines:
+        offsets.append(offsets[-1] + len(line))
+    start_line, end_line = node.lineno, node.end_lineno
+    _require(1 <= start_line <= end_line <= len(lines), "source span line outside source")
+    start = offsets[start_line - 1] + node.col_offset
+    end = offsets[end_line - 1] + node.end_col_offset
+    _require(0 <= start <= end <= len(raw), "source span byte outside source")
+    return {"start_byte": start, "end_byte": end, "line_start": start_line,
+            "column_start": node.col_offset, "line_end": end_line,
+            "column_end": node.end_col_offset, "sha256": _sha(raw[start:end])}
+
+
+def _module(path):
+    parts = list(PurePosixPath(path[:-3]).parts)
+    if parts[-1] == "__init__":
+        parts.pop()
+    return ".".join(parts)
+
+
+def _attribute(node):
+    if isinstance(node, ast.Name):
+        return node.id
+    if isinstance(node, ast.Attribute):
+        parent = _attribute(node.value)
+        if parent:
+            return parent + "." + node.attr
+    return ""
+
+
+def _signature(item):
+    return (item.st_dev, item.st_ino, item.st_mode, item.st_uid, item.st_gid,
+            item.st_nlink, item.st_size, item.st_mtime_ns, item.st_ctime_ns)
+
+
+@contextmanager
+def _producer(modules):
+    paths = sorted({Path(__file__).resolve(), *(Path(module.__file__).resolve() for module in modules)})
+    pins, witnesses = [], []
+    try:
+        for path in paths:
+            _require(path.is_absolute() and path.resolve(strict=True) == path,
+                     "canonical producer module required")
+            fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+            witnesses.append((path, fd, None, None))
+            before = os.fstat(fd)
+            _require(stat.S_ISREG(before.st_mode) and before.st_nlink == 1
+                     and before.st_size <= LIMITS["producer_bytes"], "bounded producer file required")
+            with os.fdopen(os.dup(fd), "rb") as stream:
+                raw = stream.read(LIMITS["producer_bytes"] + 1)
+            _require(len(raw) <= LIMITS["producer_bytes"]
+                     and _signature(before) == _signature(os.fstat(fd)) == _signature(path.lstat()),
+                     "producer changed during capture")
+            witnesses[-1] = (path, fd, _signature(before), _sha(raw))
+            pins.append({"path": str(path), "sha256": _sha(raw), "bytes": len(raw)})
+
+        def unchanged():
+            for path, fd, signature, digest in witnesses:
+                _require(path.resolve(strict=True) == path
+                         and _signature(os.fstat(fd)) == signature == _signature(path.lstat()),
+                         "producer changed during metadata generation")
+                os.lseek(fd, 0, os.SEEK_SET)
+                with os.fdopen(os.dup(fd), "rb") as stream:
+                    raw = stream.read(LIMITS["producer_bytes"] + 1)
+                _require(len(raw) <= LIMITS["producer_bytes"] and _sha(raw) == digest
+                         and _signature(os.fstat(fd)) == signature == _signature(path.lstat()),
+                         "producer changed during metadata generation")
+
+        public = {"schema": "terminal-revision-producer@1", "python": sys.version,
+            "pin_scope": "selected_direct_producer_modules;not_transitive_environment_closure",
+            "loaded_module_code_attested": False, "files": pins, "limits": dict(LIMITS)}
+        yield public, unchanged
+    except OSError as exc:
+        raise RevisionMetadataError("producer file custody changed") from exc
+    finally:
+        for _, fd, _, _ in witnesses:
+            os.close(fd)
+
+
+def _syntax(sources, trees):
+    modules = {}
+    for path in sources:
+        modules.setdefault(_module(path), []).append(path)
+    declarations, owners, parents, units, contracts = {}, {}, {}, [], []
+    for path, tree in trees.items():
+        counts = Counter(node.name for node in tree.body if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)))
+        declarations[path] = {name for name, count in counts.items() if count == 1}
+
+        def visit(node, owner="", parent=None):
+            parents[(path, id(node))] = parent
+            owners[(path, id(node))] = owner
+            nested = owner
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                qualified = owner + "." + node.name if owner else node.name
+                unit = {"schema": "terminal-revision-source-unit@1", "path": path,
+                        "qualified_symbol": qualified, "kind": type(node).__name__,
+                        "source_sha256": _sha(sources[path]), "span": _span(sources[path], node),
+                        "ast_sha256": _sha(ast.dump(node, include_attributes=False).encode()), **AUTHORITY}
+                units.append(_row(unit, "unit_id"))
+                contracts.append(_row({"schema": "terminal-revision-contract-candidate@1",
+                    "path": path, "qualified_symbol": qualified,
+                    "source_sha256": unit["source_sha256"], "span": unit["span"],
+                    "docstring": ast.get_docstring(node, clean=False),
+                    "annotations": ([] if isinstance(node, ast.ClassDef) else
+                        [{"name": arg.arg, "expression": ast.unparse(arg.annotation)}
+                         for arg in [*node.args.posonlyargs, *node.args.args, *node.args.kwonlyargs,
+                                     *([node.args.vararg] if node.args.vararg else []),
+                                     *([node.args.kwarg] if node.args.kwarg else [])] if arg.annotation is not None]),
+                    "return_annotation": (ast.unparse(node.returns) if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.returns else None),
+                    "classification": "source_syntax_candidate;no_contract_checker_invoked", **AUTHORITY}, "contract_id"))
+                nested = qualified
+            for child in ast.iter_child_nodes(node):
+                visit(child, nested, node)
+
+        visit(tree)
+
+    edges, unsupported = [], []
+    for path, tree in trees.items():
+        raw = sources[path]
+        top = {id(node) for node in tree.body}
+        imports = {}
+        # Any repeated/imported/reassigned root is conservatively unresolved.
+        writes = Counter(node.id for node in ast.walk(tree) if isinstance(node, ast.Name) and isinstance(node.ctx, (ast.Store, ast.Del)))
+        bindings = Counter(node.name for node in tree.body if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)))
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.Import, ast.ImportFrom)):
+                for alias in node.names:
+                    local = alias.asname or (alias.name.split(".")[0] if isinstance(node, ast.Import) else alias.name)
+                    bindings[local] += 1
+
+        def target(module):
+            paths = modules.get(module, [])
+            return paths[0] if len(paths) == 1 else None
+
+        def frontier(node, reason, expression=None):
+            row = {"schema": "terminal-revision-unsupported-site@1", "path": path,
+                   "source_sha256": _sha(raw), "source_symbol": owners[(path, id(node))] or None,
+                   "node_kind": type(node).__name__, "reason": reason,
+                   "expression": expression if expression is not None else ast.get_source_segment(raw.decode(), node),
+                   "span": _span(raw, node), "retained": True, **AUTHORITY}
+            unsupported.append(_row(row, "unsupported_id"))
+
+        def edge(node, kind, expression, target_path=None, target_symbol=None, resolution="unresolved", reason=""):
+            value = {"schema": "terminal-revision-dependency@1", "kind": kind,
+                "source_path": path, "source_symbol": owners[(path, id(node))] or None,
+                "target_path": target_path, "target_symbol": target_symbol,
+                "expression": expression, "resolution": resolution, "reason": reason,
+                "span": _span(raw, node), "source_sha256": _sha(raw),
+                "target_source_sha256": _sha(sources[target_path]) if target_path else None,
+                "semantic_authority": False, **AUTHORITY}
+            edges.append(_row(value, "edge_id"))
+            if resolution != "static_syntax":
+                frontier(node, reason or resolution, expression)
+
+        for node in ast.walk(tree):
+            if not isinstance(node, (ast.Import, ast.ImportFrom)):
+                continue
+            if isinstance(node, ast.ImportFrom):
+                current = _module(path).split(".")
+                package = current if PurePosixPath(path).name == "__init__.py" else current[:-1]
+                if node.level:
+                    root = package[:len(package) - node.level + 1] if node.level <= len(package) else []
+                    module = ".".join([*root, *([node.module] if node.module else [])]) if root else ""
+                else:
+                    module = node.module or ""
+                for alias in node.names:
+                    destination = target(module)
+                    local = alias.asname or alias.name
+                    resolved = id(node) in top and destination is not None and alias.name in declarations[destination] and alias.name != "*"
+                    reason = "source_import_link_only" if resolved else "unresolved_import_or_reexport"
+                    edge(node, "import", ast.unparse(node), destination, alias.name,
+                         "static_syntax" if resolved else "unresolved", reason)
+                    if resolved and bindings[local] == 1 and not writes[local]:
+                        imports[local] = (destination, alias.name, False)
+            else:
+                for alias in node.names:
+                    destination = target(alias.name)
+                    local = alias.asname or alias.name.split(".")[0]
+                    resolved = id(node) in top and destination is not None
+                    edge(node, "import", alias.name, destination, None,
+                         "static_syntax" if resolved else "unresolved",
+                         "source_import_link_only" if resolved else "unresolved_import")
+                    if resolved and bindings[local] == 1 and not writes[local] and (alias.asname or "." not in alias.name):
+                        imports[local] = (destination, None, True)
+
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Call):
+                expression = _attribute(node.func)
+                root = expression.split(".")[0] if expression else ""
+                parent = parents[(path, id(node))]
+                shadowed = False
+                while parent is not None:
+                    if isinstance(parent, (ast.FunctionDef, ast.AsyncFunctionDef, ast.Lambda)):
+                        args = parent.args
+                        names = {arg.arg for arg in [*args.posonlyargs, *args.args, *args.kwonlyargs,
+                                 *([args.vararg] if args.vararg else []), *([args.kwarg] if args.kwarg else [])]}
+                        # Conservative over-approximation also includes nested
+                        # stores. False negatives never grant proof authority.
+                        names.update(item.id for item in ast.walk(parent) if isinstance(item, ast.Name) and isinstance(item.ctx, (ast.Store, ast.Del)))
+                        names.update(item.name for item in ast.walk(parent) if item is not parent and isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)))
+                        if root in names or any(isinstance(item, (ast.Global, ast.Nonlocal)) for item in ast.walk(parent)):
+                            shadowed = True
+                    elif isinstance(parent, ast.ClassDef):
+                        # Class bodies execute in their own namespace; a same
+                        # name method/field must not inherit a module import.
+                        # Conservatively retain this frontier in methods too.
+                        names = {item.id for item in ast.walk(parent) if isinstance(item, ast.Name) and isinstance(item.ctx, (ast.Store, ast.Del))}
+                        names.update(item.name for item in ast.walk(parent) if item is not parent and isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)))
+                        if root in names:
+                            shadowed = True
+                    parent = parents.get((path, id(parent)))
+                destination, symbol = None, None
+                if expression and not shadowed:
+                    imported = imports.get(root)
+                    if imported is not None:
+                        destination, imported_symbol, is_module = imported
+                        suffix = expression[len(root):].lstrip(".")
+                        symbol = suffix if is_module else imported_symbol if not suffix else None
+                        if not symbol or symbol not in declarations[destination]:
+                            symbol = None
+                    elif "." not in expression and expression in declarations[path] and bindings[expression] == 1 and not writes[expression]:
+                        destination, symbol = path, expression
+                resolved = destination is not None and symbol is not None
+                dynamic = not expression or isinstance(node.func, ast.Attribute) and destination is None
+                edge(node, "call", expression or ast.unparse(node.func), destination, symbol,
+                     "static_syntax" if resolved else "dynamic" if dynamic else "unresolved",
+                     "source_call_link_only" if resolved else "shadowed_or_unresolved_call" if not dynamic else "dynamic_dispatch")
+            elif isinstance(node, (ast.Await, ast.Yield, ast.YieldFrom, ast.Lambda, ast.AsyncFunctionDef,
+                                   ast.Global, ast.Nonlocal, ast.NamedExpr, ast.With, ast.AsyncWith,
+                                   ast.Try, ast.Raise, ast.Delete, ast.Match)):
+                frontier(node, "no_formal_projection_for_" + type(node).__name__)
+    unique = lambda rows, key: sorted({row[key]: row for row in rows}.values(), key=lambda row: row[key])
+    return unique(units, "unit_id"), unique(contracts, "contract_id"), unique(edges, "edge_id"), unique(unsupported, "unsupported_id")
+
+
+def build_revision_metadata(*, sources: dict[str, bytes], repository_id: str) -> dict:
+    """Produce exact-scope advisory metadata; no target import, fit, or proof.
+
+    ``revision_id`` binds repository identity and every original supplied byte.
+    ``records_sha256`` separately binds the metadata and selected producer pins.
+    Callers must compare current source witnesses before reusing checked caches.
+    """
+    _require(type(repository_id) is str and bool(repository_id)
+             and repository_id.strip() == repository_id and len(repository_id.encode()) <= 512
+             and not any(char in repository_id for char in "\0\r\n"), "bounded repository identity required")
+    sources, trees = _sources(sources)
+    from ipfs_accelerate_py.agent_supervisor.analysis import program_ast_adapters, code_symbol_vector_index
+    from ipfs_accelerate_py.agent_supervisor.runtime import semantic_context_runtime, supervisor_meta_index
+    from ipfs_datasets_py.logic.software_contracts.semantic_index import scanner, snapshot
+    from . import terminal_codebase_supervisor_fixture as fixture
+
+    modules = (program_ast_adapters, code_symbol_vector_index, semantic_context_runtime,
+               supervisor_meta_index, scanner, snapshot, fixture)
+    with _producer(modules) as (producer, unchanged), supervisor_meta_index.public_replay_without_metadata():
+        evidence = program_ast_adapters.build_program_evidence_index(
+            {path: raw.decode("utf-8") for path, raw in sources.items()},
+            max_source_bytes=LIMITS["source_bytes"], max_facts=LIMITS["native_facts_per_file"])
+        _require(evidence.exhaustive and not evidence.truncated
+                 and {row.path for row in evidence.results} == set(sources)
+                 and all(row.status == "success" for row in evidence.results),
+                 "complete native AST coverage required")
+        state = semantic_context_runtime._scan_scoped_sources(sources, repository_id=repository_id,
+                                                            max_symbols=LIMITS["symbols"])
+        vectors = fixture._replay_lexical_snapshot(evidence=evidence,
+                                                  source_hashes={path: _sha(raw) for path, raw in sources.items()})
+        language_edges = program_ast_adapters.project_language_edge_candidates_from_index(evidence)
+        units, contracts, dependencies, unsupported = _syntax(sources, trees)
+        result = _assemble(sources, evidence, state, vectors, language_edges, units,
+                           contracts, dependencies, unsupported, repository_id, producer)
+        unchanged()
+        return result
+
+
+def _assemble(sources, evidence, state, vectors, language_edges, units,
+              contracts, dependencies, unsupported, repository_id, producer):
+    leaves = [{"path": path, "sha256": _sha(raw), "bytes": len(raw)} for path, raw in sources.items()]
+    basis = {"schema": "terminal-revision-source-basis@1", "repository_id": repository_id,
+             "sources": leaves, "scope": "complete_exact_supplied_python_sources"}
+    revision = _identity(basis)
+    records = {"ast": [{**fact.to_dict(), "path": item.path, "source_sha256": item.source_sha256}
+                       for item in evidence.results for fact in item.facts],
+        "kg": [row.to_dict() for row in state.edges],
+        "vectors": [{**row.to_dict(), "classification": "lexical_tfidf_advisory",
+                     "learned": False, **AUTHORITY} for row in vectors.rows],
+        "contracts": contracts, "source_units": units,
+        "source_files": [{**leaf, "source_text": sources[leaf["path"]].decode("utf-8")} for leaf in leaves],
+        "dependencies": dependencies, "unsupported": unsupported,
+        "native_ast_indexes": [evidence.to_dict()], "native_semantic_states": [state.to_dict()],
+        "native_language_edges": [row.to_dict() for row in language_edges],
+        "provenance": [{"schema": SCHEMA, "revision_id": revision, "producer": producer,
+            "vector_model_id": "lexical-tfidf-symbols@1", "vector_training_steps": 0,
+            "source_body_executed": False, "source_imported": False,
+            "formal_projection_attempted": False, "unsupported_inventory_scope": "dependency_resolution_and_named_projection_frontiers;not_full_behavioral_coverage",
+            "checker_invocations": 0, **AUTHORITY}]}
+    # Native tuples become their exact ordinary JSON representation for the
+    # existing bounded metadata sink. No field/population is silently removed.
+    records = json.loads(_wire(records))
+    snapshot = {**basis, "schema": "terminal-revision-source-snapshot@1",
+        "revision_id": revision, "source_count": len(sources), "whole_supplied_scope": True,
+        "records_sha256": _identity(records), "producer_sha256": _identity(producer),
+        "producer": producer, "source_body_executed": False,
+        "formal_projection_attempted": False, "training_steps": 0, **AUTHORITY}
+    return json.loads(_wire({"records": records, "source_snapshot": snapshot,
+                             "dependency_edges": dependencies}))

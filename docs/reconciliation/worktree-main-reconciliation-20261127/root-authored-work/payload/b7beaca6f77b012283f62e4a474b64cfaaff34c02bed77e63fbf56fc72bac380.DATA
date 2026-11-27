@@ -1,0 +1,413 @@
+"""Bounded first-pass telemetry for an explicitly scoped native observer run.
+
+This module cannot claim dispatch, retry, settlement, provider usage or task
+authority. It reads only selected scalar pass fields and already-sanitized
+bridge exception diagnostics. Publication never replaces an existing record.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import stat
+import traceback
+
+ENV = "IPFS_ACCELERATE_AGENT_NATIVE_DISPATCH_DIAGNOSTICS"
+SCOPE_SCHEMA = "native-dispatch-diagnostic-scope@1"
+SCHEMA = "native-dispatch-first-claimed-pass@2"
+LEGACY_SCHEMA = "native-dispatch-first-claimed-pass@1"
+BRIDGE_SCHEMA = "database-bridge-unknown-diagnostic@1"
+FIRST_PASS_NAME = "admitted_native_dispatch_first_pass.json"
+MAX_SCOPE_BYTES = 1024
+MAX_RECORD_BYTES = 16384
+SCOPE_FIELDS = frozenset(("schema", "run_id", "task_cid", "command_sha256", "producer_source_sha256"))
+FALSE_FIELDS = frozenset(("worker_birth_established", "provider_transmission_established", "provider_usage_measured",
+    "proof_authority", "execution_authority", "completion_authority", "publication_authority"))
+LEGACY_FIELDS = frozenset(("schema", "scope", "sequence", "process_instance_id", "owner_session_id", "active_task_id",
+    "claimed_task_cid", "attempt_id", "write_count", "implementation", "bridge_unknown_diagnostic", *FALSE_FIELDS))
+FIELDS = LEGACY_FIELDS | {"portal_implementation"}
+IMPLEMENTATION_FIELDS = frozenset(("status", "status_sha256", "status_bytes", "reason", "reason_sha256", "reason_bytes", "deferred"))
+PORTAL_FLAGS = frozenset(("deferred", "skipped", "provider_dispatched", "provider_call_allowed", "attempt_consumed"))
+PORTAL_IMPLEMENTATION_FIELDS = frozenset(("returncode", "reason", "reason_sha256", "reason_bytes", *PORTAL_FLAGS))
+SAFE_STATUSES = frozenset(("running", "blocked", "failed", "completed", "succeeded", "accepted", "unavailable",
+    "queued", "deferred", "pending", "noop", "already_committed", "unclassified_native_status"))
+SAFE_REASONS = frozenset(("provider_callback_outcome_unknown", "worktree_lifecycle_claim_exists",
+    "worktree_lifecycle_fence_mismatch", "implementation_protected_path_maintenance_active", "provider_capacity_backoff",
+    "plan_runtime_missing_active_plan_revision", "completed_task_leftover", "inflight_process", "task_claim_lock_exists",
+    "implementation_protected_path_declared", "completion_gap_missing_precise_edit_targets", "no_ready_tasks",
+    "claim_withdrawn_control_not_dispatchable", "goals_inconclusive", "external_protected_checkout_recovery_required",
+    "implementation_dispatch_cancelled", "required_context_overflow", "implementation_context_required_overflow",
+    "implementation_context_budget_exceeded", "portal_execution_blocked", "portal_execution_skipped",
+    "portal_execution_deferred", "portal_provider_failed", "unclassified_native_reason"))
+
+
+class NativeDispatchDiagnosticsError(ValueError):
+    pass
+
+
+def _require(condition, message):
+    if not condition:
+        raise NativeDispatchDiagnosticsError(message)
+
+
+def _wire(value):
+    try:
+        return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode("utf-8")
+    except (TypeError, ValueError, UnicodeError) as exc:
+        raise NativeDispatchDiagnosticsError("bounded plain UTF-8 JSON required") from exc
+
+
+def _decoded(raw):
+    def pairs(items):
+        result = {}
+        for key, value in items:
+            _require(key not in result, "duplicate diagnostic field")
+            result[key] = value
+        return result
+    try:
+        value = json.loads(raw, object_pairs_hook=pairs,
+            parse_constant=lambda _: (_ for _ in ()).throw(NativeDispatchDiagnosticsError("finite JSON required")))
+    except (ValueError, TypeError, UnicodeError, RecursionError) as exc:
+        raise NativeDispatchDiagnosticsError("bounded diagnostic JSON required") from exc
+    return value
+
+
+def _identity(value, *, empty=False, maximum=512):
+    _require(type(value) is str and len(value) <= maximum and len(value.encode("utf-8")) <= maximum
+        and ((empty and value == "") or re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.:@+/-]*", value) is not None)
+        and ".." not in value and not value.startswith("/"), "bounded opaque native identity required")
+
+
+def _digest(value):
+    _require(type(value) is str and re.fullmatch(r"[0-9a-f]{64}", value) is not None, "exact SHA-256 required")
+
+
+def _integer(value, *, minimum=0, maximum=2**31-1):
+    _require(type(value) is int and minimum <= value <= maximum, "bounded non-Boolean integer required")
+
+
+def validate_diagnostic_scope(scope):
+    _require(type(scope) is dict and len(scope) == len(SCOPE_FIELDS) and set(scope) == SCOPE_FIELDS and scope["schema"] == SCOPE_SCHEMA,
+        "closed native diagnostic scope required")
+    _require(type(scope["run_id"]) is str and re.fullmatch(r"admitted-[0-9a-f]{32}", scope["run_id"]) is not None,
+        "exact admitted run identity required")
+    _identity(scope["task_cid"])
+    _digest(scope["command_sha256"]); _digest(scope["producer_source_sha256"])
+    raw = _wire(scope)
+    _require(len(raw) <= MAX_SCOPE_BYTES, "diagnostic scope exceeds bound")
+    return _decoded(raw)
+
+
+def parse_diagnostic_scope(value):
+    """Only an absent/empty scope disables; malformed nonempty scopes refuse."""
+    if value is None:
+        return None
+    _require(type(value) is str and len(value) <= MAX_SCOPE_BYTES, "bounded scope environment required")
+    if value == "":
+        return None
+    try:
+        raw = value.encode("utf-8")
+    except UnicodeError as exc:
+        raise NativeDispatchDiagnosticsError("UTF-8 scope required") from exc
+    _require(len(raw) <= MAX_SCOPE_BYTES, "scope environment exceeds byte bound")
+    scope = validate_diagnostic_scope(_decoded(raw))
+    _require(raw == _wire(scope), "canonical diagnostic scope required")
+    return scope
+
+
+def validate_bridge_unknown_diagnostic(value):
+    _require(type(value) is dict and len(value) == 3 and set(value) == {"schema", "exceptions", "settlement_authority"}
+        and value["schema"] == BRIDGE_SCHEMA and value["settlement_authority"] is False,
+        "closed non-authoritative bridge diagnostic required")
+    rows = value["exceptions"]
+    _require(type(rows) is list and 1 <= len(rows) <= 4, "bounded exception inventory required")
+    for row in rows:
+        _require(type(row) is dict and len(row) == 3 and set(row) == {"exception_type", "message_sha256", "frames"}, "closed exception row required")
+        _require(type(row["exception_type"]) is str
+            and re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]{0,127}", row["exception_type"]) is not None,
+            "bounded exception class required")
+        _digest(row["message_sha256"])
+        frames = row["frames"]
+        _require(type(frames) is list and len(frames) <= 8, "bounded frame inventory required")
+        for frame in frames:
+            _require(type(frame) is dict and len(frame) == 3 and set(frame) == {"file", "line", "function"}, "closed frame required")
+            _require(type(frame["file"]) is str and frame["file"] not in {".", ".."}
+                and re.fullmatch(r"[A-Za-z0-9_.+-]{1,128}", frame["file"]) is not None, "only bounded frame basenames allowed")
+            _integer(frame["line"], minimum=1, maximum=100000000)
+            _require(type(frame["function"]) is str and re.fullmatch(
+                r"(?:[A-Za-z_][A-Za-z0-9_]{0,127}|<[a-z]{1,32}>)", frame["function"]) is not None,
+                "bounded source function identifier required")
+    raw = _wire(value)
+    _require(len(raw) <= MAX_RECORD_BYTES, "bridge diagnostic exceeds bound")
+    return _decoded(raw)
+
+
+def safe_exception_diagnostic(exception):
+    """Extract class/hash/basename frames without source-line or log reads."""
+    _require(isinstance(exception, BaseException), "native exception required")
+    exceptions, observed, seen = [], exception, set()
+    while observed is not None and len(exceptions) < 4 and id(observed) not in seen:
+        seen.add(id(observed))
+        message = str(observed)
+        _require(type(message) is str and len(message) <= 4096, "exception message exceeds diagnostic bound")
+        raw = message.encode("utf-8")
+        _require(len(raw) <= 4096, "exception message exceeds byte bound")
+        frames = []
+        for index, (frame, line) in enumerate(traceback.walk_tb(observed.__traceback__)):
+            _require(index < 64, "exception traceback traversal exceeds bound")
+            frames.append({"file": Path(frame.f_code.co_filename).name, "line": line, "function": frame.f_code.co_name})
+            if len(frames) > 8:
+                frames.pop(0)
+        exceptions.append({"exception_type": type(observed).__name__, "message_sha256": hashlib.sha256(raw).hexdigest(), "frames": frames})
+        observed = observed.__cause__ or observed.__context__
+    return validate_bridge_unknown_diagnostic({"schema": BRIDGE_SCHEMA, "exceptions": exceptions, "settlement_authority": False})
+
+
+def _classified(value, allowed, unclassified):
+    if value is None:
+        return None, None, 0
+    _require(type(value) is str and len(value) <= 4096, "bounded scalar outcome required")
+    if value == "":
+        return None, None, 0
+    try:
+        raw = value.encode("utf-8")
+    except UnicodeError as exc:
+        raise NativeDispatchDiagnosticsError("UTF-8 scalar outcome required") from exc
+    _require(len(raw) <= 4096, "scalar outcome exceeds byte bound")
+    return value if value in allowed else unclassified, hashlib.sha256(raw).hexdigest(), len(raw)
+
+
+def _implementation(value):
+    _require(value is None or type(value) is dict, "plain native implementation result required")
+    source = value or {}
+    status, status_sha, status_bytes = _classified(source.get("status"), SAFE_STATUSES, "unclassified_native_status")
+    reason, reason_sha, reason_bytes = _classified(source.get("reason"), SAFE_REASONS, "unclassified_native_reason")
+    deferred = source.get("deferred")
+    _require(deferred is None or type(deferred) is bool, "exact optional deferral flag required")
+    return {"status": status, "status_sha256": status_sha, "status_bytes": status_bytes,
+        "reason": reason, "reason_sha256": reason_sha, "reason_bytes": reason_bytes, "deferred": deferred}
+
+
+def _validate_implementation(value):
+    _require(type(value) is dict and len(value) == len(IMPLEMENTATION_FIELDS) and set(value) == IMPLEMENTATION_FIELDS, "closed scalar implementation projection required")
+    for prefix, allowed, unknown in (("status", SAFE_STATUSES, "unclassified_native_status"),
+            ("reason", SAFE_REASONS, "unclassified_native_reason")):
+        item = value[prefix]; digest = value[prefix + "_sha256"]; size = value[prefix + "_bytes"]
+        _integer(size, maximum=4096)
+        if item is None:
+            _require(digest is None and size == 0, "absent outcome cannot assert a payload")
+        else:
+            _require(type(item) is str and item in allowed and size > 0, "known scalar classification required")
+            _digest(digest)
+            if item != unknown:
+                _require(hashlib.sha256(item.encode()).hexdigest() == digest and len(item.encode()) == size,
+                    "classified outcome identity differs")
+    _require(value["deferred"] is None or type(value["deferred"]) is bool, "exact optional deferral flag required")
+
+
+def project_portal_implementation_summary(value):
+    """Project the retained exception's bounded result; never read Portal state.
+
+    A missing implementation yields no observation. Supplied return codes and
+    flags must have exact types; unrelated fields are neither copied nor read.
+    These are reported Portal scalars, not proof of worker birth or billing.
+    """
+    _require(type(value) is dict, "plain retained Portal summary required")
+    if "implementation" not in value:
+        return None
+    source = value["implementation"]
+    _require(type(source) is dict, "plain retained Portal implementation required")
+    returncode = source.get("returncode")
+    if "returncode" in source:
+        _integer(returncode, minimum=-(2**31), maximum=2**31-1)
+    flags = {}
+    for key in PORTAL_FLAGS:
+        item = source.get(key)
+        _require(key not in source or type(item) is bool, "exact optional Portal Boolean required")
+        flags[key] = item
+    reason, digest, size = _classified(source.get("reason"), SAFE_REASONS, "unclassified_native_reason")
+    return validate_portal_implementation_projection({"returncode": returncode, **flags,
+        "reason": reason, "reason_sha256": digest, "reason_bytes": size})
+
+
+def validate_portal_implementation_projection(value):
+    _require(type(value) is dict and len(value) == len(PORTAL_IMPLEMENTATION_FIELDS)
+        and set(value) == PORTAL_IMPLEMENTATION_FIELDS, "closed Portal implementation projection required")
+    if value["returncode"] is not None:
+        _integer(value["returncode"], minimum=-(2**31), maximum=2**31-1)
+    for key in PORTAL_FLAGS:
+        _require(value[key] is None or type(value[key]) is bool, "exact optional Portal Boolean required")
+    # Reuse the unchanged reason identity rules without admitting a status body.
+    _validate_implementation({"status": None, "status_sha256": None, "status_bytes": 0,
+        "reason": value["reason"], "reason_sha256": value["reason_sha256"],
+        "reason_bytes": value["reason_bytes"], "deferred": None})
+    return _decoded(_wire(value))
+
+
+def build_first_claimed_pass_diagnostic(*, scope, sequence, result, process_instance_id, owner_session_id):
+    """Project only this completed pass; never read a task, log or latest record."""
+    scope = validate_diagnostic_scope(scope)
+    _integer(sequence, minimum=1)
+    _require(type(result) is dict, "plain completed native pass required")
+    implementation = result.get("implementation_result")
+    _require(implementation is None or type(implementation) is dict, "plain implementation result required")
+    inner = implementation or {}
+    cid = result.get("claimed_task_cid")
+    attempt = result.get("attempt_id")
+    for value in (cid, attempt, inner.get("task_cid"), inner.get("attempt_id")):
+        if value is not None:
+            _identity(value, maximum=512)
+    if cid is None:
+        cid = inner.get("task_cid")
+    if attempt is None:
+        attempt = inner.get("attempt_id")
+    if cid is None and attempt is None:
+        return None
+    _identity(cid); _identity(attempt, maximum=256)
+    _require(cid == scope["task_cid"], "completed pass task differs from independent scope")
+    for key, selected in (("task_cid", cid), ("attempt_id", attempt)):
+        if inner.get(key) is not None:
+            _require(type(inner[key]) is str and inner[key] == selected, "same-pass attempt identities conflict")
+    _identity(process_instance_id); _identity(owner_session_id)
+    active = result.get("active_task_id", "")
+    _identity(active, empty=True, maximum=256)
+    count = result.get("write_count", 0); _integer(count)
+    bridge = inner.get("bridge_unknown_diagnostic")
+    if bridge is not None:
+        bridge = validate_bridge_unknown_diagnostic(bridge)
+    portal = inner.get("bridge_portal_implementation")
+    if portal is not None:
+        portal = validate_portal_implementation_projection(portal)
+    record = {"schema": SCHEMA, "scope": scope, "sequence": sequence, "process_instance_id": process_instance_id,
+        "owner_session_id": owner_session_id, "active_task_id": active, "claimed_task_cid": cid, "attempt_id": attempt,
+        "write_count": count, "implementation": _implementation(implementation), "bridge_unknown_diagnostic": bridge,
+        "portal_implementation": portal,
+        **{key: False for key in FALSE_FIELDS}}
+    return validate_first_claimed_pass_diagnostic(record)
+
+
+def validate_first_claimed_pass_diagnostic(record):
+    _require(type(record) is dict, "plain first-pass diagnostic required")
+    schema = record.get("schema")
+    fields = FIELDS if schema == SCHEMA else LEGACY_FIELDS if schema == LEGACY_SCHEMA else None
+    _require(fields is not None and len(record) == len(fields) and set(record) == fields,
+        "versioned closed first-pass diagnostic required")
+    scope = validate_diagnostic_scope(record["scope"])
+    _integer(record["sequence"], minimum=1); _integer(record["write_count"])
+    for key in ("process_instance_id", "owner_session_id", "claimed_task_cid", "attempt_id"):
+        _identity(record[key], maximum=256 if key == "attempt_id" else 512)
+    _identity(record["active_task_id"], empty=True, maximum=256)
+    _require(record["claimed_task_cid"] == scope["task_cid"], "first-pass task differs from scope")
+    _validate_implementation(record["implementation"])
+    if record["bridge_unknown_diagnostic"] is not None:
+        validate_bridge_unknown_diagnostic(record["bridge_unknown_diagnostic"])
+    if schema == SCHEMA and record["portal_implementation"] is not None:
+        validate_portal_implementation_projection(record["portal_implementation"])
+    _require(all(record[key] is False for key in FALSE_FIELDS), "diagnostics cannot establish authority or provider outcomes")
+    raw = _wire(record); _require(len(raw) <= MAX_RECORD_BYTES, "complete diagnostic exceeds byte bound")
+    return _decoded(raw)
+
+
+def _witness(info):
+    return (info.st_dev, info.st_ino, info.st_mode, info.st_uid, info.st_gid, info.st_nlink,
+        info.st_size, info.st_mtime_ns, info.st_ctime_ns)
+
+
+def _directory_identity(info):
+    return (info.st_dev, info.st_ino, info.st_mode, info.st_uid, info.st_gid)
+
+
+def _open_root(run_root):
+    root = Path(run_root)
+    _require(root.is_absolute() and ".." not in root.parts and str(root) == str(run_root), "canonical run root required")
+    fd = os.open("/", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        for part in root.parts[1:]:
+            next_fd = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd)
+            os.close(fd); fd = next_fd
+        info = os.fstat(fd)
+        _require(stat.S_ISDIR(info.st_mode) and info.st_uid == os.getuid()
+            and stat.S_IMODE(info.st_mode) == 0o700, "private current-owner run root required")
+        return root, fd, _directory_identity(info)
+    except BaseException:
+        os.close(fd)
+        raise
+
+
+def _verify_root(root, fd, identity):
+    _require(_directory_identity(os.fstat(fd)) == identity, "run directory identity changed")
+    other_root, other, current = _open_root(root)
+    try:
+        _require(current == identity and other_root == root, "run directory path replaced")
+    finally:
+        os.close(other)
+
+
+def _read(fd):
+    try:
+        source = os.open(FIRST_PASS_NAME, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=fd)
+    except FileNotFoundError:
+        return None
+    try:
+        before = os.fstat(source)
+        _require(stat.S_ISREG(before.st_mode) and before.st_uid == os.getuid() and before.st_nlink == 1
+            and stat.S_IMODE(before.st_mode) == 0o600 and 0 < before.st_size <= MAX_RECORD_BYTES,
+            "bounded private single-link regular diagnostic required")
+        raw = b""
+        while len(raw) <= MAX_RECORD_BYTES:
+            block = os.read(source, min(4096, MAX_RECORD_BYTES + 1 - len(raw)))
+            if not block:
+                break
+            raw += block
+        _require(len(raw) == before.st_size and _witness(before) == _witness(os.fstat(source))
+            and _witness(before) == _witness(os.stat(FIRST_PASS_NAME, dir_fd=fd, follow_symlinks=False)),
+            "diagnostic file changed during capture")
+        record = validate_first_claimed_pass_diagnostic(_decoded(raw))
+        _require(raw == _wire(record), "canonical first-pass bytes required")
+        return record
+    finally:
+        os.close(source)
+
+
+def read_first_claimed_pass_diagnostic(*, run_root, expected_scope):
+    scope = validate_diagnostic_scope(expected_scope)
+    root, fd, identity = _open_root(run_root)
+    try:
+        record = _read(fd)
+        if record is not None:
+            _require(record["scope"] == scope, "first-pass scope differs from independent expected binding")
+        _verify_root(root, fd, identity)
+        return record
+    finally:
+        os.close(fd)
+
+
+def publish_first_claimed_pass_diagnostic(*, run_root, record):
+    """Exclusive first-write retention; existing invalid/foreign records refuse."""
+    record = validate_first_claimed_pass_diagnostic(record); raw = _wire(record)
+    root, fd, identity = _open_root(run_root)
+    try:
+        try:
+            target = os.open(FIRST_PASS_NAME, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW | os.O_NONBLOCK,
+                0o600, dir_fd=fd)
+        except FileExistsError:
+            existing = _read(fd)
+            _require(existing is not None and existing["scope"] == record["scope"], "existing first pass has foreign binding")
+            _verify_root(root, fd, identity)
+            return False
+        try:
+            os.fchmod(target, 0o600)
+            offset = 0
+            while offset < len(raw):
+                written = os.write(target, raw[offset:]); _require(written > 0, "diagnostic write made no progress")
+                offset += written
+            os.fsync(target)
+        finally:
+            os.close(target)
+        _require(_read(fd) == record, "new first-pass reread differs")
+        _verify_root(root, fd, identity)
+        return True
+    finally:
+        os.close(fd)

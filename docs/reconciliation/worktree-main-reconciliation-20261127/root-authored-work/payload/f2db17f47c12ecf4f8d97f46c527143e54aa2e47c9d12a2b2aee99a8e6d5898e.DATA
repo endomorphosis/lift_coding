@@ -1,0 +1,67 @@
+import IntegerLowering
+
+namespace CallerComposition
+
+set_option autoImplicit false
+
+-- Formal call model only. Native CALL remains opaque; Python imports and runtime dispatch are unproved.
+
+def compositionEvidence : String := "{\"callee_result_cid\":\"baguqeera7eyu3xkpceiqex4zaj2ztu5r6tb53tgqv2cfyaksw7ul3nrb7yoq\",\"projection_id\":\"baguqeeraqaob2ctmwzlsrusfk4pj3lmljzhxisksojjz5fgf5yydzt6tj6qq\",\"scope\":\"closed_caller_AST_composition_under_captured_callee_binding\"}"
+
+inductive SourceExpr where
+  | parameter
+  | invoke (argument : SourceExpr)
+
+inductive TargetExpr where
+  | parameter
+  | invoke (argument : TargetExpr)
+
+def sourceEval : SourceExpr → Int → Int
+  | .parameter, input => input
+  | .invoke argument, input => CodebaseIntegerLowering.sourceEval
+      CodebaseIntegerLowering.capturedSourceBody (sourceEval argument input)
+
+def targetEval : TargetExpr → Int → Int
+  | .parameter, input => input
+  | .invoke argument, input => CodebaseIntegerLowering.run (targetEval argument input)
+
+def lower : SourceExpr → TargetExpr
+  | .parameter => .parameter
+  | .invoke argument => .invoke (lower argument)
+
+theorem callee_step_equivalence (input : Int) :
+    CodebaseIntegerLowering.run input = CodebaseIntegerLowering.sourceEval
+      CodebaseIntegerLowering.capturedSourceBody input :=
+  CodebaseIntegerLowering.captured_ast_target_equivalence input
+
+theorem caller_lowering_correct (body : SourceExpr) (input : Int) :
+    targetEval (lower body) input = sourceEval body input := by
+  induction body with
+  | parameter => rfl
+  | invoke argument ih =>
+    change CodebaseIntegerLowering.run (targetEval (lower argument) input) =
+      CodebaseIntegerLowering.sourceEval CodebaseIntegerLowering.capturedSourceBody (sourceEval argument input)
+    rw [ih]
+    exact callee_step_equivalence (sourceEval argument input)
+
+
+def capturedSource : SourceExpr := (SourceExpr.invoke (SourceExpr.invoke SourceExpr.parameter))
+
+def nativeTarget : TargetExpr := (TargetExpr.invoke (TargetExpr.invoke TargetExpr.parameter))
+
+theorem native_call_correspondence : nativeTarget = lower capturedSource := by rfl
+
+theorem captured_caller_equivalence (input : Int) : targetEval nativeTarget input = sourceEval capturedSource input := by
+  rw [native_call_correspondence]
+  exact caller_lowering_correct capturedSource input
+
+def run (input : Int) : Int := targetEval nativeTarget input
+
+theorem caller_offset_identity (input : Int) : run input = input + (2 : Int) := by
+  simp only [run, nativeTarget, targetEval, CodebaseIntegerLowering.source_offset_identity]
+  <;> omega
+
+theorem requested_offset_identity (input : Int) : run input = input + (2 : Int) := caller_offset_identity input
+
+end CallerComposition
+

@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+"""Run the original native immediate explanation consumer on retained v13 edges."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "v13_explanation_consumer_audit_v1"
+PRIOR = HERE / "results_v13_full_pyparsing_incremental"
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+def write(path, value): path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+def worker():
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.models import DependencyEdge
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.explain import _edge_limitations
+    frozen = read(OUT / "freeze.json")
+    assert all(sha(Path(p).read_bytes()) == digest for p, digest in frozen["inputs_sha256"].items())
+    profile = read(PRIOR / "runtime_source_manifest.json")
+    assert all(sha(Path(p).read_bytes()) == digest for p, digest in profile["files"].items())
+    edges = [{e["edge_id"]: e for e in read(PRIOR / role / "state.json")["edges"]} for role in ("changed_cold", "changed_incremental")]
+    differences = read(PRIOR / "edge_resolution_differences.json")
+    rows = []; finite_lost = confidence_retained = 0
+    for difference in differences:
+        if difference["cold_resolution"] == difference["incremental_resolution"]: continue
+        assert difference["cold_resolution"] == "finite_may" and difference["incremental_resolution"] == "definite"
+        a = DependencyEdge.from_dict(edges[0][difference["cold_edge_id"]]); b = DependencyEdge.from_dict(edges[1][difference["incremental_edge_id"]])
+        left, right = _edge_limitations(a), _edge_limitations(b)
+        assert "finite_may_target:" + a.edge_id in left
+        assert not any(value.startswith("finite_may_target:") for value in right)
+        assert a.confidence == b.confidence == "conservative"
+        assert f"confidence:{a.edge_id}:conservative" in left and f"confidence:{b.edge_id}:conservative" in right
+        finite_lost += 1; confidence_retained += 1
+        rows.append({"cold_edge_id": a.edge_id, "incremental_edge_id": b.edge_id, "source_path": difference["path"],
+                     "cold_native_limitations": sorted(left), "incremental_native_limitations": sorted(right)})
+    assert finite_lost == confidence_retained == 1564 and len(differences) == 1568
+    write(OUT / "actual_native_edge_limitations.json", rows)
+    write(OUT / "result.json", {"all_checks_passed": True, "retained_differing_edges": len(differences),
+          "direct_resolution_edges_compared": len(rows), "finite_may_limitations_lost": finite_lost,
+          "conservative_confidence_limitations_retained": confidence_retained, "remaining_derived_reference_changes_excluded": 4,
+          "consumer": "original frozen native explain._edge_limitations -> _confidence_limitations, used by explain_symbol and explain_impact",
+          "runtime_files_rehashed": len(profile["files"]), "detail_sha256": sha((OUT / "actual_native_edge_limitations.json").read_bytes()),
+          "scope": "Actual immediate explanation-output consequence only; no execution-authority path or execution-soundness failure established.",
+          "provider_calls": 0})
+
+def main():
+    parser = argparse.ArgumentParser(); parser.add_argument("--worker", action="store_true"); args = parser.parse_args()
+    if args.worker: return worker()
+    OUT.mkdir()
+    profile = read(PRIOR / "runtime_source_manifest.json")
+    paths = [Path(__file__), PRIOR / "freeze.json", PRIOR / "runtime_source_manifest.json", PRIOR / "changed_cold/state.json", PRIOR / "changed_incremental/state.json", PRIOR / "edge_resolution_differences.json", HERE / "runtime_state_identity_v5/ipfs_datasets_py/logic/software_contracts/semantic_index/explain.py"]
+    write(OUT / "freeze.json", {"schema": "ns-v13-native-explanation-consumer-freeze/v1", "bound_seconds": 60,
+          "inputs_sha256": {str(p.resolve()): sha(p.read_bytes()) for p in paths}})
+    env = dict(os.environ, PYTHONPATH=":".join(profile["pythonpath"]), IPFS_ACCEL_SKIP_CORE="1", PYTHONDONTWRITEBYTECODE="1")
+    command = [sys.executable, "-B", str(Path(__file__)), "--worker"]; tick = time.perf_counter()
+    try:
+        proc = subprocess.run(command, cwd="/tmp", env=env, capture_output=True, timeout=60)
+        process = {"returncode": proc.returncode, "timed_out": False}; stdout, stderr = proc.stdout, proc.stderr
+    except subprocess.TimeoutExpired as exc:
+        process = {"returncode": None, "timed_out": True}; stdout, stderr = exc.stdout or b"", exc.stderr or b""
+    (OUT / "stdout.log").write_bytes(stdout); (OUT / "stderr.log").write_bytes(stderr)
+    process.update(command=command, bound_seconds=60, wall_seconds=time.perf_counter() - tick)
+    write(OUT / "process.json", process)
+    if process["returncode"] != 0: raise SystemExit(1)
+    result = {"schema": "ns-v13-native-explanation-consumer-audit/v1", "freeze_sha256": sha((OUT / "freeze.json").read_bytes()), "result": read(OUT / "result.json"), "process": process}
+    write(OUT / "summary.json", result); print(json.dumps(result))
+
+if __name__ == "__main__": main()

@@ -1,0 +1,90 @@
+"""Separate task-source/executable-source metadata checks, not native admission.
+
+These cases use real normal package imports and inert launch metadata only.
+They neither instantiate the live binding class nor mint a credential/lease.
+Run separately from the previously qualified 177-case source population.
+"""
+from copy import deepcopy
+import sys
+
+import pytest
+import ipfs_accelerate_py.agent_supervisor.runtime.private_same_pid_fixture as fixture
+import ipfs_accelerate_py.agent_supervisor.runtime.local_planning_admission as admission
+
+
+def _metadata():
+    payload = {
+        'task_repository_root': '/private/fixture/task-repository',
+        'task_repository_id': 'metadata-only:private-task-repository',
+        'task_baseline_commit': '1'*40,
+        'task_baseline_tree_id': '2'*40,
+        'accelerator_source_root': '/reviewed/accelerator-source',
+    }
+    digest = '3'*64
+    descriptor = 97  # Inert metadata, not an open FD or resource capability.
+    manifest = {
+        'schema': 'isolated-admitted-supervisor-launch@1',
+        'repository_root': payload['task_repository_root'],
+        'repository_id': payload['task_repository_id'],
+        'baseline_commit': payload['task_baseline_commit'],
+        'baseline_tree_id': payload['task_baseline_tree_id'],
+        'private_same_pid_fixture': deepcopy(payload),
+        'private_same_pid_fixture_sha256': digest,
+        'environment': [['PYTHONPATH', payload['accelerator_source_root']]],
+        'argv': [sys.executable, '-P', '-m',
+                 'ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor',
+                 fixture.FD_OPTION, str(descriptor), fixture.SHA_OPTION, digest],
+    }
+    return payload, descriptor, digest, manifest
+
+
+def test_distinct_task_repository_and_accelerator_sources_join_signed_metadata():
+    payload, descriptor, digest, manifest = _metadata()
+    assert payload['task_repository_root'] != payload['accelerator_source_root']
+    fixture._require_launch_manifest_join(payload=payload, descriptor=descriptor,
+                                        digest=digest, manifest=manifest)
+
+
+@pytest.mark.parametrize('changed', (
+    'repository_root', 'repository_id', 'baseline_commit', 'baseline_tree_id',
+    'fixture_payload', 'fixture_digest', 'source_root', 'shadow_source_root',
+    'duplicate_pythonpath', 'entry_module', 'fd', 'duplicate_fd',
+))
+def test_task_and_executable_source_joins_reject_substitution(changed):
+    payload, descriptor, digest, manifest = _metadata()
+    if changed in ('repository_root', 'repository_id', 'baseline_commit', 'baseline_tree_id'):
+        manifest[changed] = 'different'
+    elif changed == 'fixture_payload':
+        manifest['private_same_pid_fixture']['task_repository_root'] = payload['accelerator_source_root']
+    elif changed == 'fixture_digest':
+        manifest['private_same_pid_fixture_sha256'] = '4'*64
+    elif changed == 'source_root':
+        manifest['environment'][0][1] = payload['task_repository_root']
+    elif changed == 'shadow_source_root':
+        manifest['environment'][0][1] = '/other/source:' + payload['accelerator_source_root']
+    elif changed == 'duplicate_pythonpath':
+        manifest['environment'].append(deepcopy(manifest['environment'][0]))
+    elif changed == 'entry_module':
+        manifest['argv'][3] = 'unapproved.entry'
+    elif changed == 'fd':
+        manifest['argv'][5] = '98'
+    elif changed == 'duplicate_fd':
+        manifest['argv'].extend((fixture.FD_OPTION, str(descriptor)))
+    else:
+        raise AssertionError(changed)
+    with pytest.raises(fixture.PrivateFixtureRefusal):
+        fixture._require_launch_manifest_join(payload=payload, descriptor=descriptor,
+                                            digest=digest, manifest=manifest)
+
+
+def test_tiny_private_task_source_fits_existing_admission_floor(tmp_path):
+    (tmp_path/'fixture.txt').write_text('Private construction-only fixture.\n')
+    sources = admission._sources(tmp_path, ['fixture.txt'])
+    assert set(sources) == {'fixture.txt'}
+    assert len(sources['fixture.txt']['sha256']) == 64
+
+
+def test_admission_still_refuses_a_large_task_source(tmp_path):
+    (tmp_path/'fixture.txt').write_bytes(b'x'*1_000_001)
+    with pytest.raises(admission.LocalPlanningError, match='local source bound exceeded'):
+        admission._sources(tmp_path, ['fixture.txt'])

@@ -1,0 +1,64 @@
+{
+  "composition_census": {
+    "incremental_proxy_change_vs_query_only": {
+      "llm-inference-batching-scheduler": 104,
+      "tune-mjcf": -184
+    },
+    "path": "next-phase-composition-census.json",
+    "runtime_dispatch_qualified": false,
+    "sha256": "922d63b62ea26fa601a51f2f315f6f76c3dd300452cbda16ec60c2c9de54057d"
+  },
+  "current_default": "legacy",
+  "current_policy": "required-instruction-ref@1",
+  "decision": "Keep opt-in: exact input reduction is qualified; one completed batching pair used more total native tokens. Finish and retain the predeclared MJCF pair before the campaign conclusion.",
+  "execution_constraints": {
+    "automatic_new_trials_authorized_by_this_plan": false,
+    "cpu_limit": 5,
+    "memory_gib": 16,
+    "mutate_frozen_campaign": false,
+    "parallel_live_trials": 1,
+    "provider_gate": "inherit shared cooldown and sticky auth/billing/quota stops; no reset or automatic failed-task replay"
+  },
+  "live_evidence": "live-comparison.json (final artifact written when all requested trials stop)",
+  "next_implementation_selected_before_final_live_results": false,
+  "priorities": [
+    {
+      "phase": "whole-session assessment",
+      "work": [
+        "Retain total planning plus coding usage and official reward for every arm, including failure/fallback/unknown accounting.",
+        "A later repeated comparison must preserve model, task, source selection and resource/backoff controls; do not infer total savings from prompt bytes or choose only favorable runs.",
+        "Keep cached input inside input rather than adding it twice; provider-session totals are not verified billing."
+      ]
+    },
+    {
+      "phase": "conditional metadata and query composition",
+      "work": [
+        "Use the existing pure metadata-then-query codecs; both reverse exactly in the offline census.",
+        "Initially compose native semantic @1 only; @2 keeps its supported query-only presentation.",
+        "Build full query-only and composed coding inputs with every wrapper before selection; batching currently favors query-only.",
+        "Retain separate selected query receipts for semantic-only and metadata-composed candidates; update selector literal checks and historical reconstruction to represent the ordered chain.",
+        "Maintain full-manifest final freshness, explicit native fallback/provider-attempt marker, and complete receipt audit binding.",
+        "Qualify stale sources, exact historical replay, candidate mutations, metadata/query/native fallback and full-budget boundaries before any new live trial."
+      ]
+    },
+    {
+      "phase": "measure remaining whole-input repetition",
+      "work": [
+        "Census the entire reconstructed coding input, including Doctor/public/workspace/reply wrappers, rather than treating worker-payload totals as whole-input savings.",
+        "The same required 4,365-byte batching literal remains in the public appendix; any factoring needs a new explicit exact-presentation and signed-instruction authority contract. Preserve the authoritative literal and requirements.",
+        "Measure narrow references from repeated worker raw_source_fetch_required and task-data immutable_support rows to the unchanged inline manifest. Census upper bounds are 760 bytes MJCF and 1,216 batching before aliasing and reference overhead.",
+        "Do not treat entire context-pack sizes or overlapping repeated-value counts as removable bytes."
+      ]
+    },
+    {
+      "phase": "source-view follow-up only with demonstrated use",
+      "work": [
+        "Optional program raw source is already omitted from indexed initial context.",
+        "Any further minification experiment must include complete read/edit/refresh traffic and observed helper adoption or actual compact input inclusion.",
+        "Preserve canonical source, exact symbol mapping and stale-edit guards; retain unsupported/unprofitable cases and native tool usage."
+      ]
+    }
+  ],
+  "schema": "terminal-query-reference-next-phase-plan@1",
+  "source_commit": "4c49239351126303035b0521e9ba71d3bf20e576"
+}

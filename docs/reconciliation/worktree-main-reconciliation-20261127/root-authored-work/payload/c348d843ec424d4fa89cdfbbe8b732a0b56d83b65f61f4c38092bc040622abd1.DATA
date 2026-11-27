@@ -1,0 +1,16 @@
+import hashlib,importlib.metadata,json,os,platform,sys,traceback
+from pathlib import Path
+sys.path[:0]=['/extension','/native/ipfs_accelerate','/native/ipfs_datasets']
+before={d.metadata['Name']:d.version for d in importlib.metadata.distributions()}
+result={'python':sys.version,'platform':platform.platform(),'machine':platform.machine(),'distributions':before,'imports':{}}
+try:
+ from ipfs_accelerate_py.testing.proof_reuse import setup_bound_execution_key as a,post_setup_call_reuse as r,signed_runner_attestations as s
+ from ipfs_datasets_py.logic.zkp.pctdd import test_execution_key_v2 as d,composite_phase_receipt_contracts as c
+ result['native_contracts_available']=a.datasets_contracts_available() and r.datasets_contracts_available() and s.datasets_contracts_available()
+except Exception as exc:
+ result.update(native_contracts_available=False,exception_type=type(exc).__name__,diagnostic=traceback.format_exc())
+for name,module in tuple(sys.modules.items()):
+ if name in ('ipfs_accelerate_py','ipfs_datasets_py') or name.startswith(('ipfs_accelerate_py.','ipfs_datasets_py.')):
+  path=getattr(module,'__file__',None)
+  if path and Path(path).is_file():result['imports'][name]={'path':path,'sha256':hashlib.sha256(Path(path).read_bytes()).hexdigest()}
+Path('/results/result.json').write_text(json.dumps(result,sort_keys=True,indent=2)+'\n')

@@ -1,0 +1,15 @@
+import json
+import os
+from pathlib import Path
+import pytest
+
+@pytest.fixture
+def payload():
+    print("NS_SETUP_EFFECT", flush=True)
+    assert os.environ.get("NS_REUSE_SETUP_FAIL", "0") == "0", "setup failure"
+    data = json.loads(Path("fixture_data.json").read_text())
+    config = json.loads(Path("settings.json").read_text())
+    value = tuple(data) + (config["offset"], int(os.environ["NS_REUSE_FACTOR"]) - 1)
+    yield value
+    print("NS_TEARDOWN_EFFECT", flush=True)
+    assert os.environ.get("NS_REUSE_TEARDOWN_FAIL", "0") == "0", "teardown failure"

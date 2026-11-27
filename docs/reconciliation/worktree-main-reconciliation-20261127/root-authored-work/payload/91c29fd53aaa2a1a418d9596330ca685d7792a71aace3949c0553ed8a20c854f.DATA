@@ -1,0 +1,46 @@
+"""Freeze one endpoint qualification attempt before any execution."""
+import hashlib
+import json
+import time
+from pathlib import Path
+
+root = Path(__file__).resolve().parent
+def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
+def write(name, value):
+    with (root / name).open('x') as stream:
+        json.dump(value, stream, indent=2, sort_keys=True)
+        stream.write('\n')
+
+registry = json.loads((root / 'registry_v2.json').read_text())
+registry.update(schema='ns-curator-candidate-service-profile/v3',
+                frozen_at_ns=time.time_ns(),
+                supersedes='registry_v2.json; v2 failed network-dependent reference control retained unchanged')
+registry['service_sources'] = {name: sha(root / name) for name in
+    ['service_v3.py', 'inventory_v3.py', 'network_readiness_v1.py']}
+for instance, profile in registry['profiles'].items():
+    profile['network_readiness_required'] = instance.endswith('-5414')
+registry['network_readiness_policy'] = {
+    'source': 'Existing public base tests use 10.255.255.1:80 as a connect-timeout target',
+    'pre_and_post_observations': 2,
+    'socket_timeout_seconds': 0.1,
+    'ready_condition': 'All observations raise socket.timeout',
+    'failed_precondition': 'No hidden evaluation starts; receipt remains incomplete',
+    'failed_postcondition': 'Retain actual native grade and costs; receipt remains incomplete',
+    'retries': 0,
+    'scope': 'Environment calibration does not modify or replace any native test'
+}
+registry['request_bindings'] = ['canonical objective hash', 'qualified base and image',
+                              'sealed complete production patch hash',
+                              'exact expected resulting source inventory hash']
+write('registry_v3.json', registry)
+matrix = json.loads((root / 'qualification_matrix_v2.json').read_text())
+matrix.update(schema='ns-curator-service-qualification-matrix/v3', frozen_at_ns=time.time_ns(),
+              service_profile_sha256=sha(root / 'registry_v3.json'))
+matrix['no_dispatch_controls'].append('wrong_objective')
+matrix['dispatch_without_hidden_evaluation_controls'] = ['wrong_source_tree']
+matrix['retry_policy'] = 'Exactly one attempt per listed native control; no automatic retries; retain every failure'
+matrix['qualification_runner_sha256'] = sha(root / 'qualify_v3.py')
+matrix['prior_failure'] = {'summary_sha256': sha(root / 'qualification-v2/summary.json'),
+                         'count': '5414 reference failed four existing public network-timeout checks'}
+write('qualification_matrix_v3.json', matrix)
+print(json.dumps({'service_profile_sha256': sha(root / 'registry_v3.json'), 'provider_calls': 0}))

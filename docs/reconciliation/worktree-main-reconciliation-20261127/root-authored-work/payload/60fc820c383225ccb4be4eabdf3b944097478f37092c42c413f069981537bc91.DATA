@@ -1,0 +1,85 @@
+import ObjectiveContainerSemantics
+
+/-! SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+Structural name-to-slot compilation. No semantic proof field, runtime value,
+objective identity, convergence claim, or desired evaluation appears in IR. -/
+
+namespace RankerObjectiveContainerLanguage
+
+noncomputable section
+
+open RankerObjectiveIR (SliceError mapOne mapTwo mapThree)
+open RankerObjectivePrefixIR (Ty Context Schema contextNames contextUnique)
+
+def compileExprAux (context : Context) : {τ : Ty} → SourceExpr τ → Except SliceError (Expr context τ)
+  | _, .leaf value => mapOne Expr.leaf (RankerObjectivePrefixIR.compileTerm context value)
+  | _, .scalarUnary op value => mapOne (Expr.scalarUnary op) (compileExprAux context value)
+  | _, .scalarBinary op left right => mapTwo (Expr.scalarBinary op)
+      (compileExprAux context left) (compileExprAux context right)
+  | _, .ifNonneg condition thenBranch elseBranch => mapThree Expr.ifNonneg
+      (compileExprAux context condition) (compileExprAux context thenBranch) (compileExprAux context elseBranch)
+  | _, .lengthVector values => mapOne Expr.lengthVector (compileExprAux context values)
+  | _, .lengthMatrix values => mapOne Expr.lengthMatrix (compileExprAux context values)
+  | _, .natToScalar value => mapOne Expr.natToScalar (compileExprAux context value)
+  | _, .indexVector values index => mapTwo Expr.indexVector
+      (compileExprAux context values) (compileExprAux context index)
+  | _, .fsumExact values => mapOne Expr.fsumExact (compileExprAux context values)
+  | _, .mapRows (columns := columns) binder values body =>
+      if binder ∈ contextNames context then .error (.unsupportedNode ("duplicateBinderName:" ++ binder))
+      else mapTwo (Expr.mapRows binder) (compileExprAux context values)
+        (compileExprAux ((binder, .vector columns) :: context) body)
+  | _, .mapVector binder values body =>
+      if binder ∈ contextNames context then .error (.unsupportedNode ("duplicateBinderName:" ++ binder))
+      else mapTwo (Expr.mapVector binder) (compileExprAux context values)
+        (compileExprAux ((binder, .scalar) :: context) body)
+  | _, .zipMap leftName rightName left right body =>
+      if leftName = rightName ∨ leftName ∈ contextNames context ∨ rightName ∈ contextNames context then
+        .error (.unsupportedNode "duplicateZipBinderName")
+      else mapThree (Expr.zipMap leftName rightName) (compileExprAux context left)
+        (compileExprAux context right)
+        (compileExprAux ((rightName, .scalar) :: (leftName, .scalar) :: context) body)
+  | _, .zipRowsMap (columns := columns) scalarName rowName left right body =>
+      if scalarName = rowName ∨ scalarName ∈ contextNames context ∨ rowName ∈ contextNames context then
+        .error (.unsupportedNode "duplicateZipBinderName")
+      else mapThree (Expr.zipRowsMap scalarName rowName) (compileExprAux context left)
+        (compileExprAux context right)
+        (compileExprAux ((rowName, .vector columns) :: (scalarName, .scalar) :: context) body)
+  | _, .rangeMap (length := length) binder boundVector body =>
+      if binder ∈ contextNames context then .error (.unsupportedNode ("duplicateBinderName:" ++ binder))
+      else mapTwo (Expr.rangeMap binder) (compileExprAux context boundVector)
+        (compileExprAux ((binder, .index length) :: context) body)
+
+def compileExpr (context : Context) {τ : Ty} (source : SourceExpr τ) : Except SliceError (Expr context τ) :=
+  if contextUnique context then compileExprAux context source
+  else .error (.unsupportedNode "duplicateContextName")
+
+def compileFields (context : Context) : {schema : Schema} → SourceFields schema →
+    Except SliceError (Fields context schema)
+  | _, .nil => .ok .nil
+  | _, .cons (name := name) (rest := rest) value fields =>
+      if name ∈ contextNames rest then .error (.unsupportedNode ("duplicateFieldName:" ++ name))
+      else mapTwo Fields.cons (compileExprAux context value) (compileFields context fields)
+
+def compilePrefixAux (context : Context) {schema : Schema} : SourcePrefix schema →
+    Except SliceError (PrefixIR context schema)
+  | .record fields => mapOne PrefixIR.record (compileFields context fields)
+  | .letBind (τ := τ) name rhs body =>
+      if name ∈ contextNames context then .error (.unsupportedNode ("duplicateBinderName:" ++ name))
+      else mapTwo (PrefixIR.letBind name) (compileExprAux context rhs)
+        (compilePrefixAux ((name, τ) :: context) body)
+
+def compilePrefix (context : Context) {schema : Schema} (source : SourcePrefix schema) :
+    Except SliceError (PrefixIR context schema) :=
+  if contextUnique context then compilePrefixAux context source
+  else .error (.unsupportedNode "duplicateContextName")
+
+theorem compile_duplicate_context_refuses (context : Context) {τ : Ty} (source : SourceExpr τ)
+    (repeated : ¬ contextUnique context) :
+    compileExpr context source = .error (.unsupportedNode "duplicateContextName") := by
+  simp only [compileExpr, repeated, if_false]
+
+#print axioms compile_duplicate_context_refuses
+
+end
+
+end RankerObjectiveContainerLanguage

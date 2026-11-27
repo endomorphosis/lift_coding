@@ -1,0 +1,175 @@
+import OriginalPrefixMarginsEvaluation
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+
+Actual fixed4x80 data-loss and exact-source-L2 regularizer assignments. These
+proofs derive scalar/map/sum/division success from the actual source graph and
+primitive bindings. Final assignment statements accept only ordinary exact-real
+weights/differences, with preceding environments built from derived values.
+
+No desired objective/gradient/convergence result is an input premise. Whole
+prefix/gradient/record evaluation, preparation, finite-value guard/return,
+Python Float/libm/fsum and training convergence remain open here.
+-/
+
+namespace RankerObjectiveOriginalLossRegularizerEvaluation
+
+noncomputable section
+
+open scoped BigOperators
+open RankerObjectiveIR (SliceError applyTwo exactDivision)
+open RankerObjectivePrefixIR (Ty NamedEnvironment namesFromScope extendNames castValue
+  evalSourceTerm evalBinary)
+open RankerObjectiveContainerLanguage (SourceExpr evalSourceExpr)
+open RankerObjectiveSourceContainerSuccess (eval_source_mapVector_success eval_source_fsum_success
+  eval_source_lengthVector_success eval_source_natToScalar_success)
+open RankerObjectiveOriginalMarginsEvaluation (dotSource exactDot exactMargins actualEnvironment
+  actual_weights_binding actual_differences_binding dot_source_success actual_data_source_scalar_body_join)
+
+def sourceL2Rat : ℚ := (5764607523034235 : ℚ) / 576460752303423488
+
+def exactData (margins : Fin 4 → ℝ) : ℝ :=
+  (∑ index, RankerRealCurvature.realStablePairLoss (margins index)) / 4
+
+def exactRegularizer (weights : Fin 80 → ℝ) : ℝ :=
+  (sourceL2Rat : ℝ) * exactDot weights weights / 2
+
+theorem data_source_success (environment : NamedEnvironment) (margins : Fin 4 → ℝ)
+    (marginsBinding : environment "margins" (.vector 4) = .ok margins) :
+    evalSourceExpr environment RankerObjectiveOriginalPrefixParts.dataSource = .ok (exactData margins) := by
+  rw [actual_data_source_scalar_body_join]
+  let losses : Fin 4 → ℝ := fun index => RankerRealCurvature.realStablePairLoss (margins index)
+  have inputSuccess : evalSourceExpr environment
+      (.leaf (.var (τ := .vector 4) "margins")) = .ok margins := by
+    exact marginsBinding
+  have bodySuccess : ∀ index : Fin 4, evalSourceExpr
+      (extendNames (τ := .scalar) "z" (margins index) environment)
+      RankerObjectiveOriginalPrefixParts.lossBodySource = .ok (losses index) := by
+    intro index
+    apply RankerObjectiveOriginalPrefixParts.emitted_loss_body_success
+    simp [extendNames, castValue]
+  have mapSuccess := eval_source_mapVector_success environment "z"
+    (.leaf (.var (τ := .vector 4) "margins")) RankerObjectiveOriginalPrefixParts.lossBodySource
+    margins losses inputSuccess bodySuccess
+  have sumSuccess := eval_source_fsum_success environment
+    (.mapVector "z" (.leaf (.var (τ := .vector 4) "margins"))
+      RankerObjectiveOriginalPrefixParts.lossBodySource) losses mapSuccess
+  have lengthSuccess := eval_source_lengthVector_success environment
+    (.leaf (.var (τ := .vector 4) "margins")) margins inputSuccess
+  have denominatorSuccess := eval_source_natToScalar_success environment
+    (.lengthVector (.leaf (.var (τ := .vector 4) "margins"))) 4 lengthSuccess
+  change applyTwo (evalBinary .div)
+      (evalSourceExpr environment (.fsumExact (.mapVector "z"
+        (.leaf (.var (τ := .vector 4) "margins")) RankerObjectiveOriginalPrefixParts.lossBodySource)))
+      (evalSourceExpr environment (.natToScalar (.lengthVector
+        (.leaf (.var (τ := .vector 4) "margins"))))) = .ok (exactData margins)
+  rw [sumSuccess, denominatorSuccess]
+  change exactDivision (∑ index, losses index) (4 : ℝ) = .ok (exactData margins)
+  simp [exactDivision, exactData, losses]
+
+/-- Structural source coefficient/dot link; no numerical desired result is
+assumed, and the coefficient retains the original exact binary64 Rat. -/
+theorem actual_regularizer_source_decomposition :
+    RankerObjectiveOriginalPrefixParts.regularizerSource =
+      SourceExpr.scalarBinary .div
+        (.scalarBinary .mul (.leaf (.scalarLiteral sourceL2Rat)) (dotSource "weights" "weights"))
+        (.leaf (.scalarLiteral ((2 : ℚ) / (1 : ℚ)))) := by
+  rfl
+
+theorem regularizer_source_success (environment : NamedEnvironment) (weights : Fin 80 → ℝ)
+    (weightsBinding : environment "weights" (.vector 80) = .ok weights) :
+    evalSourceExpr environment RankerObjectiveOriginalPrefixParts.regularizerSource =
+      .ok (exactRegularizer weights) := by
+  rw [actual_regularizer_source_decomposition]
+  have dotSuccess := dot_source_success environment "weights" "weights" weights weights
+    weightsBinding weightsBinding
+  have productSuccess : evalSourceExpr environment
+      (.scalarBinary .mul (.leaf (.scalarLiteral sourceL2Rat)) (dotSource "weights" "weights")) =
+      .ok ((sourceL2Rat : ℝ) * exactDot weights weights) := by
+    change applyTwo (evalBinary .mul) (.ok (sourceL2Rat : ℝ))
+      (evalSourceExpr environment (dotSource "weights" "weights")) =
+      .ok ((sourceL2Rat : ℝ) * exactDot weights weights)
+    rw [dotSuccess]
+    rfl
+  have twoSuccess : evalSourceExpr environment
+      (.leaf (.scalarLiteral ((2 : ℚ) / (1 : ℚ)))) = .ok (2 : ℝ) := by
+    simp [evalSourceExpr, evalSourceTerm]
+  change applyTwo (evalBinary .div)
+      (evalSourceExpr environment (.scalarBinary .mul (.leaf (.scalarLiteral sourceL2Rat))
+        (dotSource "weights" "weights")))
+      (evalSourceExpr environment (.leaf (.scalarLiteral ((2 : ℚ) / (1 : ℚ))))) =
+      .ok (exactRegularizer weights)
+  rw [productSuccess, twoSuccess]
+  change exactDivision ((sourceL2Rat : ℝ) * exactDot weights weights) (2 : ℝ) =
+    .ok (exactRegularizer weights)
+  simp [exactDivision, exactRegularizer]
+
+def afterMarginsEnvironment (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    NamedEnvironment :=
+  extendNames (τ := .vector 4) "margins" (exactMargins weights differences)
+    (namesFromScope (actualEnvironment weights differences))
+
+def afterDataEnvironment (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    NamedEnvironment :=
+  extendNames (τ := .scalar) "data" (exactData (exactMargins weights differences))
+    (afterMarginsEnvironment weights differences)
+
+def afterRegularizerEnvironment (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    NamedEnvironment :=
+  extendNames (τ := .scalar) "regularizer" (exactRegularizer weights)
+    (afterDataEnvironment weights differences)
+
+theorem after_margins_margins_binding (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    afterMarginsEnvironment weights differences "margins" (.vector 4) =
+      .ok (exactMargins weights differences) := by
+  simp [afterMarginsEnvironment, extendNames, castValue]
+
+theorem after_margins_weights_binding (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    afterMarginsEnvironment weights differences "weights" (.vector 80) = .ok weights := by
+  simpa [afterMarginsEnvironment, extendNames] using actual_weights_binding weights differences
+
+theorem after_data_weights_binding (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    afterDataEnvironment weights differences "weights" (.vector 80) = .ok weights := by
+  simpa [afterDataEnvironment, extendNames] using after_margins_weights_binding weights differences
+
+theorem after_data_margins_binding (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    afterDataEnvironment weights differences "margins" (.vector 4) =
+      .ok (exactMargins weights differences) := by
+  simpa [afterDataEnvironment, extendNames] using after_margins_margins_binding weights differences
+
+theorem after_regularizer_margins_binding (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    afterRegularizerEnvironment weights differences "margins" (.vector 4) =
+      .ok (exactMargins weights differences) := by
+  simpa [afterRegularizerEnvironment, extendNames] using after_data_margins_binding weights differences
+
+/-- Actual second assignment under the value derived by the first assignment. -/
+theorem actual_data_eval_success (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    evalSourceExpr (afterMarginsEnvironment weights differences)
+      RankerObjectiveOriginalPrefixParts.dataSource = .ok (exactData (exactMargins weights differences)) := by
+  exact data_source_success (afterMarginsEnvironment weights differences)
+    (exactMargins weights differences) (after_margins_margins_binding weights differences)
+
+/-- Actual third assignment after the independently computed first two. -/
+theorem actual_regularizer_eval_success (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    evalSourceExpr (afterDataEnvironment weights differences)
+      RankerObjectiveOriginalPrefixParts.regularizerSource = .ok (exactRegularizer weights) := by
+  exact regularizer_source_success (afterDataEnvironment weights differences) weights
+    (after_data_weights_binding weights differences)
+
+#print axioms data_source_success
+#print axioms actual_regularizer_source_decomposition
+#print axioms regularizer_source_success
+#print axioms after_margins_margins_binding
+#print axioms after_margins_weights_binding
+#print axioms after_data_weights_binding
+#print axioms after_data_margins_binding
+#print axioms after_regularizer_margins_binding
+#print axioms actual_data_eval_success
+#print axioms actual_regularizer_eval_success
+
+end
+
+end RankerObjectiveOriginalLossRegularizerEvaluation

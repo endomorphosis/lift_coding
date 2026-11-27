@@ -1,0 +1,161 @@
+# Context transport evaluation, 2026-09-14
+
+This is a completed **offline development measurement**, with no model requests,
+new repair outcomes, or whole-system savings claim. It reconstructs and verifies
+the exact raw and additive requests for the eight unique historical families,
+then applies a conservative source-preserving substitution adapter.
+
+The primary finding is a population mismatch: **none of the eight frozen public
+context inventories contains unchanged dependency source eligible for the native
+substitution policy**. All 254 selected source windows belong to permitted edit
+files or public tests/conftest. All 32 selected semantic records describe permitted
+edit files. Native ContextPacker protects target, surrounding, and test source;
+relabeling that source as compressible would change the intended intervention.
+
+Consequently C removes zero windows. This experiment cannot identify a repair or
+compression benefit from substitution. It does identify why rerunning these
+unchanged requests as a “compression” comparison would leave the original gap.
+
+## Measured results
+
+Numbers below are exact tokenization of actual system/user message strings under
+`tiktoken 0.12.0`, `o200k_base`. They exclude chat-template overhead and provider
+output. Neither this encoding nor the sensitivity encoding `cl100k_base` is
+asserted to be the Grok tokenizer. They are **not provider usage or billing**.
+
+| Unique historical family | A raw | B additive | C guarded substitution | Raw windows | Baseline lexical omissions (shared A/B/C) | Recorded frontier edges |
+|---|---:|---:|---:|---:|---:|---:|
+| tomlkit | 12,165 | 14,200 | 14,289 | 31 | 63 | 1,997 |
+| installer | 10,766 | 13,038 | 13,126 | 31 | 0 | 523 |
+| tornado | 13,040 | 14,895 | 14,984 | 38 | 8 | 1,294 |
+| more-itertools | 14,673 | 17,334 | 17,423 | 38 | 234 | 7,911 |
+| charset_normalizer | 12,782 | 14,417 | 14,505 | 36 | 0 | 807 |
+| iniconfig | 6,947 | 9,163 | 9,251 | 21 | 0 | 430 |
+| wheel | 8,206 | 9,768 | 9,856 | 22 | 0 | 633 |
+| jinja | 13,204 | 15,055 | 15,143 | 37 | 0 | 876 |
+| **Total** | **91,783** | **107,870** | **108,577** | **254** | **305** | **14,471** |
+
+B expands message content by **17.53%** relative to A. C expands it by **18.30%**;
+the extra 707 tokens over B are its explicit substitution/frontier contract,
+with no raw-source removal. Under `cl100k_base`, totals are 90,956 / 107,044 /
+107,743, corresponding to 17.69% / 18.46% expansion. These are totals across eight
+unique prepared contexts, not 32 independently prepared cells. Repetitions do
+not create additional context observations.
+
+The saved native packs have zero explicit obligation CIDs across all eight
+families. Their instruction text is preserved exactly, but obligation retention
+is vacuous here. The partial native analyses record 14,471 unknown dependency
+edges; these are edge occurrences, not 14,471 distinct missing dependencies or
+proved defects. Reusing saved preparation is not a new producer run or a fresh
+deployment-readiness check.
+
+The 305 baseline lexical omissions existed before this experiment and are
+shared by A, B and C. They are not substitutions or newly saved windows;
+**substituted windows equal zero in every family**.
+
+All 16 historical A/B request hashes reproduce exactly. All selected source
+windows match the current hash-bound public source inventory and expand to the
+same bytes. Instruction, permitted edit paths, response contract and protected
+raw spans remain unchanged in C. No required information was declared safely
+removable merely to obtain a shorter prompt.
+
+Eighteen separately reported constructed endpoint controls exercise: positive
+unchanged-dependency substitution and exact local expansion; protected source
+retention; stale capsule, source, root and inventory mismatches; missing/unknown
+frontier; partial span coverage; path escape; out-of-inventory reads; invalid
+ranges; and wrong span hashes. These controls use constructed admission records.
+They test the new adapter, **not** the native producer's validity or downstream
+repair quality. Historical source windows also undergo exact expansion checks.
+
+## Reproduce and inspect
+
+From the repository root:
+
+```bash
+python3 papers/revisions/neurosymbolic_system_scope_20260914/evals/context/run_context_eval.py
+```
+
+The command reads public source under the saved `prepared_inputs_v1/*/proposal`
+directories and the named native preparation packets in the original worktree.
+`--worktree`, `--public-inputs` and `--output` permit relocation. It never opens
+the larger unit manifests, target patches, hidden oracle payloads or scorer
+trees. No credentials, provider APIs or test scorers are used. Historical source
+preparation modules are imported only for pure request reconstruction. All
+explicit input reads are hash-bound in `results/read_provenance.json`.
+
+Artifacts:
+
+- `protocol.json`: declared development population, arms, constraints and
+  measurements, written before the first measurement.
+- `results/summary.json`: aggregate outcomes, named tokenizer table identities,
+  local elapsed time, limitations and null provider usage.
+- `results/rows.json`: per-family request hashes/counts, raw retention decisions,
+  admissions, frontier and obligation counts.
+- `results/requests/*/{A_raw,B_additive,C_substitution}.json`: exact public-source
+  request envelopes for independent retokenization. Saved files end in a newline;
+  request hashes cover canonical JSON without that storage newline.
+- `results/endpoint_controls.json`: eighteen constructed pass/fail controls.
+
+The earlier NS-007 result also did not demonstrate shorter transport. Its
+nineteen paired estimates expanded semantic context by roughly 28–75%, using
+`calibrated_utf8`. Those ContextPack estimates count structured references rather
+than the actual message transport measured here; the two numerical results must
+not be pooled.
+
+Development iteration note: the first local run had sixteen endpoint controls.
+Two source/inventory binding refusal controls were added before the final
+source-bound rerun. The local development outputs were overwritten during this
+iteration, and the first run is not an immutable archived experiment. All
+historical A/B request hashes and token totals were unchanged. The finalized
+summary includes the evaluation source SHA-256; subsequent studies use separate
+scripts and output directories.
+
+## Next matched live study
+
+The live efficacy gap remains open. The following work is required before a new
+provider comparison can answer it:
+
+1. **Create development workloads with actual unchanged dependency context.**
+   Retain the eight-family finding above without retroactive reinterpretation.
+   For a distinct development cohort, include task-relevant, unchanged public
+   dependencies from the same pre-fix repositories, or use newly recruited
+   repository tasks. Both raw controls and semantic arms receive the same source
+   universe, editable authority, acceptance criteria and source expansion access.
+   Select this inventory from public issue/source information before outcomes,
+   and preserve cases where nothing is compressible.
+2. **Run and bind the real producer on that complete declared context scope.**
+   Produce fresh native capsule admissions, source maps, dependency frontier and
+   explicit obligations. Do not count a CID-only ContextPack estimate as the
+   bytes actually sent to a model. Inspect and retain the serialized capsule
+   facts; shortened structural records alone do not establish semantic adequacy.
+3. **Materialize a distinct source-expansion caller.** The old HTTP proposer has
+   one response, no tools, and an exact frozen A/B schema. It cannot perform an
+   expansion round. A new development adapter must expose the hash-checked
+   `expand_source` operation and log actual requests/responses and fallbacks.
+   Give the same operation to all matched arms. A stale symbol/source/root or
+   unknown frontier must force raw retention or expansion. The current local
+   endpoint qualification is a prerequisite, not evidence that a model used it.
+4. **Keep three interventions distinct.** A uses raw context; B adds native
+   semantic facts to the same raw selection; C replaces only qualified unchanged
+   dependency regions, retaining target/surrounding/test source and obligations.
+   C can be shorter, equal, or longer. Log initial prompt, expansions, repeats,
+   retries and failures rather than selecting only cases with shorter C prompts.
+5. **Run a development pilot with complete provider receipts and common hidden
+   validation.** Freeze provider/model/settings, budgets, task sequence, cache
+   state, failure rules and all source/adapter hashes. For every scheduled task,
+   count input, output, exposed reasoning and cached-input fields with provider
+   inclusion semantics, including expansion decisions and fallback requests.
+   Native preparation CPU is a separate cost; any model-assisted preparation
+   adds to workflow tokens. Compare quality and expenditure on the full fixed
+   cohort. A cold audit oracle is reported separately from runtime validation.
+6. **Freeze an independent confirmatory cohort after the development pilot.**
+   Choose precision/sample size using independent repository lineages; do not
+   promote this already inspected historical cohort to a fresh holdout. The
+   integrated system study must still measure routing, persistence, reuse and
+   complete workflow tokens beyond this context component.
+
+No live invocation command is supplied because the old admission profile only
+allows A/B and no expansion rounds. A command pointing at that runner would
+misrepresent an unimplemented treatment as runnable. The next concrete code
+deliverable is the development expansion-capable proposer and its complete
+usage ledger, followed by qualified dependency-bearing contexts.

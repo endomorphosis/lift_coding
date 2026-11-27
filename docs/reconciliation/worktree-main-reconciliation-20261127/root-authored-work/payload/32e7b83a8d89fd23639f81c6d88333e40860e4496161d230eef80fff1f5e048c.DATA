@@ -1,0 +1,51 @@
+{
+  "imports": [
+    {
+      "check_result": {
+        "bytes": 14071,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-qualification-20261006-01/evidence/lean-container-source-01/check-result.json",
+        "sha256": "ca7ed3da92fbae947f595bfde1a8eb1025bc9758ebdd58eaf11210b2d125c0bf"
+      },
+      "mode": "lean-container-source-01"
+    },
+    {
+      "check_result": {
+        "bytes": 15524,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-qualification-20261006-01/evidence/lean-container-typed-01/check-result.json",
+        "sha256": "cfb690034025ad99470dad89ab537952955ddb4b14b1ed3675bf8181dfcfad63"
+      },
+      "mode": "lean-container-typed-01"
+    },
+    {
+      "check_result": {
+        "bytes": 13707,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-qualification-20261006-02/evidence/lean-container-semantics-01/check-result.json",
+        "sha256": "8650075e9f209aa2d61d284d043b51200a866611703ad40739ce29af3f05d62b"
+      },
+      "mode": "lean-container-semantics-01"
+    },
+    {
+      "check_result": {
+        "bytes": 15696,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-qualification-20261006-01/evidence/lean-python-ast-subset-01/check-result.json",
+        "sha256": "e1ecd6db20451ed9da5364e1a509c3d46ae908b0816e5529a8dde91e80e238fc"
+      },
+      "mode": "lean-python-ast-subset-01"
+    },
+    {
+      "check_result": {
+        "bytes": 15178,
+        "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-qualification-20261006-01/evidence/lean-python-ast-semantics-01/check-result.json",
+        "sha256": "38b975f475e7f47b135435745e053aca05a807ffb3ccaeca491ba6a360db94a3"
+      },
+      "mode": "lean-python-ast-semantics-01"
+    }
+  ],
+  "mode": "lean-python-ast-lowering-01",
+  "schema": "ranker-container-language-batch-plan@1",
+  "tooling_source_review": {
+    "bytes": 14414,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-ast-tooling-source-review-20261006-01/review-receipt-01.json",
+    "sha256": "de639814c184ccc3e492d00db035300fdf8fbcbf305a076abf6b4c4a2d8cde33"
+  }
+}

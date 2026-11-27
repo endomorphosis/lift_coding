@@ -1,0 +1,2003 @@
+{
+  "all_dirty_path_count": 82,
+  "commit_graph_comparison": {
+    "DCEC_Library": {
+      "prior_cached:refs/remotes/origin/master": {
+        "ancestors": 48,
+        "object_db": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/DCEC_Library",
+        "oid": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+        "reachable_relevant_oids": [
+          "a4beb5b3280595be6b9221cac3c91dd019e6d371"
+        ],
+        "state": "local_graph_available"
+      },
+      "refs/heads/main": {
+        "oid": "c6b42b02d3dc7d7e5d6281ea1a8cc6e806092da0",
+        "state": "object_graph_unavailable_locally"
+      },
+      "refs/heads/master": {
+        "ancestors": 48,
+        "object_db": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/DCEC_Library",
+        "oid": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+        "reachable_relevant_oids": [
+          "a4beb5b3280595be6b9221cac3c91dd019e6d371"
+        ],
+        "state": "local_graph_available"
+      }
+    },
+    "Eng-DCEC": {
+      "prior_cached:refs/remotes/origin/master": {
+        "ancestors": 45,
+        "object_db": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+        "oid": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+        "reachable_relevant_oids": [
+          "df518c21ef81b8001e6db59f5fd70f10cc04ff6c"
+        ],
+        "state": "local_graph_available"
+      },
+      "refs/heads/main": {
+        "oid": "51a91c7b5e41ece82e085061796584863d91210e",
+        "state": "object_graph_unavailable_locally"
+      },
+      "refs/heads/master": {
+        "ancestors": 45,
+        "object_db": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+        "oid": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+        "reachable_relevant_oids": [
+          "df518c21ef81b8001e6db59f5fd70f10cc04ff6c"
+        ],
+        "state": "local_graph_available"
+      }
+    },
+    "ShadowProver": {
+      "prior_cached:refs/remotes/origin/master": {
+        "ancestors": 283,
+        "object_db": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/ShadowProver",
+        "oid": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+        "reachable_relevant_oids": [
+          "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9"
+        ],
+        "state": "local_graph_available"
+      },
+      "refs/heads/main": {
+        "ancestors": 299,
+        "object_db": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/ShadowProver",
+        "oid": "dc92f8473e9636bad93c1c1df5bc1502945d54b2",
+        "reachable_relevant_oids": [
+          "0777f5fed556d45c42e4facc860373e19e37974d",
+          "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+          "60d64857fe39685d8117ef3a683a6bc38e870fa0",
+          "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+          "dc92f8473e9636bad93c1c1df5bc1502945d54b2",
+          "e784362d04c1f6491780ba48d55075a4412b4b52",
+          "ebd849e22d0864985fc8de1a668672625683304e",
+          "efd97269dbcbb78eb0660b2e97e40cb8cbeeafc5"
+        ],
+        "state": "local_graph_available"
+      },
+      "refs/heads/master": {
+        "ancestors": 283,
+        "object_db": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/ShadowProver",
+        "oid": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+        "reachable_relevant_oids": [
+          "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9"
+        ],
+        "state": "local_graph_available"
+      }
+    },
+    "Talos": {
+      "prior_cached:refs/remotes/origin/master": {
+        "ancestors": 30,
+        "object_db": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/Talos",
+        "oid": "e0b7650d3e3a403924773f8253e924c719748d36",
+        "reachable_relevant_oids": [
+          "e0b7650d3e3a403924773f8253e924c719748d36"
+        ],
+        "state": "local_graph_available"
+      },
+      "refs/heads/main": {
+        "oid": "f8fb0714f4abcc5eb981d7dd7623763d39fed995",
+        "state": "object_graph_unavailable_locally"
+      },
+      "refs/heads/master": {
+        "ancestors": 30,
+        "object_db": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/Talos",
+        "oid": "e0b7650d3e3a403924773f8253e924c719748d36",
+        "reachable_relevant_oids": [
+          "e0b7650d3e3a403924773f8253e924c719748d36"
+        ],
+        "state": "local_graph_available"
+      }
+    },
+    "common_crawl_search_engine": {
+      "prior_cached:refs/remotes/origin/main": {
+        "ancestors": 59,
+        "object_db": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+        "oid": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+        "reachable_relevant_oids": [
+          "0e635cba586e8f6f6ea8126e3b1668b3e675c029",
+          "1cb70a6f71b8f8f849d34efe0ec6400400542bec",
+          "29698d3aebee605ffc9cad4a26c6930a6ab4321e",
+          "5c7c2ab8a509073f39359b2a35446183855f460a",
+          "6fe3169a0f642d535d3cbb2af8f3d04c03fec07f",
+          "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+          "7d9edf423128471ba214e8907c7d5505fa80bd70",
+          "a6a0f8b117e8371ff756dfbd79566998f7aa1381",
+          "b442cebe38fd4a243bd04697705a9fa24127c742",
+          "eddcce0883b15c9043ba61ff7278751c484d6178",
+          "f810f389072df30cfa4cb984ac2402eedb0f7d51"
+        ],
+        "state": "local_graph_available"
+      },
+      "refs/heads/main": {
+        "oid": "248f17f19e6f3e4b326f651e7a64a6f69cf5be3b",
+        "state": "object_graph_unavailable_locally"
+      }
+    },
+    "convert_to_txt_based_on_mime_type": {
+      "prior_cached:refs/remotes/origin/main": {
+        "ancestors": 24,
+        "object_db": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+        "oid": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+        "reachable_relevant_oids": [
+          "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+          "9471f5b9fb7da6e55d71d801f00eb5a8ea26c22b",
+          "b0d59fda7b473c7dd8b7b0fab8425652c491498d",
+          "c78dc464b8665d1affa89f7a1752be5c7c27bc1b",
+          "d58933631a5362b1e2fdc45254ef620fa231223a",
+          "ff8c9f4033079e082b9820a6f0c1cac92893cb52"
+        ],
+        "state": "local_graph_available"
+      },
+      "refs/heads/main": {
+        "oid": "5756a6158eba5907cf0ddbd42637ef4668bb0307",
+        "state": "object_graph_unavailable_locally"
+      }
+    },
+    "ipfs_model_manager_py": {
+      "prior_cached:refs/remotes/origin/main": {
+        "ancestors": 118,
+        "object_db": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_model_manager_py",
+        "oid": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+        "reachable_relevant_oids": [
+          "4f99e470d12f45f3918128dec2610e1685564ffb",
+          "f6151d2113f42e75ea7d83a1b2362fc97e55e44d"
+        ],
+        "state": "local_graph_available"
+      },
+      "refs/heads/main": {
+        "ancestors": 118,
+        "object_db": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_model_manager_py",
+        "oid": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+        "reachable_relevant_oids": [
+          "4f99e470d12f45f3918128dec2610e1685564ffb",
+          "f6151d2113f42e75ea7d83a1b2362fc97e55e44d"
+        ],
+        "state": "local_graph_available"
+      }
+    },
+    "ipfs_transformers_py": {
+      "prior_cached:refs/remotes/origin/main": {
+        "ancestors": 54,
+        "object_db": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_transformers_py",
+        "oid": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+        "reachable_relevant_oids": [
+          "b397988ed9e3e656475c1cf4417b84efdb95daf3"
+        ],
+        "state": "local_graph_available"
+      },
+      "refs/heads/main": {
+        "ancestors": 54,
+        "object_db": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_transformers_py",
+        "oid": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+        "reachable_relevant_oids": [
+          "b397988ed9e3e656475c1cf4417b84efdb95daf3"
+        ],
+        "state": "local_graph_available"
+      }
+    },
+    "omni_converter_mk2": {
+      "prior_cached:refs/remotes/origin/main": {
+        "ancestors": 118,
+        "object_db": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/multimedia/omni_converter_mk2",
+        "oid": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+        "reachable_relevant_oids": [
+          "4e345251bcee84ae5e29f4da167be8084e7e787c",
+          "9b5bac8bac901aa7bc1586fe86753a6c146227d8",
+          "a484d4e9f94b67fbf937ed3eb5fb65b1e7dbe7ce",
+          "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+          "c1d9b0d517cea022516aab5b5d8fa5e3bc9a65aa",
+          "f4628a76e1371184c8ebf07d8ddbc2375ec50ef7"
+        ],
+        "state": "local_graph_available"
+      },
+      "refs/heads/main": {
+        "oid": "72f459942dd781cbffcffb0e29a84e445273159c",
+        "state": "object_graph_unavailable_locally"
+      }
+    }
+  },
+  "discovery_sha256": "57c4c69dc6e6adb4348f8184fab1f0780f0eb398ae1843333bbaa97e88798f78",
+  "local_checkouts": [
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "family": "DCEC_Library",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "previous_exact_HEAD": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "root_recursive_pin": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "family": "DCEC_Library",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "previous_exact_HEAD": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "root_recursive_pin": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "family": "DCEC_Library",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "previous_exact_HEAD": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "root_recursive_pin": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "family": "DCEC_Library",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "previous_exact_HEAD": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "root_recursive_pin": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "family": "DCEC_Library",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "previous_exact_HEAD": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "root_recursive_pin": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "family": "Eng-DCEC",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "previous_exact_HEAD": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "root_recursive_pin": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "family": "Eng-DCEC",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "previous_exact_HEAD": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "root_recursive_pin": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "family": "Eng-DCEC",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "previous_exact_HEAD": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "root_recursive_pin": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "family": "Eng-DCEC",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "previous_exact_HEAD": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "root_recursive_pin": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "family": "Eng-DCEC",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "previous_exact_HEAD": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "root_recursive_pin": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "family": "ShadowProver",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "previous_exact_HEAD": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "root_recursive_pin": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "family": "ShadowProver",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "previous_exact_HEAD": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "root_recursive_pin": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "family": "ShadowProver",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "previous_exact_HEAD": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "root_recursive_pin": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "family": "ShadowProver",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "previous_exact_HEAD": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "root_recursive_pin": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "family": "ShadowProver",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "previous_exact_HEAD": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "root_recursive_pin": "8bf6ce7d30bc069b740078bacaee0589b4c2c49b",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/Talos",
+      "family": "Talos",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/CEC/Talos",
+      "previous_exact_HEAD": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "root_recursive_pin": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos",
+      "family": "Talos",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Talos",
+      "previous_exact_HEAD": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "root_recursive_pin": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos",
+      "family": "Talos",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Talos",
+      "previous_exact_HEAD": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "root_recursive_pin": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos",
+      "family": "Talos",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Talos",
+      "previous_exact_HEAD": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "root_recursive_pin": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos",
+      "family": "Talos",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Talos",
+      "previous_exact_HEAD": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "root_recursive_pin": "cf386792a15583357ad8640b61a80684430b8e0f",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "family": "common_crawl_search_engine",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "previous_exact_HEAD": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "root_recursive_pin": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "family": "common_crawl_search_engine",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "previous_exact_HEAD": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "root_recursive_pin": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "family": "common_crawl_search_engine",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "previous_exact_HEAD": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "root_recursive_pin": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "family": "common_crawl_search_engine",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "previous_exact_HEAD": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "root_recursive_pin": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "family": "common_crawl_search_engine",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "previous_exact_HEAD": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "root_recursive_pin": "7c806d63b4f019e99bf5a3ca6a105fbd5778b17e",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "family": "convert_to_txt_based_on_mime_type",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "previous_exact_HEAD": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "root_recursive_pin": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "family": "convert_to_txt_based_on_mime_type",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "previous_exact_HEAD": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "root_recursive_pin": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "family": "convert_to_txt_based_on_mime_type",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "previous_exact_HEAD": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "root_recursive_pin": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "family": "convert_to_txt_based_on_mime_type",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "previous_exact_HEAD": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "root_recursive_pin": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "family": "convert_to_txt_based_on_mime_type",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "previous_exact_HEAD": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "root_recursive_pin": "2b7a36e7699dbd451a89acb273ab7090c99d1cc0",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_model_manager_py",
+      "family": "ipfs_model_manager_py",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_model_manager_py",
+      "previous_exact_HEAD": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+      "root_recursive_pin": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_model_manager_py",
+      "family": "ipfs_model_manager_py",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_model_manager_py",
+      "previous_exact_HEAD": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+      "root_recursive_pin": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_model_manager_py",
+      "family": "ipfs_model_manager_py",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_model_manager_py",
+      "previous_exact_HEAD": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+      "root_recursive_pin": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_transformers_py",
+      "family": "ipfs_transformers_py",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_transformers_py",
+      "previous_exact_HEAD": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+      "root_recursive_pin": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_transformers_py",
+      "family": "ipfs_transformers_py",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_transformers_py",
+      "previous_exact_HEAD": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+      "root_recursive_pin": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_transformers_py",
+      "family": "ipfs_transformers_py",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_transformers_py",
+      "previous_exact_HEAD": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+      "root_recursive_pin": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "family": "omni_converter_mk2",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "path": "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "previous_exact_HEAD": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "root_recursive_pin": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "family": "omni_converter_mk2",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "previous_exact_HEAD": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "root_recursive_pin": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "family": "omni_converter_mk2",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/.tools/ipfs_kit_py/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "previous_exact_HEAD": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "root_recursive_pin": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "family": "omni_converter_mk2",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "previous_exact_HEAD": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "root_recursive_pin": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "family": "omni_converter_mk2",
+      "head_error": "",
+      "head_rc": 0,
+      "observed_HEAD": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "path": "/home/barberb/lift_coding/hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "previous_exact_HEAD": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "root_recursive_pin": "ae4f3c2b321e25935f62f99fd50f72bb8916c420",
+      "status_counts": {
+        "??": 2
+      },
+      "status_error": "",
+      "status_rc": 0,
+      "status_rows": [
+        {
+          "path": "workspace/control-plane/source-leases/admission.lock",
+          "status": "??"
+        },
+        {
+          "path": "workspace/control-plane/source-leases/source.lock",
+          "status": "??"
+        }
+      ]
+    }
+  ],
+  "oid_dispositions": {
+    "DCEC_Library": {
+      "all_distinct_local_oids": 10,
+      "cached_only_reachable": 0,
+      "fresh_published_reachable": 1,
+      "unproven_commit_oids": [
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library/refs/heads/sync-preserved/20261109-13ab8a4f2541"
+          ],
+          "oid": "2616cbd6a600d13a6d95a38695bdfb67d4ce73fc",
+          "old_saved_branch": "refs/heads/sync-preserved/20261109-13ab8a4f2541",
+          "tree_equivalent_old": true
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library/refs/heads/sync-preserved/20261109-c465e6ccdf7d"
+          ],
+          "oid": "30877c96ab087f392b6842a6fd671c326aba77c4",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library/refs/heads/publication/wip-20261004/8b8e69c6442db6b187c468f8"
+          ],
+          "oid": "37604c7fc8ed5945e1f945a91035c965594e0b98",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/CEC/DCEC_Library",
+            "/home/barberb/lift_coding/hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/DCEC_Library",
+            "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/DCEC_Library",
+            "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/DCEC_Library"
+          ],
+          "oid": "72efd97f0fc8ab95fb5a7fdb0a6f8efd94c20337",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library/refs/heads/publication/wip-20261004/3792cc7cb0fb0a74eec74f85"
+          ],
+          "oid": "8b01d61e85aa72eb8904dfde407980ef080586df",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library/refs/heads/publication/wip-20261004/826ee288aa75ef7f51e09b4f"
+          ],
+          "oid": "a67325a84cae09163a7b4c574d2860ef60e74e92",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library/refs/heads/publication/wip-20261004/c795132b7740053342e15222"
+          ],
+          "oid": "afebf7b6f4ec9073a7216ce84bf4dfee03c28475",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library/refs/heads/sync-preserved/20261109-9a29c6ada72a"
+          ],
+          "oid": "edba1b3fcbc3ecb0e95268e57aef9b8aebab79a4",
+          "old_saved_branch": "refs/heads/sync-preserved/20261109-9a29c6ada72a",
+          "tree_equivalent_old": true
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library/refs/heads/sync-preserved/20261109-6fd6a3b7ecf1"
+          ],
+          "oid": "fffd0303df9e30730d265300ca040bc5347b1c49",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        }
+      ]
+    },
+    "Eng-DCEC": {
+      "all_distinct_local_oids": 6,
+      "cached_only_reachable": 0,
+      "fresh_published_reachable": 1,
+      "unproven_commit_oids": [
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC/refs/heads/sync-preserved/20261109-d01c845fb1c3"
+          ],
+          "oid": "458b8e523cc2609945db79e1cd1ef19480ae62b9",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC/refs/heads/publication/wip-20261004/5fabba113939bd8e34aee651"
+          ],
+          "oid": "46fbca82edb76bc5d7e04b882a802756fc32e5b3",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC/refs/heads/publication/wip-20261004/a5e9ce134addf920cc135fd9"
+          ],
+          "oid": "845597e8d1925520150aa1547d7d275d9b573934",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC/refs/heads/sync-preserved/20261109-52a03ced8f03"
+          ],
+          "oid": "9a84388183ff879f98d42c633a3e802243114603",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+            "/home/barberb/lift_coding/hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+            "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+            "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Eng-DCEC"
+          ],
+          "oid": "c96e40dd9351e93b5a573af3fbc82fab644a0eb4",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        }
+      ]
+    },
+    "ShadowProver": {
+      "all_distinct_local_oids": 8,
+      "cached_only_reachable": 0,
+      "fresh_published_reachable": 8,
+      "unproven_commit_oids": []
+    },
+    "Talos": {
+      "all_distinct_local_oids": 11,
+      "cached_only_reachable": 0,
+      "fresh_published_reachable": 1,
+      "unproven_commit_oids": [
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos/refs/heads/sync-preserved/20261109-5a07ce8f2bff"
+          ],
+          "oid": "4f0154629ab67e83a92feba8467863321faa8f91",
+          "old_saved_branch": "refs/heads/sync-preserved/20261109-5a07ce8f2bff",
+          "tree_equivalent_old": true
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos/refs/heads/publication/wip-20261004/51b00fc1677cefc08d1f7baa"
+          ],
+          "oid": "5dd264d190836e61f6ad37b0159762c8e6ac1f56",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos/refs/heads/publication/wip-20261004/2e5a72bcae08eb6a3df59d75"
+          ],
+          "oid": "5f27c4500cf8eb104b29296ab166357ec29120bb",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos/refs/heads/publication/wip-20261004/887df2f3fb025110b7280a69"
+          ],
+          "oid": "7c3bfb8306495acd6a05bbdf6f57da68bd531df1",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos/refs/heads/publication/wip-20261004/d167cb2383bcf8b3b4f5af66"
+          ],
+          "oid": "b54c12cc714087593fa6a4132536d4f971d54e8b",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos/refs/heads/sync-preserved/20261109-2c99b841dbf3"
+          ],
+          "oid": "cd077e86addeb0012307460193d5f438bd42fb7a",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/CEC/Talos",
+            "/home/barberb/lift_coding/hallucinate_app/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Talos",
+            "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/Talos",
+            "/home/barberb/lift_coding/hallucinate_app/ipfs_accelerate_py/ipfs_datasets_py/ipfs_datasets_py/logic/CEC/Talos"
+          ],
+          "oid": "cf386792a15583357ad8640b61a80684430b8e0f",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos/refs/heads/publication/wip-20261004/3736be6e6024d84ce3d05df0"
+          ],
+          "oid": "da9c21a30777f2f4e338846c8e6f51fe0667468c",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos/refs/heads/sync-preserved/20261109-17167fa35076"
+          ],
+          "oid": "e1f5adfbc656579ba9137d93b72d75d7475d0e02",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos/refs/heads/sync-preserved/20261109-37c440b166c9"
+          ],
+          "oid": "ff5d03ab5b04c549d002319c2c5bc2b742285939",
+          "old_saved_branch": "refs/heads/sync-preserved/20261109-37c440b166c9",
+          "tree_equivalent_old": true
+        }
+      ]
+    },
+    "common_crawl_search_engine": {
+      "all_distinct_local_oids": 15,
+      "cached_only_reachable": 11,
+      "fresh_published_reachable": 0,
+      "unproven_commit_oids": [
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine/refs/heads/sync-preserved/20261109-4b49f206667d"
+          ],
+          "oid": "3137c71a7d64957cf32a734d390d1a7fc4807c1e",
+          "old_saved_branch": "refs/heads/sync-preserved/20261109-4b49f206667d",
+          "tree_equivalent_old": true
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine/refs/heads/sync-preserved/20261109-4c221eee7aa2"
+          ],
+          "oid": "3c602a118abcc8f1b1a4eac99c57875d2c242d64",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine/refs/heads/sync-preserved/20261109-12dea45ea013"
+          ],
+          "oid": "9eeefbbd8dd295bdc14e6380f9f77172e42f0b0b",
+          "old_saved_branch": "refs/heads/sync-preserved/20261109-12dea45ea013",
+          "tree_equivalent_old": true
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine/refs/heads/sync-preserved/20261109-26292a411028"
+          ],
+          "oid": "c607b3c0219795d5e13928ce4d7740f9247f47d0",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        }
+      ]
+    },
+    "convert_to_txt_based_on_mime_type": {
+      "all_distinct_local_oids": 10,
+      "cached_only_reachable": 6,
+      "fresh_published_reachable": 0,
+      "unproven_commit_oids": [
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type/refs/heads/sync-preserved/20261109-72e4cb14eceb"
+          ],
+          "oid": "31e1552b892d638a24b5b6b418a6817ab78a8aa6",
+          "old_saved_branch": "refs/heads/sync-preserved/20261109-72e4cb14eceb",
+          "tree_equivalent_old": true
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type/refs/heads/sync-preserved/20261109-0058cd393527"
+          ],
+          "oid": "5204d99948107fa0ac26e44a8bf947f3b86b0a96",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type/refs/heads/sync-preserved/20261109-3860b65d1b31"
+          ],
+          "oid": "9e89a18009ce53019590820dd33a37a2f57acb0b",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type/refs/heads/sync-preserved/20261109-45533f287df5"
+          ],
+          "oid": "ddcaf7a5b69e58ae27df752451d1a066598cc7ba",
+          "old_saved_branch": "refs/heads/sync-preserved/20261109-45533f287df5",
+          "tree_equivalent_old": true
+        }
+      ]
+    },
+    "ipfs_model_manager_py": {
+      "all_distinct_local_oids": 2,
+      "cached_only_reachable": 0,
+      "fresh_published_reachable": 2,
+      "unproven_commit_oids": []
+    },
+    "ipfs_transformers_py": {
+      "all_distinct_local_oids": 1,
+      "cached_only_reachable": 0,
+      "fresh_published_reachable": 1,
+      "unproven_commit_oids": []
+    },
+    "omni_converter_mk2": {
+      "all_distinct_local_oids": 10,
+      "cached_only_reachable": 6,
+      "fresh_published_reachable": 0,
+      "unproven_commit_oids": [
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/omni_converter_mk2/refs/heads/sync-preserved/20261109-e67e05b220e0"
+          ],
+          "oid": "2bdce13b79b19d837a9c0b835b59dc016c78eba6",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/omni_converter_mk2/refs/heads/sync-preserved/20261109-155ded4a8ebb"
+          ],
+          "oid": "50e25459ca526ac9e2f25041bd4b0633896a281e",
+          "old_saved_branch": "refs/heads/sync-preserved/20261109-155ded4a8ebb",
+          "tree_equivalent_old": true
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/omni_converter_mk2/refs/heads/sync-preserved/20261109-d80b7f704128"
+          ],
+          "oid": "bd6fe97669cc100a5a38fc9de3299ede0a700dbe",
+          "old_saved_branch": "refs/heads/sync-preserved/20261109-d80b7f704128",
+          "tree_equivalent_old": true
+        },
+        {
+          "observed_source_examples": [
+            "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/omni_converter_mk2/refs/heads/sync-preserved/20261109-60227728eedd"
+          ],
+          "oid": "d51525d000c76136e4c21c185c7090d576d3933b",
+          "old_saved_branch": null,
+          "tree_equivalent_old": false
+        }
+      ]
+    }
+  },
+  "ref_enumeration_status": [
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "error": "",
+      "family": "DCEC_Library",
+      "rc": 0,
+      "row_count": 585
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "error": "",
+      "family": "DCEC_Library",
+      "rc": 0,
+      "row_count": 19
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "error": "",
+      "family": "DCEC_Library",
+      "rc": 0,
+      "row_count": 124
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "error": "",
+      "family": "DCEC_Library",
+      "rc": 0,
+      "row_count": 1207
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/DCEC_Library",
+      "error": "",
+      "family": "DCEC_Library",
+      "rc": 0,
+      "row_count": 47
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "error": "",
+      "family": "Eng-DCEC",
+      "rc": 0,
+      "row_count": 584
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "error": "",
+      "family": "Eng-DCEC",
+      "rc": 0,
+      "row_count": 19
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "error": "",
+      "family": "Eng-DCEC",
+      "rc": 0,
+      "row_count": 124
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "error": "",
+      "family": "Eng-DCEC",
+      "rc": 0,
+      "row_count": 1241
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Eng-DCEC",
+      "error": "",
+      "family": "Eng-DCEC",
+      "rc": 0,
+      "row_count": 44
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "error": "",
+      "family": "ShadowProver",
+      "rc": 0,
+      "row_count": 585
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "error": "",
+      "family": "ShadowProver",
+      "rc": 0,
+      "row_count": 19
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "error": "",
+      "family": "ShadowProver",
+      "rc": 0,
+      "row_count": 124
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "error": "",
+      "family": "ShadowProver",
+      "rc": 0,
+      "row_count": 1241
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/ShadowProver",
+      "error": "",
+      "family": "ShadowProver",
+      "rc": 0,
+      "row_count": 44
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/logic/CEC/Talos",
+      "error": "",
+      "family": "Talos",
+      "rc": 0,
+      "row_count": 585
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos",
+      "error": "",
+      "family": "Talos",
+      "rc": 0,
+      "row_count": 19
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos",
+      "error": "",
+      "family": "Talos",
+      "rc": 0,
+      "row_count": 124
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos",
+      "error": "",
+      "family": "Talos",
+      "rc": 0,
+      "row_count": 1245
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/logic/CEC/Talos",
+      "error": "",
+      "family": "Talos",
+      "rc": 0,
+      "row_count": 47
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "error": "",
+      "family": "common_crawl_search_engine",
+      "rc": 0,
+      "row_count": 585
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "error": "",
+      "family": "common_crawl_search_engine",
+      "rc": 0,
+      "row_count": 20
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "error": "",
+      "family": "common_crawl_search_engine",
+      "rc": 0,
+      "row_count": 125
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "error": "",
+      "family": "common_crawl_search_engine",
+      "rc": 0,
+      "row_count": 1062
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/processors/web_archiving/common_crawl_search_engine",
+      "error": "",
+      "family": "common_crawl_search_engine",
+      "rc": 0,
+      "row_count": 16
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "error": "",
+      "family": "convert_to_txt_based_on_mime_type",
+      "rc": 0,
+      "row_count": 583
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "error": "",
+      "family": "convert_to_txt_based_on_mime_type",
+      "rc": 0,
+      "row_count": 18
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "error": "",
+      "family": "convert_to_txt_based_on_mime_type",
+      "rc": 0,
+      "row_count": 123
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "error": "",
+      "family": "convert_to_txt_based_on_mime_type",
+      "rc": 0,
+      "row_count": 1060
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/convert_to_txt_based_on_mime_type",
+      "error": "",
+      "family": "convert_to_txt_based_on_mime_type",
+      "rc": 0,
+      "row_count": 14
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_model_manager_py",
+      "error": "",
+      "family": "ipfs_model_manager_py",
+      "rc": 0,
+      "row_count": 31
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_model_manager_py",
+      "error": "",
+      "family": "ipfs_model_manager_py",
+      "rc": 0,
+      "row_count": 140
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_model_manager_py",
+      "error": "",
+      "family": "ipfs_model_manager_py",
+      "rc": 0,
+      "row_count": 473
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_transformers_py",
+      "error": "",
+      "family": "ipfs_transformers_py",
+      "rc": 0,
+      "row_count": 34
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_transformers_py",
+      "error": "",
+      "family": "ipfs_transformers_py",
+      "rc": 0,
+      "row_count": 143
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_transformers_py",
+      "error": "",
+      "family": "ipfs_transformers_py",
+      "rc": 0,
+      "row_count": 481
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/external/ipfs_datasets/modules/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "error": "",
+      "family": "omni_converter_mk2",
+      "rc": 0,
+      "row_count": 582
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "error": "",
+      "family": "omni_converter_mk2",
+      "rc": 0,
+      "row_count": 17
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "error": "",
+      "family": "omni_converter_mk2",
+      "rc": 0,
+      "row_count": 122
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "error": "",
+      "family": "omni_converter_mk2",
+      "rc": 0,
+      "row_count": 1059
+    },
+    {
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_datasets_py/modules/ipfs_datasets_py/multimedia/omni_converter_mk2",
+      "error": "",
+      "family": "omni_converter_mk2",
+      "rc": 0,
+      "row_count": 13
+    }
+  ],
+  "remote_mains": {
+    "DCEC_Library": {
+      "advertised_default_reference": "refs/heads/master",
+      "advertised_oids": {
+        "HEAD": "a4beb5b3280595be6b9221cac3c91dd019e6d371",
+        "refs/heads/main": "c6b42b02d3dc7d7e5d6281ea1a8cc6e806092da0",
+        "refs/heads/master": "a4beb5b3280595be6b9221cac3c91dd019e6d371"
+      },
+      "error": "",
+      "family": "DCEC_Library",
+      "rc": 0,
+      "url": "https://github.com/endomorphosis/DCEC_Library.git"
+    },
+    "Eng-DCEC": {
+      "advertised_default_reference": "refs/heads/master",
+      "advertised_oids": {
+        "HEAD": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c",
+        "refs/heads/main": "51a91c7b5e41ece82e085061796584863d91210e",
+        "refs/heads/master": "df518c21ef81b8001e6db59f5fd70f10cc04ff6c"
+      },
+      "error": "",
+      "family": "Eng-DCEC",
+      "rc": 0,
+      "url": "https://github.com/endomorphosis/Eng-DCEC.git"
+    },
+    "ShadowProver": {
+      "advertised_default_reference": "refs/heads/master",
+      "advertised_oids": {
+        "HEAD": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9",
+        "refs/heads/main": "dc92f8473e9636bad93c1c1df5bc1502945d54b2",
+        "refs/heads/master": "3060ede1ac1ec3f8ef9f9c9e41386aed1dbbe7f9"
+      },
+      "error": "",
+      "family": "ShadowProver",
+      "rc": 0,
+      "url": "https://github.com/endomorphosis/ShadowProver.git"
+    },
+    "Talos": {
+      "advertised_default_reference": "refs/heads/master",
+      "advertised_oids": {
+        "HEAD": "e0b7650d3e3a403924773f8253e924c719748d36",
+        "refs/heads/main": "f8fb0714f4abcc5eb981d7dd7623763d39fed995",
+        "refs/heads/master": "e0b7650d3e3a403924773f8253e924c719748d36"
+      },
+      "error": "",
+      "family": "Talos",
+      "rc": 0,
+      "url": "https://github.com/endomorphosis/Talos.git"
+    },
+    "common_crawl_search_engine": {
+      "advertised_default_reference": "refs/heads/main",
+      "advertised_oids": {
+        "HEAD": "248f17f19e6f3e4b326f651e7a64a6f69cf5be3b",
+        "refs/heads/main": "248f17f19e6f3e4b326f651e7a64a6f69cf5be3b"
+      },
+      "error": "",
+      "family": "common_crawl_search_engine",
+      "rc": 0,
+      "url": "https://github.com/endomorphosis/common_crawl_search_engine.git"
+    },
+    "convert_to_txt_based_on_mime_type": {
+      "advertised_default_reference": "refs/heads/main",
+      "advertised_oids": {
+        "HEAD": "5756a6158eba5907cf0ddbd42637ef4668bb0307",
+        "refs/heads/main": "5756a6158eba5907cf0ddbd42637ef4668bb0307"
+      },
+      "error": "",
+      "family": "convert_to_txt_based_on_mime_type",
+      "rc": 0,
+      "url": "https://github.com/endomorphosis/convert_to_txt_based_on_mime_type.git"
+    },
+    "ipfs_model_manager_py": {
+      "advertised_default_reference": "refs/heads/main",
+      "advertised_oids": {
+        "HEAD": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d",
+        "refs/heads/main": "f6151d2113f42e75ea7d83a1b2362fc97e55e44d"
+      },
+      "error": "",
+      "family": "ipfs_model_manager_py",
+      "rc": 0,
+      "url": "https://github.com/endomorphosis/ipfs_model_manager_py.git"
+    },
+    "ipfs_transformers_py": {
+      "advertised_default_reference": "refs/heads/main",
+      "advertised_oids": {
+        "HEAD": "b397988ed9e3e656475c1cf4417b84efdb95daf3",
+        "refs/heads/main": "b397988ed9e3e656475c1cf4417b84efdb95daf3"
+      },
+      "error": "",
+      "family": "ipfs_transformers_py",
+      "rc": 0,
+      "url": "https://github.com/endomorphosis/ipfs_transformers_py.git"
+    },
+    "omni_converter_mk2": {
+      "advertised_default_reference": "refs/heads/main",
+      "advertised_oids": {
+        "HEAD": "72f459942dd781cbffcffb0e29a84e445273159c",
+        "refs/heads/main": "72f459942dd781cbffcffb0e29a84e445273159c"
+      },
+      "error": "",
+      "family": "omni_converter_mk2",
+      "rc": 0,
+      "url": "https://github.com/endomorphosis/omni_converter_mk2.git"
+    }
+  },
+  "schema": "first-party-nested-submodule-status-and-publication-metadata/v1",
+  "scope": "41 real initialized Git worktree status checks, nine constructed exact GitHub origins, plus cached local/registered branch ancestry where Git objects are available. No source bodies emitted. Git metadata only, no Git mutation or source lease."
+}

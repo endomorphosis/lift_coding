@@ -1,0 +1,431 @@
+"""Pure caller-composition joins with explicitly untrusted proof-shaped data.
+
+Native source extraction, ProgramIR adaptation and callee projection are real.
+The authored callee record and object descriptor attest no proving invocation,
+physical object, current repository head, or execution. Actual Lean qualification
+is performed separately; these tests never execute source, Lean, or training.
+"""
+from copy import deepcopy
+import hashlib
+import importlib
+
+import pytest
+
+
+REPOSITORY_ID = "repository:authored-call-composition-fixture"
+CALLEE = b"def increment(n: int) -> int:\n    return n + 1\n"
+CALLER = (
+    b"from callee import increment\n\n"
+    b"def twice(n: int) -> int:\n"
+    b"    return increment(increment(n))\n"
+)
+AUTHORITY = (
+    "proof_authority", "execution_authority", "completion_authority",
+    "source_semantics_verified", "runtime_behavior_verified", "cpython_equivalence_proved",
+    "source_parser_correctness_proved", "python_import_resolution_proved", "source_origin_proved",
+    "whole_program_semantics_verified", "training_convergence_proved", "full_task_satisfaction",
+    "production_activated", "original_task_budget_qualified", "network_isolation_enforced",
+    "loaded_module_code_attested", "transitive_dependency_closure_attested",
+)
+
+
+@pytest.fixture(autouse=True)
+def fresh_namespaces(tmp_path, monkeypatch):
+    monkeypatch.setenv("IPFS_ACCELERATE_META_INDEX_DUCKDB", str(tmp_path / "fresh-meta.duckdb"))
+    monkeypatch.delenv("IPFS_ACCELERATE_META_INDEX_DUCKLAKE", raising=False)
+    monkeypatch.setenv("IPFS_ACCELERATE_AGENT_ORCHESTRATION_DIR", str(tmp_path / "orchestration"))
+
+
+@pytest.fixture
+def native(fresh_namespaces):
+    from ipfs_datasets_py.duckdb_control.codebase_catalog import CodebaseHead
+    from ipfs_datasets_py.logic.software_contracts import codebase_integer_lowering_lean
+    from ipfs_datasets_py.logic.software_contracts.codebase_integer_profile import IntegerOffsetContract
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_bytes, cid_for_structured
+
+    snapshot = cid_for_structured({"snapshot": "authored fixture; no durable owner"})
+    head = CodebaseHead(
+        repository_id=REPOSITORY_ID, generation=1,
+        manifest_cid=cid_for_structured({"manifest": "authored fixture"}),
+        snapshot_cid=snapshot,
+        ast_revision_id=f"rev:{REPOSITORY_ID}:snapshot:{snapshot}",
+        receipt_cid=cid_for_structured({"receipt": "authored fixture; no publication"}),
+    )
+    return {
+        "head": head, "contract": IntegerOffsetContract,
+        "lowering": codebase_integer_lowering_lean,
+        "cid": cid_for_structured, "bytes_cid": cid_for_bytes,
+    }
+
+
+@pytest.fixture
+def projection_module(fresh_namespaces):
+    return importlib.import_module(
+        "benchmarks.agent_supervisor.container_coding.terminal_call_ir_projection"
+    )
+
+
+@pytest.fixture
+def composition(fresh_namespaces):
+    return importlib.import_module(
+        "benchmarks.agent_supervisor.container_coding.terminal_call_ir_composition"
+    )
+
+
+def _project(projection_module, native, *, requested_offset=2, callee_offset=1):
+    contract = native["contract"]
+    return projection_module.build_call_ir_projection(
+        sources={"callee.py": CALLEE, "caller.py": CALLER},
+        callee_contract=contract("callee.py", "increment", "n", callee_offset).to_dict(),
+        caller_contract=contract("caller.py", "twice", "n", requested_offset).to_dict(),
+        head=native["head"].to_dict(),
+    )
+
+
+@pytest.fixture
+def projection(projection_module, native):
+    return _project(projection_module, native)
+
+
+def _rebind_proof(proof, native, *, translation=False, contract=False):
+    if translation:
+        proof["translation_cid"] = native["cid"](proof["translation"])
+        proof["lean_certificate"]["translation_cid"] = proof["translation_cid"]
+    if contract:
+        proof["contract_cid"] = native["cid"](proof["contract"])
+    proof["result_cid"] = native["cid"]({
+        key: value for key, value in proof.items() if key != "result_cid"
+    })
+
+
+def _proof_shape(projection, native):
+    """Authored data only; the descriptor has no physical/kernel provenance."""
+    callee = projection["callee_projection"]
+    module = native["lowering"]
+    actual = callee["compiled"]["body_offset"]
+    requested = callee["contract"]["offset"]
+    matches = actual == requested
+    marker = b"authored untrusted descriptor; not a compiled Lean object"
+    olean = {
+        "path": "/authored-untrusted-fixture/IntegerLowering.olean",
+        "cid": native["bytes_cid"](marker),
+        "sha256": hashlib.sha256(marker).hexdigest(), "size_bytes": len(marker),
+    }
+    proof = {name: None for name in module._RECORD_FIELDS}
+    proof.update(module._FALSE)
+    proof.update({
+        "schema": module.SCHEMA, "profile": module.PROFILE, "scope": module.SCOPE,
+        "status": "model_proved" if matches else "model_refuted",
+        "head": deepcopy(callee["head"]), "manifest_cid": callee["head"]["manifest_cid"],
+        "source_path": callee["contract"]["path"], "source_cid": callee["source_cid"],
+        "source_sha256": callee["source_sha256"], "compiled_cid": native["cid"](callee["compiled"]),
+        "contract": deepcopy(callee["contract"]), "contract_cid": native["cid"](callee["contract"]),
+        "translation": deepcopy(callee["translation"]),
+        "translation_cid": native["cid"](callee["translation"]),
+        "lean_certificate": {
+            "scope": module.SCOPE, "theorems": deepcopy(callee["theorems"]),
+            "translation_cid": native["cid"](callee["translation"]), "olean_cid": olean["cid"],
+        },
+        "source_ast_semantics_defined": True, "source_ast_lowering_proved": True,
+        "native_target_correspondence_proved": True, "kernel_checked_model": True,
+        "requested_model_theorem_proved": matches,
+        "model_counterexample": None if matches else {
+            "input": 0, "model_output": actual, "required_output": requested,
+        },
+        "artifacts": {"lean_olean": olean},
+        "output": "authored-fixture-no-native-proof-invocation",
+    })
+    _rebind_proof(proof, native)
+    return proof
+
+
+@pytest.fixture
+def proof_shape(projection, native):
+    return _proof_shape(projection, native)
+
+
+def _assert_no_authority(value):
+    for key in AUTHORITY:
+        assert value[key] is False, key
+    assert value["source_callee_proof_origin_verified"] is False
+    assert value["formal_proof_independently_validated"] is False
+
+
+def test_real_projection_and_untrusted_callee_data_generate_advisory_composition(
+    composition, projection, proof_shape, native,
+):
+    original_projection, original_proof = deepcopy(projection), deepcopy(proof_shape)
+    value = composition.build_call_composition_source(projection=projection, callee_proof=proof_shape)
+    _assert_no_authority(value)
+    assert value["projection_id"] == projection["projection_id"]
+    assert value["callee_result_cid"] == proof_shape["result_cid"]
+    assert value["callee_olean"] == proof_shape["artifacts"]["lean_olean"]
+    assert value["model_status"] == "model_proved"
+    assert value["model_counterexample"] is None
+    assert value["native_call_opacity_preserved"] is True
+    assert value["training_steps"] == 0 and value["checker_invocations"] == 0
+    assert "import IntegerLowering" in value["lean_source"]
+    assert value["theorems"] and len(set(value["theorems"])) == len(value["theorems"])
+    assert value["source_id"] == native["cid"]({
+        key: item for key, item in value.items() if key != "source_id"
+    })
+    assert projection == original_projection and proof_shape == original_proof
+
+
+@pytest.mark.parametrize("requested_offset", [3, -1, 0])
+def test_refuted_caller_goal_preserves_proved_callee_and_composition_binding(
+    composition, projection_module, native, requested_offset,
+):
+    projection = _project(projection_module, native, requested_offset=requested_offset)
+    proof = _proof_shape(projection, native)
+    assert proof["status"] == "model_proved"
+    value = composition.build_call_composition_source(projection=projection, callee_proof=proof)
+    _assert_no_authority(value)
+    assert value["model_status"] == "model_refuted"
+    assert value["model_counterexample"] == {
+        "input": 0, "model_output": 2, "required_output": requested_offset,
+    }
+
+
+@pytest.mark.parametrize("mutation", [
+    "head", "caller_source", "callee_source", "caller_contract", "source_tree", "target_tree",
+    "call_count", "actual_offset", "dependency", "lexical_binding", "native_call_operator",
+    "callee_program", "authority", "extra_field",
+])
+def test_self_consistent_projection_cid_does_not_admit_semantic_corruption(
+    composition, projection, proof_shape, native, mutation,
+):
+    changed = deepcopy(projection)
+    if mutation == "head":
+        changed["head"]["generation"] += 1
+    elif mutation == "caller_source":
+        changed["source_texts"]["caller.py"] = CALLER.decode().replace(
+            "increment(increment(n))", "increment(n)"
+        )
+    elif mutation == "callee_source":
+        changed["source_texts"]["callee.py"] = CALLEE.decode().replace("n + 1", "n + 2")
+    elif mutation == "caller_contract":
+        changed["caller_contract"]["offset"] = 3
+    elif mutation == "source_tree":
+        changed["source_call_syntax"] = {"kind": "parameter"}
+    elif mutation == "target_tree":
+        changed["native_call_syntax"] = {"kind": "parameter"}
+    elif mutation == "call_count":
+        changed["call_count"] = 1
+    elif mutation == "actual_offset":
+        changed["actual_offset"] = 999
+    elif mutation == "dependency":
+        changed["dependency_edges"] = []
+    elif mutation == "lexical_binding":
+        changed["lexical_bindings"] = []
+    elif mutation == "native_call_operator":
+        calls = [item for item in changed["caller_native_program"]["expressions"] if item["kind"] == "call"]
+        assert calls
+        calls[0]["operator"] = "different_imported_target"
+    elif mutation == "callee_program":
+        changed["callee_projection"]["native_program"]["expressions"] = []
+        body = changed["callee_projection"]
+        body["projection_id"] = native["cid"]({key: value for key, value in body.items() if key != "projection_id"})
+    elif mutation == "authority":
+        changed["source_semantics_verified"] = True
+    else:
+        changed["unbound_extra_field"] = {"apparently_valid": True}
+    changed["projection_id"] = native["cid"]({
+        key: value for key, value in changed.items() if key != "projection_id"
+    })
+    with pytest.raises(ValueError):
+        composition.build_call_composition_source(projection=changed, callee_proof=proof_shape)
+
+
+@pytest.mark.parametrize("field", [
+    "source_sha256", "source_cid", "source_path", "compiled_cid", "contract_cid",
+    "translation_cid", "manifest_cid",
+])
+def test_callee_native_identity_cannot_drift_after_record_cid_rebinding(
+    composition, projection, proof_shape, native, field,
+):
+    proof = deepcopy(proof_shape)
+    proof[field] = "changed-untrusted-identity"
+    _rebind_proof(proof, native)
+    with pytest.raises(ValueError):
+        composition.build_call_composition_source(projection=projection, callee_proof=proof)
+
+
+@pytest.mark.parametrize("mutation", ["head", "contract", "translation", "theorems", "scope"])
+def test_callee_semantics_and_theorem_scope_must_match_the_source_projection(
+    composition, projection, proof_shape, native, mutation,
+):
+    proof = deepcopy(proof_shape)
+    if mutation == "head":
+        proof["head"]["generation"] += 1
+    elif mutation == "contract":
+        proof["contract"]["offset"] = 2
+    elif mutation == "translation":
+        proof["translation"]["native_program"]["expressions"] = []
+    elif mutation == "theorems":
+        proof["lean_certificate"]["theorems"].pop()
+    else:
+        proof["scope"] = "claimed_whole_program_runtime_equivalence"
+    _rebind_proof(proof, native, translation=mutation == "translation", contract=mutation == "contract")
+    with pytest.raises(ValueError):
+        composition.build_call_composition_source(projection=projection, callee_proof=proof)
+
+
+@pytest.mark.parametrize("field", [
+    "proof_authority", "source_semantics_verified", "cpython_equivalence_proved",
+    "source_parser_correctness_proved", "whole_program_semantics_verified", "training_convergence_proved",
+])
+@pytest.mark.parametrize("bad_value", [True, 0])
+def test_callee_claim_flags_require_exact_false_without_promoting_authority(
+    composition, projection, proof_shape, native, field, bad_value,
+):
+    proof = deepcopy(proof_shape)
+    proof[field] = bad_value
+    _rebind_proof(proof, native)
+    with pytest.raises(ValueError):
+        composition.build_call_composition_source(projection=projection, callee_proof=proof)
+
+
+def test_genuinely_refuted_callee_goal_is_not_a_proved_composition_dependency(
+    composition, projection_module, native,
+):
+    projection = _project(projection_module, native, callee_offset=2)
+    proof = _proof_shape(projection, native)
+    assert proof["status"] == "model_refuted"
+    assert proof["model_counterexample"] == {"input": 0, "model_output": 1, "required_output": 2}
+    with pytest.raises(ValueError):
+        composition.build_call_composition_source(projection=projection, callee_proof=proof)
+
+
+@pytest.mark.parametrize("field", [
+    "source_ast_semantics_defined", "source_ast_lowering_proved",
+    "native_target_correspondence_proved", "kernel_checked_model",
+])
+@pytest.mark.parametrize("bad_value", [False, 1])
+def test_missing_or_nonboolean_callee_model_claim_is_rejected(
+    composition, projection, proof_shape, native, field, bad_value,
+):
+    proof = deepcopy(proof_shape)
+    proof[field] = bad_value
+    _rebind_proof(proof, native)
+    with pytest.raises(ValueError):
+        composition.build_call_composition_source(projection=projection, callee_proof=proof)
+
+
+@pytest.mark.parametrize("mutation", [
+    "missing_artifact", "extra_descriptor_field", "missing_descriptor_field", "certificate_cid",
+])
+def test_callee_object_descriptor_and_certificate_have_closed_matching_bindings(
+    composition, projection, proof_shape, native, mutation,
+):
+    proof = deepcopy(proof_shape)
+    if mutation == "missing_artifact":
+        proof["artifacts"] = {}
+    elif mutation == "extra_descriptor_field":
+        proof["artifacts"]["lean_olean"]["caller_supplied_proof_authority"] = True
+    elif mutation == "missing_descriptor_field":
+        del proof["artifacts"]["lean_olean"]["sha256"]
+    else:
+        proof["lean_certificate"]["olean_cid"] = native["bytes_cid"](b"different untrusted object")
+    _rebind_proof(proof, native)
+    with pytest.raises(ValueError):
+        composition.build_call_composition_source(projection=projection, callee_proof=proof)
+
+
+@pytest.mark.parametrize("field,bad_value", [
+    ("path", "relative/IntegerLowering.olean"),
+    ("path", "/authored-untrusted-fixture/../IntegerLowering.olean"),
+    ("size_bytes", False), ("size_bytes", 0), ("size_bytes", 4 * 1024**2 + 1),
+    ("sha256", "ABCDEF" * 10 + "ABCD"), ("sha256", "00"), ("cid", None),
+])
+def test_object_descriptor_values_are_bounded_and_canonical_without_attesting_origin(
+    composition, projection, proof_shape, native, field, bad_value,
+):
+    proof = deepcopy(proof_shape)
+    proof["artifacts"]["lean_olean"][field] = bad_value
+    if field == "cid":
+        proof["lean_certificate"]["olean_cid"] = bad_value
+    _rebind_proof(proof, native)
+    with pytest.raises(ValueError):
+        composition.build_call_composition_source(projection=projection, callee_proof=proof)
+
+
+@pytest.mark.parametrize("mutation", ["extra_field", "missing_translation", "result_cid"])
+def test_incomplete_or_unbound_native_callee_record_is_rejected(
+    composition, projection, proof_shape, native, mutation,
+):
+    proof = deepcopy(proof_shape)
+    if mutation == "extra_field":
+        proof["authored_extra_field"] = True
+    elif mutation == "missing_translation":
+        del proof["translation"]
+    else:
+        proof["result_cid"] = native["cid"]({"different": "authored record"})
+    if mutation != "result_cid":
+        _rebind_proof(proof, native)
+    with pytest.raises(ValueError):
+        composition.build_call_composition_source(projection=projection, callee_proof=proof)
+
+
+def test_projection_identity_must_match_its_complete_body(composition, projection, proof_shape):
+    changed = deepcopy(projection)
+    changed["projection_id"] = "changed-projection-identity"
+    with pytest.raises(ValueError):
+        composition.build_call_composition_source(projection=changed, callee_proof=proof_shape)
+
+
+@pytest.mark.parametrize("field", ["head", "callee_contract", "caller_contract", "source_texts"])
+def test_rebound_projection_cannot_omit_its_source_head_or_contract_bindings(
+    composition, projection, proof_shape, native, field,
+):
+    changed = deepcopy(projection)
+    del changed[field]
+    changed["projection_id"] = native["cid"]({
+        key: value for key, value in changed.items() if key != "projection_id"
+    })
+    with pytest.raises(ValueError):
+        composition.build_call_composition_source(projection=changed, callee_proof=proof_shape)
+
+
+def test_selected_call_closure_rejects_missing_callee_source(composition, native):
+    contract = native["contract"]
+    sources = {"caller.py": CALLER}
+    original = deepcopy(sources)
+    with pytest.raises(ValueError):
+        composition._selected_sources(
+            sources, contract("callee.py", "increment", "n", 1).to_dict(),
+            contract("caller.py", "twice", "n", 2).to_dict(),
+        )
+    assert sources == original
+
+
+@pytest.mark.parametrize("package", ["callee", "caller"])
+def test_captured_package_shadowing_a_selected_module_is_refused(composition, native, package):
+    contract = native["contract"]
+    sources = {
+        "callee.py": CALLEE, "caller.py": CALLER,
+        f"{package}/__init__.py": b"# authored competing package; no import executed\n",
+    }
+    original = deepcopy(sources)
+    with pytest.raises(ValueError):
+        composition._selected_sources(
+            sources, contract("callee.py", "increment", "n", 1).to_dict(),
+            contract("caller.py", "twice", "n", 2).to_dict(),
+        )
+    assert sources == original
+
+
+def test_unrelated_dynamic_source_remains_in_original_complete_scope(composition, native):
+    contract = native["contract"]
+    sources = {
+        "callee.py": CALLEE, "caller.py": CALLER,
+        "dynamic.py": b"def unsupported_dynamic(text):\n    return eval(text)\n",
+    }
+    original = deepcopy(sources)
+    selected = composition._selected_sources(
+        sources, contract("callee.py", "increment", "n", 1).to_dict(),
+        contract("caller.py", "twice", "n", 2).to_dict(),
+    )
+    assert selected == {"callee.py": CALLEE, "caller.py": CALLER}
+    assert selected is not sources
+    assert sources == original and sources["dynamic.py"] == original["dynamic.py"]

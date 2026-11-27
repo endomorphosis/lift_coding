@@ -1,0 +1,55 @@
+#!/usr/bin/env python3
+"""Exercise the repeatable native context reader and real current-source rejection."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+
+HERE = Path(__file__).resolve().parent
+def sha(data): return hashlib.sha256(data).hexdigest()
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run", type=Path, default=HERE / "routing_enrollment_v1")
+    parser.add_argument("--output", type=Path, default=HERE / "routing_context_audit_v1.json")
+    args = parser.parse_args()
+    if args.output.exists(): raise SystemExit("audit exists")
+    freeze = json.loads((args.run / "freeze.json").read_text())
+    public = json.loads((args.run / "public_projection.json").read_text())
+    profile = json.loads((args.run / "runtime_source_manifest.json").read_text())
+    assert all(sha(Path(p).read_bytes()) == h for p, h in profile["files"].items())
+    assert all(sha((HERE / n).read_bytes()) == h for n, h in freeze["evaluation_sources"].items())
+    cases = []
+    for row in public:
+        command = ["/usr/bin/python3", "-B", str(HERE / "context_read_v1.py"), "--run", str(args.run.resolve()), "--case", row["id"], "--expected-source-sha256", sha(row["source"].encode()), "--expected-objective-sha256", sha(row["objective"].encode())]
+        process = subprocess.run(command, cwd="/tmp", capture_output=True, timeout=60)
+        assert process.returncode == 0, process.stderr[-1000:]
+        result = json.loads(process.stdout)
+        assert all(result[k] == row[k] for k in ("id", "source", "objective", "visible_validation"))
+        assert "audit_validation" not in result and not result["execution_reuse_authorized"]
+        cases.append({"id": row["id"], "source_sha256": result["source_sha256"], "objective_sha256": result["objective_sha256"], "semantic_pack_cid": result["semantic_pack_cid"], "native_expansion_calls": result["native_expansion_calls"], "exact_authority_match": True})
+    checks = []
+    base_command = ["/usr/bin/python3", "-B", str(HERE / "context_read_v1.py"), "--run", str(args.run.resolve()), "--case", public[0]["id"]]
+    for field in ("source", "objective"):
+        process = subprocess.run(base_command + ["--expected-" + field + "-sha256", "0" * 64], cwd="/tmp", capture_output=True, timeout=60)
+        assert process.returncode != 0 and not process.stdout
+        checks.append({"case": "controller_" + field + "_mismatch", "rejected": True})
+    target = args.run / public[0]["id"] / "public_source/target.py"
+    original = target.read_bytes()
+    try:
+        target.write_bytes(original + b"\n# explicit current-source mutation control\n")
+        process = subprocess.run(base_command, cwd="/tmp", capture_output=True, timeout=60)
+        assert process.returncode != 0 and not process.stdout and b"current source changed" in process.stderr
+        checks.append({"case": "actual_current_source_mutation", "rejected": True, "mutation_sha256": sha(target.read_bytes())})
+    finally:
+        target.write_bytes(original)
+    assert target.read_bytes() == original
+    recovery = subprocess.run(base_command, cwd="/tmp", capture_output=True, timeout=60)
+    assert recovery.returncode == 0 and json.loads(recovery.stdout)["source"] == public[0]["source"]
+    assert all(sha(Path(p).read_bytes()) == h for p, h in profile["files"].items())
+    result = {"schema": "ns-routing-native-context-read-audit/v1", "audit_source_sha256": sha(Path(__file__).read_bytes()), "freeze_sha256": sha((args.run / "freeze.json").read_bytes()), "cases": cases, "negative_controls": checks, "mutated_source_restored_exactly_and_read_passes": True, "runtime_files_unchanged": True, "heldback_fields_projected_to_producer": False, "provider_calls": 0, "all_checks_passed": True}
+    args.output.write_text(json.dumps(result, indent=2) + "\n")
+    print(json.dumps(result, indent=2))
+
+if __name__ == "__main__": main()

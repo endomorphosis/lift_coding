@@ -1,0 +1,25 @@
+{
+  "schema": "ranker-objective-container-core-prepared-input-review-plan@2",
+  "prepared_input_pins": {
+    "request": {
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-core-candidate-20261005-02/preparation/request-v3.json",
+      "bytes": 637236,
+      "sha256": "80c537b76529e328cad8f13b7b8e065c89c92958f5fa8690447f9a934858c96f"
+    },
+    "specification": {
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-core-candidate-20261005-02/preparation/lean-objective-container-core-02-check-specification.json",
+      "bytes": 18905,
+      "sha256": "33e6096c5ef52a5e9a702644e0d68e5149030a5096089341f98110a6bf9aa66a"
+    },
+    "profile": {
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-core-candidate-20261005-02/preparation/lean-objective-container-core-02-producer/environment-manifest.json",
+      "bytes": 9978028,
+      "sha256": "c1083d10bfb37747ba194848aa43624a9e55feeebdcd6ff77ee3db6b8e50f726"
+    },
+    "driver": {
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-core-candidate-20261005-02/run_container_core_controls_01.py",
+      "bytes": 26231,
+      "sha256": "53571082744f4c1c076456d70e83e6aa741ae13881c736d1859a3d738405754a"
+    }
+  }
+}

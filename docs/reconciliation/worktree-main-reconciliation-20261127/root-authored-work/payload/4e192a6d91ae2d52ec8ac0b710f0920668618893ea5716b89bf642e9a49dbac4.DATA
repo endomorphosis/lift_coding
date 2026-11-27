@@ -1,0 +1,69 @@
+{
+  "recorded_at": "2026-11-09T20:15:25.042911+00:00",
+  "main": "7e860a5fa1a0bd1c0f940ac141665461b332de29",
+  "historical_tip": "798ba876b6210b08f1a2980f9843ed0661368072",
+  "commit": "98f5f82c2c8859d08c7d17b00f56a43c6a15b744",
+  "branch": "refs/heads/reconcile/programme-plan-history-20261109",
+  "changed_paths": [
+    "ipfs_datasets_py/logic/autoformal/docs/ARCHIVE.md"
+  ],
+  "original_task_ids": [
+    "LIR-01",
+    "LIR-02",
+    "LIR-03",
+    "LIR-04",
+    "LIR-05",
+    "LIR-06",
+    "LIR-07",
+    "LIR-08",
+    "LIR-09",
+    "LIR-10",
+    "LIR-11",
+    "LIR-12",
+    "LIR-13",
+    "LIR-14",
+    "LIR-15",
+    "LIR-16",
+    "LIR-17",
+    "LIR-18",
+    "LIR-19",
+    "LIR-20",
+    "LIR-21",
+    "LIR-22",
+    "LIR-23",
+    "LIR-24"
+  ],
+  "historical_files": [
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+      "git_blob": "e9a4764c0a3aeddbfb79ba655cfb6a88258b9e92",
+      "bytes": 1069375,
+      "sha256": "28c0a0082c9f258eff37254b4903a2e83b911f3e462295b121c9f85aba481972"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+      "git_blob": "11451c839adcf4920c2688ff27470edb2a4e6393",
+      "bytes": 326936,
+      "sha256": "55925aeb8a2d645203fe40be785df2671589bdd8afbe09a2f37230415a423372"
+    },
+    {
+      "path": "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+      "git_blob": "beda93fc143b68fc1714277d21019d01698b9a63",
+      "bytes": 49895,
+      "sha256": "13fc442fb0fd010b5978ecbbcd9ccee2c7daa4f40c05348421c0e04bd0d69ce4"
+    }
+  ],
+  "current_backlog_handoff_training_history_unchanged": true,
+  "source_lease": {
+    "canonical_root": "/home/barberb/lift_coding/external/ipfs_datasets",
+    "mode": "write",
+    "lock_path": "/home/barberb/lift_coding/external/ipfs_datasets/workspace/control-plane/source-leases/source.lock",
+    "waited_seconds": 3.700796514749527e-05,
+    "schema_version": "autoencoder-source-lease/v1",
+    "cooperative": true
+  },
+  "validation": "Git tree/parent identity, exact 24 task IDs, all historical file bytes and unchanged current authority documents; no product execution",
+  "main_merged": false,
+  "merge_commit": "f21292f49ba2291e783b7d6f81915e9e7931056a",
+  "whitespace_check": "passed"
+}

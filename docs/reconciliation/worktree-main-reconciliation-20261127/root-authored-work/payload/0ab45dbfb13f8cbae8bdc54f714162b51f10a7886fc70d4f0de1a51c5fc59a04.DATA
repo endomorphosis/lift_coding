@@ -1,0 +1,11 @@
+# Native compiler observations
+
+Run `python reproduce.py` with Python 3.12 to verify payload hashes and exactly regenerate counts, per-domain summaries, paired patch effects, and 10,000 component-bootstrap draws. This command uses the standard library and performs no compiler or model inference. It writes only to a temporary directory.
+
+`final.sources.jsonl` contains the 1,913 distinct public source units, full text, normalization identities, aliases, and original component assignments. `final_a100.sources.jsonl` is the fixed direct-model subset. Each `final_B/C/T5.jsonl` file retains every actual terminal observation for its full 1,913-unit population. Empty representations, abstentions, and timeouts remain in the denominators.
+
+B has a strict native deontic vocabulary and a five-second whole-call budget; a timeout discards intermediate compilation. C and T5 use two structural/span checks and a ten-second budget including a source-withheld reconstruction cycle; they retain initial compilation when the later cycle times out. Exact cycles are comparisons of each interface's declared canonical fields. These are different operational contracts, and none is a source-semantic accuracy oracle.
+
+`repair_pairs.jsonl` reports structural changes induced by the executable exception-scoping patch. A changed field is not, by itself, an independently verified correction. Selection and constructed qualification observations are separate files and do not enter final denominators.
+
+`inspection_code/` contains the drivers with private host roots replaced by relocation markers. Their original and published hashes are recorded in `CUSTODY.json`. They require the external compiler runtime, which is not included. Use `reproduce.py` to reproduce metrics from the measured observations; the inspection files are not a standalone fresh-inference distribution.

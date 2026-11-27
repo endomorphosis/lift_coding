@@ -1,0 +1,131 @@
+#!/usr/bin/env python3
+"""Fresh-process signed TEST nomination; intentionally never calls a grader."""
+from __future__ import annotations
+import argparse
+from dataclasses import asdict
+import json
+import os
+from pathlib import Path
+import sys
+import time
+from request_contract import canonical,plain,sha,read,require,validate_request
+from procedure import build,cid,NATIVE
+from evidence import PLAN,KINDS,make_corpus,expected_artifacts,candidate_for,policy_family
+from runtime import NativeNominationRuntime,MemoryArtifacts
+
+def save(path,value):
+    path=Path(path);path.parent.mkdir(parents=True,exist_ok=True)
+    with path.open('xb') as stream:stream.write(canonical(value)+b'\n')
+
+def guard(profile):
+    for path,digest in profile['sources_sha256'].items():require(sha(Path(path).read_bytes())==digest,'frozen source changed: '+path)
+
+def issue(candidate,artifacts,policy,family,profile,output):
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.verifier import AdmittedReceipt,IndependentEvidence,ProcedureVerifier
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.certificate import CertificateKeyRing,ProcedureCertificateVerifier,ProcedureCertificateIssuer,CurrentCertificateContext
+    from ipfs_accelerate_py.agent_supervisor.proof.incremental_sealing.trust import SignerTrustRecord,SignerTrustRegistry
+    now=int(time.time()*1000);manifest={kind:cid(artifacts[kind]) for kind in KINDS}
+    receipts=tuple(AdmittedReceipt(identity,kind,'original-public-artifact-revalidator@1',candidate.bindings,now,now+3600000,
+        artifacts[kind].get('contract_id','')) for kind,identity in manifest.items())
+    evidence=IndependentEvidence(producer_id='original-public-artifact-revalidator@1',task_family=family,
+        source_episode_cids=candidate.source_episode_cids,specification_cids=(manifest['specification'],),counterexample_set_cid=manifest['counterexample_set'],
+        proof_receipt_cids=(manifest['proof'],),test_receipt_cids=(manifest['test'],),adversarial_assurance_cids=(manifest['adversarial'],),
+        held_out_evaluation_cid=manifest['held_out'],shadow_evaluation_cid=manifest['shadow'],repository_families=(candidate.bindings.repository_id,),
+        supported_language_classes=('python',),supported_framework_classes=('original-scorer-json',),known_limitations=(
+            'authored-nomination-only-not-test-results','fresh-request-namespace-controls-not-repository-generalization',
+            'TEST-only-unpromoted-no-production-authority','no-CALL-or-whole-grader-reuse-authority'),observed_at_ms=now,receipts=receipts)
+    costs={};tick=time.perf_counter();verified=ProcedureVerifier().verify(candidate,evidence,policy,now_ms=now)
+    costs['native_verifier_seconds']=time.perf_counter()-tick
+    save(output/'native_verification.json',{'accepted':verified.accepted,'layers':[layer.to_facts() for layer in verified.layers],'artifact':verified.artifact.to_dict()})
+    require(verified.accepted,'native independent verification rejected')
+    key=Path(profile['test_signer_key_path']).read_bytes();require(sha(key)==profile['test_signer_key_sha256'],'TEST signing key commitment changed')
+    issuer=profile['test_signer_id'];trust=SignerTrustRegistry((SignerTrustRecord(issuer,frozenset({'procedure-certificate'}),trusted=True,test_only=True),),production=False)
+    ring=CertificateKeyRing({issuer:key});verifier=ProcedureCertificateVerifier(trust,ring)
+    tick=time.perf_counter();certificate=ProcedureCertificateIssuer(trust,ring,issuer_id=issuer).issue(candidate,verified,evidence,policy,now_ms=now)
+    costs['native_issue_reverification_seconds']=time.perf_counter()-tick
+    tick=time.perf_counter();verdict=verifier.verify(certificate,CurrentCertificateContext.from_policy(policy,now_ms=now))
+    costs['native_certificate_verify_seconds']=time.perf_counter()-tick
+    require(verdict.accepted and verdict.usable and not verdict.grants_authority and not verdict.grants_promotion,'signed TEST certificate not admissible')
+    save(output/'native_certificate.json',certificate.to_dict());save(output/'native_certificate_admission.json',verdict.to_dict())
+    save(output/'native_admitted_evidence.json',{'manifest':manifest,'receipts':[receipt.to_dict() for receipt in receipts],'family':family.to_dict(),
+        'policy_revision':policy.revision,'actual_payloads_independently_recomputed_before_signing':True})
+    return certificate,verifier,costs
+
+def plan(request,profile_path,endpoint_path,output):
+    enclosing=time.perf_counter();profile_path=Path(profile_path);profile_body=profile_path.read_bytes();profile=read(profile_path);profile_sha=sha(profile_body)
+    require(profile['schema']=='ns-original-nomination-service-profile/v1','unknown service profile')
+    require(profile['corpus_sha256']==request['corpus_sha256'],'profile/corpus mismatch')
+    require(str(Path(__file__).resolve())==profile['service_path'],'service snapshot mismatch')
+    require(sha(Path(endpoint_path).read_bytes())==profile['endpoint_contract_sha256']==request['endpoint_contract_sha256'],'profile endpoint mismatch')
+    require(PLAN==profile['evidence_plan'],'frozen evidence case plan changed')
+    output=Path(output).resolve();require(not output.exists(),'new output path required');output.mkdir(parents=True)
+    costs={};tick=time.perf_counter();guard(profile);costs['initial_source_guard_seconds']=time.perf_counter()-tick
+    save(output/'request.json',request);corpus=make_corpus(request);save(output/'prospective_evidence_corpus.json',corpus)
+    save(output/'run_freeze.json',{'schema':'ns-original-nomination-run-freeze/v1','profile_sha256':profile_sha,
+        'request_sha256':sha(canonical(request)),'corpus_sha256':sha(canonical(corpus)),'endpoint_contract_sha256':request['endpoint_contract_sha256'],
+        'process_bound_seconds':profile['process_bound_seconds'],'provider_calls':0,'scorer_calls':0})
+    tick=time.perf_counter();validated=validate_request(request,endpoint_path);costs['current_source_observation_seconds']=time.perf_counter()-tick
+    tick=time.perf_counter();procedure=build(validated,profile_sha);costs['native_ir_construction_seconds']=time.perf_counter()-tick
+    tick=time.perf_counter();artifacts=expected_artifacts(request,validated,procedure,endpoint_path,profile_sha,corpus)
+    costs['actual_evidence_production_seconds']=time.perf_counter()-tick
+    for kind,artifact in artifacts.items():save(output/'evidence'/f'{kind}.json',artifact)
+    # A fresh reconstruction re-reads current public sources and executes all
+    # request checks again. Certificate metadata alone never supplies truth.
+    tick=time.perf_counter();recomputed=expected_artifacts(request,validate_request(request,endpoint_path),procedure,endpoint_path,profile_sha,corpus)
+    for kind in KINDS:
+        body=(output/'evidence'/f'{kind}.json').read_bytes()
+        require(body==canonical(recomputed[kind])+b'\n','actual evidence payload changed: '+kind)
+    costs['independent_evidence_reexecution_seconds']=time.perf_counter()-tick
+    candidate=candidate_for(procedure,artifacts);policy,family=policy_family(candidate,profile_sha,artifacts)
+    save(output/'native_candidate.json',candidate.to_dict())
+    certificate,verifier,sign_costs=issue(candidate,artifacts,policy,family,profile,output);costs.update(sign_costs)
+    tick=time.perf_counter();runtime=NativeNominationRuntime(candidate,certificate,verifier,policy,validated,request,profile_sha)
+    invocation,result,action=runtime.execute();costs['native_prepare_and_execute_seconds']=time.perf_counter()-tick
+    save(output/'native_invocation.json',invocation.to_dict());save(output/'native_outcome.json',result.outcome.to_dict())
+    save(output/'native_trace.json',result.trace.to_dict());save(output/'native_receipt.json',result.receipt.to_dict())
+    save(output/'native_admissions.json',runtime.admissions);save(output/'native_dispatches.json',runtime.dispatches)
+    for identity,body in runtime.store.bodies.items():
+        directory=output/'native_objects';directory.mkdir(exist_ok=True)
+        with (directory/(identity+'.json')).open('xb') as stream:stream.write(body)
+    require(result.outcome.status.value=='succeeded' and action is not None,'native nomination failed')
+    tick=time.perf_counter();after=validate_request(request,endpoint_path);guard(profile)
+    require(after['source_inventory_sha256']==validated['source_inventory_sha256'],'source changed during nomination')
+    costs['final_source_and_profile_guard_seconds']=time.perf_counter()-tick
+    loaded={};unfrozen=[]
+    for name,module in tuple(sys.modules.items()):
+        if getattr(module,'__file__',None) and (name.startswith(('ipfs_accelerate_py','ipfs_datasets_py')) or name in ('request_contract','procedure','runtime','evidence','repository_runtime_v2')):
+            path=Path(module.__file__).resolve()
+            if path.is_file():
+                digest=sha(path.read_bytes());loaded[str(path)]=digest
+                if profile['sources_sha256'].get(str(path))!=digest:unfrozen.append(str(path))
+    require(not unfrozen,'actually loaded service/native source absent from profile')
+    save(output/'actual_loaded_source_manifest.json',loaded)
+    total=time.perf_counter()-enclosing
+    result_body={'schema':'ns-original-validation-plan-result/v1','status':'nominated' if validated['endpoint_status']=='qualified' else 'endpoint_pending',
+        'dispatch_allowed':validated['endpoint_status']=='qualified','action':action,'scorer_request':request['scorer_request'],
+        'scorer_request_sha256':validated['scorer_request_sha256'],'validation_request_sha256':validated['request_sha256'],
+        'operation_id':request['operation_id'],'profile_sha256':profile_sha,'endpoint_contract_sha256':request['endpoint_contract_sha256'],
+        'source_inventory_sha256':validated['source_inventory_sha256'],'native_procedure_cid':procedure.content_id,'native_candidate_cid':candidate.content_id,
+        'native_certificate_cid':certificate.content_id,'native_invocation_cid':invocation.content_id,'native_outcome_cid':result.outcome.content_id,
+        'native_receipt_cid':result.receipt.content_id,'native_status':result.outcome.status.value,'native_dispatches':len(runtime.dispatches),
+        'enclosing_service_seconds':total,'nested_components_seconds':costs,'actual_import_count':len(loaded),'actual_import_manifest_sha256':sha(canonical(loaded)),
+        'output_root':str(output),'provider_calls':0,'scorer_calls':0,'scoring_passed':False,'registry_promoted':False,
+        'procedure_reused':False,'checkpoint_reused':result.resumed,'whole_grader_reused':False,'call_reuse_disposition':'requires_separate_native_post_setup_admission',
+        'fallback_reason':'CALL eligibility must be decided inside original current scorer; no eligible population inherited from nomination',
+        'warm_policy':'Same exact current-source admission and evidence costs apply; certificate and checkpoint storage do not grant cross-process reuse.',
+        'cost_scope':'Enclosing service includes source/profile guards, construction, actual evidence executions, native verification/signing/interpreter and persistence before summary. Nested values must not be added again. Host process startup/profile freezing/scorer execution are external costs.',
+        'limitations':['TEST-only local signer; no registry promotion or production authority','authored exact current scorer action; no model-synthesized repository procedure',
+            'bounded request namespace evidence; no repair/test-pass/generalization theorem','trusted immutable memory custody, not OS isolation against hostile Python']}
+    save(output/'summary.json',result_body);return result_body
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--profile',type=Path,required=True);parser.add_argument('--endpoint',type=Path,required=True)
+    parser.add_argument('--request',required=True);parser.add_argument('--run',type=Path,required=True);args=parser.parse_args()
+    request=json.load(sys.stdin) if args.request=='-' else read(args.request)
+    try:result=plan(request,args.profile,args.endpoint,args.run)
+    except Exception as exc:
+        if args.run.exists() and not (args.run/'terminal_failure.json').exists():save(args.run/'terminal_failure.json',{'exception_type':type(exc).__name__,'message':str(exc),'provider_calls':0,'scorer_calls':0})
+        raise
+    print(canonical(result).decode())
+
+if __name__=='__main__':main()

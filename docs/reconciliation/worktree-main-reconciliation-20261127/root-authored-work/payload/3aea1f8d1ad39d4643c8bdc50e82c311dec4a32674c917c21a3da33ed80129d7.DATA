@@ -1,0 +1,68 @@
+"""Read exact workflow artifacts; deduplicate effects, never infer missing usage."""
+import argparse,hashlib,json,sqlite3
+from pathlib import Path
+
+def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
+def sha(v): return hashlib.sha256(v).hexdigest()
+def fhash(p): return sha(Path(p).read_bytes())
+def main():
+    ap=argparse.ArgumentParser();ap.add_argument('--profile',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--partial',action='store_true');args=ap.parse_args();p=args.profile.resolve();profile=json.loads(p.read_text());run=p.parent;state=Path(profile['output_root']);checks=[]
+    def check(name,value):
+        checks.append({'name':name,'passed':bool(value)})
+        if not value: raise AssertionError(name)
+    for path,expected in profile['evaluation_files'].items(): check('source:'+path,fhash(path)==expected)
+    check('provider_profile',fhash(profile['provider']['profile_path'])==profile['provider']['profile_sha256'])
+    q=profile['repository_sealing_qualification'];check('sealing_qualification',fhash(q['summary_path'])==q['summary_sha256'] and json.loads(Path(q['summary_path']).read_text())['qualified'])
+    archive=json.loads((run/'frozen_source_manifest.json').read_text())
+    for row in archive['sources']: check('archive:'+row['snapshot_path'],fhash(run/row['snapshot_path'])==row['sha256'])
+    db=sqlite3.connect('file:'+str(state/'ledger.sqlite3')+'?mode=ro',uri=True);db.execute('BEGIN');journal=db.execute('SELECT seq,previous_hash,record_json,record_hash FROM journal ORDER BY seq').fetchall();effects=db.execute('SELECT effect_id,event_id,stage,request_hash,state,result_path,result_hash FROM effects ORDER BY event_id,stage').fetchall();events=db.execute('SELECT event_id,request_hash,status,result_path FROM events ORDER BY event_id').fetchall();db.close();previous=None
+    for index,(seq,prev,body,digest) in enumerate(journal,1):
+        check('journal:'+str(index),seq==index and prev==previous and sha(body.encode())==digest and json.loads(body)['seq']==seq and json.loads(body)['previous_hash']==prev);previous=digest
+    scores={};effect_rows=[];replay_aliases=0
+    def admit_score(response,origin):
+        if not isinstance(response,dict) or response.get('schema')!='ns-curator-candidate-score-receipt/v1' or 'evaluation_id' not in response: return
+        key=response['evaluation_id'];digest=sha(canonical(response))
+        if key in scores: check('scorer_alias:'+key,scores[key]['receipt_sha256']==digest);scores[key]['appearances']+=1
+        else: scores[key]={'evaluation_id':key,'receipt_sha256':digest,'response':response,'origin':origin,'appearances':1}
+    for effect_id,event_id,stage,request_hash,status,path,digest in effects:
+        request_path=state/'effects'/effect_id/'request.json';request=json.loads(request_path.read_text());check('effect_request:'+effect_id,sha(canonical(request))==request_hash and effect_id==sha(canonical({'event_id':event_id,'stage':stage,'request_hash':request_hash})))
+        row={'effect_id':effect_id,'event_id':event_id,'stage':stage,'state':status,'elapsed_seconds':None}
+        if status=='terminal':
+            check('effect_receipt:'+effect_id,fhash(path)==digest);saved=json.loads(Path(path).read_text());check('effect_binding:'+effect_id,saved['effect_id']==effect_id and saved['event_id']==event_id and saved['stage']==stage and saved['request_hash']==request_hash);row['elapsed_seconds']=saved.get('elapsed_seconds');response=saved['response'];admit_score(response,stage)
+            for replay in response.get('independent_replays',[]): admit_score(replay.get('response'),'native_replay_response')
+        effect_rows.append(row)
+    event_results={}
+    for event_id,request_hash,status,path in events:
+        event=next(e for e in profile['events'] if e['event_id']==event_id);check('event_identity:'+event_id,request_hash==sha(canonical(event)))
+        if status!='started':
+            value=json.loads(Path(path).read_text());check('event_terminal:'+event_id,value['event_id']==event_id and value['status']==status and value['profile_sha256']==fhash(p));event_results[event_id]=value
+    transport_rows=[];unknown_dispatches=[];provider=json.loads(Path(profile['provider']['profile_path']).read_text())
+    for directory in sorted((state/'provider').glob('*')):
+        if not directory.is_dir(): continue
+        receipt=directory/'result.json';intent=directory/'dispatch_intent.json'
+        if receipt.exists():
+            value=json.loads(receipt.read_text());check('provider_call_id:'+directory.name,value['call_id']==directory.name and directory.name in provider['call_ids']);check('provider_profile:'+directory.name,value['profile_sha256']==profile['provider']['profile_sha256']);check('provider_request:'+directory.name,sha(canonical(json.loads((directory/'request.json').read_text())))==value['request_sha256']);check('provider_wrapper:'+directory.name,value['transport_sha256']==profile['evaluation_files'][str(p.parents[3]/'metered_provider.py')]);transport_rows.append(value)
+        elif intent.exists(): unknown_dispatches.append(directory.name)
+    check('known_provider_post_cap',sum(r.get('attempted_posts',0) for r in transport_rows)<=16)
+    native_intents=[]
+    for directory in sorted((state/'native_repository_sealing/replays').glob('*')):
+        if not directory.is_dir(): continue
+        request=json.loads((directory/'request.json').read_text());intent=directory/'dispatch_intent.json'
+        if intent.exists(): native_intents.append({'evaluation_id':request['evaluation_id'],'completion_known':(directory/'completion.json').exists()})
+        if (directory/'completion.json').exists():
+            saved=json.loads((directory/'completion.json').read_text());check('native_replay_request:'+directory.name,saved['request_sha256']==sha(json.dumps(request,sort_keys=True,separators=(',',':'),ensure_ascii=True).encode()));admit_score(saved.get('response'),'native_replay_dispatch_completion')
+    arms=[]
+    for arm in 'ABCD':
+        selected=[e for e in profile['events'] if e['arm']==arm];results=[event_results[e['event_id']] for e in selected if e['event_id'] in event_results];calls=[r for result in results for r in result['provider_receipts']]
+        complete=len(results)==len(selected);unknown=not complete or any(r.get('attempted_posts') and r.get('normalized_usage',{}).get('total_tokens') is None for r in calls) or any(r['provider_calls'] is None for r in results)
+        totals={name:None if unknown or any(r.get('attempted_posts') and r.get('normalized_usage',{}).get(name) is None for r in calls) else sum(r.get('normalized_usage',{}).get(name) or 0 for r in calls) for name in ['input_tokens','output_tokens','total_tokens','cached_input_tokens','reasoning_tokens','api_reported_cost_ticks']}
+        accepted=sum(r['accepted_for_next_state'] for r in results);graded=sum(r['candidate_grading_passed'] for r in results)
+        arms.append({'arm':arm,'terminal_nodes':len(results),'scheduled_nodes':len(selected),'complete':complete,'accepted_nodes':accepted,'all_nodes_accepted':complete and accepted==len(selected),'candidate_grading_passed_nodes':graded,'provider_posts':None if any(r['provider_calls'] is None for r in results) or not complete else sum(r['provider_calls'] for r in results),'usage':totals,'tokens_per_accepted_node':None if unknown or accepted==0 else totals['total_tokens']/accepted,'controller_wall_seconds':None if not complete else sum(r['elapsed_seconds'] for r in results),'observed_terminal_controller_wall_seconds':sum(r['elapsed_seconds'] for r in results),'statuses':[r['status'] for r in results]})
+    baseline=next(a for a in arms if a['arm']=='A')
+    for arm in arms:
+        value=arm['usage']['total_tokens'];denom=baseline['usage']['total_tokens'];arm['descriptive_token_ratio_vs_A']=None if not arm['complete'] or not baseline['complete'] or value is None or denom is None or denom<=0 else value/denom
+    if not args.partial:
+        check('all_scheduled_events_terminal',len(event_results)==len(profile['events']));check('no_started_effects',all(r['state']=='terminal' for r in effect_rows));check('all_provider_dispatches_terminal',not unknown_dispatches)
+    result={'schema':'ns-repository-cold-audit@1','profile_sha256':fhash(p),'partial':args.partial,'checks':checks,'all_checks_passed':True,'arms':arms,'provider_receipts':len(transport_rows),'known_provider_posts':sum(r.get('attempted_posts',0) for r in transport_rows),'provider_dispatches_without_terminal_receipt':unknown_dispatches,'unique_scorer_service_receipts':len(scores),'native_replay_dispatch_intents':native_intents,'scorer_receipts':[{'evaluation_id':k,'status':v['response']['status'],'passed':v['response']['passed'],'appearances':v['appearances'],'receipt_sha256':v['receipt_sha256'],'origin':v['origin']} for k,v in sorted(scores.items())],'effects':effect_rows,'qualification_costs_in_runtime_totals':False,'time_semantics':'Controller wall includes nested services. Effect/replay timings are components, not additive overhead. Replayed completion appearances are not fresh dispatches.','uncertainty':'One development family; no inferential confidence intervals or general savings claim.'}
+    args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(result,indent=2,sort_keys=True)+'\n');print(json.dumps({'checks':len(checks),'all_checks_passed':True,'partial':args.partial,'terminal_nodes':len(event_results),'known_provider_posts':result['known_provider_posts'],'unique_scorer_receipts':len(scores),'arms':arms}))
+if __name__=='__main__': main()

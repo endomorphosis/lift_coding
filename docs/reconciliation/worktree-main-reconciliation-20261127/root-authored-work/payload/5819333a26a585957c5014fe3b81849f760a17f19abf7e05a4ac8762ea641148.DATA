@@ -1,0 +1,18 @@
+def calculate_total(values, limit=10):
+    """Return a bounded nonnegative sum."""
+    total = 0
+    for value in values:
+        if value > 0:
+            total += min(value, limit)
+    return total
+
+def outer(value):
+    def nested(item):
+        return item + 718291
+    return nested(value)
+
+class Calculator:
+    scale = 2
+    def calculate(self, value):
+        """Preserve the authored method body marker."""
+        return value * 837461

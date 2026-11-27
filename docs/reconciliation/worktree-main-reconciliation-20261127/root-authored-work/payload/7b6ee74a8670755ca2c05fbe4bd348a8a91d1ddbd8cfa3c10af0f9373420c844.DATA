@@ -1,0 +1,132 @@
+import PyAstOriginalScalarBodies
+import ObjectiveScalarIR
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED SCALAR-FORMULA CANDIDATE.
+
+Actual generated input syntax is qualified. This module can be prepared only
+following genuine acceptance of PyAstOriginalScalarBodies; its own three
+formula queries and complete native object remain pending.
+
+Ordinary margins determine both own scoped input bindings and the target
+named scalar binding. The input environment relation is derived internally.
+The two expected target trees are independently reduced to the genuine old
+scalar backend trees, whose checked domain facts supply their model formulas.
+No desired evaluation/model equation or successful result is a premise.
+
+This is an ideal-real scalar-body observation increment. It does not prove
+parsing, actual global purity, normalization, containers/whole objective,
+Float/libm/fsum, Python loop or global autoencoder/task convergence.
+-/
+
+namespace RankerOriginalPythonScalarBodies
+
+noncomputable section
+
+open RankerSupportedPythonAstReal
+open RankerObjectiveIR (SliceError evalExact scalarEnvironment stableLossBody
+  stableFactorBody mapOne mapTwo applyOne applyTwo)
+open RankerObjectivePrefixIR (NamedEnvironment extendNames castValue
+  evalSourceTerm evalUnary evalBinary)
+open RankerObjectiveContainerLanguage (evalSourceExpr)
+open GeneratedPythonAstScalarSource
+
+def sourceMarginEnvironment (binder : PyName) (margin : ℝ) : PyEnvironment :=
+  [(binder, .real margin)]
+
+def emptyNamedEnvironment : NamedEnvironment :=
+  fun name _ => .error (.unknownName name)
+
+def targetMarginEnvironment (binder : PyName) (margin : ℝ) : NamedEnvironment :=
+  extendNames (τ := .scalar) binder.spelling margin emptyNamedEnvironment
+
+private theorem margin_environments_related (binder : PyName) (margin : ℝ) :
+    StructuralEnvRel [binder] (sourceMarginEnvironment binder margin)
+      (targetMarginEnvironment binder margin) := by
+  constructor
+  · intro identifier present
+    have same : identifier = binder := by
+      simpa only [List.mem_singleton] using present
+    subst identifier
+    simp [sourceMarginEnvironment, lookupNumber, observePy, PyNumber.toReal,
+      targetMarginEnvironment, extendNames, castValue]
+  · intro binding present
+    have same : binding = (binder, PyNumber.real margin) := by
+      simpa only [sourceMarginEnvironment, List.mem_singleton] using present
+    subst binding
+    simp
+
+/-- Structural reduction of the target tree, independent of a desired model
+value. Binder spelling is used consistently; no source name is hard-coded. -/
+private theorem loss_target_backend (margin : ℝ) :
+    evalSourceExpr (targetMarginEnvironment lossBinder margin) lossTarget =
+      evalExact stableLossBody (scalarEnvironment margin) := by
+  simp only [lossTarget, evalSourceExpr, evalSourceTerm, targetMarginEnvironment,
+    extendNames, castValue, if_pos rfl, evalUnary, evalBinary,
+    stableLossBody, evalExact, scalarEnvironment, mapOne, mapTwo, applyOne, applyTwo]
+  rfl
+
+/-- The checked divisions and lazy branch trees are reduced structurally.
+No nonzero denominator or successful output is assumed here. -/
+private theorem factor_target_backend (margin : ℝ) :
+    evalSourceExpr (targetMarginEnvironment factorBinder margin) factorTarget =
+      evalExact stableFactorBody (scalarEnvironment margin) := by
+  simp only [factorTarget, evalSourceExpr, evalSourceTerm, targetMarginEnvironment,
+    extendNames, castValue, if_pos rfl, evalUnary, evalBinary,
+    stableFactorBody, evalExact, scalarEnvironment, mapOne, mapTwo, applyOne, applyTwo]
+  rfl
+
+/-- The actual own AST body supplies the observation; the genuine scalar
+backend derives its log-domain property and stable-loss formula. -/
+theorem actual_loss_body_model_success (margin : ℝ) :
+    observeNumber (evalSupportedAstReal
+      (sourceMarginEnvironment lossBinder margin) actualLossBody) =
+      .ok (RankerRealCurvature.realStablePairLoss margin) := by
+  have related : StructuralEnvRel lossScope
+      (sourceMarginEnvironment lossBinder margin)
+      (targetMarginEnvironment lossBinder margin) := by
+    simpa only [lossScope] using margin_environments_related lossBinder margin
+  rw [actual_loss_body_observation _ _ related, loss_target_backend]
+  exact RankerObjectiveIR.stableLoss_eval_success margin
+
+/-- The actual independent branch tree is retained. Both denominator facts
+follow from the genuine scalar backend theorem rather than caller premises. -/
+theorem actual_factor_body_model_success (margin : ℝ) :
+    observeNumber (evalSupportedAstReal
+      (sourceMarginEnvironment factorBinder margin) actualFactorBody) =
+      .ok (RankerRealCurvature.realStableLogisticP margin) := by
+  have related : StructuralEnvRel factorScope
+      (sourceMarginEnvironment factorBinder margin)
+      (targetMarginEnvironment factorBinder margin) := by
+    simpa only [factorScope] using margin_environments_related factorBinder margin
+  rw [actual_factor_body_observation _ _ related, factor_target_backend]
+  exact RankerObjectiveIR.stableFactor_eval_success margin
+
+/-- Source error exclusion is a conclusion derived from the actual own
+observations for ordinary margins, not a successful-evaluation premise. -/
+theorem actual_scalar_bodies_no_selected_error (margin : ℝ) (problem : PyEvalError) :
+    evalSupportedAstReal (sourceMarginEnvironment lossBinder margin) actualLossBody ≠
+        .error problem ∧
+      evalSupportedAstReal (sourceMarginEnvironment factorBinder margin) actualFactorBody ≠
+        .error problem := by
+  constructor
+  · intro failed
+    have observed := actual_loss_body_model_success margin
+    rw [failed] at observed
+    cases observed
+  · intro failed
+    have observed := actual_factor_body_model_success margin
+    rw [failed] at observed
+    cases observed
+
+#print axioms actual_loss_body_model_success
+#print axioms actual_factor_body_model_success
+#print axioms actual_scalar_bodies_no_selected_error
+
+end
+
+end RankerOriginalPythonScalarBodies
+
+#print axioms _root_.RankerOriginalPythonScalarBodies.actual_loss_body_model_success
+#print axioms _root_.RankerOriginalPythonScalarBodies.actual_factor_body_model_success
+#print axioms _root_.RankerOriginalPythonScalarBodies.actual_scalar_bodies_no_selected_error

@@ -1,0 +1,65 @@
+{
+  "bindings": {
+    "bytes": 25170,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-source-plan-20261005-01/source-bindings.json",
+    "sha256": "d6cb9f35169351848198d3919a7e794cee89429b07a2879ea680cb8511bfa8b8"
+  },
+  "candidate_pins": [
+    {
+      "bytes": 10390,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-source-transport-candidate-20261006-01/candidate-interface.json",
+      "sha256": "edb98ff591ec2b9a3aeb816ebcf32e67006ea8288aa55d4ec1b14a4f80ff5f77"
+    },
+    {
+      "bytes": 43572,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-source-transport-candidate-20261006-01/python_ast_transport.py",
+      "sha256": "adb876326a54fde0481b52c838815c1cae65f62e918025e7444bc285a6854c0d"
+    },
+    {
+      "bytes": 16779,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-source-transport-candidate-20261006-01/test_python_ast_transport.py",
+      "sha256": "68b1a922af114fce4fe1d941288c60f144e162dd53059bce20ee54f1ad82fb3f"
+    }
+  ],
+  "candidate_source_review": {
+    "bytes": 5581,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-ast-transport-source-review-20261006-01/review-receipt-01.json",
+    "sha256": "4e98ca6d333239feed2b5d2955d7a8c23e25eb933270299256df7a77be4b9661"
+  },
+  "draft": {
+    "bytes": 13910,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-prefix-host-result-20261005-01/objective-prefix-draft.json",
+    "sha256": "4a7067a4797891740734fa7eae9ad46c02bc3410a4d4fff73ba43445a5a4ae17"
+  },
+  "lean_grammar": {
+    "bytes": 3916,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-01/math/PyAstNumericSubset.lean",
+    "sha256": "11baa458c201926c3a6e02b8ec7ca35213c336a30da199ce0390e3f1d7972faf"
+  },
+  "original_source": {
+    "bytes": 16391,
+    "path": "/home/barberb/lift_coding/artifacts/codebase_ir_terminal_bench/terminal-codebase-ir-intent-corpus-head-20261004-01/source/benchmarks/agent_supervisor/container_coding/terminal_codebase_intent_ranker_training.py",
+    "sha256": "3661027d12c40002db6cd0766fcc834619a956a67bda8c844aba820d3389263a"
+  },
+  "replay_manifest": {
+    "bytes": 1213138,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-qualification-checkpoint-replay-candidate-20261006-02/history-checkpoint-02.json",
+    "sha256": "6c81310108cc3594a96fcf46070c2eceae2441311f83dfc74a069e90cf02bc99"
+  },
+  "replay_source": {
+    "bytes": 16861,
+    "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-qualification-checkpoint-replay-candidate-20261006-02/checkpoint_replay.py",
+    "sha256": "bddc7677eceb8db478fb32183ba9ef47520f6fb6156c8b525ab5ddd246ffa152"
+  },
+  "replay_source_review": {
+    "bytes": 4886,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-ast-checkpoint-replay-source-review-20261006-02/review-receipt-01.json",
+    "sha256": "ffec7170766fe5ad2026dc2fcb746877878e3f516bc268109d76080b57294160"
+  },
+  "runner_source_review": {
+    "bytes": 2891,
+    "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-ast-transport-controls-source-review-20261006-02/review-receipt-01.json",
+    "sha256": "cf787d2d98fcc19f88685f49d65132ca3adf4080ee689a912a826e227354e48e"
+  },
+  "schema": "ranker-supported-python-ast-transport-control-plan@1"
+}

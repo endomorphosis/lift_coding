@@ -1,0 +1,304 @@
+"""Task-bound, source-replayed progressive disclosure of advisory code hits.
+
+This boundary changes only optional retrieval nominations. Native task checks,
+semantic producer capsules and the original instruction remain elsewhere in
+the admitted prompt. DuckDB persists the complete sanitized manifest; neither
+that cache nor the packet authorizes a proof, execution or task completion.
+"""
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+from pathlib import Path, PurePosixPath
+import re
+import shlex
+import stat
+
+from ..context.database_context import (
+    ContextBudgetSpec, TaskContextInput, build_database_context_manifest,
+    manifest_from_dict, open_database_context_store,
+)
+from .code_retrieval_context import load_code_retrieval_context
+
+
+ARTIFACT_SCHEMA = "supervisor-code-retrieval-frontier-artifact@1"
+PACKET_SCHEMA = "supervisor-code-retrieval-frontier-context@1"
+EXPANSION_SCHEMA = "supervisor-code-retrieval-frontier-expansion@1"
+POLICY = "source-replayed-code-retrieval-frontier@1"
+MAX_FILE_BYTES = 262144
+FIELDS = frozenset({"schema", "task_cid", "task_id", "task_revision", "repository_id", "tree_id",
+    "source_artifact", "source_sha256", "source_context_sha256", "manifest_cid", "store_path",
+    "max_hits", "max_bytes", "max_tokens"})
+
+
+def _json(value) -> str:
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
+
+
+def _sha(value: str | bytes) -> str:
+    return hashlib.sha256(value.encode() if isinstance(value, str) else value).hexdigest()
+
+
+def _unique(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError("duplicate frontier JSON key")
+        result[key] = value
+    return result
+
+
+def _parse(raw: str | bytes):
+    return json.loads(raw, object_pairs_hook=_unique,
+                      parse_constant=lambda value: (_ for _ in ()).throw(ValueError("nonfinite frontier JSON")))
+
+
+def _text(value, name, maximum=256):
+    if type(value) is not str or not value.strip() or len(value.encode()) > maximum:
+        raise ValueError("invalid frontier " + name)
+    return value
+
+
+def _digest(value):
+    if type(value) is not str or not re.fullmatch(r"[a-f0-9]{64}", value):
+        raise ValueError("invalid frontier digest")
+    return value
+
+
+def _bounds(max_hits, max_bytes, max_tokens):
+    for value, lower, upper, name in ((max_hits, 0, 20, "hit count"),
+        (max_bytes, 2048, 65536, "byte budget"), (max_tokens, 512, 32768, "token budget")):
+        if type(value) is not int or not lower <= value <= upper:
+            raise ValueError("invalid frontier " + name)
+
+
+def _path(root: Path, name: str, *, exists=True) -> Path:
+    _text(name, "path", 2048)
+    relative = PurePosixPath(name)
+    path = root / name
+    if (relative.is_absolute() or ".." in relative.parts or str(relative) != name
+            or path.is_symlink() or path.resolve(strict=exists) != path.absolute()
+            or not path.resolve(strict=exists).is_relative_to(root)):
+        raise ValueError("frontier path escapes canonical repository scope")
+    if exists and not stat.S_ISREG(path.stat().st_mode):
+        raise ValueError("frontier path must be a regular file")
+    return path
+
+
+def _read(path: Path) -> bytes:
+    with path.open("rb") as stream:
+        raw = stream.read(MAX_FILE_BYTES + 1)
+    if len(raw) > MAX_FILE_BYTES:
+        raise ValueError("frontier artifact exceeds byte bound")
+    return raw
+
+
+def _manifest(spec, context):
+    """Derive all members from fresh native retrieval, never from cached claims."""
+    if type(context) is not dict or context.get("task_id") != spec["task_id"]:
+        raise ValueError("frontier source task differs")
+    hits = context.get("hits")
+    if type(hits) is not list or len(hits) > 20:
+        raise ValueError("frontier source census exceeds its bound")
+    header = {key: value for key, value in context.items() if key != "hits"}
+    # Exact JSON strings preserve public source literals, native rank/score and
+    # all call/effect/signature selectors despite generic metadata normalization.
+    evidence = tuple({"evidence_id": hit["row_id"], "summary": "Native retrieval candidate",
+                      "payload": {"hit_json": _json(hit)}} for hit in hits)
+    policy_digest = _sha(_json({"policy": POLICY, **{key: spec[key] for key in
+        ("max_hits", "max_bytes", "max_tokens", "source_artifact", "source_sha256")}}))
+    request = TaskContextInput(
+        task_cid=spec["task_cid"], task_revision=spec["task_revision"],
+        repository_id=spec["repository_id"], tree_id=spec["tree_id"],
+        policy_id=POLICY, policy_digest=policy_digest,
+        task_summary="Source-bound advisory code retrieval",
+        open_obligations=({"obligation_id": "read-exact-source-before-editing",
+            "summary": "Read exact repository source before editing; retrieval ranking is a nomination, not proof.",
+            "payload": {"source_header_json": _json(header)}},), evidence=evidence,
+        budget=ContextBudgetSpec(max_rows=22, max_members=22,
+            max_bytes=spec["max_bytes"], max_tokens=spec["max_tokens"],
+            page_size=spec["max_hits"] + 2, page_offset=0),
+    )
+    manifest = build_database_context_manifest(request)
+    assert len(manifest.members) == len(hits) + 2
+    return manifest
+
+
+def _packet(spec, context, manifest, artifact, artifact_sha256):
+    # Charge the library's complete model envelope/frontier before translating
+    # its selected records into the smaller exact native-hit worker projection.
+    manifest.bounded_model_packet()
+    selected = [_parse(item.payload["hit_json"]) for item in manifest.included_members()
+                if "hit_json" in item.payload]
+    argv = ["python3", "-m", __name__, "expand", "--repository", ".",
+        "--artifact", artifact, "--expected-sha256", artifact_sha256,
+        "--task-id", spec["task_id"]]
+    packet = {"schema": PACKET_SCHEMA, "task_cid": spec["task_cid"],
+        "task_revision": spec["task_revision"], "repository_id": spec["repository_id"],
+        "tree_id": spec["tree_id"], "manifest_cid": manifest.manifest_cid,
+        "source_artifact_sha256": spec["source_sha256"],
+        "retrieval": {**{key: value for key, value in context.items() if key != "hits"}, "hits": selected},
+        "frontier": manifest.frontier.to_dict(),
+        "expansion": {"command_prefix": shlex.join(argv),
+            "arguments": "Append --handle with one recorded expansion handle and --question with the unresolved question.",
+            "source_and_native_query_replayed_on_each_request": True},
+        "proof_authority": False, "execution_authority": False, "completion_authority": False}
+    text = _json(packet)
+    # The whole worker projection, including CLI guidance, is the actual budget.
+    if len(text.encode()) > spec["max_bytes"] or (len(text.encode()) + 3) // 4 > spec["max_tokens"]:
+        raise ValueError("complete retrieval frontier packet exceeds its budget")
+    return text
+
+
+def prepare_code_retrieval_frontier(*, repository: Path, task_cid: str, task_id: str,
+        task_revision: str, repository_id: str, tree_id: str, source_artifact: str,
+        source_sha256: str, output: Path, max_hits=2, max_bytes=32768, max_tokens=8192) -> dict:
+    """Persist a fresh, complete native-hit census and a signed-bundle nomination."""
+    root = Path(repository).resolve(strict=True)
+    _bounds(max_hits, max_bytes, max_tokens)
+    for value, name in ((task_cid, "task CID"), (task_id, "task alias"),
+        (task_revision, "task revision"), (repository_id, "repository identity"), (tree_id, "tree identity")):
+        _text(value, name)
+    _digest(source_sha256)
+    source_text = load_code_retrieval_context(repository=root, artifact=source_artifact,
+        expected_sha256=source_sha256, task_id=task_id)
+    context = _parse(source_text)
+    if context["status"] != "current":
+        raise ValueError("frontier preparation requires current source retrieval")
+    output = Path(output).absolute()
+    if (not output.is_relative_to(root) or output.exists() or output.resolve() != output
+            or (root / source_artifact).is_relative_to(output)):
+        raise ValueError("frontier output must be a new separate repository-contained directory")
+    artifact = output / "frontier.json"
+    spec = {"schema": ARTIFACT_SCHEMA, "task_cid": task_cid, "task_id": task_id,
+        "task_revision": task_revision, "repository_id": repository_id, "tree_id": tree_id,
+        "source_artifact": source_artifact, "source_sha256": source_sha256,
+        "source_context_sha256": _sha(source_text), "store_path": (output / "manifest.duckdb").relative_to(root).as_posix(),
+        "max_hits": max_hits, "max_bytes": max_bytes, "max_tokens": max_tokens}
+    manifest = _manifest(spec, context)
+    spec["manifest_cid"] = manifest.manifest_cid
+    raw = _json(spec).encode()
+    digest = _sha(raw)
+    artifact_name = artifact.relative_to(root).as_posix()
+    projection = _packet(spec, context, manifest, artifact_name, digest)
+    output.mkdir(parents=True, exist_ok=False)
+    with open_database_context_store(output / "manifest.duckdb", policy_id=POLICY) as store:
+        store.persist_manifest(manifest)
+        reopened = store.get_manifest(manifest.manifest_cid)
+        if reopened is None or _json(reopened.to_dict()) != _json(manifest.to_dict()):
+            raise ValueError("persisted frontier manifest differs from native census")
+    if load_code_retrieval_context(repository=root, artifact=source_artifact,
+            expected_sha256=source_sha256, task_id=task_id) != source_text:
+        raise ValueError("source retrieval changed during frontier preparation")
+    artifact.write_bytes(raw)
+    selected = projection if len(projection.encode()) < len(source_text.encode()) else source_text
+    return {"schema": ARTIFACT_SCHEMA, "manifest_cid": manifest.manifest_cid,
+        "metadata": {"Code retrieval frontier artifact": artifact_name,
+                     "Code retrieval frontier sha256": digest},
+        "source_bytes": len(source_text.encode()), "frontier_bytes": len(projection.encode()),
+        "selected_bytes": len(selected.encode()),
+        "selected_transport": "frontier" if selected == projection else "full",
+        "complete_hit_count": len(context["hits"]),
+        "included_hit_count": sum("hit_json" in item.payload for item in manifest.included_members()),
+        "omitted_hit_count": len(manifest.omitted_members()),
+        "proof_authority": False, "execution_authority": False, "completion_authority": False}
+
+
+def _load(*, repository, artifact, expected_sha256, task_id):
+    root = Path(repository).resolve(strict=True)
+    _digest(expected_sha256)
+    raw = _read(_path(root, artifact))
+    if _sha(raw) != expected_sha256:
+        raise ValueError("frontier artifact digest differs")
+    spec = _parse(raw)
+    if type(spec) is not dict or set(spec) != FIELDS or spec["schema"] != ARTIFACT_SCHEMA:
+        raise ValueError("invalid frontier artifact schema")
+    if spec["task_id"] != task_id:
+        raise ValueError("frontier task alias differs")
+    for key in ("task_cid", "task_id", "task_revision", "repository_id", "tree_id", "manifest_cid"):
+        _text(spec[key], key)
+    _bounds(spec["max_hits"], spec["max_bytes"], spec["max_tokens"])
+    for key in ("source_sha256", "source_context_sha256"):
+        _digest(spec[key])
+    path = _path(root, spec["store_path"])
+    if path != (root / artifact).with_name("manifest.duckdb"):
+        raise ValueError("frontier store must be the nominated artifact's sibling")
+    source_text = load_code_retrieval_context(repository=root, artifact=spec["source_artifact"],
+        expected_sha256=spec["source_sha256"], task_id=task_id)
+    context = _parse(source_text)
+    if context["status"] == "stale":
+        return spec, context, None, source_text
+    if _sha(source_text) != spec["source_context_sha256"]:
+        raise ValueError("frontier source projection differs")
+    expected = _manifest(spec, context)
+    if expected.manifest_cid != spec["manifest_cid"]:
+        raise ValueError("frontier manifest differs from independently replayed native census")
+    import duckdb
+    with duckdb.connect(str(path), read_only=True, config={"threads": 1,
+            "enable_external_access": False, "autoload_known_extensions": False,
+            "autoinstall_known_extensions": False}) as connection:
+        if connection.execute("SELECT table_type FROM information_schema.tables WHERE table_schema='main' AND table_name='context_manifests'").fetchall() != [("BASE TABLE",)]:
+            raise ValueError("frontier manifest table must be a local base table")
+        rows = connection.execute("SELECT body_json FROM context_manifests WHERE manifest_cid=?", [spec["manifest_cid"]]).fetchmany(2)
+    if len(rows) != 1 or type(rows[0][0]) is not str or len(rows[0][0].encode()) > MAX_FILE_BYTES:
+        raise ValueError("frontier manifest is missing or outside its bound")
+    stored = manifest_from_dict(_parse(rows[0][0]))
+    if _json(stored.to_dict()) != _json(expected.to_dict()):
+        raise ValueError("cached frontier manifest differs from independently replayed native census")
+    return spec, context, expected, source_text
+
+
+def load_code_retrieval_frontier(*, repository: Path, artifact: str, expected_sha256: str, task_id: str) -> str:
+    """Recheck source, query and cache; emit a smaller packet or exact full input."""
+    spec, context, manifest, source_text = _load(repository=repository, artifact=artifact,
+        expected_sha256=expected_sha256, task_id=task_id)
+    if manifest is None:
+        return source_text  # Current stale header has no hits; cached nominations cannot escape.
+    projection = _packet(spec, context, manifest, artifact, expected_sha256)
+    return projection if len(projection.encode()) < len(source_text.encode()) else source_text
+
+
+def expand_code_retrieval_frontier(*, repository: Path, artifact: str, expected_sha256: str,
+        task_id: str, handle: str, question: str) -> dict:
+    """Read exactly one omitted native candidate after an independent replay."""
+    _text(handle, "expansion handle")
+    _text(question, "unresolved question", 1024)
+    spec, context, manifest, _ = _load(repository=repository, artifact=artifact,
+        expected_sha256=expected_sha256, task_id=task_id)
+    if manifest is None:
+        raise ValueError("frontier source is stale; cached expansion is unavailable")
+    matches = [item for item in manifest.omitted_members() if item.expansion_handle == handle]
+    if len(matches) != 1 or "hit_json" not in matches[0].payload:
+        raise ValueError("unknown omitted frontier handle")
+    member = matches[0]
+    result = {"schema": EXPANSION_SCHEMA, "task_cid": spec["task_cid"], "task_id": task_id,
+        "task_revision": spec["task_revision"], "manifest_cid": manifest.manifest_cid,
+        "source_artifact_sha256": spec["source_sha256"], "index_id": context["index_id"],
+        "query_id": context["query_id"], "result_id": context["result_id"],
+        "handle": handle, "question_sha256": _sha(question), "member_id": member.member_id,
+        "member_digest": member.digest, "hit": _parse(member.payload["hit_json"]),
+        "nomination_only": True, "proof_authority": False,
+        "execution_authority": False, "completion_authority": False}
+    if len(_json(result).encode()) > spec["max_bytes"]:
+        raise ValueError("frontier expansion exceeds its byte budget")
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("operation", choices=("expand",))
+    parser.add_argument("--repository", type=Path, required=True)
+    parser.add_argument("--artifact", required=True)
+    parser.add_argument("--expected-sha256", required=True)
+    parser.add_argument("--task-id", required=True)
+    parser.add_argument("--handle", required=True)
+    parser.add_argument("--question", required=True)
+    args = parser.parse_args()
+    result = expand_code_retrieval_frontier(repository=args.repository, artifact=args.artifact,
+        expected_sha256=args.expected_sha256, task_id=args.task_id, handle=args.handle, question=args.question)
+    print(_json(result))
+
+
+if __name__ == "__main__":
+    main()

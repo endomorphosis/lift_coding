@@ -1,0 +1,453 @@
+"""Retain one environment across real prepare/review/resume driver invocations.
+
+This controller owns no planning or admission implementation. Setup is outside
+its agent clock; both actual driver CLIs, public exports and review/upload share
+one deadline. Its receipts describe observation, not task or billing success.
+"""
+from __future__ import annotations
+
+import asyncio
+from dataclasses import dataclass
+import hashlib
+import json
+from pathlib import Path, PurePosixPath
+import re
+import shlex
+import time
+from typing import Protocol
+import uuid
+
+ROOT = '/opt/ipfs-supervisor'
+PYTHON = ROOT + '/venv/bin/python'
+MODULE = 'benchmarks.agent_supervisor.container_coding.terminal_container_supervisor'
+SCHEMA = 'retained-source-nomination-lifecycle@1'
+MAX_PUBLIC_BYTES = 65536
+MAX_PHASE_BYTES = 2_000_000
+CLEANUP_RESERVE = 15.0
+REPORT_RESERVE = 1.0
+BINDINGS = frozenset({'task_id', 'task_cid', 'task_revision', 'repository_id', 'tree_id',
+    'native_tree_id', 'native_forest_id', 'coverage_id', 'contract_cid', 'ledger_sha256',
+    'instruction_source_sha256', 'index_id', 'ast_index_id', 'source_manifest_sha256'})
+ENUMS = {'semantic_transport': {'native', 'identifiers'}, 'doctor_profile': {'generic', 'header-contract'},
+    'intent_requirements_transport': {'expanded', 'compact'}, 'code_retrieval_transport': {'full', 'frontier'},
+    'code_retrieval_codec': {'expanded', 'compact'}, 'code_retrieval_wire_delivery': {'inline', 'materialized'}}
+OPTIONAL = {'model_snapshot', 'model_revision', 'security_checkpoint', 'security_checkpoint_manifest_sha256'}
+_USED = []  # Keep a bounded identity census: a failed instance cannot be restarted.
+
+
+class HarborEnvironmentProtocol(Protocol):
+    async def start(self): ...
+    async def exec(self, *, command, cwd, user, env, timeout_sec): ...
+    async def upload_file(self, source, destination): ...
+    async def stop(self, *, delete): ...
+
+
+@dataclass(frozen=True)
+class ExportedReviewInputs:
+    baseline: bytes
+    baseline_sha256: str
+    template: bytes
+    template_sha256: str
+
+
+@dataclass(frozen=True)
+class ReviewDecision:
+    raw: bytes
+    sha256: str
+
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _wire(value):
+    return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode()
+
+
+def _digest(value):
+    if type(value) is not str or re.fullmatch('[0-9a-f]{64}', value) is None:
+        raise ValueError('Independent canonical SHA256 required')
+    return value
+
+
+def _error_type(error):
+    name = type(error).__name__
+    return name if re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]{0,127}', name) else 'UnboundedCallbackError'
+
+
+def _json(raw):
+    if type(raw) is not bytes or not 0 < len(raw) <= MAX_PUBLIC_BYTES:
+        raise ValueError('Bounded public canonical JSON required')
+    def unique(rows):
+        result = {}
+        for key, value in rows:
+            if key in result:
+                raise ValueError('Duplicate public JSON key')
+            result[key] = value
+        return result
+    value = json.loads(raw, object_pairs_hook=unique)
+    if type(value) is not dict or _wire(value) != raw:
+        raise ValueError('Exact canonical public JSON required')
+    return value
+
+
+def _public_path(value):
+    if type(value) is not str or len(value.encode()) > 2048:
+        raise ValueError('Bounded public path required')
+    path = PurePosixPath(value)
+    forbidden = {'state', 'home', 'worker-home', 'codex-auth', '.codex', '.git', 'private', 'credentials', 'keys', 'secrets'}
+    if (not path.is_absolute() or str(path) != value or '..' in path.parts
+            or not path.is_relative_to(ROOT) or path == PurePosixPath(ROOT)
+            or any(part.lower() in forbidden for part in path.parts)
+            or path.suffix.lower() in {'.duckdb', '.ducklake', '.db', '.key', '.pem', '.jsonl'}
+            or path.name.lower() in {'auth.json', '.env', 'token', 'private-key'}):
+        raise ValueError('Only public runtime input paths are accepted')
+    return value
+
+
+def _controls(value):
+    if type(value) is not dict or set(value) - (set(ENUMS) | OPTIONAL | {'disable_intent_autoencoder'}):
+        raise ValueError('Closed driver controls required')
+    if not set(ENUMS) | {'disable_intent_autoencoder'} <= set(value):
+        raise ValueError('All common driver controls must be explicit')
+    for key, choices in ENUMS.items():
+        if type(value[key]) is not str or value[key] not in choices:
+            raise ValueError('Unknown driver control')
+    if type(value['disable_intent_autoencoder']) is not bool:
+        raise ValueError('Exact Boolean intent ablation required')
+    if value['code_retrieval_codec'] == 'compact' and (value['semantic_transport'] != 'native' or value['code_retrieval_transport'] != 'full'):
+        raise ValueError('Compact coding requires native full retrieval')
+    if value['code_retrieval_wire_delivery'] == 'materialized' and value['code_retrieval_codec'] != 'compact':
+        raise ValueError('Materialized wire requires compact coding')
+    for left, right in [('model_snapshot', 'model_revision'), ('security_checkpoint', 'security_checkpoint_manifest_sha256')]:
+        if (left in value) != (right in value):
+            raise ValueError('Complete independent asset pairs required')
+        if left in value:
+            _public_path(value[left])
+            if right.endswith('sha256'):
+                _digest(value[right])
+            elif type(value[right]) is not str or not 0 < len(value[right].encode()) <= 256:
+                raise ValueError('Bounded model revision required')
+    return json.loads(_wire(value))
+
+
+def _argv(*, instruction, requirement_contract, state, controls, limit, phase, observer):
+    argv = [PYTHON, '-P', '-m', MODULE, '--instruction', instruction, '--intent-requirement-contract',
+        requirement_contract, '--state', state, '--arm', 'full', '--timeout-seconds', str(limit)]
+    for key in ENUMS:
+        argv += ['--' + key.replace('_', '-'), controls[key]]
+    for key in OPTIONAL:
+        if key in controls:
+            argv += ['--' + key.replace('_', '-'), controls[key]]
+    if controls['disable_intent_autoencoder']:
+        argv.append('--disable-intent-autoencoder')
+    if observer:
+        argv.append('--observe-model-input-only')
+    argv.append('--source-nomination-' + phase.replace('_', '-'))
+    return argv
+
+
+# This owner subprocess reads only a closed phase report or the two explicitly
+# pinned public review exports. It never downloads an owner directory or DB.
+_EXPORT = r'''import base64,hashlib,json,os,pathlib,stat,sys
+p=json.loads(sys.argv[1]);path=pathlib.Path(p['path'])
+assert path.is_absolute() and path.resolve(strict=True)==path
+assert os.geteuid()==1000
+if p['operation']=='phase':
+ assert path.parent.is_relative_to(pathlib.Path('/opt/ipfs-supervisor/state'))
+ assert path.name==p['state_name']+'-source-nomination-'+p['phase']+'-result.json'
+else:
+ assert path.is_relative_to(pathlib.Path('/app/.runtime/source-review-preparation/review'))
+ assert path.name in ('bindings.json','review-template.json')
+current=path.parent
+while current!=pathlib.Path('/'):
+ info=current.lstat();assert stat.S_ISDIR(info.st_mode) and not info.st_mode&0o022
+ current=current.parent
+fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+try:
+ before=os.fstat(fd);assert stat.S_ISREG(before.st_mode) and before.st_nlink==1 and not before.st_mode&0o022
+ assert 0<before.st_size<=p['maximum']
+ if p['operation']=='phase':assert before.st_uid==1000
+ raw=os.read(fd,p['maximum']+1)
+ witness=lambda s:(s.st_dev,s.st_ino,s.st_mode,s.st_uid,s.st_gid,s.st_nlink,s.st_size,s.st_mtime_ns,s.st_ctime_ns)
+ assert len(raw)==before.st_size and witness(before)==witness(os.fstat(fd))==witness(path.lstat())
+finally:os.close(fd)
+digest=hashlib.sha256(raw).hexdigest()
+if p['operation']=='public':
+ assert len(raw)==p['bytes'] and digest==p['sha256']
+ result={'bytes':len(raw),'sha256':digest,'data':base64.b64encode(raw).decode()}
+else:
+ value=json.loads(raw);assert value['schema']=='terminal-admitted-supervisor-run@1' and value['source_nomination_phase']==p['phase']
+ scalar=lambda x:type(x)in(str,int,float,bool,type(None))
+ result={'schema':'retained-source-nomination-phase-export@1','phase':p['phase'],'report_sha256':digest,'report_bytes':len(raw),
+ 'task_completed':value.get('task_completed'),'review_required':value.get('source_nomination_review_required'),
+ 'provider_invocation_count':len(value.get('provider_invocations',[])),'pre_dispatch_refusal_count':len(value.get('pre_dispatch_refusals',[])),
+ 'worker_cleanup_returncode':value.get('worker_cleanup_returncode'),'remaining_processes':value.get('remaining_processes'),
+ 'error_type':value.get('error',{}).get('type'),'source_nomination_resume':value.get('source_nomination_resume'),
+ 'source_nomination_active_budget':value.get('source_nomination_active_budget'),
+ 'source_nomination_review_preparation':value.get('source_nomination_review_preparation'),
+ 'observation_count':len(value.get('model_input_observations',[])),
+ 'observation_error_count':len(value.get('model_input_observation_errors',[])),
+ 'observation_refusal_count':len(value.get('model_input_observation_refusals',[])),
+ 'unreceipted_provider_attempt_present':'unreceipted_provider_attempt' in value,
+ 'unreceipted_model_input_observation_present':'unreceipted_model_input_observation' in value,
+ 'start_status':value.get('start',{}).get('status'),'stop_status':value.get('stop',{}).get('status')}
+ observations=[]
+ safe_names={'schema','observation_id','status','error_type','requested_provider','requested_model','reasoning_effort',
+ 'purpose','prompt_sha256','prompt_bytes','native_prompt_sha256','native_prompt_bytes','model_prompt_sha256',
+ 'model_prompt_bytes','workspace_advisory_sha256','workspace_advisory_bytes','workspace','router_prompt_sha256',
+ 'router_prompt_bytes','semantic_transport','intent_requirements_transport','code_retrieval_codec',
+ 'code_retrieval_wire_delivery','timeout_seconds','requested_output_tokens','provider_attempted','router_calls',
+ 'execution_authority','proof_authority','completion_authority','final_custody_guard_verified',
+ 'wire_delivery_post_observation_verified','wire_delivery_cleanup_status','seconds'}
+ for row in value.get('model_input_observations',[]):
+  observations.append({k:v for k,v in row.items() if k in safe_names and scalar(v)})
+ result['model_input_observations']=observations
+ assert len(observations)<=16
+print(json.dumps(result,sort_keys=True,separators=(',',':'),allow_nan=False))
+'''
+
+_VERIFY_REVIEW = r'''import hashlib,os,pathlib,stat,sys,json
+p=json.loads(sys.argv[1]);path=pathlib.Path(p['path'])
+assert path.parent==pathlib.Path('/opt/ipfs-supervisor') and path.resolve(strict=True)==path
+fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+try:
+ s=os.fstat(fd);assert stat.S_ISREG(s.st_mode) and s.st_uid==0 and s.st_nlink==1 and stat.S_IMODE(s.st_mode)==0o444
+ assert s.st_size==p['bytes']<=65536
+ raw=os.read(fd,65537)
+ witness=lambda i:(i.st_dev,i.st_ino,i.st_mode,i.st_size,i.st_mtime_ns,i.st_ctime_ns)
+ assert witness(s)==witness(os.fstat(fd))==witness(path.lstat())
+ assert len(raw)==p['bytes'] and hashlib.sha256(raw).hexdigest()==p['sha256']
+finally:os.close(fd)
+print('{"verified":true}')
+'''
+
+
+def _phase_export(value, phase):
+    if type(value) is not dict or value.get('schema') != 'retained-source-nomination-phase-export@1' or value.get('phase') != phase:
+        raise ValueError('Actual named driver phase export required')
+    _digest(value.get('report_sha256'))
+    if type(value.get('report_bytes')) is not int or not 0 < value['report_bytes'] <= MAX_PHASE_BYTES:
+        raise ValueError('Bounded driver phase report required')
+    if (type(value.get('model_input_observations')) is not list
+            or type(value.get('observation_count')) is not int
+            or len(value['model_input_observations']) != value['observation_count']
+            or len(value['model_input_observations']) > 16):
+        raise ValueError('Exact bounded exported observation census required')
+    return value
+
+
+def _reference(value, name):
+    prefix = '.runtime/source-review-preparation/review/'
+    if (type(value) is not dict or not {'artifact', 'sha256', 'bytes'} <= set(value)
+            or value['artifact'] != prefix + name or type(value['bytes']) is not int
+            or not 0 < value['bytes'] <= MAX_PUBLIC_BYTES):
+        raise ValueError('Only independently pinned public review exports are readable')
+    _digest(value['sha256'])
+    return value
+
+
+def _review(inputs, decision):
+    if type(decision) is not ReviewDecision:
+        raise ValueError('Independent canonical bytes and caller SHA decision required')
+    _digest(decision.sha256)
+    if _sha(decision.raw) != decision.sha256:
+        raise ValueError('Independent review digest differs')
+    baseline, template, review = _json(inputs.baseline), _json(inputs.template), _json(decision.raw)
+    if (baseline.get('schema') != 'terminal-source-nomination-review-preparation@1'
+            or set(review) != {'schema', 'bindings', 'review_ref', 'selectors'}
+            or template.get('schema') != 'supervisor-intent-source-nomination-review@1'
+            or review['schema'] != template['schema'] or type(review['bindings']) is not dict
+            or set(review['bindings']) != BINDINGS or review['bindings'] != baseline['bindings']
+            or template['bindings'] != baseline['bindings']):
+        raise ValueError('Review must preserve the actual fourteen preparation bindings')
+    for key in ('task_id', 'task_cid', 'task_revision'):
+        if baseline[key] != review['bindings'][key]:
+            raise ValueError('Preparation task identity differs')
+    if type(review['review_ref']) is not str or not 0 < len(review['review_ref'].encode()) <= 256:
+        raise ValueError('Explicit bounded authorial review reference required')
+    selectors = review['selectors']
+    if type(selectors) is not list or len(selectors) > 256:
+        raise ValueError('Bounded selector population required')
+    for row in selectors:
+        if type(row) is not dict or set(row) != {'requirement_id', 'path', 'qualified_symbol'}:
+            raise ValueError('Closed reviewed source selector required')
+        if any(type(v) is not str or not 0 < len(v.encode()) <= 2048 for v in row.values()):
+            raise ValueError('Bounded reviewed selectors required')
+    return decision
+
+
+async def run_retained_source_nomination_lifecycle(*, environment: HarborEnvironmentProtocol, setup, review,
+        output: Path, instruction: str, requirement_contract: str, state: str,
+        driver_controls: dict, timeout_seconds: int = 300, observer_mode: bool = True,
+        teardown_timeout_seconds: int = 60) -> dict:
+    """Run both real CLIs in one started environment, always delete it once.
+
+    ``setup(environment)`` installs production dependencies and protected public
+    inputs. ``review(ExportedReviewInputs)`` returns ``ReviewDecision``. Both are
+    async callbacks; only the latter runs inside the shared agent deadline.
+    """
+    instruction, requirement_contract = _public_path(instruction), _public_path(requirement_contract)
+    controls = _controls(driver_controls)
+    path = PurePosixPath(state) if type(state) is str else None
+    if (path is None or str(path) != state or '..' in path.parts or path.name in {'.', '..'}
+            or path.parent != PurePosixPath(ROOT + '/state')
+            or re.fullmatch(r'[A-Za-z0-9_.-]{1,128}', path.name) is None):
+        raise ValueError('One canonical fresh owner state under ROOT/state required')
+    if type(timeout_seconds) is not int or not 90 <= timeout_seconds <= 300:
+        raise ValueError('Original common driver limit must be90..300 seconds')
+    if observer_mode is not True or type(teardown_timeout_seconds) is not int or not 1 <= teardown_timeout_seconds <= 60:
+        raise ValueError('Explicit provider-free observer mode and bounded teardown required')
+    if not callable(setup) or not callable(review):
+        raise ValueError('Explicit setup and external review callbacks required')
+    output = Path(output).absolute()
+    if output.resolve(strict=False) != output or output.exists():
+        raise ValueError('Fresh canonical evidence output required; retry refused')
+    if any(item is environment for item in _USED) or len(_USED) >= 64:
+        raise ValueError('An environment instance can start only once')
+    output.mkdir(mode=0o755, parents=False)
+    _USED.append(environment)
+    result = {'schema': SCHEMA, 'qualified': False, 'observer_mode': True, 'task_completed': False,
+        'provider_usage_or_billing_complete': False, 'provider_calls': None,
+        'setup_excluded_from_agent_deadline': True, 'teardown_official_wall_budget_qualified': False,
+        'report_publication_in_agent_budget_qualified': False, 'official_wall_budget_qualified': False,
+        'driver_active_processing_budget_is_distinct_from_controller_deadline': True,
+        'original_timeout_seconds': timeout_seconds, 'same_environment_and_owner_state': True,
+        'state': state, 'controls': controls, 'phases': [], 'proof_authority': False,
+        'execution_authority': False, 'completion_authority': False,
+        'source_equivalence_or_model_convergence_proved': False}
+    begun, deadline, stage = time.monotonic(), None, 'start'
+    def retain(name, value):
+        with (output / name).open('xb') as stream:
+            stream.write(_wire(value) + b'\n')
+    def remaining():
+        if deadline is None:
+            raise ValueError('Shared agent clock not started')
+        available = deadline - time.monotonic() - CLEANUP_RESERVE - REPORT_RESERVE
+        if available <= 0:
+            raise TimeoutError('Shared lifecycle work budget exhausted')
+        return available
+    async def execute(command, *, user='supervisor'):
+        allowance = remaining()
+        from .terminal_deployment import runtime_environment
+        return await asyncio.wait_for(environment.exec(command=command, cwd='/app', user=user,
+            env=runtime_environment(), timeout_sec=allowance), allowance)
+    async def export(parameters):
+        answer = await execute(shlex.join([PYTHON, '-I', '-c', _EXPORT, _wire(parameters).decode()]))
+        if answer.return_code != 0 or len((answer.stdout or '').encode()) > 192_000:
+            raise ValueError('Bounded public owner export failed')
+        return json.loads(answer.stdout)
+    try:
+        await environment.start()
+        stage = 'setup'
+        setup_result = await asyncio.wait_for(setup(environment), 900)
+        if setup_result is not None and (type(setup_result) is not dict or setup_result.get('qualified') is not True):
+            raise ValueError('Production setup must finish successfully before the shared clock')
+        result['setup_seconds'] = time.monotonic() - begun
+        started = time.monotonic()
+        deadline = started + timeout_seconds
+        existing_paths = [state, state + '-source-nomination-prepare_only-result.json',
+            state + '-source-nomination-resume-result.json']
+        fresh = await execute(' && '.join('test ! -e ' + shlex.quote(p) + ' && test ! -L ' + shlex.quote(p)
+            for p in existing_paths))
+        if fresh.return_code != 0:
+            raise ValueError('Fresh owner state and phase reports required; retry refused')
+        for phase in ('prepare_only', 'resume'):
+            stage = phase
+            argv = _argv(instruction=instruction, requirement_contract=requirement_contract, state=state,
+                controls=controls, limit=timeout_seconds, phase=phase, observer=True)
+            if phase == 'resume':
+                remaining()  # No new invocation or clock if review consumed the budget.
+                argv += ['--source-nomination-review', remote_review, '--source-nomination-review-sha256', decision.sha256]
+            retain(phase + '-attempt.json', {'phase': phase, 'argv_sha256': _sha(_wire(argv)),
+                'original_timeout_seconds': timeout_seconds, 'same_owner_state': state})
+            response = await execute(shlex.join(argv))
+            out, err = (response.stdout or '').encode(), (response.stderr or '').encode()
+            if len(out) > 8_000_000 or len(err) > 8_000_000:
+                raise ValueError('Driver output exceeds bounded diagnostics')
+            execution = {'phase': phase, 'returncode': response.return_code, 'argv_sha256': _sha(_wire(argv)),
+                'stdout_bytes': len(out), 'stdout_sha256': _sha(out), 'stderr_bytes': len(err), 'stderr_sha256': _sha(err)}
+            retain(phase + '-execution.json', execution)
+            phase_path = str(path.parent / (path.name + '-source-nomination-' + phase + '-result.json'))
+            exported = _phase_export(await export({'operation': 'phase', 'path': phase_path,
+                'state_name': path.name, 'phase': phase, 'maximum': MAX_PHASE_BYTES}), phase)
+            retain(phase + '-public-report.json', exported)
+            result['phases'].append({**execution, 'public_report': phase + '-public-report.json',
+                'driver_report_sha256': exported['report_sha256']})
+            if (type(exported.get('provider_invocation_count')) is not int
+                    or exported['provider_invocation_count'] != 0 or exported.get('task_completed') is not False):
+                raise ValueError('Observer qualification must not claim provider or task success')
+            if phase == 'prepare_only':
+                if response.return_code != 0 or exported.get('review_required') is not True:
+                    raise ValueError('Actual preparation did not export a review-required baseline')
+                refs = exported.get('source_nomination_review_preparation')
+                baseline_ref = _reference(refs, 'bindings.json')
+                template_ref = _reference(refs.get('review_template'), 'review-template.json')
+                raw_values = []
+                import base64
+                for name, ref in [('baseline', baseline_ref), ('template', template_ref)]:
+                    item = await export({'operation': 'public', 'path': '/app/' + ref['artifact'],
+                        'sha256': ref['sha256'], 'bytes': ref['bytes'], 'maximum': MAX_PUBLIC_BYTES})
+                    raw = base64.b64decode(item['data'], validate=True)
+                    if len(raw) != ref['bytes'] or _sha(raw) != ref['sha256']:
+                        raise ValueError('Actual exported public pin differs')
+                    with (output / (name + '.json')).open('xb') as stream:
+                        stream.write(raw)
+                    raw_values.append(raw)
+                stage = 'review'
+                inputs = ExportedReviewInputs(raw_values[0], baseline_ref['sha256'], raw_values[1], template_ref['sha256'])
+                decision = _review(inputs, await asyncio.wait_for(review(inputs), remaining()))
+                local_review = output / 'authored-review.json'
+                with local_review.open('xb') as stream:
+                    stream.write(decision.raw)
+                local_review.chmod(0o444)
+                remote_review = ROOT + '/source-nomination-reviewed-' + uuid.uuid4().hex + '.json'
+                stage = 'review_upload'
+                pre = await execute('test ! -e ' + shlex.quote(remote_review) + ' && test ! -L ' + shlex.quote(remote_review), user='root')
+                if pre.return_code != 0:
+                    raise ValueError('Immutable public review destination already exists')
+                await asyncio.wait_for(environment.upload_file(local_review, remote_review), remaining())
+                protected = await execute('chown root:root ' + shlex.quote(remote_review) + ' && chmod 0444 ' + shlex.quote(remote_review), user='root')
+                if protected.return_code != 0:
+                    raise ValueError('Public review could not be protected')
+                checked = await execute(shlex.join([PYTHON, '-I', '-c', _VERIFY_REVIEW,
+                    _wire({'path': remote_review, 'sha256': decision.sha256, 'bytes': len(decision.raw)}).decode()]))
+                if checked.return_code != 0 or json.loads(checked.stdout).get('verified') is not True:
+                    raise ValueError('Materialized public review differs from independent bytes')
+                result['review_sha256'] = decision.sha256
+                result['review_bytes'] = len(decision.raw)
+            else:
+                result['resume_driver_returncode'] = response.return_code
+                if (exported.get('error_type') is not None or exported.get('stop_status') != 'succeeded'
+                        or exported.get('remaining_processes') != 0 or exported.get('worker_cleanup_returncode') != 0
+                        or type(exported.get('observation_count')) is not int or exported['observation_count'] != 1
+                        or type(exported.get('observation_error_count')) is not int or exported['observation_error_count'] != 0
+                        or type(exported.get('observation_refusal_count')) is not int or exported['observation_refusal_count'] != 0
+                        or exported.get('unreceipted_provider_attempt_present') is not False
+                        or exported.get('unreceipted_model_input_observation_present') is not False):
+                    raise ValueError('Actual observer resume did not produce clean bounded observations')
+                result['qualified'] = True
+        result['controller_agent_processing_seconds'] = time.monotonic() - started
+    except BaseException as error:
+        result['qualified'] = False
+        result['failure'] = {'stage': stage, 'error_type': _error_type(error)}
+    finally:
+        result['agent_deadline_exhausted'] = deadline is not None and time.monotonic() >= deadline
+        stage = 'delete'
+        cleanup_started = time.monotonic()
+        try:
+            allowance = teardown_timeout_seconds if deadline is None else max(.1, min(teardown_timeout_seconds,
+                deadline - time.monotonic() - REPORT_RESERVE))
+            stopped = await asyncio.wait_for(environment.stop(delete=True), allowance)
+            if stopped is not None:
+                raise ValueError('Environment deletion must complete with the Harbor protocol result')
+            result['environment_stop_delete_succeeded'] = True
+        except BaseException as error:
+            result['environment_stop_delete_succeeded'] = False
+            result['cleanup_error_type'] = _error_type(error)
+            result['qualified'] = False
+        result['teardown_seconds'] = time.monotonic() - cleanup_started
+        result['total_controller_seconds'] = time.monotonic() - begun
+        result['setup_or_teardown_in_official_task_budget_claimed'] = False
+        retain('controller-result.json', result)
+    return result

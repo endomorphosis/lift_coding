@@ -1,0 +1,62 @@
+"""Native repository-module analysis/CEGIS service for development enrollment.
+
+Receives only caller-selected public source and objective, never grader inputs.
+Any native candidate is a proposal requiring the same repository scorer.
+"""
+import hashlib
+import json
+from pathlib import Path
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[5]
+sys.path[:0] = [str(ROOT/'external/ipfs_accelerate'), str(ROOT/'external/ipfs_datasets'), str(ROOT/'external/ipfs_kit')]
+from ipfs_accelerate_py.agent_supervisor.analysis.formal_assurance.ipa import analyze_python_source
+from ipfs_accelerate_py.agent_supervisor.autonomous_repair import formal_assurance_cegis as C
+from ipfs_accelerate_py.agent_supervisor.semantic_state.routing import RoutingInputs, route_model
+
+
+def sha(data): return hashlib.sha256(data).hexdigest()
+
+
+def execute(request):
+    started = time.perf_counter()
+    if request['schema'] != 'ns-repository-native-analysis-request@1':
+        raise ValueError('unsupported public repository analysis request')
+    if request['candidate_budget'] not in (0, 1):
+        raise ValueError('bounded grammar candidate budget must be zero or one')
+    findings=[]; attempts=[]; candidates=[]
+    for item in request['sources']:
+        if sha(item['source'].encode()) != item['sha256']:
+            raise ValueError('source identity mismatch')
+        observed=analyze_python_source(item['source'], path=item['path'])
+        findings.extend({'path':item['path'], 'finding':v.to_dict()} for v in observed)
+        for finding in observed:
+            if len(attempts) >= request['candidate_budget']:
+                break
+            try:
+                family=C.select_repair_family(finding)
+            except C.CegisError:
+                continue
+            counterexample=C.CounterexampleRecord(counterexample_id='development:'+request['event_id'], family=family,
+                path=item['path'], witness=request['objective'], rule_id=finding.rule_id)
+            result=C.run_bounded_cegis(C.CegisRepairRequest(source=item['source'], counterexample=counterexample,
+                finding=finding, admitted_paths=[item['path']], budget=C.CegisBudget(max_iterations=2)))
+            attempts.append({'path':item['path'], 'result':result.to_dict(), 'objective_relevance':'unconfirmed until independent repository checks'})
+            if result.certificate and result.candidates_tried:
+                body=result.candidates_tried[-1].after_source
+                candidates.append({'path':item['path'],'source':body,'sha256':sha(body.encode())})
+    route=route_model(RoutingInputs(context_tokens=request['context_token_estimate'],lowest_confidence='conservative',
+        risk='medium',dependency_cone_size=max(1,len(request['sources'])),unresolved_obligations=1,
+        prior_repair_failures=request.get('prior_repair_failures',0),available_proofs=0))
+    imports={str(Path(module.__file__).resolve()):{'module':name,'sha256':sha(Path(module.__file__).read_bytes())}
+        for name,module in sorted(sys.modules.copy().items()) if name.startswith(('ipfs_accelerate_py','ipfs_datasets_py','ipfs_kit_py'))
+        and getattr(module,'__file__',None) and Path(module.__file__).is_file()}
+    return {'schema':'ns-repository-native-analysis-response@1','event_id':request['event_id'],'findings':findings,
+        'attempts':attempts,'candidate_edits':candidates,'routing':route.to_dict(),'imports':imports,
+        'elapsed_seconds':time.perf_counter()-started,'provider_calls':0,'theorem_proof_claimed':False,
+        'candidate_requires_current_repository_scoring':True,'source_scope':'explicit caller-selected public modules; not complete repository analysis'}
+
+
+if __name__=='__main__': print(json.dumps(execute(json.load(sys.stdin)),sort_keys=True))

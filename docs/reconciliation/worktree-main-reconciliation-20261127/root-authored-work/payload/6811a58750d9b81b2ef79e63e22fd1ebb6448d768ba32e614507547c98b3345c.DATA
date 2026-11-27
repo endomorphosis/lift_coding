@@ -1,0 +1,64 @@
+{
+  "actual_build_or_sdk_execution_performed": false,
+  "candidate_frozen": true,
+  "checks": {
+    "comparison_exports_scalar_hashes_and_counts_only": true,
+    "comparison_module_added_to_actual_import_join": true,
+    "comparison_uses_singleton_actual_observation": true,
+    "copied_public_inputs_join_sealed_p_manifest": true,
+    "four_embedded_owner_programs_compile": true,
+    "helper_ast_parse": true,
+    "no_positive_gain_assumption": true,
+    "prior_stage_or_checkout_mutation": false,
+    "qualification_requires_complete_native_replay_and_token_counts": true,
+    "tokenizer_installed_warmed_and_protected_before_network_detach": true,
+    "worktree_root_matches_actual_driver_constant": true
+  },
+  "cli": {
+    "build": "build-pinned-runtime.py [--archive-name runtime-archive|runtime-archive-02|runtime-archive-03]",
+    "qualification": "qualify-retained-harbor.py --output Q/actual-harbor-lifecycle --contract Q/public-task-inputs/reviewed-intent-contract.json --attempt 01 --archive Q/runtime-archive"
+  },
+  "files": [
+    {
+      "bytes": 3835,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-token-pairing-20261012-01/build-pinned-runtime.py",
+      "sha256": "9c5d43c65d9c950faa394b3cc2f3257c7a38159438ce8e164f43b446eb2fa1b3"
+    },
+    {
+      "bytes": 30139,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-token-pairing-20261012-01/qualify-retained-harbor.py",
+      "sha256": "fac0ed982759ebf06b3d77dbbfe74c481920cc62906b95286427fe0daa8b2fcf"
+    },
+    {
+      "bytes": 2741,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-token-pairing-20261012-01/public-input-copy.json",
+      "sha256": "6d540db15144b947aa48eccd0156994553944b8263393bd62f3440b42b05a491"
+    },
+    {
+      "bytes": 1334,
+      "path": "/home/barberb/lift_coding/maintenance/terminal-token-pairing-20261012-01/public-task-metadata.json",
+      "sha256": "41f5b2778f3aa34ca2b6d721434297fb3ec8a598c1f3defeec93cc7c2bc13b1f"
+    }
+  ],
+  "limits": [
+    "Sealed P exports contain scalar hashes/audits rather than complete packet bytes; fresh Q context is required.",
+    "Tokenizer pip installation is version pinned; newly installed module bytes are recorded, without a separate wheel-signature claim.",
+    "Paired reconstruction occurs after driver STOP within unchanged lifecycle teardown cap; its independent40s subprocess allowance does not reset the common agent clock.",
+    "Tokenizer counts measure the complete router task input only; provider system/harness/tool/retry/output/other-turn totals remain unknown.",
+    "The expanded arm is a counterfactual of the same captured source/task/context/workspace, not another observed model call.",
+    "Source semantics, task completion, global model convergence, billing and official wall-budget qualification remain unestablished."
+  ],
+  "qualification_schema": "actual-terminal-token-pair-qualification@1",
+  "schema": "terminal-token-pair-harness-preparation@1",
+  "tokenizer": {
+    "asset_mode": 292,
+    "bpe_asset_sha256": "446a9538cb6c348e3516120d7c08b09f57c36495e2acfffe59a5bf8b0cfb1a2d",
+    "cache": "/opt/ipfs-supervisor/tokenizer-cache",
+    "cache_mode": 365,
+    "cache_uid": 0,
+    "encoding": "o200k_base",
+    "provider_tokenizer_equivalence_established": false,
+    "version": "0.13.0",
+    "vocabulary_pattern_special_tokens_sha256": "a6557bbd3ceb299981ac87fd86a51fa8f0e9505be18ed608c5ada94bdfd0f63f"
+  }
+}

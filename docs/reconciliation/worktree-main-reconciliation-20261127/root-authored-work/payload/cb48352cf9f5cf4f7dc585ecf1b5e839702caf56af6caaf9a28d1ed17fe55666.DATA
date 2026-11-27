@@ -1,0 +1,176 @@
+"""Pure signed-task projection uses the actual native Portal identity path."""
+from copy import deepcopy
+from dataclasses import replace
+from pathlib import Path
+from types import SimpleNamespace
+
+import pytest
+
+from ipfs_accelerate_py.agent_supervisor.prompt.prompt_workflow import (
+    PromptTaskRecord, PromptTaskRecordV2, PromptOutputRecord,
+    PromptValidationRecord, PromptAcceptanceRecord,
+)
+from ipfs_accelerate_py.agent_supervisor.task_sources.task_identity import canonical_content_cid, canonical_task_identity
+from ipfs_accelerate_py.agent_supervisor.runtime import native_task_identity as identity
+from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import public_replay_without_metadata
+
+
+def case(*, objective="Preserve header normalization", acceptance="Cases A, B must pass; no regression", version=1):
+    with public_replay_without_metadata():
+        task_type = PromptTaskRecord if version == 1 else PromptTaskRecordV2
+        task = task_type(task_key="PUBLIC-001", goal_cid=canonical_content_cid({"goal": "public"}),
+            dependency_task_cids=(), objective=objective, rationale="Public authored requirement",
+            scope_paths=("bottle.py", "tests/test_headers.py"),
+            outputs=(PromptOutputRecord(path="bottle.py", effect="modify", media_type="text/x-python"),),
+            validations=(PromptValidationRecord(validation_key="headers", argv=("python3", "-m", "pytest", "tests/test_headers.py"),
+                policy_cid="policy:local"),),
+            acceptance=(PromptAcceptanceRecord(criterion_key="headers-pass", criterion=acceptance, validation_keys=("headers",)),),
+            evidence_cids=(), policy_roots=("policy:local",))
+        spec = {"task_key": task.task_key, "scope_paths": list(task.scope_paths),
+            "outputs": [{key:getattr(row,key) for key in ("path","effect","media_type")} for row in task.outputs],
+            "validations": [{key:list(getattr(row,key)) if isinstance(getattr(row,key),tuple) else getattr(row,key)
+                for key in ("validation_key","argv","cwd","expected_exit_codes","policy_cid")} for row in task.validations],
+            "acceptance": [{key:list(getattr(row,key)) if isinstance(getattr(row,key),tuple) else getattr(row,key)
+                for key in ("criterion_key","criterion","evidence_cids","validation_keys")} for row in task.acceptance],
+            "dependencies": []}
+        args = dict(task=task, spec=spec, database_task_cid=task.task_cid,
+            manifest_cid="manifest:signed", graph_cid="graph:signed", planning_receipt_cid="receipt:signed", context_cid="context:signed")
+    return args
+
+
+def receipt_for(mapping):
+    return {"schema":"supervisor-public-instruction-inclusion@2", "task_id":mapping["task_id"],
+        "task_cid":mapping["database_task_cid"], "context_cid":mapping["context_cid"],
+        "manifest_cid":mapping["manifest_cid"],
+        "intent_requirements":{"graph_cid":mapping["graph_cid"],"planning_receipt_cid":mapping["planning_receipt_cid"]},
+        "source_sha256":"0"*64, "completion_authority":False}
+
+
+def actual_portal_identity(args, *, board="actual-owner", path=Path("private-attempt-projection.md")):
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.database_portal_bridge import DatabasePortalExecutionBridge
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon, parse_task_text
+    # These are the native public contract fields plus private metadata excluded
+    # by identity. No owner/database object is constructed.
+    record = SimpleNamespace(task_alias=args["task"].task_key, body={"title":args["task"].objective},
+        outputs=args["spec"]["outputs"], acceptance=args["spec"]["acceptance"], validations=args["spec"]["validations"],
+        dependencies=("database:other",))
+    attempt = SimpleNamespace(task_cid=args["database_task_cid"],attempt_id="attempt:actual",claim_id="claim:actual",
+        attempt_number=4,lease_id="lease:actual",owner_session_id="owner:actual",fencing_token=13,fence_epoch=7)
+    with public_replay_without_metadata():
+        text = DatabasePortalExecutionBridge._render_projection_seed(attempt,record,board_namespace=board)
+        tasks = parse_task_text(text,path=path,task_header_prefix="## " + record.task_alias)
+        assert len(tasks)==1
+        return PortalImplementationDaemon._identity_for_task(SimpleNamespace(todo_path=path),tasks[0]).canonical_task_cid
+
+
+@pytest.mark.parametrize("version", [1,2])
+@pytest.mark.parametrize("objective,acceptance", [
+    ("Normalize headers", "A, B, and C pass"),
+    ("  Normalize\nheaders é 🧪  ", "first line\nsecond line, unicode é"),
+    ("Keep ordinary paths", "quoted 'x' ; comma, semicolon; end"),
+])
+def test_exact_native_projection_identity(version, objective, acceptance):
+    args=case(version=version,objective=objective,acceptance=acceptance)
+    before=deepcopy(args["spec"])
+    actual=identity.derive_native_task_identity(**args)
+    assert actual["canonical_task_cid"]==actual_portal_identity(args)
+    assert actual["database_task_cid"]==args["task"].task_cid
+    assert actual["canonical_task_cid"]!=actual["database_task_cid"]
+    assert set(actual)==identity.FIELDS
+    assert identity.validate_native_task_identity(actual,receipt_for(actual))==actual
+    assert args["spec"]==before
+
+
+def test_projection_metadata_namespace_and_paths_are_not_identity_inputs():
+    args=case()
+    actual=identity.derive_native_task_identity(**args)["canonical_task_cid"]
+    assert actual==actual_portal_identity(args,board="other-board",path=Path("another-private-path.md"))
+    # Turning signed scope into allowed paths changes native semantics. The
+    # helper intentionally matches the production record which does not do so.
+    with public_replay_without_metadata():
+        incorrect=canonical_task_identity({"title":args["task"].objective,"outputs":["bottle.py"],
+            "acceptance":args["spec"]["acceptance"][0]["criterion"],"allowed paths":args["spec"]["scope_paths"]})
+    assert actual!=incorrect.canonical_task_cid
+
+
+@pytest.mark.parametrize("key", ["database_task_cid","manifest_cid","graph_cid","planning_receipt_cid","context_cid"])
+@pytest.mark.parametrize("value", [False,0,[],{},"", " bad ", "a\nb", "\ud800"])
+def test_invalid_identity_inputs_refused(key,value):
+    args=case();args[key]=value
+    with pytest.raises(identity.NativeTaskIdentityError):identity.derive_native_task_identity(**args)
+
+
+@pytest.mark.parametrize("mutation", [
+    lambda a:a.update(database_task_cid="database:foreign"),
+    lambda a:a["spec"].update(task_key="FOREIGN-001"),
+    lambda a:a["spec"].update(allowed_paths=["bottle.py"]),
+    lambda a:a["spec"]["outputs"][0].update(path="outside.py"),
+    lambda a:a["spec"]["outputs"][0].update(effect="delete"),
+    lambda a:a["spec"]["validations"][0].update(expected_exit_codes=[False]),
+    lambda a:a["spec"]["validations"][0].update(expected_exit_codes=[0.0]),
+    lambda a:a["spec"]["validations"][0].update(argv="python3"),
+    lambda a:a["spec"]["acceptance"][0].update(criterion="foreign behavioral task"),
+    lambda a:a["spec"]["acceptance"][0].update(validation_keys=["foreign"]),
+    lambda a:a["spec"].update(scope_paths=["../bottle.py"]),
+    lambda a:a["spec"].update(dependencies=[False]),
+    lambda a:a.update(task=SimpleNamespace(task_key="PUBLIC-001",objective="foreign")),
+])
+def test_unsupported_or_foreign_profile_refused(mutation):
+    args=case();mutation(args)
+    with pytest.raises(identity.NativeTaskIdentityError):identity.derive_native_task_identity(**args)
+
+
+@pytest.mark.parametrize("name", ["task_id","task_cid","manifest_cid","context_cid","graph_cid","planning_receipt_cid"])
+def test_verified_receipt_identity_join_required(name):
+    actual=identity.derive_native_task_identity(**case());receipt=receipt_for(actual)
+    target=receipt["intent_requirements"] if name in ("graph_cid","planning_receipt_cid") else receipt
+    target[name]="foreign:identity"
+    with pytest.raises(identity.NativeTaskIdentityError):identity.validate_native_task_identity(actual,receipt)
+
+
+@pytest.mark.parametrize("change", [
+    lambda m:m.update(profile="generic-owner-profile"),
+    lambda m:m.update(schema="supervisor-native-task-identity@2"),
+    lambda m:m.update(canonical_task_cid="database:task"),
+    lambda m:m.update(canonical_task_cid="B"+"a"*60),
+    lambda m:m.update(completion_authority=True),
+    lambda m:m.update(task_id=False),
+    lambda m:m.pop("context_cid"),
+])
+def test_mapping_closed_and_exact_types(change):
+    actual=identity.derive_native_task_identity(**case());receipt=receipt_for(actual);change(actual)
+    with pytest.raises(identity.NativeTaskIdentityError):identity.validate_native_task_identity(actual,receipt)
+
+
+def test_validator_returns_copy_and_allows_unrelated_verified_receipt_fields():
+    actual=identity.derive_native_task_identity(**case());receipt=receipt_for(actual)
+    receipt.update(intent_requirements_projection={"existing":"unchanged"},source_bytes=3873)
+    validated=identity.validate_native_task_identity(actual,receipt)
+    validated["task_id"]="changed"
+    assert actual["task_id"]=="PUBLIC-001"
+
+
+def test_bounds_and_empty_objective_refused(monkeypatch):
+    args=case()
+    monkeypatch.setattr(identity,"MAX_INPUT_BYTES",1)
+    with pytest.raises(identity.NativeTaskIdentityError):identity.derive_native_task_identity(**args)
+    monkeypatch.setattr(identity,"MAX_INPUT_BYTES",262144)
+    args["task"]=replace(args["task"],objective=" ")
+    with public_replay_without_metadata():args["database_task_cid"]=args["task"].task_cid
+    with pytest.raises(identity.NativeTaskIdentityError):identity.derive_native_task_identity(**args)
+
+
+def test_full_operations_suppress_owner_factory_and_restore_after_error(monkeypatch,tmp_path):
+    from ipfs_accelerate_py.agent_supervisor.runtime import supervisor_meta_index as metadata
+    args=case();calls=[]
+    def factory(cls):
+        calls.append(True)
+        raise AssertionError("metadata owner factory must not run")
+    monkeypatch.setattr(metadata.SupervisorMetaIndex,"from_env",classmethod(factory))
+    monkeypatch.setenv("IPFS_ACCELERATE_META_INDEX_DUCKDB",str(tmp_path/"unopened-owner.duckdb"))
+    derived=identity.derive_native_task_identity(**args)
+    identity.validate_native_task_identity(derived,receipt_for(derived))
+    with pytest.raises(identity.NativeTaskIdentityError):identity.derive_native_task_identity(**{**args,"database_task_cid":False})
+    assert not calls and not (tmp_path/"unopened-owner.duckdb").exists()
+    with pytest.raises(AssertionError):metadata._active()
+    assert calls==[True]

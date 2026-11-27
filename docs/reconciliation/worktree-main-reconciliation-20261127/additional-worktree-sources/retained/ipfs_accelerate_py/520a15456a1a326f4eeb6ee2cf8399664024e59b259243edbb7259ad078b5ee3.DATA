@@ -1,0 +1,157 @@
+"""Normal candidate imports and inert contract/real sealed-file controls only.
+
+No owner/client/resource substitute, initializer, manager, native DuckDB import,
+namespace API, capture row or provider is created. Old85+76 tests are separate.
+"""
+import copy
+import fcntl
+import hashlib
+from pathlib import Path
+import os
+import time
+
+import pytest
+import ipfs_accelerate_py.cli_runtime.grok_fresh_task_capture_worker as worker
+import ipfs_accelerate_py.cli_runtime.grok_fresh_task_capture_transport as transport
+import ipfs_accelerate_py.cli_runtime.grok_private_fake_credentials as helper
+
+
+def file_pin(path,raw):
+    path.write_bytes(raw);path.chmod(0o600)
+    return dict(path=str(path),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+
+
+@pytest.fixture
+def inert_contract(tmp_path):
+    metadata=tmp_path/'metadata';metadata.mkdir(mode=0o700)
+    receipts=tmp_path/'receipts';receipts.mkdir(mode=0o700)
+    root=Path(worker.__file__).parents[2];now=time.monotonic()
+    request=dict(schema=worker.PRIVATE_SCHEMA,mode='fresh-task-capture-diagnostic',one_shot=True,attempt_cap=1,
+        provider_dispatch_allowed=True,execution_environment='isolated-loopback',accelerator_root=str(root),
+        workspace=str(tmp_path/'workspace'),receipt_directory=str(receipts),task_alias='inert-private-task',
+        task_cid='inert-private-cid',database_attempt_id='inert-private-attempt',database_attempt_number=1,
+        allocation_session_id='inert-private-session',source_generation='grok-automatic-named-session/inert-private',
+        work_deadline_monotonic=now+240,native_deadline_monotonic=now+300,owner_pid=2,owner_birth=1,
+        owner_request_sha256='1'*64,context_path=str(receipts/'owner-context.json'),
+        capsule_pin=file_pin(metadata/'capsule.json',b'{}\n'),
+        source_profile_pin=file_pin(metadata/'profile.json',b'{}\n'),max_output_tokens=128,maximum_timeout_seconds=30)
+    value={name:request[name]for name in('execution_environment','task_cid','task_alias','database_attempt_id',
+        'database_attempt_number','allocation_session_id','source_generation','receipt_directory',
+        'work_deadline_monotonic','native_deadline_monotonic','owner_request_sha256')}
+    value.update(schema=helper.PRIVATE_SCHEMA,paid_provider_calls_allowed=False,
+        source_profile_sha256=request['source_profile_pin']['sha256'],capsule_sha256=request['capsule_pin']['sha256'],
+        credential_slot='inert-private-slot',fake_nonce='4'*32,credential_fingerprint=helper.fake_fingerprint('4'*32),
+        network_namespace=dict(device=4,inode=100),network_witness_policy=dict(
+            schema='private-owned-rootless-network-policy/v1',witness_kind='own-net-owned-user-restricted-maps/v1',
+            expected_uid_map=[[0,1000,1],[1,100000,65536]],expected_gid_map=[[0,1000,1],[1,100000,65536]]),
+        private_duckdb_quiescence_policy=dict(schema='private-owned-DuckDB-public-close-policy/v1',
+            operation='duckdb.close',maximum_observation_milliseconds=200))
+    context={name:value[name]for name in('database_attempt_id','database_attempt_number','allocation_session_id',
+        'source_generation','credential_slot','credential_fingerprint','work_deadline_monotonic','native_deadline_monotonic')}
+    context.update(database_task_cid=value['task_cid'],portal_task_id=value['task_alias'],
+        request_sha256=value['owner_request_sha256'],source_bindings_sha256=value['source_profile_sha256'],
+        capsule_sha256=value['capsule_sha256'])
+    request['fake_credential_fixture_pin']=file_pin(receipts/'private-fake-credential-fixture.json',helper.canonical(value))
+    return value,request,context
+
+
+def test_private_v2_pure_joins_have_no_installation_authority(inert_contract):
+    value,request,context=inert_contract
+    assert worker.validate_request(request) is request
+    assert helper.validate_fixture_metadata(value,request,context) is value
+    assert helper.validate_private_fixture_policies(value)=={
+        key:value[key]for key in('network_witness_policy','private_duckdb_quiescence_policy')}
+    assert helper._INITIALIZATION_ATTEMPTED is False and helper._RETAINED==[]
+    assert helper._PRIVATE_DUCKDB_STATE is None and transport._PRIVATE_PREPARATION_ATTEMPTED is False
+
+
+@pytest.mark.parametrize('mode',['provider','missing_pin','extra_key','wrong_path','attempt_bool','unbounded_pin'])
+def test_private_request_cannot_downgrade_or_relax_closed_contract(inert_contract,mode):
+    _,request,_=copy.deepcopy(inert_contract)
+    if mode=='provider':request['execution_environment']='provider'
+    elif mode=='missing_pin':request.pop('fake_credential_fixture_pin')
+    elif mode=='extra_key':request['ambient_credentials_allowed']=True
+    elif mode=='wrong_path':request['fake_credential_fixture_pin']['path']=request['capsule_pin']['path']
+    elif mode=='attempt_bool':request['attempt_cap']=True
+    elif mode=='unbounded_pin':request['fake_credential_fixture_pin']['bytes']=65537
+    with pytest.raises(worker.CaptureRefusal):worker.validate_request(request)
+
+
+def test_v1_request_stays_valid_and_rejects_private_fixture_field(inert_contract):
+    _,request,_=copy.deepcopy(inert_contract);request['schema']=worker.SCHEMA
+    with pytest.raises(worker.CaptureRefusal):worker.validate_request(request)
+    request.pop('fake_credential_fixture_pin');request['execution_environment']='provider'
+    assert worker.validate_request(request) is request
+    with pytest.raises(worker.CaptureRefusal):transport.prepare_private_fake_credentials(request,{},
+        borrowed_request_fd=-1,borrowed_request_sha256='0'*64)
+    assert transport._PRIVATE_PREPARATION_ATTEMPTED is False
+
+
+@pytest.mark.parametrize('mode',['v1_fixture','v1_request','wrong_R','wrong_profile','wrong_capsule','extra_F','wrong_nonce'])
+def test_private_fixture_refuses_downgrade_or_broken_owner_join(inert_contract,mode):
+    value,request,context=copy.deepcopy(inert_contract)
+    if mode=='v1_fixture':
+        value['schema']=helper.SCHEMA
+        value.pop('network_witness_policy');value.pop('private_duckdb_quiescence_policy')
+    elif mode=='v1_request':request['schema']=worker.SCHEMA
+    elif mode=='wrong_R':value['owner_request_sha256']='f'*64
+    elif mode=='wrong_profile':value['source_profile_sha256']='f'*64
+    elif mode=='wrong_capsule':value['capsule_sha256']='f'*64
+    elif mode=='extra_F':value['fallback_to_ambient']=True
+    elif mode=='wrong_nonce':value['fake_nonce']='5'*32
+    with pytest.raises(helper.PrivateFakeCredentialRefusal):helper.validate_fixture_metadata(value,request,context)
+    assert helper._INITIALIZATION_ATTEMPTED is False and helper._RETAINED==[]
+
+
+@pytest.mark.parametrize('mode',['unknown_witness','extra_network_field','initial_full_map','overlapping_maps',
+    'boolean_extent','wrong_close_operation','extra_close_field','boolean_wait','larger_wait','missing_policy'])
+def test_public_policy_cannot_select_fallback_code_or_weaken_bounds(inert_contract,mode):
+    value,_,_=copy.deepcopy(inert_contract);network=value['network_witness_policy'];close=value['private_duckdb_quiescence_policy']
+    if mode=='unknown_witness':network['witness_kind']='pid1-fallback'
+    elif mode=='extra_network_field':network['namespace_fd']=10
+    elif mode=='initial_full_map':network['expected_uid_map']=[[0,0,4294967295]]
+    elif mode=='overlapping_maps':network['expected_gid_map']=[[0,1000,2],[1,100000,1]]
+    elif mode=='boolean_extent':network['expected_uid_map']=[[False,1000,1]]
+    elif mode=='wrong_close_operation':close['operation']='_clean_default_connection'
+    elif mode=='extra_close_field':close['callback']='arbitrary.function'
+    elif mode=='boolean_wait':close['maximum_observation_milliseconds']=True
+    elif mode=='larger_wait':close['maximum_observation_milliseconds']=1000
+    elif mode=='missing_policy':value.pop('network_witness_policy')
+    with pytest.raises(helper.PrivateFakeCredentialRefusal):helper.validate_private_fixture_policies(value)
+    assert helper._PRIVATE_DUCKDB_STATE is None
+
+
+def test_real_sealed_S_binds_preexisting_F_which_points_to_distinct_R(inert_contract):
+    value,request,context=inert_contract
+    F=request['fake_credential_fixture_pin'];assert helper.decode(helper.read_pin(F))==value
+    raw=worker.canonical(request);S=hashlib.sha256(raw).hexdigest();R=context['request_sha256']
+    assert value['owner_request_sha256']==request['owner_request_sha256']==R and S!=R
+    descriptor=os.memfd_create('inert-private-v2-S-F-R',os.MFD_CLOEXEC|os.MFD_ALLOW_SEALING)
+    try:
+        os.write(descriptor,raw);fcntl.fcntl(descriptor,fcntl.F_ADD_SEALS,worker.SEALS)
+        assert worker.read_sealed_request(descriptor,S)==request
+        assert helper.read_borrowed_request(descriptor,request,S) is None
+        with pytest.raises(helper.PrivateFakeCredentialRefusal):helper.read_borrowed_request(descriptor,request,R)
+        changed=copy.deepcopy(request);changed['fake_credential_fixture_pin']['sha256']='0'*64
+        with pytest.raises(helper.PrivateFakeCredentialRefusal):helper.read_borrowed_request(descriptor,changed,S)
+    finally:os.close(descriptor)
+    assert helper._INITIALIZATION_ATTEMPTED is False and helper._PRIVATE_DUCKDB_STATE is None
+
+
+@pytest.mark.parametrize('missing',list(transport.PRIVATE_MODULES))
+def test_private_profile_needs_each_of_five_new_normal_sources(inert_contract,missing):
+    _,request,_=copy.deepcopy(inert_contract);root=Path(request['accelerator_root'])
+    sources={str(root/relative):'a'*64 for relative in(*transport.MODULES.values(),*transport.PRIVATE_MODULES.values())}
+    sources.pop(str(root/transport.PRIVATE_MODULES[missing]))
+    profile=dict(schema=transport.SOURCE_SCHEMA,source_generation=request['source_generation'],sources=sources)
+    path=Path(request['source_profile_pin']['path']);request['source_profile_pin']=file_pin(path,worker.canonical(profile))
+    with pytest.raises(worker.CaptureRefusal):transport.load_source_profile(request)
+
+
+def test_private_profile_pins_all14_dependencies_without_importing_them(inert_contract):
+    _,request,_=copy.deepcopy(inert_contract);root=Path(request['accelerator_root'])
+    sources={str(root/relative):'a'*64 for relative in(*transport.MODULES.values(),*transport.PRIVATE_MODULES.values())}
+    profile=dict(schema=transport.SOURCE_SCHEMA,source_generation=request['source_generation'],sources=sources)
+    path=Path(request['source_profile_pin']['path']);request['source_profile_pin']=file_pin(path,worker.canonical(profile))
+    assert transport.load_source_profile(request)==profile
+    assert len(sources)==14 and helper._PRIVATE_DUCKDB_STATE is None

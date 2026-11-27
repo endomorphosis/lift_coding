@@ -1,0 +1,256 @@
+import PyFiniteScalarCompatibility
+import PyAstNumericPreservation
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED SCALAR-LOWERING CANDIDATE.
+
+PyFiniteScalarCompatibility remains prospective until root qualifies its exact
+source and whole owned module. No future native evidence is assumed here.
+
+TypedScalar records only ordinary source syntax/name membership/primitive
+arity. Actual lowerer acceptance and the own-compatible fragment are derived.
+Projected numeric bindings determine a canonical scalar named environment;
+scope spelling injectivity derives its structural lookup transport. Complete
+value/selected-error preservation follows without desired evaluation, model,
+successful-result or callback-equation premises.
+
+This source does not interpret CPython parser/globals/protocols/Float/timing,
+containers, the whole objective/program, tasks, convergence or proof admission.
+-/
+
+namespace RankerSupportedPythonFiniteScalarLoweringPreservation
+
+noncomputable section
+
+open RankerSupportedPythonAstReal (PyName PyExpr PyEnvironment PyNumber
+  scalarScopeValid scopeSpellings resolveFixedCallee lowerSupportedAst
+  lowerSupportedAstAux lowerSupportedArguments lowerPrimitive lowerBinaryOpcode
+  lowerOne lowerTwo lowerThree lookupNumber observeNumber observePy StructuralEnvRel
+  lower_supported_ast_observation_preserved)
+open RankerSupportedPythonFiniteBindings (PyFiniteEnvironment ScalarBindingsAdmissible
+  scalarProjection)
+open RankerSupportedPythonOwnComprehensions (evalOwnScalar)
+open RankerSupportedPythonFiniteScalarCompatibility (ScalarCompatible ArgumentsCompatible
+  TestCompatible CanonicalScalarCallee NoReservedBindings observeOwn own_scalar_compatibility)
+open RankerObjectiveIR (SliceError)
+open RankerObjectivePrefixIR (NamedEnvironment extendNames castValue)
+open RankerObjectiveContainerLanguage (SourceExpr evalSourceExpr)
+
+/-- This is ordinary source typing. Every call constructor fixes source
+callee spelling/scope and exact arity, and both conditional branches are typed.
+No lowerer result or evaluator equation is a constructor field. -/
+inductive TypedScalar (scope : List PyName) : PyExpr → Prop where
+  | name (identifier : PyName) (present : identifier ∈ scope) :
+      TypedScalar scope (.name identifier)
+  | integer (value : ℤ) : TypedScalar scope (.integer value)
+  | floatLiteral (token : String) (ratio : ℚ) :
+      TypedScalar scope (.floatLiteral token ratio)
+  | neg (operand : PyExpr) (typed : TypedScalar scope operand) :
+      TypedScalar scope (.unary .usub operand)
+  | binary (op : RankerSupportedPythonAstReal.PyBinary) (left right : PyExpr)
+      (leftTyped : TypedScalar scope left) (rightTyped : TypedScalar scope right) :
+      TypedScalar scope (.binary op left right)
+  | abs (operand : PyExpr) (typed : TypedScalar scope operand) :
+      TypedScalar scope (.call (.name ⟨0, "abs"⟩) (.cons operand .nil))
+  | max (left right : PyExpr)
+      (leftTyped : TypedScalar scope left) (rightTyped : TypedScalar scope right) :
+      TypedScalar scope (.call (.name ⟨0, "max"⟩) (.cons left (.cons right .nil)))
+  | exp (operand : PyExpr) (typed : TypedScalar scope operand) :
+      TypedScalar scope (.call (.attribute ⟨0, "math"⟩ "exp") (.cons operand .nil))
+  | log1p (operand : PyExpr) (typed : TypedScalar scope operand) :
+      TypedScalar scope (.call (.attribute ⟨0, "math"⟩ "log1p") (.cons operand .nil))
+  | conditional (condition body otherwise : PyExpr)
+      (conditionTyped : TypedScalar scope condition)
+      (bodyTyped : TypedScalar scope body)
+      (otherwiseTyped : TypedScalar scope otherwise) :
+      TypedScalar scope
+        (.ifExp (.compare .ge condition (.integer 0)) body otherwise)
+
+private theorem typed_scalar_compatible (scope : List PyName) (expression : PyExpr)
+    (typed : TypedScalar scope expression) : ScalarCompatible scope expression := by
+  induction typed with
+  | name identifier present => exact .name identifier present
+  | integer value => exact .integer value
+  | floatLiteral token ratio => exact .floatLiteral token ratio
+  | neg operand typed ih => exact .neg operand ih
+  | binary op left right leftTyped rightTyped leftIH rightIH =>
+    exact .binary op left right leftIH rightIH
+  | abs operand typed ih =>
+    exact .call _ _ .abs (.cons operand .nil ih .nil)
+  | max left right leftTyped rightTyped leftIH rightIH =>
+    exact .call _ _ .max (.cons left (.cons right .nil) leftIH
+      (.cons right .nil rightIH .nil))
+  | exp operand typed ih =>
+    exact .call _ _ .exp (.cons operand .nil ih .nil)
+  | log1p operand typed ih =>
+    exact .call _ _ .log1p (.cons operand .nil ih .nil)
+  | conditional condition body otherwise conditionTyped bodyTyped otherwiseTyped
+      conditionIH bodyIH otherwiseIH =>
+    exact .conditional _ _ _ (.ge condition (.integer 0) conditionIH (.integer 0))
+      bodyIH otherwiseIH
+
+private theorem typed_scalar_aux_exists (scope : List PyName) (expression : PyExpr)
+    (typed : TypedScalar scope expression) :
+    ∃ program : SourceExpr .scalar, lowerSupportedAstAux scope expression = .ok program := by
+  induction typed with
+  | name identifier present =>
+    refine ⟨.leaf (.var identifier.spelling), ?_⟩
+    simp only [lowerSupportedAstAux, if_pos present]
+  | integer value => exact ⟨.leaf (.scalarLiteral (value : ℚ)), rfl⟩
+  | floatLiteral token ratio => exact ⟨.leaf (.scalarLiteral ratio), rfl⟩
+  | neg operand typed ih =>
+    rcases ih with ⟨child, accepted⟩
+    refine ⟨.scalarUnary .neg child, ?_⟩
+    simp only [lowerSupportedAstAux, accepted, lowerOne]
+  | binary op left right leftTyped rightTyped leftIH rightIH =>
+    rcases leftIH with ⟨leftProgram, leftAccepted⟩
+    rcases rightIH with ⟨rightProgram, rightAccepted⟩
+    refine ⟨.scalarBinary (lowerBinaryOpcode op) leftProgram rightProgram, ?_⟩
+    simp only [lowerSupportedAstAux, leftAccepted, rightAccepted, lowerTwo]
+  | abs operand typed ih =>
+    rcases ih with ⟨child, accepted⟩
+    refine ⟨.scalarUnary .abs child, ?_⟩
+    simp only [lowerSupportedAstAux, resolveFixedCallee, lowerSupportedArguments,
+      accepted, lowerTwo, lowerPrimitive]
+  | max left right leftTyped rightTyped leftIH rightIH =>
+    rcases leftIH with ⟨leftProgram, leftAccepted⟩
+    rcases rightIH with ⟨rightProgram, rightAccepted⟩
+    refine ⟨.scalarBinary .max leftProgram rightProgram, ?_⟩
+    simp only [lowerSupportedAstAux, resolveFixedCallee, lowerSupportedArguments,
+      leftAccepted, rightAccepted, lowerTwo, lowerPrimitive]
+  | exp operand typed ih =>
+    rcases ih with ⟨child, accepted⟩
+    refine ⟨.scalarUnary .exp child, ?_⟩
+    simp only [lowerSupportedAstAux, resolveFixedCallee, lowerSupportedArguments,
+      accepted, lowerTwo, lowerPrimitive]
+  | log1p operand typed ih =>
+    rcases ih with ⟨child, accepted⟩
+    refine ⟨.scalarUnary .log1p child, ?_⟩
+    simp only [lowerSupportedAstAux, resolveFixedCallee, lowerSupportedArguments,
+      accepted, lowerTwo, lowerPrimitive]
+  | conditional condition body otherwise conditionTyped bodyTyped otherwiseTyped
+      conditionIH bodyIH otherwiseIH =>
+    rcases conditionIH with ⟨conditionProgram, conditionAccepted⟩
+    rcases bodyIH with ⟨bodyProgram, bodyAccepted⟩
+    rcases otherwiseIH with ⟨otherwiseProgram, otherwiseAccepted⟩
+    refine ⟨.ifNonneg conditionProgram bodyProgram otherwiseProgram, ?_⟩
+    simp only [lowerSupportedAstAux, conditionAccepted, bodyAccepted, otherwiseAccepted,
+      lowerThree]
+
+/-- Static source facts derive both real lowerer acceptance and compatibility;
+there is no compiler-success premise. -/
+theorem typed_scalar_lowering_exists (scope : List PyName)
+    (valid : scalarScopeValid scope) (expression : PyExpr)
+    (typed : TypedScalar scope expression) :
+    ∃ program : SourceExpr .scalar,
+      lowerSupportedAst scope expression = .ok program ∧
+        ScalarCompatible scope expression := by
+  rcases typed_scalar_aux_exists scope expression typed with ⟨program, accepted⟩
+  refine ⟨program, ?_, typed_scalar_compatible scope expression typed⟩
+  simpa only [lowerSupportedAst, if_pos valid] using accepted
+
+/-- Numeric bindings alone determine the target named environment. -/
+def scalarNames : PyEnvironment → NamedEnvironment
+  | [] => fun name _ => .error (.unknownName name)
+  | (identifier, value) :: rest =>
+      extendNames (τ := .scalar) identifier.spelling value.toReal (scalarNames rest)
+
+private theorem scope_spellings_injective (scope : List PyName) :
+    (scopeSpellings scope).Nodup →
+      ∀ left ∈ scope, ∀ right ∈ scope,
+        left.spelling = right.spelling → left = right := by
+  induction scope with
+  | nil =>
+    intro unique left present
+    cases present
+  | cons head rest ih =>
+    intro unique left leftPresent right rightPresent same
+    have parts : head.spelling ∉ scopeSpellings rest ∧ (scopeSpellings rest).Nodup := by
+      simpa only [scopeSpellings, List.map_cons, List.nodup_cons] using unique
+    rcases List.mem_cons.mp leftPresent with leftHead | leftTail
+    · subst left
+      rcases List.mem_cons.mp rightPresent with rightHead | rightTail
+      · exact rightHead.symm
+      · have inMap : right.spelling ∈ scopeSpellings rest :=
+          List.mem_map.mpr ⟨right, rightTail, rfl⟩
+        rw [← same] at inMap
+        exact False.elim (parts.1 inMap)
+    · rcases List.mem_cons.mp rightPresent with rightHead | rightTail
+      · subst right
+        have inMap : left.spelling ∈ scopeSpellings rest :=
+          List.mem_map.mpr ⟨left, leftTail, rfl⟩
+        rw [same] at inMap
+        exact False.elim (parts.1 inMap)
+      · exact ih parts.2 left leftTail right rightTail same
+
+private theorem scalar_names_lookup (scope : List PyName)
+    (unique : (scopeSpellings scope).Nodup) :
+    ∀ projected : PyEnvironment, (∀ binding ∈ projected, binding.1 ∈ scope) →
+      ∀ identifier ∈ scope,
+        scalarNames projected identifier.spelling .scalar =
+          observeNumber (lookupNumber projected identifier) := by
+  intro projected
+  induction projected with
+  | nil =>
+    intro localBindings identifier present
+    rfl
+  | cons binding rest ih =>
+    rcases binding with ⟨head, value⟩
+    intro localBindings identifier present
+    have headPresent : head ∈ scope := localBindings (head, value) (List.mem_cons_self)
+    have restLocal : ∀ binding ∈ rest, binding.1 ∈ scope := by
+      intro binding member
+      exact localBindings binding (List.mem_cons_of_mem _ member)
+    by_cases same : identifier = head
+    · subst identifier
+      simp [scalarNames, extendNames, castValue, lookupNumber, observeNumber, observePy]
+    · have spellingDifferent : identifier.spelling ≠ head.spelling := by
+        intro spellingSame
+        exact same (scope_spellings_injective scope unique identifier present head headPresent
+          spellingSame)
+      simpa only [scalarNames, extendNames, if_neg spellingDifferent, lookupNumber, if_neg same]
+        using ih restLocal identifier present
+
+private theorem canonical_structural_environment (scope : List PyName)
+    (valid : scalarScopeValid scope) (projected : PyEnvironment)
+    (localBindings : ∀ binding ∈ projected, binding.1 ∈ scope) :
+    StructuralEnvRel scope projected (scalarNames projected) := by
+  exact ⟨scalar_names_lookup scope valid.1 projected localBindings, localBindings⟩
+
+/-- Ordinary typed syntax/binding facts derive the projection, actual compiler
+success, canonical structural environment and full partial observation join.
+No caller supplies successful evaluation, desired result or model equation. -/
+theorem own_scalar_lowered_observation (scope : List PyName)
+    (valid : scalarScopeValid scope) (environment : PyFiniteEnvironment)
+    (admitted : ScalarBindingsAdmissible scope environment)
+    (ordinary : NoReservedBindings environment)
+    (expression : PyExpr) (typed : TypedScalar scope expression) :
+    ∃ projected : PyEnvironment, ∃ program : SourceExpr .scalar,
+      scalarProjection scope environment = .ok projected ∧
+        lowerSupportedAst scope expression = .ok program ∧
+        StructuralEnvRel scope projected (scalarNames projected) ∧
+        observeNumber (observeOwn (evalOwnScalar environment expression)) =
+          evalSourceExpr (scalarNames projected) program := by
+  rcases typed_scalar_lowering_exists scope valid expression typed with
+    ⟨program, accepted, compatible⟩
+  rcases own_scalar_compatibility scope environment admitted ordinary expression compatible with
+    ⟨projected, projectedAccepted, localBindings, sourceEquality⟩
+  have related := canonical_structural_environment scope valid projected localBindings
+  refine ⟨projected, program, projectedAccepted, accepted, related, ?_⟩
+  calc
+    observeNumber (observeOwn (evalOwnScalar environment expression)) =
+        observeNumber (RankerSupportedPythonAstReal.evalSupportedAstReal projected expression) :=
+      congrArg observeNumber sourceEquality
+    _ = evalSourceExpr (scalarNames projected) program :=
+      lower_supported_ast_observation_preserved scope projected (scalarNames projected)
+        related expression program accepted
+
+#print axioms typed_scalar_lowering_exists
+#print axioms own_scalar_lowered_observation
+
+end
+
+end RankerSupportedPythonFiniteScalarLoweringPreservation
+
+#print axioms _root_.RankerSupportedPythonFiniteScalarLoweringPreservation.typed_scalar_lowering_exists
+#print axioms _root_.RankerSupportedPythonFiniteScalarLoweringPreservation.own_scalar_lowered_observation

@@ -1,0 +1,95 @@
+"""Read-only joins for transport and original public-source branch controls."""
+import argparse
+import json
+from pathlib import Path
+import sys
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import repository_runtime_v2 as R
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--corpus", type=Path, required=True)
+    parser.add_argument("--transport-controls", type=Path, required=True)
+    parser.add_argument("--branch-controls", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    checks = []
+    inputs = {}
+
+    def read(path):
+        path = Path(path).resolve()
+        inputs[str(path)] = R.sha(path.read_bytes())
+        return json.loads(path.read_bytes())
+
+    def check(name, value):
+        checks.append({"name": name, "passed": bool(value)})
+        if not value:
+            raise AssertionError(name)
+
+    corpus = read(args.corpus)
+    transport = read(args.transport_controls / "summary.json")
+    branch = read(args.branch_controls / "summary.json")
+    transport_freeze = read(args.transport_controls / "freeze.json")
+    branch_freeze = read(args.branch_controls / "freeze.json")
+    for label, summary, count in [("transport", transport, 144), ("source_branch", branch, 323)]:
+        check(label + ":qualified_checks_complete", summary["passed"] and len(summary["checks"]) == count and all(row["passed"] for row in summary["checks"]))
+        check(label + ":no_provider_or_scorer_calls", summary["provider_calls"] == summary["scorer_calls"] == 0)
+    check("branch_exact_corpus_identity", branch_freeze["corpus_sha256"] == R.sha(args.corpus.read_bytes()))
+    sources = {}
+    for control_root, freeze, names in [
+        (args.transport_controls, transport_freeze, ["repository_runtime_v2.py", "repository_retrieval_v2.py"]),
+        (args.branch_controls, branch_freeze, ["repository_runtime_v2.py", "original_sequence_v1.py"])]:
+        for name in names:
+            current = HERE / name
+            expected = freeze["sources"][str(current)]
+            sources[str(current)] = expected
+            check("current_and_frozen_source:" + str(control_root) + ":" + name,
+                  R.sha(current.read_bytes()) == expected == R.sha((control_root / name).read_bytes()))
+    for task in corpus["tasks"]:
+        check(task["task_id"] + ":complete_public_base_still_exact", R.inventory(task["source_root"])["tree_sha256"] == task["source_tree_sha256"])
+        check(task["task_id"] + ":six_frozen_events", [event["event_index"] for event in task["events"]] == list(range(1, 7)))
+        check(task["task_id"] + ":all_repair_checks_stay_required", all(event["required_original_acceptance"] for event in task["events"][1:]))
+        check(task["task_id"] + ":no_failed_candidate_input", all(event["failed_candidate_may_become_input"] is False for event in task["events"]))
+        for index, config in enumerate(task["configurations"]):
+            saved = read(args.corpus.parent / task["task_id"] / ("configuration_" + str(index) + ".json"))
+            check(task["task_id"] + ":configuration_" + str(index), saved == config)
+        for event in task["events"]:
+            config = task["configurations"][1 if event["event_index"] >= 5 else 0]
+            check(task["task_id"] + ":event_configuration_" + str(event["event_index"]), R.sha(R.canonical(config)) == event["configuration_sha256"])
+    transitions = sorted(args.branch_controls.glob("*/[1-6]/transition.json"))
+    check("all_72_source_transitions_retained", len(transitions) == 72)
+    for path in transitions:
+        transition = read(path)
+        actual = R.inventory(transition["input_tree_path"])
+        check(str(path.relative_to(args.branch_controls)) + ":actual_full_source_matches_receipt",
+              actual["tree_sha256"] == transition["input_tree_sha256"] and actual == transition["input_transport"]["source_tree"])
+        result = read(path.parent / "declared_result.json")
+        claimed = result.pop("result_sha256")
+        check(str(path.relative_to(args.branch_controls)) + ":declared_fixture_result_hash", R.sha(R.canonical(result)) == claimed)
+        check(str(path.relative_to(args.branch_controls)) + ":fixture_not_repair_claim", result["not_a_behavioral_result"] is True)
+    for path in sorted(args.transport_controls.glob("*/comment_transport.json")):
+        receipt = read(path)
+        check(str(path.relative_to(args.transport_controls)) + ":complete_comment_source_and_patch_binding",
+              R.inventory(path.parent / "comment") == receipt["source_tree"] and R.sha(receipt["patch"].encode()) == receipt["patch_sha256"])
+    check("primary_and_one_factor_scope_preserved", corpus["primary_matrix"]["trajectories"] == 32 and corpus["primary_matrix"]["event_observations"] == 192 and len(corpus["one_factor_warm_controls"]) == 7)
+    result = {"schema": "ns-generic-transport-admission/v1", "qualified_transport_only": True,
+              "applicable_live_caller_qualified": False, "ready_for_provider_dispatch": False,
+              "checks": checks, "all_checks_passed": True, "service_sources": sources,
+              "artifact_sha256": inputs, "auditor_sha256": R.sha(Path(__file__).read_bytes()),
+              "provider_calls": 0, "scorer_calls": 0,
+              "limitations": ["No actual original-matrix scorer, provider, publication, recovery, or reuse call in these source controls",
+                              "Source-branch acceptance flags are explicit fixtures, not successful repairs",
+                              "Exact quiescent trusted filesystem inputs; no hostile concurrent filesystem guarantee",
+                              "Existing regular production edits only; generated overlays not editable in carry profile",
+                              "Separate original path-map, Requests masked-mode, and Zarr raw-stat inventory formats",
+                              "OAuth public/private criteria compatibility remains a separate endpoint gate"]}
+    with args.output.open("xb") as stream:
+        stream.write(R.canonical(result) + b"\n")
+    print(json.dumps({"checks": len(checks), "all_checks_passed": True, "output_sha256": R.sha(args.output.read_bytes())}))
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,117 @@
+"""Independently reconstruct the retained public-example results; no execution."""
+import hashlib
+import json
+import os
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def read(path):
+    return json.loads(path.read_text())
+
+
+def main():
+    run = HERE / "run-v2"
+    checks = 0
+
+    def check(condition):
+        nonlocal checks
+        assert condition
+        checks += 1
+
+    freeze = read(run / "freeze.json")
+    summary = read(run / "summary.json")
+    check(digest(run / "freeze.json") == summary["freeze_sha256"])
+    check(digest(run / "frozen_runner.py") == freeze["driver_sha256"])
+    check(freeze["automatic_retries"] == 0)
+    check(summary["public_api_setup_errors"] == 0)
+    check(not summary["whole_task_acceptance_qualified"])
+    check(summary["new_confirmatory_families"] == 0)
+    processes = read(run / "processes.json")
+    check({p["task_id"] for p in processes} == set(freeze["tasks"]))
+    for process in processes:
+        check(process["returncode"] == 0 and not process["timed_out"])
+        check(0 < process["seconds"] < freeze["worker_bound_seconds"])
+        check((run / (process["task_id"] + ".stderr")).read_bytes() == b"")
+        check(json.loads((run / (process["task_id"] + ".stdout")).read_text())["cases"] == 4)
+    task_results = []
+    for task_id, task in freeze["tasks"].items():
+        tree = Path(task["tree"])
+        actual = []
+        for path in sorted(tree.rglob("*")):
+            relative = str(path.relative_to(tree))
+            if path.is_symlink():
+                actual.append({"path": relative, "kind": "symlink", "target": os.readlink(path), "mode": path.lstat().st_mode & 0o7777})
+            elif path.is_file():
+                actual.append({"path": relative, "kind": "file", "sha256": digest(path), "mode": path.stat().st_mode & 0o7777})
+        check(len(actual) == len(task["inventory"]))
+        for before, after in zip(task["inventory"], actual):
+            check(before == after)
+        result = read(run / (task_id + ".json"))
+        check(result["source_inventory_unchanged"])
+        check(result["provider_calls"] == result["hidden_or_reference_calls"] == 0)
+        check(len(result["rows"]) == len(freeze["cases"][task_id]) == 4)
+        successes = 0
+        failure_ids = []
+        for case, row in zip(freeze["cases"][task_id], result["rows"]):
+            check(case["id"] == row["case_id"])
+            check(row["phase"] == "target_call")
+            if "error_type" in row:
+                check(task_id == "ns-hist-03-oauthlib")
+                check(row["error_type"] == "AttributeError")
+                check(row["error"] == "'MetadataEndpoint' object has no attribute '_response_types'")
+                success = False
+            elif task_id == "ns-hist-01-xmltodict":
+                success = row["observed"] == case["expected"]
+            elif task_id == "ns-hist-04-click":
+                output = row["observed"]["output"].lower()
+                visible = any(value.lower() in output for value in case["choices"])
+                check(visible == row["observed"]["choices_visible"])
+                success = row["observed"]["exit_code"] == 0 and visible == case["expect_choices_visible"]
+                if case["metavar"]:
+                    check(case["metavar"].lower() in output)
+            else:
+                body = row["observed"]["body"]
+                key = "response_types_supported" if "expected_response_types" in case else "grant_types_supported"
+                expectation = case.get("expected_response_types", case.get("expected_grant_types"))
+                success = row["observed"]["status"] == 200 and set(body[key]) == set(expectation)
+            check(success == row["conforms_to_new_public_contract"])
+            successes += success
+            if not success:
+                failure_ids.append(case["id"])
+        check(successes == result["passed"])
+        for source in result["loaded_public_source_modules"].values():
+            path = Path(source["path"])
+            check(path.resolve().is_relative_to(tree.resolve()))
+            check(digest(path) == source["sha256"])
+        task_results.append({"task_id": task_id, "cases": len(result["rows"]), "passed": successes,
+                             "failing_case_ids": failure_ids, "source_entries": len(actual),
+                             "loaded_public_modules": len(result["loaded_public_source_modules"])})
+    check(sum(r["cases"] for r in task_results) == summary["executed_cases"] == 12)
+    check(sum(r["passed"] for r in task_results) == summary["passed"] == 5)
+    old = HERE / "run-v1"
+    old_freeze = read(old / "freeze.json")
+    check(digest(old / "frozen_runner.py") == old_freeze["driver_sha256"])
+    check(not read(old / "qualification_limitations.json")["qualification_passed"])
+    old_oauth = read(old / "ns-hist-03-oauthlib.json")
+    check(sum(r.get("error_type") == "TypeError" for r in old_oauth["rows"]) == 3)
+    inputs = {str(p.relative_to(HERE)): digest(p) for directory in (old, run)
+              for p in sorted(directory.iterdir()) if p.is_file()}
+    result = {"schema": "ns-public-development-contract-audit/v1", "passed": True,
+              "checks": checks, "tasks": task_results, "input_sha256": inputs,
+              "auditor_sha256": digest(Path(__file__)), "provider_calls": 0,
+              "hidden_or_reference_calls": 0, "new_target_executions": 0,
+              "scope": "Reconstructs retained public observations and source provenance; not independent hidden acceptance or historical issue-text verification."}
+    with (HERE / "audit-v1.json").open("x") as stream:
+        json.dump(result, stream, indent=2, sort_keys=True)
+        stream.write("\n")
+    print(json.dumps({"passed": True, "checks": checks, "tasks": task_results}))
+
+
+if __name__ == "__main__":
+    main()

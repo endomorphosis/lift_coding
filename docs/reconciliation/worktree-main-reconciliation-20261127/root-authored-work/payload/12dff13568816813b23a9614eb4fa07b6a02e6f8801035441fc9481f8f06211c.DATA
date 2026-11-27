@@ -1,0 +1,5 @@
+def weighted_sum(n):
+    result = 0
+    for i in range(n):
+        result += (i * 17) % 97
+    return result

@@ -1,0 +1,11 @@
+SENTINEL = 'beta'
+
+def upload_piece(payload):
+    try:
+        raise RuntimeError('backend unavailable')
+    except Exception:
+        pass
+    return {'success': True, 'payload': payload}
+
+def marker():
+    return SENTINEL

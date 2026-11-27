@@ -1,0 +1,445 @@
+"""Private inherited-channel bootstrap for PID-bound state-owner clients.
+
+The typed state owner binds grants to the kernel peer PID and process birth.
+Long-running supervisors cannot therefore place one reusable token in their
+environment and pass it to replacement daemons.  This module supplies the
+small, closed bootstrap used by a managed daemon to identify its *current*
+birth over an inherited Unix socket and receive that birth's token.
+
+Only the descriptor number is permitted in argv.  The token and owner socket
+path travel in the framed response and are installed after the descriptor is
+closed.  Provider subprocess environments are scrubbed independently by the
+normal database-program boundary.
+"""
+
+from __future__ import annotations
+
+import json
+import math
+import os
+import socket
+import stat
+import time
+from collections.abc import Mapping
+from dataclasses import dataclass
+from typing import Any, Final
+
+from ..merge.database_worktree_registry import process_birth_id
+from ..merge.worktree_lifecycle import read_process_birth
+from .control_plane_contracts import canonical_json_bytes
+from .bootstrap_fd_transport import (BootstrapFDTransportError, close_received_descriptors,
+                                     receive_framed_bytes, send_framed_bytes)
+from .task_execution_route_policy import TaskExecutionRoutePolicy
+from .typed_state_owner import (
+    TYPED_STATE_OWNER_SOCKET_ENV,
+    TYPED_STATE_OWNER_TOKEN_ENV,
+)
+
+STATE_OWNER_BOOTSTRAP_REQUEST_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/state-owner-bootstrap-request@1"
+)
+STATE_OWNER_BOOTSTRAP_RESPONSE_SCHEMA: Final = (
+    "ipfs_accelerate_py/agent-supervisor/state-owner-bootstrap-response@1"
+)
+MAX_STATE_OWNER_BOOTSTRAP_BYTES: Final = 65_536
+
+
+class StateOwnerBootstrapError(RuntimeError):
+    """The private state-owner credential bootstrap failed closed."""
+
+
+def _send_frame(channel: socket.socket, payload: Mapping[str, Any]) -> None:
+    body = canonical_json_bytes(dict(payload))
+    if len(body) < 2 or len(body) > MAX_STATE_OWNER_BOOTSTRAP_BYTES:
+        raise StateOwnerBootstrapError("state-owner bootstrap frame exceeds its bound")
+    channel.sendall(len(body).to_bytes(4, "big") + body)
+
+
+def _receive_exact(channel: socket.socket, length: int) -> bytes:
+    chunks: list[bytes] = []
+    remaining = int(length)
+    while remaining:
+        chunk = channel.recv(remaining)
+        if not chunk:
+            raise StateOwnerBootstrapError("state-owner bootstrap channel closed")
+        chunks.append(chunk)
+        remaining -= len(chunk)
+    return b"".join(chunks)
+
+
+def _receive_frame_with_descriptors(channel: socket.socket, *, expected_descriptor_count: int,
+                                    deadline_monotonic: float | None = None):
+    # Parse rights on every frame fragment, including ordinary count-zero
+    # traffic. A malformed JSON frame must never strand received descriptors.
+    timeout = channel.gettimeout()
+    deadline = (time.monotonic() + (30.0 if timeout is None else float(timeout))
+                if deadline_monotonic is None else deadline_monotonic)
+    try:
+        body, descriptors = receive_framed_bytes(channel,
+            expected_descriptor_count=expected_descriptor_count, deadline_monotonic=deadline)
+    except BootstrapFDTransportError as error:
+        raise StateOwnerBootstrapError('state-owner bootstrap ancillary frame refused') from error
+    try:
+        payload = json.loads(body.decode('utf-8'))
+        if not isinstance(payload, dict):
+            raise StateOwnerBootstrapError('state-owner bootstrap frame must be an object')
+        return payload, descriptors
+    except BaseException as error:
+        try:
+            close_received_descriptors(descriptors)
+        except BaseException as cleanup_error:
+            error.bootstrap_fd_cleanup_error = cleanup_error
+        if isinstance(error, (UnicodeDecodeError, json.JSONDecodeError)):
+            raise StateOwnerBootstrapError('state-owner bootstrap frame is malformed') from error
+        raise
+
+
+def _receive_frame(channel: socket.socket, *, deadline_monotonic: float | None = None) -> dict[str, Any]:
+    payload, _descriptors = _receive_frame_with_descriptors(channel, expected_descriptor_count=0,
+        deadline_monotonic=deadline_monotonic)
+    return payload
+
+
+def _connect_inherited_listener(
+    descriptor: int, *, timeout_seconds: float, deadline_monotonic: float | None = None
+) -> socket.socket:
+    if isinstance(descriptor, bool) or not isinstance(descriptor, int) or descriptor < 3:
+        raise StateOwnerBootstrapError("state-owner bootstrap descriptor is invalid")
+    try:
+        metadata = os.fstat(descriptor)
+    except OSError as exc:
+        raise StateOwnerBootstrapError(
+            "state-owner bootstrap descriptor is unavailable"
+        ) from exc
+    if not stat.S_ISSOCK(metadata.st_mode):
+        raise StateOwnerBootstrapError(
+            "state-owner bootstrap requires an inherited Unix socket"
+        )
+    listener: socket.socket | None = None
+    try:
+        listener = socket.socket(fileno=descriptor)
+        if listener.family != socket.AF_UNIX or (
+            listener.type & socket.SOCK_STREAM
+        ) != socket.SOCK_STREAM:
+            raise StateOwnerBootstrapError(
+                "state-owner bootstrap descriptor has the wrong socket type"
+            )
+        if listener.getsockopt(socket.SOL_SOCKET, socket.SO_ACCEPTCONN) != 1:
+            raise StateOwnerBootstrapError(
+                "state-owner bootstrap descriptor is not a rendezvous listener"
+            )
+        address = listener.getsockname()
+        if not isinstance(address, (str, bytes)) or not address:
+            raise StateOwnerBootstrapError(
+                "state-owner bootstrap rendezvous identity is unavailable"
+            )
+        # Close this daemon's inherited copy before making a fresh connection.
+        # The fresh connect is what gives the owner an authoritative
+        # SO_PEERCRED identity for this exact process birth.
+        listener.close()
+        listener = None
+        timeout = max(0.1, float(timeout_seconds))
+        deadline = time.monotonic() + timeout if deadline_monotonic is None else deadline_monotonic
+        last_error: BaseException | None = None
+        while True:
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                break
+            channel = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+            try:
+                # timeout mode uses non-blocking connect internally, so a
+                # listener that nobody accept()s raises BlockingIOError
+                # (EAGAIN) instead of waiting. Retry until the deadline.
+                channel.settimeout(max(0.05, remaining) if deadline_monotonic is None else remaining)
+                channel.connect(address)
+                if deadline_monotonic is not None and time.monotonic() >= deadline:
+                    raise TimeoutError("original private bootstrap work deadline expired")
+                return channel
+            except (BlockingIOError, TimeoutError, InterruptedError) as exc:
+                last_error = exc
+                channel.close()
+                time.sleep(min(0.05, max(0.0, deadline - time.monotonic())))
+            except OSError as exc:
+                last_error = exc
+                channel.close()
+                break
+        raise StateOwnerBootstrapError(
+            "state-owner bootstrap socket could not be opened"
+        ) from last_error
+    except StateOwnerBootstrapError:
+        if listener is not None:
+            listener.close()
+        raise
+    except (OSError, TypeError, ValueError) as exc:
+        if listener is not None:
+            listener.close()
+        raise StateOwnerBootstrapError(
+            "state-owner bootstrap socket could not be opened"
+        ) from exc
+
+
+def validate_state_owner_bootstrap_listener(descriptor: int) -> str | bytes:
+    """Validate an inherited rendezvous listener without consuming its FD.
+
+    Launch parents use this before forwarding the capability through another
+    process boundary.  Validation operates on a duplicate so the descriptor
+    retained for the eventual daemon remains open and keeps its original
+    number.
+    """
+
+    if isinstance(descriptor, bool) or not isinstance(descriptor, int) or descriptor < 3:
+        raise StateOwnerBootstrapError("state-owner bootstrap descriptor is invalid")
+    try:
+        metadata = os.fstat(descriptor)
+    except OSError as exc:
+        raise StateOwnerBootstrapError(
+            "state-owner bootstrap descriptor is unavailable"
+        ) from exc
+    if not stat.S_ISSOCK(metadata.st_mode):
+        raise StateOwnerBootstrapError(
+            "state-owner bootstrap requires an inherited Unix socket"
+        )
+    duplicate = -1
+    listener: socket.socket | None = None
+    try:
+        duplicate = os.dup(descriptor)
+        listener = socket.socket(fileno=duplicate)
+        duplicate = -1
+        if listener.family != socket.AF_UNIX or (
+            listener.type & socket.SOCK_STREAM
+        ) != socket.SOCK_STREAM:
+            raise StateOwnerBootstrapError(
+                "state-owner bootstrap descriptor has the wrong socket type"
+            )
+        if listener.getsockopt(socket.SOL_SOCKET, socket.SO_ACCEPTCONN) != 1:
+            raise StateOwnerBootstrapError(
+                "state-owner bootstrap descriptor is not a rendezvous listener"
+            )
+        address = listener.getsockname()
+        if not isinstance(address, (str, bytes)) or not address:
+            raise StateOwnerBootstrapError(
+                "state-owner bootstrap rendezvous identity is unavailable"
+            )
+        try:
+            from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import (
+                mirror_work_record,
+            )
+
+            record_ref = address.decode("utf-8", "replace") if isinstance(address, bytes) else str(address)
+            mirror_work_record(
+                catalog_kind="metadata",
+                record_kind="state_owner_bootstrap_listener",
+                record_ref=record_ref or "state-owner-bootstrap-listener",
+                subject_kind="path",
+                subject_ref=record_ref or "state-owner-bootstrap-listener",
+            )
+        except Exception:
+            pass
+        return address
+    except StateOwnerBootstrapError:
+        raise
+    except (OSError, TypeError, ValueError) as exc:
+        raise StateOwnerBootstrapError(
+            "state-owner bootstrap listener could not be validated"
+        ) from exc
+    finally:
+        if listener is not None:
+            listener.close()
+        elif duplicate >= 0:
+            os.close(duplicate)
+
+
+@dataclass(frozen=True)
+class StateOwnerBootstrapCredentials:
+    """One daemon-birth-bound credential received from its state owner."""
+
+    endpoint: str
+    socket_path: str
+    store_id: str
+    server_id: str
+    client_id: str
+    process_birth_id: str
+    token: str
+    execution_route_policy: TaskExecutionRoutePolicy
+
+    @classmethod
+    def from_response(
+        cls,
+        payload: Mapping[str, Any],
+        *,
+        client_id: str,
+        store_id: str,
+        expected_process_birth_id: str,
+    ) -> StateOwnerBootstrapCredentials:
+        fields = {
+            "schema",
+            "ok",
+            "endpoint",
+            "socket_path",
+            "store_id",
+            "server_id",
+            "client_id",
+            "process_birth_id",
+            "token",
+            "execution_route_policy",
+        }
+        if set(payload) != fields:
+            raise StateOwnerBootstrapError(
+                "state-owner bootstrap response fields differ from the closed schema"
+            )
+        if (
+            payload.get("schema") != STATE_OWNER_BOOTSTRAP_RESPONSE_SCHEMA
+            or payload.get("ok") is not True
+        ):
+            raise StateOwnerBootstrapError("state-owner bootstrap was denied")
+        values = {
+            name: str(payload.get(name) or "").strip()
+            for name in fields - {"schema", "ok", "execution_route_policy"}
+        }
+        if any(not value or len(value) > 4_096 for value in values.values()):
+            raise StateOwnerBootstrapError("state-owner bootstrap identity is invalid")
+        if len(values["token"]) < 16:
+            raise StateOwnerBootstrapError("state-owner bootstrap token is unavailable")
+        if (
+            values["client_id"] != client_id
+            or values["store_id"] != store_id
+            or values["process_birth_id"] != expected_process_birth_id
+        ):
+            raise StateOwnerBootstrapError(
+                "state-owner bootstrap response differs from the requesting birth"
+            )
+        socket_path = os.path.abspath(values["socket_path"])
+        if socket_path != values["socket_path"]:
+            raise StateOwnerBootstrapError("state-owner socket path is not absolute")
+        raw_policy = payload.get("execution_route_policy")
+        if not isinstance(raw_policy, Mapping):
+            raise StateOwnerBootstrapError(
+                "state-owner bootstrap execution route policy is unavailable"
+            )
+        try:
+            execution_route_policy = TaskExecutionRoutePolicy.from_dict(raw_policy)
+        except (TypeError, ValueError, RuntimeError) as exc:
+            raise StateOwnerBootstrapError(
+                "state-owner bootstrap execution route policy is invalid"
+            ) from exc
+        return cls(
+            endpoint=values["endpoint"],
+            socket_path=socket_path,
+            store_id=values["store_id"],
+            server_id=values["server_id"],
+            client_id=values["client_id"],
+            process_birth_id=values["process_birth_id"],
+            token=values["token"],
+            execution_route_policy=execution_route_policy,
+        )
+
+    def install_environment(self) -> dict[str, str | bool]:
+        """Install the two transport values and return only redacted metadata."""
+
+        os.environ[TYPED_STATE_OWNER_TOKEN_ENV] = self.token
+        os.environ[TYPED_STATE_OWNER_SOCKET_ENV] = self.socket_path
+        # Capture before provider children inherit environ. Idle owner-command
+        # HMAC still needs the birth-bound grant after argv/env scrubbing.
+        from ..runtime.process_security import capture_state_authority_credentials
+
+        capture_state_authority_credentials()
+        return {
+            "endpoint": self.endpoint,
+            "store_id": self.store_id,
+            "server_id": self.server_id,
+            "client_id": self.client_id,
+            "process_birth_id": self.process_birth_id,
+            "execution_route_policy_id": self.execution_route_policy.policy_id,
+            "execution_route_plan_root_cid": (
+                self.execution_route_policy.plan_root_cid
+            ),
+            "execution_route_policy": (
+                self.execution_route_policy.public_summary()
+            ),
+            "credential_transport": "private_inherited_socket",
+            "credential_in_argv": False,
+        }
+
+
+def request_state_owner_bootstrap(
+    descriptor: int,
+    *,
+    client_id: str,
+    store_id: str,
+    timeout_seconds: float = 30.0,
+    private_same_pid_fixture_fd: int = -1,
+    private_same_pid_deadline_monotonic: float | None = None,
+) -> StateOwnerBootstrapCredentials:
+    """Request one credential for the calling process's exact kernel birth."""
+
+    if type(private_same_pid_fixture_fd) is not int or (private_same_pid_fixture_fd != -1 and private_same_pid_fixture_fd < 3):
+        raise StateOwnerBootstrapError('private fixture descriptor is invalid')
+    if private_same_pid_fixture_fd == -1:
+        if private_same_pid_deadline_monotonic is not None:
+            raise StateOwnerBootstrapError('private deadline requires the sealed private descriptor')
+        private_deadline = None
+    else:
+        if (type(private_same_pid_deadline_monotonic) not in (int, float)
+                or not math.isfinite(private_same_pid_deadline_monotonic)
+                or not time.monotonic() < private_same_pid_deadline_monotonic
+                or not 0 < float(timeout_seconds) <= 120):
+            raise StateOwnerBootstrapError('finite original private work deadline required')
+        private_deadline = min(private_same_pid_deadline_monotonic, time.monotonic()+float(timeout_seconds))
+    selected_client = str(client_id or "").strip()
+    selected_store = str(store_id or "").strip()
+    if not selected_client or not selected_store:
+        raise StateOwnerBootstrapError("state-owner bootstrap scope is incomplete")
+    birth = read_process_birth(os.getpid())
+    if birth is None:
+        raise StateOwnerBootstrapError("state-owner bootstrap process birth is unavailable")
+    birth_id = process_birth_id(birth)
+    if private_deadline is None:
+        channel = _connect_inherited_listener(descriptor, timeout_seconds=timeout_seconds)
+    else:
+        channel = _connect_inherited_listener(descriptor, timeout_seconds=timeout_seconds,
+            deadline_monotonic=private_deadline)
+    try:
+        payload = {
+            'schema': STATE_OWNER_BOOTSTRAP_REQUEST_SCHEMA,
+            'pid': os.getpid(), 'process_birth': birth.to_dict(),
+            'process_birth_id': birth_id, 'client_id': selected_client, 'store_id': selected_store,
+        }
+        if private_same_pid_fixture_fd == -1:
+            _send_frame(channel, payload)
+            response = _receive_frame(channel)
+        else:
+            # Only fixed native code opens its actual kernel cwd. This is an
+            # ancillary witness, never a caller-selected JSON cwd assertion.
+            cwd_descriptor = os.open('.', os.O_PATH|os.O_DIRECTORY|os.O_NOFOLLOW|os.O_CLOEXEC)
+            try:
+                send_framed_bytes(channel, canonical_json_bytes(payload),
+                    descriptors=(private_same_pid_fixture_fd, cwd_descriptor), deadline_monotonic=private_deadline)
+            finally:
+                os.close(cwd_descriptor)
+            response = _receive_frame(channel, deadline_monotonic=private_deadline)
+
+    except (OSError, TimeoutError, BootstrapFDTransportError) as exc:
+        raise StateOwnerBootstrapError(
+            "state-owner bootstrap transport failed"
+        ) from exc
+    finally:
+        channel.close()
+    return StateOwnerBootstrapCredentials.from_response(
+        response,
+        client_id=selected_client,
+        store_id=selected_store,
+        expected_process_birth_id=birth_id,
+    )
+
+
+__all__ = [
+    "MAX_STATE_OWNER_BOOTSTRAP_BYTES",
+    "STATE_OWNER_BOOTSTRAP_REQUEST_SCHEMA",
+    "STATE_OWNER_BOOTSTRAP_RESPONSE_SCHEMA",
+    "StateOwnerBootstrapCredentials",
+    "StateOwnerBootstrapError",
+    "_receive_frame",
+    "_send_frame",
+    "request_state_owner_bootstrap",
+    "validate_state_owner_bootstrap_listener",
+]

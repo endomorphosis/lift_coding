@@ -1,0 +1,21 @@
+from pathlib import Path
+import os,sys,subprocess,time,json,hashlib
+C=Path('/home/barberb/lift_coding/maintenance/terminal-token-reduction-20261007-01/checkout')
+D=Path(__file__).resolve().parent
+files=['benchmarks/agent_supervisor/container_coding/terminal_context_audit.py','benchmarks/agent_supervisor/container_coding/test_terminal_context_audit.py','benchmarks/agent_supervisor/container_coding/benchmark_comparison.py','benchmarks/agent_supervisor/container_coding/test_benchmark_comparison.py','benchmarks/agent_supervisor/container_coding/test_terminal_retrieval_codec_comparison.py','ipfs_accelerate_py/agent_supervisor/runtime/compact_code_retrieval.py','ipfs_accelerate_py/agent_supervisor/runtime/code_retrieval_wire_delivery.py','ipfs_accelerate_py/agent_supervisor/runtime/verified_code_retrieval_projection.py','ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py','ipfs_accelerate_py/agent_supervisor/runtime/router_public_instruction.py','ipfs_accelerate_py/agent_supervisor/runtime/semantic_router_translation.py','ipfs_accelerate_py/agent_supervisor/runtime/task_context_bundle.py','ipfs_accelerate_py/agent_supervisor/runtime/code_retrieval_context.py','ipfs_accelerate_py/agent_supervisor/runtime/supervisor_meta_index.py','ipfs_accelerate_py/agent_supervisor/analysis/code_symbol_vector_index.py','ipfs_accelerate_py/agent_supervisor/context/database_context.py']
+def pins():
+ return {p:{'bytes':len((C/p).read_bytes()),'sha256':hashlib.sha256((C/p).read_bytes()).hexdigest()}for p in files}
+before=pins();(D/'before.json').write_text(json.dumps(before,sort_keys=True,indent=2)+'\n')
+for p in files:
+ q=D/'sources'/p;q.parent.mkdir(parents=True,exist_ok=True);q.write_bytes((C/p).read_bytes())
+env=os.environ.copy();env['PYTHONDONTWRITEBYTECODE']='1';env['IPFS_ACCELERATE_PYTEST_SEAL_DUCKDB']=str(D/'fresh-test-seal.duckdb');env['IPFS_ACCELERATE_META_INDEX_DUCKDB']=str(D/'fresh-meta.duckdb');env['IPFS_ACCELERATE_META_INDEX_DUCKLAKE']=str(D/'fresh-meta-lake');env['PYTHONPATH']=str(C);env['HF_HUB_OFFLINE']='1';env['TRANSFORMERS_OFFLINE']='1'
+cmd=[sys.executable,'-B','-m','pytest','-p','no:cacheprovider','-c','/dev/null',*[str(C/p)for p in files[:5]if '/test_'in p],'--junitxml='+str(D/'tests.xml'),'--basetemp='+str(D/'pytest-tmp'),'-q']
+t=time.monotonic()
+with (D/'stdout.txt').open('wb')as out,(D/'stderr.txt').open('wb')as err:
+ result=subprocess.run(cmd,cwd=C,env=env,stdout=out,stderr=err)
+after=pins();receipt={'schema':'terminal-materialized-wire-audit-comparison-unit-capture@1','command':cmd,'returncode':result.returncode,'seconds':time.monotonic()-t,'before':before,'after':after,'all_source_pins_unchanged':before==after,'provider_calls':0,'native_model_training_or_prover_jobs':0,'original_indexes_used':False,'fresh_test_seal':str(D/'fresh-test-seal.duckdb')}
+(D/'receipt.json').write_text(json.dumps(receipt,sort_keys=True,indent=2)+'\n')
+print(json.dumps({'returncode':result.returncode,'seconds':receipt['seconds'],'all_source_pins_unchanged':before==after,'directory':str(D)},sort_keys=True))
+print((D/'stdout.txt').read_text()[-12000:])
+print((D/'stderr.txt').read_text()[-2000:])
+sys.exit(result.returncode)

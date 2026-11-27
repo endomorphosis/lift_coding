@@ -1,0 +1,13 @@
+"""Execute the frozen, evaluation-authored operation; no oracle is loaded."""
+import importlib.util
+import json
+from pathlib import Path
+import sys
+
+path = Path(sys.argv[1])
+spec = importlib.util.spec_from_file_location('operation', path)
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+inputs = json.load(sys.stdin)
+outputs = [module.compute(value) for value in inputs]
+json.dump({'outputs': outputs, 'completed': True, 'calls': len(inputs)}, sys.stdout)

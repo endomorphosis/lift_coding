@@ -1,0 +1,103 @@
+"""Pure public fixture joins and actual sealed-FD controls, never activation.
+
+No singleton, credential manager, namespace, provider, owner or DB is created.
+The nonce/fingerprint are generated inert test metadata; no real key is read.
+"""
+import copy
+import fcntl
+import hashlib
+import os
+
+import pytest
+import ipfs_accelerate_py.cli_runtime.grok_private_fake_credentials as helper
+
+
+@pytest.fixture
+def fixture_metadata():
+    request=dict(execution_environment='isolated-loopback',task_cid='inert-cid',task_alias='inert-alias',
+        database_attempt_id='inert-attempt',database_attempt_number=1,allocation_session_id='inert-allocation',
+        source_generation='grok-automatic-named-session/inert',receipt_directory='/inert/receipts',
+        context_path='/inert/receipts/owner-context.json',work_deadline_monotonic=100.0,
+        native_deadline_monotonic=160.0,owner_request_sha256='1'*64,
+        source_profile_pin=dict(sha256='2'*64),capsule_pin=dict(sha256='3'*64))
+    value={name:request[name]for name in ('execution_environment','task_cid','task_alias','database_attempt_id',
+        'database_attempt_number','allocation_session_id','source_generation','receipt_directory',
+        'work_deadline_monotonic','native_deadline_monotonic','owner_request_sha256')}
+    value.update(schema=helper.SCHEMA,paid_provider_calls_allowed=False,source_profile_sha256='2'*64,
+        capsule_sha256='3'*64,credential_slot='inert-fake-slot',fake_nonce='4'*32,
+        credential_fingerprint=helper.fake_fingerprint('4'*32),network_namespace=dict(device=1,inode=2))
+    context={name:value[name]for name in ('database_attempt_id','database_attempt_number','allocation_session_id',
+        'source_generation','credential_slot','credential_fingerprint','work_deadline_monotonic','native_deadline_monotonic')}
+    context.update(database_task_cid=value['task_cid'],portal_task_id=value['task_alias'],
+        request_sha256=value['owner_request_sha256'],source_bindings_sha256=value['source_profile_sha256'],capsule_sha256=value['capsule_sha256'])
+    return value,request,context
+
+
+def test_matching_fake_fixture_metadata_is_not_installation(fixture_metadata):
+    value,request,context=fixture_metadata
+    assert helper.validate_fixture_metadata(value,request,context)==value
+    assert helper._INITIALIZATION_ATTEMPTED is False and helper._RETAINED==[]
+    assert len(value['credential_fingerprint'])==16
+
+
+@pytest.mark.parametrize('field,replacement',[
+    ('schema','other'),('execution_environment','provider'),('paid_provider_calls_allowed',True),
+    ('task_cid','another'),('database_attempt_id','another'),('database_attempt_number',True),
+    ('allocation_session_id','another'),('source_generation','another'),
+    ('source_profile_sha256','f'*64),('owner_request_sha256','f'*64),
+    ('credential_slot','another-slot'),('credential_fingerprint','0'*16),('fake_nonce','5'*32),
+    ('work_deadline_monotonic',101.0),('network_namespace',dict(device=True,inode=2)),
+    ('unexpected',True)])
+def test_unjoined_public_fake_metadata_refuses_without_installing(fixture_metadata,field,replacement):
+    value,request,context=copy.deepcopy(fixture_metadata);value[field]=replacement
+    with pytest.raises(helper.PrivateFakeCredentialRefusal):
+        helper.validate_fixture_metadata(value,request,context)
+    assert helper._INITIALIZATION_ATTEMPTED is False and helper._RETAINED==[]
+
+
+def test_real_sealed_metadata_borrow_preserves_original_FD():
+    request=dict(metadata_only=True,fake_credential_fixture_pin=dict(path='/inert/metadata',bytes=1,sha256='a'*64))
+    raw=helper.canonical(request);fd=os.memfd_create('fake-fixture-inert-request',os.MFD_CLOEXEC|os.MFD_ALLOW_SEALING)
+    try:
+        os.write(fd,raw);os.lseek(fd,2,os.SEEK_SET)
+        fcntl.fcntl(fd,fcntl.F_ADD_SEALS,fcntl.F_SEAL_WRITE|fcntl.F_SEAL_GROW|fcntl.F_SEAL_SHRINK|fcntl.F_SEAL_SEAL)
+        assert helper.read_borrowed_request(fd,request,hashlib.sha256(raw).hexdigest())is None
+        assert os.lseek(fd,0,os.SEEK_CUR)==2
+        with pytest.raises(helper.PrivateFakeCredentialRefusal):
+            helper.read_borrowed_request(fd,dict(request,metadata_only=False),hashlib.sha256(raw).hexdigest())
+    finally:os.close(fd)
+
+
+def test_unsealed_metadata_cannot_authenticate_private_fixture():
+    request=dict(metadata_only=True);raw=helper.canonical(request)
+    fd=os.memfd_create('fake-fixture-unsealed',os.MFD_CLOEXEC|os.MFD_ALLOW_SEALING)
+    try:
+        os.write(fd,raw)
+        with pytest.raises(helper.PrivateFakeCredentialRefusal,match='actual_fully_sealed_private_worker_request_required'):
+            helper.read_borrowed_request(fd,request,hashlib.sha256(raw).hexdigest())
+    finally:os.close(fd)
+
+
+def test_private_fixture_reader_needs_actual_600_file(tmp_path):
+    path=tmp_path/'inert-metadata.json';raw=helper.canonical(dict(metadata_only=True));path.write_bytes(raw);path.chmod(0o600)
+    pin=dict(path=str(path),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+    assert helper.read_pin(pin)==raw
+    path.chmod(0o644)
+    with pytest.raises(helper.PrivateFakeCredentialRefusal,match='owned_600_private_fixture_required'):
+        helper.read_pin(pin)
+
+
+@pytest.mark.parametrize('observed,accepted',[
+    (96.999,True),(97.0,False),(99.0,False),(100.0,False),
+    (True,False),(float('inf'),False),(float('nan'),False)])
+def test_original_work_margin_boundary_never_admits_late_metadata(observed,accepted):
+    # Pure observed-clock metadata, with no fake clock provider or owner/
+    # manager capability. The live wrapper samples actual time.monotonic().
+    if accepted:
+        assert helper.validate_original_work_boundary(work_deadline_monotonic=100.0,
+            native_deadline_monotonic=160.0,observed_monotonic=observed)is None
+    else:
+        with pytest.raises(helper.PrivateFakeCredentialRefusal):
+            helper.validate_original_work_boundary(work_deadline_monotonic=100.0,
+                native_deadline_monotonic=160.0,observed_monotonic=observed)
+    assert helper._INITIALIZATION_ATTEMPTED is False and helper._RETAINED==[]

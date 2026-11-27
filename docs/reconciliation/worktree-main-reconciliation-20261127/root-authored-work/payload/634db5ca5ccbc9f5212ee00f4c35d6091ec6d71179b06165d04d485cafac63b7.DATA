@@ -1,0 +1,105 @@
+{
+  "basis": "/home/barberb/lift_coding/maintenance/terminal-dispatch-evidence-20261014-01/improvement-status-01.json",
+  "completion_authority": false,
+  "current_evidence": {
+    "full_terminal_bench_harness_used": false,
+    "repository_under_test_source_modules": 3,
+    "selected_native_cases": 6,
+    "selected_tests": 1312,
+    "signed_native_dispatch_joins": true,
+    "training_steps": 0
+  },
+  "execution_authority": false,
+  "full_task_satisfaction": false,
+  "milestones": [
+    {
+      "acceptance": [
+        "Real replay refused with no additional authorized birth, event or refund.",
+        "Coding receipt-emitter origin independently joins the exact observed worker."
+      ],
+      "name": "Complete native provenance and fault coverage",
+      "work": [
+        "Qualify same-wrapper nonce replay from the genuine registered wrapper process using an explicitly bounded fixture; retain original claim/fence/ACK rules.",
+        "Authenticate coding-observation receipt bytes from the observed worker PID/birth using kernel-authenticated transport and the original input/event binding.",
+        "Preserve signed released/refused/unknown outcomes without reconstructing live authority from public records."
+      ]
+    },
+    {
+      "acceptance": [
+        "Concurrent owners cannot double-admit or refund an already reserved event.",
+        "Crash/restart and stale-fence tests exercise actual workers and durable transactions."
+      ],
+      "name": "Durable repository and task accounting",
+      "work": [
+        "Use transactional DuckDB for authoritative event reservations and immutable state transitions; project query/history metadata into DuckLake.",
+        "Key events and proof records by task/attempt/run/source-head and canonical material digests; persist conservative charge through crashes and unknown outcomes.",
+        "Recover only through fresh native ownership, fencing and source checks; exported snapshots remain data only."
+      ]
+    },
+    {
+      "acceptance": [
+        "Multiple real Terminal Bench repositories rebuild and update deterministically.",
+        "Every retrieved fact/proof joins current source; unsupported semantics remain explicit unknowns."
+      ],
+      "name": "Repository-scale codebase IR and proof index",
+      "work": [
+        "Scan each repository under test from an exact versioned source inventory and incrementally invalidate changed source units and dependent proofs.",
+        "Hydrate AST, KG, vectors, contracts, call/dependency edges, supported semantics, residuals, tests and provenance with explicit schemas.",
+        "Store proof statements, assumptions, source/compiler/prover versions and certificates separately from retrieval embeddings."
+      ]
+    },
+    {
+      "acceptance": [
+        "Plans replay against the same source and reject stale or mismatched facts.",
+        "Metadata-family census never substitutes for logic-compiler coverage or source semantics."
+      ],
+      "name": "Grounded intent IR to symbolic plans",
+      "work": [
+        "Resolve intent requirements against current indexed symbols, contracts, dependencies and proof obligations.",
+        "Use vector retrieval to propose candidates, then check structural and symbolic joins against the current head.",
+        "Project supported logic families through capability-specific compilers and check Lean artifacts; record unsupported families and unproved obligations."
+      ]
+    },
+    {
+      "acceptance": [
+        "Nonzero optimizer updates and reproducible learned checkpoint changes.",
+        "Held-out reconstruction, contract/intent recall and planning usefulness measured against deterministic extraction and untrained controls."
+      ],
+      "name": "Genuine online autoencoder training",
+      "work": [
+        "Create task-exclusive training/validation/evaluation manifests from Terminal Bench repositories and typed codebase IR; avoid hidden-test leakage.",
+        "Train actual encoder/decoder parameters under existing resource and budget controls; retain optimizer steps, checkpoints, objective, seeds and held-out metrics.",
+        "Treat learned decoding as a candidate representation until independently checked by supported symbolic lowering and source/proof joins."
+      ]
+    },
+    {
+      "acceptance": [
+        "Source/model equivalence proved only for certified supported fragments.",
+        "Convergence conclusions identify the exact objective and assumptions; loss decrease alone never proves semantics or full task satisfaction."
+      ],
+      "name": "Source equivalence and convergence qualifications",
+      "work": [
+        "Define operational source semantics and supported AST/IR lowerings, with explicit assumptions and residual unsupported constructs.",
+        "Check source-to-IR and IR-to-logic preservation certificates with Lean for each supported fragment.",
+        "Separate empirical loss convergence from formal optimizer convergence; state objective, numerical model and theorem assumptions, and independently validate the actual training trace."
+      ]
+    },
+    {
+      "acceptance": [
+        "Reduced total task tokens with held-out task acceptance maintained under the same runner/model/limits.",
+        "Local tokenizer counts, provider usage, billing savings and proof of task satisfaction remain separate claims."
+      ],
+      "name": "Whole-task context and token reduction",
+      "work": [
+        "Run the actual Terminal Bench harness and full supervisor entrypoint on task-held-out paired baseline and compressed conditions.",
+        "Compare indexed retrieval, semantic capsules, dictionary aliases and code minification with exact instructions, source bindings and proof metadata retained.",
+        "Count all planning/coding inputs, history, expansions, retries, outputs and cache setup; measure task success and provider usage when available."
+      ]
+    }
+  ],
+  "proof_authority": false,
+  "schema": "terminal-codebase-intent-ir-improvement-plan@1",
+  "scope": "Ground repository intent in versioned codebase IR, compress supervisor context, and qualify learned models and proofs separately.",
+  "source_to_model_equivalence_proved": false,
+  "training_convergence_proved": false
+}

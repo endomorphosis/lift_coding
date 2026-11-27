@@ -1,0 +1,53 @@
+"""Public-only controls; authored source mutations are not claimed repairs."""
+import argparse,hashlib,importlib.util,json,os,subprocess,sys
+from pathlib import Path
+H=Path(__file__).resolve().parent;sys.path.insert(0,str(H));import repository_runtime_v1 as R
+spec=importlib.util.spec_from_file_location('controller',H/'repository_controller_v1.py');controller=importlib.util.module_from_spec(spec);spec.loader.exec_module(controller);C=controller.C
+
+def main():
+ ap=argparse.ArgumentParser();ap.add_argument('--profile',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);args=ap.parse_args();out=args.output.resolve();out.mkdir(exist_ok=False);profile=json.loads(args.profile.read_text());checks=[]
+ def check(name,condition):
+  checks.append({'name':name,'passed':bool(condition)})
+  if not condition: raise AssertionError(name)
+ def rejects(name,fn):
+  try: fn()
+  except (ValueError,TypeError,KeyError): check(name,True)
+  else: check(name,False)
+ tasks=profile['tasks'];old=tasks['psf__requests-5414'];new=tasks['psf__requests-6028'];before=R.inventory(old['source_root'])
+ for key,task in tasks.items():
+  body=Path(task['objective_path']).read_bytes();check(key+'_raw_objective',R.sha(body)==task['objective_sha256']);check(key+'_crlf_present',b'\r\n' in body);check(key+'_normalization_would_differ',R.sha(Path(task['objective_path']).read_text().encode())!=task['objective_sha256']);check(key+'_complete_public_inventory',R.inventory(task['source_root'])['tree_sha256']==task['public_base_tree_sha256'])
+  sources=R.lexical_sources(task['source_root'],R.text(task['objective_path']),3,48000);messages=controller.messages_for(R.text(task['objective_path']),sources,[],{'status':'completed','passed':False,'designated_total':131 if key.endswith('5414') else 187,'designated_status_counts':{}})
+  check(key+'_raw_fallback_message_identity',C.canonical(messages)==C.canonical(controller.messages_for(R.text(task['objective_path']),sources,[],{'status':'completed','passed':False,'designated_total':131 if key.endswith('5414') else 187,'designated_status_counts':{}})))
+  provider=json.loads(Path(profile['provider']['profile_path']).read_text());wire={'model':provider['model'],'messages':messages,'max_tokens':provider['max_output_tokens'],'reasoning_effort':provider['reasoning_effort'],'stream':False,'response_format':provider['response_format']};check(key+'_initial_wire_within_bound',len(C.canonical(wire))<=provider['max_request_bytes']);(out/(key+'_initial_messages.json')).write_bytes(C.canonical(messages)+b'\n')
+ unchanged=next(r['path'] for r in before['entries'] if r['path'].startswith('requests/') and r['path'].endswith('.py') and (Path(new['source_root'])/r['path']).read_bytes()==(Path(old['source_root'])/r['path']).read_bytes())
+ source=R.text(Path(old['source_root'])/unchanged);first=source.splitlines(keepends=True)[0];edits=[{'path':unchanged,'old':first,'new':'# Authored carry qualification only.\n'+first}]
+ patch=R.patch_for(old['source_root'],R.replacement_edits(old['source_root'],edits));accepted=out/'authored_accepted';R.materialize(old['source_root'],accepted,patch);parent={'accepted':True,'instance_id':'psf__requests-5414','accepted_tree_path':str(accepted),'accepted_tree_sha256':R.inventory(accepted)['tree_sha256']}
+ event={'instance_id':'psf__requests-6028'};merged_dir=out/'carry';merged_dir.mkdir();result=R.advance_source(profile,event,parent,merged_dir/'tree');(out/'carry_transition.json').write_text(json.dumps(result,indent=2)+'\n')
+ check('saved_candidate_exact_replay',R.materialize(old['source_root'],accepted,patch)==R.inventory(accepted))
+ preserved=(accepted/unchanged).read_bytes();(accepted/unchanged).write_bytes(preserved+b'# altered retained bytes\n')
+ rejects('saved_candidate_drift_rejected',lambda:R.materialize(old['source_root'],accepted,patch));(accepted/unchanged).write_bytes(preserved)
+ check('actual_git_merge_no_conflicts',result['kind']=='actual_git_three_way_merge' and not result['conflicts']);check('own_accepted_change_carried',R.text(merged_dir/'tree'/unchanged).startswith('# Authored carry qualification only.\n'))
+ cumulative=R.cumulative_patch(new['source_root'],merged_dir/'tree');roundtrip=out/'scorer_patch_roundtrip';R.materialize(new['source_root'],roundtrip,cumulative);check('merged_source_exact_patch_roundtrip',R.inventory(roundtrip)==R.inventory(merged_dir/'tree'))
+ for row in R.inventory(new['source_root'])['entries']:
+  if row['path']!=unchanged: check('upstream_file_retained:'+row['path'],(merged_dir/'tree'/row['path']).read_bytes()==(Path(new['source_root'])/row['path']).read_bytes())
+ changed=next(r['path'] for r in before['entries'] if r['path'].startswith('requests/') and r['path'].endswith('.py') and (Path(new['source_root'])/r['path']).read_bytes()!=(Path(old['source_root'])/r['path']).read_bytes())
+ old_lines=R.text(Path(old['source_root'])/changed).splitlines(keepends=True);new_lines=R.text(Path(new['source_root'])/changed).splitlines(keepends=True)
+ import difflib
+ opcode=next(x for x in difflib.SequenceMatcher(a=old_lines,b=new_lines).get_opcodes() if x[0] in ('replace','delete') and x[2]>x[1]);i=opcode[1];mutated=''.join(old_lines[:i])+('# Authored conflicting change only.\n')+''.join(old_lines[i+1:])
+ conflict_source=out/'authored_conflict';R.materialize(old['source_root'],conflict_source,R.patch_for(old['source_root'],[{'path':changed,'source':mutated}]));conflict_parent={**parent,'accepted_tree_path':str(conflict_source),'accepted_tree_sha256':R.inventory(conflict_source)['tree_sha256']};conflict_dir=out/'conflict';conflict_dir.mkdir();conflict=R.advance_source(profile,event,conflict_parent,conflict_dir/'tree');(out/'conflict_transition.json').write_text(json.dumps(conflict,indent=2)+'\n');check('actual_git_conflicts_retained',changed in conflict['conflicts']);check('conflict_markers_retained','<<<<<<< ' in R.text(conflict_dir/'tree'/changed))
+ failed_dir=out/'failed_predecessor';failed=R.advance_source(profile,event,{'accepted':False},failed_dir);check('failed_parent_advances_only_public_input',not failed['prior_accepted'] and failed['prior_outcome_preserved'] and R.inventory(failed_dir)==R.inventory(new['source_root']))
+ rejects('path_traversal',lambda:R.production(accepted,'requests/../setup.py'));rejects('tests_disallowed',lambda:R.production(accepted,'tests/test_requests.py'));rejects('duplicate_old_text',lambda:R.replacement_edits(accepted,[{'path':unchanged,'old':'\n','new':'\n# no\n'}]));rejects('missing_old_text',lambda:R.replacement_edits(accepted,[{'path':unchanged,'old':'missing_unseen_literal_xyz','new':'x'}]));rejects('unbounded_edit_count',lambda:R.replacement_edits(accepted,edits*9))
+ trap='PRIVATE_ORACLE_SENTINEL_4931';projected=controller.messages_for('public issue',[],[],{'status':'completed','passed':False,'designated_total':1,'designated_status_counts':{'FAILED':1},'raw_log':trap,'test_names':[trap],'reference_patch':trap,'native_report':{trap:'FAILED'}})
+ check('private_grade_log_patch_fields_excluded',trap not in C.canonical(projected).decode())
+ ledger_dir=out/'effect_controls';ledger=C.Ledger(ledger_dir);count=[]
+ value=ledger.effect('q','counted',{'n':1},lambda d:(count.append(1) or {'value':1}));again=ledger.effect('q','counted',{'n':1},lambda d:(count.append(1) or {'value':2}));check('terminal_effect_not_reexecuted',len(count)==1 and value==again)
+ def uncertain(directory):
+  (directory/'actual_side_effect.txt').write_text('effect happened\n');raise RuntimeError('authored interruption before receipt')
+ try: ledger.effect('q','unknown',{'n':2},uncertain)
+ except RuntimeError: pass
+ try: ledger.effect('q','unknown',{'n':2},lambda d: {'unexpected':'repeated'})
+ except C.UnknownEffect: check('unknown_effect_not_repeated',True)
+ else: check('unknown_effect_not_repeated',False)
+ rejects('effect_request_mutation_rejected',lambda:ledger.effect('q','counted',{'n':3},lambda d:None));ledger.db.close();check('pristine_old_source_unchanged',R.inventory(old['source_root'])==before)
+ (out/'summary.json').write_text(json.dumps({'schema':'ns-public-repository-runtime-controls@1','checks':checks,'passed':all(c['passed'] for c in checks),'provider_calls':0,'native_scoring_calls':0,'authored_mutations_are_not_repair_successes':True,'profile_sha256':R.sha(args.profile.read_bytes())},indent=2)+'\n');print(json.dumps({'checks':len(checks),'passed':True,'provider_calls':0}))
+if __name__=='__main__': main()

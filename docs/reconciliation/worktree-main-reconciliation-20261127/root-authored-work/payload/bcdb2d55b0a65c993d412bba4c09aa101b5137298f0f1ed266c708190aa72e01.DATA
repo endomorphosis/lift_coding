@@ -1,0 +1,218 @@
+"""Root-invoked offline native-view measurement; no provider or socket calls.
+
+Root owns source guards, finite resources, normal package initialization and
+release. Case bodies belong in a private external /tmp parent, never Git.
+"""
+from __future__ import annotations
+
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import stat
+import time
+
+
+def _json(value):
+    return json.dumps(value, sort_keys=True, ensure_ascii=False,
+        separators=(",", ":"), allow_nan=False).encode("utf-8")
+
+
+def _sha(raw):
+    return sha256(raw).hexdigest()
+
+
+def _write_new(path, raw):
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+    try:
+        remaining = memoryview(raw)
+        while remaining:
+            size = os.write(fd, remaining)
+            if size < 1:
+                raise ValueError("private write refused")
+            remaining = remaining[size:]
+    finally:
+        os.close(fd)
+
+
+def _read_private(path, limit=2_000_000):
+    fd = os.open(path, os.O_RDONLY | os.O_NONBLOCK | os.O_NOFOLLOW)
+    try:
+        before = os.fstat(fd)
+        if (not stat.S_ISREG(before.st_mode) or before.st_nlink != 1
+                or before.st_uid != os.getuid() or before.st_mode & 0o077 or before.st_size > limit):
+            raise ValueError("private case file refused")
+        chunks, size = [], 0
+        while size <= limit:
+            chunk = os.read(fd, min(65536, limit + 1 - size))
+            if not chunk:
+                break
+            chunks.append(chunk)
+            size += len(chunk)
+        after = os.fstat(fd)
+        witness = lambda info: (info.st_dev, info.st_ino, info.st_mode, info.st_nlink,
+            info.st_uid, info.st_gid, info.st_size, info.st_mtime_ns, info.st_ctime_ns)
+        if size != before.st_size or size > limit or witness(before) != witness(after):
+            raise ValueError("private case file changed")
+        return b"".join(chunks)
+    finally:
+        os.close(fd)
+
+
+def _case_root(value):
+    root = Path(value)
+    if (not root.is_absolute() or root.resolve() != root or not root.is_relative_to(Path("/tmp"))
+            or root == Path("/tmp") or any((parent / ".git").exists() for parent in (root, *root.parents))):
+        raise ValueError("private external temporary case required")
+    parent = root.parent.stat()
+    if (not stat.S_ISDIR(parent.st_mode) or parent.st_uid != os.getuid() or parent.st_mode & 0o077):
+        raise ValueError("root-created private case parent required")
+    if not root.exists():
+        root.mkdir(mode=0o700)
+    info = root.stat()
+    if not stat.S_ISDIR(info.st_mode) or info.st_uid != os.getuid() or info.st_mode & 0o077:
+        raise ValueError("private case root refused")
+    return root
+
+
+def _descriptor(encoded, repository):
+    from ipfs_accelerate_py.agent_supervisor.runtime import worker_source_client as source
+    identity = source.process_identity(os.getpid())
+    now = time.monotonic_ns()
+    return dict(schema=source.DESCRIPTOR_SCHEMA_V4, session_id="a" * 32,
+        owner_uid=identity["uid"], worker_uid=identity["uid"] + 1,
+        owner_pid=os.getpid(), owner_start_time_ticks=identity["start_time_ticks"],
+        workspace=str(repository), boundary_manifest_sha256="e" * 64,
+        socket_path="/offline-authored-no-socket/source.sock", socket_device=1, socket_inode=2,
+        issued_monotonic_ns=now - 1_000_000_000, expires_monotonic_ns=now + 30_000_000_000,
+        max_requests=64, max_total_response_bytes=524288,
+        proof_authority=False, execution_authority=False, completion_authority=False,
+        source_edit_mode="disabled", view_policy_binding_sha256=None,
+        source_scope_sha256="f" * 64, semantic_evidence_mode="selected-capsules@1",
+        **source.semantic_binding(encoded, "identity@1"))
+
+
+def _prepare(repository):
+    from ipfs_accelerate_py.agent_supervisor.context.context_compiler import (
+        ContextCompiler, build_text_context_references, render_context_capsule,
+    )
+    from ipfs_accelerate_py.agent_supervisor.context.context_contracts import ContextBudget
+    from ipfs_accelerate_py.agent_supervisor.runtime.semantic_context_runtime import prepare_semantic_context
+    source = "# Literal common_bindings and $semantic_ref remain exact source.\n"
+    source += "ROOT_TEXT = 'error, cancelled, inconclusive, unsupported; café'\n"
+    for index in range(6):
+        source += (f"\ndef authored_function_{index}(value):\n"
+            "    '''The literal schema and source_cid are not metadata slots.'''\n"
+            f"    return value + {index}\n")
+    _write_new(repository / "module.py", source.encode())
+    output = repository / ".runtime/semantic"
+    prepare_semantic_context(repository=repository, paths=["module.py"],
+        required_raw_paths=["module.py"], objective="Review authored functions.",
+        task_id="AUTHORED-WORKING-SET-TASK", output=output)
+    artifact = output / "worker-context.json"
+    references = build_text_context_references(artifact.read_text(),
+        reference_prefix="semantic-context", kind="semantic-context",
+        path=artifact.relative_to(repository).as_posix(), repository_id="repo:authored",
+        tree_id="tree:authored", required=True, chunk_bytes=1201)
+    compiled = ContextCompiler(ContextBudget(max_input_tokens=131072, max_items=128,
+        max_item_bytes=16384, max_serialized_bytes=262144)).compile(
+        repository_id="repo:authored", tree_id="tree:authored",
+        objective_id="AUTHORED-WORKING-SET-TASK", objective_revision="sha256:task",
+        policy_id="policy:authored", policy_revision="sha256:policy",
+        caller="supervisor:authored", stage="implementation",
+        goal={"id": "AUTHORED-WORKING-SET-TASK"},
+        authority={"mode": "candidate_only", "completion_authority": False},
+        scope={"allowed_paths": ["module.py"]},
+        acceptance={"criteria": ["pending native validation"]}, evidence=references)
+    prompt = render_context_capsule(compiled.capsule) + "\nLiteral authorized guidance: common_bindings, $semantic_ref.\n"
+    _write_new(repository / "native-prompt.txt", prompt.encode())
+    return source.encode(), prompt
+
+
+def run_experiment(output_dir, case_root, provider, model):
+    """Reuse one genuine authored case for independent explicitly named routes."""
+    from ipfs_accelerate_py.agent_supervisor.runtime import semantic_router_translation as codec
+    from ipfs_accelerate_py.agent_supervisor.runtime import semantic_working_set as working
+    from ipfs_accelerate_py.agent_supervisor.runtime.automatic_prompt_tokenizer import resolve_prompt_tokenizer
+    from ipfs_accelerate_py.agent_supervisor.runtime.router_implementation_runner import render_model_prompt, select_model_prompt
+    from ipfs_accelerate_py.agent_supervisor.runtime.semantic_working_set_selection import select_complete_working_set
+    from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import public_replay_without_metadata
+
+    repository = _case_root(case_root)
+    output = Path(output_dir)
+    if output.resolve() != output or output.exists():
+        raise ValueError("fresh absolute output directory required")
+    output.mkdir(mode=0o700)
+    with public_replay_without_metadata():
+        marker_path = repository / "case.json"
+        if marker_path.exists():
+            marker = json.loads(_read_private(marker_path))
+            source = _read_private(repository / "module.py")
+            prompt = _read_private(repository / "native-prompt.txt").decode()
+            if marker != dict(schema="authored-working-set-case@1", source_sha256=_sha(source),
+                    native_prompt_sha256=_sha(prompt.encode())):
+                raise ValueError("private case identity differs")
+        else:
+            source, prompt = _prepare(repository)
+            _write_new(marker_path, _json(dict(schema="authored-working-set-case@1",
+                source_sha256=_sha(source), native_prompt_sha256=_sha(prompt.encode()))))
+        encoded = codec.encode_semantic_router_prompt(prompt=prompt, repository=repository)
+        descriptor_path = repository / "descriptor.json"
+        if descriptor_path.exists():
+            descriptor = json.loads(_read_private(descriptor_path))
+        else:
+            descriptor = _descriptor(encoded, repository)
+            _write_new(descriptor_path, _json(descriptor))
+        view = working.project_semantic_working_set(encoded, descriptor)
+        capsules = json.loads(codec._prompt_parts(encoded.native_prompt)[4])["capsules"]
+        restored = working.restore_semantic_working_set(provider_prompt=view.provider_prompt,
+            receipt=view.receipt, encoded=encoded, descriptor=descriptor,
+            resolver=lambda reference: _json(capsules[reference["capsule_index"]]))
+        if restored != encoded.provider_prompt or codec.restore_semantic_router_prompt(
+                provider_prompt=restored, table=encoded.table, repository=repository) != prompt:
+            raise ValueError("native fixture inverse differs")
+        suffix = "\nPublic requirement: preserve current source and unresolved obligations; no task acceptance is established.\n"
+        workspace = Path("/offline/working-set-fixture")
+        native, _ = render_model_prompt(prompt=prompt + suffix, purpose="coding", workspace=workspace)
+        semantic, _ = render_model_prompt(prompt=encoded.provider_prompt + suffix,
+            purpose="coding", workspace=workspace, semantic_transport=True)
+        deferred, _ = render_model_prompt(prompt=view.provider_prompt + suffix,
+            purpose="coding", workspace=workspace, semantic_transport=True)
+        legacy = working.select_working_set(view, semantic, deferred)
+        counter, provenance = resolve_prompt_tokenizer(provider=provider, model=model)
+        previous_prompt, previous = select_model_prompt(native_complete_prompt=native,
+            candidate_complete_prompt=legacy.provider_prompt, provider=provider, model=model, token_counter=counter)
+        selected = select_complete_working_set(view=view, native_complete_prompt=native,
+            semantic_complete_prompt=semantic, working_set_complete_prompt=deferred,
+            provider=provider, model=model, token_counter=counter)
+        for name, text in (("raw-native", native), ("semantic-full", semantic), ("working-set", deferred)):
+            target = repository / (name + "-complete.txt")
+            if target.exists():
+                if _read_private(target) != text.encode():
+                    raise ValueError("retained complete input changed")
+            else:
+                _write_new(target, text.encode())
+        closing = codec.encode_semantic_router_prompt(prompt=prompt, repository=repository)
+        if closing.provider_prompt != encoded.provider_prompt or _read_private(repository / "module.py") != source:
+            raise ValueError("closing native source changed")
+    old_candidate = "working_set" if legacy.selected_mode == working.PROFILE else "semantic_full"
+    old_effective = "raw_native" if previous["selected_representation"] == "native" else old_candidate
+    report = dict(schema="working-set-native-fixture-measurement@1", provider=provider, model=model,
+        case_source_sha256=_sha(source), native_prompt_sha256=_sha(prompt.encode()),
+        source_case="authored-public-six-function-fixture", genuine_native_producer=True,
+        exact_native_capsule_and_transport_inverse=True, metadata_side_effects_suppressed=True,
+        old_byte_selected_representation=old_candidate, old_effective_representation=old_effective,
+        old_candidate_inventory=["raw_native", old_candidate],
+        original_semantic_candidate_omitted_by_old_path=old_candidate == "working_set",
+        old_selected_complete_sha256=_sha(previous_prompt.encode()), old_prompt_selection=previous,
+        token_aware_selection=selected.receipt, tokenizer_provenance=provenance,
+        selected_representation=selected.selected_representation,
+        selected_complete_sha256=_sha(selected.selected_prompt.encode()),
+        physical_endpoint_authenticated=False, broker_connected=False,
+        actual_MCP_delivery=False, provider_invoked=False, native_history=False,
+        source_obligations_discharged=False, task_acceptance=False,
+        whole_session_token_savings=None, execution_authority=False, completion_authority=False)
+    raw = _json(report) + b"\n"
+    _write_new(output / "report.json", raw)
+    return dict(schema="working-set-native-fixture-run@1", report_sha256=_sha(raw), report_bytes=len(raw),
+        provider_invoked=False, native_history=False, task_acceptance=False)

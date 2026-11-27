@@ -1,0 +1,41 @@
+#!/usr/bin/env python3
+"""Reproduce the isolated package variant without modifying source hardlinks."""
+import argparse
+import hashlib
+import os
+from pathlib import Path
+import shutil
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[5]
+EXPECTED = "41e7ffb908a69940de2e847aeb066aa39db659bf2d5ebbe3934b7341c5bfc83c"
+RESULT = "cbc2a05f625554ec9ff486e4f59ac00b9531245358ebc5143bc0896d76efc6be"
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output", type=Path, default=HERE / "runtime_merkle_index_v1")
+    args = parser.parse_args()
+    if args.output.exists(): raise SystemExit("variant exists; choose a fresh directory")
+    original = ROOT / ".worktrees/agent-supervisor-efficiency-and-state-hardening-v1/ipfs_datasets_py/ipfs_datasets_py"
+    relative = Path("logic/software_contracts/semantic_state/merkle.py")
+    before = (original / relative).read_bytes()
+    assert hashlib.sha256(before).hexdigest() == EXPECTED
+    source = before.decode()
+    needle = "    for link in dag.links:\n        payload = _load(link.link_cid)"
+    assert source.count(needle) == 1
+    changed = source.replace(needle, "    # Immutable DAG nodes: compute this membership index once per verification.\n    node_cids = {node.node_cid for node in dag.symbol_nodes}\n    for link in dag.links:\n        payload = _load(link.link_cid)")
+    needle = "        # Layering: links must not reference node CIDs.\n        node_cids = {node.node_cid for node in dag.symbol_nodes}\n"
+    assert changed.count(needle) == 1
+    changed = changed.replace(needle, "        # Layering: links must not reference node CIDs.\n")
+    assert hashlib.sha256(changed.encode()).hexdigest() == RESULT
+    args.output.mkdir(parents=True)
+    shutil.copytree(original, args.output / "ipfs_datasets_py", copy_function=os.link, symlinks=True, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+    target = args.output / "ipfs_datasets_py" / relative
+    temporary = target.with_suffix(".py.new")
+    temporary.write_text(changed)
+    os.replace(temporary, target)
+    assert (original / relative).read_bytes() == before
+    assert os.stat(original / relative).st_ino != os.stat(target).st_ino
+    print(args.output.resolve())
+
+if __name__ == "__main__": main()

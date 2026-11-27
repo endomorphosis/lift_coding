@@ -1,0 +1,147 @@
+#!/usr/bin/env python3
+"""Isolate original frontend observation storage without editing older profiles."""
+import difflib
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+
+HERE = Path(__file__).resolve().parent
+def sha(body): return hashlib.sha256(body).hexdigest()
+
+def main():
+    source = HERE / "runtime_resolution_reuse_v6/ipfs_datasets_py"
+    destination = HERE / "runtime_frontend_observations_v7"
+    if destination.exists(): raise SystemExit("preserve previous source profile")
+    relative = Path("logic/software_contracts/semantic_index/scanner.py")
+    before = (source / relative).read_text(); after = before
+    def replace(old, new, count=1):
+        nonlocal after
+        assert after.count(old) == count, (old, after.count(old))
+        after = after.replace(old, new)
+    replace('from ipfs_datasets_py.logic.software_contracts.semantic_index.identity import (', '''from ipfs_datasets_py.logic.software_contracts.semantic_index.frontend_observations import (
+    FrontendObservationError, decode_observations, encode_observations, validate_profile,
+)
+from ipfs_datasets_py.logic.software_contracts.semantic_index.identity import (''')
+    replace('    last_reuse_diagnostics: ScanReuseDiagnostics | None = field(default=None, repr=False)', '''    last_reuse_diagnostics: ScanReuseDiagnostics | None = field(default=None, repr=False)
+    frontend_profile_sha256: str | None = None
+    last_frontend_observations: bytes | None = field(default=None, init=False, repr=False)
+    last_frontend_observation_diagnostics: dict[str, Any] | None = field(default=None, init=False, repr=False)''')
+    replace('''        previous_state: RepositoryState | None = None,
+        snapshot: RepositorySnapshot | None = None,''', '''        previous_state: RepositoryState | None = None,
+        previous_frontend_observations: bytes | None = None,
+        expected_previous_frontend_observations_cid: str | None = None,
+        snapshot: RepositorySnapshot | None = None,''')
+    replace('return self.scan_snapshot(current, sources, previous_state=previous_state, unavailable=unavailable)', '''return self.scan_snapshot(current, sources, previous_state=previous_state, unavailable=unavailable,
+                                  previous_frontend_observations=previous_frontend_observations,
+                                  expected_previous_frontend_observations_cid=expected_previous_frontend_observations_cid)''')
+    replace('''        previous_state: RepositoryState | None = None,
+        unavailable: Mapping[str, str] | None = None,''', '''        previous_state: RepositoryState | None = None,
+        previous_frontend_observations: bytes | None = None,
+        expected_previous_frontend_observations_cid: str | None = None,
+        unavailable: Mapping[str, str] | None = None,''')
+    replace('''        previous_by_key: dict[tuple[str, str, str], SymbolRecord] = {}''', '''        self.last_frontend_observations = None
+        self.last_frontend_observation_diagnostics = None
+        retained_frontend = {}
+        observations = {}
+        observation_reused_paths = []
+        observation_reused_edges = 0
+        observation_analyzed_edges = 0
+        if self.frontend_profile_sha256 is not None:
+            validate_profile(self.frontend_profile_sha256)
+        if (previous_frontend_observations is None) != (expected_previous_frontend_observations_cid is None):
+            raise FrontendObservationError("observation bytes and expected producer CID must be supplied together")
+        if previous_frontend_observations is not None:
+            if accepted_previous is None or self.frontend_profile_sha256 is None:
+                raise FrontendObservationError("accepted parent state and explicit runtime profile required for observations")
+            retained_frontend = decode_observations(
+                previous_frontend_observations,
+                expected_cid=expected_previous_frontend_observations_cid,
+                previous_state=accepted_previous, namespace=self.namespace,
+                profile_sha256=self.frontend_profile_sha256,
+            )
+        previous_by_key: dict[tuple[str, str, str], SymbolRecord] = {}''')
+    replace('''                if accepted_previous is not None and entry.source_cid is not None:
+                    prior_symbols = _reusable_path_symbols(''', '''                original = retained_frontend.get(path)
+                if original is not None and original["source_cid"] == entry.source_cid:
+                    if original["diagnostics"]:
+                        artifacts.append(ArtifactRecord(
+                            _artifact_id(path), "python-analysis", path, entry.source_cid, "opaque",
+                            {"diagnostics": list(original["diagnostics"])},
+                        ))
+                        reused_artifact_paths.append(path)
+                    else:
+                        symbols.extend(original["symbols"])
+                        edges.extend(original["edges"])
+                        reused_symbol_ids.extend(item.stable_id for item in original["symbols"])
+                    observations[path] = original["serialized"]
+                    observation_reused_paths.append(path)
+                    observation_reused_edges += len(original["edges"])
+                    reused_paths.append(path)
+                    reused = True
+                if not reused and self.frontend_profile_sha256 is None and accepted_previous is not None and entry.source_cid is not None:
+                    prior_symbols = _reusable_path_symbols(''')
+    replace('''                    analysis = python.analyze(raw, path)
+                    analyzed_paths.append(path)''', '''                    analysis = python.analyze(raw, path)
+                    if self.frontend_profile_sha256 is not None:
+                        original_symbols = () if analysis.diagnostics else analysis.symbol_records
+                        original_edges = () if analysis.diagnostics else analysis.edges
+                        observations[path] = {"source_cid": entry.source_cid,
+                                              "symbols": [s.to_dict() for s in original_symbols],
+                                              "edges": [e.to_dict() for e in original_edges],
+                                              "diagnostics": list(analysis.diagnostics)}
+                        observation_analyzed_edges += len(original_edges)
+                    analyzed_paths.append(path)''')
+    replace('''        return RepositoryState(
+            snapshot.repository_id,''', '''        state = RepositoryState(
+            snapshot.repository_id,''')
+    replace('''            self.extractor_version,
+        )
+
+
+def scan_repository_state(''', '''            self.extractor_version,
+        )
+        if self.frontend_profile_sha256 is not None:
+            self.last_frontend_observations = encode_observations(
+                observations, state, namespace=self.namespace,
+                profile_sha256=self.frontend_profile_sha256,
+            )
+            self.last_frontend_observation_diagnostics = {
+                "observation_paths": len(observations),
+                "original_observation_reused_paths": sorted(observation_reused_paths),
+                "original_observation_reused_edges": observation_reused_edges,
+                "original_observation_analyzed_edges": observation_analyzed_edges,
+                "parent_observation_cid": expected_previous_frontend_observations_cid,
+                "output_observation_cid": cid_for_bytes(self.last_frontend_observations),
+                "output_observation_bytes": len(self.last_frontend_observations),
+                "profile_sha256": self.frontend_profile_sha256,
+            }
+        return state
+
+
+def scan_repository_state(''')
+    compile(after, str(destination / "ipfs_datasets_py" / relative), "exec")
+    observation_source = HERE / "frontend_observations_v7.py"
+    compile(observation_source.read_text(), str(observation_source), "exec")
+    destination.mkdir()
+    shutil.copytree(source, destination / "ipfs_datasets_py", copy_function=os.link,
+                    symlinks=True, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+    target = destination / "ipfs_datasets_py" / relative
+    temp = target.with_suffix(".py.new"); temp.write_text(after); os.replace(temp, target)
+    target.with_name("frontend_observations.py").write_bytes(observation_source.read_bytes())
+    assert (source / relative).read_text() == before and os.stat(source / relative).st_ino != os.stat(target).st_ino
+    (HERE / "frontend_observations_v7.patch").write_text("".join(difflib.unified_diff(before.splitlines(True), after.splitlines(True), fromfile="a/ipfs_datasets_py/" + str(relative), tofile="b/ipfs_datasets_py/" + str(relative))))
+    parent = HERE / "runtime_resolution_reuse_v6_manifest.json"
+    result = {"schema": "ns-context-native-source-variant/v7", "variant_package": str(destination / "ipfs_datasets_py"),
+              "parent_variant": str(parent), "parent_variant_sha256": sha(parent.read_bytes()),
+              "changed_file": str(relative), "original_sha256": sha(before.encode()), "variant_sha256": sha(after.encode()),
+              "new_file": str(relative.with_name("frontend_observations.py")), "new_file_sha256": sha(observation_source.read_bytes()),
+              "materializer_sha256": sha(Path(__file__).read_bytes()), "upstream_files_modified": False,
+              "change": "Optional closed producer-bound original Python symbol/edge observation sidecar; current bytes verified before per-path reuse; pytest unification and whole graph resolution recomputed. Without sidecar production/use opt-in, v6 guarded behavior retained.",
+              "trust_scope": "Expected sidecar CID must come from accepted honest producer receipt; parent state, current profile and source binding are checked, not a proof that arbitrary observations follow from source.",
+              "all_native_guards_and_source_scope_retained": True, "provider_calls": 0}
+    (HERE / "runtime_frontend_observations_v7_manifest.json").write_text(json.dumps(result, indent=2) + "\n")
+    print(json.dumps(result))
+
+if __name__ == "__main__": main()

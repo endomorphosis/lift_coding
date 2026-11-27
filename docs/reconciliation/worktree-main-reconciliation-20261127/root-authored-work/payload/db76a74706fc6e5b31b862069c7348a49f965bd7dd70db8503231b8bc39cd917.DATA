@@ -1,0 +1,208 @@
+{
+  "cache_reuse_key": [
+    "repository/tree/file/symbol identities",
+    "task CID/revision and intent watermark",
+    "objective and policy revisions",
+    "interface/schema/toolchain/environment identities",
+    "query/retrieval configuration identity",
+    "artifact/manifest digests",
+    "proof premises/translation/solver/kernel identities and declared scope"
+  ],
+  "canonical_records_to_retain_outside_prompt": [
+    "source bytes and exact tree/file/symbol versions",
+    "ASTs and source selectors",
+    "knowledge graph edges and dependency/impact closure",
+    "vector embeddings and retrieval provenance",
+    "declared contracts and open obligations",
+    "formal projections with exact translator and logic-family versions",
+    "checked proof receipts, assumptions, scope, toolchain/kernel identity and invalidation edges",
+    "codebase-IR training checkpoints and empirical evaluation records"
+  ],
+  "claims_not_established": [
+    "provider-native total token reduction",
+    "full task behavioral satisfaction from compact serialization",
+    "whole-program or arbitrary source-to-model equivalence",
+    "neural model convergence theorem"
+  ],
+  "database_roles": [
+    {
+      "component": "DuckDB",
+      "existing_sources": [
+        "runtime/supervisor_meta_index.py",
+        "context/database_context.py"
+      ],
+      "new_dispatch_integration": "proposed",
+      "role": "Local indexed catalog, task/context joins and cache lookups"
+    },
+    {
+      "component": "Quack",
+      "existing_sources": [
+        "task_sources/quack_state_client.py",
+        "task_sources/typed_state_owner.py"
+      ],
+      "role": "Typed owner access to closed state commands and transactional coordination",
+      "unrestricted_model_sql_required": false
+    },
+    {
+      "component": "DuckLake",
+      "existing_sources": [
+        "runtime/supervisor_meta_index.py"
+      ],
+      "proof_or_task_completion_authority": false,
+      "role": "Persistent observational metadata, learning-catalog and publication projections"
+    }
+  ],
+  "flow": [
+    "literal public prompt",
+    "source-spanned IntentIR requirements",
+    "join against current repository AST/symbols/contracts and indexed observations",
+    "independently checked symbolic plan and bounded proof obligations",
+    "local checked operators or unresolved residual work",
+    "bounded task capsule plus verified expansion handles",
+    "lossless compact wire projection",
+    "model candidate",
+    "native validation/publication plus independent task verifier"
+  ],
+  "invalidate_on": [
+    "changed/deleted/renamed source or impact closure",
+    "changed task/policy/query",
+    "changed assumptions, proof translator or toolchain",
+    "superseded publication or evidence watermark"
+  ],
+  "next_implementation": "Bounded required evidence dispatch, after offline task-coverage and source/impact checks, through the existing manifest/frontier interfaces.",
+  "objective": "Reduce total provider tokens per independently verified Terminal-Bench success while preserving source-grounded task requirements, proof scope and native admission.",
+  "schema": "terminal-metadata-token-reduction-plan@1",
+  "stages": [
+    {
+      "change": "Compact task-IntentIR requirements independently of semantic capsule transport",
+      "checks": [
+        "literal instruction preserved",
+        "exact canonical decode equals independently replayed native context",
+        "source spans and hashes/CID unchanged",
+        "decoding guidance and tables included in byte-benefit gate",
+        "expanded default and explicit full-indexed contract requirement",
+        "recorded transport retained through every control boundary without mixing experiment groups"
+      ],
+      "evidence": "token-reduction-summary.json",
+      "order": 1,
+      "sources": [
+        "runtime/compact_intent_requirements.py",
+        "runtime/router_public_instruction.py",
+        "runtime/router_implementation_runner.py"
+      ],
+      "status": "implemented"
+    },
+    {
+      "change": "Route required semantic/world/retrieval evidence through bounded database manifests",
+      "checks": [
+        "budgets apply after all wrappers and decoding guidance",
+        "no mandatory acceptance facts silently dropped",
+        "each expansion question and handle bound to source/tree and admissible task scope",
+        "tampered, stale, deleted and inaccessible references fail before use",
+        "absent metadata remains an explicit unresolved obligation rather than a fabricated fact"
+      ],
+      "measurements": [
+        "final complete prompt bytes/local tokenizer counts",
+        "retrieved row/byte counts and expansion calls",
+        "cold hydration and warm query cost"
+      ],
+      "order": 2,
+      "packet_contents": [
+        "admitted task and requirement/dependency/prohibition closure",
+        "exact relevant source/edit spans and impacted symbols",
+        "unresolved questions and open obligations",
+        "latest distinct failure",
+        "owner-selected exact validation commands",
+        "verified fact/proof-scope references and explicit omitted frontier"
+      ],
+      "sources": [
+        "todo_daemon/implementation_daemon.py::_semantic_implementation_references",
+        "todo_daemon/implementation_daemon.py::_code_retrieval_implementation_references",
+        "context/database_context.py::DatabaseContextManifest",
+        "context/database_context.py::LLMContextFrontier",
+        "context/context_compiler.py::ContentAddressedContextStore"
+      ],
+      "status": "proposed"
+    },
+    {
+      "change": "Avoid residual model calls through reusable checked local operators and bounded proof-cache queries",
+      "checks": [
+        "proof states distinguish proposed, translated, kernel checked, unknown and invalidated",
+        "proof hits bind premises and semantic scope, not just vector similarity",
+        "supported effects and impact closure checked independently before native publication",
+        "unsupported or unproved effects keep the existing residual model route"
+      ],
+      "measurements": [
+        "eligible proof hits and invalidations",
+        "actual avoided model calls",
+        "provider tokens including all residual attempts",
+        "independent task success"
+      ],
+      "order": 3,
+      "sources": [
+        "proof/proof_scope_index.py",
+        "proof/doctor_proof_cache.py",
+        "planning/intent_symbolic_planning.py",
+        "semantic_state/context_pack_selector.py"
+      ],
+      "status": "proposed"
+    },
+    {
+      "change": "Train codebase-IR encoders to nominate relevant facts/operators and compact evidence, with explicit semantic qualification",
+      "checks": [
+        "preserve canonical AST/source/contracts as ground truth",
+        "split held-out functions/tasks/repository revisions before training",
+        "track reconstruction and retrieval error separately from task/proof results",
+        "neural latent codes and decreasing loss grant no translation/proof authority",
+        "formal family projections require typed translations and pinned Lean/kernel checks where supported",
+        "source-to-model equivalence requires independently proved supported semantics and explicit unsupported residuals",
+        "any convergence theorem names its model, objective, assumptions and certified optimization steps; empirical loss decrease alone is insufficient"
+      ],
+      "measurements": [
+        "cold training cost",
+        "held-out retrieval recall and reconstruction",
+        "supported semantic projection/proof coverage",
+        "total tokens and verified task success"
+      ],
+      "order": 4,
+      "status": "proposed"
+    },
+    {
+      "change": "Build a fresh pinned runtime and evaluate compact and bounded-retrieval treatments",
+      "checks": [
+        "offline exact historical replay before any live inference",
+        "retain failed setups and incomplete usage as unknown, never zero",
+        "distinguish exact same-context comparisons from fresh-ID or independently planned trials",
+        "include planning, coding, tool-heavy iterations and failed/retried attempts",
+        "cached input is a subset of input and is never added twice",
+        "retain native completion separately from official verifier success"
+      ],
+      "controls": [
+        "runtime source archive and exact CLI/code-mode-host digests",
+        "same public contract and planning/Doctor policy",
+        "same code source, learning checkpoint and retrieval policy",
+        "same model, reasoning, time budgets and verifier policy"
+      ],
+      "matrix": {
+        "intent_requirements_transport": [
+          "expanded",
+          "compact"
+        ],
+        "semantic_transport": [
+          "native",
+          "identifiers"
+        ]
+      },
+      "order": 5,
+      "primary_measurement": "All-attempt provider input plus output tokens per official verifier success, only with complete usage and known rewards",
+      "secondary_measurements": [
+        "call count, input/cache/output distributions",
+        "successful full-task rate",
+        "cold/warm wall time and training/proof cost",
+        "repeat variability and context-audit coverage"
+      ],
+      "status": "proposed"
+    }
+  ],
+  "status": "Compact task-IntentIR transport implemented and locally measured; bounded metadata dispatch and live evaluation remain proposed."
+}

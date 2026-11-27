@@ -1,0 +1,166 @@
+import Init
+namespace SchedulerConstraint
+set_option autoImplicit false
+set_option maxRecDepth 4096
+structure Request where
+  id : String
+  prompt : Nat
+  generated : Nat
+  deriving DecidableEq, BEq, ReflBEq, LawfulBEq, Repr
+structure Shape where
+  seq : Nat
+  heads : Nat
+  hidden : Nat
+  deriving DecidableEq, BEq, ReflBEq, LawfulBEq, Repr
+structure Row where
+  id : String
+  batch : String
+  shape : Shape
+  deriving DecidableEq, BEq, ReflBEq, LawfulBEq, Repr
+structure Fraction where
+  numerator : Nat
+  denominator : Nat
+  deriving DecidableEq, Repr
+structure Metrics where
+  cost : Fraction
+  padding : Fraction
+  latency : Fraction
+  sequential : Fraction
+  deriving DecidableEq, Repr
+structure Bucket where
+  requests : List Request
+  rows : List Row
+  metrics : Metrics
+  before : String
+  after : String
+  deriving DecidableEq, Repr
+
+def inputIDs (requests : List Request) : List String := requests.map Request.id
+def outputIDs (rows : List Row) : List String := rows.map Row.id
+def coverageCheck (requests : List Request) (rows : List Row) : Bool :=
+  (outputIDs rows).isPerm (inputIDs requests)
+def ceil64 (prompt : Nat) : Nat := ((prompt + 63) / 64) * 64
+
+def shapeCheck (request : Request) (row : Row) : Bool :=
+  decide (row.shape.heads = 32 ∧ row.shape.hidden = 4096 ∧
+    row.shape.seq % 64 = 0 ∧ ceil64 request.prompt ≤ row.shape.seq)
+def allShapeCheck (requests : List Request) (rows : List Row) : Bool :=
+  rows.all (fun row => requests.any (fun request => request.id == row.id && shapeCheck request row))
+def batchCheck (rows : List Row) : Bool :=
+  rows.all (fun a => rows.all (fun b => a.batch != b.batch || a.shape == b.shape))
+def usedShapes (a b : List Row) : List Shape := ((a ++ b).map Row.shape).eraseDups
+def globalCapCheck (a b : List Row) : Bool := decide ((usedShapes a b).length ≤ 8)
+def fractionBelowCheck (value : Fraction) (numerator denominator : Nat) : Bool :=
+  decide (0 < value.denominator ∧ 0 < denominator ∧
+    value.numerator * denominator < numerator * value.denominator)
+def thresholdCheck (metrics : Metrics) (bucket : Nat) : Bool :=
+  if bucket = 1 then
+    fractionBelowCheck metrics.cost 300000000000 1 &&
+    fractionBelowCheck metrics.padding 55 1000 &&
+    fractionBelowCheck metrics.latency 2100000 1 &&
+    fractionBelowCheck metrics.sequential 270000000 1
+  else
+    fractionBelowCheck metrics.cost 48000000000 1 &&
+    fractionBelowCheck metrics.padding 15 100 &&
+    fractionBelowCheck metrics.latency 210000 1 &&
+    fractionBelowCheck metrics.sequential 32000000 1
+
+def bucketCheck (bucket : Bucket) (bucketID : Nat) : Bool :=
+  coverageCheck bucket.requests bucket.rows &&
+  decide (inputIDs bucket.requests).Nodup &&
+  allShapeCheck bucket.requests bucket.rows && batchCheck bucket.rows &&
+  thresholdCheck bucket.metrics bucketID && decide (bucket.before = bucket.after)
+def modelAccept (a b : Bucket) : Bool :=
+  bucketCheck a 1 && bucketCheck b 2 && globalCapCheck a.rows b.rows
+
+theorem coverage_permutation (requests : List Request) (rows : List Row)
+    (accepted : coverageCheck requests rows = true) :
+    (outputIDs rows).Perm (inputIDs requests) := by
+  exact List.isPerm_iff.mp accepted
+
+theorem accepted_ids_have_count_one (requests : List Request) (rows : List Row)
+    (accepted : coverageCheck requests rows = true)
+    (uniqueInput : (inputIDs requests).Nodup) (id : String)
+    (member : id ∈ inputIDs requests) : (outputIDs rows).count id = 1 := by
+  exact ((coverage_permutation requests rows accepted).count_eq id).trans
+    (uniqueInput.count_of_mem member)
+
+theorem accepted_cardinality (requests : List Request) (rows : List Row)
+    (accepted : coverageCheck requests rows = true) : rows.length = requests.length := by
+  simpa [inputIDs, outputIDs] using (coverage_permutation requests rows accepted).length_eq
+
+theorem accepted_no_unexpected_ids (requests : List Request) (rows : List Row)
+    (accepted : coverageCheck requests rows = true) (id : String)
+    (member : id ∈ outputIDs rows) : id ∈ inputIDs requests := by
+  exact (coverage_permutation requests rows accepted).mem_iff.mp member
+
+theorem accepted_output_ids_nodup (requests : List Request) (rows : List Row)
+    (accepted : coverageCheck requests rows = true)
+    (uniqueInput : (inputIDs requests).Nodup) : (outputIDs rows).Nodup := by
+  exact (coverage_permutation requests rows accepted).symm.nodup uniqueInput
+
+theorem shape_check_sound (request : Request) (row : Row)
+    (accepted : shapeCheck request row = true) :
+    row.shape.heads = 32 ∧ row.shape.hidden = 4096 ∧
+    row.shape.seq % 64 = 0 ∧ ceil64 request.prompt ≤ row.shape.seq := by
+  exact of_decide_eq_true accepted
+
+theorem aligned_ceiling_covers_prompt (prompt : Nat) : prompt ≤ ceil64 prompt := by
+  unfold ceil64
+  omega
+
+theorem global_cap_check_sound (a b : List Row) (accepted : globalCapCheck a b = true) :
+    (usedShapes a b).length ≤ 8 := by
+  exact of_decide_eq_true accepted
+
+theorem batch_check_sound (rows : List Row) (accepted : batchCheck rows = true)
+    (a b : Row) (ha : a ∈ rows) (hb : b ∈ rows) (sameBatch : a.batch = b.batch) :
+    a.shape = b.shape := by
+  have outer := List.all_eq_true.mp accepted a ha
+  have inner := List.all_eq_true.mp outer b hb
+  simpa [sameBatch] using inner
+
+theorem fraction_below_check_sound (value : Fraction) (numerator denominator : Nat)
+    (accepted : fractionBelowCheck value numerator denominator = true) :
+    0 < value.denominator ∧ 0 < denominator ∧
+    value.numerator * denominator < numerator * value.denominator := by
+  exact of_decide_eq_true accepted
+
+def contractSHA256 : String := "69baf0845b59c98454dd883509f2d6871dbedc8550099b47f6c7f7cf2d476bfd"
+def completeCasesSHA256 : String := "0ca924d1136f0a75443d6f8110a138a6abfeb46070e71bbf10977cbb18091c7c"
+
+def case0Bucket1 : Bucket := { requests := [{ id := "bucket1-request0", prompt := 64, generated := 1 }], rows := [{ id := "bucket1-request0", batch := "batch0", shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := "{\"gen_len\":1,\"prompt_len\":64,\"request_id\":\"bucket1-request0\"}\n", after := "{\"gen_len\":1,\"prompt_len\":64,\"request_id\":\"bucket1-request0\"}\n" }
+def case0Bucket2 : Bucket := { requests := [{ id := "bucket2-request0", prompt := 128, generated := 1 }], rows := [{ id := "bucket2-request0", batch := "batch0", shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := "{\"gen_len\":1,\"prompt_len\":128,\"request_id\":\"bucket2-request0\"}\n", after := "{\"gen_len\":1,\"prompt_len\":128,\"request_id\":\"bucket2-request0\"}\n" }
+theorem authored_case_0_accepted : modelAccept case0Bucket1 case0Bucket2 = true := by decide
+
+def case1Bucket1 : Bucket := { requests := [{ id := "bucket1-request0", prompt := 64, generated := 1 }, { id := "bucket1-request1", prompt := 128, generated := 1 }, { id := "bucket1-request2", prompt := 192, generated := 1 }, { id := "bucket1-request3", prompt := 256, generated := 1 }], rows := [{ id := "bucket1-request0", batch := "batch0", shape := { seq := 64, heads := 32, hidden := 4096 } }, { id := "bucket1-request1", batch := "batch1", shape := { seq := 128, heads := 32, hidden := 4096 } }, { id := "bucket1-request2", batch := "batch2", shape := { seq := 192, heads := 32, hidden := 4096 } }, { id := "bucket1-request3", batch := "batch3", shape := { seq := 256, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := "{\"gen_len\":1,\"prompt_len\":64,\"request_id\":\"bucket1-request0\"}\n{\"gen_len\":1,\"prompt_len\":128,\"request_id\":\"bucket1-request1\"}\n{\"gen_len\":1,\"prompt_len\":192,\"request_id\":\"bucket1-request2\"}\n{\"gen_len\":1,\"prompt_len\":256,\"request_id\":\"bucket1-request3\"}\n", after := "{\"gen_len\":1,\"prompt_len\":64,\"request_id\":\"bucket1-request0\"}\n{\"gen_len\":1,\"prompt_len\":128,\"request_id\":\"bucket1-request1\"}\n{\"gen_len\":1,\"prompt_len\":192,\"request_id\":\"bucket1-request2\"}\n{\"gen_len\":1,\"prompt_len\":256,\"request_id\":\"bucket1-request3\"}\n" }
+def case1Bucket2 : Bucket := { requests := [{ id := "bucket2-request0", prompt := 320, generated := 1 }, { id := "bucket2-request1", prompt := 384, generated := 1 }, { id := "bucket2-request2", prompt := 448, generated := 1 }, { id := "bucket2-request3", prompt := 512, generated := 1 }], rows := [{ id := "bucket2-request0", batch := "batch0", shape := { seq := 320, heads := 32, hidden := 4096 } }, { id := "bucket2-request1", batch := "batch1", shape := { seq := 384, heads := 32, hidden := 4096 } }, { id := "bucket2-request2", batch := "batch2", shape := { seq := 448, heads := 32, hidden := 4096 } }, { id := "bucket2-request3", batch := "batch3", shape := { seq := 512, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := "{\"gen_len\":1,\"prompt_len\":320,\"request_id\":\"bucket2-request0\"}\n{\"gen_len\":1,\"prompt_len\":384,\"request_id\":\"bucket2-request1\"}\n{\"gen_len\":1,\"prompt_len\":448,\"request_id\":\"bucket2-request2\"}\n{\"gen_len\":1,\"prompt_len\":512,\"request_id\":\"bucket2-request3\"}\n", after := "{\"gen_len\":1,\"prompt_len\":320,\"request_id\":\"bucket2-request0\"}\n{\"gen_len\":1,\"prompt_len\":384,\"request_id\":\"bucket2-request1\"}\n{\"gen_len\":1,\"prompt_len\":448,\"request_id\":\"bucket2-request2\"}\n{\"gen_len\":1,\"prompt_len\":512,\"request_id\":\"bucket2-request3\"}\n" }
+theorem authored_case_1_accepted : modelAccept case1Bucket1 case1Bucket2 = true := by decide
+
+def case2Bucket1 : Bucket := { requests := [{ id := "bucket1-request0", prompt := 64, generated := 1 }], rows := [{ id := "bucket1-request0", batch := "batch0", shape := { seq := 64, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 299999999999999, denominator := 1000 }, padding := { numerator := 27, denominator := 500 }, latency := { numerator := 2099999999, denominator := 1000 }, sequential := { numerator := 269999999999, denominator := 1000 } }, before := "{\"gen_len\":1,\"prompt_len\":64,\"request_id\":\"bucket1-request0\"}\n", after := "{\"gen_len\":1,\"prompt_len\":64,\"request_id\":\"bucket1-request0\"}\n" }
+def case2Bucket2 : Bucket := { requests := [{ id := "bucket2-request0", prompt := 128, generated := 1 }], rows := [{ id := "bucket2-request0", batch := "batch0", shape := { seq := 128, heads := 32, hidden := 4096 } }], metrics := { cost := { numerator := 47999999999999, denominator := 1000 }, padding := { numerator := 149, denominator := 1000 }, latency := { numerator := 209999999, denominator := 1000 }, sequential := { numerator := 31999999999, denominator := 1000 } }, before := "{\"gen_len\":1,\"prompt_len\":128,\"request_id\":\"bucket2-request0\"}\n", after := "{\"gen_len\":1,\"prompt_len\":128,\"request_id\":\"bucket2-request0\"}\n" }
+theorem authored_case_2_accepted : modelAccept case2Bucket1 case2Bucket2 = true := by decide
+
+def case3Bucket1 : Bucket := { requests := [], rows := [], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := "", after := "" }
+def case3Bucket2 : Bucket := { requests := [], rows := [], metrics := { cost := { numerator := 0, denominator := 1 }, padding := { numerator := 0, denominator := 1 }, latency := { numerator := 0, denominator := 1 }, sequential := { numerator := 0, denominator := 1 } }, before := "", after := "" }
+theorem authored_case_3_accepted : modelAccept case3Bucket1 case3Bucket2 = true := by decide
+
+def controlRequests : List Request := [{ id := "r1", prompt := 65, generated := 1 }, { id := "r2", prompt := 65, generated := 1 }]
+def row1 : Row := { id := "r1", batch := "same-batch", shape := { seq := 128, heads := 32, hidden := 4096 } }
+def row2 : Row := { id := "r2", batch := "same-batch", shape := { seq := 192, heads := 32, hidden := 4096 } }
+def nineShapeRows : List Row := (List.range 9).map (fun n => { id := "r", batch := "b", shape := { seq := (n + 1) * 64, heads := 32, hidden := 4096 } })
+#print axioms coverage_permutation
+#print axioms accepted_ids_have_count_one
+#print axioms accepted_cardinality
+#print axioms accepted_no_unexpected_ids
+#print axioms accepted_output_ids_nodup
+#print axioms shape_check_sound
+#print axioms aligned_ceiling_covers_prompt
+#print axioms global_cap_check_sound
+#print axioms batch_check_sound
+#print axioms fraction_below_check_sound
+#print axioms authored_case_0_accepted
+#print axioms authored_case_1_accepted
+#print axioms authored_case_2_accepted
+#print axioms authored_case_3_accepted
+end SchedulerConstraint

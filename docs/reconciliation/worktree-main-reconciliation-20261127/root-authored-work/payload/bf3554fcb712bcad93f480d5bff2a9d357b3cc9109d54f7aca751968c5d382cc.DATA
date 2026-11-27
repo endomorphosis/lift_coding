@@ -1,0 +1,201 @@
+"""Read exact workflow artifacts; deduplicate effects, never infer missing usage."""
+import argparse,hashlib,importlib.util,json,sqlite3
+from pathlib import Path
+
+def canonical(v): return json.dumps(v,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
+def sha(v): return hashlib.sha256(v).hexdigest()
+def fhash(p): return sha(Path(p).read_bytes())
+def main():
+    ap=argparse.ArgumentParser();ap.add_argument('--profile',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--partial',action='store_true');ap.add_argument('--analysis-contract',type=Path);ap.add_argument('--scorer-admission',type=Path);ap.add_argument('--expected-scorer-admission-sha256');args=ap.parse_args();p=args.profile.resolve();profile=json.loads(p.read_text());run=p.parent;state=Path(profile['output_root']);checks=[]
+    def check(name,value):
+        checks.append({'name':name,'passed':bool(value)})
+        if not value: raise AssertionError(name)
+    for path,expected in profile['evaluation_files'].items(): check('source:'+path,fhash(path)==expected)
+    analysis_path=args.analysis_contract or (run/'root_analysis_contract_v1.json' if (run/'root_analysis_contract_v1.json').exists() else run/'analysis_contract.json');analysis=json.loads(analysis_path.read_text());check('analysis_contract_profile',analysis['profile_sha256']==fhash(p))
+    runtime_path=p.parent.parent/'repository_runtime_v1.py';spec=importlib.util.spec_from_file_location('repository_audit_source_inventory',runtime_path);runtime=importlib.util.module_from_spec(spec);spec.loader.exec_module(runtime)
+    for instance,task in profile['tasks'].items():check('public_input:'+instance,runtime.inventory(task['source_root'])['tree_sha256']==task['public_base_tree_sha256'] and fhash(task['objective_path'])==task['objective_sha256'])
+    check('provider_profile',fhash(profile['provider']['profile_path'])==profile['provider']['profile_sha256'])
+    q=profile['repository_sealing_qualification'];check('sealing_qualification',fhash(q['summary_path'])==q['summary_sha256'] and json.loads(Path(q['summary_path']).read_text())['qualified'])
+    archive=json.loads((run/'frozen_source_manifest.json').read_text())
+    for row in archive['sources']: check('archive:'+row['snapshot_path'],fhash(run/row['snapshot_path'])==row['sha256'])
+    db=sqlite3.connect('file:'+str(state/'ledger.sqlite3')+'?mode=ro',uri=True);db.execute('BEGIN');journal=db.execute('SELECT seq,previous_hash,record_json,record_hash FROM journal ORDER BY seq').fetchall();effects=db.execute('SELECT effect_id,event_id,stage,request_hash,state,result_path,result_hash FROM effects ORDER BY event_id,stage').fetchall();events=db.execute('SELECT event_id,request_hash,status,result_path FROM events ORDER BY event_id').fetchall();roots=db.execute('SELECT trajectory,event_id,generation,source_path,source_hash FROM roots ORDER BY trajectory').fetchall();db.close();previous=None;committed_events={};committed_effects={}
+    for index,(seq,prev,body,digest) in enumerate(journal,1):
+        check('journal:'+str(index),seq==index and prev==previous and sha(body.encode())==digest and json.loads(body)['seq']==seq and json.loads(body)['previous_hash']==prev);previous=digest
+        record=json.loads(body)
+        if record['kind']=='event_terminal':
+            row=record['data'];check('unique_event_commit:'+row['event_id'],row['event_id'] not in committed_events);committed_events[row['event_id']]=row
+        if record['kind']=='effect_terminal':
+            row=record['data'];check('unique_effect_commit:'+row['effect_id'],row['effect_id'] not in committed_effects);committed_effects[row['effect_id']]=row
+    scores={};score_requests={};effect_rows=[];provider_effects={};replay_aliases=0;loaded_sources={};archive_by_path={row['original_path']:row for row in archive['sources']}
+    def admit_score_request(request,kind,event_id=None,stage=None):
+        if request.get('operation')!='score' or 'evaluation_id' not in request:return
+        identifier=request['evaluation_id'];digest=sha(json.dumps(request,sort_keys=True,separators=(',',':'),ensure_ascii=True).encode())
+        check('unique_scorer_request:'+identifier,identifier not in score_requests)
+        score_requests[identifier]={'evaluation_id':identifier,'request_sha256':digest,'kind':kind,'event_id':event_id,'stage':stage,'instance_id':request['instance_id']}
+    def admit_import(path,digest,allowed,origin):
+        check('native_import_pin:'+path,allowed.get(path)==digest and fhash(path)==digest)
+        if path in loaded_sources:check('native_import_alias:'+path,loaded_sources[path]['sha256']==digest);loaded_sources[path]['origins'].append(origin)
+        else:loaded_sources[path]={'path':path,'sha256':digest,'origins':[origin],'in_frozen_archive':path in archive_by_path and archive_by_path[path]['sha256']==digest}
+    def admit_score(response,origin):
+        if not isinstance(response,dict) or response.get('schema')!='ns-curator-candidate-score-receipt/v1' or 'evaluation_id' not in response: return
+        key=response['evaluation_id'];digest=sha(canonical(response))
+        if key in scores: check('scorer_alias:'+key,scores[key]['receipt_sha256']==digest);scores[key]['appearances']+=1
+        else: scores[key]={'evaluation_id':key,'receipt_sha256':digest,'response':response,'origin':origin,'appearances':1}
+    for effect_id,event_id,stage,request_hash,status,path,digest in effects:
+        request_path=state/'effects'/effect_id/'request.json';request=json.loads(request_path.read_text());check('effect_request:'+effect_id,sha(canonical(request))==request_hash and effect_id==sha(canonical({'event_id':event_id,'stage':stage,'request_hash':request_hash})))
+        admit_score_request(request,'direct',event_id,stage)
+        row={'effect_id':effect_id,'event_id':event_id,'stage':stage,'state':status,'elapsed_seconds':None}
+        if stage.startswith('provider_'):
+            call_id=request['call_id'];check('provider_unique_effect:'+call_id,call_id not in provider_effects)
+            provider_effects[call_id]={'effect_id':effect_id,'event_id':event_id,'stage':stage,'request':request,'state':status,'response':None}
+        if status=='terminal':
+            check('effect_journal_join:'+effect_id,effect_id in committed_effects and committed_effects[effect_id]['result_hash']==digest and committed_effects[effect_id]['event_id']==event_id and committed_effects[effect_id]['stage']==stage)
+            check('effect_receipt:'+effect_id,fhash(path)==digest);saved=json.loads(Path(path).read_text());check('effect_binding:'+effect_id,saved['effect_id']==effect_id and saved['event_id']==event_id and saved['stage']==stage and saved['request_hash']==request_hash);row['elapsed_seconds']=saved.get('elapsed_seconds');response=saved['response'];admit_score(response,stage)
+            for replay in response.get('independent_replays',[]): admit_score(replay.get('response'),'native_replay_response')
+            if stage.startswith('provider_'): provider_effects[request['call_id']]['response']=response
+            for imported,imported_row in response.get('imports',{}).items():admit_import(imported,imported_row['sha256'],profile['sealing_native_files'] if stage.startswith('seal_') else profile['native_files'],stage)
+            for imported_row in response.get('runtime_profile',{}).get('imports',[]):admit_import(imported_row['path'],imported_row['sha256'],profile['world_memory_files'],stage)
+        effect_rows.append(row)
+    event_results={}
+    for event_id,request_hash,status,path in events:
+        event=next(e for e in profile['events'] if e['event_id']==event_id);check('event_identity:'+event_id,request_hash==sha(canonical(event)))
+        if status!='started':
+            check('event_journal_join:'+event_id,event_id in committed_events and committed_events[event_id]['status']==status and committed_events[event_id]['result_path']==path and committed_events[event_id]['result_hash']==fhash(path))
+            value=json.loads(Path(path).read_text());check('event_terminal:'+event_id,value['event_id']==event_id and value['status']==status and value['profile_sha256']==fhash(p));event_results[event_id]=value
+            check('event_quality_flags:'+event_id,value['accepted']==value['accepted_for_next_state']==(status=='accepted') and (not value['accepted'] or value['candidate_grading_passed']))
+            if value['accepted_for_next_state']:
+                check('accepted_full_source:'+event_id,runtime.inventory(value['accepted_tree_path'])['tree_sha256']==value['accepted_tree_sha256']==value['accepted_scorer_receipt']['candidate_source_tree_sha256'])
+    for trajectory,event_id,generation,source_path,source_hash in roots:
+        check('accepted_root_namespace:'+trajectory,event_id in event_results and event_results[event_id]['trajectory']==trajectory and event_results[event_id]['accepted_for_next_state'])
+        check('accepted_root_patch:'+trajectory,fhash(source_path)==source_hash and event_results[event_id]['accepted_patch_path']==source_path and event_results[event_id]['local_generation']==generation)
+    transport_rows=[];unknown_dispatches=[];provider=json.loads(Path(profile['provider']['profile_path']).read_text());catalog=json.loads((run/'call_catalog.json').read_text());catalog_by_id={row['call_id']:row for row in catalog}
+    check('call_catalog_digest',fhash(run/'call_catalog.json')==profile['call_catalog_sha256'])
+    check('call_catalog_unique',len(catalog)==len(catalog_by_id) and set(catalog_by_id)==set(provider['call_ids']))
+    event_by_id={row['event_id']:row for row in profile['events']};owner_by_call={};ordinal_by_call={}
+    for call_id,row in catalog_by_id.items():
+        owner,separator,ordinal=row['event_id'].rpartition('-residual-')
+        check('call_catalog_owner:'+call_id,separator and owner in event_by_id and ordinal.isdigit())
+        check('call_catalog_identity:'+call_id,call_id=='integrated-'+sha(canonical({'event_id':row['event_id'],'purpose':row['purpose']}))[:32])
+        owner_by_call[call_id]=owner;ordinal_by_call[call_id]=int(ordinal)
+    transport_by_id={};dispatch_intents={};transport_directories={};snapshot_extra=[]
+    wrapper_hash=profile['evaluation_files'][str(p.parents[3]/'metered_provider.py')]
+    def provider_binding(value,call_id,wire):
+        check('provider_call_id:'+call_id,value['call_id']==call_id and call_id in catalog_by_id)
+        check('provider_profile:'+call_id,value['profile_sha256']==profile['provider']['profile_sha256'])
+        check('provider_request:'+call_id,sha(canonical(wire))==value['request_sha256'] and len(canonical(wire))==value['request_bytes'])
+        check('provider_wrapper:'+call_id,value['transport_sha256']==wrapper_hash)
+        check('provider_request_bounds:'+call_id,len(canonical(wire))<=provider['max_request_bytes'] and wire['model']==provider['model'] and wire['max_tokens']==provider['max_output_tokens'] and wire['reasoning_effort']==provider['reasoning_effort'] and wire['stream'] is False and wire['response_format']==provider['response_format'])
+    for directory in sorted((state/'provider').glob('*')):
+        if not directory.is_dir(): continue
+        call_id=directory.name;check('provider_directory_enrolled:'+call_id,call_id in catalog_by_id)
+        receipt=directory/'result.json';intent=directory/'dispatch_intent.json';wire=json.loads((directory/'request.json').read_text());transport_directories[call_id]={'directory':str(directory),'wire':wire,'request_file_sha256':fhash(directory/'request.json')}
+        if intent.exists():
+            value=json.loads(intent.read_text());provider_binding(value,call_id,wire);dispatch_intents[call_id]={'intent_sha256':fhash(intent),'record':value}
+        if receipt.exists():
+            value=json.loads(receipt.read_text());provider_binding(value,call_id,wire)
+            check('provider_single_post:'+call_id,value['attempted_posts'] in (0,1))
+            check('provider_intent_coverage:'+call_id,value['attempted_posts']==0 or call_id in dispatch_intents)
+            if call_id in dispatch_intents:
+                record=dispatch_intents[call_id]['record'];check('provider_intent_terminal_binding:'+call_id,all(value[k]==record[k] for k in ('call_id','request_sha256','request_bytes','profile_sha256','transport_sha256','started_at')))
+            transport_rows.append(value);transport_by_id[call_id]=value;transport_directories[call_id]['receipt_file_sha256']=fhash(receipt);transport_directories[call_id]['receipt_canonical_sha256']=sha(canonical(value))
+        elif intent.exists(): unknown_dispatches.append(call_id)
+        if call_id not in provider_effects:
+            if args.partial: snapshot_extra.append(call_id)
+            else: check('transport_effect_coverage:'+call_id,False)
+    for call_id,row in provider_effects.items():
+        check('effect_call_enrolled:'+call_id,call_id in catalog_by_id)
+        entry=catalog_by_id[call_id];check('effect_catalog_binding:'+call_id,row['event_id']==entry['event_id'] and row['stage']=='provider_'+entry['purpose'] and row['request']['purpose']==entry['purpose'] and row['request']['unified_profile_sha256']==fhash(p))
+        if call_id in transport_directories:
+            check('effect_wire_join:'+call_id,row['request']['messages']==transport_directories[call_id]['wire']['messages'])
+        if row['state']=='terminal':
+            check('effect_transport_receipt_join:'+call_id,call_id in transport_by_id and canonical(row['response'])==canonical(transport_by_id[call_id]))
+    embedded_attribution={};event_provider_rows={}
+    for event_id,value in event_results.items():
+        for receipt in value['provider_receipts']:
+            call_id=receipt['call_id'];check('embedded_receipt_unique:'+call_id,call_id not in embedded_attribution)
+            check('embedded_receipt_owner:'+call_id,owner_by_call.get(call_id)==event_id)
+            check('embedded_transport_digest_join:'+call_id,call_id in transport_by_id and sha(canonical(receipt))==sha(canonical(transport_by_id[call_id])))
+            check('embedded_terminal_effect_join:'+call_id,call_id in provider_effects and provider_effects[call_id]['state']=='terminal')
+            embedded_attribution[call_id]=event_id
+    observed_call_ids=set(provider_effects)|set(transport_directories)
+    for call_id in observed_call_ids:
+        if call_id in provider_effects and provider_effects[call_id]['state']=='terminal' and owner_by_call[call_id] in event_results:
+            check('event_receipt_full_coverage:'+call_id,call_id in embedded_attribution)
+    budget_rows=[];running_slots={}
+    for event in profile['events']:
+        event_id=event['event_id'];trajectory=event['trajectory'];ids=sorted(call_id for call_id in observed_call_ids if owner_by_call[call_id]==event_id);ordinals=[ordinal_by_call[call_id] for call_id in ids]
+        prior=running_slots.get(trajectory,0);cap=min(profile['max_provider_calls_per_trajectory']-prior,profile['first_node_call_cap'] if event['parent_event'] is None else profile['max_provider_calls_per_trajectory'])
+        check('one_purpose_per_ordinal:'+event_id,len(set(ordinals))==len(ordinals))
+        check('node_budget:'+event_id,len(ids)<=cap and (not ordinals or sorted(ordinals)==list(range(len(ids)))))
+        running_slots[trajectory]=prior+len(ids);check('trajectory_budget:'+event_id,running_slots[trajectory]<=profile['max_provider_calls_per_trajectory'])
+        unknown=[call_id for call_id in ids if call_id not in transport_by_id];known=sum(transport_by_id[call_id]['attempted_posts'] for call_id in ids if call_id in transport_by_id)
+        row={'event_id':event_id,'trajectory':trajectory,'call_ids':ids,'provider_slots_used':len(ids),'prior_slots':prior,'node_cap':cap,'trajectory_provider_slots_used':running_slots[trajectory],'known_actual_posts':known,'slots_without_terminal_transport_receipt':unknown}
+        budget_rows.append(row);event_provider_rows[event_id]=row
+        if event_id in event_results:
+            result=event_results[event_id];pending=[call_id for call_id in ids if call_id in provider_effects and provider_effects[call_id]['state']!='terminal']
+            check('reported_event_slots:'+event_id,result['provider_slots_used']==len(ids) and result['trajectory_provider_slots_used']==running_slots[trajectory])
+            check('reported_event_posts:'+event_id,result['provider_calls']==(None if pending else known))
+    check('known_provider_post_cap',sum(r['attempted_posts'] for r in transport_rows)<=profile['maximum_actual_provider_posts'])
+    check('conservative_provider_slot_cap',len(observed_call_ids)<=sum(profile['max_provider_calls_per_trajectory'] for _ in running_slots))
+    native_intents=[]
+    for directory in sorted((state/'native_repository_sealing/replays').glob('*')):
+        if not directory.is_dir(): continue
+        request=json.loads((directory/'request.json').read_text());intent=directory/'dispatch_intent.json'
+        admit_score_request(request,'replay')
+        if intent.exists():
+            intent_value=json.loads(intent.read_text());check('native_replay_intent_request:'+directory.name,intent_value['request_sha256']==score_requests[request['evaluation_id']]['request_sha256']);native_intents.append({'evaluation_id':request['evaluation_id'],'completion_known':(directory/'completion.json').exists(),'intent_sha256':fhash(intent)})
+        if (directory/'completion.json').exists():
+            saved=json.loads((directory/'completion.json').read_text());check('native_replay_request:'+directory.name,saved['request_sha256']==sha(json.dumps(request,sort_keys=True,separators=(',',':'),ensure_ascii=True).encode()));admit_score(saved.get('response'),'native_replay_dispatch_completion')
+    for identifier,row in scores.items():
+        check('receipt_to_public_request:'+identifier,identifier in score_requests and row['response']['request_sha256']==score_requests[identifier]['request_sha256'])
+    scorer_admission=None;scorer_joins_complete=False
+    if args.scorer_admission:
+        check('scorer_admission_exact_digest',args.expected_scorer_admission_sha256 and fhash(args.scorer_admission)==args.expected_scorer_admission_sha256)
+        scorer_admission=json.loads(args.scorer_admission.read_text());check('scorer_admission_profile',scorer_admission['cohort_profile_sha256']==fhash(p) and scorer_admission['joins_passed'])
+        admitted={row['evaluation_id']:row for row in scorer_admission['rows']};check('scorer_admission_unique',len(admitted)==len(scorer_admission['rows']))
+        check('scorer_request_full_custody_join',set(score_requests)<=set(admitted))
+        for identifier,row in score_requests.items():
+            receipt=admitted[identifier];check('scorer_custody_request:'+identifier,receipt['request_sha256']==row['request_sha256'] and receipt['kind']==row['kind'] and receipt['instance_id']==row['instance_id'] and receipt['joins_passed'])
+            if identifier in scores:check('scorer_custody_receipt:'+identifier,receipt['receipt_canonical_sha256']==scores[identifier]['receipt_sha256'])
+        scorer_joins_complete=scorer_admission['terminal_cohort_observed'] and scorer_admission['accounting_complete'] and set(admitted)==set(score_requests)
+    arms=[]
+    for arm in 'ABCD':
+        selected=[e for e in profile['events'] if e['arm']==arm];results=[event_results[e['event_id']] for e in selected if e['event_id'] in event_results];selected_ids={e['event_id'] for e in selected};ids=sorted(call_id for call_id in observed_call_ids if owner_by_call[call_id] in selected_ids);calls=[transport_by_id[call_id] for call_id in ids if call_id in transport_by_id]
+        complete=len(results)==len(selected);missing=[call_id for call_id in ids if call_id not in transport_by_id];unknown=not complete or bool(missing) or any(r.get('attempted_posts') and r.get('normalized_usage',{}).get('total_tokens') is None for r in calls)
+        totals={name:None if unknown or any(r.get('attempted_posts') and r.get('normalized_usage',{}).get(name) is None for r in calls) else sum(r.get('normalized_usage',{}).get(name) or 0 for r in calls) for name in ['input_tokens','output_tokens','total_tokens','cached_input_tokens','reasoning_tokens','api_reported_cost_ticks']}
+        accepted=sum(r['accepted_for_next_state'] for r in results);graded=sum(r['candidate_grading_passed'] for r in results)
+        invocation_rows=[]
+        for event in selected:
+            process=run/'invocations'/event['event_id']/'process.json'
+            if process.exists():
+                value=json.loads(process.read_text());check('invocation_identity:'+event['event_id'],value['event_id']==event['event_id'] and value['arm']==arm and value['instance_id']==event['instance_id']);invocation_rows.append(value)
+                if event['event_id'] in event_results:
+                    terminal=event_results[event['event_id']];check('invocation_outcome:'+event['event_id'],value.get('status')==terminal['status'] and value.get('accepted')==terminal['accepted_for_next_state'] and value.get('candidate_grading_passed')==terminal['candidate_grading_passed'])
+        timing_complete=len(invocation_rows)==len(selected) and all(r.get('elapsed_seconds') is not None for r in invocation_rows)
+        cpu_complete=len(invocation_rows)==len(selected) and all(r.get('host_process_cpu_seconds') is not None for r in invocation_rows)
+        arms.append({'arm':arm,'terminal_nodes':len(results),'scheduled_nodes':len(selected),'complete':complete,'accepted_nodes':accepted,'accepted_fraction':accepted/len(selected),'all_nodes_accepted':complete and accepted==len(selected),'candidate_grading_passed_nodes':graded,'provider_posts':None if missing or not complete else sum(r['attempted_posts'] for r in calls),'known_observed_posts':sum(r['attempted_posts'] for r in calls),'provider_slots_used':len(ids),'call_ids':ids,'provider_slots_without_terminal_receipt':missing,'usage':totals,'tokens_per_accepted_node':None if unknown or accepted==0 else totals['total_tokens']/accepted,'controller_wall_seconds':None if not complete else sum(r['elapsed_seconds'] for r in results),'observed_terminal_controller_wall_seconds':sum(r['elapsed_seconds'] for r in results),'invocation_wall_seconds':sum(r['elapsed_seconds'] for r in invocation_rows) if timing_complete else None,'host_process_cpu_seconds':sum(r['host_process_cpu_seconds'] for r in invocation_rows) if cpu_complete else None,'container_cpu_seconds':None,'statuses':[r['status'] for r in results]})
+    baseline=next(a for a in arms if a['arm']=='A')
+    for arm in arms:
+        value=arm['usage']['total_tokens'];denom=baseline['usage']['total_tokens'];arm['descriptive_token_ratio_vs_A']=None if not arm['complete'] or not baseline['complete'] or value is None or denom is None or denom<=0 else value/denom
+        ratio=arm['descriptive_token_ratio_vs_A'];quality_preserved=arm['complete'] and baseline['complete'] and baseline['accepted_nodes']>0 and arm['accepted_fraction']>=baseline['accepted_fraction']
+        arm['descriptive_token_reduction_vs_A']=None if ratio is None else 1-ratio
+        arm['accepted_quality_at_least_A']=quality_preserved
+        arm['savings_at_preserved_quality']=None if ratio is None or not quality_preserved else 1-ratio
+        arm['tokens_per_complete_trajectory']=value if arm['all_nodes_accepted'] and value is not None else None
+        arm['complete_trajectory_token_ratio_vs_A']=ratio if arm['all_nodes_accepted'] and baseline['all_nodes_accepted'] else None
+    cohort_terminal=len(event_results)==len(profile['events']);nonterminal_effects=[row for row in effect_rows if row['state']!='terminal'];missing_transport=sorted(observed_call_ids-set(transport_by_id));missing_replays=[row['evaluation_id'] for row in native_intents if not row['completion_known']]
+    if not args.partial: check('all_scheduled_events_terminal',cohort_terminal)
+    provider_accounting_complete=cohort_terminal and not missing_transport and all(arm['usage']['total_tokens'] is not None for arm in arms)
+    effect_accounting_complete=cohort_terminal and not nonterminal_effects and not missing_replays
+    invocation_wall_accounting_complete=cohort_terminal and all(arm['invocation_wall_seconds'] is not None for arm in arms)
+    accounting_complete=provider_accounting_complete and effect_accounting_complete and invocation_wall_accounting_complete and scorer_joins_complete
+    provenance=[]
+    for call_id in sorted(observed_call_ids):
+        transport=transport_directories.get(call_id,{});effect=provider_effects.get(call_id,{})
+        provenance.append({'call_id':call_id,'event_id':owner_by_call[call_id],'residual_event_id':catalog_by_id[call_id]['event_id'],'purpose':catalog_by_id[call_id]['purpose'],'ordinal':ordinal_by_call[call_id],'effect_id':effect.get('effect_id'),'effect_state':effect.get('state'),'embedded_event_id':embedded_attribution.get(call_id),'dispatch_intent_sha256':dispatch_intents.get(call_id,{}).get('intent_sha256'),'transport_receipt_sha256':transport.get('receipt_file_sha256'),'transport_receipt_canonical_sha256':transport.get('receipt_canonical_sha256'),'transport_request_file_sha256':transport.get('request_file_sha256'),'terminal_transport_status':transport_by_id.get(call_id,{}).get('status'),'known_attempted_posts':transport_by_id.get(call_id,{}).get('attempted_posts')})
+    result={'schema':'ns-repository-cold-audit@2','auditor_sha256':fhash(__file__),'profile_sha256':fhash(p),'analysis_contract_sha256':fhash(analysis_path),'partial':args.partial,'cohort_terminal':cohort_terminal,'accounting_complete':accounting_complete,'audit_status':'complete' if accounting_complete else 'audited_incompleteness','checks':checks,'all_checks_passed':True,'arms':arms,'provider_receipts':len(transport_rows),'provider_dispatch_intents':len(dispatch_intents),'known_provider_posts':sum(r.get('attempted_posts',0) for r in transport_rows),'conservative_provider_slots':len(observed_call_ids),'provider_dispatches_without_terminal_receipt':unknown_dispatches,'provider_slots_without_terminal_receipt':missing_transport,'provider_provenance':provenance,'provider_budgets':budget_rows,'partial_snapshot_transport_ahead_of_ledger':snapshot_extra,'unique_scorer_service_receipts':len(scores),'native_replay_dispatch_intents':native_intents,'scorer_receipts':[{'evaluation_id':k,'status':v['response']['status'],'passed':v['response']['passed'],'appearances':v['appearances'],'receipt_sha256':v['receipt_sha256'],'origin':v['origin']} for k,v in sorted(scores.items())],'effects':effect_rows,'nonterminal_effects':nonterminal_effects,'qualification_costs_in_runtime_totals':False,'time_semantics':'Invocation wall is the outer runtime denominator. Controller wall includes nested services. Effect/replay timings are components, not additive overhead. Replayed completion appearances are not fresh dispatches.','seal_leaf_coverage':'Complete observed non-sealing controller effects; outer runtime accounting also includes native sealing reads/publication/recovery.','uncertainty':'One development family; no inferential confidence intervals or general savings claim. Observed fewer tokens from a source-bound halt are not credited as successful task savings.'}
+    result.update(schema='ns-repository-cold-audit@3',analysis_contract_sha256=fhash(analysis_path),provider_accounting_complete=provider_accounting_complete,effect_accounting_complete=effect_accounting_complete,invocation_wall_accounting_complete=invocation_wall_accounting_complete,scorer_custody_join_complete=scorer_joins_complete,container_cpu_available=False,journal_tip_sha256=previous,unique_public_scorer_requests=len(score_requests),scorer_requests=list(score_requests.values()),scorer_admission_sha256=fhash(args.scorer_admission) if args.scorer_admission else None,scorer_accounting=scorer_admission,native_observed_sources=list(loaded_sources.values()),native_observed_sources_absent_from_frozen_archive=[row for row in loaded_sources.values() if not row['in_frozen_archive']])
+    args.output.parent.mkdir(parents=True,exist_ok=True)
+    with args.output.open('x') as stream: stream.write(json.dumps(result,indent=2,sort_keys=True)+'\n')
+    print(json.dumps({'checks':len(checks),'all_checks_passed':True,'partial':args.partial,'audit_status':result['audit_status'],'terminal_nodes':len(event_results),'known_provider_posts':result['known_provider_posts'],'unique_scorer_receipts':len(scores),'arms':arms}))
+if __name__=='__main__': main()

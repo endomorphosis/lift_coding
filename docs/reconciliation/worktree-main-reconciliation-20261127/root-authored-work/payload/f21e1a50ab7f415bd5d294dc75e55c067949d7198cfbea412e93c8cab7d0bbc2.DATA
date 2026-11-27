@@ -1,0 +1,54 @@
+#!/usr/bin/env python3
+"""Replace repeated literal substring loops with an equivalent regex union."""
+import difflib
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+
+HERE = Path(__file__).resolve().parent
+def sha(body): return hashlib.sha256(body).hexdigest()
+
+def main():
+    source = HERE / "runtime_cid_parse_cache_v3/ipfs_datasets_py"
+    destination = HERE / "runtime_literal_union_v4"
+    if destination.exists(): raise SystemExit("variant exists; never overwrite")
+    relative = Path("logic/software_contracts/semantic_state/merkle.py")
+    before = (source / relative).read_text()
+    marker = "        node_cids = {node.node_cid for node in self.symbol_nodes}\n"
+    replacement = marker + '''        # Exact OR of literal byte-substring predicates; retain embedded matches.
+        import re
+        node_cid_pattern = (
+            re.compile(b"|".join(re.escape(cid.encode("ascii")) for cid in sorted(node_cids)))
+            if node_cids else None
+        )
+'''
+    loop = '''            for node_cid in node_cids:
+                if node_cid.encode("ascii") in encoded:
+                    raise MerkleCompilerError(
+                        "link identity must not embed a symbol-node CID"
+                    )
+'''
+    new_loop = '''            if node_cid_pattern is not None and node_cid_pattern.search(encoded) is not None:
+                raise MerkleCompilerError(
+                    "link identity must not embed a symbol-node CID"
+                )
+'''
+    assert before.count(marker) == before.count(loop) == 1
+    after = before.replace(marker, replacement).replace(loop, new_loop)
+    compile(after, str(destination / "ipfs_datasets_py" / relative), "exec")
+    destination.mkdir()
+    shutil.copytree(source, destination / "ipfs_datasets_py", copy_function=os.link, symlinks=True, ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+    target = destination / "ipfs_datasets_py" / relative
+    temporary = target.with_suffix(".py.new"); temporary.write_text(after); os.replace(temporary, target)
+    assert (source / relative).read_text() == before
+    assert os.stat(source / relative).st_ino != os.stat(target).st_ino
+    patch = "".join(difflib.unified_diff(before.splitlines(True), after.splitlines(True), fromfile="a/ipfs_datasets_py/" + str(relative), tofile="b/ipfs_datasets_py/" + str(relative)))
+    (HERE / "literal_union_v4.patch").write_text(patch)
+    parent = HERE / "runtime_cid_parse_cache_v3_manifest.json"
+    result = {"schema": "ns-context-native-source-variant/v4", "variant_package": str(destination / "ipfs_datasets_py"), "parent_variant": str(parent), "parent_variant_sha256": sha(parent.read_bytes()), "changed_file": str(relative), "original_sha256": sha(before.encode()), "variant_sha256": sha(after.encode()), "materializer_sha256": sha(Path(__file__).read_bytes()), "upstream_files_modified": False, "predicate": "any ASCII node CID byte string is a substring of canonical link payload bytes", "replacement": "single search of regex OR of escaped literals; empty set uses no pattern", "all_other_native_guards_retained": True, "source_or_proof_caching": False, "provider_calls": 0}
+    (HERE / "runtime_literal_union_v4_manifest.json").write_text(json.dumps(result, indent=2) + "\n")
+    print(json.dumps(result, indent=2))
+
+if __name__ == "__main__": main()

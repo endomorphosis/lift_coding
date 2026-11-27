@@ -1,0 +1,505 @@
+"""Real protected nomination/catalog/CLI joins with explicit fake coding dispatch."""
+from copy import deepcopy
+import json
+import os
+from pathlib import Path
+import shlex
+import subprocess
+import sys
+import tempfile
+from types import SimpleNamespace
+
+import pytest
+
+from test.api.test_intent_source_nomination import SOURCE, request_for, review_for, wire, sha
+from test.api.test_verified_code_retrieval_projection import inclusion
+from ipfs_accelerate_py.agent_supervisor.context.context_compiler import (
+    ContextCompiler, build_text_context_references, render_context_capsule,
+)
+from ipfs_accelerate_py.agent_supervisor.context.context_contracts import ContextBudget
+from ipfs_accelerate_py.agent_supervisor.runtime import (
+    reviewed_source_nomination_context as catalog, code_source_inspection as source,
+    intent_source_inspection as reader, code_retrieval_context as native,
+    code_retrieval_frontier as frontier, router_implementation_runner as runner,
+)
+from ipfs_accelerate_py.agent_supervisor.semantic_state.wire import cid_for_payload
+
+
+@pytest.fixture(autouse=True)
+def fresh_namespace(tmp_path, monkeypatch):
+    monkeypatch.setenv('IPFS_ACCELERATE_META_INDEX_DUCKDB', str(tmp_path / 'fresh-metadata.duckdb'))
+    monkeypatch.setenv('IPFS_ACCELERATE_PYTEST_SEAL_DUCKDB', str(tmp_path / 'fresh-seal.duckdb'))
+    monkeypatch.delenv('IPFS_ACCELERATE_META_INDEX_DUCKLAKE', raising=False)
+
+
+def make_case(tmp_path, *, empty=False, source_text=SOURCE, max_results=1, transport='full'):
+    root = tmp_path / 'public-repository'
+    root.mkdir(mode=0o755);root.chmod(0o755)
+    (root / 'worker.py').write_bytes(source_text.encode())
+    inputs = request_for(source_text,objects=('/app/worker.py', 'invalid_inputs_' + 'x' * 3500, 'pytest'))
+    inputs['repository_id'] = cid_for_payload({'repository': str(root)})
+    inputs['tree_id'] = 'scope:public-inputs'
+    query = inputs['source_text']
+    (root / 'instruction.md').write_bytes(query.encode())
+    result = inputs['snapshot'].search((1.0, 0.0), max_results=max_results)
+    produced = native.prepare_code_retrieval_context(repository=root, task_id=inputs['task_id'], query_text=query,
+        snapshot=inputs['snapshot'], result=result, output=root / 'retrieval.json')
+    fr = frontier.prepare_code_retrieval_frontier(repository=root, task_id=inputs['task_id'], task_cid=inputs['task_cid'],
+        task_revision=inputs['task_revision'], repository_id=inputs['repository_id'], tree_id=inputs['tree_id'],
+        source_artifact='retrieval.json', source_sha256=produced['sha256'], output=root / 'frontier')
+    review = review_for(inputs, [] if empty else None)
+    review_path = root / 'public-review.json';review_path.write_bytes(wire(review))
+    for path in root.rglob('*'):path.chmod(0o755 if path.is_dir() else 0o644)
+    prepared = reader.prepare_intent_source_nomination_artifact(repository=root,
+        artifact=fr['metadata']['Code retrieval frontier artifact'], expected_sha256=fr['metadata']['Code retrieval frontier sha256'],
+        task_id=inputs['task_id'], task_cid=inputs['task_cid'], source_artifact='retrieval.json', source_sha256=produced['sha256'],
+        contract=inputs['contract'], source_text=query, review_path=review_path, review_sha256=sha(wire(review)), output=root / 'nominations')
+    code_text = native.load_code_retrieval_context(repository=root, artifact='retrieval.json', expected_sha256=produced['sha256'], task_id=inputs['task_id'])
+    if transport=='frontier':
+        code_text=frontier.load_code_retrieval_frontier(repository=root,artifact=fr['metadata']['Code retrieval frontier artifact'],
+            expected_sha256=fr['metadata']['Code retrieval frontier sha256'],task_id=inputs['task_id'],expected_task_cid=inputs['task_cid'],
+            expected_source_artifact='retrieval.json',expected_source_sha256=produced['sha256'])
+    semantic_text = source._json({'schema':'supervisor-semantic-worker-context@1','task_id':inputs['task_id'],
+        'manifest':{'worker.py':{'sha256':sha(source_text.encode()),'source_cid':'source:fixture'},
+                    'instruction.md':{'sha256':sha(query.encode()),'source_cid':'source:instruction'}},'completion_authority':False})
+    refs = build_text_context_references(semantic_text, reference_prefix='semantic',kind='semantic-context',path='semantic.json',
+        repository_id='repository:git-common-dir',tree_id='head:git',required=True,chunk_bytes=350)
+    refs += build_text_context_references(code_text,reference_prefix='code-retrieval',kind='code-retrieval-context',path='retrieval.json',
+        repository_id='repository:git-common-dir',tree_id='head:git',required=True,chunk_bytes=1000)
+    refs += catalog.build_nomination_reference(artifact=prepared['artifact'],sha256=prepared['sha256'],
+        repository_id='repository:git-common-dir',tree_id='head:git')
+    compiled = ContextCompiler(ContextBudget(max_input_tokens=32768,max_items=128,max_item_bytes=16384,max_serialized_bytes=262144)).compile(
+        repository_id='repository:git-common-dir',tree_id='head:git',objective_id=inputs['task_id'],objective_revision=inputs['task_revision'],
+        policy_id='policy:fixture',policy_revision='revision:policy',caller='supervisor:fixture',stage='implementation',
+        goal={'id':inputs['task_id']},authority={'mode':'candidate_only','completion_authority':False},
+        scope={'allowed_paths':['worker.py']},acceptance={'criteria':['checks pending']},evidence=refs)
+    prompt = render_context_capsule(compiled.capsule)
+    block, public = inclusion(query)
+    public.update(task_id=inputs['task_id'],task_cid=inputs['task_cid'],schema='supervisor-public-instruction-inclusion@2',
+        intent_requirements={'contract_cid':prepared['nomination']['bindings']['contract_cid'],
+                             'ledger_sha256':inputs['contract']['ledger']['ledger_sha256']})
+    semantic = {'task_id':inputs['task_id'],'scope_cid':inputs['tree_id'],'native_prompt_sha256':sha(prompt.encode()),
+        'native_prompt_bytes':len(prompt.encode()),'freshness_checked':True,'semantic_root_cid':'semantic:fixture','semantic_sha256':'b'*64}
+    return dict(root=root,inputs=inputs,prepared=prepared,prompt=prompt,public=public,block=block,semantic=semantic,code_text=code_text,refs=refs)
+
+
+@pytest.fixture
+def case(tmp_path):return make_case(tmp_path)
+
+
+def load(case, **overrides):
+    return catalog.load_reviewed_source_nomination_context(**{**dict(prompt=case['prompt'],repository=case['root'],
+        source_text=case['inputs']['source_text'],instruction_receipt=case['public'],semantic_verification=case['semantic']),**overrides})
+
+
+def modified_prompt(case, change):
+    capsule=json.loads(case['prompt']);change(capsule)
+    prompt=source._json(capsule)
+    semantic={**case['semantic'],'native_prompt_sha256':sha(prompt.encode()),'native_prompt_bytes':len(prompt.encode())}
+    return prompt,semantic
+
+
+def other_revision_catalog(case, revision):
+    """Produce genuine rehashed public inputs in a fresh fixture namespace."""
+    root=case['root'];inputs={**case['inputs'],'task_revision':revision}
+    fr=frontier.prepare_code_retrieval_frontier(repository=root,task_id=inputs['task_id'],task_cid=inputs['task_cid'],
+        task_revision=revision,repository_id=inputs['repository_id'],tree_id=inputs['tree_id'],
+        source_artifact='retrieval.json',source_sha256=case['prepared']['native_bindings']['source_artifact_sha256'],
+        output=root/'other-revision-frontier')
+    review=review_for(inputs)
+    review_path=root/'other-revision-review.json';review_path.write_bytes(wire(review));review_path.chmod(0o644)
+    for path in (root/'other-revision-frontier').rglob('*'):path.chmod(0o755 if path.is_dir() else 0o644)
+    (root/'other-revision-frontier').chmod(0o755)
+    prepared=reader.prepare_intent_source_nomination_artifact(repository=root,
+        artifact=fr['metadata']['Code retrieval frontier artifact'],expected_sha256=fr['metadata']['Code retrieval frontier sha256'],
+        task_id=inputs['task_id'],task_cid=inputs['task_cid'],source_artifact='retrieval.json',
+        source_sha256=case['prepared']['native_bindings']['source_artifact_sha256'],contract=inputs['contract'],
+        source_text=inputs['source_text'],review_path=review_path,review_sha256=sha(wire(review)),
+        output=root/'other-revision-nominations')
+    def substitute(capsule):
+        references=catalog.build_nomination_reference(artifact=prepared['artifact'],sha256=prepared['sha256'],
+            repository_id=capsule['repository_id'],tree_id=capsule['tree_id'])
+        position=next(index for index,row in enumerate(capsule['evidence']) if row['kind']==catalog.KIND)
+        capsule['evidence'][position]=references[0].to_record()
+    prompt,semantic=modified_prompt(case,substitute)
+    return prepared,prompt,semantic
+
+
+def test_native_revision_and_task_cid_have_distinct_verified_namespaces(case):
+    capsule=json.loads(case['prompt'])
+    bindings=case['prepared']['nomination']['bindings']
+    assert case['inputs']['task_cid'] != case['inputs']['task_revision']
+    assert capsule['objective_revision'] == bindings['task_revision'] == case['inputs']['task_revision']
+    assert bindings['task_cid'] == case['public']['task_cid'] == case['inputs']['task_cid']
+    block,receipt,guard=load(case)
+    assert receipt['task_cid'] == case['inputs']['task_cid']
+    assert receipt['native_prompt_sha256'] == sha(case['prompt'].encode())
+    assert receipt['block_sha256'] == sha(block.encode())
+    assert receipt['proof_authority'] is False and receipt['completion_authority'] is False
+    assert guard() is None
+
+
+@pytest.mark.parametrize('revision',['task:nomination','revision:foreign','',None,True,1,1.0,[],{}])
+def test_native_revision_cannot_alias_task_cid_or_foreign_revision(case,revision):
+    # All prompt/semantic pins agree; the independent captured frontier and
+    # nomination retain their original revision, so this must still fail.
+    prompt,semantic=modified_prompt(case,lambda capsule:capsule.__setitem__('objective_revision',revision))
+    with pytest.raises(source.CodeSourceInspectionError,match='catalog differs'):
+        load(case,prompt=prompt,semantic_verification=semantic)
+
+
+@pytest.mark.parametrize('task_cid',['revision:1','task:foreign','',None,True,1,[],{}])
+def test_instruction_task_cid_cannot_alias_verified_revision(case,task_cid):
+    receipt={**case['public'],'task_cid':task_cid}
+    with pytest.raises(ValueError):load(case,instruction_receipt=receipt)
+
+
+def test_rehashed_frontier_review_and_catalog_cannot_replace_independent_capsule_revision(case):
+    prepared,prompt,semantic=other_revision_catalog(case,'revision:foreign')
+    assert prepared['nomination']['bindings']['task_revision']=='revision:foreign'
+    assert prepared['nomination']['bindings']['task_cid']==case['public']['task_cid']
+    assert prepared['sha256']!=case['prepared']['sha256']
+    assert json.loads(prompt)['objective_revision']==case['inputs']['task_revision']
+    with pytest.raises(source.CodeSourceInspectionError,match='catalog differs'):
+        load(case,prompt=prompt,semantic_verification=semantic)
+
+
+@pytest.mark.parametrize('field',['task_cid','task_revision','native_revision'])
+def test_loaded_catalog_retains_independent_cid_and_both_revision_joins(case,monkeypatch,field):
+    real=reader.load_intent_source_nomination_catalog
+    called=[]
+    def substituted(**kwargs):
+        loaded=deepcopy(real(**kwargs));called.append(True)
+        if field=='native_revision':loaded['evidence']['spec']['task_revision']='revision:foreign'
+        else:loaded['nomination']['bindings'][field]='task:foreign' if field=='task_cid' else 'revision:foreign'
+        return loaded
+    monkeypatch.setattr(reader,'load_intent_source_nomination_catalog',substituted)
+    with pytest.raises(source.CodeSourceInspectionError,match='catalog differs'):load(case)
+    assert called==[True]
+
+
+DIAGNOSTIC_GUARDS=(
+    'task_cid','task_revision','frontier_task_revision','contract_cid','ledger_sha256',
+    'instruction_source_sha256','repository_id','tree_id','semantic_source_hashes','source_population',
+)
+DIAGNOSTIC_PREFIX='catalog differs from verified semantic and requirement bindings'
+DIAGNOSTIC_FOREIGN='SYNTHETIC_DIAGNOSTIC_FOREIGN_VALUE_NEVER_EXPORTED'
+
+
+def bad_loaded_binding(loaded,field):
+    if field=='frontier_task_revision':loaded['evidence']['spec']['task_revision']=DIAGNOSTIC_FOREIGN
+    elif field=='semantic_source_hashes':loaded['nomination']['sources'][0]['sha256']=DIAGNOSTIC_FOREIGN
+    elif field=='source_population':loaded['evidence']['sources'][DIAGNOSTIC_FOREIGN]='irrelevant'
+    else:loaded['nomination']['bindings'][field]=DIAGNOSTIC_FOREIGN
+
+
+@pytest.mark.parametrize('field',DIAGNOSTIC_GUARDS)
+def test_each_failed_catalog_guard_reports_only_static_field_label(case,monkeypatch,field):
+    real=reader.load_intent_source_nomination_catalog
+    called=[]
+    def substituted(**kwargs):
+        loaded=deepcopy(real(**kwargs));called.append(True)
+        bad_loaded_binding(loaded,field)
+        return loaded
+    monkeypatch.setattr(reader,'load_intent_source_nomination_catalog',substituted)
+    with pytest.raises(source.CodeSourceInspectionError) as raised:load(case)
+    assert type(raised.value) is source.CodeSourceInspectionError
+    assert str(raised.value)==DIAGNOSTIC_PREFIX+': '+field
+    assert DIAGNOSTIC_FOREIGN not in str(raised.value)
+    assert called==[True]
+
+
+@pytest.mark.parametrize('first',DIAGNOSTIC_GUARDS[:-1])
+def test_catalog_guard_diagnostic_preserves_first_failed_predicate_order(case,monkeypatch,first):
+    real=reader.load_intent_source_nomination_catalog
+    def substituted(**kwargs):
+        loaded=deepcopy(real(**kwargs))
+        bad_loaded_binding(loaded,first)
+        bad_loaded_binding(loaded,DIAGNOSTIC_GUARDS[-1])
+        return loaded
+    monkeypatch.setattr(reader,'load_intent_source_nomination_catalog',substituted)
+    with pytest.raises(source.CodeSourceInspectionError) as raised:load(case)
+    assert str(raised.value)==DIAGNOSTIC_PREFIX+': '+first
+
+
+def test_failed_first_catalog_guard_skips_later_predicates_render_and_io(case,monkeypatch):
+    real=reader.load_intent_source_nomination_catalog
+    real_read=source._PublicCapture.read
+    capture_finished=[]
+    class LaterBindingTripwire(dict):
+        def __getitem__(self,key):
+            assert key=='task_cid','failed first predicate evaluated a later binding'
+            return super().__getitem__(key)
+    def substituted(**kwargs):
+        loaded=deepcopy(real(**kwargs))
+        loaded['nomination']['bindings']=LaterBindingTripwire(loaded['nomination']['bindings'])
+        bad_loaded_binding(loaded,'task_cid')
+        capture_finished.append(True)
+        return loaded
+    def read(self,*args,**kwargs):
+        assert not capture_finished,'failed catalog predicate triggered additional public input I/O'
+        return real_read(self,*args,**kwargs)
+    monkeypatch.setattr(reader,'load_intent_source_nomination_catalog',substituted)
+    monkeypatch.setattr(source._PublicCapture,'read',read)
+    monkeypatch.setattr(catalog,'render_reviewed_source_nomination_block',
+        lambda **_:pytest.fail('failed catalog predicate reached model catalog render'))
+    with pytest.raises(source.CodeSourceInspectionError) as raised:load(case)
+    assert str(raised.value)==DIAGNOSTIC_PREFIX+': task_cid'
+    assert type(raised.value) is source.CodeSourceInspectionError and capture_finished==[True]
+
+
+def test_catalog_all_rows_residuals_and_exact_emitted_cli_from_unrelated_cwd(case,tmp_path):
+    block,receipt,guard=load(case)
+    packet=json.loads(block[len(catalog.HEADER):])
+    assert len(block.encode())<=8192 and receipt['block_bytes']==len(block.encode())
+    assert receipt['block_sha256']==sha(block.encode())
+    assert len(packet['rows'])==1 and packet['rows'][0]['qualified_symbol']=='worker.HeaderDict._hkey'
+    assert packet['residual_requirements'] and all(row['residual'] for row in packet['residual_requirements'])
+    assert packet['unknown_census']['dependencies']['receiver_resolution']=={'status':'not_analyzed','unknown_count':None}
+    assert 'candidate_intent_ir' not in block and '"embedding"' not in block
+    candidate=tmp_path/'candidate';candidate.mkdir()
+    # Append the guidance's exact required args, without inventing hidden pins.
+    command=packet['inspector']['command_prefix']+' '+shlex.join(['--row-id',packet['rows'][0]['row_id'],
+        '--question','Exact requested public definition','--mode','source','--max-bytes','8192'])
+    actual=subprocess.run(command,shell=True,cwd=candidate,env={'PATH':'/usr/bin:/bin','HOME':str(candidate)},
+        capture_output=True,timeout=30)
+    assert actual.returncode==0,actual.stderr.decode()
+    result=json.loads(actual.stdout);assert result['content_text'].startswith('    @decorate\n    def _hkey')
+    assert result['bindings']['selected_from_query_hits'] is False
+    assert len(actual.stdout)<=8192 and not actual.stdout.endswith(b'\n')
+    assert guard() is None
+
+
+def test_empty_review_visible_unknowns_no_false_candidates(tmp_path):
+    case=make_case(tmp_path,empty=True)
+    block,receipt,_=load(case)
+    packet=json.loads(block[len(catalog.HEADER):])
+    assert packet['rows']==[] and receipt['row_count']==0
+    assert len(packet['residual_requirements'])==3 and packet['unknown_census']['unknown_symbol_requirement_count']==3
+
+
+def test_real_frontier_packet_full_replay_joins_preserve_catalog(tmp_path):
+    extended=SOURCE+'\n'+'\n\n'.join(f'def extra_{number}(payload):\n    return payload.extra_{number}()' for number in range(20))+'\n'
+    case=make_case(tmp_path,source_text=extended,max_results=20,transport='frontier')
+    assert json.loads(case['code_text'])['schema']==frontier.PACKET_SCHEMA
+    block,receipt,_=load(case)
+    assert json.loads(block[len(catalog.HEADER):])['rows'][0]['qualified_symbol']=='worker.HeaderDict._hkey'
+    assert receipt['captured_native_query_and_ast_replayed'] is True
+
+
+def test_absent_pointer_exact_default_no_io_or_receipt(case,monkeypatch):
+    prompt,_=modified_prompt(case,lambda wire:wire['evidence'].__setitem__(slice(None),[row for row in wire['evidence'] if row['kind']!=catalog.KIND]))
+    monkeypatch.setattr(source._PublicCapture,'read',lambda *a,**k:pytest.fail('absent route read filesystem'))
+    assert load(case,prompt=prompt)==('',None,None)
+    assert catalog.nomination_pointer('legacy nonnative task prompt') is None
+
+
+@pytest.mark.parametrize('change',['duplicate','optional','extra_metadata','reference_id','path','parent_repository','parent_tree','wrong_sha','extra_pair','foreign_nativepath'])
+def test_typed_pointer_and_original_native_chunk_tampering_refused(case,change):
+    def modify(capsule):
+        pointer=next(row for row in capsule['evidence'] if row['kind']==catalog.KIND)
+        if change=='duplicate':capsule['evidence'].append(deepcopy(pointer))
+        elif change=='optional':pointer['metadata']['required']=False
+        elif change=='extra_metadata':pointer['metadata']['reviewer_authenticated']=True
+        elif change=='reference_id':pointer['reference_id']='foreign-reference'
+        elif change=='path':pointer['path']='foreign.json'
+        elif change=='parent_repository':pointer['repository_id']='repository:foreign'
+        elif change=='parent_tree':pointer['tree_id']='tree:foreign'
+        elif change=='foreign_nativepath':next(row for row in capsule['evidence'] if row['kind']=='code-retrieval-context')['path']='foreign.json'
+        else:
+            pair=json.loads(pointer['summary'])
+            if change=='wrong_sha':pair['sha256']='0'*64
+            else:pair['reviewer_authenticated']=True
+            pointer['summary']=source._json(pair)
+            pointer['byte_count']=len(pointer['summary'].encode());pointer['referenced_content_id']='sha256:'+sha(pointer['summary'].encode())
+    prompt,semantic=modified_prompt(case,modify)
+    with pytest.raises(ValueError):load(case,prompt=prompt,semantic_verification=semantic)
+
+
+@pytest.mark.parametrize('field',['task_id','task_cid','source_sha256','source_bytes','manifest_signature_verified','contract_cid','ledger_sha256'])
+def test_independent_public_instruction_and_contract_bindings_refused(case,field):
+    receipt=deepcopy(case['public'])
+    if field in {'contract_cid','ledger_sha256'}:receipt['intent_requirements'][field]='foreign'
+    elif field=='source_bytes':receipt[field]+=1
+    elif field=='manifest_signature_verified':receipt[field]=False
+    else:receipt[field]='foreign'
+    with pytest.raises(ValueError):load(case,instruction_receipt=receipt)
+
+
+@pytest.mark.parametrize('field',['task_id','scope_cid','native_prompt_sha256','native_prompt_bytes','freshness_checked'])
+def test_independent_semantic_route_bindings_refused(case,field):
+    semantic={**case['semantic'],field:False if field=='freshness_checked' else 1 if field=='native_prompt_bytes' else 'foreign'}
+    with pytest.raises(ValueError):load(case,semantic_verification=semantic)
+
+
+def test_semantic_source_manifest_mismatch_and_catalog_full_gain_budget_refused(case):
+    def change(capsule):
+        row=next(row for row in capsule['evidence'] if row['kind']=='semantic-context')
+        row['summary']='foreign'
+    prompt,semantic=modified_prompt(case,change)
+    with pytest.raises(ValueError):load(case,prompt=prompt,semantic_verification=semantic)
+    with pytest.raises(source.CodeSourceInspectionBoundsError):load(case,max_bytes=1024)
+
+
+def test_catalog_finalguard_detects_command_prefix_callback_input_write_restore(case,monkeypatch):
+    target=case['root']/case['prepared']['artifact'];raw=target.read_bytes()
+    real=catalog._command_prefix
+    def prefix(*args):
+        command=real(*args);target.write_bytes(raw+b' ');target.write_bytes(raw);return command
+    monkeypatch.setattr(catalog,'_command_prefix',prefix)
+    with pytest.raises(ValueError):load(case)
+
+
+def test_catalog_whole_operation_suppresses_owner_and_guard_detects_later_source_change(case,monkeypatch):
+    from ipfs_accelerate_py.agent_supervisor.runtime import supervisor_meta_index as metadata
+    calls=[];monkeypatch.setattr(metadata.SupervisorMetaIndex,'from_env',lambda:calls.append(True))
+    _,_,guard=load(case);assert calls==[]
+    target=case['root']/'worker.py';raw=target.read_bytes();target.write_bytes(raw+b' ');target.write_bytes(raw)
+    with pytest.raises(ValueError):guard()
+
+
+def test_daemon_required_pointer_and_absent_default_roundtrip(case,monkeypatch):
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import PortalImplementationDaemon
+    fake=SimpleNamespace(repo_root=case['root'],_task_metadata_value=lambda task,key: task.metadata.get(key,''))
+    base={'code retrieval artifact':'retrieval.json','code retrieval sha256':case['prepared']['native_bindings']['source_artifact_sha256']}
+    task=SimpleNamespace(task_id=case['inputs']['task_id'],canonical_task_cid=case['inputs']['task_cid'],metadata=base)
+    old=PortalImplementationDaemon._code_retrieval_implementation_references(fake,task,repository_id='repo:outer',tree_id='head:outer')
+    assert all(row.kind!=catalog.KIND for row in old)
+    task.metadata={**base,**{key.lower():value for key,value in case['prepared']['metadata'].items()}}
+    new=PortalImplementationDaemon._code_retrieval_implementation_references(fake,task,repository_id='repo:outer',tree_id='head:outer')
+    assert new[:-1]==old and new[-1].kind==catalog.KIND and new[-1].required
+    task.metadata.pop('code source nomination sha256')
+    with pytest.raises(ValueError):PortalImplementationDaemon._code_retrieval_implementation_references(fake,task,repository_id='repo:outer',tree_id='head:outer')
+
+
+def setup_runner(case,tmp_path,monkeypatch):
+    from ipfs_accelerate_py import llm_router
+    from ipfs_accelerate_py.llm_allocation import intelligence_index
+    from ipfs_accelerate_py.agent_supervisor.runtime import (semantic_router_translation,router_public_instruction,
+        multi_supervisor_runner,codex_usage_receipt)
+    def git(*args):subprocess.run(['/usr/bin/git','-C',str(case['root']),*args],capture_output=True,check=True)
+    git('init');git('add','worker.py','instruction.md');git('-c','user.name=Fixture','-c','user.email=fixture@example.invalid','commit','-m','public')
+    workspace=tmp_path/'allocated-worktree';git('worktree','add','--detach',str(workspace),'HEAD');monkeypatch.chdir(workspace)
+    for name in (*multi_supervisor_runner.DATABASE_PROGRAM_ENV_NAMES,*multi_supervisor_runner.STATE_CREDENTIAL_ENV_NAMES,'IPFS_ACCELERATE_AGENT_STATE_OWNER_TOKEN'):
+        monkeypatch.delenv(name,raising=False)
+    monkeypatch.setattr(semantic_router_translation,'encode_semantic_router_prompt',lambda **_:SimpleNamespace(
+        receipt=case['semantic'],provider_prompt=case['prompt']))
+    monkeypatch.setattr(semantic_router_translation,'decode_semantic_router_response',lambda response,**_:SimpleNamespace(
+        text=response,receipt={'unit_stub':True,'completion_authority':False}))
+    monkeypatch.setattr(router_public_instruction,'load_public_instruction',lambda **_:(case['block'],case['public']))
+    monkeypatch.setattr(intelligence_index,'discover_available_providers',lambda:['codex_cli'])
+    monkeypatch.setattr(intelligence_index,'select_efficient_route',lambda **_:SimpleNamespace(provider='codex_cli',model_name='pinned',catalog_revision='fixture'))
+    monkeypatch.setattr(llm_router,'get_llm_provider',lambda *a,**k:object())
+    monkeypatch.setattr(codex_usage_receipt,'recover_codex_usage',lambda **_:None)
+    from ipfs_accelerate_py.cli_runtime.cli_metadata import set_last_cli_observation
+    monkeypatch.setattr(llm_router,'generate_text',lambda *a,**k:set_last_cli_observation('codex_cli',{'exit_code':0}) or 'fake')
+    return llm_router,dict(prompt=case['prompt'],provider='codex_cli',model='pinned',timeout=30,max_output_tokens=100,
+        semantic_repository=case['root'],semantic_transport='native',public_instruction_artifact=tmp_path/'synthetic-admitted.json',
+        public_instruction_sha256='a'*64,public_instruction_task_cid=case['inputs']['task_cid'])
+
+
+@pytest.mark.parametrize('mode,semantic_mode',[('expanded','native'),('compact','native'),('expanded','identifiers')])
+def test_actual_runner_fake_dispatch_preserves_native_identity_literal_and_full_catalog(case,tmp_path,monkeypatch,capsys,mode,semantic_mode):
+    llm,options=setup_runner(case,tmp_path,monkeypatch);observed=[]
+    def generate(prompt,**kwargs):
+        from ipfs_accelerate_py.cli_runtime.cli_metadata import set_last_cli_observation
+        observed.append(prompt);set_last_cli_observation('codex_cli',{'exit_code':0});return 'authored fake response'
+    monkeypatch.setattr(llm,'generate_text',generate)
+    _,receipt=runner.run(**{**options,'semantic_transport':semantic_mode},code_retrieval_codec=mode)
+    assert len(observed)==1 and receipt['router_calls']==1
+    assert observed[0].endswith(case['block']) and catalog.HEADER in observed[0]
+    assert receipt['native_prompt_sha256']==sha(case['prompt'].encode())
+    assert receipt['reviewed_source_nomination_context']['row_count']==1
+    assert receipt['model_prompt_bytes']==len(observed[0].encode())
+    assert receipt['completion_authority'] is False
+    assert receipt['semantic_transport']==semantic_mode
+    if mode=='compact':assert receipt['code_retrieval_projection']['selected_transport']=='compact'
+    capsys.readouterr()
+
+
+@pytest.mark.parametrize('observer',[False,True])
+@pytest.mark.parametrize('revision',['task:nomination','revision:foreign'])
+def test_runner_rejects_wrong_revision_before_provider_or_model_observation(case,tmp_path,monkeypatch,observer,revision):
+    from test.api.test_router_model_input_observation import (
+        protect_observation_inputs,forbid_provider_apis,authored_boundary,
+    )
+    from ipfs_accelerate_py.agent_supervisor.runtime import container_worker_boundary
+    _,options=setup_runner(case,tmp_path,monkeypatch)
+    prompt,semantic=modified_prompt(case,lambda capsule:capsule.__setitem__('objective_revision',revision))
+    case['prompt']=prompt;case['semantic'].update(semantic)
+    options['prompt']=prompt
+    if observer:
+        artifact=protect_observation_inputs(case['root'],prompt,case['public'])
+        monkeypatch.setattr(container_worker_boundary,'verify_container_worker_boundary',lambda **_:authored_boundary())
+        options.update(public_instruction_artifact=artifact,public_instruction_sha256=case['public']['artifact_sha256'],
+            container_boundary=tmp_path/'authored-boundary.json',container_boundary_sha256='c'*64,
+            observe_model_input_only=True)
+    forbid_provider_apis(monkeypatch)
+    emitted=[];real=runner.render_model_prompt
+    def render(**kwargs):emitted.append(True);return real(**kwargs)
+    monkeypatch.setattr(runner,'render_model_prompt',render)
+    with pytest.raises(source.CodeSourceInspectionError,match='catalog differs'):
+        runner.run(**options)
+    assert emitted==[]
+
+
+def test_runner_absent_default_unchanged_and_missing_binding_preprovider(case,tmp_path,monkeypatch,capsys):
+    llm,options=setup_runner(case,tmp_path,monkeypatch)
+    monkeypatch.setattr(llm,'generate_text',lambda *a,**k:pytest.fail('invalid nomination reached provider'))
+    with pytest.raises(ValueError):runner.run(**{**options,'public_instruction_artifact':None,'public_instruction_sha256':'','public_instruction_task_cid':''})
+    prompt,semantic=modified_prompt(case,lambda capsule:capsule['evidence'].__setitem__(slice(None),[row for row in capsule['evidence'] if row['kind']!=catalog.KIND]))
+    case['semantic'].update(semantic);captured=[]
+    def generate(prompt,**kwargs):
+        from ipfs_accelerate_py.cli_runtime.cli_metadata import set_last_cli_observation
+        captured.append(prompt);set_last_cli_observation('codex_cli',{'exit_code':0});return 'fake'
+    monkeypatch.setattr(llm,'generate_text',generate)
+    _,receipt=runner.run(**{**options,'prompt':prompt})
+    expected,_=runner.render_model_prompt(prompt=prompt+case['block'],purpose='coding',workspace=Path.cwd())
+    assert captured==[expected] and 'reviewed_source_nomination_context' not in receipt
+    capsys.readouterr()
+
+
+def test_runner_finalguard_before_dispatch_rejects_provider_selection_mutation(case,tmp_path,monkeypatch,capsys):
+    llm,options=setup_runner(case,tmp_path,monkeypatch)
+    target=case['root']/case['prepared']['artifact'];raw=target.read_bytes()
+    def provider(*a,**k):target.write_bytes(raw+b' ');target.write_bytes(raw);return object()
+    monkeypatch.setattr(llm,'get_llm_provider',provider)
+    monkeypatch.setattr(llm,'generate_text',lambda *a,**k:pytest.fail('changed nomination reached provider'))
+    with pytest.raises(ValueError):runner.run(**options)
+    receipt=json.loads(capsys.readouterr().out.strip().splitlines()[-1])
+    assert receipt['router_calls']==0 and receipt['usage'] is None and receipt['completion_authority'] is False
+
+
+def test_runner_finalguard_after_materializer_callback_refuses_before_provider(case,tmp_path,monkeypatch,capsys):
+    from ipfs_accelerate_py.agent_supervisor.runtime import code_retrieval_wire_delivery as delivery,container_worker_boundary
+    llm,options=setup_runner(case,tmp_path,monkeypatch)
+    monkeypatch.setattr(container_worker_boundary,'verify_container_worker_boundary',lambda **_:{'unit_stub':True})
+    real=delivery.materialize_verified_code_retrieval_wire
+    target=case['root']/case['prepared']['artifact'];raw=target.read_bytes();called=[]
+    def materialize(*args,**kwargs):
+        handle=real(*args,**kwargs);called.append(True)
+        target.write_bytes(raw+b' ');target.write_bytes(raw)
+        return handle
+    monkeypatch.setattr(delivery,'materialize_verified_code_retrieval_wire',materialize)
+    monkeypatch.setattr(llm,'generate_text',lambda *a,**k:pytest.fail('changed nomination reached provider'))
+    # The public fixture may have writable workspace ancestors. Keep the real
+    # production ancestry check and put only this ephemeral wire beneath /tmp.
+    with tempfile.TemporaryDirectory(prefix='nomination-materializer-',dir='/tmp') as directory:
+        wire_root=Path(directory)/'context-wires';wire_root.mkdir(mode=0o700)
+        monkeypatch.setattr(runner,'_wire_delivery_root',lambda:wire_root)
+        with pytest.raises(ValueError):runner.run(**options,code_retrieval_codec='compact',code_retrieval_wire_delivery='materialized',
+            container_boundary=tmp_path/'synthetic-boundary.json',container_boundary_sha256='c'*64)
+        receipt=json.loads(capsys.readouterr().out.strip().splitlines()[-1])
+        assert called==[True] and receipt['router_calls']==0 and receipt['usage'] is None
+        assert receipt['wire_delivery_cleanup_status']=='removed' and list(wire_root.iterdir())==[]
+
+
+def test_complete_model_budget_charges_catalog_and_literal_before_any_provider_call(case,tmp_path,monkeypatch):
+    llm,options=setup_runner(case,tmp_path,monkeypatch)
+    prompt=case['prompt']+'\n'+('x'*(254000-len(case['prompt'].encode())-1))
+    case['semantic'].update(native_prompt_sha256=sha(prompt.encode()),native_prompt_bytes=len(prompt.encode()))
+    assert len(prompt.encode())==254000
+    monkeypatch.setattr(llm,'get_llm_provider',lambda *a,**k:pytest.fail('overbudget prompt selected provider'))
+    monkeypatch.setattr(llm,'generate_text',lambda *a,**k:pytest.fail('overbudget prompt dispatched provider'))
+    with pytest.raises(ValueError,match='model prompt'):
+        runner.run(**{**options,'prompt':prompt})

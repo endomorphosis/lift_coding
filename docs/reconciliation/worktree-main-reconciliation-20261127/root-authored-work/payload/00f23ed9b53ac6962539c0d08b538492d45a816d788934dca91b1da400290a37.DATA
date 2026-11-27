@@ -1,0 +1,7 @@
+try:
+    upload_piece(b'hello')
+except RuntimeError as error:
+    assert str(error) == 'backend unavailable'
+else:
+    raise AssertionError('failure was swallowed')
+assert marker() == 'beta'

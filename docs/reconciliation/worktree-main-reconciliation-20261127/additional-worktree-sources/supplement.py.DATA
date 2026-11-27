@@ -1,0 +1,128 @@
+"""Add omitted runtime-package source and salvage one broken-Git source tree."""
+from collections import Counter
+from hashlib import sha1, sha256
+import importlib.util
+import json
+import os
+from pathlib import Path, PurePosixPath
+import re
+import stat
+import time
+
+OUT=Path(__file__).parent
+spec=importlib.util.spec_from_file_location('private_retention_helpers',OUT/'preserve.py')
+h=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(h)
+BASE=OUT/'retention-manifest.json'
+SALVAGE=Path('/home/barberb/.local/state/ipfs-taskboard-watchdog/repairs/sawm/retained-fairness-source-adoption-20260914/source')
+CODE_EXT={'.py','.js','.jsx','.ts','.tsx','.mjs','.cjs','.c','.cc','.cpp','.h','.hpp','.rs','.go','.sh','.bash','.ps1','.lean','.sql'}
+CACHE={'.git','__pycache__','node_modules','.venv','venv','.cache','dist','build'}
+RAW_DIRS={'logs','log','models','model','weights','checkpoints','checkpoint','raw','outputs','output','artifacts','data','workspace','tmp'}
+TOP_DIRS={'benchmarks','config','configs','docs','ipfs_accelerate_py','ipfs_datasets_py','ipfs_kit_py','scripts','test','tests','.github'}
+TOP_FILES={'Dockerfile','Makefile','CMakeLists.txt','LICENSE','MANIFEST.in','.gitignore','.gitattributes','.gitmodules','.dockerignore','.coveragerc','.asyncio_allowlist','.env.example','.env.sample'}
+MAX_FILES=20000
+MAX_DIRS=50000
+
+def eligible(relative):
+    p=PurePosixPath(relative)
+    if p.is_absolute() or '..' in p.parts or not p.parts:return False,'unsafe path'
+    if any(part in CACHE for part in p.parts):return False,'dependency/cache/Git storage'
+    if p.suffix.lower() in CODE_EXT:return True,None
+    if any(part in RAW_DIRS for part in p.parts):return False,'non-source raw/model/runtime/data payload directory'
+    if len(p.parts)==1:
+        if p.name in TOP_FILES or p.suffix.lower() in {'.md','.rst','.toml','.ini','.cfg','.yml','.yaml','.html'} or (p.name.startswith('requirements') and p.suffix=='.txt'):
+            return True,None
+        return False,'unselected root output or binary format'
+    if p.parts[0] in TOP_DIRS and p.suffix.lower() in h.SOURCE_EXT:return True,None
+    return False,'not source/config/docs/test input'
+
+def parents_without_symlinks(path):
+    for part in [path,*path.parents]:
+        if part.is_symlink():return False
+    return True
+
+def main():
+    started=time.monotonic()
+    base=json.loads(BASE.read_text())
+    versions={r['sha256']:r['archive'] for r in base['files'] if r['disposition']=='retained-inert-version'}
+    initial=set(versions)
+    total=base['unique_retained_bytes']
+    metadata={}
+    trees={}
+    reachable={}
+    for family in ('ipfs_accelerate_py','ipfs_datasets_py','ipfs_kit_py','lift_coding'):
+        _,trees[family],reachable[family],metadata[family]=h.metadata(family)
+    tree_blobs={family:set(tree.values()) for family,tree in trees.items()}
+    candidates={}
+    exclusions=[]
+    for row in base['exclusions']:
+        if PurePosixPath(row['relative_path']).suffix.lower() in CODE_EXT and row['reason']=='excluded runtime/cache/data/binary-owner directory':
+            candidates[(row['worktree'],row['relative_path'])]={'family':row['family'],'selection':'v01 overbroad directory-filter correction','status':row['status']}
+    if not parents_without_symlinks(SALVAGE):raise RuntimeError('Salvage root contains a symlink')
+    inventory_files=0
+    inventory_dirs=0
+    for current,dirs,files in os.walk(SALVAGE,followlinks=False):
+        inventory_dirs+=1
+        if inventory_dirs>MAX_DIRS:raise RuntimeError('Salvage directory inventory bound exceeded')
+        parent=Path(current)
+        relative_parent=parent.relative_to(SALVAGE)
+        if parent==SALVAGE:
+            dirs[:]=[name for name in dirs if name in TOP_DIRS and name not in CACHE and not (parent/name).is_symlink()]
+        else:
+            dirs[:]=[name for name in dirs if name not in CACHE and not (parent/name).is_symlink()]
+        for name in sorted(files):
+            inventory_files+=1
+            if inventory_files>MAX_FILES:raise RuntimeError('Salvage file inventory bound exceeded')
+            relative=(relative_parent/name).as_posix()
+            okay,why=eligible(relative)
+            if not okay:
+                exclusions.append({'worktree':str(SALVAGE),'relative_path':relative,'reason':why})
+                continue
+            candidates[(str(SALVAGE),relative)]={'family':'ipfs_accelerate_py','selection':'filesystem salvage from broken-alternates clone; container family only','status':'Git status unavailable; exact file snapshot'}
+    files=[]
+    for (root,relative),selection in sorted(candidates.items()):
+        family=selection['family']
+        row={'worktree':root,'relative_path':relative,**selection}
+        try:
+            if not parents_without_symlinks(Path(root)):
+                row.update({'disposition':'capture-refused','reason':'root path contains symlink'})
+                files.append(row);continue
+            raw,info=h.capture(root,relative)
+        except OSError as exc:
+            row.update({'disposition':'capture-refused','reason':type(exc).__name__})
+            files.append(row);continue
+        row.update(info)
+        if raw is None:
+            row['disposition']='capture-refused';files.append(row);continue
+        digest=sha256(raw).hexdigest()
+        oid=sha1(f'blob {len(raw)}\0'.encode()+raw).hexdigest()
+        row.update({'bytes':len(raw),'sha256':digest,'git_blob':oid})
+        if trees[family].get(relative)==oid:row['disposition']='exact-current-main-path'
+        elif oid in reachable[family]:row['disposition']='exact-reachable-main-history'
+        else:
+            other=next((f for f in trees if oid in tree_blobs[f] or oid in reachable[f]),None)
+            if other:
+                row.update({'disposition':'exact-published-other-family-object','proof_family':other})
+            else:
+                hits=[name for name,pattern in h.MARKERS.items() if re.search(pattern,raw)]
+                if hits:row.update({'disposition':'held-credential-marker-review','marker_families':hits})
+                elif b'\0' in raw:row.update({'disposition':'held-binary-content-review'})
+                elif digest in versions:row.update({'disposition':'retained-inert-version','archive':versions[digest],'previously_retained':digest in initial})
+                elif total+len(raw)>h.MAX_TOTAL:row.update({'disposition':'retention-bound-exceeded'})
+                else:
+                    archive='retained/'+family+'/'+digest+'.DATA'
+                    destination=OUT/archive
+                    destination.parent.mkdir(parents=True,exist_ok=True)
+                    with destination.open('xb') as stream:stream.write(raw)
+                    destination.chmod(0o600)
+                    if sha256(destination.read_bytes()).hexdigest()!=digest:raise RuntimeError('Retention readback failed')
+                    versions[digest]=archive
+                    total+=len(raw)
+                    row.update({'disposition':'retained-inert-version','archive':archive,'previously_retained':False})
+        files.append(row)
+    result={'schema':'additional-worktree-source-retention-supplement/v1','base_manifest':str(BASE),'base_manifest_bytes':BASE.stat().st_size,'base_manifest_sha256':sha256(BASE.read_bytes()).hexdigest(),'scope':'Additive preservation only. Correct43runtime-package code omissions and snapshot eligible filesystem source in one clone whose Git HEAD/alternates are broken. No source adoption, Git repair/mutation, project import, tests, models, DB, network, or profiles. Only private stdlib preservation helpers imported.','salvage_root':str(SALVAGE),'salvage_filesystem_inventory_files':inventory_files,'salvage_filesystem_inventory_directories':inventory_dirs,'salvage_history_note':'Container is an Accelerate source clone. Nested source files can prove exact byte membership in another selected family; no ownership or adoption is inferred solely from folder names.','main_metadata':metadata,'files':files,'exclusions':exclusions,'counts':dict(Counter(r['disposition'] for r in files)),'unique_new_versions':len(set(versions)-initial),'total_unique_versions_including_base':len(versions),'total_unique_bytes_including_base':total,'new_unique_bytes':total-base['unique_retained_bytes'],'remaining_gaps':['Broken-clone source snapshot has no Git tracked/untracked distinction.','Object histories with missing local objects remain incomplete; no network repair attempted.','Credential/binary/symlink/bound holds, if any, remain explicit.','Staged index-only variants are not included.'],'elapsed_seconds':round(time.monotonic()-started,3)}
+    p=OUT/'retention-supplement.json'
+    p.write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
+    print(json.dumps({'manifest':str(p),'bytes':p.stat().st_size,'sha256':sha256(p.read_bytes()).hexdigest(),'selected_files':len(files),'counts':result['counts'],'new_unique_versions':result['unique_new_versions'],'new_unique_bytes':result['new_unique_bytes'],'total_unique_versions':len(versions),'total_unique_bytes':total,'salvage_inventory_files':inventory_files,'salvage_inventory_dirs':inventory_dirs,'exclusions':len(exclusions),'elapsed_seconds':result['elapsed_seconds']},indent=2))
+
+if __name__=='__main__':main()

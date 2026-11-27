@@ -1,0 +1,99 @@
+#!/usr/bin/env python3
+"""Real multi-file lexical ambiguity and changing-inventory scanner controls."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import time
+
+HERE = Path(__file__).resolve().parent
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+def write(path, value): path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+def worker(args):
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.scanner import RepositoryScanner
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.snapshot import snapshot_repository
+    from ipfs_datasets_py.logic.software_contracts.semantic_index.explain import _edge_limitations
+    from ipfs_datasets_py.logic.software_contracts.semantic_state import build_semantic_state, verify_semantic_state_bundle
+    assert Path(__import__('ipfs_datasets_py.logic.software_contracts.semantic_index.scanner', fromlist=['x']).__file__).is_relative_to(args.profile)
+    cases = []; started = time.perf_counter()
+    with tempfile.TemporaryDirectory(prefix="ns-resolution-reuse-v6-") as tmp:
+        tree = Path(tmp)
+        initial = {"a.py": b"class Box:\n    def go(self): return 1\n", "b.py": b"class Box:\n    def go(self): return 2\n",
+                   "caller.py": b"def caller(value):\n    return value.go()\n", "safe.py": b"def identity(value):\n    return value\n"}
+        for path, body in initial.items(): (tree / path).write_bytes(body)
+        def scan(previous=None):
+            raw = {p.name: p.read_bytes() for p in tree.glob("*.py")}
+            scanner = RepositoryScanner(repository_id="repo:resolution-reuse-v6")
+            snapshot = snapshot_repository(tree, repository_id="repo:resolution-reuse-v6", exclusions=())
+            state = scanner.scan_snapshot(snapshot, raw, previous_state=previous)
+            return state, scanner.last_reuse_diagnostics.to_dict()
+        baseline, _ = scan()
+        original_may = [e for e in baseline.edges if e.metadata.get("resolution") == "finite_may"]
+        assert len(original_may) == 2
+        mutations = [
+            ("same_inventory", lambda: None),
+            ("comment_only", lambda: (tree / "safe.py").write_bytes(initial["safe.py"] + b"# public comment\n")),
+            ("third_candidate_added", lambda: (tree / "c.py").write_bytes(b"class Box:\n    def go(self): return 3\n")),
+            ("candidate_removed", lambda: (tree / "b.py").unlink()),
+            ("last_competing_candidate_removed", lambda: (tree / "c.py").unlink()),
+            ("all_candidates_removed", lambda: (tree / "a.py").unlink()),
+            ("new_candidate_after_unresolved", lambda: (tree / "d.py").write_bytes(b"class Box:\n    def go(self): return 4\n")),
+        ]
+        prior = baseline
+        for name, mutate in mutations:
+            mutate(); cold, _ = scan(); inc, diag = scan(prior)
+            same = cold.to_dict() == inc.to_dict()
+            cb = build_semantic_state(cold); ib = build_semantic_state(inc)
+            verify_semantic_state_bundle(cb); verify_semantic_state_bundle(ib)
+            blocks_equal = cb.root.root_cid == ib.root.root_cid and dict(cb.blocks) == dict(ib.blocks)
+            cold_calls = [e for e in cold.edges if e.relation == "calls"]
+            inc_calls = [e for e in inc.edges if e.relation == "calls"]
+            limitations_equal = {v for e in cold_calls for v in _edge_limitations(e)} == {v for e in inc_calls for v in _edge_limitations(e)}
+            cases.append({"case": name, "state_equal": same, "root_and_all_blocks_equal": blocks_equal,
+                          "explanation_limitations_equal": limitations_equal,
+                          "cold_calls": [{"target": e.target_id, "resolution": e.metadata.get("resolution"), "confidence": e.confidence} for e in cold_calls],
+                          "incremental_calls": [{"target": e.target_id, "resolution": e.metadata.get("resolution"), "confidence": e.confidence} for e in inc_calls],
+                          "reuse": diag})
+            # Current cold is independently authoritative next-step parent, so
+            # one failed incremental result cannot hide later inventory changes.
+            prior = cold
+        stable_cold, _ = scan(); stable_inc, diag = scan(stable_cold)
+        assert "safe.py" in diag["reused_paths"]
+        if args.profile.name == "runtime_resolution_reuse_v6":
+            assert all(r["state_equal"] and r["root_and_all_blocks_equal"] and r["explanation_limitations_equal"] for r in cases)
+            assert "caller.py" in cases[0]["reuse"]["analyzed_paths"]
+        else:
+            assert not cases[0]["state_equal"] and not cases[0]["explanation_limitations_equal"]
+    write(args.result, {"profile": args.profile.name, "cases": cases, "safe_path_reuse_observed": True,
+                       "all_equivalences_passed": all(r["state_equal"] and r["root_and_all_blocks_equal"] and r["explanation_limitations_equal"] for r in cases),
+                       "expected_profile_behavior_observed": True, "wall_seconds": time.perf_counter() - started, "provider_calls": 0})
+
+def main():
+    p = argparse.ArgumentParser(); p.add_argument("--worker", action="store_true"); p.add_argument("--profile", type=Path); p.add_argument("--result", type=Path)
+    args = p.parse_args()
+    if args.worker: return worker(args)
+    out = HERE / "resolution_reuse_validation_v6"; out.mkdir()
+    profile = read(HERE / "results_v12_full_state_identity/runtime_source_manifest.json")
+    write(out / "freeze.json", {"driver_sha256": sha(Path(__file__).read_bytes()), "variant_manifest_sha256": sha((HERE / "runtime_resolution_reuse_v6_manifest.json").read_bytes())})
+    results = []
+    for name in ("runtime_state_identity_v5", "runtime_resolution_reuse_v6"):
+        root = HERE / name
+        command = [sys.executable, "-B", str(Path(__file__)), "--worker", "--profile", str(root), "--result", str(out / (name + ".json"))]
+        env = dict(os.environ, PYTHONPATH=":".join([str(root)] + profile["pythonpath"][1:]), IPFS_ACCEL_SKIP_CORE="1", PYTHONDONTWRITEBYTECODE="1")
+        tick = time.perf_counter(); proc = subprocess.run(command, env=env, cwd="/tmp", capture_output=True, timeout=180)
+        (out / (name + ".stdout")).write_bytes(proc.stdout); (out / (name + ".stderr")).write_bytes(proc.stderr)
+        write(out / (name + ".process.json"), {"command": command, "returncode": proc.returncode, "wall_seconds": time.perf_counter() - tick})
+        if proc.returncode: raise SystemExit("control failed; preserve logs")
+        results.append(read(out / (name + ".json")))
+    write(out / "summary.json", {"schema": "ns-resolution-reuse-control/v6", "results": results,
+          "original_discrepancy_reproduced": not results[0]["all_equivalences_passed"],
+          "variant_all_equivalences_passed": results[1]["all_equivalences_passed"], "provider_calls": 0})
+    print(json.dumps({"original_discrepancy_reproduced": True, "variant_all_equivalences_passed": True, "cases_per_profile": 7}))
+
+if __name__ == "__main__": main()

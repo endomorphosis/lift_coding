@@ -1,0 +1,43 @@
+# Full Pyparsing incremental identity qualification v13
+
+This is a prospective development qualification under the unchanged explicit
+`runtime_state_identity_v5` native source profile. It appends one authored Python
+comment to `pyparsing/helpers.py` in a separate copy of the complete public source.
+The original public tree, Requests enrollment profiles, and v12 results remain
+unchanged. It is not a naturally occurring issue or a repair-quality evaluation.
+
+The frozen driver launches independent baseline and changed-cold processes in
+parallel. If both finish successfully, it binds their retained artifacts and starts
+the changed-incremental process. That process reconstructs the baseline repository
+state through `RepositoryState.from_dict`, reconstructs its root, loads every stored
+block, and invokes the native bundle constructor and complete verifier. It then
+passes the actual restored state and bundle to the native incremental scan/build
+interfaces. No guard is dropped for restored artifacts.
+
+Every worker has the same prospective 900-second bound. This larger qualification
+bound includes full-state restoration, repeated block verification, and durable
+transport; it does not change the 600-second bound of the context service measured
+in v12. A deadline or error retains its process receipt and logs and leaves the
+qualification incomplete. Incremental work is not launched if an initial worker
+fails. No provider is invoked and no source omission is authorized.
+
+All workers record stage wall/CPU times and an enclosing subprocess wall time.
+The enclosing process receipt includes initialization, import, runtime/source
+guards, native work, persistence, result hashing and exit. The driver wall interval
+starts after its one-time source-copy enrollment and freeze creation, which are
+not separately timed in this version. Baseline and changed-cold overlap on a
+shared, nonexclusive host. Consequently these numbers must not be reported as
+a replicated speedup or complete deployment cost estimate.
+
+The primary comparison checks exact serialized state and root bytes and reads all
+cold/incremental SQLite block rows in sorted CID order, comparing actual BLOB bytes.
+It covers the complete finite native bundle, including all reachable blocks.
+Source controls require fresh materialization to succeed, stale expected state to
+reject, old bytes under the changed state to reject, changed bytes under the old
+state to reject, and a change between the two native reads to reject.
+
+The independent auditor rehashes every frozen runtime file, checks terminal process
+receipts and source inventories, validates parent artifact bindings and source
+control outcomes, and rereads every cold/incremental block byte. A successful
+result would qualify this one full-repository mutation; it would not prove a
+general correctness theorem, token advantage, execution reuse or quality gain.

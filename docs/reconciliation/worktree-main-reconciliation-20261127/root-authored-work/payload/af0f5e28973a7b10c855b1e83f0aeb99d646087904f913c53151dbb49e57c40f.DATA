@@ -1,0 +1,134 @@
+#!/usr/bin/env python3
+"""Independent exact-artifact audit of the explicitly rescanning v6 profile."""
+import base64
+from collections import Counter
+import hashlib
+import json
+import os
+from pathlib import Path
+import sqlite3
+import time
+
+HERE = Path(__file__).resolve().parent
+OUT = HERE / "results_v14_full_pyparsing_resolution_guard"
+PRIOR = HERE / "results_v13_full_pyparsing_incremental"
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+
+def main():
+    start = time.perf_counter()
+    output = HERE / "full_pyparsing_resolution_guard_v14_audit.json"
+    if output.exists(): raise SystemExit("preserve completed audit")
+    inputs = {}
+    def bind(path):
+        digest = sha(path.read_bytes()); inputs[str(path.relative_to(HERE))] = digest
+        return digest
+    frozen = read(OUT / "freeze.json"); summary = read(OUT / "summary.json")
+    assert bind(HERE / "full_pyparsing_resolution_guard_v14.py") == frozen["driver_sha256"]
+    assert bind(OUT / "freeze.json") == summary["freeze_sha256"]
+    assert bind(PRIOR / "freeze.json") == frozen["parent_freeze_sha256"]
+    assert bind(OUT / "runtime_source_manifest.json") == frozen["runtime_manifest_sha256"]
+    profile = read(OUT / "runtime_source_manifest.json")
+    assert all(sha(Path(path).read_bytes()) == digest for path, digest in profile["files"].items())
+    assert summary["workers_complete"] and summary["cold_incremental_equivalence_passed"]
+    bind(OUT / "summary.json")
+    results = {}; costs = {}
+    for role in ("baseline", "changed_cold", "changed_incremental"):
+        folder = OUT / role; result = read(folder / "result.json"); process = read(folder / "process.json")
+        assert process["returncode"] == 0 and not process["timed_out"]
+        assert process["bound_seconds"] == 900 and 0 < process["wall_seconds"] < 900
+        assert result["all_checks_passed"] and result["provider_calls"] == result["raw_substitutions"] == 0
+        assert (result["regular_files"], result["python_files"], result["opaque_symlinks"], result["symbols"], result["edges"], result["blocks"]) == (286, 154, 1, 3957, 55859, 67872)
+        assert result["previous_state_and_bundle_actually_supplied"] == (role == "changed_incremental")
+        for name, digest in result["artifact_sha256"].items(): assert bind(folder / name) == digest
+        for name in ("result.json", "process.json", "stages.jsonl", "stdout.log", "stderr.log"): bind(folder / name)
+        if role == "baseline":
+            for path in folder.iterdir(): assert path.read_bytes() == (PRIOR / "baseline" / path.name).read_bytes()
+        else:
+            bind(folder / "scan_reuse_diagnostics.json")
+            assert read(folder / "scan_reuse_diagnostics.json") == result["scan_reuse_diagnostics"]
+        results[role] = result
+        costs[role] = {"process_wall_seconds": process["wall_seconds"], "worker_wall_seconds": result["wall_seconds_including_guards_and_persistence"], "stages": result["stages"], "baseline_receipt_reused_from_v13": role == "baseline"}
+    source = {}
+    for name, expected in frozen["source_manifest_sha256"].items():
+        assert bind(OUT / name) == expected
+        manifest = read(OUT / name); tree = Path(manifest["tree"])
+        actual_files = {str(p.relative_to(tree)) for p in tree.rglob("*") if p.is_file() and not p.is_symlink()}
+        actual_links = {str(p.relative_to(tree)) for p in tree.rglob("*") if p.is_symlink()}
+        assert actual_files == set(manifest["files"]) and actual_links == set(manifest["opaque_symlinks"])
+        for path, row in manifest["files"].items():
+            p = tree / path; body = p.read_bytes()
+            assert sha(body) == row["sha256"] and len(body) == row["bytes"]
+            assert bool(p.stat().st_mode & 0o111) == row["executable"]
+        for path, row in manifest["opaque_symlinks"].items(): assert os.readlink(tree / path) == row["link_target"]
+        source[name] = manifest
+    before, after = source["baseline_source.json"], source["changed_source.json"]
+    assert set(before["files"]) == set(after["files"]) and before["opaque_symlinks"] == after["opaque_symlinks"]
+    changed = [p for p in before["files"] if before["files"][p] != after["files"][p]]
+    assert changed == [frozen["mutation"]["path"]]
+    path = changed[0]
+    assert (Path(after["tree"]) / path).read_bytes() == (Path(before["tree"]) / path).read_bytes() + base64.b64decode(frozen["mutation"]["appended_comment_base64"], validate=True)
+    parent = read(OUT / "changed_incremental/parent_binding.json"); bind(OUT / "changed_incremental/parent_binding.json")
+    for name, digest in parent["parent_artifact_sha256"].items(): assert sha((OUT / "baseline" / name).read_bytes()) == digest
+    assert parent["state_cid"] == results["baseline"]["state_cid"] == frozen["expected_baseline_state_cid"]
+    assert parent["root_cid"] == results["baseline"]["root_cid"] == frozen["expected_baseline_root_cid"]
+    cold, inc = results["changed_cold"], results["changed_incremental"]
+    for name in ("state_cid", "root_cid", "snapshot_cid", "raw_bytes", "block_bytes"):
+        assert cold[name] == inc[name]
+    for name in ("state.json", "root.json"):
+        assert (OUT / "changed_cold" / name).read_bytes() == (OUT / "changed_incremental" / name).read_bytes()
+        # v6 changes only reuse admission: the retained v5 cold output is identical.
+        assert (OUT / "changed_cold" / name).read_bytes() == (PRIOR / "changed_cold" / name).read_bytes()
+    connections = [sqlite3.connect((root / "blocks.sqlite").as_uri() + "?mode=ro", uri=True) for root in (OUT / "changed_cold", OUT / "changed_incremental", PRIOR / "changed_cold")]
+    cursors = [c.execute("SELECT cid,body FROM blocks ORDER BY cid") for c in connections]
+    count = byte_count = 0; fingerprint = hashlib.sha256()
+    while True:
+        rows = [cursor.fetchone() for cursor in cursors]
+        assert rows[0] == rows[1] == rows[2]
+        if rows[0] is None: break
+        cid, body = rows[0]; count += 1; byte_count += len(body)
+        fingerprint.update(cid.encode()); fingerprint.update(len(body).to_bytes(8, "big")); fingerprint.update(body)
+    for conn in connections: conn.close()
+    assert count == cold["blocks"] and byte_count == cold["block_bytes"]
+    assert fingerprint.hexdigest() == summary["ordered_block_fingerprint"]
+    state = read(OUT / "changed_incremental/state.json"); baseline = read(OUT / "baseline/state.json")
+    diag = inc["scan_reuse_diagnostics"]
+    reused = set(diag["reused_paths"]); analyzed = set(diag["analyzed_paths"])
+    assert not reused & analyzed and len(reused) == 20 and len(analyzed) == 134
+    assert reused | analyzed == {p for p in after["files"] if p.endswith(".py")}
+    assert path in analyzed and all(before["files"][p] == after["files"][p] for p in reused)
+    reused_ids = {s["stable_id"] for s in baseline["symbols"] if s["module_path"] in reused}
+    assert reused_ids == set(diag["reused_symbol_ids"]) and len(reused_ids) == 172
+    def frontend(edge):
+        return edge["relation"] not in {"tested_by", "uses_fixture", "configured_by"} and edge["extraction_method"] not in {"static-test-call-reversal", "static-dependency-lock"}
+    reused_edges = [e for e in baseline["edges"] if e["source_id"] in reused_ids and frontend(e)]
+    for e in reused_edges:
+        target = e["metadata"].get("unresolved_target")
+        assert not (isinstance(target, str) and target.startswith(("lexical:", "module:", "pytest-fixture:")) and target != e["target_id"])
+    by_source = {s["stable_id"]: s["module_path"] for s in baseline["symbols"]}
+    projected_paths = {by_source[e["source_id"]] for e in baseline["edges"] if e["source_id"] in by_source and frontend(e) and isinstance(e["metadata"].get("unresolved_target"), str) and e["metadata"]["unresolved_target"].startswith(("lexical:", "module:", "pytest-fixture:")) and e["metadata"]["unresolved_target"] != e["target_id"]}
+    assert projected_paths <= analyzed
+    regression = read(HERE / "resolution_reuse_native_regression_v6/result.json")
+    controls = read(HERE / "resolution_reuse_validation_v6_attempt2/summary.json")
+    assert controls["original_discrepancy_reproduced"] and controls["variant_all_equivalences_passed"]
+    for p in (HERE / "resolution_reuse_native_regression_v6/result.json", HERE / "resolution_reuse_native_regression_v6/stdout.log", HERE / "resolution_reuse_validation_v6_attempt2/summary.json", HERE / "resolution_reuse_v6.patch", HERE / "runtime_resolution_reuse_v6_manifest.json", HERE / "full_pyparsing_failure_v13_audit.json"): bind(p)
+    result = {"schema": "ns-full-pyparsing-resolution-guard-audit/v14", "all_audit_checks_passed": True,
+              "cold_incremental_equivalence_passed": True, "earlier_v5_cold_output_also_exactly_equal": True,
+              "state_cid": cold["state_cid"], "root_cid": cold["root_cid"],
+              "counts": {key: cold[key] for key in ("regular_files", "python_files", "opaque_symlinks", "raw_bytes", "symbols", "edges")},
+              "blocks_compared_per_output": count, "block_bytes_compared_per_output": byte_count, "ordered_block_fingerprint": fingerprint.hexdigest(),
+              "reuse": {"reused_paths": len(reused), "rescanned_paths": len(analyzed), "projected_edge_paths_rescanned": len(projected_paths), "reused_symbols": len(reused_ids), "reused_frontend_edges": len(reused_edges), "remaining_frontend_edges_reextracted": "Not equated with projected graph edge count; full current-inventory graph resolution recomputed.", "paths": diag},
+              "source_controls_passed_new_workers": len(cold["source_controls"]) + len(inc["source_controls"]),
+              "baseline_source_controls_retained": len(results["baseline"]["source_controls"]),
+              "costs": costs, "timing_scope": summary["timing_scope"],
+              "new_workers_wall_seconds": summary["new_workers_wall_seconds"], "audit_wall_seconds": time.perf_counter() - start,
+              "native_regression": regression,
+              "native_regression_limit": "187 native tests pass; one performance expectation fails because mutable.py is intentionally rescanned by this correctness guard. Original native test preserved.",
+              "qualification_controls_per_profile": len(controls["results"][1]["cases"]),
+              "runtime_files_rehashed": len(profile["files"]), "inputs_sha256": inputs, "audit_source_sha256": sha(Path(__file__).read_bytes()),
+              "claim_limit": "Explicit fallback correctness qualification. Lossless frontend observations remain necessary for genuine incremental reuse; no E01/E03 economy, execution soundness theorem, token savings or execution reuse is claimed.",
+              "provider_calls": 0, "raw_substitutions": 0}
+    output.write_text(json.dumps(result, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({"audit": str(output), "all_audit_checks_passed": True, "blocks": count, "block_bytes": byte_count, "reused_paths": len(reused), "rescanned_paths": len(analyzed), "reused_frontend_edges": len(reused_edges)}))
+
+if __name__ == "__main__": main()

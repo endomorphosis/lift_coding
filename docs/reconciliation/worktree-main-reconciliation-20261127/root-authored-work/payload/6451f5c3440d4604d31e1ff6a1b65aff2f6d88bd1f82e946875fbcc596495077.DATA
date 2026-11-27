@@ -1,0 +1,9 @@
+# Existing native publication and recovery qualifications
+
+A fresh 2026-09-14 execution passed **47 tests, with zero failures, errors or skips**, in 5.374 host seconds. The fixed source profile is the complete ASEH worktree and its own nested Datasets and Kit packages. These are existing source-shipped tests, not new held-out experiments.
+
+The four frozen files exercise generation-bearing immutable-root CAS, conflicting and stale writers, integrity/reconstruction, incremental seal persistence, and the joined sealer's seven injected persistence boundaries. Their stored proof objects and declared proof statuses are constructed fixtures. Passing them does not verify an actual theorem, establish arbitrary test execution, or exercise the complete reasoning-to-publication workflow. Exception injection is not actual process death. The 5.374 seconds is test-suite runtime, not a sequential/parallel sealer comparison.
+
+`run-v1/freeze.json` records exact test/source hashes and command before execution; `test_sources/` retains the four files. `loaded_sources.json` identifies native modules actually imported. `results.xml`, `stdout.log`, `stderr.log` and `summary.json` retain all results. No provider requests were scheduled. Test data was confined to temporary test stores.
+
+The runner refuses to overwrite `run-v1`. A subsequent evaluation must select a new retained output directory/version. The next substantive requirement is genuine producer evidence consumed by a complete full-to-delta sealing and publication sequence, including valid continuation and actual cost accounting.

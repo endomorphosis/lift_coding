@@ -1,0 +1,66 @@
+import OriginalPrefixLossRegularizerEvaluation
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+Actual stable-factor assignment after derived margins/data/regularizer values.
+No desired whole objective, gradient, or convergence premise. -/
+
+namespace RankerObjectiveOriginalFactorsEvaluation
+
+noncomputable section
+
+open RankerObjectivePrefixIR (NamedEnvironment extendNames castValue)
+open RankerObjectiveContainerLanguage (SourceExpr evalSourceExpr)
+open RankerObjectiveSourceContainerSuccess (eval_source_mapVector_success)
+open RankerObjectiveOriginalMarginsEvaluation (exactMargins actual_factors_source_scalar_body_join)
+open RankerObjectiveOriginalLossRegularizerEvaluation (afterRegularizerEnvironment
+  after_regularizer_margins_binding)
+
+def exactFactors (margins : Fin 4 → ℝ) : Fin 4 → ℝ :=
+  fun index => RankerRealCurvature.realStableLogisticP (margins index)
+
+theorem factors_source_success (environment : NamedEnvironment) (margins : Fin 4 → ℝ)
+    (marginsBinding : environment "margins" (.vector 4) = .ok margins) :
+    evalSourceExpr environment RankerObjectiveOriginalPrefixParts.factorsSource =
+      .ok (exactFactors margins) := by
+  rw [actual_factors_source_scalar_body_join]
+  have inputSuccess : evalSourceExpr environment
+      (.leaf (.var (τ := .vector 4) "margins")) = .ok margins := by
+    exact marginsBinding
+  have bodySuccess : ∀ index : Fin 4, evalSourceExpr
+      (extendNames (τ := .scalar) "z" (margins index) environment)
+      RankerObjectiveOriginalPrefixParts.factorBodySource = .ok (exactFactors margins index) := by
+    intro index
+    apply RankerObjectiveOriginalPrefixParts.emitted_factor_body_success
+    simp [extendNames, castValue]
+  exact eval_source_mapVector_success environment "z"
+    (.leaf (.var (τ := .vector 4) "margins")) RankerObjectiveOriginalPrefixParts.factorBodySource
+    margins (exactFactors margins) inputSuccess bodySuccess
+
+def afterFactorsEnvironment (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    NamedEnvironment :=
+  extendNames (τ := .vector 4) "factors" (exactFactors (exactMargins weights differences))
+    (afterRegularizerEnvironment weights differences)
+
+theorem after_factors_factors_binding (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    afterFactorsEnvironment weights differences "factors" (.vector 4) =
+      .ok (exactFactors (exactMargins weights differences)) := by
+  simp [afterFactorsEnvironment, extendNames, castValue]
+
+/-- Actual fourth source assignment under all preceding derived bindings. -/
+theorem actual_factors_eval_success (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    evalSourceExpr (afterRegularizerEnvironment weights differences)
+      RankerObjectiveOriginalPrefixParts.factorsSource =
+      .ok (exactFactors (exactMargins weights differences)) := by
+  exact factors_source_success (afterRegularizerEnvironment weights differences)
+    (exactMargins weights differences) (after_regularizer_margins_binding weights differences)
+
+#print axioms factors_source_success
+#print axioms after_factors_factors_binding
+#print axioms actual_factors_eval_success
+
+end
+
+end RankerObjectiveOriginalFactorsEvaluation

@@ -1,0 +1,91 @@
+"""Measure actual generic residual wire against every retained public branch."""
+import argparse
+import json
+from pathlib import Path
+import shutil
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import repository_runtime_v2 as R
+import repository_retrieval_v2 as Q
+import original_messages_v1 as M
+
+
+def save(path, value):
+    with Path(path).open("xb") as stream:
+        stream.write(R.canonical(value) + b"\n")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--corpus", type=Path, required=True)
+    parser.add_argument("--branches", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    output = args.output.resolve()
+    output.mkdir(parents=True, exist_ok=False)
+    corpus = json.loads(args.corpus.read_bytes())
+    provider = {"model": "grok-4.6", "max_output_tokens": 2048, "reasoning_effort": "low", "response_format": {"type": "json_object"}, "max_request_bytes": 65536}
+    sources = [Path(__file__), HERE / "repository_runtime_v2.py", HERE / "repository_retrieval_v2.py", HERE / "original_messages_v1.py"]
+    transitions = sorted(args.branches.glob("*/[1-6]/transition.json"))
+    save(output / "freeze.json", {"schema": "ns-original-message-wire-controls-freeze/v1", "created_at_ns": time.time_ns(),
+                                  "corpus_sha256": R.sha(args.corpus.read_bytes()), "sources": {str(path): R.sha(path.read_bytes()) for path in sources},
+                                  "inputs": {str(path): R.sha(path.read_bytes()) for path in transitions}, "provider_shape_only": provider,
+                                  "initial_retrieval": {"mandatory": "public admitted repair surface plus unresolved conflict modules", "max_files": 3, "max_source_bytes": 48000},
+                                  "provider_calls": 0, "scorer_calls": 0, "not_a_dispatch_profile": True})
+    for path in sources:
+        shutil.copy2(path, output / path.name)
+    checks = []
+    rows = []
+    started = time.perf_counter()
+
+    def check(name, value):
+        checks.append({"name": name, "passed": bool(value)})
+        if not value:
+            raise AssertionError(name)
+
+    try:
+        check("complete_72_source_branches", len(transitions) == 72)
+        for index, path in enumerate(transitions):
+            transition = json.loads(path.read_bytes())
+            task = next(task for task in corpus["tasks"] if task["task_id"] == transition["task_id"])
+            objective = M.public_objective(task, args.corpus.parent)
+            root = transition["input_tree_path"]
+            check("exact_source_binding_" + str(index), R.inventory(root)["tree_sha256"] == transition["input_tree_sha256"])
+            current = {"status": "completed", "passed": False}
+            wire_for = lambda source_rows: M.wire_for(provider, M.messages_for(task, objective, source_rows, [], current, transition["configuration"]))
+            selection = Q.select(root, objective["statement"], task["source_policy"]["edit_paths"], 3, 48000, 65536, wire_for, task["source_policy"])
+            check("whole_source_and_wire_bounds_" + str(index), selection["admitted"] and selection["wire_bytes"] <= 65536 and selection["source_bytes"] <= 48000 and selection["source_count"] <= 3)
+            check("complete_repair_surface_in_initial_context_" + str(index), set(task["source_policy"]["edit_paths"]) <= {source["path"] for source in selection["sources"]})
+            messages = M.messages_for(task, objective, selection["sources"], [], current, transition["configuration"])
+            check("raw_fallback_identical_across_arm_metadata_" + str(index), all(M.messages_for({**task, "arm": arm}, objective, selection["sources"], [], current, transition["configuration"]) == messages for arm in "ABCD"))
+            rows.append({"task_id": task["task_id"], "event_index": transition["event_index"], "transition_path": str(path),
+                         "wire_bytes": selection["wire_bytes"], "source_bytes": selection["source_bytes"], "source_paths": [source["path"] for source in selection["sources"]],
+                         "wire_sha256": selection["wire_sha256"], "source_tree_sha256": transition["input_tree_sha256"]})
+            save(output / (str(index) + ".json"), {"selection": selection, "messages": messages})
+        sentinel = "PRIVATE_SCORER_LOG_PAYLOAD_52B7"
+        receipt = {"status": "completed", "passed": False, "visible_total": sentinel,
+                   "hidden_total": 4, "hidden_passed": 0, "raw_log": sentinel,
+                   "test_names": [sentinel], "reference_patch": sentinel, "native_report": {sentinel: "FAILED"}}
+        trapped = M.messages_for(task, objective, selection["sources"], [{"event_index": 2, "raw_log": sentinel, "current_check": receipt, "configuration_sha256": sentinel}], receipt, transition["configuration"],
+                                 feedback={"assistant_output": "{\"expand\":[]}", "current_check": receipt, "raw_log": sentinel, "local_validation": sentinel})
+        check("private_grade_log_name_reference_fields_never_enter_prompt", sentinel not in R.canonical(trapped).decode())
+        check("true_numeric_grade_counts_retained", M.public_check(receipt)["hidden_total"] == 4 and M.public_check(receipt)["hidden_passed"] == 0)
+        check("invalid_count_payload_is_null", M.public_check(receipt)["visible_total"] is None)
+        for path in sources:
+            check("qualification_source_stable:" + path.name, path.read_bytes() == (output / path.name).read_bytes())
+        save(output / "summary.json", {"schema": "ns-original-message-wire-controls/v1", "passed": True, "checks": checks, "rows": rows,
+                                      "provider_calls": 0, "scorer_calls": 0, "elapsed_seconds": time.perf_counter() - started,
+                                      "max_initial_wire_bytes": max(row["wire_bytes"] for row in rows),
+                                      "adaptive_later_feedback_wire": "Must be remeasured and gated before every actual provider dispatch",
+                                      "scope": "Public-only residual message and whole-source initial wire qualification; no live caller or model efficacy claim"})
+        print(json.dumps({"passed": True, "checks": len(checks), "max_wire_bytes": max(row["wire_bytes"] for row in rows), "summary_sha256": R.sha((output / "summary.json").read_bytes())}))
+    except BaseException as error:
+        save(output / "failure.json", {"passed": False, "type": type(error).__name__, "reason": str(error), "checks": checks, "rows": rows})
+        raise
+
+
+if __name__ == "__main__":
+    main()

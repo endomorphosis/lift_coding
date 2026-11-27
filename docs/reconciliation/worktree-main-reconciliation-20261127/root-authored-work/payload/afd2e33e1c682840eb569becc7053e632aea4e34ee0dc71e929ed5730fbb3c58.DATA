@@ -1,0 +1,430 @@
+"""Bound a current owner-run render observation without settling its attempt.
+
+The driver supplies an already admitted runtime. Its launch binding and protected
+first-pass sidecar select one attempt log; worker JSON alone selects no path or
+run. Exact historical input replay is required before recommending owner STOP.
+Neither the signal nor this recommendation authenticates worker birth, provider
+transmission, billing, task progress, source semantics or completion.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import re
+import shlex
+import stat
+import time
+
+from ipfs_accelerate_py.agent_supervisor.runtime import native_dispatch_diagnostics as native
+from ipfs_accelerate_py.agent_supervisor.runtime.model_input_observation_receipt import (
+    SCHEMA as OBSERVATION_SCHEMA, validate_model_input_observation,
+)
+from .terminal_model_input_observation_audit import collect_terminal_model_input_observation_audit
+
+
+SCHEMA = "terminal-observer-stop@1"
+MAX_CAPTURE_BYTES = 1_048_576
+MAX_DIRECTORY_ENTRIES = 32
+MAX_LINES = 8192
+MAX_LINE_BYTES = 262144
+MAX_AUDIT_SECONDS = 30.0
+MAX_RECHECKS = 4
+ATTEMPTS_NAME = "admitted_database_portal_attempts"
+LOGS_NAME = "implementation-logs"
+FALSE_FLAGS = ("worker_birth_established", "provider_transmission_verified", "provider_usage_measured",
+    "task_progress_authority", "proof_authority", "execution_authority", "completion_authority")
+CONTROLS = ("semantic_transport", "intent_requirements_transport", "code_retrieval_codec", "code_retrieval_wire_delivery")
+
+
+class ObserverStopError(ValueError):
+    pass
+
+
+def _require(condition):
+    if not condition:
+        raise ObserverStopError("bounded current-run observer evidence refused")
+
+
+def _wire(value):
+    try:
+        raw = json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode("utf-8")
+    except (ValueError, TypeError, UnicodeError):
+        raise ObserverStopError("bounded observer JSON required") from None
+    _require(len(raw) <= 2_000_000)
+    return raw
+
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _unique(pairs):
+    value = {}
+    for key, item in pairs:
+        _require(key not in value)
+        value[key] = item
+    return value
+
+
+def _decode(raw):
+    def no_constant(_):
+        raise ObserverStopError("finite observer JSON required")
+    try:
+        return json.loads(raw.decode("utf-8"), object_pairs_hook=_unique, parse_constant=no_constant)
+    except (ValueError, UnicodeError, RecursionError):
+        raise ObserverStopError("strict UTF-8 observer JSON required") from None
+
+
+def _digest(value):
+    return type(value) is str and re.fullmatch(r"[0-9a-f]{64}", value) is not None
+
+
+def _int(value, expected):
+    return type(value) is int and value == expected
+
+
+def verified_observation_audit(audit, observation):
+    """Check exact single-observation replay; accepts its body-free projection.
+
+    Receipt validation happens before this predicate. Audit identities live in
+    matches, while per-observation verification flags live in observations.
+    """
+    try:
+        if type(audit) is not dict or type(observation) is not dict:
+            return False
+        _wire(audit)
+        identity = observation.get("observation_id")
+        if type(identity) is not str or re.fullmatch(r"[0-9a-f]{32}", identity) is None:
+            return False
+        if (audit.get("schema") != "terminal-model-input-observation-audit@1"
+                or audit.get("status") != "verified_all_rendered_model_inputs"
+                or audit.get("all_rendered_model_inputs_verified") is not True
+                or not all(_int(audit.get(k), n) for k, n in (
+                    ("observed_records_seen", 1), ("usable_observation_records", 1),
+                    ("provider_calls", 0), ("provider_invocations_created", 0)))):
+            return False
+        if any(audit.get(k) is not False for k in ("provider_transmission_verified", "provider_usage_measured",
+                "current_freshness_verified", "task_correctness_established", "proof_authority",
+                "execution_authority", "completion_authority", "raw_prompts_exported")):
+            return False
+        if not all(_digest(audit.get(k)) for k in ("context_result_sha256", "prepared_state_sha256")):
+            return False
+        if type(audit.get("read_errors")) is not list or audit["read_errors"]:
+            return False
+        rows, matches = audit.get("observations"), audit.get("matches")
+        if type(rows) is not list or type(matches) is not list or len(rows) != 1 or len(matches) != 1:
+            return False
+        row, match = rows[0], matches[0]
+        if (type(row) is not dict or type(match) is not dict
+                or row.get("observation_id") != identity or match.get("observation_id") != identity
+                or row.get("status") != "verified_exact_rendered_input"
+                or row.get("native_input_verified") is not True
+                or row.get("rendered_model_input_verified") is not True
+                or match.get("model_input_verified") is not True):
+            return False
+        checks = match.get("model_input_checks")
+        if type(checks) is not dict or not checks or any(type(k) is not str or v is not True for k, v in checks.items()):
+            return False
+        for prefix in ("native_prompt", "model_prompt"):
+            digest, count = prefix + "_sha256", prefix + "_bytes"
+            if (not _digest(observation.get(digest)) or match.get(digest) != observation[digest]
+                    or type(observation.get(count)) is not int or not 1 <= observation[count] <= 256000
+                    or type(match.get(count)) is not int or match[count] != observation[count]):
+                return False
+        if "semantic_transport" in observation and row.get("semantic_transport") != observation["semantic_transport"]:
+            return False
+        return True
+    except (ValueError, TypeError, KeyError, OverflowError, RecursionError):
+        return False
+
+
+def _directory_identity(info):
+    return (info.st_dev, info.st_ino, info.st_mode, info.st_uid, info.st_gid)
+
+
+def _file_identity(info):
+    return (_directory_identity(info), info.st_size, info.st_nlink, info.st_mtime_ns, info.st_ctime_ns)
+
+
+def _open_directory(path):
+    path = Path(path)
+    _require(path.is_absolute() and str(path) == str(path.absolute()) and ".." not in path.parts)
+    fd = os.open("/", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        built = Path("/")
+        for part in path.parts[1:]:
+            child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd)
+            os.close(fd); fd = child; built /= part
+            info = os.fstat(fd)
+            sticky_tmp = built == Path("/tmp") and info.st_uid == 0 and bool(info.st_mode & stat.S_ISVTX)
+            _require(stat.S_ISDIR(info.st_mode) and info.st_uid in (0, os.geteuid())
+                and (not info.st_mode & 0o022 or sticky_tmp))
+        _require(_directory_identity(os.fstat(fd)) == _directory_identity(path.lstat()))
+        return fd
+    except BaseException:
+        os.close(fd)
+        raise
+
+
+def _protected_directory(path):
+    fd = _open_directory(path)
+    try:
+        info = os.fstat(fd)
+        _require(info.st_uid == os.geteuid() and not info.st_mode & 0o022)
+        return _directory_identity(info)
+    finally:
+        os.close(fd)
+
+
+def _absent(parent, name):
+    fd = _open_directory(parent)
+    try:
+        try:
+            os.stat(name, dir_fd=fd, follow_symlinks=False)
+        except FileNotFoundError:
+            return True
+        return False
+    finally:
+        os.close(fd)
+
+
+class ObserverStopProbe:
+    """One capture and one audit in the driver-selected observer mode only."""
+
+    def __init__(self, *, runtime, report, workspace_root):
+        self.runtime, self.report = runtime, report
+        self.workspace_root = Path(workspace_root).absolute()
+        _require(".." not in self.workspace_root.parts)
+        self._state = Path(runtime.state).absolute()
+        self._run = self._state / "run"
+        self._parents = {self._state: _protected_directory(self._state), self._run: _protected_directory(self._run)}
+        self._manifest_id = runtime.manifest_id
+        self._scope, self._binding = self._launch_binding()
+        self._task_id = self._binding["task_id"]
+        _require(re.fullmatch(r"[A-Za-z0-9_.-]{1,128}", self._task_id) is not None)
+        _require(_absent(self._run, native.FIRST_PASS_NAME) and _absent(self._run, ATTEMPTS_NAME))
+        self._files, self._log_dir_witness = {}, None
+        self._result = None
+        self._captured_bytes = self._audit_attempts = self._rechecks = 0
+        self._attempted = False
+
+    def _launch_binding(self):
+        from ipfs_accelerate_py.agent_supervisor.entrypoints.isolated_benchmark_runtime import _digest as launch_digest
+        from ipfs_accelerate_py.agent_supervisor.entrypoints.admitted_benchmark_runtime import _require_observer_diagnostic_command
+        manifest, report = self.runtime.manifest, self.report
+        _require(type(manifest) is dict and launch_digest(manifest) == self.runtime.manifest_id == self._manifest_id
+            and manifest.get("schema") == "isolated-admitted-supervisor-launch@1"
+            and manifest.get("run_id") == self.runtime.run_id and manifest.get("state_root") == str(self._state)
+            and _int(manifest.get("coordination_attempt_safety_cap"), 1))
+        _require(report.get("source_nomination_phase") == "resume"
+            and type(report.get("source_nomination_controls")) is dict
+            and report["source_nomination_controls"].get("observe_model_input_only") is True
+            and report.get("implementation_route") == "model_router")
+        public = report.get("public_instruction")
+        _require(type(public) is dict and all(type(public.get(k)) is str and public[k] for k in
+            ("task_cid", "artifact", "sha256", "context_cid")) and _digest(public["sha256"]))
+        scope = native.validate_diagnostic_scope(manifest["native_dispatch_diagnostic_scope"])
+        env = manifest.get("environment")
+        _require(type(env) is list and all(type(row) is list and len(row) == 2 for row in env))
+        declared = [row[1] for row in env if row[0] == native.ENV]
+        _require(len(declared) == 1 and type(declared[0]) is str and _decode(declared[0].encode()) == scope
+            and scope["run_id"] == self.runtime.run_id and scope["task_cid"] == public["task_cid"])
+        argv = manifest.get("argv")
+        _require(type(argv) is list and all(type(x) is str for x in argv)
+            and argv.count("--max-task-attempts") == argv.count("--implementation-command") == 1
+            and argv.count("--execution-slice-task-id") == argv.count("--execution-slice-task-cid") == 1
+            and argv[argv.index("--max-task-attempts") + 1] == "1")
+        task_id = argv[argv.index("--execution-slice-task-id") + 1]
+        _require(task_id and not task_id.startswith("--")
+            and argv[argv.index("--execution-slice-task-cid") + 1] == scope["task_cid"]
+            and ("task_id" not in public or public["task_id"] == task_id))
+        command = argv[argv.index("--implementation-command") + 1]
+        selected = _require_observer_diagnostic_command(command, implement=True,
+            context_bundle=manifest.get("task_context_bundle"), candidate_runner=manifest.get("candidate_runner"))
+        _require(_sha(command.encode()) == scope["command_sha256"]
+            and selected["--semantic-repository"] == manifest.get("repository_root")
+            and selected["--public-instruction-artifact"] == public["artifact"]
+            and selected["--public-instruction-sha256"] == public["sha256"]
+            and selected["--public-instruction-task-cid"] == public["task_cid"])
+        for key in ("context", "doctor_dispatch"):
+            value = report.get(key)
+            if type(value) is dict and value.get("task_cid") is not None:
+                _require(value["task_cid"] == scope["task_cid"])
+        binding = {k: public[k] for k in ("task_cid", "artifact", "sha256", "context_cid")}
+        binding["task_id"] = task_id
+        binding["controls"] = {k: report.get(k) for k in CONTROLS}
+        allowed = {"semantic_transport": {"native", "identifiers"},
+            "intent_requirements_transport": {"expanded", "compact"},
+            "code_retrieval_codec": {"expanded", "compact"}, "code_retrieval_wire_delivery": {"inline", "materialized"}}
+        parts = shlex.split(command)
+        defaults = dict(zip(CONTROLS, ("native", "expanded", "expanded", "inline")))
+        for key, value in binding["controls"].items():
+            _require(type(value) is str and value in allowed[key])
+            flag = "--" + key.replace("_", "-")
+            selected_value = parts[parts.index(flag) + 1] if flag in parts else defaults[key]
+            _require(selected_value == value)
+        return scope, binding
+
+    def _capture(self, path, *, maximum):
+        fd = _open_directory(path.parent)
+        try:
+            info = os.fstat(fd)
+            _require(info.st_uid == os.geteuid())
+            self._parents.setdefault(path.parent, _directory_identity(info))
+            handle = os.open(path.name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=fd)
+            try:
+                before = os.fstat(handle)
+                _require(stat.S_ISREG(before.st_mode) and before.st_nlink == 1 and before.st_uid == os.geteuid()
+                    and not before.st_mode & 0o022 and 0 < before.st_size <= maximum
+                    and before.st_size <= MAX_CAPTURE_BYTES - self._captured_bytes)
+                raw = b""
+                while len(raw) <= before.st_size:
+                    block = os.read(handle, min(65536, before.st_size + 1 - len(raw)))
+                    if not block: break
+                    raw += block
+                _require(len(raw) == before.st_size and _file_identity(before) == _file_identity(os.fstat(handle))
+                    == _file_identity(os.stat(path.name, dir_fd=fd, follow_symlinks=False)))
+                self._files[path] = (_file_identity(before), _sha(raw), len(raw))
+                self._captured_bytes += len(raw)
+                return raw
+            finally:
+                os.close(handle)
+        finally:
+            os.close(fd)
+
+    def _witnesses_match(self, *, reread=False):
+        scope, binding = self._launch_binding()
+        _require(scope == self._scope and _wire(binding) == _wire(self._binding))
+        for path, identity in self._parents.items():
+            _require(_protected_directory(path) == identity)
+        for path, (identity, digest, size) in self._files.items():
+            fd = _open_directory(path.parent)
+            try:
+                handle = os.open(path.name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=fd)
+                try:
+                    _require(_file_identity(os.fstat(handle)) == identity
+                        == _file_identity(os.stat(path.name, dir_fd=fd, follow_symlinks=False)))
+                    if reread:
+                        raw = b""
+                        while len(raw) <= size:
+                            block = os.read(handle, min(65536, size + 1 - len(raw)))
+                            if not block: break
+                            raw += block
+                        _require(len(raw) == size and _sha(raw) == digest and _file_identity(os.fstat(handle)) == identity
+                            == _file_identity(os.stat(path.name, dir_fd=fd, follow_symlinks=False)))
+                finally:
+                    os.close(handle)
+            finally:
+                os.close(fd)
+        if self._log_dir_witness is not None:
+            path, observed = self._log_dir_witness
+            fd = _open_directory(path)
+            try:
+                info = os.fstat(fd)
+                _require((_directory_identity(info), info.st_mtime_ns, info.st_ctime_ns, info.st_nlink) == observed)
+            finally:
+                os.close(fd)
+
+    def _result_for(self, status, reason, *, observation=None, audit=None):
+        return {"schema": SCHEMA, "status": status, "reason": reason,
+            "run_id": self._scope["run_id"], "task_cid": self._scope["task_cid"],
+            "command_sha256": self._scope["command_sha256"],
+            "observation_id": observation["observation_id"] if observation is not None else None,
+            "observation": observation, "audit": audit,
+            "audit_sha256": _sha(_wire(audit)) if audit is not None else None,
+            "captured_files": len(self._files), "captured_bytes": self._captured_bytes,
+            "audit_attempts": self._audit_attempts, **{k: False for k in FALSE_FLAGS}}
+
+    def poll(self, *, state, deadline):
+        """Pending until one scoped first pass; then capture/audit exactly once."""
+        if self._result is not None:
+            return self._result
+        try:
+            _require(type(deadline) in (int, float) and math.isfinite(deadline))
+            if time.monotonic() >= deadline:
+                self._result = self._result_for("refused", "audit_budget_unavailable")
+                return self._result
+            self._witnesses_match()
+            if _absent(self._run, native.FIRST_PASS_NAME):
+                return None
+            _require(not self._attempted)
+            self._attempted = True
+            raw = self._capture(self._run / native.FIRST_PASS_NAME, maximum=native.MAX_RECORD_BYTES)
+            first = native.validate_first_claimed_pass_diagnostic(_decode(raw))
+            _require(raw == native._wire(first) and first["scope"] == self._scope
+                and first["schema"] == native.SCHEMA and first["active_task_id"] == self._task_id
+                and first["claimed_task_cid"] == self._scope["task_cid"]
+                and _int(first["sequence"], 1) and _int(first["write_count"], 1)
+                and type(first["portal_implementation"]) is dict
+                and _int(first["portal_implementation"].get("returncode"), 75))
+            attempt_key = _sha(first["attempt_id"].encode())[:24]
+            attempt = self._run / ATTEMPTS_NAME / attempt_key
+            logs = attempt / LOGS_NAME
+            for parent in (self._run / ATTEMPTS_NAME, attempt, logs):
+                self._parents[parent] = _protected_directory(parent)
+            fd = _open_directory(logs)
+            try:
+                names = []
+                with os.scandir(fd) as entries:
+                    for entry in entries:
+                        _require(len(names) < MAX_DIRECTORY_ENTRIES)
+                        names.append(entry.name)
+                pattern = re.compile(re.escape(self._task_id.lower()) + r"-attempt-1-[0-9a-f]{32}\.log")
+                candidates = [name for name in names if name.endswith(".log")]
+                _require(len(candidates) == 1 and pattern.fullmatch(candidates[0]) is not None)
+                info = os.fstat(fd)
+                self._log_dir_witness = (logs, (_directory_identity(info), info.st_mtime_ns, info.st_ctime_ns, info.st_nlink))
+            finally:
+                os.close(fd)
+            raw = self._capture(logs / candidates[0], maximum=MAX_CAPTURE_BYTES - self._captured_bytes)
+            _require(raw.endswith(b"\n"))
+            text = raw.decode("utf-8")
+            observation = None
+            for index, line in enumerate(text.splitlines()):
+                _require(index < MAX_LINES and len(line.encode()) <= MAX_LINE_BYTES)
+                stripped = line.strip()
+                if not stripped.startswith(("{", "[")):
+                    continue
+                item = _decode(stripped.encode())
+                _require(type(item) is dict and item.get("schema") == OBSERVATION_SCHEMA and observation is None)
+                observation = validate_model_input_observation(item)
+                _require(observation["status"] == "observed")
+            _require(observation is not None)
+            public = observation["public_instruction"]
+            _require(all(public.get(k) == self._binding[k] for k in ("task_id", "task_cid", "artifact", "context_cid"))
+                and public.get("artifact_sha256") == self._binding["sha256"]
+                and all(observation[k] == self._binding["controls"][k] for k in CONTROLS))
+            workspace = Path(observation["workspace"])
+            _require(workspace != self.workspace_root and workspace.is_relative_to(self.workspace_root))
+            _require(not self.report.get("provider_invocations") and not self.report.get("model_input_observation_errors")
+                and not self.report.get("model_input_observation_refusals"))
+            self._witnesses_match()
+            available = min(MAX_AUDIT_SECONDS, deadline - time.monotonic())
+            _require(available >= .1)
+            self._audit_attempts = 1
+            try:
+                audit = collect_terminal_model_input_observation_audit(state=Path(state), observations=[observation],
+                    workspace_root=self.workspace_root, timeout_seconds=available)
+            except Exception:
+                raise ObserverStopError("observer_audit_unavailable") from None
+            _require(time.monotonic() < deadline and verified_observation_audit(audit, observation))
+            self._witnesses_match()
+            self._result = self._result_for("verified_rendered_input", "exact_current_run_render_replayed",
+                observation=observation, audit=audit)
+        except (ValueError, TypeError, KeyError, IndexError, OSError, OverflowError, RecursionError):
+            self._result = self._result_for("refused", "current_run_observation_refused")
+        return self._result
+
+    def recheck(self):
+        """Recheck only captured files after STOP, without another census/audit."""
+        if self._result is None or self._result["status"] != "verified_rendered_input" or self._rechecks >= MAX_RECHECKS:
+            return False
+        self._rechecks += 1
+        try:
+            self._witnesses_match(reread=True)
+            return True
+        except (ValueError, TypeError, KeyError, IndexError, OSError, OverflowError, RecursionError):
+            return False

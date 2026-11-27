@@ -1,0 +1,123 @@
+"""Source/config branching controls only, never behavioral repair outcomes."""
+import argparse
+import json
+from pathlib import Path
+import shutil
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import repository_runtime_v2 as R
+import original_sequence_v1 as S
+
+
+def save(path, value):
+    with Path(path).open("xb") as stream:
+        stream.write(R.canonical(value) + b"\n")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--corpus", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    output = args.output.resolve()
+    output.mkdir(parents=True, exist_ok=False)
+    corpus = json.loads(args.corpus.read_bytes())
+    sources = [Path(__file__), HERE / "repository_runtime_v2.py", HERE / "original_sequence_v1.py"]
+    save(output / "freeze.json", {"schema": "ns-original-source-branch-controls-freeze/v1", "created_at_ns": time.time_ns(),
+                                  "corpus_sha256": R.sha(args.corpus.read_bytes()), "sources": {str(p): R.sha(p.read_bytes()) for p in sources},
+                                  "branches": ["all_repairs_failed", "earlier_accepted_comment_event_failed", "declared_accepted_source_carry"],
+                                  "tasks": [task["task_id"] for task in corpus["tasks"]],
+                                  "acceptance_flags": "Declared source-transport fixtures; not actual scorers or successful repairs",
+                                  "provider_calls": 0, "scorer_calls": 0, "native_publication_calls": 0})
+    for path in sources:
+        shutil.copy2(path, output / path.name)
+    checks = []
+    started = time.perf_counter()
+
+    def check(name, value):
+        checks.append({"name": name, "passed": bool(value)})
+        if not value:
+            raise AssertionError(name)
+
+    def rejects(name, fn):
+        try:
+            fn()
+        except ValueError:
+            check(name, True)
+        else:
+            check(name, False)
+
+    try:
+        for task in corpus["tasks"]:
+            root = Path(task["source_root"])
+            initial = R.inventory(root)
+            name = task["source_policy"]["edit_paths"][0]
+            raw = (root / name).read_bytes()
+            neutral = b"\n# Declared accepted-source transport fixture, not a repair.\n"
+            failed = b"\n# Declared rejected candidate must never become input.\n"
+            for branch in ("all_repairs_failed", "earlier_accepted_comment_event_failed", "declared_accepted_source_carry"):
+                directory = output / (task["task_id"] + "_" + branch)
+                directory.mkdir()
+                previous = None
+                accepted_pointer = None
+                records = []
+                for event in task["events"]:
+                    index = event["event_index"]
+                    event_dir = directory / str(index)
+                    event_dir.mkdir()
+                    transition = S.source_input(task, event, previous, event_dir / "input")
+                    save(event_dir / "transition.json", transition)
+                    actual = (event_dir / "input" / name).read_bytes()
+                    expected = raw + (neutral if branch != "all_repairs_failed" and index > 2 else b"")
+                    if index >= 4:
+                        expected += task["events"][3]["public_source_transform"]["bytes_utf8"].encode()
+                    check(task["task_id"] + ":" + branch + ":exact_source_event_" + str(index), actual == expected)
+                    check(task["task_id"] + ":" + branch + ":failed_candidate_absent_" + str(index), failed not in actual)
+                    check(task["task_id"] + ":" + branch + ":exact_actual_config_" + str(index), transition["configuration"] == task["configurations"][1 if index >= 5 else 0])
+                    if index >= 3:
+                        check(task["task_id"] + ":" + branch + ":original_failure_retained_" + str(index), bool(transition["failed_repair_dependencies"]) == (branch == "all_repairs_failed"))
+                    accepted = index > 1 and branch != "all_repairs_failed" and not (branch == "earlier_accepted_comment_event_failed" and index >= 4)
+                    candidate = event_dir / "declared_candidate"
+                    proposed = actual + (neutral if index == 2 and accepted else failed if not accepted else b"")
+                    if proposed == actual:
+                        transport = R.materialize_candidate(root, event_dir / "input", candidate, task["source_policy"], expected_current_tree_sha256=transition["input_tree_sha256"])
+                    else:
+                        transport = R.materialize_candidate(root, event_dir / "input", candidate, task["source_policy"], expected_current_tree_sha256=transition["input_tree_sha256"],
+                                                            edits=[{"path": name, "old": actual.decode(), "new": proposed.decode()}])
+                    if accepted:
+                        accepted_pointer = index
+                    previous = {**transition, "terminal": True, "accepted_for_next_state": accepted,
+                                "status": "fixture_declared_accept" if accepted else "fixture_declared_failure",
+                                "accepted_tree_path": str(candidate) if accepted else None,
+                                "accepted_tree_sha256": transport["source_tree"]["tree_sha256"] if accepted else None,
+                                "candidate_tree_path": str(candidate), "accepted_pointer_event_index": accepted_pointer,
+                                "not_a_behavioral_result": True}
+                    previous["result_sha256"] = R.sha(R.canonical(previous))
+                    save(event_dir / "declared_result.json", previous)
+                    records.append(previous)
+                check(task["task_id"] + ":" + branch + ":public_comment_applied_once", len(previous["public_transform_history"]) == 1)
+                if branch == "earlier_accepted_comment_event_failed":
+                    check(task["task_id"] + ":old_accepted_pointer_does_not_rollback_public_comment", accepted_pointer == 3 and task["events"][3]["public_source_transform"]["bytes_utf8"].encode() in (directory / "6/input" / name).read_bytes())
+                previous_before = records[1]
+                rejects(task["task_id"] + ":" + branch + ":unterminated_predecessor", lambda: S.source_input(task, task["events"][2], {**previous_before, "terminal": False}, directory / "bad_terminal"))
+                rejects(task["task_id"] + ":" + branch + ":wrong_predecessor_order", lambda: S.source_input(task, task["events"][2], {**previous_before, "event_index": 1}, directory / "bad_order"))
+                rejects(task["task_id"] + ":" + branch + ":wrong_source_binding", lambda: S.source_input(task, task["events"][2], {**previous_before, "accepted_tree_sha256": "0" * 64, "input_tree_sha256": "0" * 64}, directory / "bad_source"))
+            check(task["task_id"] + ":all_public_base_bytes_modes_unchanged", R.inventory(root) == initial)
+        for path in sources:
+            check("frozen_source_unchanged:" + path.name, path.read_bytes() == (output / path.name).read_bytes())
+        save(output / "summary.json", {"schema": "ns-original-source-branch-controls/v1", "passed": True, "checks": checks,
+                                      "four_real_public_repositories": True, "source_config_transitions": 72,
+                                      "provider_calls": 0, "scorer_calls": 0, "native_publication_calls": 0,
+                                      "behavioral_or_integrated_success_claim": False, "elapsed_seconds": time.perf_counter() - started,
+                                      "scope": "Exact full source/config transition and conditional failed-repair retention only; declared fixture acceptance is not evidence of repair or native publication."})
+        print(json.dumps({"passed": True, "checks": len(checks), "summary_sha256": R.sha((output / "summary.json").read_bytes())}))
+    except BaseException as error:
+        save(output / "failure.json", {"passed": False, "type": type(error).__name__, "reason": str(error), "checks": checks})
+        raise
+
+
+if __name__ == "__main__":
+    main()

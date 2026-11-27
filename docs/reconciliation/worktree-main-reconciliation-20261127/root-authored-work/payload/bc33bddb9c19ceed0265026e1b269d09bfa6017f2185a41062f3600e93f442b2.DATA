@@ -1,0 +1,6 @@
+set_option maxHeartbeats 100000
+set_option maxRecDepth 512
+theorem recovery_goal : ∀ {α : Type} (x : α), x = x := by
+  intro α x
+  rfl
+#print axioms recovery_goal

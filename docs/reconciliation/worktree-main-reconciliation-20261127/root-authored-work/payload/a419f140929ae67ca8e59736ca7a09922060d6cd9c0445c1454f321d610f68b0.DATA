@@ -1,0 +1,34 @@
+import hashlib,json,random,time
+from pathlib import Path
+from multiformats import CID,multihash
+from ipfs_datasets_py.logic.software_contracts import content
+rng=random.Random(20260914);n=0
+inputs=[]
+for i in range(1200):
+ raw=rng.randbytes((0,1,2,31,32,255,4096)[i%7]);inputs.append(raw)
+ for codec in ('raw','dag-json'):
+  actual=content._cid_from_digest_bytes(raw,codec=codec)
+  expected=str(CID('base32',1,codec,multihash.digest(raw,'sha2-256')))
+  assert actual==expected;n+=1
+for i in range(200):
+ obj={'unicode':'café Ω 😀','index':i,'v':[None,True,False,-i,{'key':str(i)}]}
+ body=content.canonical_dag_json_bytes(obj)
+ assert content.cid_for_structured(obj)==str(CID('base32',1,'dag-json',multihash.digest(body,'sha2-256')));n+=1
+for data in inputs[:50]:
+ c=content.cid_for_bytes(data);assert content.decode_and_recompute_source(c,data)==c
+ try:content.decode_and_recompute_source(c,data+b'x')
+ except content.ContentIdentityError:pass
+ else:raise AssertionError('changedbytes admitted')
+for invalid in ([],{},None,1,True,'abc',bytearray(b'x')):
+ try:content.cid_for_bytes(invalid)
+ except TypeError:pass
+ else:raise AssertionError('invalid source type')
+for invalid in (0.5,b'x',(),set(),{'bad':float('nan')}):
+ try:content.cid_for_structured(invalid)
+ except (TypeError,ValueError):pass
+ else:raise AssertionError('invalid structured type')
+for codec in ('json','dag-cbor','unknown'):
+ try:content._cid_from_digest_bytes(b'x',codec=codec)
+ except content.ContentIdentityError:pass
+ else:raise AssertionError('unsupportedcodec')
+print(json.dumps({'equivalent_reference_vectors':n,'changed_source_rejections':50,'invalid_source_type_rejections':7,'invalid_structured_type_rejections':5,'unsupported_codec_rejections':3,'content_file':content.__file__,'content_sha256':hashlib.sha256(Path(content.__file__).read_bytes()).hexdigest(),'all_checks_passed':True,'provider_calls':0}))

@@ -1,0 +1,378 @@
+import PyOwnNumericComprehensions
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED FINITE-SCALAR COMPATIBILITY CANDIDATE.
+
+This bridge compares two independent own source interpreters. Ordinary scoped
+syntax, requested visible numeric kinds and absence of reserved-global finite
+bindings are its premises. Projection acceptance and complete numeric/error
+observation equality are conclusions, never supplied semantic certificates.
+
+All finite bindings are checked for reserved identities, including shadowed
+and unrequested entries, because the own callee check scans all entries.
+Missing requested names and primitive domain/arity errors remain admissible.
+Conditional execution remains lazy; the structural fragment admits both trees.
+Container-only refusal tags differ between interpreters and are excluded here.
+
+No target syntax/interpreter/model is imported. Parsing, actual global purity,
+general Python numeric/generator protocols/timing, Float, whole source/task,
+convergence, metadata/cache and planner authority remain open.
+-/
+
+namespace RankerSupportedPythonFiniteScalarCompatibility
+
+noncomputable section
+
+open RankerSupportedPythonAstReal (PyName PyNumber PyEnvironment PyExpr PyArgs
+  PyCalleeRef PyPrimitive PyEvalError reservedGlobal lookupNumber pyBind
+  resolveFixedCallee evalSupportedAstReal evalSupportedArguments evalSupportedAstTest)
+open RankerSupportedPythonFiniteBindings (PyFiniteEnvironment ScalarBindingsAdmissible
+  scalarProjection removeScalarName translateFiniteBindingError observeFiniteScalarLookup
+  lookupFiniteScalar scalar_projection_preserves_admitted_lookup)
+open RankerSupportedPythonOwnComprehensions (PyComprehensionError ownBind liftBinding
+  liftScalar calleeIdentity bindingPresent checkScalarCallee evalOwnScalar
+  evalOwnScalarArguments evalOwnScalarTest)
+
+/-- Ordinary binding membership; it includes shadowed and unrequested entries. -/
+def NoReservedBindings (environment : PyFiniteEnvironment) : Prop :=
+  ∀ binding ∈ environment, ¬ reservedGlobal binding.1
+
+/-- Canonical source callee constructors, with no resolution/evaluation field. -/
+inductive CanonicalScalarCallee : PyCalleeRef → Prop where
+  | abs : CanonicalScalarCallee (.name ⟨0, "abs"⟩)
+  | max : CanonicalScalarCallee (.name ⟨0, "max"⟩)
+  | exp : CanonicalScalarCallee (.attribute ⟨0, "math"⟩ "exp")
+  | log1p : CanonicalScalarCallee (.attribute ⟨0, "math"⟩ "log1p")
+
+mutual
+  /-- Structural own scalar fragment. Arity is a runtime observation here;
+  exact arity and spelling injectivity belong to later static lowering. -/
+  inductive ScalarCompatible (scope : List PyName) : PyExpr → Prop where
+    | name (identifier : PyName) (present : identifier ∈ scope) :
+        ScalarCompatible scope (.name identifier)
+    | integer (value : ℤ) : ScalarCompatible scope (.integer value)
+    | floatLiteral (token : String) (ratio : ℚ) :
+        ScalarCompatible scope (.floatLiteral token ratio)
+    | neg (operand : PyExpr) (compatible : ScalarCompatible scope operand) :
+        ScalarCompatible scope (.unary .usub operand)
+    | unsupportedUnary (tag : String) (operand : PyExpr) :
+        ScalarCompatible scope (.unary (.unsupported tag) operand)
+    | binary (op : RankerSupportedPythonAstReal.PyBinary) (left right : PyExpr)
+        (leftCompatible : ScalarCompatible scope left)
+        (rightCompatible : ScalarCompatible scope right) :
+        ScalarCompatible scope (.binary op left right)
+    | call (callee : PyCalleeRef) (arguments : PyArgs)
+        (canonical : CanonicalScalarCallee callee)
+        (compatible : ArgumentsCompatible scope arguments) :
+        ScalarCompatible scope (.call callee arguments)
+    | conditional (test body otherwise : PyExpr)
+        (testCompatible : TestCompatible scope test)
+        (bodyCompatible : ScalarCompatible scope body)
+        (otherwiseCompatible : ScalarCompatible scope otherwise) :
+        ScalarCompatible scope (.ifExp test body otherwise)
+    | nonNumericComparison (op : RankerSupportedPythonAstReal.PyCompare)
+        (left right : PyExpr) : ScalarCompatible scope (.compare op left right)
+    | unsupported (tag : String) : ScalarCompatible scope (.unsupported tag)
+
+  inductive ArgumentsCompatible (scope : List PyName) : PyArgs → Prop where
+    | nil : ArgumentsCompatible scope .nil
+    | cons (first : PyExpr) (rest : PyArgs)
+        (firstCompatible : ScalarCompatible scope first)
+        (restCompatible : ArgumentsCompatible scope rest) :
+        ArgumentsCompatible scope (.cons first rest)
+
+  inductive TestCompatible (scope : List PyName) : PyExpr → Prop where
+    | ge (left right : PyExpr)
+        (leftCompatible : ScalarCompatible scope left)
+        (rightCompatible : ScalarCompatible scope right) :
+        TestCompatible scope (.compare .ge left right)
+end
+
+/-- Scope forgetting is explicit. Structurally excluded own-only errors are
+given explicit diagnostics rather than silently identified with old errors. -/
+def translateOwnError : PyComprehensionError → PyEvalError
+  | .binding problem => translateFiniteBindingError problem
+  | .scalar problem => problem
+  | .unsupported tag => .unsupported tag
+  | .binderCollision identifier => .unsupported ("binderCollision:" ++ identifier.spelling)
+  | .reboundCallee identifier => .unsupported ("reboundCallee:" ++ identifier.spelling)
+
+def observeOwn {α : Type} : Except PyComprehensionError α → Except PyEvalError α
+  | .error problem => .error (translateOwnError problem)
+  | .ok value => .ok value
+
+private theorem observe_own_ok {α : Type} (value : α) :
+    observeOwn (.ok value) = .ok value := rfl
+
+private theorem own_bind_ok {α β : Type} (value : α)
+    (next : α → Except PyComprehensionError β) : ownBind (.ok value) next = next value := rfl
+
+private theorem py_bind_ok {α β : Type} (value : α)
+    (next : α → Except PyEvalError β) : pyBind (.ok value) next = next value := rfl
+
+private theorem observe_own_bind {α β : Type} (result : Except PyComprehensionError α)
+    (next : α → Except PyComprehensionError β) :
+    observeOwn (ownBind result next) =
+      pyBind (observeOwn result) (fun value => observeOwn (next value)) := by
+  cases result <;> rfl
+
+private theorem observe_lift_scalar {α : Type} (result : Except PyEvalError α) :
+    observeOwn (liftScalar result) = result := by
+  cases result <;> rfl
+
+private theorem observe_lift_binding (result :
+    Except RankerSupportedPythonFiniteBindings.PyFiniteError PyNumber) :
+    observeOwn (liftBinding result) = observeFiniteScalarLookup result := by
+  cases result <;> rfl
+
+private theorem observe_own_conditional {α : Type} (selected : Bool)
+    (body otherwise : Except PyComprehensionError α) :
+    observeOwn (if selected then body else otherwise) =
+      if selected then observeOwn body else observeOwn otherwise := by
+  cases selected <;> rfl
+
+private theorem projection_membership (scope : List PyName)
+    (environment : PyFiniteEnvironment)
+    (admitted : ScalarBindingsAdmissible scope environment) :
+    ∀ projected : PyEnvironment, scalarProjection scope environment = .ok projected →
+      ∀ binding ∈ projected, binding.1 ∈ scope := by
+  induction admitted with
+  | nil scope =>
+    intro projected accepted
+    have empty : ([] : PyEnvironment) = projected := Except.ok.inj accepted
+    cases empty
+    intro binding present
+    cases present
+  | skip scope identifier value rest outside admitted ih =>
+    intro projected accepted
+    simp only [scalarProjection, if_neg outside] at accepted
+    exact ih projected accepted
+  | number scope identifier value rest present admitted ih =>
+    intro projected accepted
+    simp only [scalarProjection, if_pos present] at accepted
+    cases tailEquation : scalarProjection (removeScalarName scope identifier) rest with
+    | error problem =>
+      rw [tailEquation] at accepted
+      cases accepted
+    | ok tail =>
+      rw [tailEquation] at accepted
+      have same : (identifier, value) :: tail = projected := Except.ok.inj accepted
+      cases same
+      intro binding member
+      rcases List.mem_cons.mp member with head | inTail
+      · subst binding
+        exact present
+      · have remaining := ih tail tailEquation binding inTail
+        exact (List.mem_filter.mp remaining).1
+
+/-- Projection acceptance, local scope membership and requested lookup/error
+transport follow from ordinary visible-binding structure alone. -/
+theorem scalar_projection_local_bindings (scope : List PyName)
+    (environment : PyFiniteEnvironment)
+    (admitted : ScalarBindingsAdmissible scope environment) :
+    ∃ projected : PyEnvironment,
+      scalarProjection scope environment = .ok projected ∧
+        (∀ binding ∈ projected, binding.1 ∈ scope) ∧
+        ∀ identifier ∈ scope,
+          observeFiniteScalarLookup (lookupFiniteScalar environment identifier) =
+            lookupNumber projected identifier := by
+  rcases scalar_projection_preserves_admitted_lookup scope environment admitted with
+    ⟨projected, accepted, related⟩
+  exact ⟨projected, accepted, projection_membership scope environment admitted projected accepted,
+    related⟩
+
+private theorem reserved_identity_absent (environment : PyFiniteEnvironment)
+    (ordinary : NoReservedBindings environment) (identifier : PyName)
+    (reserved : reservedGlobal identifier) : ¬ bindingPresent environment identifier := by
+  intro present
+  rcases present with ⟨binding, member, same⟩
+  have notReserved := ordinary binding member
+  apply notReserved
+  rw [same]
+  exact reserved
+
+private theorem canonical_callee_checks (environment : PyFiniteEnvironment)
+    (ordinary : NoReservedBindings environment) (callee : PyCalleeRef)
+    (canonical : CanonicalScalarCallee callee) :
+    ∃ primitive : PyPrimitive,
+      checkScalarCallee environment callee = .ok primitive ∧
+        resolveFixedCallee callee = some primitive := by
+  have absAbsent := reserved_identity_absent environment ordinary ⟨0, "abs"⟩ (Or.inl rfl)
+  have maxAbsent := reserved_identity_absent environment ordinary ⟨0, "max"⟩
+    (Or.inr (Or.inl rfl))
+  have mathAbsent := reserved_identity_absent environment ordinary ⟨0, "math"⟩
+    (Or.inr (Or.inr rfl))
+  cases canonical with
+  | abs =>
+    refine ⟨.abs, ?_, rfl⟩
+    simp only [checkScalarCallee, calleeIdentity, if_neg absAbsent, resolveFixedCallee]
+  | max =>
+    refine ⟨.max, ?_, rfl⟩
+    simp only [checkScalarCallee, calleeIdentity, if_neg maxAbsent, resolveFixedCallee]
+  | exp =>
+    refine ⟨.exp, ?_, rfl⟩
+    simp only [checkScalarCallee, calleeIdentity, if_neg mathAbsent, resolveFixedCallee]
+  | log1p =>
+    refine ⟨.log1p, ?_, rfl⟩
+    simp only [checkScalarCallee, calleeIdentity, if_neg mathAbsent, resolveFixedCallee]
+
+mutual
+  private theorem scalar_aux_compatibility (scope : List PyName)
+      (environment : PyFiniteEnvironment) (projected : PyEnvironment)
+      (ordinary : NoReservedBindings environment)
+      (related : ∀ identifier ∈ scope,
+        observeFiniteScalarLookup (lookupFiniteScalar environment identifier) =
+          lookupNumber projected identifier)
+      (expression : PyExpr) (compatible : ScalarCompatible scope expression) :
+      observeOwn (evalOwnScalar environment expression) =
+        evalSupportedAstReal projected expression := by
+    cases expressionEquation : expression with
+    | name identifier =>
+      rw [expressionEquation] at compatible
+      cases compatible
+      rename_i present
+      simpa only [evalOwnScalar, evalSupportedAstReal, observe_lift_binding] using
+        related identifier present
+    | integer value => rfl
+    | floatLiteral token ratio => rfl
+    | unary op operand =>
+      rw [expressionEquation] at compatible
+      cases op with
+      | usub =>
+        cases compatible
+        rename_i childCompatible
+        simp only [evalOwnScalar, evalSupportedAstReal, observe_own_bind, observe_own_ok,
+          scalar_aux_compatibility scope environment projected ordinary related operand
+            childCompatible]
+      | unsupported tag => rfl
+    | binary op left right =>
+      rw [expressionEquation] at compatible
+      cases compatible
+      rename_i leftCompatible rightCompatible
+      simp only [evalOwnScalar, evalSupportedAstReal, observe_own_bind, observe_lift_scalar,
+        scalar_aux_compatibility scope environment projected ordinary related left leftCompatible,
+        scalar_aux_compatibility scope environment projected ordinary related right rightCompatible]
+    | call callee arguments =>
+      rw [expressionEquation] at compatible
+      cases compatible
+      rename_i canonical argumentsCompatible
+      rcases canonical_callee_checks environment ordinary callee canonical with
+        ⟨primitive, ownCheck, oldCheck⟩
+      simp only [evalOwnScalar, evalSupportedAstReal, ownCheck, oldCheck, own_bind_ok,
+        observe_own_bind, observe_lift_scalar,
+        arguments_aux_compatibility scope environment projected ordinary related arguments
+          argumentsCompatible]
+    | compare op left right => rfl
+    | ifExp test body otherwise =>
+      rw [expressionEquation] at compatible
+      cases compatible
+      rename_i testCompatible bodyCompatible otherwiseCompatible
+      simp only [evalOwnScalar, evalSupportedAstReal, observe_own_bind, observe_own_conditional,
+        test_aux_compatibility scope environment projected ordinary related test testCompatible,
+        scalar_aux_compatibility scope environment projected ordinary related body bodyCompatible,
+        scalar_aux_compatibility scope environment projected ordinary related otherwise
+          otherwiseCompatible]
+    | subscript values index =>
+      rw [expressionEquation] at compatible
+      cases compatible
+    | listComp body clauses =>
+      rw [expressionEquation] at compatible
+      cases compatible
+    | generatorExp body clauses =>
+      rw [expressionEquation] at compatible
+      cases compatible
+    | unsupported tag => rfl
+  termination_by sizeOf expression
+  decreasing_by
+    all_goals
+      simp only [expressionEquation, PyExpr.unary.sizeOf_spec,
+        PyExpr.binary.sizeOf_spec, PyExpr.call.sizeOf_spec, PyExpr.ifExp.sizeOf_spec]
+      omega
+
+  private theorem arguments_aux_compatibility (scope : List PyName)
+      (environment : PyFiniteEnvironment) (projected : PyEnvironment)
+      (ordinary : NoReservedBindings environment)
+      (related : ∀ identifier ∈ scope,
+        observeFiniteScalarLookup (lookupFiniteScalar environment identifier) =
+          lookupNumber projected identifier)
+      (arguments : PyArgs) (compatible : ArgumentsCompatible scope arguments) :
+      observeOwn (evalOwnScalarArguments environment arguments) =
+        evalSupportedArguments projected arguments := by
+    cases argumentEquation : arguments with
+    | nil => rfl
+    | cons first rest =>
+      rw [argumentEquation] at compatible
+      cases compatible
+      rename_i firstCompatible restCompatible
+      simp only [evalOwnScalarArguments, evalSupportedArguments, observe_own_bind, observe_own_ok,
+        scalar_aux_compatibility scope environment projected ordinary related first firstCompatible,
+        arguments_aux_compatibility scope environment projected ordinary related rest restCompatible]
+  termination_by sizeOf arguments
+  decreasing_by
+    all_goals
+      simp only [argumentEquation, PyArgs.cons.sizeOf_spec]
+      omega
+
+  private theorem test_aux_compatibility (scope : List PyName)
+      (environment : PyFiniteEnvironment) (projected : PyEnvironment)
+      (ordinary : NoReservedBindings environment)
+      (related : ∀ identifier ∈ scope,
+        observeFiniteScalarLookup (lookupFiniteScalar environment identifier) =
+          lookupNumber projected identifier)
+      (test : PyExpr) (compatible : TestCompatible scope test) :
+      observeOwn (evalOwnScalarTest environment test) =
+        evalSupportedAstTest projected test := by
+    cases testEquation : test with
+    | compare op left right =>
+      rw [testEquation] at compatible
+      cases op with
+      | ge =>
+        cases compatible
+        rename_i leftCompatible rightCompatible
+        simp only [evalOwnScalarTest, evalSupportedAstTest, observe_own_bind, observe_own_ok,
+          scalar_aux_compatibility scope environment projected ordinary related left leftCompatible,
+          scalar_aux_compatibility scope environment projected ordinary related right rightCompatible]
+      | unsupported tag => cases compatible
+    | name identifier => rw [testEquation] at compatible; cases compatible
+    | integer value => rw [testEquation] at compatible; cases compatible
+    | floatLiteral token ratio => rw [testEquation] at compatible; cases compatible
+    | unary op operand => rw [testEquation] at compatible; cases compatible
+    | binary op left right => rw [testEquation] at compatible; cases compatible
+    | call callee arguments => rw [testEquation] at compatible; cases compatible
+    | ifExp condition body otherwise => rw [testEquation] at compatible; cases compatible
+    | subscript values index => rw [testEquation] at compatible; cases compatible
+    | listComp body clauses => rw [testEquation] at compatible; cases compatible
+    | generatorExp body clauses => rw [testEquation] at compatible; cases compatible
+    | unsupported tag => rw [testEquation] at compatible; cases compatible
+  termination_by sizeOf test
+  decreasing_by
+    all_goals
+      simp only [testEquation, PyExpr.compare.sizeOf_spec]
+      omega
+end
+
+/-- Complete own-to-old numeric AND selected-error observation equality.
+The projected environment and its successful construction are conclusions.
+No successful evaluation, target/model equality or callback certificate is a
+premise. Primitive wrong arity and domain errors remain ordinary results. -/
+theorem own_scalar_compatibility (scope : List PyName)
+    (environment : PyFiniteEnvironment)
+    (admitted : ScalarBindingsAdmissible scope environment)
+    (ordinary : NoReservedBindings environment)
+    (expression : PyExpr) (compatible : ScalarCompatible scope expression) :
+    ∃ projected : PyEnvironment,
+      scalarProjection scope environment = .ok projected ∧
+        (∀ binding ∈ projected, binding.1 ∈ scope) ∧
+        observeOwn (evalOwnScalar environment expression) =
+          evalSupportedAstReal projected expression := by
+  rcases scalar_projection_local_bindings scope environment admitted with
+    ⟨projected, accepted, localBindings, related⟩
+  exact ⟨projected, accepted, localBindings,
+    scalar_aux_compatibility scope environment projected ordinary related expression compatible⟩
+
+#print axioms scalar_projection_local_bindings
+#print axioms own_scalar_compatibility
+
+end
+
+end RankerSupportedPythonFiniteScalarCompatibility

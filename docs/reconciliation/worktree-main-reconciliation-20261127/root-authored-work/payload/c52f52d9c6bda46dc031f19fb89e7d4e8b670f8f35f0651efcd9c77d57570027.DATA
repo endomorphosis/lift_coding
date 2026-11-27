@@ -1,0 +1,2 @@
+def compute(values):
+    return sum(value * value for value in values)

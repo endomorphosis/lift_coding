@@ -1,0 +1,139 @@
+import PyAstNumericSubset
+import Mathlib.Analysis.SpecialFunctions.Log.Basic
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED.
+
+Independent scalar-fragment ideal-real interpretation. This module imports no
+SourceExpr, SourceTerm, compiler, target interpreter or mathematical objective.
+Integers retain their own value tag; scalar observation explicitly coerces
+them to Real. Binary arithmetic and pure numeric calls use that explicit Real
+coercion. This is a numeric observation model, not a theorem about Python's
+result tags, arbitrary numeric protocols, binary64, libm or math.fsum.
+
+Callees are the explicit immutable pure binding specification in the syntax
+module. An admitted structural environment cannot rebind those identities.
+Container expressions, `_dot`, generator consumption and assignments remain
+outside this phase, and report their own unsupported runtime-fragment error.
+-/
+
+namespace RankerSupportedPythonAstReal
+
+noncomputable section
+
+inductive PyNumber where
+  | integer (value : ℤ)
+  | real (value : ℝ)
+
+def PyNumber.toReal : PyNumber → ℝ
+  | .integer value => (value : ℝ)
+  | .real value => value
+
+inductive PyValue where
+  | number (value : PyNumber)
+  | boolean (value : Bool)
+  | list (values : List PyValue)
+
+inductive PyEvalError where
+  | unknownName (spelling : String)
+  | unsupported (tag : String)
+  | divisionByZero
+  | logDomain
+  deriving DecidableEq
+
+abbrev PyEnvironment := List (PyName × PyNumber)
+
+/-- Own scoped first-binding lookup. No target environment is consulted. -/
+def lookupNumber : PyEnvironment → PyName → Except PyEvalError PyNumber
+  | [], name => .error (.unknownName name.spelling)
+  | (head, value) :: rest, name =>
+      if name = head then .ok value else lookupNumber rest name
+
+def pyBind {α β : Type} (value : Except PyEvalError α)
+    (next : α → Except PyEvalError β) : Except PyEvalError β :=
+  match value with
+  | .error problem => .error problem
+  | .ok value => next value
+
+def negateNumber : PyNumber → PyNumber
+  | .integer value => .integer (-value)
+  | .real value => .real (-value)
+
+def numericBinary (op : PyBinary) (left right : PyNumber) : Except PyEvalError PyNumber :=
+  match op with
+  | .add => .ok (.real (left.toReal + right.toReal))
+  | .sub => .ok (.real (left.toReal - right.toReal))
+  | .mul => .ok (.real (left.toReal * right.toReal))
+  | .div => if right.toReal = 0 then .error .divisionByZero
+      else .ok (.real (left.toReal / right.toReal))
+
+/-- Own primitive implementations, including own domain checks and errors. -/
+def invokePrimitive : PyPrimitive → List PyNumber → Except PyEvalError PyNumber
+  | .abs, [value] => .ok (.real |value.toReal|)
+  | .max, [left, right] => .ok (.real (max left.toReal right.toReal))
+  | .exp, [value] => .ok (.real (Real.exp value.toReal))
+  | .log1p, [value] => if 0 < 1 + value.toReal
+      then .ok (.real (Real.log (1 + value.toReal))) else .error .logDomain
+  | _, _ => .error (.unsupported "primitiveArity")
+
+mutual
+  def evalSupportedAstReal (environment : PyEnvironment) : PyExpr → Except PyEvalError PyNumber
+    | .name identifier => lookupNumber environment identifier
+    | .integer value => .ok (.integer value)
+    | .floatLiteral _ ratio => .ok (.real (ratio : ℝ))
+    | .unary .usub operand =>
+        pyBind (evalSupportedAstReal environment operand) (fun value => .ok (negateNumber value))
+    | .unary (.unsupported tag) _ => .error (.unsupported ("unary:" ++ tag))
+    | .binary op left right => pyBind (evalSupportedAstReal environment left) (fun leftValue =>
+        pyBind (evalSupportedAstReal environment right) (fun rightValue =>
+          numericBinary op leftValue rightValue))
+    | .call callee arguments =>
+        match resolveFixedCallee callee with
+        | none => .error (.unsupported "calleeBinding")
+        | some primitive => pyBind (evalSupportedArguments environment arguments)
+            (invokePrimitive primitive)
+    | .ifExp test thenBranch elseBranch =>
+        pyBind (evalSupportedAstTest environment test) (fun selected =>
+          if selected then evalSupportedAstReal environment thenBranch
+          else evalSupportedAstReal environment elseBranch)
+    | .compare _ _ _ => .error (.unsupported "nonNumericComparison")
+    | .subscript _ _ => .error (.unsupported "subscriptNotInScalarPhase")
+    | .listComp _ _ => .error (.unsupported "listCompNotInScalarPhase")
+    | .generatorExp _ _ => .error (.unsupported "generatorNotInScalarPhase")
+    | .unsupported tag => .error (.unsupported tag)
+  def evalSupportedArguments (environment : PyEnvironment) : PyArgs → Except PyEvalError (List PyNumber)
+    | .nil => .ok []
+    | .cons first rest => pyBind (evalSupportedAstReal environment first) (fun value =>
+        pyBind (evalSupportedArguments environment rest) (fun values => .ok (value :: values)))
+  def evalSupportedAstTest (environment : PyEnvironment) : PyExpr → Except PyEvalError Bool
+    | .compare .ge left right => pyBind (evalSupportedAstReal environment left) (fun leftValue =>
+        pyBind (evalSupportedAstReal environment right) (fun rightValue =>
+          .ok (decide (rightValue.toReal ≤ leftValue.toReal))))
+    | _ => .error (.unsupported "nonBooleanTest")
+end
+
+/-- Source order is explicit even when both operand observations are errors. -/
+theorem binary_left_error_precedence (environment : PyEnvironment) (op : PyBinary)
+    (left right : PyExpr) (problem : PyEvalError)
+    (failed : evalSupportedAstReal environment left = .error problem) :
+    evalSupportedAstReal environment (.binary op left right) = .error problem := by
+  simp only [evalSupportedAstReal, failed, pyBind]
+
+/-- A literal true test selects only its body, even when the other source
+branch belongs to an unsupported runtime fragment. Static lowering is stricter. -/
+theorem constant_true_if_keeps_selected_observation (environment : PyEnvironment)
+    (body : PyExpr) (unsupportedTag : String) :
+    evalSupportedAstReal environment
+      (.ifExp (.compare .ge (.integer 1) (.integer 0)) body (.unsupported unsupportedTag)) =
+      evalSupportedAstReal environment body := by
+  simp [evalSupportedAstReal, evalSupportedAstTest, pyBind, PyNumber.toReal]
+
+#print axioms binary_left_error_precedence
+#print axioms constant_true_if_keeps_selected_observation
+
+end
+
+end RankerSupportedPythonAstReal
+
+#print axioms _root_.RankerSupportedPythonAstReal.binary_left_error_precedence
+#print axioms _root_.RankerSupportedPythonAstReal.constant_true_if_keeps_selected_observation

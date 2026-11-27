@@ -1,0 +1,29 @@
+[tox]
+envlist = py27,py34,py35,py36,pypy,docs,readme
+
+[testenv]
+deps=
+    -rrequirements-test.txt
+commands=
+    coverage run --source oauthlib -m unittest discover
+    coverage report
+
+
+# tox -e docs to mimick readthedocs build.
+# as of today, RTD is using python2.7 and doesn't run "setup.py install"
+[testenv:docs]
+basepython=python2.7
+skipsdist=True
+deps=sphinx
+changedir=docs
+whitelist_externals=make
+commands=make clean html
+
+# tox -e readme to mimick PyPI long_description check
+[testenv:readme]
+skipsdist=True
+deps=readme
+whitelist_externals=echo
+commands=
+        python setup.py check -r -s
+        echo setup.py/long description is syntaxly correct

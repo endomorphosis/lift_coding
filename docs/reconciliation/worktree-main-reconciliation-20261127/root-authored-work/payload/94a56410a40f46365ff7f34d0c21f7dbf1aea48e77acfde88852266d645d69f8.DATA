@@ -1,0 +1,256 @@
+"""Current-source integration of the native datasets AST lowering proof.
+
+The native prover owns the formal grammar, ProgramIR checks and Lean theorem.
+This adapter retains the original public source witnesses through publication,
+stores the full projections/residuals, and binds an advisory cache candidate.
+The formal AST theorem is not a byte-parser or CPython equivalence theorem.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+
+from . import codebase_ir_metadata as storage
+from . import terminal_revision_proof_cache as revisions
+from . import terminal_source_ir_projection as projections
+from .terminal_source_ir_projection import build_source_ir_projection
+
+SCHEMA = "terminal-current-source-ir-lowering@1"
+AUTHORITY = {"proof_authority": False, "execution_authority": False,
+    "completion_authority": False, "source_semantics_verified": False,
+    "cpython_equivalence_proved": False, "source_parser_correctness_proved": False,
+    "whole_program_semantics_verified": False, "training_convergence_proved": False,
+    "production_activated": False}
+
+
+def _wire(value):
+    return storage._json(value)
+
+
+def _same(left, right):
+    return _wire(left) == _wire(right)
+
+
+def _need(value, message):
+    if not value:
+        raise ValueError(message)
+
+
+def _write(path, value):
+    raw = _wire(value)
+    fd = path.open("xb")
+    try:
+        path.chmod(0o600)
+        fd.write(raw)
+    finally:
+        fd.close()
+    return {"path": str(path), "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+
+
+@revisions._without_metadata
+def join_source_ir_lowering(*, projection: dict, proof: dict) -> dict:
+    """Check data joins only. Caller-created proof records remain unverified.
+
+    This pure helper cannot authenticate a native proving invocation, even if
+    every status and relation agrees. The current-source wrapper separately
+    retains its actual native result and invokes the native cold validator.
+    """
+    from ipfs_datasets_py.logic.software_contracts import codebase_integer_lowering_lean as lowering
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_structured
+    from ipfs_datasets_py.logic.software_contracts.codebase_integer_profile import IntegerOffsetContract
+
+    _need(type(projection) is dict and type(proof) is dict, "exact projection and proof objects required")
+    _need(set(proof) == lowering._RECORD_FIELDS, "closed native lowering record required")
+    _need(proof["schema"] == lowering.SCHEMA and proof["profile"] == lowering.PROFILE
+        and proof["scope"] == lowering.SCOPE, "native formal lowering profile required")
+    _need(all(proof.get(key) is False for key in lowering._FALSE), "proof authority or runtime claim differs")
+    _need(projection.get("projection_id") == cid_for_structured({key: item for key, item in projection.items()
+        if key != "projection_id"}), "projection identity differs")
+    contract = IntegerOffsetContract.from_dict(projection["contract"])
+    pairs = [(proof["head"], projection["head"]), (proof["contract"], projection["contract"]),
+        (proof["source_path"], contract.path), (proof["source_cid"], projection["source_cid"]),
+        (proof["source_sha256"], projection["source_sha256"]),
+        (proof["compiled_cid"], cid_for_structured(projection["compiled"])),
+        (proof["contract_cid"], contract.cid), (proof["translation"], projection["translation"]),
+        (proof["translation_cid"], cid_for_structured(projection["translation"])),
+        (proof["translation"]["native_program"], projection["native_program"])]
+    _need(all(_same(left, right) for left, right in pairs), "source/IR/contract/translation join differs")
+    _need(proof["manifest_cid"] == proof["head"]["manifest_cid"], "manifest/head join differs")
+    for key in ("source_ast_semantics_defined", "source_ast_lowering_proved",
+            "native_target_correspondence_proved", "kernel_checked_model"):
+        _need(proof[key] is True, "native lowering claim is missing: " + key)
+    certificate = proof["lean_certificate"]
+    _need(type(certificate) is dict and certificate.get("scope") == lowering.SCOPE
+        and _same(certificate.get("theorems"), projection["theorems"])
+        and certificate.get("translation_cid") == proof["translation_cid"],
+        "native theorem inventory or translation differs")
+    matches = projection["compiled"]["body_offset"] == contract.offset
+    _need(proof["requested_model_theorem_proved"] is matches
+        and proof["status"] == ("model_proved" if matches else "model_refuted")
+        and _same(proof["model_counterexample"], None if matches else
+            {"input": 0, "model_output": projection["compiled"]["body_offset"], "required_output": contract.offset}),
+        "model goal/refutation differs")
+    _need(proof["result_cid"] == cid_for_structured({key: item for key, item in proof.items()
+        if key != "result_cid"}), "native proof record identity differs")
+    result = {"schema": "terminal-source-ir-lowering-data-join@1",
+        "projection_id": projection["projection_id"], "native_result_cid": proof["result_cid"],
+        "source_sha256": projection["source_sha256"], "head": projection["head"],
+        "formal_scope": lowering.SCOPE, "claimed_model_status": proof["status"],
+        "data_bindings_checked": True, "caller_record_origin_verified": False,
+        "formal_proof_independently_validated": False, **AUTHORITY}
+    result["join_id"] = cid_for_structured(result)
+    return result
+
+
+def _dimensions(snapshot, projection, proof, adapter_pins):
+    from ipfs_datasets_py.logic.software_contracts import codebase_integer_profile as profile
+    return {"source": {"revision_id": snapshot["revision_id"], "head": proof["head"],
+            "source_cid": proof["source_cid"]},
+        "expression": {"source_ast": projection["source_ast_syntax"], "native_target": projection["native_target_syntax"]},
+        "formalization": {"projection_id": projection["projection_id"], "native_result_cid": proof["result_cid"],
+            "translation_cid": proof["translation_cid"], "lean_certificate": proof["lean_certificate"]},
+        "slice": {"path": proof["source_path"], "source_sha256": proof["source_sha256"],
+            "scope": "closed_one_function_offset_AST_only"},
+        "obligation": proof["contract"], "assumptions": list(profile.ASSUMPTIONS),
+        "bounds": {"native_timeout_seconds": 90, "native_memory_mb": 1024},
+        "translation": {"integration_adapters": adapter_pins,
+            "native_frontend": proof["translation"]["frontend"]},
+        "provider": "native-datasets-Lean-AST-lowering", "checker": "native-Lean4",
+        "environment": {"tool_policy": proof["tool_policy"], "process_policy": proof["process_policy"],
+            "network_isolation": "not_enforced"},
+        "policy": {"scope": "advisory_artifact_candidate_only", "source_execution": False},
+        "schema": {"integration": SCHEMA, "projection": projection["schema"], "native_proof": proof["schema"]},
+        "network_policy": {"checker_network_isolation": "not_enforced", "provider_calls": 0},
+        "evidence_kind": "kernel_checked_proof", "authority_ceiling": "bounded",
+        "kernel": proof["lean_certificate"]["tool"],
+        "theorem_registry": {"theorems": proof["lean_certificate"]["theorems"], "scope": proof["scope"]}}
+
+
+@revisions._without_metadata
+def qualify_current_source_ir_lowering(*, index, repository: Path, expected_head,
+        paths: list[str], repository_id: str, contract: dict, tool_policy: dict,
+        output: Path, scheduler) -> dict:
+    """Run the native current-head prover and publish a bounded experiment.
+
+    All explicitly supplied repository files must match the durable native
+    snapshot. Selected source must pass the native one-function grammar. Other
+    files are retained as uncovered source, even if their structural AST parses.
+    """
+    from ipfs_datasets_py.logic.software_contracts import codebase_integer_lowering_lean as lowering
+    from ipfs_datasets_py.logic.software_contracts.codebase_integer_profile import IntegerOffsetContract
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_structured
+
+    adapter_pin, _, adapter_guard = revisions._file(Path(__file__), protected_parent=False)
+    projection_adapter_pin, _, projection_adapter_guard = revisions._file(
+        Path(projections.__file__), protected_parent=False)
+    adapter_pins = {"integration": adapter_pin, "projection": projection_adapter_pin}
+    snapshot, source_guard = revisions._capture(repository, paths, repository_id)
+    contract_value = IntegerOffsetContract.from_dict(contract)
+    _need(contract_value.path in snapshot["scope"], "selected contract path lies outside explicit source scope")
+    _need(expected_head.repository_id == repository_id, "owner head belongs to another repository")
+    current = index.observe_current(repository, expected_head=expected_head, scheduler=scheduler)
+    leaves = {entry.path: entry for entry in current.manifest.snapshot.entries}
+    _need(set(leaves) == set(snapshot["scope"]), "native repository snapshot differs from complete explicit scope")
+    sources = source_guard.repository_values()
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_bytes
+    _need(all(leaves[path].source_cid == cid_for_bytes(raw) for path, raw in sources.items()),
+        "native owner snapshot source differs from original captured bytes")
+    projection = build_source_ir_projection(source=sources[contract_value.path], contract=contract,
+        head=expected_head.to_dict())
+    output = Path(output).absolute()
+    _need(not output.exists() and output.parent.resolve(strict=True) == output.parent
+        and not output.is_relative_to(Path(repository)), "fresh external output required")
+    parent = output.parent.stat()
+    _need(parent.st_uid == os.geteuid() and not parent.st_mode & 0o022,
+        "protected owner output parent required")
+    output.mkdir(mode=0o700)
+    def directory_identity(value):
+        return value.st_dev, value.st_ino, value.st_mode, value.st_uid, value.st_gid
+    output_identity, parent_identity = directory_identity(output.lstat()), directory_identity(parent)
+    def output_guard():
+        _need(output.resolve(strict=True) == output and stat.S_ISDIR(output.lstat().st_mode)
+            and directory_identity(output.lstat()) == output_identity
+            and directory_identity(output.parent.lstat()) == parent_identity,
+            "original protected output directory changed")
+    emitted_guards = []
+    def retain(path, expected=None):
+        pin, _, guard = revisions._file(path)
+        _need(expected is None or _same(pin, expected), "emitted artifact differs from published pin")
+        emitted_guards.append(guard)
+        return pin
+    def publication_guard():
+        output_guard()
+        for guard in emitted_guards:
+            guard()
+        source_guard.verify_originals()
+        adapter_guard()
+        projection_adapter_guard()
+    record = lowering.prove_current_integer_offset_lowering(index, repository, expected_head=expected_head,
+        contract=contract_value, tool_policy=tool_policy, output=output / "native-lowering",
+        scheduler=scheduler, timeout_seconds=90, memory_mb=1024)
+    lowering.validate_current_integer_offset_lowering(record, index, repository, expected_head=expected_head,
+        contract=contract_value, tool_policy=tool_policy, scheduler=scheduler, timeout_seconds=90, memory_mb=1024)
+    proof = record.to_dict()
+    joined = join_source_ir_lowering(projection=projection, proof=proof)
+    projection_pin = _write(output / "projection.json", projection)
+    proof_pin = _write(output / "native-proof.json", proof)
+    retain(output / "projection.json", projection_pin)
+    retain(output / "native-proof.json", proof_pin)
+    publication_guard()
+    residuals = [{"path": path, "source_sha256": hashlib.sha256(sources[path]).hexdigest(),
+        "reason": "source_not_covered_by_selected_closed_offset_AST_proof", **AUTHORITY}
+        for path in snapshot["scope"] if path != contract_value.path]
+    records = json.loads(_wire(snapshot["metadata"]["records"]))
+    records.update(native_program_ir=[projection["native_program"]], source_ir_projections=[projection],
+        formal_ast_lowering_records=[proof], formal_lowering_joins=[joined],
+        uncovered_source_obligations=residuals,
+        logic_family_inventory=projection.get("family_statuses", []))
+    metadata = storage.hydrate_codebase_ir_metadata(records=records, output=output / "metadata",
+        source_snapshot={"revision": snapshot["metadata"]["source_snapshot"], "head": expected_head.to_dict(),
+            "projection_id": projection["projection_id"], "native_result_cid": proof["result_cid"], **AUTHORITY})
+    # Preserve native artifacts unchanged. Cache placement uses a new protected
+    # byte-identical copy rather than changing the native producer's permissions.
+    artifact = proof["artifacts"]["lean_olean"]
+    object_raw = lowering._read_bytes(Path(artifact["path"]), lowering.native.MAX_WORKSPACE_BYTES,
+        publication_guard)
+    _need(hashlib.sha256(object_raw).hexdigest() == artifact["sha256"]
+        and len(object_raw) == artifact["size_bytes"], "native checked object changed")
+    object_path = output / "checked-object.olean"
+    with object_path.open("xb") as stream:
+        object_path.chmod(0o600)
+        stream.write(object_raw)
+    retain(object_path)
+    dimensions = _dimensions(snapshot, projection, proof, adapter_pins)
+    retain(output / "cache-dimensions.json", _write(output / "cache-dimensions.json", dimensions))
+    cache = revisions.persist_revision_candidate(output=output / "candidate-cache", snapshot=snapshot,
+        dimensions=dimensions, artifact=object_path)
+    retain(output / "cache-report.json", _write(output / "cache-report.json", cache))
+    hit = revisions.lookup_revision_candidate(output=output / "candidate-cache", expected=cache,
+        root=repository, paths=paths, repository_id=repository_id, dimensions=dimensions)
+    _need(hit["status"] == "hit", "current-source advisory cache did not replay")
+    lowering.validate_current_integer_offset_lowering(record, index, repository, expected_head=expected_head,
+        contract=contract_value, tool_policy=tool_policy, scheduler=scheduler, timeout_seconds=90, memory_mb=1024)
+    storage.validate_codebase_ir_metadata(output=output / "metadata", expected=metadata)
+    publication_guard()
+    result = {"schema": SCHEMA, "qualified": True, "output": str(output), "head": expected_head.to_dict(),
+        "revision_id": snapshot["revision_id"], "projection": projection_pin, "native_proof": proof_pin,
+        "join": joined, "metadata": metadata, "advisory_cache": cache, "cache_status": hit["status"],
+        "actual_native_prover_returned": True, "native_cold_validation_passed": True,
+        "source_ast_lowering_proved": True, "native_target_correspondence_proved": True,
+        "formal_scope": lowering.SCOPE, "requested_model_theorem_proved": proof["requested_model_theorem_proved"],
+        "model_status": proof["status"], "model_counterexample": proof["model_counterexample"],
+        "uncovered_source_obligations": residuals, "unsupported_count": len(records["unsupported"]),
+        "source_body_executed": False, "training_steps": 0, "provider_calls": 0,
+        "network_isolation_enforced": False, "loaded_module_code_attested": False,
+        "behavioral_satisfaction": False, "original_task_budget_qualified": False,
+        "integration_adapters": adapter_pins, **AUTHORITY}
+    result["result_cid"] = cid_for_structured(result)
+    retain(output / "result.json", _write(output / "result.json", result))
+    # Observe the durable owner after all native metadata/cache callbacks and
+    # result serialization. Final byte/stat checks then run without callbacks.
+    index.observe_current(repository, expected_head=expected_head, scheduler=scheduler)
+    publication_guard()
+    return result

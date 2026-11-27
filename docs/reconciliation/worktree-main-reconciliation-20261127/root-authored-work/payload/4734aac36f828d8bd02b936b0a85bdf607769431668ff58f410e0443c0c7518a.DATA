@@ -1,0 +1,265 @@
+"""Authored FakeEnv control-flow tests; no native admission/driver qualification."""
+import asyncio
+import base64
+from dataclasses import replace
+import hashlib
+import json
+from pathlib import Path
+import shlex
+from types import SimpleNamespace
+
+import pytest
+
+from benchmarks.agent_supervisor.container_coding import retained_source_nomination_lifecycle as controller
+
+
+def wire(value):
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=False).encode()
+
+
+def digest(raw):return hashlib.sha256(raw).hexdigest()
+
+
+@pytest.fixture(autouse=True)
+def authored_environment_only(monkeypatch,tmp_path):
+    controller._USED.clear()
+    monkeypatch.setenv('IPFS_ACCELERATE_META_INDEX_DUCKDB',str(tmp_path/'fresh-meta.duckdb'))
+    monkeypatch.setenv('IPFS_ACCELERATE_PYTEST_SEAL_DUCKDB',str(tmp_path/'fresh-seal.duckdb'))
+
+
+class FakeEnv:
+    """Stubbed remote API and authored phase exports, never a signed producer."""
+    def __init__(self):
+        self.starts=0;self.stops=[];self.commands=[];self.uploads=[];self.mutations={};self.fail_at=None
+        bindings={key:'authored:'+key for key in controller.BINDINGS}
+        bindings.update(task_id='TASK',task_cid='task:authored',task_revision='1')
+        self.baseline=wire({'schema':'terminal-source-nomination-review-preparation@1',
+            'task_id':'TASK','task_cid':'task:authored','task_revision':'1','bindings':bindings})
+        self.template=wire({'schema':'supervisor-intent-source-nomination-review@1','bindings':bindings,
+            'review_ref':'pending:author','selectors':[]})
+        self.ref={'artifact':'.runtime/source-review-preparation/review/bindings.json','bytes':len(self.baseline),
+            'sha256':digest(self.baseline),'review_template':{'artifact':'.runtime/source-review-preparation/review/review-template.json',
+            'bytes':len(self.template),'sha256':digest(self.template)}}
+    async def start(self):
+        self.starts+=1
+        if self.fail_at=='start':raise RuntimeError('authored startup failure')
+    async def stop(self,*,delete):
+        self.stops.append(delete)
+        if self.fail_at=='stop':raise RuntimeError('authored cleanup failure')
+    async def upload_file(self,source,destination):
+        self.uploads.append((Path(source).read_bytes(),destination))
+        if self.fail_at=='upload':raise RuntimeError('authored upload failure')
+    async def exec(self,**kwargs):
+        self.commands.append(kwargs)
+        command=kwargs['command'];argv=shlex.split(command)
+        result=lambda value=None,code=0:SimpleNamespace(return_code=code,stdout=json.dumps(value) if value is not None else '',stderr='')
+        if '-m' in argv:
+            phase='prepare_only' if '--source-nomination-prepare-only' in argv else 'resume'
+            if self.fail_at==phase:raise TimeoutError('authored phase timeout')
+            return result(code=0 if phase=='prepare_only' else 1)
+        if '-c' in argv and argv[-1].startswith('{'):
+            request=json.loads(argv[-1])
+            if 'operation' not in request:
+                raw=self.uploads[-1][0]
+                return result({'verified':self.fail_at!='reread' and digest(raw)==request['sha256'] and len(raw)==request['bytes']})
+            if request['operation']=='public':
+                raw=self.baseline if request['path'].endswith('bindings.json') else self.template
+                if self.fail_at=='public':raw+=b' '
+                return result({'bytes':len(raw),'sha256':digest(raw),'data':base64.b64encode(raw).decode()})
+            phase=request['phase']
+            value={'schema':'retained-source-nomination-phase-export@1','phase':phase,
+                'report_sha256':'a'*64,'report_bytes':100,'task_completed':False,
+                'review_required':phase=='prepare_only','provider_invocation_count':0,'pre_dispatch_refusal_count':0,
+                'worker_cleanup_returncode':0,'remaining_processes':0,'error_type':None,
+                'source_nomination_review_preparation':self.ref,'source_nomination_active_budget':{},
+                'source_nomination_resume':None,'observation_count':1 if phase=='resume' else 0,
+                'observation_error_count':0,'observation_refusal_count':0,'unreceipted_provider_attempt_present':False,
+                'unreceipted_model_input_observation_present':False,
+                'start_status':'succeeded','stop_status':'succeeded','model_input_observations':[
+                    {'schema':'supervisor-model-input-observation@1','status':'observed','provider_attempted':False,
+                     'router_calls':0,'proof_authority':False,'completion_authority':False}
+                    ] if phase=='resume' else []}
+            value.update(self.mutations.get(phase,{}));return result(value)
+        if self.fail_at=='fresh' and command.startswith('test ! -e /opt/ipfs-supervisor/state/'):
+            return result(code=1)
+        return result()
+
+
+async def setup(_):pass
+
+
+async def review(inputs):
+    assert type(inputs) is controller.ExportedReviewInputs
+    value=json.loads(inputs.template);value['review_ref']='authored:FakeEnv-unit-only'
+    raw=wire(value);return controller.ReviewDecision(raw,digest(raw))
+
+
+def arguments(tmp_path,env,**changes):
+    defaults=dict(environment=env,setup=setup,review=review,output=tmp_path/'evidence',
+        instruction=controller.ROOT+'/instruction.md',requirement_contract=controller.ROOT+'/requirements.json',
+        state=controller.ROOT+'/state/trial',timeout_seconds=300,observer_mode=True,
+        driver_controls={'semantic_transport':'native','doctor_profile':'generic','intent_requirements_transport':'compact',
+            'code_retrieval_transport':'full','code_retrieval_codec':'expanded','code_retrieval_wire_delivery':'inline',
+            'disable_intent_autoencoder':True})
+    return {**defaults,**changes}
+
+
+def run(tmp_path,env,**changes):
+    return asyncio.run(controller.run_retained_source_nomination_lifecycle(**arguments(tmp_path,env,**changes)))
+
+
+def test_one_environment_real_module_argv_same_state_original_budget_and_delete(tmp_path):
+    env=FakeEnv();result=run(tmp_path,env)
+    assert result['qualified'] is True and env.starts==1 and env.stops==[True]
+    commands=[shlex.split(x['command']) for x in env.commands if ' -m ' in x['command']]
+    assert len(commands)==2
+    for argv in commands:
+        assert argv[argv.index('-m')+1]==controller.MODULE
+        assert argv[argv.index('--state')+1]==controller.ROOT+'/state/trial'
+        assert argv[argv.index('--timeout-seconds')+1]=='300'
+        assert '--observe-model-input-only' in argv
+    assert '--source-nomination-prepare-only' in commands[0] and '--source-nomination-resume' in commands[1]
+    assert len(env.uploads)==1 and digest(env.uploads[0][0])==result['review_sha256']
+    assert 'controller-result.json' in {p.name for p in (tmp_path/'evidence').iterdir()}
+    assert result['task_completed'] is False and result['provider_usage_or_billing_complete'] is False
+
+
+def test_only_pinned_public_baseline_template_reach_callback(tmp_path):
+    env=FakeEnv();seen=[]
+    async def choose(inputs):
+        seen.append(inputs)
+        assert set(inputs.__dict__)=={'baseline','baseline_sha256','template','template_sha256'}
+        assert inputs.baseline==env.baseline and inputs.template==env.template
+        return await review(inputs)
+    assert run(tmp_path,env,review=choose)['qualified'] is True and len(seen)==1
+
+
+def test_one_outer_clock_charges_review_and_decreasing_remote_timeouts(tmp_path,monkeypatch):
+    env=FakeEnv();clock=[0.];monkeypatch.setattr(controller,'time',SimpleNamespace(monotonic=lambda:clock[0]))
+    async def install(_):clock[0]+=1000
+    async def choose(inputs):clock[0]+=40;return await review(inputs)
+    result=run(tmp_path,env,setup=install,review=choose)
+    assert result['qualified'] is True and result['setup_seconds']==1000
+    calls=[x for x in env.commands if ' -m ' in x['command']]
+    assert calls[0]['timeout_sec']==284 and calls[1]['timeout_sec']==244
+    assert result['controller_agent_processing_seconds']==40
+
+
+def test_exhausted_review_never_resumes_and_still_deletes(tmp_path,monkeypatch):
+    env=FakeEnv();clock=[0.];monkeypatch.setattr(controller,'time',SimpleNamespace(monotonic=lambda:clock[0]))
+    async def choose(inputs):clock[0]=400;return await review(inputs)
+    result=run(tmp_path,env,review=choose)
+    assert result['qualified'] is False and result['agent_deadline_exhausted'] is True
+    assert len([x for x in env.commands if ' -m ' in x['command']])==1 and env.stops==[True]
+
+
+@pytest.mark.parametrize('where',['start','setup','prepare_only','public','upload','reread','resume','stop','fresh'])
+def test_failure_history_is_retained_without_restart_or_keep(tmp_path,where):
+    env=FakeEnv();env.fail_at=where
+    async def install(_):
+        if where=='setup':raise RuntimeError('authored setup failure')
+    result=run(tmp_path,env,setup=install)
+    assert result['qualified'] is False and env.starts==1 and env.stops==[True]
+    assert (tmp_path/'evidence/controller-result.json').is_file()
+    if where=='prepare_only':assert (tmp_path/'evidence/prepare_only-attempt.json').is_file()
+    if where=='resume':assert (tmp_path/'evidence/resume-attempt.json').is_file()
+
+
+@pytest.mark.parametrize('mutation',[{'provider_invocation_count':1},{'provider_invocation_count':False},
+    {'task_completed':True},{'stop_status':'failed'},{'remaining_processes':1},{'worker_cleanup_returncode':1},
+    {'observation_count':0},{'observation_count':True},{'observation_error_count':1},
+    {'observation_refusal_count':1},{'unreceipted_provider_attempt_present':True},
+    {'unreceipted_model_input_observation_present':True}])
+def test_resume_unknowns_provider_or_completion_claims_refuse(tmp_path,mutation):
+    env=FakeEnv();env.mutations['resume']=mutation
+    result=run(tmp_path,env)
+    assert result['qualified'] is False and env.stops==[True]
+    assert (tmp_path/'evidence/resume-public-report.json').is_file()
+
+
+@pytest.mark.parametrize('change',['wrong_sha','noncanonical','foreign_task','extra_authority','foreign_selector_shape'])
+def test_review_pin_or_task_shape_refused_before_upload_and_resume(tmp_path,change):
+    env=FakeEnv()
+    async def choose(inputs):
+        value=json.loads(inputs.template);value['review_ref']='authored:unit'
+        if change=='foreign_task':value['bindings']['task_cid']='foreign'
+        if change=='extra_authority':value['proof_authority']=True
+        if change=='foreign_selector_shape':value['selectors']=[{'path':'bottle.py','formula':'True'}]
+        raw=wire(value)
+        if change=='noncanonical':raw+=b'\n'
+        return controller.ReviewDecision(raw,'0'*64 if change=='wrong_sha' else digest(raw))
+    assert run(tmp_path,env,review=choose)['qualified'] is False
+    assert not env.uploads and len([x for x in env.commands if ' -m ' in x['command']])==1
+
+
+@pytest.mark.parametrize('artifact',['/opt/ipfs-supervisor/state/intent.duckdb','../keys/private.key',
+    '.runtime/source-review-preparation/review/other.json'])
+def test_private_or_unpinned_public_export_refused(tmp_path,artifact):
+    env=FakeEnv();env.ref['artifact']=artifact
+    assert run(tmp_path,env)['qualified'] is False and not env.uploads and env.stops==[True]
+
+
+@pytest.mark.parametrize('changes',[{'observer_mode':False},{'observer_mode':1},{'timeout_seconds':True},
+    {'timeout_seconds':301},{'instruction':controller.ROOT+'/codex-auth/auth.json'},
+    {'state':controller.ROOT+'/state/..'},{'state':'/tmp/owner'},
+    {'requirement_contract':controller.ROOT+'/state/contract.json'}])
+def test_early_control_or_private_path_refusal_never_starts(tmp_path,changes):
+    env=FakeEnv()
+    with pytest.raises(ValueError):run(tmp_path,env,**changes)
+    assert env.starts==0 and env.stops==[]
+
+
+def test_retries_and_existing_output_are_never_overwritten(tmp_path):
+    env=FakeEnv();assert run(tmp_path,env)['qualified'] is True
+    before=(tmp_path/'evidence/controller-result.json').read_bytes()
+    with pytest.raises(ValueError):run(tmp_path,env,output=tmp_path/'different')
+    with pytest.raises(ValueError):run(tmp_path,FakeEnv())
+    assert env.starts==1 and env.stops==[True]
+    assert (tmp_path/'evidence/controller-result.json').read_bytes()==before
+
+
+def test_unknown_control_and_incomplete_asset_pairs_refuse_before_start(tmp_path):
+    for controls in ({'proof_authority':True},{'model_snapshot':controller.ROOT+'/models/x'},
+            {'security_checkpoint':controller.ROOT+'/models/security'}):
+        env=FakeEnv();args=arguments(tmp_path,env);args['driver_controls'].update(controls)
+        with pytest.raises(ValueError):asyncio.run(controller.run_retained_source_nomination_lifecycle(**args))
+        assert env.starts==0
+
+
+def test_unqualified_setup_return_never_enters_agent_phases(tmp_path):
+    env=FakeEnv()
+    async def install(_):return {'qualified':False}
+    result=run(tmp_path,env,setup=install)
+    assert result['qualified'] is False and not env.commands and env.stops==[True]
+
+
+def test_cleanup_false_result_cannot_certify_deletion(tmp_path):
+    env=FakeEnv()
+    async def stopped(*,delete):env.stops.append(delete);return False
+    env.stop=stopped
+    result=run(tmp_path,env)
+    assert result['qualified'] is False and result['environment_stop_delete_succeeded'] is False
+    assert env.stops==[True]
+
+
+def test_callback_error_body_and_unbounded_name_are_not_exported(tmp_path):
+    env=FakeEnv();error=type('X'*10000,(Exception,),{})
+    async def choose(_):raise error('PRIVATE_CALLBACK_BODY_MUST_NOT_EXPORT')
+    result=run(tmp_path,env,review=choose)
+    assert result['failure']['error_type']=='UnboundedCallbackError'
+    raw=(tmp_path/'evidence/controller-result.json').read_bytes()
+    assert b'PRIVATE_CALLBACK_BODY' not in raw and b'X'*1000 not in raw
+
+
+def test_claimed_observation_without_corresponding_exported_record_refuses(tmp_path):
+    env=FakeEnv();env.mutations['resume']={'model_input_observations':[]}
+    assert run(tmp_path,env)['qualified'] is False and env.stops==[True]
+
+
+def test_materialized_upload_body_changed_after_review_is_refused_before_resume(tmp_path):
+    env=FakeEnv()
+    async def corrupted(source,destination):env.uploads.append((Path(source).read_bytes()+b' ',destination))
+    env.upload_file=corrupted
+    result=run(tmp_path,env)
+    assert result['qualified'] is False and result['failure']['stage']=='review_upload'
+    assert len([x for x in env.commands if ' -m ' in x['command']])==1 and env.stops==[True]

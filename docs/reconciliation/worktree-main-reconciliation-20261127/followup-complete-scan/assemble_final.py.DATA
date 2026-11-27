@@ -1,0 +1,91 @@
+"""Assemble only reviewed plaintext and verified encrypted recovery records."""
+from hashlib import sha256
+import json
+from pathlib import Path
+import shutil
+
+HERE = Path(__file__).resolve().parent
+PREFIX = HERE/'publication/docs/reconciliation/worktree-main-reconciliation-20261127'
+FOLLOWUP = PREFIX/'followup-complete-scan'
+BRANCH = FOLLOWUP/'branch-history'
+HANDOFF = Path('/tmp/git-final-branch-retention-20261127-lmljw4GB/final-private-publication-handoff.json')
+
+def copy_checked(record, destination):
+    source = Path(record['path'])
+    assert source.is_file() and not source.is_symlink()
+    raw = source.read_bytes()
+    assert len(raw)==record['bytes'] and sha256(raw).hexdigest()==record['sha256']
+    destination.parent.mkdir(parents=True,exist_ok=True)
+    if destination.exists():
+        assert destination.read_bytes()==raw
+    else:
+        destination.write_bytes(raw)
+
+def copy_tree(source, destination):
+    for path in sorted(source.rglob('*')):
+        assert not path.is_symlink()
+        if path.is_file():
+            target=destination/path.relative_to(source)
+            target.parent.mkdir(parents=True,exist_ok=True)
+            if target.exists():
+                assert target.read_bytes()==path.read_bytes()
+            else:
+                shutil.copyfile(path,target)
+
+def main():
+    handoff = json.loads(HANDOFF.read_text())
+    assert handoff['inventory_accounting']['total_distinct_repository_and_oid']==10087
+    for label,group in handoff['plaintext_ready'].items():
+        target=BRANCH/'remaining-history'/label
+        copy_checked(group['archive'],target/'history.bundle')
+        copy_checked(group['restore_receipt'],target/'restore-receipt.json')
+        for index,record in enumerate(group['credential_marker_receipts']):
+            copy_checked(record,target/('marker-review-'+str(index)+'.json'))
+    # The restricted plaintext bundle is deliberately outside this whitelist.
+    encrypted=BRANCH/'encrypted-accelerate-commit'
+    copy_checked(handoff['restricted_requires_encryption']['restore_receipt'],encrypted/'original-bundle-restore-receipt.json')
+    for key,name in [('corrected_ref_and_detached_classification','additional-head-classification.json'),('portland_restored_detached_membership','portland-detached-restore-membership.json')]:
+        copy_checked(handoff[key],BRANCH/name)
+    shutil.copyfile(HANDOFF,BRANCH/'final-restoration-handoff.json')
+    source=Path('/tmp/root-authored-work-preservation-20261127-dOW10kdc/delivery/docs/reconciliation/worktree-main-reconciliation-20261127/root-authored-work')
+    copy_tree(source,PREFIX/'root-authored-work')
+    source=Path('/tmp/additional-worktree-source-retention-20261127-ofnpftDm')
+    copy_tree(source,PREFIX/'additional-worktree-sources')
+    for path in list((PREFIX/'additional-worktree-sources').glob('*.py')):
+        path.rename(path.with_name(path.name+'.DATA'))
+    for name in ['encrypt_archive.py','encrypt_archive.v01.py.DATA','encrypt-accelerate-v02-control.json','encrypt-authored-sources-control.json','accelerate-sensitive-historical-commit-encrypt.stderr']:
+        target=FOLLOWUP/(name+'.DATA' if name.endswith('.py') else name)
+        shutil.copyfile(HERE/name,target)
+    for control in ['accelerate-sensitive-historical-commit-v02-encrypted-receipt.json','root-withheld-authored-sources-v01-encrypted-receipt.json']:
+        record=json.loads((HERE/control).read_text())
+        assert record['encryption_returncode']==record['decryption_returncode']==0
+        assert record['decrypted_bytes_match_exact_original']
+        assert record['owned_crypto_helper']['cleanup_confirmed']
+    report={
+        'schema':'complete-project-work-reconciliation-closeout/v1',
+        'scope':['/tmp','/home/barberb','registered worktrees','initialized nested project submodules'],
+        'inventory_accounting':handoff['inventory_accounting'],
+        'all_observed_commit_pairs_accounted_for':True,
+        'branch_recovery':{'new_portland_covered_pairs':7693,'other_new_covered_pairs':84,'other_plaintext_pairs':83,'other_encrypted_pairs':1,'all_new_bundles_restore_verified':True},
+        'additional_worktree_source_recovery':{'unique_payloads':123,'bytes':27045746,'original_restore_mappings':523,'other_regular_mappings_with_published_proof':4987,'distinct_staged_variants_match_published_history':2,'symlink_entries_match_published_metadata':2,'unresolved_capture_holds':0},
+        'root_authoring_recovery':{'unique_plaintext_payloads':2045,'plaintext_bytes':36869973,'original_plaintext_mappings':12832,'encrypted_mappings':365,'encrypted_unique_source_payloads':20,'unrecoverable_marker_held_versions':0,'coverage_limits':'Manifest explicitly distinguishes authored inputs, historical copied sources, unknown-copy classes and generated/dependency exclusions.'},
+        'initial_98_worktree_recovery':{'compared_working_files':2540,'new_unique_versions':22,'original_mappings':25},
+        'encryption':{'archives':2,'all_decrypt_readbacks_match':True,'passphrase_local_path':json.loads((HERE/'encryption-key-location.json').read_text())['path'],'passphrase_published':False},
+        'original_checkouts_and_indexes_mutated':False,'forced_pushes':False,'hosted_ci_dispatched':False,
+        'maintained_code_ports_in_this_followup':0,
+        'qualification':'Historical branches and unqualified variants are recoverable artifacts. No new model, legal, test-pass or production-readiness claim.',
+        'exclusions':['dependency/install caches and virtualenvs','unreadable unrelated service-private directories','explicitly recorded pytest/synthetic fixture namespaces','generated runtime/model/binary payloads outside Git history','path-only or unknown-copy classes documented by source manifests'],
+    }
+    (FOLLOWUP/'FINAL-REPORT.json').write_text(json.dumps(report,indent=2)+'\n')
+    (FOLLOWUP/'README.md').write_text('''# Full-depth worktree and branch recovery\n\nThe audit checked /tmp, /home/barberb, registered worktrees and nested project submodules. All 10,087 observed repository/commit pairs are accounted for: 2,104 in compared published main ancestry, 206 in prior verified archives, 7,693 in the newly restored Portland archive and 84 in the other newly restored bundles. Original failed-validation labels remain unchanged.\n\nThis publication preserves additional working-copy variants as inert .DATA records. The additional-worktree packet has 123 unique payloads and 523 restore mappings. The root-authoring packet has 2,045 unique plaintext payloads and 12,832 source mappings. Its 365 marker-held mappings are retained in an encrypted archive covering 20 distinct source files. The manifests record exact byte hashes, historical aliases, explicit copied/generated exclusions and uncertain provenance.\n\nOne historical Accelerate commit includes a large dataset with unresolved credential-like text. Its exact verified Git bundle is encrypted. All plaintext recovery bundles passed restore checks; both encrypted archives were decrypted locally and matched their original SHA-256 hashes. The passphrase is stored only in the protected local file named in FINAL-REPORT.json and encrypted-recovery.json. It must be retained to recover those archives.\n\nFor a plain Git bundle, start from its recorded published base, run git bundle verify, and fetch the advertised refs into recovery branches. For encrypted records, concatenate parts in manifest order, decrypt with GnuPG using the local passphrase file, and check the original archive hash before restoring. These archives preserve historical or superseded work; they do not install it as maintained runtime code.\n\nOriginal working copies, branches and indexes remain unchanged. Publication uses normal fast-forward pushes with [skip ci]. No hosted CI, model execution, database query or new scientific qualification is part of this recovery. Scan exclusions include dependency caches, virtualenvs, symlinks and unrelated service-private paths, plus the explicitly recorded synthetic/generated classes.\n''')
+    payload=[]
+    for path in sorted(PREFIX.rglob('*')):
+        if path.is_file():
+            assert not path.is_symlink() and path.stat().st_size<95*1024**2
+            raw=path.read_bytes()
+            payload.append({'path':path.relative_to(PREFIX).as_posix(),'bytes':len(raw),'sha256':sha256(raw).hexdigest()})
+    (HERE/'final-payload-roster.json').write_text(json.dumps(payload,indent=2)+'\n')
+    print(json.dumps({'files':len(payload),'bytes':sum(r['bytes'] for r in payload),'all_observed_commit_pairs':10087,'encrypted_archives':2}))
+
+if __name__ == '__main__':
+    main()

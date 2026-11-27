@@ -1,0 +1,78 @@
+"""Codec control identities keep measured usage and failures in their own groups."""
+import json
+
+import pytest
+
+from benchmarks.agent_supervisor.container_coding.benchmark_comparison import collect, SUPERVISOR
+from benchmarks.agent_supervisor.container_coding.test_benchmark_comparison import _receipt, _invocation, _transport_trial
+
+
+def controlled(tmp_path, codec, *, trial="same-public-task", invocations=None, arm="full", semantic="native", retrieval="full"):
+    report = {"task_completed": True, "code_retrieval_codec": codec,
+        "code_retrieval_transport": retrieval, "semantic_transport": semantic,
+        "provider_invocations": invocations or []}
+    path = _receipt(tmp_path, codec + "-receipt.json", SUPERVISOR,
+        [{"trial": trial, "reward": {"reward": 1}, "supervisor": report}], arm, semantic)
+    value = json.loads(path.read_text())
+    value.update(code_retrieval_codec=codec, code_retrieval_transport=retrieval)
+    path.write_text(json.dumps(value))
+    return path
+
+
+def test_different_codec_controls_are_retained_for_same_trial_identity(tmp_path):
+    expanded = controlled(tmp_path, "expanded")
+    compact = controlled(tmp_path, "compact")
+    result = collect(supervisors=[expanded, compact])
+    assert result["retained_trial_count"] == 2
+    groups = {row["comparison_group"] for row in result["rows"]}
+    assert groups == {"full:native:retrieval=full:code-codec=expanded", "full:native:retrieval=full:code-codec=compact"}
+    assert {row["code_retrieval_codec"] for row in result["rows"]} == {"expanded", "compact"}
+    # Selecting a compact control without executing a provider is not a token observation.
+    assert all(row["tokens"]["total_tokens"] is None for row in result["rows"])
+    assert result["benchmark_advantage_claimed"] is False
+
+
+def test_expanded_usage_counts_cumulative_input_once_and_audit_remains_unknown(tmp_path):
+    invocation = _transport_trial("native")["supervisor"]["provider_invocations"][0]
+    invocation.update(code_retrieval_codec="expanded")
+    path = controlled(tmp_path, "expanded", invocations=[invocation])
+    row = collect(supervisors=[path])["rows"][0]
+    assert row["tokens"] == {"input_tokens": 20, "cached_input_tokens": 15, "output_tokens": 2, "total_tokens": 22}
+    assert row["provider_calls"] == 1
+    assert row["context_input_audit"] is None
+
+
+@pytest.mark.parametrize("arm,semantic,retrieval", [
+    ("no-index", "native", "full"), ("full", "identifiers", "full"), ("full", "native", "frontier"),
+])
+def test_invalid_compact_profile_refuses_comparison(tmp_path, arm, semantic, retrieval):
+    path = controlled(tmp_path, "compact", arm=arm, semantic=semantic, retrieval=retrieval)
+    with pytest.raises(ValueError, match="compact code retrieval codec"):
+        collect(supervisors=[path])
+
+
+def test_coding_control_conflict_is_not_hidden_by_top_level_selection(tmp_path):
+    invocation = _transport_trial("native")["supervisor"]["provider_invocations"][0]
+    invocation.update(code_retrieval_codec="expanded")
+    path = controlled(tmp_path, "compact", invocations=[invocation])
+    with pytest.raises(ValueError, match="conflicting.*code_retrieval_codec"):
+        collect(supervisors=[path])
+
+
+def test_missing_compact_projection_fails_before_usage_can_be_presented(tmp_path):
+    invocation = _invocation("actual-coding")
+    invocation.update(phase="coding", code_retrieval_codec="compact", semantic_transport="native")
+    path = controlled(tmp_path, "compact", invocations=[invocation])
+    with pytest.raises(ValueError, match="projection"):
+        collect(supervisors=[path])
+
+
+def test_observed_identifier_call_cannot_become_native_compact_by_missing_control(tmp_path):
+    invocation = _transport_trial("identifiers")["supervisor"]["provider_invocations"][0]
+    path = controlled(tmp_path, "compact", invocations=[invocation])
+    value = json.loads(path.read_text())
+    value.pop("semantic_transport")
+    value["trials"][0]["supervisor"].pop("semantic_transport")
+    path.write_text(json.dumps(value))
+    with pytest.raises(ValueError, match="observed native semantic transport"):
+        collect(supervisors=[path])

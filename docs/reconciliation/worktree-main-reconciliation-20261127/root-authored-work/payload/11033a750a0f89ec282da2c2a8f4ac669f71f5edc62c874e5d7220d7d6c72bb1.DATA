@@ -1,0 +1,23 @@
+{
+  "cache_policy": {
+    "allowed_epochs": [
+      "1"
+    ],
+    "circuit_cid": "bafyreia3x3gwwglol7em5vhzzoeqvgjghqaglj4mdl7fj5sjjb3vmkbdgm",
+    "policy_cid": "bafyreigh26jzzq35qkftwhwdzdk63rgpfi7oz7h4ufw6sfpqtnsmljqxti",
+    "proof_system_id": "ed25519-trusted-runner-attestation",
+    "statement_cid": "bafyreiacmeigeausbshov4ykszqve2t77a4alfbuwodrl6tsn2ogbtcbem",
+    "trusted_issuer_ids": [
+      "ns-local-evaluation-only"
+    ],
+    "verifying_key_cid": "bafkreiaf7apmdl5r4ip3gyzqnzmir5lznbunji2565zfdonzbwux2k55qq"
+  },
+  "enrollment": {
+    "arithmetic.py": "12dff13568816813b23a9614eb4fa07b6a02e6f8801035441fc9481f8f06211c",
+    "conftest.py": "50f110e9d4fab109ff865c954b33a9f05db7ae6b55a65fb6b1a94a22c331cc60",
+    "test_work.py": "76978ac44acf771d83f1f13f79dbd820f96058c7907982371917d82b5142541e"
+  },
+  "mode": "readwrite",
+  "observation": "/home/barberb/lift_coding/papers/revisions/neurosymbolic_system_scope_20260914/evals/reuse/runs/development-v5/native/readwrite/observation.json",
+  "trust_policy_hex": "a6646b65797381a86675736167657381777079746573742d706173732d6174746573746174696f6e677265766f6b6564f4696b65795f65706f63686131696e6f745f61667465721a6aa8cacb6a6e6f745f6265666f72651a6aa7790f6e7075626c69635f6b65795f636964783b6261666b72656961663761706d646c35723469703367797a716e7a6d6972356c7a6e62756e6a69323536357a66646f6e7a62777578326b35357171707265706c616365735f6b65795f63696460737075626c69635f6b65795f6d6174657269616c5822ed01d998d45af26ce3b814c495d8e2f32ac7e63a1105f4689063d7cc0b53b44ed71369696e746572666163657352756e6e65725472757374506f6c69637940316c706f6c6963795f65706f636861316c74727573745f646f6d61696e78186e732d6c6f63616c2d6576616c756174696f6e2d6f6e6c79706163746976655f6b65795f65706f63686131707265766f6b65645f6b65795f6369647380"
+}

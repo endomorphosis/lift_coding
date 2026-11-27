@@ -1,0 +1,37 @@
+"""Record ordinary identity mismatches already emitted by the native compiler."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run-id", required=True)
+    args = parser.parse_args()
+    run = HERE / "runs" / args.run_id
+    summary = json.loads((run / "summary.json").read_text())
+    index = json.loads((run / "stores/native_memory/evaluation_index.json").read_text())
+    rows = []
+    for row in summary["rows"]:
+        if row["arm"] != "native_memory":
+            continue
+        result_path = Path(row["result"])
+        result = json.loads(result_path.read_text())
+        gate = result["gate"]
+        compilation = gate["native_compilation"]
+        expected_candidate = index["entries"][gate["retrieved_query_cid"]]["candidate_cid"]
+        expected_observation = gate["retrieved_observation_cid"]
+        if result["case"].get("observation_control"):
+            control = json.loads((result_path.parent / "untrusted_control_observation.json").read_text())
+            expected_observation = control["observation_cid"]
+        rows.append({"case_id": row["case_id"], "result_path": str(result_path), "result_sha256": hashlib.sha256(result_path.read_bytes()).hexdigest(), "expected_candidate_cid": expected_candidate, "expected_observation_cid": expected_observation, "compiled_candidate_cid": compilation["candidate_cid"], "compiled_observation_cid": compilation["observation_cid"], "query_cid": compilation["query_cid"], "candidate_identity_preserved": compilation["candidate_cid"] == expected_candidate, "observation_identity_preserved": compilation["observation_cid"] == expected_observation})
+    value = {"schema": "world-memory-compiler-identity-audit@1", "status": "native_compiler_record_identity_mismatch_observed", "posthoc": True, "case_count": len(rows), "candidate_identity_mismatches": sum(not row["candidate_identity_preserved"] for row in rows), "observation_identity_mismatches": sum(not row["observation_identity_preserved"] for row in rows), "source_reason": "DatasetsProgramWorldAdapter.cite_transition extracts query_cid first from objects which also expose candidate_cid or observation_cid.", "consumer_boundary": "Original development-v1 consumer dispatched from verified typed records; compiler output was recorded only and was never used for action identity.", "rows": rows}
+    (run / "compiler_identity_audit.json").write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+    print(json.dumps({key: value[key] for key in ("status", "case_count", "candidate_identity_mismatches", "observation_identity_mismatches")}))
+
+
+if __name__ == "__main__":
+    main()

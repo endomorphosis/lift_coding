@@ -1,0 +1,109 @@
+"""Exact artifacts and actual frozen source for native TEST integration."""
+from __future__ import annotations
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import sys
+
+HERE = Path(__file__).resolve().parent
+PROCEDURES = next(p for p in HERE.parents if (p / "catalog_v1.py").is_file() and (p / "matrix.json").is_file())
+ROOT = PROCEDURES.parents[4]
+SOURCE = ROOT / ".worktrees/proof-carrying-procedure-compiler-v1"
+sys.path.insert(0, str(SOURCE)); sys.path.insert(1, str(SOURCE / "ipfs_datasets_py"))
+os.environ.setdefault("IPFS_ACCEL_SKIP_CORE", "1")
+from ipfs_accelerate_py.agent_supervisor.proof.formal_verification_contracts import content_identity
+
+def canonical(value): return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False).encode()
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(Path(path).read_bytes())
+def write_new(path, value):
+    with Path(path).open("xb") as stream: stream.write(canonical(value) + b"\n")
+def cid(value): return content_identity(value)
+
+class Artifacts:
+    """Immutable CID bodies; collisions and changed bytes reject on every read."""
+    def __init__(self, path): self.path = Path(path); self.path.mkdir(exist_ok=True)
+    def put(self, value):
+        identity = cid(value); body = canonical(value); path = self.path / (identity + ".json")
+        if path.exists():
+            if path.read_bytes() != body: raise ValueError("artifact CID/body collision")
+        else:
+            with path.open("xb") as stream: stream.write(body)
+        return identity
+    def get(self, identity):
+        if not isinstance(identity, str) or not identity.startswith("baguqeera") or "/" in identity: raise ValueError("invalid artifact identity")
+        body = (self.path / (identity + ".json")).read_bytes(); value = json.loads(body)
+        if canonical(value) != body or cid(value) != identity: raise ValueError("artifact identity mismatch")
+        return value
+
+def frozen_guard(run):
+    frozen = read(Path(run) / "freeze.json")
+    for path, expected in frozen["sources_sha256"].items():
+        if sha(Path(path).read_bytes()) != expected: raise ValueError("frozen source drift: " + path)
+    for path, expected in frozen["input_files_sha256"].items():
+        if sha((Path(run) / path).read_bytes()) != expected: raise ValueError("frozen input drift: " + path)
+    return frozen
+
+def original_catalog():
+    path = PROCEDURES / "catalog_v1.py"
+    spec = importlib.util.spec_from_file_location("native_integration_frozen_catalog", path)
+    module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+    return module
+
+def independent_decision(payload, maximum=7):
+    """Separate decision oracle; receives no selected procedure or trace."""
+    if type(payload) is not dict or set(payload) != {"values", "budget"}: raise ValueError("closed query required")
+    if type(payload["values"]) is not list or type(payload["budget"]) is not int: raise ValueError("query shape outside frozen contract")
+    total = 0
+    for value in payload["values"]:
+        if type(value) is not int: return False
+        if value < 0 or value > maximum: return False
+        total += value
+    return total <= payload["budget"]
+
+def validate_query(payload):
+    """The certificate's bounded TEST input domain, enforced before dispatch."""
+    if type(payload) is not dict or set(payload) != {"values", "budget"}: raise ValueError("closed query required")
+    if type(payload["values"]) is not list or not 0 <= len(payload["values"]) <= 6: raise ValueError("query length outside certified TEST domain")
+    if type(payload["budget"]) is not int or not -1 <= payload["budget"] <= 25: raise ValueError("query budget outside certified TEST domain")
+    for value in payload["values"]:
+        if type(value) is int and -2 <= value <= 9: continue
+        if type(value) is bool: continue
+        if type(value) is float and value in (1.25, 2.5): continue
+        if type(value) is str and value == "x": continue
+        raise ValueError("value outside certified TEST domain")
+    return payload
+
+def replay_exact(procedure, payload, catalog):
+    """Execute the saved closed graph with concrete catalog operations."""
+    steps = {step.step_id: step for step in procedure.steps}; key = procedure.entry_step_id
+    seen = set(); checks = []; trace = []; decision = None
+    while key:
+        if key in seen or key not in steps: raise ValueError("nonclosed procedure graph")
+        seen.add(key); step = steps[key]; operation = step.operation.value; value = None
+        if operation == "READ_STATE": pass
+        elif operation in {"RUN_SELECTED_TESTS", "RUN_STATIC_ANALYSIS", "RUN_TYPE_CHECK"}:
+            value = catalog.run(operation, payload, 7); checks.append(value)
+        elif operation == "CHECK_POSTCONDITION":
+            if len(checks) != 3: raise ValueError("missing concrete check")
+            decision = all(checks)
+        elif operation == "EMIT_RECEIPT":
+            if type(decision) is not bool: raise ValueError("missing computed decision")
+        else: raise ValueError("operation outside frozen catalog")
+        trace.append({"step_id": key, "operation": operation, "observed": value}); key = step.next_step_id
+    if len(seen) != len(steps): raise ValueError("unexecuted candidate step")
+    return decision, trace
+
+def saved_candidate():
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.contracts import ProcedureCandidate, ProcedureSynthesisCounterexample
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.cegis import CounterexampleSet, SynthesisCounterexample
+    row = read(PROCEDURES / "results/cold_synthesis-prime.json")
+    candidate = ProcedureCandidate.from_dict(row["synthesis"]["candidate_artifacts"][0])
+    if candidate.procedure.to_dict() != row["procedure"] or candidate.state.value != "candidate": raise ValueError("wrong original surviving candidate")
+    members = tuple(SynthesisCounterexample.from_artifact(ProcedureSynthesisCounterexample.from_dict(v)) for v in row["synthesis"]["counterexamples"])
+    counterexamples = CounterexampleSet(members)
+    if counterexamples.content_id != candidate.counterexample_set_cid: raise ValueError("original counterexample set mismatch")
+    if candidate.bindings.repository_commit != sha((PROCEDURES / "catalog_v1.py").read_bytes()): raise ValueError("catalog binding drift")
+    return candidate, row, counterexamples

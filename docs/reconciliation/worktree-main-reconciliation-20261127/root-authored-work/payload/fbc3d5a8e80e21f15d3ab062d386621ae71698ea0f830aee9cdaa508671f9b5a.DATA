@@ -1,0 +1,128 @@
+import OriginalPrefixGradientEvaluation
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+
+Complete ordered actual five-assignment numeric-prefix evaluation. Each RHS
+success is derived in the preceding modules; generic let composition below
+assembles them without supplying any desired intermediate result as a premise
+of the final actual theorem. Only ordinary fixed-shape exact-real w/d inputs.
+
+This prospective result does not cover source preparation, original finite
+guard/return/sqrt suffix, Python Float/libm/fsum, update/iteration/convergence,
+proof-cache admission or planner activation. All bodies await native checking.
+-/
+
+namespace RankerObjectiveOriginalRecordEvaluation
+
+noncomputable section
+
+open RankerObjectiveIR (SliceError applyOne mapTwo)
+open RankerObjectivePrefixIR (Ty Denote NamedEnvironment RecordValues namesFromScope extendNames
+  castValue evalSourceTerm)
+open RankerObjectiveContainerLanguage (SourceExpr SourcePrefix evalSourceExpr evalSourceFields evalSourcePrefix)
+open RankerObjectiveOriginalMarginsEvaluation (exactMargins actualEnvironment actual_margins_eval_success)
+open RankerObjectiveOriginalLossRegularizerEvaluation (exactData exactRegularizer afterMarginsEnvironment
+  afterDataEnvironment afterRegularizerEnvironment actual_data_eval_success actual_regularizer_eval_success)
+open RankerObjectiveOriginalFactorsEvaluation (exactFactors afterFactorsEnvironment actual_factors_eval_success)
+open RankerObjectiveOriginalGradientEvaluation (exactGradient actual_gradient_eval_success)
+
+def afterGradientEnvironment (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) : NamedEnvironment :=
+  extendNames (τ := .vector 80) "gradient"
+    (exactGradient weights differences (exactFactors (exactMargins weights differences)))
+    (afterFactorsEnvironment weights differences)
+
+def orderedResult (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    RecordValues RankerObjectiveOriginalPrefixParts.resultSchema :=
+  .cons (exactMargins weights differences)
+    (.cons (exactData (exactMargins weights differences))
+      (.cons (exactRegularizer weights)
+        (.cons (exactFactors (exactMargins weights differences))
+          (.cons (exactGradient weights differences (exactFactors (exactMargins weights differences))) .nil))))
+
+def afterGradientSource : SourcePrefix RankerObjectiveOriginalPrefixParts.resultSchema :=
+  .record RankerObjectiveOriginalPrefixParts.recordSourceFields
+
+def afterFactorsSource : SourcePrefix RankerObjectiveOriginalPrefixParts.resultSchema :=
+  .letBind "gradient" RankerObjectiveOriginalPrefixParts.gradientSource afterGradientSource
+
+def afterRegularizerSource : SourcePrefix RankerObjectiveOriginalPrefixParts.resultSchema :=
+  .letBind "factors" RankerObjectiveOriginalPrefixParts.factorsSource afterFactorsSource
+
+def afterDataSource : SourcePrefix RankerObjectiveOriginalPrefixParts.resultSchema :=
+  .letBind "regularizer" RankerObjectiveOriginalPrefixParts.regularizerSource afterRegularizerSource
+
+def afterMarginsSource : SourcePrefix RankerObjectiveOriginalPrefixParts.resultSchema :=
+  .letBind "data" RankerObjectiveOriginalPrefixParts.dataSource afterDataSource
+
+theorem actual_prefix_suffix_decomposition :
+    GeneratedOriginalObjectiveContainerPrefix.emittedPrefix =
+      SourcePrefix.letBind "margins" RankerObjectiveOriginalPrefixParts.marginsSource afterMarginsSource := by
+  simpa only [afterMarginsSource, afterDataSource, afterRegularizerSource, afterFactorsSource,
+    afterGradientSource] using RankerObjectiveOriginalPrefixParts.emitted_prefix_decomposition
+
+theorem eval_source_let_success {schema : RankerObjectivePrefixIR.Schema} {τ : Ty}
+    (environment : NamedEnvironment) (name : String) (rhs : SourceExpr τ)
+    (body : SourcePrefix schema) (value : Denote τ) (result : RecordValues schema)
+    (rhsSuccess : evalSourceExpr environment rhs = .ok value)
+    (bodySuccess : evalSourcePrefix (extendNames (τ := τ) name value environment) body = .ok result) :
+    evalSourcePrefix environment (.letBind name rhs body) = .ok result := by
+  simp only [evalSourcePrefix, rhsSuccess, applyOne]
+  exact bodySuccess
+
+theorem actual_record_fields_eval_success (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    evalSourceFields (afterGradientEnvironment weights differences)
+      RankerObjectiveOriginalPrefixParts.recordSourceFields = .ok (orderedResult weights differences) := by
+  simp [RankerObjectiveOriginalPrefixParts.recordSourceFields, evalSourceFields, evalSourceExpr,
+    evalSourceTerm, orderedResult, afterGradientEnvironment, afterFactorsEnvironment,
+    afterRegularizerEnvironment, afterDataEnvironment, afterMarginsEnvironment,
+    extendNames, castValue, mapTwo]
+
+/-- Full actual source prefix for arbitrary exact-real fixed-shape inputs.
+No binding/evaluation/gradient/objective/descent/convergence premise. -/
+theorem actual_prefix_eval_success (weights : Fin 80 → ℝ) (differences : Fin 4 → Fin 80 → ℝ) :
+    evalSourcePrefix (namesFromScope (actualEnvironment weights differences))
+      GeneratedOriginalObjectiveContainerPrefix.emittedPrefix = .ok (orderedResult weights differences) := by
+  rw [actual_prefix_suffix_decomposition]
+  apply eval_source_let_success (namesFromScope (actualEnvironment weights differences)) "margins"
+    RankerObjectiveOriginalPrefixParts.marginsSource afterMarginsSource (exactMargins weights differences)
+    (orderedResult weights differences) (actual_margins_eval_success weights differences)
+  change evalSourcePrefix (afterMarginsEnvironment weights differences) afterMarginsSource =
+    .ok (orderedResult weights differences)
+  unfold afterMarginsSource
+  apply eval_source_let_success (afterMarginsEnvironment weights differences) "data"
+    RankerObjectiveOriginalPrefixParts.dataSource afterDataSource (exactData (exactMargins weights differences))
+    (orderedResult weights differences) (actual_data_eval_success weights differences)
+  change evalSourcePrefix (afterDataEnvironment weights differences) afterDataSource =
+    .ok (orderedResult weights differences)
+  unfold afterDataSource
+  apply eval_source_let_success (afterDataEnvironment weights differences) "regularizer"
+    RankerObjectiveOriginalPrefixParts.regularizerSource afterRegularizerSource (exactRegularizer weights)
+    (orderedResult weights differences) (actual_regularizer_eval_success weights differences)
+  change evalSourcePrefix (afterRegularizerEnvironment weights differences) afterRegularizerSource =
+    .ok (orderedResult weights differences)
+  unfold afterRegularizerSource
+  apply eval_source_let_success (afterRegularizerEnvironment weights differences) "factors"
+    RankerObjectiveOriginalPrefixParts.factorsSource afterFactorsSource (exactFactors (exactMargins weights differences))
+    (orderedResult weights differences) (actual_factors_eval_success weights differences)
+  change evalSourcePrefix (afterFactorsEnvironment weights differences) afterFactorsSource =
+    .ok (orderedResult weights differences)
+  unfold afterFactorsSource
+  apply eval_source_let_success (afterFactorsEnvironment weights differences) "gradient"
+    RankerObjectiveOriginalPrefixParts.gradientSource afterGradientSource
+    (exactGradient weights differences (exactFactors (exactMargins weights differences)))
+    (orderedResult weights differences) (actual_gradient_eval_success weights differences)
+  change evalSourceFields (afterGradientEnvironment weights differences)
+    RankerObjectiveOriginalPrefixParts.recordSourceFields = .ok (orderedResult weights differences)
+  exact actual_record_fields_eval_success weights differences
+
+#print axioms actual_prefix_suffix_decomposition
+#print axioms eval_source_let_success
+#print axioms actual_record_fields_eval_success
+#print axioms actual_prefix_eval_success
+
+end
+
+end RankerObjectiveOriginalRecordEvaluation

@@ -1,0 +1,824 @@
+"""Default-off sealed metadata binding for one ordinary admitted loopback M2 child.
+
+This is a source candidate, not a grant or an alternate daemon entrypoint.
+Loopback capture is a transport diagnostic, never task/provider-quality acceptance.
+Only the existing approved runtime and fixed normal daemon call these APIs.
+No bootstrap credentials or ResourceLease objects enter the sealed payload.
+"""
+from __future__ import annotations
+
+import argparse
+from contextlib import contextmanager
+import fcntl
+import hashlib
+import importlib
+import json
+import logging
+import math
+import os
+import signal
+import shlex
+from pathlib import Path
+import stat
+import sys
+import threading
+import time
+
+
+SCHEMA = 'ordinary-admitted-private-capture-M2-binding/v1'
+PRIVATE_SCHEMA = 'ordinary-admitted-private-capture-M2-binding/v2'
+FD_OPTION = '--private-same-pid-m2-fd'
+SHA_OPTION = '--private-same-pid-m2-sha256'
+SEALS = fcntl.F_SEAL_WRITE | fcntl.F_SEAL_GROW | fcntl.F_SEAL_SHRINK | fcntl.F_SEAL_SEAL
+MAXIMUM = 2*1024**2
+RECEIPT_PRECHARGE = 64*1024**2
+M2_MODULE = 'ipfs_accelerate_py.cli_runtime.grok_private_same_pid_m2'
+MODULE = 'ipfs_accelerate_py.agent_supervisor.runtime.private_same_pid_m2_entry'
+M2_SOURCE_SHA256 = '506f7de5e67d0b505faf73082f81d22e81277fdde99ff38dda387255bd97f6f4'
+# Selects the genuinely adopted SDK V6: SDK V5 clocks plus merged capacity diagnostics.
+# The existing 220 GB source ceiling is preserved; no policy or ledger reconfiguration.
+P_SDK_SOURCE_SHA256 = {
+    'resource_scheduler.py':'2d04d89a15fcbe8a9de4a61080a2e671a50f5f6a0ac28d5f4c9cdd780a767144',
+    'existing_resource_scheduler.py':'8f9331547da121d0b2310833b08f3a2d5daa08759d6d78ddf549c91293bb9ffd',
+    'autoencoder_daemon_resources.py':'0cf17951048015d4ce01817c0bfdd74394a161cd5e7999b01a29f18f358e666a',
+    'parented_phase_resources.py':'4a9406233f57deb8322bd30836c4360f8163f313939a9420f354d6e183a9fb61',
+}
+_LIVE = []
+
+
+class PrivateFixtureRefusal(RuntimeError):
+    pass
+
+
+def need(value, reason):
+    if not value:
+        raise PrivateFixtureRefusal(reason)
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False,
+                      allow_nan=False).encode('utf-8')
+
+
+def _unique(pairs):
+    out = {}
+    for key, value in pairs:
+        need(key not in out, 'duplicate_fixture_binding_key')
+        out[key] = value
+    return out
+
+
+def _decode(raw):
+    need(type(raw) is bytes and 0 < len(raw) <= MAXIMUM, 'bounded_binding_required')
+    value = json.loads(raw, object_pairs_hook=_unique,
+                       parse_constant=lambda _v: (_ for _ in ()).throw(PrivateFixtureRefusal('nonfinite_binding')))
+    need(type(value) is dict and canonical(value) == raw, 'canonical_closed_binding_required')
+    return value
+
+
+def _fixed_module(name, repository, relative, source_pins):
+    module = importlib.import_module(name)
+    path = Path(repository)/relative
+    need(sys.modules.get(name) is module and module.__file__ == module.__spec__.origin == str(path),
+         'fixed_normal_package_module_required')
+    need(source_pins.get(str(path)) == _source_digest(path), 'fixed_normal_package_source_changed')
+    return module
+
+
+def _source_digest(path):
+    path = Path(path)
+    need(path.is_absolute() and path.resolve(strict=True) == path and
+         not str(path).endswith(('.duckdb', '.db', '.sqlite', '.state.json', '.pt', '.pth',
+                                  '.safetensors', '.ckpt')),
+         'exact_source_path_required')
+    descriptor = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK | os.O_CLOEXEC)
+    try:
+        initial = os.fstat(descriptor)
+        need(stat.S_ISREG(initial.st_mode) and initial.st_nlink == 1 and
+             0 < initial.st_size <= 128*1024**2, 'bounded_regular_source_required')
+        identity = lambda info: (info.st_dev, info.st_ino, info.st_mode, info.st_nlink,
+                                 info.st_size, info.st_mtime_ns, info.st_ctime_ns)
+        hashed = hashlib.sha256(); count = 0
+        while block := os.read(descriptor, 128*1024):
+            count += len(block); need(count <= initial.st_size, 'source_grew')
+            hashed.update(block)
+        need(count == initial.st_size and identity(initial) == identity(os.fstat(descriptor)) ==
+             identity(path.lstat()), 'source_identity_changed')
+        return hashed.hexdigest()
+    finally:
+        os.close(descriptor)
+
+
+def _require_parent_source_locks(request):
+    """Observe real current-PID read custody; never accept JSON lease tokens."""
+    records = [line.split() for line in Path('/proc/locks').read_text().splitlines()]
+    for root in request['source_roots']:
+        # This first fixture supports exact independent/main package roots.
+        # Linked-worktree primary-control discovery is deliberately not guessed.
+        path = Path(root)/'workspace/control-plane/source-leases/source.lock'
+        need(path.resolve(strict=True) == path, 'actual_parent_source_lock_path_required')
+        info = path.lstat()
+        key = f'{os.major(info.st_dev):02x}:{os.minor(info.st_dev):02x}:{info.st_ino}'
+        need(stat.S_ISREG(info.st_mode) and info.st_nlink == 1 and
+             any(len(row) >= 8 and '->' not in row and row[1] == 'FLOCK' and row[3] == 'READ' and
+                 row[4] == str(os.getpid()) and row[5] == key for row in records),
+             'actual_parent_A_and_P_read_leases_required')
+
+
+def read_sealed_binding(descriptor, expected_sha256):
+    """Observe actual immutable inherited metadata; grant no authority."""
+    need(type(descriptor) is int and descriptor >= 3 and type(expected_sha256) is str and
+         len(expected_sha256) == 64 and all(c in '0123456789abcdef' for c in expected_sha256),
+         'explicit_sealed_fixture_binding_required')
+    initial = os.fstat(descriptor)
+    need(stat.S_ISREG(initial.st_mode) and initial.st_nlink == 0 and
+         0 < initial.st_size <= MAXIMUM and
+         fcntl.fcntl(descriptor, fcntl.F_GET_SEALS) & SEALS == SEALS,
+         'real_fully_sealed_memfd_required')
+    raw = os.pread(descriptor, initial.st_size+1, 0)
+    final = os.fstat(descriptor)
+    need(len(raw) == initial.st_size and hashlib.sha256(raw).hexdigest() == expected_sha256 and
+         (initial.st_dev, initial.st_ino, initial.st_size) == (final.st_dev, final.st_ino, final.st_size),
+         'sealed_fixture_metadata_changed')
+    payload = _decode(raw)
+    need(set(payload) == {'schema', 'request_pin', 'accelerator_source_root', 'task_repository_root',
+         'task_repository_id', 'task_baseline_commit', 'task_baseline_tree_id', 'private_store_id',
+         'private_database_uuid', 'private_server_id', 'private_database_path', 'private_task_cid',
+         'private_task_alias', 'source_generation', 'adapter_source_sha256', 'composition_source_sha256',
+         'receipt_directory', 'work_deadline_monotonic', 'native_deadline_monotonic',
+         'original_started_monotonic', 'parent_native_deadline_monotonic', 'one_shot',
+         'attempt_cap', 'paid_provider_calls_allowed', 'capture_worker_dispatch_allowed', 'execution_environment', 'receipt_precharge_bytes',
+         'parent_disk_reservation_id', 'parent_native_root_lease_id', 'required_P_SDK_source_sha256'},
+         'closed_fixture_binding_required')
+    need(payload['schema'] in (SCHEMA, PRIVATE_SCHEMA) and payload['one_shot'] is True and
+         type(payload['attempt_cap']) is int and payload['attempt_cap'] == 1 and
+         payload['paid_provider_calls_allowed'] is False and payload['capture_worker_dispatch_allowed'] is True and
+         payload['execution_environment'] == 'isolated-loopback' and
+         payload['receipt_precharge_bytes'] == RECEIPT_PRECHARGE and
+         payload['composition_source_sha256'] == M2_SOURCE_SHA256 and
+         payload['required_P_SDK_source_sha256'] == P_SDK_SOURCE_SHA256, 'M2_only_binding_required')
+    repository = Path(payload['accelerator_source_root'])
+    need(repository.resolve(strict=True) == repository and
+         str(repository/'ipfs_accelerate_py/agent_supervisor/runtime/private_same_pid_m2_entry.py') == __file__ and
+         _source_digest(__file__) == payload['adapter_source_sha256'], 'actual_adapter_source_binding_required')
+    task_repository = Path(payload['task_repository_root'])
+    need(task_repository.is_absolute() and task_repository.resolve(strict=True) == task_repository and
+         task_repository.is_dir() and task_repository != repository and
+         not task_repository.is_relative_to(repository) and not repository.is_relative_to(task_repository) and
+         task_repository.lstat().st_uid == os.getuid() and not task_repository.lstat().st_mode & 0o077,
+         'distinct_private_task_repository_required')
+    need(type(payload['task_repository_id']) is str and 0 < len(payload['task_repository_id']) <= 4096 and
+         all(type(payload[name]) is str and len(payload[name]) in (40, 64) and
+             all(c in '0123456789abcdef' for c in payload[name])
+             for name in ('task_baseline_commit', 'task_baseline_tree_id')),
+         'explicit_admitted_task_repository_identity_required')
+    return payload
+
+
+def _binding_schema_for_request(schema):
+    if schema == 'private-approved-child-same-pid-capture-M2-request/v1':
+        return SCHEMA
+    need(schema == 'private-approved-child-same-pid-capture-M2-request/v2',
+         'explicit_reviewed_setup_request_generation_required')
+    return PRIVATE_SCHEMA
+
+
+def _selected_setup_class(module, request):
+    need(module.__name__ == M2_MODULE and sys.modules.get(M2_MODULE) is module,
+         'actual_fixed_setup_module_for_class_selection_required')
+    schema = _binding_schema_for_request(request['schema'])
+    selected = module.PrivateAuthenticatedM2OwnedSetup if schema == PRIVATE_SCHEMA else module.PrivateM2OwnedSetup
+    need(type(selected) is type and selected.__module__ == M2_MODULE and
+         (schema != PRIVATE_SCHEMA or selected.__bases__ == (module.PrivateM2OwnedSetup,)),
+         'actual_source_defined_setup_successor_required')
+    return selected
+
+
+def _request(payload, *, require_fresh=True):
+    repository = Path(payload['accelerator_source_root'])
+    # The package and exact function are fixed in source. The payload cannot
+    # request an import path, a script, a function name, or a module loader.
+    path = repository/'ipfs_accelerate_py/cli_runtime/grok_private_same_pid_m2.py'
+    need(_source_digest(path) == payload['composition_source_sha256'], 'fixed_M2_source_changed')
+    module = importlib.import_module(M2_MODULE)
+    need(sys.modules.get(M2_MODULE) is module and module.__file__ == module.__spec__.origin == str(path),
+         'actual_fixed_M2_module_required')
+    request = module.strict_request(payload['request_pin'], require_fresh=require_fresh)
+    need(payload['schema'] == _binding_schema_for_request(request['schema']),
+         'sealed_entry_and_setup_generations_must_match')
+    need(request.get('execution_environment') == 'isolated-loopback' and
+         request['source_roots'][0] == str(repository) and
+         request['source_sha256'].get(__file__) == payload['adapter_source_sha256'] and
+         request['source_sha256'].get(str(path)) == payload['composition_source_sha256'] and
+         all(request[name] == payload[name] for name in ('private_store_id', 'private_database_uuid',
+             'private_server_id', 'private_task_cid', 'private_task_alias', 'source_generation',
+             'work_deadline_monotonic', 'native_deadline_monotonic',
+             'original_started_monotonic', 'parent_native_deadline_monotonic')) and
+         request['database_path'] == payload['private_database_path'], 'sealed_request_join_changed')
+    task_repository = Path(payload['task_repository_root'])
+    P = Path(request['source_roots'][1])
+    need(task_repository.is_relative_to(Path(request['fixture_root'])) and
+         not task_repository.is_relative_to(Path(request['attempt_directory'])) and
+         task_repository != P and not task_repository.is_relative_to(P) and
+         not P.is_relative_to(task_repository), 'private_task_and_source_namespaces_must_differ')
+    return module, request
+
+
+def original_runtime_deadline(request, *, work_deadline_monotonic, native_ceiling):
+    """Metadata cutoff only; called after the genuine fixed setup validator."""
+    names=('original_started_monotonic','work_deadline_monotonic','native_deadline_monotonic',
+           'parent_native_deadline_monotonic')
+    need(type(request)is dict and all(type(request.get(name))in(int,float) and
+         math.isfinite(request[name])for name in names) and
+         type(work_deadline_monotonic)in(int,float) and math.isfinite(work_deadline_monotonic) and
+         type(native_ceiling)in(int,float) and math.isfinite(native_ceiling),
+         'finite_original_runtime_clocks_required')
+    need(request['original_started_monotonic'] < request['work_deadline_monotonic'] <
+         request['native_deadline_monotonic'] < request['parent_native_deadline_monotonic'] <= native_ceiling and
+         request['work_deadline_monotonic']==work_deadline_monotonic,
+         'actual_runtime_must_restrict_to_original_parent_epoch')
+    return request['parent_native_deadline_monotonic']
+
+
+def prepare_original_runtime_deadline(*, request_pin, accelerator_source_root,
+                                      work_deadline_monotonic, native_ceiling):
+    repository=Path(accelerator_source_root)
+    path=repository/'ipfs_accelerate_py/cli_runtime/grok_private_same_pid_m2.py'
+    need(repository.resolve(strict=True)==repository and _source_digest(path)==M2_SOURCE_SHA256,
+         'fixed_M2_source_changed')
+    module=importlib.import_module(M2_MODULE)
+    need(sys.modules.get(M2_MODULE)is module and module.__file__==module.__spec__.origin==str(path),
+         'actual_fixed_M2_module_required')
+    request=module.strict_request(request_pin)
+    need(request['source_roots'][0]==str(repository) and
+         request['source_sha256'].get(str(path))==M2_SOURCE_SHA256 and
+         request['source_sha256'].get(__file__)==_source_digest(__file__),
+         'complete_original_M2_clock_source_join_required')
+    return original_runtime_deadline(request,work_deadline_monotonic=work_deadline_monotonic,
+                                    native_ceiling=native_ceiling)
+
+
+def original_run_lease_window(*, deadline_monotonic):
+    """Restrict the actual wall-clock run lease to the original native clock.
+
+    A coordinator operation may consume the reserve: its actual returned expiry
+    is checked against this ceiling before any process/grant is admitted.
+    """
+    wall_ms=time.time_ns()//1_000_000;now=time.monotonic()
+    need(type(deadline_monotonic)in(int,float) and math.isfinite(deadline_monotonic) and
+         deadline_monotonic>now,'original_parent_native_lease_clock_expired')
+    ceiling_ms=wall_ms+math.floor((deadline_monotonic-now)*1000)
+    lease_ms=ceiling_ms-time.time_ns()//1_000_000-1000
+    need(lease_ms>0,'original_parent_native_lease_reserve_exhausted')
+    return lease_ms,ceiling_ms
+
+
+def expected_capture_command(request):
+    return ('/usr/bin/python3', '-B', request['worker_path'],
+        '--transport-capsule', request['capsule_pin']['path'],
+        '--transport-capsule-sha256', request['capsule_pin']['sha256'])
+
+
+def fixture_options(descriptor, digest):
+    read_sealed_binding(descriptor, digest)
+    return (FD_OPTION, str(descriptor), SHA_OPTION, digest)
+
+
+def fixture_selected(args):
+    descriptor = getattr(args, 'private_same_pid_m2_fd', -1)
+    digest = getattr(args, 'private_same_pid_m2_sha256', '')
+    if descriptor == -1 and digest == '':
+        return False
+    need(type(descriptor) is int and descriptor >= 3 and type(digest) is str and len(digest) == 64 and
+         all(c in '0123456789abcdef' for c in digest), 'incomplete_fixture_option_pair')
+    return True
+
+
+def validate_supervisor_fixture(args, *, accepted_control_plane_pin=None, plan_bound_dispatch=False):
+    if not fixture_selected(args):
+        return None
+    need(not accepted_control_plane_pin and not plan_bound_dispatch and
+         args.state_owner_bootstrap_fd >= 3 and args.state_owner_client_id and
+         args.implement is True and type(args.max_task_attempts) is int and args.max_task_attempts == 1 and
+         type(args.max_restarts) is int and args.max_restarts == 1,
+         'ordinary_approved_one_shot_private_capture_M2_only')
+    need(getattr(args, 'once', False) is False, 'fixture_cannot_enter_run_once_maintenance')
+    payload = read_sealed_binding(args.private_same_pid_m2_fd, args.private_same_pid_m2_sha256)
+    _module, request = _request(payload)
+    need(str(Path.cwd()) == payload['task_repository_root'], 'actual_supervisor_task_cwd_differs')
+    need(tuple(shlex.split(args.implementation_command)) == expected_capture_command(request),
+         'sealed_capture_worker_command_only')
+    cids = getattr(args, 'execution_slice_task_cid', getattr(args, 'execution_slice_task_cids', ()))
+    aliases = getattr(args, 'execution_slice_task_id', getattr(args, 'execution_slice_task_ids', ()))
+    need(tuple(cids) == (request['private_task_cid'],) and
+         tuple(aliases) == (request['private_task_alias'],) and
+         str(args.todo_path) == request['database_path'] and str(args.state_dir) == request['state_dir'],
+         'private_supervisor_scope_differs')
+    return payload
+
+
+def private_board_namespace(*, request, record):
+    """Join inert request identity to the genuine authoritative task row.
+
+    This metadata join grants no execution or completion authority and never
+    changes the task body. The sealed M2 request already fixes this one alias.
+    """
+    from collections.abc import Mapping
+    from ..task_sources.database_task_source import TaskRecord
+    namespace = request['fixture_id']
+    need(type(namespace) is str and namespace == request['private_task_alias'] and
+         type(record) is TaskRecord and record.task_cid == request['private_task_cid'] and
+         record.task_alias == namespace and isinstance(record.body, Mapping) and
+         type(record.body.get('board_namespace')) is str and
+         record.body['board_namespace'] == namespace,
+         'actual_private_task_board_namespace_required')
+    return namespace
+
+
+def _require_launch_manifest_join(*, payload, descriptor, digest, manifest):
+    # The native runtime signs this exact manifest immediately after this
+    # check. Task source identity and installed executable sources are
+    # separate; neither may be substituted by an ambient cwd or PATH.
+    need(manifest.get('schema') == 'isolated-admitted-supervisor-launch@1' and
+         manifest.get('repository_root') == payload['task_repository_root'] and
+         manifest.get('repository_id') == payload['task_repository_id'] and
+         manifest.get('baseline_commit') == payload['task_baseline_commit'] and
+         manifest.get('baseline_tree_id') == payload['task_baseline_tree_id'] and
+         manifest.get('private_same_pid_m2_entry') == payload and
+         manifest.get('private_same_pid_m2_sha256') == digest,
+         'signed_task_repository_and_fixture_binding_must_join')
+    environment = manifest.get('environment')
+    need(type(environment) is list and all(type(item) is list and len(item) == 2 and
+         all(type(part) is str for part in item) for item in environment),
+         'actual_launch_environment_required')
+    paths = [value for name, value in environment if name == 'PYTHONPATH']
+    need(len(paths) == 1 and paths[0].split(os.pathsep)[0] ==
+         payload['accelerator_source_root'], 'signed_executable_source_root_differs')
+    argv = manifest.get('argv')
+    need(type(argv) is list and argv[:4] == [sys.executable, '-P', '-m',
+         'ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor'],
+         'fixed_supervisor_module_entry_required')
+    # Manifest identity is rechecked after native construction too. The
+    # original metadata/source/clock joins remain; freshness belongs only to
+    # the initial preparation, supervisor validation and child construction.
+    request_module, request = _request(payload, require_fresh=False)
+    need(argv.count('--implement') == 1 and '--no-implement' not in argv,
+         'signed_M2_capture_implementation_selection_required')
+    command_positions = [i for i, value in enumerate(argv) if value == '--implementation-command']
+    need(len(command_positions) == 1 and command_positions[0]+1 < len(argv) and
+         tuple(shlex.split(argv[command_positions[0]+1])) == expected_capture_command(request),
+         'signed_M2_worker_command_differs')
+    for option, expected in ((FD_OPTION, str(descriptor)), (SHA_OPTION, digest),
+                             ('--board-namespace', payload['private_task_alias'])):
+        indices = [index for index, item in enumerate(argv) if item == option]
+        need(len(indices) == 1 and indices[0]+1 < len(argv) and argv[indices[0]+1] == expected,
+             'signed_supervisor_binding_options_differ')
+
+
+class PreparedPrivateM2Binding:
+    """Actual parent-owned sealed FD and borrowed live parent custody refs."""
+    def __init__(self, *, request_pin, task_repository, task_repository_id,
+                 task_baseline_commit, task_baseline_tree_id, accelerator_source_root,
+                 server, source, selected_task, state, work_deadline_monotonic,
+                 native_deadline_monotonic, parent_root, parent_disk):
+        self.descriptor = None; self._closed = False; self._issued_birth = None
+        self._pid = os.getpid(); self._thread = threading.get_ident()
+        self.parent_root = parent_root; self.parent_disk = parent_disk
+        repository = Path(accelerator_source_root)
+        task_repository = Path(task_repository)
+        module_path = repository/'ipfs_accelerate_py/cli_runtime/grok_private_same_pid_m2.py'
+        adapter_path = repository/'ipfs_accelerate_py/agent_supervisor/runtime/private_same_pid_m2_entry.py'
+        need(str(adapter_path) == __file__ and _source_digest(adapter_path) and
+             _source_digest(module_path) == M2_SOURCE_SHA256 and
+             repository.resolve(strict=True) == repository, 'exact_normal_entry_source_required')
+        module = importlib.import_module(M2_MODULE)
+        need(module.__file__ == module.__spec__.origin == str(module_path), 'fixed_normal_M2_required')
+        request = module.strict_request(request_pin)
+        need(task_repository.resolve(strict=True) == task_repository and task_repository.is_dir() and
+             task_repository.is_relative_to(Path(request['fixture_root'])) and
+             not task_repository.is_relative_to(Path(request['attempt_directory'])) and
+             all(task_repository != Path(root) and not task_repository.is_relative_to(Path(root)) and
+                 not Path(root).is_relative_to(task_repository) for root in request['source_roots']),
+             'independent_private_admitted_task_repository_required')
+        self.request = request
+        _require_parent_source_locks(request)
+        need(request.get('execution_environment') == 'isolated-loopback' and
+         request['source_roots'][0] == str(repository) and
+             request['source_sha256'].get(str(adapter_path)) == _source_digest(adapter_path) and
+             request['source_sha256'].get(str(module_path)) == _source_digest(module_path),
+             'complete_source_generation_required')
+        for path, digest in request['source_sha256'].items():
+            need(time.monotonic() < request['work_deadline_monotonic'] and _source_digest(path) == digest,
+                 'current_producer_source_changed_or_work_expired')
+        from .quack_state_server import QuackStateServer, ServerLifecycle
+        from ..task_sources.typed_database_task_source import TypedDatabaseTaskSource
+        need(type(server) is QuackStateServer and server.lifecycle is ServerLifecycle.READY and
+             type(source) is TypedDatabaseTaskSource and
+             str(server.config.database_path) == request['database_path'] and
+             server.identity.store_id == request['private_store_id'] and
+             server.identity.server_id == request['private_server_id'] and
+             server.identity.repository_id == task_repository_id, 'actual_private_owner_required')
+        authority = source.require_quack_authority_binding(expected_endpoint=server.identity.listen_uri,
+            expected_process_instance_id=source._client.process_birth_id)
+        need(authority['store_id'] == request['private_store_id'] and
+             authority['server_id'] == request['private_server_id'] and
+             authority['stable_authority']['database_uuid'] == request['private_database_uuid'] and
+             authority['stable_authority']['repository_id'] == task_repository_id and
+             selected_task.task_cid == request['private_task_cid'] and
+             selected_task.task_key == request['private_task_alias'] and
+             str(Path(state)/'run') == request['state_dir'] and
+             request['work_deadline_monotonic'] == work_deadline_monotonic and
+             request['parent_native_deadline_monotonic'] == native_deadline_monotonic and
+             request['native_deadline_monotonic'] <= native_deadline_monotonic-2,
+             'actual_private_task_and_original_lifetime_required')
+        self.board_namespace = private_board_namespace(request=request,
+            record=source.get_task(request['private_task_cid']))
+        P = Path('/home/barberb/lift_coding/external/ipfs_datasets')
+        # The existing enclosing caller must already have the canonical P tree
+        # and actual native objects. Never insert a tree over an earlier import.
+        loaded_P = sys.modules.get('ipfs_datasets_py')
+        need(loaded_P is not None and getattr(loaded_P, '__file__', None) ==
+             str(P/'ipfs_datasets_py/__init__.py') and
+             loaded_P.__spec__.origin == loaded_P.__file__ and
+             request['source_sha256'].get(loaded_P.__file__) == _source_digest(loaded_P.__file__),
+             'canonical_P_must_already_own_actual_parent_resources')
+        for name, expected in P_SDK_SOURCE_SHA256.items():
+            path = P/'ipfs_datasets_py/optimizers/logic_theorem_optimizer'/name
+            need(request['source_sha256'].get(str(path)) == expected and _source_digest(path) == expected,
+                 'exact_fixed_absolute_deadline_SDK_generation_required')
+        native = _fixed_module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler', P,
+            'ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py', request['source_sha256'])
+        host = _fixed_module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_daemon_resources', P,
+            'ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py', request['source_sha256'])
+        parented = _fixed_module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.parented_phase_resources', P,
+            'ipfs_datasets_py/optimizers/logic_theorem_optimizer/parented_phase_resources.py', request['source_sha256'])
+        with native.resource_admission_deadline(
+                work_deadline_monotonic=request['work_deadline_monotonic'],
+                native_deadline_monotonic=request['native_deadline_monotonic']):
+            need(type(parent_disk) in (host.DaemonResourceReservation, parented.ParentedPhaseResourceReservation),
+                 'exact_enclosing_disk_owner_required')
+            parent_disk_lease = (parent_disk.native_lease if type(parent_disk) is parented.ParentedPhaseResourceReservation
+                                 else parent_disk._lease)
+            need(type(parent_root) is native.ResourceLease and type(parent_disk) in
+                 (host.DaemonResourceReservation, parented.ParentedPhaseResourceReservation) and
+                 parent_root.owner_pid == os.getpid() and parent_root.parent_lease_id is None and
+                 not parent_root.released and not parent_root.cancelled and not parent_disk.cancelled and
+                 type(parent_disk_lease) is native.ResourceLease and parent_disk_lease.owner_pid == os.getpid() and
+                 parent_root.cpu_slots >= 1 and parent_root.child_process_slots >= 2 and
+                 parent_root.memory_mb >= request['resources']['memory_mb']+512 and
+                 str(parent_root._scheduler.state_path) == request['resources']['scheduler_state_path'],
+                 'actual_enclosing_native_and_disk_custody_required')
+            active = {row['lease_id']:row for row in parent_root._scheduler.active_leases()}
+            lease_id = parent_disk_lease.lease_id
+            for _depth in range(8):
+                need(lease_id in active and active[lease_id]['owner_pid'] == os.getpid(), 'actual_parent_chain_unavailable')
+                if lease_id == parent_root.lease_id:
+                    break
+                lease_id = active[lease_id].get('parent_lease_id')
+            else:
+                raise PrivateFixtureRefusal('parent_disk_not_beneath_exact_enclosing_root')
+            self.receipt_directory = Path(state)/'private-same-pid-M2'
+            need(any(self.receipt_directory.is_relative_to(Path(root)) for root in parent_disk.roots),
+                 'parent_receipt_precharge_root_required')
+            charge_key = 'private-M2-entry:'+hashlib.sha256(request['fixture_id'].encode('utf-8')).hexdigest()
+            self.precharge = parent_disk.account_external_bytes(charge_key, RECEIPT_PRECHARGE)
+            self.receipt_directory.mkdir(mode=0o700, exist_ok=False)
+        self.payload = dict(schema=_binding_schema_for_request(request['schema']), request_pin=dict(request_pin),
+            accelerator_source_root=str(repository), task_repository_root=str(task_repository),
+            task_repository_id=task_repository_id, task_baseline_commit=task_baseline_commit,
+            task_baseline_tree_id=task_baseline_tree_id,
+            private_store_id=request['private_store_id'], private_database_uuid=request['private_database_uuid'],
+            private_server_id=request['private_server_id'], private_database_path=request['database_path'],
+            private_task_cid=request['private_task_cid'], private_task_alias=request['private_task_alias'],
+            source_generation=request['source_generation'], adapter_source_sha256=_source_digest(adapter_path),
+            composition_source_sha256=_source_digest(module_path), receipt_directory=str(self.receipt_directory),
+            work_deadline_monotonic=request['work_deadline_monotonic'],
+            native_deadline_monotonic=request['native_deadline_monotonic'],
+            original_started_monotonic=request['original_started_monotonic'],
+            parent_native_deadline_monotonic=request['parent_native_deadline_monotonic'], one_shot=True, attempt_cap=1,
+            paid_provider_calls_allowed=False, capture_worker_dispatch_allowed=True, execution_environment='isolated-loopback',
+            receipt_precharge_bytes=RECEIPT_PRECHARGE,
+            parent_disk_reservation_id=parent_disk.reservation_id, parent_native_root_lease_id=parent_root.lease_id)
+        self.payload['required_P_SDK_source_sha256'] = dict(P_SDK_SOURCE_SHA256)
+        raw = canonical(self.payload); need(len(raw) <= MAXIMUM, 'binding_size_bound')
+        descriptor = os.memfd_create('ordinary-admitted-private-same-pid-M2', os.MFD_CLOEXEC|os.MFD_ALLOW_SEALING)
+        try:
+            count = 0
+            while count < len(raw):
+                written = os.write(descriptor, raw[count:]); need(written > 0, 'memfd_write_failed'); count += written
+            fcntl.fcntl(descriptor, fcntl.F_ADD_SEALS, SEALS)
+            self.descriptor = descriptor; self.sha256 = hashlib.sha256(raw).hexdigest()
+            read_sealed_binding(descriptor, self.sha256)
+        except BaseException:
+            os.close(descriptor); self.descriptor = None
+            raise
+
+    def require_launch_manifest(self, manifest):
+        _require_launch_manifest_join(payload=self.payload, descriptor=self.descriptor,
+                                      digest=self.sha256, manifest=manifest)
+
+    def require_runtime_clocks(self, *, work_deadline_monotonic, native_deadline_monotonic):
+        need(work_deadline_monotonic==self.payload['work_deadline_monotonic'] and
+             native_deadline_monotonic==self.payload['parent_native_deadline_monotonic'] and
+             self.request['original_started_monotonic']==self.payload['original_started_monotonic'],
+             'actual_runtime_original_epoch_changed')
+
+    def __reduce__(self):
+        raise TypeError('live admitted fixture binding is not serializable')
+
+    def _native_deadlines(self):
+        P = Path('/home/barberb/lift_coding/external/ipfs_datasets')
+        return _fixed_module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler', P,
+            'ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py',
+            self.request['source_sha256'])
+
+    def require_current(self):
+        # The issuer is a different thread and does not inherit the constructor
+        # ContextVar. Establish the same original clocks explicitly before
+        # touching any scheduler/disk currentness or locks in this thread.
+        need(not self._closed and os.getpid() == self._pid and
+             time.monotonic() < self.payload['work_deadline_monotonic'] <=
+             self.payload['native_deadline_monotonic'], 'actual_parent_custody_expired')
+        native = self._native_deadlines()
+        with native.resource_admission_deadline(
+                work_deadline_monotonic=self.payload['work_deadline_monotonic'],
+                native_deadline_monotonic=self.payload['native_deadline_monotonic']):
+            need(not self.parent_root.released and not self.parent_root.cancelled and
+                 not self.parent_disk.cancelled, 'actual_parent_custody_expired')
+            read_sealed_binding(self.descriptor, self.sha256)
+            _require_parent_source_locks(self.request)
+            for path, digest in self.request['source_sha256'].items():
+                need(_source_digest(path) == digest, 'fixture_producer_generation_changed')
+            native._check_resource_operation_deadline()
+
+    def require_bootstrap_peer(self, *, pid, process_birth_id, received_witness_descriptors):
+        native = self._native_deadlines()
+        with native.resource_admission_deadline(
+                work_deadline_monotonic=self.payload['work_deadline_monotonic'],
+                native_deadline_monotonic=self.payload['native_deadline_monotonic']):
+            self.require_current()
+            need(time.monotonic() < self.payload['work_deadline_monotonic'] and
+                 type(process_birth_id) is str and process_birth_id, 'fresh_original_work_and_birth_required')
+            command_fd = os.open(f'/proc/{pid}/cmdline', os.O_RDONLY|os.O_CLOEXEC)
+            try:
+                raw_command = os.read(command_fd, 65537)
+                need(len(raw_command) <= 65536, 'actual_child_command_bound')
+            finally:
+                os.close(command_fd)
+            argv = raw_command.split(b'\0')
+            argv = [item.decode('utf-8', 'strict') for item in argv if item]
+            A = Path(self.payload['accelerator_source_root'])
+            supervisor = _fixed_module(
+                'ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_supervisor', A,
+                'ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py',
+                self.request['source_sha256'])
+            need(argv[:5] == [sys.executable, '-P', '-c',
+                 supervisor.ORDINARY_IMPLEMENTATION_DAEMON_BOOTSTRAP,
+                 supervisor.IMPLEMENTATION_DAEMON_MODULE_SENTINEL],
+                 'actual_fixed_child_entry_differs')
+            for option, expected in ((FD_OPTION, str(self.descriptor)), (SHA_OPTION, self.sha256),
+                                     ('--board-namespace', self.payload['private_task_alias'])):
+                indices = [index for index, item in enumerate(argv) if item == option]
+                need(len(indices) == 1 and indices[0]+1 < len(argv) and argv[indices[0]+1] == expected,
+                     'actual_bootstrap_child_binding_argv_differs')
+            # The ordinary child is already nondumpable. Observe kernel
+            # descriptors received on its SO_PEERCRED-authenticated request,
+            # without reading protected /proc cwd/fd or trusting JSON paths.
+            need(type(received_witness_descriptors) is tuple and len(received_witness_descriptors) == 2 and
+                 all(type(value) is int and value >= 3 and not os.get_inheritable(value)
+                     for value in received_witness_descriptors), 'two_actual_CLOEXEC_kernel_witnesses_required')
+            peer_memfd, peer_cwd = received_witness_descriptors
+            own = os.fstat(self.descriptor); peer = os.fstat(peer_memfd)
+            need((own.st_dev, own.st_ino, own.st_size) == (peer.st_dev, peer.st_ino, peer.st_size) and
+                 read_sealed_binding(peer_memfd, self.sha256) == self.payload,
+                 'actual_received_child_sealed_FD_differs')
+            directory = Path(self.payload['task_repository_root'])
+            need(directory.resolve(strict=True) == directory, 'admitted_task_directory_alias')
+            expected_cwd = directory.lstat(); actual_cwd = os.fstat(peer_cwd)
+            need(stat.S_ISDIR(expected_cwd.st_mode) and stat.S_ISDIR(actual_cwd.st_mode) and
+                 (expected_cwd.st_dev, expected_cwd.st_ino) == (actual_cwd.st_dev, actual_cwd.st_ino) and
+                 fcntl.fcntl(peer_cwd, fcntl.F_GETFL) & os.O_PATH == os.O_PATH,
+                 'actual_received_child_cwd_directory_differs')
+            witness = dict(schema='private-M2-authenticated-kernel-FD-witness/v1',
+                observation_time='authenticated_request_after_hardening', peer_pid=pid,
+                process_birth_id=process_birth_id, actual_received_descriptor_count=2, close_on_exec=True,
+                memfd=dict(device=peer.st_dev, inode=peer.st_ino, bytes=peer.st_size,
+                           seals=fcntl.fcntl(peer_memfd, fcntl.F_GET_SEALS)),
+                cwd_directory=dict(device=actual_cwd.st_dev, inode=actual_cwd.st_ino,
+                                   mode=stat.S_IMODE(actual_cwd.st_mode)))
+            native._check_resource_operation_deadline()
+            need(self._issued_birth is None, 'fixture_binding_is_one_shot_across_all_child_births')
+            # Issuer is already single-threaded and holds the genuine native run
+            # fence. A later grant/response failure never resets this one-shot.
+            self._issued_birth = process_birth_id
+            return {'fixture_binding_sha256':self.sha256,
+                    'fixture_source_generation':self.payload['source_generation'], 'fixture_one_shot':True,
+                    'fixture_peer_witness':witness}
+
+    def close_after_no_live_children(self):
+        need(os.getpid() == self._pid and threading.get_ident() == self._thread, 'original_parent_required')
+        if not self._closed:
+            os.close(self.descriptor); self._closed = True
+
+
+def _durable(directory, name, value):
+    need(name in {'intent.json','constructed.json','capture-observation.json','failed.json','closed.json','closure-unknown.json'},
+         'fixed_receipt_name_required')
+    directory = Path(directory)
+    need(directory.resolve(strict=True) == directory and directory.is_dir() and
+         directory.lstat().st_uid == os.getuid() and not directory.lstat().st_mode & 0o077,
+         'private_parent_precharged_receipt_directory_required')
+    raw = canonical(value)+b'\n'; need(len(raw) <= 128*1024, 'receipt_bound')
+    descriptor = os.open(directory/name, os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW|os.O_CLOEXEC, 0o600)
+    try:
+        count = 0
+        while count < len(raw):
+            written = os.write(descriptor, raw[count:]); need(written > 0, 'receipt_write_failed'); count += written
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+    parent = os.open(directory, os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW|os.O_CLOEXEC)
+    try:
+        os.fsync(parent)
+    finally:
+        os.close(parent)
+
+
+def _park_until(deadline):
+    logger = logging.getLogger(__name__)
+    while time.monotonic() < deadline:
+        logger.info('Private M2 one-shot parked; parent observation/STOP required')
+        time.sleep(min(0.25, max(0.0, deadline-time.monotonic())))
+    raise SystemExit(78)
+
+
+def run_private_fixture_after_bootstrap(*, args, program, owner_bootstrap, database_path):
+    """One fixed normal entry; never falls through to ordinary dispatch."""
+    custody = {'actual_bootstrap':owner_bootstrap, 'fixture':None}
+    _LIVE.append(custody)
+    source = owner_bootstrap['task_source']
+    expiry = source._client._adapter.raw.grant.get('expires_at')
+    need(type(expiry) is int, 'actual_bootstrap_expiry_unavailable_custody_retained')
+    custody['original_grant_expiry_ms'] = expiry
+    custody['original_grant_deadline_monotonic'] = time.monotonic()+max(0.0, expiry/1000-time.time())
+    try:
+        return _run_private_fixture_after_bootstrap(args=args, program=program,
+            owner_bootstrap=owner_bootstrap, database_path=database_path, custody=custody)
+    except BaseException:
+        if custody['fixture'] is None:
+            try:
+                owner_bootstrap['task_source'].close()
+                _LIVE.remove(custody)
+            except BaseException:
+                # Before fixture construction only the genuine bootstrap
+                # transport exists; retain it if even detach is unproven.
+                _park_until(custody['original_grant_deadline_monotonic'])
+        elif custody in _LIVE:
+            # Includes receipt persistence failure and partial SDK cleanup.
+            # Never exit through ordinary retry/recovery while a real fixture
+            # object or its disposition remains retained in this child.
+            _park_until(min(custody['original_grant_deadline_monotonic'],
+                            custody['fixture'].request['native_deadline_monotonic']))
+        raise
+
+
+@contextmanager
+def _private_shutdown_handlers():
+    """Use the ordinary daemon latch; never raise into a native DB call."""
+    need(threading.current_thread() is threading.main_thread(), 'actual_daemon_main_thread_required')
+    from ..todo_daemon.database_shutdown import DatabaseDaemonShutdown
+    shutdown = DatabaseDaemonShutdown()
+    previous = {}
+    try:
+        for signum in (signal.SIGTERM, signal.SIGINT):
+            previous[signum] = signal.signal(signum, shutdown.request)
+        yield shutdown
+    finally:
+        for signum, handler in previous.items():
+            signal.signal(signum, handler)
+
+
+def _private_cleanup_start(request, *, grant_deadline_monotonic):
+    # This is a cutoff only. It carries no grant and never renews a clock.
+    return min(request['work_deadline_monotonic'], request['native_deadline_monotonic']-10,
+               grant_deadline_monotonic-10)
+
+
+def _wait_for_private_stop(shutdown, *, cleanup_start_monotonic):
+    """Keep real health reads under held custody; no new work or clock renewal."""
+    while time.monotonic() < cleanup_start_monotonic:
+        shutdown.checkpoint()
+        time.sleep(min(0.1, max(0.0, cleanup_start_monotonic-time.monotonic())))
+    shutdown.checkpoint()
+
+
+def _construct_private_fixture(*, module, private_args, program, owner_bootstrap,
+                               request_pin, directory, binding_sha256):
+    # A constructor can reject before any composition object enters custody.
+    # Log fixed stages and persist type-only failure; all original validators
+    # and the enclosing genuine-bootstrap detach/UNKNOWN path remain intact.
+    logger = logging.getLogger(__name__)
+    logger.info('Private M2 stage: constructor request validation starting')
+    try:
+        request = module.strict_request(request_pin)
+        selected = _selected_setup_class(module, request)
+        fixture = selected(args=private_args, program=program,
+            owner_bootstrap=owner_bootstrap, request_pin=request_pin)
+    except BaseException as error:
+        try:
+            _durable(directory, 'failed.json', {'schema':'private-M2-attempt-failure/v1',
+                'binding_sha256':binding_sha256, 'phase':'constructor_validation',
+                'error_type':type(error).__name__, 'capture_diagnostic_only':True,
+                'production_qualified':False})
+        except BaseException as persistence_error:
+            error.add_note('constructor failure receipt persistence failed: '+type(persistence_error).__name__)
+            raise error from persistence_error
+        raise
+    logger.info('Private M2 stage: constructor request validation completed')
+    return fixture
+
+
+def _run_private_fixture_after_bootstrap(*, args, program, owner_bootstrap, database_path, custody):
+    need(fixture_selected(args), 'explicit_fixture_opt_in_required')
+    payload = read_sealed_binding(args.private_same_pid_m2_fd, args.private_same_pid_m2_sha256)
+    logging.getLogger(__name__).info('Private M2 stage: sealed request validation starting')
+    module, request = _request(payload)
+    logging.getLogger(__name__).info('Private M2 stage: sealed request validation completed')
+    need(str(Path.cwd()) == payload['task_repository_root'], 'actual_daemon_task_cwd_differs')
+    need(str(database_path) == request['database_path'] and args.implement is True and
+         args.max_task_attempts == 1 and args.state_owner_bootstrap_fd >= 3 and
+         tuple(args.execution_slice_task_cid) == (request['private_task_cid'],) and
+         tuple(args.execution_slice_task_id) == (request['private_task_alias'],), 'exact_private_child_scope_required')
+    # Path derivation comes only from the verified sealed request. The ordinary
+    # CLI has no execution_path flag, and its default behavior is untouched.
+    private_args = argparse.Namespace(**vars(args))
+    for name in ('database_path','coordination_path','execution_path','state_dir','owner_session_id'):
+        setattr(private_args, name, request[name])
+    source = owner_bootstrap.get('task_source')
+    credential = owner_bootstrap.get('state_owner_bootstrap_credentials')
+    need(source is not None and credential is not None, 'actual_existing_bootstrap_required')
+    authority = source.require_quack_authority_binding(expected_endpoint=credential.endpoint,
+        expected_process_instance_id=credential.process_birth_id, bootstrap_credentials=credential)
+    need(type(args.board_namespace) is str and args.board_namespace ==
+         private_board_namespace(request=request, record=source.get_task(request['private_task_cid'])),
+         'actual_private_child_board_namespace_differs')
+    connection = source._client._adapter.raw
+    grant_expiry_ms = connection.grant.get('expires_at')
+    need(type(grant_expiry_ms) is int and grant_expiry_ms == custody['original_grant_expiry_ms'] and
+         request['native_deadline_monotonic'] <= custody['original_grant_deadline_monotonic'] and
+         authority['store_id'] == payload['private_store_id'] and
+         authority['server_id'] == payload['private_server_id'] and
+         authority['stable_authority']['database_uuid'] == payload['private_database_uuid'] and
+         authority['stable_authority']['repository_id'] == payload['task_repository_id'],
+         'actual_child_grant_and_private_authority_must_bound_fixture')
+    directory = Path(payload['receipt_directory'])
+    _durable(directory, 'intent.json', {'schema':'private-M2-one-shot-intent/v1',
+        'binding_sha256':args.private_same_pid_m2_sha256, 'pid':os.getpid(),
+        'actual_process_birth_id':credential.process_birth_id, 'task_claimed':False,
+        'provider_dispatched':False, 'capture_diagnostic_only':True})
+    fixture = _construct_private_fixture(module=module, private_args=private_args, program=program,
+        owner_bootstrap=owner_bootstrap, request_pin=payload['request_pin'], directory=directory,
+        binding_sha256=args.private_same_pid_m2_sha256)
+    custody['fixture'] = fixture
+    # START must observe a genuine healthy child while its original native
+    # resources and source leases are held. Only ordinary STOP (or the fixed
+    # cleanup reserve boundary) ends this capture diagnostic hold.
+    failure = stopped = None
+    with _private_shutdown_handlers() as shutdown:
+        try:
+            observation = fixture.construct()
+            _durable(directory, 'constructed.json', observation)
+            capture_observation = fixture.dispatch_once()
+            _durable(directory, 'capture-observation.json', capture_observation)
+        except BaseException as error:
+            failure = error
+            _durable(directory, 'failed.json', {'schema':'private-M2-attempt-failure/v1',
+                'binding_sha256':args.private_same_pid_m2_sha256, 'error_type':type(error).__name__,
+                'capture_diagnostic_only':True, 'production_qualified':False,
+                'failure_observation':fixture.failure_observation()})
+        if failure is None:
+            try:
+                _wait_for_private_stop(shutdown, cleanup_start_monotonic=_private_cleanup_start(
+                    request, grant_deadline_monotonic=custody['original_grant_deadline_monotonic']))
+            except SystemExit as error:
+                stopped = error
+        try:
+            closeout = fixture.close(artifacts_durable=True)
+            _durable(directory, 'closed.json', closeout)
+            _LIVE.remove(custody)
+        except BaseException as error:
+            _durable(directory, 'closure-unknown.json', {'schema':'private-M2-closure-unknown/v1',
+                'error_type':type(error).__name__, 'same_live_child_retained':True,
+                'resources_reconstructed':False, 'production_qualified':False,
+                'failure_observation':fixture.failure_observation()})
+            _park_until(min(request['native_deadline_monotonic'], custody['original_grant_deadline_monotonic']))
+        if failure is not None:
+            raise failure
+        if stopped is not None:
+            raise stopped
+    return 0
+
+
+
+__all__ = ['PreparedPrivateM2Binding', 'read_sealed_binding', 'fixture_options',
+           'fixture_selected', 'validate_supervisor_fixture', 'run_private_fixture_after_bootstrap']

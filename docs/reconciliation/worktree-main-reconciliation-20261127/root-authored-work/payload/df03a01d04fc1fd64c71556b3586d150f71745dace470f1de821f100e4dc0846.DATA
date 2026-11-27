@@ -1,0 +1,500 @@
+"""Root-invoked authored same-series result-reuse transport experiment.
+
+The genuine repository compiler, router, Grok provider and streaming subprocess
+transport run unchanged. An explicit fixture adapter replaces discovery/auth
+selection and adds only a local authored Python command to the genuine provider.
+The child's usage envelope is authored test evidence, never provider charges.
+This file has no project imports or execution at import time.
+"""
+from __future__ import annotations
+
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import stat
+import subprocess
+import sys
+import tempfile
+from unittest.mock import patch
+
+
+TASK_ID = "AUTHORED-READ-SET-RESULT-REUSE-INVOICE"
+QUERY = "invoice_total"
+PROVIDER = "grok_cli"
+MODEL = "grok-4.7"
+RESPONSE = "Authored local inspection transport completed."
+SOURCES = {
+    "ledger.py": b"# Authored inspection fixture; not executed.\ndef invoice_total(subtotal, tax):\n    return subtotal + tax\n",
+    "display.py": b"# Original public display interface is mandatory.\ndef invoice_label(value):\n    return 'Invoice: ' + str(value)\n",
+    "storage.py": b"# Authored storage candidate; no file IO.\ndef invoice_storage(value):\n    return {'invoice': str(value), 'persisted': False}\n",
+}
+REQUIRED_TEXTS = (
+    "Task: inspect invoice_total arithmetic while preserving the original "
+    "display.py public callable and literal label. This is an inspection input, "
+    "not an accepted task or proof that omitted storage behavior is irrelevant.",
+    "Security: do not execute or edit source, read credentials, or contact "
+    "external services. Each dispatched inspection uses an authored local child "
+    "for a model; no actual provider or native-model inference occurs.",
+    "UI/UX: preserve invoice_label and the exact 'Invoice: ' prefix. "
+    "There is no rendered interface, accessibility or interaction result.",
+)
+AUTHORED_USAGE = {"input_tokens": 7, "cache_read_input_tokens": 2,
+    "cache_creation_input_tokens": 1, "output_tokens": 3, "total_tokens": 13}
+NORMALIZED_AUTHORED_USAGE = {"input_tokens": 7, "cached_input_tokens": 2,
+    "cache_write_input_tokens": 1, "output_tokens": 3, "total_tokens": 13}
+_ERROR_TYPES = frozenset({"AssertionError", "ValueError", "TypeError", "RuntimeError",
+    "OSError", "PermissionError", "FileNotFoundError", "TimeoutError",
+    "KeyboardInterrupt", "SystemExit"})
+
+
+def _need(value, reason):
+    if not value:
+        raise ValueError(reason)
+
+
+def _json(value):
+    return json.dumps(value, sort_keys=True, ensure_ascii=False,
+        separators=(",", ":"), allow_nan=False).encode("utf-8")
+
+
+def _sha(raw):
+    return sha256(raw).hexdigest()
+
+
+def _directory(path):
+    path = Path(path)
+    _need(path.is_absolute() and str(path) == os.path.abspath(path)
+        and ".." not in path.parts and path != Path("/"), "exact_experiment_directory_required")
+    descriptor = os.open("/", os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+    try:
+        for part in path.parts[1:]:
+            following = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=descriptor)
+            os.close(descriptor)
+            descriptor = following
+        return descriptor
+    except BaseException:
+        os.close(descriptor)
+        raise
+
+
+def _private_parent(path):
+    descriptor = _directory(path)
+    try:
+        info = os.fstat(descriptor)
+        _need(info.st_uid == os.getuid() and stat.S_IMODE(info.st_mode) == 0o700,
+            "owner_only_experiment_parent_required")
+        return info.st_dev, info.st_ino
+    finally:
+        os.close(descriptor)
+
+
+def _fresh(path, *, external=False):
+    path = Path(path)
+    if external:
+        _need(path.is_relative_to(Path("/tmp")) and path != Path("/tmp")
+            and not any(os.path.lexists(parent / ".git") for parent in (path, *path.parents)),
+            "external_experiment_case_required")
+    _private_parent(path.parent)
+    parent = _directory(path.parent)
+    try:
+        os.mkdir(path.name, 0o700, dir_fd=parent)
+    finally:
+        os.close(parent)
+    return path
+
+
+def _write(path, raw):
+    parent = _directory(path.parent)
+    try:
+        descriptor = os.open(path.name, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW,
+            0o600, dir_fd=parent)
+        try:
+            remaining = memoryview(raw)
+            while remaining:
+                count = os.write(descriptor, remaining)
+                _need(count > 0, "exclusive_experiment_write_failed")
+                remaining = remaining[count:]
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
+    finally:
+        os.close(parent)
+
+
+def _read(path, *, maximum=2 * 1024 * 1024, private=True):
+    parent = _directory(path.parent)
+    try:
+        descriptor = os.open(path.name, os.O_RDONLY | os.O_NOFOLLOW, dir_fd=parent)
+        try:
+            before = os.fstat(descriptor)
+            _need(stat.S_ISREG(before.st_mode) and before.st_nlink == 1
+                and before.st_uid == os.getuid() and before.st_size <= maximum,
+                "bounded_owned_experiment_file_required")
+            if private:
+                _need(stat.S_IMODE(before.st_mode) == 0o600, "private_experiment_file_required")
+            raw = bytearray()
+            while chunk := os.read(descriptor, min(65536, maximum + 1 - len(raw))):
+                raw.extend(chunk)
+                _need(len(raw) <= maximum, "experiment_read_bound")
+            after = os.fstat(descriptor)
+            _need((before.st_dev, before.st_ino, before.st_size, before.st_mtime_ns, before.st_ctime_ns)
+                == (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns, after.st_ctime_ns),
+                "experiment_file_changed_during_read")
+            return bytes(raw), {"sha256": _sha(raw), "bytes": len(raw),
+                "mode": stat.S_IMODE(after.st_mode)}
+        finally:
+            os.close(descriptor)
+    finally:
+        os.close(parent)
+
+
+def _child_source(*, expected_sha, expected_bytes, record_path):
+    """The fixed child reads only its owned prompt and emits authored events."""
+    return ("import hashlib, json, os, stat, sys\n"
+        "from pathlib import Path\n"
+        f"EXPECTED_SHA={expected_sha!r}\nEXPECTED_BYTES={expected_bytes!r}\n"
+        f"RECORD_ROOT={str(record_path)!r}\n"
+        "args=sys.argv[1:]\n"
+        "def one(flag, value=None):\n"
+        "    assert args.count(flag)==1\n"
+        "    i=args.index(flag)\n"
+        "    assert i+1<len(args)\n"
+        "    if value is not None: assert args[i+1]==value\n"
+        "    return args[i+1]\n"
+        "one('--model','grok-4.7')\n"
+        "one('--max-turns','1')\n"
+        "one('--output-format','streaming-json')\n"
+        "one('--permission-mode','dontAsk')\n"
+        "one('--tools','read_file')\n"
+        "one('--disallowed-tools','read_file,search_tool,use_tool')\n"
+        "session=one('--session-id')\n"
+        "assert len(session)==32 and all(c in '0123456789abcdef' for c in session)\n"
+        "assert not any(flag in args for flag in ('--prompt','-p','--resume','--continue','--'))\n"
+        "assert all(args.count(flag)==1 for flag in ('--no-plan','--no-subagents','--disable-web-search','--no-memory','--verbatim'))\n"
+        "prompt=Path(one('--prompt-file'))\n"
+        "fd=os.open(prompt,os.O_RDONLY|os.O_NOFOLLOW)\n"
+        "try:\n"
+        "    info=os.fstat(fd)\n"
+        "    assert stat.S_ISREG(info.st_mode) and info.st_uid==os.getuid() and info.st_nlink==1\n"
+        "    assert stat.S_IMODE(info.st_mode)==0o600 and info.st_size==EXPECTED_BYTES\n"
+        "    raw=b''\n"
+        "    while len(raw)<=EXPECTED_BYTES:\n"
+        "        chunk=os.read(fd,min(65536,EXPECTED_BYTES+1-len(raw)))\n"
+        "        if not chunk: break\n"
+        "        raw+=chunk\n"
+        "finally: os.close(fd)\n"
+        "assert len(raw)==EXPECTED_BYTES and hashlib.sha256(raw).hexdigest()==EXPECTED_SHA\n"
+        "assert raw.decode('utf-8') not in args\n"
+        "assert set(os.environ)<= {'PATH','PYTHONDONTWRITEBYTECODE','LC_CTYPE'}\n"
+        "row={'schema':'authored-local-grok-child@1','argv':sys.argv,'pid':os.getpid(),\n"
+        "     'parent_pid':os.getppid(),'cwd':str(Path.cwd()),'prompt_path':str(prompt),\n"
+        "     'prompt_sha256':EXPECTED_SHA,'prompt_bytes':len(raw),'prompt_mode':stat.S_IMODE(info.st_mode),\n"
+        "     'session_id':session,'native_policy_requested_only':True,'authored_usage_total':13}\n"
+        "fd=os.open(str(Path(RECORD_ROOT)/('child-'+session+'.json')),os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o600)\n"
+        "with os.fdopen(fd,'w',encoding='utf-8') as target:\n"
+        "    json.dump(row,target,sort_keys=True,separators=(',',':')); target.flush(); os.fsync(target.fileno())\n"
+        f"print({json.dumps({'type':'text','data':RESPONSE})!r},flush=True)\n"
+        f"print({json.dumps({'type':'end','stopReason':'end_turn','num_turns':1,'usage_is_incomplete':False,'usage':AUTHORED_USAGE})!r},flush=True)\n").encode("utf-8")
+
+
+def run_experiment(*, output_dir, case_root, scheduler=None):
+    """Compare three real authored callbacks with one callback plus two hits.
+
+    Root supplies the genuine package bootstrap, admitted lease and an already
+    opened existing native scheduler when needed. This must run in a dedicated
+    process: fixture hooks temporarily replace discovery/auth selection, cwd
+    and the provider environment, then restore them. No native model runs.
+    """
+    from ipfs_accelerate_py import llm_router
+    from ipfs_accelerate_py.agent_supervisor.runtime.automatic_prompt_tokenizer import resolve_prompt_tokenizer
+    from ipfs_accelerate_py.agent_supervisor.runtime.repository_context_read_set import compile_repository_read_set
+    from ipfs_accelerate_py.agent_supervisor.runtime.repository_read_set_series import inspect_repository_read_set_series
+    from ipfs_accelerate_py.agent_supervisor.runtime.repository_source_session import RepositorySourceSession
+    from ipfs_accelerate_py.agent_supervisor.runtime.supervisor_meta_index import public_replay_without_metadata
+    from ipfs_accelerate_py.cli_runtime import grok_stream_capture, grok_turn_policy, grok_native_usage
+    from ipfs_accelerate_py.cli_runtime.cli_metadata import get_last_cli_observation
+    from ipfs_accelerate_py.llm_allocation import api_key_slots, duckdb_store
+
+    _ = grok_stream_capture, grok_turn_policy, grok_native_usage
+    case = _fresh(Path(case_root), external=True)
+    output = _fresh(Path(output_dir))
+    workspace = _fresh(case / "source")
+    private = _fresh(case / "private")
+    for name, raw in SOURCES.items():
+        _write(workspace / name, raw)
+    required_path = private / "requirements.json"
+    requirements_raw = _json(list(REQUIRED_TEXTS))
+    _write(required_path, requirements_raw)
+    requirement_checks = []
+
+    def requirements_guard():
+        raw, row = _read(required_path)
+        _need(raw == requirements_raw, "authored_requirement_file_changed")
+        requirement_checks.append(row)
+
+    session_options = {}
+    if scheduler is not None:
+        from ipfs_accelerate_py.agent_supervisor.runtime.repository_source_index import NativeRepositoryIndex
+        session_options["index_factory"] = lambda path: NativeRepositoryIndex(path, scheduler=scheduler)
+    original_cwd = Path.cwd()
+    audit_state = {"active": False, "case": None, "denied": [], "stdlib_transport_opens": {
+        "temporary_file_custom_opener": 0, "devnull": 0, "owned_pipe_fd": 0}}
+    case_reports = []
+    original_error = None
+
+    def fence(event, args):
+        if not audit_state["active"]:
+            return
+        active = audit_state["case"]
+        if event == "subprocess.Popen":
+            argv = args[1]
+            if (len(active["spawned"]) >= active["expected_calls"]
+                    or type(argv) not in (list, tuple)
+                    or list(argv[:len(active["command"])]) != active["command"]
+                    or args[2] is not None or args[3] != active["safe_environment"]):
+                audit_state["denied"].append("unexpected_child")
+                raise PermissionError("authored_transport_child_refused")
+            active["spawned"].append(list(argv))
+        elif event == "open":
+            selected = args[0]
+            caller = sys._getframe(1).f_code
+            if (selected == str(active["prompt_dir"]) and caller.co_filename == tempfile.__file__
+                    and caller.co_name == "NamedTemporaryFile"):
+                audit_state["stdlib_transport_opens"]["temporary_file_custom_opener"] += 1
+                return
+            if (selected == os.devnull and caller.co_filename == subprocess.__file__
+                    and caller.co_name == "_get_devnull"):
+                audit_state["stdlib_transport_opens"]["devnull"] += 1
+                return
+            if type(selected) is int:
+                if (stat.S_ISFIFO(os.fstat(selected).st_mode)
+                        and caller.co_filename == subprocess.__file__
+                        and caller.co_name == "__init__"):
+                    audit_state["stdlib_transport_opens"]["owned_pipe_fd"] += 1
+                    return
+                selected = os.readlink(f"/proc/self/fd/{selected}")
+            selected_path = Path(os.fsdecode(selected)) if isinstance(selected, (str, bytes, os.PathLike)) else None
+            if (selected_path is None or selected_path.parent != active["prompt_dir"]
+                    or not selected_path.name.startswith("llm-router-grok-prompt-")
+                    or not selected_path.name.endswith(".txt")):
+                audit_state["denied"].append("unexpected_open")
+                raise PermissionError("authored_transport_open_refused")
+        elif event.startswith("socket.") or event in {"os.system", "os.exec", "os.posix_spawn", "os.fork", "os.forkpty"}:
+            audit_state["denied"].append("unexpected_network_or_process")
+            raise PermissionError("authored_transport_effect_refused")
+
+    sys.addaudithook(fence)
+    with public_replay_without_metadata():
+        with RepositorySourceSession(workspace, case / "state", representation="original", **session_options) as session:
+            initial = session.status_summary()
+            counter, provenance = resolve_prompt_tokenizer(provider=PROVIDER, model=MODEL)
+            options = dict(session=session, generation=initial["generation"], query=QUERY,
+                required_paths=["display.py"], required_texts=list(REQUIRED_TEXTS), task_id=TASK_ID,
+                provider=PROVIDER, model=MODEL, workspace=workspace, token_counter=counter,
+                max_input_tokens=32768, limit=8)
+            prepared = compile_repository_read_set(**options)
+            expected_raw = prepared.selected_prompt.encode("utf-8")
+            _write(private / "expected-prompt.txt", expected_raw)
+            measured = prepared.receipt["measurement_status"] == "measured"
+            expected_count = prepared.receipt["selected_input_tokens" if measured else "selected_estimated_input_tokens"]
+            _need(type(expected_count) is int and 0 < 3 * expected_count <= 32768,
+                "fixed_authored_population_exceeds_local_allowance")
+            total_key = "cumulative_input_tokens" if measured else "cumulative_estimated_input_tokens"
+            attempt_key = "local_input_tokens" if measured else "local_estimated_input_tokens"
+            scenarios = (
+                dict(name="default", expected_calls=3, reuse=False, max_total=32768, threshold=None),
+                dict(name="reuse_low_allowance_and_reached_native_threshold", expected_calls=1,
+                    reuse=True, max_total=expected_count, threshold=13),
+            )
+            with patch.object(llm_router, "_grok_cli_command", lambda: "grok"), patch.object(llm_router, "_cli_available", lambda _command: True):
+                genuine_backend = llm_router._get_grok_cli_provider()
+            _need(genuine_backend is not None, "genuine_grok_backend_unavailable")
+            actual_generate = genuine_backend.generate
+            for scenario in scenarios:
+                arm = _fresh(private / scenario["name"])
+                prompt_dir = _fresh(arm / "transport-prompts")
+                records = _fresh(arm / "child-metadata")
+                script = arm / "authored_grok_child.py"
+                script_raw = _child_source(expected_sha=_sha(expected_raw), expected_bytes=len(expected_raw), record_path=records)
+                _write(script, script_raw)
+                command = [sys.executable, "-I", "-B", str(script)]
+                original_command = list(command)
+                store = duckdb_store.AllocationStore(path=arm / "allocation.duckdb")
+                connection = store._connect()
+                _need(connection is not None, "genuine_private_allocation_store_unavailable")
+                connection.close()
+                os.chmod(store.path, 0o600)
+                _before_raw, store_before = _read(store.path, maximum=16 * 1024 * 1024)
+                active = dict(scenario, prompt_dir=prompt_dir, command=command,
+                    safe_environment={"PATH": os.defpath, "PYTHONDONTWRITEBYTECODE": "1"},
+                    spawned=[], backend_calls=[], discovery_calls=[])
+                audit_state["case"] = active
+                observed = []
+                result = None
+
+                class AuthoredCommandAdapter:
+                    def generate(self, prompt, *, model_name=None, **kwargs):
+                        _need(len(active["backend_calls"]) < scenario["expected_calls"]
+                            and prompt.encode("utf-8") == expected_raw and model_name == MODEL,
+                            "authored_backend_input_differs")
+                        _need("grok_cli_cmd" not in kwargs, "authored_command_option_collision")
+                        active["backend_calls"].append({"prompt_sha256": _sha(prompt.encode()), "model": model_name})
+                        with patch.dict(os.environ, active["safe_environment"], clear=True), patch.object(tempfile, "tempdir", str(prompt_dir)):
+                            audit_state["active"] = True
+                            try:
+                                return actual_generate(prompt, model_name=model_name, grok_cli_cmd=command, **kwargs)
+                            finally:
+                                audit_state["active"] = False
+
+                adapter = AuthoredCommandAdapter()
+
+                def discovery(provider, *, deps, use_cache):
+                    _need(provider == PROVIDER and use_cache is False
+                        and len(active["discovery_calls"]) < scenario["expected_calls"],
+                        "authored_discovery_route_differs")
+                    active["discovery_calls"].append(PROVIDER)
+                    return adapter
+
+                def no_auth_slots(provider, kwargs, *, session_id=None):
+                    _need(provider == PROVIDER, "authored_auth_slot_route_differs")
+                    return dict(kwargs)
+
+                try:
+                    os.chdir(workspace)
+                    with patch.object(llm_router, "get_llm_provider", discovery), patch.object(api_key_slots,
+                            "apply_api_key_to_kwargs", no_auth_slots), patch.object(duckdb_store, "_DEFAULT_STORE", store):
+                        selected = dict(options)
+                        selected.pop("query")
+                        if scenario["reuse"]:
+                            selected["reuse_identical_inputs"] = True
+                        result = inspect_repository_read_set_series(**selected, queries=(QUERY, QUERY, QUERY),
+                            max_total_input_tokens=scenario["max_total"],
+                            max_observed_native_tokens_before_next_dispatch=scenario["threshold"],
+                            timeout=10, max_output_tokens=64, requirements_guard=requirements_guard,
+                            receipt_observer=observed.append)
+                except BaseException as error:
+                    original_error = error
+                finally:
+                    audit_state["active"] = False
+                    os.chdir(original_cwd)
+
+                children, child_bindings = [], []
+                for path in sorted(records.iterdir()):
+                    child_bytes, binding = _read(path)
+                    children.append(json.loads(child_bytes))
+                    child_bindings.append(binding)
+                child_by_session = {child["session_id"]: child for child in children}
+                sessions = [argv[argv.index("--session-id") + 1] for argv in active["spawned"]]
+                ordered = [child_by_session.get(identity) for identity in sessions]
+                inspections = [] if result is None else result.receipt["attempts"]
+                series = None if result is None else result.receipt
+                actual = [attempt for attempt in inspections if attempt.get("backend_dispatches") == 1]
+                hits = [attempt for attempt in inspections if attempt.get("status") == "reused"]
+                observation = get_last_cli_observation(PROVIDER)
+                store_after_raw, store_after = _read(store.path, maximum=16 * 1024 * 1024)
+                requirements_guard()
+                assertions = {
+                    "expected_actual_children": len(active["spawned"]) == len(children) == scenario["expected_calls"]
+                        and len({child["pid"] for child in children}) == scenario["expected_calls"]
+                        and all(child["parent_pid"] == os.getpid() for child in children),
+                    "expected_genuine_backend_entries": len(active["backend_calls"]) == len(active["discovery_calls"]) == scenario["expected_calls"],
+                    "fresh_actual_session_ids": len(sessions) == len(set(sessions)) == scenario["expected_calls"],
+                    "caller_command_unchanged": command == original_command,
+                    "actual_argv_matches_spawn": len(ordered) == scenario["expected_calls"] and all(
+                        child is not None and argv[3:] == child["argv"] for argv, child in zip(active["spawned"], ordered)),
+                    "same_complete_prompt_delivered": len(children) == scenario["expected_calls"] and all(
+                        child["prompt_sha256"] == _sha(expected_raw) and child["prompt_bytes"] == len(expected_raw)
+                        and child["cwd"] == str(workspace) for child in children),
+                    "no_inline_prompt": all(prepared.selected_prompt not in argv for argv in active["spawned"]),
+                    "temporary_prompts_removed": len(children) == scenario["expected_calls"]
+                        and all(not os.path.lexists(child["prompt_path"]) for child in children) and list(prompt_dir.iterdir()) == [],
+                    "normalized_authored_usage_retained_once_per_call": len(actual) == scenario["expected_calls"] and all(
+                        attempt["inspection"]["native_rollout_usage"]["usage"] == NORMALIZED_AUTHORED_USAGE for attempt in actual),
+                    "actual_full_input_debit_only": series is not None and series[total_key] == scenario["expected_calls"] * expected_count
+                        and series["remaining_local_input_allowance"] == scenario["max_total"] - scenario["expected_calls"] * expected_count
+                        and series["local_accounting_complete"] is True
+                        and all(attempt[attempt_key] == expected_count and attempt["local_debit"] == expected_count for attempt in actual),
+                    "scoped_native_total_counts_actual_calls_only": series is not None
+                        and series["scoped_native_total_tokens"] == 13 * scenario["expected_calls"],
+                    "three_outputs_with_expected_reuse": series is not None and len(observed) == 1 and observed[0] == series
+                        and series["status"] == "returned" and len(result.selected_prompts) == len(result.response_texts) == 3
+                        and all(value == prepared.selected_prompt for value in result.selected_prompts)
+                        and all(value == RESPONSE for value in result.response_texts)
+                        and len(hits) == (2 if scenario["reuse"] else 0)
+                        and series.get("reuse_identical_inputs") is scenario["reuse"]
+                        and series.get("reused_results") == len(hits),
+                    "hits_do_not_spend_or_claim_new_native_calls": all(attempt.get("backend_dispatches") == 0
+                        and attempt.get("local_debit") == 0 and attempt.get("local_debit_status") == "reused"
+                        and attempt.get(attempt_key) is None and attempt.get("inspection") is None for attempt in hits),
+                    "hits_reference_original_success": not hits or len(sessions) == 1 and all(attempt.get("reuse_reference") == {
+                        "original_attempt_ordinal": 1, "original_response_index": 1,
+                        "original_invocation_id": sessions[0], "model_prompt_sha256": _sha(expected_raw),
+                        "model_prompt_bytes": len(expected_raw), "response_sha256": _sha(RESPONSE.encode()),
+                        "response_bytes": len(RESPONSE.encode())} for attempt in hits),
+                    "backend_input_and_child_session_join": [attempt["inspection"]["invocation_id"] for attempt in actual] == sessions,
+                    "actual_stream_exit_and_last_envelope": observation.get("native_grok_total_tokens") == 13
+                        and observation.get("native_grok_progress", {}).get("process_exit_observed") is True,
+                    "allocation_database_retained": bool(store_after_raw),
+                    "source_generation_unchanged": session.status_summary() == initial,
+                    "no_denied_effects": audit_state["denied"] == [],
+                    "cwd_restored": Path.cwd() == original_cwd,
+                }
+                case_reports.append(dict(name=scenario["name"], qualified=original_error is None and all(assertions.values()),
+                    reuse_selected=scenario["reuse"], assertions=assertions, declared_query_count=3,
+                    declared_max_total_local_input=scenario["max_total"], declared_per_call_local_input=32768,
+                    declared_native_stop_threshold=scenario["threshold"], actual_spawn_count=len(active["spawned"]),
+                    actual_session_id_sha256=[_sha(identity.encode()) for identity in sessions],
+                    actual_child_argv_sha256=[_sha(_json(argv)) for argv in active["spawned"]],
+                    child_metadata_bindings=child_bindings, authored_script={"sha256": _sha(script_raw), "bytes": len(script_raw)},
+                    private_allocation_database_before=store_before, private_allocation_database_after=store_after,
+                    series_receipt=series, observed_failure_receipts=observed if result is None else [],
+                    local_complete_input_count_per_dispatch=expected_count,
+                    authored_observed_native_total=None if series is None else series.get("scoped_native_total_tokens"),
+                    failure_type=None if original_error is None else type(original_error).__name__
+                        if type(original_error).__name__ in _ERROR_TYPES else "other"))
+                if original_error is not None:
+                    break
+            requirements_guard()
+            _need(session.status_summary() == initial, "authored_native_generation_changed")
+            for name, raw in SOURCES.items():
+                current = session.read(generation=initial["generation"], path=name, representation="original")
+                _need(current["encoding"] == "utf-8" and current["content"].encode() == raw
+                    and current["original_sha256"] == _sha(raw), "authored_source_changed")
+            all_sessions = [identity for arm in case_reports for identity in arm["actual_session_id_sha256"]]
+            assertions = dict(two_fixed_scenarios_completed=len(case_reports) == 2,
+                all_scenario_assertions_pass=all(arm["qualified"] for arm in case_reports),
+                exactly_four_actual_children=sum(arm["actual_spawn_count"] for arm in case_reports) == 4,
+                all_actual_session_identities_fresh=len(all_sessions) == len(set(all_sessions)) == 4,
+                same_source_prompt_and_requirements=True, source_generation_unchanged=session.status_summary() == initial,
+                no_denied_effects=audit_state["denied"] == [], cwd_restored=Path.cwd() == original_cwd)
+            report = dict(schema="authored-read-set-result-reuse-experiment@1",
+                qualified=original_error is None and all(assertions.values()), assertions=assertions,
+                task_id=TASK_ID, provider=PROVIDER, model=MODEL, cases=case_reports,
+                compiled_read_set_receipt=prepared.receipt, tokenizer_provenance=provenance,
+                source_inventory={name: {"sha256": _sha(raw), "bytes": len(raw)} for name, raw in SOURCES.items()},
+                requirements_binding={"sha256": _sha(requirements_raw), "bytes": len(requirements_raw)},
+                requirements_checks=len(requirement_checks), actual_spawn_count=sum(arm["actual_spawn_count"] for arm in case_reports),
+                authored_native_final_envelope=AUTHORED_USAGE, authored_usage_is_provider_charge=False,
+                genuine_router_provider_and_stream_transport=True, external_provider_calls=0,
+                real_grok_native_binary_executed=False, native_model_inference=False,
+                native_scheduler_supplied=scheduler is not None, scheduler_created_reset_or_reconfigured=False,
+                fixture_hooks=["grok_discovery", "get_llm_provider_authored_command_adapter", "api_key_slots_authored_identity",
+                    "genuine_private_allocation_store", "own_process_cwd_restored", "minimal_provider_environment", "owned_prompt_directory"],
+                denied_effects=list(audit_state["denied"]), stdlib_transport_opens=dict(audit_state["stdlib_transport_opens"]),
+                provider_authentication_qualified=False, real_provider_delivery_qualified=False,
+                effective_native_tool_policy_verified=False, process_containment_verified=False,
+                native_cumulative_cap_enforced=False, prior_response_history_assumed=False,
+                source_and_prompt_bodies_exported=False, target_code_executed=False, task_acceptance=False,
+                whole_task_usage_complete=None, accepted_task_token_savings=None, prior_qualification_cases_reused=False)
+            raw = _json(report) + b"\n"
+            _write(output / "report.json", raw)
+            if original_error is not None:
+                raise original_error
+            _need(report["qualified"], "authored_transport_assertions_failed")
+    return {"schema": "authored-read-set-result-reuse-experiment-run@1", "qualified": True,
+        "report_sha256": _sha(raw), "report_bytes": len(raw), "actual_spawn_count": 4,
+        "external_provider_calls": 0, "authored_native_usage_is_provider_charge": False,
+        "task_acceptance": False, "accepted_task_token_savings": None}
+
+

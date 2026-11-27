@@ -1,0 +1,466 @@
+"""Signed public data joins and retained custody, without a worker or provider.
+
+The dataset fixture compiles native source/IR/capsules in memory; its checked
+proof records are explicitly authored untrusted descriptors. Native admission
+signatures, Git worktrees and file witnesses here are real. The boundary object
+is declared test data, never a fabricated successful container verification.
+"""
+from copy import deepcopy
+import hashlib
+import importlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+
+import pytest
+
+from test.api.test_terminal_semantic_call_review import case as coherent_case
+
+
+def _sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _wire(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+
+
+@pytest.fixture(autouse=True)
+def fresh_namespaces(tmp_path, monkeypatch):
+    monkeypatch.setenv("IPFS_ACCELERATE_META_INDEX_DUCKDB", str(tmp_path / "checked-extension-meta.duckdb"))
+    monkeypatch.delenv("IPFS_ACCELERATE_META_INDEX_DUCKLAKE", raising=False)
+    monkeypatch.setenv("IPFS_ACCELERATE_AGENT_ORCHESTRATION_DIR", str(tmp_path / "orchestration"))
+
+
+_NATIVE_SEED = None
+
+
+def _create_native_seed(coherent_case, tmp_path):
+    from ipfs_accelerate_py.agent_supervisor.context.context_compiler import ContextCompiler, build_text_context_references, render_context_capsule
+    from ipfs_accelerate_py.agent_supervisor.context.context_contracts import ContextBudget
+    from ipfs_accelerate_py.agent_supervisor.control.profile_authority import initialize_local_profile
+    from ipfs_accelerate_py.agent_supervisor.prompt.prompt_workflow import PromptAcceptanceRecord, PromptGoalGraph, PromptGoalRecord, PromptOutputRecord, PromptTaskRecord, PromptValidationRecord
+    from ipfs_accelerate_py.agent_supervisor.runtime import local_planning_admission as local
+    from ipfs_accelerate_py.agent_supervisor.runtime import router_public_instruction as instruction
+    from ipfs_accelerate_py.agent_supervisor.runtime.semantic_context_runtime import prepare_semantic_context
+    from ipfs_accelerate_py.agent_supervisor.runtime.semantic_router_translation import encode_semantic_router_prompt
+    module = importlib.import_module("ipfs_accelerate_py.agent_supervisor.runtime.checked_audit_context")
+    root = tmp_path / "public-repository"; root.mkdir(mode=0o755); root.chmod(0o755)
+    (root / "build").mkdir(mode=0o755)
+    prompt = coherent_case["basis"]["prompt"]
+    instruction_path = "build/task-instruction.txt"
+    for name, raw in {**coherent_case["sources"], instruction_path: prompt.encode()}.items():
+        p = root / name; p.write_bytes(raw); p.chmod(0o644)
+    def git(*args):
+        return subprocess.check_output(["/usr/bin/git", "-c", "core.hooksPath=/dev/null", "-C", str(root), *args], text=True).strip()
+    git("init", "-q"); git("add", "callee.py", "caller.py", "dynamic.py", instruction_path)
+    git("-c", "user.name=Public checked-context fixture", "-c", "user.email=fixture@example.invalid", "commit", "-qm", "Authored public fixture")
+    _, baseline, repository_cid = local._repository(root)
+    profile, lifecycle = tmp_path / "profile", tmp_path / "lifecycle"
+    initialize_local_profile(repository_cid=repository_cid, baseline_commit=baseline, profile_dir=profile, lifecycle_dir=lifecycle)
+    policy_id = module.content_identity(local.LOCAL_POLICY)
+    validation = PromptValidationRecord(validation_key="declared-validation", argv=("/usr/bin/true",), policy_cid=policy_id)
+    acceptance = PromptAcceptanceRecord(criterion_key="pending-caller-review", criterion="Independently review the conditional caller model", validation_keys=(validation.validation_key,))
+    output = PromptOutputRecord(path="caller.py", effect="modify", media_type="text/x-python")
+    paths = tuple(sorted([*coherent_case["sources"], instruction_path]))
+    goal = PromptGoalRecord(goal_key="PUBLIC-CALL-GOAL", parent_goal_cid="", dependency_goal_cids=(),
+        title="Conditional caller review", objective=prompt, rationale="Authored public data fixture", scope_paths=paths, acceptance=(acceptance,))
+    task = PromptTaskRecord(task_key="PUBLIC-CALL-TASK", goal_cid=goal.goal_cid, dependency_task_cids=(),
+        objective=prompt, rationale="Public declared input", scope_paths=paths, outputs=(output,),
+        validations=(validation,), acceptance=(acceptance,), evidence_cids=(), policy_roots=(policy_id,), predicted_files=("caller.py",))
+    roots = {"request_cid": module.content_identity({"prompt": prompt}),
+        "scan_cid": module.content_identity({"sources": local._sources(root, list(paths))}),
+        "program_root": module.content_identity({"git_tree": git("rev-parse", "HEAD^{tree}")})}
+    graph = PromptGoalGraph(**roots, policy_roots=(policy_id,), goals=(goal,), tasks=(task,), evidence=())
+    spec = {"task_key": task.task_key, "scope_paths": list(paths), "dependencies": [],
+        "outputs": [{"path": output.path, "effect": output.effect, "media_type": output.media_type}],
+        "validations": [{name: local._plain(getattr(validation, name)) for name in ("validation_key", "argv", "cwd", "expected_exit_codes", "policy_cid")}],
+        "acceptance": [{name: local._plain(getattr(acceptance, name)) for name in ("criterion_key", "criterion", "evidence_cids", "validation_keys")}]}
+    # Native admission is a signed declaration; the validation command is never run.
+    manifest = local.author_local_benchmark_manifest(repository=root, profile_dir=profile, lifecycle_dir=lifecycle, task_specs=[spec], planning_roots=roots)
+    admission = local.admit_local_benchmark_plan(graph=graph, manifest=manifest)
+    public = instruction.prepare_public_instruction_context(repository=root, admission=admission, task_cid=task.task_cid,
+        source_path=instruction_path, expected_source_sha256=_sha(prompt.encode()))
+    semantic_output = root / ".runtime" / "semantic"
+    prepare_semantic_context(repository=root, paths=sorted(coherent_case["sources"]), required_raw_paths=sorted(coherent_case["sources"]),
+        objective=prompt, task_id=task.task_key, output=semantic_output)
+    artifact = semantic_output / "worker-context.json"
+    refs = build_text_context_references(artifact.read_text(), reference_prefix="semantic-context", kind="semantic-context",
+        path=artifact.relative_to(root).as_posix(), repository_id=repository_cid, tree_id="tree:public-fixture", required=True, chunk_bytes=1201)
+    compiled = ContextCompiler(ContextBudget(max_input_tokens=65536, max_items=128, max_item_bytes=16384, max_serialized_bytes=256000)).compile(
+        repository_id=repository_cid, tree_id="tree:public-fixture", objective_id=task.task_key, objective_revision="sha256:public-task",
+        policy_id=policy_id, policy_revision="sha256:public-policy", caller="supervisor:authored-data-fixture", stage="implementation",
+        goal={"id": task.task_key}, authority={"mode": "candidate_only", "completion_authority": False},
+        scope={"allowed_paths": ["caller.py"]}, acceptance={"criteria": ["declared public review remains pending"]}, evidence=refs)
+    native_prompt = render_context_capsule(compiled.capsule)
+    encoded = encode_semantic_router_prompt(prompt=native_prompt, repository=root).receipt
+    semantic = {"schema": "semantic-router-source-verification@1", **{key: encoded[key] for key in module._SEMANTIC_FIELDS - {"schema"}}}
+    return {"module": module, "root": root, "git": git, "prompt": prompt,
+        "instruction_path": instruction_path, "task_cid": task.task_cid, "admission": admission,
+        "public": public, "native_prompt": native_prompt, "semantic": semantic,
+        "profile": profile, "lifecycle": lifecycle, "sources": deepcopy(coherent_case["sources"])}
+
+
+@pytest.fixture
+def selected(coherent_case, tmp_path):
+    """Reuse signed seed data; every case rechecks real current files afresh.
+
+    There is no cached live budget, capacity or current-index authority. All
+    authored mutations are restored before the next independently captured load.
+    """
+    global _NATIVE_SEED
+    from ipfs_accelerate_py.agent_supervisor.runtime import router_public_instruction as instruction
+    from benchmarks.agent_supervisor.container_coding import terminal_semantic_audit_review as audit
+    from benchmarks.agent_supervisor.container_coding import terminal_semantic_context_budget as budgets
+    if _NATIVE_SEED is None:
+        _NATIVE_SEED = _create_native_seed(coherent_case, tmp_path)
+    seed = _NATIVE_SEED
+    assert seed["sources"] == coherent_case["sources"] and seed["prompt"] == coherent_case["basis"]["prompt"]
+    module, root, git = seed["module"], seed["root"], seed["git"]
+    admission, public = deepcopy(seed["admission"]), deepcopy(seed["public"])
+    native_prompt, semantic = seed["native_prompt"], deepcopy(seed["semantic"])
+    capacity = coherent_case["module"].previous.capacity
+    with capacity.reserve_call_review_capacity(scheduler=coherent_case["scheduler"], binding=coherent_case["binding"]) as control:
+        packet = audit.build_semantic_audit_context_packet(representation="view", capacity_control=control,
+            native_capsules=coherent_case["capsules"], code_views=coherent_case["views"], sources=coherent_case["sources"],
+            **coherent_case["native"], **coherent_case["basis"])
+    view = json.loads(packet)["payload"]["model_view"]
+    binding = budgets.build_context_budget_binding(head=coherent_case["native"]["expected_head"], view_id=view["view_id"],
+        reference_basis_cid=view["expansion_directory"]["reference_basis_cid"], native_root_cid=view["native_root_cid"],
+        capsule_set_id=view["capsule_set_id"], state_cid=view["state_cid"])
+    prepare = dict(repository=root, admission=admission, task_cid=seed["task_cid"], native_prompt=native_prompt,
+        public_instruction=public, context_packet=packet, checked_binding=binding, budget_policy=budgets.ContextBudgetPolicy().to_dict())
+    descriptor = module.prepare_checked_context_extension(**prepare)
+    workspace = tmp_path / "allocated"; git("worktree", "add", "--detach", "-q", str(workspace)); workspace.chmod(0o755)
+    _, inclusion = instruction.load_public_instruction(artifact=Path(public["artifact"]), expected_sha256=public["sha256"],
+        task_cid=seed["task_cid"], prompt=native_prompt, workspace=workspace, repository=root)
+    boundary = {"schema": "supervisor-container-worker-boundary@1", "container_id": "a" * 64, "image_id": "sha256:" + "b" * 64,
+        "namespaces": {"pid": "pid:[1]", "mnt": "mnt:[2]", "net": "net:[3]"}, "owner_uid": os.geteuid(), "worker_uid": os.geteuid() + 1,
+        "purpose": "coding", "manifest_sha256": "c" * 64, "completion_authority": False}
+    load = dict(artifact=Path(descriptor["artifact"]), expected_sha256=descriptor["sha256"], task_cid=seed["task_cid"],
+        native_prompt=native_prompt, instruction_receipt=inclusion, semantic_verification=semantic, workspace=workspace,
+        boundary=boundary, repository=root)
+    original_artifact = load["artifact"].read_bytes()
+    try:
+        yield {"module": module, "prepare": prepare, "load": load, "descriptor": descriptor, "sources": coherent_case["sources"],
+            "root": root, "workspace": workspace, "git": git, "profile": seed["profile"], "lifecycle": seed["lifecycle"]}
+    finally:
+        parent = load["artifact"].parent
+        kept = parent.with_name(parent.name + "-original")
+        if kept.exists():
+            shutil.rmtree(parent); kept.rename(parent)
+        for alias in ("linked.json", "hardlink.json"):
+            extra = parent / alias
+            if extra.exists() or extra.is_symlink(): extra.unlink()
+        for location in (root, workspace):
+            if not location.exists(): continue
+            for name, raw in {**seed["sources"], seed["instruction_path"]: seed["prompt"].encode()}.items():
+                path = location / name; backup = path.with_name(path.name + ".authored-original")
+                if backup.exists():
+                    if path.exists() or path.is_symlink(): path.unlink()
+                    backup.rename(path)
+                else:
+                    path.chmod(0o644); path.write_bytes(raw); path.chmod(0o644)
+        path = load["artifact"]; backup = path.with_name(path.name + ".authored-original")
+        if backup.exists():
+            if path.exists() or path.is_symlink(): path.unlink()
+            backup.rename(path)
+        else:
+            path.chmod(0o644); path.write_bytes(original_artifact); path.chmod(0o444)
+        if workspace.exists(): git("worktree", "remove", "--force", str(workspace))
+        else: git("worktree", "prune")
+
+
+def _load(selected, **changes):
+    return selected["module"].load_checked_context_extension(**{**selected["load"], **changes})
+
+
+def test_real_signed_native_task_instruction_and_original_sources_bind_exact_literal_packet(selected):
+    module = selected["module"]
+    suffix, receipt, guard = _load(selected)
+    try:
+        assert suffix == module.PREFIX + selected["prepare"]["context_packet"] + module.SUFFIX
+        assert receipt["context_sha256"] == _sha(selected["prepare"]["context_packet"].encode())
+        assert receipt["suffix_sha256"] == _sha(suffix.encode()) and receipt["suffix_bytes"] == len(suffix.encode())
+        assert receipt["native_prompt_sha256"] == _sha(selected["prepare"]["native_prompt"].encode())
+        assert receipt["checked_binding"] == selected["prepare"]["checked_binding"]
+        assert receipt["budget_policy"] == selected["prepare"]["budget_policy"]
+        assert receipt["native_semantic"] == selected["load"]["semantic_verification"]
+        assert receipt["worker_binding"] == {"workspace": str(selected["workspace"]), "boundary": selected["load"]["boundary"]}
+        assert receipt["instruction_source_path"] == "build/task-instruction.txt"
+        assert receipt["instruction_source_path"] not in {row["path"] for row in receipt["source_scope"]}
+        assert {row["path"]: row["sha256"] for row in receipt["source_scope"]} == {name: _sha(raw) for name, raw in selected["sources"].items()}
+        assert receipt["manifest_signature_verified"] is receipt["source_inventory_join_verified"] is receipt["packet_bytes_bound"] is True
+        assert all(receipt[key] is False for key in module.AUTHORITY)
+        assert "context_packet" not in receipt and "native_prompt" not in receipt
+        assert module.validate_checked_audit_context_inclusion(receipt) == receipt
+        assert Path(receipt["artifact"]).stat().st_mode & 0o777 == 0o444
+        guard()
+    finally:
+        guard.close()
+    with pytest.raises(ValueError, match="closed"):
+        guard()
+
+
+def test_identical_owner_preparation_reuses_only_exact_immutable_content(selected):
+    assert selected["module"].prepare_checked_context_extension(**selected["prepare"]) == selected["descriptor"]
+
+
+def test_group_writable_allocated_inputs_keep_native_write_policy_and_original_custody(selected):
+    path = selected["workspace"] / "caller.py"
+    path.chmod(0o664)
+    _, _, guard = _load(selected)
+    try:
+        guard()
+        path.write_bytes(path.read_bytes())
+        with pytest.raises(ValueError, match="custody"):
+            guard()
+    finally:
+        guard.close()
+
+
+def test_deployed_private_group_layout_passes_real_native_instruction_preflight_and_retained_load(selected):
+    """Exact deployed modes; declared boundary data still grants no kernel claim."""
+    from ipfs_accelerate_py.agent_supervisor.runtime import router_public_instruction as instruction
+    workspace = selected["workspace"]
+    workspace.chmod(0o3770)
+    (workspace / "build").chmod(0o2770)
+    for name in [*selected["sources"], "build/task-instruction.txt"]:
+        (workspace / name).chmod(0o660)
+    public = selected["prepare"]["public_instruction"]
+    _, observed_instruction = instruction.load_public_instruction(artifact=Path(public["artifact"]),
+        expected_sha256=public["sha256"], task_cid=selected["load"]["task_cid"],
+        prompt=selected["load"]["native_prompt"], workspace=workspace, repository=selected["root"])
+    assert observed_instruction == selected["load"]["instruction_receipt"]
+    assert observed_instruction["source_freshness_verified"] is True
+    assert observed_instruction["historical_replay"] is False
+    assert workspace.stat().st_mode & 0o7777 == 0o3770
+    assert (workspace / "build").stat().st_mode & 0o7777 == 0o2770
+    assert all((workspace / name).stat().st_mode & 0o777 == 0o660
+        for name in [*selected["sources"], "build/task-instruction.txt"])
+    suffix, receipt, guard = _load(selected)
+    try:
+        assert suffix == selected["module"].PREFIX + selected["prepare"]["context_packet"] + selected["module"].SUFFIX
+        assert all(receipt[key] is False for key in selected["module"].AUTHORITY)
+        guard()
+        path = workspace / "caller.py"
+        path.write_bytes(path.read_bytes())
+        with pytest.raises(ValueError, match="custody"):
+            guard()
+    finally:
+        guard.close()
+
+
+@pytest.mark.parametrize("target", ["file", "directory"])
+def test_allocated_input_exception_never_permits_world_writes(selected, target):
+    path = selected["workspace"] / "caller.py" if target == "file" else selected["workspace"]
+    path.chmod(0o666 if target == "file" else 0o777)
+    with pytest.raises(ValueError):
+        _load(selected)
+    path.chmod(0o644 if target == "file" else 0o755)
+
+
+def test_explicit_historical_replay_allows_removed_worktree_without_live_authority(selected):
+    suffix, receipt, guard = _load(selected); guard.close()
+    selected["git"]("worktree", "remove", "--force", str(selected["workspace"]))
+    with pytest.raises(ValueError):
+        _load(selected)
+    replayed, replay_receipt, replay_guard = selected["module"].replay_checked_context_extension(**selected["load"])
+    try:
+        assert replayed == suffix and replay_receipt == receipt
+        assert all(replay_receipt[key] is False for key in selected["module"].AUTHORITY)
+        replay_guard()
+    finally:
+        replay_guard.close()
+    (selected["root"] / "caller.py").write_bytes(selected["sources"]["caller.py"] + b"\n")
+    with pytest.raises(ValueError):
+        selected["module"].replay_checked_context_extension(**selected["load"])
+
+
+@pytest.mark.parametrize("change", ["task", "prompt", "instruction", "semantic", "semantic_bytes_bool", "canonical_workspace", "foreign_workspace", "boundary_owner", "same_worker_owner"])
+def test_live_loader_rejects_cross_task_instruction_native_and_allocated_bindings(selected, tmp_path, change):
+    args = deepcopy(selected["load"])
+    if change == "task": args["task_cid"] = selected["module"].content_identity({"foreign_task": True})
+    elif change == "prompt": args["native_prompt"] += "unadmitted suffix"
+    elif change == "instruction": args["instruction_receipt"]["source_sha256"] = "0" * 64
+    elif change == "semantic": args["semantic_verification"]["semantic_root_cid"] = selected["module"].content_identity({"foreign_root": True})
+    elif change == "semantic_bytes_bool": args["semantic_verification"]["native_prompt_bytes"] = True
+    elif change == "canonical_workspace": args["workspace"] = selected["root"]
+    elif change == "foreign_workspace":
+        foreign = tmp_path / "foreign"; subprocess.run(["/usr/bin/git", "clone", "-q", str(selected["root"]), str(foreign)], check=True); foreign.chmod(0o755)
+        args["workspace"] = foreign
+    elif change == "boundary_owner": args["boundary"]["owner_uid"] += 17
+    else: args["boundary"]["worker_uid"] = args["boundary"]["owner_uid"]
+    with pytest.raises(ValueError):
+        selected["module"].load_checked_context_extension(**args)
+
+
+@pytest.mark.parametrize("target", ["canonical_source", "allocated_source", "instruction", "artifact", "artifact_parent"])
+def test_retained_original_fds_and_parent_witnesses_reject_same_byte_replacement(selected, target):
+    _, _, guard = _load(selected)
+    try:
+        choices = {"canonical_source": selected["root"] / "caller.py", "allocated_source": selected["workspace"] / "callee.py",
+            "instruction": selected["root"] / "build/task-instruction.txt", "artifact": selected["load"]["artifact"]}
+        if target == "artifact_parent":
+            parent = selected["load"]["artifact"].parent
+            kept = parent.with_name(parent.name + "-original")
+            parent.rename(kept); parent.mkdir(mode=0o755)
+            (parent / selected["load"]["artifact"].name).write_bytes((kept / selected["load"]["artifact"].name).read_bytes())
+            (parent / selected["load"]["artifact"].name).chmod(0o444)
+        else:
+            path = choices[target]; raw, mode = path.read_bytes(), path.stat().st_mode & 0o777
+            path.rename(path.with_name(path.name + ".authored-original")); path.write_bytes(raw); path.chmod(mode)
+        with pytest.raises(ValueError, match="custody"):
+            guard()
+    finally:
+        guard.close()
+
+
+@pytest.mark.parametrize("target", ["canonical_source", "allocated_source", "instruction", "artifact"])
+def test_retained_custody_rejects_same_byte_in_place_writes(selected, target):
+    _, _, guard = _load(selected)
+    try:
+        path = {"canonical_source": selected["root"] / "caller.py", "allocated_source": selected["workspace"] / "callee.py",
+            "instruction": selected["root"] / "build/task-instruction.txt", "artifact": selected["load"]["artifact"]}[target]
+        raw, mode = path.read_bytes(), path.stat().st_mode & 0o777
+        path.chmod(0o644); path.write_bytes(raw); path.chmod(mode)
+        with pytest.raises(ValueError, match="custody"):
+            guard()
+    finally:
+        guard.close()
+
+
+def _repin(selected, payload, *, raw=None):
+    module = selected["module"]
+    payload["extension_cid"] = module.content_identity({k: v for k, v in payload.items() if k != "extension_cid"})
+    encoded = _wire(payload) if raw is None else raw
+    path = selected["load"]["artifact"]
+    path.chmod(0o644); path.write_bytes(encoded); path.chmod(0o444)
+    return {**selected["load"], "expected_sha256": _sha(encoded)}
+
+
+def _rebound_packet(module, payload, change):
+    """Refresh all representation hashes while retaining original signatures."""
+    from ipfs_datasets_py.logic.software_contracts.content import cid_for_bytes
+    packet = json.loads(payload["context_packet"])
+    view = packet["payload"]["model_view"]
+    context = json.loads(view["checked_call_context"])
+    capsule = context["context"]["capsule"]
+    if change == "residual_drop": capsule["residuals"] = []
+    elif change == "assumption_drop": capsule["assumptions"]["caller"] = []
+    elif change == "native_drop": view["native_view"]["retained_fields"]["capsules"].pop()
+    elif change == "native_limitations_drop": view["native_view"]["retained_fields"]["analysis_limitations"] = []
+    elif change == "view_authority": view["proof_transfer"] = True
+    elif change == "contract_change":
+        capsule["intent"]["caller_contract"]["offset"] = 3
+        capsule["model"]["caller_contract"]["offset"] = 3
+        capsule["model"]["requested_offset"] = 3
+    elif change == "domain_bool_alias": capsule["intent"]["mathematical_domain"]["runtime_equivalence_proved"] = 0
+    elif change == "inner_unknown": context["unregistered_execution"] = {"allowed": True}
+    else:
+        row = view["original_sources"][0]
+        raw = row["text"].replace("n + 1", "n + 9").encode()
+        row.update(text=raw.decode(), sha256=_sha(raw), bytes=len(raw), source_cid=cid_for_bytes(raw))
+        capsule["source_closure"]["sources"][0].update(sha256=_sha(raw), bytes=len(raw))
+    capsule["capsule_id"] = module.content_identity({k: v for k, v in capsule.items() if k != "capsule_id"})
+    context["capsule_id"] = capsule["capsule_id"]
+    context_text = _wire(context).decode()
+    view.update(checked_call_context=context_text, checked_call_context_sha256=_sha(context_text.encode()), checked_call_context_bytes=len(context_text.encode()))
+    directory = view["expansion_directory"]
+    reference = directory["reference_basis"]
+    reference.update(checked_call_context_sha256=view["checked_call_context_sha256"], original_sources_cid=module.content_identity(view["original_sources"]))
+    basis_id = module.content_identity(reference); directory["reference_basis_cid"] = basis_id
+    for handle in [*directory["references"], *directory["field_groups"].values(), directory["complete_audit_reference"]]:
+        handle["reference_basis_cid"] = basis_id
+    view["view_id"] = module.content_identity({k: v for k, v in view.items() if k != "view_id"})
+    packet["audit_view_id"] = view["view_id"]
+    payload["checked_binding"].update(view_id=view["view_id"], reference_basis_cid=basis_id)
+    text = _wire(packet).decode()
+    payload.update(context_packet=text, context_sha256=_sha(text.encode()), context_bytes=len(text.encode()))
+    return payload
+
+
+@pytest.mark.parametrize("change", ["residual_drop", "assumption_drop", "native_drop", "native_limitations_drop", "view_authority",
+    "contract_change", "domain_bool_alias", "inner_unknown", "original_source"])
+def test_rehashed_complete_packet_cannot_drop_required_evidence_or_change_admitted_intent(selected, change):
+    payload = json.loads(selected["load"]["artifact"].read_bytes())
+    _rebound_packet(selected["module"], payload, change)
+    with pytest.raises(ValueError):
+        selected["module"].load_checked_context_extension(**_repin(selected, payload))
+
+
+@pytest.mark.parametrize("change", ["unknown", "authority", "head_bool", "head_generation", "policy_bool", "policy_unknown", "native_prompt",
+    "source_drop", "source_digest", "source_bytes_bool", "context_pin", "signed_instruction", "graph", "signature", "inventory_domains"])
+def test_rebound_artifact_cannot_escape_original_closed_native_and_checked_joins(selected, change):
+    payload = json.loads(selected["load"]["artifact"].read_bytes())
+    if change == "unknown": payload["live_owner"] = {"attested": True}
+    elif change == "authority": payload["proof_authority"] = True
+    elif change == "head_bool": payload["checked_binding"]["head"]["generation"] = True
+    elif change == "head_generation": payload["checked_binding"]["head"]["generation"] += 1
+    elif change == "policy_bool": payload["budget_policy"]["max_model_calls"] = True
+    elif change == "policy_unknown": payload["budget_policy"]["refund_failed"] = True
+    elif change == "native_prompt": payload["task"]["native_prompt_sha256"] = "0" * 64
+    elif change == "source_drop": payload["source_scope"].pop()
+    elif change == "source_digest": payload["source_scope"][0]["sha256"] = "0" * 64
+    elif change == "source_bytes_bool": payload["source_scope"][0]["bytes"] = True
+    elif change == "context_pin": payload["context_sha256"] = "0" * 64
+    elif change == "signed_instruction": payload["signed_instruction"]["path"] = "caller.py"
+    elif change == "graph": payload["admission"]["graph"]["tasks"][0]["objective"] = "another original task"
+    elif change == "signature": payload["admission"]["receipt"]["binding"]["signature"] = "AAAA"
+    else: payload["inventory_domains"]["join"] = "dataset CID equals native source identity"
+    with pytest.raises(ValueError):
+        selected["module"].load_checked_context_extension(**_repin(selected, payload))
+
+
+@pytest.mark.parametrize("kind", ["pretty", "duplicate", "trailing", "writable", "symlink", "hardlink"])
+def test_complete_artifact_wire_and_custody_fail_closed(selected, kind):
+    args = dict(selected["load"]); path = args["artifact"]; raw = path.read_bytes()
+    if kind in {"pretty", "duplicate", "trailing"}:
+        raw = json.dumps(json.loads(raw), indent=2).encode() if kind == "pretty" else b'{"schema":"untrusted",' + raw[1:] if kind == "duplicate" else raw + b"extra"
+        path.chmod(0o644); path.write_bytes(raw); path.chmod(0o444); args["expected_sha256"] = _sha(raw)
+    elif kind == "writable": path.chmod(0o644)
+    elif kind == "symlink":
+        link = path.with_name("linked.json"); link.symlink_to(path); args["artifact"] = link
+    else: path.with_name("hardlink.json").hardlink_to(path)
+    with pytest.raises(ValueError):
+        selected["module"].load_checked_context_extension(**args)
+
+
+@pytest.mark.parametrize("change", ["false_claim", "unknown", "context_count_bool", "head_bool", "policy_float", "source_path", "source_count_bool", "task_cid", "boundary", "native_semantic"])
+def test_body_free_inclusion_validator_is_exact_detached_data_not_live_authority(selected, change):
+    _, receipt, guard = _load(selected); guard.close()
+    value = deepcopy(receipt)
+    if change == "false_claim": value["current_owner_verified"] = True
+    elif change == "unknown": value["budget_owner"] = {"live": True}
+    elif change == "context_count_bool": value["context_bytes"] = True
+    elif change == "head_bool": value["checked_binding"]["head"]["generation"] = True
+    elif change == "policy_float": value["budget_policy"]["max_model_calls"] = 1.0
+    elif change == "source_path": value["source_scope"][0]["path"] = "../callee.py"
+    elif change == "source_count_bool": value["source_scope"][0]["bytes"] = True
+    elif change == "task_cid": value["task_cid"] = "not-a-cid"
+    elif change == "boundary": value["worker_binding"]["boundary"]["owner_uid"] = True
+    else: value["native_semantic"]["native_prompt_bytes"] = True
+    with pytest.raises(ValueError):
+        selected["module"].validate_checked_audit_context_inclusion(value)
+    detached = selected["module"].validate_checked_audit_context_inclusion(receipt)
+    detached["checked_binding"]["head"]["generation"] += 1
+    assert detached != receipt and receipt["checked_binding"] == selected["prepare"]["checked_binding"]
+
+
+@pytest.mark.parametrize("change", ["source", "allocated_source", "literal_instruction", "packet_prose", "native_task", "policy"])
+def test_public_source_and_whole_literal_instruction_are_not_guessed_or_reinterpreted(selected, change):
+    if change in {"source", "allocated_source"}:
+        path = (selected["root"] if change == "source" else selected["workspace"]) / "callee.py"
+        path.write_bytes(b"def increment(n: int) -> int:\n    return n + 9\n")
+        with pytest.raises(ValueError): _load(selected)
+    elif change == "literal_instruction":
+        (selected["root"] / "build/task-instruction.txt").write_text(selected["prepare"]["context_packet"])
+        with pytest.raises(ValueError): _load(selected)
+    else:
+        args = deepcopy(selected["prepare"])
+        if change == "packet_prose": args["context_packet"] += "new instructions"
+        elif change == "native_task": args["task_cid"] = selected["module"].content_identity({"another_task": True})
+        else: args["budget_policy"]["max_payload_bytes"] = -1
+        with pytest.raises(ValueError): selected["module"].prepare_checked_context_extension(**args)

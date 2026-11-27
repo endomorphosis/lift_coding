@@ -1,0 +1,180 @@
+"""Genuine complete request validators over actual owned private files.
+
+No runtime/owner/client/resource/DB/provider substitute or construction occurs.
+Capsule named inputs here are inert metadata, never native admission evidence.
+"""
+import ast
+import hashlib
+import inspect
+from pathlib import Path
+import time
+
+import pytest
+import ipfs_accelerate_py.cli_runtime.grok_fresh_task_capture_transport as transport
+import ipfs_accelerate_py.cli_runtime.grok_private_fake_credentials as helper
+import ipfs_accelerate_py.cli_runtime.grok_private_same_pid_m2 as setup
+import ipfs_accelerate_py.agent_supervisor.runtime.private_same_pid_m2_entry as entry
+
+
+def file_pin(path,raw):
+    path.write_bytes(raw);path.chmod(0o600)
+    return dict(path=str(path),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+
+
+@pytest.fixture
+def complete_request(tmp_path_factory):
+    root=tmp_path_factory.mktemp('m2pf');root.chmod(0o700)
+    attempt=root/'attempt';attempt.mkdir(mode=0o700)
+    runtime=attempt/'runtime';runtime.mkdir(mode=0o700)
+    source_root=Path(setup.__file__).parents[2]
+    fixture_id='private-M2a-'+'4'*32;generation='grok-automatic-named-session/'+fixture_id
+    nonce='4'*32;fingerprint=helper.fake_fingerprint(nonce)
+    relative=set(transport.MODULES.values())|set(transport.PRIVATE_MODULES.values())
+    profile_sources={str(source_root/name):hashlib.sha256((source_root/name).read_bytes()).hexdigest()for name in relative}
+    profile=dict(schema=transport.SOURCE_SCHEMA,source_generation=generation,sources=profile_sources)
+    profile_pin=file_pin(root/'source-profile.json',helper.canonical(profile))
+    roles={role:file_pin0 for role,file_pin0 in ((role,dict(path=str(source_root/name),bytes=(source_root/name).stat().st_size,
+        sha256=profile_sources[str(source_root/name)]))for role,name in transport.RELATIVE.items())}
+    public=file_pin(root/'inert-named-input.json',b'{}\n')
+    named=dict(native_home=str(attempt/'native'),audit_directory=str(attempt/'audit'),preparation_home=str(attempt/'preparation'),
+        binary=public,configuration=public,owner_sampling_policy=public,system_requirements=None,
+        cleanup_reserve_seconds=1,bootstrap_max_seconds=1)
+    capsule=dict(schema=transport.CAPSULE_SCHEMA,source_generation=generation,files=roles,named_session=named)
+    capsule_pin=file_pin(root/'capsule.json',helper.canonical(capsule))
+    policy=dict(schema='private-M2-loopback-policy/v2',execution_environment='isolated-loopback',network_mode='none',
+        credential_slot='inert-preflight-slot',credential_fingerprint=fingerprint,
+        endpoint_environment={key:'http://127.0.0.1:12345/v1'for key in setup.ENDPOINT_NAMES},
+        fake_credential_contract='sealed-worker-fixture-v2-required',public_fake_nonce=nonce,
+        network_witness_policy=dict(schema='private-owned-rootless-network-policy/v1',witness_kind='own-net-owned-user-restricted-maps/v1',
+            expected_uid_map=[[0,1000,1],[1,100000,65536]],expected_gid_map=[[0,1000,1],[1,100000,65536]]),
+        private_duckdb_quiescence_policy=dict(schema='private-owned-DuckDB-public-close-policy/v1',operation='duckdb.close',
+            maximum_observation_milliseconds=200))
+    policy_pin=file_pin(root/'namespace-policy.json',helper.canonical(policy))
+    sources=dict(profile_sources)
+    for path in(Path(setup.__file__),Path(entry.__file__)):
+        sources[str(path)]=hashlib.sha256(path.read_bytes()).hexdigest()
+    for pin in(profile_pin,capsule_pin,policy_pin):sources[pin['path']]=pin['sha256']
+    now=time.monotonic()
+    value=dict(schema=setup.PRIVATE_SCHEMA,fixture_id=fixture_id,source_roots=[str(source_root),str(setup.P_ROOT)],
+        source_sha256=sources,source_profile_pin=profile_pin,capsule_pin=capsule_pin,
+        worker_path=str(source_root/transport.RELATIVE['worker']),source_generation=generation,fixture_root=str(root),
+        attempt_directory=str(attempt),socket_parent=str(root/'production-owner-socket'),
+        allocation_store_path=str(attempt/'allocation.duckdb'),database_path=str(root/'tasks.duckdb'),
+        coordination_path=str(attempt/'coordination.duckdb'),execution_path=str(attempt/'execution.duckdb'),
+        private_task_cid='inert-private-cid',private_task_alias=fixture_id,original_task_cid='inert-original-cid',
+        original_catalog_path='/unopened-original-catalog/catalog.duckdb',private_store_id='inert-private-store',
+        private_database_uuid='inert-private-database',private_server_id='inert-private-server',
+        original_store_id='inert-original-store',original_database_uuid='inert-original-database',
+        state_dir=str(runtime/'state'/'run'),owner_session_id='inert-owner-session',allocation_session_id='inert-allocation-session',
+        credential_slot=policy['credential_slot'],credential_fingerprint=fingerprint,
+        resources=dict(scheduler_state_path=str(root/'scheduler.json'),policy_sha256='1'*64,ledger_path=str(root/'ledger.json'),
+            named_roots=[str(root)],storage_bytes=128*1024**2,memory_mb=256,admission_timeout_seconds=30,
+            ledger_lock_timeout_seconds=5,child_process_slots=2),original_started_monotonic=now,
+        work_deadline_monotonic=now+240,native_deadline_monotonic=now+300,parent_native_deadline_monotonic=now+360,
+        attempt_cap=1,mode='isolated-loopback-capture',execution_environment='isolated-loopback',
+        paid_provider_calls_allowed=False,capture_worker_dispatch_allowed=True,namespace_policy_pin=policy_pin)
+    request_path=root/'request.json'
+    return value,request_path,runtime
+
+
+def write_request(value,path):
+    return file_pin(path,helper.canonical(value))
+
+
+def create_state(runtime):
+    (runtime/'state').mkdir(mode=0o700);(runtime/'state'/'run').mkdir(mode=0o700)
+
+
+def test_real_complete_preflight_then_full_construction_validation(complete_request):
+    value,path,runtime=complete_request;pin=write_request(value,path)
+    assert setup.preflight_request(pin)==value
+    assert not(runtime/'state').exists()
+    assert entry.prepare_original_runtime_deadline(request_pin=pin,accelerator_source_root=Path(value['source_roots'][0]),
+        work_deadline_monotonic=value['work_deadline_monotonic'],native_ceiling=value['parent_native_deadline_monotonic']+1)==value['parent_native_deadline_monotonic']
+    with pytest.raises(setup.FixtureRefusal,match='precharged_private_directories_required'):setup.strict_request(pin)
+    create_state(runtime)
+    assert setup.strict_request(pin)==value and setup.strict_request(pin,require_fresh=False)==value
+    with pytest.raises(setup.FixtureRefusal,match='state_must_be_absent'):setup.preflight_request(pin)
+
+
+@pytest.mark.parametrize('change',['runtime_missing','runtime_nonprivate','runtime_symlink','alternate_state',
+    'state_exists','run_exists','state_symlink','state_dangling'])
+def test_full_preflight_cannot_accept_arbitrary_or_preexisting_state(complete_request,change):
+    value,path,runtime=complete_request
+    if change=='runtime_missing':runtime.rmdir()
+    elif change=='runtime_nonprivate':runtime.chmod(0o755)
+    elif change=='runtime_symlink':
+        actual=runtime.with_name('runtime-real');runtime.rename(actual);runtime.symlink_to(actual,target_is_directory=True)
+    elif change=='alternate_state':value['state_dir']=str(runtime.parent/'other'/'state'/'run')
+    elif change=='state_exists':(runtime/'state').mkdir(mode=0o700)
+    elif change=='run_exists':create_state(runtime)
+    elif change=='state_symlink':
+        actual=runtime/'other';actual.mkdir(mode=0o700);(runtime/'state').symlink_to(actual,target_is_directory=True)
+    else:(runtime/'state').symlink_to(runtime/'missing',target_is_directory=True)
+    with pytest.raises(setup.FixtureRefusal):setup.preflight_request(write_request(value,path))
+
+
+@pytest.mark.parametrize('change',['missing_state','state_nonprivate','run_nonprivate','state_symlink',
+    'run_symlink','runtime_nonprivate','wrong_exact_path','runtime_symlink'])
+def test_full_construction_still_requires_exact_owned700_real_state(complete_request,change):
+    value,path,runtime=complete_request
+    if change!='missing_state':create_state(runtime)
+    if change=='state_nonprivate':(runtime/'state').chmod(0o755)
+    elif change=='run_nonprivate':(runtime/'state'/'run').chmod(0o755)
+    elif change=='state_symlink':
+        (runtime/'state').rename(runtime/'other');(runtime/'state').symlink_to(runtime/'other',target_is_directory=True)
+    elif change=='run_symlink':
+        (runtime/'state'/'run').rename(runtime/'state'/'other');(runtime/'state'/'run').symlink_to(runtime/'state'/'other',target_is_directory=True)
+    elif change=='runtime_nonprivate':runtime.chmod(0o755)
+    elif change=='wrong_exact_path':
+        other=runtime.parent/'other';other.mkdir(mode=0o700);value['state_dir']=str(other)
+    elif change=='runtime_symlink':
+        actual=runtime.with_name('runtime-real');runtime.rename(actual);runtime.symlink_to(actual,target_is_directory=True)
+    with pytest.raises(setup.FixtureRefusal):setup.strict_request(write_request(value,path))
+
+
+@pytest.mark.parametrize('change',['clock','cap','source','resource','task','sidecar','allocation','socket'])
+def test_full_preflight_preserves_all_existing_request_guards(complete_request,change):
+    value,path,_=complete_request
+    if change=='clock':value['work_deadline_monotonic']+=1
+    elif change=='cap':value['attempt_cap']=2
+    elif change=='source':value['source_sha256'][setup.__file__]='0'*64
+    elif change=='resource':value['resources']['child_process_slots']=3
+    elif change=='task':value['private_task_cid']=value['original_task_cid']
+    elif change=='sidecar':Path(value['execution_path']).write_bytes(b'')
+    elif change=='allocation':Path(value['allocation_store_path']).write_bytes(b'')
+    else:Path(value['socket_parent']).mkdir(mode=0o700)
+    with pytest.raises(setup.FixtureRefusal):setup.preflight_request(write_request(value,path))
+
+
+@pytest.mark.parametrize('mode',['preflight','construction'])
+def test_actual_expired_epoch_cannot_be_refreshed_by_either_phase(complete_request,mode):
+    value,path,runtime=complete_request
+    if mode=='construction':create_state(runtime)
+    started=time.monotonic()-241
+    value.update(original_started_monotonic=started,work_deadline_monotonic=started+240,
+        native_deadline_monotonic=started+300,parent_native_deadline_monotonic=started+360)
+    fn=setup.preflight_request if mode=='preflight'else setup.strict_request
+    with pytest.raises(setup.FixtureRefusal,match='unchanged_original_240_300_360'):fn(write_request(value,path))
+
+
+def test_default_strict_API_cannot_expose_preflight_state_bypass():
+    assert str(inspect.signature(setup.strict_request))=='(pin, *, require_fresh=True)'
+    assert str(inspect.signature(setup.preflight_request))=='(pin)'
+    strict=ast.parse(inspect.getsource(setup.strict_request)).body[0]
+    preflight=ast.parse(inspect.getsource(setup.preflight_request)).body[0]
+    assert ast.literal_eval(next(n for n in ast.walk(strict)if isinstance(n,ast.keyword)and n.arg=='preflight').value)is False
+    assert ast.literal_eval(next(n for n in ast.walk(preflight)if isinstance(n,ast.keyword)and n.arg=='preflight').value)is True
+
+
+def test_only_deadline_preparation_switches_to_new_readonly_preflight():
+    tree=ast.parse(inspect.getsource(entry));preflight_calls=[];strict_calls=[]
+    for node in ast.walk(tree):
+        if isinstance(node,ast.FunctionDef):
+            for call in ast.walk(node):
+                if isinstance(call,ast.Call)and isinstance(call.func,ast.Attribute)and isinstance(call.func.value,ast.Name)and call.func.value.id=='module':
+                    if call.func.attr=='preflight_request':preflight_calls.append(node.name)
+                    elif call.func.attr=='strict_request':strict_calls.append(node.name)
+    assert preflight_calls==['prepare_original_runtime_deadline']
+    assert set(strict_calls)=={'_request','__init__','_construct_private_fixture'}
+    assert setup._RETAINED==[] and helper._INITIALIZATION_ATTEMPTED is False

@@ -1,0 +1,301 @@
+"""Pure public fixture joins and actual sealed-FD controls, never activation.
+
+No singleton, credential manager, namespace, provider, owner or DB is created.
+The nonce/fingerprint are generated inert test metadata; no real key is read.
+"""
+import copy
+import fcntl
+import hashlib
+import os
+
+import pytest
+import ipfs_accelerate_py.cli_runtime.grok_private_fake_credentials as helper
+
+
+@pytest.fixture
+def fixture_metadata():
+    request=dict(execution_environment='isolated-loopback',task_cid='inert-cid',task_alias='inert-alias',
+        database_attempt_id='inert-attempt',database_attempt_number=1,allocation_session_id='inert-allocation',
+        source_generation='grok-automatic-named-session/inert',receipt_directory='/inert/receipts',
+        context_path='/inert/receipts/owner-context.json',work_deadline_monotonic=100.0,
+        native_deadline_monotonic=160.0,owner_request_sha256='1'*64,
+        source_profile_pin=dict(sha256='2'*64),capsule_pin=dict(sha256='3'*64))
+    value={name:request[name]for name in ('execution_environment','task_cid','task_alias','database_attempt_id',
+        'database_attempt_number','allocation_session_id','source_generation','receipt_directory',
+        'work_deadline_monotonic','native_deadline_monotonic','owner_request_sha256')}
+    value.update(schema=helper.SCHEMA,paid_provider_calls_allowed=False,source_profile_sha256='2'*64,
+        capsule_sha256='3'*64,credential_slot='inert-fake-slot',fake_nonce='4'*32,
+        credential_fingerprint=helper.fake_fingerprint('4'*32),network_namespace=dict(device=1,inode=2))
+    context={name:value[name]for name in ('database_attempt_id','database_attempt_number','allocation_session_id',
+        'source_generation','credential_slot','credential_fingerprint','work_deadline_monotonic','native_deadline_monotonic')}
+    context.update(database_task_cid=value['task_cid'],portal_task_id=value['task_alias'],
+        request_sha256=value['owner_request_sha256'],source_bindings_sha256=value['source_profile_sha256'],capsule_sha256=value['capsule_sha256'])
+    return value,request,context
+
+
+def test_matching_fake_fixture_metadata_is_not_installation(fixture_metadata):
+    value,request,context=fixture_metadata
+    assert helper.validate_fixture_metadata(value,request,context)==value
+    assert helper._INITIALIZATION_ATTEMPTED is False and helper._RETAINED==[]
+    assert len(value['credential_fingerprint'])==16
+
+
+@pytest.mark.parametrize('field,replacement',[
+    ('schema','other'),('execution_environment','provider'),('paid_provider_calls_allowed',True),
+    ('task_cid','another'),('database_attempt_id','another'),('database_attempt_number',True),
+    ('allocation_session_id','another'),('source_generation','another'),
+    ('source_profile_sha256','f'*64),('owner_request_sha256','f'*64),
+    ('credential_slot','another-slot'),('credential_fingerprint','0'*16),('fake_nonce','5'*32),
+    ('work_deadline_monotonic',101.0),('network_namespace',dict(device=True,inode=2)),
+    ('unexpected',True)])
+def test_unjoined_public_fake_metadata_refuses_without_installing(fixture_metadata,field,replacement):
+    value,request,context=copy.deepcopy(fixture_metadata);value[field]=replacement
+    with pytest.raises(helper.PrivateFakeCredentialRefusal):
+        helper.validate_fixture_metadata(value,request,context)
+    assert helper._INITIALIZATION_ATTEMPTED is False and helper._RETAINED==[]
+
+
+def test_real_sealed_metadata_borrow_preserves_original_FD():
+    request=dict(metadata_only=True,fake_credential_fixture_pin=dict(path='/inert/metadata',bytes=1,sha256='a'*64))
+    raw=helper.canonical(request);fd=os.memfd_create('fake-fixture-inert-request',os.MFD_CLOEXEC|os.MFD_ALLOW_SEALING)
+    try:
+        os.write(fd,raw);os.lseek(fd,2,os.SEEK_SET)
+        fcntl.fcntl(fd,fcntl.F_ADD_SEALS,fcntl.F_SEAL_WRITE|fcntl.F_SEAL_GROW|fcntl.F_SEAL_SHRINK|fcntl.F_SEAL_SEAL)
+        assert helper.read_borrowed_request(fd,request,hashlib.sha256(raw).hexdigest())is None
+        assert os.lseek(fd,0,os.SEEK_CUR)==2
+        with pytest.raises(helper.PrivateFakeCredentialRefusal):
+            helper.read_borrowed_request(fd,dict(request,metadata_only=False),hashlib.sha256(raw).hexdigest())
+    finally:os.close(fd)
+
+
+def test_unsealed_metadata_cannot_authenticate_private_fixture():
+    request=dict(metadata_only=True);raw=helper.canonical(request)
+    fd=os.memfd_create('fake-fixture-unsealed',os.MFD_CLOEXEC|os.MFD_ALLOW_SEALING)
+    try:
+        os.write(fd,raw)
+        with pytest.raises(helper.PrivateFakeCredentialRefusal,match='actual_fully_sealed_private_worker_request_required'):
+            helper.read_borrowed_request(fd,request,hashlib.sha256(raw).hexdigest())
+    finally:os.close(fd)
+
+
+def test_private_fixture_reader_needs_actual_600_file(tmp_path):
+    path=tmp_path/'inert-metadata.json';raw=helper.canonical(dict(metadata_only=True));path.write_bytes(raw);path.chmod(0o600)
+    pin=dict(path=str(path),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+    assert helper.read_pin(pin)==raw
+    path.chmod(0o644)
+    with pytest.raises(helper.PrivateFakeCredentialRefusal,match='owned_600_private_fixture_required'):
+        helper.read_pin(pin)
+
+
+@pytest.mark.parametrize('observed,accepted',[
+    (96.999,True),(97.0,False),(99.0,False),(100.0,False),
+    (True,False),(float('inf'),False),(float('nan'),False)])
+def test_original_work_margin_boundary_never_admits_late_metadata(observed,accepted):
+    # Pure observed-clock metadata, with no fake clock provider or owner/
+    # manager capability. The live wrapper samples actual time.monotonic().
+    if accepted:
+        assert helper.validate_original_work_boundary(work_deadline_monotonic=100.0,
+            native_deadline_monotonic=160.0,observed_monotonic=observed)is None
+    else:
+        with pytest.raises(helper.PrivateFakeCredentialRefusal):
+            helper.validate_original_work_boundary(work_deadline_monotonic=100.0,
+                native_deadline_monotonic=160.0,observed_monotonic=observed)
+    assert helper._INITIALIZATION_ATTEMPTED is False and helper._RETAINED==[]
+
+
+
+# New controls below use isolated helper-global syscall METADATA doubles.
+# They create no namespace, live FD, owner, credential or resource capability.
+import errno
+import stat
+import time
+from types import SimpleNamespace
+
+
+def _owned_policy():
+    return dict(schema='private-owned-rootless-network-policy/v1',
+        witness_kind='own-net-owned-user-restricted-maps/v1',
+        expected_uid_map=[[0,1000,1],[1,100000,65536]],
+        expected_gid_map=[[0,1000,1],[1,100000,65536]])
+
+
+class _OwnedKernelMetadata:
+    """Finite syscall results for unit branches, never kernel evidence."""
+    def __init__(self,mode='positive'):
+        self.mode=mode;self.next_fd=20;self.records={};self.opened=[];self.closed=[]
+        self.net_opens=0;self.uid_reads=0;self.close_failed=False;self.pause_until=None
+        self.owner_pause_until=None;self.owner_fds=[]
+    def _new(self,kind,inode,data=b''):
+        descriptor=self.next_fd;self.next_fd+=1
+        self.records[descriptor]=dict(kind=kind,inode=inode,data=data,offset=0,stats=0)
+        self.opened.append(descriptor);return descriptor
+    def open(self,path,flags):
+        if path=='/proc/self/ns/net':
+            self.net_opens+=1
+            if self.pause_until is not None:
+                while True:
+                    remaining=self.pause_until-time.monotonic()
+                    if remaining<=0:break
+                    time.sleep(min(.001,remaining))
+            return self._new('net',101 if self.mode=='changed_current_net'and self.net_opens==2 else 100)
+        if path=='/proc/self/ns/user':
+            if self.mode=='open_user_error':raise PermissionError(errno.EACCES,'unit metadata error')
+            return self._new('user',200)
+        if path=='/proc/self/uid_map':
+            self.uid_reads+=1;data=b'0 1000 1\n1 100000 65536\n'
+            if self.mode=='initial_map':data=b'0 0 4294967295\n'
+            if self.mode=='wrong_map':data=b'0 1001 1\n1 100000 65536\n'
+            if self.mode=='changed_maps'and self.uid_reads==2:data=b' 0 1000 1\n1 100000 65536\n'
+            if self.mode=='oversized_map':data=b'0'*4097
+            return self._new('uid_map',300,data)
+        if path=='/proc/self/gid_map':
+            return self._new('gid_map',301,b'0 1001 1\n1 100000 65536\n'if self.mode=='wrong_gid_map'else b'0 1000 1\n1 100000 65536\n')
+        if path=='/proc/net/route':
+            data=b'Iface Destination Gateway\n'
+            if self.mode=='external_v4':data+=b'eth0 00000000 0100007f\n'
+            return self._new('route',302,data)
+        if path=='/proc/net/ipv6_route':
+            return self._new('route6',303,b'unit-route eth0\n'if self.mode=='external_v6'else b'')
+        raise AssertionError('unexpected unit metadata path')
+    def read(self,descriptor,count):
+        row=self.records[descriptor]
+        if row['kind']=='uid_map'and self.mode in ('map_read_error','primary_and_cleanup_error'):
+            raise PermissionError(errno.EACCES,'unit metadata error')
+        result=row['data'][row['offset']:row['offset']+count];row['offset']+=len(result);return result
+    def fstat(self,descriptor):
+        row=self.records[descriptor];row['stats']+=1;inode=row['inode']
+        if self.mode=='changed_held_fd'and descriptor==20 and row['stats']>=2:inode+=1
+        return SimpleNamespace(st_dev=4,st_ino=inode,st_mode=stat.S_IFREG|0o444,st_uid=0,
+            st_nlink=1,st_size=0,st_mtime_ns=0,st_ctime_ns=0)
+    def ioctl(self,descriptor,request):
+        row=self.records[descriptor]
+        if request==helper._OWNED_NS_GET_NSTYPE:
+            if self.mode=='wrong_net_type'and row['kind']=='net':return helper._OWNED_CLONE_NEWUSER
+            if self.mode=='wrong_user_type'and row['kind']=='user':return helper._OWNED_CLONE_NEWNET
+            if self.mode=='bool_type':return True
+            return helper._OWNED_CLONE_NEWNET if row['kind']=='net'else helper._OWNED_CLONE_NEWUSER
+        if request==helper._OWNED_NS_GET_USERNS:
+            if self.mode=='owner_ioctl_error':raise OSError(errno.EPERM,'unit metadata error')
+            owner=self._new('user',201 if self.mode=='wrong_owner'else 200);self.owner_fds.append(owner)
+            if self.owner_pause_until is not None:
+                while True:
+                    remaining=self.owner_pause_until-time.monotonic()
+                    if remaining<=0:break
+                    time.sleep(min(.001,remaining))
+            return owner
+        raise AssertionError('unexpected unit metadata ioctl')
+    def fcntl(self,descriptor,request):
+        if request==fcntl.F_GETFL:return os.O_RDWR if self.mode=='writable_namespace'else os.O_RDONLY
+        if request==fcntl.F_GETFD:return 0 if self.mode=='non_CLOEXEC_namespace'else fcntl.FD_CLOEXEC
+        raise AssertionError('unexpected unit metadata fcntl')
+    def close(self,descriptor):
+        row=self.records.pop(descriptor);self.closed.append(descriptor)
+        if row['kind']in ('net','user')and self.mode in ('close_error','primary_and_cleanup_error')and not self.close_failed:
+            self.close_failed=True;raise OSError(errno.EIO,'unit metadata error')
+    def interfaces(self):return [(1,'lo'),(2,'eth0')]if self.mode=='external_interface'else[(1,'lo')]
+
+
+def _invoke_owned_metadata(monkeypatch,mode='positive',policy=None,namespace=None,expired=False,late=False,late_owner=False):
+    kernel=_OwnedKernelMetadata(mode);result=None;error=None
+    fake_os=SimpleNamespace(open=kernel.open,read=kernel.read,close=kernel.close,fstat=kernel.fstat,
+        O_RDONLY=os.O_RDONLY,O_RDWR=os.O_RDWR,O_ACCMODE=os.O_ACCMODE,O_CLOEXEC=os.O_CLOEXEC,O_NOFOLLOW=os.O_NOFOLLOW)
+    fake_fcntl=SimpleNamespace(ioctl=kernel.ioctl,fcntl=kernel.fcntl,F_GETFL=fcntl.F_GETFL,
+        F_GETFD=fcntl.F_GETFD,FD_CLOEXEC=fcntl.FD_CLOEXEC)
+    now=time.monotonic();work=now-1 if expired else now+3.1 if late or late_owner else now+30
+    if late:kernel.pause_until=work-3+.002
+    if late_owner:kernel.owner_pause_until=work-3+.002
+    with monkeypatch.context()as isolated:
+        isolated.setattr(helper,'os',fake_os);isolated.setattr(helper,'fcntl',fake_fcntl)
+        isolated.setattr(helper,'socket',SimpleNamespace(if_nameindex=kernel.interfaces))
+        try:
+            result=helper.require_owned_rootless_network(dict(device=4,inode=100)if namespace is None else namespace,
+                sealed_policy=_owned_policy()if policy is None else policy,
+                work_deadline_monotonic=work,native_deadline_monotonic=work+60)
+        except BaseException as caught:error=caught
+    return result,error,kernel
+
+
+def test_owned_rootless_metadata_positive_is_not_seal_or_authority(monkeypatch):
+    result,error,kernel=_invoke_owned_metadata(monkeypatch)
+    assert error is None and result['network_owner_user_namespace']==result['user_namespace']
+    assert result['uid_map']==_owned_policy()['expected_uid_map']
+    assert result['sealed_policy_authenticated']is False and result['policy_binding_required']is True
+    assert result['arbitrary_outer_freshness_proved']is False and result['native_qualified']is False
+    assert result['helper_initializer_called']is False and result['owned_namespace_descriptors_closed']is True
+    assert sorted(kernel.opened)==sorted(kernel.closed)and not kernel.records
+    assert helper._INITIALIZATION_ATTEMPTED is False and helper._RETAINED==[]
+
+
+@pytest.mark.parametrize('mode',[
+    'wrong_owner','wrong_net_type','wrong_user_type','bool_type','writable_namespace','non_CLOEXEC_namespace',
+    'initial_map','wrong_map','wrong_gid_map','changed_maps','changed_current_net','changed_held_fd',
+    'oversized_map','external_interface','external_v4','external_v6'])
+def test_owned_rootless_metadata_refusals_close_every_owned_FD(monkeypatch,mode):
+    result,error,kernel=_invoke_owned_metadata(monkeypatch,mode)
+    assert result is None and type(error)is helper.PrivateFakeCredentialRefusal
+    assert sorted(kernel.opened)==sorted(kernel.closed)and not kernel.records
+    assert helper._INITIALIZATION_ATTEMPTED is False and helper._RETAINED==[]
+
+
+@pytest.mark.parametrize('mode,code',[
+    ('open_user_error',errno.EACCES),('owner_ioctl_error',errno.EPERM),
+    ('map_read_error',errno.EACCES),('close_error',errno.EIO)])
+def test_owned_rootless_errors_propagate_without_fallback_or_FD_leak(monkeypatch,mode,code):
+    result,error,kernel=_invoke_owned_metadata(monkeypatch,mode)
+    assert result is None and isinstance(error,OSError)and error.errno==code
+    assert sorted(kernel.opened)==sorted(kernel.closed)and not kernel.records
+
+
+def test_owned_rootless_primary_failure_survives_cleanup_error(monkeypatch):
+    result,error,kernel=_invoke_owned_metadata(monkeypatch,'primary_and_cleanup_error')
+    assert result is None and isinstance(error,PermissionError)and error.errno==errno.EACCES
+    assert 'owned_rootless_descriptor_cleanup_failed'in error.__notes__
+    assert sorted(kernel.opened)==sorted(kernel.closed)and not kernel.records
+
+
+@pytest.mark.parametrize('extents',[
+    [],[[0,0,4294967295]],[[True,1000,1]],[[0,1000,False]],[[0,1000,0]],
+    [[-1,1000,1]],[[0,-1,1]],[[4294967294,1000,2]],[[0,4294967294,2]],
+    [[0,1000,2],[1,100000,1]],[[0,1000,1],[1,1000,1]],
+    [[0,0,1],[1,1,4294967294]],[[0,1000]],[[0,1000,1,9]],[(0,1000,1)]])
+def test_owned_rootless_map_policy_rejects_initial_overlap_and_overflow(extents):
+    with pytest.raises(helper.PrivateFakeCredentialRefusal):helper._owned_rootless_map(extents)
+
+
+@pytest.mark.parametrize('raw',[b'',b'0 1000\n',b'0 1000 1\n\n',b'+0 1000 1\n',b'0 x 1\n',b'0 1000 1\xff',b'0'*4097])
+def test_owned_rootless_map_parser_refuses_malformed_or_unbounded_bytes(raw):
+    with pytest.raises(helper.PrivateFakeCredentialRefusal):helper._owned_rootless_parse_map(raw)
+
+
+def test_owned_rootless_sealed_policy_schema_is_explicit_no_fallback(monkeypatch):
+    policy=_owned_policy();policy['unexpected']=True
+    result,error,kernel=_invoke_owned_metadata(monkeypatch,policy=policy)
+    assert result is None and type(error)is helper.PrivateFakeCredentialRefusal and kernel.opened==[]
+
+
+def test_owned_rootless_namespace_metadata_must_match_actualFD(monkeypatch):
+    result,error,kernel=_invoke_owned_metadata(monkeypatch,namespace=dict(device=4,inode=999))
+    assert result is None and type(error)is helper.PrivateFakeCredentialRefusal
+    assert sorted(kernel.opened)==sorted(kernel.closed)and not kernel.records
+
+
+def test_owned_rootless_expired_work_never_opens_namespace(monkeypatch):
+    result,error,kernel=_invoke_owned_metadata(monkeypatch,expired=True)
+    assert result is None and type(error)is helper.PrivateFakeCredentialRefusal and kernel.opened==[]
+
+
+def test_owned_rootless_actual_work_expiry_after_open_retains_cleanup(monkeypatch):
+    # The delayed metadata open crosses a REAL original monotonic boundary;
+    # the live guard's clock implementation is not replaced or reset.
+    result,error,kernel=_invoke_owned_metadata(monkeypatch,late=True)
+    assert result is None and type(error)is helper.PrivateFakeCredentialRefusal
+    assert kernel.opened and sorted(kernel.opened)==sorted(kernel.closed)and not kernel.records
+
+
+def test_owned_rootless_actual_work_expiry_after_owner_ioctl_retains_returned_FD(monkeypatch):
+    # Metadata ioctl creates an owned USER descriptor before its delayed
+    # return crosses the REAL original work margin. No clock is replaced.
+    result,error,kernel=_invoke_owned_metadata(monkeypatch,late_owner=True)
+    assert result is None and type(error)is helper.PrivateFakeCredentialRefusal
+    assert kernel.owner_fds and all(descriptor in kernel.closed for descriptor in kernel.owner_fds)
+    assert sorted(kernel.opened)==sorted(kernel.closed)and not kernel.records

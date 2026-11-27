@@ -1,0 +1,36 @@
+"""Replay unchanged exposed predicates on private unfixed/reference source controls."""
+import hashlib,importlib.util,json,os,subprocess,time,traceback
+from pathlib import Path
+H=Path(__file__).resolve().parent;C=H/'curator_custody';I=H.parents[1]/'integrated_v1';O=H/'public_contract_controls_v1'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def dump(p,x):p.write_text(json.dumps(x,sort_keys=True,indent=2)+'\n')
+def inventory(root):
+ rows=[]
+ for p in sorted(root.rglob('*')):
+  if p.is_symlink():rows.append({'path':str(p.relative_to(root)),'kind':'symlink','target':os.readlink(p),'mode':p.lstat().st_mode&0o7777})
+  elif p.is_file():rows.append({'path':str(p.relative_to(root)),'kind':'file','sha256':sha(p),'mode':p.stat().st_mode&0o7777})
+ return rows
+
+def main():
+ O.mkdir();private=O/'curator_custody';private.mkdir(mode=0o700)
+ prep=json.loads((H/'preparation-summary-v4.json').read_text());three=I/'public_contracts_v2/run-v2/frozen_runner.py';pp=I/'public_issue_reproduction_v1/qualify_public_issue.py';contract=json.loads((I/'public_contracts_v2/objectives-v1.json').read_text());cases={x['task_id']:x['public_examples'] for x in contract['tasks']}
+ assert sha(three)==json.loads((I/'public_contracts_v2/run-v2/freeze.json').read_text())['driver_sha256']
+ freeze={'schema':'ns-original-public-contract-controls/v1','frozen_at_ns':time.time_ns(),'runner_sha256':sha(Path(__file__)),'original_public_drivers_sha256':{str(p):sha(p) for p in [three,pp]},'preparation_sha256':sha(H/'preparation-summary-v4.json'),'image_id':prep['image_id'],'controls':['unfixed','reference_source_projection'],'tasks':[x['task_id'] for x in prep['tasks']],'attempts_per_control':1,'automatic_retries':0,'maximum_public_probe_processes':8,'maximum_hidden_grader_calls':0,'provider_calls':0,'network':'none','per_process_timeout_seconds':60,'original_predicates_changed':False,'qualification':'Complete public examples match expected baseline observations and every reference example passes','metadata_caveat':'Embedded three-task worker originally declares hidden_or_reference_calls=0 for its original public-only study; that field is not used here. This wrapper explicitly labels the private reference-source controls.'}
+ dump(O/'freeze.json',freeze);rows=[]
+ for uid in freeze['tasks']:
+  for control in freeze['controls']:
+   out=private/(uid+'-'+control);out.mkdir(mode=0o700);source=C/uid/'materialization_v4'/('unfixed_source' if control=='unfixed' else 'reference_source');before=inventory(source);driver=pp if uid=='ns-hist-02-pyparsing' else three
+   if driver==three:dump(out/'freeze.json',{'driver_sha256':sha(three),'tasks':{uid:{'tree':'/candidate','inventory':before}},'cases':{uid:cases[uid]}})
+   argv=['docker','--host=unix:///var/run/docker.sock','run','--rm','--network=none','--read-only','--cap-drop=ALL','--security-opt=no-new-privileges','--cpus=1','--memory=2g','--pids-limit=32','--user',str(os.getuid())+':'+str(os.getgid()),'--tmpfs','/tmp:rw,nosuid,nodev,size=268435456','--mount','type=bind,src='+str(source)+',dst=/candidate,readonly','--mount','type=bind,src='+str(driver)+',dst=/driver.py,readonly','--mount','type=bind,src='+str(out)+',dst=/results','--workdir=/candidate','--entrypoint=/usr/bin/env',prep['image_id'],'-i','HOME=/tmp','PATH=/usr/local/bin:/usr/bin:/bin','PYTHONDONTWRITEBYTECODE=1','python3','-I','-B','/driver.py']
+   argv+=['worker','/candidate'] if driver==pp else ['--run','/results','--worker',uid]
+   started=time.monotonic();dump(out/'dispatch_intent.json',{'task_id':uid,'control':control,'started_at_ns':time.time_ns(),'candidate_inventory_sha256':hashlib.sha256(json.dumps(before,sort_keys=True,separators=(',',':')).encode()).hexdigest(),'freeze_sha256':sha(O/'freeze.json')})
+   with (out/'stdout.private').open('wb') as stdout,(out/'stderr.private').open('wb') as stderr:
+    try:r=subprocess.run(argv,stdout=stdout,stderr=stderr,timeout=60);rc=r.returncode;timed=False
+    except subprocess.TimeoutExpired:rc=None;timed=True
+   receipt={'task_id':uid,'control':control,'returncode':rc,'timed_out':timed,'elapsed_seconds':time.monotonic()-started,'source_unchanged':inventory(source)==before,'driver_sha256':sha(driver),'stdout_sha256':sha(out/'stdout.private'),'stderr_sha256':sha(out/'stderr.private'),'hidden_grader_calls':0,'provider_calls':0}
+   if rc==0:
+    result=json.loads((out/('stdout.private' if driver==pp else uid+'.json')).read_text());total=len(result['rows']);passed=sum(x['conforms_to_reported_expectation'] for x in result['rows']) if driver==pp else result['passed'];receipt.update(cases=total,passed=passed,expected_passed=total if control!='unfixed' else {'ns-hist-01-xmltodict':2,'ns-hist-02-pyparsing':8,'ns-hist-03-oauthlib':1,'ns-hist-04-click':2}[uid]);receipt['control_matched_expectation']=passed==receipt['expected_passed'] and receipt['source_unchanged']
+   else:receipt['control_matched_expectation']=False
+   dump(out/'receipt.json',receipt);rows.append(receipt);dump(O/'progress.json',{'receipts':rows});print(json.dumps(receipt,sort_keys=True),flush=True)
+ dump(O/'summary.json',{'schema':'ns-original-public-contract-control-summary/v1','qualified':all(x['control_matched_expectation'] for x in rows),'receipts':rows,'freeze_sha256':sha(O/'freeze.json'),'actual_public_probe_processes':len(rows),'new_hidden_grader_calls':0,'provider_calls':0,'supplemental_configurations_qualified':False})
+if __name__=='__main__':main()

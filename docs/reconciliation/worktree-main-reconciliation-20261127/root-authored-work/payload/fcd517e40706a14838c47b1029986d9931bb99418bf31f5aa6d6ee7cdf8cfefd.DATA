@@ -1,0 +1,339 @@
+{
+  "actual_evidence": {
+    "actual_scalar_AST_to_IR_or_model_queries_accepted": 0,
+    "generic_scalar_preservation": "Q05 native passed three queries, six actual Standard-axiom reports, full1729160-byte module retained in27 ordered chunks; this general theorem still excludes parser/normalization/global provenance/containers/Float.",
+    "generic_scalar_queries": [
+      "RankerSupportedPythonAstReal.lower_supported_ast_observation_preserved",
+      "RankerSupportedPythonAstReal.lower_supported_ast_success_observation",
+      "RankerSupportedPythonAstReal.lower_supported_ast_error_observation"
+    ],
+    "generic_whole_module": {
+      "bytes": 1729160,
+      "complete": true,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-qualification-20261006-05/evidence/lean-python-ast-preservation-01/lean/PyAstNumericPreservation.olean",
+      "retention_format": "bounded_lean_chunks@1",
+      "sha256": "8baa2c0430c48ce1d310931c434823c4329d4e53f921a1b735ee8d8fc7ff9532"
+    },
+    "source_fixture_audit": "All29 source routes (loss10/factor19),58 descriptors,56unique source paths and202 token joins independently reviewed source-only; this is not a mathematical source/host/parser theorem."
+  },
+  "all32_governing_RPI_exits": "OPEN",
+  "authority": {
+    "completion_authority": false,
+    "execution_authority": false,
+    "formalization_authority": false,
+    "mutation_authority": false
+  },
+  "body_source_evidence": [
+    {
+      "AST_dump_pin": {
+        "bytes": 477,
+        "sha256": "b71027e5d37d1a5b5b574a4b880a0857f0885dbc19c81dff3e652f8f7c76287e"
+      },
+      "name": "loss",
+      "proposed_existing_alias": "actualLossBody",
+      "raw_binder_path": "module.body[24].body[1].value.left.args[0].generators[0].target",
+      "source_path": "module.body[24].body[1].value.left.args[0].elt",
+      "source_segment": "max(0.0, -z) + math.log1p(math.exp(-abs(z)))",
+      "source_segment_pin": {
+        "bytes": 44,
+        "sha256": "19d0e597f98e72c80f09d2f7411d17bc2c6748d720fc902a4c1c3c4135b1465c"
+      },
+      "source_span": [
+        125,
+        21,
+        125,
+        65
+      ]
+    },
+    {
+      "AST_dump_pin": {
+        "bytes": 714,
+        "sha256": "a5f60c17cb8efc0869ec1ac4001c04c1b43f67d7d38bc025cbb87061247d70aa"
+      },
+      "name": "factor",
+      "proposed_existing_alias": "actualFactorBody",
+      "raw_binder_path": "module.body[24].body[3].value.generators[0].target",
+      "source_path": "module.body[24].body[3].value.elt",
+      "source_segment": "math.exp(-z) / (1 + math.exp(-z)) if z >= 0 else 1 / (1 + math.exp(z))",
+      "source_segment_pin": {
+        "bytes": 70,
+        "sha256": "3b606e9946648df65b1ba914efbc05a84f11fe1b49bef6d9073349076e6894c9"
+      },
+      "source_span": [
+        127,
+        15,
+        127,
+        85
+      ]
+    }
+  ],
+  "created_date_utc": "2026-10-07",
+  "expected_target_shape": {
+    "callees": "Only PyCalleeRef name(scope0,max/abs) and attribute(scope0,math,log1p/exp) are present. Actual global runtime binding/purity remains open despite fixed interpreter registry.",
+    "condition": "Accept ge(condition,Integer0) and structurally check both factor branches; evaluation selects only the matching branch. Repeated exp(-margin) remains duplicated in the syntax.",
+    "factor": "ifNonneg (leaf(var scalar z)) (scalarBinary.div (scalarUnary.exp (scalarUnary.neg (leaf(var scalar z)))) (scalarBinary.add (leaf(scalarLiteral1)) (scalarUnary.exp (scalarUnary.neg (leaf(var scalar z)))))) (scalarBinary.div (leaf(scalarLiteral1)) (scalarBinary.add (leaf(scalarLiteral1)) (scalarUnary.exp (leaf(var scalar z)))))",
+    "literal_preservation": "Generated loss Float0.0 projects exact ratio0/1; factor test Integer0 and three Integer1 occurrences remain distinct source syntax. Lowered target scalar literals explicitly coerce Int/Rat to Real. Exact concrete source-literal matching and rational normalization are proved, not asserted by body names.",
+    "loss": "scalarBinary.add (scalarBinary.max (leaf(scalarLiteral0)) (scalarUnary.neg (leaf(var scalar z)))) (scalarUnary.log1p (scalarUnary.exp (scalarUnary.neg (scalarUnary.abs (leaf(var scalar z))))))"
+  },
+  "finalization_gate": {
+    "active_candidate_module_map": null,
+    "final_Lean_files_authored": 0,
+    "future_accepted_check_or_seal_descriptors_invented": false,
+    "requirements": [
+      "root message supplies actual generated module/source/receipt/binder descriptors",
+      "actual source aliases/API verified against29 audited raw occurrences and fixed scalar syntax",
+      "source-author completes finite mathematical proofs without desired result assumptions",
+      "independent reviewer freezes exact source/docs/module map",
+      "root alone performs native qualification and full readback"
+    ],
+    "state": "WAITING_ACTUAL_HOST_OUTPUT"
+  },
+  "flags": {
+    "Python_Float_refinement_proved": false,
+    "actual_host_transport_output_observed": false,
+    "actual_scalar_body_lowering_proved": false,
+    "actual_scalar_body_model_join_proved": false,
+    "actual_scalar_source_binding_preservation_proved": false,
+    "full_source_semantics_proved": false,
+    "global_autoencoder_convergence_proved": false,
+    "global_callee_purity_proved": false,
+    "metadata_hydration": false,
+    "normalization_correctness_proved": false,
+    "original_Python_loop_alignment_proved": false,
+    "planner_activation": false,
+    "source_parser_correctness_proved": false,
+    "strict_cache_admission": false
+  },
+  "formula_and_domain_policy": {
+    "domain_obligations": "Accepted stableLoss_eval_success derives1+exp(-abs margin)>0; accepted stableFactor_eval_success derives1+exp(-margin) and1+exp margin nonzero from exp_pos. These are genuine derived backend facts, not successful source-result premises.",
+    "factor_formula": "realStableLogisticP margin = if0<=margin then exp(-margin)/(1+exp(-margin)) else1/(1+exp margin). The genuine realStableLogisticP_eq can later identify canonical model probability if needed; this stage does not need a further query.",
+    "input_transport": "Only structural scoped variable lookup/value transport is allowed in generic body observation. The concrete formula theorems construct that relation internally from ordinary margin, so no desired target/body/model equality is supplied.",
+    "loss_formula": "realStablePairLoss margin = max 0 (-margin) + Real.log(1+Real.exp(-abs margin)) in the accepted independent model.",
+    "tag_observation": "Source PyNumber integer/real tags are interpreted independently; scalar observation coerces through toReal. This does not prove exact CPython integer-vs-float result tags, signed-zero/protocol/libm behavior or evaluation effects."
+  },
+  "full_task_satisfaction": "unknown",
+  "input_pins": [
+    {
+      "bytes": 299466,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-ast-scalar-occurrence-fixtures-20261006-01/scalar-source-occurrences-01.json",
+      "sha256": "acfd1af4ccf740d9093d0b38468b25453c86f5683caddcc2dce12e067e91297d"
+    },
+    {
+      "bytes": 3445,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-ast-scalar-occurrence-fixture-review-20261006-01/review-receipt-01.json",
+      "sha256": "c5e93dc6f5c256feeb8337b48b03803a2f16ca299a6907f982297755fbb6daa5"
+    },
+    {
+      "bytes": 44852,
+      "path": "/home/barberb/lift_coding/maintenance/ranker-supported-python-ast-container-extension-design-20261006-01/design-01.json",
+      "sha256": "814ccc88c1f87de6cc99467419d1fb0a6eb99bb616763dce386f85c4b7e64b59"
+    },
+    {
+      "bytes": 21942,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-05/math/PyAstNumericPreservation.lean",
+      "sha256": "5c6c65dc530540030fe3edf82be868ede8fd675236078dd0714ddb6bfb159b2a"
+    },
+    {
+      "bytes": 11561,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-qualification-20261006-05/qualified-review-01.json",
+      "sha256": "76a2c15fd9f9f31901e719e4e14a09db0c4aff04b60759ebd716311c518c645d"
+    },
+    {
+      "bytes": 17730,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-qualification-20261006-05/file-only-seal-01.json",
+      "sha256": "a99150efbeb5d0e08c53818b741c390103792cfe07996614970702671eee75c5"
+    },
+    {
+      "bytes": 3916,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-01/math/PyAstNumericSubset.lean",
+      "sha256": "11baa458c201926c3a6e02b8ec7ca35213c336a30da199ce0390e3f1d7972faf"
+    },
+    {
+      "bytes": 6314,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-01/math/PyAstNumericSemantics.lean",
+      "sha256": "3ce628f904f57b800f67b7a739f04e3adf72e0888b1689e23f7cef3e1ac2a2b8"
+    },
+    {
+      "bytes": 5287,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-supported-python-ast-candidate-20261006-01/math/PyAstNumericLowering.lean",
+      "sha256": "9694b40446f7c8661e183b9d137bf936642940f879227c8373d2a3bdf627b881"
+    },
+    {
+      "bytes": 13094,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/math/ObjectiveScalarIR.lean",
+      "sha256": "ae4d1ebec782c2395cc9d2585f40296988fc2ec10cfdab3f946258251c527d71"
+    },
+    {
+      "bytes": 22527,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-ir-candidate-20261005-01/evidence/lean-objective-scalar-01/check-result.json",
+      "sha256": "57ac502ebc37df08ae73b7fec69280b2dcb1a2453895ab573869d826d613bd5e"
+    },
+    {
+      "bytes": 28749,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-prefix-kernel-candidate-20261006-02/math/ObjectivePrefixIR.lean",
+      "sha256": "0b5960fc6f7376ca14ae698dea773f1d4ef163f5f4c3c76f46cddb927518d824"
+    },
+    {
+      "bytes": 3060,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-candidate-20261006-02/math/ObjectiveContainerSource.lean",
+      "sha256": "fc01f1d99e348e79f9cc9fdaf35cbbdb29d0c0963e88b4b984fde469e2eee410"
+    },
+    {
+      "bytes": 11695,
+      "path": "/home/barberb/lift_coding/qualification/codebase_ir/ranker-objective-container-language-candidate-20261006-02/math/ObjectiveContainerSemantics.lean",
+      "sha256": "23bf7349c698832ad088adc68b41913a88affafff235008b38ef6688079b5ec8"
+    }
+  ],
+  "jobs_this_design": {
+    "git": 0,
+    "host_execution": 0,
+    "host_helper_imports": 0,
+    "metadata": 0,
+    "model": 0,
+    "native": 0,
+    "target_imports": 0,
+    "tests": 0,
+    "training": 0
+  },
+  "minimal_increment": {
+    "goal": "Join only actual raw loss generator BODY and raw factors ListComp BODY to exact scalar IR and then ideal-real scalar model formulas. Neither selected subtree contains _dot, L2, fsum, len or container iteration.",
+    "no_whole_operation_opcode": "Expected target constants are explicit composition trees; no loss/factor/model opcode occurs in either independent source syntax or lowerer.",
+    "normalization_required_for_selected_scalars": false,
+    "raw_source_selected": true,
+    "source_route": "Actual pinned source buffers -> tested bounded transport_prefix once -> select the two RAW-program bodies plus actual generator binder identities -> GeneratedPythonAstScalarSource -> actual compiler output -> generic observation theorem -> genuine stable scalar backend formulas.",
+    "why_raw": "The loss/factor subtrees already contain supported unary/binary/four-fixed-callee/IfExp syntax. Use raw_program so dot/L2 normalization is not a hidden prerequisite."
+  },
+  "module_plan": [
+    {
+      "definitions": [
+        "lossTarget : SourceExpr.scalar, explicit max/neg/log1p/exp/abs composition over var z and rational0",
+        "factorTarget : SourceExpr.scalar, explicit ifNonneg/exp/div/add composition over var z and rational1"
+      ],
+      "direct_imports": [
+        "GeneratedPythonAstScalarSource",
+        "PyAstNumericPreservation"
+      ],
+      "file": "math/PyAstOriginalScalarBodies.lean",
+      "module": "PyAstOriginalScalarBodies",
+      "proof_strategy": "Unfold only actual generated scalar aliases and checked scalar lowering constructors. Derive singleton scalarScopeValid, concrete PyName membership and literal/callee matching without broad recursion or new tactic imports. Apply qualified lower_supported_ast_observation_preserved with derived exact compiler equations. General observation equality includes selected errors; it does not take a successful evaluation input.",
+      "queries": [
+        {
+          "kind": "actual_structural_acceptance",
+          "name": "RankerOriginalPythonScalarBodies.actual_scalar_bodies_lower",
+          "premises": "none; actual aliases/lowerer are computed and singleton scope validity is derived",
+          "statement": "lowerSupportedAst lossScope actualLossBody = .ok lossTarget AND lowerSupportedAst factorScope actualFactorBody = .ok factorTarget"
+        },
+        {
+          "kind": "actual_AST_partial_observation_preservation",
+          "name": "RankerOriginalPythonScalarBodies.actual_loss_body_observation",
+          "premises": "ordinary structural scoped lookup/value transport only; lowerer success is the previous derived theorem",
+          "statement": "For sourceEnvironment and targetEnvironment, StructuralEnvRel lossScope sourceEnvironment targetEnvironment -> observeNumber(evalSupportedAstReal sourceEnvironment actualLossBody) = evalSourceExpr targetEnvironment lossTarget"
+        },
+        {
+          "kind": "actual_AST_partial_observation_preservation",
+          "name": "RankerOriginalPythonScalarBodies.actual_factor_body_observation",
+          "premises": "ordinary structural scoped lookup/value transport only; lowerer success is the previous derived theorem",
+          "statement": "For sourceEnvironment and targetEnvironment, StructuralEnvRel factorScope sourceEnvironment targetEnvironment -> observeNumber(evalSupportedAstReal sourceEnvironment actualFactorBody) = evalSourceExpr targetEnvironment factorTarget"
+        }
+      ]
+    },
+    {
+      "definitions": [
+        "sourceMarginEnvironment binder margin := [(binder,PyNumber.real margin)]",
+        "emptyNamedEnvironment name τ := error(unknownName name)",
+        "targetMarginEnvironment binder margin := extendNames (τ := .scalar) binder.spelling margin emptyNamedEnvironment"
+      ],
+      "direct_imports": [
+        "PyAstOriginalScalarBodies",
+        "ObjectiveScalarIR"
+      ],
+      "file": "math/PyAstOriginalScalarFormulas.lean",
+      "module": "PyAstOriginalScalarFormulas",
+      "proof_strategy": "Construct both singleton StructuralEnvRel proofs from lookupNumber/extendNames (explicit τ=.scalar to avoid dependent-type inference inversion). Use actual observation theorems. Derive target loss/factor evaluator equalities to ObjectiveScalarIR.evalExact(stableLossBody/stableFactorBody)(scalarEnvironment margin) by scalar syntax reduction, then invoke genuine stableLoss_eval_success/stableFactor_eval_success. Derive no-source-error by contradiction from the observation result and explicit observePy error translation. No model result is a caller premise.",
+      "queries": [
+        {
+          "kind": "actual_own_AST_ideal_real_formula",
+          "name": "RankerOriginalPythonScalarBodies.actual_loss_body_model_success",
+          "premises": "ordinary margin only",
+          "statement": "For every margin:Real, observeNumber(evalSupportedAstReal(sourceMarginEnvironment lossBinder margin) actualLossBody) = .ok(RankerRealCurvature.realStablePairLoss margin)"
+        },
+        {
+          "kind": "actual_own_AST_ideal_real_formula",
+          "name": "RankerOriginalPythonScalarBodies.actual_factor_body_model_success",
+          "premises": "ordinary margin only",
+          "statement": "For every margin:Real, observeNumber(evalSupportedAstReal(sourceMarginEnvironment factorBinder margin) actualFactorBody) = .ok(RankerRealCurvature.realStableLogisticP margin)"
+        },
+        {
+          "kind": "actual_own_AST_error_exclusion",
+          "name": "RankerOriginalPythonScalarBodies.actual_scalar_bodies_no_selected_error",
+          "premises": "ordinary margin and queried error only; both success results are derived internally, never assumed",
+          "statement": "For every ordinary margin:Real and problem:PyEvalError, neither actual own scalar body under its singleton source environment evaluates to .error problem"
+        }
+      ]
+    }
+  ],
+  "out_of_scope": [
+    "Source bytes->CPython AST correctness and host lexical resolver proof",
+    "Actual builtin/math purity, dynamic globals or callee rebinding",
+    "_dot/L2 normalization or generator materialization",
+    "Comprehensions/zip/range/index/whole five assignments or actual objective guard/return",
+    "Python Float/libm/fsum/preparation/original bounded training loop",
+    "Source-model convergence extension relabeling as Python-loop or global autoencoder convergence",
+    "DuckDB/DuckLake hydration/cache/IntentIR/planner/whole TerminalBench task satisfaction"
+  ],
+  "pending_host_contract": {
+    "actual_host_scope_ids": null,
+    "complete_host_receipt_descriptor": null,
+    "direct_imports": [
+      "PyAstNumericSubset"
+    ],
+    "literal_source_descriptor": null,
+    "module": "GeneratedPythonAstScalarSource",
+    "native_acceptance_descriptor": null,
+    "parser_and_purity_claim": "Source capture and host controls are bounded evidence under an explicit parser/binding model. Generated literals do not certify source parsing, host lexical resolver correctness or actual CPython/global purity.",
+    "required_definitions": {
+      "actualFactorBody": "PyExpr from raw_program[3].rhs.body",
+      "actualLossBody": "PyExpr from raw_program[1].rhs.left.arguments[0].body",
+      "factorBinder": "PyName from raw_program[3].rhs.generators[0].target.identifier",
+      "factorScope": "List PyName := [factorBinder]",
+      "lossBinder": "PyName from raw_program[1].rhs.left.arguments[0].generators[0].target.identifier",
+      "lossScope": "List PyName := [lossBinder]"
+    },
+    "required_materialized_joins": [
+      "Exact source16391/3661027d... plus original bindings/draft/API pins, host implementation/runner/source gate and actual successful owned source-only host outcome",
+      "Entire raw transport receipt and selected subtree/source occurrence/binder joins recomputed, with complete emitted source byte pin",
+      "Raw loss/factor trees retain Float0.0 versus Integer0/1, Name/Attribute callees and two distinct exp(-z) occurrences; no old SourceExpr emitter/input AST used",
+      "Both binder spellings z and distinct actual scoped identities joined to source comprehension target paths; no guessed host numeric scope IDs",
+      "Actual generated syntax module source-gated and genuinely native-qualified before either new scalar proof module is prepared"
+    ],
+    "status": "PENDING_ROOT_OWNED_OUTPUT_AND_SOURCE_GATES"
+  },
+  "prospective_candidate_root": "qualification/codebase_ir/ranker-supported-python-ast-original-scalar-bodies-candidate-20261007-01",
+  "prospective_namespace": "RankerOriginalPythonScalarBodies",
+  "qualification_plan": {
+    "dependencies": "Reuse actual Q05 PyAstNumericPreservation owned module and actual prior AST3/target3 selectedModule admission. ObjectiveScalarIR is an existing transitive baseline module with five genuine Standard2 reports; validate exact baseline source/local registry/check/object/chunks through public descriptor admission. Preserve historical single-report transitive supports unchanged; no fake modern receipts.",
+    "evidence_policy": "Independent source/tooling gates, actual modern owned/check/spec/outer/root lease return0 and release/drain, two Standard reports per current query, complete source/environment/object/raw chunks, exact current physical scope censuses and immutable predecessor guards.",
+    "generated_syntax_queries": "root will freeze actual source-specific query list separately; not guessed or counted here",
+    "native_limits": {
+      "CPU_seconds": 20,
+      "complete_olean_bytes_max": 3997696,
+      "outer_wall_seconds": 120,
+      "raw_chunk_bytes": 65536,
+      "raw_chunks_max": 61,
+      "stdout_bytes": 65536,
+      "wall_seconds": 20,
+      "workspace_bytes": 16777216
+    },
+    "new_math_queries_prospective": 6,
+    "order": [
+      "root-owned bounded actual host transport and complete source readback",
+      "actual generated syntax module source gate and native qualification",
+      "PyAstOriginalScalarBodies three queries",
+      "PyAstOriginalScalarFormulas three queries"
+    ],
+    "source_policy": "No Mathlib.Tactic aggregate, new library closure, maxHeartbeats/maxRecDepth increase, timeout/output/object widening or private namespace patch. No template/future source is finalized before actual host output pins and root message.",
+    "split_reason": "Concrete shape/generic observation and numerical backend joins are separate stages; no broad mutual-recursion proof or whole container graph is required. Split further in a fresh candidate only if actual source/object/bounded elaboration requires it, preserving statements and caps."
+  },
+  "schema": "ranker-supported-python-ast-original-scalar-bodies-design@1",
+  "status": "SOURCE_DATA_ONLY_DESIGN_HOST_INPUTS_PENDING_NO_LEAN_FINALIZED"
+}

@@ -1,0 +1,156 @@
+#!/usr/bin/env python3
+"""Read retained native execution artifacts; never dispatch a new procedure."""
+import collections
+import json
+from pathlib import Path
+import sys
+import time
+
+HERE=Path(__file__).resolve().parent
+sys.path.insert(0,str(HERE/'profiles/v4'))
+from common import PROCEDURES, SOURCE, Artifacts, canonical, cid, frozen_guard, read, saved_candidate, sha, write_new
+
+def check(value, message):
+    if not value: raise ValueError(message)
+
+def independent_query(record):
+    check(set(record)=={'schema','payload_json'} and record['schema']=='ns-native-test-query-json/v2','closed JSON query artifact')
+    q=json.loads(record['payload_json'])
+    check(canonical(q).decode()==record['payload_json'],'exact canonical JSON transport')
+    check(set(q)=={'values','budget'} and type(q['values']) is list and type(q['budget']) is int,'closed concrete query')
+    check(len(q['values'])<=6 and -1<=q['budget']<=25,'frozen bounded query')
+    decision=all(type(v) is int and 0<=v<=7 for v in q['values']) and sum(q['values'])<=q['budget']
+    return q,decision
+
+def main():
+    started=time.perf_counter();run=HERE/'results_attempt4';output=HERE/'native_test_integration_attempt4_audit_v1.json'
+    check(not output.exists(),'audit is append-only')
+    inputs={str(p):sha(p.read_bytes()) for p in sorted(run.rglob('*')) if p.is_file()}
+    frozen=frozen_guard(run);summary=read(run/'summary.json');runtime=read(run/'runtime_summary.json')
+    check(summary['completed'] and runtime['all_checks_passed'],'terminal run completed')
+    check(summary['freeze_sha256']==sha((run/'freeze.json').read_bytes()),'run freeze identity')
+    check([p['role'] for p in summary['processes']]==['produce','verify_issue','execute'],'complete worker sequence')
+    check(all(p['returncode']==0 and not p['timed_out'] and p['bound_seconds']==120 and p['wall_seconds']<120 for p in summary['processes']),'original process bounds')
+    candidate,original,counterexamples=saved_candidate()
+    check(frozen['candidate_cid']==candidate.content_id and frozen['procedure_cid']==candidate.procedure.content_id,'exact saved candidate')
+    corpus=read(run/'corpora.json');old=read(PROCEDURES/'matrix.json')['training']+read(PROCEDURES/'results/fresh_queries.json')
+    seen={canonical(q) for q in old};old_count=len(seen)
+    for partition,queries in corpus.items():
+        check(len(queries)==frozen['corpus_counts'][partition],'frozen partition count')
+        for query in queries:
+            body=canonical(query);check(body not in seen,'no old/exposed/cross-partition duplicate');seen.add(body)
+    # Recompute actual bounded source/proof evidence in a fresh reader, separately charged.
+    from evidence import admit_artifacts
+    tick=time.perf_counter();admitted_candidate,manifest,evidence=admit_artifacts(run);evidence_revalidation_seconds=time.perf_counter()-tick
+    check(admitted_candidate.content_id==candidate.content_id,'reader exact candidate')
+    negatives=read(run/'evidence_negative_controls.json');check(len(negatives)==30 and all(row['rejected'] for row in negatives),'all evidence negatives')
+    from run import trust_for, policy_and_family
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.contracts import ProcedureCertificate, ProcedureInvocation, ProcedureExecutionTrace, ProcedureOutcome, ProcedureInvocationReceipt
+    from ipfs_accelerate_py.agent_supervisor.procedure_compiler.certificate import CurrentCertificateContext
+    certificate=ProcedureCertificate.from_dict(read(run/'certificate.json'));policy,family=policy_and_family(run,candidate)
+    _,_,verifier,_=trust_for(run)
+    admission=verifier.verify(certificate,CurrentCertificateContext.from_policy(policy,now_ms=certificate.issued_at_ms))
+    check(admission.accepted and admission.usable and not admission.grants_authority and not admission.grants_promotion,'native certificate historical admission')
+    check(not policy.required_proof_contracts and not candidate.procedure.validation.required_proof_contracts,'exact original empty native proof-contract list retained')
+    check(certificate.procedure_cid==candidate.procedure.content_id and certificate.counterexample_set_cid==counterexamples.content_id,'certificate exact subject/source')
+    check(set(certificate.proof_receipt_cids)=={manifest['proof']} and set(certificate.test_receipt_cids)=={manifest['test']},'certificate proof/test references')
+    check(certificate.held_out_evaluation_cid==manifest['held_out'] and certificate.shadow_evaluation_cid==manifest['shadow'] and set(certificate.adversarial_assurance_cids)=={manifest['adversarial']},'certificate separate evaluation evidence')
+    store=Artifacts(run/'native_objects');objects={}
+    for path in sorted(store.path.glob('*.json')): objects[path.stem]=store.get(path.stem)
+    schema_counts=collections.Counter(item['schema'] for item in objects.values())
+    bindings={item['invocation_cid']:item for item in objects.values() if item['schema']=='ns-native-test-input-binding/v1'}
+    selected=[(identity,item) for identity,item in objects.items() if item['schema']=='ns-native-test-selection/v1']
+    check(len(selected)==1,'unique unpromoted TEST selection');selection_cid,selection=selected[0]
+    check(selection['state']=='test-only-unpromoted' and selection['certificate_cid']==certificate.content_id and selection['procedure_cid']==candidate.procedure.content_id,'selection exact body')
+    operations=[step.operation.value for step in candidate.procedure.steps]
+    expected_steps={step.operation.value:step for step in candidate.procedure.steps}
+    outcomes=[];all_check_receipts=set();all_emitted=set();reconstructed={};query_seen=set()
+    persisted_rows=[read(p) for p in sorted((run/'invocations').glob('*.json'))]
+    check(persisted_rows==runtime['rows'] and len(persisted_rows)==136,'complete immediate invocation records')
+    partitions={name:[row for row in persisted_rows if row['partition']==name] for name in ('test','adversarial','held_out','shadow')}
+    for name,rows in partitions.items():check(len(rows)==len(corpus[name]),'complete runtime partition')
+    for row in persisted_rows:
+        invocation_id=row['invocation_cid'];binding=bindings[invocation_id];authority=objects[binding['authority_cid']];query_id=binding['query_cid']
+        query,decision=independent_query(objects[query_id]);check(query_id==row['query_cid'] and query_id not in query_seen,'unique exact query');query_seen.add(query_id)
+        check(canonical(query) in {canonical(q) for q in corpus[row['partition']]},'native row belongs to frozen partition')
+        check(authority['query_cid']==query_id and authority['procedure_cid']==candidate.procedure.content_id and authority['certificate_cid']==certificate.content_id,'authority subject/query')
+        check(authority['source_sha256']==candidate.bindings.repository_commit and authority['mode']=='test' and authority['scope']==['policy'] and authority['capability']=='capability.validation','actual source/capability/scope authority')
+        check(authority['virtual_source']=={'path':'policy/sequence.json','query_cid':query_id},'exact virtual read source')
+        invocation=ProcedureInvocation(bindings=candidate.bindings,procedure_cid=candidate.procedure.content_id,certificate_cid=certificate.content_id,
+            registry_revision=selection_cid,parameters={},requested_scope=('policy',),authority_receipt_cids=(binding['authority_cid'],),
+            idempotency_key=cid({'query':query_id,'ordinal':authority['ordinal'],'authority':binding['authority_cid']}),dry_run=False,requested_at_ms=authority['observed_at_ms'])
+        check(invocation.content_id==invocation_id,'native invocation body exactly reconstructs committed CID');reconstructed[invocation_id]=invocation.to_dict()
+        trace=objects[row['native_trace_cid']];outcome=objects[row['native_outcome_cid']];receipt=objects[row['native_receipt_cid']]
+        for value,contract,key in ((trace,ProcedureExecutionTrace,'native_trace_cid'),(outcome,ProcedureOutcome,'native_outcome_cid'),(receipt,ProcedureInvocationReceipt,'native_receipt_cid')):
+            check(contract.from_dict(value).content_id==row[key],'native typed consumer identity')
+            check(value['bindings']==candidate.bindings.to_dict() and value['invocation_cid']==invocation_id and value['procedure_cid']==candidate.procedure.content_id,'native typed artifact exact bindings')
+        check(receipt['outcome_cid']==row['native_outcome_cid'] and receipt['trace_cid']==row['native_trace_cid'] and outcome['trace_cid']==row['native_trace_cid'],'native producer/consumer CID joins')
+        check(receipt['certificate_cid']==certificate.content_id,'native receipt signed certificate')
+        check(authority['observed_at_ms']<=outcome['terminal_at_ms']<authority['expires_at_ms'],'input authority current at native terminal')
+        check(outcome['status']=='succeeded' and row['outcome_status']=='succeeded' and row['failure'] is None and row['decision'] is decision and row['expected'] is decision,'actual correct true/false native completion')
+        check(outcome['satisfied_postcondition_ids']==['decision-ready'] and len(outcome['validation_receipt_cids'])==1,'native actual validation/postcondition')
+        observed=[entry for entry in trace['entries'] if entry['status']=='observed'];begun=[entry for entry in trace['entries'] if entry['status']=='started']
+        check([entry['operation'] for entry in observed]==operations and [entry['operation'] for entry in begun]==operations,'every exact native operation once')
+        checks=[]
+        for entry in observed[1:4]:
+            check(len(entry['evidence_cids'])==1,'each check produces actual observation')
+            identity=entry['evidence_cids'][0];item=objects[identity];op=entry['operation'];step=expected_steps[op]
+            check(item['schema']=='ns-native-test-operation-observation/v1' and item['invocation_cid']==invocation_id and item['query_cid']==query_id,'current invocation check evidence')
+            check(item['procedure_cid']==candidate.procedure.content_id and item['source_sha256']==candidate.bindings.repository_commit and item['contract']==step.operation_contract and item['step_id']==step.step_id,'check source/operation contract')
+            checks.append(identity);all_check_receipts.add(identity)
+        check(set(observed[4]['evidence_cids'])==set(checks),'postcondition consumes all three actual check receipts')
+        emitted_ids=set(observed[5]['evidence_cids'])-set(checks);check(len(emitted_ids)==1,'actual distinct emitted decision artifact')
+        emitted_id=emitted_ids.pop();emitted=objects[emitted_id]
+        check(emitted['schema']=='ns-native-test-emitted-decision/v1' and emitted['invocation_cid']==invocation_id and emitted['query_cid']==query_id and emitted['decision'] is decision and emitted['checked_receipt_cids']==checks,'emitted decision binds all actual checks')
+        all_emitted.add(emitted_id)
+        for admission_id in outcome['validation_receipt_cids']:
+            item=objects[admission_id];check(item['kind']=='validation' and item['invocation_cid']==invocation_id and item['query_cid']==query_id and set(item['checked_evidence_cids'])==set(checks),'native validation actual all-check evidence')
+        check(set(checks+[emitted_id])<=set(receipt['admitted_evidence_cids']),'native final receipt retains actual decision evidence')
+        outcomes.append(decision)
+    controls=read(run/'runtime_controls.json');passed=[row['control'] for row in controls if row.get('passed') is True]
+    check(len(passed)==13 and len(set(passed))==13,'complete native controls')
+    check(runtime['native_dispatches']==136*6 and len(all_check_receipts)==136*3 and len(all_emitted)==136,'complete execution/evidence counters')
+    imports={};native_missing={};loaded_missing={}
+    for role in ('produce','verify_issue','execute'):
+        for name,item in read(run/(role+'_imports.json')).items():
+            path=Path(item['path']);check(sha(path.read_bytes())==item['sha256'],'observed loaded-source bytes unchanged')
+            imports[str(path)]=item['sha256']
+            if str(path) not in frozen['sources_sha256']:
+                loaded_missing[str(path)]=item['sha256']
+                if path.is_relative_to(SOURCE):native_missing[str(path)]=item['sha256']
+    check(not native_missing,'all actually imported native sources frozen')
+    # The original invocation objects were in memory. Exact CID reconstruction is
+    # explicit here, distinct from claiming an archived native checkpoint store.
+    write_new(HERE/'attempt4_reconstructed_exact_native_invocations_v1.json',reconstructed)
+    attempts=[]
+    for number in range(1,5):
+        previous=HERE/('results_attempt'+str(number));old_summary=read(previous/'summary.json');frozen_guard(previous)
+        attempts.append({'attempt':number,'completed':old_summary['completed'],'preparation_and_freeze_seconds':old_summary['preparation_and_freeze_seconds'],
+            'processes':old_summary['processes'],'retained_freeze_sha256':sha((previous/'freeze.json').read_bytes())})
+    object_storage={directory:{'files':len(list((run/directory).glob('*.json'))),'bytes':sum(p.stat().st_size for p in (run/directory).glob('*.json'))} for directory in ('evidence_objects','native_objects')}
+    result={'schema':'ns-native-test-integration-independent-audit/v1','all_checks_passed':True,'run':str(run),'profile':str(HERE/'profiles/v4'),
+        'candidate_cid':candidate.content_id,'procedure_cid':candidate.procedure.content_id,'certificate_cid':certificate.content_id,'freeze_sha256':summary['freeze_sha256'],
+        'native_certificate_historical_verdict':admission.to_dict(),'exact_native_invocations_reconstructed':len(reconstructed),'native_invocations':len(outcomes),
+        'true_decisions':sum(outcomes),'false_decisions':len(outcomes)-sum(outcomes),'native_dispatches':runtime['native_dispatches'],'native_admissions_including_controls':runtime['native_admissions'],
+        'distinct_current_check_receipts':len(all_check_receipts),'distinct_emitted_decisions':len(all_emitted),'evidence_negative_controls':len(negatives),'native_controls':passed,
+        'frozen_corpus_counts':frozen['corpus_counts'],'original_exposed_unique_inputs':old_count,'disjoint_original_and_partition_inputs':True,'float_cases_preserved':sum(any(type(v)is float for v in q['values']) for qs in corpus.values() for q in qs),
+        'object_storage':object_storage,'native_object_schema_counts':dict(schema_counts),'frozen_source_paths':len(frozen['sources_sha256']),'observed_loaded_paths':len(imports),
+        'actual_native_import_paths_missing_from_freeze':native_missing,'observed_stdlib_or_other_dependencies_not_in_native_source_freeze':loaded_missing,
+        'preparation_and_freeze_seconds':summary['preparation_and_freeze_seconds'],'processes':summary['processes'],'native_invocation_enclosing_seconds':sum(row['native_prepare_and_execute_seconds'] for row in persisted_rows),
+        'evidence_production_costs':read(run/'evidence_production_costs.json'),'native_verification_costs':read(run/'native_verification_costs.json'),
+        'retained_attempts':attempts,'independent_audit_evidence_revalidation_seconds':evidence_revalidation_seconds,'independent_audit_wall_seconds':time.perf_counter()-started,
+        'scope_limits':['Exact saved candidate, signed native TEST/read-only execution only; no native registry promotion or production authority.',
+            'Native required proof-contract list remains empty to preserve exact IR; adapter separately enforces the named bounded logical proof and concrete bridge.',
+            'Evidence admission and every runtime validation repeat concrete operations; all such work is inside enclosing process costs, not receipt-only reuse.',
+            'Trusted local immutable-input custody and accounting reservations do not establish OS isolation from hostile Python.',
+            'Checkpoint control is exact invocation reuse in the same interpreter process; native checkpoint archive/cross-process restoration is not evaluated.',
+            'Fresh corpus was authored after original development and held apart prospectively; no population generalization or arbitrary-Python theorem.',
+            'Observed import receipts include file-backed modules but not every transitive shared library; stdlib/other unpinned loaded paths are listed explicitly.',
+            'No providers/model tokens and no token savings measurement; final source profile includes all native code guards.'],
+        'inputs_sha256':inputs,'auditor_sha256':sha(Path(__file__).read_bytes()),'provider_calls':0,'model_tokens':0}
+    # No mutation of completed inputs may be hidden by this additive audit.
+    check(all(sha(Path(path).read_bytes())==digest for path,digest in inputs.items()),'completed run inputs unchanged during audit')
+    write_new(output,result)
+    print(json.dumps({key:result[key] for key in ('all_checks_passed','native_invocations','true_decisions','false_decisions','native_dispatches','frozen_source_paths','independent_audit_wall_seconds')}))
+
+if __name__=='__main__':main()

@@ -1,0 +1,65 @@
+{
+  "candidates": [
+    {
+      "ref": "refs/heads/agent/normative-cache-input-root-20261007",
+      "head": "094c566adc316b1391c58d3d38c4dd19698149ff"
+    },
+    {
+      "ref": "refs/heads/agent/normative-checkpoint-availability-root-20261006",
+      "head": "dfc02e62186dc97223a620b074b278f0e1b97115"
+    },
+    {
+      "ref": "refs/heads/agent/normative-decoder-runtime-root-20261007",
+      "head": "b7e3550da23c94fe17b591654093c5c0f84ded0c"
+    },
+    {
+      "ref": "refs/heads/codex/legal-cross-agent-followthrough-20261006",
+      "head": "8cd17c705162a5d47c0eb31616d8d5637eea79d2"
+    },
+    {
+      "ref": "refs/heads/codex/grouped-autoencoder-findings-20261006-02",
+      "head": "1b20f745a1db2a485b97ffc7f0816119881f7f8d"
+    },
+    {
+      "ref": "refs/heads/codex/legal-decoder-followup-results-20261006-01",
+      "head": "0ed01fd56db31fe4345f8143a7647a437dcb1118"
+    },
+    {
+      "ref": "refs/heads/codex/legal-scope-span-results-20261007-01",
+      "head": "7e582ad8951d6fed6235c98526ee49c08dbce218"
+    },
+    {
+      "ref": "refs/heads/codex/legal-support-action-results-20261007-01",
+      "head": "43ec348cab85a9eae3aee56a6de79807e3ea57ee"
+    },
+    {
+      "ref": "refs/heads/codex/legal-support-gate-results-20261007-01",
+      "head": "b60d71fbd131c7d0a61f8f481348a1027769af92"
+    },
+    {
+      "ref": "refs/heads/codex/legal-trigger-readout-results-20261007-01",
+      "head": "8e5da94bd0ac33b1378ae44e4801f3496e96a02c"
+    },
+    {
+      "ref": "refs/heads/codex/terminal-reply-contract-root-20261006",
+      "head": "c454ee48ff43b41946482c888c039f084e371d0d"
+    },
+    {
+      "ref": "refs/heads/codex/terminal-metadata-census-root-20261007",
+      "head": "037edf58a0dbe2ed663750f7aa45fb0b361e52fe"
+    },
+    {
+      "ref": "refs/heads/codex/terminal-reply-contract-results-root-20261007",
+      "head": "a9c3f943c14c5335bdf0f423f987ba649394f75f"
+    },
+    {
+      "ref": "refs/heads/codex/terminal-spectral-symbolic-root-20261007",
+      "head": "47114b031dfbebbd66a5cdb2778b72cc88497628"
+    },
+    {
+      "ref": "refs/heads/codex/terminal-token-metadata-root-20261007",
+      "head": "123f57e0c098e64b2d4afbf9e0d9e1f5bd3f2918"
+    }
+  ],
+  "custody": "Matching observed remote branch heads from successfully removed worktrees; main ancestry must be fresh verified; delete with explicit expected-head lease."
+}

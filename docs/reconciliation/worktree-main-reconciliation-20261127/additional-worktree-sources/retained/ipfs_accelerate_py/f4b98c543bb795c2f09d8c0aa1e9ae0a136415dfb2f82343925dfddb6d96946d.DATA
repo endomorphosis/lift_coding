@@ -1,0 +1,794 @@
+"""Separate offline-only M1 composition for a genuinely admitted child hook.
+
+SOURCE CANDIDATE ONLY. There is intentionally no CLI/main entry. The existing
+sealed daemon must opt in through a separately reviewed source/request binding
+before calling this code with its actual bootstrap result. This module neither
+mints bootstrap credentials nor accepts a serialized resource capability.
+"""
+from __future__ import annotations
+
+from contextlib import ExitStack, nullcontext
+import hashlib
+import importlib
+import json
+import math
+import os
+import fcntl
+import re
+import shlex
+from pathlib import Path
+import stat
+import sys
+import threading
+import time
+
+
+P_ROOT = Path('/home/barberb/lift_coding/external/ipfs_datasets')
+SCHEMA = 'private-approved-child-same-pid-offline-M1-request/v1'
+_RETAINED = []
+
+
+class FixtureRefusal(RuntimeError):
+    pass
+
+
+class FixtureClosureUnknown(FixtureRefusal):
+    """The same live composition must remain retained by the approved caller."""
+
+
+def need(value, reason):
+    if not value:
+        raise FixtureRefusal(reason)
+
+
+def _release_owned_phase_disk(disk, *, parent_lease):
+    """Close a genuine private phase component, without granting admission.
+
+    Used by the live M1 and independently testable with real private SDK
+    owners. Unknown writes/pending consumers/strict inventory failures refuse.
+    """
+    from ipfs_datasets_py.optimizers.logic_theorem_optimizer import resource_scheduler as sdk
+    from ipfs_datasets_py.optimizers.logic_theorem_optimizer import parented_phase_resources as parented
+    for module, relative in ((sdk, 'resource_scheduler.py'), (parented, 'parented_phase_resources.py')):
+        expected = str(P_ROOT/'ipfs_datasets_py/optimizers/logic_theorem_optimizer'/relative)
+        need(module.__file__ == module.__spec__.origin == expected,
+             'canonical_actual_resource_component_modules_required')
+    need(type(disk) is parented.ParentedPhaseResourceReservation and
+         type(parent_lease) is sdk.ResourceLease and parent_lease.owner_pid == os.getpid() and
+         disk._parent is parent_lease and disk._owner_pid == os.getpid() and type(disk._entered) is bool,
+         'actual_original_disk_composition_required')
+    lease = disk._lease
+    need(lease is None or (type(lease) is sdk.ResourceLease and lease.owner_pid == os.getpid() and
+         lease.parent_lease_id == parent_lease.lease_id), 'actual_owned_disk_native_handle_required')
+    record = disk._record
+    if record is None:
+        need(disk._entered is False and lease is None, 'partial_disk_local_state_unproven')
+        with disk._locked():
+            need(disk.reservation_id not in disk._read()['reservations'],
+                 'partial_disk_durable_disposition_unproven')
+        return 'absent'
+    need(disk._entered is True and type(record) is dict and
+         record.get('reservation_id') == disk.reservation_id and record.get('owner_pid') == os.getpid() and
+         record.get('status') in {'reserved', 'active', 'retained', 'released'},
+         'actual_owned_disk_record_required')
+    # Existing stopped cleanup keeps owner/source/attempt/consumer/group and
+    # the entire strict fresh attempt census. It grants nothing and borrows no
+    # authority from a serialized record.
+    released = disk.release(artifacts_durable=True)
+    need(released['status'] == 'released' and disk._record['status'] == 'released' and
+         disk._record.get('artifacts_durable_asserted') is True, 'actual_disk_release_unproven')
+    with disk._locked():
+        need(disk._read()['reservations'].get(disk.reservation_id) == disk._record,
+             'actual_disk_durable_release_unproven')
+    need(lease is None or lease.released is True, 'actual_disk_native_release_unproven')
+    return 'released'
+
+
+def read_pin(pin):
+    need(type(pin) is dict and set(pin) == {'path', 'bytes', 'sha256'}, 'exact_pin_required')
+    path = Path(pin['path'])
+    need(path.is_absolute() and path.resolve(strict=True) == path, 'unaliased_pin_required')
+    descriptor = os.open(path, os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK|os.O_CLOEXEC)
+    try:
+        before = os.fstat(descriptor)
+        need(stat.S_ISREG(before.st_mode) and before.st_nlink == 1 and
+             type(pin['bytes']) is int and 0 < before.st_size == pin['bytes'] <= 128*1024**2,
+             'bounded_regular_pin_required')
+        identity = lambda row: (row.st_dev, row.st_ino, row.st_mode, row.st_nlink,
+                                row.st_size, row.st_mtime_ns, row.st_ctime_ns)
+        chunks = []; count = 0
+        while block := os.read(descriptor, 128*1024):
+            count += len(block); need(count <= pin['bytes'], 'pin_grew')
+            chunks.append(block)
+        body = b''.join(chunks)
+        need(count == pin['bytes'] and hashlib.sha256(body).hexdigest() == pin['sha256'] and
+             identity(before) == identity(os.fstat(descriptor)) == identity(path.lstat()),
+             'pin_content_or_identity_changed')
+        return body
+    finally:
+        os.close(descriptor)
+
+
+def source_digest(path):
+    path = Path(path)
+    need(not str(path).endswith(('.duckdb', '.db', '.sqlite', '.state.json', '.pt', '.pth',
+                                '.safetensors', '.ckpt')), 'source_not_database_or_weights')
+    size = path.lstat().st_size
+    # Reuse the stable regular-file reader without treating asserted JSON as a
+    # capability. Source hashes are only provenance; native APIs still admit.
+    need(0 < size <= 128*1024**2, 'source_size_bound')
+    need(path.resolve(strict=True) == path, 'source_alias')
+    descriptor = os.open(path, os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK|os.O_CLOEXEC)
+    try:
+        before = os.fstat(descriptor)
+        need(stat.S_ISREG(before.st_mode) and before.st_nlink == 1, 'regular_source_required')
+        witness = lambda row: (row.st_dev, row.st_ino, row.st_mode, row.st_nlink,
+                               row.st_size, row.st_mtime_ns, row.st_ctime_ns)
+        hashed = hashlib.sha256(); count = 0
+        while block := os.read(descriptor, 128*1024):
+            count += len(block); need(count <= 128*1024**2, 'source_grew')
+            hashed.update(block)
+        need(count == before.st_size and witness(before) == witness(os.fstat(descriptor)) ==
+             witness(path.lstat()), 'source_changed')
+        return hashed.hexdigest()
+    finally:
+        os.close(descriptor)
+
+
+def strict_request(pin, *, require_fresh=True):
+    need(type(require_fresh) is bool, 'explicit_freshness_mode_required')
+    need(type(pin) is dict and set(pin) == {'path', 'bytes', 'sha256'} and
+         type(pin['bytes']) is int and 0 < pin['bytes'] <= 2*1024**2, 'request_bound')
+    def unique(pairs):
+        value = {}
+        for key, child in pairs:
+            need(key not in value, 'duplicate_request_key'); value[key] = child
+        return value
+    def bad_constant(_value):
+        raise FixtureRefusal('nonfinite_request')
+    value = json.loads(read_pin(pin), object_pairs_hook=unique, parse_constant=bad_constant)
+    need(type(value) is dict and set(value) == {
+        'schema', 'fixture_id', 'source_roots', 'source_sha256', 'source_profile_pin', 'capsule_pin',
+        'worker_path', 'source_generation', 'fixture_root', 'attempt_directory', 'socket_parent',
+        'allocation_store_path', 'database_path', 'coordination_path', 'execution_path',
+        'private_task_cid', 'private_task_alias', 'original_task_cid', 'original_catalog_path',
+        'private_store_id', 'private_database_uuid', 'private_server_id',
+        'original_store_id', 'original_database_uuid', 'state_dir', 'owner_session_id',
+        'allocation_session_id', 'credential_slot', 'credential_fingerprint', 'resources',
+        'work_deadline_monotonic', 'native_deadline_monotonic', 'offline_only', 'attempt_cap'},
+        'closed_request_schema_required')
+    need(value['schema'] == SCHEMA and value['offline_only'] is True and
+         type(value['attempt_cap']) is int and value['attempt_cap'] == 1, 'offline_M1_cap1_only')
+    need(type(value['fixture_id']) is str and re.fullmatch('private-M1a-[0-9a-f]{32}', value['fixture_id']), 'explicit_fixture_identity_required')
+    need(type(value['source_roots']) is list and len(value['source_roots']) == 2 and
+         all(type(path) is str and Path(path).is_absolute() for path in value['source_roots']) and
+         value['source_roots'][1] == str(P_ROOT), 'canonical_P_role_required')
+    need(type(value['source_sha256']) is dict and 1 <= len(value['source_sha256']) <= 10000,
+         'complete_bounded_source_map_required')
+    for name, digest in value['source_sha256'].items():
+        need(type(name) is str and Path(name).is_absolute() and type(digest) is str and len(digest) == 64 and
+             all(c in '0123456789abcdef' for c in digest), 'source_pin_shape')
+    for name in ('source_profile_pin', 'capsule_pin'):
+        metadata_pin = value[name]
+        read_pin(metadata_pin)
+        need(value['source_sha256'].get(metadata_pin['path']) == metadata_pin['sha256'],
+             'profile_and_capsule_must_join_complete_source_map')
+    need(value['source_sha256'].get(str(Path(__file__))) == source_digest(__file__),
+         'composition_source_must_be_separately_pinned')
+    for name in ('private_store_id', 'private_database_uuid', 'private_server_id',
+                 'original_store_id', 'original_database_uuid', 'source_generation',
+                 'allocation_session_id', 'credential_slot', 'credential_fingerprint', 'owner_session_id'):
+        need(type(value[name]) is str and 0 < len(value[name]) <= 4096, 'explicit_private_identity_required')
+    need(value['private_store_id'] != value['original_store_id'] and
+         value['private_database_uuid'] != value['original_database_uuid'],
+         'original_store_authority_excluded')
+    for name in ('work_deadline_monotonic', 'native_deadline_monotonic'):
+        need(type(value[name]) in (int, float) and math.isfinite(value[name]), 'original_deadline_required')
+    need(time.monotonic() < value['work_deadline_monotonic'] <= value['native_deadline_monotonic'] and
+         value['work_deadline_monotonic']-time.monotonic() <= 240 and
+         value['native_deadline_monotonic']-time.monotonic() <= 300 and
+         0 < value['native_deadline_monotonic']-value['work_deadline_monotonic'] <= 60, 'finite_original_lifetime_required')
+    need(type(value['private_task_cid']) is str and value['private_task_cid'] and
+         value['private_task_cid'] != value['original_task_cid'] and
+         type(value['private_task_alias']) is str and value['private_task_alias'] == value['fixture_id'] and
+         value['source_generation'] == 'grok-automatic-named-session/' + value['private_task_alias'],
+         'wholly_private_task_identity_required')
+    root = Path(value['fixture_root'])
+    need(root.is_absolute() and root.resolve(strict=True) == root and root.is_dir() and
+         root.lstat().st_uid == os.getuid() and not root.lstat().st_mode & 0o077,
+         'actual_private_fixture_directory_required')
+    original = Path(value['original_catalog_path'])
+    need(original.is_absolute() and '..' not in original.parts and
+         not root.is_relative_to(original.parent) and not original.is_relative_to(root),
+         'original_catalog_namespace_excluded')
+    for name in ('attempt_directory', 'socket_parent', 'allocation_store_path', 'database_path',
+                 'coordination_path', 'execution_path', 'state_dir'):
+        path = Path(value[name])
+        need(path.is_absolute() and '..' not in path.parts and path.is_relative_to(root) and
+             path != original and path.resolve(strict=False) == path, 'private_path_scope_required')
+    attempt = Path(value['attempt_directory'])
+    need(attempt.resolve(strict=True) == attempt and attempt.is_dir() and
+         attempt.lstat().st_uid == os.getuid() and not attempt.lstat().st_mode & 0o077 and
+         Path(value['allocation_store_path']).parent == attempt and
+         (not require_fresh or not Path(value['allocation_store_path']).exists()),
+         'fresh_private_allocation_path_required')
+    need(not Path(value['socket_parent']).is_relative_to(attempt), 'socket_outside_strict_attempt_required')
+    need(Path(value['socket_parent']).is_dir() and Path(value['state_dir']).is_dir(),
+         'precharged_private_directories_required')
+    for name in ('execution_path', 'coordination_path', 'state_dir'):
+        need(Path(value[name]).is_relative_to(attempt), 'local_sidecar_writes_must_be_disk_charged')
+    need(not require_fresh or all(not Path(value[name]).exists()
+         for name in ('execution_path', 'coordination_path')), 'fresh_private_local_sidecars_required')
+    need(len({value[name] for name in ('allocation_store_path', 'database_path', 'coordination_path',
+         'execution_path')}) == 4, 'distinct_private_database_files_required')
+    need(value['worker_path'] == str(Path(value['source_roots'][0]) /
+             'ipfs_accelerate_py/cli_runtime/grok_private_m1_offline_worker.py') and
+         value['source_sha256'].get(value['worker_path']) ==
+             'b24fd487ef84e7d0ce803406925394fe9f1d72b9657b6ad22857c9b0fd6654c2',
+         'only_reviewed_normal_offline_worker_allowed')
+    worker = Path(value['worker_path'])
+    need(worker.is_absolute() and value['source_sha256'].get(str(worker)) == source_digest(worker),
+         'pinned_future_worker_source_required')
+    resource = value['resources']
+    need(type(resource) is dict and set(resource) == {'scheduler_state_path', 'policy_sha256',
+        'ledger_path', 'named_roots', 'storage_bytes', 'memory_mb', 'admission_timeout_seconds',
+        'ledger_lock_timeout_seconds', 'child_process_slots'}, 'explicit_resource_envelope_required')
+    need(type(resource['child_process_slots']) is int and resource['child_process_slots'] == 2,
+         'genuine_finite_two_child_M1_envelope_required')
+    need(type(resource['memory_mb']) is int and 1 <= resource['memory_mb'] <= 2048 and
+         type(resource['storage_bytes']) is int and 1 <= resource['storage_bytes'] <= 512*1024**2,
+         'finite_M1_CPU_only_envelope_required')
+    need(type(resource['named_roots']) is list and resource['named_roots'] and
+         all(type(path) is str and Path(path).is_absolute() and
+             Path(path).resolve(strict=True) == Path(path) for path in resource['named_roots']) and
+         any(root.is_relative_to(Path(path)) for path in resource['named_roots']),
+         'actual_named_storage_roots_required')
+    need(type(resource['policy_sha256']) is str and len(resource['policy_sha256']) == 64 and
+         all(c in '0123456789abcdef' for c in resource['policy_sha256']) and
+         all(type(resource[name]) is str and Path(resource[name]).is_absolute()
+             for name in ('scheduler_state_path', 'ledger_path')), 'explicit_existing_native_authority_required')
+    for name, maximum in (('admission_timeout_seconds', 120), ('ledger_lock_timeout_seconds', 60)):
+        need(type(resource[name]) in (int, float) and math.isfinite(resource[name]) and
+             0 < resource[name] <= maximum, 'bounded_admission_wait_required')
+    return value
+
+
+def _import_pinned_normal_module(name, root, relative, source_sha256):
+    """Import/check real source metadata only; this grants no capability."""
+    module = importlib.import_module(name)
+    path = Path(root)/relative
+    need(module.__file__ == module.__spec__.origin == str(path) and
+         source_sha256.get(str(path)) == source_digest(path),
+         'genuine_normal_module_origin_required')
+    return module
+
+
+class PrivateM1OwnedSetup:
+    """Retained live M1 composition; approved caller owns invocation/receipts.
+
+    ``owner_bootstrap`` must be the real result already obtained exactly once
+    by database_owner_bootstrap_kwargs in the existing approved daemon child.
+    The caller must retain this object and its process if close() is unknown.
+    No context-manager auto-release or original task dispatch is provided.
+    """
+    def __init__(self, *, args, program, owner_bootstrap, request_pin):
+        self.request_pin = dict(request_pin); self.request = strict_request(request_pin)
+        self.args, self.program, self.bootstrap = args, program, owner_bootstrap
+        self.pid, self.thread = os.getpid(), threading.get_ident()
+        self.source_stack = ExitStack(); self.source_locks = []
+        self.root = self.phase = self.disk = self.daemon = self.profile = self.store = None
+        self.native_owner_heartbeat = None
+        self.disk_entered = self.disk_closed = self.constructed = self.closed = False
+        self.construction_started = False
+        self.stage = "not_started"
+        self.dispatch_started = self.dispatch_finished = False
+        self.database_run_once_called = False
+        self.bridge = None
+        self.worker_metadata = []
+        self.offline_metadata_descriptor = None
+        self.offline_metadata_request_sha256 = None
+        self.offline_result = None
+        self.native_deadlines = None; self.pending_admission_error = None
+        self.source_closed = False; self.native_ids = []; self.failure = None
+        self.allocation_env_installed = False
+        self.previous_allocation_env = ('IPFS_ACCELERATE_LLM_ALLOCATION_DB' in os.environ,
+                                       os.environ.get('IPFS_ACCELERATE_LLM_ALLOCATION_DB'))
+        _RETAINED.append(self)
+
+    def __reduce__(self):
+        raise TypeError('private same-PID live construction cannot be serialized')
+
+    def _remaining(self):
+        need(os.getpid() == self.pid and threading.get_ident() == self.thread, 'original_child_thread_required')
+        remaining = self.request['native_deadline_monotonic']-time.monotonic()
+        need(remaining > 0, 'original_native_deadline_expired')
+        return remaining
+
+    def _work_remaining(self):
+        remaining = min(self._remaining(), self.request['work_deadline_monotonic']-time.monotonic())
+        need(remaining > 0, 'original_work_deadline_expired')
+        return remaining
+
+    def _sources(self):
+        read_pin(self.request_pin)
+        need(all(source_digest(path) == digest for path, digest in self.request['source_sha256'].items()),
+             'current_producer_source_changed')
+        self._loaded_sources()
+
+    def _loaded_sources(self):
+        """Reject already loaded drift and unpinned future producer imports."""
+        for name, module in tuple(sys.modules.items()):
+            top = name.partition('.')[0]
+            if top not in {'ipfs_accelerate_py', 'ipfs_datasets_py'}:
+                continue
+            path = getattr(module, '__file__', None)
+            spec = getattr(module, '__spec__', None)
+            need(type(path) is str and spec is not None and spec.origin == path,
+                 'real_package_source_origin_required')
+            expected = Path(self.request['source_roots'][0]) if top == 'ipfs_accelerate_py' else P_ROOT
+            need(Path(path).is_relative_to(expected) and
+                 self.request['source_sha256'].get(path) == source_digest(path),
+                 'foreign_or_unpinned_loaded_producer_refused')
+
+    def _module(self, name, root, relative):
+        return _import_pinned_normal_module(name, root, relative, self.request['source_sha256'])
+
+    def failure_observation(self):
+        """Fixed diagnostic fields only; these observations are not grants."""
+        record = getattr(self.disk, '_record', None)
+        lease = getattr(self.disk, '_lease', None)
+        status = record.get('status') if type(record) is dict else 'absent'
+        return dict(schema='private-M1-safe-disposition-observation/v1',
+            stage=self.stage, dispatch_started=self.dispatch_started, dispatch_finished=self.dispatch_finished,
+            disk_enter_returned=self.disk_entered,
+            disk_base_entered=getattr(self.disk, '_entered', False) is True,
+            disk_record_status=status if status in {'absent', 'reserved', 'active', 'retained', 'released'} else 'unknown',
+            actual_disk_native_handle_present=lease is not None,
+            actual_disk_native_handle_released=(lease.released is True if lease is not None else None),
+            disk_closed=self.disk_closed, constructed=self.constructed, source_closed=self.source_closed)
+
+    def _remember_actual_disk_native(self):
+        lease = getattr(self.disk, '_lease', None)
+        if lease is not None:
+            need(type(lease) is self.native_deadlines.ResourceLease and lease.owner_pid == self.pid and
+                 lease.parent_lease_id == self.phase.lease_id,
+                 'actual_owned_disk_native_handle_required')
+            if lease.lease_id not in self.native_ids:
+                self.native_ids.append(lease.lease_id)
+
+    def _close_owned_disk(self):
+        self._remember_actual_disk_native()
+        _release_owned_phase_disk(self.disk, parent_lease=self.phase)
+        self.disk_closed = True
+
+    def construct(self):
+        need(not self.construction_started and not self.constructed and not self.closed and self.root is None, 'one_construction_only')
+        self.construction_started = True
+        self._work_remaining(); self._sources()
+        request = self.request; A = Path(request['source_roots'][0])
+        need(A.resolve(strict=True) == A, 'exact_approved_accelerator_tree_required')
+        # The approved child already loaded Accelerator. Canonical P may be
+        # prepended only when no foreign P module has already been loaded.
+        for name, module in tuple(sys.modules.items()):
+            if name.partition('.')[0] in {'ipfs_accelerate_py', 'ipfs_datasets_py'} and getattr(module, '__file__', None):
+                expected_root = A if name.startswith('ipfs_accelerate_py') else P_ROOT
+                need(Path(module.__file__).is_relative_to(expected_root) and
+                     module.__spec__.origin == module.__file__, 'foreign_preloaded_tree_refused')
+        if str(P_ROOT) not in sys.path or sys.path[0] != str(P_ROOT):
+            sys.path.insert(0, str(P_ROOT))
+        daemon = self._module('ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon', A,
+            'ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py')
+        bootstrap = self._module('ipfs_accelerate_py.agent_supervisor.todo_daemon.native_owner_bootstrap', A,
+            'ipfs_accelerate_py/agent_supervisor/todo_daemon/native_owner_bootstrap.py')
+        typed = self._module('ipfs_accelerate_py.agent_supervisor.task_sources.typed_database_task_source', A,
+            'ipfs_accelerate_py/agent_supervisor/task_sources/typed_database_task_source.py')
+        credentials = self._module('ipfs_accelerate_py.agent_supervisor.task_sources.state_owner_bootstrap', A,
+            'ipfs_accelerate_py/agent_supervisor/task_sources/state_owner_bootstrap.py')
+        programs = self._module('ipfs_accelerate_py.agent_supervisor.runtime.multi_supervisor_runner', A,
+            'ipfs_accelerate_py/agent_supervisor/runtime/multi_supervisor_runner.py')
+        need(type(self.bootstrap) is dict and set(self.bootstrap) == {'task_source', 'close_task_source',
+             'process_instance_id', 'state_owner_bootstrap_credentials'} and
+             type(self.bootstrap['task_source']) is typed.TypedDatabaseTaskSource and
+             type(self.bootstrap['state_owner_bootstrap_credentials']) is credentials.StateOwnerBootstrapCredentials and
+             self.bootstrap['close_task_source'] is True, 'actual_existing_bootstrap_result_required')
+        credential = self.bootstrap['state_owner_bootstrap_credentials']
+        need(type(self.program) is programs.DatabaseProgramConfig and self.program.authority_mode == 'quack' and
+             self.program.task_source_kind == 'duckdb' and self.program.quack_endpoint == credential.endpoint and
+             self.program.store_id == credential.store_id and
+             self.bootstrap['process_instance_id'] == credential.process_birth_id,
+             'current_approved_program_and_birth_required')
+        need(self.args.state_owner_bootstrap_fd >= 3 and self.args.state_owner_client_id == credential.client_id and
+             self.args.implement is True and self.args.max_task_attempts == 1 and
+             tuple(self.args.execution_slice_task_cid) == (request['private_task_cid'],) and
+             tuple(self.args.execution_slice_task_id) == (request['private_task_alias'],),
+             'approved_private_offline_dispatch_slice_and_cap_required')
+        need(all(str(getattr(self.args, name, '')) == request[name]
+                 for name in ('database_path', 'coordination_path', 'execution_path', 'state_dir',
+                              'owner_session_id')),
+             'CLI_must_name_exact_private_paths_and_owner')
+        authority = self.bootstrap['task_source'].require_quack_authority_binding(
+            expected_endpoint=credential.endpoint, expected_process_instance_id=credential.process_birth_id,
+            bootstrap_credentials=credential)
+        stable = authority['stable_authority']
+        need(authority['store_id'] == stable['store_id'] == credential.store_id == request['private_store_id'] and
+             authority['server_id'] == credential.server_id == request['private_server_id'] and
+             stable['database_uuid'] == request['private_database_uuid'] and
+             authority['store_id'] != request['original_store_id'] and
+             stable['database_uuid'] != request['original_database_uuid'],
+             'genuine_current_bootstrap_must_bind_wholly_private_store')
+        lease = self._module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_source_lease', P_ROOT,
+            'ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_lease.py')
+        self.native_deadlines = self._module(
+            'ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler', P_ROOT,
+            'ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py')
+        try:
+            with self.native_deadlines.resource_admission_deadline(
+                    work_deadline_monotonic=request['work_deadline_monotonic'],
+                    native_deadline_monotonic=request['native_deadline_monotonic']):
+                for root in (A, P_ROOT):
+                    held = self.source_stack.enter_context(lease.source_lease(root, mode='read',
+                        timeout_seconds=min(30, self._work_remaining())))
+                    info = Path(held.lock_path).lstat()
+                    self.source_locks.append(dict(root=str(root), path=held.lock_path,
+                        device=info.st_dev, inode=info.st_ino,
+                        kernel_key=f'{os.major(info.st_dev):02x}:{os.minor(info.st_dev):02x}:{info.st_ino}'))
+                self._sources()
+                existing = self._module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.existing_resource_scheduler', P_ROOT,
+                    'ipfs_datasets_py/optimizers/logic_theorem_optimizer/existing_resource_scheduler.py')
+                parented = self._module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.parented_phase_resources', P_ROOT,
+                    'ipfs_datasets_py/optimizers/logic_theorem_optimizer/parented_phase_resources.py')
+                resource = request['resources']
+                self._work_remaining()
+                self.scheduler = existing.open_existing_scheduler(resource['scheduler_state_path'], resource['policy_sha256'])
+                wait = lambda: min(resource['admission_timeout_seconds'], self._work_remaining())
+                self.stage = 'native_root_admission'
+                self.root = self.scheduler.acquire(self.native_deadlines.ResourceLane.HAMMER_LEAN, cpu_slots=1, memory_mb=resource['memory_mb'],
+                    child_process_slots=resource['child_process_slots'], timeout=wait(), request_id=request['fixture_id']+':root')
+                self.native_ids.append(self.root.lease_id)
+                self.stage = 'native_phase_admission'
+                self.phase = self.root.acquire_child(cpu_slots=1, memory_mb=resource['memory_mb'],
+                    child_process_slots=resource['child_process_slots'], timeout=wait(), request_id=request['fixture_id']+':phase')
+                self.native_ids.append(self.phase.lease_id)
+                self.stage = 'disk_reservation_construct'
+                self.disk = parented.ParentedPhaseResourceReservation(resource['ledger_path'],
+                    roots=tuple(Path(path) for path in resource['named_roots']),
+                    attempt_directory=Path(request['attempt_directory']), parent_lease=self.phase,
+                    storage_bytes=resource['storage_bytes'], memory_mb=resource['memory_mb'],
+                    cpu_slots=1, child_process_slots=resource['child_process_slots'], scheduler_state_path=resource['scheduler_state_path'],
+                    expected_scheduler_policy_sha256=resource['policy_sha256'], timeout_seconds=self._remaining(),
+                    ledger_lock_timeout_seconds=min(resource['ledger_lock_timeout_seconds'], self._work_remaining()))
+                self._work_remaining(); self.stage = 'disk_reservation_enter'
+                try:
+                    self.disk.__enter__()
+                except BaseException as entry_error:
+                    # Preserve the original admission/entry exception and any
+                    # pending-SDK marker even if local handle tracking fails.
+                    try:
+                        self._remember_actual_disk_native()
+                    except BaseException as tracking_error:
+                        entry_error.private_M1_tracking_error_type = type(tracking_error).__name__
+                    raise
+                else:
+                    self.disk_entered = True
+                    self._remember_actual_disk_native()
+                allocation = self._module('ipfs_accelerate_py.llm_allocation.duckdb_store', A,
+                    'ipfs_accelerate_py/llm_allocation/duckdb_store.py')
+                self.stage = 'allocation_schema_construct'
+                self.store = allocation.AllocationStore(Path(request['allocation_store_path']))
+                self._work_remaining()
+                self.store.list_api_key_slots('grok_cli')
+                need(self.store._ready is True, 'genuine_private_DuckDB_schema_required')
+                os.environ['IPFS_ACCELERATE_LLM_ALLOCATION_DB'] = str(self.store.path)
+                self.allocation_env_installed = True
+                self._work_remaining()
+                self.stage = 'database_daemon_construct'
+                self.daemon = daemon.DatabaseImplementationDaemon(database_path=Path(request['database_path']),
+                    coordination_path=Path(request['coordination_path']), execution_path=Path(request['execution_path']),
+                    state_dir=Path(self.args.state_dir), state_prefix=str(self.args.state_prefix),
+                    owner_session_id=str(self.args.owner_session_id), authority_mode='quack', task_source_kind='duckdb',
+                    quack_uri=credential.endpoint, require_real_execution=True, max_task_attempts=1,
+                    execution_slice_task_cids=(request['private_task_cid'],),
+                    execution_slice_task_ids=(request['private_task_alias'],), **self.bootstrap)
+                modules = {}
+                for short in ('grok_production_owner', 'grok_existing_phase_owner', 'grok_owned_unix_socket',
+                              'grok_production_owner_server', 'grok_production_handoff', 'grok_same_pid_owner_profile'):
+                    modules[short] = self._module('ipfs_accelerate_py.cli_runtime.'+short, A,
+                        'ipfs_accelerate_py/cli_runtime/'+short+'.py')
+                self._work_remaining(); self.stage = 'same_pid_profile_module_preload'
+                self._module('ipfs_accelerate_py.agent_supervisor.todo_daemon.database_portal_bridge', A,
+                    'ipfs_accelerate_py/agent_supervisor/todo_daemon/database_portal_bridge.py')
+                self.stage = 'same_pid_profile_construct'
+                self.profile = modules['grok_same_pid_owner_profile'].ExistingSamePidOwnerProfile(
+                    core=modules['grok_production_owner'], factory_module=modules['grok_existing_phase_owner'],
+                    listener_module=modules['grok_owned_unix_socket'], server_module=modules['grok_production_owner_server'],
+                    handoff_module=modules['grok_production_handoff'], database_owner=self.daemon, allocation_store=self.store,
+                    root=self.root, phase=self.phase, disk=self.disk, source_roots=(A, P_ROOT),
+                    source_pins=dict(request['source_sha256']), source_locks=tuple(self.source_locks),
+                    source_profile_pin=dict(request['source_profile_pin']), capsule_pin=dict(request['capsule_pin']),
+                    source_generation=request['source_generation'], worker_path=Path(request['worker_path']),
+                    socket_parent=Path(request['socket_parent']), allocation_session_id=request['allocation_session_id'],
+                    credential_slot=request['credential_slot'], credential_fingerprint=request['credential_fingerprint'],
+                    work_deadline_monotonic=request['work_deadline_monotonic'],
+                    native_deadline_monotonic=request['native_deadline_monotonic'], expected_task_cid=request['private_task_cid'])
+                runner = self._module('ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon_runner', A,
+                    'ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon_runner.py')
+                self.bridge = runner.bind_database_portal_execution_from_args(self.daemon, self.args,
+                    repo_root=Path.cwd(), portal_daemon_class=daemon.PortalImplementationDaemon,
+                    provider_handoff_binder=self.bind_portal_attempt, max_passes=1)
+                need(type(self.bridge) is self.profile.bridge_module.DatabasePortalExecutionBridge and
+                     self.bridge.provider_handoff_binder == self.bind_portal_attempt and
+                     self.bridge.max_passes == self.bridge.max_task_attempts == 1 and
+                     self.daemon.execution_callbacks_bound, 'exact_one_pass_genuine_callbacks_required')
+                self._work_remaining()
+                observation = bootstrap.observe_typed_database_without_dispatch(self.daemon)
+                need(observation['attempt_consumed'] is False and observation['write_count'] == 0 and
+                     observation['provider_dispatched'] is False, 'setup_must_not_dispatch_before_explicit_once')
+                # Use the existing genuine credential-bound reader. Keep its
+                # connection and producer activity inside this composition's
+                # actual native/source custody until ordinary owner STOP.
+                self.native_owner_heartbeat = bootstrap.NativeOwnerHeartbeat(
+                    credentials=credential, state_dir=Path(self.args.state_dir),
+                    state_prefix=str(self.args.state_prefix))
+                self._work_remaining(); self.stage = 'native_heartbeat_start'
+                self.native_owner_heartbeat.start()
+                self.stage = 'final_strict_attempt_check'
+                self.disk.check_usage(self.disk.directory, full=True)
+                self._work_remaining(); self._sources(); self.constructed = True
+                self.stage = 'constructed'
+                return dict(schema='private-M1-setup-observation/v1', fixture_id=request['fixture_id'],
+                    same_pid=os.getpid(), offline_only=True, actual_same_pid_profile_constructed=True,
+                    native_ids=list(self.native_ids), actual_source_lock_count=len(self.source_locks),
+                    typed_owner_ready_task_count=observation['ready_task_count'],
+                    private_store_id=authority['store_id'], private_database_uuid=stable['database_uuid'],
+                    private_server_id=authority['server_id'],
+                    task_claimed=False, provider_dispatched=False, full_transport_qualified=False,
+                    production_qualified=False, original_task_selected=False, Lean_admitted=False)
+        except BaseException as error:
+            self.failure = type(error).__name__
+            if getattr(error, 'resource_admission_cleanup_pending', False):
+                # Retain the actual SDK object/request outcome, not a JSON grant.
+                self.pending_admission_error = error
+            raise
+
+    def require_current(self):
+        self._work_remaining()
+        native = self.native_deadlines
+        need(native is not None and self.constructed and not self.closed,
+             'actual_constructed_M1_owner_required')
+        with native.resource_admission_deadline(
+                work_deadline_monotonic=self.request['work_deadline_monotonic'],
+                native_deadline_monotonic=self.request['native_deadline_monotonic']):
+            self._sources()
+            need(not self.root.released and not self.root.cancelled and
+                 not self.phase.released and not self.phase.cancelled and not self.disk.cancelled,
+                 'genuine_original_M1_resources_not_current')
+            self.disk.check_usage(self.disk.directory)
+            credential = self.bootstrap['state_owner_bootstrap_credentials']
+            authority = self.bootstrap['task_source'].require_quack_authority_binding(
+                expected_endpoint=credential.endpoint, expected_process_instance_id=credential.process_birth_id,
+                bootstrap_credentials=credential)
+            need(authority['store_id'] == self.request['private_store_id'] and
+                 authority['stable_authority']['database_uuid'] == self.request['private_database_uuid'],
+                 'genuine_private_M1_bootstrap_changed')
+            self._work_remaining()
+
+    def bind_portal_attempt(self, *, portal_daemon, attempt, paths, binding):
+        self.require_current()
+        self.profile.bind_portal_attempt(portal_daemon=portal_daemon, attempt=attempt,
+                                         paths=paths, binding=binding)
+        need(portal_daemon.production_owner_handoff_factory == self.profile.prepare_handoff,
+             'actual_profile_must_install_its_real_public_factory')
+        # Configure the existing public owner-only factory seam, not a class,
+        # function or SDK method replacement. The genuine profile remains the
+        # constructor of the actual claim/native-bound handoff.
+        portal_daemon.production_owner_handoff_factory = self.prepare_offline_handoff
+
+    def prepare_offline_handoff(self, **kwargs):
+        self.require_current()
+        handoff = self.profile.prepare_handoff(**kwargs)
+        self.bind_offline_handoff(handoff)
+        return handoff
+
+    def bind_offline_handoff(self, handoff):
+        self.require_current()
+        need(handoff is self.profile.handoff and handoff.owner._owner is self.daemon and
+             handoff.owner._root is self.root and handoff.owner._phase is self.phase and
+             handoff.owner._disk is self.disk and handoff.allocation_store is self.store and
+             not self.worker_metadata, 'one_actual_owned_offline_handoff_required')
+        A = Path(self.request['source_roots'][0])
+        worker = self._module('ipfs_accelerate_py.cli_runtime.grok_private_m1_offline_worker', A,
+            'ipfs_accelerate_py/cli_runtime/grok_private_m1_offline_worker.py')
+        checker = self._module('ipfs_accelerate_py.cli_runtime.grok_private_m1_offline_check', A,
+            'ipfs_accelerate_py/cli_runtime/grok_private_m1_offline_check.py')
+        pin = lambda path: dict(path=str(path), bytes=Path(path).stat().st_size,
+                                sha256=source_digest(path))
+        binding = handoff.binding
+        value = dict(schema=worker.SCHEMA, mode='offline-ACK-only', one_shot=True, attempt_cap=1,
+            provider_dispatch_allowed=False, private_task_alias=self.request['private_task_alias'],
+            database_task_cid=binding['database_task_cid'], allocation_session_id=binding['allocation_session_id'],
+            accelerator_root=str(A), workspace=binding['workspace'],
+            receipt_directory=str(handoff.server.context_path.parent), source_generation=binding['source_generation'],
+            work_deadline_monotonic=self.request['work_deadline_monotonic'],
+            native_deadline_monotonic=self.request['native_deadline_monotonic'],
+            worker_pin=pin(self.request['worker_path']), owner_client_pin=pin(self.profile.core.__file__),
+            source_profile_pin=dict(self.request['source_profile_pin']), capsule_pin=dict(self.request['capsule_pin']))
+        worker.validate_request(value)
+        raw = worker.canonical(value)
+        need(len(raw) <= worker.MAX_REQUEST, 'bounded_real_offline_worker_request_required')
+        descriptor = os.memfd_create('approved-private-M1-offline-worker', os.MFD_CLOEXEC | os.MFD_ALLOW_SEALING)
+        # Retain the actual descriptor before any fallible write/bind. An
+        # unknown launch/cleanup never closes it from a replacement object.
+        record = dict(descriptor=descriptor, request=value)
+        self.worker_metadata.append(record)
+        written = 0
+        while written < len(raw):
+            self._work_remaining()
+            count = os.write(descriptor, raw[written:]); need(count > 0, 'worker_metadata_write_failed')
+            written += count
+        fcntl.fcntl(descriptor, fcntl.F_ADD_SEALS, worker.SEALS)
+        record['sha256'] = hashlib.sha256(raw).hexdigest()
+        need(worker.read_sealed_request(descriptor, record['sha256']) == value,
+             'actual_sealed_worker_metadata_readback_required')
+        self.offline_metadata_descriptor = descriptor
+        self.offline_metadata_request_sha256 = record['sha256']
+        handoff.bind_private_offline_metadata(issuer=self, descriptor=descriptor,
+            request_sha256=record['sha256'], worker_module=worker, checker_module=checker)
+
+    def dispatch_once(self):
+        need(self.constructed and not self.closed and not self.dispatch_started,
+             'one_actual_M1_database_pass_only')
+        self.require_current()
+        self.dispatch_started = True
+        self.stage = 'actual_database_run_once'
+        error = None
+        outcome = None
+        try:
+            with self.native_deadlines.resource_admission_deadline(
+                    work_deadline_monotonic=self.request['work_deadline_monotonic'],
+                    native_deadline_monotonic=self.request['native_deadline_monotonic']):
+                self.database_run_once_called = True
+                outcome = self.daemon.run_once()
+        except BaseException as caught:
+            error = caught
+        # A caught exception or a run_once dict is never accepted as an ACK.
+        # Only the real handoff's stored FIRST-callback checker observation
+        # permits this negative diagnostic. It still cannot complete the task.
+        try:
+            observed = self.profile.handoff.private_offline_observation()
+        except BaseException:
+            if error is not None:
+                raise error
+            raise
+        need(type(observed) is dict and observed.get('actual_first_handoff_missing_capture_refusal') is True and
+             observed.get('actual_listener_closed') is True and observed.get('actual_capture_accepted') is False and
+             observed.get('task_completion_accepted') is False and observed.get('native_qualified') is False,
+             'genuine_offline_negative_observation_required')
+        handoff = self.profile.handoff
+        attempt = self.daemon.get_attempt(self.profile._attempt.attempt_id)
+        daemon_module = sys.modules['ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon']
+        need(type(attempt) is daemon_module.DatabaseTaskAttempt and
+             attempt.task_cid == self.request['private_task_cid'] and
+             attempt.task_alias == self.request['private_task_alias'] and
+             type(attempt.attempt_number) is int and attempt.attempt_number == 1 and
+             attempt.status in {'running', 'failed'}, 'actual_private_noncompletion_attempt_required')
+        callback = self.daemon.provider_invocation_recorded(attempt.attempt_id,
+            idempotency_key='provider:' + attempt.attempt_id)
+        need(type(callback) is dict and callback.get('callback_state') in
+             {'started_outcome_unknown', 'failed_outcome_settled'},
+             'actual_private_callback_disposition_required')
+        # The genuine zero-exit worker's negative FIRST callback is not an
+        # eligible native nonzero-exit settlement. Preserve RUNNING/UNKNOWN;
+        # never invoke planning abandonment or synthesize a FAILED row.
+        private = handoff._private_offline
+        need(type(private) is dict and len(self.worker_metadata) == 1,
+             'one_actual_retained_worker_metadata_required')
+        worker_request = private['worker'].decode(private['request_bytes'])
+        need(worker_request == self.worker_metadata[0]['request'],
+             'same_actual_retained_worker_request_required')
+        def pin(path):
+            path = Path(path)
+            value = dict(path=str(path), bytes=path.stat().st_size, sha256=source_digest(path))
+            read_pin(value)
+            return value
+        identity = {name:getattr(attempt, name) for name in (
+            'attempt_id','claim_id','task_cid','task_alias','attempt_number','owner_session_id',
+            'fencing_token','fence_epoch','lease_id','committed_phase','status','revision')}
+        self.offline_result = observed
+        self.dispatch_finished = True
+        self.stage = 'actual_offline_negative_observed'
+        self._work_remaining(); self._sources()
+        return dict(schema='private-M1-offline-negative-observation/v1', fixture_id=self.request['fixture_id'],
+            actual_database_run_once=True, actual_offline_handoff_observation=dict(observed),
+            actual_attempt=identity, actual_callback_state=callback['callback_state'],
+            actual_run_once_returned=error is None, actual_run_once_return_type=type(outcome).__name__,
+            actual_run_once_error_type=(type(error).__name__ if error is not None else None),
+            original_parent_stdin_commitment=dict(private['stdin']),
+            worker_request=dict(worker_request), worker_request_sha256=self.worker_metadata[0]['sha256'],
+            worker_context_pin=pin(handoff.server.context_path),
+            worker_observation_pin=pin(handoff.server.context_path.parent/'offline-ACK.json'),
+            owner_rpc_observation_directory=str(handoff.server.observation_directory),
+            ACK_transport_observed=True, terminal_FAILED_attempt_observed=attempt.status == 'failed',
+            full_M1_qualification=False, pending_settlement_contract_required=attempt.status != 'failed',
+            task_completion_accepted=False, paid_provider_calls=0, attempt_cap=1,
+            original_task_selected=False, production_qualified=False, Lean_admitted=False)
+
+    def close(self, *, artifacts_durable):
+        """Explicit stopped cleanup; preserve this object on every unknown.
+
+        The approved parent owns and precharges durable receipts separately.
+        It must persist observations before selecting artifacts_durable=True.
+        No new resource grant or task retry occurs in this method.
+        """
+        need(artifacts_durable is True and not self.closed, 'durable_explicit_stopped_cleanup_required')
+        need(os.getpid() == self.pid and threading.get_ident() == self.thread, 'original_child_thread_required')
+        try:
+            need(self.pending_admission_error is None, 'actual_native_admission_retirement_unproven')
+            cleanup_scope = (self.native_deadlines.resource_cleanup_deadline(
+                native_deadline_monotonic=self.request['native_deadline_monotonic'])
+                if self.native_deadlines is not None else nullcontext())
+            with cleanup_scope:
+                self.stage = 'heartbeat_and_daemon_stopped_cleanup'
+                if self.native_owner_heartbeat is not None:
+                    self.native_owner_heartbeat.close()
+                    thread = self.native_owner_heartbeat.thread
+                    need((thread is None or not thread.is_alive()) and
+                         not self.native_owner_heartbeat.client.attached,
+                         'actual_native_owner_heartbeat_cleanup_unproven')
+                if self.profile is not None:
+                    self.profile.close_retained_listener_after_failure()
+                for record in self.worker_metadata:
+                    if 'closed' not in record:
+                        os.close(record['descriptor']); record['closed'] = True
+                self.offline_metadata_descriptor = None
+                self.offline_metadata_request_sha256 = None
+                if self.daemon is not None:
+                    self.daemon.close()
+                elif type(self.bootstrap) is dict and 'task_source' in self.bootstrap:
+                    self.bootstrap['task_source'].close()
+                if self.disk is not None and not self.disk_closed:
+                    self.stage = 'disk_owned_stopped_cleanup'
+                    self._close_owned_disk()
+                for resource in (self.phase, self.root):
+                    if resource is not None and not resource.released:
+                        need(resource.release(), 'actual_native_release_refused')
+                if hasattr(self, 'scheduler'):
+                    need(not any(row.get('lease_id') in self.native_ids for row in self.scheduler.active_leases()),
+                         'selected_native_ids_still_active')
+                self._sources()
+                if self.allocation_env_installed:
+                    need(os.environ.get('IPFS_ACCELERATE_LLM_ALLOCATION_DB') == self.request['allocation_store_path'],
+                         'allocation_environment_changed_before_release')
+                    present, value = self.previous_allocation_env
+                    if present:
+                        os.environ['IPFS_ACCELERATE_LLM_ALLOCATION_DB'] = value
+                    else:
+                        os.environ.pop('IPFS_ACCELERATE_LLM_ALLOCATION_DB', None)
+                    self.allocation_env_installed = False
+                self.source_stack.close()
+                locks = [line.split() for line in Path('/proc/locks').read_text().splitlines()]
+                for row in self.source_locks:
+                    info = Path(row['path']).lstat()
+                    need((info.st_dev, info.st_ino) == (row['device'], row['inode']) and
+                         not any('->' not in record and len(record) >= 6 and
+                             record[4] == str(self.pid) and record[5] == row['kernel_key'] for record in locks),
+                         'actual_original_kernel_source_lock_release_unproven')
+                self.source_closed = True; self.closed = True
+                self.stage = 'closed'
+                _RETAINED.remove(self)
+                return dict(schema='private-same-pid-M1-child-closure/v1', fixture_id=self.request['fixture_id'],
+                    offline_only=True, actual_constructed=self.constructed,
+                    actual_database_run_once=self.database_run_once_called, actual_offline_negative_observed=self.dispatch_finished,
+                    actual_task_attempt_bound=(self.profile is not None and self.profile._attempt is not None),
+                    actual_worker_started=(self.profile is not None and self.profile._handoff is not None and
+                        self.profile._handoff._process is not None),
+                    selected_native_ids=list(self.native_ids), selected_native_ids_absent=True,
+                    disk_reservation_id=(self.disk.reservation_id if self.disk is not None else None),
+                    actual_source_locks=list(self.source_locks), actual_source_locks_released=True,
+                    actual_worker_metadata_descriptors_closed=all(record.get('closed') is True for record in self.worker_metadata),
+                    task_completion_accepted=False, paid_provider_calls=0,
+                    original_task_selected=False, production_qualified=False, Lean_admitted=False)
+        except BaseException as error:
+            self.failure = type(error).__name__
+            # Preserve actual objects and any still-held locks/leases. The
+            # caller must retain the live approved child and reconcile closure.
+            raise FixtureClosureUnknown('M1_closure_unproven_live_composition_retained') from error

@@ -1,0 +1,226 @@
+"""Offline public-source transport qualification; no repair-success assertions."""
+import argparse
+import difflib
+import json
+from pathlib import Path
+import shutil
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE))
+import repository_runtime_v2 as R
+import repository_retrieval_v2 as Q
+from build_original_corpus_v1 import configurations
+
+EVALS = HERE.parent.parent
+
+
+def save(path, value):
+    with Path(path).open("xb") as stream:
+        stream.write(R.canonical(value) + b"\n")
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--corpus", type=Path, required=True)
+    parser.add_argument("--output", type=Path, required=True)
+    args = parser.parse_args()
+    out = args.output.resolve()
+    out.mkdir(parents=True, exist_ok=False)
+    checks = []
+    start = time.perf_counter()
+
+    def check(name, passed):
+        checks.append({"name": name, "passed": bool(passed)})
+        if not passed:
+            raise AssertionError(name)
+
+    def rejects(name, fn):
+        try:
+            fn()
+        except (ValueError, TypeError, KeyError):
+            check(name, True)
+        else:
+            check(name, False)
+
+    sources = [Path(__file__), HERE / "repository_runtime_v2.py", HERE / "repository_retrieval_v2.py", HERE / "build_original_corpus_v1.py"]
+    for source in sources:
+        shutil.copy2(source, out / source.name)
+    corpus = json.loads(args.corpus.read_bytes())
+    reqprofile = json.loads((HERE / "requests-cold-v2/profile.json").read_bytes())
+    zarr = EVALS / "recruitment/rebench_environment_v1/zarr/candidate_endpoint_v1"
+    zreg = json.loads((zarr / "registry_v2.json").read_bytes())
+    tasks = []
+    for task in corpus["tasks"]:
+        tasks.append({**task, "id": task["task_id"], "policy": task["source_policy"], "format": "original"})
+    for task_id, task in reqprofile["tasks"].items():
+        names = [row["path"] for row in R.inventory(task["source_root"])["entries"] if row["path"].startswith("requests/") and row["path"].endswith(".py")]
+        tasks.append({**task, "id": task_id, "policy": R.policy_for(task["source_root"], names, names, mode_policy="git_apply_umask_0022"), "format": "masked"})
+    for task_id, task in zreg["tasks"].items():
+        root = zarr / task["public_projection"] / "source"
+        names = [row["path"] for row in R.inventory(root)["entries"] if row["path"].startswith("src/zarr/") and row["path"].endswith(".py")]
+        edit = [name for name in names if name not in task["generated_source_paths"]]
+        tasks.append({**task, "source_root": str(root), "id": task_id, "generated_paths": task["generated_source_paths"],
+                      "policy": R.policy_for(root, names, edit, mode_policy="git_apply_umask_0022"), "format": "raw_stat"})
+    save(out / "freeze.json", {"schema": "ns-generic-source-transport-qualification-freeze/v2", "created_at_ns": time.time_ns(),
+                               "sources": {str(p): R.sha(p.read_bytes()) for p in sources}, "corpus_sha256": R.sha(args.corpus.read_bytes()),
+                               "tasks": tasks, "provider_calls": 0, "scorer_calls": 0, "public_only": True,
+                               "operations": ["exact no-op/comment/revert on all 8 public bases", "three retained mode-only reversions",
+                                              "Requests and Zarr actual public Git carry/conflict/failure", "path and drift rejection",
+                                              "whole-wire and UTF-8/CRLF/no-EOF-newline controls"],
+                               "authored_candidates_are_not_repair_successes": True})
+    pristine = {task["id"]: R.inventory(task["source_root"]) for task in tasks}
+    try:
+        for task in tasks:
+            root = Path(task["source_root"])
+            policy = task["policy"]
+            directory = out / task["id"]
+            directory.mkdir()
+            name = policy["edit_paths"][0]
+            source = R.text(root / name)
+            first = R.materialize_candidate(root, root, directory / "noop", policy, expected_current_tree_sha256=pristine[task["id"]]["tree_sha256"])
+            check(task["id"] + ":noop_full_inventory_exact", first["source_tree"] == pristine[task["id"]] and not first["patch"])
+            comment = "\n# Public generic transport qualification only.\n"
+            changed = R.materialize_candidate(root, root, directory / "comment", policy, expected_current_tree_sha256=pristine[task["id"]]["tree_sha256"],
+                                              edits=[{"path": name, "old": source, "new": source + comment}])
+            check(task["id"] + ":comment_exact_bytes", (directory / "comment" / name).read_bytes() == (source + comment).encode())
+            check(task["id"] + ":comment_nonempty_cumulative_patch", bool(changed["patch"]))
+            again = R.materialize_candidate(root, directory / "comment", directory / "replay", policy, expected_current_tree_sha256=changed["source_tree"]["tree_sha256"])
+            check(task["id"] + ":independent_cumulative_replay_exact", again["source_tree"] == changed["source_tree"] and again["patch"] == changed["patch"])
+            reverted = R.materialize_candidate(root, directory / "comment", directory / "reverted", policy, expected_current_tree_sha256=changed["source_tree"]["tree_sha256"],
+                                               edits=[{"path": name, "old": source + comment, "new": source}])
+            check(task["id"] + ":reversion_restores_all_pristine_bytes_and_modes", reverted["source_tree"] == pristine[task["id"]] and reverted["patch"] == "")
+            mode = next(row["mode"] for row in changed["source_tree"]["entries"] if row["path"] == name)
+            base_mode = (root / name).stat().st_mode & 0o7777
+            expected_mode = base_mode if policy["mode_policy"] == "preserve_base_modes" else (0o755 if base_mode & 0o111 else 0o644)
+            check(task["id"] + ":explicit_scorer_raw_mode_policy", mode == expected_mode)
+            rejects(task["id"] + ":wrong_current_receipt_rejected", lambda: R.materialize_candidate(root, directory / "comment", directory / "wrong", policy, expected_current_tree_sha256="0" * 64))
+            check(task["id"] + ":retained_candidate_replay_exact", R.materialize_candidate(root, root, directory / "noop", policy, expected_current_tree_sha256=pristine[task["id"]]["tree_sha256"])["source_tree"] == first["source_tree"])
+            if task["format"] == "raw_stat":
+                expected = json.loads((root.parent / "source_inventory.json").read_bytes())
+                check(task["id"] + ":exact_zarr_raw_stat_inventory", R.raw_stat_inventory(root)["entries"] == expected["entries"] and R.raw_stat_inventory(root)["tree_sha256"] == expected["tree_sha256"])
+                for generated in task["generated_paths"]:
+                    check(task["id"] + ":generated_overlay_unchanged", (directory / "comment" / generated).read_bytes() == (root / generated).read_bytes())
+                    rejects(task["id"] + ":generated_edit_rejected", lambda: R.production(root, generated, policy, edit=True))
+            if task["format"] == "original":
+                adapter = R.original_adapter_inventory(directory / "comment")
+                check(task["id"] + ":original_adapter_complete_population", set(adapter) == {row["path"] for row in pristine[task["id"]]["entries"]})
+                check(task["id"] + ":original_adapter_complete_raw_modes", all(row["mode"] == adapter[row["path"]]["mode"] for row in pristine[task["id"]]["entries"] if row["kind"] == "file"))
+                check(task["id"] + ":configuration_is_actual_distinct_api_input", configurations(task["id"])[0] != configurations(task["id"])[1])
+            wire = lambda source_rows: R.canonical({"model": "grok-4.6", "messages": [{"role": "user", "content": R.canonical({"objective": "Public transport qualification", "sources": source_rows}).decode()}], "max_tokens": 2048, "reasoning_effort": "low", "stream": False, "response_format": {"type": "json_object"}})
+            selected = Q.select(root, "Public transport qualification", [name], 3, 48000, 65536, wire, policy)
+            if len(source.encode()) <= 48000 and len(wire(Q.sources_for(root, [name], policy))) <= 65536:
+                check(task["id"] + ":mandatory_complete_within_actual_wire", selected["admitted"] and name in [s["path"] for s in selected["sources"]] and selected["source_count"] <= 3 and selected["source_bytes"] <= 48000 and selected["wire_bytes"] <= 65536)
+            else:
+                check(task["id"] + ":oversized_mandatory_explicitly_pending", not selected["admitted"] and selected["sources"][0]["source"] == source)
+            save(directory / "retrieval.json", selected)
+            save(directory / "comment_transport.json", changed)
+
+        # Every original mode-only failure remains unchanged; no retrospective grading.
+        diagnosis = json.loads((HERE / "requests-cold-v2/all_mode_transport_failures_v1.json").read_bytes())
+        req = next(task for task in tasks if task["id"] == "psf__requests-6028")
+        for row in diagnosis["rows"]:
+            current = HERE / "requests-cold-v2/state/events" / row["event_id"] / ("residual_candidate_" + str(row["ordinal"]))
+            observed = R.inventory(current)
+            check(row["event_id"] + ":retained_mode_failure_" + str(row["ordinal"]), observed["tree_sha256"] == row["candidate_tree_sha256"])
+            result = R.materialize_candidate(req["source_root"], current, out / (row["event_id"] + "_" + str(row["ordinal"])), req["policy"], expected_current_tree_sha256=observed["tree_sha256"])
+            check(row["event_id"] + ":prospective_replay_restores_pristine_" + str(row["ordinal"]), not result["patch"] and result["source_tree"] == pristine[req["id"]])
+            check(row["event_id"] + ":historical_failure_unchanged_" + str(row["ordinal"]), R.inventory(current) == observed)
+
+        fixture = out / "exact_text_base"
+        fixture.mkdir()
+        bodies = {"a.py": b"value = '\xc3\xa9'\r\nlast = 1\r\n", "no_eof.py": b"value = 1", "same.py": b"value = 1", "with space.py": b"value = 2\n"}
+        for name, body in bodies.items():
+            (fixture / name).write_bytes(body)
+            (fixture / name).chmod(0o664)
+        (fixture / "local_link").symlink_to("a.py")
+        policy = R.policy_for(fixture, list(bodies), list(bodies), mode_policy="git_apply_umask_0022")
+        for index, name in enumerate(bodies):
+            old = R.text(fixture / name)
+            new = old.replace("1", "3") if "1" in old else old.replace("2", "3")
+            result = R.materialize_candidate(fixture, fixture, out / ("text_case_" + str(index)), policy, expected_current_tree_sha256=R.inventory(fixture)["tree_sha256"], edits=[{"path": name, "old": old, "new": new}])
+            check("exact_utf8_crlf_eof_space:" + name, (out / ("text_case_" + str(index)) / name).read_bytes() == new.encode())
+        rejects("traversal_guard", lambda: R.production(fixture, "../a.py", policy))
+        rejects("normalized_path_guard", lambda: R.production(fixture, "./a.py", policy))
+        rejects("symlink_source_guard", lambda: R.policy_for(fixture, ["local_link"], ["local_link"], mode_policy="preserve_base_modes"))
+        rejects("nonproduction_guard", lambda: R.production(fixture, "outside.py", policy))
+        rejects("unknown_mode_policy", lambda: R.policy_for(fixture, ["a.py"], ["a.py"], mode_policy="unknown"))
+        rejects("closed_edit_schema_mode_field", lambda: R.replacement_edits(fixture, [{"path": "a.py", "old": "last = 1", "new": "last = 3", "mode": 0o777}], policy))
+        rejects("ambiguous_replacement", lambda: R.replacement_edits(fixture, [{"path": "a.py", "old": "\r\n", "new": "\n"}], policy))
+        wire = lambda rows: R.canonical({"sources": rows, "feedback": "quotes \" newline\n nonascii \u00e9"})
+        selected = Q.sources_for(fixture, ["a.py"], policy)
+        measured = Q.measure(selected, wire)
+        check("UTF8_bytes_not_characters", measured["source_bytes"] > len(selected[0]["source"]))
+        exact = Q.select(fixture, "", ["a.py"], 1, measured["source_bytes"], measured["wire_bytes"], wire, policy)
+        check("exact_file_raw_wire_caps_admit", exact["admitted"] and exact["sources"] == selected)
+        for cap in ("files", "raw", "wire"):
+            caps = [1, measured["source_bytes"], measured["wire_bytes"]]
+            if cap == "files":
+                result = Q.select(fixture, "", ["a.py", "same.py"], *caps, wire, policy)
+            else:
+                caps[1 if cap == "raw" else 2] -= 1
+                result = Q.select(fixture, "", ["a.py"], *caps, wire, policy)
+            check("mandatory_oversize_preserved:" + cap, not result["admitted"] and "a.py" in result["mandatory_paths"])
+        expanded = Q.expand(fixture, ["same.py"], ["a.py"], 65536, wire, policy)
+        check("expansion_retains_mandatory", expanded["admitted"] and {r["path"] for r in expanded["sources"]} == {"a.py", "same.py"})
+        pending = Q.expand(fixture, ["same.py"], ["a.py"], measured["wire_bytes"], wire, policy)
+        check("oversized_expansion_not_truncated", not pending["admitted"] and len(pending["sources"]) == 2)
+        rejects("expansion_malformed_path", lambda: Q.expand(fixture, [[]], ["a.py"], 65536, wire, policy))
+        rejects("expansion_duplicate_path", lambda: Q.expand(fixture, ["a.py", "a.py"], [], 65536, wire, policy))
+
+        for old_id, new_id, graph in [
+            ("psf__requests-5414", "psf__requests-6028", EVALS / "recruitment/ancestry_v1/psf__requests/graph.git"),
+            ("zarr-developers__zarr-python-2996", "zarr-developers__zarr-python-3015", EVALS / "recruitment/rebench_ancestry_v1/zarr-developers__zarr-python/graph.git")]:
+            old = next(t for t in tasks if t["id"] == old_id)
+            new = next(t for t in tasks if t["id"] == new_id)
+            stable = next(name for name in old["policy"]["edit_paths"] if name in new["policy"]["edit_paths"] and (Path(old["source_root"]) / name).read_bytes() == (Path(new["source_root"]) / name).read_bytes())
+            old_body = R.text(Path(old["source_root"]) / stable)
+            directory = out / (old_id + "_actual_git")
+            directory.mkdir()
+            changed = R.materialize_candidate(old["source_root"], old["source_root"], directory / "authored_parent", old["policy"], expected_current_tree_sha256=pristine[old_id]["tree_sha256"], edits=[{"path": stable, "old": old_body, "new": old_body + "\n# Authored carry check only.\n"}])
+            parent = {"accepted": True, "accepted_tree_path": str(directory / "authored_parent"), "accepted_tree_sha256": changed["source_tree"]["tree_sha256"], "fixture_only": True}
+            transition = R.advance_source(old, new, parent, directory / "merged", graph=graph, old_policy=old["policy"], new_policy=new["policy"])
+            save(directory / "transition.json", transition)
+            check(old_id + ":actual_git_three_way_carries_source", transition["kind"] == "actual_git_three_way_merge" and not transition["conflicts"] and R.text(directory / "merged" / stable).endswith("# Authored carry check only.\n"))
+            for name in new.get("generated_paths", []):
+                check(old_id + ":new_generated_overlay_exact", (directory / "merged" / name).read_bytes() == (Path(new["source_root"]) / name).read_bytes())
+            failed = R.advance_source(old, new, {"accepted": False}, directory / "failed_parent", graph=graph, old_policy=old["policy"], new_policy=new["policy"])
+            check(old_id + ":failed_parent_only_public_advance", failed["prior_outcome_preserved"] and not failed["prior_accepted"] and R.inventory(directory / "failed_parent") == pristine[new_id])
+            name = next(name for name in old["policy"]["edit_paths"] if name in new["policy"]["edit_paths"] and (Path(old["source_root"]) / name).read_bytes() != (Path(new["source_root"]) / name).read_bytes())
+            before = R.text(Path(old["source_root"]) / name).splitlines(keepends=True)
+            after = R.text(Path(new["source_root"]) / name).splitlines(keepends=True)
+            operation = next(row for row in difflib.SequenceMatcher(a=before, b=after).get_opcodes() if row[0] in ("replace", "delete") and row[2] > row[1])
+            changed_body = "".join(before[:operation[1]]) + "# Authored conflicting source only.\n" + "".join(before[operation[1] + 1:])
+            changed = R.materialize_candidate(old["source_root"], old["source_root"], directory / "conflict_parent", old["policy"], expected_current_tree_sha256=pristine[old_id]["tree_sha256"], edits=[{"path": name, "old": "".join(before), "new": changed_body}])
+            parent = {**parent, "accepted_tree_path": str(directory / "conflict_parent"), "accepted_tree_sha256": changed["source_tree"]["tree_sha256"]}
+            conflict = R.advance_source(old, new, parent, directory / "conflict", graph=graph, old_policy=old["policy"], new_policy=new["policy"])
+            save(directory / "conflict_transition.json", conflict)
+            check(old_id + ":actual_merge_conflicts_retained", name in conflict["conflicts"] and "<<<<<<< " in R.text(directory / "conflict" / name))
+            drift = directory / "mismatched_new_export"
+            R.copy_public(new["source_root"], drift)
+            (drift / stable).write_bytes((drift / stable).read_bytes() + b"\n# Claimed new export drift.\n")
+            drift_policy = R.policy_for(drift, new["policy"]["read_paths"], new["policy"]["edit_paths"], mode_policy=new["policy"]["mode_policy"])
+            drift_task = {**new, "source_root": str(drift)}
+            rejects(old_id + ":mismatched_new_upstream_export_rejected_even_with_matching_local_policy", lambda: R.advance_source(old, drift_task, parent, directory / "drift_carry", graph=graph, old_policy=old["policy"], new_policy=drift_policy))
+            rejects(old_id + ":failed_parent_does_not_authorize_mismatched_new_export", lambda: R.advance_source(old, drift_task, {"accepted": False}, directory / "drift_failed", graph=graph, old_policy=old["policy"], new_policy=drift_policy))
+            check(old_id + ":new_upstream_authenticated_independently", transition["new_public_source_authentication"]["base_commit"] == new["base_commit"] and failed["new_public_source_authentication"]["upstream_tree_oid"] == transition["new_public_source_authentication"]["upstream_tree_oid"])
+
+        for task in tasks:
+            check(task["id"] + ":entire_public_base_unchanged", R.inventory(task["source_root"]) == pristine[task["id"]])
+        for source in sources:
+            check("qualification_source_stable:" + source.name, R.sha(source.read_bytes()) == R.sha((out / source.name).read_bytes()))
+        summary = {"schema": "ns-generic-source-transport-qualification/v2", "passed": True, "checks": checks,
+                   "public_bases": len(tasks), "provider_calls": 0, "scorer_calls": 0, "counterfactual_reversion_grades": None,
+                   "elapsed_seconds": time.perf_counter() - start, "authored_mutations_are_not_repair_successes": True,
+                   "freeze_sha256": R.sha((out / "freeze.json").read_bytes())}
+        save(out / "summary.json", summary)
+        print(json.dumps({"passed": True, "checks": len(checks), "elapsed_seconds": summary["elapsed_seconds"], "summary_sha256": R.sha((out / "summary.json").read_bytes())}))
+    except BaseException as error:
+        save(out / "failure.json", {"passed": False, "type": type(error).__name__, "reason": str(error), "checks": checks,
+                                     "elapsed_seconds": time.perf_counter() - start, "provider_calls": 0, "scorer_calls": 0})
+        raise
+
+
+if __name__ == "__main__":
+    main()

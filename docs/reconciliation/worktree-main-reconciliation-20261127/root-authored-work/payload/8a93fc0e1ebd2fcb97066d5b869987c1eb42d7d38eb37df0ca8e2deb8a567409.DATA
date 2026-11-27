@@ -1,0 +1,5 @@
+set_option maxHeartbeats 200000
+set_option maxRecDepth 512
+theorem empirical_goal (n : Int) : (n + 6) - 6 = n := by
+  omega
+#print axioms empirical_goal

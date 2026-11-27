@@ -1,0 +1,33 @@
+"""One unfixed/reference-source control per original development family."""
+import hashlib,importlib.util,json,os,subprocess,time,traceback
+from pathlib import Path
+H=Path(__file__).resolve().parent;C=H/'curator_custody';O=H/'native_controls_v1'
+def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
+def dump(p,x):p.write_text(json.dumps(x,sort_keys=True,indent=2)+'\n')
+def main():
+ O.mkdir();private=O/'curator_custody';private.mkdir(mode=0o700)
+ prep=json.loads((H/'preparation-summary-v4.json').read_text());rp=C/'selected_registry_v4.json';assert sha(rp)==prep['private_registry_sha256'];registry=json.loads(rp.read_text())
+ path=next(Path(p) for p in prep['source_bindings'] if p.endswith('/adapter.py'));spec=importlib.util.spec_from_file_location('historical_original_control_adapter',path);A=importlib.util.module_from_spec(spec);spec.loader.exec_module(A)
+ freeze={'schema':'ns-original-development-native-controls/v1','frozen_at_ns':time.time_ns(),'runner_sha256':sha(Path(__file__)),'preparation_sha256':sha(H/'preparation-summary-v4.json'),'private_registry_sha256':sha(rp),'source_bindings':prep['source_bindings'],'controls':['unfixed','reference_source_projection'],'task_order':[x['task_id'] for x in prep['tasks']],'attempts_per_control':1,'automatic_retries':0,'maximum_grader_calls':8,'provider_calls':0,'image_id':A.IMAGE,'docker_endpoint':'unix:///var/run/docker.sock','per_container_wall_bound_seconds':120,'shared_child_wall_bound_seconds':115,'cpu':1,'memory_bytes':2147483648,'pids':32,'network':'none','hidden_expected_nodes_and_visible_criteria_changed':False,'new_public_contract_probes_included':False,'reference_scope':'Only entire publicly authorized implementation surface, byte-equivalent to saved full original reference on that surface; original tests/ancillary patch parts withheld from candidate'}
+ dump(O/'freeze.json',freeze);rows=[]
+ for uid in freeze['task_order']:
+  for control in freeze['controls']:
+   out=private/(uid+'-'+control);out.mkdir(mode=0o700);material=C/uid/'materialization_v4';candidate=material/('unfixed_source' if control=='unfixed' else 'reference_source');m=registry['units'][uid]
+   old=os.umask(0o022);started=time.monotonic()
+   try:
+    assert sha(rp)==freeze['private_registry_sha256']
+    for p,d in freeze['source_bindings'].items():assert sha(Path(p))==d
+    binding=A.candidate_binding(candidate,m)
+    dump(out/'dispatch_intent.json',{'task_id':uid,'control':control,'started_at_ns':time.time_ns(),'candidate_sha256':binding['sha256'],'manifest_sha256':A.digest(m),'freeze_sha256':sha(O/'freeze.json')})
+    result=A.score_sealed_candidate(out,candidate,m);dump(out/'returned_result.json',result);scorer=result['scorer']
+    hidden_file=out/'historical_scorer/results/hidden.observation.json';visible_file=out/'historical_scorer/results/visible.observation.json';hidden=json.loads(hidden_file.read_text()) if hidden_file.exists() else {};visible=json.loads(visible_file.read_text()) if visible_file.exists() else {}
+    oracle=json.loads((C/'objects'/m['oracle_metadata_sha256']).read_text());expected=set(oracle['fail_to_pass']);calls={r['nodeid']:r['outcome'] for r in hidden.get('reports',[]) if r.get('when')=='call'}
+    complete=set(hidden.get('collected',[]))==expected and set(calls)==expected and all(v in {'passed','failed'} for v in calls.values()) and not any(r.get('outcome')=='failed' for r in hidden.get('reports',[]) if r.get('when')!='call')
+    clean=complete and scorer.get('baseline_exit')==0 and scorer.get('visible_collected')==m['expected_visible_collected_count'] and not result['timed_out'] and result['container_exit_code']==0
+    receipt={'task_id':uid,'control':control,'status':'completed' if clean else 'incomplete','success':result['success'],'expected_success':control!='unfixed','control_matched_expectation':clean and result['success']==(control!='unfixed'),'visible_collected':scorer.get('visible_collected'),'visible_passed':scorer.get('visible_passed'),'visible_skipped':scorer.get('visible_skipped'),'hidden_designated':len(expected),'hidden_completed':len(calls),'hidden_passed':sum(v=='passed' for v in calls.values()),'hidden_failed':sum(v=='failed' for v in calls.values()),'classification':scorer['classification'],'outer_score_seconds':time.monotonic()-started,'candidate_sha256':binding['sha256'],'manifest_sha256':A.digest(m),'native_host_receipt_sha256':sha(out/'historical_scorer/host_result.json'),'hidden_observation_sha256':sha(hidden_file) if hidden_file.exists() else None,'visible_observation_sha256':sha(visible_file) if visible_file.exists() else None,'source_unchanged':A.candidate_binding(candidate,m)==binding,'new_provider_calls':0}
+   except Exception:
+    err=out/'runner_error.private.txt';err.write_text(traceback.format_exc());receipt={'task_id':uid,'control':control,'status':'runner_error','control_matched_expectation':False,'outer_score_seconds':time.monotonic()-started,'error_evidence_sha256':sha(err),'new_provider_calls':0}
+   finally:os.umask(old)
+   dump(out/'receipt.json',receipt);rows.append(receipt);dump(O/'progress.json',{'receipts':rows,'attempts_finished':len(rows)});print(json.dumps(receipt,sort_keys=True),flush=True)
+ dump(O/'summary.json',{'schema':'ns-original-development-native-control-summary/v1','qualified':all(x['control_matched_expectation'] for x in rows),'freeze_sha256':sha(O/'freeze.json'),'receipts':rows,'actual_control_attempts':len(rows),'automatic_retries':0,'provider_calls':0,'new_public_objectives_qualified':False,'candidate_endpoint_qualified':False})
+if __name__=='__main__':main()

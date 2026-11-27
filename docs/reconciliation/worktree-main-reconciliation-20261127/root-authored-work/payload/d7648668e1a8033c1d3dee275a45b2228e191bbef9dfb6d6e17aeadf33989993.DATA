@@ -1,0 +1,16 @@
+import os
+import pytest
+
+@pytest.fixture
+def current_fixture():
+    print("ORIGINAL_SETUP")
+    if os.environ["CONTROL_CASE"] == "setup_failure":
+        raise RuntimeError("authored setup failure")
+    yield object()
+    print("ORIGINAL_TEARDOWN")
+    if os.environ["CONTROL_CASE"] == "teardown_failure":
+        raise RuntimeError("authored teardown failure")
+
+def test_current_lifecycle(current_fixture):
+    print("ORIGINAL_CALL")
+    assert os.environ["CONTROL_CASE"] != "call_failure"

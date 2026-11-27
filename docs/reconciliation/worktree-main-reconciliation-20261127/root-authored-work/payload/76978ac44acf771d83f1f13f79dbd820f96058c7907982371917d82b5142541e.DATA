@@ -1,0 +1,4 @@
+from arithmetic import weighted_sum
+
+def test_work(payload):
+    assert weighted_sum(600_000) + sum(payload) == 28799907

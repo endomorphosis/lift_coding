@@ -1,0 +1,126 @@
+"""Freeze and replay only the public pyparsing issue example on the public base.
+
+This admits a newly reconstructed development objective. It cannot establish
+that the current issue body is byte-identical to the report at the base date.
+No reference repair, hidden tests, candidate model or acceptance grader is read.
+"""
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+ROOT = Path(__file__).resolve().parent
+WORKSPACE = ROOT.parents[4]
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def dump(path, value):
+    path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+
+
+def worker():
+    source = Path(sys.argv[2]).resolve()
+    sys.path.insert(0, str(source))
+    import pyparsing as pp
+    rows = []
+    for mode in ("default", "nonrecursive", "recursive"):
+        first = pp.Char(pp.nums)
+        second = pp.match_previous_expr(first)
+        expression = first + ":" + second
+        if mode != "default":
+            expression.leave_whitespace(mode == "recursive")
+        for value in ("1:1", "1:2", "1:a"):
+            matches = list(expression.scan_string(value))
+            observed = bool(matches)
+            rows.append({"mode": mode, "input": value, "expected_match": value == "1:1",
+                         "observed_match": observed, "match_count": len(matches),
+                         "conforms_to_reported_expectation": observed == (value == "1:1")})
+    modules = {}
+    for name, module in sorted(sys.modules.items()):
+        if name == "pyparsing" or name.startswith("pyparsing."):
+            path = Path(module.__file__).resolve()
+            modules[name] = {"path": str(path.relative_to(source)), "sha256": sha(path)}
+    print(json.dumps({"rows": rows, "loaded_modules": modules, "python": sys.version,
+                      "source_root": str(source), "pid": os.getpid()}))
+
+
+def main():
+    output = ROOT / "public_issue_reproduction_v1"
+    output.mkdir()
+    issue_path = ROOT / "public_task_authority_v1/ns-hist-02-pyparsing.json"
+    issue = json.loads(issue_path.read_text())
+    registry_path = ROOT.parent / "next_stage_candidate_registry.json"
+    registry = json.loads(registry_path.read_text())
+    task = next(r for r in registry["historical_candidates"] if r["task_id"] == issue["task_id"])
+    source = WORKSPACE / task["public_tree"]["path"]
+    assert source.is_dir() and not issue["is_pull_request"]
+    assert hashlib.sha256(issue["public_issue_body"].encode()).hexdigest() == issue["body_sha256"]
+    objective = {"schema": "ns-public-development-objective/v1", "task_id": issue["task_id"],
+                 "public_issue_url": issue["url"], "public_issue_body": issue["public_issue_body"],
+                 "public_issue_body_sha256": issue["body_sha256"],
+                 "statement": "For first = Char(nums), second = match_previous_expr(first), and expression = first + ':' + second, the expression should match '1:1' and reject '1:2' and '1:a'. Preserve that behavior with default whitespace handling and with leave_whitespace(recursive=False) or leave_whitespace(recursive=True).",
+                 "authorized_paths": task["admitted_paths"], "base_commit": task["pre_fix_commit"],
+                 "authority_scope": "Current retrieved public issue report frozen for a new development study; original-at-prefix issue-body bytes unverified.",
+                 "status_before_execution": "public_example_pending_reproduction",
+                 "not_a_hidden_acceptance_specification": True}
+    dump(output / "objective.json", objective)
+    inventory = {}
+    symlinks = {}
+    for directory, dirs, files in os.walk(source, followlinks=False):
+        for name in list(dirs) + files:
+            path = Path(directory) / name
+            relative = str(path.relative_to(source))
+            if path.is_symlink():
+                symlinks[relative] = os.readlink(path)
+            elif path.is_file():
+                inventory[relative] = sha(path)
+    dump(output / "source_inventory.json", {"regular_files": inventory, "opaque_symlinks": symlinks})
+    freeze = {"schema": "ns-public-issue-reproduction-freeze/v1", "frozen_at_ns": time.time_ns(),
+              "script_sha256": sha(Path(__file__)), "objective_sha256": sha(output / "objective.json"),
+              "inventory_sha256": sha(output / "source_inventory.json"),
+              "input_hashes": {str(p): sha(p) for p in (issue_path, registry_path)},
+              "expected_cases": 9, "expected_prefix_failure": "recursive mode incorrectly matches '1:2' as reported publicly",
+              "provider_calls": 0, "hidden_or_reference_payloads_read": False}
+    dump(output / "freeze.json", freeze)
+    (output / Path(__file__).name).write_bytes(Path(__file__).read_bytes())
+    command = [sys.executable, "-B", "-I", str(Path(__file__).resolve()), "worker", str(source)]
+    started = time.perf_counter()
+    run = subprocess.run(command, cwd=output, capture_output=True, timeout=30)
+    elapsed = time.perf_counter() - started
+    (output / "stdout.json").write_bytes(run.stdout)
+    (output / "stderr.txt").write_bytes(run.stderr)
+    dump(output / "execution.json", {"argv": command, "returncode": run.returncode,
+                                      "elapsed_seconds": elapsed, "finished_at_ns": time.time_ns()})
+    if run.returncode:
+        raise RuntimeError("public example failed to execute; artifacts retained")
+    result = json.loads(run.stdout)
+    assert len(result["rows"]) == 9
+    failures = [r for r in result["rows"] if not r["conforms_to_reported_expectation"]]
+    expected = len(failures) == 1 and failures[0]["mode"] == "recursive" and failures[0]["input"] == "1:2"
+    for relative, digest in inventory.items():
+        assert sha(source / relative) == digest
+    for row in result["loaded_modules"].values():
+        assert inventory[row["path"]] == row["sha256"]
+    summary = {"schema": "ns-public-issue-reproduction/v1", "task_id": issue["task_id"],
+               "executed_cases": len(result["rows"]), "passes": len(result["rows"]) - len(failures),
+               "reported_defect_reproduced": expected, "failures": failures,
+               "source_files_unchanged": len(inventory), "loaded_source_modules_bound": len(result["loaded_modules"]),
+               "public_objective_qualified_for_new_development": expected,
+               "original_at_prefix_issue_text_verified": False, "provider_calls": 0,
+               "reference_or_hidden_scorer_calls": 0, "new_confirmatory_family": False}
+    dump(output / "summary.json", summary)
+    dump(output / "artifact_manifest.json", {str(p.relative_to(output)): sha(p) for p in sorted(output.iterdir()) if p.is_file()})
+    print(json.dumps(summary, indent=2))
+
+
+if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "worker":
+        worker()
+    else:
+        main()

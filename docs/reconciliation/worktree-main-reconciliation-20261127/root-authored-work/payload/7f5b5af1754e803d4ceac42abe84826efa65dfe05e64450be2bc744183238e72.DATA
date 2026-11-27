@@ -1,0 +1,103 @@
+"""Read-only custody audit; report only infrastructure/status/count summaries."""
+import hashlib
+import json
+from pathlib import Path
+import re
+import sys
+
+HERE=Path(__file__).resolve().parent
+OUT=HERE/'run-v1'
+CUSTODY=OUT/'curator_custody'
+
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def main():
+    checks=[]
+    def check(name,ok):
+        checks.append({'check':name,'passed':bool(ok)})
+        assert ok,name
+    freeze=json.loads((OUT/'freeze.json').read_text())
+    scorer=json.loads((OUT/'scoring-v2/native_scorer_freeze.json').read_text())
+    result=json.loads((OUT/'scoring-v2/score_summary.json').read_text())
+    row=json.loads((CUSTODY/'row.json').read_text())
+    tests=json.loads((CUSTODY/'tests.json').read_text())
+    check('original curator frozen',sha(HERE/'curator.py')==sha(OUT/'curator_snapshot.py')==freeze['curator_sha256'])
+    check('original native scorer failed-attempt snapshot retained',sha(HERE/'native_scorer.py')==sha(OUT/'native_scorer_snapshot.py'))
+    check('final native scorer frozen',sha(HERE/'native_scorer_v2.py')==sha(OUT/'scoring-v2/native_scorer_snapshot.py')==scorer['scorer_sha256'])
+    check('source environment freeze binding',sha(OUT/'freeze.json')==scorer['environment_freeze_sha256'])
+    for path,h in freeze['source_files'].items():
+        check('base source hash '+path,sha(OUT/'build_context/source'/path)==h)
+    harness=HERE.parent/'harness_source'
+    for path,h in freeze['native_grader_sources'].items():
+        check('native source hash '+path,sha(harness/path)==h)
+    for name,m in scorer['native_loaded_sources'].items():
+        check('ordinary loaded source '+name,sha(Path(m['path']))==m['sha256'])
+    check('native package initializer actually loaded','swebench.harness' in scorer['native_loaded_sources'] and scorer['native_loaded_sources']['swebench.harness']['path'].endswith('/harness/__init__.py'))
+    check('no initializer bypass used',scorer['ordinary_package_import'] and not scorer['sys_modules_initializer_bypass_used'])
+    permitted={'source /opt/miniconda3/bin/activate','source /opt/miniconda3/etc/profile.d/conda.sh','conda activate testbed'}
+    original=(CUSTODY/'eval-original.sh').read_text()
+    retained=''.join(line for line in original.splitlines(keepends=True) if line.strip() not in permitted)
+    check('only exact conda lines removed',retained==(CUSTODY/'eval-arm.sh').read_text())
+    check('exact dataset eval script retained',original==row['eval_script'])
+    check('exact gold bytes retained',(CUSTODY/'gold.patch').read_text()==row['patch'])
+    check('exact test patch retained',(CUSTODY/'test.patch').read_text()==row['test_patch'])
+    check('eval still contains exact hidden test patch',row['test_patch'].strip() in retained)
+    for key in ('FAIL_TO_PASS','PASS_TO_PASS'):
+        check('expected set retained '+key,set(tests[key])==set(json.loads(row[key]) if isinstance(row[key],str) else row[key]))
+    # Inspect public environment metadata without emitting the raw log.
+    package_log=(CUSTODY/'logs/image-packages.stdout').read_text()
+    pyline=package_log.splitlines()[0]
+    packages,end=json.JSONDecoder().raw_decode(package_log[package_log.index('['):])
+    installed={p['name'].lower():p['version'] for p in packages}
+    requested={line.split('==')[0].lower():line.split('==')[1] for line in (OUT/'build_context/pinned-python.txt').read_text().splitlines()}
+    check('exact Python version installed',pyline=='Python 3.9.20')
+    check('all13 Python package versions match',len(requested)==13 and all(installed.get(n)==v for n,v in requested.items()))
+    image_metadata={'python':pyline,'python_packages':packages,'pinned_packages_matched':len(requested),
+        'system_package_versions':[line for line in package_log[package_log.index('[')+end:].splitlines() if '\t' in line]}
+    (OUT/'image_package_metadata.json').write_text(json.dumps(image_metadata,indent=2)+'\n')
+    for r in result['controls']:
+        arm=r['control']
+        folder=CUSTODY/('native-v2-'+arm)
+        decoding=json.loads((folder/'log-decoding.json').read_text())
+        raw=Path(decoding['raw_path']).read_bytes()
+        decoded=(folder/'evaluation-native-decoded.log').read_text()
+        check(arm+' raw immutable log',hashlib.sha256(raw).hexdigest()==r['raw_log_sha256']==decoding['raw_sha256'])
+        check(arm+' exact upstream decoder',raw.decode(errors='replace').encode()==(folder/'evaluation-native-decoded.log').read_bytes())
+        check(arm+' nonempty complete expected checks',r['expected_unique_checks']==r['expected_checks_completed']==187 and r['expected_missing']==r['expected_errors']==r['expected_skipped']==0)
+        check(arm+' native declared qualification',r['qualification_control_passed'] and r['native_logs_found'])
+        check(arm+' no timeout or OOM',not r['timed_out'] and not r['oom_killed'])
+        check(arm+' eight nonexpected errors disclosed',r['parsed_status_counts']['ERROR']==8)
+        check(arm+' missing exit marker disclosed',r['test_exit_code'] is None)
+        statuses=json.loads((folder/'status_map.json').read_text())
+        check(arm+' all187 expected statuses materialized',all(name in statuses and statuses[name] in ('PASSED','FAILED','XFAIL') for name in set(tests['FAIL_TO_PASS'])|set(tests['PASS_TO_PASS'])))
+    unfixed,gold=result['controls']
+    check('independent control direction',not unfixed['native_resolved'] and gold['native_resolved'] and unfixed['expected_fail_to_pass_actual_failures']==2 and gold['expected_fail_to_pass_actual_failures']==0)
+    check('gold not accidentally passed as empty patch',len(row['patch'])>0 and (CUSTODY/'native-v2-gold/gold.patch').read_text()==row['patch'])
+    public_paths=[HERE/'protocol.json',HERE/'curator.py',HERE/'native_scorer.py',HERE/'native_scorer_v2.py',HERE/'audit_curator.py',
+        *OUT.glob('*.json'),*OUT.glob('*.diff'),*(OUT/'scoring-v2').glob('*.json')]
+    hidden_ids=set(tests['FAIL_TO_PASS'])|set(tests['PASS_TO_PASS'])
+    leaks=[]
+    for p in public_paths:
+        text=p.read_text()
+        if row['patch'] in text or row['test_patch'] in text or any(name in text for name in hidden_ids):
+            leaks.append(p.name)
+    check('no hidden patch or test ID in sanitized public artifacts',not leaks)
+    audit={'schema':'ns-arm64-curator-artifact-audit/v1','checks_passed':len(checks),'checks':checks,
+        'hidden_values_emitted':False,'designated_checks_qualified':187,'all_collected_tests_error_free':False,
+        'nonexpected_setup_errors_per_control':8,'provider_calls':0,'new_scorer_executions':0,
+        'auditor_sha256':sha(Path(__file__))}
+    (OUT/'artifact_audit.json').write_text(json.dumps(audit,indent=2)+'\n')
+    print(json.dumps({k:v for k,v in audit.items() if k!='checks'},sort_keys=True))
+
+
+if __name__=='__main__':
+    try:
+        main()
+    except BaseException as exc:
+        import traceback
+        (CUSTODY/'artifact-audit-exception.txt').write_text(traceback.format_exc())
+        print(json.dumps({'audit':'failed','exception_type':type(exc).__name__,'details_retained_in_custody':True}))
+        raise SystemExit(1)

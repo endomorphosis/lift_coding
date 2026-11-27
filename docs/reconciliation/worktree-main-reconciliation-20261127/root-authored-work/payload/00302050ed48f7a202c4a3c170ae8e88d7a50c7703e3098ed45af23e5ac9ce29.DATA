@@ -1,0 +1,21 @@
+# Autoencoder empirical artifact
+
+This package reproduces the paper's source-vector reconstruction metrics and uncertainty estimates from the released numeric predictions. It requires Python 3 and NumPy; the experiment used NumPy 1.26.4. Run from any directory:
+
+```sh
+python3 /path/to/autoencoder/reproduce.py --output /path/to/reproduced-autoencoder
+```
+
+The command verifies input hashes, recomputes every row's cosine, MSE and squared L2 distance with the frozen metric implementation, reconstructs the constant 69-training-vector mean, and reruns the 10,000-draw original-component bootstrap and the secondary 2,000-draw conditional unit bootstrap. `metric_verification.json` reports pass/fail and `reproduced_summary.json` contains the reproduced statistics. It requires no model service, network access, GPU or private checkout.
+
+`predictions/` contains copied numeric outputs and the metadata required by the frozen scorer. Each extract is bound to its full original prediction hash in `manifest.json`. `scores/` contains the full corresponding metric rows. Source embeddings are the actual complete-document MiniLM vectors, with producer/model hashes in `provenance/`. `source_metadata.jsonl` binds source identities, corpus families and the original connected components without duplicating the source text.
+
+`provenance/checkpoints/` contains original checkpoint identities, exact compact-state hashes, component cardinalities and isolated proof-head values. The large learned vector arrays, full feature-membership tables and active feature dumps are omitted. This package therefore reproduces evaluation from outputs; rerunning model inference additionally requires the hash-identified original parameters and native implementation. The included inference code documents the executed method and has repository imports; it is not a standalone model distribution.
+
+T1 performs actual source-keyed memory lookups; misses use verified native cold projections. T3's embedding vectors reuse its exactly tied T2 decoder, so they are not independent repetitions. Its native proof heads are measured separately in the guidance artifact. The source activation cache is generated with learned-state access denied and cleared between sources. Independent review and 60 exact cached-versus-uncached selection comparisons qualify its two disjoint final execution partitions.
+
+These measurements concern reconstruction of source-derived embeddings. The decoder has a linear input-vector path, and identity copying would give cosine 1/MSE 0. They do not establish compression, natural-language reconstruction, legal-semantic fidelity, or proof truth. The dominant component and four corpus editions limit generalization; the unit bootstrap is a conditional cohort display. See `provenance/METHODS_AND_SCOPE.md` for scope, historical evaluation defects and retained development attempts.
+
+Documentary source/checkpoint excerpts redact personal home-directory paths. `provenance/documentary_redactions.json` records original and published hashes for those copies. Frozen execution identities remain separately recorded. The numeric scorer, scientific profile, embeddings, numeric predictions and metrics are not changed by this anonymization.
+
+To keep the archive compact, T0 and the three T2 arms store complete numeric vectors. T3 stores exact aliases of its corresponding T2 vectors with original per-record metadata. T1 stores cold T0 aliases for verified misses and explicit vector overrides for every actual memory hit. All eleven score files remain present. The manifest binds both stored representations and the hashes of the original expanded numeric projections. `reproduce.py` restores those projections without arithmetic, verifies their hashes and complete source coverage, and only then invokes the frozen scorer. This storage reuse does not add model inference or independent replications.

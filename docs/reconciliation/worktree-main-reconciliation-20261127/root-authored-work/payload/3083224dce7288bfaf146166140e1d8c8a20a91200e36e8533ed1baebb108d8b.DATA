@@ -1,0 +1,17 @@
+{
+  "time": "2026-11-10T00:41:32.194597+00:00",
+  "operation": "Restore exact tracked monitor JSON fixture into isolated checkout",
+  "source_write_timeout_seconds": 300,
+  "source_mutation_performed": false,
+  "blocking_reader_pid": 619281,
+  "reader_live_after_timeout": true,
+  "reader_state": "S",
+  "reader_not_interrupted": true,
+  "next_validation_started": false,
+  "failed_attempts_preserved": [
+    "gate-board-monitor-v01",
+    "gate-board-monitor-v02"
+  ],
+  "fixture": "test/api/fixtures/legal_ir_deployed_event_driven_checkpoint.json",
+  "retry_requires_fresh_lease": true
+}

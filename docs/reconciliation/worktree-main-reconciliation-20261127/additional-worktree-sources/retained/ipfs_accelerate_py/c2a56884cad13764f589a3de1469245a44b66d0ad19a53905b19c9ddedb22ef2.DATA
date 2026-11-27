@@ -1,0 +1,178 @@
+"""Bounded Unix stream frames; received descriptors convey no authority alone.
+
+The bootstrap caller authenticates SO_PEERCRED/current birth before issuing
+anything, validates the actual descriptor witnesses, and closes returned FDs.
+Ordinary frames select zero descriptors and reject ancillary data everywhere.
+"""
+from __future__ import annotations
+
+import array
+import fcntl
+import math
+import os
+import socket
+import time
+
+MAXIMUM_BYTES = 65_536
+MAXIMUM_DESCRIPTORS = 2
+MAXIMUM_IO_SECONDS = 120.0
+
+
+class BootstrapFDTransportError(RuntimeError):
+    """Closed transport failure; never credential or capability evidence."""
+
+
+def _require(value, reason):
+    if not value:
+        raise BootstrapFDTransportError(reason)
+
+
+def _channel(channel, deadline_monotonic):
+    _require(isinstance(channel, socket.socket) and channel.family == socket.AF_UNIX
+             and channel.getsockopt(socket.SOL_SOCKET, socket.SO_TYPE) == socket.SOCK_STREAM,
+             'connected_unix_stream_required')
+    channel.getpeername()
+    _require(type(deadline_monotonic) in (int, float)
+             and math.isfinite(deadline_monotonic), 'finite_original_deadline_required')
+    remaining = deadline_monotonic-time.monotonic()
+    _require(0 < remaining <= MAXIMUM_IO_SECONDS, 'original_deadline_expired_or_unbounded')
+    _require(hasattr(socket, 'MSG_CMSG_CLOEXEC'), 'atomic_received_CLOEXEC_required')
+    return channel.gettimeout()
+
+
+def _timeout(channel, deadline_monotonic):
+    remaining = deadline_monotonic-time.monotonic()
+    if remaining <= 0:
+        raise TimeoutError('original_bootstrap_IO_deadline_expired')
+    channel.settimeout(remaining)
+
+
+def close_received_descriptors(descriptors):
+    """Attempt every owned close; report actual unresolved FDs on failure."""
+    _require(type(descriptors) is tuple
+             and all(type(fd) is int and fd >= 0 for fd in descriptors)
+             and len(set(descriptors)) == len(descriptors), 'owned_descriptor_tuple_required')
+    errors = []
+    for descriptor in descriptors:
+        try:
+            os.close(descriptor)
+        except OSError as error:
+            errors.append((descriptor, error))
+    if errors:
+        failure = BootstrapFDTransportError('received_descriptor_close_unproven')
+        failure.failed_descriptors = tuple(fd for fd, _ in errors)
+        raise failure from errors[0][1]
+
+
+def send_framed_bytes(channel, body, *, descriptors=(), deadline_monotonic):
+    """Send one frame and at most one pair of borrowed Unix descriptors.
+
+    No borrowed descriptor is closed, including on a partial send or failure.
+    The actual child caller opens '.' with O_PATH|O_DIRECTORY|O_CLOEXEC and
+    closes that owned directory FD in finally. It never accepts a cwd witness
+    from JSON. Only the first sendmsg may contain SCM_RIGHTS.
+    """
+    _require(type(body) is bytes and 2 <= len(body) <= MAXIMUM_BYTES,
+             'bounded_body_bytes_required')
+    _require(type(descriptors) is tuple and len(descriptors) in (0, 2)
+             and all(type(fd) is int and fd >= 0 for fd in descriptors)
+             and len(set(descriptors)) == len(descriptors), 'zero_or_two_distinct_borrowed_FDs_required')
+    for fd in descriptors:
+        os.fstat(fd)
+    original_timeout = _channel(channel, deadline_monotonic)
+    packet = len(body).to_bytes(4, 'big')+body
+    try:
+        ancillary = [(socket.SOL_SOCKET, socket.SCM_RIGHTS, array.array('i', descriptors))] if descriptors else []
+        _timeout(channel, deadline_monotonic)
+        sent = channel.sendmsg([packet], ancillary)
+        _require(sent > 0, 'bootstrap_stream_send_closed')
+        while sent < len(packet):
+            _timeout(channel, deadline_monotonic)
+            count = channel.send(packet[sent:])
+            _require(count > 0, 'bootstrap_stream_send_closed')
+            sent += count
+        _timeout(channel, deadline_monotonic)
+    except BaseException as failure:
+        try:
+            channel.settimeout(original_timeout)
+        except BaseException as restore_failure:
+            failure.bootstrap_socket_restore_error = restore_failure
+        raise
+    else:
+        channel.settimeout(original_timeout)
+
+
+def receive_framed_bytes(channel, *, expected_descriptor_count=0,
+                         maximum_bytes=MAXIMUM_BYTES, deadline_monotonic):
+    """Receive one frame, returning ownership of exactly zero or two FDs.
+
+    Every header/body fragment uses recvmsg, so rights injected after the
+    header cannot be silently discarded. On every failure all descriptors
+    actually received so far are closed. MSG_CMSG_CLOEXEC is mandatory; no
+    race-prone inheritable-then-fix fallback exists. This is transport only.
+    """
+    _require(type(expected_descriptor_count) is int and expected_descriptor_count in (0, 2),
+             'expected_descriptor_count_must_be_zero_or_two')
+    _require(type(maximum_bytes) is int and 2 <= maximum_bytes <= MAXIMUM_BYTES,
+             'bounded_maximum_bytes_required')
+    original_timeout = _channel(channel, deadline_monotonic)
+    received = []
+    itemsize = array.array('i').itemsize
+    ancillary_bytes = socket.CMSG_SPACE(MAXIMUM_DESCRIPTORS*itemsize)
+
+    def exact(length):
+        chunks = []
+        remaining = length
+        while remaining:
+            _timeout(channel, deadline_monotonic)
+            chunk, controls, flags, _ = channel.recvmsg(
+                remaining, ancillary_bytes, socket.MSG_CMSG_CLOEXEC)
+            invalid_control = False
+            # Collect ALL installed rights before rejecting this recvmsg. A
+            # later unknown/malformed control must not leak earlier rights.
+            for level, kind, data in controls:
+                if level == socket.SOL_SOCKET and kind == socket.SCM_RIGHTS:
+                    values = array.array('i')
+                    complete = len(data)//itemsize*itemsize
+                    values.frombytes(data[:complete])
+                    received.extend(values)
+                    invalid_control |= not data or complete != len(data)
+                else:
+                    invalid_control = True
+            _require(not invalid_control and not flags & (socket.MSG_CTRUNC|socket.MSG_TRUNC),
+                     'unexpected_or_truncated_ancillary_data')
+            _require(len(received) <= expected_descriptor_count,
+                     'unexpected_or_excess_received_descriptors')
+            for descriptor in received:
+                _require(fcntl.fcntl(descriptor, fcntl.F_GETFD) & fcntl.FD_CLOEXEC
+                         and not os.get_inheritable(descriptor), 'received_descriptor_not_CLOEXEC')
+            _require(bool(chunk), 'bootstrap_stream_closed_before_frame_complete')
+            chunks.append(chunk)
+            remaining -= len(chunk)
+        return b''.join(chunks)
+
+    try:
+        size = int.from_bytes(exact(4), 'big')
+        _require(2 <= size <= maximum_bytes, 'bootstrap_frame_size_invalid')
+        body = exact(size)
+        _require(len(received) == expected_descriptor_count,
+                 'bootstrap_descriptor_count_differs')
+        _timeout(channel, deadline_monotonic)
+        # Restore before handing ownership to the caller. If restoration
+        # itself fails, the exception path still closes every received FD.
+        channel.settimeout(original_timeout)
+    except BaseException as failure:
+        try:
+            close_received_descriptors(tuple(received))
+        except BaseException as cleanup_failure:
+            failure.bootstrap_fd_cleanup_error = cleanup_failure
+        try:
+            channel.settimeout(original_timeout)
+        except BaseException as restore_failure:
+            failure.bootstrap_socket_restore_error = restore_failure
+        raise
+    return body, tuple(received)
+
+
+__all__ = ['BootstrapFDTransportError', 'send_framed_bytes', 'receive_framed_bytes',
+           'close_received_descriptors']

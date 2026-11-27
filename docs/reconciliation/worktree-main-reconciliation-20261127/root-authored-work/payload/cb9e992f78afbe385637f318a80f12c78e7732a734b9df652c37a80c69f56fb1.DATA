@@ -1,0 +1,170 @@
+"""Digest-only exact public fixture provenance; never test or print credentials."""
+import ast
+import hashlib
+import json
+from pathlib import Path
+import re
+import stat
+import subprocess
+import time
+import traceback
+import urllib.request
+
+ROOT = Path(__file__).resolve().parent
+HF = ROOT.parent
+REFS = {
+    "1f4ebaf98e8d9adb018ef5d4532903667163656551b6499af2c2b0936574fd53":
+        ("v3.0.2", "9e824cfb0eb36b4d23ab73171b821b1a74ec659c",
+         "tests/oauth2/rfc6749/clients/test_service_application.py"),
+    "4de74f50b33be0f5d1974d6c4652cb708daea90fce6a60826d6890ed5e31aa1d":
+        ("v3.0.2", "9e824cfb0eb36b4d23ab73171b821b1a74ec659c",
+         "tests/oauth1/rfc5849/test_signatures.py"),
+    "acd22beaf606192f6f196a65e7069363ae9cb66b9de24d44cc044a8fad97fcc4":
+        ("v3.0.0", "9dfa40c3bdab3aa788e711283afdf36c2fbdd1de",
+         "tests/oauth2/rfc6749/test_server.py"),
+}
+OLD_PEM = re.compile(rb"-----BEGIN ((?:RSA |EC |DSA |OPENSSH |ENCRYPTED )?)PRIVATE KEY-----[ \t]*\r?\n(?:[A-Za-z0-9+/=,: \t-]{1,4096}\r?\n){1,512}-----END \1PRIVATE KEY-----")
+PEM = re.compile(rb"-----BEGIN ((?:RSA |EC |DSA |OPENSSH |ENCRYPTED )?)PRIVATE KEY-----[ \t]{0,64}(?:\r?\n|\\n)(?:[A-Za-z0-9+/=,: \t-]{1,128}(?:\r?\n|\\n)){1,256}-----END \1PRIVATE KEY-----")
+
+
+def sha(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def pin(path):
+    before = path.lstat()
+    assert stat.S_ISREG(before.st_mode) and path.resolve() == path
+    raw = path.read_bytes()
+    after = path.lstat()
+    sig = lambda s: (s.st_dev, s.st_ino, s.st_size, s.st_mtime_ns, s.st_ctime_ns)
+    assert sig(before) == sig(after)
+    return {"path": str(path), "bytes": len(raw), "sha256": sha(raw)}
+
+
+def write(path, body):
+    with path.open("x") as stream:
+        json.dump(body, stream, indent=2, sort_keys=True)
+        stream.write("\n")
+
+
+def run():
+    started = time.monotonic()
+    result = {"schema": "terminal-ir-oauthlib-exact-public-fixture-provenance@1",
+              "status": "started", "files": [], "approvals": [], "errors": [],
+              "credential_values_printed": False,
+              "candidate_credentials_tested_against_services": False,
+              "active_exact_credential_veto_required": True,
+              "path_prefix_whitelists": [], "raw_source_files_modified": False,
+              "public_source_bodies_retained_in_receipt": False,
+              "whole_archive_credential_safety_claimed": False}
+    try:
+        inventory_path = HF / "candidate-inventory-01/candidate-files.json"
+        inventory = pin(inventory_path)
+        assert inventory["bytes"] == 683986
+        assert inventory["sha256"] == "8bc9d37b68764febf00e40823a6b340fb23c0f1560194b7929469b39dba4002f"
+        data = json.loads(inventory_path.read_bytes())
+        result["inventory"] = inventory
+        result["reviewer"] = pin(Path(__file__).resolve())
+        remote = subprocess.run(
+            ["git", "ls-remote", "https://github.com/oauthlib/oauthlib.git",
+             "refs/tags/v3.0.0", "refs/tags/v3.0.0^{}",
+             "refs/tags/v3.0.2", "refs/tags/v3.0.2^{}"],
+            capture_output=True, check=True, timeout=20, text=True)
+        remote_rows = [{"sha1": a, "ref": b} for a, b in
+                       (line.split("\t") for line in remote.stdout.splitlines())]
+        result["remote_tag_observations"] = remote_rows
+        for row in data["unique_files"]:
+            if row["file_sha256"] not in REFS:
+                continue
+            tag, revision, path = REFS[row["file_sha256"]]
+            assert any(r["sha1"] == revision and r["ref"] == "refs/tags/" + tag
+                       for r in remote_rows)
+            local_path = Path(row["paths"][0]["source_path"])
+            local_pin = pin(local_path)
+            local = local_path.read_bytes()
+            assert local_pin["sha256"] == row["file_sha256"]
+            assert local_pin["bytes"] == row["bytes"]
+            url = f"https://raw.githubusercontent.com/oauthlib/oauthlib/{revision}/{path}"
+            with urllib.request.urlopen(url, timeout=20) as response:
+                public = response.read(65537)
+                status = response.status
+            assert len(public) <= 65536 and status == 200
+            assert public == local and sha(public) == row["file_sha256"]
+            expected = sorted(x["match_sha256"] for x in row["credential_candidates"])
+            old_digests = sorted(set(sha(m.group()) for m in OLD_PEM.finditer(local)))
+            new_matches = list(PEM.finditer(local))
+            new_digests = sorted(set(sha(m.group()) for m in new_matches))
+            assert old_digests == expected == new_digests
+            assert sorted(set(sha(m.group()) for m in PEM.finditer(public))) == expected
+            tree = ast.parse(local)
+            parents = {child: parent for parent in ast.walk(tree)
+                       for child in ast.iter_child_nodes(parent)}
+            contexts = []
+            for node in ast.walk(tree):
+                if not isinstance(node, ast.Constant) or not isinstance(node.value, (str, bytes)):
+                    continue
+                value = node.value.encode() if isinstance(node.value, str) else node.value
+                if b"-----BEGIN " not in value or b"PRIVATE KEY-----" not in value:
+                    continue
+                scopes = []
+                ancestor = node
+                while ancestor in parents:
+                    ancestor = parents[ancestor]
+                    if isinstance(ancestor, (ast.ClassDef, ast.FunctionDef, ast.AsyncFunctionDef)):
+                        scopes.append({"kind": type(ancestor).__name__,
+                                       "name": ancestor.name, "line": ancestor.lineno})
+                parent = parents.get(node)
+                targets = (parent.targets if isinstance(parent, ast.Assign) else
+                           [parent.target] if isinstance(parent, ast.AnnAssign) else [])
+                names = [t.id if isinstance(t, ast.Name) else t.attr
+                         for t in targets if isinstance(t, (ast.Name, ast.Attribute))]
+                contexts.append({"literal_line": node.lineno, "end_line": node.end_lineno,
+                                 "literal_type": type(node.value).__name__,
+                                 "bound_names": names, "enclosing_scopes": list(reversed(scopes)),
+                                 "decoded_literal_sha256": sha(value)})
+            assert contexts
+            assert all(any("Test" in s["name"] or "test_" in s["name"] or
+                           s["name"] == "setUp" for s in c["enclosing_scopes"])
+                       for c in contexts)
+            browser_url = f"https://github.com/oauthlib/oauthlib/blob/{revision}/{path}"
+            record = {"file_sha256": row["file_sha256"], "bytes": row["bytes"],
+                      "alias_path_count": len(row["paths"]), "representative": local_pin,
+                      "upstream_repository": "https://github.com/oauthlib/oauthlib",
+                      "published_tag": tag, "immutable_revision": revision, "public_path": path,
+                      "public_raw_url": url, "public_browser_url": browser_url,
+                      "public_http_status": status, "public_body_bytes": len(public),
+                      "public_body_sha256": sha(public), "whole_file_byte_identity_verified": True,
+                      "candidate_digests": expected, "decoder07_match_digests": new_digests,
+                      "fixture_ast_contexts": contexts,
+                      "classification": "published_public_fixture",
+                      "interpretation": "Exactly published OAuthlib unit-test fixture bodies. No assertion that active services use or do not use this material; active exact-credential veto remains mandatory."}
+            assert pin(local_path) == local_pin
+            result["files"].append(record)
+            result["approvals"].append({"file_sha256": row["file_sha256"],
+                                        "approved_match_sha256": expected,
+                                        "classification": "published_public_fixture",
+                                        "provenance_ref": browser_url})
+        assert len(result["files"]) == 3
+        result["unique_file_count"] = 3
+        result["alias_path_count"] = sum(r["alias_path_count"] for r in result["files"])
+        assert pin(inventory_path) == inventory
+        result["status"] = "passed_exact_public_fixture_provenance"
+    except BaseException as error:
+        result["status"] = "failed"
+        result["approvals"] = []
+        result["errors"].append({"type": type(error).__name__, "traceback": traceback.format_exc()})
+    finally:
+        result["elapsed_seconds"] = time.monotonic() - started
+        write(ROOT / "review.json", result)
+    if result["status"] == "passed_exact_public_fixture_provenance":
+        write(ROOT / "approved-fixtures.json",
+              {"schema": "terminal-ir-exact-public-fixture-approvals@1",
+               "review": pin(ROOT / "review.json"), "approvals": result["approvals"],
+               "active_exact_credential_veto_required": True})
+    print(json.dumps({"status": result["status"], "review": pin(ROOT / "review.json"),
+                      "elapsed_seconds": result["elapsed_seconds"]}))
+    return 0 if result["status"] == "passed_exact_public_fixture_provenance" else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(run())

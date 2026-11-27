@@ -1,0 +1,64 @@
+# Original four-family acceptance and candidate endpoint
+
+The original native development acceptance criteria are retained and executable for XMLtodict, Pyparsing, OAuthlib and Click. Eight standalone source controls qualified. The separately frozen candidate endpoint then qualified all 16 combinations of four tasks, two source controls and two exact API configurations, plus 14 rejection controls. An independent read-only audit passed 710 checks over 7,552 private evidence files. No model/provider calls were made.
+
+| Family | Complete source entries | Original visible suite | Designated hidden: base → reference | Exposed objectives: base → reference |
+|---|---:|---:|---:|---:|
+| XMLtodict | 16 | 34/34 | 0/1 → 1/1 | 2/4 → 4/4 |
+| Pyparsing | 287 | 2,044/2,044 | 2/3 → 3/3 | 8/9 → 9/9 |
+| OAuthlib | 199 | 3/3 | 0/1 → 1/1 | 1/4 → 4/4 under prospective v3 |
+| Click | 145 | 113/113 | 0/5 → 5/5 | 2/4 → 4/4 |
+
+Every reference projection passed the original criterion, all exposed examples, and each configured API probe. Each unchanged base failed joint acceptance. A passing control is not a model success or an independent family replication. Pyparsing already passes two of its three designated hidden cases before repair; calling all three baseline failures would be incorrect.
+
+## Prospective OAuth public correction
+
+The previously authored v2 combined-Server example required exact advertised response keys code/token/none. Its unchanged saved reference passed 3/4 public examples while passing original native acceptance. A separate curator-authored candidate preserving all configured keys passed that superseded public predicate but failed the unchanged original hidden criterion. Both observations remain retained; they do not establish that all possible implementations are logically incompatible.
+
+Independent review used only pristine public source/documentation and official specifications. The public Server exposes none routing, but a constructor with an abstract RequestValidator does not establish that every internal routing key must appear in default discovery metadata. RFC 8414 describes supported server response types, while the OAuth response-type specification defines none; neither supplies that library constructor equality guarantee. [RFC 8414 §2](https://www.rfc-editor.org/rfc/rfc8414.html#section-2), [OAuth response type none](https://openid.net/specs/oauth-v2-multiple-response-types-1_0.html#none).
+
+Root authorized prospective v3 using that public semantic review: actual endpoint construction and HTTP 200, a nonempty list of nonempty string response types drawn from the configured public keys for combined Server, and exact preservation of explicitly supplied metadata claims. The prior exact-key predicate remains an unqualified diagnostic. Two new public-only controls produced base 1/4 and unchanged reference 4/4; original native acceptance was not revised. The v3 objective text/record and driver are separately frozen, and corpus v3 binds the new authority.
+
+## Source, execution and interface
+
+The endpoint accepts a complete caller-sealed source directory and exact original-adapter inventory digest, with explicit task/base/objective text/objective record/configuration/profile identities and a unique evaluation ID. It verifies all source entries and copies the source into private custody before hidden material is loaded. Cumulative source content is compared to the immutable original base, including reversions. Raw base permissions are preserved; path population, symlink targets, file types and permissions cannot change, and only the public one-file repair surface per task can change content, within the original 16 KiB cumulative patch bound.
+
+The saved full reference patches contain test and, for Click, ancillary edits. Controls use explicit public repair-surface projections, independently proven byte-equivalent to the full saved reference across the entire authorized implementation surface. This is not full-reference-patch transport or general arbitrary-file editing. All remaining public files are inventoried and immutable. New public base materializations correct only archive permissions from checkout 0664/0775 to scorer 0644/0755; all content hashes, path populations and symlink targets remain unchanged, and old checkouts remain retained.
+
+The original native Docker image is pinned on unix:///var/run/docker.sock; source, driver and custody mounts are read-only, networking is disabled, and execution uses one CPU, 2 GiB and 32 PIDs. The original visible suite and designated hidden selection are unchanged. The original historical scorer attempts designated hidden execution after the visible observation even when visible tests fail; source-integrity/execution exceptions or timeout can prevent completion. Each actual endpoint control completed both populations. A separate container executes every exposed example and the exact API configuration. CALL reuse and whole-grader caching are absent. This is honest-process/custody qualification, not an adversarial oracle-integrity proof.
+
+The rejected controls cover wrong base, objective record, objective text, configuration, profile, expected tree, task, operation, extra request field, file mode, added test path, changed original public test, escaping symlink, and duplicate evaluation ID. The duplicate check is included in the 14 total because there are six identity-field controls. Every rejection preceded native/public process dispatch. Unique IDs and retained request/intents/receipts support later caller accounting.
+
+Configuration control filenames enumerate sorted profile-digest order, which reverses the corpus index in this freeze. configuration_label_map_v1.json and quality_cost_projection_v1.json explicitly map each exact digest to the authoritative corpus configuration index; no bytes or executions were relabeled silently.
+
+## Costs and retained failures
+
+The eight standalone native controls consumed 90.113011 measured outer seconds. The 16 endpoint controls consumed 165.716182 seconds in the native adapter phase and 6.393495 seconds in the disjoint public phase. Both are nested within 199.143348 service seconds. All 30 qualification invocations, including 14 negatives, consumed 201.088590 measured outer seconds. Native phase time includes source/custody preparation, execution and cleanup; it is not pure container runtime. Audit/archive overhead is separate. Do not add nested intervals.
+
+Retained setup failures include the initial objective-record/text hash confusion, archive/patch permission mismatches under umask 077, eight failed original public-driver launches at an insufficiently deep mount path, a supplemental public inventory-ordering assertion and its report-writer failure, and the endpoint qualification-v1 source/output directory collision after nine successful rejection calls and zero grader/public process dispatches. The corrected v2 qualification wrapper changed only fixture output naming; service/profile bytes stayed fixed. No failed run was overwritten or automatically retried until passing.
+
+Across this original acceptance work, 25 native grader calls were made: eight standalone, one failed supplemental candidate, and 16 endpoint controls. Public objective/configuration process attempts total 36: eight failed initial public launches, eight corrected unchanged-predicate launches, two supplemental public attempts, two prospective OAuth v3 controls, and 16 endpoint public processes. One supplemental native attempt and its failed public probe lost in-memory elapsed durations before the wrapper wrote them; their durations remain null/unknown, never zero. This missing historical measurement prevents a complete wall-time total for all attempts.
+
+No token-savings result follows from these controls. They establish a usable original-family scorer for subsequent six-event model/controller, cold/warm cache, configuration-change, publication/recovery and one-factor evaluations. Native fixture-bearing validation reuse and generic publication are separate qualification tasks.
+
+## Authoritative artifacts
+
+- [Qualified endpoint declaration](endpoint_declaration_v4.json)
+- [Endpoint admission](candidate_endpoint_v2/admission_v2.json)
+- [Independent audit](audit_v1/summary.json)
+- [Quality/cost projection](candidate_endpoint_v1/quality_cost_projection_v1.json)
+- [Corrected public objectives](public_contract_v3/objectives.json)
+- [OAuth v3 controls](oauth_public_controls_v3/summary.json)
+- [Public semantic review](oauth_public_semantics_v1/REPORT.md)
+- [Original native controls](native_controls_v1/summary.json)
+- [Retained v2 public mismatch](public_contract_controls_v2/summary.json)
+- [Retained supplemental native attempt](oauth_supplement_v1/retained_attempt_v1.json)
+- [Public base source index](public_bases_v1/admission.json)
+
+## Classification-only endpoint correction
+
+The v1 snapshot described visible-failure lifecycle behavior incorrectly and allowed a visible_regression_failed result to count as native-complete without requiring hidden coverage. None of its 16 actual controls took that incomplete path: all visible and hidden populations completed, so every recorded grade remains unchanged. The full v1 snapshot and an additive erratum are retained.
+
+A new v2 service/profile now requires complete designated hidden coverage for any completed grade, including failed visible results. An AST comparison confines the service change to importing and invoking this stricter classifier. Sixteen retained actual population/receipt pairs preserve their grades under the new classifier; eight targeted classification controls cover absent/partial hidden coverage, hidden setup failure, complete visible failure, process failure, timeout, a missing completion signal and an ordinary complete pass. Four supporting public observation patterns verify partial/missing/teardown-error/failed-CALL classification. One actual service startup request with a wrong base was rejected before dispatch. No native suite or public probe was rerun for this classification correction.
+
+The corrected declaration/profile binds this metadata and required coverage. See [classification qualification](candidate_endpoint_v2/classification_qualification_v1/summary.json), [startup control](candidate_endpoint_v2/startup_control_v1/summary.json), and [retained lifecycle erratum](lifecycle_description_erratum_v1.json).

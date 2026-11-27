@@ -1,0 +1,135 @@
+"""Custody-owned scorer request/dispatch/receipt union; emit sanitized admission."""
+import argparse
+import hashlib
+import json
+import sqlite3
+import time
+from collections import Counter
+from pathlib import Path
+
+H = Path(__file__).resolve().parent
+R = H.parents[2]
+def canonical(x): return json.dumps(x, sort_keys=True, separators=(',', ':')).encode()
+def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
+def read(p): return json.loads(p.read_text()) if p.exists() else None
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--output', required=True)
+    parser.add_argument('--profile', required=True)
+    args = parser.parse_args()
+    output = Path(args.output)
+    assert not output.exists()
+    profile_path = Path(args.profile).resolve()
+    cohort = profile_path.parent
+    assert profile_path.name == 'profile.json'
+    profile = read(cohort / 'profile.json')
+    state = Path(profile['output_root'])
+    started = time.time_ns()
+    entries = {}
+    evidence = {}
+    def observe(path):
+        if path.exists(): evidence[str(path)] = sha(path)
+        return read(path)
+    for kind, directory in [('direct', state / 'effects'), ('replay', state / 'native_repository_sealing/replays')]:
+        for path in sorted(directory.glob('*/request.json')):
+            request = read(path)
+            if request.get('operation') != 'score': continue
+            identifier = request['evaluation_id']
+            assert identifier not in entries
+            entries[identifier] = {'kind': kind, 'request': observe(path), 'public_request_path': path,
+                                   'completion': observe(path.parent / 'completion.json'),
+                                   'outer_intent': observe(path.parent / 'dispatch_intent.json')}
+    # Include any service-owned request from this cohort even if its outer caller lost its record.
+    for path in sorted((H / 'results-v3').glob('*/curator_custody/request.json')):
+        request = read(path)
+        candidate = Path(request.get('sealed_candidate_patch_path', '/'))
+        if not candidate.is_relative_to(state): continue
+        identifier = request['evaluation_id']
+        if identifier not in entries:
+            entries[identifier] = {'kind': 'service_only_unknown', 'request': request, 'public_request_path': None,
+                                   'completion': None, 'outer_intent': None}
+        assert entries[identifier]['request'] == request
+        entries[identifier]['private_request_path'] = path
+        observe(path)
+    rows = []
+    checks = 0
+    for identifier, item in sorted(entries.items()):
+        request = item['request']
+        request_hash = hashlib.sha256(canonical(request)).hexdigest()
+        directory = H / 'results-v3' / identifier
+        private_request = observe(directory / 'curator_custody/request.json')
+        dispatch = observe(directory / 'dispatch_intent.json')
+        receipt = observe(directory / 'receipt.json')
+        completion = item['completion']
+        intent = item['outer_intent']
+        if private_request is not None:
+            assert private_request == request
+            checks += 1
+        if dispatch:
+            assert private_request is not None and dispatch['request_sha256'] == request_hash
+            checks += 1
+        if receipt:
+            assert private_request is not None and receipt['evaluation_id'] == identifier
+            if 'request_sha256' in receipt: assert receipt['request_sha256'] == request_hash
+            checks += 1
+        if intent:
+            assert intent['request_sha256'] == request_hash
+            checks += 1
+        response = (completion or {}).get('response')
+        if completion:
+            assert completion.get('request_hash', completion.get('request_sha256')) == request_hash
+            if response is not None: assert response == receipt
+            checks += 1
+        rows.append({'evaluation_id': identifier, 'kind': item['kind'], 'instance_id': request['instance_id'],
+            'event_id': (completion or {}).get('event_id'), 'stage': (completion or {}).get('stage'),
+            'request_sha256': request_hash,
+            'receipt_canonical_sha256': hashlib.sha256(canonical(receipt)).hexdigest() if receipt else None,
+            'receipt_file_sha256': sha(directory / 'receipt.json') if receipt else None,
+            'public_request_present': item['public_request_path'] is not None,
+            'service_request_present': private_request is not None,
+            'service_dispatch_intent_present': dispatch is not None,
+            'replay_dispatch_intent_present': intent is not None,
+            'receipt_present': receipt is not None, 'outer_completion_present': completion is not None,
+            'receipt_status': (receipt or {}).get('status'),
+            'grade': (receipt or {}).get('passed') if (receipt or {}).get('status') == 'completed' else None,
+            'container_elapsed_seconds': (receipt or {}).get('elapsed_seconds'),
+            'outer_service_elapsed_seconds': (completion or {}).get('elapsed_seconds'),
+            'outer_returncode': (completion or {}).get('returncode'),
+            'joins_passed': True})
+    connection = sqlite3.connect('file:' + str(state / 'ledger.sqlite3') + '?mode=ro', uri=True)
+    observed = dict(connection.execute('SELECT event_id,status FROM events').fetchall())
+    connection.close()
+    expected_events = {x['event_id'] for x in profile['events']}
+    terminal = expected_events <= set(observed) and all(observed[x] != 'started' for x in expected_events)
+    custody = output.parent / 'curator_custody'
+    custody.mkdir(parents=True, exist_ok=True, mode=0o700)
+    manifest_path = custody / (output.stem + '.evidence.json')
+    assert not manifest_path.exists()
+    manifest_path.write_text(json.dumps(evidence, sort_keys=True, indent=2) + '\n')
+    manifest_path.chmod(0o600)
+    unknown = [x['evaluation_id'] for x in rows if not x['receipt_present'] or not x['outer_completion_present']]
+    summary = {'schema': 'ns-sanitized-cohort-scorer-accounting-admission/v3',
+        'snapshot_started_at_ns': started, 'snapshot_finished_at_ns': time.time_ns(),
+        'cohort_profile_sha256': sha(cohort / 'profile.json'), 'auditor_sha256': sha(Path(__file__)),
+        'joins_passed': True, 'available_joins_checked': checks, 'terminal_cohort_observed': terminal,
+        'scheduled_events': len(expected_events), 'observed_event_statuses': {x: observed.get(x) for x in sorted(expected_events)},
+        'unique_request_count': len(rows), 'request_counts_by_kind': dict(Counter(x['kind'] for x in rows)),
+        'service_request_count': sum(x['service_request_present'] for x in rows),
+        'service_dispatch_intent_count': sum(x['service_dispatch_intent_present'] for x in rows),
+        'receipt_count': sum(x['receipt_present'] for x in rows), 'outer_completion_count': sum(x['outer_completion_present'] for x in rows),
+        'receipt_status_counts': dict(Counter(str(x['receipt_status']) for x in rows)),
+        'grades': dict(Counter(str(x['grade']) for x in rows)), 'pending_or_unknown_ids': unknown,
+        'accounting_complete': terminal and not unknown,
+        'container_elapsed_seconds_sum_observed': sum(x['container_elapsed_seconds'] or 0 for x in rows),
+        'outer_service_elapsed_seconds_sum_observed': sum(x['outer_service_elapsed_seconds'] or 0 for x in rows),
+        'missing_container_elapsed_count': sum(x['container_elapsed_seconds'] is None for x in rows),
+        'elapsed_sums_overlap_do_not_add': True, 'rows': rows,
+        'private_evidence_artifact_count': len(evidence), 'private_evidence_manifest_sha256': sha(manifest_path),
+        'join_rule': 'Union public direct/replay score requests and all service-owned requests bound to this cohort candidate tree; deduplicate evaluation_id; compare exact private/public request bytes canonically, dispatch request hash, actual service receipt and exact outer response. Unknown and request-only IDs remain in the denominator.',
+        'new_scorer_calls': 0, 'new_provider_calls': 0, 'source_or_profile_mutations': False}
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(summary, sort_keys=True, indent=2) + '\n')
+    print(json.dumps({k:v for k,v in summary.items() if k not in {'rows', 'observed_event_statuses'}}, sort_keys=True))
+
+if __name__ == '__main__': main()

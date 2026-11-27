@@ -1,0 +1,129 @@
+"""Real receipt files and owned abnormal child exit; no native grant/STOP mock.
+
+These tests prove diagnostic classification and immutable evidence handling.
+They do not reproduce SIGSEGV or qualify native runtime STOP.
+"""
+from pathlib import Path
+import hashlib
+import importlib.machinery
+import importlib.util
+import json
+import os
+import subprocess
+import sys
+import time
+
+import pytest
+
+import ipfs_accelerate_py.agent_supervisor.control.lifecycle_orchestrator as lifecycle_orchestrator
+
+CALLER = Path('/home/barberb/lift_coding/artifacts/legal-ir-supervisor-recovery-20261016-02/grok-private-M0-caller-source-v8-r2/run_construction.py')
+CALLER_SHA = 'f41b2ea3931bcf0c62d9f90d10681e0bd0ab48294a0f0b1aeb6ef656f027a1bd'
+CHECKER = Path('/home/barberb/lift_coding/artifacts/legal-ir-supervisor-recovery-20261018-01/private-M0-independent-construction-checker-source-v1/check_construction.py')
+CHECKER_SHA = 'b60a439024f917d6869ed96aec1dd060c85ee550c6dc27530e7db39412eecbfe'
+
+
+def _real_source(name, path, digest):
+    assert path.resolve(strict=True) == path
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == digest
+    spec = importlib.util.spec_from_file_location(name, path)
+    assert type(spec.loader) is importlib.machinery.SourceFileLoader
+    assert spec.origin == str(path)
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    assert sys.modules[name] is module and module.__file__ == module.__spec__.origin == str(path)
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == digest
+    return module
+
+
+@pytest.fixture(scope='module')
+def actual_sources():
+    # These are real stdlib-only artifact modules, not fake packages or
+    # fabricated runtime/native capability objects. main() is never called.
+    caller = _real_source('private_m0_receipt_test_caller8', CALLER, CALLER_SHA)
+    check = _real_source('private_m0_receipt_test_checker', CHECKER, CHECKER_SHA)
+    yield caller, check
+    assert hashlib.sha256(CALLER.read_bytes()).hexdigest() == CALLER_SHA
+    assert hashlib.sha256(CHECKER.read_bytes()).hexdigest() == CHECKER_SHA
+
+
+@pytest.mark.parametrize('files,label,unproven', [
+    ((), 'NO_DURABLE_RECEIPTS_UNPROVEN', True),
+    (('intent.json',), 'INTENT_ONLY_UNPROVEN', True),
+    (('failed.json',), 'FAILED_WITHOUT_CLOSED_UNPROVEN', True),
+    (('constructed.json',), 'CONSTRUCTED_FILE_PRESENT_UNQUALIFIED', False),
+    (('closed.json',), 'CLOSED_FILE_PRESENT_UNQUALIFIED', True),
+    (('closure-unknown.json',), 'UNKNOWN_RECEIPT_PRESENT', True),
+    (('closed.json', 'closure-unknown.json'), 'UNKNOWN_RECEIPT_PRESENT', True),
+], ids=['none','intent-only','failed-no-close','constructed-not-admitted','closed-not-admitted','unknown','conflicting-unknown'])
+def test_real_receipt_presence_is_diagnostic_only(tmp_path, actual_sources, files, label, unproven):
+    caller, check = actual_sources
+    directory = tmp_path/'receipts'
+    directory.mkdir(mode=0o700)
+    for name in files:
+        (directory/name).write_text(json.dumps({'schema':'inert-receipt-fixture/v1','authority':False}))
+    snapshot = caller.child_receipt_snapshot(directory, check=check)
+    presence = caller.child_receipt_presence(directory)
+    assert {name for name, row in snapshot['files'].items() if row is not None} == set(files)
+    assert caller.child_outcome_label(presence) == label
+    assert caller.child_requires_unproven_cleanup(presence) is unproven
+    caller.require_child_receipts_unchanged(directory, expected=snapshot, check=check)
+    assert sorted(path.name for path in directory.iterdir()) == sorted(files)
+
+
+def test_real_receipt_change_refuses_preserved_snapshot(tmp_path, actual_sources):
+    caller, check = actual_sources
+    directory = tmp_path/'receipts'
+    directory.mkdir(mode=0o700)
+    path = directory/'intent.json'
+    path.write_bytes(b'{"schema":"inert-intent/v1"}\n')
+    original = caller.child_receipt_snapshot(directory, check=check)
+    path.write_bytes(b'{"schema":"inert-intent/v2"}\n')
+    with pytest.raises(check.ConstructionCheckFailed, match='child_receipts_changed_during_native_STOP'):
+        caller.require_child_receipts_unchanged(directory, expected=original, check=check)
+    assert caller.child_outcome_label(caller.child_receipt_presence(directory)) == 'INTENT_ONLY_UNPROVEN'
+    assert not (directory/'closed.json').exists()
+
+
+def test_real_owned_abnormal_exit_stays_unproven_intent_only(tmp_path, actual_sources):
+    caller, check = actual_sources
+    directory = tmp_path/'receipts'
+    directory.mkdir(mode=0o700)
+    before = caller.child_receipt_snapshot(directory, check=check)
+    assert caller.child_outcome_label(caller.child_receipt_presence(directory)) == 'NO_DURABLE_RECEIPTS_UNPROVEN'
+    code = "import os,sys; p=os.path.join(sys.argv[1],'intent.json'); fd=os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600); os.write(fd,b'{\"schema\":\"inert-owned-child-intent/v1\",\"authority\":false}\\n'); os.fsync(fd); os.close(fd); os._exit(23)"
+    actual = subprocess.Popen((sys.executable,'-B','-c',code,str(directory)),
+        stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True)
+    try:
+        # Read actual /proc state without Popen.poll(), which would reap the
+        # owned zombie. The production adapter deliberately rejects Z as a
+        # live identity; actual wait is still separately required below.
+        deadline = time.monotonic()+3
+        state = None
+        while time.monotonic() < deadline:
+            raw = Path(f'/proc/{actual.pid}/stat').read_text()
+            state = raw[raw.rfind(')')+2:].split()[0]
+            if state == 'Z':
+                break
+            time.sleep(.01)
+        assert state == 'Z'
+        module_root = Path(sys.modules['ipfs_accelerate_py'].__file__).parent
+        actual_source = module_root/'agent_supervisor/control/lifecycle_orchestrator.py'
+        assert lifecycle_orchestrator.__file__ == lifecycle_orchestrator.__spec__.origin == str(actual_source)
+        assert sys.modules[lifecycle_orchestrator.__name__] is lifecycle_orchestrator
+        with pytest.raises(ProcessLookupError):
+            lifecycle_orchestrator.LinuxProcessAdapter._stat(actual.pid)
+        assert actual.wait(timeout=3) == 23
+        assert not Path(f'/proc/{actual.pid}').exists()
+        after = caller.child_receipt_snapshot(directory, check=check)
+        assert before != after and after['files']['intent.json'] is not None
+        assert all(after['files'][name] is None for name in caller.CHILD_RECEIPT_NAMES if name != 'intent.json')
+        assert caller.child_outcome_label(caller.child_receipt_presence(directory)) == 'INTENT_ONLY_UNPROVEN'
+        assert caller.child_requires_unproven_cleanup(caller.child_receipt_presence(directory)) is True
+        caller.require_child_receipts_unchanged(directory, expected=after, check=check)
+        assert not (directory/'closed.json').exists()
+    finally:
+        if actual.poll() is None:
+            actual.kill()
+        actual.wait(timeout=2)

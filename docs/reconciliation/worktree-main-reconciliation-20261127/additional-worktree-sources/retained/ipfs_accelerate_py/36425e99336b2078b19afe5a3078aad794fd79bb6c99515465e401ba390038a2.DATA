@@ -1,0 +1,210 @@
+"""Pure M2 metadata/fail-closed gates; no resource or capability doubles.
+
+Uses normal inert modules and actual private regular files only. No owner,
+claim, DuckDB, provider, native process, namespace or scheduler is created.
+"""
+import ast
+import hashlib
+import inspect
+import json
+from pathlib import Path
+
+import pytest
+import ipfs_accelerate_py.cli_runtime.grok_private_same_pid_m2 as setup
+
+
+def pin(path):
+    raw=path.read_bytes()
+    return dict(path=str(path),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+
+
+def write_json(path,value):
+    path.write_text(json.dumps(value,sort_keys=True,separators=(',',':'))+'\n')
+    path.chmod(0o600)
+    return pin(path)
+
+
+def capture_options():
+    return dict(schema=setup.SCHEMA,mode='isolated-loopback-capture',
+        execution_environment='isolated-loopback',paid_provider_calls_allowed=False,
+        capture_worker_dispatch_allowed=True,attempt_cap=1)
+
+
+def test_explicit_capture_permission_is_metadata_only():
+    assert setup._validate_capture_mode(capture_options()) is None
+    with pytest.raises(setup.FixtureRefusal,match=setup.WORKER_CREDENTIAL_GAP):
+        setup._require_explicit_worker_credential_contract()
+
+
+@pytest.mark.parametrize('field,value',[
+    ('mode','provider'),('execution_environment','provider'),
+    ('paid_provider_calls_allowed',True),('capture_worker_dispatch_allowed',1),
+    ('attempt_cap',True),('attempt_cap',2)])
+def test_capture_permission_cannot_enable_other_modes_or_caps(field,value):
+    options=capture_options();options[field]=value
+    with pytest.raises(setup.FixtureRefusal,match='isolated_loopback_M2_cap1_only'):
+        setup._validate_capture_mode(options)
+
+
+def clocks():
+    return dict(original_started_monotonic=1000.0,work_deadline_monotonic=1240.0,
+        native_deadline_monotonic=1300.0,parent_native_deadline_monotonic=1360.0)
+
+
+def test_original_clock_epoch_is_retained():
+    assert setup._validate_original_clocks(clocks(),now=1100.0) is None
+
+
+@pytest.mark.parametrize('field,value',[
+    ('original_started_monotonic',True),('original_started_monotonic',1001),
+    ('work_deadline_monotonic',1241),('native_deadline_monotonic',1301),
+    ('parent_native_deadline_monotonic',1361),('native_deadline_monotonic',float('nan')),
+    ('parent_native_deadline_monotonic',float('inf'))])
+def test_deadlines_cannot_refresh_or_change_original_clock_offsets(field,value):
+    options=clocks();options[field]=value
+    with pytest.raises(setup.FixtureRefusal):
+        setup._validate_original_clocks(options,now=1100.0)
+
+
+def test_expired_original_work_clock_refuses():
+    with pytest.raises(setup.FixtureRefusal,match='unchanged_original_240_300_360'):
+        setup._validate_original_clocks(clocks(),now=1240.0)
+
+
+@pytest.fixture
+def policy_input(tmp_path):
+    policy=dict(schema='private-M2-loopback-policy/v1',execution_environment='isolated-loopback',
+        network_mode='none',credential_slot='fresh-fake-slot',credential_fingerprint='1'*16,
+        endpoint_environment={name:'http://127.0.0.1:12345/v1' for name in setup.ENDPOINT_NAMES},
+        fake_credential_contract='explicit-worker-fixture-required')
+    path=tmp_path/'public-loopback-policy.json'
+    options=dict(namespace_policy_pin=write_json(path,policy),
+        credential_slot=policy['credential_slot'],credential_fingerprint=policy['credential_fingerprint'])
+    return options,policy,path
+
+
+def test_actual_policy_pin_carries_public_inputs_without_secrets(policy_input):
+    options,policy,_=policy_input
+    assert setup.read_loopback_policy(options)==policy
+    assert 'secrets_file' not in policy
+
+
+@pytest.mark.parametrize('endpoint',[
+    'http://example.org:12345/v1','https://127.0.0.1:12345/v1',
+    'http://127.0.0.1:0/v1','http://user@127.0.0.1:12345/v1',
+    'http://127.0.0.1:12345/v1?key=placeholder','http://127.0.0.1:12345/v1#fragment',
+    'http://localhost:12345/v1','http://127.0.0.1:70000/v1'])
+def test_only_explicit_numeric_public_loopback_routes_are_accepted(policy_input,endpoint):
+    options,policy,path=policy_input
+    policy['endpoint_environment'][sorted(setup.ENDPOINT_NAMES)[0]]=endpoint
+    options['namespace_policy_pin']=write_json(path,policy)
+    with pytest.raises(setup.FixtureRefusal):setup.read_loopback_policy(options)
+
+
+@pytest.mark.parametrize('field,value',[
+    ('credential_slot','another-slot'),('credential_fingerprint','2'*16),
+    ('network_mode','host'),('fake_credential_contract','ambient'),
+    ('extra_field',True)])
+def test_policy_cannot_rebind_slot_or_choose_ambient_mode(policy_input,field,value):
+    options,policy,path=policy_input;policy[field]=value
+    options['namespace_policy_pin']=write_json(path,policy)
+    with pytest.raises(setup.FixtureRefusal):setup.read_loopback_policy(options)
+
+
+def test_policy_actual_bytes_must_stay_pinned(policy_input):
+    options,_,path=policy_input;path.write_bytes(path.read_bytes()+b' ')
+    with pytest.raises(setup.FixtureRefusal):setup.read_loopback_policy(options)
+
+
+def test_duplicate_public_policy_keys_refuse(policy_input):
+    options,_,path=policy_input
+    path.write_text('{"schema":"a","schema":"b"}\n');options['namespace_policy_pin']=pin(path)
+    with pytest.raises(setup.FixtureRefusal,match='duplicate_loopback_policy_key'):
+        setup.read_loopback_policy(options)
+
+
+ROLES={
+    'worker':'ipfs_accelerate_py/cli_runtime/grok_fresh_task_capture_worker.py',
+    'adapter':'ipfs_accelerate_py/cli_runtime/grok_fresh_task_capture_transport.py',
+    'runtime':'ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py',
+    'helper':'ipfs_accelerate_py/cli_runtime/grok_named_session.py',
+    'owner_source':'ipfs_accelerate_py/cli_runtime/grok_production_owner.py'}
+EXTRA=['ipfs_accelerate_py/__init__.py','ipfs_accelerate_py/llm_router.py',
+    'ipfs_accelerate_py/llm_allocation/__init__.py','ipfs_accelerate_py/llm_allocation/duckdb_store.py']
+
+
+@pytest.fixture
+def source_metadata(tmp_path):
+    root=tmp_path/'A';sources={}
+    for relative in list(ROLES.values())+EXTRA:
+        path=root/relative;path.parent.mkdir(parents=True,exist_ok=True)
+        path.write_text('# inert regular-file metadata\n');sources[str(path)]=pin(path)['sha256']
+    generation='grok-automatic-named-session/fresh-metadata'
+    profile=dict(schema='fresh-task-grok-capture-source-profile/v1',source_generation=generation,sources=dict(sources))
+    capsule=dict(schema='legal-ir-grok-planning-transport-capsule/v4',source_generation=generation,
+        files={role:pin(root/relative) for role,relative in ROLES.items()},
+        named_session={name:None for name in ('native_home','audit_directory','preparation_home','binary',
+            'configuration','owner_sampling_policy','system_requirements','cleanup_reserve_seconds','bootstrap_max_seconds')})
+    profile_path=tmp_path/'profile.json';capsule_path=tmp_path/'capsule.json'
+    options=dict(source_roots=[str(root)],source_generation=generation,source_sha256=sources,
+        source_profile_pin=write_json(profile_path,profile),capsule_pin=write_json(capsule_path,capsule))
+    return options,profile,capsule,profile_path,capsule_path
+
+
+def test_nine_source_roles_join_full_map_and_unchanged_V4_metadata(source_metadata):
+    options,_,_,_,_=source_metadata
+    assert setup._validate_capture_source_metadata(options)==dict(
+        source_profile_count=9,generic_V4_schema_preserved=True)
+
+
+@pytest.mark.parametrize('relative',list(ROLES.values())+EXTRA)
+def test_any_missing_capture_dependency_refuses(source_metadata,relative):
+    options,profile,_,profile_path,_=source_metadata
+    profile['sources'].pop(str(Path(options['source_roots'][0])/relative))
+    options['source_profile_pin']=write_json(profile_path,profile)
+    with pytest.raises(setup.FixtureRefusal,match='nine_normal_capture_roles_required'):
+        setup._validate_capture_source_metadata(options)
+
+
+@pytest.mark.parametrize('role',list(ROLES))
+def test_V4_schema_cannot_drop_a_source_role(source_metadata,role):
+    options,_,capsule,_,capsule_path=source_metadata;capsule['files'].pop(role)
+    options['capsule_pin']=write_json(capsule_path,capsule)
+    with pytest.raises(setup.FixtureRefusal,match='unchanged_V4_capture_capsule_required'):
+        setup._validate_capture_source_metadata(options)
+
+
+def test_source_profile_cannot_replace_full_producer_hash(source_metadata):
+    options,_,_,_,_=source_metadata
+    options['source_sha256'][next(iter(options['source_sha256']))]='f'*64
+    with pytest.raises(setup.FixtureRefusal,match='capture_profile_must_join_complete_producer_map'):
+        setup._validate_capture_source_metadata(options)
+
+
+@pytest.mark.parametrize('name',['dispatch_once','bind_portal_attempt','prepare_capture_handoff','bind_capture_handoff'])
+def test_worker_gap_guard_precedes_every_dispatch_and_issuer_entry(name):
+    tree=ast.parse(inspect.getsource(setup))
+    cls=next(node for node in tree.body if isinstance(node,ast.ClassDef) and node.name=='PrivateM2OwnedSetup')
+    method=next(node for node in cls.body if isinstance(node,ast.FunctionDef) and node.name==name)
+    statements=method.body[1:] if isinstance(method.body[0],ast.Expr) and isinstance(method.body[0].value,ast.Constant) else method.body
+    first=statements[0]
+    assert isinstance(first,ast.Expr) and isinstance(first.value,ast.Call)
+    assert isinstance(first.value.func,ast.Name)
+    assert first.value.func.id=='_require_explicit_worker_credential_contract'
+    if name=='dispatch_once':assert len(statements)==1
+
+
+@pytest.mark.parametrize('rows,accepted',[
+    ([(1,'lo')],True),
+    ([(1,'lo'),(2,'eth0')],False),
+    ([(1,'lo'),(2,'lo')],False),
+    ([(True,'lo')],False),
+    ([(0,'lo')],False)])
+def test_public_interface_census_does_not_admit_non_loopback_or_invalid_metadata(rows,accepted):
+    # These inputs are metadata only, never an asserted namespace/resource
+    # handle. Only the live observer obtains rows from socket.if_nameindex.
+    if accepted:
+        assert setup._require_loopback_interface_census(rows) is None
+    else:
+        with pytest.raises(setup.FixtureRefusal,match='network_namespace_loopback_only_required'):
+            setup._require_loopback_interface_census(rows)

@@ -1,0 +1,20 @@
+import json
+from ipfs_datasets_py.logic.software_contracts import content as c
+from multiformats import multihash
+original=multihash.digest;calls=[]
+def counting(data,*args,**kwargs):
+ calls.append(bytes(data));return original(data,*args,**kwargs)
+multihash.digest=counting
+body=b'fixed-current-source';cid=c.cid_for_bytes(body);c._validate_cid_syntax_cached.cache_clear();calls.clear()
+for _ in range(20):assert c.decode_and_recompute_source(cid,body)==cid
+for _ in range(20):
+ try:c.decode_and_recompute_source(cid,body+b'changed')
+ except c.ContentIdentityError:pass
+ else:raise AssertionError('changed source accepted')
+assert len(calls)==40 and calls.count(body)==20
+info=c._validate_cid_syntax_cached.cache_info()
+assert info.hits>=39
+try:c.validate_cid(cid,codecs=('dag-json',))
+except c.ContentIdentityError:pass
+else:raise AssertionError('allowed-codec cache contamination')
+print(json.dumps({'successful_current_source_reads':20,'changed_source_rejections':20,'native_multihashes_recomputed':len(calls),'syntax_cache':info._asdict(),'wrong_allowed_codec_rejected':True,'all_checks_passed':True}))

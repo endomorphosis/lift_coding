@@ -1,0 +1,32 @@
+"""Evaluate the original frozen auditor's sufficient rejecting predicate.
+
+This reads curated receipt metadata and the pinned historical source snapshot.
+It does not import the runtime, inspect a prompt/rollout/key, open a database,
+execute a native replay, or upgrade the original failed audit observation.
+"""
+import ast
+import hashlib
+import json
+from pathlib import Path
+HERE = Path(__file__).parent
+SOURCE = HERE / 'before-terminal_context_audit.py'
+raw = SOURCE.read_bytes()
+assert hashlib.sha256(raw).hexdigest() == 'f1bf327a52a3b2d932b7b056266ad509712557a39a1120fa32a6528d48480b82'
+module = ast.parse(raw)
+function = next(node for node in module.body if isinstance(node, ast.FunctionDef) and node.name == '_historical_code_native')
+assignment = next(node for node in function.body if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'metadata' for t in node.targets))
+assert ast.unparse(assignment.value) == "expected.get('metadata')"
+guard = next(node for node in function.body if isinstance(node, ast.If) and isinstance(node.test, ast.BoolOp) and ast.unparse(node.test.values[0]) == 'type(metadata) is not dict')
+first = ast.Expression(guard.test.values[0]);ast.fix_missing_locations(first)
+rows = []
+for arm in ('expanded','compact'):
+ receipt_raw = (HERE.parent / ('pilot/code-'+arm+'-01/receipt.json')).read_bytes()
+ supervisor = json.loads(receipt_raw)['trials'][0]['supervisor']
+ expected = supervisor['context']
+ native_raw = json.dumps(expected, sort_keys=True, indent=2).encode()+b'\n'
+ digest = hashlib.sha256(native_raw).hexdigest()
+ assert digest == supervisor['context_input_audit']['context_result_sha256']
+ rejects = eval(compile(first,str(SOURCE),'eval'),{'__builtins__':{},'type':type,'dict':dict},{'metadata':expected.get('metadata')})
+ assert rejects is True
+ rows.append({'arm':arm,'receipt_sha256':hashlib.sha256(receipt_raw).hexdigest(),'exact_context_result_sha256':digest,'metadata_present':'metadata' in expected,'context_bundle_present':'context_bundle' in expected,'original_first_guard_rejects':rejects,'compact_branch_reached_by_configuration':arm=='compact'})
+print(json.dumps({'schema':'terminal-original-metadata-guard-reproducer@1','source_sha256':hashlib.sha256(raw).hexdigest(),'assignment_line':assignment.lineno,'guard_line':guard.lineno,'predicate':'type(metadata) is not dict','demonstration_scope':'Only the sufficient original short-circuit predicate is evaluated; original complete native artifact/capsule state was not exported and the whole historical audit is not rerun.','cases':rows,'runtime_imports':0,'provider_calls':0,'databases_opened':0,'original_receipts_modified':False},sort_keys=True))

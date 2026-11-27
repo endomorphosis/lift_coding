@@ -1,0 +1,46 @@
+{
+  "time": "2026-11-10T03:26:49.560697+00:00",
+  "input_tree": "c70e2b5c4052e7bf3eb76306b947aedce5567b48",
+  "resolutions": [
+    {
+      "path": "benchmarks/agent_supervisor/container_coding/benchmark_comparison.py",
+      "external_source": "/tmp/lift-sync-pruning-runtime-prepared-source-20261110-v01/benchmark_comparison.py.txt",
+      "sha256": "b4d034c25ce77f29dc2c3bbea507c04c9b77d2d18528bd29464aac6eb11fab49",
+      "conflict_blocks_prepared": 1,
+      "syntax_parsed": true
+    },
+    {
+      "path": "ipfs_accelerate_py/llm_router.py",
+      "external_source": "/tmp/lift-sync-pruning-runtime-prepared-source-20261110-v01/llm_router.py.txt",
+      "sha256": "fcf3cc076f395fb5d80eb1f7b8a986f5f470b0179ee3a4b101f523e7784901bd",
+      "conflict_blocks_prepared": 2,
+      "syntax_parsed": true
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/database_portal_bridge.py",
+      "external_source": "/tmp/lift-sync-pruning-runtime-prepared-source-20261110-v01/database_portal_bridge.py.txt",
+      "sha256": "baedc4e91f0af24f7ce101f73c046e7984c02094720c54fe6022e78ec62a8e21",
+      "conflict_blocks_prepared": 2,
+      "syntax_parsed": true
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py",
+      "external_source": "/tmp/lift-sync-pruning-runtime-prepared-source-20261110-v01/implementation_daemon.py.txt",
+      "sha256": "05b6b85f5ee9044a3f3aec77e5dcd12d926bd92ee8d76bb5705834796c5df6b9",
+      "conflict_blocks_prepared": 2,
+      "syntax_parsed": true
+    },
+    {
+      "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/supervisor_runtime.py",
+      "external_source": "/tmp/lift-sync-pruning-runtime-prepared-source-20261110-v01/supervisor_runtime.py.txt",
+      "sha256": "10372b6c209cf31b5d72b0439bcbe57e96d4619c34375a73e19fee3558ff15cc",
+      "conflict_blocks_prepared": 5,
+      "syntax_parsed": true
+    }
+  ],
+  "review_errors": [],
+  "source_tree_updated": false,
+  "source_refs_updated": false,
+  "runtime_qualified": false,
+  "write_attempt": "Original three-second WRITE-source admission timed out before mutation; coordinated H GREEN198 now holds READs."
+}

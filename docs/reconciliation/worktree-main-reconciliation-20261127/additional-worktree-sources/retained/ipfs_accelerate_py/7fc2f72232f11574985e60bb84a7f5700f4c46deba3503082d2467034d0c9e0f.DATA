@@ -1,0 +1,748 @@
+"""FIRST post-return factual capture checker for a separately sealed fresh task.
+
+Import performs no project imports, provider/DB/native/resource operations.
+Metadata alone is never authority. Only first_after_stream_capture consumes
+an actual retained normal handoff, Popen, original sealed FD and public store.
+It observes native capture, never settles/accepts a task or proves model quality.
+"""
+import fcntl
+import hashlib
+import json
+import math
+import os
+from pathlib import Path
+import re
+import stat
+import subprocess
+import sys
+import time
+import types
+import uuid
+
+SCHEMA = 'fresh-task-grok-capture-check/v1'
+MODULE = 'ipfs_accelerate_py.cli_runtime.grok_fresh_task_capture_check'
+WORKER = 'ipfs_accelerate_py.cli_runtime.grok_fresh_task_capture_worker'
+MAX_BYTES = 2 * 1024 * 1024
+CAPTURE_FIELDS = ('allocation_session_id','provider','native_session_id','workspace','resume_style')
+METHODS = ('initialize','session/new','_x.ai/session/rename','_x.ai/session/close')
+STAGES = ('request_prepared','remaining_deadline','worker_v4_response')
+
+
+class CaptureCheckRefusal(RuntimeError):
+    """Closed metadata-only reason; no exception messages/credentials copied."""
+
+
+def need(condition, reason):
+    if not condition:
+        raise CaptureCheckRefusal(reason)
+
+
+def canonical(value):
+    return (json.dumps(value,sort_keys=True,ensure_ascii=False,allow_nan=False,
+                       separators=(',',':'))+'\n').encode('utf-8')
+
+
+def digest(value):
+    return hashlib.sha256(canonical(value)).hexdigest()
+
+
+def decode(raw):
+    def unique(pairs):
+        out={}
+        for key,value in pairs:
+            need(key not in out,'duplicate_JSON_key')
+            out[key]=value
+        return out
+    def bad(_):
+        raise CaptureCheckRefusal('nonfinite_JSON')
+    try:
+        value=json.loads(raw.decode('utf-8'),object_pairs_hook=unique,parse_constant=bad)
+    except (ValueError,UnicodeError,RecursionError):
+        raise CaptureCheckRefusal('invalid_JSON') from None
+    need(type(value) is dict,'JSON_object_required')
+    return value
+
+
+def read_pin(pin, *, maximum=MAX_BYTES, private=False):
+    need(type(pin) is dict and set(pin)=={'path','bytes','sha256'} and
+         type(pin['path']) is str and type(pin['bytes']) is int and
+         0<pin['bytes']<=maximum and type(pin['sha256']) is str and
+         re.fullmatch('[0-9a-f]{64}',pin['sha256']),'exact_bounded_pin_required')
+    path=Path(pin['path'])
+    need(path.is_absolute() and path.resolve(strict=True)==path,'unaliased_pin_path_required')
+    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK|os.O_CLOEXEC)
+    try:
+        before=os.fstat(fd)
+        need(stat.S_ISREG(before.st_mode) and before.st_nlink==1 and
+             before.st_size==pin['bytes'],'regular_pin_file_required')
+        if private:
+            need(before.st_uid==os.geteuid() and stat.S_IMODE(before.st_mode)==0o600,
+                 'private_owned_pin_file_required')
+        body=bytearray()
+        while len(body)<=pin['bytes']:
+            piece=os.read(fd,min(65536,pin['bytes']+1-len(body)))
+            if not piece:break
+            body.extend(piece)
+        signature=lambda row:(row.st_dev,row.st_ino,row.st_mode,row.st_nlink,
+                                  row.st_size,row.st_mtime_ns,row.st_ctime_ns)
+        need(len(body)==pin['bytes'] and signature(before)==signature(os.fstat(fd))==
+             signature(path.lstat()) and hashlib.sha256(body).hexdigest()==pin['sha256'],
+             'pin_changed_or_digest_mismatch')
+        return bytes(body)
+    finally:
+        os.close(fd)
+
+
+def read_borrowed_sealed_request(fd, request):
+    """Read without seeking, mutating or closing the issuer's original memfd."""
+    need(type(fd) is int and fd>=0,'original_borrowed_metadata_FD_required')
+    row=os.fstat(fd)
+    seals=fcntl.F_SEAL_SEAL|fcntl.F_SEAL_SHRINK|fcntl.F_SEAL_GROW|fcntl.F_SEAL_WRITE
+    need(stat.S_ISREG(row.st_mode) and 0<row.st_size<=65536 and
+         fcntl.fcntl(fd,fcntl.F_GET_SEALS)==seals and
+         fcntl.fcntl(fd,fcntl.F_GETFD)&fcntl.FD_CLOEXEC,'fully_sealed_original_metadata_FD_required')
+    raw=os.pread(fd,row.st_size+1,0)
+    need(len(raw)==row.st_size and raw==canonical(request),'sealed_fresh_request_differs')
+    return hashlib.sha256(raw).hexdigest()
+
+
+PRIVATE_SCHEMA = 'private-fresh-task-grok-capture-request/v2'
+PRIVATE_FIXTURE_SCHEMA = 'private-grok-fake-credential-fixture/v2'
+PRIVATE_HELPER = 'ipfs_accelerate_py.cli_runtime.grok_private_fake_credentials'
+PRIVATE_PRELAUNCH_FIELDS = (
+    'database_task_cid','database_attempt_id','database_claim_id','database_attempt_number',
+    'coordination_lease_id','owner_session_id','fencing_token','fence_epoch','portal_task_id',
+    'portal_task_revision_cid','portal_attempt','native_attempt_id','allocation_session_id',
+    'credential_slot','credential_fingerprint','allocation_store_path','workspace','source_generation',
+    'source_bindings_sha256','capsule_sha256','worker_source_sha256','owner_source_sha256',
+    'work_deadline_monotonic','native_deadline_monotonic','root_lease_id','phase_lease_id',
+    'disk_native_lease_id','disk_reservation_id')
+PRIVATE_PROFILE_PATHS = (
+    'ipfs_accelerate_py/__init__.py',
+    'ipfs_accelerate_py/cli_runtime/grok_fresh_task_capture_worker.py',
+    'ipfs_accelerate_py/cli_runtime/grok_fresh_task_capture_transport.py',
+    'ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py',
+    'ipfs_accelerate_py/cli_runtime/grok_named_session.py',
+    'ipfs_accelerate_py/cli_runtime/grok_production_owner.py',
+    'ipfs_accelerate_py/llm_router.py',
+    'ipfs_accelerate_py/llm_allocation/__init__.py',
+    'ipfs_accelerate_py/llm_allocation/duckdb_store.py',
+    'ipfs_accelerate_py/cli_runtime/grok_private_fake_credentials.py',
+    'ipfs_accelerate_py/common/__init__.py',
+    'ipfs_accelerate_py/common/storage_wrapper.py',
+    'ipfs_accelerate_py/common/secrets_manager.py',
+    'ipfs_accelerate_py/llm_allocation/api_key_slots.py')
+PRIVATE_CAPSULE_ROLES = dict(worker=PRIVATE_PROFILE_PATHS[1],adapter=PRIVATE_PROFILE_PATHS[2],
+    runtime=PRIVATE_PROFILE_PATHS[3],helper=PRIVATE_PROFILE_PATHS[4],owner_source=PRIVATE_PROFILE_PATHS[5])
+
+
+def _private_pin_shape(value, maximum=65536):
+    need(type(value) is dict and set(value)=={'path','bytes','sha256'} and
+         type(value['path']) is str and Path(value['path']).is_absolute() and
+         '..' not in Path(value['path']).parts and not any(ord(c)<32 for c in value['path']) and
+         type(value['bytes']) is int and 0<value['bytes']<=maximum and
+         type(value['sha256']) is str and re.fullmatch('[0-9a-f]{64}',value['sha256']),
+         'private_exact_bounded_pin_required')
+
+
+def _private_restricted_map(rows):
+    need(type(rows) is list and 1<=len(rows)<=8,'private_bounded_namespace_maps_required')
+    for row in rows:
+        need(type(row) is list and len(row)==3 and all(type(x) is int for x in row) and
+             0<=row[0]<4294967295 and 0<=row[1]<4294967295 and 0<row[2]<=4294967295 and
+             row[0]+row[2]<=4294967295 and row[1]+row[2]<=4294967295,
+             'private_namespace_map_triplets_required')
+    need(sum(row[2] for row in rows)<4294967295,'private_noninitial_namespace_map_required')
+    for axis in (0,1):
+        ordered=sorted(rows,key=lambda row:row[axis])
+        need(all(a[axis]+a[2]<=b[axis] for a,b in zip(ordered,ordered[1:])),
+             'private_nonoverlapping_namespace_maps_required')
+
+
+def validate_private_fixture_metadata(*,request,context,fixture,source_profile,capsule):
+    """Pure S->F->R joins only; this never creates a client or authority."""
+    need(type(request) is dict and request.get('schema')==PRIVATE_SCHEMA and
+         request.get('execution_environment')=='isolated-loopback' and
+         type(request.get('attempt_cap')) is int and request['attempt_cap']==1 and
+         type(request.get('database_attempt_number')) is int and request['database_attempt_number']==1,
+         'private_v2_loopback_single_attempt_required')
+    need(set(request)=={'schema','mode','one_shot','attempt_cap','provider_dispatch_allowed','execution_environment',
+         'accelerator_root','workspace','receipt_directory','task_alias','task_cid','database_attempt_id',
+         'database_attempt_number','allocation_session_id','source_generation','work_deadline_monotonic',
+         'native_deadline_monotonic','owner_pid','owner_birth','owner_request_sha256','context_path',
+         'capsule_pin','source_profile_pin','max_output_tokens','maximum_timeout_seconds','fake_credential_fixture_pin'} and
+         request['mode']=='fresh-task-capture-diagnostic' and request['one_shot'] is True and
+         request['provider_dispatch_allowed'] is True,'private_closed_sealed_worker_request_required')
+    for key in ('fake_credential_fixture_pin','source_profile_pin','capsule_pin'):
+        _private_pin_shape(request.get(key))
+    fields={'schema','execution_environment','paid_provider_calls_allowed','task_cid','task_alias',
+        'database_attempt_id','database_attempt_number','allocation_session_id','source_generation',
+        'owner_request_sha256','source_profile_sha256','capsule_sha256','credential_slot',
+        'credential_fingerprint','fake_nonce','receipt_directory','work_deadline_monotonic',
+        'native_deadline_monotonic','network_namespace','network_witness_policy','private_duckdb_quiescence_policy'}
+    need(type(fixture) is dict and set(fixture)==fields and fixture['schema']==PRIVATE_FIXTURE_SCHEMA and
+         fixture['execution_environment']=='isolated-loopback' and fixture['paid_provider_calls_allowed'] is False,
+         'closed_private_v2_fake_fixture_required')
+    raw=canonical(fixture);pin=request['fake_credential_fixture_pin']
+    need(pin['path']==str(Path(request['receipt_directory'])/'private-fake-credential-fixture.json') and
+         Path(request['context_path']).parent==Path(request['receipt_directory']) and
+         pin['bytes']==len(raw) and pin['sha256']==hashlib.sha256(raw).hexdigest(),
+         'original_sealed_request_must_commit_exact_fixture_F')
+    need(type(context) is dict and context.get('schema')=='grok-production-owner-context/v1' and
+         all(key in context for key in PRIVATE_PRELAUNCH_FIELDS), 'actual_private_context_fields_required')
+    prelaunch={'schema':'grok-production-owner-context/v1',**{key:context[key] for key in PRIVATE_PRELAUNCH_FIELDS}}
+    R=digest(prelaunch);S=digest(request)
+    need(context.get('request_sha256')==request.get('owner_request_sha256')==fixture['owner_request_sha256']==R and
+         S!=R and digest({k:v for k,v in context.items() if k!='context_sha256'})==context.get('context_sha256'),
+         'distinct_original_S_fixture_F_owner_R_context_commitments_required')
+    for key in ('task_cid','task_alias','database_attempt_id','database_attempt_number','allocation_session_id',
+                'source_generation','receipt_directory','work_deadline_monotonic','native_deadline_monotonic'):
+        need(type(fixture[key]) is type(request.get(key)) and fixture[key]==request[key],
+             'private_fixture_original_request_binding_differs')
+    pairs={'task_cid':'database_task_cid','task_alias':'portal_task_id','database_attempt_id':'database_attempt_id',
+        'database_attempt_number':'database_attempt_number','allocation_session_id':'allocation_session_id',
+        'source_generation':'source_generation','credential_slot':'credential_slot',
+        'credential_fingerprint':'credential_fingerprint','source_profile_sha256':'source_bindings_sha256',
+        'capsule_sha256':'capsule_sha256','work_deadline_monotonic':'work_deadline_monotonic',
+        'native_deadline_monotonic':'native_deadline_monotonic'}
+    for key,target in pairs.items():
+        need(type(fixture[key]) is type(context.get(target)) and fixture[key]==context[target],
+             'private_fixture_actual_context_binding_differs')
+    nonce=fixture['fake_nonce']
+    need(type(nonce) is str and re.fullmatch('[0-9a-f]{32}',nonce) and
+         type(fixture['credential_slot']) is str and re.fullmatch('[A-Za-z0-9_.-]{1,64}',fixture['credential_slot']) and
+         fixture['credential_fingerprint']==hashlib.sha256(('INVALID_PRIVATE_LOOPBACK_FIXTURE_ONLY_'+nonce).encode()).hexdigest()[:16],
+         'private_public_nonce_must_match_existing_context_fingerprint')
+    work,native=fixture['work_deadline_monotonic'],fixture['native_deadline_monotonic']
+    need(type(work) in (int,float) and type(native) in (int,float) and math.isfinite(work) and math.isfinite(native) and
+         0<work<native and native-work<=60,'private_original_work_native_clocks_required')
+    namespace=fixture['network_namespace']
+    need(type(namespace) is dict and set(namespace)=={'device','inode'} and
+         all(type(x) is int and x>0 for x in namespace.values()),'private_exact_self_namespace_metadata_required')
+    network=fixture['network_witness_policy']
+    need(type(network) is dict and set(network)=={'schema','witness_kind','expected_uid_map','expected_gid_map'} and
+         network['schema']=='private-owned-rootless-network-policy/v1' and
+         network['witness_kind']=='own-net-owned-user-restricted-maps/v1','private_explicit_owned_rootless_policy_required')
+    _private_restricted_map(network['expected_uid_map']);_private_restricted_map(network['expected_gid_map'])
+    quiet=fixture['private_duckdb_quiescence_policy']
+    need(type(quiet) is dict and set(quiet)=={'schema','operation','maximum_observation_milliseconds'} and
+         quiet['schema']=='private-owned-DuckDB-public-close-policy/v1' and quiet['operation']=='duckdb.close' and
+         type(quiet['maximum_observation_milliseconds']) is int and quiet['maximum_observation_milliseconds']==200,
+         'private_fixed_public_quiescence_policy_required')
+    need(type(source_profile) is dict and set(source_profile)=={'schema','source_generation','sources'} and
+         source_profile['schema']=='fresh-task-grok-capture-source-profile/v1' and
+         source_profile['source_generation']==request['source_generation'] and type(source_profile['sources']) is dict and
+         14<=len(source_profile['sources'])<=512,'private_explicit_source_profile_required')
+    root=Path(request['accelerator_root'])
+    for path,sha in source_profile['sources'].items():
+        need(type(path) is str and Path(path).is_absolute() and '..' not in Path(path).parts and Path(path).is_relative_to(root) and
+             type(sha) is str and re.fullmatch('[0-9a-f]{64}',sha),'private_source_profile_member_required')
+    need(all(str(root/path) in source_profile['sources'] for path in PRIVATE_PROFILE_PATHS),
+         'private_all_normal_dependency_sources_required')
+    need(type(capsule) is dict and set(capsule)=={'schema','source_generation','files','named_session'} and
+         capsule['schema']=='legal-ir-grok-planning-transport-capsule/v4' and capsule['source_generation']==request['source_generation'] and
+         type(capsule['files']) is dict and set(capsule['files'])==set(PRIVATE_CAPSULE_ROLES),
+         'private_unchanged_V4_capsule_required')
+    for role,relative in PRIVATE_CAPSULE_ROLES.items():
+        item=capsule['files'][role];_private_pin_shape(item,MAX_BYTES)
+        need(item['path']==str(root/relative) and source_profile['sources'].get(item['path'])==item['sha256'],
+             'private_capsule_normal_role_source_profile_join_required')
+    named=capsule['named_session']
+    need(type(named) is dict and set(named)=={'native_home','audit_directory','preparation_home','binary','configuration',
+         'owner_sampling_policy','system_requirements','cleanup_reserve_seconds','bootstrap_max_seconds'},
+         'private_closed_original_named_session_policy_required')
+    for key in ('native_home','audit_directory','preparation_home'):
+        need(type(named[key]) is str and Path(named[key]).is_absolute() and '..' not in Path(named[key]).parts,
+             'private_original_named_session_path_required')
+    for key,maximum in (('binary',256*1024**2),('configuration',65536),('owner_sampling_policy',65536)):
+        _private_pin_shape(named[key],maximum)
+    if named['system_requirements'] is not None:_private_pin_shape(named['system_requirements'])
+    for key,maximum in (('cleanup_reserve_seconds',10),('bootstrap_max_seconds',30)):
+        number=named[key]
+        need(type(number) in (int,float) and math.isfinite(number) and 1<=number<=maximum,
+             'private_original_named_session_lifetime_required')
+    for document,key,field in ((source_profile,'source_profile_pin','source_profile_sha256'),(capsule,'capsule_pin','capsule_sha256')):
+        raw=canonical(document)
+        need(len(raw)==request[key]['bytes'] and hashlib.sha256(raw).hexdigest()==request[key]['sha256']==fixture[field],
+             'private_exact_profile_capsule_commitments_required')
+    need(context['worker_source_sha256']==capsule['files']['worker']['sha256'] and
+         context['owner_source_sha256']==capsule['files']['owner_source']['sha256'],
+         'private_actual_worker_and_absolute_RPC_source_join_required')
+    return dict(schema='private-fixture-authentication-metadata/v1',metadata_only=True,
+        sealed_request_sha256=S,fixture_sha256=pin['sha256'],owner_request_sha256=R,
+        context_sha256=context['context_sha256'],initializer_qualified=False,native_qualified=False,
+        production_qualified=False,task_completion_accepted=False,Lean_admitted=False)
+
+
+def read_private_authentication_inputs(*,descriptor,request,context):
+    """Read original sealed S and exact owned F/profile/capsule, without authority."""
+    need(type(request) is dict and request.get('schema')==PRIVATE_SCHEMA,
+         'explicit_private_authentication_inputs_required')
+    S=read_borrowed_sealed_request(descriptor,request)
+    documents={}
+    for name,key in (('fixture','fake_credential_fixture_pin'),('source_profile','source_profile_pin'),('capsule','capsule_pin')):
+        native=request.get('native_deadline_monotonic')
+        need(type(native) in (int,float) and math.isfinite(native) and time.monotonic()<native,
+             'private_original_native_authentication_clock_expired')
+        documents[name]=decode(read_pin(request[key],maximum=65536,private=True))
+        need(time.monotonic()<native,'private_original_native_authentication_clock_expired')
+    joined=validate_private_fixture_metadata(request=request,context=context,**documents)
+    need(joined['sealed_request_sha256']==S,'private_borrowed_S_differs_from_F_R_join')
+    return dict(documents,authentication=joined)
+
+
+def validate_private_preparation_metadata(*,request,context,transport,owner_rows,fixture,source_profile,capsule):
+    """Authenticate private initialization observations; never native authority."""
+    authenticated=validate_private_fixture_metadata(request=request,context=context,fixture=fixture,
+        source_profile=source_profile,capsule=capsule)
+    value=transport.get('private_fake_credentials')
+    need(type(value) is dict and value.get('schema')=='private-fake-credential-installation-observation/v2' and
+         all(value.get(key) is True for key in ('metadata_only','actual_same_process_private_manager','fake_only',
+             'network_policy_binding_verified','same_owner_client','same_store','no_capture_rows_seeded')) and
+         all(value.get(key) is False for key in ('real_credentials_used','ambient_credentials_read','provider_called',
+             'provider_dispatch_granted','singleton_reset','task_completion_accepted','native_qualified',
+             'production_qualified','Lean_admitted','public_empty_capture_read_is_absence_proof')),
+         'actual_nonqualifying_private_initialization_observation_required')
+    need(value.get('fixture_pin')==request['fake_credential_fixture_pin'] and
+         value.get('owner_request_sha256')==authenticated['owner_request_sha256'] and
+         value.get('sealed_worker_request_sha256')==authenticated['sealed_request_sha256'] and
+         value.get('credential_slot')==fixture['credential_slot'] and
+         value.get('credential_fingerprint')==fixture['credential_fingerprint'] and
+         value.get('work_deadline_monotonic')==request['work_deadline_monotonic'] and
+         value.get('native_deadline_monotonic')==request['native_deadline_monotonic'],
+         'private_initialization_original_S_F_R_slot_clock_joins_required')
+    start,end=(value.get(key) for key in ('preparation_started_monotonic','preparation_completed_monotonic'))
+    stdin=transport.get('stdin_read_started_monotonic');dispatch=transport.get('dispatch_monotonic')
+    need(all(type(t) in (int,float) and math.isfinite(t) for t in (start,end,stdin,dispatch)) and
+         0<start<=end<=stdin<=dispatch<request['work_deadline_monotonic']-3,
+         'private_authentication_and_initializer_must_precede_original_stdin_and_dispatch')
+    before=value.get('owner_rpc_receipt_count_before_preparation');after=value.get('owner_rpc_receipt_count_after_preparation')
+    clients=transport.get('owner_rpc_receipts')
+    need(type(before) is int and type(after) is int and type(clients) is list and type(owner_rows) is list and
+         1<=before<after<len(clients)==len(owner_rows)<=512,
+         'same_actual_client_full_contiguous_RPC_population_required')
+    need(clients[0].get('stage')=='request_prepared' and clients[-1].get('stage')=='worker_v4_response',
+         'private_original_first_and_final_RPC_required')
+    claim=('database_task_cid','database_attempt_id','database_claim_id','database_attempt_number',
+           'coordination_lease_id','owner_session_id','fencing_token','fence_epoch')
+    resources=('root_lease_id','phase_lease_id','disk_native_lease_id','disk_reservation_id')
+    stages={'request_prepared','allocation_binding','remaining_deadline','bootstrap_start','bootstrap_protocol',
+            'headless_start','headless_close','response_acceptance','worker_v4_dispatch','worker_v4_response'}
+    previous=0
+    for index,(left,right) in enumerate(zip(clients,owner_rows),1):
+        need(type(left) is dict and type(right) is dict and type(left.get('sequence')) is int and
+             type(right.get('sequence')) is int and left['sequence']==right['sequence']==index and
+             left.get('stage')==right.get('stage') and left.get('stage') in stages and
+             left.get('request_sha256')==right.get('request_sha256')==context['request_sha256'] and
+             left.get('context_sha256')==right.get('context_sha256')==context['context_sha256'] and
+             left.get('response_sha256')==right.get('response_sha256') and
+             left.get('client_pid')==right.get('client_pid')==context['worker_pid'] and
+             left.get('client_birth')==right.get('client_birth')==context['worker_birth'] and
+             left.get('client_process_group')==context['worker_process_group'] and
+             left.get('owner_pid')==right.get('owner_pid')==context['owner_pid'] and
+             left.get('owner_birth')==right.get('owner_birth')==context['owner_birth'] and
+             left.get('actual_kernel_peer_owner_verified') is True and
+             left.get('observation_is_not_native_authority') is True and
+             right.get('claim_binding')=={key:context[key] for key in claim} and
+             right.get('resource_binding')=={key:context[key] for key in resources} and
+             right.get('source_bindings_sha256')==context['source_bindings_sha256'],
+             'private_same_worker_server_claim_resource_source_RPC_join_required')
+        observed,received=right.get('observed_monotonic'),left.get('received_monotonic')
+        need(all(type(t) in (int,float) and math.isfinite(t) for t in (observed,received)) and
+             previous<=observed<=received<request['work_deadline_monotonic'] and received-observed<1 and
+             left.get('observed_monotonic')==observed,'private_fresh_original_one_second_RPC_required')
+        previous=received
+        response=dict(schema='grok-production-owner-currentness/v1',status='current',sequence=index,stage=right['stage'],
+            **{key:context[key] for key in ('request_sha256','context_sha256','nonce','owner_pid','owner_birth',
+                'worker_pid','worker_birth','worker_process_group','work_deadline_monotonic','native_deadline_monotonic')},
+            observed_monotonic=observed)
+        need(digest(response)==right['response_sha256'],'private_original_RPC_response_commitment_required')
+        if before<index<=after:
+            need(start<=observed<=received<=end and right['stage']=='remaining_deadline',
+                 'private_preparation_RPC_prefix_must_be_same_actual_client')
+    need(clients[before-1]['received_monotonic']<=start and clients[after-1]['received_monotonic']<=end,
+         'private_preparation_ACK_counts_must_match_actual_boundary_prefix')
+    readiness=value.get('store_readiness');counts=value.get('actual_readonly_capture_table_counts')
+    need(type(readiness) is dict and readiness.get('allocation_store_path')==context['allocation_store_path'] and
+         readiness.get('row')=={} and type(counts) is dict and set(counts)=={'cli_sessions','cli_session_aliases'} and
+         all(type(v) is int and v==0 for v in counts.values()) and
+         type(readiness.get('observed_monotonic')) in (int,float) and start<=readiness['observed_monotonic']<=end,
+         'private_real_readonly_zero_capture_tables_and_same_store_required')
+    observations=value.get('network_observations')
+    need(type(observations) is list and len(observations)==4 and type(value.get('early_network_observation')) is dict,
+         'private_early_and_four_actual_selected_network_guards_required')
+    common=None
+    for network in [value['early_network_observation']]+observations:
+        need(type(network) is dict and network.get('schema')=='private-owned-rootless-network-observation/v1' and
+             all(network.get(key) is True for key in ('own_NET_owned_by_noninitial_self_USER',
+                'only_loopback_and_no_external_routes_observed','metadata_only','policy_binding_required','owned_namespace_descriptors_closed')) and
+             all(network.get(key) is False for key in ('sealed_policy_authenticated','arbitrary_outer_freshness_proved',
+                'helper_initializer_called','provider_called','native_qualified','production_qualified','Lean_admitted')) and
+             network.get('network_namespace')==fixture['network_namespace'] and
+             network.get('network_owner_user_namespace')==network.get('user_namespace') and
+             type(network.get('user_namespace')) is dict and set(network['user_namespace'])=={'device','inode'} and
+             all(type(v) is int and v>0 for v in network['user_namespace'].values()) and
+             network.get('uid_map')==fixture['network_witness_policy']['expected_uid_map'] and
+             network.get('gid_map')==fixture['network_witness_policy']['expected_gid_map'] and
+             type(network.get('interfaces')) is list and len(network['interfaces'])==1 and
+             type(network['interfaces'][0]) is list and len(network['interfaces'][0])==2 and
+             type(network['interfaces'][0][0]) is int and network['interfaces'][0][0]>0 and network['interfaces'][0][1]=='lo','private_actual_network_policy_observations_must_remain_non_authority')
+        stable={key:network.get(key) for key in ('network_namespace','user_namespace','network_owner_user_namespace',
+            'uid_map','gid_map','uid_map_sha256','gid_map_sha256','interfaces','IPv4_routes_sha256','IPv6_routes_sha256')}
+        need(all(type(stable[key]) is str and re.fullmatch('[0-9a-f]{64}',stable[key]) for key in
+            ('uid_map_sha256','gid_map_sha256','IPv4_routes_sha256','IPv6_routes_sha256')) and
+             (common is None or stable==common),'private_network_kernel_map_route_observations_must_be_stable')
+        common=stable
+    quiet=value.get('public_duckdb_quiescence')
+    need(type(quiet) is list and len(quiet)==2 and [x.get('phase') if type(x) is dict else None for x in quiet]==['before_initialization','after_strict_readback'],
+         'private_both_genuine_public_quiescence_phases_required')
+    last=start
+    for item in quiet:
+        need(type(item) is dict and item.get('schema')=='private-DuckDB-public-quiescence/v1' and
+             item.get('public_API')=='duckdb.close' and type(item.get('arguments_count')) is int and item['arguments_count']==0 and
+             item.get('returned_None') is True and item.get('actual_single_thread_gate_passed') is True and
+             item.get('observations_are_not_continuous') is True and item.get('qualification_granted') is False and
+             item.get('explicit_default_connection_API_called') is False and
+             item.get('implicit_default_connection_creation')=='UNKNOWN' and item.get('native_thread_cause_attributed') is False and
+             item.get('work_deadline_monotonic')==request['work_deadline_monotonic'] and
+             item.get('native_deadline_monotonic')==request['native_deadline_monotonic'],
+             'private_public_quiescence_must_preserve_real_single_thread_gate_and_limits')
+        closure=dict(path=str(Path(request['receipt_directory'])/'private-fake-duckdb-closure.json'),bytes=15157,
+            sha256='00e462ea48071e91f6312fac75e35601ab5530233183f3da11de2542603c3f29')
+        need(item.get('dependency_closure_pin')==closure and
+             item.get('verified_dependency_root')==str(Path(request['receipt_directory'])/'private-fake-duckdb') and
+             type(item.get('dependency_file_count')) is int and item['dependency_file_count']==48 and
+             type(item.get('dependency_total_bytes')) is int and item['dependency_total_bytes']==55017948 and
+             item.get('distribution_version')=='1.5.5' and type(item.get('engine_version')) is str and
+             re.fullmatch('[A-Za-z0-9_.+-]{1,128}',item['engine_version']),
+             'private_exact_staged_DuckDB48_source_and_actual_engine_metadata_required')
+        samples=item.get('samples');started=item.get('call_started_monotonic');returned=item.get('call_returned_monotonic')
+        expected=['before_public_close','after_public_close']+['observation_'+str(ms)+'ms' for ms in (25,50,100,200)]
+        need(type(samples) is list and len(samples)==6 and [x.get('stage') if type(x) is dict else None for x in samples]==expected and
+             all(type(t) in (int,float) and math.isfinite(t) for t in (started,returned)) and last<=started<=returned<=end,
+             'private_six_actual_original_clock_quiescence_samples_required')
+        previous=last
+        for sample in samples:
+            moment=sample.get('observed_monotonic');native_ids=sample.get('native_thread_ids')
+            need(type(moment) in (int,float) and math.isfinite(moment) and previous<=moment<=end and
+                 sample.get('atomic') is False and sample.get('main_python_thread') is True and
+                 type(sample.get('python_thread_count')) is int and sample['python_thread_count']>0 and
+                 type(native_ids) is list and native_ids and len(set(native_ids))==len(native_ids) and
+                 all(type(pid) is int and pid>0 for pid in native_ids) and
+                 type(sample.get('native_thread_count')) is int and sample['native_thread_count']==len(native_ids),
+                 'private_honest_nonatomic_thread_snapshots_required')
+            previous=moment
+        need(samples[0]['observed_monotonic']<=started<=returned<=samples[1]['observed_monotonic'] and
+             all(sample['observed_monotonic']>=returned+ms/1000 for sample,ms in zip(samples[2:],(25,50,100,200))),
+             'private_actual_public_close_window_must_not_renew_original_clock')
+        final=samples[-1]
+        need(final['python_thread_count']==1 and final['native_thread_ids']==[context['worker_pid']] and
+             final['native_thread_count']==1 and final['main_python_thread'] is True,
+             'private_final_200ms_snapshot_must_observe_actual_single_worker')
+        last=final['observed_monotonic']
+    need(readiness['observed_monotonic']<=quiet[0]['call_started_monotonic'] and last<=end,
+         'private_ready_store_and_closed_readback_before_real_single_thread_gates')
+    return authenticated
+
+
+
+def validate_capture_metadata(*,request,context,transport,router_receipt,named_receipt,
+                              bootstrap_frames,capture_row,owner_rows,
+                              expected_stdin,expected_argv,private_documents=None):
+    """Pure factual joins; inert unit metadata never qualifies native authority."""
+    need(type(request) is dict and request.get('schema') in ('fresh-task-grok-capture-request/v1',PRIVATE_SCHEMA) and
+         request.get('mode')=='fresh-task-capture-diagnostic' and request.get('one_shot') is True and
+         type(request.get('attempt_cap')) is int and request['attempt_cap']==1 and
+         request.get('provider_dispatch_allowed') is True and
+         not any(key.startswith('original_task') or key.startswith('original_catalog') for key in request),
+         'distinct_sealed_fresh_task_required')
+    need(request.get('execution_environment') in ('isolated-loopback','provider'),
+         'explicit_execution_environment_required')
+    if request['schema']==PRIVATE_SCHEMA:
+        need(type(private_documents) is dict and set(private_documents)=={'fixture','source_profile','capsule'},
+             'original_private_authentication_documents_required')
+        validate_private_preparation_metadata(request=request,context=context,transport=transport,
+            owner_rows=owner_rows,**private_documents)
+    need(type(transport) is dict and transport.get('schema')=='fresh-task-grok-capture-transport/v1' and
+         transport.get('metadata_only') is True and transport.get('capture_accepted_by_parent') is False and
+         transport.get('task_completion_accepted') is False and transport.get('production_qualified') is False,
+         'fresh_transport_observation_required')
+    for key in ('task_alias','task_cid','database_attempt_id','database_attempt_number',
+                'allocation_session_id','source_generation','execution_environment'):
+        need(type(transport.get(key)) is type(request.get(key)) and transport.get(key)==request.get(key),
+             'fresh_task_transport_binding_differs')
+    need(type(request.get('database_attempt_number')) is int and request['database_attempt_number']==1,
+         'single_actual_attempt_required')
+    pairs={'task_alias':'portal_task_id','task_cid':'database_task_cid',
+        'database_attempt_id':'database_attempt_id','database_attempt_number':'database_attempt_number',
+        'allocation_session_id':'allocation_session_id','source_generation':'source_generation',
+        'workspace':'workspace','owner_pid':'owner_pid','owner_birth':'owner_birth',
+        'owner_request_sha256':'request_sha256'}
+    for key,target in pairs.items():
+        need(type(request.get(key)) is type(context.get(target)) and request.get(key)==context.get(target),
+             'fresh_request_context_differs')
+    need(context.get('schema')=='grok-production-owner-context/v1' and
+         digest({k:v for k,v in context.items() if k!='context_sha256'})==context.get('context_sha256'),
+         'actual_context_commitment_required')
+    for pin_key,context_key in (('capsule_pin','capsule_sha256'),('source_profile_pin','source_bindings_sha256')):
+        need(transport.get(pin_key)==request.get(pin_key) and
+             request[pin_key]['sha256']==context.get(context_key),'capsule_or_source_profile_differs')
+    need(transport.get('owner_request_sha256')==context['request_sha256'] and
+         transport.get('sealed_request_sha256')==digest(request),'original_sealed_request_commitment_required')
+    need(type(expected_stdin) is dict and set(expected_stdin)=={'bytes','sha256'} and
+         type(expected_stdin['bytes']) is int and 0<expected_stdin['bytes']<=128000 and
+         re.fullmatch('[0-9a-f]{64}',expected_stdin['sha256']) and
+         transport.get('stdin')==expected_stdin,'actual_original_stdin_commitment_required')
+    need(type(expected_argv) in (tuple,list) and all(type(x) is str for x in expected_argv) and
+         transport.get('worker_argv')==list(expected_argv),'actual_accepted_worker_argv_required')
+    worker=transport.get('worker_identity')
+    need(type(worker) is dict and worker.get('pid')==context.get('worker_pid') and
+         worker.get('birth')==context.get('worker_birth') and
+         worker.get('group_pid')==context.get('worker_process_group')==context.get('worker_pid') and
+         worker.get('parent_pid')==context.get('owner_pid'),'actual_worker_birth_group_required')
+    work=request.get('work_deadline_monotonic');native=request.get('native_deadline_monotonic')
+    need(all(type(x) in (int,float) and math.isfinite(x) for x in (work,native)) and work<native and
+         context.get('work_deadline_monotonic')==work and context.get('native_deadline_monotonic')==native and
+         transport.get('original_work_deadline_monotonic')==work and
+         transport.get('original_native_deadline_monotonic')==native,'original_absolute_clocks_required')
+    before=transport.get('store_capture_before');after=transport.get('store_capture_observation')
+    need(type(before) is dict and type(before.get('row')) is dict and not before['row'] and
+         type(after) is dict and before.get('allocation_store_path')==after.get('allocation_store_path')==
+         context.get('allocation_store_path'),'fresh_public_pre_dispatch_capture_observation_required')
+    clocks=[before.get('observed_monotonic'),transport.get('dispatch_monotonic'),
+            transport.get('response_monotonic'),after.get('observed_monotonic'),transport.get('observed_monotonic')]
+    need(all(type(x) in (int,float) and math.isfinite(x) for x in clocks) and
+         clocks==sorted(clocks) and clocks[2]<work and clocks[-1]<native,'actual_dispatch_response_clock_joins_required')
+    need(type(transport.get('timeout_seconds')) in (int,float) and 0<transport['timeout_seconds']<=
+         request['maximum_timeout_seconds']<=90,'original_timeout_bound_required')
+    need(type(named_receipt) is dict and named_receipt.get('schema')=='grok-owned-acp-named-session@1' and
+         named_receipt.get('report_scope')=='bootstrap_close_only' and
+         named_receipt.get('source_generation')==request['source_generation'] and
+         named_receipt.get('allocation_session_id')==request['allocation_session_id'],
+         'actual_owned_named_session_receipt_required')
+    for key in ('bootstrap_successful','native_process_reaped','process_group_baseline_restored',
+                'lifetime_closed','response_accepted','no_session_prompt_submitted'):
+        need(named_receipt.get(key) is True,'native_named_session_not_accepted_and_closed')
+    need(type(named_receipt.get('native_process_returncode')) is int and named_receipt['native_process_returncode']==0 and
+         named_receipt.get('forced_cleanup') is False and named_receipt.get('native_session_state_written_by_client') is False and
+         named_receipt.get('cleanup_error_types')==[] and named_receipt.get('failure_code') is None and
+         named_receipt.get('request_methods')==list(METHODS),'native_bootstrap_cleanup_or_protocol_differs')
+    session=named_receipt.get('session_id')
+    try:parsed=uuid.UUID(session)
+    except (ValueError,TypeError,AttributeError):raise CaptureCheckRefusal('accepted_native_UUID_required') from None
+    need(str(parsed)==session and parsed.version==4,'accepted_native_UUID_required')
+    frames={}
+    for frame in bootstrap_frames:
+        need(type(frame) is dict,'native_bootstrap_frame_required')
+        if 'id' not in frame:continue
+        ident=frame['id'];need(type(ident) is int and ident in (1,2,3,4) and ident not in frames and
+            frame.get('jsonrpc')=='2.0' and 'method' not in frame and 'error' not in frame and
+            type(frame.get('result')) is dict,'native_bootstrap_reply_population_required')
+        frames[ident]=frame['result']
+    need(set(frames)=={1,2,3,4} and type(frames[1].get('protocolVersion')) is int and
+         frames[1]['protocolVersion']==1 and frames[2].get('sessionId')==session and
+         frames[3].get('success') is True and frames[4].get('error') is None and
+         type(frames[4].get('result')) is dict and frames[4]['result'].get('success') is True and
+         frames[4]['result'].get('outcome')=='closed','native_accepted_UUID_reply_required')
+    replies=named_receipt.get('replies');need(type(replies) is list and len(replies)==4,'native_reply_commitments_required')
+    for index,row in enumerate(replies,1):
+        hashed=hashlib.sha256(json.dumps(frames[index],sort_keys=True,separators=(',',':'),allow_nan=False).encode()).hexdigest()
+        need(row==dict(id=index,method=METHODS[index-1],response_sha256=hashed),'native_reply_commitment_mismatch')
+    need(type(request.get('max_output_tokens')) is int and 1<=request['max_output_tokens']<=4096 and
+         type(request.get('maximum_timeout_seconds')) is int and 1<=request['maximum_timeout_seconds']<=90,
+         'fixed_output_and_timeout_bounds_required')
+    policy=router_receipt.get('provider_invocation_policy',{})
+    need(router_receipt.get('schema')=='router-implementation-invocation@1' and
+         router_receipt.get('status')=='provider_returned' and router_receipt.get('provider')=='grok_cli' and
+         router_receipt.get('model')=='grok-4.7' and router_receipt.get('purpose')=='planning' and
+         type(router_receipt.get('router_calls')) is int and router_receipt['router_calls']==1 and
+         router_receipt.get('workspace')==request['workspace'] and router_receipt.get('completion_authority') is False and
+         router_receipt.get('requested_output_tokens')==request['max_output_tokens'] and
+         router_receipt.get('native_prompt_sha256')==expected_stdin['sha256'] and
+         router_receipt.get('native_prompt_bytes')==expected_stdin['bytes'] and
+         type(router_receipt.get('timeout_seconds')) in (int,float) and
+         0<router_receipt['timeout_seconds']<=transport['timeout_seconds'] and
+         policy.get('owned_named_session_requested') is True and policy.get('owned_named_session')==named_receipt and
+         policy.get('allocation_session_id')==request['allocation_session_id'] and
+         policy.get('native_resume_session_id')==session and policy.get('native_resume_identity_verified') is True,
+         'actual_router_native_session_join_required')
+    expected=dict(allocation_session_id=request['allocation_session_id'],provider='grok_cli',
+                  native_session_id=session,workspace=request['workspace'],resume_style='resume')
+    need(type(capture_row) is dict and {k:capture_row.get(k) for k in CAPTURE_FIELDS}==expected and
+         after.get('row')==expected,'postdrain_actual_allocation_capture_required')
+    client=transport.get('owner_rpc_receipts');need(type(client) is list and len(client)==len(owner_rows) and client,
+        'actual_owner_RPC_population_required')
+    need(client[0].get('stage')=='request_prepared' and client[-1].get('stage')=='worker_v4_response' and
+         any(x.get('stage')=='remaining_deadline' for x in client),'actual_owner_RPC_stages_required')
+    for index,(left,right) in enumerate(zip(client,owner_rows),1):
+        need(left.get('sequence')==right.get('sequence')==index and left.get('stage')==right.get('stage') and
+             left.get('request_sha256')==right.get('request_sha256')==context['request_sha256'] and
+             left.get('context_sha256')==right.get('context_sha256')==context['context_sha256'] and
+             left.get('response_sha256')==right.get('response_sha256') and
+             left.get('client_pid')==right.get('client_pid')==context['worker_pid'] and
+             left.get('client_birth')==right.get('client_birth')==context['worker_birth'] and
+             left.get('owner_pid')==right.get('owner_pid')==context['owner_pid'] and
+             left.get('owner_birth')==right.get('owner_birth')==context['owner_birth'] and
+             left.get('actual_kernel_peer_owner_verified') is True,
+             'actual_owner_client_RPC_join_required')
+        need(right.get('claim_binding')=={key:context[key] for key in (
+            'database_task_cid','database_attempt_id','database_claim_id','database_attempt_number',
+            'coordination_lease_id','owner_session_id','fencing_token','fence_epoch')} and
+             right.get('resource_binding')=={key:context[key] for key in (
+            'root_lease_id','phase_lease_id','disk_native_lease_id','disk_reservation_id')} and
+             right.get('source_bindings_sha256')==context['source_bindings_sha256'],
+             'actual_owner_claim_resource_source_join_required')
+        observed=right.get('observed_monotonic');received=left.get('received_monotonic')
+        need(all(type(x) in (int,float) and math.isfinite(x) for x in (observed,received)) and
+             observed<=received<work and left.get('observed_monotonic')==observed,
+             'actual_RPC_original_clock_required')
+        response={'schema':'grok-production-owner-currentness/v1','status':'current',
+            'sequence':index,'stage':right['stage'],**{key:context[key] for key in (
+            'request_sha256','context_sha256','nonce','owner_pid','owner_birth','worker_pid',
+            'worker_birth','worker_process_group','work_deadline_monotonic','native_deadline_monotonic')},
+            'observed_monotonic':observed}
+        need(digest(response)==right['response_sha256'],'actual_RPC_response_commitment_required')
+    return dict(schema=SCHEMA,metadata_only=True,metadata_joins=True,accepted_native_session_id=session,
+        observed_capture=expected,actual_ACK_count=len(owner_rows),execution_environment=request['execution_environment'],
+        provider_quality='private-fake-provider' if request['execution_environment']=='isolated-loopback' else 'unassessed',
+        public_pre_dispatch_empty_observed=True,durable_pre_dispatch_absence_proved=False,
+        task_completion_accepted=False,native_qualified=False,production_qualified=False,Lean_admitted=False)
+
+
+def _module(root,name,pins):
+    module=sys.modules.get(name);path=root/Path(*name.split('.')).with_suffix('.py')
+    need(type(module) is types.ModuleType and module.__file__==module.__spec__.origin==str(path) and
+         path.resolve(strict=True)==path and pins.get(str(path))==hashlib.sha256(path.read_bytes()).hexdigest(),
+         'actual_normal_source_pinned_module_required')
+    return module
+
+
+def _original_group_absent(group):
+    need(type(group) is int and group>1 and group!=os.getpgrp(),'actual_original_worker_group_required')
+    for path in Path('/proc').iterdir():
+        if not path.name.isdigit():continue
+        try:row=(path/'stat').read_text().rsplit(')',1)[1].split()
+        except (FileNotFoundError,ProcessLookupError):continue
+        need(int(row[2])!=group,'actual_worker_group_not_drained')
+
+
+def first_after_stream_capture(*,handoff,completed,request,observation_pin,expected_stdin):
+    """Own FIRST ordinary handoff callback and independently read capture.
+
+    Requires the separately reviewed M2 accepted-FD/issuer/first-callback seam.
+    Existing M1/offline state cannot be reinterpreted. No callback is replayed.
+    Caller must still refuse diagnostic task completion after this observation.
+    """
+    need(type(request) is dict and request.get('schema') in ('fresh-task-grok-capture-request/v1',PRIVATE_SCHEMA),
+         'distinct_sealed_fresh_task_required')
+    root=Path(request['accelerator_root']);module=sys.modules.get('ipfs_accelerate_py.cli_runtime.grok_production_handoff')
+    need(type(module) is types.ModuleType and type(handoff) is module.ProductionProviderHandoff,
+         'actual_retained_normal_handoff_required')
+    pins=handoff._pins;_module(root,module.__name__,pins);_module(root,MODULE,pins)
+    worker=_module(root,WORKER,pins);worker.validate_request(request)
+    handoff._lifetime()
+    need(handoff._private_offline is None and handoff._private_capture_checker_active is True and
+         handoff._prepared is True and handoff._closed is False and handoff._completed is False and
+         handoff._capture is None,'actual_M2_FIRST_callback_required')
+    need(type(completed) is subprocess.CompletedProcess and type(handoff._process) is subprocess.Popen and
+         type(completed.returncode) is int and completed.returncode==0 and
+         tuple(completed.args)==handoff.command==tuple(handoff._process.args),
+         'actual_retained_successful_Popen_and_argv_required')
+    native=request['native_deadline_monotonic'];need(time.monotonic()<native,'original_native_callback_clock_expired')
+    remaining=native-time.monotonic()
+    need(remaining>0,'original_native_wait_clock_expired')
+    need(handoff._process.wait(timeout=remaining)==0 and
+         handoff._process.returncode==completed.returncode,'actual_retained_waitstatus_required')
+    identity=handoff._child_identity;need(type(identity) is dict and identity['pid']==handoff._process.pid and
+        identity['group_pid']==handoff._process.pid,'actual_retained_birth_required')
+    _original_group_absent(identity['group_pid'])
+    fd=handoff.private_capture_request_descriptor()
+    sealed=read_borrowed_sealed_request(fd,request)
+    need(observation_pin['path']==str(Path(request['receipt_directory'])/'capture-transport.json'),
+         'exact_fresh_transport_receipt_path_required')
+    directory=Path(request['receipt_directory'])
+    need(directory.resolve(strict=True)==directory and
+         handoff.owner._disk.directory in directory.parents and
+         stat.S_IMODE(directory.lstat().st_mode)==0o700 and
+         handoff.server.context_path.parent==directory,
+         'actual_charged_capture_receipt_directory_required')
+    transport=decode(read_pin(observation_pin,private=True))
+    need(transport['context_pin']['path']==request['context_path']==str(handoff.server.context_path),
+         'exact_actual_owner_context_path_required')
+    need(sealed==transport['sealed_request_sha256'],'original_sealed_FD_receipt_mismatch')
+    need(decode(read_pin(transport['request_pin'],maximum=65536,private=True))==request,
+         'durable_original_request_snapshot_required')
+    need(transport['worker_identity']==identity,'retained_Popen_birth_transport_differs')
+    context=handoff.core.validate_context(handoff.core.decode(handoff.server._context_bytes))
+    need(decode(read_pin(transport['context_pin'],maximum=8192,private=True))==context and
+         handoff.capsule_pin==request['capsule_pin'] and handoff.source_bindings_pin==request['source_profile_pin'],
+         'actual_handoff_context_capsule_profile_required')
+    private_documents=None
+    if request['schema']==PRIVATE_SCHEMA:
+        authenticated=read_private_authentication_inputs(descriptor=fd,request=request,context=context)
+        private_documents={key:authenticated[key] for key in ('fixture','source_profile','capsule')}
+        # The portable profile is a subset. The complete live producer map is
+        # independently retained and checked before/after the real FIRST call.
+        for path,sha in private_documents['source_profile']['sources'].items():
+            need(pins.get(path)==sha,'private_profile_must_join_complete_actual_producer_map')
+        capsule=private_documents['capsule']
+    else:
+        capsule=decode(read_pin(request['capsule_pin'],maximum=65536))
+        read_pin(request['source_profile_pin'],maximum=65536)
+    need(capsule.get('schema')=='legal-ir-grok-planning-transport-capsule/v4' and
+         capsule.get('source_generation')==request['source_generation'],
+         'unchanged_owner_capsule_and_fresh_generation_required')
+    router=decode(read_pin(transport['router_receipt_pin'],private=True))
+    need(router.get('provider_invocation_policy',{}).get('named_session_binary_sha256')==
+         capsule['named_session']['binary']['sha256'],'actual_named_native_binary_commitment_required')
+    named=decode(read_pin(transport['named_receipt_pin'],private=True))
+    frames=[decode(line) for line in read_pin(transport['bootstrap_stdout_pin'],private=True).splitlines() if line.strip()]
+    for path,sha in pins.items():
+        need(handoff.factory.source_digest(path)==sha,'actual_complete_producer_source_changed')
+    # Validate genuine post-drain observations BEFORE consuming FIRST. These
+    # are public reads only; no row is seeded or changed to satisfy a check.
+    before_row=handoff.allocation_store.get_cli_session(request['allocation_session_id'],'grok_cli')
+    before_rows=handoff.server.observations()
+    preliminary=validate_capture_metadata(request=request,context=context,transport=transport,
+        router_receipt=router,named_receipt=named,bootstrap_frames=frames,capture_row=before_row,
+        owner_rows=before_rows,expected_stdin=expected_stdin,expected_argv=list(handoff._process.args),
+        private_documents=private_documents)
+    need(time.monotonic()<native,'original_native_clock_expired_before_FIRST')
+    # Sole FIRST call. The genuine consumer closes the exact listener after
+    # actual group drain, demands real store capture, and sets _completed.
+    handoff.after_stream_return(completed)
+    need(handoff._completed is True and handoff._closed is True and handoff.server.closed is True and
+         handoff._capture is not None,'actual_ordinary_capture_callback_not_accepted')
+    row=handoff.allocation_store.get_cli_session(request['allocation_session_id'],'grok_cli')
+    readback_monotonic=time.monotonic()
+    rows=handoff.server.observations()
+    result=validate_capture_metadata(request=request,context=context,transport=transport,
+        router_receipt=router,named_receipt=named,bootstrap_frames=frames,capture_row=row,
+        owner_rows=rows,expected_stdin=expected_stdin,expected_argv=list(handoff._process.args),
+        private_documents=private_documents)
+    need(result==preliminary and rows==before_rows and
+         handoff._capture['row']==result['observed_capture'],
+         'independent_public_capture_differs_from_FIRST')
+    for path,sha in pins.items():
+        need(handoff.factory.source_digest(path)==sha,'producer_source_changed_after_capture_readback')
+    read_pin(observation_pin,private=True)
+    if private_documents is not None:
+        final_inputs=read_private_authentication_inputs(descriptor=fd,request=request,context=context)
+        need(all(final_inputs[key]==document for key,document in private_documents.items()),
+             'original_private_authentication_inputs_changed_after_FIRST')
+    need(time.monotonic()<native,'original_native_clock_expired_after_public_readback')
+    _original_group_absent(identity['group_pid'])
+    for path,sha in pins.items():
+        need(handoff.factory.source_digest(path)==sha,'producer_source_changed_after_final_group_read')
+    need(time.monotonic()<native,'original_native_final_acceptance_clock_expired')
+    result.update(metadata_only=False,actual_retained_Popen_waitstatus_joined=True,
+        actual_first_ordinary_capture_callback=True,actual_postdrain_public_capture_readback=True,
+        actual_capture_accepted=True,actual_listener_closed=True,callback_replayed=False,
+        observation_pin=dict(observation_pin),actual_waitstatus=handoff._process.returncode,
+        actual_worker_identity=dict(identity),actual_worker_argv=list(handoff._process.args),
+        actual_original_stdin_commitment=dict(expected_stdin),actual_context_pin=dict(transport['context_pin']),
+        actual_owner_RPC_observations=json.loads(json.dumps(rows,allow_nan=False)),
+        actual_capture_observation=dict(allocation_store_path=str(handoff.allocation_store.path),
+            row=dict(result['observed_capture']),observed_monotonic=readback_monotonic),
+        task_completion_accepted=False)
+    return result

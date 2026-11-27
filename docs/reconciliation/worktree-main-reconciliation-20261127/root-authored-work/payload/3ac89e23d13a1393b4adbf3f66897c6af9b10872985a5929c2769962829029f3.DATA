@@ -1,0 +1,191 @@
+"""Qualify author-written public objectives on three unchanged development bases.
+
+Uses frozen public titles/source documentation, never reference patches or hidden
+tests. These are new development contracts, not recovered original issue bodies.
+"""
+import argparse
+import hashlib
+import importlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+REPO = HERE.parents[5]
+REGISTRY = HERE.parent.parent / "next_stage_candidate_registry.json"
+IDS = ("ns-hist-01-xmltodict", "ns-hist-03-oauthlib", "ns-hist-04-click")
+
+
+def sha(body):
+    return hashlib.sha256(body).hexdigest()
+
+
+def canonical(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+
+
+def save(path, value):
+    with path.open("x") as stream:
+        stream.write(json.dumps(value, sort_keys=True, indent=2) + "\n")
+
+
+def inventory(tree):
+    rows = []
+    for path in sorted(tree.rglob("*")):
+        if path.is_symlink():
+            rows.append({"path":str(path.relative_to(tree)), "kind":"symlink", "target":os.readlink(path), "mode":path.lstat().st_mode & 0o7777})
+        elif path.is_file():
+            rows.append({"path":str(path.relative_to(tree)), "kind":"file", "sha256":sha(path.read_bytes()), "mode":path.stat().st_mode & 0o7777})
+    return rows
+
+
+def cases():
+    return {
+        IDS[0]: [
+            {"id":"default_declaration_no_ordinary_attribute", "xml":'<root xmlns="urn:ns"><child id="1"/></root>', "process_namespaces":True,
+             "expected":{"urn:ns:root":{"@xmlns":{"":"urn:ns"},"urn:ns:child":{"@id":"1"}}}},
+            {"id":"prefix_declaration_no_ordinary_attribute", "xml":'<root xmlns:x="urn:x"><x:child id="1"/></root>', "process_namespaces":True,
+             "expected":{"root":{"@xmlns":{"x":"urn:x"},"urn:x:child":{"@id":"1"}}}},
+            {"id":"declaring_element_with_ordinary_attribute", "xml":'<root xmlns="urn:ns" id="0"><child id="1"/></root>', "process_namespaces":True,
+             "expected":{"urn:ns:root":{"@id":"0","@xmlns":{"":"urn:ns"},"urn:ns:child":{"@id":"1"}}}},
+            {"id":"namespace_processing_disabled_control", "xml":'<root xmlns:x="urn:x"><x:child id="1"/></root>', "process_namespaces":False,
+             "expected":{"root":{"@xmlns:x":"urn:x","x:child":{"@id":"1"}}}},
+        ],
+        IDS[1]: [
+            {"id":"authorization_endpoint_metadata", "endpoint":"authorization", "override_response_types":False, "expected_response_types":["code"]},
+            {"id":"authorization_explicit_response_types", "endpoint":"authorization", "override_response_types":True, "expected_response_types":["code"]},
+            {"id":"combined_server_metadata", "endpoint":"server", "override_response_types":False, "expected_response_types":["code","token"]},
+            {"id":"token_endpoint_control", "endpoint":"token", "override_response_types":False, "expected_grant_types":["authorization_code"]},
+        ],
+        IDS[2]: [
+            {"id":"hide_string_choices", "choices":["alpha-value","beta-value"], "show_choices":False, "metavar":None, "case_sensitive":True, "expect_choices_visible":False},
+            {"id":"hide_casefolded_choices", "choices":["AlphaValue","BetaValue"], "show_choices":False, "metavar":None, "case_sensitive":False, "expect_choices_visible":False},
+            {"id":"visible_choices_control", "choices":["alpha-value","beta-value"], "show_choices":True, "metavar":None, "case_sensitive":True, "expect_choices_visible":True},
+            {"id":"explicit_metavar_control", "choices":["alpha-value","beta-value"], "show_choices":False, "metavar":"SELECTION", "case_sensitive":True, "expect_choices_visible":False},
+        ],
+    }
+
+
+def worker(task_id, run):
+    frozen = json.loads((run / "freeze.json").read_text())
+    assert sha(Path(__file__).read_bytes()) == frozen["driver_sha256"]
+    task = frozen["tasks"][task_id]
+    tree = Path(task["tree"])
+    assert inventory(tree) == task["inventory"]
+    sys.path.insert(0, str(tree / "src" if task_id == IDS[2] else tree))
+    package = importlib.import_module({IDS[0]:"xmltodict",IDS[1]:"oauthlib",IDS[2]:"click"}[task_id])
+    assert Path(package.__file__).resolve().is_relative_to(tree)
+    rows = []
+    for case in frozen["cases"][task_id]:
+        started = time.perf_counter()
+        try:
+            if task_id == IDS[0]:
+                observed = package.parse(case["xml"], process_namespaces=case["process_namespaces"])
+                passed = observed == case["expected"]
+            elif task_id == IDS[2]:
+                from click.testing import CliRunner
+                @package.command()
+                @package.option("--choice", type=package.Choice(case["choices"],case_sensitive=case["case_sensitive"]),
+                                show_choices=case["show_choices"], metavar=case["metavar"])
+                def command(choice):
+                    pass
+                outcome = CliRunner().invoke(command,["--help"])
+                visible = any(value.lower() in outcome.output.lower() for value in case["choices"])
+                observed = {"exit_code":outcome.exit_code, "output":outcome.output, "choices_visible":visible}
+                passed = outcome.exit_code == 0 and visible == case["expect_choices_visible"]
+            else:
+                from oauthlib.oauth2 import RequestValidator, Server
+                from oauthlib.oauth2.rfc6749.grant_types import AuthorizationCodeGrant
+                from oauthlib.oauth2.rfc6749.endpoints.authorization import AuthorizationEndpoint
+                from oauthlib.oauth2.rfc6749.endpoints.token import TokenEndpoint
+                from oauthlib.oauth2.rfc6749.endpoints.metadata import MetadataEndpoint
+                validator = RequestValidator()
+                grant = AuthorizationCodeGrant(validator)
+                if case["endpoint"] == "authorization":
+                    endpoint = AuthorizationEndpoint(default_response_type="code", response_types={"code":grant})
+                elif case["endpoint"] == "token":
+                    endpoint = TokenEndpoint(default_grant_type="authorization_code", grant_types={"authorization_code":grant})
+                else:
+                    endpoint = Server(validator)
+                claims = {"issuer":"https://example.invalid", "authorization_endpoint":"https://example.invalid/authorize", "token_endpoint":"https://example.invalid/token"}
+                if case["override_response_types"]:
+                    claims["response_types_supported"] = ["code"]
+                metadata = MetadataEndpoint([endpoint], claims=claims)
+                headers, body, status = metadata.create_metadata_response("https://example.invalid/.well-known/oauth-authorization-server")
+                observed = {"headers":headers, "body":json.loads(body), "status":status}
+                key = "response_types_supported" if "expected_response_types" in case else "grant_types_supported"
+                expected = case.get("expected_response_types", case.get("expected_grant_types"))
+                passed = status == 200 and set(observed["body"][key]) == set(expected)
+            rows.append({"case_id":case["id"], "conforms_to_new_public_contract":passed, "observed":observed, "seconds":time.perf_counter()-started})
+        except Exception as exc:
+            rows.append({"case_id":case["id"], "conforms_to_new_public_contract":False,
+                         "error_type":type(exc).__name__, "error":str(exc), "seconds":time.perf_counter()-started})
+    imported = {}
+    for name, module in tuple(sys.modules.items()):
+        path = getattr(module,"__file__",None)
+        if path and Path(path).is_file() and Path(path).resolve().is_relative_to(tree):
+            imported[name] = {"path":str(Path(path).resolve()), "sha256":sha(Path(path).read_bytes())}
+    assert inventory(tree) == task["inventory"]
+    result = {"schema":"ns-public-development-contract-result/v2", "task_id":task_id,
+              "rows":rows, "passed":sum(row["conforms_to_new_public_contract"] for row in rows),
+              "cases":len(rows), "loaded_public_source_modules":imported, "source_inventory_unchanged":True,
+              "provider_calls":0, "hidden_or_reference_calls":0,
+              "contract_scope":"Author-written cases from existing public title and prefix source API; not original issue-body recovery, full acceptance or a new independent family."}
+    save(run / (task_id + ".json"), result)
+    print(json.dumps({"task_id":task_id,"cases":result["cases"],"passed":result["passed"]}))
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--run",type=Path,required=True)
+    parser.add_argument("--worker",choices=IDS)
+    args = parser.parse_args()
+    run = args.run.resolve()
+    if args.worker:
+        worker(args.worker, run)
+        return
+    run.mkdir(parents=True, exist_ok=False)
+    registry = json.loads(REGISTRY.read_text())
+    tasks = {}
+    for row in registry["historical_candidates"]:
+        if row["task_id"] not in IDS:
+            continue
+        tree = (REPO / row["public_tree"]["path"]).resolve()
+        tasks[row["task_id"]] = {"tree":str(tree), "base_commit":row["pre_fix_commit"],
+            "public_title":row["issue_title"], "inventory":inventory(tree),
+            "original_issue_text_verified":False, "repair_surface":row["admitted_paths"]}
+    assert set(tasks) == set(IDS)
+    freeze = {"schema":"ns-public-development-contract-freeze/v2", "created_at_ns":time.time_ns(),
+              "driver_sha256":sha(Path(__file__).read_bytes()), "registry_sha256":sha(REGISTRY.read_bytes()),
+              "tasks":tasks, "cases":cases(), "worker_bound_seconds":60, "automatic_retries":0,
+              "authorization_basis":"Existing original-development task registry, frozen public titles and prefix-source API documentation. No hidden test/reference inspection. New explicit development objectives, not historical-text provenance.",
+              "provider_calls":0, "hidden_or_reference_calls":0}
+    save(run / "freeze.json",freeze)
+    processes=[]
+    for task_id in IDS:
+        command=[sys.executable,"-B",str(Path(__file__).resolve()),"--run",str(run),"--worker",task_id]
+        started=time.perf_counter()
+        try:
+            process=subprocess.run(command,capture_output=True,timeout=60,env={**os.environ,"PYTHONDONTWRITEBYTECODE":"1"})
+            stdout,stderr,code,timed_out=process.stdout,process.stderr,process.returncode,False
+        except subprocess.TimeoutExpired as exc:
+            stdout,stderr,code,timed_out=exc.stdout or b"",exc.stderr or b"",None,True
+        (run/(task_id+".stdout")).write_bytes(stdout);(run/(task_id+".stderr")).write_bytes(stderr)
+        processes.append({"task_id":task_id,"command":command,"returncode":code,"timed_out":timed_out,"seconds":time.perf_counter()-started})
+    save(run/"processes.json",processes)
+    assert all(row["returncode"]==0 and not row["timed_out"] for row in processes), "Preserve failed process; qualify a new version before retry."
+    rows=[json.loads((run/(task_id+".json")).read_text()) for task_id in IDS]
+    summary={"schema":"ns-public-development-contract-summary/v2", "freeze_sha256":sha((run/"freeze.json").read_bytes()),
+             "tasks":[{k:row[k] for k in ("task_id","cases","passed","source_inventory_unchanged")} for row in rows],
+             "executed_cases":sum(row["cases"] for row in rows),"passed":sum(row["passed"] for row in rows),
+             "all_workers_completed":True,"provider_calls":0,"hidden_or_reference_calls":0,
+             "whole_task_acceptance_qualified":False,"new_confirmatory_families":0,
+             "scope":freeze["authorization_basis"]}
+    save(run/"summary.json",summary);print(json.dumps(summary))
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,253 @@
+"""Normal metadata/kernel tests; no native lease, bootstrap, DB or provider.
+
+The complete payloads below are inert metadata. They never instantiate the
+binding/owner class or serialize an alleged capability.
+"""
+from types import SimpleNamespace
+from pathlib import Path
+import fcntl
+import hashlib
+import os
+import time
+
+import pytest
+import ipfs_accelerate_py.cli_runtime.grok_private_same_pid_m1 as composition
+import ipfs_accelerate_py.agent_supervisor.runtime.private_same_pid_m1_entry as entry
+
+
+def _write(path, raw):
+    path.write_bytes(raw)
+    path.chmod(0o600)
+    return {'path':str(path), 'bytes':len(raw), 'sha256':hashlib.sha256(raw).hexdigest()}
+
+
+@pytest.fixture
+def inert_payload(tmp_path):
+    root = Path(entry.__file__).parents[3]
+    task = tmp_path/'task'
+    task.mkdir(mode=0o700)
+    request = _write(tmp_path/'inert-request.json', b'{}')
+    now = time.monotonic()
+    return dict(schema=entry.SCHEMA, request_pin=request, accelerator_source_root=str(root),
+        task_repository_root=str(task), task_repository_id='inert-metadata-only',
+        task_baseline_commit='1'*40, task_baseline_tree_id='2'*40,
+        private_store_id='inert-private-store', private_database_uuid='inert-private-uuid',
+        private_server_id='inert-private-server', private_database_path=str(tmp_path/'private.duckdb'),
+        private_task_cid='inert-private-task', private_task_alias='private-M1a-'+'3'*32,
+        source_generation='inert-source-only', adapter_source_sha256=entry._source_digest(entry.__file__),
+        composition_source_sha256=entry.M1_SOURCE_SHA256, receipt_directory=str(tmp_path/'receipts'),
+        work_deadline_monotonic=now+5, native_deadline_monotonic=now+10, one_shot=True, attempt_cap=1,
+        paid_provider_calls_allowed=False, offline_worker_dispatch_allowed=True,
+        receipt_precharge_bytes=entry.RECEIPT_PRECHARGE, parent_disk_reservation_id='inert-parent-disk',
+        parent_native_root_lease_id='inert-parent-root', required_P_SDK_source_sha256=dict(entry.P_SDK_SOURCE_SHA256))
+
+
+@pytest.fixture
+def memfds():
+    descriptors = []
+    def create(raw, *, sealed=True):
+        descriptor = os.memfd_create('M1-inert-metadata-test', os.MFD_CLOEXEC|os.MFD_ALLOW_SEALING)
+        descriptors.append(descriptor)
+        assert os.write(descriptor, raw) == len(raw)
+        if sealed:
+            fcntl.fcntl(descriptor, fcntl.F_ADD_SEALS, entry.SEALS)
+        return descriptor, hashlib.sha256(raw).hexdigest()
+    yield create
+    for descriptor in descriptors:
+        os.close(descriptor)
+
+
+def test_default_selector_is_off_without_bootstrap_or_native_fields():
+    args = SimpleNamespace()
+    assert entry.fixture_selected(args) is False
+    assert entry.validate_supervisor_fixture(args) is None
+
+
+@pytest.mark.parametrize('descriptor,digest', [(-1,'a'*64),(3,''),(True,'a'*64),(1,'a'*64),(3,'z'*64)])
+def test_incomplete_or_untyped_option_pair_refuses(descriptor,digest):
+    with pytest.raises(entry.PrivateFixtureRefusal, match='incomplete_fixture_option_pair'):
+        entry.fixture_selected(SimpleNamespace(private_same_pid_m1_fd=descriptor,
+            private_same_pid_m1_sha256=digest))
+
+
+def test_opted_supervisor_requires_real_implementation_before_reading_fd():
+    args = SimpleNamespace(private_same_pid_m1_fd=999999, private_same_pid_m1_sha256='a'*64,
+        state_owner_bootstrap_fd=999998, state_owner_client_id='inert-only', implement=False,
+        max_task_attempts=1, max_restarts=1)
+    with pytest.raises(entry.PrivateFixtureRefusal, match='ordinary_approved_one_shot_private_offline_M1_only'):
+        entry.validate_supervisor_fixture(args)
+
+
+def test_base_command_does_not_preinsert_any_accepted_private_flags():
+    request = {'worker_path':'/inert/worker.py', 'capsule_pin':{'path':'/inert/capsule.json','sha256':'a'*64}}
+    command = entry.expected_offline_command(request)
+    assert command == ('/usr/bin/python3','-B','/inert/worker.py','--transport-capsule',
+                       '/inert/capsule.json','--transport-capsule-sha256','a'*64)
+    assert not any(word.startswith('--private-m1-') for word in command)
+
+
+def test_real_sealed_complete_metadata_round_trip_cannot_be_written(inert_payload,memfds):
+    descriptor,digest = memfds(entry.canonical(inert_payload))
+    assert entry.read_sealed_binding(descriptor,digest) == inert_payload
+    assert not os.get_inheritable(descriptor)
+    with pytest.raises(PermissionError):
+        os.pwrite(descriptor,b'x',0)
+    assert entry.read_sealed_binding(descriptor,digest) == inert_payload
+
+
+@pytest.mark.parametrize('cap',[True,1.0,0,2])
+def test_typed_cap_one_is_enforced_in_real_sealed_metadata(inert_payload,memfds,cap):
+    inert_payload['attempt_cap'] = cap
+    descriptor,digest = memfds(entry.canonical(inert_payload))
+    with pytest.raises(entry.PrivateFixtureRefusal,match='M1_only_binding_required'):
+        entry.read_sealed_binding(descriptor,digest)
+
+
+def test_old_construction_only_schema_cannot_select_dispatch(inert_payload,memfds):
+    inert_payload['schema'] = 'ordinary-admitted-private-fixture-binding/v1'
+    descriptor,digest = memfds(entry.canonical(inert_payload))
+    with pytest.raises(entry.PrivateFixtureRefusal,match='M1_only_binding_required'):
+        entry.read_sealed_binding(descriptor,digest)
+
+
+def test_unsealed_real_memfd_is_rejected(inert_payload,memfds):
+    descriptor,digest = memfds(entry.canonical(inert_payload),sealed=False)
+    with pytest.raises(entry.PrivateFixtureRefusal,match='real_fully_sealed_memfd_required'):
+        entry.read_sealed_binding(descriptor,digest)
+
+
+def test_actual_sealed_bytes_cannot_be_substituted_by_wrong_digest(inert_payload,memfds):
+    descriptor,_digest = memfds(entry.canonical(inert_payload))
+    with pytest.raises(entry.PrivateFixtureRefusal,match='sealed_fixture_metadata_changed'):
+        entry.read_sealed_binding(descriptor,'0'*64)
+
+
+def test_duplicate_json_keys_refuse_even_when_fd_and_digest_are_real(memfds):
+    descriptor,digest = memfds(b'{"schema":"one","schema":"two"}')
+    with pytest.raises(entry.PrivateFixtureRefusal,match='duplicate_fixture_binding_key'):
+        entry.read_sealed_binding(descriptor,digest)
+
+
+def test_additional_metadata_field_is_not_an_authority_extension(inert_payload,memfds):
+    inert_payload['alleged_extra_grant'] = 'inert-not-a-capability'
+    descriptor,digest = memfds(entry.canonical(inert_payload))
+    with pytest.raises(entry.PrivateFixtureRefusal,match='closed_fixture_binding_required'):
+        entry.read_sealed_binding(descriptor,digest)
+
+
+@pytest.fixture
+def exact_request(tmp_path):
+    # Real private paths and real normal source bytes, but no SDK/API call.
+    root = tmp_path/'private'
+    root.mkdir(mode=0o700)
+    attempt = root/'attempt'
+    attempt.mkdir(mode=0o700)
+    state = attempt/'state'
+    state.mkdir(mode=0o700)
+    socket = root/'socket'
+    socket.mkdir(mode=0o700)
+    profile = _write(root/'source-profile.json',b'{"metadata_only":true}')
+    capsule = _write(root/'capsule.json',b'{"metadata_only":true}')
+    A = Path(composition.__file__).parents[2]
+    worker = A/'ipfs_accelerate_py/cli_runtime/grok_private_m1_offline_worker.py'
+    sources = {str(Path(composition.__file__)):composition.source_digest(composition.__file__),
+               str(worker):composition.source_digest(worker),
+               profile['path']:profile['sha256'],capsule['path']:capsule['sha256']}
+    now = time.monotonic()
+    alias = 'private-M1a-'+'a'*32
+    value = dict(schema=composition.SCHEMA,fixture_id=alias,source_roots=[str(A),str(composition.P_ROOT)],
+        source_sha256=sources,source_profile_pin=profile,capsule_pin=capsule,worker_path=str(worker),
+        source_generation='grok-automatic-named-session/'+alias,fixture_root=str(root),
+        attempt_directory=str(attempt),socket_parent=str(socket),allocation_store_path=str(attempt/'allocation.duckdb'),
+        database_path=str(root/'task.duckdb'),coordination_path=str(attempt/'coordination.duckdb'),
+        execution_path=str(attempt/'execution.duckdb'),state_dir=str(state),private_task_cid='private-inert-cid',
+        private_task_alias=alias,original_task_cid='excluded-original-cid',
+        original_catalog_path=str(tmp_path/'excluded-original'/'catalog.duckdb'),
+        private_store_id='private-store',private_database_uuid='private-uuid',private_server_id='private-server',
+        original_store_id='excluded-original-store',original_database_uuid='excluded-original-uuid',
+        owner_session_id='inert-owner',allocation_session_id='inert-allocation',credential_slot='inert-slot',
+        credential_fingerprint='inert-fingerprint',work_deadline_monotonic=now+30,
+        native_deadline_monotonic=now+60,offline_only=True,attempt_cap=1,
+        resources=dict(scheduler_state_path=str(root/'unopened-scheduler.json'),policy_sha256='a'*64,
+            ledger_path=str(root/'unopened-ledger.json'),named_roots=[str(root)],storage_bytes=1024**2,
+            memory_mb=64,admission_timeout_seconds=1,ledger_lock_timeout_seconds=1,child_process_slots=2))
+    return value,root
+
+
+def test_later_immutable_request_join_does_not_reassert_initial_freshness(exact_request):
+    value,root = exact_request
+    pin = _write(root/'request.json',entry.canonical(value))
+    assert composition.strict_request(pin) == value
+    # These are inert test-owned file bytes, never database connections.
+    for field in ('allocation_store_path','coordination_path','execution_path'):
+        Path(value[field]).write_bytes(b'inert-file-not-database')
+    with pytest.raises(composition.FixtureRefusal,match='fresh_private_allocation_path_required'):
+        composition.strict_request(pin)
+    assert composition.strict_request(pin,require_fresh=False) == value
+
+
+def test_immutable_join_does_not_turn_off_source_validation(exact_request):
+    value,root = exact_request
+    profile = Path(value['source_profile_pin']['path'])
+    before = profile.read_bytes()
+    profile.write_bytes(b'!' + before[1:])
+    pin = _write(root/'request.json',entry.canonical(value))
+    with pytest.raises(composition.FixtureRefusal,match='pin_content_or_identity_changed'):
+        composition.strict_request(pin,require_fresh=False)
+
+
+def _private_projection_metadata():
+    # Real production row/attempt types holding inert projection metadata.
+    # No owner, lease, bootstrap, database or provider capability is created.
+    from types import MappingProxyType
+    from ipfs_accelerate_py.agent_supervisor.task_sources.database_task_source import TaskRecord
+    from ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon import DatabaseTaskAttempt
+    alias = 'private-M1a-'+'7'*32
+    request = dict(fixture_id=alias, private_task_alias=alias, private_task_cid='task:inert-private-M1')
+    record = TaskRecord(task_cid=request['private_task_cid'], task_alias=alias,
+        goal_cid='goal:inert-private-M1', ordinal=0, status='ready', revision=2,
+        body=MappingProxyType({'board_namespace':alias, 'title':'Offline projection metadata',
+            'completion':'auto', 'local_planning_contract':{'inert_metadata_only':True}}))
+    attempt = DatabaseTaskAttempt(attempt_id='attempt:inert-private-M1', claim_id='claim:inert-private-M1',
+        task_cid=record.task_cid, task_alias=alias, attempt_number=1,
+        owner_session_id='session:inert-private-M1', fencing_token=1, fence_epoch=1,
+        lease_id='lease:inert-metadata-only', committed_phase='claimed', status='running', started_at_ms=1)
+    return request, record, attempt
+
+
+def test_private_execution_namespace_preserves_actual_task_projection():
+    import ipfs_accelerate_py.agent_supervisor.todo_daemon.database_portal_bridge as bridge
+    import ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon as daemon
+    import ipfs_accelerate_py.agent_supervisor.task_sources.board_control_plane as board
+    request, record, attempt = _private_projection_metadata()
+    before = dict(record.body)
+    namespace = entry.private_board_namespace(request=request, record=record)
+    assert board.infer_board_namespace(board_namespace=namespace, merge_target_branch='main',
+        todo_path=Path('/inert/control.duckdb'), state_prefix='admitted') == namespace
+    projection = bridge.DatabasePortalExecutionBridge._render_projection_seed(attempt, record,
+        board_namespace=namespace)
+    assert projection.count('- Board namespace: '+namespace+'\n') == 1
+    tasks = daemon.parse_task_text(projection, path=Path('/inert/private-projection.todo.md'),
+        task_header_prefix='## '+record.task_alias)
+    assert len(tasks) == 1 and tasks[0].board_namespace == namespace
+    assert dict(record.body) == before
+
+
+def test_private_namespace_conflict_still_refuses_without_rewriting_task_body():
+    from dataclasses import replace
+    from types import MappingProxyType
+    import ipfs_accelerate_py.agent_supervisor.todo_daemon.database_portal_bridge as bridge
+    request, record, attempt = _private_projection_metadata()
+    conflicting = replace(record, body=MappingProxyType({**record.body, 'board_namespace':'foreign-board'}))
+    before = dict(conflicting.body)
+    with pytest.raises(entry.PrivateFixtureRefusal, match='actual_private_task_board_namespace_required'):
+        entry.private_board_namespace(request=request, record=conflicting)
+    with pytest.raises(bridge.DatabasePortalBridgeError, match='board namespace conflicts'):
+        bridge.DatabasePortalExecutionBridge._render_projection_seed(attempt, conflicting,
+            board_namespace=request['fixture_id'])
+    # The prior branch/path inference is independently rejected by the real
+    # unchanged renderer even when the actual private task metadata is valid.
+    with pytest.raises(bridge.DatabasePortalBridgeError, match='board namespace conflicts'):
+        bridge.DatabasePortalExecutionBridge._render_projection_seed(attempt, record, board_namespace='main')
+    assert dict(conflicting.body) == before
+    assert record.body['board_namespace'] == request['fixture_id']

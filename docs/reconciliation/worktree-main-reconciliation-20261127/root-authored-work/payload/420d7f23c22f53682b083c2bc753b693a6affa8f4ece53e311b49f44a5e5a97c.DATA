@@ -1,0 +1,11 @@
+import json,os
+from pathlib import Path
+import pytest
+rows=[]
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item,call):
+    result=yield
+    report=result.get_result()
+    rows.append({"phase":report.when,"outcome":report.outcome})
+def pytest_sessionfinish(session,exitstatus):
+    Path(os.environ["CONTROL_OBSERVER"]).write_text(json.dumps({"reports":rows,"exitstatus":int(exitstatus)}))

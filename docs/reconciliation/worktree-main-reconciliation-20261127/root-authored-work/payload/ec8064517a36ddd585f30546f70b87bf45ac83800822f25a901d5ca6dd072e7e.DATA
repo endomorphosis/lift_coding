@@ -1,0 +1,97 @@
+# Native authoritative context service qualification
+
+This directory materializes one coherent context-service profile on the existing
+xmltodict and pyparsing public pre-fix development snapshots. It is a prerequisite
+for the integrated study in `../../next_stage_protocol.md`. It makes no model
+quality, token-savings, signed-proof, cache-reuse, or complete-caller claim.
+
+`run_qualification.py` freezes the exact public source inventory, a newly computed
+Git tree for those bytes/modes, evaluation sources, and the Python/JSON source files
+of the complete ASEH Accelerator plus its nested Datasets and Kit. The Datasets and
+Kit package roots precede the Accelerator worktree in `PYTHONPATH`; every imported
+module in those namespaces must resolve to its pinned inner package. Each producer
+and consumer runs in a separate normal Python subprocess. No namespace injection,
+network provider request, target execution, hidden test, or reference patch is used.
+The environment binding covers the explicitly recorded Python/runtime profile; this
+normal subprocess experiment is not a fully hermetic operating-system sandbox.
+
+The producer actually acquires the public source with the native snapshot service,
+scans its explicitly declared semantic scope, builds and verifies the native semantic
+bundle, and records unknown edges. The full profile analyzes all Python source; the
+bounded profile names the target and first four unchanged package Python paths,
+with every other Python path explicitly retained raw and marked unparsed.
+It nominates at most four unchanged-package function capsules in a fixed source
+order and observes native freshness/admission. Those capsules remain additive.
+Native `read_required_source` materializes selected dependency and target bytes.
+Documentation symlinks remain opaque; native undecodable assets remain named
+missing semantics. Every regular source file, including binary assets, is retained.
+
+Datasets `get_authority().build_minimal` constructs the closed pack. The Accelerator
+`ContextPacker.pack_v01` delegation must reconstruct the identical Datasets pack CID
+from the same closed sections. Objectives, edit policy, runtime/source profile,
+environment, declared source bundles, and explicitly authored acceptance obligations
+are content-bound. The consumer independently recomputes current inputs and source
+bundle CIDs, reopens the native Kit store, verifies immutable bytes and Datasets
+semantic identity, and materializes every required source bundle and member.
+
+The required-source CIDs identify explicit resolvable bundle manifests, whose member
+CIDs identify the actual source bytes. This two-step resolution is a new evaluation
+adapter, not an assertion that a CID string substitutes for source. Kit stores bytes
+through its checkpoint artifact container; these unsigned blobs have no seal or
+execution-reuse authority, and no current root is published.
+
+Two native limitations require caller policy:
+
+- The compatibility coverage view uses fixed paths and token costs. Its pack can
+  report `sufficient` and `expansion_required=false` while the closed envelope names
+  missing evidence. Those values do not authorize source omission or acceptance.
+- Native `evaluate_exact_freshness` checks tree/objective/policy/interface/toolchain/
+  environment, but does not compare `CurrentPackIdentity.required_source_cids`.
+  This adapter adds an explicit required-source mapping and materialized-content
+  guard; a negative control records the native check's miss and caller rejection.
+
+Per case, eleven negative controls cover changed tree, objective, objective revision,
+policy, interface, toolchain, environment, required-source CID, semantic payload,
+stored bytes, and attempted use of an unpublished candidate root. These are bounded
+qualification checks, not proof of general dependency completeness or correctness.
+
+Run a new version from the repository root:
+
+```sh
+/usr/bin/python3 -B papers/revisions/neurosymbolic_system_scope_20260914/evals/integrated_v1/context_qualification/run_qualification.py --output /absolute/path/to/new_results
+```
+
+Use an output directory inside this qualification directory when adding study
+artifacts. The controller refuses to overwrite results and bounds each service at
+600 seconds. `expansion_commands.json` contains executable argument arrays; each
+command verifies the current source manifest and outputs exact nominated bytes.
+`audit_qualification.py --results RESULTS --output NEW_AUDIT.json` independently
+checks retained artifacts, runs those commands, and rejects an outside-scope path.
+
+The development attempts in `results_v1` through `results_v4` are retained with
+their corresponding script copies. Their reasons are recorded in
+`development_attempts_v1_to_v4.json`. In v4, the xmltodict producer/consumer passed;
+the pyparsing assertion rejected its native opaque binary assets before scanning.
+The revised v5 run preserves those assets and missing semantics. Historical
+attempts must not be described as if produced by a later edited script.
+
+The unmodified v5 pyparsing scan completed in 145.51 seconds, but full producer
+preparation exceeded its 600-second limit. `results_v5/outcome.json` preserves this
+censored outcome. The profiled hot path and isolated native optimization are
+documented in `merkle_index_design.md` and `merkle_node_index_v1.patch`.
+
+The completed `results_v6_bounded_index` run and
+`audit_v6_bounded_index.json` qualify both bounded service roundtrips. They retain
+302 regular files / 11,781,935 bytes plus one opaque symlink; 5 xmltodict and 149
+pyparsing Python files remain explicitly unparsed/raw. Four native dependency
+capsules were produced on pyparsing (two exact and two conservative admissions),
+with zero source substitutions. Four unchanged/target-comment cold-versus-incremental
+cases have identical state CIDs, semantic roots, and reachable blocks. The audit
+executes four unique source-expansion commands and rejects two outside-scope paths.
+`service_contract_v6.json` specifies the executable interface and its current scope.
+
+The integrated caller still needs the common task loop, model ledger, routing,
+validation, source expansion across live rounds, signed trust policy, real procedure
+applicability, persistence/sealing integration, and matched cold/warm trajectories.
+This service retains all source bytes and therefore establishes no compression
+benefit. The original families are already exposed development data.

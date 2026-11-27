@@ -1,0 +1,65 @@
+Retained pilot trials. These observations do not establish a benchmark advantage.
+
+Token cells marked ≥ are observed cumulative lower bounds; complete totals remain unknown. Explicit native session completion is required for complete model totals, including for legacy receipts. Verified provider-free symbolic/Doctor execution can establish complete zero totals. Verifier reward and supervisor task completion alone do not establish usage completeness.
+
+| Arm | Trial | Reward | Native completion | Env setup s | Agent setup s | Agent s | Verifier s | Input | Cached | Output | Total | Outcome |
+|---|---|---:|---|---:|---:|---:|---:|---:|---:|---:|---:|---|
+| Supervisor: full indexed context (identifiers semantic transport) | same-native-trial | 1 | unknown | unknown | unknown | unknown | unknown | 20 | 15 | 2 | 22 | official_verifier_passed |
+| Supervisor: full indexed context (native semantic transport) | same-native-trial | 1 | unknown | unknown | unknown | unknown | unknown | 20 | 15 | 2 | 22 | official_verifier_passed |
+
+Unsuccessful attempt costs are retained separately. Values below are observed subtotals; unknown calls or counters can make the actual total larger.
+
+| Arm | Unsuccessful trials | Known input | Known cached | Known output | Known total | Trials with unknown totals |
+|---|---:|---:|---:|---:|---:|---:|
+
+Cached input is already included in input. Missing values remain unknown. Provider-reported dollar costs are unavailable when shown as null in JSON; estimated Harbor costs are excluded.
+
+No-index retains the same planner and native supervisor, with no context bundle. Setup, agent execution, and verification remain separate timings.
+
+Provider invocation observations retain failure and timeout information independently of the eventual task outcome.
+
+| Trial | Invocation | Phase | Status | Error | Timeout s | Native session complete | Input | Cached | Output | Total |
+|---|---|---|---|---|---:|---|---:|---:|---:|---:|
+| same-native-trial | coding | coding | provider_returned | unknown | unknown | True | 20 | 15 | 2 | 22 |
+| same-native-trial | coding | coding | provider_returned | unknown | unknown | True | 20 | 15 | 2 | 22 |
+
+Supervisor phase observations are already inside agent time. Cold initial indexing is included; these values are not added to the total or to nested helper timings. Missing phases remain unknown.
+
+| Trial | Prepare s | Cold initial context s | Planning s | Admitted context s | Doctor s | Post-publication refresh s |
+|---|---:|---:|---:|---:|---:|---:|
+| same-native-trial | unknown | unknown | unknown | unknown | unknown | unknown |
+| same-native-trial | unknown | unknown | unknown | unknown | unknown | unknown |
+
+Doctor selection, worker materialization and context refresh remain separate from native completion and verifier reward. Embedding subtotals retain measured failed work when complete accounting is unavailable.
+
+| Trial | Implementation route | Doctor status | Worker materializations observed | Refresh status | Local embedding calls | Known local call subtotal |
+|---|---|---|---:|---|---:|---:|
+| same-native-trial | unknown | unknown | unknown | unknown | unknown | unknown |
+| same-native-trial | unknown | unknown | unknown | unknown | unknown | unknown |
+
+Model-input audit reconstructs retained context and exact task-prompt bytes. It does not cover provider system context or establish task correctness.
+
+| Trial | Audit status | Any native input verified | Any model input verified | All observed coding inputs verified |
+|---|---|---|---|---|
+| same-native-trial | unknown | unknown | unknown | True |
+| same-native-trial | unknown | unknown | unknown | True |
+
+Reported task-prompt sizes are bytes, not token savings. Router bytes include semantic translation and any Doctor residual advisory; model bytes also include the workspace instruction.
+
+| Trial | Invocation | Phase | Semantic transport | Native bytes | Router bytes | Model bytes | Identifier mappings | Residual advisory bytes |
+|---|---|---|---|---:|---:|---:|---:|---:|
+| same-native-trial | coding | coding | identifiers | 12000 | 9000 | 9500 | 10 | unknown |
+| same-native-trial | coding | coding | native | 12000 | 12000 | 12500 | unknown | unknown |
+
+Semantic transport comparisons require identical recorded native prompt, semantic task, scope, root and hash, public instruction and Doctor residual bindings. Independent runs with missing or different context are non-isolated. Matching bytes do not establish a causal effect or token savings.
+
+| Task | Transport context status | Contexts comparable |
+|---|---|---|
+| fix-code-vulnerability | identical_recorded_context | True |
+
+Tokens per official verifier pass include failed attempts in the same treatment. Zero passes, unknown rewards or incomplete usage leave the ratio unknown.
+
+| Treatment | Official passes | All-attempt total tokens | Tokens per official pass |
+|---|---:|---:|---:|
+| Supervisor: full indexed context (identifiers semantic transport) | 1 | 22 | 22.000 |
+| Supervisor: full indexed context (native semantic transport) | 1 | 22 | 22.000 |

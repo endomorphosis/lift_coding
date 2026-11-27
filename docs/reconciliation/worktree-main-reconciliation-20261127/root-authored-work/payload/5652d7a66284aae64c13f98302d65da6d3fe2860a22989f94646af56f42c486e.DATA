@@ -1,0 +1,51 @@
+The new development lifecycle publishes actual bounded-execution evidence through the complete ASEH native sealer. A full checkpoint and two successive delta seals became the current root. A competing delta reached the real compare-and-swap operation and lost because its expected parent was stale. Two abruptly terminated processes retained the correct root across fresh-process recovery. These results use integrity-only receipts and an explicit development admission caller; they do not establish theorem proofs or signed execution attestations.
+
+`run-v1/` preserves the frozen protocol, native source hashes, original runner snapshots, actual operation sources and receipts, native stores/WALs, child-process logs and all outcomes. The source-shipped publication tests run separately by the parent agent are not included in these counts. No provider requests, provider tokens or production-source edits occurred.
+
+The native capability is narrower than the naming might suggest. `IncrementalProofSealer.publish_*` consumes supplied evidence statuses/freshness flags, constructs roots, journals phases, persists the seal and performs CAS. It does not dispatch a unit verifier. Separate `verify_seal` checks supplied receipt bytes against digest commitments, along with declared seal bindings; it does not execute the receipt's computation. Its `groth16` label does not dispatch a pairing verifier here. The built-in `HermeticHmacEngine` also explicitly checks a public tag without proving witness knowledge. This evaluation therefore uses the actual `integrity_only` mode and a new caller that checks exact source/input/policy bindings, complete receipt coverage, independently replays finite outputs and reconstructs the committed seal before admitting it.
+
+| Measured event | Outcome |
+| --- | --- |
+| Full checkpoint r0 | Published generation 0 with two real computation receipts |
+| Delta r1 | Published generation 1; energy receipt reused, clamp newly executed |
+| Delta r2a | Published generation 2 with the same reuse/replacement pattern |
+| Competing delta r2b pinned to r1 | Rejected as `stale_parent` at `seal_persistence`; winning pointer unchanged |
+| Receipt bytes changed without changing their digest | Native integrity verifier rejected |
+| Wrong recorded output with a consistent new digest | Native digest verification accepted; development caller rejected |
+| Required energy unit omitted | Native builder/publication rejected `incomplete_manifest`; pointer unchanged |
+| Old receipt supplied after the clamp source changed | Native digest verification accepted; development caller rejected |
+| Actually executed wrong clamp source | Native digest verification accepted; development caller rejected source/output mismatch |
+
+The computation domain is 19 integer clamp inputs and all 156 vectors of length 0–3 over five integers. Four honest candidate states cover 700 state/input observations. Preparing them used five operation subprocesses and 232 executed operation inputs, with three exact unchanged-receipt reuses. The deliberately wrong-source control adds one operation subprocess and 19 inputs. These counts describe this construction; no measured cold baseline, latency advantage or token-saving estimate is claimed. The independent finite checker still runs when receipts are reused.
+
+The execution subprocess loads only the frozen evaluation-authored operation and its inputs. A separate trusted caller checks clamp outputs using an ordered-median formula and vector energy using repeated addition, checks source/input/policy/worker identities, then invokes native seal integrity verification. Fresh recovery processes load receipt and seal bytes from the native store, recursively revalidate the accepted chain and read the native current pointer. The exact required manifest is independently fixed to `clamp` and `energy`. Phase artifact bytes for unit receipts, repository forest commitment and aggregation manifest are genuinely stored and rehashed. Auxiliary source snapshots and per-state receipt mappings remain evaluation artifacts; this is an explicitly constructed integration caller, not a production daemon or a self-contained native archive consumer.
+
+For each termination scenario, the closed r1 store was copied into a separate evaluation root. At the native named boundary the process called `os._exit(91)`, bypassing Python cleanup; this is process termination, not a power-loss or filesystem-fault test. Three separate recovery processes followed each termination.
+
+| Termination boundary | First recovery | Later recoveries |
+| --- | --- | --- |
+| After seal persistence, before CAS | r1 remains current; pending r2a is `verify-existing`, `in_progress`, no mutation applied | Same pending disposition and same accepted root |
+| After current-root CAS | r2a remains current; pending WAL cleanup commits, `pointer_matches_seal` | Same accepted root, no further cleanup mutation |
+
+The first row is a measured native limitation: `recover_publication` recognizes valid persisted work but does not finish its CAS. Run v1 does not demonstrate continuation of that pending transition. The stale-CAS check uses sequential writers with one deliberately stale expected pointer, not a simultaneous contention stress test.
+
+The separate `continuation-v1/` phase fills the continuation gap with an explicitly evaluated new caller. An actual same-transition retry through native `publish_delta_seal`, performed on an isolated copy, failed with `begin_transition rejected: already_exists` and left that copied pending transition aborted. This failed native retry is retained. On another copy of the original pending store, a fresh process reloaded the actual pending seal and receipt bytes, revalidated the accepted parent chain and all finite outputs, then completed the native Kit CAS and WAL phase/commit operations. It reached generation 2 without executing any operation again. A third fresh process read this accepted r2a root, used it as the parent for the next r2b source event, executed the changed clamp on 19 inputs, reused the energy receipt and published generation 3 through the native sealer. The resulting four-seal accepted chain was revalidated. Thus continuation works through the new development recovery caller; it is not an existing high-level native resume API. All original run-v1 artifact bytes remained unchanged.
+
+`preparation-timing-v1/` adds four separately frozen paired trials of actual cold preparation, alternating arm order. Each arm launches both operation subprocesses, checks all 175 outputs, constructs a native full seal and invokes native integrity verification; no root is published. The parallel arm uses two worker threads to launch the two real subprocesses. All eight candidate seals and receipt sets were byte-identical.
+
+| Measured preparation cost | Sequential | Parallel |
+| --- | --- | --- |
+| Accepted trials | 4/4 | 4/4 |
+| Median elapsed preparation | 63.21 ms | 32.10 ms |
+| Observed elapsed range | 34.04–67.51 ms | 21.19–44.69 ms |
+| Median actual CPU, driver plus completed children | 61.36 ms | 55.48 ms |
+| Maximum sampled aggregate process RSS | 44.66 MiB | 55.54 MiB |
+| Maximum observed processes in the group | 2 | 3 |
+
+The observed ratio of median elapsed times is 1.97 on this small construction. Preparation timing excludes Python/native imports and final output serialization; the RSS sampler covers the entire invocation, including imports. Aggregate RSS sums the driver and worker resident sets, counts shared pages in each process and is sampled rather than a continuous physical-memory high-water mark. CPU comes from actual `RUSAGE_SELF` plus `RUSAGE_CHILDREN` deltas. The host was not exclusive. These sixteen operation subprocesses performed 1,400 inputs in total; they establish a bounded measured preparation tradeoff, not a full-system or population speedup. They used zero model tokens.
+
+`validate.py` passed 181 checks without invoking native publication/recovery or executing operations. It independently replayed all 700 outputs; recomputed receipt-to-leaf/category, manifest, forest, aggregation and seal commitments; checked the exact parent chain and reuse; audited the mutation and termination outcomes; and verified all 44 frozen native source files and 30 loaded native modules under the complete ASEH source profile. `run-v1/artifact_audit.json` records those checks. Original scorer-integrity results remain unchanged elsewhere.
+
+`audit_phases.py` separately passed 216 read-only checks of continuation and preparation timing: original-run preservation, the actual failed retry, stored-evidence continuation, fresh next-event parent consumption, independent output replay, source bindings, exact paired evidence, observed CPU and recomputed RSS peaks from retained samples. `phase_artifact_audit.json` records this supplementary audit. `artifact_checksums.json` inventories all non-bytecode artifacts in this directory, excluding the inventory itself.
+
+Reproduce a new lifecycle run with `python run.py run-v2` from this directory; it refuses an existing output directory. Audit the retained run with `python validate.py run-v1`. The run-v1 scripts are preserved under `run-v1/frozen_runner/`. `continue_pending.py` and `prepare_benchmark.py` preserve their separate frozen manifests, runner snapshots and all subprocess receipts in their output directories and refuse an existing directory. The five constructed mutation controls and two termination points are a bounded development qualification, not a general adversarial security evaluation.

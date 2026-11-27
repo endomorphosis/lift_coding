@@ -1,0 +1,166 @@
+#!/usr/bin/env python3
+"""Versioned full-source enrollment/read adapter; no providers or repository execution.
+
+The caller explicitly enrolls a complete public source inventory. Every preparation
+captures new current bytes and creates a new native pack. Reads reject source drift.
+"""
+import argparse
+import base64
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import stat
+import subprocess
+import time
+
+HERE = Path(__file__).resolve().parent
+def sha(body): return hashlib.sha256(body).hexdigest()
+def read(path): return json.loads(path.read_text())
+def write(path, value): path.write_text(json.dumps(value, indent=2, sort_keys=True) + "\n")
+def canonical(value): return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+
+def inventory(root):
+    """List names/modes only; never follow links or read undeclared file contents."""
+    found = set()
+    for current, dirs, names in os.walk(root, followlinks=False):
+        if Path(current) == root and ".git" in dirs: dirs.remove(".git")
+        for name in list(dirs):
+            path = Path(current) / name
+            if path.is_symlink():
+                found.add(path.relative_to(root).as_posix()); dirs.remove(name)
+        found.update((Path(current) / name).relative_to(root).as_posix() for name in names if not (Path(current) == root and name == ".git"))
+    return found
+
+def capture(request):
+    root = Path(request["repository_root"]).resolve()
+    paths = request["public_source_paths"]
+    if len(paths) != len(set(paths)) or not paths: raise ValueError("public inventory must be nonempty and unique")
+    for path in paths:
+        if not isinstance(path, str) or Path(path).is_absolute() or ".." in Path(path).parts or Path(path).as_posix() != path or path == ".git" or path.startswith(".git/"):
+            raise ValueError("invalid admitted public path")
+    if inventory(root) != set(paths): raise ValueError("current inventory differs from declared complete public source")
+    files = {}; links = {}; bodies = {}
+    for relative in sorted(paths):
+        path = root / relative
+        if any(parent.is_symlink() for parent in path.parents if parent != root and parent.is_relative_to(root)):
+            raise ValueError("symlink parent outside profile")
+        mode = path.lstat().st_mode
+        if stat.S_ISLNK(mode):
+            target = os.readlink(path)
+            links[relative] = {"link_target": target, "sha256": sha(target.encode()), "policy": "opaque; never follow"}
+        elif stat.S_ISREG(mode):
+            body = path.read_bytes(); bodies[relative] = body
+            files[relative] = {"bytes": len(body), "sha256": sha(body), "executable": bool(mode & 0o111)}
+        else: raise ValueError("unsupported special source path")
+    return {"root": str(root), "files": files, "opaque_symlinks": links}, bodies
+
+def guard_current(out):
+    request = read(out / "request.json")
+    current, _ = capture(request)
+    if current != read(out / "origin_source_manifest.json"): raise ValueError("current source bytes/modes/link target changed; prepare a new version")
+
+def runtime(out):
+    freeze = read(out / "freeze.json")
+    for name, expected in freeze["evaluation_sources"].items():
+        if sha((HERE / name).read_bytes()) != expected: raise ValueError("evaluation source changed")
+    if sha((out / "runtime_source_manifest.json").read_bytes()) != freeze["runtime_manifest_sha256"]: raise ValueError("runtime manifest changed")
+    if sha((out / "request.json").read_bytes()) != freeze["request_sha256"]: raise ValueError("request changed")
+    if sha((out / "origin_source_manifest.json").read_bytes()) != freeze["origin_manifest_sha256"]: raise ValueError("origin manifest changed")
+    profile = read(out / "runtime_source_manifest.json")
+    if any(sha(Path(path).read_bytes()) != expected for path, expected in profile["files"].items()): raise ValueError("runtime source changed")
+    env = {k: os.environ[k] for k in ("PATH", "LANG", "HOME") if k in os.environ}
+    env.update(PYTHONPATH=os.pathsep.join(profile["pythonpath"]), PYTHONDONTWRITEBYTECODE="1", IPFS_ACCEL_SKIP_CORE="1", GIT_CEILING_DIRECTORIES=str(out / request_id(out)))
+    return env
+
+def request_id(out): return read(out / "request.json")["task_id"]
+
+def invoke(out, role, path=None):
+    command = ["/usr/bin/python3", "-B", str(HERE / "native_service.py"), role, "--run", str(out), "--case", request_id(out)]
+    if path is not None: command += ["--path", path]
+    env = runtime(out); started = time.perf_counter()
+    try:
+        process = subprocess.run(command, cwd="/tmp", env=env, capture_output=True, timeout=600)
+    except subprocess.TimeoutExpired as exc:
+        if role != "expand":
+            folder = out / request_id(out)
+            (folder / (role + ".stdout")).write_bytes(exc.stdout or b"")
+            (folder / (role + ".stderr")).write_bytes(exc.stderr or b"")
+            write(folder / (role + "_process.json"), {"command": command, "bound_seconds": 600, "timed_out": True, "wall_seconds": time.perf_counter() - started})
+        raise
+    receipt = {"role": role, "command": command, "returncode": process.returncode, "wall_seconds": time.perf_counter() - started}
+    if role != "expand":
+        folder = out / request_id(out)
+        (folder / (role + ".stdout")).write_bytes(process.stdout)
+        (folder / (role + ".stderr")).write_bytes(process.stderr)
+        write(folder / (role + "_process.json"), receipt)
+    if process.returncode: raise RuntimeError("native service rejected: " + process.stderr.decode(errors="replace")[-1800:])
+    return process.stdout, receipt
+
+def prepare(args):
+    out = args.run.resolve()
+    if out.exists(): raise ValueError("output exists; use a new version")
+    request = read(args.request)
+    required = {"schema", "task_id", "repository_id", "repository_root", "public_source_paths", "target_paths", "objective", "provenance"}
+    if set(request) != required or request["schema"] != "ns-repository-context-request/v1": raise ValueError("closed request schema mismatch")
+    if not request["task_id"].replace("-", "").replace("_", "").isalnum(): raise ValueError("invalid task id")
+    if set(request["objective"]) != {"title", "text", "authority"}: raise ValueError("closed public objective schema mismatch")
+    origin, bodies = capture(request)
+    if not request["target_paths"] or not set(request["target_paths"]) <= set(bodies): raise ValueError("targets must be admitted regular source paths")
+    if out.is_relative_to(Path(origin["root"])): raise ValueError("output must be outside enrolled repository")
+    out.mkdir(parents=True); folder = out / request["task_id"]; folder.mkdir()
+    write(out / "request.json", request); write(out / "origin_source_manifest.json", origin)
+    shutil.copyfile(args.profile, out / "runtime_source_manifest.json")
+    tree = folder / "public_source"; tree.mkdir()
+    for path, body in bodies.items():
+        target = tree / path; target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(body)
+        target.chmod(0o755 if origin["files"][path]["executable"] else 0o644)
+    for path, value in origin["opaque_symlinks"].items():
+        target = tree / path; target.parent.mkdir(parents=True, exist_ok=True); target.symlink_to(value["link_target"])
+    gitdir = folder / "source_objects.git"
+    subprocess.run(["git", "init", "--bare", "--quiet", str(gitdir)], check=True)
+    git = ["git", "--git-dir=" + str(gitdir), "--work-tree=" + str(tree)]
+    subprocess.run(git + ["-c", "core.autocrlf=false", "add", "--all", "--force", "."], cwd=tree, check=True)
+    tree_oid = subprocess.check_output(git + ["write-tree"], cwd=tree, text=True).strip()
+    source = {"task_id": request["task_id"], "tree": str(tree), "files": origin["files"], "opaque_symlinks": origin["opaque_symlinks"], "computed_git_tree_oid": tree_oid, "git_tree_provenance": "new tree of declared current public bytes and modes; no upstream commit authentication", "provenance": request["provenance"]}
+    def is_test(path):
+        return Path(path).name.startswith("test_") or Path(path).name == "conftest.py" or any(p in ("test", "tests", "testing") for p in Path(path).parts[:-1])
+    case = {"task_id": request["task_id"], "family_id": request["repository_id"], "upstream_repo": request["repository_id"], "issue_title": request["objective"]["title"], "public_specification": request["objective"]["text"], "admitted_paths": request["target_paths"], "unchanged_package_python_candidates": sorted(p for p in bodies if p.endswith(".py") and p not in request["target_paths"] and not is_test(p)), "role": "current_public_development", "original_split": "development", "objective_authority": request["objective"]["authority"]}
+    write(folder / "case.json", case); write(folder / "public_source_manifest.json", source)
+    job = {"task_id": request["task_id"], "folder": str(folder), "case_sha256": sha((folder / "case.json").read_bytes()), "source_manifest_sha256": sha((folder / "public_source_manifest.json").read_bytes())}
+    freeze = {"schema": "ns-integrated-context-service-freeze/v1", "frozen_at_unix": time.time(), "evaluation_sources": {p.name: sha(p.read_bytes()) for p in (Path(__file__), HERE / "native_service.py")}, "runtime_manifest_sha256": sha((out / "runtime_source_manifest.json").read_bytes()), "request_sha256": sha((out / "request.json").read_bytes()), "origin_manifest_sha256": sha((out / "origin_source_manifest.json").read_bytes()), "jobs": [job], "semantic_scope": "all", "identity_checks": False, "provider_calls": 0}
+    write(out / "freeze.json", freeze)
+    guard_current(out)
+    try:
+        executions = [invoke(out, role)[1] for role in ("produce", "consume")]
+        guard_current(out); runtime(out)
+    except Exception as exc:
+        write(out / "outcome.json", {"complete": False, "error_type": type(exc).__name__, "error": str(exc), "provider_calls": 0})
+        raise
+    summary = {"schema": "ns-current-repository-context/v1", "complete": True, "full_declared_source_scanned": True, "raw_source_retained": True, "raw_substitutions": 0, "producer": read(folder / "producer.json"), "consumer": read(folder / "consumer.json"), "processes": executions, "request_sha256": freeze["request_sha256"], "context_freeze_sha256": sha((out / "freeze.json").read_bytes()), "source_custody": "quiescent current public inventory checked before and after preparation; immutable captured source checked by native consumer", "provider_calls": 0, "full_caller_ready": False, "execution_reuse_authorized": False}
+    write(out / "summary.json", summary)
+    print(json.dumps(summary))
+
+def expand(args):
+    out = args.run.resolve(); freeze = read(out / "freeze.json")
+    if args.expected_freeze_sha256 != sha((out / "freeze.json").read_bytes()): raise ValueError("caller context freeze identity changed")
+    if args.expected_request_sha256 != freeze["request_sha256"]: raise ValueError("caller request identity changed; prepare a new version")
+    if not read(out / "summary.json")["complete"]: raise ValueError("preparation incomplete")
+    runtime(out); guard_current(out)
+    request = read(out / "request.json"); sources = []
+    for path in args.path:
+        raw, receipt = invoke(out, "expand", path)
+        sources.append({"path": path, "sha256": sha(raw), "bytes": len(raw), "base64": base64.b64encode(raw).decode(), "native_expansion_seconds": receipt["wall_seconds"]})
+    guard_current(out); runtime(out)
+    print(json.dumps({"schema": "ns-current-repository-context-read/v1", "task_id": request["task_id"], "objective": request["objective"], "objective_sha256": sha(canonical(request["objective"])), "sources": sources, "request_sha256": freeze["request_sha256"], "context_freeze_sha256": sha((out / "freeze.json").read_bytes()), "semantic_pack_cid": read(out / request["task_id"] / "pack_ref.json")["semantic_pack_cid"], "raw_source_retained": True, "execution_reuse_authorized": False, "provider_calls": 0}))
+
+def main():
+    parser = argparse.ArgumentParser()
+    sub = parser.add_subparsers(dest="role", required=True)
+    prep = sub.add_parser("prepare"); prep.add_argument("--request", type=Path, required=True); prep.add_argument("--profile", type=Path, required=True); prep.add_argument("--run", type=Path, required=True)
+    get = sub.add_parser("read"); get.add_argument("--run", type=Path, required=True); get.add_argument("--expected-request-sha256", required=True); get.add_argument("--expected-freeze-sha256", required=True); get.add_argument("--path", action="append", required=True)
+    args = parser.parse_args()
+    (prepare if args.role == "prepare" else expand)(args)
+
+if __name__ == "__main__": main()

@@ -1,0 +1,350 @@
+"""Historical K@1 catalog reconstruction without current working-tree sources.
+
+The auditor independently verifies the signed task, captured native bundle,
+literal instruction and original semantic producer. This helper checks those
+joins, protected metadata custody and original Git blob/native AST replay. It
+does not reauthenticate current state, reviewer relevance or dispatch authority.
+K@1 lacks a recorded interpreter prefix: only the same trusted runtime paths
+are supported, and a differing complete block digest is refused.
+"""
+from __future__ import annotations
+
+import json
+import os
+from pathlib import Path, PurePosixPath
+import re
+import selectors
+import shlex
+import subprocess
+import tempfile
+import time
+
+from . import code_source_inspection as source
+from . import reviewed_source_nomination_context as catalog
+
+TRUE_FIELDS = frozenset({"captured_native_query_and_ast_replayed", "metadata_owner_suppressed", "original_inputs_rechecked"})
+FALSE_FIELDS = frozenset({"review_authentication_claimed", "source_authentication_claimed",
+    "current_owner_revision_authenticated", "behavioral_requirements_satisfied",
+    "proof_authority", "execution_authority", "completion_authority"})
+RECEIPT_FIELDS = frozenset({"schema", "artifact", "artifact_sha256", "native_prompt_sha256", "native_prompt_bytes",
+    "block_sha256", "block_bytes", "task_id", "task_cid", "contract_cid", "ledger_sha256", "source_sha256",
+    "row_count", "residual_requirement_count", *TRUE_FIELDS, *FALSE_FIELDS})
+HISTORICAL_SCHEMA = "supervisor-reviewed-source-nomination-historical-replay@1"
+
+
+@source._without_metadata
+def validate_reviewed_source_nomination_receipt(value, *, native_sha256=None, native_bytes=None,
+        instruction=None, semantic_verification=None):
+    """Strict closed scalar K@1 record validation, never proof of its claims."""
+    if type(value) is not dict or set(value) != RECEIPT_FIELDS or value["schema"] != catalog.RECEIPT_SCHEMA:
+        raise source.CodeSourceInspectionError("closed K source nomination receipt required")
+    raw = source._json(value).encode("utf-8")
+    if len(raw) > 8192:
+        raise source.CodeSourceInspectionBoundsError("source nomination scalar receipt exceeds bound")
+    for field in TRUE_FIELDS:
+        if value[field] is not True:
+            raise source.CodeSourceInspectionError("historical recorded observation flag differs")
+    for field in FALSE_FIELDS:
+        if value[field] is not False:
+            raise source.CodeSourceInspectionError("source nomination authority must remain false")
+    source._relative(value["artifact"])
+    for field in ("artifact_sha256", "native_prompt_sha256", "block_sha256", "ledger_sha256", "source_sha256"):
+        source._digest(value[field])
+    for field in ("task_id", "task_cid", "contract_cid"):
+        source._text(value[field])
+    for field, minimum, maximum in (("native_prompt_bytes", 1, 256000), ("block_bytes", 1, catalog.MAX_BYTES),
+                                   ("row_count", 0, 256), ("residual_requirement_count", 1, 256)):
+        if type(value[field]) is not int or not minimum <= value[field] <= maximum:
+            raise source.CodeSourceInspectionBoundsError("exact bounded receipt counts required")
+    if native_sha256 is not None and value["native_prompt_sha256"] != source._digest(native_sha256):
+        raise source.CodeSourceInspectionError("native prompt receipt digest differs")
+    if native_bytes is not None and (type(native_bytes) is not int or value["native_prompt_bytes"] != native_bytes):
+        raise source.CodeSourceInspectionError("native prompt receipt byte count differs")
+    if instruction is not None:
+        required = instruction.get("intent_requirements") if type(instruction) is dict else None
+        if (type(required) is not dict or any(value[key] != instruction.get(key) for key in ("task_id", "task_cid", "source_sha256"))
+                or value["contract_cid"] != required.get("contract_cid") or value["ledger_sha256"] != required.get("ledger_sha256")):
+            raise source.CodeSourceInspectionError("nomination receipt differs from verified instruction")
+    if semantic_verification is not None and (type(semantic_verification) is not dict
+            or semantic_verification.get("task_id") != value["task_id"]
+            or semantic_verification.get("native_prompt_sha256") != value["native_prompt_sha256"]
+            or type(semantic_verification.get("native_prompt_bytes")) is not int
+            or semantic_verification["native_prompt_bytes"] != value["native_prompt_bytes"]):
+        raise source.CodeSourceInspectionError("nomination receipt differs from verified original semantic prompt")
+    return json.loads(raw)
+
+
+def _git_blob(repository, commit, path, maximum):
+    """Preflight size then bounded pipe reads; never capture an unbounded blob."""
+    source._relative(path)
+    if type(commit) is not str or re.fullmatch(r"[0-9a-f]{40}|[0-9a-f]{64}", commit) is None:
+        raise source.CodeSourceInspectionError("independent original Git baseline required")
+    if type(maximum) is not int or not 0 < maximum <= 2_000_000:
+        raise source.CodeSourceInspectionBoundsError("bounded historical Git source required")
+    argv = ["/usr/bin/git", "-c", "safe.directory=" + str(repository), "-C", str(repository), "cat-file"]
+    name = commit + ":" + path
+    sized = subprocess.run([*argv, "-s", name], check=True, capture_output=True, timeout=10)
+    if len(sized.stdout) > 32 or re.fullmatch(rb"[0-9]+\n", sized.stdout) is None:
+        raise source.CodeSourceInspectionError("bounded Git blob size required")
+    size = int(sized.stdout)
+    if not 0 < size <= maximum:
+        raise source.CodeSourceInspectionBoundsError("original Git source exceeds byte bound")
+    process = subprocess.Popen([*argv, "blob", name], stdout=subprocess.PIPE, stderr=subprocess.DEVNULL)
+    data = bytearray()
+    try:
+        with selectors.DefaultSelector() as poll:
+            poll.register(process.stdout, selectors.EVENT_READ)
+            deadline = time.monotonic() + 10
+            while True:
+                remaining = deadline - time.monotonic()
+                if remaining <= 0 or not poll.select(remaining):
+                    raise source.CodeSourceInspectionError("historical Git source read timed out")
+                block = os.read(process.stdout.fileno(), min(65536, maximum + 1 - len(data)))
+                if not block:
+                    break
+                data.extend(block)
+                if len(data) > maximum:
+                    raise source.CodeSourceInspectionBoundsError("historical Git source exceeds bounded read")
+        if process.wait(timeout=max(0.01, deadline - time.monotonic())) != 0 or len(data) != size:
+            raise source.CodeSourceInspectionError("historical Git source size or status differs")
+        return bytes(data)
+    finally:
+        if process.poll() is None:
+            process.kill()
+            process.wait(timeout=2)
+        process.stdout.close()
+
+
+def _metadata(value):
+    if type(value) is not dict or len(value) > 32:
+        raise source.CodeSourceInspectionError("captured native bundle metadata required")
+    if len(source._json(value).encode()) > 16384:
+        raise source.CodeSourceInspectionBoundsError("captured bundle metadata exceeds bound")
+    selected = {}
+    for kind in ("code source nomination", "code retrieval", "code retrieval frontier"):
+        artifact, digest = (kind + " artifact", kind + " sha256")
+        a = [item for key, item in value.items() if type(key) is str and key.lower() == artifact]
+        d = [item for key, item in value.items() if type(key) is str and key.lower() == digest]
+        if len(a) > 1 or len(d) > 1 or bool(a) != bool(d):
+            raise source.CodeSourceInspectionError("unique captured bundle pair required")
+        if a:
+            selected[artifact], selected[digest] = str(source._relative(a[0])), source._digest(d[0])
+    if any(kind + " artifact" not in selected for kind in ("code source nomination", "code retrieval")):
+        raise source.CodeSourceInspectionError("genuine captured bundle nomination and native source pairs required")
+    return selected
+
+
+@source._without_metadata
+def replay_reviewed_source_nomination_context(*, prompt, receipt, repository, source_text,
+        instruction_receipt, semantic_verification, nominations, baseline_commit, max_bytes=8192):
+    """Reconstruct exact K@1 catalog from public captures and original Git blobs.
+
+    ``baseline_commit`` and ``nominations`` must come from independently
+    verified signed preparation and its genuine captured native task bundle.
+    Returned checks are historical identity observations, not live authority.
+    """
+    try:
+        return _replay(prompt=prompt, receipt=receipt, repository=repository, source_text=source_text,
+            instruction_receipt=instruction_receipt, semantic_verification=semantic_verification,
+            nominations=nominations, baseline_commit=baseline_commit, max_bytes=max_bytes)
+    except source.CodeSourceInspectionError:
+        raise
+    except Exception as exc:
+        raise source.CodeSourceInspectionError("historical source nomination replay failed") from exc
+
+
+def _replay(*, prompt, receipt, repository, source_text, instruction_receipt, semantic_verification,
+        nominations, baseline_commit, max_bytes):
+    pointer = catalog.nomination_pointer(prompt)
+    if pointer is None:
+        if receipt is not None:
+            raise source.CodeSourceInspectionError("orphan source nomination receipt refused")
+        return "", {"schema": HISTORICAL_SCHEMA, "present": False, "proof_authority": False,
+                    "execution_authority": False, "completion_authority": False}, None
+    if type(max_bytes) is not int or not 1024 <= max_bytes <= catalog.MAX_BYTES:
+        raise source.CodeSourceInspectionBoundsError("bounded historical catalog cap required")
+    if type(baseline_commit) is not str or re.fullmatch(r"[0-9a-f]{40}|[0-9a-f]{64}", baseline_commit) is None:
+        raise source.CodeSourceInspectionError("independent original Git baseline required")
+    source._text(source_text, 8192)
+    from . import compact_code_retrieval as codec
+    from . import verified_code_retrieval_projection as verified
+    from . import code_retrieval_context as native
+    from . import code_retrieval_frontier as frontier
+    from . import intent_source_inspection as reader
+    from ..semantic_state.wire import cid_for_payload
+    capsule, _ = codec._native(prompt)
+    scalar = validate_reviewed_source_nomination_receipt(receipt, native_sha256=source._sha(prompt.encode()),
+        native_bytes=len(prompt.encode()), instruction=instruction_receipt, semantic_verification=semantic_verification)
+    if (instruction_receipt.get("manifest_signature_verified") is not True
+            or instruction_receipt.get("verbatim_utf8") is not True
+            or instruction_receipt.get("completion_authority") is not False
+            or instruction_receipt.get("task_id") != capsule["objective_id"]
+            or instruction_receipt.get("task_cid") != scalar["task_cid"]
+            or instruction_receipt.get("source_sha256") != source._sha(source_text.encode())
+            or type(instruction_receipt.get("source_bytes")) is not int
+            or instruction_receipt["source_bytes"] != len(source_text.encode())):
+        raise source.CodeSourceInspectionError("verified original signed instruction required")
+    metadata = _metadata(nominations)
+    if (metadata["code source nomination artifact"] != pointer["artifact"]
+            or metadata["code source nomination sha256"] != pointer["sha256"]
+            or scalar["artifact"] != pointer["artifact"] or scalar["artifact_sha256"] != pointer["sha256"]):
+        raise source.CodeSourceInspectionError("original native bundle and typed pointer differ")
+    selected, _, code_text = codec._chunks(capsule)
+    rendered = source._parse(code_text)
+    context = codec._retrieval(rendered, source_text)
+    if source._json(rendered) != code_text or context.get("status") != "current" or context.get("task_id") != scalar["task_id"]:
+        raise source.CodeSourceInspectionError("original native query and objective differ")
+    artifact = metadata["code retrieval artifact"]
+    if any(row["path"] != artifact for _, row in selected):
+        raise source.CodeSourceInspectionError("captured original retrieval path differs")
+    scope = verified._semantic_scope(capsule)
+    root = source._root(repository)
+    captured = source._PublicCapture(root)
+    raw = captured.read(pointer["artifact"], reader.MAX_ARTIFACT_BYTES)
+    if source._sha(raw) != pointer["sha256"]:
+        raise source.CodeSourceInspectionError("captured nomination artifact digest differs")
+    wrapper = source._parse(raw)
+    fields = {"schema", "native_bindings", "inputs", "nomination", "nomination_sha256", *reader.FLAGS}
+    if (type(wrapper) is not dict or set(wrapper) != fields or wrapper["schema"] != reader.ARTIFACT_SCHEMA
+            or source._json(wrapper).encode() != raw
+            or any(wrapper[key] is not value for key, value in reader.FLAGS.items())):
+        raise source.CodeSourceInspectionError("closed original nomination wrapper required")
+    bindings = wrapper["native_bindings"]
+    expected_native = reader._native_bindings(bindings["frontier_artifact"], bindings["frontier_sha256"],
+        scalar["task_id"], scalar["task_cid"], artifact, metadata["code retrieval sha256"])
+    if source._json(bindings) != source._json(expected_native):
+        raise source.CodeSourceInspectionError("captured original native binding differs")
+    if "code retrieval frontier artifact" in metadata and (metadata["code retrieval frontier artifact"] != bindings["frontier_artifact"]
+            or metadata["code retrieval frontier sha256"] != bindings["frontier_sha256"]):
+        raise source.CodeSourceInspectionError("captured frontier pair differs")
+    refs = wrapper["inputs"]
+    if type(refs) is not dict or set(refs) != set(reader.ROLES):
+        raise source.CodeSourceInspectionError("closed captured nomination role population required")
+    role_pins = {}
+    for role, (name, maximum) in reader.ROLES.items():
+        ref = refs[role]
+        if (type(ref) is not dict or set(ref) != {"path", "bytes", "sha256"}
+                or ref["path"] != str(PurePosixPath(pointer["artifact"]).with_name(name))
+                or type(ref["bytes"]) is not int or not 0 < ref["bytes"] <= maximum):
+            raise source.CodeSourceInspectionError("closed original nomination role reference required")
+        source._digest(ref["sha256"])
+        value = captured.read(ref["path"], ref["bytes"])
+        if len(value) != ref["bytes"] or source._sha(value) != ref["sha256"]:
+            raise source.CodeSourceInspectionError("captured nomination role digest differs")
+        role_pins[role + "_sha256"] = ref["sha256"]
+    instruction_raw = captured.values[(root, refs["instruction"]["path"])]
+    if instruction_raw != source_text.encode():
+        raise source.CodeSourceInspectionError("original literal UTF-8 instruction differs")
+    native_raw = captured.read(artifact, native.MAX_ARTIFACT_BYTES)
+    if source._sha(native_raw) != metadata["code retrieval sha256"]:
+        raise source.CodeSourceInspectionError("captured native retrieval digest differs")
+    payload = source._parse(native_raw)
+    if type(payload) is not dict or payload.get("schema") not in {native.SCHEMA, native.REFERENCED_SCHEMA}:
+        raise source.CodeSourceInspectionError("captured native retrieval schema required")
+    if payload["schema"] == native.REFERENCED_SCHEMA:
+        ref = payload.get("snapshot_ref")
+        if (type(ref) is not dict or set(ref) != {"path", "sha256", "bytes", "index_id"}
+                or type(ref["bytes"]) is not int or not 0 < ref["bytes"] <= native.MAX_SNAPSHOT_BYTES):
+            raise source.CodeSourceInspectionError("bounded captured native snapshot required")
+        value = captured.read(ref["path"], ref["bytes"])
+        if len(value) != ref["bytes"] or source._sha(value) != source._digest(ref["sha256"]):
+            raise source.CodeSourceInspectionError("captured native snapshot digest differs")
+    frontier_raw = captured.read(bindings["frontier_artifact"], frontier.MAX_FILE_BYTES)
+    if source._sha(frontier_raw) != bindings["frontier_sha256"]:
+        raise source.CodeSourceInspectionError("captured frontier digest differs")
+    spec = source._parse(frontier_raw)
+    if (type(spec) is not dict or set(spec) != frontier.FIELDS or spec["schema"] != frontier.ARTIFACT_SCHEMA
+            or spec["store_path"] != str(PurePosixPath(bindings["frontier_artifact"]).with_name("manifest.duckdb"))):
+        raise source.CodeSourceInspectionError("closed original frontier specification required")
+    captured.read(spec["store_path"], 64_000_000, manifest=True)
+    hashes = payload.get("source_sha256")
+    if (type(hashes) is not dict or not 1 <= len(hashes) <= 64
+            or hashes != context.get("source_sha256") or any(scope.get(name) != digest for name, digest in hashes.items())):
+        raise source.CodeSourceInspectionError("original signed semantic source population differs")
+    sources = {}
+    for name, digest in hashes.items():
+        source._relative(name)
+        source._digest(digest)
+        if (root, name) in captured.values:
+            raise source.CodeSourceInspectionError("historical source and metadata paths collide")
+        remaining = source.MAX_CAPTURE_BYTES - sum(map(len, captured.values.values())) - sum(map(len, sources.values()))
+        if len(captured.values) + len(sources) + 1 > source.MAX_FILES or remaining <= 0:
+            raise source.CodeSourceInspectionBoundsError("historical source capture population exceeds bound")
+        blob = _git_blob(root, baseline_commit, name, min(2_000_000, remaining))
+        if source._sha(blob) != digest:
+            raise source.CodeSourceInspectionError("original signed Git source digest differs")
+        blob.decode("utf-8", errors="strict")
+        sources[name] = blob
+    captured.verify_originals()
+    copies = {**captured.repository_values(), **sources}
+    directories = {"."}
+    for name in copies:
+        parts = PurePosixPath(name).parts
+        directories.update("/".join(parts[:end]) for end in range(1, len(parts)))
+    if len(directories) > source.MAX_DIRECTORIES:
+        raise source.CodeSourceInspectionBoundsError("historical directory population exceeds bound")
+    with tempfile.TemporaryDirectory(prefix="source-nomination-historical-") as directory:
+        replay = Path(directory)
+        replay.chmod(0o755)
+        for name, value in copies.items():
+            target = replay / name
+            target.parent.mkdir(parents=True, exist_ok=True, mode=0o755)
+            parent = replay
+            for part in target.parent.relative_to(replay).parts:
+                parent = parent / part
+                parent.chmod(0o755)
+            target.write_bytes(value)
+            target.chmod(0o644)
+        loaded = reader.load_intent_source_nomination_catalog(repository=replay, artifact=pointer["artifact"],
+            expected_sha256=pointer["sha256"], task_id=scalar["task_id"], task_cid=scalar["task_cid"],
+            source_text=source_text, source_artifact=artifact, source_sha256=metadata["code retrieval sha256"])
+        nomination, evidence, pins = loaded["nomination"], loaded["evidence"], loaded["pins"]
+        bound = nomination["bindings"]
+        # Replay the original captured revision, independently of its task CID.
+        if (bound["task_cid"] != scalar["task_cid"]
+                or bound["task_revision"] != capsule["objective_revision"]
+                or spec["task_revision"] != capsule["objective_revision"]
+                or bound["contract_cid"] != scalar["contract_cid"] or bound["ledger_sha256"] != scalar["ledger_sha256"]
+                or bound["repository_id"] != cid_for_payload({"repository": str(root)})
+                or bound["tree_id"] != semantic_verification.get("scope_cid")
+                or bound["instruction_source_sha256"] != scalar["source_sha256"]):
+            raise source.CodeSourceInspectionError("historical catalog requirement and namespace bindings differ")
+        original_context = source._json(evidence["context"])
+        if rendered.get("schema") == codec.FRONTIER_SCHEMA:
+            manifest = frontier._manifest(evidence["spec"], evidence["context"])
+            original_context = frontier._packet(evidence["spec"], evidence["context"], manifest,
+                bindings["frontier_artifact"], bindings["frontier_sha256"], root)
+            if len(original_context.encode()) >= len(source._json(evidence["context"]).encode()):
+                raise source.CodeSourceInspectionError("historical frontier projection gain differs")
+        if original_context != code_text:
+            raise source.CodeSourceInspectionError("historical full native query/AST projection differs")
+        command = catalog._command_prefix(root, pins)
+        # The exact argv regenerated from trusted runtime and all independently
+        # joined pins must roundtrip shell quoting; no recorded opaque prefix.
+        if shlex.join(shlex.split(command)) != command:
+            raise source.CodeSourceInspectionError("trusted inspector command shape differs")
+        block = catalog.render_reviewed_source_nomination_block(nomination=nomination,
+            command_prefix=command, max_bytes=max_bytes)
+        if (source._sha(block.encode()) != scalar["block_sha256"] or len(block.encode()) != scalar["block_bytes"]
+                or len(nomination["nominations"]) != scalar["row_count"]
+                or len(nomination["requirements"]) != scalar["residual_requirement_count"]):
+            raise source.CodeSourceInspectionError("historical catalog bytes or counts differ from original receipt")
+        loaded["verify_originals"]()
+        if any((replay / name).read_bytes() != value for name, value in copies.items()):
+            raise source.CodeSourceInspectionError("historical replay copy changed")
+    captured.verify_originals()
+    checks = {"schema": HISTORICAL_SCHEMA, "present": True, "catalog_bytes_exact": True,
+        "native_query_and_ast_replayed": True, "original_signed_source_hashes_matched": True,
+        "metadata_original_witnesses_rechecked": True, "same_trusted_runtime_command_prefix": True,
+        "block_sha256": scalar["block_sha256"], "block_bytes": scalar["block_bytes"],
+        "row_count": scalar["row_count"], "residual_requirement_count": scalar["residual_requirement_count"],
+        "current_worktree_sources_read": False, "current_owner_database_read": False,
+        "current_dispatch_authority": False, "current_freshness_verified": False,
+        "review_authentication_claimed": False, "source_authentication_claimed": False,
+        "semantic_equivalence_verified": False, "behavioral_requirements_satisfied": False,
+        "proof_authority": False, "execution_authority": False, "completion_authority": False}
+    return block, checks, captured.verify_originals
+
+
+__all__ = ["RECEIPT_FIELDS", "TRUE_FIELDS", "FALSE_FIELDS", "HISTORICAL_SCHEMA",
+    "validate_reviewed_source_nomination_receipt", "replay_reviewed_source_nomination_context"]

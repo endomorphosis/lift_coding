@@ -1,0 +1,533 @@
+"""Explicit private fake-only manager proposal. No import-time activation.
+
+Not wired into any worker or M2 route. A future separately reviewed sealed
+worker request must authenticate fixture_pin. Existing V3 rejects that field;
+M2's immutable dispatch refusal MUST remain. No credential/resource capability
+is serialized, no real singleton is reset, and no provider is called here.
+"""
+from __future__ import annotations
+import fcntl
+import hashlib
+import importlib
+import json
+import math
+import os
+from pathlib import Path
+import re
+import socket
+import stat
+import sys
+import threading
+import time
+import types
+
+MODULE='ipfs_accelerate_py.cli_runtime.grok_private_fake_credentials'
+SCHEMA='private-grok-fake-credential-fixture/v1'
+MAX_BYTES=65536
+_INITIALIZATION_ATTEMPTED=False
+_RETAINED=[]
+RELATIVE={
+    MODULE:'ipfs_accelerate_py/cli_runtime/grok_private_fake_credentials.py',
+    'ipfs_accelerate_py.common':'ipfs_accelerate_py/common/__init__.py',
+    'ipfs_accelerate_py.common.storage_wrapper':'ipfs_accelerate_py/common/storage_wrapper.py',
+    'ipfs_accelerate_py.common.secrets_manager':'ipfs_accelerate_py/common/secrets_manager.py',
+    'ipfs_accelerate_py.llm_allocation.api_key_slots':'ipfs_accelerate_py/llm_allocation/api_key_slots.py',
+    'ipfs_accelerate_py.llm_allocation.duckdb_store':'ipfs_accelerate_py/llm_allocation/duckdb_store.py',
+    'ipfs_accelerate_py.cli_runtime.grok_production_owner':'ipfs_accelerate_py/cli_runtime/grok_production_owner.py'}
+
+class PrivateFakeCredentialRefusal(RuntimeError):
+    """Fixed codes only; never expose secret/file/env values or raw exceptions."""
+
+def need(value,reason):
+    if not value:raise PrivateFakeCredentialRefusal(reason)
+
+def canonical(value):
+    return (json.dumps(value,sort_keys=True,ensure_ascii=False,allow_nan=False,separators=(',',':'))+'\n').encode()
+
+def decode(raw):
+    def unique(rows):
+        result={}
+        for name,value in rows:
+            need(name not in result,'duplicate_fake_fixture_key');result[name]=value
+        return result
+    try:
+        value=json.loads(raw,object_pairs_hook=unique,
+            parse_constant=lambda _:(_ for _ in()).throw(PrivateFakeCredentialRefusal('nonfinite_fake_fixture')))
+    except (ValueError,UnicodeError,RecursionError):
+        raise PrivateFakeCredentialRefusal('invalid_fake_fixture_JSON')from None
+    need(type(value)is dict and canonical(value)==raw,'canonical_fake_fixture_required')
+    return value
+
+def _identity(row):
+    return row.st_dev,row.st_ino,row.st_mode,row.st_uid,row.st_nlink,row.st_size,row.st_mtime_ns,row.st_ctime_ns
+
+def read_pin(pin):
+    need(type(pin)is dict and set(pin)=={'path','bytes','sha256'} and
+         type(pin['path'])is str and type(pin['bytes'])is int and 0<pin['bytes']<=MAX_BYTES and
+         type(pin['sha256'])is str and re.fullmatch('[0-9a-f]{64}',pin['sha256']),
+         'bounded_exact_private_fixture_pin_required')
+    path=Path(pin['path']);need(path.is_absolute()and path.resolve(strict=True)==path,'unaliased_private_fixture_required')
+    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK|os.O_CLOEXEC)
+    try:
+        before=os.fstat(fd)
+        need(stat.S_ISREG(before.st_mode)and before.st_nlink==1 and before.st_uid==os.geteuid()and
+             stat.S_IMODE(before.st_mode)==0o600 and before.st_size==pin['bytes'],'owned_600_private_fixture_required')
+        raw=os.read(fd,pin['bytes']+1)
+        need(len(raw)==pin['bytes']and hashlib.sha256(raw).hexdigest()==pin['sha256']and
+             _identity(before)==_identity(os.fstat(fd))==_identity(path.lstat()),'private_fixture_pin_changed')
+        return raw
+    finally:os.close(fd)
+
+def read_borrowed_request(fd,request,sha256):
+    need(type(fd)is int and fd>=3 and type(sha256)is str and re.fullmatch('[0-9a-f]{64}',sha256),
+         'explicit_borrowed_sealed_worker_request_required')
+    row=os.fstat(fd);seals=fcntl.F_SEAL_WRITE|fcntl.F_SEAL_GROW|fcntl.F_SEAL_SHRINK|fcntl.F_SEAL_SEAL
+    need(stat.S_ISREG(row.st_mode)and row.st_nlink==0 and row.st_uid==os.geteuid()and
+         0<row.st_size<=MAX_BYTES and fcntl.fcntl(fd,fcntl.F_GET_SEALS)&seals==seals and
+         fcntl.fcntl(fd,fcntl.F_GETFD)&fcntl.FD_CLOEXEC,'actual_fully_sealed_private_worker_request_required')
+    raw=os.pread(fd,row.st_size+1,0)
+    need(raw==canonical(request)and hashlib.sha256(raw).hexdigest()==sha256 and
+         _identity(row)==_identity(os.fstat(fd)),'original_sealed_worker_request_changed')
+
+
+def _source_sha(path):
+    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK|os.O_CLOEXEC)
+    try:
+        before=os.fstat(fd)
+        need(stat.S_ISREG(before.st_mode)and before.st_nlink==1 and 0<before.st_size<=8*1024**2,
+             'bounded_regular_fake_fixture_source_required')
+        result=hashlib.sha256();count=0
+        while piece:=os.read(fd,65536):
+            count+=len(piece);need(count<=before.st_size,'fake_fixture_source_grew');result.update(piece)
+        need(count==before.st_size and _identity(before)==_identity(os.fstat(fd))==_identity(path.lstat()),
+             'fake_fixture_source_identity_changed')
+        return result.hexdigest()
+    finally:os.close(fd)
+
+
+def _fake_value(nonce):
+    need(type(nonce)is str and re.fullmatch('[0-9a-f]{32}',nonce),'public_fake_nonce_required')
+    # Explicit invalid-for-provider domain. This is generated fake material,
+    # never supplied by an operator or copied from a credential store.
+    return 'INVALID_PRIVATE_LOOPBACK_FIXTURE_ONLY_'+nonce
+
+def fake_fingerprint(nonce):
+    """Public metadata for genuine16hex fingerprint_api_key; not a credential."""
+    return hashlib.sha256(_fake_value(nonce).encode()).hexdigest()[:16]
+
+def validate_fixture_metadata(value,request,context):
+    """Pure joins only. This function cannot install or admit anything."""
+    fields={'schema','execution_environment','paid_provider_calls_allowed','task_cid','task_alias',
+        'database_attempt_id','database_attempt_number','allocation_session_id','source_generation',
+        'owner_request_sha256','source_profile_sha256','capsule_sha256','credential_slot',
+        'credential_fingerprint','fake_nonce','receipt_directory','work_deadline_monotonic',
+        'native_deadline_monotonic','network_namespace'}
+    need(type(value)is dict and set(value)==fields and value['schema']==SCHEMA and
+         value['execution_environment']=='isolated-loopback'and value['paid_provider_calls_allowed']is False,
+         'closed_loopback_only_fake_fixture_required')
+    need(request.get('execution_environment')=='isolated-loopback'and
+         type(value['database_attempt_number'])is int and value['database_attempt_number']==1,
+         'single_private_loopback_attempt_required')
+    for name in ('task_cid','task_alias','database_attempt_id','database_attempt_number',
+                 'allocation_session_id','source_generation','receipt_directory',
+                 'work_deadline_monotonic','native_deadline_monotonic','owner_request_sha256'):
+        need(type(value[name])is type(request.get(name))and value[name]==request.get(name),'fake_fixture_request_join_required')
+    pairs={'task_cid':'database_task_cid','task_alias':'portal_task_id','database_attempt_id':'database_attempt_id',
+        'database_attempt_number':'database_attempt_number','allocation_session_id':'allocation_session_id',
+        'source_generation':'source_generation','owner_request_sha256':'request_sha256',
+        'source_profile_sha256':'source_bindings_sha256','capsule_sha256':'capsule_sha256',
+        'credential_slot':'credential_slot','credential_fingerprint':'credential_fingerprint',
+        'work_deadline_monotonic':'work_deadline_monotonic','native_deadline_monotonic':'native_deadline_monotonic'}
+    for left,right in pairs.items():
+        need(type(value[left])is type(context.get(right))and value[left]==context.get(right),'fake_fixture_actual_owner_context_join_required')
+    need(value['source_profile_sha256']==request['source_profile_pin']['sha256']and
+         value['capsule_sha256']==request['capsule_pin']['sha256'],'fake_fixture_sealed_source_join_required')
+    need(type(value['credential_slot'])is str and re.fullmatch('[A-Za-z0-9_.-]{1,64}',value['credential_slot'])and
+         type(value['credential_fingerprint'])is str and re.fullmatch('[0-9a-f]{16}',value['credential_fingerprint'])and
+         fake_fingerprint(value['fake_nonce'])==value['credential_fingerprint'],'fake_only_slot_fingerprint_required')
+    need(all(type(value[name])in(int,float)and math.isfinite(value[name])for name in
+         ('work_deadline_monotonic','native_deadline_monotonic'))and
+         0<value['work_deadline_monotonic']<value['native_deadline_monotonic']and
+         value['native_deadline_monotonic']-value['work_deadline_monotonic']<=60,'original_fake_fixture_clocks_required')
+    namespace=value['network_namespace']
+    need(type(namespace)is dict and set(namespace)=={'device','inode'}and
+         all(type(x)is int and x>0 for x in namespace.values()),'exact_fake_fixture_namespace_metadata_required')
+    directory=Path(value['receipt_directory'])
+    need(directory.is_absolute()and '..'not in directory.parts and
+         directory==Path(request['context_path']).parent,'fake_fixture_actual_context_directory_required')
+    return value
+
+def require_live_network(namespace):
+    """Actual calling-task observation; a serialized namespace never suffices."""
+    own=Path('/proc/self/ns/net').stat();initial=Path('/proc/1/ns/net').stat()
+    need(namespace=={'device':own.st_dev,'inode':own.st_ino}and
+         (own.st_dev,own.st_ino)!=(initial.st_dev,initial.st_ino),'actual_private_network_namespace_required')
+    need([name for _,name in socket.if_nameindex()]==['lo'],'actual_loopback_only_network_required')
+    need(len(Path('/proc/net/route').read_text().splitlines())==1 and
+         all(row.split()and row.split()[-1]=='lo'for row in Path('/proc/net/ipv6_route').read_text().splitlines()),
+         'actual_no_external_routes_required')
+    again=Path('/proc/self/ns/net').stat()
+    need((own.st_dev,own.st_ino)==(again.st_dev,again.st_ino),'private_network_namespace_changed')
+
+def validate_original_work_boundary(*,work_deadline_monotonic,native_deadline_monotonic,observed_monotonic):
+    """Pure observed-clock cutoff; metadata cannot renew a clock or admit IO."""
+    need(all(type(moment)in(int,float)and math.isfinite(moment)for moment in
+         (work_deadline_monotonic,native_deadline_monotonic,observed_monotonic)),
+         'finite_private_fake_original_clock_required')
+    need(0<=observed_monotonic<work_deadline_monotonic-3 and
+         0<work_deadline_monotonic<native_deadline_monotonic and
+         native_deadline_monotonic-work_deadline_monotonic<=60,
+         'private_fake_original_work_margin_expired')
+
+
+def _work_current(value):
+    # Live phases always sample the actual clock. No supplied observation,
+    # refreshed budget, timeout or cleanup extension is accepted here.
+    validate_original_work_boundary(work_deadline_monotonic=value['work_deadline_monotonic'],
+        native_deadline_monotonic=value['native_deadline_monotonic'],observed_monotonic=time.monotonic())
+
+
+def _single_thread():
+    need(threading.current_thread()is threading.main_thread()and threading.active_count()==1 and
+         [p.name for p in Path('/proc/self/task').iterdir()]==[str(os.getpid())],
+         'fresh_single_threaded_fake_fixture_process_required')
+
+def _source_module(name,root,sources,*,import_allowed,work_value=None):
+    path=root/RELATIVE[name]
+    need(path.resolve(strict=True)==path and type(sources.get(str(path)))is str and
+         _source_sha(path)==sources[str(path)],'fake_fixture_normal_source_required')
+    if import_allowed:
+        need(type(work_value)is dict,'original_clock_required_before_project_import')
+        _work_current(work_value)
+        module=importlib.import_module(name)
+        _work_current(work_value)
+    else:
+        module=sys.modules.get(name)
+    need(type(module)is types.ModuleType and sys.modules.get(name)is module and module.__name__==name and
+         module.__file__==module.__spec__.origin==str(path)and module.__spec__.name==name,
+         'fake_fixture_genuine_normal_module_required')
+    need(_source_sha(path)==sources[str(path)],'fake_fixture_source_changed')
+    if work_value is not None:_work_current(work_value)
+    return module
+
+def _source_function(module,name):
+    function=vars(module).get(name)
+    need(type(function)is types.FunctionType and function.__globals__ is vars(module)and
+         function.__module__==module.__name__ and function.__code__.co_filename==module.__file__,
+         'fake_fixture_genuine_source_function_required')
+    return function
+
+def initialize_private_fake_credentials(*,fixture_pin,request,request_descriptor,request_sha256,core,owner_client,store):
+    """Unwired explicit proposal; no prior manager is reset or reinterpreted.
+
+    Fixed-clock checks bracket every new IO/factory/selection phase. They
+    cannot preempt a genuine API or import already executing. The separately
+    admitted process owner must enforce the original hard process deadlines;
+    a late return is refused with real new objects retained, never rolled back.
+    Current V3/M2 do not call this, and M2 dispatch must remain fail-closed.
+    """
+    global _INITIALIZATION_ATTEMPTED
+    need(not _INITIALIZATION_ATTEMPTED,'one_private_fake_initialization_only')
+    read_borrowed_request(request_descriptor,request,request_sha256)
+    need(type(request)is dict and request.get('fake_credential_fixture_pin')==fixture_pin,
+         'future_sealed_request_must_authenticate_fake_fixture_pin')
+    value=decode(read_pin(fixture_pin));profile=decode(read_pin(request['source_profile_pin']))
+    need(set(profile)=={'schema','source_generation','sources'}and
+         profile['schema']=='fresh-task-grok-capture-source-profile/v1'and
+         profile['source_generation']==request['source_generation']and type(profile['sources'])is dict and
+         9<=len(profile['sources'])<=512,'private_fake_source_profile_required')
+    root=Path(request['accelerator_root']);sources=profile['sources']
+    _source_module(MODULE,root,sources,import_allowed=False)
+    actual_core=_source_module('ipfs_accelerate_py.cli_runtime.grok_production_owner',root,sources,import_allowed=False)
+    need(core is actual_core and type(owner_client)is core.ProductionOwnerGuardClient,'actual_fake_fixture_owner_client_required')
+    context=core.validate_context(owner_client.context());validate_fixture_metadata(value,request,context)
+    _work_current(value)
+    require_live_network(value['network_namespace']);_single_thread()
+    _work_current(value)
+    owner_client.assert_current('remaining_deadline')
+    _work_current(value)
+    directory=Path(value['receipt_directory']);row=directory.lstat()
+    need(directory.resolve(strict=True)==directory and stat.S_ISDIR(row.st_mode)and row.st_uid==os.geteuid()and
+         stat.S_IMODE(row.st_mode)==0o700 and Path(fixture_pin['path'])==directory/'private-fake-credential-fixture.json',
+         'actual_owned_private_fake_fixture_directory_required')
+    secret_file=directory/'private-fake-secrets.json';cache=directory/'private-fake-storage-cache'
+    need(not os.path.lexists(secret_file)and not os.path.lexists(cache),'fresh_absent_fake_fixture_outputs_required')
+    secret_module_name='ipfs_accelerate_py.common.secrets_manager'
+    need(secret_module_name not in sys.modules,'prior_secrets_module_must_not_be_reinterpreted')
+    slot_name='api_key/grok_cli/'+value['credential_slot']
+    forbidden={slot_name.upper(),slot_name.upper().replace('-','_'),slot_name.upper().replace('.','_'),
+        'XAI_API_KEY','GROK_API_KEY','IPFS_ACCELERATE_SECRETS_KEY'}
+    need(not any(name in os.environ for name in forbidden),'no_ambient_fake_slot_or_provider_credential_fallback')
+    _work_current(value)
+    _source_module('ipfs_accelerate_py.common',root,sources,import_allowed=True,work_value=value)
+    _work_current(value)
+    storage=_source_module('ipfs_accelerate_py.common.storage_wrapper',root,sources,import_allowed=True,work_value=value)
+    _work_current(value)
+    need(vars(storage).get('_storage_wrapper')is None,'preexisting_storage_singleton_preserved')
+    storage_factory=_source_function(storage,'get_storage_wrapper')
+    require_live_network(value['network_namespace']);_single_thread()
+    state=dict(pid=os.getpid(),thread=threading.get_ident(),fixture_pin=dict(fixture_pin),manager=None,storage=None)
+    _work_current(value)
+    _INITIALIZATION_ATTEMPTED=True
+    _RETAINED.append(state)
+    _work_current(value)
+    cache.mkdir(mode=0o700)
+    _work_current(value)
+    cache_info=cache.lstat()
+    need(cache.resolve(strict=True)==cache and stat.S_ISDIR(cache_info.st_mode)and
+         cache_info.st_uid==os.geteuid()and stat.S_IMODE(cache_info.st_mode)==0o700,
+         'actual_owned_700_fake_storage_cache_required')
+    _work_current(value)
+    fd=os.open(secret_file,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW|os.O_CLOEXEC,0o600)
+    try:
+        # The actual FD is owned by this finally even if open returned late.
+        _work_current(value)
+        need(os.write(fd,b'{}\n')==3,'private_fake_empty_file_write_failed')
+        _work_current(value)
+        os.fsync(fd)
+        _work_current(value)
+        info=os.fstat(fd)
+        need(stat.S_ISREG(info.st_mode)and info.st_nlink==1 and info.st_uid==os.geteuid()and
+             stat.S_IMODE(info.st_mode)==0o600,'actual_owned_600_fake_file_required')
+    finally:os.close(fd)
+    # SecretsManager imports/calls this wrapper at module top. Prebind the
+    # genuine offline singleton; never invoke distributed/autodetect defaults.
+    _work_current(value)
+    wrapper=storage_factory(enable_distributed=False,cache_dir=str(cache),auto_detect_ci=False)
+    state['storage']=wrapper  # Retain the actual returned object before refusal.
+    _work_current(value)
+    need(type(wrapper)is storage.StorageWrapper and storage._storage_wrapper is wrapper and
+         wrapper._storage is None and wrapper._use_distributed is False and wrapper._cache_dir==str(cache),
+         'actual_private_offline_storage_wrapper_required')
+    _work_current(value)
+    secret_module=_source_module(secret_module_name,root,sources,import_allowed=True,work_value=value)
+    _work_current(value)
+    need(secret_module.get_storage_wrapper is storage_factory and secret_module._storage is wrapper and
+         vars(secret_module).get('_global_secrets_manager')is None,'fresh_private_secrets_singleton_required')
+    factory=_source_function(secret_module,'get_global_secrets_manager')
+    require_live_network(value['network_namespace']);_single_thread()
+    _work_current(value)
+    manager=factory(secrets_file=str(secret_file),use_encryption=False)
+    state['manager']=manager  # Never lose a late actual return or reset globals.
+    _work_current(value)
+    need(type(manager)is secret_module.SecretsManager and secret_module._global_secrets_manager is manager and
+         manager.secrets_file==str(secret_file)and manager.use_encryption is False and manager._cipher is None and
+         manager.storage is None,'actual_fresh_private_fake_manager_required')
+    _work_current(value)
+    keys=manager.list_credential_keys()
+    _work_current(value)
+    need(keys==[],'actual_fresh_private_fake_manager_required')
+    fake=_fake_value(value['fake_nonce'])
+    _work_current(value)
+    manager.set_credential(slot_name,fake,persist=True)
+    _work_current(value)
+    keys=manager.list_credential_keys()
+    _work_current(value)
+    resolved=manager.get_credential(slot_name)
+    _work_current(value)
+    need(keys==[slot_name]and resolved==fake,'actual_fake_credential_memory_readback_required')
+    _work_current(value)
+    slots=_source_module('ipfs_accelerate_py.llm_allocation.api_key_slots',root,sources,import_allowed=True,work_value=value)
+    _work_current(value)
+    allocation=_source_module('ipfs_accelerate_py.llm_allocation.duckdb_store',root,sources,import_allowed=True,work_value=value)
+    _work_current(value)
+    need(type(store)is allocation.AllocationStore and str(store.path)==context['allocation_store_path']and
+         store.path.is_file(),'actual_preexisting_private_allocation_store_required')
+    _work_current(value)
+    binding=slots.RequiredApiKeyBinding('grok_cli',request['allocation_session_id'],value['credential_slot'],value['credential_fingerprint'])
+    _work_current(value)
+    fingerprint=slots.fingerprint_api_key(fake)
+    _work_current(value)
+    global_manager=slots._secrets()
+    _work_current(value)
+    need(fingerprint==value['credential_fingerprint']and global_manager is manager,
+         'actual_global_fake_fingerprint_and_manager_join_required')
+    # Genuine existing strict slot/session metadata only; no ranking, binding
+    # repair, registration or native capture insertion is performed here.
+    _work_current(value)
+    selected=slots.select_api_key('grok_cli',session_id=request['allocation_session_id'],store=store,required_binding=binding)
+    _work_current(value)
+    need(selected['secret']==fake and selected['key_fingerprint']==value['credential_fingerprint']and
+         selected['slot_id']==value['credential_slot'],'actual_private_fake_strict_binding_readback_required')
+    _work_current(value)
+    fd=os.open(secret_file,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK|os.O_CLOEXEC)
+    try:
+        _work_current(value)
+        saved=os.fstat(fd)
+        need((saved.st_dev,saved.st_ino)==(info.st_dev,info.st_ino)and saved.st_nlink==1 and
+             saved.st_uid==os.geteuid()and stat.S_IMODE(saved.st_mode)==0o600 and 0<saved.st_size<=4096,
+             'actual_fake_file_identity_or_size_changed')
+        _work_current(value)
+        data=os.read(fd,4097)
+        _work_current(value)
+        need(len(data)==saved.st_size and json.loads(data)=={slot_name:fake}and
+             _identity(saved)==_identity(os.fstat(fd))==_identity(secret_file.lstat()),
+             'actual_fake_file_persistence_required')
+    finally:os.close(fd)
+    require_live_network(value['network_namespace']);_single_thread()
+    final_directory=directory.lstat()
+    need((final_directory.st_dev,final_directory.st_ino,final_directory.st_uid,stat.S_IMODE(final_directory.st_mode))==
+         (row.st_dev,row.st_ino,os.geteuid(),0o700),'original_private_fake_directory_identity_changed')
+    _work_current(value)
+    owner_client.assert_current('remaining_deadline')
+    _work_current(value)
+    read_pin(fixture_pin)
+    _work_current(value)
+    read_pin(request['source_profile_pin'])
+    _work_current(value)
+    need(secret_module._global_secrets_manager is manager,'private_fake_original_custody_expired')
+    return dict(schema='private-fake-credential-installation-observation/v1',metadata_only=True,
+        actual_same_process_private_manager=True,credential_slot=value['credential_slot'],
+        credential_fingerprint=value['credential_fingerprint'],fake_only=True,real_credentials_used=False,
+        ambient_credentials_read=False,provider_called=False,provider_dispatch_granted=False,
+        singleton_reset=False,task_completion_accepted=False,native_qualified=False,
+        production_qualified=False,Lean_admitted=False)
+
+
+# Separate explicit observation proposal. The original PID1 guard and the
+# credential initializer above remain unchanged and do NOT call this route.
+_OWNED_ROOTLESS_POLICY_SCHEMA='private-owned-rootless-network-policy/v1'
+_OWNED_ROOTLESS_WITNESS='own-net-owned-user-restricted-maps/v1'
+_OWNED_NS_GET_USERNS=0xb701
+_OWNED_NS_GET_NSTYPE=0xb703
+_OWNED_CLONE_NEWUSER=0x10000000
+_OWNED_CLONE_NEWNET=0x40000000
+_OWNED_ID_SPACE=4294967295
+
+def _owned_rootless_map(rows):
+    need(type(rows)is list and 1<=len(rows)<=8,'owned_rootless_bounded_map_required')
+    extents=[]
+    for row in rows:
+        need(type(row)is list and len(row)==3 and all(type(v)is int for v in row),
+             'owned_rootless_map_triplets_required')
+        inside,outside,count=row
+        need(0<=inside<_OWNED_ID_SPACE and 0<=outside<_OWNED_ID_SPACE and 0<count<=_OWNED_ID_SPACE and
+             inside+count<=_OWNED_ID_SPACE and outside+count<=_OWNED_ID_SPACE,
+             'owned_rootless_map_range_required')
+        extents.append((inside,outside,count))
+    need(sum(row[2]for row in extents)<_OWNED_ID_SPACE,'owned_rootless_restricted_noninitial_map_required')
+    for axis in (0,1):
+        ordered=sorted((row[axis],row[axis]+row[2])for row in extents)
+        need(all(left[1]<=right[0]for left,right in zip(ordered,ordered[1:])),
+             'owned_rootless_nonoverlapping_map_required')
+    return tuple(extents)
+
+def _owned_rootless_parse_map(raw):
+    need(type(raw)is bytes and 0<len(raw)<=4096,'owned_rootless_map_bytes_required')
+    try:text=raw.decode('ascii')
+    except UnicodeError:raise PrivateFakeCredentialRefusal('owned_rootless_ascii_map_required')from None
+    lines=text.splitlines();need(1<=len(lines)<=8,'owned_rootless_bounded_map_required')
+    rows=[]
+    for line in lines:
+        fields=line.split()
+        need(len(fields)==3 and all(re.fullmatch('[0-9]{1,10}',v)for v in fields),
+             'owned_rootless_decimal_map_required')
+        rows.append([int(v)for v in fields])
+    return _owned_rootless_map(rows)
+
+def _owned_rootless_close_all(descriptors):
+    # Work expiry never prevents cleanup of these actual receiver-owned FDs.
+    active=sys.exc_info()[1];first=None
+    for descriptor in reversed(descriptors):
+        try:os.close(descriptor)
+        except BaseException as error:
+            if first is None:first=error
+    if first is not None:
+        if active is None:raise first
+        active.add_note('owned_rootless_descriptor_cleanup_failed')
+
+def _owned_rootless_proc_bytes(path,maximum,boundary):
+    need(path in ('/proc/self/uid_map','/proc/self/gid_map','/proc/net/route','/proc/net/ipv6_route')and
+         type(maximum)is int and 0<maximum<=65536,'owned_rootless_fixed_proc_reader_required')
+    _work_current(boundary)
+    descriptor=os.open(path,os.O_RDONLY|os.O_CLOEXEC|os.O_NOFOLLOW)
+    try:
+        _work_current(boundary);before=os.fstat(descriptor);parts=[];count=0
+        need(stat.S_ISREG(before.st_mode),'owned_rootless_proc_regular_file_required')
+        while True:
+            _work_current(boundary);block=os.read(descriptor,min(4096,maximum+1-count));_work_current(boundary)
+            if not block:break
+            count+=len(block);need(count<=maximum,'owned_rootless_proc_read_bound')
+            parts.append(block)
+        need(_identity(before)==_identity(os.fstat(descriptor)),'owned_rootless_proc_file_changed')
+        _work_current(boundary);return b''.join(parts)
+    finally:_owned_rootless_close_all([descriptor])
+
+def _owned_rootless_typed_identity(descriptor,expected_type,boundary):
+    _work_current(boundary);kind=fcntl.ioctl(descriptor,_OWNED_NS_GET_NSTYPE);_work_current(boundary)
+    need(type(kind)is int and kind==expected_type,'owned_rootless_namespace_type_required')
+    flags=fcntl.fcntl(descriptor,fcntl.F_GETFL);fdflags=fcntl.fcntl(descriptor,fcntl.F_GETFD)
+    need(type(flags)is int and type(fdflags)is int and flags&os.O_ACCMODE==os.O_RDONLY and fdflags&fcntl.FD_CLOEXEC,
+         'owned_rootless_readonly_CLOEXEC_namespace_required')
+    _work_current(boundary);row=os.fstat(descriptor);_work_current(boundary)
+    need(type(row.st_dev)is int and type(row.st_ino)is int and row.st_dev>0 and row.st_ino>0,
+         'owned_rootless_kernel_namespace_identity_required')
+    return row.st_dev,row.st_ino
+
+def require_owned_rootless_network(namespace,*,sealed_policy,work_deadline_monotonic,native_deadline_monotonic):
+    """Observe an explicitly selected private NET/USER ownership policy.
+
+    ``sealed_policy`` names expected public evidence; this argument alone does
+    NOT authenticate a seal, parent, resource or task. A future initializer
+    binding must authenticate it. No caller selects FDs, PIDs, syscall adapter,
+    clock provider, manager or owner client. This never falls back from the
+    original PID1 guard and grants no native/helper admission.
+    """
+    boundary=dict(work_deadline_monotonic=work_deadline_monotonic,native_deadline_monotonic=native_deadline_monotonic)
+    _work_current(boundary)
+    need(type(namespace)is dict and set(namespace)=={'device','inode'}and
+         all(type(v)is int and v>0 for v in namespace.values()),'owned_rootless_exact_namespace_metadata_required')
+    expected_namespace=(namespace['device'],namespace['inode'])
+    need(type(sealed_policy)is dict and set(sealed_policy)=={'schema','witness_kind','expected_uid_map','expected_gid_map'}and
+         sealed_policy['schema']==_OWNED_ROOTLESS_POLICY_SCHEMA and sealed_policy['witness_kind']==_OWNED_ROOTLESS_WITNESS,
+         'owned_rootless_explicit_policy_required')
+    uid_expected=_owned_rootless_map(sealed_policy['expected_uid_map'])
+    gid_expected=_owned_rootless_map(sealed_policy['expected_gid_map'])
+    held=[];typed=[]
+    def retain(descriptor):
+        need(type(descriptor)is int and descriptor>=0 and descriptor not in held,'owned_rootless_new_namespace_FD_required')
+        held.append(descriptor);return descriptor
+    def observe():
+        _work_current(boundary)
+        net=retain(os.open('/proc/self/ns/net',os.O_RDONLY|os.O_CLOEXEC));_work_current(boundary)
+        user=retain(os.open('/proc/self/ns/user',os.O_RDONLY|os.O_CLOEXEC));_work_current(boundary)
+        net_id=_owned_rootless_typed_identity(net,_OWNED_CLONE_NEWNET,boundary)
+        user_id=_owned_rootless_typed_identity(user,_OWNED_CLONE_NEWUSER,boundary)
+        _work_current(boundary);owner=retain(fcntl.ioctl(net,_OWNED_NS_GET_USERNS));_work_current(boundary)
+        owner_id=_owned_rootless_typed_identity(owner,_OWNED_CLONE_NEWUSER,boundary)
+        typed.extend(((net,_OWNED_CLONE_NEWNET,net_id),(user,_OWNED_CLONE_NEWUSER,user_id),
+                      (owner,_OWNED_CLONE_NEWUSER,owner_id)))
+        need(net_id==expected_namespace,'owned_rootless_sealed_self_namespace_mismatch')
+        need(owner_id==user_id,'owned_rootless_NET_must_be_owned_by_self_USER')
+        uid_raw=_owned_rootless_proc_bytes('/proc/self/uid_map',4096,boundary)
+        gid_raw=_owned_rootless_proc_bytes('/proc/self/gid_map',4096,boundary)
+        uid=_owned_rootless_parse_map(uid_raw);gid=_owned_rootless_parse_map(gid_raw)
+        need(uid==uid_expected and gid==gid_expected,'owned_rootless_actual_maps_must_match_policy')
+        _work_current(boundary);interfaces=socket.if_nameindex();_work_current(boundary)
+        need([name for _,name in interfaces]==['lo'],'owned_rootless_loopback_only_required')
+        v4=_owned_rootless_proc_bytes('/proc/net/route',65536,boundary)
+        v6=_owned_rootless_proc_bytes('/proc/net/ipv6_route',65536,boundary)
+        need(len(v4.splitlines())==1 and all(row.split()and row.split()[-1]==b'lo'for row in v6.splitlines()),
+             'owned_rootless_no_external_routes_required')
+        _work_current(boundary)
+        return dict(network_namespace=dict(device=net_id[0],inode=net_id[1]),
+            user_namespace=dict(device=user_id[0],inode=user_id[1]),
+            network_owner_user_namespace=dict(device=owner_id[0],inode=owner_id[1]),
+            uid_map=[list(row)for row in uid],gid_map=[list(row)for row in gid],
+            uid_map_sha256=hashlib.sha256(uid_raw).hexdigest(),gid_map_sha256=hashlib.sha256(gid_raw).hexdigest(),
+            interfaces=interfaces,IPv4_routes_sha256=hashlib.sha256(v4).hexdigest(),IPv6_routes_sha256=hashlib.sha256(v6).hexdigest())
+    try:
+        before=observe();after=observe()
+        need(before==after,'owned_rootless_namespace_maps_or_routes_changed')
+        for descriptor,kind,identity in typed:
+            need(_owned_rootless_typed_identity(descriptor,kind,boundary)==identity,
+                 'owned_rootless_held_namespace_FD_changed')
+        _work_current(boundary)
+        result=dict(schema='private-owned-rootless-network-observation/v1',**after,
+            own_NET_owned_by_noninitial_self_USER=True,only_loopback_and_no_external_routes_observed=True,
+            metadata_only=True,sealed_policy_authenticated=False,policy_binding_required=True,
+            arbitrary_outer_freshness_proved=False,helper_initializer_called=False,
+            provider_called=False,native_qualified=False,production_qualified=False,Lean_admitted=False)
+    finally:_owned_rootless_close_all(held)
+    _work_current(boundary);result['owned_namespace_descriptors_closed']=True
+    return result

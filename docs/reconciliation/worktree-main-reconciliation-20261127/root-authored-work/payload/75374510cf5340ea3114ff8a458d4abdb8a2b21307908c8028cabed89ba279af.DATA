@@ -1,0 +1,3 @@
+import Allowed
+theorem fixtureTruth : True := by trivial
+#print axioms fixtureTruth

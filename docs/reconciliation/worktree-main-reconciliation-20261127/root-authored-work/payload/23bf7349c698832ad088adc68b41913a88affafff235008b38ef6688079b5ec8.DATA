@@ -1,0 +1,214 @@
+import ObjectiveContainerTyped
+
+set_option backward.isDefEq.respectTransparency false
+
+/-!
+SOURCE-ONLY, UNCOMPILED, UNQUALIFIED CANDIDATE.
+
+Ordered partial exact-real interpreters. Source evaluation uses only named
+environments; target evaluation uses only intrinsic slots. Both recurse on
+their own syntax. Source and target share the qualified primitive arithmetic
+and ordered list traversal, not a compiler or a semantic certificate.
+
+Conversion to a finite vector occurs only after the actual list traversal has
+succeeded and its length has been proved. Zip retains minimum truncation.
+No Python Float/libm/fsum refinement, external decoder theorem, source model
+convergence, task completion, proof-cache admission, or planner activation.
+-/
+
+namespace RankerObjectiveContainerLanguage
+
+noncomputable section
+
+open RankerObjectiveIR (SliceError mapOne mapTwo applyOne applyTwo)
+open RankerObjectivePrefixIR (Ty Denote Context Schema Environment NamedEnvironment
+  RecordValues extendNames evalUnary evalBinary)
+open RankerObjectiveContainerIR (mapExact zipMapExact)
+
+def vectorOfList {length : ℕ} (values : List ℝ) (sameLength : values.length = length) :
+    Fin length → ℝ :=
+  fun index => values.get ⟨index.val, by rw [sameLength]; exact index.isLt⟩
+
+/-- The successful traversal equation, rather than a desired pointwise result,
+supplies the length proof used before finite indexing is constructed. -/
+def mapToVector {α : Type} {length : ℕ} (body : α → Except SliceError ℝ)
+    (values : Fin length → α) : Except SliceError (Fin length → ℝ) :=
+  match result : mapExact body (List.ofFn values) with
+  | .error problem => .error problem
+  | .ok outputs => .ok (vectorOfList outputs (by
+      have same := RankerObjectivePrefixIR.map_exact_success_length body
+        (List.ofFn values) outputs result
+      simpa only [List.length_ofFn] using same))
+
+/-- Unequal lengths remain admissible and produce Fin(min m n), after the
+actual partial zip has succeeded. No equal-length input premise is used. -/
+def zipToVector {α β : Type} {leftLength rightLength : ℕ}
+    (body : α → β → Except SliceError ℝ)
+    (left : Fin leftLength → α) (right : Fin rightLength → β) :
+    Except SliceError (Fin (min leftLength rightLength) → ℝ) :=
+  match result : zipMapExact body (List.ofFn left) (List.ofFn right) with
+  | .error problem => .error problem
+  | .ok outputs => .ok (vectorOfList outputs (by
+      have same := RankerObjectivePrefixIR.zip_exact_success_min_length body
+        (List.ofFn left) (List.ofFn right) outputs result
+      simpa only [List.length_ofFn] using same))
+
+def evalSourceExpr (environment : NamedEnvironment) : {τ : Ty} →
+    SourceExpr τ → Except SliceError (Denote τ)
+  | _, .leaf value => RankerObjectivePrefixIR.evalSourceTerm environment value
+  | _, .scalarUnary op value => applyOne (evalUnary op) (evalSourceExpr environment value)
+  | _, .scalarBinary op left right =>
+      applyTwo (evalBinary op) (evalSourceExpr environment left) (evalSourceExpr environment right)
+  | _, .ifNonneg condition thenBranch elseBranch =>
+      applyOne (fun value => if 0 ≤ value then evalSourceExpr environment thenBranch
+        else evalSourceExpr environment elseBranch) (evalSourceExpr environment condition)
+  | _, .lengthVector (length := length) values =>
+      mapOne (fun _ => length) (evalSourceExpr environment values)
+  | _, .lengthMatrix (rows := rows) values =>
+      mapOne (fun _ => rows) (evalSourceExpr environment values)
+  | _, .natToScalar value => mapOne (fun value : ℕ => (value : ℝ)) (evalSourceExpr environment value)
+  | _, .indexVector values index => mapTwo (fun values index => values index)
+      (evalSourceExpr environment values) (evalSourceExpr environment index)
+  | _, .fsumExact values => mapOne
+      (fun values => RankerObjectiveContainerIR.orderedFsum (List.ofFn values))
+      (evalSourceExpr environment values)
+  | _, .mapRows (columns := columns) binder values body => applyOne
+      (fun rows => mapToVector (fun row => evalSourceExpr
+        (extendNames (τ := .vector columns) binder row environment) body) rows)
+      (evalSourceExpr environment values)
+  | _, .mapVector binder values body => applyOne
+      (fun values => mapToVector (fun value => evalSourceExpr
+        (extendNames (τ := .scalar) binder value environment) body) values)
+      (evalSourceExpr environment values)
+  | _, .zipMap leftName rightName left right body => applyTwo
+      (fun left right => zipToVector
+        (fun a b => evalSourceExpr (extendNames (τ := .scalar) rightName b
+          (extendNames (τ := .scalar) leftName a environment)) body)
+        left right)
+      (evalSourceExpr environment left) (evalSourceExpr environment right)
+  | _, .zipRowsMap (columns := columns) scalarName rowName left right body => applyTwo
+      (fun left right => zipToVector
+        (fun scalar row => evalSourceExpr (extendNames (τ := .vector columns) rowName row
+          (extendNames (τ := .scalar) scalarName scalar environment)) body)
+        left right)
+      (evalSourceExpr environment left) (evalSourceExpr environment right)
+  | _, .rangeMap (length := length) binder boundVector body => applyOne
+      (fun _ => mapToVector
+        (fun index => evalSourceExpr (extendNames (τ := .index length) binder index environment) body)
+        (fun index : Fin length => index))
+      (evalSourceExpr environment boundVector)
+
+def evalExpr : {context : Context} → (environment : Environment context) →
+    {τ : Ty} → Expr context τ → Except SliceError (Denote τ)
+  | _, environment, _, .leaf value => RankerObjectivePrefixIR.evalTerm environment value
+  | _, environment, _, .scalarUnary op value => applyOne (evalUnary op) (evalExpr environment value)
+  | _, environment, _, .scalarBinary op left right =>
+      applyTwo (evalBinary op) (evalExpr environment left) (evalExpr environment right)
+  | _, environment, _, .ifNonneg condition thenBranch elseBranch =>
+      applyOne (fun value => if 0 ≤ value then evalExpr environment thenBranch
+        else evalExpr environment elseBranch) (evalExpr environment condition)
+  | _, environment, _, .lengthVector (length := length) values =>
+      mapOne (fun _ => length) (evalExpr environment values)
+  | _, environment, _, .lengthMatrix (rows := rows) values =>
+      mapOne (fun _ => rows) (evalExpr environment values)
+  | _, environment, _, .natToScalar value => mapOne (fun value : ℕ => (value : ℝ)) (evalExpr environment value)
+  | _, environment, _, .indexVector values index => mapTwo (fun values index => values index)
+      (evalExpr environment values) (evalExpr environment index)
+  | _, environment, _, .fsumExact values => mapOne
+      (fun values => RankerObjectiveContainerIR.orderedFsum (List.ofFn values))
+      (evalExpr environment values)
+  | _, environment, _, .mapRows (columns := columns) _ values body => applyOne
+      (fun rows => mapToVector (fun row => evalExpr (.cons (τ := .vector columns) row environment) body) rows)
+      (evalExpr environment values)
+  | _, environment, _, .mapVector _ values body => applyOne
+      (fun values => mapToVector (fun value => evalExpr (.cons (τ := .scalar) value environment) body) values)
+      (evalExpr environment values)
+  | _, environment, _, .zipMap _ _ left right body => applyTwo
+      (fun left right => zipToVector
+        (fun a b => evalExpr (.cons (τ := .scalar) b (.cons (τ := .scalar) a environment)) body) left right)
+      (evalExpr environment left) (evalExpr environment right)
+  | _, environment, _, .zipRowsMap (columns := columns) _ _ left right body => applyTwo
+      (fun left right => zipToVector
+        (fun scalar row => evalExpr (.cons (τ := .vector columns) row
+          (.cons (τ := .scalar) scalar environment)) body) left right)
+      (evalExpr environment left) (evalExpr environment right)
+  | _, environment, _, .rangeMap (length := length) _ boundVector body => applyOne
+      (fun _ => mapToVector (fun index => evalExpr (.cons (τ := .index length) index environment) body)
+        (fun index : Fin length => index))
+      (evalExpr environment boundVector)
+
+def evalSourceFields (environment : NamedEnvironment) : {schema : Schema} →
+    SourceFields schema → Except SliceError (RecordValues schema)
+  | _, .nil => .ok .nil
+  | _, .cons value rest => mapTwo RecordValues.cons
+      (evalSourceExpr environment value) (evalSourceFields environment rest)
+
+def evalFields {context : Context} (environment : Environment context) : {schema : Schema} →
+    Fields context schema → Except SliceError (RecordValues schema)
+  | _, .nil => .ok .nil
+  | _, .cons value rest => mapTwo RecordValues.cons
+      (evalExpr environment value) (evalFields environment rest)
+
+def evalSourcePrefix (environment : NamedEnvironment) {schema : Schema} :
+    SourcePrefix schema → Except SliceError (RecordValues schema)
+  | .record fields => evalSourceFields environment fields
+  | .letBind (τ := τ) name rhs body => applyOne
+      (fun value => evalSourcePrefix (extendNames (τ := τ) name value environment) body)
+      (evalSourceExpr environment rhs)
+
+def evalPrefix : {context : Context} → (environment : Environment context) → {schema : Schema} →
+    PrefixIR context schema → Except SliceError (RecordValues schema)
+  | _, environment, _, .record fields => evalFields environment fields
+  | _, environment, _, .letBind (τ := τ) _ rhs body => applyOne
+      (fun value => evalPrefix (.cons (τ := τ) value environment) body) (evalExpr environment rhs)
+
+theorem map_to_vector_error {α : Type} {length : ℕ}
+    (body : α → Except SliceError ℝ) (values : Fin length → α) (problem : SliceError)
+    (failed : mapExact body (List.ofFn values) = .error problem) :
+    mapToVector body values = .error problem := by
+  unfold mapToVector
+  split
+  · rename_i observed equation
+    have sameProblem := Except.error.inj (equation.symm.trans failed)
+    cases sameProblem
+    rfl
+  · rename_i outputs equation
+    have impossible : (Except.ok outputs : Except SliceError (List ℝ)) = .error problem :=
+      equation.symm.trans failed
+    cases impossible
+
+theorem zip_to_vector_error {α β : Type} {leftLength rightLength : ℕ}
+    (body : α → β → Except SliceError ℝ)
+    (left : Fin leftLength → α) (right : Fin rightLength → β) (problem : SliceError)
+    (failed : zipMapExact body (List.ofFn left) (List.ofFn right) = .error problem) :
+    zipToVector body left right = .error problem := by
+  unfold zipToVector
+  split
+  · rename_i observed equation
+    have sameProblem := Except.error.inj (equation.symm.trans failed)
+    cases sameProblem
+    rfl
+  · rename_i outputs equation
+    have impossible : (Except.ok outputs : Except SliceError (List ℝ)) = .error problem :=
+      equation.symm.trans failed
+    cases impossible
+
+theorem ordered_map_first_error {α β : Type} (body : α → Except SliceError β)
+    (first : α) (rest : List α) (problem : SliceError)
+    (failed : body first = .error problem) : mapExact body (first :: rest) = .error problem := by
+  simp only [mapExact, failed]
+
+theorem ordered_zip_first_error {α β γ : Type} (body : α → β → Except SliceError γ)
+    (leftFirst : α) (leftRest : List α) (rightFirst : β) (rightRest : List β) (problem : SliceError)
+    (failed : body leftFirst rightFirst = .error problem) :
+    zipMapExact body (leftFirst :: leftRest) (rightFirst :: rightRest) = .error problem := by
+  simp only [zipMapExact, failed]
+
+#print axioms map_to_vector_error
+#print axioms zip_to_vector_error
+#print axioms ordered_map_first_error
+#print axioms ordered_zip_first_error
+
+end
+
+end RankerObjectiveContainerLanguage

@@ -1,0 +1,21 @@
+{
+  "previous_commit": "436751c8a6310907f866725deb9c6cc0bdc07dc5",
+  "commit": "3d60697ca59cbba061671e4c3f7eb1b665e80d5f",
+  "changed_paths": [
+    "benchmarks/agent_supervisor/container_coding/test_terminal_deployment.py"
+  ],
+  "product_owner_or_policy_changed": false,
+  "reason": "The refusal fixture intentionally creates a symlink, while the existing owned artifact policy accepts only unaliased regular files.",
+  "scope": "Keep the live refusal assertion and unchanged referent, then remove only the authored alias and persist a typed observation. No artifact policy change.",
+  "prior_failed_attempt_untouched": true,
+  "source_lease": {
+    "canonical_root": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "mode": "write",
+    "lock_path": "/home/barberb/lift_coding/external/ipfs_accelerate/workspace/control-plane/source-leases/source.lock",
+    "waited_seconds": 81.81592267518863,
+    "schema_version": "autoencoder-source-lease/v1",
+    "cooperative": true
+  },
+  "validation_pending": true,
+  "published": false
+}

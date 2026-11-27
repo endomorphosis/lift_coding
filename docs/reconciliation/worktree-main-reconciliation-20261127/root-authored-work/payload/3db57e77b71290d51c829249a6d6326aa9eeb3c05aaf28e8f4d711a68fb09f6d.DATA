@@ -1,0 +1,294 @@
+#!/usr/bin/env python3
+"""Measure source-preserving context transport; never invoke models or scorers.
+
+Only the saved native preparation and hash-bound PUBLIC source inventory are
+read. The larger unit manifests, target patches and hidden scorer trees are
+neither loaded nor imported. Historical producer execution is replayed as data.
+"""
+from __future__ import annotations
+
+import argparse
+import base64
+import copy
+import hashlib
+import importlib.metadata
+import json
+from pathlib import Path
+import sys
+import time
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parents[4]
+DEFAULT_WORKTREE = ROOT / ".worktrees/vericodegen-neurosymbolic_supervision-2026"
+PAPER_SUFFIX = "papers/completion/neurosymbolic_supervision/pilot/recovery/final_input_source"
+DEFAULT_INPUTS = Path.home() / ".local/state/ipfs_accelerate_py/vericodegen-2026/research-inputs/neurosymbolic_supervision/final-host-ab-cold-20260913-v1/prepared_inputs_v1"
+READS: dict[str, str] = {}
+
+
+def canon(value):
+    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
+
+
+def sha(value: bytes):
+    return hashlib.sha256(value).hexdigest()
+
+
+def raw_cid_from_sha256(digest):
+    # Existing source identity profile: CIDv1 / raw / sha2-256 / base32.
+    return "b" + base64.b32encode(bytes.fromhex("01551220" + digest)).decode().lower().rstrip("=")
+
+
+def read(path):
+    path = Path(path).resolve()
+    data = path.read_bytes()
+    READS[str(path)] = sha(data)
+    return data
+
+
+def write_json(path, value):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(value, indent=2, sort_keys=True, ensure_ascii=False) + "\n")
+
+
+def safe_rel(path):
+    if not isinstance(path, str) or not path or path.startswith("/") or any(x in {"..", ".git"} for x in path.split("/")):
+        raise ValueError("source path outside inventory")
+    return path
+
+
+def expand_source(reference, files):
+    """Caller-level endpoint: recheck current bytes before revealing a span."""
+    path = safe_rel(reference["path"])
+    if path not in files:
+        raise ValueError("source path outside inventory")
+    body = files[path]
+    if sha(body.encode()) != reference["source_sha256"]:
+        raise ValueError("stale source expansion")
+    lines = body.splitlines(keepends=True)
+    start, end = reference["start_line"], reference["end_line"]
+    if type(start) is not int or type(end) is not int or not 1 <= start <= end <= len(lines):
+        raise ValueError("invalid expansion range")
+    text = "".join(lines[start-1:end])
+    if sha(text.encode()) != reference["text_sha256"]:
+        raise ValueError("source span binding mismatch")
+    return text
+
+
+def plan_substitution(snippets, source_kinds, preparation):
+    """Conservative adapter around existing native capsule admission results.
+
+    The caller must explicitly declare dependency source; absence of that
+    declaration is not permission to compress. Whole source windows are used;
+    partial overlapping matches never justify hiding the rest of a window.
+    """
+    kept, removed, decisions = [], [], []
+    frontier = preparation.get("native_analysis_dependency_frontier")
+    unresolved = {x["source_id"] for x in frontier} if isinstance(frontier, list) else None
+    admissions = {x["ref"]["capsule_cid"]: x for x in preparation["admissions"]}
+    for snippet in snippets:
+        path = snippet["path"]
+        reason = "protected_source_kind"
+        candidates = []
+        if source_kinds.get(path) == "dependency_source":
+            reason = "no_wholly_covering_fresh_capsule"
+            for record in preparation["records"]:
+                span = record.get("span") or {}
+                admission = admissions.get(record["capsule_cid"], {})
+                reference = admission.get("ref", {})
+                if record["path"] != path or not (span.get("start_line", 10**20) <= snippet["start_line"] and span.get("end_line", -1) >= snippet["end_line"]):
+                    continue
+                if (preparation.get("inventory", {}).get(path) != snippet["source_sha256"] or
+                    record["source_cid"] != raw_cid_from_sha256(snippet["source_sha256"])):
+                    reason = "source_binding_mismatch"
+                    continue
+                if (admission.get("freshness") != "fresh" or
+                    admission.get("admission") not in {"exact_substitute", "conservative_substitute_with_caveats"} or
+                    reference.get("raw_source_required") is not False or
+                    reference.get("source_cid") != record["source_cid"] or
+                    reference.get("semantic_state_root_cid") != preparation["semantic_state_root_cid"]):
+                    reason = "stale_or_unadmitted_capsule"
+                    continue
+                if unresolved is None or record["stable_symbol_id"] in unresolved:
+                    reason = "unknown_dependency_frontier"
+                    continue
+                candidates.append(record)
+        if candidates:
+            record = sorted(candidates, key=lambda x: x["stable_symbol_id"])[0]
+            reference = {k: snippet[k] for k in ("path", "start_line", "end_line", "source_sha256")}
+            reference.update(text_sha256=sha(snippet["text"].encode()), capsule_cid=record["capsule_cid"])
+            removed.append(reference)
+            reason = "source_bound_dependency_substitution"
+        else:
+            kept.append(copy.deepcopy(snippet))
+        decisions.append({"path": path, "start_line": snippet["start_line"], "end_line": snippet["end_line"], "decision": reason})
+    return kept, removed, decisions
+
+
+def qualify_endpoint():
+    """Authored controls exercise positive substitution and refusal behavior."""
+    text = "def scale(value):\n    return value * 2\n"
+    source_cid = raw_cid_from_sha256(sha(text.encode()))
+    files = {"dependency.py": text}
+    snippet = {"path": "dependency.py", "start_line": 1, "end_line": 2, "text": text, "source_sha256": sha(text.encode())}
+    record = {"path": "dependency.py", "span": {"start_line": 1, "end_line": 2}, "capsule_cid": "fixture-capsule", "stable_symbol_id": "fixture-symbol", "source_cid": source_cid}
+    admission = {"freshness": "fresh", "admission": "exact_substitute", "ref": {"capsule_cid": "fixture-capsule", "raw_source_required": False, "source_cid": source_cid, "semantic_state_root_cid": "fixture-root"}}
+    preparation = {"records": [record], "admissions": [admission], "native_analysis_dependency_frontier": [], "semantic_state_root_cid": "fixture-root", "inventory": {"dependency.py": sha(text.encode())}}
+    cases = []
+    kept, removed, _ = plan_substitution([snippet], {"dependency.py": "dependency_source"}, preparation)
+    assert not kept and len(removed) == 1
+    assert expand_source(removed[0], files) == text
+    cases.append({"case": "admitted_dependency_exact_expansion", "pass": True})
+    for name, kind, mutation in [
+        ("target_never_compressed", "target_source", lambda p: None),
+        ("tests_never_compressed", "test_source", lambda p: None),
+        ("surrounding_never_compressed", "surrounding_source", lambda p: None),
+        ("unknown_source_kind_retains_raw", "undeclared", lambda p: None),
+        ("stale_capsule_retains_raw", "dependency_source", lambda p: p["admissions"][0].update(freshness="stale")),
+        ("raw_required_retains_raw", "dependency_source", lambda p: p["admissions"][0]["ref"].update(raw_source_required=True)),
+        ("root_mismatch_retains_raw", "dependency_source", lambda p: p.update(semantic_state_root_cid="different-root")),
+        ("source_cid_mismatch_retains_raw", "dependency_source", lambda p: p["records"][0].update(source_cid="wrong-source")),
+        ("inventory_mismatch_retains_raw", "dependency_source", lambda p: p["inventory"].update({"dependency.py": "0" * 64})),
+        ("unknown_frontier_retains_raw", "dependency_source", lambda p: p.update(native_analysis_dependency_frontier=[{"source_id": "fixture-symbol"}])),
+        ("missing_frontier_retains_raw", "dependency_source", lambda p: p.pop("native_analysis_dependency_frontier")),
+        ("partial_coverage_retains_raw", "dependency_source", lambda p: p["records"][0]["span"].update(end_line=1)),
+    ]:
+        altered = copy.deepcopy(preparation)
+        mutation(altered)
+        kept, absent, _ = plan_substitution([snippet], {"dependency.py": kind}, altered)
+        assert kept == [snippet] and not absent, name
+        cases.append({"case": name, "pass": True})
+    for name, ref, current in [
+        ("stale_source_expansion_rejected", removed[0], {"dependency.py": text.replace("* 2", "* 3")}),
+        ("source_path_escape_rejected", {**removed[0], "path": "../secret"}, files),
+        ("out_of_inventory_rejected", {**removed[0], "path": "secret"}, files),
+        ("invalid_line_range_rejected", {**removed[0], "end_line": 3}, files),
+        ("wrong_span_digest_rejected", {**removed[0], "text_sha256": "0" * 64}, files),
+    ]:
+        try:
+            expand_source(ref, current)
+        except ValueError:
+            cases.append({"case": name, "pass": True})
+        else:
+            raise AssertionError(name)
+    return {"schema": "ns-context-constructed-endpoint-controls/v1", "native_capsule_validation_exercised": False,
+            "scope": "Adapter controls use explicitly constructed admission records; no native proof or compression benefit claim", "cases": cases}
+
+
+def encoding_identity(encoding):
+    table = hashlib.sha256()
+    for piece, rank in sorted(encoding._mergeable_ranks.items(), key=lambda x: x[1]):
+        table.update(rank.to_bytes(4, "big") + len(piece).to_bytes(4, "big") + piece)
+    return {"name": encoding.name, "mergeable_ranks_sha256": table.hexdigest(), "special_tokens_sha256": sha(canon(encoding._special_tokens)), "pattern_sha256": sha(encoding._pat_str.encode()), "vocabulary_size": encoding.n_vocab}
+
+
+def measure(request, encodings):
+    return {"request_sha256": sha(canon(request)), "request_bytes": len(canon(request)), "encodings": {
+        name: {"message_content_tokens": sum(len(enc.encode(m["content"], disallowed_special=())) for m in request["messages"]),
+               "serialized_envelope_tokens": len(enc.encode(canon(request).decode(), disallowed_special=()))}
+        for name, enc in encodings.items()}}
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--worktree", type=Path, default=DEFAULT_WORKTREE)
+    ap.add_argument("--public-inputs", type=Path, default=DEFAULT_INPUTS)
+    ap.add_argument("--output", type=Path, default=HERE / "results")
+    args = ap.parse_args()
+    started = time.perf_counter()
+    protocol = json.loads(read(HERE / "protocol.json"))
+    read(__file__)
+    import tiktoken
+    encodings = {name: tiktoken.get_encoding(name) for name in protocol["tokenization"]["encodings"]}
+    saved = args.worktree / PAPER_SUFFIX
+    sys.dont_write_bytecode = True
+    sys.path.insert(0, str(saved / "host_service"))
+    for name in ("semantic_context.py", "context_selection.py", "http_proposer.py"):
+        read(saved / "host_service" / name)
+    import semantic_context as historical
+    rows = []
+    for packet_path in sorted((saved / "prepared_contexts").glob("*.private.json")):
+        packet = json.loads(read(packet_path))
+        prep = packet["native_preparation"]
+        unit = packet["unit_id"]
+        private = args.public_inputs / unit
+        instruction = read(private / "prompt.txt").decode()
+        files = {safe_rel(path): read(private / "proposal" / safe_rel(path)).decode() for path in prep["inventory"]}
+        assert {path: sha(body.encode()) for path, body in files.items()} == prep["inventory"]
+        assert all(record["source_cid"] == raw_cid_from_sha256(prep["inventory"][record["path"]]) for record in prep["records"])
+        allowed, tests = prep["allowed_edit_paths"], prep["public_test_paths"]
+        assert set(allowed).isdisjoint(tests)
+        requests = {}
+        for arm, label in (("A", "A_raw"), ("B", "B_additive")):
+            request, binding = historical.request(instruction, files, allowed, tests, arm, prep)
+            assert sha(canon(request)) == packet["request_sha256"][arm], (unit, arm, "request drift")
+            assert binding == packet["bindings"][arm], (unit, arm, "binding drift")
+            requests[label] = request
+        raw_spec = json.loads(requests["A_raw"]["messages"][1]["content"])
+        sem_spec = json.loads(requests["B_additive"]["messages"][1]["content"])
+        assert raw_spec["public_pre_fix_snippets"] == sem_spec["public_pre_fix_snippets"]
+        kinds = {p: "target_source" if p in allowed else "test_source" if p in tests else "unindexed_source" for p in files}
+        kept, removed, decisions = plan_substitution(raw_spec["public_pre_fix_snippets"], kinds, prep)
+        sub_spec = copy.deepcopy(sem_spec)
+        sub_spec["public_pre_fix_snippets"] = kept
+        sub_spec["source_substitution_contract"] = {
+            "schema": "ns-source-preserving-substitution/v1",
+            "protected_source_kinds": protocol["protected_kinds"],
+            "removed_windows": removed,
+            "unknown_frontier": {"edge_count": len(prep["native_analysis_dependency_frontier"]), "analysis_complete_repository": prep["analysis_scope_is_complete_repository"]},
+            "obligation_cids": prep["native_pack"]["pack"]["obligation_cids"],
+            "expansion": "No windows substituted on this cohort. Local expansion endpoint is qualified separately; the historical model request has no tools."
+        }
+        sub = copy.deepcopy(requests["B_additive"])
+        sub["messages"][1]["content"] = canon(sub_spec).decode()
+        requests["C_substitution"] = sub
+        # Every materialized span must match the source before any token count.
+        for snippet in raw_spec["public_pre_fix_snippets"]:
+            reference = {**snippet, "text_sha256": sha(snippet["text"].encode())}
+            assert expand_source(reference, files) == snippet["text"]
+        assert sub_spec["instruction"] == raw_spec["instruction"] == instruction
+        assert sub_spec["allowed_edit_paths"] == raw_spec["allowed_edit_paths"]
+        assert sub_spec["response_contract"] == raw_spec["response_contract"]
+        assert all(any(s == retained for retained in kept) for s in raw_spec["public_pre_fix_snippets"] if kinds[s["path"]] != "dependency_source")
+        measurements = {arm: measure(request, encodings) for arm, request in requests.items()}
+        row = {"unit_id": unit, "public_inventory_sha256": sha(canon(prep["inventory"])),
+               "source_kinds": kinds, "raw_selected_windows": len(kept) + len(removed),
+               "raw_omitted_windows": len(packet["bindings"]["A"]["omitted_spans"]),
+               "eligible_dependency_files": sum(kind == "dependency_source" for kind in kinds.values()),
+               "substituted_windows": len(removed), "retained_raw_windows": len(kept),
+               "native_record_count": len(prep["records"]),
+               "native_frontier_edge_count": len(prep["native_analysis_dependency_frontier"]),
+               "native_obligation_count": len(prep["native_pack"]["pack"]["obligation_cids"]),
+               "admission_counts": {status: sum(a["admission"] == status for a in prep["admissions"]) for status in sorted({a["admission"] for a in prep["admissions"]})},
+               "requests": measurements, "checks": {"historical_A_B_hashes_reproduced": True, "source_bytes_match_inventory": True, "required_raw_spans_preserved": True, "instruction_and_authority_preserved": True, "selected_spans_expand_exactly": True},
+               "decisions": decisions}
+        rows.append(row)
+        for arm, request in requests.items():
+            # Public source request bodies retained for independent measurement.
+            (args.output / "requests" / unit).mkdir(parents=True, exist_ok=True)
+            (args.output / "requests" / unit / (arm + ".json")).write_bytes(canon(request) + b"\n")
+    assert len(rows) == 8, "historical cohort changed"
+    controls = qualify_endpoint()
+    totals = {arm: {name: sum(r["requests"][arm]["encodings"][name]["message_content_tokens"] for r in rows) for name in encodings} for arm in ("A_raw", "B_additive", "C_substitution")}
+    summary = {"schema": "ns-context-transport-results/v1", "cohort_size": len(rows), "protocol_sha256": sha(canon(protocol)),
+               "evaluation_source_sha256": sha(read(__file__)),
+               "tokenizer": {"package": "tiktoken", "version": importlib.metadata.version("tiktoken"), "encodings": [encoding_identity(e) for e in encodings.values()], "provider_tokenizer": False},
+               "message_content_token_totals": totals,
+               "reductions_relative_to_A": {arm: {name: 1 - value / totals["A_raw"][name] for name, value in vals.items()} for arm, vals in totals.items()},
+               "total_selected_windows": sum(r["raw_selected_windows"] for r in rows),
+               "total_substituted_windows": sum(r["substituted_windows"] for r in rows),
+               "families_with_eligible_dependencies": sum(r["eligible_dependency_files"] > 0 for r in rows),
+               "total_native_frontier_edges": sum(r["native_frontier_edge_count"] for r in rows),
+               "total_native_obligations": sum(r["native_obligation_count"] for r in rows),
+               "constructed_endpoint_checks": len(controls["cases"]), "all_checks_passed": True,
+               "provider_calls": 0, "provider_usage": None, "native_producer_executed_now": False,
+               "hidden_oracle_or_target_patch_reads": 0, "elapsed_seconds": time.perf_counter() - started,
+               "interpretation": "Exact named-encoding offline measurement of frozen public request transport. Zero eligible dependency regions: no empirical substitution compression effect identified. Negative reductions indicate expansion, not savings. No repair outcomes measured."}
+    write_json(args.output / "summary.json", summary)
+    write_json(args.output / "rows.json", rows)
+    write_json(args.output / "endpoint_controls.json", controls)
+    write_json(args.output / "read_provenance.json", {"schema": "ns-context-input-provenance/v1", "read_paths_sha256": READS})
+    print(json.dumps(summary, indent=2))
+
+
+if __name__ == "__main__":
+    main()

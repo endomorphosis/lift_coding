@@ -1,0 +1,38 @@
+{
+  "arms": [
+    "legacy",
+    "required-instruction-ref@1"
+  ],
+  "causal_or_statistical_claim_supported": false,
+  "concurrent_trials": 1,
+  "intended_axis": "Only the redundant query slot becomes an exact pointer to the still-inline required instruction.",
+  "live_gates": [
+    "clean frozen source and newly verified runtime archive",
+    "unchanged provider/resource/backoff controls",
+    "one serial attempt per named arm/task, no automatic failed-task retry",
+    "native cumulative input plus output and official rewards retained",
+    "failures, fallbacks and incomplete usage retained"
+  ],
+  "offline_gates": [
+    "complete input replay matches captured model input",
+    "required instruction stays byte-identical",
+    "unchanged source selection and authority",
+    "actual selected reference in eligible treatment",
+    "complete-input proxy improves with full production wrappers",
+    "all unit/integration checks pass"
+  ],
+  "prior_evidence_preserved": true,
+  "provider_calls_so_far": 0,
+  "provider_rate_limit_policy": "Inherit shared provider gate; no state reset or rerouting.",
+  "publication": "local only; GitHub publication belongs to designated separate session",
+  "repeats_per_arm_per_task": 1,
+  "requested_tasks": [
+    "llm-inference-batching-scheduler",
+    "tune-mjcf"
+  ],
+  "resource_profile": "source384-5cpu-16gib-extended@1",
+  "schema": "terminal-query-reference-pilot-plan@1",
+  "source": "/home/barberb/lift_coding_worktrees/terminal-query-reference-20261012",
+  "source_base_commit": "8d84057318f3006c568ef776308eb30e2bcda003",
+  "status": "offline_qualification_required_before_live_preparation"
+}

@@ -1,0 +1,27 @@
+{
+  "parent": "22c62676f46fbeb0767bb6b8683c4d6612c68973",
+  "commit": "dcbc6433e78728a42ebc84b10341b4b1dc35201e",
+  "changed_paths": [
+    "test/api/test_owner_writable_worktree.py",
+    "test/api/test_owner_worktree_parent.py",
+    "test/api/test_owner_worktree_traversal.py"
+  ],
+  "source_lease": {
+    "canonical_root": "/home/barberb/lift_coding/external/ipfs_accelerate",
+    "mode": "write",
+    "lock_path": "/home/barberb/lift_coding/external/ipfs_accelerate/workspace/control-plane/source-leases/source.lock",
+    "waited_seconds": 4.1008926928043365e-05,
+    "schema_version": "autoencoder-source-lease/v1",
+    "cooperative": true
+  },
+  "all_existing_test_assertions_and_parameter_matrices_unchanged": true,
+  "existing_filesystem_helpers_unchanged": true,
+  "alias_count": 5,
+  "cleanup_scope": "Only five finite named, owner-created symlink cases; exact target/inode/mode and before/after target metadata observations. Alias remains live through original assertions; only that named alias retired in finally. No target bytes read or permission normalization. Failed original attempt untouched.",
+  "artifact_checker_or_product_owner_changed": false,
+  "fresh_validation_pending": false,
+  "published": true,
+  "delivery_commit": "537492f7f076837fb67a419ba1a6ebd15ccdf9fa",
+  "native_qualification": false,
+  "failure_cutoff": "candidate-owner-permission-preparation-publication.json"
+}

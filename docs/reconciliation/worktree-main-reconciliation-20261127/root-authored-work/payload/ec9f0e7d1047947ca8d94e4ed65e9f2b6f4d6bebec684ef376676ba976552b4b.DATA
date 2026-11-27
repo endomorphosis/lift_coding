@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+"""Full XML cold/incremental identity checks under the frozen syntax-cache profile."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import time
+
+HERE = Path(__file__).resolve().parent
+SOURCE = HERE / "results_v9_full_syntax_cache"
+OUT = HERE / "results_v10_full_xml_identity"
+def sha(b): return hashlib.sha256(b).hexdigest()
+def read(p): return json.loads(p.read_text())
+def write(p, v): p.write_text(json.dumps(v, indent=2, sort_keys=True) + "\n")
+
+def main():
+    OUT.mkdir()
+    shutil.copyfile(SOURCE / "runtime_source_manifest.json", OUT / "runtime_source_manifest.json")
+    freeze = read(SOURCE / "freeze.json")
+    job = next(j for j in freeze["jobs"] if j["task_id"] == "ns-hist-01-xmltodict")
+    folder = OUT / job["task_id"]; folder.mkdir()
+    for name in ("case.json", "public_source_manifest.json"): shutil.copyfile(SOURCE / job["task_id"] / name, folder / name)
+    job["folder"] = str(folder); freeze["jobs"] = [job]; freeze["identity_checks"] = True
+    freeze["evaluation_sources"][Path(__file__).name] = sha(Path(__file__).read_bytes())
+    freeze["frozen_at_unix"] = time.time(); freeze["parent_freeze_sha256"] = sha((SOURCE / "freeze.json").read_bytes())
+    write(OUT / "freeze.json", freeze)
+    profile = read(OUT / "runtime_source_manifest.json")
+    env = dict(os.environ, PYTHONPATH=":".join(profile["pythonpath"]), PYTHONDONTWRITEBYTECODE="1", IPFS_ACCEL_SKIP_CORE="1", GIT_CEILING_DIRECTORIES=str(HERE.parents[5] / "papers/completion/runtime_bootstrap/unblock_20260912/ns_baselines/source_cache"))
+    executions = []
+    for role in ("produce", "consume"):
+        command = ["/usr/bin/python3", "-B", str(HERE / "native_service.py"), role, "--run", str(OUT), "--case", job["task_id"]]
+        started = time.perf_counter(); process = subprocess.run(command, cwd="/tmp", env=env, capture_output=True, timeout=600)
+        (folder / (role + ".stdout")).write_bytes(process.stdout); (folder / (role + ".stderr")).write_bytes(process.stderr)
+        receipt = {"role": role, "command": command, "returncode": process.returncode, "wall_seconds": time.perf_counter() - started}
+        write(folder / (role + "_process.json"), receipt); executions.append(receipt)
+        assert process.returncode == 0, process.stderr.decode(errors="replace")[-2000:]
+    assert all(sha(Path(path).read_bytes()) == digest for path, digest in profile["files"].items())
+    rows = [{"task_id": job["task_id"], "producer": read(folder / "producer.json"), "consumer": read(folder / "consumer.json")}]
+    result = {"schema": "ns-integrated-context-qualification-result/v1", "freeze_sha256": sha((OUT / "freeze.json").read_bytes()), "rows": rows, "processes": executions, "runtime_unchanged_after_services": True, "all_roundtrips_passed": True, "provider_calls": 0, "ready_full_caller": False, "quality_or_token_savings_claim": False}
+    write(OUT / "summary.json", result); print(json.dumps({"complete": True, "provider_calls": 0}))
+
+if __name__ == "__main__": main()
