@@ -1,0 +1,76 @@
+{
+  "blob_bytes_scanned": 187676662,
+  "blobs_scanned": 1385,
+  "git_child_returncode": 0,
+  "incremental_inventory_sha256": "5046eae79111364da67393487e9661a52eb1aaad454b85a38954e5c1dd640bee",
+  "marker_families_scanned": [
+    "aws_access_key",
+    "credential_url",
+    "github_token",
+    "hf_token",
+    "private_key",
+    "provider_token"
+  ],
+  "marker_hits": [
+    {
+      "bytes": 19412,
+      "marker_families": [
+        "github_token"
+      ],
+      "oid": "089e77cd0bcba3fbd587f1273db1726cdb4dd8ca",
+      "path": "test/api/test_agent_supervisor_untrusted_proposal.py"
+    },
+    {
+      "bytes": 19395,
+      "marker_families": [
+        "github_token"
+      ],
+      "oid": "4a07b991da3b77078ba0ae2b15475d6950ef0927",
+      "path": "test/api/test_agent_supervisor_untrusted_proposal.py"
+    },
+    {
+      "bytes": 39740,
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "5da012f647c3ff057f66b814c32ed68b26eccf5d",
+      "path": "test/api/test_agent_supervisor_project_dependency_preflight.py"
+    },
+    {
+      "bytes": 50767,
+      "marker_families": [
+        "private_key"
+      ],
+      "oid": "823b432504fb81c814c2353eefad1af629bdec6f",
+      "path": "test/api/test_agent_supervisor_proposal_validation.py"
+    },
+    {
+      "bytes": 61274,
+      "marker_families": [
+        "private_key"
+      ],
+      "oid": "98bd1b92d92f3c6bab5492de130418465e839d7c",
+      "path": "test/api/test_agent_supervisor_proposal_validation.py"
+    },
+    {
+      "bytes": 58770,
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "b50ddf5c37ae79c04d890a0a974cb3fd50126517",
+      "path": "test/api/test_agent_supervisor_project_dependency_preflight.py"
+    },
+    {
+      "bytes": 20668,
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "f83b07157e12f464b547b8d2b0ce80d53235baa6",
+      "path": "test/api/test_agent_supervisor_repository_forest.py"
+    }
+  ],
+  "restored_bundle_receipt_sha256": "ed3f966e68c872b8952ec4a36677b2cf12554db8f43cc7c2c79c2d5e7b458893",
+  "schema": "git-recovery-payload-marker-scan/v1",
+  "scope": "Static credential markers on exact incremental Git blob bytes. No payload was executed or interpreted as database/model input.",
+  "secret_values_printed": false
+}

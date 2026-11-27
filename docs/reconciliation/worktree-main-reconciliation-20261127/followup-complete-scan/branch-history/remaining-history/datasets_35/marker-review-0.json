@@ -1,0 +1,69 @@
+{
+  "blob_bytes_scanned": 47497854,
+  "blobs_scanned": 1114,
+  "git_child_returncode": 0,
+  "incremental_inventory_sha256": "ad5cfc9cd2e14d2e2acd65f18ecb8d1ddcc57585ba258974db2100d2db4e9afd",
+  "marker_families_scanned": [
+    "aws_access_key",
+    "credential_url",
+    "github_token",
+    "hf_token",
+    "private_key",
+    "provider_token"
+  ],
+  "marker_hits": [
+    {
+      "bytes": 14257,
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "00d459cd10f0094187aa739ba58637ba3578f545",
+      "path": "tests/security/test_wallet_processor_bounds.py"
+    },
+    {
+      "bytes": 12174,
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "04da8be88b2ed7a796417ac27b4a5109a7b2bcea",
+      "path": "tests/unit/logic/security_ir/cvefixes/test_source_snapshot.py"
+    },
+    {
+      "bytes": 28973,
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "88f5a0a6d5163d64c72b6c036ca5fd3014b4b91e",
+      "path": "tests/unit/processors/smart_contracts/test_acquisition.py"
+    },
+    {
+      "bytes": 20695,
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "b1bf2ff3eae8a296760ac7a5dfebbd806b52f77e",
+      "path": "tests/unit/processors/wallets/test_transport.py"
+    },
+    {
+      "bytes": 14139,
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "d9660f9a8cfdab4bbdef2c09b1c8f20c6177c3c2",
+      "path": "tests/unit/processors/wallets/worldcoin/test_config.py"
+    },
+    {
+      "bytes": 6804,
+      "marker_families": [
+        "github_token",
+        "provider_token"
+      ],
+      "oid": "f40a549509f7b100eab556d5c6b69cfa8fb092a7",
+      "path": "docs/optimizers/agentic/QUICK_START.md"
+    }
+  ],
+  "restored_bundle_receipt_sha256": "d9a166a8afc22a97fdda12e15f3c227fb415e92bffbd4b480c97e256d5bbed13",
+  "schema": "git-recovery-payload-marker-scan/v1",
+  "scope": "Static credential markers on exact incremental Git blob bytes. No payload was executed or interpreted as database/model input.",
+  "secret_values_printed": false
+}

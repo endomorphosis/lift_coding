@@ -1,0 +1,109 @@
+{
+  "reviewed": [
+    {
+      "bytes": 14257,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "credential_url",
+          "role": "reserved_example_domain"
+        }
+      ],
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "00d459cd10f0094187aa739ba58637ba3578f545",
+      "path": "tests/security/test_wallet_processor_bounds.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 12174,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "credential_url",
+          "role": "explicit_example_login"
+        }
+      ],
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "04da8be88b2ed7a796417ac27b4a5109a7b2bcea",
+      "path": "tests/unit/logic/security_ir/cvefixes/test_source_snapshot.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 28973,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "credential_url",
+          "role": "explicit_example_login"
+        }
+      ],
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "88f5a0a6d5163d64c72b6c036ca5fd3014b4b91e",
+      "path": "tests/unit/processors/smart_contracts/test_acquisition.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 20695,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "credential_url",
+          "role": "explicit_example_login"
+        }
+      ],
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "b1bf2ff3eae8a296760ac7a5dfebbd806b52f77e",
+      "path": "tests/unit/processors/wallets/test_transport.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 14139,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "credential_url",
+          "role": "explicit_example_login"
+        }
+      ],
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "d9660f9a8cfdab4bbdef2c09b1c8f20c6177c3c2",
+      "path": "tests/unit/processors/wallets/worldcoin/test_config.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 6804,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "github_token",
+          "role": "deterministic_fixture"
+        },
+        {
+          "count": 1,
+          "family": "provider_token",
+          "role": "deterministic_fixture"
+        }
+      ],
+      "marker_families": [
+        "github_token",
+        "provider_token"
+      ],
+      "oid": "f40a549509f7b100eab556d5c6b69cfa8fb092a7",
+      "path": "docs/optimizers/agentic/QUICK_START.md",
+      "unresolved": []
+    }
+  ],
+  "scan_receipt_sha256": "e392930a464c098e0e007e32f5ccfd2dad03c841addd7030c02d8223dbef8a4b",
+  "secret_values_printed": false,
+  "skipped_large": []
+}

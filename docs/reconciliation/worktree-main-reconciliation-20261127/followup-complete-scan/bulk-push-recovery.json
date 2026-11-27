@@ -1,0 +1,7 @@
+{
+  "initial_bulk_commit": "8c2ef9d8cbaae9d4a205f787ee6e16e5d8e29fa1",
+  "returncode": 1,
+  "failure": "HTTP500; unexpected disconnect. Remote main independently advanced; bulk commit was not an ancestor of observed current main.",
+  "recovery": "Same frozen payload is uploaded in smaller normal pushes on a dedicated recovery branch, followed by a normal merge into freshly fetched main.",
+  "forced_push": false
+}

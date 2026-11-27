@@ -1,0 +1,245 @@
+{
+  "reviewed": [
+    {
+      "bytes": 12553,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "credential_url",
+          "role": "reserved_example_domain"
+        },
+        {
+          "count": 1,
+          "family": "private_key",
+          "role": "header_marker_only"
+        }
+      ],
+      "marker_families": [
+        "credential_url",
+        "private_key"
+      ],
+      "oid": "00a9227e437fd56096f5d050ed494634d0b363cd",
+      "path": "tests/test_iroh_security.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 38659,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "aws_access_key",
+          "role": "documented_example"
+        }
+      ],
+      "marker_families": [
+        "aws_access_key"
+      ],
+      "oid": "035c2b6b2bb665564552044230f711b02cd14af8",
+      "path": "docs/architecture/FILESYSTEM_BACKEND_ARCHITECTURE_REVIEW.md",
+      "unresolved": []
+    },
+    {
+      "bytes": 9421,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "aws_access_key",
+          "role": "documented_example"
+        }
+      ],
+      "marker_families": [
+        "aws_access_key"
+      ],
+      "oid": "477da714eeef4f57d85fef5d3607f9af21f8d36b",
+      "path": "docs/implementation/ENCRYPTED_CONFIG_SUMMARY.md",
+      "unresolved": []
+    },
+    {
+      "bytes": 13271,
+      "classified_counts": [
+        {
+          "count": 4,
+          "family": "aws_access_key",
+          "role": "documented_example"
+        },
+        {
+          "count": 2,
+          "family": "aws_access_key",
+          "role": "unresolved_token"
+        },
+        {
+          "count": 2,
+          "family": "hf_token",
+          "role": "deterministic_fixture"
+        }
+      ],
+      "marker_families": [
+        "aws_access_key",
+        "hf_token"
+      ],
+      "oid": "5f2f0c91d878c4a93c5a34d6fdd234416d6083bb",
+      "path": "tests/test_dashboard_config_loading.py",
+      "unresolved": [
+        {
+          "candidate_length": 20,
+          "distinct_byte_count": 13,
+          "family": "aws_access_key",
+          "fixture_context": false,
+          "line_number": 200,
+          "role": "unresolved_token"
+        },
+        {
+          "candidate_length": 20,
+          "distinct_byte_count": 13,
+          "family": "aws_access_key",
+          "fixture_context": true,
+          "line_number": 221,
+          "role": "unresolved_token"
+        }
+      ]
+    },
+    {
+      "bytes": 13350,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "aws_access_key",
+          "role": "documented_example"
+        }
+      ],
+      "marker_families": [
+        "aws_access_key"
+      ],
+      "oid": "a7ca1ea31c53ee37f586bb3794c8d80c2ec01891",
+      "path": "docs/fixes/DASHBOARD_CONFIG_FIX.md",
+      "unresolved": []
+    },
+    {
+      "bytes": 6453,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "aws_access_key",
+          "role": "documented_example"
+        },
+        {
+          "count": 1,
+          "family": "hf_token",
+          "role": "deterministic_fixture"
+        }
+      ],
+      "marker_families": [
+        "aws_access_key",
+        "hf_token"
+      ],
+      "oid": "b9dcf6c6a764ce479702ab9daec9f3103cef5b16",
+      "path": "examples/encrypted_config_example.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 7387,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "aws_access_key",
+          "role": "documented_example"
+        }
+      ],
+      "marker_families": [
+        "aws_access_key"
+      ],
+      "oid": "cc9e3df4ece04a74aafc8dad3493c77c388c4be1",
+      "path": "docs/fixes/BACKEND_INTEGRATION_FIX.md",
+      "unresolved": []
+    },
+    {
+      "bytes": 13410,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "aws_access_key",
+          "role": "documented_example"
+        }
+      ],
+      "marker_families": [
+        "aws_access_key"
+      ],
+      "oid": "da91673454a8b135295d1420a7bd2112a8b440c7",
+      "path": "docs/features/ENCRYPTED_CONFIG_GUIDE.md",
+      "unresolved": []
+    },
+    {
+      "bytes": 9651,
+      "classified_counts": [
+        {
+          "count": 2,
+          "family": "aws_access_key",
+          "role": "documented_example"
+        }
+      ],
+      "marker_families": [
+        "aws_access_key"
+      ],
+      "oid": "e652e8e7c9c399c760e1fa18c9bb8962dcfc9e72",
+      "path": "tests/verification/verify_config_fix.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 29845,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "aws_access_key",
+          "role": "documented_example"
+        }
+      ],
+      "marker_families": [
+        "aws_access_key"
+      ],
+      "oid": "eb0fff56c007c0783c083a8afe3c802381d20deb",
+      "path": "docs/testing/COMPREHENSIVE_BACKEND_TESTS_FINAL_REVIEW.md",
+      "unresolved": []
+    },
+    {
+      "bytes": 7892,
+      "classified_counts": [
+        {
+          "count": 4,
+          "family": "aws_access_key",
+          "role": "documented_example"
+        },
+        {
+          "count": 1,
+          "family": "github_token",
+          "role": "deterministic_fixture"
+        }
+      ],
+      "marker_families": [
+        "aws_access_key",
+        "github_token"
+      ],
+      "oid": "ec83523008abb00b48097162333a4e94e1b23dc3",
+      "path": "tests/test_service_config_form_fix.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 9968,
+      "classified_counts": [
+        {
+          "count": 2,
+          "family": "aws_access_key",
+          "role": "documented_example"
+        }
+      ],
+      "marker_families": [
+        "aws_access_key"
+      ],
+      "oid": "f15265516915273bba52f40aa341b99c760a8867",
+      "path": "tests/test_secure_config.py",
+      "unresolved": []
+    }
+  ],
+  "scan_receipt_sha256": "b2e26b023a17577927b4145174e39446a830d269877b84feb13425f9775a7747",
+  "secret_values_printed": false,
+  "skipped_large": []
+}

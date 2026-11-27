@@ -1,0 +1,99 @@
+{
+  "schema": "git-recovery-payload-marker-scan/v1",
+  "source_git_dir": "/home/barberb/portland-laws.github.io/ipfs_datasets_py/.git",
+  "excluded_published_ancestor": "a8191d2510658f330db78b43bc4fad3712973bf0",
+  "object_counts": {
+    "commit": 9462,
+    "tree": 11300,
+    "blob": 3999
+  },
+  "uncompressed_bytes": 255024784,
+  "large_blobs": [
+    {
+      "oid": "837b77070a41a494899c65a8d8e539a4a9d347f1",
+      "path": "docs/reports/open_us_law_reindex/cohort_M.json",
+      "bytes": 20259984
+    },
+    {
+      "oid": "49fbad074272f9a0e78017f0809597927f24bac1",
+      "path": "docs/reports/open_us_law_reindex/cohort_J.json",
+      "bytes": 5548325
+    }
+  ],
+  "marker_hits": [
+    {
+      "oid": "35a447959055919627be420b2c424c5073d2f809",
+      "path": "tests/unit/processors/test_playwright_limiter_state_laws_proxy.py",
+      "bytes": 10909,
+      "marker_families": [
+        "credential_url"
+      ]
+    },
+    {
+      "oid": "7d35c58d47cdde6f8ea949de458946db4b620ba7",
+      "path": "tests/unit/scripts/test_state_laws_reindex_live_runner.py",
+      "bytes": 16603,
+      "marker_families": [
+        "credential_url"
+      ]
+    },
+    {
+      "oid": "9fcec1c04b2f1aa9639f9a7e0583f2341786a85a",
+      "path": "tests/unit/scripts/test_state_laws_reindex_live_runner.py",
+      "bytes": 16569,
+      "marker_families": [
+        "credential_url"
+      ]
+    },
+    {
+      "oid": "2b5d612bcf4bd2f7891cc69416fdb171c8d095c0",
+      "path": "tests/unit/scripts/test_state_laws_reindex_live_runner.py",
+      "bytes": 14542,
+      "marker_families": [
+        "credential_url"
+      ]
+    },
+    {
+      "oid": "e7c129eaf6acae036b012ee6dff26285be37c6c4",
+      "path": "tests/unit/scripts/test_state_laws_reindex_live_runner.py",
+      "bytes": 14414,
+      "marker_families": [
+        "credential_url"
+      ]
+    },
+    {
+      "oid": "e8c3379b01c0bbb5ec48472ac4b6d7bb86e7a051",
+      "path": "tests/unit/processors/test_playwright_limiter_state_laws_proxy.py",
+      "bytes": 9951,
+      "marker_families": [
+        "credential_url"
+      ]
+    },
+    {
+      "oid": "bf9929e2f53164cf37c15963c462684739080825",
+      "path": "tests/unit/processors/test_playwright_limiter_state_laws_proxy.py",
+      "bytes": 6523,
+      "marker_families": [
+        "credential_url"
+      ]
+    },
+    {
+      "oid": "f03fe209792aed9e1c45e766c78d5f0dcc285e5b",
+      "path": "tests/integration/processors/domains/uspto/test_live_contract_canary.py",
+      "bytes": 16000,
+      "marker_families": [
+        "provider_token"
+      ]
+    },
+    {
+      "oid": "2b47098ebc0f948a160ca609fec552f45750bc57",
+      "path": "tests/security/test_patent_hf_release_v2.py",
+      "bytes": 35412,
+      "marker_families": [
+        "private_key"
+      ]
+    }
+  ],
+  "git_child_returncode": 0,
+  "secret_values_printed": false
+}

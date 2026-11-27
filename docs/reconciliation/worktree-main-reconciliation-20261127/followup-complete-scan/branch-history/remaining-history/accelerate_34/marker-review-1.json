@@ -1,0 +1,119 @@
+{
+  "reviewed": [
+    {
+      "bytes": 19412,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "github_token",
+          "role": "deterministic_fixture"
+        }
+      ],
+      "marker_families": [
+        "github_token"
+      ],
+      "oid": "089e77cd0bcba3fbd587f1273db1726cdb4dd8ca",
+      "path": "test/api/test_agent_supervisor_untrusted_proposal.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 19395,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "github_token",
+          "role": "deterministic_fixture"
+        }
+      ],
+      "marker_families": [
+        "github_token"
+      ],
+      "oid": "4a07b991da3b77078ba0ae2b15475d6950ef0927",
+      "path": "test/api/test_agent_supervisor_untrusted_proposal.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 39740,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "credential_url",
+          "role": "reserved_example_domain"
+        }
+      ],
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "5da012f647c3ff057f66b814c32ed68b26eccf5d",
+      "path": "test/api/test_agent_supervisor_project_dependency_preflight.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 50767,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "private_key",
+          "role": "header_marker_only"
+        }
+      ],
+      "marker_families": [
+        "private_key"
+      ],
+      "oid": "823b432504fb81c814c2353eefad1af629bdec6f",
+      "path": "test/api/test_agent_supervisor_proposal_validation.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 61274,
+      "classified_counts": [
+        {
+          "count": 2,
+          "family": "private_key",
+          "role": "header_marker_only"
+        }
+      ],
+      "marker_families": [
+        "private_key"
+      ],
+      "oid": "98bd1b92d92f3c6bab5492de130418465e839d7c",
+      "path": "test/api/test_agent_supervisor_proposal_validation.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 58770,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "credential_url",
+          "role": "reserved_example_domain"
+        }
+      ],
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "b50ddf5c37ae79c04d890a0a974cb3fd50126517",
+      "path": "test/api/test_agent_supervisor_project_dependency_preflight.py",
+      "unresolved": []
+    },
+    {
+      "bytes": 20668,
+      "classified_counts": [
+        {
+          "count": 1,
+          "family": "credential_url",
+          "role": "explicit_example_login"
+        }
+      ],
+      "marker_families": [
+        "credential_url"
+      ],
+      "oid": "f83b07157e12f464b547b8d2b0ce80d53235baa6",
+      "path": "test/api/test_agent_supervisor_repository_forest.py",
+      "unresolved": []
+    }
+  ],
+  "scan_receipt_sha256": "03a39bc9cf58c316b8df47fc2c8b24bff5e52fd4af9e0ed66c6d83cf1314a03e",
+  "secret_values_printed": false,
+  "skipped_large": []
+}

@@ -1,0 +1,133 @@
+{
+  "base_commit_ancestor_count": 28664,
+  "bundle": {
+    "bytes": 1913663,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/lift_coding-historical-tips.bundle",
+    "sha256": "e121273507abff97b6eb07135fc0c1e715bc0fccfc819c65ce5999b7c8d19e64"
+  },
+  "exact_source_refs": [
+    {
+      "all_refs": [
+        {
+          "committer_timestamp": 1791147137,
+          "common_dir": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/git/root-hf-history-conversion-02/isolated.git",
+          "ref": "refs/heads/publication-root-source-results-01-20261004"
+        }
+      ],
+      "any_failed_validation_rescue_ref": false,
+      "oid": "80ca8550261a59f06d086d47cd969cfd1583ef88",
+      "representative": {
+        "committer_timestamp": 1791147137,
+        "common_dir": "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/git/root-hf-history-conversion-02/isolated.git",
+        "ref": "refs/heads/publication-root-source-results-01-20261004"
+      }
+    }
+  ],
+  "family": "lift_coding",
+  "git_bundle_verify_stderr": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/lift_coding-historical-tips.bundle is okay\n",
+  "git_bundle_verify_stdout": "The bundle contains this ref:\n80ca8550261a59f06d086d47cd969cfd1583ef88 refs/heads/retained/80ca8550261a59f06d086d47cd969cfd1583ef88\nThe bundle requires this ref:\n5eba7f7f18b9ee3a83ae8801180512e0452a7164 \nThe bundle uses this hash algorithm: sha1\n",
+  "live_code_adoption": false,
+  "private_source_alternates": [
+    "/home/barberb/lift_coding/artifacts/autoformalization-publication-20261004/git/root-hf-history-conversion-02/isolated.git/objects"
+  ],
+  "provided_object_delta_bases": [],
+  "publication_files_in_reassembly_order": [
+    {
+      "bytes": 1913663,
+      "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/lift_coding-historical-tips.bundle",
+      "sha256": "e121273507abff97b6eb07135fc0c1e715bc0fccfc819c65ce5999b7c8d19e64"
+    }
+  ],
+  "published_base": "93edf9895e09ffa873a7eb65634a1c0ed27d297d",
+  "published_base_object_db": "/tmp/lift-origin-main-reconcile-private-A8hmZDEd/root/.git",
+  "readonly_inputs": true,
+  "restore_uses_published_base_alternate_only": true,
+  "restored_exact_incremental_object_ids": {
+    "bytes": 2993,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/exact-delta-object-ids.txt",
+    "sha256": "ba01b0254f265e8a071972df999d1072f7175fa212792b096683817300d0f861"
+  },
+  "restored_pack_objects": 73,
+  "sizing": {
+    "object_counts_by_type": {
+      "blob": 51,
+      "commit": 1,
+      "tree": 21
+    },
+    "objects": 73,
+    "sum_storage_bytes_in_aggregate": 1548536,
+    "ten_largest_objects": [
+      [
+        2196050,
+        "3d294fc20e79d47ff504505ab303656933838c1a",
+        "blob"
+      ],
+      [
+        851885,
+        "d8a8eee02c609d6d37366aec9694579586f30ae2",
+        "blob"
+      ],
+      [
+        851849,
+        "618ad48fc50b436c8885805571da0d49b764e1ce",
+        "blob"
+      ],
+      [
+        851419,
+        "1fea4b049a24eb03006ac8cafaeb8ea9c43a4275",
+        "blob"
+      ],
+      [
+        829701,
+        "a1bfe8b0f18bfc35996fab6378f70ac93ed64bb1",
+        "blob"
+      ],
+      [
+        775371,
+        "318997b9b03551285d807f12bcb6736b1d0cb156",
+        "blob"
+      ],
+      [
+        572111,
+        "416bb20a732d1290837307fc3355cad991237e18",
+        "blob"
+      ],
+      [
+        135533,
+        "5310b5b0de613df054392d056c6961763ef0255e",
+        "blob"
+      ],
+      [
+        101903,
+        "6371c463210b0177081725b2b26f270d06542dc1",
+        "blob"
+      ],
+      [
+        63736,
+        "782456ae5767ea914b871ea5cf944f999130a5e7",
+        "blob"
+      ]
+    ],
+    "uncompressed_bytes_by_type": {
+      "blob": 7598653,
+      "commit": 298,
+      "tree": 25396
+    },
+    "uncompressed_object_bytes": 7624347
+  },
+  "sizing_receipt": {
+    "bytes": 1215,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/pre-pack-object-sizes.json",
+    "sha256": "446209a10987b1abda4bbb1662670613dc5a977d2bf246d22a03706562503164"
+  },
+  "source_roster": {
+    "bytes": 902,
+    "path": "/tmp/git-wide-retention-gap-20261127-ppyrr7zt/lift_coding-unproven.json",
+    "sha256": "cbbeb7834495763aae3e2039de373ad0200dc664dacf467a565dd243d5777d94"
+  },
+  "status": "RESTORE_VERIFIED",
+  "tip_count": 1,
+  "tips": [
+    "80ca8550261a59f06d086d47cd969cfd1583ef88"
+  ]
+}
