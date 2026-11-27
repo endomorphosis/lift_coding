@@ -1,0 +1,9 @@
+# Seven historical commit tips: completed incremental preservation
+
+This follows parent publication `2ff68d92e55880df279a7a91ca5760d117b0aac3`, whose results explicitly left seven historical tips pending. All seven now have exact commit refs and new objects retained in four Git bundles. The first packet's 117 inert private bodies and Guide586's maintained changes remain unchanged.
+
+Each bundle lists a published prerequisite commit in `manifest.json`. Restore into a complete clone of the corresponding GitHub repository containing that prerequisite, run `git bundle verify`, and fetch the bundle's `refs/recovery/*` into recovery refs. These historical preparation, qualification and original-author commits are retained as history; they are not all adopted as maintained runtime code.
+
+All 45 new commit/tree/blob objects were reconstructed exactly. Ten needed blobs came from existing private cached files, matched by Git blob ID and SHA-256; no canonical blob body was read. Bundle headers and prerequisites passed Git verification. The packs were independently indexed into new empty stores, every new object's bytes were compared, and all seven advertised commit refs were restored exactly. The full published baseline was not materialized locally, so this is conditional incremental restoration, not a standalone repository or full-checkout test. The earlier full-fetch failure from a metadata-only baseline remains recorded; it is not relabeled as success.
+
+No project module import, Source job, model, Native execution, new test run, force push or hosted CI was part of this completion. The prior 95-test result stays bound to its original tested checkout. The original working copies and branch refs were preserved. The previously reported 176 inaccessible directories remain outside the inspected contents.

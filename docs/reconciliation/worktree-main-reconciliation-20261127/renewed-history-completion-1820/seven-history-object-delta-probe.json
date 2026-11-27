@@ -1,0 +1,413 @@
+{
+  "schema": "seven-tip-object-metadata-probe/v1",
+  "blob_bodies_read": false,
+  "rows": [
+    {
+      "target": "17be501a290c65556ab1d1038f47d76ea5bab6a8",
+      "repo": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V4-checked-whole-project-private-yI1zwigi/normal-local/checkout/.git",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V4-checked-whole-project-private-yI1zwigi/normal-local/checkout",
+      "family": "D",
+      "published_base": "344d3282d2d268505211f8dcf60e98b5306fcd4f",
+      "returncode": 0,
+      "stderr": "",
+      "objects": [
+        "17be501a290c65556ab1d1038f47d76ea5bab6a8",
+        "8cb65bfe936b62b9de0c697ca43ba129b6aea44b",
+        "8b2cdb465288f3d6e2b136ed7e2d172347730e27",
+        "f3346939b3d665ee3a25276cfea00ca4edd583cd",
+        "ee725bea815e5121887eb9e1dd4d275521517d97",
+        "00c1624ee4707cec61e2e458d3e74416226413d9",
+        "75cdbace76bb8ed29283d1e1a89902035d57f833",
+        "6713e119fb358fcbf1d2e8c2698bd1b21279f61f",
+        "bf547a40956919bed230fa79f07f8fca915a8dc2",
+        "253a5dcfbbd366ec34990e508e77c69793549df3",
+        "0cdd649c57c92549e119a12193253d96ef2760c3"
+      ],
+      "object_metadata": [
+        [
+          "17be501a290c65556ab1d1038f47d76ea5bab6a8",
+          "commit",
+          "285"
+        ],
+        [
+          "8cb65bfe936b62b9de0c697ca43ba129b6aea44b",
+          "tree",
+          "2647"
+        ],
+        [
+          "8b2cdb465288f3d6e2b136ed7e2d172347730e27",
+          "tree",
+          "2816"
+        ],
+        [
+          "f3346939b3d665ee3a25276cfea00ca4edd583cd",
+          "tree",
+          "2559"
+        ],
+        [
+          "ee725bea815e5121887eb9e1dd4d275521517d97",
+          "tree",
+          "15943"
+        ],
+        [
+          "00c1624ee4707cec61e2e458d3e74416226413d9",
+          "blob",
+          "176021"
+        ],
+        [
+          "75cdbace76bb8ed29283d1e1a89902035d57f833",
+          "tree",
+          "6100"
+        ],
+        [
+          "6713e119fb358fcbf1d2e8c2698bd1b21279f61f",
+          "tree",
+          "10390"
+        ],
+        [
+          "bf547a40956919bed230fa79f07f8fca915a8dc2",
+          "tree",
+          "21641"
+        ],
+        [
+          "253a5dcfbbd366ec34990e508e77c69793549df3",
+          "tree",
+          "20576"
+        ],
+        [
+          "0cdd649c57c92549e119a12193253d96ef2760c3",
+          "blob",
+          "445541"
+        ]
+      ],
+      "metadata_returncode": 0,
+      "metadata_stderr": "",
+      "independent_root_blob_membership": {
+        "00c1624ee4707cec61e2e458d3e74416226413d9": false,
+        "0cdd649c57c92549e119a12193253d96ef2760c3": false
+      },
+      "needed_blob_paths": {
+        "00c1624ee4707cec61e2e458d3e74416226413d9": "ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py",
+        "0cdd649c57c92549e119a12193253d96ef2760c3": "tests/unit/logic/autoformal/test_legal_corpus_definition_use_native_v2.py"
+      }
+    },
+    {
+      "target": "37cfa9523b3df28fe5c8d989e872c1cc20bb4538",
+      "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/hallucinate.git",
+      "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/hallucinate.git",
+      "family": "H",
+      "published_base": "f41eef8e6978807553ec7c000688be61fed1863e",
+      "returncode": 0,
+      "stderr": "",
+      "object_metadata": [
+        [
+          "37cfa9523b3df28fe5c8d989e872c1cc20bb4538",
+          "commit",
+          "250"
+        ],
+        [
+          "6cf529526d72e03264d032ddd72ec5797a896e1f",
+          "tree",
+          "2592"
+        ]
+      ],
+      "objects": [
+        "37cfa9523b3df28fe5c8d989e872c1cc20bb4538",
+        "6cf529526d72e03264d032ddd72ec5797a896e1f"
+      ],
+      "metadata_returncode": 0,
+      "metadata_stderr": ""
+    },
+    {
+      "target": "3b6c6c4252bae5c5209da7116f3c97e01cf7f629",
+      "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/datasets.git",
+      "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/datasets.git",
+      "family": "D",
+      "published_base": "344d3282d2d268505211f8dcf60e98b5306fcd4f",
+      "returncode": 0,
+      "stderr": "",
+      "objects": [
+        "3b6c6c4252bae5c5209da7116f3c97e01cf7f629",
+        "eab12579b53599c7e2a01ef95b7db55d91f80f1b",
+        "8da1d5ad14e96dbeea100930aee83b9c2ec6b632",
+        "c5d419460aafb7663519ab4e1f9d5ff149bbe63c",
+        "f88adf29a4c0aa8d552ce4cee83b0588783280d1",
+        "329504098fdedcf2fc99c74a41dc4e4a298b7032",
+        "02029854680c574776a79fd909666c5da43dd5fb",
+        "892f0e7618fba102af518db63870d2b70390423f",
+        "6d75fb88685278687667a917aa7749a73666a6bd",
+        "07fe8617020830fbbd23cc315dd54781b0403d7d",
+        "a010904ff5893225d03ffd98743ac1f4429e161f",
+        "a77246fc0a5b01d3ca5374a291a37ffc18b4aaf3",
+        "b346121f0018f4ab549a41a07ba16c5ab9dc5b86"
+      ],
+      "object_metadata": [
+        [
+          "3b6c6c4252bae5c5209da7116f3c97e01cf7f629",
+          "commit",
+          "340"
+        ],
+        [
+          "eab12579b53599c7e2a01ef95b7db55d91f80f1b",
+          "tree",
+          "2647"
+        ],
+        [
+          "8da1d5ad14e96dbeea100930aee83b9c2ec6b632",
+          "tree",
+          "2816"
+        ],
+        [
+          "c5d419460aafb7663519ab4e1f9d5ff149bbe63c",
+          "tree",
+          "2559"
+        ],
+        [
+          "f88adf29a4c0aa8d552ce4cee83b0588783280d1",
+          "tree",
+          "15943"
+        ],
+        [
+          "329504098fdedcf2fc99c74a41dc4e4a298b7032",
+          "tree",
+          "478"
+        ],
+        [
+          "02029854680c574776a79fd909666c5da43dd5fb",
+          "blob",
+          "1562775"
+        ],
+        [
+          "892f0e7618fba102af518db63870d2b70390423f",
+          "blob",
+          "1114497"
+        ],
+        [
+          "6d75fb88685278687667a917aa7749a73666a6bd",
+          "blob",
+          "863118"
+        ],
+        [
+          "07fe8617020830fbbd23cc315dd54781b0403d7d",
+          "blob",
+          "2420115"
+        ],
+        [
+          "a010904ff5893225d03ffd98743ac1f4429e161f",
+          "tree",
+          "6100"
+        ],
+        [
+          "a77246fc0a5b01d3ca5374a291a37ffc18b4aaf3",
+          "tree",
+          "10390"
+        ],
+        [
+          "b346121f0018f4ab549a41a07ba16c5ab9dc5b86",
+          "tree",
+          "21641"
+        ]
+      ],
+      "metadata_returncode": 0,
+      "metadata_stderr": "",
+      "independent_root_blob_membership": {
+        "02029854680c574776a79fd909666c5da43dd5fb": false,
+        "892f0e7618fba102af518db63870d2b70390423f": false,
+        "6d75fb88685278687667a917aa7749a73666a6bd": false,
+        "07fe8617020830fbbd23cc315dd54781b0403d7d": false
+      },
+      "needed_blob_paths": {
+        "02029854680c574776a79fd909666c5da43dd5fb": "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+        "892f0e7618fba102af518db63870d2b70390423f": "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+        "6d75fb88685278687667a917aa7749a73666a6bd": "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+        "07fe8617020830fbbd23cc315dd54781b0403d7d": "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json"
+      }
+    },
+    {
+      "target": "401ef025b051d9b6332e244a8a0e87315d3382fc",
+      "repo": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/root.git",
+      "path": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/root.git",
+      "family": "R",
+      "published_base": "9577abf26d4e236709d11a0f39402cdd986da267",
+      "returncode": 0,
+      "stderr": "",
+      "object_metadata": [
+        [
+          "401ef025b051d9b6332e244a8a0e87315d3382fc",
+          "commit",
+          "271"
+        ],
+        [
+          "8f547883ef093e75168c9ea9d0f8a42b256c3d5a",
+          "tree",
+          "2871"
+        ],
+        [
+          "6959a3ad98d3ff8adde1d392ebb0cda201cb4245",
+          "tree",
+          "290"
+        ]
+      ],
+      "objects": [
+        "401ef025b051d9b6332e244a8a0e87315d3382fc",
+        "8f547883ef093e75168c9ea9d0f8a42b256c3d5a",
+        "6959a3ad98d3ff8adde1d392ebb0cda201cb4245"
+      ],
+      "metadata_returncode": 0,
+      "metadata_stderr": ""
+    },
+    {
+      "target": "6774922fe38d3e961f07e6ff4a866d40d3d48f97",
+      "repo": "/tmp/Root-f7c3-owned-existing-route-tdyKlZHW/accelerate/.git",
+      "path": "/tmp/Root-f7c3-owned-existing-route-tdyKlZHW/accelerate",
+      "family": "A",
+      "published_base": "fae7981fa576817536a3c7aa62c5d28dc417f214",
+      "returncode": 0,
+      "stderr": "",
+      "object_metadata": [
+        [
+          "6774922fe38d3e961f07e6ff4a866d40d3d48f97",
+          "commit",
+          "282"
+        ],
+        [
+          "68cff10df483132b143c5ba920921e8364b80fbf",
+          "tree",
+          "2915"
+        ],
+        [
+          "d090575457ad93975e4661d4a1b18b0cd9dc68bd",
+          "tree",
+          "4454"
+        ],
+        [
+          "bad5d0863bf14dd5e4f4ebe9b94280e171524237",
+          "tree",
+          "4165"
+        ],
+        [
+          "058e87135fce5ee66dae63938b778e008119ef3e",
+          "tree",
+          "3389"
+        ],
+        [
+          "6e8ca37ffb1153df59cb6f94b89163e57c8160ae",
+          "blob",
+          "47971"
+        ],
+        [
+          "85f1b863ca463f008007e4126be5fe5cbbc588da",
+          "blob",
+          "82453"
+        ],
+        [
+          "fc6f77c9832b393d0b31436b2e7b36e1255b61d9",
+          "tree",
+          "79842"
+        ],
+        [
+          "e857134f9180b21324f7bb5363744c0fe6c45053",
+          "tree",
+          "164921"
+        ],
+        [
+          "6aaff89d74640999226e38d97ea7ac135de04df9",
+          "blob",
+          "89450"
+        ],
+        [
+          "d00f6b92e5c6094cfff3128d160d67fb4a9b6fe8",
+          "blob",
+          "81073"
+        ]
+      ],
+      "objects": [
+        "6774922fe38d3e961f07e6ff4a866d40d3d48f97",
+        "68cff10df483132b143c5ba920921e8364b80fbf",
+        "d090575457ad93975e4661d4a1b18b0cd9dc68bd",
+        "bad5d0863bf14dd5e4f4ebe9b94280e171524237",
+        "058e87135fce5ee66dae63938b778e008119ef3e",
+        "6e8ca37ffb1153df59cb6f94b89163e57c8160ae",
+        "85f1b863ca463f008007e4126be5fe5cbbc588da",
+        "fc6f77c9832b393d0b31436b2e7b36e1255b61d9",
+        "e857134f9180b21324f7bb5363744c0fe6c45053",
+        "6aaff89d74640999226e38d97ea7ac135de04df9",
+        "d00f6b92e5c6094cfff3128d160d67fb4a9b6fe8"
+      ],
+      "metadata_returncode": 0,
+      "metadata_stderr": "",
+      "independent_root_blob_membership": {
+        "6e8ca37ffb1153df59cb6f94b89163e57c8160ae": false,
+        "85f1b863ca463f008007e4126be5fe5cbbc588da": false,
+        "6aaff89d74640999226e38d97ea7ac135de04df9": false,
+        "d00f6b92e5c6094cfff3128d160d67fb4a9b6fe8": false
+      },
+      "needed_blob_paths": {
+        "6e8ca37ffb1153df59cb6f94b89163e57c8160ae": "ipfs_accelerate_py/agent_supervisor/rescue/board_service_fleet_monitor.py",
+        "85f1b863ca463f008007e4126be5fe5cbbc588da": "ipfs_accelerate_py/agent_supervisor/rescue/board_service_monitor.py",
+        "6aaff89d74640999226e38d97ea7ac135de04df9": "test/api/test_board_service_fleet_monitor.py",
+        "d00f6b92e5c6094cfff3128d160d67fb4a9b6fe8": "test/api/test_board_service_monitor.py"
+      }
+    },
+    {
+      "target": "94b78a7ef6fc500e62f764e4a0c140b95b007811",
+      "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/root.git",
+      "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/root.git",
+      "family": "R",
+      "published_base": "9577abf26d4e236709d11a0f39402cdd986da267",
+      "returncode": 0,
+      "stderr": "",
+      "object_metadata": [
+        [
+          "94b78a7ef6fc500e62f764e4a0c140b95b007811",
+          "commit",
+          "253"
+        ],
+        [
+          "75d48cb75f660380c894f8f648e2b7d737ed1501",
+          "tree",
+          "2871"
+        ],
+        [
+          "d5c1729328eefb08c54845aa560b41e0b10da2fd",
+          "tree",
+          "290"
+        ]
+      ],
+      "objects": [
+        "94b78a7ef6fc500e62f764e4a0c140b95b007811",
+        "75d48cb75f660380c894f8f648e2b7d737ed1501",
+        "d5c1729328eefb08c54845aa560b41e0b10da2fd"
+      ],
+      "metadata_returncode": 0,
+      "metadata_stderr": ""
+    },
+    {
+      "target": "c667d98928216a5466df5f47cf834f6d4c3d3093",
+      "repo": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/hallucinate.git",
+      "path": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/hallucinate.git",
+      "family": "H",
+      "published_base": "f41eef8e6978807553ec7c000688be61fed1863e",
+      "returncode": 0,
+      "stderr": "",
+      "object_metadata": [
+        [
+          "c667d98928216a5466df5f47cf834f6d4c3d3093",
+          "commit",
+          "276"
+        ],
+        [
+          "d2f509958071d642adb8cfddb1c9a10dc5e5081d",
+          "tree",
+          "2592"
+        ]
+      ],
+      "objects": [
+        "c667d98928216a5466df5f47cf834f6d4c3d3093",
+        "d2f509958071d642adb8cfddb1c9a10dc5e5081d"
+      ],
+      "metadata_returncode": 0,
+      "metadata_stderr": ""
+    }
+  ]
+}

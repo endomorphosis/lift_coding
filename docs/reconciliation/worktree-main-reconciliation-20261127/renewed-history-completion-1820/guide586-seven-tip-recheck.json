@@ -1,0 +1,183 @@
+{
+  "all_graph_fetches_closed": true,
+  "fetch_graph_records": [
+    {
+      "commit_count": 14963,
+      "expected_published_main": "10a3dac4d863b44eb848dfc9f6f91a925e4e1c13",
+      "family": "ipfs_datasets_py",
+      "fetch_rc": 0,
+      "fetch_stderr": "From https://github.com/endomorphosis/ipfs_datasets_py\n * [new branch]      main       -> remaining-history-guide586/main\n",
+      "graph_rc": 0,
+      "missing": [],
+      "observed_ref": "10a3dac4d863b44eb848dfc9f6f91a925e4e1c13",
+      "verification_database": "/tmp/git-recovery-current-remote-audit-20261127-YjjrUOhv/ipfs_datasets_py.git"
+    },
+    {
+      "commit_count": 3314,
+      "expected_published_main": "f41eef8e6978807553ec7c000688be61fed1863e",
+      "family": "hallucinate_app",
+      "fetch_rc": 0,
+      "fetch_stderr": "From https://github.com/endomorphosis/hallucinate_app\n * [new branch]      main       -> remaining-history-guide586/main\n",
+      "graph_rc": 0,
+      "missing": [],
+      "observed_ref": "f41eef8e6978807553ec7c000688be61fed1863e",
+      "verification_database": "/tmp/git-recovery-current-remote-audit-20261127-YjjrUOhv/hallucinate_app.git"
+    },
+    {
+      "commit_count": 28683,
+      "expected_published_main": "9577abf26d4e236709d11a0f39402cdd986da267",
+      "family": "lift_coding",
+      "fetch_rc": 0,
+      "fetch_stderr": "From https://github.com/endomorphosis/lift_coding\n * [new branch]          main       -> remaining-history-guide586/main\n",
+      "graph_rc": 0,
+      "missing": [],
+      "observed_ref": "9577abf26d4e236709d11a0f39402cdd986da267",
+      "verification_database": "/tmp/lift-origin-main-reconcile-private-A8hmZDEd/root/.git"
+    }
+  ],
+  "newly_published_covered": [],
+  "schema": "guide586-seven-history-recheck/v1",
+  "scope": "Fresh three graph-only private Gitfetches explicitly selected by parent; no canonicalSource, lazyblobfetch, project/model/runtime import, code adoption or push. Exact7approved OIDs only.",
+  "still_requires_preservation": [
+    {
+      "current_main_membership": [],
+      "new_published_main_membership": [],
+      "oid": "17be501a290c65556ab1d1038f47d76ea5bab6a8",
+      "previous_recovery_inventory_membership": [],
+      "sightings": [
+        {
+          "oid": "17be501a290c65556ab1d1038f47d76ea5bab6a8",
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V4-checked-whole-project-private-yI1zwigi/normal-local/checkout",
+          "ref": "refs/heads/work/p2-whole-component-preservation-observation",
+          "repo": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V4-checked-whole-project-private-yI1zwigi/normal-local/checkout/.git",
+          "type": "commit"
+        }
+      ]
+    },
+    {
+      "current_main_membership": [],
+      "new_published_main_membership": [],
+      "oid": "37cfa9523b3df28fe5c8d989e872c1cc20bb4538",
+      "previous_recovery_inventory_membership": [],
+      "sightings": [
+        {
+          "oid": "37cfa9523b3df28fe5c8d989e872c1cc20bb4538",
+          "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/hallucinate.git",
+          "ref": "refs/heads/guide586-recovery-publication",
+          "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/hallucinate.git",
+          "type": "commit"
+        },
+        {
+          "oid": "37cfa9523b3df28fe5c8d989e872c1cc20bb4538",
+          "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/hallucinate.git",
+          "ref": "refs/heads/watchdog-f7c3-publication",
+          "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/hallucinate.git",
+          "type": "commit"
+        }
+      ]
+    },
+    {
+      "current_main_membership": [],
+      "new_published_main_membership": [],
+      "oid": "3b6c6c4252bae5c5209da7116f3c97e01cf7f629",
+      "previous_recovery_inventory_membership": [],
+      "sightings": [
+        {
+          "oid": "3b6c6c4252bae5c5209da7116f3c97e01cf7f629",
+          "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/datasets.git",
+          "ref": "refs/heads/guide586-recovery-private",
+          "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/datasets.git",
+          "type": "commit"
+        },
+        {
+          "oid": "3b6c6c4252bae5c5209da7116f3c97e01cf7f629",
+          "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/datasets.git",
+          "ref": "refs/heads/guide586-recovery-publication",
+          "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/datasets.git",
+          "type": "commit"
+        }
+      ]
+    },
+    {
+      "current_main_membership": [],
+      "new_published_main_membership": [],
+      "oid": "401ef025b051d9b6332e244a8a0e87315d3382fc",
+      "previous_recovery_inventory_membership": [],
+      "sightings": [
+        {
+          "oid": "401ef025b051d9b6332e244a8a0e87315d3382fc",
+          "path": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/root.git",
+          "ref": "refs/heads/p1-native2-code-publication",
+          "repo": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/root.git",
+          "type": "commit"
+        },
+        {
+          "oid": "401ef025b051d9b6332e244a8a0e87315d3382fc",
+          "path": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/root.git",
+          "ref": "refs/heads/watchdog-f7c3-publication",
+          "repo": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/root.git",
+          "type": "commit"
+        }
+      ]
+    },
+    {
+      "current_main_membership": [],
+      "new_published_main_membership": [],
+      "oid": "6774922fe38d3e961f07e6ff4a866d40d3d48f97",
+      "previous_recovery_inventory_membership": [],
+      "sightings": [
+        {
+          "oid": "6774922fe38d3e961f07e6ff4a866d40d3d48f97",
+          "path": "/tmp/Root-f7c3-owned-existing-route-tdyKlZHW/accelerate",
+          "ref": "refs/remotes/origin/codex/board-monitor-declared-validation-20261127",
+          "repo": "/tmp/Root-f7c3-owned-existing-route-tdyKlZHW/accelerate/.git",
+          "type": "commit"
+        }
+      ]
+    },
+    {
+      "current_main_membership": [],
+      "new_published_main_membership": [],
+      "oid": "94b78a7ef6fc500e62f764e4a0c140b95b007811",
+      "previous_recovery_inventory_membership": [],
+      "sightings": [
+        {
+          "oid": "94b78a7ef6fc500e62f764e4a0c140b95b007811",
+          "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/root.git",
+          "ref": "refs/heads/guide586-recovery-publication",
+          "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/root.git",
+          "type": "commit"
+        },
+        {
+          "oid": "94b78a7ef6fc500e62f764e4a0c140b95b007811",
+          "path": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/root.git",
+          "ref": "refs/heads/watchdog-f7c3-publication",
+          "repo": "/tmp/Root-Guide586-Native2-and-recovery-zKAh44W0/parent-pins/root.git",
+          "type": "commit"
+        }
+      ]
+    },
+    {
+      "current_main_membership": [],
+      "new_published_main_membership": [],
+      "oid": "c667d98928216a5466df5f47cf834f6d4c3d3093",
+      "previous_recovery_inventory_membership": [],
+      "sightings": [
+        {
+          "oid": "c667d98928216a5466df5f47cf834f6d4c3d3093",
+          "path": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/hallucinate.git",
+          "ref": "refs/heads/p1-native2-code-publication",
+          "repo": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/hallucinate.git",
+          "type": "commit"
+        },
+        {
+          "oid": "c667d98928216a5466df5f47cf834f6d4c3d3093",
+          "path": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/hallucinate.git",
+          "ref": "refs/heads/watchdog-f7c3-publication",
+          "repo": "/tmp/P1-Native2-code-parent-pins-INERT-VmI1vwSP/archive-path-query-preflight/hallucinate.git",
+          "type": "commit"
+        }
+      ]
+    }
+  ]
+}

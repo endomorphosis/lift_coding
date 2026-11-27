@@ -1,0 +1,860 @@
+{
+  "schema": "renewed-request-normal-main-publication/v1",
+  "base": "9577abf26d4e236709d11a0f39402cdd986da267",
+  "commit": "2ff68d92e55880df279a7a91ca5760d117b0aac3",
+  "tree": "9295cfd8e58eac1e5c0a730defd23401cfa17717",
+  "files": [
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/Guide586-actual-closed-rebind.json",
+      "bytes": 804,
+      "sha256": "90f9e9c6087a12615816c68acc98bc6381557832cd074d1b15e53f0a269a00b6",
+      "blob": "c227dc3c5c2afc63f937dbf8092fcc76c109ba80"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/README.md",
+      "bytes": 2954,
+      "sha256": "9e491d04aaa23520e5bf60390654a415def0c350a063f8ca458d794552a369d5",
+      "blob": "de08f22c11d2053a93596713ec8b6eeeee2b587f"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/actual-Guide586-normal-FF-publication.json",
+      "bytes": 9730,
+      "sha256": "2c1a7897a36f287b53301b57991f7b39fdf2f564aedf9f72045eef4bd32784a5",
+      "blob": "be9a7ec650e3b54f569c9205c9a3747c5431c52f"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/manifest.json",
+      "bytes": 90943,
+      "sha256": "bd38922a50177778bee6ccf700da3f649e87e9bf192ec8d47f9ae65801f1585a",
+      "blob": "e7b30bef5b24b360c03c51bb6ceb70eba17b0b0d"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/04da87d3fe22f11d1c5be339423e646676faf3c8a558598c03f20b1379277838.DATA",
+      "bytes": 38026,
+      "sha256": "04da87d3fe22f11d1c5be339423e646676faf3c8a558598c03f20b1379277838",
+      "blob": "258453b4b0c24ca522688822e446709971fbe0e7"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/079e9eeb8753dda4581331c2da3edf1d35501bd37863d5cc1c81f781871e8e31.DATA",
+      "bytes": 12366,
+      "sha256": "079e9eeb8753dda4581331c2da3edf1d35501bd37863d5cc1c81f781871e8e31",
+      "blob": "aadf2236209acebb3f4ebc967c7c49141384c79b"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/0cccd4fd0f804451ae6541e525ce43d084c135ccf58dcf739fae37d6861e7dc2.DATA",
+      "bytes": 10214,
+      "sha256": "0cccd4fd0f804451ae6541e525ce43d084c135ccf58dcf739fae37d6861e7dc2",
+      "blob": "504cb530ca6e7a149bb8fcad54c70485f8bf6451"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/0dc6c3b879602b4a372d63d446f15455e4751ad49bb0032f4e156c60763b06fb.DATA",
+      "bytes": 6331,
+      "sha256": "0dc6c3b879602b4a372d63d446f15455e4751ad49bb0032f4e156c60763b06fb",
+      "blob": "00ba502cbfdcaaafeef012f1636962fd11881a7b"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/0def4ca16164782b22b548c77d3d2b42fb59f924cba516470b83c6ccebb8ebab.DATA",
+      "bytes": 10916,
+      "sha256": "0def4ca16164782b22b548c77d3d2b42fb59f924cba516470b83c6ccebb8ebab",
+      "blob": "67ac0b957cb29389bd154746523479ce0d141b7d"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/121a66119ef987b25d880cfec2bbed84ccac3454c58423c572df72b99f67aeee.DATA",
+      "bytes": 1758,
+      "sha256": "121a66119ef987b25d880cfec2bbed84ccac3454c58423c572df72b99f67aeee",
+      "blob": "2a7565204c405e4d1e405a10529ede2f09873fdc"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/13c7ddb7a215d5095832d95bdd35aa561774ab8ab7c844ec01ba51edab42f59b.DATA",
+      "bytes": 9636,
+      "sha256": "13c7ddb7a215d5095832d95bdd35aa561774ab8ab7c844ec01ba51edab42f59b",
+      "blob": "e879123b52b523947f4e1d8e8f119a91e306a992"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/16c0d0a804fe4b4526f7cf01290ac4812452ef7ad222ca01efc23cde4fa20db7.DATA",
+      "bytes": 4924,
+      "sha256": "16c0d0a804fe4b4526f7cf01290ac4812452ef7ad222ca01efc23cde4fa20db7",
+      "blob": "2bafaec8cd287de02cce3fa4f841a25729fd65a9"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/1a858e8f5fe019da507d0313718622f963aa0c76fd0f232b987b0e6cfa98058b.DATA",
+      "bytes": 2160,
+      "sha256": "1a858e8f5fe019da507d0313718622f963aa0c76fd0f232b987b0e6cfa98058b",
+      "blob": "83ad540c195ab445e08f8e413459c1ce8e78826d"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/1b1c29969da0aa7c077658984a015b17e2d3a6c2a160a322af387b84cc03ec01.DATA",
+      "bytes": 8558,
+      "sha256": "1b1c29969da0aa7c077658984a015b17e2d3a6c2a160a322af387b84cc03ec01",
+      "blob": "6cebdbe85822f10ffdf5f1d3efd8bd37d2e1f5d1"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/206c7db9c7cc43c8c15bd12bc57c7fee2fcdb164e7adc85dae391bf321bc67dd.DATA",
+      "bytes": 37388,
+      "sha256": "206c7db9c7cc43c8c15bd12bc57c7fee2fcdb164e7adc85dae391bf321bc67dd",
+      "blob": "6d8ddf14306b5638e7c0b5f094fad127d7aadf93"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/22fd211d2533a2477c295ab7a94c0961ea4f1a77946b51adde14ea5ccb9b35c0.DATA",
+      "bytes": 8535,
+      "sha256": "22fd211d2533a2477c295ab7a94c0961ea4f1a77946b51adde14ea5ccb9b35c0",
+      "blob": "7c8050793abd54bea0b00a7b1164954421bbaa27"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/249d4d460945683f71b93fb30f4a48cdd4a8fd9ec6151d76647d1df5abf2d052.DATA",
+      "bytes": 15521,
+      "sha256": "249d4d460945683f71b93fb30f4a48cdd4a8fd9ec6151d76647d1df5abf2d052",
+      "blob": "a55a4759969bed96ddd4501cc304cb89f7f8194c"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/271d7e05979cd16d84ec3342d2b32f2fd76e0508c3bd6c9c86a786c421a1262d.DATA",
+      "bytes": 6740,
+      "sha256": "271d7e05979cd16d84ec3342d2b32f2fd76e0508c3bd6c9c86a786c421a1262d",
+      "blob": "20e0f4a9ee747eec1375c8cac6927772199217e6"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/2873fcd894cb84fc4d434adc595ff472df6dfa94a568a5f03b8c6cfc429160f5.DATA",
+      "bytes": 10315,
+      "sha256": "2873fcd894cb84fc4d434adc595ff472df6dfa94a568a5f03b8c6cfc429160f5",
+      "blob": "0ec09aad7ece6e1ee6545b7353d7bb405ef957ef"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/2a3f16db95950b8b94fe856dc45fea15993830d260ddeea04ac9399638b29dd4.DATA",
+      "bytes": 12685,
+      "sha256": "2a3f16db95950b8b94fe856dc45fea15993830d260ddeea04ac9399638b29dd4",
+      "blob": "8f3e24e187769cc78acd6d9b90ff3fbe148b5278"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/2bb66984b2b9d4273cc6e96a0314bbbe27208d12cd04fa30030f0abe1a39299a.DATA",
+      "bytes": 7140,
+      "sha256": "2bb66984b2b9d4273cc6e96a0314bbbe27208d12cd04fa30030f0abe1a39299a",
+      "blob": "edd1fc6f0ec82ef8b1b6a3d284f79e554c69af23"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/2d0895e1261fabb4413b4f723132596da5b6ae0e96b5c25028584ab1bff62269.DATA",
+      "bytes": 22299,
+      "sha256": "2d0895e1261fabb4413b4f723132596da5b6ae0e96b5c25028584ab1bff62269",
+      "blob": "783ec7c7160050fbb1bdcd89d52b0bce9bcfe8dd"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/2ddc72a151881c1041b0fb15ab01768693a33bfdc44756de73a0b98e8975e873.DATA",
+      "bytes": 12651,
+      "sha256": "2ddc72a151881c1041b0fb15ab01768693a33bfdc44756de73a0b98e8975e873",
+      "blob": "41f3eb9fbdd680e0b511fc4bd76c8735e720363c"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/2ea2b06988e2ae4176c6c34bc56f61b5c783d39de3225b40a2449e2a0e9c4c17.DATA",
+      "bytes": 7925,
+      "sha256": "2ea2b06988e2ae4176c6c34bc56f61b5c783d39de3225b40a2449e2a0e9c4c17",
+      "blob": "880ab47b9768db2a67ea5213ace40bd5f2bd816a"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/3098de911c97adb2ac0cf4dc57e6101700e16aac4d0d44076eba984f460c2956.DATA",
+      "bytes": 24332,
+      "sha256": "3098de911c97adb2ac0cf4dc57e6101700e16aac4d0d44076eba984f460c2956",
+      "blob": "0ade2cebb9c964761c50e13c5eb9adc344ac692b"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/30a4b6ea362e2ea8f8ad51b37e09f185b0a4d927e44fe9da3b0673a00006e984.DATA",
+      "bytes": 40089,
+      "sha256": "30a4b6ea362e2ea8f8ad51b37e09f185b0a4d927e44fe9da3b0673a00006e984",
+      "blob": "f3cceda48a6e83d495f532b74d2a4b4884cbdc15"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/34c3fa6e27ac33f2a13534fb56e0a5d469c06fa98b3661fdcc6f434a022381de.DATA",
+      "bytes": 25500,
+      "sha256": "34c3fa6e27ac33f2a13534fb56e0a5d469c06fa98b3661fdcc6f434a022381de",
+      "blob": "80d97431c398531ef01d5a1b2ce7208d9ebfdd32"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/373b26be25a10cf3ba4bd2f31c7b13200ba6ee21844eebd631104979af976ac9.DATA",
+      "bytes": 4915,
+      "sha256": "373b26be25a10cf3ba4bd2f31c7b13200ba6ee21844eebd631104979af976ac9",
+      "blob": "32d800cdd0b5e0d47b5a49b33da6cbface735bd3"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/3bbf3fc41e04f7ece6938baaec20c667c335f4bd6fadad7cc445ddc687a413de.DATA",
+      "bytes": 5895,
+      "sha256": "3bbf3fc41e04f7ece6938baaec20c667c335f4bd6fadad7cc445ddc687a413de",
+      "blob": "c6610f635268484b5a110426b8d1d237e272e825"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/3e94342d8723bbfcbfb5240ad6410a66798da3e8c44b207376b0899bcc991eec.DATA",
+      "bytes": 7307,
+      "sha256": "3e94342d8723bbfcbfb5240ad6410a66798da3e8c44b207376b0899bcc991eec",
+      "blob": "9492a24e66b76fb673a21000e979cd8133a9b505"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/3fb7fb802dc869625f3cbbfe1f1e967a185014b4c0a5a1276d97db532d9063ff.DATA",
+      "bytes": 12800,
+      "sha256": "3fb7fb802dc869625f3cbbfe1f1e967a185014b4c0a5a1276d97db532d9063ff",
+      "blob": "83200f2c8217ecdbbc13ed7bbfaafecc5ab5a279"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/46b6a2a442e0baeaaeeaec1f27bd3798815e0fd9a1a8005d4db0f33943f65235.DATA",
+      "bytes": 5415,
+      "sha256": "46b6a2a442e0baeaaeeaec1f27bd3798815e0fd9a1a8005d4db0f33943f65235",
+      "blob": "2a336a54ec0c957420b13767316f28ed720e96fa"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/498e0092e8abd6096f433feb3dfc51fb349030104ffc59898f2dd55b5512cbea.DATA",
+      "bytes": 12057,
+      "sha256": "498e0092e8abd6096f433feb3dfc51fb349030104ffc59898f2dd55b5512cbea",
+      "blob": "81b53971fe2e2355142e3b37312e2f22d4d0b8d1"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/4e41a7aebb6d22dd88511edd3e14ba3c4114c6c0a81a8e9e4de84d865faf2a8a.DATA",
+      "bytes": 2509,
+      "sha256": "4e41a7aebb6d22dd88511edd3e14ba3c4114c6c0a81a8e9e4de84d865faf2a8a",
+      "blob": "c9e38d0aa36e33d73782946bc1a03be36fdeb659"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/4f5e363ea21bdf0b687e6f53bab57e559fc79571d01ccfe18bf24f455f2e36af.DATA",
+      "bytes": 2697,
+      "sha256": "4f5e363ea21bdf0b687e6f53bab57e559fc79571d01ccfe18bf24f455f2e36af",
+      "blob": "68a39d93327903da1681c85dfc59ee569dcf6443"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/5673e2da51bd16ef3b9b3e0e494564b84710018230af7a5f51dfe1828e9f919b.DATA",
+      "bytes": 4420,
+      "sha256": "5673e2da51bd16ef3b9b3e0e494564b84710018230af7a5f51dfe1828e9f919b",
+      "blob": "94aacabe927a9df2c5607aa39bc07575910e97cb"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/57629a86507ab184281782b23d234380ec0c3567b5a73f3c9f37c8a65ea1673d.DATA",
+      "bytes": 4010,
+      "sha256": "57629a86507ab184281782b23d234380ec0c3567b5a73f3c9f37c8a65ea1673d",
+      "blob": "307fe55dc58b02b4d833963744937de6cc4415e7"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/5a84500addc1105346691f92bbdf3f4f158b0c349c2f33935c4b995480038afe.DATA",
+      "bytes": 38023,
+      "sha256": "5a84500addc1105346691f92bbdf3f4f158b0c349c2f33935c4b995480038afe",
+      "blob": "50cdf669e95a720727ef320a6f6a21b95365b5bc"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/61c5bac828aecb2874de5bf85a935006ac8092bcf7e9b399660aff5903bfdeba.DATA",
+      "bytes": 44383,
+      "sha256": "61c5bac828aecb2874de5bf85a935006ac8092bcf7e9b399660aff5903bfdeba",
+      "blob": "a6134d28ccdfc5c7820249e4fcf2a9dd2b12dd49"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/63ca7c722c4bb1f63352925562bdd6a617634335cd4fe491b2bc8b74f0813be7.DATA",
+      "bytes": 2142,
+      "sha256": "63ca7c722c4bb1f63352925562bdd6a617634335cd4fe491b2bc8b74f0813be7",
+      "blob": "d6c02c2db8dc1580f30d4b500ccb729b530416d3"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/6674af0f1eb31f014210b70b72338f1fe0130336b5b220d7eff0281b171341ae.DATA",
+      "bytes": 16327,
+      "sha256": "6674af0f1eb31f014210b70b72338f1fe0130336b5b220d7eff0281b171341ae",
+      "blob": "cb6b68aef6c6f46cff8598c4121e4448fbfbd83e"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/6db7b172c2b50a4287df56ff8795ffdb0f77a0fa19f5575833a04f82c999da81.DATA",
+      "bytes": 2160,
+      "sha256": "6db7b172c2b50a4287df56ff8795ffdb0f77a0fa19f5575833a04f82c999da81",
+      "blob": "c16197421313f951b54e0c7df51bf291e6316479"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/724455da09a422af0274d86a5dcf3232ffded3383097f5183b3000b25aa2937a.DATA",
+      "bytes": 9062,
+      "sha256": "724455da09a422af0274d86a5dcf3232ffded3383097f5183b3000b25aa2937a",
+      "blob": "3934ad2c50553d8577506fa185779ec0b0b61bc8"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/75388eeaf3827e27f12f875deb6a447d8f1ad6a448baace49fdf7c3b7e0d8d15.DATA",
+      "bytes": 14517,
+      "sha256": "75388eeaf3827e27f12f875deb6a447d8f1ad6a448baace49fdf7c3b7e0d8d15",
+      "blob": "c34e551c9fffe71b63e4ab2261f833b6d0b5815a"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/763c4eeef1c1223f3f398acff833dc6e8902916f694bd94b0cdc72825336aae0.DATA",
+      "bytes": 40595,
+      "sha256": "763c4eeef1c1223f3f398acff833dc6e8902916f694bd94b0cdc72825336aae0",
+      "blob": "b35fbf159985a9f8ad03a65056ee4ab0018f82a3"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/77580eeb44c49e0cf2b22abab9a68cd0bd377db05bb6543a6c0310f25e73d3a8.DATA",
+      "bytes": 8547,
+      "sha256": "77580eeb44c49e0cf2b22abab9a68cd0bd377db05bb6543a6c0310f25e73d3a8",
+      "blob": "69473e80648f9bf6061ea27982dba92f301fe1d1"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/79e21daa390416aaac8776bc6861d3cd2165c1baad4c81668503f4003189e005.DATA",
+      "bytes": 5298,
+      "sha256": "79e21daa390416aaac8776bc6861d3cd2165c1baad4c81668503f4003189e005",
+      "blob": "6f5c0c2b84f74c00bc579e54fde0d821a7df4c2b"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/83146b8d5594f15b309013d27055084b1ef729579152a93aded89bb723e4c4c8.DATA",
+      "bytes": 4036,
+      "sha256": "83146b8d5594f15b309013d27055084b1ef729579152a93aded89bb723e4c4c8",
+      "blob": "a2190c0d05ac9f0b0c357e28fec741103a34a6e8"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/855c961e68c6aa4e9afdd2252b66fdcd106d1bfec8b4169e736cff92ea7663ed.DATA",
+      "bytes": 5314,
+      "sha256": "855c961e68c6aa4e9afdd2252b66fdcd106d1bfec8b4169e736cff92ea7663ed",
+      "blob": "f3b2f23e4464265900b79721acf516e9c54e4962"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/8647ca4e83bcf18854b24ca2eae8a441c104423e6cbf6a1da2a26cc88216988d.DATA",
+      "bytes": 12625,
+      "sha256": "8647ca4e83bcf18854b24ca2eae8a441c104423e6cbf6a1da2a26cc88216988d",
+      "blob": "f566b3776226b2e9117595afe407c6463b5e7504"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/8ac23b6f9c6043629b94772c092ab94927a695a8fb3fba0e62baf689104c27cc.DATA",
+      "bytes": 6321,
+      "sha256": "8ac23b6f9c6043629b94772c092ab94927a695a8fb3fba0e62baf689104c27cc",
+      "blob": "fdd276594500600a8d3f6045f1069568b12c8dba"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/8ba67697dfddb3c70a60431f5f6e96989d7b71f980cefa08923ae5744f13923d.DATA",
+      "bytes": 7597,
+      "sha256": "8ba67697dfddb3c70a60431f5f6e96989d7b71f980cefa08923ae5744f13923d",
+      "blob": "85f13fb053f0399db7516e1265fe369850a8afb3"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/8c2bd3a98eaa438a353526a047990f222f29f7e07b109ea9d79c85e99b86e1b1.DATA",
+      "bytes": 25533,
+      "sha256": "8c2bd3a98eaa438a353526a047990f222f29f7e07b109ea9d79c85e99b86e1b1",
+      "blob": "bf6e61676a9c2c2e4cb6358d4bda148fe8c8869e"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/8c9f911f4223e915b8bc9652e664f3850de54ceb7f04cd3ab77585c2bad18f19.DATA",
+      "bytes": 3122,
+      "sha256": "8c9f911f4223e915b8bc9652e664f3850de54ceb7f04cd3ab77585c2bad18f19",
+      "blob": "5d95a4343b0007579b080244275377743993931c"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/8d5c939f73f1dff48b7cc35011a8f9f47f4884d91e416b14b3ce87a157e90631.DATA",
+      "bytes": 4817,
+      "sha256": "8d5c939f73f1dff48b7cc35011a8f9f47f4884d91e416b14b3ce87a157e90631",
+      "blob": "b72333626574acf65526046e14e1f50b9574e2c8"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/8efc127a0e2d642f27880fa7a7f96fc372eb98f1ea6bf3ed276c2837639ada84.DATA",
+      "bytes": 3801,
+      "sha256": "8efc127a0e2d642f27880fa7a7f96fc372eb98f1ea6bf3ed276c2837639ada84",
+      "blob": "8672509ed419515365548c83ff81e6b5b94562c6"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/8fd2655ba828a2cea6a658a6c3d11819c6df7a3b28286f8c30372496fa9c559c.DATA",
+      "bytes": 12811,
+      "sha256": "8fd2655ba828a2cea6a658a6c3d11819c6df7a3b28286f8c30372496fa9c559c",
+      "blob": "9a58554a310f68e533c3dc3ffb218244837c550a"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/91e3899e5d89f78916d8fca301e9daa4f2289b0a847a0665a04e9e8e00358aa4.DATA",
+      "bytes": 37796,
+      "sha256": "91e3899e5d89f78916d8fca301e9daa4f2289b0a847a0665a04e9e8e00358aa4",
+      "blob": "8334110789abb265d81778c56d0b986e90268aae"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/93e34315d75804414fa2d10b428b524c5d965093c392e9abd9e598d80470f10d.DATA",
+      "bytes": 5162,
+      "sha256": "93e34315d75804414fa2d10b428b524c5d965093c392e9abd9e598d80470f10d",
+      "blob": "b46e4f0f43cc3c4b2ed1ca74df95c1239683bd03"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/93fcac8ca8021af419cb2a5bd4422ffe41e899a432f60fa1abf31059691cc266.DATA",
+      "bytes": 25489,
+      "sha256": "93fcac8ca8021af419cb2a5bd4422ffe41e899a432f60fa1abf31059691cc266",
+      "blob": "e7a04cd23f198b0338d43238f1cbb3748d2058db"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/a243350c951dd863c0ecb2e58db78a7621e37ec40de068037212d333e45455db.DATA",
+      "bytes": 17131,
+      "sha256": "a243350c951dd863c0ecb2e58db78a7621e37ec40de068037212d333e45455db",
+      "blob": "28ae2dcd0671cc8c8ea12f176574f35157639a5a"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/a50d6f9e63d948f1d6e0abb0d539ab321628d93092d97c5dfd49111b8c6de03a.DATA",
+      "bytes": 13809,
+      "sha256": "a50d6f9e63d948f1d6e0abb0d539ab321628d93092d97c5dfd49111b8c6de03a",
+      "blob": "4a8eed13342d9729ecaa6a1d06acd42ce5e7f26d"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/a5f4e4076ab0727c01bf47ed1cc07155eacbf5f1c9123605b15fa5d175db9364.DATA",
+      "bytes": 11972,
+      "sha256": "a5f4e4076ab0727c01bf47ed1cc07155eacbf5f1c9123605b15fa5d175db9364",
+      "blob": "a3df4dbe3fb5bcff3e0a4f37e0a100d0df8cbcb0"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/a6cae6247b51f42df6cd5ed89cfb34092b60911c26a1db14fa745411257598d1.DATA",
+      "bytes": 6164,
+      "sha256": "a6cae6247b51f42df6cd5ed89cfb34092b60911c26a1db14fa745411257598d1",
+      "blob": "41fba4fffa4635e9ab64a9b30f6ec4f262ffbb4c"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/a75cdd6c5eaaa5dd0488d00cfee7cca357412a7f8d3fad3b38b185e0ff03b101.DATA",
+      "bytes": 12800,
+      "sha256": "a75cdd6c5eaaa5dd0488d00cfee7cca357412a7f8d3fad3b38b185e0ff03b101",
+      "blob": "5c0cfbffb804ffba29031ab84eea190d3ba9c931"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/ae188d55574c2e2280006313866a93447e4298a170b12df03a58a1775fa235c6.DATA",
+      "bytes": 1758,
+      "sha256": "ae188d55574c2e2280006313866a93447e4298a170b12df03a58a1775fa235c6",
+      "blob": "32f498c4c5a5614c6c6741982196cf3b47a40fae"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/b203c8f293f66ab7a96989ef7fc2e8b5f6b0df65e51168d33a75c31f621afffb.DATA",
+      "bytes": 3284,
+      "sha256": "b203c8f293f66ab7a96989ef7fc2e8b5f6b0df65e51168d33a75c31f621afffb",
+      "blob": "f1c2af9b3f47699fda018e28ecc5ca67188a0f0a"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/b8bb6889aec332bc727547333c4ee2960558af7c2722d03ef878839dc6031da7.DATA",
+      "bytes": 6740,
+      "sha256": "b8bb6889aec332bc727547333c4ee2960558af7c2722d03ef878839dc6031da7",
+      "blob": "bb1967a6c37096bd72c5a8675a1069e75695caa8"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/c1703fd1c418f0c7cb3af802119fd88d69abb8279650c0a3d5a4293fe6e62100.DATA",
+      "bytes": 12851,
+      "sha256": "c1703fd1c418f0c7cb3af802119fd88d69abb8279650c0a3d5a4293fe6e62100",
+      "blob": "6d7222b67c4e68d4355fd1e6c6b9208c9e2cd76f"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/c2fffd0f61c7f5822f21774158c971223ac606aaf86b8d81b88b474728af70cb.DATA",
+      "bytes": 12634,
+      "sha256": "c2fffd0f61c7f5822f21774158c971223ac606aaf86b8d81b88b474728af70cb",
+      "blob": "42964a41177e4c09947e73b72a305e822ad1ecff"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/cc72e03ddac4d857b5cdbca4ec35bb9d5307b390270c9229400a918c48b08175.DATA",
+      "bytes": 14094,
+      "sha256": "cc72e03ddac4d857b5cdbca4ec35bb9d5307b390270c9229400a918c48b08175",
+      "blob": "3f90b468dfe72ac7a510ac3641e412221e22352b"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/d47e3775fd2d1f9398edb8eb2cd1b4c3ec261eff59b5b6f4cc27f5a362d63028.DATA",
+      "bytes": 3049,
+      "sha256": "d47e3775fd2d1f9398edb8eb2cd1b4c3ec261eff59b5b6f4cc27f5a362d63028",
+      "blob": "95ce600e7e73702fb8841ab52873b27003b81f0b"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/e76b1b3bc06ca5494270b2d8356dbe7f96241726c2edc6ccc3a99a38984ed4d8.DATA",
+      "bytes": 2142,
+      "sha256": "e76b1b3bc06ca5494270b2d8356dbe7f96241726c2edc6ccc3a99a38984ed4d8",
+      "blob": "918791e9d9bc22d56e39f68ccea1828180785318"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/e88f8eaf2a7e98ed578b6706113db3b2e53f687cf9ffd6e0aeb2c38e491a0d41.DATA",
+      "bytes": 5172,
+      "sha256": "e88f8eaf2a7e98ed578b6706113db3b2e53f687cf9ffd6e0aeb2c38e491a0d41",
+      "blob": "c0c67963ac99b0c56db1eb8f1c4767ed45ee219d"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/e9ee0a0b2dfa686c824d8847f43538f4383b2aaa0f3ea40ab13cdaa175d66e5e.DATA",
+      "bytes": 25560,
+      "sha256": "e9ee0a0b2dfa686c824d8847f43538f4383b2aaa0f3ea40ab13cdaa175d66e5e",
+      "blob": "75f6553c7a9a0a90b6a3eaf4fafe09234a364366"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/eb4cb9e98999a2b88cb1a6c341109f53989759e0bdd7ed76b3df76b1f39be22d.DATA",
+      "bytes": 2098,
+      "sha256": "eb4cb9e98999a2b88cb1a6c341109f53989759e0bdd7ed76b3df76b1f39be22d",
+      "blob": "f07e7f47fb1879f3b2a08cf52c7d8c82f91143f7"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/f542139a0db507d2d77c038207a206c7a24cc61b9ea3d35a5ac29f2e54ea9255.DATA",
+      "bytes": 53162,
+      "sha256": "f542139a0db507d2d77c038207a206c7a24cc61b9ea3d35a5ac29f2e54ea9255",
+      "blob": "c0e72f1fcacb6562c5eef348baaa0d86a7df04fc"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/additional-private-operators/payload/f7a22d08fd63e3e13f7c2487b91ae9df958033031cc864012b1f4f07549c3f23.DATA",
+      "bytes": 9643,
+      "sha256": "f7a22d08fd63e3e13f7c2487b91ae9df958033031cc864012b1f4f07549c3f23",
+      "blob": "3e98b03fe24dfaecc6915b6ba40c8caa5aa54b03"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/agent-turn-checkpoint/actual-datasets-publication.json",
+      "bytes": 1133,
+      "sha256": "540870f28af17a20dfb4808de1406dbdf4045f7fbd9d74bf04532ede81b4b880",
+      "blob": "5fe66c36eb51cedf153c3ebc5d2e4e27b6695d2d"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/agent-turn-checkpoint/current-base-test-recipe.json",
+      "bytes": 579,
+      "sha256": "4febc8a2af31d9eed5574d4fe84a7358a7ffeea0998ddb40bf70183b0e811050",
+      "blob": "d92c6c72b67dba7408878bebb86ac5ade2676c25"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/agent-turn-checkpoint/current-base-test-result.json",
+      "bytes": 1436,
+      "sha256": "3a3a1d015e5df27eed577f7851c7495b904ad6fb7ae3517d3b493e377a5b692c",
+      "blob": "bfd5035dab191e65f8c6bc3a914d539aefbff0ff"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/agent-turn-checkpoint/datasets-current-base-merge.diff",
+      "bytes": 38026,
+      "sha256": "04da87d3fe22f11d1c5be339423e646676faf3c8a558598c03f20b1379277838",
+      "blob": "258453b4b0c24ca522688822e446709971fbe0e7"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/agent-turn-checkpoint/datasets-integration-before.json",
+      "bytes": 201,
+      "sha256": "122562d3e97c8d331fcc7b4c1e8fb70809122b2a0cbf805cb1f5c135fba2ec5d",
+      "blob": "f69fbe7ffdaba05feb17268cf6d5b1a2fa1d9e07"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/agent-turn-checkpoint/independent-static-review.json",
+      "bytes": 694,
+      "sha256": "158a33cf8476ab1e627da312b66f9eec3882bf42082aec401d5f885ebcd7de51",
+      "blob": "cf9fa8bd6a6a7e3c018c1ecac6efdbd19091ad70"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/agent-turn-checkpoint/run-current-base-tests.py.DATA",
+      "bytes": 3122,
+      "sha256": "8c9f911f4223e915b8bc9652e664f3850de54ceb7f04cd3ab77585c2bad18f19",
+      "blob": "5d95a4343b0007579b080244275377743993931c"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/archive-owner-release-to-Guide586.json",
+      "bytes": 1296,
+      "sha256": "bc5d95f19f386c986690808927a0cb9c3d6df1bfd34d9dd5a0eabc0426245b98",
+      "blob": "5724524558b735b8c4f996d036f9f4b8c237a9ab"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/filesystem-marker-rescan-v01.json",
+      "bytes": 85255,
+      "sha256": "aa1519867527d6cb3c4ed07a9ac0f2eda839579e3f820fe2349b96d69cc2ff8e",
+      "blob": "c772d6b7193348ebcaa23c9709c5c56d75d0f25b"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/filesystem-marker-rescan-with-known-delta-v01.json",
+      "bytes": 2955,
+      "sha256": "e91f6d8861996c626a5f5be3bbcce247e53f5e43b417610cf2520dad4bee1ca1",
+      "blob": "baed37ca630912ed8fa2bbb95f267fbede7ce491"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/final-metadata-delta-summary.json",
+      "bytes": 14226,
+      "sha256": "4132f30e4c39bbcb79dfcab442224872de15ab790b7487febe3d03e30fb9044f",
+      "blob": "8285597342a22777a7e01a589af1c9ff01a55b00"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/finite-graph-metadata-join.json.xz.DATA",
+      "bytes": 383908,
+      "sha256": "8f055930523a9fb3d141ea2f896a6bec13032bd8eaba78108ba407a4d749cb5b",
+      "blob": "f2da454af9fc5d567406e70578ac6fca0bf0a76c"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/metadata-compression-readback.json",
+      "bytes": 307,
+      "sha256": "6638e21cf8391e26a2cc7f5e1286b754cb025053e0ebe57fe17e3fc0aeb0e691",
+      "blob": "b69bec3cb628afc2e5e426b19ca134e91add1be7"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/permission-recheck.json",
+      "bytes": 46117,
+      "sha256": "d76dd8747103f349c795a812bc0473db25a084a5a14da1c41b888f1fef7741b0",
+      "blob": "84030081d73061999e7d743aa1e1b9e4c28c6a1d"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/prior-publication-current-remote-readback.json",
+      "bytes": 11411,
+      "sha256": "6f8190fccee5ee1f9a6a4b799a5877e9d37e83ce4f5d5600dab4e45a86dfb7ed",
+      "blob": "5f024e882dd31ee6d61c55527a1c6f0aba18ade9"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/manifest.json",
+      "bytes": 37604,
+      "sha256": "1b26688752f46011caa9d1d185628da19b69b6d24ab5118bf9f75e93f480706b",
+      "blob": "4bd68aa1901f43d83a9391aaf9a0d812303ad8d4"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/06f232e97a49063074bba7fac5decbb62c40bfb6a38d95ee1281d14f55f98a81.DATA",
+      "bytes": 42571,
+      "sha256": "06f232e97a49063074bba7fac5decbb62c40bfb6a38d95ee1281d14f55f98a81",
+      "blob": "6069a5c77b6c4db1ad80b75a5c58a6484e7afcc4"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/0b4f8559c606649446b146e065ce8d7dd7602d669d6b595c1b3bc334e84f3609.DATA",
+      "bytes": 5770,
+      "sha256": "0b4f8559c606649446b146e065ce8d7dd7602d669d6b595c1b3bc334e84f3609",
+      "blob": "63e6e1cebb716e81e07f2af468dd5b6c70c0d7e9"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/0bac75b1a97a9e205bf3c04ccf84b467597837f2624302589a35e6479c656716.DATA",
+      "bytes": 22252,
+      "sha256": "0bac75b1a97a9e205bf3c04ccf84b467597837f2624302589a35e6479c656716",
+      "blob": "44b4799a31e9f0870dc16b9a2676f189e37f6e23"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/0df5df0975ec05536a2e1e0d88e691fa0aff62ec3d961bb182dda44a7ba1b0ab.DATA",
+      "bytes": 15504,
+      "sha256": "0df5df0975ec05536a2e1e0d88e691fa0aff62ec3d961bb182dda44a7ba1b0ab",
+      "blob": "5b41172eee72862908967d2171eb144355de16da"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/0ea1c37d6ca6a1bc8f88ea8b54b9d682f4e7a1707a3e179dfa7784772a6ffeb9.DATA",
+      "bytes": 29046,
+      "sha256": "0ea1c37d6ca6a1bc8f88ea8b54b9d682f4e7a1707a3e179dfa7784772a6ffeb9",
+      "blob": "8c4c14a23fb16f4476492fdd18a693c86d92abd9"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/10d32a8d482cc6c28c3c6a157f908ffd4562e38af7e0c77c0a1c940b2ce80c68.DATA",
+      "bytes": 45526,
+      "sha256": "10d32a8d482cc6c28c3c6a157f908ffd4562e38af7e0c77c0a1c940b2ce80c68",
+      "blob": "668e18bdfbef081979a613f2407b60404cdcc5b7"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/134e5abf22f2581572aac279a1533d85c4d00d06cca13790236b331bcb575e09.DATA",
+      "bytes": 77021,
+      "sha256": "134e5abf22f2581572aac279a1533d85c4d00d06cca13790236b331bcb575e09",
+      "blob": "7b42811a5534e308db119e533091d2a00f005b63"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/16afb3d5c64d4a22dc1b12ae9ba72d8a326081863ac285358e11a64a536bd48f.DATA",
+      "bytes": 1793,
+      "sha256": "16afb3d5c64d4a22dc1b12ae9ba72d8a326081863ac285358e11a64a536bd48f",
+      "blob": "956d9dded49a9516b9d43946a272311de0184dbf"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/19c55a6fb31a3b18111e14bd5f466f4b975bf165b217db704e9e4046054a3f1f.DATA",
+      "bytes": 12804,
+      "sha256": "19c55a6fb31a3b18111e14bd5f466f4b975bf165b217db704e9e4046054a3f1f",
+      "blob": "d5003b1f3c4509da529614f7ef93407669b09d3d"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/1c90f61fa0df3117711e865955c0c168174e01b488c1584c384c9b51481a98ce.DATA",
+      "bytes": 1299,
+      "sha256": "1c90f61fa0df3117711e865955c0c168174e01b488c1584c384c9b51481a98ce",
+      "blob": "1e7643cbbabee53ea55f2150536a8c6d6df765de"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/2bf835cc9c404598c29687747b7070ae54eb3014ee73a4e40a515323a68ba1be.DATA",
+      "bytes": 914,
+      "sha256": "2bf835cc9c404598c29687747b7070ae54eb3014ee73a4e40a515323a68ba1be",
+      "blob": "a7b4bd2eb890dffce7caa4b558f8b77b858c29d5"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/36239cf4eac39ce8992e47457cc012cb9c3af4d04d4acb16f60830c315968818.DATA",
+      "bytes": 15640,
+      "sha256": "36239cf4eac39ce8992e47457cc012cb9c3af4d04d4acb16f60830c315968818",
+      "blob": "1095be9f9651e5136684016e4d360b949b7b434c"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/3e8c642785b4a47a2d074f6c266171154b71dfe1e426297ba48ebab6c5d6f420.DATA",
+      "bytes": 4661,
+      "sha256": "3e8c642785b4a47a2d074f6c266171154b71dfe1e426297ba48ebab6c5d6f420",
+      "blob": "09d5c422230c69942213f8321b313926dc9613e9"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/434a64bf01575ced936d1f1d1fc3cdbfca5161e51c24649d52071a7ab4ce4f88.DATA",
+      "bytes": 47386,
+      "sha256": "434a64bf01575ced936d1f1d1fc3cdbfca5161e51c24649d52071a7ab4ce4f88",
+      "blob": "72eb98c42ab5bbb19628ddf39ff9919d66e37da6"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/531d8bb6222e29442ff3132a5662d497126e4e32dc61c759e4ee830864f683a6.DATA",
+      "bytes": 22085,
+      "sha256": "531d8bb6222e29442ff3132a5662d497126e4e32dc61c759e4ee830864f683a6",
+      "blob": "3d8501abfdebf93477816f4a7f7ba2c3098920b8"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/5b9560780c70ab37f8e69dbcaaf33ceb0f1a973f0e1972b137bbb144b1f72e55.DATA",
+      "bytes": 26629,
+      "sha256": "5b9560780c70ab37f8e69dbcaaf33ceb0f1a973f0e1972b137bbb144b1f72e55",
+      "blob": "3337a711cc274115bcaed259a20394a508308399"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/5b986be98f857bb6e91b95930d6b21da8d64d10434934d7c4cc9742ab8681f99.DATA",
+      "bytes": 19395,
+      "sha256": "5b986be98f857bb6e91b95930d6b21da8d64d10434934d7c4cc9742ab8681f99",
+      "blob": "9c2973d7b92298860531a5f832c1ec6613887301"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/5f8aa9fee08aa30b8623cf5a134e385273d652419aae369eed299573b1384fdb.DATA",
+      "bytes": 11301,
+      "sha256": "5f8aa9fee08aa30b8623cf5a134e385273d652419aae369eed299573b1384fdb",
+      "blob": "dcdfd0a7dec93d7710e5d6f551329af9891561f4"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/635a088e2812c20fa21d7a72a9c41dc077aa76ebe2c03f8f1ed9913b7171ca3e.DATA",
+      "bytes": 1760,
+      "sha256": "635a088e2812c20fa21d7a72a9c41dc077aa76ebe2c03f8f1ed9913b7171ca3e",
+      "blob": "6934453feb8ae4a04c05cad58b9e3b69e1c8aacf"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/680f7fc63434bf0d49a784c75bbe012d1656b7fa54c0863db193702ece047178.DATA",
+      "bytes": 9564,
+      "sha256": "680f7fc63434bf0d49a784c75bbe012d1656b7fa54c0863db193702ece047178",
+      "blob": "c0fc035655a60b8873fa5bb78955dd2c68b3a531"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/684349ae2f8739326124c52f670a0c99967d90080dc675683e9b57506db6619b.DATA",
+      "bytes": 13877,
+      "sha256": "684349ae2f8739326124c52f670a0c99967d90080dc675683e9b57506db6619b",
+      "blob": "8c0095f0115b6ee4501e55f8fa2facedae256a62"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/75a92976d46e72ac0822b17ed6e6903a62fd19a45258763dbef813851b4edf52.DATA",
+      "bytes": 1299,
+      "sha256": "75a92976d46e72ac0822b17ed6e6903a62fd19a45258763dbef813851b4edf52",
+      "blob": "a230d8e98f3d1a26e42af0bac442b8dccbc85cbc"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/7b7f11e358347a0f8c806f2d2066ed88ea862b4fdd00bfaa09122a25fbfc6e7b.DATA",
+      "bytes": 23592,
+      "sha256": "7b7f11e358347a0f8c806f2d2066ed88ea862b4fdd00bfaa09122a25fbfc6e7b",
+      "blob": "a379ed384906fd171b095872e3614c29781753da"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/7cce37c0deb4f0702c9eddaceea573d4586e8fa8f76555ab2fa0134a7ad02790.DATA",
+      "bytes": 9529,
+      "sha256": "7cce37c0deb4f0702c9eddaceea573d4586e8fa8f76555ab2fa0134a7ad02790",
+      "blob": "08f17c6f947c6f3c0776fda1d31181cbf696c474"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/7e4fd2025de40bbdee5db4040a4ddf9d4ed903ea93c0656ec5d8d3c20e7ae152.DATA",
+      "bytes": 5646,
+      "sha256": "7e4fd2025de40bbdee5db4040a4ddf9d4ed903ea93c0656ec5d8d3c20e7ae152",
+      "blob": "7aec5e904dbd80630bd695053c1cce66782ef98a"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/80c5bca94ac35db19b86b4c03ac71e5f88bd58452cf229d503fc8edb9d12949a.DATA",
+      "bytes": 17712,
+      "sha256": "80c5bca94ac35db19b86b4c03ac71e5f88bd58452cf229d503fc8edb9d12949a",
+      "blob": "768d1c28e2ad2553670d0d799f1f1b53e1a1fd5e"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/837eeceafe0febde5761b395392ee84e0ab046f12dff3a0430f0ad7e191c4d78.DATA",
+      "bytes": 880,
+      "sha256": "837eeceafe0febde5761b395392ee84e0ab046f12dff3a0430f0ad7e191c4d78",
+      "blob": "2c71ca55432f254145f748cb8cd2101b86cd7d1f"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/88bed4de7df095279f31ebcf3de42392ea1b9c13b68372c35224592dcadf54f1.DATA",
+      "bytes": 4214,
+      "sha256": "88bed4de7df095279f31ebcf3de42392ea1b9c13b68372c35224592dcadf54f1",
+      "blob": "cbdac7fc4431944f53411d7d2e26d6edc7231cfa"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/8af3e802a402c9e0a318f56048ddf13df71c9653346e12f488b978fdfa37f21b.DATA",
+      "bytes": 4661,
+      "sha256": "8af3e802a402c9e0a318f56048ddf13df71c9653346e12f488b978fdfa37f21b",
+      "blob": "c2a2cce49af3f343bca0bc289e9b22d27e0a6ef3"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/99b921475ead760dd1c1a5c0978704f38eab6f090b005858e5f44df324973db2.DATA",
+      "bytes": 1811,
+      "sha256": "99b921475ead760dd1c1a5c0978704f38eab6f090b005858e5f44df324973db2",
+      "blob": "b41b40d3cfb942f0220620305f37d39e18cf42b0"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/9da7844c4f48977911adde9fb405f3afab37b0908d90368db925cdd685d6c669.DATA",
+      "bytes": 18090,
+      "sha256": "9da7844c4f48977911adde9fb405f3afab37b0908d90368db925cdd685d6c669",
+      "blob": "4ab89ae086e4a570cce87b323a8d9cfb0ca98da4"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/aad214108fa6a343d50d6b3c804a149bd9037eba82b43cd58d8fbec469f36e10.DATA",
+      "bytes": 12812,
+      "sha256": "aad214108fa6a343d50d6b3c804a149bd9037eba82b43cd58d8fbec469f36e10",
+      "blob": "5f31f6538a2899fdf2c598fb6130508526332573"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/ab42bbde9d08f61d754c40587e08d3c8fd01d5a5dec72316567901718e1e6105.DATA",
+      "bytes": 24421,
+      "sha256": "ab42bbde9d08f61d754c40587e08d3c8fd01d5a5dec72316567901718e1e6105",
+      "blob": "04e8869e6b52203cb8f4b15f08358114c2938a9c"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/ae152068d8d166ea0e17b657f15d286b7894c8b833755f82d2baeb6ac77e5244.DATA",
+      "bytes": 1793,
+      "sha256": "ae152068d8d166ea0e17b657f15d286b7894c8b833755f82d2baeb6ac77e5244",
+      "blob": "f1f262dd49a30c1d6ee0bffddf85138c10b888a0"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/b8bc5ade745400d6c92b7bb1592f2e99eae605abfd5fda4138fdc8d8a2f5379a.DATA",
+      "bytes": 1768,
+      "sha256": "b8bc5ade745400d6c92b7bb1592f2e99eae605abfd5fda4138fdc8d8a2f5379a",
+      "blob": "d59afcb8cf1e0ed5aa99da4d36f05ef731821c26"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/c39bfcfa7117f64592d20fb133626b26060dce219f82305b7bca5d34a5ce8fae.DATA",
+      "bytes": 9564,
+      "sha256": "c39bfcfa7117f64592d20fb133626b26060dce219f82305b7bca5d34a5ce8fae",
+      "blob": "cf3232c3937ff79b687916a133cc94554227f5b9"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/c9613a1429520498ba487d660456950d974f79aea8bd28c082b2fad0a8c927b7.DATA",
+      "bytes": 8380,
+      "sha256": "c9613a1429520498ba487d660456950d974f79aea8bd28c082b2fad0a8c927b7",
+      "blob": "842bf1f73fb4e38d4717d51b8cab03bdec617cca"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/d9545137291c7876c6c5a1e308a30429806040248b577eb662e356f95aa512e5.DATA",
+      "bytes": 67587,
+      "sha256": "d9545137291c7876c6c5a1e308a30429806040248b577eb662e356f95aa512e5",
+      "blob": "42d209572bf85c17e92b724d3578bd9557ed4176"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/db093263714b0e41e06633f4fc1dbe883bb9b531050690178bd557ba2d6b6b52.DATA",
+      "bytes": 9189,
+      "sha256": "db093263714b0e41e06633f4fc1dbe883bb9b531050690178bd557ba2d6b6b52",
+      "blob": "e2a8cfae610b3f967e07263fde02453191a2139d"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/de57a50797c5fde8efce0d6dd84b34116b5fb19a5d78520c332c7295c88cfd1a.DATA",
+      "bytes": 1811,
+      "sha256": "de57a50797c5fde8efce0d6dd84b34116b5fb19a5d78520c332c7295c88cfd1a",
+      "blob": "b4516f8626e94af9a089c46718c6e3078f4d6008"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/f0053d32463fe79cfe0d8b1d600ea4de11ad11e375eea78498a38837398241ca.DATA",
+      "bytes": 10541,
+      "sha256": "f0053d32463fe79cfe0d8b1d600ea4de11ad11e375eea78498a38837398241ca",
+      "blob": "fcfba5be0f21e74c5fb46d599bde2b218c487e7b"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/f425b0c72cb8284d2635fc27f547d05c7c2c57b987c05781c8fbb9a67a85807a.DATA",
+      "bytes": 14095,
+      "sha256": "f425b0c72cb8284d2635fc27f547d05c7c2c57b987c05781c8fbb9a67a85807a",
+      "blob": "4974bdbcd96edcca9ed0d5cdc1b2ef6d67696cdc"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/private-drafts/payload/fc7c8e9e9900442d0408b411b1299111f5942c8c9df61de8999e4d3050f8a8f5.DATA",
+      "bytes": 10310,
+      "sha256": "fc7c8e9e9900442d0408b411b1299111f5942c8c9df61de8999e4d3050f8a8f5",
+      "blob": "41192ae65a7f2055a20be5e967f654042a7e54c7"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/publish-renewed.py.DATA",
+      "bytes": 6460,
+      "sha256": "9e772afb530da21dd6ef581bf49534030a5a4568a869f145b05031ece81a91bd",
+      "blob": "69b3159f1b024665d9f5c5616f89698c3640c1a6"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/results.json",
+      "bytes": 6872,
+      "sha256": "4a20c9df14b5e6912e1526120fb5ab6078613eed6ca9c71587a96d5fbd4d5cb8",
+      "blob": "35cdceb8a7d8224421c6d133dfe89220cf3c0914"
+    },
+    {
+      "path": "docs/reconciliation/worktree-main-reconciliation-20261127/renewed-request-1730/top-level-file-metadata.json",
+      "bytes": 2484,
+      "sha256": "7054015280c99c7f917804c587b19d59a68f651cad26f92c0b513b146e77149b",
+      "blob": "103343d235f14dc569f4dd2c7da9a453afb87cfe"
+    }
+  ],
+  "child_pin_before": "10a3dac4d863b44eb848dfc9f6f91a925e4e1c13",
+  "child_pin_after": "10a3dac4d863b44eb848dfc9f6f91a925e4e1c13",
+  "guide586_root_preserved": "9577abf26d4e236709d11a0f39402cdd986da267",
+  "gitlink_changes": 0,
+  "normal_fast_forward": true,
+  "force": false,
+  "reviewed_roster_sha256": "c9fe1ec99038bf4d710daffee1a86a434c78115ddfb20d2ac644d9dad7c208e9",
+  "hosted_ci_dispatched": false,
+  "original_working_files_untouched": true,
+  "push_returncode": 0,
+  "remote_main": "2ff68d92e55880df279a7a91ca5760d117b0aac3",
+  "closed_utc": "2026-11-27T18:16:47.319906+00:00"
+}

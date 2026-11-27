@@ -1,0 +1,361 @@
+{
+  "schema": "seven-historical-tip-incremental-archives/v1",
+  "archived_tips": 7,
+  "archives": [
+    {
+      "family": "H",
+      "published_prerequisite": "f41eef8e6978807553ec7c000688be61fed1863e",
+      "tips": [
+        "37cfa9523b3df28fe5c8d989e872c1cc20bb4538",
+        "c667d98928216a5466df5f47cf834f6d4c3d3093"
+      ],
+      "bundle": "H-historical-tips.bundle",
+      "bytes": 4595,
+      "sha256": "f7d52f6342a6a9c1857698a1e54892bce0ef7cabbf14d1c562c0aa27621b3449",
+      "objects": [
+        {
+          "oid": "37cfa9523b3df28fe5c8d989e872c1cc20bb4538",
+          "type": "commit",
+          "bytes": 250,
+          "sha256": "59ddb36563911fd01c4b4f910cd50e8fe617aea4eaf38d0f02f6b5e91b0e1574"
+        },
+        {
+          "oid": "6cf529526d72e03264d032ddd72ec5797a896e1f",
+          "type": "tree",
+          "bytes": 2592,
+          "sha256": "d1dcae5682470e9e5208d54e7c0e7fe28f7eb61eed909bdb9beb2923f3107219"
+        },
+        {
+          "oid": "c667d98928216a5466df5f47cf834f6d4c3d3093",
+          "type": "commit",
+          "bytes": 276,
+          "sha256": "36bdbf268f07fd32b2ad695b15e86ca212dd35021d7b6660b795b0efd6c44f6c"
+        },
+        {
+          "oid": "d2f509958071d642adb8cfddb1c9a10dc5e5081d",
+          "type": "tree",
+          "bytes": 2592,
+          "sha256": "dcf0d124a241d8246acc44f3a44c9a50cc5b5bfe89b0e62a26c23aadfde727b0"
+        }
+      ],
+      "bundle_verify_returncode": 0,
+      "pack_index_returncode": 0,
+      "all_new_object_bytes_roundtrip_exact": true,
+      "advertised_tip_refs_restored_exact": true,
+      "full_prerequisite_checkout_materialized": false,
+      "verification_limit": "Incremental archive. Complete published prerequisite required for a full checkout; local test independently restored all new object bytes and advertised commit refs, not the unmaterialized published baseline."
+    },
+    {
+      "family": "R",
+      "published_prerequisite": "9577abf26d4e236709d11a0f39402cdd986da267",
+      "tips": [
+        "401ef025b051d9b6332e244a8a0e87315d3382fc",
+        "94b78a7ef6fc500e62f764e4a0c140b95b007811"
+      ],
+      "bundle": "R-historical-tips.bundle",
+      "bytes": 5791,
+      "sha256": "5f38834f8bbe6199d4f42b7d3b1a98d67ab95d4b5e0385525aa9e64d336e4835",
+      "objects": [
+        {
+          "oid": "401ef025b051d9b6332e244a8a0e87315d3382fc",
+          "type": "commit",
+          "bytes": 271,
+          "sha256": "7ae6956a1b32614592237abded5a63b71fb11166cf37ad18b3ac015aa575019e"
+        },
+        {
+          "oid": "8f547883ef093e75168c9ea9d0f8a42b256c3d5a",
+          "type": "tree",
+          "bytes": 2871,
+          "sha256": "fbe3c24564b80245c188b8a1ee52d5ff27741927e2101d0f8b0dd0519a472735"
+        },
+        {
+          "oid": "6959a3ad98d3ff8adde1d392ebb0cda201cb4245",
+          "type": "tree",
+          "bytes": 290,
+          "sha256": "e9fdb72189b384116e22533bb58e0325daed35af4de95d9e8289e449af791602"
+        },
+        {
+          "oid": "94b78a7ef6fc500e62f764e4a0c140b95b007811",
+          "type": "commit",
+          "bytes": 253,
+          "sha256": "3c9d953392f8f1b46ef0cac56c92a7e183469b858d7e334f8f867ad8516403c8"
+        },
+        {
+          "oid": "75d48cb75f660380c894f8f648e2b7d737ed1501",
+          "type": "tree",
+          "bytes": 2871,
+          "sha256": "9396b81f93ba0a68954b70069d19dc081ab95fc3f25ce817da95ba781f38b994"
+        },
+        {
+          "oid": "d5c1729328eefb08c54845aa560b41e0b10da2fd",
+          "type": "tree",
+          "bytes": 290,
+          "sha256": "5db6eac2ad8b4900383b27826a413b68f890c9c8476dc4572e52b3ff924828be"
+        }
+      ],
+      "bundle_verify_returncode": 0,
+      "pack_index_returncode": 0,
+      "all_new_object_bytes_roundtrip_exact": true,
+      "advertised_tip_refs_restored_exact": true,
+      "full_prerequisite_checkout_materialized": false,
+      "verification_limit": "Incremental archive. Complete published prerequisite required for a full checkout; local test independently restored all new object bytes and advertised commit refs, not the unmaterialized published baseline."
+    },
+    {
+      "family": "D",
+      "published_prerequisite": "344d3282d2d268505211f8dcf60e98b5306fcd4f",
+      "tips": [
+        "17be501a290c65556ab1d1038f47d76ea5bab6a8",
+        "3b6c6c4252bae5c5209da7116f3c97e01cf7f629"
+      ],
+      "bundle": "D-historical-tips.bundle",
+      "bytes": 1675695,
+      "sha256": "3dd5b20dc03ad4f2b7c6d1c90102d4cd022919ab41a1445cb72d36bd4b1327a3",
+      "objects": [
+        {
+          "oid": "17be501a290c65556ab1d1038f47d76ea5bab6a8",
+          "type": "commit",
+          "bytes": 285,
+          "sha256": "7bb433dff59254c4f6a298c3e59a60ecbf50cd940d3a87f6822ad760d4e11599"
+        },
+        {
+          "oid": "8cb65bfe936b62b9de0c697ca43ba129b6aea44b",
+          "type": "tree",
+          "bytes": 2647,
+          "sha256": "1e38fb9fbfd869bd24b759ccde44b82e195fae6d68a5c8e17f2162f715af9e25"
+        },
+        {
+          "oid": "8b2cdb465288f3d6e2b136ed7e2d172347730e27",
+          "type": "tree",
+          "bytes": 2816,
+          "sha256": "dd92035665e6338a2f7bc704d344735bc9b7c882b6ab2b5f7a4ad3b67a5cb273"
+        },
+        {
+          "oid": "f3346939b3d665ee3a25276cfea00ca4edd583cd",
+          "type": "tree",
+          "bytes": 2559,
+          "sha256": "40e0ab2161d031f497f5831d63267541c43e278180b81d405d7485fd5c09e050"
+        },
+        {
+          "oid": "ee725bea815e5121887eb9e1dd4d275521517d97",
+          "type": "tree",
+          "bytes": 15943,
+          "sha256": "de790598350b056c8bcd151cb6a4187f874cbd7af5cf92a50addc0901aee0c5f"
+        },
+        {
+          "oid": "00c1624ee4707cec61e2e458d3e74416226413d9",
+          "type": "blob",
+          "bytes": 176021,
+          "sha256": "3655f499da874af4ce7d52225ad9f8b3991bfb4129aa85fb9cbc7212fc3d39c9"
+        },
+        {
+          "oid": "75cdbace76bb8ed29283d1e1a89902035d57f833",
+          "type": "tree",
+          "bytes": 6100,
+          "sha256": "0c6050dae69d97f9ae2ec0e2d71e152714429926d5763bf1b3b1d46595873e79"
+        },
+        {
+          "oid": "6713e119fb358fcbf1d2e8c2698bd1b21279f61f",
+          "type": "tree",
+          "bytes": 10390,
+          "sha256": "27f5a7ff7b7e92158d16cdfdf123fde57592f97a69de86a4eb3b68e1783d3a2a"
+        },
+        {
+          "oid": "bf547a40956919bed230fa79f07f8fca915a8dc2",
+          "type": "tree",
+          "bytes": 21641,
+          "sha256": "2ddd880240df5ba27b1dc4845ce4ddfc959a37e3d5c77367276cc1b34cb46318"
+        },
+        {
+          "oid": "253a5dcfbbd366ec34990e508e77c69793549df3",
+          "type": "tree",
+          "bytes": 20576,
+          "sha256": "2e82b994ec2eb02c12b1d6e50638b37a35c0168c13e927af4c3a79d98234dfb3"
+        },
+        {
+          "oid": "0cdd649c57c92549e119a12193253d96ef2760c3",
+          "type": "blob",
+          "bytes": 445541,
+          "sha256": "cf62c0c77bc2b644025f4adecb7c6714f1fa92a01cdcc6ede110e8cd4047038b"
+        },
+        {
+          "oid": "3b6c6c4252bae5c5209da7116f3c97e01cf7f629",
+          "type": "commit",
+          "bytes": 340,
+          "sha256": "aec94e783da7bec3d0cf5e44b77cb85c9a7c7d4bb04f6ad76f0521b0673dbceb"
+        },
+        {
+          "oid": "eab12579b53599c7e2a01ef95b7db55d91f80f1b",
+          "type": "tree",
+          "bytes": 2647,
+          "sha256": "1e83a6c604d6c1cb86999556932cd7add17e244bd6feda215fff7a9465292f96"
+        },
+        {
+          "oid": "8da1d5ad14e96dbeea100930aee83b9c2ec6b632",
+          "type": "tree",
+          "bytes": 2816,
+          "sha256": "9d446a307f9e5e62fa53eb03625ce5f71dabc9b15da62102658f897eb732a8c2"
+        },
+        {
+          "oid": "c5d419460aafb7663519ab4e1f9d5ff149bbe63c",
+          "type": "tree",
+          "bytes": 2559,
+          "sha256": "8c9fc6eabfbc8ccf78f8d4932786f0b77f399762dea6a0bbe5873f5f4054c798"
+        },
+        {
+          "oid": "f88adf29a4c0aa8d552ce4cee83b0588783280d1",
+          "type": "tree",
+          "bytes": 15943,
+          "sha256": "2f109513ea4c71601de2ecd3390e0f9ed6c7d994567453899abf9f95a0b09f68"
+        },
+        {
+          "oid": "329504098fdedcf2fc99c74a41dc4e4a298b7032",
+          "type": "tree",
+          "bytes": 478,
+          "sha256": "4d003bb71f93169f0488fe99afd1bb571700f258c400f4a8a7eb77ae59712ccf"
+        },
+        {
+          "oid": "02029854680c574776a79fd909666c5da43dd5fb",
+          "type": "blob",
+          "bytes": 1562775,
+          "sha256": "7705235696de4d510fde228721a8e5726721fc24489a09cd1949be5f8cc5b6ae"
+        },
+        {
+          "oid": "892f0e7618fba102af518db63870d2b70390423f",
+          "type": "blob",
+          "bytes": 1114497,
+          "sha256": "c468aae1a25729b9439761690e8495fa32b35d4ed6bfc06fdb83da6c7434f80b"
+        },
+        {
+          "oid": "6d75fb88685278687667a917aa7749a73666a6bd",
+          "type": "blob",
+          "bytes": 863118,
+          "sha256": "ce44d5f806fc6ea9ce5cd1af08b074a326d3d04b8e84e9fe5473e59e4c81c6d9"
+        },
+        {
+          "oid": "07fe8617020830fbbd23cc315dd54781b0403d7d",
+          "type": "blob",
+          "bytes": 2420115,
+          "sha256": "cff5299c511ac82718425b5551d2b5e766efaf9fe17517517fa3831021d7c6dc"
+        },
+        {
+          "oid": "a010904ff5893225d03ffd98743ac1f4429e161f",
+          "type": "tree",
+          "bytes": 6100,
+          "sha256": "1d714583e4d541a3a6b2cd35cb288f0687546a7f34b446f4cddc280dbd23d283"
+        },
+        {
+          "oid": "a77246fc0a5b01d3ca5374a291a37ffc18b4aaf3",
+          "type": "tree",
+          "bytes": 10390,
+          "sha256": "319f76fa8d766204ba369cbb6c0e19dd4bf4a124138630adf43dc661f4701824"
+        },
+        {
+          "oid": "b346121f0018f4ab549a41a07ba16c5ab9dc5b86",
+          "type": "tree",
+          "bytes": 21641,
+          "sha256": "d8041c0918d098794f0201e13448936094b74a6989c657313d91fbed2782d8d5"
+        }
+      ],
+      "bundle_verify_returncode": 0,
+      "pack_index_returncode": 0,
+      "all_new_object_bytes_roundtrip_exact": true,
+      "advertised_tip_refs_restored_exact": true,
+      "full_prerequisite_checkout_materialized": false,
+      "verification_limit": "Incremental archive. Complete published prerequisite required for a full checkout; local test independently restored all new object bytes and advertised commit refs, not the unmaterialized published baseline."
+    },
+    {
+      "family": "A",
+      "published_prerequisite": "fae7981fa576817536a3c7aa62c5d28dc417f214",
+      "tips": [
+        "6774922fe38d3e961f07e6ff4a866d40d3d48f97"
+      ],
+      "bundle": "A-historical-tips.bundle",
+      "bytes": 192125,
+      "sha256": "0995dcc9052ebe15f9e953d78cc0f19da6102d25e56e2d2e737e4a57142b1eb0",
+      "objects": [
+        {
+          "oid": "6774922fe38d3e961f07e6ff4a866d40d3d48f97",
+          "type": "commit",
+          "bytes": 282,
+          "sha256": "41f50789c14d64fd050aefc71a97a8a7a2111db2c8d52577fc5693c09a1be65d"
+        },
+        {
+          "oid": "68cff10df483132b143c5ba920921e8364b80fbf",
+          "type": "tree",
+          "bytes": 2915,
+          "sha256": "5acb329d7facf8aba0ad95306aca7ff8aa33f779c76fc52ef31c45391e406103"
+        },
+        {
+          "oid": "d090575457ad93975e4661d4a1b18b0cd9dc68bd",
+          "type": "tree",
+          "bytes": 4454,
+          "sha256": "951455b4d530d14614dcd905bd4e17e1b2889f7fd8b6720ab80a8c3c19af910e"
+        },
+        {
+          "oid": "bad5d0863bf14dd5e4f4ebe9b94280e171524237",
+          "type": "tree",
+          "bytes": 4165,
+          "sha256": "fa42626df2f7a1e01be33601865cf20432af08db237094eccb6991d51bd70631"
+        },
+        {
+          "oid": "058e87135fce5ee66dae63938b778e008119ef3e",
+          "type": "tree",
+          "bytes": 3389,
+          "sha256": "8ed0c26a5401d9e62fbfb7843309aa4aaebe8e4ac3ced0cace22dff11f561203"
+        },
+        {
+          "oid": "6e8ca37ffb1153df59cb6f94b89163e57c8160ae",
+          "type": "blob",
+          "bytes": 47971,
+          "sha256": "b31e6955e62b62eb7323441538c98a003fc435ab5dde599b919c132fe52eb0ec"
+        },
+        {
+          "oid": "85f1b863ca463f008007e4126be5fe5cbbc588da",
+          "type": "blob",
+          "bytes": 82453,
+          "sha256": "c1e23676eae6829d3d123bc787fc322b0208ff4fa66e3e2ce2ff12e994448b41"
+        },
+        {
+          "oid": "fc6f77c9832b393d0b31436b2e7b36e1255b61d9",
+          "type": "tree",
+          "bytes": 79842,
+          "sha256": "fe19232840a5ba8b02d245e4c216bc1c338ca223d7e1aa0d2fb6edadcea9fb5f"
+        },
+        {
+          "oid": "e857134f9180b21324f7bb5363744c0fe6c45053",
+          "type": "tree",
+          "bytes": 164921,
+          "sha256": "ed2476e3214304eb642bae7833c4e308be81a55738fdd6e3ac4913154c0aeeac"
+        },
+        {
+          "oid": "6aaff89d74640999226e38d97ea7ac135de04df9",
+          "type": "blob",
+          "bytes": 89450,
+          "sha256": "9946f1e6fdbf36369de9dc16e973f14f320788e0a7f010215cd75b6dcdb948db"
+        },
+        {
+          "oid": "d00f6b92e5c6094cfff3128d160d67fb4a9b6fe8",
+          "type": "blob",
+          "bytes": 81073,
+          "sha256": "3e6f3aae3b9b43729dcfa6747ed6db2a69a3826afeb53e9aebc273a880c0cf95"
+        }
+      ],
+      "bundle_verify_returncode": 0,
+      "pack_index_returncode": 0,
+      "all_new_object_bytes_roundtrip_exact": true,
+      "advertised_tip_refs_restored_exact": true,
+      "full_prerequisite_checkout_materialized": false,
+      "verification_limit": "Incremental archive. Complete published prerequisite required for a full checkout; local test independently restored all new object bytes and advertised commit refs, not the unmaterialized published baseline."
+    }
+  ],
+  "canonical_blob_bodies_read": false,
+  "new_blob_source": "Ten exact previously-held private files, hash-bound to Git blobs; no canonical working-file read",
+  "source_runtime_or_tests_executed": false,
+  "maintained_code_adoption": false,
+  "original_refs_and_working_files_mutated": false,
+  "prior_failed_full_fetch": {
+    "returncode": 1,
+    "missing_baseline_blob": "394c3083e36449d22a11874e2177590a7e419c03",
+    "reason": "Local baseline intentionally contains metadata only; original failed attempt retained, not reclassified"
+  }
+}
