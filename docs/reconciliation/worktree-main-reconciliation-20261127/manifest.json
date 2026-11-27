@@ -23,6 +23,13 @@
       "sha256": "31d46f722408a4dbbe99c1783bc5c8dece95b1038ec1585a0d8a2f15791fcc4d"
     }
   ],
+  "current_user_project_pins": {
+    "external/ipfs_accelerate": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+    "external/ipfs_datasets": "5bf57f390a12621a40716595fe261c35d2741e12",
+    "hallucinate_app": "fe0d51a95aa4662efad395bfeeb996dab567313c"
+  },
+  "final_readback_utc": "2026-11-27T05:10:30.355834+00:00",
+  "historical_branch_tips_preserved": 10,
   "home_working_file_packet": "../home-checkout-source-preservation-20261127/manifest.json",
   "hosted_ci_dispatched": false,
   "kit_reconciliation": {
@@ -48,8 +55,19 @@
     "kit_service_tests": "only-equivalent-signature-formatting",
     "kit_workflow": "byte-identical-to-main"
   },
+  "latest_parent_containing_all_pins": "9712f24eeb4cf444416b2613cf23f097c17bda30",
   "local_tests_passed": 368,
+  "objective_dependency_main": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+  "objective_focused_tests_passed": 6,
+  "objective_full_owning_module": {
+    "both_failures_reproduced_on_untouched_main": true,
+    "errors": 0,
+    "failed": 2,
+    "passed": 107,
+    "skipped": 0
+  },
   "parent_pin_main": "0e4e509048c7486bff76ec2939d4abc62ed4a6b9",
+  "prior_recovery_archive_publication": "0ff4b2a168ea8e00c1c552a041e804e5f236ee7f",
   "registered_datasets_and_accelerate_worktrees_checked": 58,
   "remaining_history_preservation_packet": "../retained-portland-legal-work-20261127/restore.json",
   "root_working_authored_comparison": {
@@ -91,6 +109,33 @@
       "original": "/tmp/lift-coding-tmp-git-inventory-hJPsp5dx/single-commit-branch-review.json",
       "role": "local-git-inventory-observation",
       "sha256": "d1ead6624206f27d3d1abcf62adc3babb93db618fb3b57e0d32dfdd1372285d8"
+    },
+    "objective-publication.json": {
+      "bytes": 521,
+      "role": "actual local qualification or publication receipt",
+      "sha256": "03a77430ce83f9f6ae7ab5dc9381627f449101399920f69e8c45eb7eede25946"
+    },
+    "objective-tests/full-owning-module.xml.DATA": {
+      "bytes": 30055,
+      "original": "/tmp/accelerate-objective-output-owner-main-ybAvG5Rm/local-fully-hydrated/junit.xml",
+      "role": "closed normal local test result",
+      "sha256": "e62dfeac646c0a250bd105e95f4f286ae5718033e8c1132aaff6dd6a89a14dbd"
+    },
+    "objective-tests/junit.xml.DATA": {
+      "bytes": 1210,
+      "role": "actual local qualification or publication receipt",
+      "sha256": "cea1a52f373d7c73dc29259ad16418b81bb3555a5c30417ffc99c10ffe62e657"
+    },
+    "objective-tests/known-baseline-failure.xml.DATA": {
+      "bytes": 6419,
+      "role": "actual local qualification or publication receipt",
+      "sha256": "b6a08799d7899e6a4e88850e4df4d2f895981377e2454933f149ec6d105128c4"
+    },
+    "objective-tests/second-known-baseline-failure.xml.DATA": {
+      "bytes": 7095,
+      "original": "/tmp/accelerate-objective-output-owner-main-ybAvG5Rm/local-baseline-manual-review/junit.xml",
+      "role": "closed normal local test result",
+      "sha256": "05c428f0f2eb38d09106f3d6fbec0681f66aeb5e64857c13b40b103da746f3bc"
     },
     "parent-pin-publication.json": {
       "bytes": 420,

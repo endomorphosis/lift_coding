@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="1" time="14.943" timestamp="2026-11-27T05:04:45.365050+00:00" hostname="spark-b271"><testcase classname="api.test_agent_supervisor_objective_graph" name="test_objective_refill_reprojects_legacy_dscon_card_and_artifacts_in_place" time="0.371"><failure message="assert {PosixPath('/... }\n}\n', ...} == {PosixPath('/... }\n}\n', ...}&#10;  &#10;  Omitting 3 identical items, use -vv to show&#10;  Differing items:&#10;  {PosixPath('/tmp/accelerate-objective-output-owner-main-ybAvG5Rm/local-baseline-control/pytest/test_objective_refill_r...otnuq&quot;\n      }\n    }\n  },\n  &quot;task_count&quot;: 1,\n  &quot;task_header_prefix&quot;: &quot;## DSCON-&quot;,\n  &quot;todo_path&quot;: &quot;todo.md&quot;\n}\n'} != {PosixPath('/tmp/accelerate-objective-output-owner-main-ybAvG5Rm/local-baseline-control/pytest/test_objective_refill_r...otnuq&quot;\n      }\n    }\n  },\n  &quot;task_count&quot;: 1,\n  &quot;task_header_prefix&quot;: &quot;## DSCON-&quot;,\n  &quot;todo_path&quot;: &quot;todo.md&quot;\n}\n'}&#10;  {PosixPath('/tmp/accelerate-objec...&#10;  &#10;  ...Full output truncated (3743 lines hidden), use '-vv' to show">tmp_path = PosixPath('/tmp/accelerate-objective-output-owner-main-ybAvG5Rm/local-baseline-control/pytest/test_objective_refill_reprojec0')
+
+    def test_objective_refill_reprojects_legacy_dscon_card_and_artifacts_in_place(
+        tmp_path,
+    ):
+        seeded = _seed_legacy_dscon_evidence_output_card(tmp_path)
+        old_vector_bytes = seeded["vector_path"].read_bytes()
+        old_vector = json.loads(seeded["vector_path"].read_text(encoding="utf-8"))
+        old_vector_task = next(
+            item for item in old_vector["records"] if item["task_id"] == seeded["task_id"]
+        )
+    
+        refilled = generate_objective_todos(
+            repo_root=seeded["repo"],
+            objective_path=seeded["objective_path"],
+            todo_path=seeded["todo_path"],
+            discovery_dir=seeded["discovery_dir"],
+            bundle_dir=seeded["bundle_dir"],
+            task_prefix="DSCON-",
+            precomputed_findings=[seeded["finding"]],
+            persist_ast_dataset=False,
+            write_todo_vector_index=True,
+            discovery_output_path=("data/datasets_contract_analysis/agent_supervisor/discovery"),
+        )
+    
+        # Obligation dedupe still reports zero newly generated tasks.  The exact
+        # existing display ID is rotated under the generator's taskboard lock.
+        assert refilled == []
+        todo_text = seeded["todo_path"].read_text(encoding="utf-8")
+        assert todo_text.count(f"## {seeded['task_id']} ") == 1
+        assert "- Status: todo" in todo_text
+        assert "- Projection history: preserve this operator note" in todo_text
+        assert f"- Evidence outputs: {', '.join(seeded['manifests'])}" in todo_text
+        assert seeded["current_identity"].canonical_task_key in todo_text
+        assert seeded["current_identity"].canonical_task_cid in todo_text
+        assert seeded["legacy_identity"].canonical_task_cid not in todo_text
+    
+        discovery_text = seeded["discovery_path"].read_text(encoding="utf-8")
+        assert f"Evidence outputs: {', '.join(seeded['manifests'])}" in discovery_text
+        assert f"Canonical task CID: {seeded['current_identity'].canonical_task_cid}" in discovery_text
+        shard_text = seeded["shard_path"].read_text(encoding="utf-8")
+        assert "- Projection history: preserve this operator note" in shard_text
+        assert f"- Evidence outputs: {', '.join(seeded['manifests'])}" in shard_text
+    
+        bundle_index = json.loads((seeded["bundle_dir"] / "index.json").read_text(encoding="utf-8"))
+        indexed_task = bundle_index["bundles"]["datasets-contract/bootstrap"]["tasks"][0]
+        assert indexed_task["task_id"] == seeded["task_id"]
+        assert indexed_task["canonical_task_cid"] == seeded["current_identity"].canonical_task_cid
+        assert indexed_task["evidence_outputs"] == sorted(seeded["manifests"])
+    
+        new_vector = json.loads(seeded["vector_path"].read_text(encoding="utf-8"))
+        new_vector_task = next(
+            item for item in new_vector["records"] if item["task_id"] == seeded["task_id"]
+        )
+        assert seeded["vector_path"].read_bytes() != old_vector_bytes
+        assert new_vector_task["task_id"] == old_vector_task["task_id"]
+    
+        generated_artifacts = {
+            path: path.read_bytes()
+            for path in (
+                seeded["todo_path"],
+                seeded["discovery_path"],
+                seeded["shard_path"],
+                seeded["bundle_dir"] / "index.json",
+                seeded["vector_path"],
+            )
+        }
+        repeated = generate_objective_todos(
+            repo_root=seeded["repo"],
+            objective_path=seeded["objective_path"],
+            todo_path=seeded["todo_path"],
+            discovery_dir=seeded["discovery_dir"],
+            bundle_dir=seeded["bundle_dir"],
+            task_prefix="DSCON-",
+            precomputed_findings=[seeded["finding"]],
+            persist_ast_dataset=False,
+            write_todo_vector_index=True,
+            discovery_output_path=("data/datasets_contract_analysis/agent_supervisor/discovery"),
+        )
+        assert repeated == []
+&gt;       assert {path: path.read_bytes() for path in generated_artifacts} == generated_artifacts
+E       assert {PosixPath('/... }\n}\n', ...} == {PosixPath('/... }\n}\n', ...}
+E         
+E         Omitting 3 identical items, use -vv to show
+E         Differing items:
+E         {PosixPath('/tmp/accelerate-objective-output-owner-main-ybAvG5Rm/local-baseline-control/pytest/test_objective_refill_r...otnuq"\n      }\n    }\n  },\n  "task_count": 1,\n  "task_header_prefix": "## DSCON-",\n  "todo_path": "todo.md"\n}\n'} != {PosixPath('/tmp/accelerate-objective-output-owner-main-ybAvG5Rm/local-baseline-control/pytest/test_objective_refill_r...otnuq"\n      }\n    }\n  },\n  "task_count": 1,\n  "task_header_prefix": "## DSCON-",\n  "todo_path": "todo.md"\n}\n'}
+E         {PosixPath('/tmp/accelerate-objec...
+E         
+E         ...Full output truncated (3743 lines hidden), use '-vv' to show
+
+test/api/test_agent_supervisor_objective_graph.py:3361: AssertionError</failure></testcase></testsuite></testsuites>
