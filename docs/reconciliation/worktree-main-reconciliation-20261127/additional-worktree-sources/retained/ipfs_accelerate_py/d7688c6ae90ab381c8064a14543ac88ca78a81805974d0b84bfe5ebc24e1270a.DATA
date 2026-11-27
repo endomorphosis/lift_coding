@@ -1,0 +1,163 @@
+"""Pure metadata and real private process tests; no native owner/claim doubles."""
+import hashlib
+import importlib.util
+from pathlib import Path
+import subprocess
+import sys
+
+import pytest
+
+SOURCE = Path('/home/barberb/lift_coding/artifacts/legal-ir-supervisor-recovery-20261018-03/private-M1-independent-acceptance-source-v3')
+
+
+def _load(name, relative, digest):
+    path=SOURCE/relative
+    assert hashlib.sha256(path.read_bytes()).hexdigest()==digest
+    spec=importlib.util.spec_from_file_location(name,path)
+    module=importlib.util.module_from_spec(spec)
+    sys.modules[name]=module
+    spec.loader.exec_module(module)
+    assert hashlib.sha256(path.read_bytes()).hexdigest()==digest
+    return module
+
+
+check=_load('private_M1_actual_independent_checker','check_offline_m1.py','9aa04b1628b6886566fefb2d62484a254f05d80b1f4312071f763f087eb051af')
+lifecycle=_load('private_M1_actual_finite_lifecycle','run_m1_lifecycle.py','bf787b15d9ce50559679a1960d0c04bf8c9d7505e788e9a9382f6d9be671e4b2')
+
+
+def inert_rows():
+    # Inert additive query fixtures only. No real attempt, claim, lease,
+    # resource, owner or server object is constructed or alleged here.
+    context=dict(database_attempt_id='inert-attempt',database_claim_id='inert-claim',
+        database_task_cid='inert-task',database_attempt_number=1,owner_session_id='inert-owner',
+        fencing_token=4,fence_epoch=2)
+    row=dict(attempt_id='inert-attempt',claim_id='inert-claim',task_cid='inert-task',attempt_number=1,
+        owner_session_id='inert-owner',fencing_token=4,fence_epoch=2,committed_phase='context',
+        status='running',finished_at_ms=None)
+    provider=dict(attempt_id='inert-attempt',task_cid='inert-task',idempotency_key='provider:inert-attempt',
+        owner_session_id='inert-owner',result=dict(schema='database-portal-callback-intent@1',
+        callback_state='started_outcome_unknown',provider_effect_state='unknown_may_have_started'))
+    return dict(rows=[row],provider_rows=[provider],effect_count=0,complete_phase_count=0,context=context)
+
+
+def test_running_unknown_metadata_stays_unsettled_and_unqualified():
+    result=check.classify_native_attempt(**inert_rows())
+    assert result['actual_native_attempt_count']==1
+    assert result['actual_native_attempt_status']=='running'
+    assert result['actual_callback_state']=='started_outcome_unknown'
+    assert result['task_qualification_passed'] is False and result['unsettled_claim_must_remain'] is True
+    assert result['offline_ACK_is_settlement'] is False and result['completion_authority'] is False
+
+
+def test_terminal_failed_row_alone_cannot_establish_eligible_settlement():
+    value=inert_rows()
+    value['rows'][0].update(status='failed',finished_at_ms=1000)
+    value['provider_rows'][0]['result']={'schema':'inert-observation-only'}
+    result=check.classify_native_attempt(**value)
+    assert result['actual_native_terminal_failed_row_observed'] is True
+    assert result['native_terminal_settlement_independently_verified'] is False
+    assert result['task_qualification_passed'] is False and result['unsettled_claim_must_remain'] is True
+
+
+@pytest.mark.parametrize('mutation',['missing','second','bool_attempt','bool_fence','completed','effect','phase','wrong_invocation'])
+def test_tampered_inert_attempt_or_completion_metadata_refuses(mutation):
+    value=inert_rows()
+    if mutation=='missing':value['rows']=[]
+    elif mutation=='second':value['rows'].append(dict(value['rows'][0]))
+    elif mutation=='bool_attempt':value['rows'][0]['attempt_number']=True
+    elif mutation=='bool_fence':value['rows'][0]['fence_epoch']=True
+    elif mutation=='completed':value['rows'][0]['status']='succeeded'
+    elif mutation=='effect':value['effect_count']=1
+    elif mutation=='phase':value['complete_phase_count']=1
+    else:value['provider_rows'][0]['attempt_id']='different-attempt'
+    with pytest.raises(check.OfflineM1CheckFailed):
+        check.classify_native_attempt(**value)
+
+
+def test_passive_wait_and_STOP_cutoffs_remain_on_original_clocks():
+    original=dict(work=1000.0,child_native=1060.0,parent_native=1120.0,stop_timeout_ms=30000)
+    first=lifecycle.original_cutoffs(**original)
+    assert first==dict(close_cutoff=1075.0,stop_cutoff=1085.0)
+    # Re-observation cannot manufacture a fresh lifetime from time elapsed.
+    assert lifecycle.original_cutoffs(**original)==first
+
+
+@pytest.mark.parametrize('updates',[{'work':True},{'parent_native':float('inf')},{'parent_native':1121.0},{'stop_timeout_ms':30000.0}])
+def test_invalid_or_untyped_original_clocks_are_refused(updates):
+    value=dict(work=1000.0,child_native=1060.0,parent_native=1120.0,stop_timeout_ms=30000)
+    value.update(updates)
+    with pytest.raises(RuntimeError,match='original_work_child_parent_STOP_clocks_required'):
+        lifecycle.original_cutoffs(**value)
+
+
+def test_actual_process_group_absence_requires_real_child_exit_and_wait():
+    process=subprocess.Popen([sys.executable,'-I','-B','-c','import sys;sys.stdin.buffer.read(1)'],
+        stdin=subprocess.PIPE,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True)
+    try:
+        assert lifecycle._group_absent(check,process.pid) is False
+        process.communicate(input=b'x',timeout=3.0)
+        assert process.returncode==0
+        assert lifecycle._group_absent(check,process.pid) is True
+    finally:
+        if process.poll() is None:
+            process.kill()
+        process.wait(timeout=3.0)
+
+
+@pytest.fixture
+def task_admission_metadata():
+    # Inert metadata only, never a native claim or process capability.
+    process=dict(schema='process-schema',client_id='inert-client',process_birth_id='inert-birth',
+        pid=31,uid=1000,start_time_ticks=22,boot_id='inert-boot',parent_pid=30)
+    route=dict(schema='route-schema',policy_id='inert-policy',plan_root_cid='inert-plan',
+        repository_tree_id='inert-tree',source_revision=1,task_cid='inert-task',task_alias='inert-alias',
+        task_revision=4,task_contract_cid='inert-contract',execution_mode='implementation')
+    context=dict(database_claim_id='inert-claim',database_attempt_id='inert-attempt',
+        coordination_lease_id='inert-lease',database_attempt_number=1,owner_session_id='inert-owner',
+        fencing_token=7,fence_epoch=3)
+    before=dict(task_cid='inert-task',task_alias='inert-alias',goal_cid='inert-goal',revision=4,
+        status='ready',updated_at='before',body=dict(text='unchanged',number=1))
+    receipt=dict(operation='database_attempt_admitted',claim_id='inert-claim',attempt_id='inert-attempt',
+        lease_id='inert-lease',attempt_number=1,owner_session_id='inert-owner',fencing_token=7,fence_epoch=3,
+        claimed_from_revision=4,task_prefix='',task_shard_count=1,task_shard_index=0,strict_task_sharding=False,
+        idle_lane_work_stealing='',claim_phase_schema='admission-schema',
+        claim_process_attestation=dict(process,grant_id='inert-grant'),execution_route_binding=dict(route),
+        execution_route_policy_id='inert-policy',execution_route_origin_revision=4,
+        admitted_from_revision=5,attempt_execution_phase='claimed',attempt_execution_revision=1)
+    after=dict(before,revision=6,status='in_progress',updated_at='after',body=dict(before['body'],completion_receipt=receipt))
+    return dict(before=before,after=after,context=context,expected_route=route,expected_process=process,
+        admission_schema='admission-schema',process_schema='process-schema')
+
+
+def test_only_source_defined_receipt_transition_is_observation_not_settlement(task_admission_metadata):
+    result=check.validate_private_task_admission(**task_admission_metadata)
+    assert result['only_receipt_changed'] is True and result['actual_claim_and_admission_revisions_joined'] is True
+    assert result['grant_id_independently_verified'] is False and result['claim_granted'] is False
+    assert result['settlement_verified'] is False and result['task_completion_accepted'] is False
+
+
+@pytest.mark.parametrize('mutation',['body_text','body_bool','body_extra','identity','revision','revision_bool',
+    'status','receipt_extra','receipt_missing','claim','fence_bool','attempt_bool','route','route_origin',
+    'process_birth','process_extra','sharding','execution_phase','prior_receipt'])
+def test_receipt_transition_rejects_unrelated_or_unjoined_metadata(task_admission_metadata,mutation):
+    value=task_admission_metadata;before=value['before'];after=value['after'];receipt=after['body']['completion_receipt']
+    if mutation=='body_text':after['body']['text']='changed'
+    elif mutation=='body_bool':after['body']['number']=True
+    elif mutation=='body_extra':after['body']['other']='unexpected'
+    elif mutation=='identity':after['goal_cid']='other'
+    elif mutation=='revision':after['revision']=7
+    elif mutation=='revision_bool':after['revision']=True
+    elif mutation=='status':after['status']='completed'
+    elif mutation=='receipt_extra':receipt['other']='unexpected'
+    elif mutation=='receipt_missing':receipt.pop('claim_id')
+    elif mutation=='claim':receipt['claim_id']='other'
+    elif mutation=='fence_bool':receipt['fence_epoch']=True
+    elif mutation=='attempt_bool':receipt['attempt_number']=True
+    elif mutation=='route':receipt['execution_route_binding']['task_contract_cid']='other'
+    elif mutation=='route_origin':receipt['execution_route_origin_revision']=5
+    elif mutation=='process_birth':receipt['claim_process_attestation']['process_birth_id']='other'
+    elif mutation=='process_extra':receipt['claim_process_attestation']['other']='unexpected'
+    elif mutation=='sharding':receipt['strict_task_sharding']=True
+    elif mutation=='execution_phase':receipt['attempt_execution_phase']='provider'
+    else:before['body']['completion_receipt']={}
+    with pytest.raises(check.OfflineM1CheckFailed):check.validate_private_task_admission(**value)

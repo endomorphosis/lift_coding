@@ -1,0 +1,276 @@
+"""Pure checkpoint controls plus actual private file/clock/process boundaries.
+
+No owner/client/resource/capability substitute, initializer, manager, DB,
+provider, native UUID, capture row or FIRST is created. Actual acceptance code
+requires genuine runtime/source/claim/worker and custody observations separately.
+"""
+import copy
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+import time
+
+import pytest
+
+SOURCE=Path('/home/barberb/lift_coding/artifacts/legal-ir-supervisor-recovery-20261019-01/genuine-private-M2-acceptance-source-v1/check_m2_initializer.py')
+EXPECTED_SOURCE='d8edb4ad3e656d146f391a37f71a04b252cd6c4906a06f78c97d66b080823a5b'
+assert hashlib.sha256(SOURCE.read_bytes()).hexdigest()==EXPECTED_SOURCE
+spec=importlib.util.spec_from_file_location('genuine_private_M2_initializer_acceptance_metadata',SOURCE)
+check=importlib.util.module_from_spec(spec);sys.modules[spec.name]=check;spec.loader.exec_module(check)
+assert hashlib.sha256(SOURCE.read_bytes()).hexdigest()==EXPECTED_SOURCE
+
+def _pin(path, value):
+    raw=check.canonical(value)
+    return dict(path=str(path),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+
+@pytest.fixture
+def private_metadata(tmp_path):
+    root=Path('/inert/normal-source');directory=tmp_path/'receipts';directory.mkdir(mode=0o700)
+    now=time.monotonic();work=now+30;native=work+60
+    sources={str(root/relative):hashlib.sha256(relative.encode()).hexdigest() for relative in check.PRIVATE_PROFILE_PATHS}
+    profile=dict(schema='fresh-task-grok-capture-source-profile/v1',source_generation='grok-automatic-named-session/inert-private',sources=sources)
+    named=dict(native_home='/inert/native-home',audit_directory='/inert/audit',preparation_home='/inert/preparation',
+        binary=dict(path='/inert/grok',bytes=1,sha256='1'*64),configuration=dict(path='/inert/config',bytes=1,sha256='2'*64),
+        owner_sampling_policy=dict(path='/inert/policy',bytes=1,sha256='3'*64),system_requirements=None,
+        cleanup_reserve_seconds=5,bootstrap_max_seconds=10)
+    capsule=dict(schema='legal-ir-grok-planning-transport-capsule/v4',source_generation=profile['source_generation'],
+        files={role:dict(path=str(root/relative),bytes=1,sha256=sources[str(root/relative)]) for role,relative in check.PRIVATE_CAPSULE_ROLES.items()},named_session=named)
+    nonce='4'*32;fingerprint=hashlib.sha256(('INVALID_PRIVATE_LOOPBACK_FIXTURE_ONLY_'+nonce).encode()).hexdigest()[:16]
+    context=dict(schema='grok-production-owner-context/v1',database_task_cid='inert-new-task',database_attempt_id='inert-attempt',
+        database_claim_id='inert-claim',database_attempt_number=1,coordination_lease_id='inert-coordination',owner_session_id='inert-owner',
+        fencing_token=1,fence_epoch=1,portal_task_id='inert-alias',portal_task_revision_cid='inert-revision',portal_attempt=1,
+        native_attempt_id='inert-attempt',allocation_session_id='inert-allocation',credential_slot='private-offline-inert',
+        credential_fingerprint=fingerprint,allocation_store_path=str(directory/'allocation.duckdb'),workspace='/inert/workspace',
+        source_generation=profile['source_generation'],source_bindings_sha256=check.digest(profile),capsule_sha256=check.digest(capsule),
+        worker_source_sha256=capsule['files']['worker']['sha256'],owner_source_sha256=capsule['files']['owner_source']['sha256'],
+        work_deadline_monotonic=work,native_deadline_monotonic=native,root_lease_id='inert-root',phase_lease_id='inert-phase',
+        disk_native_lease_id='inert-native-disk',disk_reservation_id='inert-disk',owner_pid=10,owner_birth=20,worker_pid=30,
+        worker_birth=40,worker_process_group=30,endpoint='/inert/socket',socket=dict(device=1,inode=2,mode=0o140600,uid=0,gid=0,nlink=1),nonce='5'*48)
+    context['request_sha256']=check.digest(dict(schema=context['schema'],**{key:context[key] for key in check.PRIVATE_PRELAUNCH_FIELDS}))
+    context['context_sha256']=check.digest(context)
+    request=dict(schema=check.PRIVATE_SCHEMA,mode='fresh-task-capture-diagnostic',one_shot=True,attempt_cap=1,
+        provider_dispatch_allowed=True,execution_environment='isolated-loopback',accelerator_root=str(root),workspace='/inert/workspace',
+        receipt_directory=str(directory),task_alias=context['portal_task_id'],task_cid=context['database_task_cid'],
+        database_attempt_id=context['database_attempt_id'],database_attempt_number=1,allocation_session_id=context['allocation_session_id'],
+        source_generation=profile['source_generation'],work_deadline_monotonic=work,native_deadline_monotonic=native,
+        owner_pid=10,owner_birth=20,owner_request_sha256=context['request_sha256'],context_path=str(directory/'owner-context.json'),
+        capsule_pin=_pin(directory/'capsule.json',capsule),source_profile_pin=_pin(directory/'profile.json',profile),max_output_tokens=64,maximum_timeout_seconds=20)
+    fixture=dict(schema=check.PRIVATE_FIXTURE_SCHEMA,execution_environment='isolated-loopback',paid_provider_calls_allowed=False,
+        task_cid=request['task_cid'],task_alias=request['task_alias'],database_attempt_id=request['database_attempt_id'],database_attempt_number=1,
+        allocation_session_id=request['allocation_session_id'],source_generation=request['source_generation'],owner_request_sha256=request['owner_request_sha256'],
+        source_profile_sha256=check.digest(profile),capsule_sha256=check.digest(capsule),credential_slot=context['credential_slot'],credential_fingerprint=fingerprint,
+        fake_nonce=nonce,receipt_directory=str(directory),work_deadline_monotonic=work,native_deadline_monotonic=native,network_namespace=dict(device=4,inode=10),
+        network_witness_policy=dict(schema='private-owned-rootless-network-policy/v1',witness_kind='own-net-owned-user-restricted-maps/v1',expected_uid_map=[[0,1000,1],[1,100000,65536]],expected_gid_map=[[0,1000,1],[1,100000,65536]]),
+        private_duckdb_quiescence_policy=dict(schema='private-owned-DuckDB-public-close-policy/v1',operation='duckdb.close',maximum_observation_milliseconds=200))
+    request['fake_credential_fixture_pin']=_pin(directory/'private-fake-credential-fixture.json',fixture)
+    return dict(request=request,context=context,fixture=fixture,source_profile=profile,capsule=capsule)
+
+def _preparation_metadata(data):
+    """Inert observations only; no fake client, store or accepted capture row."""
+    q=data['request'];c=data['context'];f=data['fixture'];start=q['work_deadline_monotonic']-20
+    network=dict(schema='private-owned-rootless-network-observation/v1',network_namespace=f['network_namespace'],
+        user_namespace=dict(device=4,inode=11),network_owner_user_namespace=dict(device=4,inode=11),
+        uid_map=f['network_witness_policy']['expected_uid_map'],gid_map=f['network_witness_policy']['expected_gid_map'],
+        uid_map_sha256='1'*64,gid_map_sha256='2'*64,interfaces=[[1,'lo']],IPv4_routes_sha256='3'*64,IPv6_routes_sha256='4'*64,
+        own_NET_owned_by_noninitial_self_USER=True,only_loopback_and_no_external_routes_observed=True,
+        metadata_only=True,sealed_policy_authenticated=False,policy_binding_required=True,arbitrary_outer_freshness_proved=False,
+        helper_initializer_called=False,provider_called=False,native_qualified=False,production_qualified=False,Lean_admitted=False,
+        owned_namespace_descriptors_closed=True)
+    def quiet(phase,offset):
+        moment=start+offset
+        samples=[dict(stage=stage,observed_monotonic=moment+delta,python_thread_count=1,native_thread_ids=[30],
+            native_thread_count=1,main_python_thread=True,atomic=False) for stage,delta in
+            [('before_public_close',-.001),('after_public_close',.002),('observation_25ms',.027),
+             ('observation_50ms',.052),('observation_100ms',.102),('observation_200ms',.202)]]
+        return dict(schema='private-DuckDB-public-quiescence/v1',phase=phase,public_API='duckdb.close',arguments_count=0,
+            call_started_monotonic=moment,call_returned_monotonic=moment+.001,returned_None=True,samples=samples,
+            actual_single_thread_gate_passed=True,observations_are_not_continuous=True,qualification_granted=False,
+            explicit_default_connection_API_called=False,implicit_default_connection_creation='UNKNOWN',native_thread_cause_attributed=False,
+            dependency_closure_pin=dict(path=str(Path(q['receipt_directory'])/'private-fake-duckdb-closure.json'),bytes=15157,
+                sha256='00e462ea48071e91f6312fac75e35601ab5530233183f3da11de2542603c3f29'),
+            verified_dependency_root=str(Path(q['receipt_directory'])/'private-fake-duckdb'),dependency_file_count=48,
+            dependency_total_bytes=55017948,distribution_version='1.5.5',engine_version='1.5.5',
+            work_deadline_monotonic=q['work_deadline_monotonic'],native_deadline_monotonic=q['native_deadline_monotonic'])
+    value=dict(schema='private-fake-credential-installation-observation/v2',metadata_only=True,
+        actual_same_process_private_manager=True,credential_slot=f['credential_slot'],credential_fingerprint=f['credential_fingerprint'],
+        fake_only=True,real_credentials_used=False,ambient_credentials_read=False,provider_called=False,provider_dispatch_granted=False,
+        singleton_reset=False,task_completion_accepted=False,native_qualified=False,production_qualified=False,Lean_admitted=False,
+        fixture_pin=q['fake_credential_fixture_pin'],owner_request_sha256=c['request_sha256'],sealed_worker_request_sha256=check.digest(q),
+        network_policy_binding_verified=True,network_observations=[copy.deepcopy(network) for _ in range(4)],
+        public_duckdb_quiescence=[quiet('before_initialization',.3),quiet('after_strict_readback',1.3)],
+        work_deadline_monotonic=q['work_deadline_monotonic'],native_deadline_monotonic=q['native_deadline_monotonic'],
+        same_owner_client=True,same_store=True,early_network_observation=copy.deepcopy(network),
+        store_readiness=dict(allocation_store_path=c['allocation_store_path'],row={},observed_monotonic=start+.2),
+        actual_readonly_capture_table_counts=dict(cli_sessions=0,cli_session_aliases=0),
+        public_empty_capture_read_is_absence_proof=False,no_capture_rows_seeded=True,
+        preparation_started_monotonic=start,preparation_completed_monotonic=start+2,
+        owner_rpc_receipt_count_before_preparation=1,owner_rpc_receipt_count_after_preparation=3)
+    clients=[];owners=[]
+    claim=('database_task_cid','database_attempt_id','database_claim_id','database_attempt_number',
+        'coordination_lease_id','owner_session_id','fencing_token','fence_epoch')
+    resources=('root_lease_id','phase_lease_id','disk_native_lease_id','disk_reservation_id')
+    for sequence,(stage,offset) in enumerate([('request_prepared',-.2),('remaining_deadline',.1),('remaining_deadline',1),
+                                             ('worker_v4_dispatch',2.15),('worker_v4_response',2.3)],1):
+        response=dict(schema='grok-production-owner-currentness/v1',status='current',sequence=sequence,stage=stage,
+            **{key:c[key] for key in ('request_sha256','context_sha256','nonce','owner_pid','owner_birth','worker_pid',
+                'worker_birth','worker_process_group','work_deadline_monotonic','native_deadline_monotonic')},
+            observed_monotonic=start+offset)
+        shared=dict(sequence=sequence,stage=stage,request_sha256=c['request_sha256'],context_sha256=c['context_sha256'],
+            response_sha256=check.digest(response),client_pid=c['worker_pid'],client_birth=c['worker_birth'],
+            owner_pid=c['owner_pid'],owner_birth=c['owner_birth'],observed_monotonic=start+offset)
+        clients.append(dict(shared,client_process_group=c['worker_process_group'],received_monotonic=start+offset+.005,
+            actual_kernel_peer_owner_verified=True,observation_is_not_native_authority=True))
+        owners.append(dict(shared,claim_binding={key:c[key] for key in claim},resource_binding={key:c[key] for key in resources},
+            source_bindings_sha256=c['source_bindings_sha256']))
+    return dict(transport=dict(private_fake_credentials=value,stdin_read_started_monotonic=start+2.1,
+                dispatch_monotonic=start+2.2,owner_rpc_receipts=clients),owner_rows=owners)
+
+def _response(context,sequence,stage,observed):
+    return dict(schema='grok-production-owner-currentness/v1',status='current',sequence=sequence,stage=stage,
+        **{key:context[key]for key in ('request_sha256','context_sha256','nonce','owner_pid','owner_birth',
+            'worker_pid','worker_birth','worker_process_group','work_deadline_monotonic','native_deadline_monotonic')},
+        observed_monotonic=observed)
+
+
+@pytest.fixture
+def checkpoint_metadata(private_metadata):
+    data=copy.deepcopy(private_metadata);observation=_preparation_metadata(data);q=data['request'];c=data['context'];t=observation['transport']
+    value=t['private_fake_credentials'];start=value['preparation_started_monotonic']
+    secret=Path(q['receipt_directory'])/'private-fake-secrets.json';secret.write_bytes(b'{}\n');secret.chmod(0o600)
+    def fstat():
+        row=secret.lstat();return dict(device=row.st_dev,inode=row.st_ino,uid=row.st_uid,mode=stat.S_IMODE(row.st_mode),nlink=row.st_nlink,bytes=row.st_size)
+    initial=fstat();fake='INVALID_PRIVATE_LOOPBACK_FIXTURE_ONLY_'+data['fixture']['fake_nonce']
+    secret.write_bytes(check.canonical({'api_key/grok_cli/'+c['credential_slot']:fake}))
+    value['fake_persistence']=dict(schema='private-fake-secret-persistence-observation/v1',path=str(secret),
+        initial_fstat=initial,final_fstat=fstat(),final_pin=dict(path=str(secret),bytes=secret.stat().st_size,
+            sha256=hashlib.sha256(secret.read_bytes()).hexdigest()),observed_monotonic=start+1.1)
+    argv=['/usr/bin/python3','-B',str(Path(q['accelerator_root'])/'ipfs_accelerate_py/cli_runtime/grok_fresh_task_capture_worker.py'),
+        '--transport-capsule',q['capsule_pin']['path'],'--transport-capsule-sha256',q['capsule_pin']['sha256'],
+        '--private-m2-capture-handshake','--private-m2-request-fd','7','--private-m2-request-sha256',check.digest(q),
+        '--owner-context',q['context_path'],'--owner-request-sha256',q['owner_request_sha256'],
+        '--owner-allocation-session-id',q['allocation_session_id']]
+    checkpoint=dict(schema=check.CHECKPOINT_SCHEMA,worker_request=q,sealed_worker_request_sha256=check.digest(q),
+        fake_credential_fixture_pin=q['fake_credential_fixture_pin'],owner_request_sha256=q['owner_request_sha256'],
+        context_pin=_pin(q['context_path'],c),source_profile_pin=q['source_profile_pin'],capsule_pin=q['capsule_pin'],
+        source_generation=q['source_generation'],task_alias=q['task_alias'],task_cid=q['task_cid'],
+        database_attempt_id=q['database_attempt_id'],database_attempt_number=q['database_attempt_number'],
+        allocation_session_id=q['allocation_session_id'],worker_identity=dict(pid=c['worker_pid'],parent_pid=c['owner_pid'],
+            group_pid=c['worker_process_group'],birth=c['worker_birth']),worker_argv=argv,allocation_store_path=c['allocation_store_path'],
+        original_work_deadline_monotonic=q['work_deadline_monotonic'],original_native_deadline_monotonic=q['native_deadline_monotonic'],
+        private_fake_credentials=value,owner_rpc_receipts=t['owner_rpc_receipts'][:3],checkpoint_started_monotonic=start+2.01,
+        checkpoint_observed_monotonic=start+2.02,metadata_only=True,execution_environment='isolated-loopback',
+        checkpoint_contains_post_write_observation=False,**{key:False for key in check.CHECKPOINT_FALSE_FIELDS})
+    owners=observation['owner_rows'][:3]
+    # Actual source sends its final preparation ACK after both close/thread
+    # phases; retain that ordering in this inert, non-authority packet.
+    last=checkpoint['owner_rpc_receipts'][-1];last['observed_monotonic']=start+1.8;last['received_monotonic']=start+1.805
+    owners[-1]['observed_monotonic']=start+1.8
+    last['response_sha256']=owners[-1]['response_sha256']=check.digest(_response(c,3,'remaining_deadline',start+1.8))
+    for sequence,observed in ((4,start+2.015),(5,start+2.03)):
+        row=copy.deepcopy(owners[-1]);row.update(sequence=sequence,stage='remaining_deadline',observed_monotonic=observed,
+            response_sha256=check.digest(_response(c,sequence,'remaining_deadline',observed)));owners.append(row)
+    return dict(checkpoint=checkpoint,context=c,owner_rows=owners,fixture=data['fixture'],source_profile=data['source_profile'],capsule=data['capsule'])
+
+
+def _prefix(data):
+    copied=dict(data);N=len(data['checkpoint']['owner_rpc_receipts']);copied['owner_rows']=data['owner_rows'][:N]
+    return copied
+
+
+def test_checkpoint_real_preparation_prefix_has_no_future_native_or_task_authority(checkpoint_metadata):
+    result=check.validate_checkpoint_metadata(**_prefix(checkpoint_metadata))
+    emission=check.validate_emission_custody_ACKs(checkpoint=checkpoint_metadata['checkpoint'],owner_rows=checkpoint_metadata['owner_rows'])
+    assert result['actual_prefix_ACK_count']==3 and result['checkpoint_metadata_verified']is True
+    assert result['initializer_qualified']is result['native_qualified']is result['task_completion_accepted']is False
+    assert emission['actual_owner_observed_postdurability_currentness']is True
+    assert emission['suffix_received_client_ACKs_proved']is emission['qualification_granted']is False
+
+
+@pytest.mark.parametrize('mutation',[
+    'schema','extra_future_stdin','postwrite_claim','S','F','R','context_pin','task','attempt_bool','worker_birth','worker_argv',
+    'argv_S','original_clock','owner_claim','owner_fence','owner_resource','owner_source','owner_digest','stale_ACK','duplicate_sequence',
+    'fake_future_response','after_count','network_route','quiescence_native2','quiescence_wrongPID',
+    'persistence_inode','persistence_mode','persistence_initial_size','persistence_extra','checkpoint_late'])
+def test_checkpoint_tampering_or_future_evidence_refuses(checkpoint_metadata,mutation):
+    data=copy.deepcopy(checkpoint_metadata);cp=data['checkpoint'];v=cp['private_fake_credentials'];rows=data['owner_rows']
+    if mutation=='schema':cp['schema']='unsealed-other'
+    elif mutation=='extra_future_stdin':cp['stdin_read_started_monotonic']=cp['checkpoint_observed_monotonic']
+    elif mutation=='postwrite_claim':cp['checkpoint_contains_post_write_observation']=True
+    elif mutation=='S':cp['sealed_worker_request_sha256']='0'*64
+    elif mutation=='F':cp['fake_credential_fixture_pin']=dict(cp['fake_credential_fixture_pin'],sha256='0'*64)
+    elif mutation=='R':cp['owner_request_sha256']='0'*64
+    elif mutation=='context_pin':cp['context_pin']=dict(cp['context_pin'],sha256='0'*64)
+    elif mutation=='task':cp['task_cid']='other'
+    elif mutation=='attempt_bool':cp['database_attempt_number']=True
+    elif mutation=='worker_birth':cp['worker_identity']['birth']+=1
+    elif mutation=='worker_argv':cp['worker_argv'][2]='/other/worker.py'
+    elif mutation=='argv_S':cp['worker_argv'][11]='0'*64
+    elif mutation=='original_clock':cp['original_work_deadline_monotonic']+=1
+    elif mutation=='owner_claim':rows[1]['claim_binding']['database_claim_id']='other'
+    elif mutation=='owner_fence':rows[1]['claim_binding']['fencing_token']+=1
+    elif mutation=='owner_resource':rows[1]['resource_binding']['root_lease_id']='other'
+    elif mutation=='owner_source':rows[1]['source_bindings_sha256']='0'*64
+    elif mutation=='owner_digest':rows[1]['response_sha256']=cp['owner_rpc_receipts'][1]['response_sha256']='0'*64
+    elif mutation=='stale_ACK':cp['owner_rpc_receipts'][1]['received_monotonic']=rows[1]['observed_monotonic']+1
+    elif mutation=='duplicate_sequence':cp['owner_rpc_receipts'][2]['sequence']=2
+    elif mutation=='fake_future_response':cp['owner_rpc_receipts'][-1]['stage']=rows[2]['stage']='worker_v4_response'
+    elif mutation=='after_count':v['owner_rpc_receipt_count_after_preparation']-=1
+    elif mutation=='network_route':v['network_observations'][0]['IPv4_routes_sha256']='0'*64
+    elif mutation=='quiescence_native2':
+        sample=v['public_duckdb_quiescence'][-1]['samples'][-1];sample['native_thread_ids'].append(31);sample['native_thread_count']=2
+    elif mutation=='quiescence_wrongPID':v['public_duckdb_quiescence'][-1]['samples'][-1]['native_thread_ids']=[31]
+    elif mutation=='persistence_inode':v['fake_persistence']['final_fstat']['inode']+=1
+    elif mutation=='persistence_mode':v['fake_persistence']['final_fstat']['mode']=0o644
+    elif mutation=='persistence_initial_size':v['fake_persistence']['initial_fstat']['bytes']=4
+    elif mutation=='persistence_extra':v['fake_persistence']['raw_fake_value']='forbidden'
+    elif mutation=='checkpoint_late':cp['checkpoint_observed_monotonic']=cp['original_work_deadline_monotonic']-2
+    with pytest.raises(check.InitializerM2CheckFailed):check.validate_checkpoint_metadata(**_prefix(data))
+
+
+@pytest.mark.parametrize('mutation',['no_postwrite_ACK','wrong_stage','wrong_sequence','prewrite_after_record','postwrite_before_record','late_postwrite'])
+def test_durable_emission_cannot_be_inferred_from_partial_or_late_checkpoint(checkpoint_metadata,mutation):
+    data=copy.deepcopy(checkpoint_metadata);cp=data['checkpoint'];rows=data['owner_rows']
+    if mutation=='no_postwrite_ACK':rows.pop()
+    elif mutation=='wrong_stage':rows[-1]['stage']='headless_start'
+    elif mutation=='wrong_sequence':rows[-1]['sequence']=4
+    elif mutation=='prewrite_after_record':rows[-2]['observed_monotonic']=cp['checkpoint_observed_monotonic']+.001
+    elif mutation=='postwrite_before_record':rows[-1]['observed_monotonic']=cp['checkpoint_observed_monotonic']-.001
+    elif mutation=='late_postwrite':rows[-1]['observed_monotonic']=cp['original_work_deadline_monotonic']-2
+    with pytest.raises(check.InitializerM2CheckFailed):check.validate_emission_custody_ACKs(checkpoint=cp,owner_rows=rows)
+
+
+def test_actual_owned_private_file_reader_refuses_mode_change_and_preserves_bytes(tmp_path):
+    path=tmp_path/'evidence.json';path.write_bytes(b'{}\n');path.chmod(0o600)
+    assert check._private_evidence(path,16)==b'{}\n'
+    path.chmod(0o644)
+    with pytest.raises(check.InitializerM2CheckFailed):check._private_evidence(path,16)
+
+
+@pytest.mark.parametrize('population',[3,5,9])
+def test_checkpoint_prefix_population_is_actual_variable_not_M1_fixed_three(checkpoint_metadata,population):
+    data=copy.deepcopy(checkpoint_metadata);cp=data['checkpoint'];c=data['context']
+    start=cp['private_fake_credentials']['preparation_started_monotonic'];clients=[];owners=[]
+    for sequence in range(1,population+1):
+        stage='request_prepared'if sequence==1 else'remaining_deadline'
+        observed=start-.2 if sequence==1 else start+.1+(sequence-2)*1.7/(population-2)
+        row=copy.deepcopy(cp['owner_rpc_receipts'][0]);row.update(sequence=sequence,stage=stage,observed_monotonic=observed,
+            received_monotonic=observed+.005,response_sha256=check.digest(_response(c,sequence,stage,observed)))
+        owner=copy.deepcopy(data['owner_rows'][0]);owner.update(sequence=sequence,stage=stage,observed_monotonic=observed,
+            response_sha256=row['response_sha256'])
+        clients.append(row);owners.append(owner)
+    cp['owner_rpc_receipts']=clients;cp['private_fake_credentials']['owner_rpc_receipt_count_after_preparation']=population
+    data['owner_rows']=owners
+    result=check.validate_checkpoint_metadata(**data)
+    assert result['actual_prefix_ACK_count']==population and result['native_qualified']is False
+
+
+def test_checkpoint_final_preparation_ACK_cannot_precede_final_thread_observation(checkpoint_metadata):
+    data=copy.deepcopy(checkpoint_metadata);cp=data['checkpoint'];c=data['context'];row=cp['owner_rpc_receipts'][-1]
+    observed=cp['private_fake_credentials']['preparation_started_monotonic']+1
+    row['observed_monotonic']=data['owner_rows'][2]['observed_monotonic']=observed;row['received_monotonic']=observed+.005
+    row['response_sha256']=data['owner_rows'][2]['response_sha256']=check.digest(_response(c,3,'remaining_deadline',observed))
+    with pytest.raises(check.InitializerM2CheckFailed):check.validate_checkpoint_metadata(**_prefix(data))

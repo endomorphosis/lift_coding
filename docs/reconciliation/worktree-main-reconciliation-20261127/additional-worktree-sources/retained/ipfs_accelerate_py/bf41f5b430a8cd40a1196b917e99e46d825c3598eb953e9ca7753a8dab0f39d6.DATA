@@ -1,0 +1,103 @@
+"""Passive real-file/clock/process staging checks; no native STOP mock or grant."""
+from pathlib import Path
+import hashlib
+import importlib.util
+import json
+import os
+import subprocess
+import sys
+import time
+
+import pytest
+
+CALLER = Path('/home/barberb/lift_coding/artifacts/legal-ir-supervisor-recovery-20261016-02/grok-private-M0-caller-source-v10/run_construction.py')
+CALLER_SHA = '2df8f2dcaf89f20732efc2ea2a590e8dc4cf6ee742068fe668d1057f3e599f69'
+CHECKER = Path('/home/barberb/lift_coding/artifacts/legal-ir-supervisor-recovery-20261018-01/private-M0-independent-construction-checker-source-v1/check_construction.py')
+CHECKER_SHA = 'b60a439024f917d6869ed96aec1dd060c85ee550c6dc27530e7db39412eecbfe'
+
+
+def _source(name, path, digest):
+    assert path.resolve(strict=True) == path
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == digest
+    spec = importlib.util.spec_from_file_location(name,path)
+    actual = importlib.util.module_from_spec(spec)
+    sys.modules[name] = actual
+    spec.loader.exec_module(actual)
+    assert actual.__file__ == actual.__spec__.origin == str(path)
+    assert sys.modules[name] is actual
+    return actual
+
+
+@pytest.fixture(scope='module')
+def sources():
+    caller = _source('private_m0_caller10_passive_test', CALLER, CALLER_SHA)
+    check = _source('private_m0_passive_test_checker', CHECKER, CHECKER_SHA)
+    yield caller, check
+    assert hashlib.sha256(CALLER.read_bytes()).hexdigest() == CALLER_SHA
+    assert hashlib.sha256(CHECKER.read_bytes()).hexdigest() == CHECKER_SHA
+
+
+def test_cutoffs_only_reduce_original_child_and_STOP_clocks(sources):
+    caller, _ = sources
+    actual = caller.original_automatic_close_cutoffs(work_deadline=10., child_native_deadline=70.,
+        parent_native_deadline=130., stop_timeout_ms=30000)
+    assert actual['automatic_close_observation_cutoff'] == 70.
+    assert actual['latest_original_STOP_start'] == 95.
+    earlier = caller.original_automatic_close_cutoffs(work_deadline=10., child_native_deadline=110.,
+        parent_native_deadline=130., stop_timeout_ms=30000)
+    assert earlier['automatic_close_observation_cutoff'] == earlier['latest_original_STOP_start'] == 95.
+    assert earlier['original_work_deadline'] == 10.
+
+
+def test_actual_owned_writer_only_produces_unqualified_file_observation(tmp_path, sources):
+    caller, check = sources
+    directory = tmp_path/'receipts'; directory.mkdir(mode=0o700)
+    now = time.monotonic()
+    # These times and inert JSON are test metadata, not native capabilities.
+    code = "import os,sys,time; time.sleep(.08); p=os.path.join(sys.argv[1],'closed.json'); fd=os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600); os.write(fd,b'{\"schema\":\"inert-close-test/v1\",\"authority\":false}\\n'); os.fsync(fd); os.close(fd)"
+    actual = subprocess.Popen((sys.executable,'-B','-c',code,str(directory)),
+        stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,start_new_session=True)
+    try:
+        observed = caller.await_automatic_child_close(directory,check=check,work_deadline=now-.1,
+            child_native_deadline=now+3.,parent_native_deadline=now+40.,stop_timeout_ms=30000)
+        assert actual.wait(timeout=3) == 0
+        assert observed['disposition'] == 'complete_closed_JSON_observed'
+        assert observed['metadata_observation_only'] is True
+        assert observed['native_closure_qualified'] is False
+        assert observed['genuine_native_STOP_still_required'] is True
+        assert observed['no_parent_child_close_or_release'] is True
+        assert observed['no_parent_signal'] is True
+        assert observed['closed_receipt_pin']['sha256'] == hashlib.sha256((directory/'closed.json').read_bytes()).hexdigest()
+        assert json.loads((directory/'closed.json').read_bytes())['authority'] is False
+    finally:
+        if actual.poll() is None: actual.kill()
+        actual.wait(timeout=2)
+
+
+@pytest.mark.parametrize('name,disposition', [
+    ('closure-unknown.json','closure_unknown_present'),
+    ('failed.json','failed_receipt_present'),
+])
+def test_actual_failure_file_returns_unproven_disposition_for_mandatory_STOP(tmp_path,sources,name,disposition):
+    caller, check = sources
+    directory = tmp_path/'receipts'; directory.mkdir(mode=0o700)
+    path=directory/name; path.write_text('{"inert_fixture":true,"authority":false}')
+    before=path.read_bytes(); now=time.monotonic()
+    observed=caller.await_automatic_child_close(directory,check=check,work_deadline=now-.1,
+        child_native_deadline=now+2.,parent_native_deadline=now+40.,stop_timeout_ms=30000)
+    assert observed['disposition'] == disposition
+    assert observed['native_closure_qualified'] is False
+    assert observed['genuine_native_STOP_still_required'] is True
+    assert observed['closed_receipt_pin'] is None
+    assert path.read_bytes() == before and not(directory/'closed.json').exists()
+
+
+def test_absent_file_reaches_original_real_clock_cutoff_without_repair(tmp_path,sources):
+    caller, check=sources
+    directory=tmp_path/'receipts'; directory.mkdir(mode=0o700); now=time.monotonic()
+    observed=caller.await_automatic_child_close(directory,check=check,work_deadline=now-.1,
+        child_native_deadline=now+.15,parent_native_deadline=now+40.,stop_timeout_ms=30000)
+    assert time.monotonic() >= observed['original_cutoffs']['automatic_close_observation_cutoff']
+    assert observed['disposition'] == 'original_close_observation_deadline_reached'
+    assert observed['native_closure_qualified'] is False and observed['genuine_native_STOP_still_required'] is True
+    assert observed['closed_receipt_pin'] is None and list(directory.iterdir()) == []

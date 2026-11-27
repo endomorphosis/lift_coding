@@ -1,0 +1,218 @@
+"""Preserve exact additional authored files. No project imports or adoption."""
+from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timezone
+from hashlib import sha1, sha256
+import json
+import os
+from pathlib import Path, PurePosixPath
+import re
+import stat
+import subprocess
+import time
+
+OUT=Path(__file__).parent
+LOCATORS=Path('/tmp/fresh-git-discovery-20261127-1vX4ddBA/uncommitted-code-locators.json')
+STATUS=Path('/tmp/fresh-git-discovery-20261127-1vX4ddBA/physical-worktree-status.json')
+ENV=dict(os.environ,GIT_OPTIONAL_LOCKS='0',GIT_TERMINAL_PROMPT='0',GIT_NO_LAZY_FETCH='1')
+TARGETS={
+ 'ipfs_datasets_py':('/tmp/git-main-followup-20261127-zYjieLmd/datasets-current-main-proof.git',True,'3bdfec5b148ad6c4ac53281ceb02ecd8377643e0'),
+ 'ipfs_accelerate_py':('/tmp/accelerate-objective-output-owner-main-ybAvG5Rm/checkout',False,'64a8649952bed66a457d7b87bf6dced9fadab8d4'),
+ 'ipfs_kit_py':('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/kit',False,'b15442e490dc39d046a911ea663c73c99ed3c755'),
+ 'lift_coding':('/tmp/lift-origin-main-reconcile-private-A8hmZDEd/root',False,'93edf9895e09ffa873a7eb65634a1c0ed27d297d'),
+ 'hallucinate_app':('/tmp/git-main-followup-20261127-zYjieLmd/hallucinate-main-proof.git',True,'cd31ee793f829af78634d624a2d4ab3b963e993c'),
+ 'swissknife':('/tmp/git-main-followup-20261127-zYjieLmd/swissknife-main-proof.git',True,'453a30b01e62b6acdd1c54070821dbacfbf7908e'),
+ 'mcp-plus-plus':('/tmp/git-main-followup-20261127-zYjieLmd/mcp-main-proof.git',True,'33c0c56e9423e11945837657e3a82fe865c60f91'),
+}
+MAX_FILE=5*1024**2
+MAX_TOTAL=128*1024**2
+SOURCE_EXT={'.py','.js','.jsx','.ts','.tsx','.mjs','.cjs','.c','.cc','.cpp','.h','.hpp','.rs','.go','.sh','.bash','.ps1','.lean','.md','.rst','.toml','.yaml','.yml','.ini','.cfg','.conf','.json','.schema','.txt','.cmake','.css','.scss','.html','.sql'}
+SOURCE_NAMES={'Dockerfile','Makefile','CMakeLists.txt','.gitignore','.gitattributes','.env.example','.env.sample','.editorconfig'}
+ALLOWED_PREFIX={'ipfs_datasets_py','ipfs_accelerate_py','ipfs_kit_py','src','lib','app','scripts','tests','test','benchmarks','config','configs','docs','examples','include','.github'}
+EXCLUDED_PARTS={'.git','__pycache__','node_modules','.venv','venv','logs','log','models','model','weights','checkpoints','checkpoint','raw','runtime','outputs','output','artifacts','data','workspace','tmp','.cache','dist','build'}
+MARKERS={
+ 'private_key':rb'-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----',
+ 'github_token':rb'(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{45,})',
+ 'aws_access_key':rb'\b(?:AKIA|ASIA)[A-Z0-9]{16}\b',
+ 'provider_token':rb'\bsk-(?:proj-)?[A-Za-z0-9_-]{35,}',
+ 'credential_url':rb'https?://[^\s/]+:[^\s/@]+@',
+}
+
+def git(family,*args,timeout=120):
+    repo,bare,tip=TARGETS[family]
+    cmd=['git','-c','core.fsmonitor=false','-c','core.hooksPath=/dev/null','-c','protocol.allow=never','-c','protocol.file.allow=never','-c','protocol.https.allow=never','-c','protocol.ssh.allow=never']
+    cmd+=['--git-dir',repo] if bare else ['-C',repo]
+    return subprocess.run(cmd+list(args),capture_output=True,env=ENV,timeout=timeout)
+
+def metadata(family):
+    repo,bare,tip=TARGETS[family]
+    actual=git(family,'rev-parse','--verify',tip+'^{commit}')
+    if actual.returncode or actual.stdout.decode().strip()!=tip:
+        raise RuntimeError('Missing selected local main commit for '+family)
+    shallow=git(family,'rev-parse','--is-shallow-repository')
+    tree=git(family,'ls-tree','--full-tree','-r','-z',tip)
+    paths={}
+    if tree.returncode==0:
+        for token in tree.stdout.split(b'\0'):
+            if token:
+                head,path=token.split(b'\t',1)
+                mode,kind,oid=head.decode().split()
+                if kind=='blob':paths[path.decode('utf-8','surrogateescape')]=oid
+    history=git(family,'rev-list','--objects','--missing=print',tip)
+    reachable=set()
+    missing=[]
+    if history.returncode==0:
+        for token in history.stdout.splitlines():
+            oid=token.split(b' ',1)[0].decode('ascii','replace')
+            if oid.startswith('?'):missing.append(oid[1:])
+            elif len(oid)==40:reachable.add(oid)
+    return family,paths,reachable,{'repo':repo,'bare':bare,'selected_main_commit':tip,'current_tree_rc':tree.returncode,'current_tree_blob_paths':len(paths),'current_tree_listing_sha256':sha256(tree.stdout).hexdigest(),'current_tree_error':tree.stderr.decode('utf-8','replace')[:1000] if tree.returncode else None,'history_rc':history.returncode,'history_object_count':len(reachable),'history_listing_sha256':sha256(history.stdout).hexdigest(),'missing_objects':missing,'shallow':shallow.stdout.decode().strip()=='true','history_complete':history.returncode==0 and not missing and shallow.stdout.decode().strip()=='false','history_error':history.stderr.decode('utf-8','replace')[:1000] if history.returncode else None}
+
+def source_path(relative):
+    path=PurePosixPath(relative)
+    if path.is_absolute() or '..' in path.parts or not path.parts:return False,'unsafe relative path'
+    if any(part in EXCLUDED_PARTS for part in path.parts):return False,'excluded runtime/cache/data/binary-owner directory'
+    if path.suffix.lower() not in SOURCE_EXT and path.name not in SOURCE_NAMES:return False,'not a selected source/config/docs/test format'
+    if path.parts[0] not in ALLOWED_PREFIX and len(path.parts)>1:
+        if path.suffix.lower() not in {'.py','.js','.ts','.tsx','.rs','.go','.sh','.lean'}:return False,'outside selected source/config/docs/test roots'
+    if path.name=='.env':return False,'private environment config is not a publication input'
+    return True,None
+
+def untracked_paths(group,summary):
+    path=summary['path']
+    if not path.endswith('/'):
+        return [path],None
+    pure=PurePosixPath(path)
+    if not pure.parts or pure.parts[0] not in ALLOWED_PREFIX or any(part in EXCLUDED_PARTS for part in pure.parts):
+        return [],'untracked directory outside selected source/config/docs/test roots'
+    cmd=['git','--literal-pathspecs','-c','core.fsmonitor=false','-c','core.hooksPath=/dev/null','-C',group['path'],'ls-files','--others','--exclude-standard','-z','--',path]
+    p=subprocess.run(cmd,capture_output=True,env=ENV,timeout=30)
+    if p.returncode:return [],'untracked metadata enumeration rc'+str(p.returncode)
+    return [part.decode('utf-8','surrogateescape') for part in p.stdout.split(b'\0') if part],None
+
+def nine(st):
+    return {'dev':st.st_dev,'ino':st.st_ino,'mode':st.st_mode,'nlink':st.st_nlink,'uid':st.st_uid,'gid':st.st_gid,'size':st.st_size,'mtime_ns':st.st_mtime_ns,'ctime_ns':st.st_ctime_ns}
+
+def capture(root,relative):
+    source=Path(root)/relative
+    current=Path(root)
+    for part in PurePosixPath(relative).parts:
+        current=current/part
+        if current.is_symlink():return None,{'reason':'source path has symlink component'}
+    before=source.lstat()
+    if not stat.S_ISREG(before.st_mode):return None,{'reason':'source is not a regular file'}
+    if before.st_size>MAX_FILE:return None,{'reason':'file exceeds selected5MiB source bound','bytes':before.st_size}
+    fd=os.open(source,os.O_RDONLY|os.O_NOFOLLOW)
+    try:
+        opened=os.fstat(fd)
+        if nine(before)!=nine(opened):return None,{'reason':'file identity changed before open'}
+        chunks=[]
+        remaining=MAX_FILE+1
+        while remaining:
+            block=os.read(fd,min(remaining,1024*1024))
+            if not block:break
+            chunks.append(block);remaining-=len(block)
+        raw=b''.join(chunks)
+        after=os.fstat(fd)
+        current=source.lstat()
+        if len(raw)!=before.st_size or nine(before)!=nine(after) or nine(before)!=nine(current):return None,{'reason':'source changed during one capture'}
+        return raw,{'full9':nine(before)}
+    finally:
+        os.close(fd)
+
+def walk_sha(value):
+    if isinstance(value,dict):
+        if isinstance(value.get('sha256'),str):yield value['sha256']
+        for child in value.values():yield from walk_sha(child)
+    elif isinstance(value,list):
+        for child in value:yield from walk_sha(child)
+
+def main():
+    started=time.monotonic()
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        results=list(pool.map(metadata,TARGETS))
+    trees={r[0]:r[1] for r in results}
+    reachable={r[0]:r[2] for r in results}
+    metadata_report={r[0]:r[3] for r in results}
+    print(json.dumps({'main_metadata_closed':True,'families':{k:{'tree_paths':v['current_tree_blob_paths'],'history_objects':v['history_object_count'],'history_complete':v['history_complete']} for k,v in metadata_report.items()}}),flush=True)
+    rootblobs=set(trees['lift_coding'].values())
+    manifests=[]
+    archived_sha=set()
+    for path,oid in trees['lift_coding'].items():
+        if path.startswith('docs/reconciliation/') and path.endswith('.json') and ('manifest' in PurePosixPath(path).name or PurePosixPath(path).name in {'restore.json','retained-versions.json'}):
+            p=git('lift_coding','cat-file','blob',oid)
+            row={'path':path,'git_blob':oid,'bytes':len(p.stdout),'rc':p.returncode}
+            if p.returncode==0:
+                row['sha256']=sha256(p.stdout).hexdigest()
+                try:
+                    archived_sha.update(walk_sha(json.loads(p.stdout)))
+                except ValueError:row['json_error']=True
+            manifests.append(row)
+    loc=json.loads(LOCATORS.read_text())
+    status=json.loads(STATUS.read_text())
+    bypath={r['path']:r for r in status['repositories']}
+    candidates={}
+    exclusions=[]
+    for group in loc['owning_worktree_groups']:
+        rows=bypath[group['path']]['nondeletion_statuses']
+        for row in rows:
+            paths,error=untracked_paths(group,row) if row['status']=='??' else ([row['path']],None)
+            if error:
+                exclusions.append({'worktree':group['path'],'family':group['family'],'relative_path':row['path'],'status':row['status'],'reason':error})
+            for relative in paths:
+                okay,reason=source_path(relative)
+                if not okay:
+                    exclusions.append({'worktree':group['path'],'family':group['family'],'relative_path':relative,'status':row['status'],'reason':reason})
+                    continue
+                candidates[(group['path'],relative)]=(group['family'],row['status'])
+    print(json.dumps({'candidate_metadata_closed':True,'selected_file_mappings':len(candidates),'metadata_exclusions':len(exclusions)}),flush=True)
+    files=[]
+    versions={}
+    held=[]
+    total_retained=0
+    for (root,relative),(family,status_value) in sorted(candidates.items()):
+        row={'worktree':root,'family':family,'relative_path':relative,'status':status_value}
+        try:
+            raw,info=capture(root,relative)
+        except OSError as exc:
+            row.update({'disposition':'capture-refused','reason':type(exc).__name__})
+            files.append(row);continue
+        row.update(info)
+        if raw is None:
+            row['disposition']='capture-refused';files.append(row);continue
+        digest=sha256(raw).hexdigest()
+        oid=sha1(f'blob {len(raw)}\0'.encode()+raw).hexdigest()
+        row.update({'bytes':len(raw),'sha256':digest,'git_blob':oid,'current_main_path_blob':trees[family].get(relative),'archive_manifest_mentions_hash':digest in archived_sha})
+        if trees[family].get(relative)==oid:row['disposition']='exact-current-main-path'
+        elif oid in set(trees[family].values()):row['disposition']='exact-current-main-blob-other-path'
+        elif oid in reachable[family]:row['disposition']='exact-reachable-main-history'
+        elif oid in rootblobs:row['disposition']='exact-published-root-payload'
+        else:
+            hits=[name for name,pattern in MARKERS.items() if re.search(pattern,raw)]
+            if hits:
+                row.update({'disposition':'held-credential-marker-review','marker_families':hits})
+                held.append(row.copy())
+            elif b'\0' in raw:
+                row.update({'disposition':'held-binary-content-review'})
+                held.append(row.copy())
+            elif digest in versions:
+                row.update({'disposition':'retained-inert-version','archive':versions[digest]})
+            elif total_retained+len(raw)>MAX_TOTAL:
+                row.update({'disposition':'retention-bound-exceeded','reason':'128MiB unique source retention bound'})
+            else:
+                archive='retained/'+family+'/'+digest+'.DATA'
+                destination=OUT/archive
+                destination.parent.mkdir(parents=True,exist_ok=True)
+                with destination.open('xb') as stream:stream.write(raw)
+                destination.chmod(0o600)
+                if sha256(destination.read_bytes()).hexdigest()!=digest:raise RuntimeError('Private retained-byte readback failed')
+                versions[digest]=archive
+                total_retained+=len(raw)
+                row.update({'disposition':'retained-inert-version','archive':archive})
+        files.append(row)
+    report={'schema':'additional-worktree-source-retention/v1','created_utc':datetime.now(timezone.utc).isoformat(),'scope':'Exact source/config/docs/test versions from existing95metadata groups, preserved inertly when absent from selected published main/history and published root payloads. No Source adoption, project import, tests, model, DB, network, canonical writes, or execution authority.','locator_file':str(LOCATORS),'locator_sha256':sha256(LOCATORS.read_bytes()).hexdigest(),'status_file':str(STATUS),'status_sha256':sha256(STATUS.read_bytes()).hexdigest(),'selected_main_metadata':metadata_report,'archive_manifest_metadata':manifests,'archive_manifest_sha_count':len(archived_sha),'manifest_mention_policy':'A SHA mentioned by a manifest is not by itself proof of retained payload. Exact published root blob membership is required for payload classification.','selected_file_mappings':len(candidates),'files':files,'exclusions':exclusions,'held':held,'counts':dict(Counter(r['disposition'] for r in files)),'unique_retained_versions':len(versions),'unique_retained_bytes':total_retained,'limits':{'max_source_file_bytes':MAX_FILE,'max_unique_retained_bytes':MAX_TOTAL},'restore':'For retained-inert-version mappings only, verify archive bytes/SHA256, then copy to an independently selected destination worktree and original relative_path. Original mode and full9 are recorded. Original worktrees are untouched. No automatic restore/adoption is selected.','remaining_gaps':['Credential-marker and binary holds require exact review before publication.','Untracked directories excluded as runtime/model/binary/data are recorded without recursive body reads.','Unmatched files do not establish compatibility with current maintained code.','Staged index variants are separate from current working-copy bytes and are not captured by this report.','Incomplete main object history, if any, is explicit; unmatched means no proven membership, not proven novelty.'],'elapsed_seconds':round(time.monotonic()-started,3)}
+    p=OUT/'retention-manifest.json'
+    p.write_text(json.dumps(report,indent=2,sort_keys=True)+'\n')
+    print(json.dumps({'manifest':str(p),'bytes':p.stat().st_size,'sha256':sha256(p.read_bytes()).hexdigest(),'counts':report['counts'],'unique_retained_versions':len(versions),'unique_retained_bytes':total_retained,'held_count':len(held),'exclusions':len(exclusions),'elapsed_seconds':report['elapsed_seconds']},indent=2),flush=True)
+
+if __name__=='__main__':main()

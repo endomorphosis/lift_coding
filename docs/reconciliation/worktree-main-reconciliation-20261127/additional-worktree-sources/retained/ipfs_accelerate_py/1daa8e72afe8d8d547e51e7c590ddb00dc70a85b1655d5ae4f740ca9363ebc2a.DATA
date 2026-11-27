@@ -1,0 +1,288 @@
+"""Pure private-v2 metadata gates; no owner, resource, DB or native doubles.
+
+No setup/handoff instance is constructed. Inert regular files in the source
+profile cases establish metadata checks only, never normal API qualification.
+"""
+import ast
+import copy
+import hashlib
+import inspect
+import json
+from pathlib import Path
+
+import pytest
+import ipfs_accelerate_py.cli_runtime.grok_private_same_pid_m2 as setup
+import ipfs_accelerate_py.cli_runtime.grok_production_handoff as handoff
+import ipfs_accelerate_py.agent_supervisor.runtime.private_same_pid_m2_entry as entry
+
+
+def mode():
+    return dict(schema=setup.PRIVATE_SCHEMA,mode='isolated-loopback-capture',
+        execution_environment='isolated-loopback',paid_provider_calls_allowed=False,
+        capture_worker_dispatch_allowed=True,attempt_cap=1)
+
+
+def test_private_generation_has_explicit_cap1_metadata():
+    assert setup._validate_selected_capture_mode(mode()) is None
+
+
+@pytest.mark.parametrize('field,value',[
+    ('schema',True),('mode','provider'),('execution_environment','provider'),
+    ('paid_provider_calls_allowed',True),('capture_worker_dispatch_allowed',1),('attempt_cap',2)])
+def test_private_generation_rejects_mode_or_cap_reinterpretation(field,value):
+    value0=mode();value0[field]=value
+    with pytest.raises(setup.FixtureRefusal):setup._validate_selected_capture_mode(value0)
+
+
+def test_original_unconditional_refusal_stays_closed():
+    with pytest.raises(setup.FixtureRefusal,match=setup.WORKER_CREDENTIAL_GAP):
+        setup._require_explicit_worker_credential_contract()
+
+
+def policy():
+    nonce='a'*32
+    fingerprint=hashlib.sha256(('INVALID_PRIVATE_LOOPBACK_FIXTURE_ONLY_'+nonce).encode()).hexdigest()[:16]
+    value=dict(schema=setup.PRIVATE_POLICY_SCHEMA,execution_environment='isolated-loopback',network_mode='none',
+        credential_slot='private-slot',credential_fingerprint=fingerprint,public_fake_nonce=nonce,
+        endpoint_environment={name:'http://127.0.0.1:12345/v1'for name in setup.ENDPOINT_NAMES},
+        fake_credential_contract='sealed-worker-fixture-v2-required',network_witness_policy=dict(
+            schema='private-owned-rootless-network-policy/v1',witness_kind='own-net-owned-user-restricted-maps/v1',
+            expected_uid_map=[[0,1000,1],[1,100000,65536]],expected_gid_map=[[0,1000,1],[1,100000,65536]]),
+        private_duckdb_quiescence_policy=dict(schema='private-owned-DuckDB-public-close-policy/v1',
+            operation='duckdb.close',maximum_observation_milliseconds=200))
+    return value,{name:value[name]for name in ('credential_slot','credential_fingerprint')}
+
+
+def test_private_policy_joins_existing_fingerprint_and_closed_expectations():
+    value,request=policy()
+    assert setup._validate_private_policy_metadata(value,request)==value
+
+
+@pytest.mark.parametrize('change',[
+    'old_schema','extra_field','bad_nonce','mismatched_fingerprint','host_network','bool_map',
+    'initial_map','overlapping_map','float_close_window','other_close','long_close_window',
+    'remote_endpoint','missing_endpoint','different_slot'])
+def test_private_policy_cannot_supply_alternate_dispatch_or_authority(change):
+    value,request=policy()
+    if change=='old_schema':value['schema']='private-M2-loopback-policy/v1'
+    elif change=='extra_field':value['readiness']=True
+    elif change=='bad_nonce':value['public_fake_nonce']='provider-secret'
+    elif change=='mismatched_fingerprint':value['public_fake_nonce']='b'*32
+    elif change=='host_network':value['network_mode']='host'
+    elif change=='bool_map':value['network_witness_policy']['expected_uid_map'][0][0]=False
+    elif change=='initial_map':value['network_witness_policy']['expected_uid_map']=[[0,0,4294967295]]
+    elif change=='overlapping_map':value['network_witness_policy']['expected_gid_map'].append([2,900000,2])
+    elif change=='float_close_window':value['private_duckdb_quiescence_policy']['maximum_observation_milliseconds']=200.0
+    elif change=='other_close':value['private_duckdb_quiescence_policy']['operation']='_duckdb.clean_default_connection'
+    elif change=='long_close_window':value['private_duckdb_quiescence_policy']['maximum_observation_milliseconds']=201
+    elif change=='remote_endpoint':value['endpoint_environment'][sorted(setup.ENDPOINT_NAMES)[0]]='http://example.org:12345/v1'
+    elif change=='missing_endpoint':value['endpoint_environment'].pop(sorted(setup.ENDPOINT_NAMES)[0])
+    elif change=='different_slot':value['credential_slot']='another-slot'
+    with pytest.raises(setup.FixtureRefusal):setup._validate_private_policy_metadata(value,request)
+
+
+def fixture_inputs():
+    policy_value,_=policy();profile=dict(path='/inert/profile.json',bytes=10,sha256='1'*64)
+    capsule=dict(path='/inert/capsule.json',bytes=20,sha256='2'*64)
+    request=dict(schema='private-fresh-task-grok-capture-request/v2',owner_request_sha256='3'*64,
+        receipt_directory='/inert/receipt',source_profile_pin=profile,capsule_pin=capsule,
+        task_cid='private-task',task_alias='private-alias',database_attempt_id='private-attempt',
+        database_attempt_number=1,allocation_session_id='private-allocation',source_generation='private-generation',
+        work_deadline_monotonic=1240.0,native_deadline_monotonic=1300.0)
+    value={key:request[key]for key in ('owner_request_sha256','receipt_directory','task_cid','task_alias',
+        'database_attempt_id','database_attempt_number','allocation_session_id','source_generation',
+        'work_deadline_monotonic','native_deadline_monotonic')}
+    value.update(schema='private-grok-fake-credential-fixture/v2',source_profile_sha256=profile['sha256'],
+        capsule_sha256=capsule['sha256'],network_witness_policy=policy_value['network_witness_policy'],
+        private_duckdb_quiescence_policy=policy_value['private_duckdb_quiescence_policy'])
+    options=dict(owner_request_sha256=request['owner_request_sha256'],receipt_directory=request['receipt_directory'],
+        source_profile_pin=profile,capsule_pin=capsule,network_policy=policy_value['network_witness_policy'],
+        quiescence_policy=policy_value['private_duckdb_quiescence_policy'])
+    return copy.deepcopy(value),copy.deepcopy(request),copy.deepcopy(options)
+
+
+def test_R_to_F_join_never_uses_worker_S_digest():
+    value,request,options=fixture_inputs()
+    assert handoff._require_private_fixture_join(value,request,**options) is None
+
+
+@pytest.mark.parametrize('field',[
+    'owner_request_sha256','receipt_directory','source_profile_sha256','capsule_sha256',
+    'task_cid','database_attempt_number','network_witness_policy','private_duckdb_quiescence_policy'])
+def test_fixture_cannot_rebind_R_context_profile_attempt_or_policy(field):
+    value,request,options=fixture_inputs()
+    value[field]=True if field=='database_attempt_number'else{}if field.endswith('policy')else'changed'
+    with pytest.raises(handoff.ProductionHandoffRefusal):handoff._require_private_fixture_join(value,request,**options)
+
+
+def test_entry_generation_mapping_is_explicit_and_original_preserved():
+    assert entry._binding_schema_for_request(setup.SCHEMA)==entry.SCHEMA
+    assert entry._binding_schema_for_request(setup.PRIVATE_SCHEMA)==entry.PRIVATE_SCHEMA
+
+
+@pytest.mark.parametrize('schema',[True,'provider','private-approved-child-same-pid-capture-M2-request/v3'])
+def test_entry_generation_mapping_rejects_arbitrary_selectors(schema):
+    with pytest.raises(entry.PrivateFixtureRefusal):entry._binding_schema_for_request(schema)
+
+
+def test_original_four_refusal_seams_remain_structurally_intact():
+    tree=ast.parse(inspect.getsource(setup));base=next(n for n in tree.body if isinstance(n,ast.ClassDef)and n.name=='PrivateM2OwnedSetup')
+    for name in ('bind_portal_attempt','prepare_capture_handoff','bind_capture_handoff','dispatch_once'):
+        method=next(n for n in base.body if isinstance(n,ast.FunctionDef)and n.name==name)
+        body=method.body[1:]if isinstance(method.body[0],ast.Expr)and isinstance(method.body[0].value,ast.Constant)else method.body
+        assert isinstance(body[0],ast.Expr)and isinstance(body[0].value,ast.Call)
+        assert isinstance(body[0].value.func,ast.Name)and body[0].value.func.id=='_require_explicit_worker_credential_contract'
+        if name=='dispatch_once':assert len(body)==1
+
+
+def test_successor_is_source_defined_and_preserves_same_inherited_resources():
+    assert setup.PrivateAuthenticatedM2OwnedSetup.__bases__==(setup.PrivateM2OwnedSetup,)
+    assert setup.PrivateAuthenticatedM2OwnedSetup.construct is setup.PrivateM2OwnedSetup.construct
+    assert setup.PrivateAuthenticatedM2OwnedSetup.require_current is setup.PrivateM2OwnedSetup.require_current
+    assert setup.PrivateAuthenticatedM2OwnedSetup.close is setup.PrivateM2OwnedSetup.close
+
+
+def write_json(path,value):
+    raw=(json.dumps(value,sort_keys=True,separators=(',',':'))+'\n').encode();path.write_bytes(raw);path.chmod(0o600)
+    return dict(path=str(path),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+
+
+@pytest.fixture
+def private_profile(tmp_path):
+    roles={'worker':'ipfs_accelerate_py/cli_runtime/grok_fresh_task_capture_worker.py',
+        'adapter':'ipfs_accelerate_py/cli_runtime/grok_fresh_task_capture_transport.py',
+        'runtime':'ipfs_accelerate_py/agent_supervisor/runtime/router_implementation_runner.py',
+        'helper':'ipfs_accelerate_py/cli_runtime/grok_named_session.py',
+        'owner_source':'ipfs_accelerate_py/cli_runtime/grok_production_owner.py'}
+    extra=['ipfs_accelerate_py/__init__.py','ipfs_accelerate_py/llm_router.py',
+        'ipfs_accelerate_py/llm_allocation/__init__.py','ipfs_accelerate_py/llm_allocation/duckdb_store.py']
+    private=['ipfs_accelerate_py/cli_runtime/grok_private_fake_credentials.py','ipfs_accelerate_py/common/__init__.py',
+        'ipfs_accelerate_py/common/storage_wrapper.py','ipfs_accelerate_py/common/secrets_manager.py',
+        'ipfs_accelerate_py/llm_allocation/api_key_slots.py']
+    root=tmp_path/'A';sources={};pins={}
+    for relative in list(roles.values())+extra+private:
+        path=root/relative;path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(b'# inert metadata only\n')
+        pins[str(path)]=dict(path=str(path),bytes=path.stat().st_size,sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+        sources[str(path)]=pins[str(path)]['sha256']
+    generation='private-v2-metadata'
+    profile=dict(schema='fresh-task-grok-capture-source-profile/v1',source_generation=generation,sources=dict(sources))
+    capsule=dict(schema='legal-ir-grok-planning-transport-capsule/v4',source_generation=generation,
+        files={role:pins[str(root/relative)]for role,relative in roles.items()},named_session={name:None for name in (
+            'native_home','audit_directory','preparation_home','binary','configuration','owner_sampling_policy',
+            'system_requirements','cleanup_reserve_seconds','bootstrap_max_seconds')})
+    profile_path=tmp_path/'profile.json'
+    request=dict(schema=setup.PRIVATE_SCHEMA,source_roots=[str(root)],source_generation=generation,source_sha256=sources,
+        source_profile_pin=write_json(profile_path,profile),capsule_pin=write_json(tmp_path/'capsule.json',capsule))
+    return request,profile,profile_path,root,private
+
+
+def test_private_source_profile_requires_fourteen_and_keeps_V4(private_profile):
+    request,*_=private_profile
+    assert setup._validate_capture_source_metadata(request)==dict(source_profile_count=14,generic_V4_schema_preserved=True)
+
+
+@pytest.mark.parametrize('index',range(5))
+def test_each_new_private_source_role_is_required(private_profile,index):
+    request,profile,path,root,private=private_profile
+    profile['sources'].pop(str(root/private[index]));request['source_profile_pin']=write_json(path,profile)
+    with pytest.raises(setup.FixtureRefusal):setup._validate_capture_source_metadata(request)
+
+
+@pytest.mark.parametrize('name,expected_AST_sha256', [('bind_private_offline_metadata', '54391fe35550da791ec3a91097d29970bb1aa080a902ecbc18795ba91a6ffe79'), ('_private_offline_current', '8bd7ce1ad08a6da75f2e6fb2cea2892111b0014afc16966cae3d895a91439537')])
+def test_original_offline_methods_are_exact_pinned_predecessor_AST(name,expected_AST_sha256):
+    tree=ast.parse(inspect.getsource(handoff))
+    cls=next(n for n in tree.body if isinstance(n,ast.ClassDef)and n.name=='ProductionProviderHandoff')
+    method=next(n for n in cls.body if isinstance(n,ast.FunctionDef)and n.name==name)
+    assert hashlib.sha256(ast.dump(method,include_attributes=False).encode()).hexdigest()==expected_AST_sha256
+
+
+def test_capture_binding_retains_the_actual_checked_fixture_identity():
+    tree=ast.parse(inspect.getsource(handoff))
+    cls=next(n for n in tree.body if isinstance(n,ast.ClassDef)and n.name=='ProductionProviderHandoff')
+    method=next(n for n in cls.body if isinstance(n,ast.FunctionDef)and n.name=='bind_private_capture_metadata')
+    observed=[n for n in method.body if isinstance(n,ast.Assign)and isinstance(n.value,ast.Call)and
+        isinstance(n.value.func,ast.Attribute)and n.value.func.attr=='_private_capture_fixture_current']
+    assert len(observed)==1 and len(observed[0].targets)==1
+    assert isinstance(observed[0].targets[0],ast.Name)and observed[0].targets[0].id=='fixture_identity'
+    retained=[n for n in method.body if isinstance(n,ast.Assign)and len(n.targets)==1 and
+        isinstance(n.targets[0],ast.Attribute)and n.targets[0].attr=='_private_capture']
+    assert len(retained)==1 and isinstance(retained[0].value,ast.Call)
+    value=next(k.value for k in retained[0].value.keywords if k.arg=='fixture_identity')
+    assert isinstance(value,ast.Name)and value.id=='fixture_identity'
+    assert observed[0].lineno<retained[0].lineno
+
+
+def test_capture_current_rechecks_original_fixture_before_productive_branch():
+    tree=ast.parse(inspect.getsource(handoff))
+    cls=next(n for n in tree.body if isinstance(n,ast.ClassDef)and n.name=='ProductionProviderHandoff')
+    method=next(n for n in cls.body if isinstance(n,ast.FunctionDef)and n.name=='_private_capture_current')
+    direct=[n for n in method.body if isinstance(n,ast.Expr)and isinstance(n.value,ast.Call)and
+        isinstance(n.value.func,ast.Attribute)and n.value.func.attr=='_private_capture_fixture_current']
+    assert len(direct)==1
+    keywords={k.arg:ast.dump(k.value,include_attributes=False)for k in direct[0].value.keywords}
+    assert keywords=={'request':ast.dump(ast.Name(id='request',ctx=ast.Load()),include_attributes=False),
+        'issuer':ast.dump(ast.parse("state['issuer']",mode='eval').body,include_attributes=False),
+        'identity':ast.dump(ast.parse("state['fixture_identity']",mode='eval').body,include_attributes=False)}
+    branch=next(n for n in method.body if isinstance(n,ast.If)and isinstance(n.test,ast.Name)and n.test.id=='productive')
+    assert direct[0].lineno<branch.lineno
+
+
+def _setup_method_AST(name):
+    tree=ast.parse(inspect.getsource(setup))
+    cls=next(n for n in tree.body if isinstance(n,ast.ClassDef)and n.name=='PrivateM2OwnedSetup')
+    return next(n for n in cls.body if isinstance(n,ast.FunctionDef)and n.name==name)
+
+
+def _is_work_gate(node):
+    return isinstance(node,ast.Expr)and isinstance(node.value,ast.Call)and isinstance(node.value.func,ast.Attribute)and\
+        isinstance(node.value.func.value,ast.Name)and node.value.func.value.id=='self'and node.value.func.attr=='_work_remaining'
+
+
+def test_dependency_destination_uses_streaming_reader_not_generic_materialization():
+    method=_setup_method_AST('_stage_private_duckdb')
+    generic=[n for n in ast.walk(method)if isinstance(n,ast.Call)and isinstance(n.func,ast.Name)and n.func.id=='read_pin']
+    assert len(generic)==2 and all(len(n.args)==1 and isinstance(n.args[0],ast.Name)and n.args[0].id=='manifest_pin'for n in generic)
+    streamed=[n for n in ast.walk(method)if isinstance(n,ast.Call)and isinstance(n.func,ast.Attribute)and n.func.attr=='_stream_private_dependency']
+    assert len(streamed)==1 and [ast.dump(n,include_attributes=False)for n in streamed[0].args]==[
+        ast.dump(ast.Name(id='target',ctx=ast.Load()),include_attributes=False),
+        ast.dump(ast.Name(id='expected',ctx=ast.Load()),include_attributes=False)]
+
+
+def test_dependency_stream_hash_keeps_only_one_bounded_block():
+    method=_setup_method_AST('_stream_private_dependency')
+    reads=[n for n in ast.walk(method)if isinstance(n,ast.Call)and isinstance(n.func,ast.Attribute)and
+        isinstance(n.func.value,ast.Name)and n.func.value.id=='os'and n.func.attr=='read']
+    assert len(reads)==1 and len(reads[0].args)==2
+    assert ast.dump(reads[0].args[1],include_attributes=False)==ast.dump(ast.parse('1024*1024',mode='eval').body,include_attributes=False)
+    assert not any(isinstance(n,ast.Call)and isinstance(n.func,ast.Attribute)and n.func.attr in
+        ('read_bytes','join','append','extend')for n in ast.walk(method))
+    assert not any(isinstance(n,ast.List)for n in ast.walk(method))
+
+
+def test_private_new_file_retains_FD_before_postopen_original_work_gate():
+    method=_setup_method_AST('_write_private_file')
+    index=next(i for i,n in enumerate(method.body)if isinstance(n,ast.Assign)and isinstance(n.value,ast.Call)and
+        isinstance(n.value.func,ast.Attribute)and n.value.func.attr=='open')
+    assert isinstance(method.body[index+1],ast.Assign)
+    assert isinstance(method.body[index+2],ast.Expr)and isinstance(method.body[index+2].value,ast.Call)and\
+        method.body[index+2].value.func.attr=='append'
+    owned=method.body[index+3]
+    assert isinstance(owned,ast.Try)and _is_work_gate(owned.body[0])and _is_work_gate(owned.body[2])
+    assert isinstance(owned.body[1],ast.Assign)and owned.body[1].value.func.attr=='fstat'
+    assert any(isinstance(n,ast.Expr)and isinstance(n.value,ast.Call)and isinstance(n.value.func,ast.Attribute)and
+        n.value.func.attr=='close'for n in owned.finalbody)
+
+
+def test_dependency_copy_open_and_read_returns_gate_before_next_mutation():
+    method=_setup_method_AST('_stage_private_duckdb')
+    source_try=next(n for n in ast.walk(method)if isinstance(n,ast.Try)and n.body and _is_work_gate(n.body[0])and
+        len(n.body)>1 and isinstance(n.body[1],ast.Assign)and isinstance(n.body[1].value,ast.Call)and
+        isinstance(n.body[1].value.func,ast.Attribute)and n.body[1].value.func.attr=='fstat')
+    assert _is_work_gate(source_try.body[2])
+    opened=next(i for i,n in enumerate(source_try.body)if isinstance(n,ast.Assign)and isinstance(n.value,ast.Call)and
+        isinstance(n.value.func,ast.Attribute)and n.value.func.attr=='open')
+    assert _is_work_gate(source_try.body[opened+1])
+    loop=next(n for n in source_try.body if isinstance(n,ast.While)and isinstance(n.test,ast.Constant)and n.test.value is True)
+    assert _is_work_gate(loop.body[0])and _is_work_gate(loop.body[2])
+    assert isinstance(loop.body[1],ast.Assign)and loop.body[1].value.func.attr=='read'
+    assert isinstance(loop.body[3],ast.If)and any(isinstance(n,ast.Break)for n in ast.walk(loop.body[3]))

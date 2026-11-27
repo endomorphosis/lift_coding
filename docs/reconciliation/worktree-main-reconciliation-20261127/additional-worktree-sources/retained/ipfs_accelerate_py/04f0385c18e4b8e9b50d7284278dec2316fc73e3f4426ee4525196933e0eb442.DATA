@@ -1,0 +1,138 @@
+"""M2 sealed metadata/normal selector controls; no capability doubles.
+
+No setup, handoff, owner grant, DB, scheduler, provider or native task is
+constructed. A fully sealed metadata read is never admission authority.
+"""
+import argparse
+import fcntl
+import hashlib
+import os
+from pathlib import Path
+import time
+
+import pytest
+import ipfs_accelerate_py.agent_supervisor.runtime.private_same_pid_m2_entry as entry
+
+
+def seal(payload):
+    raw=entry.canonical(payload)
+    descriptor=os.memfd_create('private-M2-entry-test',os.MFD_CLOEXEC|os.MFD_ALLOW_SEALING)
+    os.write(descriptor,raw);fcntl.fcntl(descriptor,fcntl.F_ADD_SEALS,entry.SEALS)
+    return descriptor,hashlib.sha256(raw).hexdigest()
+
+
+@pytest.fixture
+def binding_metadata(tmp_path):
+    task=tmp_path/'task';task.mkdir(mode=0o700)
+    request=tmp_path/'request.json';request.write_bytes(b'{}');request.chmod(0o600)
+    root=Path(entry.__file__).parents[3];now=time.monotonic()
+    return dict(schema=entry.SCHEMA,request_pin=dict(path=str(request),bytes=2,
+        sha256=hashlib.sha256(b'{}').hexdigest()),accelerator_source_root=str(root),
+        task_repository_root=str(task),task_repository_id='inert-private-source-cid',
+        task_baseline_commit='1'*40,task_baseline_tree_id='2'*40,
+        private_store_id='inert-store',private_database_uuid='inert-db',private_server_id='inert-server',
+        private_database_path=str(tmp_path/'unopened.duckdb'),private_task_cid='inert-task-cid',
+        private_task_alias='inert-private-M2',source_generation='grok-automatic-named-session/inert',
+        adapter_source_sha256=hashlib.sha256(Path(entry.__file__).read_bytes()).hexdigest(),
+        composition_source_sha256=entry.M2_SOURCE_SHA256,receipt_directory=str(tmp_path/'receipts'),
+        work_deadline_monotonic=now+10,native_deadline_monotonic=now+20,
+        original_started_monotonic=now-10,parent_native_deadline_monotonic=now+30,one_shot=True,attempt_cap=1,
+        paid_provider_calls_allowed=False,capture_worker_dispatch_allowed=True,
+        execution_environment='isolated-loopback',receipt_precharge_bytes=entry.RECEIPT_PRECHARGE,
+        parent_disk_reservation_id='inert-no-resource',parent_native_root_lease_id='inert-no-lease',
+        required_P_SDK_source_sha256=dict(entry.P_SDK_SOURCE_SHA256))
+
+
+def test_real_sealed_M2_binding_is_metadata_only(binding_metadata):
+    descriptor,digest=seal(binding_metadata)
+    try:
+        assert entry.read_sealed_binding(descriptor,digest)==binding_metadata
+        assert os.fstat(descriptor).st_nlink==0
+        with pytest.raises(OSError):os.pwrite(descriptor,b'x',0)
+    finally:os.close(descriptor)
+
+
+@pytest.mark.parametrize('field,value',[
+    ('attempt_cap',True),('attempt_cap',2),('paid_provider_calls_allowed',True),
+    ('execution_environment','provider'),('schema','ordinary-admitted-private-offline-M1-binding/v1')])
+def test_closed_M2_binding_cannot_promote_or_relabel(binding_metadata,field,value):
+    payload=dict(binding_metadata);payload[field]=value;descriptor,digest=seal(payload)
+    try:
+        with pytest.raises(entry.PrivateFixtureRefusal):entry.read_sealed_binding(descriptor,digest)
+    finally:os.close(descriptor)
+
+
+def test_actual_unsealed_M2_descriptor_refuses(binding_metadata):
+    raw=entry.canonical(binding_metadata);descriptor=os.memfd_create('unsealed-M2-entry',os.MFD_CLOEXEC|os.MFD_ALLOW_SEALING)
+    try:
+        os.write(descriptor,raw)
+        with pytest.raises(entry.PrivateFixtureRefusal,match='real_fully_sealed_memfd_required'):
+            entry.read_sealed_binding(descriptor,hashlib.sha256(raw).hexdigest())
+    finally:os.close(descriptor)
+
+
+def test_actual_sealed_M2_digest_cannot_be_rebound(binding_metadata):
+    descriptor,_digest=seal(binding_metadata)
+    try:
+        with pytest.raises(entry.PrivateFixtureRefusal,match='sealed_fixture_metadata_changed'):
+            entry.read_sealed_binding(descriptor,'0'*64)
+    finally:os.close(descriptor)
+
+
+def test_M2_selector_defaults_off_without_any_project_objects():
+    assert entry.fixture_selected(argparse.Namespace())is False
+
+
+@pytest.mark.parametrize('fd,digest',[(3,''),(-1,'1'*64),(True,'1'*64)])
+def test_incomplete_or_bool_M2_selector_refuses(fd,digest):
+    args=argparse.Namespace(private_same_pid_m2_fd=fd,private_same_pid_m2_sha256=digest)
+    with pytest.raises(entry.PrivateFixtureRefusal):entry.fixture_selected(args)
+
+
+@pytest.mark.parametrize('work,native,grant,expected',[(1,30,40,1),(30,20,40,10),(30,40,20,10)])
+def test_cleanup_cutoff_only_reduces_original_clocks(work,native,grant,expected):
+    now=time.monotonic()
+    actual=entry._private_cleanup_start(dict(work_deadline_monotonic=now+work,
+        native_deadline_monotonic=now+native),grant_deadline_monotonic=now+grant)
+    assert actual==now+expected
+
+
+def test_capture_command_leaves_accepted_private_flags_to_genuine_handoff():
+    request=dict(worker_path='/inert/worker.py',capsule_pin=dict(path='/inert/capsule',sha256='1'*64))
+    assert entry.expected_capture_command(request)==('/usr/bin/python3','-B','/inert/worker.py',
+        '--transport-capsule','/inert/capsule','--transport-capsule-sha256','1'*64)
+    assert not any('private-m2' in argument for argument in entry.expected_capture_command(request))
+
+
+def test_original_parent_timer_is_restricted_without_renewing_epoch():
+    now=time.monotonic();request=dict(original_started_monotonic=now,
+        work_deadline_monotonic=now+240,native_deadline_monotonic=now+300,
+        parent_native_deadline_monotonic=now+360)
+    assert entry.original_runtime_deadline(request,work_deadline_monotonic=now+240,
+        native_ceiling=now+400)==request['parent_native_deadline_monotonic']
+
+
+@pytest.mark.parametrize('change',['extend_ceiling','different_work','bool_parent'])
+def test_original_runtime_clock_join_refuses_extension_or_rebind(change):
+    now=time.monotonic();request=dict(original_started_monotonic=now,
+        work_deadline_monotonic=now+240,native_deadline_monotonic=now+300,
+        parent_native_deadline_monotonic=now+360)
+    ceiling=now+400;work=now+240
+    if change=='extend_ceiling':ceiling=now+359
+    elif change=='different_work':work=now+241
+    else:request['parent_native_deadline_monotonic']=True
+    with pytest.raises(entry.PrivateFixtureRefusal):
+        entry.original_runtime_deadline(request,work_deadline_monotonic=work,native_ceiling=ceiling)
+
+
+def test_actual_run_lease_window_is_bounded_by_original_remaining_clock():
+    started=time.monotonic();wall_started=time.time_ns()//1_000_000
+    duration,ceiling=entry.original_run_lease_window(deadline_monotonic=started+10)
+    assert 0<duration<=9000
+    assert wall_started<ceiling<=time.time_ns()//1_000_000+10000
+    assert duration+1000<=ceiling-wall_started
+
+
+def test_actual_expired_original_run_lease_clock_refuses():
+    with pytest.raises(entry.PrivateFixtureRefusal):
+        entry.original_run_lease_window(deadline_monotonic=time.monotonic()-1)

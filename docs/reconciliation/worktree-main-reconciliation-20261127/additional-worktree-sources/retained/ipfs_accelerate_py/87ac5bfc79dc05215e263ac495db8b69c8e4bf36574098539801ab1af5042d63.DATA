@@ -1,0 +1,118 @@
+"""Independent M2 seam metadata/real-FD regressions, no capability doubles.
+
+A pure join and borrowed sealed FD reader grant no owner/claim/native/task
+or credential authority. No handoff instance, SDK, DB or provider is created.
+"""
+import copy
+import fcntl
+import hashlib
+import os
+from pathlib import Path
+import time
+
+import pytest
+import ipfs_accelerate_py.cli_runtime.grok_production_handoff as handoff
+import ipfs_accelerate_py.cli_runtime.grok_fresh_task_capture_worker as worker
+import ipfs_accelerate_py.cli_runtime.grok_fresh_task_capture_check as checker
+
+
+@pytest.fixture
+def capture_request(tmp_path):
+    cap=tmp_path/'capsule';cap.write_bytes(b'{}\n');cap.chmod(0o600)
+    profile=tmp_path/'profile';profile.write_bytes(b'{}\n');profile.chmod(0o600)
+    def pin(p):return dict(path=str(p),bytes=p.stat().st_size,sha256=hashlib.sha256(p.read_bytes()).hexdigest())
+    now=time.monotonic();directory=tmp_path/'receipt'
+    return dict(schema=worker.SCHEMA,mode='fresh-task-capture-diagnostic',one_shot=True,attempt_cap=1,
+        provider_dispatch_allowed=True,execution_environment='isolated-loopback',accelerator_root=str(tmp_path/'A'),
+        workspace=str(tmp_path/'workspace'),receipt_directory=str(directory),context_path=str(directory/'owner-context.json'),
+        task_alias='fresh-inert-alias',task_cid='inert-cid',database_attempt_id='inert-attempt',database_attempt_number=1,
+        allocation_session_id='inert-allocation',source_generation='grok-automatic-named-session/inert-source',
+        work_deadline_monotonic=now+10,native_deadline_monotonic=now+20,owner_pid=2,owner_birth=1,
+        owner_request_sha256='1'*64,capsule_pin=pin(cap),source_profile_pin=pin(profile),
+        max_output_tokens=128,maximum_timeout_seconds=10)
+
+
+def join_inputs(value):
+    binding={key:value[key]for key in ('database_attempt_id','database_attempt_number','allocation_session_id',
+        'workspace','source_generation','work_deadline_monotonic','native_deadline_monotonic')}
+    binding.update(portal_task_id=value['task_alias'],database_task_cid=value['task_cid'],portal_attempt=1)
+    options={key:value[key]for key in ('accelerator_root','receipt_directory','context_path','owner_pid',
+        'owner_birth','owner_request_sha256')}
+    return binding,options
+
+
+def test_complete_inert_join_is_metadata_only(capture_request):
+    binding,options=join_inputs(capture_request)
+    assert handoff._require_capture_request_join(capture_request,binding,**options)is None
+
+
+@pytest.mark.parametrize('field',['task_cid','database_attempt_id','allocation_session_id',
+    'workspace','source_generation','owner_birth','work_deadline_monotonic'])
+def test_sealed_request_cannot_rebind_actual_attempt_or_original_clock(capture_request,field):
+    binding,options=join_inputs(capture_request);value=dict(capture_request)
+    value[field]=False if field=='owner_birth'else -1 if field=='work_deadline_monotonic'else 'different'
+    with pytest.raises(handoff.ProductionHandoffRefusal):
+        handoff._require_capture_request_join(value,binding,**options)
+
+
+def test_missing_binding_key_refuses_as_closed_metadata_error(capture_request):
+    binding,options=join_inputs(capture_request);binding.pop('database_attempt_id')
+    with pytest.raises(handoff.ProductionHandoffRefusal):
+        handoff._require_capture_request_join(capture_request,binding,**options)
+
+
+@pytest.mark.parametrize('value',[True,2])
+def test_non_exact_one_portal_attempt_is_refused(capture_request,value):
+    binding,options=join_inputs(capture_request);binding['portal_attempt']=value
+    with pytest.raises(handoff.ProductionHandoffRefusal):
+        handoff._require_capture_request_join(capture_request,binding,**options)
+
+
+def sealed(value):
+    raw=worker.canonical(value);fd=os.memfd_create('private-M2-metadata-test',os.MFD_CLOEXEC|os.MFD_ALLOW_SEALING)
+    os.write(fd,raw);fcntl.fcntl(fd,fcntl.F_ADD_SEALS,worker.SEALS)
+    return fd,hashlib.sha256(raw).hexdigest()
+
+
+def test_actual_borrowed_sealed_FD_identity_is_retained(capture_request):
+    fd,digest=sealed(capture_request)
+    try:
+        value,identity=handoff._read_private_offline_descriptor(worker_module=worker,descriptor=fd,request_sha256=digest)
+        assert value==capture_request
+        assert handoff._read_private_offline_descriptor(worker_module=worker,descriptor=fd,
+            request_sha256=digest,identity=identity)==(capture_request,identity)
+        # Reader borrows the descriptor; it remains genuinely open for issuer.
+        assert os.fstat(fd).st_ino==identity[1]
+    finally:os.close(fd)
+
+
+def test_identical_bytes_in_another_actual_memfd_cannot_replace_original(capture_request):
+    first,digest=sealed(capture_request);second,other=sealed(capture_request)
+    try:
+        _,identity=handoff._read_private_offline_descriptor(worker_module=worker,descriptor=first,request_sha256=digest)
+        assert other==digest
+        with pytest.raises(handoff.ProductionHandoffRefusal,match='handoff_private_metadata_descriptor_replaced'):
+            handoff._read_private_offline_descriptor(worker_module=worker,descriptor=second,
+                request_sha256=digest,identity=identity)
+    finally:os.close(first);os.close(second)
+
+
+def test_actual_non_CLOEXEC_metadata_descriptor_is_refused(capture_request):
+    fd,digest=sealed(capture_request)
+    try:
+        os.set_inheritable(fd,True)
+        with pytest.raises(handoff.ProductionHandoffRefusal,match='handoff_private_metadata_descriptor_must_be_CLOEXEC'):
+            handoff._read_private_offline_descriptor(worker_module=worker,descriptor=fd,request_sha256=digest)
+    finally:os.close(fd)
+
+
+def test_genuine_stdlib_only_checker_joins_its_normal_worker_without_global_alias():
+    # The actual checker deliberately resolves worker locally at FIRST. The
+    # setup must use its declared normal module name, without inventing globals.
+    assert 'worker' not in vars(checker)
+    assert handoff._require_capture_worker_checker_pair(worker, checker) is None
+
+
+def test_genuine_modules_cannot_be_swapped_in_capture_checker_pair():
+    with pytest.raises(handoff.ProductionHandoffRefusal, match='genuine_worker_checker_pair_required'):
+        handoff._require_capture_worker_checker_pair(checker, worker)

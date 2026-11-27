@@ -1,0 +1,100 @@
+"""Real normal module/pin boundaries; no capability objects or admitted M0."""
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import textwrap
+
+import pytest
+
+import ipfs_accelerate_py.cli_runtime.grok_private_same_pid_m0 as actual_m0
+import ipfs_accelerate_py.cli_runtime.grok_existing_phase_owner as actual_factory
+
+
+def test_cold_normal_profile_dependencies_refuse_missing_then_preload_actual_sources():
+    # A fresh interpreter proves the absence boundary without removing or
+    # replacing a live normal package in this pytest process.
+    script = textwrap.dedent('''
+        import hashlib, importlib, json, pathlib, sys, types
+        import ipfs_accelerate_py.cli_runtime.grok_private_same_pid_m0 as m0
+        import ipfs_accelerate_py.cli_runtime.grok_existing_phase_owner as factory
+        import ipfs_accelerate_py.cli_runtime.grok_same_pid_owner_profile as profile
+        A=pathlib.Path(m0.__file__).parents[2]
+        P=pathlib.Path('/home/barberb/lift_coding/external/ipfs_datasets')
+        bridge='ipfs_accelerate_py.agent_supervisor.todo_daemon.database_portal_bridge'
+        relative='ipfs_accelerate_py/agent_supervisor/todo_daemon/database_portal_bridge.py'
+        path=A/relative
+        pins={str(path):hashlib.sha256(path.read_bytes()).hexdigest()}
+        assert bridge not in sys.modules
+        try:
+            factory.module(bridge,A,relative,pins)
+        except factory.ExistingOwnerRefusal as error:
+            assert str(error)=='existing_owner_genuine_module_origin_required'
+        else:
+            raise AssertionError('consumer guard must refuse an unloaded module')
+        assert bridge not in sys.modules
+        module=m0._import_pinned_normal_module(bridge,A,relative,pins)
+        assert type(module) is types.ModuleType and sys.modules[bridge] is module
+        assert factory.module(bridge,A,relative,pins) is module
+        # These are the exact five direct module guards in the real profile
+        # constructor, plus its six already-required normal CLI producers.
+        required=[
+          ('ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon',A,'ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py'),
+          (bridge,A,relative),
+          ('ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler',P,'ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py'),
+          ('ipfs_datasets_py.optimizers.logic_theorem_optimizer.parented_phase_resources',P,'ipfs_datasets_py/optimizers/logic_theorem_optimizer/parented_phase_resources.py'),
+          ('ipfs_accelerate_py.llm_allocation.duckdb_store',A,'ipfs_accelerate_py/llm_allocation/duckdb_store.py'),
+        ]
+        required += [(name,A,'ipfs_accelerate_py/cli_runtime/'+name.rsplit('.',1)[-1]+'.py') for name in profile.EXPECTED_MODULE_NAMES]
+        assert len(required)==11 and len({name for name,_,_ in required})==11
+        for name,root,relative in required:
+            path=root/relative
+            pins[str(path)]=hashlib.sha256(path.read_bytes()).hexdigest()
+            module=m0._import_pinned_normal_module(name,root,relative,pins)
+            assert type(module) is types.ModuleType and sys.modules[name] is module
+            assert module.__file__==module.__spec__.origin==str(path)
+            assert factory.module(name,root,relative,pins) is module
+        print(json.dumps(dict(guard_refused_missing=True,actual_normal_modules=11,authority_created=False)))
+    ''')
+    child = subprocess.Popen([sys.executable, '-B', '-c', script], env=dict(os.environ),
+        stdin=subprocess.DEVNULL,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+    try:
+        stdout,stderr=child.communicate(timeout=30)
+    finally:
+        if child.poll() is None:
+            child.kill()
+            child.communicate(timeout=5)
+    assert child.returncode==0,stderr.decode('utf-8','replace')[-4096:]
+    assert len(stdout)<4096 and len(stderr)<65536
+    assert json.loads(stdout)==dict(guard_refused_missing=True,actual_normal_modules=11,authority_created=False)
+
+
+@pytest.mark.parametrize('supplied_digest', [None, '0'*64], ids=['missing-pin','wrong-pin'])
+def test_actual_normal_preload_refuses_missing_or_wrong_source_pin(supplied_digest):
+    root=Path(actual_m0.__file__).parents[2]
+    name='ipfs_accelerate_py.agent_supervisor.todo_daemon.database_portal_bridge'
+    relative='ipfs_accelerate_py/agent_supervisor/todo_daemon/database_portal_bridge.py'
+    pins={} if supplied_digest is None else {str(root/relative):supplied_digest}
+    with pytest.raises(actual_m0.FixtureRefusal,match='genuine_normal_module_origin_required'):
+        actual_m0._import_pinned_normal_module(name,root,relative,pins)
+    # Refusal never fabricates an unavailable producer or relaxes the real
+    # consumer's expected origin; the imported object remains a normal module.
+    module=sys.modules[name]
+    assert module.__file__==module.__spec__.origin==str(root/relative)
+
+
+def test_source_profile_metadata_projection_keeps_full_pin_and_strict_consumer(tmp_path):
+    source=tmp_path/'inert-source-profile.json'
+    body=b'{"schema":"inert-metadata-not-authority/v1"}\n'
+    source.write_bytes(body)
+    complete=dict(path=str(source),bytes=len(body),sha256=hashlib.sha256(body).hexdigest())
+    before=dict(complete)
+    pins={complete['path']:complete['sha256']}
+    binding=dict(source_bindings_sha256=complete['sha256'])
+    with pytest.raises(actual_factory.ExistingOwnerRefusal,match='existing_owner_source_profile_pin_required'):
+        actual_factory._require_source_profile_binding(pins,complete,binding)
+    scoped={key:complete[key] for key in ('path','sha256')}
+    actual_factory._require_source_profile_binding(pins,scoped,binding)
+    assert complete==before and set(complete)=={'path','bytes','sha256'}

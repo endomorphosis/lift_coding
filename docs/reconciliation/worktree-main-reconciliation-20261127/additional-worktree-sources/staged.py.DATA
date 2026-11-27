@@ -1,0 +1,76 @@
+"""Preserve the two identified distinct staged/working source variants."""
+from hashlib import sha1, sha256
+import importlib.util
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+
+OUT=Path(__file__).parent
+spec=importlib.util.spec_from_file_location('private_retention_helpers',OUT/'preserve.py')
+h=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(h)
+SOURCES=[
+ {'worktree':'/home/barberb/lift_coding/.worktrees/legal-ir-native-metadata-executor-20261029','family':'ipfs_accelerate_py','relative_path':'ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py'},
+ {'worktree':'/home/barberb/portland-laws.github.io/workspace/codex-work/patent-legal-intelligence/ipfs_datasets_py','family':'ipfs_datasets_py','relative_path':'ipfs_datasets_py/processors/domains/uspto/prior_art_search_client.py'},
+]
+ENV=dict(os.environ,GIT_OPTIONAL_LOCKS='0',GIT_TERMINAL_PROMPT='0',GIT_NO_LAZY_FETCH='1')
+
+def git(repo,*args):
+    return subprocess.run(['git','--literal-pathspecs','-c','core.fsmonitor=false','-c','core.hooksPath=/dev/null','-c','protocol.allow=never','-C',repo,*args],capture_output=True,env=ENV,timeout=30,check=True).stdout
+
+def main():
+    current={}
+    reachable={}
+    proof={}
+    for family in ('ipfs_accelerate_py','ipfs_datasets_py','lift_coding'):
+        _,current[family],reachable[family],proof[family]=h.metadata(family)
+    previous=[]
+    for name in ('retention-manifest.json','retention-supplement.json'):
+        previous.extend(json.loads((OUT/name).read_text())['files'])
+    versions={row['sha256']:row['archive'] for row in previous if row['disposition']=='retained-inert-version'}
+    rows=[]
+    for selection in SOURCES:
+        row=dict(selection)
+        root=selection['worktree'];relative=selection['relative_path'];family=selection['family']
+        index=Path(git(root,'rev-parse','--path-format=absolute','--git-path','index').decode().strip())
+        if index.is_symlink():raise RuntimeError('Source index is a symlink')
+        before=index.stat()
+        listing=git(root,'ls-files','--stage','-z','--',relative)
+        entries=[token for token in listing.split(b'\0') if token]
+        if len(entries)!=1:raise RuntimeError('Selected source does not have exactly one index stage')
+        meta,path=entries[0].split(b'\t',1)
+        mode,oid,stage=meta.decode().split()
+        if stage!='0' or path.decode()!=relative:raise RuntimeError('Unresolved index stage or path drift')
+        raw=git(root,'cat-file','blob',oid)
+        after=index.stat()
+        if h.nine(before)!=h.nine(after):raise RuntimeError('Source index drifted while reading selected blob')
+        if len(raw)>h.MAX_FILE:raise RuntimeError('Staged source exceeds selected per-file bound')
+        digest=sha256(raw).hexdigest()
+        actual_oid=sha1(f'blob {len(raw)}\0'.encode()+raw).hexdigest()
+        if oid!=actual_oid:raise RuntimeError('Selected staged blob hash does not match returned source bytes')
+        row.update({'index_path':str(index),'index_full9_before':h.nine(before),'index_full9_after':h.nine(after),'source_index_unchanged':True,'stage':0,'mode':mode,'bytes':len(raw),'sha256':digest,'git_blob':oid,'observed_HEAD':git(root,'rev-parse','HEAD').decode().strip()})
+        if current[family].get(relative)==oid:row['disposition']='exact-current-main-path'
+        elif oid in reachable[family]:row['disposition']='exact-reachable-main-history'
+        elif oid in set(current['lift_coding'].values()):row['disposition']='exact-published-root-payload'
+        else:
+            hits=[name for name,pattern in h.MARKERS.items() if re.search(pattern,raw)]
+            if hits:row.update({'disposition':'held-credential-marker-review','marker_families':hits})
+            elif b'\0' in raw:row['disposition']='held-binary-content-review'
+            elif digest in versions:row.update({'disposition':'retained-inert-index-version','archive':versions[digest],'new_payload':False})
+            else:
+                archive='retained/'+family+'/'+digest+'.DATA'
+                path=OUT/archive
+                path.parent.mkdir(parents=True,exist_ok=True)
+                with path.open('xb') as stream:stream.write(raw)
+                path.chmod(0o600)
+                if sha256(path.read_bytes()).hexdigest()!=digest:raise RuntimeError('Staged archive readback failed')
+                row.update({'disposition':'retained-inert-index-version','archive':archive,'new_payload':True})
+        rows.append(row)
+    result={'schema':'two-distinct-staged-source-preservation/v1','scope':'Read-only two-index-blob preservation for the MM source rows identified by the927worktree status audit. No project import, Git mutation, index write, Source adoption, model, tests, DB, network, or runtime selection.','main_metadata':proof,'files':rows,'remaining_gaps':['This selects only the two MM rows in the95source groups; other index stages outside this scope remain with their owning reconciliation.']}
+    p=OUT/'staged-variants.json'
+    p.write_text(json.dumps(result,indent=2,sort_keys=True)+'\n')
+    print(json.dumps({'path':str(p),'bytes':p.stat().st_size,'sha256':sha256(p.read_bytes()).hexdigest(),'files':[{k:row.get(k) for k in ('family','relative_path','bytes','sha256','disposition','new_payload')} for row in rows]},indent=2))
+
+if __name__=='__main__':main()

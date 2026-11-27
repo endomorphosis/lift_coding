@@ -1,0 +1,331 @@
+"""Normal-package tests of real kernel-sealed inert metadata, not authority.
+
+No case creates PreparedPrivateFixtureBinding, credentials, native leases,
+Quack/DuckDB objects or a child. These tests stop at the public sealed reader,
+option gate and default-off selector. The request pin names a real inert JSON
+file that deliberately is not an executable M0 request. No fake packages,
+module loaders, syscall patches or mocked resource outcomes are used.
+"""
+from contextlib import contextmanager
+from copy import deepcopy
+import errno
+import fcntl
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+import time
+from types import SimpleNamespace
+
+import pytest
+import ipfs_accelerate_py.agent_supervisor.runtime.private_same_pid_fixture as binding
+
+
+@pytest.fixture
+def inert_metadata(tmp_path):
+    # Derive the real imported normal-package root; never copy a subject module
+    # into this private fixture or substitute a loader/source tree.
+    module_path = Path(binding.__file__)
+    assert module_path.is_absolute() and module_path.resolve(strict=True) == module_path
+    assert binding.__spec__.origin == str(module_path)
+    assert sys.modules.get(binding.__name__) is binding
+    accelerator = module_path.parents[3]
+    assert module_path == accelerator/'ipfs_accelerate_py/agent_supervisor/runtime/private_same_pid_fixture.py'
+    private = tmp_path/'inert-sealed-metadata'
+    private.mkdir(mode=0o700)
+    task_repository = private/'task-repository-metadata-only'
+    task_repository.mkdir(mode=0o700)
+    receipts = private/'receipts-not-native-evidence'
+    receipts.mkdir(mode=0o700)
+    # This file is real and its size/hash pin is correct. Its content is
+    # explicitly inert; _request/construct/bootstrap are outside these tests.
+    request = private/'inert-request-metadata.json'
+    request_bytes = binding.canonical({
+        'schema': 'sealed-reader-test-inert-metadata/v1',
+        'M0_request': False,
+        'native_authority': False,
+    })
+    request.write_bytes(request_bytes)
+    now = time.monotonic()
+    return {
+        'schema': binding.SCHEMA,
+        'request_pin': {'path': str(request), 'bytes': len(request_bytes),
+                        'sha256': hashlib.sha256(request_bytes).hexdigest()},
+        'accelerator_source_root': str(accelerator),
+        'task_repository_root': str(task_repository),
+        'task_repository_id': 'inert-metadata:not-an-admitted-repository',
+        'task_baseline_commit': '1'*40,
+        'task_baseline_tree_id': '2'*40,
+        'private_store_id': 'inert-metadata:not-a-store',
+        'private_database_uuid': 'inert-metadata:not-a-database-uuid',
+        'private_server_id': 'inert-metadata:not-a-server',
+        'private_database_path': str(private/'never-created.duckdb'),
+        'private_task_cid': 'inert-metadata:not-a-task',
+        'private_task_alias': 'SAMEPID-M0-METADATA-ONLY',
+        'source_generation': 'inert-sealed-reader-metadata-only',
+        'adapter_source_sha256': hashlib.sha256(module_path.read_bytes()).hexdigest(),
+        'composition_source_sha256': binding.M0_SOURCE_SHA256,
+        'receipt_directory': str(receipts),
+        'work_deadline_monotonic': now+10,
+        'native_deadline_monotonic': now+20,
+        'one_shot': True,
+        'attempt_cap': 1,
+        'provider_dispatch_allowed': False,
+        'receipt_precharge_bytes': binding.RECEIPT_PRECHARGE,
+        'parent_disk_reservation_id': 'inert-metadata:no-disk-reservation',
+        'parent_native_root_lease_id': 'inert-metadata:no-native-lease',
+        'required_P_SDK_source_sha256': dict(binding.P_SDK_SOURCE_SHA256),
+    }
+
+
+@contextmanager
+def _real_memfd(raw, *, seals=binding.SEALS):
+    assert type(raw) is bytes and len(raw) <= binding.MAXIMUM+1
+    descriptor = os.memfd_create('normal-test-inert-metadata',
+                                os.MFD_CLOEXEC | os.MFD_ALLOW_SEALING)
+    try:
+        assert descriptor >= 3
+        view = memoryview(raw)
+        while view:
+            written = os.write(descriptor, view[:64*1024])
+            assert written > 0
+            view = view[written:]
+        if seals:
+            fcntl.fcntl(descriptor, fcntl.F_ADD_SEALS, seals)
+        yield descriptor, hashlib.sha256(raw).hexdigest()
+    finally:
+        os.close(descriptor)
+
+
+def test_real_sealed_metadata_roundtrip_preserves_shared_descriptor_offset(inert_metadata):
+    raw = binding.canonical(inert_metadata)
+    with _real_memfd(raw) as (descriptor, digest):
+        info = os.fstat(descriptor)
+        assert stat.S_ISREG(info.st_mode) and info.st_nlink == 0
+        assert fcntl.fcntl(descriptor, fcntl.F_GET_SEALS) & binding.SEALS == binding.SEALS
+        assert not os.get_inheritable(descriptor)
+        os.lseek(descriptor, len(raw), os.SEEK_SET)
+        duplicate = os.dup(descriptor)
+        try:
+            assert binding.read_sealed_binding(duplicate, digest) == inert_metadata
+            assert os.lseek(descriptor, 0, os.SEEK_CUR) == len(raw)
+            assert os.lseek(duplicate, 0, os.SEEK_CUR) == len(raw)
+        finally:
+            os.close(duplicate)
+        assert binding.read_sealed_binding(descriptor, digest) == inert_metadata
+
+
+def test_options_and_selector_use_actual_sealed_descriptor_without_claiming_authority(inert_metadata):
+    with _real_memfd(binding.canonical(inert_metadata)) as (descriptor, digest):
+        assert binding.fixture_options(descriptor, digest) == (
+            binding.FD_OPTION, str(descriptor), binding.SHA_OPTION, digest)
+        args = SimpleNamespace(private_same_pid_fixture_fd=descriptor,
+                               private_same_pid_fixture_sha256=digest)
+        assert binding.fixture_selected(args) is True
+
+
+@pytest.mark.parametrize('operation', ('write', 'grow', 'shrink'))
+def test_real_kernel_denies_mutation_after_sealing(inert_metadata, operation):
+    raw = binding.canonical(inert_metadata)
+    with _real_memfd(raw) as (descriptor, digest):
+        with pytest.raises(OSError) as caught:
+            if operation == 'write':
+                os.pwrite(descriptor, b'!', 0)
+            elif operation == 'grow':
+                os.ftruncate(descriptor, len(raw)+1)
+            else:
+                os.ftruncate(descriptor, len(raw)-1)
+        assert caught.value.errno == errno.EPERM
+        assert os.pread(descriptor, len(raw)+1, 0) == raw
+        assert binding.read_sealed_binding(descriptor, digest) == inert_metadata
+
+
+@pytest.mark.parametrize('missing', ('write', 'grow', 'shrink', 'seal', 'all'))
+def test_reader_requires_every_real_kernel_seal(inert_metadata, missing):
+    flags = {'write': fcntl.F_SEAL_WRITE, 'grow': fcntl.F_SEAL_GROW,
+             'shrink': fcntl.F_SEAL_SHRINK, 'seal': fcntl.F_SEAL_SEAL}
+    seals = 0 if missing == 'all' else binding.SEALS & ~flags[missing]
+    with _real_memfd(binding.canonical(inert_metadata), seals=seals) as (descriptor, digest):
+        assert fcntl.fcntl(descriptor, fcntl.F_GET_SEALS) & binding.SEALS != binding.SEALS
+        with pytest.raises(binding.PrivateFixtureRefusal, match='real_fully_sealed_memfd_required'):
+            binding.read_sealed_binding(descriptor, digest)
+
+
+def test_linked_regular_file_cannot_substitute_for_sealed_memfd(inert_metadata, tmp_path):
+    raw = binding.canonical(inert_metadata)
+    path = tmp_path/'ordinary-metadata.json'
+    path.write_bytes(raw)
+    descriptor = os.open(path, os.O_RDONLY | os.O_CLOEXEC)
+    try:
+        assert os.fstat(descriptor).st_nlink == 1
+        with pytest.raises(binding.PrivateFixtureRefusal, match='real_fully_sealed_memfd_required'):
+            binding.read_sealed_binding(descriptor, hashlib.sha256(raw).hexdigest())
+    finally:
+        os.close(descriptor)
+
+
+@pytest.mark.parametrize('boundary', ('empty', 'too_large'))
+def test_reader_enforces_memfd_size_bound(boundary):
+    raw = b'' if boundary == 'empty' else b'x'*(binding.MAXIMUM+1)
+    with _real_memfd(raw) as (descriptor, digest):
+        with pytest.raises(binding.PrivateFixtureRefusal, match='real_fully_sealed_memfd_required'):
+            binding.read_sealed_binding(descriptor, digest)
+
+
+def test_reader_and_forwarded_options_reject_wrong_body_digest(inert_metadata):
+    with _real_memfd(binding.canonical(inert_metadata)) as (descriptor, digest):
+        wrong = ('0' if digest[0] != '0' else '1') + digest[1:]
+        with pytest.raises(binding.PrivateFixtureRefusal, match='sealed_fixture_metadata_changed'):
+            binding.read_sealed_binding(descriptor, wrong)
+        with pytest.raises(binding.PrivateFixtureRefusal, match='sealed_fixture_metadata_changed'):
+            binding.fixture_options(descriptor, wrong)
+
+
+def test_reader_rejects_a_genuinely_truncated_json_body(inert_metadata):
+    raw = binding.canonical(inert_metadata)[:-1]
+    with _real_memfd(raw) as (descriptor, digest):
+        with pytest.raises(json.JSONDecodeError):
+            binding.read_sealed_binding(descriptor, digest)
+
+
+@pytest.mark.parametrize('encoding', ('noncanonical', 'duplicate', 'nan', 'infinity', 'negative_infinity'))
+def test_reader_rejects_ambiguous_or_noncanonical_encoded_metadata(inert_metadata, encoding):
+    expected = 'canonical_closed_binding_required'
+    if encoding == 'noncanonical':
+        raw = json.dumps(inert_metadata, sort_keys=True, indent=1, allow_nan=False).encode('utf-8')
+    elif encoding == 'duplicate':
+        raw = b'{"schema":"inert-duplicate",' + binding.canonical(inert_metadata)[1:]
+        expected = 'duplicate_fixture_binding_key'
+    else:
+        changed = deepcopy(inert_metadata)
+        changed['work_deadline_monotonic'] = {
+            'nan': float('nan'), 'infinity': float('inf'), 'negative_infinity': -float('inf')
+        }[encoding]
+        raw = json.dumps(changed, sort_keys=True, separators=(',', ':'), allow_nan=True).encode('utf-8')
+        expected = 'nonfinite_binding'
+    with _real_memfd(raw) as (descriptor, digest):
+        with pytest.raises(binding.PrivateFixtureRefusal, match=expected):
+            binding.read_sealed_binding(descriptor, digest)
+
+
+@pytest.mark.parametrize('change', ('missing', 'extra'))
+def test_reader_requires_closed_metadata_shape(inert_metadata, change):
+    changed = deepcopy(inert_metadata)
+    if change == 'missing':
+        del changed['request_pin']
+    else:
+        changed['extra_unrecognized_field'] = 'inert'
+    with _real_memfd(binding.canonical(changed)) as (descriptor, digest):
+        with pytest.raises(binding.PrivateFixtureRefusal, match='closed_fixture_binding_required'):
+            binding.read_sealed_binding(descriptor, digest)
+
+
+@pytest.mark.parametrize('change', (
+    'cap_zero', 'cap_two', 'cap_boolean', 'cap_float',
+    'one_shot_false', 'one_shot_integer', 'provider_true', 'provider_integer',
+))
+def test_reader_preserves_integer_cap_one_and_strict_one_shot_flags(inert_metadata, change):
+    changed = deepcopy(inert_metadata)
+    field, value = {
+        'cap_zero': ('attempt_cap', 0), 'cap_two': ('attempt_cap', 2),
+        'cap_boolean': ('attempt_cap', True), 'cap_float': ('attempt_cap', 1.0),
+        'one_shot_false': ('one_shot', False), 'one_shot_integer': ('one_shot', 1),
+        'provider_true': ('provider_dispatch_allowed', True),
+        'provider_integer': ('provider_dispatch_allowed', 0),
+    }[change]
+    changed[field] = value
+    with _real_memfd(binding.canonical(changed)) as (descriptor, digest):
+        with pytest.raises(binding.PrivateFixtureRefusal, match='M0_only_binding_required'):
+            binding.read_sealed_binding(descriptor, digest)
+
+
+@pytest.mark.parametrize('change', ('adapter', 'composition', 'SDK', 'precharge'))
+def test_reader_rejects_producer_and_precharge_substitution(inert_metadata, change):
+    changed = deepcopy(inert_metadata)
+    expected = 'M0_only_binding_required'
+    if change == 'adapter':
+        changed['adapter_source_sha256'] = '0'*64
+        expected = 'actual_adapter_source_binding_required'
+    elif change == 'composition':
+        changed['composition_source_sha256'] = '0'*64
+    elif change == 'SDK':
+        changed['required_P_SDK_source_sha256']['autoencoder_daemon_resources.py'] = '0'*64
+    else:
+        changed['receipt_precharge_bytes'] = 0
+    with _real_memfd(binding.canonical(changed)) as (descriptor, digest):
+        with pytest.raises(binding.PrivateFixtureRefusal, match=expected):
+            binding.read_sealed_binding(descriptor, digest)
+
+
+@pytest.mark.parametrize('change', ('same_as_source', 'world_readable', 'symlink'))
+def test_reader_requires_actual_distinct_private_task_directory(inert_metadata, tmp_path, change):
+    changed = deepcopy(inert_metadata)
+    task = Path(changed['task_repository_root'])
+    if change == 'same_as_source':
+        changed['task_repository_root'] = changed['accelerator_source_root']
+    elif change == 'world_readable':
+        task.chmod(0o755)
+    else:
+        alias = tmp_path/'task-alias'
+        alias.symlink_to(task, target_is_directory=True)
+        changed['task_repository_root'] = str(alias)
+    try:
+        with _real_memfd(binding.canonical(changed)) as (descriptor, digest):
+            with pytest.raises(binding.PrivateFixtureRefusal, match='distinct_private_task_repository_required'):
+                binding.read_sealed_binding(descriptor, digest)
+    finally:
+        if change == 'world_readable':
+            task.chmod(0o700)
+
+
+@pytest.mark.parametrize('defaults', ('absent', 'explicit', 'ordinary_unrelated'))
+def test_default_off_path_requires_no_bootstrap_or_request_fields(defaults):
+    if defaults == 'absent':
+        args = SimpleNamespace()
+    elif defaults == 'explicit':
+        args = SimpleNamespace(private_same_pid_fixture_fd=-1, private_same_pid_fixture_sha256='')
+    else:
+        args = SimpleNamespace(implement=True, max_task_attempts=2)
+    assert binding.fixture_selected(args) is False
+    assert binding.validate_supervisor_fixture(args) is None
+
+
+@pytest.mark.parametrize('change', (
+    'missing_fd', 'missing_digest', 'sentinel_fd', 'boolean_fd',
+    'short_digest', 'uppercase_digest', 'bytes_digest',
+))
+def test_partial_opt_in_pair_fails_before_any_authority_lookup(inert_metadata, change):
+    with _real_memfd(binding.canonical(inert_metadata)) as (descriptor, digest):
+        values = {'private_same_pid_fixture_fd': descriptor,
+                  'private_same_pid_fixture_sha256': digest}
+        if change == 'missing_fd':
+            del values['private_same_pid_fixture_fd']
+        elif change == 'missing_digest':
+            del values['private_same_pid_fixture_sha256']
+        elif change == 'sentinel_fd':
+            values['private_same_pid_fixture_fd'] = -1
+        elif change == 'boolean_fd':
+            values['private_same_pid_fixture_fd'] = True
+        elif change == 'short_digest':
+            values['private_same_pid_fixture_sha256'] = digest[:-1]
+        elif change == 'uppercase_digest':
+            values['private_same_pid_fixture_sha256'] = 'A'*64
+        else:
+            values['private_same_pid_fixture_sha256'] = digest.encode('ascii')
+        args = SimpleNamespace(**values)
+        with pytest.raises(binding.PrivateFixtureRefusal, match='incomplete_fixture_option_pair'):
+            binding.fixture_selected(args)
+        with pytest.raises(binding.PrivateFixtureRefusal, match='incomplete_fixture_option_pair'):
+            binding.validate_supervisor_fixture(args)
+
+
+def test_fixture_cannot_enter_plan_bound_route_even_with_real_sealed_metadata(inert_metadata):
+    with _real_memfd(binding.canonical(inert_metadata)) as (descriptor, digest):
+        args = SimpleNamespace(private_same_pid_fixture_fd=descriptor,
+                               private_same_pid_fixture_sha256=digest)
+        # No credential/listener stand-in is supplied: route exclusion happens
+        # before the code may read any missing authority arguments or request.
+        with pytest.raises(binding.PrivateFixtureRefusal, match='ordinary_approved_one_shot_private_fixture_only'):
+            binding.validate_supervisor_fixture(args, plan_bound_dispatch=True)

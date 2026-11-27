@@ -1,0 +1,513 @@
+"""Opt-in provider-stream binding for a NEW same-PID production owner profile.
+
+Source candidate only. The profile must construct a genuine owner and server
+at the Portal provider seam, after the final worktree exists. No resource,
+claim, source lock, credential slot or session is acquired by this module.
+"""
+from __future__ import annotations
+
+import fcntl
+import hashlib
+import math
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import threading
+import time
+import types
+
+MODULE_NAME = 'ipfs_accelerate_py.cli_runtime.grok_production_handoff'
+POLL_SECONDS = 0.05
+OWNER_FLAGS = ('--owner-context', '--owner-request-sha256', '--owner-allocation-session-id')
+CAPTURE_FIELDS = ('allocation_session_id', 'provider', 'native_session_id', 'workspace', 'resume_style')
+PRIVATE_OFFLINE_FLAGS = ('--private-m1-offline-handshake', '--private-m1-request-fd',
+                         '--private-m1-request-sha256')
+PRIVATE_OFFLINE_ENTRY = 'ipfs_accelerate_py.cli_runtime.grok_private_same_pid_m1'
+PRIVATE_OFFLINE_WORKER = 'ipfs_accelerate_py.cli_runtime.grok_private_m1_offline_worker'
+PRIVATE_OFFLINE_CHECKER = 'ipfs_accelerate_py.cli_runtime.grok_private_m1_offline_check'
+
+
+class ProductionHandoffRefusal(RuntimeError):
+    pass
+
+
+def need(value, reason):
+    if not value:
+        raise ProductionHandoffRefusal(reason)
+
+
+def _read_private_offline_descriptor(*, worker_module, descriptor, request_sha256, identity=None):
+    """Observe borrowed, sealed metadata only; this does not admit a launch.
+
+    The entry retains and closes the descriptor. A recycled integer, including
+    one naming identical bytes, cannot replace the originally bound kernel FD.
+    This helper alone has no handoff, resource, claim or completion authority.
+    """
+    request = worker_module.read_sealed_request(descriptor, request_sha256)
+    info = os.fstat(descriptor)
+    observed = (info.st_dev, info.st_ino, info.st_mode, info.st_uid, info.st_nlink,
+                info.st_size, fcntl.fcntl(descriptor, fcntl.F_GET_SEALS))
+    need(fcntl.fcntl(descriptor, fcntl.F_GETFD) & fcntl.FD_CLOEXEC,
+         'handoff_private_metadata_descriptor_must_be_CLOEXEC')
+    need(identity is None or identity == observed, 'handoff_private_metadata_descriptor_replaced')
+    return request, observed
+
+
+class ProductionProviderHandoff:
+    """One actual stream, on the existing owner thread; never serializable.
+
+    The caller supplies a server that already holds genuine same-PID root,
+    phase, disk and database-attempt objects, plus an already initialized
+    allocation store. Existing store reads may open a connection; they occur
+    only after the complete worker process group has drained.
+    """
+
+    def __init__(self, *, server_module, server, allocation_store, capsule_pin,
+                 source_bindings_pin, worker_path):
+        need(type(server_module) is types.ModuleType and
+             sys.modules.get(server_module.__name__) is server_module and
+             server_module.__name__ == 'ipfs_accelerate_py.cli_runtime.grok_production_owner_server' and
+             type(server) is server_module.ProductionOwnerServer,
+             'handoff_exact_source_bound_server_required')
+        self.server_module, self.server = server_module, server
+        self.owner, self.core = server.owner, server.core
+        self._pins = dict(self.owner._pins)
+        factory = sys.modules.get(type(self.owner).__module__)
+        need(type(factory) is types.ModuleType and hasattr(factory, 'source_digest'),
+             'handoff_genuine_owner_factory_required')
+        self.factory = factory
+        daemon = sys.modules.get('ipfs_accelerate_py.agent_supervisor.todo_daemon.implementation_daemon')
+        allocation = sys.modules.get('ipfs_accelerate_py.llm_allocation.duckdb_store')
+        need(type(daemon) is types.ModuleType and type(allocation) is types.ModuleType and
+             type(self.owner._owner) is daemon.DatabaseImplementationDaemon and
+             type(allocation_store) is allocation.AllocationStore and allocation_store._ready is True,
+             'handoff_existing_database_owner_and_initialized_store_required')
+        accelerator = Path(daemon.__file__).parents[3]
+        self._daemon_module = daemon
+        self._allocation_module = allocation
+        self._cleanup_module = sys.modules.get('ipfs_accelerate_py.agent_supervisor.todo_daemon.core')
+        self.allocation_store = allocation_store
+        expected = {
+            MODULE_NAME: accelerator/'ipfs_accelerate_py/cli_runtime/grok_production_handoff.py',
+            server_module.__name__: accelerator/'ipfs_accelerate_py/cli_runtime/grok_production_owner_server.py',
+            allocation.__name__: accelerator/'ipfs_accelerate_py/llm_allocation/duckdb_store.py',
+            daemon.__name__: accelerator/'ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_daemon.py',
+            'ipfs_accelerate_py.agent_supervisor.todo_daemon.core': accelerator/'ipfs_accelerate_py/agent_supervisor/todo_daemon/core.py',
+        }
+        for name, path in expected.items():
+            module = sys.modules.get(name)
+            need(type(module) is types.ModuleType and module.__file__ == str(path) and
+                 module.__spec__.origin == str(path) and
+                 self._pins.get(str(path)) == factory.source_digest(path),
+                 'handoff_normal_package_complete_source_pins_required')
+        self._binding_bytes = bytes(self.owner._binding_bytes)
+        need(type(allocation_store.path) is type(Path()) and
+             str(allocation_store.path) == self.binding['allocation_store_path'] and
+             allocation_store.path.resolve(strict=True) == allocation_store.path,
+             'handoff_exact_existing_allocation_store_required')
+        for pin, digest in ((capsule_pin, self.binding['capsule_sha256']),
+                            (source_bindings_pin, self.binding['source_bindings_sha256'])):
+            need(type(pin) is dict and set(pin) == {'path', 'bytes', 'sha256'} and
+                 type(pin['bytes']) is int and pin['bytes'] > 0 and pin['sha256'] == digest and
+                 Path(pin['path']).stat().st_size == pin['bytes'] and
+                 factory.source_digest(pin['path']) == digest,
+                 'handoff_exact_existing_capsule_and_profile_pins_required')
+        self.capsule_pin, self.source_bindings_pin = dict(capsule_pin), dict(source_bindings_pin)
+        need(capsule_pin['bytes'] <= 65_536, 'handoff_bounded_capsule_required')
+        descriptor = os.open(capsule_pin['path'], os.O_RDONLY|os.O_NOFOLLOW|os.O_CLOEXEC|os.O_NONBLOCK)
+        try:
+            before = os.fstat(descriptor)
+            need(before.st_size == capsule_pin['bytes'], 'handoff_capsule_size_changed')
+            capsule_body = os.read(descriptor, 65_536+1)
+            after = os.fstat(descriptor)
+            identity = lambda row: (row.st_dev, row.st_ino, row.st_mode, row.st_nlink,
+                                    row.st_size, row.st_mtime_ns, row.st_ctime_ns)
+            need(len(capsule_body) == capsule_pin['bytes'] and identity(before) == identity(after),
+                 'handoff_capsule_changed_during_cleanup_budget_read')
+        finally:
+            os.close(descriptor)
+        need(self.factory.source_digest(capsule_pin['path']) == capsule_pin['sha256'],
+             'handoff_capsule_changed_during_cleanup_budget_read')
+        def unique_pairs(items):
+            result = {}
+            for key, value in items:
+                need(key not in result, 'handoff_capsule_duplicate_JSON_field')
+                result[key] = value
+            return result
+        def bad_constant(_value):
+            raise ProductionHandoffRefusal('handoff_capsule_nonfinite_JSON')
+        # Capsule bound matches V4's existing 65,536-byte file contract.
+        # RPC decode remains separately restricted to its original 8 KiB.
+        capsule = json.loads(capsule_body.decode('utf-8'), object_pairs_hook=unique_pairs,
+                             parse_constant=bad_constant)
+        need(type(capsule) is dict and self.core.canonical(capsule) == capsule_body and
+             capsule.get('schema') == 'legal-ir-grok-planning-transport-capsule/v4',
+             'handoff_capsule_schema_or_canonical_encoding_differs')
+        reserve = capsule['named_session']['cleanup_reserve_seconds']
+        need(type(reserve) in (int, float) and math.isfinite(reserve) and 1 <= reserve <= 10,
+             'handoff_original_capsule_cleanup_reserve_required')
+        self._cleanup_seconds = float(reserve)
+        self.worker_path = Path(worker_path)
+        need(str(self.worker_path) in self._pins and
+             self._pins[str(self.worker_path)] == self.binding['worker_source_sha256'] and
+             factory.source_digest(self.worker_path) == self.binding['worker_source_sha256'],
+             'handoff_exact_worker_source_required')
+        self._pid, self._thread = os.getpid(), threading.get_ident()
+        self._birth = self.core.process(self._pid)['birth']
+        self._prepared = False
+        self._process = None
+        self._child_identity = None
+        self._completed = False
+        self._closed = False
+        self._capture = None
+        self._observations = None
+        self._private_offline = None
+        self._private_offline_checker_active = False
+        self._private_offline_callback_attempted = False
+        self._private_offline_observation_bytes = None
+        self.owner.current()
+
+    def __reduce__(self):
+        raise TypeError('production provider handoff cannot be serialized')
+
+    def _lifetime(self):
+        need(os.getpid() == self._pid and threading.get_ident() == self._thread and
+             self.core.process(self._pid)['birth'] == self._birth,
+             'handoff_existing_owner_process_or_thread_changed')
+
+    @property
+    def binding(self):
+        # Every use decodes the original immutable owner bytes; a caller only
+        # receives a copy and cannot extend the original work/native deadline.
+        return self.core.decode(self._binding_bytes)
+
+    def _private_offline_modules(self, *, issuer, worker_module, checker_module):
+        """Only the genuine source-pinned private entry can select this seam."""
+        root = Path(self._daemon_module.__file__).parents[3]
+        entry = sys.modules.get(PRIVATE_OFFLINE_ENTRY)
+        for name, module in ((PRIVATE_OFFLINE_ENTRY, entry),
+                             (PRIVATE_OFFLINE_WORKER, worker_module),
+                             (PRIVATE_OFFLINE_CHECKER, checker_module)):
+            path = root / (name.replace('.', '/') + '.py')
+            need(type(module) is types.ModuleType and sys.modules.get(name) is module and
+                 module.__name__ == name and module.__file__ == module.__spec__.origin == str(path) and
+                 self._pins.get(str(path)) == self.factory.source_digest(path),
+                 'handoff_private_entry_worker_checker_normal_sources_required')
+        need(type(issuer) is entry.PrivateM1OwnedSetup and
+             issuer.profile.handoff is self and issuer.daemon is self.owner._owner and
+             issuer.root is self.owner._root and issuer.phase is self.owner._phase and
+             issuer.disk is self.owner._disk and issuer.store is self.allocation_store and
+             issuer.pid == self._pid and issuer.thread == self._thread,
+             'handoff_private_issuer_actual_owned_objects_required')
+        for module, function_name in ((entry, 'require_current'),
+                (worker_module, 'read_sealed_request'),
+                (checker_module, 'first_after_stream_missing_capture')):
+            function = (entry.PrivateM1OwnedSetup.require_current if module is entry
+                        else vars(module).get(function_name))
+            need(type(function) is types.FunctionType and function.__globals__ is vars(module) and
+                 function.__code__.co_filename == module.__file__ and function.__name__ == function_name,
+                 'handoff_private_actual_normal_methods_required')
+        need(type(issuer.require_current) is types.MethodType and
+             issuer.require_current.__self__ is issuer and
+             issuer.require_current.__func__ is entry.PrivateM1OwnedSetup.require_current and
+             checker_module.worker is worker_module,
+             'handoff_private_entry_and_checker_method_identity_required')
+        for path, digest in self._pins.items():
+            need(self.factory.source_digest(path) == digest, 'handoff_private_complete_producer_source_changed')
+
+    def bind_private_offline_metadata(self, *, issuer, descriptor, request_sha256,
+                                      worker_module, checker_module):
+        """Opt in once using actual entry custody; metadata never grants a lease.
+
+        The normal factory and ordinary Portal inputs cannot supply arbitrary
+        inherited descriptors. The genuine M1 entry owns this fully sealed FD
+        and retains it until the actual consumer tree is absent.
+        """
+        self._lifetime()
+        need(self._private_offline is None and not self._prepared and not self._closed and
+             self._process is None, 'handoff_private_binding_must_precede_single_stream')
+        self._private_offline_modules(issuer=issuer, worker_module=worker_module, checker_module=checker_module)
+        need(type(issuer.offline_metadata_descriptor) is int and
+             type(issuer.offline_metadata_request_sha256) is str and
+             issuer.offline_metadata_descriptor == descriptor and
+             issuer.offline_metadata_request_sha256 == request_sha256,
+             'handoff_private_descriptor_must_match_actual_issuer_retention')
+        issuer.require_current()
+        request, identity = _read_private_offline_descriptor(worker_module=worker_module,
+            descriptor=descriptor, request_sha256=request_sha256)
+        binding = self.binding
+        root = str(Path(self._daemon_module.__file__).parents[3])
+        expected = {key: binding[key] for key in ('database_task_cid', 'allocation_session_id',
+            'workspace', 'source_generation', 'work_deadline_monotonic', 'native_deadline_monotonic')}
+        expected.update(private_task_alias=binding['portal_task_id'], accelerator_root=root,
+                        receipt_directory=str(self.server.context_path.parent))
+        need(all(type(request[key]) is type(value) and request[key] == value
+                 for key, value in expected.items()) and
+             type(binding['database_attempt_number']) is int and binding['database_attempt_number'] == 1 and
+             type(binding['portal_attempt']) is int and binding['portal_attempt'] == 1,
+             'handoff_private_request_actual_attempt_and_original_clocks_required')
+        directory = Path(request['receipt_directory'])
+        need(directory.resolve(strict=True) == directory and self.owner._disk.directory in directory.parents and
+             request['worker_pin']['path'] == str(self.worker_path) and
+             request['source_profile_pin'] == self.source_bindings_pin and
+             request['capsule_pin'] == self.capsule_pin and
+             request['worker_pin']['sha256'] == binding['worker_source_sha256'] and
+             request['owner_client_pin']['sha256'] == binding['owner_source_sha256'],
+             'handoff_private_metadata_paths_and_source_profile_differ')
+        for key in ('worker_pin', 'owner_client_pin', 'source_profile_pin', 'capsule_pin'):
+            worker_module.read_pin(request[key])
+        issuer.require_current()
+        self.owner.current()
+        need(time.monotonic() < binding['work_deadline_monotonic'] - 3.0,
+             'handoff_private_binding_original_work_margin_expired')
+        self._private_offline = dict(issuer=issuer, descriptor=descriptor, request_sha256=request_sha256,
+            worker=worker_module, checker=checker_module, identity=identity,
+            request_bytes=worker_module.canonical(request), accepted=False, stdin=None, portal=None)
+
+    def _private_offline_current(self, *, productive):
+        state = self._private_offline
+        need(state is not None, 'handoff_private_binding_required')
+        self._lifetime()
+        self._private_offline_modules(issuer=state['issuer'], worker_module=state['worker'],
+                                      checker_module=state['checker'])
+        need(type(state['issuer'].offline_metadata_descriptor) is int and
+             type(state['issuer'].offline_metadata_request_sha256) is str and
+             state['issuer'].offline_metadata_descriptor == state['descriptor'] and
+             state['issuer'].offline_metadata_request_sha256 == state['request_sha256'],
+             'handoff_private_original_issuer_descriptor_retention_changed')
+        request, _ = _read_private_offline_descriptor(worker_module=state['worker'],
+            descriptor=state['descriptor'], request_sha256=state['request_sha256'], identity=state['identity'])
+        need(state['worker'].canonical(request) == state['request_bytes'],
+             'handoff_private_original_sealed_metadata_changed')
+        if productive:
+            state['issuer'].require_current()
+            self.owner.current()
+            need(time.monotonic() < self.binding['work_deadline_monotonic'] - 3.0,
+                 'handoff_private_launch_original_work_margin_expired')
+        return request
+
+    def accepted_metadata_pass_fds(self, *, portal_daemon, command, input_text):
+        """One real Portal launch may borrow only its bound metadata descriptor."""
+        if self._private_offline is None:
+            return ()
+        state = self._private_offline
+        need(self._prepared and self._process is None and not self._closed and not state['accepted'] and
+             portal_daemon is state['portal'] and
+             type(portal_daemon) is self._daemon_module.PortalImplementationDaemon and
+             type(command) in (list, tuple) and tuple(command) == self.command and
+             type(input_text) is str, 'handoff_private_one_exact_portal_launch_required')
+        raw = input_text.encode('utf-8')
+        need(0 < len(raw) <= state['worker'].MAX_STDIN, 'handoff_private_complete_bounded_original_stdin_required')
+        self._private_offline_current(productive=True)
+        state['stdin'] = dict(bytes=len(raw), sha256=hashlib.sha256(raw).hexdigest())
+        need(time.monotonic() < self.binding['work_deadline_monotonic'] - 3.0,
+             'handoff_private_final_FD_acceptance_original_margin_expired')
+        state['accepted'] = True
+        return (state['descriptor'],)
+
+    def after_accepted_stream_return(self, completed):
+        """The private checker owns FIRST callback; no offline task is accepted."""
+        if self._private_offline is None:
+            return self.after_stream_return(completed)
+        state = self._private_offline
+        self._lifetime()
+        need(not self._private_offline_callback_attempted and state['accepted'] is True and
+             type(state['stdin']) is dict and type(completed) is subprocess.CompletedProcess and
+             type(completed.returncode) is int and completed.returncode == 0,
+             'handoff_private_single_successful_worker_return_required')
+        self._private_offline_callback_attempted = True
+        request = self._private_offline_current(productive=False)
+        path = Path(request['receipt_directory']) / 'offline-ACK.json'
+        size = path.stat().st_size
+        need(0 < size <= state['worker'].MAX_RECEIPT, 'handoff_private_bounded_actual_offline_receipt_required')
+        pin = dict(path=str(path), bytes=size, sha256=self.factory.source_digest(path))
+        self._private_offline_checker_active = True
+        try:
+            observation = state['checker'].first_after_stream_missing_capture(handoff=self,
+                completed=completed, request=request, observation_pin=pin, expected_stdin=dict(state['stdin']))
+        finally:
+            self._private_offline_checker_active = False
+        need(self._closed is True and self.server.closed is True and self._completed is False and
+             self._capture is None and observation['actual_first_handoff_missing_capture_refusal'] is True and
+             observation['task_completion_accepted'] is False and observation['actual_capture_accepted'] is False,
+             'handoff_private_only_genuine_closed_negative_observation_required')
+        self._private_offline_observation_bytes = state['worker'].canonical(observation)
+        raise ProductionHandoffRefusal('handoff_private_offline_observation_not_completion')
+
+    def private_offline_observation(self):
+        """Return an additive copy, never completion or renewed native authority."""
+        self._lifetime()
+        need(self._private_offline_observation_bytes is not None and self._closed is True and
+             self.server.closed is True and self._completed is False and self._capture is None,
+             'handoff_private_no_genuine_first_callback_negative_observation')
+        return json.loads(self._private_offline_observation_bytes.decode('utf-8'))
+
+    def prepare_for_stream(self, *, portal_daemon, task, portal_attempt,
+                           workspace, command, maximum_timeout_seconds):
+        """Finish argv before Popen; publish context only from actual birth."""
+        self._lifetime()
+        need(not self._prepared and not self._closed and
+             type(portal_daemon) is self._daemon_module.PortalImplementationDaemon,
+             'handoff_single_exact_portal_provider_required')
+        authority = portal_daemon._database_attempt_authority
+        need(type(authority) is dict and all(type(authority.get(key)) is type(self.binding[key]) and
+             authority[key] == self.binding[key] for key in
+             ('database_task_cid', 'database_attempt_id', 'database_claim_id', 'database_attempt_number')) and
+             type(task) is self._daemon_module.PortalTask and
+             task.task_id == self.binding['portal_task_id'] and
+             portal_daemon._canonical_ref(task) == self.binding['portal_task_revision_cid'] and
+             type(portal_attempt) is int and portal_attempt == self.binding['portal_attempt'] and
+             str(workspace) == self.binding['workspace'] and
+             not portal_daemon.production_provider_policy,
+             'handoff_actual_portal_attempt_workspace_or_route_differs')
+        need(type(command) in (tuple, list) and len(command) >= 3 and
+             tuple(command[:3]) == ('/usr/bin/python3', '-B', str(self.worker_path)) and
+             all(type(part) is str and part for part in command) and
+             not any(part == flag or part.startswith(flag+'=') for part in command for flag in OWNER_FLAGS),
+             'handoff_exact_worker_argv_without_owner_overrides_required')
+        for flag, expected in (('--transport-capsule', self.capsule_pin['path']),
+                               ('--transport-capsule-sha256', self.capsule_pin['sha256'])):
+            indices = [index for index, part in enumerate(command) if part == flag]
+            need(len(indices) == 1 and indices[0]+1 < len(command) and command[indices[0]+1] == expected and
+                 not any(part.startswith(flag+'=') for part in command),
+                 'handoff_actual_worker_capsule_argv_differs')
+        now = time.monotonic()
+        deadline = self.binding['work_deadline_monotonic']
+        need(type(maximum_timeout_seconds) in (int, float) and math.isfinite(maximum_timeout_seconds) and
+             0 < deadline-now <= maximum_timeout_seconds and
+             deadline <= self.binding['native_deadline_monotonic'],
+             'handoff_original_absolute_deadline_required')
+        self.owner.current()
+        private_arguments = ()
+        if self._private_offline is not None:
+            self._private_offline_current(productive=True)
+            need(not any(part == flag or part.startswith(flag+'=') for part in command
+                         for flag in PRIVATE_OFFLINE_FLAGS), 'handoff_private_argv_overrides_forbidden')
+            private_arguments = ('--private-m1-offline-handshake', '--private-m1-request-fd',
+                str(self._private_offline['descriptor']), '--private-m1-request-sha256',
+                self._private_offline['request_sha256'])
+            self._private_offline['portal'] = portal_daemon
+        self.command = tuple(command) + private_arguments + (
+            '--owner-context', str(self.server.context_path),
+            '--owner-request-sha256', self.owner._request_sha256,
+            '--owner-allocation-session-id', self.binding['allocation_session_id'],
+        )
+        if self._private_offline is not None:
+            need(time.monotonic() < self.binding['work_deadline_monotonic'] - 3.0,
+                 'handoff_private_prepared_argv_original_margin_expired')
+        self._prepared = True
+        return list(self.command)
+
+    @property
+    def absolute_deadline(self):
+        self._lifetime()
+        need(self._prepared, 'handoff_provider_not_prepared')
+        return self.binding['work_deadline_monotonic']
+
+    def on_started(self, process):
+        """Existing runner calls this before any original stdin is delivered."""
+        self._lifetime()
+        need(self._prepared and self._process is None and type(process) is subprocess.Popen,
+             'handoff_one_actual_direct_Popen_required')
+        if self._private_offline is not None:
+            need(self._private_offline['accepted'] is True and tuple(process.args) == self.command,
+                 'handoff_private_actual_accepted_Popen_argv_required')
+        self._process = process
+        self._child_identity = self.core.process(process.pid)
+        need(self._child_identity['parent_pid'] == self._pid and
+             self._child_identity['group_pid'] == process.pid, 'handoff_actual_direct_worker_birth_required')
+        self.server.bind_child(process)
+
+    def poll_or_cancel(self):
+        try:
+            self._lifetime()
+            need(self._prepared and self._process is not None and not self._closed,
+                 'handoff_provider_lifetime_changed')
+            return self.server.poll_or_cancel()
+        except BaseException:
+            return 'production_provider_handoff_currentness_refused'
+
+    def close_after_stream_failure(self):
+        """No speculative deletion: genuine close refuses any live consumer."""
+        self._lifetime()
+        if not self._closed:
+            cleanup_deadline = time.monotonic()+self._cleanup_seconds
+            def remaining_cleanup():
+                remaining = cleanup_deadline-time.monotonic()
+                need(remaining > 0, 'handoff_single_cleanup_budget_expired')
+                return remaining
+            if self._process is not None:
+                need(self._child_identity is not None and
+                     self._child_identity['pid'] == self._process.pid,
+                     'handoff_cleanup_actual_birth_custody_unverified')
+                child = {'pid': self._child_identity['pid'], 'birth': str(self._child_identity['birth'])}
+                usage = self.owner._host._group_usage(child)
+                need(usage['available'] is True, 'handoff_cleanup_group_inventory_unverified')
+                if usage['live_processes']:
+                    # The genuine strict SDK checks the ORIGINAL captured birth
+                    # before any signal, including leader-exit and PID reuse.
+                    # No fresh PID sample grants replacement authority.
+                    fenced = self._cleanup_module.terminate_pid_tree(self._process.pid,
+                        grace_seconds=min(0.1, remaining_cleanup()), freeze_first=True,
+                        require_gone=True, owned_process_group_id=self._process.pid,
+                        expected_root_start_time_ticks=int(self._child_identity['birth']),
+                        strict_timeout_seconds=remaining_cleanup())
+                    need(fenced is True, 'handoff_cleanup_strict_native_fence_unverified')
+                self._process.wait(timeout=remaining_cleanup())
+                usage = self.owner._host._group_usage(child)
+                need(usage['available'] is True and usage['live_processes'] == 0,
+                     'handoff_cleanup_group_drain_unverified')
+            # SDK native-consumer and group checks still run independently.
+            # Any false/unknown path above retains the endpoint and precharge.
+            remaining_cleanup()
+            self.server.close_after_group_drain()
+            self._closed = True
+
+    def after_stream_return(self, completed):
+        """Collect independent evidence after the actual runner drains group."""
+        self._lifetime()
+        need(self._private_offline is None or self._private_offline_checker_active is True,
+             'handoff_private_checker_must_own_first_callback')
+        need(not self._completed and self._process is not None and
+             type(completed) is subprocess.CompletedProcess and type(completed.returncode) is int and
+             completed.returncode == self._process.returncode and tuple(completed.args) == self.command,
+             'handoff_actual_stream_result_differs')
+        # The genuine consumer independently requires native/group absence.
+        # No post-exit current() is attempted: the old child identity is gone.
+        self.server.close_after_group_drain()
+        self._closed = True
+        if completed.returncode == 0:
+            self.server.assert_result_eligible()
+            self._observations = self.server.observations()
+            row = self.allocation_store.get_cli_session(self.binding['allocation_session_id'], 'grok_cli')
+            need(type(row) is dict and all(type(row.get(key)) is str and row[key] for key in CAPTURE_FIELDS) and
+                 row['allocation_session_id'] == self.binding['allocation_session_id'] and
+                 row['provider'] == 'grok_cli' and row['workspace'] == self.binding['workspace'] and
+                 row['resume_style'] == 'resume', 'handoff_independent_store_capture_readback_missing')
+            need(self._private_offline is None, 'handoff_private_offline_capture_cannot_be_accepted')
+            observed = time.monotonic()
+            need(observed < self.binding['native_deadline_monotonic'],
+                 'handoff_independent_capture_after_native_deadline')
+            self._capture = {'allocation_store_path': self.binding['allocation_store_path'],
+                             'row': {key: row[key] for key in CAPTURE_FIELDS},
+                             'observed_monotonic': observed}
+        self._completed = True
+
+    def freeze_owner_observations(self, *, transport_pin, output_path):
+        """Additive metadata for the independent factual acceptance checker."""
+        self._lifetime()
+        need(self._completed and self._closed and self._capture is not None and self._observations,
+             'handoff_no_successful_postdrain_owner_evidence')
+        need(type(transport_pin) is dict and set(transport_pin) == {'path', 'bytes', 'sha256'} and
+             Path(transport_pin['path']).stat().st_size == transport_pin['bytes'] and
+             self.factory.source_digest(transport_pin['path']) == transport_pin['sha256'],
+             'handoff_exact_transport_receipt_pin_required')
+        context = self.core.decode(self.server._context_bytes)
+        record = {'schema': 'legal-ir-grok-planning-transport-owner-observations/v1',
+                  'context_sha256': context['context_sha256'], 'request_sha256': context['request_sha256'],
+                  'transport_receipt_sha256': transport_pin['sha256'],
+                  'source_bindings_pin': dict(self.source_bindings_pin), 'capsule_pin': dict(self.capsule_pin),
+                  'rpc_observations': self._observations, 'capture_observation': self._capture}
+        return self.server_module.fresh_record(self.core, output_path, record, self.owner._disk.directory)

@@ -1,0 +1,98 @@
+{
+  "schema": "complete-project-work-reconciliation-closeout/v1",
+  "scope": [
+    "/tmp",
+    "/home/barberb",
+    "registered worktrees",
+    "initialized nested project submodules"
+  ],
+  "inventory_accounting": {
+    "additional_actual_oids": 158,
+    "branch_tips": 9929,
+    "main_reachable": 2104,
+    "new_private_bundles_restore": 84,
+    "portland_bundle_restore": 7693,
+    "previous_published_restores": 206,
+    "total_distinct_repository_and_oid": 10087,
+    "unborn_markers_excluded": 1
+  },
+  "all_observed_commit_pairs_accounted_for": true,
+  "branch_recovery": {
+    "new_portland_covered_pairs": 7693,
+    "other_new_covered_pairs": 84,
+    "other_plaintext_pairs": 83,
+    "other_encrypted_pairs": 1,
+    "all_new_bundles_restore_verified": true
+  },
+  "additional_worktree_source_recovery": {
+    "unique_payloads": 123,
+    "bytes": 27045746,
+    "original_restore_mappings": 523,
+    "distinct_staged_variants_match_published_history": 2,
+    "symlink_entries_match_published_metadata": 2,
+    "unresolved_capture_holds": 0,
+    "other_regular_mappings_with_existing_published_source_evidence": 4987
+  },
+  "root_authoring_recovery": {
+    "unique_plaintext_payloads": 2045,
+    "plaintext_bytes": 36869973,
+    "original_plaintext_mappings": 12832,
+    "encrypted_mappings": 365,
+    "encrypted_unique_source_payloads": 20,
+    "unrecoverable_marker_held_versions": 0,
+    "coverage_limits": "Manifest explicitly distinguishes authored inputs, historical copied sources, unknown-copy classes and generated/dependency exclusions."
+  },
+  "initial_98_worktree_recovery": {
+    "compared_working_files": 2540,
+    "new_unique_versions": 22,
+    "original_mappings": 25
+  },
+  "encryption": {
+    "archives": 2,
+    "all_decrypt_readbacks_match": true,
+    "passphrase_local_path": "/home/barberb/.local/state/lift-coding-git-recovery/20261127-86d805ij/historical-bundle.passphrase",
+    "passphrase_published": false
+  },
+  "forced_pushes": false,
+  "hosted_ci_dispatched": false,
+  "maintained_code_ports_in_this_followup": 0,
+  "qualification": "Historical branches and unqualified variants are recoverable artifacts. No new model, legal, test-pass or production-readiness claim.",
+  "exclusions": [
+    "dependency/install caches and virtualenvs",
+    "permission-denied directories recorded in discovery",
+    "explicitly recorded pytest/synthetic fixture namespaces",
+    "generated runtime/model/binary payloads outside Git history",
+    "path-only or unknown-copy classes documented by source manifests"
+  ],
+  "original_working_files_staged_contents_and_branch_refs_preserved": true,
+  "global_index_stat_metadata_equality_claimed": false,
+  "permission_denied_directories": {
+    "count": 176,
+    "within_project_artifacts": 105,
+    "all_denied_paths_audited": false,
+    "unattended_privileged_read": "sudo requires password",
+    "path_manifest": "full-depth-discovery-metadata.json"
+  },
+  "independent_staged_review": {
+    "path": "independent-publication-review.json",
+    "bytes": 7503,
+    "sha256": "77e4063a41a46d9a05af33316e8ee6a68ab692aac79874bed4262e9f345fd8c1",
+    "scope": "2284 files and protected payloads; later changes limited to metadata/this review."
+  },
+  "coordinator_export_request": {
+    "selected_existing_thread": "01a0f851-65f0-7c11-b737-07a24c5090ea",
+    "transport": "unavailable at localhost40213; request not delivered",
+    "no_new_reader_or_runtime_created": true
+  },
+  "commit_accounting_scope": "Eight primary repository families, with nine additional owned nested repository families checked separately.",
+  "other_owned_nested_repositories": {
+    "families": 9,
+    "physical_checkouts": 41,
+    "observed_commit_pairs": 73,
+    "all_ancestor_of_actual_github_main": true,
+    "authored_dirty_entries": 0,
+    "receipt": "nested-owned-final-proof.json",
+    "receipt_sha256": "25b4756f979b6718b31e6857efb9c496f62d302c36b2282a0747b1da66b8f8eb"
+  },
+  "total_observed_owned_repository_commit_pairs_accounted_for": 10160
+}

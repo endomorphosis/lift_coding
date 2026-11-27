@@ -1,0 +1,49 @@
+{
+  "schema": "encrypted-exact-history-retention/v1",
+  "artifact_kind": "git-bundle",
+  "original_archive_sha256": "be9250573417c383d40770a1505bfa7a8eeebab5a0243bb2e4cbec2681ccee91",
+  "original_archive_bytes": 283328984,
+  "original_commit_tips": [
+    "1c16fb1773a03a202523a7ff62d191717b7d8173"
+  ],
+  "reason": "Unresolved credential-like text; exact original bytes retained encrypted.",
+  "cipher": "GnuPG AES256 symmetric encryption",
+  "ciphertext_sha256": "2b536cdeeee7438798cd0a1c3771e2b04198d5f2c1ce758ddae138e49cee4180",
+  "ciphertext_bytes": 283329098,
+  "encryption_returncode": 0,
+  "decryption_returncode": 0,
+  "decrypted_bytes_match_exact_original": true,
+  "key_local_path": "/home/barberb/.local/state/lift-coding-git-recovery/20261127-86d805ij/historical-bundle.passphrase",
+  "key_is_in_git": false,
+  "key_values_disclosed": false,
+  "owned_crypto_helper": {
+    "pid": 25747,
+    "birth_start_ticks": "477696431",
+    "returncode": 0,
+    "cleanup_confirmed": true,
+    "private_home": "/tmp/git-main-followup-20261127-zYjieLmd/accelerate-sensitive-historical-commit-v02-gnupg"
+  },
+  "parts_in_concatenation_order": [
+    {
+      "path": "accelerate-sensitive-historical-commit-v02.archive.gpg.part-000.DATA",
+      "bytes": 90000000,
+      "sha256": "2487b03d8a3beab692c00181b299008b4463817b3e9dd54552692a3d72a26af6"
+    },
+    {
+      "path": "accelerate-sensitive-historical-commit-v02.archive.gpg.part-001.DATA",
+      "bytes": 90000000,
+      "sha256": "8c89fb90eac37385a5e794b586c9e77e763aa77c4e7941c1f7bdad76040db16e"
+    },
+    {
+      "path": "accelerate-sensitive-historical-commit-v02.archive.gpg.part-002.DATA",
+      "bytes": 90000000,
+      "sha256": "8d1cbac315954288e8ab61921c4190c280f963e6e02cc0c96fc673a4cc2481bc"
+    },
+    {
+      "path": "accelerate-sensitive-historical-commit-v02.archive.gpg.part-003.DATA",
+      "bytes": 13329098,
+      "sha256": "daf11ff494463dc7be622233346762f88b346ab446b4ed3a5badaa29d8a90cf3"
+    }
+  ],
+  "restore_instruction": "Concatenate the listed parts, decrypt with gpg using the local passphrase file, verify the original archive SHA-256, then use the accompanying restore receipt."
+}

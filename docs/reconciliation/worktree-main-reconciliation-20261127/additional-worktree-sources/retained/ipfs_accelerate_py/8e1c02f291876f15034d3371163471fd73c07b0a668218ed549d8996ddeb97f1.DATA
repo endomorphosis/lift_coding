@@ -1,0 +1,204 @@
+"""Pure inert metadata and genuine private-file controls only.
+
+Synthetic dictionaries below are NOT owner/ACK capabilities. No owner/client,
+resource substitute, initializer, manager, native dependency or provider runs.
+"""
+import ast
+import copy
+import hashlib
+import inspect
+import os
+from pathlib import Path
+import stat
+import time
+
+import pytest
+import ipfs_accelerate_py.cli_runtime.grok_fresh_task_capture_transport as transport
+import ipfs_accelerate_py.cli_runtime.grok_fresh_task_capture_worker as worker
+import ipfs_accelerate_py.cli_runtime.grok_private_fake_credentials as helper
+
+
+def pin_file(path,raw):
+    path.write_bytes(raw);path.chmod(0o600)
+    return dict(path=str(path),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+
+
+@pytest.fixture
+def inert_checkpoint(tmp_path):
+    receipts=tmp_path/'receipts';receipts.mkdir(mode=0o700)
+    metadata=tmp_path/'metadata';metadata.mkdir(mode=0o700)
+    now=time.monotonic();root=Path(worker.__file__).parents[2]
+    request=dict(schema=worker.PRIVATE_SCHEMA,mode='fresh-task-capture-diagnostic',one_shot=True,attempt_cap=1,
+        provider_dispatch_allowed=True,execution_environment='isolated-loopback',accelerator_root=str(root),
+        workspace=str(tmp_path/'workspace'),receipt_directory=str(receipts),task_alias='inert-checkpoint-task',
+        task_cid='inert-checkpoint-cid',database_attempt_id='inert-checkpoint-attempt',database_attempt_number=1,
+        allocation_session_id='inert-checkpoint-session',source_generation='grok-automatic-named-session/inert-checkpoint',
+        work_deadline_monotonic=now+240,native_deadline_monotonic=now+300,owner_pid=2,owner_birth=5,
+        owner_request_sha256='1'*64,context_path=str(receipts/'owner-context.json'),
+        capsule_pin=pin_file(metadata/'capsule.json',b'{}\n'),source_profile_pin=pin_file(metadata/'profile.json',b'{}\n'),
+        max_output_tokens=128,maximum_timeout_seconds=30,
+        fake_credential_fixture_pin=pin_file(receipts/'private-fake-credential-fixture.json',b'{}\n'))
+    identity=dict(pid=3,parent_pid=2,group_pid=3,birth=7)
+    context=dict(request_sha256=request['owner_request_sha256'],worker_pid=3,worker_birth=7,worker_process_group=3,
+        owner_pid=2,owner_birth=5,context_sha256='2'*64,allocation_store_path=str(receipts/'allocation.duckdb'))
+    context_pin=pin_file(Path(request['context_path']),worker.canonical(context))
+    S=transport.digest(request)
+    persistence=dict(schema='private-fake-secret-persistence-observation/v1',path=str(receipts/'private-fake-secrets.json'),
+        initial_fstat=dict(device=1,inode=2,uid=os.geteuid(),mode=0o600,nlink=1,bytes=3),
+        final_fstat=dict(device=1,inode=2,uid=os.geteuid(),mode=0o600,nlink=1,bytes=8),
+        final_pin=dict(path=str(receipts/'private-fake-secrets.json'),bytes=8,sha256='7'*64),observed_monotonic=now-0.025)
+    initialization=dict(schema='private-fake-credential-installation-observation/v2',fixture_pin=request['fake_credential_fixture_pin'],
+        owner_request_sha256=request['owner_request_sha256'],sealed_worker_request_sha256=S,same_owner_client=True,same_store=True,
+        no_capture_rows_seeded=True,actual_readonly_capture_table_counts={'cli_sessions':0,'cli_session_aliases':0},
+        preparation_started_monotonic=now-0.05,preparation_completed_monotonic=now-0.02,
+        owner_rpc_receipt_count_before_preparation=1,owner_rpc_receipt_count_after_preparation=2,
+        fake_persistence=persistence,**{name:False for name in('provider_called','provider_dispatch_granted',
+            'task_completion_accepted','native_qualified','production_qualified','Lean_admitted')})
+    rows=[]
+    for n,stage in enumerate(('request_prepared','remaining_deadline'),1):
+        rows.append(dict(sequence=n,stage=stage,request_sha256=request['owner_request_sha256'],context_sha256=context['context_sha256'],
+            owner_pid=2,owner_birth=5,owner_process_group=2,client_pid=3,client_birth=7,client_process_group=3,
+            observed_monotonic=now-0.05+(n-1)*0.02,received_monotonic=now-0.04+(n-1)*0.02,
+            response_sha256=str(n)*64,actual_kernel_peer_owner_verified=True,observation_is_not_native_authority=True))
+    record=dict(schema=transport.PRIVATE_PREPARATION_CHECKPOINT_SCHEMA,worker_request=copy.deepcopy(request),
+        sealed_worker_request_sha256=S,fake_credential_fixture_pin=request['fake_credential_fixture_pin'],
+        owner_request_sha256=request['owner_request_sha256'],context_pin=context_pin,source_profile_pin=request['source_profile_pin'],
+        capsule_pin=request['capsule_pin'],source_generation=request['source_generation'],task_alias=request['task_alias'],
+        task_cid=request['task_cid'],database_attempt_id=request['database_attempt_id'],database_attempt_number=1,
+        allocation_session_id=request['allocation_session_id'],worker_identity=identity,
+        worker_argv=['/usr/bin/python3.12','-I','-m',worker.__name__],allocation_store_path=context['allocation_store_path'],
+        original_work_deadline_monotonic=request['work_deadline_monotonic'],original_native_deadline_monotonic=request['native_deadline_monotonic'],
+        private_fake_credentials=initialization,owner_rpc_receipts=rows,checkpoint_started_monotonic=now-0.01,
+        checkpoint_observed_monotonic=now,metadata_only=True,execution_environment='isolated-loopback',
+        checkpoint_contains_post_write_observation=False,**{name:False for name in transport._CHECKPOINT_FALSE_FIELDS})
+    options=dict(request=request,sealed_request_sha256=S,context_pin=context_pin,context=context,worker_identity=identity)
+    return record,copy.deepcopy(options)
+
+
+def test_pure_closed_checkpoint_is_metadata_not_live_authority(inert_checkpoint):
+    record,options=inert_checkpoint
+    assert transport.validate_private_preparation_checkpoint(record,**options)is record
+    assert helper._INITIALIZATION_ATTEMPTED is False and transport._PRIVATE_RETAINED==[]
+
+
+@pytest.mark.parametrize('change',['extra','S','canonical_S_bool','F','R','context','profile','capsule','generation',
+    'task','attempt_bool','store','worker','work_clock','postwrite_claim'])
+def test_closed_checkpoint_refuses_rebinding_or_extra_authority(inert_checkpoint,change):
+    record,options=copy.deepcopy(inert_checkpoint)
+    if change=='extra':record['stop_after_initialization']=True
+    elif change=='S':record['sealed_worker_request_sha256']='f'*64
+    elif change=='canonical_S_bool':record['worker_request']['database_attempt_number']=True
+    elif change=='F':record['fake_credential_fixture_pin']['sha256']='f'*64
+    elif change=='R':record['owner_request_sha256']='f'*64
+    elif change=='context':record['context_pin']['sha256']='f'*64
+    elif change=='profile':record['source_profile_pin']['sha256']='f'*64
+    elif change=='capsule':record['capsule_pin']['sha256']='f'*64
+    elif change=='generation':record['source_generation']+='-changed'
+    elif change=='task':record['task_cid']='changed'
+    elif change=='attempt_bool':record['database_attempt_number']=True
+    elif change=='store':record['allocation_store_path']+='.other'
+    elif change=='worker':record['worker_identity']['birth']+=1
+    elif change=='work_clock':record['original_work_deadline_monotonic']+=1
+    else:record['checkpoint_contains_post_write_observation']=True
+    with pytest.raises(worker.CaptureRefusal):transport.validate_private_preparation_checkpoint(record,**options)
+
+
+@pytest.mark.parametrize('name',sorted(transport._CHECKPOINT_FALSE_FIELDS))
+def test_durable_preparation_never_grants_native_or_capture_admission(inert_checkpoint,name):
+    record,options=inert_checkpoint;record[name]=True
+    with pytest.raises(worker.CaptureRefusal):transport.validate_private_preparation_checkpoint(record,**options)
+
+
+@pytest.mark.parametrize('change',['sequence','R','context','client','future','stage','extra'])
+def test_checkpoint_owner_prefix_refuses_mutated_inert_metadata(inert_checkpoint,change):
+    record,options=inert_checkpoint;row=record['owner_rpc_receipts'][-1]
+    if change=='sequence':row['sequence']=4
+    elif change=='R':row['request_sha256']='f'*64
+    elif change=='context':row['context_sha256']='f'*64
+    elif change=='client':row['client_pid']=90
+    elif change=='future':row['received_monotonic']=record['checkpoint_observed_monotonic']+1
+    elif change=='stage':row['stage']='worker_v4_response'
+    else:row['native_lease']=True
+    with pytest.raises(worker.CaptureRefusal):transport.validate_private_preparation_checkpoint(record,**options)
+
+
+@pytest.mark.parametrize('change',['missing','inode','mode','size','path','clock','extra'])
+def test_checkpoint_refuses_persistence_witness_reinterpretation(inert_checkpoint,change):
+    record,options=inert_checkpoint;w=record['private_fake_credentials']['fake_persistence']
+    if change=='missing':record['private_fake_credentials'].pop('fake_persistence')
+    elif change=='inode':w['final_fstat']['inode']+=1
+    elif change=='mode':w['final_fstat']['mode']=0o644
+    elif change=='size':w['final_pin']['bytes']+=1
+    elif change=='path':w['path']+='.other'
+    elif change=='clock':w['observed_monotonic']=record['checkpoint_observed_monotonic']+1
+    else:w['raw_secret']='must-not-be-accepted'
+    with pytest.raises(worker.CaptureRefusal):transport.validate_private_preparation_checkpoint(record,**options)
+
+
+def test_real_checkpoint_is_owned600_and_inode_checked(inert_checkpoint):
+    record,options=inert_checkpoint;pin=transport.write_private_preparation_checkpoint(record,**options)
+    info=Path(pin['path']).lstat();identity=worker._identity(info)
+    assert stat.S_IMODE(info.st_mode)==0o600 and info.st_uid==os.geteuid()and info.st_nlink==1
+    assert transport.read_private_preparation_checkpoint(pin,identity=identity,**options)==record
+    assert helper._INITIALIZATION_ATTEMPTED is False and transport._PRIVATE_RETAINED==[]
+
+
+def test_real_duplicate_write_keeps_original_inode_and_bytes(inert_checkpoint):
+    record,options=inert_checkpoint;pin=transport.write_private_preparation_checkpoint(record,**options)
+    path=Path(pin['path']);identity=worker._identity(path.lstat());raw=path.read_bytes()
+    with pytest.raises(FileExistsError):transport.write_private_preparation_checkpoint(record,**options)
+    assert worker._identity(path.lstat())==identity and path.read_bytes()==raw
+
+
+def test_same_bytes_replacement_cannot_replace_original_checkpoint_inode(inert_checkpoint):
+    record,options=inert_checkpoint;pin=transport.write_private_preparation_checkpoint(record,**options)
+    path=Path(pin['path']);identity=worker._identity(path.lstat());other=path.with_name('other-checkpoint.json')
+    pin_file(other,path.read_bytes());other.replace(path)
+    with pytest.raises(worker.CaptureRefusal,match='inode_changed'):
+        transport.read_private_preparation_checkpoint(pin,identity=identity,**options)
+
+
+def test_real_checkpoint_mode_change_is_refused(inert_checkpoint):
+    record,options=inert_checkpoint;pin=transport.write_private_preparation_checkpoint(record,**options)
+    Path(pin['path']).chmod(0o644)
+    with pytest.raises(worker.CaptureRefusal):transport.read_private_preparation_checkpoint(pin,**options)
+
+
+def test_symlink_checkpoint_target_never_overwrites_other_file(inert_checkpoint):
+    record,options=inert_checkpoint;directory=Path(options['request']['receipt_directory']);target=directory/'untouched.json'
+    pin_file(target,b'untouched\n');(directory/transport.PRIVATE_PREPARATION_CHECKPOINT_NAME).symlink_to(target)
+    with pytest.raises(FileExistsError):transport.write_private_preparation_checkpoint(record,**options)
+    assert target.read_bytes()==b'untouched\n'
+
+
+def test_actual_original_clock_exhaustion_refuses_before_new_write(inert_checkpoint):
+    record,options=inert_checkpoint;request=options['request'];request['work_deadline_monotonic']=time.monotonic()-1
+    request['native_deadline_monotonic']=request['work_deadline_monotonic']+60
+    with pytest.raises(worker.CaptureRefusal,match='original_work_margin_expired'):
+        transport._private_checkpoint_work_current(request)
+    assert not(Path(request['receipt_directory'])/transport.PRIVATE_PREPARATION_CHECKPOINT_NAME).exists()
+
+
+def test_completed_metadata_remains_readable_after_actual_work_margin_expires(inert_checkpoint):
+    record,options=inert_checkpoint;request=options['request'];request['work_deadline_monotonic']=time.monotonic()+3.2
+    request['native_deadline_monotonic']=request['work_deadline_monotonic']+60
+    record['worker_request']=copy.deepcopy(request);options['sealed_request_sha256']=transport.digest(request)
+    record['sealed_worker_request_sha256']=options['sealed_request_sha256']
+    record['private_fake_credentials']['sealed_worker_request_sha256']=options['sealed_request_sha256']
+    record['original_work_deadline_monotonic']=request['work_deadline_monotonic']
+    record['original_native_deadline_monotonic']=request['native_deadline_monotonic']
+    pin=transport.write_private_preparation_checkpoint(record,**options);identity=worker._identity(Path(pin['path']).lstat())
+    time.sleep(max(0,request['work_deadline_monotonic']-3-time.monotonic())+0.005)
+    with pytest.raises(worker.CaptureRefusal,match='original_work_margin_expired'):
+        transport.write_private_preparation_checkpoint(record,**options)
+    assert transport.read_private_preparation_checkpoint(pin,identity=identity,**options)==record
+
+
+def test_genuine_helper_persistence_witness_uses_existing_verified_FD_locals_only():
+    tree=ast.parse(inspect.getsource(helper));fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef)and n.name=='initialize_private_fake_credentials')
+    assignment=next(n for n in ast.walk(fn)if isinstance(n,ast.Assign)and any(isinstance(t,ast.Name)and t.id=='fake_persistence'for t in n.targets))
+    text=ast.unparse(assignment.value)
+    assert 'persistence_fstat(info)'in text and 'persistence_fstat(saved)'in text
+    assert 'hashlib.sha256(data).hexdigest()'in text and 'time.monotonic()'in text
+    assert 'fake'not in {n.id for n in ast.walk(assignment.value)if isinstance(n,ast.Name)}
+    assert helper._INITIALIZATION_ATTEMPTED is False and helper._RETAINED==[]

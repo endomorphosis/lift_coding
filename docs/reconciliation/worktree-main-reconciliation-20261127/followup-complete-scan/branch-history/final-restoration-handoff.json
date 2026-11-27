@@ -1,0 +1,188 @@
+{
+  "corrected_ref_and_detached_classification": {
+    "bytes": 12035,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/additional-head-classification.json",
+    "sha256": "0b13c3a3ca63f9c0e64e3527446c749a0bfb0231fc82cf78c9f93864f2ca224e"
+  },
+  "github_publication_in_this_lane": false,
+  "inventory_accounting": {
+    "additional_actual_oids": 158,
+    "branch_tips": 9929,
+    "main_reachable": 2104,
+    "new_private_bundles_restore": 84,
+    "portland_bundle_restore": 7693,
+    "previous_published_restores": 206,
+    "total_distinct_repository_and_oid": 10087,
+    "unborn_markers_excluded": 1
+  },
+  "original_checkouts_mutated": false,
+  "plaintext_ready": {
+    "accelerate_34": {
+      "archive": {
+        "bytes": 40479704,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_scanned_subset/ipfs_accelerate_py/ipfs_accelerate_py-historical-tips.bundle",
+        "sha256": "ed8c180d702e2c92ff2166ca77faec13130e809262dd8866af3613c07fe6cb52"
+      },
+      "count": 34,
+      "credential_marker_receipts": [
+        {
+          "bytes": 2268,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_scanned_subset/ipfs_accelerate_py/credential-marker-scan.json",
+          "sha256": "03a39bc9cf58c316b8df47fc2c8b24bff5e52fd4af9e0ed66c6d83cf1314a03e"
+        },
+        {
+          "bytes": 3015,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_scanned_subset/ipfs_accelerate_py/small-marker-review.json",
+          "sha256": "fd77359d5f0def7d66514d08ab3c9135e8f45f5b94175ecfc5c5d9b2d332fd1d"
+        }
+      ],
+      "published_base": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+      "restore_receipt": {
+        "bytes": 42476,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_scanned_subset/ipfs_accelerate_py/restore-receipt.json",
+        "sha256": "ed3f966e68c872b8952ec4a36677b2cf12554db8f43cc7c2c79c2d5e7b458893"
+      }
+    },
+    "accelerate_detached_1": {
+      "archive": {
+        "bytes": 5396,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/ipfs_accelerate_py_detached-historical-tips.bundle",
+        "sha256": "36a3eac68c18ab7de909e11e1ff5eaa193b625da556ea8bd40488d668aa3e2aa"
+      },
+      "count": 1,
+      "credential_marker_receipts": [
+        {
+          "bytes": 695,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/credential-marker-scan.json",
+          "sha256": "c2f609a8b9d60c7ab7e82562e0642216bb74f5b302733fa2dcb879c23b5e37f0"
+        }
+      ],
+      "published_base": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+      "restore_receipt": {
+        "bytes": 5816,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_accelerate_py_detached/restore-receipt.json",
+        "sha256": "d4e24951aca326b0668a8ab4f919abcd356144483be53d24ff140d419f080656"
+      }
+    },
+    "datasets_35": {
+      "archive": {
+        "bytes": 7597493,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_datasets_py/ipfs_datasets_py-historical-tips.bundle",
+        "sha256": "182cceb3a5a93b3a9c043333cc3af92a23896e5183b2d8d87edf7e6c73346dee"
+      },
+      "count": 35,
+      "credential_marker_receipts": [
+        {
+          "bytes": 2048,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_datasets_py/credential-marker-scan.json",
+          "sha256": "e392930a464c098e0e007e32f5ccfd2dad03c841addd7030c02d8223dbef8a4b"
+        },
+        {
+          "bytes": 2750,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_datasets_py/small-marker-review.json",
+          "sha256": "a1cbb8de4fc2c13c3b1bcd84fd2387c3db3b048d856e10ba46db1c5a4e74537b"
+        }
+      ],
+      "published_base": "3bdfec5b148ad6c4ac53281ceb02ecd8377643e0",
+      "restore_receipt": {
+        "bytes": 65875,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/recovery/ipfs_datasets_py/restore-receipt.json",
+        "sha256": "d9a166a8afc22a97fdda12e15f3c227fb415e92bffbd4b480c97e256d5bbed13"
+      }
+    },
+    "kit_11": {
+      "archive": {
+        "bytes": 5904318,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_kit_py/ipfs_kit_py-historical-tips.bundle",
+        "sha256": "db5b8579093a4336269ff95c92956ec70499e1426a39032322f3fe6895cfc789"
+      },
+      "count": 11,
+      "credential_marker_receipts": [
+        {
+          "bytes": 3299,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_kit_py/credential-marker-scan.json",
+          "sha256": "b2e26b023a17577927b4145174e39446a830d269877b84feb13425f9775a7747"
+        },
+        {
+          "bytes": 6008,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_kit_py/small-marker-review.json",
+          "sha256": "b6f86410b515c4b1bc00abb3c574610ad4d13b66ee822abb3216f69ae8c2e3ef"
+        },
+        {
+          "bytes": 594,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_kit_py/deterministic-test-key-adjudication.json",
+          "sha256": "b21c4301697e7de3f7b640e5855f8bedb8516c982d5d5a1f20ebba8223fd604e"
+        }
+      ],
+      "published_base": "b15442e490dc39d046a911ea663c73c99ed3c755",
+      "restore_receipt": {
+        "bytes": 111809,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/ipfs_kit_py/restore-receipt.json",
+        "sha256": "392089c893edeaf99d9cc8a54036e7703429552ae38581979db5a7de6229f88f"
+      }
+    },
+    "root_1": {
+      "archive": {
+        "bytes": 1913663,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/lift_coding-historical-tips.bundle",
+        "sha256": "e121273507abff97b6eb07135fc0c1e715bc0fccfc819c65ce5999b7c8d19e64"
+      },
+      "count": 1,
+      "credential_marker_receipts": [
+        {
+          "bytes": 697,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/credential-marker-scan.json",
+          "sha256": "c40cea66d62378d50cddf84baf437b15490cdb4451a214539e197255cfc88de2"
+        }
+      ],
+      "published_base": "93edf9895e09ffa873a7eb65634a1c0ed27d297d",
+      "restore_receipt": {
+        "bytes": 4538,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/lift_coding/restore-receipt.json",
+        "sha256": "b959aa4d1c1ccda5b73df18d111704d075fbec1d8c7c086c00fbeacd5a2871ab"
+      }
+    },
+    "swiss_1": {
+      "archive": {
+        "bytes": 794393,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/swissknife-historical-tips.bundle",
+        "sha256": "b165fc6f56518f644d2657c8e546f89d9492b669687cd4cb073cb14d9f465ad8"
+      },
+      "count": 1,
+      "credential_marker_receipts": [
+        {
+          "bytes": 698,
+          "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/credential-marker-scan.json",
+          "sha256": "4d2b3b1bb41824df8a79488e847f691da937fd8452f498a5fdc7f85e39d0282d"
+        }
+      ],
+      "published_base": "453a30b01e62b6acdd1c54070821dbacfbf7908e",
+      "restore_receipt": {
+        "bytes": 4370,
+        "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/nonthin_recovery/swissknife/restore-receipt.json",
+        "sha256": "2f338b96ec2f22d416f9761f71e596f66f0679230ec8a5ab01518e4edffbc121"
+      }
+    }
+  },
+  "portland_restored_detached_membership": {
+    "bytes": 1828,
+    "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/portland-detached-restore-membership.json",
+    "sha256": "964abe6b094db3ed21354ab81464f95892573763965cc10f8614ea40b67ca279"
+  },
+  "restricted_requires_encryption": {
+    "count": 1,
+    "held_plaintext_bundle": {
+      "bytes": 283328984,
+      "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_single_private/ipfs_accelerate_py/ipfs_accelerate_py-historical-tips.bundle",
+      "sha256": "be9250573417c383d40770a1505bfa7a8eeebab5a0243bb2e4cbec2681ccee91"
+    },
+    "publication_as_plaintext_selected": false,
+    "restore_receipt": {
+      "bytes": 22476,
+      "path": "/tmp/git-final-branch-retention-20261127-lmljw4GB/accelerate_single_private/ipfs_accelerate_py/restore-receipt.json",
+      "sha256": "0c361754f6e0707128d5c11646b0bff4d50f793b193f14d0909c399357cd7ac8"
+    },
+    "tip": "1c16fb1773a03a202523a7ff62d191717b7d8173"
+  },
+  "schema": "private-github-history-archive-handoff/v1"
+}
