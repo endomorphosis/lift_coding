@@ -1,0 +1,1891 @@
+{
+  "active_goal_count": 11,
+  "completed_goal_count": 0,
+  "generated_at": "2026-07-29T20:39:49.641280+00:00",
+  "goal_count": 11,
+  "goals": [
+    {
+      "bundle": "knowledge-graphs/root",
+      "evidence": [
+        "docs/architecture/KNOWLEDGE_GRAPHS_PRODUCTION_HARDENING_PLAN_2026_07_29.md"
+      ],
+      "fib_priority": 1,
+      "goal_id": "KGP-G000",
+      "parents": [],
+      "refinement_depth": "0",
+      "status": "provisionally_complete",
+      "title": "Production-grade multi-graph knowledge graph platform",
+      "track": "knowledge-graphs"
+    },
+    {
+      "bundle": "knowledge-graphs/baseline",
+      "evidence": [
+        "direct CLI and MCP probes from 2026-07-29",
+        "docs/knowledge_graphs/MASTER_STATUS.md"
+      ],
+      "fib_priority": 2,
+      "goal_id": "KGP-G010",
+      "parents": [
+        "KGP-G000"
+      ],
+      "refinement_depth": "1",
+      "status": "provisionally_complete",
+      "title": "Executable truth baseline and compatibility contract",
+      "track": "baseline"
+    },
+    {
+      "bundle": "knowledge-graphs/control-plane",
+      "evidence": [
+        "KGP-G010 contract and inventory outputs"
+      ],
+      "fib_priority": 3,
+      "goal_id": "KGP-G020",
+      "parents": [
+        "KGP-G000"
+      ],
+      "refinement_depth": "1",
+      "status": "provisionally_complete",
+      "title": "Canonical graph identity, manifest, catalog, and service",
+      "track": "architecture"
+    },
+    {
+      "bundle": "knowledge-graphs/transactions",
+      "evidence": [
+        "KGP-G020 service and catalog contract"
+      ],
+      "fib_priority": 5,
+      "goal_id": "KGP-G030",
+      "parents": [
+        "KGP-G000"
+      ],
+      "refinement_depth": "1",
+      "status": "provisionally_complete",
+      "title": "Durable concurrency, transactions, and recovery",
+      "track": "durability"
+    },
+    {
+      "bundle": "knowledge-graphs/storage",
+      "evidence": [
+        "KGP-G020 manifest and service contracts"
+      ],
+      "fib_priority": 5,
+      "goal_id": "KGP-G040",
+      "parents": [
+        "KGP-G000"
+      ],
+      "refinement_depth": "1",
+      "status": "provisionally_complete",
+      "title": "Interchangeable Parquet, IPFS/IPLD, and ipfs_kit_py storage",
+      "track": "storage"
+    },
+    {
+      "bundle": "knowledge-graphs/query-sharding",
+      "evidence": [
+        "search/graph_query/sharded_car",
+        "KGP-G020 and KGP-G040 contracts"
+      ],
+      "fib_priority": 8,
+      "goal_id": "KGP-G050",
+      "parents": [
+        "KGP-G000"
+      ],
+      "refinement_depth": "1",
+      "status": "provisionally_complete",
+      "title": "Versioned sharding and bounded unified query",
+      "track": "query"
+    },
+    {
+      "bundle": "knowledge-graphs/surfaces",
+      "evidence": [
+        "KGP-G010 public contract matrix",
+        "KGP-G020 service"
+      ],
+      "fib_priority": 8,
+      "goal_id": "KGP-G060",
+      "parents": [
+        "KGP-G000"
+      ],
+      "refinement_depth": "1",
+      "status": "provisionally_complete",
+      "title": "Python, CLI, MCP, and MCP++ surface parity",
+      "track": "interfaces"
+    },
+    {
+      "bundle": "knowledge-graphs/ucan",
+      "evidence": [
+        "ipfs_datasets_py/mcp_server/ucan_delegation.py",
+        "KGP-G020 service contract"
+      ],
+      "fib_priority": 8,
+      "goal_id": "KGP-G070",
+      "parents": [
+        "KGP-G000"
+      ],
+      "refinement_depth": "1",
+      "status": "provisionally_complete",
+      "title": "MCP++ UCAN authorization and audit",
+      "track": "security"
+    },
+    {
+      "bundle": "knowledge-graphs/corpora",
+      "evidence": [
+        "KGP-G010 inventory",
+        "lift_coding/.cvefixes-build",
+        "logic/intent_ir/graphrag",
+        "211-AI data/retrieval_package",
+        "agent supervisor graph datasets"
+      ],
+      "fib_priority": 13,
+      "goal_id": "KGP-G080",
+      "parents": [
+        "KGP-G000"
+      ],
+      "refinement_depth": "1",
+      "status": "provisionally_complete",
+      "title": "Real corpus adapters and differential validation",
+      "track": "compatibility"
+    },
+    {
+      "bundle": "knowledge-graphs/reliability",
+      "evidence": [
+        "KGP-G030 through KGP-G080 passing contracts"
+      ],
+      "fib_priority": 13,
+      "goal_id": "KGP-G090",
+      "parents": [
+        "KGP-G000"
+      ],
+      "refinement_depth": "1",
+      "status": "provisionally_complete",
+      "title": "Load, soak, chaos, observability, and operability",
+      "track": "reliability"
+    },
+    {
+      "bundle": "knowledge-graphs/adoption",
+      "evidence": [
+        "KGP-G010 through KGP-G090 completion receipts"
+      ],
+      "fib_priority": 21,
+      "goal_id": "KGP-G100",
+      "parents": [
+        "KGP-G000"
+      ],
+      "refinement_depth": "1",
+      "status": "provisionally_complete",
+      "title": "Reversible adoption and production release",
+      "track": "adoption"
+    }
+  ],
+  "graph": {
+    "children": {
+      "KGP-G000": [
+        "KGP-G010",
+        "KGP-G020",
+        "KGP-G030",
+        "KGP-G040",
+        "KGP-G050",
+        "KGP-G060",
+        "KGP-G070",
+        "KGP-G080",
+        "KGP-G090",
+        "KGP-G100"
+      ]
+    },
+    "depths": {
+      "KGP-G000": 0,
+      "KGP-G010": 1,
+      "KGP-G020": 1,
+      "KGP-G030": 1,
+      "KGP-G040": 1,
+      "KGP-G050": 1,
+      "KGP-G060": 1,
+      "KGP-G070": 1,
+      "KGP-G080": 1,
+      "KGP-G090": 1,
+      "KGP-G100": 1
+    },
+    "edges": [
+      {
+        "from": "KGP-G000",
+        "kind": "refines",
+        "to": "KGP-G010"
+      },
+      {
+        "from": "KGP-G000",
+        "kind": "refines",
+        "to": "KGP-G020"
+      },
+      {
+        "from": "KGP-G000",
+        "kind": "refines",
+        "to": "KGP-G030"
+      },
+      {
+        "from": "KGP-G000",
+        "kind": "refines",
+        "to": "KGP-G040"
+      },
+      {
+        "from": "KGP-G000",
+        "kind": "refines",
+        "to": "KGP-G050"
+      },
+      {
+        "from": "KGP-G000",
+        "kind": "refines",
+        "to": "KGP-G060"
+      },
+      {
+        "from": "KGP-G000",
+        "kind": "refines",
+        "to": "KGP-G070"
+      },
+      {
+        "from": "KGP-G000",
+        "kind": "refines",
+        "to": "KGP-G080"
+      },
+      {
+        "from": "KGP-G000",
+        "kind": "refines",
+        "to": "KGP-G090"
+      },
+      {
+        "from": "KGP-G000",
+        "kind": "refines",
+        "to": "KGP-G100"
+      }
+    ],
+    "evidence_edges": [
+      {
+        "from": "KGP-G000",
+        "kind": "requires_evidence",
+        "to": "evidence:a81381e06ee258fe"
+      },
+      {
+        "from": "KGP-G010",
+        "kind": "requires_evidence",
+        "to": "evidence:99f3b7d5ba03e8b8"
+      },
+      {
+        "from": "KGP-G010",
+        "kind": "requires_evidence",
+        "to": "evidence:e637f65ad79756df"
+      },
+      {
+        "from": "KGP-G020",
+        "kind": "requires_evidence",
+        "to": "evidence:efc9a280b8b1e30c"
+      },
+      {
+        "from": "KGP-G030",
+        "kind": "requires_evidence",
+        "to": "evidence:7ce454584f71f3af"
+      },
+      {
+        "from": "KGP-G040",
+        "kind": "requires_evidence",
+        "to": "evidence:ce75f10bc57062fd"
+      },
+      {
+        "from": "KGP-G050",
+        "kind": "requires_evidence",
+        "to": "evidence:bd0b7f635266490f"
+      },
+      {
+        "from": "KGP-G050",
+        "kind": "requires_evidence",
+        "to": "evidence:0518359d18a3512b"
+      },
+      {
+        "from": "KGP-G060",
+        "kind": "requires_evidence",
+        "to": "evidence:89db3916f3973f72"
+      },
+      {
+        "from": "KGP-G060",
+        "kind": "requires_evidence",
+        "to": "evidence:5cb1f744a6018d70"
+      },
+      {
+        "from": "KGP-G070",
+        "kind": "requires_evidence",
+        "to": "evidence:7edf669755574843"
+      },
+      {
+        "from": "KGP-G070",
+        "kind": "requires_evidence",
+        "to": "evidence:d5c0d696b85ebafe"
+      },
+      {
+        "from": "KGP-G080",
+        "kind": "requires_evidence",
+        "to": "evidence:c734a43e88fffe10"
+      },
+      {
+        "from": "KGP-G080",
+        "kind": "requires_evidence",
+        "to": "evidence:4ad75419bedb7522"
+      },
+      {
+        "from": "KGP-G080",
+        "kind": "requires_evidence",
+        "to": "evidence:f2fba97128d66a39"
+      },
+      {
+        "from": "KGP-G080",
+        "kind": "requires_evidence",
+        "to": "evidence:cd731b84552dc691"
+      },
+      {
+        "from": "KGP-G080",
+        "kind": "requires_evidence",
+        "to": "evidence:9c4e2dcc56c56be1"
+      },
+      {
+        "from": "KGP-G090",
+        "kind": "requires_evidence",
+        "to": "evidence:9669143a08fc715e"
+      },
+      {
+        "from": "KGP-G100",
+        "kind": "requires_evidence",
+        "to": "evidence:0d472178f4734fca"
+      }
+    ],
+    "evidence_nodes": [
+      {
+        "acceptance_criterion": "docs/architecture/KNOWLEDGE_GRAPHS_PRODUCTION_HARDENING_PLAN_2026_07_29.md",
+        "goal_id": "KGP-G000",
+        "id": "evidence:a81381e06ee258fe"
+      },
+      {
+        "acceptance_criterion": "direct CLI and MCP probes from 2026-07-29",
+        "goal_id": "KGP-G010",
+        "id": "evidence:99f3b7d5ba03e8b8"
+      },
+      {
+        "acceptance_criterion": "docs/knowledge_graphs/MASTER_STATUS.md",
+        "goal_id": "KGP-G010",
+        "id": "evidence:e637f65ad79756df"
+      },
+      {
+        "acceptance_criterion": "KGP-G010 contract and inventory outputs",
+        "goal_id": "KGP-G020",
+        "id": "evidence:efc9a280b8b1e30c"
+      },
+      {
+        "acceptance_criterion": "KGP-G020 service and catalog contract",
+        "goal_id": "KGP-G030",
+        "id": "evidence:7ce454584f71f3af"
+      },
+      {
+        "acceptance_criterion": "KGP-G020 manifest and service contracts",
+        "goal_id": "KGP-G040",
+        "id": "evidence:ce75f10bc57062fd"
+      },
+      {
+        "acceptance_criterion": "search/graph_query/sharded_car",
+        "goal_id": "KGP-G050",
+        "id": "evidence:bd0b7f635266490f"
+      },
+      {
+        "acceptance_criterion": "KGP-G020 and KGP-G040 contracts",
+        "goal_id": "KGP-G050",
+        "id": "evidence:0518359d18a3512b"
+      },
+      {
+        "acceptance_criterion": "KGP-G010 public contract matrix",
+        "goal_id": "KGP-G060",
+        "id": "evidence:89db3916f3973f72"
+      },
+      {
+        "acceptance_criterion": "KGP-G020 service",
+        "goal_id": "KGP-G060",
+        "id": "evidence:5cb1f744a6018d70"
+      },
+      {
+        "acceptance_criterion": "ipfs_datasets_py/mcp_server/ucan_delegation.py",
+        "goal_id": "KGP-G070",
+        "id": "evidence:7edf669755574843"
+      },
+      {
+        "acceptance_criterion": "KGP-G020 service contract",
+        "goal_id": "KGP-G070",
+        "id": "evidence:d5c0d696b85ebafe"
+      },
+      {
+        "acceptance_criterion": "KGP-G010 inventory",
+        "goal_id": "KGP-G080",
+        "id": "evidence:c734a43e88fffe10"
+      },
+      {
+        "acceptance_criterion": "lift_coding/.cvefixes-build",
+        "goal_id": "KGP-G080",
+        "id": "evidence:4ad75419bedb7522"
+      },
+      {
+        "acceptance_criterion": "logic/intent_ir/graphrag",
+        "goal_id": "KGP-G080",
+        "id": "evidence:f2fba97128d66a39"
+      },
+      {
+        "acceptance_criterion": "211-AI data/retrieval_package",
+        "goal_id": "KGP-G080",
+        "id": "evidence:cd731b84552dc691"
+      },
+      {
+        "acceptance_criterion": "agent supervisor graph datasets",
+        "goal_id": "KGP-G080",
+        "id": "evidence:9c4e2dcc56c56be1"
+      },
+      {
+        "acceptance_criterion": "KGP-G030 through KGP-G080 passing contracts",
+        "goal_id": "KGP-G090",
+        "id": "evidence:9669143a08fc715e"
+      },
+      {
+        "acceptance_criterion": "KGP-G010 through KGP-G090 completion receipts",
+        "goal_id": "KGP-G100",
+        "id": "evidence:0d472178f4734fca"
+      }
+    ],
+    "lifecycle": {
+      "nonterminal_goal_ids": [
+        "KGP-G000",
+        "KGP-G010",
+        "KGP-G020",
+        "KGP-G030",
+        "KGP-G040",
+        "KGP-G050",
+        "KGP-G060",
+        "KGP-G070",
+        "KGP-G080",
+        "KGP-G090",
+        "KGP-G100"
+      ],
+      "schedulable_goal_ids": [
+        "KGP-G000",
+        "KGP-G010",
+        "KGP-G020",
+        "KGP-G030",
+        "KGP-G040",
+        "KGP-G050",
+        "KGP-G060",
+        "KGP-G070",
+        "KGP-G080",
+        "KGP-G090",
+        "KGP-G100"
+      ],
+      "state_counts": {
+        "provisionally_complete": 11
+      },
+      "terminal_goal_ids": []
+    },
+    "node_details": {
+      "KGP-G000": {
+        "completion_evidence": {
+          "acceptance_criterion": "All exact child goals KGP-G010 through KGP-G100 have fresh current-tree passing evidence; concurrent graph identity and durability are proven; all four surfaces agree; UCAN fails closed; Parquet, IPFS/IPLD, and ipfs_kit_py pass storage contracts; real corpora and load/chaos gates pass; migration remains reversible."
+        },
+        "goal_id": "KGP-G000",
+        "lifecycle_state": "provisionally_complete",
+        "parents": [],
+        "required_evidence": [
+          "docs/architecture/KNOWLEDGE_GRAPHS_PRODUCTION_HARDENING_PLAN_2026_07_29.md"
+        ],
+        "schedulable": true,
+        "status": "provisionally_complete",
+        "terminal": false,
+        "title": "Production-grade multi-graph knowledge graph platform"
+      },
+      "KGP-G010": {
+        "completion_evidence": {
+          "acceptance_criterion": "Known CLI/MCP lifecycle failures are reproducible without permissive assertions; every discovered graph producer has an owner/schema/format/count/consumer/revision record; canonical and stale repository copies are identified; completion claims cite executable evidence."
+        },
+        "goal_id": "KGP-G010",
+        "lifecycle_state": "provisionally_complete",
+        "parents": [
+          "KGP-G000"
+        ],
+        "required_evidence": [
+          "direct CLI and MCP probes from 2026-07-29",
+          "docs/knowledge_graphs/MASTER_STATUS.md"
+        ],
+        "schedulable": true,
+        "status": "provisionally_complete",
+        "terminal": false,
+        "title": "Executable truth baseline and compatibility contract"
+      },
+      "KGP-G020": {
+        "completion_evidence": {
+          "acceptance_criterion": "Tenant/graph/branch/revision identity is explicit and canonical; manifests round-trip deterministically; graph lifecycle and branch-head CAS survive restart; no entry point constructs an ambient empty graph; compatibility policy is documented."
+        },
+        "goal_id": "KGP-G020",
+        "lifecycle_state": "provisionally_complete",
+        "parents": [
+          "KGP-G000"
+        ],
+        "required_evidence": [
+          "KGP-G010 contract and inventory outputs"
+        ],
+        "schedulable": true,
+        "status": "provisionally_complete",
+        "terminal": false,
+        "title": "Canonical graph identity, manifest, catalog, and service"
+      },
+      "KGP-G030": {
+        "completion_evidence": {
+          "acceptance_criterion": "Thread and process tests prove no lost updates or cross-graph leakage; crash points recover to pre-commit or committed state only; stale leases and duplicate idempotency attempts cannot mutate twice; readers remain revision stable during compaction."
+        },
+        "goal_id": "KGP-G030",
+        "lifecycle_state": "provisionally_complete",
+        "parents": [
+          "KGP-G000"
+        ],
+        "required_evidence": [
+          "KGP-G020 service and catalog contract"
+        ],
+        "schedulable": true,
+        "status": "provisionally_complete",
+        "terminal": false,
+        "title": "Durable concurrency, transactions, and recovery"
+      },
+      "KGP-G040": {
+        "completion_evidence": {
+          "acceptance_criterion": "All storage profiles pass the same manifest/object/restart/corruption contract; Parquet publication is atomic; CID bytes are verified; ipfs_kit_py capability negotiation is explicit; reachable revisions remain pinned and unreachable staging data can be collected safely."
+        },
+        "goal_id": "KGP-G040",
+        "lifecycle_state": "provisionally_complete",
+        "parents": [
+          "KGP-G000"
+        ],
+        "required_evidence": [
+          "KGP-G020 manifest and service contracts"
+        ],
+        "schedulable": true,
+        "status": "provisionally_complete",
+        "terminal": false,
+        "title": "Interchangeable Parquet, IPFS/IPLD, and ipfs_kit_py storage"
+      },
+      "KGP-G050": {
+        "completion_evidence": {
+          "acceptance_criterion": "v1 manifests remain readable; v2 supports integrity-bound virtual shards and limited rebalance; cross-shard traversal is correct; queries never substitute an empty graph; time/row/byte/depth/fan-out budgets and revision-bound cursors hold across local and IPFS shards."
+        },
+        "goal_id": "KGP-G050",
+        "lifecycle_state": "provisionally_complete",
+        "parents": [
+          "KGP-G000"
+        ],
+        "required_evidence": [
+          "search/graph_query/sharded_car",
+          "KGP-G020 and KGP-G040 contracts"
+        ],
+        "schedulable": true,
+        "status": "provisionally_complete",
+        "terminal": false,
+        "title": "Versioned sharding and bounded unified query"
+      },
+      "KGP-G060": {
+        "completion_evidence": {
+          "acceptance_criterion": "Create/write/query/transaction/list/delete/reopen operations survive independent process and MCP calls; every request names a graph target; all four surfaces return canonically equivalent results and errors for the same vector; public imports and deprecations are versioned."
+        },
+        "goal_id": "KGP-G060",
+        "lifecycle_state": "provisionally_complete",
+        "parents": [
+          "KGP-G000"
+        ],
+        "required_evidence": [
+          "KGP-G010 public contract matrix",
+          "KGP-G020 service"
+        ],
+        "schedulable": true,
+        "status": "provisionally_complete",
+        "terminal": false,
+        "title": "Python, CLI, MCP, and MCP++ surface parity"
+      },
+      "KGP-G070": {
+        "completion_evidence": {
+          "acceptance_criterion": "Resource containment and every delegation link attenuate authority; issuer/audience/expiry/revocation/caveat/idempotency checks fail closed before graph or shard access; cross-tenant and confused-deputy matrices deny; allow and deny receipts are verifiable and redact protected data."
+        },
+        "goal_id": "KGP-G070",
+        "lifecycle_state": "provisionally_complete",
+        "parents": [
+          "KGP-G000"
+        ],
+        "required_evidence": [
+          "ipfs_datasets_py/mcp_server/ucan_delegation.py",
+          "KGP-G020 service contract"
+        ],
+        "schedulable": true,
+        "status": "provisionally_complete",
+        "terminal": false,
+        "title": "MCP++ UCAN authorization and audit"
+      },
+      "KGP-G080": {
+        "completion_evidence": {
+          "acceptance_criterion": "Each named corpus has a read-only adapter, immutable fixture manifest, representative golden queries, count/checksum/provenance validation, and differential comparison to its current reader; dirty or stale nested repositories are never promoted to canonical source."
+        },
+        "goal_id": "KGP-G080",
+        "lifecycle_state": "provisionally_complete",
+        "parents": [
+          "KGP-G000"
+        ],
+        "required_evidence": [
+          "KGP-G010 inventory",
+          "lift_coding/.cvefixes-build",
+          "logic/intent_ir/graphrag",
+          "211-AI data/retrieval_package",
+          "agent supervisor graph datasets"
+        ],
+        "schedulable": true,
+        "status": "provisionally_complete",
+        "terminal": false,
+        "title": "Real corpus adapters and differential validation"
+      },
+      "KGP-G090": {
+        "completion_evidence": {
+          "acceptance_criterion": "Smoke, 211-AI, CVEfixes, 1M/10M synthetic, 16-graph mixed concurrency, soak, and chaos profiles emit reproducible receipts; no silent loss/leak/unauthorized effect/resource drift occurs; unexplained p95 or throughput regression above 10% blocks release; backup/restore and readiness diagnostics work."
+        },
+        "goal_id": "KGP-G090",
+        "lifecycle_state": "provisionally_complete",
+        "parents": [
+          "KGP-G000"
+        ],
+        "required_evidence": [
+          "KGP-G030 through KGP-G080 passing contracts"
+        ],
+        "schedulable": true,
+        "status": "provisionally_complete",
+        "terminal": false,
+        "title": "Load, soak, chaos, observability, and operability"
+      },
+      "KGP-G100": {
+        "completion_evidence": {
+          "acceptance_criterion": "Shadow result comparison and canary graph routing are observable; rollback selects the last immutable verified head without data conversion; producer-specific sign-off is recorded; compatibility/deprecation windows are documented; no codepath moves before its corpus, security, durability, surface, and load gates pass."
+        },
+        "goal_id": "KGP-G100",
+        "lifecycle_state": "provisionally_complete",
+        "parents": [
+          "KGP-G000"
+        ],
+        "required_evidence": [
+          "KGP-G010 through KGP-G090 completion receipts"
+        ],
+        "schedulable": true,
+        "status": "provisionally_complete",
+        "terminal": false,
+        "title": "Reversible adoption and production release"
+      }
+    },
+    "nodes": [
+      "KGP-G000",
+      "KGP-G010",
+      "KGP-G020",
+      "KGP-G030",
+      "KGP-G040",
+      "KGP-G050",
+      "KGP-G060",
+      "KGP-G070",
+      "KGP-G080",
+      "KGP-G090",
+      "KGP-G100"
+    ],
+    "roots": [
+      "KGP-G000"
+    ],
+    "schedulable_goal_ids": [
+      "KGP-G000",
+      "KGP-G010",
+      "KGP-G020",
+      "KGP-G030",
+      "KGP-G040",
+      "KGP-G050",
+      "KGP-G060",
+      "KGP-G070",
+      "KGP-G080",
+      "KGP-G090",
+      "KGP-G100"
+    ],
+    "state_counts": {
+      "provisionally_complete": 11
+    },
+    "terminal_goal_ids": []
+  },
+  "heap_schedule": [
+    {
+      "fib_priority": 1,
+      "goal_id": "KGP-G000",
+      "graph_depth": 0,
+      "heap_index": 0,
+      "output_count": 4,
+      "parents": [],
+      "priority": "P0",
+      "priority_rank": 0,
+      "required_evidence_count": 1,
+      "sort_key": [
+        1,
+        0,
+        -13,
+        0,
+        "KGP-G000"
+      ],
+      "status": "provisionally_complete",
+      "title": "Production-grade multi-graph knowledge graph platform",
+      "track": "knowledge-graphs",
+      "work_surface_score": 13
+    },
+    {
+      "fib_priority": 2,
+      "goal_id": "KGP-G010",
+      "graph_depth": 1,
+      "heap_index": 1,
+      "output_count": 3,
+      "parents": [
+        "KGP-G000"
+      ],
+      "priority": "P0",
+      "priority_rank": 0,
+      "required_evidence_count": 2,
+      "sort_key": [
+        2,
+        0,
+        -15,
+        1,
+        "KGP-G010"
+      ],
+      "status": "provisionally_complete",
+      "title": "Executable truth baseline and compatibility contract",
+      "track": "baseline",
+      "work_surface_score": 15
+    },
+    {
+      "fib_priority": 3,
+      "goal_id": "KGP-G020",
+      "graph_depth": 1,
+      "heap_index": 2,
+      "output_count": 4,
+      "parents": [
+        "KGP-G000"
+      ],
+      "priority": "P0",
+      "priority_rank": 0,
+      "required_evidence_count": 1,
+      "sort_key": [
+        3,
+        0,
+        -13,
+        1,
+        "KGP-G020"
+      ],
+      "status": "provisionally_complete",
+      "title": "Canonical graph identity, manifest, catalog, and service",
+      "track": "architecture",
+      "work_surface_score": 13
+    },
+    {
+      "fib_priority": 5,
+      "goal_id": "KGP-G030",
+      "graph_depth": 1,
+      "heap_index": 3,
+      "output_count": 3,
+      "parents": [
+        "KGP-G000"
+      ],
+      "priority": "P0",
+      "priority_rank": 0,
+      "required_evidence_count": 1,
+      "sort_key": [
+        5,
+        0,
+        -11,
+        1,
+        "KGP-G030"
+      ],
+      "status": "provisionally_complete",
+      "title": "Durable concurrency, transactions, and recovery",
+      "track": "durability",
+      "work_surface_score": 11
+    },
+    {
+      "fib_priority": 5,
+      "goal_id": "KGP-G040",
+      "graph_depth": 1,
+      "heap_index": 4,
+      "output_count": 2,
+      "parents": [
+        "KGP-G000"
+      ],
+      "priority": "P0",
+      "priority_rank": 0,
+      "required_evidence_count": 1,
+      "sort_key": [
+        5,
+        0,
+        -9,
+        1,
+        "KGP-G040"
+      ],
+      "status": "provisionally_complete",
+      "title": "Interchangeable Parquet, IPFS/IPLD, and ipfs_kit_py storage",
+      "track": "storage",
+      "work_surface_score": 9
+    },
+    {
+      "fib_priority": 8,
+      "goal_id": "KGP-G060",
+      "graph_depth": 1,
+      "heap_index": 5,
+      "output_count": 4,
+      "parents": [
+        "KGP-G000"
+      ],
+      "priority": "P0",
+      "priority_rank": 0,
+      "required_evidence_count": 2,
+      "sort_key": [
+        8,
+        0,
+        -17,
+        1,
+        "KGP-G060"
+      ],
+      "status": "provisionally_complete",
+      "title": "Python, CLI, MCP, and MCP++ surface parity",
+      "track": "interfaces",
+      "work_surface_score": 17
+    },
+    {
+      "fib_priority": 8,
+      "goal_id": "KGP-G050",
+      "graph_depth": 1,
+      "heap_index": 6,
+      "output_count": 3,
+      "parents": [
+        "KGP-G000"
+      ],
+      "priority": "P0",
+      "priority_rank": 0,
+      "required_evidence_count": 2,
+      "sort_key": [
+        8,
+        0,
+        -15,
+        1,
+        "KGP-G050"
+      ],
+      "status": "provisionally_complete",
+      "title": "Versioned sharding and bounded unified query",
+      "track": "query",
+      "work_surface_score": 15
+    },
+    {
+      "fib_priority": 8,
+      "goal_id": "KGP-G070",
+      "graph_depth": 1,
+      "heap_index": 7,
+      "output_count": 3,
+      "parents": [
+        "KGP-G000"
+      ],
+      "priority": "P0",
+      "priority_rank": 0,
+      "required_evidence_count": 2,
+      "sort_key": [
+        8,
+        0,
+        -15,
+        1,
+        "KGP-G070"
+      ],
+      "status": "provisionally_complete",
+      "title": "MCP++ UCAN authorization and audit",
+      "track": "security",
+      "work_surface_score": 15
+    },
+    {
+      "fib_priority": 13,
+      "goal_id": "KGP-G090",
+      "graph_depth": 1,
+      "heap_index": 8,
+      "output_count": 4,
+      "parents": [
+        "KGP-G000"
+      ],
+      "priority": "P0",
+      "priority_rank": 0,
+      "required_evidence_count": 1,
+      "sort_key": [
+        13,
+        0,
+        -13,
+        1,
+        "KGP-G090"
+      ],
+      "status": "provisionally_complete",
+      "title": "Load, soak, chaos, observability, and operability",
+      "track": "reliability",
+      "work_surface_score": 13
+    },
+    {
+      "fib_priority": 13,
+      "goal_id": "KGP-G080",
+      "graph_depth": 1,
+      "heap_index": 9,
+      "output_count": 3,
+      "parents": [
+        "KGP-G000"
+      ],
+      "priority": "P1",
+      "priority_rank": 1,
+      "required_evidence_count": 5,
+      "sort_key": [
+        13,
+        1,
+        -27,
+        1,
+        "KGP-G080"
+      ],
+      "status": "provisionally_complete",
+      "title": "Real corpus adapters and differential validation",
+      "track": "compatibility",
+      "work_surface_score": 27
+    },
+    {
+      "fib_priority": 21,
+      "goal_id": "KGP-G100",
+      "graph_depth": 1,
+      "heap_index": 10,
+      "output_count": 3,
+      "parents": [
+        "KGP-G000"
+      ],
+      "priority": "P1",
+      "priority_rank": 1,
+      "required_evidence_count": 1,
+      "sort_key": [
+        21,
+        1,
+        -11,
+        1,
+        "KGP-G100"
+      ],
+      "status": "provisionally_complete",
+      "title": "Reversible adoption and production release",
+      "track": "adoption",
+      "work_surface_score": 11
+    }
+  ],
+  "objective_path": "/home/barberb/ipfs_datasets_py/docs/architecture/knowledge_graphs_production_hardening.objectives.md",
+  "schema": "ipfs_accelerate_py.agent_supervisor.objective_graph",
+  "thought_graph": {
+    "edge_count": 66,
+    "edges": [
+      {
+        "from": "goal:KGP-G000",
+        "kind": "requires_evidence",
+        "to": "evidence:a81381e06ee2"
+      },
+      {
+        "from": "goal:KGP-G000",
+        "kind": "validated_by",
+        "to": "validation:5ed6edca974f"
+      },
+      {
+        "from": "goal:KGP-G000",
+        "kind": "touches_surface",
+        "to": "code_surface:876ce0a08689"
+      },
+      {
+        "from": "goal:KGP-G000",
+        "kind": "touches_surface",
+        "to": "code_surface:cb9a72ce5932"
+      },
+      {
+        "from": "goal:KGP-G000",
+        "kind": "touches_surface",
+        "to": "code_surface:813fdf39b85c"
+      },
+      {
+        "from": "goal:KGP-G000",
+        "kind": "touches_surface",
+        "to": "code_surface:8ad0703f739f"
+      },
+      {
+        "from": "goal:KGP-G010",
+        "kind": "requires_evidence",
+        "to": "evidence:99f3b7d5ba03"
+      },
+      {
+        "from": "goal:KGP-G010",
+        "kind": "requires_evidence",
+        "to": "evidence:e637f65ad797"
+      },
+      {
+        "from": "goal:KGP-G010",
+        "kind": "validated_by",
+        "to": "validation:9de66cd21b1f"
+      },
+      {
+        "from": "goal:KGP-G010",
+        "kind": "touches_surface",
+        "to": "code_surface:bc1d687d4db7"
+      },
+      {
+        "from": "goal:KGP-G010",
+        "kind": "touches_surface",
+        "to": "code_surface:362be9bb445a"
+      },
+      {
+        "from": "goal:KGP-G010",
+        "kind": "touches_surface",
+        "to": "code_surface:1dee6e72f617"
+      },
+      {
+        "from": "goal:KGP-G020",
+        "kind": "requires_evidence",
+        "to": "evidence:efc9a280b8b1"
+      },
+      {
+        "from": "goal:KGP-G020",
+        "kind": "validated_by",
+        "to": "validation:20b7a6757a69"
+      },
+      {
+        "from": "goal:KGP-G020",
+        "kind": "touches_surface",
+        "to": "code_surface:3b49f97e7fca"
+      },
+      {
+        "from": "goal:KGP-G020",
+        "kind": "touches_surface",
+        "to": "code_surface:0b086f824e96"
+      },
+      {
+        "from": "goal:KGP-G020",
+        "kind": "touches_surface",
+        "to": "code_surface:7d279a1410e4"
+      },
+      {
+        "from": "goal:KGP-G020",
+        "kind": "touches_surface",
+        "to": "code_surface:f921c39e2364"
+      },
+      {
+        "from": "goal:KGP-G030",
+        "kind": "requires_evidence",
+        "to": "evidence:7ce454584f71"
+      },
+      {
+        "from": "goal:KGP-G030",
+        "kind": "validated_by",
+        "to": "validation:3c1350dccc5c"
+      },
+      {
+        "from": "goal:KGP-G030",
+        "kind": "touches_surface",
+        "to": "code_surface:92bc9ea5bdf2"
+      },
+      {
+        "from": "goal:KGP-G030",
+        "kind": "touches_surface",
+        "to": "code_surface:fd29a076f13a"
+      },
+      {
+        "from": "goal:KGP-G030",
+        "kind": "touches_surface",
+        "to": "code_surface:7241b834146f"
+      },
+      {
+        "from": "goal:KGP-G040",
+        "kind": "requires_evidence",
+        "to": "evidence:ce75f10bc570"
+      },
+      {
+        "from": "goal:KGP-G040",
+        "kind": "validated_by",
+        "to": "validation:9e5d86b052e0"
+      },
+      {
+        "from": "goal:KGP-G040",
+        "kind": "touches_surface",
+        "to": "code_surface:837e51c6ee5a"
+      },
+      {
+        "from": "goal:KGP-G040",
+        "kind": "touches_surface",
+        "to": "code_surface:4f618879af18"
+      },
+      {
+        "from": "goal:KGP-G050",
+        "kind": "requires_evidence",
+        "to": "evidence:bd0b7f635266"
+      },
+      {
+        "from": "goal:KGP-G050",
+        "kind": "requires_evidence",
+        "to": "evidence:0518359d18a3"
+      },
+      {
+        "from": "goal:KGP-G050",
+        "kind": "validated_by",
+        "to": "validation:cebcc6610f07"
+      },
+      {
+        "from": "goal:KGP-G050",
+        "kind": "touches_surface",
+        "to": "code_surface:46488b332849"
+      },
+      {
+        "from": "goal:KGP-G050",
+        "kind": "touches_surface",
+        "to": "code_surface:9c08cdfebc0f"
+      },
+      {
+        "from": "goal:KGP-G050",
+        "kind": "touches_surface",
+        "to": "code_surface:58cfff166fc3"
+      },
+      {
+        "from": "goal:KGP-G060",
+        "kind": "requires_evidence",
+        "to": "evidence:89db3916f397"
+      },
+      {
+        "from": "goal:KGP-G060",
+        "kind": "requires_evidence",
+        "to": "evidence:5cb1f744a601"
+      },
+      {
+        "from": "goal:KGP-G060",
+        "kind": "validated_by",
+        "to": "validation:2fd0350b898c"
+      },
+      {
+        "from": "goal:KGP-G060",
+        "kind": "touches_surface",
+        "to": "code_surface:620e5fc26096"
+      },
+      {
+        "from": "goal:KGP-G060",
+        "kind": "touches_surface",
+        "to": "code_surface:3c67a14fe1f6"
+      },
+      {
+        "from": "goal:KGP-G060",
+        "kind": "touches_surface",
+        "to": "code_surface:196f9253d960"
+      },
+      {
+        "from": "goal:KGP-G060",
+        "kind": "touches_surface",
+        "to": "code_surface:be8e351d09d6"
+      },
+      {
+        "from": "goal:KGP-G070",
+        "kind": "requires_evidence",
+        "to": "evidence:7edf66975557"
+      },
+      {
+        "from": "goal:KGP-G070",
+        "kind": "requires_evidence",
+        "to": "evidence:d5c0d696b85e"
+      },
+      {
+        "from": "goal:KGP-G070",
+        "kind": "validated_by",
+        "to": "validation:6c25a3a2b64b"
+      },
+      {
+        "from": "goal:KGP-G070",
+        "kind": "touches_surface",
+        "to": "code_surface:1946da4cd6f2"
+      },
+      {
+        "from": "goal:KGP-G070",
+        "kind": "touches_surface",
+        "to": "code_surface:7f0ce6b3951c"
+      },
+      {
+        "from": "goal:KGP-G070",
+        "kind": "touches_surface",
+        "to": "code_surface:cda0c5bc930b"
+      },
+      {
+        "from": "goal:KGP-G080",
+        "kind": "requires_evidence",
+        "to": "evidence:c734a43e88ff"
+      },
+      {
+        "from": "goal:KGP-G080",
+        "kind": "requires_evidence",
+        "to": "evidence:4ad75419bedb"
+      },
+      {
+        "from": "goal:KGP-G080",
+        "kind": "requires_evidence",
+        "to": "evidence:f2fba97128d6"
+      },
+      {
+        "from": "goal:KGP-G080",
+        "kind": "requires_evidence",
+        "to": "evidence:cd731b84552d"
+      },
+      {
+        "from": "goal:KGP-G080",
+        "kind": "requires_evidence",
+        "to": "evidence:9c4e2dcc56c5"
+      },
+      {
+        "from": "goal:KGP-G080",
+        "kind": "validated_by",
+        "to": "validation:69a3b88c3603"
+      },
+      {
+        "from": "goal:KGP-G080",
+        "kind": "touches_surface",
+        "to": "code_surface:d61c447fe5d8"
+      },
+      {
+        "from": "goal:KGP-G080",
+        "kind": "touches_surface",
+        "to": "code_surface:8bd2a30a5785"
+      },
+      {
+        "from": "goal:KGP-G080",
+        "kind": "touches_surface",
+        "to": "code_surface:2b1f0284cc56"
+      },
+      {
+        "from": "goal:KGP-G090",
+        "kind": "requires_evidence",
+        "to": "evidence:9669143a08fc"
+      },
+      {
+        "from": "goal:KGP-G090",
+        "kind": "validated_by",
+        "to": "validation:9a89dcfcc493"
+      },
+      {
+        "from": "goal:KGP-G090",
+        "kind": "touches_surface",
+        "to": "code_surface:70353943c83e"
+      },
+      {
+        "from": "goal:KGP-G090",
+        "kind": "touches_surface",
+        "to": "code_surface:f51c623f56c0"
+      },
+      {
+        "from": "goal:KGP-G090",
+        "kind": "touches_surface",
+        "to": "code_surface:a845c1b40bad"
+      },
+      {
+        "from": "goal:KGP-G090",
+        "kind": "touches_surface",
+        "to": "code_surface:90544e4e4cb5"
+      },
+      {
+        "from": "goal:KGP-G100",
+        "kind": "requires_evidence",
+        "to": "evidence:0d472178f473"
+      },
+      {
+        "from": "goal:KGP-G100",
+        "kind": "validated_by",
+        "to": "validation:69285cae6da7"
+      },
+      {
+        "from": "goal:KGP-G100",
+        "kind": "touches_surface",
+        "to": "code_surface:e0574783ac4d"
+      },
+      {
+        "from": "goal:KGP-G100",
+        "kind": "touches_surface",
+        "to": "code_surface:2e4b46704255"
+      },
+      {
+        "from": "goal:KGP-G100",
+        "kind": "touches_surface",
+        "to": "code_surface:79e75fd6e290"
+      }
+    ],
+    "node_count": 77,
+    "nodes": [
+      {
+        "goal_id": "KGP-G020",
+        "id": "code_surface:0b086f824e96",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/knowledge_graphs/catalog",
+        "thought": "Inspect or modify `ipfs_datasets_py/knowledge_graphs/catalog` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G070",
+        "id": "code_surface:1946da4cd6f2",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/knowledge_graphs/auth",
+        "thought": "Inspect or modify `ipfs_datasets_py/knowledge_graphs/auth` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G060",
+        "id": "code_surface:196f9253d960",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/mcp_server/tools/graph_tools",
+        "thought": "Inspect or modify `ipfs_datasets_py/mcp_server/tools/graph_tools` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G010",
+        "id": "code_surface:1dee6e72f617",
+        "kind": "code_surface",
+        "path": "docs/architecture/knowledge_graphs_contract_matrix.md",
+        "thought": "Inspect or modify `docs/architecture/knowledge_graphs_contract_matrix.md` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G080",
+        "id": "code_surface:2b1f0284cc56",
+        "kind": "code_surface",
+        "path": "tests/integration/knowledge_graphs/corpora",
+        "thought": "Inspect or modify `tests/integration/knowledge_graphs/corpora` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G100",
+        "id": "code_surface:2e4b46704255",
+        "kind": "code_surface",
+        "path": "docs/migration/knowledge_graphs",
+        "thought": "Inspect or modify `docs/migration/knowledge_graphs` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G010",
+        "id": "code_surface:362be9bb445a",
+        "kind": "code_surface",
+        "path": "docs/architecture/knowledge_graphs_inventory.md",
+        "thought": "Inspect or modify `docs/architecture/knowledge_graphs_inventory.md` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G020",
+        "id": "code_surface:3b49f97e7fca",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/knowledge_graphs/contracts",
+        "thought": "Inspect or modify `ipfs_datasets_py/knowledge_graphs/contracts` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G060",
+        "id": "code_surface:3c67a14fe1f6",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/ipfs_datasets_cli.py",
+        "thought": "Inspect or modify `ipfs_datasets_py/ipfs_datasets_cli.py` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G050",
+        "id": "code_surface:46488b332849",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/knowledge_graphs/query",
+        "thought": "Inspect or modify `ipfs_datasets_py/knowledge_graphs/query` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G040",
+        "id": "code_surface:4f618879af18",
+        "kind": "code_surface",
+        "path": "tests/contract/knowledge_graphs/storage",
+        "thought": "Inspect or modify `tests/contract/knowledge_graphs/storage` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G050",
+        "id": "code_surface:58cfff166fc3",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/search/graph_query",
+        "thought": "Inspect or modify `ipfs_datasets_py/search/graph_query` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G060",
+        "id": "code_surface:620e5fc26096",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/knowledge_graphs/__init__.py",
+        "thought": "Inspect or modify `ipfs_datasets_py/knowledge_graphs/__init__.py` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G090",
+        "id": "code_surface:70353943c83e",
+        "kind": "code_surface",
+        "path": "benchmarks/knowledge_graphs",
+        "thought": "Inspect or modify `benchmarks/knowledge_graphs` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G030",
+        "id": "code_surface:7241b834146f",
+        "kind": "code_surface",
+        "path": "tests/chaos/knowledge_graphs",
+        "thought": "Inspect or modify `tests/chaos/knowledge_graphs` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G100",
+        "id": "code_surface:79e75fd6e290",
+        "kind": "code_surface",
+        "path": "docs/operations/knowledge_graphs_release.md",
+        "thought": "Inspect or modify `docs/operations/knowledge_graphs_release.md` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G020",
+        "id": "code_surface:7d279a1410e4",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/knowledge_graphs/service.py",
+        "thought": "Inspect or modify `ipfs_datasets_py/knowledge_graphs/service.py` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G070",
+        "id": "code_surface:7f0ce6b3951c",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/mcp_server",
+        "thought": "Inspect or modify `ipfs_datasets_py/mcp_server` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G000",
+        "id": "code_surface:813fdf39b85c",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/ipfs_datasets_cli.py",
+        "thought": "Inspect or modify `ipfs_datasets_py/ipfs_datasets_cli.py` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G040",
+        "id": "code_surface:837e51c6ee5a",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/knowledge_graphs/storage",
+        "thought": "Inspect or modify `ipfs_datasets_py/knowledge_graphs/storage` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G000",
+        "id": "code_surface:876ce0a08689",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/knowledge_graphs",
+        "thought": "Inspect or modify `ipfs_datasets_py/knowledge_graphs` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G000",
+        "id": "code_surface:8ad0703f739f",
+        "kind": "code_surface",
+        "path": "tests/knowledge_graphs",
+        "thought": "Inspect or modify `tests/knowledge_graphs` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G080",
+        "id": "code_surface:8bd2a30a5785",
+        "kind": "code_surface",
+        "path": "tests/fixtures/knowledge_graphs",
+        "thought": "Inspect or modify `tests/fixtures/knowledge_graphs` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G090",
+        "id": "code_surface:90544e4e4cb5",
+        "kind": "code_surface",
+        "path": "docs/operations/knowledge_graphs",
+        "thought": "Inspect or modify `docs/operations/knowledge_graphs` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G030",
+        "id": "code_surface:92bc9ea5bdf2",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/knowledge_graphs/transactions",
+        "thought": "Inspect or modify `ipfs_datasets_py/knowledge_graphs/transactions` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G050",
+        "id": "code_surface:9c08cdfebc0f",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/knowledge_graphs/storage/sharding",
+        "thought": "Inspect or modify `ipfs_datasets_py/knowledge_graphs/storage/sharding` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G090",
+        "id": "code_surface:a845c1b40bad",
+        "kind": "code_surface",
+        "path": "tests/chaos/knowledge_graphs",
+        "thought": "Inspect or modify `tests/chaos/knowledge_graphs` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G010",
+        "id": "code_surface:bc1d687d4db7",
+        "kind": "code_surface",
+        "path": "tests/knowledge_graphs/contract",
+        "thought": "Inspect or modify `tests/knowledge_graphs/contract` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G060",
+        "id": "code_surface:be8e351d09d6",
+        "kind": "code_surface",
+        "path": "tests/knowledge_graphs/conformance",
+        "thought": "Inspect or modify `tests/knowledge_graphs/conformance` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G000",
+        "id": "code_surface:cb9a72ce5932",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/mcp_server",
+        "thought": "Inspect or modify `ipfs_datasets_py/mcp_server` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G070",
+        "id": "code_surface:cda0c5bc930b",
+        "kind": "code_surface",
+        "path": "tests/security/knowledge_graphs",
+        "thought": "Inspect or modify `tests/security/knowledge_graphs` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G080",
+        "id": "code_surface:d61c447fe5d8",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/knowledge_graphs/adapters",
+        "thought": "Inspect or modify `ipfs_datasets_py/knowledge_graphs/adapters` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G100",
+        "id": "code_surface:e0574783ac4d",
+        "kind": "code_surface",
+        "path": "ipfs_datasets_py/knowledge_graphs/migration",
+        "thought": "Inspect or modify `ipfs_datasets_py/knowledge_graphs/migration` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G090",
+        "id": "code_surface:f51c623f56c0",
+        "kind": "code_surface",
+        "path": "tests/load/knowledge_graphs",
+        "thought": "Inspect or modify `tests/load/knowledge_graphs` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G020",
+        "id": "code_surface:f921c39e2364",
+        "kind": "code_surface",
+        "path": "docs/architecture",
+        "thought": "Inspect or modify `docs/architecture` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G030",
+        "id": "code_surface:fd29a076f13a",
+        "kind": "code_surface",
+        "path": "tests/integration/knowledge_graphs/concurrency",
+        "thought": "Inspect or modify `tests/integration/knowledge_graphs/concurrency` as part of this objective."
+      },
+      {
+        "goal_id": "KGP-G050",
+        "id": "evidence:0518359d18a3",
+        "kind": "evidence_requirement",
+        "term": "KGP-G020 and KGP-G040 contracts",
+        "thought": "Find or create repository evidence proving `KGP-G020 and KGP-G040 contracts`."
+      },
+      {
+        "goal_id": "KGP-G100",
+        "id": "evidence:0d472178f473",
+        "kind": "evidence_requirement",
+        "term": "KGP-G010 through KGP-G090 completion receipts",
+        "thought": "Find or create repository evidence proving `KGP-G010 through KGP-G090 completion receipts`."
+      },
+      {
+        "goal_id": "KGP-G080",
+        "id": "evidence:4ad75419bedb",
+        "kind": "evidence_requirement",
+        "term": "lift_coding/.cvefixes-build",
+        "thought": "Find or create repository evidence proving `lift_coding/.cvefixes-build`."
+      },
+      {
+        "goal_id": "KGP-G060",
+        "id": "evidence:5cb1f744a601",
+        "kind": "evidence_requirement",
+        "term": "KGP-G020 service",
+        "thought": "Find or create repository evidence proving `KGP-G020 service`."
+      },
+      {
+        "goal_id": "KGP-G030",
+        "id": "evidence:7ce454584f71",
+        "kind": "evidence_requirement",
+        "term": "KGP-G020 service and catalog contract",
+        "thought": "Find or create repository evidence proving `KGP-G020 service and catalog contract`."
+      },
+      {
+        "goal_id": "KGP-G070",
+        "id": "evidence:7edf66975557",
+        "kind": "evidence_requirement",
+        "term": "ipfs_datasets_py/mcp_server/ucan_delegation.py",
+        "thought": "Find or create repository evidence proving `ipfs_datasets_py/mcp_server/ucan_delegation.py`."
+      },
+      {
+        "goal_id": "KGP-G060",
+        "id": "evidence:89db3916f397",
+        "kind": "evidence_requirement",
+        "term": "KGP-G010 public contract matrix",
+        "thought": "Find or create repository evidence proving `KGP-G010 public contract matrix`."
+      },
+      {
+        "goal_id": "KGP-G090",
+        "id": "evidence:9669143a08fc",
+        "kind": "evidence_requirement",
+        "term": "KGP-G030 through KGP-G080 passing contracts",
+        "thought": "Find or create repository evidence proving `KGP-G030 through KGP-G080 passing contracts`."
+      },
+      {
+        "goal_id": "KGP-G010",
+        "id": "evidence:99f3b7d5ba03",
+        "kind": "evidence_requirement",
+        "term": "direct CLI and MCP probes from 2026-07-29",
+        "thought": "Find or create repository evidence proving `direct CLI and MCP probes from 2026-07-29`."
+      },
+      {
+        "goal_id": "KGP-G080",
+        "id": "evidence:9c4e2dcc56c5",
+        "kind": "evidence_requirement",
+        "term": "agent supervisor graph datasets",
+        "thought": "Find or create repository evidence proving `agent supervisor graph datasets`."
+      },
+      {
+        "goal_id": "KGP-G000",
+        "id": "evidence:a81381e06ee2",
+        "kind": "evidence_requirement",
+        "term": "docs/architecture/KNOWLEDGE_GRAPHS_PRODUCTION_HARDENING_PLAN_2026_07_29.md",
+        "thought": "Find or create repository evidence proving `docs/architecture/KNOWLEDGE_GRAPHS_PRODUCTION_HARDENING_PLAN_2026_07_29.md`."
+      },
+      {
+        "goal_id": "KGP-G050",
+        "id": "evidence:bd0b7f635266",
+        "kind": "evidence_requirement",
+        "term": "search/graph_query/sharded_car",
+        "thought": "Find or create repository evidence proving `search/graph_query/sharded_car`."
+      },
+      {
+        "goal_id": "KGP-G080",
+        "id": "evidence:c734a43e88ff",
+        "kind": "evidence_requirement",
+        "term": "KGP-G010 inventory",
+        "thought": "Find or create repository evidence proving `KGP-G010 inventory`."
+      },
+      {
+        "goal_id": "KGP-G080",
+        "id": "evidence:cd731b84552d",
+        "kind": "evidence_requirement",
+        "term": "211-AI data/retrieval_package",
+        "thought": "Find or create repository evidence proving `211-AI data/retrieval_package`."
+      },
+      {
+        "goal_id": "KGP-G040",
+        "id": "evidence:ce75f10bc570",
+        "kind": "evidence_requirement",
+        "term": "KGP-G020 manifest and service contracts",
+        "thought": "Find or create repository evidence proving `KGP-G020 manifest and service contracts`."
+      },
+      {
+        "goal_id": "KGP-G070",
+        "id": "evidence:d5c0d696b85e",
+        "kind": "evidence_requirement",
+        "term": "KGP-G020 service contract",
+        "thought": "Find or create repository evidence proving `KGP-G020 service contract`."
+      },
+      {
+        "goal_id": "KGP-G010",
+        "id": "evidence:e637f65ad797",
+        "kind": "evidence_requirement",
+        "term": "docs/knowledge_graphs/MASTER_STATUS.md",
+        "thought": "Find or create repository evidence proving `docs/knowledge_graphs/MASTER_STATUS.md`."
+      },
+      {
+        "goal_id": "KGP-G020",
+        "id": "evidence:efc9a280b8b1",
+        "kind": "evidence_requirement",
+        "term": "KGP-G010 contract and inventory outputs",
+        "thought": "Find or create repository evidence proving `KGP-G010 contract and inventory outputs`."
+      },
+      {
+        "goal_id": "KGP-G080",
+        "id": "evidence:f2fba97128d6",
+        "kind": "evidence_requirement",
+        "term": "logic/intent_ir/graphrag",
+        "thought": "Find or create repository evidence proving `logic/intent_ir/graphrag`."
+      },
+      {
+        "goal_id": "KGP-G000",
+        "id": "goal:KGP-G000",
+        "kind": "goal",
+        "priority": "P0",
+        "status": "provisionally_complete",
+        "thought": "Make `ipfs_datasets_py.knowledge_graphs` the durable, concurrent, authorized, sharded, multi-surface platform for the repository's heterogeneous knowledge graphs without migrating a producer before its evidence gates pass.",
+        "title": "Production-grade multi-graph knowledge graph platform",
+        "track": "knowledge-graphs"
+      },
+      {
+        "goal_id": "KGP-G010",
+        "id": "goal:KGP-G010",
+        "kind": "goal",
+        "priority": "P0",
+        "status": "provisionally_complete",
+        "thought": "Replace coverage-based production claims with executable public-contract failures and a complete inventory of graph producers, artifacts, schemas, consumers, and repository revisions.",
+        "title": "Executable truth baseline and compatibility contract",
+        "track": "baseline"
+      },
+      {
+        "goal_id": "KGP-G020",
+        "id": "goal:KGP-G020",
+        "kind": "goal",
+        "priority": "P0",
+        "status": "provisionally_complete",
+        "thought": "Establish one versioned graph target, immutable revision manifest, durable catalog, and long-lived GraphService used by every entry point.",
+        "title": "Canonical graph identity, manifest, catalog, and service",
+        "track": "architecture"
+      },
+      {
+        "goal_id": "KGP-G030",
+        "id": "goal:KGP-G030",
+        "kind": "goal",
+        "priority": "P0",
+        "status": "provisionally_complete",
+        "thought": "Provide snapshot reads, optimistic multi-writer commits, durable WAL recovery, graph-scoped leases, fencing, idempotency, and safe compaction.",
+        "title": "Durable concurrency, transactions, and recovery",
+        "track": "durability"
+      },
+      {
+        "goal_id": "KGP-G040",
+        "id": "goal:KGP-G040",
+        "kind": "goal",
+        "priority": "P0",
+        "status": "provisionally_complete",
+        "thought": "Persist the same graph revision through versioned Parquet, direct IPFS/IPLD, and ipfs_kit_py adapters with verified hybrid caching, pins, and garbage-collection roots.",
+        "title": "Interchangeable Parquet, IPFS/IPLD, and ipfs_kit_py storage",
+        "track": "storage"
+      },
+      {
+        "goal_id": "KGP-G050",
+        "id": "goal:KGP-G050",
+        "kind": "goal",
+        "priority": "P0",
+        "status": "provisionally_complete",
+        "thought": "Consolidate the existing sharded-CAR work behind one query backend with v1 compatibility, scalable v2 routing, cross-shard adjacency, indexes, budgets, cursors, and streaming.",
+        "title": "Versioned sharding and bounded unified query",
+        "track": "query"
+      },
+      {
+        "goal_id": "KGP-G060",
+        "id": "goal:KGP-G060",
+        "kind": "goal",
+        "priority": "P0",
+        "status": "provisionally_complete",
+        "thought": "Route all public surfaces through GraphService with stable lifecycle, target selection, streaming, JSON results, typed errors, and exact conformance vectors.",
+        "title": "Python, CLI, MCP, and MCP++ surface parity",
+        "track": "interfaces"
+      },
+      {
+        "goal_id": "KGP-G070",
+        "id": "goal:KGP-G070",
+        "kind": "goal",
+        "priority": "P0",
+        "status": "provisionally_complete",
+        "thought": "Enforce attenuated UCAN capabilities for graph resources in MCP++ and the shared service, including expiry, revocation, caveats, replay defense, and redacted audit receipts.",
+        "title": "MCP++ UCAN authorization and audit",
+        "track": "security"
+      },
+      {
+        "goal_id": "KGP-G080",
+        "id": "goal:KGP-G080",
+        "kind": "goal",
+        "priority": "P1",
+        "status": "provisionally_complete",
+        "thought": "Read and validate CVEfixes, SkillCenter, 211-AI, and code/evidence graphs through canonical adapters before any producer is migrated.",
+        "title": "Real corpus adapters and differential validation",
+        "track": "compatibility"
+      },
+      {
+        "goal_id": "KGP-G090",
+        "id": "goal:KGP-G090",
+        "kind": "goal",
+        "priority": "P0",
+        "status": "provisionally_complete",
+        "thought": "Establish hardware-labelled performance baselines and prove bounded operation, recovery, backup/restore, health, metrics, tracing, and audit under realistic and synthetic load.",
+        "title": "Load, soak, chaos, observability, and operability",
+        "track": "reliability"
+      },
+      {
+        "goal_id": "KGP-G100",
+        "id": "goal:KGP-G100",
+        "kind": "goal",
+        "priority": "P1",
+        "status": "provisionally_complete",
+        "thought": "Provide shadow, canary, rollback, migration, compatibility, and deprecation controls and release only after every upstream evidence gate passes.",
+        "title": "Reversible adoption and production release",
+        "track": "adoption"
+      },
+      {
+        "command": "python -m pytest -q tests/unit/knowledge_graphs/contracts tests/integration/knowledge_graphs/test_catalog_service.py",
+        "goal_id": "KGP-G020",
+        "id": "validation:20b7a6757a69",
+        "kind": "validation_strategy",
+        "thought": "Run this validation before closing the goal."
+      },
+      {
+        "command": "python -m pytest -q tests/knowledge_graphs/conformance tests/cli/test_graph_commands.py tests/mcp/test_graph_tools.py",
+        "goal_id": "KGP-G060",
+        "id": "validation:2fd0350b898c",
+        "kind": "validation_strategy",
+        "thought": "Run this validation before closing the goal."
+      },
+      {
+        "command": "python -m pytest -q tests/unit/knowledge_graphs/test_transactions.py tests/integration/knowledge_graphs/concurrency tests/chaos/knowledge_graphs",
+        "goal_id": "KGP-G030",
+        "id": "validation:3c1350dccc5c",
+        "kind": "validation_strategy",
+        "thought": "Run this validation before closing the goal."
+      },
+      {
+        "command": "python -m pytest -q tests/unit/knowledge_graphs tests/integration/knowledge_graphs tests/cli/test_graph_commands.py",
+        "goal_id": "KGP-G000",
+        "id": "validation:5ed6edca974f",
+        "kind": "validation_strategy",
+        "thought": "Run this validation before closing the goal."
+      },
+      {
+        "command": "python -m pytest -q tests/integration/knowledge_graphs/test_shadow_migration.py tests/integration/knowledge_graphs/test_rollback.py",
+        "goal_id": "KGP-G100",
+        "id": "validation:69285cae6da7",
+        "kind": "validation_strategy",
+        "thought": "Run this validation before closing the goal."
+      },
+      {
+        "command": "python -m pytest -q tests/integration/knowledge_graphs/corpora",
+        "goal_id": "KGP-G080",
+        "id": "validation:69a3b88c3603",
+        "kind": "validation_strategy",
+        "thought": "Run this validation before closing the goal."
+      },
+      {
+        "command": "python -m pytest -q tests/security/knowledge_graphs tests/mcp/test_graph_ucan.py",
+        "goal_id": "KGP-G070",
+        "id": "validation:6c25a3a2b64b",
+        "kind": "validation_strategy",
+        "thought": "Run this validation before closing the goal."
+      },
+      {
+        "command": "python -m pytest -q tests/load/knowledge_graphs tests/chaos/knowledge_graphs",
+        "goal_id": "KGP-G090",
+        "id": "validation:9a89dcfcc493",
+        "kind": "validation_strategy",
+        "thought": "Run this validation before closing the goal."
+      },
+      {
+        "command": "python -m pytest -q tests/knowledge_graphs/contract",
+        "goal_id": "KGP-G010",
+        "id": "validation:9de66cd21b1f",
+        "kind": "validation_strategy",
+        "thought": "Run this validation before closing the goal."
+      },
+      {
+        "command": "python -m pytest -q tests/contract/knowledge_graphs/storage tests/integration/knowledge_graphs/test_storage_restart.py",
+        "goal_id": "KGP-G040",
+        "id": "validation:9e5d86b052e0",
+        "kind": "validation_strategy",
+        "thought": "Run this validation before closing the goal."
+      },
+      {
+        "command": "python -m pytest -q tests/unit/search/test_sharded_car tests/integration/knowledge_graphs/test_sharded_query.py tests/knowledge_graphs/contract/test_query_budgets.py",
+        "goal_id": "KGP-G050",
+        "id": "validation:cebcc6610f07",
+        "kind": "validation_strategy",
+        "thought": "Run this validation before closing the goal."
+      }
+    ],
+    "schema": "ipfs_accelerate_py.agent_supervisor.objective_thought_graph"
+  }
+}

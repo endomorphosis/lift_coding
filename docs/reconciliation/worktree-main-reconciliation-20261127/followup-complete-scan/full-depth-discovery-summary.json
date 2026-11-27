@@ -1,0 +1,946 @@
+{
+  "all_local_branch_and_origin_main_rows": 29675,
+  "current_scope_limit": "Recent-commit audit covers local branch heads and origin/main in384 associated common dirs. It does not establish older branch equivalence, uncommitted source-body preservation, all fixture output inclusion, or current remote equality.",
+  "cutoff_utc": "2026-11-27T05:19:00+00:00",
+  "discovery_raw_sha256": "57c4c69dc6e6adb4348f8184fab1f0780f0eb398ae1843333bbaa97e88798f78",
+  "family_common_counts": {
+    "hallucinate_app": 5,
+    "ipfs_accelerate_py": 111,
+    "ipfs_datasets_py": 103,
+    "ipfs_kit_py": 99,
+    "jevops": 2,
+    "lift_coding": 10,
+    "mcp-plus-plus": 49,
+    "swissknife": 5
+  },
+  "filesystem_error_count": 176,
+  "known_root98": "/tmp/git-main-followup-20261127-zYjieLmd/metadata-refresh.json",
+  "new_common_dirs_vs_root98": 328,
+  "new_tmp_paths": [
+    "/tmp/legal-refusal-recovery-j_10md5l/repo",
+    "/tmp/lift-origin-main-reconcile-private-A8hmZDEd/root",
+    "/tmp/pytest-of-barberb/lir-cacheprep-e01/cache",
+    "/tmp/pytest-of-barberb/lir-cacheprep-e02/cache",
+    "/tmp/pytest-of-barberb/lir-cacheprep-e03/cache",
+    "/tmp/pytest-of-barberb/lir-cacheprep-e04/cache"
+  ],
+  "omissions": [
+    "No symlink traversal.",
+    "Dependency/install caches and virtualenv directories excluded as recorded.",
+    "Git markers inside unreadable directories cannot be inspected.",
+    "Metadata discovery is not source-content reconciliation or an integration claim."
+  ],
+  "recent_metadata": [],
+  "refs_at_or_after_cutoff": [
+    {
+      "common_dir": "/tmp/lift-origin-main-reconcile-private-A8hmZDEd/root/.git",
+      "family": "lift_coding",
+      "known_in_root98": false,
+      "refs": [
+        {
+          "committer_timestamp": 1795756773,
+          "oid": "20a2b7ac3b47a12971ac9cb469e719f474df01ba",
+          "ref": "refs/remotes/origin/main"
+        }
+      ]
+    }
+  ],
+  "registered_existing_not_discovered": [
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-0215830a765993dc-1790452392479986655/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-0215830a765993dc-1790452392479986655/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "9df09d3f50b80beebd5ae8bcd83cf72d034078c2",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-0215830a765993dc-1790452392479986655/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-0215830a765993dc-1790452392479986655/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-0215830a765993dc-1790452392479986655/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-0215830a765993dc-1790452392479986655/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-051288817b396053-1789806174414920183/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-051288817b396053-1789806174414920183/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "ddf6b79467b68159650df81befc288c8553df664",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-051288817b396053-1789806174414920183/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-051288817b396053-1789806174414920183/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-051288817b396053-1789806174414920183/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-051288817b396053-1789806174414920183/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-051c9a77b595da23-1789519911677248359/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-051c9a77b595da23-1789519911677248359/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "525542446517a17c38c4edaeb5843e198ac45e48",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-051c9a77b595da23-1789519911677248359/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-051c9a77b595da23-1789519911677248359/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "2ecff12c01705a26bd524b94a424b2a01f903f85",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-051c9a77b595da23-1789519911677248359/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-051c9a77b595da23-1789519911677248359/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-0a2cc46abc36f40c-1789677823601791843/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-0a2cc46abc36f40c-1789677823601791843/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "21f2dc2c52940c8552be1515d893e107d0564387",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-0a2cc46abc36f40c-1789677823601791843/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-0a2cc46abc36f40c-1789677823601791843/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-0a2cc46abc36f40c-1789677823601791843/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-0a2cc46abc36f40c-1789677823601791843/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-24af3192050aca62-1790456564886923842/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-24af3192050aca62-1790456564886923842/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "8714d28516577b6e6d7e12ed84f7e36df8a7d64e",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-24af3192050aca62-1790456564886923842/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-24af3192050aca62-1790456564886923842/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-24af3192050aca62-1790456564886923842/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-24af3192050aca62-1790456564886923842/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3a475d3f04539d8f-1789523759865409912/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3a475d3f04539d8f-1789523759865409912/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "525542446517a17c38c4edaeb5843e198ac45e48",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3a475d3f04539d8f-1789523759865409912/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3a475d3f04539d8f-1789523759865409912/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3a475d3f04539d8f-1789523759865409912/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3a475d3f04539d8f-1789523759865409912/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc26593dac9a4b4-1790469059729194348/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc26593dac9a4b4-1790469059729194348/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31f8d87bb373cd58b780ab8d1ab955c6fb853901",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc26593dac9a4b4-1790469059729194348/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc26593dac9a4b4-1790469059729194348/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc26593dac9a4b4-1790469059729194348/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc26593dac9a4b4-1790469059729194348/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc2d7b4c89965f5-1789470200269583117/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc2d7b4c89965f5-1789470200269583117/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "c369b00ba315e42f54b7f53ff2f6c55987f05214",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc2d7b4c89965f5-1789470200269583117/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc2d7b4c89965f5-1789470200269583117/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "2ecff12c01705a26bd524b94a424b2a01f903f85",
+      "branch": "refs/heads/main",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc2d7b4c89965f5-1789470200269583117/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py",
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc2d7b4c89965f5-1789470200269583117/modules/ipfs_datasets_py/modules/.tools/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "89667f339465974d0bbf83ac7596d62c1190ab03",
+      "branch": "refs/heads/main",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc2d7b4c89965f5-1789470200269583117/modules/ipfs_datasets_py/modules/ipfs_accelerate_py",
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc2d7b4c89965f5-1789470200269583117/modules/ipfs_datasets_py/modules/ipfs_accelerate_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "2ecff12c01705a26bd524b94a424b2a01f903f85",
+      "branch": "refs/heads/main",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc2d7b4c89965f5-1789470200269583117/modules/ipfs_kit_py",
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3bc2d7b4c89965f5-1789470200269583117/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3f49e2924af20807-1790477809015795258/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3f49e2924af20807-1790477809015795258/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "fc22166a1141984165beffdf278808941519d701",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3f49e2924af20807-1790477809015795258/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3f49e2924af20807-1790477809015795258/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3f49e2924af20807-1790477809015795258/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-3f49e2924af20807-1790477809015795258/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-4306acf8c49404c7-1789470540458191053/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-4306acf8c49404c7-1789470540458191053/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "c369b00ba315e42f54b7f53ff2f6c55987f05214",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-4306acf8c49404c7-1789470540458191053/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-4306acf8c49404c7-1789470540458191053/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "2ecff12c01705a26bd524b94a424b2a01f903f85",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-4306acf8c49404c7-1789470540458191053/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-4306acf8c49404c7-1789470540458191053/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-52ab0c2c8d3134cd-1790448277665242241/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-52ab0c2c8d3134cd-1790448277665242241/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "9422f1835f6ad8ef1bd14414effb5ae9d4fe0895",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-52ab0c2c8d3134cd-1790448277665242241/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-52ab0c2c8d3134cd-1790448277665242241/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-52ab0c2c8d3134cd-1790448277665242241/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-52ab0c2c8d3134cd-1790448277665242241/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-72eb0ac35009dc83-1790473280009967858/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-72eb0ac35009dc83-1790473280009967858/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "d95775a3092abbfec1f991b64df89f0297ce07af",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-72eb0ac35009dc83-1790473280009967858/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-72eb0ac35009dc83-1790473280009967858/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-72eb0ac35009dc83-1790473280009967858/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-72eb0ac35009dc83-1790473280009967858/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-7a04b9956983c2e4-1789670099867384129/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-7a04b9956983c2e4-1789670099867384129/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "11e3f7b978502509f63f182d8308cf72b22112d2",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-7a04b9956983c2e4-1789670099867384129/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-7a04b9956983c2e4-1789670099867384129/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-7a04b9956983c2e4-1789670099867384129/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-7a04b9956983c2e4-1789670099867384129/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-7e2ca9708cafb11a-1790477436400569995/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-7e2ca9708cafb11a-1790477436400569995/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "2c11ee78fbcf740fa589bc8170f1fc52f0dbdd78",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-7e2ca9708cafb11a-1790477436400569995/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-7e2ca9708cafb11a-1790477436400569995/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-7e2ca9708cafb11a-1790477436400569995/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-7e2ca9708cafb11a-1790477436400569995/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-80244560c4760f92-1790481948542237027/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-80244560c4760f92-1790481948542237027/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "c2bf8efb3ae6d3f889fb4e09c2c58160d0a44f7d",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-80244560c4760f92-1790481948542237027/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-80244560c4760f92-1790481948542237027/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-80244560c4760f92-1790481948542237027/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-80244560c4760f92-1790481948542237027/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-8b563182447998ed-1789527661796063467/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-8b563182447998ed-1789527661796063467/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "219c3f1ee27c644279784961676fefaf056ebaa5",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-8b563182447998ed-1789527661796063467/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-8b563182447998ed-1789527661796063467/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-8b563182447998ed-1789527661796063467/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-8b563182447998ed-1789527661796063467/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-9c7c2e8c63d60626-1789666220116027861/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-9c7c2e8c63d60626-1789666220116027861/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "25386294688cfb8e4a1690be36632f910ead00e6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-9c7c2e8c63d60626-1789666220116027861/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-9c7c2e8c63d60626-1789666220116027861/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-9c7c2e8c63d60626-1789666220116027861/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-9c7c2e8c63d60626-1789666220116027861/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-b6eb7dc109a3dbbf-1790464832057333042/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-b6eb7dc109a3dbbf-1790464832057333042/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "b61857c2d43c97bb2ad8c5487dc6a003b58365b2",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-b6eb7dc109a3dbbf-1790464832057333042/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-b6eb7dc109a3dbbf-1790464832057333042/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-b6eb7dc109a3dbbf-1790464832057333042/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-b6eb7dc109a3dbbf-1790464832057333042/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-bd91b21327cf8ac0-1789673969567945934/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-bd91b21327cf8ac0-1789673969567945934/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "7932ccd982fe0ce9dfd6f5dce290d7ed947216da",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-bd91b21327cf8ac0-1789673969567945934/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-bd91b21327cf8ac0-1789673969567945934/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-bd91b21327cf8ac0-1789673969567945934/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-bd91b21327cf8ac0-1789673969567945934/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-c30c45dd12f3f8b1-1790460690927469668/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-c30c45dd12f3f8b1-1790460690927469668/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "c7bed8897f563cddf238b0c9b26244ec98fbce7a",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-c30c45dd12f3f8b1-1790460690927469668/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-c30c45dd12f3f8b1-1790460690927469668/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-c30c45dd12f3f8b1-1790460690927469668/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-c30c45dd12f3f8b1-1790460690927469668/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-d3fa95e756154300-1789692554772841208/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-d3fa95e756154300-1789692554772841208/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "4f9d9b63c666e809e4d03fbf44cef08ddf51fd67",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-d3fa95e756154300-1789692554772841208/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-d3fa95e756154300-1789692554772841208/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-d3fa95e756154300-1789692554772841208/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-d3fa95e756154300-1789692554772841208/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-d4a38dc68bc0a7f5-1789809863566407300/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-d4a38dc68bc0a7f5-1789809863566407300/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "ddf6b79467b68159650df81befc288c8553df664",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-d4a38dc68bc0a7f5-1789809863566407300/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-d4a38dc68bc0a7f5-1789809863566407300/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-d4a38dc68bc0a7f5-1789809863566407300/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-d4a38dc68bc0a7f5-1789809863566407300/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-f167227db9e95bde-1790485730876512759/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-f167227db9e95bde-1790485730876512759/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "565470d6587b2937f2821a0a5fd1a4891c253de2",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-f167227db9e95bde-1790485730876512759/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-f167227db9e95bde-1790485730876512759/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-f167227db9e95bde-1790485730876512759/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-f167227db9e95bde-1790485730876512759/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-f77b807bec133da0-1789472063536959785/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-f77b807bec133da0-1789472063536959785/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "c369b00ba315e42f54b7f53ff2f6c55987f05214",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-f77b807bec133da0-1789472063536959785/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-f77b807bec133da0-1789472063536959785/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "2ecff12c01705a26bd524b94a424b2a01f903f85",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-f77b807bec133da0-1789472063536959785/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-f77b807bec133da0-1789472063536959785/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-fade72100f3719d8-1789798490032051521/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-fade72100f3719d8-1789798490032051521/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "2b6cfb3c213d13c836e8cf7c94b25458f2c3de16",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-fade72100f3719d8-1789798490032051521/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-fade72100f3719d8-1789798490032051521/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a9b98beac1ef14278b4adf4f2289cd509530fb86",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-fade72100f3719d8-1789798490032051521/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-fade72100f3719d8-1789798490032051521/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-ffd559082e93fdfe-1789516064496405409/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-ffd559082e93fdfe-1789516064496405409/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "dbd94493a570fdebcd93368fb43b26f7fc79cf58",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-ffd559082e93fdfe-1789516064496405409/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-ffd559082e93fdfe-1789516064496405409/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "2ecff12c01705a26bd524b94a424b2a01f903f85",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-ffd559082e93fdfe-1789516064496405409/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-ffd559082e93fdfe-1789516064496405409/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-source-84320d8bd3a2612b/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-source-84320d8bd3a2612b/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "2fea27a5f41c03d5a5babf888b279fe2d3c8a2bc",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-source-84320d8bd3a2612b/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-source-84320d8bd3a2612b/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "2ecff12c01705a26bd524b94a424b2a01f903f85",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-source-84320d8bd3a2612b/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/accelerator-source-84320d8bd3a2612b/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "31096be86103f29faef80a01e03d09b1ad7345c6",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/semantic-preserving-autonomous-remodularization-v1/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/semantic-preserving-autonomous-remodularization-v1/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "2fea27a5f41c03d5a5babf888b279fe2d3c8a2bc",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/semantic-preserving-autonomous-remodularization-v1/modules/ipfs_datasets_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/semantic-preserving-autonomous-remodularization-v1/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "2ecff12c01705a26bd524b94a424b2a01f903f85",
+      "common_dir": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/semantic-preserving-autonomous-remodularization-v1/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/.local/state/ipfs_accelerate_py/lgcvf-exact-six-080-native-closure/.git/worktrees/semantic-preserving-autonomous-remodularization-v1/modules/ipfs_kit_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "15c1816d6c63a2b11edd505704f6a04a9abc6167",
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/worktrees/repo/modules/ipfs_accelerate_py/mcplusplus",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/worktrees/repo/modules/ipfs_accelerate_py/mcplusplus",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "a2f5400b7cb89c8481819379a1b7b9959fe81d45",
+      "branch": "refs/heads/main",
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/worktrees/repo/modules/ipfs_datasets_py",
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/worktrees/repo/modules/ipfs_datasets_py",
+      "path_symlink": false
+    },
+    {
+      "HEAD": "e164bb21c7a73b722a83aea7623e5677391bce54",
+      "common_dir": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/worktrees/repo/modules/ipfs_kit_py",
+      "detached": true,
+      "discovered": false,
+      "git_marker_exists": false,
+      "git_marker_symlink": false,
+      "path": "/home/barberb/lift_coding/.git/modules/hallucinate_app/modules/ipfs_accelerate_py/worktrees/repo/modules/ipfs_kit_py",
+      "path_symlink": false
+    }
+  ],
+  "registered_existing_not_discovered_count": 89,
+  "registered_existing_not_discovered_interpretation": "All89 have path==common_dir and no nested .git marker. They are Git-directory entries returned by explicit --git-dir worktree list, not newly discovered physical source checkouts.",
+  "registered_existing_not_root98_count": 951,
+  "related_common_dirs": 384,
+  "scope": "read-only associated-family Git metadata; no source-content or publication claim",
+  "unique_ref_tips": 9929
+}

@@ -1,0 +1,47 @@
+"""Freeze unmatched local versions as explicitly inert recovery records."""
+from hashlib import sha256
+import json
+from pathlib import Path
+import re
+
+HERE = Path(__file__).resolve().parent
+MARKERS = {
+    'private_key': rb'-----BEGIN (?:RSA |EC |OPENSSH |DSA )?PRIVATE KEY-----',
+    'github_token': rb'(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{45,})',
+    'aws_access_key': rb'\b(?:AKIA|ASIA)[A-Z0-9]{16}\b',
+    'provider_token': rb'\bsk-(?:proj-)?[A-Za-z0-9_-]{35,}',
+    'credential_url': rb'https?://[^\s/]+:[^\s/@]+@',
+}
+
+def main():
+    source = json.loads((HERE/'working-file-history-comparison.json').read_text())
+    payload = HERE/'publication/docs/reconciliation/worktree-main-reconciliation-20261127/followup-complete-scan'
+    manifest = {'schema':'inert-working-version-retention/v1','disposition':'Exact recovery versions. Maintained integration is assessed separately. These records convey no runtime authority or new qualification.','files':[],'excluded':[]}
+    seen = {}
+    for row in source['files']:
+        if row['disposition'] not in ['needs-review','large-file-review-required']:
+            continue
+        path = Path(row['file'])
+        if path.is_symlink() or not path.is_file():
+            raise RuntimeError('Source changed type: '+str(path))
+        raw = path.read_bytes()
+        digest = sha256(raw).hexdigest()
+        if row.get('sha256',digest)!=digest or len(raw)!=row['bytes']:
+            raise RuntimeError('Source changed bytes: '+str(path))
+        hits = [name for name,pattern in MARKERS.items() if re.search(pattern,raw)]
+        if hits:
+            manifest['excluded'].append({'source':str(path),'sha256':digest,'bytes':len(raw),'reason':'credential-marker-review','marker_families':hits})
+            continue
+        if digest not in seen:
+            relative = 'retained/'+row['repo']+'/'+row['relative_path']+'.DATA'
+            out = payload/relative
+            out.parent.mkdir(parents=True,exist_ok=True)
+            out.write_bytes(raw)
+            seen[digest] = relative
+        manifest['files'].append(dict(row,sha256=digest,archive=seen[digest],disposition='inert-recovery-version'))
+    payload.mkdir(parents=True,exist_ok=True)
+    (payload/'retained-versions.json').write_text(json.dumps(manifest,indent=2)+'\n')
+    print(json.dumps({'unique_versions':len(seen),'original_mappings':len(manifest['files']),'exclusions':manifest['excluded'],'bytes':sum((payload/r).stat().st_size for r in seen.values())},indent=2))
+
+if __name__ == '__main__':
+    main()

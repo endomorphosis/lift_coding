@@ -1,0 +1,82 @@
+"""Read-only Git metadata refresh for the user's publication reconciliation."""
+import concurrent.futures
+import collections
+import datetime
+import json
+import os
+from pathlib import Path
+import subprocess
+
+OUT = Path(__file__).resolve().parent
+PRIOR = Path('/tmp/lift-origin-main-reconcile-private-A8hmZDEd/publication/docs/reconciliation/worktree-main-reconciliation-20261127/inventory/compact-inventory.json')
+ROOT = Path('/home/barberb/lift_coding')
+ENV = dict(os.environ, GIT_OPTIONAL_LOCKS='0', GIT_TERMINAL_PROMPT='0')
+
+def git(path, *args, timeout=45):
+    return subprocess.run(['git', '-c', 'core.fsmonitor=false', '-c', 'core.hooksPath=/dev/null', '-C', str(path), *args], env=ENV, capture_output=True, timeout=timeout)
+
+def one(item):
+    row = {'path': item['path'], 'repo': item.get('repo')}
+    path = Path(item['path'])
+    if not path.exists():
+        return dict(row, missing=True)
+    try:
+        for name, args in [('head', ('rev-parse','HEAD')), ('common_dir', ('rev-parse','--path-format=absolute','--git-common-dir'))]:
+            r = git(path, *args)
+            row[name] = r.stdout.decode(errors='replace').strip() if r.returncode == 0 else None
+        refs = git(path, 'for-each-ref', '--format=%(refname) %(objectname)', 'refs/heads')
+        row['refs'] = dict(s.split(' ',1) for s in refs.stdout.decode().splitlines())
+        bare = git(path, 'rev-parse','--is-bare-repository').stdout.strip() == b'true'
+        row['bare'] = bare
+        if not bare:
+            r = git(path, 'status','--porcelain=v1','-z','--untracked-files=normal')
+            row['status_returncode'] = r.returncode
+            entries = r.stdout.split(b'\0')
+            statuses = []
+            idx = 0
+            while idx < len(entries):
+                raw = entries[idx]; idx += 1
+                if not raw:
+                    continue
+                code = raw[:2].decode(errors='replace')
+                entry = {'status':code, 'path':raw[3:].decode(errors='replace')}
+                if 'R' in code or 'C' in code:
+                    entry['original'] = entries[idx].decode(errors='replace'); idx += 1
+                statuses.append(entry)
+            row['status'] = statuses
+            row['status_counts'] = dict(collections.Counter(x['status'] for x in statuses))
+    except Exception as exc:
+        row['error'] = type(exc).__name__ + ': ' + str(exc)
+    return row
+
+def main():
+    prior = json.loads(PRIOR.read_text())
+    paths = {x['path']:x for x in prior['repositories']}
+    for rel in ['.', 'external/ipfs_datasets', 'external/ipfs_accelerate', 'external/ipfs_kit', 'swissknife', 'Mcp-Plus-Plus', 'hallucinate_app', 'JevOps', 'external/meta-wearables-dat-android', 'external/meta-wearables-dat-ios']:
+        p = str((ROOT / rel).resolve())
+        paths.setdefault(p, {'path':p,'repo':Path(rel).name if rel != '.' else 'lift_coding'})
+    for family in ['ipfs_datasets_py','ipfs_accelerate_py','ipfs_kit_py']:
+        p = str(Path('/home/barberb') / family)
+        if Path(p).exists():
+            paths.setdefault(p, {'path':p,'repo':family})
+    with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+        rows = list(pool.map(one, paths.values()))
+    report = {'schema':'git-publication-metadata-refresh/v1','observed_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'prior_inventory':str(PRIOR),'repositories':rows}
+    (OUT/'metadata-refresh.json').write_text(json.dumps(report,indent=2)+'\n')
+    prior_by = {r['path']:r for r in prior['repositories']}
+    summary = {'repositories':len(rows),'missing':sum(bool(r.get('missing')) for r in rows),'errors':[r for r in rows if 'error' in r], 'changed_heads':[], 'new_refs':[], 'working_counts':[]}
+    for row in rows:
+        old = prior_by.get(row['path'],{})
+        if row.get('head') != old.get('head'):
+            summary['changed_heads'].append({'path':row['path'],'before':old.get('head'),'after':row.get('head')})
+        for name, oid in row.get('refs',{}).items():
+            if old.get('refs',{}).get(name) != oid:
+                summary['new_refs'].append({'path':row['path'],'ref':name,'oid':oid})
+        if row.get('status'):
+            summary['working_counts'].append({'path':row['path'],'counts':row['status_counts'],'rows':len(row['status'])})
+    (OUT/'summary.json').write_text(json.dumps(summary,indent=2)+'\n')
+    print(json.dumps({k:v for k,v in summary.items() if k!='working_counts'},indent=2))
+    print('working_copies_with_changes',len(summary['working_counts']))
+
+if __name__ == '__main__':
+    main()

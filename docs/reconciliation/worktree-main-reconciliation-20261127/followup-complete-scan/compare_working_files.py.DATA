@@ -1,0 +1,89 @@
+"""Compare publication candidates by exact bytes; never change working files."""
+from collections import Counter
+from hashlib import sha1, sha256
+import json
+import os
+from pathlib import Path
+import subprocess
+
+HERE = Path(__file__).resolve().parent
+ROOT_GIT = '/tmp/lift-origin-main-reconcile-private-A8hmZDEd/root'
+TARGETS = {
+    'ipfs_accelerate_py': ('/tmp/accelerate-objective-output-owner-main-ybAvG5Rm/checkout', '64a8649952bed66a457d7b87bf6dced9fadab8d4'),
+    'ipfs_datasets_py': ('/tmp/P1-proof-cache-translation-current-6btZZr/datasets', '5bf57f390a12621a40716595fe261c35d2741e12'),
+    'ipfs_kit_py': ('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/kit', 'b15442e490dc39d046a911ea663c73c99ed3c755'),
+    'lift_coding': (ROOT_GIT, '20a2b7ac3b47a12971ac9cb469e719f474df01ba'),
+}
+ALIASES = {'ipfs_datasets':'ipfs_datasets_py', 'ipfs_accelerate':'ipfs_accelerate_py', 'ipfs_kit':'ipfs_kit_py'}
+ENV = dict(os.environ, GIT_OPTIONAL_LOCKS='0', GIT_TERMINAL_PROMPT='0')
+
+def git(repo, *args):
+    return subprocess.check_output(['git','-c','core.fsmonitor=false','-c','core.hooksPath=/dev/null','-C',str(repo),*args], env=ENV)
+
+def walk_rows(value):
+    if isinstance(value,dict):
+        if isinstance(value.get('sha256'),str):
+            yield value
+        for child in value.values():
+            yield from walk_rows(child)
+    elif isinstance(value,list):
+        for child in value:
+            yield from walk_rows(child)
+
+def main():
+    inventories = json.loads((HERE/'compact-metadata-refresh.json').read_text())['repositories']
+    archive_paths = git(ROOT_GIT,'ls-tree','-r','--name-only','origin/main','--','docs/reconciliation').decode().splitlines()
+    manifests = [p for p in archive_paths if p.endswith(('manifest.json','restore.json'))]
+    archived = set()
+    for path in manifests:
+        try:
+            obj = json.loads(git(ROOT_GIT,'show','origin/main:'+path))
+            archived.update(r['sha256'] for r in walk_rows(obj))
+        except (ValueError,subprocess.CalledProcessError):
+            continue
+    trees = {}
+    for family,(repo,tip) in TARGETS.items():
+        tree = {}
+        for record in git(repo,'ls-tree','-r','-z',tip).split(b'\0'):
+            if record:
+                meta,path = record.split(b'\t',1)
+                mode,kind,oid = meta.decode().split()
+                tree[path.decode(errors='surrogateescape')] = (mode,kind,oid)
+        trees[family] = tree
+    rows = []
+    for entry in inventories:
+        family = ALIASES.get(entry.get('repo'), entry.get('repo'))
+        if family not in TARGETS:
+            continue
+        repo = Path(entry['path'])
+        paths = {row['path'] for row in entry.get('status_non_deletion',[]) if row['status']!='??'}
+        if repo.as_posix().startswith('/home/barberb'):
+            prefixes = ['ipfs_datasets_py/','ipfs_accelerate_py/','ipfs_kit_py/','benchmarks/','tests/','test/','scripts/','docs/','config/','.github/workflows/']
+            extra = git(repo,'ls-files','--others','--exclude-standard','-z','--',*prefixes)
+            paths.update(p.decode(errors='surrogateescape') for p in extra.split(b'\0') if p)
+            paths.update(row['path'] for row in entry.get('status_non_deletion',[]) if row['status']=='??' and not row['path'].endswith('/'))
+        for relative in sorted(paths):
+            path = repo/relative
+            if not path.is_file() or path.is_symlink():
+                continue
+            stat = path.stat()
+            if stat.st_size > 5*1024**2:
+                rows.append({'file':str(path),'repo':family,'relative_path':relative,'bytes':stat.st_size,'disposition':'large-file-review-required'})
+                continue
+            raw = path.read_bytes()
+            digest = sha256(raw).hexdigest()
+            oid = sha1(f'blob {len(raw)}\0'.encode()+raw).hexdigest()
+            target = trees[family].get(relative)
+            if target and target[2]==oid:
+                disposition = 'exact-current-main'
+            elif digest in archived:
+                disposition = 'exact-published-archive'
+            else:
+                disposition = 'needs-review'
+            rows.append({'file':str(path),'repo':family,'relative_path':relative,'bytes':len(raw),'sha256':digest,'git_blob':oid,'current_main_blob':target[2] if target else None,'disposition':disposition})
+    result = {'schema':'working-source-publication-comparison/v1','target_main_tips':{k:v[1] for k,v in TARGETS.items()},'archive_manifests_compared':manifests,'archive_hashes':len(archived),'files':rows,'counts':dict(Counter(row['disposition'] for row in rows))}
+    (HERE/'working-file-comparison.json').write_text(json.dumps(result,indent=2)+'\n')
+    print(json.dumps({'files':len(rows),'counts':result['counts'],'needs_review':[{k:r[k] for k in ['file','bytes','disposition']} for r in rows if r['disposition'] not in ['exact-current-main','exact-published-archive']][:40]},indent=2))
+
+if __name__ == '__main__':
+    main()

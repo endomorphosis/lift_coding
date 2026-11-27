@@ -1,0 +1,46 @@
+{
+  "admission_records": {},
+  "cycle_count": 1,
+  "gap_family_states": {},
+  "generated_work": [],
+  "generated_work_count": 0,
+  "last_cycle": {
+    "accepted": [],
+    "consumed_tokens": 0,
+    "exhausted": false,
+    "final_open_work": 12,
+    "generated_work": [],
+    "initial_open_work": 12,
+    "limits": {
+      "max_breadth_per_parent": 4,
+      "max_depth": 3,
+      "max_new_work": 12,
+      "max_open_work": 48,
+      "max_retries": 2,
+      "semantic_similarity_threshold": 0.82,
+      "token_budget": 8192
+    },
+    "rejected": [],
+    "rejection_counts": {}
+  },
+  "last_evaluation": {
+    "accepted": [],
+    "admitted_cost": 0.0,
+    "admitted_tokens": 0,
+    "evaluator_version": "objective-work-evaluator-v1",
+    "policy": {
+      "current_open_work": 12,
+      "max_open_work": 48,
+      "max_proposals": 12,
+      "max_total_cost": 1000000.0,
+      "min_confidence": 0.0,
+      "min_novelty": 0.0,
+      "remaining_token_budget": 8192
+    },
+    "rejected": [],
+    "remaining_cost": 1000000.0,
+    "remaining_open_slots": 36,
+    "remaining_tokens": 8192
+  },
+  "schema": "ipfs_accelerate_py.agent_supervisor.objective_daemon.generation.v1"
+}

@@ -1,0 +1,70 @@
+from concurrent.futures import ThreadPoolExecutor
+from collections import Counter, defaultdict
+from datetime import datetime, timezone
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import subprocess
+
+ROOT=Path(__file__).parent
+raw=ROOT/'discovery.json'
+discovery=json.loads(raw.read_text())
+prior=json.loads(Path('/tmp/git-main-followup-20261127-zYjieLmd/metadata-refresh.json').read_text())
+knowncommons={row['common_dir'] for row in prior['repositories']}
+knownpaths={row['path'] for row in prior['repositories']}
+families={'ipfs_datasets_py','ipfs_accelerate_py','ipfs_kit_py','lift_coding','hallucinate_app','swissknife','mcp-plus-plus','jevops'}
+cutoff=datetime(2026,11,27,5,19,tzinfo=timezone.utc).timestamp()
+env=dict(os.environ,GIT_OPTIONAL_LOCKS='0',GIT_TERMINAL_PROMPT='0')
+related=defaultdict(list)
+for row in discovery['repositories']:
+    if row.get('valid'):
+        family=(row.get('origin') or '').lower().rstrip('/').rsplit('/',1)[-1].removesuffix('.git')
+        if family in families:
+            related[row['common_dir']].append(dict(row,family=family))
+
+def inspect(item):
+    common,rows=item
+    args=['git','--git-dir',common,'for-each-ref','--format=%(refname)%00%(objectname)%00%(committerdate:unix)','refs/heads/','refs/remotes/origin/main']
+    p=subprocess.run(args,capture_output=True,env=env,timeout=20)
+    refs=[]
+    for line in p.stdout.decode('utf-8','replace').splitlines():
+        bits=line.split('\0')
+        if len(bits)==3:
+            ref,oid,stamp=bits
+            refs.append({'ref':ref,'oid':oid,'committer_timestamp':int(stamp) if stamp.isdigit() else None})
+    gitmeta=[]
+    for row in rows:
+        meta={'path':row['path'],'git_dir':row['git_dir'],'head':row['head'],'family':row['family'],'recent_metadata':[]}
+        for filename in ('HEAD','index','logs/HEAD'):
+            path=Path(row['git_dir'])/filename
+            try:
+                st=path.stat()
+                if st.st_mtime >= cutoff:
+                    meta['recent_metadata'].append({'file':filename,'mtime_ns':st.st_mtime_ns,'size':st.st_size})
+            except FileNotFoundError:
+                pass
+        gitmeta.append(meta)
+    return {'common_dir':common,'family':rows[0]['family'],'known_in_root98':common in knowncommons,'rc':p.returncode,'refs':refs,'refs_at_or_after_cutoff':[r for r in refs if r['committer_timestamp'] and r['committer_timestamp'] >= cutoff],'recent_worktree_metadata':[m for m in gitmeta if m['recent_metadata']],'discovered_paths':len(rows)}
+
+with ThreadPoolExecutor(max_workers=12) as pool:
+    results=list(pool.map(inspect,sorted(related.items())))
+extra=[]
+for group in discovery['registered_worktrees']:
+    if group['common_dir'] not in related:
+        continue
+    for row in group['worktrees']:
+        path=Path(row['path'])
+        if row['path'] in knownpaths or not path.exists():
+            continue
+        try:
+            stat=path.lstat()
+            marker=path/'.git'
+            exists=marker.exists()
+            extra.append(dict(row,common_dir=group['common_dir'],path_symlink=path.is_symlink(),git_marker_exists=exists,git_marker_symlink=marker.is_symlink(),discovered=any(r['path']==row['path'] for r in related[group['common_dir']])))
+        except OSError as exc:
+            extra.append(dict(row,common_dir=group['common_dir'],error=type(exc).__name__))
+report={'cutoff_utc':'2026-11-27T05:19:00+00:00','scope':'read-only associated-family Git metadata; no source-content or publication claim','discovery_raw_sha256':sha256(raw.read_bytes()).hexdigest(),'known_root98':'/tmp/git-main-followup-20261127-zYjieLmd/metadata-refresh.json','related_common_dirs':len(results),'new_common_dirs_vs_root98':sum(not r['known_in_root98'] for r in results),'refs_at_or_after_cutoff':[{'common_dir':r['common_dir'],'family':r['family'],'known_in_root98':r['known_in_root98'],'refs':r['refs_at_or_after_cutoff']} for r in results if r['refs_at_or_after_cutoff']],'recent_metadata':[{'common_dir':r['common_dir'],'known_in_root98':r['known_in_root98'],'worktrees':r['recent_worktree_metadata']} for r in results if r['recent_worktree_metadata']],'registered_existing_paths_not_root98':extra,'all_related_ref_metadata':results,'omissions':discovery['scope_limitations'],'filesystem_error_count':len(discovery['filesystem_errors'])}
+out=ROOT/'recent-associated-metadata.json'
+out.write_text(json.dumps(report,indent=2,sort_keys=True)+'\n')
+print(json.dumps({'path':str(out),'bytes':out.stat().st_size,'sha256':sha256(out.read_bytes()).hexdigest(),'common_dirs':len(results),'new_common_dirs':report['new_common_dirs_vs_root98'],'recent_refs':report['refs_at_or_after_cutoff'],'recent_metadata_count':len(report['recent_metadata']),'registered_existing_not_root98':len(extra),'registered_existing_not_discovered':sum(not r.get('discovered') for r in extra)},indent=2))

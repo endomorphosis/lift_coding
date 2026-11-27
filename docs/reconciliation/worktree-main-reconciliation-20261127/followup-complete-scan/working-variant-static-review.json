@@ -1,0 +1,86 @@
+{
+  "comparison": "Detached retained source and maintained main copies. Whole-file Git blob IDs verified for both copies. Retained SHA-256 hashes matched the input manifest. Parsed ASTs compared in source order without importing the files.",
+  "input_manifest": "publication/docs/reconciliation/worktree-main-reconciliation-20261127/followup-complete-scan/retained-versions.json",
+  "limits": "Three exact file pairs only. Counts are AST test definitions. The supervisor and root ignore file were outside this review. No imports, tests, network, or canonical Source reads.",
+  "reviewed_files": [
+    {
+      "classification": "deletion_only",
+      "disposition": "retain_inert_snapshot",
+      "local": {
+        "bytes": 38869,
+        "git_blob": "f35a43418d70fc213e22755264d8b00795d75d69",
+        "sha256": "53ae06bb399e3c44a85ebff4d91f80bb72c47fcda61c955093c2482761118648",
+        "test_definitions": 42,
+        "top_level_ast_nodes": 63
+      },
+      "local_additions": 0,
+      "maintained_main": {
+        "bytes": 79713,
+        "git_blob": "08211fa4dda3b52c295426546f40cb94fdc17fc0",
+        "sha256": "5e562e963b8ee3dbcdb206da7627692ca78a9b1b6c95f3770b62adc8fcffcba0",
+        "test_definitions": 75,
+        "top_level_ast_nodes": 102
+      },
+      "maintained_test_definitions_omitted": 33,
+      "observations": [
+        "All 63 retained top-level nodes also occur in the same order in maintained main.",
+        "The snapshot omits two obligation and abstention tests, 17 prose recompilation and semantic facet or callback tests, and 14 civil deadline and effective-date tests."
+      ],
+      "path": "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py",
+      "repository": "ipfs_datasets_py"
+    },
+    {
+      "changed_entrypoint": "codex_thread_handoff_main",
+      "classification": "older_entrypoint_with_same_send_branch",
+      "disposition": "retain_inert_snapshot",
+      "local": {
+        "bytes": 28607,
+        "git_blob": "8931c76436f4c2cb4779c02641c145e3debd7414",
+        "sha256": "bf84858bd0f32d8660765921720c43d56462cdd3efca5657b038bdd7ad38dffa",
+        "top_level_ast_nodes": 30
+      },
+      "local_additions": 0,
+      "maintained_helper_definitions_omitted": 12,
+      "maintained_main": {
+        "bytes": 73268,
+        "git_blob": "d2cf234e6c8019f4ca95d1f23a9e682718bb9982",
+        "sha256": "039bb9269ee7f10a95c4227a9a67bbbd2ae7c260935c27d6076578e40a3f62fa",
+        "top_level_ast_nodes": 42
+      },
+      "observations": [
+        "The snapshot omits five read-only subcommands and the offline artifact argument pair and handling.",
+        "The full local send try and exception AST already occurs in the maintained branch used when offline artifact handling permits transport."
+      ],
+      "path": "ipfs_accelerate_py/cli_integrations/openai_codex_cli_integration.py",
+      "repository": "ipfs_accelerate_py"
+    },
+    {
+      "classification": "suffix_deletion_only",
+      "disposition": "retain_inert_snapshot",
+      "local": {
+        "bytes": 33896,
+        "git_blob": "b8583b3ee10888d13927b761cf998a6450f15a27",
+        "sha256": "850c8b2b64c504b3f7d95c8f0475592a5393c90729c45ab77842e7ca4fba1c31",
+        "test_definitions": 36,
+        "top_level_ast_nodes": 31
+      },
+      "local_additions": 0,
+      "maintained_main": {
+        "bytes": 123739,
+        "git_blob": "72a0703cee1608f56441cb09b176d29128be3dda",
+        "sha256": "b5caa78e61f49635a517c00ed8f9f27e56c22f18d9e11864bdd666f08976d9a2",
+        "test_definitions": 131,
+        "top_level_ast_nodes": 58
+      },
+      "maintained_test_definitions_omitted": 95,
+      "observations": [
+        "The original 31 top-level nodes match the maintained prefix.",
+        "The maintained suffix covers bounded thread reads, private artifacts, durable handoffs, manifest recovery, owner dependencies, and transport fallback."
+      ],
+      "path": "test/api/test_codex_thread_handoff.py",
+      "repository": "ipfs_accelerate_py"
+    }
+  ],
+  "schema": "static-working-variant-review/v1",
+  "source_port_candidates": []
+}

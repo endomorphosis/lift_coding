@@ -1,0 +1,146 @@
+"""Read-only Git metadata discovery; no source-body reads or network."""
+from concurrent.futures import ThreadPoolExecutor
+from collections import Counter
+from datetime import datetime, timezone
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import re
+import subprocess
+import time
+from urllib.parse import urlsplit
+
+OUT = Path(__file__).parent
+PRIOR = Path('/tmp/lift-origin-main-reconcile-private-A8hmZDEd/publication/docs/reconciliation/worktree-main-reconciliation-20261127/inventory/compact-inventory.json')
+ROOTS = (Path('/tmp'), Path('/home/barberb'))
+EXCLUDE_NAMES = {'.cache', 'node_modules', '__pycache__', '.venv', 'venv', 'env', '.tox', '.nox', '.npm', '.rustup', '.cargo', '.gradle', '.m2', '.yarn', '.pnpm-store', 'site-packages', 'dist-packages', 'huggingface', 'transformers_cache', 'model_cache', 'model-cache'}
+CODEX_EXCLUDE = {'sessions', 'archived_sessions', 'logs', 'log', 'shell_snapshots', 'plugins', 'skills'}
+env = dict(os.environ, GIT_OPTIONAL_LOCKS='0', GIT_TERMINAL_PROMPT='0')
+errors = []
+exclusions = Counter()
+markers = {}
+visited = 0
+started = time.monotonic()
+
+def scan(base, metadata=False):
+    global visited
+    stack = [base]
+    while stack:
+        parent = stack.pop()
+        try:
+            with os.scandir(parent) as stream:
+                entries = list(stream)
+        except OSError as exc:
+            errors.append({'path': str(parent), 'kind': type(exc).__name__, 'detail': str(exc)[:160]})
+            continue
+        visited += 1
+        names = {entry.name for entry in entries}
+        if {'HEAD', 'config', 'objects'} <= names:
+            markers.setdefault(str(parent), 'bare_or_gitdir')
+            mods = parent/'modules'
+            if mods.is_dir() and not mods.is_symlink():
+                stack.append(mods)
+            continue
+        for ent in entries:
+            path = Path(ent.path)
+            try:
+                if ent.name == '.git':
+                    if ent.is_symlink():
+                        exclusions['symlink_git_marker'] += 1
+                    elif ent.is_dir(follow_symlinks=False) or ent.is_file(follow_symlinks=False):
+                        markers[str(path)] = 'ordinary_git_marker'
+                        mods = path/'modules'
+                        if ent.is_dir(follow_symlinks=False) and mods.is_dir() and not mods.is_symlink():
+                            stack.append(mods)
+                    continue
+                if not ent.is_dir(follow_symlinks=False):
+                    continue
+                if ent.name in EXCLUDE_NAMES:
+                    exclusions['name:'+ent.name] += 1
+                    continue
+                if '.codex' in path.parts and ent.name in CODEX_EXCLUDE:
+                    exclusions['codex:'+ent.name] += 1
+                    continue
+                # Virtual environments with a nonstandard directory name.
+                if (path/'pyvenv.cfg').is_file():
+                    exclusions['pyvenv.cfg'] += 1
+                    continue
+                stack.append(path)
+            except OSError as exc:
+                errors.append({'path': str(path), 'kind': type(exc).__name__, 'detail': str(exc)[:160]})
+
+def command(args, timeout=12):
+    try:
+        result = subprocess.run(['git', '-c', 'core.fsmonitor=false', '-c', 'core.hooksPath=/dev/null', *args], capture_output=True, env=env, timeout=timeout)
+        return result.returncode, result.stdout.decode('utf-8','replace'), result.stderr.decode('utf-8','replace')
+    except subprocess.TimeoutExpired:
+        return -1, '', 'metadata command timeout'
+
+def clean_remote(raw):
+    raw = raw.strip()
+    if not raw:
+        return None
+    if '://' in raw:
+        parsed = urlsplit(raw)
+        return (parsed.hostname or '') + parsed.path
+    if re.match(r'[^/@:]+@[^/:]+:', raw):
+        return raw.split('@',1)[1].replace(':','/',1)
+    return raw
+
+def inspect_marker(item):
+    marker, kind = item
+    p = Path(marker)
+    prefix = ['-C', str(p.parent)] if kind == 'ordinary_git_marker' else ['--git-dir', str(p)]
+    rc, out, err = command(prefix+['rev-parse', '--path-format=absolute', '--git-dir', '--git-common-dir', '--is-bare-repository'])
+    rows = out.splitlines()
+    if rc or len(rows) != 3:
+        return {'marker': marker, 'kind': kind, 'valid': False, 'error': err[:240], 'rc': rc}
+    gitdir, common, bare = rows
+    _, origin, _ = command(['--git-dir', common, 'config', '--local', '--get', 'remote.origin.url'])
+    _, head, _ = command(prefix+['rev-parse', '--verify', 'HEAD'])
+    _, branch, _ = command(prefix+['symbolic-ref', '--quiet', '--short', 'HEAD'])
+    path = str(p.parent) if kind == 'ordinary_git_marker' else str(p)
+    return {'marker': marker, 'path': path, 'kind': kind, 'valid': True, 'git_dir': gitdir, 'common_dir': common, 'bare': bare == 'true', 'origin': clean_remote(origin), 'head': head.strip() or None, 'branch': branch.strip() or None}
+
+for root in ROOTS:
+    scan(root)
+print(json.dumps({'scan_closed':True,'directories':visited,'markers':len(markers),'elapsed':round(time.monotonic()-started,3)}),flush=True)
+with ThreadPoolExecutor(max_workers=12) as pool:
+    inspected = list(pool.map(inspect_marker, sorted(markers.items())))
+valid = [row for row in inspected if row['valid']]
+commons = sorted({row['common_dir'] for row in valid})
+
+def worktrees(common):
+    rc, out, err = command(['--git-dir', common, 'worktree', 'list', '--porcelain'], timeout=20)
+    records = []
+    record = None
+    for line in out.splitlines():
+        if line.startswith('worktree '):
+            record = {'path': line[9:]}
+            records.append(record)
+        elif record is not None and line:
+            key, _, value = line.partition(' ')
+            record[key] = value if value else True
+    return {'common_dir':common,'rc':rc,'worktrees':records,'error':err[:240] if rc else None}
+
+with ThreadPoolExecutor(max_workers=12) as pool:
+    registered = list(pool.map(worktrees, commons))
+prior = json.loads(PRIOR.read_text())
+oldpaths = {row['path'] for row in prior['repositories']}
+oldcommons = set(prior['registered_tmp_worktrees'])
+family_names = {'ipfs_datasets_py','ipfs_accelerate_py','ipfs_kit_py','lift_coding','hallucinate_app','swissknife','mcp-plus-plus','jevops'}
+def family(row):
+    remote = row.get('origin') or ''
+    name = remote.rstrip('/').rsplit('/',1)[-1].removesuffix('.git').lower()
+    return name if name in family_names else None
+related = [dict(row, family=family(row)) for row in valid if family(row)]
+new_related = [row for row in related if row['path'] not in oldpaths and row['common_dir'] not in oldcommons]
+endomorphosis = [row for row in valid if re.search(r'(?:^|/)endomorphosis/', row.get('origin') or '', re.I)]
+discovered_paths = {row['path'] for row in valid}
+extra_registered = [dict(row, common_dir=group['common_dir']) for group in registered for row in group['worktrees'] if row['path'] not in discovered_paths and not row.get('bare')]
+report = {'version':1,'started_utc':datetime.now(timezone.utc).isoformat(),'read_only':True,'network':False,'source_bodies_read':False,'roots':[str(root) for root in ROOTS],'prior_inventory':str(PRIOR),'prior_inventory_sha256':sha256(PRIOR.read_bytes()).hexdigest(),'directories_visited':visited,'discovered_markers':len(markers),'valid_git_metadata':len(valid),'distinct_common_dirs':len(commons),'elapsed_seconds':round(time.monotonic()-started,3),'excluded_directory_counts':dict(exclusions),'filesystem_errors':errors,'repositories':inspected,'registered_worktrees':registered,'new_related_repositories':new_related,'endomorphosis_repositories':endomorphosis,'registered_paths_outside_discovery':extra_registered,'related_family_counts':dict(Counter(row['family'] for row in related)),'scope_limitations':['No symlink traversal.','Dependency/install caches and virtualenv directories excluded as recorded.','Git markers inside unreadable directories cannot be inspected.','Metadata discovery is not source-content reconciliation or an integration claim.']}
+raw=(json.dumps(report,sort_keys=True,indent=2)+'\n').encode()
+destination=OUT/'discovery.json'
+destination.write_bytes(raw)
+print(json.dumps({'report':str(destination),'bytes':len(raw),'sha256':sha256(raw).hexdigest(),'valid':len(valid),'common_dirs':len(commons),'related_families':report['related_family_counts'],'new_related':new_related,'other_endomorphosis_count':len(endomorphosis),'extra_registered':extra_registered,'errors':len(errors),'elapsed_seconds':report['elapsed_seconds']},indent=2),flush=True)

@@ -1,0 +1,542 @@
+{
+  "evaluation_count": 10,
+  "evaluations": [
+    {
+      "analysis_inconclusive": false,
+      "evaluator_version": "objective-plan-evaluator-v1",
+      "goal_id": "KGP-G070",
+      "rejected": [],
+      "router_error": null,
+      "selected": {
+        "branch": {
+          "branch_id": "fallback:KGP-036:focused-1",
+          "dependencies": [
+            "KGP-G000"
+          ],
+          "estimated_cost": 1.0,
+          "expected_objective_delta": 0.7,
+          "predicted_files": [
+            "objective-plan.unspecified"
+          ],
+          "predicted_symbols": [
+            "completion-reconciliation",
+            "ipfs_datasets_py/mcp_server/ucan_delegation.py",
+            "KGP-G020 service contract"
+          ],
+          "risk": 0.2,
+          "source": "deterministic_fallback",
+          "summary": "Deterministic focused plan for MCP++ UCAN authorization and audit",
+          "validation_commands": [
+            "git diff --check",
+            "python -m pytest -q tests/security/knowledge_graphs tests/mcp/test_graph_ucan.py"
+          ],
+          "validation_proof": [
+            "git diff --check exits with status 0",
+            "python -m pytest -q tests/security/knowledge_graphs tests/mcp/test_graph_ucan.py exits with status 0"
+          ]
+        },
+        "rationale": [
+          "expected objective delta contributes 385000 millionths",
+          "risk adjustment contributes 200000 millionths",
+          "cost efficiency contributes 75000 millionths",
+          "validation proof contributes 50000 millionths",
+          "total deterministic score is 710000 millionths"
+        ],
+        "score_millionths": 710000
+      },
+      "selection_rationale": [
+        "expected objective delta contributes 385000 millionths",
+        "risk adjustment contributes 200000 millionths",
+        "cost efficiency contributes 75000 millionths",
+        "validation proof contributes 50000 millionths",
+        "total deterministic score is 710000 millionths"
+      ],
+      "source": "deterministic_planner",
+      "task_id": "KGP-036",
+      "used_fallback": false
+    },
+    {
+      "analysis_inconclusive": false,
+      "evaluator_version": "objective-plan-evaluator-v1",
+      "goal_id": "KGP-G030",
+      "rejected": [],
+      "router_error": null,
+      "selected": {
+        "branch": {
+          "branch_id": "fallback:KGP-037:focused-1",
+          "dependencies": [
+            "KGP-G000"
+          ],
+          "estimated_cost": 1.0,
+          "expected_objective_delta": 0.7,
+          "predicted_files": [
+            "objective-plan.unspecified"
+          ],
+          "predicted_symbols": [
+            "completion-reconciliation",
+            "KGP-G020 service and catalog contract"
+          ],
+          "risk": 0.2,
+          "source": "deterministic_fallback",
+          "summary": "Deterministic focused plan for Durable concurrency, transactions, and recovery",
+          "validation_commands": [
+            "git diff --check",
+            "python -m pytest -q tests/unit/knowledge_graphs/test_transactions.py tests/integration/knowledge_graphs/concurrency tests/chaos/knowledge_graphs"
+          ],
+          "validation_proof": [
+            "git diff --check exits with status 0",
+            "python -m pytest -q tests/unit/knowledge_graphs/test_transactions.py tests/integration/knowledge_graphs/concurrency tests/chaos/knowledge_graphs exits with status 0"
+          ]
+        },
+        "rationale": [
+          "expected objective delta contributes 385000 millionths",
+          "risk adjustment contributes 200000 millionths",
+          "cost efficiency contributes 75000 millionths",
+          "validation proof contributes 50000 millionths",
+          "total deterministic score is 710000 millionths"
+        ],
+        "score_millionths": 710000
+      },
+      "selection_rationale": [
+        "expected objective delta contributes 385000 millionths",
+        "risk adjustment contributes 200000 millionths",
+        "cost efficiency contributes 75000 millionths",
+        "validation proof contributes 50000 millionths",
+        "total deterministic score is 710000 millionths"
+      ],
+      "source": "deterministic_planner",
+      "task_id": "KGP-037",
+      "used_fallback": false
+    },
+    {
+      "analysis_inconclusive": false,
+      "evaluator_version": "objective-plan-evaluator-v1",
+      "goal_id": "KGP-G010",
+      "rejected": [],
+      "router_error": null,
+      "selected": {
+        "branch": {
+          "branch_id": "fallback:KGP-038:focused-1",
+          "dependencies": [
+            "KGP-G000"
+          ],
+          "estimated_cost": 1.0,
+          "expected_objective_delta": 0.7,
+          "predicted_files": [
+            "objective-plan.unspecified"
+          ],
+          "predicted_symbols": [
+            "completion-reconciliation",
+            "direct CLI and MCP probes from 2026-07-29",
+            "docs/knowledge_graphs/MASTER_STATUS.md"
+          ],
+          "risk": 0.2,
+          "source": "deterministic_fallback",
+          "summary": "Deterministic focused plan for Executable truth baseline and compatibility contract",
+          "validation_commands": [
+            "git diff --check",
+            "python -m pytest -q tests/knowledge_graphs/contract"
+          ],
+          "validation_proof": [
+            "git diff --check exits with status 0",
+            "python -m pytest -q tests/knowledge_graphs/contract exits with status 0"
+          ]
+        },
+        "rationale": [
+          "expected objective delta contributes 385000 millionths",
+          "risk adjustment contributes 200000 millionths",
+          "cost efficiency contributes 75000 millionths",
+          "validation proof contributes 50000 millionths",
+          "total deterministic score is 710000 millionths"
+        ],
+        "score_millionths": 710000
+      },
+      "selection_rationale": [
+        "expected objective delta contributes 385000 millionths",
+        "risk adjustment contributes 200000 millionths",
+        "cost efficiency contributes 75000 millionths",
+        "validation proof contributes 50000 millionths",
+        "total deterministic score is 710000 millionths"
+      ],
+      "source": "deterministic_planner",
+      "task_id": "KGP-038",
+      "used_fallback": false
+    },
+    {
+      "analysis_inconclusive": false,
+      "evaluator_version": "objective-plan-evaluator-v1",
+      "goal_id": "KGP-G020",
+      "rejected": [],
+      "router_error": null,
+      "selected": {
+        "branch": {
+          "branch_id": "fallback:KGP-039:focused-1",
+          "dependencies": [
+            "KGP-G000"
+          ],
+          "estimated_cost": 1.0,
+          "expected_objective_delta": 0.7,
+          "predicted_files": [
+            "objective-plan.unspecified"
+          ],
+          "predicted_symbols": [
+            "completion-reconciliation",
+            "KGP-G010 contract and inventory outputs"
+          ],
+          "risk": 0.2,
+          "source": "deterministic_fallback",
+          "summary": "Deterministic focused plan for Canonical graph identity, manifest, catalog, and service",
+          "validation_commands": [
+            "git diff --check",
+            "python -m pytest -q tests/unit/knowledge_graphs/contracts tests/integration/knowledge_graphs/test_catalog_service.py"
+          ],
+          "validation_proof": [
+            "git diff --check exits with status 0",
+            "python -m pytest -q tests/unit/knowledge_graphs/contracts tests/integration/knowledge_graphs/test_catalog_service.py exits with status 0"
+          ]
+        },
+        "rationale": [
+          "expected objective delta contributes 385000 millionths",
+          "risk adjustment contributes 200000 millionths",
+          "cost efficiency contributes 75000 millionths",
+          "validation proof contributes 50000 millionths",
+          "total deterministic score is 710000 millionths"
+        ],
+        "score_millionths": 710000
+      },
+      "selection_rationale": [
+        "expected objective delta contributes 385000 millionths",
+        "risk adjustment contributes 200000 millionths",
+        "cost efficiency contributes 75000 millionths",
+        "validation proof contributes 50000 millionths",
+        "total deterministic score is 710000 millionths"
+      ],
+      "source": "deterministic_planner",
+      "task_id": "KGP-039",
+      "used_fallback": false
+    },
+    {
+      "analysis_inconclusive": false,
+      "evaluator_version": "objective-plan-evaluator-v1",
+      "goal_id": "KGP-G000",
+      "rejected": [],
+      "router_error": null,
+      "selected": {
+        "branch": {
+          "branch_id": "fallback:KGP-040:focused-1",
+          "dependencies": [],
+          "estimated_cost": 1.0,
+          "expected_objective_delta": 0.7,
+          "predicted_files": [
+            "objective-plan.unspecified"
+          ],
+          "predicted_symbols": [
+            "completion-reconciliation",
+            "docs/architecture/KNOWLEDGE_GRAPHS_PRODUCTION_HARDENING_PLAN_2026_07_29.md"
+          ],
+          "risk": 0.2,
+          "source": "deterministic_fallback",
+          "summary": "Deterministic focused plan for Production-grade multi-graph knowledge graph platform",
+          "validation_commands": [
+            "git diff --check",
+            "python -m pytest -q tests/unit/knowledge_graphs tests/integration/knowledge_graphs tests/cli/test_graph_commands.py"
+          ],
+          "validation_proof": [
+            "git diff --check exits with status 0",
+            "python -m pytest -q tests/unit/knowledge_graphs tests/integration/knowledge_graphs tests/cli/test_graph_commands.py exits with status 0"
+          ]
+        },
+        "rationale": [
+          "expected objective delta contributes 385000 millionths",
+          "risk adjustment contributes 200000 millionths",
+          "cost efficiency contributes 75000 millionths",
+          "validation proof contributes 50000 millionths",
+          "total deterministic score is 710000 millionths"
+        ],
+        "score_millionths": 710000
+      },
+      "selection_rationale": [
+        "expected objective delta contributes 385000 millionths",
+        "risk adjustment contributes 200000 millionths",
+        "cost efficiency contributes 75000 millionths",
+        "validation proof contributes 50000 millionths",
+        "total deterministic score is 710000 millionths"
+      ],
+      "source": "deterministic_planner",
+      "task_id": "KGP-040",
+      "used_fallback": false
+    },
+    {
+      "analysis_inconclusive": false,
+      "evaluator_version": "objective-plan-evaluator-v1",
+      "goal_id": "KGP-G090",
+      "rejected": [],
+      "router_error": null,
+      "selected": {
+        "branch": {
+          "branch_id": "fallback:KGP-041:focused-1",
+          "dependencies": [
+            "KGP-G000"
+          ],
+          "estimated_cost": 1.0,
+          "expected_objective_delta": 0.7,
+          "predicted_files": [
+            "objective-plan.unspecified"
+          ],
+          "predicted_symbols": [
+            "completion-reconciliation",
+            "KGP-G030 through KGP-G080 passing contracts"
+          ],
+          "risk": 0.2,
+          "source": "deterministic_fallback",
+          "summary": "Deterministic focused plan for Load, soak, chaos, observability, and operability",
+          "validation_commands": [
+            "git diff --check",
+            "python -m pytest -q tests/load/knowledge_graphs tests/chaos/knowledge_graphs"
+          ],
+          "validation_proof": [
+            "git diff --check exits with status 0",
+            "python -m pytest -q tests/load/knowledge_graphs tests/chaos/knowledge_graphs exits with status 0"
+          ]
+        },
+        "rationale": [
+          "expected objective delta contributes 385000 millionths",
+          "risk adjustment contributes 200000 millionths",
+          "cost efficiency contributes 75000 millionths",
+          "validation proof contributes 50000 millionths",
+          "total deterministic score is 710000 millionths"
+        ],
+        "score_millionths": 710000
+      },
+      "selection_rationale": [
+        "expected objective delta contributes 385000 millionths",
+        "risk adjustment contributes 200000 millionths",
+        "cost efficiency contributes 75000 millionths",
+        "validation proof contributes 50000 millionths",
+        "total deterministic score is 710000 millionths"
+      ],
+      "source": "deterministic_planner",
+      "task_id": "KGP-041",
+      "used_fallback": false
+    },
+    {
+      "analysis_inconclusive": false,
+      "evaluator_version": "objective-plan-evaluator-v1",
+      "goal_id": "KGP-G080",
+      "rejected": [],
+      "router_error": null,
+      "selected": {
+        "branch": {
+          "branch_id": "fallback:KGP-042:focused-1",
+          "dependencies": [
+            "KGP-G000"
+          ],
+          "estimated_cost": 1.0,
+          "expected_objective_delta": 0.7,
+          "predicted_files": [
+            "objective-plan.unspecified"
+          ],
+          "predicted_symbols": [
+            "211-AI data/retrieval_package",
+            "agent supervisor graph datasets",
+            "completion-reconciliation",
+            "KGP-G010 inventory",
+            "lift_coding/.cvefixes-build",
+            "logic/intent_ir/graphrag"
+          ],
+          "risk": 0.2,
+          "source": "deterministic_fallback",
+          "summary": "Deterministic focused plan for Real corpus adapters and differential validation",
+          "validation_commands": [
+            "git diff --check",
+            "python -m pytest -q tests/integration/knowledge_graphs/corpora"
+          ],
+          "validation_proof": [
+            "git diff --check exits with status 0",
+            "python -m pytest -q tests/integration/knowledge_graphs/corpora exits with status 0"
+          ]
+        },
+        "rationale": [
+          "expected objective delta contributes 385000 millionths",
+          "risk adjustment contributes 200000 millionths",
+          "cost efficiency contributes 75000 millionths",
+          "validation proof contributes 50000 millionths",
+          "total deterministic score is 710000 millionths"
+        ],
+        "score_millionths": 710000
+      },
+      "selection_rationale": [
+        "expected objective delta contributes 385000 millionths",
+        "risk adjustment contributes 200000 millionths",
+        "cost efficiency contributes 75000 millionths",
+        "validation proof contributes 50000 millionths",
+        "total deterministic score is 710000 millionths"
+      ],
+      "source": "deterministic_planner",
+      "task_id": "KGP-042",
+      "used_fallback": false
+    },
+    {
+      "analysis_inconclusive": false,
+      "evaluator_version": "objective-plan-evaluator-v1",
+      "goal_id": "KGP-G060",
+      "rejected": [],
+      "router_error": null,
+      "selected": {
+        "branch": {
+          "branch_id": "fallback:KGP-043:focused-1",
+          "dependencies": [
+            "KGP-G000"
+          ],
+          "estimated_cost": 1.0,
+          "expected_objective_delta": 0.7,
+          "predicted_files": [
+            "objective-plan.unspecified"
+          ],
+          "predicted_symbols": [
+            "completion-reconciliation",
+            "KGP-G010 public contract matrix",
+            "KGP-G020 service"
+          ],
+          "risk": 0.2,
+          "source": "deterministic_fallback",
+          "summary": "Deterministic focused plan for Python, CLI, MCP, and MCP++ surface parity",
+          "validation_commands": [
+            "git diff --check",
+            "python -m pytest -q tests/knowledge_graphs/conformance tests/cli/test_graph_commands.py tests/mcp/test_graph_tools.py"
+          ],
+          "validation_proof": [
+            "git diff --check exits with status 0",
+            "python -m pytest -q tests/knowledge_graphs/conformance tests/cli/test_graph_commands.py tests/mcp/test_graph_tools.py exits with status 0"
+          ]
+        },
+        "rationale": [
+          "expected objective delta contributes 385000 millionths",
+          "risk adjustment contributes 200000 millionths",
+          "cost efficiency contributes 75000 millionths",
+          "validation proof contributes 50000 millionths",
+          "total deterministic score is 710000 millionths"
+        ],
+        "score_millionths": 710000
+      },
+      "selection_rationale": [
+        "expected objective delta contributes 385000 millionths",
+        "risk adjustment contributes 200000 millionths",
+        "cost efficiency contributes 75000 millionths",
+        "validation proof contributes 50000 millionths",
+        "total deterministic score is 710000 millionths"
+      ],
+      "source": "deterministic_planner",
+      "task_id": "KGP-043",
+      "used_fallback": false
+    },
+    {
+      "analysis_inconclusive": false,
+      "evaluator_version": "objective-plan-evaluator-v1",
+      "goal_id": "KGP-G100",
+      "rejected": [],
+      "router_error": null,
+      "selected": {
+        "branch": {
+          "branch_id": "fallback:KGP-044:focused-1",
+          "dependencies": [
+            "KGP-G000"
+          ],
+          "estimated_cost": 1.0,
+          "expected_objective_delta": 0.7,
+          "predicted_files": [
+            "objective-plan.unspecified"
+          ],
+          "predicted_symbols": [
+            "completion-reconciliation",
+            "KGP-G010 through KGP-G090 completion receipts"
+          ],
+          "risk": 0.2,
+          "source": "deterministic_fallback",
+          "summary": "Deterministic focused plan for Reversible adoption and production release",
+          "validation_commands": [
+            "git diff --check",
+            "python -m pytest -q tests/integration/knowledge_graphs/test_shadow_migration.py tests/integration/knowledge_graphs/test_rollback.py"
+          ],
+          "validation_proof": [
+            "git diff --check exits with status 0",
+            "python -m pytest -q tests/integration/knowledge_graphs/test_shadow_migration.py tests/integration/knowledge_graphs/test_rollback.py exits with status 0"
+          ]
+        },
+        "rationale": [
+          "expected objective delta contributes 385000 millionths",
+          "risk adjustment contributes 200000 millionths",
+          "cost efficiency contributes 75000 millionths",
+          "validation proof contributes 50000 millionths",
+          "total deterministic score is 710000 millionths"
+        ],
+        "score_millionths": 710000
+      },
+      "selection_rationale": [
+        "expected objective delta contributes 385000 millionths",
+        "risk adjustment contributes 200000 millionths",
+        "cost efficiency contributes 75000 millionths",
+        "validation proof contributes 50000 millionths",
+        "total deterministic score is 710000 millionths"
+      ],
+      "source": "deterministic_planner",
+      "task_id": "KGP-044",
+      "used_fallback": false
+    },
+    {
+      "analysis_inconclusive": false,
+      "evaluator_version": "objective-plan-evaluator-v1",
+      "goal_id": "KGP-G050",
+      "rejected": [],
+      "router_error": null,
+      "selected": {
+        "branch": {
+          "branch_id": "fallback:KGP-045:focused-1",
+          "dependencies": [
+            "KGP-G000"
+          ],
+          "estimated_cost": 1.0,
+          "expected_objective_delta": 0.7,
+          "predicted_files": [
+            "objective-plan.unspecified"
+          ],
+          "predicted_symbols": [
+            "completion-reconciliation",
+            "KGP-G020 and KGP-G040 contracts",
+            "search/graph_query/sharded_car"
+          ],
+          "risk": 0.2,
+          "source": "deterministic_fallback",
+          "summary": "Deterministic focused plan for Versioned sharding and bounded unified query",
+          "validation_commands": [
+            "git diff --check",
+            "python -m pytest -q tests/unit/search/test_sharded_car tests/integration/knowledge_graphs/test_sharded_query.py tests/knowledge_graphs/contract/test_query_budgets.py"
+          ],
+          "validation_proof": [
+            "git diff --check exits with status 0",
+            "python -m pytest -q tests/unit/search/test_sharded_car tests/integration/knowledge_graphs/test_sharded_query.py tests/knowledge_graphs/contract/test_query_budgets.py exits with status 0"
+          ]
+        },
+        "rationale": [
+          "expected objective delta contributes 385000 millionths",
+          "risk adjustment contributes 200000 millionths",
+          "cost efficiency contributes 75000 millionths",
+          "validation proof contributes 50000 millionths",
+          "total deterministic score is 710000 millionths"
+        ],
+        "score_millionths": 710000
+      },
+      "selection_rationale": [
+        "expected objective delta contributes 385000 millionths",
+        "risk adjustment contributes 200000 millionths",
+        "cost efficiency contributes 75000 millionths",
+        "validation proof contributes 50000 millionths",
+        "total deterministic score is 710000 millionths"
+      ],
+      "source": "deterministic_planner",
+      "task_id": "KGP-045",
+      "used_fallback": false
+    }
+  ],
+  "schema": "ipfs_accelerate_py.agent_supervisor.objective_plan_evaluations@1"
+}
