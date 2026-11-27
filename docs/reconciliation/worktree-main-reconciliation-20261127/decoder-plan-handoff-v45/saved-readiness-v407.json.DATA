@@ -1,0 +1,2865 @@
+{
+  "checked_manifest": {
+    "bytes": 835559,
+    "path": "/tmp/decoder-training-experiment-manifest-v407.json",
+    "sha256": "576275b2f0c5f96ffcabcf51d55fde4b3a41885564870a6cc0696f3e8a8408ef"
+  },
+  "dispatch_authority": false,
+  "guide566_publisher_stage_a_preflight": {
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "candidate_reader_pending_current_index": {
+      "bytes": 38543,
+      "path": "/tmp/decoder-training-temporal-registration-private-v01-RSo1bOyL/guide566-reader.INERT.json",
+      "sha256": "e7cf5502ea432215b341642fbfcf7498eb3b6e72ca73aaa81384d8980f718482"
+    },
+    "conditional_Reader_bytes": 25466852,
+    "conditional_combined_bytes_before_overhead": 27219966,
+    "conditional_selector_bytes": 1753114,
+    "conditional_shortfall_bytes_before_overhead": 20862974,
+    "current_reader_bound": false,
+    "headroom_is_selection_or_admission": false,
+    "last_verified_published_accelerate_sha": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+    "last_verified_published_datasets_sha": "b9b3d750bba758c171d17d07bc29edc29ff14e42",
+    "observed_guide": 566,
+    "original_index_read_close": null,
+    "publisher_preflight": {
+      "bytes": 4518,
+      "path": "/tmp/decoder-training-temporal-registration-private-v01-RSo1bOyL/guide566-preflight.json",
+      "sha256": "987b886f84ee0cd300503a0cca9e5bc69919456913aa45492199b9d86e2ae47d"
+    },
+    "quote_basis": "retained publisher and consumed predecessor archive",
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 14204,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide566-four-doc-three-FF-publication-small-v573.json",
+      "sha256": "5ba77f892c1f0985c2eb6ca29fde2735461c24d46bf70c11f05989f7be66eedb"
+    },
+    "source_frontier": "published_pair_pending_independent_current_read"
+  },
+  "guide567_catalog_stage_a_preflight": {
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "candidate_reader_pending_current_index": {
+      "bytes": 38545,
+      "path": "/tmp/decoder-training-stage-a-guide567-preflight-private-v01-UY8NCfcA/reader.INERT.json",
+      "sha256": "befb1e0ae197d0600ed6fcda4b4d9ec5a0a6782cf26ab1b8cc7998841e904ade"
+    },
+    "conditional_Reader_bytes": 25486120,
+    "conditional_combined_bytes_before_overhead": 27239234,
+    "conditional_selector_bytes": 1753114,
+    "conditional_shortfall_bytes_before_overhead": 20882242,
+    "current_reader_bound": false,
+    "headroom_is_selection_or_admission": false,
+    "last_verified_published_accelerate_sha": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+    "last_verified_published_datasets_sha": "1bf497f1aa6f0ea9f9b8983c76c55bf7ded16aa2",
+    "observed_guide": 567,
+    "original_index_read_close": null,
+    "publisher_preflight": {
+      "bytes": 6966,
+      "path": "/tmp/decoder-training-stage-a-guide567-preflight-private-v01-UY8NCfcA/rebinding.json",
+      "sha256": "a3b346739c4862179aeb36b4558844551e0c545b5bca5e04f165a040e71faddb"
+    },
+    "quote_basis": "retained publisher and consumed predecessor archive",
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 17531,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide567-four-doc-three-FF-publication-small-v578.json",
+      "sha256": "9ca016ae1a80bb98c9d8cad5ac59d48c338d14255096cd0d1867ac3814bf6cf9"
+    },
+    "source_frontier": "published_pair_pending_independent_current_read"
+  },
+  "guide573_before_exact_offline_index_and_quote": {
+    "Guide572_offline_reconciliation": {
+      "bytes": 59154,
+      "path": "/tmp/decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa/stage-a-guide572-rebind.INERT.json",
+      "sha256": "6474b8bf0b2691df499adaff30143c6becd2f610ad2acdee1b82f8658cff81f5"
+    },
+    "Guide573_detached_metadata": {
+      "bytes": 4692,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/guide573-metadata.INERT.json",
+      "sha256": "1087aa3f70cfca94faa20116155465a5fdc6a0dd7cf0dfeeb78122c1abf7ffa9"
+    },
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "candidate_reader_pending_current_index": null,
+    "conditional_Reader_bytes": null,
+    "conditional_combined_bytes_before_overhead": null,
+    "conditional_selector_bytes": null,
+    "conditional_shortfall_bytes_before_overhead": null,
+    "current_independent_read_join": null,
+    "current_publication_retained_precharge": {
+      "bytes": 1276,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/Source-only-Guide573-full-retained-cap.json",
+      "sha256": "60ec66c0cc0476a13565f961f1e6b0d09a80c55b6b783b85745700fafc22ce6d"
+    },
+    "current_reader_bound": false,
+    "current_source_funding_inputs": null,
+    "detached_body_content_matches": 32,
+    "headroom_is_selection_or_admission": false,
+    "historical_prior_checkout_paired_quote": {
+      "conditional_Reader_bytes": 25538449,
+      "conditional_combined_bytes_before_overhead": 27291563,
+      "conditional_selector_bytes": 1753114,
+      "conditional_shortfall_bytes_before_overhead": 20934571,
+      "quote_basis": "Guide571 publisher replay through the independent historical Guide570 index and actual v595 receipt"
+    },
+    "last_verified_published_accelerate_sha": "219ba3da0f62f772801d71715e22c506faa21126",
+    "last_verified_published_datasets_sha": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+    "later_isolated_read_receipt": {
+      "bytes": 2900,
+      "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/actual-isolated-Source42-content-epoch-closed.json",
+      "sha256": "e4c0629a49442081d0adc2df61fbc1234e114505379578c86b9160ed60eaa7c7"
+    },
+    "latest_postcatalog_code_publication": {
+      "bytes": 22197,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase2-physical-V4-current-trust-exact2-ordinary22-three-FF-publication-v582.json",
+      "sha256": "071d63ddcc64989609a452f3a2cfdde373a125f171160a520e945a0f96556c9e"
+    },
+    "latest_postcatalog_rebind": {
+      "bytes": 4685,
+      "path": "/tmp/decoder-training-dual-policy-origin-private-v01-8pQ4Et1N/stage-a-v582-rebinding.json",
+      "sha256": "f42670d7bd6d97e6d7b9e1297bc87e39a144d0d4519ce1ee21e25e483abfcc04"
+    },
+    "latest_retained_capture_floor": 539146,
+    "observed_guide": 573,
+    "original_index_read_close": null,
+    "publisher_preflight": null,
+    "quote_basis": "Guide573 current selector and Reader reservation are pending",
+    "reader_candidate_after_independent_index_read": null,
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 3117,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-Guide573-four-docs-three-FF-publication.json",
+      "sha256": "1a83a7c66b2e726b4f6605039fbd5bad4296f6cb3f008e965436c68a9e89e8c7"
+    },
+    "recorded_published_accelerate_index": {
+      "bytes": 4469929,
+      "full9": {
+        "st_ctime_ns": "1795734671233647109",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "48763139",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734671232647103",
+        "st_nlink": "1",
+        "st_size": "4469929",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+      "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+    },
+    "recorded_published_datasets_index": {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795736943626072478",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "1086707",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795736943625072468",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/.git/index",
+      "sha256": "c3be915a700050787e42001811b05aab2edebf0737fd3c207f23674b862cbee0"
+    },
+    "source_frontier": "published_checkout_pending_current_Git_roles_and_independent_index",
+    "standalone_independent_index_payload_floor_excluded_from_quote": 7070598,
+    "standalone_independent_index_payload_shortfall": 713606,
+    "verified_direct_bytes_delta": null,
+    "verified_relocated_body_roles": null
+  },
+  "guide574_before_exact_offline_index_and_quote": {
+    "Guide572_offline_reconciliation": {
+      "bytes": 59154,
+      "path": "/tmp/decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa/stage-a-guide572-rebind.INERT.json",
+      "sha256": "6474b8bf0b2691df499adaff30143c6becd2f610ad2acdee1b82f8658cff81f5"
+    },
+    "Guide573_detached_metadata": {
+      "bytes": 4692,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/guide573-metadata.INERT.json",
+      "sha256": "1087aa3f70cfca94faa20116155465a5fdc6a0dd7cf0dfeeb78122c1abf7ffa9"
+    },
+    "Guide573_exact_offline_index_roles": {
+      "bytes": 11743,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-replay.INERT.json",
+      "sha256": "65858f594f49c27bf1526d661adc47f98749da4db9e18680c58497b474402b46"
+    },
+    "Guide573_offline_Reader_v3": {
+      "bytes": 556332,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-all-fresh-preview.INERT.json",
+      "sha256": "72b538ab80ac6610b75f64d74c1d474ae8beb651b54a8b740495941b0c6fbb4a"
+    },
+    "Guide574_detached_metadata": {
+      "bytes": 5580,
+      "path": "/tmp/decoder-training-compact-right-censor-controls-private-v01-982l3zS2/guide574/frontier.INERT.json",
+      "sha256": "2f1bbdf5b04b9f8c827989443c3dba3b061eba72fe9951d694173f63527ad306"
+    },
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "candidate_reader_pending_current_index": null,
+    "conditional_Reader_bytes": null,
+    "conditional_combined_bytes_before_overhead": null,
+    "conditional_selector_bytes": null,
+    "conditional_shortfall_bytes_before_overhead": null,
+    "current_independent_read_join": null,
+    "current_publication_retained_precharge": {
+      "bytes": 1314,
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/Source-only-Guide574-full-retained-cap.json",
+      "sha256": "ceffb184cc31806d15edcc6fb06583d92994e4c8f1506966cd8cce9039da4c69"
+    },
+    "current_reader_bound": false,
+    "current_source_funding_inputs": null,
+    "detached_body_content_matches": 32,
+    "headroom_is_selection_or_admission": false,
+    "historical_prior_checkout_paired_quote": {
+      "conditional_Reader_bytes": 25538449,
+      "conditional_combined_bytes_before_overhead": 27291563,
+      "conditional_selector_bytes": 1753114,
+      "conditional_shortfall_bytes_before_overhead": 20934571,
+      "quote_basis": "Guide571 publisher replay through the independent historical Guide570 index and actual v595 receipt"
+    },
+    "last_verified_published_accelerate_sha": "219ba3da0f62f772801d71715e22c506faa21126",
+    "last_verified_published_datasets_sha": "6106a4633ec6504ee8c004cc5a9c7fe348ff38bf",
+    "later_isolated_read_receipt": {
+      "bytes": 2900,
+      "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/actual-isolated-Source42-content-epoch-closed.json",
+      "sha256": "e4c0629a49442081d0adc2df61fbc1234e114505379578c86b9160ed60eaa7c7"
+    },
+    "latest_postcatalog_code_publication": {
+      "bytes": 22197,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase2-physical-V4-current-trust-exact2-ordinary22-three-FF-publication-v582.json",
+      "sha256": "071d63ddcc64989609a452f3a2cfdde373a125f171160a520e945a0f96556c9e"
+    },
+    "latest_postcatalog_rebind": {
+      "bytes": 4685,
+      "path": "/tmp/decoder-training-dual-policy-origin-private-v01-8pQ4Et1N/stage-a-v582-rebinding.json",
+      "sha256": "f42670d7bd6d97e6d7b9e1297bc87e39a144d0d4519ce1ee21e25e483abfcc04"
+    },
+    "latest_retained_capture_floor": 543393,
+    "observed_guide": 574,
+    "original_index_read_close": null,
+    "publisher_preflight": null,
+    "quote_basis": "Guide574 current stage-zero and HEAD join and paired quote are pending",
+    "reader_candidate_after_independent_index_read": null,
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 2647,
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-Guide574-four-docs-three-FF-publication.json",
+      "sha256": "84d3364b66b4990a14a687417fb17ae38bc1fdb85131c51bfda55d34a0a1e84d"
+    },
+    "recorded_published_accelerate_index": {
+      "bytes": 4469929,
+      "full9": {
+        "st_ctime_ns": "1795734671233647109",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "48763139",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734671232647103",
+        "st_nlink": "1",
+        "st_size": "4469929",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+      "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+    },
+    "recorded_published_datasets_index": {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795739644455917255",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "16956758",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739644454463755",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/.git/index",
+      "sha256": "26afaa8c5a756128d11917a2f700bf866fcedd1ce4c933440dfa74413c4b5477"
+    },
+    "replayed_stage_zero_protected_count": null,
+    "source_frontier": "published_checkout_pending_current_Git_roles_and_independent_index",
+    "standalone_independent_index_payload_floor_excluded_from_quote": 7070598,
+    "standalone_independent_index_payload_shortfall": 713606,
+    "verified_direct_bytes_delta": null,
+    "verified_relocated_body_roles": null
+  },
+  "last_independently_rebound_guide568_stage_a": {
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "candidate_reader_pending_current_index": null,
+    "conditional_Reader_bytes": 25500527,
+    "conditional_combined_bytes_before_overhead": 27253641,
+    "conditional_selector_bytes": 1753114,
+    "conditional_shortfall_bytes_before_overhead": 20896649,
+    "current_independent_read_join": {
+      "bytes": 3634,
+      "path": "/tmp/decoder-training-stage-a-guide568-preflight-private-v01-YV3m7GuS/independent-read1-join.json",
+      "sha256": "8eba35f09ae6bbba74b0a248117427716726070769f56477025c3e3bf81dd47d"
+    },
+    "current_reader_bound": false,
+    "current_source_funding_inputs": {
+      "bytes": 2801,
+      "path": "/tmp/decoder-training-stage-a-guide568-preflight-private-v01-YV3m7GuS/funding-after-read1.INERT.json",
+      "sha256": "c1baa0cb84059f746eab414a7441ce9039c764f11ef6629388950fbeaf991c90"
+    },
+    "headroom_is_selection_or_admission": false,
+    "last_verified_published_accelerate_sha": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+    "last_verified_published_datasets_sha": "d80c2d22da938b517d79d3ba2e53d82863d173f3",
+    "latest_postcatalog_code_publication": {
+      "bytes": 22197,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase2-physical-V4-current-trust-exact2-ordinary22-three-FF-publication-v582.json",
+      "sha256": "071d63ddcc64989609a452f3a2cfdde373a125f171160a520e945a0f96556c9e"
+    },
+    "latest_postcatalog_rebind": {
+      "bytes": 4685,
+      "path": "/tmp/decoder-training-dual-policy-origin-private-v01-8pQ4Et1N/stage-a-v582-rebinding.json",
+      "sha256": "f42670d7bd6d97e6d7b9e1297bc87e39a144d0d4519ce1ee21e25e483abfcc04"
+    },
+    "observed_guide": 568,
+    "original_index_read_close": {
+      "bytes": 4812,
+      "path": "/tmp/Root-Guide568-existing-index-SourceREAD1-v584-voqjc3xx/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json",
+      "sha256": "e9556c2f9bad3969ab63e51aa2eeace20022964f20f1c6d2bd6e4412e1464f0f"
+    },
+    "publisher_preflight": {
+      "bytes": 5234,
+      "path": "/tmp/decoder-training-stage-a-guide568-preflight-private-v01-YV3m7GuS/rebinding.json",
+      "sha256": "957be668b2a8efce2cca1cfd463293ce4feae5e3fcf6668c9adc8740da9afd2d"
+    },
+    "quote_basis": "Guide568 publisher replay and independently closed v584 index read",
+    "reader_candidate_after_independent_index_read": {
+      "bytes": 38545,
+      "path": "/tmp/decoder-training-stage-a-guide568-preflight-private-v01-YV3m7GuS/reader.INERT.json",
+      "sha256": "369c5f2323c10fd688da085dc988a7b17a1cae599e7d38060909dbf9d3fe20c7"
+    },
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 14574,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide568-four-doc-three-FF-publication-small-v583.json",
+      "sha256": "2dc9a82bea913c832fa17c8288d035cb9712267ec1894921604fa930b64adc68"
+    },
+    "source_frontier": "published_pair_independently_observed_selection_and_funding_pending"
+  },
+  "last_independently_rebound_stage_a_coordination": {
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "conditional_Reader_bytes": 25446280,
+    "conditional_combined_bytes_before_overhead": 27199394,
+    "conditional_selector_bytes": 1753114,
+    "conditional_shortfall_bytes_before_overhead": 20842402,
+    "current_reader_bound": false,
+    "headroom_is_selection_or_admission": false,
+    "held_body_roles": 32,
+    "last_verified_published_accelerate_sha": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+    "last_verified_published_datasets_sha": "91ddf809d93072a08999da191d8d09d8f411be34",
+    "mandatory_two_index_probe_bytes": 11461080,
+    "observed_guide": 564,
+    "offline_verification": {
+      "bytes": 4427,
+      "path": "/tmp/decoder-training-stage-a-guide564-replay-private-v01-0yRtXJIf/verification.json",
+      "sha256": "0e058b927666a86ced9bf150ff6205c437d51eb4e807a090262a0290362a37b6"
+    },
+    "original_index_read_close": {
+      "bytes": 4812,
+      "path": "/tmp/Root-Guide564-existing-index-SourceREAD1-v566-HxlJK5kJ/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json",
+      "sha256": "e7070dab82f2ea1febed9c7c4c597ab209d2863da97bc97d1b7c40d29e1cc986"
+    },
+    "pending_capture_roles": 12,
+    "prepared_reader_plan": {
+      "bytes": 38539,
+      "path": "/tmp/decoder-training-stage-a-guide564-replay-private-v01-0yRtXJIf/reader.INERT.json",
+      "sha256": "2621e255a9954b4f751924ddc31a0621bbeb41762cbf671be82bac492f3881de"
+    },
+    "prepared_selector": {
+      "bytes": 10235,
+      "path": "/tmp/decoder-training-stage-a-guide564-replay-private-v01-0yRtXJIf/selector.INERT.json",
+      "sha256": "5d33209e526b8019d73b089195d44cc41dc3fbe82ac13f8970260208c76d615d"
+    },
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 15798,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide564-four-doc-three-FF-publication-small-v565.json",
+      "sha256": "6c689d574ca7c04b32511b54d828e499b3b8f7dff56efd93f88edf296404352c"
+    },
+    "reused_archives": 20,
+    "source_frontier": "published_pair_has_verified_offline_preselection"
+  },
+  "manifest_schema_version": "0.407.0",
+  "prior_guide576_conditional_owner_handoff": {
+    "Guide576_boundary": {
+      "bytes": 5828,
+      "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/guide576-frontier.json",
+      "sha256": "7ed65da7ceecdfd17d2c38d56c45c893728cd8e8d0a6f72f2824a99658451110"
+    },
+    "Guide576_independent_pending_writer_matched_index": {
+      "bytes": 7934,
+      "path": "/tmp/decoder-training-stage-a-guide576-rebind-private-v01-HW7T7zkk/descriptor.json",
+      "sha256": "77cf11cd150a9dad850c164fc2760b5e8659e3a39fcda43fafddde28327b85b8"
+    },
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "changed_historical_origin_role": "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py",
+    "conditional_combined_64_KiB_bytes_before_overhead": 24832212,
+    "conditional_combined_bytes_before_overhead": 26798292,
+    "conditional_guide576_owner_handoff": {
+      "bytes": 1442,
+      "path": "/tmp/decoder-training-stage-a-guide576-owner-transition-private-v01-tU42r4Kc/descriptor.json",
+      "sha256": "240c2f0b1137482c02f5e4dca3648c1b1b209429baa9ad81a0762c3c7df4dccc"
+    },
+    "conditional_guide576_quote": {
+      "bytes": 2928,
+      "path": "/tmp/decoder-training-stage-a-guide576-owner-transition-private-v01-tU42r4Kc/conditional-cost.INERT.json",
+      "sha256": "61e1123919f253bd64fb74fba35848c2593f5e2ae86561d32023345745e39a26"
+    },
+    "current_DEVELOPMENT_hparam_selection_consumer": null,
+    "current_TRAIN_consumer": null,
+    "current_independent_read_join": null,
+    "headroom_is_selection_or_admission": false,
+    "last_verified_published_accelerate_sha": "219ba3da0f62f772801d71715e22c506faa21126",
+    "last_verified_published_datasets_sha": "8a902502e1a82d3da05b9c31a42db8c39ea8a9e1",
+    "latest_retained_capture_floor": 543402,
+    "modeled_owner_controls": 8,
+    "observed_guide": 576,
+    "quote_basis": "guide576_current_owner_and_index_closure_pending",
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 2703,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-Guide576-four-docs-three-FF-publication.json",
+      "sha256": "28c2677788637620b8eedf080dd4b4da948cc0173735316f909bd516b4d458db"
+    },
+    "recorded_published_accelerate_index": {
+      "bytes": 4469929,
+      "full9": {
+        "st_ctime_ns": "1795734671233647109",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "48763139",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734671232647103",
+        "st_nlink": "1",
+        "st_size": "4469929",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+      "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+    },
+    "recorded_published_datasets_index": {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795742735701259200",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514406",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795742735688259022",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+      "sha256": "e284b742de199704467819863e060ef07e680a78a64a01faff8114e98360d55c"
+    },
+    "standalone_independent_index_payload_floor_excluded_from_quote": 7070598,
+    "standalone_independent_index_payload_shortfall": 713606,
+    "unchanged_fresh_body_roles": 32,
+    "unchanged_historical_roles": 91
+  },
+  "prior_publisher_guide569_stage_a": {
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "candidate_reader_pending_current_index": {
+      "bytes": 38545,
+      "path": "/tmp/decoder-training-stage-a-guide569-preflight-private-v01-KcCkSVpx/reader.INERT.json",
+      "sha256": "5cb192a4329c819b182740372538eb938c7d43bade6577d56d81dbd6fd121270"
+    },
+    "conditional_Reader_bytes": 25509481,
+    "conditional_combined_bytes_before_overhead": 27262595,
+    "conditional_selector_bytes": 1753114,
+    "conditional_shortfall_bytes_before_overhead": 20905603,
+    "current_independent_read_join": null,
+    "current_reader_bound": false,
+    "current_source_funding_inputs": {
+      "bytes": 2209,
+      "path": "/tmp/decoder-training-stage-a-guide569-preflight-private-v01-KcCkSVpx/funding.INERT.json",
+      "sha256": "0e65608dd02fdc31168cbec9bea1d00e8d7052583419f3ce3f08d5559b7f7d44"
+    },
+    "headroom_is_selection_or_admission": false,
+    "last_verified_published_accelerate_sha": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+    "last_verified_published_datasets_sha": "9deb82de114b95027ea5427819ccfc7139c49bbe",
+    "latest_postcatalog_code_publication": {
+      "bytes": 22197,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase2-physical-V4-current-trust-exact2-ordinary22-three-FF-publication-v582.json",
+      "sha256": "071d63ddcc64989609a452f3a2cfdde373a125f171160a520e945a0f96556c9e"
+    },
+    "latest_postcatalog_rebind": {
+      "bytes": 4685,
+      "path": "/tmp/decoder-training-dual-policy-origin-private-v01-8pQ4Et1N/stage-a-v582-rebinding.json",
+      "sha256": "f42670d7bd6d97e6d7b9e1297bc87e39a144d0d4519ce1ee21e25e483abfcc04"
+    },
+    "observed_guide": 569,
+    "original_index_read_close": null,
+    "publisher_preflight": {
+      "bytes": 5196,
+      "path": "/tmp/decoder-training-stage-a-guide569-preflight-private-v01-KcCkSVpx/rebinding.json",
+      "sha256": "1462337be944561dbaa5dddf99ff161283b1b530ed61453e3f6bf4868d7faf04"
+    },
+    "quote_basis": "Guide569 publisher replay from the independently closed Guide568 index",
+    "reader_candidate_after_independent_index_read": null,
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 14940,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide569-four-doc-three-FF-publication-small-v587.json",
+      "sha256": "340a7a9000a00a154f3ea26123bf42ab779e51d53816513f4ee1e1d770c7e7c1"
+    },
+    "source_frontier": "published_pair_pending_independent_current_read"
+  },
+  "prior_publisher_guide570_stage_a": {
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "candidate_reader_pending_current_index": {
+      "bytes": 38545,
+      "path": "/tmp/decoder-training-stage-a-guide570-preflight-private-v01-lsmRGtWM/reader.INERT.json",
+      "sha256": "bc1ba83a1955acb8ab48ae32ce8c8bacbcc9226e01c3e155a439233a52fd00d4"
+    },
+    "conditional_Reader_bytes": 25527021,
+    "conditional_combined_bytes_before_overhead": 27280135,
+    "conditional_selector_bytes": 1753114,
+    "conditional_shortfall_bytes_before_overhead": 20923143,
+    "current_independent_read_join": null,
+    "current_reader_bound": false,
+    "current_source_funding_inputs": {
+      "bytes": 2233,
+      "path": "/tmp/decoder-training-stage-a-guide570-preflight-private-v01-lsmRGtWM/funding.INERT.json",
+      "sha256": "a627850bb7a5809d3f4375fc042fb10b3ed2685d12dfbaa1ecc8cd2dcca87b2a"
+    },
+    "headroom_is_selection_or_admission": false,
+    "last_verified_published_accelerate_sha": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+    "last_verified_published_datasets_sha": "8ba21fb39f09ae6243e92bfd86533a610e48a094",
+    "latest_postcatalog_code_publication": {
+      "bytes": 22197,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase2-physical-V4-current-trust-exact2-ordinary22-three-FF-publication-v582.json",
+      "sha256": "071d63ddcc64989609a452f3a2cfdde373a125f171160a520e945a0f96556c9e"
+    },
+    "latest_postcatalog_rebind": {
+      "bytes": 4685,
+      "path": "/tmp/decoder-training-dual-policy-origin-private-v01-8pQ4Et1N/stage-a-v582-rebinding.json",
+      "sha256": "f42670d7bd6d97e6d7b9e1297bc87e39a144d0d4519ce1ee21e25e483abfcc04"
+    },
+    "observed_guide": 570,
+    "original_index_read_close": null,
+    "publisher_preflight": {
+      "bytes": 5324,
+      "path": "/tmp/decoder-training-stage-a-guide570-preflight-private-v01-lsmRGtWM/rebinding.json",
+      "sha256": "76456484d68116f6050a2e8567092dbd4939c20f1bc7884e5124a0fba71ee127"
+    },
+    "quote_basis": "Guide570 publisher replay through the retained v589 index and both normal releases",
+    "reader_candidate_after_independent_index_read": null,
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 15127,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide570-four-doc-three-FF-publication-small-v592.json",
+      "sha256": "ca01b3b4bb3e551e03c89e5421e7d30057c3f6cf3da951b7f20008d4f4acf148"
+    },
+    "source_frontier": "published_pair_pending_independent_current_read",
+    "standalone_independent_index_payload_floor_excluded_from_quote": 6991150
+  },
+  "prior_publisher_guide571_stage_a": {
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "candidate_reader_pending_current_index": {
+      "bytes": 38545,
+      "path": "/tmp/decoder-training-stage-a-guide571-preflight-private-v01-Wq3c45Ui/reader.INERT.json",
+      "sha256": "19ddd53efbac5974270088032ad6af1ffd6b432f7e0ff8a35eb479202ed66fe8"
+    },
+    "conditional_Reader_bytes": 25538449,
+    "conditional_combined_bytes_before_overhead": 27291563,
+    "conditional_selector_bytes": 1753114,
+    "conditional_shortfall_bytes_before_overhead": 20934571,
+    "current_independent_read_join": null,
+    "current_reader_bound": false,
+    "current_source_funding_inputs": {
+      "bytes": 2209,
+      "path": "/tmp/decoder-training-stage-a-guide571-preflight-private-v01-Wq3c45Ui/funding.INERT.json",
+      "sha256": "f8470139b575c9b73a2569fd8168cafb692d085223e6350347c5e2d19aeacee5"
+    },
+    "headroom_is_selection_or_admission": false,
+    "last_verified_published_accelerate_sha": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+    "last_verified_published_datasets_sha": "6d1b200341ae62d6dc0aa6db27f3955c50483fa7",
+    "later_isolated_read_receipt": {
+      "bytes": 2900,
+      "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/actual-isolated-Source42-content-epoch-closed.json",
+      "sha256": "e4c0629a49442081d0adc2df61fbc1234e114505379578c86b9160ed60eaa7c7"
+    },
+    "latest_postcatalog_code_publication": {
+      "bytes": 22197,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase2-physical-V4-current-trust-exact2-ordinary22-three-FF-publication-v582.json",
+      "sha256": "071d63ddcc64989609a452f3a2cfdde373a125f171160a520e945a0f96556c9e"
+    },
+    "latest_postcatalog_rebind": {
+      "bytes": 4685,
+      "path": "/tmp/decoder-training-dual-policy-origin-private-v01-8pQ4Et1N/stage-a-v582-rebinding.json",
+      "sha256": "f42670d7bd6d97e6d7b9e1297bc87e39a144d0d4519ce1ee21e25e483abfcc04"
+    },
+    "latest_retained_capture_floor": 532860,
+    "observed_guide": 571,
+    "original_index_read_close": null,
+    "publisher_preflight": {
+      "bytes": 5695,
+      "path": "/tmp/decoder-training-stage-a-guide571-preflight-private-v01-Wq3c45Ui/rebinding.json",
+      "sha256": "29774c9a605be72ef72b888adcad01461f8c0dbda9f226557e3e63bcd782ba58"
+    },
+    "quote_basis": "Guide571 publisher replay through the independent historical Guide570 index and actual v595 receipt",
+    "reader_candidate_after_independent_index_read": null,
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 14878,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide571-four-doc-three-FF-publication-small-v595.json",
+      "sha256": "e801a745c72ca6597179134be541d3751bcb4bf1f529ad5360e0e981ab36bc9b"
+    },
+    "source_frontier": "published_pair_pending_independent_current_read",
+    "standalone_independent_index_payload_floor_excluded_from_quote": 6991150
+  },
+  "prior_publisher_guide572_stage_a": {
+    "Guide572_offline_reconciliation": {
+      "bytes": 59154,
+      "path": "/tmp/decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa/stage-a-guide572-rebind.INERT.json",
+      "sha256": "6474b8bf0b2691df499adaff30143c6becd2f610ad2acdee1b82f8658cff81f5"
+    },
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "candidate_reader_pending_current_index": null,
+    "conditional_Reader_bytes": null,
+    "conditional_combined_bytes_before_overhead": null,
+    "conditional_selector_bytes": null,
+    "conditional_shortfall_bytes_before_overhead": null,
+    "current_independent_read_join": null,
+    "current_publication_retained_precharge": {
+      "bytes": 1312,
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/Source-only-Guide572-full-retained-cap.json",
+      "sha256": "2d653440a2e18f27cab5213de9400e8dfacb0bcccfde0f04112e499f756fa811"
+    },
+    "current_reader_bound": false,
+    "current_source_funding_inputs": null,
+    "headroom_is_selection_or_admission": false,
+    "historical_prior_checkout_paired_quote": {
+      "conditional_Reader_bytes": 25538449,
+      "conditional_combined_bytes_before_overhead": 27291563,
+      "conditional_selector_bytes": 1753114,
+      "conditional_shortfall_bytes_before_overhead": 20934571,
+      "quote_basis": "Guide571 publisher replay through the independent historical Guide570 index and actual v595 receipt"
+    },
+    "last_verified_published_accelerate_sha": "219ba3da0f62f772801d71715e22c506faa21126",
+    "last_verified_published_datasets_sha": "8996e160d2628b0fd35f1166a6dae6957582c243",
+    "later_isolated_read_receipt": {
+      "bytes": 2900,
+      "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/actual-isolated-Source42-content-epoch-closed.json",
+      "sha256": "e4c0629a49442081d0adc2df61fbc1234e114505379578c86b9160ed60eaa7c7"
+    },
+    "latest_postcatalog_code_publication": {
+      "bytes": 22197,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase2-physical-V4-current-trust-exact2-ordinary22-three-FF-publication-v582.json",
+      "sha256": "071d63ddcc64989609a452f3a2cfdde373a125f171160a520e945a0f96556c9e"
+    },
+    "latest_postcatalog_rebind": {
+      "bytes": 4685,
+      "path": "/tmp/decoder-training-dual-policy-origin-private-v01-8pQ4Et1N/stage-a-v582-rebinding.json",
+      "sha256": "f42670d7bd6d97e6d7b9e1297bc87e39a144d0d4519ce1ee21e25e483abfcc04"
+    },
+    "latest_retained_capture_floor": 537051,
+    "observed_guide": 572,
+    "original_index_read_close": null,
+    "publisher_preflight": {
+      "bytes": 59154,
+      "path": "/tmp/decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa/stage-a-guide572-rebind.INERT.json",
+      "sha256": "6474b8bf0b2691df499adaff30143c6becd2f610ad2acdee1b82f8658cff81f5"
+    },
+    "quote_basis": "Guide572 owner must rebind absolute checkout paths and original archive admission before a paired quote",
+    "reader_candidate_after_independent_index_read": null,
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 2632,
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-Guide572-four-docs-three-FF-publication.json",
+      "sha256": "8812bb7dc362d7a2815d4e438a972b1eef0d29034b9349a7c87dee4d7add083b"
+    },
+    "recorded_published_accelerate_index": {
+      "bytes": 4469929,
+      "full9": {
+        "st_ctime_ns": "1795734671233647109",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "48763139",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734671232647103",
+        "st_nlink": "1",
+        "st_size": "4469929",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+      "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+    },
+    "recorded_published_datasets_index": {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795735605759587343",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "3561340",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735605758587335",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/.git/index",
+      "sha256": "2266f4d1c12dfa62b7e87a5078a49a578134ea0150752e9db42a566ad810dca5"
+    },
+    "source_frontier": "published_new_checkout_pending_independent_index_and_archive_rebind",
+    "standalone_independent_index_payload_floor_excluded_from_quote": 7070598,
+    "standalone_independent_index_payload_shortfall": 713606,
+    "verified_direct_bytes_delta": 93705,
+    "verified_relocated_body_roles": 32
+  },
+  "prior_publisher_guide573_stage_a": {
+    "Guide572_offline_reconciliation": {
+      "bytes": 59154,
+      "path": "/tmp/decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa/stage-a-guide572-rebind.INERT.json",
+      "sha256": "6474b8bf0b2691df499adaff30143c6becd2f610ad2acdee1b82f8658cff81f5"
+    },
+    "Guide573_detached_metadata": {
+      "bytes": 4692,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/guide573-metadata.INERT.json",
+      "sha256": "1087aa3f70cfca94faa20116155465a5fdc6a0dd7cf0dfeeb78122c1abf7ffa9"
+    },
+    "Guide573_exact_offline_index_roles": {
+      "bytes": 11743,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-replay.INERT.json",
+      "sha256": "65858f594f49c27bf1526d661adc47f98749da4db9e18680c58497b474402b46"
+    },
+    "Guide573_offline_Reader_v3": {
+      "bytes": 556332,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-all-fresh-preview.INERT.json",
+      "sha256": "72b538ab80ac6610b75f64d74c1d474ae8beb651b54a8b740495941b0c6fbb4a"
+    },
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "candidate_reader_pending_current_index": null,
+    "conditional_Reader_bytes": 25024186,
+    "conditional_combined_bytes_before_overhead": 26777300,
+    "conditional_selector_bytes": 1753114,
+    "conditional_shortfall_bytes_before_overhead": 20420308,
+    "current_independent_read_join": null,
+    "current_publication_retained_precharge": {
+      "bytes": 1276,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/Source-only-Guide573-full-retained-cap.json",
+      "sha256": "60ec66c0cc0476a13565f961f1e6b0d09a80c55b6b783b85745700fafc22ce6d"
+    },
+    "current_reader_bound": false,
+    "current_source_funding_inputs": null,
+    "detached_body_content_matches": 32,
+    "headroom_is_selection_or_admission": false,
+    "historical_prior_checkout_paired_quote": {
+      "conditional_Reader_bytes": 25538449,
+      "conditional_combined_bytes_before_overhead": 27291563,
+      "conditional_selector_bytes": 1753114,
+      "conditional_shortfall_bytes_before_overhead": 20934571,
+      "quote_basis": "Guide571 publisher replay through the independent historical Guide570 index and actual v595 receipt"
+    },
+    "last_verified_published_accelerate_sha": "219ba3da0f62f772801d71715e22c506faa21126",
+    "last_verified_published_datasets_sha": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+    "later_isolated_read_receipt": {
+      "bytes": 2900,
+      "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/actual-isolated-Source42-content-epoch-closed.json",
+      "sha256": "e4c0629a49442081d0adc2df61fbc1234e114505379578c86b9160ed60eaa7c7"
+    },
+    "latest_postcatalog_code_publication": {
+      "bytes": 22197,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase2-physical-V4-current-trust-exact2-ordinary22-three-FF-publication-v582.json",
+      "sha256": "071d63ddcc64989609a452f3a2cfdde373a125f171160a520e945a0f96556c9e"
+    },
+    "latest_postcatalog_rebind": {
+      "bytes": 4685,
+      "path": "/tmp/decoder-training-dual-policy-origin-private-v01-8pQ4Et1N/stage-a-v582-rebinding.json",
+      "sha256": "f42670d7bd6d97e6d7b9e1297bc87e39a144d0d4519ce1ee21e25e483abfcc04"
+    },
+    "latest_retained_capture_floor": 539146,
+    "observed_guide": 573,
+    "original_index_read_close": null,
+    "publisher_preflight": null,
+    "quote_basis": "Guide573 v3 all-fresh conditional, one preview read",
+    "reader_candidate_after_independent_index_read": null,
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 3117,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-Guide573-four-docs-three-FF-publication.json",
+      "sha256": "1a83a7c66b2e726b4f6605039fbd5bad4296f6cb3f008e965436c68a9e89e8c7"
+    },
+    "recorded_published_accelerate_index": {
+      "bytes": 4469929,
+      "full9": {
+        "st_ctime_ns": "1795734671233647109",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "48763139",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734671232647103",
+        "st_nlink": "1",
+        "st_size": "4469929",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+      "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+    },
+    "recorded_published_datasets_index": {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795736943626072478",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "1086707",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795736943625072468",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/.git/index",
+      "sha256": "c3be915a700050787e42001811b05aab2edebf0737fd3c207f23674b862cbee0"
+    },
+    "replayed_stage_zero_protected_count": 32,
+    "source_frontier": "published_writer_matched_index_and_paired_quote_await_current_owner",
+    "standalone_independent_index_payload_floor_excluded_from_quote": 7070598,
+    "standalone_independent_index_payload_shortfall": 713606,
+    "verified_direct_bytes_delta": null,
+    "verified_relocated_body_roles": null
+  },
+  "prior_publisher_guide574_stage_a": {
+    "Guide572_offline_reconciliation": {
+      "bytes": 59154,
+      "path": "/tmp/decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa/stage-a-guide572-rebind.INERT.json",
+      "sha256": "6474b8bf0b2691df499adaff30143c6becd2f610ad2acdee1b82f8658cff81f5"
+    },
+    "Guide573_detached_metadata": {
+      "bytes": 4692,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/guide573-metadata.INERT.json",
+      "sha256": "1087aa3f70cfca94faa20116155465a5fdc6a0dd7cf0dfeeb78122c1abf7ffa9"
+    },
+    "Guide573_exact_offline_index_roles": {
+      "bytes": 11743,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-replay.INERT.json",
+      "sha256": "65858f594f49c27bf1526d661adc47f98749da4db9e18680c58497b474402b46"
+    },
+    "Guide573_offline_Reader_v3": {
+      "bytes": 556332,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-all-fresh-preview.INERT.json",
+      "sha256": "72b538ab80ac6610b75f64d74c1d474ae8beb651b54a8b740495941b0c6fbb4a"
+    },
+    "Guide574_detached_metadata": {
+      "bytes": 5580,
+      "path": "/tmp/decoder-training-compact-right-censor-controls-private-v01-982l3zS2/guide574/frontier.INERT.json",
+      "sha256": "2f1bbdf5b04b9f8c827989443c3dba3b061eba72fe9951d694173f63527ad306"
+    },
+    "Guide574_exact_offline_index_roles": {
+      "bytes": 11748,
+      "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/guide574-replay.INERT.json",
+      "sha256": "5ad76cb41eed69a40c2a843603a30bac98f7822ded7c9b7bb124e515e9bcec1b"
+    },
+    "Guide574_offline_Reader_v3": {
+      "bytes": 560809,
+      "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/guide574-all-fresh-preview.INERT.json",
+      "sha256": "d72596ec7d7ddf69a34143699659302499f92c5cdb73414b5159a4197442100f"
+    },
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "candidate_reader_pending_current_index": null,
+    "conditional_Reader_bytes": 25048317,
+    "conditional_combined_bytes_before_overhead": 26801431,
+    "conditional_joint_ref64K_payload_gap": 25548957,
+    "conditional_joint_ref64K_with_historical_readback_gap": 32619554,
+    "conditional_joint_with_independent_index_gap_before_overhead": 27515037,
+    "conditional_paired_ref64K": 24835351,
+    "conditional_selector_bytes": 1753114,
+    "conditional_shortfall_bytes_before_overhead": 20444439,
+    "current_independent_read_join": null,
+    "current_publication_retained_precharge": {
+      "bytes": 1314,
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/Source-only-Guide574-full-retained-cap.json",
+      "sha256": "ceffb184cc31806d15edcc6fb06583d92994e4c8f1506966cd8cce9039da4c69"
+    },
+    "current_reader_bound": false,
+    "current_source_funding_inputs": null,
+    "detached_body_content_matches": 32,
+    "headroom_is_selection_or_admission": false,
+    "historical_prior_checkout_paired_quote": {
+      "conditional_Reader_bytes": 25538449,
+      "conditional_combined_bytes_before_overhead": 27291563,
+      "conditional_selector_bytes": 1753114,
+      "conditional_shortfall_bytes_before_overhead": 20934571,
+      "quote_basis": "Guide571 publisher replay through the independent historical Guide570 index and actual v595 receipt"
+    },
+    "last_verified_published_accelerate_sha": "219ba3da0f62f772801d71715e22c506faa21126",
+    "last_verified_published_datasets_sha": "6106a4633ec6504ee8c004cc5a9c7fe348ff38bf",
+    "later_isolated_read_receipt": {
+      "bytes": 2900,
+      "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/actual-isolated-Source42-content-epoch-closed.json",
+      "sha256": "e4c0629a49442081d0adc2df61fbc1234e114505379578c86b9160ed60eaa7c7"
+    },
+    "latest_postcatalog_code_publication": {
+      "bytes": 22197,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase2-physical-V4-current-trust-exact2-ordinary22-three-FF-publication-v582.json",
+      "sha256": "071d63ddcc64989609a452f3a2cfdde373a125f171160a520e945a0f96556c9e"
+    },
+    "latest_postcatalog_rebind": {
+      "bytes": 4685,
+      "path": "/tmp/decoder-training-dual-policy-origin-private-v01-8pQ4Et1N/stage-a-v582-rebinding.json",
+      "sha256": "f42670d7bd6d97e6d7b9e1297bc87e39a144d0d4519ce1ee21e25e483abfcc04"
+    },
+    "latest_retained_capture_floor": 543393,
+    "observed_guide": 574,
+    "optional_Guide574_ref_cap_quotes": {
+      "bytes": 2954,
+      "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/guide574-ref-cap-conditional-quote.INERT.json",
+      "sha256": "51ab34f243a91ad6a27696500a9289bcce3d53f3cb0676a437b7af3d92eb3a8c"
+    },
+    "original_index_read_close": null,
+    "publisher_preflight": null,
+    "quote_basis": "Guide574 v3 all-fresh conditional, one preview read",
+    "reader_candidate_after_independent_index_read": null,
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 2647,
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-Guide574-four-docs-three-FF-publication.json",
+      "sha256": "84d3364b66b4990a14a687417fb17ae38bc1fdb85131c51bfda55d34a0a1e84d"
+    },
+    "recorded_published_accelerate_index": {
+      "bytes": 4469929,
+      "full9": {
+        "st_ctime_ns": "1795734671233647109",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "48763139",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734671232647103",
+        "st_nlink": "1",
+        "st_size": "4469929",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+      "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+    },
+    "recorded_published_datasets_index": {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795739644455917255",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "16956758",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739644454463755",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/.git/index",
+      "sha256": "26afaa8c5a756128d11917a2f700bf866fcedd1ce4c933440dfa74413c4b5477"
+    },
+    "replayed_stage_zero_protected_count": 32,
+    "source_frontier": "published_writer_matched_index_and_paired_quote_await_current_owner",
+    "standalone_independent_index_payload_floor_excluded_from_quote": 7070598,
+    "standalone_independent_index_payload_shortfall": 713606,
+    "verified_direct_bytes_delta": null,
+    "verified_relocated_body_roles": null
+  },
+  "prior_publisher_guide575_stage_a": {
+    "Guide575_exact_offline_replay": {
+      "bytes": 1663,
+      "path": "/tmp/decoder-training-stage-a-guide575-rebind-private-v01-9K6ruUs7/descriptor.json",
+      "sha256": "e24b94e08d770e726f9ccad30a71fbe9d72f04bbdd6baa4d18e5d88d961394ad"
+    },
+    "Guide575_record": {
+      "bytes": 3268,
+      "path": "/tmp/decoder-training-source62-opening-role-private-v01-arF8Pkiw/guide575-frontier.json",
+      "sha256": "e3823c211dfdf24fc2feff53fafe7b728054cc3fc178e4391ddcaaf51a4d5670"
+    },
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "conditional_combined_bytes_before_overhead": 26789525,
+    "conditional_joint_ref64K_payload_gap": 25537051,
+    "conditional_joint_ref64K_with_historical_readback_gap": 32607648,
+    "conditional_joint_with_independent_index_gap_before_overhead": 27503131,
+    "conditional_paired_ref64K": 24823445,
+    "conditional_shortfall_bytes_before_overhead": 20432533,
+    "current_independent_read_join": null,
+    "headroom_is_selection_or_admission": false,
+    "last_verified_published_accelerate_sha": "219ba3da0f62f772801d71715e22c506faa21126",
+    "last_verified_published_datasets_sha": "099cf857240915394deced81eff5e5dfcf5e96c6",
+    "latest_retained_capture_floor": 543398,
+    "observed_guide": 575,
+    "quote_basis": "current_writer_matched_offline_replay_pending_independent_read_and_selection",
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 2639,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-Guide575-four-docs-three-FF-publication.json",
+      "sha256": "c04197de963678c357e0f2b97f0a501b343f3f468d4a6a50a7d15ba22a9d568a"
+    },
+    "recorded_published_accelerate_index": {
+      "bytes": 4469929,
+      "full9": {
+        "st_ctime_ns": "1795734671233647109",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "48763139",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734671232647103",
+        "st_nlink": "1",
+        "st_size": "4469929",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+      "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+    },
+    "recorded_published_datasets_index": {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795742273905497335",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514406",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795742273899497289",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+      "sha256": "0a4e1e63733a772db7ccd2edac48653b03803c8bdfcfc03ed3b8539d55e8a744"
+    },
+    "standalone_independent_index_payload_floor_excluded_from_quote": 7070598,
+    "standalone_independent_index_payload_shortfall": 713606
+  },
+  "prior_publisher_stage_a_preflight": {
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "candidate_reader_pending_current_index": {
+      "bytes": 38545,
+      "path": "/tmp/decoder-training-stage-a-guide565-preflight-private-v01-0aDNPsWc/reader.INERT.json",
+      "sha256": "8be6bb728a358b424d93a3fa19ba2fd4c2fac3674d69663bc7ddbc327ec240d5"
+    },
+    "conditional_Reader_bytes": 25456373,
+    "conditional_combined_bytes_before_overhead": 27209487,
+    "conditional_selector_bytes": 1753114,
+    "conditional_shortfall_bytes_before_overhead": 20852495,
+    "current_reader_bound": false,
+    "headroom_is_selection_or_admission": false,
+    "last_verified_published_accelerate_sha": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+    "last_verified_published_datasets_sha": "16db3463d0dec71d3073ba6903d303d894ca2377",
+    "observed_guide": 565,
+    "original_index_read_close": null,
+    "publisher_preflight": {
+      "bytes": 5028,
+      "path": "/tmp/decoder-training-stage-a-guide565-preflight-private-v01-0aDNPsWc/rebinding.json",
+      "sha256": "7d8a9e02fe5fc3434c46228f87bc62d0e874fe697c7a0be0a29063f7094d0bc0"
+    },
+    "quote_basis": "retained publisher and consumed predecessor archive",
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 15494,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide565-four-doc-three-FF-publication-small-v568.json",
+      "sha256": "b0ae67407b5c2523979cf24a1798e32499c20113a75cf45fba2b4bdaf4a2f4f0"
+    },
+    "source_frontier": "published_pair_pending_independent_current_read"
+  },
+  "prior_stage_a_coordination": {
+    "active_accelerate_publication": {
+      "bytes": 10596,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-A-CLI-manifest-handoff-ordinary100-three-FF-publication-v347.json",
+      "sha256": "dbda5956bf87018cf376d29c509e75a54923966e600452f088c1062c716e8685"
+    },
+    "active_publication": {
+      "receipt": {
+        "bytes": 12291,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide527-four-doc-three-FF-publication-small-v344.json",
+        "sha256": "9d6a9c1c9b3a67cd16a225948eff9090b450b3abcfc5b1f599ed7e54bd40bb45"
+      },
+      "roots": {
+        "A": {
+          "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+          "index": {
+            "bytes": 4412225,
+            "full9": {
+              "st_ctime_ns": "1795500785295142737",
+              "st_dev": "66306",
+              "st_gid": "1000",
+              "st_ino": "69342879",
+              "st_mode": "33204",
+              "st_mtime_ns": "1795500785294142725",
+              "st_nlink": "1",
+              "st_size": "4412225",
+              "st_uid": "1000"
+            },
+            "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/index",
+            "sha256": "cb683f5552a5c4aecc54a7fb2fb0ea75dfb369fe1c7fe52d13dbf8b3ced751de"
+          },
+          "origin_main": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+          "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+        },
+        "D": {
+          "HEAD": "31da9dcebec20a351a38eeba37990edd37d6421a",
+          "index": {
+            "bytes": 6991149,
+            "full9": {
+              "st_ctime_ns": "1795638661324917741",
+              "st_dev": "66306",
+              "st_gid": "1000",
+              "st_ino": "68338235",
+              "st_mode": "33204",
+              "st_mtime_ns": "1795638661323909837",
+              "st_nlink": "1",
+              "st_size": "6991149",
+              "st_uid": "1000"
+            },
+            "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+            "sha256": "6867e981ccd45b80c6a37417d243b2c93a79ab0217ecf36b11d65ecc06e8678c"
+          },
+          "origin_main": "31da9dcebec20a351a38eeba37990edd37d6421a",
+          "tree": "2276910f876151dbd612893a51909ce20d6ebf49"
+        }
+      }
+    },
+    "clean_local_datasets_sha": "7e1cbca78c1c934ae57db6e1bb6639639345e516",
+    "closed_postpublication_checkpoint": {
+      "bytes": 4214,
+      "path": "/tmp/Root-guide526-one-four-existing-Source-CAS-v336-n068mjl_/current-checkpoint-guide526-effective-date44-closed-v336.json",
+      "sha256": "c9ac8f3b8b1438530df43bd5bd6a0e3ea173de77d74e4561c25e023b1f70b6ee"
+    },
+    "closed_postpublication_checkpoint_headroom_bytes": 10551296,
+    "conditional_post_read1_headroom_bytes": null,
+    "conditional_source_sizing_before_owner_overhead_bytes": null,
+    "current_index_expectation_basis": "published_pair_preserves_closed_read3_pending_original_stage_a_live_verification",
+    "current_reader_bound": false,
+    "guide527_published_reader_plan": {
+      "bytes": 42968,
+      "path": "/tmp/decoder-training-stage-a-v344-guide527-published-private-v01-8OKDAIYc/published-reader-plan-guide527-v344.INERT.json",
+      "sha256": "3e8cc3144dbe4c553391fa0ce45e39f6497c865af57f3edc8300ee6fc1eca173"
+    },
+    "headroom_is_selection_or_admission": false,
+    "headroom_observation_basis": "current_stage_a_allocation_and_scope_remain_unbound",
+    "last_verified_published_accelerate_sha": "190cb69b9035ea210d9af8817fbe76caf890b48f",
+    "last_verified_published_datasets_sha": "7e1cbca78c1c934ae57db6e1bb6639639345e516",
+    "latest_local_datasets_rebind": {
+      "bytes": 10180,
+      "path": "/tmp/decoder-training-stage-a-v349-local-READ3-private-v01-hHeFSm3x/descriptor.json",
+      "sha256": "f5751b58a236ca213478047f0113bed4d6f3ef3cf4325734f4073d0ef954b152"
+    },
+    "ledger_observation_selection_sha256": null,
+    "local_accelerate_cli_test_cases_passed": 100,
+    "local_accelerate_ordinary_qualification": {
+      "bytes": 6699,
+      "path": "/tmp/decoder-training-stage-a-v347-ordinary-read-closure-private-v01-G6DBTOmB/descriptor.json",
+      "sha256": "f1ebac4de5ef8ffc08335b6578aa152e3140fa1c98f426ee53b63172ffd7d02b"
+    },
+    "local_calendar_software_cases_passed": 69,
+    "local_calendar_software_qualification": {
+      "bytes": 2538,
+      "path": "/tmp/Root-Phase3-calendar-ordinary69-selected-v341-h_fuvec2/actual-calendar-ordinary69-qualified-compact-v341.json",
+      "sha256": "d54fe9e16fb25d61625054151afe78a3e7ccdc61b58094bf57821c0060c37e71"
+    },
+    "local_datasets_retrieval_fixture_passes": 9,
+    "local_freeze": {
+      "bytes": 10270,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase3-effective-calendar-exact3-local-freeze-v339.json",
+      "sha256": "7bf4b816e14c3c7ee7d86d13a9b9709616eb9f3874b0e153eba1bfc189b20040"
+    },
+    "local_only_accelerate_preparation": {
+      "bytes": 14163,
+      "path": "/tmp/decoder-training-stage-a-v345-accelerate-freeze-read9-private-v01-pEDD0WxK/descriptor-v02.json",
+      "sha256": "b871a2649c1bf367ca2a53b85fe65a4ad32c0318975cdea29990ca28749b42bc"
+    },
+    "local_only_index_expectation": null,
+    "local_only_reader_plan": null,
+    "local_read4_close": {
+      "bytes": 4119,
+      "path": "/tmp/Root-Phase3-calendar-existing-frozen-READ4-v339-eghb_8es/actual-output/actual-two-exact-Source-closed.json",
+      "sha256": "1963c737f0798f6898e7c5f86fc80c0d743b53891e2758fd68722db0ba241fe9"
+    },
+    "next_source_owner_dependency": "select the current paired read scope, capture fresh refs from both published roots and allocate the Reader separately",
+    "observed_local_accelerate_sha": "190cb69b9035ea210d9af8817fbe76caf890b48f",
+    "older_published_conditional_source_sizing_bytes": {
+      "combined": 26564131,
+      "reader": 24811017,
+      "selector": 1753114
+    },
+    "older_published_selector_preselection": {
+      "bytes": 13544,
+      "path": "/tmp/decoder-training-stage-a-v347-selector-preselection-private-v01-77ZTSOv2/selector-preselection.INERT.json",
+      "sha256": "66a32a8f170c5898a2543892f9d023cf4ce9a6611d4bbbfc7fc7b91b8895171e"
+    },
+    "original_closed_index_capture": {
+      "bytes": 1882,
+      "path": "/tmp/Root-Phase6-existing-Guide526-index-READ1-v337-h_ffcz4g/actual-output/actual-two-exact-Source-closed.json",
+      "sha256": "6ebae36dd50d62ce4e2ad09a7bd85e87b451f225c5cc64e565a6c53a5f36a070"
+    },
+    "post_extracted_view_publication_evidence": {
+      "bytes": 13583,
+      "path": "/tmp/decoder-training-stage-a-v350-published-P4-private-v01-YRk85mKX/descriptor.json",
+      "sha256": "a38e1b7d942f17e508f211157bcaf5d6b717966d67dddc6d0ed3f5059753e7d5"
+    },
+    "prepared_reader_plan": {
+      "bytes": 42973,
+      "path": "/tmp/decoder-training-stage-a-v349-local-READ3-private-v01-hHeFSm3x/reader-plan-P4-frozen-v349.LOCAL-ONLY.INERT.json",
+      "sha256": "d15e6bd726192252e952899621d8f259ab72cbe64ec64ce16e4f2903d43745dd"
+    },
+    "prior_calendar_publication": {
+      "receipt": {
+        "bytes": 12709,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase3-effective-calendar-ordinary69-and-direct-Lean-three-FF-publication-v342.json",
+        "sha256": "192b14db36939a9a91f992b2e6c8df03b8d214985cfba9866560af4556385c2f"
+      },
+      "roots": {
+        "A": {
+          "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+          "index": {
+            "bytes": 4412225,
+            "full9": {
+              "st_ctime_ns": "1795500785295142737",
+              "st_dev": "66306",
+              "st_gid": "1000",
+              "st_ino": "69342879",
+              "st_mode": "33204",
+              "st_mtime_ns": "1795500785294142725",
+              "st_nlink": "1",
+              "st_size": "4412225",
+              "st_uid": "1000"
+            },
+            "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/index"
+          },
+          "origin_main": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+          "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+        },
+        "D": {
+          "HEAD": "86a9a0c49e2021ecc98bdd56b000f0c99238342a",
+          "index": {
+            "bytes": 6991149,
+            "full9": {
+              "st_ctime_ns": "1795637717379007791",
+              "st_dev": "66306",
+              "st_gid": "1000",
+              "st_ino": "68338235",
+              "st_mode": "33204",
+              "st_mtime_ns": "1795637717377625534",
+              "st_nlink": "1",
+              "st_size": "6991149",
+              "st_uid": "1000"
+            },
+            "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+            "sha256": "18dce26017c4ace31e50720d528b6d2c4f180c3eb96f4f36d3b8eb67f3312206"
+          },
+          "origin_main": "86a9a0c49e2021ecc98bdd56b000f0c99238342a",
+          "tree": "b3c7bc9a88c642bd9119a432f9d3b44834c95b4b"
+        }
+      }
+    },
+    "prior_checked_reader_coordination": {
+      "checkpoint_sha256": "5fca3ee207bb8ec2b6b3f63748c7bc3d9f7100f89302ed143fa89737a22188bd",
+      "clean_local_datasets_sha": "17a3d3ff728fd4485220ae7ab85c344672db08c9",
+      "docs_only_successor_preserves_qualification": true,
+      "headroom_is_selection_or_admission": false,
+      "headroom_observation_basis": "existing Phase4 v321 preselection, actual post-run ledger unobserved",
+      "last_verified_published_datasets_sha": "17a3d3ff728fd4485220ae7ab85c344672db08c9",
+      "ledger_observation_selection_sha256": "2cf1babb63de2d5f538a2001fafab9b0f1e19e9d27caeeeb8d977bea47b84493",
+      "next_source_owner_dependency": "verify the current protected index and original paired selector before Reader selection",
+      "phase4_qualified_datasets_sha": "7a1e4cafd278fe10f1b4d6b65a98134d298b5f4b",
+      "phase4_recorded_passes": 4,
+      "recorded_headroom_bytes": 398852096,
+      "source_frontier": "same_recorded_commit"
+    },
+    "prior_guide526_publication": {
+      "prior_publication": {
+        "bytes": 13081,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase6-effective-date-ordinary44-three-FF-publication-v335.json",
+        "sha256": "b9b12b1a191f866b9d83bce59772eec6c31c82f820cf4f1f9c63993dd13acb39"
+      },
+      "receipt": {
+        "bytes": 10967,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide526-four-doc-three-FF-publication-small-v336.json",
+        "sha256": "b0b70d49db2d68218c57c5547cc58f122b6e73db9c641cc8e704ff53cc055632"
+      },
+      "roots": {
+        "A": {
+          "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+          "index": {
+            "bytes": 4412225,
+            "full9": {
+              "st_ctime_ns": "1795500785295142737",
+              "st_dev": "66306",
+              "st_gid": "1000",
+              "st_ino": "69342879",
+              "st_mode": "33204",
+              "st_mtime_ns": "1795500785294142725",
+              "st_nlink": "1",
+              "st_size": "4412225",
+              "st_uid": "1000"
+            },
+            "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/index"
+          },
+          "origin_main": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+          "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+        },
+        "D": {
+          "HEAD": "43414c90daa8ba3c891e2aad635d211ddd5e5133",
+          "index": {
+            "bytes": 6991149,
+            "full9": {
+              "st_ctime_ns": "1795631097226607030",
+              "st_dev": "66306",
+              "st_gid": "1000",
+              "st_ino": "68338235",
+              "st_mode": "33204",
+              "st_mtime_ns": "1795631097216606987",
+              "st_nlink": "1",
+              "st_size": "6991149",
+              "st_uid": "1000"
+            },
+            "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+            "sha256": null
+          },
+          "origin_main": "43414c90daa8ba3c891e2aad635d211ddd5e5133",
+          "tree": "a231536bd161ff6c2a18ebda6caaa6b657b26925"
+        }
+      },
+      "source4": {
+        "bytes": 4834,
+        "path": "/tmp/Root-guide526-one-four-existing-Source-CAS-v336-n068mjl_/Root-one526-four-installed-Source-closed-small-v336.json",
+        "sha256": "2f1c3cd6eb18b477bf1af9536a15eef2a125103b44bee1cc368d7a52ab09ade8"
+      }
+    },
+    "prior_prepared_published_reader": {
+      "closed_postpublication_checkpoint_headroom_bytes": 10551296,
+      "conditional_post_read1_headroom_bytes": 6356992,
+      "headroom_observation_basis": "post_read1_balance_derived_from_retained_charge_pending_original_ledger",
+      "next_source_owner_dependency": "bind the original paired selector and separate Reader allocation to the current Source scope",
+      "original_closed_index_capture": {
+        "bytes": 1882,
+        "path": "/tmp/Root-Phase6-existing-Guide526-index-READ1-v337-h_ffcz4g/actual-output/actual-two-exact-Source-closed.json",
+        "sha256": "6ebae36dd50d62ce4e2ad09a7bd85e87b451f225c5cc64e565a6c53a5f36a070"
+      },
+      "prepared_reader_plan": {
+        "bytes": 42948,
+        "path": "/tmp/decoder-training-stage-a-v337-reader-rebind-private-v01-I02GsK5w/published-reader-plan-guide526-index-read1-v337.INERT.json",
+        "sha256": "44c7e794b048c797ed136959af6cb8ab1b1d8bfae740afe72e35c1f619162cd9"
+      },
+      "recorded_headroom_bytes": null,
+      "source_frontier": "published_successor_has_verified_index_expectation",
+      "verified_index_expectation": {
+        "bytes": 6991149,
+        "full9": {
+          "st_ctime_ns": "1795631097226607030",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68338235",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795631097216606987",
+          "st_nlink": "1",
+          "st_size": "6991149",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+        "sha256": "73ac0f9512a77a09961108b318521b22476c1b22584ef5b1656ad5e21ecaac22"
+      }
+    },
+    "recorded_headroom_after_retained_paid_minimum_bytes": 6356992,
+    "recorded_headroom_bytes": null,
+    "retained_index_readback": {
+      "raw_indexes": {
+        "A": {
+          "bytes": 4412225,
+          "full9": {
+            "st_ctime_ns": "1795639131582566045",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72113760",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795639131582566045",
+            "st_nlink": "1",
+            "st_size": "4412225",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/Root-CLI100-existing-two-root-READ9-v346-dv_w_kdj/actual-output/raw/07-index.DATA",
+          "sha256": "6cde1bad45731e4c0febe2d6e1a521c394986e8db6e354d85ed52effaacbd50a"
+        },
+        "D": {
+          "bytes": 6991149,
+          "full9": {
+            "st_ctime_ns": "1795639131629764508",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "72113764",
+            "st_mode": "33024",
+            "st_mtime_ns": "1795639131629764508",
+            "st_nlink": "1",
+            "st_size": "6991149",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/Root-CLI100-existing-two-root-READ9-v346-dv_w_kdj/actual-output/raw/08-index.DATA",
+          "sha256": "6867e981ccd45b80c6a37417d243b2c93a79ab0217ecf36b11d65ecc06e8678c"
+        }
+      },
+      "receipt": {
+        "bytes": 15010,
+        "path": "/tmp/Root-CLI100-existing-two-root-READ9-v346-dv_w_kdj/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json",
+        "sha256": "bc8433d7acc58c1e39a1e858b113f8ca1861bc340c696446955b56bc2bea9656"
+      }
+    },
+    "retained_paid_source_minimum_receipt": {
+      "bytes": 1244,
+      "path": "/tmp/Root-existing-P4-shared-view-ordinary9-selected-v350-t5j307ck/Source-only-authorized-ordinary9-cap-prior-retained.json",
+      "sha256": "8a730e47735b6701ca11fa5328181167b34d7111f86248dbdc4242c9d80ce3b5"
+    },
+    "source_frontier": "new_published_pair_requires_fresh_signed_selector_and_reader_allocation",
+    "standalone_selector_preselection": {
+      "bytes": 13583,
+      "path": "/tmp/decoder-training-stage-a-v350-published-P4-private-v01-YRk85mKX/descriptor.json",
+      "sha256": "a38e1b7d942f17e508f211157bcaf5d6b717966d67dddc6d0ed3f5059753e7d5"
+    },
+    "verified_index_expectation": {
+      "bytes": 6991149,
+      "full9": {
+        "st_ctime_ns": "1795640174478834018",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "68338235",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795640174468833953",
+        "st_nlink": "1",
+        "st_size": "6991149",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+      "sha256": "39cba05594816dd7a3226f703fbdd48f29c2fa782d690b9a376d90173870c45a"
+    }
+  },
+  "prior_v582_published_stage_a_preflight": {
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "candidate_reader_pending_current_index": {
+      "bytes": 38539,
+      "path": "/tmp/decoder-training-dual-policy-origin-private-v01-8pQ4Et1N/v582-reader.INERT.json",
+      "sha256": "41b20052ff5abecd0d86b1d677aa8b5b2ea1df1b848832225d092aca80955074"
+    },
+    "conditional_Reader_bytes": 25486120,
+    "conditional_combined_bytes_before_overhead": 27239234,
+    "conditional_selector_bytes": 1753114,
+    "conditional_shortfall_bytes_before_overhead": 20882242,
+    "current_reader_bound": false,
+    "headroom_is_selection_or_admission": false,
+    "last_verified_published_accelerate_sha": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+    "last_verified_published_datasets_sha": "a217c5b3f37a0ae6ab4e81240329e6258e1fcfdf",
+    "latest_postcatalog_code_publication": {
+      "bytes": 22197,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase2-physical-V4-current-trust-exact2-ordinary22-three-FF-publication-v582.json",
+      "sha256": "071d63ddcc64989609a452f3a2cfdde373a125f171160a520e945a0f96556c9e"
+    },
+    "latest_postcatalog_rebind": {
+      "bytes": 4685,
+      "path": "/tmp/decoder-training-dual-policy-origin-private-v01-8pQ4Et1N/stage-a-v582-rebinding.json",
+      "sha256": "f42670d7bd6d97e6d7b9e1297bc87e39a144d0d4519ce1ee21e25e483abfcc04"
+    },
+    "observed_guide": 567,
+    "original_index_read_close": null,
+    "publisher_preflight": {
+      "bytes": 6966,
+      "path": "/tmp/decoder-training-stage-a-guide567-preflight-private-v01-UY8NCfcA/rebinding.json",
+      "sha256": "a3b346739c4862179aeb36b4558844551e0c545b5bca5e04f165a040e71faddb"
+    },
+    "quote_basis": "retained Guide567 replay plus v582 two-file publication and prior closed local READ3",
+    "recorded_headroom_bytes": 6356992,
+    "recorded_publication": {
+      "bytes": 17531,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide567-four-doc-three-FF-publication-small-v578.json",
+      "sha256": "9ca016ae1a80bb98c9d8cad5ac59d48c338d14255096cd0d1867ac3814bf6cf9"
+    },
+    "source_frontier": "published_pair_pending_independent_current_read"
+  },
+  "private_authenticated_confirmation_cost_bounds": {
+    "actual_held_out_legal_fidelity": null,
+    "actual_paid_or_model_evidence": null,
+    "compact_owner_controls": {
+      "actual_legal_review_or_paid_training": false,
+      "paired_development_looks": 2,
+      "physical_paid_events_fixture": 8,
+      "refusals": [
+        {
+          "case": "same split with different TRAIN roster across arms",
+          "reason": "matched compact arms must retain the same ordered TRAIN cohort, runtime and budgets"
+        },
+        {
+          "case": "physical training close omitted from proper paid stage",
+          "reason": "every scored compact look must charge its completed training and evaluation closes"
+        },
+        {
+          "case": "physical evaluation close omitted from proper paid stage",
+          "reason": "every scored compact look must charge its completed training and evaluation closes"
+        },
+        {
+          "case": "completed training paid only at terminal, not at confirming look",
+          "reason": "retrospective look must charge its completed training and evaluation closes"
+        },
+        {
+          "case": "duplicate physical close under another event ID",
+          "reason": "one physical close cannot be charged under multiple pilot event identities"
+        },
+        {
+          "case": "independent development owner denial",
+          "reason": "independent owner refused compact development selection, receipts or physical terminal cells"
+        },
+        {
+          "case": "development callback mutated selected cell",
+          "reason": "selected compact study, development design, receipts or terminal cells changed"
+        },
+        {
+          "case": "unscored attempt with uncharged terminal close",
+          "reason": "compact terminal ledger must charge the exact attempt close, including unscored failures"
+        },
+        {
+          "case": "legacy freeze rejects distinct compact comparison",
+          "reason": "exact verified development comparison required"
+        }
+      ],
+      "unscored_failed_attempt_retained": true
+    },
+    "convergence_established": false,
+    "dispatch_authority": false,
+    "fictional_wall_bound": {
+      "attainment": 1,
+      "confirming_look": "look-3",
+      "lower_meter_sha256": "8e2c8afe53db832b6b79f33026654ab73c4f653bf77fabac6670686dbd9ccf48",
+      "lower_seconds": 30.0,
+      "observed_confirmation_seconds": null,
+      "reason": "confirmed_by_later_authenticated_meter",
+      "restricted_confirmation_seconds": [
+        30.0,
+        48.0
+      ],
+      "upper_meter_sha256": "0c41143e74ac83dae776d39719543d662e94a699536719c68cf74ee6eacc4911",
+      "upper_seconds": 48.0
+    },
+    "local_passing_cases": {
+      "focused_confirmation_bounds": 8,
+      "registered_development_and_freeze": 3,
+      "retained_paid_comparator": 14
+    },
+    "owner": {
+      "bytes": 911399,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/study.py",
+      "sha256": "0db05161d43713375a0a9b4db8d359b6b5d50f08f5a7481f2b804b97add778b1"
+    }
+  },
+  "private_compact_paid_censor_followup_and_phase7_feedback_readback": {
+    "compact_control": {
+      "actual_paid_arm_meter_or_legal_review": false,
+      "actual_study_owner_code_sha256": "c462caa0fffb73f74549013d0272d224dada01e9e33620329b5b3f5ffb920915",
+      "baseline_attainment": null,
+      "baseline_followup": [
+        6.0,
+        10.0
+      ],
+      "candidate_confirmation": 3.0,
+      "capped_fixture_only_five_authority_fields_rebound": true,
+      "legacy_restricted_candidate_minus_baseline": [
+        [
+          -7,
+          1
+        ],
+        [
+          3,
+          1
+        ]
+      ],
+      "original_followup_owner_refusal_verified": true,
+      "paid_event_count": 8,
+      "refined_restricted_candidate_minus_baseline": [
+        [
+          -7,
+          1
+        ],
+        [
+          -3,
+          1
+        ]
+      ],
+      "retained_failed_events": 2,
+      "schema": "private-positive-compact-censor-followup-controls/v1",
+      "unchanged_fixture_both_golden_hashes_verified": true
+    },
+    "dispatch_authority": false,
+    "feedback_original_failures": [
+      "test_typed_nested_feedback_matching_envelope_preserves_weight_updates[feedback]",
+      "test_typed_nested_feedback_matching_envelope_preserves_weight_updates[guidance]"
+    ],
+    "feedback_original_passes": 24,
+    "isolated_precharged_capture_count": 541273,
+    "retained_headroom_bytes": 6356992,
+    "successor_isolated_read10": {
+      "bytes": 19732,
+      "path": "/tmp/P7-Guide573-successor-live-READ10-controls-JedG5GQ0/actual-isolated-Phase7-READ10-closed.json",
+      "sha256": "0acb3ae07ff8631e511cdc08fac91f7ffc7deafa1ba4481100763bf004eb4c7c"
+    },
+    "successor_ordinary_result": null
+  },
+  "private_composed_fused_policy_transport": {
+    "actual_model_training_or_measured_comparison": null,
+    "dispatch_authority": false,
+    "maintained_source_adoption": null,
+    "passing_local_tests": {
+      "fused_t5_dispatch": 2,
+      "fused_t5_grouped_update": 4,
+      "fused_t5_receipt_binding": 7,
+      "fused_t5_sampling": 6,
+      "retained_guided_dispatch": 6,
+      "retained_ordinary_dispatch": 3,
+      "retained_qwen2_activation_admission": 8,
+      "retained_qwen2_producer": 7,
+      "retained_t5_greedy_producer": 8
+    },
+    "pinned_fused_companions": {
+      "grouped_policy": {
+        "bytes": 124092,
+        "path": "/tmp/decoder-training-t5-conditioned-group-private-v01-Upe8Bb8T/grouped_policy.py",
+        "sha256": "e3686d20778fffcf0b70b133d72ca4dfdd8d14dd1600d266f30d545cb35ddca3"
+      },
+      "proof_scoped_credit": {
+        "bytes": 56476,
+        "path": "/tmp/decoder-training-t5-conditioned-group-private-v01-Upe8Bb8T/proof_scoped_credit.py",
+        "sha256": "43d7bbb4be6192df93e60c69674ab36b6c14ab8e4c149673461b6448108dfc54"
+      },
+      "relational_trial": {
+        "bytes": 142050,
+        "path": "/tmp/decoder-training-shared-fused-policy-private-v01-toUs6jbU/relational_trial.py",
+        "sha256": "be4488a3e1d17f221a76082e8cd2696be134b73863e8aaf68ff2ce939851aa28"
+      },
+      "sampled_action": {
+        "bytes": 77243,
+        "path": "/tmp/decoder-training-t5-conditioned-rollout-private-v01-yqPD2kHk/sampled_action.py",
+        "sha256": "da91e31c392e095700366ad53037412635bf8fc2af08f6e72d5b8339faa9ac97"
+      },
+      "teacher_prefix": {
+        "bytes": 52410,
+        "path": "/tmp/decoder-training-shared-fused-policy-private-v01-toUs6jbU/teacher_prefix.py",
+        "sha256": "b7e46d7f5df3783cb2904a67cacc3273d5e82e987d1740afb085c3a76a97f5cd"
+      }
+    },
+    "separate_companion_profiles_tested": true,
+    "single_complete_maintained_package_verified": false,
+    "teacher_prefix": {
+      "bytes": 52410,
+      "path": "/tmp/decoder-training-shared-fused-policy-private-v01-toUs6jbU/teacher_prefix.py",
+      "sha256": "b7e46d7f5df3783cb2904a67cacc3273d5e82e987d1740afb085c3a76a97f5cd"
+    },
+    "worker": {
+      "bytes": 841491,
+      "path": "/tmp/decoder-training-shared-fused-policy-private-v01-toUs6jbU/worker.py.DATA",
+      "sha256": "68bc6a2cc8c057241731a7bdb484cafd179358d67e96108839d522c119278f20"
+    }
+  },
+  "private_dual_architecture_projector_composition": {
+    "candidate_worker": {
+      "bytes": 827774,
+      "path": "/tmp/decoder-training-projector-dual-worker-private-v01-g8PUIRQ4/worker.py.DATA",
+      "sha256": "febf4733fa7952b1b891d87a090b5db872fa15fc882e0767b951a4683c67e0b0"
+    },
+    "dispatch_authority": false,
+    "maintained_source_adoption": null,
+    "missing_eager_trial_symbols": [
+      "T5FusionDecisionSpanPolicyAttempt",
+      "_require_t5_fusion_completion_binding",
+      "_t5_fusion_policy_selection_fields"
+    ],
+    "native_measured_comparison": null,
+    "normal_package_import_verified": false,
+    "passing_local_controls_distinct": {
+      "qwen2_producer": 7,
+      "t5_composed_generation_and_producer": 8
+    }
+  },
+  "private_existing_stage_a_owner_startup_and_child_closeout": {
+    "actual_live_reader": null,
+    "child_receipt_read_by_existing_A0_binder": true,
+    "dispatch_authority": false,
+    "exact_owner_startup_selection": null,
+    "exact_selector_terminal": null,
+    "external_index_live_read": null,
+    "joint_minimum_additional_bytes_before_owner_overhead": 27490906,
+    "original_parent_wait_evidence": null,
+    "runtime_custody_in_controls_was_modeled": true,
+    "test_cases": {
+      "historical_reader": 16,
+      "new_startup_and_closeout": 9,
+      "pinned_stage_zero_parser": 2
+    }
+  },
+  "private_existing_stage_a_paired_selector_owner_closeout": {
+    "actual_original_wait_or_ledger_confirmation": null,
+    "current_independent_index_read": null,
+    "dispatch_authority": false,
+    "exact_terminal_fields": 6,
+    "exact_terminal_schema": "stage-a-paired-git-selector-terminal/v1",
+    "live_selector_selection": null,
+    "live_selector_terminal": null,
+    "selected_Source42_read_probe_bound_bytes": 10376,
+    "selector_bound_before_terminal_and_other_startup_bytes": 1763490,
+    "successful_child_accounted_captures_without_extra_owner_reads": 28,
+    "terminal_reservation_formula": "2 * terminal_receipt_max_bytes + 1",
+    "test_counts": {
+      "retained_reader": 9,
+      "selector": 7
+    }
+  },
+  "private_normal_launcher_preflight": {
+    "actual_owner_release_or_model_result": null,
+    "current_detached_v12_request_shape_parsed": true,
+    "dispatch_authority": false,
+    "maintained_adoption_or_independent_current_source_capture": null,
+    "normally_imported_first_party_bodies": 42,
+    "passing_local_preflight_cases": 6,
+    "retained_index_comparison": {
+      "bytes": 32106,
+      "path": "/tmp/decoder-training-launcher-normal-import-private-v01-ifYc0ole/index-handoff.json",
+      "sha256": "218dded666a31e35035d990c0f1bf50f715eca383396e64e7cb38532c22fce49"
+    },
+    "retained_index_counts": {
+      "absent": 7,
+      "different_blob": 3
+    },
+    "staged_role_inventory": {
+      "bytes": 59166,
+      "path": "/tmp/decoder-training-launcher-normal-import-private-v01-ifYc0ole/staged-roles.json",
+      "sha256": "7001050f779ce18588cad4ceba0973f6fe45e458c6a5544836a531d66efaba60"
+    },
+    "typed_direct_cli_reaches_original_owner_gate": true
+  },
+  "private_paid_confirmation_censor_followup": {
+    "actual_censor_followup_owner": null,
+    "dispatch_authority": false,
+    "local_cases": {
+      "followup": 9,
+      "retained_bounds": 8,
+      "retained_stage_g": 8
+    },
+    "modeled_example": {
+      "candidate_followup": [
+        100.0,
+        120.0
+      ],
+      "candidate_legacy": [
+        0.0,
+        120.0
+      ],
+      "paired_difference": [
+        [
+          40,
+          1
+        ],
+        [
+          60,
+          1
+        ]
+      ]
+    },
+    "source62_fit_sensitivity": {
+      "equal_record_delta": -0.22161062558492026,
+      "fit_updates": 0,
+      "heldout_original": {
+        "after_exact": 0,
+        "baseline_exact": 0,
+        "cases": 3,
+        "dependency_components": 1,
+        "retention_rate": null,
+        "scope": "paired_full_nine_payload_exactness_on_one_declared_frozen_heldout_component"
+      },
+      "leave_one_row_out_deltas": [
+        -0.2168160080909729,
+        -0.20923444628715515,
+        -0.2387814223766327
+      ],
+      "source_fidelity_or_convergence_measured": false,
+      "target_length_weighted_record_scalar": {
+        "after": 0.5743337216695422,
+        "before": 0.7924879651175696,
+        "change": -0.2181542434480274
+      }
+    }
+  },
+  "private_paid_meter_portability_confirmation_bounds": {
+    "actual_legal_fidelity_or_convergence": null,
+    "actual_paid_model_evidence": null,
+    "case_counts": {
+      "meter_bounded_portability": 8,
+      "retained_paid_projection_and_final": 10,
+      "retained_restricted": 5
+    },
+    "dispatch_authority": false,
+    "maintained_adoption": null,
+    "modeled_case_summary": {
+      "cross_profile_bounds_seconds": [
+        [
+          -28,
+          1
+        ],
+        [
+          45,
+          1
+        ]
+      ],
+      "modeled_owner_evidence": true,
+      "within_t5_size_bounds_seconds": [
+        [
+          -155,
+          2
+        ],
+        [
+          -109,
+          2
+        ]
+      ]
+    },
+    "study_owner": {
+      "bytes": 916062,
+      "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/study.py",
+      "sha256": "0ed2b796854574708184a132303054d780048a78da5031f9c4d7e1c074da3a3d"
+    }
+  },
+  "private_qwen2_original_owner_request_binding": {
+    "actual_convergence_evidence": null,
+    "actual_model_execution": null,
+    "current_owner_selection": null,
+    "dispatch_authority": false,
+    "explicit_owner_input_still_required": true,
+    "local_passing_cases": {
+      "four_arm_renderer": 11,
+      "modeled_legacy_release_and_v382_reader": 6,
+      "normal_launcher": 6,
+      "original_owner_binding": 8
+    },
+    "maintained_adoption": null,
+    "owner_launcher": {
+      "bytes": 119777,
+      "path": "/tmp/decoder-training-projector-original-request-binding-private-v01-GTZmjlB7/launcher.py.DATA",
+      "sha256": "b44dbfb908df7272254ec9090638fc531e41454d00b4a3e840547af835afbc2f"
+    },
+    "runtime_control_scope": {
+      "actual_children": 0,
+      "independently_selected_retry_request_sha256": "c6ecf09533fcfcc48c9a3c86ccc86306375cc96c788da61bd5406498c1015376",
+      "original_runtime_effects": "modeled",
+      "real_inner_blocks_second_read_substitution": true,
+      "selected_opening_request_sha256": "a494e19c98cdad9747a9982314896c446388fe259122acee82a2eb1f7f5de4fb"
+    },
+    "trusted_profile_request_pin_field": "expected_request_sha256"
+  },
+  "private_qwen2_prelaunch_selected_release": {
+    "actual_legal_fidelity_or_convergence": null,
+    "actual_native_or_model_operation": null,
+    "current_owner_selection": null,
+    "dispatch_authority": false,
+    "local_passing_cases": {
+      "legacy_paid": 8,
+      "legacy_terminal": 8,
+      "retained_release": 6,
+      "selected_release": 10,
+      "strict_and_retained_selected_readback": 15
+    },
+    "modeled_paid_summary": {
+      "actual_model_execution": false,
+      "experiment_events": 6,
+      "failed_retry_count": 1,
+      "scripted_paid_cpu_ns": 20000000,
+      "successful_release_count": 4
+    },
+    "modeled_release_receipt_summary": {
+      "actual_model_processes": 0,
+      "issued_release_sha256": "201885ffb56f9afe64d6342cb2654589b3cb5286ff44ee6bf610775ecc98374a",
+      "launch_selection": {
+        "request_sha256": "a1d25ec7572a4fb498cf993c4e24e287a91aef7fe32f814479805cbbe81e3ad5",
+        "source_epoch_sha256": "2b6898abec1a0fe0d6e7223456b63c003ee8a78341fabb1bc1b6d8c54f2745aa"
+      },
+      "modeled_source_and_daemon": true,
+      "tested_original_approval_stages": [
+        "prelaunch",
+        "selection",
+        "prefill"
+      ]
+    },
+    "owners": {
+      "launcher.py.DATA": {
+        "before": {
+          "bytes": 119777,
+          "path": "/tmp/decoder-training-projector-original-request-binding-private-v01-GTZmjlB7/launcher.py.DATA",
+          "sha256": "b44dbfb908df7272254ec9090638fc531e41454d00b4a3e840547af835afbc2f"
+        },
+        "candidate": {
+          "bytes": 120458,
+          "path": "/tmp/decoder-training-projector-selected-release-private-v01-e8w9qPhY/launcher.py.DATA",
+          "sha256": "0a3729f232bd3d94eb6224a59020bcff6e57015b690537b2a5361f5e4eeac5a0"
+        },
+        "changed_existing_definitions": [
+          "ReviewedQwen2ProjectorRelease",
+          "run_reviewed_qwen2_projector_owner_cycle"
+        ],
+        "diff": {
+          "bytes": 2041,
+          "path": "/tmp/decoder-training-projector-selected-release-private-v01-e8w9qPhY/launcher.py.DATA.diff",
+          "sha256": "1af19192ae1dfb795a8136af2def30607dd6a0a3f2e5da1903da89b1e5b2f75b"
+        }
+      },
+      "relational_assessment.py": {
+        "before": {
+          "bytes": 574005,
+          "path": "/tmp/decoder-training-projector-request-paid-join-private-v01-OXrJ2XDz/relational_assessment.py",
+          "sha256": "36e5e8895518984a4062a10a4b861837e7b0f74e047d4b04282f2c833bb73857"
+        },
+        "candidate": {
+          "bytes": 575468,
+          "path": "/tmp/decoder-training-projector-selected-release-private-v01-e8w9qPhY/relational_assessment.py",
+          "sha256": "76a1b2cbde9444fb13946bdcd1d3b3e285236d4c2a8ca9e3a7724355adfa43b0"
+        },
+        "changed_existing_definitions": [
+          "_qwen2_projector_released_parent",
+          "read_qwen2_projector_paid_attempts"
+        ],
+        "diff": {
+          "bytes": 5675,
+          "path": "/tmp/decoder-training-projector-selected-release-private-v01-e8w9qPhY/relational_assessment.py.diff",
+          "sha256": "a4438ec2316f13acc0646c76ed23343c7f0e84b96af22f57eedce31e781d7b23"
+        }
+      },
+      "study.py": {
+        "before": {
+          "bytes": 904800,
+          "path": "/tmp/decoder-training-projector-request-paid-join-private-v01-OXrJ2XDz/study.py",
+          "sha256": "dc070ebd5a46b7e029579c714153613c01915595cff8091f175b18ca6baaad53"
+        },
+        "candidate": {
+          "bytes": 905879,
+          "path": "/tmp/decoder-training-projector-selected-release-private-v01-e8w9qPhY/study.py",
+          "sha256": "09afd1fd3f35f3c1612eecb84a5b5d091cf7edb2455526b8e9a9c02064b36f44"
+        },
+        "changed_existing_definitions": [
+          "_reconcile_external_projector_experiment",
+          "compare_verified_qwen2_external_projector"
+        ],
+        "diff": {
+          "bytes": 3730,
+          "path": "/tmp/decoder-training-projector-selected-release-private-v01-e8w9qPhY/study.py.diff",
+          "sha256": "50d1c4333516ba69abe6aa4ff995eff88d75c22c3cbf1681e324608bf59716a0"
+        }
+      }
+    },
+    "release_schema": "reviewed-qwen2-projector-direct-owner-release/v3"
+  },
+  "private_qwen2_projector_request_materialization": {
+    "dispatch_authority": false,
+    "four_fictional_requests_round_tripped": true,
+    "launcher": {
+      "bytes": 118813,
+      "path": "/tmp/decoder-training-projector-request-materialization-private-v01-tMT106br/launcher.py.DATA",
+      "sha256": "d6875d3d8adfdb3697085f128424f09e80a5660d09f41f5acb3d5caf0a8d4bdd"
+    },
+    "local_passing_cases": {
+      "four_arm_preparation": 11,
+      "legacy_launcher": 6,
+      "legacy_worker_producer": 7,
+      "normal_launcher": 6
+    },
+    "maintained_adoption": null,
+    "original_runtime_authority_required": true,
+    "paid_or_native_execution": null,
+    "worker": {
+      "bytes": 842621,
+      "path": "/tmp/decoder-training-projector-request-materialization-private-v01-tMT106br/worker.py.DATA",
+      "sha256": "de424df72892525387f10ca99d7e05053e1454320817241228f03ab73b63da6c"
+    }
+  },
+  "private_qwen2_selected_request_paid_readback": {
+    "actual_convergence_evidence": null,
+    "actual_paid_or_native_execution": null,
+    "checked_join_scope": {
+      "actual_v381_fixture_request_sha256s": [
+        "252027fbb0e58373a9a5c81d6bd4cd6833d3e54b3fd276a54ad16acb3cc4d08a",
+        "c22ceb621dd8bb56fe958f18b878e78a022620b864323a996240d10a5747d58c",
+        "30d55f30148558d2acaf40adac73ec78b4122281ba5086b5a70ffb7d9d816abc",
+        "e2cca47cc4f7882630c2598ccc15ecbc56a033ea36eff438960506eb0da2d1cd"
+      ],
+      "attempts": 5,
+      "cpu_ns": 20000000,
+      "distinct_events": 6,
+      "failed_retained": 1,
+      "modeled_paid_fixture": true
+    },
+    "dispatch_authority": false,
+    "local_passing_cases": {
+      "legacy_paid_comparison": 8,
+      "legacy_terminal": 8,
+      "selected_request_controls": 7
+    },
+    "maintained_adoption": null,
+    "readback_owner": {
+      "bytes": 574005,
+      "path": "/tmp/decoder-training-projector-request-paid-join-private-v01-OXrJ2XDz/relational_assessment.py",
+      "sha256": "36e5e8895518984a4062a10a4b861837e7b0f74e047d4b04282f2c833bb73857"
+    },
+    "study_owner": {
+      "bytes": 904800,
+      "path": "/tmp/decoder-training-projector-request-paid-join-private-v01-OXrJ2XDz/study.py",
+      "sha256": "dc070ebd5a46b7e029579c714153613c01915595cff8091f175b18ca6baaad53"
+    }
+  },
+  "private_relocated_reader_to_existing_A0": {
+    "dispatch_authority": false,
+    "live_A0": null,
+    "live_reader": null,
+    "local_A0_controls": 13,
+    "local_preserved_legacy_cases": 16,
+    "local_reader_v3_cases": 7,
+    "modeled_reader_result_consumed_by_actual_A0_binder": true,
+    "selected_current_startup_and_terminal_owner": null
+  },
+  "private_shared_trial_companion": {
+    "actual_model_training_or_measured_comparison": null,
+    "canonical_maintained_package_import_verified": false,
+    "current_policy_routes_with_shared_trial": [
+      "ordinary_span",
+      "guided_span",
+      "qwen2_activation"
+    ],
+    "dispatch_authority": false,
+    "fused_t5_policy_on_combined_worker": "refused before Source read and any owner/optimizer activity",
+    "local_passing_controls": {
+      "exact_linkage_and_guards": 4,
+      "fused_t5_policy_binding": 7,
+      "guided_policy_binding": 5,
+      "guided_policy_dispatch": 6,
+      "ordinary_policy_binding": 5,
+      "ordinary_policy_dispatch": 3,
+      "qwen2_activation_admission": 8
+    },
+    "maintained_source_adoption": null,
+    "private_assessor_normal_import": {
+      "old_strict_trial": "missing exact T5 attempt class",
+      "shared_retained_trial": "success"
+    },
+    "shared_trial": {
+      "bytes": 142050,
+      "path": "/tmp/decoder-training-shared-trial-companion-private-v01-CxWQ8SRT/relational_trial.py",
+      "sha256": "be4488a3e1d17f221a76082e8cd2696be134b73863e8aaf68ff2ce939851aa28"
+    },
+    "worker": {
+      "bytes": 828782,
+      "path": "/tmp/decoder-training-shared-trial-companion-private-v01-CxWQ8SRT/worker.py.DATA",
+      "sha256": "48780dac31c20c6735950b7ca537b3831ef36d1306314d822259ddb4cf39fa41"
+    }
+  },
+  "private_source62_strict_first_role_monitor": {
+    "actual_model_or_runtime_savings_measured": null,
+    "candidate": {
+      "bytes": 6458,
+      "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/descriptor.json",
+      "sha256": "d45b9c2bc37de19d81275814188f00e540871489a7b41461640905a429283997"
+    },
+    "local_checks": 21,
+    "observed_obstruction_token": 5,
+    "original_train_labels_replayed": 3,
+    "retained_output_tokens_after_obstruction": 4433
+  },
+  "private_stage_a_relocated_all_fresh_source32": {
+    "actual_detached_python_rows": 1213,
+    "actual_detached_retained_rows": 1218,
+    "composed_captures_were_modelled": true,
+    "current_independent_index_read": null,
+    "dispatch_authority": false,
+    "explicit_partial_costs": {
+      "avoided_additional_index_request_bytes": 7070598,
+      "explicit_read_requests_and_raw_outputs_bytes": 33150207,
+      "explicit_read_requests_bytes": 31735309,
+      "git_guard_passes": 2,
+      "git_guard_requests_per_pass_bytes": 11541115,
+      "guide_requests_bytes": 5823219,
+      "one_guard_explicit_request_bytes": 20194194,
+      "one_guard_explicit_requests_and_raw_outputs_bytes": 21609092,
+      "raw_body_output_bytes": 1414898,
+      "raw_body_readback_requests_bytes": 1414930,
+      "source_body_requests_bytes": 1414930
+    },
+    "historical_archive_count": 20,
+    "live_owner_selection": null,
+    "local_passing_cases": 6,
+    "non_index_content_changes_for_owner_recheck": {
+      "A": [
+        ".git/info/exclude"
+      ],
+      "D": [
+        ".git/info/exclude",
+        "tests/unit/logic/autoformal/test_corpus_release_cli.py",
+        "ipfs_datasets_py/logic/autoformal/supervisor_loop.py",
+        "scripts/ops/legal_ir/run_autoformal_supervisor.py"
+      ]
+    },
+    "paired_reservation": null,
+    "planned_current_body_reads": 32
+  },
+  "private_stage_a_relocated_reservation": {
+    "conditional_subtotal_gap_before_owner_overhead": 20401582,
+    "dispatch_authority": false,
+    "headroom_basis_bytes": 6356992,
+    "live_reader": null,
+    "local_passing_cases": 7,
+    "quote": {
+      "Reader_core": {
+        "control_probe_bytes": 556439,
+        "direct_source_bytes": 21609092,
+        "epoch_output_allowance_bytes": 1050019,
+        "git_output_allowance_bytes": 1425458,
+        "logical_selected_bytes": 24641008
+      },
+      "Reader_epoch_LIST_sizes": {
+        "outer_epoch": 525009,
+        "python_epoch": 523151
+      },
+      "Reader_parent_matrix_allowance": 364452,
+      "Reader_selected_control_reads": [
+        {
+          "bytes": 556438,
+          "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/guide572-all-fresh-preview.INERT.json",
+          "sha256": "e682f614e50a3e97af25fdf532df48607dbc52085571a9b84d494bbd46ff4cfb"
+        }
+      ],
+      "additional_owner_control_roster": null,
+      "capture_partition": "stage-a-source32-relocated-all-fresh/v1",
+      "dispatch_authority": false,
+      "execution_selected": false,
+      "live_reservation": null,
+      "schema": "private-stage-a-relocated-reservation-scenario/v1",
+      "selector_Reader_conditional_subtotal": 26758574,
+      "selector_git_stream_allowance": 704536,
+      "selector_raw_stream_write_readback_allowance": 1048578
+    }
+  },
+  "private_teacher_pilot_first_use_wall": {
+    "actual_wall_owner_evidence": null,
+    "dispatch_authority": false,
+    "distinct_actual_ordinary33": {
+      "A": "219ba3da0f62f772801d71715e22c506faa21126",
+      "D": "cbc43a5f365502265d1e64d7bce3281f2871ef01",
+      "junit": {
+        "bytes": 6106,
+        "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/actual-output/corpus-release-physical-v4-retained-type-current-review-ordinary33-run-result0-output1.bin",
+        "sha256": "d1ba609e94c9a4d10217fa2c6a4d3deee2aa9f3e68116b58f6310691dbfab06e"
+      },
+      "passed": 33,
+      "report": {
+        "bytes": 996010,
+        "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/actual-output/complete-frozen-local-D-corpus-release-physical-v4-retained-type-current-review-ordinary33-existing-owner-report.json",
+        "sha256": "eecfe9703987364d818a9fe6448e1aa66da01efb9f9c17d6700274fbe417e297"
+      },
+      "scope": "software_qualification_on_the_frozen_local_candidate",
+      "source_and_resource_closed": true
+    },
+    "legal_quality_threshold_from_wall": false,
+    "local_passing_cases": {
+      "new_elapsed_verification": 8,
+      "retained_all_paid": 8,
+      "retained_final": 11
+    },
+    "modeled_paid_and_wall_summary": {
+      "first_use_wall": {
+        "clock_domain_sha256": "10260d8aafea18c83f08c4e68a428db759f6b2a6f2fc2154874d695f6c46fd13",
+        "covered_paid_events": 39,
+        "elapsed_ns": 42000000000,
+        "end_ns": 43000000000,
+        "opening_receipt_sha256": "eeef9e0b1fd421ae545ca779ba0fe32ec8a79a417649726b50da916e79adda13",
+        "physical_clock_windows_sha256": "995fab5e9111ad468c0fb5493d985305c2e4474bbb6e7987523aad1b2a42bb39",
+        "receipt_sha256": "b9f028ed29b205e47312baabcbdbc74b7d03735ea9954e2b3d3347af5772ba8c",
+        "schema": "reviewed-teacher-pilot-first-use-wall/v1",
+        "scope": "whole_pilot_opening_through_independently_authenticated_terminal_evidence",
+        "selection_sha256": "cac64ffb03652739a45b733f6ac2c00dc57f8a337e294c53c5b434af141657a9",
+        "start_ns": 1000000000,
+        "terminal_evidence_receipt_sha256": "23d3315d6638eb26fe51f155975af772a0c6793534a260dc0aaf0bf821846d12"
+      },
+      "observed_model_or_native_execution": false,
+      "original_event_count": 39,
+      "paid_failed_event_retained": true
+    },
+    "owner": {
+      "bytes": 30009,
+      "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/final_physical_union.py",
+      "sha256": "ccb4f816f07211f380d97a09cee2181da359882b17698f881deadc65ea2cc825"
+    },
+    "preparation_only_stops_included": false,
+    "scope": "paid_preparation_and_development_and_final_with_independent_clock_endpoint_approval"
+  },
+  "private_teacher_preparation_stop_wall": {
+    "actual_wall_owner_evidence": null,
+    "all_original_decoder_arms_independently_unstarted_required": true,
+    "dispatch_authority": false,
+    "local_passing_cases": {
+      "retained_completed_wall": 8,
+      "terminal_preparation_wall": 7
+    },
+    "modeled_preparation_stop_wall_summary": {
+      "paid_wall": {
+        "clock_domain_sha256": "49f3c56ed1545326eb00bc3db6a1338baba9977b9b1b5783d80ed76ad45b2851",
+        "covered_paid_events": 3,
+        "elapsed_ns": 40,
+        "end_ns": 45,
+        "opening_receipt_sha256": "038638fb28a056a350ceb9046960a8f3d89906304e5ed665cfee176a4f4b55fe",
+        "physical_clock_windows_sha256": "96ca0f5d0d5faaa1c083a730f5ef9ae158087bce8807d1b4be6cdaba3c8e0d98",
+        "receipt_sha256": "5518cb7be00d06737663fe65ca34d785d16118325935a7172016497f53c36137",
+        "schema": "reviewed-teacher-pilot-first-use-wall/v1",
+        "scope": "pilot_opening_through_independently_authenticated_preparation_stop",
+        "selection_sha256": "4d34a64faea2e6ce57bb12bf82481769b520dab56af1a59037e9b2f527311000",
+        "start_ns": 5,
+        "terminal_evidence_receipt_sha256": "03368ddecda490c85980bf5d9f9e70a5752c6fb295ac0afeac09745533ef7853"
+      },
+      "recovered_wall": {
+        "clock_domain_sha256": "4be64255f538d26be402e58c6a4f9773c39c390d0c916f77b4d2357343ff683b",
+        "covered_paid_events": 3,
+        "elapsed_ns": 40,
+        "end_ns": 45,
+        "opening_receipt_sha256": "038638fb28a056a350ceb9046960a8f3d89906304e5ed665cfee176a4f4b55fe",
+        "physical_clock_windows_sha256": "97b01034485e23563aad09955fda55cc37522657fde64ba58402dca9554ca750",
+        "receipt_sha256": "5518cb7be00d06737663fe65ca34d785d16118325935a7172016497f53c36137",
+        "schema": "reviewed-teacher-pilot-first-use-wall/v1",
+        "scope": "pilot_opening_through_independently_authenticated_preparation_stop",
+        "selection_sha256": "eae8b3834c314320e7841d74afc4179e50f26ef457fb60384200505962968bc6",
+        "start_ns": 5,
+        "terminal_evidence_receipt_sha256": "03368ddecda490c85980bf5d9f9e70a5752c6fb295ac0afeac09745533ef7853"
+      },
+      "zero_paid_wall": {
+        "clock_domain_sha256": "4a5e1b13a28d21f264d012382435a161dd3e4777a6b84822e9d6e6e4a3bd5852",
+        "covered_paid_events": 0,
+        "elapsed_ns": 20,
+        "end_ns": 25,
+        "opening_receipt_sha256": "038638fb28a056a350ceb9046960a8f3d89906304e5ed665cfee176a4f4b55fe",
+        "physical_clock_windows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+        "receipt_sha256": "5518cb7be00d06737663fe65ca34d785d16118325935a7172016497f53c36137",
+        "schema": "reviewed-teacher-pilot-first-use-wall/v1",
+        "scope": "pilot_opening_through_independently_authenticated_preparation_stop",
+        "selection_sha256": "6297a3cefdfe3d0dc485065ed43da3592565efa0ad7e5168a73b257d0afba297",
+        "start_ns": 5,
+        "terminal_evidence_receipt_sha256": "03368ddecda490c85980bf5d9f9e70a5752c6fb295ac0afeac09745533ef7853"
+      }
+    },
+    "owner": {
+      "bytes": 34886,
+      "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/final_physical_union.py",
+      "sha256": "c5e490402f1093b9cce28c7461f18d6811c2d8914fabb2e7f7dda145af7df1bf"
+    }
+  },
+  "private_unified_policy_companions": {
+    "actual_model_training_or_measured_comparison": null,
+    "actual_qwen_native_discovery_pass": null,
+    "dispatch_authority": false,
+    "maintained_package_adoption_and_import": null,
+    "normal_detached_companion_and_assessor_import": true,
+    "passing_integrated_local_cases": {
+      "bundle_controls": 3,
+      "fused_binding": 7,
+      "fused_dispatch": 2,
+      "fused_group": 4,
+      "fused_rollout": 6,
+      "qwen_guidance": 9,
+      "qwen_strict_worker": 9,
+      "temporal_grouped_worker": 8
+    },
+    "same_exact_companion_bytes_across_policy_profiles": true,
+    "unified_companions": {
+      "grouped_policy": {
+        "bytes": 174160,
+        "path": "/tmp/decoder-training-unified-grouped-policy-private-v01-ZdWBre07/grouped_policy.py",
+        "sha256": "0e49dd946039c46e93094bf62b72277d3f7ef65cab38ee632b034c034a20b99f"
+      },
+      "proof_scoped_credit": {
+        "bytes": 56476,
+        "path": "/tmp/decoder-training-unified-grouped-policy-private-v01-ZdWBre07/proof_scoped_credit.py",
+        "sha256": "43d7bbb4be6192df93e60c69674ab36b6c14ab8e4c149673461b6448108dfc54"
+      },
+      "relational_trial": {
+        "bytes": 142050,
+        "path": "/tmp/decoder-training-unified-grouped-policy-private-v01-ZdWBre07/relational_trial.py",
+        "sha256": "be4488a3e1d17f221a76082e8cd2696be134b73863e8aaf68ff2ce939851aa28"
+      },
+      "sampled_action": {
+        "bytes": 77243,
+        "path": "/tmp/decoder-training-unified-grouped-policy-private-v01-ZdWBre07/sampled_action.py",
+        "sha256": "da91e31c392e095700366ad53037412635bf8fc2af08f6e72d5b8339faa9ac97"
+      },
+      "teacher_prefix": {
+        "bytes": 52410,
+        "path": "/tmp/decoder-training-unified-grouped-policy-private-v01-ZdWBre07/teacher_prefix.py",
+        "sha256": "b7e46d7f5df3783cb2904a67cacc3273d5e82e987d1740afb085c3a76a97f5cd"
+      }
+    },
+    "worker": {
+      "bytes": 841772,
+      "path": "/tmp/decoder-training-unified-grouped-policy-private-v01-ZdWBre07/worker.py.DATA",
+      "sha256": "b1e519b10333cf3939c6259083225029130b3ebd1e8cb50ea38e7699f298de87"
+    }
+  },
+  "registered_transport_original_scope": {
+    "actual_model_or_training": false,
+    "candidate": {
+      "bytes": 5699,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/descriptor.json",
+      "sha256": "58552b72637e585ba13ef3e07765bbf4dba89bca1387f10e9f5183bbdae13fd1"
+    },
+    "current_source_adoption": null,
+    "focused_local_checks": 5,
+    "retained_local_checks": 6
+  },
+  "required_final_release_evidence": [
+    "original development comparison",
+    "preregistered threshold policy",
+    "eligible frozen exact checkpoint",
+    "separate resource and legal review"
+  ],
+  "schema": "decoder-training-advisory-design-check/v1",
+  "source62_original_strict_wire_opening_diagnostic": {
+    "actual_wall_or_compute_savings": null,
+    "body_positions_already_emitted_after_strict_wire_failure": 4433,
+    "candidate": {
+      "bytes": 3230,
+      "path": "/tmp/decoder-training-source62-opening-role-private-v01-arF8Pkiw/descriptor.json",
+      "sha256": "f08d73f108f9310e70389add1bbf8317cc7d59099181ec1d6938fc4461c9537f"
+    },
+    "earliest_verified_incompatible_body_token": 5,
+    "original_EOS_rejection_predicate_reproduced_count": 1,
+    "original_exact_by_arm": {
+      "TRAIN3": 0,
+      "pristine0": 0
+    },
+    "paired_first_role_symbol_divergent_body_token": 7,
+    "timed_out_without_original_assembly": 5
+  },
+  "source_only_a0_missing_selection_ids": [
+    "legal_cohort",
+    "origin_and_decoder",
+    "resources_and_cost"
+  ],
+  "stage_a_coordination": {
+    "actual_paired_selection": null,
+    "actual_reader_allocation": null,
+    "current_DEVELOPMENT_hparam_selection_consumer": null,
+    "current_TRAIN_consumer": null,
+    "current_conditional_reader_quote": null,
+    "current_independent_read_join": null,
+    "guide_writer_accelerate": "e55316f48847b17a8b4041a2da30bcaa0ba6eb90",
+    "headroom_is_selection_or_admission": false,
+    "identity_boundary": {
+      "bytes": 2620,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/guide581-frontier.json",
+      "sha256": "844d28551a42f62ce3aada97c674b8aaa7420cd72560e8e3e49648277c11011e"
+    },
+    "last_verified_published_accelerate_sha": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+    "last_verified_published_datasets_sha": "5bf57f390a12621a40716595fe261c35d2741e12",
+    "observed_guide": 581,
+    "publication": {
+      "bytes": 3578,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-Guide581-four-docs-three-FF-publication.json",
+      "sha256": "0e5e9a2bc004e7ba1c1a6b681afe50a8890c557433b39706aca55971363ec9d6"
+    },
+    "qualified_physical_accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "recorded_headroom_bytes": 6356992,
+    "recorded_published_datasets_index": {
+      "bytes": 7070589,
+      "full9": {
+        "st_ctime_ns": "1795756035761619880",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72533257",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795756035751619831",
+        "st_nlink": "1",
+        "st_size": "7070589",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+      "sha256": "b0133f594f37349d5a6959ec0904089265fac8d3fb5c0637b8d0769aecce1078"
+    },
+    "standalone_independent_index_payload_shortfall": 713598
+  },
+  "stage_d_qwen_guided_cached_anchor": {
+    "actual_guided_training": null,
+    "actual_legal_review": null,
+    "dispatch_authority": false,
+    "modeled_common_cache_rows": 10,
+    "modeled_opening_scored_actions_per_arm": [
+      2,
+      2
+    ],
+    "original_discovery_roles_replayed_before_refusal": 12,
+    "passing_local_controls": {
+      "focused_guidance": 9,
+      "retained_scope": 6
+    }
+  },
+  "stage_d_qwen_native_discovery_admission": {
+    "actual_legal_review": null,
+    "actual_native_training": null,
+    "dispatch_authority": false,
+    "modeled_and_development_refuse_before_train_owner": true,
+    "native_gate_did_not_open_outputs_or_update": true,
+    "original_discovery_roles_replayed_to_refusal": 12,
+    "passing_local_controls": {
+      "retained_worker": 6,
+      "strict_worker": 8
+    }
+  },
+  "stage_e_qwen_original_activation_discovery": {
+    "actual_semantic_review": null,
+    "both_directions_meet_selected_policy": false,
+    "dispatch_authority": false,
+    "native_activation_measurement": null,
+    "original_modeled_forward_roles": 12,
+    "passing_local_controls": {
+      "original_discovery": 9,
+      "retained_panel": 9
+    },
+    "training_credit_assignment_changed": false
+  },
+  "stage_e_reciprocal_activation_panel": {
+    "actual_semantic_review": null,
+    "dispatch_authority": false,
+    "modeled_directional_selectivity": {
+      "qwen2": [
+        true,
+        false
+      ],
+      "t5": [
+        true,
+        true
+      ]
+    },
+    "native_activation_measurement": null,
+    "passing_local_controls": {
+      "panel": 9,
+      "retained_t5": 7
+    }
+  },
+  "stage_f_compact_generation_custody": {
+    "actual_legal_review": null,
+    "dispatch_authority": false,
+    "drift_boundaries_reproduced": [
+      "generate",
+      "inspect"
+    ],
+    "native_edit_effect": null,
+    "offending_rows_admitted": 0,
+    "passing_local_controls": {
+      "comparison": 4,
+      "scheduled": 9
+    },
+    "scheduled_prior_arms_retained": [
+      "baseline"
+    ]
+  },
+  "stage_f_qwen_external_projector_development": {
+    "dispatch_authority": false,
+    "passing_local_controls": {
+      "focused": 7,
+      "retained_t5": 3
+    },
+    "scripted_common_source_rows": 2,
+    "scripted_forwards_per_route": {
+      "Qwen2": 16,
+      "T5": 16
+    },
+    "verified_native_or_protected_development": null,
+    "weight_edit_benefit_measured": false
+  },
+  "stage_f_qwen_external_projector_returns": {
+    "dispatch_authority": false,
+    "passing_local_controls": 10,
+    "role_scoped_review_subjects": 8,
+    "scripted_backend_forwards": 16,
+    "scripted_bf16_restoration_verified": true,
+    "scripted_source_rows": 2,
+    "verified_native_or_protected_development": null,
+    "weight_edit_benefit_measured": false
+  },
+  "stage_f_qwen_projector_direct_close": {
+    "direct_reservation_owner_required": true,
+    "dispatch_authority": false,
+    "native_paid_attempts": null,
+    "passing_local_controls": 8,
+    "physical_close_replay_used": true,
+    "scripted_attempts": 5,
+    "scripted_model_return_roles": 4
+  },
+  "stage_f_qwen_projector_launcher": {
+    "actual_native_launch": null,
+    "dispatch_authority": false,
+    "independent_post_release_close": null,
+    "passing_local_controls": {
+      "batch_codec": 8,
+      "launcher": 6
+    },
+    "verified_fictional_child_artifact_roles": [
+      "evaluation",
+      "generation",
+      "loader",
+      "projector"
+    ]
+  },
+  "stage_f_qwen_projector_paid_attempts": {
+    "dispatch_authority": false,
+    "native_paid_attempts": null,
+    "passing_local_controls": 6,
+    "physical_close_replay_used": true,
+    "scripted_attempts": 5,
+    "scripted_model_return_roles": 4
+  },
+  "stage_f_qwen_projector_paid_comparison": {
+    "dispatch_authority": false,
+    "native_measured_comparison": null,
+    "passing_local_controls": {
+      "qwen2": 8,
+      "retained_t5": 11
+    },
+    "scripted_failed_attempts": 1,
+    "scripted_unique_events": 6,
+    "unchanged_t5_report": true
+  },
+  "stage_f_qwen_projector_producer": {
+    "dispatch_authority": false,
+    "existing_native_launcher_compatible": false,
+    "fictional_rows_per_arm": 2,
+    "historical_dynamic_route_retained": true,
+    "native_owner_closes": null,
+    "passing_local_controls": 7,
+    "scripted_producer_arms": 4
+  },
+  "stage_f_qwen_projector_release_issuer": {
+    "dispatch_authority": false,
+    "native_launch_or_release": null,
+    "passing_local_controls": {
+      "issuer": 5,
+      "retained_reader": 8
+    },
+    "scripted_durable_artifact_roles": 7
+  },
+  "stage_f_qwen_projector_source_order_and_release_slot": {
+    "dispatch_authority": false,
+    "native_launch_or_release": null,
+    "passing_local_controls": {
+      "issuer": 6,
+      "retained_reader": 8
+    },
+    "scripted_durable_artifact_roles": 7
+  },
+  "stage_f_shared_external_projector_assessment": {
+    "dispatch_authority": false,
+    "passing_local_controls": {
+      "qwen2": 7,
+      "retained_t5": 11
+    },
+    "scripted_source_rows": 2,
+    "shared_scripted_policy_sha256": "de7f0e1393be7ad296945a2ff71c47c57c7baccc57a815c195e51eafc408e364",
+    "unchanged_t5_reports": 2,
+    "verified_native_protected_development": null
+  },
+  "stage_g_authenticated_censor_followup": {
+    "candidate": {
+      "bytes": 4820,
+      "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/descriptor.json",
+      "sha256": "9f49c8a0248b27d847c3c5a9674af875840946ad0e295ee5822b850e2d436de2"
+    },
+    "focused_local_cases": 8,
+    "measured_scientific_evidence": null,
+    "modeled_example": {
+      "closing_wall_seconds": 46,
+      "followup": [
+        [
+          -55,
+          2
+        ],
+        [
+          145,
+          2
+        ]
+      ],
+      "horizon_seconds": 100,
+      "mean_lower_gain_seconds": 23,
+      "original": [
+        [
+          -101,
+          2
+        ],
+        [
+          145,
+          2
+        ]
+      ],
+      "seed_count": 2
+    },
+    "retained_local_cases": 17
+  },
+  "stages": [
+    {
+      "experiments": [
+        "A0-source-only",
+        "A1-8d",
+        "A2-384d",
+        "A3-768d",
+        "A4-4096d"
+      ],
+      "missing_selection_ids": [
+        "legal_cohort",
+        "final_reservation",
+        "origin_and_decoder",
+        "threshold_policy",
+        "seed_and_checkpoint_grid",
+        "resources_and_cost",
+        "retention_reference",
+        "teacher_spacy8_close",
+        "teacher_gte_small384_close",
+        "teacher_gte_base768_close",
+        "teacher_leanstral4096_close"
+      ],
+      "required_prior_designs": [],
+      "stage": "A",
+      "supplied_reference_ids_requiring_owner_validation": []
+    },
+    {
+      "experiments": [
+        "B-conditioning-distillation"
+      ],
+      "missing_selection_ids": [
+        "legal_cohort",
+        "final_reservation",
+        "origin_and_decoder",
+        "threshold_policy",
+        "seed_and_checkpoint_grid",
+        "resources_and_cost",
+        "retention_reference",
+        "teacher_spacy8_close",
+        "teacher_gte_small384_close",
+        "teacher_gte_base768_close",
+        "teacher_leanstral4096_close",
+        "conditioning_selection"
+      ],
+      "required_prior_designs": [
+        "A"
+      ],
+      "stage": "B",
+      "supplied_reference_ids_requiring_owner_validation": []
+    },
+    {
+      "experiments": [
+        "C-selective-fusion"
+      ],
+      "missing_selection_ids": [
+        "legal_cohort",
+        "final_reservation",
+        "origin_and_decoder",
+        "threshold_policy",
+        "seed_and_checkpoint_grid",
+        "resources_and_cost",
+        "retention_reference",
+        "teacher_spacy8_close",
+        "teacher_gte_small384_close",
+        "teacher_gte_base768_close",
+        "teacher_leanstral4096_close",
+        "conditioning_selection",
+        "fusion_selection"
+      ],
+      "required_prior_designs": [
+        "B"
+      ],
+      "stage": "C",
+      "supplied_reference_ids_requiring_owner_validation": []
+    },
+    {
+      "experiments": [
+        "D-credit"
+      ],
+      "missing_selection_ids": [
+        "legal_cohort",
+        "final_reservation",
+        "origin_and_decoder",
+        "threshold_policy",
+        "seed_and_checkpoint_grid",
+        "resources_and_cost",
+        "retention_reference",
+        "policy_selection"
+      ],
+      "required_prior_designs": [],
+      "stage": "D",
+      "supplied_reference_ids_requiring_owner_validation": []
+    },
+    {
+      "experiments": [
+        "E-mechanistic"
+      ],
+      "missing_selection_ids": [
+        "legal_cohort",
+        "final_reservation",
+        "origin_and_decoder",
+        "threshold_policy",
+        "seed_and_checkpoint_grid",
+        "resources_and_cost",
+        "retention_reference",
+        "activation_selection"
+      ],
+      "required_prior_designs": [],
+      "stage": "E",
+      "supplied_reference_ids_requiring_owner_validation": []
+    },
+    {
+      "experiments": [
+        "F-weight-proposals"
+      ],
+      "missing_selection_ids": [
+        "legal_cohort",
+        "final_reservation",
+        "origin_and_decoder",
+        "threshold_policy",
+        "seed_and_checkpoint_grid",
+        "resources_and_cost",
+        "retention_reference",
+        "activation_selection",
+        "edit_selection"
+      ],
+      "required_prior_designs": [
+        "E"
+      ],
+      "stage": "F",
+      "supplied_reference_ids_requiring_owner_validation": []
+    },
+    {
+      "experiments": [
+        "G-portability"
+      ],
+      "missing_selection_ids": [
+        "legal_cohort",
+        "final_reservation",
+        "origin_and_decoder",
+        "threshold_policy",
+        "seed_and_checkpoint_grid",
+        "resources_and_cost",
+        "retention_reference",
+        "teacher_spacy8_close",
+        "teacher_gte_small384_close",
+        "teacher_gte_base768_close",
+        "teacher_leanstral4096_close",
+        "portability_selection"
+      ],
+      "required_prior_designs": [],
+      "stage": "G",
+      "supplied_reference_ids_requiring_owner_validation": []
+    }
+  ],
+  "supplied_references_need_independent_owner_verification": true,
+  "temporal_assessed_continuation_enclosing_wall": {
+    "candidate": {
+      "bytes": 5422,
+      "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/descriptor.json",
+      "sha256": "717b7557ccc005aded26d5995144267b66763236f0b61032ded1d9a128bb864c"
+    },
+    "heldout_threshold_established": false,
+    "modeled_cases": {
+      "qwen2": {
+        "elapsed_ns": 1100,
+        "paid_events": 19,
+        "reviewed_arms": 3
+      },
+      "t5": {
+        "elapsed_ns": 1100,
+        "paid_events": 22,
+        "reviewed_arms": 4
+      }
+    },
+    "native_elapsed_evidence": null,
+    "passing_local_cases": 13
+  },
+  "temporal_assessed_continuation_fixture": {
+    "actual_two_round_cost_and_review_evidence": null,
+    "cost_to_heldout_threshold_established": false,
+    "dispatch_authority": false,
+    "first_cut_scripted_owner_fixture": true,
+    "local_controls": 6,
+    "second_cut_modeled_receipts": true
+  },
+  "temporal_continued_paid_cost_fixture": {
+    "cost_to_held_out_threshold_established": false,
+    "current_actual_meter_evidence": null,
+    "dispatch_authority": false,
+    "passing_local_controls": 12,
+    "scope": "fictional_meter_and_saved_checkpoint_fixtures",
+    "whole_study_elapsed_wall": null
+  },
+  "temporal_development_assessor_fixture": {
+    "architecture_and_arm_fixture_combinations": [
+      [
+        "T5",
+        "raw"
+      ],
+      [
+        "T5",
+        "prefix"
+      ],
+      [
+        "Qwen2",
+        "raw"
+      ],
+      [
+        "Qwen2",
+        "prefix"
+      ]
+    ],
+    "current_owner_adoption": null,
+    "dispatch_authority": false,
+    "final_run_selected": false,
+    "local_controls": 8,
+    "paid_continuation_comparison": null
+  },
+  "temporal_paid_development_fixture": {
+    "FINAL_selected": false,
+    "dispatch_authority": false,
+    "local_controls": 10,
+    "measured_cost_to_heldout_threshold": null,
+    "measured_development_endpoint": null
+  },
+  "temporal_review_availability_wall_fixture": {
+    "FINAL_selected": false,
+    "cost_to_heldout_threshold_established": false,
+    "dispatch_authority": false,
+    "local_controls": 14,
+    "native_paid_review_availability": null,
+    "whole_study_wall_evidence": null
+  },
+  "two_round_scripted_qwen": {
+    "actual_legal_reviews": null,
+    "actual_training_or_cost_evidence": null,
+    "cost_to_heldout_threshold_established": false,
+    "dispatch_authority": false,
+    "passing_local_controls": 6,
+    "qwen2_new_controls": 3,
+    "scripted_two_round_architectures": [
+      "T5",
+      "Qwen2"
+    ],
+    "t5_regression_controls": 3
+  },
+  "two_round_scripted_t5": {
+    "actual_resource_evidence": null,
+    "dispatch_authority": false,
+    "later_qwen2_native_fixture_selected": false,
+    "native_model_optimizer_or_legal_evidence": null,
+    "passing_local_controls": 3,
+    "scripted_t5_arms_per_cut": 2,
+    "scripted_t5_checkpoints_and_assessment_cuts": 2
+  }
+}

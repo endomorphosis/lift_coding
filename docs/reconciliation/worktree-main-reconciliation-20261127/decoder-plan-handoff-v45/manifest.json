@@ -1,0 +1,58 @@
+{
+  "schema": "decoder-planning-handoff-publication/v1",
+  "plan_version": "3.554",
+  "current_experiment_manifest": "v407",
+  "new_operator_handoff": "v45",
+  "changes": "Correct stale current pointers; separate A0 preflight, measured pilot and future research; clarify existing Source-cap authorization and optional standalone READ1.",
+  "versioned_specification_unchanged": {
+    "bytes": 67587,
+    "sha256": "d9545137291c7876c6c5a1e308a30429806040248b577eb662e356f95aa512e5"
+  },
+  "all_17_runtime_selections_unchanged_and_unset": true,
+  "scientific_goal_complete": false,
+  "project_Source_models_training_or_CI_launched": false,
+  "records": [
+    {
+      "archive": "plan.before-v3.553.md.DATA",
+      "original": "/tmp/decoder-plan-current-handoff-20261127-73e60Lyr/plan.before.md.DATA",
+      "bytes": 1826292,
+      "sha256": "4ba93db86a840aa43e51641329dd6d7dd9194ba7da101dcfb4dc239160b74c17"
+    },
+    {
+      "archive": "plan.v3.554.md.DATA",
+      "original": "/tmp/decoder-training-integration-plan.md",
+      "bytes": 1827729,
+      "sha256": "3f4c75a15072d6461311f1247151e6b4a124fb44408f4e3de03a6fff5692cb07"
+    },
+    {
+      "archive": "operator-handoff-v45.md.DATA",
+      "original": "/tmp/decoder-training-operator-handoff-v45.md",
+      "bytes": 7033,
+      "sha256": "7354519be9fbef13950ca66b90438d072873f567466b3c31fb31189138c014f5"
+    },
+    {
+      "archive": "experiment-manifest-v407.json.DATA",
+      "original": "/tmp/decoder-training-experiment-manifest-v407.json",
+      "bytes": 835559,
+      "sha256": "576275b2f0c5f96ffcabcf51d55fde4b3a41885564870a6cc0696f3e8a8408ef"
+    },
+    {
+      "archive": "saved-readiness-v407.json.DATA",
+      "original": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/verified-readiness.json",
+      "bytes": 124013,
+      "sha256": "cb9c87c9ad9b582c6eea3161403ed4d9ba1a7c74d08d5cdcdc2f4df4a88aed71"
+    },
+    {
+      "archive": "plan.diff",
+      "original": "/tmp/decoder-plan-current-handoff-20261127-73e60Lyr/plan.diff",
+      "bytes": 6070,
+      "sha256": "0935e4033de546fba6cbc05b3666b9bab385cb2f6f533f199e705b3c7808e8a5"
+    },
+    {
+      "archive": "requirement-audit.json",
+      "original": "/tmp/decoder-plan-current-handoff-20261127-73e60Lyr/requirement-audit.json",
+      "bytes": 6917,
+      "sha256": "e79bdb6f06828c90066d577b903f6a930d6ce3e37e1adc494891b60ca5695b87"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+--- plan-v3.553
++++ plan-v3.554
+@@ -1,6 +1,6 @@
+ # Versioned decoder-training integration plan
+ 
+-Version 3.553. Updated 2026-11-27 with registered transport scope and capacity checks.
++Version 3.554. Updated 2026-11-27 with current package pointers and distinct preflight and study requirements.
+ 
+ Status. Both saved T5 policy candidates reached the output cap on every fictional held-out row. In the later matched Qwen2.5 comparison, model-reported loss fell on the three fixed TRAIN rows and exact held-out output remained 0/3 at both checkpoints. The four-teacher study, independent source-fidelity evaluation and cross-architecture measurements remain open.
+ 
+@@ -23,20 +23,22 @@
+ 
+ Optimize total measured compute and wall time to a predefined held-out source-faithfulness threshold, subject to formal-validity and retention requirements. Report methods that fail to reach the threshold. Lower loss, improved probes, syntax validity, successful compilation, and high reward are distinct observations; none substitutes for legal source correspondence.
+ 
+-The original objective remains in the immutable [attachment](/home/barberb/.codex/attachments/198ce801-199a-411b-85de-228dde81e251/pasted-text-1.txt). The user subsequently authorized read-only research in the submodule. This plan does not authorize project changes, model imports, installation, new CI callers, training, or resource-budget changes. All future validation is local; do not dispatch GitHub Actions. Preserve original receipts, checkpoints, failures, charges, legal-review requirements, and existing owner custody.
++The original objective remains in the immutable [attachment](/home/barberb/.codex/attachments/198ce801-199a-411b-85de-228dde81e251/pasted-text-1.txt). The user subsequently authorized read-only research in the submodule. This plan does not itself select project changes, model imports, installation, new CI callers, training, or numerical resource budgets. The user's separate Source-cap increase authorization remains available to the existing Source owner. Applying it requires the owner's exact current ledger, operation scope and allocation; another generic user-confirmation step is unnecessary. All future validation is local; do not dispatch GitHub Actions. Preserve original receipts, checkpoints, failures, charges, legal-review requirements, and existing owner custody.
+ 
+ ## Package
+ 
+-- [Detailed specification](/tmp/decoder-training-integration-specification-v01.md): contracts, gradient boundaries, actual integration owners, change sets, hypotheses and acceptance gates.
++- [Detailed specification](/tmp/decoder-training-integration-specification-v01.md): contracts, gradient boundaries, integration owners, change sets, hypotheses and acceptance gates, with its original dated research cutoffs. The current operating pointers are in this Package section and handoff v45; the versioned specification bytes remain unchanged.
+ - [Repository research](/tmp/decoder-training-prior-work-research-v01.md): source links, actual APIs, prior results and scope limits.
+ - [Source observations](/tmp/decoder-training-prior-work-source-observations-v01.json): hashed inspected source and historical-result snapshots; not an atomic repository snapshot.
+-- The machine-readable design includes eleven experiments, seven stages, existing owner bindings and gates. [Current experiment manifest](/tmp/decoder-training-experiment-manifest-v404.json)
+-- [Current verified readiness](/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/verified-readiness.json) records the Guide576 publication and changed Stage A owner binding. [Earlier operator handoff](/tmp/decoder-training-operator-handoff-v44.md).
++- The machine-readable design includes eleven experiments, seven stages, seventeen independent receipt slots, existing owner bindings and refusal conditions. [Current experiment manifest v407](/tmp/decoder-training-experiment-manifest-v407.json)
++- [Current saved readiness projection](/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/verified-readiness.json) preserves the Guide581 publication, distinct Accelerate identities and unselected current Source and cohort fields. It is a saved evidence projection, not a fresh physical checkout observation. [Current operator handoff v45](/tmp/decoder-training-operator-handoff-v45.md) separates the source-only A0 preflight from the measured teacher study. [Earlier handoff v44](/tmp/decoder-training-operator-handoff-v44.md) retains its Guide564 cutoff.
+ - [Latest split and training-cycle handoff](/tmp/decoder-training-a0-world-v2-opaque-bound-private-v01/handoff.md)
+ - [Decision protocol](/tmp/decoder-training-decision-protocol-v02.md): comparison, selection, intervention, credit and stopping procedures.
+ - [Draft structural schema v0.2.1](/tmp/decoder-training-contracts-draft-v03.schema.json): versioned training, evaluation, credit, intervention, update and cost record shapes. The [v0.1 teacher and capability shapes](/tmp/decoder-training-contracts-draft-v01.schema.json) retain their original record versions. See Section 21 for synthetic conformance scope.
+ 
+ The detailed specification retains chronological findings, including earlier uncertainties. Its repository-research and subsequent sections supersede those uncertainties where evidence was obtained. This overview states the current planning conclusions.
++
++The first conditional preflight is source-only A0. It needs the original `legal_cohort`, `origin_and_decoder` and `resources_and_cost` receipts. The proposed minimum teacher pilot then uses one selected decoder configuration and seed with nine attempts: one source-only arm, four teacher-specific tap-only controls and four relational arms. The broader conditioning/distillation grid remains a separate later comparison. Four authenticated common-cohort teacher closes, frozen study selections and untouched FINAL custody belong to the measured comparison; they do not add receipt slots to A0. No run is selected by this document.
+ 
+ ## 1. Build on the existing stack
+ 

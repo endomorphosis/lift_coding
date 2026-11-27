@@ -1,0 +1,40 @@
+# Local decoder experiment handoff v45
+
+Status: conditional design, no launch selected. Use [manifest v407](/tmp/decoder-training-experiment-manifest-v407.json) and its [saved readiness projection](/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/verified-readiness.json). All seventeen independent selection digests remain unset. Earlier handoff v44 describes Guide564 and remains historical.
+
+## 1. The first two operations have different requirements
+
+The source-only A0 preflight requires exactly three independently authenticated selections: `legal_cohort`, `origin_and_decoder`, and `resources_and_cost`. The existing checker verifies that list separately from measured Stage A. A0 uses the reviewed source-only route without optimizer updates. It still requires the selected Source epoch, permitted cohort, decoder provenance, tokenizer/prefill and ordinary local ownership. See the [existing first-run handoff](/tmp/decoder-training-original-parent-retention-private-v01/first-run-handoff.json) and [checker](/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/check_design.py:3208).
+
+The proposed first measured teacher pilot has nine attempts per selected configuration and seed: one source-only arm, four teacher-specific tap-only arms and four relational arms. Compare each relational arm with its own tap-only control, then inspect tap-only versus source-only for instrumentation effects. Preserve all four teachers, common TRAIN membership, complete outputs, checkpoints, observation schedule and paid work. Freeze the registered study, thresholds, seed/checkpoint grid, retention reference and untouched FINAL custody before the measured comparison. This is a teacher-supervision pilot; the broader conditioning and distillation grid remains a later comparison. Nothing here selects either operation.
+
+## 2. Source selection uses the existing paired route
+
+The original Source owner selects the current Datasets and Accelerate physical roots, exact HEAD/tree/index/exclude expectations, approved role list, funded ledger, byte ceilings, namespace and launch window. Preserve every prior charge. The original paired selector must actually close with its ref-stream commitments and terminal evidence before the existing Reader consumes the selected plan. The Reader observes and authenticates both indexes inside that operation. See the [held Reader](/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/reader.py.DATA:265) and [index verification](/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/verify_standalone_git.py:316).
+
+A separate standalone READ1 is an owner sequencing option, not a v4 Reader API prerequisite. If the owner retains that option, price it separately. If the owner chooses the integrated observation, retain all paired opening, closing and Source guards. The user's Source-cap increase authorization persists; the existing owner can apply it with a fresh exact ledger and scope without another generic confirmation. This does not select numerical compute budgets or create a new reader, profile, supervisor or queue.
+
+Guide581 is the last saved decoder handoff boundary, not a current physical allocation. Its Datasets index was 7,070,589 bytes, and its qualified physical Accelerate index was 4,469,929 bytes. Two reads plus their growth sentinels total 11,540,520 bytes, exceeding the historical 6,356,992-byte headroom by 5,183,528 bytes before bodies, reports or other owner overhead. Published, writer and qualified physical Accelerate commits remain distinct. Later Git publications do not rebind physical file metadata, import roles, budget or lease custody. The next current quote belongs to the existing owner.
+
+## 3. Corpus review and decoder provenance can advance independently
+
+Route the retained [LIR-0602 request](/tmp/decoder-training-lir0602-owner-choice-private-v01-rbc6d3du/owner-choice-request.INERT.json) through the existing internal review owner. It needs the original documentary selection and independently bound §7214 finding, or an explicit unresolved disposition. That return feeds the original complete TRAIN and separately reviewed DEVELOPMENT admissions. It does not itself admit either partition. The [joint cohort candidate](/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/descriptor.json) keeps TRAIN, DEVELOPMENT and Source-epoch inputs null. LIR-1701 retains separate opaque FINAL custody.
+
+The original decoder and checkpoint owners select the exact current backend, tokenizer, configuration, assets and pristine origin. The optimized Qwen route also retains its original calibration/import and independent zero-step reload. Qualification of a new candidate or ByteLevel migration remains separate from historical checkpoint identity. Use the existing backend and resource owners; no new model execution is granted by this handoff.
+
+## 4. Teacher evidence is scoped
+
+| Teacher | Held producer facts | What still needs selection and authentication |
+|---|---|---|
+| spaCy 8D | Hashed linguistic features, L2 normalization and six-decimal rounding; historical target-aware acquisition is identified | Source-only extraction profile, exact pipeline, current common-cohort close |
+| GTE-small 384D | Pinned model/revision and mean-pooling producer; eight historical source inputs | Exact current assets/profile and eligible common-cohort close |
+| Multilingual GTE-base 768D | Pinned model/code revisions and CLS-pooling producer; historical operation used an effective 512-token limit | Current limit and assets/profile; the 8192 label does not prove long-context execution |
+| Leanstral 4096D | Two closed source-only full-forward engineering observations | Current assets/profile and admitted common TRAIN/evaluation rows |
+
+All four current run-profile selections remain unresolved. Dimensions do not establish a shared semantic space. See the [four-teacher evidence handoff](/tmp/decoder-training-four-teacher-first-pilot-private-v01-5d2m6_ru/evidence-handoff.json). Historical vectors, fictional approvals and prior zero-exact held-out outputs cannot supply the missing current admissions.
+
+## 5. Immediate deliverables and remaining research
+
+The immediate outputs are the existing integration specification and conditional executable experiment design, including versioned records, capability declarations, gradient/state boundaries, matched controls, original-owner calls and failure behavior. The seven-stage program still requires actual independent fidelity, validity, abstention, retention, cost-to-threshold and portability evidence. Proposed thresholds and checkpoint schedules remain unselected. Preserve historical failed attempts and original charges. All selected future validation uses local existing owners.
+
+The coordination connector was unavailable during the current audit. Saved owner messages describe separate cache work and supply no Stage A selection. No Source, teacher producer, training, evaluation or deployment was launched by this update.
