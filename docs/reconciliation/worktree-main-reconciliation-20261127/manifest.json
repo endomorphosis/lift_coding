@@ -1,0 +1,150 @@
+{
+  "accelerate_main": "e55316f48847b17a8b4041a2da30bcaa0ba6eb90",
+  "additional_home_variants": [
+    {
+      "archive": "additional-home-variants/ipfs_accelerate_py/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py.DATA",
+      "bytes": 352169,
+      "disposition": "retained historical or superseded working-file variant; no maintained-code adoption",
+      "original": "/home/barberb/ipfs_accelerate_py/ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+      "sha256": "5ba32bec29c8d0119a690cad52d3de78ad3874811116046df4e27cfb0b0c1339"
+    },
+    {
+      "archive": "additional-home-variants/ipfs_accelerate_py/docs/architecture/knowledge_graphs_production_hardening.todo.md.DATA",
+      "bytes": 0,
+      "disposition": "retained historical or superseded working-file variant; no maintained-code adoption",
+      "original": "/home/barberb/ipfs_accelerate_py/docs/architecture/knowledge_graphs_production_hardening.todo.md",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive": "additional-home-variants/ipfs_datasets_py/docs/architecture/knowledge_graphs_production_hardening.objectives.md.DATA",
+      "bytes": 31516,
+      "disposition": "retained historical or superseded working-file variant; no maintained-code adoption",
+      "original": "/home/barberb/ipfs_datasets_py/docs/architecture/knowledge_graphs_production_hardening.objectives.md",
+      "sha256": "31d46f722408a4dbbe99c1783bc5c8dece95b1038ec1585a0d8a2f15791fcc4d"
+    }
+  ],
+  "home_working_file_packet": "../home-checkout-source-preservation-20261127/manifest.json",
+  "hosted_ci_dispatched": false,
+  "kit_reconciliation": {
+    "head": "b15442e490dc39d046a911ea663c73c99ed3c755",
+    "service_test": {
+      "difference": "equivalent wrapping of the _config function signature",
+      "eight_test_bodies_and_cleanup": "identical",
+      "remote_blob": "bb6540e53ee855dc073fdb9cf5ffbf45db3ab902",
+      "working_blob": "c0ac8ec11e5e74cc650916676b083da643c47313"
+    },
+    "workflow": {
+      "remote_blob": "d4ea72a86e7ec34a67226e745143ff82afd444c2",
+      "working_blob": "d4ea72a86e7ec34a67226e745143ff82afd444c2"
+    }
+  },
+  "known_duplicates": {
+    "datasets": [
+      "dbacb17",
+      "362650f",
+      "de261f4",
+      "f347383"
+    ],
+    "kit_service_tests": "only-equivalent-signature-formatting",
+    "kit_workflow": "byte-identical-to-main"
+  },
+  "local_tests_passed": 368,
+  "parent_pin_main": "0e4e509048c7486bff76ec2939d4abc62ed4a6b9",
+  "registered_datasets_and_accelerate_worktrees_checked": 58,
+  "remaining_history_preservation_packet": "../retained-portland-legal-work-20261127/restore.json",
+  "root_working_authored_comparison": {
+    "gitignore_local_lines_not_in_main": 0,
+    "gitmodules_identical_to_published": true,
+    "implementation_docs_identical_to_published": 21,
+    "older_doc_variants_retained": 2,
+    "scripts_identical_to_published": 19,
+    "tests_identical_to_published": 15
+  },
+  "schema": "worktree-main-reconciliation-publication/v1",
+  "source_snapshots": {
+    "accelerate-publication.json": {
+      "bytes": 475,
+      "original": "/tmp/lift-origin-main-reconcile-private-A8hmZDEd/accelerate-publication.json",
+      "role": "verified-normal-publication",
+      "sha256": "3d8d3a56aedd62c2b08a171715b521b93958f78606b2464d0182540f12de5622"
+    },
+    "board-monitor-tests/junit.xml.DATA": {
+      "bytes": 58854,
+      "original": "/tmp/accelerate-board-monitor-current-main-k3xn37mM/local-check/junit.xml",
+      "role": "local-test-result",
+      "sha256": "67f238d715fba518733b776d1493042e42f2e06e1b7bd92ff8a13f18eeb8c5cd"
+    },
+    "inventory/compact-inventory.json": {
+      "bytes": 1351908,
+      "original": "/tmp/lift-coding-tmp-git-inventory-hJPsp5dx/compact-inventory.json",
+      "role": "local-git-inventory-observation",
+      "sha256": "d7e6b97d0142944780b2a8fc081573fe2a129cc24a6f6d7159706069c48e7446"
+    },
+    "inventory/scoped-small-worktree-content-comparison.json": {
+      "bytes": 58158,
+      "original": "/tmp/lift-coding-tmp-git-inventory-hJPsp5dx/scoped-small-worktree-content-comparison.json",
+      "role": "local-git-inventory-observation",
+      "sha256": "9c8c670ed5daae28c200d63ba9c71cde1f63bb6cb30eeb0893279a889b7239bf"
+    },
+    "inventory/single-commit-branch-review.json": {
+      "bytes": 10350,
+      "original": "/tmp/lift-coding-tmp-git-inventory-hJPsp5dx/single-commit-branch-review.json",
+      "role": "local-git-inventory-observation",
+      "sha256": "d1ead6624206f27d3d1abcf62adc3babb93db618fb3b57e0d32dfdd1372285d8"
+    },
+    "parent-pin-publication.json": {
+      "bytes": 420,
+      "original": "/tmp/lift-origin-main-reconcile-private-A8hmZDEd/parent-pin-publication.json",
+      "role": "verified-normal-publication",
+      "sha256": "224cd7df6a640254ac99f89216212f2dfc1a622eda3f8dcc4eea6a118acd15cd"
+    },
+    "pending-transport-draft/red.exit.DATA": {
+      "bytes": 2,
+      "original": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/red.exit",
+      "role": "unvalidated-draft-or-setup-failure",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "pending-transport-draft/red.stderr.DATA": {
+      "bytes": 9166,
+      "original": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/red.stderr",
+      "role": "unvalidated-draft-or-setup-failure",
+      "sha256": "ddd463c50400232970a8e7e6dc05381e9c9f7b1920ce1af4c52cac52e4437a54"
+    },
+    "pending-transport-draft/red.stdout.DATA": {
+      "bytes": 0,
+      "original": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/red.stdout",
+      "role": "unvalidated-draft-or-setup-failure",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "pending-transport-draft/test_transport_scope.py.DATA": {
+      "bytes": 6059,
+      "original": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/test_transport_scope.py",
+      "role": "unvalidated-draft-or-setup-failure",
+      "sha256": "411a5264800c8e686dd263ab42a6e40ce984a52941202b7ec65e90b6dd1ce373"
+    },
+    "remote-main-readbacks.json": {
+      "bytes": 1817,
+      "original": "git ls-remote refs/heads/main",
+      "role": "verified-current-remote-ref-observations",
+      "sha256": "e24ff8ebd0f6c12b400c2a7ac9b6b2e60e4011768cef76e4565e92c5b693705d"
+    },
+    "retained-variants/58-autoencoder-progress-integration-2026-10-06.md.DATA": {
+      "bytes": 12552,
+      "original": "/home/barberb/lift_coding/implementation_plan/docs/58-autoencoder-progress-integration-2026-10-06.md",
+      "role": "superseded-local-document-variant",
+      "sha256": "aa10ce001b3558654b9b1abddfd24600d509913a90c39b50cbb696be9c35426b"
+    },
+    "retained-variants/59-autoencoder-progress-reconciliation-2026-10-06.md.DATA": {
+      "bytes": 3105,
+      "original": "/home/barberb/lift_coding/implementation_plan/docs/59-autoencoder-progress-reconciliation-2026-10-06.md",
+      "role": "superseded-local-document-variant",
+      "sha256": "6e91b8bd82d578ef49a6f61829b5db8c791e0f49d5dccef0bbec82663f3cea4b"
+    }
+  },
+  "tmp_scope": {
+    "common_directories": 70,
+    "copies_and_worktrees": 85,
+    "discovery_depth": 6,
+    "distinct_tips": 548
+  }
+}

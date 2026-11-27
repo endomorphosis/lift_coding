@@ -1,0 +1,336 @@
+{
+  "checked_out_scope": "portland-laws.github.io/workspace/codex-work",
+  "comparison": "Current origin/main ancestry, git cherry, changed endpoint paths, and exact object IDs in the previously published November 24 and November 27 preservation archives.",
+  "content_review": "Tracked source, tests, configuration and historical documentation. Credential-like signatures were reviewed and identified as synthetic leakage controls and test fixtures. The historic 179-byte discovery checkpoint records identifiers, a phase and booleans. No application runtime DB, model weights or raw corpus dump was included.",
+  "excluded_ancestral_checkouts": [
+    {
+      "ahead": 0,
+      "behind": 5607,
+      "checkout": "legal-corpora-reindex-mi-xml-validator-20260828/ipfs_datasets_py",
+      "family": "datasets",
+      "ref": "refs/heads/codex/lcr-final-source-20260828",
+      "tip": "a8191d2510658f330db78b43bc4fad3712973bf0",
+      "tracked_status_rows": 0,
+      "untracked_status_rows": 1
+    },
+    {
+      "ahead": 0,
+      "behind": 6278,
+      "checkout": "uscode-sparse-graphrag/ipfs_datasets_py",
+      "family": "datasets",
+      "ref": "refs/heads/feature/uscode-sparse-graphrag",
+      "tip": "ca04ef7fce3e22b80ff10aa15b15eb11b1870e77",
+      "tracked_status_rows": 0,
+      "untracked_status_rows": 0
+    },
+    {
+      "ahead": 0,
+      "behind": 11220,
+      "checkout": "uscode-sparse-graphrag/ipfs_accelerate_py",
+      "family": "accelerate",
+      "ref": "HEAD",
+      "tip": "34420f615d3eebfefa3cc1a3e4ebf8f51b16afac",
+      "tracked_status_rows": 0,
+      "untracked_status_rows": 0
+    }
+  ],
+  "functional_followup": "Accelerate output-path owner dependencies were identified as a separate source-port candidate. Historical proposal-validation production guards are already represented on current Accelerate main. The bundles preserve their specific historical commit identities and tests.",
+  "repositories": {
+    "accelerate": {
+      "bundle_prerequisite_commits": [
+        "ff605126b6f5e6b7bfa7b7bb688347909de12a43",
+        "fd4ad4579493dd428ff5e9316a1be77f7ab28a00",
+        "34420f615d3eebfefa3cc1a3e4ebf8f51b16afac",
+        "c1e33e8f443253e106c464d7c5b5c341c3095876",
+        "12c4e8387de4986d38d69534f3d74864e7bb15c1"
+      ],
+      "bundled_object_count": 674,
+      "bytes": 1080488,
+      "file": "accelerate-portland-legal-history.bundle",
+      "restored_pack_object_count": 748,
+      "sha256": "11be0151619f127c72ac69310dd54a067e690f104bfeabd9993c5087db84272f",
+      "tips": [
+        {
+          "common_main_ancestor": "12c4e8387de4986d38d69534f3d74864e7bb15c1",
+          "delta_paths_differ_from_current_main": 9,
+          "delta_paths_equal_to_current_main": 0,
+          "merge_commits": 0,
+          "origins": [
+            {
+              "ahead": 4,
+              "behind": 8857,
+              "checkout": "ipfs-accelerate-origin-main-board-isolation-20260817",
+              "ref": "refs/heads/operator/board-isolation-20260817",
+              "tracked_status_rows": 3,
+              "untracked_status_rows": 2
+            }
+          ],
+          "patch_equivalent_nonmerge_commits": 0,
+          "raw_objects": {
+            "blob": 14,
+            "commit": 4,
+            "tree": 25
+          },
+          "retained_ref": "refs/heads/portland-legal/ipfs-accelerate-origin-main-board-isolation-20260817",
+          "tip": "7d9de5e43cc07a63d49033a9735e48c0513b3e87",
+          "unmatched_nonmerge_commits": 4
+        },
+        {
+          "common_main_ancestor": "c1e33e8f443253e106c464d7c5b5c341c3095876",
+          "delta_paths_differ_from_current_main": 37,
+          "delta_paths_equal_to_current_main": 1,
+          "merge_commits": 0,
+          "origins": [
+            {
+              "ahead": 26,
+              "behind": 10290,
+              "checkout": "ipfs-accelerate-slr-origin-main-isolation-20260817",
+              "ref": "refs/heads/operator/slr-origin-main-isolation-20260817",
+              "tracked_status_rows": 8,
+              "untracked_status_rows": 1
+            }
+          ],
+          "patch_equivalent_nonmerge_commits": 0,
+          "raw_objects": {
+            "blob": 74,
+            "commit": 26,
+            "tree": 134
+          },
+          "retained_ref": "refs/heads/portland-legal/ipfs-accelerate-slr-origin-main-isolation-20260817",
+          "tip": "402ef60dd075529cd4d10bc3110fad74781167f8",
+          "unmatched_nonmerge_commits": 26
+        },
+        {
+          "common_main_ancestor": "c1e33e8f443253e106c464d7c5b5c341c3095876",
+          "delta_paths_differ_from_current_main": 51,
+          "delta_paths_equal_to_current_main": 1,
+          "merge_commits": 1,
+          "origins": [
+            {
+              "ahead": 11,
+              "behind": 10290,
+              "checkout": "ipfs_accelerate_py",
+              "ref": "HEAD",
+              "tracked_status_rows": 0,
+              "untracked_status_rows": 0
+            },
+            {
+              "ahead": 11,
+              "behind": 10290,
+              "checkout": "fix-proposal-validation-fail-open-20260811/ipfs_accelerate_py",
+              "ref": "refs/heads/fix/proposal-validation-fail-open-20260811",
+              "tracked_status_rows": 0,
+              "untracked_status_rows": 0
+            }
+          ],
+          "patch_equivalent_nonmerge_commits": 0,
+          "raw_objects": {
+            "blob": 79,
+            "commit": 11,
+            "tree": 76
+          },
+          "retained_ref": "refs/heads/portland-legal/ipfs-accelerate-py",
+          "tip": "cfb66d1c1b727033f8e8a4266df02f52fdc43b5e",
+          "unmatched_nonmerge_commits": 10
+        },
+        {
+          "common_main_ancestor": "c1e33e8f443253e106c464d7c5b5c341c3095876",
+          "delta_paths_differ_from_current_main": 62,
+          "delta_paths_equal_to_current_main": 1,
+          "merge_commits": 1,
+          "origins": [
+            {
+              "ahead": 19,
+              "behind": 10290,
+              "checkout": "federal-register-refill-integrity/ipfs_accelerate_py",
+              "ref": "refs/heads/fix/federal-register-refill-integrity",
+              "tracked_status_rows": 0,
+              "untracked_status_rows": 0
+            }
+          ],
+          "patch_equivalent_nonmerge_commits": 0,
+          "raw_objects": {
+            "blob": 114,
+            "commit": 19,
+            "tree": 122
+          },
+          "retained_ref": "refs/heads/portland-legal/federal-register-refill-integrity",
+          "tip": "fe5eb78ddde05bf744d2c96c43f7c9daa06e5021",
+          "unmatched_nonmerge_commits": 18
+        },
+        {
+          "common_main_ancestor": "c1e33e8f443253e106c464d7c5b5c341c3095876",
+          "delta_paths_differ_from_current_main": 65,
+          "delta_paths_equal_to_current_main": 1,
+          "merge_commits": 1,
+          "origins": [
+            {
+              "ahead": 20,
+              "behind": 10290,
+              "checkout": "federal-register-reindex/ipfs_accelerate_py",
+              "ref": "HEAD",
+              "tracked_status_rows": 6,
+              "untracked_status_rows": 1
+            }
+          ],
+          "patch_equivalent_nonmerge_commits": 0,
+          "raw_objects": {
+            "blob": 123,
+            "commit": 20,
+            "tree": 129
+          },
+          "retained_ref": "refs/heads/portland-legal/federal-register-reindex",
+          "tip": "17923c9844a6941aeeeb651c313b4e70a7e81f28",
+          "unmatched_nonmerge_commits": 19
+        },
+        {
+          "common_main_ancestor": "c1e33e8f443253e106c464d7c5b5c341c3095876",
+          "delta_paths_differ_from_current_main": 62,
+          "delta_paths_equal_to_current_main": 1,
+          "merge_commits": 1,
+          "origins": [
+            {
+              "ahead": 19,
+              "behind": 10290,
+              "checkout": "federal-register-supervisor-retry-recovery/ipfs_accelerate_py",
+              "ref": "refs/heads/fix/federal-register-attempt-limit-recovery",
+              "tracked_status_rows": 0,
+              "untracked_status_rows": 0
+            }
+          ],
+          "patch_equivalent_nonmerge_commits": 0,
+          "raw_objects": {
+            "blob": 118,
+            "commit": 19,
+            "tree": 122
+          },
+          "retained_ref": "refs/heads/portland-legal/federal-register-supervisor-retry-recovery",
+          "tip": "6a46f98369daaddfe12d3a1636e9210a58f8589a",
+          "unmatched_nonmerge_commits": 18
+        },
+        {
+          "common_main_ancestor": "ff605126b6f5e6b7bfa7b7bb688347909de12a43",
+          "delta_paths_differ_from_current_main": 16,
+          "delta_paths_equal_to_current_main": 2,
+          "merge_commits": 1,
+          "origins": [
+            {
+              "ahead": 12,
+              "behind": 12097,
+              "checkout": "patent-legal-intelligence/ipfs_accelerate_py",
+              "ref": "refs/heads/feature/patent-legal-supervisor",
+              "tracked_status_rows": 3,
+              "untracked_status_rows": 2
+            }
+          ],
+          "patch_equivalent_nonmerge_commits": 5,
+          "raw_objects": {
+            "blob": 35,
+            "commit": 12,
+            "tree": 73
+          },
+          "retained_ref": "refs/heads/portland-legal/patent-legal-intelligence",
+          "tip": "494618d4a8127adc9f3a215bd7fc7b5c0e581b3c",
+          "unmatched_nonmerge_commits": 6
+        }
+      ],
+      "url": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "verified_exact_object_set": true,
+      "verified_main": "e55316f48847b17a8b4041a2da30bcaa0ba6eb90",
+      "verified_thin_pack_delta_bases_from_current_main": 74
+    },
+    "datasets": {
+      "bundle_prerequisite_commits": [
+        "a103b31fc8796a17a2ec308d27715bb3945534b8",
+        "c8c076a65febadc941367997620a738d67998978"
+      ],
+      "bundled_object_count": 3066,
+      "bytes": 2232654,
+      "file": "datasets-portland-legal-history.bundle",
+      "restored_pack_object_count": 3176,
+      "sha256": "feb8a9906e06b6dd8cd5953dffa4b5a959831dff207a13877948935325dfd324",
+      "tips": [
+        {
+          "common_main_ancestor": "c8c076a65febadc941367997620a738d67998978",
+          "delta_paths_differ_from_current_main": 28,
+          "delta_paths_equal_to_current_main": 0,
+          "merge_commits": 6,
+          "origins": [
+            {
+              "ahead": 20,
+              "behind": 6456,
+              "checkout": "federal-register-plan-hardening/ipfs_datasets_py",
+              "ref": "refs/heads/operator/federal-register-plan-hardening",
+              "tracked_status_rows": 0,
+              "untracked_status_rows": 0
+            }
+          ],
+          "patch_equivalent_nonmerge_commits": 0,
+          "raw_objects": {
+            "blob": 38,
+            "commit": 20,
+            "tree": 102
+          },
+          "retained_ref": "refs/heads/portland-legal/federal-register-plan-hardening",
+          "tip": "5caee51dea6ebba77b049e83843860606e867c69",
+          "unmatched_nonmerge_commits": 14
+        },
+        {
+          "common_main_ancestor": "c8c076a65febadc941367997620a738d67998978",
+          "delta_paths_differ_from_current_main": 247,
+          "delta_paths_equal_to_current_main": 1,
+          "merge_commits": 83,
+          "origins": [
+            {
+              "ahead": 272,
+              "behind": 6456,
+              "checkout": "federal-register-reindex/ipfs_datasets_py",
+              "ref": "refs/heads/feature/federal-register-reindex",
+              "tracked_status_rows": 0,
+              "untracked_status_rows": 0
+            }
+          ],
+          "patch_equivalent_nonmerge_commits": 1,
+          "raw_objects": {
+            "blob": 458,
+            "commit": 272,
+            "tree": 1308
+          },
+          "retained_ref": "refs/heads/portland-legal/federal-register-reindex",
+          "tip": "64b7c2f846f62fe74a9778fbe52f39052df27031",
+          "unmatched_nonmerge_commits": 188
+        },
+        {
+          "common_main_ancestor": "a103b31fc8796a17a2ec308d27715bb3945534b8",
+          "delta_paths_differ_from_current_main": 97,
+          "delta_paths_equal_to_current_main": 10,
+          "merge_commits": 33,
+          "origins": [
+            {
+              "ahead": 116,
+              "behind": 7159,
+              "checkout": "patent-legal-intelligence/ipfs_datasets_py",
+              "ref": "refs/heads/feature/patent-automated-application-review",
+              "tracked_status_rows": 35,
+              "untracked_status_rows": 37
+            }
+          ],
+          "patch_equivalent_nonmerge_commits": 0,
+          "raw_objects": {
+            "blob": 176,
+            "commit": 116,
+            "tree": 727
+          },
+          "retained_ref": "refs/heads/portland-legal/patent-legal-intelligence",
+          "tip": "4003799a00df8764e3c91d0241ee75e975626269",
+          "unmatched_nonmerge_commits": 83
+        }
+      ],
+      "url": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "verified_exact_object_set": true,
+      "verified_main": "7c0d40925436665bd90f62941d66ec63edadfb5b",
+      "verified_thin_pack_delta_bases_from_current_main": 110
+    }
+  },
+  "schema": "portland-legal-work-history-preservation/v1"
+}

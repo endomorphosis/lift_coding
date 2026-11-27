@@ -1,0 +1,405 @@
+{
+  "credential_marker_families_checked": [
+    "pem_private_key",
+    "github_token",
+    "aws_access_key",
+    "provider_token",
+    "jwt",
+    "credential_url",
+    "raw_key_assignment"
+  ],
+  "families": {
+    "accelerate": {
+      "checkout_head": "a2f7213b63989df96a8bb5b6b84b8d47ec7f7e08",
+      "dirty_entry_count": 18,
+      "excluded": [
+        {
+          "bytes": 352169,
+          "git_blob": "398431cb10a719460aedd54b926bf2fac287e4f4",
+          "path": "ipfs_accelerate_py/agent_supervisor/todo_daemon/implementation_supervisor.py",
+          "reason": "Live main retains the campaign scan and stall methods. Live retry uses the equivalent capability decision with a revision- and claim-bound quarantine. The old validation-process command markers have been replaced by managed process observation.",
+          "sha256": "5ba32bec29c8d0119a690cad52d3de78ad3874811116046df4e27cfb0b0c1339",
+          "status": " M"
+        },
+        {
+          "bytes": 13657,
+          "git_blob": "7e172145095b5537b8a2cd766d0dda7f6af99478",
+          "path": "test/duckdb_api/visualization/advanced_visualization/test_customizable_dashboard.py",
+          "reason": "exact published blob",
+          "sha256": "3b0442d822c022e720cf40261890e8758a4f3cd994ab9256670e43ea9325a2f5",
+          "status": " M"
+        },
+        {
+          "bytes": 21182,
+          "git_blob": "5ed74e915e909fdabf5009c3708f74decab6e508",
+          "path": "test/run_webgpu_optimizer_benchmarks.py",
+          "reason": "exact published blob",
+          "sha256": "72f2f588a5689558da0dc479eb9621135a1329bcf3a70eefe7c6d84e2e095bea",
+          "status": " M"
+        },
+        {
+          "bytes": 5556,
+          "git_blob": "12325f66f4d4726f83d0fb121773eff47fe2255c",
+          "path": "test/skills/test_hf_flan_t5.py",
+          "reason": "exact published blob",
+          "sha256": "102638200d5571422d95d50f546e19d4bc592b06957ac66d7d3cdb65c9b8abb0",
+          "status": " M"
+        },
+        {
+          "bytes": 5488,
+          "git_blob": "54f4691fd6873590788330fc38fe5ef0d0fd3b10",
+          "path": "test/skills/test_hf_gpt_j.py",
+          "reason": "exact published blob",
+          "sha256": "b5c16d8636e86d392b3bb385028c8bc76b9e3f66395aabd25ea11a7b38d23c52",
+          "status": " M"
+        },
+        {
+          "bytes": 32486,
+          "git_blob": "5ee719dfc87757899c406897fe39299b0e3ab37f",
+          "path": "test/skills/test_hf_mlp_mixer.py",
+          "reason": "exact published blob",
+          "sha256": "969e556f412e8f32682932fd5e5b34910e87262534b30afbafefb19d300a6964",
+          "status": " M"
+        },
+        {
+          "bytes": 28942,
+          "git_blob": "9e4d89e12da109852976aea4a224b43c41795b2c",
+          "path": "test/skills/test_hf_speech_to_text.py",
+          "reason": "exact published blob",
+          "sha256": "1e3816d27aea4ae53246bc70f9635ccf5daaf3bf24428193af8e710626c3a449",
+          "status": " M"
+        },
+        {
+          "bytes": 30356,
+          "git_blob": "55fc09bf088f64756a09e6e9e91edfb76ec814f3",
+          "path": "test/skills/test_hf_transfo_xl.py",
+          "reason": "exact published blob",
+          "sha256": "b4eca50f282b848e83f4f798e45cd201ea73b7e98be1a6e60e2871cd6067a529",
+          "status": " M"
+        },
+        {
+          "bytes": 5882,
+          "git_blob": "1fa68b16f237e96605e98baf0a62de101f0d06d2",
+          "path": "test/skills/test_hf_vision_text_dual_encoder.py",
+          "reason": "exact published blob",
+          "sha256": "a009ea51815f84ffb43e70d349a008b13696d0bbf75e2ed89544737642ddd5f6",
+          "status": " M"
+        },
+        {
+          "bytes": 5581,
+          "git_blob": "1e4169d9011de965a7f49d3c82053bf5a0dc2085",
+          "path": "test/skills/test_hf_xlm_roberta.py",
+          "reason": "exact published blob",
+          "sha256": "214e15b9facadf53bcaca3cf0489ffc681febfd53c035bdb9bd89f5b112397e7",
+          "status": " M"
+        },
+        {
+          "path": "docs/architecture/knowledge_graphs_production_hardening.todo.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "bytes": 6441,
+          "git_blob": "915043695be7bde48e6fbe276803963da976ea05",
+          "path": "ipfs_accelerate_py/agent_supervisor/campaign_host_capability.py",
+          "reason": "exact published blob",
+          "sha256": "3ba8ffb6e0a35732dc9db934afe9e8544d965ff37b95dfa310bd3f20e13bb63a",
+          "status": "??"
+        },
+        {
+          "bytes": 2730,
+          "git_blob": "8553f2e8a7fee4ee11193bff7c7f6ec47bac46ba",
+          "path": "test/api/test_agent_supervisor_campaign_host_capability.py",
+          "reason": "exact published blob",
+          "sha256": "0a2695563e1cc13da1aa8cb19ba2253f0a57baabe304fc60b2e48058a147c1fb",
+          "status": "??"
+        }
+      ],
+      "origin_main": "e55316f48847b17a8b4041a2da30bcaa0ba6eb90",
+      "retained": [
+        {
+          "archive": "accelerate/ipfs_accelerate_py/agent_supervisor/duckdb_state.py.DATA",
+          "bytes": 17484,
+          "checkout_head_blob": "99ba190e4b6ddcb52ba1574a08a2a0e7d1b64304",
+          "current_logical_path": "ipfs_accelerate_py/agent_supervisor/task_sources/duckdb_state.py",
+          "git_blob": "71974ed073c7f5540eae19f8104271d529d9b9bd",
+          "origin_main_blob": "c1e985fe4055e9b50159ce457ea9464ce993fdb1",
+          "path": "ipfs_accelerate_py/agent_supervisor/duckdb_state.py",
+          "sha256": "ed47b3a62f4d84ec2f391a3c92aba1d7b1318567add9c1aa556cdf7f83968225",
+          "source_mode": "0664",
+          "status": " M"
+        },
+        {
+          "archive": "accelerate/pytest.ini.DATA",
+          "bytes": 3295,
+          "checkout_head_blob": "03280dd06e9ae23f6db46d173c43ca26057de158",
+          "current_logical_path": "pytest.ini",
+          "git_blob": "a9a16e4ebefa1aeb5a45da54e5a5abe2c48006e4",
+          "origin_main_blob": "a5e40001ca00b5975f03cdddc5f679779c03bc7e",
+          "path": "pytest.ini",
+          "sha256": "e746499aede56cb746d3daa6c289187cb7bcd0201c13bcb584faf6f12965f9e5",
+          "source_mode": "0775",
+          "status": " M"
+        },
+        {
+          "archive": "accelerate/test/api/conftest.py.DATA",
+          "bytes": 1017,
+          "checkout_head_blob": "68030b22a6b81fc51210aad61fa31f7cdbed94a2",
+          "current_logical_path": "test/api/conftest.py",
+          "git_blob": "2ea8bda3240553ac934c327a8a2064f0de90f1cc",
+          "origin_main_blob": "fdf7e3e0fda18d0860b490b7b1f038cf899f2db6",
+          "path": "test/api/conftest.py",
+          "sha256": "c4da7b08f0c7cdbf731b65cdd2091462b25e8a76913f6cd54b665e7bf00b13b4",
+          "source_mode": "0775",
+          "status": " M"
+        },
+        {
+          "archive": "accelerate/test/api/test_agent_supervisor_duckdb_state.py.DATA",
+          "bytes": 9467,
+          "checkout_head_blob": "71a062de7a40883437b7c0ee46577d73440af299",
+          "current_logical_path": "test/api/test_agent_supervisor_duckdb_state.py",
+          "git_blob": "565315963591a4848fc6ee9f74565f2dd4f32279",
+          "origin_main_blob": "36c622cc81eabfad2ed01796ca1d583936a7df0d",
+          "path": "test/api/test_agent_supervisor_duckdb_state.py",
+          "sha256": "4d11aee02ad9934e9858eb1ef4f9c081002f9d11f9e41a4eea1a07395204315e",
+          "source_mode": "0664",
+          "status": " M"
+        },
+        {
+          "archive": "accelerate/test/pytest.ini.DATA",
+          "bytes": 2241,
+          "checkout_head_blob": "0283f840a31ad0e7d1580c17799f8b313e009112",
+          "current_logical_path": "test/pytest.ini",
+          "git_blob": "a0770c1298df08a1391fe8c5c8c7c52b39e70927",
+          "origin_main_blob": "7198ac0e6326fe98f79d5e14d6326e11e7c2c071",
+          "path": "test/pytest.ini",
+          "sha256": "f68c6219a2923d0d385bd1f866c73049843f7ce11c8066004d0cf9a8f0b6803f",
+          "source_mode": "0775",
+          "status": " M"
+        }
+      ]
+    },
+    "datasets": {
+      "checkout_head": "7f0d38572f92f5fc0cba7a5ddd4bef28523876f3",
+      "dirty_entry_count": 39,
+      "excluded": [
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/bundles/.index.duckdb.lock",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/bundles/index.json",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/bundles/knowledge-graphs-adoption.todo.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/bundles/knowledge-graphs-baseline.todo.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/bundles/knowledge-graphs-control-plane.todo.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/bundles/knowledge-graphs-corpora.todo.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/bundles/knowledge-graphs-query-sharding.todo.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/bundles/knowledge-graphs-reliability.todo.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/bundles/knowledge-graphs-root.todo.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/bundles/knowledge-graphs-surfaces.todo.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/bundles/knowledge-graphs-transactions.todo.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/bundles/knowledge-graphs-ucan.todo.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/discovery/2026-07-29-kgp-036-objective-gap-2f8f50b34b69.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/discovery/2026-07-29-kgp-037-objective-gap-1122d5298b0c.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/discovery/2026-07-29-kgp-038-objective-gap-41d8fde4986a.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/discovery/2026-07-29-kgp-039-objective-gap-410184b4078a.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/discovery/2026-07-29-kgp-040-objective-gap-88aaa809eae8.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/discovery/2026-07-29-kgp-041-objective-gap-8ffedab092b6.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/discovery/2026-07-29-kgp-042-objective-gap-0b703a243441.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/discovery/2026-07-29-kgp-043-objective-gap-14ba135f6651.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/discovery/2026-07-29-kgp-044-objective-gap-1c98bc14d11e.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/discovery/2026-07-29-kgp-045-objective-gap-dc5190fd8946.md",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/objective_graph.json",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/parallel/worktrees/lane-00/.pool-state/79522904108b-f8c659839e96.json",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/parallel/worktrees/lane-00/.pool-state/7bedf42df035-4e7b498fc2a2.json",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/parallel/worktrees/lane-00/.pool-state/90214f147580-21cd076ca0c8.json",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/parallel/worktrees/lane-00/.pool-state/9f3f738583bf-a23cdbbf300e.json",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/parallel/worktrees/lane-00/.pool-state/9f3f738583bf-a23cdbbf300e.lock",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/parallel/worktrees/lane-00/.pool-state/d838e56c5a6a-529d1f198cbf.json",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/parallel/worktrees/lane-01/.pool-state/2d57c77e0a62-cbe668692b7e.json",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/parallel/worktrees/lane-01/.pool-state/4aaafa7f3a77-5968c857a0f2.json",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/parallel/worktrees/lane-01/.pool-state/ae93c105decd-0039554e5ad6.json",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/parallel/worktrees/lane-01/.pool-state/ae93c105decd-0039554e5ad6.lock",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/parallel/worktrees/lane-01/.pool-state/e0cd82e61e1b-f21790651f0e.json",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/knowledge_graphs_production_hardening/parallel/worktrees/lane-01/workspace-ae93c105decd-0039554e5ad6/.agent_cwd",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/objective_generation.json",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "path": "data/agent_supervisor/plan_evaluations.json",
+          "reason": "generated taskboard, runtime state, or machine evidence",
+          "status": "??"
+        },
+        {
+          "bytes": 31516,
+          "git_blob": "6ad8ef808dd664320ee0ae428b3509cf3f537fcc",
+          "path": "docs/architecture/knowledge_graphs_production_hardening.objectives.md",
+          "reason": "Combines authored objectives with generated current completion, evidence, analyzer, quorum and transition fields.",
+          "sha256": "31d46f722408a4dbbe99c1783bc5c8dece95b1038ec1585a0d8a2f15791fcc4d",
+          "status": "??"
+        }
+      ],
+      "origin_main": "95dc193c3a4a37f9c9227da640a346b2cd58e54c",
+      "retained": [
+        {
+          "archive": "datasets/docs/architecture/KNOWLEDGE_GRAPHS_PRODUCTION_HARDENING_PLAN_2026_07_29.md.DATA",
+          "bytes": 12459,
+          "checkout_head_blob": null,
+          "current_logical_path": "docs/architecture/KNOWLEDGE_GRAPHS_PRODUCTION_HARDENING_PLAN_2026_07_29.md",
+          "git_blob": "3b12e1d0774de8383dc6085813d9ef73811610bf",
+          "origin_main_blob": null,
+          "path": "docs/architecture/KNOWLEDGE_GRAPHS_PRODUCTION_HARDENING_PLAN_2026_07_29.md",
+          "sha256": "5a3bac18ac791d46f6da4c2415d31e8ab89ae9eb8d42f57c5128db499ac6dece",
+          "source_mode": "0664",
+          "status": "??"
+        }
+      ]
+    }
+  },
+  "prior_archive": {
+    "git_reference": "54c824aa30:docs/reconciliation/retained-legal-autoformalization-work-20261127/manifest.json",
+    "sha256": "f69ea12aa5241af8ba051d7ea202920dd782b5950d84ad3103c49a7447331fb8"
+  },
+  "project_runtime_invoked": false,
+  "schema": "home-checkout-source-preservation/v1",
+  "source_worktrees_changed": false,
+  "status": "historical-authored-source-retention"
+}

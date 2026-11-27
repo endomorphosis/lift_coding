@@ -1,0 +1,15 @@
+# Autoencoder findings reconciled with the shared source tree
+
+This follow-up to the October 6 progress review integrates newly published contextual replay and normative-wording findings before another training experiment. The [package guide](../../external/ipfs_datasets/docs/autoencoders/progress_reconciliation_20261006.md) maps the compatible source, measurements, limits and next retention observation.
+
+The [branch/worktree review](../../artifacts/autoencoder-progress-reconcile-20261006/branches/branch-worktree-review.md) covers 423 package refs/19 worktrees and 338 workspace refs/35 worktrees at pinned snapshots. Existing relevant branch contributions are already on main; older trees are not replayed over later implementations. The [twenty-study evidence catalog](../../artifacts/autoencoder-progress-reconcile-20261006/evidence/evidence-review.md) preserves exact checkpoints, codecs, source cohorts, embedding profiles and admission distinctions.
+
+The shared checkout had omitted published code even though main retained it. Exact additive restoration plus two bounded owner merges make 219 reviewed main paths available and byte/mode identical in the source-of-truth tree. Existing dirty owners, ordinary HEADs/indexes, locked worktrees, HACC and hallucinate_app are preserved. Three codebase timeout routes still require explicit resource-profile reconciliation; the current scheduler is preserved. The opt-in working-copy audit now exposes missing/modified canonical files independently from Git ancestry and main retention.
+
+A four-file grouped deontic decoder/evaluator contribution from local agent work is integrated after 161 tests against main dependencies and canonical source. Its deterministic, source-withheld request/AST/Lean rendering does not qualify legal meaning, teach a model or admit a proof. The broader grouped-span learned models and source-parser/provenance changes remain pending their own scope, source and numerical review.
+
+The selected recovery/API tests pass 621; working-tree audit tests pass 29; grouped-interface tests pass 161. These 811 targeted tests measure integration contracts. No model training, Hub transfer, new weight download or Lake admission is granted by that result.
+
+The next bounded experiment is exposed-v3 retention on the four latest normative selected tensors, before additional fitting. It preserves two exact archived zero controls, a durable reference barrier and full 48-source/180-rule/720-scalar-site accounting. The [private proposal](../../artifacts/autoencoder-progress-reconcile-20261006/retention/README.md) records its 36 pure contracts, 1,297 authenticated inputs, source tree, resource budget and execution gate. Actual observation results will be contributed separately after publication and independent guardian readiness pass.
+
+Legal, Intent, Security and UI projections remain modality-specific. The eight-family Legal floor and code/state/TLA+ requirements are not replaced by this scalar or grouped IR interface. Actual applicable Lake builds remain the only Lean admission. The Constitution remains unformalized.

@@ -1,0 +1,315 @@
+# Knowledge Graphs Production Hardening Objective Heap
+
+This heap is the durable source of intent for program `KGP`. A task status,
+passing unit coverage, or prose assertion is not completion evidence. Each goal
+requires fresh validation bound to the current repository tree and its exact
+acceptance criteria.
+
+## KGP-G000 Production-grade multi-graph knowledge graph platform
+
+- Status: provisionally_complete
+- Parent:
+- Fib priority: 1
+- Track: knowledge-graphs
+- Priority: P0
+- Bundle: knowledge-graphs/root
+- Goal: Make `ipfs_datasets_py.knowledge_graphs` the durable, concurrent, authorized, sharded, multi-surface platform for the repository's heterogeneous knowledge graphs without migrating a producer before its evidence gates pass.
+- Evidence: docs/architecture/KNOWLEDGE_GRAPHS_PRODUCTION_HARDENING_PLAN_2026_07_29.md
+- Outputs: ipfs_datasets_py/knowledge_graphs, ipfs_datasets_py/mcp_server, ipfs_datasets_py/ipfs_datasets_cli.py, tests/knowledge_graphs
+- Validation: python -m pytest -q tests/unit/knowledge_graphs tests/integration/knowledge_graphs tests/cli/test_graph_commands.py
+- Acceptance: All exact child goals KGP-G010 through KGP-G100 have fresh current-tree passing evidence; concurrent graph identity and durability are proven; all four surfaces agree; UCAN fails closed; Parquet, IPFS/IPLD, and ipfs_kit_py pass storage contracts; real corpora and load/chaos gates pass; migration remains reversible.
+- Gap task: Implement the highest-priority incomplete child goal without weakening a gate or moving a legacy producer early.
+- Refinement: Preserve separate contracts, durability, storage, sharding/query, surfaces, authorization, corpus, reliability, and adoption workstreams.
+- Embedding query: production knowledge graph concurrent graph catalog parquet ipld ipfs ipfs_kit mcp ucan load migration
+- AST query: KnowledgeGraphManager GraphEngine IPLDBackend TransactionManager ShardedCARBackend
+- Goal completion schema version: 1
+- Completion confidence: 0.083333
+- Uncovered criteria: ["All exact child goals KGP-G010 through KGP-G100 have fresh current-tree passing evidence","concurrent graph identity and durability are proven","all four surfaces agree","UCAN fails closed","Parquet, IPFS/IPLD, and ipfs_kit_py pass storage contracts","real corpora and load/chaos gates pass","migration remains reversible."]
+- Stale evidence: []
+- Analyzer health: {"evidence":{},"passed":false,"reason_code":"analyzer_health_missing","status":"missing"}
+- Exhaustion quorum: {"evidence":{},"member_count":null,"reason_code":"exhaustion_quorum_missing","required_members":null,"satisfied":false,"stale_members":[]}
+- Reopen reasons: []
+- State transitioned at: 2026-07-29T20:34:55.278766+00:00
+- State transition reason: Produce completion evidence for: All exact child goals KGP-G010 through KGP-G100 have fresh current-tree passing evidence; Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree.; Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one.; Require an explicitly healthy analyzer that is safe for completion reasoning.; Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree.; Every descendant must remain verified with all proof requirements fresh, conclusive, uncontradicted, and satisfied.; Task completion is provisional until every criterion has valid evidence.
+- Provisional at: 2026-07-29T20:34:55.278766+00:00
+
+## KGP-G010 Executable truth baseline and compatibility contract
+
+- Status: provisionally_complete
+- Parent: KGP-G000
+- Fib priority: 2
+- Track: baseline
+- Priority: P0
+- Bundle: knowledge-graphs/baseline
+- Goal: Replace coverage-based production claims with executable public-contract failures and a complete inventory of graph producers, artifacts, schemas, consumers, and repository revisions.
+- Evidence: direct CLI and MCP probes from 2026-07-29; docs/knowledge_graphs/MASTER_STATUS.md
+- Outputs: tests/knowledge_graphs/contract, docs/architecture/knowledge_graphs_inventory.md, docs/architecture/knowledge_graphs_contract_matrix.md
+- Validation: python -m pytest -q tests/knowledge_graphs/contract
+- Acceptance: Known CLI/MCP lifecycle failures are reproducible without permissive assertions; every discovered graph producer has an owner/schema/format/count/consumer/revision record; canonical and stale repository copies are identified; completion claims cite executable evidence.
+- Gap task: Add the missing contract probe or graph-producer inventory record.
+- Refinement: Keep behavioral probes independent from repository/artifact inventory so both can start immediately.
+- Embedding query: knowledge graph drift inventory CLI MCP lifecycle persistence contract failures
+- AST query: KnowledgeGraphManager graph_create graph_add_entity graph_query_cypher
+- Goal completion schema version: 1
+- Completion confidence: 0.166667
+- Uncovered criteria: ["Known CLI/MCP lifecycle failures are reproducible without permissive assertions","every discovered graph producer has an owner/schema/format/count/consumer/revision record","canonical and stale repository copies are identified","completion claims cite executable evidence."]
+- Stale evidence: []
+- Analyzer health: {"evidence":{},"passed":false,"reason_code":"analyzer_health_missing","status":"missing"}
+- Exhaustion quorum: {"evidence":{},"member_count":null,"reason_code":"exhaustion_quorum_missing","required_members":null,"satisfied":false,"stale_members":[]}
+- Reopen reasons: []
+- State transitioned at: 2026-07-29T20:34:55.278766+00:00
+- State transition reason: Produce completion evidence for: Known CLI/MCP lifecycle failures are reproducible without permissive assertions; Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree.; Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one.; Require an explicitly healthy analyzer that is safe for completion reasoning.; Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree.; Task completion is provisional until every criterion has valid evidence.
+- Provisional at: 2026-07-29T20:34:55.278766+00:00
+
+## KGP-G020 Canonical graph identity, manifest, catalog, and service
+
+- Status: provisionally_complete
+- Parent: KGP-G000
+- Fib priority: 3
+- Track: architecture
+- Priority: P0
+- Bundle: knowledge-graphs/control-plane
+- Goal: Establish one versioned graph target, immutable revision manifest, durable catalog, and long-lived GraphService used by every entry point.
+- Evidence: KGP-G010 contract and inventory outputs
+- Outputs: ipfs_datasets_py/knowledge_graphs/contracts, ipfs_datasets_py/knowledge_graphs/catalog, ipfs_datasets_py/knowledge_graphs/service.py, docs/architecture
+- Validation: python -m pytest -q tests/unit/knowledge_graphs/contracts tests/integration/knowledge_graphs/test_catalog_service.py
+- Acceptance: Tenant/graph/branch/revision identity is explicit and canonical; manifests round-trip deterministically; graph lifecycle and branch-head CAS survive restart; no entry point constructs an ambient empty graph; compatibility policy is documented.
+- Gap task: Implement the next incomplete contract, catalog, or service lifecycle operation with restart tests.
+- Refinement: Separate immutable contracts, catalog persistence, and orchestration to minimize file conflicts.
+- Embedding query: GraphTarget graph manifest revision branch catalog graph service lifecycle
+- AST query: GraphTarget GraphManifest GraphCatalog GraphService
+- Goal completion schema version: 1
+- Completion confidence: 0.166667
+- Uncovered criteria: ["Tenant/graph/branch/revision identity is explicit and canonical","manifests round-trip deterministically","graph lifecycle and branch-head CAS survive restart","no entry point constructs an ambient empty graph","compatibility policy is documented."]
+- Stale evidence: []
+- Analyzer health: {"evidence":{},"passed":false,"reason_code":"analyzer_health_missing","status":"missing"}
+- Exhaustion quorum: {"evidence":{},"member_count":null,"reason_code":"exhaustion_quorum_missing","required_members":null,"satisfied":false,"stale_members":[]}
+- Reopen reasons: []
+- State transitioned at: 2026-07-29T20:34:55.278766+00:00
+- State transition reason: Produce completion evidence for: Tenant/graph/branch/revision identity is explicit and canonical; Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree.; Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one.; Require an explicitly healthy analyzer that is safe for completion reasoning.; Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree.; Task completion is provisional until every criterion has valid evidence.
+- Provisional at: 2026-07-29T20:34:55.278766+00:00
+
+## KGP-G030 Durable concurrency, transactions, and recovery
+
+- Status: provisionally_complete
+- Parent: KGP-G000
+- Fib priority: 5
+- Track: durability
+- Priority: P0
+- Bundle: knowledge-graphs/transactions
+- Goal: Provide snapshot reads, optimistic multi-writer commits, durable WAL recovery, graph-scoped leases, fencing, idempotency, and safe compaction.
+- Evidence: KGP-G020 service and catalog contract
+- Outputs: ipfs_datasets_py/knowledge_graphs/transactions, tests/integration/knowledge_graphs/concurrency, tests/chaos/knowledge_graphs
+- Validation: python -m pytest -q tests/unit/knowledge_graphs/test_transactions.py tests/integration/knowledge_graphs/concurrency tests/chaos/knowledge_graphs
+- Acceptance: Thread and process tests prove no lost updates or cross-graph leakage; crash points recover to pre-commit or committed state only; stale leases and duplicate idempotency attempts cannot mutate twice; readers remain revision stable during compaction.
+- Gap task: Close the next state-machine, crash-recovery, or concurrency invariant.
+- Refinement: Implement the WAL/MVCC contract before broad performance tuning.
+- Embedding query: knowledge graph MVCC WAL snapshot isolation CAS lease fencing idempotency crash recovery
+- AST query: TransactionManager WriteAheadLog GraphCatalog compare_and_swap
+- Goal completion schema version: 1
+- Completion confidence: 0.166667
+- Uncovered criteria: ["Thread and process tests prove no lost updates or cross-graph leakage","crash points recover to pre-commit or committed state only","stale leases and duplicate idempotency attempts cannot mutate twice","readers remain revision stable during compaction."]
+- Stale evidence: []
+- Analyzer health: {"evidence":{},"passed":false,"reason_code":"analyzer_health_missing","status":"missing"}
+- Exhaustion quorum: {"evidence":{},"member_count":null,"reason_code":"exhaustion_quorum_missing","required_members":null,"satisfied":false,"stale_members":[]}
+- Reopen reasons: []
+- State transitioned at: 2026-07-29T20:34:55.278766+00:00
+- State transition reason: Produce completion evidence for: Thread and process tests prove no lost updates or cross-graph leakage; Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree.; Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one.; Require an explicitly healthy analyzer that is safe for completion reasoning.; Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree.; Task completion is provisional until every criterion has valid evidence.
+- Provisional at: 2026-07-29T20:34:55.278766+00:00
+
+## KGP-G040 Interchangeable Parquet, IPFS/IPLD, and ipfs_kit_py storage
+
+- Status: provisionally_complete
+- Parent: KGP-G000
+- Fib priority: 5
+- Track: storage
+- Priority: P0
+- Bundle: knowledge-graphs/storage
+- Goal: Persist the same graph revision through versioned Parquet, direct IPFS/IPLD, and ipfs_kit_py adapters with verified hybrid caching, pins, and garbage-collection roots.
+- Evidence: KGP-G020 manifest and service contracts
+- Outputs: ipfs_datasets_py/knowledge_graphs/storage, tests/contract/knowledge_graphs/storage
+- Validation: python -m pytest -q tests/contract/knowledge_graphs/storage tests/integration/knowledge_graphs/test_storage_restart.py
+- Acceptance: All storage profiles pass the same manifest/object/restart/corruption contract; Parquet publication is atomic; CID bytes are verified; ipfs_kit_py capability negotiation is explicit; reachable revisions remain pinned and unreachable staging data can be collected safely.
+- Gap task: Implement or repair the next adapter behavior required by the shared storage contract.
+- Refinement: Keep adapter-specific dependencies behind one protocol and use fault-injectable test doubles.
+- Embedding query: parquet graph store ipfs ipld dag cbor car ipfs_kit capability cache pin garbage collection
+- AST query: GraphStore ParquetGraphStore IPLDGraphStore IpfsKitGraphStore
+- Goal completion schema version: 1
+- Completion confidence: 0.166667
+- Uncovered criteria: ["All storage profiles pass the same manifest/object/restart/corruption contract","Parquet publication is atomic","CID bytes are verified","ipfs_kit_py capability negotiation is explicit","reachable revisions remain pinned and unreachable staging data can be collected safely."]
+- Stale evidence: []
+- Analyzer health: {"evidence":{},"passed":false,"reason_code":"analyzer_health_missing","status":"missing"}
+- Exhaustion quorum: {"evidence":{},"member_count":null,"reason_code":"exhaustion_quorum_missing","required_members":null,"satisfied":false,"stale_members":[]}
+- Reopen reasons: []
+- State transitioned at: 2026-07-29T20:34:55.278766+00:00
+- State transition reason: Produce completion evidence for: All storage profiles pass the same manifest/object/restart/corruption contract; Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree.; Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one.; Require an explicitly healthy analyzer that is safe for completion reasoning.; Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree.; Task completion is provisional until every criterion has valid evidence.
+- Provisional at: 2026-07-29T20:34:55.278766+00:00
+
+## KGP-G050 Versioned sharding and bounded unified query
+
+- Status: provisionally_complete
+- Parent: KGP-G000
+- Fib priority: 8
+- Track: query
+- Priority: P0
+- Bundle: knowledge-graphs/query-sharding
+- Goal: Consolidate the existing sharded-CAR work behind one query backend with v1 compatibility, scalable v2 routing, cross-shard adjacency, indexes, budgets, cursors, and streaming.
+- Evidence: search/graph_query/sharded_car; KGP-G020 and KGP-G040 contracts
+- Outputs: ipfs_datasets_py/knowledge_graphs/query, ipfs_datasets_py/knowledge_graphs/storage/sharding, ipfs_datasets_py/search/graph_query
+- Validation: python -m pytest -q tests/unit/search/test_sharded_car tests/integration/knowledge_graphs/test_sharded_query.py tests/knowledge_graphs/contract/test_query_budgets.py
+- Acceptance: v1 manifests remain readable; v2 supports integrity-bound virtual shards and limited rebalance; cross-shard traversal is correct; queries never substitute an empty graph; time/row/byte/depth/fan-out budgets and revision-bound cursors hold across local and IPFS shards.
+- Gap task: Close the next manifest, routing, traversal, index, or query-budget gap.
+- Refinement: Adopt and adapt proven sharded-CAR code before deleting or duplicating it.
+- Embedding query: sharded CAR manifest rendezvous virtual shards adjacency unified query cursor budget streaming
+- AST query: ShardedCARBackend ShardManifest GraphQueryBackend UnifiedQueryEngine
+- Goal completion schema version: 1
+- Completion confidence: 0.166667
+- Uncovered criteria: ["v1 manifests remain readable","v2 supports integrity-bound virtual shards and limited rebalance","cross-shard traversal is correct","queries never substitute an empty graph","time/row/byte/depth/fan-out budgets and revision-bound cursors hold across local and IPFS shards."]
+- Stale evidence: []
+- Analyzer health: {"evidence":{},"passed":false,"reason_code":"analyzer_health_missing","status":"missing"}
+- Exhaustion quorum: {"evidence":{},"member_count":null,"reason_code":"exhaustion_quorum_missing","required_members":null,"satisfied":false,"stale_members":[]}
+- Reopen reasons: []
+- State transitioned at: 2026-07-29T20:34:55.278766+00:00
+- State transition reason: Produce completion evidence for: v1 manifests remain readable; Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree.; Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one.; Require an explicitly healthy analyzer that is safe for completion reasoning.; Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree.; Task completion is provisional until every criterion has valid evidence.
+- Provisional at: 2026-07-29T20:34:55.278766+00:00
+
+## KGP-G060 Python, CLI, MCP, and MCP++ surface parity
+
+- Status: provisionally_complete
+- Parent: KGP-G000
+- Fib priority: 8
+- Track: interfaces
+- Priority: P0
+- Bundle: knowledge-graphs/surfaces
+- Goal: Route all public surfaces through GraphService with stable lifecycle, target selection, streaming, JSON results, typed errors, and exact conformance vectors.
+- Evidence: KGP-G010 public contract matrix; KGP-G020 service
+- Outputs: ipfs_datasets_py/knowledge_graphs/__init__.py, ipfs_datasets_py/ipfs_datasets_cli.py, ipfs_datasets_py/mcp_server/tools/graph_tools, tests/knowledge_graphs/conformance
+- Validation: python -m pytest -q tests/knowledge_graphs/conformance tests/cli/test_graph_commands.py tests/mcp/test_graph_tools.py
+- Acceptance: Create/write/query/transaction/list/delete/reopen operations survive independent process and MCP calls; every request names a graph target; all four surfaces return canonically equivalent results and errors for the same vector; public imports and deprecations are versioned.
+- Gap task: Implement the next operation in GraphService and make all surfaces pass its shared vector.
+- Refinement: Add vectors to the shared harness before surface-specific wrappers.
+- Embedding query: python CLI MCP MCP++ graph API parity persistent manager JSON error cursor
+- AST query: GraphService KnowledgeGraphManager graph_create main
+- Goal completion schema version: 1
+- Completion confidence: 0.166667
+- Uncovered criteria: ["Create/write/query/transaction/list/delete/reopen operations survive independent process and MCP calls","every request names a graph target","all four surfaces return canonically equivalent results and errors for the same vector","public imports and deprecations are versioned."]
+- Stale evidence: []
+- Analyzer health: {"evidence":{},"passed":false,"reason_code":"analyzer_health_missing","status":"missing"}
+- Exhaustion quorum: {"evidence":{},"member_count":null,"reason_code":"exhaustion_quorum_missing","required_members":null,"satisfied":false,"stale_members":[]}
+- Reopen reasons: []
+- State transitioned at: 2026-07-29T20:34:55.278766+00:00
+- State transition reason: Produce completion evidence for: Create/write/query/transaction/list/delete/reopen operations survive independent process and MCP calls; Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree.; Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one.; Require an explicitly healthy analyzer that is safe for completion reasoning.; Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree.; Task completion is provisional until every criterion has valid evidence.
+- Provisional at: 2026-07-29T20:34:55.278766+00:00
+
+## KGP-G070 MCP++ UCAN authorization and audit
+
+- Status: provisionally_complete
+- Parent: KGP-G000
+- Fib priority: 8
+- Track: security
+- Priority: P0
+- Bundle: knowledge-graphs/ucan
+- Goal: Enforce attenuated UCAN capabilities for graph resources in MCP++ and the shared service, including expiry, revocation, caveats, replay defense, and redacted audit receipts.
+- Evidence: ipfs_datasets_py/mcp_server/ucan_delegation.py; KGP-G020 service contract
+- Outputs: ipfs_datasets_py/knowledge_graphs/auth, ipfs_datasets_py/mcp_server, tests/security/knowledge_graphs
+- Validation: python -m pytest -q tests/security/knowledge_graphs tests/mcp/test_graph_ucan.py
+- Acceptance: Resource containment and every delegation link attenuate authority; issuer/audience/expiry/revocation/caveat/idempotency checks fail closed before graph or shard access; cross-tenant and confused-deputy matrices deny; allow and deny receipts are verifiable and redact protected data.
+- Gap task: Close the next capability-chain or enforcement-boundary proof.
+- Refinement: Keep policy contracts separate from MCP transport and test enforcement at GraphService.
+- Embedding query: MCP++ UCAN knowledge graph capability attenuation caveat revocation audit fail closed
+- AST query: UCANDelegation GraphAuthorizationService AuthorizationReceipt
+- Goal completion schema version: 1
+- Completion confidence: 0.166667
+- Uncovered criteria: ["Resource containment and every delegation link attenuate authority","issuer/audience/expiry/revocation/caveat/idempotency checks fail closed before graph or shard access","cross-tenant and confused-deputy matrices deny","allow and deny receipts are verifiable and redact protected data."]
+- Stale evidence: []
+- Analyzer health: {"evidence":{},"passed":false,"reason_code":"analyzer_health_missing","status":"missing"}
+- Exhaustion quorum: {"evidence":{},"member_count":null,"reason_code":"exhaustion_quorum_missing","required_members":null,"satisfied":false,"stale_members":[]}
+- Reopen reasons: []
+- State transitioned at: 2026-07-29T20:34:55.278766+00:00
+- State transition reason: Produce completion evidence for: Resource containment and every delegation link attenuate authority; Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree.; Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one.; Require an explicitly healthy analyzer that is safe for completion reasoning.; Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree.; Task completion is provisional until every criterion has valid evidence.
+- Provisional at: 2026-07-29T20:34:55.278766+00:00
+
+## KGP-G080 Real corpus adapters and differential validation
+
+- Status: provisionally_complete
+- Parent: KGP-G000
+- Fib priority: 13
+- Track: compatibility
+- Priority: P1
+- Bundle: knowledge-graphs/corpora
+- Goal: Read and validate CVEfixes, SkillCenter, 211-AI, and code/evidence graphs through canonical adapters before any producer is migrated.
+- Evidence: KGP-G010 inventory; lift_coding/.cvefixes-build; logic/intent_ir/graphrag; 211-AI data/retrieval_package; agent supervisor graph datasets
+- Outputs: ipfs_datasets_py/knowledge_graphs/adapters, tests/fixtures/knowledge_graphs, tests/integration/knowledge_graphs/corpora
+- Validation: python -m pytest -q tests/integration/knowledge_graphs/corpora
+- Acceptance: Each named corpus has a read-only adapter, immutable fixture manifest, representative golden queries, count/checksum/provenance validation, and differential comparison to its current reader; dirty or stale nested repositories are never promoted to canonical source.
+- Gap task: Add or validate the next corpus adapter and its differential query set.
+- Refinement: Treat each corpus as a separate lane after the shared adapter protocol is stable.
+- Embedding query: CVEfixes SkillCenter 211 AI code graph corpus adapter parquet migration differential
+- AST query: SkillCenterGraphRAG CVEFixes ShardedCARBackend CodeEvidenceGraph
+- Goal completion schema version: 1
+- Completion confidence: 0.166667
+- Uncovered criteria: ["Each named corpus has a read-only adapter, immutable fixture manifest, representative golden queries, count/checksum/provenance validation, and differential comparison to its current reader","dirty or stale nested repositories are never promoted to canonical source."]
+- Stale evidence: []
+- Analyzer health: {"evidence":{},"passed":false,"reason_code":"analyzer_health_missing","status":"missing"}
+- Exhaustion quorum: {"evidence":{},"member_count":null,"reason_code":"exhaustion_quorum_missing","required_members":null,"satisfied":false,"stale_members":[]}
+- Reopen reasons: []
+- State transitioned at: 2026-07-29T20:34:55.278766+00:00
+- State transition reason: Produce completion evidence for: Each named corpus has a read-only adapter, immutable fixture manifest, representative golden queries, count/checksum/provenance validation, and differential comparison to its current reader; Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree.; Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one.; Require an explicitly healthy analyzer that is safe for completion reasoning.; Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree.; Task completion is provisional until every criterion has valid evidence.
+- Provisional at: 2026-07-29T20:34:55.278766+00:00
+
+## KGP-G090 Load, soak, chaos, observability, and operability
+
+- Status: provisionally_complete
+- Parent: KGP-G000
+- Fib priority: 13
+- Track: reliability
+- Priority: P0
+- Bundle: knowledge-graphs/reliability
+- Goal: Establish hardware-labelled performance baselines and prove bounded operation, recovery, backup/restore, health, metrics, tracing, and audit under realistic and synthetic load.
+- Evidence: KGP-G030 through KGP-G080 passing contracts
+- Outputs: benchmarks/knowledge_graphs, tests/load/knowledge_graphs, tests/chaos/knowledge_graphs, docs/operations/knowledge_graphs
+- Validation: python -m pytest -q tests/load/knowledge_graphs tests/chaos/knowledge_graphs
+- Acceptance: Smoke, 211-AI, CVEfixes, 1M/10M synthetic, 16-graph mixed concurrency, soak, and chaos profiles emit reproducible receipts; no silent loss/leak/unauthorized effect/resource drift occurs; unexplained p95 or throughput regression above 10% blocks release; backup/restore and readiness diagnostics work.
+- Gap task: Add the next workload, metric, fault, or operations proof needed by the release gate.
+- Refinement: Separate harness correctness from long-running environment-labelled executions.
+- Embedding query: graph load test p99 throughput soak chaos recovery observability backup restore resource leak
+- AST query: GraphLoadHarness GraphMetrics GraphHealth GraphBackup
+- Goal completion schema version: 1
+- Completion confidence: 0.166667
+- Uncovered criteria: ["Smoke, 211-AI, CVEfixes, 1M/10M synthetic, 16-graph mixed concurrency, soak, and chaos profiles emit reproducible receipts","no silent loss/leak/unauthorized effect/resource drift occurs","unexplained p95 or throughput regression above 10% blocks release","backup/restore and readiness diagnostics work."]
+- Stale evidence: []
+- Analyzer health: {"evidence":{},"passed":false,"reason_code":"analyzer_health_missing","status":"missing"}
+- Exhaustion quorum: {"evidence":{},"member_count":null,"reason_code":"exhaustion_quorum_missing","required_members":null,"satisfied":false,"stale_members":[]}
+- Reopen reasons: []
+- State transitioned at: 2026-07-29T20:34:55.278766+00:00
+- State transition reason: Produce completion evidence for: Smoke, 211-AI, CVEfixes, 1M/10M synthetic, 16-graph mixed concurrency, soak, and chaos profiles emit reproducible receipts; Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree.; Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one.; Require an explicitly healthy analyzer that is safe for completion reasoning.; Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree.; Task completion is provisional until every criterion has valid evidence.
+- Provisional at: 2026-07-29T20:34:55.278766+00:00
+
+## KGP-G100 Reversible adoption and production release
+
+- Status: provisionally_complete
+- Parent: KGP-G000
+- Fib priority: 21
+- Track: adoption
+- Priority: P1
+- Bundle: knowledge-graphs/adoption
+- Goal: Provide shadow, canary, rollback, migration, compatibility, and deprecation controls and release only after every upstream evidence gate passes.
+- Evidence: KGP-G010 through KGP-G090 completion receipts
+- Outputs: ipfs_datasets_py/knowledge_graphs/migration, docs/migration/knowledge_graphs, docs/operations/knowledge_graphs_release.md
+- Validation: python -m pytest -q tests/integration/knowledge_graphs/test_shadow_migration.py tests/integration/knowledge_graphs/test_rollback.py
+- Acceptance: Shadow result comparison and canary graph routing are observable; rollback selects the last immutable verified head without data conversion; producer-specific sign-off is recorded; compatibility/deprecation windows are documented; no codepath moves before its corpus, security, durability, surface, and load gates pass.
+- Gap task: Close the next reversible migration or release-evidence gap.
+- Refinement: Migrate one producer class at a time and retain independent rollback.
+- Embedding query: knowledge graph shadow canary migration rollback deprecation release gate
+- AST query: GraphMigrator ShadowQueryComparator GraphReleaseGate
+- Goal completion schema version: 1
+- Completion confidence: 0.166667
+- Uncovered criteria: ["Shadow result comparison and canary graph routing are observable","rollback selects the last immutable verified head without data conversion","producer-specific sign-off is recorded","compatibility/deprecation windows are documented","no codepath moves before its corpus, security, durability, surface, and load gates pass."]
+- Stale evidence: []
+- Analyzer health: {"evidence":{},"passed":false,"reason_code":"analyzer_health_missing","status":"missing"}
+- Exhaustion quorum: {"evidence":{},"member_count":null,"reason_code":"exhaustion_quorum_missing","required_members":null,"satisfied":false,"stale_members":[]}
+- Reopen reasons: []
+- State transitioned at: 2026-07-29T20:34:55.278766+00:00
+- State transition reason: Produce completion evidence for: Shadow result comparison and canary graph routing are observable; Map every mandatory acceptance criterion to fresh, verified implementation and validation proof bound to the current tree.; Every submitted validation proof must be fresh and passing, and every mandatory criterion must have one.; Require an explicitly healthy analyzer that is safe for completion reasoning.; Require the configured number of independent, fresh, healthy exhaustive receipts bound to the current repository tree.; Task completion is provisional until every criterion has valid evidence.
+- Provisional at: 2026-07-29T20:34:55.278766+00:00
+

@@ -1,0 +1,236 @@
+# Knowledge Graphs Production Hardening Plan
+
+**Date:** 2026-07-29  
+**Program:** `KGP`  
+**System of record:** `knowledge_graphs_production_hardening.objectives.md`  
+**Execution board:** `knowledge_graphs_production_hardening.todo.md`  
+**Target module:** `ipfs_datasets_py.knowledge_graphs`
+
+## Executive decision
+
+The current module must not be treated as production ready. It contains useful
+query, extraction, migration, and IPLD components, but the public entry points
+do not share a durable graph identity or a persistent service instance. Direct
+smoke tests on the current tree show that:
+
+- `ipfs_datasets_cli.py graph create` calls a missing
+  `KnowledgeGraphManager.create_graph`;
+- `graph add-entity` constructs `Entity` with an incompatible signature;
+- query results are not consistently JSON serializable;
+- each MCP graph tool constructs a fresh manager, so writes and transactions
+  cannot survive across calls;
+- the storage namespace is computed but not used to maintain durable graph
+  heads or a graph catalog; and
+- graph MCP/MCP++ operations do not enforce the existing UCAN delegation
+  machinery.
+
+The passing unit suite does not invalidate those findings. A focused run of 68
+CLI, transaction, WAL, public API, and end-to-end tests passed on 2026-07-29,
+while the direct CLI and MCP smoke tests above still failed. The program
+therefore uses observable cross-process behavior, durability, recovery, and
+cross-surface result parity as release evidence, not line coverage or
+session-labelled tests.
+
+## Desired architecture
+
+All Python, CLI, MCP, and MCP++ operations call one long-lived `GraphService`.
+The service resolves a `GraphTarget` containing tenant, graph ID, branch or
+immutable revision, and storage profile. It authorizes the request, opens a
+snapshot or transaction, delegates to one query/write implementation, and
+returns a bounded canonical result envelope.
+
+```text
+Python API ─┐
+CLI ────────┼─> GraphService ─> authorization ─> catalog/MVCC ─> query/write
+MCP ────────┤                                      │              │
+MCP++/UCAN ─┘                                      ├─ Parquet     ├─ indexes
+                                                   ├─ IPFS/IPLD   └─ sharded scan
+                                                   └─ ipfs_kit_py
+```
+
+### Identity and catalog
+
+- A graph is addressed as `kg://<tenant>/<graph>` and has named mutable
+  branches whose heads point to immutable content-addressed revisions.
+- A revision manifest records schema version, graph kind, ontology, parent,
+  node and edge counts, partition/index descriptors, provenance, checksums,
+  codec, storage profile, and root CID where applicable.
+- A local embedded catalog uses SQLite WAL and compare-and-swap branch heads.
+  SQLite stores control metadata only; graph payloads remain in Parquet or
+  IPLD. Remote/distributed profiles publish immutable manifests and optionally
+  an IPNS or another explicitly configured mutable name.
+- Graph creation, branch updates, idempotency records, leases, tombstones, and
+  pin roots are durable. A graph can never be selected by ambient process
+  state or by constructing a new manager.
+
+### Concurrency and recovery
+
+- Readers use immutable snapshots. Writers stage deltas and advance a branch
+  head with optimistic compare-and-swap.
+- Graph-scoped writer leases include fencing epochs. Idempotency keys prevent
+  duplicate effects across retries and protocol reconnects.
+- A durable WAL records intent, prepared objects, head publication, and
+  completion. Recovery either finishes a committed publication or removes an
+  unreachable staged write; it never exposes a partial graph.
+- Conflict behavior is deterministic and tested across threads, processes,
+  MCP clients, and storage adapters. Compaction operates on immutable deltas
+  and cannot invalidate existing snapshots.
+
+### Storage profiles
+
+1. **Parquet:** versioned node, edge, adjacency, property, and index datasets;
+   atomic local publication; PyArrow predicate pushdown; bounded row groups;
+   schema evolution and checksums.
+2. **IPFS/IPLD:** DAG-CBOR manifests and index blocks plus CAR shard objects;
+   Kubo-compatible content routing, verification after fetch, explicit pin
+   roots, offline export/import, and garbage-collection safety.
+3. **`ipfs_kit_py`:** a first-class adapter using capability negotiation
+   rather than import-time guessing. Its semantics and errors must match the
+   direct IPFS adapter.
+4. **Hybrid:** immutable Parquet/CAR payloads with a verified local cache and
+   CID-backed remote root. The catalog records which copy is authoritative.
+
+The existing `search.graph_query.sharded_car` implementation is the starting
+point for the sharded reader and publisher. Its v1 hash-modulo manifest remains
+readable. A v2 manifest adds virtual shards/rendezvous routing, explicit
+cross-shard adjacency, schema and index versions, shard statistics, integrity
+digests, and bounded index buckets so changing physical shard count need not
+reshuffle the entire graph.
+
+### Query contract
+
+- One backend protocol supports node/property scans, adjacency expansion,
+  bounded path traversal, Cypher IR, hybrid/vector search, and explicit
+  federation.
+- Every operation requires a `GraphTarget`; federation requires a declared
+  list of targets and never substitutes an empty graph.
+- Results use a versioned JSON-safe envelope with schema, target revision,
+  rows, columns, cursor, statistics, warnings, provenance, and authorization
+  receipt reference.
+- Time, row, byte, traversal-depth, fan-out, and memory budgets are enforced
+  below every surface. Cursors are opaque and revision-bound.
+- Python, CLI, MCP, and MCP++ execute the same golden corpus/query vectors and
+  must produce canonically equivalent results and typed errors.
+
+### MCP++ and UCAN
+
+The MCP++ authorization resource is
+`kg://<tenant>/<graph>[/branches/<branch>|/revisions/<cid>]`. Initial abilities
+are `graph/list`, `graph/read`, `graph/query`, `graph/write`, `graph/admin`,
+`graph/pin`, and `graph/delegate`. Caveats can narrow branch/revision, query
+kind, property labels, maximum rows/bytes/depth, expiration, audience, storage
+profile, and mutation count.
+
+Authorization is enforced in `GraphService`, not only in a protocol wrapper,
+so Python and CLI callers can use the same policy when configured. The
+validator must verify the complete attenuated chain, issuer/audience, expiry,
+revocation, nonce/idempotency binding, resource containment, and caveat
+monotonicity. It fails closed before catalog lookup or shard fetch and emits a
+redacted, content-addressed audit receipt for allow and deny outcomes.
+
+## Existing graph compatibility fixtures
+
+The first migration phase is read-only and adapter based. Existing producers
+remain authoritative until parity evidence passes.
+
+| Fixture | Current evidence | Use in this program |
+| --- | --- | --- |
+| CVE/CVEfixes | `lift_coding/.cvefixes-build`; source Parquet is about 1.2 GB plus embeddings and graph index artifacts | large security corpus, shard/index integrity, incremental publication, query parity |
+| SkillCenter | `logic/intent_ir/graphrag` and `skillcenter_hf_release.py` | skills corpus, graph/vector/BM25 hybrid parity, Parquet and CID manifest compatibility |
+| 211-AI | 48,851 graph nodes, 648,958 graph edges, 22,638 documents and embeddings in `data/retrieval_package` | realistic traversal, community, browser export, multi-client and memory tests |
+| Code/evidence graphs | agent supervisor objective, AST, semantic dependency, conflict, and code-evidence graphs plus repository-specific code graphs | graph kind extensibility, provenance, rapid incremental changes |
+
+The inventory task must discover other graph producers and record their
+repository revision, schema, counts, generator, consumer, persistence format,
+and owner. The stale, dirty nested `lift_coding/.../ipfs_datasets_py` checkout
+is an input fixture only and must not become the implementation source of
+truth.
+
+## Test and reliability strategy
+
+### Correctness
+
+- model/property tests for manifests, IDs, canonical serialization, routing,
+  schema evolution, idempotency, and authorization attenuation;
+- state-machine tests for create/write/commit/conflict/retry/recover/delete;
+- crash injection at every WAL and publication boundary;
+- multi-process readers and writers over multiple graph IDs and tenants;
+- exact cross-surface golden vectors and error equivalence;
+- v1/v2 shard compatibility, corrupted block, missing shard, wrong CID,
+  offline CAR, pin/GC, and partial network tests; and
+- migration differential tests comparing old and new readers against each
+  real corpus.
+
+### Load and longevity
+
+The harness records throughput, p50/p95/p99 latency, queue time, error and
+conflict rate, open descriptors, RSS/heap, cache hit rate, bytes read, shard
+fan-out, IPFS fetches, and recovery time. Workloads include:
+
+- smoke: 1,000 nodes / 5,000 edges;
+- real medium: the full 211-AI graph;
+- real large: CVEfixes source and generated release artifacts;
+- synthetic large: at least 1 million nodes / 10 million edges;
+- concurrent mixed read/write/query workloads across at least 16 graph IDs;
+- 24-hour soak after the shorter suite is stable; and
+- process kill, disk-full, corrupt-cache, unavailable-IPFS, slow-shard, and
+  lease-expiry chaos scenarios.
+
+The baseline task establishes hardware-labelled SLOs before absolute latency
+gates are ratified. Release gates are immediately strict for correctness:
+zero silent data loss, cross-tenant leakage, unauthorized reads/writes,
+partial committed revisions, result mismatches in the golden suite, and
+unbounded resource growth. Performance changes require a statistically
+defensible baseline comparison; an unexplained regression greater than 10%
+in p95 latency or throughput blocks release.
+
+## Delivery stages and gates
+
+1. **Truth baseline:** executable failures, contract matrix, artifact
+   inventory, authoritative repository/revision map.
+2. **Control plane:** graph identity, manifests, catalog, service contract,
+   lifecycle and compatibility ADRs.
+3. **Durability:** Parquet, IPFS/IPLD, `ipfs_kit_py`, WAL, MVCC, recovery,
+   pinning and garbage collection.
+4. **Data/query plane:** v1/v2 sharding, unified backend, budgets, streaming,
+   and indexes.
+5. **Surfaces/security:** Python, CLI, MCP, MCP++, UCAN, audit, and exact
+   conformance vectors.
+6. **Corpus/load evidence:** CVE, skills, 211, code graphs, differential
+   migration, load, soak, chaos, backup/restore.
+7. **Adoption:** shadow reads, dual-write only where safe, canary graph IDs,
+   rollback, deprecation, and release sign-off.
+
+No existing producer or consumer migrates before stage 6 passes for its corpus.
+No destructive conversion occurs in place. A canary can be disabled by moving
+the catalog head back to the last verified immutable revision.
+
+## Definition of done
+
+The root goal is complete only when all child goals have fresh receipts bound
+to the current tree and all of these are true:
+
+- at least 16 graph IDs can be read and written concurrently without identity
+  confusion, lost updates, or cross-tenant leakage;
+- Parquet, direct IPFS/IPLD, and `ipfs_kit_py` profiles pass the same contract
+  suite, including restart and crash recovery;
+- Python, CLI, MCP, and MCP++ pass the same operation/query/error vectors;
+- UCAN allow, attenuation, expiry, revocation, replay, and denial tests pass
+  with fail-closed audit evidence;
+- v1 and v2 sharded graphs pass integrity and cross-shard traversal tests;
+- CVEfixes, SkillCenter, 211-AI, and code/evidence graph fixtures pass
+  differential and representative workload tests;
+- load, soak, chaos, backup/restore, observability, and resource bounds pass
+  on a labelled environment; and
+- migration runbooks, rollback, compatibility policy, and deprecation
+  warnings are published, with no legacy codepath moved before its gate.
+
+## Supervisor operation
+
+The objective heap is durable intent; the todo board, objective graph,
+datasets, and bundle index are rebuildable projections. Supervisor state lives
+under `data/agent_supervisor/knowledge_graphs_production_hardening/`. The
+supervisor starts with one isolated lane to limit risk while the baseline and
+inventory establish the authoritative work surface. Parallelism can increase
+only after predicted-file and dependency evidence shows disjoint work.
+
