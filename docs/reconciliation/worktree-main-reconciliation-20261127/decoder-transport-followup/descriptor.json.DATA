@@ -1,0 +1,132 @@
+{
+  "actual_current_source_prefill": null,
+  "actual_current_target_witness": null,
+  "actual_training_or_model_execution": false,
+  "builder": {
+    "bytes": 4443,
+    "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/build.py",
+    "sha256": "dac517627d8da4a2f67497653d3ab82fa65ecbc4e2eb02adf2dfdebc64ca6432"
+  },
+  "candidate": {
+    "bytes": 433079,
+    "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/relational_assessment.py",
+    "sha256": "d4906425bc6b10a1ae8107cea854410c01099b91386b1ebea54ca1b11b5fc5fb"
+  },
+  "closed_tests": {
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/final-green.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 1731,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/final-green.stderr",
+      "sha256": "4eb25f075baa5d7ac13082257ec430dd9f876c8c7b289125d4fa9664777586db"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/final-green.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "correction_to_test_setup": "The inherited fixture directory and its audit permission were relocated to this private output parent.",
+  "current_source_adoption": null,
+  "diff": {
+    "bytes": 3917,
+    "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/transport.diff",
+    "sha256": "28286b03ae2f578bb561114fed57d665cbab297a9158f442a124a0c2dfa918f7"
+  },
+  "dispatch_authority": false,
+  "earlier_green_controls": {
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/green.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 1581,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/green.stderr",
+      "sha256": "89ecef683078acc26945aed68b7a4b6bf3b551db4fc981002f2f3b4b09c0af07"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/green.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "execution_selected": false,
+  "existing_definitions_preserved_except": [
+    "verify_registered_development_target_witness",
+    "verify_registered_qwen_development_target_witness",
+    "verify_registered_development_source_prefill"
+  ],
+  "focused_test_functions": 5,
+  "initial_fixture_setup_errors": {
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/red.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "stderr": {
+      "bytes": 9166,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/red.stderr",
+      "sha256": "ddd463c50400232970a8e7e6dc05381e9c9f7b1920ce1af4c52cac52e4437a54"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/red.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "original_behavioral_failures": {
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/behavioral-red.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "stderr": {
+      "bytes": 7913,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/behavioral-red.stderr",
+      "sha256": "24b45d10dfa547ca154b998d47457f3ce2fb9795d62e8a0135f1aebaa16f0bdf"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/behavioral-red.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "original_parent_failing_subcases": 8,
+  "original_parent_functions_failed": 2,
+  "parent": {
+    "bytes": 432500,
+    "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/relational_assessment.before.py.DATA",
+    "sha256": "5ffc69dc064600279bf47c468c4ab06e42ac0bf9d715eac8779383f9b2325aeb"
+  },
+  "qualification": "Existing registered entries and strict codec on fictional detached data with simulated owner closes.",
+  "retained_test_functions": 6,
+  "schema": "private-registered-decoder-transport-original-scope/v1",
+  "second_fixture_setup_errors": {
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/reproduced-red.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "stderr": {
+      "bytes": 8802,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/reproduced-red.stderr",
+      "sha256": "ba28ea1284bab45ca65c5a867c10d4c33cad4c523aeb3cf19bf9907be88977c1"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/reproduced-red.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "tests": {
+    "bytes": 7641,
+    "path": "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/test_transport_scope.py",
+    "sha256": "f809345e6d80a861e9604d5f333b40fd0d0cb14f03da7ca570d4266997315927"
+  },
+  "total_test_functions": 11,
+  "unchanged_existing_calls_use_optional_scope_default": true
+}

@@ -1,0 +1,66 @@
+{
+  "current_capture_floor": 543429,
+  "current_conditional_reader_quote": null,
+  "current_reader_allocation": null,
+  "datasets": "5bf57f390a12621a40716595fe261c35d2741e12",
+  "datasets_index": {
+    "bytes": 7070589,
+    "full9": {
+      "st_ctime_ns": "1795756035761619880",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72533257",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795756035751619831",
+      "st_nlink": "1",
+      "st_size": "7070589",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "sha256": "b0133f594f37349d5a6959ec0904089265fac8d3fb5c0637b8d0769aecce1078"
+  },
+  "dispatch_authority": false,
+  "exact_current_paired_source_epoch": null,
+  "execution_selected": false,
+  "guide_writer_accelerate": "e55316f48847b17a8b4041a2da30bcaa0ba6eb90",
+  "independent_index_payload_floor": 7070590,
+  "independent_index_payload_shortfall": 713598,
+  "ledger": {
+    "bytes": 1321,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/Source-only-Guide581-full-retained-cap.json",
+    "sha256": "91acf9ffe66d861824275ca128635becb9fac6f6805a3c411ede206b30f012b7"
+  },
+  "original_paired_selector": null,
+  "publication": {
+    "bytes": 3578,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-Guide581-four-docs-three-FF-publication.json",
+    "sha256": "0e5e9a2bc004e7ba1c1a6b681afe50a8890c557433b39706aca55971363ec9d6"
+  },
+  "published_accelerate": "64a8649952bed66a457d7b87bf6dced9fadab8d4",
+  "qualified_physical_accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+  "qualified_physical_accelerate_index": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "retained_headroom_bytes": 6356992,
+  "schema": "private-published-guide581-stage-a-identity-boundary/v1",
+  "signed_current_DEVELOPMENT_consumer": null,
+  "signed_current_TRAIN_consumer": null,
+  "writer": {
+    "bytes": 6552,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics/actual-Guide581-four-docs-Source-closed-and-frozen.json",
+    "sha256": "38e41dfb04443a92c2a20308d4f01a9cb75fa34f97029856ffbcbf82f1429503"
+  }
+}

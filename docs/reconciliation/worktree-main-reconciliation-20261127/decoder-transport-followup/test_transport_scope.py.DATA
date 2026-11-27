@@ -1,0 +1,149 @@
+"""Exercise existing registered transport entries on private fictional fixtures."""
+import ast
+from copy import deepcopy
+from dataclasses import replace
+from pathlib import Path
+from runpy import run_path
+import sys
+import unittest
+
+HERE = Path(__file__).absolute().parent
+guard = run_path('/tmp/decoder-training-stage-a-guide576-owner-transition-private-v01-tU42r4Kc/prepare.py')
+def detached_test_scope(event, args):
+    if event == 'open' and isinstance(args[0], (str, bytes, Path)) and args[2] & 0o3:
+        path = Path(args[0].decode() if isinstance(args[0], bytes) else args[0])
+        if guard['detached'](path) and path.is_relative_to(HERE):
+            return
+    guard['audit'](event, args)
+
+sys.addaudithook(detached_test_scope)
+BASE = HERE.parent / 'decoder-training-registered-source-prefill-private-v01-b8PYkGWb'
+def exact(path, size, digest):
+    return guard['archive'](guard['pin'](path,size,digest))
+
+prior=BASE/'check_registered_prefill.py'
+fixture={'__name__':'held_registered_prefill_fixture','__file__':str(prior)}
+exec(compile(exact(prior,17868,'9a5e7dfff340a3b6a7a945f78739f3053e646410c955d8f50f32c79cade78e07'),str(prior),'exec'),fixture)
+study,pin=(fixture[key] for key in ('study','pin'))
+Retained=fixture['SourcePrefillChecks']
+# Only relocate the existing fictional fixture's output directory.
+legacy = fixture['base']['retained']['Legacy']
+for owner in legacy.__mro__:
+    if 'setup_run' in owner.__dict__:
+        owner.__dict__['setup_run'].__globals__['HERE'] = HERE
+    for method in owner.__dict__.values():
+        environment = getattr(method, '__globals__', {})
+        if callable(environment.get('audit')):
+            environment['HERE'] = HERE
+before='--before' in sys.argv
+if before:
+    sys.argv.remove('--before')
+
+METHODS={'verify_registered_development_target_witness',
+         'verify_registered_qwen_development_target_witness',
+         'verify_registered_development_source_prefill'}
+
+def apply_candidate(owner):
+    if before:
+        return
+    path=HERE/'relational_assessment.py'
+    code=path.read_bytes()
+    nodes=[node for node in ast.parse(code).body if isinstance(node,ast.FunctionDef) and node.name in METHODS]
+    assert {node.name for node in nodes}==METHODS
+    env=owner.verify_registered_development_source_prefill.__globals__
+    exec(compile(ast.Module(body=nodes,type_ignores=[]),str(path),'exec'),env)
+    for name in METHODS:
+        setattr(owner,name,env[name])
+
+class ScopeChecks(Retained):
+    def two_lanes(self):
+        f,owner=super().two_lanes()
+        apply_candidate(owner)
+        return f,owner
+
+    @staticmethod
+    def reseal_target(owner, route, report):
+        scope=owner._registered_target_witness_route(route)[0]
+        fields={'scope_sha256','rows','all_rows_fit_within_output_cap_witnessed',
+                'source_prefill_verified','dispatch_authority'}
+        return dict(report,scope_sha256=pin(dict({key:value for key,value in report.items() if key not in fields},schema=scope)))
+
+    def check_target(self, f, owner, route, *, report=None, approve=None, **options):
+        held=f.lanes[route]
+        value=held.report if report is None else report
+        return owner.verify_registered_development_target_witness(study,route=route,
+            registration=f.args['registration'],report=value,expected_report_sha256=pin(value),lane=held.lane,
+            verify_close=(lambda scope,body,close: (scope,body,close)==(
+                value['scope_sha256'],pin(value),held.lane.target_review_close_sha256)) if approve is None else approve,
+            **options)
+
+    def test_resealed_target_grid_or_study_or_design_refuses_before_close_owner(self):
+        f,owner=self.two_lanes()
+        for route,held in f.lanes.items():
+            for field in ('optimizer_step_grid_sha256','study_sha256','design_sha256'):
+                with self.subTest(route=route,field=field):
+                    report=self.reseal_target(owner,route,dict(held.report,**{field:pin(('crossed',field))}))
+                    calls=[]
+                    with self.assertRaisesRegex(ValueError,'differs from its registration'):
+                        self.check_target(f,owner,route,report=report,approve=lambda *args:calls.append(args) or True)
+                    self.assertFalse(calls)
+
+    def test_t5_frames_of_one_or_two_positions_refuse_before_close_owner(self):
+        f,owner=self.two_lanes()
+        held=f.lanes[owner.T5]
+        for length in (1,2):
+            with self.subTest(length=length):
+                row=held.lane.rows[0]
+                lane=replace(held.lane,rows=(replace(row,prefill_positions=length),*held.lane.rows[1:]))
+                components=[]
+                altered=0
+                for component in held.components:
+                    report=deepcopy(component.report)
+                    for observed in report['rows']:
+                        if observed['id']==row.row_id:
+                            observed['prefill_positions']=length
+                            altered+=1
+                    components.append(replace(component,report=report,expected_report_sha256=pin(report)))
+                self.assertEqual(altered,1)
+                calls=[]
+                with self.assertRaisesRegex(ValueError,'outside its original route capacity'):
+                    self.bind(f,owner,owner.T5,lane,tuple(components),verify=lambda *args:calls.append(args) or True)
+                self.assertFalse(calls)
+
+    def test_independently_selected_target_scope_rejects_resealed_split(self):
+        f,owner=self.two_lanes()
+        for route,held in f.lanes.items():
+            expected=held.report['scope_sha256']
+            self.assertTrue(self.check_target(f,owner,route,expected_scope_sha256=expected))
+            bad=self.reseal_target(owner,route,dict(held.report,development_split_sha256=pin('different split')))
+            calls=[]
+            with self.assertRaisesRegex(ValueError,'exact selected target scope'):
+                self.check_target(f,owner,route,report=bad,expected_scope_sha256=expected,
+                    approve=lambda *args:calls.append(args) or True)
+            self.assertFalse(calls)
+
+    def test_t5_three_positions_is_the_inclusive_original_floor(self):
+        f,owner=self.two_lanes()
+        held=f.lanes[owner.T5]
+        lane,components=self.prepare_components(f,owner,held.report,owner.T5,3)
+        self.assertTrue(self.bind(f,owner,owner.T5,lane,components))
+
+    def test_existing_qwen_entry_relays_the_optional_selected_scope(self):
+        f,owner=self.two_lanes()
+        lane=f.lanes[owner.QWEN]
+        arguments=dict(registration=f.args['registration'],report=lane.report,
+            expected_report_sha256=pin(lane.report),lane=lane.lane,verify_close=lambda *_:True)
+        self.assertTrue(owner.verify_registered_qwen_development_target_witness(study,**arguments))
+        self.assertTrue(owner.verify_registered_qwen_development_target_witness(study,**arguments,
+            expected_scope_sha256=lane.report['scope_sha256']))
+        with self.assertRaisesRegex(ValueError,'exact selected target scope'):
+            owner.verify_registered_qwen_development_target_witness(study,**arguments,
+                expected_scope_sha256=pin('another selected original scope'))
+
+if __name__=='__main__':
+    tests=[ScopeChecks(name) for name in ScopeChecks.__dict__ if name.startswith('test_')]
+    if before:
+        tests=tests[:2]
+    else:
+        tests.extend(ScopeChecks(name) for name in Retained.__dict__ if name.startswith('test_'))
+    raise SystemExit(int(not unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(tests)).wasSuccessful()))

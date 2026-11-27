@@ -1,0 +1,68 @@
+"""Apply a finite extension to the retained registered transport verifier."""
+import ast
+from hashlib import sha256
+from pathlib import Path
+import difflib
+
+HERE = Path(__file__).absolute().parent
+PARENT = HERE.parent/'decoder-training-registered-source-prefill-private-v01-b8PYkGWb/relational_assessment.py'
+assert not any(p.is_symlink() for p in (PARENT,*PARENT.parents))
+before = PARENT.read_bytes()
+assert (len(before),sha256(before).hexdigest()) == (432500,'5ffc69dc064600279bf47c468c4ab06e42ac0bf9d715eac8779383f9b2325aeb')
+source = before.decode()
+replacements = [
+('''def verify_registered_development_target_witness(study_owner, *, route, registration, report,
+        expected_report_sha256, lane, verify_close):''',
+ '''def verify_registered_development_target_witness(study_owner, *, route, registration, report,
+        expected_report_sha256, lane, verify_close, expected_scope_sha256=None):'''),
+('''        scope = {key: value for key, value in report.items() if key not in (
+            "scope_sha256", "rows", "all_rows_fit_within_output_cap_witnessed", "source_prefill_verified", "dispatch_authority")}''',
+ '''        if expected_scope_sha256 is not None:
+            _need(_pin(expected_scope_sha256) and report.get("scope_sha256") == expected_scope_sha256,
+                  "exact selected target scope required")
+        scope = {key: value for key, value in report.items() if key not in (
+            "scope_sha256", "rows", "all_rows_fit_within_output_cap_witnessed", "source_prefill_verified", "dispatch_authority")}'''),
+('''                 == tuple(registration.get(key) for key in ("registration_sha256", "matrix_sha256", "evaluation_policy_sha256", "evidence_kind"))
+              and (report.get("evidence_kind") == "fictional_fixture"''',
+ '''                 == tuple(registration.get(key) for key in ("registration_sha256", "matrix_sha256", "evaluation_policy_sha256", "evidence_kind"))
+              and report.get("study_sha256") == registration.get("study_sha256")
+              and report.get("design_sha256") == registration.get("design_sha256")
+              and report.get("optimizer_step_grid_sha256") == registration.get("grid_sha256")
+              and (report.get("evidence_kind") == "fictional_fixture"'''),
+('''def verify_registered_qwen_development_target_witness(study_owner, *, registration, report,
+        expected_report_sha256, lane, verify_close):''',
+ '''def verify_registered_qwen_development_target_witness(study_owner, *, registration, report,
+        expected_report_sha256, lane, verify_close, expected_scope_sha256=None):'''),
+('''        report=report, expected_report_sha256=expected_report_sha256, lane=lane, verify_close=verify_close)
+
+
+DEVELOPMENT_PREFILL_SCHEMA''',
+ '''        report=report, expected_report_sha256=expected_report_sha256, lane=lane, verify_close=verify_close,
+        expected_scope_sha256=expected_scope_sha256)
+
+
+DEVELOPMENT_PREFILL_SCHEMA'''),
+('''                      prefill <= min(geometry["max_source_tokens"], lane.max_sequence_tokens)),
+                      "successful source prefill exceeds its original route capacity")''',
+ '''                      3 <= prefill <= min(geometry["max_source_tokens"], lane.max_sequence_tokens)),
+                      "successful source prefill outside its original route capacity")''')]
+for old,new in replacements:
+    assert source.count(old)==1,old
+    source=source.replace(old,new,1)
+post=source.encode()
+compile(post,str(HERE/'relational_assessment.py'),'exec')
+changed={'verify_registered_development_target_witness','verify_registered_qwen_development_target_witness',
+         'verify_registered_development_source_prefill'}
+def definitions(raw):
+    return [ast.dump(node) for node in ast.parse(raw).body if getattr(node,'name',None) not in changed]
+assert definitions(before)==definitions(post)
+for name,body in [('relational_assessment.before.py.DATA',before),('relational_assessment.py',post),
+                  ('transport.diff',''.join(difflib.unified_diff(before.decode().splitlines(keepends=True),
+                      source.splitlines(keepends=True),fromfile='relational_assessment.py (retained)',
+                      tofile='relational_assessment.py (private candidate)')).encode())]:
+    path=HERE/name
+    if path.exists():
+        assert path.read_bytes()==body
+    else:
+        with path.open('xb') as stream:stream.write(body)
+    print(name,len(body),sha256(body).hexdigest())

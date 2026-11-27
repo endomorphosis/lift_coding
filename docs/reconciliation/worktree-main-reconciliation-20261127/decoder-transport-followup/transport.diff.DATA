@@ -1,0 +1,56 @@
+--- relational_assessment.py (retained)
++++ relational_assessment.py (private candidate)
+@@ -1397,7 +1397,7 @@
+ 
+ 
+ def verify_registered_development_target_witness(study_owner, *, route, registration, report,
+-        expected_report_sha256, lane, verify_close):
++        expected_report_sha256, lane, verify_close, expected_scope_sha256=None):
+     """Verify the pair comparator's target-review role using a selected original close."""
+     scope_schema, report_schema, codec, label = _registered_target_witness_route(route)
+ 
+@@ -1408,6 +1408,9 @@
+               and report.get("schema") == report_schema
+               and report.get("dispatch_authority") is report.get("source_prefill_verified") is False
+               and _pin(lane.target_review_close_sha256), f"exact closed registered {label} target witness required")
++        if expected_scope_sha256 is not None:
++            _need(_pin(expected_scope_sha256) and report.get("scope_sha256") == expected_scope_sha256,
++                  "exact selected target scope required")
+         scope = {key: value for key, value in report.items() if key not in (
+             "scope_sha256", "rows", "all_rows_fit_within_output_cap_witnessed", "source_prefill_verified", "dispatch_authority")}
+         scope["schema"] = scope_schema
+@@ -1419,6 +1422,9 @@
+               and report.get("target_codec") == codec
+               and tuple(report.get(key) for key in ("registration_sha256", "matrix_sha256", "evaluation_policy_sha256", "evidence_kind"))
+                  == tuple(registration.get(key) for key in ("registration_sha256", "matrix_sha256", "evaluation_policy_sha256", "evidence_kind"))
++              and report.get("study_sha256") == registration.get("study_sha256")
++              and report.get("design_sha256") == registration.get("design_sha256")
++              and report.get("optimizer_step_grid_sha256") == registration.get("grid_sha256")
+               and (report.get("evidence_kind") == "fictional_fixture"
+                    or report.get("evidence_kind") == "native_reviewed" and report.get("allow_fictional_tokenizer") is False)
+               and tuple(report.get(name) for name in ("variant", "configuration_sha256", "tokenizer_pipeline_sha256",
+@@ -1471,10 +1477,11 @@
+ 
+ 
+ def verify_registered_qwen_development_target_witness(study_owner, *, registration, report,
+-        expected_report_sha256, lane, verify_close):
++        expected_report_sha256, lane, verify_close, expected_scope_sha256=None):
+     """Keep the existing Qwen target-review close entry point."""
+     return verify_registered_development_target_witness(study_owner, route=QWEN, registration=registration,
+-        report=report, expected_report_sha256=expected_report_sha256, lane=lane, verify_close=verify_close)
++        report=report, expected_report_sha256=expected_report_sha256, lane=lane, verify_close=verify_close,
++        expected_scope_sha256=expected_scope_sha256)
+ 
+ 
+ DEVELOPMENT_PREFILL_SCHEMA = "reviewed-development-source-only-prefill/v1"
+@@ -1803,8 +1810,8 @@
+                 prefill = observed.get("prefill_positions")
+                 _need(type(prefill) is int and prefill > 0 and (
+                       prefill + lane.max_output_tokens - 1 <= lane.max_sequence_tokens if route == QWEN else
+-                      prefill <= min(geometry["max_source_tokens"], lane.max_sequence_tokens)),
+-                      "successful source prefill exceeds its original route capacity")
++                      3 <= prefill <= min(geometry["max_source_tokens"], lane.max_sequence_tokens)),
++                      "successful source prefill outside its original route capacity")
+             original_reports.append(report)
+             proof_rows.append((report["scope_sha256"], component.expected_report_sha256, report.get("source_receipt_sha256"),
+                                scope["source_contexts_sha256"], component.original_close_sha256))

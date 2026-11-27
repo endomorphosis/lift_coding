@@ -1,0 +1,127 @@
+test_resealed_target_grid_or_study_or_design_refuses_before_close_owner (__main__.ScopeChecks.test_resealed_target_grid_or_study_or_design_refuses_before_close_owner) ... ERROR
+test_t5_frames_of_one_or_two_positions_refuse_before_close_owner (__main__.ScopeChecks.test_t5_frames_of_one_or_two_positions_refuse_before_close_owner) ... ERROR
+
+======================================================================
+ERROR: test_resealed_target_grid_or_study_or_design_refuses_before_close_owner (__main__.ScopeChecks.test_resealed_target_grid_or_study_or_design_refuses_before_close_owner)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/test_transport_scope.py", line 77, in test_resealed_target_grid_or_study_or_design_refuses_before_close_owner
+    f,owner=self.two_lanes()
+            ^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/test_transport_scope.py", line 56, in two_lanes
+    f,owner=super().two_lanes()
+            ^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-registered-source-prefill-private-v01-b8PYkGWb/check_registered_prefill.py", line 140, in two_lanes
+    helper, harness, f, t5, assessor = self.fixture()
+                                       ^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-registered-source-prefill-private-v01-b8PYkGWb/check_registered_prefill.py", line 73, in fixture
+    harness, f, t5 = helper.fixture()
+                     ^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-registered-dual-target-witness-private-v01-vbvuHts1/check_dual_witness.py", line 54, in fixture
+    f = owner.setup_fixture()
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-registered-qwen-witness-private-v01-KgmZIilF/check_registered_witness.py", line 62, in setup_fixture
+    fixture = fixture_test.witness_pair()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-t5-development-witness-private-v01-c8OD3SWo/check_witness.py", line 63, in witness_pair
+    pair = self.prepared()
+           ^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-t5-prospective-capacity-private-v01-5XM1TMEt/check_prospective.py", line 24, in prepared
+    fixture = self.setup_run()
+              ^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-span-validation-handoff-private-v01-7QLWdQjv/test_policy_validation_evaluator.py", line 230, in setup_run
+    fixture = donor['Fixture'](Path(temporary.name), family=family, native_validation=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-teacher-charge-private-v01/test_development_split.py", line 56, in __init__
+    variant = Variant(folder, family)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-portability-cohort-private-v01/test_portability_cohort.py", line 92, in __init__
+    self.native = (fixture["T5Case"](folder) if family == "t5"
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-relational-t5-private-v01/test_t5_arming.py", line 64, in __init__
+    super().__init__(folder, size=2, four_rows=True)
+  File "/tmp/decoder-training-relational-t5-private-v01/test_arming.py", line 55, in __init__
+    self.fx=origin_fixture["Case"](folder)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-relational-origin-private-v01/test_origin.py", line 67, in __init__
+    self.trainer=F["Fixture"](folder)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-relational-trial-private-v01/test_trial.py", line 175, in __init__
+    empty = stash(root / "empty.json", b"{}")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-relational-trial-private-v01/test_trial.py", line 152, in stash
+    path.write_bytes(body)
+  File "/usr/lib/python3.12/pathlib.py", line 1038, in write_bytes
+    with self.open(mode='wb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-t5-development-output-capacity-private-v01-5b7IDAki/check_output_capacity.py", line 28, in audit
+    raise RuntimeError(f'Unexpected fixture write {path}')
+RuntimeError: Unexpected fixture write /tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/fictional-validation-owner-xpkuwskp/empty.json
+
+======================================================================
+ERROR: test_t5_frames_of_one_or_two_positions_refuse_before_close_owner (__main__.ScopeChecks.test_t5_frames_of_one_or_two_positions_refuse_before_close_owner)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/test_transport_scope.py", line 88, in test_t5_frames_of_one_or_two_positions_refuse_before_close_owner
+    f,owner=self.two_lanes()
+            ^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/test_transport_scope.py", line 56, in two_lanes
+    f,owner=super().two_lanes()
+            ^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-registered-source-prefill-private-v01-b8PYkGWb/check_registered_prefill.py", line 140, in two_lanes
+    helper, harness, f, t5, assessor = self.fixture()
+                                       ^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-registered-source-prefill-private-v01-b8PYkGWb/check_registered_prefill.py", line 73, in fixture
+    harness, f, t5 = helper.fixture()
+                     ^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-registered-dual-target-witness-private-v01-vbvuHts1/check_dual_witness.py", line 54, in fixture
+    f = owner.setup_fixture()
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-registered-qwen-witness-private-v01-KgmZIilF/check_registered_witness.py", line 62, in setup_fixture
+    fixture = fixture_test.witness_pair()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-t5-development-witness-private-v01-c8OD3SWo/check_witness.py", line 63, in witness_pair
+    pair = self.prepared()
+           ^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-t5-prospective-capacity-private-v01-5XM1TMEt/check_prospective.py", line 24, in prepared
+    fixture = self.setup_run()
+              ^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-span-validation-handoff-private-v01-7QLWdQjv/test_policy_validation_evaluator.py", line 230, in setup_run
+    fixture = donor['Fixture'](Path(temporary.name), family=family, native_validation=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-teacher-charge-private-v01/test_development_split.py", line 56, in __init__
+    variant = Variant(folder, family)
+              ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-portability-cohort-private-v01/test_portability_cohort.py", line 92, in __init__
+    self.native = (fixture["T5Case"](folder) if family == "t5"
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-relational-t5-private-v01/test_t5_arming.py", line 64, in __init__
+    super().__init__(folder, size=2, four_rows=True)
+  File "/tmp/decoder-training-relational-t5-private-v01/test_arming.py", line 55, in __init__
+    self.fx=origin_fixture["Case"](folder)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-relational-origin-private-v01/test_origin.py", line 67, in __init__
+    self.trainer=F["Fixture"](folder)
+                 ^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-relational-trial-private-v01/test_trial.py", line 175, in __init__
+    empty = stash(root / "empty.json", b"{}")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-relational-trial-private-v01/test_trial.py", line 152, in stash
+    path.write_bytes(body)
+  File "/usr/lib/python3.12/pathlib.py", line 1038, in write_bytes
+    with self.open(mode='wb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/decoder-training-t5-development-output-capacity-private-v01-5b7IDAki/check_output_capacity.py", line 28, in audit
+    raise RuntimeError(f'Unexpected fixture write {path}')
+RuntimeError: Unexpected fixture write /tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/fictional-validation-owner-f9ef3wlc/empty.json
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.314s
+
+FAILED (errors=2)

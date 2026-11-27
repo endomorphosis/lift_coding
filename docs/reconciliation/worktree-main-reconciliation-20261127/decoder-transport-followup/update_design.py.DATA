@@ -1,0 +1,69 @@
+"""Update the saved design with the exact local transport result and observed frontier."""
+from hashlib import sha256
+import json
+from pathlib import Path
+from runpy import run_path
+
+HERE=Path(__file__).absolute().parent
+
+def checked(path,size,digest):
+    assert path.is_absolute() and path.is_relative_to('/tmp')
+    assert not {'.git','datasets','accelerate','..'} & set(path.parts)
+    assert not any(p.is_symlink() for p in (path,*path.parents))
+    raw=path.read_bytes();assert (len(raw),sha256(raw).hexdigest())==(size,digest)
+    return raw
+
+def ref(path):
+    assert not path.is_symlink()
+    raw=path.read_bytes()
+    return dict(path=str(path),bytes=len(raw),sha256=sha256(raw).hexdigest())
+
+def save(path,value):
+    raw=(json.dumps(value,sort_keys=True,indent=2,ensure_ascii=False,allow_nan=False)+'\n').encode()
+    with path.open('xb') as stream:stream.write(raw)
+    return ref(path)
+
+old=Path('/tmp/decoder-training-experiment-manifest-v406.json')
+raw=checked(old,835039,'d954e78faeab397a2691c8cee252127092f2f9b63710cfd5cbb5123218e88946')
+m=json.loads(raw);m.update(previous_manifest=ref(old),manifest_schema_version='0.407.0')
+m['advisory_operator_readiness_checker']=ref(HERE/'check_design.py')
+design=m['typed_execution_design']
+design['registered_transport_original_scope']=ref(HERE/'descriptor.json')
+design['guide581_stage_a_distinct_identity_boundary']=ref(HERE/'guide581-frontier.json')
+checker=run_path(str(HERE/'check_design.py'))
+report=checker['report'](m)
+assert report['stage_a_coordination']['observed_guide']==581
+assert report['registered_transport_original_scope']['focused_local_checks']==5
+assert report['stage_a_coordination']['current_TRAIN_consumer'] is None
+assert report['stage_a_coordination']['current_independent_read_join'] is None
+assert all(entry['selected_receipt_sha256'] is None for entry in design['independent_selection_slots'] if entry['id']=='legal_cohort')
+manifest=save(Path('/tmp/decoder-training-experiment-manifest-v407.json'),m)
+readiness=save(HERE/'verified-readiness.json',dict(checked_manifest=manifest,**report))
+plan=Path('/tmp/decoder-training-integration-plan.md')
+old_plan=checked(plan,1823908,'f09da1806e10ed4dc03662a4e2c996882f1613d163e7ff5fa821135e2355d341')
+body=old_plan.decode()
+old_title='Version 3.552. Updated 2026-11-27 with the joint TRAIN and DEVELOPMENT receipt check.'
+assert body.count(old_title)==1
+body=body.replace(old_title,'Version 3.553. Updated 2026-11-27 with registered transport scope and capacity checks.',1)
+marker='## Primary research references'
+assert body.count(marker)==1
+addition='''## 845. Check transport capacity against the original model and study
+
+The registered transport verifier now checks the target report's study, design and optimizer grid against the selected registration. Its optional scope pin also binds the complete detached target scope. The existing Qwen wrapper forwards that pin and keeps its prior default. T5 successful source-prefill reports must carry at least three positions, matching the original worker's nonempty body plus BOS and EOS. The causal reservation arithmetic stays bound to its existing profile. [Candidate and exact evidence](/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/descriptor.json)
+
+Two regression functions reproduced eight failing cases in the retained verifier. The candidate passed 11 local tests, comprising five focused controls and six retained controls. The tests exercise both decoder families through the existing pair comparator, including the three-position T5 boundary and the Qwen scope relay. Two earlier attempts stopped during fixture setup because the inherited output directory and audit permission pointed at different private parents. Both were corrected in the test harness. All earlier logs remain retained. The fixtures used simulated closes and supply no model or convergence result. [Closed local result](/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/final-green.stderr)
+
+## 846. Preserve the distinct Guide581 Source identities
+
+Guide581 published Datasets `5bf57f39` and Accelerate `64a86499`. Its documentation writer named Accelerate `e55316f4`; its qualification used physical Accelerate `219ba3da`. These are three different commits. The saved design records each separately and leaves current paired Source verification, selector and Reader allocation unset. The writer records a 7,070,589-byte Datasets index. Its independent payload plus growth probe is 713,598 bytes above the retained headroom before storage and owner overhead. [Observed frontier](/tmp/decoder-training-transport-original-scope-private-v01-HGGFq0NH/guide581-frontier.json)
+
+The original training and development cohorts still require their independent reviews and current consumer receipts. The four-teacher and portability studies retain their original hypotheses and missing measurements. [Experiment manifest](/tmp/decoder-training-experiment-manifest-v407.json)
+
+'''
+post=body.replace(marker,addition+marker,1).encode()
+with (HERE/'plan-staged.md').open('xb') as stream:stream.write(post)
+with plan.open('r+b') as stream:
+    assert stream.read()==old_plan
+    stream.seek(0);stream.write(post);stream.truncate()
+assert plan.read_bytes()==post
+for item in (manifest,readiness,ref(plan)):print(json.dumps(item))

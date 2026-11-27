@@ -1,0 +1,65 @@
+"""Seal exact detached code, controls and the latest publication metadata."""
+from hashlib import sha256
+import json
+from pathlib import Path
+
+HERE=Path(__file__).absolute().parent
+
+def ref(path):
+    assert path.is_absolute() and path.is_relative_to('/tmp')
+    assert not {'.git','datasets','accelerate','repositories','..'} & set(path.parts)
+    assert not any(part.is_symlink() for part in (path,*path.parents))
+    raw=path.read_bytes()
+    return dict(path=str(path),bytes=len(raw),sha256=sha256(raw).hexdigest())
+
+def save(name,value):
+    raw=(json.dumps(value,indent=2,sort_keys=True,ensure_ascii=False,allow_nan=False)+'\n').encode()
+    path=HERE/name
+    with path.open('xb') as stream:stream.write(raw)
+    return ref(path)
+
+def result(stem,count,expected):
+    refs={key:ref(HERE/f'{stem}.{key}') for key in ('exit','stdout','stderr')}
+    assert (HERE/f'{stem}.exit').read_bytes()==f'{expected}\n'.encode()
+    assert f'Ran {count} tests'.encode() in (HERE/f'{stem}.stderr').read_bytes()
+    return refs
+
+post=ref(HERE/'relational_assessment.py')
+assert (post['bytes'],post['sha256'])==(433079,'d4906425bc6b10a1ae8107cea854410c01099b91386b1ebea54ca1b11b5fc5fb')
+descriptor=save('descriptor.json',dict(
+    schema='private-registered-decoder-transport-original-scope/v1',
+    parent=ref(HERE/'relational_assessment.before.py.DATA'),candidate=post,
+    diff=ref(HERE/'transport.diff'),builder=ref(HERE/'build.py'),tests=ref(HERE/'test_transport_scope.py'),
+    closed_tests=result('final-green',11,0),focused_test_functions=5,retained_test_functions=6,total_test_functions=11,
+    original_behavioral_failures=result('behavioral-red',2,1),original_parent_functions_failed=2,
+    original_parent_failing_subcases=8,earlier_green_controls=result('green',10,0),
+    initial_fixture_setup_errors=result('red',2,1),second_fixture_setup_errors=result('reproduced-red',2,1),
+    correction_to_test_setup='The inherited fixture directory and its audit permission were relocated to this private output parent.',
+    existing_definitions_preserved_except=['verify_registered_development_target_witness',
+        'verify_registered_qwen_development_target_witness','verify_registered_development_source_prefill'],
+    unchanged_existing_calls_use_optional_scope_default=True,
+    qualification='Existing registered entries and strict codec on fictional detached data with simulated owner closes.',
+    current_source_adoption=None,actual_current_source_prefill=None,actual_current_target_witness=None,
+    actual_training_or_model_execution=False,execution_selected=False,dispatch_authority=False))
+folder=Path('/tmp/P1-proof-cache-translation-current-6btZZr/lean-json-diagnostics')
+pub=ref(folder/'actual-Guide581-four-docs-three-FF-publication.json')
+writer=ref(folder/'actual-Guide581-four-docs-Source-closed-and-frozen.json')
+ledger=ref(folder/'Source-only-Guide581-full-retained-cap.json')
+assert (pub['bytes'],pub['sha256'])==(3578,'0e5e9a2bc004e7ba1c1a6b681afe50a8890c557433b39706aca55971363ec9d6')
+assert (writer['bytes'],writer['sha256'])==(6552,'38e41dfb04443a92c2a20308d4f01a9cb75fa34f97029856ffbcbf82f1429503')
+assert (ledger['bytes'],ledger['sha256'])==(1321,'91acf9ffe66d861824275ca128635becb9fac6f6805a3c411ede206b30f012b7')
+published=json.loads(Path(pub['path']).read_bytes());written=json.loads(Path(writer['path']).read_bytes())
+paid=json.loads(Path(ledger['path']).read_bytes())['after_full_retained_precharge']
+headroom=min(paid['global_cap']-paid['used'],paid['internal_cap']-paid['internal_used'])
+frontier=save('guide581-frontier.json',dict(
+    schema='private-published-guide581-stage-a-identity-boundary/v1',publication=pub,writer=writer,ledger=ledger,
+    datasets=published['live_main_after']['datasets'],published_accelerate=published['live_main_after']['accelerate'],
+    guide_writer_accelerate=written['A'],qualified_physical_accelerate=published['qualified_physical_A_HEAD'],
+    qualified_physical_accelerate_index=published['qualified_physical_A_index'],datasets_index=written['index'],
+    current_capture_floor=paid['captures'],retained_headroom_bytes=headroom,
+    independent_index_payload_floor=written['index']['bytes']+1,
+    independent_index_payload_shortfall=written['index']['bytes']+1-headroom,
+    exact_current_paired_source_epoch=None,original_paired_selector=None,current_reader_allocation=None,
+    signed_current_TRAIN_consumer=None,signed_current_DEVELOPMENT_consumer=None,
+    current_conditional_reader_quote=None,execution_selected=False,dispatch_authority=False))
+print(json.dumps(dict(descriptor=descriptor,guide581_frontier=frontier)))
