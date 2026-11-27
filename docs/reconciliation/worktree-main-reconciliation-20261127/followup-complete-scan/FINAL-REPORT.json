@@ -94,5 +94,13 @@
     "receipt": "nested-owned-final-proof.json",
     "receipt_sha256": "25b4756f979b6718b31e6857efb9c496f62d302c36b2282a0747b1da66b8f8eb"
   },
-  "total_observed_owned_repository_commit_pairs_accounted_for": 10160
+  "total_observed_owned_repository_commit_pairs_accounted_for": 10160,
+  "actual_archive_publication": {
+    "commit": "e67ad0d217e3cb4cfa1f63f62e9dc09156236ec7",
+    "recovery_parent": "58348d9b39f3437ce285cc1312a570eda17b049c",
+    "normal_merge": true,
+    "all_six_batches_accepted": true,
+    "archive_subtree_matches_uploaded_branch": true,
+    "receipt": "batch-publication-closeout.json"
+  }
 }

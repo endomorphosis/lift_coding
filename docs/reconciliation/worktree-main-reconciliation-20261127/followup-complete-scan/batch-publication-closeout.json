@@ -1,0 +1,118 @@
+{
+  "schema": "normal-batched-recovery-publication/v1",
+  "initial_main": "04315cd28cdeabae354cc6b77643f1c435a09352",
+  "recovery_ref": "refs/heads/reconciliation/worktree-recovery-20261127-zYjieLmd",
+  "payload_files": 2289,
+  "payload_bytes": 478908470,
+  "batch_count": 6,
+  "batches": [
+    {
+      "index": 1,
+      "commit": "02ebfcdb87db034125d4c97f24c610b916cc0d84",
+      "parent": "04315cd28cdeabae354cc6b77643f1c435a09352",
+      "paths": 1,
+      "raw_bytes": 90000000,
+      "push": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "remote: warning: See https://gh.io/lfs for more information.        \nremote: warning: File docs/reconciliation/worktree-main-reconciliation-20261127/followup-complete-scan/branch-history/encrypted-accelerate-commit/accelerate-sensitive-historical-commit-v02.archive.gpg.part-000.DATA is 85.83 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        \nremote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        \nremote: \nremote: Create a pull request for 'reconciliation/worktree-recovery-20261127-zYjieLmd' on GitHub by visiting:        \nremote:      https://github.com/endomorphosis/lift_coding/pull/new/reconciliation/worktree-recovery-20261127-zYjieLmd        \nremote: \nTo https://github.com/endomorphosis/lift_coding.git\n * [new branch]          02ebfcdb87db034125d4c97f24c610b916cc0d84 -> reconciliation/worktree-recovery-20261127-zYjieLmd\n",
+        "remote_ref": "02ebfcdb87db034125d4c97f24c610b916cc0d84",
+        "accepted": true
+      }
+    },
+    {
+      "index": 2,
+      "commit": "d2d44929a3a6c6861bbd701cb48c1c359bc9eefa",
+      "parent": "02ebfcdb87db034125d4c97f24c610b916cc0d84",
+      "paths": 1,
+      "raw_bytes": 90000000,
+      "push": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "remote: warning: See https://gh.io/lfs for more information.        \nremote: warning: File docs/reconciliation/worktree-main-reconciliation-20261127/followup-complete-scan/branch-history/encrypted-accelerate-commit/accelerate-sensitive-historical-commit-v02.archive.gpg.part-001.DATA is 85.83 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        \nremote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        \nTo https://github.com/endomorphosis/lift_coding.git\n   02ebfcdb8..d2d44929a  d2d44929a3a6c6861bbd701cb48c1c359bc9eefa -> reconciliation/worktree-recovery-20261127-zYjieLmd\n",
+        "remote_ref": "d2d44929a3a6c6861bbd701cb48c1c359bc9eefa",
+        "accepted": true
+      }
+    },
+    {
+      "index": 3,
+      "commit": "0159e4b6682e2f9620b3f807ffa4cb4996a78d51",
+      "parent": "d2d44929a3a6c6861bbd701cb48c1c359bc9eefa",
+      "paths": 1,
+      "raw_bytes": 90000000,
+      "push": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "remote: warning: See https://gh.io/lfs for more information.        \nremote: warning: File docs/reconciliation/worktree-main-reconciliation-20261127/followup-complete-scan/branch-history/encrypted-accelerate-commit/accelerate-sensitive-historical-commit-v02.archive.gpg.part-002.DATA is 85.83 MB; this is larger than GitHub's recommended maximum file size of 50.00 MB        \nremote: warning: GH001: Large files detected. You may want to try Git Large File Storage - https://git-lfs.github.com.        \nTo https://github.com/endomorphosis/lift_coding.git\n   d2d44929a..0159e4b66  0159e4b6682e2f9620b3f807ffa4cb4996a78d51 -> reconciliation/worktree-recovery-20261127-zYjieLmd\n",
+        "remote_ref": "0159e4b6682e2f9620b3f807ffa4cb4996a78d51",
+        "accepted": true
+      }
+    },
+    {
+      "index": 4,
+      "commit": "6f2a79fa97b0bca77f64c3928c43ca61a1bac6f9",
+      "parent": "0159e4b6682e2f9620b3f807ffa4cb4996a78d51",
+      "paths": 163,
+      "raw_bytes": 72162008,
+      "push": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "To https://github.com/endomorphosis/lift_coding.git\n   0159e4b66..6f2a79fa9  6f2a79fa97b0bca77f64c3928c43ca61a1bac6f9 -> reconciliation/worktree-recovery-20261127-zYjieLmd\n",
+        "remote_ref": "6f2a79fa97b0bca77f64c3928c43ca61a1bac6f9",
+        "accepted": true
+      }
+    },
+    {
+      "index": 5,
+      "commit": "ae46190a3f2a97eddbe6feecdf4efdfda1013b71",
+      "parent": "6f2a79fa97b0bca77f64c3928c43ca61a1bac6f9",
+      "paths": 29,
+      "raw_bytes": 74772245,
+      "push": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "To https://github.com/endomorphosis/lift_coding.git\n   6f2a79fa9..ae46190a3  ae46190a3f2a97eddbe6feecdf4efdfda1013b71 -> reconciliation/worktree-recovery-20261127-zYjieLmd\n",
+        "remote_ref": "ae46190a3f2a97eddbe6feecdf4efdfda1013b71",
+        "accepted": true
+      }
+    },
+    {
+      "index": 6,
+      "commit": "58348d9b39f3437ce285cc1312a570eda17b049c",
+      "parent": "ae46190a3f2a97eddbe6feecdf4efdfda1013b71",
+      "paths": 2094,
+      "raw_bytes": 61974217,
+      "push": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "To https://github.com/endomorphosis/lift_coding.git\n   ae46190a3..58348d9b3  58348d9b39f3437ce285cc1312a570eda17b049c -> reconciliation/worktree-recovery-20261127-zYjieLmd\n",
+        "remote_ref": "58348d9b39f3437ce285cc1312a570eda17b049c",
+        "accepted": true
+      }
+    }
+  ],
+  "main_attempts": [
+    {
+      "commit": "e67ad0d217e3cb4cfa1f63f62e9dc09156236ec7",
+      "parent_main": "04315cd28cdeabae354cc6b77643f1c435a09352",
+      "recovery_parent": "58348d9b39f3437ce285cc1312a570eda17b049c",
+      "changed_paths": 2252,
+      "push": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "To https://github.com/endomorphosis/lift_coding.git\n   04315cd28..e67ad0d21  e67ad0d217e3cb4cfa1f63f62e9dc09156236ec7 -> main\n",
+        "remote_ref": "e67ad0d217e3cb4cfa1f63f62e9dc09156236ec7",
+        "accepted": true
+      }
+    }
+  ],
+  "forced_push": false,
+  "hosted_ci_dispatched": false,
+  "all_staged_artifact_hashes_verified": true,
+  "published_main": "e67ad0d217e3cb4cfa1f63f62e9dc09156236ec7",
+  "recovery_branch_merged_as_parent": true,
+  "all_payload_paths_verified": true,
+  "verified_archive_subtree_identical_to_uploaded_branch": true,
+  "readback_utc": "2026-11-27T06:16:40.238420+00:00",
+  "remote_main_readback": "e67ad0d217e3cb4cfa1f63f62e9dc09156236ec7"
+}
