@@ -1,0 +1,97 @@
+{
+  "actual_Git_Source_or_runtime_effects": false,
+  "actual_Source_epoch_Git_full9_clock_IO_selection_effect_and_results": null,
+  "bootstrap_future_NULL_bindings": [
+    "ADDITIONAL_A_PROVENANCE",
+    "ADDITIONAL_A_ROOT",
+    "ADMITTED_IO_PLAN_REFERENCE",
+    "BINDING_MANIFEST_REFERENCE",
+    "EFFECT_DECISION_REFERENCE",
+    "EXPECTED_MODULES",
+    "GIT_CANDIDATE_PROVENANCE",
+    "PYTEST_INIFILE",
+    "REQUIRED_CANONICAL_CONFTESTS",
+    "ROOT",
+    "ROOT_RUNTIME_SELECTION",
+    "SOURCE_EPOCH_RECORD_COUNT",
+    "SOURCE_EPOCH_SHA256",
+    "SOURCE_READ_BINDING_REFERENCE",
+    "rewrite_observer"
+  ],
+  "cases": 9,
+  "controls": {
+    "bootstrap": {
+      "bytes": 36839,
+      "path": "/tmp/P1-proof-cache-translation-R2-ordinary9-INERT-BUQbWDYR/existing-ordinary9-bootstrap.INERT.py.DATA",
+      "sha256": "3ec8385ffaa38a6c821c11d4e73b09744f6f8bcde9edb13b09a49338aa7af901"
+    },
+    "factory": {
+      "bytes": 3260,
+      "path": "/tmp/P1-proof-cache-translation-R2-ordinary9-INERT-BUQbWDYR/existing-ordinary9-factory.INERT.py.DATA",
+      "sha256": "0dfcd621695d9b761e681185b75fe466a25f8bdad1ad389915dea857cd9573a0"
+    },
+    "operator": {
+      "bytes": 51961,
+      "path": "/tmp/P1-proof-cache-translation-R2-ordinary9-INERT-BUQbWDYR/existing-ordinary9-operator.INERT.py.DATA",
+      "sha256": "8a4b2bed367d24ece03a57ab2a7092da632fd00e90a0062e796c2ec49930e927"
+    }
+  },
+  "current_candidate_test_append": {
+    "bytes": 2147,
+    "path": "/tmp/P1-proof-cache-translation-agreement-private-tsXoF9ev/SEALED-private-proof-cache-translation-append.json",
+    "sha256": "09febf74c72a5f00aa3c630bee38621916ef9b5d40ca44baf399a208e2b3be30"
+  },
+  "functions": 5,
+  "operator_future_NULL_bindings": [
+    "ABSENT_PATHS",
+    "BOOTSTRAP_REFERENCE",
+    "D_READ_BINDING_REFERENCE",
+    "FINAL_ADMITTED_IO_PLAN_REFERENCE",
+    "FINAL_A_HEAD",
+    "FINAL_A_PROVENANCE",
+    "FINAL_A_ROOT",
+    "FINAL_A_TREE",
+    "FINAL_BINDING_MANIFEST",
+    "FINAL_BINDING_MANIFEST_REFERENCE",
+    "FINAL_D_HEAD",
+    "FINAL_D_PROVENANCE",
+    "FINAL_D_ROOT",
+    "FINAL_D_TREE",
+    "FINAL_EFFECT_DECISION",
+    "FINAL_EFFECT_DECISION_REFERENCE",
+    "FINAL_EXPECTED_CAPACITY",
+    "FINAL_EXPECTED_RESOURCE_CONFIG",
+    "FINAL_FIXTURE_CLOSURE_REFERENCE",
+    "FINAL_MODULE_BINDINGS",
+    "FINAL_OUTPUT_PATH",
+    "FINAL_RESOURCE_STATE_PATH",
+    "FINAL_SDK_BINDINGS",
+    "FINAL_SOURCE_PROJECTS",
+    "ROOT_RUNTIME_SELECTION",
+    "ROOT_SELECTION",
+    "parent"
+  ],
+  "preserved_D_READ_ABI_normal_rewrite_finalizer_resource_limits": true,
+  "prior_INERT_reference": {
+    "bytes": 5921,
+    "path": "/tmp/P7-checked-feedback-terminal-final-bind-INERT-D0xVtGlC/READY-ordinary26-final-revalidated-static-INERT.json",
+    "sha256": "5ac1750a33af99dc544cffc49d8c501f39abf400ac0d225577053feeb483f940"
+  },
+  "prospective_phase_group": "phase1-proof-cache-translation9",
+  "role_plan": {
+    "bytes": 4195,
+    "path": "/tmp/P1-proof-cache-translation-R2-ordinary9-INERT-BUQbWDYR/ordinary9-source-and-rewrite-roles-INERT-v02.json",
+    "sha256": "49f7a655acf737f9cbd1cc320deeba192e9697b34f5b3be8aa8d7c6e00e39286"
+  },
+  "schema": "existing-R2-Phase1-proof-cache-translation-ordinary9-compile-only/v1",
+  "selector_roster": {
+    "bytes": 2684,
+    "path": "/tmp/P1-proof-cache-translation-R2-ordinary9-INERT-BUQbWDYR/exact-5-function-9-proposed-literal-cases.json",
+    "sha256": "68c1f85ee7cbfe88d26106399286997739d84e390a659c15350ca1ce347154b4"
+  },
+  "v597_reference": {
+    "bytes": 6769,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-Phase7-current-checked-proof-ordinary26-closed.json",
+    "sha256": "d7869ec2129071491a627ed7313aae19851ff39a5b18afa8478f13e714619ca9"
+  }
+}

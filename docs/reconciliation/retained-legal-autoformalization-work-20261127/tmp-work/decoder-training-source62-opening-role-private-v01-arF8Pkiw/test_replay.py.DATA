@@ -1,0 +1,79 @@
+"""Verify exact archived role divergence and its separate canonical-wire failure."""
+from hashlib import sha256
+import json
+from pathlib import Path
+from runpy import run_path
+import unittest
+
+HERE=Path(__file__).resolve().parent
+candidate=HERE/'replay.py'
+assert sha256(candidate.read_bytes()).hexdigest()=='6ba564450d29eb54467a6af999db317404b55cc998a44347ab4a85eeeda41299'
+api=run_path(str(candidate))
+base=Path(api['OLD_RESULT'])
+
+
+class OpeningRoleControls(unittest.TestCase):
+    def test_original_matched_pair_gives_one_earlier_wire_failure_per_stream(self):
+        result=api['report']()
+        self.assertEqual(result['original_exact_by_arm'],{'pristine0':0,'TRAIN3':0})
+        self.assertEqual(result['observed_body_positions_after_strict_wire_obstruction'],4433)
+        self.assertEqual(result['actual_eos_rejection_predicate_reproduced_count'],1)
+        self.assertEqual(result['timed_out_streams_with_new_retrospective_wire_witness'],5)
+        rows=result['rows']
+        self.assertEqual([row['shared_native_frame_tokens'] for row in rows],[727,732,728])
+        self.assertEqual([row['first_divergent_body_token'] for row in rows],[7]*3)
+        self.assertEqual(result['distinct_first_symbols'],
+            {'TRAIN3':{'officer':3},'pristine0':{'covered_officer':1,'query':1,'supervisor':1}})
+        for row in rows:
+            for arm,entry in row['arms'].items():
+                witness=entry['strict_wire_witness']
+                self.assertEqual((witness['body_token_position'],witness['first_mismatching_byte_zero_based']),(5,21))
+                self.assertEqual(entry['original_parser_called_at_eos'],entry['original_eos'])
+
+    def test_extending_a_prefix_before_the_first_disagreement_is_inconclusive(self):
+        body=b'{"argument_roles":[{"symbol":"alpha","roles":["person"]}]}'
+        inspect=api['strict_role_prefix']
+        for count in range(22):
+            with self.subTest(count=count):
+                self.assertIsNone(inspect(body[:count],tuple(range(1,count+1))))
+        for count in range(22,len(body)+1):
+            witness=inspect(body[:count],tuple(range(1,count+1)))
+            self.assertEqual(witness['first_mismatching_byte_zero_based'],21)
+            self.assertEqual(witness['body_token_position'],22)
+            self.assertEqual(witness['prefix_sha256'],sha256(body[:22]).hexdigest())
+
+    def test_one_bad_byte_can_arrive_inside_a_multi_byte_token(self):
+        body=b'{"argument_roles":[{"symbol":"alpha"}]}'
+        inspect=api['strict_role_prefix']
+        self.assertEqual(inspect(body,(2,5,10,21,29,len(body)))['body_token_position'],5)
+        self.assertEqual(inspect(body,(len(body),))['body_token_position'],1)
+
+    def test_valid_sorted_key_and_unrecognized_contexts_are_left_to_existing_checks(self):
+        inspect=api['strict_role_prefix']
+        values=(b'{"argument_roles":[{"roles":["person"],"symbol":"alice"}]}',
+                b'{"argument_roles":[]}',
+                b'{"detail":{"argument_roles":[{"symbol":"x"}]}}',
+                b'{"argument_roles":"[{symbol: x}]"}')
+        for body in values:
+            with self.subTest(body=body):
+                self.assertIsNone(inspect(body,(len(body),)))
+
+    def test_original_json_predicate_refuses_noncanonical_role_order(self):
+        parse,wire,_=api['original_codec'](json.loads(base.read_bytes()))
+        offered=b'{"argument_roles":[{"symbol":"a","roles":["person"]}]}'
+        with self.assertRaisesRegex(ValueError,'canonical reviewed artifact JSON required'):
+            parse(offered)
+        expected=wire(json.loads(offered))
+        self.assertEqual(expected,b'{"argument_roles":[{"roles":["person"],"symbol":"a"}]}')
+        self.assertEqual(parse(expected),json.loads(offered))
+
+    def test_canonical_json_can_include_duplicate_role_members(self):
+        parse,wire,_=api['original_codec'](json.loads(base.read_bytes()))
+        item={'symbol':'x','roles':['person']}
+        body=wire({'argument_roles':[item,item]})
+        self.assertEqual(parse(body)['argument_roles'],[item,item])
+        self.assertIsNone(api['strict_role_prefix'](body,(len(body),)))
+
+
+if __name__=='__main__':
+    unittest.main(verbosity=2)

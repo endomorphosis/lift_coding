@@ -1,0 +1,223 @@
+"""Run the existing Reader function against modeled Source/Git and real private readbacks."""
+import ast
+from copy import deepcopy
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+from runpy import run_path
+import time
+import unittest
+from reservation_preview import CANDIDATE, EPOCH_OWNER, PREVIEW, checked, load
+
+HERE = Path(__file__).resolve().parent
+BASE = HERE.parent / 'decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF'
+test = BASE / 'retained_reader_projection.py'
+assert sha256(test.read_bytes()).hexdigest() == 'd72afb4a261e329a185fc7064c82a00232434d5d368e8870a33c3c61a9ab6da5'
+Harness = run_path(str(test))['ExistingStageAOwner']
+A0_OWNER = (HERE.parent / 'decoder-training-stage-a-relocated-a0-private-v01-eAKKpyUX/verify_rebind_capture.py',
+             141422, 'f37c2faba9ba57eaec6c71fa1065befe2f7e14b9c0e69f2d218003ea92c02555')
+
+
+def wire(value):
+    return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode()
+
+
+def digest(raw):
+    return sha256(raw).hexdigest()
+
+
+class RelocatedReader(unittest.TestCase):
+    def setUp(self):
+        self.h = h = Harness()
+        h.setUpClass()
+        h.setUp()
+        self.addCleanup(h.doCleanups)
+        tree = ast.parse(checked((HERE/'reader.py.DATA', 42325,
+            'c9a1e81533834ba39fbed94f64da61fcde171259976703513168c230eb377e55')))
+        nodes = [n for n in tree.body
+                 if (type(n) is ast.FunctionDef and n.name in ('read_selected_stage_a_epoch','checked_read'))
+                 or (type(n) is ast.Assign and type(n.targets[0]) is ast.Name
+                     and n.targets[0].id in {'STAGE_A_RELOCATED_PARTITION','STAGE_A_RELOCATED_SELECTION'})]
+        self.assertEqual(len(nodes), 4)
+        modeled_body_read = h.owner['checked_read']
+        exec(compile(ast.Module(nodes,type_ignores=[]), str(HERE/'reader.py.DATA'), 'exec'), h.owner)
+        self.checked_read = h.owner['checked_read']
+        h.owner['checked_read'] = modeled_body_read
+        self.epoch = load(EPOCH_OWNER)
+        self.git = load(CANDIDATE)
+        self.preview = json.loads(checked(PREVIEW))
+        self.plan = self.preview['reader_inputs']
+        self.roots = tuple(self.plan['current_roots'][role]['root'] for role in ('D','A'))
+        h.roots = self.roots
+        h.owner['request'] = dict(root=self.roots[0], additional_A={'root':self.roots[1]},
+                                 actual_modes={root:'read' for root in self.roots})
+        guides = self.plan['four_guide_post_candidates_for_current_owner_recheck']
+        h.fixture.guides = guides
+        outer = self.preview['relocated_retained_outer']
+        self.targets = self.plan['fresh_Source_body_targets']
+        h.fresh_map = {}
+        for ordinal, row in enumerate(self.targets):
+            body = f'# future Source body {ordinal}\n'.encode()
+            stamp = dict(row['full9'],st_size=str(len(body)))
+            row.update(bytes=len(body),sha256=digest(body),expected_Git_blob_oid=self.epoch['blob_oid'](body),full9=stamp)
+            h.fresh_map[row['path']] = body, stamp
+        self.stamps = {row['path']:row['full9'] for row in outer + guides + self.targets}
+        self.index = self.plan['current_index']
+        self.index_raw = checked((Path('/tmp/decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa/'
+                                  'guide572-publisher-matched-index.DATA'),7070597,
+                                  '2266f4d1c12dfa62b7e87a5078a49a578134ea0150752e9db42a566ad810dca5'))
+        raw = wire(self.preview)
+        self.ref = dict(path=str(h.output/'selection-preview.fixture'),bytes=len(raw),sha256=digest(raw))
+        Path(self.ref['path']).write_bytes(raw)
+        known = {row['path']:row for row in outer}
+        sizes = self.epoch['_plan_compact_archive_sizes'](
+            self.plan,outer,[row for row in outer if row['path'].endswith('.py')],
+            {row['path']:row['full9'] for row in self.targets})
+        self.selection = h.selection | dict(schema='existing-stage-a-retained-controls-outer-only/v3',
+            plan_sha256=self.ref['sha256'],relocation_preview=self.ref,maximum_core_bytes=32*1024**2,
+            epoch_output_maximums=sizes,
+            git_record=dict(D_index=self.index,A_index=known[self.roots[1]+'/.git/index'],
+                           exact_exclude_pins=[known[root+'/.git/info/exclude'] for root in self.roots]),
+            paired_selector_observation_sha256='7'*64,
+            git_project_expectations={row['root']:row for row in self.plan['current_roots'].values()})
+        h.owner.update(verify_full_metadata_guard=self.observe)
+        self.git.update(verify_stage_a_git_with_retained_controls=self.git_endpoints,
+                        stage_a_paired_git_expectations=lambda selected, roots: selected)
+        self.approvals = []
+        self.observations = 0
+        self.drift = False
+        self.approve_binding = True
+
+    def observe(self, *, stage_a_rows):
+        self.observations += 1
+        self.assertEqual(len(stage_a_rows),1254)
+        self.assertEqual({row['path']:row['full9'] for row in stage_a_rows},self.stamps)
+        observed = deepcopy(self.stamps)
+        if self.drift and self.observations == 2:
+            observed[self.targets[0]['path']]['st_ino']='9'
+        return observed
+
+    def git_endpoints(self, io, record, deadline, *, between_endpoints, stage_a_targets,
+                      verify_continuous_owner_scope, expected_owner_scope_sha256, project_expectations, **options):
+        self.assertEqual(record,self.selection['git_record'])
+        self.assertEqual(stage_a_targets,self.targets)
+        self.assertEqual(project_expectations,self.selection['git_project_expectations'])
+        self.assertTrue(verify_continuous_owner_scope(expected_owner_scope_sha256,
+            'paired-git-continuous-read-retained-controls/v1',os.getpid(),self.roots,'before-opening'))
+        opening = {'roots':self.plan['current_roots'],'index':self.index,
+                   'git':[dict(path=row['path'],mode=row['expected_Git_mode'],Git_blob_oid=row['expected_Git_blob_oid'])
+                          for row in self.targets]}, self.index_raw
+        middle = between_endpoints(deepcopy(opening))
+        return opening,middle,deepcopy(opening),dict(
+            schema='paired-git-continuous-read-retained-controls/v1',
+            owner_scope_sha256=expected_owner_scope_sha256,roots=list(self.roots),
+            closing_git_endpoint_checked=True,closing_original_descriptor_identity_checked=True,
+            retained_descriptors_closed=True,closing_fresh_control_body_read=False,
+            closing_explicit_git_selector_metadata_checked=True)
+
+    def run_reader(self, **changes):
+        selection = self.selection | changes
+        def approve(binding):
+            self.approvals.append(binding)
+            self.assertTrue(all(not row['exit_returned'] for row in self.h.report['Source_contexts']))
+            return self.approve_binding
+        return self.h.owner['read_selected_stage_a_epoch'](
+            self.preview,reader_selection=selection,expected_selection_sha256=digest(wire(selection)),
+            verify_reader_selection=lambda *_:True,verify_phase7_owner=None,verify_relocation_owner=approve,
+            epoch_api=self.epoch,git_api=self.git,io=None,read_stage_zero=lambda *_:None,deadline=time.monotonic()+4)
+
+    def test_source_capture_order_and_archive_only_after_closure(self):
+        h = self.h
+        result = self.run_reader()
+        self.assertTrue(result['Source_closed'] and result['archive_committed'])
+        self.assertEqual(result['observed_counts'],dict(opening_full9=1254,closing_full9=1254,
+                                                        guides=4,reused_archives=0,fresh_bodies=32))
+        self.assertEqual([row['canonical_path'] for row in result['fresh_captures']],
+                         [row['path'] for row in self.targets])
+        kinds = [kind for event,kind in h.events if event=='read']
+        self.assertEqual(kinds.count('selected_stage_a_relocation_preview'),1)
+        self.assertNotIn('selected_stage_a_retained_archive',kinds)
+        self.assertNotIn('selected_stage_a_input',kinds)
+        self.assertEqual(len(h.body_reads),64)
+        self.assertEqual(len(list((h.output/'matrices').iterdir())),96)
+        self.assertEqual(self.approvals,[result['relocation_owner_binding_sha256']])
+        self.assertLess(h.events.index(('Source','exit checked')),h.events.index(('write','stage-a-outer-epoch.json')))
+
+    def test_refused_owner_never_commits_an_epoch(self):
+        self.approve_binding = False
+        with self.assertRaisesRegex(ValueError,'Independent owner closure'):
+            self.run_reader()
+        self.assertTrue(self.h.report['stage_a']['Source_closed'])
+        self.assertFalse(self.h.report['stage_a']['archive_committed'])
+        self.assertFalse((self.h.output/'stage-a-outer-epoch.json').exists())
+
+    def test_terminal_drift_refuses_before_owner_approval(self):
+        self.drift = True
+        with self.assertRaisesRegex(ValueError,'metadata fence drifted'):
+            self.run_reader()
+        self.assertEqual(self.approvals,[])
+        self.assertTrue(self.h.report['stage_a']['Source_closed'])
+
+    def test_small_epoch_bound_refuses_before_any_source_body(self):
+        with self.assertRaisesRegex(ValueError,'exceed its selected bound'):
+            self.run_reader(epoch_output_maximums={'outer_epoch':1,'python_epoch':1})
+        self.assertEqual(self.h.body_reads,[])
+        self.assertTrue(self.h.report['stage_a']['Source_closed'])
+
+    def test_wrong_preview_ref_refuses_before_source_or_reads(self):
+        ref = dict(self.ref, sha256='0'*64)
+        with self.assertRaisesRegex(ValueError,'preview reference'):
+            self.run_reader(relocation_preview=ref)
+        self.assertEqual(self.h.events,[])
+
+    def test_actual_read_guard_requires_all_32_permits_and_open_source(self):
+        h = self.h
+        path = h.output/'one-modeled-canonical-file.DATA'
+        body = b'local permit fixture'
+        path.write_bytes(body)
+        first = dict(path=str(path), bytes=len(body), sha256=digest(body), full9=h.owner['f9'](path.lstat()))
+        permits = {row['path']:row for row in self.targets[1:]}
+        permits[str(path)] = first
+        h.report['stage_a'] = {'capture_partition':'stage-a-source32-relocated-all-fresh/v1'}
+        with self.assertRaisesRegex(ValueError,'unselected Stage A'):
+            self.checked_read(path,len(body),'canonical_current_working_file',stage_a_fresh=permits)
+        with h.contexts(deadline=time.monotonic()+4):
+            self.assertEqual(self.checked_read(path,len(body),'canonical_current_working_file',
+                                               stage_a_fresh=permits),(body,first['full9']))
+            permits.pop(self.targets[-1]['path'])
+            with self.assertRaisesRegex(ValueError,'exact thirty-two'):
+                self.checked_read(path,len(body),'canonical_current_working_file',stage_a_fresh=permits)
+
+    def test_actual_reader_result_feeds_existing_a0_binder(self):
+        result = self.run_reader()
+        archive = Path(result['outer_archive']['path']).read_bytes()
+        terminal = wire(dict(Root_selected=True, Source_closed=True, owned_module_closed=True,
+            read_complete=True, errors=[], Source_contexts=self.h.report['Source_contexts'],
+            stage_a=result, explicit_IO_before_closeout=self.h.spent,
+            full_Source_envelope_retained=self.selection['maximum_core_bytes']))
+        reference = dict(path=str(self.h.output/'modeled-terminal.json'),bytes=len(terminal),sha256=digest(terminal))
+        roster = [{key:row[key] for key in ('path','bytes','sha256','full9')} for row in self.targets]
+        module = Path(roster[0]['path']).relative_to(self.roots[0]).with_suffix('').as_posix().replace('/','.')
+        selected = dict(schema='selected-A0-existing-StageA-reader-archive/v2',
+            reader_selection_sha256=result['selection_sha256'],reader_plan_sha256=result['plan_sha256'],
+            roots=result['closing_roots'],protected_index=result['closing_protected_index'],
+            parent_module_sha256={module:roster[0]['sha256']},absent_paths=[],fresh_capture_roster=roster,
+            capture_partition=result['capture_partition'],relocation_preview=self.ref,
+            relocation_owner_binding_sha256=result['relocation_owner_binding_sha256'])
+        selected_pin = digest(wire(selected))
+        offered = []
+        def verify_close(*args):
+            offered.append(args)
+            return True
+        bound = load(A0_OWNER)['bind_closed_stage_a_archive_for_a0'](
+            selected,expected_selection_sha256=selected_pin,terminal_reference=reference,
+            terminal_raw=terminal,outer_raw=archive,verify_original_reader_close=verify_close)
+        self.assertEqual(bound['schema'],'actual-selected-a0-paired-source-read-binding/v1')
+        self.assertEqual(bound['outer_epoch'],result['outer_archive'])
+        self.assertEqual(offered,[(reference['sha256'],selected_pin,result['selection_sha256'],digest(archive))])
+
+
+if __name__ == '__main__':
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(RelocatedReader)
+    raise SystemExit(not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful())

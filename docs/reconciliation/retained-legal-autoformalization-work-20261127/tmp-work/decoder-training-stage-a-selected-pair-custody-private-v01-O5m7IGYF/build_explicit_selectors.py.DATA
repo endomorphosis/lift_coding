@@ -1,0 +1,195 @@
+"""Build an additive explicit Git-selector route in the retained Stage A owners."""
+from difflib import unified_diff
+from hashlib import sha256
+from pathlib import Path
+import ast
+
+
+HERE = Path(__file__).resolve().parent
+TMP = HERE.parent
+PRE = {
+    'reader.py.DATA': (TMP/'decoder-training-stage-a-a0-archive-handoff-private-v01-UMiyG7nf'/'reader.py.DATA',
+                       36219,'b5edbfbf7054b9e7451d50fa89e674323af0d865c021e92b0c59b581c51465b8'),
+    'verify_standalone_git.py': (TMP/'decoder-training-stage-a-retained-git-controls-private-v01-kNzLC76L'/'verify_standalone_git.py',
+                                 28531,'4c79c0caa54f08f3e6a13d220cd6aee717774c8de98989ff2b3f78f43808a239'),
+}
+
+
+def replace_once(body, old, new):
+    if body.count(old) != 1:
+        raise ValueError(f'expected one held edit anchor: {old[:80]}')
+    return body.replace(old,new)
+
+
+def git_candidate(body):
+    helper = '''def stage_a_paired_git_expectations(project_expectations, roots):
+    """Snapshot the exact Git selector rows offered by the original paired owner."""
+    from copy import deepcopy
+
+    if (type(roots) is not tuple or len(roots) != 2
+            or any(type(root) is not str or not Path(root).is_absolute()
+                   or str(Path(root)) != root or '..' in Path(root).parts for root in roots)
+            or roots[0] == roots[1] or type(project_expectations) is not dict
+            or set(project_expectations) != set(roots)):
+        raise ValueError('exact two original paired Git roots required')
+    selected = deepcopy(project_expectations)
+    project_keys = {'HEAD','tree','branch_ref','refs_sha256','Git_selector_metadata'}
+    stat_keys = {'st_dev','st_ino','st_mode','st_uid','st_gid','st_nlink',
+                 'st_size','st_mtime_ns','st_ctime_ns'}
+    identities = set()
+
+    def hex_pin(value, length):
+        return type(value) is str and len(value) == length and all(x in '0123456789abcdef' for x in value)
+
+    for root in roots:
+        entry = selected[root]
+        if (type(entry) is not dict or set(entry) != project_keys
+                or not hex_pin(entry['HEAD'],40) or not hex_pin(entry['tree'],40)
+                or not hex_pin(entry['refs_sha256'],64)):
+            raise ValueError('exact original Git HEAD, tree and ref-stream pins required')
+        branch, metadata = entry['branch_ref'], entry['Git_selector_metadata']
+        if (type(branch) is not str or not branch.startswith('refs/heads/')
+                or any(part in ('','.','..') for part in branch.split('/'))
+                or any(ord(char) <= 32 or ord(char) == 127 for char in branch)
+                or type(metadata) is not dict or set(metadata) != {'HEAD','ref','config'}):
+            raise ValueError('exact original symbolic branch and Git selector rows required')
+        git_dir = Path(root)/'.git'
+        for key, leaf in (('HEAD','HEAD'),('ref',branch),('config','config')):
+            pin = metadata[key]
+            if type(pin) is not dict or set(pin) != {'path','full9'} or pin['path'] != str(git_dir/leaf):
+                raise ValueError('Git selector path must bind its original HEAD, loose ref or config role')
+            stamp = pin['full9']
+            if type(stamp) is not dict or set(stamp) != stat_keys:
+                raise ValueError('exact original Git selector full9 required')
+            try:
+                canonical = all(type(value) is str and value == str(int(value)) for value in stamp.values())
+            except ValueError as error:
+                raise ValueError('exact original Git selector full9 required') from error
+            if (not canonical or not stat.S_ISREG(int(stamp['st_mode']))
+                    or stamp['st_nlink'] != '1' or int(stamp['st_size']) < 0):
+                raise ValueError('exact regular single-link Git selector full9 required')
+            identity = (stamp['st_dev'],stamp['st_ino'])
+            if identity in identities:
+                raise ValueError('Git selector file identity aliases another selected role')
+            identities.add(identity)
+    return selected
+
+
+'''
+    body = replace_once(body, 'def verify_standalone_git(io, record, deadline,', helper+'def verify_standalone_git(io, record, deadline,')
+    head, sep, after = body.partition('def verify_stage_a_git_with_retained_controls(')
+    prefix, marker, definition = head.partition('def verify_standalone_git(')
+    definition = replace_once(definition, '                          git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT):',
+                              '                          git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT, project_expectations=None):')
+    head = prefix+marker+definition
+    start = '''    excludes = {row['path']: row for row in record['exact_exclude_pins']}
+    for root, index_key in ((str(R), 'D_index'), (str(A), 'A_index')):
+        expected = STANDALONE_PROJECT_EXPECTATIONS[root]'''
+    end = '''    excludes = {row['path']: row for row in record['exact_exclude_pins']}
+    roots = (str(R), str(A))
+    expectations = (STANDALONE_PROJECT_EXPECTATIONS if project_expectations is None
+                    else stage_a_paired_git_expectations(project_expectations, roots))
+    for root, index_key in ((roots[0], 'D_index'), (roots[1], 'A_index')):
+        expected = expectations[root]'''
+    head = replace_once(head,start,end)
+    root_loop = "    for root, index_key in ((roots[0], 'D_index'), (roots[1], 'A_index')):"
+    head = replace_once(head,root_loop,
+        """    def selector_matches(pin):
+        path = Path(pin['path'])
+        return ((project_expectations is None or path.resolve(strict=True) == path)
+                and full9(path.lstat()) == pin['full9'])
+
+"""+root_loop)
+    head = replace_once(head,"            if not path.is_relative_to(git_dir) or full9(path.lstat()) != pin['full9']:",
+                        "            if not path.is_relative_to(git_dir) or not selector_matches(pin):")
+    head = replace_once(head,"        if any(full9(Path(pin['path']).lstat()) != pin['full9'] for pin in selector_pins.values()):",
+                        "        if any(not selector_matches(pin) for pin in selector_pins.values()):")
+    after = replace_once(after,'        git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT):',
+                        '        git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT, project_expectations=None):')
+    after = replace_once(after,"    scope_kind = 'paired-git-continuous-read-retained-controls/v1'\n",
+        """    scope_kind = 'paired-git-continuous-read-retained-controls/v1'
+    git_options = {} if project_expectations is None else {
+        'project_expectations':stage_a_paired_git_expectations(project_expectations, roots)}
+""")
+    after = replace_once(after,'                git_output_maximum=git_output_maximum)\n',
+                        '                git_output_maximum=git_output_maximum, **git_options)\n')
+    after = replace_once(after,"        verify_scope('closing-complete')\n",
+        """        verify_scope('closing-complete')
+        if git_options and any(Path(pin['path']).resolve(strict=True) != Path(pin['path'])
+                               or full9(Path(pin['path']).lstat()) != pin['full9']
+                               for entry in git_options['project_expectations'].values()
+                               for pin in entry['Git_selector_metadata'].values()):
+            raise ValueError('selected Git selector changed after final owner verification')
+""")
+    after = replace_once(after,"    receipt['retained_descriptors_closed'] = True\n",
+        """    receipt['retained_descriptors_closed'] = True
+    if git_options:
+        receipt['closing_explicit_git_selector_metadata_checked'] = True
+""")
+    return head+sep+after
+
+
+def reader_candidate(body):
+    body = replace_once(body,
+        """    if (set(chosen) != fields or chosen['schema'] != 'existing-stage-a-retained-controls-outer-only/v1'
+""",
+        """    schema = chosen.get('schema')
+    explicit_selectors = schema == 'existing-stage-a-retained-controls-outer-only/v2'
+    if explicit_selectors:
+        fields |= {'git_project_expectations','paired_selector_observation_sha256'}
+    if (set(chosen) != fields or schema not in ('existing-stage-a-retained-controls-outer-only/v1',
+                                               'existing-stage-a-retained-controls-outer-only/v2')
+""")
+    anchor = """    if (type(deadline) not in (int,float) or not 0 < deadline-time.monotonic() <= chosen['maximum_run_seconds']
+"""
+    extra = """    selector_provenance, git_options = {}, {}
+    if explicit_selectors:
+        observation = chosen['paired_selector_observation_sha256']
+        bind_expectations = git_api.get('stage_a_paired_git_expectations')
+        if (type(observation) is not str or len(observation) != 64
+                or any(char not in '0123456789abcdef' for char in observation)
+                or not callable(bind_expectations)):
+            raise ValueError('original paired Git selector observation and verifier required')
+        # The existing owner approves the entire selection digest, which binds
+        # this observation reference and the per-root expectations together.
+        selected_gits = bind_expectations(chosen['git_project_expectations'], roots)
+        for role in ('D','A'):
+            selected_root = plan['current_roots'][role]
+            expected = selected_gits[selected_root['root']]
+            if (expected['HEAD'],expected['tree']) != (selected_root['HEAD'],selected_root['tree']):
+                raise ValueError('selected paired Git HEAD or tree differs from the exact Reader plan')
+        selector_provenance = {'paired_selector_observation_sha256':observation,
+                               'git_project_expectations_sha256':H(encoded(selected_gits))}
+        git_options['project_expectations'] = selected_gits
+"""
+    body=replace_once(body,anchor,extra+anchor)
+    body=replace_once(body,"    report['stage_a'] = attempt\n","    attempt.update(selector_provenance)\n    report['stage_a'] = attempt\n")
+    return replace_once(body,
+        "                git_output_maximum=chosen['git_output_maximum'])\n",
+        "                git_output_maximum=chosen['git_output_maximum'], **git_options)\n")
+
+
+def main():
+    candidates = []
+    for name, transform in (('reader.py.DATA',reader_candidate),('verify_standalone_git.py',git_candidate)):
+        before_path, before_len, before_digest = PRE[name]
+        raw = before_path.read_bytes()
+        if len(raw) != before_len or sha256(raw).hexdigest() != before_digest:
+            raise ValueError(f'held preimage changed: {before_path}')
+        original = raw.decode()
+        candidate = transform(original)
+        ast.parse(candidate)
+        delta = ''.join(unified_diff(original.splitlines(True),candidate.splitlines(True),
+                                    fromfile='a/'+name,tofile='b/'+name))
+        candidates.append((name,candidate,delta))
+    for name, candidate, delta in candidates:
+        with (HERE/name).open('x') as stream:
+            stream.write(candidate)
+        with (HERE/(name+'.diff')).open('x') as stream:
+            stream.write(delta)
+        output = candidate.encode()
+        print(f'{name} {len(output)} {sha256(output).hexdigest()}')
+
+
+if __name__ == '__main__':
+    main()

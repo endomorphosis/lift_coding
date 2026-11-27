@@ -1,0 +1,466 @@
+"""Verify one physical development/final union behind the existing final owner."""
+
+from copy import deepcopy
+from dataclasses import dataclass
+from hashlib import sha256
+from pathlib import Path
+
+
+PRIOR = Path("/tmp/decoder-training-pilot-physical-cost-private-v02-apClb9Qc/physical_cost.py")
+PRIOR_SHA256 = "566e5dcdb0f1483dd293ad88960fca07b1f11c37c862aae5fc0dc7db6d5c0eaa"
+FINAL_SELECTION = "reviewed-pilot-final-physical-resource-selection/v1"
+
+
+def _load_prior():
+    raw = PRIOR.read_bytes()
+    if sha256(raw).hexdigest() != PRIOR_SHA256:
+        raise ValueError("the selected physical close verifier changed")
+    scope = {"__file__": str(PRIOR), "__name__": __name__}
+    exec(compile(raw, str(PRIOR), "exec", dont_inherit=True), scope)
+    return scope
+
+
+PHYSICAL = _load_prior()
+require = PHYSICAL["require"]
+
+
+def selection_commitment(ledger, offered):
+    return ledger.commitment((FINAL_SELECTION, offered))
+
+
+def _events(ledger, rows):
+    return tuple(ledger._event_roster(tuple(ledger.PaidEvent(**row) for row in rows)).values())
+
+
+@dataclass(frozen=True)
+class ComponentClose:
+    close_sha256: str
+    process_identities: tuple[tuple[str, int, int], ...]
+
+
+def _development_scopes(ledger, comparison, receipts, cost_evidence, events):
+    require(ledger.development_receipts_commitment(
+        receipts, design_sha256=comparison["development_design_sha256"],
+        attempts_sha256=comparison["attempts_sha256"]) == comparison["development_receipts_sha256"],
+        "complete original development receipt roster required")
+    require(type(cost_evidence) is ledger.CostEvidence
+            and ledger.commitment(cost_evidence) == comparison["cost_evidence_sha256"]
+            and cost_evidence.events == events
+            and cost_evidence.attempts_sha256 == comparison["attempts_sha256"],
+            "complete original development meter and allocation evidence required")
+    observations = {(interval.attempt_sha256, interval.stage): allocation
+                    for interval, allocation in cost_evidence.observations}
+    require(len(observations) == len(cost_evidence.observations), "duplicate original meter scope")
+    by_event = ledger._event_roster(events)
+    scopes = {}
+    for look, receipt in zip(comparison["development_looks"], receipts, strict=True):
+        native = receipt.report["native_identity"]
+        require((native["attempt_sha256"], native["look"], native["candidate_sha256"],
+                 native["trial_terminal_close_sha256"], receipt.owner_close_sha256)
+                == (look["attempt_sha256"], look["look"], look["checkpoint_sha256"],
+                    look["trial_terminal_close_sha256"], look["owner_close_sha256"]),
+                "development component roster differs from its compared look")
+        original = receipt.report["component_closes"]
+        require(type(original) in (list, tuple) and bool(original)
+                and all(ledger._pin(row["owner_close_sha256"]) for row in original),
+                "original ordered development component closes required")
+        attempt_stage = look["attempt_sha256"], look["look"]
+        allocation = observations[attempt_stage]
+        require(type(allocation) is ledger.ChargeManifest and (allocation.attempt_sha256, allocation.stage) == attempt_stage,
+                "development allocation differs from its original look")
+        paid = ledger._event_shares(allocation, by_event, {})
+        leaves = {by_event[event_id].close_receipt_sha256 for event_id in paid
+                  if by_event[event_id].kind not in (PHYSICAL["TEACHER"], ledger.ACTIVATION_EVENT_KIND)}
+        closes = tuple(row["owner_close_sha256"] for row in original)
+        require(attempt_stage not in scopes and look["owner_close_sha256"] in leaves and len(set(closes)) == len(closes),
+                "original development evaluation and components require one exact paid scope")
+        scopes[attempt_stage] = closes, leaves
+    return scopes
+
+
+def _final_scopes(ledger, cells, final_events, development_components):
+    events = {row.event_sha256: row for row in final_events}
+    final_leaf_pins = {row.close_receipt_sha256 for row in final_events}
+    require(final_leaf_pins.isdisjoint(development_components),
+            "a paid final leaf aliases an original development component close")
+    scopes = {}
+    for cell in cells:
+        resource = cell.final_resources
+        if resource is None:
+            continue
+        scope = resource["final_resource_plan_sha256"], resource["final_resource_evidence_sha256"]
+        require(all(ledger._pin(pin) for pin in scope), "original final resource scope pins required")
+        for activity in resource["activities"]:
+            evaluation = activity["activity"]["evaluation_sha256"]
+            key = (*scope, evaluation)
+            referenced = (activity["terminal_close_sha256"], *activity["component_owner_close_sha256s"])
+            require(development_components.isdisjoint(referenced),
+                    "final terminal or component close aliases an original development component close")
+            leaves = tuple(events[event_id].close_receipt_sha256
+                           for event_id, _ in activity["charged_events"]["entries"])
+            require(key not in scopes, "the same final projection appeared twice")
+            scopes[key] = activity, leaves
+    return scopes
+
+
+def _component_coverage(replay_component, scope, closes, allowed_leaves, by_birth):
+    """Every observed component birth must occur in an eligible paid event."""
+    for close in closes:
+        observed = replay_component(scope, close)
+        require(type(observed) is ComponentClose and observed.close_sha256 == close
+                and type(observed.process_identities) is tuple and bool(observed.process_identities)
+                and all(type(identity) is tuple and len(identity) == 3
+                        and type(identity[0]) is str and all(type(value) is int and value > 0 for value in identity[1:])
+                        for identity in observed.process_identities)
+                and len(set(observed.process_identities)) == len(observed.process_identities)
+                and all(by_birth.get(identity) in allowed_leaves for identity in observed.process_identities),
+                "original component process is absent from its paid physical scope")
+
+
+def verify_physical_union(
+        ledger, validator, plans, comparison, cells, development_receipts, development_cost_evidence, offered, *,
+        development_roster_raw, expected_development_roster_sha256, joint_roster_raw, expected_joint_roster_sha256,
+        replay_close, replay_final_activity, replay_component, teacher_roster=None, replay_teacher_aggregate=None,
+        physical_owner=None, teacher_request_binding=None):
+    """Recheck the existing callback inputs and replay all physical scopes once.
+
+    The existing owner independently pins the original verified development
+    roster and the selected union. The final activity replayer authenticates
+    its original resource plan, evidence, terminal and report, meter and
+    allocation, and resolves that allocation to the exact physical leaf
+    close digests in order. The physical replayer independently checks the
+    original request, wait, process birth and exclusive usage for each leaf.
+    The component replayer authenticates all original wait/birth identities
+    for a selected component or final terminal, including sampled descendants.
+    """
+    def current():
+        plan_pin = ledger.teacher_pilot_final_plan_commitment(validator, plans)
+        comparison_pin = ledger.commitment(comparison)
+        return plan_pin, ledger.teacher_pilot_final_evidence_commitment(plan_pin, comparison_pin, cells), comparison_pin
+
+    require(type(offered) is tuple and offered == current()
+            and callable(replay_final_activity) and callable(replay_component),
+            "final owner callback differs from the selected plan, evidence or comparison")
+    require(type(comparison) is dict and comparison.get("schema") == ledger.VERIFIED_DEVELOPMENT_SCHEMA,
+            "verified original development comparison required")
+    selected_plans, selected_comparison, selected_cells, selected_receipts, selected_cost = deepcopy(
+        (plans, comparison, cells, development_receipts, development_cost_evidence))
+    development = _events(ledger, selected_comparison["physical_paid_events"])
+    dev_scopes = _development_scopes(ledger, selected_comparison, selected_receipts, selected_cost, development)
+    components = {close for closes, _ in dev_scopes.values() for close in closes}
+    paid_final = ledger._pilot_paid_final_union(
+        selected_cells, selected_comparison, selected_plans[0].retention_references[0])
+    final = _events(ledger, paid_final["physical_paid_events"])
+    scopes = _final_scopes(ledger, selected_cells, final, components)
+    physical = PHYSICAL if physical_owner is None else vars(physical_owner)
+    request_pin = selected_comparison.get("teacher_request_roster_sha256")
+    selected_request = {}
+    if physical_owner is not None:
+        require((request_pin is None and teacher_request_binding is None
+                 and selected_comparison.get("evidence_kind") == "fictional_fixture")
+                or (ledger._pin(request_pin) and type(teacher_request_binding) is physical_owner.TeacherRequestBinding
+                    and teacher_request_binding.expected_request_roster_sha256 == request_pin),
+                "the modern FINAL cost route must replay its original teacher request binding")
+        if teacher_request_binding is not None:
+            if selected_comparison.get("evidence_kind") == "native_reviewed":
+                require((teacher_request_binding.expected_source_selection_sha256,
+                         teacher_request_binding.expected_source_projection_sha256) == tuple(selected_comparison.get(key)
+                    for key in ("teacher_request_source_selection_sha256", "teacher_request_source_projection_sha256")),
+                    "FINAL producer request must retain the original native TRAIN source projection")
+            selected_request["teacher_request_binding"] = teacher_request_binding
+    else:
+        require(teacher_request_binding is None, "original legacy cost replay accepts no request binding")
+    prior = physical["read_selected"](development_roster_raw, expected_development_roster_sha256)
+    joint = physical["read_selected"](joint_roster_raw, expected_joint_roster_sha256)
+    development_ids = {row.event_sha256 for row in development}
+    require(prior["schema"] == physical["ROSTER_SCHEMA"] and prior["scope"] == physical["PILOT"]
+            and prior["selection_sha256"] == selected_comparison["cost_evidence_sha256"]
+            and set(row["event_sha256"] for row in prior["events"]) == development_ids
+            and prior["events"] == [row for row in joint["events"] if row["event_sha256"] in development_ids],
+            "joint replay must preserve the independently verified development close bindings")
+    require((ledger.teacher_cost_roster_commitment(teacher_roster) if teacher_roster is not None else None)
+            == selected_comparison.get("teacher_cost_roster_sha256"),
+            "joint replay must preserve the selected teacher aggregate roster")
+    events = tuple(sorted((*development, *final), key=lambda value: value.event_sha256))
+    observed_leaves = []
+
+    def observe_leaf(row):
+        observed = replay_close(row)
+        observed_leaves.append(observed)
+        return observed
+
+    proof = physical["verify_event_roster"](ledger, events, joint_roster_raw,
+        expected_roster_sha256=expected_joint_roster_sha256,
+        expected_selection_sha256=selection_commitment(ledger, offered), expected_scope=physical["PILOT"],
+        replay_close=observe_leaf, teacher_roster=teacher_roster, replay_teacher_aggregate=replay_teacher_aggregate,
+        **selected_request)
+    by_birth = {(leaf.clock_domain_sha256, *birth): leaf.close_sha256
+                for leaf in observed_leaves for birth in leaf.process_births}
+    for key, (closes, leaves) in dev_scopes.items():
+        _component_coverage(replay_component, ("development", *key), closes, leaves, by_birth)
+    for key, (projection, leaves) in scopes.items():
+        observed = replay_final_activity(*key)
+        require(ledger.commitment(observed) == ledger.commitment((projection, leaves)),
+                "final owner scope, meter or allocation differs from original activity evidence")
+        closes = (projection["terminal_close_sha256"], *projection["component_owner_close_sha256s"])
+        _component_coverage(replay_component, ("final", *key), closes, leaves, by_birth)
+    require(current() == offered and ledger.development_receipts_commitment(
+        development_receipts, design_sha256=selected_comparison["development_design_sha256"],
+        attempts_sha256=selected_comparison["attempts_sha256"]) == selected_comparison["development_receipts_sha256"]
+        and ledger.commitment(development_cost_evidence) == selected_comparison["cost_evidence_sha256"],
+        "selected final or development inputs drifted during the owner replay")
+    return {**proof, "development_event_count": len(development), "final_event_count": len(final),
+            "final_activity_projections": len(scopes), "distinct_final_activities": paid_final["observed_final_activities"],
+            "development_component_occurrences_checked": sum(len(closes) for closes, _ in dev_scopes.values()),
+            "shared_retention_evaluation_sha256": paid_final["shared_retention_baseline_evaluation_sha256"],
+            "final_paid_work": paid_final["physical_work_ns"]}
+
+
+ALL_PAID_PHASES_SCHEMA = "reviewed-teacher-pilot-all-paid-physical-phases/v1"
+
+
+def _paid_preparation_producer_closes(ledger, history):
+    """Keep original and superseded producer closes out of the FINAL activity namespace."""
+    schema = history["schema"]
+    snapshots = [history["profiles"]]
+    transitions = ()
+    if schema != ledger.TEACHER_PILOT_COMPLETED_ORIGINAL_SCHEMA:
+        snapshots.append(history["recovery_profiles"])
+        transitions = (history["preparation_recovery"],) if schema == ledger.TEACHER_PILOT_COMPLETED_RECOVERY_SCHEMA else (
+            history["preparation_recoveries"])
+    closes = set()
+    for rows, fields in (
+            *((profiles, ("owner_close_sha256",)) for profiles in snapshots),
+            *((edge["profiles"], ("original_owner_close_sha256", "recovery_owner_close_sha256"))
+              for edge in transitions)):
+        require(type(rows) in (tuple, list) and tuple((row.get("teacher"), row.get("width")) for row in rows)
+                    == ledger.MATRIX_TEACHERS and all(ledger._pin(row.get(field)) for row in rows for field in fields),
+                "every original teacher producer close and superseded close must remain bound")
+        closes.update(row[field] for row in rows for field in fields)
+    return closes
+
+
+TEACHER_PILOT_FIRST_USE_WALL_SCHEMA = "reviewed-teacher-pilot-first-use-wall/v1"
+
+
+@dataclass(frozen=True)
+class TeacherPilotFirstUseWall:
+    span: object
+    opening_receipt_sha256: str
+    terminal_evidence_receipt_sha256: str
+
+
+def teacher_pilot_first_use_wall_commitment(ledger, all_paid_phases_sha256, witness):
+    require(type(witness) is TeacherPilotFirstUseWall and type(witness.span) is ledger.WallSpan,
+            "typed teacher pilot first-use wall and original endpoints required")
+    span = witness.span
+    identities = (all_paid_phases_sha256, span.receipt_sha256, witness.opening_receipt_sha256,
+                  witness.terminal_evidence_receipt_sha256)
+    require(all(ledger._pin(pin) for pin in (*identities, span.clock_domain_sha256))
+            and len(set(identities)) == len(identities)
+            and type(span.start_ns) is type(span.end_ns) is int and 0 <= span.start_ns < span.end_ns,
+            "distinct original wall endpoints and one bounded clock domain required")
+    return ledger.commitment((TEACHER_PILOT_FIRST_USE_WALL_SCHEMA, all_paid_phases_sha256, witness))
+
+
+def _teacher_pilot_first_use_wall(ledger, binding_pin, witness, expected, seen, reserved_pins, approve):
+    span = witness.span
+    original_windows = tuple((event, row["request_sha256"], leaf.close_sha256,
+        leaf.clock_domain_sha256, leaf.start_ns, leaf.end_ns) for event, (row, leaf) in sorted(seen.items()))
+    evidence = (span.receipt_sha256, witness.opening_receipt_sha256, witness.terminal_evidence_receipt_sha256)
+    require({pin for row in original_windows for pin in row[:3]}.union(reserved_pins).isdisjoint(evidence),
+            "first-use wall receipts must not alias original paid scope, request, event or close identities")
+    require(bool(original_windows)
+            and all(domain == span.clock_domain_sha256 and span.start_ns <= start <= end <= span.end_ns
+                    for _, _, _, domain, start, end in original_windows),
+            "first-use wall must enclose every original paid event in its clock domain")
+    clock_roster_sha256 = ledger.commitment(original_windows)
+    require(approve(expected, binding_pin, witness.opening_receipt_sha256, witness.terminal_evidence_receipt_sha256,
+                    clock_roster_sha256) is True,
+            "original clock owner refused the selected first-use endpoints or paid event windows")
+    return {"schema": TEACHER_PILOT_FIRST_USE_WALL_SCHEMA, "selection_sha256": expected,
+            "clock_domain_sha256": span.clock_domain_sha256, "receipt_sha256": span.receipt_sha256,
+            "start_ns": span.start_ns, "end_ns": span.end_ns, "elapsed_ns": span.end_ns - span.start_ns,
+            "opening_receipt_sha256": witness.opening_receipt_sha256,
+            "terminal_evidence_receipt_sha256": witness.terminal_evidence_receipt_sha256,
+            "physical_clock_windows_sha256": clock_roster_sha256, "covered_paid_events": len(original_windows),
+            "scope": "whole_pilot_opening_through_independently_authenticated_terminal_evidence"}
+
+
+def verify_all_paid_phases(
+        ledger, validator, plans, comparison, cells, development_receipts, development_cost_evidence, offered, *,
+        physical_owner, preparation_development, expected_preparation_development_sha256, preparation_history,
+        preparation_roster_raw, development_roster_raw, expected_development_roster_sha256,
+        joint_roster_raw, expected_joint_roster_sha256, replay_preparation_close, replay_close,
+        replay_final_activity, replay_component, verify_whole_study_cost_owner,
+        teacher_roster, replay_teacher_aggregate, teacher_request_binding=None, first_use_wall=None,
+        expected_first_use_wall_sha256=None, verify_first_use_wall_owner=None):
+    """Carry the approved preparation and DEVELOPMENT costs through the existing FINAL cost owner.
+
+    This readback preserves the original FINAL plan, evidence and independent
+    component approvals. Preparation-only events remain outside the packet
+    teacher aggregates. The cross-phase resource owner binds the prior proof
+    and original rosters to the separately authorized FINAL comparison.
+    """
+    require(type(preparation_development) is type(preparation_history) is dict
+            and all(ledger._pin(pin) for pin in (expected_preparation_development_sha256,
+                expected_development_roster_sha256, expected_joint_roster_sha256))
+            and all(callable(owner) for owner in (verify_whole_study_cost_owner, replay_preparation_close, replay_close,
+                replay_final_activity, replay_component, replay_teacher_aggregate)),
+            "independently selected preparation history, paid FINAL and replay owners required")
+    phase = preparation_development
+    teacher_roster_pin = ledger.teacher_cost_roster_commitment(teacher_roster)
+    request_snapshot = deepcopy(teacher_request_binding)
+
+    def current():
+        plan_pin = ledger.teacher_pilot_final_plan_commitment(validator, plans)
+        comparison_pin = ledger.commitment(comparison)
+        final_pin = ledger.teacher_pilot_final_evidence_commitment(plan_pin, comparison_pin, cells)
+        history_body = {key: value for key, value in preparation_history.items() if key != "preparation_history_sha256"}
+        require(offered == (plan_pin, final_pin, comparison_pin)
+                and ledger.commitment(phase) == expected_preparation_development_sha256
+                and phase.get("schema") == physical_owner.TEACHER_PILOT_PREPARATION_DEVELOPMENT_UNION_SCHEMA
+                and phase.get("dispatch_authority") is preparation_history.get("dispatch_authority") is False
+                and type(preparation_history.get("fixture_only")) is bool
+                and comparison.get("evidence_kind") == (
+                    "fictional_fixture" if preparation_history["fixture_only"] else "native_reviewed")
+                and phase.get("teacher_pilot_preparation_sha256") == plans[0].matrix_sha256
+                    == comparison.get("teacher_pilot_preparation_sha256")
+                and phase.get("development_comparison_sha256") == comparison_pin
+                and phase.get("development_physical_roster_sha256") == expected_development_roster_sha256
+                and phase.get("preparation_history_sha256") == ledger.commitment(history_body)
+                    == preparation_history.get("preparation_history_sha256")
+                and ledger.commitment(development_cost_evidence) == comparison.get("cost_evidence_sha256")
+                and ledger.teacher_cost_roster_commitment(teacher_roster) == teacher_roster_pin
+                    == comparison.get("teacher_cost_roster_sha256")
+                and teacher_request_binding == request_snapshot
+                and ledger.development_receipts_commitment(development_receipts,
+                    design_sha256=comparison["development_design_sha256"],
+                    attempts_sha256=comparison["attempts_sha256"]) == comparison.get("development_receipts_sha256"),
+                "selected preparation proof, DEVELOPMENT or FINAL scope differs")
+        return (plan_pin, final_pin, comparison_pin)
+
+    chosen = current()
+    prep_roster_pin = preparation_history.get("preparation_roster_sha256")
+    require(ledger._pin(prep_roster_pin) and phase.get("preparation_roster_sha256") == prep_roster_pin,
+            "the readback must preserve the exact original preparation roster")
+    prior = ledger._event_roster(_events(ledger, phase["physical_paid_events"]))
+    development = ledger._event_roster(_events(ledger, comparison["physical_paid_events"]))
+    phase_ids = tuple(phase.get(field) for field in (
+        "preparation_only_event_sha256s", "development_only_event_sha256s", "shared_original_event_sha256s"))
+    require(all(type(ids) in (tuple, list) and all(ledger._pin(pin) for pin in ids)
+                and tuple(ids) == tuple(sorted(set(ids))) for ids in phase_ids),
+            "the original readback must identify its exact ordered phase leaves")
+    prep_only, dev_only, shared = map(set, phase_ids)
+    require(not (prep_only & shared or prep_only & dev_only or shared & dev_only)
+            and dev_only | shared == development.keys()
+            and prep_only | shared | dev_only == prior.keys()
+            and all(prior[key] == value for key, value in development.items())
+            and phase.get("observed_exclusive_physical_work_ns") == ledger._physical_work_ns(prior),
+            "the original paid union must preserve every selected DEVELOPMENT and preparation leaf")
+    prep = {key: prior[key] for key in prior if key in prep_only or key in shared}
+    prepared_refs = tuple((key, row.close_receipt_sha256) for key, row in prep.items())
+    history_refs = preparation_history.get("paid_preparation_event_refs",
+                                           preparation_history.get("original_paid_preparation_event_refs"))
+    require(bool(prep) and type(history_refs) in (tuple, list)
+            and tuple(map(tuple, history_refs)) == prepared_refs
+            and preparation_history.get("paid_preparation_event_count") == len(prep)
+            and preparation_history.get("paid_preparation_work_ns") == ledger._physical_work_ns(prep),
+            "all original preparation events and counters are required")
+
+    paid_final = ledger._pilot_paid_final_union(cells, comparison, plans[0].retention_references[0])
+    final = ledger._event_roster(_events(ledger, paid_final["physical_paid_events"]))
+    final_ids = {identity for key, row in final.items() for identity in (key, row.close_receipt_sha256)}
+    for cell in cells:
+        if cell.final_resources is not None:
+            for row in cell.final_resources["activities"]:
+                final_ids.update((row["activity"]["evaluation_sha256"], row["terminal_close_sha256"],
+                                  *row["component_owner_close_sha256s"]))
+    preparation_ids = _paid_preparation_producer_closes(ledger, preparation_history)
+    preparation_ids.update(pin for pair in prepared_refs for pin in pair)
+    require(final_ids.isdisjoint(preparation_ids),
+            "FINAL activity, event or component cannot reuse an original preparation identity")
+
+    prep_selection = preparation_history["preparation_event_selection_sha256"]
+    require(physical_owner._pilot_preparation_work_selection(ledger, preparation_history, tuple(prep.values()))
+                == prep_selection,
+            "the paid FINAL readback requires the exact complete original preparation selection")
+
+    binding = (ALL_PAID_PHASES_SCHEMA, chosen, expected_preparation_development_sha256, prep_roster_pin,
+               expected_development_roster_sha256, expected_joint_roster_sha256)
+    binding_pin = ledger.commitment(binding)
+    has_wall = any(value is not None for value in (
+        first_use_wall, expected_first_use_wall_sha256, verify_first_use_wall_owner))
+
+    def current_wall():
+        if has_wall:
+            require(callable(verify_first_use_wall_owner)
+                    and teacher_pilot_first_use_wall_commitment(ledger, binding_pin, first_use_wall)
+                    == expected_first_use_wall_sha256,
+                    "exact selected first-use wall witness and original clock owner required")
+
+    current_wall()
+
+    def guarded(owner):
+        def checked(*args):
+            result = owner(*args)
+            current()
+            current_wall()
+            return result
+        return checked
+
+    require(guarded(verify_whole_study_cost_owner)(binding_pin, *binding[1:]) is True,
+            "original resource owner refused the complete selected paid study history")
+    seen = {}
+
+    def capture(owner):
+        replay = guarded(owner)
+
+        def checked(row):
+            selected = dict(row)
+            event = selected["event_sha256"]
+            value = replay(row)
+            require(type(value) is physical_owner.PhysicalClose, "original typed physical close required")
+            observation = selected, deepcopy(value)
+            require(seen.setdefault(event, observation) == observation,
+                    "a shared producer must retain the exact original close across all phases")
+            return value
+        return checked
+
+    physical_owner.verify_teacher_preparation_events(ledger, tuple(prep.values()), preparation_roster_raw,
+        expected_roster_sha256=prep_roster_pin, expected_selection_sha256=prep_selection,
+        replay_close=capture(replay_preparation_close))
+    final_proof = verify_physical_union(
+        ledger, validator, plans, comparison, cells, development_receipts, development_cost_evidence, offered,
+        development_roster_raw=development_roster_raw, expected_development_roster_sha256=expected_development_roster_sha256,
+        joint_roster_raw=joint_roster_raw, expected_joint_roster_sha256=expected_joint_roster_sha256,
+        replay_close=capture(replay_close), replay_final_activity=guarded(replay_final_activity),
+        replay_component=guarded(replay_component), teacher_roster=teacher_roster,
+        replay_teacher_aggregate=guarded(replay_teacher_aggregate),
+        physical_owner=physical_owner, teacher_request_binding=teacher_request_binding)
+    union = prior | final
+    require(seen.keys() == union.keys(), "every paid event must replay through its original physical close")
+    rows = tuple(seen[key][0] for key in sorted(union))
+    require(len({row["request_sha256"] for row in rows}) == len(rows)
+            and len({row["close_sha256"] for row in rows}) == len(rows),
+            "original physical requests and closes must remain unique across all phases")
+    physical_owner._replay_physical_event_leaves(ledger, union, rows, expected_scope=physical_owner.PILOT,
+        replay_close=lambda row: seen[row["event_sha256"]][1])
+    current()
+    wall = {}
+    if has_wall:
+        selected_scope = {*chosen, expected_preparation_development_sha256, prep_roster_pin,
+                          expected_development_roster_sha256, expected_joint_roster_sha256,
+                          preparation_history["preparation_history_sha256"],
+                          comparison["cost_evidence_sha256"], teacher_roster_pin}
+        selected_scope.update(preparation_ids | final_ids)
+        wall["first_use_wall"] = _teacher_pilot_first_use_wall(ledger, binding_pin, first_use_wall,
+            expected_first_use_wall_sha256, seen, selected_scope, guarded(verify_first_use_wall_owner))
+    return {"schema": ALL_PAID_PHASES_SCHEMA, "all_paid_phases_sha256": binding_pin,
+            "preparation_development_sha256": expected_preparation_development_sha256,
+            "preparation_only_event_count": len(prep_only), "shared_producer_event_count": len(shared),
+            "development_and_final_physical_proof": final_proof,
+            "original_event_count": len(union),
+            "physical_paid_events": tuple(ledger._wire(union[key]) for key in sorted(union)),
+            "observed_exclusive_physical_work_ns": ledger._physical_work_ns(union),
+            "dispatch_authority": False, **wall}

@@ -1,0 +1,95 @@
+{
+  "Source_binding": {
+    "bytes": 1902,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-isolated-ordinary37-D27-read-binding.json",
+    "sha256": "7f22ec78360aa9992d5c14474b65137083cf07ca7164f570c7c7672887471ec9"
+  },
+  "Source_lease_and_resource_cleanup_closed": true,
+  "actual_ordinary_counts": {
+    "errors": 0,
+    "failures": 0,
+    "functions": 15,
+    "passed": 37,
+    "skipped": 0,
+    "tests": 37
+  },
+  "actual_report": {
+    "bytes": 1044045,
+    "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/actual-output/complete-frozen-local-D-reviewed-mixed-v3-definition-self-reference-ordinary37-existing-owner-report.json",
+    "sha256": "d64986fd31f5c00ba83775c0a305b863b6ca2000da29324d39ba5c340846bde2"
+  },
+  "exact_freeze": {
+    "bytes": 6414,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-isolated-Phase2-V3-definition-exact-two-local-freeze.json",
+    "sha256": "4451d305186b343a67388d8a637e40abd21473e69c2c27ca41f6b8a7c6ffc1d6"
+  },
+  "held_case_selector": {
+    "bytes": 15048,
+    "path": "/tmp/P2-V3-existing-ordinary37-controls-INERT-nauXr2ty/exact-15-function-37-case-static-roster.json",
+    "sha256": "1e36fafb31de5bccd87bf917eba5e398419aae62449ff8b54d46d3ca16c444e7"
+  },
+  "large_model_fit_or_Native_or_statutory_qualification": false,
+  "ordered_cases": [
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_full_fictional_definition_object_use_and_mixed_use_replay",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_independently_valid_signatures_cannot_cross_domains[v2-claims-in-v3]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_independently_valid_signatures_cannot_cross_domains[v3-claims-in-v2]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[typed-node-coverage-complete typed-node source correspondence required]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[definition-use-target-complete ordered predicate definition-use targets required]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[valid-mixed-sort-drift-governing predicate argument sorts differ]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[overlapping-use-overlapping interpretations are not two distinct normative uses]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[stale-policy-signature-signed_policy_sha256_differs]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[expired-policy-policy_not_current]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[revoked-key-key_revoked]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[revoked-principal-principal_revoked]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_v3_sibling_preserves_v2_source_and_binds_current_producers",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_governing_definition_rejects_implication_instead_of_complete_equivalence",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_old_generation_source_pin_cannot_be_rehashed_into_current_v2_preparation",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-equal]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[distinct-identities]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[direct]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[nested]"
+  ],
+  "ordinary_raw_JUnit": {
+    "bytes": 7894,
+    "logical_name": "junit.xml",
+    "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/actual-output/reviewed-mixed-v3-definition-self-reference-ordinary37-run-result0-output1.bin",
+    "sha256": "b954f4c881b3a923d78bb284c597af2d2b1c343c46d518eaccc2c6d1d4ae44b8"
+  },
+  "published": false,
+  "raw_phase_bindings": {
+    "collect": {
+      "bytes": 197679,
+      "logical_name": "binding.json",
+      "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/actual-output/reviewed-mixed-v3-definition-self-reference-ordinary37-collect-result0-output0.bin",
+      "sha256": "c12b1e2223c647d4e3da3e50db52c2cd29eed2c511e077e5327f96d61e81219d"
+    },
+    "run": {
+      "bytes": 236539,
+      "logical_name": "binding.json",
+      "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/actual-output/reviewed-mixed-v3-definition-self-reference-ordinary37-run-result0-output0.bin",
+      "sha256": "2171f8555f0d256aeb4e6b7dd6e888ef635db3744c6c9de643ce166d977959bc"
+    }
+  },
+  "schema": "actual-Phase2-current-V3-definition-ordinary37-closed/v1",
+  "terminal_returncode": 0,
+  "terminal_session": 24174
+}

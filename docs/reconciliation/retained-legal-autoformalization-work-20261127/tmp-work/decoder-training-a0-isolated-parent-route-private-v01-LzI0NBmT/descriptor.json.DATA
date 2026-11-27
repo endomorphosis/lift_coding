@@ -1,0 +1,174 @@
+{
+  "caller_artifacts": {
+    "build.py": {
+      "bytes": 7945,
+      "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/build.py",
+      "sha256": "01518cb34c9c6de3878db7c372f4dff5d4e84cae86280ec65acdc69eb5ff353e"
+    },
+    "selected_parent.helpers": {
+      "bytes": 12315,
+      "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/selected_parent.helpers",
+      "sha256": "cdd106fa93769a2f5b2e8a7a787f361867324bd99ffd9cf741cff0b3ab199dfb"
+    },
+    "test_parent_route.py": {
+      "bytes": 19474,
+      "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/test_parent_route.py",
+      "sha256": "6d8f753573c69797970b25df865e849eee27b8ba0fe31c5fa1859544b42a576b"
+    },
+    "test_parent_with_original_entry.py": {
+      "bytes": 4974,
+      "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/test_parent_with_original_entry.py",
+      "sha256": "a37de38feec7b521380b65b4f782026cf503bbaeed1dd7801f5306611cf1099f"
+    }
+  },
+  "candidate": {
+    "bytes": 102188,
+    "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/owner-driver.py.DATA",
+    "sha256": "0ceadfc1a356b56de158b97f5200d2f56824651a039d7a9d2bcc9e156a2bc666"
+  },
+  "closed_local_checks": {
+    "modeled_parent": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/test.exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "passed": 13,
+      "stderr": {
+        "bytes": 2057,
+        "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/test.stderr",
+        "sha256": "83b3ddfe22a706388d270f3cac70debaf7e1059ab3a01460aa9cd932857ba7c2"
+      },
+      "stdout": {
+        "bytes": 4895,
+        "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/test.stdout",
+        "sha256": "986944330462108939f2ff0aebb5cf872870f62173ab1d86e6583bf7d9cb9c73"
+      }
+    },
+    "retained_renderer_and_custody": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/integration.exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "passed": 1,
+      "stderr": {
+        "bytes": 294,
+        "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/integration.stderr",
+        "sha256": "205b83abe73146a9e92810af7c938bd556897793129ad91c11e1486e52d01dfe"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/integration.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "retained_v03_tests": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/retained.exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "passed": 18,
+      "stderr": {
+        "bytes": 3147,
+        "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/retained.stderr",
+        "sha256": "4e8e27931891d5a20a5d0f8a69257f7ebd55f6370ece5c9a2f8b4b8e5b92258a"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/retained.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "diff": {
+    "bytes": 86514,
+    "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/isolated-parent-route.diff",
+    "sha256": "254c0d8df131a1d29457830007a93e4fdbdfd263212730afe14db9a8a7a4cfa9"
+  },
+  "entry": "run_existing_owner(execution_reference, isolated_owner=existing_owner_inputs)",
+  "initial_test_failures": {
+    "initial-integration.exit": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/initial-integration.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "initial-integration.stderr": {
+      "bytes": 1122,
+      "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/initial-integration.stderr",
+      "sha256": "020e162e01f2e2a327536d2898abb2d6a1e7cce989ac41caab37e4a902779bff"
+    },
+    "initial-test.exit": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/initial-test.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "initial-test.stderr": {
+      "bytes": 6881,
+      "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/initial-test.stderr",
+      "sha256": "ed60d947e5d82a3967f3a904c56209be134927b7c81edfc29c7e3be5f9089724"
+    },
+    "intermediate-integration.exit": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/intermediate-integration.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "intermediate-integration.stderr": {
+      "bytes": 1371,
+      "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/intermediate-integration.stderr",
+      "sha256": "0a457eff3ad2bb61b2dc221f8110865d107057e49ed92cd5197429b307568309"
+    }
+  },
+  "legacy_critical_operation_order_verified": [
+    "make_low_lr_control_request",
+    "metadata_and_actual_factory_setup_completed_before_Daemon",
+    "get_global_resource_scheduler(config=config)",
+    "stack.enter_context(reservation)",
+    "actual_current_database_before_fresh_vendor_import",
+    "runner=admitted.ResourceAdmittedToolRunner",
+    "result=run_test_with_actual_custody(request)",
+    "external_control_and_CAS_growth_after",
+    "actual_fresh_vendor_import_completed",
+    "actual managed descendant claims remain",
+    "reservation.finalize(CHARGED_ROOT,artifacts_durable=True)",
+    "report['source_after']=metadata_guard()"
+  ],
+  "live_source_resource_runtime_or_scientific_execution_selected": false,
+  "original_helpers_AST_equal": [
+    "exact_metadata",
+    "load_cached_operational",
+    "metadata_guard",
+    "genuine",
+    "run_test_with_actual_custody",
+    "run_selected_isolated_origin",
+    "retain_origin_owner_bytes",
+    "sync_origin_output_directory",
+    "origin_retained_external_bytes",
+    "retain_actual_output_files",
+    "observe_control_and_CAS_metadata",
+    "observe_state",
+    "load_operation_metadata",
+    "tracked_source_read"
+  ],
+  "predecessor": {
+    "bytes": 85906,
+    "path": "/tmp/decoder-training-a0-isolated-parent-route-private-v01-LzI0NBmT/owner-driver.before.py.DATA",
+    "sha256": "946c3bea4d45318fccb506e1fbe9417e7e5a1dcd75acd968c7143d513bf332ce"
+  },
+  "remaining": "Current paired reader allocation and close, admitted development and untouched FINAL custody, current original-owner launch and budget including reviewed extra metadata reads, actual qualified reservation, exact physical clock, and genuine SDK/wait/terminal replay. Candidate earns no scientific credit.",
+  "schema": "private-existing-owner-a0-isolated-parent-route/v1",
+  "scope": "Private parent and extracted original entry/renderer/archiver with modeled admissions and SDK results. The legacy CLI still selects its legacy schema. The isolated branch requires explicitly supplied existing-owner callbacks in its original birth parent.",
+  "selected_opening_contract": {
+    "callback_integration": "Original selected caller must supply three real verifiers and exact held origin/renderer objects. New ordinary CLI switch or fallback is absent.",
+    "cleanup": "Original SDK capture/handle, retained-byte accounting, durable finalization, release, and Source context order are reused. A renderer/launch refusal before capture has no dispatch count or legacy output debit.",
+    "physical": "The existing original verifier authorizes exact immutable launch and control commitments and actual birth before SDK dispatch, with the selected physical request and clock. No new physical observations are manufactured.",
+    "resource": "Exact existing ledger, state policy, reserved scope, environment and charged namespace. Shared original reservation is the only scheduler opener on the isolated path.",
+    "source": "Independently authenticated current paired reader close, complete ordered Source epoch, actual protected index mapping, two Git project identities and exact four parent module pins. When the protected index is in the epoch, its full9 and digest must agree with that row."
+  },
+  "separate_paired_facet_candidate": {
+    "bytes": 4030,
+    "path": "/tmp/decoder-training-paired-facet-comparison-private-v01-6y8hkrZ5/descriptor.json",
+    "sha256": "ab07c2247c5638b4a40729165e45240e53942ece7ac9ab33f631aaf14c72044e"
+  }
+}

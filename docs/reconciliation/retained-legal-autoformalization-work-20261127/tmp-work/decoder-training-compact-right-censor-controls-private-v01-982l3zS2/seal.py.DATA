@@ -1,0 +1,149 @@
+"""Seal the compact paid control and distinct Phase 7 feedback readback."""
+from copy import deepcopy
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+from runpy import run_path
+from stat import S_IMODE
+from tempfile import mkstemp
+
+HERE=Path(__file__).resolve().parent
+TMP=HERE.parent
+OLD=TMP/'decoder-training-experiment-manifest-v395.json'
+NEW=TMP/'decoder-training-experiment-manifest-v396.json'
+KEY='private_compact_paid_censor_followup_and_phase7_feedback_readback'
+
+
+def ref(path,expected=None):
+    raw=path.read_bytes()
+    digest=sha256(raw).hexdigest()
+    assert expected is None or digest==expected,path
+    return dict(path=str(path),bytes=len(raw),sha256=digest)
+
+
+def save(path,value):
+    raw=value.encode() if type(value) is str else (json.dumps(value,indent=2,sort_keys=True)+'\n').encode()
+    with path.open('xb') as stream:
+        stream.write(raw)
+    return ref(path)
+
+
+def replay_refs():
+    assert (HERE/'compact.rc').read_bytes()==(HERE/'phase7-feedback-readback.rc').read_bytes()==b'0\n'
+    assert (HERE/'compact.stderr').read_bytes()==b''
+    stdout=json.loads((HERE/'compact.stdout').read_bytes())
+    assert stdout==json.loads((HERE/'assessment-replay-v01.json').read_bytes())
+    assert stdout['unchanged_fixture_both_golden_hashes_verified'] is True
+    assert stdout['paid_event_count']==8 and stdout['retained_failed_events']==2
+    assert stdout['baseline_followup']==[6.0,10.0] and stdout['candidate_confirmation']==3.0
+    assert stdout['refined_restricted_candidate_minus_baseline']==[[-7,1],[-3,1]]
+    return {name:ref(HERE/name) for name in ('assessment-replay-v01.json','capped-compact-paid-comparison.json',
+        'capped-compact-censor-followup.json','compact.rc','compact.stdout','compact.stderr','phase7-feedback-readback.rc')}
+
+
+old_ref=ref(OLD,'12be57572d7a5fe291954745b954271fdcb9d548414c9d80b174eed6ac8a9581')
+old=json.loads(OLD.read_bytes())
+old_checker=Path(old['advisory_operator_readiness_checker']['path'])
+assert ref(old_checker)==old['advisory_operator_readiness_checker']
+description=HERE/'descriptor.json'
+artifacts=replay_refs()
+phase7=ref(HERE/'phase7-feedback-readback.json','b68490159046c6eec0c0a25529f2b0e0420b7e21d166f0a945963c925b7bad6c')
+descriptor=dict(schema='private-compact-censor-followup-plus-feedback-frontier/v1',
+    owner=ref(TMP/'decoder-training-paid-censor-followup-private-v01-9bUvEI8h/study.py',
+              'c462caa0fffb73f74549013d0272d224dada01e9e33620329b5b3f5ffb920915'),
+    artifacts=artifacts, compact_control=artifacts['assessment-replay-v01.json'],isolated_phase7=phase7,
+    drivers={name:ref(HERE/name) for name in ('check_compact_censoring.py','phase7_feedback_readback.py','seal.py')},
+    measured_new_model_arm=None, actual_compact_followup_authority=None, actual_Stage_A_current_index=None,
+    current_reader_allocation=None, dispatch_authority=False)
+source=old_checker.read_text()
+at_def='def report(manifest):\n'
+at_out='        "stage_a_coordination": coordination,'
+assert source.count(at_def)==source.count(at_out)==1
+projection='''def project_compact_censor_control_and_feedback_frontier(reference, coordination):
+    row = retained_json(reference)
+    compact = retained_json(row["compact_control"])
+    phase7 = retained_json(row["isolated_phase7"])
+    charge = retained_json(phase7["latest_retained_precharge"])
+    ledger = charge["after_full_retained_precharge"]
+    headroom = min(ledger["global_cap"]-ledger["used"],ledger["internal_cap"]-ledger["internal_used"])
+    require(row["schema"] == "private-compact-censor-followup-plus-feedback-frontier/v1"
+            and compact["actual_study_owner_code_sha256"] == row["owner"]["sha256"]
+            and compact["unchanged_fixture_both_golden_hashes_verified"] is True
+            and compact["capped_fixture_only_five_authority_fields_rebound"] is True
+            and compact["original_followup_owner_refusal_verified"] is True
+            and compact["actual_paid_arm_meter_or_legal_review"] is False
+            and compact["baseline_followup"] == [6.0,10.0] and compact["candidate_confirmation"] == 3.0
+            and compact["legacy_restricted_candidate_minus_baseline"] == [[-7,1],[3,1]]
+            and compact["refined_restricted_candidate_minus_baseline"] == [[-7,1],[-3,1]]
+            and compact["paid_event_count"] == 8 and compact["retained_failed_events"] == 2
+            and compact["baseline_attainment"] is None
+            and phase7["cases"] == 26 and phase7["passes"] == 24 and len(phase7["failed_nodes"]) == 2
+            and phase7["qualification_complete"] is phase7["contributes_current_Stage_A_index_or_model_qualification"] is False
+            and phase7["successor_ordinary_result"] is None
+            and phase7["successor_local_D"] != phase7["published_D"] == coordination["last_verified_published_datasets_sha"]
+            and charge["all_prior_costs_retained"] is True
+            and phase7["retained_headroom_bytes"] == headroom == coordination["recorded_headroom_bytes"]
+            and row["measured_new_model_arm"] is row["actual_compact_followup_authority"]
+                is row["actual_Stage_A_current_index"] is row["current_reader_allocation"] is None
+            and row["dispatch_authority"] is False,
+            "exact compact fixture and distinct isolated feedback readback required")
+    return {"compact_control":compact,
+            "feedback_original_passes":phase7["passes"],"feedback_original_failures":phase7["failed_nodes"],
+            "successor_isolated_read10":phase7["successor_isolated_READ10_closed"],
+            "isolated_precharged_capture_count":ledger["captures"],"retained_headroom_bytes":headroom,
+            "successor_ordinary_result":None,"dispatch_authority":False}
+
+
+'''
+source=source.replace(at_def,projection+at_def,1)
+source=source.replace(at_out,at_out+f'''
+        **({{"{KEY}": project_compact_censor_control_and_feedback_frontier(design["{KEY}"], coordination)}}
+           if "{KEY}" in design else {{}}),''',1)
+plan=TMP/'decoder-training-integration-plan.md'
+status=plan.stat()
+before=plan.read_bytes()
+assert sha256(before).hexdigest()=='758fbc2415ba3536f8723c64bd26acaae6ab7abd9f254dcc08d6fcc2828c0c94'
+body=before.decode()
+addition=f"""## 833. Verify censored cost through compact DEVELOPMENT
+
+The compact owner emitted both comparisons through its existing review, checkpoint and paid-meter checks. The unchanged local fixture reproduced both historical hashes. The second fixture declared a six-second budget and ten-second analysis horizon before creating study commitments. Its supervised arm failed its scheduled look at five seconds and closed at the cap. Its relational arm confirmed at three seconds. The independent follow-up control narrowed the supervised arm's restricted interval from 0–10 to 6–10 seconds and the paired relational-minus-supervised interval from −7 to +3 seconds to −7 to −3 seconds. Supervised attainment remains unknown, and both failed work events remain charged. These are modeled outcomes from the real software entry points. [Compact owner replay and exact reports]({description})
+
+In the separate Phase 7 Ordinary26 run, 24 cases passed and the two typed feedback variants failed while indexing the global-view norm. The held scalar update code reports the singleton target as applied with a zero global delta, and the sparse norm omits zero deltas. The replay with a competing view produces opposite signed changes of magnitude 0.025 at the fixture step size. The existing owner's v02 fixture seeds that competitor and checks direct and nested update parity. Its successor isolated READ10 closed on local Datasets `4449d6a6`. The owning qualification result remains pending in these receipts. Guide573 stays the published Stage A basis, and the isolated read keeps its full precharge. [Exact failure, limited scalar replay and successor receipt]({phase7['path']})
+
+"""
+for was,now in (
+    (str(OLD),str(NEW)),
+    ('Version 3.541. Updated 2026-11-27 with paid censor follow-up bounds and the Source62 fit replay.',
+     'Version 3.542. Updated 2026-11-27 with the compact censoring control and feedback fixture readback.'),
+    ('## Primary research references',addition+'## Primary research references'),
+):
+    assert body.count(was)==1,was
+    body=body.replace(was,now,1)
+checker=HERE/'check_design.py'
+ns={'__name__':'private_readback','__file__':str(checker)}
+exec(compile(source,str(checker),'exec'),ns)
+prior=run_path(str(old_checker))['report'](old)
+assert ns['report'](old)==prior
+new=deepcopy(old)
+new['manifest_schema_version']='0.396.0'
+new['previous_manifest']=old_ref
+new['typed_execution_design'][KEY]=save(description,descriptor)
+new['advisory_operator_readiness_checker']=save(checker,source)
+report=run_path(str(checker))['report'](new)
+prior['manifest_schema_version']=new['manifest_schema_version']
+assert {key:value for key,value in report.items() if key!=KEY}==prior
+manifest=save(NEW,new)
+readiness=save(HERE/'verified-readiness.json',report)
+fd,name=mkstemp(dir=TMP,prefix=plan.name+'.')
+staged=Path(name)
+try:
+    with os.fdopen(fd,'w') as stream:
+        stream.write(body)
+    staged.chmod(S_IMODE(status.st_mode))
+    assert plan.stat().st_ino==status.st_ino and plan.read_bytes()==before
+    os.replace(staged,plan)
+finally:
+    if staged.exists():
+        staged.unlink()
+print(json.dumps(dict(manifest=manifest,readiness=readiness,plan=ref(plan),descriptor=ref(description)),sort_keys=True))

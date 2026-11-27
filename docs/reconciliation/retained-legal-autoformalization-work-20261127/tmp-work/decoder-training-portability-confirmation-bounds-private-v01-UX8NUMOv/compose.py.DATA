@@ -1,0 +1,60 @@
+"""Extend the retained Stage G readback without altering the original pair or FINAL evidence."""
+
+import ast
+from difflib import unified_diff
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+BASE = HERE.parent / "decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j" / "study.py"
+BASE_SHA = "0db05161d43713375a0a9b4db8d359b6b5d50f08f5a7481f2b804b97add778b1"
+
+
+def change(text, old, new):
+    assert text.count(old) == 1, old
+    return text.replace(old, new, 1)
+
+
+def update(before):
+    anchor = "def summarize_objective_portability_restricted_confirmation(development, *, expected_development_sha256,\n"
+    result = change(before, anchor, (HERE / "meter_portability.py.IN").read_text() + anchor)
+    result = change(result, "                                                            verify_original_development_owner):\n",
+        "                                                            verify_original_development_owner, paid_comparison=None):\n")
+    result = change(result, "    infer a failed run's resource use or make a population-level claim.\n",
+        "    infer a failed run's resource use or make a population-level claim.\n\n"
+        "    Optional paid comparison evidence adds independently authenticated\n"
+        "    meter bounds without altering the original restricted result.\n")
+    anchor = '    _restricted_confirmation_validate_shared_subjects(comparisons, development["comparisons"])\n'
+    result = change(result, anchor, anchor + '''    meter_readback = {}
+    if paid_comparison is not None:
+        paid_pairs, meter_pin = _portability_paid_confirmation_pairs(development, paid_comparison)
+        meter_readback = {"paid_confirmation_bounds_sha256": meter_pin,
+            "meter_bounded_comparisons": tuple(_portability_meter_interactions(row, original, paid_pairs)
+                for row, original in zip(comparisons, development["comparisons"], strict=True))}
+''')
+    result = change(result, '''             and commitment(development) == expected_development_sha256,
+             "original paid development owner refused or restricted-time inputs changed")''', '''             and commitment(development) == expected_development_sha256
+             and (paid_comparison is None or
+                  commitment(paid_comparison) == development["paid_development_comparison_sha256"]),
+             "original paid development owner refused or restricted-time inputs changed")''')
+    return change(result, '''            "scope": "finite_selected_seed_scheduled_confirmation_clipped_at_each_original_clock_horizon",
+            "changes_paid_or_final_evidence": False}''', '''            "scope": "finite_selected_seed_scheduled_confirmation_clipped_at_each_original_clock_horizon",
+            "changes_paid_or_final_evidence": False, **meter_readback}''')
+
+
+if __name__ == "__main__":
+    raw = BASE.read_bytes()
+    assert sha256(raw).hexdigest() == BASE_SHA
+    before = raw.decode()
+    after = update(before)
+    old, candidate = (ast.parse(code).body for code in (before, after))
+    added = {"_portability_confirmation_pair_key", "_portability_paid_confirmation_pairs", "_portability_meter_interactions"}
+    assert {node.name for node in candidate if getattr(node, "name", None) in added} == added
+    names = {getattr(a, "name", None) for a, b in zip(old,
+        (node for node in candidate if getattr(node, "name", None) not in added), strict=True) if ast.dump(a) != ast.dump(b)}
+    assert names == {"summarize_objective_portability_restricted_confirmation"}, names
+    (HERE / "study.py").write_text(after)
+    patch = unified_diff(before.splitlines(keepends=True), after.splitlines(keepends=True),
+                         "prior/study.py", "candidate/study.py")
+    (HERE / "study.diff").write_text("".join(patch))
+    print(len(after.encode()), sha256(after.encode()).hexdigest())

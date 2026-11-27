@@ -1,0 +1,155 @@
+{
+  "actual_legal_cohort_selected": false,
+  "any_model_or_training_execution": false,
+  "authoring_recipe": {
+    "bytes": 1868,
+    "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/build.py",
+    "sha256": "7f3b661ae2bb66218664605e1af322d5957b67ab68b4890607f18018cba03d26"
+  },
+  "before": {
+    "bytes": 78029,
+    "path": "/tmp/decoder-training-a0-world-v2-opaque-bound-private-v01/legal_ir_eval_splits.py",
+    "sha256": "83995ca68ccb20c3d4ac6e056f147eb0874003b4555acac8182faa2df71cf417"
+  },
+  "candidate": {
+    "bytes": 91107,
+    "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/legal_ir_eval_splits.v02.py",
+    "sha256": "e139cc75d42846fad28ef009e1f6e5fc4c47f5fe350f7323942664908dca3457"
+  },
+  "canonical_adoption": false,
+  "current_development_receipt": null,
+  "current_source_epoch": null,
+  "current_training_receipt": null,
+  "diff": {
+    "bytes": 13567,
+    "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/candidate-v02.diff",
+    "sha256": "1b2a038654c3bfdab5b29e04e10406ad410b38599371f9eacc9c1fc72fb9aa57"
+  },
+  "dispatch_authority": false,
+  "entry": "project_a0_joint_reviewed_cohort",
+  "execution_selected": false,
+  "final_access_granted": false,
+  "first_candidate": {
+    "bytes": 88240,
+    "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/legal_ir_eval_splits.py",
+    "sha256": "5b9be21115cf5e5ff233564578b191556117b2cc955d43e0a5d951aaa8608abd"
+  },
+  "focused_checks": 11,
+  "focused_closure": {
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/green-v02.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 1787,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/green-v02.stderr",
+      "sha256": "cb19f4402c4f070a7a42e0237b38d193c3e8ad3fff3ca14fc337ada38889a9ca"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/green-v02.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "focused_harness": {
+    "bytes": 14170,
+    "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/test_joint_cohort.py",
+    "sha256": "c6a5c1f913a7a74afdea8b724bd29c072d6dfd7a8822895782609c5b52baa94f"
+  },
+  "fragment": {
+    "bytes": 13003,
+    "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/cohort.fragment",
+    "sha256": "e8f14b1f2b26b191f1b921d014fe7da8b6e83a8b63838374bd73ebaf37a3fa13"
+  },
+  "initial_eight_controls": {
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/test.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 1286,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/test.stderr",
+      "sha256": "f516872d9c29e4e91f4c378af6594d6d05a0af5f7067ff9eba7ee1b585546fce"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/test.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "predecessor_ast_preserved": true,
+  "predecessor_comparator_bound_to_older_file": {
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/retained.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "stderr": {
+      "bytes": 2996,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/retained.stderr",
+      "sha256": "92e45b663f26cd622daab96482dbc4aac4779770bcaccd25f7f2685e9f455ada"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/retained.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "qualifications": [
+    "original world split behavior on detached fixtures",
+    "joint verification using simulated receipt and owner callbacks"
+  ],
+  "retained_behavior_checks": 9,
+  "retained_closure": {
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/retained-v02.exit",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 1869,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/retained-v02.stderr",
+      "sha256": "4ca8dcab38ff10197b9f2a4b4bd3b9523fc71f422107b33a9b395df13708a575"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/retained-v02.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "retained_harness": {
+    "bytes": 1728,
+    "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/test_retained_split.py",
+    "sha256": "105bf7368b8b59a1b15a50c2acd119504a2595985d946dc44cf5c8a63c53d823"
+  },
+  "reuse": [
+    "existing protected split projector",
+    "existing DEVELOPMENT owner verifier",
+    "original TRAIN producer approval"
+  ],
+  "schema": "private-a0-joint-reviewed-cohort-candidate/v1",
+  "summary_override_reproduced_on_first_candidate": {
+    "exit": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/summary-override.red.exit",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "stderr": {
+      "bytes": 921,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/summary-override.red.stderr",
+      "sha256": "40edca591e8bcf7d34db00e2007d673cd82ed8b7b8d7c046651eb9e680795ca8"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-a0-joint-reviewed-cohort-private-v01-LHY8yMct/summary-override.red.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "training_producer": {
+    "bytes": 177467,
+    "path": "/tmp/reviewed-tokenizer-pure-structure-cache-private-v01/inputs.after.py.DATA",
+    "sha256": "88125051a7b1d0dcc887f772faa750fa13b8a2141693679a62e2bd5e97e92db3"
+  }
+}

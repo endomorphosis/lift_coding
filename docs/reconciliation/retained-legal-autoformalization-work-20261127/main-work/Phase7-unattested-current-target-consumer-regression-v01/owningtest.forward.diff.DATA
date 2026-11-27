@@ -1,0 +1,43 @@
+--- a/test_trusted_feedback_weight_updates.py
++++ b/test_trusted_feedback_weight_updates.py
+@@ -1064,3 +1064,40 @@
+         assert report.block_reasons == {"proof_feedback_current_target_mismatch": 1}
+         assert auxiliary["skipped_current_target_count"] == 1
+     assert encoder.state.to_dict() == before
++
++
++def test_current_target_metadata_without_checked_receipt_never_reaches_update(samples, monkeypatch):
++    # This fixture supplies matching commitments and caller-written trust flags,
++    # but no independently bound verifier receipt. These are fictional rows;
++    # their identifiers do not establish a checked proof.
++    train, holdout = samples
++    versions = _versions()
++    record, target = _current_feedback_fixture(train, versions)
++    encoder = AdaptiveModalAutoencoder(compute_device="python")
++    before = encoder.state.to_dict()
++    trainer = TrustedFeedbackTrainer(
++        encoder, expected_versions=versions,
++        config=TrustedFeedbackTrainerConfig(production_weight_writes_enabled=True),
++    )
++    updates = []
++
++    def stop_before_update(*args, **kwargs):
++        updates.append(True)
++        return False
++
++    monkeypatch.setitem(trainer.train.__globals__, "_apply_bounded_sample_update", stop_before_update)
++    targets = {target.obligation_id: target}
++    report = trainer.train(
++        [record.to_dict()], {train.sample_id: train},
++        ablation_evidence=_ablation(train.sample_id, holdout.sample_id),
++        current_proof_targets=targets,
++    )
++    auxiliary = encoder.train_proof_auxiliary_heads(
++        [record], expected_versions=versions,
++        current_proof_targets=targets, learning_rate=0,
++    )
++    assert report.applied_count == 0
++    assert encoder.state.to_dict() == before
++    assert {"update_calls": len(updates), "auxiliary_eligible": auxiliary["eligible_count"]} == {
++        "update_calls": 0, "auxiliary_eligible": 0,
++    }

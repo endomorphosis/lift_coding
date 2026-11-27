@@ -1,0 +1,104 @@
+"""Private exact-leaf tests, reusing the retained guarded no-fit profile."""
+import ast
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+from types import ModuleType
+
+BASE = Path(__file__).parent
+GUARD = Path("/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/phase7-same-id-proof-feedback-no-fit-v01-gA9Exh/guarded_probe.py")
+
+def load(path, size, digest):
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        before = os.fstat(fd)
+        assert stat.S_ISREG(before.st_mode) and before.st_size == size
+        raw = b""
+        while len(raw) <= size:
+            block = os.read(fd, min(65536, size + 1 - len(raw)))
+            if not block:
+                break
+            raw += block
+        after = os.fstat(fd)
+    finally:
+        os.close(fd)
+    assert before == after and hashlib.sha256(raw).hexdigest() == digest
+    return raw
+
+def module(name, raw, path, package=None):
+    value = ModuleType(name)
+    value.__file__ = str(path)
+    value.__package__ = package or name.rpartition(".")[0]
+    sys.modules[name] = value
+    exec(compile(raw, str(path), "exec", dont_inherit=True), value.__dict__)
+    return value
+
+def main():
+    assert sys.flags.isolated and sys.dont_write_bytecode and not sys.flags.optimize
+    mode = sys.argv[1]
+    assert mode in ("RED", "GREEN")
+    prior = module("_retained_metric_lineage_guard", load(GUARD, 15945,
+        "6e483bf40c38136befa85f40f04df617d715c9047bc7ad8bb1812c05f1891bdf"), GUARD)
+    prior.install_kernel_guards()
+    sys.addaudithook(prior.audit)
+    import pytest
+
+    package = "ipfs_datasets_py.optimizers.logic_theorem_optimizer"
+    # Namespace-only parents do not execute project initialization or replace
+    # any validator. Both actual leaf modules execute in full below.
+    for name in ("ipfs_datasets_py", "ipfs_datasets_py.optimizers", package):
+        shell = ModuleType(name)
+        shell.__path__ = []
+        shell.__package__ = name
+        sys.modules[name] = shell
+    cache_path = BASE / "legal_ir_evaluation_cache.py.published574.DATA"
+    cache_raw = load(cache_path, 37563,
+        "059b3e848b62d7aabe70f1f60ef6f1bae5192d867bd66a37ff3cbbf18f4a3960")
+    module(package + ".legal_ir_evaluation_cache", cache_raw, cache_path)
+    if mode == "RED":
+        owner_path, owner_size, owner_sha = BASE / "legal_ir_metric_lineage.published574.py.DATA", 20234, "df157497e17936216cd4e1faf8b813fefd389733049edd60a7b5f87da911d0fb"
+    else:
+        owner_path, owner_size, owner_sha = BASE / "legal_ir_metric_lineage.after.py.DATA", int(sys.argv[2]), sys.argv[3]
+    owner_raw = load(owner_path, owner_size, owner_sha)
+    module(package + ".legal_ir_metric_lineage", owner_raw, owner_path)
+    fragment_path = BASE / "metric-lineage-malformed-cache-tests.fragment.py.DATA"
+    fragment = load(fragment_path, 4926, "f936ef9846201709c3e92ed0400d1f545b55e8bc0a54a9b06520624cd9fb67cc")
+    scope = {"pytest": pytest}
+    exec(compile(fragment, str(fragment_path), "exec", dont_inherit=True), scope)
+    excluded = "test_malformed_persistent_metric_lineage_recomputes_with_existing_codec"
+    rows = []
+    for node in ast.parse(fragment).body:
+        if not isinstance(node, ast.FunctionDef) or not node.name.startswith("test_") or node.name == excluded:
+            continue
+        function = scope[node.name]
+        marks = getattr(function, "pytestmark", [])
+        cases = [(None, {})]
+        if marks:
+            assert len(marks) == 1 and marks[0].name == "parametrize"
+            mark = marks[0]
+            assert mark.args[0] == "field,value"
+            cases = list(zip(mark.kwargs["ids"], [dict(zip(("field", "value"), row)) for row in mark.args[1]]))
+        for case, kwargs in cases:
+            name = node.name + ("[" + case + "]" if case else "")
+            try:
+                function(**kwargs)
+            except BaseException as error:
+                rows.append(dict(case=name, passed=False, error_type=type(error).__name__, error=str(error)[:1500]))
+            else:
+                rows.append(dict(case=name, passed=True))
+    assert len(rows) == 11 and len({r["case"] for r in rows}) == 11
+    assert not prior.denied
+    report = dict(mode=mode, cases=rows, passed=sum(r["passed"] for r in rows),
+        failed=sum(not r["passed"] for r in rows), exact_owner_sha256=owner_sha,
+        guard=prior.guard, explicit_denials=prior.denied, source_modules_executed=2,
+        project_initializers_executed=False, model_fit=False, Source=False, SDK=False,
+        normal_pytest_qualification=False, unexecuted_integration_cases=4,
+        fixture_scope="fictional in-memory cache metadata; actual cached leaf validators")
+    print(json.dumps(report, sort_keys=True))
+    return 0 if all(r["passed"] for r in rows) else 1
+
+if __name__ == "__main__":
+    raise SystemExit(main())

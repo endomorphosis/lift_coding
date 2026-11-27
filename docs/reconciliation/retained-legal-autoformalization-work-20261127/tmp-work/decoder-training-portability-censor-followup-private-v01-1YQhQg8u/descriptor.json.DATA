@@ -1,0 +1,133 @@
+{
+  "actual_training": false,
+  "changes_paid_or_final_evidence": false,
+  "closed_logs": {
+    "focused": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/focused.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1334,
+        "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/focused.stderr",
+        "sha256": "c930f4d5209cd2b928e5579188041cc145648207dacefca93fd76262c957bb2c"
+      },
+      "stdout": {
+        "bytes": 170,
+        "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/focused.stdout",
+        "sha256": "1fdc21cd0dae1e758a97bd6938e4c223b96548d3ec86ec5350d4934a09e8c5a6"
+      }
+    },
+    "paid_followup": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/paid_followup.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1431,
+        "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/paid_followup.stderr",
+        "sha256": "d1d1366af884a86b2625ae5a26549052e4f9a3d5a06ef52a6025ce89c1abd2bd"
+      },
+      "stdout": {
+        "bytes": 114,
+        "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/paid_followup.stdout",
+        "sha256": "2fb32f57aac7b7054065bcd9a06ca95c7278711f79421c5d8b3a62724309e41f"
+      }
+    },
+    "portability": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/portability.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1412,
+        "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/portability.stderr",
+        "sha256": "89bfd85b10b65cfac406e84784e64a9312c44d255bab8f3f8ecd6611f333bd0f"
+      },
+      "stdout": {
+        "bytes": 143,
+        "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/portability.stdout",
+        "sha256": "91a5036c302882ed81ddeb127e6e7915492c60a021cd6f6548d44adc6c2d2819"
+      }
+    }
+  },
+  "closure_meter_and_paid_comparison_replayed_in_existing_owner": true,
+  "diff": {
+    "bytes": 5895,
+    "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/study.diff",
+    "sha256": "9f8d6f8bb936c8d9ca3f5b52fb39720ad82fadf3a17d14b00526b2571a9bf76e"
+  },
+  "drivers": {
+    "compose.py": {
+      "bytes": 5784,
+      "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/compose.py",
+      "sha256": "47df4504ccb826ae1ab5de7c7586df1092d9524acd07c3b0135159ac4a23bf63"
+    },
+    "fixture.py": {
+      "bytes": 5508,
+      "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/fixture.py",
+      "sha256": "c0af086aa81ac33cedba7358bf50de64a390413aca2916712a774cd2048fd245"
+    },
+    "test_stage_g_followup.py": {
+      "bytes": 8813,
+      "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/test_stage_g_followup.py",
+      "sha256": "9b6672af140b6942c0db58ca8ae0f480faa50cdfe161fa17cb0572ff6168980b"
+    },
+    "validate_retained.py": {
+      "bytes": 866,
+      "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/validate_retained.py",
+      "sha256": "ed2765a3220380843771344c03697aba4651f5690407ca02c52198ff028e87dd"
+    }
+  },
+  "followup_and_development_owner_checks_modeled": true,
+  "hosted_ci_allowed": false,
+  "legacy_binary_readback_preserved": true,
+  "local_passing": {
+    "focused": 8,
+    "paid_followup": 9,
+    "portability": 8
+  },
+  "measured_portability_or_convergence": false,
+  "modeled_example": {
+    "closing_wall_seconds": 46,
+    "followup": [
+      [
+        -55,
+        2
+      ],
+      [
+        145,
+        2
+      ]
+    ],
+    "horizon_seconds": 100,
+    "mean_lower_gain_seconds": 23,
+    "original": [
+      [
+        -101,
+        2
+      ],
+      [
+        145,
+        2
+      ]
+    ],
+    "seed_count": 2
+  },
+  "owner": {
+    "bytes": 924088,
+    "path": "/tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/study.py",
+    "sha256": "a8dd0c21750f7d7dcaa6ac0a277e832b151b9f76912a7ba0ab8e8cd8e6c702f9"
+  },
+  "prior_owner": {
+    "bytes": 921348,
+    "path": "/tmp/decoder-training-paid-censor-followup-private-v01-9bUvEI8h/study.py",
+    "sha256": "c462caa0fffb73f74549013d0272d224dada01e9e33620329b5b3f5ffb920915"
+  },
+  "project_source_changes_selected": false,
+  "schema": "private-stage-g-paid-censor-followup-integration/v1",
+  "valid_but_unselected_attempt_and_clock_refused": true
+}

@@ -1,0 +1,46 @@
+{
+  "Root_selected": true,
+  "Source_WRITE_claimed": false,
+  "Source_closed": true,
+  "actual_isolated_content_epoch": {
+    "bytes": 6569,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "071a277ff541b7fa9303677ec5b87378735e6fff5d9d921a973299de97941bb8"
+  },
+  "exact_local_freeze": {
+    "bytes": 9962,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-isolated-Phase7-receipt-bounds-exact-two-local-freeze.json",
+    "sha256": "29802789293f7af8358cbb2437753ade2a10873310b19eed1855dd4d77e024c6"
+  },
+  "outer_epoch_record_count": 1618,
+  "outer_epoch_reference": {
+    "bytes": 852469,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-live-reconciled-outer1618-epoch.json",
+    "sha256": "6474fe1502994fa0df1422c1feb4303f6641922d6972a81106f5cd79367f3562"
+  },
+  "owned_module_closed": true,
+  "promotion_selected": false,
+  "protected_index_reference": {
+    "bytes": 7070589,
+    "full9": {
+      "st_ctime_ns": "1795743985314605828",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72514901",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795743985313605818",
+      "st_nlink": "1",
+      "st_size": "7070589",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "sha256": "ce5bfbf2fc6a5a7041928ddac359e475af8487d80ffbb004aa5a4463bc98e252"
+  },
+  "python_epoch_record_count": 1605,
+  "python_epoch_reference": {
+    "bytes": 845899,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-live-reconciled-Python1605-epoch.json",
+    "sha256": "b52eec6a31b1c224873b8fe2805b997a15e3a949ad187a1d83b6d1633e95b9ac"
+  },
+  "schema": "actual-D27-observed-D-root-initializer-READ-small-closeout/v1"
+}

@@ -1,0 +1,11 @@
+Phase 8 — affected-path Native Lean CI integration (2026-11-23)
+
+The existing `.github/workflows/legal-v2-reasoner-ci.yml` now selects pushes and pull requests targeting `main` or `develop` when relevant legal formalization, compiler, retrieval, proof, fixture, test, or workflow paths change. Both event filters include `ipfs_datasets_py/logic/**` and `tests/unit/logic/**`, preserving coverage for the actual typed AST, parser, family emitter, TDFOL, formalization, and proof dependencies. Manual `workflow_dispatch` remains available.
+
+The patch adds exactly 100 lines inside `on`. Every job and every byte outside that block is unchanged, including pinned Lean 4.34.1, admission controls, shard validation, timeouts, resource budgets, and existing Native tests. The existing Native matrix steps are reachable for matched events; no new workflow, job, enrollment flag, or controller was introduced.
+
+Verification: the original ten static checks and eleven dependency-path checks passed (21 parent checks, zero failures/errors/skips), with three separate mutation controls. Earlier failing trigger/path checks are retained. These are static checks and do not establish a hosted CI or Native Lean result. No CI dispatch or CI polling was performed for publication.
+
+The guarded workflow replacement and separate readback completed with Source closure and no errors. The committed workflow is 62,773 bytes, SHA256 `8f2b612fd27c59249a9e38d5107271413ecc61ebaad2b1f6eb24ff3516b12ecd`.
+
+Published by ordinary fast-forward pushes: datasets `e88e21eed18ac588cce062d62f609d9738fbdfd7`; hallucinate `3c660dcea2f23a733fb91e105a69216d8278a667`; lift_coding `d7498fa17e585bce48da255c45284bdbf62d3e0a`. Remote heads, parent gitlinks, and clean publication checkouts were verified. The change configures affected-path checking; it does not establish completion of the legal corpus, legal review, model fidelity, or the full eight-phase programme.

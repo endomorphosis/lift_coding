@@ -1,0 +1,52 @@
+{
+  "Native_selected": false,
+  "exact_one_role": {
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "postimage": {
+        "bytes": 128091,
+        "path": "/tmp/P1-native-translated-cache-input-private-yI6YGH/test_kernel_backends.after.DATA",
+        "sha256": "b706ba0dddc5795055be378d8393c831e65fb7fbaf73a574fcee51227d3676b5"
+      },
+      "postimage_git_blob": "a05d6360be0fcf61a75861c5f0ac8cd63a9d3533",
+      "preimage": {
+        "bytes": 123945,
+        "path": "/tmp/P1-native-translated-cache-input-private-yI6YGH/test_kernel_backends.before.DATA",
+        "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945"
+      },
+      "preimage_git_blob": "005655a32c50d14e20a4a65b1bc7d3773d8061d6"
+    }
+  },
+  "fixture_owner": {
+    "bytes": 102758,
+    "full9": {
+      "st_ctime_ns": "1795741449323712303",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72514356",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795741449323712303",
+      "st_nlink": "1",
+      "st_size": "102758",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+    "sha256": "23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab"
+  },
+  "forward": {
+    "bytes": 10180,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/native-translated-cache.forward.patch",
+    "sha256": "00f145bb2d5c555d5602d9f2e07d6d5ab1023a99781dcc824062a1d938348d47"
+  },
+  "guarded_real_software_generation": {
+    "bytes": 44719,
+    "path": "/tmp/P1-native-translated-cache-input-private-yI6YGH/actual-generation.stdout.json",
+    "sha256": "cd35151537fdef8e6fcf621cf66382e806dd11eac93704965a2acff9c4e29f5c"
+  },
+  "inverse": {
+    "bytes": 10180,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/native-translated-cache.inverse.patch",
+    "sha256": "9a1484633d6382a741734c5e2f1d5bb3f6b5255f2d4af5b485ad34af68f664b2"
+  },
+  "published_D_HEAD": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+  "schema": "existing-native-translated-cache-test-only-prepared/v1"
+}

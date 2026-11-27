@@ -1,0 +1,276 @@
+"""Bind closed Phase2 V3 READ evidence to the existing ordinary37 nonclock inputs."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+
+
+HERE = Path(__file__).resolve().parent
+D = Path('/tmp/P1-proof-cache-translation-current-6btZZr/datasets')
+A = Path('/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate')
+A_HEAD = '219ba3da0f62f772801d71715e22c506faa21126'
+A_TREE = 'c670052e6e12473d974382e455c7aef4adb6aebe'
+GUIDE = {'path': '/tmp/P1-proof-cache-translation-current-6btZZr/actual-Guide575-four-docs-three-FF-publication.json', 'bytes': 2639, 'sha256': 'c04197de963678c357e0f2b97f0a501b343f3f468d4a6a50a7d15ba22a9d568a'}
+CONTROLS = {'path': '/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/READY-existing-Phase2-V3-ordinary37-v02-INERT.json', 'bytes': 21519, 'sha256': '504b74a1ec2bc20235c2e1a5cddd9f02a6ae61ff861d304606448809d18f04d8'}
+PREVIOUS_OUTER = {'path': '/tmp/P1-proof-cache-translation-current-6btZZr/actual-live-reconciled-outer1614-epoch.json', 'bytes': 850358, 'sha256': '44af55564659e96cfe9e3c7ead9336203f51bb37c6117ab108238b5d3b69bb05'}
+PREVIOUS_PYTHON = {'path': '/tmp/P1-proof-cache-translation-current-6btZZr/actual-live-reconciled-Python1601-epoch.json', 'bytes': 843788, 'sha256': 'da7f473f29fe4a57f8e8388c15d72cd7ba69c61168add0993b5116e4237e6dd9'}
+RECEIPTS = D.parent/'phase2-self-reference'
+BRANCH = 'refs/heads/isolated/phase2-v3-definition-self-reference'
+OWNER = 'ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py'
+TEST = 'tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py'
+CHANGED = {OWNER,TEST}
+KEYS = ('path','bytes','sha256')
+ROW_KEYS = KEYS + ('full9',)
+FIELDS = ('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+EPOCH_COUNTS = (1614,1601)
+ABSENT = ('ipfs_datasets_py/conftest.py', 'ipfs_datasets_py/optimizers/conftest.py', 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/conftest.py', 'tests/unit/logic/__init__.py', 'tests/unit/logic/conftest.py', 'tests/unit/logic/integration/__init__.py', 'tests/unit/logic/integration/conftest.py', 'tests/unit/logic/autoformal/__init__.py', 'tests/unit/logic/autoformal/conftest.py')
+
+
+def stamp(info):
+    return {key:str(getattr(info,key)) for key in FIELDS}
+
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def blob(raw):
+    return hashlib.sha1(f'blob {len(raw)}\0'.encode()+raw).hexdigest()
+
+
+def read(ref):
+    path=Path(ref['path'])
+    assert path.is_absolute()
+    with os.fdopen(os.open(path,os.O_NOFOLLOW|os.O_RDONLY),'rb') as handle:
+        before=os.fstat(handle.fileno())
+        assert stat.S_ISREG(before.st_mode) and before.st_nlink==1 and before.st_size==ref['bytes']
+        raw=handle.read(ref['bytes']+1)
+        assert stamp(before)==stamp(os.fstat(handle.fileno()))==stamp(path.lstat())
+    assert len(raw)==ref['bytes'] and digest(raw)==ref['sha256'],str(path)
+    return raw
+
+
+def load(ref):
+    return json.loads(read(ref))
+
+
+def seal(name,value):
+    path=HERE/name
+    raw=(json.dumps(value,sort_keys=True,indent=2)+'\n').encode()
+    with os.fdopen(os.open(path,os.O_CREAT|os.O_NOFOLLOW|os.O_WRONLY|os.O_EXCL,0o400),'wb') as handle:
+        handle.write(raw)
+        handle.flush()
+        os.fsync(handle.fileno())
+    return dict(path=str(path),bytes=len(raw),sha256=digest(raw))
+
+
+def argref(parts):
+    path,size,sha=parts
+    assert size.isdecimal() and int(size)>0 and len(sha)==64 and set(sha)<=set('0123456789abcdef')
+    assert Path(path).is_absolute()
+    return dict(path=path,bytes=int(size),sha256=sha)
+
+
+def rowmap(rows,count):
+    result={row['path']:row for row in rows}
+    assert len(rows)==len(result)==count
+    assert all(set(row)==set(ROW_KEYS) for row in rows)
+    return result
+
+
+def ledger_join(prior,new):
+    previous=prior['after_full_retained_precharge']
+    before=new['prior']
+    spent=new['after_full_retained_precharge']
+    amount=new['added_Source_only_envelope']
+    consumption=('global_cap','internal_cap','used','internal_used')
+    assert all(before[k]==previous[k] for k in consumption) and before['captures']>=previous['captures']
+    assert before['capturesComplete'] is previous['capturesComplete'] is False
+    assert new['all_prior_costs_retained'] and new['exact_human_affirmation']==prior['exact_human_affirmation']
+    assert type(amount) is int and amount>0 and all(spent[k]==before[k]+amount for k in consumption)
+
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    for name in ('--freeze','--epoch','--read-closed'):
+        parser.add_argument(name,nargs=3,metavar=('PATH','BYTES','SHA256'),required=True)
+    args=parser.parse_args()
+    assert __debug__
+    freeze_ref,epoch_ref,closed_ref=map(argref,(args.freeze,args.epoch,args.read_closed))
+    assert all(Path(pin['path']).parent==RECEIPTS for pin in (freeze_ref,epoch_ref,closed_ref))
+    freeze,epoch,closed=map(load,(freeze_ref,epoch_ref,closed_ref))
+    abi_ref=closed['ordinary_read_binding_abi']
+    abi=load(abi_ref)
+    assert freeze['terminal_returncode']==epoch['terminal_returncode']==closed['terminal_returncode']==0
+    assert all(v['Source_closed'] is v['module_closed'] is True for v in (epoch,closed))
+    assert abi['schema']=='actual-D27-observed-D-root-initializer-READ-small-closeout/v1'
+    assert abi['Root_selected'] is abi['Source_closed'] is abi['owned_module_closed'] is True
+    assert all(v['exact_local_freeze']==freeze_ref for v in (closed,epoch,abi))
+    assert abi['actual_isolated_content_epoch']==closed['actual_isolated_content_epoch']==epoch_ref
+    assert freeze['only_two_D_tree_entries_changed'] and freeze['local_clean'] and freeze['isolated_Source_context_closed']
+    assert not any(freeze[k] for k in ('pushed','ordinary_qualified','canonical_Source_write_claimed','shared_source_or_Git_mutation'))
+    if 'shared_status_before_sha256' in freeze or 'shared_status_after_sha256' in freeze:
+        assert freeze['shared_status_before_sha256']==freeze['shared_status_after_sha256']
+    assert freeze['root']==str(D) and D.resolve(strict=True)==D and A.resolve(strict=True)==A
+    assert all(closed.get(k,False) is False for k in ('ordinary_phase_qualified','shared_canonical_mutation','Source_WRITE_claimed'))
+
+    guide=load(GUIDE)
+    guide_install=load(guide['actual_doc_Source_closed'])
+    assert guide['terminal_returncode']==guide_install['terminal_returncode']==0 and guide['evidence_ordinal']==575
+    assert guide_install['Source_closed'] is guide_install['module_closed'] is True
+    assert guide['live_main_after']['datasets']==freeze['parent']==epoch['prior_published_D']==guide_install['HEAD']
+    assert closed['previous_published_guide']==epoch['previous_published_guide']==GUIDE
+    d_proj,a_proj=closed['projects']
+    head,tree=freeze['frozen']['HEAD'],freeze['frozen']['tree']
+    assert (d_proj['root'],d_proj['Git_HEAD'],d_proj['Git_tree'])==(str(D),head,tree)
+    assert (a_proj['root'],a_proj['Git_HEAD'],a_proj['Git_tree'])==(str(A),A_HEAD,A_TREE)
+    assert guide['live_main_after']['accelerate']==A_HEAD
+
+    didx=freeze['frozen']['index']
+    branch=freeze['frozen']['branch_file']
+    assert freeze['frozen']['branch']==BRANCH and branch['path']==str(D/'.git'/BRANCH)
+    assert didx['path']==str(D/'.git/index') and didx==abi['protected_index_reference']==closed['protected_index_reference']
+    assert stamp(Path(branch['path']).lstat())==branch['full9']
+    outer_ref,python_ref=abi['outer_epoch_reference'],abi['python_epoch_reference']
+    assert all(v['outer_epoch_reference']==outer_ref and v['python_epoch_reference']==python_ref for v in (epoch,closed))
+    assert all((v['outer_epoch_record_count'],v['python_epoch_record_count'])==EPOCH_COUNTS for v in (epoch,closed,abi))
+    outer,python=map(load,(outer_ref,python_ref))
+    current=rowmap(outer,EPOCH_COUNTS[0]); current_python=rowmap(python,EPOCH_COUNTS[1])
+    assert all(current[k]==v for k,v in current_python.items())
+    assert all(Path(p).is_relative_to(D) or Path(p).is_relative_to(A) for p in current)
+    assert all(stamp(Path(p).lstat())==row['full9'] for p,row in current.items())
+    aidx=current[str(A/'.git/index')]
+    assert aidx==closed['actual_accelerate_index_metadata']==epoch['actual_A_index']
+    assert current[didx['path']]==didx
+    assert aidx==freeze['additional_A_index']==guide_install['A_index']
+    previous=rowmap(load(PREVIOUS_OUTER),EPOCH_COUNTS[0])
+    previous_python=rowmap(load(PREVIOUS_PYTHON),EPOCH_COUNTS[1])
+    docs=guide_install['committed_docs']
+    assert len(docs)==4
+    overlay={str(D/rel) for rel in {*CHANGED,*docs}}|{didx['path']}
+    assert current.keys()==previous.keys() and current_python.keys()==previous_python.keys()
+    assert {path for path,row in current.items() if row!=previous[path]}==overlay
+    assert {path for path,row in current_python.items() if row!=previous_python[path]}=={str(D/rel) for rel in CHANGED}
+    for rel,doc in docs.items():
+        assert doc['path']==str(D/rel) and all(current[doc['path']][key]==doc[key] for key in ROW_KEYS)
+
+    guard_ref=closed.get('named_metadata_recheck_reference')
+    if guard_ref is None:
+        request=load(closed['request'])
+        selection=load(closed['selected'])
+        assert selection['Root_selected'] is True and selection['request']==closed['request']
+        assert selection['cap']==closed['full_charge']
+        guard_ref=request['named_metadata_recheck_reference']
+    guard_payload=load(guard_ref)
+    guards=guard_payload['rows'] if isinstance(guard_payload,dict) else guard_payload
+    guard_map={row['path']:row for row in guards}
+    assert len(guards)==len(guard_map)==closed['named_metadata_count']==1621
+    assert all(guard_map[path]==row for path,row in current.items())
+    bound_branch=branch['path']
+    metadata_only={str(D/'.git/HEAD'),str(D/'.git/config'),bound_branch,str(D/'.git/refs/remotes/live-observation/main'),
+                   str(A/'.git/HEAD'),str(A/'.git/config'),str(A/'.git/refs/remotes/live-observation/main')}
+    assert guard_map.keys()-current.keys()==metadata_only
+    assert all(set(guard_map[path])=={'path','full9'} for path in metadata_only)
+    assert all(Path(p).is_relative_to(D) or Path(p).is_relative_to(A) for p in guard_map)
+    assert all(stamp(Path(p).lstat())==row['full9'] for p,row in guard_map.items())
+
+    controls=load(CONTROLS)
+    plan=load(controls['current_role_map'])
+    expected=controls['exact_private_posts']
+    assert controls['static_selection']['literal_expected_cases']==37 and controls['static_selection']['function_count']==15
+    assert controls['current_source_freeze_read3_profile_bindings'] is controls['fresh_runtime_clock_effect_io_output_bindings'] is None
+    assert set(expected)==CHANGED
+    candidate_ref=freeze['candidate']
+    assert closed.get('exact_private_candidate',candidate_ref)==candidate_ref
+    candidate=load(candidate_ref)
+    changes=candidate['exact_two_roles']
+    assert candidate['published_D_HEAD']==freeze['parent'] and set(changes)==set(freeze['committed'])==CHANGED
+    captures={row['path']:row for row in closed['individual_captures']}
+    assert len(captures)==len(closed['individual_captures'])==3
+    assert set(captures)=={str(D/rel) for rel in CHANGED}|{didx['path']}
+    for rel,change in changes.items():
+        post=change['postimage']
+        installed=freeze['committed'][rel]
+        assert change['preimage_git_blob']==installed['parent_blob']==expected[rel]['before_git_blob']
+        assert post['bytes']==installed['bytes'] and post['sha256']==installed['sha256']
+        assert change['postimage_git_blob']==installed['stage0_and_committed_blob'] and installed['git_mode']=='100644'
+        observed=captures[str(D/rel)]
+        assert all(observed[k]==installed[k]==current[str(D/rel)][k] for k in ROW_KEYS)
+        raw=read(observed['raw_reference'])
+        assert raw==read(post) and (len(raw),digest(raw),blob(raw))==(installed['bytes'],installed['sha256'],change['postimage_git_blob'])
+        assert raw==read(expected[rel]['after'])
+        assert change['postimage_git_blob']==expected[rel]['after_git_blob']
+        assert all(previous[str(D/rel)][k]==expected[rel]['before'][k] for k in ('bytes','sha256'))
+    retained_index=captures[didx['path']]
+    assert all(retained_index[k]==didx[k] for k in ROW_KEYS)
+    raw_index=read(retained_index['raw_reference'])
+    assert (len(raw_index),digest(raw_index))==(didx['bytes'],didx['sha256'])
+
+    modules={}
+    guarded_module_roles={}
+    for name,rel in {'ipfs_datasets_py.logic.autoformal.legal_reviewed_norm_admission_v3': 'ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py', 'tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3': 'tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py'}.items():
+        live=current[str(D/rel)]
+        modules[name]={'relative_path':rel,**{k:live[k] for k in ('bytes','sha256','full9')}}
+        guarded_module_roles[name]=dict(relative_path=rel,published_preimage=expected[rel]['before'],prospective_postimage=expected[rel]['after'])
+    assert set(modules)==set(controls['future_guarded_bootstrap_module_names'])
+    fixture_plan=controls['future_fixture_wire']
+    fixture_rels=fixture_plan['required_fixture_closure_relative_paths']
+    normals=fixture_plan['required_normal_conftest_relative_paths']
+    ini=fixture_plan['pytest_inifile_relative']
+    assert len(fixture_rels)==len(set(fixture_rels))==7 and len(normals)==3 and ini=='pytest.ini'
+    for rel in fixture_rels:
+        if rel!=TEST:
+            assert current[str(D/rel)]==previous[str(D/rel)]==plan['known_role_rows'][rel]
+    fixture_rows=[current[str(D/rel)] for rel in fixture_rels]
+    assert tuple(fixture_plan['required_absent_relative_paths'])==ABSENT
+    absences=[str(D/rel) for rel in ABSENT]
+    assert all(not os.path.lexists(path) for path in absences)
+    guide_cap,write_cap,read_cap=map(load,(guide_install['full_charge'],freeze['full_charge'],closed['full_charge']))
+    assert write_cap['previous_charge']==guide_install['full_charge'] and read_cap['previous_charge']==freeze['full_charge']
+    assert epoch.get('retained_first_READ_attempt_full_charge') is None
+    assert epoch['full_charge']==closed['full_charge'] and epoch['actual_ledger_after']==closed['actual_ledger_after']
+    assert all(v['resource_policy_capacity_unchanged'] is True for v in (guide_cap,write_cap,read_cap))
+    ledger_join(guide_cap,write_cap)
+    ledger_join(write_cap,read_cap)
+    actual=closed['actual_ledger_after']; reserved=read_cap['after_full_retained_precharge']
+    assert all(actual[k]<=reserved[k] for k in ('used','internal_used'))
+    assert all(actual[k]==reserved[k] for k in ('global_cap','internal_cap'))
+    read(read_cap['exact_human_affirmation'])
+
+    fixture=seal('actual-ordinary37-seven-role-fixture-wire.json',dict(
+        schema='actual-existing-Phase2-V3-ordinary37-protected-fixture-closure/v1',
+        actual_closed_Source_READ_reference=closed_ref,actual_isolated_content_epoch=epoch_ref,
+        pytest_inifile=str(D/ini),required_fixture_closure=fixture_rows,
+        required_normal_conftests=[str(D/rel) for rel in normals],
+        required_absent_paths=absences,role_count=len(fixture_rows),
+        whole_fixture_fresh_body_read_claimed=False,final_ordinary_runtime_qualification_eligibility_authority=None))
+    proof=seal('actual-ordinary37-clean-D-A-index-provenance.json',dict(
+        D=didx,A=aidx,branch=branch,frozen=freeze_ref,actual_paired_D_A_READ3=closed_ref,
+        A_raw_Source_index_capture_claimed=False,A_index_metadata_verified_against_current_epoch=True))
+    d_prov,a_prov=(dict(root=v['root'],HEAD=v['Git_HEAD'],tree=v['Git_tree'],actual_closed_Source_READ=closed_ref,
+        clean_index_provenance_reference=proof,local_frozen_Git_metadata_reference=metadata,clean_worktree_and_index=True,
+        status_sha256=digest(b'')) for v,metadata in ((d_proj,freeze_ref),(a_proj,proof)))
+    role_plan=seal('ordinary37-final-role-map-INERT.json',dict(
+        guarded_module_roles=guarded_module_roles,candidate_roles=changes,actual_freeze_correspondence_only=freeze_ref,
+        actual_exact_two_candidate=candidate_ref,expected_current_A_HEAD=A_HEAD,expected_normal_conftests=normals,
+        fixture_relative_paths=fixture_rels,expected_absent_relative_paths=list(ABSENT),
+        prior_outer=PREVIOUS_OUTER,prior_python=PREVIOUS_PYTHON,replaced_outer_paths=sorted(overlay)))
+    final_controls=seal('READY-ordinary37-final-static-INERT.json',controls|dict(
+        role_plan=role_plan,prior_static_controls=CONTROLS,ordinary_result=None,all_actual_bindings=None,selected_runtime=None))
+    ready=seal('READY-live-ordinary37-actual-READ3-INERT.json',dict(
+        schema='actual-READ3-live-Phase2-V3-ordinary37-nonclock/v1',controls=final_controls,read=abi_ref,
+        fixture=fixture,freeze=freeze_ref,read_close=closed_ref,modules=modules,D_prov=d_prov,A_prov=a_prov,
+        outer=outer_ref,python=python_ref,expected_absent_paths=absences,latest_closed_Source_full_precharge=closed['full_charge'],
+        read3_named_metadata_guard=guard_ref,named_metadata_count=len(guards),isolated_frozen_local_git_candidate=True,
+        canonical_source_application=False,final_ordinary_runtime_qualification_eligibility_authority=None,
+        prior_closed_guide_source_charge=guide_install['full_charge'],successor_write_charge=freeze['full_charge'],
+        protected_Guide575_publication=GUIDE,
+        successor_epoch_charge=epoch['full_charge'],successor_epoch=epoch_ref,epoch_and_READ3_share_one_actual_charge=True,
+        runtime_clock_IO_effect_and_result=None))
+    print(json.dumps(dict(static=final_controls,nonclock=ready)))
+
+
+if __name__=='__main__':
+    main()

@@ -1,0 +1,37 @@
+{
+  "actual_COLLECT_is_order_authority": true,
+  "actual_collection_order": null,
+  "case_vector": [
+    5,
+    1,
+    1,
+    1,
+    1
+  ],
+  "exact_case_ids": [
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[both-absent]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[exact-match]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[request-only]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[receipt-only]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[different-digest]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_record_v2_disk_round_trip_and_explicit_context",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_proof_binding_normalizes_protocol_frozen_kernel_payload_to_canonical_wire",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_current_lean_verification_profile_survives_bound_cache_wire_replay",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_proof_reuse_refuses_an_installed_older_kernel_profile"
+  ],
+  "expected_function_case_counts": {
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement": 5,
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_proof_binding_normalizes_protocol_frozen_kernel_payload_to_canonical_wire": 1,
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_proof_reuse_refuses_an_installed_older_kernel_profile": 1,
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_record_v2_disk_round_trip_and_explicit_context": 1,
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_current_lean_verification_profile_survives_bound_cache_wire_replay": 1
+  },
+  "function_selectors": [
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_record_v2_disk_round_trip_and_explicit_context",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_proof_binding_normalizes_protocol_frozen_kernel_payload_to_canonical_wire",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_current_lean_verification_profile_survives_bound_cache_wire_replay",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_proof_reuse_refuses_an_installed_older_kernel_profile"
+  ],
+  "owning_test": "tests/unit/logic/legal_ir/test_proof_cache.py"
+}

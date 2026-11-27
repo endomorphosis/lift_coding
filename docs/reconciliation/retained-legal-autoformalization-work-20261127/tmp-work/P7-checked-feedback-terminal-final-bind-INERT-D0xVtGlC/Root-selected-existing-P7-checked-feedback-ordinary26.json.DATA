@@ -1,0 +1,40 @@
+{
+  "IO_reference": {
+    "bytes": 723,
+    "path": "/tmp/P7-checked-feedback-terminal-final-bind-INERT-D0xVtGlC/Root-selected-IO.json",
+    "sha256": "181936e9460906676288f97a8fca4c2290291e2a7caca67324b9b31c6a900e28"
+  },
+  "Root_selected": true,
+  "Source_READ_binding": {
+    "bytes": 2404,
+    "path": "/tmp/P7-Guide573-successor-live-READ10-controls-JedG5GQ0/actual-isolated-Phase7-ordinary-D27-read-binding.json",
+    "sha256": "78d7bcc6d10f18c434c0abed0c34717ab0d18f57e8b3a85f6f99df7e411db0b1"
+  },
+  "Source_envelope_bytes": 134217728,
+  "actual_COLLECT_supplies_order": true,
+  "actual_nonclock_handoff": {
+    "bytes": 21495,
+    "path": "/tmp/P7-checked-feedback-terminal-final-bind-INERT-D0xVtGlC/READY-live-ordinary26-final-revalidated-actual-READ10-INERT.json",
+    "sha256": "470c7a3c7a607a80877280a55f427959636c48df14011aaac85acae1259742e3"
+  },
+  "case_hint": 26,
+  "effect_reference": {
+    "bytes": 634,
+    "path": "/tmp/P7-checked-feedback-terminal-final-bind-INERT-D0xVtGlC/Root-selected-effect.json",
+    "sha256": "a6af2f3f7385ded3a71e7f051077eb70b0b84b439de20ce70c1bc2b343a82e20"
+  },
+  "frozen_D_HEAD": "4449d6a62a607cded94db3822b39033ed4850c26",
+  "frozen_D_tree": "ab10c4bdf0d2ce0b6a01d25166cb4eea2c96ac70",
+  "launch_deadline_utc_ns": 1795740412995424509,
+  "launch_not_before_utc_ns": 1795739572995424509,
+  "ledger_before": {
+    "captures": 543391,
+    "capturesComplete": false,
+    "global_cap": 56706484234,
+    "internal_cap": 56515892360,
+    "internal_used": 56375317640,
+    "used": 56565909514
+  },
+  "output_namespace": "/tmp/P7-checked-feedback-terminal-final-bind-INERT-D0xVtGlC/actual-output",
+  "schema": "Root-selected-existing-P7-checked-feedback-frozen-local-ordinary26/v1"
+}

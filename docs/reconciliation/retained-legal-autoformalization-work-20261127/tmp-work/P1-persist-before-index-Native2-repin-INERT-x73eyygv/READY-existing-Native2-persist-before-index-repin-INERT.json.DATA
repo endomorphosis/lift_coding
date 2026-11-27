@@ -1,0 +1,564 @@
+{
+  "SDK_source_pins": {
+    "ipfs_datasets_py.logic.backends.kernel.lean": [
+      "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+    ],
+    "ipfs_datasets_py.logic.backends.process": [
+      "ipfs_datasets_py/logic/backends/process.py",
+      "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+    ],
+    "ipfs_datasets_py.logic.backends.resource_admission": [
+      "ipfs_datasets_py/logic/backends/resource_admission.py",
+      "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+    ],
+    "ipfs_datasets_py.logic.ir_core.protocols": [
+      "ipfs_datasets_py/logic/ir_core/protocols.py",
+      "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+    ],
+    "ipfs_datasets_py.logic.legal_ir.proof_cache": [
+      "ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+      "cf414d3c4bfb858741a8423508d7e70d26db7f3b0a61959c9d594c39ddee23de"
+    ],
+    "ipfs_datasets_py.logic.parsers": [
+      "ipfs_datasets_py/logic/parsers/__init__.py",
+      "e75f0c2ffea0f0706a3d1768a794849e6c013b6647dc59ba331f44797c233386"
+    ],
+    "ipfs_datasets_py.logic.parsers.kernel_targets": [
+      "ipfs_datasets_py/logic/parsers/kernel_targets.py",
+      "8b4db56f36dd4fc3a459421b546bdb98d6d6d299cd3fe6ce17e5d01ee3e9b748"
+    ],
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler": [
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+    ]
+  },
+  "actual_Git_local_freeze": null,
+  "actual_Host_asset_metadata_or_admission": null,
+  "actual_IO_envelope": null,
+  "actual_Output_reference": null,
+  "actual_Source42_owner_and_current_ledger": null,
+  "actual_Source_SDK_Native_or_Git_mutation": false,
+  "actual_Source_manifest_application": null,
+  "actual_binding_schema": "existing-direct-Native3-current-bindings/v1",
+  "actual_clock_scope": null,
+  "actual_module_D_A_current_selection": null,
+  "actual_parent_resource_profile": {
+    "child_process_slots": 1,
+    "cpu_slots": 1,
+    "memory_mb": 8192,
+    "requires_gpu": false
+  },
+  "actual_runtime_selection": null,
+  "authenticated_previous_INERT_controls": {
+    "bytes": 18066,
+    "path": "/tmp/P1-translated-cache-native-existing-owner-INERT-bwI7Tb3c/READY-existing-v597-translated-cache-Native2-INERT.json",
+    "sha256": "915bd7f66242794b21a0f8c818ab51b5de6a9bcf95186907e031d33420da8692"
+  },
+  "binder": {
+    "bytes": 5646,
+    "path": "/tmp/P1-persist-before-index-Native2-repin-INERT-x73eyygv/existing-v567-binder-atomic-cache-INERT.py.DATA",
+    "sha256": "3facae1df83369cf515615c31143196203a3a48ea97091c653f8e42f349d05df"
+  },
+  "cache_fixture_existing_epoch_role": {
+    "bytes": 105531,
+    "full9": {
+      "st_ctime_ns": "1795750532276434201",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72514039",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795750532276434201",
+      "st_nlink": "1",
+      "st_size": "105531",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+    "sha256": "1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460"
+  },
+  "emitter_and_proof_cache_role_map": {
+    "ipfs_datasets_py.logic.backends.results": {
+      "bytes": 27160,
+      "git_blob": "7ffdc5b4019faa80749df5fb0bb7d1f06379573f",
+      "held_row": {
+        "bytes": 27160,
+        "full9": {
+          "st_ctime_ns": "1795741365135834572",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72513279",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795741365135834572",
+          "st_nlink": "1",
+          "st_size": "27160",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/backends/results.py",
+        "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+      },
+      "relative": "ipfs_datasets_py/logic/backends/results.py",
+      "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+    },
+    "ipfs_datasets_py.logic.families.namespaces": {
+      "bytes": 34262,
+      "git_blob": "2ff6102d93759b4bfd30e2d0054353db733e6e2b",
+      "held_row": {
+        "bytes": 34262,
+        "full9": {
+          "st_ctime_ns": "1795741365144236630",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72513346",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795741365144236630",
+          "st_nlink": "1",
+          "st_size": "34262",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/families/namespaces.py",
+        "sha256": "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+      },
+      "relative": "ipfs_datasets_py/logic/families/namespaces.py",
+      "sha256": "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+    },
+    "ipfs_datasets_py.logic.ir_core.canonical": {
+      "bytes": 14098,
+      "git_blob": "fa63fd302dad6340556a937b73883a25376f5f6b",
+      "held_row": {
+        "bytes": 14098,
+        "full9": {
+          "st_ctime_ns": "1795741365154768559",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72513476",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795741365154768559",
+          "st_nlink": "1",
+          "st_size": "14098",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/ir_core/canonical.py",
+        "sha256": "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0"
+      },
+      "relative": "ipfs_datasets_py/logic/ir_core/canonical.py",
+      "sha256": "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0"
+    },
+    "ipfs_datasets_py.logic.ir_core.claims": {
+      "bytes": 16176,
+      "git_blob": "63af5a987404010aa0ec69fb827722afc9b53b81",
+      "held_row": {
+        "bytes": 16176,
+        "full9": {
+          "st_ctime_ns": "1795741365154768559",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72513477",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795741365154768559",
+          "st_nlink": "1",
+          "st_size": "16176",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/ir_core/claims.py",
+        "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+      },
+      "relative": "ipfs_datasets_py/logic/ir_core/claims.py",
+      "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+    },
+    "ipfs_datasets_py.logic.ir_core.identity": {
+      "bytes": 8911,
+      "git_blob": "69d77e91f4ec671c6355b0f035017b1fed2b38d0",
+      "held_row": {
+        "bytes": 8911,
+        "full9": {
+          "st_ctime_ns": "1795741365154799247",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72513480",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795741365154799247",
+          "st_nlink": "1",
+          "st_size": "8911",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/ir_core/identity.py",
+        "sha256": "606bffc1f938c59f44651eeb65cb9c0738e16e465aabba0ad82ef05e3b5b3b0e"
+      },
+      "relative": "ipfs_datasets_py/logic/ir_core/identity.py",
+      "sha256": "606bffc1f938c59f44651eeb65cb9c0738e16e465aabba0ad82ef05e3b5b3b0e"
+    },
+    "ipfs_datasets_py.logic.legal_ir.adapter": {
+      "bytes": 51421,
+      "git_blob": "bda96aefe70d34e76a6f6f75cba530c7ad16841a",
+      "held_row": {
+        "bytes": 51421,
+        "full9": {
+          "st_ctime_ns": "1795741365155936263",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72513487",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795741365155936263",
+          "st_nlink": "1",
+          "st_size": "51421",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/legal_ir/adapter.py",
+        "sha256": "fd38de52f0d159a6f417e5a7d50b0a8967dc7280a760950fd479a81be5922c06"
+      },
+      "relative": "ipfs_datasets_py/logic/legal_ir/adapter.py",
+      "sha256": "fd38de52f0d159a6f417e5a7d50b0a8967dc7280a760950fd479a81be5922c06"
+    },
+    "ipfs_datasets_py.logic.legal_ir.proof_cache": {
+      "bytes": 62783,
+      "git_blob": "ac9a60101a19f1c13fdebb7925ac8b23846fb561",
+      "held_row": {
+        "bytes": 62783,
+        "full9": {
+          "st_ctime_ns": "1795750532276434201",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72513518",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795750532276434201",
+          "st_nlink": "1",
+          "st_size": "62783",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+        "sha256": "cf414d3c4bfb858741a8423508d7e70d26db7f3b0a61959c9d594c39ddee23de"
+      },
+      "relative": "ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+      "sha256": "cf414d3c4bfb858741a8423508d7e70d26db7f3b0a61959c9d594c39ddee23de"
+    },
+    "ipfs_datasets_py.logic.parsers": {
+      "bytes": 8980,
+      "git_blob": "c7a25d447dbb1f70d660529f0c15f8a92ca47876",
+      "held_row": {
+        "bytes": 8980,
+        "full9": {
+          "st_ctime_ns": "1795741365165799322",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72513555",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795741365165799322",
+          "st_nlink": "1",
+          "st_size": "8980",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/parsers/__init__.py",
+        "sha256": "e75f0c2ffea0f0706a3d1768a794849e6c013b6647dc59ba331f44797c233386"
+      },
+      "relative": "ipfs_datasets_py/logic/parsers/__init__.py",
+      "sha256": "e75f0c2ffea0f0706a3d1768a794849e6c013b6647dc59ba331f44797c233386"
+    },
+    "ipfs_datasets_py.logic.parsers.kernel_targets": {
+      "bytes": 126192,
+      "git_blob": "9368a5af2344148a3ff5cc9b682c6528bfb3f8d7",
+      "held_row": {
+        "bytes": 126192,
+        "full9": {
+          "st_ctime_ns": "1795741365167799336",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72513571",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795741365167799336",
+          "st_nlink": "1",
+          "st_size": "126192",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/parsers/kernel_targets.py",
+        "sha256": "8b4db56f36dd4fc3a459421b546bdb98d6d6d299cd3fe6ce17e5d01ee3e9b748"
+      },
+      "relative": "ipfs_datasets_py/logic/parsers/kernel_targets.py",
+      "sha256": "8b4db56f36dd4fc3a459421b546bdb98d6d6d299cd3fe6ce17e5d01ee3e9b748"
+    },
+    "ipfs_datasets_py.logic.syntax_core": {
+      "bytes": 8285,
+      "git_blob": "9d0f887ec3d4d8b559d7cd546b39f4c6c6de3ee7",
+      "held_row": {
+        "bytes": 8285,
+        "full9": {
+          "st_ctime_ns": "1795741365173388415",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72513609",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795741365173388415",
+          "st_nlink": "1",
+          "st_size": "8285",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/syntax_core/__init__.py",
+        "sha256": "20dd418d90360cdb42c64ba8b87bedcdb640228b460ef6c6ae60312365130e81"
+      },
+      "relative": "ipfs_datasets_py/logic/syntax_core/__init__.py",
+      "sha256": "20dd418d90360cdb42c64ba8b87bedcdb640228b460ef6c6ae60312365130e81"
+    },
+    "ipfs_datasets_py.logic.syntax_core.contracts": {
+      "bytes": 75291,
+      "git_blob": "09d79a0e6ae23d8e71f31fbba9bbebfdb84f4546",
+      "held_row": {
+        "bytes": 75291,
+        "full9": {
+          "st_ctime_ns": "1795741365173958675",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72513614",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795741365173958675",
+          "st_nlink": "1",
+          "st_size": "75291",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/syntax_core/contracts.py",
+        "sha256": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+      },
+      "relative": "ipfs_datasets_py/logic/syntax_core/contracts.py",
+      "sha256": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+    },
+    "ipfs_datasets_py.logic.syntax_core.registry": {
+      "bytes": 27560,
+      "git_blob": "a909ce3a3ea1712f9d2aa35ba2c5d2e4eb097f56",
+      "held_row": {
+        "bytes": 27560,
+        "full9": {
+          "st_ctime_ns": "1795741365174799384",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72513619",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795741365174799384",
+          "st_nlink": "1",
+          "st_size": "27560",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/syntax_core/registry.py",
+        "sha256": "eff5ca12d748eff1e9463b737a8243c97d89cac51e1b604fe2c765aed885cb44"
+      },
+      "relative": "ipfs_datasets_py/logic/syntax_core/registry.py",
+      "sha256": "eff5ca12d748eff1e9463b737a8243c97d89cac51e1b604fe2c765aed885cb44"
+    }
+  },
+  "exact_selected_maintained_functions": [
+    "parsers.__init__",
+    "parsers.kernel_targets",
+    "syntax_core.__init__",
+    "syntax_core.registry",
+    "syntax_core.contracts",
+    "families.namespaces",
+    "ir_core.claims",
+    "ir_core.canonical",
+    "ir_core.identity",
+    "backends.results",
+    "legal_ir.proof_cache",
+    "legal_ir.adapter"
+  ],
+  "exact_static_inverse_proof": {
+    "all_prior_fixture_functions_AST_exact": true,
+    "binder_functions_AST_exact": true,
+    "binder_replacements": [
+      [
+        "b706ba0dddc5795055be378d8393c831e65fb7fbaf73a574fcee51227d3676b5",
+        "eac1d213b16ff2ef79f18269352648768d4e145b2b65fbb8c75c308bced98ea2"
+      ],
+      [
+        "23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab",
+        "1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460"
+      ]
+    ],
+    "compiled_without_execution": true,
+    "operator_replacements": [
+      [
+        "b706ba0dddc5795055be378d8393c831e65fb7fbaf73a574fcee51227d3676b5",
+        "eac1d213b16ff2ef79f18269352648768d4e145b2b65fbb8c75c308bced98ea2"
+      ],
+      [
+        "d33e4a9d60d42ae645aff13174cfa6f57043477ca81886739b8f75adee33fcf9",
+        "3facae1df83369cf515615c31143196203a3a48ea97091c653f8e42f349d05df"
+      ],
+      [
+        "102758, '23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab'",
+        "105531, '1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460'"
+      ],
+      [
+        "704ccf09ba9d7d3c32d107c9cd8e07f6f32933d5f5fdcfe404b641f847c30743",
+        "cf414d3c4bfb858741a8423508d7e70d26db7f3b0a61959c9d594c39ddee23de"
+      ]
+    ],
+    "owning_native_fixture_SHA_literal_only": true,
+    "reversed_byte_for_byte": true
+  },
+  "historical_previous_Native_success": {
+    "bytes": 7503,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-Phase1-native-translated-proof-cache-closed.json",
+    "sha256": "7c612a24bf24486fad3245ccb5ac319412a8dea07b1649a83dec697c913bd0f2"
+  },
+  "immutable_current_guide579_head": "4bd600b83d5b9abd0a3f5c466677d40e42efddf3",
+  "maintained_helper_request_bounds": {
+    "max_memory_bytes": 4294967296,
+    "max_output_bytes": 65536,
+    "max_steps": 100,
+    "timeout_ms": 15000
+  },
+  "native_case_profile": "P1-native-cache-controlled-translation/v1",
+  "old_version_refusal_controls_no_new_native": true,
+  "operator": {
+    "bytes": 46821,
+    "path": "/tmp/P1-persist-before-index-Native2-repin-INERT-x73eyygv/existing-v597-operator-atomic-cache-INERT.py.DATA",
+    "sha256": "83450b876f4330c703338c9f55d216cfb72735ced269b2c052087fd191390fc7"
+  },
+  "ordinary_or_Native_qualification": false,
+  "owning_cache_support_fixture": {
+    "bytes": 105531,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/retained-Source-test_proof_cache.py.DATA",
+    "sha256": "1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460"
+  },
+  "owning_product_source": {
+    "bytes": 62783,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/retained-Source-proof_cache.py.DATA",
+    "sha256": "cf414d3c4bfb858741a8423508d7e70d26db7f3b0a61959c9d594c39ddee23de"
+  },
+  "owning_test_post": {
+    "bytes": 128091,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/retained-Source-test_kernel_backends.py.DATA",
+    "sha256": "eac1d213b16ff2ef79f18269352648768d4e145b2b65fbb8c75c308bced98ea2"
+  },
+  "predicted_sdk_events": [
+    {
+      "argv_tail": [
+        "--version"
+      ],
+      "expected_rc": 0,
+      "index": 0,
+      "program": "Lean4"
+    },
+    {
+      "argv_tail": [
+        "--json",
+        "Main.lean"
+      ],
+      "expected_rc": 0,
+      "index": 1,
+      "program": "Lean4"
+    },
+    {
+      "argv_tail": [
+        "--json",
+        "Main.lean"
+      ],
+      "expected_rc": 0,
+      "index": 2,
+      "program": "Lean4"
+    }
+  ],
+  "preserved_definitions_and_native_finalizer": true,
+  "remaining_current_roles": [
+    "fresh Source/clock/enrollment/IO",
+    "fresh 8 assets/full9 proof, paired A/D roots/index",
+    "exact test installation, current frozen index",
+    "existing runtime state/policy and cleanup"
+  ],
+  "retained_source_role_basis": {
+    "bytes": 852469,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-live-reconciled-outer1618-epoch.json",
+    "sha256": "a250df914df7b03b8362891c3013cce373e2a65e7a083a1f1521d7e9279b165d"
+  },
+  "reuse_native_commands": 0,
+  "schema": "existing-admitted-Lean-Native2-atomic-cache-repin-INERT/v1",
+  "selector_rebind_map": {
+    "candidate": {
+      "bytes": 10316,
+      "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/SEALED-private-Phase1-proof-cache-atomic-record-exact-three.json",
+      "sha256": "1057bbcde6ed22f67da2603060f467d1a320a79bb24046b4e6ad2311b935bd20"
+    },
+    "capture_population": [
+      ".git/index",
+      "ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+      "tests/integration/logic/backends/test_kernel_backends.py",
+      "tests/unit/logic/legal_ir/test_proof_cache.py"
+    ],
+    "closed_READ4": {
+      "bytes": 8248,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-Phase1-cache-atomic-put-READ4-closed.json",
+      "sha256": "759f5100682a32e5fe2a9a81dbb0a33946d8ff658df1fbfd1f3f338295b5b148"
+    },
+    "closed_epoch": {
+      "bytes": 6382,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-live-reconciled-Source42-content-epoch-closed.json",
+      "sha256": "747a2492f0d6ce993c1208fb74b71c330bd53bd87a676370d3e3b570134ced37"
+    },
+    "exact_targets": [
+      "ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+      "tests/integration/logic/backends/test_kernel_backends.py",
+      "tests/unit/logic/legal_ir/test_proof_cache.py"
+    ],
+    "latest_observed_pre_Native_cap": {
+      "bytes": 2710,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/ordinary10-retry-v02/Source-only-authorized-Phase1-proof-cache-atomic-put-ordinary10-cap-prior-retained.json",
+      "sha256": "7c54c321f62614dbf0e8cabce1f097c1c4b20ad4a4ab2590ae27f5deef8e7727"
+    },
+    "latest_observed_pre_Native_ordinary10": {
+      "bytes": 3865,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-Phase1-current-cache-atomic-put-ordinary10-closed.json",
+      "sha256": "5bb09cf899098870073e07fa2e16258d51d2f01372315d4dba785992823a9dc2"
+    },
+    "local_freeze": {
+      "bytes": 8716,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-Phase1-cache-atomic-put-exact-three-local-freeze.json",
+      "sha256": "0d94fff7376374123441e0a52da3fb11b06f315125051e030660c48d571b5725"
+    },
+    "published_parent": {
+      "bytes": 3363,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-Guide579-four-docs-three-FF-publication.json",
+      "sha256": "1e4dcdba8ad65453fbf82291927814b584ae4c7e2183509a175f4aca876d0811"
+    },
+    "published_parent_freeze": {
+      "bytes": 6210,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-Guide579-four-docs-Source-closed-and-frozen.json",
+      "sha256": "bcf4c64afb6398d4806d069376786074fb1e82fbb09b059ba9e4ace968598ddf"
+    },
+    "retained_READ4_charge": {
+      "bytes": 1305,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/Source-only-Phase1-cache-atomic-put-READ-overlay-full-retained.json",
+      "sha256": "adc7cb0909e09256db3e203a9a2e85a8b412ea639bf3b30e07b1bc78b62df072"
+    },
+    "reuse_source": {
+      "bytes": 11474,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/select-native-translation.v02.py",
+      "sha256": "af1d779b356f01bcea61d421d01c4174556d3b8456d3250447135fc7880371e7"
+    },
+    "selector_requirements": [
+      "Import only definitions from freeze-cache-atomic-put.py; BASE and Guide579 are supplied there. Use ROLE=NATIVE_TEST and OWNER for proof cache.",
+      "Verify exact three raw READ4/epoch/full9/stage joins, not prior POSTIMAGE or old only_one_test_changed.",
+      "Use same Source42/protocol/host asset and corrected namespace integrity, unchanged native bounds and parent profile.",
+      "Use latest actual retained cap, preserving ordinary10 prior refusal and charges, not the historic Native retry ledger.",
+      "Fresh bindings and selection remain required. Use distinct output namespace."
+    ]
+  },
+  "slots": {
+    "A": null,
+    "CURRENT_BINDING_REF": null,
+    "PATH_SCOPE": null,
+    "ROOT_SELECTION": null,
+    "RUN_OUTPUT": null,
+    "W": null
+  },
+  "v567_binder_basis": {
+    "bytes": 5635,
+    "path": "/tmp/Root-P1-current-Lean-wrapper-native-cache-v459-KQUxVbdC/current-existing-native-cache-binder.py.DATA",
+    "sha256": "403a945120e859401603b853d0f699730932da12530f95c0efc892ec89c2c211"
+  },
+  "v597_actual_operator": {
+    "bytes": 44307,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/Root-selected-existing-current-Native2-operator.py",
+    "sha256": "0e0c0d356007c55c558b12fc8f56b602dca8b537a8be18fab8d81ddd22b716fc"
+  },
+  "v597_inert_lineage": {
+    "bytes": 43793,
+    "path": "/tmp/P1-Native-namespaced-v594-existing-owner-INERT-MIcZpQSJ/existing-direct-native-namespaced-operator-INERT.py.DATA",
+    "sha256": "99269e97c682dd832d2d98774776a0dbbcee8de2b683874e2c748506737b3815"
+  }
+}

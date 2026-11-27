@@ -1,0 +1,129 @@
+{
+  "V4_helper_and_prior_39_test_definitions_preserved_by_exact_test_byte_prefix": true,
+  "all_other_gitlinks_and_accelerate_preserved": true,
+  "force_or_tag_push": false,
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "ade03ff800c4162882997dcb5597100e41a36ae1",
+        "to": "2d3d1475b3aebfc22efe26370a0c015b02ff145b"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "ade03ff800c4162882997dcb5597100e41a36ae1",
+        "to": "2d3d1475b3aebfc22efe26370a0c015b02ff145b"
+      },
+      "hallucinate_app": {
+        "from": "d9c71ad597b4b1d2f11083afc1c564aaba03f520",
+        "to": "7a7192f116d610f89071db882bf1ec4ed9664c7d"
+      }
+    }
+  },
+  "installation": {
+    "Source_module_stages_and_FDs_closed": true,
+    "bytes": 3738,
+    "path": "/tmp/Root-LIR20-lexical-existing-Source2-CAS-actual-v178-izwwqdmp/Root-LIR20-two-installed-Source-closed-small-v178.json",
+    "sha256": "0dd31f12c942df850fc7deb7e5892babce2645666509148d37903fd00e3c39f9"
+  },
+  "local_after": {
+    "accelerate": {
+      "clean_index_worktree": true,
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "clean_index_worktree": true,
+      "head": "2d3d1475b3aebfc22efe26370a0c015b02ff145b",
+      "tree": "d9207d9c0b34726b9e46a64c89e62e6d077da6a1"
+    },
+    "hallucinate": {
+      "clean_index_worktree": true,
+      "head": "7a7192f116d610f89071db882bf1ec4ed9664c7d",
+      "tree": "0ff944b8a933da41de40867fb6afb2d31c1a187c"
+    },
+    "root": {
+      "clean_index_worktree": true,
+      "head": "f7e9e19dd9856e937a36e27ee1f2b1a8adb35e82",
+      "tree": "1b62a88c3d2cb59f003888b3bbe17a156e0a5a4b"
+    }
+  },
+  "new_Source_SDK_test_CI_model_or_runtime_invocation": false,
+  "numerical_Native_or_legal_qualification": false,
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "2d3d1475b3aebfc22efe26370a0c015b02ff145b",
+    "hallucinate": "7a7192f116d610f89071db882bf1ec4ed9664c7d",
+    "root": "f7e9e19dd9856e937a36e27ee1f2b1a8adb35e82"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "ade03ff800c4162882997dcb5597100e41a36ae1",
+    "hallucinate": "d9c71ad597b4b1d2f11083afc1c564aaba03f520",
+    "root": "6c32ae44ae1d286b4bf65c0d689b4f696ddf688e"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "private_new12_controls": {
+    "after": {
+      "failed": 0,
+      "passed": 12
+    },
+    "before": {
+      "failed": 5,
+      "passed": 7
+    },
+    "bytes": 13202,
+    "path": "/tmp/LIR20-lexical-currentV4-integration-private-v169-_5qcdjco/actual-NEW12-private-lexical-before-after-scope-result.json",
+    "scope": "actual full retrieve and actual BM25 AST, fictional replay/lane/split/integrity/array boundaries, tensor sentinel; no project or Torch imports",
+    "sha256": "b656f829631854b3c7c16de1420e9016706b339d6b09dbfba9ac5d090271b6ee"
+  },
+  "public_Torch_V4_executed": false,
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "pushes": {
+    "datasets": {
+      "from": "ade03ff800c4162882997dcb5597100e41a36ae1",
+      "porcelain": " \t2d3d1475b3aebfc22efe26370a0c015b02ff145b:refs/heads/main\tade03ff800..2d3d1475b3",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "2d3d1475b3aebfc22efe26370a0c015b02ff145b"
+    },
+    "hallucinate": {
+      "from": "d9c71ad597b4b1d2f11083afc1c564aaba03f520",
+      "porcelain": " \t7a7192f116d610f89071db882bf1ec4ed9664c7d:refs/heads/main\td9c71ad..7a7192f",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "7a7192f116d610f89071db882bf1ec4ed9664c7d"
+    },
+    "root": {
+      "from": "6c32ae44ae1d286b4bf65c0d689b4f696ddf688e",
+      "porcelain": " \tf7e9e19dd9856e937a36e27ee1f2b1a8adb35e82:refs/heads/main\t6c32ae44ae..f7e9e19dd9",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "f7e9e19dd9856e937a36e27ee1f2b1a8adb35e82"
+    }
+  },
+  "schema": "LIR20-lexical-GitHub-publication/v178",
+  "selected_blobs": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_joint_retrieval.py": {
+      "blob": "c15582df34f21c148d22bf93e07dd59044bb66b4",
+      "bytes": 74852,
+      "parent_blob": "b69f58e871dc9ded419817888dfeabd8fb9e4fd8",
+      "sha256": "b60874c3e8260f926cbd5eab18018c183417b594b9937a167854dbe45fcf9bac"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_joint_retrieval.py": {
+      "blob": "07dd3bf1fcb2bd6b005f64e2b4e16f76e38f214a",
+      "bytes": 65766,
+      "parent_blob": "e58a1c995c7ec1d7cf50dd5a1826b55f34e03cb2",
+      "sha256": "163d81acf27e16b6d31145b3d78133578fa65646bacf2a83a4c9898a6124ccc5"
+    }
+  }
+}

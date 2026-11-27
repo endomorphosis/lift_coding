@@ -1,0 +1,40 @@
+{
+  "IO_reference": {
+    "bytes": 721,
+    "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/Root-selected-IO.json",
+    "sha256": "3d435a97270b2c403004091215f41cb6fe032076e19ca3659afb75bff468d35f"
+  },
+  "Root_selected": true,
+  "Source_READ_binding": {
+    "bytes": 2446,
+    "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/actual-live-ordinary33-Source-binding-ABI.json",
+    "sha256": "40e8efe6a05838d015075c47614d3e81626e855aa0f63541e6ce238ef3cfb873"
+  },
+  "Source_envelope_bytes": 134217728,
+  "actual_COLLECT_supplies_order": true,
+  "actual_nonclock_handoff": {
+    "bytes": 6769,
+    "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/READY-live-ordinary33-actual-READ3-INERT.json",
+    "sha256": "330e841bef8cc7a6e0db08ee169979e8d5735590ab9bdd7c783e8d8574269d78"
+  },
+  "case_hint": 33,
+  "effect_reference": {
+    "bytes": 550,
+    "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/Root-selected-effect.json",
+    "sha256": "79759922107836539e63c7a1e47cd8cdb018515249b35f3647c23b713f58b4a0"
+  },
+  "frozen_D_HEAD": "cbc43a5f365502265d1e64d7bce3281f2871ef01",
+  "frozen_D_tree": "195a3725baeb792ef7952aabfd40866c6c8b568b",
+  "launch_deadline_utc_ns": 1795735898555189669,
+  "launch_not_before_utc_ns": 1795735058555189669,
+  "ledger_before": {
+    "captures": 537049,
+    "capturesComplete": false,
+    "global_cap": 55095871498,
+    "internal_cap": 54905279624,
+    "internal_used": 54764704904,
+    "used": 54955296778
+  },
+  "output_namespace": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/actual-output",
+  "schema": "Root-selected-existing-Phase2-physical-v4-current-trust-frozen-local-ordinary33/v1"
+}

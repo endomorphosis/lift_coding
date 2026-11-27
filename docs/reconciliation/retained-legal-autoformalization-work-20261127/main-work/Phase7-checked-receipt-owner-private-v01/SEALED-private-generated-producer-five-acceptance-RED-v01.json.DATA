@@ -1,0 +1,306 @@
+{
+  "Git_mutations": 0,
+  "Native": 0,
+  "SDK": 0,
+  "SQL": 0,
+  "Source_epoch": null,
+  "actual_private_result": {
+    "compiled_project_paths": 120,
+    "error_cause": "The held existing builder does not accept current_target. Four routes share this one missing integration API.",
+    "errors": 4,
+    "executed": 5,
+    "explicit_denials": [],
+    "failures": 0,
+    "guard": {
+      "address_space_bytes": 536870912,
+      "cpu_affinity": [
+        0
+      ],
+      "cpu_seconds": 25,
+      "kernel_probes": [
+        "socket",
+        "clone3",
+        "write-open"
+      ],
+      "landlock_abi": 7,
+      "stdout_stderr_each_max_bytes": 131072,
+      "syscall_denylist": [
+        "socket",
+        "socketpair",
+        "connect",
+        "accept",
+        "accept4",
+        "bind",
+        "listen",
+        "clone",
+        "clone3",
+        "execve",
+        "execveat",
+        "io_uring_setup",
+        "io_uring_enter",
+        "io_uring_register",
+        "pidfd_getfd",
+        "ptrace",
+        "process_vm_writev",
+        "setns",
+        "unshare",
+        "mount",
+        "umount2",
+        "truncate",
+        "ftruncate",
+        "fchmod",
+        "fchmodat",
+        "fchmodat2",
+        "fchown",
+        "fchownat",
+        "utimensat",
+        "setxattr",
+        "lsetxattr",
+        "fsetxattr",
+        "removexattr",
+        "lremovexattr",
+        "fremovexattr"
+      ]
+    },
+    "legacy_no_target_digest_control": "PASS",
+    "model_fit": false,
+    "normal_pytest_qualification": false,
+    "passed": 1,
+    "project_compile_bytes": 7559394,
+    "stderr": {
+      "bytes": 4246,
+      "full9": [
+        66306,
+        72510860,
+        33024,
+        1,
+        1000,
+        1000,
+        4246,
+        1795739002338058331,
+        1795739002338058331
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-generated-producer-five-RED.v02.stderr.txt",
+      "sha256": "9850054a82c151d4d898fc4296ee45c98e6a40aad6c3572a1a8e3815869649da"
+    },
+    "stdout": {
+      "bytes": 36307,
+      "full9": [
+        66306,
+        72510859,
+        33024,
+        1,
+        1000,
+        1000,
+        36307,
+        1795739002338058331,
+        1795739002338058331
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-generated-producer-five-RED.v02.stdout.json",
+      "sha256": "4e1fe5ccef9743798a4b3e486c202332e85b1ac1b15ad1fa62d9b5d5395b5d7e"
+    }
+  },
+  "all_existing_prefix_and_AST_exact": true,
+  "all_prior_costs_and_failures_retained": true,
+  "append": {
+    "bytes": 9755,
+    "full9": [
+      66306,
+      72510848,
+      33024,
+      1,
+      1000,
+      1000,
+      9755,
+      1795738838473703224,
+      1795738911249303186
+    ],
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/generated-producer-owningtests.append.py.DATA",
+    "sha256": "900dfb5741730207691162f8e30e61db13ccb9504278972e7ea6ad09c01aa683"
+  },
+  "base": {
+    "bytes": 55601,
+    "full9": [
+      66306,
+      72510058,
+      33024,
+      1,
+      1000,
+      1000,
+      55601,
+      1795737945276228823,
+      1795737945276228823
+    ],
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_trusted_feedback_weight_updates.checked-receipt.after-v03.py.DATA",
+    "sha256": "7726114eca83166b7a45973ad9839ce5f80782172d6f10cf521f069541b20b34"
+  },
+  "canonical_Source_reads": 0,
+  "canonical_adoption": null,
+  "canonical_writes": 0,
+  "controls": {
+    "actual_runtime_bindings": null,
+    "all_previous_test_prefix_and_AST_exact": true,
+    "all_tests_unchanged": true,
+    "append": {
+      "bytes": 9755,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/generated-producer-owningtests.append.py.DATA",
+      "sha256": "900dfb5741730207691162f8e30e61db13ccb9504278972e7ea6ad09c01aa683"
+    },
+    "case_names": [
+      "test_actual_feedback_builder_preserves_legacy_obligation_digest_without_target",
+      "test_checked_target_uses_actual_feedback_builder_before_both_consumers",
+      "test_actual_feedback_builder_refuses_same_id_changed_obligation[statement]",
+      "test_actual_feedback_builder_refuses_same_id_changed_obligation[metadata]",
+      "test_actual_feedback_builder_refuses_unmatched_checked_receipt"
+    ],
+    "controls": {
+      "bytes": 5917,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-maintained-generated-producer-five-controls.v02.py.DATA",
+      "sha256": "6fd02ef286311b96d976ec7358dccff727f4675a5cadc5b554402668ad5cd947"
+    },
+    "expected_missing_API": "build_legal_ir_proof_feedback_record(..., current_target=...)",
+    "overlay": {
+      "bytes": 350,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/same-consumer-v02-overlay.json",
+      "sha256": "843d9cc96eb21b3565589bbb64e7a42de29256e5cd11a07c1d65ba442b1a135a"
+    },
+    "product_code_unchanged": true,
+    "projection": {
+      "bytes": 63889,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/generated-producer-five-projection.json",
+      "sha256": "dd396d34033d2a61724ac026a299385aa6356454186a435c6dd6f04f27454fb2"
+    },
+    "retained_control_failure": "Reporter missing json in extracted function scope masked per-case diagnostics; add local stdlib import only. Earlier raw output preserved.",
+    "runner": {
+      "bytes": 16416,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-rebased-generated-producer-five-runner.v02.py.DATA",
+      "sha256": "aca027a2a4482463f9edc039884b9f938afb4e05da42f34fd24cb1d702b23d85"
+    },
+    "test": {
+      "bytes": 65356,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_trusted_feedback_weight_updates.producer-acceptance.after.py.DATA",
+      "sha256": "2f056250c9fd6c8a54a299706af5357842f2ef3c00910354c09a72e043c3b3ac"
+    }
+  },
+  "current_checkout_proof_roles_verified": false,
+  "current_published_head_reported_by_Root": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+  "current_store_location_missing_from_publication_receipt": true,
+  "fixture_semantics": {
+    "actual_generated_formula_obligation": true,
+    "actual_prover_execution": false,
+    "contract_coverage_not_substituted": true,
+    "copied_metadata_isolated_with_deepcopy": true,
+    "fresh_fictional_typed_result_commits_actual_formal_wire_SHA": true,
+    "independent_real_producer_authentication_claimed": false,
+    "legal_review_granted": false,
+    "selector": "kind exception_scope_precedence, nonempty formula_id, exception_count>0, exception_scope_precedes_norm statement, deontic.ir/conditional_normative",
+    "unrelated_receipt_not_reused": true
+  },
+  "forward": {
+    "bytes": 10362,
+    "full9": [
+      66306,
+      72510861,
+      33024,
+      1,
+      1000,
+      1000,
+      10362,
+      1795739107663936398,
+      1795739107663936398
+    ],
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/producer-acceptance-owningtest.forward.diff",
+    "sha256": "558a514922024ee769930063be135d791ef25cca2f2987eeade4ebe530cff524"
+  },
+  "full_goal_complete": false,
+  "inverse": {
+    "bytes": 10362,
+    "full9": [
+      66306,
+      72510862,
+      33024,
+      1,
+      1000,
+      1000,
+      10362,
+      1795739107676936507,
+      1795739107676936507
+    ],
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/producer-acceptance-owningtest.inverse.diff",
+    "sha256": "fda84fbc4c03264d42dd71f68c4960ad7a4e558a126053b13ba05f7da5c7b3f1"
+  },
+  "new_tests": {
+    "cases": [
+      "test_actual_feedback_builder_preserves_legacy_obligation_digest_without_target",
+      "test_checked_target_uses_actual_feedback_builder_before_both_consumers",
+      "test_actual_feedback_builder_refuses_same_id_changed_obligation[statement]",
+      "test_actual_feedback_builder_refuses_same_id_changed_obligation[metadata]",
+      "test_actual_feedback_builder_refuses_unmatched_checked_receipt"
+    ],
+    "expanded_cases": 5,
+    "methods": 4
+  },
+  "no_Git_fetch_or_body_fallback": true,
+  "prior_reporter_failure": {
+    "cause": "Missing local json in extracted control scope masked per-case diagnostics; corrected only standard-library import. Tests unchanged.",
+    "stderr": {
+      "bytes": 1048,
+      "full9": [
+        66306,
+        72510855,
+        33024,
+        1,
+        1000,
+        1000,
+        1048,
+        1795738945486586509,
+        1795738945486586509
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-generated-producer-five-RED.stderr.txt",
+      "sha256": "91f5abe882199f336bea39abeb91c87c09034c1ea741c400fc7ff62f82616e6e"
+    },
+    "stdout": {
+      "bytes": 32966,
+      "full9": [
+        66306,
+        72510854,
+        33024,
+        1,
+        1000,
+        1000,
+        32966,
+        1795738945486586509,
+        1795738945486586509
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-generated-producer-five-RED.stdout.json",
+      "sha256": "2bb0c76581647162eaa89bc1a6bc13b2a880cb7f2847fa27e5882125824a5c5f"
+    }
+  },
+  "product_code_changed_in_this_unit": false,
+  "real_RPC": 0,
+  "required_existing_join": {
+    "before_projection": "Verify actual full obligation wire digest incl metadata and current identifiers against selected target; validate checked receipt before producing positive feedback.",
+    "consumer_contract": "Canonical record serde and independently selected expected record ID then existing target.matches and both consumers; no fit in these fixtures.",
+    "input_contract": "Existing checked target7c57 with actual typed receipt and independent expectation; no inferred property/tree association.",
+    "output_contract": "Project selected target commitment and checked receipt ID into source-free feedback; retain default legacy digest if no target; never copy raw proof metadata.",
+    "proposed_optional_builder_keyword": "current_target"
+  },
+  "schema": "private-existing-Phase7-generated-producer-acceptance-tests/v1",
+  "status": "TEST_ONLY_ACTUAL_RED_PRODUCT_OWNER_REMAINS_ROOT",
+  "test_post": {
+    "bytes": 65356,
+    "full9": [
+      66306,
+      72510849,
+      33024,
+      1,
+      1000,
+      1000,
+      65356,
+      1795738911249303186,
+      1795738911249303186
+    ],
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_trusted_feedback_weight_updates.producer-acceptance.after.py.DATA",
+    "sha256": "2f056250c9fd6c8a54a299706af5357842f2ef3c00910354c09a72e043c3b3ac"
+  }
+}

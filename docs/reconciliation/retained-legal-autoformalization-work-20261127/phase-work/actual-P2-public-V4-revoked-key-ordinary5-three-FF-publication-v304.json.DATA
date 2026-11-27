@@ -1,0 +1,120 @@
+{
+  "Source_resource_and_parent_cleanup_received": true,
+  "active_eight_phase_goal_complete": false,
+  "all_other_paths_and_gitlinks_preserved": true,
+  "case_vector": [
+    1,
+    2,
+    1,
+    1
+  ],
+  "child_CLI_compile_witness_unclaimed": true,
+  "committed_blob": {
+    "oid": "a1999199145789efcaaad5a1afac766072e07527",
+    "path": "tests/unit/logic/autoformal/test_corpus_release_cli.py",
+    "sha256": "65db8d66896bf1a6dd999fb9a262c68e65384642a4267f87c90900aa4d57457f",
+    "size": 211903
+  },
+  "elapsed_seconds": 12.056625863537192,
+  "genuine_revocation_fixture": {
+    "evaluation_gold_mask": 0,
+    "fresh_consistently_rehashed_ineligible_report_refused": true,
+    "fresh_real_Ed25519_fictional_fixture": true,
+    "key_revoked_blocker_observed_by_assertions": true,
+    "original_fixture_request_unchanged": true,
+    "permitted_uses": [],
+    "semantic_use_eligible": false,
+    "stale_report_refused": true,
+    "training_mask": 0
+  },
+  "independently_verified_JUnit": {
+    "bytes": 1068,
+    "logical_name": "junit.xml",
+    "path": "/tmp/Root-P2-V4-revoked-key-ordinary5-v304-rcymoyx1/actual-output/corpus-release-public-v4-revocation-ordinary5-run-result0-output1.bin",
+    "sha256": "abcf68eaf6455b4125cca380c82a5bcf1b42fda5a490d98dd6864f79820d08a4"
+  },
+  "local_freeze": {
+    "bytes": 4840,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-P2-V4-revoked-key-one-test-local-freeze-v302.json",
+    "sha256": "c68f16d9d08550282f036158e702dc29aaf9275afaca9c308c8f39059347469e"
+  },
+  "no_new_Source_test_CI_Lean_training_operation": true,
+  "pushes_in_actual_order": [
+    {
+      "after": "68e3739ffd64e54016133d3d1e0304c6302da1b1",
+      "before": "8aebc34eb1e430b00c2b941cb256e853fe2adc02",
+      "normal_fast_forward": true,
+      "porcelain": " \t68e3739ffd64e54016133d3d1e0304c6302da1b1:refs/heads/main\t8aebc34eb1..68e3739ffd",
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "98f3387686debc5fb75a495850b62a26a0fe0eeb",
+      "before": "2a9aabdcf78695630446e08235f48a6e8ec90c18",
+      "normal_fast_forward": true,
+      "porcelain": " \t98f3387686debc5fb75a495850b62a26a0fe0eeb:refs/heads/main\t2a9aabd..98f3387",
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "a3cf10cef76a7178c5e83a84947430f507775684",
+      "before": "fe7a01f5fd350f6ba425b0a463f80025a3404b59",
+      "normal_fast_forward": true,
+      "porcelain": " \ta3cf10cef76a7178c5e83a84947430f507775684:refs/heads/main\tfe7a01f5fd..a3cf10cef7",
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "qualification": {
+    "bytes": 3483,
+    "path": "/tmp/Root-P2-V4-revoked-key-ordinary5-v304-rcymoyx1/Root-public-V4-revoked-key-ordinary5-qualified-small-v304.json",
+    "sha256": "dc13b206148a64946916bc8a74d77613ff81747fc86fbad8078aca20dfbde467"
+  },
+  "real_legal_review_or_statutory_admission_claimed": false,
+  "repositories": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {},
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "origin_main": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "HEAD": "68e3739ffd64e54016133d3d1e0304c6302da1b1",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {},
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "origin_main": "68e3739ffd64e54016133d3d1e0304c6302da1b1",
+      "tree": "754fd9f796439076c1bb71e14ec6430f505f3b99"
+    },
+    "hallucinate": {
+      "HEAD": "98f3387686debc5fb75a495850b62a26a0fe0eeb",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {
+        "ipfs_datasets_py": "68e3739ffd64e54016133d3d1e0304c6302da1b1"
+      },
+      "origin": "https://github.com/endomorphosis/hallucinate_app",
+      "origin_main": "98f3387686debc5fb75a495850b62a26a0fe0eeb",
+      "tree": "e6a75fd04dcda3ca1b23dee522d425ab02da5176"
+    },
+    "root": {
+      "HEAD": "a3cf10cef76a7178c5e83a84947430f507775684",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {
+        "external/ipfs_datasets": "68e3739ffd64e54016133d3d1e0304c6302da1b1",
+        "hallucinate_app": "98f3387686debc5fb75a495850b62a26a0fe0eeb"
+      },
+      "origin": "https://github.com/endomorphosis/lift_coding",
+      "origin_main": "a3cf10cef76a7178c5e83a84947430f507775684",
+      "tree": "a6c184330093b0b4ee7a60603567a6cc6b141ebb"
+    }
+  },
+  "schema": "P2-public-V4-revoked-key-ordinary5-exact-three-FF-publication/v304",
+  "source_closed_install": {
+    "bytes": 3027,
+    "path": "/tmp/Root-P2-V4-revoked-key-Source1-selected-v302-jd75862z/Root-V4-revoked-key-one-test-installed-Source-closed-small-v302.json",
+    "sha256": "b933c745e8babc35c17a22bf667285e86c46d9b50cccadba4a30c7fcf8a21fbf"
+  },
+  "unique_passes": 5
+}

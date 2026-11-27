@@ -1,0 +1,50 @@
+"""Check the selected parser against exact retained Guide573 bytes."""
+from hashlib import sha256
+import json
+from pathlib import Path
+from runpy import run_path
+import unittest
+
+HERE=Path(__file__).resolve().parent
+GUIDE=HERE.parent/'decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP'
+
+
+def pinned(path,size,digest):
+    raw=path.read_bytes()
+    assert (len(raw),sha256(raw).hexdigest())==(size,digest)
+    return raw
+
+
+class CurrentStageZero(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        parser=HERE/'guide573_stage_zero.py'
+        pinned(parser,2611,'f474b5f0c7e3ae431234389886533cca65c06db26fc8515982721fcf27f6a1ed')
+        cls.parse=staticmethod(run_path(str(parser))['read_stage_zero'])
+        cls.index=pinned(GUIDE/'guide573-writer-matched-index.DATA',7070597,
+                        'c3be915a700050787e42001811b05aab2edebf0737fd3c207f23674b862cbee0')
+        p=json.loads(pinned(GUIDE/'guide573-all-fresh-preview.INERT.json',556332,
+                        '72b538ab80ac6610b75f64d74c1d474ae8beb651b54a8b740495941b0c6fbb4a'))
+        inputs=p['reader_inputs']
+        root=inputs['current_roots']['D']['root']
+        cls.entries={Path(row['path']).relative_to(root).as_posix():row for row in inputs['fresh_Source_body_targets']}
+
+    def test_live_callback_interface_pinned_roster(self):
+        names=list(self.entries)
+        result=self.parse(self.index,names)
+        self.assertEqual(list(result),[name.encode() for name in names])
+        for name,row in self.entries.items():
+            match,=result[name.encode()]
+            self.assertEqual(match[:3],(row['expected_Git_blob_oid'],0o100644,0))
+
+    def test_same_length_changed_index_or_wrong_roster_refuses(self):
+        paths=list(self.entries)
+        substitute=self.index[:-1]+bytes((self.index[-1]^1,))
+        with self.assertRaisesRegex(ValueError,'exact selected Guide573'):
+            self.parse(substitute,paths)
+        with self.assertRaisesRegex(ValueError,'exact selected Guide573'):
+            self.parse(self.index,paths[:-1]+paths[:1])
+
+
+if __name__=='__main__':
+    unittest.main(verbosity=2)

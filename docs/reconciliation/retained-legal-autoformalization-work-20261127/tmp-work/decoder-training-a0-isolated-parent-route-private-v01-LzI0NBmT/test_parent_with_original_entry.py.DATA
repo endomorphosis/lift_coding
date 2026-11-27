@@ -1,0 +1,88 @@
+"""Connect the new dispatch to the retained exact renderer and custody helper."""
+import ast
+from copy import deepcopy
+from hashlib import sha256
+from pathlib import Path
+import json
+import os
+import runpy
+import sys
+import unittest
+from unittest.mock import patch
+
+HERE=Path(__file__).resolve().parent
+original_fixture=Path('/tmp/decoder-training-a0-isolated-owner-entry-private-v03-bx79kksl/test_selected_isolated_entry.py')
+raw=original_fixture.read_bytes()
+assert sha256(raw).hexdigest()=='08c83aa4508cfea7361ca2d849b3960ab28171a6e534a504a12a1e654234905a'
+old=ast.parse(raw)
+for index,node in enumerate(old.body):
+    if isinstance(node,ast.Assign) and isinstance(node.targets[0],ast.Name) and node.targets[0].id=='selected':
+        old.body=old.body[:index]
+        break
+else:
+    raise AssertionError('missing retained test launch boundary')
+fixtures={'__file__':str(original_fixture)}
+exec(compile(old,str(original_fixture),'exec'),fixtures)
+SelectedOwnerEntry=fixtures['SelectedOwnerEntry']
+owner=fixtures['owner']
+render=fixtures['render']
+retained=fixtures['retained']
+before=HERE/'owner-driver.before.py.DATA'
+candidate=HERE/'owner-driver.py.DATA'
+source=ast.parse(candidate.read_bytes())
+nodes={node.name:node for node in source.body if isinstance(node,ast.FunctionDef)}
+required=('isolated_parent_fingerprint','dispatch_isolated_parent','run_selected_isolated_origin')
+prior={node.name:node for node in ast.parse(before.read_bytes()).body if isinstance(node,ast.FunctionDef)}
+for keep in ('run_selected_isolated_origin','run_test_with_actual_custody','retain_origin_owner_bytes',
+             'origin_retained_external_bytes','retain_actual_output_files','metadata_guard'):
+    assert ast.dump(nodes[keep])==ast.dump(prior[keep]), keep
+
+class IntegratedDispatch(SelectedOwnerEntry):
+    def setUp(self):
+        super().setUp()
+        actual_ast=ast.Module(body=[nodes[name] for name in required],type_ignores=[])
+        exec(compile(actual_ast,str(candidate),'exec'),self.driver_ops)
+
+    def test_launch_new_parent_dispatch_reaches_exact_entry_renderer_and_return_capture(self):
+        launch=owner._wire(self.original_ticket)
+        launch_ref={'path':str(self.root/'fixture-launch'),'bytes':len(launch),'sha256':sha256(launch).hexdigest()}
+        authority={'origin_owner':owner,'origin':self.selection,'renderer':render,
+            'verify_opening':lambda *_:False,
+            'verify_control_binding':self.auth_control,'verify_launch_owner':self.auth_launch}
+        selected={'root':Path(self.binding['cwd']),'epoch_raw':self.driver_ops['epoch_raw'],'launch_raw':launch,
+            'control_reference':self.control_ref,'launch_reference':launch_ref}
+        execution={'control_binding':deepcopy(self.control_ref),'launch_selection':deepcopy(launch_ref)}
+        selected['fingerprint']=self.driver_ops['isolated_parent_fingerprint'](selected,authority)
+        self.report['tests_dispatched']=[]
+        result=self.driver_ops['dispatch_isolated_parent'](selected,execution,authority)
+        self.assertIs(result,self.result)
+        self.assertEqual(self.operations,['control','launch','sdk','source_after'])
+        self.assertEqual(self.tool_calls,[self.request_before])
+        self.assertEqual(len(self.report['run_raw_output_files']),8)
+        self.assertEqual(self.report['isolated_origin_preclose']['original_request_sha256'],self.request_pin)
+        self.assertEqual(self.report['source_before'],self.report['source_after_run'])
+
+    def auth_control(self,binding_sha,origin_sha):
+        self.operations.append('control')
+        self.assertEqual((binding_sha,origin_sha),(self.control_ref['sha256'],owner.origin_commitment(self.selection)))
+        return True
+
+    def auth_launch(self,launch_sha,dispatch_sha,request_sha,physical_sha,birth):
+        self.operations.append('launch')
+        ticket=self.original_ticket
+        dispatch={k:v for k,v in ticket.items() if k!='control_binding_sha256'}
+        dispatch.update(schema=owner.QWEN_IMPORT_ATTEMPT_DISPATCH_SCHEMA,
+                        operator_birth=[os.getpid(),self.birth_ticks])
+        self.assertEqual((launch_sha,dispatch_sha,request_sha,physical_sha,birth),
+            (sha256(owner._wire(ticket)).hexdigest(),sha256(owner._wire(dispatch)).hexdigest(),
+             self.request_pin,ticket['physical_request_sha256'],(os.getpid(),self.birth_ticks)))
+        return True
+
+direct=retained['held']['DirectControls']
+ancestor=direct.__mro__[1]
+bootstrap=ancestor.setUp.__globals__['renderer']['OriginRendererControls']
+if __name__=='__main__':
+    suite=unittest.TestSuite([IntegratedDispatch('test_launch_new_parent_dispatch_reaches_exact_entry_renderer_and_return_capture')])
+    with patch.dict(ancestor.setUp.__globals__,{'TemporaryDirectory':retained['temporary']}),patch.dict(
+            bootstrap.setUp.__globals__,{'TemporaryDirectory':retained['temporary']}):
+        sys.exit(int(not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful()))

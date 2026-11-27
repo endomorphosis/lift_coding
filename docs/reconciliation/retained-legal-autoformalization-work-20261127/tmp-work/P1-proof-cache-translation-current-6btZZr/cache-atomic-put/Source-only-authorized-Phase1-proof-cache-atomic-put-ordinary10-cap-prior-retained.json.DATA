@@ -1,0 +1,53 @@
+{
+  "added_Source_only_envelope": 134217728,
+  "after_full_retained_precharge": {
+    "captures": 543419,
+    "capturesComplete": false,
+    "global_cap": 59290175498,
+    "internal_cap": 59099583624,
+    "internal_used": 59093226632,
+    "used": 59283818506
+  },
+  "combined_epoch_READ4_full_retained_charge": {
+    "bytes": 1305,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/Source-only-Phase1-cache-atomic-put-READ-overlay-full-retained.json",
+    "sha256": "adc7cb0909e09256db3e203a9a2e85a8b412ea639bf3b30e07b1bc78b62df072"
+  },
+  "exact_human_affirmation": {
+    "bytes": 2960,
+    "path": "/tmp/Main-source-cap-human-provenance-v01-g9hs_s_q/Root-original-human-Source-cap-approval.record.jsonl",
+    "sha256": "8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda"
+  },
+  "no_policy_capacity_or_model_change": true,
+  "prior": {
+    "captures": 543418,
+    "capturesComplete": false,
+    "global_cap": 59155957770,
+    "internal_cap": 58965365896,
+    "internal_used": 58959008904,
+    "used": 59149600778
+  },
+  "protected_Guide579_Source_full_charge": {
+    "bytes": 1310,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/Source-only-Guide579-full-retained-cap.json",
+    "sha256": "cec009c16d322937592dbf0447551813dd7848ddd72ecddb487e4909ad6a4d5b"
+  },
+  "protected_Guide579_publication": {
+    "bytes": 3363,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-Guide579-four-docs-three-FF-publication.json",
+    "sha256": "1e4dcdba8ad65453fbf82291927814b584ae4c7e2183509a175f4aca876d0811"
+  },
+  "selected": {
+    "captures": 543418,
+    "capturesComplete": false,
+    "global_cap": 59290175498,
+    "internal_cap": 59099583624,
+    "internal_used": 58959008904,
+    "used": 59149600778
+  },
+  "successor_write_charge": {
+    "bytes": 1296,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/Source-only-proof-cache-atomic-put-WRITE-full-retained.json",
+    "sha256": "6e6420d3a74a195ace7f3c9cc2c6d49479f63a337368d601c7b2e40637c80d76"
+  }
+}

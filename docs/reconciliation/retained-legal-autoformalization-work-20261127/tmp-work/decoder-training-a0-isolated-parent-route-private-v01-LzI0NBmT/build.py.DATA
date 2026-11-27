@@ -1,0 +1,144 @@
+from hashlib import sha256
+from pathlib import Path
+import ast
+
+root = Path(__file__).resolve().parent
+before = Path('/tmp/decoder-training-a0-isolated-owner-entry-private-v03-bx79kksl/owner-driver.py.DATA').read_bytes()
+assert sha256(before).hexdigest() == '946c3bea4d45318fccb506e1fbe9417e7e5a1dcd75acd968c7143d513bf332ce'
+s = before.decode()
+ranges = s.splitlines(keepends=True)
+def lines(a, b):
+    return ''.join(ranges[a-1:b])
+
+def indent(body, width=1):
+    return ''.join((' '*width + line) if line.strip() else line for line in body.splitlines(keepends=True))
+
+helpers = (root/'selected_parent.helpers').read_text()
+start = '''def run_existing_owner(execution_reference, *, isolated_owner=None):
+ if __debug__ is not True:
+  raise RuntimeError("the existing driver requires Python assertions")
+ global report, RUN_OUTPUT, CHARGED_ROOT, ABSENT_PATHS, STATE, EPOCH, PROJECTS, EVIDENCE
+ global epoch_raw, epoch_reference, factory_namespace, sdk, disk, runner, result
+ global PY, FLAGS, _owner_invoked
+ if globals().get('_owner_invoked') is True:
+  raise RuntimeError("one existing owner attempt per birth parent")
+ _owner_invoked=True
+ EXECUTION_REFERENCE=execution_reference
+ EXECUTION=json.loads(exact_metadata(EXECUTION_REFERENCE))
+ isolated = EXECUTION.get('schema') == ISOLATED_PARENT_SCHEMA
+ if isolated:
+  selected = prepare_isolated_parent(EXECUTION, EXECUTION_REFERENCE, isolated_owner)
+  PY=selected['control']['python']
+  FLAGS=selected['environment']
+ else:
+  if isolated_owner is not None:
+   raise ValueError("isolated owner callbacks require explicit isolated parent selection")
+'''
+legacy_binding = lines(29,34)
+legacy_root = lines(37,37) + lines(39,39) + lines(41,41) + lines(43,43)
+selected_root = '''
+ if isolated:
+  ROOT=selected['root']
+  PROJECTS=selected['projects']
+  epoch_reference=selected['epoch_reference']
+  epoch_raw=selected['epoch_raw']
+  EPOCH=selected['epoch']
+  epoch_by_path={row['path']:row for row in EPOCH}
+  EVIDENCE=selected['evidence']
+  ABSENT_PATHS=selected['absent_paths']
+  opening=selected['opening']
+  report={'marker':'ACTUAL_SELECTED_A0_ISOLATED_IMPORT_EXISTING_OWNER_V1',
+          'selection':'original owner-selected isolated source-only import',
+          'run':None,'collection':None,'errors':[],'tests_dispatched':[],
+          'source_epoch':epoch_reference,'source_epoch_binding':epoch_reference,
+          'actual_driver_input_reference':EXECUTION_REFERENCE,
+          'actual_paired_Source_close_reference':selected['paired_close'],
+          'protected_index_sha256':selected['protected_index_sha256'],
+          'resource_cleanup_confirmed':False,'Source_closed':False,
+          'statutory_or_modelquality_or_convergence_authority':False}
+ else:
+'''
+# In the legacy flow the output setup still precedes the epoch check.
+old_output = lines(47,51)
+old_epoch = lines(52,59)
+old_report = lines(104,104)
+
+legacy_preflight = lines(369,421)
+selected_setup = '''
+ if isolated:
+  factory_namespace=isolated_owner['renderer']
+  if selected['fingerprint'] != isolated_parent_fingerprint(selected, isolated_owner):
+   raise ValueError("selected isolated parent inputs changed before Source entry")
+ else:
+'''
+initial_legacy_resources = '''
+  opening=dict(opening, state_path=str(STATE), storage_bytes=12884901888,
+               memory_mb=12288, cpu_slots=4, child_process_slots=1,
+               timeout_seconds=600, ledger_lock_timeout_seconds=180, storage_limit_bytes=280000000000)
+'''
+prepare_runner = '''
+   if isolated:
+    report['isolated_control_reference']=dict(EXECUTION['control_binding'])
+    report['isolated_launch_reference']=dict(EXECUTION['launch_selection'])
+   else:
+'''
+reserve = lines(473,500)
+constructor = lines(476,477)
+reserve = reserve.replace(constructor, '''   reservation=disk.DaemonResourceReservation(opening['resource_ledger'],roots=opening['roots'],
+       storage_bytes=opening['storage_bytes'],memory_mb=opening['memory_mb'],cpu_slots=opening['cpu_slots'],
+       child_process_slots=opening['child_process_slots'],timeout_seconds=opening['timeout_seconds'],
+       ledger_lock_timeout_seconds=opening['ledger_lock_timeout_seconds'],scheduler_state_path=str(STATE),
+       expected_scheduler_policy_sha256=opening['expected_scheduler_policy_sha256'],require_existing_ledger=True,
+       storage_limit_bytes=opening['storage_limit_bytes'])
+   print(json.dumps({'event':'ACTUAL_EXISTING_DAEMON_ADMISSION_BEGIN','operator_pid':os.getpid(),'state_path':str(STATE),'charged_root':str(CHARGED_ROOT),'explicit_same_ledger_storage_limit_bytes':opening['storage_limit_bytes']}),flush=True)
+''')
+assert reserve != lines(473,500)
+reserve = reserve.replace('admission_started+600.0','admission_started+float(opening[\'timeout_seconds\'])').replace('admission_work_deadline+180.0','admission_work_deadline+float(opening[\'ledger_lock_timeout_seconds\'])')
+reserve = reserve.replace("'constructor_native_wait_ceiling_seconds':600,'productive_budget_seconds':600,'cleanup_allowance_seconds':180", "'constructor_native_wait_ceiling_seconds':opening['timeout_seconds'],'productive_budget_seconds':opening['timeout_seconds'],'cleanup_allowance_seconds':opening['ledger_lock_timeout_seconds']")
+runner_create = '''
+   report['actual_parent_lease']=parent.to_dict()
+   runner=admitted.ResourceAdmittedToolRunner(parent_lease=parent,cpu_slots=opening['cpu_slots'],
+       child_process_slots=opening['child_process_slots'],base_environment={'PATH':PATH_SCOPE,'LANG':'C.UTF-8'},
+       executable_roots=('/usr/bin','/home/barberb/.local/bin'))
+   if isolated:
+    result=dispatch_isolated_parent(selected, EXECUTION, isolated_owner)
+    genuine(result)
+    report['isolated_origin_preclose_completed']=True
+   else:
+'''
+close = lines(588,596)
+close = close.replace("path=RUN_OUTPUT/'complete-fresh-currentcopy-v11-vendor-import-existing-owner-report.json'",
+    "path=RUN_OUTPUT/('complete-selected-A0-isolated-existing-owner-report.json' if isolated else 'complete-fresh-currentcopy-v11-vendor-import-existing-owner-report.json')")
+close = close.replace("'event':'ACTUAL_CURRENTCOPY_V11_VENDOR_IMPORT_CLOSED'", "'event':('ACTUAL_SELECTED_A0_ISOLATED_IMPORT_CLOSED' if isolated else 'ACTUAL_CURRENTCOPY_V11_VENDOR_IMPORT_CLOSED')")
+close = close.replace("shutil.rmtree(PARENT_HOME)", "shutil.rmtree(PARENT_HOME)")
+body = (
+ lines(1,25) + '\n' + helpers + '\n'
+ + lines(62,72) + lines(75,103) + lines(107,344)
+ + lines(351,367) + '\n'
+ + start + indent(legacy_binding, 2) + '\n'
+ + indent(legacy_root, 2)
+ + indent(lines(45,45))
+ + indent(old_output)
+ + selected_root + indent(old_epoch, 2) + indent(old_report, 2)
+ + indent(lines(73,74))
+ + " STATE=Path(opening['state_path']) if isolated else " + lines(345,345).split('=',1)[1]
+ + indent(lines(347,348))
+ + selected_setup + indent(legacy_preflight, 2) + initial_legacy_resources
+ + indent(lines(424,453))
+ + indent(lines(454,454))
+ + "    if isolated:\n     module_pins={name:(name.replace('.','/')+'.py',selected['parent_module_sha256'][name]) for name in ISOLATED_PARENT_MODULES}\n"
+ + indent(lines(455,459))
+ + indent(prepare_runner) + indent(lines(460,472),2)
+ + indent(reserve.replace(lines(474,475), "   if not isolated:\n" + indent(lines(474,475))))
+ + "    if not isolated:\n" + indent(lines(501,524),2)
+ + indent(runner_create) + indent(lines(527,550),2)
+ + indent(lines(551,587).replace(
+     "       else:\n        reservation.account_external_bytes('actual-currentcopy-v11-vendor-import-SDK-outputs'",
+     "       elif not isolated:\n        reservation.account_external_bytes('actual-currentcopy-v11-vendor-import-SDK-outputs'"))
+ + indent(close)
+ + "\n return report\n\n\nif __name__ == '__main__':\n"
+ + " assert len(sys.argv)==4,'one authenticated actual metadata binding CLI required'\n"
+ + " run_existing_owner({'path':sys.argv[1],'bytes':int(sys.argv[2]),'sha256':sys.argv[3]})\n")
+ast.parse(body)
+(root/'owner-driver.before.py.DATA').write_bytes(before)
+(root/'owner-driver.py.DATA').write_text(body)

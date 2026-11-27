@@ -1,0 +1,162 @@
+{
+  "checked_record_product_sha256": "ca4d03b8053243ec594926b19c05b0be9ca5d093643f10fa8da87e1aa8af5ef5",
+  "effects": {
+    "Git_mutation": false,
+    "Native": false,
+    "Source_lease": false,
+    "numeric_update": false,
+    "ordinary_suite_claim": false
+  },
+  "exact_owning_test": {
+    "bytes": 59753,
+    "path": "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/test_trusted_feedback_weight_updates.checked-nested.py.DATA",
+    "sha256": "d6db4090fd9b9d69a041ba836b072002f28299d93e5270c0087b239a56b3486e"
+  },
+  "exact_same_121_compiled_paths": true,
+  "green_direct_and_nested_exact_equality": true,
+  "guard": {
+    "address_space_bytes": 536870912,
+    "cpu_affinity": [
+      0
+    ],
+    "cpu_seconds": 25,
+    "kernel_probes": [
+      "socket",
+      "clone3",
+      "write-open"
+    ],
+    "landlock_abi": 7,
+    "stdout_stderr_each_max_bytes": 131072,
+    "syscall_denylist": [
+      "socket",
+      "socketpair",
+      "connect",
+      "accept",
+      "accept4",
+      "bind",
+      "listen",
+      "clone",
+      "clone3",
+      "execve",
+      "execveat",
+      "io_uring_setup",
+      "io_uring_enter",
+      "io_uring_register",
+      "pidfd_getfd",
+      "ptrace",
+      "process_vm_writev",
+      "setns",
+      "unshare",
+      "mount",
+      "umount2",
+      "truncate",
+      "ftruncate",
+      "fchmod",
+      "fchmodat",
+      "fchmodat2",
+      "fchown",
+      "fchownat",
+      "utimensat",
+      "setxattr",
+      "lsetxattr",
+      "fsetxattr",
+      "removexattr",
+      "lremovexattr",
+      "fremovexattr"
+    ]
+  },
+  "inputs": {
+    "bytes": 2963,
+    "path": "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/prepared-same16-inputs.json",
+    "sha256": "e9f691e1ccca861005bd661f43132f85e0db8fafee1c53388cab8c1328f37195"
+  },
+  "ordered_cases": [
+    "test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence[selected]",
+    "test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence[same_receipt_id]",
+    "test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence[stale_raw_source]",
+    "test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence[changed_interpretation]",
+    "test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence[changed_dependency]",
+    "test_current_target_metadata_without_checked_receipt_never_reaches_update",
+    "test_typed_feedback_uses_current_semantic_target_before_update[matching]",
+    "test_typed_feedback_uses_current_semantic_target_before_update[legacy]",
+    "test_typed_feedback_uses_current_semantic_target_before_update[sample]",
+    "test_typed_feedback_uses_current_semantic_target_before_update[interpretation]",
+    "test_typed_feedback_uses_current_semantic_target_before_update[dependency]",
+    "test_typed_feedback_refuses_substituted_record_with_same_target[other_receipt]",
+    "test_typed_feedback_refuses_substituted_record_with_same_target[other_label_same_receipt]",
+    "test_current_target_requires_independent_id_and_canonical_feedback[copied_id]",
+    "test_current_target_requires_independent_id_and_canonical_feedback[unselected_id]",
+    "test_checked_proof_nested_guidance_cannot_redirect_primary_update"
+  ],
+  "phases": {
+    "green": {
+      "returncode": {
+        "bytes": 2,
+        "path": "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/green/returncode",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr.txt": {
+        "bytes": 0,
+        "path": "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/green/stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout.json": {
+        "bytes": 36224,
+        "path": "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/green/stdout.json",
+        "sha256": "863231dde7daaa4db1dbbab41931f2b26a70cdf24aa301a5a48330bd794ffe2a"
+      }
+    },
+    "red": {
+      "returncode": {
+        "bytes": 2,
+        "path": "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/red/returncode",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "stderr.txt": {
+        "bytes": 0,
+        "path": "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/red/stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout.json": {
+        "bytes": 36895,
+        "path": "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/red/stdout.json",
+        "sha256": "6988780d4800cba04096eec3663f588bff73220f925c4cbc8675a145975aa969"
+      }
+    }
+  },
+  "red_distribution": {
+    "direct": {
+      "deontic.ir": 1.0
+    },
+    "nested": {
+      "CEC.native": 0.04633204633204633,
+      "deontic.ir": 0.9536679536679536
+    }
+  },
+  "red_feature_keys_differ": true,
+  "retained15_before_and_after": true,
+  "roles_overlay_after": {
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py": "ca4d03b8053243ec594926b19c05b0be9ca5d093643f10fa8da87e1aa8af5ef5",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py": "cd37964aa4a497e8d778ae0e6a90fe87f3362ead8c9a3751a5a3288b7370ed2e",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py": "d6db4090fd9b9d69a041ba836b072002f28299d93e5270c0087b239a56b3486e",
+    "tests/unit/logic/legal_ir/test_proof_cache.py": "be38ab5213fa35c0b614f3e52f96dcf8645023bd114875c3789a897d9387a439",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py": "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414"
+  },
+  "roles_overlay_before": {
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py": "ca4d03b8053243ec594926b19c05b0be9ca5d093643f10fa8da87e1aa8af5ef5",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py": "630398501836dc7bba1b213dbd93b2e93a18c593747f52467f325c5033d7fa94",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py": "d6db4090fd9b9d69a041ba836b072002f28299d93e5270c0087b239a56b3486e",
+    "tests/unit/logic/legal_ir/test_proof_cache.py": "be38ab5213fa35c0b614f3e52f96dcf8645023bd114875c3789a897d9387a439",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py": "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414"
+  },
+  "runner": {
+    "bytes": 16924,
+    "path": "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/existing-121-maintained-plus-nested-no-fit.py.DATA",
+    "sha256": "f6c7d56be92b377af32cfd5cb004e8a4093ad6c82d227a676f3513be61c81b7c"
+  },
+  "schema": "existing-Phase7-maintained-no-fit-same16-nested-learning-route/v1"
+}

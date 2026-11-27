@@ -1,0 +1,59 @@
+--- a/reader.py.DATA
++++ b/reader.py.DATA
+@@ -265,7 +265,12 @@
+     chosen = json.loads(encoded(reader_selection))
+     fields = {'schema', 'plan_sha256', 'git_record', 'output_root', 'maximum_core_bytes',
+               'maximum_matrix_write_bytes', 'epoch_output_maximums', 'git_output_maximum','maximum_run_seconds'}
+-    if (set(chosen) != fields or chosen['schema'] != 'existing-stage-a-retained-controls-outer-only/v1'
++    schema = chosen.get('schema')
++    explicit_selectors = schema == 'existing-stage-a-retained-controls-outer-only/v2'
++    if explicit_selectors:
++        fields |= {'git_project_expectations','paired_selector_observation_sha256'}
++    if (set(chosen) != fields or schema not in ('existing-stage-a-retained-controls-outer-only/v1',
++                                               'existing-stage-a-retained-controls-outer-only/v2')
+             or H(encoded(chosen)) != expected_selection_sha256
+             or H(encoded(plan)) != chosen['plan_sha256'] or chosen['output_root'] != str(OUT)
+             or any(type(chosen[key]) is not int or chosen[key] <= 0 for key in
+@@ -280,6 +285,25 @@
+             or OUT.resolve(strict=True) != OUT or any(OUT.is_relative_to(Path(root)) for root in roots)
+             or any((OUT / part).resolve(strict=True) != OUT / part for part in ('raw','matrices'))):
+         raise ValueError('selected paired Source READ roots or original output directories differ')
++    selector_provenance, git_options = {}, {}
++    if explicit_selectors:
++        observation = chosen['paired_selector_observation_sha256']
++        bind_expectations = git_api.get('stage_a_paired_git_expectations')
++        if (type(observation) is not str or len(observation) != 64
++                or any(char not in '0123456789abcdef' for char in observation)
++                or not callable(bind_expectations)):
++            raise ValueError('original paired Git selector observation and verifier required')
++        # The existing owner approves the entire selection digest, which binds
++        # this observation reference and the per-root expectations together.
++        selected_gits = bind_expectations(chosen['git_project_expectations'], roots)
++        for role in ('D','A'):
++            selected_root = plan['current_roots'][role]
++            expected = selected_gits[selected_root['root']]
++            if (expected['HEAD'],expected['tree']) != (selected_root['HEAD'],selected_root['tree']):
++                raise ValueError('selected paired Git HEAD or tree differs from the exact Reader plan')
++        selector_provenance = {'paired_selector_observation_sha256':observation,
++                               'git_project_expectations_sha256':H(encoded(selected_gits))}
++        git_options['project_expectations'] = selected_gits
+     if (type(deadline) not in (int,float) or not 0 < deadline-time.monotonic() <= chosen['maximum_run_seconds']
+             or verify_reader_selection(expected_selection_sha256,roots,chosen['plan_sha256'],deadline) is not True
+             or time.monotonic() >= deadline):
+@@ -288,6 +312,7 @@
+     attempt = {'selection_sha256': expected_selection_sha256, 'archive_committed': False,
+                'Source_closed': False, 'body_capture_count': 0,
+                'matrix_write_bytes_debited': 0, 'private_write_debits': [], 'fresh_captures': []}
++    attempt.update(selector_provenance)
+     report['stage_a'] = attempt
+ 
+     def check_deadline():
+@@ -404,7 +429,7 @@
+                 stage_a_targets=plan['fresh_Source_body_targets'],read_stage_zero=read_stage_zero,
+                 admit_git_output=accept_git,record_git_output=record_git,
+                 expected_owner_scope_sha256=expected_selection_sha256,verify_continuous_owner_scope=active_scope,
+-                git_output_maximum=chosen['git_output_maximum'])
++                git_output_maximum=chosen['git_output_maximum'], **git_options)
+             before,legacy_python,planned,shared,captures = middle
+             endpoint_rows = [dict(row,full9=before[row['path']]) for row in rows]
+             after = verify_full_metadata_guard(stage_a_rows=endpoint_rows)

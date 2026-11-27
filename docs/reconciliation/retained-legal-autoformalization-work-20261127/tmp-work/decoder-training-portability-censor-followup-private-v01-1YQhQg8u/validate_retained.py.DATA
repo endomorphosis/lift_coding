@@ -1,0 +1,19 @@
+"""Run exact retained regressions against the private Stage G successor."""
+from hashlib import sha256
+from pathlib import Path
+import sys
+
+HERE=Path(__file__).resolve().parent
+tests = {
+    'portability': ('decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/test_portability_confirmation_bounds.py',
+                    '420a5aa4fa4dae13183121ba03ecc34836f8fdc1157b38418cc9119e34f9fbe6'),
+    'paid_followup': ('decoder-training-paid-censor-followup-private-v01-9bUvEI8h/test_followup.py',
+                      'c5cc22f3aeb0a9f70d037829758f7d22b040a29379764e806b4f24a4697e9e7a'),
+}
+selection,=sys.argv[1:]
+relative,pin=tests[selection]
+source=HERE.parent/relative
+body=source.read_bytes()
+assert sha256(body).hexdigest()==pin
+sys.argv=[source.name]
+exec(compile(body,str(source),'exec'),{'__name__':'__main__','__file__':str(HERE/source.name)})

@@ -1,0 +1,55 @@
+import hashlib
+import struct
+
+def read_index(index, paths, *, expected_trailer='eb0d0a5698ce183bf6bd8d343697462f9c7520f4'):
+    # Caller independently binds the entire retained capture before parsing.
+    # Passing None requests the full stage table instead of named paths.
+    magic, version, count = struct.unpack_from('>4sII', index, 0)
+    assert (magic, version, count) == (b'DIRC', 3, 41250)
+    assert index[-20:].hex() == expected_trailer
+    assert hashlib.sha1(index[:-20]).digest() == index[-20:]
+    matches = {} if paths is None else {path.encode('ascii'): [] for path in paths}
+    end = len(index) - 20
+    offset = 12
+    previous = None
+    nonzero_stages = 0
+    for _ in range(count):
+        assert offset + 62 < end
+        cache = struct.unpack_from('>10I', index, offset)
+        mode, cached_size = cache[6], cache[9]
+        oid = index[offset + 40:offset + 60].hex()
+        flags = struct.unpack_from('>H', index, offset + 60)[0]
+        path_start = offset + 62
+        if flags & 0x4000:
+            assert struct.unpack_from('>H', index, path_start)[0] == 0x4000
+            path_start += 2
+        stage = (flags & 0x3000) >> 12
+        nul = index.index(0, path_start, end)
+        path = index[path_start:nul]
+        assert path and flags & 0xfff == min(len(path), 0xfff)
+        next_offset = offset + ((nul - offset + 8) // 8) * 8
+        assert next_offset <= end and index[nul:next_offset] == bytes(next_offset - nul)
+        ordering = (path, stage)
+        assert previous is None or previous < ordering
+        previous, offset = ordering, next_offset
+        nonzero_stages += int(stage != 0)
+        if paths is None or path in matches:
+            matches.setdefault(path, []).append((oid, mode, stage, cached_size))
+    extensions = []
+    while offset < end:
+        assert offset + 8 <= end
+        signature, size = struct.unpack_from('>4sI', index, offset)
+        assert b'A' <= signature[:1] <= b'Z', signature
+        extensions.append((signature, size))
+        offset += 8 + size
+    assert offset == end and extensions == [(b'TREE', 237573)]
+    assert nonzero_stages == 0
+    return matches
+
+def read_stage_zero(index, paths):
+    if (not __debug__ or type(index) is not bytes or len(index) != 7070597
+            or hashlib.sha256(index).hexdigest() !=
+                    'c3be915a700050787e42001811b05aab2edebf0737fd3c207f23674b862cbee0'
+            or type(paths) is not list or len(paths) != 32 or len(set(paths)) != 32):
+        raise ValueError('exact selected Guide573 D index and 32 tracked targets required')
+    return read_index(index, paths)

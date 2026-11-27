@@ -1,0 +1,19 @@
+"""Replay the unchanged historical terminal and paid comparison contracts."""
+
+from hashlib import sha256
+from pathlib import Path
+import sys
+
+HERE = Path(__file__).resolve().parent
+TMP = HERE.parent
+role, = sys.argv[1:]
+path, expected = {
+    "terminal": (TMP / "decoder-training-qwen-projector-direct-close-private-v01-EKILMVqW/test_terminal.py",
+                 "9776d76a7c45d528172ead507742008052a8c2df0f1206cc75508a884d8ea911"),
+    "paid": (TMP / "decoder-training-qwen-projector-paid-comparison-private-v01-a3jOl79B/check_qwen_paid.py",
+             "ebc4d9045249e60222c1acf02629da55288cbadeb88049a009d33ec862a5c306"),
+}[role]
+raw = path.read_bytes()
+assert sha256(raw).hexdigest() == expected
+sys.argv = [sys.argv[0]]
+exec(compile(raw, str(path), "exec"), globals())

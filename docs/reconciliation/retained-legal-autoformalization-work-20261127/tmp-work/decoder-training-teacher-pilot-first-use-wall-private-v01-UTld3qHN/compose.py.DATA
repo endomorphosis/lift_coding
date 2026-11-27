@@ -1,0 +1,80 @@
+"""Compose optional first-use elapsed wall into the retained paid teacher pilot owner."""
+
+import ast
+from difflib import unified_diff
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+BASE = HERE.parent / "decoder-training-teacher-pilot-all-paid-phases-private-v01-AL5vbJYA"
+PIN = "38b33cd83f400ce26730ad275a6fa906f76b2176c252011d371bf9a45454a1ec"
+
+
+def change(body, old, new):
+    assert body.count(old) == 1, old
+    return body.replace(old, new, 1)
+
+
+raw = (BASE / "final_physical_union.py").read_bytes()
+assert sha256(raw).hexdigest() == PIN
+prior = raw.decode()
+at = "def verify_all_paid_phases(\n"
+source = change(prior, at, (HERE / "first_use_wall.py.IN").read_text() + at)
+at = "        teacher_roster, replay_teacher_aggregate, teacher_request_binding=None):\n"
+source = change(source, at, at[:-3] + ", first_use_wall=None,\n        expected_first_use_wall_sha256=None, verify_first_use_wall_owner=None):\n")
+at = "    binding_pin = ledger.commitment(binding)\n\n    def guarded(owner):\n"
+source = change(source, at, '''    binding_pin = ledger.commitment(binding)
+    has_wall = any(value is not None for value in (
+        first_use_wall, expected_first_use_wall_sha256, verify_first_use_wall_owner))
+
+    def current_wall():
+        if has_wall:
+            require(callable(verify_first_use_wall_owner)
+                    and teacher_pilot_first_use_wall_commitment(ledger, binding_pin, first_use_wall)
+                    == expected_first_use_wall_sha256,
+                    "exact selected first-use wall witness and original clock owner required")
+
+    current_wall()
+
+    def guarded(owner):
+''')
+at = "            result = owner(*args)\n            current()\n            return result\n"
+source = change(source, at, '''            result = owner(*args)
+            current()
+            current_wall()
+            return result
+''')
+at = '''    current()
+    return {"schema": ALL_PAID_PHASES_SCHEMA, "all_paid_phases_sha256": binding_pin,'''
+source = change(source, at, '''    current()
+    wall = {}
+    if has_wall:
+        selected_scope = {*chosen, expected_preparation_development_sha256, prep_roster_pin,
+                          expected_development_roster_sha256, expected_joint_roster_sha256,
+                          preparation_history["preparation_history_sha256"],
+                          comparison["cost_evidence_sha256"], teacher_roster_pin}
+        selected_scope.update(preparation_ids | final_ids)
+        wall["first_use_wall"] = _teacher_pilot_first_use_wall(ledger, binding_pin, first_use_wall,
+            expected_first_use_wall_sha256, seen, selected_scope, guarded(verify_first_use_wall_owner))
+    return {"schema": ALL_PAID_PHASES_SCHEMA, "all_paid_phases_sha256": binding_pin,''')
+at = '''            "observed_exclusive_physical_work_ns": ledger._physical_work_ns(union),
+            "dispatch_authority": False}
+'''
+source = change(source, at, at.replace('"dispatch_authority": False}', '"dispatch_authority": False, **wall}'))
+additions = {"TeacherPilotFirstUseWall", "teacher_pilot_first_use_wall_commitment", "_teacher_pilot_first_use_wall"}
+
+def name(node):
+    if type(node) is ast.Assign and len(node.targets) == 1:
+        return getattr(node.targets[0], "id", None)
+    return getattr(node, "name", None)
+
+additions.add("TEACHER_PILOT_FIRST_USE_WALL_SCHEMA")
+old, new = (ast.parse(body).body for body in (prior, source))
+changes = {name(a) for a, b in zip(old, (n for n in new if name(n) not in additions), strict=True)
+           if ast.dump(a) != ast.dump(b)}
+assert changes == {"verify_all_paid_phases"}
+(HERE / "final_physical_union.py").write_text(source)
+diff = unified_diff(prior.splitlines(keepends=True), source.splitlines(keepends=True),
+                    "prior/final_physical_union.py", "candidate/final_physical_union.py")
+(HERE / "final_physical_union.diff").write_text("".join(diff))
+print(len(source.encode()), sha256(source.encode()).hexdigest())

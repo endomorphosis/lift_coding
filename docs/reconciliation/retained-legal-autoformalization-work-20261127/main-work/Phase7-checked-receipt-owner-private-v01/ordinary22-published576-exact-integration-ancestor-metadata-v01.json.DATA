@@ -1,0 +1,41 @@
+{
+  "absent_exact_paths": [
+    "tests/integration/conftest.py",
+    "tests/integration/logic/conftest.py",
+    "tests/AGENTS.md",
+    "tests/integration/AGENTS.md",
+    "tests/integration/logic/AGENTS.md"
+  ],
+  "actual_Source": null,
+  "all_prior_costs_retained": true,
+  "clock": null,
+  "new_runner": false,
+  "purpose": "Existing ordinary22 integration ancestor/config closure; no file body or Source read.",
+  "records": [
+    {
+      "bytes": 2054,
+      "git_blob": "5cad63c1111f76828f01024a5a1bc726ad1211d5",
+      "kind": "blob",
+      "mode": "100644",
+      "path": "conftest.py"
+    },
+    {
+      "bytes": 1536,
+      "git_blob": "5ebc8ab6330fc940b64e3037c605d0faf034e1e6",
+      "kind": "blob",
+      "mode": "100644",
+      "path": "pytest.ini"
+    },
+    {
+      "bytes": 20716,
+      "git_blob": "feac04dd85490c131e0bf8b132f0b221d7446de4",
+      "kind": "blob",
+      "mode": "100644",
+      "path": "tests/conftest.py"
+    }
+  ],
+  "revision": "8a902502e1a82d3da05b9c31a42db8c39ea8a9e1",
+  "runtime": null,
+  "status": "IMMUTABLE_METADATA_ONLY_INERT",
+  "store": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets"
+}

@@ -1,0 +1,142 @@
+"""Record the tested shared Source42 lifecycle and paired-selector child receipt."""
+from copy import deepcopy
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+from runpy import run_path
+from stat import S_IMODE
+from tempfile import mkstemp
+
+HERE=Path(__file__).resolve().parent
+TMP=HERE.parent
+OLD=TMP/'decoder-training-experiment-manifest-v393.json'
+NEW=TMP/'decoder-training-experiment-manifest-v394.json'
+KEY='private_existing_stage_a_paired_selector_owner_closeout'
+TESTS=TMP/'decoder-training-stage-a-selector-controls-private-v01-pjiF8CHj'
+
+
+def ref(path,expected=None):
+    raw=path.read_bytes()
+    hex_digest=sha256(raw).hexdigest()
+    assert expected is None or expected==hex_digest,path
+    return dict(path=str(path),bytes=len(raw),sha256=hex_digest)
+
+
+def save(path,value):
+    raw=value.encode() if type(value) is str else (json.dumps(value,indent=2,sort_keys=True)+'\n').encode()
+    with path.open('xb') as stream:
+        stream.write(raw)
+    return ref(path)
+
+
+def logs(directory,stem,count):
+    text=(directory/(stem+'.stderr')).read_text()
+    assert (directory/(stem+'.rc')).read_bytes()==b'0\n'
+    assert sum(line.endswith(' ... ok') for line in text.splitlines())==count and text.endswith('\nOK\n')
+    return {kind:ref(directory/(stem+'.'+kind)) for kind in ('rc','stdout','stderr')}
+
+
+old_ref=ref(OLD,'bebe99aff1848c48db929fc2a5964d09e791cc73c508219d368011a4c5a7d833')
+old=json.loads(OLD.read_bytes())
+old_checker=Path(old['advisory_operator_readiness_checker']['path'])
+assert ref(old_checker)==old['advisory_operator_readiness_checker']
+description=HERE/'descriptor.json'
+desc=dict(
+    schema='private-stage-a-paired-selector-owner-controls/v1',
+    candidate=ref(HERE/'reader.py.DATA','9880656f4c4f273f25aab90ee11324a6809f0336367736a8bfe9e7092f1b2b09'),
+    diff=ref(HERE/'reader.py.DATA.diff','cae434a706ee794344ae931fed28b2c126d77d52994a91fb49427ebcdac00514'),
+    selector_test=ref(TESTS/'test_selector_startup.py','6b4082d9c9d8382112728ead63234b6eacb180294bf5dbb442e7438e4e3791b7'),
+    test_counts=dict(selector=7,retained_reader=9),selector_logs=logs(TESTS,'tests',7),
+    retained_reader_logs=logs(HERE,'reader',9),
+    drivers={name:ref(HERE/name) for name in ('compose.py','shared.py.IN','selector.py.IN','test_retained_reader.py','seal.py')},
+    exact_terminal_schema='stage-a-paired-git-selector-terminal/v1',exact_terminal_fields=6,
+    uses_original_selector_observer_and_binder=True,shared_Source42_owner_lifecycle=True,
+    actual_git_subprocess_authority_in_tests=False,actual_Source_lease_authority_in_tests=False,
+    selector_git_and_ref_stream_bound_bytes=1_753_114,selected_Source42_read_probe_bound_bytes=10_376,
+    selector_bound_before_terminal_and_other_startup_bytes=1_763_490,
+    terminal_reservation_formula='2 * terminal_receipt_max_bytes + 1',
+    successful_child_accounted_captures_without_extra_owner_reads=28,
+    current_independent_index_read=None,live_selector_selection=None,live_selector_terminal=None,
+    actual_original_wait_or_ledger_confirmation=None,dispatch_authority=False)
+source=old_checker.read_text()
+at_def='def report(manifest):\n'
+at_out='        "stage_a_coordination": coordination,'
+assert source.count(at_def)==source.count(at_out)==1
+projection='''def project_existing_paired_selector_owner(reference, coordination):
+    row = retained_json(reference)
+    require(row["schema"] == "private-stage-a-paired-selector-owner-controls/v1"
+            and row["test_counts"] == {"selector":7,"retained_reader":9}
+            and row["exact_terminal_fields"] == 6
+            and row["exact_terminal_schema"] == "stage-a-paired-git-selector-terminal/v1"
+            and row["uses_original_selector_observer_and_binder"] is row["shared_Source42_owner_lifecycle"] is True
+            and row["actual_git_subprocess_authority_in_tests"] is row["actual_Source_lease_authority_in_tests"] is False
+            and row["selector_git_and_ref_stream_bound_bytes"] == coordination["conditional_selector_bytes"]
+            and row["selected_Source42_read_probe_bound_bytes"] == 10_376
+            and 1_753_114 + 10_376 == row["selector_bound_before_terminal_and_other_startup_bytes"]
+            and row["successful_child_accounted_captures_without_extra_owner_reads"] == 28
+            and row["current_independent_index_read"] is row["live_selector_selection"] is row["live_selector_terminal"]
+                is row["actual_original_wait_or_ledger_confirmation"] is None
+            and row["dispatch_authority"] is False,
+            "exact modeled paired-selector owner closeout and budget required")
+    return {key:row[key] for key in ("test_counts","exact_terminal_schema","exact_terminal_fields",
+        "selected_Source42_read_probe_bound_bytes","selector_bound_before_terminal_and_other_startup_bytes",
+        "terminal_reservation_formula","successful_child_accounted_captures_without_extra_owner_reads",
+        "current_independent_index_read","live_selector_selection","live_selector_terminal",
+        "actual_original_wait_or_ledger_confirmation","dispatch_authority")}
+
+
+'''
+source=source.replace(at_def,projection+at_def,1)
+source=source.replace(at_out,at_out+f'''
+        **({{"{KEY}": project_existing_paired_selector_owner(design["{KEY}"], coordination)}}
+           if "{KEY}" in design else {{}}),''',1)
+plan=TMP/'decoder-training-integration-plan.md'
+status=plan.stat()
+before=plan.read_bytes()
+assert sha256(before).hexdigest()=='6cd16d9bd4396191efa242fd9975c956a81b282b588b378c96ba63cf1c94cd2d'
+body=before.decode()
+addition=f"""## 831. Produce the paired selector receipt through the existing Source owner
+
+The detached paired selector now calls the existing observer and uses the same Source42 lifecycle as the Reader. The owner checks startup authority and live budget before opening its output. The selector observes both Git roots under the two READ leases. After confirmed lease exits and module cleanup, it retains and reads back the two original ref streams before sealing the six-field child receipt. A confirmed failure can retain a negative receipt. An unconfirmed lease exit or module cleanup withholds the receipt and keeps custody with the original owner. [Implementation and local controls]({description})
+
+Seven selector controls passed with modeled leases and Git processes. The unmodified independent selector binder accepted the exact child bytes and raw streams when its owner callback approved, and refused when that callback declined. All nine existing Reader startup checks also passed with the shared lifecycle. The historical default entry point keeps its original behavior.
+
+The selector requires 1,763,490 bytes for its selected Source42 code read, Git stream reservations, and private ref stream writes and readbacks. The exact terminal reserve adds twice its selected maximum plus one byte. The test accounts for 28 captures without additional owner controls. Current independent index evidence, the selector's live selection and original process wait, and the Reader allocation remain open. The combined Guide573 shortfall remains at least 27,490,906 bytes before startup, terminal and owner overhead. [Current readiness]({HERE/'verified-readiness.json'})
+
+"""
+for was,now in (
+    (str(OLD),str(NEW)),
+    ('Version 3.539. Updated 2026-11-27 with the selected Reader startup and child closeout.',
+     'Version 3.540. Updated 2026-11-27 with the paired selector owner and exact child receipt.'),
+    ('## Primary research references',addition+'## Primary research references'),
+):
+    assert body.count(was)==1,was
+    body=body.replace(was,now,1)
+checker=HERE/'check_design.py'
+ns={'__name__':'private_readback','__file__':str(checker)}
+exec(compile(source,str(checker),'exec'),ns)
+prior=run_path(str(old_checker))['report'](old)
+assert ns['report'](old)==prior
+new=deepcopy(old)
+new['manifest_schema_version']='0.394.0'
+new['previous_manifest']=old_ref
+new['typed_execution_design'][KEY]=save(description,desc)
+new['advisory_operator_readiness_checker']=save(checker,source)
+report=run_path(str(checker))['report'](new)
+prior['manifest_schema_version']=new['manifest_schema_version']
+assert {key:value for key,value in report.items() if key!=KEY}==prior
+manifest=save(NEW,new)
+readiness=save(HERE/'verified-readiness.json',report)
+fd,name=mkstemp(dir=TMP,prefix=plan.name+'.')
+staged=Path(name)
+try:
+    with os.fdopen(fd,'w') as stream:
+        stream.write(body)
+    staged.chmod(S_IMODE(status.st_mode))
+    assert plan.stat().st_ino==status.st_ino and plan.read_bytes()==before
+    os.replace(staged,plan)
+finally:
+    if staged.exists():
+        staged.unlink()
+print(json.dumps(dict(manifest=manifest,readiness=readiness,plan=ref(plan),descriptor=ref(description)),sort_keys=True))

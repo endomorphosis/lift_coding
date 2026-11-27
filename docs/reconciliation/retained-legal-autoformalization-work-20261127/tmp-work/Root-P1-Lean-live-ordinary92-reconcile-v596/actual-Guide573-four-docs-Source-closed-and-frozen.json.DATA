@@ -1,0 +1,174 @@
+{
+  "A": "219ba3da0f62f772801d71715e22c506faa21126",
+  "A_index": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "HEAD": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+  "Source_closed": true,
+  "actual_Source_leases": [
+    {
+      "canonical_root": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets",
+      "cooperative": true,
+      "lock_path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/workspace/control-plane/source-leases/source.lock",
+      "mode": "write",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 7.308833301067352e-05
+    },
+    {
+      "canonical_root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+      "cooperative": true,
+      "lock_path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/workspace/control-plane/source-leases/source.lock",
+      "mode": "read",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 7.047969847917557e-05
+    }
+  ],
+  "actual_namespaced_native": {
+    "cleanup_verified": true,
+    "compiler_rc": [
+      0,
+      1
+    ],
+    "full_Phase1_complete": false,
+    "native_cases": 2,
+    "pytest_case_credit": 0,
+    "report": {
+      "bytes": 111081,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-native2-output/complete-native3-direct-existing-owner-report.json",
+      "sha256": "c617e83857ff671cd733c316519527256728bc2325043364253cbba7b5840f14"
+    },
+    "version_rc": 0
+  },
+  "code_publication": {
+    "bytes": 14753,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-P1-Lean-ordinary92-and-Native2-three-FF-publication.json",
+    "sha256": "1f52975ebd4cc8572b2a0da750a173d1ca5596c643f21e8dd2b5c1de0a02b5d6"
+  },
+  "committed_docs": {
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": {
+      "bytes": 1549276,
+      "committed_blob": "7cc731eb9657db01814c3dff840fed04e6a50db0",
+      "full9": {
+        "st_ctime_ns": "1795736943328762655",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2629337",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795736943328762655",
+        "st_nlink": "1",
+        "st_size": "1549276",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+      "sha256": "957e5971f5b282b2577b303c37f0b5ed74ec940266b3bbc2c5c76e1cca645107"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": {
+      "bytes": 1092489,
+      "committed_blob": "c23ac76b40a481b9d731f1dd040ba89037f9defa",
+      "full9": {
+        "st_ctime_ns": "1795736943329746473",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2629339",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795736943329746473",
+        "st_nlink": "1",
+        "st_size": "1092489",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+      "sha256": "438a1b25f167575ee3235fb5384ed44ecdc1707997b27fbd6f4a0afd30515b0b"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": {
+      "bytes": 850187,
+      "committed_blob": "ba974e8e1fcad00f7db9bd4a11953a1823beab9c",
+      "full9": {
+        "st_ctime_ns": "1795736943329945211",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2629340",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795736943329945211",
+        "st_nlink": "1",
+        "st_size": "850187",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+      "sha256": "fecdf8de23ea0d2aaa15fc4c0cf9de856cd5985b1ff08708cf6dfbee51f2743e"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": {
+      "bytes": 2342533,
+      "committed_blob": "0865520391f9d298a581438dd25d3d6b6ad5e364",
+      "full9": {
+        "st_ctime_ns": "1795736943329069602",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2629338",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795736943329069602",
+        "st_nlink": "1",
+        "st_size": "2342533",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+      "sha256": "3ac4fc5b2451367cdffb75251b5e51f4a5b635667c0b7fbb1257ae0d8522ced8"
+    }
+  },
+  "composer_READY": {
+    "bytes": 17892,
+    "path": "/tmp/P1-Lean92-Native2-guide573-existing-composer-INERT-kVMIQxSz/READY-one-existing-guide573-four-guides.json",
+    "sha256": "7bb0ac0410d83d2fce3d7a7c6eb86071e5088ab69296d9f302c95c3d5704c5cc"
+  },
+  "evidence_ordinal": 573,
+  "full_charge": {
+    "bytes": 1276,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/Source-only-Guide573-full-retained-cap.json",
+    "sha256": "60ec66c0cc0476a13565f961f1e6b0d09a80c55b6b783b85745700fafc22ce6d"
+  },
+  "index": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795736943626072478",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "1086707",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795736943625072468",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/.git/index",
+    "sha256": "c3be915a700050787e42001811b05aab2edebf0737fd3c207f23674b862cbee0"
+  },
+  "module_closed": true,
+  "only_four_Git_changes": true,
+  "ordinary_qualification": {
+    "bytes": 24231,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-live-reconciled-P1-Lean-ordinary92-closed.json",
+    "sha256": "0e515a1f804ff04a70446d1fedeb27d0a63a73a030c4978bcac8bce767e7b5b5"
+  },
+  "prior_D": "30e1f2f81538b1e472a858a7984f1fba64fc6836",
+  "prior_values_preserved": {
+    "components": 126,
+    "evidence_records": 572,
+    "tasks": 24
+  },
+  "pushed": false,
+  "schema": "actual-Guide573-exact-four-isolated-Source-freeze/v1",
+  "terminal_returncode": 0,
+  "tree": "8b2d09183375036dba868e4607646ee407007fc5"
+}

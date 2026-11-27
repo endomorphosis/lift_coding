@@ -1,0 +1,316 @@
+"""Rebind only the detached Guide575 publication and price the existing Stage A reader."""
+import ast
+import hashlib
+from hashlib import sha1, sha256
+import json
+from pathlib import Path
+import struct
+
+HERE = Path(__file__).resolve().parent
+TMP = HERE.parent
+LIVE = TMP / 'P1-proof-cache-translation-current-6btZZr'
+PRIOR = TMP / 'decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK'
+RES = TMP / 'decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy'
+CAP = TMP / 'decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO'
+HELPER = TMP / 'decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa'
+PARSER = TMP / 'decoder-training-stage-a-v292-frozen-reader-private-v01-ORhtLOea'
+RECON = TMP / 'decoder-training-guide535-index-reconstruction-private-v01-XLNnRqmJ'
+ALLOWED = {HERE, LIVE, LIVE / 'guide575-composition', LIVE / 'guide575-transport', PRIOR, RES, CAP,
+           HELPER, PARSER, RECON}
+
+
+def ref(path, size, digest):
+    return dict(path=str(path), bytes=size, sha256=digest)
+
+
+def archive(reference):
+    path = Path(reference['path'])
+    assert path.parent in ALLOWED and '.git' not in path.parts and '..' not in path.parts
+    raw = path.read_bytes()
+    assert (len(raw), sha256(raw).hexdigest()) == (reference['bytes'], reference['sha256']), path
+    return raw
+
+
+def load(reference):
+    return json.loads(archive(reference))
+
+
+def save(name, body):
+    raw = body if type(body) is bytes else json.dumps(
+        body, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode()
+    path = HERE / name
+    if path.exists():
+        assert path.read_bytes() == raw, path
+    else:
+        with path.open('xb') as stream:
+            stream.write(raw)
+    return ref(path, len(raw), sha256(raw).hexdigest())
+
+
+def extract(reference, names, scope):
+    tree = ast.parse(archive(reference), reference['path'])
+    chosen = [node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name in names]
+    assert {node.name for node in chosen} == names
+    exec(compile(ast.Module(chosen, type_ignores=[]), reference['path'], 'exec'), scope)
+    return scope
+
+
+def code_scope(reference):
+    scope = {'__name__': 'private_guide575_calculation', '__file__': reference['path'], 'Path': Path,
+             'hashlib': hashlib}
+    exec(compile(archive(reference), reference['path'], 'exec'), scope)
+    return scope
+
+
+def replay():
+    publication_ref = ref(LIVE/'actual-Guide575-four-docs-three-FF-publication.json', 2639,
+        'c04197de963678c357e0f2b97f0a501b343f3f468d4a6a50a7d15ba22a9d568a')
+    event_ref = ref(LIVE/'guide575-transport'/'actual-Guide575-publication-events.jsonl', 3600,
+        'a47f85b9633c0730499baabe5bbcd579a1a6e402912d0d62a95bfbcd59cb8af1')
+    prior_index = ref(PRIOR/'guide574-writer-matched-index.DATA', 7070597,
+        '26afaa8c5a756128d11917a2f700bf866fcedd1ce4c933440dfa74413c4b5477')
+    prior_preview = ref(PRIOR/'guide574-all-fresh-preview.INERT.json', 560809,
+        'd72596ec7d7ddf69a34143699659302499f92c5cdb73414b5159a4197442100f')
+    publication = load(publication_ref)
+    events = [json.loads(line) for line in archive(event_ref).splitlines()]
+    pushes = [item for item in events if 'fast_forward_verified' in item]
+    assert [item['fast_forward_verified'] for item in pushes] == ['datasets','hallucinate','root']
+    assert pushes[-1]['live_readback'] == publication['live_main_after']
+    writer_ref, code_ref = publication['actual_doc_Source_closed'], publication['actual_code_publication']
+    writer, code = load(writer_ref), load(code_ref)
+    assert publication['terminal_returncode'] == writer['terminal_returncode'] == code['terminal_returncode'] == 0
+    assert writer['Source_closed'] is writer['module_closed'] is writer['only_four_Git_changes'] is True
+    assert publication['evidence_ordinal'] == writer['evidence_ordinal'] == 575
+    assert writer['code_publication'] == code_ref and code['live_main_after'] == publication['live_main_before']
+    assert writer['HEAD'] == publication['live_main_after']['datasets']
+
+    read_ref = code['READ3']
+    read = load(read_ref)
+    evidence_ref = read['actual_isolated_content_epoch']
+    evidence = load(evidence_ref)
+    guard_ref = read['named_metadata_recheck_reference']
+    guard = load(guard_ref)
+    basis_ref = read['outer_epoch_reference']
+    basis = load(basis_ref)
+    assert read['Source_closed'] is read['module_closed'] is evidence['Source_closed'] is evidence['module_closed'] is True
+    assert read['terminal_returncode'] == evidence['terminal_returncode'] == 0
+    assert read['named_metadata_count'] == len(guard['rows']) == 1621
+    assert guard['outer_epoch_reference'] == evidence['outer_epoch_reference'] == basis_ref and len(basis) == 1614
+    base = read['protected_index_reference']
+    by_path = {row['path']: row for row in read['individual_captures']}
+    assert len(by_path) == len(read['individual_captures']) == 3
+    captured = by_path[base['path']]
+    assert {key: captured[key] for key in base} == base == code['D_index']
+    d, a = read['projects']
+    assert d['Git_HEAD'] == code['live_main_after']['datasets'] == writer['prior_D']
+    assert a['Git_HEAD'] == code['live_main_after']['accelerate'] == writer['A']
+    assert read['actual_accelerate_index_metadata'] == evidence['actual_A_index'] == writer['A_index']
+    assert base['path'] == writer['index']['path'] == str(Path(d['root'])/'.git/index')
+    raw = archive(captured['raw_reference'])
+    companion = evidence['actual_A_index_raw_reference']
+    companion_raw = archive(companion)
+    assert companion['sha256'] == writer['A_index']['sha256']
+
+    helpers_ref = ref(HELPER/'rebind.py', 18000,
+        '8f17a3968c58c9b87475365e8f663a65a5dece119b0b99ae29de3542a9d1f56b')
+    helpers = extract(helpers_ref, {'changed','replay_parser','rows','restore_entries'},
+                      {'ast':ast,'archive':archive,'struct':struct})
+    parser_ref = ref(PARSER/'replay_index.py', 7058,
+        'ee28ee6fc23643b06c2f6cc213223fd61226172c9ce4f299ae2285f5c8b2ed35')
+    parse = helpers['replay_parser'](parser_ref, 3, 41250, 237573)
+    rows = helpers['rows']
+    old, pre = rows(parse, archive(prior_index)), rows(parse, raw)
+    assert old.keys() == pre.keys() and len(pre) == 41250
+    assert len(rows(helpers['replay_parser'](parser_ref, 3, 29607, 146025), companion_raw)) == 29607
+    reconstruction_ref = ref(RECON/'reconstruct_index.py', 11222,
+        'a0ee242b0cb573b04c6d70c071315c6efde66cfc50ecf1eefef02a800f490a23')
+    reconstruct = extract(reconstruction_ref, {'require','git_hash','parse_cache_tree','linux_stat_fields','rewrite_tree'},
+                          {'sha1':sha1})
+    changes = code['exact_two_changes']
+    assert {name for name in pre if pre[name] != old[name]} == changes.keys()
+    for name, change in changes.items():
+        assert (old[name][0], pre[name][0]) == (change['parent_blob'], change['stage0_and_committed_blob'])
+        assert old[name][1:3] == pre[name][1:3] == (0o100644, 0)
+        body = archive(by_path[change['path']]['raw_reference'])
+        assert (len(body),sha256(body).hexdigest(),reconstruct['git_hash']('blob',body).hex()) == (
+            change['bytes'],change['sha256'],change['stage0_and_committed_blob'])
+
+    composer = load(writer['composer_READY'])
+    assert (composer['expected_current_D_HEAD'],composer['expected_current_D_tree']) == (d['Git_HEAD'],d['Git_tree'])
+    assert (composer['expected_current_A_HEAD'],composer['expected_current_A_tree']) == (a['Git_HEAD'],a['Git_tree'])
+    assert composer['actual_live_code_publication'] == code_ref
+    docs = {row['relative_path']:row for row in composer['files']}
+    assert docs.keys() == writer['committed_docs'].keys() == set(publication['only_four_docs'])
+    entries,extension = helpers['restore_entries'](raw,len(pre),pre)
+    assert raw[extension:extension+4] == b'TREE'
+    cache = reconstruct['parse_cache_tree'](raw,extension+8)
+    replacements, output, growth = {}, bytearray(raw), {}
+    for name,witness in writer['committed_docs'].items():
+        edit = docs[name]
+        key = name.encode()
+        offset,stats,blob = entries[key]
+        assert witness['path'] == str(Path(d['root'])/name) and blob.hex() == edit['before_Git_blob_oid']
+        before_body = archive(edit['before_private'])
+        assert reconstruct['git_hash']('blob',before_body) == blob
+        body = archive(edit['post_private'])
+        insertion = edit['surgical_insertion']
+        at = insertion['offset']
+        fragment = archive(insertion['fragment_reference'])
+        assert body == before_body[:at] + fragment + before_body[at:]
+        oid = reconstruct['git_hash']('blob',body)
+        assert (len(body),sha256(body).hexdigest(),oid.hex()) == (witness['bytes'],witness['sha256'],witness['committed_blob'])
+        growth[name] = len(fragment)
+        replacements[key] = oid
+        output[offset:offset+40] = struct.pack('>10I',*reconstruct['linux_stat_fields'](witness['full9'],stats[6]))
+        output[offset+40:offset+60] = oid
+    before,after,dirs = reconstruct['rewrite_tree'](raw,output,entries,cache,replacements)
+    assert before.hex() == d['Git_tree'] and after.hex() == writer['tree']
+    output[-20:] = sha1(output[:-20]).digest()
+    output = bytes(output)
+    assert (len(output),sha256(output).hexdigest()) == (writer['index']['bytes'],writer['index']['sha256'])
+    final = rows(parse,output)
+    assert final.keys() == pre.keys() and {name for name in final if pre[name] != final[name]} == docs.keys()
+
+    prior = load(prior_preview)
+    inputs = prior['reader_inputs']
+    roots = dict(inputs['current_roots'])
+    old_d = Path(roots['D']['root'])
+    assert (roots['A']['root'], roots['A']['HEAD'], roots['A']['tree']) == (a['root'],a['Git_HEAD'],a['Git_tree'])
+    roots['D'] = dict(roots['D'],root=d['root'],HEAD=writer['HEAD'],tree=writer['tree'])
+
+    def relative(old_path):
+        return Path(old_path).relative_to(old_d).as_posix()
+
+    def relocated(old_path):
+        path = Path(old_path)
+        if path.is_relative_to(old_d):
+            return str(Path(d['root']) / relative(path))
+        assert path.is_relative_to(a['root'])
+        return old_path
+
+    basis_by_path = {row['path']:row for row in basis}
+    assert len(basis_by_path) == 1614 and basis_by_path[base['path']] == base
+    guard_by_path = {row['path']:row for row in guard['rows']}
+    assert all(guard_by_path[path] == row for path,row in basis_by_path.items())
+    basis_by_path[base['path']] = writer['index']
+    scope = dict(inputs['historical_origin_scope_recheck'])
+    for key, count in (('fresh_32_paths',32),('retained_92_paths',92)):
+        old_paths = scope[key]
+        assert len(old_paths) == len(set(old_paths)) == count
+        assert all(old[relative(path)] == pre[relative(path)] == final[relative(path)] for path in old_paths)
+        assert {relative(path) for path in old_paths}.isdisjoint(changes.keys() | docs.keys())
+        scope[key] = [relocated(path) for path in old_paths]
+
+    previous_retained = prior['relocated_retained_outer']
+    retained = [basis_by_path[relocated(row['path'])] for row in previous_retained]
+    paired_retained = tuple(zip(previous_retained, retained, strict=True))
+    changed = [dict(previous=left,relocated=right,index_role=right==writer['index'])
+               for left,right in paired_retained if (left['bytes'],left['sha256'])!=(right['bytes'],right['sha256'])]
+    assert all(right['path'] not in scope['retained_92_paths']
+               or (left['bytes'],left['sha256']) == (right['bytes'],right['sha256']) for left,right in paired_retained)
+    assert len({right['path'] for left,right in paired_retained if right['path'] in scope['retained_92_paths']}) == 92
+    fresh, roles = [], []
+    for row in inputs['fresh_Source_body_targets']:
+        updated = basis_by_path[relocated(row['path'])]
+        name = relative(row['path'])
+        expected = (row['expected_Git_blob_oid'],int(row['expected_Git_mode'],8),0)
+        assert old[name][:3] == pre[name][:3] == final[name][:3] == expected
+        assert (updated['bytes'],updated['sha256']) == (row['bytes'],row['sha256'])
+        assert updated['full9'] != row['full9']
+        fresh.append(dict(row,path=updated['path'],full9=updated['full9']))
+        roles.append(dict(relative_path=name,bytes=updated['bytes'],sha256=updated['sha256'],
+                          Git_oid=expected[0],Git_mode=row['expected_Git_mode'],Git_stage=0))
+    guides = [{key:writer['committed_docs'][relative(row['path'])][key] for key in ('path','bytes','sha256','full9')}
+              for row in inputs['four_guide_post_candidates_for_current_owner_recheck']]
+    assert len({row['path'] for row in retained+guides+fresh}) == 1254
+    assert scope['fresh_32_paths'] == [row['path'] for row in fresh]
+    index_reference = save('guide575-writer-matched-index.DATA',output)
+    proof = save('guide575-replay.INERT.json',dict(
+        schema='private-stage-a-guide575-writer-index-and-body-roles/v1', before_index=captured['raw_reference'],
+        prior_guide_index=prior_index, prior_preview=prior_preview, writer_matched_index=index_reference,
+        writer_expected_index=writer['index'], frozen_A_index=companion, publisher_events=event_ref,
+        publication=publication_ref, writer=writer_ref, code_publication=code_ref, closed_pre_doc_READ3=read_ref,
+        closed_pre_doc_content_epoch=evidence_ref, pre_doc_metadata_guard=guard_ref, pre_doc_outer_epoch=basis_ref,
+        published_roots=roots, Git_index_entries=41250, stage_zero_code_changes=sorted(changes),
+        publisher_document_paths=sorted(docs), document_byte_growth=growth,
+        rewritten_cache_tree_directories=[name.decode() for name in dirs],
+        pre_doc_index_trailer=raw[-20:].hex(), final_index_trailer=output[-20:].hex(), protected_roles=roles,
+        protected_role_content_matches=32, historical_retained_role_content_and_stage_zero_matches=92,
+        historical_retained_roles_unchanged=scope['retained_92_paths'], independent_current_index_read=None,
+        paired_selection=None, live_reader_allocation=None, dispatch_authority=False))
+    preview = dict(prior, reader_inputs=dict(inputs,current_roots=roots,current_index=writer['index'],
+                   historical_origin_scope_recheck=scope,fresh_Source_body_targets=fresh,
+                   four_guide_post_candidates_for_current_owner_recheck=guides),
+                   relocation_proof=proof,relocated_retained_outer=retained,changed_retained_content=changed)
+    assert preview['historical_phase7'] == prior['historical_phase7'] and preview['execution_selected'] is False
+    preview_ref = save('guide575-all-fresh-preview.INERT.json',preview)
+    ledger_ref = writer['full_charge']
+    charge = load(ledger_ref)
+    paid = charge['after_full_retained_precharge']
+    assert paid['captures'] == 543398 and charge['all_prior_costs_retained'] is True
+    headroom = min(paid['global_cap']-paid['used'],paid['internal_cap']-paid['internal_used'])
+    return proof, preview_ref, index_reference, ledger_ref, headroom, output[-20:].hex()
+
+
+def quotes(preview, ledger, headroom):
+    owner_ref = ref(RES/'reservation_preview.py',4109,
+        'c0338d5750e16d30c0f051c03dbd89527a63c5cf9b22d1481f91d2a3163b9c6b')
+    existing_ref = ref(RES/'verify_standalone_git.py',46075,
+        '9fe6b3cfd9876c0e7d03019a9ace59b6daad54744bf2270bd5239cf2f217b527')
+    candidate_ref = ref(CAP/'verify_standalone_git.py',47245,
+        'b6bda714fa95411b84fc0333f5348bc05a307bb44fe0e4fb9ecf38c6e3b85b5d')
+    owner = code_scope(owner_ref)
+    owner['PREVIEW'] = (Path(preview['path']),preview['bytes'],preview['sha256'])
+    existing_result = owner['price']()
+    args,limits = owner['fixture']()
+    candidate = code_scope(candidate_ref)
+    cap = candidate['_STAGE_A_GIT_STREAM_LIMIT']
+    short = limits['git_output_maximum']
+    index = args[0]['D_index']['bytes']
+    standalone_floor = index + 1
+    matrix = existing_result['Reader_parent_matrix_allowance']
+
+    def price(ref_cap):
+        core = candidate['source32_paired_reader_reservation'](
+            *args,**limits,git_ref_output_maximum=ref_cap,
+            capture_partition=candidate['STAGE_A_RELOCATED_ALL_FRESH_RESERVATION'])
+        selector = candidate['stage_a_git_selector_output_allowance'](
+            git_output_maximum=short, git_ref_output_maximum=ref_cap)
+        archive_bytes = 2*(2*ref_cap+1)
+        combined = core['logical_selected_bytes']+matrix+selector+archive_bytes
+        return dict(git_output_maximum=short,git_ref_output_maximum=ref_cap, Reader_core=core,
+                    selector_git_stream_allowance=selector, selector_raw_stream_archive_allowance=archive_bytes,
+                    paired_subtotal=combined,paired_gap=combined-headroom,
+                    joint_payload_floor_gap=combined-headroom+standalone_floor,
+                    joint_with_historical_independent_readback_floor_gap=combined-headroom+standalone_floor+index)
+
+    legacy, option = price(cap),price(65536)
+    assert legacy['Reader_core'] == existing_result['Reader_core']
+    assert legacy['paired_subtotal'] == existing_result['selector_Reader_conditional_subtotal']
+    assert legacy['paired_subtotal']-option['paired_subtotal'] == 10*(cap-65536)
+    return save('guide575-conditional-quotes.INERT.json',dict(
+        schema='private-guide575-stage-a-ref-cap-conditional-quotes/v1', preview=preview, ledger=ledger,
+        existing_owner_inputs=owner_ref, existing_core=existing_ref, optional_64_KiB_core=candidate_ref,
+        retained_headroom_bytes=headroom, Reader_parent_matrix_allowance=matrix,
+        Reader_epoch_LIST_sizes=existing_result['Reader_epoch_LIST_sizes'], independent_index_payload_floor=standalone_floor,
+        standalone_independent_index_payload_gap=standalone_floor-headroom,
+        legacy=legacy, ref_64_KiB=option, earliest_unpriced_items='startup, other control probes, actual owner and terminal overhead',
+        current_ref_stream_sizes=None, independent_index_read=None, selector_allocation=None, reader_allocation=None,
+        execution_selected=False,dispatch_authority=False))
+
+
+def main():
+    proof,preview,index,ledger,headroom,trailer = replay()
+    quote = quotes(preview,ledger,headroom)
+    current = Path(__file__).read_bytes()
+    descriptor = save('descriptor.json',dict(schema='private-guide575-stage-a-replay-and-price/v1',
+        driver=ref(Path(__file__),len(current),sha256(current).hexdigest()), exact_replay=proof, reader_preview=preview,
+        index=index, index_trailer=trailer, conditional_quotes=quote, retained_ledger=ledger, retained_headroom_bytes=headroom,
+        protected_role_content_matches=32,historical_retained_role_content_and_stage_zero_matches=92,
+        original_paired_selector_allocation=None,live_reader_allocation=None,independent_postpublication_index_read=None,
+        dispatch_authority=False))
+    print(json.dumps(dict(descriptor=descriptor,result=load(descriptor),quotes=load(quote)),sort_keys=True))
+
+
+if __name__ == '__main__':
+    main()

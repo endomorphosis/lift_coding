@@ -1,0 +1,135 @@
+{
+  "actual_legal_fidelity_or_convergence": null,
+  "actual_paid_model_evidence": null,
+  "case_counts": {
+    "meter_bounded_portability": 8,
+    "retained_paid_projection_and_final": 10,
+    "retained_restricted": 5
+  },
+  "dispatch_authority": false,
+  "logs": {
+    "meter_bounded_portability": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/portability-confirmation-first.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1412,
+        "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/portability-confirmation-first.stderr",
+        "sha256": "0a46a15cadd742b6074b5ccf481a16b999c2d8b11fe0d4781f13c967a9719e66"
+      },
+      "stdout": {
+        "bytes": 143,
+        "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/portability-confirmation-first.stdout",
+        "sha256": "91a5036c302882ed81ddeb127e6e7915492c60a021cd6f6548d44adc6c2d2819"
+      }
+    },
+    "retained_paid_projection_and_final": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/retained-projectors-final.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 2090,
+        "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/retained-projectors-final.stderr",
+        "sha256": "4a3cb255dc7670c03a8e6c29d8c3ddaa54fa946c7fa22437a3b38e5c97fd58e7"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/retained-projectors-final.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "retained_restricted": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/retained-restricted-final.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 945,
+        "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/retained-restricted-final.stderr",
+        "sha256": "2a50c1b9e54d9281b34441445d68a01d4a028a66b71f31ed5e9fe3bb318b7ceb"
+      },
+      "stdout": {
+        "bytes": 227,
+        "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/retained-restricted-final.stdout",
+        "sha256": "71afaadf88883e5529f9876c122f70e26e50d37616fd3db9c9569f62e2bb921b"
+      }
+    }
+  },
+  "maintained_adoption": null,
+  "modeled_case_summary": {
+    "cross_profile_bounds_seconds": [
+      [
+        -28,
+        1
+      ],
+      [
+        45,
+        1
+      ]
+    ],
+    "modeled_owner_evidence": true,
+    "within_t5_size_bounds_seconds": [
+      [
+        -155,
+        2
+      ],
+      [
+        -109,
+        2
+      ]
+    ]
+  },
+  "owner_diff": {
+    "bytes": 7184,
+    "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/study.diff",
+    "sha256": "8b26a1f53f270bbe749cb5c217d13fd4475c7c902a7a25b5685105de8e5ee888"
+  },
+  "prior_study_owner": {
+    "bytes": 911399,
+    "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/study.py",
+    "sha256": "0db05161d43713375a0a9b4db8d359b6b5d50f08f5a7481f2b804b97add778b1"
+  },
+  "retained_restricted_fixture_byte_identical": {
+    "bytes": 227,
+    "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/retained-restricted-final.stdout",
+    "sha256": "71afaadf88883e5529f9876c122f70e26e50d37616fd3db9c9569f62e2bb921b"
+  },
+  "schema": "reviewed-paid-meter-portability-confirmation-private-controls/v1",
+  "study_owner": {
+    "bytes": 916062,
+    "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/study.py",
+    "sha256": "0ed2b796854574708184a132303054d780048a78da5031f9c4d7e1c074da3a3d"
+  },
+  "tools": {
+    "compose.py": {
+      "bytes": 3895,
+      "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/compose.py",
+      "sha256": "18816a697e91e85014884b33202c30826f131e7e3124dcc116df7d4c6d0e061b"
+    },
+    "meter_portability.py.IN": {
+      "bytes": 3906,
+      "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/meter_portability.py.IN",
+      "sha256": "8535ed2bb36e4adb5ce986b36f86eddeda126fa62f29d6baa90b6861cd925a12"
+    },
+    "retained_stage_g.py": {
+      "bytes": 750,
+      "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/retained_stage_g.py",
+      "sha256": "d94280f2ed0f6151611c7b72824ce1518beebe2d520d099021389d920780baa9"
+    },
+    "seal.py": {
+      "bytes": 8764,
+      "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/seal.py",
+      "sha256": "182e41d83811956552fa45cf169590e2b91511cdfe762e1871685a420e516729"
+    },
+    "test_portability_confirmation_bounds.py": {
+      "bytes": 11077,
+      "path": "/tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/test_portability_confirmation_bounds.py",
+      "sha256": "420a5aa4fa4dae13183121ba03ecc34836f8fdc1157b38418cc9119e34f9fbe6"
+    }
+  }
+}

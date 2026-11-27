@@ -1,0 +1,140 @@
+{
+  "Source_runtime_native_model_or_Git_mutation": false,
+  "actual_current_proof_cache_report": {
+    "bytes": 10175,
+    "path": "/tmp/P7-current-checked-proof-cache-fixture-1Nps6ZZx/fixture-v05.stdout.json",
+    "sha256": "39fed95f3591d21b968bb66f00354d9cf2daba4c7d70e9a9a607fa8a8d1b0f0d"
+  },
+  "added_current_source_roles": {
+    "ipfs_datasets_py/logic/backends/kernel/lean.py": {
+      "bytes": 104341,
+      "git_blob_sha1": "7ee0cdb71958b052038fa467230dbf86dd0c3fb2",
+      "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+    },
+    "ipfs_datasets_py/logic/families/namespaces.py": {
+      "bytes": 34262,
+      "git_blob_sha1": "2ff6102d93759b4bfd30e2d0054353db733e6e2b",
+      "sha256": "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+    },
+    "ipfs_datasets_py/logic/formalization/__init__.py": {
+      "bytes": 2073,
+      "git_blob_sha1": "59375db940cfdcfb95cff7548630628821ac4bae",
+      "sha256": "91c60c1dfbf9038b8271ae6b1495dbbaf0be8d6ce438524c33f4f7a586f17266"
+    },
+    "ipfs_datasets_py/logic/formalization/compiler.py": {
+      "bytes": 35152,
+      "git_blob_sha1": "85f27c5708fd5ebd43f616de7895b4a99bac2f13",
+      "sha256": "2d4c63025e3d0004774c3a1d688193187f115b181085d7825d46c9d72581b03c"
+    },
+    "ipfs_datasets_py/logic/formalization/samples.py": {
+      "bytes": 13082,
+      "git_blob_sha1": "1de7e2d32651cb0193789604cbef0b0f31bf4e49",
+      "sha256": "90b5efa905eb9d3fb980cb628d32a180d37fa9097fb252b3aad006a3eb628695"
+    },
+    "ipfs_datasets_py/logic/formalization/views.py": {
+      "bytes": 29888,
+      "git_blob_sha1": "82a93e24033046426629310b7f8a65ba9260f5e0",
+      "sha256": "509fdf2d7334559c7ef176d504d5a6a9d8645c99c00c779d14cb3d08c51f9ae2"
+    },
+    "ipfs_datasets_py/logic/ir_core/canonical.py": {
+      "bytes": 14098,
+      "git_blob_sha1": "fa63fd302dad6340556a937b73883a25376f5f6b",
+      "sha256": "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0"
+    },
+    "ipfs_datasets_py/logic/ir_core/diagnostics.py": {
+      "bytes": 20110,
+      "git_blob_sha1": "4d3ab85d061a8d0d44e945af44dcf8ed23c9fcc9",
+      "sha256": "508fd3c2dce94a1eb1e2dff19f8f578ccec2d1e94eb1db2742f75783e23ff198"
+    },
+    "ipfs_datasets_py/logic/ir_core/evidence.py": {
+      "bytes": 12653,
+      "git_blob_sha1": "fa2e4dadbd6e96e8502165f9c418fcc42c0ec484",
+      "sha256": "826743829d2964b97e13720b5ea52907de77f6b18e8886e5a3c0fb6a977fdeff"
+    },
+    "ipfs_datasets_py/logic/ir_core/identity.py": {
+      "bytes": 8911,
+      "git_blob_sha1": "69d77e91f4ec671c6355b0f035017b1fed2b38d0",
+      "sha256": "606bffc1f938c59f44651eeb65cb9c0738e16e465aabba0ad82ef05e3b5b3b0e"
+    },
+    "ipfs_datasets_py/logic/ir_core/provenance.py": {
+      "bytes": 31891,
+      "git_blob_sha1": "9f2e8425894c8287ae0046153ac081734cb77d8d",
+      "sha256": "16eaf7c258550e5625bc19e6e7468c94133aedd1e85e64075f057ab4e52c3efe"
+    },
+    "ipfs_datasets_py/logic/legal_ir/__init__.py": {
+      "bytes": 2708,
+      "git_blob_sha1": "049082bd3528682a395698fea6ae778421ddf156",
+      "sha256": "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1"
+    },
+    "ipfs_datasets_py/logic/legal_ir/proof_cache.py": {
+      "bytes": 62643,
+      "git_blob_sha1": "5f4b9e8eedf00c89d31ff9fa68559dc3584126e1",
+      "sha256": "9b05a2f890f2df62931273f2448182af8a2d99af73248c5c67ef2ec3d04b0c3c"
+    },
+    "ipfs_datasets_py/logic/syntax_core/__init__.py": {
+      "bytes": 8285,
+      "git_blob_sha1": "9d0f887ec3d4d8b559d7cd546b39f4c6c6de3ee7",
+      "sha256": "20dd418d90360cdb42c64ba8b87bedcdb640228b460ef6c6ae60312365130e81"
+    },
+    "ipfs_datasets_py/logic/syntax_core/ast.py": {
+      "bytes": 56966,
+      "git_blob_sha1": "129c5c4079d2ef05924bcf62c76fb7d3fd22d5e7",
+      "sha256": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+    },
+    "ipfs_datasets_py/logic/syntax_core/contracts.py": {
+      "bytes": 75291,
+      "git_blob_sha1": "09d79a0e6ae23d8e71f31fbba9bbebfdb84f4546",
+      "sha256": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+    },
+    "ipfs_datasets_py/logic/syntax_core/signatures.py": {
+      "bytes": 30488,
+      "git_blob_sha1": "ce8eb3447fdb9ed57c348e0cb16fe60528d440b6",
+      "sha256": "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+    }
+  },
+  "all_Git_modes": "100644",
+  "compile_roster_body_bytes": 5835014,
+  "current_git_head": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+  "current_git_tree": "8b2d09183375036dba868e4607646ee407007fc5",
+  "current_proof_cache_projection": {
+    "bytes": 20653,
+    "path": "/tmp/P7-current-checked-proof-cache-fixture-1Nps6ZZx/checked-proof-cache-projection.json",
+    "sha256": "8744cb18578ff59637ee6690b6614a9b663a63cce38834225be5c214f6e667aa"
+  },
+  "discovery_only_path": "ipfs_datasets_py/ipfs_backend_router.py",
+  "exact_ablation_roles": [
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py"
+  ],
+  "inherited_cohorts_unchanged": true,
+  "maintained_case_names": [
+    "checked_producer_to_serdes_trainer",
+    "same_alias_other_receipt",
+    "same_id_changed_source",
+    "stale_interpretation",
+    "selected_frame_change"
+  ],
+  "maintained_case_success_expected": [
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "no_fit_integrated_runtime_scope_unrun": true,
+  "previous_Main_projection": {
+    "bytes": 60156,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/projection-one-consumer-case.v03.compact.json",
+    "sha256": "8b392cebb88812a7405f4f5a077e8beca5786103fdffc1f8c6d2f9a3e4a9afb4"
+  },
+  "prior_and_checked_overlap": 26,
+  "projection_manifest": {
+    "bytes": 63676,
+    "path": "/tmp/P7-integrated-current-Guide573-projection-Dc4JIunr/projection-current-Guide573-integrated119.compact.json",
+    "sha256": "fa2a718cfe3400a3e347f93e3b613562a9147156750ab003628cb6dceda0f715"
+  },
+  "schema": "phase7-exact-current-Guide573-integrated-no-fit-projection/v1",
+  "source_paths": 119,
+  "unchanged_prior_code_paths": 102,
+  "unexpected_current_Git_drift": {}
+}

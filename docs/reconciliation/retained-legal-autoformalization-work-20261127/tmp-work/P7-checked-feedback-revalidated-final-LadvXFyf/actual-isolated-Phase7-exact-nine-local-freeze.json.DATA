@@ -1,0 +1,411 @@
+{
+  "actual_Source42": {
+    "bytes": 10375,
+    "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/actual-doc-owner-approved-Source42-control-code.py.DATA",
+    "sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9"
+  },
+  "actual_isolated_write_lease": {
+    "canonical_root": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets",
+    "cooperative": true,
+    "lock_path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/workspace/control-plane/source-leases/source.lock",
+    "mode": "write",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 6.558559834957123e-05
+  },
+  "additional_A_index": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "candidate": {
+    "bytes": 9930,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/SEALED-Phase7-checked-legal-proof-current-exact-nine-private-v02.json",
+    "sha256": "2dbbfdd8888a86b26e4ff54a5918d5617e7182793b3e5ebea2a270f2ee3e9d67"
+  },
+  "canonical_Source_write_claimed": false,
+  "committed": {
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py": {
+      "bytes": 74557,
+      "full9": {
+        "st_ctime_ns": "1795739320211720665",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72511038",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739320211720665",
+        "st_nlink": "1",
+        "st_size": "74557",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "1f3d36a0c1cc595c1797b0f471720546ddc6c520",
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "sha256": "5c44d695c17fab26d6bba70d544e57a7bd0b5fd5b2434f810c9656db13926478",
+      "stage0_and_committed_blob": "3c2cc1443e9f96a611a81052c0e13f7b6634248e"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": {
+      "bytes": 1429059,
+      "full9": {
+        "st_ctime_ns": "1795739320212545951",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72511367",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739320212545951",
+        "st_nlink": "1",
+        "st_size": "1429059",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "b527db1c29a5e0ba13c13f2adf5a0f8be925ed7e",
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "sha256": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447",
+      "stage0_and_committed_blob": "6c03d227e6a43439395ec37a5d280aebf30b7460"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py": {
+      "bytes": 41765,
+      "full9": {
+        "st_ctime_ns": "1795739320212787329",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72511381",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739320212787329",
+        "st_nlink": "1",
+        "st_size": "41765",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "3e08a06029424257f8aa9df72a4a12d29c0d9547",
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+      "sha256": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc",
+      "stage0_and_committed_blob": "ec28c41fffdb7013d8b73ccc2ba70f1231316019"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py": {
+      "bytes": 42453,
+      "full9": {
+        "st_ctime_ns": "1795739320212808306",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72511388",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739320212808306",
+        "st_nlink": "1",
+        "st_size": "42453",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "37265225393a19b2c58ee0ead946929090b51d23",
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "sha256": "cd37964aa4a497e8d778ae0e6a90fe87f3362ead8c9a3751a5a3288b7370ed2e",
+      "stage0_and_committed_blob": "f185deec8ddbfc25db15352cc15def76bb5ab351"
+    },
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py": {
+      "bytes": 62474,
+      "full9": {
+        "st_ctime_ns": "1795739320212808306",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "53394694",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739320212808306",
+        "st_nlink": "1",
+        "st_size": "62474",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "754d53a96072b21bcabb8a44a4fc615b4cf1152f",
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+      "sha256": "da2e3d88faf184d3fa03c9531b4122583e2a882d9545bef1d0c7c2ab20b7bb83",
+      "stage0_and_committed_blob": "b3440e026ac79e9f96fce9b852f2bdbbfd5763a9"
+    },
+    "tests/unit/logic/legal_ir/test_proof_cache.py": {
+      "bytes": 98509,
+      "full9": {
+        "st_ctime_ns": "1795739320212808306",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "54969067",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739320212808306",
+        "st_nlink": "1",
+        "st_size": "98509",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "4525114941200e1d74adf6b45449e03b2dd2c1a2",
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+      "sha256": "087c587b4f35f61f08f2c8f9bba768893dfa1e57f3645976faa38e7927e02414",
+      "stage0_and_committed_blob": "03ea849ebdb3c818af1e56d8ee44add38af030ee"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py": {
+      "bytes": 16426,
+      "full9": {
+        "st_ctime_ns": "1795739320212808306",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "63750734",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739320212808306",
+        "st_nlink": "1",
+        "st_size": "16426",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "af6bf4ff9ad59d7fbe3c1ac8d324e58b437f9c53",
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py",
+      "sha256": "892386e52414fda1b3eac441aaa900630ffaf755140739d053df29ce75c2ed4a",
+      "stage0_and_committed_blob": "b91b53344561d723bb28d9d0f6b71d3aaa7e3d7c"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py": {
+      "bytes": 9778,
+      "full9": {
+        "st_ctime_ns": "1795739320212899058",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "63750736",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739320212899058",
+        "st_nlink": "1",
+        "st_size": "9778",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "dd11af058186d651fbe94588395494a09a72828c",
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py",
+      "sha256": "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414",
+      "stage0_and_committed_blob": "57ef63daf94a901365822cddb3ea1054fca2646c"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py": {
+      "bytes": 9648,
+      "full9": {
+        "st_ctime_ns": "1795739320212912098",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "63750738",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739320212912098",
+        "st_nlink": "1",
+        "st_size": "9648",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "7d671b8c3c440731fc2ee48c15999b0d0c6766c9",
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py",
+      "sha256": "ead71235b234846d6444678459d3fdd03bd10c0955783dcbd8f2f7d3cdf503a6",
+      "stage0_and_committed_blob": "cf976daddf3adc045c604c5a58c12ae9cc4f0543"
+    }
+  },
+  "frozen": {
+    "HEAD": "4449d6a62a607cded94db3822b39033ed4850c26",
+    "branch": "refs/heads/isolated/phase7-checked-legal-proof-feedback-canonical-parity",
+    "branch_file": {
+      "bytes": 41,
+      "full9": {
+        "st_ctime_ns": "1795739320536723403",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "21808156",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739320536723403",
+        "st_nlink": "1",
+        "st_size": "41",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/.git/refs/heads/isolated/phase7-checked-legal-proof-feedback-canonical-parity",
+      "sha256": "5c3765a9818f9f5e0a23976d60dc909dabbe69e5e9fee35c116a821b9ee51e98"
+    },
+    "index": {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795739320534723386",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "16956758",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739320524723302",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/.git/index",
+      "sha256": "3b42d81cab5c448918beb4c638ccdc0a5f5b562f4fdf12658054299be42e1d20"
+    },
+    "tree": "ab10c4bdf0d2ce0b6a01d25166cb4eea2c96ac70"
+  },
+  "full_charge": {
+    "bytes": 1304,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/Source-only-Phase7-checked-exact9-guarded-write-full-retained-cap-v02.json",
+    "sha256": "3a6b26b8bd39c3783596efd8b395bef88b1f16024579df8e869c04b1490324f3"
+  },
+  "isolated_Source_context_closed": true,
+  "local_clean": true,
+  "only_nine_D_tree_entries_changed": true,
+  "ordinary_qualified": false,
+  "parent": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+  "prior_targets": {
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py": {
+      "bytes": 60953,
+      "full9": {
+        "st_ctime_ns": "1795739229993961591",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72511038",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739229993961591",
+        "st_nlink": "1",
+        "st_size": "60953",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "sha256": "c0bc4092d301318619aec4e109a661da65a86816b9754fb5e73106cb910712f3"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": {
+      "bytes": 1428092,
+      "full9": {
+        "st_ctime_ns": "1795739230032961918",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72511367",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739230032961918",
+        "st_nlink": "1",
+        "st_size": "1428092",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "sha256": "fd80bf985b3f544a43d6d389feadac49bd33b55ba891d43d155574652c46a35d"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py": {
+      "bytes": 41332,
+      "full9": {
+        "st_ctime_ns": "1795739230034961935",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72511381",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739230034961935",
+        "st_nlink": "1",
+        "st_size": "41332",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+      "sha256": "4d82c053d90cd30e666b75323fdc5e7eb4b4a613a23e5044a8098a7ecc5e7492"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py": {
+      "bytes": 40652,
+      "full9": {
+        "st_ctime_ns": "1795739230036961952",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72511388",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739230036961952",
+        "st_nlink": "1",
+        "st_size": "40652",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "sha256": "5274253f346efe110c5a69eec161e5dcb51ce858fae5f3275c045528b32273a5"
+    },
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py": {
+      "bytes": 37429,
+      "full9": {
+        "st_ctime_ns": "1795739230094570036",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "53394694",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739230094570036",
+        "st_nlink": "1",
+        "st_size": "37429",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+      "sha256": "9ea38219594c8f5841fec7dbd2ad6da8925147eda44cb0ca9df2cff0fc5a2d7e"
+    },
+    "tests/unit/logic/legal_ir/test_proof_cache.py": {
+      "bytes": 97545,
+      "full9": {
+        "st_ctime_ns": "1795739230094962439",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "54969067",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739230094962439",
+        "st_nlink": "1",
+        "st_size": "97545",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+      "sha256": "4e012101e4400324175c02d296b51abde97d065c76abfddef1b51d16329f639d"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py": {
+      "bytes": 11156,
+      "full9": {
+        "st_ctime_ns": "1795739230103962515",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "63750734",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739230103962515",
+        "st_nlink": "1",
+        "st_size": "11156",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py",
+      "sha256": "3445e906f9bdb8a4986489dc57bf0ab06773bcd074fba3edef7301023699743c"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py": {
+      "bytes": 8639,
+      "full9": {
+        "st_ctime_ns": "1795739230104962523",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "63750736",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739230104962523",
+        "st_nlink": "1",
+        "st_size": "8639",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py",
+      "sha256": "2cbd48b08c48175f36bbd6a4380b1a1fcb2f108fcd7d81cede5151ced10eb54e"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py": {
+      "bytes": 8328,
+      "full9": {
+        "st_ctime_ns": "1795739230105962532",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "63750738",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739230105962532",
+        "st_nlink": "1",
+        "st_size": "8328",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py",
+      "sha256": "437985f7dd86b5a280edb865eb46ccdb46244ba8e64acfc99d6677040f42b1d7"
+    }
+  },
+  "private_red_green_base": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+  "pushed": false,
+  "root": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets",
+  "schema": "isolated-live-exact-nine-phase7-Git-freeze/v1",
+  "shared_source_or_Git_mutation": false,
+  "shared_status_after_sha256": "6e07703a6a150fc2147a54da5bb083934d44353019b5c97e8493ac868b79464e",
+  "shared_status_before_sha256": "6e07703a6a150fc2147a54da5bb083934d44353019b5c97e8493ac868b79464e",
+  "terminal_returncode": 0
+}

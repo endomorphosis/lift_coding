@@ -1,0 +1,156 @@
+--- prior/study.py
++++ candidate/study.py
+@@ -781,9 +781,83 @@
+     return work
+ 
+ 
++CONFIRMATION_COST_BOUNDS_SCHEMA = "reviewed-scheduled-confirmation-cost-bounds/v1"
++
++
++def _confirmation_meter_window(attempt, clock, horizon, attainment, observed, reason):
++    """Bracket a certified look only with verified cumulative meters on its own attempt."""
++    decision = attempt["decision"]
++    lower = upper = confirming = None
++    if decision["status"] == "reached" and attempt["confirmation_budget_block"] is None:
++        confirming = decision["confirming_checkpoint"]
++        meters = attempt["cost_evidence"]
++        looks = meters["looks"]
++        index = next(index for index, row in enumerate(looks) if row["look"] == confirming)
++
++        def measured(rows):
++            return next((meter for meter in rows if meter["costs"][clock] is not None), None)
++
++        if observed is not None:
++            lower = upper = looks[index]["meter"]
++        else:
++            lower = measured(row["meter"] for row in reversed(looks[:index]))
++            upper = measured([*(row["meter"] for row in looks[index + 1:]), meters["closing_meter"]])
++            if upper is not None and upper["costs"][clock] <= horizon:
++                attainment, reason = 1, "confirmed_by_later_authenticated_meter"
++            elif lower is not None and lower["costs"][clock] > horizon:
++                attainment, reason = 0, "after_horizon_by_earlier_authenticated_meter"
++    low = None if lower is None else lower["costs"][clock]
++    high = None if upper is None else upper["costs"][clock]
++    restricted_lower = horizon if attainment == 0 else 0.0 if low is None else min(low, horizon)
++    restricted_upper = horizon if attainment == 0 or high is None else min(high, horizon)
++    return {"confirming_look": confirming, "attainment": attainment, "reason": reason,
++            "observed_confirmation_seconds": observed, "lower_seconds": low, "upper_seconds": high,
++            "lower_meter_sha256": None if lower is None else lower["record_sha256"],
++            "upper_meter_sha256": None if upper is None else upper["record_sha256"],
++            "restricted_confirmation_seconds": (restricted_lower, restricted_upper)}
++
++
++def _verified_confirmation_cost_bounds(report):
++    """Tighten finite paired-seed bounds without changing an assessed look or its clock."""
++    attempts = {row["attempt_sha256"]: row for row in report["attempts"]}
++    rows, grouped = [], {}
++    for pair in report["pairs"]:
++        clock, horizon = pair["clock"], pair["horizon"]
++        baseline, candidate = (_confirmation_meter_window(attempts[pair[f"{role}_attempt_sha256"]], clock, horizon,
++                pair[f"{role}_attained"], pair[f"observed_{role}_confirmation"], pair[f"{role}_reason"])
++            for role in ("baseline", "candidate"))
++        a_low, a_high = (Fraction.from_float(value) for value in baseline["restricted_confirmation_seconds"])
++        b_low, b_high = (Fraction.from_float(value) for value in candidate["restricted_confirmation_seconds"])
++        time_delta = (b_low - a_high, b_high - a_low)
++        a, b = baseline["attainment"], candidate["attainment"]
++        attained_delta = ((0 if b is None else b) - (1 if a is None else a),
++                          (1 if b is None else b) - (0 if a is None else a))
++        row = {"seed": pair["seed"], "contrast_id": pair["contrast_id"], "clock": clock, "horizon": horizon,
++               "baseline_attempt_sha256": pair["baseline_attempt_sha256"],
++               "candidate_attempt_sha256": pair["candidate_attempt_sha256"],
++               "baseline": baseline, "candidate": candidate,
++               "restricted_candidate_minus_baseline_seconds_bounds": _wire(time_delta),
++               "candidate_minus_baseline_attainment_bounds": attained_delta}
++        rows.append(row)
++        grouped.setdefault((pair["contrast_id"], clock, horizon), []).append((time_delta, attained_delta))
++    contrasts = []
++    for (contrast, clock, horizon), evidence in grouped.items():
++        timings, indicators = zip(*evidence, strict=True)
++        count = len(evidence)
++        time_mean = tuple(sum(values) / count for values in zip(*timings, strict=True))
++        attainment_mean = tuple(Fraction(sum(values), count) for values in zip(*indicators, strict=True))
++        contrasts.append({"contrast_id": contrast, "clock": clock, "horizon": horizon, "paired_seeds": count,
++                          "restricted_mean_candidate_minus_baseline_seconds_bounds": _wire(time_mean),
++                          "mean_candidate_minus_baseline_attainment_bounds": _wire(attainment_mean)})
++    return {"schema": CONFIRMATION_COST_BOUNDS_SCHEMA, "pairs": tuple(rows), "contrasts": tuple(contrasts),
++            "scope": "finite_registered_seed_pairs_and_scheduled_confirmation_clocks",
++            "cost_basis": report["cost_basis"], "cost_evidence_sha256": report["cost_evidence_sha256"]}
++
++
+ def compare_verified_contrasts(validator, *, study, expected_study_sha256, attempts, expected_attempts_sha256,
+                                contrast_plan, expected_contrast_plan_sha256, cost_evidence,
+-                               expected_cost_evidence_sha256, verify_cost_owner, retrospective_look_closes=None):
++                               expected_cost_evidence_sha256, verify_cost_owner, retrospective_look_closes=None,
++                               include_confirmation_cost_bounds=False):
+     """Compare selected attempts with complete, owner-authenticated paid-work evidence.
+ 
+     The independent verifier resolves the selected commitment and authenticates
+@@ -796,7 +870,8 @@
+         attempts=attempts, expected_attempts_sha256=expected_attempts_sha256, contrast_plan=contrast_plan,
+         expected_contrast_plan_sha256=expected_contrast_plan_sha256, cost_evidence=cost_evidence,
+         expected_cost_evidence_sha256=expected_cost_evidence_sha256, verify_cost_owner=verify_cost_owner,
+-        retrospective_look_closes=retrospective_look_closes)
++        retrospective_look_closes=retrospective_look_closes,
++        include_confirmation_cost_bounds=include_confirmation_cost_bounds)
+ 
+ 
+ def _compare_verified_contrasts(validator, *, study, expected_study_sha256, attempts, expected_attempts_sha256,
+@@ -806,7 +881,8 @@
+                                 expected_activation_diagnostic_charges_sha256=None, exclusive_non_teacher_work=False,
+                                 expected_teacher_request_roster_sha256=None, require_original_terminal_event=False,
+                                 first_use_shared_work=None, expected_first_use_shared_work_sha256=None,
+-                                first_use_interrupted_preparation_events=()):
++                                first_use_interrupted_preparation_events=(), include_confirmation_cost_bounds=False):
++    _require(type(include_confirmation_cost_bounds) is bool, "explicit boolean confirmation bounds selection required")
+     _require(callable(verify_cost_owner), "independent resource owner verification required")
+     request_pin = expected_teacher_request_roster_sha256
+     _require(request_pin is None or (_pin(request_pin) and teacher_policy is not None),
+@@ -885,6 +961,8 @@
+                       first_use_shared_work=dict(sorted(shared_work.items())))
+     if first_use_interrupted_preparation_events:
+         output["first_use_interrupted_preparation_events"] = first_use_interrupted_preparation_events
++    if include_confirmation_cost_bounds:
++        output["confirmation_cost_bounds"] = _verified_confirmation_cost_bounds(output)
+     return output
+ 
+ 
+@@ -2474,7 +2552,8 @@
+                                            expected_teacher_request_roster_sha256=None,
+                                            expected_development_component_costs_sha256=None,
+                                            shuffle_coverage_readback=None, expected_shuffle_coverage_readback_sha256=None,
+-                                           shuffle_teacher_request_roster_raw=None, verify_shuffle_coverage_preparation=None):
++                                           shuffle_teacher_request_roster_raw=None, verify_shuffle_coverage_preparation=None,
++                                           include_confirmation_cost_bounds=False):
+     """Authenticate each actual validation look before the existing paid comparison.
+ 
+     The selected owner resolves the preregistration, candidate and training
+@@ -2608,7 +2687,8 @@
+         expected_cost_evidence_sha256=expected_cost_evidence_sha256, verify_cost_owner=component_cost_owner,
+         teacher_policy=teacher_policy, activation_diagnostic_charges=activation_diagnostic_charges,
+         expected_activation_diagnostic_charges_sha256=expected_activation_diagnostic_charges_sha256,
+-        expected_teacher_request_roster_sha256=expected_teacher_request_roster_sha256, **cost_options)
++        expected_teacher_request_roster_sha256=expected_teacher_request_roster_sha256,
++        include_confirmation_cost_bounds=include_confirmation_cost_bounds, **cost_options)
+     current()
+     output = {**report, "schema": VERIFIED_DEVELOPMENT_SCHEMA,
+             "development_design_sha256": expected_development_design_sha256,
+@@ -2777,7 +2857,8 @@
+         expected_cost_evidence_sha256, verify_cost_owner, development_design, expected_development_design_sha256,
+         step_grid, expected_step_grid_sha256, development_receipts, expected_development_receipts_sha256,
+         terminal_cells, expected_terminal_cells_sha256, verify_development_owner,
+-        activation_diagnostic_charges=None, expected_activation_diagnostic_charges_sha256=None):
++        activation_diagnostic_charges=None, expected_activation_diagnostic_charges_sha256=None,
++        include_confirmation_cost_bounds=False):
+     """Compare the paid, source-only compact development attempts at one terminal step.
+ 
+     The development owner independently resolves the selected physical
+@@ -2869,7 +2950,8 @@
+         expected_cost_evidence_sha256=expected_cost_evidence_sha256, verify_cost_owner=verify_cost_owner,
+         retrospective_look_closes=expected_cost_closes, exclusive_non_teacher_work=True,
+         activation_diagnostic_charges=activation_diagnostic_charges,
+-        expected_activation_diagnostic_charges_sha256=expected_activation_diagnostic_charges_sha256)
++        expected_activation_diagnostic_charges_sha256=expected_activation_diagnostic_charges_sha256,
++        include_confirmation_cost_bounds=include_confirmation_cost_bounds)
+     current()
+     return {**report, "schema": VERIFIED_COMPACT_DEVELOPMENT_SCHEMA,
+             "development_design_sha256": expected_development_design_sha256,

@@ -1,0 +1,68 @@
+{
+  "accelerate_published_head_preserved": true,
+  "actual_code_publication": {
+    "bytes": 15701,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Phase8-metric-lineage-ordinary19-three-FF-publication.json",
+    "sha256": "3f0a1e4487ef85bada8904383ce45606b29df1f77b268eb4ee23ed175116bc98"
+  },
+  "actual_doc_Source_closed": {
+    "bytes": 6154,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Guide577-four-docs-Source-closed-and-frozen.json",
+    "sha256": "d27876c5d8801f49721153981e8e63369349bb5f40fc8159b31793996946bf13"
+  },
+  "actual_ordinary19": {
+    "bytes": 5768,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Phase8-current-metric-lineage-ordinary19-closed.json",
+    "sha256": "5a4dbca147a2179a2540209d256550dffd4e1426cc7065e221037c2f680bac37"
+  },
+  "evidence_ordinal": 577,
+  "live_main_after": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "254ba85016cb9dba03ac6aa96b8aa411aeeb465a",
+    "hallucinate": "3d0fca0e84040e0c8911e66893780bc37fd465df",
+    "root": "d3b03b938cdc58d71478067fa4b8a461c1ce4d65"
+  },
+  "live_main_before": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "da3024e6ab94fecad9f258375dcc18b04902bfe2",
+    "hallucinate": "a783ca610d8a5693025fb4f706e0b00663416446",
+    "root": "8a2dc2038ec4549e83486b78843ebc1435a77bc2"
+  },
+  "only_four_docs": [
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json"
+  ],
+  "prior_values_preserved": {
+    "components": 126,
+    "evidence_records": 576,
+    "tasks": 24
+  },
+  "pushes_in_actual_order": [
+    {
+      "after": "254ba85016cb9dba03ac6aa96b8aa411aeeb465a",
+      "before": "da3024e6ab94fecad9f258375dcc18b04902bfe2",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "3d0fca0e84040e0c8911e66893780bc37fd465df",
+      "before": "a783ca610d8a5693025fb4f706e0b00663416446",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "d3b03b938cdc58d71478067fa4b8a461c1ce4d65",
+      "before": "8a2dc2038ec4549e83486b78843ebc1435a77bc2",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "schema": "actual-Guide577-four-docs-live-metric-lineage-ordinary19-three-FF-publication/v1",
+  "shared_checkouts_preserved": true,
+  "terminal_returncode": 0
+}

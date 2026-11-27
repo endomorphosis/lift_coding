@@ -1,0 +1,103 @@
+--- /tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/verify_rebind_capture.py
++++ /tmp/decoder-training-stage-a-relocated-a0-private-v01-eAKKpyUX/verify_rebind_capture.py
+@@ -1666,6 +1666,35 @@
+     return payloads
+ 
+ 
++def _verify_relocated_a0_capture_roster(expected, captures, archived, datasets_root, output_root):
++    require(type(expected) is list and type(captures) is list and len(expected) == len(captures) == 32
++            and all(type(row) is dict and set(row) == {'path', 'bytes', 'sha256', 'full9'}
++                    and type(row['path']) is str and row['path'].endswith('.py')
++                    and Path(row['path']).is_relative_to(datasets_root)
++                    and type(row['bytes']) is int and 0 < row['bytes'] <= 16 * 1024**2
++                    and _sha_pin(row['sha256']) for row in expected)
++            and list(archived) == expected,
++            'exact selected relocated capture roster must match the archived 32-file tail')
++    for ordinal, (row, event) in enumerate(zip(expected, captures, strict=True)):
++        validate_full9(row['full9'], row['bytes'])
++        require(type(event) is dict and set(event) == {'canonical_path', 'capture', 'raw_reference'}
++                and event['canonical_path'] == row['path'] and type(event['capture']) is dict,
++                'relocated Reader canonical capture order or shape differs')
++        witness, raw = event['capture'], event['raw_reference']
++        require(type(raw) is dict and set(raw) == {'path', 'bytes', 'sha256', 'full9'}
++                and type(raw['bytes']) is int
++                and raw['path'] == str(output_root / 'raw' / f'{ordinal}-stage-a.DATA')
++                and (raw['bytes'], raw['sha256']) == (row['bytes'], row['sha256'])
++                and witness.get('actual_source_result') == row
++                and witness.get('source_parent_all_fields_equal') is True
++                and witness.get('private_output_integrity_and_owner_passed') is True
++                and witness.get('private_raw_readback') == {key: raw[key] for key in ('bytes', 'sha256', 'full9')},
++                'relocated Reader capture lacks matching Source-end and private readback evidence')
++        validate_full9(raw['full9'], raw['bytes'])
++        require(stat.S_IMODE(int(raw['full9']['st_mode'])) == 0o400,
++                'relocated Reader private raw capture is not immutable')
++
++
+ def bind_closed_stage_a_archive_for_a0(selected, *, expected_selection_sha256, terminal_reference,
+                                        terminal_raw, outer_raw, verify_original_reader_close):
+     """Project the already authorized Reader proof into the existing isolated A0 Source binding."""
+@@ -1689,14 +1718,25 @@
+ 
+     fields = {'schema','reader_selection_sha256','reader_plan_sha256','roots','protected_index',
+               'parent_module_sha256','absent_paths'}
++    schema = selected.get('schema') if type(selected) is dict else None
++    relocated = schema == 'selected-A0-existing-StageA-reader-archive/v2'
++    if relocated:
++        fields |= {'capture_partition', 'relocation_preview', 'relocation_owner_binding_sha256',
++                   'fresh_capture_roster'}
+     require(type(selected) is dict and set(selected) == fields and
+-            selected['schema'] == 'selected-A0-existing-StageA-reader-archive/v1' and
++            (schema == 'selected-A0-existing-StageA-reader-archive/v1' or relocated) and
+             all(_sha_pin(selected[key]) for key in ('reader_selection_sha256','reader_plan_sha256')) and
+             _sha_pin(expected_selection_sha256) and sha256(encode(selected)) == expected_selection_sha256 and
+             file_ref(terminal_reference) and callable(verify_original_reader_close),
+             'expected independently selected Stage A archive and terminal reference')
+     picked = json.loads(encode(selected))
+     selected_terminal = dict(terminal_reference)
++    if relocated:
++        preview = picked['relocation_preview']
++        require(picked['capture_partition'] == 'stage-a-source32-relocated-all-fresh/v1' and
++                file_ref(preview) and preview['sha256'] == picked['reader_plan_sha256'] and
++                _sha_pin(picked['relocation_owner_binding_sha256']),
++                'exact selected relocation preview and independent Reader binding required')
+     require(type(terminal_raw) is bytes and len(terminal_raw) == selected_terminal['bytes'] and
+             sha256(terminal_raw) == selected_terminal['sha256'],'Stage A terminal receipt bytes differ')
+     receipt = json.loads(terminal_raw,object_pairs_hook=strict_pairs)
+@@ -1719,15 +1759,16 @@
+              for name in sorted(map(str,root_paths))],
+             'original Stage A Reader did not close both READs and its module normally')
+     stage = receipt.get('stage_a')
++    fresh_count, reused_count = (32, 0) if relocated else (12, 20)
+     require(type(stage) is dict and stage.get('Source_closed') is True and
+             stage.get('archive_committed') is True and
+             stage.get('selection_sha256') == picked['reader_selection_sha256'] and
+             stage.get('plan_sha256') == picked['reader_plan_sha256'] and
+             stage.get('closing_roots') == roots and
+             stage.get('closing_protected_index') == picked['protected_index'] and
+-            type(stage.get('body_capture_count')) is int and stage['body_capture_count'] == 12 and
++            type(stage.get('body_capture_count')) is int and stage['body_capture_count'] == fresh_count and
+             stage.get('observed_counts') == {'opening_full9':1254,'closing_full9':1254,
+-                                             'guides':4,'reused_archives':20,'fresh_bodies':12},
++                                             'guides':4,'reused_archives':reused_count,'fresh_bodies':fresh_count},
+             'Stage A terminal does not match the selected roots, index or capture roster')
+     provenance = stage.get('retained_git_provenance')
+     require(type(provenance) is dict and provenance.get('schema') == 'paired-git-continuous-read-retained-controls/v1'
+@@ -1761,6 +1802,18 @@
+     require(rows.get(index['path']) == index and
+             all(path_ok(path) and sum(Path(path).is_relative_to(project) for project in root_paths) == 1
+                 for path in rows),'archived outer LIST differs from its protected index or project roots')
++    if relocated:
++        require(all(stage.get(key) == picked[key] for key in (
++                    'capture_partition', 'relocation_preview', 'relocation_owner_binding_sha256')) and
++                provenance.get('closing_explicit_git_selector_metadata_checked') is True and
++                all(_sha_pin(stage.get(key)) for key in ('paired_selector_observation_sha256',
++                                                        'git_project_expectations_sha256')) and
++                preview['path'] not in (archive['path'], selected_terminal['path']) and
++                all(not Path(preview['path']).is_relative_to(root) for root in root_paths),
++                'relocated Reader terminal did not verify selected preview, owner and selectors')
++        _verify_relocated_a0_capture_roster(picked['fresh_capture_roster'],
++                                           stage.get('fresh_captures'), tuple(rows.values())[-32:],
++                                           root_paths[0], Path(archive['path']).parent)
+     modules = picked['parent_module_sha256']
+     absent = picked['absent_paths']
+     require(type(modules) is dict and bool(modules) and

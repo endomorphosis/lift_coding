@@ -1,0 +1,74 @@
+{
+  "additional_owner_controls_included": false,
+  "artifacts": {
+    "compose.py": {
+      "bytes": 3497,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/compose.py",
+      "sha256": "4013d4f296b7669b5483b4448326244ec0d468e26cfd91e864cea5124a390a74"
+    },
+    "controls.rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/controls.rc",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "controls.stderr": {
+      "bytes": 912,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/controls.stderr",
+      "sha256": "3fbcab9c94ed0a0f45a8fc10ff1a4d06f7d6644c35f490b1701d547a5d395ba9"
+    },
+    "controls.stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/controls.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "reservation_preview.py": {
+      "bytes": 4109,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/reservation_preview.py",
+      "sha256": "c0338d5750e16d30c0f051c03dbd89527a63c5cf9b22d1481f91d2a3163b9c6b"
+    },
+    "seal.py": {
+      "bytes": 8068,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/seal.py",
+      "sha256": "5b84d9e45c8454b4752ba3bb41d7306d48ffcf715aa8e76e62ec3f9450194c42"
+    },
+    "test_reservation.py": {
+      "bytes": 4648,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/test_reservation.py",
+      "sha256": "fe1a39ee8bf52b14666719877b2078f0885a6899cceed5302309dc5c5aef6312"
+    }
+  },
+  "before": {
+    "bytes": 44991,
+    "path": "/tmp/decoder-training-stage-a-selector-observer-private-v01-CKyIGens/verify_standalone_git.py",
+    "sha256": "2cf502a37fceafbd50a3610172dadbee282823460ce33a808512f843df25a5e4"
+  },
+  "candidate": {
+    "bytes": 46075,
+    "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/verify_standalone_git.py",
+    "sha256": "9fe6b3cfd9876c0e7d03019a9ace59b6daad54744bf2270bd5239cf2f217b527"
+  },
+  "conditional_subtotal_gap_before_owner_overhead": 20401582,
+  "diff": {
+    "bytes": 3356,
+    "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/verify_standalone_git.diff",
+    "sha256": "a8390ce9b39c20bdaa6955469c96a763324e208e0eb08435362666dae96fe640"
+  },
+  "dispatch_authority": false,
+  "headroom_basis_bytes": 6356992,
+  "historical_pair_prices_equal": true,
+  "independent_index_read_included": false,
+  "live_reader": null,
+  "local_passing_cases": 7,
+  "quote_scenario": {
+    "bytes": 1070,
+    "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/guide572-conditional-reservation.INERT.json",
+    "sha256": "7b0e2ec8940d380525fdae700984e98164512c678289537061d46437aafd463b"
+  },
+  "reader_dispatch_and_A0_closure_adopted": false,
+  "relocated_preview": {
+    "bytes": 556438,
+    "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/guide572-all-fresh-preview.INERT.json",
+    "sha256": "e682f614e50a3e97af25fdf532df48607dbc52085571a9b84d494bbd46ff4cfb"
+  },
+  "schema": "private-stage-a-relocated-reservation-controls/v1"
+}

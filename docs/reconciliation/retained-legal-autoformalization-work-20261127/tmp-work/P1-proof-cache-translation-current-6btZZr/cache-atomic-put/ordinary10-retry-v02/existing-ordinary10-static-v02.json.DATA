@@ -1,0 +1,124 @@
+{
+  "actual_Git_Source_or_runtime_effects": false,
+  "actual_Source_epoch_Git_full9_clock_IO_selection_effect_and_results": null,
+  "all_actual_bindings": null,
+  "bootstrap_future_NULL_bindings": [
+    "ADDITIONAL_A_PROVENANCE",
+    "ADDITIONAL_A_ROOT",
+    "ADMITTED_IO_PLAN_REFERENCE",
+    "BINDING_MANIFEST_REFERENCE",
+    "EFFECT_DECISION_REFERENCE",
+    "EXPECTED_MODULES",
+    "GIT_CANDIDATE_PROVENANCE",
+    "PYTEST_INIFILE",
+    "REQUIRED_CANONICAL_CONFTESTS",
+    "ROOT",
+    "ROOT_RUNTIME_SELECTION",
+    "SOURCE_EPOCH_RECORD_COUNT",
+    "SOURCE_EPOCH_SHA256",
+    "SOURCE_READ_BINDING_REFERENCE",
+    "rewrite_observer"
+  ],
+  "cases": 10,
+  "controls": {
+    "bootstrap": {
+      "bytes": 37182,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/ordinary10-retry-v02/existing-ordinary10-bootstrap.INERT.py.DATA",
+      "sha256": "687442f94d968f6ca5a4fbbe8692a75675d4ccb22c11c49e3dcb8ad074c8efe8"
+    },
+    "factory": {
+      "bytes": 3264,
+      "path": "/tmp/P1-proof-cache-atomic-put-ordinary10-INERT-qs489fww/existing-ordinary10-factory.INERT.py.DATA",
+      "sha256": "41c89c35f961249079156384917d20273d8775018410e73b81c5da2dafd6e7b7"
+    },
+    "operator": {
+      "bytes": 52303,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/ordinary10-retry-v02/existing-ordinary10-operator.INERT.py.DATA",
+      "sha256": "2b90161f69b8662bfdf54d68328262b1a555fca350a17f333af4e06ce6e83567"
+    }
+  },
+  "definition_AST_delta_names": {
+    "bootstrap": [
+      "BindingEvidence"
+    ],
+    "factory": [
+      "continuation_request"
+    ],
+    "operator": [
+      "binding_for"
+    ]
+  },
+  "exact_control_diff": {
+    "bytes": 34269,
+    "path": "/tmp/P1-proof-cache-atomic-put-ordinary10-INERT-qs489fww/exact-three-control-ordinary9-to-ordinary10.diff",
+    "sha256": "7e43341cd94c7335592bd4fc5f15c4db3d8cc2cd36bcd2abdc6e832429a7814f"
+  },
+  "existing_run_ancestry": {
+    "actual_ordinary9_junit": {
+      "bytes": 1686,
+      "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/actual-output/phase1-proof-cache-translation9-run-result0-output1.bin",
+      "sha256": "1e6ed08c175504d475e69d10136be2a2ce763b49cac8eda6ad44a8a2db2da3de"
+    },
+    "actual_ordinary9_report": {
+      "bytes": 447955,
+      "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/actual-output/complete-frozen-local-D-phase1-proof-cache-translation9-existing-owner-report.json",
+      "sha256": "8eaed28daa2ff852fcb30af75695759f2754af6efe941dd502415239e6309c93"
+    },
+    "inert_and_selected_prior_operator_and_bootstrap_definition_AST_equal": true
+  },
+  "functions": 6,
+  "operator_future_NULL_bindings": [
+    "ABSENT_PATHS",
+    "BOOTSTRAP_REFERENCE",
+    "D_READ_BINDING_REFERENCE",
+    "FINAL_ADMITTED_IO_PLAN_REFERENCE",
+    "FINAL_A_HEAD",
+    "FINAL_A_PROVENANCE",
+    "FINAL_A_ROOT",
+    "FINAL_A_TREE",
+    "FINAL_BINDING_MANIFEST",
+    "FINAL_BINDING_MANIFEST_REFERENCE",
+    "FINAL_D_HEAD",
+    "FINAL_D_PROVENANCE",
+    "FINAL_D_ROOT",
+    "FINAL_D_TREE",
+    "FINAL_EFFECT_DECISION",
+    "FINAL_EFFECT_DECISION_REFERENCE",
+    "FINAL_EXPECTED_CAPACITY",
+    "FINAL_EXPECTED_RESOURCE_CONFIG",
+    "FINAL_FIXTURE_CLOSURE_REFERENCE",
+    "FINAL_MODULE_BINDINGS",
+    "FINAL_OUTPUT_PATH",
+    "FINAL_RESOURCE_STATE_PATH",
+    "FINAL_SDK_BINDINGS",
+    "FINAL_SOURCE_PROJECTS",
+    "ROOT_RUNTIME_SELECTION",
+    "ROOT_SELECTION",
+    "parent"
+  ],
+  "ordinary_result": null,
+  "preserved_D_READ_ABI_normal_rewrite_finalizer_resource_limits": true,
+  "prior_static_controls": {
+    "bytes": 4053,
+    "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/READY-ordinary9-final-static-INERT.json",
+    "sha256": "72c592b6a3492bec254e08df3898e3c7f48861f7b88f009f3bd3862d97ec6a39"
+  },
+  "private_candidate": {
+    "bytes": 10316,
+    "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/SEALED-private-Phase1-proof-cache-atomic-record-exact-three.json",
+    "sha256": "1057bbcde6ed22f67da2603060f467d1a320a79bb24046b4e6ad2311b935bd20"
+  },
+  "prospective_phase_group": "phase1-proof-cache-atomic-put10",
+  "role_plan": {
+    "bytes": 11352,
+    "path": "/tmp/P1-proof-cache-atomic-put-ordinary10-INERT-qs489fww/ordinary10-role-map-INERT.json",
+    "sha256": "0a0e24a786feae93b76d1fa139375cc07d3a70aaa17e86ad241195ff2f50384c"
+  },
+  "schema": "existing-R2-Phase1-proof-cache-atomic-put-ordinary10-compile-only/v1",
+  "selected_runtime": null,
+  "selector_roster": {
+    "bytes": 3503,
+    "path": "/tmp/P1-proof-cache-atomic-put-ordinary10-INERT-qs489fww/exact-6-function-10-proposed-literal-cases.json",
+    "sha256": "2feb2b1364334da9259e0e5542c54d49604a5f37d90b14d6110ccca50aa5c5fb"
+  }
+}

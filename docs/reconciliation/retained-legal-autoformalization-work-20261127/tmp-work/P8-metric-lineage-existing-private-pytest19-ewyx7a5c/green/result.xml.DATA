@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite name="pytest" errors="1" failures="0" skipped="0" tests="1" time="0.731" timestamp="2026-11-27T01:31:13.575613+00:00" hostname="spark-b271"><testcase classname="" name="tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_metric_responsiveness" time="0.000"><error message="collection failure">ImportError while importing test module '/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py:7: in &lt;module&gt;
+    from ipfs_datasets_py.optimizers.logic_theorem_optimizer import (
+ipfs_datasets_py/optimizers/logic_theorem_optimizer/uscode_modal_daemon_runner.py:38: in &lt;module&gt;
+    from huggingface_hub import HfFileSystem
+/tmp/P2-V4-current-admission-withdrawal-test-only-private-EFrOMQn8/invoke-existing-pytest-private-v02-one-selector.py.DATA:36: in audit
+    raise ImportError(f"private fixture model backend refused: {args[0]}")
+E   ImportError: private fixture model backend refused: huggingface_hub</error></testcase></testsuite></testsuites>

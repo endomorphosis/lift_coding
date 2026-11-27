@@ -1,0 +1,172 @@
+
+
+@pytest.mark.parametrize(
+    ("scenario", "producer_error"),
+    [
+        ("selected", None),
+        ("same_receipt_id", "exact checked receipt and formal obligation"),
+        ("stale_raw_source", "checked obligation does not bind the current sample source"),
+        ("changed_interpretation", "failed current receipt replay"),
+        ("changed_dependency", "failed current receipt replay"),
+    ],
+)
+def test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence(
+    samples, monkeypatch, scenario, producer_error
+):
+    from dataclasses import replace
+
+    from ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback import (
+        ProofFeedbackTrustError,
+        build_legal_ir_proof_feedback_record,
+    )
+    from ipfs_datasets_py.logic.ir_core.claims import stable_digest
+    from ipfs_datasets_py.logic.legal_ir.proof_cache import LegalProofRecord
+    from tests.unit.logic.legal_ir.test_proof_cache import _bound_feedback_fixture
+
+    train, holdout = samples
+    train, proof, obligation, context = _bound_feedback_fixture(
+        train, "obligation:checked-feedback-trainer-fixture"
+    )
+    receipt, = proof.theorem_receipt_results(
+        expected_context=context, obligation_id=obligation.obligation_id
+    )
+    assert receipt.obligation_digest == obligation.digest
+    versions = _versions()
+    target = ProofFeedbackTrainingTarget(
+        sample_id=train.sample_id,
+        sample_sha256=proof_feedback_sample_digest(train),
+        obligation_id=obligation.obligation_id,
+        obligation_type="exception_scope",
+        legal_ir_view="deontic.ir",
+        formal_obligation_sha256=obligation.digest,
+        reviewed_target_sha256=context["interpretation_digest"],
+        dependency_manifest_sha256=stable_digest(dict(context["dependency_versions"])),
+        legal_proof_record=proof,
+        current_sample=train,
+        expected_artifact_digest=proof.artifact_digest,
+        expected_legal_proof_digest=proof.content_digest,
+        expected_proof_receipt_digest=receipt.digest,
+        expected_proof_context=context,
+    )
+
+    def project(selected):
+        return build_legal_ir_proof_feedback_record(
+            obligation,
+            training_target=selected,
+            semantic_slots={"exception": "present"},
+            versions=versions,
+            partition_policy=ProofFeedbackPartitionPolicy(holdout_fraction=0.0),
+        )
+
+    record = project(target)
+    assert record.positive and record.kernel_reconstruction.verified
+    receipt_reference = f"protocol-proof-sha256:{receipt.digest}"
+    assert record.receipt_ids == (receipt_reference,)
+    assert record.kernel_reconstruction.receipt_id == receipt_reference
+    assert record.obligation_digest == target.obligation_digest
+
+    selected_sample = train
+    if scenario == "same_receipt_id":
+        other_receipt = replace(receipt, verifier=receipt.verifier + "-alternate")
+        assert other_receipt.receipt_id == receipt.receipt_id
+        assert other_receipt.digest != receipt.digest
+        binding, = proof.proof_bindings
+        other_binding = binding.to_dict() | {"receipt_digest": other_receipt.digest}
+        other_proof = LegalProofRecord.build(
+            proof.formalization_artifact(),
+            profile=proof.profile,
+            jurisdiction=proof.jurisdiction,
+            theorem_receipts=(other_receipt,),
+            proof_bindings=(other_binding,),
+        )
+        assert other_proof.theorem_receipt_results(
+            expected_context=context, obligation_id=obligation.obligation_id
+        ) == (other_receipt,)
+        target = replace(
+            target,
+            legal_proof_record=other_proof,
+            expected_legal_proof_digest=other_proof.content_digest,
+        )
+    elif scenario == "stale_raw_source":
+        selected_sample = replace(train, text=train.text + " ")
+        assert selected_sample.sample_id == train.sample_id
+        assert selected_sample.modal_ir.to_dict() == train.modal_ir.to_dict()
+        assert proof_feedback_sample_digest(selected_sample) != target.sample_sha256
+        target = replace(
+            target,
+            current_sample=selected_sample,
+            sample_sha256=proof_feedback_sample_digest(selected_sample),
+        )
+    elif scenario == "changed_interpretation":
+        changed_digest = stable_digest({"fictional_interpretation": "revised"})
+        assert changed_digest != target.reviewed_target_sha256
+        target = replace(
+            target,
+            reviewed_target_sha256=changed_digest,
+            expected_proof_context=dict(context, interpretation_digest=changed_digest),
+        )
+    elif scenario == "changed_dependency":
+        dependencies = dict(context["dependency_versions"])
+        dependencies["fictional-definition"] = stable_digest({"definition": "revised"})
+        assert stable_digest(dependencies) != target.dependency_manifest_sha256
+        target = replace(
+            target,
+            dependency_manifest_sha256=stable_digest(dependencies),
+            expected_proof_context=dict(context, dependency_versions=dependencies),
+        )
+
+    if producer_error is not None:
+        with pytest.raises(ProofFeedbackTrustError, match=producer_error):
+            project(target)
+        # Rebind the offered record's two structural pins so the consumers
+        # must replay checked evidence before they can refuse it.
+        offered = replace(record, record_id="", obligation_digest=target.obligation_digest)
+        offered = replace(offered, record_id=offered.expected_record_id)
+    else:
+        offered = record
+
+    target = replace(target, expected_feedback_record_id=offered.record_id)
+    wire = json.loads(json.dumps(offered.to_dict()))
+    detached = LegalIRProofFeedbackRecord.from_dict(wire)
+    assert detached.to_dict() == wire
+    assert detached.record_id == target.expected_feedback_record_id
+    assert detached.obligation_digest == target.obligation_digest
+    accepted = producer_error is None
+    assert target.matches(detached) is accepted
+
+    encoder = AdaptiveModalAutoencoder(compute_device="python")
+    before = encoder.state.to_dict()
+    trainer = TrustedFeedbackTrainer(
+        encoder,
+        expected_versions=versions,
+        config=TrustedFeedbackTrainerConfig(production_weight_writes_enabled=True),
+    )
+    updates = []
+
+    def stop_before_update(model, guidance, sample, *, feedback_id, learning_rate):
+        updates.append((feedback_id, proof_feedback_sample_digest(sample)))
+        return False
+
+    monkeypatch.setitem(
+        trainer.train.__globals__, "_apply_bounded_sample_update", stop_before_update
+    )
+    targets = {target.obligation_id: target}
+    result = trainer.train(
+        [wire],
+        {selected_sample.sample_id: selected_sample},
+        ablation_evidence=_ablation(train.sample_id, holdout.sample_id),
+        current_proof_targets=targets,
+    )
+    if accepted:
+        assert updates == [(record.record_id, target.sample_sha256)]
+        assert result.block_reasons == {"no_bounded_learning_target": 1}
+    else:
+        assert not updates
+        assert result.block_reasons == {"proof_feedback_current_target_mismatch": 1}
+    auxiliary = encoder.train_proof_auxiliary_heads(
+        [wire], expected_versions=versions, current_proof_targets=targets, learning_rate=0
+    )
+    assert auxiliary["eligible_count"] == int(accepted)
+    assert auxiliary["skipped_current_target_count"] == int(not accepted)
+    assert result.applied_count == auxiliary["applied_count"] == 0
+    assert encoder.state.to_dict() == before

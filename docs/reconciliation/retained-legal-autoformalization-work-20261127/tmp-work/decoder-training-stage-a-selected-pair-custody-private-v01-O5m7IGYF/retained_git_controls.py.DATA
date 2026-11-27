@@ -1,0 +1,299 @@
+import ast
+from copy import deepcopy
+from hashlib import sha256
+import errno
+import json
+import os
+from pathlib import Path
+import stat
+import subprocess
+import tempfile
+import time
+import unittest
+from unittest.mock import patch
+
+HERE=Path(__file__).resolve().parent
+OWNER_PIN='fbdbfdec2b2d87bc960940bb06349e3fa7a8b5fd5a6c041343824f21185ced57'
+GUARD_PIN='f1256c8de08535861aee3c189fb6d3a79786ba81303e307bc41c3a8e757d2e0a'
+ARCHIVE=Path('/tmp/decoder-training-stage-a-derived-python-archive-private-v01-IdtYrBBS/descriptor.json')
+FROZEN=Path('/tmp/decoder-training-stage-a-v292-frozen-reader-private-v01-ORhtLOea/receipt.json')
+PRIOR=Path('/tmp/decoder-training-stage-a-v266-cli-v4-published-predecessor-private-v01-lxbjdyei/'
+           'source32-v266-published-Phase8-corpus-CLI-V4-successor.INERT.json')
+SCOPE='8'*64
+HEAD='1'*40
+TREE='2'*40
+OID='3'*40
+REFS=b'refs/heads/fixture '+HEAD.encode()+b'\n'
+
+
+def sha(raw):
+    return sha256(raw).hexdigest()
+
+
+def full9(st):
+    names=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+    return {key:str(getattr(st,key)) for key in names}
+
+
+def verify(path,pin):
+    raw=path.read_bytes()
+    assert sha(raw)==pin,path
+    return raw
+
+
+def configured():
+    raw=verify(HERE/'verify_standalone_git.py',GUARD_PIN)
+    guard=dict(Path=Path,os=os,stat=stat,time=time,subprocess=subprocess,hashlib=__import__('hashlib'))
+    exec(compile(raw,str(HERE/'verify_standalone_git.py'),'exec'),guard)
+    return guard
+
+
+def price_scenario(guard):
+    frozen=json.loads(verify(FROZEN,'dc408af0db676142261f270d30ec7bcda752607c1b2ef0deda8802cba3ceec22'))
+    prior=json.loads(verify(PRIOR,'56607e82570283b1d7f81e329088a3e09e10d7d40d735ba3ac5a021e9b061564'))
+    art=frozen['artifacts']
+    ref=art['expected-reader-preview.INERT.json']
+    roster=json.loads(verify(Path(ref['path']),ref['sha256']))
+    rows=roster['pre_read_metadata_rows']
+    index={row['path'].split('/repositories/')[-1]:row for row in rows if '/.git/' in row['path']}
+    guards={'D_index':index['datasets/.git/index'],'A_index':index['accelerate/.git/index'],
+        'exact_exclude_pins':[index['datasets/.git/info/exclude'],index['accelerate/.git/info/exclude']]}
+    read_controls=[prior['phase7_request'],prior['phase7_receipt'],art['expected-outer.INERT.json']]
+    args=(guards,rows[1218:1222],[row for row in rows[1222:] if row['full9'] is None],
+          roster['archive_reference_expectations'],read_controls)
+    limits={'epoch_output_maximums':{'outer_epoch':564378,'python_epoch':562357},'git_output_maximum':8192,
+            'persist_python_epoch':False}
+    return args,limits
+
+
+class RetainedControls(unittest.TestCase):
+    def setUp(self):
+        self.guard=configured()
+        self.report={'inputs':[]}
+        self.spent={'bytes':0,'captures':0}
+        self.owner={'Path':Path,'os':os,'stat':stat,'H':sha,'f9':full9,'report':self.report,
+                    'spent':self.spent,'before':{'used':0,'internal_used':0,'global_cap':2**30,'internal_cap':2**30}}
+        raw=verify(HERE/'owner.py.DATA',OWNER_PIN)
+        part=ast.parse(raw)
+        selected=[node for node in part.body if isinstance(node,ast.FunctionDef)
+                  and node.name in ('admit','control_read')]
+        self.assertEqual([node.name for node in selected],['admit','control_read'])
+        exec(compile(ast.Module(body=selected,type_ignores=[]),str(HERE/'owner.py.DATA'),'exec'),self.owner)
+        self.tmp=tempfile.TemporaryDirectory(dir=HERE)
+        self.addCleanup(self.tmp.cleanup)
+        base=Path(self.tmp.name)
+        self.roots=[base/'datasets',base/'accelerate']
+        self.record={'exact_exclude_pins':[]}
+        self.branch='refs/heads/fixture'
+        expected={}
+        for role,root in zip('DA',self.roots,strict=True):
+            git_dir=root/'.git'
+            pins={}
+            for kind,name in (('HEAD','HEAD'),('ref',self.branch),('config','config'),('index','index'),
+                              ('exclude','info/exclude')):
+                path=git_dir/name
+                path.parent.mkdir(parents=True,exist_ok=True)
+                raw=kind.encode()
+                path.write_bytes(raw)
+                pins[kind]={'path':str(path),'bytes':len(raw),'sha256':sha(raw),'full9':full9(path.lstat())}
+            self.record[role+'_index']=pins['index']
+            self.record['exact_exclude_pins'].append(pins['exclude'])
+            expected[str(root)]={'HEAD':HEAD,'tree':TREE,'branch_ref':self.branch,'refs_sha256':sha(REFS),
+                                'Git_selector_metadata':{name:pins[name] for name in ('HEAD','ref','config')}}
+        self.names=[f'target {i:02}.py' for i in range(32)]
+        self.targets=[{'path':str(self.roots[0]/name),'expected_Git_mode':'100644','expected_Git_blob_oid':OID}
+                      for name in self.names]
+        self.guard.update(R=self.roots[0],A=self.roots[1],STANDALONE_PROJECT_EXPECTATIONS=expected,
+                          _run_accounted_stage_a_git=self.git_observation)
+        self.phases=[]
+        self.git_calls=[]
+        self.duplicates=[]
+        self.parser_calls=[]
+        self.changed_refs=False
+        self.scope_allowed=lambda phase: True
+        self.dup=os.dup
+        self.begin,self.record_output=self.guard['stage_a_git_owner_callbacks'](
+            self.owner['admit'],self.spent,self.report)
+
+    def collect_dup(self,fd):
+        dup=self.dup(fd)
+        self.duplicates.append(dup)
+        return dup
+
+    def closing_fds_are_closed(self):
+        for fd in set(self.duplicates):
+            with self.subTest(fd=fd),self.assertRaises(OSError) as captured:
+                os.fstat(fd)
+            self.assertEqual(captured.exception.errno,errno.EBADF)
+
+    def verify_scope(self,digest,kind,pid,roots,phase):
+        self.assertEqual(digest,SCOPE)
+        self.assertEqual(kind,'paired-git-continuous-read-retained-controls/v1')
+        self.assertEqual(pid,os.getpid())
+        self.assertEqual(roots,tuple(map(str,self.roots)))
+        self.phases.append(phase)
+        return self.scope_allowed(phase)
+
+    def read_stage_zero(self,raw,names):
+        self.assertEqual(raw,b'index')
+        self.assertEqual(names,self.names)
+        self.parser_calls.append(raw)
+        return {os.fsencode(path):[(OID,0o100644,0,0)] for path in names}
+
+    def git_observation(self,command,*,env,timeout,admit_git_output,record_git_output,deadline,git_output_maximum):
+        path=Path(command[command.index('-C')+1])/'.git'
+        args=tuple(command[command.index('-C')+2:])
+        if args[:2]==('--literal-pathspecs','ls-tree'):
+            self.assertEqual(args[6:],tuple(self.names))
+            raw=('\0'.join(f'100644 blob {OID}\t{name}' for name in self.names)+'\0').encode()
+        else:
+            responses={('rev-parse','--path-format=absolute','--git-path','index'):f'{path}/index\n',
+                       ('rev-parse','--path-format=absolute','--git-path','info/exclude'):f'{path}/info/exclude\n',
+                       ('symbolic-ref','HEAD'):self.branch+'\n',
+                       ('rev-parse','--absolute-git-dir'):f'{path}\n',
+                       ('rev-parse','--path-format=absolute','--git-common-dir'):f'{path}\n',
+                       ('rev-parse',self.branch):HEAD+'\n',('rev-parse','HEAD'):HEAD+'\n',
+                       ('rev-parse','HEAD^{tree}'):TREE+'\n',
+                       ('for-each-ref','--format=%(refname) %(objectname)'):
+                           REFS.decode()+('unexpected-ref\n' if self.changed_refs else ''),
+                       ('status','--porcelain=v1','-z','--untracked-files=normal'):'',
+                       ('diff','--cached','--quiet','HEAD','--'):'',('diff','--quiet','--'):''}
+            raw=responses[args].encode()
+        admit_git_output(git_output_maximum+1)
+        record_git_output(command,{'stdout_bytes':len(raw),'stderr_bytes':0,'process_started':True})
+        self.git_calls.append(args)
+        return raw
+
+    def run_paired(self,between=lambda _: 'middle result',control_read=None,**options):
+        if control_read is None:
+            control_read=self.owner['control_read']
+        with patch.object(os,'dup',side_effect=self.collect_dup):
+            return self.guard['verify_stage_a_git_with_retained_controls'](None,self.record,time.monotonic()+10,
+                between_endpoints=between,control_read=control_read,stage_a_targets=self.targets,
+                read_stage_zero=self.read_stage_zero,admit_git_output=self.begin,record_git_output=self.record_output,
+                expected_owner_scope_sha256=SCOPE,verify_continuous_owner_scope=self.verify_scope,
+                git_output_maximum=8192,**options)
+
+    def test_one_opening_read_sweep_two_full_git_endpoints_and_original_IO_debit(self):
+        before,middle,after,receipt=self.run_paired()
+        self.assertEqual(before,after)
+        self.assertEqual(middle,'middle result')
+        self.assertEqual(len(self.git_calls),50)
+        self.assertEqual(self.git_calls[:25],self.git_calls[25:])
+        self.assertEqual(len(self.parser_calls),2)
+        self.assertIs(self.parser_calls[0],self.parser_calls[1])
+        self.assertEqual(self.phases,['before-opening','opening-complete','before-closing','closing-complete'])
+        self.assertEqual(len(self.report['inputs']),4)
+        self.assertEqual([row['actual_bytes'] for row in self.report['inputs']],[5,7,5,7])
+        self.assertEqual(self.spent['captures'],54)
+        self.assertEqual(self.spent['bytes'],24+sum(row['stdout_bytes'] for row in self.report['Git_calls']))
+        self.assertFalse(receipt['closing_fresh_control_body_read'])
+        self.assertEqual(receipt['closing_control_body_read_bytes'],0)
+        self.assertTrue(receipt['retained_descriptors_closed'])
+        self.assertEqual(len(self.duplicates),4)
+        self.closing_fds_are_closed()
+
+    def test_same_bytes_replaced_by_new_inode_refuses_and_closes(self):
+        path=Path(self.record['D_index']['path'])
+        def replace(_):
+            scratch=path.with_suffix('.new')
+            scratch.write_bytes(path.read_bytes())
+            os.replace(scratch,path)
+        with self.assertRaisesRegex(ValueError,'descriptor changed'):
+            self.run_paired(replace)
+        self.assertEqual(len(self.git_calls),25)
+        self.assertEqual(len(self.report['inputs']),4)
+        self.closing_fds_are_closed()
+
+    def test_change_with_restored_mtime_refuses(self):
+        path=Path(self.record['A_index']['path'])
+        def restore(_):
+            initial=path.stat()
+            time.sleep(0.002)
+            path.write_bytes(b'INDEX')
+            os.utime(path,ns=(initial.st_atime_ns,initial.st_mtime_ns))
+            self.assertEqual(path.stat().st_mtime_ns,initial.st_mtime_ns)
+            self.assertNotEqual(path.stat().st_ctime_ns,initial.st_ctime_ns)
+        with self.assertRaisesRegex(ValueError,'descriptor changed'):
+            self.run_paired(restore)
+        self.closing_fds_are_closed()
+
+    def test_terminal_ref_change_refuses_even_with_valid_retained_descriptors(self):
+        def drift(_):
+            self.changed_refs=True
+        with self.assertRaisesRegex(ValueError,'refs, tree or cleanliness changed'):
+            self.run_paired(drift)
+        self.assertGreater(len(self.git_calls),25)
+        self.assertLess(len(self.git_calls),50)
+        self.assertEqual(len(self.report['inputs']),4)
+        self.closing_fds_are_closed()
+
+    def test_loss_of_active_scope_refuses_without_new_source_reads(self):
+        self.scope_allowed=lambda phase: phase!='before-closing'
+        with self.assertRaisesRegex(ValueError,'continuous paired READ scope refused'):
+            self.run_paired()
+        self.assertEqual(len(self.git_calls),25)
+        self.assertEqual(len(self.report['inputs']),4)
+        self.closing_fds_are_closed()
+
+    def test_caller_failure_releases_all_original_descriptors(self):
+        def refuse(_):
+            raise RuntimeError('intervening original body read refused')
+        with self.assertRaisesRegex(RuntimeError,'intervening original'):
+            self.run_paired(refuse)
+        self.assertEqual(len(self.git_calls),25)
+        self.closing_fds_are_closed()
+
+    def test_no_duplication_from_a_reader_closing_before_callback(self):
+        def old(ref,kind,**kwargs):
+            return self.owner['control_read'](ref,kind)
+        with self.assertRaisesRegex(ValueError,'did not retain'):
+            self.run_paired(control_read=old)
+        self.assertEqual(len(self.report['inputs']),1)
+        self.assertEqual(self.duplicates,[])
+
+    def test_final_verifier_cannot_change_path_after_the_terminal_Git_checks(self):
+        path=Path(self.record['D_index']['path'])
+        def drift(phase):
+            if phase=='closing-complete':
+                path.write_bytes(b'INDEX')
+            return True
+        self.scope_allowed=drift
+        with self.assertRaisesRegex(ValueError,'descriptor changed'):
+            self.run_paired()
+        self.assertEqual(len(self.git_calls),50)
+        self.closing_fds_are_closed()
+
+    def test_opening_Git_observation_is_not_mutable_from_body_callback(self):
+        def mutate(opening):
+            opening[0]['git'].pop()
+        with self.assertRaisesRegex(ValueError,'opening Git endpoint changed'):
+            self.run_paired(mutate)
+        self.assertEqual(len(self.git_calls),25)
+        self.closing_fds_are_closed()
+
+    def test_literal_git_control_path_alias_refused(self):
+        parent=self.roots[0]/'.git'/'info'
+        renamed=parent.with_name('info-real')
+        def alias(_):
+            parent.rename(renamed)
+            parent.symlink_to(renamed,target_is_directory=True)
+        with self.assertRaisesRegex(ValueError,'descriptor changed'):
+            self.run_paired(alias)
+        self.closing_fds_are_closed()
+
+    def test_conditional_cost_reduces_only_second_control_body_sweep(self):
+        args,limits=price_scenario(self.guard)
+        price=self.guard['source32_paired_reader_reservation']
+        old=price(*args,**limits)
+        saved=price(*args,**limits,retain_terminal_git_controls=True)
+        self.assertEqual(old['logical_selected_bytes'],35_667_999)
+        self.assertEqual(saved['logical_selected_bytes'],24_263_931)
+        self.assertEqual(old['direct_source_bytes']-saved['direct_source_bytes'],11_404_068)
+        for key in ('git_output_allowance_bytes','control_probe_bytes','epoch_output_allowance_bytes'):
+            self.assertEqual(old[key],saved[key])
+        with self.assertRaisesRegex(ValueError,'Explicit same-owner terminal'):
+            price(*args,**limits,retain_terminal_git_controls=1)
+
+if __name__=='__main__':
+    unittest.main(verbosity=2)

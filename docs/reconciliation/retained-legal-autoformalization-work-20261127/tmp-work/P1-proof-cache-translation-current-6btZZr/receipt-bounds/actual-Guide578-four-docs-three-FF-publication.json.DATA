@@ -1,0 +1,68 @@
+{
+  "accelerate_published_head_preserved": true,
+  "actual_code_publication": {
+    "bytes": 15579,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-Phase7-receipt-bounds-ordinary22-three-FF-publication.json",
+    "sha256": "77d888220bff3b11a0781a314c78feb6151f9d89981150c5b2ca95fe10bb5004"
+  },
+  "actual_doc_Source_closed": {
+    "bytes": 6126,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-Guide578-four-docs-Source-closed-and-frozen.json",
+    "sha256": "a4316202c24862647a8d758f263f8835457dfbe4bfd5db2dbb3462f072012381"
+  },
+  "actual_ordinary22": {
+    "bytes": 5236,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-Phase7-current-receipt-bounds-ordinary22-closed.json",
+    "sha256": "c02ca0f02e331cef5a94b0cfa115fa01ed05405619026b37185d4b6096f7fa0c"
+  },
+  "evidence_ordinal": 578,
+  "live_main_after": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+    "hallucinate": "8587cc74bca7d37109133231fa17f0dff54628fc",
+    "root": "6edcf585c887c334972ef4a90c6de05fc0d4460e"
+  },
+  "live_main_before": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "0cf525e0d3070135547f145e87726dade3d70a1f",
+    "hallucinate": "08cc0850860309f4ff10d952c2fc6afbceb5746d",
+    "root": "6d53f2d8c970287139905f622837c776aa7596e5"
+  },
+  "only_four_docs": [
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json"
+  ],
+  "prior_values_preserved": {
+    "components": 126,
+    "evidence_records": 577,
+    "tasks": 24
+  },
+  "pushes_in_actual_order": [
+    {
+      "after": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+      "before": "0cf525e0d3070135547f145e87726dade3d70a1f",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "8587cc74bca7d37109133231fa17f0dff54628fc",
+      "before": "08cc0850860309f4ff10d952c2fc6afbceb5746d",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "6edcf585c887c334972ef4a90c6de05fc0d4460e",
+      "before": "6d53f2d8c970287139905f622837c776aa7596e5",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "schema": "actual-Guide578-four-docs-live-receipt-bounds-ordinary22-three-FF-publication/v1",
+  "shared_checkouts_preserved": true,
+  "terminal_returncode": 0
+}

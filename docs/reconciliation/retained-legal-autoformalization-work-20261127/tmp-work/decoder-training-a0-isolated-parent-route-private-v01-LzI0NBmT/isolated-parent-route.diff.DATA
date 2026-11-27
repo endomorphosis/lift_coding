@@ -1,0 +1,814 @@
+--- owner-driver.before.py.DATA
++++ owner-driver.py.DATA
+@@ -23,41 +23,178 @@
+  finally:os.close(fd)
+  assert f9(before)==f9(opened)==f9(ended)==f9(p.lstat())and len(raw)==reference['bytes']and H(raw)==reference['sha256']
+  return raw
+-assert len(sys.argv)==4,'one authenticated actual metadata binding CLI required'
+-EXECUTION_REFERENCE={'path':sys.argv[1],'bytes':int(sys.argv[2]),'sha256':sys.argv[3]}
+-EXECUTION=json.loads(exact_metadata(EXECUTION_REFERENCE))
+-assert set(EXECUTION)=={'schema','source_binding','control_binding','import_request','resource_opening','projects','charged_root','output_directory'}
+-assert EXECUTION['schema']=='actual-currentcopy-v11-vendor-import-existing-owner-driver-input/v1'
+-ROOT_SELECTION='Root selected SAME existing-owner fresh current-copy v11 vendor import; explicit digest-omitted objective, empty Adam0/new lineage, no old numeric parent or physical-launcher gate'
+-assert 'PENDING'not in ROOT_SELECTION
+-ACTUAL_BINDING_REFERENCE=EXECUTION['source_binding'];ACTUAL_BINDING=json.loads(exact_metadata(ACTUAL_BINDING_REFERENCE))
+-assert ACTUAL_BINDING['schema']=='actual-closed-world-six-file-legalmath-law-postCAS-binding/v1'and ACTUAL_BINDING['Root_selected']is True and ACTUAL_BINDING['actual_install_Source_WRITE_closed']is True
+-
+-
+-ROOT=Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01')
+-
+-CONTROL_DIR=Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01')
+-
+-PY='/home/barberb/.local/bin/python'
+-
+-FLAGS={'HF_HUB_OFFLINE': '1', 'IPFS_ACCEL_AUTO_INSTALL': '0', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS': '0', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS_SIMULATED': '0', 'IPFS_ACCEL_SKIP_CORE': '1', 'IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS': '0', 'IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI': '0', 'IPFS_DATASETS_PY_MINIMAL_IMPORTS': '1', 'IPFS_TEST_PROOF_REUSE_AUTO_INSTALL': '0', 'PYTEST_DISABLE_PLUGIN_AUTOLOAD': '1', 'PYTHONDONTWRITEBYTECODE': '1', 'PYTHONPATH': '/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_accelerate:/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01:/home/barberb/.local/lib/python3.12/site-packages', 'PYTHONUSERBASE': '/home/barberb/.local', 'RUN_HEAVY_TESTS': '0', 'RUN_LLM_TESTS': '0', 'RUN_LONG_TESTS': '0', 'RUN_NETWORK_TESTS': '0', 'TRANSFORMERS_OFFLINE': '1', 'GIT_CONFIG_GLOBAL': '/dev/null', 'GIT_CONFIG_NOSYSTEM': '1', 'BLIS_NUM_THREADS': '4', 'CUDA_VISIBLE_DEVICES': '', 'MKL_NUM_THREADS': '4', 'NUMEXPR_NUM_THREADS': '4', 'OMP_NUM_THREADS': '4', 'OMP_THREAD_LIMIT': '4', 'OPENBLAS_NUM_THREADS': '4', 'TOKENIZERS_PARALLELISM': 'false', 'VECLIB_MAXIMUM_THREADS': '4'}
+-
+-PATH_SCOPE='/home/barberb/.local/bin:/usr/lib/git-core'
+-
+-RUN_OUTPUT=Path(EXECUTION['output_directory']);CHARGED_ROOT=Path(EXECUTION['charged_root'])
+-for p in(RUN_OUTPUT,CHARGED_ROOT):assert p.is_absolute()and '..'not in p.parts and not os.path.lexists(p),'fresh actual owned output and charged roots required'
+-assert RUN_OUTPUT!=CHARGED_ROOT and CHARGED_ROOT not in RUN_OUTPUT.parents and RUN_OUTPUT not in CHARGED_ROOT.parents
+-RUN_OUTPUT.mkdir(mode=0o700);PARENT_HOME=RUN_OUTPUT/'parent-home';PARENT_HOME.mkdir(mode=0o700)
+-os.environ.clear();os.environ.update({'PATH':PATH_SCOPE,'LANG':'C.UTF-8','HOME':str(PARENT_HOME),'XDG_CONFIG_HOME':str(PARENT_HOME/'xdg-config'),'XDG_CACHE_HOME':str(PARENT_HOME/'xdg-cache'),'XDG_DATA_HOME':str(PARENT_HOME/'xdg-data'),'GH_CONFIG_DIR':str(PARENT_HOME/'gh-config'),'GIT_CONFIG_GLOBAL':'/dev/null','GIT_CONFIG_NOSYSTEM':'1'});os.environ.update(FLAGS)
+-epoch_reference=ACTUAL_BINDING['outer_epoch'];epoch_raw=exact_metadata(epoch_reference);EPOCH=json.loads(epoch_raw)
+-assert type(EPOCH)is list and 4192<=len(EPOCH)<=8192 and len(EPOCH)==ACTUAL_BINDING['outer_record_count']
+-python_reference=ACTUAL_BINDING['python_epoch'];python_epoch_raw=exact_metadata(python_reference);python_rows=json.loads(python_epoch_raw);epoch_by_path={row['path']:row for row in EPOCH}
+-assert len(epoch_by_path)==len(EPOCH)and len(python_rows)==ACTUAL_BINDING['python_record_count']and all(epoch_by_path.get(row['path'])==row for row in python_rows)
+-PROJECTS=EXECUTION['projects'];assert type(PROJECTS)is list and len(PROJECTS)==2 and all(set(project)=={'root','Git_HEAD'}and re.fullmatch('[0-9a-f]{40}',project['Git_HEAD'])for project in PROJECTS)
+-assert{project['root']for project in PROJECTS}=={str(ROOT),str(ROOT.parent/'ipfs_accelerate')}
+-EVIDENCE={key:ACTUAL_BINDING['protected_index'][key]for key in('path','full9')}
+-ABSENT_PATHS=[]
+-
++
++ISOLATED_PARENT_SCHEMA = "actual-selected-a0-isolated-existing-owner-parent/v1"
++ISOLATED_SOURCE_SCHEMA = "actual-selected-a0-paired-source-read-binding/v1"
++ISOLATED_RESERVATION_SCHEMA = "actual-selected-a0-original-resource-opening/v1"
++ISOLATED_PARENT_MODULES = ('ipfs_datasets_py.logic.backends.process',
++    'ipfs_datasets_py.logic.backends.resource_admission',
++    'ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler',
++    'ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_daemon_resources')
++
++def _selected_parent_path(value):
++ return type(value) is str and Path(value).is_absolute() and '..' not in Path(value).parts and str(Path(value)) == value
++
++def _selected_parent_digest(value):
++ return type(value) is str and re.fullmatch('[0-9a-f]{64}', value) is not None
++
++def _selected_parent_json(reference):
++ raw=exact_metadata(reference)
++ def unique(pairs):
++  result={}
++  for name,value in pairs:
++   if name in result:
++    raise ValueError("duplicate selected parent metadata key")
++   result[name]=value
++  return result
++ return json.loads(raw,object_pairs_hook=unique),raw
++
++def isolated_parent_fingerprint(selected, owner):
++ controls={key:value for key,value in selected.items() if key not in ('fingerprint','epoch_raw','launch_raw','root')}
++ return (H(json.dumps(controls,sort_keys=True,separators=(',',':')).encode()),
++         H(selected['epoch_raw']),H(selected['launch_raw']),str(selected['root']),
++         owner['origin_owner'].origin_commitment(owner['origin']),
++         id(owner['origin_owner']),id(owner['renderer']),id(owner['renderer']['run_relational_origin_first_use']),
++         id(owner['verify_opening']),id(owner['verify_control_binding']),id(owner['verify_launch_owner']))
++
++def prepare_isolated_parent(execution, execution_ref, owner):
++ """Authenticate parent inputs before the existing driver opens its live custody."""
++ from copy import deepcopy
++ if (type(execution) is not dict or set(execution) != {'schema','source_binding','control_binding',
++       'resource_opening','launch_selection','projects','charged_root','output_directory'}
++     or execution['schema'] != ISOLATED_PARENT_SCHEMA
++     or type(owner) is not dict or set(owner) != {'origin_owner','origin','renderer',
++           'verify_opening','verify_control_binding','verify_launch_owner'}
++     or any(not callable(owner[key]) for key in ('verify_opening','verify_control_binding','verify_launch_owner'))
++     or type(owner['renderer']) is not dict or not callable(owner['renderer'].get('run_relational_origin_first_use'))):
++  raise ValueError("explicit existing owner and exact isolated parent input required")
++ sealed_execution,execution_raw=_selected_parent_json(execution_ref)
++ if sealed_execution!=execution:
++  raise ValueError("selected isolated parent execution input changed")
++ source, _ = _selected_parent_json(execution['source_binding'])
++ control, _ = _selected_parent_json(execution['control_binding'])
++ opening, _ = _selected_parent_json(execution['resource_opening'])
++ launch, launch_raw = _selected_parent_json(execution['launch_selection'])
++ if (type(source) is not dict or source.get('schema') != ISOLATED_SOURCE_SCHEMA
++     or set(source) != {'schema','datasets_root','projects','outer_epoch','protected_index','absent_paths','paired_reader_close','parent_module_sha256'}
++     or not _selected_parent_path(source['datasets_root'])):
++  raise ValueError("exact current paired Source binding required")
++ projects=source['projects']
++ if (type(projects) is not list or len(projects)!=2 or projects!=execution['projects']
++     or any(type(p) is not dict or set(p)!={'root','Git_HEAD'} or not _selected_parent_path(p['root'])
++            or type(p['Git_HEAD']) is not str or re.fullmatch('[0-9a-f]{40}',p['Git_HEAD']) is None for p in projects)
++     or len({p['root'] for p in projects})!=2 or source['datasets_root'] not in {p['root'] for p in projects}):
++  raise ValueError("current paired project roots and Git HEADs differ")
++ roots={Path(p['root']) for p in projects}
++ if any(root.resolve(strict=True)!=root for root in roots):
++  raise ValueError("paired project roots must have their selected resolved identities")
++ if any(a != b and a.is_relative_to(b) for a in roots for b in roots):
++  raise ValueError("paired project roots must be separate")
++ for field in ('charged_root','output_directory'):
++  if (not _selected_parent_path(execution[field])
++      or Path(execution[field]).resolve()!=Path(execution[field])
++      or any(Path(execution[field]).is_relative_to(root) for root in roots)):
++   raise ValueError("private charged and output paths must be outside selected Source roots")
++ epoch, epoch_raw = _selected_parent_json(source['outer_epoch'])
++ _selected_parent_json(source['paired_reader_close'])
++ evidence=source['protected_index']
++ absent=source['absent_paths']
++ def row_stamp(full9):
++  return (type(full9) is dict and set(full9)==set(fields)
++          and all(type(value) is str and re.fullmatch('[0-9]+', value) is not None for value in full9.values()))
++ if (type(epoch) is not list or not 0<len(epoch)<=8192
++     or any(type(row) is not dict or not _selected_parent_path(row.get('path'))
++            or type(row.get('bytes')) is not int or row['bytes']<0 or not _selected_parent_digest(row.get('sha256'))
++            or not row_stamp(row.get('full9')) or row['full9']['st_size']!=str(row['bytes'])
++            or sum(Path(row['path']).is_relative_to(root) for root in roots)!=1 for row in epoch)
++     or len({row['path'] for row in epoch})!=len(epoch)
++     or type(evidence) is not dict or set(evidence)!={'path','full9','sha256'}
++     or not _selected_parent_path(evidence['path']) or not row_stamp(evidence['full9'])
++     or not _selected_parent_digest(evidence['sha256'])
++     or type(absent) is not list or any(not _selected_parent_path(path)
++          or not any(Path(path).is_relative_to(root) for root in roots) for path in absent)
++     or len(set(absent))!=len(absent) or set(absent).intersection(row['path'] for row in epoch)):
++  raise ValueError("current paired Source full9, protected index or absence roster differs")
++ parent_module_sha256=source['parent_module_sha256']
++ by_path={row['path']:row for row in epoch}
++ index_row=by_path.get(evidence['path'])
++ if index_row is not None and any(index_row[key]!=evidence[key] for key in ('sha256','full9')):
++  raise ValueError("protected index and paired Source row differ")
++ if (type(parent_module_sha256) is not dict or set(parent_module_sha256)!=set(ISOLATED_PARENT_MODULES)
++     or any(not _selected_parent_digest(digest)
++            or by_path.get(str(Path(source['datasets_root'])/(name.replace('.','/')+'.py')),{}).get('sha256')!=digest
++            for name,digest in parent_module_sha256.items())):
++  raise ValueError("exact current parent module pins must match the paired Source epoch")
++ numeric={'storage_bytes','storage_limit_bytes','memory_mb','cpu_slots','child_process_slots',
++          'timeout_seconds','ledger_lock_timeout_seconds'}
++ if (type(opening) is not dict or set(opening)!=(numeric | {'schema','state_path','resource_ledger',
++          'roots','expected_scheduler_policy_sha256','environment'})
++     or opening['schema'] != ISOLATED_RESERVATION_SCHEMA
++     or any(type(opening[field]) is not int or opening[field]<=0 for field in numeric)
++     or not all(_selected_parent_path(opening[key]) for key in ('state_path','resource_ledger'))
++     or not _selected_parent_digest(opening['expected_scheduler_policy_sha256'])
++     or type(opening['roots']) is not list or not opening['roots']
++     or any(not _selected_parent_path(root) for root in opening['roots'])
++     or len(set(opening['roots']))!=len(opening['roots'])
++     or opening['storage_bytes']>opening['storage_limit_bytes']
++     or not any(Path(execution['charged_root']).is_relative_to(Path(root)) for root in opening['roots'])):
++  raise ValueError("exact existing ledger, scheduler and charged reservation selection required")
++ environment=opening['environment']
++ if (type(environment) is not dict or any(type(key) is not str or type(value) is not str for key,value in environment.items())
++     or not all(environment.get(key) == value for key,value in {
++         'HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1','IPFS_DATASETS_PY_MINIMAL_IMPORTS':'1',
++         'IPFS_ACCEL_AUTO_INSTALL':'0','IPFS_ACCEL_SKIP_CORE':'1','IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS':'0',
++         'IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI':'0','PYTHONDONTWRITEBYTECODE':'1'}.items())
++     or environment.get('PYTHONOPTIMIZE','') not in ('','0')
++     or not set(map(str,roots)).issubset(environment.get('PYTHONPATH','').split(os.pathsep))):
++  raise ValueError("exact approved offline parent and renderer environment required")
++ origin_sha=owner['origin_owner'].origin_commitment(owner['origin'])
++ if (type(control) is not dict or control.get('origin_selection_sha256')!=origin_sha
++     or control.get('source_epoch_reference')!=source['outer_epoch']
++     or control.get('cwd')!=source['datasets_root']
++     or control.get('attempt_directory')!=str(Path(execution['charged_root'])/'attempt')
++     or not _selected_parent_path(control.get('python'))
++     or not _selected_parent_digest(control.get('owner_admission_sha256'))
++     or type(control.get('limits')) is not dict
++     or any(type(control['limits'].get(key)) is not int or not 0<control['limits'][key]<=bound
++            for key,bound in {'resident_memory_bytes':opening['memory_mb']*1024**2,
++                              'max_workspace_bytes':opening['storage_bytes']}.items())
++     or type(launch) is not dict or launch.get('origin_selection_sha256')!=origin_sha
++     or launch.get('source_epoch_sha256')!=source['outer_epoch']['sha256']
++     or launch.get('control_binding_sha256')!=execution['control_binding']['sha256']
++     or not all(_selected_parent_digest(launch.get(key)) for key in ('physical_request_sha256','clock_domain_sha256'))):
++  raise ValueError("selected control, launch, resource or origin does not bind the paired Source epoch")
++ selected={'root':Path(source['datasets_root']),'projects':projects,'environment':environment,
++     'epoch_reference':source['outer_epoch'],'epoch':epoch,'epoch_raw':epoch_raw,'control':control,
++     'evidence':{key:evidence[key] for key in ('path','full9')},'protected_index_sha256':evidence['sha256'],
++     'absent_paths':absent,'opening':opening,'paired_close':source['paired_reader_close'],'launch_raw':launch_raw,
++     'launch_reference':dict(execution['launch_selection']), 'parent_module_sha256':parent_module_sha256,
++     'control_reference':dict(execution['control_binding'])}
++ # The original verifier authenticates the paired reader close and the selected
++ # index path even when Git metadata is tracked outside the regular Source roster.
++ fingerprint=isolated_parent_fingerprint(selected, owner)
++ references=(dict(execution_ref),dict(execution['source_binding']),dict(execution['resource_opening']),
++             dict(source['paired_reader_close']),dict(execution['control_binding']),dict(execution['launch_selection']))
++ if owner['verify_opening'](*(ref['sha256'] for ref in references),control['owner_admission_sha256'],origin_sha) is not True:
++  raise ValueError("original owner refused the selected parent opening")
++ if (isolated_parent_fingerprint(selected,owner)!=fingerprint or exact_metadata(execution_ref)!=execution_raw
++     or execution!=sealed_execution):
++  raise ValueError("selected isolated parent opening changed during verification")
++ for ref in references[1:]:
++  exact_metadata(ref)
++ selected['fingerprint']=fingerprint
++ return selected
++
++def dispatch_isolated_parent(selected, execution, owner):
++ if (selected['fingerprint']!=isolated_parent_fingerprint(selected,owner)
++     or execution['launch_selection']!=selected['launch_reference']
++     or execution['control_binding']!=selected['control_reference']):
++  raise ValueError("selected isolated dispatch scope changed after parent admission")
++ report['isolated_origin_dispatch_attempted']=True
++ return run_selected_isolated_origin(owner['origin'],origin_owner=owner['origin_owner'],
++     actual_control_binding_reference=dict(selected['control_reference']),verify_control_binding=owner['verify_control_binding'],
++     launch_raw=selected['launch_raw'],expected_launch_sha256=selected['launch_reference']['sha256'],
++     verify_launch_owner=owner['verify_launch_owner'])
+ 
+ source42={'bytes': 10375, 'encoding': 'zlib+base64', 'path': '/tmp/legal-ir-phase2-reviewed-admission-source-20261108-v01/resource-census-compatible-port-v01/runtime-owner-v4-trainer-compatibility-v01/current-published-cleanup71-original16MiB-input-v01/original42-frozen.py', 'raw_zlib_base64': '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', 'sha256': '42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9'}
+ 
+@@ -69,8 +206,6 @@
+  mod=importlib.util.module_from_spec(spec);sys.modules[name]=mod
+  exec(compile(raw,record["path"],"exec"),mod.__dict__)
+  return mod
+-
+-source=load_cached_operational(source42,'selected_ordinary_source42_owner')
+ 
+ def metadata_guard():
+  for path in ABSENT_PATHS:assert not os.path.lexists(path),("declared namespace absence changed",path)
+@@ -100,9 +235,6 @@
+  assert d["workspace_cleaned"] and not d["error"],d
+  assert d.get("native_lifecycle",{}).get("cleanup_confirmed") is True,d
+  return d
+-
+-report={'marker':'ACTUAL_CURRENTCOPY_DIGEST_OMITTED_VENDOR_IMPORT_EXISTING_OWNER_V1','selection':ROOT_SELECTION,'scope':'Fresh local vendor bits, same current-copy T3 DATA ancestry, explicit digest-omitted v11 objective, BF16/new Adam0/new lineage; no forward, training, generation or model-quality claim.','node':'Fresh digest-omitted current-copy vendor initialization','run':None,'collection':None,'errors':[],'tests_dispatched':[],'source_epoch':ACTUAL_BINDING['outer_epoch'],'source_epoch_binding':ACTUAL_BINDING['outer_epoch'],'Python_source_epoch_binding':ACTUAL_BINDING['python_epoch'],'protected_index_sha256':ACTUAL_BINDING['protected_index']['sha256'],'actual_postCAS_binding_reference':ACTUAL_BINDING_REFERENCE,'source_install_receipt':ACTUAL_BINDING['source_install_receipt'],'actual_driver_input_reference':EXECUTION_REFERENCE,'resource_cleanup_confirmed':False,'Source_closed':False,'actual_sdk_results_retained_before_assertions':True,'input_file_manifest':[],'statutory_or_modelquality_or_convergence_authority':False,'large_vendor_initialization_requested':True,'training_requested':False,'no_old_numeric_parent':True,'preexisting_orphan_or_old_unknown_wrapper_requalified':False}
+-
+ 
+ def run_test_with_actual_custody(request, *, origin_owner=None, origin_selection=None,
+                                  expected_origin_request_sha256=None, first_use_attempt_raw=None,
+@@ -342,12 +474,6 @@
+ 
+ import importlib
+ 
+-STATE=Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase2-whole-norm-source-use-onebuild-preparation-v01/selected-whole-norm-source-use-Native-output-v01/native-resource-scheduler.json')
+-
+-report['actual_resource_state_path']=str(STATE);report['actual_parent_lease']=None
+-parent=None;reservation=None
+-
+-
+ def observe_control_and_CAS_metadata(database,artifact_root):
+  pool=disk._inventory([artifact_root],strict=True)
+  observed=database.lstat();assert stat.S_ISREG(observed.st_mode)and observed.st_nlink==1
+@@ -366,232 +492,339 @@
+    return {'full9':f9(after),'bytes':len(raw),'sha256':H(raw),'state':json.loads(raw)}
+  raise RuntimeError('bounded resource snapshot identity changed')
+ 
+-OBJECTIVE={'evaluation_request_schema': 'reviewed-source-evaluation-request/v11', 'generation_policy_schema': 'reviewed-decoder-digest-omitted-generation-policy/v1', 'recipe_schema': 'reviewed-local-digest-omitted-decoder-recipe/v1', 'runtime_profile': 'builtin-qwen2-bfloat16/v1', 'target_codec': 'complete-reviewed-norm-digest-omitted-json/v1', 'training_conditioning_profile': 'qwen2-chatml-digest-omitted-legal-ir/v1'}
+-
+-ACTUAL_IDS={'experiment_id': 'qwen25-digest-omitted-T3-lr1e-5-v01', 'base_version_id': 'qwen25-digest-omitted-vendor-pristine-v01', 'checkpoint_lineage_id': 'qwen25-digest-omitted-T3-three-updates-v01', 'evaluation_request_id': 'qwen25-digest-omitted-Q3-matched-v01'}
+-
+-SELECTED_SOURCE5={'worker': '65d55a34f097a4b673464ef59b87942274e65eb5083ea79d01759f8df16372f2', 'inputs': '7fbcfeb40e6f0d68537d0601169fbc208c3b6ca36273d786a85d876720323afb', 'consumer': 'ff8b61f71280f4c5d1d413feab33d5f9498f3cf560755492eafbbb0348d0bc82', 'admission': '1249dc93b2a6208f152c08f3bab5706acc272fa93663a58f0f87924e80d172be', 'splits': '7963ebcb291c0476f0cccc4123e28a519187970f02dbd9059fce78e661287c3c'}
+-
+-FACTORY_REFERENCE={'bytes': 17859, 'path': '/tmp/digest-omitted-v11-vendor-import-current-registry-join-private-v04/bind-existing-owner-explicit-objective-request.after.py.DATA', 'sha256': 'd7454c7ea9f6f6e55f4c1ead26df72672aed143efb0e869ed02eb7b2ffd618c0'}
+-
+-PROGRAM_REFERENCE={'bytes': 40143, 'path': '/tmp/digest-omitted-v11-vendor-import-current-registry-join-private-v04/import.after.py.DATA', 'sha256': '4a7d50a9c2a66abf93459c6db6a09094792ba0948f4be0f339ceb817a0a79848'}
+-
+-ENTRY_REFERENCE={'bytes': 1997, 'path': '/tmp/digest-omitted-v11-vendor-import-current-registry-join-private-v04/import.entry.after.py.DATA', 'sha256': 'ea413ae7114e120123548966703907ac431fff740ca05b4334aa146e15bcb3b6'}
+-
+-MANIFEST_REFERENCE={'bytes': 5075, 'path': '/tmp/digest-omitted-v11-vendor-import-current-registry-join-private-v04/fresh-import-program-entry-manifest.after.json', 'sha256': 'fdca1b4dd828f013da144df9049585745df487653ebada4f5e4e8ea5a09463c5'}
+-
+-# COMPLETE caller-selected metadata setup is performed before Daemon entry.
+-common_raw=exact_metadata(EXECUTION['control_binding']);common=json.loads(common_raw)
+-request_data=json.loads(exact_metadata(EXECUTION['import_request']));opening=json.loads(exact_metadata(EXECUTION['resource_opening']))
+-assert common['schema']=='actual-selected-existing-owner-fresh-digest-omitted-control-binding/v1'and common['objective']==OBJECTIVE and request_data['objective']==OBJECTIVE
+-assert all(common[key]==request_data[key]==value for key,value in ACTUAL_IDS.items())
+-assert common['actual_complete_Source_epoch_reference']==ACTUAL_BINDING['outer_epoch']and common['actual_protected_index_metadata']==ACTUAL_BINDING['protected_index']
+-assert common['actual_selected_Source5']==SELECTED_SOURCE5
+-assert common['actual_selected_inference_sha256']==common['expected_inference_source_sha256']==request_data['expected_inference_source_sha256']=='413cabdaae3c28321215fe418b450013fdd07ac94dde6e0c39d08de5cde3c6f3'
+-assert common['attempt_directory']==request_data['attempt_directory']==str(CHARGED_ROOT/'attempt')
+-assert request_data['cwd']==str(ROOT)and request_data['lineage_mode']=='fresh-vendor-empty-adam-no-parent/v1'
+-paths={'worker':'ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py','inputs':'ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py','consumer':'ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py','admission':'ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py','splits':'ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py'}
+-assert all(epoch_by_path[str(ROOT/path)]['sha256']==SELECTED_SOURCE5[name]for name,path in paths.items())
+-assert epoch_by_path[str(ROOT/'ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_process_worker.py')]['sha256']=='080f42aa310e2aede90b95c8e4a98564cf1885c27c46ba12a7d6e45e955df71a'
+-factory_raw=exact_metadata(FACTORY_REFERENCE);program_raw=exact_metadata(PROGRAM_REFERENCE);exact_metadata(ENTRY_REFERENCE);exact_metadata(MANIFEST_REFERENCE)
+-factory_namespace={'__name__':'existing_v11_import_request_substitution','__file__':FACTORY_REFERENCE['path']};exec(compile(factory_raw,FACTORY_REFERENCE['path'],'exec'),factory_namespace)
+-assert factory_namespace['_select_fresh_objective'](OBJECTIVE)==OBJECTIVE
+-# Only selected bounded metadata refs are read; model/tokenizer/license/weight bodies are not preflighted here.
+-metadata_cache={};metadata_references=[]
+-def load_operation_metadata(reference):
+- raw=exact_metadata(reference);value=json.loads(raw);metadata_cache[(reference['path'],reference['bytes'],reference['sha256'])]=value;metadata_references.append(reference);return value
+-for key,value in request_data.items():
+- if key.endswith('_artifact')and value is not None:load_operation_metadata(value)
+-closed=load_operation_metadata(common['closed_registry_artifact']);controlled_before=load_operation_metadata(common['controlled_registry_artifact'])
+-closed_database_reference=closed['database'];assert controlled_before['database_artifact_after_close']==closed_database_reference and controlled_before['closed_owner_generation']==closed['closed_owner_generation']
+-assert type(closed['closed_owner_generation'])is int and closed['closed_owner_generation']>=9
+-stage=load_operation_metadata(common['T3_stage_witness_artifact']);assert stage['stage_source_pins']==SELECTED_SOURCE5
+-import ast as _ast
+-_program_ast=_ast.parse(program_raw.decode());_current_copy=next(n for n in _program_ast.body if isinstance(n,_ast.FunctionDef)and n.name=='_validate_current_copy_restaging')
+-_current_namespace={'Path':Path};exec(compile(_ast.Module(body=[_current_copy],type_ignores=[]),PROGRAM_REFERENCE['path'],'exec'),_current_namespace)
+-report['actual_current_copy_metadata_preflight']=_current_namespace['_validate_current_copy_restaging'](request_data,load_operation_metadata)
+-qualified=load_operation_metadata(request_data['original_asset_qualification_artifact']);qualified_close=load_operation_metadata(qualified['closeout']);asset_receipt=load_operation_metadata(qualified['asset_receipt'])
+-assert qualified['whole_payload_digest_matches_immutable_LFS']and qualified['header_matches_closed_metadata']and qualified['storage_released_and_durable']
+-assert qualified_close['source_closed']is True and qualified_close['original_owner_custody']['returncode']==0 and not qualified_close['original_owner_custody']['errors']
+-assert asset_receipt['repository']=='Qwen/Qwen2.5-0.5B-Instruct'and asset_receipt['revision']=='7ae557604adf67be50417f59c2c2f167def9a775'
+-assert {'model.safetensors','config.json','tokenizer_config.json','tokenizer.json','LICENSE'}.issubset(asset_receipt['assets'])
+-growth_database=Path(closed_database_reference['path']);growth_pool=Path(controlled_before['artifact_root'])
+-assert all(any(path==Path(root)or Path(root)in path.parents for root in opening['roots'])for path in(growth_database,growth_pool))
+-report['actual_selected_Source5']=SELECTED_SOURCE5;report['objective_selection']=OBJECTIVE;report['actual_ids']=ACTUAL_IDS
+-report['selected_small_metadata_preflight']={'references':metadata_references,'reference_count':len(metadata_references),'all_selected_references_byte_SHA_F9_authenticated':True,'operational_JSON_ordinary_parse':True,'no_asset_weight_or_DB_body_read':True,'same_factory_and_current_copy_program_helper':True,'complete_caller_metadata_setup_before_Daemon':True,'scope':'Caller-selected bounded metadata and exact rendered factory setup only; not a claim every later numerical-owner branch has executed.'}
+-
+-
+-@contextlib.contextmanager
+-def tracked_source_read(project):
+-    manager = source.source_lease(project['root'], mode='read', timeout_seconds=30)
+-    lease = manager.__enter__()
+-    observation = {'root': project['root'], 'entered': True, 'exit_returned': False}
+-    report.setdefault('actual_Source_context_closure', []).append(observation)
++def run_existing_owner(execution_reference, *, isolated_owner=None):
++ if __debug__ is not True:
++  raise RuntimeError("the existing driver requires Python assertions")
++ global report, RUN_OUTPUT, CHARGED_ROOT, ABSENT_PATHS, STATE, EPOCH, PROJECTS, EVIDENCE
++ global epoch_raw, epoch_reference, factory_namespace, sdk, disk, runner, result
++ global PY, FLAGS, _owner_invoked
++ if globals().get('_owner_invoked') is True:
++  raise RuntimeError("one existing owner attempt per birth parent")
++ _owner_invoked=True
++ EXECUTION_REFERENCE=execution_reference
++ EXECUTION=json.loads(exact_metadata(EXECUTION_REFERENCE))
++ isolated = EXECUTION.get('schema') == ISOLATED_PARENT_SCHEMA
++ if isolated:
++  selected = prepare_isolated_parent(EXECUTION, EXECUTION_REFERENCE, isolated_owner)
++  PY=selected['control']['python']
++  FLAGS=selected['environment']
++ else:
++  if isolated_owner is not None:
++   raise ValueError("isolated owner callbacks require explicit isolated parent selection")
++  assert set(EXECUTION)=={'schema','source_binding','control_binding','import_request','resource_opening','projects','charged_root','output_directory'}
++  assert EXECUTION['schema']=='actual-currentcopy-v11-vendor-import-existing-owner-driver-input/v1'
++  ROOT_SELECTION='Root selected SAME existing-owner fresh current-copy v11 vendor import; explicit digest-omitted objective, empty Adam0/new lineage, no old numeric parent or physical-launcher gate'
++  assert 'PENDING'not in ROOT_SELECTION
++  ACTUAL_BINDING_REFERENCE=EXECUTION['source_binding'];ACTUAL_BINDING=json.loads(exact_metadata(ACTUAL_BINDING_REFERENCE))
++  assert ACTUAL_BINDING['schema']=='actual-closed-world-six-file-legalmath-law-postCAS-binding/v1'and ACTUAL_BINDING['Root_selected']is True and ACTUAL_BINDING['actual_install_Source_WRITE_closed']is True
++
++  ROOT=Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01')
++  CONTROL_DIR=Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01')
++  PY='/home/barberb/.local/bin/python'
++  FLAGS={'HF_HUB_OFFLINE': '1', 'IPFS_ACCEL_AUTO_INSTALL': '0', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS': '0', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS_SIMULATED': '0', 'IPFS_ACCEL_SKIP_CORE': '1', 'IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS': '0', 'IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI': '0', 'IPFS_DATASETS_PY_MINIMAL_IMPORTS': '1', 'IPFS_TEST_PROOF_REUSE_AUTO_INSTALL': '0', 'PYTEST_DISABLE_PLUGIN_AUTOLOAD': '1', 'PYTHONDONTWRITEBYTECODE': '1', 'PYTHONPATH': '/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_accelerate:/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01:/home/barberb/.local/lib/python3.12/site-packages', 'PYTHONUSERBASE': '/home/barberb/.local', 'RUN_HEAVY_TESTS': '0', 'RUN_LLM_TESTS': '0', 'RUN_LONG_TESTS': '0', 'RUN_NETWORK_TESTS': '0', 'TRANSFORMERS_OFFLINE': '1', 'GIT_CONFIG_GLOBAL': '/dev/null', 'GIT_CONFIG_NOSYSTEM': '1', 'BLIS_NUM_THREADS': '4', 'CUDA_VISIBLE_DEVICES': '', 'MKL_NUM_THREADS': '4', 'NUMEXPR_NUM_THREADS': '4', 'OMP_NUM_THREADS': '4', 'OMP_THREAD_LIMIT': '4', 'OPENBLAS_NUM_THREADS': '4', 'TOKENIZERS_PARALLELISM': 'false', 'VECLIB_MAXIMUM_THREADS': '4'}
++ PATH_SCOPE='/home/barberb/.local/bin:/usr/lib/git-core'
++ RUN_OUTPUT=Path(EXECUTION['output_directory']);CHARGED_ROOT=Path(EXECUTION['charged_root'])
++ for p in(RUN_OUTPUT,CHARGED_ROOT):assert p.is_absolute()and '..'not in p.parts and not os.path.lexists(p),'fresh actual owned output and charged roots required'
++ assert RUN_OUTPUT!=CHARGED_ROOT and CHARGED_ROOT not in RUN_OUTPUT.parents and RUN_OUTPUT not in CHARGED_ROOT.parents
++ RUN_OUTPUT.mkdir(mode=0o700);PARENT_HOME=RUN_OUTPUT/'parent-home';PARENT_HOME.mkdir(mode=0o700)
++ os.environ.clear();os.environ.update({'PATH':PATH_SCOPE,'LANG':'C.UTF-8','HOME':str(PARENT_HOME),'XDG_CONFIG_HOME':str(PARENT_HOME/'xdg-config'),'XDG_CACHE_HOME':str(PARENT_HOME/'xdg-cache'),'XDG_DATA_HOME':str(PARENT_HOME/'xdg-data'),'GH_CONFIG_DIR':str(PARENT_HOME/'gh-config'),'GIT_CONFIG_GLOBAL':'/dev/null','GIT_CONFIG_NOSYSTEM':'1'});os.environ.update(FLAGS)
++
++ if isolated:
++  ROOT=selected['root']
++  PROJECTS=selected['projects']
++  epoch_reference=selected['epoch_reference']
++  epoch_raw=selected['epoch_raw']
++  EPOCH=selected['epoch']
++  epoch_by_path={row['path']:row for row in EPOCH}
++  EVIDENCE=selected['evidence']
++  ABSENT_PATHS=selected['absent_paths']
++  opening=selected['opening']
++  report={'marker':'ACTUAL_SELECTED_A0_ISOLATED_IMPORT_EXISTING_OWNER_V1',
++          'selection':'original owner-selected isolated source-only import',
++          'run':None,'collection':None,'errors':[],'tests_dispatched':[],
++          'source_epoch':epoch_reference,'source_epoch_binding':epoch_reference,
++          'actual_driver_input_reference':EXECUTION_REFERENCE,
++          'actual_paired_Source_close_reference':selected['paired_close'],
++          'protected_index_sha256':selected['protected_index_sha256'],
++          'resource_cleanup_confirmed':False,'Source_closed':False,
++          'statutory_or_modelquality_or_convergence_authority':False}
++ else:
++  epoch_reference=ACTUAL_BINDING['outer_epoch'];epoch_raw=exact_metadata(epoch_reference);EPOCH=json.loads(epoch_raw)
++  assert type(EPOCH)is list and 4192<=len(EPOCH)<=8192 and len(EPOCH)==ACTUAL_BINDING['outer_record_count']
++  python_reference=ACTUAL_BINDING['python_epoch'];python_epoch_raw=exact_metadata(python_reference);python_rows=json.loads(python_epoch_raw);epoch_by_path={row['path']:row for row in EPOCH}
++  assert len(epoch_by_path)==len(EPOCH)and len(python_rows)==ACTUAL_BINDING['python_record_count']and all(epoch_by_path.get(row['path'])==row for row in python_rows)
++  PROJECTS=EXECUTION['projects'];assert type(PROJECTS)is list and len(PROJECTS)==2 and all(set(project)=={'root','Git_HEAD'}and re.fullmatch('[0-9a-f]{40}',project['Git_HEAD'])for project in PROJECTS)
++  assert{project['root']for project in PROJECTS}=={str(ROOT),str(ROOT.parent/'ipfs_accelerate')}
++  EVIDENCE={key:ACTUAL_BINDING['protected_index'][key]for key in('path','full9')}
++  ABSENT_PATHS=[]
++  report={'marker':'ACTUAL_CURRENTCOPY_DIGEST_OMITTED_VENDOR_IMPORT_EXISTING_OWNER_V1','selection':ROOT_SELECTION,'scope':'Fresh local vendor bits, same current-copy T3 DATA ancestry, explicit digest-omitted v11 objective, BF16/new Adam0/new lineage; no forward, training, generation or model-quality claim.','node':'Fresh digest-omitted current-copy vendor initialization','run':None,'collection':None,'errors':[],'tests_dispatched':[],'source_epoch':ACTUAL_BINDING['outer_epoch'],'source_epoch_binding':ACTUAL_BINDING['outer_epoch'],'Python_source_epoch_binding':ACTUAL_BINDING['python_epoch'],'protected_index_sha256':ACTUAL_BINDING['protected_index']['sha256'],'actual_postCAS_binding_reference':ACTUAL_BINDING_REFERENCE,'source_install_receipt':ACTUAL_BINDING['source_install_receipt'],'actual_driver_input_reference':EXECUTION_REFERENCE,'resource_cleanup_confirmed':False,'Source_closed':False,'actual_sdk_results_retained_before_assertions':True,'input_file_manifest':[],'statutory_or_modelquality_or_convergence_authority':False,'large_vendor_initialization_requested':True,'training_requested':False,'no_old_numeric_parent':True,'preexisting_orphan_or_old_unknown_wrapper_requalified':False}
++ source=load_cached_operational(source42,'selected_ordinary_source42_owner')
++
++ STATE=Path(opening['state_path']) if isolated else Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase2-whole-norm-source-use-onebuild-preparation-v01/selected-whole-norm-source-use-Native-output-v01/native-resource-scheduler.json')
++ report['actual_resource_state_path']=str(STATE);report['actual_parent_lease']=None
++ parent=None;reservation=None
++
++ if isolated:
++  factory_namespace=isolated_owner['renderer']
++  if selected['fingerprint'] != isolated_parent_fingerprint(selected, isolated_owner):
++   raise ValueError("selected isolated parent inputs changed before Source entry")
++ else:
++  OBJECTIVE={'evaluation_request_schema': 'reviewed-source-evaluation-request/v11', 'generation_policy_schema': 'reviewed-decoder-digest-omitted-generation-policy/v1', 'recipe_schema': 'reviewed-local-digest-omitted-decoder-recipe/v1', 'runtime_profile': 'builtin-qwen2-bfloat16/v1', 'target_codec': 'complete-reviewed-norm-digest-omitted-json/v1', 'training_conditioning_profile': 'qwen2-chatml-digest-omitted-legal-ir/v1'}
++
++  ACTUAL_IDS={'experiment_id': 'qwen25-digest-omitted-T3-lr1e-5-v01', 'base_version_id': 'qwen25-digest-omitted-vendor-pristine-v01', 'checkpoint_lineage_id': 'qwen25-digest-omitted-T3-three-updates-v01', 'evaluation_request_id': 'qwen25-digest-omitted-Q3-matched-v01'}
++
++  SELECTED_SOURCE5={'worker': '65d55a34f097a4b673464ef59b87942274e65eb5083ea79d01759f8df16372f2', 'inputs': '7fbcfeb40e6f0d68537d0601169fbc208c3b6ca36273d786a85d876720323afb', 'consumer': 'ff8b61f71280f4c5d1d413feab33d5f9498f3cf560755492eafbbb0348d0bc82', 'admission': '1249dc93b2a6208f152c08f3bab5706acc272fa93663a58f0f87924e80d172be', 'splits': '7963ebcb291c0476f0cccc4123e28a519187970f02dbd9059fce78e661287c3c'}
++
++  FACTORY_REFERENCE={'bytes': 17859, 'path': '/tmp/digest-omitted-v11-vendor-import-current-registry-join-private-v04/bind-existing-owner-explicit-objective-request.after.py.DATA', 'sha256': 'd7454c7ea9f6f6e55f4c1ead26df72672aed143efb0e869ed02eb7b2ffd618c0'}
++
++  PROGRAM_REFERENCE={'bytes': 40143, 'path': '/tmp/digest-omitted-v11-vendor-import-current-registry-join-private-v04/import.after.py.DATA', 'sha256': '4a7d50a9c2a66abf93459c6db6a09094792ba0948f4be0f339ceb817a0a79848'}
++
++  ENTRY_REFERENCE={'bytes': 1997, 'path': '/tmp/digest-omitted-v11-vendor-import-current-registry-join-private-v04/import.entry.after.py.DATA', 'sha256': 'ea413ae7114e120123548966703907ac431fff740ca05b4334aa146e15bcb3b6'}
++
++  MANIFEST_REFERENCE={'bytes': 5075, 'path': '/tmp/digest-omitted-v11-vendor-import-current-registry-join-private-v04/fresh-import-program-entry-manifest.after.json', 'sha256': 'fdca1b4dd828f013da144df9049585745df487653ebada4f5e4e8ea5a09463c5'}
++
++  # COMPLETE caller-selected metadata setup is performed before Daemon entry.
++  common_raw=exact_metadata(EXECUTION['control_binding']);common=json.loads(common_raw)
++  request_data=json.loads(exact_metadata(EXECUTION['import_request']));opening=json.loads(exact_metadata(EXECUTION['resource_opening']))
++  assert common['schema']=='actual-selected-existing-owner-fresh-digest-omitted-control-binding/v1'and common['objective']==OBJECTIVE and request_data['objective']==OBJECTIVE
++  assert all(common[key]==request_data[key]==value for key,value in ACTUAL_IDS.items())
++  assert common['actual_complete_Source_epoch_reference']==ACTUAL_BINDING['outer_epoch']and common['actual_protected_index_metadata']==ACTUAL_BINDING['protected_index']
++  assert common['actual_selected_Source5']==SELECTED_SOURCE5
++  assert common['actual_selected_inference_sha256']==common['expected_inference_source_sha256']==request_data['expected_inference_source_sha256']=='413cabdaae3c28321215fe418b450013fdd07ac94dde6e0c39d08de5cde3c6f3'
++  assert common['attempt_directory']==request_data['attempt_directory']==str(CHARGED_ROOT/'attempt')
++  assert request_data['cwd']==str(ROOT)and request_data['lineage_mode']=='fresh-vendor-empty-adam-no-parent/v1'
++  paths={'worker':'ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py','inputs':'ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py','consumer':'ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py','admission':'ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py','splits':'ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py'}
++  assert all(epoch_by_path[str(ROOT/path)]['sha256']==SELECTED_SOURCE5[name]for name,path in paths.items())
++  assert epoch_by_path[str(ROOT/'ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_process_worker.py')]['sha256']=='080f42aa310e2aede90b95c8e4a98564cf1885c27c46ba12a7d6e45e955df71a'
++  factory_raw=exact_metadata(FACTORY_REFERENCE);program_raw=exact_metadata(PROGRAM_REFERENCE);exact_metadata(ENTRY_REFERENCE);exact_metadata(MANIFEST_REFERENCE)
++  factory_namespace={'__name__':'existing_v11_import_request_substitution','__file__':FACTORY_REFERENCE['path']};exec(compile(factory_raw,FACTORY_REFERENCE['path'],'exec'),factory_namespace)
++  assert factory_namespace['_select_fresh_objective'](OBJECTIVE)==OBJECTIVE
++  # Only selected bounded metadata refs are read; model/tokenizer/license/weight bodies are not preflighted here.
++  metadata_cache={};metadata_references=[]
++  def load_operation_metadata(reference):
++   raw=exact_metadata(reference);value=json.loads(raw);metadata_cache[(reference['path'],reference['bytes'],reference['sha256'])]=value;metadata_references.append(reference);return value
++  for key,value in request_data.items():
++   if key.endswith('_artifact')and value is not None:load_operation_metadata(value)
++  closed=load_operation_metadata(common['closed_registry_artifact']);controlled_before=load_operation_metadata(common['controlled_registry_artifact'])
++  closed_database_reference=closed['database'];assert controlled_before['database_artifact_after_close']==closed_database_reference and controlled_before['closed_owner_generation']==closed['closed_owner_generation']
++  assert type(closed['closed_owner_generation'])is int and closed['closed_owner_generation']>=9
++  stage=load_operation_metadata(common['T3_stage_witness_artifact']);assert stage['stage_source_pins']==SELECTED_SOURCE5
++  import ast as _ast
++  _program_ast=_ast.parse(program_raw.decode());_current_copy=next(n for n in _program_ast.body if isinstance(n,_ast.FunctionDef)and n.name=='_validate_current_copy_restaging')
++  _current_namespace={'Path':Path};exec(compile(_ast.Module(body=[_current_copy],type_ignores=[]),PROGRAM_REFERENCE['path'],'exec'),_current_namespace)
++  report['actual_current_copy_metadata_preflight']=_current_namespace['_validate_current_copy_restaging'](request_data,load_operation_metadata)
++  qualified=load_operation_metadata(request_data['original_asset_qualification_artifact']);qualified_close=load_operation_metadata(qualified['closeout']);asset_receipt=load_operation_metadata(qualified['asset_receipt'])
++  assert qualified['whole_payload_digest_matches_immutable_LFS']and qualified['header_matches_closed_metadata']and qualified['storage_released_and_durable']
++  assert qualified_close['source_closed']is True and qualified_close['original_owner_custody']['returncode']==0 and not qualified_close['original_owner_custody']['errors']
++  assert asset_receipt['repository']=='Qwen/Qwen2.5-0.5B-Instruct'and asset_receipt['revision']=='7ae557604adf67be50417f59c2c2f167def9a775'
++  assert {'model.safetensors','config.json','tokenizer_config.json','tokenizer.json','LICENSE'}.issubset(asset_receipt['assets'])
++  growth_database=Path(closed_database_reference['path']);growth_pool=Path(controlled_before['artifact_root'])
++  assert all(any(path==Path(root)or Path(root)in path.parents for root in opening['roots'])for path in(growth_database,growth_pool))
++  report['actual_selected_Source5']=SELECTED_SOURCE5;report['objective_selection']=OBJECTIVE;report['actual_ids']=ACTUAL_IDS
++  report['selected_small_metadata_preflight']={'references':metadata_references,'reference_count':len(metadata_references),'all_selected_references_byte_SHA_F9_authenticated':True,'operational_JSON_ordinary_parse':True,'no_asset_weight_or_DB_body_read':True,'same_factory_and_current_copy_program_helper':True,'complete_caller_metadata_setup_before_Daemon':True,'scope':'Caller-selected bounded metadata and exact rendered factory setup only; not a claim every later numerical-owner branch has executed.'}
++
++  opening=dict(opening, state_path=str(STATE), storage_bytes=12884901888,
++               memory_mb=12288, cpu_slots=4, child_process_slots=1,
++               timeout_seconds=600, ledger_lock_timeout_seconds=180, storage_limit_bytes=280000000000)
++ @contextlib.contextmanager
++ def tracked_source_read(project):
++     manager = source.source_lease(project['root'], mode='read', timeout_seconds=30)
++     lease = manager.__enter__()
++     observation = {'root': project['root'], 'entered': True, 'exit_returned': False}
++     report.setdefault('actual_Source_context_closure', []).append(observation)
++     try:
++         yield lease
++     except BaseException:
++         suppressed = manager.__exit__(*sys.exc_info())
++         observation['exit_returned'] = True
++         if not suppressed:
++             raise
++     else:
++         manager.__exit__(None, None, None)
++         observation['exit_returned'] = True
++
++ try:
++  with contextlib.ExitStack()as stack:
++   leases=[stack.enter_context(tracked_source_read(project))for project in sorted(PROJECTS,key=lambda q:str(source.canonical_source_root(q['root'])))]
++   report['Source_leases']=[lease.to_dict()for lease in leases]
++   try:
++    report['source_before']=metadata_guard()
++    sys.path[:0]=FLAGS['PYTHONPATH'].split(os.pathsep)
++    sdk=importlib.import_module('ipfs_datasets_py.logic.backends.process')
++    admitted=importlib.import_module('ipfs_datasets_py.logic.backends.resource_admission')
++    resources=importlib.import_module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler')
++    disk=importlib.import_module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_daemon_resources')
++    assert sdk.ToolRunRequest is admitted.ToolRunRequest and sdk.ToolRunResult is admitted.ToolRunResult
++    assert admitted.GlobalResourceScheduler is resources.GlobalResourceScheduler
++    module_pins={'ipfs_datasets_py.logic.backends.process':('ipfs_datasets_py/logic/backends/process.py','4434f571e209c17165aa3ea941001bbeaad3efc10957a8dfe9c183f7531b44b6'),'ipfs_datasets_py.logic.backends.resource_admission':('ipfs_datasets_py/logic/backends/resource_admission.py','5fcddd981835a7fa618c202f8de4c52a41777af74aae8a7f65fb4cb8b275edc9'),'ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler':('ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py','7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3'),'ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_daemon_resources':('ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py','278cdfbc3d33a21caef7ee71eb7141574e7c409ac802ae8998e3cb2db67c32c0')}
++    if isolated:
++     module_pins={name:(name.replace('.','/')+'.py',selected['parent_module_sha256'][name]) for name in ISOLATED_PARENT_MODULES}
++    report['canonical_module_bindings']={}
++    for name,(relative,digest)in module_pins.items():
++     mod=sys.modules[name];path=ROOT/relative;row=epoch_by_path[str(path)]
++     assert Path(mod.__file__).resolve()==path.resolve()and row['sha256']==digest and f9(path.lstat())==row['full9']
++     report['canonical_module_bindings'][name]={'path':str(path),'epoch_sha256':digest,'full9':row['full9']}
++
++    if isolated:
++     report['isolated_control_reference']=dict(EXECUTION['control_binding'])
++     report['isolated_launch_reference']=dict(EXECUTION['launch_selection'])
++    else:
++     request=factory_namespace['make_low_lr_control_request']('import',request_data,sdk=sdk,python=PY,environment=FLAGS,actual_control_binding_reference=EXECUTION['control_binding'],objective=OBJECTIVE)
++     import dataclasses as _request_dataclasses
++     factory_limits=_request_dataclasses.asdict(request.limits)
++     request=_request_dataclasses.replace(request,limits=_request_dataclasses.replace(request.limits,resident_memory_bytes=12884901888))
++     actual_limits=_request_dataclasses.asdict(request.limits)
++     assert factory_limits['resident_memory_bytes']==34359738368 and actual_limits['resident_memory_bytes']==12884901888
++     assert{key:value for key,value in factory_limits.items()if key!='resident_memory_bytes'}=={key:value for key,value in actual_limits.items()if key!='resident_memory_bytes'}
++     report['explicit_initializer_resource_adjustment']={'factory_limits':factory_limits,'actual_SDK_limits':actual_limits,'parent_memory_mb':12288,'parent_CPU_slots':4,'parent_child_process_slots':1,'same_ledger_storage_limit_bytes':280000000000,'same_storage_promise_bytes':12884901888,'same_prewrite_external_growth_charge_bytes':67108864,'scheduler_wait_seconds_after_census':600,'ledger_lock_timeout_seconds':180,'total_admission_wall_bound_claimed':False,'scope':'Constructor600 bounds post-census scheduler wait; the separate SAME public resource_admission_deadline bounds productive reservation entry600 including census, with original180 cleanup allowance. Context ends before SDK. Nonpreemptible OS IO is not hard realtime.'}
++     actual_rendered_request=json.loads(request.input_files['request.json'])
++     assert actual_rendered_request['objective']==OBJECTIVE and actual_rendered_request['source_sha256']=={row['path']:row['sha256']for row in EPOCH}
++     report['input_file_manifest']=[{'path':name,'bytes':len(raw),'sha256':H(raw)}for name,raw in request.input_files.items()]
++     report['actual_rendered_operation_request']=actual_rendered_request
++     report['metadata_and_actual_factory_setup_completed_before_Daemon']=True
++    report['resource_before']=observe_state()
++    if not isolated:
++     config=resources.ResourceSchedulerConfig(state_path=str(STATE),**report['resource_before']['state']['config'])
++     scheduler=resources.get_global_resource_scheduler(config=config)
++    reservation=disk.DaemonResourceReservation(opening['resource_ledger'],roots=opening['roots'],
++        storage_bytes=opening['storage_bytes'],memory_mb=opening['memory_mb'],cpu_slots=opening['cpu_slots'],
++        child_process_slots=opening['child_process_slots'],timeout_seconds=opening['timeout_seconds'],
++        ledger_lock_timeout_seconds=opening['ledger_lock_timeout_seconds'],scheduler_state_path=str(STATE),
++        expected_scheduler_policy_sha256=opening['expected_scheduler_policy_sha256'],require_existing_ledger=True,
++        storage_limit_bytes=opening['storage_limit_bytes'])
++    print(json.dumps({'event':'ACTUAL_EXISTING_DAEMON_ADMISSION_BEGIN','operator_pid':os.getpid(),'state_path':str(STATE),'charged_root':str(CHARGED_ROOT),'explicit_same_ledger_storage_limit_bytes':opening['storage_limit_bytes']}),flush=True)
++    admission_started=time.monotonic()
++    admission_work_deadline=admission_started+float(opening['timeout_seconds'])
++    admission_native_deadline=admission_work_deadline+float(opening['ledger_lock_timeout_seconds'])
++    inherited_admission_deadline=resources.resource_operation_deadline()
++    if inherited_admission_deadline is not None:
++     admission_work_deadline=min(admission_work_deadline,inherited_admission_deadline.work_deadline_monotonic)
++     admission_native_deadline=min(admission_native_deadline,inherited_admission_deadline.native_deadline_monotonic)
++    report['resource_admission_clock']={'scope':'reservation entry only; context ends before SDK','start_monotonic':admission_started,'work_deadline_monotonic':admission_work_deadline,'native_deadline_monotonic':admission_native_deadline,'constructor_native_wait_ceiling_seconds':opening['timeout_seconds'],'productive_budget_seconds':opening['timeout_seconds'],'cleanup_allowance_seconds':opening['ledger_lock_timeout_seconds'],'inherited_deadline_clipped':inherited_admission_deadline is not None,'hard_realtime_bound':False}
+     try:
+-        yield lease
+-    except BaseException:
+-        suppressed = manager.__exit__(*sys.exc_info())
+-        observation['exit_returned'] = True
+-        if not suppressed:
+-            raise
++     with resources.resource_admission_deadline(work_deadline_monotonic=admission_work_deadline,native_deadline_monotonic=admission_native_deadline):
++      stack.enter_context(reservation)
++    finally:
++     admission_elapsed=time.monotonic()-admission_started
++     observed_native_wait=reservation._lease.to_dict()['wait_seconds']if reservation._lease is not None else None
++     report['resource_admission_timing']={'reservation_entry_elapsed_seconds':admission_elapsed,'scheduler_native_wait_seconds':observed_native_wait,'exact_census_elapsed_seconds':None,'non_native_wait_entry_elapsed_seconds':max(0.0,admission_elapsed-observed_native_wait)if observed_native_wait is not None else None,'non_native_wait_scope':'includes census, ledger IO and reservation bookkeeping; not an exact census measurement','failure_without_lease_has_no_measured_native_wait':reservation._lease is None}
++    parent=reservation._lease
++    CHARGED_ROOT.mkdir(parents=True,mode=0o700);(CHARGED_ROOT/'attempt'/'exports').mkdir(parents=True,mode=0o700)
++    report['actual_disk_reservation']=reservation.to_dict()
++    try:report['initial_persistent_usage']=reservation.check_usage(CHARGED_ROOT,child_pid=None)
++    except disk.DaemonResourceError as error:
++     observed=disk._bounded_cleanup_failure_observation('failure_retention',error,reservation.lock_path,origin_owner=reservation)
++     if type(error)is not disk.DaemonResourceError or observed['reason_code']!='ledger_lock_unavailable' or observed['lock_observation_status']!='accepted':raise
++     report['initial_usage_original_owner_lock_timeout_retry_once']=observed;report['initial_persistent_usage']=reservation.check_usage(CHARGED_ROOT,child_pid=None)
++    if not isolated:
++     def retained_artifact(reference,snapshot_to=None):
++         path=Path(reference['path']);before=path.lstat();assert stat.S_ISREG(before.st_mode)and before.st_nlink==1 and before.st_uid==os.getuid()and before.st_size==reference['bytes']
++         fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW);digest=hashlib.sha256();count=0;snapshot=None
++         try:
++          opened=os.fstat(fd);assert f9(before)==f9(opened)
++          if snapshot_to is not None:snapshot=open(snapshot_to,'xb')
++          while True:
++           chunk=os.read(fd,1024**2)
++           if not chunk:break
++           count+=len(chunk);digest.update(chunk)
++           if snapshot is not None:snapshot.write(chunk)
++          ended=os.fstat(fd)
++          if snapshot is not None:snapshot.flush();os.fsync(snapshot.fileno())
++         finally:
++          os.close(fd)
++          if snapshot is not None:snapshot.close()
++         after=path.lstat();assert f9(before)==f9(opened)==f9(ended)==f9(after)and count==reference['bytes']and digest.hexdigest()==reference['sha256']
++         result={'artifact':reference,'full9':f9(after),'path_FD_after_stable':True}
++         if snapshot_to is not None:
++          os.chmod(snapshot_to,0o400);result['immutable_actual_pre_import_database_snapshot']={'path':str(snapshot_to),'bytes':count,'sha256':digest.hexdigest(),'full9':f9(Path(snapshot_to).lstat())}
++         return result
++     report['actual_current_database_before_fresh_vendor_import']=retained_artifact(closed_database_reference,CHARGED_ROOT/'closed-pre-import-control.duckdb')
++     report['external_control_and_CAS_growth_before']=observe_control_and_CAS_metadata(growth_database,growth_pool)
++     report['prewrite_external_control_and_CAS_growth_allowance']=reservation.account_external_bytes('current-control-and-CAS-growth-allowance-v1',64*1024**2)
++
++    report['actual_parent_lease']=parent.to_dict()
++    runner=admitted.ResourceAdmittedToolRunner(parent_lease=parent,cpu_slots=opening['cpu_slots'],
++        child_process_slots=opening['child_process_slots'],base_environment={'PATH':PATH_SCOPE,'LANG':'C.UTF-8'},
++        executable_roots=('/usr/bin','/home/barberb/.local/bin'))
++    if isolated:
++     result=dispatch_isolated_parent(selected, EXECUTION, isolated_owner)
++     genuine(result)
++     report['isolated_origin_preclose_completed']=True
+     else:
+-        manager.__exit__(None, None, None)
+-        observation['exit_returned'] = True
+-
+-try:
+- with contextlib.ExitStack()as stack:
+-  leases=[stack.enter_context(tracked_source_read(project))for project in sorted(PROJECTS,key=lambda q:str(source.canonical_source_root(q['root'])))]
+-  report['Source_leases']=[lease.to_dict()for lease in leases]
+-  try:
+-   report['source_before']=metadata_guard()
+-   sys.path[:0]=FLAGS['PYTHONPATH'].split(os.pathsep)
+-   sdk=importlib.import_module('ipfs_datasets_py.logic.backends.process')
+-   admitted=importlib.import_module('ipfs_datasets_py.logic.backends.resource_admission')
+-   resources=importlib.import_module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler')
+-   disk=importlib.import_module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_daemon_resources')
+-   assert sdk.ToolRunRequest is admitted.ToolRunRequest and sdk.ToolRunResult is admitted.ToolRunResult
+-   assert admitted.GlobalResourceScheduler is resources.GlobalResourceScheduler
+-   module_pins={'ipfs_datasets_py.logic.backends.process':('ipfs_datasets_py/logic/backends/process.py','4434f571e209c17165aa3ea941001bbeaad3efc10957a8dfe9c183f7531b44b6'),'ipfs_datasets_py.logic.backends.resource_admission':('ipfs_datasets_py/logic/backends/resource_admission.py','5fcddd981835a7fa618c202f8de4c52a41777af74aae8a7f65fb4cb8b275edc9'),'ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler':('ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py','7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3'),'ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_daemon_resources':('ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py','278cdfbc3d33a21caef7ee71eb7141574e7c409ac802ae8998e3cb2db67c32c0')}
+-   report['canonical_module_bindings']={}
+-   for name,(relative,digest)in module_pins.items():
+-    mod=sys.modules[name];path=ROOT/relative;row=epoch_by_path[str(path)]
+-    assert Path(mod.__file__).resolve()==path.resolve()and row['sha256']==digest and f9(path.lstat())==row['full9']
+-    report['canonical_module_bindings'][name]={'path':str(path),'epoch_sha256':digest,'full9':row['full9']}
+-   request=factory_namespace['make_low_lr_control_request']('import',request_data,sdk=sdk,python=PY,environment=FLAGS,actual_control_binding_reference=EXECUTION['control_binding'],objective=OBJECTIVE)
+-   import dataclasses as _request_dataclasses
+-   factory_limits=_request_dataclasses.asdict(request.limits)
+-   request=_request_dataclasses.replace(request,limits=_request_dataclasses.replace(request.limits,resident_memory_bytes=12884901888))
+-   actual_limits=_request_dataclasses.asdict(request.limits)
+-   assert factory_limits['resident_memory_bytes']==34359738368 and actual_limits['resident_memory_bytes']==12884901888
+-   assert{key:value for key,value in factory_limits.items()if key!='resident_memory_bytes'}=={key:value for key,value in actual_limits.items()if key!='resident_memory_bytes'}
+-   report['explicit_initializer_resource_adjustment']={'factory_limits':factory_limits,'actual_SDK_limits':actual_limits,'parent_memory_mb':12288,'parent_CPU_slots':4,'parent_child_process_slots':1,'same_ledger_storage_limit_bytes':280000000000,'same_storage_promise_bytes':12884901888,'same_prewrite_external_growth_charge_bytes':67108864,'scheduler_wait_seconds_after_census':600,'ledger_lock_timeout_seconds':180,'total_admission_wall_bound_claimed':False,'scope':'Constructor600 bounds post-census scheduler wait; the separate SAME public resource_admission_deadline bounds productive reservation entry600 including census, with original180 cleanup allowance. Context ends before SDK. Nonpreemptible OS IO is not hard realtime.'}
+-   actual_rendered_request=json.loads(request.input_files['request.json'])
+-   assert actual_rendered_request['objective']==OBJECTIVE and actual_rendered_request['source_sha256']=={row['path']:row['sha256']for row in EPOCH}
+-   report['input_file_manifest']=[{'path':name,'bytes':len(raw),'sha256':H(raw)}for name,raw in request.input_files.items()]
+-   report['actual_rendered_operation_request']=actual_rendered_request
+-   report['metadata_and_actual_factory_setup_completed_before_Daemon']=True
+-   report['resource_before']=observe_state()
+-   config=resources.ResourceSchedulerConfig(state_path=str(STATE),**report['resource_before']['state']['config'])
+-   scheduler=resources.get_global_resource_scheduler(config=config)
+-   reservation=disk.DaemonResourceReservation(opening['resource_ledger'],roots=opening['roots'],storage_bytes=12884901888,memory_mb=12288,cpu_slots=4,child_process_slots=1,timeout_seconds=600,ledger_lock_timeout_seconds=180,scheduler_state_path=str(STATE),expected_scheduler_policy_sha256=opening['expected_scheduler_policy_sha256'],require_existing_ledger=True,storage_limit_bytes=280000000000)
+-   print(json.dumps({'event':'ACTUAL_EXISTING_DAEMON_ADMISSION_BEGIN','operator_pid':os.getpid(),'state_path':str(STATE),'charged_root':str(CHARGED_ROOT),'explicit_same_ledger_storage_limit_bytes':280000000000}),flush=True)
+-   admission_started=time.monotonic()
+-   admission_work_deadline=admission_started+600.0
+-   admission_native_deadline=admission_work_deadline+180.0
+-   inherited_admission_deadline=resources.resource_operation_deadline()
+-   if inherited_admission_deadline is not None:
+-    admission_work_deadline=min(admission_work_deadline,inherited_admission_deadline.work_deadline_monotonic)
+-    admission_native_deadline=min(admission_native_deadline,inherited_admission_deadline.native_deadline_monotonic)
+-   report['resource_admission_clock']={'scope':'reservation entry only; context ends before SDK','start_monotonic':admission_started,'work_deadline_monotonic':admission_work_deadline,'native_deadline_monotonic':admission_native_deadline,'constructor_native_wait_ceiling_seconds':600,'productive_budget_seconds':600,'cleanup_allowance_seconds':180,'inherited_deadline_clipped':inherited_admission_deadline is not None,'hard_realtime_bound':False}
+-   try:
+-    with resources.resource_admission_deadline(work_deadline_monotonic=admission_work_deadline,native_deadline_monotonic=admission_native_deadline):
+-     stack.enter_context(reservation)
++     print(json.dumps({'event':'ACTUAL_CURRENTCOPY_V11_VENDOR_IMPORT_START','operator_pid':os.getpid(),'actual_parent_lease_id':parent.lease_id}),flush=True)
++     report['tests_dispatched'].append('one fresh current-copy digest-omitted v11 vendor initialization through existing numerical owner')
++     result=run_test_with_actual_custody(request)
++     report['external_control_and_CAS_growth_after']=observe_control_and_CAS_metadata(growth_database,growth_pool)
++     growth_before=report['external_control_and_CAS_growth_before'];growth_after=report['external_control_and_CAS_growth_after']
++     database_growth=max(0,growth_after['database']['bytes']-growth_before['database']['bytes']);pool_growth=max(0,growth_after['pool_inventory']['apparent_bytes']-growth_before['pool_inventory']['apparent_bytes'])
++     report['measured_external_control_and_CAS_growth']={'database_positive_growth_bytes':database_growth,'pool_positive_growth_bytes':pool_growth,'total_positive_growth_bytes':database_growth+pool_growth,'prewrite_allowance_bytes':64*1024**2,'within_prewrite_allowance':database_growth+pool_growth<=64*1024**2,'full_prewrite_charge_retained_no_refund':True,'scope':'bounded metadata only; no extra model/weight/object body reads'}
++     assert report['measured_external_control_and_CAS_growth']['within_prewrite_allowance'],'external current-control/CAS growth exceeds selected prewrite allowance'
++     report['source_after_run']=metadata_guard();genuine(result)
++     assert result.returncode==0,('actual fresh current-copy v11 vendor import refused or failed',result.returncode)
++     outputs={key:json.loads(value)for key,value in result.output_files.items()if key.endswith('.json')}
++     assert set(result.output_files)=={'source-observation.json','config.json','license-apache2.txt','recipe.json','tokenizer.json','retention.json','explicit-ChatML-source-lineage.json','authored-admission-transport.json','current-reviewed-source-request.json','controlled-registry.json','prepared-pair.json'}
++     imported=outputs['prepared-pair.json'];record=outputs['controlled-registry.json'];correspondence=imported['tensor_correspondence']
++     assert imported['parameters_imported']==494032768 and imported['stored_tensor_count']==len(correspondence)==290
++     assert all(row['bit_equal']is True for row in correspondence)and imported['all_stored_parameters_bit_equal']is True and imported['tied_output_embedding_preserved']is True
++     assert imported['optimizer_steps']==0 and imported['fresh_Adam_state_empty']is True and imported['configuration_identity']['optimizer_groups'][0]['lr']==.00001
++     assert imported['schema']=='actual-pinned-Qwen25-digest-omitted-pristine-checkpoint-pair/v1'and imported['expected_source_sha256']==SELECTED_SOURCE5 and imported['objective_selection']==OBJECTIVE
++     assert all(imported[name]==value for name,value in ACTUAL_IDS.items()if name!='evaluation_request_id')
++     assert imported['numeric_parent_checkpoint_accepted']is False and imported['historical_pair_and_baseline_are_DATA_only']is True
++     assert not any(imported[name]for name in('model_forward_executed','model_weights_downloaded','training_performed','model_or_legal_quality_qualified'))
++     assert record['closed_owner_generation']==closed['closed_owner_generation']+1 and record['models_staged_in_registry']is False
++     current_request=outputs['current-reviewed-source-request.json'];assert current_request['schema']==OBJECTIVE['evaluation_request_schema']and current_request['generation_policy']['schema']==OBJECTIVE['generation_policy_schema']and current_request['generation_policy']['target_codec']==OBJECTIVE['target_codec']and current_request['generation_policy']['conditioning_profile']==OBJECTIVE['training_conditioning_profile']
++     assert current_request['request_id']==ACTUAL_IDS['evaluation_request_id']and current_request['generation_policy']['max_generation_seconds']==1200.0 and current_request['max_output_tokens']==16384
++     report['actual_pristine_import_pair']=imported;report['actual_current_controlled_registry']=record;report['actual_source_observation']=outputs['source-observation.json'];report['actual_fresh_vendor_import_completed']=True
+    finally:
+-    admission_elapsed=time.monotonic()-admission_started
+-    observed_native_wait=reservation._lease.to_dict()['wait_seconds']if reservation._lease is not None else None
+-    report['resource_admission_timing']={'reservation_entry_elapsed_seconds':admission_elapsed,'scheduler_native_wait_seconds':observed_native_wait,'exact_census_elapsed_seconds':None,'non_native_wait_entry_elapsed_seconds':max(0.0,admission_elapsed-observed_native_wait)if observed_native_wait is not None else None,'non_native_wait_scope':'includes census, ledger IO and reservation bookkeeping; not an exact census measurement','failure_without_lease_has_no_measured_native_wait':reservation._lease is None}
+-   parent=reservation._lease
+-   CHARGED_ROOT.mkdir(parents=True,mode=0o700);(CHARGED_ROOT/'attempt'/'exports').mkdir(parents=True,mode=0o700)
+-   report['actual_disk_reservation']=reservation.to_dict()
+-   try:report['initial_persistent_usage']=reservation.check_usage(CHARGED_ROOT,child_pid=None)
+-   except disk.DaemonResourceError as error:
+-    observed=disk._bounded_cleanup_failure_observation('failure_retention',error,reservation.lock_path,origin_owner=reservation)
+-    if type(error)is not disk.DaemonResourceError or observed['reason_code']!='ledger_lock_unavailable' or observed['lock_observation_status']!='accepted':raise
+-    report['initial_usage_original_owner_lock_timeout_retry_once']=observed;report['initial_persistent_usage']=reservation.check_usage(CHARGED_ROOT,child_pid=None)
+-   def retained_artifact(reference,snapshot_to=None):
+-       path=Path(reference['path']);before=path.lstat();assert stat.S_ISREG(before.st_mode)and before.st_nlink==1 and before.st_uid==os.getuid()and before.st_size==reference['bytes']
+-       fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW);digest=hashlib.sha256();count=0;snapshot=None
+-       try:
+-        opened=os.fstat(fd);assert f9(before)==f9(opened)
+-        if snapshot_to is not None:snapshot=open(snapshot_to,'xb')
+-        while True:
+-         chunk=os.read(fd,1024**2)
+-         if not chunk:break
+-         count+=len(chunk);digest.update(chunk)
+-         if snapshot is not None:snapshot.write(chunk)
+-        ended=os.fstat(fd)
+-        if snapshot is not None:snapshot.flush();os.fsync(snapshot.fileno())
+-       finally:
+-        os.close(fd)
+-        if snapshot is not None:snapshot.close()
+-       after=path.lstat();assert f9(before)==f9(opened)==f9(ended)==f9(after)and count==reference['bytes']and digest.hexdigest()==reference['sha256']
+-       result={'artifact':reference,'full9':f9(after),'path_FD_after_stable':True}
+-       if snapshot_to is not None:
+-        os.chmod(snapshot_to,0o400);result['immutable_actual_pre_import_database_snapshot']={'path':str(snapshot_to),'bytes':count,'sha256':digest.hexdigest(),'full9':f9(Path(snapshot_to).lstat())}
+-       return result
+-   report['actual_current_database_before_fresh_vendor_import']=retained_artifact(closed_database_reference,CHARGED_ROOT/'closed-pre-import-control.duckdb')
+-   report['external_control_and_CAS_growth_before']=observe_control_and_CAS_metadata(growth_database,growth_pool)
+-   report['prewrite_external_control_and_CAS_growth_allowance']=reservation.account_external_bytes('current-control-and-CAS-growth-allowance-v1',64*1024**2)
+-   report['actual_parent_lease']=parent.to_dict()
+-   runner=admitted.ResourceAdmittedToolRunner(parent_lease=parent,cpu_slots=4,child_process_slots=1,base_environment={'PATH':PATH_SCOPE,'LANG':'C.UTF-8'},executable_roots=('/usr/bin','/home/barberb/.local/bin'))
+-   print(json.dumps({'event':'ACTUAL_CURRENTCOPY_V11_VENDOR_IMPORT_START','operator_pid':os.getpid(),'actual_parent_lease_id':parent.lease_id}),flush=True)
+-   report['tests_dispatched'].append('one fresh current-copy digest-omitted v11 vendor initialization through existing numerical owner')
+-   result=run_test_with_actual_custody(request)
+-   report['external_control_and_CAS_growth_after']=observe_control_and_CAS_metadata(growth_database,growth_pool)
+-   growth_before=report['external_control_and_CAS_growth_before'];growth_after=report['external_control_and_CAS_growth_after']
+-   database_growth=max(0,growth_after['database']['bytes']-growth_before['database']['bytes']);pool_growth=max(0,growth_after['pool_inventory']['apparent_bytes']-growth_before['pool_inventory']['apparent_bytes'])
+-   report['measured_external_control_and_CAS_growth']={'database_positive_growth_bytes':database_growth,'pool_positive_growth_bytes':pool_growth,'total_positive_growth_bytes':database_growth+pool_growth,'prewrite_allowance_bytes':64*1024**2,'within_prewrite_allowance':database_growth+pool_growth<=64*1024**2,'full_prewrite_charge_retained_no_refund':True,'scope':'bounded metadata only; no extra model/weight/object body reads'}
+-   assert report['measured_external_control_and_CAS_growth']['within_prewrite_allowance'],'external current-control/CAS growth exceeds selected prewrite allowance'
+-   report['source_after_run']=metadata_guard();genuine(result)
+-   assert result.returncode==0,('actual fresh current-copy v11 vendor import refused or failed',result.returncode)
+-   outputs={key:json.loads(value)for key,value in result.output_files.items()if key.endswith('.json')}
+-   assert set(result.output_files)=={'source-observation.json','config.json','license-apache2.txt','recipe.json','tokenizer.json','retention.json','explicit-ChatML-source-lineage.json','authored-admission-transport.json','current-reviewed-source-request.json','controlled-registry.json','prepared-pair.json'}
+-   imported=outputs['prepared-pair.json'];record=outputs['controlled-registry.json'];correspondence=imported['tensor_correspondence']
+-   assert imported['parameters_imported']==494032768 and imported['stored_tensor_count']==len(correspondence)==290
+-   assert all(row['bit_equal']is True for row in correspondence)and imported['all_stored_parameters_bit_equal']is True and imported['tied_output_embedding_preserved']is True
+-   assert imported['optimizer_steps']==0 and imported['fresh_Adam_state_empty']is True and imported['configuration_identity']['optimizer_groups'][0]['lr']==.00001
+-   assert imported['schema']=='actual-pinned-Qwen25-digest-omitted-pristine-checkpoint-pair/v1'and imported['expected_source_sha256']==SELECTED_SOURCE5 and imported['objective_selection']==OBJECTIVE
+-   assert all(imported[name]==value for name,value in ACTUAL_IDS.items()if name!='evaluation_request_id')
+-   assert imported['numeric_parent_checkpoint_accepted']is False and imported['historical_pair_and_baseline_are_DATA_only']is True
+-   assert not any(imported[name]for name in('model_forward_executed','model_weights_downloaded','training_performed','model_or_legal_quality_qualified'))
+-   assert record['closed_owner_generation']==closed['closed_owner_generation']+1 and record['models_staged_in_registry']is False
+-   current_request=outputs['current-reviewed-source-request.json'];assert current_request['schema']==OBJECTIVE['evaluation_request_schema']and current_request['generation_policy']['schema']==OBJECTIVE['generation_policy_schema']and current_request['generation_policy']['target_codec']==OBJECTIVE['target_codec']and current_request['generation_policy']['conditioning_profile']==OBJECTIVE['training_conditioning_profile']
+-   assert current_request['request_id']==ACTUAL_IDS['evaluation_request_id']and current_request['generation_policy']['max_generation_seconds']==1200.0 and current_request['max_output_tokens']==16384
+-   report['actual_pristine_import_pair']=imported;report['actual_current_controlled_registry']=record;report['actual_source_observation']=outputs['source-observation.json'];report['actual_fresh_vendor_import_completed']=True
+-  finally:
+-   if parent is None and reservation is not None and getattr(reservation,'_lease',None)is not None and not reservation._lease.released:
+-    parent=reservation._lease
+-   if parent is not None:
+-    attempt=0
+-    while True:
+-     attempt+=1
+-     try:
+-      snapshot=observe_state();rows=snapshot['state']['leases'];descendants={parent.lease_id};changed=True
+-      while changed:
+-       changed=False
+-       for leaseid,row in rows.items():
+-        if row.get('parent_lease_id')in descendants and leaseid not in descendants:descendants.add(leaseid);changed=True
+-      if descendants.intersection(rows)-{parent.lease_id}:raise RuntimeError('actual managed descendant claims remain; retain original custody')
+-      report['resource_before_parent_release']=snapshot
+-      if reservation is not None and not parent.released:
+-       if report.get('origin_capture_selected') is True:
+-        report['origin_archive_external_bytes'] = origin_retained_external_bytes()
+-        reservation.account_external_bytes('actual-relational-origin-SDK-and-archive-v1', report['origin_archive_external_bytes'])
+-       else:
+-        reservation.account_external_bytes('actual-currentcopy-v11-vendor-import-SDK-outputs',sum(len(v)for v in result.output_files.values())if 'result'in globals()else 0)
+-       if CHARGED_ROOT.exists():
+-        report['actual_reservation_finalized']=reservation.finalize(CHARGED_ROOT,artifacts_durable=True)
+-       else:
+-        assert not report['tests_dispatched'],'no target or SDK was dispatched before this admission failure'
+-        report['actual_reservation_predispatch_release']=reservation.release(artifacts_durable=True)
+-       report['actual_parent_release_return']=parent.released
+-      elif not parent.released:report['actual_parent_release_return']=parent.release()
+-      snapshot=observe_state();assert not descendants.intersection(snapshot['state']['leases'])
+-      report['resource_after_parent_release']=snapshot;report['resource_cleanup_confirmed']=True
+-      break
+-     except BaseException as cleanup_error:
+-      report['resource_cleanup_last_error']={'type':type(cleanup_error).__name__,'message':str(cleanup_error),'attempt':attempt}
+-      try:print(json.dumps({'event':'ACTUAL_RESOURCE_CUSTODY_RETAINED','operator_pid':os.getpid(),'attempt':attempt,'Source_READ_held':True}),flush=True);time.sleep(1)
+-      except BaseException as hold_error:report['resource_hold_error']=repr(hold_error)
+-   else:report['resource_after_predispatch']=observe_state();report['resource_cleanup_confirmed']=True
+-   report['source_after']=metadata_guard()
+-except BaseException as error:
+- report['errors'].append({'type':type(error).__name__,'message':str(error),'traceback':traceback.format_exc()});raise
+-finally:
+- contexts=report.get('actual_Source_context_closure',[]);report['Source_closed']=bool(contexts)and all(row['exit_returned']is True for row in contexts)
+- raw=json.dumps(report,sort_keys=True,separators=(',',':'),default=str).encode();path=RUN_OUTPUT/'complete-fresh-currentcopy-v11-vendor-import-existing-owner-report.json'
+- fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)
+- with os.fdopen(fd,'wb')as stream:stream.write(raw);stream.flush();os.fsync(stream.fileno())
+- shutil.rmtree(PARENT_HOME)
+- print(json.dumps({'event':'ACTUAL_CURRENTCOPY_V11_VENDOR_IMPORT_CLOSED','report':{'path':str(path),'bytes':len(raw),'sha256':H(raw)},'Source_closed':report['Source_closed'],'resource_cleanup_confirmed':report['resource_cleanup_confirmed'],'errors':report['errors']},sort_keys=True),flush=True)
+-
++    if parent is None and reservation is not None and getattr(reservation,'_lease',None)is not None and not reservation._lease.released:
++     parent=reservation._lease
++    if parent is not None:
++     attempt=0
++     while True:
++      attempt+=1
++      try:
++       snapshot=observe_state();rows=snapshot['state']['leases'];descendants={parent.lease_id};changed=True
++       while changed:
++        changed=False
++        for leaseid,row in rows.items():
++         if row.get('parent_lease_id')in descendants and leaseid not in descendants:descendants.add(leaseid);changed=True
++       if descendants.intersection(rows)-{parent.lease_id}:raise RuntimeError('actual managed descendant claims remain; retain original custody')
++       report['resource_before_parent_release']=snapshot
++       if reservation is not None and not parent.released:
++        if report.get('origin_capture_selected') is True:
++         report['origin_archive_external_bytes'] = origin_retained_external_bytes()
++         reservation.account_external_bytes('actual-relational-origin-SDK-and-archive-v1', report['origin_archive_external_bytes'])
++        elif not isolated:
++         reservation.account_external_bytes('actual-currentcopy-v11-vendor-import-SDK-outputs',sum(len(v)for v in result.output_files.values())if 'result'in globals()else 0)
++        if CHARGED_ROOT.exists():
++         report['actual_reservation_finalized']=reservation.finalize(CHARGED_ROOT,artifacts_durable=True)
++        else:
++         assert not report['tests_dispatched'],'no target or SDK was dispatched before this admission failure'
++         report['actual_reservation_predispatch_release']=reservation.release(artifacts_durable=True)
++        report['actual_parent_release_return']=parent.released
++       elif not parent.released:report['actual_parent_release_return']=parent.release()
++       snapshot=observe_state();assert not descendants.intersection(snapshot['state']['leases'])
++       report['resource_after_parent_release']=snapshot;report['resource_cleanup_confirmed']=True
++       break
++      except BaseException as cleanup_error:
++       report['resource_cleanup_last_error']={'type':type(cleanup_error).__name__,'message':str(cleanup_error),'attempt':attempt}
++       try:print(json.dumps({'event':'ACTUAL_RESOURCE_CUSTODY_RETAINED','operator_pid':os.getpid(),'attempt':attempt,'Source_READ_held':True}),flush=True);time.sleep(1)
++       except BaseException as hold_error:report['resource_hold_error']=repr(hold_error)
++    else:report['resource_after_predispatch']=observe_state();report['resource_cleanup_confirmed']=True
++    report['source_after']=metadata_guard()
++ except BaseException as error:
++  report['errors'].append({'type':type(error).__name__,'message':str(error),'traceback':traceback.format_exc()});raise
++ finally:
++  contexts=report.get('actual_Source_context_closure',[]);report['Source_closed']=bool(contexts)and all(row['exit_returned']is True for row in contexts)
++  raw=json.dumps(report,sort_keys=True,separators=(',',':'),default=str).encode();path=RUN_OUTPUT/('complete-selected-A0-isolated-existing-owner-report.json' if isolated else 'complete-fresh-currentcopy-v11-vendor-import-existing-owner-report.json')
++  fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)
++  with os.fdopen(fd,'wb')as stream:stream.write(raw);stream.flush();os.fsync(stream.fileno())
++  shutil.rmtree(PARENT_HOME)
++  print(json.dumps({'event':('ACTUAL_SELECTED_A0_ISOLATED_IMPORT_CLOSED' if isolated else 'ACTUAL_CURRENTCOPY_V11_VENDOR_IMPORT_CLOSED'),'report':{'path':str(path),'bytes':len(raw),'sha256':H(raw)},'Source_closed':report['Source_closed'],'resource_cleanup_confirmed':report['resource_cleanup_confirmed'],'errors':report['errors']},sort_keys=True),flush=True)
++
++ return report
++
++
++if __name__ == '__main__':
++ assert len(sys.argv)==4,'one authenticated actual metadata binding CLI required'
++ run_existing_owner({'path':sys.argv[1],'bytes':int(sys.argv[2]),'sha256':sys.argv[3]})

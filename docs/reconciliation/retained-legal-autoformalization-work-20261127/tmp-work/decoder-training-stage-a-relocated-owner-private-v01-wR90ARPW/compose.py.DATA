@@ -1,0 +1,25 @@
+"""Add an opt-in owner entry function without changing the historical top-level."""
+import ast
+import difflib
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+PRIOR = Path('/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/reader.py.DATA')
+raw = PRIOR.read_bytes()
+assert (len(raw),sha256(raw).hexdigest()) == (42325,'c9a1e81533834ba39fbed94f64da61fcde171259976703513168c230eb377e55')
+before = raw.decode()
+hook = '\ntry:\n    selection=json.loads(control_read(SEL,'
+old = "spent['bytes']+n>100663296:"
+new = "spent['bytes']+n>report.get('selected_stage_a_operator_envelope',100663296):"
+assert before.count(hook)==before.count(old)==1
+after=before.replace(old,new,1).replace(hook,(HERE/'startup.py.IN').read_text()+hook,1)
+previous, candidate = ast.parse(before), ast.parse(after)
+changed = {'run_selected_relocated_stage_a_owner','admit'}
+assert [ast.dump(n) for n in previous.body if getattr(n,'name',None) not in changed] == [
+    ast.dump(n) for n in candidate.body if getattr(n,'name',None) not in changed]
+(HERE/'reader.py.DATA').write_text(after)
+(HERE/'reader.py.DATA.diff').write_text(''.join(difflib.unified_diff(
+    before.splitlines(keepends=True),after.splitlines(keepends=True),
+    fromfile=str(PRIOR),tofile=str(HERE/'reader.py.DATA'))))
+print(len(after.encode()),sha256(after.encode()).hexdigest())

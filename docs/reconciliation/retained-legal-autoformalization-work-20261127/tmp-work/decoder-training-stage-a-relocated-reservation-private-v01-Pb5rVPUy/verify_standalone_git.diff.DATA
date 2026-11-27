@@ -1,0 +1,49 @@
+--- /tmp/decoder-training-stage-a-selector-observer-private-v01-CKyIGens/verify_standalone_git.py
++++ /tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/verify_standalone_git.py
+@@ -530,11 +530,14 @@
+         "avoided_additional_index_request_bytes": git_guard_record["D_index"]["bytes"] + 1,
+     }
+ 
++STAGE_A_RELOCATED_ALL_FRESH_RESERVATION = 'stage-a-source32-relocated-all-fresh/v1'
++
++
+ def source32_paired_reader_reservation(git_guard_record, guides, fresh_sources, archived_sources, control_reads,
+                                        *, epoch_output_maximums,
+                                        git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT,
+                                        persist_python_epoch=True,
+-                                       retain_terminal_git_controls=False):
++                                       retain_terminal_git_controls=False, capture_partition=None):
+     """Price selected logical operations before the existing owner enters Source.
+ 
+     Use selected maximum output lengths for the two epoch lists. The current
+@@ -544,8 +547,13 @@
+     capture. Select it together with the existing owner's projected archive
+     encoder and replay, and budget its retained receipts separately.
+     """
+-    if len(fresh_sources) != 12 or len(archived_sources) != 20:
+-        raise ValueError('exact Stage A partition of 12 fresh and 20 archived bodies required')
++    if capture_partition is None:
++        if len(fresh_sources) != 12 or len(archived_sources) != 20:
++            raise ValueError('exact Stage A partition of 12 fresh and 20 archived bodies required')
++    elif type(capture_partition) is not str or capture_partition != STAGE_A_RELOCATED_ALL_FRESH_RESERVATION:
++        raise ValueError('unknown Stage A capture partition')
++    elif len(fresh_sources) != 32 or len(archived_sources) != 0:
++        raise ValueError('relocated Stage A requires exactly 32 fresh captures and zero archives')
+     legacy = source32_explicit_byte_demand(git_guard_record, guides, [*fresh_sources, *archived_sources])
+     if (type(epoch_output_maximums) is not dict or set(epoch_output_maximums) != {'outer_epoch', 'python_epoch'}
+             or any(type(value) is not int or value < 1 for value in epoch_output_maximums.values())):
+@@ -559,6 +567,14 @@
+             any(type(row['bytes']) is not int or row['bytes'] < 0 or not Path(row['path']).is_absolute()
+                 for row in control_reads)):
+         raise ValueError('exact distinct bounded control reads required')
++    if capture_partition is not None:
++        pins = [git_guard_record['D_index'], git_guard_record['A_index'],
++                *git_guard_record['exact_exclude_pins'], *guides, *fresh_sources, *control_reads]
++        literal_paths = [row['path'] for row in pins]
++        if (len(set(literal_paths)) != len(literal_paths) or
++                any(type(path) is not str or str(Path(path)) != path or '..' in Path(path).parts
++                    or path.startswith('//') for path in literal_paths)):
++            raise ValueError('relocated Stage A requires distinct literal Source and control paths')
+     control_passes = 1 if retain_terminal_git_controls else 2
+     file_guards = control_passes * legacy['git_guard_requests_per_pass_bytes']
+     fresh_io = sum(3 * row['bytes'] + 2 for row in fresh_sources)

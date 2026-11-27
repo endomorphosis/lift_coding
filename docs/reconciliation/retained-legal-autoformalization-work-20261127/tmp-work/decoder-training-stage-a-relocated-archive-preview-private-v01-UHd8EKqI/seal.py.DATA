@@ -1,0 +1,166 @@
+"""Seal the detached Guide572 work without changing the historical readiness result."""
+from copy import deepcopy
+import difflib
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+from runpy import run_path
+from stat import S_IMODE
+from tempfile import mkstemp
+
+HERE = Path(__file__).resolve().parent
+TMP = HERE.parent
+KEY = 'private_stage_a_relocated_all_fresh_source32'
+OLD = TMP / 'decoder-training-experiment-manifest-v388.json'
+NEW = TMP / 'decoder-training-experiment-manifest-v389.json'
+PRIOR_READY = TMP / 'decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/verified-readiness.json'
+
+
+def ref(path, expected=None):
+    raw = path.read_bytes()
+    digest = sha256(raw).hexdigest()
+    assert expected is None or digest == expected, path
+    return dict(path=str(path), bytes=len(raw), sha256=digest)
+
+
+def save(path, value):
+    raw = value.encode() if type(value) is str else (json.dumps(value, indent=2, sort_keys=True) + '\n').encode()
+    with path.open('xb') as output:
+        output.write(raw)
+    return ref(path)
+
+
+prior_owner = TMP / 'decoder-training-stage-a-a0-archive-handoff-private-v01-UMiyG7nf/verify_rebind_capture.py'
+candidate = HERE / 'verify_rebind_capture.py'
+assert candidate.read_bytes().startswith(prior_owner.read_bytes())
+diff = ''.join(difflib.unified_diff(prior_owner.read_text().splitlines(keepends=True),
+                                   candidate.read_text().splitlines(keepends=True),
+                                   fromfile=str(prior_owner), tofile=str(candidate)))
+assert (HERE / 'test_relocated_source32.final.rc').read_bytes() == b'0\n'
+log = (HERE / 'test_relocated_source32.final.stderr').read_text()
+assert sum(line.endswith(' ... ok') for line in log.splitlines()) == 6
+assert 'Ran 6 tests in ' in log and log.endswith('\nOK\n')
+preview_path = HERE / 'guide572-all-fresh-preview.INERT.json'
+preview = json.loads(preview_path.read_bytes())
+changed = preview['changed_retained_content']
+assert len(changed) == 7 and sum(item['index_role'] for item in changed) == 2
+new_roots = preview['reader_inputs']['current_roots']
+changed_payloads = {role: [Path(row['relocated']['path']).relative_to(root['root']).as_posix()
+                           for row in changed if not row['index_role']
+                           and Path(row['relocated']['path']).is_relative_to(root['root'])]
+                    for role, root in new_roots.items()}
+assert changed_payloads == {'A': ['.git/info/exclude'], 'D': [
+    '.git/info/exclude', 'tests/unit/logic/autoformal/test_corpus_release_cli.py',
+    'ipfs_datasets_py/logic/autoformal/supervisor_loop.py',
+    'scripts/ops/legal_ir/run_autoformal_supervisor.py']}
+descriptor_path = HERE / 'descriptor.json'
+descriptor = {
+    'schema': 'private-stage-a-relocated-all-fresh-candidate/v1',
+    'prior_owner': ref(prior_owner, 'b81d390abb0b2972b70268a16ddace18ed370f54ed90d1693dc00b93587cd9be'),
+    'candidate': ref(candidate, 'a5c1527b72f47c92e71a3a4ce81f8d027aca9ec2aaaac0df32ff5e9c95e37c8f'),
+    'diff': save(HERE / 'verify_rebind_capture.diff', diff),
+    'preview': ref(preview_path, 'e682f614e50a3e97af25fdf532df48607dbc52085571a9b84d494bbd46ff4cfb'),
+    'explicit_partial_costs': ref(HERE / 'guide572-explicit-cost-subtotal.INERT.json',
+                                  '7d5cceb3c2a4692350bf34583715954d766f86e6db71fc15db2696ec779feb12'),
+    'test': ref(HERE / 'test_relocated_source32.py', 'a6fc9a9c82c05907660844f7efa654ca8dabf27c77e2b0fef5f861ddbdf22bcd'),
+    'logs': {kind: ref(HERE / ('test_relocated_source32.final.' + kind)) for kind in ('rc', 'stdout', 'stderr')},
+    'earlier_modelled_run': {name: ref(HERE / ('test_relocated_source32.' + name))
+                             for name in ('stderr', 'stdout', 'first-run.py.DATA')},
+    'drivers': {name: ref(HERE / name) for name in ('relocation.py.IN', 'compose.py', 'replay_preview.py', 'seal.py')},
+    'actual_detached_retained_rows': 1218, 'actual_detached_python_rows': 1213,
+    'historical_archive_count': 20, 'planned_current_body_reads': 32, 'published_expected_roots': new_roots,
+    'non_index_content_changes_for_owner_recheck': changed_payloads,
+    'local_passing_cases': 6, 'composed_captures_were_modelled': True,
+    'paired_reservation': None, 'current_independent_index_read': None, 'live_owner_selection': None,
+    'execution_selected': False, 'dispatch_authority': False,
+}
+old_ref = ref(OLD, 'c0d1b5ce65c594c975c1e2492160eb6558a406d2983572328e247b0ef2cf26a5')
+old = json.loads(OLD.read_bytes())
+old_checker = old['advisory_operator_readiness_checker']
+old_checker_path = Path(old_checker['path'])
+assert ref(old_checker_path, old_checker['sha256']) == old_checker
+ref(PRIOR_READY, 'fa132f8df597f7f2a900fe252a5e28793ffc5418e1344517ac91d86bf58ff4d6')
+prior_verified = json.loads(PRIOR_READY.read_bytes())
+source = old_checker_path.read_text()
+before = 'def report(manifest):\n'
+at_result = '        "stage_a_coordination": coordination,'
+assert source.count(before) == source.count(at_result) == 1
+projection = '''def project_relocated_stage_a_candidate(reference):
+    record = retained_json(reference)
+    require(record["schema"] == "private-stage-a-relocated-all-fresh-candidate/v1"
+            and (record["actual_detached_retained_rows"], record["actual_detached_python_rows"],
+                 record["historical_archive_count"], record["planned_current_body_reads"],
+                 record["local_passing_cases"]) == (1218, 1213, 20, 32, 6)
+            and record["composed_captures_were_modelled"] is True
+            and record["paired_reservation"] is record["current_independent_index_read"]
+                is record["live_owner_selection"] is None
+            and record["execution_selected"] is record["dispatch_authority"] is False,
+            "exact detached Stage A relocation with six local controls required")
+    preview = retained_json(record["preview"])
+    costs = retained_json(record["explicit_partial_costs"])
+    require(preview["execution_selected"] is False
+            and preview["reader_inputs"]["current_roots"] == record["published_expected_roots"]
+            and len(preview["changed_retained_content"]) == 7
+            and len(preview["relocated_retained_outer"]) == 1218
+            and costs["explicit_read_requests_and_raw_outputs_bytes"] == 33_150_207
+            and costs["one_guard_explicit_requests_and_raw_outputs_bytes"] == 21_609_092,
+            "detached relocation preview and explicit cost terms required")
+    fields = ("actual_detached_retained_rows", "actual_detached_python_rows", "historical_archive_count",
+              "planned_current_body_reads", "non_index_content_changes_for_owner_recheck",
+              "local_passing_cases", "composed_captures_were_modelled", "paired_reservation",
+              "current_independent_index_read", "live_owner_selection", "dispatch_authority")
+    return {**{field: record[field] for field in fields}, "explicit_partial_costs": costs}
+
+
+'''
+source = source.replace(before, projection + before, 1)
+source = source.replace(at_result, at_result + f'''
+        **({{"{KEY}": project_relocated_stage_a_candidate(design["{KEY}"])}}
+           if "{KEY}" in design else {{}}),''', 1)
+path = TMP / 'decoder-training-integration-plan.md'
+current = path.read_bytes()
+assert sha256(current).hexdigest() == '5d3e0cbd0766c669d706a4a53dd910f7daa12c785912b6a2e39a47c036000660'
+original_stat = path.stat()
+body = current.decode()
+addition = f"""## 826. Rebuild the Stage A inputs on the moved checkout
+
+The detached Guide572 candidate now has an all-fresh composition path for the original Reader. The preview maps all 1,218 retained rows, including 1,213 Python rows, to the new checkout. It confirms the same body hashes and tracked blob identities for the 32 protected roles. It treats all 32 as fresh for a future capture and binds the 20 archived receipts to their original Phase 7 roots and index. Seven retained bodies changed across the move, including both indices. The other five are the two Git exclude files, the supervisor loop, its command entry point and the CLI test. These changes need current owner review. [Candidate and evidence]({descriptor_path})
+
+Six local checks passed. The preview used the retained publication and capture evidence. The composition checks used 32 modeled captures to exercise ordering, full metadata and body verification, plus owner refusal and mutation. The live Reader still needs to select and price this path. Explicit reads and raw body output total 33,150,207 bytes with two full Git control reads. The same subtotal is 21,609,092 bytes if the existing Reader supports retaining the opening controls through the terminal check. Both subtotals exclude selector, other controls, epoch outputs and owner overhead. The independent Datasets index read still has a 713,606-byte payload gap. [Readiness]({HERE / 'verified-readiness.json'})
+
+"""
+for was, now in (
+    (str(OLD), str(NEW)),
+    ('Version 3.534. Updated 2026-11-26 with preparation-stop elapsed readback and the Guide572 publication.',
+     'Version 3.535. Updated 2026-11-26 with a fresh capture candidate for the relocated Stage A inputs.'),
+    ('## Primary research references', addition + '## Primary research references'),
+):
+    assert body.count(was) == 1, was
+    body = body.replace(was, now, 1)
+new = deepcopy(old)
+new['manifest_schema_version'] = '0.389.0'
+new['previous_manifest'] = old_ref
+new['typed_execution_design'][KEY] = save(descriptor_path, descriptor)
+checker = HERE / 'check_design.py'
+new['advisory_operator_readiness_checker'] = save(checker, source)
+checked = run_path(str(checker))['report'](new)
+assert checked['manifest_schema_version'] == new['manifest_schema_version']
+prior_verified['manifest_schema_version'] = new['manifest_schema_version']
+assert {key: value for key, value in checked.items() if key != KEY} == prior_verified
+assert checked['stage_a_coordination']['standalone_independent_index_payload_shortfall'] == 713_606
+manifest = save(NEW, new)
+readiness = save(HERE / 'verified-readiness.json', checked)
+fd, name = mkstemp(dir=TMP, prefix=path.name + '.')
+staged = Path(name)
+try:
+    with os.fdopen(fd, 'w') as output:
+        output.write(body)
+    staged.chmod(S_IMODE(original_stat.st_mode))
+    assert path.read_bytes() == current and path.stat().st_ino == original_stat.st_ino
+    os.replace(staged, path)
+finally:
+    if staged.exists():
+        staged.unlink()
+print(json.dumps({'descriptor': ref(descriptor_path), 'manifest': manifest, 'readiness': readiness,
+                  'plan': ref(path)}, sort_keys=True))

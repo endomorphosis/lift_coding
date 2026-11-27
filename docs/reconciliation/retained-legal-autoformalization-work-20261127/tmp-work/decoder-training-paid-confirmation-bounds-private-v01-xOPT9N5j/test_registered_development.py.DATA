@@ -1,0 +1,105 @@
+"""Exercise the real registered DEVELOPMENT comparator and its existing freeze contract."""
+
+import ast
+from hashlib import sha256
+import json
+from pathlib import Path
+import runpy
+from unittest import TestCase, TextTestRunner, defaultTestLoader
+from unittest.mock import patch
+
+HERE = Path(__file__).resolve().parent
+FIXTURE = HERE.parent / "decoder-training-development-grid-private-v01"
+PINS = {
+    "test_development_grid.py": "69003abd5d922cf943dd10cacdc1c7caa3bb5af4deeccc4743a4b986557b3540",
+    "test_development_cost.py": "65d118a6d0a9966d4c8d46dfcdc18987187c3b8f21707fe46ce316b7571f941a",
+    "test_cost_evidence.py": "cca0a3e70e81120d83fda480f7a591a92968f07a81f3ce940c8acd470ac02862",
+}
+
+
+def fixture_body(name):
+    p = FIXTURE / name
+    data = p.read_bytes()
+    assert sha256(data).hexdigest() == PINS[name], p
+    return data
+
+
+run_path = runpy.run_path
+
+
+def fixture_path(path, *args, **kwargs):
+    path = Path(path)
+    if path == FIXTURE / "study.py":
+        path = HERE / "study.py"
+    elif path.parent == FIXTURE:
+        fixture_body(path.name)
+    return run_path(str(path), *args, **kwargs)
+
+
+with patch.object(runpy, "run_path", fixture_path):
+    dev = fixture_path(FIXTURE / "test_development_cost.py")
+body = fixture_body("test_development_grid.py")
+row, = (node for node in ast.parse(body).body if type(node) is ast.ClassDef and node.name == "StepStudy")
+method, = (node for node in row.body if type(node) is ast.FunctionDef and node.name == "compare")
+# Transmit only the opt-in flag. Reuse the fixture's real owner and receipt calls.
+method.args.kwonlyargs.append(ast.arg(arg="include_confirmation_cost_bounds"))
+method.args.kw_defaults.append(ast.Constant(value=False))
+calls = [node for node in ast.walk(method) if type(node) is ast.Call and type(node.func) is ast.Attribute
+         and node.func.attr == "compare_verified_development_contrasts"]
+assert len(calls) == 1
+calls[0].keywords.append(ast.keyword(arg="include_confirmation_cost_bounds",
+                                    value=ast.Name(id="include_confirmation_cost_bounds", ctx=ast.Load())))
+source = ast.fix_missing_locations(ast.Module(body=[row], type_ignores=[]))
+scope = {key: dev[key] for key in ("S", "gate", "pin", "StudyFixture")}
+exec(compile(source, str(FIXTURE / "test_development_grid.py"), "exec"), scope)
+StepStudy = scope["StepStudy"]
+summary = {}
+
+
+def wall_bounds(report):
+    row, = (part for part in report["confirmation_cost_bounds"]["pairs"] if part["clock"] == "wall_seconds")
+    return row
+
+
+class RegisteredDevelopmentControls(TestCase):
+    def test_registered_grid_keeps_original_legal_looks_and_paid_events(self):
+        fixture = StepStudy()
+        fixture.base.with_interval(1, "look-3", wall=None)
+        legacy = fixture.compare()
+        scoped = fixture.compare(include_confirmation_cost_bounds=True)
+        self.assertEqual({key: value for key, value in scoped.items() if key != "confirmation_cost_bounds"}, legacy)
+        self.assertEqual(scoped["optimizer_step_schedule"], fixture.grid.steps)
+        self.assertEqual([role for role, _ in fixture.calls], ["review", "cost"] * 2)
+        self.assertEqual(len(scoped["physical_paid_events"]), 10)
+        self.assertEqual(sum(event["disposition"] == "failed" for event in scoped["physical_paid_events"]), 2)
+        bounded = wall_bounds(scoped)["candidate"]
+        self.assertEqual((bounded["attainment"], bounded["lower_seconds"], bounded["upper_seconds"]), (1, 30.0, 48.0))
+        self.assertIsNone(bounded["observed_confirmation_seconds"])
+        summary.update(development_grid=list(fixture.grid.steps), paid_events=10, failed_events=2,
+                       candidate_wall_lower_seconds=30.0, candidate_wall_upper_seconds=48.0)
+        (HERE / "registered-development-fixture.json").write_text(json.dumps(scoped, sort_keys=True) + "\n")
+
+    def test_bounded_development_report_preserves_the_exact_final_freeze_rule(self):
+        fixture = StepStudy()
+        scoped = fixture.compare(include_confirmation_cost_bounds=True)
+        self.assertEqual(wall_bounds(scoped)["candidate"]["observed_confirmation_seconds"], 45.0)
+        frozen = fixture.freeze(scoped)
+        self.assertEqual(frozen["optimizer_steps"], dict(fixture.grid.steps)["look-3"])
+        fixture = StepStudy()
+        fixture.base.with_interval(1, "look-3", wall=None)
+        bounded = fixture.compare(include_confirmation_cost_bounds=True)
+        with self.assertRaises(ValueError):
+            fixture.freeze(bounded)
+
+    def test_review_owner_refusal_never_spends_cost_owner_work(self):
+        fixture = StepStudy()
+        with self.assertRaisesRegex(ValueError, "owner refused"):
+            fixture.compare(include_confirmation_cost_bounds=True, owner=lambda *args: False)
+        self.assertEqual(fixture.calls, [])
+
+
+if __name__ == "__main__":
+    result = TextTestRunner(verbosity=2).run(defaultTestLoader.loadTestsFromTestCase(RegisteredDevelopmentControls))
+    if result.wasSuccessful():
+        print(json.dumps(summary, sort_keys=True))
+    raise SystemExit(not result.wasSuccessful())

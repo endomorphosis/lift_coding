@@ -1,0 +1,61 @@
+{
+  "actual_TEST_Source_Native_or_Git_mutation": false,
+  "append": {
+    "bytes": 7587,
+    "path": "/tmp/Phase7-checked-legal-proof-trainer-append-private-Bv2vWRF3/checked-legal-proof-trainer.append.py.DATA",
+    "sha256": "fdedd0f63265e7d10bcbad598144ae07db611e69f314d37446d0bf0307fea1d8"
+  },
+  "checks": [
+    "producer",
+    "JSON wire",
+    "independent target identity",
+    "primary no-fit spy",
+    "auxiliary eligibility",
+    "unchanged state"
+  ],
+  "compile_only": true,
+  "exact_all_prior_bytes_and_AST": true,
+  "exact_byte_removal_inverse": true,
+  "forward_patch": {
+    "bytes": 8092,
+    "path": "/tmp/Phase7-checked-legal-proof-trainer-append-private-Bv2vWRF3/checked-legal-proof-trainer.forward.patch",
+    "sha256": "033cc5902a3a9ef5a4dc241ae2c8a278aa73997561a24448b38f9fff6e3dce65"
+  },
+  "inverse_patch": {
+    "bytes": 8092,
+    "path": "/tmp/Phase7-checked-legal-proof-trainer-append-private-Bv2vWRF3/checked-legal-proof-trainer.inverse.patch",
+    "sha256": "6fe764963328518cd05304350ef8db421aaaeaadbfe84cda73b0f348ae4307a7"
+  },
+  "new_static_cases": 5,
+  "owning_test": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+  "postimage": {
+    "bytes": 55446,
+    "path": "/tmp/Phase7-checked-legal-proof-trainer-append-private-Bv2vWRF3/test_trusted_feedback_weight_updates.checked.after.py.DATA",
+    "sha256": "dbf4082c8521d7b1fd38efba7860fe98342d8d7d4ef3ffd231cc714472db147a"
+  },
+  "preimage": {
+    "bytes": 47859,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/test_trusted_feedback_weight_updates.after.py.DATA",
+    "sha256": "c10a304565f6607da918ac2d0c2afa103a9fb39bf07ebac9871fcc473a970fe4"
+  },
+  "private_or_ordinary_execution": null,
+  "product_owner_candidate": {
+    "bytes": 73863,
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/legal_ir_proof_feedback.after.py.DATA",
+    "sha256": "c569446d321b4a1b3815d13e0ad51813cb32c3ae3e8d99f449653f9fe177cf72"
+  },
+  "schema": "existing-trainer-checked-legal-proof-integration-append-private/v1",
+  "selected_function": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence",
+  "static_param_order": [
+    "selected",
+    "same_receipt_id",
+    "stale_raw_source",
+    "changed_interpretation",
+    "changed_dependency"
+  ],
+  "support_test_fixture_candidate": {
+    "bytes": 98345,
+    "path": "/tmp/Phase7-existing-proof-cache-fixture-migration-private-EjL1ZzNP/test_proof_cache.with-bound-feedback-fixture.py.DATA",
+    "sha256": "be38ab5213fa35c0b614f3e52f96dcf8645023bd114875c3789a897d9387a439"
+  }
+}

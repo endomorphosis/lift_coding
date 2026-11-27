@@ -1,0 +1,706 @@
+{
+  "AGENTS_chain_metadata": [
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/AGENTS.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/AGENTS.override.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/AGENTS.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/AGENTS.override.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/AGENTS.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/AGENTS.override.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/logic/AGENTS.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/logic/AGENTS.override.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/optimizers/AGENTS.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/optimizers/AGENTS.override.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/AGENTS.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/AGENTS.override.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/logic/integration/AGENTS.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/logic/integration/AGENTS.override.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/AGENTS.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/AGENTS.override.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/logic/AGENTS.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/logic/AGENTS.override.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/AGENTS.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/AGENTS.override.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/logic/integration/reasoning/AGENTS.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/logic/integration/reasoning/AGENTS.override.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/logic/integration/AGENTS.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/logic/integration/AGENTS.override.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/logic/legal_ir/AGENTS.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/logic/legal_ir/AGENTS.override.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/logic_theorem_optimizer/AGENTS.md"
+    },
+    {
+      "exists": false,
+      "full9": null,
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/logic_theorem_optimizer/AGENTS.override.md"
+    }
+  ],
+  "actual_isolated_content_epoch": {
+    "bytes": 9018,
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-Phase7-current-Source42-content-epoch-closed.json",
+    "sha256": "a7eeb8e165f48322a1c1680b1ec70ec8af3a4b6424ccadbe23a0d1ad831a651f"
+  },
+  "all_candidate_metadata": [
+    {
+      "body_cap": 74557,
+      "bytes": 74557,
+      "exists": true,
+      "expected_bytes": 74557,
+      "expected_git_blob_oid": "3c2cc1443e9f96a611a81052c0e13f7b6634248e",
+      "expected_sha256": "5c44d695c17fab26d6bba70d544e57a7bd0b5fd5b2434f810c9656db13926478",
+      "full9": {
+        "st_ctime_ns": "1795738495873935389",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "67552106",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495873935389",
+        "st_nlink": "1",
+        "st_size": "74557",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "relative_path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "5c44d695c17fab26d6bba70d544e57a7bd0b5fd5b2434f810c9656db13926478"
+    },
+    {
+      "body_cap": 1429059,
+      "bytes": 1429059,
+      "exists": true,
+      "expected_bytes": 1429059,
+      "expected_git_blob_oid": "6c03d227e6a43439395ec37a5d280aebf30b7460",
+      "expected_sha256": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447",
+      "full9": {
+        "st_ctime_ns": "1795738495873935389",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510188",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495873935389",
+        "st_nlink": "1",
+        "st_size": "1429059",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447"
+    },
+    {
+      "body_cap": 41765,
+      "bytes": 41765,
+      "exists": true,
+      "expected_bytes": 41765,
+      "expected_git_blob_oid": "ec28c41fffdb7013d8b73ccc2ba70f1231316019",
+      "expected_sha256": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc",
+      "full9": {
+        "st_ctime_ns": "1795738495874624995",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510208",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874624995",
+        "st_nlink": "1",
+        "st_size": "41765",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc"
+    },
+    {
+      "body_cap": 42453,
+      "bytes": 42453,
+      "exists": true,
+      "expected_bytes": 42453,
+      "expected_git_blob_oid": "f185deec8ddbfc25db15352cc15def76bb5ab351",
+      "expected_sha256": "cd37964aa4a497e8d778ae0e6a90fe87f3362ead8c9a3751a5a3288b7370ed2e",
+      "full9": {
+        "st_ctime_ns": "1795738495874668851",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510763",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874668851",
+        "st_nlink": "1",
+        "st_size": "42453",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "cd37964aa4a497e8d778ae0e6a90fe87f3362ead8c9a3751a5a3288b7370ed2e"
+    },
+    {
+      "body_cap": 61378,
+      "bytes": 61378,
+      "exists": true,
+      "expected_bytes": 61378,
+      "expected_git_blob_oid": "4197a32e166b0582b3229439425749fff8f26dc8",
+      "expected_sha256": "f15cc994ea8a8ae5f8d34c1c16572481ff7c73398fce068af4a3ec5bced9915b",
+      "full9": {
+        "st_ctime_ns": "1795738495874668851",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510768",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874668851",
+        "st_nlink": "1",
+        "st_size": "61378",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+      "relative_path": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "f15cc994ea8a8ae5f8d34c1c16572481ff7c73398fce068af4a3ec5bced9915b"
+    },
+    {
+      "body_cap": 98509,
+      "bytes": 98509,
+      "exists": true,
+      "expected_bytes": 98509,
+      "expected_git_blob_oid": "03ea849ebdb3c818af1e56d8ee44add38af030ee",
+      "expected_sha256": "087c587b4f35f61f08f2c8f9bba768893dfa1e57f3645976faa38e7927e02414",
+      "full9": {
+        "st_ctime_ns": "1795738495874668851",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510819",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874668851",
+        "st_nlink": "1",
+        "st_size": "98509",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+      "relative_path": "tests/unit/logic/legal_ir/test_proof_cache.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "087c587b4f35f61f08f2c8f9bba768893dfa1e57f3645976faa38e7927e02414"
+    },
+    {
+      "body_cap": 16426,
+      "bytes": 16426,
+      "exists": true,
+      "expected_bytes": 16426,
+      "expected_git_blob_oid": "b91b53344561d723bb28d9d0f6b71d3aaa7e3d7c",
+      "expected_sha256": "892386e52414fda1b3eac441aaa900630ffaf755140739d053df29ce75c2ed4a",
+      "full9": {
+        "st_ctime_ns": "1795738495874668851",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510820",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874668851",
+        "st_nlink": "1",
+        "st_size": "16426",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py",
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "892386e52414fda1b3eac441aaa900630ffaf755140739d053df29ce75c2ed4a"
+    },
+    {
+      "body_cap": 9778,
+      "bytes": 9778,
+      "exists": true,
+      "expected_bytes": 9778,
+      "expected_git_blob_oid": "57ef63daf94a901365822cddb3ea1054fca2646c",
+      "expected_sha256": "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414",
+      "full9": {
+        "st_ctime_ns": "1795738495874818820",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510821",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874818820",
+        "st_nlink": "1",
+        "st_size": "9778",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py",
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414"
+    },
+    {
+      "body_cap": 9648,
+      "bytes": 9648,
+      "exists": true,
+      "expected_bytes": 9648,
+      "expected_git_blob_oid": "cf976daddf3adc045c604c5a58c12ae9cc4f0543",
+      "expected_sha256": "ead71235b234846d6444678459d3fdd03bd10c0955783dcbd8f2f7d3cdf503a6",
+      "full9": {
+        "st_ctime_ns": "1795738495874839828",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510822",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874839828",
+        "st_nlink": "1",
+        "st_size": "9648",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py",
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "ead71235b234846d6444678459d3fdd03bd10c0955783dcbd8f2f7d3cdf503a6"
+    },
+    {
+      "body_cap": 7070597,
+      "bytes": 7070597,
+      "exists": true,
+      "expected_bytes": 7070597,
+      "expected_git_blob_oid": null,
+      "expected_sha256": "5a332cba66adba6051bb6f25c460fd4f7cc33fb831cbde164843e5b6e32aa53d",
+      "full9": {
+        "st_ctime_ns": "1795738496101937191",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "49196736",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738496100937183",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_Git_index",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/.git/index",
+      "relative_path": ".git/index",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "5a332cba66adba6051bb6f25c460fd4f7cc33fb831cbde164843e5b6e32aa53d"
+    }
+  ],
+  "approved_current_Source42_owner_binding": {
+    "bytes": 2297,
+    "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/actual-Source42-doc-owner-current-control-binding-v01.json",
+    "sha256": "43c18000562ed03baf5df2d0cea8260682063078822ed7ff23208ba47c4ea674"
+  },
+  "closed_D_source_write_separate": {
+    "bytes": 17276,
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-isolated-Phase7-exact-nine-local-freeze.json",
+    "sha256": "63b1bc7bc60db45147d2bc0f0d3a3fab908b19fa17f530d00ced408f5fa88da3"
+  },
+  "exact_new_body_targets": [
+    {
+      "body_cap": 74557,
+      "bytes": 74557,
+      "exists": true,
+      "expected_bytes": 74557,
+      "expected_git_blob_oid": "3c2cc1443e9f96a611a81052c0e13f7b6634248e",
+      "expected_sha256": "5c44d695c17fab26d6bba70d544e57a7bd0b5fd5b2434f810c9656db13926478",
+      "full9": {
+        "st_ctime_ns": "1795738495873935389",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "67552106",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495873935389",
+        "st_nlink": "1",
+        "st_size": "74557",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "relative_path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "5c44d695c17fab26d6bba70d544e57a7bd0b5fd5b2434f810c9656db13926478"
+    },
+    {
+      "body_cap": 1429059,
+      "bytes": 1429059,
+      "exists": true,
+      "expected_bytes": 1429059,
+      "expected_git_blob_oid": "6c03d227e6a43439395ec37a5d280aebf30b7460",
+      "expected_sha256": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447",
+      "full9": {
+        "st_ctime_ns": "1795738495873935389",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510188",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495873935389",
+        "st_nlink": "1",
+        "st_size": "1429059",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447"
+    },
+    {
+      "body_cap": 41765,
+      "bytes": 41765,
+      "exists": true,
+      "expected_bytes": 41765,
+      "expected_git_blob_oid": "ec28c41fffdb7013d8b73ccc2ba70f1231316019",
+      "expected_sha256": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc",
+      "full9": {
+        "st_ctime_ns": "1795738495874624995",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510208",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874624995",
+        "st_nlink": "1",
+        "st_size": "41765",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc"
+    },
+    {
+      "body_cap": 42453,
+      "bytes": 42453,
+      "exists": true,
+      "expected_bytes": 42453,
+      "expected_git_blob_oid": "f185deec8ddbfc25db15352cc15def76bb5ab351",
+      "expected_sha256": "cd37964aa4a497e8d778ae0e6a90fe87f3362ead8c9a3751a5a3288b7370ed2e",
+      "full9": {
+        "st_ctime_ns": "1795738495874668851",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510763",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874668851",
+        "st_nlink": "1",
+        "st_size": "42453",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "cd37964aa4a497e8d778ae0e6a90fe87f3362ead8c9a3751a5a3288b7370ed2e"
+    },
+    {
+      "body_cap": 61378,
+      "bytes": 61378,
+      "exists": true,
+      "expected_bytes": 61378,
+      "expected_git_blob_oid": "4197a32e166b0582b3229439425749fff8f26dc8",
+      "expected_sha256": "f15cc994ea8a8ae5f8d34c1c16572481ff7c73398fce068af4a3ec5bced9915b",
+      "full9": {
+        "st_ctime_ns": "1795738495874668851",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510768",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874668851",
+        "st_nlink": "1",
+        "st_size": "61378",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+      "relative_path": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "f15cc994ea8a8ae5f8d34c1c16572481ff7c73398fce068af4a3ec5bced9915b"
+    },
+    {
+      "body_cap": 98509,
+      "bytes": 98509,
+      "exists": true,
+      "expected_bytes": 98509,
+      "expected_git_blob_oid": "03ea849ebdb3c818af1e56d8ee44add38af030ee",
+      "expected_sha256": "087c587b4f35f61f08f2c8f9bba768893dfa1e57f3645976faa38e7927e02414",
+      "full9": {
+        "st_ctime_ns": "1795738495874668851",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510819",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874668851",
+        "st_nlink": "1",
+        "st_size": "98509",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+      "relative_path": "tests/unit/logic/legal_ir/test_proof_cache.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "087c587b4f35f61f08f2c8f9bba768893dfa1e57f3645976faa38e7927e02414"
+    },
+    {
+      "body_cap": 16426,
+      "bytes": 16426,
+      "exists": true,
+      "expected_bytes": 16426,
+      "expected_git_blob_oid": "b91b53344561d723bb28d9d0f6b71d3aaa7e3d7c",
+      "expected_sha256": "892386e52414fda1b3eac441aaa900630ffaf755140739d053df29ce75c2ed4a",
+      "full9": {
+        "st_ctime_ns": "1795738495874668851",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510820",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874668851",
+        "st_nlink": "1",
+        "st_size": "16426",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py",
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "892386e52414fda1b3eac441aaa900630ffaf755140739d053df29ce75c2ed4a"
+    },
+    {
+      "body_cap": 9778,
+      "bytes": 9778,
+      "exists": true,
+      "expected_bytes": 9778,
+      "expected_git_blob_oid": "57ef63daf94a901365822cddb3ea1054fca2646c",
+      "expected_sha256": "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414",
+      "full9": {
+        "st_ctime_ns": "1795738495874818820",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510821",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874818820",
+        "st_nlink": "1",
+        "st_size": "9778",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py",
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414"
+    },
+    {
+      "body_cap": 9648,
+      "bytes": 9648,
+      "exists": true,
+      "expected_bytes": 9648,
+      "expected_git_blob_oid": "cf976daddf3adc045c604c5a58c12ae9cc4f0543",
+      "expected_sha256": "ead71235b234846d6444678459d3fdd03bd10c0955783dcbd8f2f7d3cdf503a6",
+      "full9": {
+        "st_ctime_ns": "1795738495874839828",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510822",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874839828",
+        "st_nlink": "1",
+        "st_size": "9648",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py",
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "ead71235b234846d6444678459d3fdd03bd10c0955783dcbd8f2f7d3cdf503a6"
+    },
+    {
+      "body_cap": 7070597,
+      "bytes": 7070597,
+      "exists": true,
+      "expected_bytes": 7070597,
+      "expected_git_blob_oid": null,
+      "expected_sha256": "5a332cba66adba6051bb6f25c460fd4f7cc33fb831cbde164843e5b6e32aa53d",
+      "full9": {
+        "st_ctime_ns": "1795738496101937191",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "49196736",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738496100937183",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_Git_index",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/.git/index",
+      "relative_path": ".git/index",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "5a332cba66adba6051bb6f25c460fd4f7cc33fb831cbde164843e5b6e32aa53d"
+    }
+  ],
+  "exact_previous_isolated_reader": {
+    "bytes": 23638,
+    "path": "/tmp/P2-V4-CLI33-isolated-READ3-controls-03GmsFzw/Root-selected-existing-v589-isolated-CLI33-READ3.py",
+    "sha256": "d5d87fbd26e618042350757fdc790ef1b63ec1c91ad6de048495012812b160ea"
+  },
+  "exact_private_candidate": {
+    "bytes": 9061,
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/SEALED-Phase7-checked-legal-proof-current-exact-nine-private.json",
+    "sha256": "31caccf483e6ac1e10772854a4281ba19844832e1f1141c89f5d5b4618e66976"
+  },
+  "frozen_roots": [
+    {
+      "Git_HEAD": "de261f458ef5a73e2fe5683de01382f817fae9ed",
+      "Git_tree": "b766976844ccdb7404198e8d2e87f7a74f95c50f",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets"
+    },
+    {
+      "Git_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+      "Git_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate"
+    }
+  ],
+  "ledger_before": {
+    "captures": 539148,
+    "capturesComplete": false,
+    "global_cap": 56068950026,
+    "internal_cap": 55878358152,
+    "internal_used": 55838446728,
+    "used": 56029038602
+  },
+  "literal_metadata_candidate_count": 10,
+  "live_reconciled_git_baselines": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+    "hallucinate": "662108f395fd434f93032bcbd1f13750a2aeb5a2",
+    "root": "38502eb5d6d9f3987f8a398c78b43ae2a3d7f54d"
+  },
+  "local_frozen_git": {
+    "bytes": 17276,
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-isolated-Phase7-exact-nine-local-freeze.json",
+    "sha256": "63b1bc7bc60db45147d2bc0f0d3a3fab908b19fa17f530d00ced408f5fa88da3"
+  },
+  "named_metadata_count": 1625,
+  "named_metadata_recheck_reference": {
+    "bytes": 926801,
+    "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-isolated-1625-named-metadata-guard.json",
+    "sha256": "13f15773a4e364234d425d870f1ddf6372554c538271e5be4ffc255cb672844c"
+  },
+  "namespace_metadata": [],
+  "previous_published_guide": {
+    "bytes": 3117,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-Guide573-four-docs-three-FF-publication.json",
+    "sha256": "1a83a7c66b2e726b4f6605039fbd5bad4296f6cb3f008e965436c68a9e89e8c7"
+  },
+  "prior_v589_existing_reader": {
+    "bytes": 23839,
+    "path": "/tmp/P2-retained-type-review-metadata-postfreeze-READ3-INERT-v589-7evfti1p/Root-selected-existing-V4-retained-type-review-metadata-postfreeze-READ3.py",
+    "sha256": "8b4346f6f5e487e465c0405e23ad5d61ef295baf4618ed91e9fb14a4df26f011"
+  },
+  "promotion_selected": false,
+  "schema": "existing-Phase7-isolated-exact-nine-postfreeze-READ10/v1",
+  "source_write_claimed": false,
+  "target_count": 10
+}

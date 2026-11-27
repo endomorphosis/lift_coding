@@ -1,0 +1,193 @@
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+
+work=Path(__file__).resolve().parent
+file_names=('path','bytes','sha256')
+fields=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+stamp=lambda s:{k:str(getattr(s,k)) for k in fields}
+
+def captured(path):
+    p=Path(path)
+    st=p.lstat()
+    assert stat.S_ISREG(st.st_mode) and st.st_nlink==1
+    with os.fdopen(os.open(p,os.O_RDONLY|os.O_NOFOLLOW),'rb') as stream:
+        assert stamp(st)==stamp(os.fstat(stream.fileno()))
+        data=stream.read(st.st_size+1)
+        assert stamp(st)==stamp(os.fstat(stream.fileno()))
+    assert len(data)==st.st_size and stamp(st)==stamp(p.lstat())
+    return dict(path=str(p),bytes=len(data),sha256=hashlib.sha256(data).hexdigest()),data
+
+
+def ref(path):
+    return captured(path)[0]
+
+
+def raw(r):
+    observed,data=captured(r['path'])
+    assert observed=={k:r[k] for k in file_names}
+    return data
+
+def obj(r):
+    return json.loads(raw(r))
+
+def save(name,payload):
+    p=work/name
+    with os.fdopen(os.open(p,os.O_CREAT|os.O_NOFOLLOW|os.O_WRONLY|os.O_EXCL,0o400),'wb') as stream:
+        stream.write((json.dumps(payload,indent=2,sort_keys=True)+'\n').encode());stream.flush();os.fsync(stream.fileno())
+    return ref(p)
+
+assert __debug__ and len(sys.argv)==10
+closed_ref,freeze_ref,controls_ref=(
+    dict(path=sys.argv[i],bytes=int(sys.argv[i+1]),sha256=sys.argv[i+2]) for i in (1,4,7))
+closed,freeze,controls=map(obj,(closed_ref,freeze_ref,controls_ref))
+assert controls_ref['bytes']==32156 and controls_ref['sha256']=='f7b8499ec178f68cd8509b5134b3d6fcfe8586a39ea6dc04b434ff9600b68ba6'
+assert closed['terminal_returncode']==0 and closed['Source_closed'] is closed['module_closed'] is True
+assert closed['current_ordinary_static'] == controls_ref
+assert closed['exact_local_freeze']==freeze_ref
+assert freeze['terminal_returncode']==0 and freeze['pushed'] is False
+assert freeze['isolated_Source_context_closed'] is True
+assert freeze['canonical_Source_write_claimed'] is freeze['shared_source_or_Git_mutation'] is False
+assert freeze['local_clean'] is freeze['only_two_D_tree_entries_changed'] is True
+guide_ref=controls['current_Guide571_publication']
+guide=obj(guide_ref)
+assert guide['terminal_returncode']==0 and guide['evidence_ordinal']==571
+assert freeze_ref['bytes']==6102 and freeze_ref['sha256']=='55a3b16ae1e00c7df30146a03cdde8ad98eda319ee2c3af386662dc4aabbb37a'
+assert freeze['parent']=='9143ad4daa5b8728ac806d0cfba18561081800fd'
+assert freeze['private_red_green_base']==guide['repositories']['datasets']['HEAD']
+assert closed.get('previous_published_guide',guide_ref)==guide_ref
+guide_install=obj(guide['source_closed_installation'])
+a_original_ref=guide_install['original_A_preservation']
+a_original=obj(a_original_ref)
+assert len(a_original['exact_three_rows'])==3
+for row in a_original['exact_three_rows']:
+    assert stamp(Path(row['path']).lstat())==row['full9']
+    raw(row)
+
+d_root,a_root=closed['projects']
+D,A=Path(d_root['root']),Path(a_root['root'])
+old_D=Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets')
+assert D==Path('/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets') and D.resolve(strict=True)==D
+assert freeze['root']==str(D)
+assert A==Path('/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate') and A.resolve(strict=True)==A
+assert a_original['root']!=str(A)
+didx=freeze['frozen']['index']
+assert didx['path']==str(D/'.git/index') and closed['protected_index_reference']==didx
+assert (d_root['Git_HEAD'],d_root['Git_tree'])==(freeze['frozen']['HEAD'],freeze['frozen']['tree'])
+assert d_root['Git_HEAD']=='cbc43a5f365502265d1e64d7bce3281f2871ef01'
+assert (a_root['Git_HEAD'],a_root['Git_tree'])==('219ba3da0f62f772801d71715e22c506faa21126','c670052e6e12473d974382e455c7aef4adb6aebe')
+
+outer_ref,python_ref=closed['outer_epoch_reference'],closed['python_epoch_reference']
+outer,python=obj(outer_ref),obj(python_ref)
+current={row['path']:row for row in outer}
+assert len(current)==len(outer)==closed['outer_epoch_record_count']==1610
+assert len({row['path'] for row in python})==len(python)==closed['python_epoch_record_count']==1597
+assert all(current[row['path']]==row for row in python)
+assert all(Path(path).is_relative_to(D) or Path(path).is_relative_to(A) for path in current)
+assert all(stamp(Path(row['path']).lstat())==row['full9'] for row in outer)
+assert current[didx['path']]==didx
+aidx=current[str(A/'.git/index')]
+
+readrequest=obj(closed['request'])
+selected=obj(closed['selected'])
+assert selected['Root_selected'] is True and selected['request']==closed['request']
+guard_ref=readrequest['named_metadata_recheck_reference']
+guards=obj(guard_ref)['rows']
+named_count=closed['named_metadata_count']
+assert len(guards)==len({row['path'] for row in guards})==named_count and 1610<=named_count<=1623
+assert {row['path']:row for row in guards}[aidx['path']]==aidx
+assert all(stamp(Path(row['path']).lstat())==row['full9'] for row in guards)
+captures={row['path']:row for row in closed['individual_captures']}
+expected=set(controls['future_roles']['Source_READ3_paths'])-{'.git/index'}
+assert set(captures)=={str(D/rel) for rel in expected}|{didx['path']}
+assert len(closed['individual_captures'])==3 and set(freeze['committed'])==expected
+assert all(all(held[k]==current[path][k] for k in ('bytes','sha256','full9')) for path,held in captures.items())
+assert freeze['candidate']['sha256']=='d4ec744a8454e4781a2804e6ec0cdf197a844d95fccef8e1f82ec3a14568596a'
+candidate=obj(freeze['candidate'])
+for path,held in captures.items():
+    saved=raw(held['raw_reference'])
+    assert (len(saved),hashlib.sha256(saved).hexdigest())==(held['bytes'],held['sha256'])
+    if path!=didx['path']:
+        relative=Path(path).relative_to(D).as_posix()
+        assert saved==raw(candidate['exact_two_roles'][relative]['private_after'])
+        assert freeze['committed'][relative]['stage0_and_committed_blob']==candidate['exact_two_roles'][relative]['planned_git_blob']
+modules={}
+for name,descriptor in controls['future_roles']['guarded_bootstrap_modules'].items():
+    relative=descriptor['relative_path']
+    held=current[str(D/relative)]
+    if descriptor.get('use_actual_frozen_READ3_post'):
+        assert captures[held['path']]['sha256']==held['sha256']
+    modules[name]=dict(relative_path=relative,**{k:held[k] for k in ('bytes','sha256','full9')})
+source_ref=freeze['actual_Source42']
+assert source_ref
+
+read_charge=closed['full_charge']
+charge=obj(read_charge)
+assert charge['all_prior_costs_retained'] is charge['resource_policy_capacity_unchanged'] is True
+raw(charge['exact_human_affirmation'])
+retained=charge['after_full_retained_precharge']
+assert retained['used']>=retained['internal_used']
+assert retained['global_cap']>=retained['used'] and retained['internal_cap']>=retained['internal_used']
+
+def at_clone(path):
+    return str(D / Path(path).relative_to(old_D))
+
+
+def retarget(row):
+    fresh=current[at_clone(row['path'])]
+    if Path(row['path']).relative_to(old_D).as_posix() not in expected:
+        assert all(fresh[key]==row[key] for key in ('bytes','sha256'))
+    return fresh
+
+
+old_fixture=controls['fixture_wire_DATA']
+absences=[at_clone(path) for path in old_fixture['required_absent_paths']]
+assert len(absences)==len(set(absences))==9 and all(not os.path.lexists(path) for path in absences)
+fixture_rows=[retarget(row) for row in old_fixture['required_fixture_closure']]
+assert len(fixture_rows)==6
+assert all(retarget(row) for row in controls['known_current_RUN_support_rows'])
+fixture_wire=old_fixture|dict(required_fixture_closure=fixture_rows,actual_READ3_reference=closed_ref,
+    pytest_inifile=at_clone(old_fixture['pytest_inifile']),required_absent_paths=absences,
+    script_required_fixture=retarget(old_fixture['script_required_fixture']),
+    prospective_parent_RUN_compile_rows=[retarget(row) for row in old_fixture['prospective_parent_RUN_compile_rows']],
+    required_normal_conftests=[at_clone(path) for path in old_fixture['required_normal_conftests']])
+fixture_wire.pop('actual_READ4_reference')
+
+abi=save('actual-live-ordinary33-Source-binding-ABI.json',dict(
+    schema='actual-D27-observed-D-root-initializer-READ-small-closeout/v1',
+    Root_selected=True,Source_closed=True,owned_module_closed=True,
+    outer_epoch_record_count=len(outer),python_epoch_record_count=len(python),
+    outer_epoch_reference=outer_ref,python_epoch_reference=python_ref,
+    protected_index_reference=didx,actual_closed_READ3=closed_ref,actual_Source_write_separate=None, isolated_Source_write_code_reference=source_ref,
+    exact_local_freeze=freeze_ref,published_guide571=guide_ref,resource_runtime_authority=None))
+prior_result_ref=ref(Path('/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/actual-isolated-V4-CLI-ordinary33-closed.json'))
+assert prior_result_ref['sha256']=='a7b1792f4166dffb7f3c0a55af0da71f0383f5260b504a3838e5ae19e23b204c'
+prior_result=obj(prior_result_ref)
+assert prior_result['terminal_returncode']==0 and prior_result['Source_and_resource_and_parent_closed'] is True
+assert prior_result['canonical_adoption_or_publication'] is False
+provenance=save('actual-live-ordinary33-clean-D-A-index-provenance.json',dict(
+    D=didx,A=aidx,branch=freeze['frozen']['branch_file'],frozen=freeze_ref,
+    actual_paired_D_A_READ3=closed_ref, A_raw_Source_index_capture_claimed=False,
+    A_index_metadata_verified_against_current_epoch=True, historical_Guide571=guide_ref,
+    original_A_preservation_reference=a_original_ref,prior_isolated_ordinary33=prior_result_ref))
+D_prov=dict(root=str(D),HEAD=d_root['Git_HEAD'],tree=d_root['Git_tree'],
+            actual_closed_Source_READ=closed_ref,clean_index_provenance_reference=provenance,
+            local_frozen_Git_metadata_reference=freeze_ref,clean_worktree_and_index=True,
+            status_sha256=hashlib.sha256(b'').hexdigest())
+A_prov=dict(root=str(A),HEAD=a_root['Git_HEAD'],tree=a_root['Git_tree'],
+            actual_closed_Source_READ=closed_ref,clean_index_provenance_reference=provenance,
+            local_frozen_Git_metadata_reference=provenance,clean_worktree_and_index=True,
+            status_sha256=D_prov['status_sha256'])
+fixture=save('actual-live-ordinary33-exact-six-fixture-wire.json',fixture_wire)
+out=save('READY-live-ordinary33-actual-READ3-INERT.json',dict(
+    schema='actual-READ3-live-ordinary33-nonclock/v1',read=abi,read_close=closed_ref,fixture=fixture,controls=controls_ref,
+    D_prov=D_prov,A_prov=A_prov,freeze=freeze_ref,modules=modules,outer=outer_ref,python=python_ref,
+    latest_closed_Source_full_precharge=read_charge,original_A_preservation_reference=a_original_ref,
+    historical_Guide571_publication=guide_ref,read3_named_metadata_guard=guard_ref,named_metadata_count=named_count,
+    prior_isolated_ordinary33=prior_result_ref,
+    isolated_frozen_local_git_candidate=True,canonical_source_application=False,
+    final_ordinary_runtime_qualification_eligibility_authority=None))
+print(json.dumps(out,sort_keys=True))

@@ -1,0 +1,390 @@
+import ast
+import contextlib
+from contextlib import contextmanager
+from types import SimpleNamespace
+from copy import deepcopy
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import runpy
+import stat
+import sys
+import tempfile
+import time
+import unittest
+
+HERE=Path(__file__).resolve().parent
+BASE=Path('/tmp/decoder-training-stage-a-phase7-shared-controls-private-v01-Svh5A6da')
+CAPTURE=Path('/tmp/Reader-parent-matrix-publication-after-Source-IO-private-v03-qp1u81n7/boundary.after.py.DATA')
+OWNER_PIN='981dfd120c28cca772edf9382be5d7ea237869f8724075816a4625f265fe7e34'
+ARCHIVE=Path('/tmp/decoder-training-stage-a-derived-python-archive-private-v01-IdtYrBBS/verify_rebind_capture.py')
+GUARD=HERE/'verify_standalone_git.py'
+FIXTURE=BASE/'test_phase7_source32_reuse_v02.py'
+
+
+def digest(raw):
+    return sha256(raw).hexdigest()
+
+
+def exact(path,pin):
+    raw=path.read_bytes()
+    assert digest(raw)==pin,path
+    return raw
+
+
+def full9(st):
+    names=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+    return {key:str(getattr(st,key)) for key in names}
+
+
+class ExistingStageAOwner(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        exact(FIXTURE,'6ab44d8b7660f4615ae250279e9029f0a26fd7b3e1be4559a247cdb37b7cd459')
+        cls.fixtures=runpy.run_path(str(FIXTURE))
+        exact(ARCHIVE,'ea592f7bd7f6c0d7cc1953efef83524e116845139d67af964e8782cf0017884e')
+        cls.epoch=runpy.run_path(str(ARCHIVE))
+        cls.git={'Path':Path}
+        raw=exact(GUARD,'f1256c8de08535861aee3c189fb6d3a79786ba81303e307bc41c3a8e757d2e0a')
+        exec(compile(raw,str(GUARD),'exec'),cls.git)
+
+    def setUp(self):
+        f=self.fixtures
+        self.fixture=f['Fixture'](json.loads(exact(f['OLD_PLAN'],f['OLD_PLAN_SHA'])),
+                                  json.loads(exact(f['OVERLAP'],f['OVERLAP_SHA'])),
+                                  json.loads(exact(f['P7_REQUEST'],f['P7_REQUEST_SHA'])))
+        self.plan_raw,self.plan_args=self.fixture.candidate()
+        for target,(capture,_) in zip(self.plan_raw['fresh_Source_body_targets'],self.fixture.all_captures,strict=True):
+            target.update(bytes=capture['bytes'],sha256=capture['sha256'],full9=None)
+        self.plan_args['expected_plan_sha256']=digest(f['encode'](self.plan_raw))
+        self.roots=tuple(self.plan_raw['current_roots'][key]['root'] for key in ('D','A'))
+        self.events=[]
+        self.spent={'bytes':0,'captures':0}
+        self.report={'inputs':[],'Source_contexts':[]}
+        self.body_reads=[]
+        self.post_drift=False
+        self.close_failure=False
+        self.refuse_approval=False
+        self.refuse_outer_write=False
+        temp=tempfile.TemporaryDirectory(dir=HERE)
+        self.addCleanup(temp.cleanup)
+        self.output=Path(temp.name)
+        for part in ('raw','matrices'):
+            (self.output/part).mkdir()
+        self.given_data={
+            self.plan_raw['phase7_request']['path']:self.plan_args['phase7_request_raw'],
+            self.plan_raw['phase7_receipt']['path']:self.plan_args['phase7_receipt_raw'],
+            self.plan_raw['current_retained_epochs']['outer']['path']:self.plan_args['retained_outer_raw'],
+        }
+        self.archive_map={ref['path']:(raw,stamps) for ref,raw,stamps in self.fixture.shared}
+        self.fresh_map={row['canonical_path']:(raw,row['canonical_full9']) for row,raw in self.fixture.fresh}
+        self.owner={'__name__':'private_owner_functions','os':os,'stat':stat,'Path':Path,'H':digest,'f9':full9,
+                    'report':self.report,'spent':self.spent,'time':time,'json':json,'OUT':self.output,'contextlib':contextlib,'sys':sys,
+                    'request':{'root':self.roots[0],'additional_A':{'root':self.roots[1]},
+                               'actual_modes':{root:'read' for root in self.roots}},
+                    'before':{'used':0,'internal_used':0,'global_cap':2**29,'internal_cap':2**29}}
+        path=HERE/'reader.py.DATA'
+        tree=ast.parse(exact(path,OWNER_PIN))
+        functions=[node for node in tree.body if isinstance(node,ast.FunctionDef)
+                   and node.name in ('admit','control_read','seal','checked_read','acquire_current_sources','read_selected_stage_a_epoch')]
+        exec(compile(ast.Module(body=functions,type_ignores=[]),str(path),'exec'),self.owner)
+        self.real_control_read=self.owner['control_read']
+        self.real_seal=self.owner['seal']
+        self.real_checked_read=self.owner['checked_read']
+        self.real_acquire=self.owner['acquire_current_sources']
+        self.owner.update(control_read=self.read_control,checked_read=self.read_body,seal=self.seal,
+                          acquire_current_sources=self.contexts,verify_full_metadata_guard=self.observe,
+                          parents=self.parents,leaf=lambda row: self.events.append(('leaf',row['path'])))
+        raw=exact(CAPTURE,'64c726cde30beb825dacf042c82aaea7d7e653b34c743c664c99f22db3d084ba')
+        exec(compile(raw,str(CAPTURE),'exec'),self.owner)
+        self.git_api={**self.git,'verify_stage_a_git_with_retained_controls':self.paired_git}
+        self.selection={'schema':'existing-stage-a-retained-controls-outer-only/v1',
+            'plan_sha256':self.plan_args['expected_plan_sha256'],'output_root':str(self.output),
+            'maximum_core_bytes':16*1024**2,'maximum_matrix_write_bytes':1024**2,
+            'epoch_output_maximums':{'outer_epoch':1024**2,'python_epoch':1024**2},
+            'git_output_maximum':8192,'maximum_run_seconds':5}
+        old=self.fixture.before['index']
+        self.selection['git_record']={'D_index':old,'A_index':{'path':'/fixture/A/.git/index','bytes':29},
+            'exact_exclude_pins':[{'path':'/fixture/D/.git/info/exclude','bytes':2},
+                                  {'path':'/fixture/A/.git/info/exclude','bytes':2}]}
+
+    def parents(self,path):
+        return [{'path':str(Path(path).parent),'full9':{'fixture':'original parent observation'}}]
+
+    def charge_read(self,raw):
+        self.owner['admit'](len(raw)+1)
+        self.spent['bytes']+=len(raw)
+        self.spent['captures']+=1
+
+    def read_control(self,ref,kind,**kwargs):
+        path=Path(ref['path'])
+        self.events.append(('read',kind))
+        if path.is_relative_to(self.output):
+            return self.real_control_read(ref,kind,**kwargs)
+        if kind=='selected_stage_a_guide':
+            self.assertIn(ref,self.fixture.guides)
+            self.owner['admit'](ref['bytes']+1)
+            self.spent['bytes']+=ref['bytes']
+            self.spent['captures']+=1
+            return b'fixture verified guide'
+        if kwargs.get('return_file_observations'):
+            raw,stamps=self.archive_map[str(path)]
+            self.assertEqual((len(raw),digest(raw)),(ref['bytes'],ref['sha256']))
+            self.charge_read(raw)
+            return raw,deepcopy(stamps)
+        raw=self.given_data[str(path)]
+        self.assertEqual((len(raw),digest(raw)),(ref['bytes'],ref['sha256']))
+        self.charge_read(raw)
+        return raw
+
+    def read_body(self,path,limit,kind,*,stage_a_fresh=None):
+        self.body_reads.append((path,kind))
+        if kind=='canonical_current_working_file':
+            self.assertEqual(set(stage_a_fresh),set(self.fresh_map))
+            self.assertEqual(stage_a_fresh[str(path)]['bytes'],limit)
+            raw,stamp=self.fresh_map[str(path)]
+            self.assertEqual(len(raw),limit)
+            self.charge_read(raw)
+            return raw,deepcopy(stamp)
+        path=Path(path)
+        begin=full9(path.lstat())
+        raw=self.real_control_read({'path':str(path),'bytes':limit},kind)
+        self.assertEqual(full9(path.lstat()),begin)
+        return raw,begin
+
+    def seal(self,path,raw):
+        self.events.append(('write',path.name))
+        if path.name=='stage-a-outer-epoch.json':
+            self.assertTrue(all(row['exit_returned'] for row in self.report['Source_contexts']))
+            if self.refuse_outer_write:
+                raise OSError('fixture outer writer refused')
+        return self.real_seal(path,raw)
+
+    @contextmanager
+    def contexts(self,*,deadline):
+        self.assertGreater(deadline,time.monotonic())
+        self.events.append(('Source','entered'))
+        rows=[{'root':root,'mode':'read','entered':True,'exit_returned':False} for root in sorted(self.roots)]
+        self.report['Source_contexts'].extend(rows)
+        try:
+            yield
+        finally:
+            for row in rows:
+                row['exit_returned']=not self.close_failure
+            self.events.append(('Source','exit checked'))
+
+    def paired_git(self,io,record,deadline,*,between_endpoints,verify_continuous_owner_scope,
+                   expected_owner_scope_sha256,stage_a_targets,git_output_maximum,**options):
+        self.assertEqual(self.selection['git_record'],record)
+        self.assertEqual(stage_a_targets,self.plan_raw['fresh_Source_body_targets'])
+        self.assertEqual(git_output_maximum,8192)
+        self.assertTrue(verify_continuous_owner_scope(expected_owner_scope_sha256,
+            'paired-git-continuous-read-retained-controls/v1',os.getpid(),self.roots,'before-opening'))
+        before={key:deepcopy(value) for key,value in self.fixture.before.items() if key!='full9'}
+        opening=(before,self.fixture.raw_index)
+        self.events.append(('Git','opening'))
+        body=between_endpoints(deepcopy(opening))
+        self.events.append(('Git','closing'))
+        return opening,body,deepcopy(opening),{'retained_descriptors_closed':True,
+                                             'closing_fresh_control_body_read':False}
+
+    def observe(self,*,stage_a_rows):
+        terminal=not any(row['full9'] is None for row in stage_a_rows)
+        self.events.append(('full9','closing' if terminal else 'opening'))
+        self.assertEqual(len(stage_a_rows),1254)
+        self.assertEqual(sum(row['full9'] is None for row in stage_a_rows),0 if terminal else 12)
+        actual=deepcopy(self.fixture.before['full9'])
+        if terminal and self.post_drift:
+            actual[stage_a_rows[-1]['path']]['st_ino']='99'
+        return actual
+
+    def run_reader(self,**changes):
+        selected=self.selection|changes
+        selection_pin=digest(self.fixtures['encode'](selected))
+        def approve(offered,roots,plan_pin,deadline):
+            self.assertGreater(deadline,time.monotonic())
+            self.assertEqual((offered,roots,plan_pin),(selection_pin,self.roots,selected['plan_sha256']))
+            self.events.append(('selection','checked'))
+            return not self.refuse_approval
+        return self.owner['read_selected_stage_a_epoch'](self.plan_raw,reader_selection=selected,
+           expected_selection_sha256=selection_pin,verify_reader_selection=approve,
+           verify_phase7_owner=self.plan_args['verify_phase7_owner'],epoch_api=self.epoch,
+           git_api=self.git_api,io=None,read_stage_zero=lambda *_:None,deadline=time.monotonic()+5)
+
+    def test_original_composer_two_endpoints_both_commitments_and_one_physical_archive(self):
+        result=self.run_reader()
+        self.assertTrue(result['Source_closed'] and result['archive_committed'])
+        self.assertEqual(result['body_capture_count'],12)
+        self.assertEqual(result['closing_roots'],self.fixture.after['roots'])
+        self.assertEqual(result['closing_protected_index'],self.fixture.after['index'])
+        self.assertEqual(result['plan_sha256'],self.plan_args['expected_plan_sha256'])
+        self.assertEqual(result['observed_counts'],
+            {'opening_full9':1254,'closing_full9':1254,'guides':4,'reused_archives':20,'fresh_bodies':12})
+        self.assertEqual(len(list((self.output/'matrices').iterdir())),36)
+        self.assertEqual(len(list((self.output/'raw').iterdir())),12)
+        self.assertEqual(len(self.body_reads),24)
+        self.assertEqual([kind for event,kind in self.events if event=='full9'],['opening','closing'])
+        self.assertLess(self.events.index(('Git','closing')),self.events.index(('full9','closing')))
+        self.assertLess(self.events.index(('Source','exit checked')),self.events.index(('write','stage-a-outer-epoch.json')))
+        raw=(self.output/'stage-a-outer-epoch.json').read_bytes()
+        outputs=self.epoch['replay_v214_outer_only_epoch_archive'](raw,expected_commitments=result['logical_epochs'])
+        self.assertEqual([len(json.loads(outputs[k])) for k in ('outer_epoch','python_epoch')],[1250,1245])
+        self.assertEqual(sorted(x.name for x in self.output.iterdir()),['matrices','raw','stage-a-outer-epoch.json'])
+        self.assertEqual(result['matrix_write_bytes_debited'],sum(x.stat().st_size for x in (self.output/'matrices').iterdir()))
+        self.assertEqual(sum(row['parent_matrix'] for row in result['private_write_debits']),36)
+
+    def test_merged_control_reader_keeps_archive_observations_and_held_fd_modes(self):
+        inputs=self.output/'raw'
+        self.owner['parents']=lambda path:[str(Path(path).parent)]
+        raw=b'one original control read'
+        archived=self.real_seal(inputs/'archive.DATA',raw)
+        archived['full9']=full9(Path(archived['path']).lstat())
+        value,stamps=self.real_control_read(archived,'private_archive',return_file_observations=True)
+        self.assertEqual((value,stamps),(raw,(archived['full9'],)*4))
+        retained=[]
+        def save(fd):
+            self.assertEqual(full9(os.fstat(fd)),archived['full9'])
+            retained.append(os.dup(fd))
+        ordinary={key:archived[key] for key in ('path','bytes','sha256')}
+        try:
+            result=self.real_control_read(ordinary,'selected_opening_Git_control',retain_fd=save)
+            self.assertEqual(result,raw)
+            self.assertEqual(len(retained),1)
+            self.assertEqual(full9(os.fstat(retained[0])),archived['full9'])
+        finally:
+            for fd in retained:
+                os.close(fd)
+        with self.assertRaisesRegex(ValueError,'one explicit control observation mode'):
+            self.real_control_read(archived,'ambiguous',retain_fd=save,return_file_observations=True)
+        self.assertEqual(self.spent,{'bytes':2*len(raw),'captures':2})
+
+    def test_actual_read_rejects_legacy_paths_accepts_exact_scope_and_rejects_thirteenth(self):
+        requested=json.loads(exact(self.fixtures['P7_REQUEST'],self.fixtures['P7_REQUEST_SHA']))
+        self.owner['request'].update(targets=requested['targets'],
+            protected_completed_targets=requested['protected_completed_targets'],
+            unchanged_fences=requested.get('unchanged_fences',[]))
+        allowed={row['path'] for key in ('targets','protected_completed_targets','unchanged_fences')
+                 for row in self.owner['request'][key]}
+        self.assertEqual(len(self.fresh_map),12)
+        self.assertTrue(allowed.isdisjoint(self.fresh_map))
+        temp=tempfile.TemporaryDirectory(dir=HERE)
+        self.addCleanup(temp.cleanup)
+        folder=Path(temp.name)
+        permits={}
+        for i in range(13):
+            path=folder/f'fresh-{i:02}.DATA'
+            body=f'private fixture {i:02}'.encode()
+            path.write_bytes(body)
+            if i<12:
+                permits[str(path)]={'path':str(path),'bytes':len(body),'sha256':digest(body),
+                                    'full9':full9(path.lstat())}
+        self.owner['control_read']=self.real_control_read
+        first=next(iter(permits.values()))
+        with self.assertRaisesRegex(AssertionError,'unselected file read'):
+            self.real_checked_read(first['path'],first['bytes'],'canonical_current_working_file')
+        self.report['stage_a']={'fixture':True}
+        with self.assertRaisesRegex(ValueError,'unselected Stage A'):
+            self.real_checked_read(first['path'],first['bytes'],'canonical_current_working_file',stage_a_fresh=permits)
+        self.report['Source_contexts']=[
+            {'root':root,'mode':'read','entered':True,'exit_returned':False} for root in sorted(self.roots)]
+        for row in permits.values():
+            body,stamp=self.real_checked_read(row['path'],row['bytes'],'canonical_current_working_file',
+                                              stage_a_fresh=permits)
+            self.assertEqual((digest(body),stamp),(row['sha256'],row['full9']))
+        with self.assertRaisesRegex(ValueError,'unselected Stage A'):
+            self.real_checked_read(folder/'fresh-12.DATA',first['bytes'],'canonical_current_working_file',
+                                   stage_a_fresh=permits)
+        with self.assertRaisesRegex(ValueError,'unselected Stage A'):
+            self.real_checked_read(first['path'],first['bytes']+1,'canonical_current_working_file',
+                                   stage_a_fresh=permits)
+        self.assertEqual(self.spent['captures'],12)
+
+    def test_actual_acquisition_passes_declining_deadline_and_preserves_legacy_default(self):
+        clock=SimpleNamespace(now=10)
+        calls=[]
+        @contextmanager
+        def acquire(root,**options):
+            calls.append((root,options))
+            clock.now+=1
+            yield
+        self.owner.update(time=SimpleNamespace(monotonic=lambda:clock.now),
+                          source=SimpleNamespace(DEFAULT_TIMEOUT_SECONDS=300,source_lease=acquire))
+        with self.real_acquire(deadline=15):
+            self.assertTrue(all(not row['exit_returned'] for row in self.report['Source_contexts']))
+        self.assertEqual([opts['timeout_seconds'] for _,opts in calls],[5,4])
+        self.assertTrue(all(row['exit_returned'] for row in self.report['Source_contexts']))
+        calls.clear()
+        with self.real_acquire():
+            pass
+        self.assertEqual([opts for _,opts in calls],[{'mode':'read'}]*2)
+
+    def test_actual_first_lease_overrun_closes_it_and_never_acquires_the_second(self):
+        clock=SimpleNamespace(now=10)
+        events=[]
+        @contextmanager
+        def acquire(root,**options):
+            events.append(('enter',root,options['timeout_seconds']))
+            clock.now+=2
+            try:
+                yield
+            finally:
+                events.append(('exit',root))
+        self.owner.update(time=SimpleNamespace(monotonic=lambda:clock.now),
+                          source=SimpleNamespace(DEFAULT_TIMEOUT_SECONDS=300,source_lease=acquire))
+        with self.assertRaisesRegex(ValueError,'expired while acquiring'):
+            self.real_acquire(deadline=11)
+        first=min(self.roots)
+        self.assertEqual(events,[('enter',first,1),('exit',first)])
+        self.assertTrue(self.report['Source_contexts'][0]['exit_returned'])
+
+    def test_original_owner_refusal_has_no_reads_leases_or_writes(self):
+        self.refuse_approval=True
+        with self.assertRaisesRegex(ValueError,'selection refused'):
+            self.run_reader()
+        self.assertEqual(self.events,[('selection','checked')])
+        self.assertEqual(self.spent,{'bytes':0,'captures':0})
+
+    def test_insufficient_available_allocation_refuses_before_controls(self):
+        self.owner['before']['internal_cap']=1
+        with self.assertRaisesRegex(RuntimeError,'shared Source allowance insufficient'):
+            self.run_reader()
+        self.assertEqual(self.events,[('selection','checked')])
+        self.assertEqual(self.spent,{'bytes':0,'captures':0})
+
+    def test_matrix_limit_stops_before_first_body_is_published_and_closes_source(self):
+        with self.assertRaisesRegex(ValueError,'parent-matrix write allowance'):
+            self.run_reader(maximum_matrix_write_bytes=1)
+        self.assertTrue(self.report['stage_a']['Source_closed'])
+        self.assertFalse(self.report['stage_a']['archive_committed'])
+        self.assertEqual(list((self.output/'raw').iterdir()),[])
+        self.assertEqual(len(self.body_reads),1)
+
+    def test_terminal_full9_drift_refuses_and_records_source_closed(self):
+        self.post_drift=True
+        with self.assertRaisesRegex(ValueError,'metadata fence drifted'):
+            self.run_reader()
+        self.assertTrue(self.report['stage_a']['Source_closed'])
+        self.assertFalse(self.report['stage_a']['archive_committed'])
+        self.assertNotIn(('write','stage-a-outer-epoch.json'),self.events)
+
+    def test_unconfirmed_source_close_prevents_outer_publication(self):
+        self.close_failure=True
+        with self.assertRaisesRegex(ValueError,'Source context exits are required'):
+            self.run_reader()
+        self.assertFalse(self.report['stage_a']['Source_closed'])
+        self.assertFalse(self.report['stage_a']['archive_committed'])
+        self.assertNotIn(('write','stage-a-outer-epoch.json'),self.events)
+
+    def test_failed_outer_write_keeps_source_close_and_no_success_flag(self):
+        self.refuse_outer_write=True
+        with self.assertRaisesRegex(OSError,'outer writer refused'):
+            self.run_reader()
+        attempt=self.report['stage_a']
+        self.assertTrue(attempt['Source_closed'])
+        self.assertFalse(attempt['archive_committed'])
+        self.assertFalse(attempt['private_write_debits'][-1]['completed'])
+        self.assertGreater(attempt['private_write_debits'][-1]['bytes'],0)
+
+if __name__=='__main__':
+    unittest.main(verbosity=2)

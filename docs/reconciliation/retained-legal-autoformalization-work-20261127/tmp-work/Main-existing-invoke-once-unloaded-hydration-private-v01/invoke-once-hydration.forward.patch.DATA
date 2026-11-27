@@ -1,0 +1,146 @@
+--- a/invoke-existing-durable-handoff-INERT.py.DATA
++++ b/invoke-existing-durable-handoff-INERT.py.DATA
+@@ -111,9 +111,26 @@
+                                       timeout_seconds=15.0,max_response_bytes=262144)
+     snapshot=state.get('thread_snapshot');turn=state.get('latest_turn')
+     if (state.get('observation_state')!='observed' or type(snapshot) is not dict
+-            or snapshot.get('id')!=THREAD_ID or snapshot.get('can_accept_direct_input') is not True
+-            or type(turn) is not dict):
++            or snapshot.get('id')!=THREAD_ID or type(turn) is not dict):
+         return finish(no_authority('refused','current_thread_state_unverified',state_observation=state))
++    needs_resume=snapshot.get('status')=='notLoaded'
++    if needs_resume:
++        if (turn.get('status') not in {'completed','failed','interrupted'}
++                or type(turn.get('id')) is not str
++                or re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}',turn['id']) is None
++                or not (snapshot.get('can_accept_direct_input') is None
++                        or snapshot.get('can_accept_direct_input') is False)):
++            return finish(no_authority('refused','unloaded_thread_requires_verified_terminal_turn',state_observation=state))
++    elif snapshot.get('can_accept_direct_input') is not True:
++        return finish(no_authority('refused','current_thread_state_unverified',state_observation=state))
++    def authenticate(reserved):
++        # Resume and enqueue share one immutable reservation; never overwrite
++        # an UNKNOWN record to obtain permission for another mutation.
++        for item in (retained,reserved):
++            checked=ns['read_codex_handoff_artifact'](private_root=str(private),artifact_path=item['path'],
++                expected_bytes=item['bytes'],expected_sha256=item['sha256'])
++            if checked.get('artifact_state')!='verified' or checked.get('full9')!=item['full9']:
++                raise ValueError('durable pre-mutation artifact changed')
+     def reserve(method, expected):
+         row=no_authority('delivery_unknown','reserved_before_mutation',method=method,
+             expected_observed_turn=expected,message_sha256=bindings['message_sha256'],
+@@ -121,11 +138,7 @@
+         saved=keep_json(outputs['unknown_reservation_path'],row)
+         if saved.get('artifact_state')!='retained':raise ValueError('UNKNOWN reservation not durable')
+         # Re-authenticate both immutable artifacts immediately before the mutation boundary.
+-        for item in (retained,saved):
+-            checked=ns['read_codex_handoff_artifact'](private_root=str(private),artifact_path=item['path'],
+-                expected_bytes=item['bytes'],expected_sha256=item['sha256'])
+-            if checked.get('artifact_state')!='verified' or checked.get('full9')!=item['full9']:
+-                raise ValueError('durable pre-mutation artifact changed')
++        authenticate(saved)
+         return saved
+     if turn.get('status')=='inProgress':
+         reservation=reserve('turn/steer',turn)
+@@ -148,7 +161,7 @@
+     # Root explicitly selected this bounded one-off idle turn/start orchestration.
+     # The existing transport opener is reused; this does not replace the production sender.
+     deadline=time.monotonic()+15.0;response_bytes=0;notifications=0;next_id=0;response_ids=[]
+-    mutation_started=False;reservation=None
++    mutation_started=False;reservation=None;mutation_method=None;resume_acknowledged=False
+     def remaining():
+         left=deadline-time.monotonic()
+         if left<=0:raise TimeoutError('Root_oneoff_start_deadline')
+@@ -185,21 +198,55 @@
+                     if notifications>32:raise ValueError('RPC_notification_bound')
+             rpc('initialize',{'clientInfo':{'name':'Root-oneoff-existing-handoff','version':'1'}})
+             send({'jsonrpc':'2.0','method':'initialized'})
+-            again=rpc('thread/read',{'threadId':THREAD_ID,'includeTurns':False})
+-            current=again.get('thread') if type(again) is dict else None
+-            listing=rpc('thread/turns/list',{'threadId':THREAD_ID,'limit':1,'sortDirection':'desc'})
+-            rows=listing.get('data') if type(listing) is dict else None
+-            row=rows[0] if type(rows) is list and len(rows)==1 else None
+-            latest=row.get('turn',row) if type(row) is dict else None
+-            if (type(current) is not dict or current.get('id')!=THREAD_ID
+-                    or current.get('canAcceptDirectInput') is not True
+-                    or type(latest) is not dict or latest.get('id')!=turn['id']
+-                    or latest.get('status')!=turn['status']
+-                    or latest.get('status') not in {'completed','failed','interrupted'}):
++            def observe_latest():
++                again=rpc('thread/read',{'threadId':THREAD_ID,'includeTurns':False})
++                current=again.get('thread') if type(again) is dict else None
++                listing=rpc('thread/turns/list',{'threadId':THREAD_ID,'limit':1,'sortDirection':'desc'})
++                rows=listing.get('data') if type(listing) is dict else None
++                row=rows[0] if type(rows) is list and len(rows)==1 else None
++                return current,row.get('turn',row) if type(row) is dict else None
++            def same_terminal(latest):
++                return (type(latest) is dict and latest.get('id')==turn['id']
++                    and latest.get('status')==turn['status']
++                    and latest.get('status') in {'completed','failed','interrupted'})
++            def status_type(current):
++                status=current.get('status') if type(current) is dict else None
++                return status.get('type') if type(status) is dict else status
++            current,latest=observe_latest()
++            if needs_resume:
++                if (type(current) is not dict or current.get('id')!=THREAD_ID
++                        or status_type(current)!='notLoaded'
++                        or not (current.get('canAcceptDirectInput') is None
++                                or current.get('canAcceptDirectInput') is False)
++                        or not same_terminal(latest)):
++                    return finish(no_authority('refused','unloaded_state_changed_no_dispatch',
++                        method='thread/resume',rpc_response_ids=response_ids))
++                reservation=reserve('thread/resume+turn/start',{'id':latest['id'],'status':latest['status']})
++                mutation_started=True;mutation_method='thread/resume'
++                hydrated=rpc('thread/resume',{'threadId':THREAD_ID,'excludeTurns':True})
++                resumed=hydrated.get('thread') if type(hydrated) is dict else None
++                if (type(resumed) is not dict or resumed.get('id')!=THREAD_ID
++                        or resumed.get('canAcceptDirectInput') is not True
++                        or status_type(resumed)!='idle'):
++                    raise ValueError('same_thread_resume_ack_invalid')
++                resume_acknowledged=True
++                # Hydration is not an enqueue or a current-turn guarantee.
++                current,latest=observe_latest()
++                if (type(current) is not dict or current.get('id')!=THREAD_ID
++                        or current.get('canAcceptDirectInput') is not True
++                        or status_type(current)!='idle' or not same_terminal(latest)):
++                    return finish(no_authority('refused','hydrated_state_changed_no_dispatch',
++                        method='turn/start',rpc_response_ids=response_ids,
++                        metadata_resume_acknowledged=True,UNKNOWN_reservation=reservation,
++                        current_call_mutation_started=True,message_mutation_started=False))
++                authenticate(reservation)
++            elif (type(current) is not dict or current.get('id')!=THREAD_ID
++                    or current.get('canAcceptDirectInput') is not True or not same_terminal(latest)):
+                 return finish(no_authority('refused','idle_state_changed_no_dispatch',
+                                           method='turn/start',rpc_response_ids=response_ids))
+-            reservation=reserve('turn/start',{'id':latest['id'],'status':latest['status']})
+-            mutation_started=True  # Any send/ack failure from this durable point is UNKNOWN.
++            if reservation is None:
++                reservation=reserve('turn/start',{'id':latest['id'],'status':latest['status']})
++            mutation_started=True;mutation_method='turn/start'  # Unacknowledged enqueue is UNKNOWN.
+             ack=rpc('turn/start',{'threadId':THREAD_ID,
+                                  'input':[{'type':'text','text':message,'text_elements':[]}]})
+             newturn=ack.get('turn') if type(ack) is dict else None
+@@ -211,12 +258,18 @@
+                             method='turn/start'),'enqueue_acknowledged':True,
+                 'ack':{'turn_id':new_id,'status':newturn.get('status')},
+                 'rpc_response_ids':response_ids,'UNKNOWN_reservation':reservation,
+-                'state_reads_atomic':False})
++                'state_reads_atomic':False,
++                **({'metadata_resume_acknowledged':True} if needs_resume else {})})
+     except Exception as error:
+-        return finish(no_authority('delivery_unknown' if mutation_started else 'refused',
+-            'turn_start_unacknowledged' if mutation_started else 'idle_preflight_refused',
+-            method='turn/start',error_type=type(error).__name__,rpc_response_ids=response_ids,
+-            UNKNOWN_reservation=reservation,current_call_mutation_started=mutation_started))
++        unknown=mutation_started and not (mutation_method=='thread/resume' and resume_acknowledged)
++        reason=('turn_start_unacknowledged' if mutation_method=='turn/start' else
++                'post_resume_state_unverified' if resume_acknowledged else
++                'thread_resume_unacknowledged' if mutation_started else 'idle_preflight_refused')
++        return finish(no_authority('delivery_unknown' if unknown else 'refused',reason,
++            method=mutation_method or 'turn/start',error_type=type(error).__name__,rpc_response_ids=response_ids,
++            UNKNOWN_reservation=reservation,current_call_mutation_started=mutation_started,
++            **({'metadata_resume_acknowledged':resume_acknowledged,
++                'message_mutation_started':mutation_method=='turn/start'} if needs_resume else {})))
+ 
+ def main(argv=None):
+     parser=argparse.ArgumentParser(description='INERT until Root supplies one new message and fresh private outputs.')

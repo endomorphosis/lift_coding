@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/existing-rebased-projection-runner-one-consumer-case.v04.py.DATA", line 287, in main
+    outcome = run_cases(args.mode, adapter, prior)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/existing-rebased-projection-runner-one-consumer-case.v04.py.DATA", line 254, in run_cases
+    return {"passes": scope["run"]()}
+                      ^^^^^^^^^^^^^^
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/existing-maintained-no-fit-one-consumer-case.py.DATA", line 76, in run
+    case(source.samples.__wrapped__(), patches)
+  File "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/project/tests/unit/logic/integration/test_trusted_feedback_weight_updates.py", line 1101, in test_current_target_metadata_without_checked_receipt_never_reaches_update
+AssertionError

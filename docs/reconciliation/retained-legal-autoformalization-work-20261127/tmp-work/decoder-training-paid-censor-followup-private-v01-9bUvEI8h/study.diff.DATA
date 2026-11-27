@@ -1,0 +1,106 @@
+--- /tmp/decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/study.py
++++ /tmp/decoder-training-paid-censor-followup-private-v01-9bUvEI8h/study.py
+@@ -817,15 +817,22 @@
+             "restricted_confirmation_seconds": (restricted_lower, restricted_upper)}
+ 
+ 
+-def _verified_confirmation_cost_bounds(report):
++def _verified_confirmation_cost_bounds(report, *, censor_followup=None):
+     """Tighten finite paired-seed bounds without changing an assessed look or its clock."""
+     attempts = {row["attempt_sha256"]: row for row in report["attempts"]}
++    censor_followup = {} if censor_followup is None else censor_followup
+     rows, grouped = [], {}
+     for pair in report["pairs"]:
+         clock, horizon = pair["clock"], pair["horizon"]
+         baseline, candidate = (_confirmation_meter_window(attempts[pair[f"{role}_attempt_sha256"]], clock, horizon,
+                 pair[f"{role}_attained"], pair[f"observed_{role}_confirmation"], pair[f"{role}_reason"])
+             for role in ("baseline", "candidate"))
++        for role, window in (("baseline", baseline), ("candidate", candidate)):
++            witness = censor_followup.get((pair[f"{role}_attempt_sha256"], clock))
++            if witness is not None:
++                lower, upper = window["restricted_confirmation_seconds"]
++                window["restricted_confirmation_seconds"] = (max(lower, min(witness["through_seconds"], horizon)), upper)
++                window["censor_followup"] = dict(witness)
+         a_low, a_high = (Fraction.from_float(value) for value in baseline["restricted_confirmation_seconds"])
+         b_low, b_high = (Fraction.from_float(value) for value in candidate["restricted_confirmation_seconds"])
+         time_delta = (b_low - a_high, b_high - a_low)
+@@ -852,6 +859,79 @@
+     return {"schema": CONFIRMATION_COST_BOUNDS_SCHEMA, "pairs": tuple(rows), "contrasts": tuple(contrasts),
+             "scope": "finite_registered_seed_pairs_and_scheduled_confirmation_clocks",
+             "cost_basis": report["cost_basis"], "cost_evidence_sha256": report["cost_evidence_sha256"]}
++
++
++CENSOR_FOLLOWUP_BOUNDS_SCHEMA = "reviewed-scheduled-confirmation-cost-bounds-with-censor-followup/v1"
++
++
++@dataclass(frozen=True)
++class CensorFollowup:
++    attempt_sha256: str
++    clock: str
++    closing_meter_sha256: str
++    closing_clock_receipt_sha256: str
++    closeout_receipt_sha256: str
++    no_confirmation_through_close_receipt_sha256: str
++
++
++def verify_censored_confirmation_cost_bounds(report, *, expected_paid_report_sha256, followups,
++        expected_followups_sha256, verify_original_followup_owner):
++    """Tighten partial follow-up using same-attempt paid closure and independent absence evidence."""
++    _require(type(report) is dict and report.get("schema") in (
++        VERIFIED_CONTRAST_SCHEMA, VERIFIED_DEVELOPMENT_SCHEMA, VERIFIED_COMPACT_DEVELOPMENT_SCHEMA)
++        and _pin(expected_paid_report_sha256) and commitment(report) == expected_paid_report_sha256
++        and _pin(report.get("cost_evidence_sha256")) and type(followups) is tuple and bool(followups)
++        and all(type(row) is CensorFollowup for row in followups)
++        and _pin(expected_followups_sha256) and commitment(followups) == expected_followups_sha256
++        and callable(verify_original_followup_owner), "exact paid report and original no-confirmation proof required")
++    paid = deepcopy(report)
++    selected = deepcopy(followups)
++    attempts = {row["attempt_sha256"]: row for row in paid["attempts"]}
++    _require(len(attempts) == len(paid["attempts"]), "paid attempt identities must be unique")
++    meter_uses = Counter(
++        meter["record_sha256"] for row in attempts.values()
++        for meter in (row["cost_evidence"]["closing_meter"], *(look["meter"] for look in row["cost_evidence"]["looks"])))
++    close_uses = Counter(row["closeout_receipt_sha256"] for row in attempts.values())
++    compared = {(pair[f"{role}_attempt_sha256"], pair["clock"])
++                for pair in paid["pairs"] for role in ("baseline", "candidate")}
++    witnessed = {}
++    for followup in selected:
++        key = (followup.attempt_sha256, followup.clock)
++        _require(all(_pin(pin) for pin in (followup.attempt_sha256, followup.closing_meter_sha256,
++            followup.closing_clock_receipt_sha256, followup.closeout_receipt_sha256,
++            followup.no_confirmation_through_close_receipt_sha256))
++            and type(followup.clock) is str and followup.clock in COVERED_CLOCKS
++            and key in compared and key not in witnessed,
++            "exact unique right-censored attempt and compared clock required")
++        row = attempts[followup.attempt_sha256]
++        verdict = row["decision"]
++        closing = row["cost_evidence"]["closing_meter"]
++        stamp = closing["costs"].get(followup.clock)
++        _require(verdict["status"] == "right_censored" and verdict["confirming_checkpoint"] is None
++            and row["confirmation_budget_block"] is None
++            and closing["stage"] == "close" and closing["attempt_sha256"] == followup.attempt_sha256
++            and closing["record_sha256"] == row["closing_meter_sha256"] == followup.closing_meter_sha256
++            and meter_uses[followup.closing_meter_sha256] == 1
++            and row["closeout_receipt_sha256"] == followup.closeout_receipt_sha256
++            and close_uses[followup.closeout_receipt_sha256] == 1
++            and closing["clock_receipts"][COVERED_CLOCKS.index(followup.clock)] == followup.closing_clock_receipt_sha256
++            and type(stamp) is float and isfinite(stamp) and stamp >= 0
++            and stamp == verdict["closing_costs"][followup.clock],
++            "paid right-censored follow-up requires its own observed closing clock and unaliased meter")
++        witnessed[key] = {
++            "through_seconds": stamp,
++            "closing_meter_sha256": followup.closing_meter_sha256,
++            "closing_clock_receipt_sha256": followup.closing_clock_receipt_sha256,
++            "closeout_receipt_sha256": followup.closeout_receipt_sha256,
++            "no_confirmation_through_close_receipt_sha256": followup.no_confirmation_through_close_receipt_sha256}
++    _require(verify_original_followup_owner(expected_paid_report_sha256, paid["cost_evidence_sha256"],
++                                            expected_followups_sha256) is True
++        and commitment(report) == commitment(paid) == expected_paid_report_sha256
++        and commitment(followups) == commitment(selected) == expected_followups_sha256,
++        "original follow-up owner refused coverage or exact selected evidence changed")
++    bounds = _verified_confirmation_cost_bounds(paid, censor_followup=witnessed)
++    return {**bounds, "schema": CENSOR_FOLLOWUP_BOUNDS_SCHEMA, "paid_report_sha256": expected_paid_report_sha256,
++            "followups_sha256": expected_followups_sha256}
+ 
+ 
+ def compare_verified_contrasts(validator, *, study, expected_study_sha256, attempts, expected_attempts_sha256,

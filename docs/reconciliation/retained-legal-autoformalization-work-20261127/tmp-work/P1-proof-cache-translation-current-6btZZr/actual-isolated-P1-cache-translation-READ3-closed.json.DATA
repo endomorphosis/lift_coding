@@ -1,0 +1,187 @@
+{
+  "Source_WRITE_claimed": false,
+  "Source_closed": true,
+  "actual_accelerate_index_metadata": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "actual_closed_Source_read_leases": [
+    {
+      "canonical_root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+      "cooperative": true,
+      "lock_path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/workspace/control-plane/source-leases/source.lock",
+      "mode": "read",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 3.390386700630188e-05
+    },
+    {
+      "canonical_root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+      "cooperative": true,
+      "lock_path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/workspace/control-plane/source-leases/source.lock",
+      "mode": "read",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 6.833579391241074e-05
+    }
+  ],
+  "actual_isolated_content_epoch": {
+    "bytes": 6236,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "44e3761cedbc50ed9967e330f4c35f4b7d39269257acbe9e41cb7f2e69407783"
+  },
+  "actual_ledger_after": {
+    "captures": 543396,
+    "capturesComplete": false,
+    "global_cap": 57159469066,
+    "internal_cap": 56968877192,
+    "internal_used": 56962520200,
+    "used": 57153112074
+  },
+  "exact_local_freeze": {
+    "bytes": 6190,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-isolated-Phase1-cache-translation-exact-two-local-freeze.json",
+    "sha256": "38999ef02d990f6bfb348c01a80455b00b58fed94283c153011bc3afbcf50b4a"
+  },
+  "full_charge": {
+    "bytes": 1292,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/Source-only-P1-cache-translation-READ-epoch-full-retained-v02.json",
+    "sha256": "1846053f8ec3457b8b2f39e03807f52734eddb8ccb6d0e00585763c522bfedf9"
+  },
+  "individual_captures": [
+    {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795741449710387210",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514406",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741449706387182",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+      "raw_reference": {
+        "bytes": 7070597,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/retained-Source-index.DATA",
+        "sha256": "a5d9497fe854dfaa4e40ba174393b221ba2f095db09579baa34de10364b99245"
+      },
+      "sha256": "a5d9497fe854dfaa4e40ba174393b221ba2f095db09579baa34de10364b99245"
+    },
+    {
+      "bytes": 62783,
+      "full9": {
+        "st_ctime_ns": "1795741449323712303",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513518",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741449323712303",
+        "st_nlink": "1",
+        "st_size": "62783",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+      "raw_reference": {
+        "bytes": 62783,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/retained-Source-proof_cache.py.DATA",
+        "sha256": "704ccf09ba9d7d3c32d107c9cd8e07f6f32933d5f5fdcfe404b641f847c30743"
+      },
+      "sha256": "704ccf09ba9d7d3c32d107c9cd8e07f6f32933d5f5fdcfe404b641f847c30743"
+    },
+    {
+      "bytes": 102758,
+      "full9": {
+        "st_ctime_ns": "1795741449323712303",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514356",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741449323712303",
+        "st_nlink": "1",
+        "st_size": "102758",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+      "raw_reference": {
+        "bytes": 102758,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/retained-Source-test_proof_cache.py.DATA",
+        "sha256": "23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab"
+      },
+      "sha256": "23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab"
+    }
+  ],
+  "module_closed": true,
+  "named_metadata_count": 1621,
+  "named_metadata_recheck_reference": {
+    "bytes": 905701,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-isolated-1621-named-metadata-guard.json",
+    "sha256": "10fb3261b3d4f86421f2a196f3da1b167b07447c637169aaa73dd62c465a3747"
+  },
+  "ordinary_phase_qualified": false,
+  "ordinary_read_binding_abi": {
+    "bytes": 1818,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-isolated-ordinary9-D27-read-binding.json",
+    "sha256": "cde6c95b52d38f8035c0c784bba5845204512178ac4a574410822141851883f5"
+  },
+  "outer_epoch_record_count": 1614,
+  "outer_epoch_reference": {
+    "bytes": 850358,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-live-reconciled-outer1614-epoch.json",
+    "sha256": "44af55564659e96cfe9e3c7ead9336203f51bb37c6117ab108238b5d3b69bb05"
+  },
+  "previous_published_guide": {
+    "bytes": 2647,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-Guide574-four-docs-three-FF-publication.json",
+    "sha256": "84d3364b66b4990a14a687417fb17ae38bc1fdb85131c51bfda55d34a0a1e84d"
+  },
+  "projects": [
+    {
+      "Git_HEAD": "4cc1311f12a317b8a0a0aa92c950011cd09399f0",
+      "Git_tree": "971b75a5ba8da2c688631ea814709d91d75a5720",
+      "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets"
+    },
+    {
+      "Git_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+      "Git_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate"
+    }
+  ],
+  "promotion_selected": false,
+  "protected_index_reference": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795741449710387210",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72514406",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795741449706387182",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "sha256": "a5d9497fe854dfaa4e40ba174393b221ba2f095db09579baa34de10364b99245"
+  },
+  "python_epoch_record_count": 1601,
+  "python_epoch_reference": {
+    "bytes": 843788,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-live-reconciled-Python1601-epoch.json",
+    "sha256": "da7f473f29fe4a57f8e8388c15d72cd7ba69c61168add0993b5116e4237e6dd9"
+  },
+  "schema": "actual-closed-Source42-epoch-and-exact-three-retained-reads/v1",
+  "terminal_returncode": 0
+}

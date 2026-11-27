@@ -1,0 +1,145 @@
+{
+  "actual_live_reader": null,
+  "basis_quote": {
+    "bytes": 1590,
+    "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-pair-conditional-quote.INERT.json",
+    "sha256": "0233b3a3379469767120fbda67e6eea6a89298a56839981c1e201d565be69f9f"
+  },
+  "candidate": {
+    "bytes": 50631,
+    "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/reader.py.DATA",
+    "sha256": "f20087d2ad4740b3b8b2d30ee1f70365b0aafdb44c416dda5e52cf18ca644bd5"
+  },
+  "child_receipt_read_by_existing_A0_binder": true,
+  "controls": {
+    "legacy": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/legacy.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 2987,
+        "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/legacy.stderr",
+        "sha256": "3b2d959f5fa85e537e3909a39b33e67740ceb088bdf1cd7e212ed385733bd982"
+      },
+      "stdout": {
+        "bytes": 31,
+        "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/legacy.stdout",
+        "sha256": "bbe25e9d44fb636c1bb34f70c4e41545926d66e43ad606a70000b6d843f6758f"
+      }
+    },
+    "stage-zero": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/stage-zero.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 364,
+        "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/stage-zero.stderr",
+        "sha256": "09865b00305a13043865a2aae7e7ef751979eb37b3af328e7f6fb95423bd3753"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/stage-zero.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "startup": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/startup.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1397,
+        "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/startup.stderr",
+        "sha256": "996fe3c07897b4456ede05c6f482bf2c41f5052a399b0f8bbd15d2d6bd8bfc29"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/startup.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "diff": {
+    "bytes": 9292,
+    "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/reader.py.DATA.diff",
+    "sha256": "452fc7349d89518ff8ea98e41cf2f19557658a7cff367007c068a7d58c068768"
+  },
+  "dispatch_authority": false,
+  "drivers": {
+    "compose.py": {
+      "bytes": 1384,
+      "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/compose.py",
+      "sha256": "17d3cef537ac2818b76f5e1d363bd04774ad54fdd7af8b10003b4a2378d6709e"
+    },
+    "compose_stage_zero.py": {
+      "bytes": 2071,
+      "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/compose_stage_zero.py",
+      "sha256": "597a6ad8656799d6665635ce1d4b2ceefee281d572d7c8214331ae4941f48b08"
+    },
+    "seal.py": {
+      "bytes": 8871,
+      "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/seal.py",
+      "sha256": "97fc44a161a0e1d72fb2fd6efcfd84dab80f5cb401fa4abd96d7375f4dd8dd9e"
+    },
+    "startup.py.IN": {
+      "bytes": 8257,
+      "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/startup.py.IN",
+      "sha256": "bbb8edacd514c2a5b53b750dcb6913e9ec53e1e1b1f1db169032e16178d5c3b3"
+    },
+    "test_stage_zero.py": {
+      "bytes": 2129,
+      "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/test_stage_zero.py",
+      "sha256": "955a407716064622320af4ec3e9880f72bffc2d1747c294690b598f976e58e37"
+    },
+    "test_startup.py": {
+      "bytes": 10576,
+      "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/test_startup.py",
+      "sha256": "1e12baf3e608535bb7b303b8183586519626e4b12268e93061d43c33faed543b"
+    }
+  },
+  "exact_owner_startup_selection": null,
+  "exact_selector_terminal": null,
+  "external_index_live_read": null,
+  "joint_minimum_additional_bytes_before_owner_overhead": 27490906,
+  "legacy_default_entrypoint_preserved": true,
+  "original_parent_wait_evidence": null,
+  "retained_first_fixture_driver": {
+    "bytes": 7749,
+    "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/startup-first-report-fixture/test_startup.py",
+    "sha256": "46358dcd01b6f0d07eea8c4cbd3fe9304dfddd95a39f287fde8e6f2d761436af"
+  },
+  "retained_first_fixture_missing_errors_field": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/startup-first-report-fixture/startup.rc",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "stderr": {
+      "bytes": 9378,
+      "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/startup-first-report-fixture/startup.stderr",
+      "sha256": "23fcf6b9274ccd38a0d058513e355b576b3abaa4ca2b0dabe69f549a07ec8e82"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/startup-first-report-fixture/startup.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "runtime_custody_in_controls_was_modeled": true,
+  "schema": "private-existing-stage-a-owner-startup-controls/v1",
+  "stage_zero_adapter": {
+    "bytes": 2611,
+    "path": "/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/guide573_stage_zero.py",
+    "sha256": "f474b5f0c7e3ae431234389886533cca65c06db26fc8515982721fcf27f6a1ed"
+  },
+  "test_cases": {
+    "historical_reader": 16,
+    "new_startup_and_closeout": 9,
+    "pinned_stage_zero_parser": 2
+  }
+}

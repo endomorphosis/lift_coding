@@ -1,0 +1,14 @@
+"""Run prior all-phase and FINAL controls against the exact wall candidate."""
+
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+driver = HERE.parent / "decoder-training-teacher-pilot-all-paid-phases-private-v01-AL5vbJYA" / "check_all_paid.py"
+raw = driver.read_bytes()
+assert sha256(raw).hexdigest() == "0c2228b19e7c97172b277695f2f3091760758b3813c6ce85790ec3ed563411e6"
+before = b'AFTER_SHA = "38b33cd83f400ce26730ad275a6fa906f76b2176c252011d371bf9a45454a1ec"'
+after = b'AFTER_SHA = "ccb4f816f07211f380d97a09cee2181da359882b17698f881deadc65ea2cc825"'
+assert raw.count(before) == 1
+exec(compile(raw.replace(before, after, 1), str(driver), "exec"),
+     {"__file__": str(HERE / driver.name), "__name__": "__main__"})

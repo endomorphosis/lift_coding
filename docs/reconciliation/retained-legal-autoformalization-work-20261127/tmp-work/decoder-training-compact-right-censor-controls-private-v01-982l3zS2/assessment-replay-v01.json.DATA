@@ -1,0 +1,36 @@
+{
+  "actual_paid_arm_meter_or_legal_review": false,
+  "actual_study_owner_code_sha256": "c462caa0fffb73f74549013d0272d224dada01e9e33620329b5b3f5ffb920915",
+  "baseline_attainment": null,
+  "baseline_followup": [
+    6.0,
+    10.0
+  ],
+  "candidate_confirmation": 3.0,
+  "capped_fixture_only_five_authority_fields_rebound": true,
+  "legacy_restricted_candidate_minus_baseline": [
+    [
+      -7,
+      1
+    ],
+    [
+      3,
+      1
+    ]
+  ],
+  "original_followup_owner_refusal_verified": true,
+  "paid_event_count": 8,
+  "refined_restricted_candidate_minus_baseline": [
+    [
+      -7,
+      1
+    ],
+    [
+      -3,
+      1
+    ]
+  ],
+  "retained_failed_events": 2,
+  "schema": "private-positive-compact-censor-followup-controls/v1",
+  "unchanged_fixture_both_golden_hashes_verified": true
+}

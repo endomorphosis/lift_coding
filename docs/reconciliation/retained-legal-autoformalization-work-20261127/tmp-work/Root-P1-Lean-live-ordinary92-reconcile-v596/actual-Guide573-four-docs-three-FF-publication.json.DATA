@@ -1,0 +1,84 @@
+{
+  "accelerate_published_head_preserved": true,
+  "actual_code_publication": {
+    "bytes": 14753,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-P1-Lean-ordinary92-and-Native2-three-FF-publication.json",
+    "sha256": "1f52975ebd4cc8572b2a0da750a173d1ca5596c643f21e8dd2b5c1de0a02b5d6"
+  },
+  "actual_doc_Source_closed": {
+    "bytes": 6558,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-Guide573-four-docs-Source-closed-and-frozen.json",
+    "sha256": "d38bd70d2b0fd73526cd606bdd36fbd4eada351b1c22bbd1185363cadafc2139"
+  },
+  "actual_namespaced_native": {
+    "cleanup_verified": true,
+    "compiler_rc": [
+      0,
+      1
+    ],
+    "full_Phase1_complete": false,
+    "native_cases": 2,
+    "pytest_case_credit": 0,
+    "report": {
+      "bytes": 111081,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-native2-output/complete-native3-direct-existing-owner-report.json",
+      "sha256": "c617e83857ff671cd733c316519527256728bc2325043364253cbba7b5840f14"
+    },
+    "version_rc": 0
+  },
+  "actual_ordinary92": {
+    "bytes": 24231,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-live-reconciled-P1-Lean-ordinary92-closed.json",
+    "sha256": "0e515a1f804ff04a70446d1fedeb27d0a63a73a030c4978bcac8bce767e7b5b5"
+  },
+  "evidence_ordinal": 573,
+  "live_main_after": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+    "hallucinate": "662108f395fd434f93032bcbd1f13750a2aeb5a2",
+    "root": "38502eb5d6d9f3987f8a398c78b43ae2a3d7f54d"
+  },
+  "live_main_before": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "30e1f2f81538b1e472a858a7984f1fba64fc6836",
+    "hallucinate": "e1d28073c5dae9a74b3510b0ecaeb8a9b0f619a8",
+    "root": "a78db368e1894396777b15695cbd7a9513c2ace0"
+  },
+  "only_four_docs": [
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json"
+  ],
+  "prior_values_preserved": {
+    "components": 126,
+    "evidence_records": 572,
+    "tasks": 24
+  },
+  "pushes_in_actual_order": [
+    {
+      "after": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+      "before": "30e1f2f81538b1e472a858a7984f1fba64fc6836",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "662108f395fd434f93032bcbd1f13750a2aeb5a2",
+      "before": "e1d28073c5dae9a74b3510b0ecaeb8a9b0f619a8",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "38502eb5d6d9f3987f8a398c78b43ae2a3d7f54d",
+      "before": "a78db368e1894396777b15695cbd7a9513c2ace0",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "schema": "actual-Guide573-four-docs-live-ordinary92-and-Native2-three-FF-publication/v1",
+  "shared_checkouts_preserved": true,
+  "terminal_returncode": 0
+}

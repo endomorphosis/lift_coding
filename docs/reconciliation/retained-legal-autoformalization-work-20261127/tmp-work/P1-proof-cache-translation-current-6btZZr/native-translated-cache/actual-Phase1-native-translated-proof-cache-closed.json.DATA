@@ -1,0 +1,177 @@
+{
+  "Source_lease_and_resource_cleanup_closed": true,
+  "actual_cache_index": {
+    "bytes": 439,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-native-output-v02/original-test-temp/native-proof-cache/index.json",
+    "sha256": "7e38bf5472e35cc2c25d8b9d25109f3503022bdb4656f4b31125225e7a16be3a"
+  },
+  "actual_cache_record": {
+    "bytes": 39431,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-native-output-v02/original-test-temp/native-proof-cache/records/bafkreienwrw5shilwcmvuvrrb3gvyzkuz5a5cutsoskkvnlxtcmtqztkam.json",
+    "sha256": "8631ca781d0139b676d5e3c6cc6bab458859d8b82c64221baea53bd6bc7698fb"
+  },
+  "actual_command_counts": {
+    "all": 3,
+    "compiler": 2,
+    "unclassified": 0,
+    "version": 1
+  },
+  "actual_commands": [
+    {
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "--version"
+      ],
+      "returncode": 0,
+      "workspace_cleaned": true
+    },
+    {
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "-s65536",
+        "-j1",
+        "--json",
+        "Main.lean"
+      ],
+      "returncode": 0,
+      "workspace_cleaned": true
+    },
+    {
+      "argv": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "-s65536",
+        "-j1",
+        "--json",
+        "Main.lean"
+      ],
+      "returncode": 0,
+      "workspace_cleaned": true
+    }
+  ],
+  "actual_event_refs": [
+    {
+      "bytes": 3395,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-native-output-v02/native-0-actual-event.json",
+      "sha256": "91b0c6a31e4e784db5dfcde27498064e8618ef2a99d03c6acef3e91a40142820"
+    },
+    {
+      "bytes": 3958,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-native-output-v02/native-1-actual-event.json",
+      "sha256": "6b855e4db628426dfa0a4ffa8073aa437bdb813a778ce3ce4dc7adcfd272d3cf"
+    },
+    {
+      "bytes": 3959,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-native-output-v02/native-2-actual-event.json",
+      "sha256": "14845adce19725418c444e277dbdaefbc89c0650e773281c0e6328fcb3740ad2"
+    }
+  ],
+  "actual_report": {
+    "bytes": 113626,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-native-output-v02/complete-native3-direct-existing-owner-report.json",
+    "sha256": "b7882ec191a18f136cf53f288b5220c09465ebfe7c67768875d3bf2c48296268"
+  },
+  "actual_source_after": {
+    "bytes": 684951,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-native-output-v02/source-after.json",
+    "sha256": "4a01be74155207ea6ab9886dc59fc90da6ed3823581499cab5411c7650856d20"
+  },
+  "actual_source_before": {
+    "bytes": 684951,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-native-output-v02/source-before.json",
+    "sha256": "4a01be74155207ea6ab9886dc59fc90da6ed3823581499cab5411c7650856d20"
+  },
+  "controlled_translation": {
+    "cache_record_cid": "bafkreienwrw5shilwcmvuvrrb3gvyzkuz5a5cutsoskkvnlxtcmtqztkam",
+    "expected_proposition": "True",
+    "submitted_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+    "theorem_name": "cache_native_fixture",
+    "theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq",
+    "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f"
+  },
+  "disk_reopen_and_exact_reuse": true,
+  "exact_READ3": {
+    "bytes": 7505,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-isolated-Phase1-native-translated-cache-READ3-closed.json",
+    "sha256": "330a7c8ae65428dfe88998c913f7596fcb3a19e681232d8325b85825d776ce5c"
+  },
+  "exact_freeze": {
+    "bytes": 5486,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-isolated-Phase1-native-translation-test-only-local-freeze.json",
+    "sha256": "8d66a2bd7bb7cd76bf90d9c333922fe61ec8832e885c498479adcb5feff4d930"
+  },
+  "fictional_typed_True_fixture_only": true,
+  "first_refusal": {
+    "bytes": 34395,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-native-output/complete-native3-direct-existing-owner-report.json",
+    "sha256": "b413e852c0ec43179c5103a23716da84cff6f55cea2bb925d5e514ee9eb5faf3"
+  },
+  "first_refusal_full_retained_Source_cap": {
+    "bytes": 1328,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/Source-only-Native-translated-cache-full-retained-cap.json",
+    "sha256": "27ac1183f37ed2b6627137700639e53f2d2154c661464d9debd5038a895436f5"
+  },
+  "first_refusal_native_command_count": 0,
+  "first_refusal_terminal": {
+    "bytes": 34,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/native-operator.terminal.json",
+    "sha256": "45815806ec75ce4ff9779e46198dbc02f7c5376b4ff4889675b1c6b458d0144c"
+  },
+  "full_retained_Source_cap": {
+    "bytes": 1312,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/Source-only-Native-translated-cache-full-retained-cap-v02.json",
+    "sha256": "57ea3ee252aed7064aeca3636f08518d9e927dda474755e29b6d3f857416477e"
+  },
+  "guarded_software_generation": {
+    "bytes": 44719,
+    "path": "/tmp/P1-native-translated-cache-input-private-yI6YGH/actual-generation.stdout.json",
+    "sha256": "cd35151537fdef8e6fcf621cf66382e806dd11eac93704965a2acff9c4e29f5c"
+  },
+  "instrumented_inputs": [
+    {
+      "bytes": 456,
+      "logical_name": "Main.lean",
+      "original_type": "str",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-native-output-v02/native-1-input-0.bin",
+      "sha256": "0b371e01ab208d04eb1127215c2ad9fa881cc34fee8e0e923022191b01d3485c"
+    },
+    {
+      "bytes": 456,
+      "logical_name": "Main.lean",
+      "original_type": "str",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-native-output-v02/native-2-input-0.bin",
+      "sha256": "0b371e01ab208d04eb1127215c2ad9fa881cc34fee8e0e923022191b01d3485c"
+    }
+  ],
+  "lean_version": "4.34.1",
+  "native_processes_during_replay": 0,
+  "operator_terminal": {
+    "bytes": 34,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/native-operator.v02.terminal.json",
+    "sha256": "1e94c0c5509734ace513d4e3be588de79068fe3aa2b1b0d151c26149d2d73e09"
+  },
+  "original_test_report": {
+    "bytes": 148373,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-native-output-v02/original-test-temp/native-lean-proof-cache-v3.json",
+    "sha256": "ff78e45e54e3ce009dbf11f19a6d585334d92fad7329d5ef8f9e0be89ce907fb"
+  },
+  "physical_IO_accounting_complete": false,
+  "public_test_functions_unchanged": true,
+  "pytest_case_credit": 0,
+  "real_statute_review_or_corpus_admission_or_model_training": false,
+  "rejected_artifact_facets": [
+    "source",
+    "obligation",
+    "assumptions"
+  ],
+  "rejected_context_facets": [
+    "declaration",
+    "proposition",
+    "toolchain",
+    "backend-profile",
+    "interpretation",
+    "dependency"
+  ],
+  "schema": "actual-Phase1-native-translated-proof-cache-closed/v1",
+  "software_reissued_backend_version_control_count": 2,
+  "terminal_returncode": 0
+}

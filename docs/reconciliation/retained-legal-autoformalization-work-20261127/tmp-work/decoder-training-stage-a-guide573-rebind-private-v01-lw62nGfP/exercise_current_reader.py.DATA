@@ -1,0 +1,32 @@
+"""Run the seven retained local Reader/A0 checks on the Guide573 tuple."""
+from pathlib import Path
+import sys
+from rebind import HERE, RES, archive, load, ref
+from reservation import PREVIEW
+
+DRIVER = ref(RES/'test_reader_v3.py',13362,
+    '607a232c5f51d317da7eec43e726349b04e7680e69da1f26802edc67b411fac2')
+INDEX_PROOF = load(ref(HERE/'guide573-replay.INERT.json',11743,
+    '65858f594f49c27bf1526d661adc47f98749da4db9e18680c58497b474402b46'))
+INDEX = INDEX_PROOF['writer_matched_index']
+
+
+def run():
+    sys.path.insert(0,str(RES))
+    try:
+        import reservation_preview as prior
+        prior.PREVIEW=(Path(PREVIEW['path']),PREVIEW['bytes'],PREVIEW['sha256'])
+        code=archive(DRIVER).decode()
+        old_path=('/tmp/decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa/'
+                  "'\n                                  'guide572-publisher-matched-index.DATA")
+        old_sha='2266f4d1c12dfa62b7e87a5078a49a578134ea0150752e9db42a566ad810dca5'
+        for before,after in ((old_path,INDEX['path']),(old_sha,INDEX['sha256'])):
+            assert code.count(before)==1,before
+            code=code.replace(before,after)
+        exec(compile(code,DRIVER['path'],'exec'),{'__name__':'__main__','__file__':DRIVER['path']})
+    finally:
+        sys.path.pop(0)
+
+
+if __name__=='__main__':
+    run()

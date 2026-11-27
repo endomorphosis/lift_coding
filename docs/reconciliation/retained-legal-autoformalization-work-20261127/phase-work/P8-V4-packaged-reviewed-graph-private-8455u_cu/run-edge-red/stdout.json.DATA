@@ -1,0 +1,21 @@
+{
+  "actual_pyarrow_loaded": true,
+  "controls": [
+    {
+      "detail": "DID NOT RAISE <class 'ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1.ReleaseCoordinatorError'>",
+      "exception": "Failed",
+      "name": "edge-identity",
+      "passed": false,
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-V4-packaged-reviewed-graph-private-8455u_cu/run-private-v4-existing-guard.py.DATA\", line 54, in <module>\n    module.test_physical_v4_refuses_hf_graph_different_from_independently_reviewed_graph(material, variant)\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py\", line 3510, in test_physical_v4_refuses_hf_graph_different_from_independently_reviewed_graph\n  File \"/home/barberb/lift_coding/.venv/lib/python3.12/site-packages/_pytest/python_api.py\", line 1019, in __exit__\n    fail(self.message)\n  File \"/home/barberb/lift_coding/.venv/lib/python3.12/site-packages/_pytest/outcomes.py\", line 178, in fail\n    raise Failed(msg=reason, pytrace=pytrace)\nFailed: DID NOT RAISE <class 'ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1.ReleaseCoordinatorError'>\n"
+    }
+  ],
+  "guard_events": [],
+  "lightweight_private_scope": true,
+  "permitted_ctypes_self_handles": [
+    "self_process_handle"
+  ],
+  "physical_fixture_constructed": true,
+  "test_module_origin": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+  "test_source_sha256": "d776ce661feb27a6863a1ee6d0f730c1f2c4b7944edafaf581776ef5f10e4202",
+  "torch_duckdb_loaded": false
+}

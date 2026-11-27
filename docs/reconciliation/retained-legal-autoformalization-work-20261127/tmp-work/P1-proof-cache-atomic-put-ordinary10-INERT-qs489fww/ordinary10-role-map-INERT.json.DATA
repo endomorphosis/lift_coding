@@ -1,0 +1,264 @@
+{
+  "Native_fixture_literal_pin_role": {
+    "changed_tracked_row_requires_fresh_epoch_binding": true,
+    "included_in_ordinary10_module_or_fixture_closure": false,
+    "relative_path": "tests/integration/logic/backends/test_kernel_backends.py",
+    "revalidated_by_Native": false
+  },
+  "actual_Source_Git_auxiliary_fixture_clock_and_IO": null,
+  "actual_exact_three_candidate": null,
+  "actual_freeze_correspondence_only": null,
+  "actual_results": null,
+  "candidate_roles": {
+    "ipfs_datasets_py/logic/legal_ir/proof_cache.py": {
+      "after": {
+        "bytes": 62783,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/proof_cache.py.after.DATA",
+        "sha256": "cf414d3c4bfb858741a8423508d7e70d26db7f3b0a61959c9d594c39ddee23de"
+      },
+      "after_git_blob": "ac9a60101a19f1c13fdebb7925ac8b23846fb561",
+      "before": {
+        "bytes": 62783,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/proof_cache.py.before.DATA",
+        "sha256": "704ccf09ba9d7d3c32d107c9cd8e07f6f32933d5f5fdcfe404b641f847c30743"
+      },
+      "before_git_blob": "e74f30f960193827687b9f28faf07ccb20a38a06",
+      "forward_patch": {
+        "bytes": 479,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/proof_cache.py.forward.patch",
+        "sha256": "d9ccdc99b6616dc52bae1770701b111d1b3482f1fa91ecfc8554194ba1302168"
+      },
+      "git_mode": "100644",
+      "inverse_patch": {
+        "bytes": 477,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/proof_cache.py.inverse.patch",
+        "sha256": "3616a2cb54738695544c0a7dfdb542db1a91ba242a6add57c0c7ecfdae50cd65"
+      },
+      "parent_blob": "e74f30f960193827687b9f28faf07ccb20a38a06",
+      "private_only": true
+    },
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "after": {
+        "bytes": 128091,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_kernel_backends.py.after.DATA",
+        "sha256": "eac1d213b16ff2ef79f18269352648768d4e145b2b65fbb8c75c308bced98ea2"
+      },
+      "after_git_blob": "20f612f6c6a241804cdf71b09dc9a0a4f0c2e923",
+      "before": {
+        "bytes": 128091,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_kernel_backends.py.before.DATA",
+        "sha256": "b706ba0dddc5795055be378d8393c831e65fb7fbaf73a574fcee51227d3676b5"
+      },
+      "before_git_blob": "a05d6360be0fcf61a75861c5f0ac8cd63a9d3533",
+      "forward_patch": {
+        "bytes": 657,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_kernel_backends.py.forward.patch",
+        "sha256": "1eca09bff4938fd2b669ff20e9d6743f1b60f493243e8e24e520a973a3784502"
+      },
+      "git_mode": "100644",
+      "inverse_patch": {
+        "bytes": 657,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_kernel_backends.py.inverse.patch",
+        "sha256": "229595cf34d32e509f1d73bd13a76fed1623d85327469cea272894cc92e3f64f"
+      },
+      "parent_blob": "a05d6360be0fcf61a75861c5f0ac8cd63a9d3533",
+      "private_only": true
+    },
+    "tests/unit/logic/legal_ir/test_proof_cache.py": {
+      "after": {
+        "bytes": 105531,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_proof_cache.py.after.DATA",
+        "sha256": "1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460"
+      },
+      "after_git_blob": "8d3a1e52040ea8497a74ec1f47c420141de1b9bf",
+      "before": {
+        "bytes": 102758,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_proof_cache.py.before.DATA",
+        "sha256": "23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab"
+      },
+      "before_git_blob": "5ff29423462c009bc5c8f4541b78842411c59e96",
+      "forward_patch": {
+        "bytes": 3094,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_proof_cache.py.forward.patch",
+        "sha256": "d21ffe09246135170adcb2fc0031f715945554c8cb6b1ca3f8354d1619e23083"
+      },
+      "git_mode": "100644",
+      "inverse_patch": {
+        "bytes": 3094,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_proof_cache.py.inverse.patch",
+        "sha256": "8341b3e2b57f076ed0acfe2b70ae9e0404b59daf8943048f8c6d8e5396b1f44b"
+      },
+      "parent_blob": "5ff29423462c009bc5c8f4541b78842411c59e96",
+      "private_only": true
+    }
+  },
+  "expected_current_A_HEAD": null,
+  "expected_normal_conftests": [
+    "conftest.py",
+    "tests/conftest.py",
+    "tests/unit/conftest.py"
+  ],
+  "fixture_scope": "Same three module roles and six configuration/package rows as ordinary9",
+  "guarded_module_roles": {
+    "ipfs_datasets_py.logic.backends.kernel.lean": {
+      "published_preimage": {
+        "bytes": 104341,
+        "git_blob": "7ee0cdb71958b052038fa467230dbf86dd0c3fb2",
+        "mode": "100644",
+        "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py"
+    },
+    "ipfs_datasets_py.logic.legal_ir.proof_cache": {
+      "prospective_postimage": {
+        "bytes": 62783,
+        "git_blob": "ac9a60101a19f1c13fdebb7925ac8b23846fb561",
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/proof_cache.py.after.DATA",
+        "sha256": "cf414d3c4bfb858741a8423508d7e70d26db7f3b0a61959c9d594c39ddee23de"
+      },
+      "published_preimage": {
+        "bytes": 62783,
+        "git_blob": "e74f30f960193827687b9f28faf07ccb20a38a06",
+        "mode": "100644",
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/proof_cache.py.before.DATA",
+        "sha256": "704ccf09ba9d7d3c32d107c9cd8e07f6f32933d5f5fdcfe404b641f847c30743"
+      },
+      "relative_path": "ipfs_datasets_py/logic/legal_ir/proof_cache.py"
+    },
+    "tests.unit.logic.legal_ir.test_proof_cache": {
+      "prospective_postimage": {
+        "bytes": 105531,
+        "git_blob": "8d3a1e52040ea8497a74ec1f47c420141de1b9bf",
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_proof_cache.py.after.DATA",
+        "sha256": "1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460"
+      },
+      "published_preimage": {
+        "bytes": 102758,
+        "git_blob": "5ff29423462c009bc5c8f4541b78842411c59e96",
+        "mode": "100644",
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_proof_cache.py.before.DATA",
+        "sha256": "23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab"
+      },
+      "relative_path": "tests/unit/logic/legal_ir/test_proof_cache.py"
+    }
+  },
+  "maintained_owner_names": [
+    "ipfs_datasets_py.logic.legal_ir.proof_cache",
+    "ipfs_datasets_py.logic.backends.kernel.lean"
+  ],
+  "normal_conftest_candidates": [
+    "conftest.py",
+    "tests/conftest.py",
+    "tests/unit/conftest.py"
+  ],
+  "observed_published_source_preimages_only": {
+    "__init__.py": {
+      "bytes": 478,
+      "git_blob": "f193dac78f8856b9144978fe4ba0f07ffc6fe19c",
+      "mode": "100644",
+      "sha256": "bd518ec0f37a0a5c4c0b35e7cf36504716a1fe4dbe4f0a803629a965a9fdeeb1"
+    },
+    "conftest.py": {
+      "bytes": 2054,
+      "git_blob": "5cad63c1111f76828f01024a5a1bc726ad1211d5",
+      "mode": "100644",
+      "sha256": "2eab130f3effda3737f25a1770ccd5f9d4955ba42c3d692d659801ffdc1035cf"
+    },
+    "ipfs_datasets_py/logic/backends/kernel/lean.py": {
+      "bytes": 104341,
+      "git_blob": "7ee0cdb71958b052038fa467230dbf86dd0c3fb2",
+      "mode": "100644",
+      "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+    },
+    "ipfs_datasets_py/logic/legal_ir/proof_cache.py": {
+      "bytes": 62783,
+      "git_blob": "e74f30f960193827687b9f28faf07ccb20a38a06",
+      "mode": "100644",
+      "sha256": "704ccf09ba9d7d3c32d107c9cd8e07f6f32933d5f5fdcfe404b641f847c30743"
+    },
+    "pytest.ini": {
+      "bytes": 1536,
+      "git_blob": "5ebc8ab6330fc940b64e3037c605d0faf034e1e6",
+      "mode": "100644",
+      "sha256": "01737eaafcd2b7e7e1a8db2368a93d4a28053ba44e611a10b1c87d2155dc65ff"
+    },
+    "tests/__init__.py": {
+      "bytes": 20,
+      "git_blob": "ae78246ec23f342d440481a9b77b868c14d26463",
+      "mode": "100644",
+      "sha256": "89588b0c2be9d872060e78aa68ccf95f94ca27ea6bcb79a43509d66c296c73ce"
+    },
+    "tests/conftest.py": {
+      "bytes": 20716,
+      "git_blob": "feac04dd85490c131e0bf8b132f0b221d7446de4",
+      "mode": "100644",
+      "sha256": "0a255dc653799cb980d7edbb1d7b2e3c8f0d81b091d4986aa712e1e8e12b7f10"
+    },
+    "tests/unit/__init__.py": {
+      "bytes": 26,
+      "git_blob": "ea3f8b923c2804f646990530711c8d6fe09d129b",
+      "mode": "100644",
+      "sha256": "9d566025eaa21543b52722147774afc45981154f677dcc38078a2632e5b52947"
+    },
+    "tests/unit/conftest.py": {
+      "bytes": 1204,
+      "git_blob": "998f93deb362b71ccf555e1ff43fd56117137978",
+      "mode": "100644",
+      "sha256": "2abb4618add06f636ab71406c19ccd828084a48ecf75448397ddb6cd2bca53a2"
+    },
+    "tests/unit/logic/legal_ir/test_proof_cache.py": {
+      "bytes": 102758,
+      "git_blob": "5ff29423462c009bc5c8f4541b78842411c59e96",
+      "mode": "100644",
+      "sha256": "23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab"
+    }
+  },
+  "package_initializer_candidates": [
+    "__init__.py",
+    "tests/__init__.py",
+    "tests/unit/__init__.py"
+  ],
+  "prior_ordinary9_role_plan": {
+    "bytes": 8262,
+    "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/ordinary9-final-role-map-INERT.json",
+    "sha256": "e2fe400da4010f2f90f74f58f8c4dad7c0980b84fd885594731c6d2da56360f9"
+  },
+  "private_exact_three_candidate": {
+    "bytes": 10316,
+    "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/SEALED-private-Phase1-proof-cache-atomic-record-exact-three.json",
+    "sha256": "1057bbcde6ed22f67da2603060f467d1a320a79bb24046b4e6ad2311b935bd20"
+  },
+  "protected_configuration_and_test_package_rows": [
+    "conftest.py",
+    "tests/conftest.py",
+    "tests/unit/conftest.py",
+    "pytest.ini",
+    "tests/__init__.py",
+    "tests/unit/__init__.py"
+  ],
+  "pytest_ini_relative_path": "pytest.ini",
+  "roles": {
+    "ipfs_datasets_py.logic.backends.kernel.lean": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+    "ipfs_datasets_py.logic.legal_ir.proof_cache": "ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+    "tests.unit.logic.legal_ir.test_proof_cache": "tests/unit/logic/legal_ir/test_proof_cache.py"
+  },
+  "schema": "existing-Phase1-proof-cache-atomic-put-ordinary10-role-plan-INERT/v1",
+  "selected_test_modules": {
+    "tests/unit/logic/legal_ir/test_proof_cache.py": "tests.unit.logic.legal_ir.test_proof_cache"
+  },
+  "selected_test_rewrite_policy": {
+    "cache_policy": "bypass-read-only-for-selected-owning-test",
+    "required_compile_and_execution_witness": true,
+    "rewrite_policy": "normal-pytest-assertion-rewrite",
+    "schema": "selected-test-normal-pytest-source-AST-code-observation/v1",
+    "selected_test_binding_names": [
+      "tests.unit.logic.legal_ir.test_proof_cache"
+    ],
+    "unobserved_or_cached_only_route": "REFUSE"
+  },
+  "source_epoch_changed_code_paths": [
+    "ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+    "tests/integration/logic/backends/test_kernel_backends.py",
+    "tests/unit/logic/legal_ir/test_proof_cache.py"
+  ]
+}

@@ -1,0 +1,172 @@
+{
+  "Guide519_and_other_paths_links_preserved": true,
+  "Root_verifier_v1_dictionary_order_assumption_failure_retained": true,
+  "actual_function_count": 15,
+  "committed_files": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py": {
+      "bytes": 37725,
+      "full9": {
+        "st_ctime_ns": "1795599435126841171",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042551",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795599434495784462",
+        "st_nlink": "1",
+        "st_size": "37725",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py",
+      "previous_blob": "a7f4498dc98e26740a49c3865bc329cd10505f66",
+      "sha256": "1a7d55434d9c89ac22c6cc7dc53f30ded964ab0846e0a35c84efe8d760495f98",
+      "stage0_and_committed_blob": "fe181984a79a0088faa46010bd2d60e155d27b0a"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py": {
+      "bytes": 12917,
+      "full9": {
+        "st_ctime_ns": "1795599435735847783",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042552",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795599434499223044",
+        "st_nlink": "1",
+        "st_size": "12917",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py",
+      "previous_blob": "078599a90c5cf003b8252f63ba0a9f04dc81b69a",
+      "sha256": "e64e9f8fa947d15ffbd3196eaf4b9a0b4df99492e6f95bdbb167bfe54ae4fb75",
+      "stage0_and_committed_blob": "939c3d60a7bb13f021679de702d760d0c19f30aa"
+    }
+  },
+  "compiled_SDK_Source_qualification_scope": "synthetic benchmark fixture and software only",
+  "elapsed_seconds": 13.415805797092617,
+  "frozen_D_index_unchanged_through_push": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795599571719292315",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795599571718292305",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "c0753e50bc82c5bed19ace9ac98d96e34ac294b34e791eb65bafadd9ee5b39c1"
+  },
+  "function_count_vector": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    1,
+    1
+  ],
+  "local_freeze": {
+    "bytes": 5510,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-P8-benchmark-exact2-local-freeze-v306.json",
+    "sha256": "9e552f4ce495353d24e1afbe799ba37d3d5327717bd7ab64f0fd9fe9aee7999f"
+  },
+  "no_new_Source_tests_CI_Native_model_legal_training_operation": true,
+  "ordinary_unique_pass": 21,
+  "private21_referenced_separately": true,
+  "pushes_in_actual_order": [
+    {
+      "after": "a79b4ef9a8b9a4aee2e53a975832784e694b5e33",
+      "before": "64744f61c80f452b8395db41289c2b1dcafba9d6",
+      "normal_fast_forward": true,
+      "porcelain": " \ta79b4ef9a8b9a4aee2e53a975832784e694b5e33:refs/heads/main\t64744f61c8..a79b4ef9a8",
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "db3c7ddff837ad075d60a66a4fe49f9570924097",
+      "before": "fb0ea773e0baa2499378d91883e9041798b10636",
+      "normal_fast_forward": true,
+      "porcelain": " \tdb3c7ddff837ad075d60a66a4fe49f9570924097:refs/heads/main\tfb0ea77..db3c7dd",
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "b0d349c984f4fa09cce3ccc54fd47421ccfdfa9e",
+      "before": "3cec152cc741a41d920978e8526c91dbc17ebdb6",
+      "normal_fast_forward": true,
+      "porcelain": " \tb0d349c984f4fa09cce3ccc54fd47421ccfdfa9e:refs/heads/main\t3cec152cc7..b0d349c984",
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "qualification": {
+    "bytes": 4105,
+    "path": "/tmp/Root-P8-benchmark-ordinary21-v307-sz73_pyk/Root-P8-benchmark-ordinary21-qualified-small-v307.json",
+    "sha256": "4faacaab4ca6332c382df49a0131e4b23bac3a6390fff2a8495a677b290de3d1"
+  },
+  "repos": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {},
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "origin_main": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "HEAD": "a79b4ef9a8b9a4aee2e53a975832784e694b5e33",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {},
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "origin_main": "a79b4ef9a8b9a4aee2e53a975832784e694b5e33",
+      "tree": "4dc7b0aca19c557eab81ff6014c9cb4463b96f3c"
+    },
+    "hallucinate": {
+      "HEAD": "db3c7ddff837ad075d60a66a4fe49f9570924097",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {
+        "ipfs_datasets_py": "a79b4ef9a8b9a4aee2e53a975832784e694b5e33"
+      },
+      "origin": "https://github.com/endomorphosis/hallucinate_app",
+      "origin_main": "db3c7ddff837ad075d60a66a4fe49f9570924097",
+      "tree": "c678967ab2138ee0956529e3ca36b283911e6cef"
+    },
+    "root": {
+      "HEAD": "b0d349c984f4fa09cce3ccc54fd47421ccfdfa9e",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {
+        "external/ipfs_datasets": "a79b4ef9a8b9a4aee2e53a975832784e694b5e33",
+        "hallucinate_app": "db3c7ddff837ad075d60a66a4fe49f9570924097"
+      },
+      "origin": "https://github.com/endomorphosis/lift_coding",
+      "origin_main": "b0d349c984f4fa09cce3ccc54fd47421ccfdfa9e",
+      "tree": "92d159b5edea1e11de19f6d3a7bd0827046878df"
+    }
+  },
+  "schema": "P8-benchmark-ordinary21-exact-two-three-FF-publication/v307",
+  "source_closed_install": {
+    "bytes": 4543,
+    "path": "/tmp/Root-P8-benchmark-exact-Source2-selected-v306-ene6i7ym/Root-P8-benchmark-two-installed-Source-closed-small-v306.json",
+    "sha256": "aa054444cee38da24fe76e3dd681c0a9c5ae4609ebbba2b4932c5cb5abe5dd66"
+  },
+  "source_resources_and_actual_parent_reported_closed": true,
+  "verified_raw_JUnit": {
+    "bytes": 4210,
+    "logical_name": "junit.xml",
+    "path": "/tmp/Root-P8-benchmark-ordinary21-v307-sz73_pyk/actual-output/P8-external-benchmark21-run-result0-output1.bin",
+    "sha256": "ab237df365f9ab7ce764c98ae3e0a7bbf23f2c8e1e2612a657c45b572be71d80"
+  },
+  "whole_eight_phase_goal_complete": false
+}

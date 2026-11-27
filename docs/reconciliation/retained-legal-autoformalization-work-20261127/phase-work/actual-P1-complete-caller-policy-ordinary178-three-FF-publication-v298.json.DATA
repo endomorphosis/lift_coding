@@ -1,0 +1,147 @@
+{
+  "Native_run": false,
+  "SQL51_or_Native_replayed": false,
+  "SQL_tests_run": 0,
+  "SQL_waiter_branch_preserved": true,
+  "Source_READ5_closed_reference": {
+    "bytes": 4840,
+    "path": "/tmp/Root-P1-complete-policy-frozen-post4-index-SourceREAD5-v297-sh1hvvnv/actual-output/actual-two-exact-Source-closed.json",
+    "sha256": "392795c296c11ba68eb22959cdb0edddc98282c0c569215e11544c9ead3baab4"
+  },
+  "Source_SDK_tests_CI_model_ledger_or_policy_action_by_publisher": false,
+  "datasets_code_joins": {
+    "ipfs_datasets_py/logic/backends/cache_protocol.py": {
+      "bytes": 43005,
+      "committed_blob": "5faddd0448df6425f0d4008f39e5c4979e199210",
+      "sha256": "48029fa604a91f6f748eda8b30dcb03d11b3127abb2bd32b21d91246b0dd3661"
+    },
+    "ipfs_datasets_py/logic/common/duckdb_proof_store.py": {
+      "bytes": 111147,
+      "committed_blob": "0a72c6f822387b940384a36fb1dd65b35d654776",
+      "sha256": "db8488f5640c8d9bbc6fb565cfe93b0e6ee1b52b67a079d74238629507d65d37"
+    },
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "bytes": 111809,
+      "committed_blob": "0f90cb1507027379c68246f40f8d5786dcf93613",
+      "sha256": "fe723bdd0f777bdb9ac96a7a72dd508a43830b82d1219e0ec97672be752bbb56"
+    },
+    "tests/unit/logic/legal_ir/test_proof_cache.py": {
+      "bytes": 93508,
+      "committed_blob": "8dbb1843acdb95d94e1c22398712a9c11049d5cd",
+      "sha256": "cd92c41e80976e707110855423dd6ae6956206e5a6bfd57556cec93611ac4a9e"
+    }
+  },
+  "exact_qualification_receipt": {
+    "bytes": 3702,
+    "path": "/tmp/Root-P1-complete-caller-policy-ordinary178-v298-grrhjnuq/Root-P1-complete-caller-policy-ordinary178-qualified-small-v298.json",
+    "sha256": "4c5d7846ccb88c2809865a0abe310056f572f3282acdb2af84ce2f817ab3b4bb"
+  },
+  "frozen_D_index_preserved": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795585275555636193",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795585275554318068",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "0cb647dc6b8f2ca1a2b36c0fb1a6d234403792c02d36b16ba9f1681033effcef"
+  },
+  "independent_roster": {
+    "bytes": 41135,
+    "full9": {
+      "st_ctime_ns": "1795584739858281988",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72103001",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795584739858281988",
+      "st_nlink": "1",
+      "st_size": "41135",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-cache-leader-authority-four-code-private-v01/ordinary178-independent-literal-roster-DATA-only-v02.json",
+    "sha256": "8243b4d71e0d2a4d5b939519e1595ad6263616e5feb4ff85c6bb6de2780b70c7"
+  },
+  "independently_verified_JUnit": {
+    "bytes": 28927,
+    "logical_name": "junit.xml",
+    "path": "/tmp/Root-P1-complete-caller-policy-ordinary178-v298-grrhjnuq/actual-output/P1-complete-caller-policy178-run-result0-output1.bin",
+    "sha256": "36ae9a0b57c566e566faa44a9ddeb5eec73242ff2b31289ae96fd4f6f58e2baf"
+  },
+  "ordinary_evidence": {
+    "duplicates": 0,
+    "errors": 0,
+    "exact_JUnit_order": true,
+    "failures": 0,
+    "functions": 67,
+    "new": 12,
+    "pass": 178,
+    "retained": 166,
+    "skips": 0
+  },
+  "prior_local_freeze": {
+    "bytes": 9213,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-P1-complete-caller-policy-four-code-local-freeze-v296.json",
+    "sha256": "bb124c42ba53a87e7fe3909ac051587cbfc6d21a20851fb1ffe2aa0444fc377a"
+  },
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "repositories": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "before": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "clean_index_and_worktree": true,
+      "gitlink_changes": {},
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "origin_main": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "other_gitlinks_preserved": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "HEAD": "7cb1e5ddc291e19ec8552f9edff11249c08d4470",
+      "before": "da6225ff33b56a15345da4ba2322d8771fa36f02",
+      "clean_index_and_worktree": true,
+      "gitlink_changes": {},
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "origin_main": "7cb1e5ddc291e19ec8552f9edff11249c08d4470",
+      "other_gitlinks_preserved": true,
+      "tree": "0d4030b300fb47a7724353ff1262b4b2b263c664"
+    },
+    "hallucinate": {
+      "HEAD": "08062a477b4d76aebe62f7a7cdeb59afc384185b",
+      "before": "e2543fca35165217acd549a0700c7cd7ae149dba",
+      "clean_index_and_worktree": true,
+      "gitlink_changes": {
+        "ipfs_datasets_py": "7cb1e5ddc291e19ec8552f9edff11249c08d4470"
+      },
+      "origin": "https://github.com/endomorphosis/hallucinate_app",
+      "origin_main": "08062a477b4d76aebe62f7a7cdeb59afc384185b",
+      "other_gitlinks_preserved": true,
+      "tree": "b28daf54d110e84f483e1286e07b472201041b61"
+    },
+    "root": {
+      "HEAD": "7661d31339ced280fab5de7145cc1e56353b21f9",
+      "before": "e035d44966d585049833596d4b89ac7ef5b9fc22",
+      "clean_index_and_worktree": true,
+      "gitlink_changes": {
+        "external/ipfs_datasets": "7cb1e5ddc291e19ec8552f9edff11249c08d4470",
+        "hallucinate_app": "08062a477b4d76aebe62f7a7cdeb59afc384185b"
+      },
+      "origin": "https://github.com/endomorphosis/lift_coding",
+      "origin_main": "7661d31339ced280fab5de7145cc1e56353b21f9",
+      "other_gitlinks_preserved": true,
+      "tree": "cb9fbf6ddb2d7d1cfaeee9d3f127903ae9e12ac1"
+    }
+  },
+  "schema": "P1-caller-policy-ordinary178-verified-child-first-fast-forward/v1",
+  "whole_project_qualified": false
+}

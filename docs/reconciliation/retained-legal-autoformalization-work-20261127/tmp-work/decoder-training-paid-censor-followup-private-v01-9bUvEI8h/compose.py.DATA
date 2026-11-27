@@ -1,0 +1,48 @@
+"""Add an independently verified follow-up projection without changing prior reports."""
+import ast
+import difflib
+from hashlib import sha256
+from pathlib import Path
+
+HERE=Path(__file__).resolve().parent
+PRIOR=HERE.parent/'decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/study.py'
+raw=PRIOR.read_bytes()
+assert (len(raw),sha256(raw).hexdigest())==(916062,'0ed2b796854574708184a132303054d780048a78da5031f9c4d7e1c074da3a3d')
+before=raw.decode()
+after=before
+
+
+def replace(old,new):
+    global after
+    assert after.count(old)==1,old
+    after=after.replace(old,new,1)
+
+
+replace('def _verified_confirmation_cost_bounds(report):',
+        'def _verified_confirmation_cost_bounds(report, *, censor_followup=None):')
+replace('    attempts = {row["attempt_sha256"]: row for row in report["attempts"]}\n    rows, grouped = [], {}\n',
+        '    attempts = {row["attempt_sha256"]: row for row in report["attempts"]}\n'
+        '    censor_followup = {} if censor_followup is None else censor_followup\n    rows, grouped = [], {}\n')
+replace('        a_low, a_high = (Fraction.from_float(value) for value in baseline["restricted_confirmation_seconds"])\n',
+        '''        for role, window in (("baseline", baseline), ("candidate", candidate)):
+            witness = censor_followup.get((pair[f"{role}_attempt_sha256"], clock))
+            if witness is not None:
+                lower, upper = window["restricted_confirmation_seconds"]
+                window["restricted_confirmation_seconds"] = (max(lower, min(witness["through_seconds"], horizon)), upper)
+                window["censor_followup"] = dict(witness)
+        a_low, a_high = (Fraction.from_float(value) for value in baseline["restricted_confirmation_seconds"])
+''')
+replace('\n\ndef compare_verified_contrasts(validator, *, study, expected_study_sha256, attempts, expected_attempts_sha256,',
+        (HERE/'censor_followup.py.IN').read_text()
+        +'\n\ndef compare_verified_contrasts(validator, *, study, expected_study_sha256, attempts, expected_attempts_sha256,')
+previous=ast.parse(before)
+current=ast.parse(after)
+names={'_verified_confirmation_cost_bounds','CensorFollowup','verify_censored_confirmation_cost_bounds'}
+assert [ast.dump(n) for n in previous.body if getattr(n,'name','') not in names]==[
+    ast.dump(n) for n in current.body if getattr(n,'name','') not in names
+    and not (type(n) is ast.Assign and type(n.targets[0]) is ast.Name
+             and n.targets[0].id=='CENSOR_FOLLOWUP_BOUNDS_SCHEMA')]
+(HERE/'study.py').write_text(after)
+(HERE/'study.diff').write_text(''.join(difflib.unified_diff(before.splitlines(keepends=True),after.splitlines(keepends=True),
+    fromfile=str(PRIOR),tofile=str(HERE/'study.py'))))
+print(len(after.encode()),sha256(after.encode()).hexdigest())

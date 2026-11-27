@@ -1,0 +1,63 @@
+"""Bind the existing v3 stage-zero parser to the exact Guide574 retained bytes."""
+from hashlib import sha256
+import json
+from pathlib import Path
+from runpy import run_path
+
+HERE=Path(__file__).resolve().parent
+PRIOR=HERE.parent/'decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/guide573_stage_zero.py'
+INDEX='26afaa8c5a756128d11917a2f700bf866fcedd1ce4c933440dfa74413c4b5477'
+PREVIEW='d72596ec7d7ddf69a34143699659302499f92c5cdb73414b5159a4197442100f'
+
+
+def bind():
+    raw=PRIOR.read_bytes()
+    assert (len(raw),sha256(raw).hexdigest())==(2611,'f474b5f0c7e3ae431234389886533cca65c06db26fc8515982721fcf27f6a1ed')
+    text=raw.decode()
+    for old,new in (
+        ('c3be915a700050787e42001811b05aab2edebf0737fd3c207f23674b862cbee0',INDEX),
+        ('eb0d0a5698ce183bf6bd8d343697462f9c7520f4','13eb146f7979645cd0fe0fed11f9524e2357073c'),
+        ('Guide573','Guide574'),
+    ):
+        assert text.count(old)==1
+        text=text.replace(old,new,1)
+    path=HERE/'guide574_stage_zero.py'
+    body=text.encode()
+    if path.exists():
+        assert path.read_bytes()==body
+    else:
+        with path.open('xb') as stream:
+            stream.write(body)
+    return path,body
+
+
+def check():
+    path,body=bind()
+    parse=run_path(str(path))['read_stage_zero']
+    data=(HERE/'guide574-writer-matched-index.DATA').read_bytes()
+    preview=(HERE/'guide574-all-fresh-preview.INERT.json').read_bytes()
+    assert (len(data),sha256(data).hexdigest())==(7070597,INDEX)
+    assert (len(preview),sha256(preview).hexdigest())==(560809,PREVIEW)
+    selected=json.loads(preview)['reader_inputs']
+    root=selected['current_roots']['D']['root']
+    expected={Path(row['path']).relative_to(root).as_posix():row['expected_Git_blob_oid']
+              for row in selected['fresh_Source_body_targets']}
+    observed=parse(data,list(expected))
+    assert list(observed)==[name.encode() for name in expected] and len(observed)==32
+    for name,oid in expected.items():
+        match,=observed[name.encode()]
+        assert match[:3]==(oid,0o100644,0)
+    mutation=data[:-1]+bytes((data[-1]^1,))
+    for index,paths in ((mutation,list(expected)),(data,list(expected)[1:]+[next(reversed(expected))])):
+        try:
+            parse(index,paths)
+        except ValueError as error:
+            assert 'exact selected Guide574' in str(error)
+        else:
+            raise AssertionError('substituted selected index or repeated path accepted')
+    return dict(parser_path=str(path),parser_sha256=sha256(body).hexdigest(),
+                exact_positions=len(observed),wrong_index_rejected=True,duplicate_paths_rejected=True)
+
+
+if __name__=='__main__':
+    print(json.dumps(check(),sort_keys=True))

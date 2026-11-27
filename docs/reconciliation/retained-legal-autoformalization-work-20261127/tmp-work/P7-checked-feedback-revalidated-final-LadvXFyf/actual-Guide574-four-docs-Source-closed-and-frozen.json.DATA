@@ -1,0 +1,158 @@
+{
+  "A": "219ba3da0f62f772801d71715e22c506faa21126",
+  "A_index": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "HEAD": "6106a4633ec6504ee8c004cc5a9c7fe348ff38bf",
+  "Source_closed": true,
+  "actual_Source_leases": [
+    {
+      "canonical_root": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets",
+      "cooperative": true,
+      "lock_path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/workspace/control-plane/source-leases/source.lock",
+      "mode": "write",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 2.9984861612319946e-05
+    },
+    {
+      "canonical_root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+      "cooperative": true,
+      "lock_path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/workspace/control-plane/source-leases/source.lock",
+      "mode": "read",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 6.803218275308609e-05
+    }
+  ],
+  "code_publication": {
+    "bytes": 21352,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-Phase7-ordinary26-check-feedback-three-FF-publication.json",
+    "sha256": "dbb00c0b498d16c52246142aaefa2ed8dbdc58782ad03112e4d8ab97ff66afa6"
+  },
+  "committed_docs": {
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": {
+      "bytes": 1550347,
+      "committed_blob": "6fc9f8e5e020acbd85373244b02ca2d61f67a3a9",
+      "full9": {
+        "st_ctime_ns": "1795739644167377366",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "47486860",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739644167377366",
+        "st_nlink": "1",
+        "st_size": "1550347",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+      "sha256": "a5f6ba8e2a725e44807e9f3b6cc6b9eebc306824a65428214bdf76a12c34b9bf"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": {
+      "bytes": 1093542,
+      "committed_blob": "37099381a6ced01505e4c90c9d3eeb49708c80ca",
+      "full9": {
+        "st_ctime_ns": "1795739644167986587",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "47486862",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739644167986587",
+        "st_nlink": "1",
+        "st_size": "1093542",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+      "sha256": "fbbd1313115e53161aa584e64f22c9076dae5f0b1f1b5c2dedbcd04787034bdc"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": {
+      "bytes": 851240,
+      "committed_blob": "63ac337ee0534da042b5e0f4b40845ddeef84067",
+      "full9": {
+        "st_ctime_ns": "1795739644168136701",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "47486863",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739644168136701",
+        "st_nlink": "1",
+        "st_size": "851240",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+      "sha256": "d951b0221164e758d3b5ed5327380f2567fe5df6db1ed97cb4097bc1f2140f43"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": {
+      "bytes": 2349250,
+      "committed_blob": "3bf650c429f53ed49fbec8999628ad57ccebd26f",
+      "full9": {
+        "st_ctime_ns": "1795739644167632920",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "47486861",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795739644167632920",
+        "st_nlink": "1",
+        "st_size": "2349250",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+      "sha256": "c0298bcd506d8d89507c8c3cd8adef3e23bda24bf5c00a8ffc9cca891cebef82"
+    }
+  },
+  "composer_READY": {
+    "bytes": 17889,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/guide574-composition/READY-one-existing-guide574-four-guides.json",
+    "sha256": "21eebdb74361480edbdb32d50956e01aea17b00310cb5ee41935e6408baf106d"
+  },
+  "evidence_ordinal": 574,
+  "full_charge": {
+    "bytes": 1314,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/Source-only-Guide574-full-retained-cap.json",
+    "sha256": "ceffb184cc31806d15edcc6fb06583d92994e4c8f1506966cd8cce9039da4c69"
+  },
+  "index": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795739644455917255",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "16956758",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795739644454463755",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/.git/index",
+    "sha256": "26afaa8c5a756128d11917a2f700bf866fcedd1ce4c933440dfa74413c4b5477"
+  },
+  "module_closed": true,
+  "only_four_Git_changes": true,
+  "ordinary_qualification": {
+    "bytes": 6769,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-Phase7-current-checked-proof-ordinary26-closed.json",
+    "sha256": "d7869ec2129071491a627ed7313aae19851ff39a5b18afa8478f13e714619ca9"
+  },
+  "prior_D": "4449d6a62a607cded94db3822b39033ed4850c26",
+  "prior_values_preserved": {
+    "components": 126,
+    "evidence_records": 573,
+    "tasks": 24
+  },
+  "pushed": false,
+  "schema": "actual-Guide574-exact-four-isolated-Source-freeze/v1",
+  "terminal_returncode": 0,
+  "tree": "2d1b336ecb814cc7d902c3a922d1a4417ba83eab"
+}

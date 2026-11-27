@@ -1,0 +1,75 @@
+"""Add authenticated scheduled-confirmation bounds to the existing study owner."""
+
+import ast
+from difflib import unified_diff
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+BASE = HERE.parent / "decoder-training-projector-selected-release-private-v01-e8w9qPhY" / "study.py"
+BASE_PIN = "09afd1fd3f35f3c1612eecb84a5b5d091cf7edb2455526b8e9a9c02064b36f44"
+
+
+def change(text, old, new):
+    assert text.count(old) == 1, old
+    return text.replace(old, new, 1)
+
+
+prior = BASE.read_bytes()
+assert sha256(prior).hexdigest() == BASE_PIN
+source = prior.decode()
+at = "def compare_verified_contrasts(validator, *, study, expected_study_sha256, attempts, expected_attempts_sha256,\n"
+source = change(source, at, (HERE / "confirmation_bounds.py.IN").read_text() + at)
+at = "                               expected_cost_evidence_sha256, verify_cost_owner, retrospective_look_closes=None):\n"
+source = change(source, at, at[:-3] + ",\n                               include_confirmation_cost_bounds=False):\n")
+at = "        retrospective_look_closes=retrospective_look_closes)\n\n\ndef _compare_verified_contrasts"
+source = change(source, at, """        retrospective_look_closes=retrospective_look_closes,
+        include_confirmation_cost_bounds=include_confirmation_cost_bounds)
+
+
+def _compare_verified_contrasts""")
+at = """                                first_use_interrupted_preparation_events=()):
+    _require(callable(verify_cost_owner), "independent resource owner verification required")"""
+source = change(source, at, """                                first_use_interrupted_preparation_events=(), include_confirmation_cost_bounds=False):
+    _require(type(include_confirmation_cost_bounds) is bool, "explicit boolean confirmation bounds selection required")
+    _require(callable(verify_cost_owner), "independent resource owner verification required")""")
+at = """    if first_use_interrupted_preparation_events:
+        output["first_use_interrupted_preparation_events"] = first_use_interrupted_preparation_events
+    return output"""
+source = change(source, at, at[:-len("    return output")] + """    if include_confirmation_cost_bounds:
+        output["confirmation_cost_bounds"] = _verified_confirmation_cost_bounds(output)
+    return output""")
+at = "                                           shuffle_teacher_request_roster_raw=None, verify_shuffle_coverage_preparation=None):\n"
+source = change(source, at, at[:-3] + ",\n                                           include_confirmation_cost_bounds=False):\n")
+at = "        expected_teacher_request_roster_sha256=expected_teacher_request_roster_sha256, **cost_options)\n"
+source = change(source, at, """        expected_teacher_request_roster_sha256=expected_teacher_request_roster_sha256,
+        include_confirmation_cost_bounds=include_confirmation_cost_bounds, **cost_options)
+""")
+at = """        activation_diagnostic_charges=None, expected_activation_diagnostic_charges_sha256=None):
+    \"\"\"Compare the paid, source-only compact development attempts at one terminal step."""
+source = change(source, at, """        activation_diagnostic_charges=None, expected_activation_diagnostic_charges_sha256=None,
+        include_confirmation_cost_bounds=False):
+    \"\"\"Compare the paid, source-only compact development attempts at one terminal step.""")
+at = """        expected_activation_diagnostic_charges_sha256=expected_activation_diagnostic_charges_sha256)
+    current()
+    return {**report, "schema": VERIFIED_COMPACT_DEVELOPMENT_SCHEMA,"""
+source = change(source, at, """        expected_activation_diagnostic_charges_sha256=expected_activation_diagnostic_charges_sha256,
+        include_confirmation_cost_bounds=include_confirmation_cost_bounds)
+    current()
+    return {**report, "schema": VERIFIED_COMPACT_DEVELOPMENT_SCHEMA,""")
+
+def label(node):
+    if type(node) is ast.Assign and len(node.targets) == 1 and type(node.targets[0]) is ast.Name:
+        return node.targets[0].id
+    return getattr(node, "name", None)
+
+extra = {"CONFIRMATION_COST_BOUNDS_SCHEMA", "_confirmation_meter_window", "_verified_confirmation_cost_bounds"}
+before, after = (ast.parse(text).body for text in (prior, source))
+updates = {label(left) for left, right in zip(before, (node for node in after if label(node) not in extra), strict=True)
+           if ast.dump(left) != ast.dump(right)}
+assert updates == {"compare_verified_contrasts", "_compare_verified_contrasts", "compare_verified_development_contrasts",
+                   "compare_verified_compact_development_contrasts"}, updates
+(HERE / "study.py").write_text(source)
+(HERE / "study.diff").write_text("".join(unified_diff(prior.decode().splitlines(keepends=True), source.splitlines(keepends=True),
+                                              "prior/study.py", "candidate/study.py")))
+print(len(source.encode()), sha256(source.encode()).hexdigest())

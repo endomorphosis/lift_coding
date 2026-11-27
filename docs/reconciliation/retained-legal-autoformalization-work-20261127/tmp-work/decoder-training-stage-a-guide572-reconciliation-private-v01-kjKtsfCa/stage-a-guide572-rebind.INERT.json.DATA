@@ -1,0 +1,1464 @@
+{
+  "Guide571_basis": {
+    "bytes": 5695,
+    "path": "/tmp/decoder-training-stage-a-guide571-preflight-private-v01-Wq3c45Ui/rebinding.json",
+    "sha256": "29774c9a605be72ef72b888adcad01461f8c0dbda9f226557e3e63bcd782ba58"
+  },
+  "Guide572_documentary_changed_tree_dirs": [
+    "",
+    "ipfs_datasets_py",
+    "ipfs_datasets_py/logic",
+    "ipfs_datasets_py/logic/autoformal",
+    "ipfs_datasets_py/logic/autoformal/docs"
+  ],
+  "Guide572_documentary_index_delta": [
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json"
+  ],
+  "Guide572_documentary_publication": {
+    "bytes": 2632,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-Guide572-four-docs-three-FF-publication.json",
+    "sha256": "8812bb7dc362d7a2815d4e438a972b1eef0d29034b9349a7c87dee4d7add083b"
+  },
+  "Guide572_exact_three_FFs": [
+    {
+      "after": "8996e160d2628b0fd35f1166a6dae6957582c243",
+      "before": "cbc43a5f365502265d1e64d7bce3281f2871ef01",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "80c472a8aa28db5f0f6a148ecd41dec34b16c6e4",
+      "before": "950cf34959b658dc62dd4df853256ec24cfe9e19",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "5165641659bf96e1cc696c54a65eb14a74db3276",
+      "before": "fb10d3325954472503d44bc27ca7393868577996",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "Guide572_independent_postpublication_index_READ1": null,
+  "Guide572_protected_D_expected_index": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795735605759587343",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "3561340",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795735605758587335",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/.git/index",
+    "sha256": "2266f4d1c12dfa62b7e87a5078a49a578134ea0150752e9db42a566ad810dca5"
+  },
+  "Guide572_publication_events": {
+    "bytes": 3600,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-Guide572-publication-events.jsonl",
+    "sha256": "dc72e3d6f1424c7a1d2eed39caeaefc3b518cfc7d3bdd239a514c29db4f4180c"
+  },
+  "Guide572_publisher_matched_D_index": {
+    "bytes": 7070597,
+    "path": "/tmp/decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa/guide572-publisher-matched-index.DATA",
+    "sha256": "2266f4d1c12dfa62b7e87a5078a49a578134ea0150752e9db42a566ad810dca5"
+  },
+  "Guide572_source_close": {
+    "bytes": 6056,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-Guide572-four-docs-Source-closed-and-frozen.json",
+    "sha256": "47e7638b5b32c03728e1ffa648d8d08d529d863223d7f7f8020016f3b526faed"
+  },
+  "Ordinary33_code_publication": {
+    "bytes": 27474,
+    "path": "/tmp/P2-V4-CLI-live-reconciled-ordinary33-publisher-INERT-UHtLMQQb/actual-live-reconciled-V4-CLI-ordinary33-three-FF-publication.json",
+    "sha256": "0b8f452fcedbe7f44befed897d5445558b68afb1ef1c4404262bf82eb71f265a"
+  },
+  "Ordinary33_prepublication_READ3": {
+    "bytes": 9832,
+    "path": "/tmp/P2-V4-CLI33-live-reconciled-READ3-controls-46ECQFly/actual-isolated-CLI33-READ3-closed.json",
+    "sha256": "0b9c361b49fa8918e1bf5b760ee9fc2eed6bafadf447ea775afccfd7d14c9eba"
+  },
+  "Ordinary33_prepublication_published_parent_at_check": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "9143ad4daa5b8728ac806d0cfba18561081800fd",
+    "hallucinate": "4eedd8b2314dcbaf2779d513cf60f18c623bfa50",
+    "root": "635d52d12f089cc34897ceca8b64d735bea570cf"
+  },
+  "Ordinary33_prepublication_raw_D_index": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795735036018312428",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "2925796",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795735036018312428",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P2-V4-CLI33-live-reconciled-READ3-controls-46ECQFly/actual-output/raw/02-index.DATA",
+    "sha256": "52160bc3ee19a11de6ef4f1fdfd517ca44d814a775e7b0c6237503169deff577"
+  },
+  "Ordinary33_qualified_outer_terminal": {
+    "bytes": 15020,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-live-reconciled-V4-CLI-ordinary33-closed.json",
+    "sha256": "7a9f1b31bbe71eba1e2bc4253d3fd9d0180a13045c171c76d803be6b6ffcdb09"
+  },
+  "Ordinary33_source_index_geometry": {
+    "A_paths": 29607,
+    "A_version": 3,
+    "D_paths": 41250,
+    "D_version": 3
+  },
+  "Reader_allocation": null,
+  "TRAIN_or_Native_admission": null,
+  "companion_prepublication_exact_A_index": {
+    "bytes": 4469929,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-reconciled-A-index.DATA",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "current_published_candidate_protected_roots": {
+    "A": {
+      "Git_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+      "Git_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate"
+    },
+    "D": {
+      "Git_HEAD": "8996e160d2628b0fd35f1166a6dae6957582c243",
+      "Git_tree": "07d8b2b6ef184443fb7b851cf252f5c78c4a8a69",
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets"
+    }
+  },
+  "current_remote_heads": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "8996e160d2628b0fd35f1166a6dae6957582c243",
+    "hallucinate": "80c472a8aa28db5f0f6a148ecd41dec34b16c6e4",
+    "root": "5165641659bf96e1cc696c54a65eb14a74db3276"
+  },
+  "current_retained_headroom_bytes": 6356992,
+  "direct_byte_delta_only": {
+    "32_body_sizes": 0,
+    "A_index": 0,
+    "D_index": 79448,
+    "docs_each": {
+      "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": 1558,
+      "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": 3623,
+      "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": 1336,
+      "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": 7740
+    },
+    "subtotal": 93705
+  },
+  "dispatch_authority": false,
+  "historical_archive_partition": {
+    "fresh_roles": 12,
+    "rebound_live": false,
+    "retained_archives": 20
+  },
+  "latest_full_retained_prepayment": {
+    "bytes": 1312,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/Source-only-Guide572-full-retained-cap.json",
+    "sha256": "2d653440a2e18f27cab5213de9400e8dfacb0bcccfde0f04112e499f756fa811"
+  },
+  "migrated_body_metadata_epoch": {
+    "bytes": 846652,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-live-reconciled-outer1610-epoch.json",
+    "sha256": "fb7b6f9b1dacdb57a47c9d7d72b9e1a969ae76796ac4732706eaaa7676c4a1ec"
+  },
+  "observed_source_capture_count_floor": 537051,
+  "paired_selection": null,
+  "prior_protected_shared_checkouts_preserved": {
+    "accelerate": {
+      "HEAD": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+      "dirty_files": [
+        {
+          "bytes": 10477,
+          "full9": {
+            "st_ctime_ns": "1795679996609094637",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "69514358",
+            "st_mode": "33277",
+            "st_mtime_ns": "1795679996609094637",
+            "st_nlink": "1",
+            "st_size": "10477",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/docs/guides/cli/README_CLI.md",
+          "sha256": "5cd14467efcd779e27b007f7639c208270346f12d44573c3b3e710a0fa6f23e5"
+        },
+        {
+          "bytes": 73268,
+          "full9": {
+            "st_ctime_ns": "1795679996593094466",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "69517233",
+            "st_mode": "33261",
+            "st_mtime_ns": "1795679996593094466",
+            "st_nlink": "1",
+            "st_size": "73268",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/ipfs_accelerate_py/cli_integrations/openai_codex_cli_integration.py",
+          "sha256": "039bb9269ee7f10a95c4227a9a67bbbd2ae7c260935c27d6076578e40a3f62fa"
+        },
+        {
+          "bytes": 123739,
+          "full9": {
+            "st_ctime_ns": "1795679996606094605",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "69603142",
+            "st_mode": "33188",
+            "st_mtime_ns": "1795679996606094605",
+            "st_nlink": "1",
+            "st_size": "123739",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/test/api/test_codex_thread_handoff.py",
+          "sha256": "b5caa78e61f49635a517c00ed8f9f27e56c22f18d9e11864bdd666f08976d9a2"
+        }
+      ],
+      "index": {
+        "bytes": 4412225,
+        "full9": {
+          "st_ctime_ns": "1795676233159923497",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342879",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795676233150923413",
+          "st_nlink": "1",
+          "st_size": "4412225",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/index",
+        "sha256": "e52c2c37977f4ee20f580e2fbc0fc8e4eac5ff47f18e08fb93980ad2b36a9961"
+      },
+      "origin_main": "21d7c7b2436a895c9615d7ed9866c5c27b8bb43b",
+      "status_sha256": "0813d78ba7a1bb3ca8b5312b0997680120a4497e017a3090a4ed4ab30fdcb10a"
+    },
+    "datasets": {
+      "HEAD": "6d1b200341ae62d6dc0aa6db27f3955c50483fa7",
+      "dirty_files": [
+        {
+          "bytes": 49957,
+          "full9": {
+            "st_ctime_ns": "1795733029445592091",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70008243",
+            "st_mode": "33188",
+            "st_mtime_ns": "1795733029445592091",
+            "st_nlink": "1",
+            "st_size": "49957",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/README.md",
+          "sha256": "29a2e3e6c1267e4159f4798d436510695df01b596af93bd0282a3e9dc34da869"
+        },
+        {
+          "bytes": 1089818,
+          "full9": {
+            "st_ctime_ns": "1795733279995229368",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70042581",
+            "st_mode": "33188",
+            "st_mtime_ns": "1795733279995229368",
+            "st_nlink": "1",
+            "st_size": "1089818",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+          "sha256": "3c82d7178a12b3b78aa9fb452a8e6ad89bd6306b198a9fb93358f1a448dc52c2"
+        },
+        {
+          "bytes": 112988,
+          "full9": {
+            "st_ctime_ns": "1795733029442592058",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70008153",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795733029442592058",
+            "st_nlink": "1",
+            "st_size": "112988",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/docs/OPERATIONS.md",
+          "sha256": "539918df9724f105c458135c5470a91dd839ba7ae57dce62ea20a583ba471275"
+        },
+        {
+          "bytes": 2328609,
+          "full9": {
+            "st_ctime_ns": "1795733314093573857",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70042653",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795733314093573857",
+            "st_nlink": "1",
+            "st_size": "2328609",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+          "sha256": "487cc09197cd20b3e259da845b880e4f47a57915484089c65c287626910206c4"
+        },
+        {
+          "bytes": 292364,
+          "full9": {
+            "st_ctime_ns": "1795733029422591838",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70008554",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795733029422591838",
+            "st_nlink": "1",
+            "st_size": "292364",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/supervisor_loop.py",
+          "sha256": "ddccaf94d76ca505655a9cdac90a048f695f133e042e87f4e61cbc62bad37a2c"
+        },
+        {
+          "bytes": 279677,
+          "full9": {
+            "st_ctime_ns": "1795733029435591981",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70025824",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795733029435591981",
+            "st_nlink": "1",
+            "st_size": "279677",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/scripts/ops/legal_ir/run_autoformal_supervisor.py",
+          "sha256": "d2d1ede812fb6ce8a1c656726d276b1ae681f5695d61269700ecbd798cf6cadf"
+        },
+        {
+          "bytes": 66930,
+          "full9": {
+            "st_ctime_ns": "1795733029440461986",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "70042693",
+            "st_mode": "33188",
+            "st_mtime_ns": "1795733029440461986",
+            "st_nlink": "1",
+            "st_size": "66930",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/test_supervisor_agent_turn_recovery.py",
+          "sha256": "355f8090bcce236e738989df1c952fd8509faea70806029d65d6c0eab99aeaed"
+        }
+      ],
+      "index": {
+        "bytes": 6991149,
+        "full9": {
+          "st_ctime_ns": "1795732746412283036",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68338235",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795732746411283024",
+          "st_nlink": "1",
+          "st_size": "6991149",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+        "sha256": "8afa59074a9bec81c88f7019d978f1f17d14a2f27440449c77a566408642883e"
+      },
+      "origin_main": "6d1b200341ae62d6dc0aa6db27f3955c50483fa7",
+      "status_sha256": "6e07703a6a150fc2147a54da5bb083934d44353019b5c97e8493ac868b79464e"
+    },
+    "hallucinate": {
+      "HEAD": "72f545fbce55a54c8c6d90cf4050b68949c31f38",
+      "index": {
+        "bytes": 138750,
+        "full9": {
+          "st_ctime_ns": "1795732751487212222",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342837",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795732751486346643",
+          "st_nlink": "1",
+          "st_size": "138750",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate/.git/index",
+        "sha256": "bfd1065e6b13eccbe1392a873133b25b5ce82d76e3c261347c10605ac8b916fe"
+      },
+      "origin_main": "72f545fbce55a54c8c6d90cf4050b68949c31f38",
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "root": {
+      "HEAD": "4d55f51e8860642f7ce038b63fa463ab800b88d4",
+      "index": {
+        "bytes": 7262222,
+        "full9": {
+          "st_ctime_ns": "1795732754122379615",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69387331",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795732754121379602",
+          "st_nlink": "1",
+          "st_size": "7262222",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/.git/index",
+        "sha256": "a55ef7dc02ea5a1fda41553d9dda535afbcd7f3b09f1f1eff4c3c532854fe856"
+      },
+      "origin_main": "4d55f51e8860642f7ce038b63fa463ab800b88d4",
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "protected_body_roles": [
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "77b377ed5ac6f51eb0d2bb2a52006c26ca1b74c1",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 63678,
+        "full9": {
+          "st_ctime_ns": "1795734574960049462",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48769668",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574960049462",
+          "st_nlink": "1",
+          "st_size": "63678",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/duckdb_control/autoencoder_registry.py",
+        "sha256": "f6e782db575b3b645439082bb244449152c55cd82bdf1f8787fce9a1381fab7f"
+      },
+      "protected_old": {
+        "bytes": 63678,
+        "expected_Git_blob_oid": "77b377ed5ac6f51eb0d2bb2a52006c26ca1b74c1",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/duckdb_control/autoencoder_registry.py",
+        "sha256": "f6e782db575b3b645439082bb244449152c55cd82bdf1f8787fce9a1381fab7f"
+      },
+      "relative_path": "ipfs_datasets_py/duckdb_control/autoencoder_registry.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "820a19201664d1044b3af61e0dc79f183c31bd6b",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 57884,
+        "full9": {
+          "st_ctime_ns": "1795734574960049462",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48769690",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574960049462",
+          "st_nlink": "1",
+          "st_size": "57884",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/duckdb_control/connections.py",
+        "sha256": "8d3cc05a89f2b337e584708e7c6dbc8d7d4deccef442265ccbd5ca848821a872"
+      },
+      "protected_old": {
+        "bytes": 57884,
+        "expected_Git_blob_oid": "820a19201664d1044b3af61e0dc79f183c31bd6b",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/duckdb_control/connections.py",
+        "sha256": "8d3cc05a89f2b337e584708e7c6dbc8d7d4deccef442265ccbd5ca848821a872"
+      },
+      "relative_path": "ipfs_datasets_py/duckdb_control/connections.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "b3b28a1e0c05f828568ce892627c98066aa42cb4",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 18314,
+        "full9": {
+          "st_ctime_ns": "1795734574965733368",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770092",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574965733368",
+          "st_nlink": "1",
+          "st_size": "18314",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/cec_proof_cache.py",
+        "sha256": "8a40f17c0b82d7f8b9dfb8654d53c5f9472852acbcc830fdb3f3d98221f71bf3"
+      },
+      "protected_old": {
+        "bytes": 18314,
+        "expected_Git_blob_oid": "b3b28a1e0c05f828568ce892627c98066aa42cb4",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/cec_proof_cache.py",
+        "sha256": "8a40f17c0b82d7f8b9dfb8654d53c5f9472852acbcc830fdb3f3d98221f71bf3"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/cec_proof_cache.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "0c0661eb169afd2b786bed61595c654dbe891ce2",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 19473,
+        "full9": {
+          "st_ctime_ns": "1795734574965733368",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770093",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574965733368",
+          "st_nlink": "1",
+          "st_size": "19473",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/cec_zkp_integration.py",
+        "sha256": "8284720a83162918a9785ec31d2e44dfbb2dd948a0f653b451745b0f8e3ab962"
+      },
+      "protected_old": {
+        "bytes": 19473,
+        "expected_Git_blob_oid": "0c0661eb169afd2b786bed61595c654dbe891ce2",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/cec_zkp_integration.py",
+        "sha256": "8284720a83162918a9785ec31d2e44dfbb2dd948a0f653b451745b0f8e3ab962"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/cec_zkp_integration.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "cf0a3ec3c0e2850a5a9aad86ed7e2cd266bd4fea",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 26343,
+        "full9": {
+          "st_ctime_ns": "1795734574966049498",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770101",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966049498",
+          "st_nlink": "1",
+          "st_size": "26343",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/dcec_english_grammar.py",
+        "sha256": "2b87f9e7d256dd236c65147eabfc55bd3d481e74be63c80c23f6720d33cba0b2"
+      },
+      "protected_old": {
+        "bytes": 26343,
+        "expected_Git_blob_oid": "cf0a3ec3c0e2850a5a9aad86ed7e2cd266bd4fea",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/dcec_english_grammar.py",
+        "sha256": "2b87f9e7d256dd236c65147eabfc55bd3d481e74be63c80c23f6720d33cba0b2"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/dcec_english_grammar.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "f808e61fba61bc4f99409b35a7555db4348f971b",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 13580,
+        "full9": {
+          "st_ctime_ns": "1795734574966049498",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770104",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966049498",
+          "st_nlink": "1",
+          "st_size": "13580",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/dcec_namespace.py",
+        "sha256": "9e6903c74d3b95634f86f4f67392ca61bf9a284b577294d2b12ff001d9fbeb24"
+      },
+      "protected_old": {
+        "bytes": 13580,
+        "expected_Git_blob_oid": "f808e61fba61bc4f99409b35a7555db4348f971b",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/dcec_namespace.py",
+        "sha256": "9e6903c74d3b95634f86f4f67392ca61bf9a284b577294d2b12ff001d9fbeb24"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/dcec_namespace.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "ef6a60266e397e8a26da397f04c3e1411c4c08a6",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 14472,
+        "full9": {
+          "st_ctime_ns": "1795734574966049498",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770118",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966049498",
+          "st_nlink": "1",
+          "st_size": "14472",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/grammar_engine.py",
+        "sha256": "df787f7656894c063eaad5e16bc78168f1fd7c301a0907639dfb466b5f286293"
+      },
+      "protected_old": {
+        "bytes": 14472,
+        "expected_Git_blob_oid": "ef6a60266e397e8a26da397f04c3e1411c4c08a6",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/grammar_engine.py",
+        "sha256": "df787f7656894c063eaad5e16bc78168f1fd7c301a0907639dfb466b5f286293"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/grammar_engine.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "540bf35af10362b5301c349506185bbfb7eb5d8f",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 4312,
+        "full9": {
+          "st_ctime_ns": "1795734574966049498",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770139",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966049498",
+          "st_nlink": "1",
+          "st_size": "4312",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/__init__.py",
+        "sha256": "46d1d7677be5038b9006cfa6738940dd306aa404736295cf58d201a4a398c641"
+      },
+      "protected_old": {
+        "bytes": 4312,
+        "expected_Git_blob_oid": "540bf35af10362b5301c349506185bbfb7eb5d8f",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/__init__.py",
+        "sha256": "46d1d7677be5038b9006cfa6738940dd306aa404736295cf58d201a4a398c641"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/inference_rules/__init__.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "d9f2c6b3082bd48bf3e9672f8fab8b6a05ec04ff",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 2387,
+        "full9": {
+          "st_ctime_ns": "1795734574966504668",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770170",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966504668",
+          "st_nlink": "1",
+          "st_size": "2387",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/base.py",
+        "sha256": "5776e79206eb65fc3d2e898e48c374cba6fde09dbc48661d1ffb8417f2d99646"
+      },
+      "protected_old": {
+        "bytes": 2387,
+        "expected_Git_blob_oid": "d9f2c6b3082bd48bf3e9672f8fab8b6a05ec04ff",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/base.py",
+        "sha256": "5776e79206eb65fc3d2e898e48c374cba6fde09dbc48661d1ffb8417f2d99646"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/inference_rules/base.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "7519570d5de4875a9fbf77ee1ee88db8a6cef41f",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 24462,
+        "full9": {
+          "st_ctime_ns": "1795734574966504668",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770174",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966504668",
+          "st_nlink": "1",
+          "st_size": "24462",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/cognitive.py",
+        "sha256": "329334034ecfbb55fcb306c0d084a2a31f658a85af2ecb1edaef1c6ad7de7813"
+      },
+      "protected_old": {
+        "bytes": 24462,
+        "expected_Git_blob_oid": "7519570d5de4875a9fbf77ee1ee88db8a6cef41f",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/cognitive.py",
+        "sha256": "329334034ecfbb55fcb306c0d084a2a31f658a85af2ecb1edaef1c6ad7de7813"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/inference_rules/cognitive.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "7f962d5b90aa258d8f29c0cc44bb8ed03a6d93d7",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 15450,
+        "full9": {
+          "st_ctime_ns": "1795734574966504668",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770178",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966504668",
+          "st_nlink": "1",
+          "st_size": "15450",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/deontic.py",
+        "sha256": "8ef29a48e2e132f595ead529d446f7180745920ffae790feac985c121b4a6ddb"
+      },
+      "protected_old": {
+        "bytes": 15450,
+        "expected_Git_blob_oid": "7f962d5b90aa258d8f29c0cc44bb8ed03a6d93d7",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/deontic.py",
+        "sha256": "8ef29a48e2e132f595ead529d446f7180745920ffae790feac985c121b4a6ddb"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/inference_rules/deontic.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "a6136fbeb248d253854908b5cabff7eeb8d46a44",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 9218,
+        "full9": {
+          "st_ctime_ns": "1795734574966504668",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770185",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966504668",
+          "st_nlink": "1",
+          "st_size": "9218",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/modal.py",
+        "sha256": "4ddf941cb2c2920699ec0e7f48d34b68a727da40a8868bd161c56eb315c2e4ef"
+      },
+      "protected_old": {
+        "bytes": 9218,
+        "expected_Git_blob_oid": "a6136fbeb248d253854908b5cabff7eeb8d46a44",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/modal.py",
+        "sha256": "4ddf941cb2c2920699ec0e7f48d34b68a727da40a8868bd161c56eb315c2e4ef"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/inference_rules/modal.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "a4e114be165f806e6abf7881c2ecf5d6f1c6d98e",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 15934,
+        "full9": {
+          "st_ctime_ns": "1795734574966504668",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770186",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966504668",
+          "st_nlink": "1",
+          "st_size": "15934",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/propositional.py",
+        "sha256": "feb45f9807bc2d1cd38738006cb98cc553aa652918ee1158e8b106131ccd86bb"
+      },
+      "protected_old": {
+        "bytes": 15934,
+        "expected_Git_blob_oid": "a4e114be165f806e6abf7881c2ecf5d6f1c6d98e",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/propositional.py",
+        "sha256": "feb45f9807bc2d1cd38738006cb98cc553aa652918ee1158e8b106131ccd86bb"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/inference_rules/propositional.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "4eeb466ea7ce9667450e85476b4e9ff52cac447f",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 15219,
+        "full9": {
+          "st_ctime_ns": "1795734574966504668",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770201",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966504668",
+          "st_nlink": "1",
+          "st_size": "15219",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/resolution.py",
+        "sha256": "8a5078e2e5ed25c350b8d28d6173f0013c6f78d075bfe5ca4b0516d46cbfcd82"
+      },
+      "protected_old": {
+        "bytes": 15219,
+        "expected_Git_blob_oid": "4eeb466ea7ce9667450e85476b4e9ff52cac447f",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/resolution.py",
+        "sha256": "8a5078e2e5ed25c350b8d28d6173f0013c6f78d075bfe5ca4b0516d46cbfcd82"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/inference_rules/resolution.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "805d49d20b43d19b50ac1636f8ba84e68821fd50",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 16154,
+        "full9": {
+          "st_ctime_ns": "1795734574966504668",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770205",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966504668",
+          "st_nlink": "1",
+          "st_size": "16154",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/specialized.py",
+        "sha256": "6a3d14356a1b076c7c943d7bd30da7d7694c03bae9da0d3ccf5a8bf848e7de96"
+      },
+      "protected_old": {
+        "bytes": 16154,
+        "expected_Git_blob_oid": "805d49d20b43d19b50ac1636f8ba84e68821fd50",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/specialized.py",
+        "sha256": "6a3d14356a1b076c7c943d7bd30da7d7694c03bae9da0d3ccf5a8bf848e7de96"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/inference_rules/specialized.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "b0f6b9fb0cf20c3bd55fad17d4831cbf705334be",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 23768,
+        "full9": {
+          "st_ctime_ns": "1795734574966504668",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770224",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966504668",
+          "st_nlink": "1",
+          "st_size": "23768",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/temporal.py",
+        "sha256": "08d09c5be78e72168a4f4edef74840e766f65e1b9a9e4601f3000308254b9eaf"
+      },
+      "protected_old": {
+        "bytes": 23768,
+        "expected_Git_blob_oid": "b0f6b9fb0cf20c3bd55fad17d4831cbf705334be",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/inference_rules/temporal.py",
+        "sha256": "08d09c5be78e72168a4f4edef74840e766f65e1b9a9e4601f3000308254b9eaf"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/inference_rules/temporal.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "9f71d25b6daeaf02b0867d101a01a063ec6c301b",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 4694,
+        "full9": {
+          "st_ctime_ns": "1795734574966504668",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770249",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966504668",
+          "st_nlink": "1",
+          "st_size": "4694",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/legal_ir_lifecycle.py",
+        "sha256": "0e70084ecacfed64efa46716d13e5ecfd6a44686df5546a67716eb5cadc4a7fd"
+      },
+      "protected_old": {
+        "bytes": 4694,
+        "expected_Git_blob_oid": "9f71d25b6daeaf02b0867d101a01a063ec6c301b",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/legal_ir_lifecycle.py",
+        "sha256": "0e70084ecacfed64efa46716d13e5ecfd6a44686df5546a67716eb5cadc4a7fd"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/legal_ir_lifecycle.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "8a991e4143bb9ef55b2c8d1ce0bf814a46c1c772",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 15938,
+        "full9": {
+          "st_ctime_ns": "1795734574966504668",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770311",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966504668",
+          "st_nlink": "1",
+          "st_size": "15938",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/nl_converter.py",
+        "sha256": "016b8e4893b9825e2f3b0a95d331691736433a1cdae430dde2d831862e0bf254"
+      },
+      "protected_old": {
+        "bytes": 15938,
+        "expected_Git_blob_oid": "8a991e4143bb9ef55b2c8d1ce0bf814a46c1c772",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/nl_converter.py",
+        "sha256": "016b8e4893b9825e2f3b0a95d331691736433a1cdae430dde2d831862e0bf254"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/nl_converter.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "c2edff854961ae8773228c8c2c339cf8bb7c0467",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 10061,
+        "full9": {
+          "st_ctime_ns": "1795734574966504668",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770341",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574966504668",
+          "st_nlink": "1",
+          "st_size": "10061",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/problem_parser.py",
+        "sha256": "fd946d11ca07fcf09db67f91f3a90680f8b7024c373be09c514ff91a957682d3"
+      },
+      "protected_old": {
+        "bytes": 10061,
+        "expected_Git_blob_oid": "c2edff854961ae8773228c8c2c339cf8bb7c0467",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/problem_parser.py",
+        "sha256": "fd946d11ca07fcf09db67f91f3a90680f8b7024c373be09c514ff91a957682d3"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/problem_parser.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "b3590dc29697ae91c1c219efecd9870a0408a6c2",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 19007,
+        "full9": {
+          "st_ctime_ns": "1795734574967049504",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770357",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574967049504",
+          "st_nlink": "1",
+          "st_size": "19007",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/prover_core.py",
+        "sha256": "c734b6cfbd05cd73bb5836d0635c1d9bb95ce3d722567e5afd082a4edb963487"
+      },
+      "protected_old": {
+        "bytes": 19007,
+        "expected_Git_blob_oid": "b3590dc29697ae91c1c219efecd9870a0408a6c2",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/prover_core.py",
+        "sha256": "c734b6cfbd05cd73bb5836d0635c1d9bb95ce3d722567e5afd082a4edb963487"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/prover_core.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "d77b1d2492a6743eca5cf50c5dddf3dee1c90190",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 51196,
+        "full9": {
+          "st_ctime_ns": "1795734574967049504",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48770360",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734574967049504",
+          "st_nlink": "1",
+          "st_size": "51196",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/CEC/native/prover_core_extended_rules.py",
+        "sha256": "07e26b65dba0a2f6be6bf7f36424a25da28d4c1e440e703b6985044684d9b253"
+      },
+      "protected_old": {
+        "bytes": 51196,
+        "expected_Git_blob_oid": "d77b1d2492a6743eca5cf50c5dddf3dee1c90190",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/CEC/native/prover_core_extended_rules.py",
+        "sha256": "07e26b65dba0a2f6be6bf7f36424a25da28d4c1e440e703b6985044684d9b253"
+      },
+      "relative_path": "ipfs_datasets_py/logic/CEC/native/prover_core_extended_rules.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "8a8ec6b741c7eccfd102b4ef02bee976f6dc205d",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 8817,
+        "full9": {
+          "st_ctime_ns": "1795734575050184563",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48773230",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734575050184563",
+          "st_nlink": "1",
+          "st_size": "8817",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/zkp/__init__.py",
+        "sha256": "ea2eb0e91ae023d2b2180189c26fda4bf9fac3a9d0b1189cbe415676b2af3151"
+      },
+      "protected_old": {
+        "bytes": 8817,
+        "expected_Git_blob_oid": "8a8ec6b741c7eccfd102b4ef02bee976f6dc205d",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/zkp/__init__.py",
+        "sha256": "ea2eb0e91ae023d2b2180189c26fda4bf9fac3a9d0b1189cbe415676b2af3151"
+      },
+      "relative_path": "ipfs_datasets_py/logic/zkp/__init__.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "f311d9913cdcb9e17e08189c15b6d0277815afde",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 15585,
+        "full9": {
+          "st_ctime_ns": "1795734575054307132",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48776573",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734575054307132",
+          "st_nlink": "1",
+          "st_size": "15585",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_invocation_contracts.py",
+        "sha256": "51b6879f0ec00b1548fa3b47266872c312e64dded0149cb2c516508f7daa53dd"
+      },
+      "protected_old": {
+        "bytes": 15585,
+        "expected_Git_blob_oid": "f311d9913cdcb9e17e08189c15b6d0277815afde",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_invocation_contracts.py",
+        "sha256": "51b6879f0ec00b1548fa3b47266872c312e64dded0149cb2c516508f7daa53dd"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_invocation_contracts.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "b24e921a66d4ae0c5b1c5b7b67b442066fe1eee7",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 22784,
+        "full9": {
+          "st_ctime_ns": "1795734575055050032",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48776597",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734575055050032",
+          "st_nlink": "1",
+          "st_size": "22784",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_incremental_training.py",
+        "sha256": "0f76f56a53d67867f2447ef97f63d05db2cce80aaf32c46ef662b64cff398fd2"
+      },
+      "protected_old": {
+        "bytes": 22784,
+        "expected_Git_blob_oid": "b24e921a66d4ae0c5b1c5b7b67b442066fe1eee7",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_incremental_training.py",
+        "sha256": "0f76f56a53d67867f2447ef97f63d05db2cce80aaf32c46ef662b64cff398fd2"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_incremental_training.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "2ca172903507b0b6ea6d93ab5ebee78c469601cc",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 92465,
+        "full9": {
+          "st_ctime_ns": "1795734575055050032",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48776600",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734575055050032",
+          "st_nlink": "1",
+          "st_size": "92465",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+        "sha256": "944e2fd0e0ddd922858941a5b99002ddc205a2e738114eece8dcf7aa5c69ded4"
+      },
+      "protected_old": {
+        "bytes": 92465,
+        "expected_Git_blob_oid": "2ca172903507b0b6ea6d93ab5ebee78c469601cc",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+        "sha256": "944e2fd0e0ddd922858941a5b99002ddc205a2e738114eece8dcf7aa5c69ded4"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "6eb9b3a5f5a5f56c3f2466aa7ae06b3ef24189ee",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 7896,
+        "full9": {
+          "st_ctime_ns": "1795734575056050038",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48776601",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734575056050038",
+          "st_nlink": "1",
+          "st_size": "7896",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py",
+        "sha256": "04f29da03f937dfee7ecfcb621980240c014754abe55f71a2c1ef8338ba715bb"
+      },
+      "protected_old": {
+        "bytes": 7896,
+        "expected_Git_blob_oid": "6eb9b3a5f5a5f56c3f2466aa7ae06b3ef24189ee",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py",
+        "sha256": "04f29da03f937dfee7ecfcb621980240c014754abe55f71a2c1ef8338ba715bb"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "22f52de8c990e4b9d0670073e28278b3d41a69ce",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 78534,
+        "full9": {
+          "st_ctime_ns": "1795734575057050044",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48776616",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734575057050044",
+          "st_nlink": "1",
+          "st_size": "78534",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_coordinator.py",
+        "sha256": "8a08373adbc84a3382ded6a05e1ce67a42ba6969bcc31a99cbdf10d49bc45528"
+      },
+      "protected_old": {
+        "bytes": 78534,
+        "expected_Git_blob_oid": "22f52de8c990e4b9d0670073e28278b3d41a69ce",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_coordinator.py",
+        "sha256": "8a08373adbc84a3382ded6a05e1ce67a42ba6969bcc31a99cbdf10d49bc45528"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_coordinator.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "7f3f37945c60913eaea15b68bcff81a764cabec0",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 597715,
+        "full9": {
+          "st_ctime_ns": "1795734575058050050",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48776619",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734575058050050",
+          "st_nlink": "1",
+          "st_size": "597715",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py",
+        "sha256": "451be2dee4de4365ecf78183629a2a4283aa31adeb9a4ddcdaeae0843ad90528"
+      },
+      "protected_old": {
+        "bytes": 597715,
+        "expected_Git_blob_oid": "7f3f37945c60913eaea15b68bcff81a764cabec0",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py",
+        "sha256": "451be2dee4de4365ecf78183629a2a4283aa31adeb9a4ddcdaeae0843ad90528"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "517875f0df7ee58c62f14fc3b2e91f53cc98e14c",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 6387,
+        "full9": {
+          "st_ctime_ns": "1795734575058050050",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48776623",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734575058050050",
+          "st_nlink": "1",
+          "st_size": "6387",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/checkpoint_content_guard.py",
+        "sha256": "5461672516b4a60938b036d558192e8db328fdd00d20cda76b7448dea09c706c"
+      },
+      "protected_old": {
+        "bytes": 6387,
+        "expected_Git_blob_oid": "517875f0df7ee58c62f14fc3b2e91f53cc98e14c",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/checkpoint_content_guard.py",
+        "sha256": "5461672516b4a60938b036d558192e8db328fdd00d20cda76b7448dea09c706c"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/checkpoint_content_guard.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "07b499a1263becd7bd5c6d2755dc81c24cbe6f56",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 61991,
+        "full9": {
+          "st_ctime_ns": "1795734575059050056",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48776635",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734575059050056",
+          "st_nlink": "1",
+          "st_size": "61991",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py",
+        "sha256": "e652c79842323fec40f3e5d8f6a23620c9b4ce4a2d1043c597176a13de3f4acd"
+      },
+      "protected_old": {
+        "bytes": 61991,
+        "expected_Git_blob_oid": "07b499a1263becd7bd5c6d2755dc81c24cbe6f56",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py",
+        "sha256": "e652c79842323fec40f3e5d8f6a23620c9b4ce4a2d1043c597176a13de3f4acd"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "4f28fe460536fe969adbad8e6f8e0c37a0adaa2d",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 59952,
+        "full9": {
+          "st_ctime_ns": "1795734575061050068",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48776682",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734575061050068",
+          "st_nlink": "1",
+          "st_size": "59952",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py",
+        "sha256": "4fa7f523e99879e74c3a333b31ece53b6556360df2b2ce9441c0e2f471d08f20"
+      },
+      "protected_old": {
+        "bytes": 59952,
+        "expected_Git_blob_oid": "4f28fe460536fe969adbad8e6f8e0c37a0adaa2d",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py",
+        "sha256": "4fa7f523e99879e74c3a333b31ece53b6556360df2b2ce9441c0e2f471d08f20"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py"
+    },
+    {
+      "Git": {
+        "mode": "100644",
+        "oid": "9192b908d3afed67bf8fcec679b05613a1034e61",
+        "stage": 0
+      },
+      "closed_ordinary_epoch": {
+        "bytes": 21228,
+        "full9": {
+          "st_ctime_ns": "1795734575065050092",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48776761",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734575065050092",
+          "st_nlink": "1",
+          "st_size": "21228",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py",
+        "sha256": "dcd3a885820e7985ebec458a80325fe00d4d50656cf5827a828dd9cb45eb2524"
+      },
+      "protected_old": {
+        "bytes": 21228,
+        "expected_Git_blob_oid": "9192b908d3afed67bf8fcec679b05613a1034e61",
+        "expected_Git_mode": "100644",
+        "full9": null,
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py",
+        "sha256": "dcd3a885820e7985ebec458a80325fe00d4d50656cf5827a828dd9cb45eb2524"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py"
+    }
+  ],
+  "protected_body_sha256_size_and_Git_stage0_changes": 0,
+  "protected_role_count": 32,
+  "protected_role_root_changed": true,
+  "quote": {
+    "Guide571_historical_combined": 27291563,
+    "Guide572_combined": null,
+    "reason": "Existing Reader archive join requires exact historical absolute paths and same-path index. Relocation owner disposition and output allowance reprice are pending."
+  },
+  "schema": "private-retained-stage-a-guide572-publication-reconciliation/v1"
+}

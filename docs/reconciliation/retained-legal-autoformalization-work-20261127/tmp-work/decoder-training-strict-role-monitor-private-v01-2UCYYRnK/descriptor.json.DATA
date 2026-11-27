@@ -1,0 +1,158 @@
+{
+  "checkpoint_and_codec_path_selected": false,
+  "closed_logs": {
+    "archive": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/archive.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/archive.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 5771,
+        "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/archive.stdout",
+        "sha256": "64450bcad7f2c39db2fbc542724dc2d16f0389a91670801f402f36423eb0e546"
+      }
+    },
+    "frontier": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/guide576.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/guide576.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "legacy": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/legacy.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1845,
+        "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/legacy.stderr",
+        "sha256": "a12d925220184f850edd0a1a2f71206c73fb4abc46b7435e7cc9e53b3c29cb41"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/legacy.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "positive": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/train-positive.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/train-positive.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 6858,
+        "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/train-positive.stdout",
+        "sha256": "63a5cb563fdb948e4dfe18cbed566542a2654bd887fff1a50391254dadd04176"
+      }
+    },
+    "strict": {
+      "exit": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/strict-tests.exit",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1566,
+        "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/strict-tests.stderr",
+        "sha256": "cd8fee4d7f731d9e17d983a7b09a34cd76b4c87c6c24e0d506bb91d3c04e1a04"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/strict-tests.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "diff": {
+    "bytes": 5856,
+    "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/readback.diff",
+    "sha256": "2def4a5024b33388a741de8a9bb06a8d7f8b26ed91a4305079a31336889a07ff"
+  },
+  "dispatch_authority": false,
+  "drivers": {
+    "compose.py": {
+      "bytes": 4621,
+      "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/compose.py",
+      "sha256": "fa0df8a2fb86b6852458972f43a1ead6c9ed9a464e268715bea6bbb5773e7bda"
+    },
+    "guide576_scope.py": {
+      "bytes": 6541,
+      "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/guide576_scope.py",
+      "sha256": "8bf2d982fa74c696c6e9afa23ce1fb23a0a79425c3f2f0eb03748277bfcbe919"
+    },
+    "replay_archive.py": {
+      "bytes": 4112,
+      "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/replay_archive.py",
+      "sha256": "2605060b846f331d2229a3cd8b44d6619cd4c1f6a7eb3d99f08be0d47e16f1f5"
+    },
+    "replay_labels.py": {
+      "bytes": 1691,
+      "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/replay_labels.py",
+      "sha256": "7372e0b64b5e326a9dbda8a1fe4f430fa3ba38dfcb942d9f82b01c774fa135d6"
+    },
+    "retained_checks.py": {
+      "bytes": 690,
+      "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/retained_checks.py",
+      "sha256": "9cf1cbed5274c6df428db0adf219dad17dd72f1a2051d990e1fc3a71b48f79f9"
+    },
+    "strict_first_role.py.IN": {
+      "bytes": 1318,
+      "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/strict_first_role.py.IN",
+      "sha256": "ae7155794555cfae173c82d4846d8d006511c58a6096b4e182bfe673f3f6798c"
+    },
+    "test_strict_role_order.py": {
+      "bytes": 10891,
+      "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/test_strict_role_order.py",
+      "sha256": "13d6d1663b14715e804b36062c160ac2a5dc590de4c5aad5e9eee90bc22279dc"
+    },
+    "train_labels.py": {
+      "bytes": 7421,
+      "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/train_labels.py",
+      "sha256": "2775fced48cd083a5d25c45ccbacaf6e84a7a5887a58c43f9008115b9bfd06fa"
+    }
+  },
+  "heldout_target_reads": 0,
+  "model_calls": 0,
+  "monitor": {
+    "bytes": 26931,
+    "path": "/tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/readback.py",
+    "sha256": "507a250561a39112b82352da5f5b3e58e8d1829d00d960063a931289d2187e57"
+  },
+  "native_monitor_stopping_or_wall_savings": null,
+  "original_heldout_exact": {
+    "TRAIN3": 0,
+    "pristine0": 0
+  },
+  "previous_monitor": {
+    "bytes": 24208,
+    "path": "/tmp/decoder-training-selective-prefix-inspection-private-v01-PV9ezANr/readback.py",
+    "sha256": "7be27aa995f70a7557ad65e728d2a013c20fbbe96729bd230a265e86e7ba948c"
+  },
+  "schema": "private-strict-first-role-monitor-and-original-source62-replay/v1",
+  "test_counts": {
+    "archived_generated_negatives": 6,
+    "controlled_positive_chunk_schedules": 87,
+    "focused": 9,
+    "original_teacher_forced_positive_labels": 3,
+    "retained_default": 12
+  }
+}

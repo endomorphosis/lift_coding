@@ -1,0 +1,80 @@
+{
+  "Source_binding": {
+    "bytes": 1875,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-isolated-ordinary22-D27-read-binding.json",
+    "sha256": "a1d8ed81de5e4d76d47474924f4a501ddaa0d4735bbf6e4f445fe2980af33fb3"
+  },
+  "Source_lease_and_resource_cleanup_closed": true,
+  "actual_ordinary_counts": {
+    "errors": 0,
+    "failures": 0,
+    "functions": 20,
+    "passed": 22,
+    "skipped": 0,
+    "tests": 22
+  },
+  "actual_report": {
+    "bytes": 671125,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-output/complete-frozen-local-D-Phase7-receipt-bounds-ordinary22-existing-owner-report.json",
+    "sha256": "ca380f69a1586a1168063edd0f372199468f3c5f270c80bbbd7da10bcd312621"
+  },
+  "exact_freeze": {
+    "bytes": 9962,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-isolated-Phase7-receipt-bounds-exact-two-local-freeze.json",
+    "sha256": "29802789293f7af8358cbb2437753ade2a10873310b19eed1855dd4d77e024c6"
+  },
+  "held_case_selector": {
+    "bytes": 6549,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-owning22-static-selection-DATA.json",
+    "sha256": "1d880d46f44d662627a65aba93699b8148209ea90b82e3a49ce97e19336efe02"
+  },
+  "large_model_fit_or_Native_or_statutory_qualification": false,
+  "ordered_cases": [
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_interface_and_schema_versions_are_pinned",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_public_inputs_bind_all_required_dimensions",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_each_public_input_dimension_change_produces_distinct_digest",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_trusted_receipt_rejects_non_conclusive_and_attestation_authority",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_private_witness_never_serializes",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_cryptographic_execution_succeeds_and_projects_attestation_authority",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_attestation_does_not_raise_underlying_semantic_authority",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_simulated_backend_fails_production_gates",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_circuit_mismatch_fails_closed",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_stale_attestation_fails",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_revoked_material_fails",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_rejected_and_error_verdicts_are_non_authoritative",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_malformed_prover_output_fails_closed",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_statement_and_record_round_trip",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_request_repr_redacts_witness",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_typed_execution_bounds_without_metadata_copy",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_explicit_metadata_bounds_exactly[empty]",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_explicit_metadata_bounds_exactly[null]",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_explicit_metadata_bounds_exactly[partial]",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_declared_conflicting_bounds_are_not_rewritten_into_valid_evidence",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_adding_execution_bounds_does_not_upgrade_missing_translation_authority",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_old_receipt_without_bounds_keeps_its_serialized_content_identity"
+  ],
+  "ordinary_raw_JUnit": {
+    "bytes": 3640,
+    "logical_name": "junit.xml",
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-output/Phase7-receipt-bounds-ordinary22-run-result0-output1.bin",
+    "sha256": "730c6d493fa393a72cd266c8e4a45b4c3c0ca3e006ee14abe9779b2128656e37"
+  },
+  "published": false,
+  "raw_phase_bindings": {
+    "collect": {
+      "bytes": 124849,
+      "logical_name": "binding.json",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-output/Phase7-receipt-bounds-ordinary22-collect-result0-output0.bin",
+      "sha256": "432b7089bccc1874dea670fbda909999386b6b442cf106572ab97cd0fc1c6ade"
+    },
+    "run": {
+      "bytes": 131778,
+      "logical_name": "binding.json",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-output/Phase7-receipt-bounds-ordinary22-run-result0-output0.bin",
+      "sha256": "be4736f5488ed0f508514e8b5e0e73cd676c2c61f42332d74321c3af7b17b5cf"
+    }
+  },
+  "schema": "actual-Phase7-current-receipt-bounds-ordinary22-closed/v1",
+  "terminal_returncode": 0,
+  "terminal_session": 78189
+}

@@ -1,0 +1,360 @@
+{
+  "Lean_owner_normal_RUN_source_compile_sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800",
+  "Source_READ3": {
+    "bytes": 2353,
+    "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/actual-isolated-ordinary92-D27-read-binding.json",
+    "sha256": "453f5320013daaac283c7360ff01d2832966bcfc53ad5568e55a9bd7c33e2f49"
+  },
+  "Source_and_resource_and_parent_closed": true,
+  "actual_raw_JUnit": {
+    "bytes": 17502,
+    "logical_name": "junit.xml",
+    "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/actual-output/phase1-lean-request-92-run-result0-output1.bin",
+    "sha256": "2790ac6c972a372f05fb99988377214fd6d1e88379fcd88476ac65d5ef203366"
+  },
+  "actual_report": {
+    "bytes": 2109568,
+    "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/actual-output/complete-frozen-local-D-phase1-lean-request-92-existing-owner-report.json",
+    "sha256": "038fc414bb1942c3b6fe92e9617907abd426aa056d5f1b905a588e67efb4980e"
+  },
+  "canonical_adoption_or_publication": false,
+  "counts": {
+    "errors": 0,
+    "failures": 0,
+    "functions": 19,
+    "passed": 92,
+    "skipped": 0,
+    "tests": 92
+  },
+  "isolated_freeze": {
+    "bytes": 5801,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-isolated-exact-two-local-freeze.json",
+    "sha256": "afa47b34b755f9bd2c53bb36d68b10c069dd005d4e0b66a7b4338ebf6bb1d9de"
+  },
+  "ordered_cases": [
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_verified_proof_binds_full_kernel_receipt",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_is_rejected_and_never_proved",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_sorry_can_explicitly_downgrade_authority",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_unavailable_lean_kernel_never_passes",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_wasm_plane_is_probe_only_and_not_confused_with_native_success",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_binds_expected_goal_policy_and_round_trips_strictly",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_report]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_report_name]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[unapproved_dependency]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_typecheck]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_proposition_digest]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_compiled_source]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_source]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_proof]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_toolchain_policy]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_report_position]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[unknown_field]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[legacy_schema]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[missing_source]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_submitted_source]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_compiled_recipe]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_selected_declaration]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_report_line]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[empty_report_text]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[wrong_declaration_report_text]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[hidden_sorry_report_text]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v2_receipt_rejects_internal_evidence_mutations_even_with_recomputed_id[hidden_dependency_report_text]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_source_only_compilation_cannot_prove_an_opaque_request_obligation",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[missing_guard]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[other_guard]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[original_report]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_missing]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_unchecked]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_version]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_executable]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_executable_sha]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_size]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[changed_stat]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[failed_version]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[stderr_version]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[other_version_command]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[identity_scope]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[unknown_identity_field]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_replay_rejects_guard_and_native_identity_mutations[v2_schema]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_v3_precancelled_request_runs_no_identity_or_proof_callbacks",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[{\"severity\": \"error\", \"data\": \"fictional unsolved goals\"}\\n-stdout]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[{\"severity\": \"error\", \"data\": \"fictional unsolved goals\"}\\n-stderr]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  {\"severity\": \"error\", \"data\": \"fictional type mismatch\"}\\n-stdout]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  {\"severity\": \"error\", \"data\": \"fictional type mismatch\"}\\n-stderr]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[error: fictional unsolved goals\\n-stdout]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[error: fictional unsolved goals\\n-stderr]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[Main.lean:1:0: error: fictional unsolved goals\\n-stdout]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[Main.lean:1:0: error: fictional unsolved goals\\n-stderr]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  \\tMain.lean:12:3: error: fictional unsolved goals\\n-stdout]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  \\tMain.lean:12:3: error: fictional unsolved goals\\n-stderr]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  ERROR: fictional unsolved goals\\n-stdout]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_bound_error_diagnostics_on_either_stream_cannot_be_rescued[  ERROR: fictional unsolved goals\\n-stderr]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence[different-result]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence[different-source]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence[contradictory-status]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence[different-witness-receipt]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence[different-witness-theorem]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_inconsistent_evidence[different-capability]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request[result_id]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request[assumptions]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_fields_from_another_request[bounds]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[False]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0.0]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[True]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[0]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[None]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_malformed_or_failed_exit_status_cannot_establish_proof[1]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[False]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_exact_source_bound_report_cannot_rescue_noninteger_exit_status[0.0]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[match]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[equivalent-source-alias]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[declaration]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[proposition]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[source]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[translation]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_binds_accepted_receipt_to_request_payload[missing-obligation]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[rocq]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[cvc5]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_foreign_requested_backend_after_complete_rebind[lean4-wasm]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_preserves_default_and_supported_requested_backend_aliases[]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_preserves_default_and_supported_requested_backend_aliases[lean]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_preserves_default_and_supported_requested_backend_aliases[lean4]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_preserves_default_and_supported_requested_backend_aliases[lean-kernel]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[satisfiability]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[runtime_monitor]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[evidence_readiness]",
+    "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[policy_approval]"
+  ],
+  "owned_terminal_session": 67508,
+  "schema": "actual-live-reconciled-P1-Lean-ordinary92-closed/v1",
+  "statutory_admission_or_model_or_Native_qualification": false,
+  "terminal_returncode": 0,
+  "witnesses": {
+    "collect": {
+      "lifecycle": {
+        "cleanup_confirmed": true,
+        "descendant_tracking_complete": true,
+        "group_scan_complete": true,
+        "kernel_containment_attested": false,
+        "leader": {
+          "birth_ticks": 475428863,
+          "parent_pid": 85051,
+          "pid": 85086,
+          "process_group_id": 85086,
+          "session_id": 85086
+        },
+        "leader_reaped": true,
+        "observation_errors": [],
+        "observed_descendants": [
+          {
+            "birth_ticks": 475428894,
+            "parent_pid": 85086,
+            "pid": 85091,
+            "process_group_id": 85086,
+            "session_id": 85086
+          }
+        ],
+        "ownership_is_sampled": true,
+        "parent": {
+          "birth_ticks": 475428838,
+          "pid": 85051
+        },
+        "readers": {
+          "joined": 2,
+          "started": 2
+        },
+        "remaining_group_members": [],
+        "remaining_tracked_descendants": [],
+        "schema": "native-owned-tool-lifecycle@1",
+        "stdin_writer": {
+          "joined": 0,
+          "started": 0
+        },
+        "workspace": {
+          "device": 66306,
+          "inode": 43041584,
+          "removed": true
+        }
+      },
+      "raw_binding": {
+        "bytes": 439296,
+        "logical_name": "binding.json",
+        "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/actual-output/phase1-lean-request-92-collect-result0-output0.bin",
+        "sha256": "5509e5758c5a32130d315e6bf1fb64f1e47eb1083eded1812f95f37bd15d8778"
+      },
+      "tests": {
+        "AST_to_code_observed": true,
+        "cache_policy": "bypass-read-only-for-selected-owning-test",
+        "code_execution_observed": true,
+        "code_filename": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+        "code_sha256": "467a3aadf97a799da87516b3fab0a86f6057f397b18095f5943aeb7a6eb98221",
+        "compile_source_full9": {
+          "st_ctime_ns": "1795735927039492753",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48802439",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795735927039492753",
+          "st_nlink": "1",
+          "st_size": "123945",
+          "st_uid": "1000"
+        },
+        "compile_source_sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945",
+        "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+        "returned_code_identity_matches": true,
+        "schema": "actual-selected-test-source-AST-code-witness/v1",
+        "selected_cache_reads_bypassed": 1,
+        "source_after": {
+          "bytes": 123945,
+          "full9": {
+            "st_ctime_ns": "1795735927039492753",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "48802439",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795735927039492753",
+            "st_nlink": "1",
+            "st_size": "123945",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+          "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945",
+          "stable_FD_path_before_after": true
+        },
+        "source_before": {
+          "bytes": 123945,
+          "full9": {
+            "st_ctime_ns": "1795735927039492753",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "48802439",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795735927039492753",
+            "st_nlink": "1",
+            "st_size": "123945",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+          "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945",
+          "stable_FD_path_before_after": true
+        },
+        "source_bytes": 123945,
+        "source_sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945",
+        "source_to_AST_observed": true
+      }
+    },
+    "run": {
+      "lifecycle": {
+        "cleanup_confirmed": true,
+        "descendant_tracking_complete": true,
+        "group_scan_complete": true,
+        "kernel_containment_attested": false,
+        "leader": {
+          "birth_ticks": 475428941,
+          "parent_pid": 85051,
+          "pid": 85278,
+          "process_group_id": 85278,
+          "session_id": 85278
+        },
+        "leader_reaped": true,
+        "observation_errors": [],
+        "observed_descendants": [
+          {
+            "birth_ticks": 475428971,
+            "parent_pid": 85278,
+            "pid": 85464,
+            "process_group_id": 85278,
+            "session_id": 85278
+          }
+        ],
+        "ownership_is_sampled": true,
+        "parent": {
+          "birth_ticks": 475428838,
+          "pid": 85051
+        },
+        "readers": {
+          "joined": 2,
+          "started": 2
+        },
+        "remaining_group_members": [],
+        "remaining_tracked_descendants": [],
+        "schema": "native-owned-tool-lifecycle@1",
+        "stdin_writer": {
+          "joined": 0,
+          "started": 0
+        },
+        "workspace": {
+          "device": 66306,
+          "inode": 43041584,
+          "removed": true
+        }
+      },
+      "raw_binding": {
+        "bytes": 486638,
+        "logical_name": "binding.json",
+        "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/actual-output/phase1-lean-request-92-run-result0-output0.bin",
+        "sha256": "0398e7a9d0443d387b0702fe0b94260da66e02d1438003901edeeaff05107bf2"
+      },
+      "tests": {
+        "AST_to_code_observed": true,
+        "cache_policy": "bypass-read-only-for-selected-owning-test",
+        "code_execution_observed": true,
+        "code_filename": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+        "code_sha256": "467a3aadf97a799da87516b3fab0a86f6057f397b18095f5943aeb7a6eb98221",
+        "compile_source_full9": {
+          "st_ctime_ns": "1795735927039492753",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "48802439",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795735927039492753",
+          "st_nlink": "1",
+          "st_size": "123945",
+          "st_uid": "1000"
+        },
+        "compile_source_sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945",
+        "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+        "returned_code_identity_matches": true,
+        "schema": "actual-selected-test-source-AST-code-witness/v1",
+        "selected_cache_reads_bypassed": 1,
+        "source_after": {
+          "bytes": 123945,
+          "full9": {
+            "st_ctime_ns": "1795735927039492753",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "48802439",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795735927039492753",
+            "st_nlink": "1",
+            "st_size": "123945",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+          "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945",
+          "stable_FD_path_before_after": true
+        },
+        "source_before": {
+          "bytes": 123945,
+          "full9": {
+            "st_ctime_ns": "1795735927039492753",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "48802439",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795735927039492753",
+            "st_nlink": "1",
+            "st_size": "123945",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+          "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945",
+          "stable_FD_path_before_after": true
+        },
+        "source_bytes": 123945,
+        "source_sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945",
+        "source_to_AST_observed": true
+      }
+    }
+  }
+}

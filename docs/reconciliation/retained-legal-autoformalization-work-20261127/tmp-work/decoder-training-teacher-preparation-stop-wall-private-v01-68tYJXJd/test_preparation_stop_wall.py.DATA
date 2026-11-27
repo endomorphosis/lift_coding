@@ -1,0 +1,241 @@
+"""Test independently timed stopping with original modeled preparation owners."""
+
+from dataclasses import replace
+from hashlib import sha256
+import json
+from pathlib import Path
+import runpy
+import sys
+from types import ModuleType
+import unittest
+from unittest.mock import patch
+
+
+HERE = Path(__file__).resolve().parent
+SINGLE = HERE.parent / "decoder-training-teacher-pilot-preparation-stop-private-v01-CwXGnYXb/test_preparation_stop.py"
+RECOVERY = HERE.parent / "decoder-training-stopped-pilot-recovery-fixture-private-v01-H0IfuCvV"
+STUDY = HERE.parent / "decoder-training-teacher-preparation-chain-private-v01-HvFxLkbO/study.py"
+STUDY_PIN = (458526, "06da5e08266eb994b3ba2556d5feab742a3ed078b0ad9712e124b04ad071109a")
+REPORT = {}
+
+
+def exact(path, pin):
+    raw = path.read_bytes()
+    assert sha256(raw).hexdigest() == pin, path
+    return raw
+
+
+raw = exact(SINGLE, "01c6e0a16e9d6d37ccfd7b40d2d958091b74506d5a02b7f818b729d7a40abdeb")
+for before, after in ((b'cls.image = HERE / "study.py"', b'cls.image = STUDY_PATH'),
+        (b'STUDY_PIN = "af7732476558bde17624585a9224a1c333387ae6fdd9fdc403c0b97ab4957d87"',
+         b'STUDY_PIN = SELECTED_STUDY_SHA256')):
+    assert raw.count(before) == 1
+    raw = raw.replace(before, after)
+single = {"__name__": "retained_single_stop", "__file__": str(HERE / SINGLE.name),
+          "STUDY_PATH": STUDY, "SELECTED_STUDY_SHA256": STUDY_PIN[1]}
+exec(compile(raw, str(SINGLE), "exec"), single)
+
+
+def load_recovery():
+    precursor = RECOVERY / "check_stopped_recovery.py"
+    base = ModuleType("check_stopped_recovery")
+    base.__file__ = str(HERE / precursor.name)
+    assert base.__name__ not in sys.modules
+    sys.modules[base.__name__] = base
+    try:
+        exec(compile(exact(precursor, "df8094555e56b30d1a9296c5a2bd20a1cb62dfe35fb85414a9ae67d01f47bc92"),
+                     str(precursor), "exec"), vars(base))
+        path = RECOVERY / "check_recovered_stop.py"
+        ns = {"__name__": "retained_recovered_stop", "__file__": str(HERE / path.name)}
+        exec(compile(exact(path, "cee8956e40ef1358a9b02061244858e9d9c8881bd46e62b8a62d1a05789f772a"),
+                     str(path), "exec"), ns)
+    finally:
+        del sys.modules[base.__name__]
+    recovered = ns["RecoveredStop"]
+    recovered.candidate_path, recovered.candidate_pin = STUDY, STUDY_PIN
+    return recovered
+
+
+program = runpy.run_path(str(HERE / "final_physical_union.py"))
+verify_wall = program["verify_teacher_pilot_preparation_stop_wall"]
+commit_wall = program["teacher_pilot_first_use_wall_commitment"]
+Wall = program["TeacherPilotFirstUseWall"]
+
+
+class WallFixture:
+    def offered(self, ledger, validator, source, physical, args, calls, *, all_arms=True):
+        self.ledger, self.validator, self.source, self.physical = ledger, validator, source, physical
+        self.args, self.calls, self.clock_calls, self.replayed = args, calls, [], {}
+        self.arms = tuple(name for name, _ in args["study"].arms)
+        if all_arms:
+            selected = []
+            for prefix in ("", "recovery_"):
+                receipt = args.get(prefix + "no_dispatch")
+                if receipt is None:
+                    continue
+                receipt = replace(receipt, unstarted_arms=self.arms)
+                digest = ledger.teacher_pilot_no_dispatch_commitment(receipt)
+                args[prefix + "no_dispatch"] = receipt
+                args["expected_" + prefix + "no_dispatch_sha256"] = digest
+                selected.append((digest, receipt.owner_close_sha256, receipt.plan_sha256, receipt.coverage_sha256))
+            self.dispatch = tuple(selected)
+
+            def dispatch(*offered):
+                calls.append(("selected_dispatch", offered))
+                return offered in self.dispatch
+
+            args["verify_no_dispatch_owner"] = dispatch
+        prior = args.get("replay_preparation_close")
+        if prior is not None:
+            def replay(row):
+                close = prior(row)
+                result = replace(close, start_ns=close.start_ns + 10, end_ns=close.end_ns + 10)
+                self.replayed[row["event_sha256"]] = result
+                return result
+            args["replay_preparation_close"] = replay
+        self.original = ledger.summarize_teacher_pilot_preparation_stop(validator, source, physical, **args)
+        self.stop_pin = ledger.commitment(self.original)
+        windows = tuple((event, close.request_sha256, close.close_sha256, close.clock_domain_sha256,
+                         close.start_ns, close.end_ns) for event, close in sorted(self.replayed.items()))
+        self.windows = ledger.commitment(windows)
+        domain = windows[0][3] if windows else ledger.commitment("modeled independent clock")
+        self.earliest = min((row[4] for row in windows), default=10)
+        latest = max((row[5] for row in windows), default=20)
+        self.window_count = len(windows)
+        self.witness = Wall(ledger.WallSpan(domain, self.earliest - 5, latest + 5, ledger.commitment("stop clock receipt")),
+                            ledger.commitment("independent original opening"), ledger.commitment("independent stop endpoint"))
+        calls.clear()
+        self.replayed.clear()
+
+    def verify(self, *, witness=None, approve=None, **overrides):
+        witness = self.witness if witness is None else witness
+        selected = commit_wall(self.ledger, self.stop_pin, witness)
+        expected = (selected, self.stop_pin, witness.opening_receipt_sha256,
+                    witness.terminal_evidence_receipt_sha256, self.windows)
+
+        def clock_owner(*received):
+            self.clock_calls.append(received)
+            self.assertEqual(len(self.replayed), self.window_count)
+            self.assertEqual(received, expected)
+            return True if approve is None else approve()
+
+        inputs = self.args | {"first_use_wall": witness, "expected_preparation_stop_sha256": self.stop_pin,
+            "expected_first_use_wall_sha256": selected, "verify_first_use_wall_owner": clock_owner} | overrides
+        return verify_wall(self.ledger, self.validator, self.source, self.physical, **inputs)
+
+    def check_wall(self, output):
+        self.assertEqual(output["preparation_stop"], self.original)
+        self.assertEqual(output["preparation_stop_sha256"], self.stop_pin)
+        self.assertIs(output["dispatch_authority"], False)
+        wall, w = output["first_use_wall"], self.witness
+        span = w.span
+        self.assertEqual((wall["start_ns"], wall["end_ns"], wall["elapsed_ns"]), (span.start_ns, span.end_ns, span.end_ns - span.start_ns))
+        self.assertEqual(wall["clock_domain_sha256"], span.clock_domain_sha256)
+        self.assertEqual(wall["receipt_sha256"], span.receipt_sha256)
+        self.assertEqual(wall["opening_receipt_sha256"], w.opening_receipt_sha256)
+        self.assertEqual(wall["terminal_evidence_receipt_sha256"], w.terminal_evidence_receipt_sha256)
+        self.assertEqual(wall["physical_clock_windows_sha256"], self.windows)
+        self.assertEqual(wall["covered_paid_events"], self.window_count)
+        self.assertEqual(wall["scope"], "pilot_opening_through_independently_authenticated_preparation_stop")
+        self.assertEqual(len(self.clock_calls), 1)
+        self.assertEqual(tuple(row["arm"] for row in self.original["decoder_dispatch"]
+                         if row["dispatch_status"] == "confirmed_unstarted"), self.arms)
+        return wall
+
+
+class StoppedWallControls(WallFixture, single["PreparationStop"]):
+    def select(self, *, paid=True, dispatch="all"):
+        fixture, source, args, calls = self.selected(paid=paid, dispatch=dispatch != "none")
+        self.offered(fixture.S, fixture.threshold, source, self.cost, args, calls, all_arms=dispatch == "all")
+
+    def test_paid_stop_keeps_original_failed_and_refused_events(self):
+        self.select()
+        report = self.verify()
+        wall = self.check_wall(report)
+        self.assertEqual(wall["covered_paid_events"], 3)
+        self.assertEqual({close.disposition for close in self.replayed.values()}, {"complete", "failed", "refused"})
+        self.assertTrue(any(close.leader_started is False for close in self.replayed.values()))
+        self.assertEqual(self.original["paid_preparation_work_ns"], {"cpu_ns": None, "gpu_ns": 0})
+        self.assertEqual(self.calls.count("cost"), 1)
+        REPORT["paid_wall"] = wall
+
+    def test_zero_paid_stop_can_have_elapsed_without_physical_work_claim(self):
+        self.select(paid=False)
+        self.assertNotIn("replay_preparation_close", self.args)
+        wall = self.check_wall(self.verify())
+        self.assertGreater(wall["elapsed_ns"], 0)
+        self.assertEqual(wall["covered_paid_events"], 0)
+        self.assertEqual(self.windows, self.ledger.commitment(()))
+        self.assertEqual(self.original["paid_preparation_work_ns"], {"cpu_ns": None, "gpu_ns": None})
+        self.assertTrue(all(not isinstance(row, tuple) or row[0] != "event" for row in self.calls))
+        REPORT["zero_paid_wall"] = wall
+
+    def test_absent_or_partial_dispatch_proof_cannot_claim_preparation_only(self):
+        for dispatch in ("partial", "none"):
+            with self.subTest(dispatch=dispatch):
+                self.select(paid=False, dispatch=dispatch)
+                with self.assertRaisesRegex(ValueError, "unstarted evidence for every original decoder arm"):
+                    self.verify()
+                self.assertEqual(self.clock_calls, [])
+
+    def test_missing_clock_owner_or_mismatched_stop_digest_refuses(self):
+        self.select(paid=False)
+        for overrides in ({"verify_first_use_wall_owner": None}, {"expected_preparation_stop_sha256": "1" * 64}):
+            with self.subTest(overrides=overrides), self.assertRaises(ValueError):
+                self.verify(**overrides)
+        self.assertEqual(self.clock_calls, [])
+
+    def test_enclosure_and_owning_no_dispatch_receipt_alias_refuse(self):
+        self.select()
+        for witness in (replace(self.witness, opening_receipt_sha256=self.args["no_dispatch"].owner_close_sha256),
+                        replace(self.witness, span=replace(self.witness.span, start_ns=self.earliest + 1)),
+                        replace(self.witness, span=replace(self.witness.span, clock_domain_sha256="1" * 64))):
+            self.calls.clear()
+            self.replayed.clear()
+            with self.subTest(witness=witness), self.assertRaises(ValueError):
+                self.verify(witness=witness)
+        self.assertEqual(self.clock_calls, [])
+
+    def test_original_owner_refusal_and_witness_mutation_refuse(self):
+        self.select()
+        with self.assertRaisesRegex(ValueError, "original decoder dispatch owner refused"):
+            self.verify(verify_no_dispatch_owner=lambda *_: False)
+        self.assertEqual(self.clock_calls, [])
+        with self.assertRaisesRegex(ValueError, "original clock owner refused"):
+            self.verify(approve=lambda: False)
+        self.assertEqual(len(self.clock_calls), 1)
+
+        def mutate():
+            object.__setattr__(self.witness.span, "end_ns", self.witness.span.end_ns + 1)
+            return True
+
+        with self.assertRaisesRegex(ValueError, "first-use wall witness changed"):
+            self.verify(approve=mutate)
+        self.assertEqual(len(self.clock_calls), 2)
+
+
+class RecoveredWallControls(WallFixture, load_recovery()):
+    def test_recovered_stop_keeps_both_dispatch_closes_and_sunk_work(self):
+        case = self.paired(self.candidate, changed_request=True)
+        args, calls, _ = self.recovered_inputs(case, old_dispatch=True, new_dispatch=True)
+        self.offered(case.S, self.threshold, case.fixture.owner, self.physical, args, calls)
+        wall = self.check_wall(self.verify())
+        self.assertEqual(wall["covered_paid_events"], 3)
+        self.assertEqual(self.original["paid_preparation_work_ns"], {"cpu_ns": 31, "gpu_ns": 0})
+        self.assertEqual(tuple(row[1] for row in calls if row[0] == "selected_dispatch"), self.dispatch)
+        self.assertEqual(len({row[1] for row in self.dispatch}), 2)
+        self.assertEqual(set(dict(case.events)), self.replayed.keys())
+        with self.assertRaisesRegex(ValueError, "exact independently selected terminal preparation stop"):
+            self.verify(recovery_no_dispatch=None, expected_recovery_no_dispatch_sha256=None)
+        self.assertEqual(len(self.clock_calls), 1)
+        REPORT["recovered_wall"] = wall
+
+
+if __name__ == "__main__":
+    classes = (StoppedWallControls, RecoveredWallControls)
+    tests = (cls(name) for cls in classes for name in vars(cls) if name.startswith("test_"))
+    with patch.dict(single["SourceControls"].create.__globals__, TemporaryDirectory=single["private_directory"]):
+        result = unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(tests))
+    if result.wasSuccessful():
+        print(json.dumps(REPORT, sort_keys=True))
+    raise SystemExit(not result.wasSuccessful())

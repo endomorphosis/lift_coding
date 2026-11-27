@@ -1,0 +1,132 @@
+{
+  "A_provenance": {
+    "HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+    "actual_closed_Source_READ": {
+      "bytes": 7560,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-isolated-Phase8-metric-lineage-READ3-closed.json",
+      "sha256": "78c8f4b2bff2097ed74567a59d8bd26805bc21273ee7f9682ca4f2a9578c90d6"
+    },
+    "clean_index_provenance_reference": {
+      "bytes": 2159,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-ordinary19-clean-D-A-index-provenance.json",
+      "sha256": "c2fde67d6486bceaee3a753d9bf761e81e42b42f0c53d25b7d18234024d63bdc"
+    },
+    "clean_worktree_and_index": true,
+    "local_frozen_Git_metadata_reference": {
+      "bytes": 2159,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-ordinary19-clean-D-A-index-provenance.json",
+      "sha256": "c2fde67d6486bceaee3a753d9bf761e81e42b42f0c53d25b7d18234024d63bdc"
+    },
+    "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tree": "c670052e6e12473d974382e455c7aef4adb6aebe"
+  },
+  "D_provenance": {
+    "HEAD": "da3024e6ab94fecad9f258375dcc18b04902bfe2",
+    "actual_closed_Source_READ": {
+      "bytes": 7560,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-isolated-Phase8-metric-lineage-READ3-closed.json",
+      "sha256": "78c8f4b2bff2097ed74567a59d8bd26805bc21273ee7f9682ca4f2a9578c90d6"
+    },
+    "clean_index_provenance_reference": {
+      "bytes": 2159,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-ordinary19-clean-D-A-index-provenance.json",
+      "sha256": "c2fde67d6486bceaee3a753d9bf761e81e42b42f0c53d25b7d18234024d63bdc"
+    },
+    "clean_worktree_and_index": true,
+    "local_frozen_Git_metadata_reference": {
+      "bytes": 7762,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-isolated-Phase8-metric-lineage-exact-two-local-freeze.json",
+      "sha256": "8611c18407c338ca365cae4c14737e9fb029332618ad81f8f70cab7508e9f309"
+    },
+    "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tree": "07af7b655e1e64fefe695e2bd79a20f28c5d915e"
+  },
+  "Root_selected": true,
+  "Source_WRITE_claimed": false,
+  "admitted_io_plan_reference": {
+    "bytes": 734,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/Root-selected-IO.json",
+    "sha256": "fd05999c9753ae8d2d6dffded0c1a871313865647105acd514245d7d25e341d8"
+  },
+  "effect_decision_reference": {
+    "bytes": 621,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/Root-selected-effect.json",
+    "sha256": "54c39118634ed1a3cdad3cc76b2321da666dcbdd6231c804aa57ffa02acbee90"
+  },
+  "fixture_closure_reference": {
+    "bytes": 5434,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-ordinary19-six-role-fixture-wire.json",
+    "sha256": "243fa09c23c19e584d299d98c01d4827e717defee79b55a695c10963905f7715"
+  },
+  "frozen_Git_candidates": true,
+  "modules": {
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_metric_lineage": {
+      "bytes": 20259,
+      "full9": {
+        "st_ctime_ns": "1795743194413035327",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513759",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743194413035327",
+        "st_nlink": "1",
+        "st_size": "20259",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_metric_lineage.py",
+      "sha256": "fd476d9372ae92cd37b9e8f7f8e7415a5f383227fc6d533ab611ee7c4ed6274d"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.uscode_modal_daemon_runner": {
+      "bytes": 998965,
+      "full9": {
+        "st_ctime_ns": "1795741365196799536",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513795",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365196799536",
+        "st_nlink": "1",
+        "st_size": "998965",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/uscode_modal_daemon_runner.py",
+      "sha256": "9e1043f39507cd3be06cf1131f9be5f4787b2a71da5f7ccbe5ae76762482fbd1"
+    },
+    "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_metric_responsiveness": {
+      "bytes": 13043,
+      "full9": {
+        "st_ctime_ns": "1795743194413035327",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514594",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743194413035327",
+        "st_nlink": "1",
+        "st_size": "13043",
+        "st_uid": "1000"
+      },
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py",
+      "sha256": "8a1aa33563b0b60d69d34cec9d8e48c1e1f0f1b3d33ead3609e5ee075e8e84e4"
+    }
+  },
+  "ordinary_execution_or_qualification": null,
+  "projects": [
+    {
+      "Git_HEAD": "da3024e6ab94fecad9f258375dcc18b04902bfe2",
+      "Git_tree": "07af7b655e1e64fefe695e2bd79a20f28c5d915e",
+      "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets"
+    },
+    {
+      "Git_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+      "Git_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate"
+    }
+  ],
+  "source_read_binding_reference": {
+    "bytes": 1903,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-isolated-ordinary19-D27-read-binding.json",
+    "sha256": "a52d8fd5999a5d9098598c517f1e058e6b7b77d6486e65bff98c52334fc920e5"
+  }
+}

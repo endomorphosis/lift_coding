@@ -1,0 +1,67 @@
+{
+  "Source_binding": {
+    "bytes": 1818,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-isolated-ordinary9-D27-read-binding.json",
+    "sha256": "cde6c95b52d38f8035c0c784bba5845204512178ac4a574410822141851883f5"
+  },
+  "Source_lease_and_resource_cleanup_closed": true,
+  "actual_ordinary_counts": {
+    "errors": 0,
+    "failures": 0,
+    "functions": 5,
+    "passed": 9,
+    "skipped": 0,
+    "tests": 9
+  },
+  "actual_report": {
+    "bytes": 447955,
+    "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/actual-output/complete-frozen-local-D-phase1-proof-cache-translation9-existing-owner-report.json",
+    "sha256": "8eaed28daa2ff852fcb30af75695759f2754af6efe941dd502415239e6309c93"
+  },
+  "exact_freeze": {
+    "bytes": 6190,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-isolated-Phase1-cache-translation-exact-two-local-freeze.json",
+    "sha256": "38999ef02d990f6bfb348c01a80455b00b58fed94283c153011bc3afbcf50b4a"
+  },
+  "held_case_selector": {
+    "bytes": 2684,
+    "path": "/tmp/P1-proof-cache-translation-R2-ordinary9-INERT-BUQbWDYR/exact-5-function-9-proposed-literal-cases.json",
+    "sha256": "68c1f85ee7cbfe88d26106399286997739d84e390a659c15350ca1ce347154b4"
+  },
+  "large_model_fit_or_Native_or_statutory_qualification": false,
+  "ordered_cases": [
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[both-absent]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[exact-match]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[request-only]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[receipt-only]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[different-digest]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_record_v2_disk_round_trip_and_explicit_context",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_proof_binding_normalizes_protocol_frozen_kernel_payload_to_canonical_wire",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_current_lean_verification_profile_survives_bound_cache_wire_replay",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_proof_reuse_refuses_an_installed_older_kernel_profile"
+  ],
+  "ordinary_raw_JUnit": {
+    "bytes": 1686,
+    "logical_name": "junit.xml",
+    "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/actual-output/phase1-proof-cache-translation9-run-result0-output1.bin",
+    "sha256": "1e6ed08c175504d475e69d10136be2a2ce763b49cac8eda6ad44a8a2db2da3de"
+  },
+  "published": false,
+  "raw_phase_bindings": {
+    "collect": {
+      "bytes": 77424,
+      "logical_name": "binding.json",
+      "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/actual-output/phase1-proof-cache-translation9-collect-result0-output0.bin",
+      "sha256": "f57d94b6f0e77e069d9ad9e423c6f8152ed64c7600eed1757ebb452f05821568"
+    },
+    "run": {
+      "bytes": 80814,
+      "logical_name": "binding.json",
+      "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/actual-output/phase1-proof-cache-translation9-run-result0-output0.bin",
+      "sha256": "f9b2b3aa7111f21fb6d68dbc5075afbf09de3fdb78a9760f59ee8dadeecaa534"
+    }
+  },
+  "schema": "actual-Phase1-current-cache-translation-ordinary9-closed/v1",
+  "terminal_returncode": 0,
+  "terminal_session": 78362
+}

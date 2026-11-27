@@ -1,0 +1,256 @@
+"""Exercise the split owner with modeled current signature and TRAIN callbacks."""
+from copy import deepcopy
+from dataclasses import asdict, dataclass, replace
+from pathlib import Path
+from runpy import run_path
+import sys
+from types import ModuleType
+import unittest
+
+HERE = Path(__file__).absolute().parent
+# Reuse the established detached-file audit. No test code writes files.
+guard = run_path('/tmp/decoder-training-stage-a-guide576-owner-transition-private-v01-tU42r4Kc/prepare.py')
+sys.addaudithook(guard['audit'])
+
+raw = guard['archive'](guard['pin'](HERE/'legal_ir_eval_splits.v02.py', 91107,
+    'e139cc75d42846fad28ef009e1f6e5fc4c47f5fe350f7323942664908dca3457'))
+owner = ModuleType('_private_joint_reviewed_split_owner')
+sys.modules[owner.__name__] = owner
+exec(compile(raw, str(HERE/'legal_ir_eval_splits.v02.py'), 'exec'), vars(owner))
+digest = owner._digest
+source_path = '/modeled/ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py'
+current_producer = '1b294d2d896f715c7fe667cf194e2a04bc681705af558a535d55210b4cacf917'
+prior_producer = '30f9e1f2554b030241aeb8ec8ffc1f6c98816eee2732c83e59dbf3c0b36de50e'
+source_epoch = digest('modeled closed Reader epoch')
+
+
+class Binding:
+    def __init__(self, receipt):
+        self.details = receipt
+
+    def receipt(self):
+        return deepcopy(self.details)
+
+
+class Consumer:
+    REVIEWED_V3_SCHEMA = 'reviewed-source-span-consumer-binding/v3'
+    REVIEWED_V3_PROFILE = 'complete-reviewed-mixed-sort-source-span-supervision/v3'
+    ReviewedSourceSpanConsumerBinding = Binding
+    reviewed_admission_inputs_sha256 = staticmethod(digest)
+
+    @staticmethod
+    def _preflight(value):
+        return owner._canonical_json(value).encode()
+
+    def __init__(self):
+        self.replays = 0
+        self.allow = True
+
+    def validate_reviewed_source_span_consumer_binding_v3(self, binding, *_args, **_kw):
+        self.replays += 1
+        if not self.allow:
+            raise ValueError('modeled original independent approval refused')
+        return binding.receipt()
+
+
+@dataclass(frozen=True)
+class Reservation:
+    global_split_sha256: str
+    population_sha256: str
+    opaque_final_sha256: str
+    access_policy_sha256: str
+    reserved_final_count: int
+
+    @staticmethod
+    def fixed_stage_final_reservation_commitment(value):
+        return digest(asdict(value))
+
+
+class JointCohort(unittest.TestCase):
+    def setUp(self):
+        samples = {'TRAIN_PRIVATE_A': 'sprocket', 'TRAIN_PRIVATE_B': 'turbine',
+                   'DEVELOPMENT_PRIVATE': 'susurrus', 'FINAL_PRIVATE': 'holdout'}
+        split = owner.LegalIRSplitManifest(
+            tuple(owner.LegalIRSplitExample(i,digest(text)) for i,text in samples.items()),
+            dict(zip(samples,('train','train','validation','holdout'),strict=True)),digest('config')).to_dict()
+        self.split_pin = digest(split)
+        self.consumer = Consumer()
+        reference = dict(id='DEVELOPMENT_PRIVATE',unit_id='ID_DEV_PRIVATE',source_text=samples['DEVELOPMENT_PRIVATE'],
+               canonical_ir={'source_binding':{'occurrence_cid':'OCC_DEV_PRIVATE'}})
+        development_rows = [reference]
+        exposure = [{'purpose':'modeled exposure'}]
+        record = dict(id=reference['id'],unit_id=reference['unit_id'],row_index=0,status='ready',blockers=[],
+             occurrence_cid='OCC_DEV_PRIVATE', canonical_ir_sha256=digest(reference['canonical_ir']),
+             source_text_sha256=guard['sha256'](reference['source_text'].encode()).hexdigest())
+        development = self.receipt('hparam_selection', [record])
+        development['input_sha256s'].update(rows=digest(development_rows),exposure=digest(exposure))
+        self.development_binding = Binding(development)
+        reservation = Reservation(self.split_pin,digest('population'),digest('opaque-final'),digest('access'),1)
+        admission = {'preparation':{'producer_pins':{source_path:current_producer}}}
+        self.development = dict(split_manifest=split,development_rows=development_rows,
+            expected_split_manifest_sha256=self.split_pin,expected_development_rows_sha256=digest(development_rows),
+            consumer=self.consumer,development_binding=self.development_binding,admission_inputs=admission,
+            exposure_records=exposure,expected_development_receipt_sha256=digest(development),
+            reservation_owner=Reservation,final_reservation=reservation,
+            expected_final_reservation_sha256=Reservation.fixed_stage_final_reservation_commitment(reservation),
+            expected_population_sha256=reservation.population_sha256)
+        rows = [dict(id=i,row_index=j,status='ready',blockers=[],occurrence_cid=f'TRAIN_OCC_PRIVATE_{j}',
+                unit_id=f'TRAIN_UNIT_PRIVATE_{j}',source_text_sha256=digest(samples[i]),canonical_ir_sha256=digest(('target',i)))
+                for j,i in enumerate(('TRAIN_PRIVATE_B','TRAIN_PRIVATE_A'))]
+        component = self.receipt('training', rows)
+        key='TRAIN_COMPONENT_PRIVATE'
+        split_guard=dict(schema='reviewed-decoder-component-split-guard/v1', passed=True,
+                         corpus_wide_dependency_isolation_proved=False)
+        self.training = dict(schema='reviewed-decoder-training-input-receipt/v4',
+            profile='mixed-sort-admission-component-decoder-training-inputs/v4',
+            admission_profile='complete-reviewed-mixed-sort-norm-admission/v3',provenance_kind='statutory',
+            split_manifest_sha256=self.split_pin,production_training_eligible=True,current_reviewed_training_permitted=True,
+            fixture_only=False,training_executed=False,backend_execution_authorized=False,training_mask=1,record_count=2,
+            training_record_ids=[row['id'] for row in rows],
+            row_commitments=[{field:row[field] for field in ('id','unit_id','source_text_sha256','canonical_ir_sha256')} for row in rows],
+            admission_assessment_sha256={key:component['admission_assessment_sha256']},
+            component_split_guard={key:split_guard},current_admission_custody={key:{'reviews_sha256':digest('fixture review')}},
+            current_consumer_receipt={'schema':'reviewed-cycle-component-consumer-receipts/v2','row_count':2,
+                'components':[dict(component_id=key,row_ids=[row['id'] for row in rows],component_split_guard=deepcopy(split_guard),
+                    admission_inputs_sha256=component['admission_inputs_sha256'],receipt=component)]})
+        self.calls = []
+
+    def receipt(self, operation, rows):
+        return dict(schema=self.consumer.REVIEWED_V3_SCHEMA,profile=self.consumer.REVIEWED_V3_PROFILE,
+             operation=operation,status='ready',semantic_admission_replayed=True,semantic_use_eligible=True,blockers=[],
+             provenance_kind='statutory',fictional_fixture_allowed=False,permitted_uses=[operation],
+             training_mask=int(operation=='training'),row_count=len(rows),ready_row_count=len(rows),
+             input_sha256s={'split_manifest':self.split_pin},
+             admission_inputs_sha256=digest((operation,'current signed inputs')),
+             admission_assessment_sha256=digest((operation,'current signed assessment')),rows=rows)
+
+    def approve(self,*items):
+        self.calls.append(items)
+        return True
+
+    def approve_development(self, projected, split_pin, pop, rows_pin, receipt_pin):
+        return (len(projected) == 64 and (split_pin,pop,rows_pin,receipt_pin) ==
+                tuple(self.development[key] for key in ('expected_split_manifest_sha256','expected_population_sha256',
+                   'expected_development_rows_sha256','expected_development_receipt_sha256')))
+
+    def call(self, approve=None, epoch=source_epoch, approve_development=None):
+        return owner.project_a0_joint_reviewed_cohort(self.development,self.training,
+            expected_training_receipt_sha256=digest(self.training),current_source_epoch_sha256=epoch,
+            admission_producer_path=source_path,admission_producer_sha256=current_producer,
+            verify_original_training_owner=self.approve if approve is None else approve,
+            verify_development_owner=self.approve_development if approve_development is None else approve_development)
+
+    def component(self):
+        return self.training['current_consumer_receipt']['components'][0]
+
+    def test_exact_receipts_join_and_expose_no_protected_metadata(self):
+        result = self.call()
+        self.assertEqual(self.consumer.replays,1)
+        self.assertEqual(self.calls,[(digest(self.training),result['scope_sha256'])])
+        self.assertEqual(result['development']['operation'],'hparam_selection')
+        self.assertEqual(result['training']['member_count'],2)
+        self.assertFalse(result['execution_selected'])
+        self.assertFalse(result['final_access_granted'])
+        for secret in ('TRAIN_PRIVATE','DEVELOPMENT_PRIVATE','FINAL_PRIVATE','occurrence_cid','turbine','susurrus'):
+            self.assertNotIn(secret,owner._canonical_json(result))
+
+    def test_resealed_equal_count_development_id_cannot_join_as_train(self):
+        self.assertEqual(owner.project_a0_disclosure_safe_split(**self.development)['train_member_count'],2)
+        component=self.component()
+        for identifiers in (self.training['training_record_ids'],component['row_ids']):
+            identifiers[0]='DEVELOPMENT_PRIVATE'
+        component['receipt']['rows'][0]['id']='DEVELOPMENT_PRIVATE'
+        with self.assertRaisesRegex(ValueError,'exact selected TRAIN partition'):
+            self.call()
+        self.assertEqual(self.calls,[])
+        self.assertEqual(self.consumer.replays,1)
+
+    def test_derived_partition_summary_cannot_override_manifest_assignments(self):
+        split=self.development['split_manifest']
+        split['samples_by_split']['train']=['DEVELOPMENT_PRIVATE','TRAIN_PRIVATE_A']
+        pin=digest(split)
+        self.development['expected_split_manifest_sha256']=pin
+        reservation=replace(self.development['final_reservation'],global_split_sha256=pin)
+        self.development['final_reservation']=reservation
+        self.development['expected_final_reservation_sha256']=Reservation.fixed_stage_final_reservation_commitment(reservation)
+        self.development_binding.details['input_sha256s']['split_manifest']=pin
+        self.development['expected_development_receipt_sha256']=digest(self.development_binding.receipt())
+        self.training['split_manifest_sha256']=pin
+        component=self.component()
+        component['receipt']['input_sha256s']['split_manifest']=pin
+        self.training['training_record_ids'][0]=component['row_ids'][0]='DEVELOPMENT_PRIVATE'
+        component['receipt']['rows'][0]['id']='DEVELOPMENT_PRIVATE'
+        with self.assertRaisesRegex(ValueError,'exact selected TRAIN partition'):
+            self.call()
+        self.assertEqual(self.calls,[])
+
+    def test_resealed_hparam_component_cannot_authorize_training(self):
+        self.component()['receipt']['operation']='hparam_selection'
+        with self.assertRaisesRegex(ValueError,'ready V3 training admission'):
+            self.call()
+        self.assertEqual(self.calls,[])
+        self.assertEqual(self.consumer.replays,0)
+
+    def test_resealed_future_aggregate_cannot_hide_stale_assessment_or_row_commitment(self):
+        key=self.component()['component_id']
+        top=self.training['admission_assessment_sha256']
+        prior=top[key]
+        top[key]=digest('stale assessment hash')
+        with self.assertRaisesRegex(ValueError,'ready V3 training admission'):
+            self.call()
+        top[key]=prior
+        self.training['row_commitments'][0]['canonical_ir_sha256']=digest('crossed typed target hash')
+        with self.assertRaisesRegex(ValueError,'changes an ordered record'):
+            self.call()
+        self.assertEqual(self.calls,[])
+
+    def test_original_development_owner_required_even_after_replay(self):
+        with self.assertRaisesRegex(ValueError,'existing DEVELOPMENT owner refused'):
+            self.call(approve_development=lambda *_:False)
+        self.assertEqual(self.consumer.replays,1)
+        self.assertEqual(self.calls,[])
+
+    def test_admitted_component_requires_original_order(self):
+        self.component()['row_ids'].reverse()
+        self.component()['receipt']['rows'].reverse()
+        with self.assertRaisesRegex(ValueError,'ordered TRAIN records'):
+            self.call()
+
+    def test_old_producer_or_refused_development_blocks_before_train_owner(self):
+        pins=self.development['admission_inputs']['preparation']['producer_pins']
+        pins[source_path]=prior_producer
+        with self.assertRaisesRegex(ValueError,'different admission producer'):
+            self.call()
+        self.assertEqual(self.consumer.replays,0)
+        pins[source_path]=current_producer
+        self.consumer.allow=False
+        with self.assertRaisesRegex(ValueError,'existing V3 DEVELOPMENT replay refused'):
+            self.call()
+        self.assertEqual(self.calls,[])
+
+    def test_exact_occurrence_reuse_under_distinct_row_alias_blocks(self):
+        self.component()['receipt']['rows'][0]['occurrence_cid']='OCC_DEV_PRIVATE'
+        with self.assertRaisesRegex(ValueError,'reuse an exact reviewed source occurrence'):
+            self.call()
+        self.assertEqual(self.calls,[])
+
+    def test_previous_approval_cannot_join_same_receipts_under_new_source_epoch(self):
+        original=self.call()
+        def approve(receipt,pin):
+            return (receipt,pin)==self.calls[0]
+        self.assertEqual(self.call(approve), original)
+        with self.assertRaisesRegex(ValueError,'original TRAIN owner refused'):
+            self.call(approve,epoch=digest('other selected closed Source epoch'))
+
+    def test_refusal_and_mid_approval_mutation_never_join(self):
+        with self.assertRaisesRegex(ValueError,'original TRAIN owner refused'):
+            self.call(lambda *_:1)
+        def mutate(*_):
+            self.development['exposure_records']=[{'purpose':'changed'}]
+            return True
+        with self.assertRaisesRegex(ValueError,'changed during original TRAIN approval'):
+            self.call(mutate)
+
+
+if __name__=='__main__':
+    unittest.main(verbosity=2)

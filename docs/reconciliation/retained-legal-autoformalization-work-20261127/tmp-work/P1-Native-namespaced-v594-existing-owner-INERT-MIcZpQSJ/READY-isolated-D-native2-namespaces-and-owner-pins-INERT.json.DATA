@@ -1,0 +1,119 @@
+{
+  "Source_lease_or_authority": null,
+  "canonical_Project_or_Source_Git_mutation": false,
+  "current_SDK_source_pins": {
+    "ipfs_datasets_py.logic.backends.kernel.lean": [
+      "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+    ],
+    "ipfs_datasets_py.logic.backends.process": [
+      "ipfs_datasets_py/logic/backends/process.py",
+      "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+    ],
+    "ipfs_datasets_py.logic.backends.resource_admission": [
+      "ipfs_datasets_py/logic/backends/resource_admission.py",
+      "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+    ],
+    "ipfs_datasets_py.logic.ir_core.protocols": [
+      "ipfs_datasets_py/logic/ir_core/protocols.py",
+      "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+    ],
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler": [
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+    ]
+  },
+  "freeze": {
+    "bytes": 5801,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-isolated-exact-two-local-freeze.json",
+    "sha256": "afa47b34b755f9bd2c53bb36d68b10c069dd005d4e0b66a7b4338ebf6bb1d9de"
+  },
+  "normal_namespaces": [
+    {
+      "FD_closed": true,
+      "code_body_bytes_read": 0,
+      "device": 66306,
+      "full9": {
+        "st_ctime_ns": "1795735763603855842",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2796298",
+        "st_mode": "16893",
+        "st_mtime_ns": "1795735763603855842",
+        "st_nlink": "5",
+        "st_size": "4096",
+        "st_uid": "1000"
+      },
+      "fullname": "ipfs_datasets_py.logic.backends",
+      "initializer_absent": true,
+      "initializer_path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/backends/__init__.py",
+      "inode": 2796298,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/backends"
+    },
+    {
+      "FD_closed": true,
+      "code_body_bytes_read": 0,
+      "device": 66306,
+      "full9": {
+        "st_ctime_ns": "1795735763611173229",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2798245",
+        "st_mode": "16893",
+        "st_mtime_ns": "1795735763611173229",
+        "st_nlink": "2",
+        "st_size": "4096",
+        "st_uid": "1000"
+      },
+      "fullname": "ipfs_datasets_py.logic.families",
+      "initializer_absent": true,
+      "initializer_path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/families/__init__.py",
+      "inode": 2798245,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/families"
+    },
+    {
+      "FD_closed": true,
+      "code_body_bytes_read": 0,
+      "device": 66306,
+      "full9": {
+        "st_ctime_ns": "1795735763620768186",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4884750",
+        "st_mode": "16893",
+        "st_mtime_ns": "1795735763620768186",
+        "st_nlink": "2",
+        "st_size": "4096",
+        "st_uid": "1000"
+      },
+      "fullname": "ipfs_datasets_py.logic.intent_ir.formalize",
+      "initializer_absent": true,
+      "initializer_path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/intent_ir/formalize/__init__.py",
+      "inode": 4884750,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/intent_ir/formalize"
+    }
+  ],
+  "observed_toolchain": false,
+  "owning_test_record": {
+    "bytes": 123945,
+    "full9": {
+      "st_ctime_ns": "1795735927039492753",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48802439",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795735927039492753",
+      "st_nlink": "1",
+      "st_size": "123945",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+    "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945"
+  },
+  "schema": "existing-direct-native2-isolated-D-namespace-metadata/1",
+  "source_epoch_closure": {
+    "bytes": 6319,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "3fb04725ccfc2b5c4a5fc0a60392bfed468b38adeec9b9a67dad8266d113351e"
+  }
+}

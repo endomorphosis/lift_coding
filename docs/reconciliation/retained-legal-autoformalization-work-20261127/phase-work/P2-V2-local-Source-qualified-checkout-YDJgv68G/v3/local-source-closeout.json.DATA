@@ -1,0 +1,64 @@
+{
+  "actual_lease": {
+    "canonical_root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-local-Source-qualified-checkout-YDJgv68G/checkout",
+    "cooperative": true,
+    "lock_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-local-Source-qualified-checkout-YDJgv68G/checkout/workspace/control-plane/source-leases/source.lock",
+    "mode": "read",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 7.846485823392868e-05
+  },
+  "all_source_pins_verified_before_and_after": true,
+  "collected": [
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[direct]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[nested]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_full_fictional_definition_object_use_and_mixed_use_replay",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_old_generation_source_pin_cannot_be_rehashed_into_current_v2_preparation",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_v3_sibling_preserves_v2_source_and_binds_current_producers",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-equal]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[distinct-identities]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[revoked-key-key_revoked]"
+  ],
+  "commit": "45e4cca444029036fb847ff0ffcd63096f7c67a5",
+  "conftest_origins": [
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-local-Source-qualified-checkout-YDJgv68G/checkout/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-local-Source-qualified-checkout-YDJgv68G/checkout/tests/conftest.py",
+    "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-local-Source-qualified-checkout-YDJgv68G/checkout/tests/unit/conftest.py"
+  ],
+  "elapsed_seconds": 13.2858667075634,
+  "error": 0,
+  "executed": [
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[direct]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[nested]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_full_fictional_definition_object_use_and_mixed_use_replay",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_old_generation_source_pin_cannot_be_rehashed_into_current_v2_preparation",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_v3_sibling_preserves_v2_source_and_binds_current_producers",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-equal]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[distinct-identities]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[revoked-key-key_revoked]"
+  ],
+  "execution_scope": "local software fixture",
+  "failure": 0,
+  "group": "v3",
+  "junit": {
+    "bytes": 2788,
+    "cases": 14,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-local-Source-qualified-checkout-YDJgv68G/v3/result.xml",
+    "sha256": "9630021f11b345889f1f0d8be4ee921e1496a016e75725396cc55593f2ad3c25"
+  },
+  "returncode": 0,
+  "same_collection_execution_xml": true,
+  "skipped": 0,
+  "source_read_closed": true
+}

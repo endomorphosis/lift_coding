@@ -1,0 +1,69 @@
+{
+  "actual_failed_RUN_COLLECT_RUN_JUnit_exact_order": true,
+  "actual_failed_RUN_binding": {
+    "bytes": 3649,
+    "path": "/tmp/P7-checked-feedback-ordinary26-retry-owner-order-5D1JveT6/actual-P7-checked-feedback-ordinary26-binding.json",
+    "sha256": "f0236b8bc30ceebb98d56a8cbd3e75d7406d425478e9d52272922586479740ed"
+  },
+  "actual_failed_RUN_bootstrap_binding": {
+    "bytes": 282494,
+    "logical_name": "binding.json",
+    "path": "/tmp/P7-checked-feedback-ordinary26-retry-owner-order-5D1JveT6/actual-output/phase7-checked-feedback26-run-result0-output0.bin",
+    "sha256": "6c6f8e9427802f57728658da694a0ad25683b5c4ae6c9fece74b3713e5c16d8a"
+  },
+  "actual_failed_RUN_case_names": [
+    "test_typed_nested_feedback_matching_envelope_preserves_weight_updates[guidance]",
+    "test_typed_nested_feedback_matching_envelope_preserves_weight_updates[feedback]"
+  ],
+  "actual_failed_RUN_counts": {
+    "errors": 0,
+    "failures": 2,
+    "passed": 24,
+    "skips": 0,
+    "tests": 26
+  },
+  "actual_failed_RUN_full_retained_charge": {
+    "bytes": 2073,
+    "path": "/tmp/P7-checked-feedback-ordinary26-retry-owner-order-5D1JveT6/Source-only-authorized-P7-checked-feedback-ordinary26-cap-prior-retained.json",
+    "sha256": "b9a673cd433f63b66876a81c62f3344a3c513abf806628ff5eb4fb4588f186c5"
+  },
+  "actual_failed_RUN_raw_JUnit": {
+    "bytes": 12076,
+    "logical_name": "junit.xml",
+    "path": "/tmp/P7-checked-feedback-ordinary26-retry-owner-order-5D1JveT6/actual-output/phase7-checked-feedback26-run-result0-output1.bin",
+    "sha256": "8cd57f5d4f97c5655fc1fd6a58b3bf396c3f0d3c1d18568a51bf9f081dd0efa8"
+  },
+  "actual_failed_RUN_report": {
+    "bytes": 1014563,
+    "path": "/tmp/P7-checked-feedback-ordinary26-retry-owner-order-5D1JveT6/actual-output/complete-frozen-local-D-phase7-checked-feedback26-existing-owner-report.json",
+    "sha256": "7e5ffa7f6ec5e2e003d90fd30417a3002c8b22f39fb6ccae52c7b3151c3ed8c1"
+  },
+  "first_failed_COLLECT_full_retained_charge": {
+    "bytes": 1215,
+    "path": "/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/Source-only-authorized-P7-checked-feedback-ordinary26-cap-prior-retained.json",
+    "sha256": "f7322716aa4783ac2228167afa5b9df833ad65aa6f3a59f8d40967b538ab22e1"
+  },
+  "first_failed_COLLECT_report": {
+    "bytes": 118215,
+    "path": "/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/actual-output/complete-frozen-local-D-phase7-checked-feedback26-existing-owner-report.json",
+    "sha256": "c781091f9ff18b5b736d6418fdc957f0d6b0fd8bff4272989c8636e0f6a8568e"
+  },
+  "next_Source_runtime_or_publication_selected": null,
+  "no_trial_qualification_credit": true,
+  "protected_Guide573_closed_Source_install": {
+    "bytes": 6558,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-Guide573-four-docs-Source-closed-and-frozen.json",
+    "sha256": "d38bd70d2b0fd73526cd606bdd36fbd4eada351b1c22bbd1185363cadafc2139"
+  },
+  "protected_Guide573_publication": {
+    "bytes": 3117,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-Guide573-four-docs-three-FF-publication.json",
+    "sha256": "1a83a7c66b2e726b4f6605039fbd5bad4296f6cb3f008e965436c68a9e89e8c7"
+  },
+  "shared_SDK_Source_and_owned_parent_closed": true,
+  "unchanged_ordinary26_static_controls": {
+    "bytes": 5337,
+    "path": "/tmp/P7-checked-feedback-ordinary26-retry-owner-order-5D1JveT6/READY-existing-v237-Phase7-ordinary26-owner-order-retry-INERT.json",
+    "sha256": "1874813cab0a90ebe4a7cc272b37d0a417745fae9fe43258af6258e1ac883179"
+  }
+}

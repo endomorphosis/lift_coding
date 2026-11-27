@@ -1,0 +1,260 @@
+{
+  "A_provenance": {
+    "HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+    "actual_closed_Source_READ": {
+      "bytes": 9607,
+      "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/actual-isolated-P1-Lean92-READ3-closed.json",
+      "sha256": "23eacdbf0c260382158deca5da4c29ddca3c7e3fab5901f253c2040cae3002a1"
+    },
+    "clean_index_provenance_reference": {
+      "bytes": 2076,
+      "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/actual-live-ordinary92-clean-D-A-index-provenance.json",
+      "sha256": "576c40a1aa70f2fd3cae07ea740796cb6b9ebf33862adc8592a0ac5165dad522"
+    },
+    "clean_worktree_and_index": true,
+    "local_frozen_Git_metadata_reference": {
+      "bytes": 2076,
+      "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/actual-live-ordinary92-clean-D-A-index-provenance.json",
+      "sha256": "576c40a1aa70f2fd3cae07ea740796cb6b9ebf33862adc8592a0ac5165dad522"
+    },
+    "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tree": "c670052e6e12473d974382e455c7aef4adb6aebe"
+  },
+  "D_provenance": {
+    "HEAD": "30e1f2f81538b1e472a858a7984f1fba64fc6836",
+    "actual_closed_Source_READ": {
+      "bytes": 9607,
+      "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/actual-isolated-P1-Lean92-READ3-closed.json",
+      "sha256": "23eacdbf0c260382158deca5da4c29ddca3c7e3fab5901f253c2040cae3002a1"
+    },
+    "clean_index_provenance_reference": {
+      "bytes": 2076,
+      "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/actual-live-ordinary92-clean-D-A-index-provenance.json",
+      "sha256": "576c40a1aa70f2fd3cae07ea740796cb6b9ebf33862adc8592a0ac5165dad522"
+    },
+    "clean_worktree_and_index": true,
+    "local_frozen_Git_metadata_reference": {
+      "bytes": 5801,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-isolated-exact-two-local-freeze.json",
+      "sha256": "afa47b34b755f9bd2c53bb36d68b10c069dd005d4e0b66a7b4338ebf6bb1d9de"
+    },
+    "root": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets",
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tree": "1604d49d2a8c2fe85b450890a3ceb1cfa5fd2fb7"
+  },
+  "Root_selected": true,
+  "Source_WRITE_claimed": false,
+  "admitted_io_plan_reference": {
+    "bytes": 713,
+    "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/Root-selected-IO.json",
+    "sha256": "eb00c4c58d1fd708dd613f61ba5c36cd42fe74fd6d4af12e41af3a0aca70725e"
+  },
+  "effect_decision_reference": {
+    "bytes": 547,
+    "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/Root-selected-effect.json",
+    "sha256": "d2afdb6eddf56a75849b452785351446e98843bf73819b04e16b8c82d043a381"
+  },
+  "fixture_closure_reference": {
+    "bytes": 19693,
+    "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/actual-live-ordinary92-exact-32-fixture-wire.json",
+    "sha256": "039c4498c1980200109956fa0269bdce3f39b570c7c47ba1076e1c7b9a399789"
+  },
+  "frozen_Git_candidates": true,
+  "modules": {
+    "ipfs_datasets_py.logic.backends.kernel.lean": {
+      "bytes": 104341,
+      "full9": {
+        "st_ctime_ns": "1795735927039492753",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2796373",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735927039492753",
+        "st_nlink": "1",
+        "st_size": "104341",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+    },
+    "ipfs_datasets_py.logic.backends.kernel.rocq": {
+      "bytes": 41607,
+      "full9": {
+        "st_ctime_ns": "1795735763602999531",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2796544",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735763602999531",
+        "st_nlink": "1",
+        "st_size": "41607",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/rocq.py",
+      "sha256": "7fd1b39643190277f00325dac59cf3923b24a3056963713bd7437a364b6a0f9a"
+    },
+    "ipfs_datasets_py.logic.backends.kernel.wasm": {
+      "bytes": 24933,
+      "full9": {
+        "st_ctime_ns": "1795735763602999531",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2796546",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735763602999531",
+        "st_nlink": "1",
+        "st_size": "24933",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/wasm.py",
+      "sha256": "49cfdbc0108b43d45ab9f567b4153f384985563b075f369b32e37f855252d6cc"
+    },
+    "ipfs_datasets_py.logic.backends.process": {
+      "bytes": 109707,
+      "full9": {
+        "st_ctime_ns": "1795735763602999531",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2796597",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735763602999531",
+        "st_nlink": "1",
+        "st_size": "109707",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/process.py",
+      "sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+    },
+    "ipfs_datasets_py.logic.backends.resource_admission": {
+      "bytes": 19806,
+      "full9": {
+        "st_ctime_ns": "1795735763602999531",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2796598",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735763602999531",
+        "st_nlink": "1",
+        "st_size": "19806",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/resource_admission.py",
+      "sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+    },
+    "ipfs_datasets_py.logic.backends.results": {
+      "bytes": 27160,
+      "full9": {
+        "st_ctime_ns": "1795735763602999531",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2796600",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735763602999531",
+        "st_nlink": "1",
+        "st_size": "27160",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/results.py",
+      "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+    },
+    "ipfs_datasets_py.logic.families.models": {
+      "bytes": 36277,
+      "full9": {
+        "st_ctime_ns": "1795735763611031516",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2798246",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735763611031516",
+        "st_nlink": "1",
+        "st_size": "36277",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/families/models.py",
+      "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f"
+    },
+    "ipfs_datasets_py.logic.ir_core.claims": {
+      "bytes": 16176,
+      "full9": {
+        "st_ctime_ns": "1795735763621368207",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4884761",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735763621368207",
+        "st_nlink": "1",
+        "st_size": "16176",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/ir_core/claims.py",
+      "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+    },
+    "ipfs_datasets_py.logic.ir_core.protocols": {
+      "bytes": 57510,
+      "full9": {
+        "st_ctime_ns": "1795735763621368207",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "4884765",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735763621368207",
+        "st_nlink": "1",
+        "st_size": "57510",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/ir_core/protocols.py",
+      "sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler": {
+      "bytes": 151350,
+      "full9": {
+        "st_ctime_ns": "1795735763658856286",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "48797812",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735763658856286",
+        "st_nlink": "1",
+        "st_size": "151350",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "sha256": "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+    },
+    "tests.integration.logic.backends.test_kernel_backends": {
+      "bytes": 123945,
+      "full9": {
+        "st_ctime_ns": "1795735927039492753",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "48802439",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735927039492753",
+        "st_nlink": "1",
+        "st_size": "123945",
+        "st_uid": "1000"
+      },
+      "relative_path": "tests/integration/logic/backends/test_kernel_backends.py",
+      "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945"
+    }
+  },
+  "ordinary_execution_or_qualification": null,
+  "projects": [
+    {
+      "Git_HEAD": "30e1f2f81538b1e472a858a7984f1fba64fc6836",
+      "Git_tree": "1604d49d2a8c2fe85b450890a3ceb1cfa5fd2fb7",
+      "root": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets"
+    },
+    {
+      "Git_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+      "Git_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate"
+    }
+  ],
+  "source_read_binding_reference": {
+    "bytes": 2353,
+    "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/actual-isolated-ordinary92-D27-read-binding.json",
+    "sha256": "453f5320013daaac283c7360ff01d2832966bcfc53ad5568e55a9bd7c33e2f49"
+  }
+}

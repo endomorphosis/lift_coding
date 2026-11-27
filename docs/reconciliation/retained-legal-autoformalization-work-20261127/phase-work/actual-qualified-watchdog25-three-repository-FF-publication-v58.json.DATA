@@ -1,0 +1,103 @@
+{
+  "complete": true,
+  "other_gitlinks_preserved": true,
+  "qualification": {
+    "closeout": {
+      "bytes": 3553,
+      "path": "/tmp/Root-selected-native-watchdog-normal25-corrected-v58/Root-corrected-normal25-actual-small-closeout-v58.json",
+      "sha256": "1dfb1048fc82869e3c62f5df373a1260db94a66caf36f9726b0ad57d69da74cd"
+    },
+    "errors": 0,
+    "failures": 0,
+    "junit": {
+      "bytes": 3794,
+      "logical_name": "junit.xml",
+      "path": "/tmp/Root-selected-native-watchdog-normal25-corrected-v58/actual-output/git-candidate-watchdog-owning-run-result0-output1.bin",
+      "sha256": "4d20a093ad3695b911e6c7c5090194e4886b3a22bba7bfe53518c636b11ca010"
+    },
+    "prior_failed_attempts_preserved": [
+      "v49_ROOT_type",
+      "v50_workspace",
+      "v52_fixture_Nativeguard"
+    ],
+    "real_database_case": {
+      "classname": "api.test_board_stall_watchdog",
+      "name": "test_active_owner_does_not_starve_real_repository_metadata_obligations",
+      "time": "3.002"
+    },
+    "skips": 0,
+    "subreports": 0,
+    "unique_tests_passed": 25
+  },
+  "repositories": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "clean": true,
+      "local_before": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "push_attempted": true,
+      "push_returned": true,
+      "remote_after_push": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "remote_before": "8967b3ba8fbf76a5e42f8fd4e8d85949173138ed",
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc",
+      "verified_remote_main": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88"
+    },
+    "datasets": {
+      "HEAD": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+      "clean": true,
+      "local_before": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "push_attempted": false,
+      "push_returned": false,
+      "remote_before": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+      "tree": "329d830d7ed44f85f997b345310bf9622a9cb31a",
+      "verified_remote_main": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488"
+    },
+    "hallucinate": {
+      "HEAD": "0f6eb8e3337002accc647f481b46f930c6a7abeb",
+      "clean": true,
+      "local_before": "f6290dbae751294ce5014babeb667fd75feaa9fa",
+      "local_commit": "0f6eb8e3337002accc647f481b46f930c6a7abeb",
+      "origin": "https://github.com/endomorphosis/hallucinate_app.git",
+      "push_attempted": true,
+      "push_returned": true,
+      "remote_after_push": "0f6eb8e3337002accc647f481b46f930c6a7abeb",
+      "remote_before": "f6290dbae751294ce5014babeb667fd75feaa9fa",
+      "staged_gitlinks": {
+        "ipfs_accelerate_py": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88"
+      },
+      "tree": "b88a58a1a56784b0cd35d1137c4409a606a6c840",
+      "verified_remote_main": "0f6eb8e3337002accc647f481b46f930c6a7abeb"
+    },
+    "root": {
+      "HEAD": "c701ab2730b2bee49d98daf7e10e56dc18c6bf29",
+      "clean": true,
+      "local_before": "e40b197092df3876afdb92f94d49bcd932fe2a9c",
+      "local_commit": "c701ab2730b2bee49d98daf7e10e56dc18c6bf29",
+      "origin": "https://github.com/endomorphosis/lift_coding.git",
+      "push_attempted": true,
+      "push_returned": true,
+      "remote_after_push": "c701ab2730b2bee49d98daf7e10e56dc18c6bf29",
+      "remote_before": "e40b197092df3876afdb92f94d49bcd932fe2a9c",
+      "staged_gitlinks": {
+        "external/ipfs_accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+        "hallucinate_app": "0f6eb8e3337002accc647f481b46f930c6a7abeb"
+      },
+      "tree": "2085de6334359798020e944c935240ac542395dc",
+      "verified_remote_main": "c701ab2730b2bee49d98daf7e10e56dc18c6bf29"
+    }
+  },
+  "schema": "qualified-watchdog25-child-first-fast-forward-publication/v1",
+  "scope": {
+    "explicit_CI_action": false,
+    "force_push": false,
+    "full_eight_phase_goal_complete": false,
+    "new_Source_test_model_or_Native_action": false
+  },
+  "verified_gitlinks": {
+    "H/ipfs_accelerate_py": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "Root/external/ipfs_accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "Root/external/ipfs_datasets": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+    "Root/hallucinate_app": "0f6eb8e3337002accc647f481b46f930c6a7abeb"
+  }
+}

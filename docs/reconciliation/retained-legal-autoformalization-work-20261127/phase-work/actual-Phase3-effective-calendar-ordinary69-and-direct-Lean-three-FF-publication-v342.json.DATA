@@ -1,0 +1,302 @@
+{
+  "Guide526_and_untargeted_code_fences_preserved": {
+    "ipfs_datasets_py/logic/TDFOL/compiler_repairs.py": "b914db06cd23be92ae0a24bcfb35c1b19d3fd1a3",
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": "ceec6f5ef719ad09bf8471bede8c56d23c557617",
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": "13caa6d9a224c0ce5ab49ca0dc664f95d79347c1",
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": "00ead43061d6d53605b8a8695dbb039ab9bc11e0",
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": "a7b0b5663bcee6df39396d7e2e2837f1126fd432",
+    "ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py": "2faa76f3b111b3d68c814eb0eb0db7724a7a18f8",
+    "ipfs_datasets_py/logic/formalization/autoencoder/ir_legal_text_roundtrip.py": "3e89176b68d5a16b9c808e744a9e09a462ea0ddb",
+    "ipfs_datasets_py/logic/legal_ir/extended_compiler.py": "3c30f4ffb90199b11293bedc9b8e468ce286cfce",
+    "ipfs_datasets_py/logic/legal_ir/extended_contracts.py": "b4c41063d5c3aa0ce680ec5b448d97e0c1bd9b38",
+    "ipfs_datasets_py/logic/legal_ir/extended_decompiler.py": "bfca7a6f7a03a1f26ff5322dae81b11aa216b17f",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py": "9dbd1c45ede27e34652cf872fb9aebfc06b996b8",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py": "41bf5a658264cd8b5ee11b4f94236bd0aa8bfc20"
+  },
+  "Source_SDK_resource_closed": true,
+  "all_other_paths_and_gitlinks_preserved": true,
+  "direct_Lean": {
+    "compiler_returncodes": [
+      0,
+      1
+    ],
+    "deliberate_false_claim_failure": [
+      {
+        "column": 135,
+        "line": 90
+      }
+    ],
+    "exact_inputs": [
+      {
+        "bytes": 4581,
+        "path": "/tmp/Root-Phase3-calendar-exact-managed-Native-v342-qd6fv43g/actual-output/native-1-input-0.bin",
+        "sha256": "b7abe22862f80ec34531a1b88520fbb90d4631c1b78e7756b65e4f5474aaaa49"
+      },
+      {
+        "bytes": 4751,
+        "path": "/tmp/Root-Phase3-calendar-exact-managed-Native-v342-qd6fv43g/actual-output/native-2-input-0.bin",
+        "sha256": "c73a94d80c558949ce8fb5aea3e091adbaea34b6c50824cfd7ef171ab8605bc1"
+      }
+    ],
+    "version": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+  },
+  "exact_Source_stage_committed_blob_joins": {
+    "ipfs_datasets_py/logic/autoformal/legal_calendar_lake.py": {
+      "bytes": 11292,
+      "full9": {
+        "st_ctime_ns": "1795637571565853173",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042573",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795637571260440964",
+        "st_nlink": "1",
+        "st_size": "11292",
+        "st_uid": "1000"
+      },
+      "git_blob": "445df67173a755ed15b60866aedb90e16af8ff0a",
+      "mode": "100644",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_calendar_lake.py",
+      "prior_blob": "e53514cab6825d373f0ecdb1a52cc95fc7e43c5d",
+      "sha256": "2d7e37f84562ddfed17de5cdc95d91fe3a1301be32e693961147644f35edd702",
+      "stage0_blob": "445df67173a755ed15b60866aedb90e16af8ff0a"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_canonical_calendar.py": {
+      "bytes": 29974,
+      "full9": {
+        "st_ctime_ns": "1795637571852856692",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042575",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795637571263656347",
+        "st_nlink": "1",
+        "st_size": "29974",
+        "st_uid": "1000"
+      },
+      "git_blob": "90c4357511dfb11ce18297c9d0d0e1abae57ac48",
+      "mode": "100644",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_canonical_calendar.py",
+      "prior_blob": "9f8f5a740dfff16ea67dd07b8208eed97ce64aaa",
+      "sha256": "b45d0ad9329e90e4b007885e201adf5b2602b2d789127555b35fdbe5b65bc1b5",
+      "stage0_blob": "90c4357511dfb11ce18297c9d0d0e1abae57ac48"
+    },
+    "tests/unit/logic/autoformal/test_legal_canonical_calendar.py": {
+      "bytes": 31449,
+      "full9": {
+        "st_ctime_ns": "1795637572171860603",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042576",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795637571267859743",
+        "st_nlink": "1",
+        "st_size": "31449",
+        "st_uid": "1000"
+      },
+      "git_blob": "f611b86c860d75c2231131ca28702bb93bcb889a",
+      "mode": "100644",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_legal_canonical_calendar.py",
+      "prior_blob": "490b7c31a9edaa7f6259302367e14f07faadd15b",
+      "sha256": "eefdf25291245045690f70570fec7238d76d0bca931ef3eef2b47e32f0b20a73",
+      "stage0_blob": "f611b86c860d75c2231131ca28702bb93bcb889a"
+    }
+  },
+  "exact_local_freeze": {
+    "bytes": 10270,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase3-effective-calendar-exact3-local-freeze-v339.json",
+    "sha256": "7bf4b816e14c3c7ee7d86d13a9b9709616eb9f3874b0e153eba1bfc189b20040"
+  },
+  "failures_errors_skips_duplicates": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "frozen_D_index": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795637717379007791",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795637717377625534",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "18dce26017c4ace31e50720d528b6d2c4f180c3eb96f4f36d3b8eb67f3312206"
+  },
+  "frozen_D_index_exact_readback_before_and_after": true,
+  "full_Lake_or_statutory_or_model_claim": false,
+  "new_effective_date_cases": 22,
+  "no_test_CI_Source_Native_model_replay": true,
+  "ordinary69": {
+    "bytes": 2538,
+    "path": "/tmp/Root-Phase3-calendar-ordinary69-selected-v341-h_fuvec2/actual-calendar-ordinary69-qualified-compact-v341.json",
+    "sha256": "d54fe9e16fb25d61625054151afe78a3e7ccdc61b58094bf57821c0060c37e71"
+  },
+  "ordinary69_and_Native_compact": {
+    "bytes": 2887,
+    "path": "/tmp/Root-Phase3-calendar-exact-managed-Native-v342-qd6fv43g/actual-Phase3-calendar-ordinary69-and-direct-Lean-two-witnesses-compact-v342.json",
+    "sha256": "c676741a2f3140e3a53a9cc36f370de92abd5c314f289a8202aa3ec44834664a"
+  },
+  "ordinary_unique_pass": 69,
+  "prior_Guide526_publication": {
+    "bytes": 10967,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide526-four-doc-three-FF-publication-small-v336.json",
+    "sha256": "b0b70d49db2d68218c57c5547cc58f122b6e73db9c641cc8e704ff53cc055632"
+  },
+  "pushes_in_actual_order": [
+    {
+      "after": "86a9a0c49e2021ecc98bdd56b000f0c99238342a",
+      "before": "43414c90daa8ba3c891e2aad635d211ddd5e5133",
+      "normal_fast_forward": true,
+      "porcelain": [
+        "To https://github.com/endomorphosis/ipfs_datasets_py.git",
+        " \tHEAD:refs/heads/main\t43414c90da..86a9a0c49e",
+        "Done"
+      ],
+      "remote_messages": [
+        "remote: ",
+        "remote: GitHub found 150 vulnerabilities on endomorphosis/ipfs_datasets_py's default branch (8 critical, 77 high, 58 moderate, 7 low). To find out more, visit:        ",
+        "remote:      https://github.com/endomorphosis/ipfs_datasets_py/security/dependabot        ",
+        "remote:"
+      ],
+      "repository": "datasets"
+    },
+    {
+      "after": "0f901c879247e419b16854b47224bfb1aa504ff6",
+      "before": "98916baa350d9e6a9d1a702fd6c8b6a08f5b38ee",
+      "normal_fast_forward": true,
+      "porcelain": [
+        "To https://github.com/endomorphosis/hallucinate_app.git",
+        " \tHEAD:refs/heads/main\t98916ba..0f901c8",
+        "Done"
+      ],
+      "remote_messages": [],
+      "repository": "hallucinate"
+    },
+    {
+      "after": "2a1640c598b3548145a27ce3c06c4aaa2f5ba23c",
+      "before": "7b25f95ea9b2b0914c67e82cddc8e01812812738",
+      "normal_fast_forward": true,
+      "porcelain": [
+        "To https://github.com/endomorphosis/lift_coding.git",
+        " \tHEAD:refs/heads/main\t7b25f95ea9..2a1640c598",
+        "Done"
+      ],
+      "remote_messages": [],
+      "repository": "root"
+    }
+  ],
+  "raw_JUnit": {
+    "bytes": 12671,
+    "path": "/tmp/Root-Phase3-calendar-ordinary69-selected-v341-h_fuvec2/actual-output/canonical-calendar-software-ordinary69-run-result0-output1.bin",
+    "sha256": "90c5cd9ba8940cc894676472c9caf05527d8f1f635531f2aab01df998a9a3a41"
+  },
+  "repositories": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {},
+      "index": {
+        "bytes": 4412225,
+        "full9": {
+          "st_ctime_ns": "1795500785295142737",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342879",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795500785294142725",
+          "st_nlink": "1",
+          "st_size": "4412225",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/index"
+      },
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "origin_main": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "HEAD": "86a9a0c49e2021ecc98bdd56b000f0c99238342a",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {},
+      "index": {
+        "bytes": 6991149,
+        "full9": {
+          "st_ctime_ns": "1795637717379007791",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68338235",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795637717377625534",
+          "st_nlink": "1",
+          "st_size": "6991149",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index"
+      },
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "origin_main": "86a9a0c49e2021ecc98bdd56b000f0c99238342a",
+      "tree": "b3c7bc9a88c642bd9119a432f9d3b44834c95b4b"
+    },
+    "hallucinate": {
+      "HEAD": "0f901c879247e419b16854b47224bfb1aa504ff6",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {
+        "ipfs_datasets_py": "86a9a0c49e2021ecc98bdd56b000f0c99238342a"
+      },
+      "index": {
+        "bytes": 138750,
+        "full9": {
+          "st_ctime_ns": "1795638149279642554",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342837",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795638149278642567",
+          "st_nlink": "1",
+          "st_size": "138750",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate/.git/index"
+      },
+      "origin": "https://github.com/endomorphosis/hallucinate_app.git",
+      "origin_main": "0f901c879247e419b16854b47224bfb1aa504ff6",
+      "tree": "7c10ae92770e7679cbd3586a83cc54d2fecc7ed2"
+    },
+    "root": {
+      "HEAD": "2a1640c598b3548145a27ce3c06c4aaa2f5ba23c",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {
+        "external/ipfs_datasets": "86a9a0c49e2021ecc98bdd56b000f0c99238342a",
+        "hallucinate_app": "0f901c879247e419b16854b47224bfb1aa504ff6"
+      },
+      "index": {
+        "bytes": 7262222,
+        "full9": {
+          "st_ctime_ns": "1795638149594638468",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69387331",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795638149592638494",
+          "st_nlink": "1",
+          "st_size": "7262222",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/.git/index"
+      },
+      "origin": "https://github.com/endomorphosis/lift_coding.git",
+      "origin_main": "2a1640c598b3548145a27ce3c06c4aaa2f5ba23c",
+      "tree": "d63c48a967fcc24448cc721f58e3e588e1a5ea2d"
+    }
+  },
+  "retained_cases": 47,
+  "schema": "Phase3-effective-calendar-ordinary69-and-direct-Lean-three-normal-FF-publication/v342",
+  "scope": "Controlled effective-date/deadline software cases and two exact direct Lean invocations."
+}

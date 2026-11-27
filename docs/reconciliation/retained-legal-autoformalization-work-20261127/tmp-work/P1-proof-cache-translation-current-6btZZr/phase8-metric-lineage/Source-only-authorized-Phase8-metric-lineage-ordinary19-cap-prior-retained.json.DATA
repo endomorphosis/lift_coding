@@ -1,0 +1,53 @@
+{
+  "added_Source_only_envelope": 134217728,
+  "after_full_retained_precharge": {
+    "captures": 543405,
+    "capturesComplete": false,
+    "global_cap": 57998329866,
+    "internal_cap": 57807737992,
+    "internal_used": 57801381000,
+    "used": 57991972874
+  },
+  "combined_epoch_READ3_full_retained_charge": {
+    "bytes": 1309,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/Source-only-Phase8-metric-lineage-READ-overlay-full-retained.json",
+    "sha256": "36ba77fe21ad82c302d41d61e0fd3c7ffaa120fe0c05324afb0f4c49f2e1ccb1"
+  },
+  "exact_human_affirmation": {
+    "bytes": 2960,
+    "path": "/tmp/Main-source-cap-human-provenance-v01-g9hs_s_q/Root-original-human-Source-cap-approval.record.jsonl",
+    "sha256": "8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda"
+  },
+  "no_policy_capacity_or_model_change": true,
+  "prior": {
+    "captures": 543404,
+    "capturesComplete": false,
+    "global_cap": 57864112138,
+    "internal_cap": 57673520264,
+    "internal_used": 57667163272,
+    "used": 57857755146
+  },
+  "protected_Guide576_Source_full_charge": {
+    "bytes": 1316,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/Source-only-Guide576-full-retained-cap.json",
+    "sha256": "5632d40943fd8e3d9be6ff31e351ffa3106fa321072655caf79b95277db0e16b"
+  },
+  "protected_Guide576_publication": {
+    "bytes": 2703,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-Guide576-four-docs-three-FF-publication.json",
+    "sha256": "28c2677788637620b8eedf080dd4b4da948cc0173735316f909bd516b4d458db"
+  },
+  "selected": {
+    "captures": 543404,
+    "capturesComplete": false,
+    "global_cap": 57998329866,
+    "internal_cap": 57807737992,
+    "internal_used": 57667163272,
+    "used": 57857755146
+  },
+  "successor_write_charge": {
+    "bytes": 1294,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/Source-only-Phase8-metric-lineage-WRITE-full-retained.json",
+    "sha256": "55e6c1e3d6e0bbc225e11f3633b55ee92c70578a2e6fe2adf159c0b1193d1756"
+  }
+}

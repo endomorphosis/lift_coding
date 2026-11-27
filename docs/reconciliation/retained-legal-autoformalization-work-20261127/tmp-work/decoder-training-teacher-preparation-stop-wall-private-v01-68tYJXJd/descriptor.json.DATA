@@ -1,0 +1,175 @@
+{
+  "actual_model_or_native_execution": null,
+  "actual_wall_owner_evidence": null,
+  "all_original_decoder_arms_independently_unstarted_required": true,
+  "diff": {
+    "bytes": 7038,
+    "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/final_physical_union.diff",
+    "sha256": "d87385829931895eb717ececceea222c1d5a3443a851c71f061801b4c21fbc21"
+  },
+  "dispatch_authority": false,
+  "drivers": {
+    "compose.py": {
+      "bytes": 1929,
+      "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/compose.py",
+      "sha256": "dcff77e3629d48fdde809c9a5b63ae64339c5cf7ab9a5d691667a3734844c22c"
+    },
+    "guide572_projection.py.IN": {
+      "bytes": 7686,
+      "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/guide572_projection.py.IN",
+      "sha256": "f324c2a277f5a7ca924e48c7fbc0f11c48023c121bcd9850de15dd8cfb5aaad9"
+    },
+    "preparation_stop_wall.py.IN": {
+      "bytes": 4815,
+      "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/preparation_stop_wall.py.IN",
+      "sha256": "74a62e0081b7903f5c5930d51b0a58e6de553f5407a04b28b65b52ffb58c725b"
+    },
+    "retained_completed_wall.py": {
+      "bytes": 754,
+      "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/retained_completed_wall.py",
+      "sha256": "464f5bc0ba6c413149931cac64caf0c14b2cd7a2fa43b12f32bd2f06ae3996fb"
+    },
+    "seal.py": {
+      "bytes": 9778,
+      "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/seal.py",
+      "sha256": "a332573726beb2fa005ecb36824798755526d2cbe18804f5c532d4f72495387e"
+    },
+    "test_preparation_stop_wall.py": {
+      "bytes": 12907,
+      "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/test_preparation_stop_wall.py",
+      "sha256": "3f9535788952a470712503184c0e9620edcaa8a83d57c7714f8fd6bd651711af"
+    }
+  },
+  "local_passing_cases": {
+    "retained_completed_wall": 8,
+    "terminal_preparation_wall": 7
+  },
+  "logs": {
+    "retained_completed_wall": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/retained-completed.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1436,
+        "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/retained-completed.stderr",
+        "sha256": "05e279284a356a261ce8642b31c7f4c04e024a8316885b97d3c04355f80e591a"
+      },
+      "stdout": {
+        "bytes": 935,
+        "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/retained-completed.stdout",
+        "sha256": "b717e873679243477029dedaf1de9537431171c733714e597a4a3df4c67b21a2"
+      }
+    },
+    "terminal_preparation_wall": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/preparation-stop-wall-final.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1215,
+        "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/preparation-stop-wall-final.stderr",
+        "sha256": "9b49f0b06c752a155f672e942f68ca138ba8b2989acc016e35fa0ad3d1c9d60e"
+      },
+      "stdout": {
+        "bytes": 2366,
+        "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/preparation-stop-wall-final.stdout",
+        "sha256": "259bf134976cb70da642eb2838443135cdfd0965be5ada7b8ddeb5927caf6c1f"
+      }
+    }
+  },
+  "maintained_adoption": null,
+  "modeled_preparation_stop_wall_summary": {
+    "paid_wall": {
+      "clock_domain_sha256": "49f3c56ed1545326eb00bc3db6a1338baba9977b9b1b5783d80ed76ad45b2851",
+      "covered_paid_events": 3,
+      "elapsed_ns": 40,
+      "end_ns": 45,
+      "opening_receipt_sha256": "038638fb28a056a350ceb9046960a8f3d89906304e5ed665cfee176a4f4b55fe",
+      "physical_clock_windows_sha256": "96ca0f5d0d5faaa1c083a730f5ef9ae158087bce8807d1b4be6cdaba3c8e0d98",
+      "receipt_sha256": "5518cb7be00d06737663fe65ca34d785d16118325935a7172016497f53c36137",
+      "schema": "reviewed-teacher-pilot-first-use-wall/v1",
+      "scope": "pilot_opening_through_independently_authenticated_preparation_stop",
+      "selection_sha256": "4d34a64faea2e6ce57bb12bf82481769b520dab56af1a59037e9b2f527311000",
+      "start_ns": 5,
+      "terminal_evidence_receipt_sha256": "03368ddecda490c85980bf5d9f9e70a5752c6fb295ac0afeac09745533ef7853"
+    },
+    "recovered_wall": {
+      "clock_domain_sha256": "4be64255f538d26be402e58c6a4f9773c39c390d0c916f77b4d2357343ff683b",
+      "covered_paid_events": 3,
+      "elapsed_ns": 40,
+      "end_ns": 45,
+      "opening_receipt_sha256": "038638fb28a056a350ceb9046960a8f3d89906304e5ed665cfee176a4f4b55fe",
+      "physical_clock_windows_sha256": "97b01034485e23563aad09955fda55cc37522657fde64ba58402dca9554ca750",
+      "receipt_sha256": "5518cb7be00d06737663fe65ca34d785d16118325935a7172016497f53c36137",
+      "schema": "reviewed-teacher-pilot-first-use-wall/v1",
+      "scope": "pilot_opening_through_independently_authenticated_preparation_stop",
+      "selection_sha256": "eae8b3834c314320e7841d74afc4179e50f26ef457fb60384200505962968bc6",
+      "start_ns": 5,
+      "terminal_evidence_receipt_sha256": "03368ddecda490c85980bf5d9f9e70a5752c6fb295ac0afeac09745533ef7853"
+    },
+    "zero_paid_wall": {
+      "clock_domain_sha256": "4a5e1b13a28d21f264d012382435a161dd3e4777a6b84822e9d6e6e4a3bd5852",
+      "covered_paid_events": 0,
+      "elapsed_ns": 20,
+      "end_ns": 25,
+      "opening_receipt_sha256": "038638fb28a056a350ceb9046960a8f3d89906304e5ed665cfee176a4f4b55fe",
+      "physical_clock_windows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "receipt_sha256": "5518cb7be00d06737663fe65ca34d785d16118325935a7172016497f53c36137",
+      "schema": "reviewed-teacher-pilot-first-use-wall/v1",
+      "scope": "pilot_opening_through_independently_authenticated_preparation_stop",
+      "selection_sha256": "6297a3cefdfe3d0dc485065ed43da3592565efa0ad7e5168a73b257d0afba297",
+      "start_ns": 5,
+      "terminal_evidence_receipt_sha256": "03368ddecda490c85980bf5d9f9e70a5752c6fb295ac0afeac09745533ef7853"
+    }
+  },
+  "owner": {
+    "bytes": 34886,
+    "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/final_physical_union.py",
+    "sha256": "c5e490402f1093b9cce28c7461f18d6811c2d8914fabb2e7f7dda145af7df1bf"
+  },
+  "prior_owner": {
+    "bytes": 30009,
+    "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/final_physical_union.py",
+    "sha256": "ccb4f816f07211f380d97a09cee2181da359882b17698f881deadc65ea2cc825"
+  },
+  "retained_completed_pilot_modeled_wall": {
+    "first_use_wall": {
+      "clock_domain_sha256": "10260d8aafea18c83f08c4e68a428db759f6b2a6f2fc2154874d695f6c46fd13",
+      "covered_paid_events": 39,
+      "elapsed_ns": 42000000000,
+      "end_ns": 43000000000,
+      "opening_receipt_sha256": "eeef9e0b1fd421ae545ca779ba0fe32ec8a79a417649726b50da916e79adda13",
+      "physical_clock_windows_sha256": "b1efe5ef72afdd535821dbc1d7b993e4e727c280bfdc208822014eeadb256c52",
+      "receipt_sha256": "b9f028ed29b205e47312baabcbdbc74b7d03735ea9954e2b3d3347af5772ba8c",
+      "schema": "reviewed-teacher-pilot-first-use-wall/v1",
+      "scope": "whole_pilot_opening_through_independently_authenticated_terminal_evidence",
+      "selection_sha256": "f4dcb4e286d67204f3d26426fd50fc1e955a6f8edfc85b819ed0e827bb06acb7",
+      "start_ns": 1000000000,
+      "terminal_evidence_receipt_sha256": "23d3315d6638eb26fe51f155975af772a0c6793534a260dc0aaf0bf821846d12"
+    },
+    "observed_model_or_native_execution": false,
+    "original_event_count": 39,
+    "paid_failed_event_retained": true
+  },
+  "retained_initial_fixture_adapter_failure": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/preparation-stop-wall-first.rc",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "stderr": {
+      "bytes": 3280,
+      "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/preparation-stop-wall-first.stderr",
+      "sha256": "b06603582ac053aa3db368ed72f8a5c2d13aa9ace11bb77a913aa47d1edea1f8"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-teacher-preparation-stop-wall-private-v01-68tYJXJd/preparation-stop-wall-first.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "schema": "reviewed-teacher-preparation-stop-wall-private-controls/v1"
+}

@@ -1,0 +1,35 @@
+{
+  "active_datasets_candidate": "9a89672b4b3d32d6e83fbc29368b40e4cc033612",
+  "all_worktrees_preserved": true,
+  "baseline": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "d067738daf11465f74a91c75165747d9db766cdc",
+    "hallucinate": "db523a840f8324f4b23832c5bdc5e61222aca933",
+    "root": "c614d9d52eaeb30c5d37bb3285616d5273772c9b"
+  },
+  "retention_only": [
+    "historical branches",
+    "earlier worktree bytes",
+    "private proposals",
+    "unfinished official V2 typed-response intake"
+  ],
+  "tested_scope": {
+    "fixture_tests": {
+      "v2": 15,
+      "v3": 14
+    },
+    "matching_roles": 135,
+    "paths": {
+      "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py": [
+        "100644",
+        "f2f1151c8bb3b834e14da8b0ae941ff13728ce53"
+      ],
+      "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py": [
+        "100644",
+        "ded31ed3ad317c4ca1584847e49c992b0c031dda"
+      ]
+    },
+    "qualification_sha256": "376d16817da4fedf2bbffc80515360b68c0ea8ec9ed414264a0109858b28186e",
+    "tested_prior_commit": "45e4cca444029036fb847ff0ffcd63096f7c67a5"
+  }
+}

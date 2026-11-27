@@ -1,0 +1,104 @@
+
+    def test_accepted_namespace_after_policy_failed_last_turn_never_replays(self):
+        f = self.case(loaded=True)
+        accepted = f.invoke()
+        self.assertEqual(accepted["delivery_state"], "accepted_enqueue_only")
+        original = f.backend._turn
+
+        def policy_failed_turn(number):
+            row = original(number)
+            row.update(id=accepted["ack"]["turn_id"], status="failed",
+                       error={"code": "fictional_content_policy",
+                              "message": "Fictional prior task was policy-rejected."})
+            return row
+
+        f.backend._turn = policy_failed_turn
+        self.assertEqual(f.backend._turn(1)["error"]["code"], "fictional_content_policy")
+        before = list(f.backend.methods())
+        mutations = list(f.backend.mutation_checks)
+        f.no_replay(self)
+        self.assertEqual(f.backend.methods(), before)
+        self.assertEqual(f.backend.mutation_checks, mutations)
+
+    def test_unknown_namespace_after_policy_failed_last_turn_never_replays(self):
+        f = self.case(fault="start_lost_ack")
+        self.assertEqual(f.invoke()["delivery_state"], "delivery_unknown")
+        path = Path(f.bindings["unknown_reservation_path"])
+        before_raw = path.read_bytes()
+        original = f.backend._turn
+
+        def policy_failed_turn(number):
+            row = original(number)
+            row.update(id="fictional-later-failed-turn", status="failed",
+                       error={"code": "fictional_content_policy",
+                              "message": "Fictional later failure is not delivery evidence."})
+            return row
+
+        f.backend._turn = policy_failed_turn
+        self.assertEqual(f.backend._turn(1)["status"], "failed")
+        before = list(f.backend.methods())
+        mutations = list(f.backend.mutation_checks)
+        f.no_replay(self)
+        self.assertEqual(f.backend.methods(), before)
+        self.assertEqual(f.backend.mutation_checks, mutations)
+        self.assertEqual(path.read_bytes(), before_raw)
+
+    def test_system_error_without_exact_input_capability_never_mutates(self):
+        for capability in (None, False, 0, 1, "true", [], {}):
+            with self.subTest(capability=capability):
+                f = self.case(loaded=True, terminal="failed")
+                thread = f.backend._thread
+                turn = f.backend._turn
+
+                def system_error_thread(number, original=thread, value=capability):
+                    row = original(number)
+                    row.update(status={"type": "systemError"},
+                               canAcceptDirectInput=value)
+                    return row
+
+                def policy_failed_turn(number, original=turn):
+                    row = original(number)
+                    row["error"] = {"code": "fictional_content_policy",
+                                    "message": "Fictional prior task was policy-rejected."}
+                    return row
+
+                f.backend._thread = system_error_thread
+                f.backend._turn = policy_failed_turn
+                self.assertEqual(f.backend._thread(1)["status"]["type"], "systemError")
+                self.assertIsNot(f.backend._thread(1)["canAcceptDirectInput"], True)
+                self.assertEqual(f.backend._turn(1)["status"], "failed")
+                self.assertEqual(f.invoke()["delivery_state"], "refused")
+                self.assertEqual(f.backend.mutation_checks, [])
+                self.assertNotIn("thread/resume", f.backend.methods())
+                self.assert_no_dispatch(f)
+
+    def test_new_selected_namespace_after_prior_policy_failure_keeps_enqueue_only(self):
+        prior = self.case(loaded=True)
+        self.assertEqual(prior.invoke()["delivery_state"], "accepted_enqueue_only")
+        new = self.case(loaded=True, terminal="failed")
+        self.assertNotEqual(new.bindings["private_root"], prior.bindings["private_root"])
+        self.assertEqual(new.caller.THREAD_ID, prior.caller.THREAD_ID)
+        self.assertIs(new.bindings["Root_selected"], True)
+        self.assertNotEqual(new.bindings["message_sha256"], new.caller.PRIOR_MESSAGE_SHA256)
+        original = new.backend._turn
+
+        def unrelated_policy_failed_turn(number):
+            row = original(number)
+            row["error"] = {"code": "fictional_content_policy",
+                            "task_id": "fictional-unrelated-prior-task",
+                            "message": "Fictional old task failed; the new task was separately selected."}
+            return row
+
+        new.backend._turn = unrelated_policy_failed_turn
+        self.assertEqual(new.backend._turn(1)["error"]["task_id"],
+                         "fictional-unrelated-prior-task")
+        result = new.invoke()
+        self.assertEqual(result["delivery_state"], "accepted_enqueue_only")
+        self.assertIs(result["enqueue_acknowledged"], True)
+        self.assertEqual(new.backend.mutation_checks, ["turn/start"])
+        self.assertNotIn("thread/resume", new.backend.methods())
+        self.assertNotIn("turn/steer", new.backend.methods())
+        for flag in ("processing_confirmed", "completion_eligible",
+                     "execution_granted", "claim_granted", "retryable"):
+            self.assertIs(result[flag], False)
+        new.no_replay(self)

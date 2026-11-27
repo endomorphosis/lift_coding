@@ -1,0 +1,568 @@
+'INERT frozen-local-D phase7-checked-feedback26 bootstrap; private adaptation, never qualification.'
+import ast
+import base64
+import hashlib
+import zlib
+import importlib
+import importlib.machinery
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+import time
+
+def validate_runtime_authority(authority, expected_authority, now_utc_ns):
+    keys={'schema','root_selection','launch_not_before_utc_ns','launch_deadline_utc_ns'}
+    for value in (authority,expected_authority):
+        if type(value) is not dict or set(value)!=keys or value['schema']!='Root-selected-normal-HOME-rescue-launch-authority/v1':
+            raise RuntimeError('closed Root runtime authority required')
+        reference=value['root_selection']
+        if type(reference) is not dict or set(reference)!={'path','bytes','sha256'}:
+            raise RuntimeError('one exact immutable Root selection reference required')
+        if type(reference['path']) is not str or not Path(reference['path']).is_absolute() or type(reference['bytes']) is not int or reference['bytes']<=0 or type(reference['sha256']) is not str or len(reference['sha256'])!=64 or any(c not in '0123456789abcdef' for c in reference['sha256']):
+            raise RuntimeError('invalid immutable Root selection reference')
+        start=value['launch_not_before_utc_ns'];deadline=value['launch_deadline_utc_ns']
+        if type(start) is not int or type(deadline) is not int or not 0<start<deadline:
+            raise RuntimeError('finite exact UTC nanosecond launch window required')
+    if authority!=expected_authority:
+        raise RuntimeError('Root runtime authority mismatch, including selection and clock')
+    if type(now_utc_ns) is not int or not authority['launch_not_before_utc_ns']<=now_utc_ns<authority['launch_deadline_utc_ns']:
+        raise RuntimeError('Root launch clock outside selected window')
+    return authority
+
+ROOT = '/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets'
+ADDITIONAL_A_ROOT = '/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate'
+EXPECTED_MODULES = {'ipfs_datasets_py.logic.backends.kernel.lean': {'bytes': 104341, 'full9': {'st_ctime_ns': '1795737993365748724', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '59949558', 'st_mode': '33204', 'st_mtime_ns': '1795737993365748724', 'st_nlink': '1', 'st_size': '104341', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/logic/backends/kernel/lean.py', 'sha256': '18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.logic.backends.process': {'bytes': 109707, 'full9': {'st_ctime_ns': '1795737993365748724', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '59425205', 'st_mode': '33204', 'st_mtime_ns': '1795737993365748724', 'st_nlink': '1', 'st_size': '109707', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/logic/backends/process.py', 'sha256': '370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.logic.backends.resource_admission': {'bytes': 19806, 'full9': {'st_ctime_ns': '1795737993365748724', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '59425206', 'st_mode': '33204', 'st_mtime_ns': '1795737993365748724', 'st_nlink': '1', 'st_size': '19806', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/logic/backends/resource_admission.py', 'sha256': 'fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.logic.integration.reasoning.legal_ir_learned_guidance': {'bytes': 54518, 'full9': {'st_ctime_ns': '1795737993389654584', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '67552099', 'st_mode': '33204', 'st_mtime_ns': '1795737993389654584', 'st_nlink': '1', 'st_size': '54518', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/logic/integration/reasoning/legal_ir_learned_guidance.py', 'sha256': '2068698a282fa30b3eece259c6b8dddc28c2f0f518b1cc169384c17d03229ba8', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback': {'bytes': 74557, 'full9': {'st_ctime_ns': '1795738495873935389', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '67552106', 'st_mode': '33204', 'st_mtime_ns': '1795738495873935389', 'st_nlink': '1', 'st_size': '74557', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py', 'sha256': '5c44d695c17fab26d6bba70d544e57a7bd0b5fd5b2434f810c9656db13926478', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.logic.legal_ir.adapter': {'bytes': 51421, 'full9': {'st_ctime_ns': '1795737993395305082', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '68993914', 'st_mode': '33204', 'st_mtime_ns': '1795737993395305082', 'st_nlink': '1', 'st_size': '51421', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/logic/legal_ir/adapter.py', 'sha256': 'fd38de52f0d159a6f417e5a7d50b0a8967dc7280a760950fd479a81be5922c06', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.logic.legal_ir.proof_cache': {'bytes': 62643, 'full9': {'st_ctime_ns': '1795737993397654655', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '68993945', 'st_mode': '33204', 'st_mtime_ns': '1795737993397654655', 'st_nlink': '1', 'st_size': '62643', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/logic/legal_ir/proof_cache.py', 'sha256': '9b05a2f890f2df62931273f2448182af8a2d99af73248c5c67ef2ec3d04b0c3c', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_grammar_decoder': {'bytes': 146870, 'full9': {'st_ctime_ns': '1795737993424654893', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510174', 'st_mode': '33204', 'st_mtime_ns': '1795737993424654893', 'st_nlink': '1', 'st_size': '146870', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py', 'sha256': '0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_samples': {'bytes': 6258, 'full9': {'st_ctime_ns': '1795737993425654902', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510183', 'st_mode': '33204', 'st_mtime_ns': '1795737993425654902', 'st_nlink': '1', 'st_size': '6258', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_samples.py', 'sha256': 'e46d794d38971343d8f3aed68fb224e5b44292cf9f4b8c973dedc20db5651b87', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder': {'bytes': 1429059, 'full9': {'st_ctime_ns': '1795738495873935389', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510188', 'st_mode': '33204', 'st_mtime_ns': '1795738495873935389', 'st_nlink': '1', 'st_size': '1429059', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py', 'sha256': '3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_adaptive_optimizer': {'bytes': 21228, 'full9': {'st_ctime_ns': '1795737993429654938', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510189', 'st_mode': '33204', 'st_mtime_ns': '1795737993429654938', 'st_nlink': '1', 'st_size': '21228', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py', 'sha256': 'dcd3a885820e7985ebec458a80325fe00d4d50656cf5827a828dd9cb45eb2524', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_state_transaction': {'bytes': 17051, 'full9': {'st_ctime_ns': '1795737993429654938', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510192', 'st_mode': '33204', 'st_mtime_ns': '1795737993429654938', 'st_nlink': '1', 'st_size': '17051', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_transaction.py', 'sha256': 'c4da0ecd5ebb0ba83d91a3683f049b163662211afb216cacacf86bdd7a4b48d3', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_state_version': {'bytes': 22278, 'full9': {'st_ctime_ns': '1795737993429654938', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510193', 'st_mode': '33204', 'st_mtime_ns': '1795737993429654938', 'st_nlink': '1', 'st_size': '22278', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_version.py', 'sha256': '136756e14822dcec8158fb2718417972096842de74c4e841f08df28f1c7a028e', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_view_diagnostic': {'bytes': 8430, 'full9': {'st_ctime_ns': '1795737993429654938', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510194', 'st_mode': '33204', 'st_mtime_ns': '1795737993429654938', 'st_nlink': '1', 'st_size': '8430', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_view_diagnostic.py', 'sha256': '1937169c7d49409b89b00c2b2c9d1d9e955ab3f37f15122931b79be9bb0c36ba', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_registry': {'bytes': 519367, 'full9': {'st_ctime_ns': '1795737993430654946', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510197', 'st_mode': '33204', 'st_mtime_ns': '1795737993430654946', 'st_nlink': '1', 'st_size': '519367', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_registry.py', 'sha256': 'e8a79d5612f50d3a842b72e618fc1903094dc4dd225688d9cb2d67bb4b0cb00a', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.projection_profiler': {'bytes': 10801, 'full9': {'st_ctime_ns': '1795737993431654955', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510201', 'st_mode': '33204', 'st_mtime_ns': '1795737993431654955', 'st_nlink': '1', 'st_size': '10801', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/projection_profiler.py', 'sha256': 'c5c5179cce6df49f694523b999f61cc8a842fa71424af956893400d574e3b4e8', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.proof_feedback_ablation': {'bytes': 41765, 'full9': {'st_ctime_ns': '1795738495874624995', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510208', 'st_mode': '33204', 'st_mtime_ns': '1795738495874624995', 'st_nlink': '1', 'st_size': '41765', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py', 'sha256': '01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler': {'bytes': 151350, 'full9': {'st_ctime_ns': '1795737993432654964', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510204', 'st_mode': '33204', 'st_mtime_ns': '1795737993432654964', 'st_nlink': '1', 'st_size': '151350', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py', 'sha256': '7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3', 'scope': 'frozen_git_D_source'}, 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.trusted_feedback_trainer': {'bytes': 42453, 'full9': {'st_ctime_ns': '1795738495874668851', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510763', 'st_mode': '33204', 'st_mtime_ns': '1795738495874668851', 'st_nlink': '1', 'st_size': '42453', 'st_uid': '1000'}, 'relative_path': 'ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py', 'sha256': 'cd37964aa4a497e8d778ae0e6a90fe87f3362ead8c9a3751a5a3288b7370ed2e', 'scope': 'frozen_git_D_source'}, 'tests.unit.logic.integration.test_trusted_feedback_weight_updates': {'bytes': 61378, 'full9': {'st_ctime_ns': '1795738495874668851', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510768', 'st_mode': '33204', 'st_mtime_ns': '1795738495874668851', 'st_nlink': '1', 'st_size': '61378', 'st_uid': '1000'}, 'relative_path': 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py', 'sha256': 'f15cc994ea8a8ae5f8d34c1c16572481ff7c73398fce068af4a3ec5bced9915b', 'scope': 'frozen_git_D_source'}, 'tests.unit.logic.legal_ir.test_proof_cache': {'bytes': 98509, 'full9': {'st_ctime_ns': '1795738495874668851', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510819', 'st_mode': '33204', 'st_mtime_ns': '1795738495874668851', 'st_nlink': '1', 'st_size': '98509', 'st_uid': '1000'}, 'relative_path': 'tests/unit/logic/legal_ir/test_proof_cache.py', 'sha256': '087c587b4f35f61f08f2c8f9bba768893dfa1e57f3645976faa38e7927e02414', 'scope': 'frozen_git_D_source'}, 'tests.unit.optimizers.logic_theorem_optimizer.test_modal_autoencoder_proof_heads': {'bytes': 16426, 'full9': {'st_ctime_ns': '1795738495874668851', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510820', 'st_mode': '33204', 'st_mtime_ns': '1795738495874668851', 'st_nlink': '1', 'st_size': '16426', 'st_uid': '1000'}, 'relative_path': 'tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py', 'sha256': '892386e52414fda1b3eac441aaa900630ffaf755140739d053df29ce75c2ed4a', 'scope': 'frozen_git_D_source'}, 'tests.unit.optimizers.logic_theorem_optimizer.test_proof_feedback_ablation': {'bytes': 9778, 'full9': {'st_ctime_ns': '1795738495874818820', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510821', 'st_mode': '33204', 'st_mtime_ns': '1795738495874818820', 'st_nlink': '1', 'st_size': '9778', 'st_uid': '1000'}, 'relative_path': 'tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py', 'sha256': 'bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414', 'scope': 'frozen_git_D_source'}, 'tests.unit.optimizers.logic_theorem_optimizer.test_trainable_legal_ir_objective': {'bytes': 9648, 'full9': {'st_ctime_ns': '1795738495874839828', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '72510822', 'st_mode': '33204', 'st_mtime_ns': '1795738495874839828', 'st_nlink': '1', 'st_size': '9648', 'st_uid': '1000'}, 'relative_path': 'tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py', 'sha256': 'ead71235b234846d6444678459d3fdd03bd10c0955783dcbd8f2f7d3cdf503a6', 'scope': 'frozen_git_D_source'}}
+MAINTAINED_OWNER_NAMES = ['ipfs_datasets_py.optimizers.logic_theorem_optimizer.trusted_feedback_trainer', 'ipfs_datasets_py.logic.integration.reasoning.legal_ir_learned_guidance', 'ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_samples', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_grammar_decoder', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_registry', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_state_version', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_state_transaction', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.projection_profiler', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_adaptive_optimizer', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_view_diagnostic', 'ipfs_datasets_py.logic.backends.process', 'ipfs_datasets_py.logic.backends.resource_admission', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler', 'ipfs_datasets_py.optimizers.logic_theorem_optimizer.proof_feedback_ablation', 'ipfs_datasets_py.logic.legal_ir.proof_cache', 'ipfs_datasets_py.logic.legal_ir.adapter', 'ipfs_datasets_py.logic.backends.kernel.lean']
+SELECTED_TEST_MODULES = {'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py': 'tests.unit.logic.integration.test_trusted_feedback_weight_updates', 'tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py': 'tests.unit.optimizers.logic_theorem_optimizer.test_proof_feedback_ablation', 'tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py': 'tests.unit.optimizers.logic_theorem_optimizer.test_modal_autoencoder_proof_heads', 'tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py': 'tests.unit.optimizers.logic_theorem_optimizer.test_trainable_legal_ir_objective', 'tests/unit/logic/legal_ir/test_proof_cache.py': 'tests.unit.logic.legal_ir.test_proof_cache'}
+FUNCTION_SELECTORS = ['tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence', 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_current_target_metadata_without_checked_receipt_never_reaches_update', 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_uses_current_semantic_target_before_update', 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_refuses_substituted_record_with_same_target', 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_current_target_requires_independent_id_and_canonical_feedback', 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_proof_nested_guidance_cannot_redirect_primary_update', 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_content_addressed_proof_feedback_updates_primary_and_auxiliary_heads', 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_nested_feedback_matching_envelope_preserves_weight_updates', 'tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py::test_ablation_refuses_unmatched_typed_feedback_before_cloning', 'tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py::test_trusted_version_matched_feedback_trains_every_head_and_reports_family_metrics', 'tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py::test_proof_updates_cannot_override_primary_objective_parameters', 'tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py::test_proof_head_training_reports_finite_nonzero_proof_norms', 'tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_record_v2_disk_round_trip_and_explicit_context']
+EXPECTED_FUNCTION_CASE_COUNTS = {'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence': 7, 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_current_target_metadata_without_checked_receipt_never_reaches_update': 1, 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_uses_current_semantic_target_before_update': 5, 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_refuses_substituted_record_with_same_target': 2, 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_current_target_requires_independent_id_and_canonical_feedback': 2, 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_proof_nested_guidance_cannot_redirect_primary_update': 1, 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_content_addressed_proof_feedback_updates_primary_and_auxiliary_heads': 1, 'tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_nested_feedback_matching_envelope_preserves_weight_updates': 2, 'tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py::test_ablation_refuses_unmatched_typed_feedback_before_cloning': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py::test_trusted_version_matched_feedback_trains_every_head_and_reports_family_metrics': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py::test_proof_updates_cannot_override_primary_objective_parameters': 1, 'tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py::test_proof_head_training_reports_finite_nonzero_proof_norms': 1, 'tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_record_v2_disk_round_trip_and_explicit_context': 1}
+REQUIRED_CANONICAL_CONFTESTS = ['/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/conftest.py', '/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/conftest.py', '/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/conftest.py', '/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/conftest.py', '/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/logic_theorem_optimizer/conftest.py']
+PYTEST_INIFILE = '/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/pytest.ini'
+SELECTED_TEST_REWRITE_POLICY = {'cache_policy': 'bypass-read-only-for-selected-owning-test', 'required_compile_and_execution_witness': True, 'rewrite_policy': 'normal-pytest-assertion-rewrite', 'schema': 'selected-test-normal-pytest-source-AST-code-observation/v1', 'selected_test_binding_names': ['tests.unit.logic.integration.test_trusted_feedback_weight_updates', 'tests.unit.optimizers.logic_theorem_optimizer.test_proof_feedback_ablation', 'tests.unit.optimizers.logic_theorem_optimizer.test_modal_autoencoder_proof_heads', 'tests.unit.optimizers.logic_theorem_optimizer.test_trainable_legal_ir_objective', 'tests.unit.logic.legal_ir.test_proof_cache'], 'unobserved_or_cached_only_route': 'REFUSE'}
+ROOT_RUNTIME_SELECTION = {'schema': 'Root-selected-normal-HOME-rescue-launch-authority/v1', 'root_selection': {'path': '/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/Root-selected-existing-P7-checked-feedback-ordinary26.json', 'bytes': 1660, 'sha256': 'eaa32e8a572122779b8e7b3bd398efb2a438cd06335e235787c215ed3ca8b496'}, 'launch_not_before_utc_ns': 1795738861237103896, 'launch_deadline_utc_ns': 1795739701237103896}
+GIT_CANDIDATE_PROVENANCE = {'HEAD': 'de261f458ef5a73e2fe5683de01382f817fae9ed', 'actual_closed_Source_READ': {'bytes': 19747, 'path': '/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-isolated-Phase7-READ10-closed.json', 'sha256': 'dd9b4bf800fdfa655cce53366845a136e09dc6291e9184e7ae038b7115f989b1'}, 'clean_index_provenance_reference': {'bytes': 2125, 'path': '/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/actual-live-ordinary26-clean-D-A-index-provenance.json', 'sha256': '96e33f59ea8d7b4dc89f009bf8174428234880eab577a2d34a6a0c3591b83081'}, 'clean_worktree_and_index': True, 'local_frozen_Git_metadata_reference': {'bytes': 17276, 'path': '/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-isolated-Phase7-exact-nine-local-freeze.json', 'sha256': '63b1bc7bc60db45147d2bc0f0d3a3fab908b19fa17f530d00ced408f5fa88da3'}, 'root': '/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets', 'status_sha256': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 'tree': 'b766976844ccdb7404198e8d2e87f7a74f95c50f'}
+ADDITIONAL_A_PROVENANCE = {'HEAD': '219ba3da0f62f772801d71715e22c506faa21126', 'actual_closed_Source_READ': {'bytes': 19747, 'path': '/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-isolated-Phase7-READ10-closed.json', 'sha256': 'dd9b4bf800fdfa655cce53366845a136e09dc6291e9184e7ae038b7115f989b1'}, 'clean_index_provenance_reference': {'bytes': 2125, 'path': '/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/actual-live-ordinary26-clean-D-A-index-provenance.json', 'sha256': '96e33f59ea8d7b4dc89f009bf8174428234880eab577a2d34a6a0c3591b83081'}, 'clean_worktree_and_index': True, 'local_frozen_Git_metadata_reference': {'bytes': 2125, 'path': '/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/actual-live-ordinary26-clean-D-A-index-provenance.json', 'sha256': '96e33f59ea8d7b4dc89f009bf8174428234880eab577a2d34a6a0c3591b83081'}, 'root': '/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate', 'status_sha256': 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855', 'tree': 'c670052e6e12473d974382e455c7aef4adb6aebe'}
+BINDING_MANIFEST_REFERENCE = {'path': '/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/Root-selected-P7-checked-feedback-ordinary26-binding-manifest.json', 'bytes': 18123, 'sha256': 'd5cde87bba930194fbb866f29d25df1c79b141b63696d13c2597863192225a4e'}
+SOURCE_READ_BINDING_REFERENCE = {'bytes': 2419, 'path': '/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-isolated-Phase7-ordinary-D27-read-binding.json', 'sha256': '4f0bdc68c96dfe39cac0cdb11452897a4d56ec74443ee202a889753c0126ff63'}
+ADMITTED_IO_PLAN_REFERENCE = {'path': '/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/Root-selected-IO.json', 'bytes': 714, 'sha256': '5088b9ee85cb14b52ddb44f52682423fcc1031deca799b58cbfcb80f8e7b457c'}
+EFFECT_DECISION_REFERENCE = {'path': '/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/Root-selected-effect.json', 'bytes': 634, 'sha256': 'a6af2f3f7385ded3a71e7f051077eb70b0b84b439de20ce70c1bc2b343a82e20'}
+SOURCE_EPOCH_SHA256 = 'f50f863d865ae2a8ad64429396fbb2c7f52e04b25408d586163bec7f8fe73e60'
+SOURCE_EPOCH_RECORD_COUNT = 1614
+EXPECTED_ORDERED_CASE_COUNTS = (7, 1, 5, 2, 2, 1, 1, 2, 1, 1, 1, 1, 1)
+EXPECTED_CASES = 26
+if any(value is None for value in (
+    ROOT, ADDITIONAL_A_ROOT, EXPECTED_MODULES, MAINTAINED_OWNER_NAMES,
+    SELECTED_TEST_MODULES, FUNCTION_SELECTORS, EXPECTED_FUNCTION_CASE_COUNTS,
+    REQUIRED_CANONICAL_CONFTESTS, PYTEST_INIFILE, SELECTED_TEST_REWRITE_POLICY,
+    ROOT_RUNTIME_SELECTION, GIT_CANDIDATE_PROVENANCE, ADDITIONAL_A_PROVENANCE,
+    BINDING_MANIFEST_REFERENCE, SOURCE_READ_BINDING_REFERENCE,
+    ADMITTED_IO_PLAN_REFERENCE, EFFECT_DECISION_REFERENCE,
+    SOURCE_EPOCH_SHA256, SOURCE_EPOCH_RECORD_COUNT,
+)):
+    raise RuntimeError('INERT phase7-checked-feedback26: actual roots/pins/full9/Source READ/clock/effect decision remain NULL')
+
+if not sys.dont_write_bytecode:
+    raise RuntimeError("existing -B/no-bytecode invocation required")
+workspace = Path(__file__).resolve().parent
+request = json.loads((workspace / "request.json").read_bytes())
+validate_runtime_authority(request.get("runtime_authority"), ROOT_RUNTIME_SELECTION, time.time_ns())
+root = Path(request["source_root"])
+accelerate = Path(request["accelerate_root"])
+if str(root) != ROOT or str(accelerate) != ADDITIONAL_A_ROOT:
+    raise RuntimeError("exact future D root and additional A import root required")
+if (not root.is_absolute() or root.resolve(strict=True) != root
+        or not accelerate.is_absolute() or accelerate.resolve(strict=True) != accelerate
+        or root == accelerate):
+    raise RuntimeError("two distinct real Source READ roots required")
+phase, operation = request["phase"], request["operation"]
+group_name = request["selection_group"]
+if phase != 'frozen-local-D-phase7-checked-feedback26' or group_name != 'phase7-checked-feedback26' or operation not in {"collect", "run"}:
+    raise RuntimeError('one explicit phase7-checked-feedback26 phase/group and operation required')
+for key, expected in (
+    ("git_candidate_provenance", GIT_CANDIDATE_PROVENANCE),
+    ("additional_A_provenance", ADDITIONAL_A_PROVENANCE),
+    ("binding_manifest_reference", BINDING_MANIFEST_REFERENCE),
+    ("source_read_binding_reference", SOURCE_READ_BINDING_REFERENCE),
+    ("admitted_io_plan_reference", ADMITTED_IO_PLAN_REFERENCE),
+    ("effect_decision_reference", EFFECT_DECISION_REFERENCE),
+    ("modules", EXPECTED_MODULES),
+    ("maintained_owner_names", MAINTAINED_OWNER_NAMES),
+    ("selected_test_modules", SELECTED_TEST_MODULES),
+    ("function_selectors", FUNCTION_SELECTORS),
+    ("expected_function_case_counts", EXPECTED_FUNCTION_CASE_COUNTS),
+    ("required_canonical_conftests", REQUIRED_CANONICAL_CONFTESTS),
+    ("pytest_inifile", PYTEST_INIFILE),
+    ("selected_test_rewrite_policy", SELECTED_TEST_REWRITE_POLICY),
+):
+    if request[key] != expected:
+        raise RuntimeError("closed Root binding differs: " + key)
+
+pytest_inifile = Path(request["pytest_inifile"])
+if (not pytest_inifile.is_absolute() or pytest_inifile.resolve(strict=True) != pytest_inifile
+        or not pytest_inifile.is_relative_to(root)):
+    raise RuntimeError("exact selected real D pytest configuration required")
+
+report = {
+    "schema": "published-D-phase2-bridge27-binding/v1",
+    "phase": phase, "operation": operation, "selection_group": group_name,
+    "qualification_scope": '13 future-bound public functions/26 statically expected cases under isolated frozen local D and additional A READ provenance',
+    "canonical_application": False, "frozen_D_Git_READ_application": True,
+    "Source_WRITE_claimed": False,
+    "external_pretrained_asset_loading_requested": False,
+    "pretrained_quality_or_convergence_claimed": False,
+    "execution_granted": False, "claim_granted": False, "completion_eligible": False,
+    "collection_accepted": False, "pytest_exit_code": None,
+    "actual_bootstrap_execution": True,
+}
+for key in ("git_candidate_provenance", "additional_A_provenance",
+            "binding_manifest_reference", "source_read_binding_reference",
+            "admitted_io_plan_reference", "effect_decision_reference"):
+    report[key] = request[key]
+report["pytest_inifile"] = str(pytest_inifile)
+
+modules = request["modules"]
+maintained_owner_names = request["maintained_owner_names"]
+expected_test_modules = request["selected_test_modules"]
+if (type(modules) is not dict or not modules
+        or type(maintained_owner_names) is not list
+        or len(maintained_owner_names) != len(set(maintained_owner_names))
+        or type(expected_test_modules) is not dict or not expected_test_modules):
+    raise RuntimeError("finite explicit owner and selected-test bindings required")
+test_names = list(expected_test_modules.values())
+if (len(test_names) != len(set(test_names))
+        or set(maintained_owner_names).intersection(test_names)
+        or set(modules) != set(maintained_owner_names) | set(test_names)):
+    raise RuntimeError("disjoint exact maintained-owner/test role partition required")
+module_order = list(modules)
+bound_paths = {}
+for name, row in modules.items():
+    if row["scope"] != "frozen_git_D_source":
+        raise RuntimeError("explicit published Git D source scope required")
+    relative = Path(row["relative_path"])
+    if relative.is_absolute() or ".." in relative.parts:
+        raise RuntimeError("bounded D-relative module path required")
+    path = root / relative
+    if path.resolve(strict=True) != path:
+        raise RuntimeError("module must preserve its real physical D origin")
+    bound_paths[name] = path
+for relative, name in expected_test_modules.items():
+    if name not in modules or relative != modules[name]["relative_path"]:
+        raise RuntimeError("selected-test module/path cross-link differs")
+if any(name in sys.modules for name in modules):
+    raise RuntimeError("fresh child required; do not replace imported aliases")
+
+function_selectors = request["function_selectors"]
+expected_counts = request["expected_function_case_counts"]
+if (type(function_selectors) is not list or len(function_selectors) != 13
+        or len(set(function_selectors)) != 13
+        or any(type(node) is not str or "::" not in node or "[" in node for node in function_selectors)
+        or type(expected_counts) is not dict or set(expected_counts) != set(function_selectors)
+        or any(type(value) is not int for value in expected_counts.values())
+        or tuple(expected_counts[node] for node in function_selectors) != EXPECTED_ORDERED_CASE_COUNTS
+        or sum(expected_counts.values()) != EXPECTED_CASES):
+    raise RuntimeError('exact ordered13-selector case vector/26 required')
+owning_files = request["owning_files"]
+if (type(owning_files) is not list or owning_files != list(expected_test_modules)
+        or {node.split("::", 1)[0] for node in function_selectors} != set(owning_files)):
+    raise RuntimeError("exact future-bound D owning files required")
+policy = request["selected_test_rewrite_policy"]
+if (type(policy) is not dict
+        or policy != {
+            "schema": "selected-test-normal-pytest-source-AST-code-observation/v1",
+            "cache_policy": "bypass-read-only-for-selected-owning-test",
+            "rewrite_policy": "normal-pytest-assertion-rewrite",
+            "selected_test_binding_names": test_names,
+            "required_compile_and_execution_witness": True,
+            "unobserved_or_cached_only_route": "REFUSE",
+        }):
+    raise RuntimeError("exact selected-source rewrite witness policy required")
+selected = request["actual_collected_roster"] if operation == "run" else list(function_selectors)
+if (type(selected) is not list or not selected or len(selected) > 4096
+        or any(type(value) is not str for value in selected)
+        or len(set(selected)) != len(selected)
+        or any(node.split("[", 1)[0] not in expected_counts for node in selected)
+        or (operation == "run" and len(selected) != EXPECTED_CASES)):
+    raise RuntimeError("bounded genuine selected roster required")
+if operation == "collect" and request.get("actual_collected_roster") is not None:
+    raise RuntimeError("COLLECT cannot claim a preexisting expanded roster")
+
+H = lambda raw: hashlib.sha256(raw).hexdigest()
+authenticated = {}
+def exact(path,size,digest):
+ p=Path(path);assert p.is_absolute()and p.resolve(strict=True)==p
+ a=p.lstat();fields=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns');stamp=lambda info:{k:str(getattr(info,k))for k in fields}
+ assert stat.S_ISREG(a.st_mode)and a.st_nlink==1 and a.st_size==size
+ fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW);parts=[];total=0
+ try:
+  assert stamp(a)==stamp(os.fstat(fd))
+  while piece:=os.read(fd,65536):
+   total+=len(piece);assert total<=size;parts.append(piece)
+  b=b''.join(parts);assert total==size and H(b)==digest and stamp(a)==stamp(os.fstat(fd))==stamp(p.lstat())
+ finally:os.close(fd)
+ authenticated[str(p)]={'path':str(p),'bytes':total,'sha256':H(b),'full9':stamp(a),'stable_FD_path_before_after':True}
+ return b
+
+epoch_raw = (workspace / "source-epoch.json").read_bytes()
+if (request["source_epoch_sha256"] != SOURCE_EPOCH_SHA256
+        or request["source_epoch_record_count"] != SOURCE_EPOCH_RECORD_COUNT
+        or H(epoch_raw) != SOURCE_EPOCH_SHA256):
+    raise RuntimeError("actual Source READ epoch binding differs")
+epoch_rows = json.loads(epoch_raw)
+if type(epoch_rows) is not list or len(epoch_rows) != SOURCE_EPOCH_RECORD_COUNT:
+    raise RuntimeError("actual Source READ epoch population differs")
+epoch = {row["path"]: row for row in epoch_rows}
+if len(epoch) != len(epoch_rows):
+    raise RuntimeError("duplicate Source paths")
+fields = ("st_dev", "st_ino", "st_mode", "st_nlink", "st_uid", "st_gid", "st_size", "st_mtime_ns", "st_ctime_ns")
+f9 = lambda value: {key: str(getattr(value, key)) for key in fields}
+for name, path in bound_paths.items():
+    row = modules[name]
+    saved = epoch[str(path)]
+    if (saved["bytes"], saved["sha256"], saved["full9"]) != (row["bytes"], row["sha256"], row["full9"]):
+        raise RuntimeError("selected module/epoch cross-link differs: " + name)
+
+def body_identity(name):
+    path = str(bound_paths[name])
+    row = modules[name]
+    exact(path, row["bytes"], row["sha256"])
+    observed = dict(authenticated[path])
+    if observed["full9"] != row["full9"]:
+        raise RuntimeError("bound D module metadata differs: " + name)
+    return dict(name=name, path=path, bytes=observed["bytes"], sha256=observed["sha256"],
+                scope=row["scope"], full9=observed["full9"])
+
+configuration_paths = [str(pytest_inifile)] + list(request["required_canonical_conftests"])
+if (not request["required_canonical_conftests"] or len(configuration_paths) != len(set(configuration_paths))):
+    raise RuntimeError("unique explicit normal ini/conftest closure required")
+def audit_configuration():
+    result = []
+    for value in configuration_paths:
+        path = Path(value)
+        if (not path.is_absolute() or path.resolve(strict=True) != path
+                or not (path.is_relative_to(root) or path.is_relative_to(accelerate))):
+            raise RuntimeError("configuration path is outside bound D/additional A READ roots")
+        row = epoch[str(path)]
+        exact(str(path), row["bytes"], row["sha256"])
+        observed = dict(authenticated[str(path)])
+        if observed["full9"] != row["full9"]:
+            raise RuntimeError("normal ini/conftest Source epoch metadata differs")
+        result.append(observed)
+    return result
+
+loaded = {}
+def audit_modules():
+    result = []
+    for name in module_order:
+        mod = sys.modules.get(name)
+        if mod is not loaded.get(name) or mod is None:
+            raise RuntimeError("existing-name module object was replaced: " + name)
+        path = bound_paths[name]
+        if (Path(mod.__file__).resolve(strict=True) != path
+                or Path(mod.__spec__.origin).resolve(strict=True) != path
+                or mod.__spec__.name != name):
+            raise RuntimeError("module physical origin was retagged: " + name)
+        parent_name, attribute = name.rsplit(".", 1)
+        if getattr(sys.modules[parent_name], attribute) is not mod:
+            raise RuntimeError("parent-package alias differs: " + name)
+        result.append(body_identity(name))
+    return result
+
+original_source_loader = importlib.machinery.SourceFileLoader.get_code
+original_meta_path = tuple(sys.meta_path)
+compiled = {}
+def normal_guarded_source_code(loader,name):
+    path=Path(loader.path).resolve()
+    if path.is_relative_to(root)or path.is_relative_to(accelerate):
+        row=epoch.get(str(path))
+        if row is None:raise RuntimeError('unlisted actual Source import: '+str(path))
+        before=path.lstat()
+        fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+        try:
+            if not stat.S_ISREG(before.st_mode)or before.st_nlink!=1 or f9(before)!=f9(os.fstat(fd)):
+                raise RuntimeError('actual Source identity differs')
+            raw=bytearray()
+            while piece:=os.read(fd,1024**2):
+                raw.extend(piece)
+                if len(raw)>row['bytes']:raise RuntimeError('Source byte bound changed')
+            if f9(before)!=f9(os.fstat(fd))or f9(before)!=f9(path.lstat())or f9(before)!=row['full9']:
+                raise RuntimeError('actual Source metadata differs')
+        finally:os.close(fd)
+        raw=bytes(raw)
+        if len(raw)!=row['bytes']or hashlib.sha256(raw).hexdigest()!=row['sha256']:
+            raise RuntimeError('actual Source bytes differ')
+        compiled[str(path)]=row['sha256']
+        return loader.source_to_code(raw,str(path))
+    return original_source_loader(loader,name)
+
+class SelectedTestRewriteObserver:
+ def __init__(self,rewrite_module,specs,read_exact,authenticated):
+  self.module=rewrite_module;self.specs=specs;self.read_exact=read_exact;self.authenticated=authenticated;self.events={};self.code_records={};self.cache_bypasses={path:0 for path in specs};self.installed=False
+ def install(self):
+  module=self.module
+  assert isinstance(module.AssertionRewritingHook,type)and callable(module._rewrite_test)and callable(module._read_pyc)
+  self.original_rewrite=module._rewrite_test;self.original_read_pyc=module._read_pyc
+  self.had_exec='exec'in vars(module);self.original_exec=vars(module).get('exec',__import__('builtins').exec)
+  self.original_ast=module.ast;self.had_compile='compile'in vars(module);self.original_compile=vars(module).get('compile',__import__('builtins').compile)
+  module._rewrite_test=self.rewrite_test;module._read_pyc=self.read_pyc;module.exec=self.exec_code;self.installed=True
+  return self
+ def selected_path(self,value):
+  try:path=str(Path(value).resolve())
+  except(TypeError,ValueError,OSError):return None
+  return path if path in self.specs else None
+ def read_pyc(self,*args,**kwargs):
+  source=args[0]if args else kwargs.get('source')
+  path=self.selected_path(source)
+  if path is not None:
+   self.cache_bypasses[path]+=1
+   return None
+  return self.original_read_pyc(*args,**kwargs)
+ def rewrite_test(self,*args,**kwargs):
+  filename=args[0]if args else kwargs.get('fn');path=self.selected_path(filename)
+  if path is None:return self.original_rewrite(*args,**kwargs)
+  assert path not in self.events,'selected test was rewritten more than once'
+  spec=self.specs[path];raw=self.read_exact(path,spec['bytes'],spec['sha256']);before=dict(self.authenticated[path]);assert before['full9']==spec['full9']
+  actual_source_sha=__import__('hashlib').sha256(raw).hexdigest()
+  event={'schema':'actual-selected-test-source-AST-code-witness/v1','path':path,'source_bytes':len(raw),'source_sha256':actual_source_sha,'source_before':before,'source_to_AST_observed':False,'AST_to_code_observed':False,'returned_code_identity_matches':False,'code_execution_observed':False,'code_filename':None,'code_sha256':None,'compile_source_sha256':None,'compile_source_full9':None,'cache_policy':'bypass-read-only-for-selected-owning-test'}
+  parsed={};compiled={};observer=self
+  class AstProxy:
+   def __getattr__(self,name):return getattr(observer.original_ast,name)
+   def parse(self,source,*parse_args,**parse_kwargs):
+    selected_filename=parse_kwargs.get('filename',parse_args[0]if parse_args else'<unknown>')
+    if str(selected_filename)!=path:return observer.original_ast.parse(source,*parse_args,**parse_kwargs)
+    assert type(source)is bytes and source==raw,'pytest parsed bytes must equal the authenticated source bytes'
+    tree=observer.original_ast.parse(source,*parse_args,**parse_kwargs);assert not parsed
+    parsed['tree']=tree;event['source_to_AST_observed']=True
+    return tree
+  def compile_code(source,filename,mode,*compile_args,**compile_kwargs):
+   if str(filename)!=path:return observer.original_compile(source,filename,mode,*compile_args,**compile_kwargs)
+   assert parsed and source is parsed['tree']and mode=='exec'and not compiled,'pytest must compile the observed rewritten AST'
+   code=observer.original_compile(source,filename,mode,*compile_args,**compile_kwargs)
+   assert code.co_filename==path
+   compiled['code']=code;event['AST_to_code_observed']=True;event['code_filename']=code.co_filename;event['code_sha256']=__import__('hashlib').sha256(__import__('marshal').dumps(code)).hexdigest();event['compile_source_sha256']=actual_source_sha;event['compile_source_full9']=before['full9']
+   return code
+  self.module.ast=AstProxy();self.module.compile=compile_code
+  try:
+   result=self.original_rewrite(*args,**kwargs)
+   assert type(result)is tuple and len(result)==2 and compiled and result[1]is compiled['code'],'rewrite hook must return the actually observed code object'
+   self.read_exact(path,spec['bytes'],spec['sha256']);after=dict(self.authenticated[path]);assert before==after
+   event['source_after']=after;event['returned_code_identity_matches']=True;self.events[path]=event;self.code_records[id(result[1])]=(result[1],event)
+   return result
+  finally:
+   self.module.ast=self.original_ast
+   if self.had_compile:self.module.compile=self.original_compile
+   else:vars(self.module).pop('compile',None)
+ def exec_code(self,code,*args,**kwargs):
+  # Closed explicit-scope profile: never inherit this observer's wrapper frame.
+  if kwargs or len(args)not in(1,2)or type(args[0])is not dict:
+   raise RuntimeError('pytest rewrite exec requires explicit positional globals dictionary')
+  if len(args)==2 and args[1]is not None and type(args[1])is not dict:
+   raise RuntimeError('pytest rewrite exec locals scope is unsupported')
+  pair=self.code_records.get(id(code))
+  if pair is None:return self.original_exec(code,*args,**kwargs)
+  assert pair[0]is code
+  namespace=args[0]if args else kwargs.get('globals');assert type(namespace)is dict and str(Path(namespace['__file__']).resolve())==pair[1]['path']
+  result=self.original_exec(code,*args,**kwargs);pair[1]['code_execution_observed']=True
+  return result
+ def witness(self,path):
+  assert path in self.events,'no source-coupled selected-test rewrite event'
+  event=dict(self.events[path]);event['selected_cache_reads_bypassed']=self.cache_bypasses[path]
+  assert event['source_to_AST_observed']is True and event['AST_to_code_observed']is True and event['returned_code_identity_matches']is True and event['code_execution_observed']is True and event['selected_cache_reads_bypassed']>=1
+  return event
+ def restore(self):
+  if not self.installed:return True
+  self.module._rewrite_test=self.original_rewrite;self.module._read_pyc=self.original_read_pyc;self.module.ast=self.original_ast
+  if self.had_exec:self.module.exec=self.original_exec
+  else:vars(self.module).pop('exec',None)
+  if self.had_compile:self.module.compile=self.original_compile
+  else:vars(self.module).pop('compile',None)
+  self.installed=False
+  return self.module._rewrite_test is self.original_rewrite and self.module._read_pyc is self.original_read_pyc and self.module.ast is self.original_ast
+
+prefix = str(root) + "/"
+def normalized(value):
+    return value[len(prefix):] if value.startswith(prefix) else value
+
+called = []
+terminal_reports = []
+rewrite_observer = None
+class BindingEvidence:
+    def pytest_collection_finish(self, session):
+        roster = [normalized(item.nodeid) for item in session.items]
+        counts = {}
+        pairs = []
+        for item, nodeid in zip(session.items, roster, strict=True):
+            base = nodeid.split("[", 1)[0]
+            counts[base] = counts.get(base, 0) + 1
+            relative = nodeid.split("::", 1)[0]
+            selected_test_name = expected_test_modules.get(relative)
+            if selected_test_name is None:
+                raise pytest.UsageError("pytest selected a foreign owning module")
+            module = item.module
+            if selected_test_name in loaded and loaded[selected_test_name] is not module:
+                raise pytest.UsageError("selected module object changed")
+            loaded[selected_test_name] = module
+            function = getattr(item.obj, "__func__", item.obj)
+            if (sys.modules.get(selected_test_name) is not module
+                    or function.__globals__ is not module.__dict__):
+                raise pytest.UsageError("collected function globals differ from owning module")
+            left, *tail = nodeid.split("::")
+            pairs.append([left[:-3].replace("/", ".") + ("." + ".".join(tail[:-1]) if len(tail) > 1 else ""), tail[-1]])
+        report["actual_collected_roster"] = roster
+        report["actual_function_case_counts"] = counts
+        report["junit_expected_pairs"] = pairs
+        if (len(roster) != EXPECTED_CASES or len(set(roster)) != len(roster)
+                or counts != expected_counts
+                or {node.split("::", 1)[0] for node in roster} != set(owning_files)):
+            raise pytest.UsageError("empty, duplicated, foreign or wrong-count collection")
+        if operation == "run" and roster != request["actual_collected_roster"]:
+            raise pytest.UsageError("RUN roster differs from genuine expanded COLLECT order")
+        report["collection_module_bindings"] = audit_modules()
+        report["loaded_bindings"] = audit_modules()
+        actual_conftests = sorted({
+            str(Path(plugin.__file__).resolve())
+            for _, plugin in session.config.pluginmanager.list_name_plugin()
+            if getattr(plugin, "__file__", None) and Path(plugin.__file__).name == "conftest.py"
+        })
+        report["actual_conftest_paths"] = actual_conftests
+        required = request["required_canonical_conftests"]
+        if type(required) is not list or not required or set(required) != set(actual_conftests):
+            raise pytest.UsageError("normal D conftest closure was not loaded")
+        report["actual_inifile"] = str(session.config.inipath)
+        if report["actual_inifile"] != str(pytest_inifile):
+            raise pytest.UsageError("normal D pytest.ini differs")
+        report["actual_normal_config_confcutdir"] = session.config.getoption("confcutdir", default=None)
+        report["collection_configuration_bindings"] = audit_configuration()
+        report["actual_maintained_owner_origins"] = {}
+        for name in maintained_owner_names:
+            module = loaded[name]
+            path = str(bound_paths[name])
+            if compiled.get(path) != modules[name]["sha256"]:
+                raise pytest.UsageError("maintained owner compilation was not observed")
+            report["actual_maintained_owner_origins"][name] = {
+                "path": path, "spec_origin": str(Path(module.__spec__.origin).resolve()),
+                "compiled_SHA256": compiled[path],
+            }
+        report["actual_test_module_origins"] = {}
+        report["actual_test_item_origins"] = []
+        report["actual_test_rewrite_source_to_code"] = {}
+        for item, nodeid in zip(session.items, roster, strict=True):
+            relative = nodeid.split("::", 1)[0]
+            name = expected_test_modules[relative]
+            path = str(bound_paths[name])
+            row = modules[name]
+            module = item.module
+            exact(path, row["bytes"], row["sha256"])
+            source_before = dict(authenticated[path])
+            if source_before["full9"] != row["full9"]:
+                raise pytest.UsageError("owning-test source metadata differs")
+            module_loader = getattr(module, "__loader__", None)
+            spec_loader = getattr(module.__spec__, "loader", None)
+            if not isinstance(module_loader, pytest_rewrite.AssertionRewritingHook) or module_loader is not spec_loader:
+                raise pytest.UsageError("actual owning-test pytest rewrite loader required")
+            witness = rewrite_observer.witness(path)
+            if witness["compile_source_sha256"] != row["sha256"] or witness["compile_source_full9"] != row["full9"]:
+                raise pytest.UsageError("source-coupled owning-test compilation differs")
+            function = getattr(item.obj, "__func__", item.obj)
+            code_object = getattr(function, "__code__", None)
+            if code_object is None or str(Path(code_object.co_filename).resolve()) != path:
+                raise pytest.UsageError("selected item code filename differs")
+            exact(path, row["bytes"], row["sha256"])
+            source_after = dict(authenticated[path])
+            if source_before != source_after:
+                raise pytest.UsageError("owning-test source changed during item binding")
+            loader_name = type(module_loader).__module__ + "." + type(module_loader).__qualname__
+            spec_loader_name = type(spec_loader).__module__ + "." + type(spec_loader).__qualname__
+            common = dict(path=path, spec_origin=path, loader_type=loader_name,
+                          spec_loader_type=spec_loader_name,
+                          rewritten_test_compiled_SHA256=witness["compile_source_sha256"],
+                          rewritten_test_compiled_SHA_observed=True, actual_rewrite_witness=witness)
+            report["actual_test_module_origins"][path] = dict(
+                common, name=module.__name__, source_sha256=row["sha256"], source_full9=source_after["full9"])
+            report["actual_test_item_origins"].append(dict(
+                common, nodeid=nodeid, module_origin=path,
+                item_code_filename=str(Path(code_object.co_filename).resolve()),
+                source_before=source_before, source_after=source_after))
+            report["actual_test_rewrite_source_to_code"][path] = witness
+        test_paths = {str(bound_paths[name]) for name in test_names}
+        if (set(report["actual_test_module_origins"]) != test_paths
+                or [row["nodeid"] for row in report["actual_test_item_origins"]] != roster):
+            raise pytest.UsageError("incomplete selected-test witness population")
+        report["collection_accepted"] = True
+
+    def pytest_runtest_call(self, item):
+        selected_test_name = expected_test_modules.get(normalized(item.nodeid).split("::", 1)[0])
+        function = getattr(item.obj, "__func__", item.obj)
+        if (selected_test_name is None or item.module is not loaded[selected_test_name]
+                or function.__globals__ is not loaded[selected_test_name].__dict__):
+            raise pytest.UsageError("run item does not use actual owning code")
+        called.append(normalized(item.nodeid))
+
+    def pytest_runtest_logreport(self,report):
+        if report.when=='call':
+            if type(report) is not pytest.TestReport and not isinstance(report,pytest.SubtestReport):
+                raise RuntimeError('unknown public pytest report kind')
+            terminal_reports.append(dict(nodeid=normalized(report.nodeid),outcome=report.outcome,is_subtest=isinstance(report,pytest.SubtestReport)))
+
+    def pytest_sessionfinish(self,session,exitstatus):
+        report['actual_called_roster']=list(called)
+        report['actual_terminal_call_reports']=list(terminal_reports)
+        if operation=='run' and int(exitstatus)==0:
+            if (called!=request['actual_collected_roster'] or len(called)!=len(set(called))
+                    or not terminal_reports
+                    or any(type(row['is_subtest']) is not bool or row['nodeid'] not in called or row['outcome']!='passed' for row in terminal_reports)
+                    or [row['nodeid'] for row in terminal_reports if not row['is_subtest']]!=called):
+                raise pytest.UsageError('successful owning-file run did not execute every retained selected call')
+
+code = 1
+os.environ["IPFS_TEST_PROOF_REUSE_MODE"] = "off"
+sys.path.insert(0, str(accelerate))
+sys.path.insert(0, str(root))
+report["initial_body_bindings"] = [body_identity(name) for name in modules]
+report["initial_configuration_bindings"] = audit_configuration()
+importlib.machinery.SourceFileLoader.get_code = normal_guarded_source_code
+try:
+    for name in maintained_owner_names:
+        loaded[name] = importlib.import_module(name)
+    if any(name in sys.modules for name in test_names):
+        raise RuntimeError("owning tests imported before genuine pytest rewrite observer")
+    import pytest
+    import _pytest.assertion.rewrite as pytest_rewrite
+    selected_test_specs = {
+        str(bound_paths[name]): dict(bytes=modules[name]["bytes"], sha256=modules[name]["sha256"], full9=modules[name]["full9"])
+        for name in test_names
+    }
+    rewrite_observer = SelectedTestRewriteObserver(pytest_rewrite, selected_test_specs, exact, authenticated).install()
+    argv = [
+        "-c", str(pytest_inifile), "--rootdir", str(root),
+        "--import-mode=importlib", "--showlocals", "-o", "cache_dir=" + str(workspace / "pytest-cache"),
+        "-o", "tmp_path_retention_policy=all", "--basetemp", str(workspace / "pytest"),
+    ] + [str(root / selector) for selector in selected]
+    if operation == "collect":
+        argv += ["--collect-only", "-q", "-q"]
+    else:
+        argv += ["--junitxml", str(workspace / "junit.xml")]
+    report["pytest_argv"] = argv
+    code = pytest.main(argv, plugins=[BindingEvidence()])
+    report["pytest_exit_code"] = int(code)
+    report["closing_module_bindings"] = audit_modules()
+    report["closing_configuration_bindings"] = audit_configuration()
+finally:
+    report["normal_pytest_rewrite_observer_restored"] = True if rewrite_observer is None else rewrite_observer.restore()
+    importlib.machinery.SourceFileLoader.get_code = original_source_loader
+    report["normal_Source_loader_restored"] = importlib.machinery.SourceFileLoader.get_code is original_source_loader
+    report["entry_meta_path_mutations"] = 0
+    report["normal_import_meta_path_types_before"] = [type(x).__module__ + "." + type(x).__qualname__ for x in original_meta_path]
+    report["normal_import_meta_path_types_after"] = [type(x).__module__ + "." + type(x).__qualname__ for x in sys.meta_path]
+    report["actual_compiled_current_Source"] = compiled
+    report["actual_compiled_owner_SHA256"] = compiled
+    raw = json.dumps(report, sort_keys=True, separators=(",", ":")).encode()
+    descriptor = os.open(workspace / "binding.json", os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+    with os.fdopen(descriptor, "wb") as stream:
+        stream.write(raw)
+        stream.flush()
+        os.fsync(stream.fileno())
+if not report["collection_accepted"]:
+    raise SystemExit(4)
+raise SystemExit(code)

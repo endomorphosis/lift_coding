@@ -1,0 +1,111 @@
+{
+  "CI_dispatched_or_polled": false,
+  "JUnit_independently_verified": {
+    "bytes": 11074,
+    "logical_name": "junit.xml",
+    "path": "/tmp/Root-V1-frozen-local-modern-normal54-v293-dvxgqlkd/actual-output/P1-V1-initial-read-refusal54-run-result0-output1.bin",
+    "sha256": "75beeb5997d181733856718aec74b7e0e2e8a6e701f2d9903e42226ca9b77258"
+  },
+  "Native_run": false,
+  "SQL_tests_run": 0,
+  "Source_and_resource_cleanup_confirmed_in_qualification": true,
+  "Source_or_tests_repeated": false,
+  "capacity_or_ledger_changed": false,
+  "datasets_committed_blobs": {
+    "scripts/ops/legal_ir/run_owned_validation.py": "3cc28cd28f7fba8bff956ddabf1d8b132bde6cd1",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_validation_run_resources.py": "0fd8292fdeb3dc65f1d1eb97a010268786687098"
+  },
+  "datasets_frozen_index_preserved": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795580070633526048",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795580070621525929",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "1c1e32cf5bec086e8586289c07c3cd5fd906c0306c8e7268916717d52cde4a8a"
+  },
+  "fast_forward_push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "local_freeze": {
+    "bytes": 5831,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/p1-v1-strict-refusal-local-freeze-v291/V1-strict-refusal-two-file-local-freeze-v01.json",
+    "sha256": "0b33d825008f9021701c60299e38636d118a4fd4fb3c222b16a4b808a3c440a4"
+  },
+  "ordinary_cases": {
+    "V1": 27,
+    "V5": 27,
+    "duplicates": 0,
+    "error": 0,
+    "fail": 0,
+    "pass": 54,
+    "skip": 0
+  },
+  "qualification": {
+    "bytes": 3915,
+    "path": "/tmp/Root-V1-frozen-local-modern-normal54-v293-dvxgqlkd/Root-V1-strict-refusal-ordinary54-qualified-small-v293.json",
+    "sha256": "f0cc37b95d733143f26d78cb910824c6398bed3a0a589a371c6c2c02cb7d5930"
+  },
+  "repositories": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "before": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "gitlinks_updated": {},
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "origin_main_readback": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "other_gitlinks_preserved": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc",
+      "working_tree_and_index_clean": true
+    },
+    "datasets": {
+      "HEAD": "5cb7aca73e8fc36bc8a1fa9f0cb3c648452967ab",
+      "before": "35e56b6b34c5cd363935e5377c1946a1a53e32b1",
+      "gitlinks_updated": {},
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "origin_main_readback": "5cb7aca73e8fc36bc8a1fa9f0cb3c648452967ab",
+      "other_gitlinks_preserved": true,
+      "tree": "824d985501147bb58fc9874137c548a8023c3bb6",
+      "working_tree_and_index_clean": true
+    },
+    "hallucinate": {
+      "HEAD": "76d3bb5b116325921403aad161b96f6ab4a73971",
+      "before": "f0e54b50279efb57a40dc3b7cb46314fe08f55e3",
+      "gitlinks_updated": {
+        "ipfs_datasets_py": "5cb7aca73e8fc36bc8a1fa9f0cb3c648452967ab"
+      },
+      "origin": "https://github.com/endomorphosis/hallucinate_app",
+      "origin_main_readback": "76d3bb5b116325921403aad161b96f6ab4a73971",
+      "other_gitlinks_preserved": true,
+      "tree": "e318b044b761f3450570e6c954544141aeb2115e",
+      "working_tree_and_index_clean": true
+    },
+    "root": {
+      "HEAD": "a980d038f234249a561c3200dd8fd332fce0a8ac",
+      "before": "b02a2183f3664a3bd2563792b70ff170190ed25f",
+      "gitlinks_updated": {
+        "external/ipfs_datasets": "5cb7aca73e8fc36bc8a1fa9f0cb3c648452967ab",
+        "hallucinate_app": "76d3bb5b116325921403aad161b96f6ab4a73971"
+      },
+      "origin": "https://github.com/endomorphosis/lift_coding",
+      "origin_main_readback": "a980d038f234249a561c3200dd8fd332fce0a8ac",
+      "other_gitlinks_preserved": true,
+      "tree": "b24f200b5939834ac01320ee22bfbecc4d49c435",
+      "working_tree_and_index_clean": true
+    }
+  },
+  "schema": "ordinary54-v293-fast-forward-publication/v1",
+  "v287_SQL51_zero_test_refusal_retained": {
+    "bytes": 1800,
+    "path": "/tmp/Root-P1-SQL51-actual-source-resource-selection-v287-6h9nx_q8/Root-SQL51-no-grant-original-refusal-custody-recovered-small-v287.json",
+    "sha256": "eec454b13b27a9c5fd06bc96cc7ad4fa67e48c86a92068d7f257d197463cbb02"
+  }
+}

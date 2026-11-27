@@ -1,0 +1,90 @@
+from copy import deepcopy
+import json
+from pathlib import Path
+import unittest
+
+from reservation_preview import CANDIDATE, PRIOR, fixture, load, price
+
+
+class Reservation(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.old = load(PRIOR)['source32_paired_reader_reservation']
+        api = load(CANDIDATE)
+        cls.new = api['source32_paired_reader_reservation']
+        cls.partition = api['STAGE_A_RELOCATED_ALL_FRESH_RESERVATION']
+        cls.scenario_args, cls.limits = fixture()
+
+    def setUp(self):
+        self.args = list(deepcopy(self.scenario_args))
+
+    def reserve(self, *, mode=None, **limits):
+        return type(self).new(*self.args, **(self.limits | limits),
+                              capture_partition=self.partition if mode is None else mode)
+
+    def test_explicit_partition_required(self):
+        for owner in (type(self).old, type(self).new):
+            with self.assertRaisesRegex(ValueError, '12 fresh and 20 archived'):
+                owner(*self.args, **self.limits)
+        self.assertEqual(self.reserve()['logical_selected_bytes'], 24_641_008)
+
+    def test_retains_every_historical_price_component(self):
+        self.args[2], self.args[3] = self.args[2][:12], self.args[2][12:]
+        for retain in (True, False):
+            for persist in (True, False):
+                bounds = self.limits | dict(retain_terminal_git_controls=retain, persist_python_epoch=persist)
+                self.assertEqual(type(self).old(*self.args, **bounds), type(self).new(*self.args, **bounds))
+        with self.assertRaisesRegex(ValueError, '32 fresh captures'):
+            self.reserve()
+
+    def test_requires_exact_shape_and_literal_version(self):
+        for version in ('stage-a-source32-relocated-all-fresh/v2', False, 1):
+            with self.subTest(version=version), self.assertRaisesRegex(ValueError, 'unknown Stage A'):
+                self.reserve(mode=version)
+        self.args[2].pop()
+        with self.assertRaisesRegex(ValueError, '32 fresh captures'):
+            self.reserve()
+
+    def test_retained_controls_remove_one_file_sweep_only(self):
+        retained = self.reserve()
+        reread = self.reserve(retain_terminal_git_controls=False)
+        self.assertEqual(reread['logical_selected_bytes'] - retained['logical_selected_bytes'], 11_541_115)
+        self.assertEqual(reread['direct_source_bytes'], 33_150_207)
+        self.assertEqual(retained['direct_source_bytes'], 21_609_092)
+        self.assertEqual(retained['git_output_allowance_bytes'], 1_425_458)
+        for key in ('epoch_output_allowance_bytes', 'control_probe_bytes', 'git_output_allowance_bytes'):
+            self.assertEqual(reread[key], retained[key])
+
+    def test_future_controls_and_both_epoch_outputs_are_priced(self):
+        base = self.reserve()
+        self.args[4].append(dict(path='/tmp/owner-selected-future-receipt.fixture', bytes=311))
+        new = self.reserve(persist_python_epoch=True)
+        self.assertEqual(new['control_probe_bytes'] - base['control_probe_bytes'], 312)
+        self.assertEqual(new['epoch_output_allowance_bytes'] - base['epoch_output_allowance_bytes'], 2 * 523_151 + 1)
+        with self.assertRaisesRegex(ValueError, 'positive maximum lengths'):
+            self.reserve(epoch_output_maximums=dict(outer_epoch=525009))
+        with self.assertRaisesRegex(ValueError, 'terminal Git control'):
+            self.reserve(retain_terminal_git_controls=1)
+
+    def test_refuses_overlaps_and_nonliteral_paths(self):
+        path = self.args[2][0]['path']
+        for alternate in (path, path.replace('/datasets/', '/datasets//', 1),
+                          path.replace('/datasets/', '/datasets/../datasets/', 1)):
+            self.args[4] = [*self.scenario_args[4], dict(path=alternate, bytes=1)]
+            with self.subTest(alternate=alternate), self.assertRaisesRegex(ValueError, 'distinct literal Source'):
+                self.reserve()
+
+    def test_exact_detached_scenario(self):
+        held = Path(__file__).with_name('guide572-conditional-reservation.INERT.json')
+        quote = price()
+        self.assertEqual(quote, json.loads(held.read_bytes()))
+        self.assertEqual(quote['Reader_parent_matrix_allowance'], 364452)
+        self.assertEqual(quote['selector_Reader_conditional_subtotal'], 26758574)
+        self.assertEqual(quote['selector_git_stream_allowance'], 704536)
+        self.assertEqual(quote['selector_raw_stream_write_readback_allowance'], 1048578)
+        self.assertIs(quote['additional_owner_control_roster'], None)
+        self.assertFalse(quote['dispatch_authority'])
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

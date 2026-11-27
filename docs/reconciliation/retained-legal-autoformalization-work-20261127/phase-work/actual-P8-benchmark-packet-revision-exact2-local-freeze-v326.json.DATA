@@ -1,0 +1,253 @@
+{
+  "D_branch_ref_before": {
+    "bytes": 41,
+    "full9": {
+      "st_ctime_ns": "1795616112546259543",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862939",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795616112546259543",
+      "st_nlink": "1",
+      "st_size": "41",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/refs/heads/work/phase6-capacity-composition-20261123",
+    "sha256": "53ce1044eef034fc37642e868c29cd92a7cc85ca95d0389d30a364b9bc4257d9"
+  },
+  "D_branch_ref_frozen": {
+    "bytes": 41,
+    "full9": {
+      "st_ctime_ns": "1795624281882958046",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862940",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795624281882958046",
+      "st_nlink": "1",
+      "st_size": "41",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/refs/heads/work/phase6-capacity-composition-20261123",
+    "sha256": "f8d261bcd686d8ad5200d2f91bb198e94d9f88c1a2b8eee331c93edc23b9d7c6"
+  },
+  "D_clean_worktree_and_index": true,
+  "D_index_before": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795616112545259539",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795616112543259531",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "c2925ccf7f44e738641f196887390e8707644ca6a084e347a1873da7bb6a9de6"
+  },
+  "D_index_frozen": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795624281880958025",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795624281879958014",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "b32b409a70267fb0ee029711fc4db53169e5dda2ee49c33d90b624dfa8d2742b"
+  },
+  "D_local_HEAD": "3ea8a5a10da075dc7bc31a67e5d48c32cf8ae1b4",
+  "D_parent": "17a3d3ff728fd4485220ae7ab85c344672db08c9",
+  "D_symbolic_HEAD": "refs/heads/work/phase6-capacity-composition-20261123",
+  "D_tree": "0cb675b8978f2e6aabb33de3644960382e857dba",
+  "all_other_index_entries_and_paths_and_gitlinks_preserved": true,
+  "candidate": {
+    "bytes": 8664,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-external-benchmark-packet-revision-private-v01-2jsuqnla/sealed-private-benchmark-packet-revision-two-file-v01.json",
+    "sha256": "59b54c3859174bcf1afcab5d6551b61928d9705f3537c8a70080ab81146e012a"
+  },
+  "exact_committed_files": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py": {
+      "bytes": 37952,
+      "committed_blob": "566fcdd4562bb8dc570d0e52b18fccc3172e4224",
+      "full9": {
+        "st_ctime_ns": "1795624161686653870",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70031759",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795624161046039810",
+        "st_nlink": "1",
+        "st_size": "37952",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py",
+      "previous_blob": "fe181984a79a0088faa46010bd2d60e155d27b0a",
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py",
+      "sha256": "9ad1187907f37120be9929da6967ba3753cb6887696b48c2386e13854c2df000",
+      "stage0_blob": "566fcdd4562bb8dc570d0e52b18fccc3172e4224"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py": {
+      "bytes": 13790,
+      "committed_blob": "906dfa81068aa04759af700d28966862e1686624",
+      "full9": {
+        "st_ctime_ns": "1795624162298660516",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70031793",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795624161049700938",
+        "st_nlink": "1",
+        "st_size": "13790",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py",
+      "previous_blob": "939c3d60a7bb13f021679de702d760d0c19f30aa",
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py",
+      "sha256": "e2bdaca2566fe5c331bcc401781e286d4956a1af474ddebd666a93f2973f641a",
+      "stage0_blob": "906dfa81068aa04759af700d28966862e1686624"
+    }
+  },
+  "guide522_blobs_preserved": {
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": "606e436b1269f225597a913415413f77137e8ccc",
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": "e6cb38a9584a0c4fb8498f374598c7d6b0d2608e",
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": "4dfa6a157c5bfce007de75de831bc00092cfc753",
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": "1bf7518b16484647a2f1d188f3c32e77b9d126c3"
+  },
+  "hold_frozen_for_READ6_and_normal22": true,
+  "local_origin_main_tracking_unchanged": "17a3d3ff728fd4485220ae7ab85c344672db08c9",
+  "only_owner_evaluate_packet_AST_changed": true,
+  "ordinary22_not_run_or_qualified": true,
+  "other_roots_preserved": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "branch": "refs/heads/reconcile/accelerator-autonomy-eight-files-20261123",
+      "clean": true,
+      "gitlinks": [
+        "160000 commit 5dd8cde2f9e5d9423fbaf2e6eb2e500693399cc4\tdocs/fastmcp",
+        "160000 commit 0da9a074d09267a927d72faa58c26d828f0f8edb\tdocs/mcp-python-sdk",
+        "160000 commit 628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0\tipfs_accelerate_py/mcplusplus",
+        "160000 commit 311e2d12699bb3c051a88bec0535a6e1581421ca\tipfs_datasets_py",
+        "160000 commit a1f4b23332a4e22d97d6c4e441fb5795e3eba2c8\tipfs_kit_py",
+        "160000 commit 4f99e470d12f45f3918128dec2610e1685564ffb\tipfs_model_manager_py",
+        "160000 commit b397988ed9e3e656475c1cf4417b84efdb95daf3\tipfs_transformers_py",
+        "160000 commit 057fde0083b864ba617eed617e45c1e4d599e5e7\ttest/doc-builder",
+        "160000 commit 057fde0083b864ba617eed617e45c1e4d599e5e7\ttest/huggingface_doc_builder",
+        "160000 commit 6c4710bdef6b0db127d40704d8ee2f82c551b27f\ttest/huggingface_transformers"
+      ],
+      "index": {
+        "bytes": 4412225,
+        "full9": {
+          "st_ctime_ns": "1795500785295142737",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342879",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795500785294142725",
+          "st_nlink": "1",
+          "st_size": "4412225",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/index",
+        "sha256": "cb683f5552a5c4aecc54a7fb2fb0ea75dfb369fe1c7fe52d13dbf8b3ced751de"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "tracking": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "hallucinate": {
+      "HEAD": "bdd4d76d4a90d782259e688289d4b348c1a14cfb",
+      "branch": "refs/heads/reconcile/all-work-app-main-20261123",
+      "clean": true,
+      "gitlinks": [
+        "160000 commit 88c0d9f82f66aaddbb01344c9f85236e92a5dc88\tipfs_accelerate_py",
+        "160000 commit 17a3d3ff728fd4485220ae7ab85c344672db08c9\tipfs_datasets_py",
+        "160000 commit b15442e490dc39d046a911ea663c73c99ed3c755\tipfs_kit_py",
+        "160000 commit 453a30b01e62b6acdd1c54070821dbacfbf7908e\tswissknife"
+      ],
+      "index": {
+        "bytes": 138750,
+        "full9": {
+          "st_ctime_ns": "1795616116858031501",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342837",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795616116856276631",
+          "st_nlink": "1",
+          "st_size": "138750",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate/.git/index",
+        "sha256": "6e6d568efae27dac0bd372e5721bb6c33da46d894f4edddb25730a6c15ae6515"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate",
+      "tracking": "bdd4d76d4a90d782259e688289d4b348c1a14cfb",
+      "tree": "d40bf053eb80d1d002ef46802cbf817d25ca4479"
+    },
+    "root": {
+      "HEAD": "7184c81f12d474fa47f5a1f7b7ffa9a66baa4804",
+      "branch": "refs/heads/reconcile/all-work-parent-main-20261123",
+      "clean": true,
+      "gitlinks": [
+        "160000 commit 810e8bd91b14fd945e086840ccd0e2874a7910c3\tJevOps",
+        "160000 commit 33c0c56e9423e11945837657e3a82fe865c60f91\tMcp-Plus-Plus",
+        "160000 commit 88c0d9f82f66aaddbb01344c9f85236e92a5dc88\texternal/ipfs_accelerate",
+        "160000 commit 17a3d3ff728fd4485220ae7ab85c344672db08c9\texternal/ipfs_datasets",
+        "160000 commit b15442e490dc39d046a911ea663c73c99ed3c755\texternal/ipfs_kit",
+        "160000 commit f4371bc9f90249d51eb07d7f8a61e8d829294f16\texternal/meta-wearables-dat-android",
+        "160000 commit bbae597cd1c748cd29b9375a1624a8d75b1c9e14\texternal/meta-wearables-dat-ios",
+        "160000 commit bdd4d76d4a90d782259e688289d4b348c1a14cfb\thallucinate_app",
+        "160000 commit 453a30b01e62b6acdd1c54070821dbacfbf7908e\tswissknife"
+      ],
+      "index": {
+        "bytes": 7262222,
+        "full9": {
+          "st_ctime_ns": "1795616119678826246",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69387316",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795616119677287888",
+          "st_nlink": "1",
+          "st_size": "7262222",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/.git/index",
+        "sha256": "8f1002778379c63661883d925f033e69f8d065e2274006d0437c771c57fb6ac2"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root",
+      "tracking": "7184c81f12d474fa47f5a1f7b7ffa9a66baa4804",
+      "tree": "a22d5cb966625270690a694e9b20314138e309ac"
+    }
+  },
+  "owning_test_exact_12917_prefix_and_old_AST_preserved": true,
+  "pushed": false,
+  "schema": "actual-P8-packet-revision-two-file-local-freeze/v326",
+  "source_closed_install": {
+    "bytes": 3111,
+    "full9": {
+      "st_ctime_ns": "1795624187174818526",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72109970",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795624187174818526",
+      "st_nlink": "1",
+      "st_size": "3111",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-P8-benchmark-declared-revision-exact-Source2-selected-v326-24neoy4w/Root-P8-revision-exact-two-installed-Source-closed-small-v326.json",
+    "sha256": "d0938fb6a33b0ede244c4e4a8f1c45e352e084914844456a7482e0f8bbf819bc"
+  }
+}

@@ -1,0 +1,89 @@
+"""Rebind the retained fictional paid matrix to a selected detached study body."""
+from hashlib import sha256
+from pathlib import Path
+
+
+HERE = Path(__file__).resolve().parent
+CURRENT = HERE / 'study.py'
+HELD = HERE.parent / 'decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv'
+HELD_SHA256 = '420a5aa4fa4dae13183121ba03ecc34836f8fdc1157b38418cc9119e34f9fbe6'
+CENSORED_CELL = ('alpha', 't5', 'spacy', 'relational')
+UNUSED_CENSORED_CELL = ('alpha', 'qwen', 'gte-base-multilingual', 'relational')
+FAILED_CELL = ('beta', 'qwen', 'spacy', 'relational')
+CPU_CAP = 3.0
+CELL_KEYS = ('seed', 'variant', 'teacher', 'native_arm')
+
+
+MATRIX_CHANGES = (
+    (b'budget_caps=(None, None, None),', b'budget_caps=(None, SELECTED_CPU_CAP, None),'),
+    (b'            mock = old["attempt"](self.study, si, ai, pattern=(True,), wall_times=(wall,), wall_end=wall + 1.)',
+     b'            censored = tuple(cell[key] for key in SELECTED_CELL_KEYS) in SELECTED_CENSORED_CELLS\n'
+     b'            mock = old["attempt"](self.study, si, ai, pattern=(not censored,), wall_times=(wall,), wall_end=wall + 1.)'),
+    (b'                              assessments=() if failed else mock.assessments, closeout_status="integrity_failure" if failed else "complete")',
+     b'                              assessments=() if failed else mock.assessments,\n'
+     b'                              closeout_status="integrity_failure" if failed else "budget_limit" if censored else "complete",\n'
+     b'                              budget_clock="cpu_seconds" if censored else None,\n'
+     b'                              cap_receipt_sha256=pin((ident, "prospective CPU cap")) if censored else None)'),
+    (b'                event = cost["native_event"]((ident, stage), kind="training" if failed else "validation",\n'
+     b'                                             disposition="failed" if failed else "complete", cpu_ns=NS, gpu_ns=None)',
+     b'                extra_close_cpu = int(censored and stage == "close")\n'
+     b'                event = cost["native_event"]((ident, stage), kind="training" if failed else "validation",\n'
+     b'                                             disposition="failed" if failed else "complete",\n'
+     b'                                             cpu_ns=(1 + extra_close_cpu) * NS, gpu_ns=None)'),
+    (b'                    pin(interval), pin(charges), True, validator.Costs(elapsed, float(len(paid)), None),',
+     b'                    pin(interval), pin(charges), True, validator.Costs(elapsed, float(len(paid) + extra_close_cpu), None),'),
+)
+
+
+def held_matrix(study_path):
+    path = HELD / 'test_portability_confirmation_bounds.py'
+    body = path.read_bytes()
+    if sha256(body).hexdigest() != HELD_SHA256:
+        raise ValueError('Retained portability fixture identity changed')
+    prefix, marker, _ = body.partition(b'\nclass PortabilityConfirmationBounds(')
+    if not marker:
+        raise ValueError('Retained portability fixture class boundary missing')
+    for old, new in (
+        (b'CURRENT = HERE / "study.py"', b'CURRENT = SELECTED_STUDY'),
+        (b'), SELECTED_DEVELOPMENT_FIXTURE=development,',
+         b') + SELECTED_MATRIX_CHANGES, SELECTED_DEVELOPMENT_FIXTURE=development,\n'
+         b'    SELECTED_CENSORED_CELLS=SELECTED_CENSORED_CELLS, SELECTED_CELL_KEYS=SELECTED_CELL_KEYS,\n'
+         b'    SELECTED_CPU_CAP=SELECTED_CPU_CAP,'),
+    ):
+        if prefix.count(old) != 1:
+            raise ValueError('Retained portability fixture binding point changed')
+        prefix = prefix.replace(old, new, 1)
+    namespace = dict(__name__='held_portability_fixture', __file__=str(path), SELECTED_STUDY=study_path,
+                     SELECTED_MATRIX_CHANGES=MATRIX_CHANGES, SELECTED_CPU_CAP=CPU_CAP,
+                     SELECTED_CENSORED_CELLS=(CENSORED_CELL, UNUSED_CENSORED_CELL), SELECTED_CELL_KEYS=CELL_KEYS)
+    exec(compile(prefix, str(path), 'exec'), namespace)
+    return namespace['matrix']
+
+
+class PortabilityFixture:
+    def __init__(self, matrix, folder):
+        self.S = S = matrix['S']
+        self.pin = S.commitment
+        self.case = case = matrix['Case'](folder)
+        self.paid = case.comparison
+        self.plan = S.ObjectivePortabilityPlan(self.pin(case.matrix), (
+            S.VariantObjectiveContrast('qwen', 't5', 'spacy', 'wall_seconds'),
+            S.VariantObjectiveContrast('t5', 'wider-t5', 'gte-small', 'wall_seconds'),
+        ))
+        plan_pin = S.objective_portability_plan_commitment(self.plan)
+        paid_pin = self.pin(self.paid)
+        projection_pin = self.pin(case.project())
+        self.report = S.project_objective_portability(matrix['validator'], plan=self.plan,
+            expected_plan_sha256=plan_pin, matrix=case.matrix, study=case.study, contrasts=case.contrasts,
+            comparison=self.paid, expected_comparison_sha256=paid_pin, development_receipts=case.receipts,
+            verify_projection_owner=lambda *pins: pins == (self.plan.matrix_sha256, paid_pin),
+            verify_portability_owner=lambda *pins: pins == (plan_pin, self.plan.matrix_sha256, projection_pin))
+
+    def attempt(self, cell):
+        matrix_row, = (row for row in self.case.matrix['attempts'] if tuple(row[key] for key in CELL_KEYS) == cell)
+        attempt, = (row for row in self.paid['attempts'] if row['attempt_sha256'] == matrix_row['attempt_sha256'])
+        return attempt
+
+
+def make_fixture(folder, *, study_path=CURRENT):
+    return PortabilityFixture(held_matrix(Path(study_path)), Path(folder))

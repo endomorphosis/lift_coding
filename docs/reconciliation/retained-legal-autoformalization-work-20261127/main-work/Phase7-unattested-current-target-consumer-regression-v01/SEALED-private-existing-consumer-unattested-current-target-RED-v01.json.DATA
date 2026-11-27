@@ -1,0 +1,323 @@
+{
+  "Git_mutations": 0,
+  "Native_runs": 0,
+  "SQL": 0,
+  "Source_reads": 0,
+  "actual_engineering_outcome": {
+    "applied_count_assertion_passed": true,
+    "canonical_source_qualification": false,
+    "compiled_project_paths": 102,
+    "exact_update_and_eligibility_counts_not_externalized": true,
+    "executed_new_methods": 1,
+    "explicit_denials": [],
+    "failing_new_methods": 1,
+    "failure": "final no-update/no-auxiliary-eligibility assertion",
+    "guard": {
+      "address_space_bytes": 536870912,
+      "cpu_affinity": [
+        0
+      ],
+      "cpu_seconds": 25,
+      "kernel_probes": [
+        "socket",
+        "clone3",
+        "write-open"
+      ],
+      "landlock_abi": 7,
+      "stdout_stderr_each_max_bytes": 131072,
+      "syscall_denylist": [
+        "socket",
+        "socketpair",
+        "connect",
+        "accept",
+        "accept4",
+        "bind",
+        "listen",
+        "clone",
+        "clone3",
+        "execve",
+        "execveat",
+        "io_uring_setup",
+        "io_uring_enter",
+        "io_uring_register",
+        "pidfd_getfd",
+        "ptrace",
+        "process_vm_writev",
+        "setns",
+        "unshare",
+        "mount",
+        "umount2",
+        "truncate",
+        "ftruncate",
+        "fchmod",
+        "fchmodat",
+        "fchmodat2",
+        "fchown",
+        "fchownat",
+        "utimensat",
+        "setxattr",
+        "lsetxattr",
+        "fsetxattr",
+        "removexattr",
+        "lremovexattr",
+        "fremovexattr"
+      ]
+    },
+    "no_fit": true,
+    "normal_pytest_qualification": false,
+    "passing_new_methods": 0,
+    "state_unchanged_assertion_passed": true,
+    "worker_rc": 2
+  },
+  "all_old_AST_exact": true,
+  "canonical_writes": 0,
+  "model_fits": 0,
+  "new_method": "test_current_target_metadata_without_checked_receipt_never_reaches_update",
+  "next_existing_owner_action": "Bind selected current checked receipt and independent canonical expectation in existing target/producer; run this same unchanged method GREEN. Existing trainer already calls target.matches after serde and before updates.",
+  "old_prefix_bytes": 46285,
+  "old_prefix_sha256": "78f1f42f172367e8bb932721b0ef01011b8ff9a7b5821ee2942a4f5254eaa9e3",
+  "preserved_history": [
+    {
+      "assessment": "setup failure missing historical baseline before project compile",
+      "stderr": {
+        "bytes": 2010,
+        "full9": [
+          66306,
+          72509844,
+          33024,
+          1,
+          1000,
+          1000,
+          2010,
+          1795736624679865803,
+          1795736624679865803
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/actual-private-unattested-RED.stderr.txt",
+        "sha256": "fef634a705ca3adf873098349e4a31c5719a6c31ef2575db347b83420d3e241e"
+      },
+      "stdout": {
+        "bytes": 807,
+        "full9": [
+          66306,
+          72509843,
+          33024,
+          1,
+          1000,
+          1000,
+          807,
+          1795736624679865803,
+          1795736624679865803
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/actual-private-unattested-RED.stdout.json",
+        "sha256": "9dc47e8f62f8de624f1ab22ff50759891e33888a3d3513d3c1b3bc75483f8b37"
+      }
+    },
+    {
+      "assessment": "setup refusal oversized pretty JSON manifest before project compile",
+      "stderr": {
+        "bytes": 1350,
+        "full9": [
+          66306,
+          72509849,
+          33024,
+          1,
+          1000,
+          1000,
+          1350,
+          1795736693330579622,
+          1795736693330579622
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/actual-private-unattested-RED.v02.stderr.txt",
+        "sha256": "58aff29946ac6ff2fa17934e863e284f5865f77827e070a9392d4385c2c9174b"
+      },
+      "stdout": {
+        "bytes": 1268,
+        "full9": [
+          66306,
+          72509848,
+          33024,
+          1,
+          1000,
+          1000,
+          1268,
+          1795736693330579622,
+          1795736693330579622
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/actual-private-unattested-RED.v02.stdout.json",
+        "sha256": "06028cd651ce7249e7b66db28ef3d213cd24ab1664db19f9ac374b9a3cb9ef8c"
+      }
+    },
+    {
+      "assessment": "old10 cases actually passed, intended new case not selected; final identity guard refused",
+      "stderr": {
+        "bytes": 404,
+        "full9": [
+          66306,
+          72509852,
+          33024,
+          1,
+          1000,
+          1000,
+          404,
+          1795736716129813388,
+          1795736716129813388
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/actual-private-unattested-RED.v03.stderr.txt",
+        "sha256": "ba13df94ed0ad3111e2139c644544621870841577bcc35394e34aa7a60e278af"
+      },
+      "stdout": {
+        "bytes": 31646,
+        "full9": [
+          66306,
+          72509851,
+          33024,
+          1,
+          1000,
+          1000,
+          31646,
+          1795736716129813388,
+          1795736716129813388
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/actual-private-unattested-RED.v03.stdout.json",
+        "sha256": "3ead6544a7d407f8f5141c454a5ee57b1f0b261db46c6dae1e21c735032d1a9f"
+      }
+    }
+  ],
+  "product_patch_authored": false,
+  "real_RPC": 0,
+  "refs": {
+    "actual-private-unattested-RED.v04.stderr.txt": {
+      "bytes": 1383,
+      "full9": [
+        66306,
+        72509855,
+        33024,
+        1,
+        1000,
+        1000,
+        1383,
+        1795736775156411682,
+        1795736775156411682
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/actual-private-unattested-RED.v04.stderr.txt",
+      "sha256": "f0970cba622ca54c6472639037b13f5778c4816067064767b2974c7428496dc2"
+    },
+    "actual-private-unattested-RED.v04.stdout.json": {
+      "bytes": 29717,
+      "full9": [
+        66306,
+        72509854,
+        33024,
+        1,
+        1000,
+        1000,
+        29717,
+        1795736775157411692,
+        1795736775157411692
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/actual-private-unattested-RED.v04.stdout.json",
+      "sha256": "6375409db0a52a59f6b1dbbf9f836fb5a248ae52e02b24ebb77ea8f2f224bb28"
+    },
+    "existing-rebased-projection-runner-one-consumer-case.v04.py.DATA": {
+      "bytes": 16536,
+      "full9": [
+        66306,
+        72509853,
+        33024,
+        1,
+        1000,
+        1000,
+        16536,
+        1795736753619194491,
+        1795736753619194491
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/existing-rebased-projection-runner-one-consumer-case.v04.py.DATA",
+      "sha256": "44dd6f0e296e1f3f86410499e29c679508128963df22c07894aa1d1fce3c81c4"
+    },
+    "owning-consumer-unattested.append.py.DATA": {
+      "bytes": 1574,
+      "full9": [
+        66306,
+        72509837,
+        33024,
+        1,
+        1000,
+        1000,
+        1574,
+        1795736608324693388,
+        1795736608324693388
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/owning-consumer-unattested.append.py.DATA",
+      "sha256": "84f214b6996bdd671eb650bfb866ded345523b0d2b334dbe83fb53c2d77aad1b"
+    },
+    "owningtest.forward.diff": {
+      "bytes": 1921,
+      "full9": [
+        66306,
+        72509839,
+        33024,
+        1,
+        1000,
+        1000,
+        1921,
+        1795736608341693568,
+        1795736608341693568
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/owningtest.forward.diff",
+      "sha256": "7588c3e686a4d4f61322064a9410f1db60f68d9006f90f577a71ea304a1987d0"
+    },
+    "owningtest.inverse.diff": {
+      "bytes": 1921,
+      "full9": [
+        66306,
+        72509840,
+        33024,
+        1,
+        1000,
+        1000,
+        1921,
+        1795736608345693610,
+        1795736608345693610
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/owningtest.inverse.diff",
+      "sha256": "75b6df40c8341e367f08cff9b9fb780ee35f1ce31b8e6f2ec9622e65e348d38e"
+    },
+    "projection-one-consumer-case.v03.compact.json": {
+      "bytes": 60156,
+      "full9": [
+        66306,
+        72509850,
+        33024,
+        1,
+        1000,
+        1000,
+        60156,
+        1795736713776789333,
+        1795736713776789333
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/projection-one-consumer-case.v03.compact.json",
+      "sha256": "8b392cebb88812a7405f4f5a077e8beca5786103fdffc1f8c6d2f9a3e4a9afb4"
+    },
+    "test_trusted_feedback_weight_updates.after.py.DATA": {
+      "bytes": 47859,
+      "full9": [
+        66306,
+        72509838,
+        33024,
+        1,
+        1000,
+        1000,
+        47859,
+        1795736608336693515,
+        1795736608336693515
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/test_trusted_feedback_weight_updates.after.py.DATA",
+      "sha256": "c10a304565f6607da918ac2d0c2afa103a9fb39bf07ebac9871fcc473a970fe4"
+    }
+  },
+  "repo_relative_owningtest": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+  "review_or_legal_admission_granted": false,
+  "schema": "private-Phase7-current-target-unattested-consumer-regression/v1",
+  "scope": "One append-only owning-test negative control against existing private target-aware producer/trainer/modal proposal. Not a claim about currently published training or actual production exploit.",
+  "technical_missing_input": "No defined current target formal/review/dependency -> canonical receipt property/tree/source-result expectation mapping. Do not infer IDs or proof authority from commitments or trust booleans."
+}

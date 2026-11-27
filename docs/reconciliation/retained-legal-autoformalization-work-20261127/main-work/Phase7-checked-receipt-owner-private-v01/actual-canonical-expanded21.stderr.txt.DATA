@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-rebased-checked-receipt-expanded21-runner.py.DATA", line 276, in main
+    outcome = run_cases(args.mode, adapter, prior)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-rebased-checked-receipt-expanded21-runner.py.DATA", line 243, in run_cases
+    return {"passes": scope["run"]()}
+                      ^^^^^^^^^^^^^^
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-maintained-checked-receipt-expanded21-controls.py.DATA", line 81, in run
+    case(source.samples.__wrapped__(), patches, change)
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/project/tests/unit/logic/integration/test_trusted_feedback_weight_updates.py", line 1196, in test_checked_current_receipt_gates_both_existing_consumers
+  File "/usr/lib/python3.12/dataclasses.py", line 1581, in replace
+    return obj.__class__(**changes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 18, in __init__
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/project/ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py", line 342, in __post_init__
+    raise ProofReceiptAttestationError(
+ipfs_datasets_py.logic.bridge.proof_receipt_attestation.ProofReceiptAttestationError: underlying status disproved is not conclusive

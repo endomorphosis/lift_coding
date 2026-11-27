@@ -1,0 +1,308 @@
+{
+  "actual_eos_rejection_predicate_reproduced_count": 1,
+  "baseline": {
+    "bytes": 11136,
+    "path": "/tmp/decoder-training-source62-codec-readback-private-v01-vt7J9Uqt/result.json",
+    "sha256": "e3eb7a303bb28b0f15710b59a74b0c99b08f2aea01aa5102af7ff0448b6dad35"
+  },
+  "capacity_receipts": {
+    "TRAIN3": {
+      "bytes": 4836,
+      "path": "/tmp/current-cache-fixed-fit-and-matched-Q3-existing-owner-continuation-private-v01/current-request-source-map-ordering-correction-private-v01/v02-historical-failure-current-Source-separated/actual-current-Source-binding-ae2f82c4a3bd6ae2-v01/actual-TRAIN3-fit-Q3-output-v01/run.output.2.bin",
+      "sha256": "59c4f4de1a0e8183efde725e55fb84333922ccbeea622be5e46c671b189720f7"
+    },
+    "pristine0": {
+      "bytes": 4839,
+      "path": "/tmp/current-cache-fixed-fit-and-matched-Q3-existing-owner-continuation-private-v01/current-request-source-map-ordering-correction-private-v01/v02-historical-failure-current-Source-separated/actual-current-Source-binding-ae2f82c4a3bd6ae2-v01/actual-pristine0-fit-Q3-output-v01/run.output.2.bin",
+      "sha256": "1e2d2eabab0113c0d97c5d3129bc27194b8618ba049d1a536448038ff548794f"
+    }
+  },
+  "causal_mechanism_established": false,
+  "distinct_first_symbols": {
+    "TRAIN3": {
+      "officer": 3
+    },
+    "pristine0": {
+      "covered_officer": 1,
+      "query": 1,
+      "supervisor": 1
+    }
+  },
+  "model_calls": 0,
+  "observed_body_positions_after_strict_wire_obstruction": 4433,
+  "original_codec_owners": {
+    "autoencoder_training_worker.py": {
+      "bytes": 586659,
+      "path": "/tmp/digest-cache-current-at-migration-cohort-private-v01/worker.after.py.DATA",
+      "sha256": "348fe95f15ee03d8039c1171b30d228400416f3a6fa40462f64592139ba54963"
+    },
+    "legal_ir_semantic_metrics.py": {
+      "bytes": 111418,
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/combined-R-A-physical-definition-realization-CAS-preparation-v01/current-Source65-public-codec-consumer-metrics-two-owner-bounded-capture-v01/1-legal_ir_semantic_metrics.py.DATA",
+      "sha256": "b44c482aaf9a96a420c4eb02bb0175cfc99cc14854d02a85347fa3aaf4461c1a"
+    },
+    "legal_span_consumer_binding.py": {
+      "bytes": 58356,
+      "path": "/tmp/decoder-training-packed-envelope-private-v01-0Irsccvs/consumer.before.py.DATA",
+      "sha256": "ff8b61f71280f4c5d1d413feab33d5f9498f3cf560755492eafbbb0348d0bc82"
+    },
+    "training_cycle_inputs.py": {
+      "bytes": 177467,
+      "path": "/tmp/reviewed-tokenizer-pure-structure-cache-private-v01/inputs.after.py.DATA",
+      "sha256": "88125051a7b1d0dcc887f772faa750fa13b8a2141693679a62e2bd5e97e92db3"
+    }
+  },
+  "original_exact_by_arm": {
+    "TRAIN3": 0,
+    "pristine0": 0
+  },
+  "possible_cost_savings_measured": null,
+  "reference_targets_opened": 0,
+  "rows": [
+    {
+      "arms": {
+        "TRAIN3": {
+          "earlier_shape_diagnostic": null,
+          "emitted_body_positions_after_invalid_wire": 883,
+          "first_divergent_token_byte_span": [
+            30,
+            33
+          ],
+          "first_divergent_token_id": 1847,
+          "first_symbol": "officer",
+          "first_symbol_closing_token": 9,
+          "original_body_tokens": 888,
+          "original_eos": false,
+          "original_outcome": "incomplete",
+          "original_parser_called_at_eos": false,
+          "role_array_prefix": {
+            "closed_shape_valid_members": 96,
+            "distinct_closed_members": 7,
+            "first_duplicate_closed_member_token": 88,
+            "most_repeated_member_count": 88
+          },
+          "strict_wire_witness": {
+            "body_token_position": 5,
+            "first_mismatching_byte_zero_based": 21,
+            "issue": "first_role_key_is_not_the_canonical_roles_member",
+            "prefix_sha256": "12e86dcabf8e0e01957cc184da5d2627198e4cee80aae1ebf638ce1dc48e3fcd"
+          }
+        },
+        "pristine0": {
+          "earlier_shape_diagnostic": {
+            "additional_body_tokens": 869,
+            "body_token_position": 20,
+            "byte_end": 78,
+            "earlier_than_retained_repeat_signal": true,
+            "issue": "closed_argument_role_violates_shape"
+          },
+          "emitted_body_positions_after_invalid_wire": 884,
+          "first_divergent_token_byte_span": [
+            30,
+            37
+          ],
+          "first_divergent_token_id": 20804,
+          "first_symbol": "covered_officer",
+          "first_symbol_closing_token": 10,
+          "original_body_tokens": 889,
+          "original_eos": false,
+          "original_outcome": "incomplete",
+          "original_parser_called_at_eos": false,
+          "role_array_prefix": {
+            "closed_shape_valid_members": 0,
+            "distinct_closed_members": 0,
+            "first_duplicate_closed_member_token": null,
+            "most_repeated_member_count": 0
+          },
+          "strict_wire_witness": {
+            "body_token_position": 5,
+            "first_mismatching_byte_zero_based": 21,
+            "issue": "first_role_key_is_not_the_canonical_roles_member",
+            "prefix_sha256": "12e86dcabf8e0e01957cc184da5d2627198e4cee80aae1ebf638ce1dc48e3fcd"
+          }
+        }
+      },
+      "common_body_token_ids": [
+        4913,
+        14479,
+        43061,
+        66582,
+        18785,
+        3252
+      ],
+      "first_divergent_body_token": 7,
+      "row": "reviewed:fixture:rich-mixed-q/unit-1",
+      "shared_native_frame_sha256": "6a1d270d07a76a2d51d2a2aebc8c3d566b486f6498b313d71f916e6c00d4ce28",
+      "shared_native_frame_tokens": 727,
+      "shared_prefix_bytes": 30,
+      "shared_prefix_sha256": "790ae7cf1871dfcc6f2eae2319f510e5f8cd14d9a7ce916e0c801a9788f7338d"
+    },
+    {
+      "arms": {
+        "TRAIN3": {
+          "earlier_shape_diagnostic": {
+            "additional_body_tokens": 0,
+            "body_token_position": 27,
+            "byte_end": 100,
+            "issue": "closed_top_level_object_missing_required_fields"
+          },
+          "emitted_body_positions_after_invalid_wire": 22,
+          "first_divergent_token_byte_span": [
+            30,
+            33
+          ],
+          "first_divergent_token_id": 1847,
+          "first_symbol": "officer",
+          "first_symbol_closing_token": 9,
+          "original_body_tokens": 27,
+          "original_eos": true,
+          "original_outcome": "invalid",
+          "original_parser_called_at_eos": true,
+          "role_array_prefix": {
+            "closed_shape_valid_members": 2,
+            "distinct_closed_members": 2,
+            "first_duplicate_closed_member_token": null,
+            "most_repeated_member_count": 1
+          },
+          "strict_wire_witness": {
+            "body_token_position": 5,
+            "first_mismatching_byte_zero_based": 21,
+            "issue": "first_role_key_is_not_the_canonical_roles_member",
+            "prefix_sha256": "12e86dcabf8e0e01957cc184da5d2627198e4cee80aae1ebf638ce1dc48e3fcd"
+          }
+        },
+        "pristine0": {
+          "earlier_shape_diagnostic": {
+            "additional_body_tokens": 877,
+            "body_token_position": 12,
+            "byte_end": 53,
+            "issue": "closed_argument_role_violates_shape"
+          },
+          "emitted_body_positions_after_invalid_wire": 884,
+          "first_divergent_token_byte_span": [
+            30,
+            35
+          ],
+          "first_divergent_token_id": 1631,
+          "first_symbol": "query",
+          "first_symbol_closing_token": 8,
+          "original_body_tokens": 889,
+          "original_eos": false,
+          "original_outcome": "incomplete",
+          "original_parser_called_at_eos": false,
+          "role_array_prefix": {
+            "closed_shape_valid_members": 0,
+            "distinct_closed_members": 0,
+            "first_duplicate_closed_member_token": null,
+            "most_repeated_member_count": 0
+          },
+          "strict_wire_witness": {
+            "body_token_position": 5,
+            "first_mismatching_byte_zero_based": 21,
+            "issue": "first_role_key_is_not_the_canonical_roles_member",
+            "prefix_sha256": "12e86dcabf8e0e01957cc184da5d2627198e4cee80aae1ebf638ce1dc48e3fcd"
+          }
+        }
+      },
+      "common_body_token_ids": [
+        4913,
+        14479,
+        43061,
+        66582,
+        18785,
+        3252
+      ],
+      "first_divergent_body_token": 7,
+      "row": "reviewed:fixture:rich-mixed-q/unit-2",
+      "shared_native_frame_sha256": "c0f15c36f5691d97087ba07edd4c64ab61ee5961f570fb7dbcb07aa1cf07eb35",
+      "shared_native_frame_tokens": 732,
+      "shared_prefix_bytes": 30,
+      "shared_prefix_sha256": "790ae7cf1871dfcc6f2eae2319f510e5f8cd14d9a7ce916e0c801a9788f7338d"
+    },
+    {
+      "arms": {
+        "TRAIN3": {
+          "earlier_shape_diagnostic": {
+            "additional_body_tokens": 860,
+            "body_token_position": 21,
+            "byte_end": 93,
+            "earlier_than_retained_repeat_signal": true,
+            "issue": "closed_argument_role_violates_shape"
+          },
+          "emitted_body_positions_after_invalid_wire": 876,
+          "first_divergent_token_byte_span": [
+            30,
+            33
+          ],
+          "first_divergent_token_id": 1847,
+          "first_symbol": "officer",
+          "first_symbol_closing_token": 9,
+          "original_body_tokens": 881,
+          "original_eos": false,
+          "original_outcome": "incomplete",
+          "original_parser_called_at_eos": false,
+          "role_array_prefix": {
+            "closed_shape_valid_members": 0,
+            "distinct_closed_members": 0,
+            "first_duplicate_closed_member_token": null,
+            "most_repeated_member_count": 0
+          },
+          "strict_wire_witness": {
+            "body_token_position": 5,
+            "first_mismatching_byte_zero_based": 21,
+            "issue": "first_role_key_is_not_the_canonical_roles_member",
+            "prefix_sha256": "12e86dcabf8e0e01957cc184da5d2627198e4cee80aae1ebf638ce1dc48e3fcd"
+          }
+        },
+        "pristine0": {
+          "earlier_shape_diagnostic": null,
+          "emitted_body_positions_after_invalid_wire": 884,
+          "first_divergent_token_byte_span": [
+            30,
+            33
+          ],
+          "first_divergent_token_id": 12776,
+          "first_symbol": "supervisor",
+          "first_symbol_closing_token": 9,
+          "original_body_tokens": 889,
+          "original_eos": false,
+          "original_outcome": "incomplete",
+          "original_parser_called_at_eos": false,
+          "role_array_prefix": {
+            "closed_shape_valid_members": 90,
+            "distinct_closed_members": 5,
+            "first_duplicate_closed_member_token": 64,
+            "most_repeated_member_count": 18
+          },
+          "strict_wire_witness": {
+            "body_token_position": 5,
+            "first_mismatching_byte_zero_based": 21,
+            "issue": "first_role_key_is_not_the_canonical_roles_member",
+            "prefix_sha256": "12e86dcabf8e0e01957cc184da5d2627198e4cee80aae1ebf638ce1dc48e3fcd"
+          }
+        }
+      },
+      "common_body_token_ids": [
+        4913,
+        14479,
+        43061,
+        66582,
+        18785,
+        3252
+      ],
+      "first_divergent_body_token": 7,
+      "row": "reviewed:fixture:rich-mixed-q/unit-3",
+      "shared_native_frame_sha256": "18cdf7c75d1291ca9fc38a5a240efc66dbb855623e8bf7880946c136dbacc64a",
+      "shared_native_frame_tokens": 728,
+      "shared_prefix_bytes": 30,
+      "shared_prefix_sha256": "790ae7cf1871dfcc6f2eae2319f510e5f8cd14d9a7ce916e0c801a9788f7338d"
+    }
+  ],
+  "schema": "retained-source62-role-opening-and-strict-wire-diagnostic/v1",
+  "semantic_fidelity_evaluated": false,
+  "shared_opening_tokens_across_rows": {
+    "TRAIN3": 11,
+    "pristine0": 6
+  },
+  "timed_out_streams_with_new_retrospective_wire_witness": 5
+}

@@ -1,0 +1,490 @@
+"""Apply a shared codec-prefix diagnostic to two independently retained decoders."""
+
+from hashlib import sha256
+import json
+from math import prod
+from pathlib import Path
+import sys
+import unittest
+
+
+TMP = Path("/tmp")
+QWEN = TMP / "decoder-training-source62-codec-readback-private-v01-vt7J9Uqt"
+T5 = TMP / "decoder-training-stage-d-retained-t5-budget-private-v01-Ih3IAtdq"
+QWEN_SOURCE = (QWEN / "readback.py", 15566, "18d2288f6066ac1d0bc97cd6d4ebb2b7844c2000b2b5ec7f03af30ef666cd749")
+QWEN_RESULT = (QWEN / "result.json", 11136, "e3eb7a303bb28b0f15710b59a74b0c99b08f2aea01aa5102af7ff0448b6dad35")
+T5_SOURCE = (T5 / "readback.py", 10032, "8834ffd7e5b26107c29e01fdc59b67546a6e98d5ea78b2509f8bb6aa6ceb963e")
+T5_CAPACITY = (T5 / "initial.stdout", 4800, "ad3bd7d649e50843f58bbb3d83ac1e6d20fedeaab6cf1836a7a160e86d8e1c42")
+T5_INPUTS_PIN = "88125051a7b1d0dcc887f772faa750fa13b8a2141693679a62e2bd5e97e92db3"
+T5_CODEC = "complete-reviewed-norm-json/v2"
+T5_PIPELINE_PIN = "6bcf9f696dc5782fc74f5accd367044f8e931a803bb9328c38ca20787fe43500"
+
+
+def digest(raw):
+    return sha256(raw).hexdigest()
+
+
+def read(path, size, expected):
+    body = Path(path).read_bytes()
+    if (len(body), digest(body)) != (size, expected):
+        raise ValueError(f"retained input differs from its recorded commitment: {path}")
+    return body
+
+
+def ref(entry):
+    path, size, pin = entry
+    return {"path": str(path), "bytes": size, "sha256": pin}
+
+
+def read_json(reference):
+    return json.loads(read(reference["path"], reference["bytes"], reference["sha256"]))
+
+
+def load(entry):
+    path = str(entry[0])
+    namespace = {"__name__": "_retained_archival_analysis", "__file__": path}
+    exec(compile(read(*entry), path, "exec"), namespace)
+    return namespace
+
+
+def exact_t5_body(ids, symbols, added, codec, byte_alphabet):
+    if ids[0] != codec["bos_token_id"] or codec["eos_token_id"] in ids[1:]:
+        raise ValueError("expected an original T5 cap trace without EOS")
+    if any(i in added or i not in symbols for i in ids[1:]):
+        raise ValueError("unselected control or added token in a T5 greedy body")
+    # This path binds only the observed ordinary tokens in the exact archived asset.
+    return bytes(byte_alphabet[char] for i in ids[1:] for char in symbols[i])
+
+
+def analyze_t5(qwen, t5):
+    budget = json.loads(read(*T5_CAPACITY))
+    terminal = read_json(budget["assessment_terminal"])
+    close = terminal["evaluation_process_close"]
+    assert t5["digest"](t5["wire"](close)) == terminal["evaluation_process_close_sha256"]
+    assert close["fixture_receipt"] == budget["assessment_fixture"]
+    assert close["root_terminal"]["returncode"] == 0 and close["lifecycle"]["cleanup_confirmed"] is True
+    assert terminal["fixture_only"] and not terminal["separately_observed_paid_attempts"]
+    assessment = read_json(close["fixture_receipt"])
+    assert assessment["fixture_only"] and assessment["actual_statutory_admission"] is False
+    assert assessment["source_pins"]["inputs"] == T5_INPUTS_PIN
+    assert assessment["prior_independent_terminal"] == terminal["prior_independent_terminal"] == budget["dispatch_terminal"]
+    dispatch = read_json(budget["dispatch_terminal"])
+    assert dispatch["process_close"]["fixture_receipt"] == budget["dispatch_fixture"]
+    train = read_json(budget["dispatch_fixture"])
+    assert train["fixture_only"] is True and train["scripted_token_support_and_draws"] is True
+    configuration = train["configuration"]
+    assert configuration["architecture"] == "encoder_decoder"
+    assert t5["digest"](t5["wire"](configuration)) == train["configuration_sha256"] == assessment["configuration_sha256"]
+    assert budget["configuration_sha256"] == assessment["configuration_sha256"]
+    codec = configuration["tokenizer"]
+    assert codec["pipeline_sha256"] == T5_PIPELINE_PIN and codec["vocab_size"] == budget["tokenizer_vocab_size"]
+    tokenizer = read_json(budget["tokenizer"])
+    alphabet = t5["byte_alphabet"]()
+    _, added, symbols = t5["multi_byte_candidates"](tokenizer, codec["bos_token_id"], codec["eos_token_id"])
+    assert budget["tokenizer"] in train["asset_refs"]
+    fields, role_checker = qwen["selected_contracts"]({
+        path: qwen["read"](path, size, expected) for path, size, expected in qwen["PRIORS"][2:]})
+    cap = assessment["max_output_tokens_including_bos"]
+    assert cap == budget["archived_output_cap"] == 16
+    outputs = {}
+    selected_body_ids = set()
+    for arm, bundle in assessment["arms"].items():
+        loader = bundle["assessment_load"]
+        assert budget["tokenizer"] in loader["artifacts"] and loader["restore_performed"] is True
+        assert loader["device"] == "cpu" and loader["dtype"] == "float32"
+        artifact = bundle["evaluation_artifact"]["metadata"]["source_generation_observation"]
+        receipt = artifact["last_call"]["input_receipt"]
+        assert receipt["target_access_performed"] is False and receipt["tokenizer_contract"] == codec
+        assert artifact["input_commitment"]["backend_identity"]["target_codec"] == T5_CODEC
+        assert artifact["last_call"]["raw_generation_outputs"] == bundle["generated_rows"]
+        generated = []
+        for row in bundle["generated_rows"]:
+            ids = row["generated_token_ids"]
+            assert len(ids) == cap and row["reason"] == "output_limit_without_eos" and row["outcome"] == "incomplete"
+            assert row["candidate"] is row["generated_text"] is None
+            body = exact_t5_body(ids, symbols, added, codec, alphabet)
+            assert len(body) == len(ids) - 1 and len(set(body)) == len(set(ids[1:])) == 1
+            selected_body_ids.update(ids[1:])
+            # Each observed T5 body token in this fixture is one ASCII byte.
+            result = qwen["row_result"](row, list(range(1, len(body) + 1)), body, False, fields, role_checker, None)
+            assert result["prefix_obstruction_witness"]["body_token_position"] == 1
+            generated.append(result)
+        assert len(generated) == 3 and len(bundle["native_forwards"]) == 45
+        assert bundle["native_forwards_by_row"] == {row["row"]: 15 for row in generated}
+        prefixes = [row["generated_token_ids"][:step] for row in bundle["generated_rows"]
+                    for step in range(1, cap)]
+        traces = bundle["native_forwards"]
+        assert all(trace["decoder_ids"] == prefix and trace["logit_shape"] == [1, len(prefix), codec["vocab_size"]]
+                   for trace, prefix in zip(traces, prefixes, strict=True))
+        outputs[arm] = {"rows": generated, "native_forwards": len(prefixes),
+                        "observed_dense_logit_elements": sum(prod(trace["logit_shape"]) for trace in traces),
+                        "observed_dense_logit_elements_after_first_obstruction": sum(
+                            prod(trace["logit_shape"]) for trace in traces if len(trace["decoder_ids"]) > 1)}
+    assert len(outputs) == 2 and selected_body_ids == {6, 92}
+    positive = []
+    for tape, stored in zip(train["completed_rollouts"], budget["observed_train_completion_control"], strict=True):
+        row, = tape["rows"]
+        ids = [sample["sample"]["output_column"] for sample in row["samples"]]
+        assert ids[-1] == codec["eos_token_id"]
+        emitted = "".join(added[index]["content"] for index in ids[:-1]).encode("ascii")
+        assert (len(emitted), digest(emitted)) == (stored["bytes"], stored["canonical_sha256"])
+        assert digest(emitted) == row["close"]["candidate_sha256"]
+        assert set(json.loads(emitted)) == fields
+        _, problem = qwen["structural_prefix"](emitted.decode("ascii"), fields, role_checker)
+        assert problem is None
+        positive.append({"raw_bytes": len(emitted), "digest": digest(emitted),
+                         "provenance": "retained sampled TRAIN completion with fixture-selected support"})
+    assert len(positive) == 2
+    lower_bounds = [row["tokens_with_bos_eos_lower_bound"] for row in budget["retained_reference_rows"]]
+    assert len(lower_bounds) == 3 and all(x > budget["archived_declared_backend_window"] > cap for x in lower_bounds)
+    return {"assessment_fixture": budget["assessment_fixture"], "assessment_terminal": budget["assessment_terminal"],
+            "capacity_readback": ref(T5_CAPACITY), "tokenizer_asset": budget["tokenizer"],
+            "original_tokenizer_pipeline_sha256": codec["pipeline_sha256"],
+            "output_codec": T5_CODEC, "original_assessment_operation": "CPU FP32 greedy over signed fictional sources",
+            "arms": outputs, "observed_ordinary_body_pieces": {str(i): symbols[i] for i in sorted(selected_body_ids)},
+            "retained_other_phase_positive_controls": positive,
+            "observed_complete_greedy_rows": 0, "original_output_token_cap_including_BOS": cap,
+            "original_declared_backend_window": budget["archived_declared_backend_window"],
+            "lower_bounds_for_exact_canonical_references_including_BOS_and_EOS": lower_bounds}
+
+
+def report():
+    qwen, t5 = load(QWEN_SOURCE), load(T5_SOURCE)
+    earlier = json.loads(read(*QWEN_RESULT))
+    assert earlier["fixture_only"] and earlier["counts"]["original_exact_by_arm"] == {"TRAIN3": 0, "pristine0": 0}
+    t5_result = analyze_t5(qwen, t5)
+    qwen_rows = [row for rows in earlier["arms"].values() for row in rows]
+    assert len(qwen_rows) == 6
+    return {"schema": "private-cross-decoder-codec-prefix-readback/v1", "fixture_only": True,
+            "method": "same conservative strict-object and closed-field analysis over separately authenticated output bodies",
+            "retained_T5": t5_result, "retained_Qwen2": {
+                "analysis": ref(QWEN_RESULT), "original_tokenizer_pipeline_sha256": earlier["exact_original_pipeline_sha256"],
+                "original_stop_reasons": [row["original_stop_reason"] for row in qwen_rows],
+                "checked_prefix_positions_per_stream": [None if row["prefix_obstruction_witness"] is None else
+                    row["prefix_obstruction_witness"]["body_token_position"] for row in qwen_rows],
+                "output_codec": earlier["target_codec"], "original_exact_by_arm": earlier["counts"]["original_exact_by_arm"],
+            },
+            "shared_generated_structure_probe_validated": True, "matched_architecture_comparison": False,
+            "runtime_or_policy_or_checkpoint_modified": False, "current_heldout_targets_opened": 0,
+            "fresh_model_calls": 0, "wall_or_compute_savings_measured": None}
+
+
+class Controls(unittest.TestCase):
+    def test_both_archives_and_distinct_policy_controls(self):
+        d = report()
+        t5 = d["retained_T5"]
+        self.assertEqual(t5["observed_ordinary_body_pieces"], {"6": "#", "92": "y"})
+        self.assertEqual(sum(x["native_forwards"] for x in t5["arms"].values()), 90)
+        self.assertEqual(sum(x["observed_dense_logit_elements"] for x in t5["arms"].values()), 190080)
+        self.assertEqual(sum(x["observed_dense_logit_elements_after_first_obstruction"]
+                             for x in t5["arms"].values()), 188496)
+        self.assertEqual(sum(row["prefix_obstruction_witness"]["additional_body_tokens"]
+                             for x in t5["arms"].values() for row in x["rows"]), 84)
+        self.assertEqual(t5["lower_bounds_for_exact_canonical_references_including_BOS_and_EOS"], [2845, 7011, 9021])
+        self.assertTrue(all(x["raw_bytes"] == 5375 for x in t5["retained_other_phase_positive_controls"]))
+        self.assertFalse(d["matched_architecture_comparison"])
+
+    def test_refuse_added_token_or_changed_original_framing(self):
+        config = {"bos_token_id": 1, "eos_token_id": 0}
+        for ids, added in (([2, 6], {}), ([1, 6, 0], {}), ([1, 6], {6: "#"})):
+            with self.assertRaises(ValueError):
+                exact_t5_body(ids, {6: "#"}, added, config, {"#": 35})
+
+
+if __name__ == "__main__":
+    if sys.argv[1:] == ["--check"]:
+        sys.argv[:] = sys.argv[:1]
+        unittest.main(verbosity=2)
+    else:
+        assert len(sys.argv) == 1
+        print(json.dumps(report(), sort_keys=True, indent=2, ensure_ascii=True))
+
+
+APPEND_ONLY_MONITOR_SCHEMA = "private-source-only-append-stable-codec-prefix-monitor/v2"
+
+
+STRICT_ROLE_ORDER_WIRE_PROFILE = "complete-reviewed-norm-digest-omitted-json/v1"
+_STRICT_ROLE_FIELDS = frozenset({
+    "argument_roles", "assumptions", "cross_references", "definition_uses",
+    "governing_context", "interpretation_id", "profile", "source_binding", "typed_expression",
+})
+_FIRST_ROLE_OBJECT = b'{"argument_roles":[{'
+_CANONICAL_FIRST_ROLE_MEMBER = _FIRST_ROLE_OBJECT + b'"roles":'
+
+
+class AppendOnlyCodecPrefixMonitor:
+    """Observe stable, raw payload bytes after the original framing is removed.
+
+    The selected tokenizer must authorize byte concatenation. This monitor is
+    independent of model/architecture internals. A diagnostic budget or decode
+    uncertainty disables the monitor and leaves the ordinary decoder in charge.
+    The optional strict profile requires the original canonical serializer,
+    exact role shape and a byte-stable tokenizer path, verified by the caller.
+    """
+
+    def __init__(self, structural_prefix, fields, role_validator, *, max_body_bytes, max_inspected_bytes,
+                 wire_profile=None):
+        from codecs import getincrementaldecoder
+
+        if type(max_body_bytes) is not int or max_body_bytes <= 0:
+            raise ValueError("positive payload byte limit required")
+        if type(max_inspected_bytes) is not int or max_inspected_bytes <= 0:
+            raise ValueError("positive cumulative prefix-inspection byte limit required")
+        self._check = structural_prefix
+        self._fields = frozenset(fields)
+        if wire_profile is not None and (type(wire_profile) is not str
+                or wire_profile != STRICT_ROLE_ORDER_WIRE_PROFILE or self._fields != _STRICT_ROLE_FIELDS):
+            raise ValueError("strict wire profile requires its original nine fields and exact codec")
+        self._wire_profile = wire_profile
+        self._strict_role_offset = 0 if wire_profile is not None else None
+        self._strict_role_bytes = 0
+        self._role_validator = role_validator
+        self._max_body_bytes = max_body_bytes
+        self._max_inspected_bytes = max_inspected_bytes
+        self._decoder = getincrementaldecoder("utf-8")("strict")
+        self._parts = []
+        self._hash = sha256()
+        self._count = self._bytes = self._inspected = self._calls = 0
+        self._depth = 0
+        self._started = self._quoted = self._escaped = self._value_pending = False
+        self._last_top_string = None
+        self._previous_significant = None
+        self._top_string_chars = None
+        self._argument_roles_array = False
+        self._role_chars = None
+        self._role_prechecks = self._role_bytes = 0
+        self._status = "watching"
+        self._obstruction = None
+
+    def _check_strict_first_role(self, emitted):
+        offset = self._strict_role_offset
+        if offset is None:
+            return
+        # An undecoded suffix cannot provide the opted-in stable ASCII witness.
+        if self._decoder.getstate()[0]:
+            self._strict_role_offset = None
+            return
+        expected = _CANONICAL_FIRST_ROLE_MEMBER
+        for byte in emitted[:len(expected) - offset]:
+            if self._strict_role_bytes + self._role_bytes + self._inspected >= self._max_inspected_bytes:
+                self._status = "diagnostic_inspection_budget_exhausted"
+                return
+            self._strict_role_bytes += 1
+            if byte != expected[offset]:
+                self._strict_role_offset = None
+                if offset >= len(_FIRST_ROLE_OBJECT):
+                    self._obstruction = {
+                        "issue": "first_role_key_is_not_the_canonical_roles_member",
+                        "body_token_position": self._count,
+                        "byte_end": offset + 1,
+                        "prefix_sha256": self._hash.hexdigest(),
+                    }
+                    self._status = "irreversible_codec_prefix"
+                return
+            offset += 1
+        self._strict_role_offset = offset if offset < len(expected) else None
+
+
+    def _closed_role_needs_full_check(self):
+        """A valid direct role cannot itself introduce a new shape obstruction."""
+        text = "".join(self._role_chars)
+        size = len(text.encode("utf-8"))
+        if self._strict_role_bytes + self._role_bytes + self._inspected + size > self._max_inspected_bytes:
+            return True
+        self._role_bytes += size
+        self._role_prechecks += 1
+        try:
+            role = json.loads(text)
+            return self._role_validator({"argument_roles": [role]}) is not True
+        except (ValueError, RecursionError):
+            return True
+
+    def _inspect_boundary(self, text):
+        """Schedule only boundaries the held obstruction classifier can interpret."""
+        inspect = False
+        for char in text:
+            if self._role_chars is not None:
+                self._role_chars.append(char)
+            if self._quoted:
+                if self._top_string_chars is not None:
+                    self._top_string_chars.append(char)
+                if self._escaped:
+                    self._escaped = False
+                elif char == "\\":
+                    self._escaped = True
+                elif char == '"':
+                    self._quoted = False
+                    self._previous_significant = '"'
+                    inspect |= self._depth == 1 or (self._depth == 2 and self._argument_roles_array)
+                    if self._top_string_chars is not None:
+                        try:
+                            self._last_top_string = json.loads("".join(self._top_string_chars))
+                        except ValueError:
+                            self._last_top_string = None
+                        self._top_string_chars = None
+                continue
+            if char in " \t\r\n":
+                continue
+            depth = self._depth
+            if not self._started:
+                inspect = True
+            if self._value_pending:
+                # A non-array at argument_roles is itself an obstruction.
+                if self._last_top_string == "argument_roles":
+                    inspect = True
+                    self._argument_roles_array = char == "["
+                self._last_top_string = None
+            if char in "]}":
+                if depth <= 1 or (self._argument_roles_array and depth == 2):
+                    inspect = True
+                elif self._argument_roles_array and depth == 3:
+                    inspect |= (char != "}" or self._role_chars is None
+                                or (not inspect and self._closed_role_needs_full_check()))
+                    self._role_chars = None
+                if depth <= 2:
+                    self._argument_roles_array = False
+                self._depth = max(0, depth - 1)
+            elif char in "{[":
+                if self._argument_roles_array and depth == 2 and char == "{":
+                    self._role_chars = [char]
+                self._depth += 1
+            elif self._argument_roles_array and depth == 2 and char != '"':
+                # An open scalar can become a complete JSON value in this token
+                # even before a comma or closing bracket is emitted.
+                if char != "," or self._previous_significant not in ("}", '"', "]"):
+                    inspect = True
+            self._started = True
+            self._previous_significant = char
+            self._value_pending = char == ":" and depth == 1
+            self._quoted = char == '"'
+            if self._quoted and depth == 1:
+                self._top_string_chars = ['"']
+        return inspect
+
+    def observe(self, emitted):
+        """Consume one tokenizer output piece excluding separately handled BOS/EOS."""
+        if type(emitted) is not bytes or not emitted:
+            raise ValueError("one nonempty token of stable raw bytes required")
+        if self._status != "watching":
+            return self._status
+        if self._bytes + len(emitted) > self._max_body_bytes:
+            self._status = "diagnostic_body_budget_exhausted"
+            return self._status
+        self._bytes += len(emitted)
+        self._count += 1
+        self._hash.update(emitted)
+        try:
+            stable = self._decoder.decode(emitted, final=False)
+        except UnicodeDecodeError:
+            self._status = "stable_utf8_unavailable"
+            return self._status
+        self._check_strict_first_role(emitted)
+        if self._status != "watching":
+            return self._status
+        self._parts.append(stable)
+        if not self._inspect_boundary(stable):
+            return self._status
+        if self._strict_role_bytes + self._role_bytes + self._inspected + self._bytes > self._max_inspected_bytes:
+            self._status = "diagnostic_inspection_budget_exhausted"
+            return self._status
+
+        # Reuse the original codec obstruction classifier. The single-pass
+        # boundary scanner selects occasions to call it and never sets a stop.
+        self._calls += 1
+        self._inspected += self._bytes
+        prefix = "".join(self._parts)
+        try:
+            _, problem = self._check(prefix, self._fields, self._role_validator)
+        except (ValueError, RecursionError):
+            self._status = "codec_inspection_unavailable"
+            return self._status
+        if problem is not None:
+            reason, end = problem
+            self._obstruction = {"issue": reason, "body_token_position": self._count,
+                                 "byte_end": len(prefix[:end].encode("utf-8")),
+                                 "prefix_sha256": self._hash.hexdigest()}
+            self._status = "irreversible_codec_prefix"
+        return self._status
+
+    def result(self):
+        result = {"status": self._status, "charged_inspection_bytes": self._inspected,
+                "role_prechecks": self._role_prechecks, "charged_role_precheck_bytes": self._role_bytes,
+                "inspected_prefixes": self._calls, "consumed_body_tokens": self._count,
+                "consumed_body_bytes": self._bytes,
+                "obstruction": None if self._obstruction is None else dict(self._obstruction)}
+        if self._wire_profile is not None:
+            result.update(wire_profile=self._wire_profile,
+                          charged_strict_role_prefix_bytes=self._strict_role_bytes)
+        return result
+
+
+def verify_append_only_monitor():
+    """Replay immutable native-output pieces through the same selected codec parser."""
+    qwen, t5 = load(QWEN_SOURCE), load(T5_SOURCE)
+    observations = {}
+    original = qwen["row_result"]
+    lane = "retained_Qwen2"
+
+    def tracked(row, ends, body, eos, fields, role_shape, periodic):
+        retained = original(row, ends, body, eos, fields, role_shape, periodic)
+        monitor = AppendOnlyCodecPrefixMonitor(qwen["structural_prefix"], fields, role_shape,
+            max_body_bytes=max(1, len(body)), max_inspected_bytes=65536)
+        start = 0
+        for end in ends:
+            status = monitor.observe(body[start:end])
+            start = end
+            if status != "watching":
+                break
+        result = monitor.result()
+        new = result["obstruction"]
+        prior = retained["prefix_obstruction_witness"]
+        if new is not None:
+            assert prior is not None and prior["issue"] == new["issue"] and prior["byte_end"] == new["byte_end"]
+            assert new["body_token_position"] >= prior["body_token_position"]
+        observations.setdefault(lane, []).append({"row": row["id"], "original_body_tokens": len(ends),
+            "original_EOS": eos, "original_outcome": retained["status"], "original_body_sha256": retained["body_sha256"],
+            "prior_prefix_witness": prior, "monitor": result, "later_body_tokens_in_original_if_stop_signalled":
+                None if new is None else len(ends) - new["body_token_position"]})
+        return retained
+
+    # The observer receives parser-verified literal output from each retained
+    # source-only route. It cannot touch weights, targets or token decoding.
+    qwen["row_result"] = tracked
+    qwen_bound = qwen["diagnostic"]()
+    assert qwen_bound == json.loads(read(*QWEN_RESULT))
+    lane = "retained_T5"
+    t5_bound = analyze_t5(qwen, t5)
+    budget = json.loads(read(*T5_CAPACITY))
+    training = read_json(budget["dispatch_fixture"])
+    tokenizer = read_json(budget["tokenizer"])
+    codec = training["configuration"]["tokenizer"]
+    _, added, _ = t5["multi_byte_candidates"](tokenizer, codec["bos_token_id"], codec["eos_token_id"])
+    fields, role_shape = qwen["selected_contracts"]({
+        path: qwen["read"](path, size, pin) for path, size, pin in qwen["PRIORS"][2:]})
+    positives = []
+    for tape, known in zip(training["completed_rollouts"], t5_bound["retained_other_phase_positive_controls"], strict=True):
+        row, = tape["rows"]
+        columns = [sample["sample"]["output_column"] for sample in row["samples"]]
+        assert columns.pop() == codec["eos_token_id"]
+        assert all(added[column]["special"] is False for column in columns)
+        chunks = tuple(added[column]["content"].encode("ascii") for column in columns)
+        body = b"".join(chunks)
+        assert (len(body), digest(body)) == (known["raw_bytes"], known["digest"])
+        monitor = AppendOnlyCodecPrefixMonitor(qwen["structural_prefix"], fields, role_shape,
+            max_body_bytes=len(body), max_inspected_bytes=65536)
+        assert all(monitor.observe(piece) == "watching" for piece in chunks)
+        positives.append({"raw_bytes": len(body), "original_body_tokens": len(chunks),
+                          "sha256": digest(body), "monitor": monitor.result()})
+    summary = {}
+    for name, inspected in observations.items():
+        assert len(inspected) == 6
+        stopped = [row for row in inspected if row["monitor"]["obstruction"]]
+        summary[name] = {"original_output_streams": len(inspected), "irreversible_outputs": len(stopped),
+            "later_body_tokens": sum(row["later_body_tokens_in_original_if_stop_signalled"] for row in stopped),
+            "EOS_positions_after_obstruction": sum(row["original_EOS"] for row in stopped)}
+    return {"schema": APPEND_ONLY_MONITOR_SCHEMA, "bound_historical_replay": observations,
+            "summary": summary, "retained_other_phase_accepted_structural_controls": positives,
+            "original_heldout_exact": {"Qwen2": qwen_bound["counts"]["original_exact_by_arm"],
+                                       "T5": {arm: 0 for arm in t5_bound["arms"]}},
+            "model_calls": 0, "targets_opened": 0, "new_assessments": 0, "runtime_integration_selected": False,
+            "wall_or_compute_savings_measured": None, "convergence_measured": False, "dispatch_authority": False}

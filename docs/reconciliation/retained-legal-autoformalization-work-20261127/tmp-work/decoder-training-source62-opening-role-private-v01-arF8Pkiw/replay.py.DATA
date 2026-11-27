@@ -1,0 +1,307 @@
+"""Read the first varying output choice from the retained paired Qwen generation."""
+import ast
+from bisect import bisect_left
+from collections import Counter
+from hashlib import sha256
+import json
+from pathlib import Path
+
+HERE=Path(__file__).resolve().parent
+ROOT=HERE.parent
+OLDER=ROOT/'decoder-training-source62-codec-readback-private-v01-vt7J9Uqt'
+DRIVER=OLDER/'readback.py'
+OLD_RESULT=OLDER/'result.json'
+PREFIX=b'{"argument_roles":[{"symbol":'
+ARRAY=b'{"argument_roles":['
+ARMS=('pristine0','TRAIN3')
+JSON=json.JSONDecoder()
+PRIOR=(11136,'e3eb7a303bb28b0f15710b59a74b0c99b08f2aea01aa5102af7ff0448b6dad35')
+DRIVER_PIN=(15566,'18d2288f6066ac1d0bc97cd6d4ebb2b7844c2000b2b5ec7f03af30ef666cd749')
+
+
+def ref(path,data):
+    return dict(path=str(path),bytes=len(data),sha256=sha256(data).hexdigest())
+
+
+def exact(path, pin):
+    data=path.read_bytes()
+    claim=ref(path,data)
+    assert (claim['bytes'],claim['sha256'])==pin,path
+    return data
+
+
+def read_ref(reference):
+    return json.loads(exact(Path(reference['path']),(reference['bytes'],reference['sha256'])))
+
+
+def base_tokens(row,eos):
+    tokens=row['generated_token_ids']
+    return tuple(tokens[1:-1] if eos else tokens[1:])
+
+
+def common_tokens(*outputs):
+    return sum(1 for _ in common_prefix(*outputs))
+
+
+def common_prefix(*outputs):
+    for tokens in zip(*outputs):
+        if len(set(tokens))!=1:
+            return
+        yield tokens[0]
+
+
+def position(ends, byte_end):
+    assert type(byte_end) is int and ends and 0 < byte_end <= ends[-1]
+    return bisect_left(ends,byte_end)+1
+
+
+def skip_space(text,index):
+    while index < len(text) and text[index] in ' \r\n\t':
+        index += 1
+    return index
+
+
+def closed_roles(text, validate):
+    """Parse closed direct role objects in the original leading array."""
+    assert text.startswith(ARRAY.decode('ascii'))
+    index=len(ARRAY)
+    rows=[]
+    while index < len(text):
+        index=skip_space(text,index)
+        try:
+            shape,end=JSON.raw_decode(text,index)
+        except json.JSONDecodeError:
+            break
+        if not validate({'argument_roles':[shape]}):
+            break
+        rows.append((shape,end))
+        next_at=skip_space(text,end)
+        if text[next_at:next_at+1]!=',':
+            break
+        index=next_at+1
+    return rows
+
+
+def decode_opening(row, ends, body, eos, validate, original):
+    tokens=base_tokens(row,eos)
+    assert len(tokens)==len(ends) and ends[-1]==len(body)
+    assert body.startswith(PREFIX+b'"')
+    text=body.decode('utf-8',errors='strict')
+    name, symbol_end=JSON.raw_decode(text,len(PREFIX))
+    assert type(name) is str and name
+    symbol_close=len(text[:symbol_end].encode('utf-8'))
+    first_content_start=len(PREFIX)+1
+    roles=closed_roles(text,validate)
+    comparable=[(item['symbol'],tuple(item['roles'])) for item,_ in roles]
+    counts=Counter(comparable)
+    duplicate=None
+    seen=set()
+    for (item,end),key in zip(roles,comparable,strict=True):
+        if key in seen:
+            duplicate=position(ends,len(text[:end].encode('utf-8')))
+            break
+        seen.add(key)
+    return dict(row=row['id'],tokens=tokens,ends=tuple(ends),body=body,
+                symbol=name,symbol_content_bytes=(first_content_start,symbol_close-1),
+                symbol_close_body_token=position(ends,symbol_close),
+                structure=original['prefix_obstruction_witness'],original_outcome=row['outcome'],
+                roles=dict(closed_shape_valid_members=len(roles),distinct_closed_members=len(counts),
+                           first_duplicate_closed_member_token=duplicate,
+                           most_repeated_member_count=max(counts.values(),default=0)))
+
+
+def read_capacity(closed_refs):
+    reports,refs={},{}
+    for arm,archives in closed_refs.items():
+        close=read_ref(archives['close'])
+        refs[arm]=close['actual_saved_raw_outputs']['complete-capacity-before-forward.json']
+        report=read_ref(refs[arm])
+        assert report['all_rows_passed'] and report['complete_population_count']==3
+        assert report['query_reference_target_body_or_length_used_for_limits_or_prefix'] is False
+        assert report['source_or_target_shortened'] is False
+        assert report['global_output_cap']==16384 and report['generation_policy']['max_generation_seconds']==1200.0
+        reports[arm]=report
+    assert reports[ARMS[0]]['queries']==reports[ARMS[1]]['queries']
+    return reports[ARMS[0]]['queries'],refs
+
+
+def collect():
+    old_result=json.loads(exact(OLD_RESULT,PRIOR))
+    source=exact(DRIVER,DRIVER_PIN)
+    scope={'__name__':'retained_original_archive_reader','__file__':str(DRIVER)}
+    exec(compile(source,str(DRIVER),'exec'),scope)
+    original=scope['row_result']
+    received=[]
+
+    def capture(row,ends,body,eos,fields,roles,periodic):
+        result=original(row,ends,body,eos,fields,roles,periodic)
+        seen=decode_opening(row,ends,body,eos,roles,result)
+        seen['original_eos']=eos
+        received.append(seen)
+        return result
+
+    scope['row_result']=capture
+    assert scope['diagnostic']()==old_result
+    assert len(received)==6
+    grouped={arm:tuple(received[i*3:(i+1)*3]) for i,arm in enumerate(ARMS)}
+    for arm,outputs in grouped.items():
+        assert tuple(row['row'] for row in outputs)==tuple(row['row'] for row in old_result['arms'][arm])
+    capacities,refs=read_capacity(old_result['original_closed_generations'])
+    return grouped,capacities,refs,old_result
+
+
+def pair_report(prior, after, capacity):
+    assert prior['row']==after['row']==capacity['id']
+    first_divergent=common_tokens(prior['tokens'],after['tokens'])+1
+    assert first_divergent<=min(len(prior['tokens']),len(after['tokens']))
+    observed={}
+    boundaries=[]
+    for name,side in zip(ARMS,(prior,after),strict=True):
+        index=first_divergent-1
+        divergence_start=side['ends'][index-1] if index else 0
+        divergence_end=side['ends'][index]
+        start,end=side['symbol_content_bytes']
+        assert start<=divergence_start<divergence_end<=end
+        assert len(side['tokens'])+1+int(side['original_eos'])<capacity['full_output_cap']
+        observed[name]=dict(first_symbol=side['symbol'],first_symbol_closing_token=side['symbol_close_body_token'],
+            first_divergent_token_id=side['tokens'][index],
+            first_divergent_token_byte_span=(divergence_start,divergence_end),
+            original_body_tokens=len(side['tokens']),original_eos=side['original_eos'],
+            original_outcome=side['original_outcome'],role_array_prefix=side['roles'],
+            earlier_shape_diagnostic=side['structure'])
+        boundaries.append(divergence_start)
+    assert boundaries[0]==boundaries[1]
+    shared=prior['body'][:boundaries[0]]
+    assert shared==after['body'][:boundaries[1]]==PREFIX+b'"'
+    return dict(row=prior['row'],first_divergent_body_token=first_divergent,
+                shared_prefix_bytes=len(shared),shared_prefix_sha256=sha256(shared).hexdigest(),
+                shared_native_frame_sha256=capacity['native_frame_sha256'],
+                shared_native_frame_tokens=capacity['native_frame_tokens'],
+                common_body_token_ids=tuple(prior['tokens'][:first_divergent-1]),arms=observed)
+
+
+def original_codec(archive):
+    archive_root=Path(archive['sources'][3]['path'])
+    pins={
+        'autoencoder_training_worker.py':(ROOT/'digest-cache-current-at-migration-cohort-private-v01/worker.after.py.DATA',586659,
+            '348fe95f15ee03d8039c1171b30d228400416f3a6fa40462f64592139ba54963'),
+        'training_cycle_inputs.py':(Path(archive['sources'][2]['path']),177467,
+            '88125051a7b1d0dcc887f772faa750fa13b8a2141693679a62e2bd5e97e92db3'),
+        'legal_span_consumer_binding.py':(ROOT/'decoder-training-packed-envelope-private-v01-0Irsccvs/consumer.before.py.DATA',58356,
+            'ff8b61f71280f4c5d1d413feab33d5f9498f3cf560755492eafbbb0348d0bc82'),
+        'legal_ir_semantic_metrics.py':(archive_root,111418,
+            'b44c482aaf9a96a420c4eb02bb0175cfc99cc14854d02a85347fa3aaf4461c1a'),
+    }
+    for entry in archive['original_closed_generations'].values():
+        closed=read_ref(entry['close'])
+        assert closed['Source_closed'] and closed['resource_cleanup_confirmed']
+        compiled={Path(path).name:digest for path,digest in closed['actual_compiled_Source_hashes'].items()
+                  if Path(path).name in pins}
+        assert compiled=={name:pin[-1] for name,pin in pins.items()}
+        assert read_ref(entry['generation'])['input_commitment']['generation_policy']['target_codec']==archive['target_codec']
+
+    sources={}
+    retained={}
+    for name,(path,size,digest) in pins.items():
+        body=exact(path,(size,digest))
+        retained[name]=ref(path,body)
+        sources[name]=ast.parse(body,filename=str(path))
+    worker=sources['autoencoder_training_worker.py']
+    decoder,=(node for node in ast.walk(worker) if isinstance(node,ast.FunctionDef) and node.name=='generate_batch'
+              and 'assemble_reviewed_decoder_digest_omitted_target' in ast.unparse(node))
+    closing,=(node for node in ast.walk(decoder) if isinstance(node,ast.If) and ast.unparse(node.test)=='token == eos')
+    dispatched=ast.unparse(closing)
+    assert 'text = self.tokenizer.decode(list(generated[1:-1]))' in dispatched
+    assert 'value = assemble_reviewed_decoder_digest_omitted_target(text, target_codec=self.target_codec)' in dispatched
+
+    inputs=sources['training_cycle_inputs.py']
+    defs={node.name:node for node in inputs.body if isinstance(node,ast.FunctionDef)}
+    assembler=ast.unparse(defs['assemble_reviewed_decoder_digest_omitted_target'])
+    assert assembler.index("value = _reviewed_json(model_wire.encode('utf-8'))")<assembler.index('_reviewed_closed(value')
+    assert 'return _reviewed_decoder_canonical_formula_target(value)' in assembler
+    assert 'consumer._preflight(value)' in ast.unparse(defs['_reviewed_wire'])
+    shape,=(node for node in sources['legal_ir_semantic_metrics.py'].body
+            if isinstance(node,ast.FunctionDef) and node.name=='_complete_norm_payload_shape')
+    assert 'set(role) != {\'symbol\', \'roles\'}' in ast.unparse(shape)
+
+    import math
+    namespace={'json':json,'math':math,'SourceSpanConsumerBindingError':ValueError}
+    selected={'_require','_wire','_preflight','MAX_BYTES','MAX_NODES','MAX_DEPTH'}
+    nodes=[node for node in sources['legal_span_consumer_binding.py'].body
+           if getattr(node,'name',None) in selected or isinstance(node,ast.Assign)
+              and getattr(node.targets[0],'id',None) in selected]
+    assert len(nodes)==len(selected)
+    exec(compile(ast.Module(body=nodes,type_ignores=[]),'retained-consumer-json','exec'),namespace)
+    exact_wire=namespace['_preflight']
+    decoder_ns={'_reviewed_wire':exact_wire,'MAX_REVIEWED_ARTIFACT_BYTES':32*1024**2}
+    exec(compile(ast.Module(body=[defs['_reviewed_need'],defs['_reviewed_json']],type_ignores=[]),
+                 'retained-input-json','exec'),decoder_ns)
+    return decoder_ns['_reviewed_json'],exact_wire,retained
+
+
+def strict_role_prefix(body, ends):
+    """Locate a disagreement with the mandatory first key of this first role."""
+    role_start=ARRAY+b'{'
+    if not body.startswith(role_start):
+        return None
+    candidate=role_start+b'"roles":'
+    for index,(emitted,wanted) in enumerate(zip(body,candidate)):
+        if emitted!=wanted:
+            return dict(first_mismatching_byte_zero_based=index,body_token_position=position(ends,index+1),
+                        prefix_sha256=sha256(body[:index+1]).hexdigest(),
+                        issue='first_role_key_is_not_the_canonical_roles_member')
+    return None
+
+
+def report():
+    grouped,capacities,capacity_refs,old=collect()
+    parse,wire,retained=original_codec(old)
+    rows=[]
+    earlier_work=0
+    actual_eos_rejections=0
+    for (prior,after),frame in zip(zip(*(grouped[name] for name in ARMS),strict=True),capacities,strict=True):
+        pair=pair_report(prior,after,frame)
+        for arm,side in zip(ARMS,(prior,after),strict=True):
+            outcome=pair['arms'][arm]
+            evidence=strict_role_prefix(side['body'],side['ends'])
+            assert evidence is not None
+            position_check=evidence['body_token_position']
+            assert position_check<pair['first_divergent_body_token']
+            after_stop=len(side['tokens'])-position_check
+            earlier_work+=after_stop
+            if side['original_eos']:
+                assert outcome['original_outcome']=='invalid'
+                value=json.loads(side['body'])
+                assert set(value)=={'argument_roles'}
+                ordered=wire(value)
+                assert ordered!=side['body']
+                assert next(i for i,(left,right) in enumerate(zip(side['body'],ordered)) if left!=right)==evidence[
+                    'first_mismatching_byte_zero_based']
+                try:
+                    parse(side['body'])
+                except ValueError as error:
+                    assert str(error)=='canonical reviewed artifact JSON required'
+                else:
+                    raise AssertionError('original strict JSON equality accepted changed key order')
+                assert parse(ordered)==value
+                actual_eos_rejections+=1
+            outcome.update(strict_wire_witness=evidence,emitted_body_positions_after_invalid_wire=after_stop,
+                           original_parser_called_at_eos=side['original_eos'])
+        rows.append(pair)
+    assert actual_eos_rejections==1
+    arm_common={arm:common_tokens(*(row['tokens'] for row in outputs)) for arm,outputs in grouped.items()}
+    symbols={arm:dict(Counter(row['symbol'] for row in outputs)) for arm,outputs in grouped.items()}
+    return dict(schema='retained-source62-role-opening-and-strict-wire-diagnostic/v1',
+                baseline=ref(OLD_RESULT,exact(OLD_RESULT,PRIOR)),capacity_receipts=capacity_refs,
+                original_codec_owners=retained,rows=rows,distinct_first_symbols=symbols,
+                shared_opening_tokens_across_rows=arm_common,
+                original_exact_by_arm=old['counts']['original_exact_by_arm'],
+                observed_body_positions_after_strict_wire_obstruction=earlier_work,
+                actual_eos_rejection_predicate_reproduced_count=actual_eos_rejections,
+                timed_out_streams_with_new_retrospective_wire_witness=5,
+                reference_targets_opened=0,model_calls=0,semantic_fidelity_evaluated=False,
+                causal_mechanism_established=False,possible_cost_savings_measured=None)
+
+
+if __name__=='__main__':
+    print(json.dumps(report(),sort_keys=True,indent=2))

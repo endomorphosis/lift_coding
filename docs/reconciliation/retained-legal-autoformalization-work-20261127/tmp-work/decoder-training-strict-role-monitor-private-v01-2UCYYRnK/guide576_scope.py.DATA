@@ -1,0 +1,115 @@
+"""Authenticate the published Guide576 and its changed retained Stage A role."""
+import ast
+from hashlib import sha1,sha256
+import json
+from pathlib import Path
+import sys
+
+HERE=Path(__file__).resolve().parent
+TMP=HERE.parent
+sys.path.insert(0,str(HERE))
+from replay_archive import check_open
+
+LIVE=TMP/'P1-proof-cache-translation-current-6btZZr/phase2-self-reference'
+PRIOR=TMP/'decoder-training-stage-a-guide575-rebind-private-v01-9K6ruUs7'
+OLD=TMP/'Phase2-V3-recursive-definition-private-dE9srJIA/legal_reviewed_norm_admission_v3.py.before.DATA'
+ROLE='ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py'
+
+
+def artifact(path,pin):
+    path=Path(path)
+    assert path.is_relative_to(TMP)
+    assert not set(path.parts)&{'.git','datasets','accelerate','..'} and path.resolve(strict=True)==path
+    raw=path.read_bytes()
+    assert sha256(raw).hexdigest()==pin,path
+    return raw,dict(path=str(path),bytes=len(raw),sha256=pin)
+
+
+def offer(reference):
+    raw,actual=artifact(reference['path'],reference['sha256'])
+    assert actual==reference
+    return raw
+
+
+def doc(reference):
+    return json.loads(offer(reference))
+
+
+def scope():
+    pub_raw,pub_ref=artifact(LIVE/'actual-Guide576-four-docs-three-FF-publication.json',
+                             '28c2677788637620b8eedf080dd4b4da948cc0173735316f909bd516b4d458db')
+    pub=json.loads(pub_raw)
+    writer,code,tests=(doc(pub[key]) for key in ('actual_doc_Source_closed','actual_code_publication','actual_ordinary37'))
+    read=doc(code['READ3'])
+    cap=doc(writer['full_charge'])
+    assert pub['evidence_ordinal']==writer['evidence_ordinal']==576
+    assert all(item['terminal_returncode']==0 for item in (pub,writer,code,tests,read))
+    assert code['live_main_after']==pub['live_main_before']
+    assert code['live_main_before']['datasets']=='099cf857240915394deced81eff5e5dfcf5e96c6'
+    assert pub['live_main_after']['datasets']==writer['HEAD']=='8a902502e1a82d3da05b9c31a42db8c39ea8a9e1'
+    assert pub['live_main_after']['accelerate']==writer['A']==code['live_main_before']['accelerate']
+    assert [row['repository'] for row in pub['pushes_in_actual_order']]==['datasets','hallucinate','root']
+    assert all(row['normal_fast_forward'] is True and row['push_returncode']==0 for row in pub['pushes_in_actual_order'])
+    assert writer['Source_closed'] is writer['module_closed'] is read['Source_closed'] is read['module_closed'] is True
+    assert writer['only_four_Git_changes'] and set(writer['committed_docs'])==set(pub['only_four_docs'])
+    assert tests['Source_lease_and_resource_cleanup_closed']
+    counts=tests['actual_ordinary_counts']
+    assert counts=={'errors':0,'failures':0,'functions':15,'passed':37,'skipped':0,'tests':37}
+
+    prior_raw,prior_ref=artifact(PRIOR/'guide575-all-fresh-preview.INERT.json',
+                                'fedc71a50ef8fa52dcecf7942eea38f9bd4f2e1c7f9e28ede975217bb6bb8ea5')
+    preview=json.loads(prior_raw)
+    old={row['path']:row for row in preview['relocated_retained_outer']}
+    current={row['path']:row for row in doc(read['outer_epoch_reference'])}
+    pending=preview['reader_inputs']
+    protected=pending['fresh_Source_body_targets']
+    retained=pending['historical_origin_scope_recheck']['retained_92_paths']
+    assert len(protected)==32 and len(retained)==len(set(retained))==92
+    stamp=lambda row:{key:row[key] for key in ('bytes','sha256','full9','path')}
+    assert all(stamp(row)==current[row['path']] for row in protected)
+    name=str(Path(pending['current_roots']['D']['root'])/ROLE)
+    assert [path for path in retained if old[path]!=current[path]]==[name]
+    prior_body,prior_body_ref=artifact(OLD,'30f9e1f2554b030241aeb8ec8ffc1f6c98816eee2732c83e59dbf3c0b36de50e')
+    capture,=(item for item in read['individual_captures'] if item['path']==name)
+    body_ref=capture['raw_reference']
+    body=offer(body_ref)
+    changed=code['exact_two_changes'][ROLE]
+    assert stamp(capture)==stamp(changed)==current[name] and ref_matches(old[name],prior_body_ref)
+    assert len(body)-len(prior_body)==338
+    git_oid=lambda raw:sha1((f'blob {len(raw)}\0').encode()+raw).hexdigest()
+    assert git_oid(prior_body)==changed['parent_blob'] and git_oid(body)==changed['stage0_and_committed_blob']
+    before,after=map(ast.parse,(prior_body,body))
+    member=lambda node:getattr(node,'name',None)=='_reviewed_body'
+    assert [ast.dump(n) for n in before.body if not member(n)]==[ast.dump(n) for n in after.body if not member(n)]
+    new_body,=[node for node in after.body if member(node)]
+    new_statement=ast.unparse(new_body)
+    assert 'term.kind is ast.NodeKind.PREDICATE and term.symbol == symbol' in new_statement
+    assert 'predicate occurs in its own definition' in new_statement
+    counters=cap['after_full_retained_precharge']
+    room=counters['internal_cap']-counters['internal_used']
+    assert room==counters['global_cap']-counters['used']==6356992
+    assert writer['index']['bytes']==7070597
+    return dict(schema='private-guide576-published-stage-a-retained-owner-change/v1',
+        publication=pub_ref,writer=pub['actual_doc_Source_closed'],code_publication=pub['actual_code_publication'],
+        qualification=pub['actual_ordinary37'],qualification_counts=counts,
+        closing_read=code['READ3'],current_outer=read['outer_epoch_reference'],retained_cap=writer['full_charge'],
+        datasets=writer['HEAD'],accelerate=writer['A'],writer_index=writer['index'],accelerate_index=writer['A_index'],
+        prior_preview=prior_ref,unchanged_fresh_role_count=32,retained_role_count=92,
+        unchanged_retained_role_count=91,changed_relative_role=ROLE,
+        changed_function='_reviewed_body',old_stamp=old[name],new_stamp=current[name],
+        old_Git_blob_oid=changed['parent_blob'],new_Git_blob_oid=changed['stage0_and_committed_blob'],
+        old_detached_source=prior_body_ref,current_detached_source=body_ref,increase_in_body_bytes=338,
+        ordinary_legal_admission_established=False,historical_scope_transferred=False,
+        independent_index_read_floor=writer['index']['bytes']+1,
+        independent_index_read_gap=writer['index']['bytes']+1-room,
+        retained_headroom_bytes=room,current_capture_floor=counters['captures'],
+        Reader_price=None,independent_current_read=None,actual_selector=None,actual_Reader_allocation=None)
+
+
+def ref_matches(row,reference):
+    return all(row[k]==reference[k] for k in ('bytes','sha256'))
+
+
+if __name__=='__main__':
+    sys.addaudithook(check_open)
+    print(json.dumps(scope(),sort_keys=True,indent=2))

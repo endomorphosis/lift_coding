@@ -1,0 +1,160 @@
+"""Replay the three archived Source62 TRAIN labels without project imports."""
+
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+
+
+_TMP = Path("/tmp")
+_INDEX = {
+    "path": str(_TMP / "decoder-training-source62-codec-readback-private-v01-vt7J9Uqt/result.json"),
+    "bytes": 11136,
+    "sha256": "e3eb7a303bb28b0f15710b59a74b0c99b08f2aea01aa5102af7ff0448b6dad35",
+}
+_PRIVATE_ROOTS = (
+    Path(_INDEX["path"]).parent,
+    _TMP / "current-cache-fixed-fit-and-matched-Q3-existing-owner-continuation-private-v01",
+    _TMP / (
+        "codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/"
+        "Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/"
+        "combined-R-A-physical-definition-realization-CAS-preparation-v01/"
+        "fresh-digest-omitted-TRAIN-fixed-row-fit-existing-owner-driver-preparation-v01/"
+        "resource-WAL30-pristine0-parent64GiB-RSS64-AS96-coherent-outer-v05/"
+        "actual-TRAIN-output-v03/current-operation-DATA-closeout-exports-v03"
+    ),
+    _TMP / "pytest-of-barberb/legal-ir-qwen25-digest-omitted-current-T3-restage-v02/attempt/exports",
+    _TMP / "pytest-of-barberb/legal-ir-qwen25-current-import-434cf2-v01/attempt/registry-artifacts",
+)
+_FORBIDDEN_PARTS = {
+    ".", "..", ".git", "datasets", "accelerate",
+    "ipfs_datasets", "ipfs_datasets_py", "ipfs_accelerate", "ipfs_accelerate_py",
+}
+_CODEC = "complete-reviewed-norm-digest-omitted-json/v1"
+_FIELDS = {
+    "argument_roles", "assumptions", "cross_references", "definition_uses",
+    "governing_context", "interpretation_id", "profile", "source_binding", "typed_expression",
+}
+_FIT = "fixed-TRAIN-fit-at-current-cache-checkpoint.json"
+_CAPACITY = "fixed-TRAIN-fit-complete-capacity.json"
+
+
+def _digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def _canonical(value):
+    return json.dumps(
+        value, ensure_ascii=True, sort_keys=True, separators=(",", ":"), allow_nan=False
+    ).encode("utf-8")
+
+
+def _read_json(reference):
+    path = Path(reference["path"])
+    size = reference["bytes"]
+    if (
+        not path.is_absolute()
+        or _FORBIDDEN_PARTS.intersection(path.parts)
+        or not any(path.is_relative_to(root) and path != root for root in _PRIVATE_ROOTS)
+        or path.resolve(strict=True) != path
+        or type(size) is not int
+        or not 0 < size <= 2 * 1024 * 1024
+    ):
+        raise ValueError("reference escapes the bounded private archive")
+    with os.fdopen(os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK), "rb") as stream:
+        identity = os.fstat(stream.fileno())
+        if not stat.S_ISREG(identity.st_mode) or identity.st_size != size:
+            raise ValueError("reference is not an exact regular file")
+        raw = stream.read(size + 1)
+    if len(raw) != size or _digest(raw) != reference["sha256"]:
+        raise ValueError("retained artifact differs from its original pin")
+    return json.loads(raw)
+
+
+def load_train_labels():
+    """Return (labels_by_row_id, provenance) for the archived fictional TRAIN cohort."""
+    index = _read_json(_INDEX)
+    provenance = {"index": dict(_INDEX), "arms": {}, "rows": {}}
+    arms = {}
+    for name in ("pristine0", "TRAIN3"):
+        close_ref = index["original_closed_generations"][name]["close"]
+        close = _read_json(close_ref)
+        if close["Source_closed"] is not True or close["actual_SDK_returncode"] != 0:
+            raise ValueError("original Source62 fit did not close successfully")
+        outputs = close["actual_saved_raw_outputs"]
+        fit_ref, capacity_ref = outputs[_FIT], outputs[_CAPACITY]
+        fit, capacity = _read_json(fit_ref), _read_json(capacity_ref)
+        if (
+            fit["heldout_targets_accessed"] is not False
+            or capacity["heldout_targets_accessed"] is not False
+            or fit["cohort"]["heldout_targets_accessed"] is not False
+            or fit["objective"]["target_codec"] != _CODEC
+            or capacity["all_complete_rows_fit"] is not True
+        ):
+            raise ValueError("original fit did not authenticate the target codec and TRAIN scope")
+        provenance["arms"][name] = {"close": close_ref, "fit": fit_ref, "capacity": capacity_ref}
+        arms[name] = (close, fit["cohort"]["rows"], capacity["rows"])
+
+    request_ref = arms["TRAIN3"][0]["actual_current_cache_pair"]["origin_training_request_artifact"]
+    stage_witness_ref = _read_json(request_ref)["T3_stage_witness_artifact"]
+    witness = _read_json(stage_witness_ref)
+    row_ids = witness["training_row_ids"]
+    if (
+        len(row_ids) != 3 or len(set(row_ids)) != 3
+        or not set(row_ids).isdisjoint(witness["protected_Q3_source_ids"])
+        or witness["full_nine_field_targets_preserved"] is not True
+        or witness["same_T3_rows_and_history_records"] is not True
+        or witness["fresh_objective"]["target_codec"] != _CODEC
+    ):
+        raise ValueError("stage witness does not bind the exact three TRAIN-only targets")
+    stage_ref = witness["stage"]
+    stage = _read_json(stage_ref)
+    rows_ref = stage["rows_artifact"]
+    rows = _read_json(rows_ref)
+    if [row["id"] for row in rows] != row_ids:
+        raise ValueError("stage rows differ from the witnessed TRAIN-only order")
+    for _, fit_rows, capacity_rows in arms.values():
+        if [row["id"] for row in fit_rows] != row_ids or [row["id"] for row in capacity_rows] != row_ids:
+            raise ValueError("Source62 fit and capacity rows differ from the original TRAIN order")
+
+    labels = {}
+    for position, row in enumerate(rows):
+        row_id, target = row["id"], row["canonical_ir"]
+        if set(target) != _FIELDS or "content_digest" not in target["typed_expression"]:
+            raise ValueError("original label is not an exact full-nine target")
+        full_digest = _digest(_canonical(target))
+        projected = dict(target)
+        projected["typed_expression"] = dict(target["typed_expression"])
+        del projected["typed_expression"]["content_digest"]
+        raw = _canonical(projected)
+        raw_digest = _digest(raw)
+        token_counts = []
+        for _, fit_rows, capacity_rows in arms.values():
+            fit_row, cap_row = fit_rows[position], capacity_rows[position]
+            if (
+                full_digest != fit_row["target_identities"]["full_nine_field_target_sha256"]
+                or raw_digest != fit_row["model_target_wire_sha256"]
+                or raw_digest != cap_row["model_target_wire_sha256"]
+            ):
+                raise ValueError("replayed label differs from the original Source62 commitments")
+            token_counts.append(cap_row["target_tokens"])
+        if token_counts[0] != token_counts[1]:
+            raise ValueError("original arms disagree on the TRAIN target token count")
+        labels[row_id] = raw
+        provenance["rows"][row_id] = {
+            "full_nine_field_target_sha256": full_digest,
+            "model_target_wire_sha256": raw_digest,
+            "label_bytes": len(raw),
+            "target_tokens_including_bos_eos": token_counts[0],
+        }
+
+    provenance.update({
+        "target_codec": _CODEC,
+        "scope": "archived fictional Source62 teacher-forced TRAIN labels",
+        "origin_training_request": request_ref,
+        "stage_witness": stage_witness_ref,
+        "stage": stage_ref,
+        "train_rows": rows_ref,
+    })
+    return labels, provenance

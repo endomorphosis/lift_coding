@@ -1,0 +1,168 @@
+"""Attach the refreshed Guide574 replay and conditional quote to the design."""
+from copy import deepcopy
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+from runpy import run_path
+from stat import S_IMODE
+from tempfile import mkstemp
+
+HERE=Path(__file__).resolve().parent
+TMP=HERE.parent
+OLD=TMP/'decoder-training-experiment-manifest-v397.json'
+NEW=TMP/'decoder-training-experiment-manifest-v398.json'
+KEY='guide574_stage_a_writer_matched_all_fresh_quote'
+
+
+def ref(path,expected=None):
+    raw=path.read_bytes()
+    digest=sha256(raw).hexdigest()
+    assert expected is None or expected==digest,path
+    return dict(path=str(path),bytes=len(raw),sha256=digest)
+
+
+def save(path,value):
+    raw=value.encode() if type(value) is str else (json.dumps(value,indent=2,sort_keys=True)+'\n').encode()
+    with path.open('xb') as stream:
+        stream.write(raw)
+    return ref(path)
+
+
+def logs(stem):
+    assert (HERE/(stem+'.rc')).read_bytes()==b'0\n'
+    return {kind:ref(HERE/(stem+'.'+kind)) for kind in ('rc','stdout','stderr')}
+
+
+old_ref=ref(OLD,'613b67ac951e9200ee60a161dd279b19ad80776bdff46e3eb63a9317edc5e709')
+old=json.loads(OLD.read_bytes())
+old_checker=Path(old['advisory_operator_readiness_checker']['path'])
+assert ref(old_checker)==old['advisory_operator_readiness_checker']
+replay=json.loads((HERE/'replay.stdout').read_bytes())
+rebound=replay['Guide574']
+assert (HERE/'replay.stderr').read_bytes()==(HERE/'stage-zero.stderr').read_bytes()==b''
+assert sum(line.endswith(' ... ok') for line in (HERE/'reader.stderr').read_text().splitlines())==7
+for rows in replay.values():
+    for item in rows.values():
+        assert ref(Path(item['path']))==item
+stage=json.loads((HERE/'stage-zero.stdout').read_bytes())
+parser=ref(Path(stage['parser_path']),stage['parser_sha256'])
+assert stage['exact_positions']==32 and stage['wrong_index_rejected'] is stage['duplicate_paths_rejected'] is True
+quote=ref(HERE/'guide574-pair-conditional-quote.INERT.json',
+          'f2d1eddd72043557699ffb84bc628152956ce7ee640482bc9d0ea454d5b26fa3')
+description=HERE/'descriptor.json'
+descriptor=dict(schema='private-guide574-stage-a-exact-replay-and-price/v1',index_replay=rebound['proof'],
+    writer_matched_index=rebound['index'],reader_preview=rebound['preview'],quote=quote,
+    rebound_stage_zero_parser=parser,stage_zero_controls=stage,reader_local_passing_cases=7,
+    guide573_retained_preimages_match=replay['Guide573_exact_retained_replay'],
+    closed_logs={stem:logs(stem) for stem in ('replay','stage-zero','reader')},
+    drivers={name:ref(HERE/name) for name in ('rebind.py','reservation.py','bind_stage_zero.py',
+                                             'test_rebound_reader.py','seal.py')},
+    modeled_Source_Git_owner_in_reader_checks=True,independent_index_live_read=None,
+    original_paired_selector_allocation=None,live_reader_allocation=None,dispatch_authority=False)
+source=old_checker.read_text()
+at_def='def report(manifest):\n'
+at_return='    return {\n        "schema": "decoder-training-advisory-design-check/v1",'
+assert source.count(at_def)==source.count(at_return)==1
+projection='''def guide574_replayed_stage_a(reference, prior):
+    row = retained_json(reference)
+    proof = retained_json(row["index_replay"])
+    preview = retained_json(row["reader_preview"])
+    quote = retained_json(row["quote"])
+    selector = retained_json(quote["selector_expectations"])
+    require(row["schema"] == "private-guide574-stage-a-exact-replay-and-price/v1"
+            and prior["observed_guide"] == 574 and prior["Guide574_detached_metadata"] == proof["guide574_metadata"]
+            and proof["schema"] == "private-stage-a-guide574-writer-index-and-body-roles/v1"
+            and proof["writer_expected_index"] == prior["recorded_published_datasets_index"]
+            and proof["writer_matched_index"] == row["writer_matched_index"]
+            and all(proof["writer_matched_index"][key] == proof["writer_expected_index"][key]
+                    for key in ("bytes", "sha256"))
+            and proof["Git_index_entries"] == 41250
+            and len(proof["protected_roles"]) == 32
+            and all(role["Git_stage"] == 0 for role in proof["protected_roles"])
+            and proof["published_roots"] == selector["expected_roots"] == preview["reader_inputs"]["current_roots"]
+            and preview["relocation_proof"] == row["index_replay"]
+            and row["reader_preview"] == quote["preview"] and preview["execution_selected"] is False
+            and preview["source_body_reads"] == 32 and preview["archive_historical_count"] == 20
+            and row["reader_local_passing_cases"] == 7 and row["modeled_Source_Git_owner_in_reader_checks"] is True
+            and row["stage_zero_controls"]["exact_positions"] == 32
+            and row["independent_index_live_read"] is row["original_paired_selector_allocation"]
+                is row["live_reader_allocation"] is None
+            and row["dispatch_authority"] is False, "exact detached Guide574 replay and closed local controls required")
+    selector_bytes = quote["selector_git_stream_allowance"] + quote["selector_raw_stream_write_readback_allowance"]
+    reader_bytes = quote["Reader_core"]["logical_selected_bytes"] + quote["Reader_parent_matrix_allowance"]
+    combined = selector_bytes + reader_bytes
+    headroom = quote["retained_headroom_bytes"]
+    index = quote["independent_index_payload_floor"]
+    require(headroom == prior["recorded_headroom_bytes"] and combined == quote["selector_Reader_conditional_subtotal"]
+                == 26_801_431 and combined - headroom == quote["conditional_paired_gap_before_overhead"]
+            and index == prior["standalone_independent_index_payload_floor_excluded_from_quote"]
+            and index - headroom == quote["independent_index_payload_gap"]
+                == prior["standalone_independent_index_payload_shortfall"]
+            and combined + index - headroom == quote["conditional_joint_gap_before_overhead"]
+            and quote["independent_index_read_included"] is False
+            and quote["live_reservation"] is quote["actual_original_owner_allocation"] is None,
+            "exact Guide574 conditional budgets and independent index gap required")
+    return prior | {"source_frontier":"published_writer_matched_index_and_paired_quote_await_current_owner",
+        "Guide574_exact_offline_index_roles":row["index_replay"],"Guide574_offline_Reader_v3":row["reader_preview"],
+        "replayed_stage_zero_protected_count":32,"quote_basis":"Guide574 v3 all-fresh conditional, one preview read",
+        "conditional_Reader_bytes":reader_bytes,"conditional_selector_bytes":selector_bytes,
+        "conditional_combined_bytes_before_overhead":combined,
+        "conditional_shortfall_bytes_before_overhead":quote["conditional_paired_gap_before_overhead"],
+        "conditional_joint_with_independent_index_gap_before_overhead":quote["conditional_joint_gap_before_overhead"]}
+
+
+'''
+source=source.replace(at_def,projection+at_def,1)
+source=source.replace(at_return,f'''    if "{KEY}" in design:
+        predecessor["guide574_before_exact_offline_index_and_quote"] = coordination
+        coordination = guide574_replayed_stage_a(design["{KEY}"], coordination)
+'''+at_return,1)
+plan=TMP/'decoder-training-integration-plan.md'
+status=plan.stat()
+before=plan.read_bytes()
+assert sha256(before).hexdigest()=='9c87dcd7396a7cf10c157aab05152b17d46c796975d460834029efbe0204aac4'
+body=before.decode()
+addition=f"""## 835. Reproduce Guide574's published index and update the paired quote
+
+The shared offline verifier reproduces the prior Guide573 artifacts byte for byte and reconstructs the Guide574 writer's exact 7,070,597 index bytes. It verifies nine code and test changes followed by four documentation changes. The changed paths do not intersect the 32 protected files or the 92 retained import-scope paths. All 32 protected files keep their stage-zero blob identities, modes and content hashes. The current preview uses their new file metadata and preserves the original 20 archived capture receipts under their historical checkout. [Exact replay and checks]({description})
+
+All seven local Reader-to-A0 checks passed with modeled custody. The Guide574 parser also returned all 32 exact rows and rejected same-length altered index bytes and repeated target paths. With one preview read, retained opening Git file controls and outer-only epoch storage, the new selector and Reader subtotal is 26,801,431 bytes. It is 20,444,439 bytes above retained headroom before owner overhead. Counting the independent index payload and probe in the same shared pool raises the minimum gap to 27,515,037 bytes. Startup, closeout and additional owner controls need separate pricing. Independent current observation, actual selection and allocation remain pending. [Guide574 conditional quote]({quote['path']})
+
+"""
+for was,now in (
+    (str(OLD),str(NEW)),
+    ('Version 3.543. Updated 2026-11-27 with the verified Phase 7 rerun and Guide574 publication.',
+     'Version 3.544. Updated 2026-11-27 with the exact Guide574 index and refreshed Stage A reservation.'),
+    ('## Primary research references',addition+'## Primary research references'),
+):
+    assert body.count(was)==1,was
+    body=body.replace(was,now,1)
+checker=HERE/'check_design.py'
+ns={'__name__':'private_readback','__file__':str(checker)}
+exec(compile(source,str(checker),'exec'),ns)
+prior=run_path(str(old_checker))['report'](old)
+assert ns['report'](old)==prior
+new=deepcopy(old)
+new['manifest_schema_version']='0.398.0'
+new['previous_manifest']=old_ref
+new['typed_execution_design'][KEY]=save(description,descriptor)
+new['advisory_operator_readiness_checker']=save(checker,source)
+report=run_path(str(checker))['report'](new)
+latest=report['stage_a_coordination']
+assert latest['observed_guide']==574 and latest['conditional_joint_with_independent_index_gap_before_overhead']==27_515_037
+assert latest['current_independent_read_join'] is latest['actual_reader_allocation'] is None
+manifest=save(NEW,new)
+readiness=save(HERE/'verified-readiness.json',report)
+fd,name=mkstemp(dir=TMP,prefix=plan.name+'.')
+staged=Path(name)
+try:
+    with os.fdopen(fd,'w') as stream:
+        stream.write(body)
+    staged.chmod(S_IMODE(status.st_mode))
+    assert plan.stat().st_ino==status.st_ino and plan.read_bytes()==before
+    os.replace(staged,plan)
+finally:
+    if staged.exists():
+        staged.unlink()
+print(json.dumps(dict(manifest=manifest,readiness=readiness,plan=ref(plan),descriptor=ref(description)),sort_keys=True))

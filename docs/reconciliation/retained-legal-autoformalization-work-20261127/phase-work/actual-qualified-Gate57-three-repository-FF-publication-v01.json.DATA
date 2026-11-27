@@ -1,0 +1,84 @@
+{
+  "command_log": {
+    "bytes": 13346129,
+    "commands": 71,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-qualified-Gate57-three-repository-FF-publication-v01.commands.jsonl",
+    "sha256": "4fa5a29480d2f63d9a64972a6339ea7514935fb07eaf90edf930b37fa9480beb"
+  },
+  "complete": true,
+  "error": null,
+  "qualification": {
+    "errors": 0,
+    "failures": 0,
+    "independent_saved_JUnit_verified": true,
+    "raw_passing_reports": 168,
+    "reference": {
+      "bytes": 2876,
+      "path": "/tmp/Root-selected-current-Gate57-normal-v43/Root-Gate57-actual-ordinary-small-closeout-v43.json",
+      "sha256": "eb03537ac032ea8433bd47ccbdcedfff5465f7ec462b293bdf47710fb7e7382f"
+    },
+    "skips": 0,
+    "typed_subreports": 111,
+    "unique_parent_tests": 57
+  },
+  "repositories": {
+    "A": {
+      "HEAD": "8967b3ba8fbf76a5e42f8fd4e8d85949173138ed",
+      "before_remote": "de4d5a62b6fac2df61769a6461c2ada97f788208",
+      "changed_paths": [
+        "ipfs_accelerate_py/agent_supervisor/rescue/gate_recovery.py",
+        "ipfs_accelerate_py/agent_supervisor/rescue/lane_resume.py",
+        "test/api/test_agent_supervisor_gate_recovery_evidence_refresh.py"
+      ],
+      "clean": true,
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "remote_HEAD_verified": true,
+      "tree": "ee57c3137733458c56a04feaef311dedbdb4d976"
+    },
+    "H": {
+      "HEAD": "f6290dbae751294ce5014babeb667fd75feaa9fa",
+      "before": "d1b5b2aa39690b1d832ec4d7c774c1fc287e60ed",
+      "clean": true,
+      "gitlinks_updated": {
+        "ipfs_accelerate_py": "8967b3ba8fbf76a5e42f8fd4e8d85949173138ed"
+      },
+      "origin": "https://github.com/endomorphosis/hallucinate_app.git",
+      "other_gitlinks_sha256": "8cd6039b5f6b64578438dd7d8377bf09b001d30a9722bba4514ddee66a7ae1a4",
+      "other_gitlinks_unchanged": true,
+      "remote_HEAD_verified": true,
+      "tree": "757bd8b8bac6ffb9411e0257fb369aaf4a3638fb"
+    },
+    "Root": {
+      "HEAD": "e40b197092df3876afdb92f94d49bcd932fe2a9c",
+      "before": "1a00d581fc45092d0cdfeb6c11133121b16fec30",
+      "clean": true,
+      "datasets_gitlink_unchanged": "4ccc8917b2168db8e11f54c5aadd4ca267f1c488",
+      "gitlinks_updated": {
+        "external/ipfs_accelerate": "8967b3ba8fbf76a5e42f8fd4e8d85949173138ed",
+        "hallucinate_app": "f6290dbae751294ce5014babeb667fd75feaa9fa"
+      },
+      "origin": "https://github.com/endomorphosis/lift_coding.git",
+      "other_gitlinks_sha256": "daa7a515c40fd27c036545e28e759d1ece295b363daa2b0857667af360f2a874",
+      "other_gitlinks_unchanged": true,
+      "remote_HEAD_verified": true,
+      "tree": "a3df51f3d0cd08c8a74e5c9db5638cad57e6d358"
+    }
+  },
+  "schema": "qualified-Gate57-child-first-FF-publication/v1",
+  "scope": {
+    "CI_dispatch_or_poll": false,
+    "Git_mutation_roots": [
+      "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate",
+      "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root"
+    ],
+    "Main_watchdog_pair_adopted": false,
+    "Source_contexts_opened": false,
+    "all_git_subprocesses_returned": true,
+    "force_push": false,
+    "full_eight_phase_goal_complete": false,
+    "model_or_Native_action": false,
+    "original_checkouts_mutated_by_this_operation": false,
+    "tests_replayed": false
+  }
+}

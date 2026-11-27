@@ -1,0 +1,81 @@
+{
+  "actual_HEAD": null,
+  "actual_Source": null,
+  "all_prior_failures_and_costs_retained": true,
+  "clock": null,
+  "current_ancestor_metadata": {
+    "bytes": 1142,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/ordinary22-published576-exact-integration-ancestor-metadata-v01.json",
+    "sha256": "c0d12ee31c5b3809b13a16b1f8c1cf32a9d798dba1f0bd19b82290f604a2c2b6"
+  },
+  "current_preimage_compatibility": {
+    "bytes": 1305,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/closed-published576-receipt-bounds-preimage-compatibility-v01.json",
+    "sha256": "4cfc4e8219ab95912017cbf4c4ba79f2e7a13d2c580ef7f29344929f42081b1a"
+  },
+  "existing_fixture_scope": {
+    "_receipt": "Calls actual build_trusted_receipt_from_backend_result.",
+    "_theorem": "Real TheoremResult PROVED/THEOREM with typed ExecutionBounds and declared independently-checkable translation ceiling; fictional data only.",
+    "_verification": "Existing injected in-memory prover/verifier callbacks, fictional artifact/key/policy IDs and fixed timestamps. CRYPTOGRAPHIC label tests software state/authority rules; not an actual backend qualification.",
+    "filesystem_or_socket_or_process_or_SQL_or_model_operations_in_test_methods": false,
+    "serialization": "In-memory JSON/pickle and private-witness interface tests."
+  },
+  "historical_private_evidence": {
+    "actual_crypto_or_Lean_proof": false,
+    "bytes": 37835,
+    "case_roster_field": "$.case_names",
+    "case_success_field": "$.case_success",
+    "compiled_source_roster_field": "$.compiled",
+    "compiled_sources": 122,
+    "historical_overlay_bindings_are_current": false,
+    "normal_qualification": false,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-receipt-owning22-SAME-GREEN.stdout.json",
+    "sha256": "2a061cb644d553fa77ae75f6737d3ccd0fb5e042e1e3dbe4ac50f81f45c2d749"
+  },
+  "instructions": "Existing Root writer and ordinary owner remain responsible for current exact source/import/config/conftest, Code and resource/custody binding. Reuse existing route; actual collected membership/order must be checked. No historical overlay adoption, new runner, budget reset, crypto/Native/model/legal grant.",
+  "ordinary_result": null,
+  "project_import_owners": [
+    "ipfs_datasets_py.logic.backends.results",
+    "ipfs_datasets_py.logic.bridge.proof_receipt_attestation",
+    "ipfs_datasets_py.logic.families.models",
+    "ipfs_datasets_py.logic.ir_core.protocols",
+    "ipfs_datasets_py.logic.ir_core.claims",
+    "ipfs_datasets_py.logic.verification_api"
+  ],
+  "pytest_runtime_fixture_parameters": [],
+  "runtime_authority": null,
+  "static_roster": {
+    "cases": 22,
+    "functions": 20,
+    "new_cases": 7,
+    "old_cases": 15,
+    "only_parameter": {
+      "ids": [
+        "empty",
+        "null",
+        "partial"
+      ],
+      "name": "declared",
+      "values": [
+        {},
+        null,
+        {
+          "max_steps": 100,
+          "timeout_ms": 1000
+        }
+      ]
+    },
+    "selection": {
+      "bytes": 6549,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-owning22-static-selection-DATA.json",
+      "sha256": "1d880d46f44d662627a65aba93699b8148209ea90b82e3a49ce97e19336efe02"
+    }
+  },
+  "status": "INERT_EXISTING_ORDINARY22_FIXTURE_AND_IMPORT_FACTS",
+  "test_path": "tests/integration/logic/test_proof_receipt_attestation.py",
+  "test_post": {
+    "bytes": 27851,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_proof_receipt_attestation.bounds.after.py.DATA",
+    "sha256": "e6cc137379fb50e0aec6e6ae9a1b315344190652ff51fd0ca250f57acf3ab861"
+  }
+}

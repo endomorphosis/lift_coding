@@ -1,0 +1,186 @@
+{
+  "actual_Native_or_Source_or_SDK_or_canonical_or_Git_mutation": false,
+  "actual_same92": {
+    "GREEN": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 92,
+      "raw_JUnit": {
+        "bytes": 17482,
+        "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/same-software92-current-e2dd/result.xml",
+        "sha256": "8ef5a5e29cde91a9831e34e7ff6109719cb59e46c1d1cb16e5c0dece3b00d1b4"
+      },
+      "skips": 0,
+      "termination": {
+        "bytes": 4094,
+        "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/software92-termination.json",
+        "sha256": "b0e5b6549c12cb8e41ff78039c6e59851cf20d19961627cce5708df668589fb4"
+      },
+      "unique": 92
+    },
+    "RED": {
+      "errors": 0,
+      "failed": 4,
+      "failed_ids": [
+        "test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[satisfiability]",
+        "test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[runtime_monitor]",
+        "test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[evidence_readiness]",
+        "test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[policy_approval]"
+      ],
+      "passed": 88,
+      "raw_XML": {
+        "bytes": 19294,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/before/result.xml",
+        "sha256": "8cd0495d93ef7d77232c0ac258c54068f64572629a7564a4c300eadba1e7d57f"
+      },
+      "skips": 0,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/before/stderr.DATA",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 3228,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/before/stdout.DATA",
+        "sha256": "e980ee29805233d6d06f4e71549ccd8c9c592c221094f79e11e59add89bff19c"
+      },
+      "termination": {
+        "bytes": 3441,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/before/termination.json",
+        "sha256": "da8c793f7c39b7f21defc8ccad49bdb3c8f4f4e9c57dad39015954b820624b19"
+      },
+      "unique": 92
+    },
+    "exact_19_function_selectors": {
+      "bytes": 2412,
+      "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/same-software-19-selectors.json",
+      "sha256": "94da18476c9d62359fb91d10c21928b16bca52e7457bb7f9b9d01b275373cf78"
+    },
+    "exact_ordered_case_roster": {
+      "bytes": 15120,
+      "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/exact-same-software-92-case-roster.json",
+      "sha256": "e65741bdc2fef24c3680fdb4e883daf5813d3a5b8ef2121e53e181464c632e9a"
+    },
+    "existing_runner": {
+      "bytes": 2734,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/existing-private-runner-nineteen-selectors.py.DATA",
+      "sha256": "fdd6efc3f5b344b2de059dcee188081321ba7a832da9fdf7df5631dd51507653"
+    },
+    "private_220_role_manifest": {
+      "bytes": 75930,
+      "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/software-private-project-roles.json",
+      "sha256": "422993839eb5ee78ac241f59414fb568f1207eea4afc5899eff0a1d3f35019d8"
+    }
+  },
+  "binder_LEAN_SHA256_literal_is_provenance_only": true,
+  "binder_only_three_image_pins_changed": {
+    "LEAN_SHA256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800",
+    "OWNING_TEST_BYTES": 123945,
+    "OWNING_TEST_SHA256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945"
+  },
+  "caller_owned_binder_postimage": {
+    "bytes": 5314,
+    "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/bind_existing_native_expected_policy.composed.INERT.py.DATA",
+    "sha256": "6683b105998cba123ff7029cba67ab153d2622467b02eec30cc0e275ff9329d3"
+  },
+  "caller_owned_binder_preimage": {
+    "bytes": 5314,
+    "path": "/tmp/P1-Guide571-Lean-routing-namespaced-composed-private-v02-pltcow1x/bind_existing_native_expected_policy.composed.INERT.py.DATA",
+    "sha256": "61074c0b4fdd376aebebbe0b5978c5b86317bace0e2b4b4ffc01618fcc8690b4"
+  },
+  "configurable_logic_families_and_native_namespaces_preserved": true,
+  "exact_one_new_if_in_existing_LeanKernelOutcome_postinit": true,
+  "exact_prior_test_AST_and_source_prefix_preserved": true,
+  "exact_two_roles": {
+    "ipfs_datasets_py/logic/backends/kernel/lean.py": {
+      "mode": "100644",
+      "postimage": {
+        "bytes": 104341,
+        "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/lean.composed.py.DATA",
+        "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+      },
+      "postimage_git_blob": "7ee0cdb71958b052038fa467230dbf86dd0c3fb2",
+      "preimage": {
+        "bytes": 103838,
+        "path": "/tmp/P1-Guide571-Lean-routing-namespaced-composed-private-v02-pltcow1x/lean.before.py.DATA",
+        "sha256": "c1050ad1ec067fc7f7c8fea08793e872511fe58029e9b1aa89ec90d2cb288313"
+      },
+      "preimage_git_blob": "a96fcf58d02523fee3912912933302c026c92788"
+    },
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "mode": "100644",
+      "postimage": {
+        "bytes": 123945,
+        "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/test_kernel_backends.composed.py.DATA",
+        "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945"
+      },
+      "postimage_git_blob": "005655a32c50d14e20a4a65b1bc7d3773d8061d6",
+      "preimage": {
+        "bytes": 115566,
+        "path": "/tmp/P1-Guide571-Lean-routing-namespaced-composed-private-v02-pltcow1x/test_kernel_backends.before.py.DATA",
+        "sha256": "99e00363bbd1ea23d450af0912374fdbf4d30ab3b1802371fb8d237dccbf7da5"
+      },
+      "preimage_git_blob": "94cd39ed1d3e352faa41992f6236fe72179958eb"
+    }
+  },
+  "forward": {
+    "bytes": 9897,
+    "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/exact-two.forward.patch",
+    "sha256": "08bc5b856abc31ce0bb86ebc63eeede3b5a59ddc35496862b81daeead75cbb0a"
+  },
+  "forward_inverse_exact_two_roles_roundtrip": true,
+  "incremental_owner_forward": {
+    "bytes": 596,
+    "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/owner-query-kind.forward.patch",
+    "sha256": "f95ea0c26b08673dcbbfccca7b6a3c08a74b7ebf268c6ac5a6f7d1f970373e29"
+  },
+  "incremental_owner_inverse": {
+    "bytes": 596,
+    "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/owner-query-kind.inverse.patch",
+    "sha256": "ff4bff0553cee8255b8d04d02d8315cd2cffd923a20e00d0eb6fe1583f27c859"
+  },
+  "inverse": {
+    "bytes": 9897,
+    "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/exact-two.inverse.patch",
+    "sha256": "fd04ccb869e7d69fa95e020f43b4f4de123e1d9d660d7c50575255a23f1f2762"
+  },
+  "namespaced_native_and_actual_current_ordinary_qualification_pending": true,
+  "new_red_packet": {
+    "bytes": 5419,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/SEALED-current-Lean-outcome-query-kind-genuine-RED-test-only-v01.json",
+    "sha256": "7680bc96682bace965494a478e5a510f7e9f374286283d0b6d912f2cbb9ed049"
+  },
+  "new_test_function": "tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind",
+  "new_test_query_kinds": [
+    "satisfiability",
+    "runtime_monitor",
+    "evidence_readiness",
+    "policy_approval"
+  ],
+  "policy": "Constructor outcome validation follows the nonconfigurable theorem-proof query kind. Existing public dispatch, backend family configuration, and all Native runtime boundaries are preserved.",
+  "prior_composition": {
+    "bytes": 8950,
+    "path": "/tmp/P1-Guide571-Lean-routing-namespaced-composed-private-v02-pltcow1x/SEALED-private-Lean-routing-plus-native-namespaced-decoy-exact-two.json",
+    "sha256": "7dcccc58157095231465be41aa534abd38f9646e67af6ef5b9ebde577d113041"
+  },
+  "protocol_git_blob": "09b5536bf3269b6eb54f62cfa83e8dceed53d49e",
+  "protocol_sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336",
+  "published_D_HEAD": "6d1b200341ae62d6dc0aa6db27f3955c50483fa7",
+  "schema": "private-P1-current-Lean-routing-query-kind-native-namespaced-exact-two/v1",
+  "scoped_native_test_expected_cases": [
+    {
+      "accepted": true,
+      "case": "root_positive",
+      "compiler_rc": 0,
+      "declaration": "wanted"
+    },
+    {
+      "accepted": false,
+      "case": "namespaced_wrong_type",
+      "compiler_rc": 1,
+      "declaration": "Law.wanted"
+    }
+  ],
+  "scoped_native_test_report_schema": "native-lean-v3-namespaced-declaration-check/v1",
+  "scoped_native_test_selector": "tests/integration/logic/backends/test_kernel_backends.py::test_lean_native_v3_expected_declaration_distinguishes_namespaced_decoy"
+}

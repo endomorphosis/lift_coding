@@ -1,0 +1,287 @@
+{
+  "Main_fixture": {
+    "bytes": 4056,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/ordinary22-existing-fixture-import-and-scope-DATA-v01.json",
+    "sha256": "2fd048579ff50b831f835aa6802a541433ded685eace5af416ed66a4f7a50237"
+  },
+  "PATH_SCOPE": null,
+  "compile_only": true,
+  "controls": {
+    "bootstrap": {
+      "bytes": 42891,
+      "path": "/tmp/P7-receipt-bounds-existing-v379-ordinary22-INERT-6OvPYSH8/existing-ordinary22-bootstrap.INERT.py.DATA",
+      "sha256": "07224f577a8127009dea381f84a34304e624a2476eaa9073aa2368e79afe89e3"
+    },
+    "factory": {
+      "bytes": 3286,
+      "path": "/tmp/P7-receipt-bounds-existing-v379-ordinary22-INERT-6OvPYSH8/existing-ordinary22-factory.INERT.py.DATA",
+      "sha256": "651f9ae6074e4817db51e8f16dae4adc84062f7225d50d9c07b394efe6da28f8"
+    },
+    "operator": {
+      "bytes": 56209,
+      "path": "/tmp/P7-receipt-bounds-existing-v379-ordinary22-INERT-6OvPYSH8/existing-ordinary22-operator.INERT.py.DATA",
+      "sha256": "3bc7cdc9c68587db557d4a0446e2543faa1b0272ea44940c4a1060f7ab462203"
+    }
+  },
+  "desired_module_map": {
+    "ipfs_datasets_py.logic.bridge.proof_receipt_attestation": "ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py",
+    "tests.integration.logic.test_proof_receipt_attestation": "tests/integration/logic/test_proof_receipt_attestation.py"
+  },
+  "exact_private_candidate": {
+    "bytes": 18741,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/SEALED-private-existing-receipt-bounds-two-file-GREEN-v01.json",
+    "sha256": "3aecbf5629c3500baac63beffd701c8e50d02783e93d7cf93c50d702967ac6d9"
+  },
+  "exact_v379_disk_cache_and_auto_cuda_offline_profile": true,
+  "execution_python": null,
+  "expected_maintained_owner_names": [
+    "ipfs_datasets_py.logic.bridge.proof_receipt_attestation"
+  ],
+  "expected_selected_test_modules": {
+    "tests/integration/logic/test_proof_receipt_attestation.py": "tests.integration.logic.test_proof_receipt_attestation"
+  },
+  "future_Source_clock_IO_runtime_SDK_and_outputs": null,
+  "future_fixture_wire": {
+    "pytest_inifile_relative": "pytest.ini",
+    "required_absent_relative_paths": [
+      "tests/integration/conftest.py",
+      "tests/integration/logic/conftest.py",
+      "tests/integration/logic/__init__.py",
+      "tests/AGENTS.md",
+      "tests/integration/AGENTS.md",
+      "tests/integration/logic/AGENTS.md"
+    ],
+    "required_fixture_closure_relative_paths": [
+      "pytest.ini",
+      "conftest.py",
+      "tests/conftest.py",
+      "tests/__init__.py",
+      "tests/integration/__init__.py",
+      "ipfs_datasets_py/logic/verification_api.py"
+    ],
+    "required_normal_conftest_relative_paths": [
+      "conftest.py",
+      "tests/conftest.py"
+    ]
+  },
+  "independent_literal_roster": {
+    "bytes": 7808,
+    "path": "/tmp/P7-receipt-bounds-existing-v379-ordinary22-INERT-6OvPYSH8/exact-20-function-22-case-static-roster.json",
+    "sha256": "41f0610bf381e32651e21f5f0ed3eb8d5e9a405b3ecf24fbccb9e1faf117e43c"
+  },
+  "ordered_count_vector": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    3,
+    1,
+    1,
+    1
+  ],
+  "phase": "frozen-local-D-Phase7-receipt-bounds-ordinary22",
+  "prior_same_daemon_controls": {
+    "bytes": 11626,
+    "path": "/tmp/Phase7-joint-cache-ordinary23-existing-R2-INERT-u6pE7oXF/READY-Phase7-joint-existing-R2-ordinary23-INERT-RootNULL.json",
+    "sha256": "3ce7673da20d74ea94162df1480ed14091947d87ad907f305a6bc605b9523338"
+  },
+  "qualification": null,
+  "roles": {
+    "ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py": {
+      "Git_object_stored": false,
+      "base": {
+        "bytes": 63071,
+        "full9": [
+          66306,
+          72509860,
+          33024,
+          1,
+          1000,
+          1000,
+          63071,
+          1795737109659656524,
+          1795737109659656524
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/ipfs_datasets_py__logic__bridge__proof_receipt_attestation.py.DATA",
+        "sha256": "61296f095b933730ea24b070d2eaaf4202da9714c274a605bd5e18c6f4df49a7"
+      },
+      "computed_git_blob_sha1": "362660beaea798069c5fe9c7af73ef424d7704b9",
+      "forward": {
+        "bytes": 590,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-bounds.forward.diff",
+        "sha256": "1b7eddc3914b8db959a171b3b813f6eb1da4f7552c919d2a5ee3d129bbb45b27"
+      },
+      "inverse": {
+        "bytes": 590,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-bounds.inverse.diff",
+        "sha256": "b04d6a98f25dbd73a1fae3bbb8cf101947c9703fb66fe91d71f14bf9f6532a26"
+      },
+      "post": {
+        "bytes": 63254,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/proof_receipt_attestation.bounds.after.py.DATA",
+        "sha256": "c350097f9425ce916997b1e116297e9497716ae13747719e722b36fe92f38921"
+      },
+      "repo_relative_path": "ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py"
+    },
+    "tests/integration/logic/test_proof_receipt_attestation.py": {
+      "Git_object_stored": false,
+      "base": {
+        "bytes": 22905,
+        "full9": [
+          66306,
+          72511713,
+          33024,
+          1,
+          1000,
+          1000,
+          22905,
+          1795739807874852413,
+          1795739807874852413
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_proof_receipt_attestation.integration-published-6d1b.py.DATA",
+        "sha256": "452ebaa2e016cc7393a892c2f0bdd8cb2e331bde307c064b9ac5404b3313a096"
+      },
+      "computed_git_blob_sha1": "ff318f57469d6be81b76f7e2e12ec9db46b25306",
+      "forward": {
+        "bytes": 5325,
+        "full9": [
+          66306,
+          72511774,
+          33024,
+          1,
+          1000,
+          1000,
+          5325,
+          1795740547106273735,
+          1795740547106273735
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-bounds-owningtest.forward.diff",
+        "sha256": "b448f9072ed0922915fdee751580d1cf34481e8e0d3973400387d0d9951d0305"
+      },
+      "inverse": {
+        "bytes": 5325,
+        "full9": [
+          66306,
+          72511775,
+          33024,
+          1,
+          1000,
+          1000,
+          5325,
+          1795740547113273758,
+          1795740547113273758
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-bounds-owningtest.inverse.diff",
+        "sha256": "3601e273a8cef9f920baec6fe3207b057261c615a9e356a25dd65df7d659cd1e"
+      },
+      "post": {
+        "bytes": 27851,
+        "full9": [
+          66306,
+          72511757,
+          33024,
+          1,
+          1000,
+          1000,
+          27851,
+          1795740276051843091,
+          1795740276051843091
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_proof_receipt_attestation.bounds.after.py.DATA",
+        "sha256": "e6cc137379fb50e0aec6e6ae9a1b315344190652ff51fd0ca250f57acf3ab861"
+      },
+      "repo_relative_path": "tests/integration/logic/test_proof_receipt_attestation.py"
+    }
+  },
+  "schema": "private-existing-v379-R2-Phase7-receipt-bounds-ordinary22-compile-only/v1",
+  "selection_group": "Phase7-receipt-bounds-ordinary22",
+  "static_selection": {
+    "actual_collect_is_roster_and_order_authority": true,
+    "expected_function_case_counts": {
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_adding_execution_bounds_does_not_upgrade_missing_translation_authority": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_attestation_does_not_raise_underlying_semantic_authority": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_circuit_mismatch_fails_closed": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_cryptographic_execution_succeeds_and_projects_attestation_authority": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_declared_conflicting_bounds_are_not_rewritten_into_valid_evidence": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_each_public_input_dimension_change_produces_distinct_digest": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_interface_and_schema_versions_are_pinned": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_malformed_prover_output_fails_closed": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_old_receipt_without_bounds_keeps_its_serialized_content_identity": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_private_witness_never_serializes": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_public_inputs_bind_all_required_dimensions": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_explicit_metadata_bounds_exactly": 3,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_typed_execution_bounds_without_metadata_copy": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_rejected_and_error_verdicts_are_non_authoritative": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_request_repr_redacts_witness": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_revoked_material_fails": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_simulated_backend_fails_production_gates": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_stale_attestation_fails": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_statement_and_record_round_trip": 1,
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_trusted_receipt_rejects_non_conclusive_and_attestation_authority": 1
+    },
+    "function_count": 20,
+    "function_selectors": [
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_interface_and_schema_versions_are_pinned",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_public_inputs_bind_all_required_dimensions",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_each_public_input_dimension_change_produces_distinct_digest",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_trusted_receipt_rejects_non_conclusive_and_attestation_authority",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_private_witness_never_serializes",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_cryptographic_execution_succeeds_and_projects_attestation_authority",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_attestation_does_not_raise_underlying_semantic_authority",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_simulated_backend_fails_production_gates",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_circuit_mismatch_fails_closed",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_stale_attestation_fails",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_revoked_material_fails",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_rejected_and_error_verdicts_are_non_authoritative",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_malformed_prover_output_fails_closed",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_statement_and_record_round_trip",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_request_repr_redacts_witness",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_typed_execution_bounds_without_metadata_copy",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_explicit_metadata_bounds_exactly",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_declared_conflicting_bounds_are_not_rewritten_into_valid_evidence",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_adding_execution_bounds_does_not_upgrade_missing_translation_authority",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_old_receipt_without_bounds_keeps_its_serialized_content_identity"
+    ],
+    "literal_expected_cases": 22,
+    "literal_expected_nodeids": [
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_interface_and_schema_versions_are_pinned",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_public_inputs_bind_all_required_dimensions",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_each_public_input_dimension_change_produces_distinct_digest",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_trusted_receipt_rejects_non_conclusive_and_attestation_authority",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_private_witness_never_serializes",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_cryptographic_execution_succeeds_and_projects_attestation_authority",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_attestation_does_not_raise_underlying_semantic_authority",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_simulated_backend_fails_production_gates",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_circuit_mismatch_fails_closed",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_stale_attestation_fails",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_revoked_material_fails",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_rejected_and_error_verdicts_are_non_authoritative",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_malformed_prover_output_fails_closed",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_statement_and_record_round_trip",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_request_repr_redacts_witness",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_typed_execution_bounds_without_metadata_copy",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_explicit_metadata_bounds_exactly[empty]",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_explicit_metadata_bounds_exactly[null]",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_explicit_metadata_bounds_exactly[partial]",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_declared_conflicting_bounds_are_not_rewritten_into_valid_evidence",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_adding_execution_bounds_does_not_upgrade_missing_translation_authority",
+      "tests/integration/logic/test_proof_receipt_attestation.py::test_old_receipt_without_bounds_keeps_its_serialized_content_identity"
+    ],
+    "owning_files": [
+      "tests/integration/logic/test_proof_receipt_attestation.py"
+    ]
+  },
+  "verification_api_support_without_preload": "ipfs_datasets_py/logic/verification_api.py"
+}

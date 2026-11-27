@@ -1,0 +1,62 @@
+{
+  "A": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "A_index_metadata_verified_against_current_epoch": true,
+  "A_raw_Source_index_capture_claimed": false,
+  "D": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795735927425184003",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "1086707",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795735927424183995",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/.git/index",
+    "sha256": "ed76a1509714a8f9f2d4bd7b3da9b6a1b2671127c310f198406516407a759c78"
+  },
+  "actual_paired_D_A_READ3": {
+    "bytes": 9607,
+    "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/actual-isolated-P1-Lean92-READ3-closed.json",
+    "sha256": "23eacdbf0c260382158deca5da4c29ddca3c7e3fab5901f253c2040cae3002a1"
+  },
+  "branch": {
+    "bytes": 41,
+    "full9": {
+      "st_ctime_ns": "1795735927427848521",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "1600545",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795735927427848521",
+      "st_nlink": "1",
+      "st_size": "41",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/.git/refs/heads/isolated/phase1-lean-routing-query-kind",
+    "sha256": "aa3c28ce0c412ecb5b3291cb2e79d1e56f1556719d122ad985747f320d0af025"
+  },
+  "frozen": {
+    "bytes": 5801,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-isolated-exact-two-local-freeze.json",
+    "sha256": "afa47b34b755f9bd2c53bb36d68b10c069dd005d4e0b66a7b4338ebf6bb1d9de"
+  }
+}

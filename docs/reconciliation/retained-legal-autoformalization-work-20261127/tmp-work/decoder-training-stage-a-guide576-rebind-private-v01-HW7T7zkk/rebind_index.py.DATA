@@ -1,0 +1,163 @@
+"""Reconstruct the Guide576 writer index using the retained Guide575 driver."""
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import stat
+
+
+HERE = Path(__file__).absolute().parent
+TMP = HERE.parent
+PRIOR = TMP / 'decoder-training-stage-a-guide575-rebind-private-v01-9K6ruUs7'
+LIVE_PARENT = TMP / 'P1-proof-cache-translation-current-6btZZr'
+LIVE = LIVE_PARENT / 'phase2-self-reference'
+ALLOWED = {HERE, PRIOR, LIVE, LIVE_PARENT, LIVE / 'guide576-composition', LIVE / 'guide576-transport',
+           TMP / 'decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa',
+           TMP / 'decoder-training-stage-a-v292-frozen-reader-private-v01-ORhtLOea',
+           TMP / 'decoder-training-guide535-index-reconstruction-private-v01-XLNnRqmJ'}
+FORBIDDEN_PARTS = {'.git', 'datasets', 'accelerate', '..'}
+DRIVER = PRIOR / 'rebind.py'
+DRIVER_ID = (19069, 'e95d3ef5a44422bc9c4a9346f971c9e31f9b7ef57be7f69ec70b2fd772ecdfe2')
+AFFECTED_ROLE = 'ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py'
+
+
+def sha(raw):
+    return sha256(raw).hexdigest()
+
+
+def pin(path, length, digest):
+    return dict(path=str(path), bytes=length, sha256=digest)
+
+
+def safe_path(path):
+    if (not path.is_absolute() or path.parent not in ALLOWED or FORBIDDEN_PARTS.intersection(path.parts)
+            or any(item.is_symlink() for item in (path, *path.parents))):
+        raise ValueError(f'Only detached regular archive paths are allowed: {path}')
+
+
+def archive(reference):
+    path = Path(reference['path'])
+    safe_path(path)
+    with os.fdopen(os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK), 'rb') as stream:
+        status = os.fstat(stream.fileno())
+        if not stat.S_ISREG(status.st_mode) or status.st_size != reference['bytes']:
+            raise ValueError(f'Detached regular archive size changed: {path}')
+        body = stream.read(reference['bytes'] + 1)
+    if (len(body), sha(body)) != (reference['bytes'], reference['sha256']):
+        raise ValueError(f'Detached archive differs from its receipt: {path}')
+    return body
+
+
+def save(name, value):
+    path = HERE / name
+    safe_path(path)
+    if not isinstance(value, bytes):
+        value = json.dumps(value, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
+    with path.open('xb') as stream:
+        stream.write(value)
+    result = pin(path, len(value), sha(value))
+    assert archive(result) == value
+    return result
+
+
+def reconstruct():
+    raw = archive(pin(DRIVER,*DRIVER_ID)).decode()
+    boundary = '    prior = load(prior_preview)\n'
+    assert raw.count(boundary) == 1
+    source = raw.split(boundary)[0]
+    for before, after in (
+        ("LIVE = TMP / 'P1-proof-cache-translation-current-6btZZr'",
+         "LIVE = TMP / 'P1-proof-cache-translation-current-6btZZr' / 'phase2-self-reference'"),
+        ("PRIOR = TMP / 'decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK'",
+         "PRIOR = TMP / 'decoder-training-stage-a-guide575-rebind-private-v01-9K6ruUs7'"),
+        ("LIVE/'actual-Guide575-four-docs-three-FF-publication.json', 2639,\n"
+         "        'c04197de963678c357e0f2b97f0a501b343f3f468d4a6a50a7d15ba22a9d568a'",
+         "LIVE/'actual-Guide576-four-docs-three-FF-publication.json', 2703,\n"
+         "        '28c2677788637620b8eedf080dd4b4da948cc0173735316f909bd516b4d458db'"),
+        ("LIVE/'guide575-transport'/'actual-Guide575-publication-events.jsonl', 3600,\n"
+         "        'a47f85b9633c0730499baabe5bbcd579a1a6e402912d0d62a95bfbcd59cb8af1'",
+         "LIVE/'guide576-transport'/'actual-Guide576-publication-events.jsonl', 3600,\n"
+         "        '710280ca16c39ae034562a8a74d974d48c36bbb64decf725e2c2066effef3434'"),
+        ("PRIOR/'guide574-writer-matched-index.DATA', 7070597,\n"
+         "        '26afaa8c5a756128d11917a2f700bf866fcedd1ce4c933440dfa74413c4b5477'",
+         "PRIOR/'guide575-writer-matched-index.DATA', 7070597,\n"
+         "        '0a4e1e63733a772db7ccd2edac48653b03803c8bdfcfc03ed3b8539d55e8a744'"),
+        ("PRIOR/'guide574-all-fresh-preview.INERT.json', 560809,\n"
+         "        'd72596ec7d7ddf69a34143699659302499f92c5cdb73414b5159a4197442100f'",
+         "PRIOR/'guide575-all-fresh-preview.INERT.json', 554294,\n"
+         "        'fedc71a50ef8fa52dcecf7942eea38f9bd4f2e1c7f9e28ede975217bb6bb8ea5'"),
+        ("== writer['evidence_ordinal'] == 575", "== writer['evidence_ordinal'] == 576"),
+    ):
+        assert source.count(before) == 1, before
+        source = source.replace(before,after,1)
+    source += '''    return output, old, pre, final, basis, {
+        'publication': publication_ref, 'publisher_events': event_ref, 'writer': writer_ref,
+        'code_publication': code_ref, 'before_index': captured['raw_reference'], 'closed_pre_doc_READ3': read_ref,
+        'closed_pre_doc_content_epoch': evidence_ref, 'pre_doc_metadata_guard': guard_ref,
+        'pre_doc_outer_epoch': basis_ref, 'prior_guide_index': prior_index, 'prior_preview': prior_preview,
+        'frozen_A_index': companion, 'writer_expected_index': writer['index'], 'A': writer['A'],
+        'D': writer['HEAD'], 'D_tree': writer['tree'], 'published_roots': publication['live_main_after'],
+        'Git_index_entries': len(final), 'pre_doc_index_trailer': raw[-20:].hex(),
+        'final_index_trailer': output[-20:].hex(), 'stage_zero_code_changes': changes,
+        'publisher_document_paths': sorted(docs), 'document_byte_growth': growth,
+        'rewritten_cache_tree_directories': [name.decode() for name in dirs],
+    }
+'''
+    namespace = {'__file__': str(HERE / 'rebind_index.py'), '__name__': 'retained_guide576_index_replay'}
+    exec(compile(source,str(DRIVER),'exec'),namespace)
+    namespace['archive'] = archive
+    return namespace['replay']()
+
+
+def verify_scope(old, pre, final, basis, records):
+    prior = json.loads(archive(records['prior_preview']))
+    plan = prior['reader_inputs']
+    dataset_root = Path(plan['current_roots']['D']['root'])
+    assert Path(records['writer_expected_index']['path']).parent.parent == dataset_root
+    assert plan['current_roots']['A']['HEAD'] == records['A']
+    scope = plan['historical_origin_scope_recheck']
+    role_counts = {'fresh_32_paths': 32, 'retained_92_paths': 92}
+    changed = {}
+    for role, count in role_counts.items():
+        paths = scope[role]
+        assert len(paths) == len(set(paths)) == count
+        names = [Path(path).relative_to(dataset_root).as_posix() for path in paths]
+        # Preserve the Guide575 rule: every prior, pre-doc and final stage-zero row must match.
+        failed = [name for name in names if not old[name] == pre[name] == final[name]]
+        overlaps = sorted(set(names) & (records['stage_zero_code_changes'].keys() | set(records['publisher_document_paths'])))
+        assert sorted(failed) == overlaps
+        changed[role] = failed
+    assert changed == {'fresh_32_paths': [], 'retained_92_paths': [AFFECTED_ROLE]}, changed
+    archived = {row['path']: row for row in basis}
+    assert all(all(archived[row['path']][key] == row[key] for key in ('full9','bytes','sha256'))
+               for row in plan['fresh_Source_body_targets'])
+    previous = {row['path']: row for row in prior['relocated_retained_outer']}
+    role_path = str(dataset_root / AFFECTED_ROLE)
+    changed_role = records['stage_zero_code_changes'][AFFECTED_ROLE]
+    assert scope['retained_92_paths'].index(role_path) == 35
+    assert all(archived[role_path][key] == changed_role[key] for key in ('full9','bytes','sha256'))
+    return dict(fresh_roles_exact_full9_hash_size=32, fresh_roles_same_absolute_paths=True,
+                retained_import_roster_unchanged_rows=91, retained_import_roster_expected_rows=92,
+                retained_import_scope_accepted=False, retained_import_scope_changed_relative_paths=changed['retained_92_paths'],
+                changed_retained_role_position=36, prior_retained_role=previous[role_path],
+                new_retained_role=archived[role_path])
+
+
+def main():
+    raw,old,pre,final,basis,records = reconstruct()
+    refused = verify_scope(old,pre,final,basis,records)
+    written = save('guide576-writer-matched-index.DATA',raw)
+    script = Path(__file__)
+    safe_path(script)
+    self_raw = script.read_bytes()
+    descriptor = save('descriptor.json',dict(schema='private-guide576-stage-a-writer-index-only/v1',
+        detached_driver=pin(Path(__file__),len(self_raw),sha(self_raw)), original_guide575_driver=pin(DRIVER,*DRIVER_ID),
+        writer_matched_index=written, replay=records, role_continuity=refused,
+        independent_postpublication_index_read=None, reader_preview=None, paired_quote=None,
+        live_reader_allocation=None, original_paired_selector_allocation=None, dispatch_authority=False))
+    print(json.dumps(dict(descriptor=descriptor,index=written,D=records['D'],A=records['A'],
+                          final_index_trailer=records['final_index_trailer'],role_continuity=refused),sort_keys=True))
+
+
+if __name__ == '__main__':
+    main()

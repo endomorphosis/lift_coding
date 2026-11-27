@@ -1,0 +1,40 @@
+{
+  "IO_reference": {
+    "bytes": 725,
+    "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/Root-selected-IO.json",
+    "sha256": "709343d152b761c99c9b945c5ddf81e61414d9f87a1bac66ebea4565453320a1"
+  },
+  "Root_selected": true,
+  "Source_READ_binding": {
+    "bytes": 1902,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-isolated-ordinary37-D27-read-binding.json",
+    "sha256": "7f22ec78360aa9992d5c14474b65137083cf07ca7164f570c7c7672887471ec9"
+  },
+  "Source_envelope_bytes": 134217728,
+  "actual_COLLECT_supplies_order": true,
+  "actual_nonclock_handoff": {
+    "bytes": 8485,
+    "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/READY-live-ordinary37-actual-READ3-INERT.json",
+    "sha256": "c0207ad3f03a83e5d4a05740d920013104c49ac0ce42473c06f259ec8dafc28a"
+  },
+  "case_hint": 37,
+  "effect_reference": {
+    "bytes": 544,
+    "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/Root-selected-effect.json",
+    "sha256": "c219ce3dce16d1f947befa47d099182a272fa10661598ca24c868b938eee220b"
+  },
+  "frozen_D_HEAD": "c5a72c90394d86a54cb93cc3a2187da954a2677f",
+  "frozen_D_tree": "5c7e0f349a06fa1ea1567cceca726bfa58121f12",
+  "launch_deadline_utc_ns": 1795743506969196166,
+  "launch_not_before_utc_ns": 1795742666969196166,
+  "ledger_before": {
+    "captures": 543400,
+    "capturesComplete": false,
+    "global_cap": 57646008330,
+    "internal_cap": 57455416456,
+    "internal_used": 57314841736,
+    "used": 57505433610
+  },
+  "output_namespace": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/actual-output",
+  "schema": "Root-selected-existing-Phase2-V3-definition-self-reference-frozen-local-ordinary37/v1"
+}

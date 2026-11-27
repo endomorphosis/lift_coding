@@ -1,0 +1,11 @@
+--- b/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_metric_lineage.py
++++ a/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_metric_lineage.py
+@@ -257,7 +257,7 @@
+ ) -> bool:
+     try:
+         observed = metric_lineage_from_block(block)
+-    except (LegalIRMetricLineageError, TypeError, ValueError):
++    except LegalIRMetricLineageError:
+         return False
+     return observed.to_dict(include_digest=False) == expected.to_dict(include_digest=False)
+ 

@@ -1,0 +1,60 @@
+"""Reprice the exact Guide574 preview through the retained owner."""
+import hashlib
+import json
+from pathlib import Path
+
+HERE=Path(__file__).resolve().parent
+ROOT=HERE.parent
+RES=ROOT/'decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy'
+META=ROOT/'decoder-training-compact-right-censor-controls-private-v01-982l3zS2/guide574/frontier.INERT.json'
+PREVIEW=HERE/'guide574-all-fresh-preview.INERT.json'
+READY_PREVIEW=(560809,'d72596ec7d7ddf69a34143699659302499f92c5cdb73414b5159a4197442100f')
+
+
+def checked(path,size,digest):
+    raw=path.read_bytes()
+    assert (len(raw),hashlib.sha256(raw).hexdigest())==(size,digest),path
+    return raw
+
+
+def save(path,value):
+    raw=json.dumps(value,sort_keys=True,separators=(',',':'),allow_nan=False).encode()
+    if path.exists():
+        assert path.read_bytes()==raw
+    else:
+        with path.open('xb') as stream:
+            stream.write(raw)
+    return dict(path=str(path),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())
+
+
+def calculate():
+    code=RES/'reservation_preview.py'
+    raw=checked(code,4109,'c0338d5750e16d30c0f051c03dbd89527a63c5cf9b22d1481f91d2a3163b9c6b')
+    ns={'__name__':'private_reprice','__file__':str(code)}
+    exec(compile(raw,str(code),'exec'),ns)
+    ns['PREVIEW']=(PREVIEW,*READY_PREVIEW)
+    preview=json.loads(checked(PREVIEW,*READY_PREVIEW))
+    api=ns['load'](ns['CANDIDATE'])
+    api['_stage_a_selector_source_roots'].__globals__['hashlib']=hashlib
+    roots,order=api['_stage_a_selector_source_roots'](preview['reader_inputs']['current_roots'])
+    selector=save(HERE/'guide574-selector-expectations.INERT.json',
+        dict(schema='private-stage-a-guide574-expected-existing-selector-roots/v1',
+             expected_roots=roots,root_order=order,actual_selector_close=None,owner_scope=None,
+             paired_selector_observation_sha256=None,git_project_expectations=None,execution_selected=False))
+    priced=ns['price']()
+    meta=json.loads(checked(META,5580,'2f1bbdf5b04b9f8c827989443c3dba3b061eba72fe9951d694173f63527ad306'))
+    headroom=meta['retained_headroom_bytes']
+    pair=priced['selector_Reader_conditional_subtotal']
+    index=meta['independent_index_payload_floor']
+    assert headroom==6_356_992 and index==7_070_598 and priced['additional_owner_control_roster'] is None
+    new=dict(priced,schema='private-guide574-all-fresh-conditional-reservation/v1',
+             preview=priced['Reader_selected_control_reads'][0],selector_expectations=selector,
+             retained_headroom_bytes=headroom,conditional_paired_gap_before_overhead=pair-headroom,
+             independent_index_payload_floor=index,independent_index_payload_gap=index-headroom,
+             conditional_joint_gap_before_overhead=index+pair-headroom,
+             independent_index_read_included=False,actual_original_owner_allocation=None)
+    return save(HERE/'guide574-pair-conditional-quote.INERT.json',new)
+
+
+if __name__=='__main__':
+    print(json.dumps(calculate(),sort_keys=True))

@@ -1,0 +1,56 @@
+{
+  "Root_selected": true,
+  "Source_WRITE_claimed": false,
+  "Source_closed": true,
+  "actual_compact": {
+    "bytes": 7340,
+    "path": "/tmp/P2-V4-CLI33-live-reconciled-READ3-controls-46ECQFly/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json",
+    "sha256": "f31aa8ee673a2de265eb497891b9f7f390a8310c26ad2bac33d824961f952a86"
+  },
+  "actual_isolated_content_epoch": {
+    "bytes": 6362,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "e655b5bd34e12e6825044d4eb103f296e8f7f67a114520f74549aa54b37cce4e"
+  },
+  "actual_report": {
+    "bytes": 1342427,
+    "path": "/tmp/P2-V4-CLI33-live-reconciled-READ3-controls-46ECQFly/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-closed-report.json",
+    "sha256": "e48d24a3fe4a2ff14f3607d7b3841ec463cbf7cef6cd7c5eece55cfdf7e17ae9"
+  },
+  "exact_local_freeze": {
+    "bytes": 6102,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-live-reconciled-index-refreshed-freeze.json",
+    "sha256": "55a3b16ae1e00c7df30146a03cdde8ad98eda319ee2c3af386662dc4aabbb37a"
+  },
+  "outer_epoch_record_count": 1610,
+  "outer_epoch_reference": {
+    "bytes": 846652,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-live-reconciled-outer1610-epoch.json",
+    "sha256": "fb7b6f9b1dacdb57a47c9d7d72b9e1a969ae76796ac4732706eaaa7676c4a1ec"
+  },
+  "owned_module_closed": true,
+  "promotion_selected": false,
+  "protected_index_reference": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795734671195646866",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "3561340",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671194646859",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/.git/index",
+    "sha256": "52160bc3ee19a11de6ef4f1fdfd517ca44d814a775e7b0c6237503169deff577"
+  },
+  "python_epoch_record_count": 1597,
+  "python_epoch_reference": {
+    "bytes": 840097,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-live-reconciled-Python1597-epoch.json",
+    "sha256": "40c1ae7c954d594df87698c63663fdf6ee9e3f0c1876116b2ee7aff7c34a3edf"
+  },
+  "schema": "actual-D27-observed-D-root-initializer-READ-small-closeout/v1"
+}

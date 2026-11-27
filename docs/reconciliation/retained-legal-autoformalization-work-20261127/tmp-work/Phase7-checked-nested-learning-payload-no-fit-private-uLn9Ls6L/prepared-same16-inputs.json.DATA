@@ -1,0 +1,96 @@
+[
+  {
+    "expected": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      false
+    ],
+    "manifest": [
+      "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/red/maintained-121-plus-one.json",
+      45479,
+      "4e6a61f5552d0dcc42d352934644c7e200253cca91e8992c0ecdbbfc8a60eb0c"
+    ],
+    "overlay": [
+      "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/red/overlay.json",
+      357,
+      "3e0eb6f67861ad95d5fc58c04ee602a8cb2e38608ac30680212dc9dbc9819ed9"
+    ],
+    "phase": "red",
+    "projection": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/maintained-checked-project",
+    "runner": [
+      "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/existing-121-maintained-plus-nested-no-fit.py.DATA",
+      16924,
+      "f6c7d56be92b377af32cfd5cb004e8a4093ad6c82d227a676f3513be61c81b7c"
+    ],
+    "test": [
+      "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/test_trusted_feedback_weight_updates.checked-nested.py.DATA",
+      59753,
+      "d6db4090fd9b9d69a041ba836b072002f28299d93e5270c0087b239a56b3486e"
+    ],
+    "trainer": [
+      "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/red/trainer.after-v04.DATA",
+      42271,
+      "630398501836dc7bba1b213dbd93b2e93a18c593747f52467f325c5033d7fa94"
+    ]
+  },
+  {
+    "expected": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "manifest": [
+      "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/green/maintained-121-plus-one.json",
+      45478,
+      "c9ccdb7c5883a5cc9044c35c8ceb683e3d88609d72a50aedd7565730d4148335"
+    ],
+    "overlay": [
+      "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/green/overlay.json",
+      370,
+      "bf5b9d2c3c2a91bd32a7c7af5a74334c430e8cf87f76782dd7a31c546f2da082"
+    ],
+    "phase": "green",
+    "projection": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/maintained-checked-project",
+    "runner": [
+      "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/existing-121-maintained-plus-nested-no-fit.py.DATA",
+      16924,
+      "f6c7d56be92b377af32cfd5cb004e8a4093ad6c82d227a676f3513be61c81b7c"
+    ],
+    "test": [
+      "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/test_trusted_feedback_weight_updates.checked-nested.py.DATA",
+      59753,
+      "d6db4090fd9b9d69a041ba836b072002f28299d93e5270c0087b239a56b3486e"
+    ],
+    "trainer": [
+      "/tmp/Phase7-checked-nested-learning-payload-no-fit-private-uLn9Ls6L/green/trainer.checked-route.after.py.DATA",
+      42453,
+      "cd37964aa4a497e8d778ae0e6a90fe87f3362ead8c9a3751a5a3288b7370ed2e"
+    ]
+  }
+]

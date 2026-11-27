@@ -1,0 +1,79 @@
+{
+  "GREEN": {
+    "bytes": 5742,
+    "errors": 0,
+    "failures": 0,
+    "passed_parent_methods": 24,
+    "sha256": "d061938578707060b3110ce778fe18b7f10d8e7d44cac4d8e175bc69ded51d9d",
+    "skips": 0
+  },
+  "accounting": {
+    "additional_private_IO_reserve": 1048576,
+    "all_repeats_and_prior_scoping_retained": true,
+    "charged_upper_bound_before_this_closeout_readback": 5111476,
+    "closed_prior_P1_unit_2074871_retained_separately_not_refunded": true,
+    "phase_limit": 8388608,
+    "prior_failed_cohort_debit": 3145728
+  },
+  "assignment": {
+    "bytes": 5091,
+    "path": "/tmp/Root-Main-existing-handoff-unloaded-resume-unit-v294-t5i28p43/assignment.json",
+    "sha256": "d86bea328f40e42d09be2223a4fd77e0ec48815364316f906c3c593f547a9c53"
+  },
+  "corrected_RED": {
+    "bytes": 45424,
+    "do_not_treat_subtest_failures_as_parent_count": true,
+    "errors": 0,
+    "failure_observations": 24,
+    "parents": 24,
+    "sha256": "827725309be7a746c22dc9b260e8da1c17f0480a2ff0bb0c299e219bfdc7d141"
+  },
+  "full_eight_phase_goal_complete": false,
+  "future_operation": "Existing Root selects any actual caller use separately; no automatic real activation or replay authorized here",
+  "history_retained": [
+    "initial baseline report4d74 had one incorrect fictional256KiB bound on the legacy4MiB sender; corrected transport boundary, assertions unchanged",
+    "initial real-export diagnostic1a70 preflight_unavailable isolated that fixture mismatch",
+    "test-function export cache added once per cohort after real exact source/roster validation; every protocol/artifact/sender validator is actual code",
+    "initial overlength coordinator handoff tool response rejected before enqueue, shortened metadata handoff then acknowledged; no experiment RPC occurred"
+  ],
+  "post": {
+    "bytes": 19593,
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/invoke-existing-durable-handoff.unloaded-hydration.after.py.DATA",
+    "sha256": "00d26e75f8e84fe03364101fbbe1a88c32e4d4b02bd24dd92fd263adbc1da9ca"
+  },
+  "proposal": {
+    "bytes": 2819,
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/sealed-private-existing-invoke-once-unloaded-hydration-v01.json",
+    "sha256": "ed9f35af2b83b098a5ff63a5fb85b3c637abfd1026eb9bbcb0de075721dfd6b4"
+  },
+  "scope": {
+    "P1_SQL_test239d_freeze_untouched": true,
+    "all_other_caller_AST_and_globals_unchanged": true,
+    "canonical_Source_Git_SQL_SDK_Native_model_work": 0,
+    "new_provider_controller_thread_registry_or_authority": false,
+    "only_changed_top_level_AST": "invoke_once",
+    "production_CLI9496_unchanged": true,
+    "real_AppServer_RPC_or_message_dispatch_experiment": 0
+  },
+  "static_peer_review": {
+    "child_limit": 131072,
+    "child_total": 85865,
+    "no_extra_import_test_RPC_by_reviewer": true,
+    "reads_final_caller_and_tests": 40162,
+    "reads_initial_schema_and_saved_resume_metadata": 45703,
+    "result": "CLEAR"
+  },
+  "status": "PRIVATE IMPLEMENTATION AND FICTIONAL ENGINEERING QUALIFICATION CLOSED",
+  "terminal": {
+    "exit_code": 0,
+    "no_open_owned_handle": true,
+    "own_session_id": 31211,
+    "terminal_chunk": "b3f97b"
+  },
+  "tests": {
+    "bytes": 20569,
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/test_existing_invoke_once_hydration.py",
+    "sha256": "f32c6dcd0f192dbdbe291f719749a233a9e1f682220e162a66065ae4543f2127"
+  },
+  "unit": "existing invoke_once unloaded-terminal metadata hydration"
+}

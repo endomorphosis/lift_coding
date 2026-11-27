@@ -1,0 +1,114 @@
+--- prior/final_physical_union.py
++++ candidate/final_physical_union.py
+@@ -263,14 +263,15 @@
+     return ledger.commitment((TEACHER_PILOT_FIRST_USE_WALL_SCHEMA, all_paid_phases_sha256, witness))
+ 
+ 
+-def _teacher_pilot_first_use_wall(ledger, binding_pin, witness, expected, seen, reserved_pins, approve):
++def _teacher_pilot_first_use_wall(ledger, binding_pin, witness, expected, seen, reserved_pins, approve, *,
++        allow_empty=False, scope="whole_pilot_opening_through_independently_authenticated_terminal_evidence"):
+     span = witness.span
+     original_windows = tuple((event, row["request_sha256"], leaf.close_sha256,
+         leaf.clock_domain_sha256, leaf.start_ns, leaf.end_ns) for event, (row, leaf) in sorted(seen.items()))
+     evidence = (span.receipt_sha256, witness.opening_receipt_sha256, witness.terminal_evidence_receipt_sha256)
+     require({pin for row in original_windows for pin in row[:3]}.union(reserved_pins).isdisjoint(evidence),
+             "first-use wall receipts must not alias original paid scope, request, event or close identities")
+-    require(bool(original_windows)
++    require((allow_empty or bool(original_windows))
+             and all(domain == span.clock_domain_sha256 and span.start_ns <= start <= end <= span.end_ns
+                     for _, _, _, domain, start, end in original_windows),
+             "first-use wall must enclose every original paid event in its clock domain")
+@@ -284,7 +285,7 @@
+             "opening_receipt_sha256": witness.opening_receipt_sha256,
+             "terminal_evidence_receipt_sha256": witness.terminal_evidence_receipt_sha256,
+             "physical_clock_windows_sha256": clock_roster_sha256, "covered_paid_events": len(original_windows),
+-            "scope": "whole_pilot_opening_through_independently_authenticated_terminal_evidence"}
++            "scope": scope}
+ 
+ 
+ def verify_all_paid_phases(
+@@ -464,3 +465,84 @@
+             "physical_paid_events": tuple(ledger._wire(union[key]) for key in sorted(union)),
+             "observed_exclusive_physical_work_ns": ledger._physical_work_ns(union),
+             "dispatch_authority": False, **wall}
++
++
++TEACHER_PILOT_PREPARATION_STOP_WALL_SCHEMA = "reviewed-teacher-pilot-preparation-stop-first-use-wall/v1"
++
++
++def verify_teacher_pilot_preparation_stop_wall(
++        ledger, validator, source_owner, physical_owner, *, expected_preparation_stop_sha256,
++        first_use_wall, expected_first_use_wall_sha256, verify_first_use_wall_owner, **preparation_args):
++    """Replay a selected terminal stop, including a genuine zero-paid preparation stop.
++
++    The existing study verifies the roster, the coverage and both dispatch
++    closes when a replacement producer was tried. All decoder slots must be
++    independently unstarted before first-use time can end at this stop.
++    """
++    require(ledger._pin(expected_preparation_stop_sha256) and callable(verify_first_use_wall_owner),
++            "exact original preparation stop and independent clock owner required")
++
++    def input_commitment():
++        return ledger.commitment({key: (sha256(value).hexdigest() if type(value) is bytes else value)
++                                  for key, value in preparation_args.items() if not callable(value)})
++
++    initial = input_commitment()
++
++    def current():
++        require(teacher_pilot_first_use_wall_commitment(ledger, expected_preparation_stop_sha256, first_use_wall)
++                == expected_first_use_wall_sha256 and input_commitment() == initial,
++                "selected preparation stop or first-use wall witness changed")
++
++    current()
++    seen = {}
++    replay = preparation_args.get("replay_preparation_close")
++
++    def capture(row):
++        selected = dict(row)
++        observed = replay(row)
++        current()
++        event = selected["event_sha256"]
++        require(type(observed) is physical_owner.PhysicalClose and event not in seen,
++                "exact once-per-event original preparation close required")
++        seen[event] = selected, deepcopy(observed)
++        return observed
++
++    original_args = dict(preparation_args)
++    if callable(replay):
++        original_args["replay_preparation_close"] = capture
++    report = ledger.summarize_teacher_pilot_preparation_stop(validator, source_owner, physical_owner, **original_args)
++    current()
++    require(report["schema"] in (ledger.TEACHER_PILOT_PREPARATION_STOP_SCHEMA,
++                                 ledger.TEACHER_PILOT_PREPARATION_RECOVERY_STOP_SCHEMA)
++            and report["dispatch_authority"] is False and ledger.commitment(report) == expected_preparation_stop_sha256,
++            "exact independently selected terminal preparation stop required")
++    scope = report["decoder_dispatch"]
++    require(len(scope) == 1 + 2 * len(ledger.MATRIX_TEACHERS)
++            and tuple(row["arm"] for row in scope) == tuple(arm for arm, _ in preparation_args["study"].arms)
++            and all(row["dispatch_status"] == "confirmed_unstarted" and row["decoder_attempt_sha256"] is None for row in scope)
++            and ledger._pin(report.get("no_dispatch_sha256")) and ledger._pin(report.get("no_dispatch_owner_close_sha256"))
++            and ("recovery_coverage_sha256" not in report or (
++                ledger._pin(report.get("recovery_no_dispatch_sha256"))
++                and ledger._pin(report.get("recovery_no_dispatch_owner_close_sha256")))),
++            "a preparation-only wall requires authenticated unstarted evidence for every original decoder arm")
++    refs = report.get("paid_preparation_event_refs", report["original_paid_preparation_event_refs"])
++    require(report["paid_preparation_event_count"] == len(seen)
++            and tuple(map(tuple, refs)) == tuple((event, leaf.close_sha256) for event, (_, leaf) in sorted(seen.items())),
++            "preparation-only elapsed span must bind every original paid preparation event")
++    reserved = {value for key, value in report.items() if key.endswith("_sha256") and ledger._pin(value)}
++    reserved.update((expected_preparation_stop_sha256, preparation_args["plan"].requests_sha256))
++    for field in ("profiles", "recovery_profiles"):
++        reserved.update(row["owner_close_sha256"] for row in report.get(field, ()))
++
++    def approve(*pins):
++        decision = verify_first_use_wall_owner(*pins)
++        current()
++        require(ledger.commitment(report) == expected_preparation_stop_sha256,
++                "selected original preparation stop changed during clock approval")
++        return decision
++
++    wall = _teacher_pilot_first_use_wall(ledger, expected_preparation_stop_sha256, first_use_wall,
++        expected_first_use_wall_sha256, seen, reserved, approve, allow_empty=True,
++        scope="pilot_opening_through_independently_authenticated_preparation_stop")
++    return {"schema": TEACHER_PILOT_PREPARATION_STOP_WALL_SCHEMA, "preparation_stop_sha256": expected_preparation_stop_sha256,
++            "preparation_stop": report, "first_use_wall": wall, "dispatch_authority": False}

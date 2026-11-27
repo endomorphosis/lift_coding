@@ -1,0 +1,88 @@
+"""Replay selected Guide573 and Guide574 artifacts through the same detached verifier."""
+from pathlib import Path
+from hashlib import sha256
+import json
+
+HERE=Path(__file__).resolve().parent
+TMP=HERE.parent
+LAST=TMP/'decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP'
+PREVIOUS=LAST/'rebind.py'
+FRONTIER=TMP/'decoder-training-compact-right-censor-controls-private-v01-982l3zS2/guide574'
+PUBLISHED=TMP/'P7-checked-feedback-revalidated-final-LadvXFyf'
+READ=TMP/'P7-Guide573-successor-live-READ10-controls-JedG5GQ0'
+
+
+def source():
+    raw=PREVIOUS.read_bytes()
+    assert (len(raw),sha256(raw).hexdigest())==(11960,'3db7035d5989a45eac95c6e58d6f76040517f91f819f549d3ed5f4efaead8f20')
+    text=raw.decode()
+
+    def replace(old,new):
+        nonlocal text
+        assert text.count(old)==1,old
+        text=text.replace(old,new,1)
+
+    replace("    refs = metadata['retained_refs']\n","""    if GUIDE == 573:
+        refs=metadata['retained_refs']
+    else:
+        refs=dict(metadata['references'],write_close=metadata['references']['writer'],
+                  read_close=metadata['references']['content_epoch'])
+        read_close=load(refs['read_close'])
+        refs['metadata']=read_close['outer_epoch_reference']
+        metadata=dict(metadata,datasets_root=str(Path(metadata['writer_expected_D_index']['path']).parent.parent),
+                      changed_retained_bodies=metadata['retained_changed_content'])
+""")
+    replace("    read = load(code['READ3'])","    read = load(code[CODE_READ])")
+    first=text.index("    changes=code['exact_two_changes']")
+    last=text.index("    reconstruct = extract",first)
+    replace(text[first:last],"""    change_rows=code[CODE_CHANGES]
+    assert {name for name in pre if pre[name]!=old[name]}==change_rows.keys()
+    for name, change in change_rows.items():
+        if GUIDE == 573:
+            oids=tuple(change[:2])
+        else:
+            oids=(change['parent_blob'],change['stage0_and_committed_blob'])
+            assert change['git_mode']=='100644' and change['bytes']==pre[name][3]
+            assert change['path']==str(Path(d['root'])/name)
+        assert (old[name][0],pre[name][0])==oids
+        assert old[name][1:3]==pre[name][1:3]==(0o100644,0)
+""")
+    replace('    assert len(rows)==1610','    assert len(rows)==OUTER_ROWS')
+    for name in ('writer-matched-index.DATA','replay.INERT.json','all-fresh-preview.INERT.json'):
+        replace(f"HERE/'guide573-{name}'",f"HERE/f'guide{{GUIDE}}-{name}'")
+    replace("schema='private-stage-a-guide573-writer-index-and-body-roles/v1'",
+            "schema=f'private-stage-a-guide{GUIDE}-writer-index-and-body-roles/v1'")
+    replace("prior_guide_index=PRIOR_INDEX,guide573_metadata=METADATA,prior_preview=PRIOR_PREVIEW,",
+            "prior_guide_index=PRIOR_INDEX,prior_preview=PRIOR_PREVIEW,**{f'guide{GUIDE}_metadata':METADATA},")
+    return text
+
+
+def run(guide):
+    assert guide in (573,574)
+    namespace={'__file__':str(PREVIOUS),'__name__':'guide_replay_backend','GUIDE':guide}
+    exec(compile(source(),str(PREVIOUS),'exec'),namespace)
+    make_ref=namespace['ref']
+    if guide==573:
+        namespace.update(CODE_READ='READ3',CODE_CHANGES='exact_two_changes',OUTER_ROWS=1610)
+        def verify_unchanged(path,raw):
+            assert path.parent==LAST and path.read_bytes()==raw
+            return make_ref(path,len(raw),sha256(raw).hexdigest())
+        namespace['save']=verify_unchanged
+    else:
+        namespace.update(
+            HERE=HERE,CODE_READ='READ10',CODE_CHANGES='exact_nine_changes',OUTER_ROWS=1614,
+            ALLOWED=namespace['ALLOWED']|{HERE,LAST,FRONTIER,PUBLISHED,PUBLISHED/'guide574-transport',
+                PUBLISHED/'guide574-composition',READ,READ/'actual-output'/'raw'},
+            PRIOR_INDEX=make_ref(LAST/'guide573-writer-matched-index.DATA',7070597,
+                                 'c3be915a700050787e42001811b05aab2edebf0737fd3c207f23674b862cbee0'),
+            PRIOR_PREVIEW=make_ref(LAST/'guide573-all-fresh-preview.INERT.json',556332,
+                                   '72b538ab80ac6610b75f64d74c1d474ae8beb651b54a8b740495941b0c6fbb4a'),
+            METADATA=make_ref(FRONTIER/'frontier.INERT.json',5580,
+                              '2f1bbdf5b04b9f8c827989443c3dba3b061eba72fe9951d694173f63527ad306'),
+            EVENTS=make_ref(PUBLISHED/'guide574-transport'/'actual-Guide574-publication-events.jsonl',3600,
+                            '99a7a84aa4cf619486b7f7aab15356ce14aaf6d5c19f3a7b6fd319edafbf4345'))
+    return namespace['replay']()
+
+
+if __name__=='__main__':
+    print(json.dumps({'Guide573_exact_retained_replay':run(573),'Guide574':run(574)},sort_keys=True))

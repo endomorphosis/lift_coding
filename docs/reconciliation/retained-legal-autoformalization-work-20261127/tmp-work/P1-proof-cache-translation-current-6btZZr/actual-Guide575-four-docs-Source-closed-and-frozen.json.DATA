@@ -1,0 +1,158 @@
+{
+  "A": "219ba3da0f62f772801d71715e22c506faa21126",
+  "A_index": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "HEAD": "099cf857240915394deced81eff5e5dfcf5e96c6",
+  "Source_closed": true,
+  "actual_Source_leases": [
+    {
+      "canonical_root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+      "cooperative": true,
+      "lock_path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/workspace/control-plane/source-leases/source.lock",
+      "mode": "write",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 8.742418140172958e-05
+    },
+    {
+      "canonical_root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+      "cooperative": true,
+      "lock_path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/workspace/control-plane/source-leases/source.lock",
+      "mode": "read",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 6.865710020065308e-05
+    }
+  ],
+  "code_publication": {
+    "bytes": 15468,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-Phase1-cache-translation-ordinary9-three-FF-publication.json",
+    "sha256": "d7ca14c392c0fdc91c3bdab15d027929cff6d699e214d89f9bb82cecc8a07c65"
+  },
+  "committed_docs": {
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": {
+      "bytes": 1551429,
+      "committed_blob": "9874e5a390e44cc42060bbc8769d11b7791d1d8e",
+      "full9": {
+        "st_ctime_ns": "1795742273618495141",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513030",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795742273618495141",
+        "st_nlink": "1",
+        "st_size": "1551429",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+      "sha256": "a47227c568bc657c874d86f52b81e1ba5fb5b6caef2073dfb4bb8056c0bb801e"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": {
+      "bytes": 1094414,
+      "committed_blob": "3541e089fc046bce378c46a3ae14ec62ccccdaea",
+      "full9": {
+        "st_ctime_ns": "1795742273619964864",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513032",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795742273619964864",
+        "st_nlink": "1",
+        "st_size": "1094414",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+      "sha256": "d56115ef23cb9a8e00e93ccea559f52811f432506c880f559a467628fd77c183"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": {
+      "bytes": 852112,
+      "committed_blob": "e77dedf5890725ab55260c171b8f2b26ecf39e18",
+      "full9": {
+        "st_ctime_ns": "1795742273620141361",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513033",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795742273620141361",
+        "st_nlink": "1",
+        "st_size": "852112",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+      "sha256": "7a89c2bc8d3efdbe0a14f5c400e6e7be141d047a30389f97e04393350f20720d"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": {
+      "bytes": 2355449,
+      "committed_blob": "97122c3b039ef607f8fd33402c8e0b0f8520ab4c",
+      "full9": {
+        "st_ctime_ns": "1795742273619541245",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513031",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795742273619541245",
+        "st_nlink": "1",
+        "st_size": "2355449",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+      "sha256": "1a0b5a9196f927f4b089463b1e19f2e75800a4e4755ecae4a6c1eef1230e9d9c"
+    }
+  },
+  "composer_READY": {
+    "bytes": 17732,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/guide575-composition/READY-one-existing-guide575-four-guides.json",
+    "sha256": "31d5f612a9896c338a1008002b26acae3da98032dade140fe1ebdde308441e7a"
+  },
+  "evidence_ordinal": 575,
+  "full_charge": {
+    "bytes": 1329,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/Source-only-Guide575-full-retained-cap.json",
+    "sha256": "f9dd3366442e9cb4436bbd78ded76c1fd37bf198446da1c5929379d499532fbd"
+  },
+  "index": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795742273905497335",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72514406",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795742273899497289",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "sha256": "0a4e1e63733a772db7ccd2edac48653b03803c8bdfcfc03ed3b8539d55e8a744"
+  },
+  "module_closed": true,
+  "only_four_Git_changes": true,
+  "ordinary_qualification": {
+    "bytes": 3616,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-Phase1-current-cache-translation-ordinary9-closed.json",
+    "sha256": "3514c4fd3f0067b6c11378d22bdc9f54689522cba38bbadfcfef74bf20f09d57"
+  },
+  "prior_D": "4cc1311f12a317b8a0a0aa92c950011cd09399f0",
+  "prior_values_preserved": {
+    "components": 126,
+    "evidence_records": 574,
+    "tasks": 24
+  },
+  "pushed": false,
+  "schema": "actual-Guide575-exact-four-isolated-Source-freeze/v1",
+  "terminal_returncode": 0,
+  "tree": "c276f362a9bb1adbe5ec18d050aea5b30dad7cdf"
+}

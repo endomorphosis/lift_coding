@@ -1,0 +1,150 @@
+--- a/verify_standalone_git.py
++++ b/verify_standalone_git.py
+@@ -115,9 +115,62 @@
+     return 46 * short_capture + 4 * ref_capture
+ 
+ 
++def stage_a_paired_git_expectations(project_expectations, roots):
++    """Snapshot the exact Git selector rows offered by the original paired owner."""
++    from copy import deepcopy
++
++    if (type(roots) is not tuple or len(roots) != 2
++            or any(type(root) is not str or not Path(root).is_absolute()
++                   or str(Path(root)) != root or '..' in Path(root).parts for root in roots)
++            or roots[0] == roots[1] or type(project_expectations) is not dict
++            or set(project_expectations) != set(roots)):
++        raise ValueError('exact two original paired Git roots required')
++    selected = deepcopy(project_expectations)
++    project_keys = {'HEAD','tree','branch_ref','refs_sha256','Git_selector_metadata'}
++    stat_keys = {'st_dev','st_ino','st_mode','st_uid','st_gid','st_nlink',
++                 'st_size','st_mtime_ns','st_ctime_ns'}
++    identities = set()
++
++    def hex_pin(value, length):
++        return type(value) is str and len(value) == length and all(x in '0123456789abcdef' for x in value)
++
++    for root in roots:
++        entry = selected[root]
++        if (type(entry) is not dict or set(entry) != project_keys
++                or not hex_pin(entry['HEAD'],40) or not hex_pin(entry['tree'],40)
++                or not hex_pin(entry['refs_sha256'],64)):
++            raise ValueError('exact original Git HEAD, tree and ref-stream pins required')
++        branch, metadata = entry['branch_ref'], entry['Git_selector_metadata']
++        if (type(branch) is not str or not branch.startswith('refs/heads/')
++                or any(part in ('','.','..') for part in branch.split('/'))
++                or any(ord(char) <= 32 or ord(char) == 127 for char in branch)
++                or type(metadata) is not dict or set(metadata) != {'HEAD','ref','config'}):
++            raise ValueError('exact original symbolic branch and Git selector rows required')
++        git_dir = Path(root)/'.git'
++        for key, leaf in (('HEAD','HEAD'),('ref',branch),('config','config')):
++            pin = metadata[key]
++            if type(pin) is not dict or set(pin) != {'path','full9'} or pin['path'] != str(git_dir/leaf):
++                raise ValueError('Git selector path must bind its original HEAD, loose ref or config role')
++            stamp = pin['full9']
++            if type(stamp) is not dict or set(stamp) != stat_keys:
++                raise ValueError('exact original Git selector full9 required')
++            try:
++                canonical = all(type(value) is str and value == str(int(value)) for value in stamp.values())
++            except ValueError as error:
++                raise ValueError('exact original Git selector full9 required') from error
++            if (not canonical or not stat.S_ISREG(int(stamp['st_mode']))
++                    or stamp['st_nlink'] != '1' or int(stamp['st_size']) < 0):
++                raise ValueError('exact regular single-link Git selector full9 required')
++            identity = (stamp['st_dev'],stamp['st_ino'])
++            if identity in identities:
++                raise ValueError('Git selector file identity aliases another selected role')
++            identities.add(identity)
++    return selected
++
++
+ def verify_standalone_git(io, record, deadline, *, retain_d_index=False, control_read=None,
+                           stage_a_targets=None, read_stage_zero=None, admit_git_output=None, record_git_output=None,
+-                          git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT):
++                          git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT, project_expectations=None):
+     """Recheck selected roots and index/exclude bytes under the existing Source contexts.
+ 
+     Keep the D index bytes from this pass for a downstream reader when selected.
+@@ -205,15 +258,23 @@
+         return raw if retain_body else None
+ 
+     excludes = {row['path']: row for row in record['exact_exclude_pins']}
+-    for root, index_key in ((str(R), 'D_index'), (str(A), 'A_index')):
+-        expected = STANDALONE_PROJECT_EXPECTATIONS[root]
++    roots = (str(R), str(A))
++    expectations = (STANDALONE_PROJECT_EXPECTATIONS if project_expectations is None
++                    else stage_a_paired_git_expectations(project_expectations, roots))
++    def selector_matches(pin):
++        path = Path(pin['path'])
++        return ((project_expectations is None or path.resolve(strict=True) == path)
++                and full9(path.lstat()) == pin['full9'])
++
++    for root, index_key in ((roots[0], 'D_index'), (roots[1], 'A_index')):
++        expected = expectations[root]
+         git_dir = Path(root) / '.git'
+         selector_pins = expected['Git_selector_metadata']
+         if set(selector_pins) != {'HEAD', 'ref', 'config'}:
+             raise ValueError('exact standalone Git selector metadata required')
+         for pin in selector_pins.values():
+             path = Path(pin['path'])
+-            if not path.is_relative_to(git_dir) or full9(path.lstat()) != pin['full9']:
++            if not path.is_relative_to(git_dir) or not selector_matches(pin):
+                 raise ValueError(f'standalone Git selector metadata changed: {path}')
+         actual_index = git(root, 'rev-parse', '--path-format=absolute', '--git-path', 'index').decode().strip()
+         actual_exclude = git(root, 'rev-parse', '--path-format=absolute', '--git-path',
+@@ -260,7 +321,7 @@
+                                  for relative, pin in zip(relative_bytes, stage_a_pins, strict=True)]
+                 if tree_rows[-1] != b'' or sorted(tree_rows[:-1]) != sorted(expected_rows):
+                     raise ValueError('Stage A D HEAD tree paths, kinds, modes or blobs differ')
+-        if any(full9(Path(pin['path']).lstat()) != pin['full9'] for pin in selector_pins.values()):
++        if any(not selector_matches(pin) for pin in selector_pins.values()):
+             raise ValueError(f'standalone Git selector changed during verification: {root}')
+         if stage_a_pins:
+             endpoint_roots[index_key[0]] = {'root': root, 'HEAD': expected['HEAD'], 'tree': expected['tree'],
+@@ -281,7 +342,7 @@
+         io, record, deadline, *, between_endpoints, control_read, stage_a_targets,
+         read_stage_zero, admit_git_output, record_git_output,
+         expected_owner_scope_sha256, verify_continuous_owner_scope,
+-        git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT):
++        git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT, project_expectations=None):
+     """Use retained Git control bytes under one selected continuous paired Source READ.
+ 
+     The existing owner must hold both READ contexts through this call. Its
+@@ -302,6 +363,8 @@
+     roots = (str(R), str(A))
+     pid = os.getpid()
+     scope_kind = 'paired-git-continuous-read-retained-controls/v1'
++    git_options = {} if project_expectations is None else {
++        'project_expectations':stage_a_paired_git_expectations(project_expectations, roots)}
+ 
+     def verify_scope(phase):
+         if (os.getpid() != pid or (str(R), str(A)) != roots or time.monotonic() >= deadline
+@@ -384,7 +447,7 @@
+                 io, selected, deadline, retain_d_index=True, control_read=read_bytes,
+                 stage_a_targets=targets, read_stage_zero=read_stage_zero,
+                 admit_git_output=admit_git_output, record_git_output=record_git_output,
+-                git_output_maximum=git_output_maximum)
++                git_output_maximum=git_output_maximum, **git_options)
+ 
+         verify_scope('before-opening')
+         opening = observe_endpoint(opening_read)
+@@ -402,6 +465,11 @@
+         if tuple(terminal_paths) != ordered_paths or closing != opening:
+             raise ValueError('closing Git endpoint differs from the opening endpoint')
+         verify_scope('closing-complete')
++        if git_options and any(Path(pin['path']).resolve(strict=True) != Path(pin['path'])
++                               or full9(Path(pin['path']).lstat()) != pin['full9']
++                               for entry in git_options['project_expectations'].values()
++                               for pin in entry['Git_selector_metadata'].values()):
++            raise ValueError('selected Git selector changed after final owner verification')
+         for path in ordered_paths:
+             check_descriptor(pin_map[path], cached[path][0])
+         receipt = {
+@@ -414,6 +482,8 @@
+             'closing_control_body_read_bytes': 0,
+         }
+     receipt['retained_descriptors_closed'] = True
++    if git_options:
++        receipt['closing_explicit_git_selector_metadata_checked'] = True
+     return opening, middle, closing, receipt
+ 
+ 

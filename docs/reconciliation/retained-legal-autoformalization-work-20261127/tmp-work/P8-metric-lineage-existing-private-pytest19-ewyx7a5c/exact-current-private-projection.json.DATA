@@ -1,0 +1,3055 @@
+{
+  "epoch": {
+    "bytes": 850358,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-live-reconciled-outer1614-epoch.json",
+    "sha256": "ce5954ea16ad993e247d3cff6fd3b93d0d7e130905f144f8e6351a5a1bc146d6"
+  },
+  "git_head": "8a902502e1a82d3da05b9c31a42db8c39ea8a9e1",
+  "git_read_only": true,
+  "private_bytes": 18597877,
+  "private_detected_absent_roles": [
+    "tests/unit/optimizers/logic_theorem_optimizer/__init__.py"
+  ],
+  "published_V3_support_role_basis": {
+    "bytes": 67465,
+    "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/immutable-Git-role-map.json",
+    "sha256": "04f873654b2653b8812951691c759e1424401fc5ccdcb0be6b6ae5e47bc0b8f5"
+  },
+  "receipt": {
+    "bytes": 11446,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/SEALED-private-metric-lineage-cache-recovery-two-file-v01.json",
+    "sha256": "ed2b7f020d68c7564a99dc6e65857bf92ccb97f80204b3b2e8da53e3c9161e9d"
+  },
+  "same_pytest_guard": {
+    "bytes": 2733,
+    "path": "/tmp/P2-V4-current-admission-withdrawal-test-only-private-EFrOMQn8/invoke-existing-pytest-private-v02-one-selector.py.DATA",
+    "sha256": "03df45a40b9e5d51ba9d8ac97a11a9f7833560393fe33a1706312144ae2ec571"
+  },
+  "selected_roles": {
+    "__init__.py": {
+      "baseline": {
+        "bytes": 478,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/__init__.py",
+        "sha256": "bd518ec0f37a0a5c4c0b35e7cf36504716a1fe4dbe4f0a803629a965a9fdeeb1"
+      },
+      "git_blob": "f193dac78f8856b9144978fe4ba0f07ffc6fe19c",
+      "mode": "100644"
+    },
+    "conftest.py": {
+      "baseline": {
+        "bytes": 2054,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/conftest.py",
+        "sha256": "2eab130f3effda3737f25a1770ccd5f9d4955ba42c3d692d659801ffdc1035cf"
+      },
+      "git_blob": "5cad63c1111f76828f01024a5a1bc726ad1211d5",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/__init__.py": {
+      "baseline": {
+        "bytes": 56829,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/__init__.py",
+        "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+      },
+      "git_blob": "7d8b29b674206355ec12a84f69920a819338e43c",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/duckdb_control/autoencoder_registry.py": {
+      "baseline": {
+        "bytes": 63678,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/duckdb_control/autoencoder_registry.py",
+        "sha256": "f6e782db575b3b645439082bb244449152c55cd82bdf1f8787fce9a1381fab7f"
+      },
+      "git_blob": "77b377ed5ac6f51eb0d2bb2a52006c26ca1b74c1",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/duckdb_control/connections.py": {
+      "baseline": {
+        "bytes": 57884,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/duckdb_control/connections.py",
+        "sha256": "8d3cc05a89f2b337e584708e7c6dbc8d7d4deccef442265ccbd5ca848821a872"
+      },
+      "git_blob": "820a19201664d1044b3af61e0dc79f183c31bd6b",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/duckdb_control/contracts.py": {
+      "baseline": {
+        "bytes": 19957,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/duckdb_control/contracts.py",
+        "sha256": "7ef4df9216ecaef4a415afffbb353b9b091120a4faaf702d3c243d43ceb6c199"
+      },
+      "git_blob": "aa8b7b9636bbae9cd239b94288481ab508afca63",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/ipfs_backend_router.py": {
+      "baseline": {
+        "bytes": 35292,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/ipfs_backend_router.py",
+        "sha256": "d57898ceb7a5be0d8776f81ecb08cf96144afa03f55090d5f33b41baed3e8b0d"
+      },
+      "git_blob": "99e0217a261e86fdc38298ea181960bedafbd9b5",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/__init__.py": {
+      "baseline": {
+        "bytes": 3407,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/__init__.py",
+        "sha256": "8f4f1468b80c29eb7f6af4c02907adccc6bad5df1c7f22de5be7731a52b04b6b"
+      },
+      "git_blob": "1efd5b02c02fdbcbd90d0fc80ba6bfd21cf5844b",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/__init__.py": {
+      "baseline": {
+        "bytes": 14271,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/__init__.py",
+        "sha256": "ba830d1ab93bea301ead1b31a827878478c89d6c428dba4d0063ca4c6e69e947"
+      },
+      "git_blob": "6679d43b271c3c39023dff53bc8b4517e3631132",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/cec_proof_cache.py": {
+      "baseline": {
+        "bytes": 18314,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/cec_proof_cache.py",
+        "sha256": "8a40f17c0b82d7f8b9dfb8654d53c5f9472852acbcc830fdb3f3d98221f71bf3"
+      },
+      "git_blob": "b3b28a1e0c05f828568ce892627c98066aa42cb4",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/cec_zkp_integration.py": {
+      "baseline": {
+        "bytes": 19473,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/cec_zkp_integration.py",
+        "sha256": "8284720a83162918a9785ec31d2e44dfbb2dd948a0f653b451745b0f8e3ab962"
+      },
+      "git_blob": "0c0661eb169afd2b786bed61595c654dbe891ce2",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py": {
+      "baseline": {
+        "bytes": 9131,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py",
+        "sha256": "06517ecd30e4889d2a54db6732279e61a53945906860ef66378b5d707cca04b0"
+      },
+      "git_blob": "95c482f2af3067181559c1eb5af733f5a85e8f0e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/dcec_core.py": {
+      "baseline": {
+        "bytes": 57189,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/dcec_core.py",
+        "sha256": "bb977f411605fc1f0715ed23c988102d55fa012029053c21c8fc5b14aea17e14"
+      },
+      "git_blob": "baa0353e9da94dc1542a5fadb4296710e55f6ec5",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/dcec_english_grammar.py": {
+      "baseline": {
+        "bytes": 26343,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/dcec_english_grammar.py",
+        "sha256": "2b87f9e7d256dd236c65147eabfc55bd3d481e74be63c80c23f6720d33cba0b2"
+      },
+      "git_blob": "cf0a3ec3c0e2850a5a9aad86ed7e2cd266bd4fea",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/dcec_integration.py": {
+      "baseline": {
+        "bytes": 18642,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/dcec_integration.py",
+        "sha256": "f039af934dba224d6c4984e8840fd8a4de00fe5e69837b0678d1d670dc26ac82"
+      },
+      "git_blob": "6306716e4d0bc35c7952629f55aaf0ef53737027",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/dcec_namespace.py": {
+      "baseline": {
+        "bytes": 13580,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/dcec_namespace.py",
+        "sha256": "9e6903c74d3b95634f86f4f67392ca61bf9a284b577294d2b12ff001d9fbeb24"
+      },
+      "git_blob": "f808e61fba61bc4f99409b35a7555db4348f971b",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/dcec_parsing.py": {
+      "baseline": {
+        "bytes": 14204,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/dcec_parsing.py",
+        "sha256": "2756e3c94acf902579bfc54d469e01ddd25b72f53d177b88921829d71df7da70"
+      },
+      "git_blob": "0feb2b0a0e86f6ad8885ebe08f9ef4636427e8e2",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py": {
+      "baseline": {
+        "bytes": 15038,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py",
+        "sha256": "0e0b231ed68c39054cfd2fd674780cb736fd258cde7570881cb3a41cb5d2680e"
+      },
+      "git_blob": "607e722ed7af91b4ff832142eb38acf2d057f6e7",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/exceptions.py": {
+      "baseline": {
+        "bytes": 10095,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/exceptions.py",
+        "sha256": "cbbbafacf70d1c7355d7c930f48c5f71fc711765aa4789a817e5c229c8e60622"
+      },
+      "git_blob": "7d4d894fd23aaf15b8ab0948ee0d8c552fd061c7",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/grammar_engine.py": {
+      "baseline": {
+        "bytes": 14472,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/grammar_engine.py",
+        "sha256": "df787f7656894c063eaad5e16bc78168f1fd7c301a0907639dfb466b5f286293"
+      },
+      "git_blob": "ef6a60266e397e8a26da397f04c3e1411c4c08a6",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/inference_rules/__init__.py": {
+      "baseline": {
+        "bytes": 4312,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/inference_rules/__init__.py",
+        "sha256": "46d1d7677be5038b9006cfa6738940dd306aa404736295cf58d201a4a398c641"
+      },
+      "git_blob": "540bf35af10362b5301c349506185bbfb7eb5d8f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/inference_rules/base.py": {
+      "baseline": {
+        "bytes": 2387,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/inference_rules/base.py",
+        "sha256": "5776e79206eb65fc3d2e898e48c374cba6fde09dbc48661d1ffb8417f2d99646"
+      },
+      "git_blob": "d9f2c6b3082bd48bf3e9672f8fab8b6a05ec04ff",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/inference_rules/cognitive.py": {
+      "baseline": {
+        "bytes": 24462,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/inference_rules/cognitive.py",
+        "sha256": "329334034ecfbb55fcb306c0d084a2a31f658a85af2ecb1edaef1c6ad7de7813"
+      },
+      "git_blob": "7519570d5de4875a9fbf77ee1ee88db8a6cef41f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/inference_rules/deontic.py": {
+      "baseline": {
+        "bytes": 15450,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/inference_rules/deontic.py",
+        "sha256": "8ef29a48e2e132f595ead529d446f7180745920ffae790feac985c121b4a6ddb"
+      },
+      "git_blob": "7f962d5b90aa258d8f29c0cc44bb8ed03a6d93d7",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/inference_rules/modal.py": {
+      "baseline": {
+        "bytes": 9218,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/inference_rules/modal.py",
+        "sha256": "4ddf941cb2c2920699ec0e7f48d34b68a727da40a8868bd161c56eb315c2e4ef"
+      },
+      "git_blob": "a6136fbeb248d253854908b5cabff7eeb8d46a44",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/inference_rules/propositional.py": {
+      "baseline": {
+        "bytes": 15934,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/inference_rules/propositional.py",
+        "sha256": "feb45f9807bc2d1cd38738006cb98cc553aa652918ee1158e8b106131ccd86bb"
+      },
+      "git_blob": "a4e114be165f806e6abf7881c2ecf5d6f1c6d98e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/inference_rules/resolution.py": {
+      "baseline": {
+        "bytes": 15219,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/inference_rules/resolution.py",
+        "sha256": "8a5078e2e5ed25c350b8d28d6173f0013c6f78d075bfe5ca4b0516d46cbfcd82"
+      },
+      "git_blob": "4eeb466ea7ce9667450e85476b4e9ff52cac447f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/inference_rules/specialized.py": {
+      "baseline": {
+        "bytes": 16154,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/inference_rules/specialized.py",
+        "sha256": "6a3d14356a1b076c7c943d7bd30da7d7694c03bae9da0d3ccf5a8bf848e7de96"
+      },
+      "git_blob": "805d49d20b43d19b50ac1636f8ba84e68821fd50",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/inference_rules/temporal.py": {
+      "baseline": {
+        "bytes": 23768,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/inference_rules/temporal.py",
+        "sha256": "08d09c5be78e72168a4f4edef74840e766f65e1b9a9e4601f3000308254b9eaf"
+      },
+      "git_blob": "b0f6b9fb0cf20c3bd55fad17d4831cbf705334be",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/legal_ir_lifecycle.py": {
+      "baseline": {
+        "bytes": 4694,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/legal_ir_lifecycle.py",
+        "sha256": "0e70084ecacfed64efa46716d13e5ecfd6a44686df5546a67716eb5cadc4a7fd"
+      },
+      "git_blob": "9f71d25b6daeaf02b0867d101a01a063ec6c301b",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/modal_tableaux.py": {
+      "baseline": {
+        "bytes": 17450,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/modal_tableaux.py",
+        "sha256": "5910e250b1aa61221f22318e6cea6858df3ee1701fe631634f9e1977ae671235"
+      },
+      "git_blob": "bad37bff06a4e72da495814547e6f59684134c89",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/nl_converter.py": {
+      "baseline": {
+        "bytes": 15938,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/nl_converter.py",
+        "sha256": "016b8e4893b9825e2f3b0a95d331691736433a1cdae430dde2d831862e0bf254"
+      },
+      "git_blob": "8a991e4143bb9ef55b2c8d1ce0bf814a46c1c772",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/problem_parser.py": {
+      "baseline": {
+        "bytes": 10061,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/problem_parser.py",
+        "sha256": "fd946d11ca07fcf09db67f91f3a90680f8b7024c373be09c514ff91a957682d3"
+      },
+      "git_blob": "c2edff854961ae8773228c8c2c339cf8bb7c0467",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/prover_core.py": {
+      "baseline": {
+        "bytes": 19007,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/prover_core.py",
+        "sha256": "c734b6cfbd05cd73bb5836d0635c1d9bb95ce3d722567e5afd082a4edb963487"
+      },
+      "git_blob": "b3590dc29697ae91c1c219efecd9870a0408a6c2",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/prover_core_extended_rules.py": {
+      "baseline": {
+        "bytes": 51196,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/prover_core_extended_rules.py",
+        "sha256": "07e26b65dba0a2f6be6bf7f36424a25da28d4c1e440e703b6985044684d9b253"
+      },
+      "git_blob": "d77b1d2492a6743eca5cf50c5dddf3dee1c90190",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/CEC/native/shadow_prover.py": {
+      "baseline": {
+        "bytes": 22696,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/CEC/native/shadow_prover.py",
+        "sha256": "90049debb68b2ae19238ee4637bd3b5a3124a7f06bb9448cd3567621df95d496"
+      },
+      "git_blob": "217942691f7737f4f969edc41b42b0a2396b9bc6",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/TDFOL/__init__.py": {
+      "baseline": {
+        "bytes": 11004,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/TDFOL/__init__.py",
+        "sha256": "42c252ba4fb85301b649bc3afe497a2799d27460b9556e57c7398b5441ba13e8"
+      },
+      "git_blob": "3c3a1cd0b7c9fcd5d4c3cb6b30b44169125c1e87",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/TDFOL/compiler_repairs.py": {
+      "baseline": {
+        "bytes": 11393,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/TDFOL/compiler_repairs.py",
+        "sha256": "248dd9a3c9be8b21fb75799415aa6a72c6d81d7c559ed7579fa3f4a69660b823"
+      },
+      "git_blob": "b914db06cd23be92ae0a24bcfb35c1b19d3fd1a3",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/TDFOL/tdfol_core.py": {
+      "baseline": {
+        "bytes": 28721,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+        "sha256": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7"
+      },
+      "git_blob": "c89b513ad59ba3e8c124be78ac2a93355f88a829",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/TDFOL/tdfol_parser.py": {
+      "baseline": {
+        "bytes": 29788,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/TDFOL/tdfol_parser.py",
+        "sha256": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3"
+      },
+      "git_blob": "6fab7228536c780d1b38704c946532fd9c27cb2f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/__init__.py": {
+      "baseline": {
+        "bytes": 4434,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/__init__.py",
+        "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+      },
+      "git_blob": "950f95b6c859021bbd76326adcf602bdd4d19482",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/__init__.py": {
+      "baseline": {
+        "bytes": 61853,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/__init__.py",
+        "sha256": "375049ac8658847ef08a411660a3a0f7f452d211fb78df1399a387db4e0c065b"
+      },
+      "git_blob": "b0f98a14e91837ddd3d40b9b1e3913b3c0d67cd7",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_contracts.py": {
+      "baseline": {
+        "bytes": 27024,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/corpus_contracts.py",
+        "sha256": "0279ad9f7afeb2843aba5c1e0c5b9dd85da8037bd46fd90497f987b613d05982"
+      },
+      "git_blob": "a6123cadd2535883d7e21829877e87f16c34a06e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_definition_adapter_v2.py": {
+      "baseline": {
+        "bytes": 19768,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/corpus_definition_adapter_v2.py",
+        "sha256": "17412dc0e246e43ba5a1935f3f053c5312b2868d334d6204ca2801aba9230237"
+      },
+      "git_blob": "6a4e4b58a0b8540df0d77e4cb9a2d28b05de792a",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_definition_norm_adapter.py": {
+      "baseline": {
+        "bytes": 20947,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/corpus_definition_norm_adapter.py",
+        "sha256": "82fc3590e7c606905cf0cf8d4984e779309c5f9620380e061910eb014b523af0"
+      },
+      "git_blob": "bf9b0a0f481dfda83a695041726298771577a6fa",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_definition_review.py": {
+      "baseline": {
+        "bytes": 23810,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/corpus_definition_review.py",
+        "sha256": "03da9d41741d176a1d305ce3a256213ca981bc98ea9f83721dee3fed10d12833"
+      },
+      "git_blob": "a1b3dbe7071a58c2b852d7515bc9d9a3229a11a7",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_definition_review_v2.py": {
+      "baseline": {
+        "bytes": 58374,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/corpus_definition_review_v2.py",
+        "sha256": "d121c761c4acc30e9e651c72f77c1adbd4ae190f11ca5f3535c166097ab8d7fe"
+      },
+      "git_blob": "26bbacaef5d5717873b25cd876f6e109c82fc912",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_definition_use_review_v2.py": {
+      "baseline": {
+        "bytes": 36028,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/corpus_definition_use_review_v2.py",
+        "sha256": "f8a8e36454555e27fe082504914db39d8924cea794802a41c4616ccc63081503"
+      },
+      "git_blob": "89977d014ca3f8f696ec0161f7a67ffcabe84542",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_definition_use_v2.py": {
+      "baseline": {
+        "bytes": 39651,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/corpus_definition_use_v2.py",
+        "sha256": "c8963dd77ec9e80df964e0e425c7940383ebf7b9ef16dcd5122c801a11051907"
+      },
+      "git_blob": "53a158f007c322b006a5d7762be1a5823216311d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_graph.py": {
+      "baseline": {
+        "bytes": 20583,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/corpus_graph.py",
+        "sha256": "8a1dc03ee39962baf784ac780ed2c8286b8e2e3998ec6677db281e81adc04409"
+      },
+      "git_blob": "3839b30bb3dab26e252d47ace30b8022c3daa692",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_graph_exchange.py": {
+      "baseline": {
+        "bytes": 17454,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/corpus_graph_exchange.py",
+        "sha256": "32800bca0662830409de0622e16902bd458cf6d47c821fc7079cdf4ba9ddc9ad"
+      },
+      "git_blob": "44465b6cde059d2c9ce69ce68423c334c5036623",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_norm_definition_adapter.py": {
+      "baseline": {
+        "bytes": 56136,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/corpus_norm_definition_adapter.py",
+        "sha256": "0071cc56a8284bac64c49ee24d1f2b3030c2dc98302b964c7baefd39d526939a"
+      },
+      "git_blob": "3664e8da87608d53a0a3bbaf9bb519dfd2cdd5f2",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_parent_occurrence_adapter.py": {
+      "baseline": {
+        "bytes": 33358,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/corpus_parent_occurrence_adapter.py",
+        "sha256": "3fc1f863825414eb187e0adc326b4b0710e5a6170ba3b3a014150d3f2ee147b2"
+      },
+      "git_blob": "0d8b0e4d5368075141566d1bb3e4bffdfaf7b53d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_proposed_graph_adapter.py": {
+      "baseline": {
+        "bytes": 92971,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/corpus_proposed_graph_adapter.py",
+        "sha256": "58115e83df44085bf7a6c83af4edcef76e5796e3bb1913609e1b08e5434d8be7"
+      },
+      "git_blob": "81ce24d3c0c8d9dfe824708f801bea55181a4227",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_source.py": {
+      "baseline": {
+        "bytes": 16185,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/corpus_source.py",
+        "sha256": "6e4be77cfc27a750b11aa57bb92baa92617c57d5c4a26316e25563aa715ec257"
+      },
+      "git_blob": "4505f96bb99dfa53965c185fdfb1ce900b4764a3",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/family_qualification.py": {
+      "baseline": {
+        "bytes": 37698,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/family_qualification.py",
+        "sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8"
+      },
+      "git_blob": "509d35f7e5c68acd2157f85f20face935cafcc31",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_cache_parent_occurrences.py": {
+      "baseline": {
+        "bytes": 15054,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_cache_parent_occurrences.py",
+        "sha256": "6f032fdfd2b29f0f79bd1900efef44ddb4aff83b867da249a1e5606e13d9240b"
+      },
+      "git_blob": "5f861f17b1d0ba81512169b0756afb29b9987fa2",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_canonical_calendar.py": {
+      "baseline": {
+        "bytes": 29974,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_canonical_calendar.py",
+        "sha256": "b45d0ad9329e90e4b007885e201adf5b2602b2d789127555b35fdbe5b65bc1b5"
+      },
+      "git_blob": "90c4357511dfb11ce18297c9d0d0e1abae57ac48",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_canonical_qualified.py": {
+      "baseline": {
+        "bytes": 19295,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_canonical_qualified.py",
+        "sha256": "580544f2bf329c54832eee9b66042794bab2e6938bad142952aca9f4438f5902"
+      },
+      "git_blob": "ee1bd80f49ee54d784ce3d82f2a970c18c628cb3",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_context_obligations.py": {
+      "baseline": {
+        "bytes": 4026,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_context_obligations.py",
+        "sha256": "8b637a6c1947c152abefef3396b86b95739e214dde80e17739ad3f483e2c0482"
+      },
+      "git_blob": "f87baf4b3bbf1b36e42a8a3fff7714a195e88c29",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_corpus_definition_use_lake_v2.py": {
+      "baseline": {
+        "bytes": 95493,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_corpus_definition_use_lake_v2.py",
+        "sha256": "5c98152db328b75583f6c0cd181e2724ca5f7392870ec0faf1e4d870cbb76b32"
+      },
+      "git_blob": "49866be7a2b6e62aec204ed7d856b26fd9d126e9",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_corpus_definition_use_native_v2.py": {
+      "baseline": {
+        "bytes": 391589,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_corpus_definition_use_native_v2.py",
+        "sha256": "b2480e02cc9593bd671b7563cc00096c83787168277b1ab3e7e2a6f2f87b57e3"
+      },
+      "git_blob": "dffb6f619fbae577e284dca534611542e236cc6f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_corpus_lake.py": {
+      "baseline": {
+        "bytes": 20116,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_corpus_lake.py",
+        "sha256": "b9ea921769b6dbfd33b237eef3335df76e5592c9087317f4f19b3cd71cb44c5b"
+      },
+      "git_blob": "46120b8c961781ca91f9acb7283ccbd9aef78a9b",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_corpus_shared_lake.py": {
+      "baseline": {
+        "bytes": 200742,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_corpus_shared_lake.py",
+        "sha256": "edaa05b243d950d442e915d7a64f49c580fd4b5a13da77a919fefede082af5af"
+      },
+      "git_blob": "f752fdfb75217689c16b56e06e97091427fbf705",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_counted_frame_v1.py": {
+      "baseline": {
+        "bytes": 48481,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_counted_frame_v1.py",
+        "sha256": "df91798d11e2b0da36afc75e0bc1a8b6d0a3d08bc255e7362d1c200e5e9baa13"
+      },
+      "git_blob": "01e7bd225dccfdc60c1a5c4d62b2435d8d887fca",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_counted_relation_binding_v1.py": {
+      "baseline": {
+        "bytes": 31147,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_counted_relation_binding_v1.py",
+        "sha256": "17589872139fa4a9972f9ff8f2c92f1bd2531d1049de33a60167422a5967f075"
+      },
+      "git_blob": "1bced9299248d2a87580bee5debc8667c30245af",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_definition_boolean.py": {
+      "baseline": {
+        "bytes": 2456,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_definition_boolean.py",
+        "sha256": "719169f57f549800dfaa40394203c5bb056e549f3f4aa783d3e5354beba3bb2b"
+      },
+      "git_blob": "623a13a2bf21acf18df79f214ebaf38b4adbbb08",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_family_routes.py": {
+      "baseline": {
+        "bytes": 7838,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_family_routes.py",
+        "sha256": "5e997e84596c1875d0140573b33a08ff9c12902b003ed3669e1f7bf51aee7c2d"
+      },
+      "git_blob": "831d650fc53a1aa2108bd4bbec05d1321b75f8e4",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_graph_dependencies.py": {
+      "baseline": {
+        "bytes": 19638,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_graph_dependencies.py",
+        "sha256": "eba3bc49bf9f88a660ce9d0d6947f99c603c44a8fc3379d001d31cfe77f98afa"
+      },
+      "git_blob": "4fc80c6b7390851e3283b1c6e9ae72d8c35d17d0",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_graph_review.py": {
+      "baseline": {
+        "bytes": 30521,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_graph_review.py",
+        "sha256": "32abecbf17bc3d10b59d1bd08fde3e8b6bfa58f73b17e31e817fe0f4e910af9e"
+      },
+      "git_blob": "4249a46631b438ade9f64263aae4218d1ff053a8",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_native_ast_preservation.py": {
+      "baseline": {
+        "bytes": 206212,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_native_ast_preservation.py",
+        "sha256": "8ecc4a9a2c87c6369b2d7a359c77b2a11b2aa70ad4bc873da1260b9544e7dec2"
+      },
+      "git_blob": "3db7dc401adda53e7a31f3bd4549fd390a3955ed",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_native_ast_preservation_native.py": {
+      "baseline": {
+        "bytes": 47134,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_native_ast_preservation_native.py",
+        "sha256": "e945707870dbbc971c8f1984018e4931ba2c4a78f3629c93ac0c164f5a37fc7a"
+      },
+      "git_blob": "e0d04d13f9683aa1ee283e83cab85e94e676dd63",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py": {
+      "baseline": {
+        "bytes": 89284,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py",
+        "sha256": "fd43ce8ab0263b34ad1f3c37ebceecdf3ea73500584dced589208cf1f831e13e"
+      },
+      "git_blob": "b6b4612aacefb1620329b7fb8ae3475a23bec89d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_norm_content_responses_v1.py": {
+      "baseline": {
+        "bytes": 30767,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_norm_content_responses_v1.py",
+        "sha256": "c6f53e87191a417b2551233fca11b4324e7bb2a060fb540fa029048462fe25a1"
+      },
+      "git_blob": "a1dec4956e68caeb8fa2d6f1eb4f3fa4498ec5fe",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_norm_definition_evidence_v1.py": {
+      "baseline": {
+        "bytes": 50615,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_norm_definition_evidence_v1.py",
+        "sha256": "f83919d11c18ee01759022de39c992486c5b06eb940b1135709e1344c9f793d1"
+      },
+      "git_blob": "81be6490acd636b732427df10aedf630616f2a6d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_norm_interpretation_review_v1.py": {
+      "baseline": {
+        "bytes": 61235,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_norm_interpretation_review_v1.py",
+        "sha256": "bdb61ffa938b6d6b26fe81507f54f55263a81c8e38720d027c8d97ea754927b6"
+      },
+      "git_blob": "7ac26c9c01c3eb1a2221a30a36dd4a000e43a831",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_norm_scope_correspondence_v1.py": {
+      "baseline": {
+        "bytes": 44109,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_norm_scope_correspondence_v1.py",
+        "sha256": "731d4b6fa766ccf30f05339dc6d487c96a2e84a25dfbf0f995df647086591fa1"
+      },
+      "git_blob": "e0989a62402f0a5b60b49586c21ae5c40f604afa",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_official_document_views.py": {
+      "baseline": {
+        "bytes": 51449,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_official_document_views.py",
+        "sha256": "e43e7e19c6d58ec179224128d9ceabe6a9bf0963db6b42e0c738419a110f00cb"
+      },
+      "git_blob": "30dc4bff3a7b2dca47f185eac80b787a7475e94a",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_official_source_custody.py": {
+      "baseline": {
+        "bytes": 19956,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_official_source_custody.py",
+        "sha256": "876bb6618fd76f6be33b995e9597796e4a5b4d95fa6689129beb3fb918b796e7"
+      },
+      "git_blob": "38a4589f9d9d15fc458f4c4d2cc52f9e1f9ea2c9",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_paired_manifest_inventory_v1.py": {
+      "baseline": {
+        "bytes": 17742,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_paired_manifest_inventory_v1.py",
+        "sha256": "f5778bbb6f2fef41a45057ce45ca2f409f0f27647c39e538b21909dd38a1990b"
+      },
+      "git_blob": "01f3d75db8a355057aba398ba73fcc18ea56282b",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_parent_parquet_pages.py": {
+      "baseline": {
+        "bytes": 71640,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_parent_parquet_pages.py",
+        "sha256": "fcf2f111f1b95450caf09e818b2298e8080ad53774944b844ac46d729af767c7"
+      },
+      "git_blob": "9f7e7e52bd5afa70f3ef65ec852818a42a0c6ba4",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_parent_sentence_candidates.py": {
+      "baseline": {
+        "bytes": 16451,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_parent_sentence_candidates.py",
+        "sha256": "3ba32854f639f0abb78d1ca2abdabdd56007d1c4fcc3862382383887b60c590a"
+      },
+      "git_blob": "14f1acd5441beccdcbfa725c71ddfdb0dab79a51",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_parent_text_views.py": {
+      "baseline": {
+        "bytes": 14276,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_parent_text_views.py",
+        "sha256": "ddb4e221bc720c38f6484dd40819e40ca30c8d293f5f4f88553347b5978883a6"
+      },
+      "git_blob": "6d07ead38c78fe5f8123ed42f8a7dc5947afe15d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_pilot_lake.py": {
+      "baseline": {
+        "bytes": 15230,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_pilot_lake.py",
+        "sha256": "a97d3392af57631fa3105947ab5df3bb8380fe46e45fef556210b8318aff6b6a"
+      },
+      "git_blob": "99baaf597ab3c92d96f328f755ff1d2a06d48780",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_producer_lineage.py": {
+      "baseline": {
+        "bytes": 40149,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_producer_lineage.py",
+        "sha256": "f139235a9d1f7b20a2d37c2904e5656d80f3503f02e71d6a615f8fd662d98cda"
+      },
+      "git_blob": "e07e8fc0dc9e12d70cda87f770a2293254190dfd",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_producer_page_lineage.py": {
+      "baseline": {
+        "bytes": 5723,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_producer_page_lineage.py",
+        "sha256": "b47702f6bf21fed209ed7e1581875fb4121a906c15c8c65456ba52f91e85f656"
+      },
+      "git_blob": "b628b8185479c87972d08dba028689a2a84dd3c5",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py": {
+      "baseline": {
+        "bytes": 61518,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py",
+        "sha256": "ff66f344c9cda788801a9fa2d3ef66afd7046d903a53d2bbf11f8dbfdf847ad2"
+      },
+      "git_blob": "7d3609f35c81a071798f37eb79ac310ab62e93ae",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py": {
+      "baseline": {
+        "bytes": 35250,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py",
+        "sha256": "1b294d2d896f715c7fe667cf194e2a04bc681705af558a535d55210b4cacf917"
+      },
+      "git_blob": "d2959d73378a870453c48775692fa6462d154a5d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_semantic_graph.py": {
+      "baseline": {
+        "bytes": 37209,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_semantic_graph.py",
+        "sha256": "b198d58209f5151081588fab914bedc7f15bbbd5d1a1717af98711aed031464c"
+      },
+      "git_blob": "47f4ab05360511aa5265920a8ea9ffb9bd5b61f9",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_source_definition_bridge.py": {
+      "baseline": {
+        "bytes": 10069,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_source_definition_bridge.py",
+        "sha256": "2956a408cf767243f16944e4eb5dad425d26e1b09fd1979fbbbfa8fb4701a812"
+      },
+      "git_blob": "e9351fbd5dc8ff510fd7e0f7c7b8f07585e70278",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_source_definition_bridge_v2.py": {
+      "baseline": {
+        "bytes": 38423,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_source_definition_bridge_v2.py",
+        "sha256": "da374789b919212513f9d4403b2bd161783db53982233f4ff2e8273166a8a860"
+      },
+      "git_blob": "766dd9845c453012bb6a0d499be2384b8def9e91",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_source_definition_norm_bridge.py": {
+      "baseline": {
+        "bytes": 11020,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_source_definition_norm_bridge.py",
+        "sha256": "fc658de41226117e096a7e003ffd73edcf32b7ee7ead141c9804db8064a2b18c"
+      },
+      "git_blob": "b2e03c1beaba2be75e3d3fd4093946d7c2295bf9",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_source_definition_norm_lake.py": {
+      "baseline": {
+        "bytes": 7263,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_source_definition_norm_lake.py",
+        "sha256": "b3a6831e814786400ced3d49a9e57284e461afd7a86b397b756b579d99cbc541"
+      },
+      "git_blob": "c41a3e89fb7eacc29624c2285537558398496f06",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_source_norm_scope_v1.py": {
+      "baseline": {
+        "bytes": 39753,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_source_norm_scope_v1.py",
+        "sha256": "9131a433da50e564412b73f77b36502fe43c72f46858c21a56f2c57cd178141d"
+      },
+      "git_blob": "ed2969a01a72e568a53123d9ce45cf14857d239f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_source_sampling.py": {
+      "baseline": {
+        "bytes": 13827,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_source_sampling.py",
+        "sha256": "bdf8a76c13e5e3dd67e5cd2b18230726063d65a97c6db5a018c26dcadefc2489"
+      },
+      "git_blob": "cbb1a2bca8a626645ac18c4241d0bc10a2acbddf",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_source_sampling_context_definition_binding_v2.py": {
+      "baseline": {
+        "bytes": 19555,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_source_sampling_context_definition_binding_v2.py",
+        "sha256": "b8d97fdefbebd3d565e7e6601a7e15a43cf387ecdd402fca74e4b1388323aaf4"
+      },
+      "git_blob": "abd5e046b1d2c47e8af242c76ed288c982db48b4",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_source_sampling_context_definition_review_v2.py": {
+      "baseline": {
+        "bytes": 15936,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_source_sampling_context_definition_review_v2.py",
+        "sha256": "0575f4027e66dbceaf94ed27ffde18eb1ce1667af81d3f0366fda0644675c4f4"
+      },
+      "git_blob": "c78b9de19b2fb8ea2d0ed5dcd3a2a298f0ea266a",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_source_sampling_definition_binding_v2.py": {
+      "baseline": {
+        "bytes": 25148,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_source_sampling_definition_binding_v2.py",
+        "sha256": "52bf992918db6ef9d2a1030aee0321e4a031f01c2055502693f63835da0bb141"
+      },
+      "git_blob": "0de5bcb31fe7551aaf464b6a5b60428f30aa9c12",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_source_sampling_definition_review_v2.py": {
+      "baseline": {
+        "bytes": 30204,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_source_sampling_definition_review_v2.py",
+        "sha256": "6bbcf0e6126441c28420d7197db7c93a1117cfb0ccd042affec748ccc7387cf9"
+      },
+      "git_blob": "070b42de0cb156537f81df79fb2fc1ae0508a509",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_source_sampling_review.py": {
+      "baseline": {
+        "bytes": 37589,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_source_sampling_review.py",
+        "sha256": "0434ee6773f68365598394a02d4130d89f18d5c822ea521fcfd5d381e2375e46"
+      },
+      "git_blob": "12e93a94aedcb3ae1b67cb9c7a2be4551bf318e4",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_source_sampling_review_context.py": {
+      "baseline": {
+        "bytes": 18433,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_source_sampling_review_context.py",
+        "sha256": "d5422415f3311451259818f89928d62e69f0bbd9df70648290dbe4a84d4e0645"
+      },
+      "git_blob": "571130ce21a9e73084c867869bb3aec548b1c0ac",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_source_typed_norm_join_v1.py": {
+      "baseline": {
+        "bytes": 45716,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_source_typed_norm_join_v1.py",
+        "sha256": "f51377e4c2446d464cd6cbbc97f6838f591e652e50c460e8084771944e937976"
+      },
+      "git_blob": "240b962783d0ad9aa04691c8750ca8285071d71c",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_span_cache_intake.py": {
+      "baseline": {
+        "bytes": 79061,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_span_cache_intake.py",
+        "sha256": "e37cefaf27608856b94bac44135fdcc522f179b2d119dfef7fc7666f982f7743"
+      },
+      "git_blob": "a394060e02c1f40c301fc8dba9a3fd4b271f6e39",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_span_provenance.py": {
+      "baseline": {
+        "bytes": 13828,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_span_provenance.py",
+        "sha256": "9bf7226c76e7865ca46431f13bc6a0100ca8a99874a1cf8b58637d2b5016ac5c"
+      },
+      "git_blob": "496ffae890acb0fa11451edbb1d116e621a6b48e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_span_section_bridge.py": {
+      "baseline": {
+        "bytes": 15321,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_span_section_bridge.py",
+        "sha256": "fe6cada852d5049131930e989b6b865097dcf87004c00f890d5fe8bb9638a959"
+      },
+      "git_blob": "79e3e8876fded1a20a2c71d53e10db677aab5894",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_statutory_context.py": {
+      "baseline": {
+        "bytes": 25999,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_statutory_context.py",
+        "sha256": "96bfd59e00771c77cfc045b9594f284a1ce95e968805764eb613a5b35ce065da"
+      },
+      "git_blob": "38b5299431c32f50acced2cf2fd06cc8abad4e0d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_statutory_context_v2.py": {
+      "baseline": {
+        "bytes": 20005,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/legal_statutory_context_v2.py",
+        "sha256": "2f4e2895e29d6a7fcefdb240c73b732b8e0504b918af62994a04964bc572a13e"
+      },
+      "git_blob": "12ea11aca96e6addceadb4029b135f66247eec1e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/scoped_definition_resolution.py": {
+      "baseline": {
+        "bytes": 30302,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/scoped_definition_resolution.py",
+        "sha256": "f35fd6484c2c0cca4234477231c702dc17de4b5d9cadb0f944272065d9c13962"
+      },
+      "git_blob": "96cf4ba5c6d36f2f56a52ab68d86ed62373c656c",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/span_cache.py": {
+      "baseline": {
+        "bytes": 105673,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/span_cache.py",
+        "sha256": "e35f5333fc4776d5b519ec84a38f42715a76ff7b20a776a35b7e01ea9342b068"
+      },
+      "git_blob": "4f228d01f547dfa1b0bbfb231643fb45d939d8d0",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/span_cache_exchange.py": {
+      "baseline": {
+        "bytes": 70057,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/span_cache_exchange.py",
+        "sha256": "0c31dbe6ada1ecdf5c13ceda0b04da0cf13981801d8563e5750fc0cac41b4857"
+      },
+      "git_blob": "23195cdecec427436f30c42bb97ff0e0039f3b17",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/span_cache_feed.py": {
+      "baseline": {
+        "bytes": 44463,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/span_cache_feed.py",
+        "sha256": "60d515f24bec614413021f9efbf4b708e79e0a1f98d408fb686c89023aa40d8a"
+      },
+      "git_blob": "b03b88e368dead658e6d9f59de61c55ec36d1f70",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/span_evidence.py": {
+      "baseline": {
+        "bytes": 28234,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/span_evidence.py",
+        "sha256": "2954dfa10d2aad64178b3b3bfc799686389a98303652f6856bd2dbee9cae95ed"
+      },
+      "git_blob": "872714e9e61b6863f0e55607f7565f11d805fd93",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/supervisor_queue.py": {
+      "baseline": {
+        "bytes": 24339,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/supervisor_queue.py",
+        "sha256": "2802b9a24618abdbd2acd58b5f475c8b634539e68d12d3cfd7a0dff0a2c05172"
+      },
+      "git_blob": "743f513d192a1e520201b22fa2c9679f053a044f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/supervisor_todo.py": {
+      "baseline": {
+        "bytes": 29213,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/supervisor_todo.py",
+        "sha256": "e4443a7fa3826ba9709c97c00f4ea2db2c4ab48b24b4aa759eef53d1199ccf70"
+      },
+      "git_blob": "2e718933bf90440ec91aff8925e00d92704a32f0",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py": {
+      "baseline": {
+        "bytes": 179170,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py",
+        "sha256": "c172218316d2add710f45f3c0cd99f78fbc4a4f70616cfb875eb07930bea1b28"
+      },
+      "git_blob": "29fd3b0b8a197a2674231ffc64cd1f3790307cd6",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/autoformal/tree_pin.py": {
+      "baseline": {
+        "bytes": 2052,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/autoformal/tree_pin.py",
+        "sha256": "ec43fd9379f3c9198451e8d62d98db53826dcf115e6858039a73c3da7d72a1c2"
+      },
+      "git_blob": "91611948e2cd7ec3f4b8e4f8c99c70eb501b9261",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/backends/process.py": {
+      "baseline": {
+        "bytes": 109707,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/backends/process.py",
+        "sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+      },
+      "git_blob": "1650b31bd0aa342f3614bf9999e9b6010fba17ee",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/backends/results.py": {
+      "baseline": {
+        "bytes": 27160,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/backends/results.py",
+        "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+      },
+      "git_blob": "7ffdc5b4019faa80749df5fb0bb7d1f06379573f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/backends/toolchain_roles.py": {
+      "baseline": {
+        "bytes": 53880,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/backends/toolchain_roles.py",
+        "sha256": "1f5ffbf35e9171b77474da7fb7a1eeb91579a3d09fc0f99d480abfd49aaaf3e0"
+      },
+      "git_blob": "7cc124d5328f8649bb8af03b97b36153d146a83e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/common/__init__.py": {
+      "baseline": {
+        "bytes": 2438,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/common/__init__.py",
+        "sha256": "e574c74067e7059cc506b32c780bc0444de89c63b55dade3df00ae9fd563431e"
+      },
+      "git_blob": "c06c400f28c7a07e5c0ce719a7e3d3227a3bef0f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/common/bounded_cache.py": {
+      "baseline": {
+        "bytes": 6656,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/common/bounded_cache.py",
+        "sha256": "29a450b5fc08c5577964774035717dc5d7be85c159cfd502fba5252c4ec9c9fa"
+      },
+      "git_blob": "9d37b6c2c22299cc433b565e2ff5148808f9790e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/common/converters.py": {
+      "baseline": {
+        "bytes": 13962,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/common/converters.py",
+        "sha256": "f530c453775f2c1a4a2f8a26aa647df1f725be109078df258288eab33a427fde"
+      },
+      "git_blob": "f2ed787161b6303057d125c3149cb1df5f4b8c9b",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/common/errors.py": {
+      "baseline": {
+        "bytes": 2268,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/common/errors.py",
+        "sha256": "10d21acd8d0fd6049297a1b36d10db1fcc09146095f1dabfe5a686b887f4b8cf"
+      },
+      "git_blob": "c84a797f91f8a512178527e66ddc7bdfe06b4948",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/common/feature_detection.py": {
+      "baseline": {
+        "bytes": 4875,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/common/feature_detection.py",
+        "sha256": "a285d84f9b13ee3c2c54023e07ccf9da94ce93e6736362c1881421db9e509d76"
+      },
+      "git_blob": "227753dce0379026054a44604ac65361f7108031",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/common/proof_cache.py": {
+      "baseline": {
+        "bytes": 168205,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/common/proof_cache.py",
+        "sha256": "b68c36ff934ba6ee7a308162ee7035c78f4c522a5483e85e536b428db8485b36"
+      },
+      "git_blob": "ebfe06198a3634ae0812dd7e2d997909a9fb978d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/common/utility_monitor.py": {
+      "baseline": {
+        "bytes": 6398,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/common/utility_monitor.py",
+        "sha256": "ef23631a622dfd555cefcdf69793e78a7c64a115c7451aea4dfff5389b014985"
+      },
+      "git_blob": "bbb296dcc09ca863536e40a7503a061fdc4f6c50",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/common/validators.py": {
+      "baseline": {
+        "bytes": 8374,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/common/validators.py",
+        "sha256": "e58dbba7d3f346545e2ff572928ed9c7bb9adc71b20e8cc8dc816a7fc060e0c7"
+      },
+      "git_blob": "121b08d093b79f6dc2298b5fa799e7b15b2e682a",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/families/models.py": {
+      "baseline": {
+        "bytes": 36277,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/families/models.py",
+        "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f"
+      },
+      "git_blob": "053af9eaf293ba268c2dc8155844f2e3dc5355ce",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/families/namespaces.py": {
+      "baseline": {
+        "bytes": 34262,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/families/namespaces.py",
+        "sha256": "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+      },
+      "git_blob": "2ff6102d93759b4bfd30e2d0054353db733e6e2b",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/formalization/__init__.py": {
+      "baseline": {
+        "bytes": 2073,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/formalization/__init__.py",
+        "sha256": "91c60c1dfbf9038b8271ae6b1495dbbaf0be8d6ce438524c33f4f7a586f17266"
+      },
+      "git_blob": "59375db940cfdcfb95cff7548630628821ac4bae",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/__init__.py": {
+      "baseline": {
+        "bytes": 97,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py",
+        "sha256": "82206d6ca08b8626b2afd37534679ac3ea001005f934ed211aa0f1f4eb81f073"
+      },
+      "git_blob": "94864ddd315dab1b20d0d5ae0f5824be1b4fb95e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_lane_bundle.py": {
+      "baseline": {
+        "bytes": 31225,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/formalization/autoencoder/alignment_lane_bundle.py",
+        "sha256": "316d627fe20fecf6c5d5fe1c5fef98bb5a662ac48ef025c65b623affde282fce"
+      },
+      "git_blob": "36f1ffc238810a1ad5cf4eeae73e6daaf83f7645",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_masked_contrastive.py": {
+      "baseline": {
+        "bytes": 9479,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/formalization/autoencoder/alignment_masked_contrastive.py",
+        "sha256": "913033528d04602fe60e941ee78cfd8d8b7a898bc0803c02e9b60531bd2aa89f"
+      },
+      "git_blob": "50094e1113c87ce09b4705f73a7dd89366ad46ab",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_declarations.py": {
+      "baseline": {
+        "bytes": 41179,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_declarations.py",
+        "sha256": "e8fc5c15900fac19df46896a0bcb5c04b0cdd5533dc574d4d962b5fdf0e11662"
+      },
+      "git_blob": "5452289fc78c0adaa443c028e9d0aed2eaf01e18",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_mask_handoff.py": {
+      "baseline": {
+        "bytes": 46237,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/formalization/autoencoder/alignment_relation_mask_handoff.py",
+        "sha256": "c039572c8a83f8464d9b633b54c569ac170cfcad8f9b7fea55de6ede1c906e01"
+      },
+      "git_blob": "6883f1b2418da72bc910707d2dc690ba1af93d31",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/alignment_stage_declarations.py": {
+      "baseline": {
+        "bytes": 23074,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/formalization/autoencoder/alignment_stage_declarations.py",
+        "sha256": "4e475329097a747f9ec1a635c58395209271eb9808dc5658e70f0bf7eebc1c0e"
+      },
+      "git_blob": "178c225e84fb8c458d3713197e8e8fb112747017",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py": {
+      "baseline": {
+        "bytes": 39438,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py",
+        "sha256": "dab6bbd4e17eef888f4181aab0c6ce3f087a717edc83a55befb7742fd1f598b1"
+      },
+      "git_blob": "208019d2fadb4c88dce44eab4927c92349ef6d84",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/native_legal_qualified_lean.py": {
+      "baseline": {
+        "bytes": 16858,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/formalization/autoencoder/native_legal_qualified_lean.py",
+        "sha256": "5407ba7299b002048ff8f45dbea7295d3b210f41904f28a98684042d055d0b2a"
+      },
+      "git_blob": "669c7d3a7d8df39e094cb84fad39fd4ce164fa71",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/formalization/autoencoder/native_qualified_lean.py": {
+      "baseline": {
+        "bytes": 18936,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/formalization/autoencoder/native_qualified_lean.py",
+        "sha256": "645d38508004833092cd5fd9870f29fdae34aa0e262471888973cb3203121408"
+      },
+      "git_blob": "3dc4abe1c79b854b612cdcd42167643b7cfe57c9",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/integration/__init__.py": {
+      "baseline": {
+        "bytes": 14312,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/integration/__init__.py",
+        "sha256": "11c1b240f9c1fb53653322c57f9150847ac62c43491da61b5dede542b4cc9b41"
+      },
+      "git_blob": "2b1d3116c4db56d0c4c17dc2c7b364c574afd8f9",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/integration/reasoning/__init__.py": {
+      "baseline": {
+        "bytes": 48019,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/integration/reasoning/__init__.py",
+        "sha256": "40610ac00bd3b1d123a4bf5aa7dfd08d2164aa859130c1f72b625471accfce2e"
+      },
+      "git_blob": "0d9ec25dea3f61c647ffa68eefc1676d1a5b5f1c",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_citations.py": {
+      "baseline": {
+        "bytes": 77369,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/integration/reasoning/legal_ir_citations.py",
+        "sha256": "5cba3369b0ed0e293710c1cd87ed0cc215094345656a1920c2d66b313c254418"
+      },
+      "git_blob": "22af53683d96ab115b56b4f9b876ee967434f64f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_obligations.py": {
+      "baseline": {
+        "bytes": 29049,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/integration/reasoning/legal_ir_obligations.py",
+        "sha256": "982f1cfad15976c162e71e809ada5b00794bb67b8ae42c981b80a8fc7d24ae1b"
+      },
+      "git_blob": "d9b8c183d91ae62fe2d86977995ccbc45221a1b8",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_source_maps.py": {
+      "baseline": {
+        "bytes": 55424,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/integration/reasoning/legal_ir_source_maps.py",
+        "sha256": "7f7a3e7b1d40ef3d5a923cfad06ae6e0e8488a4fd42a32eebf58d83403300cd7"
+      },
+      "git_blob": "bc094d64a45dcdbb2f9cdd346014e4e2fb45df3c",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_symbols.py": {
+      "baseline": {
+        "bytes": 71313,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/integration/reasoning/legal_ir_symbols.py",
+        "sha256": "923150886f4b6650310c81e693ed6b07dd0ec304b7b88393f5cd91de3cc62cce"
+      },
+      "git_blob": "2449b7b2c4eb8ca0f74a583d5c3dc54eddc56a0e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_temporal_authority.py": {
+      "baseline": {
+        "bytes": 80724,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/integration/reasoning/legal_ir_temporal_authority.py",
+        "sha256": "a4e14b94f03df2df56625840c75ec0dddf760f43d541f8ee8d2efa85e054ebe5"
+      },
+      "git_blob": "d9581a2230f4e21b96d7aa8356d4f4fff03ca513",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_view_contracts.py": {
+      "baseline": {
+        "bytes": 60130,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/integration/reasoning/legal_ir_view_contracts.py",
+        "sha256": "086997b67133df2437435b417324b11ede49b503ca92f5af6c67146c765fd875"
+      },
+      "git_blob": "7e94aa00486dd5bedd06f89d4b5be3999dbbf8e8",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/intent_ir/__init__.py": {
+      "baseline": {
+        "bytes": 2386,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/intent_ir/__init__.py",
+        "sha256": "acf68a7215af95b4a7d4e4dc883cb7577e2129e7bbadf49c1fc2c404848bc641"
+      },
+      "git_blob": "fb934206096eacd6d65e388dee3c0d1fb769ee9d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/intent_ir/autoencoder.py": {
+      "baseline": {
+        "bytes": 1006,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/intent_ir/autoencoder.py",
+        "sha256": "ff944970bd24db83b6851fe4b84db62fe00128ed6ee0019c17cd941f2feb2e91"
+      },
+      "git_blob": "14cdf673b44e46f7263daca506813ad5f836aa68",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/intent_ir/canonicalize.py": {
+      "baseline": {
+        "bytes": 1495,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/intent_ir/canonicalize.py",
+        "sha256": "3609047cc8c99437d77461b4f7ea0e05d193a31bf0d20a7e80b7b0c10a8cff87"
+      },
+      "git_blob": "7dd0eb278d8fed99b9868c1bf9760e41278e196d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/intent_ir/decoder.py": {
+      "baseline": {
+        "bytes": 24220,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/intent_ir/decoder.py",
+        "sha256": "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257"
+      },
+      "git_blob": "8b217953c0a6b9f8411df52f6d70953d7ce4246e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py": {
+      "baseline": {
+        "bytes": 22238,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+        "sha256": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d"
+      },
+      "git_blob": "ed043a96be267fb18f78f7f454f320e08ab0fe8a",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/intent_ir/formalize/projection_contracts.py": {
+      "baseline": {
+        "bytes": 6460,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/intent_ir/formalize/projection_contracts.py",
+        "sha256": "86386464d599b4fc5af66b3e6f634e797594bbde0c3e2bcff087d802c478fdaf"
+      },
+      "git_blob": "b0eb49b27878fbe276b1d010629e3bf9ee994b0c",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/intent_ir/protocols.py": {
+      "baseline": {
+        "bytes": 1693,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/intent_ir/protocols.py",
+        "sha256": "adb0ae8eaf2e55bf587ac76baa90d8303b61e0df246c03c30b56cb31a9643780"
+      },
+      "git_blob": "f7fa6b469b26602bbc6d82dbadfe840a2b97d4e8",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/intent_ir/schema.py": {
+      "baseline": {
+        "bytes": 27163,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/intent_ir/schema.py",
+        "sha256": "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56"
+      },
+      "git_blob": "e4a46f49464c84015d96f6a97d87a1a5bfa2af65",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/ir_core/__init__.py": {
+      "baseline": {
+        "bytes": 6942,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/ir_core/__init__.py",
+        "sha256": "4c0070482e009dd7cb9875e91124d48683da37d53f691cccb306ec50f23c946c"
+      },
+      "git_blob": "71c13cae5d6ffc38d9b1ec4bee8ee90b255b3d0a",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/ir_core/canonical.py": {
+      "baseline": {
+        "bytes": 14098,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/ir_core/canonical.py",
+        "sha256": "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0"
+      },
+      "git_blob": "fa63fd302dad6340556a937b73883a25376f5f6b",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/ir_core/claims.py": {
+      "baseline": {
+        "bytes": 16176,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/ir_core/claims.py",
+        "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+      },
+      "git_blob": "63af5a987404010aa0ec69fb827722afc9b53b81",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/ir_core/identity.py": {
+      "baseline": {
+        "bytes": 8911,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/ir_core/identity.py",
+        "sha256": "606bffc1f938c59f44651eeb65cb9c0738e16e465aabba0ad82ef05e3b5b3b0e"
+      },
+      "git_blob": "69d77e91f4ec671c6355b0f035017b1fed2b38d0",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/ir_core/protocols.py": {
+      "baseline": {
+        "bytes": 57510,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/ir_core/protocols.py",
+        "sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+      },
+      "git_blob": "09b5536bf3269b6eb54f62cfa83e8dceed53d49e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/ir_core/provenance.py": {
+      "baseline": {
+        "bytes": 31891,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/ir_core/provenance.py",
+        "sha256": "16eaf7c258550e5625bc19e6e7468c94133aedd1e85e64075f057ab4e52c3efe"
+      },
+      "git_blob": "9f2e8425894c8287ae0046153ac081734cb77d8d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/ir_core/schema_registry.py": {
+      "baseline": {
+        "bytes": 31823,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/ir_core/schema_registry.py",
+        "sha256": "1b214ea190a41c6a451377a03bc71ea84f6703314293ef78c5f269082eee4fbe"
+      },
+      "git_blob": "bd4c90c1b470c944b8953f64379232f8752f65e0",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/legal_ir/__init__.py": {
+      "baseline": {
+        "bytes": 2708,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/legal_ir/__init__.py",
+        "sha256": "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1"
+      },
+      "git_blob": "049082bd3528682a395698fea6ae778421ddf156",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/legal_ir/canonical_byte_codec.py": {
+      "baseline": {
+        "bytes": 12983,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/legal_ir/canonical_byte_codec.py",
+        "sha256": "e2e1859fb2c71c2c2b758516dc35149e7a742d39f6950be76b0962e226d7cafb"
+      },
+      "git_blob": "79c24d5c16700081fb2f0bde1b1eda2dcba2d261",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py": {
+      "baseline": {
+        "bytes": 109257,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+        "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+      },
+      "git_blob": "1bf4da481ff84ccb3554ae0dd1126dfc4cbffb6b",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+      "baseline": {
+        "bytes": 29993,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+        "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+      },
+      "git_blob": "18783070b45c280067552f110bc48748a210e53e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope_bridge.py": {
+      "baseline": {
+        "bytes": 4214,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope_bridge.py",
+        "sha256": "7e74f5ea2230549165fd0cb0230b2b8baaa0016cc2352d5a422c70c20f5e4da8"
+      },
+      "git_blob": "fcd144ab4dea928a260634e6a513945db2b53799",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/__init__.py": {
+      "baseline": {
+        "bytes": 38854,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/__init__.py",
+        "sha256": "8305b15bf8d51229a2d3e8e99105bb8c07b1d051c11a1ffc53a0a55cd5c53c3a"
+      },
+      "git_blob": "51fe94dbac0ed523f1c348c63e59a6c255662e7d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/autoencoder_loop.py": {
+      "baseline": {
+        "bytes": 42699,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/autoencoder_loop.py",
+        "sha256": "c184f109822b9f9d745f962c8677a1481d7180713517266a0c79315bcd6a6d2b"
+      },
+      "git_blob": "12dc7b0cad27d3db063f7d7478df0d3969df0b96",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/codec.py": {
+      "baseline": {
+        "bytes": 498190,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/codec.py",
+        "sha256": "96d26e736fd04792bd05939f07790dfbe568b33240220b57b683de51d88442b1"
+      },
+      "git_blob": "8cd9284fe4cb3d7369c9bda3acc0438ca815d528",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/decompiler.py": {
+      "baseline": {
+        "bytes": 890498,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/decompiler.py",
+        "sha256": "daddb94ed2170b1d4be5011c6294e024f705b6d75b2f5c853066b24d3271d929"
+      },
+      "git_blob": "46492c672b85884bb1be43cc496879e52c11e293",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/decompiler_repairs.py": {
+      "baseline": {
+        "bytes": 20211,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/decompiler_repairs.py",
+        "sha256": "c75783a057f9bee0c18a0ee534e5a9a7a1ad14225d7f85393e2ce0631b9ecc68"
+      },
+      "git_blob": "e0ac5e01684cab7089b7b450d7c1eb3cc07b534c",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/introspection_analysis.py": {
+      "baseline": {
+        "bytes": 63908,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/introspection_analysis.py",
+        "sha256": "fd67da1c32fcfb7a3c755fd14e817ae9191d80f8cbfd5c97b24901c231cf916b"
+      },
+      "git_blob": "5c795c01c2ee352c17d585548122a0de359c53f4",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/introspection_export.py": {
+      "baseline": {
+        "bytes": 56781,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/introspection_export.py",
+        "sha256": "06f7a5f8b5df5a14de26920eaae9beae72444ca04bda456a81e5f9488b9f684c"
+      },
+      "git_blob": "661287447ec74e836c5797d6322507f592a78df6",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/introspection_metrics.py": {
+      "baseline": {
+        "bytes": 39046,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/introspection_metrics.py",
+        "sha256": "1af3d1ae4bfcdc91e44503650acac805916b898914b831d7188810b8a3f498d7"
+      },
+      "git_blob": "d1c48a56cf9724b2440ed743b6feefd2424b7567",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/ir_symbol_catalog.py": {
+      "baseline": {
+        "bytes": 9174,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/ir_symbol_catalog.py",
+        "sha256": "eb0176bf5d9d479ac3786d2facc888d9cacdf44eb5333315d42faae1de736101"
+      },
+      "git_blob": "476c43b29685bc1e0c1a72f5216fbb8f537f6461",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/kg_bridge.py": {
+      "baseline": {
+        "bytes": 59559,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/kg_bridge.py",
+        "sha256": "163e130cf18ae636f2f2b56dfb5c4d18622afa6a7733a6394d43940ce68d14fc"
+      },
+      "git_blob": "fb790e7d9068dafe1a31bbfe0e23746062c4094f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/lean_runtime.py": {
+      "baseline": {
+        "bytes": 3656,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/lean_runtime.py",
+        "sha256": "4c660537439a6780eda9ef08f0c2e3f79f6a100843c295116c050f3e7d0b1d6e"
+      },
+      "git_blob": "6c98370c491430e6812e97c8ff473fc483b2da6f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/leanstral.py": {
+      "baseline": {
+        "bytes": 116113,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/leanstral.py",
+        "sha256": "c678ed2fe11e78ebad0b5b9584b7c16eb1211602bb81e358b9adf33da95637ac"
+      },
+      "git_blob": "2f9336f279fc026fec8a5430f843923d25c1fabe",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/leanstral_artifact_cache.py": {
+      "baseline": {
+        "bytes": 9948,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/leanstral_artifact_cache.py",
+        "sha256": "d97ef413591011e0c392f8b79422ff11df2043311694c02a67bfad87f7675053"
+      },
+      "git_blob": "602aa19611174dcbda526fca442a50929f0666bb",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/leanstral_audit.py": {
+      "baseline": {
+        "bytes": 250508,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/leanstral_audit.py",
+        "sha256": "cf5c0e0d7fe6af84d7bd10d2b57172379a18b78c437ecc973937754eaae54516"
+      },
+      "git_blob": "e9ffb48b806f35235b4aa3eda9a4ed51b99b2df9",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/leanstral_audit_policy.py": {
+      "baseline": {
+        "bytes": 27697,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/leanstral_audit_policy.py",
+        "sha256": "d1db367e127ebe4bf3e4b861870fc94f145d2836dfc6f2626871522c42f56b20"
+      },
+      "git_blob": "89624993334929bf4f368168df3d15b7cf05f377",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/leanstral_audit_worker.py": {
+      "baseline": {
+        "bytes": 92786,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/leanstral_audit_worker.py",
+        "sha256": "f54d5b52266c0aeaef6b9cd30648b30f4d306a215dc3415811d822498bea8c9b"
+      },
+      "git_blob": "7b0834d21889b65ca470924cfca457128386c169",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/leanstral_reporting.py": {
+      "baseline": {
+        "bytes": 89856,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/leanstral_reporting.py",
+        "sha256": "55af26a733fb42fbad3e15c033210ca20d075b71110543b9d42add0441df0115"
+      },
+      "git_blob": "6c374aefc11e816df65cdb884a16809c5c66378a",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/leanstral_theorems.py": {
+      "baseline": {
+        "bytes": 32297,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/leanstral_theorems.py",
+        "sha256": "514db799fc03085f171f8b557219f00c4dcff775e4d0c689cf5bb5b06d6a8ec1"
+      },
+      "git_blob": "761e14a11bbf9f8d670d56a47e1371d2af582a85",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/leanstral_verifier.py": {
+      "baseline": {
+        "bytes": 87243,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/leanstral_verifier.py",
+        "sha256": "517f3fd5720923b9c340ea91d6344f809b3b3a9c888795e7d95915afe09f2326"
+      },
+      "git_blob": "fcec00b75d96d08d9cc377db163d0193db3e91a2",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/modal/synthesis.py": {
+      "baseline": {
+        "bytes": 54065,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/modal/synthesis.py",
+        "sha256": "788c10f76e84e725295c872bb3aeb3667c25c231d8be98ecc32c4a160671b81a"
+      },
+      "git_blob": "6c6fa04d479cf2af4c3f3c711ccb0334775bb07c",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/parsers/__init__.py": {
+      "baseline": {
+        "bytes": 8980,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/parsers/__init__.py",
+        "sha256": "e75f0c2ffea0f0706a3d1768a794849e6c013b6647dc59ba331f44797c233386"
+      },
+      "git_blob": "c7a25d447dbb1f70d660529f0c15f8a92ca47876",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/parsers/event_calculus.py": {
+      "baseline": {
+        "bytes": 59003,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/parsers/event_calculus.py",
+        "sha256": "8bd7217febef6daf86f76bae7e03ab0cbf7eb22a1b64f3040fd26a3d2ebfc390"
+      },
+      "git_blob": "7c1ce10a60d0153ebfc5e4e9f9d7efcd7188c6fa",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/parsers/flogic.py": {
+      "baseline": {
+        "bytes": 78083,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/parsers/flogic.py",
+        "sha256": "85ac4353d2bd15fee7cfcf345a4f7afe33d27baca49b1b273f08a217298d1bb7"
+      },
+      "git_blob": "4fd7597e59b5bbdbd537001df010e491cfd65124",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/parsers/fol.py": {
+      "baseline": {
+        "bytes": 58092,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/parsers/fol.py",
+        "sha256": "af5e730aa9f92676ff07c8be43e834652a98e6f7a015a04cd8ee0546c2b18e0f"
+      },
+      "git_blob": "6b9a536e4579af880dd21da647c6cf2e7c6d4913",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/parsers/legacy_modal.py": {
+      "baseline": {
+        "bytes": 71642,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/parsers/legacy_modal.py",
+        "sha256": "7b18812ea6fcba8b65ed7dc5c3407e0ad06ac9760c5c66441e9677463f9eb66e"
+      },
+      "git_blob": "47caa0ac2246ed222d297a392c39647b79a6c57f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/parsers/modal.py": {
+      "baseline": {
+        "bytes": 99829,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/parsers/modal.py",
+        "sha256": "3131ff1dd516ebdf52071215c2c7983f9cf317d86bb138ff9437faae9b227942"
+      },
+      "git_blob": "e952b112c50c7a63eb65a0a8f2fd8f9510320ac9",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/profile_g.py": {
+      "baseline": {
+        "bytes": 54035,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/profile_g.py",
+        "sha256": "4ca5dcc601f30c723467f425a6a03a7c5b1f644c2239a0f4a489705f1b715f03"
+      },
+      "git_blob": "b57e2496b3848523f0ac7f644291883d887d9df9",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/software_verification/__init__.py": {
+      "baseline": {
+        "bytes": 1863,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/software_verification/__init__.py",
+        "sha256": "c33a0ccf9d2c00ec384d637fdfdb19a087ccf23c54f217eeb58aa66bf7822f5f"
+      },
+      "git_blob": "dba9ef21ad2042fc4a9b2c238dc74611a7d21cd7",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/software_verification/state.py": {
+      "baseline": {
+        "bytes": 35431,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/software_verification/state.py",
+        "sha256": "085841a600ed8f8fde202e720d1f70e5a0432e4bf80d20ff11fe60c90107c54c"
+      },
+      "git_blob": "f0cce6dba5277b7fb612d7edbb90219a755c2377",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/software_verification/temporal.py": {
+      "baseline": {
+        "bytes": 48463,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/software_verification/temporal.py",
+        "sha256": "56d8a6d3a5e7f11dd9f4d9d2096ec0f787a481b006abac311d212bbc622558dc"
+      },
+      "git_blob": "a16468df9fbf963d61533fc931a7cae0a696e511",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/software_verification/trace.py": {
+      "baseline": {
+        "bytes": 28653,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/software_verification/trace.py",
+        "sha256": "4751f221cbe8ae8f2b328e3db3faf620b57288df9c3d22baba6e289f80523512"
+      },
+      "git_blob": "643a79b2089756f67213c70ee25aa1ba1206633d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/software_verification/transitions.py": {
+      "baseline": {
+        "bytes": 47121,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/software_verification/transitions.py",
+        "sha256": "982d7e3a243fb70f5f797b7b6efdb45faebb3895945b06c04a9421fbe4ba7d86"
+      },
+      "git_blob": "f6e9857ec64926097b26fe8f099f8fe8f8a7d9ce",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/syntax_core/__init__.py": {
+      "baseline": {
+        "bytes": 8285,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/syntax_core/__init__.py",
+        "sha256": "20dd418d90360cdb42c64ba8b87bedcdb640228b460ef6c6ae60312365130e81"
+      },
+      "git_blob": "9d0f887ec3d4d8b559d7cd546b39f4c6c6de3ee7",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/syntax_core/algebra.py": {
+      "baseline": {
+        "bytes": 45735,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/syntax_core/algebra.py",
+        "sha256": "d3587e2270943167ebef226e03cbd70cfc8888d936647670a21cfa514240e6b7"
+      },
+      "git_blob": "3e38b32b0cdb97ff50f84e415c0d4425ab0d0c94",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/syntax_core/ast.py": {
+      "baseline": {
+        "bytes": 56966,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/syntax_core/ast.py",
+        "sha256": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+      },
+      "git_blob": "129c5c4079d2ef05924bcf62c76fb7d3fd22d5e7",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/syntax_core/contracts.py": {
+      "baseline": {
+        "bytes": 75291,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/syntax_core/contracts.py",
+        "sha256": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+      },
+      "git_blob": "09d79a0e6ae23d8e71f31fbba9bbebfdb84f4546",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/syntax_core/diagnostics.py": {
+      "baseline": {
+        "bytes": 10752,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/syntax_core/diagnostics.py",
+        "sha256": "a291db3c2cea04ae8dd9221a5e5ddbebd419679c02a5a008034e3755e7650d8f"
+      },
+      "git_blob": "4b436f9aa0346ede2ef01a0f5a2400bc63abe0d5",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/syntax_core/lexer.py": {
+      "baseline": {
+        "bytes": 27534,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/syntax_core/lexer.py",
+        "sha256": "f666e9759323508f4e90964c0d71164645af9ce1de60bed778e5f64f7f4a3aea"
+      },
+      "git_blob": "dbb9e3f995404a0283fe6bcf5dc83f2d2d145eb4",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/syntax_core/registry.py": {
+      "baseline": {
+        "bytes": 27560,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/syntax_core/registry.py",
+        "sha256": "eff5ca12d748eff1e9463b737a8243c97d89cac51e1b604fe2c765aed885cb44"
+      },
+      "git_blob": "a909ce3a3ea1712f9d2aa35ba2c5d2e4eb097f56",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/logic/syntax_core/signatures.py": {
+      "baseline": {
+        "bytes": 30488,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/logic/syntax_core/signatures.py",
+        "sha256": "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+      },
+      "git_blob": "ce8eb3447fdb9ed57c348e0cb16fe60528d440b6",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/__init__.py": {
+      "baseline": {
+        "bytes": 957,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/__init__.py",
+        "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+      },
+      "git_blob": "7ba70fc5215c797c6b3be4f27ca0c74c6d705491",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py": {
+      "baseline": {
+        "bytes": 69336,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+        "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+      },
+      "git_blob": "ba048421b90e32e87300c10b13e199da350b6207",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/async_artifact_writer.py": {
+      "baseline": {
+        "bytes": 50529,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/async_artifact_writer.py",
+        "sha256": "8bc5fe38ed1b4c8279b89b6cbdafcfa4bc1083ee4e974682d280c7451555df4e"
+      },
+      "git_blob": "eb657c5fe4465994f88c6fb2d57c94f83a92a271",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_job_inputs.py": {
+      "baseline": {
+        "bytes": 27296,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_job_inputs.py",
+        "sha256": "3017c6c6e6e700fc64b2d21b0624a521765801deb79816b57611209b76f9046a"
+      },
+      "git_blob": "1cba432f4d3817e67b437e298eb456f836cb3ff0",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_process.py": {
+      "baseline": {
+        "bytes": 36664,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_process.py",
+        "sha256": "06c0063a0f8e231b5f178d715ce8f492007a0e2bd09c167eacfb759854187c4e"
+      },
+      "git_blob": "80d507c9e8aaa6d15623f46a11fb0dc979bffa30",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_process_worker.py": {
+      "baseline": {
+        "bytes": 29554,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_process_worker.py",
+        "sha256": "080f42aa310e2aede90b95c8e4a98564cf1885c27c46ba12a7d6e45e955df71a"
+      },
+      "git_blob": "083722340b7f8fa6e4a1ae44beac5e9a7cb31ef6",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_candidate_qualification.py": {
+      "baseline": {
+        "bytes": 32164,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_candidate_qualification.py",
+        "sha256": "7ef775f99bb66be537ce4c0b5996ae484b76465dd51ec77f800aeefe8478b133"
+      },
+      "git_blob": "2c0e5acecb845934881e7a83ad15445bb37b27f8",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_index.py": {
+      "baseline": {
+        "bytes": 21099,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_index.py",
+        "sha256": "f4b71d03e6341602631387262d0efffb61c95bca40ad5307ecfcda3eb1d169b9"
+      },
+      "git_blob": "b83e59378222ac65ece37cadf4de15ce87bcd6c5",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py": {
+      "baseline": {
+        "bytes": 27947,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py",
+        "sha256": "b067f05b3cfc28cb213a83519530f7148b2a5fa7d5b25809e87e1f7c286f9a5d"
+      },
+      "git_blob": "d4fda5e81f5393b3cd99266e03ea9a75612bb35f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_corpus_inputs.py": {
+      "baseline": {
+        "bytes": 37119,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_corpus_inputs.py",
+        "sha256": "8cb58b97ca6d7db1684cdb843e972fd517a9909c135ad2b668e27797e95ff487"
+      },
+      "git_blob": "5c6830da72c6145a56367bdbd9b7cdb2569617aa",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_invocation_contracts.py": {
+      "baseline": {
+        "bytes": 15585,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_invocation_contracts.py",
+        "sha256": "51b6879f0ec00b1548fa3b47266872c312e64dded0149cb2c516508f7daa53dd"
+      },
+      "git_blob": "f311d9913cdcb9e17e08189c15b6d0277815afde",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_invocation_worker.py": {
+      "baseline": {
+        "bytes": 82125,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_invocation_worker.py",
+        "sha256": "38b496bf74f80b477d91af98f2ffb7559b0cdde6983a8b3d0672eae5990f6a26"
+      },
+      "git_blob": "1fa7d59b61ca0ddb3d9e1c902dda9c15f929a2f7",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_observation.py": {
+      "baseline": {
+        "bytes": 7058,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_observation.py",
+        "sha256": "aa1d4c2af08cf3d01b79746f331c7d38786837efc892565656af6502bf995db7"
+      },
+      "git_blob": "692ea7db6d941aedef7ac87d331a14bbc89f3c85",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_report_session.py": {
+      "baseline": {
+        "bytes": 12671,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_report_session.py",
+        "sha256": "216345f36bc817b63c4d53aabf39955dda0119c8cefc11b339f636055084a3fd"
+      },
+      "git_blob": "b028e6aec435bdb1975a8744ce257ad63f1d61b8",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py": {
+      "baseline": {
+        "bytes": 71686,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py",
+        "sha256": "51bec0e627e266595229dee298f22c7bdcf82bb5876eb2da1efd5f3655fbe585"
+      },
+      "git_blob": "57af9526f01f6f392172dd03d145377f4e63d5db",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_target_session.py": {
+      "baseline": {
+        "bytes": 14252,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_target_session.py",
+        "sha256": "ca67a2698a559454106ecbefd5aa0d4ee48aa14c9d3af47ee408b47b869b7e86"
+      },
+      "git_blob": "7cd56101c4bb0a61a151acdc3b3af568d1f21c03",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_weight_session.py": {
+      "baseline": {
+        "bytes": 11220,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_weight_session.py",
+        "sha256": "780676b77d1feeaa0ac5b0a720165c6dde7b082b82493d89a7f822ee20bd495d"
+      },
+      "git_blob": "e4de2a03979136dd4114dc132ccf7d64d8ed9c66",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py": {
+      "baseline": {
+        "bytes": 34371,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+        "sha256": "9a269fab7e5f65cd34e45132e23fa15dbae133b28d605575fdfd9b8dfe1bc048"
+      },
+      "git_blob": "4cc2b3b24bbfdf1aa3c1d5b481f10677f5c4dc1d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_receipt_set.py": {
+      "baseline": {
+        "bytes": 23050,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_receipt_set.py",
+        "sha256": "7ed4aeff1bec961690b31e2f2ea17975aa6523d947ce12a1c1ee24517bc1475c"
+      },
+      "git_blob": "7dd28aebaad52e9c1283d8b03d68246c67039443",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_incremental_training.py": {
+      "baseline": {
+        "bytes": 22784,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_incremental_training.py",
+        "sha256": "0f76f56a53d67867f2447ef97f63d05db2cce80aaf32c46ef662b64cff398fd2"
+      },
+      "git_blob": "b24e921a66d4ae0c5b1c5b7b67b442066fe1eee7",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py": {
+      "baseline": {
+        "bytes": 92465,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py",
+        "sha256": "944e2fd0e0ddd922858941a5b99002ddc205a2e738114eece8dcf7aa5c69ded4"
+      },
+      "git_blob": "2ca172903507b0b6ea6d93ab5ebee78c469601cc",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py": {
+      "baseline": {
+        "bytes": 7896,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py",
+        "sha256": "04f29da03f937dfee7ecfcb621980240c014754abe55f71a2c1ef8338ba715bb"
+      },
+      "git_blob": "6eb9b3a5f5a5f56c3f2466aa7ae06b3ef24189ee",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_ontology_observation.py": {
+      "baseline": {
+        "bytes": 15132,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_ontology_observation.py",
+        "sha256": "cf8e2532c525299bc5fd7ec4d2ab2df07a0259429f13417fe449f5539e810c1a"
+      },
+      "git_blob": "fb493b19912fcd18255056efbdb2f13353f26807",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_produced_record_projection.py": {
+      "baseline": {
+        "bytes": 17358,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_produced_record_projection.py",
+        "sha256": "3e91b71b7d364113fb7728c381f614e7a71872b2c207b32ca766bd73d4455e2a"
+      },
+      "git_blob": "003348b9631e0b3d557c751c41636146374c8a04",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_resource_recovery.py": {
+      "baseline": {
+        "bytes": 264567,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_resource_recovery.py",
+        "sha256": "ae5c1f9ada1d786e73568e948aacd17745603c2d0f3eab1b48243c933705ca3b"
+      },
+      "git_blob": "d42f7b75fe0940ede1990f081c871721610193f9",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_lease.py": {
+      "baseline": {
+        "bytes": 10375,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_lease.py",
+        "sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9"
+      },
+      "git_blob": "bf0aadec9745a671907e3523f12623d3bfd46aab",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_partitions.py": {
+      "baseline": {
+        "bytes": 17973,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_partitions.py",
+        "sha256": "d696c3af565d09be1825a00bdbf979ff97c12bb1a6ab1054564a9946b824875a"
+      },
+      "git_blob": "7a40cf835499d421675f3469fa482cdf4751ae06",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_target_preparation.py": {
+      "baseline": {
+        "bytes": 23177,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_target_preparation.py",
+        "sha256": "2d63251dd3a1135acf6ad6612eb0e60b62409569f564273b5a175bdf9109ae19"
+      },
+      "git_blob": "f226f8651af87a68ad87b3f8f7a16ad90c1ac450",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_coordinator.py": {
+      "baseline": {
+        "bytes": 78534,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_coordinator.py",
+        "sha256": "8a08373adbc84a3382ded6a05e1ce67a42ba6969bcc31a99cbdf10d49bc45528"
+      },
+      "git_blob": "22f52de8c990e4b9d0670073e28278b3d41a69ce",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py": {
+      "baseline": {
+        "bytes": 597715,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py",
+        "sha256": "451be2dee4de4365ecf78183629a2a4283aa31adeb9a4ddcdaeae0843ad90528"
+      },
+      "git_blob": "7f3f37945c60913eaea15b68bcff81a764cabec0",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_uscode_import.py": {
+      "baseline": {
+        "bytes": 31233,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_uscode_import.py",
+        "sha256": "3ead6dbe0014be69a11c1a9f6c203d62c012a3dd5f5913aa9471eda91574bb70"
+      },
+      "git_blob": "e95fefd377976f42d97b688a14ee8ee9e1509a50",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_uscode_inventory.py": {
+      "baseline": {
+        "bytes": 33754,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_uscode_inventory.py",
+        "sha256": "6aa7330cd20a2eb256561382b78bc4465d3b7607827f53d0b644d9e89afb1f21"
+      },
+      "git_blob": "95d3ebfcf98dd23500a49ba3764d494698036a36",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/checkpoint_content_guard.py": {
+      "baseline": {
+        "bytes": 6387,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/checkpoint_content_guard.py",
+        "sha256": "5461672516b4a60938b036d558192e8db328fdd00d20cda76b7448dea09c706c"
+      },
+      "git_blob": "517875f0df7ee58c62f14fc3b2e91f53cc98e14c",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/codex_scope_scheduler.py": {
+      "baseline": {
+        "bytes": 79144,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/codex_scope_scheduler.py",
+        "sha256": "68d81f6fc598f4b0752fe4b88c63aa4178d1a54f3767d536e22d46c0e70b6e0b"
+      },
+      "git_blob": "6cabc8298bdb2f1c91b8ced6909eb4e17f9fafd6",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/existing_resource_scheduler.py": {
+      "baseline": {
+        "bytes": 25411,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/existing_resource_scheduler.py",
+        "sha256": "b2b8022a1d1a10676fd809862ff1db069387c0619cadcb6731e37345e0a20114"
+      },
+      "git_blob": "f0a0177948fa7b997937003033edf5bedfa7642b",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/frame_bm25_selector.py": {
+      "baseline": {
+        "bytes": 79321,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/frame_bm25_selector.py",
+        "sha256": "feb8d74a8a87783408025f1a341500b734a396b99c757f1e65026e4abb26b437"
+      },
+      "git_blob": "f5f47721b7148a41d2566174bcb2c0b7dc977261",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py": {
+      "baseline": {
+        "bytes": 14622,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_formula_codec.py",
+        "sha256": "f90769a3d99131da5ba48bb84c6f830f521c92d98122bdaaa8dd88fc65042290"
+      },
+      "git_blob": "0e96d544c72999d1fe9bc4c03e2585addb4a331c",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py": {
+      "baseline": {
+        "bytes": 61991,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py",
+        "sha256": "e652c79842323fec40f3e5d8f6a23620c9b4ce4a2d1043c597176a13de3f4acd"
+      },
+      "git_blob": "07b499a1263becd7bd5c6d2755dc81c24cbe6f56",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_evaluation_artifacts.py": {
+      "baseline": {
+        "bytes": 147367,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_evaluation_artifacts.py",
+        "sha256": "fe3b8f7dd58532f883918168d9a9ac0e3078fcc9e2ddae3398ec1a71efd4982f"
+      },
+      "git_blob": "48cc1a70c3f353142acbef6d36ab6bd29542b348",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_evaluation_cache.py": {
+      "baseline": {
+        "bytes": 37563,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_evaluation_cache.py",
+        "sha256": "059b3e848b62d7aabe70f1f60ef6f1bae5192d867bd66a37ff3cbbf18f4a3960"
+      },
+      "git_blob": "cfc2f6683ecfe5a90da48c6da9abfe0101165ae8",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py": {
+      "baseline": {
+        "bytes": 39002,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py",
+        "sha256": "1c42816617ecb0eb10508282507da354a591a137b5fc969bdbcde76eb9173ac6"
+      },
+      "git_blob": "1e4acd4df77b47f24feb2c2379acb94d7cd3ca5e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py": {
+      "baseline": {
+        "bytes": 42137,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+        "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+      },
+      "git_blob": "53d7123051e1a1b9737edeb8928dfe57a579286c",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py": {
+      "baseline": {
+        "bytes": 146870,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+        "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+      },
+      "git_blob": "446ea6eb734d8586a060f64fc56bf198e312aabe",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_metric_lineage.py": {
+      "baseline": {
+        "bytes": 20234,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_metric_lineage.py",
+        "sha256": "df157497e17936216cd4e1faf8b813fefd389733049edd60a7b5f87da911d0fb"
+      },
+      "git_blob": "d23063de3430b77a843fc159a79ec279cd3e5403",
+      "mode": "100644",
+      "private_overlay": {
+        "bytes": 20259,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/legal_ir_metric_lineage.after.py.DATA",
+        "sha256": "fd476d9372ae92cd37b9e8f7f8e7415a5f383227fc6d533ab611ee7c4ed6274d"
+      }
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_report_bundle.py": {
+      "baseline": {
+        "bytes": 45344,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_report_bundle.py",
+        "sha256": "16ae5547afff84d6fc98447b73d33e66c30affff603bf733651fd7c995979b18"
+      },
+      "git_blob": "e5f13bc80f270fb1948a566754a6072130451a94",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py": {
+      "baseline": {
+        "bytes": 112276,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_semantic_metrics.py",
+        "sha256": "949e4dcbfb3b306d760ebedbf256d79d25441ee6dbe3e3915c63e5304d586413"
+      },
+      "git_blob": "2e868b9118b42938b25c159a9dba07d891af9978",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_target_bundle.py": {
+      "baseline": {
+        "bytes": 27683,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_target_bundle.py",
+        "sha256": "4553e2feef78f3088750f5442433e05444fa6a04cd4788e2c25a32352f4c4fdb"
+      },
+      "git_blob": "0a5151327cf6eac077f52f266d5a93f767e4c7cb",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_target_snapshot.py": {
+      "baseline": {
+        "bytes": 19728,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_target_snapshot.py",
+        "sha256": "7d0a014c4856826aafbe972534456af72e5b69c737662f8ce93a3e8e1d647c9b"
+      },
+      "git_blob": "81b3000206324bf1dac19a3fcdfbe12dec63cbff",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_uncertainty.py": {
+      "baseline": {
+        "bytes": 49901,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_uncertainty.py",
+        "sha256": "0a6fe97f0a29bad5a2a0857cfcc77f600774ecdb2eb7fad6b81994a847175c64"
+      },
+      "git_blob": "c1ad22eeb62ac3765ef29fdbdc0735efb7ca9bd7",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_joint_retrieval.py": {
+      "baseline": {
+        "bytes": 74852,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_joint_retrieval.py",
+        "sha256": "b60874c3e8260f926cbd5eab18018c183417b594b9937a167854dbe45fcf9bac"
+      },
+      "git_blob": "c15582df34f21c148d22bf93e07dd59044bb66b4",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_modal_parser.py": {
+      "baseline": {
+        "bytes": 160181,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_modal_parser.py",
+        "sha256": "5415bf565171b17db1d4a03c715e974645a59018addb852cf67fc3c71d462406"
+      },
+      "git_blob": "af00f209e18c3b40e0c9bd1892c9456451ac3638",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_samples.py": {
+      "baseline": {
+        "bytes": 6258,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_samples.py",
+        "sha256": "e46d794d38971343d8f3aed68fb224e5b44292cf9f4b8c973dedc20db5651b87"
+      },
+      "git_blob": "58b4374b825a3228ed46b6a5f1bc5807c03a30fc",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py": {
+      "baseline": {
+        "bytes": 59952,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py",
+        "sha256": "4fa7f523e99879e74c3a333b31ece53b6556360df2b2ce9441c0e2f471d08f20"
+      },
+      "git_blob": "4f28fe460536fe969adbad8e6f8e0c37a0adaa2d",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py": {
+      "baseline": {
+        "bytes": 35294,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_formula.py",
+        "sha256": "60e509fc5018584d19530dd6f9b8423f163cb7baec60f5736d849995bca61185"
+      },
+      "git_blob": "f138ffb2285f7fc607fe3296f8abe5d6b7b9121a",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py": {
+      "baseline": {
+        "bytes": 84401,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py",
+        "sha256": "fdcf1fae15f6fe9ec4986097b698d0ea535042f5fc047678b4184b647ef215ea"
+      },
+      "git_blob": "93e2cf5deccd2014cd20c553bab3705e73614a4c",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/logic_extractor.py": {
+      "baseline": {
+        "bytes": 33726,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/logic_extractor.py",
+        "sha256": "4b77d1e0dced3a1ba83ad19fd41855b2ce96a9c4527efd1b8befd7f9828beaf2"
+      },
+      "git_blob": "db442473607e88942d18ca8804ddb0df5ac6159e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": {
+      "baseline": {
+        "bytes": 1429059,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+        "sha256": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447"
+      },
+      "git_blob": "6c03d227e6a43439395ec37a5d280aebf30b7460",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py": {
+      "baseline": {
+        "bytes": 21228,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py",
+        "sha256": "dcd3a885820e7985ebec458a80325fe00d4d50656cf5827a828dd9cb45eb2524"
+      },
+      "git_blob": "9192b908d3afed67bf8fcec679b05613a1034e61",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_arrow_weights.py": {
+      "baseline": {
+        "bytes": 32722,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_arrow_weights.py",
+        "sha256": "3f126b4ab9903f95b74522fff08d4b43df44ba4efa41f20fb15f24354e181948"
+      },
+      "git_blob": "a44eee5855fa60a7e4ccff6e51989c844b71e659",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_checkpoint.py": {
+      "baseline": {
+        "bytes": 94460,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_checkpoint.py",
+        "sha256": "2db1ca445df723013604dc85098bb4a90f343d31e7b26211360b2ca3456bf8e2"
+      },
+      "git_blob": "1b081180e55693bc19eb93e98b391a58d2077213",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_transaction.py": {
+      "baseline": {
+        "bytes": 17051,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_transaction.py",
+        "sha256": "c4da0ecd5ebb0ba83d91a3683f049b163662211afb216cacacf86bdd7a4b48d3"
+      },
+      "git_blob": "3ceaec82db19c01cf1d9f365bbdc21aba2472c37",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_version.py": {
+      "baseline": {
+        "bytes": 22278,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_version.py",
+        "sha256": "136756e14822dcec8158fb2718417972096842de74c4e841f08df28f1c7a028e"
+      },
+      "git_blob": "a76ffc8439c5ab5eca9b98e70f7c778d66e25e98",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_view_diagnostic.py": {
+      "baseline": {
+        "bytes": 8430,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_view_diagnostic.py",
+        "sha256": "1937169c7d49409b89b00c2b2c9d1d9e955ab3f37f15122931b79be9bb0c36ba"
+      },
+      "git_blob": "c03881a6c0b9d7e3d6a7f204c1811693d0898997",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_ir.py": {
+      "baseline": {
+        "bytes": 7283,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_ir.py",
+        "sha256": "697b8e183fb966f01a0b81e4241154c38d2785277739518cbdfcc8db37695743"
+      },
+      "git_blob": "62e7701bae4b2b5fb5c4196cea2580933c458c93",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_prover_router.py": {
+      "baseline": {
+        "bytes": 6445,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_prover_router.py",
+        "sha256": "46fe3a0a83b8e0e86c9bbb9dbfab15a2a4a8401fbe661bd58b512a93ffd47388"
+      },
+      "git_blob": "7b47493906c6e66f3253de0b742ed4f3a9020630",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_registry.py": {
+      "baseline": {
+        "bytes": 519367,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_registry.py",
+        "sha256": "e8a79d5612f50d3a842b72e618fc1903094dc4dd225688d9cb2d67bb4b0cb00a"
+      },
+      "git_blob": "573d23777a29a2e29e125ea16a6ae8417d407e75",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_reporting.py": {
+      "baseline": {
+        "bytes": 25241,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_reporting.py",
+        "sha256": "dad528feb4bc277962ac526deaac7de74c7752513b9c330f4d3a6dd724b2d21f"
+      },
+      "git_blob": "0a2f932236357060099f4427f38071ff792bb0ef",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_todo_daemon.py": {
+      "baseline": {
+        "bytes": 269726,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_todo_daemon.py",
+        "sha256": "c7ebd9e2974ddcc2e734a6465077219757d6e903d89ba55249e78296bdc53c8d"
+      },
+      "git_blob": "6d23481b78362751e6a7e65022ab18620288a88e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/parallelism_autotuner.py": {
+      "baseline": {
+        "bytes": 80193,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/parallelism_autotuner.py",
+        "sha256": "772dcd628dbfd3a58f6ccf609b02d687fd7669c56b63fe4a5aa054c588954a48"
+      },
+      "git_blob": "282ca3807b05e0a8772a55fa6f42b595b36dd983",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/projection_profiler.py": {
+      "baseline": {
+        "bytes": 10801,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/projection_profiler.py",
+        "sha256": "c5c5179cce6df49f694523b999f61cc8a842fa71424af956893400d574e3b4e8"
+      },
+      "git_blob": "6a152d4d394a36b185475db59329a47b7c37f25e",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py": {
+      "baseline": {
+        "bytes": 41765,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+        "sha256": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc"
+      },
+      "git_blob": "ec28c41fffdb7013d8b73ccc2ba70f1231316019",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py": {
+      "baseline": {
+        "bytes": 15543,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py",
+        "sha256": "3655923785cb99409171caaba8c523354f03dbe8d82b6deb45a7b46db8394633"
+      },
+      "git_blob": "ab690a0e50ac4fd66037d3281eb4a859af4806ff",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/prover_integration.py": {
+      "baseline": {
+        "bytes": 26522,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/prover_integration.py",
+        "sha256": "5c338d236cde845371d0efec9ddc43d2d858142f46e068b818e28dc8da37db8b"
+      },
+      "git_blob": "d1d1423263486c06cbbf0787630d132c723609a0",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py": {
+      "baseline": {
+        "bytes": 151350,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+        "sha256": "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+      },
+      "git_blob": "54dc1effc87deb3fba782f1b9df4db460ffb4f1a",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py": {
+      "baseline": {
+        "bytes": 53075,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py",
+        "sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63"
+      },
+      "git_blob": "f9f476b8af6dafab5606c349cfb30546c0ba7a29",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py": {
+      "baseline": {
+        "bytes": 38995,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py",
+        "sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6"
+      },
+      "git_blob": "a0f72635842cdcb22b333ada6ff782f1fcbfd419",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py": {
+      "baseline": {
+        "bytes": 306359,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/spacy_modal_codec.py",
+        "sha256": "49446ed1e1289ac5cf8cc07e65f67968adc12666ebb66cf951107c9d8c591617"
+      },
+      "git_blob": "3e6cddfad55ba38a6304c74062468d32881e21fe",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py": {
+      "baseline": {
+        "bytes": 42453,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+        "sha256": "cd37964aa4a497e8d778ae0e6a90fe87f3362ead8c9a3751a5a3288b7370ed2e"
+      },
+      "git_blob": "f185deec8ddbfc25db15352cc15def76bb5ab351",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/uscode_dataset.py": {
+      "baseline": {
+        "bytes": 20749,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/uscode_dataset.py",
+        "sha256": "a2a816c3390e1ae141322f414fe7cca74dc5161d0880256f418266c9de369d47"
+      },
+      "git_blob": "f4b81a2bc990351f44db993d5716b08bea90de88",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/uscode_modal_daemon_runner.py": {
+      "baseline": {
+        "bytes": 998965,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/uscode_modal_daemon_runner.py",
+        "sha256": "9e1043f39507cd3be06cf1131f9be5f4787b2a71da5f7ccbe5ae76762482fbd1"
+      },
+      "git_blob": "5f53c9c5f52e3a0737db0c26f2b0e17e0d124cd1",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/validation_run_resources.py": {
+      "baseline": {
+        "bytes": 96211,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/optimizers/logic_theorem_optimizer/validation_run_resources.py",
+        "sha256": "860d25af0ab629c48bb7a2c7356c7690c09fdfe81b53777777c0a41384f1b293"
+      },
+      "git_blob": "27149959c2bb03cf150c98e1e578f84086e9b97f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/__init__.py": {
+      "baseline": {
+        "bytes": 13495,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/__init__.py",
+        "sha256": "ad900d235b175e021f0fb679ede5ce5f810dbdca29bc488a2f10bc06b0a17047"
+      },
+      "git_blob": "6b668b4a4c597eface1cdfb4cf1dcd2b77300dc2",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/core/__init__.py": {
+      "baseline": {
+        "bytes": 1660,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/core/__init__.py",
+        "sha256": "35a86c358c1b2acdf5390a864df857978cd82eedde7ca096c293d417939aa6d5"
+      },
+      "git_blob": "a6f08bf6181cb4edf199c85e0465e873fc4b67d8",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/core/input_detector.py": {
+      "baseline": {
+        "bytes": 14806,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/core/input_detector.py",
+        "sha256": "80a5cecad4308023febcda895d6cd3ac984fb7167f942281db5425547e090746"
+      },
+      "git_blob": "2ce1949fde937f8b78c306de54e48e000bbb9960",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/core/protocol.py": {
+      "baseline": {
+        "bytes": 13576,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/core/protocol.py",
+        "sha256": "ad0198f49eb31a5d764cbf828c74080070ade6ed16d202ac6dd735bc423cc7c8"
+      },
+      "git_blob": "844acfa4a8f7f89c94faa537a105b5eefc215011",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/core/registry.py": {
+      "baseline": {
+        "bytes": 22036,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/core/registry.py",
+        "sha256": "cc89d69c1886b762867d3dc991a2129d5fadfb0663bff7dda933c4591be59be0"
+      },
+      "git_blob": "c0af062071c8b3b4de327a83e627f34aeb7d7e13",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/core/universal_processor.py": {
+      "baseline": {
+        "bytes": 18503,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/core/universal_processor.py",
+        "sha256": "450e0926c6596b11e24d0ae5181bdfa1bd45f575f26de30eab0acf83027914b8"
+      },
+      "git_blob": "90997ed3f55d692ee2ad4a23cb00b461d7685a32",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/infrastructure/__init__.py": {
+      "baseline": {
+        "bytes": 934,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/infrastructure/__init__.py",
+        "sha256": "e73c6dbd4706b81daad0648b6d16b3184ea5db8c57c6fc1ee5362cff604f7b70"
+      },
+      "git_blob": "cf2a9d8dc2092dd131914b4e9b74a12c09aeb2af",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/infrastructure/caching.py": {
+      "baseline": {
+        "bytes": 10731,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/infrastructure/caching.py",
+        "sha256": "49b8586a3c4921bf72d7d46e34d94af1a039deedaa3be95e94e1ac20984c5ae7"
+      },
+      "git_blob": "e8fc027cc9ee54f801fd9c24ddfd383d81791eff",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/infrastructure/error_handling.py": {
+      "baseline": {
+        "bytes": 12161,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/infrastructure/error_handling.py",
+        "sha256": "3b223f9943f16f6312ae4712999818c21c3cadcfa88085936236e8ac56b340dd"
+      },
+      "git_blob": "21c571f31243cd1b0020e4a7b507a0974adcc8ec",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/infrastructure/monitoring.py": {
+      "baseline": {
+        "bytes": 19076,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/infrastructure/monitoring.py",
+        "sha256": "ec3502a6c677cc46d2d5942f3ef5c5345d32a7e23febe1203d6d71a1b16bd1a7"
+      },
+      "git_blob": "785b7031b3318e443558f748ca2dedd2a1fcb434",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/input_detection.py": {
+      "baseline": {
+        "bytes": 15062,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/input_detection.py",
+        "sha256": "08cd2e1ec4033eb82b40380e93f80e85e08593981296ed7b0a5eed9d3caac727"
+      },
+      "git_blob": "f63833961107ed34032017e2d93751f7b91a219b",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/legal_data/__init__.py": {
+      "baseline": {
+        "bytes": 42578,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/legal_data/__init__.py",
+        "sha256": "c591d799ad6e2468fd3d211bc3028b135dc45f48f21c4f0f01f10fe9069f251f"
+      },
+      "git_blob": "65113c9f78378e3812ff4e23d4fe2d6155345783",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/legal_data/uscode_identity.py": {
+      "baseline": {
+        "bytes": 45650,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/legal_data/uscode_identity.py",
+        "sha256": "2c9efbbd7c477c88b6cdd4a97ce4bbfdc2b2a733ac1f856662711aab3f79a224"
+      },
+      "git_blob": "0024b807a6e7a2c3b292e509835729feff766b2a",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/legal_data/uscode_release_schema.py": {
+      "baseline": {
+        "bytes": 91298,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/legal_data/uscode_release_schema.py",
+        "sha256": "7808e42ae4308b8f25421628840e1e23d65f72d8a28ef67a88d48ff510ef3c53"
+      },
+      "git_blob": "dbcd291294913f082b99729d30a71247cb89799b",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/protocol.py": {
+      "baseline": {
+        "bytes": 16179,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/protocol.py",
+        "sha256": "18293ad803f137d5aea1498528eac5f43dcb67481739f1f46027053257b3bdde"
+      },
+      "git_blob": "64c68a30556a1d10afcb488085819dd002d5145f",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/retrieval.py": {
+      "baseline": {
+        "bytes": 21686,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/retrieval.py",
+        "sha256": "3111cd77eb800c5534b42e765c971577f7b8ea4bc720ec938222b273cc90ac82"
+      },
+      "git_blob": "778b9591894ac45c6e4268b2a649e4ccfb79d817",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/processors/universal_processor.py": {
+      "baseline": {
+        "bytes": 25111,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/processors/universal_processor.py",
+        "sha256": "5da3068aa1733eeea1b948da98323b9ed6834eb8efeceb66d26c80a03e3cb3f5"
+      },
+      "git_blob": "e993686c973a8ed6fa2593af30d0551b9baffc83",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/router_deps.py": {
+      "baseline": {
+        "bytes": 5845,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/router_deps.py",
+        "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+      },
+      "git_blob": "906a415bac365db7ba03b2be71f1086edb0fd926",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/utils/__init__.py": {
+      "baseline": {
+        "bytes": 175,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/utils/__init__.py",
+        "sha256": "78f4cd7f8e14b4fff482c0c91ada5c49f8b9edf707bffd9cd58840b5503e66c2"
+      },
+      "git_blob": "dd98bbea10f2938d6f040b8aa5c4377bbb14beb9",
+      "mode": "100644"
+    },
+    "ipfs_datasets_py/utils/cid_utils.py": {
+      "baseline": {
+        "bytes": 4428,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/ipfs_datasets_py/utils/cid_utils.py",
+        "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+      },
+      "git_blob": "36944fb73c85e541b0b9c47531ebfd7b79791534",
+      "mode": "100644"
+    },
+    "pytest.ini": {
+      "baseline": {
+        "bytes": 1536,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/pytest.ini",
+        "sha256": "01737eaafcd2b7e7e1a8db2368a93d4a28053ba44e611a10b1c87d2155dc65ff"
+      },
+      "git_blob": "5ebc8ab6330fc940b64e3037c605d0faf034e1e6",
+      "mode": "100644"
+    },
+    "tests/__init__.py": {
+      "baseline": {
+        "bytes": 20,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/__init__.py",
+        "sha256": "89588b0c2be9d872060e78aa68ccf95f94ca27ea6bcb79a43509d66c296c73ce"
+      },
+      "git_blob": "ae78246ec23f342d440481a9b77b868c14d26463",
+      "mode": "100644"
+    },
+    "tests/conftest.py": {
+      "baseline": {
+        "bytes": 20716,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/conftest.py",
+        "sha256": "0a255dc653799cb980d7edbb1d7b2e3c8f0d81b091d4986aa712e1e8e12b7f10"
+      },
+      "git_blob": "feac04dd85490c131e0bf8b132f0b221d7446de4",
+      "mode": "100644"
+    },
+    "tests/unit/__init__.py": {
+      "baseline": {
+        "bytes": 26,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/__init__.py",
+        "sha256": "9d566025eaa21543b52722147774afc45981154f677dcc38078a2632e5b52947"
+      },
+      "git_blob": "ea3f8b923c2804f646990530711c8d6fe09d129b",
+      "mode": "100644"
+    },
+    "tests/unit/conftest.py": {
+      "baseline": {
+        "bytes": 1204,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/conftest.py",
+        "sha256": "2abb4618add06f636ab71406c19ccd828084a48ecf75448397ddb6cd2bca53a2"
+      },
+      "git_blob": "998f93deb362b71ccf555e1ff43fd56117137978",
+      "mode": "100644"
+    },
+    "tests/unit/logic/autoformal/test_corpus_norm_definition_adapter.py": {
+      "baseline": {
+        "bytes": 64310,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/logic/autoformal/test_corpus_norm_definition_adapter.py",
+        "sha256": "65e048cb503a2c5532e2ad65cce02a8e61de52ac89602cdf811eda224ae1f3b4"
+      },
+      "git_blob": "6cd0db1cdb355f77699c334d64ae5b3bd354850d",
+      "mode": "100644"
+    },
+    "tests/unit/logic/autoformal/test_legal_corpus_shared_lake.py": {
+      "baseline": {
+        "bytes": 204417,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/logic/autoformal/test_legal_corpus_shared_lake.py",
+        "sha256": "25ed3e6a71adff8e80eb679324e4e1094d61e2bfef940b9ed0a2cc31682628bf"
+      },
+      "git_blob": "1c90728f906fa7495a80f911d546ef7de84a3243",
+      "mode": "100644"
+    },
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py": {
+      "baseline": {
+        "bytes": 125523,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py",
+        "sha256": "80ca1e89438287270e68591c3dad6498fd017c53f11254ce53b4c981d819d778"
+      },
+      "git_blob": "b531d4b67134a980648aec910fed88733941afde",
+      "mode": "100644"
+    },
+    "tests/unit/logic/autoformal/test_legal_norm_content_responses_v1.py": {
+      "baseline": {
+        "bytes": 32334,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/logic/autoformal/test_legal_norm_content_responses_v1.py",
+        "sha256": "66cf8659639c52ba77b87b9e4d593129f7e21eaef50410f4673c18ede6ae460a"
+      },
+      "git_blob": "a430bce95f79e438180d02c629659733cf6190ea",
+      "mode": "100644"
+    },
+    "tests/unit/logic/autoformal/test_legal_norm_interpretation_review_v1.py": {
+      "baseline": {
+        "bytes": 75715,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/logic/autoformal/test_legal_norm_interpretation_review_v1.py",
+        "sha256": "39d7a774ce3e1cc7b48159a3cf26bed044093cba931778c5d076fa191ae87db5"
+      },
+      "git_blob": "212f1c85a60b1c94a20a2e323cf54a7497a34b51",
+      "mode": "100644"
+    },
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py": {
+      "baseline": {
+        "bytes": 82687,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/logic/autoformal/test_legal_relational_norm_v1.py",
+        "sha256": "d6180c3e711e5d795c9bea3c4a258ed8720e4a9d831f1426fa61b67322d8cbea"
+      },
+      "git_blob": "f3fd84f94af3c9957d2e43e485d4009a05c88d7c",
+      "mode": "100644"
+    },
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py": {
+      "baseline": {
+        "bytes": 34149,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py",
+        "sha256": "b33ec128970c9601583df4cf9b8c78744a7def25af3a497eb6bed7194c183a91"
+      },
+      "git_blob": "57cba9cbfe55bf91fa8377808cd853d7d39c9059",
+      "mode": "100644"
+    },
+    "tests/unit/logic/formalization/autoencoder/__init__.py": {
+      "baseline": {
+        "bytes": 0,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/logic/formalization/autoencoder/__init__.py",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "git_blob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "mode": "100644"
+    },
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_declarations.py": {
+      "baseline": {
+        "bytes": 61464,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/logic/formalization/autoencoder/test_alignment_relation_declarations.py",
+        "sha256": "5f62c07462cb6027b05fb3f75bc2d668d2d59e3d6c734465bcaa0de06068396b"
+      },
+      "git_blob": "5c417790d86f5567c2d6cbcf8972cc26df102eb4",
+      "mode": "100644"
+    },
+    "tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py": {
+      "baseline": {
+        "bytes": 79013,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/logic/formalization/autoencoder/test_alignment_relation_mask_handoff.py",
+        "sha256": "a7d246b14ed16f92ca31bb19dd934cb326e32a028eabe4cbb62ec0b42335503b"
+      },
+      "git_blob": "fdf9428183d6d60fd4795f92704210f806ae1ef5",
+      "mode": "100644"
+    },
+    "tests/unit/logic/test_autoformal_campaign_training_inputs.py": {
+      "baseline": {
+        "bytes": 213705,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/logic/test_autoformal_campaign_training_inputs.py",
+        "sha256": "b53eab310892692a7d21b9e8ea02c3e409187836210f89ab6804ab510ab50826"
+      },
+      "git_blob": "cde693ab8a31447436e1546d098c97c86456e5d7",
+      "mode": "100644"
+    },
+    "tests/unit/optimizers/__init__.py": {
+      "baseline": {
+        "bytes": 33,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/optimizers/__init__.py",
+        "sha256": "a2915ce482d690b118753f039d6d394743a89b07fe4392781656952e584531c1"
+      },
+      "git_blob": "15d197077884b957db59b30b05de012377d88027",
+      "mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/conftest.py": {
+      "baseline": {
+        "bytes": 5647,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/optimizers/logic_theorem_optimizer/conftest.py",
+        "sha256": "28c6a027bf1dab9365f1b70f9b90428a136cb5e6436994176f5b6a9ddc6efc11"
+      },
+      "git_blob": "81cf45c01ee456a6747611412590bd3fabdd7707",
+      "mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_campaign_training_worker.py": {
+      "baseline": {
+        "bytes": 17893,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_campaign_training_worker.py",
+        "sha256": "acb0092927aec9c39faf40412a662057094585476af2100a4c6d4b73acc54610"
+      },
+      "git_blob": "c384396a2f24c60846394b54401ba036e054aca3",
+      "mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_embedding_production.py": {
+      "baseline": {
+        "bytes": 20507,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_embedding_production.py",
+        "sha256": "d073a82c60bfca06ce6c797692a0c3a725ff63ba5b99bcfde3fb627795fba101"
+      },
+      "git_blob": "b15943d4a9d738108822b7786e4756fd24f6a108",
+      "mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_embedding_receipt_set.py": {
+      "baseline": {
+        "bytes": 28098,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_embedding_receipt_set.py",
+        "sha256": "623da845fd8be83112bb205a2989f4cf71d1422899e4c998ed078489781a3cbf"
+      },
+      "git_blob": "65001f3c1ad126cc0aeb40df04e72d01d83b3b0a",
+      "mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_produced_record_projection.py": {
+      "baseline": {
+        "bytes": 29535,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_produced_record_projection.py",
+        "sha256": "2f2fb8caf310cd53c1085fd75712d34e0b02ae16abf58d67e757f9b9b10a39b1"
+      },
+      "git_blob": "b6143f2b4c477b6ae49bfce25b6f5b049c300648",
+      "mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_uscode_inventory.py": {
+      "baseline": {
+        "bytes": 34103,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_uscode_inventory.py",
+        "sha256": "f439b9be4ee5f54bc4017baed66b6cbacef03625e25328687edafa65b55bc904"
+      },
+      "git_blob": "59fc7c9dc4a7e47d28dfd301f92dc449486e1e2f",
+      "mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py": {
+      "baseline": {
+        "bytes": 294426,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py",
+        "sha256": "0bfc578af7cc9bc43a045a661c2584404b620a4da8ebbb54d3e6377ae7daea86"
+      },
+      "git_blob": "b232fc973f04a76436572f24ca33ea2b8b85801a",
+      "mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py": {
+      "baseline": {
+        "bytes": 8117,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py",
+        "sha256": "24a9d4a7396f628d089bf8367551665fb7937153feef7f9971ae7466deffb3dd"
+      },
+      "git_blob": "e181d4fbaa5dd55e92e3636e39fc5aa98541a8d1",
+      "mode": "100644",
+      "private_overlay": {
+        "bytes": 13043,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/test_legal_ir_metric_responsiveness.after.py.DATA",
+        "sha256": "8a1aa33563b0b60d69d34cec9d8e48c1e1f0f1b3d33ead3609e5ee075e8e84e4"
+      }
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py": {
+      "baseline": {
+        "bytes": 15510,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py",
+        "sha256": "ff6d5189c29527b9c280c3b8372fb9d3f37ad30d3f097691f5f1957b358708be"
+      },
+      "git_blob": "c5fa8cab0cc701074acc5da8a5812af22792f5a7",
+      "mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py": {
+      "baseline": {
+        "bytes": 75797,
+        "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/project/tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py",
+        "sha256": "f35c64ddaac85802ef2d33f65827d722dc836c741de17d4cb1686e315857b46b"
+      },
+      "git_blob": "d4fad9ed5995e5a2db6c7921cfbf45b574f81a62",
+      "mode": "100644"
+    }
+  }
+}

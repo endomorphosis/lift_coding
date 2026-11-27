@@ -1,0 +1,144 @@
+"""Seal the private owner entry, parser and local evidence."""
+from copy import deepcopy
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+from runpy import run_path
+from stat import S_IMODE
+from tempfile import mkstemp
+
+HERE=Path(__file__).resolve().parent
+TMP=HERE.parent
+OLD=TMP/'decoder-training-experiment-manifest-v392.json'
+NEW=TMP/'decoder-training-experiment-manifest-v393.json'
+KEY='private_existing_stage_a_owner_startup_and_child_closeout'
+
+
+def ref(path,expected=None):
+    raw=path.read_bytes()
+    digest=sha256(raw).hexdigest()
+    assert expected is None or expected==digest,path
+    return dict(path=str(path),bytes=len(raw),sha256=digest)
+
+
+def save(path,data):
+    raw=data.encode() if type(data) is str else (json.dumps(data,indent=2,sort_keys=True)+'\n').encode()
+    with path.open('xb') as stream:
+        stream.write(raw)
+    return ref(path)
+
+
+def logs(directory,stem,n,rc=0):
+    assert (directory/(stem+'.rc')).read_bytes()==f'{rc}\n'.encode()
+    text=(directory/(stem+'.stderr')).read_text()
+    assert f'Ran {n} tests in ' in text
+    if rc==0:
+        assert text.endswith('\nOK\n') and sum(line.endswith(' ... ok') for line in text.splitlines())==n
+    return {name:ref(directory/(stem+'.'+name)) for name in ('rc','stdout','stderr')}
+
+
+old_ref=ref(OLD,'87c285e87da9671b08830012a42503da755a60a689b7ae0fec03bab2cd19547a')
+old=json.loads(OLD.read_bytes())
+old_checker=Path(old['advisory_operator_readiness_checker']['path'])
+assert ref(old_checker)==old['advisory_operator_readiness_checker']
+guide=TMP/'decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP'
+quote=ref(guide/'guide573-pair-conditional-quote.INERT.json',
+          '0233b3a3379469767120fbda67e6eea6a89298a56839981c1e201d565be69f9f')
+description=HERE/'descriptor.json'
+descriptor=dict(
+    schema='private-existing-stage-a-owner-startup-controls/v1',
+    candidate=ref(HERE/'reader.py.DATA','f20087d2ad4740b3b8b2d30ee1f70365b0aafdb44c416dda5e52cf18ca644bd5'),
+    diff=ref(HERE/'reader.py.DATA.diff','452fc7349d89518ff8ea98e41cf2f19557658a7cff367007c068a7d58c068768'),
+    stage_zero_adapter=ref(HERE/'guide573_stage_zero.py','f474b5f0c7e3ae431234389886533cca65c06db26fc8515982721fcf27f6a1ed'),
+    test_cases=dict(new_startup_and_closeout=9,pinned_stage_zero_parser=2,historical_reader=16),
+    controls={stem:logs(HERE,stem,n) for stem,n in (('startup',9),('stage-zero',2),('legacy',16))},
+    retained_first_fixture_missing_errors_field=logs(HERE/'startup-first-report-fixture','startup',8,1),
+    retained_first_fixture_driver=ref(HERE/'startup-first-report-fixture'/'test_startup.py'),
+    drivers={name:ref(HERE/name) for name in ('compose.py','startup.py.IN','compose_stage_zero.py',
+             'test_startup.py','test_stage_zero.py','seal.py')},
+    basis_quote=quote,joint_minimum_additional_bytes_before_owner_overhead=27_490_906,
+    exact_owner_startup_selection=None,exact_selector_terminal=None,external_index_live_read=None,
+    original_parent_wait_evidence=None,actual_live_reader=None,dispatch_authority=False,
+    runtime_custody_in_controls_was_modeled=True,child_receipt_read_by_existing_A0_binder=True,
+    legacy_default_entrypoint_preserved=True)
+source=old_checker.read_text()
+before_def='def report(manifest):\n'
+before_out='        "stage_a_coordination": coordination,'
+assert source.count(before_def)==source.count(before_out)==1
+extend='''def project_stage_a_owner_startup(reference, coordination):
+    row = retained_json(reference)
+    quote = retained_json(row["basis_quote"])
+    joint = (quote["selector_Reader_conditional_subtotal"]
+             + coordination["standalone_independent_index_payload_floor_excluded_from_quote"]
+             - quote["retained_headroom_bytes"])
+    require(row["schema"] == "private-existing-stage-a-owner-startup-controls/v1"
+            and row["test_cases"] == {"new_startup_and_closeout":9,"pinned_stage_zero_parser":2,"historical_reader":16}
+            and row["runtime_custody_in_controls_was_modeled"] is True
+            and row["child_receipt_read_by_existing_A0_binder"] is row["legacy_default_entrypoint_preserved"] is True
+            and row["exact_owner_startup_selection"] is row["exact_selector_terminal"] is row["external_index_live_read"]
+                is row["original_parent_wait_evidence"] is row["actual_live_reader"] is None
+            and joint == row["joint_minimum_additional_bytes_before_owner_overhead"] == 27_490_906
+            and coordination["actual_paired_selection"] is coordination["current_independent_read_join"] is None
+            and row["dispatch_authority"] is False,
+            "exact detached startup and proof-preserving joint resource arithmetic required")
+    return {key:row[key] for key in ("test_cases","runtime_custody_in_controls_was_modeled",
+        "child_receipt_read_by_existing_A0_binder","joint_minimum_additional_bytes_before_owner_overhead",
+        "exact_owner_startup_selection","exact_selector_terminal","external_index_live_read",
+        "original_parent_wait_evidence","actual_live_reader","dispatch_authority")}
+
+
+'''
+source=source.replace(before_def,extend+before_def,1)
+source=source.replace(before_out,before_out+f'''
+        **({{"{KEY}": project_stage_a_owner_startup(design["{KEY}"], coordination)}}
+           if "{KEY}" in design else {{}}),''',1)
+plan=TMP/'decoder-training-integration-plan.md'
+status=plan.stat()
+before=plan.read_bytes()
+assert sha256(before).hexdigest()=='d915d209fb3d5586c1a493e3a7567dcc9aa5f01cf6b91481f02c9d874ed7dfa1'
+body=before.decode()
+addition=f"""## 830. Bind the selected Reader startup and child closeout
+
+The existing detached Reader now exposes an owner startup function for the 32-file path. It checks the exact preview, selection, launch window, paired Git namespace and owner budget before opening a fresh output. It uses the selected Source42 loader and the same Reader. The preview is supplied from the owner's authenticated prelaunch buffer and read once by the Reader. A caller that also reads it during prelaunch must carry that cost. The function records a child receipt only after confirmed exits and owned-module cleanup, accounts for terminal reservation, write and readback, and leaves independent parent wait and ledger verification to the existing owner. The historical entry still has its original behavior. [Startup candidate and local evidence]({description})
+
+Nine startup and closeout controls passed with modeled Source and Git custody. The existing A0 binder accepted the exact child receipt only after its independent authority callback approved it. Sixteen earlier Reader controls passed against this candidate. The original index parser was adapted for the exact Guide573 v3 index and received all 32 selected rows in interface tests. Both parser checks passed, including refusal of a changed same-length index and a duplicate roster.
+
+Guide573's independent index capture and the selector and Reader use the same retained headroom if charged together. The combined arithmetic calls for at least 27,490,906 more bytes before startup, terminal and owner overhead. Prior envelopes remain charged. Current independent Source evidence, a paired selector terminal and a live owner selection and wait are still pending. [Guide573 reservation]({quote['path']})
+
+"""
+for was,now in (
+    (str(OLD),str(NEW)),
+    ('Version 3.538. Updated 2026-11-27 with exact Guide573 index replay and the refreshed Stage A reservation.',
+     'Version 3.539. Updated 2026-11-27 with the selected Reader startup and child closeout.'),
+    ('## Primary research references',addition+'## Primary research references'),
+):
+    assert body.count(was)==1,was
+    body=body.replace(was,now,1)
+checker=HERE/'check_design.py'
+namespace={'__name__':'private_readback','__file__':str(checker)}
+exec(compile(source,str(checker),'exec'),namespace)
+prior=run_path(str(old_checker))['report'](old)
+assert namespace['report'](old)==prior
+new=deepcopy(old)
+new['manifest_schema_version']='0.393.0'
+new['previous_manifest']=old_ref
+new['typed_execution_design'][KEY]=save(description,descriptor)
+new['advisory_operator_readiness_checker']=save(checker,source)
+report=run_path(str(checker))['report'](new)
+prior['manifest_schema_version']=new['manifest_schema_version']
+assert {key:value for key,value in report.items() if key!=KEY}==prior
+manifest=save(NEW,new)
+readiness=save(HERE/'verified-readiness.json',report)
+fd,name=mkstemp(dir=TMP,prefix=plan.name+'.')
+staged=Path(name)
+try:
+    with os.fdopen(fd,'w') as stream:
+        stream.write(body)
+    staged.chmod(S_IMODE(status.st_mode))
+    assert plan.stat().st_ino==status.st_ino and plan.read_bytes()==before
+    os.replace(staged,plan)
+finally:
+    if staged.exists():
+        staged.unlink()
+print(json.dumps(dict(manifest=manifest,readiness=readiness,plan=ref(plan),descriptor=ref(description)),sort_keys=True))

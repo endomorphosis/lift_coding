@@ -1,0 +1,179 @@
+"""Run the existing paid comparator and its opt-in censor follow-up projection."""
+from copy import deepcopy
+from dataclasses import replace
+from hashlib import sha256
+import json
+from pathlib import Path
+import unittest
+
+HERE=Path(__file__).resolve().parent
+BOUND=HERE.parent/'decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/test_confirmation_bounds.py'
+PRIOR=HERE.parent/'decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/study.py'
+raw=BOUND.read_bytes()
+assert (len(raw),sha256(raw).hexdigest())==(9698,'58c7aece811f4ad2bdac1fce0f5ee67a45bd7e5c48f227f50ae546d1c3c2aae4')
+scope={'__file__':__file__,'__name__':'retained_fixture'}
+exec(compile(raw,str(BOUND),'exec'),scope)
+S=scope['study_owner']
+Case=scope['Case']
+reframed=scope['reframed']
+compare=scope['compare']
+select=scope['held']['only']
+pin=S.commitment
+WALL='wall_seconds'
+SUMMARY={}
+
+
+def censored(horizon=120.0, cross_clock=False, missing=False):
+    if not cross_clock:
+        return reframed(Case(capped=True),S,horizons=(horizon,150.0,10.0))
+    case=reframed(Case(capped=True),S,horizons=(horizon,150.0,10.0),budget_caps=(None,17.0,None))
+    baseline,candidate=case.base
+    candidate=replace(candidate,budget_clock='cpu_seconds')
+    case.base=baseline,candidate
+    interval,charge=case.observations[case.locate(1,'close')]
+    close,=(event for event,_ in charge.entries if case.events[event].kind=='closeout')
+    case.events[close]=replace(case.events[close],cpu_ns=6_000_000_000)
+    wall=None if missing else replace(interval.wall,end_ns=interval.wall.start_ns+35_000_000_000)
+    case.with_interval(1,'close',subject_sha256=S.meter_subject(candidate,None),wall=wall)
+    return case
+
+
+def selection(report, slot=1, clock=WALL):
+    row=report['attempts'][slot]
+    closing=row['cost_evidence']['closing_meter']
+    return S.CensorFollowup(row['attempt_sha256'],clock,row['closing_meter_sha256'],
+        closing['clock_receipts'][S.COVERED_CLOCKS.index(clock)],row['closeout_receipt_sha256'],
+        pin(('modeled independent no-confirmation receipt',clock)))
+
+
+def bound(report, selected, owner=lambda *_:True):
+    return S.verify_censored_confirmation_cost_bounds(report,expected_paid_report_sha256=pin(report),
+        followups=selected,expected_followups_sha256=pin(selected),verify_original_followup_owner=owner)
+
+
+class CensorControls(unittest.TestCase):
+    def test_supported_partial_followup_changes_only_restricted_time(self):
+        case=censored()
+        report=compare(case,*case.seal())
+        closed=deepcopy(report)
+        seen=[]
+        picked=(selection(report),)
+        new=bound(report,picked,lambda *args:seen.append(args) is None)
+        old=select(report['confirmation_cost_bounds'],'pairs',clock=WALL)
+        actual=select(new,'pairs',clock=WALL)
+        candidate=actual['candidate']
+        self.assertEqual(old['candidate']['restricted_confirmation_seconds'],(0.0,120.0))
+        self.assertEqual(candidate['restricted_confirmation_seconds'],(100.0,120.0))
+        self.assertEqual(actual['restricted_candidate_minus_baseline_seconds_bounds'],((40,1),(60,1)))
+        self.assertEqual(actual['candidate_minus_baseline_attainment_bounds'],(-1,0))
+        self.assertEqual(old['candidate_minus_baseline_attainment_bounds'],(-1,0))
+        self.assertIsNone(candidate['attainment'])
+        self.assertTrue(all(candidate[key] is None for key in ('observed_confirmation_seconds','confirming_look',
+                        'lower_meter_sha256','upper_meter_sha256','lower_seconds','upper_seconds')))
+        self.assertEqual(seen,[(pin(report),report['cost_evidence_sha256'],pin(picked))])
+        self.assertEqual(report,closed)
+        SUMMARY.update(candidate_legacy=old['candidate']['restricted_confirmation_seconds'],
+                       candidate_followup=candidate['restricted_confirmation_seconds'],
+                       paired_difference=actual['restricted_candidate_minus_baseline_seconds_bounds'])
+
+    def test_cross_clock_censoring_preserves_independent_cap_clock(self):
+        case=censored(80.0,cross_clock=True)
+        report=compare(case,*case.seal())
+        self.assertEqual(report['attempts'][1]['decision']['status'],'right_censored')
+        actual=select(bound(report,(selection(report),)),'pairs',clock=WALL)
+        self.assertEqual(actual['candidate']['restricted_confirmation_seconds'],(35.0,80.0))
+        self.assertEqual(actual['restricted_candidate_minus_baseline_seconds_bounds'],((-25,1),(20,1)))
+        self.assertIsNone(actual['candidate']['attainment'])
+
+    def test_horizon_at_close_preserves_known_nonattainment(self):
+        case=censored(100.0)
+        report=compare(case,*case.seal())
+        actual=select(bound(report,(selection(report),)),'pairs',clock=WALL)
+        self.assertEqual(actual['candidate']['restricted_confirmation_seconds'],(100.0,100.0))
+        self.assertEqual(actual['candidate']['attainment'],0)
+
+    def test_owner_refusal_and_stale_paid_digest_do_not_tighten(self):
+        case=censored()
+        report=compare(case,*case.seal())
+        picked=(selection(report),)
+        with self.assertRaisesRegex(ValueError,'original follow-up owner refused'):
+            bound(report,picked,lambda *_:False)
+        with self.assertRaisesRegex(ValueError,'exact paid report'):
+            S.verify_censored_confirmation_cost_bounds(report,expected_paid_report_sha256=pin("other paid report"),
+                followups=picked,expected_followups_sha256=pin(picked),verify_original_followup_owner=lambda *_:True)
+        def mutate(*_):
+            report['attempts'][1]['decision']['closing_costs'][WALL]=101.0
+            return True
+        with self.assertRaisesRegex(ValueError,'exact selected evidence changed'):
+            bound(report,picked,mutate)
+
+    def test_alias_of_paid_meter_cannot_certify_a_censor_interval(self):
+        case=censored()
+        attempts,evidence=case.seal()
+        closing=replace(attempts[1].closing_meter,record_sha256=attempts[0].assessments[2].meter.record_sha256)
+        attempts=(attempts[0],replace(attempts[1],closing_meter=closing))
+        evidence=replace(evidence,attempts_sha256=pin(attempts))
+        report=compare(case,attempts,evidence)
+        picked=selection(report)
+        with self.assertRaisesRegex(ValueError,'unaliased meter'):
+            bound(report,(picked,),lambda *_:self.fail('alias reached follow-up owner'))
+
+    def test_missing_clock_and_unmatched_closure_are_refused(self):
+        case=censored(80.0,cross_clock=True,missing=True)
+        report=compare(case,*case.seal())
+        picked=replace(selection(report),closing_clock_receipt_sha256=pin('made-up wall receipt'))
+        self.assertEqual(select(report['confirmation_cost_bounds'],'pairs',clock=WALL)['candidate']
+                         ['restricted_confirmation_seconds'],(0.0,80.0))
+        with self.assertRaisesRegex(ValueError,'observed closing clock'):
+            bound(report,(picked,),lambda *_:self.fail('missing clock reached follow-up owner'))
+        case=censored()
+        report=compare(case,*case.seal())
+        picked=selection(report)
+        for field in ('closeout_receipt_sha256','closing_clock_receipt_sha256','closing_meter_sha256'):
+            with self.subTest(field=field),self.assertRaisesRegex(ValueError,'own observed closing clock'):
+                bound(report,(replace(picked,**{field:pin(field)}),))
+        with self.assertRaisesRegex(ValueError,'unique right-censored'):
+            bound(report,(picked,picked))
+
+    def test_supports_the_actual_registered_development_owner(self):
+        registered=BOUND.with_name('test_registered_development.py')
+        body=registered.read_bytes()
+        self.assertEqual((len(body),sha256(body).hexdigest()),(5076,
+            '53dc7aa783c076b1e910983a835e880bb1880112d25f0a385c5c4820a346532f'))
+        namespace={'__file__':str(HERE/registered.name),'__name__':'registered_fixture'}
+        exec(compile(body,str(registered),'exec'),namespace)
+        fixture=namespace['StepStudy'](capped=True,empty='budget_limit')
+        report=fixture.compare(include_confirmation_cost_bounds=True)
+        self.assertEqual(report['schema'],S.VERIFIED_DEVELOPMENT_SCHEMA)
+        actual=select(bound(report,(selection(report),)),'pairs',clock=WALL)
+        self.assertEqual(actual['candidate']['restricted_confirmation_seconds'],(100.0,100.0))
+        self.assertEqual(actual['candidate']['attainment'],0)
+
+    def test_verified_compact_non_censored_outcomes_cannot_supply_followup(self):
+        raw=BOUND.with_name('fictional-compact-comparison-v01.json').read_bytes()
+        self.assertEqual((len(raw),sha256(raw).hexdigest()),(19466,
+            '8110202574613de816dfe3709e4f7cb7e7353d23ba6abdda09821d2d089fe817'))
+        report=json.loads(raw)
+        self.assertEqual(report['schema'],S.VERIFIED_COMPACT_DEVELOPMENT_SCHEMA)
+        for index in (0,1):
+            with self.subTest(index=index),self.assertRaisesRegex(ValueError,'paid right-censored'):
+                bound(report,(selection(report,index),),lambda *_:self.fail('noncensored arm reached follow-up owner'))
+
+    def test_prior_paid_and_optional_bounds_reports_are_identical(self):
+        prior=scope['load_fixture'](PRIOR)
+        previous=prior['module']
+        case=reframed(prior['Case'](capped=True),previous,horizons=(120.0,150.0,10.0))
+        before=case.compare(*case.seal())
+        expected=previous._verified_confirmation_cost_bounds(before)
+        current=censored()
+        report=compare(current,*current.seal())
+        self.assertEqual({k:v for k,v in report.items() if k!='confirmation_cost_bounds'},before)
+        self.assertEqual(report['confirmation_cost_bounds'],expected)
+
+
+if __name__=='__main__':
+    suite=unittest.defaultTestLoader.loadTestsFromTestCase(CensorControls)
+    result=unittest.TextTestRunner(verbosity=2).run(suite)
+    if result.wasSuccessful():
+        print(json.dumps(SUMMARY,sort_keys=True))
+    raise SystemExit(not result.wasSuccessful())

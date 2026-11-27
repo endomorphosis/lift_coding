@@ -1,0 +1,20 @@
+{
+  "candidate": {
+    "bytes": 3116,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/SEALED-Phase7-receipt-bounds-exact-two.json",
+    "sha256": "75c25b343072e543f36652328d45e924420bd083dc8a31bd2c25d586dd075e0d"
+  },
+  "first_full_charge": {
+    "bytes": 1294,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/Source-only-Phase7-receipt-bounds-WRITE-full-retained.json",
+    "sha256": "48b153a723382c43c88a849ac2518a3136640450024b0dd61f47468572211db7"
+  },
+  "no_Git_or_Source_write_observed": true,
+  "original_runner": {
+    "bytes": 8908,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/first-write-support-ordered-before-sparse.py.DATA",
+    "sha256": "1e804b3e62623ae20ec47daea31f583175d6192a428d5fbd78d51453be928e1a"
+  },
+  "stage": "support metadata was checked before sparse materialization",
+  "terminal_returncode": 1
+}

@@ -1,0 +1,145 @@
+"""Seal the verified follow-up projection and descriptive Source62 readback."""
+from copy import deepcopy
+from hashlib import sha256
+import json
+from math import isclose
+import os
+from pathlib import Path
+from runpy import run_path
+from stat import S_IMODE
+from tempfile import mkstemp
+
+HERE=Path(__file__).resolve().parent
+TMP=HERE.parent
+OLD=TMP/'decoder-training-experiment-manifest-v394.json'
+NEW=TMP/'decoder-training-experiment-manifest-v395.json'
+KEY='private_paid_confirmation_censor_followup'
+
+
+def ref(path,expected=None):
+    raw=path.read_bytes()
+    digest=sha256(raw).hexdigest()
+    assert expected is None or expected==digest,path
+    return dict(path=str(path),bytes=len(raw),sha256=digest)
+
+
+def save(path,value):
+    raw=value.encode() if type(value) is str else (json.dumps(value,indent=2,sort_keys=True)+'\n').encode()
+    with path.open('xb') as stream:
+        stream.write(raw)
+    return ref(path)
+
+
+def logs(stem,n):
+    stderr=(HERE/(stem+'.stderr')).read_text()
+    assert (HERE/(stem+'.rc')).read_bytes()==b'0\n'
+    assert sum(line.endswith(' ... ok') for line in stderr.splitlines())==n and stderr.endswith('\nOK\n')
+    return {kind:ref(HERE/(stem+'.'+kind)) for kind in ('stdout','stderr','rc')}
+
+
+old_ref=ref(OLD,'4e27325334dd0a785b5b581f92024537881a29b0a53b7fd639a4957d50b3327f')
+old=json.loads(OLD.read_bytes())
+old_checker=Path(old['advisory_operator_readiness_checker']['path'])
+assert ref(old_checker)==old['advisory_operator_readiness_checker']
+description=HERE/'descriptor.json'
+scenario=json.loads((HERE/'followup.stdout').read_bytes())
+assert scenario==dict(candidate_legacy=[0.,120.],candidate_followup=[100.,120.],paired_difference=[[40,1],[60,1]])
+fit=ref(HERE/'source62-fit-sensitivity.json','ec86642cf73867de0c771e42dbbf6762abb8d61963a7e4330a4219b7e03c5fef')
+values=json.loads(Path(fit['path']).read_bytes())
+assert values['fit_updates']==0 and values['source_fidelity_or_convergence_measured'] is False
+assert len(values['rows'])==3 and all(row['change']<0 for row in values['rows'])
+assert isclose(values['target_length_weighted_record_scalar']['change'],-0.2181542434480274)
+desc=dict(
+    schema='private-paid-scheduled-confirmation-censor-followup-controls/v1',
+    before=ref(TMP/'decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/study.py',
+               '0ed2b796854574708184a132303054d780048a78da5031f9c4d7e1c074da3a3d'),
+    candidate=ref(HERE/'study.py','c462caa0fffb73f74549013d0272d224dada01e9e33620329b5b3f5ffb920915'),
+    diff=ref(HERE/'study.diff','a8e157d8979b750064902f7d6bb072c5f86431d2ce96ddb0e5aa760fd05e022b'),
+    local_cases=dict(followup=9,retained_bounds=8,retained_stage_g=8),modeled_example=scenario,
+    local_logs={stem:logs(stem,n) for stem,n in (('followup',9),('retained-bounds',8),('retained-stage-g',8))},
+    drivers={name:ref(HERE/name) for name in ('compose.py','censor_followup.py.IN','test_followup.py',
+                                             'test_retained.py','source62_fit_sensitivity.py','seal.py')},
+    source62_descriptive_fit_sensitivity=fit, source62_native_rerun=None, actual_censor_followup_owner=None,
+    old_paid_reports_and_final_rule_preserved=True, independently_selected_live_study=None, dispatch_authority=False)
+source=old_checker.read_text()
+at_def='def report(manifest):\n'
+at_out='        "stage_a_coordination": coordination,'
+assert source.count(at_def)==source.count(at_out)==1
+projection='''def project_paid_censor_followup(reference):
+    row = retained_json(reference)
+    fit = retained_json(row["source62_descriptive_fit_sensitivity"])
+    require(row["schema"] == "private-paid-scheduled-confirmation-censor-followup-controls/v1"
+            and row["local_cases"] == {"followup":9,"retained_bounds":8,"retained_stage_g":8}
+            and row["modeled_example"] == {"candidate_legacy":[0.0,120.0],"candidate_followup":[100.0,120.0],
+                                           "paired_difference":[[40,1],[60,1]]}
+            and row["old_paid_reports_and_final_rule_preserved"] is True
+            and row["source62_native_rerun"] is row["actual_censor_followup_owner"]
+                is row["independently_selected_live_study"] is None
+            and row["dispatch_authority"] is False and fit["fit_updates"] == 0
+            and fit["source_fidelity_or_convergence_measured"] is False
+            and fit["expected_positions_total"] == 5845 and len(fit["rows"]) == 3
+            and all(row["change"] < 0 for row in fit["rows"])
+            and fit["heldout_original"]["after_exact"] == fit["heldout_original"]["baseline_exact"] == 0
+            and fit["heldout_original"]["cases"] == 3,
+            "exact synthetic censor controls and fixed-TRAIN descriptive readback required")
+    fields = ("equal_record_delta","leave_one_row_out_deltas","target_length_weighted_record_scalar",
+              "fit_updates","heldout_original","source_fidelity_or_convergence_measured")
+    return {"local_cases":row["local_cases"],"modeled_example":row["modeled_example"],
+            "source62_fit_sensitivity":{key:fit[key] for key in fields},
+            "actual_censor_followup_owner":None,"dispatch_authority":False}
+
+
+'''
+source=source.replace(at_def,projection+at_def,1)
+source=source.replace(at_out,at_out+f'''
+        **({{"{KEY}": project_paid_censor_followup(design["{KEY}"])}}
+           if "{KEY}" in design else {{}}),''',1)
+plan=TMP/'decoder-training-integration-plan.md'
+status=plan.stat()
+before=plan.read_bytes()
+assert sha256(before).hexdigest()=='8f65e3a5ea73481b2f6270e15dddee14f887b3d54ef4824af9881b489ff4268d'
+body=before.decode()
+addition=f"""## 832. Use independent follow-up evidence in the paid threshold comparison
+
+The existing paid comparator can derive a separate restricted time interval for a right-censored attempt. It uses an unaliased closing meter, its clock receipt, the original attempt close and independently approved evidence of no scheduled confirmation through that close. It keeps the observations, costs, attainment flags and FINAL eligibility from the original paid report. The earlier first-use wall rule remains a separate measurement. [Implementation and local controls]({description})
+
+Nine focused checks passed, including a cross-clock cap, a registered DEVELOPMENT comparison, and refusal to promote reached or conclusively completed compact results into censoring evidence. Sixteen retained confirmation and Stage G checks passed. In one modeled paid comparison, a 100-second close with a 120-second horizon yields a restricted 100–120-second interval. The difference against a 60-second baseline narrows to 40–60 seconds. Attainment at 120 seconds remains unknown. The result still needs the original follow-up authority for any measured study.
+
+On the three previously measured Qwen2.5 fictional TRAIN rows, the model-reported scalar decreases by 0.231200, 0.246363 and 0.187269. Dropping any one row leaves the equal-row change between −0.238781 and −0.209234. Weighting the row scalars by their expected aligned target lengths gives 0.792488 before and 0.574334 after. This is a descriptive fit check on the original read-only exports. Both arms still have 0/3 exact held-out outputs. No additional model run or legal review occurred. Stage A's live evidence and allocation remain pending. [Source62 descriptive replay]({fit['path']})
+
+"""
+for was,now in (
+    (str(OLD),str(NEW)),
+    ('Version 3.540. Updated 2026-11-27 with the paired selector owner and exact child receipt.',
+     'Version 3.541. Updated 2026-11-27 with paid censor follow-up bounds and the Source62 fit replay.'),
+    ('## Primary research references',addition+'## Primary research references'),
+):
+    assert body.count(was)==1,was
+    body=body.replace(was,now,1)
+checker=HERE/'check_design.py'
+ns={'__name__':'private_readback','__file__':str(checker)}
+exec(compile(source,str(checker),'exec'),ns)
+prior=run_path(str(old_checker))['report'](old)
+assert ns['report'](old)==prior
+new=deepcopy(old)
+new['manifest_schema_version']='0.395.0'
+new['previous_manifest']=old_ref
+new['typed_execution_design'][KEY]=save(description,desc)
+new['advisory_operator_readiness_checker']=save(checker,source)
+report=run_path(str(checker))['report'](new)
+prior['manifest_schema_version']=new['manifest_schema_version']
+assert {key:value for key,value in report.items() if key!=KEY}==prior
+manifest=save(NEW,new)
+readiness=save(HERE/'verified-readiness.json',report)
+fd,name=mkstemp(dir=TMP,prefix=plan.name+'.')
+staged=Path(name)
+try:
+    with os.fdopen(fd,'w') as stream:
+        stream.write(body)
+    staged.chmod(S_IMODE(status.st_mode))
+    assert plan.stat().st_ino==status.st_ino and plan.read_bytes()==before
+    os.replace(staged,plan)
+finally:
+    if staged.exists():
+        staged.unlink()
+print(json.dumps(dict(manifest=manifest,readiness=readiness,plan=ref(plan),descriptor=ref(description)),sort_keys=True))

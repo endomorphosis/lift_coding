@@ -1,0 +1,28 @@
+{
+  "actual_pyarrow_loaded": true,
+  "controls": [
+    {
+      "name": "retained-positive",
+      "passed": true
+    }
+  ],
+  "guard_events": [],
+  "lightweight_private_scope": true,
+  "overlays": [
+    {
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-V4-packaged-reviewed-graph-private-8455u_cu/owning-test.after-v02.py.DATA",
+      "module": "tests.unit.logic.autoformal._private_v4_current_revocation"
+    },
+    {
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-V4-packaged-reviewed-graph-private-8455u_cu/legal_release_coordinator_v1.after-v02.py.DATA",
+      "module": "ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1"
+    }
+  ],
+  "permitted_ctypes_self_handles": [
+    "self_process_handle"
+  ],
+  "physical_fixture_constructed": true,
+  "test_module_origin": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+  "test_source_sha256": "b02f62e724968f32c3a8df87a3998f7a26014764a04103bbdbc13898134e1371",
+  "torch_duckdb_loaded": false
+}

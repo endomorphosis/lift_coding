@@ -1,0 +1,170 @@
+{
+  "actual_push_outputs_and_recovery_evidence": {
+    "datasets": {
+      "evidence": "Original publisher advanced past the nonzero-exit check, then the immediate remote readback assertion failed. Fresh ls-remote and tracking reflog confirmed the requested commit; no repeat push.",
+      "first_readback_value_retained": false,
+      "fresh_authoritative_readback_chunk": "da9fbf",
+      "observed_git_push_exit_code": 0,
+      "original_terminal_chunk": "cc9324",
+      "tracking_reflog": "a470b0b8039dc4ca500731db5442ba1d20f7da97\tupdate by push"
+    },
+    "hallucinate": {
+      "observed_exit_code": 0,
+      "remote_readbacks": [
+        "71b7117a76a15161991846b8718da7d7b31c8b5d"
+      ],
+      "stderr": "",
+      "stdout": "To https://github.com/endomorphosis/hallucinate_app.git\n \t71b7117a76a15161991846b8718da7d7b31c8b5d:refs/heads/main\t93110e2..71b7117\nDone"
+    },
+    "root": {
+      "observed_exit_code": 0,
+      "remote_readbacks": [
+        "5282932521223af0f01ceaa7649e50869c339288"
+      ],
+      "stderr": "",
+      "stdout": "To https://github.com/endomorphosis/lift_coding.git\n \t5282932521223af0f01ceaa7649e50869c339288:refs/heads/main\td3d2008a90..5282932521\nDone"
+    }
+  },
+  "all_checkouts_clean": true,
+  "all_other_gitlinks_and_A_preserved": true,
+  "all_other_paths_unchanged": true,
+  "fixture_loaded_coordinator_compiled_sha256": "aec9ed9cd79fa334266f299f25c5552280d1d2ace45f45df2aa98c8e57169967",
+  "force_or_tag_push": false,
+  "frozen_D_index_unchanged": true,
+  "frozen_candidate": {
+    "bytes": 3814,
+    "full9": {
+      "st_ctime_ns": "1795568316472265632",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862900",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795568316472265632",
+      "st_nlink": "1",
+      "st_size": "3814",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase8-corpus-CLI-V4-two-file-local-freeze-v264.json",
+    "sha256": "49db06121fb1c574583cb7a63e5789734d031a537eef0381cb2393c6a573557d"
+  },
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "641c18147315a5cdfaf7ede4626bdeb72e70602e",
+        "to": "a470b0b8039dc4ca500731db5442ba1d20f7da97"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "641c18147315a5cdfaf7ede4626bdeb72e70602e",
+        "to": "a470b0b8039dc4ca500731db5442ba1d20f7da97"
+      },
+      "hallucinate_app": {
+        "from": "93110e2851c701e315d02752e699008c2cf793d6",
+        "to": "71b7117a76a15161991846b8718da7d7b31c8b5d"
+      }
+    }
+  },
+  "local_after": {
+    "accelerate": {
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "index_and_worktree_clean": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "head": "a470b0b8039dc4ca500731db5442ba1d20f7da97",
+      "index_and_worktree_clean": true,
+      "tree": "0fa3cf44506d165d71eff58ba43ef75164340f82"
+    },
+    "hallucinate": {
+      "head": "71b7117a76a15161991846b8718da7d7b31c8b5d",
+      "index_and_worktree_clean": true,
+      "tree": "991b10728b15a92e66f0226de7de8cfc3cb58d0d"
+    },
+    "root": {
+      "head": "5282932521223af0f01ceaa7649e50869c339288",
+      "index_and_worktree_clean": true,
+      "tree": "45cff3863974355b2fb04984e8507239856924ef"
+    }
+  },
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "a470b0b8039dc4ca500731db5442ba1d20f7da97",
+    "hallucinate": "71b7117a76a15161991846b8718da7d7b31c8b5d",
+    "root": "5282932521223af0f01ceaa7649e50869c339288"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "641c18147315a5cdfaf7ede4626bdeb72e70602e",
+    "hallucinate": "93110e2851c701e315d02752e699008c2cf793d6",
+    "root": "d3d2008a90ff7937f6288111ff3580d41228686b"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "publisher_replayed_Source_SDK_tests_CI_model_or_Native": false,
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "qualification": {
+    "Source_resource_parent_child_workspaces_closed": true,
+    "bytes": 4708,
+    "error": 0,
+    "failure": 0,
+    "full9": {
+      "st_ctime_ns": "1795569482422498811",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72100795",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795569482422498811",
+      "st_nlink": "1",
+      "st_size": "4708",
+      "st_uid": "1000"
+    },
+    "natural_functions": 3,
+    "path": "/tmp/Root-Phase8-corpus-CLI-V4-ordinary4-selected-v266-zbj1of7i/Root-Phase8-public-corpus-V4-ordinary4-qualified-Source-resource-closed-small-v266.json",
+    "public_child_compilation_witness_claimed": false,
+    "raw_JUnit": {
+      "bytes": 905,
+      "full9": {
+        "st_ctime_ns": "1795569377759640045",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72100783",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795569377759640045",
+        "st_nlink": "1",
+        "st_size": "905",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-Phase8-corpus-CLI-V4-ordinary4-selected-v266-zbj1of7i/actual-output/corpus-release-public-v4-ordinary4-run-result0-output1.bin",
+      "sha256": "d6840c19b2cda2bd513e54db113b4bdaf7f683bf3c60a808185fec356b0ddee3"
+    },
+    "sha256": "874512580c535887197eb22c743d794a7454237764d8da28f0e98eb9efe7117f",
+    "skip": 0,
+    "unique_cases": 4
+  },
+  "qualification_scope": "One original physical API case, two public CLI invocation cases, and one Native-selection refusal, with real Parquet fixtures. CLI27 remains separate. No Native, statutory, legal, training or full-goal authority.",
+  "schema": "actual-Phase8-corpus-CLI-V4-ordinary4-three-FF-publication/v266",
+  "selected_role_blobs": [
+    {
+      "blob": "7d63bc58a593c8b487ac31985d48b7b8cf81b383",
+      "bytes": 11419,
+      "relative_path": "scripts/ops/legal_ir/validate_uscode_corpus_release.py",
+      "sha256": "8be90e0f3a3f5d684f0a310172ba99737cc1e89afbf95c7701ff0321ab4417ad"
+    },
+    {
+      "blob": "5800ee664e2c4bb2562da0e43eaef774545669b1",
+      "bytes": 208493,
+      "relative_path": "tests/unit/logic/autoformal/test_corpus_release_cli.py",
+      "sha256": "f57ef7f49f1b979c7f75d456bd5c9f9e4eb091a40dd2dcb6c649c468198211bf"
+    }
+  ],
+  "test_source_sha256": "f57ef7f49f1b979c7f75d456bd5c9f9e4eb091a40dd2dcb6c649c468198211bf"
+}

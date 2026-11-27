@@ -1,0 +1,111 @@
+{
+  "actual_exact_two_candidate": {
+    "bytes": 3116,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/SEALED-Phase7-receipt-bounds-exact-two.json",
+    "sha256": "75c25b343072e543f36652328d45e924420bd083dc8a31bd2c25d586dd075e0d"
+  },
+  "actual_freeze_correspondence_only": {
+    "bytes": 9962,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-isolated-Phase7-receipt-bounds-exact-two-local-freeze.json",
+    "sha256": "29802789293f7af8358cbb2437753ade2a10873310b19eed1855dd4d77e024c6"
+  },
+  "candidate_roles": {
+    "ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py": {
+      "postimage": {
+        "bytes": 63254,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/proof_receipt_attestation.bounds.after.py.DATA",
+        "sha256": "c350097f9425ce916997b1e116297e9497716ae13747719e722b36fe92f38921"
+      },
+      "postimage_git_blob": "362660beaea798069c5fe9c7af73ef424d7704b9",
+      "preimage": {
+        "bytes": 63071,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/ipfs_datasets_py__logic__bridge__proof_receipt_attestation.py.DATA",
+        "sha256": "61296f095b933730ea24b070d2eaaf4202da9714c274a605bd5e18c6f4df49a7"
+      },
+      "preimage_git_blob": "9a52c4a11642edb0cb62b5c00b02ad67a9983e53"
+    },
+    "tests/integration/logic/test_proof_receipt_attestation.py": {
+      "postimage": {
+        "bytes": 27851,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_proof_receipt_attestation.bounds.after.py.DATA",
+        "sha256": "e6cc137379fb50e0aec6e6ae9a1b315344190652ff51fd0ca250f57acf3ab861"
+      },
+      "postimage_git_blob": "ff318f57469d6be81b76f7e2e12ec9db46b25306",
+      "preimage": {
+        "bytes": 22905,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_proof_receipt_attestation.integration-published-6d1b.py.DATA",
+        "sha256": "452ebaa2e016cc7393a892c2f0bdd8cb2e331bde307c064b9ac5404b3313a096"
+      },
+      "preimage_git_blob": "2de37c1db9c3c5808a087e5ed1ed8a23ab8f672f"
+    }
+  },
+  "expected_absent_relative_paths": [
+    "tests/integration/conftest.py",
+    "tests/integration/logic/conftest.py",
+    "tests/integration/logic/__init__.py",
+    "tests/AGENTS.md",
+    "tests/integration/AGENTS.md",
+    "tests/integration/logic/AGENTS.md"
+  ],
+  "expected_current_A_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+  "expected_normal_conftests": [
+    "conftest.py",
+    "tests/conftest.py"
+  ],
+  "fixture_relative_paths": [
+    "pytest.ini",
+    "conftest.py",
+    "tests/conftest.py",
+    "tests/__init__.py",
+    "tests/integration/__init__.py",
+    "ipfs_datasets_py/logic/verification_api.py"
+  ],
+  "guarded_module_roles": {
+    "ipfs_datasets_py.logic.bridge.proof_receipt_attestation": {
+      "prospective_postimage": {
+        "bytes": 63254,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/proof_receipt_attestation.bounds.after.py.DATA",
+        "sha256": "c350097f9425ce916997b1e116297e9497716ae13747719e722b36fe92f38921"
+      },
+      "published_preimage": {
+        "bytes": 63071,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/ipfs_datasets_py__logic__bridge__proof_receipt_attestation.py.DATA",
+        "sha256": "61296f095b933730ea24b070d2eaaf4202da9714c274a605bd5e18c6f4df49a7"
+      },
+      "relative_path": "ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py"
+    },
+    "tests.integration.logic.test_proof_receipt_attestation": {
+      "prospective_postimage": {
+        "bytes": 27851,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_proof_receipt_attestation.bounds.after.py.DATA",
+        "sha256": "e6cc137379fb50e0aec6e6ae9a1b315344190652ff51fd0ca250f57acf3ab861"
+      },
+      "published_preimage": {
+        "bytes": 22905,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_proof_receipt_attestation.integration-published-6d1b.py.DATA",
+        "sha256": "452ebaa2e016cc7393a892c2f0bdd8cb2e331bde307c064b9ac5404b3313a096"
+      },
+      "relative_path": "tests/integration/logic/test_proof_receipt_attestation.py"
+    }
+  },
+  "prior_outer": {
+    "bytes": 850909,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-live-reconciled-outer1615-epoch.json",
+    "sha256": "f4e93e12e72916247f8864f390ce57f8445b4b354eaa9e087aa5021cc0ffa898"
+  },
+  "prior_python": {
+    "bytes": 844339,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-live-reconciled-Python1602-epoch.json",
+    "sha256": "34f4fa4710c4e3803292c3af319ddef3210a0d6b3da5e930b3719a89b976ffbd"
+  },
+  "replaced_outer_paths": [
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/verification_api.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/test_proof_receipt_attestation.py"
+  ]
+}

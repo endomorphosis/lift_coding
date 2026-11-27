@@ -1,0 +1,269 @@
+{
+  "cases": 92,
+  "controls": {
+    "bootstrap": {
+      "bytes": 39383,
+      "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/existing-ordinary92-bootstrap.INERT.py.DATA",
+      "sha256": "e908fd038461600f9b8bbda78444c891c47a4d0ea77ffd799169ec1b48a4c772"
+    },
+    "factory": {
+      "bytes": 3064,
+      "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/existing-ordinary92-factory.INERT.py.DATA",
+      "sha256": "cb09e122ed136ed4f5b8ae24b18e0cb8b4a4b09c35eb89365018ccd634ce7dfe"
+    },
+    "operator": {
+      "bytes": 54713,
+      "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/existing-ordinary92-operator.INERT.py.DATA",
+      "sha256": "0155eec999b5c6c1365f194ed7813941c05d2cf84c772ee6007d3afb2944ab77"
+    }
+  },
+  "current_D_path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets",
+  "current_additional_A_path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+  "exact_function_selectors": {
+    "bytes": 2412,
+    "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/same-software-19-selectors.json",
+    "sha256": "94da18476c9d62359fb91d10c21928b16bca52e7457bb7f9b9d01b275373cf78"
+  },
+  "expected_A_publish_head": "219ba3da0f62f772801d71715e22c506faa21126",
+  "expected_A_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+  "expected_D_publish_head": "8996e160d2628b0fd35f1166a6dae6957582c243",
+  "expected_case_roster": {
+    "bytes": 15120,
+    "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/exact-same-software-92-case-roster.json",
+    "sha256": "e65741bdc2fef24c3680fdb4e883daf5813d3a5b8ef2121e53e181464c632e9a"
+  },
+  "fixture_closure_count": 32,
+  "functions": 19,
+  "future_roles": {
+    "Source_READ3_paths": [
+      "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "tests/integration/logic/backends/test_kernel_backends.py",
+      ".git/index"
+    ],
+    "guarded_bootstrap_modules": {
+      "ipfs_datasets_py.logic.backends.kernel.lean": {
+        "expected_after_adoption": {
+          "bytes": 104341,
+          "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+        },
+        "prior_v453": {
+          "bytes": 103838,
+          "sha256": "c1050ad1ec067fc7f7c8fea08793e872511fe58029e9b1aa89ec90d2cb288313"
+        },
+        "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+        "use_actual_frozen_READ3_post": true
+      },
+      "ipfs_datasets_py.logic.backends.kernel.rocq": {
+        "expected_after_adoption": {
+          "bytes": 41607,
+          "sha256": "7fd1b39643190277f00325dac59cf3923b24a3056963713bd7437a364b6a0f9a"
+        },
+        "prior_v453": {
+          "bytes": 41607,
+          "sha256": "7fd1b39643190277f00325dac59cf3923b24a3056963713bd7437a364b6a0f9a"
+        },
+        "relative_path": "ipfs_datasets_py/logic/backends/kernel/rocq.py",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.logic.backends.kernel.wasm": {
+        "expected_after_adoption": {
+          "bytes": 24933,
+          "sha256": "49cfdbc0108b43d45ab9f567b4153f384985563b075f369b32e37f855252d6cc"
+        },
+        "prior_v453": {
+          "bytes": 24933,
+          "sha256": "49cfdbc0108b43d45ab9f567b4153f384985563b075f369b32e37f855252d6cc"
+        },
+        "relative_path": "ipfs_datasets_py/logic/backends/kernel/wasm.py",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.logic.backends.process": {
+        "expected_after_adoption": {
+          "bytes": 109707,
+          "sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+        },
+        "prior_v453": {
+          "bytes": 109707,
+          "sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+        },
+        "relative_path": "ipfs_datasets_py/logic/backends/process.py",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.logic.backends.resource_admission": {
+        "expected_after_adoption": {
+          "bytes": 19806,
+          "sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+        },
+        "prior_v453": {
+          "bytes": 19806,
+          "sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+        },
+        "relative_path": "ipfs_datasets_py/logic/backends/resource_admission.py",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.logic.backends.results": {
+        "expected_after_adoption": {
+          "bytes": 27160,
+          "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+        },
+        "prior_v453": {
+          "bytes": 27160,
+          "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+        },
+        "relative_path": "ipfs_datasets_py/logic/backends/results.py",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.logic.families.models": {
+        "expected_after_adoption": {
+          "bytes": 36277,
+          "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f"
+        },
+        "prior_v453": {
+          "bytes": 36277,
+          "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f"
+        },
+        "relative_path": "ipfs_datasets_py/logic/families/models.py",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.logic.ir_core.claims": {
+        "expected_after_adoption": {
+          "bytes": 16176,
+          "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+        },
+        "prior_v453": {
+          "bytes": 16176,
+          "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+        },
+        "relative_path": "ipfs_datasets_py/logic/ir_core/claims.py",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.logic.ir_core.protocols": {
+        "expected_after_adoption": {
+          "bytes": 57510,
+          "sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+        },
+        "prior_v453": {
+          "bytes": 57414,
+          "sha256": "b452a7095a2524f0ea3f4e4f3a395643d3257cd6f42e3c77f8e1817df62f6fed"
+        },
+        "relative_path": "ipfs_datasets_py/logic/ir_core/protocols.py",
+        "use_actual_frozen_READ3_post": false
+      },
+      "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler": {
+        "expected_after_adoption": {
+          "bytes": 151350,
+          "sha256": "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+        },
+        "prior_v453": {
+          "bytes": 151350,
+          "sha256": "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+        },
+        "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+        "use_actual_frozen_READ3_post": false
+      },
+      "tests.integration.logic.backends.test_kernel_backends": {
+        "expected_after_adoption": {
+          "bytes": 123945,
+          "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945"
+        },
+        "prior_v453": {
+          "bytes": 115566,
+          "sha256": "99e00363bbd1ea23d450af0912374fdbf4d30ab3b1802371fb8d237dccbf7da5"
+        },
+        "relative_path": "tests/integration/logic/backends/test_kernel_backends.py",
+        "use_actual_frozen_READ3_post": true
+      }
+    }
+  },
+  "historical_D_path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+  "historical_fixture_reference": {
+    "bytes": 20987,
+    "path": "/tmp/P1-combined-Lean-existing-ordinary81-nonclock-KJT6IbWA/actual-P1-ordinary81-two-normal-conftests-and-retained-protected-fixture-closure.json",
+    "sha256": "0b4d27ab7584ffecb157d57391ac8fafb43e09a804c629e8177f48c0e47792bc"
+  },
+  "immutable_combined_candidate": {
+    "bytes": 9386,
+    "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/SEALED-private-Lean-routing-query-kind-native-namespaced-exact-two.json",
+    "sha256": "d07b254324a63bb6c35ff9ee56d5f6f478fb69c4c91a668446e9eed66e3e0f32"
+  },
+  "native_result": null,
+  "ordinary_result": null,
+  "previous_limits": {
+    "AS_bytes": 8589934592,
+    "RSS_bytes": 4294967296,
+    "child_process_slots": 1,
+    "collect": {
+      "cpu_seconds": 110,
+      "wall_seconds": 120
+    },
+    "cpu_slots": 1,
+    "max_input_bytes": 4194304,
+    "max_output_bytes": 16777216,
+    "max_workspace_bytes": 67108864,
+    "run": {
+      "cpu_seconds": 540,
+      "wall_seconds": 600
+    },
+    "termination_grace_seconds": 5
+  },
+  "previous_ordinary81_controls": {
+    "bytes": 8037,
+    "path": "/tmp/Root-P1-combined-Lean-ordinary81-v453-ft9ky5rw/READY-P1-existing-ordinary81-frozen-local-controls-INERT.json",
+    "sha256": "e7875c01dca23ea0eb7f519c84a82c68f64ec2130372e11ac6d87726dccd2353"
+  },
+  "previous_ordinary81_selected_manifest": {
+    "bytes": 10332,
+    "path": "/tmp/Root-P1-combined-Lean-ordinary81-v453-ft9ky5rw/Root-selected-P1-combined-Lean-ordinary81-binding-manifest.json",
+    "sha256": "fe3caa508a927cc2f5bc11b60f8c5e301a8fd3053969147ea53e4e69ce0c6e2e"
+  },
+  "previous_ordinary81_selector": {
+    "bytes": 12245,
+    "path": "/tmp/Root-P1-combined-Lean-ordinary81-v453-ft9ky5rw/select-existing-P1-combined-Lean81.py",
+    "sha256": "ef9e02815a97096edba2ea5349f79f56d65c7415d96fe214777c2abf1e15ffb7"
+  },
+  "previous_passing_ordinary81": {
+    "bytes": 18416,
+    "path": "/tmp/Root-P1-combined-Lean-ordinary81-v453-ft9ky5rw/actual-P1-combined-Lean-ordinary81-qualified-Source-closed-small-v453.json",
+    "sha256": "708b24e08437dea2a6f910d32415328f2aa53fde7f41dba5c9e881dee81ed7ce"
+  },
+  "prior_live_materializer_pattern": {
+    "bytes": 11029,
+    "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/materialize-live-ordinary33.v02.py.DATA",
+    "sha256": "dd45227cb5faea2eed56b7af79a0983fdc087068b2ecb06e24eea74c07c7b112"
+  },
+  "prior_live_selector_pattern": {
+    "bytes": 14555,
+    "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/select-live-ordinary33.py.DATA",
+    "sha256": "eb9c892f63f5946ba507cb186039d060c10f776e1d38ebf9bc2659bc1f1cb4d5"
+  },
+  "private_same92_passed": true,
+  "provisional_outer_count": 1610,
+  "provisional_python_count": 1597,
+  "schema": "existing-P1-Lean-ordinary92-inert-controls/v1",
+  "scoped_native_selector": "tests/integration/logic/backends/test_kernel_backends.py::test_lean_native_v3_expected_declaration_distinguishes_namespaced_decoy",
+  "selected_Git_candidate": null,
+  "selected_Source": null,
+  "selected_root_clock": null,
+  "selected_runtime_bindings": null,
+  "statically_ordered_vector": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    21,
+    1,
+    16,
+    1,
+    12,
+    6,
+    3,
+    6,
+    2,
+    7,
+    3,
+    4,
+    4
+  ]
+}

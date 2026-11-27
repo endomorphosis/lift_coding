@@ -1,0 +1,40 @@
+{
+  "IO_reference": {
+    "bytes": 734,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/Root-selected-IO.json",
+    "sha256": "fd05999c9753ae8d2d6dffded0c1a871313865647105acd514245d7d25e341d8"
+  },
+  "Root_selected": true,
+  "Source_READ_binding": {
+    "bytes": 1903,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-isolated-ordinary19-D27-read-binding.json",
+    "sha256": "a52d8fd5999a5d9098598c517f1e058e6b7b77d6486e65bff98c52334fc920e5"
+  },
+  "Source_envelope_bytes": 134217728,
+  "actual_COLLECT_supplies_order": true,
+  "actual_nonclock_handoff": {
+    "bytes": 9244,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/READY-live-ordinary19-actual-READ3-INERT.json",
+    "sha256": "7d5704c06756c4ef529cf3b64717fdcbc9b5cad7215bbe80fda0b4e51b55465c"
+  },
+  "case_hint": 19,
+  "effect_reference": {
+    "bytes": 621,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/Root-selected-effect.json",
+    "sha256": "54c39118634ed1a3cdad3cc76b2321da666dcbdd6231c804aa57ffa02acbee90"
+  },
+  "frozen_D_HEAD": "da3024e6ab94fecad9f258375dcc18b04902bfe2",
+  "frozen_D_tree": "07af7b655e1e64fefe695e2bd79a20f28c5d915e",
+  "launch_deadline_utc_ns": 1795744399598182445,
+  "launch_not_before_utc_ns": 1795743559598182445,
+  "ledger_before": {
+    "captures": 543404,
+    "capturesComplete": false,
+    "global_cap": 57998329866,
+    "internal_cap": 57807737992,
+    "internal_used": 57667163272,
+    "used": 57857755146
+  },
+  "output_namespace": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-output",
+  "schema": "Root-selected-existing-Phase8-metric-lineage-frozen-local-ordinary19/v1"
+}

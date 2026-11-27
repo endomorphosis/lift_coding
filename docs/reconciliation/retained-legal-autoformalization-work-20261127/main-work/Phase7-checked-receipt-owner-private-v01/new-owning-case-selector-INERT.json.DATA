@@ -1,0 +1,14 @@
+{
+  "Source_epoch": null,
+  "actual_collection": null,
+  "clock": null,
+  "current_Git_HEAD": null,
+  "new_case_counts": {
+    "test_checked_current_receipt_gates_both_existing_consumers": 14,
+    "test_checked_current_target_refuses_incomplete_receipt_selection": 6,
+    "test_current_target_metadata_without_checked_receipt_never_reaches_update": 1
+  },
+  "ordinary_result": null,
+  "path": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+  "runtime_authority": null
+}

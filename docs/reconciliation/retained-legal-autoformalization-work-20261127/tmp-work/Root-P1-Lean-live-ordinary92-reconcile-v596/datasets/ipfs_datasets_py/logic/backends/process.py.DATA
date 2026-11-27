@@ -1,0 +1,2544 @@
+"""Bounded, injectable lifecycle for external logic tools.
+
+This module is the common process boundary for native executables, proof-kernel
+hosts, and tools hosted by JVM, OCaml/opam, or WASM runtimes.  It intentionally
+does not know how to install any of them.  Discovery is a side-effect-free path
+lookup and execution happens only after an explicit
+:meth:`BoundedToolRunner.run` call.
+
+The boundary implements ``UniversalBoundedToolLifecycle@1`` /
+``BoundedToolRunner@1`` and has four important properties:
+
+* commands are argv sequences and are always launched with ``shell=False``;
+* every run receives a private workspace which is removed on every exit path;
+* wall time, OS resources, captured streams, inputs, outputs, and paths are
+  bounded;
+* cancellation and timeout terminate the process group and tracked Linux
+  descendants, including descendants that start another session or group.
+
+Linux descendant tracking samples live ancestry and binds identities to process
+start times (and pidfds where available). It handles ordinary native helper
+groups, but is not a security boundary against deliberate daemon escape between
+samples; use a dedicated cgroup for kernel-enforced containment.
+
+``BoundedToolRunner`` accepts an injected executor.  Backend adapters can
+therefore use a deterministic fake in unit tests while production uses
+``SubprocessExecutor``.  SMT/differential-style stdin solvers should call
+:func:`run_bounded_stdin_tool` instead of raw ``subprocess.run``.
+"""
+
+from __future__ import annotations
+
+import math
+import errno
+import os
+import re
+import shutil
+import signal
+import stat
+import subprocess
+import sys
+import tempfile
+import threading
+import time
+from collections.abc import Callable, Mapping, Sequence
+from contextlib import nullcontext
+from dataclasses import dataclass, field, replace
+from enum import StrEnum
+from pathlib import Path, PurePosixPath
+from types import MappingProxyType
+from typing import Any, Final, Protocol
+
+BOUNDED_TOOL_RUNNER_VERSION: Final = "bounded-tool-runner/v1"
+UNIVERSAL_BOUNDED_TOOL_LIFECYCLE_VERSION: Final = "universal-bounded-tool-lifecycle/v1"
+WORKSPACE_PLACEHOLDER: Final = "{workspace}"
+REDACTION: Final = "<redacted>"
+
+# Runtime families that must share one injected lifecycle contract.
+UNIVERSAL_TOOL_RUNTIMES: Final = frozenset(
+    {
+        "native",
+        "jvm",
+        "ocaml",
+        "opam",
+        "wasm",
+        "kernel",
+    }
+)
+
+_SENSITIVE_NAME = re.compile(
+    r"(?:^|_)(?:api_?key|access_?key|authorization|credential|passwd|password|"
+    r"private_?key|secret|session|token)(?:$|_)",
+    re.IGNORECASE,
+)
+_SENSITIVE_OPTION = re.compile(
+    r"^--?(?:api[-_]?key|access[-_]?key|authorization|credential|passwd|"
+    r"password|private[-_]?key|secret|session|token)$",
+    re.IGNORECASE,
+)
+_SENSITIVE_ASSIGNMENT = re.compile(
+    r"^(--?(?:api[-_]?key|access[-_]?key|authorization|credential|passwd|"
+    r"password|private[-_]?key|secret|session|token))=(.*)$",
+    re.IGNORECASE,
+)
+
+
+class ToolProcessError(ValueError):
+    """Raised when a process request violates the bounded-runner contract."""
+
+
+@dataclass(frozen=True, slots=True)
+class NativeProcessIdentity:
+    """Linux identity observed by the parent, never read from tool stdout."""
+
+    pid: int
+    birth_ticks: int
+    parent_pid: int
+    process_group_id: int
+    session_id: int
+
+    def to_dict(self) -> dict[str, int]:
+        return {name: getattr(self, name) for name in self.__dataclass_fields__}
+
+
+@dataclass(frozen=True, slots=True)
+class NativeToolLifecycleObservation:
+    """Fresh sampled native ownership evidence for sequential native tools.
+
+    This profile does not attest kernel containment or rule out a deliberately
+    escaped daemon between ancestry samples. The caller must retain its lease
+    whenever ``cleanup_confirmed`` is false, even if the leader returned zero.
+    """
+
+    parent_pid: int
+    parent_birth_ticks: int
+    leader: NativeProcessIdentity
+    observed_descendants: tuple[NativeProcessIdentity, ...]
+    leader_reaped: bool
+    descendant_tracking_complete: bool
+    group_scan_complete: bool
+    remaining_group_members: tuple[NativeProcessIdentity, ...]
+    remaining_tracked_descendants: tuple[NativeProcessIdentity, ...]
+    readers_started: int
+    readers_joined: int
+    stdin_writer_started: int
+    stdin_writer_joined: int
+    workspace_device: int
+    workspace_inode: int
+    workspace_removed: bool
+    observation_errors: tuple[str, ...] = ()
+
+    @property
+    def process_cleanup_confirmed(self) -> bool:
+        return (self.leader_reaped and self.descendant_tracking_complete
+                and self.group_scan_complete and not self.remaining_group_members
+                and not self.remaining_tracked_descendants
+                and 0 <= self.readers_started == self.readers_joined <= 2
+                and self.stdin_writer_started == self.stdin_writer_joined
+                and not self.observation_errors)
+
+    @property
+    def cleanup_confirmed(self) -> bool:
+        return self.process_cleanup_confirmed and self.workspace_removed
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "schema": "native-owned-tool-lifecycle@1",
+            "parent": {"pid": self.parent_pid, "birth_ticks": self.parent_birth_ticks},
+            "leader": self.leader.to_dict(),
+            "observed_descendants": [item.to_dict() for item in self.observed_descendants],
+            "leader_reaped": self.leader_reaped,
+            "descendant_tracking_complete": self.descendant_tracking_complete,
+            "group_scan_complete": self.group_scan_complete,
+            "remaining_group_members": [item.to_dict() for item in self.remaining_group_members],
+            "remaining_tracked_descendants": [item.to_dict() for item in self.remaining_tracked_descendants],
+            "readers": {"started": self.readers_started, "joined": self.readers_joined},
+            "stdin_writer": {"started": self.stdin_writer_started, "joined": self.stdin_writer_joined},
+            "workspace": {"device": self.workspace_device, "inode": self.workspace_inode,
+                          "removed": self.workspace_removed},
+            "observation_errors": list(self.observation_errors),
+            "ownership_is_sampled": True,
+            "kernel_containment_attested": False,
+            "cleanup_confirmed": self.cleanup_confirmed,
+        }
+
+
+class OwnedToolCleanupError(ToolProcessError):
+    """An opt-in native run requires its actual cleanup owner to be retained."""
+
+    def __init__(self, cleanup_handle: NativeToolCleanupHandle, reason: str):
+        super().__init__(reason)
+        self.cleanup_handle = cleanup_handle
+
+
+class ToolRuntime(StrEnum):
+    """Execution families supported by the shared lifecycle.
+
+    ``KERNEL`` covers proof assistants (Lean, Isabelle, Rocq/Coq) that still
+    run as ordinary host processes under the same isolation contract as
+    ``NATIVE``.  Adapters may use either spelling; both share one runner.
+    """
+
+    NATIVE = "native"
+    JVM = "jvm"
+    OCAML = "ocaml"
+    OPAM = "opam"
+    WASM = "wasm"
+    KERNEL = "kernel"
+
+
+@dataclass(frozen=True, slots=True)
+class ToolRunLimits:
+    """Hard and capture bounds for a single tool invocation.
+
+    memory_bytes caps per-process virtual address space. resident_memory_bytes
+    adds a Linux process-tree RSS guard sampled every 100 ms; it can overshoot
+    between samples and counts shared pages in each process. Use cgroups for
+    a kernel-enforced aggregate memory ceiling.
+
+    max_file_bytes overrides the per-file RLIMIT_FSIZE cap when file-size
+    enforcement is enabled. None preserves the max_workspace_bytes fallback;
+    an explicit cap does not change the private workspace aggregate bound.
+
+    Private workspace logical bytes, entries and depth are inspected about
+    every 100 ms and after execution, even when RLIMIT_FSIZE is disabled. Sampling
+    may overshoot and does not cover external paths or unlinked open files;
+    use filesystem quotas for a hard disk ceiling. Entries include directories
+    and symlinks; symlink targets and non-regular file bodies are never read.
+    """
+
+    timeout_seconds: float = 30.0
+    termination_grace_seconds: float = 0.25
+    cpu_seconds: float | None = None
+    memory_bytes: int | None = None
+    max_output_bytes: int = 1_048_576
+    max_input_bytes: int = 1_048_576
+    max_workspace_bytes: int = 16_777_216
+    max_output_files: int = 64
+    max_path_bytes: int = 512
+    max_arguments: int = 256
+    max_argument_bytes: int = 65_536
+    max_environment_bytes: int = 131_072
+    enforce_file_size_limit: bool = True
+    resident_memory_bytes: int | None = None
+    max_file_bytes: int | None = None
+    max_workspace_entries: int = 16_384
+    max_workspace_depth: int = 64
+
+    def __post_init__(self) -> None:
+        for name in ("timeout_seconds", "termination_grace_seconds"):
+            value = getattr(self, name)
+            if (
+                isinstance(value, bool)
+                or not isinstance(value, (int, float))
+                or not math.isfinite(float(value))
+                or value < 0
+            ):
+                raise ToolProcessError(f"{name} must be a finite non-negative number")
+        if self.timeout_seconds <= 0:
+            raise ToolProcessError("timeout_seconds must be positive")
+        if self.cpu_seconds is not None and (
+            isinstance(self.cpu_seconds, bool)
+            or not isinstance(self.cpu_seconds, (int, float))
+            or not math.isfinite(float(self.cpu_seconds))
+            or self.cpu_seconds <= 0
+        ):
+            raise ToolProcessError("cpu_seconds must be a finite positive number")
+        for name in (
+            "memory_bytes",
+            "resident_memory_bytes",
+            "max_output_bytes",
+            "max_input_bytes",
+            "max_workspace_bytes",
+            "max_output_files",
+            "max_path_bytes",
+            "max_arguments",
+            "max_argument_bytes",
+            "max_environment_bytes",
+        ):
+            value = getattr(self, name)
+            if value is None and name in {"memory_bytes", "resident_memory_bytes"}:
+                continue
+            if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+                raise ToolProcessError(f"{name} must be a positive integer")
+        if self.max_workspace_bytes < self.max_input_bytes:
+            raise ToolProcessError(
+                "max_workspace_bytes must be at least max_input_bytes"
+            )
+        if self.max_file_bytes is not None and (
+            type(self.max_file_bytes) is not int or self.max_file_bytes <= 0
+        ):
+            raise ToolProcessError("max_file_bytes must be a positive integer or None")
+        if not isinstance(self.enforce_file_size_limit, bool):
+            raise ToolProcessError(
+                "enforce_file_size_limit must be a boolean"
+            )
+        for name, maximum in (("max_workspace_entries", 1_000_000),
+                              ("max_workspace_depth", 256)):
+            value = getattr(self, name)
+            if type(value) is not int or not 0 < value <= maximum:
+                raise ToolProcessError(f"{name} must be an integer between 1 and {maximum}")
+
+
+@dataclass(frozen=True, slots=True)
+class ToolRunRequest:
+    """One inert external-tool request.
+
+    ``input_files`` and ``output_paths`` are relative POSIX paths inside the
+    private workspace.  Use ``{workspace}`` in an argument when a tool needs
+    the absolute workspace path (for example ``{workspace}/model.smt2``).
+    """
+
+    argv: tuple[str, ...]
+    runtime: ToolRuntime = ToolRuntime.NATIVE
+    limits: ToolRunLimits = field(default_factory=ToolRunLimits)
+    stdin: bytes | str | None = field(default=None, repr=False)
+    input_files: Mapping[str, bytes | str] = field(
+        default_factory=dict, repr=False
+    )
+    output_paths: tuple[str, ...] = ()
+    environment: Mapping[str, str] = field(default_factory=dict, repr=False)
+    secrets: tuple[str, ...] = field(default=(), repr=False)
+    owned_process_observation: bool = False
+
+    def __post_init__(self) -> None:
+        if type(self.owned_process_observation) is not bool:
+            raise ToolProcessError("owned_process_observation must be an exact boolean")
+        if isinstance(self.argv, (str, bytes, bytearray)):
+            raise ToolProcessError("argv must be a sequence, never a shell string")
+        object.__setattr__(self, "argv", tuple(self.argv))
+        try:
+            runtime = (
+                self.runtime
+                if isinstance(self.runtime, ToolRuntime)
+                else ToolRuntime(self.runtime)
+            )
+        except (TypeError, ValueError) as error:
+            raise ToolProcessError(f"unsupported tool runtime: {self.runtime!r}") from error
+        object.__setattr__(self, "runtime", runtime)
+        if not isinstance(self.limits, ToolRunLimits):
+            raise ToolProcessError("limits must be ToolRunLimits")
+        if not isinstance(self.input_files, Mapping):
+            raise ToolProcessError("input_files must be a mapping")
+        if not isinstance(self.environment, Mapping):
+            raise ToolProcessError("environment must be a mapping")
+        object.__setattr__(
+            self, "input_files", MappingProxyType(dict(self.input_files))
+        )
+        object.__setattr__(
+            self, "environment", MappingProxyType(dict(self.environment))
+        )
+        object.__setattr__(self, "output_paths", tuple(self.output_paths))
+        object.__setattr__(self, "secrets", tuple(self.secrets))
+
+
+@dataclass(frozen=True, slots=True)
+class ProcessInvocation:
+    """Validated invocation passed to an injected executor."""
+
+    argv: tuple[str, ...]
+    runtime: ToolRuntime
+    cwd: Path
+    environment: Mapping[str, str]
+    stdin: bytes | None
+    limits: ToolRunLimits
+    owned_process_observation: bool = False
+
+
+@dataclass(frozen=True, slots=True)
+class ToolResourceObservation:
+    """Computed dispatch envelope and observed predicates, never a guessed cause.
+
+    RSS values are existing samples, not an independently measured true peak.
+    A negative return code supplies a signal number, not its sender or cause.
+    """
+
+    effective_limits: tuple[tuple[str, int | float | bool | None], ...]
+    dispatched: bool
+    cause_known: bool
+    observed_trigger: str
+    trigger_stage: str
+    signal_number: int | None = None
+    rss_current_bytes: int | None = None
+    rss_peak_sampled_bytes: int | None = None
+    admission_requested_limits: tuple[tuple[str, int | float | bool | None], ...] = ()
+    ambient_operation_present: bool | None = None
+    admission_deadline_monotonic: float | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        limits = dict(self.effective_limits)
+        result = {"schema": "native-tool-resource-observation/v1",
+            "limits_basis": "computed from final invocation; not an independent getrlimit measurement",
+            "effective_limits": limits, "dispatched": self.dispatched,
+            "cause_known": self.cause_known, "observed_trigger": self.observed_trigger,
+            "trigger_stage": self.trigger_stage, "signal_number": self.signal_number,
+            "rss": {"current_bytes": self.rss_current_bytes, "peak_sampled_bytes": self.rss_peak_sampled_bytes,
+                    "cap_bytes": limits["resident_memory_bytes"]}}
+        if self.admission_requested_limits:
+            result["admission"] = {"requested_limits": dict(self.admission_requested_limits),
+                "ambient_operation_present": self.ambient_operation_present,
+                "shared_deadline_monotonic": self.admission_deadline_monotonic}
+        return result
+
+
+def _tool_resource_limit_envelope(limits: ToolRunLimits) -> tuple[tuple[str, int | float | bool | None], ...]:
+    """The existing native-limit arithmetic, reported without changing it."""
+    return (("wall_seconds", limits.timeout_seconds),
+        ("cpu_seconds_configured", limits.cpu_seconds),
+        ("cpu_soft_seconds", None if limits.cpu_seconds is None else max(1, int(math.ceil(limits.cpu_seconds)))),
+        ("cpu_hard_seconds", None if limits.cpu_seconds is None else max(1, int(math.ceil(limits.cpu_seconds)))),
+        ("rlimit_cpu_enabled", os.name == "posix" and limits.cpu_seconds is not None),
+        ("virtual_memory_bytes", limits.memory_bytes), ("rlimit_as_enabled", os.name == "posix" and limits.memory_bytes is not None),
+        ("resident_memory_bytes", limits.resident_memory_bytes),
+        ("rlimit_fsize_enabled", os.name == "posix" and limits.enforce_file_size_limit),
+        ("file_bytes", (limits.max_workspace_bytes if limits.max_file_bytes is None else limits.max_file_bytes)
+            if limits.enforce_file_size_limit else None),
+        ("workspace_bytes", limits.max_workspace_bytes), ("workspace_entries", limits.max_workspace_entries),
+        ("workspace_depth", limits.max_workspace_depth), ("input_bytes", limits.max_input_bytes),
+        ("output_bytes", limits.max_output_bytes), ("output_files", limits.max_output_files),
+        ("termination_grace_seconds", limits.termination_grace_seconds))
+
+
+def _tool_resource_observation(limits: ToolRunLimits, *, dispatched: bool, returncode: int | None = None,
+        trigger: str | None = None, stage: str = "execution", rss_current_bytes: int | None = None,
+        rss_peak_sampled_bytes: int | None = None,
+        effective_limits: tuple[tuple[str, int | float | bool | None], ...] | None = None) -> ToolResourceObservation:
+    known = trigger is not None
+    if trigger is None:
+        trigger = ("unknown_signal" if returncode is not None and returncode < 0 else
+                   "completed" if returncode == 0 else "nonzero_exit" if returncode is not None else "unknown")
+        known = returncode == 0
+        stage = "process_exit"
+    return ToolResourceObservation(effective_limits=(_tool_resource_limit_envelope(limits)
+        if effective_limits is None else effective_limits),
+        dispatched=dispatched, cause_known=known, observed_trigger=trigger, trigger_stage=stage,
+        signal_number=-returncode if returncode is not None and returncode < 0 else None,
+        rss_current_bytes=rss_current_bytes, rss_peak_sampled_bytes=rss_peak_sampled_bytes)
+
+
+def _tool_resource_post_workspace(observation: ToolResourceObservation | None, *,
+        exceeded: bool, error: str) -> ToolResourceObservation | None:
+    if observation is None or (not exceeded and not error):
+        return observation
+    if observation.cause_known and observation.observed_trigger != "completed":
+        return observation
+    return replace(observation, cause_known=True, observed_trigger=("workspace_limit" if exceeded else
+        "workspace_inspection_error"), trigger_stage="post_execution_validation")
+
+
+@dataclass(frozen=True, slots=True)
+class RawProcessResult:
+    """Executor-level result before redaction and declared-output collection."""
+
+    returncode: int | None
+    stdout: bytes | str = b""
+    stderr: bytes | str = b""
+    elapsed_seconds: float = 0.0
+    pid: int | None = None
+    timed_out: bool = False
+    cancelled: bool = False
+    output_truncated: bool = False
+    process_tree_terminated: bool = False
+    resource_exhausted: bool = False
+    error: str = ""
+    workspace_limit_exceeded: bool = False
+    native_lifecycle: NativeToolLifecycleObservation | None = None
+    native_cleanup_handle: NativeToolCleanupHandle | None = field(default=None, repr=False)
+    resource_observation: ToolResourceObservation | None = None
+
+
+@dataclass(frozen=True, slots=True)
+class ToolProbe:
+    """Side-effect-free executable discovery result."""
+
+    runtime: ToolRuntime
+    requested_executable: str
+    available: bool
+    executable_path: str = ""
+    reason: str = ""
+
+
+@dataclass(frozen=True, slots=True)
+class ToolRunResult:
+    """Sanitized result of a complete bounded lifecycle."""
+
+    interface_version: str
+    runtime: ToolRuntime
+    command: tuple[str, ...]
+    returncode: int | None
+    stdout: str
+    stderr: str
+    elapsed_seconds: float
+    output_files: Mapping[str, bytes]
+    pid: int | None = None
+    timed_out: bool = False
+    cancelled: bool = False
+    unavailable: bool = False
+    output_truncated: bool = False
+    workspace_limit_exceeded: bool = False
+    process_tree_terminated: bool = False
+    resource_exhausted: bool = False
+    workspace_cleaned: bool = True
+    termination_reason: str = ""
+    error: str = ""
+    native_lifecycle: NativeToolLifecycleObservation | None = None
+    resource_observation: ToolResourceObservation | None = None
+
+    @property
+    def ok(self) -> bool:
+        return (
+            self.returncode == 0
+            and not self.timed_out
+            and not self.cancelled
+            and not self.unavailable
+            and not self.resource_exhausted
+        )
+
+    @property
+    def outputs(self) -> Mapping[str, bytes]:
+        """Compatibility spelling for callers that prefer ``outputs``."""
+
+        return self.output_files
+
+    def to_dict(self) -> dict[str, Any]:
+        result = {
+            "interface_version": self.interface_version,
+            "runtime": self.runtime.value,
+            "command": list(self.command),
+            "returncode": self.returncode,
+            "stdout": self.stdout,
+            "stderr": self.stderr,
+            "elapsed_seconds": self.elapsed_seconds,
+            "output_files": {
+                path: content.decode("utf-8", errors="replace")
+                for path, content in self.output_files.items()
+            },
+            "pid": self.pid,
+            "timed_out": self.timed_out,
+            "cancelled": self.cancelled,
+            "unavailable": self.unavailable,
+            "output_truncated": self.output_truncated,
+            "workspace_limit_exceeded": self.workspace_limit_exceeded,
+            "process_tree_terminated": self.process_tree_terminated,
+            "resource_exhausted": self.resource_exhausted,
+            "workspace_cleaned": self.workspace_cleaned,
+            "termination_reason": self.termination_reason,
+            "error": self.error,
+        }
+        if self.native_lifecycle is not None:
+            result["native_lifecycle"] = self.native_lifecycle.to_dict()
+        if self.resource_observation is not None:
+            result["resource_observation"] = self.resource_observation.to_dict()
+        return result
+
+
+class CancellationSignal(Protocol):
+    """Structural cancellation contract accepted by the runner."""
+
+    def is_cancelled(self) -> bool: ...
+
+
+class CancellationToken:
+    """Small thread-safe cancellation token for direct users of this module."""
+
+    def __init__(self) -> None:
+        self._event = threading.Event()
+
+    def cancel(self) -> None:
+        self._event.set()
+
+    @property
+    def cancelled(self) -> bool:
+        return self._event.is_set()
+
+    def is_cancelled(self) -> bool:
+        return self._event.is_set()
+
+    def is_set(self) -> bool:
+        return self._event.is_set()
+
+    def wait(self, timeout: float | None = None) -> bool:
+        return self._event.wait(timeout)
+
+
+class ProcessExecutor(Protocol):
+    """Injection point used by deterministic fake and production executors."""
+
+    def execute(
+        self,
+        invocation: ProcessInvocation,
+        cancellation: CancellationSignal | Any | None = None,
+    ) -> RawProcessResult: ...
+
+
+class UniversalBoundedToolLifecycle(Protocol):
+    """``UniversalBoundedToolLifecycle@1`` structural surface.
+
+    Every external tool adapter (SMT/differential, ATP, protocol, kernel,
+    TLA/JVM, hyperproperties, OCaml/opam, WASM probes) must route execution
+    through an object that satisfies this contract rather than calling
+    ``subprocess`` directly.
+    """
+
+    interface_version: str
+
+    def probe(
+        self,
+        executable: str,
+        *,
+        runtime: ToolRuntime = ToolRuntime.NATIVE,
+        search_path: str | None = None,
+    ) -> ToolProbe: ...
+
+    def is_available(
+        self,
+        executable: str,
+        *,
+        runtime: ToolRuntime = ToolRuntime.NATIVE,
+        search_path: str | None = None,
+    ) -> bool: ...
+
+    def run(
+        self,
+        request: ToolRunRequest | Sequence[str],
+        *,
+        cancellation: CancellationSignal | Any | None = None,
+        runtime: ToolRuntime = ToolRuntime.NATIVE,
+        limits: ToolRunLimits | None = None,
+        stdin: bytes | str | None = None,
+        input_files: Mapping[str, bytes | str] | None = None,
+        output_paths: Sequence[str] = (),
+        environment: Mapping[str, str] | None = None,
+        secrets: Sequence[str] = (),
+    ) -> ToolRunResult: ...
+
+
+def _is_cancelled(cancellation: Any | None) -> bool:
+    if cancellation is None:
+        return False
+    for name in ("is_cancelled", "is_set"):
+        method = getattr(cancellation, name, None)
+        if callable(method):
+            return bool(method())
+    return bool(getattr(cancellation, "cancelled", False))
+
+
+def _resource_preexec(limits: ToolRunLimits) -> Callable[[], None] | None:
+    if os.name != "posix":
+        return None
+
+    def apply_limits() -> None:
+        import resource
+
+        resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
+        if limits.enforce_file_size_limit:
+            file_limit = (
+                limits.max_workspace_bytes
+                if limits.max_file_bytes is None
+                else limits.max_file_bytes
+            )
+            resource.setrlimit(resource.RLIMIT_FSIZE, (file_limit, file_limit))
+        if limits.cpu_seconds is not None:
+            cpu_limit = max(1, int(math.ceil(limits.cpu_seconds)))
+            resource.setrlimit(resource.RLIMIT_CPU, (cpu_limit, cpu_limit))
+        if limits.memory_bytes is not None:
+            resource.setrlimit(
+                resource.RLIMIT_AS, (limits.memory_bytes, limits.memory_bytes)
+            )
+
+    return apply_limits
+
+
+def _linux_prlimit_path() -> str:
+    """Find the owner-selected system limit helper, independently of PATH."""
+    for candidate in (Path("/usr/bin/prlimit"), Path("/bin/prlimit")):
+        try:
+            resolved = candidate.resolve(strict=True)
+        except OSError:
+            continue
+        if resolved.is_file() and os.access(resolved, os.X_OK):
+            return str(resolved)
+    raise ToolProcessError("Linux bounded execution requires /usr/bin/prlimit or /bin/prlimit")
+
+
+def _linux_resource_argv(argv: Sequence[str], limits: ToolRunLimits) -> list[str]:
+    """Apply limits in a native exec helper, avoiding Python after threaded fork.
+
+    The helper sets the same soft/hard limits as the legacy preexec callback and
+    execs the requested tool in its existing process group. Its path is trusted
+    local installation policy; resource limits do not authenticate executables.
+    """
+    command = [_linux_prlimit_path(), "--core=0:0"]
+    if limits.enforce_file_size_limit:
+        file_limit = (
+            limits.max_workspace_bytes
+            if limits.max_file_bytes is None
+            else limits.max_file_bytes
+        )
+        command.append(f"--fsize={file_limit}:{file_limit}")
+    if limits.cpu_seconds is not None:
+        cpu_limit = max(1, int(math.ceil(limits.cpu_seconds)))
+        command.append(f"--cpu={cpu_limit}:{cpu_limit}")
+    if limits.memory_bytes is not None:
+        command.append(f"--as={limits.memory_bytes}:{limits.memory_bytes}")
+    return [*command, "--", *argv]
+
+
+def _terminate_process_tree(
+    process: subprocess.Popen[bytes],
+    *,
+    grace_seconds: float,
+    descendants: _LinuxDescendantTracker | None = None,
+) -> bool:
+    """Terminate the process and descendants without searching by name."""
+
+    if descendants is not None:
+        # Capture ancestry before signalling the parent can reparent children.
+        descendants.refresh()
+        descendants.signal_descendants(signal.SIGTERM)
+    if process.poll() is not None:
+        return False
+    if os.name == "posix":
+        try:
+            os.killpg(process.pid, signal.SIGTERM)
+        except ProcessLookupError:
+            return False
+        except PermissionError:
+            process.terminate()
+    else:  # pragma: no cover - exercised on Windows CI.
+        process.terminate()
+    try:
+        process.wait(timeout=max(0.001, grace_seconds))
+        return True
+    except subprocess.TimeoutExpired:
+        pass
+    if os.name == "posix":
+        try:
+            os.killpg(process.pid, signal.SIGKILL)
+        except ProcessLookupError:
+            pass
+        except PermissionError:
+            process.kill()
+    else:  # pragma: no cover - exercised on Windows CI.
+        process.kill()
+    try:
+        process.wait(timeout=max(0.1, grace_seconds))
+    except subprocess.TimeoutExpired:  # pragma: no cover - hostile OS boundary.
+        return False
+    return True
+
+
+def _living_group_descendants(group_id: int, leader_pid: int) -> bool:
+    """Return whether Linux exposes a live descendant in the process group."""
+
+    if os.name != "posix" or not Path("/proc").is_dir():
+        return False
+    try:
+        entries = tuple(Path("/proc").iterdir())
+    except OSError:
+        return False
+    for entry in entries:
+        if not entry.name.isdigit() or int(entry.name) == leader_pid:
+            continue
+        try:
+            raw = (entry / "stat").read_text(encoding="utf-8")
+            closing = raw.rfind(")")
+            fields = raw[closing + 2 :].split()
+            state = fields[0]
+            process_group_id = int(fields[2])
+        except (OSError, IndexError, ValueError):
+            continue
+        if process_group_id == group_id and state != "Z":
+            return True
+    return False
+
+
+def _process_tree_resident_bytes(leader_pid: int) -> int:
+    """Sample Linux RSS for the leader and its descendants, counting shared pages
+    conservatively in each process. Processes that exit during sampling are ignored.
+    This is a sampled guard, not a kernel cgroup memory limit.
+    """
+    pending = [leader_pid]
+    visited: set[int] = set()
+    total = 0
+    page_size = os.sysconf("SC_PAGE_SIZE")
+    while pending:
+        pid = pending.pop()
+        if pid in visited:
+            continue
+        visited.add(pid)
+        root = Path("/proc") / str(pid)
+        try:
+            fields = (root / "stat").read_text().rsplit(")", 1)[1].split()
+            total += max(0, int(fields[21])) * page_size
+            # A child can be forked by any thread in the JVM.
+            for task in (root / "task").iterdir():
+                try:
+                    pending.extend(int(child) for child in (task / "children").read_text().split())
+                except (OSError, ValueError):
+                    continue
+        except (OSError, IndexError, ValueError):
+            continue
+    return total
+
+
+def _linux_process_identity(pid: int) -> tuple[int, str, int, int] | None:
+    """Return birth ticks, state, parent and RSS without relying on a name."""
+    try:
+        with (Path("/proc") / str(pid) / "stat").open() as stream:
+            raw = stream.read(8192)
+        fields = raw.rsplit(")", 1)[1].split()
+        return int(fields[19]), fields[0], int(fields[1]), max(0, int(fields[21]))
+    except (OSError, IndexError, ValueError):
+        return None
+
+
+def _linux_owned_identity(pid: int) -> tuple[NativeProcessIdentity, str]:
+    """Read one bounded procfs identity; callers distinguish exit from error."""
+    with (Path("/proc") / str(pid) / "stat").open() as stream:
+        raw = stream.read(8193)
+    if len(raw) > 8192:
+        raise ToolProcessError("Linux process identity exceeds observation bound")
+    fields = raw.rsplit(")", 1)[1].split()
+    return NativeProcessIdentity(pid, int(fields[19]), int(fields[1]),
+                                 int(fields[2]), int(fields[3])), fields[0]
+
+
+class _LinuxDescendantTracker:
+    """Retain observed ancestry through reparenting and process-group changes."""
+
+    def __init__(self, leader_pid: int, *, retain_history: bool = False):
+        self.leader_pid = leader_pid
+        self.enabled = sys.platform.startswith("linux") and Path("/proc/self/stat").is_file()
+        self.records: dict[int, tuple[int, int | None]] = {}
+        self.error = ""
+        self._seeded = False
+        self.retain_history = retain_history
+        self.history: dict[tuple[int, int], NativeProcessIdentity] = {}
+
+    def _forget(self, pid: int) -> None:
+        record = self.records.pop(pid, None)
+        if record is not None and record[1] is not None:
+            os.close(record[1])
+
+    def _retain(self, pid: int, identity: tuple[int, str, int, int]) -> bool:
+        if len(self.records) >= 8192 or (self.retain_history
+                and (pid, identity[0]) not in self.history and len(self.history) >= 8192):
+            self.error = "descendant tracking capacity exceeded"
+            return False
+        descriptor = None
+        if hasattr(os, "pidfd_open"):
+            try:
+                descriptor = os.pidfd_open(pid, 0)
+            except OSError:
+                pass  # Older kernels can still use checked birth identities.
+        latest = _linux_process_identity(pid)
+        if latest is None or latest[0] != identity[0]:
+            if descriptor is not None:
+                os.close(descriptor)
+            return False
+        self.records[pid] = (identity[0], descriptor)
+        if self.retain_history:
+            try:
+                observed, _ = _linux_owned_identity(pid)
+                if observed.birth_ticks != identity[0]:
+                    self._forget(pid)
+                    return False
+                self.history[(pid, identity[0])] = observed
+            except (FileNotFoundError, ProcessLookupError):
+                self._forget(pid)
+                return False
+            except (OSError, ValueError, IndexError, ToolProcessError):
+                self.error = "tracked process identity could not be observed"
+                return False
+        return True
+
+    def _identity(self, pid):
+        identity = _linux_process_identity(pid)
+        if identity is None and self.retain_history:
+            try:
+                _linux_owned_identity(pid)
+            except (FileNotFoundError, ProcessLookupError):
+                pass
+            except (OSError, ValueError, IndexError, ToolProcessError):
+                self.error = "tracked process observation failed"
+        return identity
+
+    def refresh(self) -> None:
+        if not self.enabled:
+            return
+        pending: list[tuple[int, int | None]] = [(pid, None) for pid in self.records]
+        if not self._seeded:
+            pending.append((self.leader_pid, None))
+            self._seeded = True
+        visited = set()
+        while pending:
+            pid, parent = pending.pop()
+            if pid in visited:
+                continue
+            visited.add(pid)
+            identity = self._identity(pid)
+            known = self.records.get(pid)
+            if identity is None or (known is not None and known[0] != identity[0]):
+                self._forget(pid)
+                continue
+            if known is None:
+                if parent is not None and identity[2] != parent:
+                    continue  # Child list raced exit/reuse; never adopt a stranger.
+                if not self._retain(pid, identity):
+                    continue
+            if identity[1] == "Z":
+                self._forget(pid)
+                continue
+            try:
+                # JVM and Poly/ML can fork from threads other than their leader.
+                for task in (Path("/proc") / str(pid) / "task").iterdir():
+                    try:
+                        children = (task / "children").read_text().split()
+                        pending.extend((int(child), pid) for child in children)
+                    except (OSError, ValueError) as error:
+                        if self.retain_history and not (isinstance(error, OSError)
+                                and error.errno in (errno.ENOENT, errno.ESRCH)):
+                            self.error = "descendant child-list observation failed"
+                        continue
+            except OSError as error:
+                if self.retain_history and error.errno not in (errno.ENOENT, errno.ESRCH):
+                    self.error = "descendant task observation failed"
+                continue
+
+    def live_descendants(self) -> list[int]:
+        live = []
+        for pid, (birth, _) in tuple(self.records.items()):
+            identity = self._identity(pid)
+            if identity is None or identity[0] != birth or identity[1] == "Z":
+                self._forget(pid)
+            elif pid != self.leader_pid:
+                live.append(pid)
+        return live
+
+    def resident_bytes(self) -> int:
+        pages = 0
+        for pid, (birth, _) in tuple(self.records.items()):
+            identity = _linux_process_identity(pid)
+            if identity is not None and identity[0] == birth and identity[1] != "Z":
+                pages += identity[3]
+        return pages * os.sysconf("SC_PAGE_SIZE")
+
+    def signal_descendants(self, number: int) -> bool:
+        signalled = False
+        for pid in self.live_descendants():
+            birth, descriptor = self.records[pid]
+            try:
+                if descriptor is not None and hasattr(signal, "pidfd_send_signal"):
+                    signal.pidfd_send_signal(descriptor, number)
+                else:
+                    identity = _linux_process_identity(pid)
+                    if identity is None or identity[0] != birth or identity[1] == "Z":
+                        continue
+                    os.kill(pid, number)
+                signalled = True
+            except ProcessLookupError:
+                pass
+            except PermissionError:
+                self.error = "permission denied while terminating tracked descendant"
+        return signalled
+
+    def drain(self, grace_seconds: float) -> tuple[bool, list[int]]:
+        self.refresh()
+        attempted = self.signal_descendants(signal.SIGTERM)
+        deadline = time.monotonic() + grace_seconds
+        while self.live_descendants() and time.monotonic() < deadline:
+            self.refresh()
+            self.signal_descendants(signal.SIGTERM)
+            time.sleep(.01)
+        # SIGKILL and a separate bounded wait are needed even if the parent has
+        # already exited. A returned receipt must not imply that a live helper
+        # disappeared merely because its original process group did.
+        deadline = time.monotonic() + max(.1, min(1.0, grace_seconds))
+        while self.live_descendants():
+            self.refresh()
+            attempted = self.signal_descendants(signal.SIGKILL) or attempted
+            if time.monotonic() >= deadline:
+                break
+            time.sleep(.01)
+        return attempted, self.live_descendants()
+
+    def close(self) -> None:
+        for pid in tuple(self.records):
+            self._forget(pid)
+
+
+def _terminate_remaining_group(group_id: int, grace_seconds: float) -> bool:
+    """Reap descendants after their group leader has already exited."""
+
+    if os.name != "posix":
+        return False
+    try:
+        os.killpg(group_id, signal.SIGTERM)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return False
+    deadline = time.monotonic() + grace_seconds
+    while time.monotonic() < deadline:
+        if not _living_group_descendants(group_id, group_id):
+            return True
+        time.sleep(0.01)
+    try:
+        os.killpg(group_id, signal.SIGKILL)
+    except ProcessLookupError:
+        pass
+    except PermissionError:
+        return False
+    return True
+
+
+class _BoundedCapture:
+    def __init__(self, limit: int) -> None:
+        self._limit = limit
+        self._value = bytearray()
+        self.truncated = False
+        self.completed = False
+        self.error = ""
+
+    def drain(self, stream: Any) -> None:
+        try:
+            while True:
+                chunk = stream.read(65_536)
+                if not chunk:
+                    self.completed = True
+                    return
+                remaining = self._limit - len(self._value)
+                if remaining > 0:
+                    self._value.extend(chunk[:remaining])
+                if len(chunk) > remaining:
+                    self.truncated = True
+        except BaseException as error:
+            self.error = "native pipe capture failed: " + type(error).__name__
+            raise
+        finally:
+            try:
+                stream.close()
+            except OSError as error:
+                self.error = "native pipe close failed: " + type(error).__name__
+
+    @property
+    def value(self) -> bytes:
+        return bytes(self._value)
+
+
+def _cleanup_failed_execution(process, descendants, workers, grace_seconds, error) -> None:
+    """Keep native ownership when a caller callback or control flow raises.
+
+    Each cleanup step is independent: a failed sampler must not prevent leader
+    termination, and a failed termination must not discard retained birth IDs.
+    Cleanup remains bounded; any failed steps are attached to the original
+    exception instead of replacing the exception that interrupted execution.
+    """
+    notes: list[str] = []
+
+    def attempt(label, action):
+        try:
+            return action()
+        except BaseException as cleanup_error:
+            notes.append(f"{label}: {type(cleanup_error).__name__}")
+            return None
+
+    if descendants is None:
+        descendants = attempt("initialize descendant tracker", lambda: _LinuxDescendantTracker(process.pid))
+    if descendants is not None:
+        # Discover separate sessions while the parent is still alive.
+        attempt("snapshot descendants", descendants.refresh)
+        attempt("terminate descendants", lambda: descendants.signal_descendants(signal.SIGTERM))
+    attempt("terminate leader", lambda: _terminate_process_tree(process, grace_seconds=grace_seconds))
+    attempt("terminate remaining group", lambda: _terminate_remaining_group(process.pid, grace_seconds))
+    if descendants is not None:
+        drained = attempt("drain descendants", lambda: descendants.drain(grace_seconds))
+        if drained is None:
+            # Refresh can itself be the failing operation; still signal the
+            # retained birth-checked records without another refresh first.
+            attempt("kill retained descendants", lambda: descendants.signal_descendants(signal.SIGKILL))
+            deadline = time.monotonic() + max(.1, min(1., grace_seconds))
+            while time.monotonic() < deadline:
+                live = attempt("inspect retained descendants", descendants.live_descendants)
+                if not live:
+                    break
+                time.sleep(.01)
+        survivors = attempt("inspect descendant cleanup", descendants.live_descendants)
+        if survivors:
+            notes.append("tracked descendants survived: " + ",".join(map(str, survivors[:32])))
+        if descendants.error:
+            notes.append(descendants.error[:512])
+        attempt("close descendant handles", descendants.close)
+    if attempt("inspect leader cleanup", process.poll) is None:
+        notes.append("leader termination could not be confirmed")
+
+    streams = {id(stream): stream for stream in (process.stdin, process.stdout, process.stderr) if stream is not None}
+    for worker, stream in workers:
+        if worker.ident is not None:
+            attempt("join pipe worker", lambda: worker.join(timeout=max(.1, grace_seconds)))
+        if worker.is_alive():
+            # Closing a buffered stream held by a still-blocked reader can
+            # deadlock. Disclose the failed drain instead of blocking forever.
+            streams.pop(id(stream), None)
+            notes.append("pipe worker survived bounded cleanup")
+    for stream in streams.values():
+        attempt("close process pipe", stream.close)
+    for note in notes[:12]:
+        error.add_note("bounded process cleanup: " + note)
+
+
+def _execution_exception_text(error: BaseException) -> str:
+    notes = [note[:512] for note in getattr(error, "__notes__", ())
+             if isinstance(note, str) and note.startswith("bounded process cleanup: ")]
+    return str(error) + ("; " + "; ".join(notes[:12]) if notes else "")
+
+
+class NativeToolCleanupHandle:
+    """Parent-owned resources retained until a fresh complete cleanup succeeds.
+
+    ``retry_cleanup`` is bounded by the original termination grace and returns
+    fresh observations, including failures. It never releases a scheduler
+    lease. A caller's cleanup guardian must keep and renew its actual leases.
+    The handle can move between threads in the same birth-bound parent, but
+    cannot be used after fork. No implicit finalizer declares cleanup complete.
+    """
+
+    def __init__(self, process, descendants, workers, workspace, grace_seconds,
+                 *, parent_identity, workspace_info):
+        self._process = process
+        self._descendants = descendants
+        self._workers = workers
+        self._workspace = workspace
+        self._grace_seconds = grace_seconds
+        self._temporary = None
+        self._lock = threading.Lock()
+        self._captures = ()
+        self._initial_errors = []
+        parent = parent_identity
+        self._parent = parent
+        self._leader = None
+        self._workspace_info = workspace_info
+        self._last_observation = None
+        self._closed = False
+        if process is not None:
+            self.attach_process(process)
+
+    def attach_process(self, process) -> None:
+        # Preallocation precedes Popen; retain the actual child before any
+        # fallible post-launch sampler or thread initialization can run.
+        self._process = process
+        self._descendants.leader_pid = process.pid
+        parent = self._parent
+        self._leader = NativeProcessIdentity(process.pid, 0, parent.pid, process.pid, process.pid)
+        try:
+            self._leader, _ = _linux_owned_identity(process.pid)
+        except (OSError, ValueError, IndexError, ToolProcessError):
+            self._leader = NativeProcessIdentity(process.pid, 0, parent.pid, process.pid, process.pid)
+            self._initial_errors.append("native leader birth identity was not observed")
+        if (self._leader.parent_pid != parent.pid or self._leader.process_group_id != process.pid
+                or self._leader.session_id != process.pid):
+            self._initial_errors.append("native child did not enter its owned session")
+
+    def attach_workspace(self, temporary) -> None:
+        self._temporary = temporary
+        # An unresolved handle dropped by its caller must leave an orphaned
+        # workspace, never delete the workspace of work that is still alive.
+        temporary._finalizer.detach()
+        self._check_owner()
+
+    def _check_owner(self) -> None:
+        parent, _ = _linux_owned_identity(os.getpid())
+        if parent.pid != self._parent.pid or parent.birth_ticks != self._parent.birth_ticks:
+            raise ToolProcessError("native cleanup handle belongs to another parent")
+
+    def _group_members(self):
+        members, errors = [], []
+        try:
+            for count, entry in enumerate(Path("/proc").iterdir(), 1):
+                if count > 32768:
+                    errors.append("native group scan capacity exceeded")
+                    break
+                if not entry.name.isdigit():
+                    continue
+                try:
+                    identity, state = _linux_owned_identity(int(entry.name))
+                    if identity.process_group_id == self._leader.process_group_id and state != "Z":
+                        members.append(identity)
+                except (FileNotFoundError, ProcessLookupError):
+                    continue
+                except (OSError, ValueError, IndexError, ToolProcessError) as error:
+                    errors.append("native group member observation failed: " + type(error).__name__)
+                    break
+        except OSError as error:
+            errors.append("native group enumeration failed: " + type(error).__name__)
+        return tuple(sorted(members, key=lambda item: (item.pid, item.birth_ticks))), errors
+
+    def _owns_group_member(self, identity):
+        if (identity.pid, identity.birth_ticks) in self._descendants.history:
+            return True
+        if identity.pid == self._leader.pid:
+            return identity.birth_ticks == self._leader.birth_ticks
+        # A numeric group or session ID alone is reusable after the leader is
+        # reaped. Unknown members are adoptable only under its live birth-bound
+        # session anchor; afterwards only retained identities may be signalled.
+        try:
+            anchor, state = _linux_owned_identity(self._leader.pid)
+        except (FileNotFoundError, ProcessLookupError):
+            return False
+        return (state != "Z" and anchor == self._leader
+                and identity.session_id == self._leader.session_id)
+
+    def _retry(self, *, remove_workspace):
+        errors = list(self._initial_errors)
+
+        def attempt(label, action):
+            try:
+                return action()
+            except BaseException as error:
+                errors.append(label + ": " + type(error).__name__)
+                return None
+
+        # Each step remains independent if a sampler or cleanup boundary fails.
+        # Tracked pidfds/births survive until leader, helpers and pipes drain.
+        if not self._closed:
+            attempt("refresh tracked descendants", self._descendants.refresh)
+            attempt("terminate native leader", lambda: _terminate_process_tree(
+                self._process, grace_seconds=self._grace_seconds, descendants=self._descendants))
+            drained = attempt("drain tracked descendants", lambda: self._descendants.drain(self._grace_seconds))
+            if drained is not None and drained[1]:
+                errors.append("tracked descendants survived bounded cleanup")
+            group, scan_errors = self._group_members()
+            errors.extend(scan_errors)
+            # Signal only individually birth-checked identities observed in the
+            # owned session, never a newly reused numeric group ID.
+            for identity in group:
+                if identity.pid == self._leader.pid and identity.birth_ticks != self._leader.birth_ticks:
+                    errors.append("native leader PID was reused before group drain")
+                    continue
+                try:
+                    if not self._owns_group_member(identity):
+                        errors.append("unowned member in reused or unanchored native group")
+                        continue
+                    latest, _ = _linux_owned_identity(identity.pid)
+                    if latest == identity:
+                        known = self._descendants.records.get(identity.pid)
+                        if known is not None and known[0] != identity.birth_ticks:
+                            self._descendants._forget(identity.pid)
+                        if identity.pid not in self._descendants.records:
+                            self._descendants._retain(identity.pid,
+                                (identity.birth_ticks, "S", identity.parent_pid, 0))
+                        descriptor = self._descendants.records.get(identity.pid, (None, None))[1]
+                        if descriptor is not None and hasattr(signal, "pidfd_send_signal"):
+                            signal.pidfd_send_signal(descriptor, signal.SIGKILL)
+                        else:
+                            latest, _ = _linux_owned_identity(identity.pid)
+                            if latest == identity:
+                                os.kill(identity.pid, signal.SIGKILL)
+                except (FileNotFoundError, ProcessLookupError):
+                    pass
+                except (OSError, ValueError, IndexError, ToolProcessError) as error:
+                    errors.append("terminate owned group member: " + type(error).__name__)
+            stop = time.monotonic() + max(.1, min(1., self._grace_seconds))
+            while group and not scan_errors and time.monotonic() < stop:
+                time.sleep(.01)
+                group, scan_errors = self._group_members()
+            errors.extend(scan_errors)
+            for worker, _ in self._workers:
+                if worker.ident is not None:
+                    attempt("join native pipe worker", lambda worker=worker:
+                            worker.join(timeout=max(.1, self._grace_seconds)))
+
+        group, scan_errors = self._group_members()
+        errors.extend(scan_errors)
+        live = attempt("inspect tracked descendants", self._descendants.live_descendants)
+        remaining = []
+        for pid in live or ():
+            try:
+                identity, state = _linux_owned_identity(pid)
+                known = self._descendants.records.get(pid)
+                if known is not None and identity.birth_ticks == known[0] and state != "Z":
+                    remaining.append(identity)
+            except (FileNotFoundError, ProcessLookupError):
+                pass
+            except (OSError, ValueError, IndexError, ToolProcessError) as error:
+                errors.append("tracked survivor observation failed: " + type(error).__name__)
+        if self._descendants.error:
+            errors.append(self._descendants.error)
+        reaped = attempt("inspect native leader reaping", self._process.poll) is not None
+        readers = self._workers[:2]
+        writers = self._workers[2:]
+        started = lambda values: sum(worker.ident is not None for worker, _ in values)
+        joined = lambda values: sum(worker.ident is not None and not worker.is_alive() for worker, _ in values)
+        process_drained = (reaped and not group and live is not None and not remaining
+                           and not errors and started(readers) == joined(readers)
+                           and started(writers) == joined(writers))
+        removed = False
+        if process_drained:
+            streams = {id(stream): stream for stream in
+                       (self._process.stdin, self._process.stdout, self._process.stderr) if stream is not None}
+            for stream in streams.values():
+                attempt("close native pipe", stream.close)
+            if remove_workspace and not self._closed:
+                if attempt("close retained process handles", self._descendants.close) is not None:
+                    self._closed = True
+                elif not self._descendants.records:
+                    self._closed = True
+            if remove_workspace and self._temporary is not None and not errors:
+                try:
+                    info = self._workspace.lstat()
+                    if (info.st_dev, info.st_ino) != (self._workspace_info.st_dev, self._workspace_info.st_ino):
+                        errors.append("owned workspace identity changed before cleanup")
+                    else:
+                        attempt("remove owned workspace", self._temporary.cleanup)
+                except FileNotFoundError:
+                    pass
+                except OSError as error:
+                    errors.append("observe owned workspace before cleanup: " + type(error).__name__)
+                try:
+                    self._workspace.lstat()
+                except FileNotFoundError:
+                    removed = True
+                except OSError as error:
+                    errors.append("observe owned workspace removal: " + type(error).__name__)
+        observation = NativeToolLifecycleObservation(
+            self._parent.pid, self._parent.birth_ticks, self._leader,
+            tuple(sorted((item for item in self._descendants.history.values()
+                          if item.pid != self._leader.pid), key=lambda item: (item.pid, item.birth_ticks))),
+            reaped, self._descendants.enabled and not self._descendants.error,
+            not scan_errors, group, tuple(remaining), started(readers), joined(readers),
+            started(writers), joined(writers), self._workspace_info.st_dev,
+            self._workspace_info.st_ino, removed, tuple(dict.fromkeys(errors))[:32])
+        self._last_observation = observation
+        return observation
+
+    def retry_process_cleanup(self) -> NativeToolLifecycleObservation:
+        self._check_owner()
+        with self._lock:
+            return self._retry(remove_workspace=False)
+
+    def retry_cleanup(self) -> NativeToolLifecycleObservation:
+        self._check_owner()
+        with self._lock:
+            return self._retry(remove_workspace=True)
+
+
+class SubprocessExecutor:
+    """Production executor using a new process group and bounded pipe drains."""
+
+    def __init__(
+        self,
+        *,
+        popen: Callable[..., subprocess.Popen[bytes]] = subprocess.Popen,
+        clock: Callable[[], float] = time.monotonic,
+        poll_interval_seconds: float = 0.01,
+    ) -> None:
+        if poll_interval_seconds <= 0:
+            raise ToolProcessError("poll_interval_seconds must be positive")
+        self._popen = popen
+        self._clock = clock
+        self._poll_interval_seconds = poll_interval_seconds
+
+    def execute(
+        self,
+        invocation: ProcessInvocation,
+        cancellation: CancellationSignal | Any | None = None,
+    ) -> RawProcessResult:
+        started = self._clock()
+        if invocation.owned_process_observation and (type(self) is not SubprocessExecutor
+                or self._popen is not subprocess.Popen or not sys.platform.startswith("linux")):
+            raise ToolProcessError("owned process observations require the exact native Linux executor")
+        if invocation.limits.resident_memory_bytes is not None and not Path("/proc/self/stat").is_file():
+            return RawProcessResult(returncode=None, error="resident memory guard requires Linux procfs")
+        if _is_cancelled(cancellation):
+            return RawProcessResult(
+                returncode=None,
+                elapsed_seconds=0.0,
+                cancelled=True,
+                error="cancelled before process start",
+            )
+
+        deadline = started + invocation.limits.timeout_seconds
+        timed_out = cancelled = False
+
+        def stop_workspace_scan() -> bool:
+            nonlocal timed_out, cancelled
+            if timed_out or cancelled:
+                return True
+            if _is_cancelled(cancellation):
+                cancelled = True
+            elif self._clock() >= deadline:
+                timed_out = True
+            return timed_out or cancelled
+
+        initial_workspace = _inspect_workspace(
+            invocation.cwd, invocation.limits, stop_requested=stop_workspace_scan)
+        if initial_workspace.limit_exceeded or initial_workspace.error or initial_workspace.interrupted:
+            return RawProcessResult(
+                returncode=None, elapsed_seconds=max(0.0, self._clock() - started),
+                timed_out=timed_out, cancelled=cancelled,
+                resource_exhausted=initial_workspace.limit_exceeded or bool(initial_workspace.error),
+                workspace_limit_exceeded=initial_workspace.limit_exceeded,
+                resource_observation=_tool_resource_observation(invocation.limits, dispatched=False,
+                    trigger=("workspace_limit" if initial_workspace.limit_exceeded else "workspace_inspection_error"
+                        if initial_workspace.error else "cancelled" if cancelled else "wall_timeout"), stage="pre_dispatch"),
+                error=initial_workspace.error or ("workspace limit exceeded before process start"
+                    if initial_workspace.limit_exceeded else "operation stopped during workspace inspection"),
+            )
+
+        creation_flags = 0
+        if os.name == "nt":  # pragma: no cover - exercised on Windows CI.
+            creation_flags = getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
+        argv = list(invocation.argv)
+        preexec = None
+        if sys.platform.startswith("linux"):
+            try:
+                argv = _linux_resource_argv(argv, invocation.limits)
+            except ToolProcessError as error:
+                return RawProcessResult(returncode=None, elapsed_seconds=self._clock() - started, error=str(error))
+        else:  # Legacy non-Linux path; concurrent bounded launch is qualified on Linux.
+            preexec = _resource_preexec(invocation.limits)
+        process = None
+        descendants = None
+        workers = []
+        owned = None
+        parent_identity = workspace_info = None
+        if invocation.owned_process_observation:
+            parent_identity, _ = _linux_owned_identity(os.getpid())
+            workspace_info = invocation.cwd.lstat()
+            # Construct every lifecycle owner before starting native work.
+            descendants = _LinuxDescendantTracker(0, retain_history=True)
+            owned = NativeToolCleanupHandle(None, descendants, workers,
+                invocation.cwd, invocation.limits.termination_grace_seconds,
+                parent_identity=parent_identity, workspace_info=workspace_info)
+        try:
+            if stop_workspace_scan():
+                return RawProcessResult(
+                    returncode=None, elapsed_seconds=max(0.0, self._clock() - started),
+                    timed_out=timed_out, cancelled=cancelled,
+                    error="operation stopped before process start",
+                )
+            effective_resource_limits = _tool_resource_limit_envelope(invocation.limits)
+            # No-input launches need a read-only EOF source. CPython DEVNULL
+            # opens O_RDWR, which exceeds strict read-only external I/O scopes.
+            # Keep the original Popen and close the parent's handle immediately.
+            with (open(os.devnull, "rb") if invocation.stdin is None
+                  else nullcontext(subprocess.PIPE)) as stdin:
+                process = self._popen(
+                    argv,
+                    cwd=str(invocation.cwd),
+                    env=dict(invocation.environment),
+                    stdin=stdin,
+                    stdout=subprocess.PIPE,
+                    stderr=subprocess.PIPE,
+                    shell=False,
+                    start_new_session=(os.name == "posix"),
+                    creationflags=creation_flags,
+                    preexec_fn=preexec,
+                )
+                if owned is not None:
+                    owned.attach_process(process)
+                else:
+                    descendants = _LinuxDescendantTracker(process.pid)
+            assert process.stdout is not None
+            assert process.stderr is not None
+            stdout = _BoundedCapture(invocation.limits.max_output_bytes)
+            stderr = _BoundedCapture(invocation.limits.max_output_bytes)
+            if owned is not None:
+                owned._captures = (stdout, stderr)
+            readers = (
+                threading.Thread(target=stdout.drain, args=(process.stdout,), daemon=True),
+                threading.Thread(target=stderr.drain, args=(process.stderr,), daemon=True),
+            )
+            for reader, stream in zip(readers, (process.stdout, process.stderr)):
+                workers.append((reader, stream))
+                reader.start()
+
+            if invocation.stdin is not None:
+                assert process.stdin is not None
+
+                def write_stdin() -> None:
+                    try:
+                        process.stdin.write(invocation.stdin or b"")
+                        process.stdin.flush()
+                    except (BrokenPipeError, OSError):
+                        pass
+                    finally:
+                        try:
+                            process.stdin.close()
+                        except OSError:
+                            pass
+
+                writer = threading.Thread(target=write_stdin, daemon=True)
+                workers.append((writer, process.stdin))
+                writer.start()
+
+            next_ancestry_sample = started
+            resident_exhausted = False
+            rss_current_bytes = rss_peak_sampled_bytes = None
+            observed_trigger = None
+            next_memory_sample = started
+            next_workspace_sample = self._clock() + 0.1
+            workspace_exceeded = False
+            workspace_error = ""
+            tree_terminated = False
+            while True:
+                if self._clock() >= next_ancestry_sample:
+                    descendants.refresh()
+                    next_ancestry_sample = self._clock() + .1
+                if process.poll() is not None:
+                    break
+                if descendants.error:
+                    observed_trigger = "descendant_observation_error"
+                    tree_terminated = _terminate_process_tree(process,
+                        grace_seconds=invocation.limits.termination_grace_seconds, descendants=descendants)
+                    break
+                if (invocation.limits.resident_memory_bytes is not None
+                        and self._clock() >= next_memory_sample):
+                    next_memory_sample = self._clock() + 0.1
+                    resident_bytes = (descendants.resident_bytes() if descendants.enabled
+                        else _process_tree_resident_bytes(process.pid))
+                    rss_current_bytes = resident_bytes
+                    rss_peak_sampled_bytes = max(rss_peak_sampled_bytes or 0, resident_bytes)
+                    if resident_bytes > invocation.limits.resident_memory_bytes:
+                        resident_exhausted = True
+                        observed_trigger = "resident_memory_limit"
+                        tree_terminated = _terminate_process_tree(
+                            process, grace_seconds=invocation.limits.termination_grace_seconds,
+                            descendants=descendants)
+                        break
+                if _is_cancelled(cancellation):
+                    cancelled = True
+                    observed_trigger = "cancelled"
+                    tree_terminated = _terminate_process_tree(
+                        process,
+                        grace_seconds=invocation.limits.termination_grace_seconds,
+                        descendants=descendants,
+                    )
+                    break
+                if self._clock() >= deadline:
+                    timed_out = True
+                    observed_trigger = "wall_timeout"
+                    tree_terminated = _terminate_process_tree(
+                        process,
+                        grace_seconds=invocation.limits.termination_grace_seconds,
+                        descendants=descendants,
+                    )
+                    break
+                if self._clock() >= next_workspace_sample:
+                    usage = _inspect_workspace(invocation.cwd, invocation.limits,
+                                               stop_requested=stop_workspace_scan)
+                    next_workspace_sample = self._clock() + 0.1
+                    workspace_exceeded = usage.limit_exceeded
+                    workspace_error = usage.error
+                    if workspace_exceeded or workspace_error or usage.interrupted:
+                        observed_trigger = ("workspace_limit" if workspace_exceeded else "workspace_inspection_error"
+                            if workspace_error else "cancelled" if cancelled else "wall_timeout")
+                        tree_terminated = _terminate_process_tree(
+                            process, grace_seconds=invocation.limits.termination_grace_seconds,
+                            descendants=descendants)
+                        break
+                time.sleep(self._poll_interval_seconds)
+
+            try:
+                returncode = process.wait(
+                    timeout=max(0.1, invocation.limits.termination_grace_seconds)
+                )
+            except subprocess.TimeoutExpired:  # pragma: no cover - hostile OS boundary.
+                tree_terminated = _terminate_process_tree(
+                    process,
+                    grace_seconds=invocation.limits.termination_grace_seconds,
+                    descendants=descendants,
+                )
+                returncode = process.poll()
+
+            native_lifecycle = None
+            if owned is not None:
+                native_lifecycle = owned.retry_process_cleanup()
+                if not native_lifecycle.process_cleanup_confirmed:
+                    raise OwnedToolCleanupError(owned, "native owned process cleanup is unresolved")
+                cleanup_error = "; ".join(filter(None, (workspace_error, stdout.error, stderr.error,
+                    "native pipe EOF was not observed" if not(stdout.completed and stderr.completed) else "")))
+            else:
+                if _living_group_descendants(process.pid, process.pid):
+                    tree_terminated = (
+                        _terminate_remaining_group(
+                            process.pid, invocation.limits.termination_grace_seconds
+                        )
+                        or tree_terminated
+                    )
+                terminated_descendants, surviving_descendants = descendants.drain(
+                    invocation.limits.termination_grace_seconds)
+                tree_terminated = tree_terminated or terminated_descendants
+                cleanup_error = "; ".join(filter(None, (descendants.error, workspace_error)))
+                if surviving_descendants:
+                    tree_terminated = False
+                    cleanup_error = "tracked descendants survived bounded cleanup: " + ",".join(map(str, surviving_descendants))
+                descendants.close()
+                for reader in readers:
+                    reader.join(timeout=max(0.1, invocation.limits.termination_grace_seconds))
+            resource_exhausted = bool(cleanup_error) or resident_exhausted or workspace_exceeded or (
+                not timed_out
+                and not cancelled
+                and returncode is not None
+                and returncode < 0
+                and (
+                    invocation.limits.cpu_seconds is not None
+                    or invocation.limits.memory_bytes is not None
+                    or returncode == -getattr(signal, "SIGXFSZ", 0)
+                )
+            )
+            return RawProcessResult(
+                returncode=returncode,
+                stdout=stdout.value,
+                stderr=stderr.value,
+                elapsed_seconds=max(0.0, self._clock() - started),
+                pid=process.pid,
+                timed_out=timed_out,
+                cancelled=cancelled,
+                output_truncated=stdout.truncated or stderr.truncated,
+                process_tree_terminated=tree_terminated,
+                resource_exhausted=resource_exhausted,
+                error=cleanup_error,
+                workspace_limit_exceeded=workspace_exceeded,
+                native_lifecycle=native_lifecycle,
+                native_cleanup_handle=owned,
+                resource_observation=_tool_resource_observation(invocation.limits, dispatched=True,
+                    returncode=returncode, trigger=observed_trigger or ("cleanup_error" if cleanup_error else None),
+                    rss_current_bytes=rss_current_bytes, rss_peak_sampled_bytes=rss_peak_sampled_bytes,
+                    effective_limits=effective_resource_limits),
+            )
+        except BaseException as error:
+            if process is None:
+                raise
+            if isinstance(error, OwnedToolCleanupError):
+                raise
+            if owned is not None:
+                # The caller receives the actual retained cleanup owner even
+                # when a cancellation callback or OS operation interrupted us.
+                try:
+                    owned.retry_process_cleanup()
+                except BaseException as cleanup_error:
+                    error.add_note("bounded process cleanup: " + type(cleanup_error).__name__)
+                raise OwnedToolCleanupError(owned,
+                    "native execution interrupted: " + type(error).__name__ + ": "
+                    + _execution_exception_text(error)) from error
+            try:
+                _cleanup_failed_execution(process, descendants, workers,
+                    invocation.limits.termination_grace_seconds, error)
+            except BaseException as cleanup_error:
+                # Preserve the initiating exception even at a hostile OS or
+                # repeated interruption boundary during best-effort cleanup.
+                error.add_note("bounded process cleanup: unexpected " + type(cleanup_error).__name__)
+            raise
+
+
+
+def _validate_workspace_path(path: str, limits: ToolRunLimits) -> PurePosixPath:
+    if not isinstance(path, str) or not path or "\x00" in path:
+        raise ToolProcessError("workspace paths must be non-empty strings without NUL")
+    if len(path.encode("utf-8")) > limits.max_path_bytes:
+        raise ToolProcessError(f"workspace path exceeds {limits.max_path_bytes} bytes")
+    if "\\" in path:
+        raise ToolProcessError("workspace paths must use portable POSIX separators")
+    value = PurePosixPath(path)
+    if value.is_absolute() or value == PurePosixPath(".") or ".." in value.parts:
+        raise ToolProcessError(
+            f"workspace path must be relative and traversal-free: {path!r}"
+        )
+    return value
+
+
+def _bytes(value: bytes | str, field_name: str) -> bytes:
+    if isinstance(value, bytes):
+        return value
+    if isinstance(value, str):
+        return value.encode("utf-8")
+    raise ToolProcessError(f"{field_name} must be bytes or text")
+
+
+def _redact_text(value: str, secrets: Sequence[str]) -> str:
+    result = value
+    for secret in sorted(
+        {secret for secret in secrets if isinstance(secret, str) and secret},
+        key=len,
+        reverse=True,
+    ):
+        result = result.replace(secret, REDACTION)
+    return result
+
+
+def _redact_command(argv: Sequence[str], secrets: Sequence[str]) -> tuple[str, ...]:
+    redacted: list[str] = []
+    redact_next = False
+    for argument in argv:
+        if redact_next:
+            redacted.append(REDACTION)
+            redact_next = False
+            continue
+        assignment = _SENSITIVE_ASSIGNMENT.match(argument)
+        if assignment:
+            redacted.append(f"{assignment.group(1)}={REDACTION}")
+            continue
+        redacted.append(_redact_text(argument, secrets))
+        redact_next = bool(_SENSITIVE_OPTION.match(argument))
+    return tuple(redacted)
+
+
+@dataclass(frozen=True, slots=True)
+class _WorkspaceInspection:
+    bytes_used: int = 0
+    entries: int = 0
+    limit_exceeded: bool = False
+    error: str = ""
+    interrupted: bool = False
+
+
+def _inspect_workspace(
+    root: Path,
+    limits: ToolRunLimits,
+    *,
+    stop_requested: Callable[[], bool] | None = None,
+) -> _WorkspaceInspection:
+    """Inspect metadata with bounded work and no file-body reads.
+
+    POSIX traversal pins each directory with O_NOFOLLOW descriptors. The
+    portable path fallback checks identities but is not a hostile-race security
+    boundary. A disappearing child is a normal concurrent deletion; other
+    inspection failures refuse the run instead of reporting zero usage.
+    Sparse files count logical length and hard links count per directory entry.
+    Filesystem calls themselves are not forcibly interruptible.
+    """
+    total = entries = 0
+    stack: list[tuple[Any, int | Path, int, tuple[int, int]]] = []
+    descriptors = os.name == "posix" and hasattr(os, "O_NOFOLLOW")
+
+    def identity(info: os.stat_result) -> tuple[int, int]:
+        return info.st_dev, info.st_ino
+
+    def open_directory(path: str | Path, depth: int, parent: int | None = None,
+                       expected: os.stat_result | None = None) -> None:
+        if descriptors:
+            flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW | getattr(os, "O_CLOEXEC", 0)
+            fd = os.open(path, flags, dir_fd=parent)
+            try:
+                info = os.fstat(fd)
+                if expected is not None and identity(info) != identity(expected):
+                    raise OSError("workspace directory changed during inspection")
+                iterator = os.scandir(fd)
+            except BaseException:
+                os.close(fd)
+                raise
+            stack.append((iterator, fd, depth, identity(info)))
+        else:  # Portable metadata scan; live native qualification is on Linux.
+            directory = Path(path)
+            info = directory.lstat()
+            if (not stat.S_ISDIR(info.st_mode)
+                    or (expected is not None and identity(info) != identity(expected))):
+                raise OSError("workspace directory changed during inspection")
+            stack.append((os.scandir(directory), directory, depth, identity(info)))
+
+    def close_directory() -> None:
+        iterator, handle, _, _ = stack.pop()
+        try:
+            iterator.close()
+        finally:
+            if descriptors:
+                os.close(handle)
+
+    def inspect() -> _WorkspaceInspection:
+        nonlocal total, entries
+        if stop_requested is not None and stop_requested():
+            return _WorkspaceInspection(interrupted=True)
+        open_directory(root, 0)
+        while stack:
+            if stop_requested is not None and stop_requested():
+                return _WorkspaceInspection(total, entries, interrupted=True)
+            iterator, handle, depth, expected_identity = stack[-1]
+            try:
+                entry = next(iterator)
+            except StopIteration:
+                if not descriptors and identity(handle.lstat()) != expected_identity:
+                    raise OSError("workspace directory changed during inspection")
+                close_directory()
+                continue
+            entries += 1
+            if entries > limits.max_workspace_entries:
+                return _WorkspaceInspection(total, entries, limit_exceeded=True)
+            try:
+                info = entry.stat(follow_symlinks=False)
+                if stat.S_ISREG(info.st_mode):
+                    total += info.st_size
+                    if total > limits.max_workspace_bytes:
+                        return _WorkspaceInspection(total, entries, limit_exceeded=True)
+                elif stat.S_ISDIR(info.st_mode):
+                    if depth + 1 > limits.max_workspace_depth:
+                        return _WorkspaceInspection(total, entries, limit_exceeded=True)
+                    open_directory(entry.name if descriptors else Path(entry.path), depth + 1,
+                                   parent=handle if descriptors else None, expected=info)
+            except FileNotFoundError:
+                # A child may disappear while the tool is running. Root and
+                # iterator failures still take the conservative error path.
+                continue
+        return _WorkspaceInspection(total, entries)
+
+    cleanup_error = ""
+    try:
+        usage = inspect()
+    except OSError as error:
+        usage = _WorkspaceInspection(total, entries,
+            error="workspace inspection failed: " + type(error).__name__)
+    finally:
+        while stack:
+            try:
+                close_directory()
+            except OSError as error:
+                # Try every ancestor even if one descriptor/iterator fails to
+                # close. Never mask KeyboardInterrupt or another active error.
+                cleanup_error = cleanup_error or "workspace inspection cleanup failed: " + type(error).__name__
+    if cleanup_error:
+        usage = replace(usage, error="; ".join(filter(None, (usage.error, cleanup_error))))
+    return usage
+
+
+def _workspace_size(root: Path, limit: int) -> tuple[int, bool]:
+    """Compatibility helper; unreadable or over-complex trees are refused."""
+    limits = ToolRunLimits(max_input_bytes=min(limit, 1_048_576), max_workspace_bytes=limit)
+    usage = _inspect_workspace(root, limits)
+    return usage.bytes_used, usage.limit_exceeded or bool(usage.error)
+
+
+def tool_limits_from_milliseconds(
+    timeout_ms: int,
+    *,
+    max_output_bytes: int = 1_048_576,
+    max_memory_bytes: int | None = None,
+    max_input_bytes: int | None = None,
+    max_workspace_bytes: int | None = None,
+    cpu_seconds: float | None = None,
+    termination_grace_seconds: float = 0.25,
+) -> ToolRunLimits:
+    """Map millisecond wall bounds (ExecutionBounds-style) onto ToolRunLimits."""
+
+    if isinstance(timeout_ms, bool) or not isinstance(timeout_ms, int) or timeout_ms <= 0:
+        raise ToolProcessError("timeout_ms must be a positive integer")
+    output_bound = max_output_bytes if max_output_bytes > 0 else 1_048_576
+    input_bound = max_input_bytes if max_input_bytes is not None else output_bound
+    workspace_bound = (
+        max_workspace_bytes
+        if max_workspace_bytes is not None
+        else max(output_bound * 2, input_bound + output_bound + 1024)
+    )
+    return ToolRunLimits(
+        timeout_seconds=max(timeout_ms / 1000.0, 0.001),
+        termination_grace_seconds=termination_grace_seconds,
+        cpu_seconds=(
+            max(timeout_ms / 1000.0, 0.001) if cpu_seconds is None else cpu_seconds
+        ),
+        memory_bytes=max_memory_bytes,
+        max_output_bytes=output_bound,
+        max_input_bytes=input_bound,
+        max_workspace_bytes=max(workspace_bound, input_bound),
+    )
+
+
+@dataclass(frozen=True, slots=True)
+class BoundedStdinObservation:
+    """Normalized observation for stdin-fed tools (SMT/differential style)."""
+
+    stdout: str = ""
+    stderr: str = ""
+    returncode: int | None = 0
+    elapsed_ms: int = 0
+    timed_out: bool = False
+    cancelled: bool = False
+    unavailable: bool = False
+    process_tree_terminated: bool = False
+    output_truncated: bool = False
+    workspace_cleaned: bool = True
+    resource_exhausted: bool = False
+    termination_reason: str = ""
+    command: tuple[str, ...] = ()
+    error: str = ""
+    interface_version: str = UNIVERSAL_BOUNDED_TOOL_LIFECYCLE_VERSION
+    native_lifecycle: NativeToolLifecycleObservation | None = None
+
+    def to_dict(self) -> dict[str, Any]:
+        result = {
+            "interface_version": self.interface_version,
+            "stdout": self.stdout,
+            "stderr": self.stderr,
+            "returncode": self.returncode,
+            "elapsed_ms": self.elapsed_ms,
+            "timed_out": self.timed_out,
+            "cancelled": self.cancelled,
+            "unavailable": self.unavailable,
+            "process_tree_terminated": self.process_tree_terminated,
+            "output_truncated": self.output_truncated,
+            "workspace_cleaned": self.workspace_cleaned,
+            "resource_exhausted": self.resource_exhausted,
+            "termination_reason": self.termination_reason,
+            "command": list(self.command),
+            "error": self.error,
+        }
+        if self.native_lifecycle is not None:
+            result["native_lifecycle"] = self.native_lifecycle.to_dict()
+        return result
+
+
+def run_bounded_stdin_tool(
+    argv: Sequence[str],
+    stdin: bytes | str,
+    *,
+    runner: BoundedToolRunner | UniversalBoundedToolLifecycle | None = None,
+    runtime: ToolRuntime = ToolRuntime.NATIVE,
+    limits: ToolRunLimits | None = None,
+    cancellation: CancellationSignal | Any | None = None,
+    environment: Mapping[str, str] | None = None,
+    secrets: Sequence[str] = (),
+    timeout_ms: int | None = None,
+    max_output_bytes: int | None = None,
+    max_memory_bytes: int | None = None,
+    owned_process_observation: bool = False,
+) -> BoundedStdinObservation:
+    """Run an argv+stdin tool through the universal bounded lifecycle.
+
+    Preferred replacement for direct ``subprocess.run`` in SMT, differential,
+    and version-probe paths that feed a script on standard input.
+    """
+
+    if isinstance(argv, (str, bytes, bytearray)):
+        raise ToolProcessError("argv must be a sequence, never a shell string")
+    if type(owned_process_observation) is not bool:
+        raise ToolProcessError("owned_process_observation must be an exact boolean")
+    resolved_limits = limits
+    if resolved_limits is None:
+        resolved_limits = tool_limits_from_milliseconds(
+            timeout_ms if timeout_ms is not None else 30_000,
+            max_output_bytes=(
+                max_output_bytes if max_output_bytes is not None else 1_048_576
+            ),
+            max_memory_bytes=max_memory_bytes,
+            max_input_bytes=len(_bytes(stdin, "stdin")) + 1,
+        )
+    active_runner: BoundedToolRunner | UniversalBoundedToolLifecycle
+    if runner is None:
+        active_runner = BoundedToolRunner()
+    else:
+        active_runner = runner
+    if owned_process_observation and type(active_runner) is not BoundedToolRunner:
+        raise ToolProcessError("owned observations require the exact native bounded runner")
+    request = ToolRunRequest(
+        argv=tuple(argv),
+        runtime=runtime,
+        limits=resolved_limits,
+        stdin=stdin,
+        environment=environment or {},
+        secrets=tuple(secrets),
+        owned_process_observation=owned_process_observation,
+    )
+    result = active_runner.run(request, cancellation=cancellation)
+    return BoundedStdinObservation(
+        stdout=result.stdout,
+        stderr=result.stderr,
+        returncode=result.returncode,
+        elapsed_ms=max(0, int(result.elapsed_seconds * 1000)),
+        timed_out=result.timed_out,
+        cancelled=result.cancelled,
+        unavailable=result.unavailable,
+        process_tree_terminated=result.process_tree_terminated,
+        output_truncated=result.output_truncated,
+        workspace_cleaned=result.workspace_cleaned,
+        resource_exhausted=result.resource_exhausted,
+        termination_reason=result.termination_reason,
+        command=result.command,
+        error=result.error,
+        native_lifecycle=result.native_lifecycle,
+    )
+
+
+class BoundedToolRunner:
+    """Reusable ``BoundedToolRunner@1`` / ``UniversalBoundedToolLifecycle@1``.
+
+    An injected executor is trusted only to execute the validated invocation.
+    The runner still owns workspace materialization, declared-output reads,
+    redaction, and cleanup, so fake and real runs observe the same contract.
+    """
+
+    interface_version: Final = BOUNDED_TOOL_RUNNER_VERSION
+    lifecycle_version: Final = UNIVERSAL_BOUNDED_TOOL_LIFECYCLE_VERSION
+
+    def __init__(
+        self,
+        *,
+        executor: ProcessExecutor
+        | Callable[[ProcessInvocation, Any | None], RawProcessResult]
+        | None = None,
+        workspace_root: str | Path | None = None,
+        base_environment: Mapping[str, str] | None = None,
+        executable_roots: Sequence[str | Path] = (),
+    ) -> None:
+        self._default_executor = executor is None
+        self._executor = executor or SubprocessExecutor()
+        self._workspace_root = (
+            Path(workspace_root).expanduser() if workspace_root is not None else None
+        )
+        default_environment = {
+            name: value
+            for name, value in os.environ.items()
+            if name in {"PATH", "LANG", "LC_ALL", "SYSTEMROOT", "WINDIR"}
+        }
+        self._base_environment = dict(
+            default_environment if base_environment is None else base_environment
+        )
+        self._executable_roots = tuple(
+            Path(root).expanduser().resolve() for root in executable_roots
+        )
+
+    def probe(
+        self,
+        executable: str,
+        *,
+        runtime: ToolRuntime = ToolRuntime.NATIVE,
+        search_path: str | None = None,
+    ) -> ToolProbe:
+        """Inspect executable availability without starting or installing it."""
+
+        if not isinstance(executable, str) or not executable or "\x00" in executable:
+            raise ToolProcessError("executable must be a non-empty string without NUL")
+        try:
+            resolved_runtime = (
+                runtime if isinstance(runtime, ToolRuntime) else ToolRuntime(runtime)
+            )
+        except (TypeError, ValueError) as error:
+            raise ToolProcessError(f"unsupported tool runtime: {runtime!r}") from error
+        candidate = shutil.which(
+            executable, path=search_path or self._base_environment.get("PATH")
+        )
+        if candidate is None:
+            return ToolProbe(
+                runtime=resolved_runtime,
+                requested_executable=executable,
+                available=False,
+                reason="executable not found",
+            )
+        resolved = Path(candidate).resolve()
+        if self._executable_roots and not any(
+            resolved == root or root in resolved.parents
+            for root in self._executable_roots
+        ):
+            return ToolProbe(
+                runtime=resolved_runtime,
+                requested_executable=executable,
+                available=False,
+                reason="executable is outside the allowed roots",
+            )
+        return ToolProbe(
+            runtime=resolved_runtime,
+            requested_executable=executable,
+            available=True,
+            executable_path=str(resolved),
+        )
+
+    def is_available(
+        self,
+        executable: str,
+        *,
+        runtime: ToolRuntime = ToolRuntime.NATIVE,
+        search_path: str | None = None,
+    ) -> bool:
+        return self.probe(
+            executable, runtime=runtime, search_path=search_path
+        ).available
+
+    def run(
+        self,
+        request: ToolRunRequest | Sequence[str],
+        *,
+        cancellation: CancellationSignal | Any | None = None,
+        runtime: ToolRuntime = ToolRuntime.NATIVE,
+        limits: ToolRunLimits | None = None,
+        stdin: bytes | str | None = None,
+        input_files: Mapping[str, bytes | str] | None = None,
+        output_paths: Sequence[str] = (),
+        environment: Mapping[str, str] | None = None,
+        secrets: Sequence[str] = (),
+    ) -> ToolRunResult:
+        """Run one request and return a sanitized, non-raising operational result."""
+
+        if not isinstance(request, ToolRunRequest):
+            request = ToolRunRequest(
+                argv=tuple(request),
+                runtime=runtime,
+                limits=limits or ToolRunLimits(),
+                stdin=stdin,
+                input_files=input_files or {},
+                output_paths=tuple(output_paths),
+                environment=environment or {},
+                secrets=tuple(secrets),
+            )
+        self._validate_request(request)
+        if request.owned_process_observation and (type(self) is not BoundedToolRunner
+                or type(self._executor) is not SubprocessExecutor
+                or self._executor._popen is not subprocess.Popen
+                or not sys.platform.startswith("linux")):
+            raise ToolProcessError("owned observations require the exact native Linux bounded runner")
+        secret_values = self._secret_values(request)
+        redacted_command = _redact_command(request.argv, secret_values)
+        if _is_cancelled(cancellation):
+            return self._result(
+                request,
+                command=redacted_command,
+                raw=RawProcessResult(
+                    returncode=None,
+                    cancelled=True,
+                    error="cancelled before process start",
+                ),
+                outputs={},
+                secrets=secret_values,
+                workspace_cleaned=True,
+            )
+
+        resolved_argv = request.argv
+        if self._default_executor or self._executable_roots:
+            probe = self.probe(
+                request.argv[0],
+                runtime=request.runtime,
+                search_path=self._base_environment.get("PATH"),
+            )
+            if not probe.available:
+                return self._result(
+                    request,
+                    command=redacted_command,
+                    raw=RawProcessResult(
+                        returncode=None,
+                        error=probe.reason,
+                    ),
+                    outputs={},
+                    secrets=secret_values,
+                    workspace_cleaned=True,
+                    unavailable=True,
+                )
+            resolved_argv = (probe.executable_path, *request.argv[1:])
+
+        workspace_root = self._workspace_root
+        if workspace_root is not None:
+            workspace_root.mkdir(mode=0o700, parents=True, exist_ok=True)
+        temporary = tempfile.TemporaryDirectory(
+            prefix="logic-tool-",
+            dir=str(workspace_root) if workspace_root is not None else None,
+        )
+        workspace = Path(temporary.name).resolve()
+        owned_handle = None
+        owned_observation = None
+        try:
+            try:
+                os.chmod(workspace, 0o700)
+            except OSError:  # pragma: no cover - permissions differ on Windows.
+                pass
+            self._write_inputs(workspace, request)
+            expanded_argv = tuple(
+                self._expand_workspace_argument(argument, workspace, request.limits)
+                for argument in resolved_argv
+            )
+            invocation = ProcessInvocation(
+                argv=expanded_argv,
+                runtime=request.runtime,
+                cwd=workspace,
+                environment=MappingProxyType(
+                    self._environment(request.environment, workspace, request.limits)
+                ),
+                stdin=(
+                    None
+                    if request.stdin is None
+                    else _bytes(request.stdin, "stdin")
+                ),
+                limits=request.limits,
+                owned_process_observation=request.owned_process_observation,
+            )
+            execution_started = time.monotonic()
+            executor_failed = False
+            try:
+                raw = self._execute(invocation, cancellation)
+                owned_handle = raw.native_cleanup_handle
+            except OwnedToolCleanupError as error:
+                owned_handle = error.cleanup_handle
+                executor_failed = True
+                raw = RawProcessResult(returncode=None, resource_exhausted=True,
+                    error=_execution_exception_text(error), native_cleanup_handle=owned_handle)
+            except OSError as error:
+                executor_failed = True
+                raw = RawProcessResult(returncode=None, error=_execution_exception_text(error))
+            except Exception as error:
+                executor_failed = True
+                raw = RawProcessResult(
+                    returncode=None,
+                    error=f"executor failure: {type(error).__name__}: {_execution_exception_text(error)}",
+                )
+            outputs, files_truncated = self._read_outputs(workspace, request)
+            final_cancelled, final_timed_out = raw.cancelled, raw.timed_out
+
+            def stop_final_scan() -> bool:
+                nonlocal final_cancelled, final_timed_out
+                if executor_failed:
+                    # The original exception (possibly a failed cancellation
+                    # callback) already prevents success. Do not call it again
+                    # and replace the preserved execution/cleanup diagnostic.
+                    return True
+                if not (final_cancelled or final_timed_out):
+                    if _is_cancelled(cancellation):
+                        final_cancelled = True
+                    elif time.monotonic() >= execution_started + request.limits.timeout_seconds:
+                        final_timed_out = True
+                return final_cancelled or final_timed_out
+
+            usage = _inspect_workspace(workspace, request.limits, stop_requested=stop_final_scan)
+            stop_final_scan()
+            if final_cancelled or final_timed_out:
+                raw = replace(raw, cancelled=final_cancelled, timed_out=final_timed_out)
+            workspace_exceeded = raw.workspace_limit_exceeded or usage.limit_exceeded
+            if files_truncated or workspace_exceeded or usage.error:
+                raw = replace(
+                    raw,
+                    output_truncated=raw.output_truncated or files_truncated,
+                    resource_exhausted=raw.resource_exhausted or workspace_exceeded or bool(usage.error),
+                    workspace_limit_exceeded=workspace_exceeded,
+                    error="; ".join(filter(None, (raw.error, usage.error))),
+                    resource_observation=_tool_resource_post_workspace(raw.resource_observation,
+                        exceeded=workspace_exceeded, error=usage.error),
+                )
+            result = self._result(
+                request,
+                command=redacted_command,
+                raw=raw,
+                outputs=outputs,
+                secrets=secret_values,
+                workspace_cleaned=True,
+                workspace_limit_exceeded=workspace_exceeded,
+            )
+        finally:
+            if owned_handle is None:
+                temporary.cleanup()
+            else:
+                # Keep the TemporaryDirectory object and process handles alive
+                # on unresolved cleanup; its finalizer must not delete a live
+                # child's workspace when the caller unwinds its stack.
+                try:
+                    owned_handle.attach_workspace(temporary)
+                    owned_observation = owned_handle.retry_cleanup()
+                except BaseException as cleanup_error:
+                    raise OwnedToolCleanupError(owned_handle,
+                        "native cleanup observation failed: " + type(cleanup_error).__name__) from cleanup_error
+                if not owned_observation.cleanup_confirmed:
+                    raise OwnedToolCleanupError(owned_handle,
+                        "native process, pipe or workspace cleanup is unresolved")
+        if owned_observation is not None:
+            result = replace(result, native_lifecycle=owned_observation, workspace_cleaned=True)
+        return result
+
+    def _execute(
+        self, invocation: ProcessInvocation, cancellation: Any | None
+    ) -> RawProcessResult:
+        execute = getattr(self._executor, "execute", None)
+        raw = (
+            execute(invocation, cancellation)
+            if callable(execute)
+            else self._executor(invocation, cancellation)  # type: ignore[operator]
+        )
+        if not isinstance(raw, RawProcessResult):
+            raise TypeError("executor must return RawProcessResult")
+        return raw
+
+    @staticmethod
+    def _validate_request(request: ToolRunRequest) -> None:
+        limits = request.limits
+        if not request.argv or len(request.argv) > limits.max_arguments:
+            raise ToolProcessError(
+                f"argv must contain 1..{limits.max_arguments} arguments"
+            )
+        argument_bytes = 0
+        for argument in request.argv:
+            if (
+                not isinstance(argument, str)
+                or not argument
+                or "\x00" in argument
+            ):
+                raise ToolProcessError(
+                    "argv entries must be non-empty strings without NUL"
+                )
+            argument_bytes += len(argument.encode("utf-8"))
+        if argument_bytes > limits.max_argument_bytes:
+            raise ToolProcessError(
+                f"argv exceeds {limits.max_argument_bytes} encoded bytes"
+            )
+        if request.stdin is not None and len(_bytes(request.stdin, "stdin")) > limits.max_input_bytes:
+            raise ToolProcessError("stdin exceeds max_input_bytes")
+        if len(request.output_paths) > limits.max_output_files:
+            raise ToolProcessError("too many declared output paths")
+        paths = [
+            _validate_workspace_path(path, limits)
+            for path in request.output_paths
+        ]
+        if len(paths) != len(set(paths)):
+            raise ToolProcessError("declared output paths must be unique")
+        input_total = 0
+        normalized_inputs: set[PurePosixPath] = set()
+        for path, content in request.input_files.items():
+            normalized = _validate_workspace_path(path, limits)
+            if normalized in normalized_inputs:
+                raise ToolProcessError("input paths must be unique")
+            normalized_inputs.add(normalized)
+            input_total += len(_bytes(content, f"input file {path!r}"))
+        if input_total > limits.max_input_bytes:
+            raise ToolProcessError("input files exceed max_input_bytes")
+        if (
+            request.stdin is not None
+            and input_total + len(_bytes(request.stdin, "stdin"))
+            > limits.max_input_bytes
+        ):
+            raise ToolProcessError("combined stdin and input files exceed max_input_bytes")
+        for name, value in request.environment.items():
+            if (
+                not isinstance(name, str)
+                or not name
+                or "=" in name
+                or "\x00" in name
+                or not isinstance(value, str)
+                or "\x00" in value
+            ):
+                raise ToolProcessError(
+                    "environment keys and values must be valid NUL-free strings"
+                )
+        for secret in request.secrets:
+            if not isinstance(secret, str) or not secret:
+                raise ToolProcessError("secrets must be non-empty strings")
+
+    @staticmethod
+    def _write_inputs(workspace: Path, request: ToolRunRequest) -> None:
+        for relative, content in request.input_files.items():
+            path = workspace.joinpath(*_validate_workspace_path(relative, request.limits).parts)
+            path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+            try:
+                path.write_bytes(_bytes(content, f"input file {relative!r}"))
+            except OSError as error:
+                raise ToolProcessError(
+                    f"could not materialize input file {relative!r}: {error}"
+                ) from error
+
+    @staticmethod
+    def _expand_workspace_argument(
+        argument: str, workspace: Path, limits: ToolRunLimits
+    ) -> str:
+        if WORKSPACE_PLACEHOLDER not in argument:
+            return argument
+        if argument == WORKSPACE_PLACEHOLDER:
+            return str(workspace)
+        prefix = f"{WORKSPACE_PLACEHOLDER}/"
+        if not argument.startswith(prefix):
+            raise ToolProcessError(
+                "{workspace} may only be an argument or an argument prefix"
+            )
+        relative = _validate_workspace_path(argument[len(prefix) :], limits)
+        return str(workspace.joinpath(*relative.parts))
+
+    def _environment(
+        self,
+        requested: Mapping[str, str],
+        workspace: Path,
+        limits: ToolRunLimits,
+    ) -> dict[str, str]:
+        environment = dict(self._base_environment)
+        environment.update(requested)
+        isolated = str(workspace)
+        environment.update(
+            {
+                "HOME": isolated,
+                "TMPDIR": isolated,
+                "TMP": isolated,
+                "TEMP": isolated,
+            }
+        )
+        size = sum(
+            len(name.encode("utf-8")) + len(value.encode("utf-8")) + 2
+            for name, value in environment.items()
+        )
+        if size > limits.max_environment_bytes:
+            raise ToolProcessError("environment exceeds max_environment_bytes")
+        return environment
+
+    @staticmethod
+    def _secret_values(request: ToolRunRequest) -> tuple[str, ...]:
+        values = set(request.secrets)
+        values.update(
+            value
+            for name, value in request.environment.items()
+            if value and _SENSITIVE_NAME.search(name)
+        )
+        return tuple(sorted(values, key=len, reverse=True))
+
+    @staticmethod
+    def _read_outputs(
+        workspace: Path, request: ToolRunRequest
+    ) -> tuple[dict[str, bytes], bool]:
+        outputs: dict[str, bytes] = {}
+        truncated = False
+        for relative in request.output_paths:
+            path = workspace.joinpath(
+                *_validate_workspace_path(relative, request.limits).parts
+            )
+            try:
+                info = path.lstat()
+            except FileNotFoundError:
+                continue
+            except OSError:
+                continue
+            if not stat.S_ISREG(info.st_mode) or path.is_symlink():
+                continue
+            with path.open("rb") as handle:
+                content = handle.read(request.limits.max_output_bytes + 1)
+            if len(content) > request.limits.max_output_bytes:
+                content = content[: request.limits.max_output_bytes]
+                truncated = True
+            outputs[relative] = content
+        return outputs, truncated
+
+    @staticmethod
+    def _result(
+        request: ToolRunRequest,
+        *,
+        command: tuple[str, ...],
+        raw: RawProcessResult,
+        outputs: Mapping[str, bytes],
+        secrets: Sequence[str],
+        workspace_cleaned: bool,
+        unavailable: bool = False,
+        workspace_limit_exceeded: bool = False,
+    ) -> ToolRunResult:
+        workspace_limit_exceeded = workspace_limit_exceeded or raw.workspace_limit_exceeded
+        stdout, stdout_truncated = _bounded_redacted_text(
+            raw.stdout, secrets, request.limits.max_output_bytes
+        )
+        stderr, stderr_truncated = _bounded_redacted_text(
+            raw.stderr, secrets, request.limits.max_output_bytes
+        )
+        error, error_truncated = _bounded_redacted_text(
+            raw.error, secrets, request.limits.max_output_bytes
+        )
+        sanitized_outputs: dict[str, bytes] = {}
+        file_redaction_truncated = False
+        for path, content in outputs.items():
+            sanitized = _redact_output_bytes(content, secrets)
+            if len(sanitized) > request.limits.max_output_bytes:
+                sanitized = sanitized[: request.limits.max_output_bytes]
+                file_redaction_truncated = True
+            sanitized_outputs[path] = sanitized
+        if raw.cancelled:
+            reason = "cancelled"
+        elif raw.timed_out:
+            reason = "timeout"
+        elif workspace_limit_exceeded or raw.resource_exhausted:
+            reason = "resource_limit"
+        elif unavailable:
+            reason = "unavailable"
+        elif raw.returncode not in (0, None):
+            reason = "nonzero_exit"
+        elif raw.error:
+            reason = "error"
+        else:
+            reason = "completed"
+        return ToolRunResult(
+            interface_version=BOUNDED_TOOL_RUNNER_VERSION,
+            runtime=request.runtime,
+            command=command,
+            returncode=raw.returncode,
+            stdout=stdout,
+            stderr=stderr,
+            elapsed_seconds=max(0.0, float(raw.elapsed_seconds)),
+            output_files=MappingProxyType(sanitized_outputs),
+            pid=raw.pid,
+            timed_out=raw.timed_out,
+            cancelled=raw.cancelled,
+            unavailable=unavailable,
+            output_truncated=(
+                raw.output_truncated
+                or stdout_truncated
+                or stderr_truncated
+                or error_truncated
+                or file_redaction_truncated
+            ),
+            workspace_limit_exceeded=workspace_limit_exceeded,
+            process_tree_terminated=raw.process_tree_terminated,
+            resource_exhausted=raw.resource_exhausted or workspace_limit_exceeded,
+            workspace_cleaned=workspace_cleaned,
+            termination_reason=reason,
+            error=error,
+            native_lifecycle=raw.native_lifecycle,
+            resource_observation=raw.resource_observation,
+        )
+
+
+def _bounded_redacted_text(
+    value: bytes | str,
+    secrets: Sequence[str],
+    limit: int,
+) -> tuple[str, bool]:
+    encoded = value if isinstance(value, bytes) else str(value).encode("utf-8")
+    truncated = len(encoded) > limit
+    text = encoded[:limit].decode("utf-8", errors="replace")
+    redacted = _redact_text(text, secrets)
+    redacted_bytes = redacted.encode("utf-8")
+    if len(redacted_bytes) > limit:
+        truncated = True
+        redacted = redacted_bytes[:limit].decode("utf-8", errors="replace")
+    return redacted, truncated
+
+
+def _redact_output_bytes(content: bytes, secrets: Sequence[str]) -> bytes:
+    result = content
+    for secret in sorted(
+        {secret for secret in secrets if isinstance(secret, str) and secret},
+        key=len,
+        reverse=True,
+    ):
+        result = result.replace(secret.encode("utf-8"), REDACTION.encode("utf-8"))
+    return result
+
+
+# Stable descriptive aliases used by adapters with command-oriented naming.
+ProcessLimits = ToolRunLimits
+CommandRequest = ToolRunRequest
+CommandResult = ToolRunResult
+NativeProcessExecutor = SubprocessExecutor
+
+
+__all__ = [
+    "BOUNDED_TOOL_RUNNER_VERSION",
+    "UNIVERSAL_BOUNDED_TOOL_LIFECYCLE_VERSION",
+    "UNIVERSAL_TOOL_RUNTIMES",
+    "WORKSPACE_PLACEHOLDER",
+    "BoundedStdinObservation",
+    "BoundedToolRunner",
+    "CancellationSignal",
+    "CancellationToken",
+    "CommandRequest",
+    "CommandResult",
+    "NativeProcessExecutor",
+    "NativeProcessIdentity",
+    "NativeToolCleanupHandle",
+    "NativeToolLifecycleObservation",
+    "OwnedToolCleanupError",
+    "ProcessExecutor",
+    "ProcessInvocation",
+    "ProcessLimits",
+    "RawProcessResult",
+    "SubprocessExecutor",
+    "ToolProbe",
+    "ToolProcessError",
+    "ToolRunLimits",
+    "ToolRunRequest",
+    "ToolRunResult",
+    "ToolRuntime",
+    "UniversalBoundedToolLifecycle",
+    "run_bounded_stdin_tool",
+    "tool_limits_from_milliseconds",
+]

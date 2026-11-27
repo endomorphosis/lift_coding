@@ -1,0 +1,160 @@
+{
+  "Source_tests_CI_model_or_Native_replayed_by_publisher": false,
+  "accelerate_HEAD_tree_index_refs_preserved": true,
+  "actual_push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "actual_push_outputs": {
+    "datasets": {
+      "observed_exit_code": 0,
+      "stderr": "remote: \nremote: GitHub found 150 vulnerabilities on endomorphosis/ipfs_datasets_py's default branch (8 critical, 77 high, 58 moderate, 7 low). To find out more, visit:        \nremote:      https://github.com/endomorphosis/ipfs_datasets_py/security/dependabot        \nremote:",
+      "stdout": "To https://github.com/endomorphosis/ipfs_datasets_py.git\n \t1538e52c22f12fcad6a22aef0a0e1a4d32dac5ae:refs/heads/main\t75b8c9c352..1538e52c22\nDone"
+    },
+    "hallucinate": {
+      "observed_exit_code": 0,
+      "stderr": "",
+      "stdout": "To https://github.com/endomorphosis/hallucinate_app.git\n \tb052ea6b677a5d5dec58182881cc4f73eba44091:refs/heads/main\t9e4daa1..b052ea6\nDone"
+    },
+    "root": {
+      "observed_exit_code": 0,
+      "stderr": "",
+      "stdout": "To https://github.com/endomorphosis/lift_coding.git\n \t5f9a30fb6343c1f278feec6d023ff71be14a0503:refs/heads/main\t6049d793fb..5f9a30fb63\nDone"
+    }
+  },
+  "all_checkouts_clean": true,
+  "all_other_gitlinks_preserved": true,
+  "earlier_control_pin_and_import_refusals_retained": true,
+  "force_or_tags": false,
+  "frozen_D_index_unchanged": true,
+  "frozen_candidate": {
+    "bytes": 3846,
+    "full9": {
+      "st_ctime_ns": "1795555620243524738",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862885",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795555620243524738",
+      "st_nlink": "1",
+      "st_size": "3846",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-P7-typed-proof-sample-two-file-local-freeze-v227.json",
+    "sha256": "84f25c11dd790fdc81d5e089ea2389cbb834112857a404653b58dfdad9d1edf4"
+  },
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "75b8c9c35297b2d69612868f457c4cd12542cf97",
+        "to": "1538e52c22f12fcad6a22aef0a0e1a4d32dac5ae"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "75b8c9c35297b2d69612868f457c4cd12542cf97",
+        "to": "1538e52c22f12fcad6a22aef0a0e1a4d32dac5ae"
+      },
+      "hallucinate_app": {
+        "from": "9e4daa10d7b063e0056069a56a83993df7a3ee5f",
+        "to": "b052ea6b677a5d5dec58182881cc4f73eba44091"
+      }
+    }
+  },
+  "local_after": {
+    "accelerate": {
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "index_and_worktree_clean": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "head": "1538e52c22f12fcad6a22aef0a0e1a4d32dac5ae",
+      "index_and_worktree_clean": true,
+      "tree": "c1a9370818ea8eccf59372600159dcaa3c51a31f"
+    },
+    "hallucinate": {
+      "head": "b052ea6b677a5d5dec58182881cc4f73eba44091",
+      "index_and_worktree_clean": true,
+      "tree": "911c685f876a442818bba0dcc20b42d1e9effd4e"
+    },
+    "root": {
+      "head": "5f9a30fb6343c1f278feec6d023ff71be14a0503",
+      "index_and_worktree_clean": true,
+      "tree": "9669313602730c7b880e3e69581bf8e002b27893"
+    }
+  },
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "1538e52c22f12fcad6a22aef0a0e1a4d32dac5ae",
+    "hallucinate": "b052ea6b677a5d5dec58182881cc4f73eba44091",
+    "root": "5f9a30fb6343c1f278feec6d023ff71be14a0503"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "75b8c9c35297b2d69612868f457c4cd12542cf97",
+    "hallucinate": "9e4daa10d7b063e0056069a56a83993df7a3ee5f",
+    "root": "6049d793fb5bbd5a603cc2ea19540ef959bb5c0a"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "qualification": {
+    "Source_resources_and_workspaces_closed": true,
+    "bytes": 6488,
+    "errors": 0,
+    "failures": 0,
+    "full9": {
+      "st_ctime_ns": "1795557845321445098",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72098165",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795557845321445098",
+      "st_nlink": "1",
+      "st_size": "6488",
+      "st_uid": "1000"
+    },
+    "new_cases": 5,
+    "path": "/tmp/Root-P7-typed-feedback72-modal-closed-selected-v237-llscaxax/Root-P7-ordinary72-qualified-Source-resource-closed-small-v237.json",
+    "raw_JUnit": {
+      "bytes": 14709,
+      "full9": {
+        "st_ctime_ns": "1795557779289076908",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72098173",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795557779289076908",
+        "st_nlink": "1",
+        "st_size": "14709",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-P7-typed-feedback72-modal-closed-selected-v237-llscaxax/actual-output/phase7-typed-feedback72-run-result0-output1.bin",
+      "sha256": "f449ba8066d3e600e3d9a159e2f1cf86b8f1101567b5c31688996f88840920cd"
+    },
+    "retained_cases": 67,
+    "sha256": "f1ca7ff8b21f304d679f6e7397af6c0773a8696931ca4d6791e3dc36e12f7aba",
+    "skips": 0,
+    "unique_cases": 72
+  },
+  "qualification_scope": "Bounded software fixtures with authored in-memory updates; no pretrained model fit, Native kernel or legal authority claim.",
+  "schema": "actual-P7-typed-proof-sample-ordinary72-three-FF-publication/v237",
+  "selected_role_blobs": [
+    {
+      "blob": "37265225393a19b2c58ee0ead946929090b51d23",
+      "bytes": 40652,
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "sha256": "5274253f346efe110c5a69eec161e5dcb51ce858fae5f3275c045528b32273a5"
+    },
+    {
+      "blob": "754d53a96072b21bcabb8a44a4fc615b4cf1152f",
+      "bytes": 37429,
+      "relative_path": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+      "sha256": "9ea38219594c8f5841fec7dbd2ad6da8925147eda44cb0ca9df2cff0fc5a2d7e"
+    }
+  ]
+}

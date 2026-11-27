@@ -1,0 +1,219 @@
+{
+  "V3_retention_roster": [
+    "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[direct]",
+    "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[nested]",
+    "test_full_fictional_definition_object_use_and_mixed_use_replay",
+    "test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load",
+    "test_old_generation_source_pin_cannot_be_rehashed_into_current_v2_preparation",
+    "test_v3_sibling_preserves_v2_source_and_binds_current_producers",
+    "test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]",
+    "test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]",
+    "test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]",
+    "test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict]",
+    "test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict]",
+    "test_reviewed_v3_cross_reference_version_consistency[shared-equal]",
+    "test_reviewed_v3_cross_reference_version_consistency[distinct-identities]",
+    "test_current_trust_controls_reject_even_genuine_signatures[revoked-key-key_revoked]"
+  ],
+  "actual_private_pytest": {
+    "green": {
+      "errors": 0,
+      "evidence": [
+        {
+          "bytes": 2746,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/green/run.json",
+          "sha256": "4a95e4de9c0248905a116e885200eff651f127ae0781f1c94145d59f24e14e9a"
+        },
+        {
+          "bytes": 3214,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/green/result.xml",
+          "sha256": "ccb9a829dabf80de3a4fbdcf6c278b8769099f3b3c4168ab6271cb83ec09b731"
+        },
+        {
+          "bytes": 338,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/green/stdout.DATA",
+          "sha256": "3a5f204b33c47b8d398cf861688d2b21a7ab2d7a9079ee388978f44fdd0f01dc"
+        },
+        {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/green/stderr.DATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "failures": 0,
+      "passes": 15,
+      "process_rc": 0,
+      "skips": 0
+    },
+    "red": {
+      "errors": 0,
+      "evidence": [
+        {
+          "bytes": 2742,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/red/run.json",
+          "sha256": "f4fb5954a9f00824e610bd00566ba428f6b74c9633f205f8c787e840d7d6dc0b"
+        },
+        {
+          "bytes": 4520,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/red/result.xml",
+          "sha256": "014405369b1c8f0711c25eb05d7667e4d09d7bed930df0d9081b3567426c1a63"
+        },
+        {
+          "bytes": 1918,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/red/stdout.DATA",
+          "sha256": "e2fbced1ece7b94ed03770a67e45e94089a39cf9b3a13d9de961e4db237c5320"
+        },
+        {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/red/stderr.DATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "failures": 2,
+      "passes": 13,
+      "process_rc": 1,
+      "skips": 0
+    },
+    "v3-retention": {
+      "errors": 0,
+      "evidence": [
+        {
+          "bytes": 2663,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/v3-retention/run.json",
+          "sha256": "bfaeb711f031549c5e855b45123dc87a93b9857f4d2458976a8ea9aa7913bc99"
+        },
+        {
+          "bytes": 2788,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/v3-retention/result.xml",
+          "sha256": "9139d7c86062d63da38c80b4c10447939d2f873e64b380d7f377e3e349f3be5f"
+        },
+        {
+          "bytes": 345,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/v3-retention/stdout.DATA",
+          "sha256": "481ffe63f613fff04f96f2e07a056dec602a1a665597ae7a84b30ca00d1b8ef5"
+        },
+        {
+          "bytes": 0,
+          "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/v3-retention/stderr.DATA",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "failures": 0,
+      "passes": 14,
+      "process_rc": 0,
+      "skips": 0
+    }
+  },
+  "base_tree": "dc3a536a8b86cfdf37fbc683bb8eff9c01550f7b",
+  "byte_exact_roundtrip": true,
+  "canonical_installation": null,
+  "canonical_source_files": {
+    "owner": {
+      "after": {
+        "bytes": 89622,
+        "git_blob": "f2f1151c8bb3b834e14da8b0ae941ff13728ce53",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/owner.after.py.DATA",
+        "sha256": "5532f9f5e8899ea3aee4f52c6bf309dfd59695dc5a7894704885ce0c1ee6ddfa"
+      },
+      "before": {
+        "bytes": 89284,
+        "git_blob": "b6b4612aacefb1620329b7fb8ae3475a23bec89d",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/owner.before.py.DATA",
+        "sha256": "fd43ce8ab0263b34ad1f3c37ebceecdf3ea73500584dced589208cf1f831e13e"
+      },
+      "canonical_path": "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py",
+      "mode": "100644"
+    },
+    "test": {
+      "after": {
+        "bytes": 129055,
+        "git_blob": "ded31ed3ad317c4ca1584847e49c992b0c031dda",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/test.after.py.DATA",
+        "sha256": "91b0714f2a07c83dceb75fb803e21aa81e41806f6872947e2ed49318a6351965"
+      },
+      "before": {
+        "bytes": 125523,
+        "git_blob": "b531d4b67134a980648aec910fed88733941afde",
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/test.before.py.DATA",
+        "sha256": "80ca1e89438287270e68591c3dad6498fd017c53f11254ce53b4c981d819d778"
+      },
+      "canonical_path": "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py",
+      "mode": "100644"
+    }
+  },
+  "current_remote_base": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+  "exact_current_130_Git_fixture_inputs": {
+    "bytes": 38410,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/current-fixture-epoch.json",
+    "sha256": "9792085df2b134898ec01399d35638dddd5b11eb6babbbc8530771bfd9b0f6bf"
+  },
+  "forward_patch": {
+    "bytes": 5619,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/exact-two.forward.patch.DATA",
+    "sha256": "417de3dc94483c1591e178751e9444129f2dd968337abf744f69e02364344147"
+  },
+  "inverse_patch": {
+    "bytes": 5619,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/exact-two.inverse.patch.DATA",
+    "sha256": "7a979779a0b26ac99f1faab85913756e8b0c45aef75be672e966aec0f6a5fa4c"
+  },
+  "local_candidate_commit": {
+    "isolated_store": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/publish-all-20261126-nsFFGMUO/datasets.git",
+    "oid": "45e4cca444029036fb847ff0ffcd63096f7c67a5",
+    "parent": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+    "ref": "refs/reconciliation/pending-v2-governing-definition-20261127",
+    "tree": "651de7ce738ee15dc4b6d153f3f359c7406cdc17"
+  },
+  "ordinary_qualification": null,
+  "profile": {
+    "CPU_s": 55,
+    "address_space_bytes": 536870912,
+    "cpu_slots": 1,
+    "launcher": {
+      "bytes": 2648,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/run-private-current.py",
+      "sha256": "6bb3a5cfd8f3db5cc4a824ffe7977e0884ce90ae233e89b653d54cd87fd3da3c"
+    },
+    "retained_runner": {
+      "bytes": 2733,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/existing-runner.py.DATA",
+      "sha256": "37b0cd50f0ce9d5ef5fd38e29d040211401365253595255b74fa60becba76132"
+    },
+    "wall_s": 60
+  },
+  "published_V3_guard_ancestor": "c5a72c90394d86a54cb93cc3a2187da954a2677f",
+  "remote_publication": null,
+  "retained_V3_current_Git_source_and_test": {
+    "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py": {
+      "bytes": 35250,
+      "git_blob": "d2959d73378a870453c48775692fa6462d154a5d",
+      "sha256": "1b294d2d896f715c7fe667cf194e2a04bc681705af558a535d55210b4cacf917",
+      "updated_since_8ba": true
+    },
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py": {
+      "bytes": 34149,
+      "git_blob": "57cba9cbfe55bf91fa8377808cd853d7d39c9059",
+      "sha256": "b33ec128970c9601583df4cf9b8c78744a7def25af3a497eb6bed7194c183a91",
+      "updated_since_8ba": true
+    }
+  },
+  "same_ordered_V2_roster": [
+    "test_reviewed_v2_requires_nonrecursive_governing_definition[independent]",
+    "test_reviewed_v2_requires_nonrecursive_governing_definition[identity]",
+    "test_reviewed_v2_requires_nonrecursive_governing_definition[nested-self-use]",
+    "test_reviewed_v2_complete_fictional_transition_uses_full_sources_and_typed_ir",
+    "test_reviewed_v2_resealed_positive_report_requires_complete_public_replay",
+    "test_reviewed_v2_synthetic_trust_cannot_be_promoted_to_production_review",
+    "test_reviewed_v2_relabeling_one_physical_paragraph_cannot_supply_two_statutory_uses",
+    "test_reviewed_v2_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+    "test_reviewed_v2_manifest_refresh_preserves_shared_uses_and_refuses_conflicting_bytes[False]",
+    "test_reviewed_v2_manifest_refresh_preserves_shared_uses_and_refuses_conflicting_bytes[True]",
+    "test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+    "test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+    "test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+    "test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+    "test_reviewed_v2_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]"
+  ],
+  "schema": "phase2-V2-direct-self-reference-fix-on-published-V3-epoch/v1",
+  "scope": "Fictional admission. V2 self-pin advances; V3 source and prior signed archives are preserved. Fresh V2/V3 fixture commitments regenerated."
+}

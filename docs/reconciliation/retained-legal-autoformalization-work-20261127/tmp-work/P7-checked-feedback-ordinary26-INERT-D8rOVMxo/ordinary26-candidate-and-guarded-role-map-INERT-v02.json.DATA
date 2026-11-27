@@ -1,0 +1,640 @@
+{
+  "preserved_published_parent": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+  "expected_current_A_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+  "candidate_roles": {
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py": {
+      "relative_path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "published_preimage": {
+        "bytes": 60953,
+        "sha256": "c0bc4092d301318619aec4e109a661da65a86816b9754fb5e73106cb910712f3",
+        "git_blob": "1f3d36a0c1cc595c1797b0f471720546ddc6c520",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/legal_ir_proof_feedback.after.py.DATA",
+        "bytes": 74557,
+        "sha256": "5c44d695c17fab26d6bba70d544e57a7bd0b5fd5b2434f810c9656db13926478",
+        "git_blob": "3c2cc1443e9f96a611a81052c0e13f7b6634248e"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "published_preimage": {
+        "bytes": 1428092,
+        "sha256": "fd80bf985b3f544a43d6d389feadac49bd33b55ba891d43d155574652c46a35d",
+        "git_blob": "b527db1c29a5e0ba13c13f2adf5a0f8be925ed7e",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/modal.after.DATA",
+        "bytes": 1429059,
+        "sha256": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447",
+        "git_blob": "6c03d227e6a43439395ec37a5d280aebf30b7460"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+      "published_preimage": {
+        "bytes": 41332,
+        "sha256": "4d82c053d90cd30e666b75323fdc5e7eb4b4a613a23e5044a8098a7ecc5e7492",
+        "git_blob": "3e08a06029424257f8aa9df72a4a12d29c0d9547",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/ablation.after-v02.DATA",
+        "bytes": 41765,
+        "sha256": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc",
+        "git_blob": "ec28c41fffdb7013d8b73ccc2ba70f1231316019"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "published_preimage": {
+        "bytes": 40652,
+        "sha256": "5274253f346efe110c5a69eec161e5dcb51ce858fae5f3275c045528b32273a5",
+        "git_blob": "37265225393a19b2c58ee0ead946929090b51d23",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/trainer.checked-route.after.py.DATA",
+        "bytes": 42453,
+        "sha256": "cd37964aa4a497e8d778ae0e6a90fe87f3362ead8c9a3751a5a3288b7370ed2e",
+        "git_blob": "f185deec8ddbfc25db15352cc15def76bb5ab351"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py": {
+      "relative_path": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+      "published_preimage": {
+        "bytes": 37429,
+        "sha256": "9ea38219594c8f5841fec7dbd2ad6da8925147eda44cb0ca9df2cff0fc5a2d7e",
+        "git_blob": "754d53a96072b21bcabb8a44a4fc615b4cf1152f",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/test_trusted_feedback_weight_updates.checked-final.py.DATA",
+        "bytes": 61378,
+        "sha256": "f15cc994ea8a8ae5f8d34c1c16572481ff7c73398fce068af4a3ec5bced9915b",
+        "git_blob": "4197a32e166b0582b3229439425749fff8f26dc8"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py": {
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py",
+      "published_preimage": {
+        "bytes": 8639,
+        "sha256": "2cbd48b08c48175f36bbd6a4380b1a1fcb2f108fcd7d81cede5151ced10eb54e",
+        "git_blob": "dd11af058186d651fbe94588395494a09a72828c",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/test_proof_feedback_ablation.test.after.DATA",
+        "bytes": 9778,
+        "sha256": "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414",
+        "git_blob": "57ef63daf94a901365822cddb3ea1054fca2646c"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py": {
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py",
+      "published_preimage": {
+        "bytes": 11156,
+        "sha256": "3445e906f9bdb8a4986489dc57bf0ab06773bcd074fba3edef7301023699743c",
+        "git_blob": "af6bf4ff9ad59d7fbe3c1ac8d324e58b437f9c53",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/Phase7-existing-proof-cache-fixture-migration-private-EjL1ZzNP/test_modal_autoencoder_proof_heads.with-bound-feedback-fixture.py.DATA",
+        "bytes": 16426,
+        "sha256": "892386e52414fda1b3eac441aaa900630ffaf755140739d053df29ce75c2ed4a",
+        "git_blob": "b91b53344561d723bb28d9d0f6b71d3aaa7e3d7c"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py": {
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py",
+      "published_preimage": {
+        "bytes": 8328,
+        "sha256": "437985f7dd86b5a280edb865eb46ccdb46244ba8e64acfc99d6677040f42b1d7",
+        "git_blob": "7d671b8c3c440731fc2ee48c15999b0d0c6766c9",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/Phase7-existing-proof-cache-fixture-migration-private-EjL1ZzNP/test_trainable_legal_ir_objective.with-bound-feedback-fixture.py.DATA",
+        "bytes": 9648,
+        "sha256": "ead71235b234846d6444678459d3fdd03bd10c0955783dcbd8f2f7d3cdf503a6",
+        "git_blob": "cf976daddf3adc045c604c5a58c12ae9cc4f0543"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "tests/unit/logic/legal_ir/test_proof_cache.py": {
+      "relative_path": "tests/unit/logic/legal_ir/test_proof_cache.py",
+      "published_preimage": {
+        "bytes": 97545,
+        "sha256": "4e012101e4400324175c02d296b51abde97d065c76abfddef1b51d16329f639d",
+        "git_blob": "4525114941200e1d74adf6b45449e03b2dd2c1a2",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/test_proof_cache.checked-artifact-fixture.after.py.DATA",
+        "bytes": 98509,
+        "sha256": "087c587b4f35f61f08f2c8f9bba768893dfa1e57f3645976faa38e7927e02414",
+        "git_blob": "03ea849ebdb3c818af1e56d8ee44add38af030ee"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    }
+  },
+  "guarded_module_roles": {
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.trusted_feedback_trainer": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "published_preimage": {
+        "bytes": 40652,
+        "sha256": "5274253f346efe110c5a69eec161e5dcb51ce858fae5f3275c045528b32273a5",
+        "git_blob": "37265225393a19b2c58ee0ead946929090b51d23",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/trainer.checked-route.after.py.DATA",
+        "bytes": 42453,
+        "sha256": "cd37964aa4a497e8d778ae0e6a90fe87f3362ead8c9a3751a5a3288b7370ed2e",
+        "git_blob": "f185deec8ddbfc25db15352cc15def76bb5ab351"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "ipfs_datasets_py.logic.integration.reasoning.legal_ir_learned_guidance": {
+      "relative_path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_learned_guidance.py",
+      "published_preimage": {
+        "bytes": 54518,
+        "sha256": "2068698a282fa30b3eece259c6b8dddc28c2f0f518b1cc169384c17d03229ba8",
+        "git_blob": "1b449791d94397cd812323c21ff8307fbfd7fc3e",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback": {
+      "relative_path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "published_preimage": {
+        "bytes": 60953,
+        "sha256": "c0bc4092d301318619aec4e109a661da65a86816b9754fb5e73106cb910712f3",
+        "git_blob": "1f3d36a0c1cc595c1797b0f471720546ddc6c520",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/legal_ir_proof_feedback.after.py.DATA",
+        "bytes": 74557,
+        "sha256": "5c44d695c17fab26d6bba70d544e57a7bd0b5fd5b2434f810c9656db13926478",
+        "git_blob": "3c2cc1443e9f96a611a81052c0e13f7b6634248e"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_samples": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_samples.py",
+      "published_preimage": {
+        "bytes": 6258,
+        "sha256": "e46d794d38971343d8f3aed68fb224e5b44292cf9f4b8c973dedc20db5651b87",
+        "git_blob": "58b4374b825a3228ed46b6a5f1bc5807c03a30fc",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "published_preimage": {
+        "bytes": 1428092,
+        "sha256": "fd80bf985b3f544a43d6d389feadac49bd33b55ba891d43d155574652c46a35d",
+        "git_blob": "b527db1c29a5e0ba13c13f2adf5a0f8be925ed7e",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/modal.after.DATA",
+        "bytes": 1429059,
+        "sha256": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447",
+        "git_blob": "6c03d227e6a43439395ec37a5d280aebf30b7460"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_grammar_decoder": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+      "published_preimage": {
+        "bytes": 146870,
+        "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd",
+        "git_blob": "446ea6eb734d8586a060f64fc56bf198e312aabe",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_registry": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_registry.py",
+      "published_preimage": {
+        "bytes": 519367,
+        "sha256": "e8a79d5612f50d3a842b72e618fc1903094dc4dd225688d9cb2d67bb4b0cb00a",
+        "git_blob": "573d23777a29a2e29e125ea16a6ae8417d407e75",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_state_version": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_version.py",
+      "published_preimage": {
+        "bytes": 22278,
+        "sha256": "136756e14822dcec8158fb2718417972096842de74c4e841f08df28f1c7a028e",
+        "git_blob": "a76ffc8439c5ab5eca9b98e70f7c778d66e25e98",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_state_transaction": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_transaction.py",
+      "published_preimage": {
+        "bytes": 17051,
+        "sha256": "c4da0ecd5ebb0ba83d91a3683f049b163662211afb216cacacf86bdd7a4b48d3",
+        "git_blob": "3ceaec82db19c01cf1d9f365bbdc21aba2472c37",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.projection_profiler": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/projection_profiler.py",
+      "published_preimage": {
+        "bytes": 10801,
+        "sha256": "c5c5179cce6df49f694523b999f61cc8a842fa71424af956893400d574e3b4e8",
+        "git_blob": "6a152d4d394a36b185475db59329a47b7c37f25e",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_adaptive_optimizer": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py",
+      "published_preimage": {
+        "bytes": 21228,
+        "sha256": "dcd3a885820e7985ebec458a80325fe00d4d50656cf5827a828dd9cb45eb2524",
+        "git_blob": "9192b908d3afed67bf8fcec679b05613a1034e61",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_view_diagnostic": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_view_diagnostic.py",
+      "published_preimage": {
+        "bytes": 8430,
+        "sha256": "1937169c7d49409b89b00c2b2c9d1d9e955ab3f37f15122931b79be9bb0c36ba",
+        "git_blob": "c03881a6c0b9d7e3d6a7f204c1811693d0898997",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "ipfs_datasets_py.logic.backends.process": {
+      "relative_path": "ipfs_datasets_py/logic/backends/process.py",
+      "published_preimage": {
+        "bytes": 109707,
+        "sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7",
+        "git_blob": "1650b31bd0aa342f3614bf9999e9b6010fba17ee",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "ipfs_datasets_py.logic.backends.resource_admission": {
+      "relative_path": "ipfs_datasets_py/logic/backends/resource_admission.py",
+      "published_preimage": {
+        "bytes": 19806,
+        "sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8",
+        "git_blob": "4ec4a57c8fb7e058cf92e9b0a42cd1940290fb4f",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "published_preimage": {
+        "bytes": 151350,
+        "sha256": "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3",
+        "git_blob": "54dc1effc87deb3fba782f1b9df4db460ffb4f1a",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.proof_feedback_ablation": {
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+      "published_preimage": {
+        "bytes": 41332,
+        "sha256": "4d82c053d90cd30e666b75323fdc5e7eb4b4a613a23e5044a8098a7ecc5e7492",
+        "git_blob": "3e08a06029424257f8aa9df72a4a12d29c0d9547",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/ablation.after-v02.DATA",
+        "bytes": 41765,
+        "sha256": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc",
+        "git_blob": "ec28c41fffdb7013d8b73ccc2ba70f1231316019"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "ipfs_datasets_py.logic.legal_ir.proof_cache": {
+      "relative_path": "ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+      "published_preimage": {
+        "bytes": 62643,
+        "sha256": "9b05a2f890f2df62931273f2448182af8a2d99af73248c5c67ef2ec3d04b0c3c",
+        "git_blob": "5f4b9e8eedf00c89d31ff9fa68559dc3584126e1",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "ipfs_datasets_py.logic.legal_ir.adapter": {
+      "relative_path": "ipfs_datasets_py/logic/legal_ir/adapter.py",
+      "published_preimage": {
+        "bytes": 51421,
+        "sha256": "fd38de52f0d159a6f417e5a7d50b0a8967dc7280a760950fd479a81be5922c06",
+        "git_blob": "bda96aefe70d34e76a6f6f75cba530c7ad16841a",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "ipfs_datasets_py.logic.backends.kernel.lean": {
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "published_preimage": {
+        "bytes": 104341,
+        "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800",
+        "git_blob": "7ee0cdb71958b052038fa467230dbf86dd0c3fb2",
+        "git_mode": "100644"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": false
+    },
+    "tests.unit.logic.integration.test_trusted_feedback_weight_updates": {
+      "relative_path": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+      "published_preimage": {
+        "bytes": 37429,
+        "sha256": "9ea38219594c8f5841fec7dbd2ad6da8925147eda44cb0ca9df2cff0fc5a2d7e",
+        "git_blob": "754d53a96072b21bcabb8a44a4fc615b4cf1152f",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/test_trusted_feedback_weight_updates.checked-final.py.DATA",
+        "bytes": 61378,
+        "sha256": "f15cc994ea8a8ae5f8d34c1c16572481ff7c73398fce068af4a3ec5bced9915b",
+        "git_blob": "4197a32e166b0582b3229439425749fff8f26dc8"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "tests.unit.optimizers.logic_theorem_optimizer.test_proof_feedback_ablation": {
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py",
+      "published_preimage": {
+        "bytes": 8639,
+        "sha256": "2cbd48b08c48175f36bbd6a4380b1a1fcb2f108fcd7d81cede5151ced10eb54e",
+        "git_blob": "dd11af058186d651fbe94588395494a09a72828c",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/test_proof_feedback_ablation.test.after.DATA",
+        "bytes": 9778,
+        "sha256": "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414",
+        "git_blob": "57ef63daf94a901365822cddb3ea1054fca2646c"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "tests.unit.optimizers.logic_theorem_optimizer.test_modal_autoencoder_proof_heads": {
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py",
+      "published_preimage": {
+        "bytes": 11156,
+        "sha256": "3445e906f9bdb8a4986489dc57bf0ab06773bcd074fba3edef7301023699743c",
+        "git_blob": "af6bf4ff9ad59d7fbe3c1ac8d324e58b437f9c53",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/Phase7-existing-proof-cache-fixture-migration-private-EjL1ZzNP/test_modal_autoencoder_proof_heads.with-bound-feedback-fixture.py.DATA",
+        "bytes": 16426,
+        "sha256": "892386e52414fda1b3eac441aaa900630ffaf755140739d053df29ce75c2ed4a",
+        "git_blob": "b91b53344561d723bb28d9d0f6b71d3aaa7e3d7c"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "tests.unit.optimizers.logic_theorem_optimizer.test_trainable_legal_ir_objective": {
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py",
+      "published_preimage": {
+        "bytes": 8328,
+        "sha256": "437985f7dd86b5a280edb865eb46ccdb46244ba8e64acfc99d6677040f42b1d7",
+        "git_blob": "7d671b8c3c440731fc2ee48c15999b0d0c6766c9",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/Phase7-existing-proof-cache-fixture-migration-private-EjL1ZzNP/test_trainable_legal_ir_objective.with-bound-feedback-fixture.py.DATA",
+        "bytes": 9648,
+        "sha256": "ead71235b234846d6444678459d3fdd03bd10c0955783dcbd8f2f7d3cdf503a6",
+        "git_blob": "cf976daddf3adc045c604c5a58c12ae9cc4f0543"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    },
+    "tests.unit.logic.legal_ir.test_proof_cache": {
+      "relative_path": "tests/unit/logic/legal_ir/test_proof_cache.py",
+      "published_preimage": {
+        "bytes": 97545,
+        "sha256": "4e012101e4400324175c02d296b51abde97d065c76abfddef1b51d16329f639d",
+        "git_blob": "4525114941200e1d74adf6b45449e03b2dd2c1a2",
+        "git_mode": "100644"
+      },
+      "prospective_postimage": {
+        "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/test_proof_cache.checked-artifact-fixture.after.py.DATA",
+        "bytes": 98509,
+        "sha256": "087c587b4f35f61f08f2c8f9bba768893dfa1e57f3645976faa38e7927e02414",
+        "git_blob": "03ea849ebdb3c818af1e56d8ee44add38af030ee"
+      },
+      "requires_current_full9": null,
+      "requires_direct_postfreeze_READ": true
+    }
+  },
+  "maintained_owner_names": [
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.trusted_feedback_trainer",
+    "ipfs_datasets_py.logic.integration.reasoning.legal_ir_learned_guidance",
+    "ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_samples",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_grammar_decoder",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_registry",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_state_version",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_state_transaction",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.projection_profiler",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_adaptive_optimizer",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.modal_autoencoder_view_diagnostic",
+    "ipfs_datasets_py.logic.backends.process",
+    "ipfs_datasets_py.logic.backends.resource_admission",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler",
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.proof_feedback_ablation",
+    "ipfs_datasets_py.logic.legal_ir.proof_cache",
+    "ipfs_datasets_py.logic.legal_ir.adapter",
+    "ipfs_datasets_py.logic.backends.kernel.lean"
+  ],
+  "selected_test_modules": {
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py": "tests.unit.logic.integration.test_trusted_feedback_weight_updates",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py": "tests.unit.optimizers.logic_theorem_optimizer.test_proof_feedback_ablation",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py": "tests.unit.optimizers.logic_theorem_optimizer.test_modal_autoencoder_proof_heads",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py": "tests.unit.optimizers.logic_theorem_optimizer.test_trainable_legal_ir_objective",
+    "tests/unit/logic/legal_ir/test_proof_cache.py": "tests.unit.logic.legal_ir.test_proof_cache"
+  },
+  "expected_normal_conftests": [
+    "conftest.py",
+    "tests/conftest.py",
+    "tests/unit/conftest.py",
+    "tests/unit/optimizers/conftest.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/conftest.py"
+  ],
+  "pytest_inifile": "pytest.ini",
+  "protected_configuration_and_test_package_rows": {
+    "conftest.py": {
+      "bytes": 2054,
+      "sha256": "2eab130f3effda3737f25a1770ccd5f9d4955ba42c3d692d659801ffdc1035cf",
+      "git_blob": "5cad63c1111f76828f01024a5a1bc726ad1211d5",
+      "git_mode": "100644"
+    },
+    "tests/conftest.py": {
+      "bytes": 20716,
+      "sha256": "0a255dc653799cb980d7edbb1d7b2e3c8f0d81b091d4986aa712e1e8e12b7f10",
+      "git_blob": "feac04dd85490c131e0bf8b132f0b221d7446de4",
+      "git_mode": "100644"
+    },
+    "tests/unit/conftest.py": {
+      "bytes": 1204,
+      "sha256": "2abb4618add06f636ab71406c19ccd828084a48ecf75448397ddb6cd2bca53a2",
+      "git_blob": "998f93deb362b71ccf555e1ff43fd56117137978",
+      "git_mode": "100644"
+    },
+    "tests/unit/optimizers/conftest.py": {
+      "bytes": 39426,
+      "sha256": "44b5cc7d0f551c60e19d2ecaf824b07b01f1b40c8acb904fbabb4205e8abd97f",
+      "git_blob": "6685eb59bbea1d8cc15321e2568e92c0659a1e3d",
+      "git_mode": "100644"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/conftest.py": {
+      "bytes": 5647,
+      "sha256": "28c6a027bf1dab9365f1b70f9b90428a136cb5e6436994176f5b6a9ddc6efc11",
+      "git_blob": "81cf45c01ee456a6747611412590bd3fabdd7707",
+      "git_mode": "100644"
+    },
+    "pytest.ini": {
+      "bytes": 1536,
+      "sha256": "01737eaafcd2b7e7e1a8db2368a93d4a28053ba44e611a10b1c87d2155dc65ff",
+      "git_blob": "5ebc8ab6330fc940b64e3037c605d0faf034e1e6",
+      "git_mode": "100644"
+    },
+    "tests/__init__.py": {
+      "bytes": 20,
+      "sha256": "89588b0c2be9d872060e78aa68ccf95f94ca27ea6bcb79a43509d66c296c73ce",
+      "git_blob": "ae78246ec23f342d440481a9b77b868c14d26463",
+      "git_mode": "100644"
+    },
+    "tests/unit/__init__.py": {
+      "bytes": 26,
+      "sha256": "9d566025eaa21543b52722147774afc45981154f677dcc38078a2632e5b52947",
+      "git_blob": "ea3f8b923c2804f646990530711c8d6fe09d129b",
+      "git_mode": "100644"
+    },
+    "tests/unit/optimizers/__init__.py": {
+      "bytes": 33,
+      "sha256": "a2915ce482d690b118753f039d6d394743a89b07fe4392781656952e584531c1",
+      "git_blob": "15d197077884b957db59b30b05de012377d88027",
+      "git_mode": "100644"
+    }
+  },
+  "expected_absent_module_configuration_roles": [
+    "tests/unit/logic/__init__.py",
+    "tests/unit/logic/conftest.py",
+    "tests/unit/logic/legal_ir/__init__.py",
+    "tests/unit/logic/legal_ir/conftest.py",
+    "tests/unit/logic/integration/__init__.py",
+    "tests/unit/logic/integration/conftest.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/__init__.py"
+  ],
+  "postfreeze_READ10_paths": [
+    "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py",
+    "tests/unit/logic/legal_ir/test_proof_cache.py",
+    ".git/index"
+  ],
+  "projected_only_epoch_counts": {
+    "outer": 1614,
+    "python": 1601
+  },
+  "existing_v237_SDK_pins": {
+    "ipfs_datasets_py.logic.backends.process": [
+      "ipfs_datasets_py/logic/backends/process.py",
+      "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+    ],
+    "ipfs_datasets_py.logic.backends.resource_admission": [
+      "ipfs_datasets_py/logic/backends/resource_admission.py",
+      "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+    ],
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler": [
+      "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+      "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+    ]
+  },
+  "cold_import_support_from_private_no_fit_only": {
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/final-maintained-checked-projection.json",
+    "bytes": 45676,
+    "sha256": "97ec7cd7e08121f1e6b4cc69499783c79c43e260c85a94cc745546171a00fe5b"
+  },
+  "admitted_scope": "bounded in-memory Python test updates, temporary JSON cache disk round trip, and no-fit spy cases",
+  "optional_local_torch_and_transitive_numpy_import_on_default_constructor": true,
+  "no_user_or_runtime_selection": null,
+  "actual_freeze": null,
+  "actual_epoch": null,
+  "actual_READ": null,
+  "held_Lean92_prior_epoch_references": [
+    {
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-live-reconciled-outer1610-epoch.json",
+      "bytes": 850463,
+      "sha256": "9af3058e7567f9e7e19ce70c6c30d33ee4dfe9d50bbfe0c05aedfe84eec56bd8"
+    }
+  ],
+  "exact_four_modules_missing_from_held_Lean92_prior_epoch": [
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py"
+  ],
+  "actual_freeze_correspondence_only": {
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-isolated-Phase7-exact-nine-local-freeze.json",
+    "bytes": 17276,
+    "sha256": "63b1bc7bc60db45147d2bc0f0d3a3fab908b19fa17f530d00ced408f5fa88da3"
+  },
+  "all_nine_prospective_posts_equal_actual_frozen_images": true
+}

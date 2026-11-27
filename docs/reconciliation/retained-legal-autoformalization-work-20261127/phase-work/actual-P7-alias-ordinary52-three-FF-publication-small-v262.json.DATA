@@ -1,0 +1,160 @@
+{
+  "actual_push_outputs": {
+    "datasets": {
+      "observed_exit_code": 0,
+      "stderr": "remote: \nremote: GitHub found 150 vulnerabilities on endomorphosis/ipfs_datasets_py's default branch (8 critical, 77 high, 58 moderate, 7 low). To find out more, visit:        \nremote:      https://github.com/endomorphosis/ipfs_datasets_py/security/dependabot        \nremote:",
+      "stdout": "To https://github.com/endomorphosis/ipfs_datasets_py.git\n \t641c18147315a5cdfaf7ede4626bdeb72e70602e:refs/heads/main\tb5d5b5eaa7..641c181473\nDone"
+    },
+    "hallucinate": {
+      "observed_exit_code": 0,
+      "stderr": "",
+      "stdout": "To https://github.com/endomorphosis/hallucinate_app.git\n \t93110e2851c701e315d02752e699008c2cf793d6:refs/heads/main\tceec89f..93110e2\nDone"
+    },
+    "root": {
+      "observed_exit_code": 0,
+      "stderr": "",
+      "stdout": "To https://github.com/endomorphosis/lift_coding.git\n \td3d2008a90ff7937f6288111ff3580d41228686b:refs/heads/main\tc174f6db1c..d3d2008a90\nDone"
+    }
+  },
+  "all_checkouts_clean": true,
+  "all_other_gitlinks_and_A_preserved": true,
+  "all_other_paths_unchanged": true,
+  "force_or_tag_push": false,
+  "frozen_D_index_unchanged": true,
+  "frozen_candidate": {
+    "bytes": 3803,
+    "full9": {
+      "st_ctime_ns": "1795566666302830875",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862899",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795566666302830875",
+      "st_nlink": "1",
+      "st_size": "3803",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-P7-alias-two-file-local-freeze-v260.json",
+    "sha256": "519c1c9e6bb8976926591ac1b49cb3124b88445fed5f52e774051e70cccf3a45"
+  },
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "b5d5b5eaa71c97c43a3f421340c179b613b83191",
+        "to": "641c18147315a5cdfaf7ede4626bdeb72e70602e"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "b5d5b5eaa71c97c43a3f421340c179b613b83191",
+        "to": "641c18147315a5cdfaf7ede4626bdeb72e70602e"
+      },
+      "hallucinate_app": {
+        "from": "ceec89fd6c684d380e9441efa1b4bb518c9b7817",
+        "to": "93110e2851c701e315d02752e699008c2cf793d6"
+      }
+    }
+  },
+  "local_after": {
+    "accelerate": {
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "index_and_worktree_clean": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "head": "641c18147315a5cdfaf7ede4626bdeb72e70602e",
+      "index_and_worktree_clean": true,
+      "tree": "0a2f5f21692f19804ec77a2dd2f058083be6d573"
+    },
+    "hallucinate": {
+      "head": "93110e2851c701e315d02752e699008c2cf793d6",
+      "index_and_worktree_clean": true,
+      "tree": "1422d49b58e2dcd2fc8ff9f35dba01d8e688f25b"
+    },
+    "root": {
+      "head": "d3d2008a90ff7937f6288111ff3580d41228686b",
+      "index_and_worktree_clean": true,
+      "tree": "3fcdb2234b2206004da4cca18c14df50e8950fb2"
+    }
+  },
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "641c18147315a5cdfaf7ede4626bdeb72e70602e",
+    "hallucinate": "93110e2851c701e315d02752e699008c2cf793d6",
+    "root": "d3d2008a90ff7937f6288111ff3580d41228686b"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "b5d5b5eaa71c97c43a3f421340c179b613b83191",
+    "hallucinate": "ceec89fd6c684d380e9441efa1b4bb518c9b7817",
+    "root": "c174f6db1c8df4ce6ad3fb0d6a69c32c513d0aa8"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "publisher_replayed_Source_SDK_tests_CI_model_or_Native": false,
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "qualification": {
+    "Source_parent_resources_and_workspaces_closed": true,
+    "bytes": 3229,
+    "errors": 0,
+    "failures": 0,
+    "full9": {
+      "st_ctime_ns": "1795567454053187580",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72100549",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795567454053187580",
+      "st_nlink": "1",
+      "st_size": "3229",
+      "st_uid": "1000"
+    },
+    "natural_functions": 19,
+    "new_cases": 8,
+    "path": "/tmp/Root-P7-alias-ordinary52-selected-v262-gtoqnhj1/Root-P7-alias-ordinary52-qualified-Source-resource-closed-small-v262.json",
+    "raw_JUnit": {
+      "bytes": 9675,
+      "full9": {
+        "st_ctime_ns": "1795567325970676432",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72100541",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795567325970676432",
+        "st_nlink": "1",
+        "st_size": "9675",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-P7-alias-ordinary52-selected-v262-gtoqnhj1/actual-output/proof-feedback-alias-full52-run-result0-output1.bin",
+      "sha256": "91ab3f1cb4edad84089330b20087cbd0dd92419f25345643884b51cb230ce9c4"
+    },
+    "retained_cases": 44,
+    "sha256": "78527a75c143dd4887728710f5556e81d5f3060df29f5fdccc6a31c641aefea1",
+    "skips": 0,
+    "unique_cases": 52
+  },
+  "qualification_scope": "Ordinary owning-file software qualification. Private 8 and 29 cohorts separate. No Native, training, statutory or full-goal claim.",
+  "schema": "actual-P7-alias-ordinary52-three-FF-publication/v262",
+  "selected_role_blobs": [
+    {
+      "blob": "fdc8331d089947b5cece6b9b341551fc146592ae",
+      "bytes": 59538,
+      "relative_path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "sha256": "c58df29db75d5200fae7b27ae1297ecc925e8761fb6663a5d70eae2fd55a8e1c"
+    },
+    {
+      "blob": "b989e133ae56e74a79b61f04cd1277ac3bcd3478",
+      "bytes": 23636,
+      "relative_path": "tests/unit/logic/integration/test_legal_ir_proof_feedback.py",
+      "sha256": "85806ca14e88f313066eba7c0ca0849f2e2047cb270d00fdf047fd7007654631"
+    }
+  ]
+}

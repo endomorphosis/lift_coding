@@ -1,0 +1,222 @@
+"""Detached two-round tests for the optional whole-study elapsed wall proof."""
+from dataclasses import asdict, replace
+from hashlib import sha256
+import json
+from pathlib import Path
+import unittest
+
+
+HERE = Path(__file__).resolve().parent
+RETAINED = HERE.parent / 'decoder-training-temporal-assessed-continuation-private-v01-L30pSB8r/check_continuation.py'
+raw = RETAINED.read_bytes()
+if sha256(raw).hexdigest() != 'fd3693cb30f321d76b92345cf8cf207e360485b472d4e44fbc41f3f8ceabf79a':
+    raise ValueError('Retained assessed-continuation fixture changed')
+fixture = {'__name__': 'retained_assessed_continuation', '__file__': str(HERE / 'check_continuation.py')}
+exec(compile(raw, str(RETAINED), 'exec'), fixture)
+project, ledger, stamp, read = (fixture[key] for key in ('project', 'ledger', 'C', 'read'))
+OUTER_START = 0
+OUTER_END = 1100
+
+
+def whole_witness(options):
+    """Give each original training or evaluation event its own modeled window."""
+    windows = {}
+
+    def bind(event_id, by_id, original):
+        copied = replace(original, receipt_sha256=stamp(('modeled paid wall window', event_id)))
+        window = project.TemporalPaidEventWindow(event_id, by_id[event_id].close_receipt_sha256, copied)
+        prior = windows.setdefault(event_id, window)
+        if prior != window:
+            raise ValueError('Shared modeled training event has two different time bounds')
+
+    for scope in options['rounds']:
+        evidence = scope.training.cost_evidence
+        training = {event.event_sha256: event for event in evidence.events}
+        for interval, charge in evidence.observations:
+            for event_id, _ in charge.entries:
+                bind(event_id, training, interval.wall)
+        evaluation = {event.event_sha256: event for event in scope.evaluation_events}
+        review = {proof.attempt_sha256: proof.evaluation_wall for proof in scope.review_walls}
+        for settlement in scope.evaluation_settlements:
+            close = settlement.evaluation_close_event_sha256
+            if close is not None:
+                for event_id in (close, *settlement.component_event_sha256s, *settlement.other_event_sha256s):
+                    bind(event_id, evaluation, review[settlement.attempt_sha256])
+    domain, = {row.span.clock_domain_sha256 for row in windows.values()}
+    span = ledger.WallSpan(domain, OUTER_START, OUTER_END, stamp('modeled overall span'))
+    return project.TemporalAssessedWall(span, stamp('modeled independent opening receipt'),
+        stamp('modeled final evidence receipt'), tuple(windows[event_id] for event_id in sorted(windows)))
+
+
+def offered(options, witness, owner):
+    selected = options['expected_assessed_continuation_sha256']
+    wall_pin = project.temporal_assessed_wall_commitment(ledger, selected, witness)
+    return options | dict(whole_wall=witness, expected_whole_wall_sha256=wall_pin, verify_whole_wall_owner=owner)
+
+
+class WholeWallControls(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.original_fixture = fixture['AssessedContinuationControls']
+        cls.original_fixture.setUpClass()
+        cls.addClassCleanup(cls.original_fixture.doClassCleanups)
+
+    def case(self, family='t5', **options):
+        original = self.original_fixture()
+        self.addCleanup(original.doCleanups)
+        return original.get(family=family, **options)
+
+    def assert_closed_whole(self, options, trial, visits, *, events, reviews):
+        legacy = read(options, trial)
+        self.assertIsNone(legacy['whole_study_elapsed_wall'])
+        self.assertEqual(legacy['paid_event_count'], events)
+        original_owners = tuple(visits)
+        visits.clear()
+        witness = whole_witness(options)
+        wall_owner_visits = []
+
+        def clock_owner(*pins):
+            wall_owner_visits.append(pins)
+            return True
+
+        selected = offered(options, witness, clock_owner)
+        report = read(selected, trial)
+        self.assertEqual(report | {'whole_study_elapsed_wall': None}, legacy)
+        self.assertEqual(tuple(visits), original_owners)
+        result = report['whole_study_elapsed_wall']
+        self.assertEqual(result['elapsed_ns'], OUTER_END - OUTER_START)
+        self.assertEqual(result['covered_paid_events'], events)
+        self.assertEqual(result['covered_reviews'], reviews)
+        self.assertEqual((result['start_ns'], result['end_ns']), (OUTER_START, OUTER_END))
+        self.assertEqual(result['clock_domain_sha256'], witness.span.clock_domain_sha256)
+        self.assertFalse(report['dispatch_authority'])
+        self.assertFalse(report['convergence_established'])
+        self.assertFalse(report['cost_to_heldout_threshold_established'])
+        self.assertFalse(report['FINAL_selected'])
+        self.assertEqual(len(wall_owner_visits), 1)
+        paid_pin = stamp(tuple((row.event_sha256, row.close_receipt_sha256, asdict(row.span))
+                               for row in witness.paid_windows))
+        self.assertEqual(result['paid_windows_sha256'], paid_pin)
+        self.assertEqual(result['receipt_sha256'], witness.span.receipt_sha256)
+        self.assertEqual(result['opening_receipt_sha256'], witness.opening_receipt_sha256)
+        self.assertEqual(result['terminal_evidence_receipt_sha256'], witness.terminal_evidence_receipt_sha256)
+        self.assertEqual(wall_owner_visits[0], (selected['expected_whole_wall_sha256'],
+                         selected['expected_assessed_continuation_sha256'], paid_pin,
+                         result['arm_and_review_windows_sha256']))
+
+    def test_t5_covers_all_training_evaluation_and_review_availability(self):
+        self.assert_closed_whole(*self.case(), events=22, reviews=4)
+
+    def test_qwen2_keeps_unstarted_evaluation_without_losing_training_wall(self):
+        self.assert_closed_whole(*self.case('qwen2', no_eval=True), events=19, reviews=3)
+
+    def test_missing_outside_wrong_domain_or_wrong_close_event_refuses(self):
+        options, trial, _ = self.case()
+        witness = whole_witness(options)
+        first, second, *remaining = witness.paid_windows
+        alterations = {
+            'missing event': (second, *remaining),
+            'outside outer span': (replace(first, span=replace(first.span, end_ns=OUTER_END + 1)), second, *remaining),
+            'crossed clock domain': (replace(first, span=replace(first.span,
+                                             clock_domain_sha256=stamp('foreign clock'))), second, *remaining),
+            'crossed physical close': (replace(first, close_receipt_sha256=second.close_receipt_sha256), second, *remaining),
+        }
+        for label, windows in alterations.items():
+            with self.subTest(label=label), self.assertRaises(ValueError):
+                read(offered(options, replace(witness, paid_windows=windows), self.never_verify), trial)
+
+    def never_verify(self, *_):
+        self.fail('Invalid whole wall reached its owner')
+
+    def test_review_available_past_outer_close_refuses_even_with_full_event_coverage(self):
+        options, trial, _ = self.case()
+        earlier, later = options['rounds']
+        ordinary, revised = later.review_walls
+        late = replace(revised, review_available_ns=OUTER_END + 1,
+                       review_availability_receipt_sha256=stamp('modeled late review receipt'))
+        updated = replace(later, review_walls=(ordinary, late))
+        changed = options | dict(rounds=(earlier, updated), owners=(options['owners'][0],
+            fixture['round_owners'](options['study'], trial, updated, [], 'late')))
+        changed['expected_assessed_continuation_sha256'] = fixture['select'](changed, trial)
+
+        def joins(rounds):
+            return tuple(project._temporal_assessed_round_pins(ledger, trial, options['study'], scope)[2:]
+                         for scope in rounds)
+
+        def history_owner(selected, parent, training, offered_joins, events):
+            return ((selected, offered_joins) == (changed['expected_assessed_continuation_sha256'], joins(changed['rounds']))
+                    and options['verify_assessed_history_owner'](options['expected_assessed_continuation_sha256'],
+                        parent, training, joins(options['rounds']), events))
+
+        changed['verify_assessed_history_owner'] = history_owner
+        # The existing owner can authenticate this later review independently of the new outer bound.
+        legacy = read(changed, trial)
+        self.assertIsNone(legacy['whole_study_elapsed_wall'])
+        late_result = legacy['round_results'][1]['arm_review_clocks'][1]['original_review_clock']
+        self.assertEqual(late_result['review_available_ns'], OUTER_END + 1)
+        self.assertLess(late_result['evaluation_wall']['end_ns'], OUTER_END)
+        with self.assertRaisesRegex(ValueError, 'cover original review availability'):
+            read(offered(changed, whole_witness(changed), self.never_verify), trial)
+
+    def test_whole_wall_owner_refusal_and_callback_mutation_block_result(self):
+        options, trial, _ = self.case()
+        witness = whole_witness(options)
+        calls = []
+
+        def refuse(*pins):
+            calls.append(pins)
+            return False
+
+        def mutate(*pins):
+            calls.append(pins)
+            object.__setattr__(witness, 'opening_receipt_sha256', stamp('replacement opening receipt'))
+            return True
+
+        for verify, message in ((refuse, 'elapsed clock owner refused'), (mutate, 'enclosing wall changed')):
+            with self.subTest(verifier=verify.__name__), self.assertRaisesRegex(ValueError, message):
+                read(offered(options, witness, verify), trial)
+        self.assertEqual(len(calls), 2)
+
+
+    def test_opt_in_preserves_legacy_wire_bytes_outside_the_wall_field(self):
+        options, trial, _ = self.case()
+        legacy = read(options, trial)
+        observed = read(offered(options, whole_witness(options), lambda *_: True), trial)
+
+        def wire_bytes(value):
+            return json.dumps(ledger._wire(value), sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
+
+        self.assertEqual(wire_bytes(observed | {'whole_study_elapsed_wall': None}), wire_bytes(legacy))
+
+    def test_reviewed_arm_without_original_availability_cannot_certify_elapsed(self):
+        options, trial, _ = self.case()
+        baseline = read(options, trial)
+        witness = whole_witness(options)
+        earlier, later = options['rounds']
+        retained, missing = later.review_walls
+        changed_later = replace(later, review_walls=(retained,))
+        changed = options | dict(rounds=(earlier, changed_later), owners=(options['owners'][0],
+            fixture['round_owners'](options['study'], trial, changed_later, [], 'missing')))
+        selected = fixture['select'](changed, trial)
+        changed['expected_assessed_continuation_sha256'] = selected
+        pins = tuple(project._temporal_assessed_round_pins(ledger, trial, options['study'], scope)[2:]
+                     for scope in changed['rounds'])
+        events = tuple(event['event_sha256'] for event in baseline['physical_paid_events'])
+        history_arguments = (selected, options['expected_parent_projection_sha256'],
+                             baseline['training_history_sha256'], pins, events)
+        changed['verify_assessed_history_owner'] = lambda *offered: offered == history_arguments
+
+        accepted = read(changed, trial)
+        result = accepted['round_results'][1]
+        paid_arm = next(row for row in result['paid_development']['arm_results']
+                        if row['attempt_sha256'] == missing.attempt_sha256)
+        clock = next(row for row in result['arm_review_clocks'] if row['attempt_sha256'] == missing.attempt_sha256)
+        self.assertEqual(paid_arm['assessment_status'], 'reviewed')
+        self.assertIsNone(clock['original_review_clock'])
+        self.assertEqual(accepted['physical_paid_events'], baseline['physical_paid_events'])
+        with self.assertRaisesRegex(ValueError, 'original review availability for every reviewed attempt'):
+            read(offered(changed, witness, self.never_verify), trial)
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

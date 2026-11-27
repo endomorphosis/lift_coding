@@ -1,0 +1,244 @@
+{
+  "D_HEAD_file_unchanged": {
+    "bytes": 58,
+    "full9": {
+      "st_ctime_ns": "1795421817209629985",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338411",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795421817209629985",
+      "st_nlink": "1",
+      "st_size": "58",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/HEAD",
+    "sha256": "633d4b3d5604d54947816497188e2b631576bbd7c3c2986bee21e5d45c8a8147"
+  },
+  "D_branch_ref_before": {
+    "bytes": 41,
+    "full9": {
+      "st_ctime_ns": "1795631097229607043",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862957",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795631097228607038",
+      "st_nlink": "1",
+      "st_size": "41",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/refs/heads/work/phase6-capacity-composition-20261123",
+    "sha256": "556370c5faab13d966b711e4d02600d916a9ce3f0dcceb35b87e9096ccd8849f"
+  },
+  "D_branch_ref_frozen": {
+    "bytes": 41,
+    "full9": {
+      "st_ctime_ns": "1795637717380033179",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862958",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795637717380033179",
+      "st_nlink": "1",
+      "st_size": "41",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/refs/heads/work/phase6-capacity-composition-20261123",
+    "sha256": "e8cc7420038d834de9f1be01a989c055cff3429953dcf7077948ed5bec91ceb7"
+  },
+  "D_clean_worktree_and_index": true,
+  "D_index_before": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795631097226607030",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795631097216606987",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "73ac0f9512a77a09961108b318521b22476c1b22584ef5b1656ad5e21ecaac22"
+  },
+  "D_index_frozen": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795637717379007791",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795637717377625534",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "18dce26017c4ace31e50720d528b6d2c4f180c3eb96f4f36d3b8eb67f3312206"
+  },
+  "D_local_HEAD": "86a9a0c49e2021ecc98bdd56b000f0c99238342a",
+  "D_parent": "43414c90daa8ba3c891e2aad635d211ddd5e5133",
+  "D_symbolic_HEAD": "refs/heads/work/phase6-capacity-composition-20261123",
+  "D_tree": "b3c7bc9a88c642bd9119a432f9d3b44834c95b4b",
+  "Guide526_and_untargeted_code_fences_preserved": {
+    "ipfs_datasets_py/logic/TDFOL/compiler_repairs.py": "b914db06cd23be92ae0a24bcfb35c1b19d3fd1a3",
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": "ceec6f5ef719ad09bf8471bede8c56d23c557617",
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": "13caa6d9a224c0ce5ab49ca0dc664f95d79347c1",
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": "00ead43061d6d53605b8a8695dbb039ab9bc11e0",
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": "a7b0b5663bcee6df39396d7e2e2837f1126fd432",
+    "ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py": "2faa76f3b111b3d68c814eb0eb0db7724a7a18f8",
+    "ipfs_datasets_py/logic/formalization/autoencoder/ir_legal_text_roundtrip.py": "3e89176b68d5a16b9c808e744a9e09a462ea0ddb",
+    "ipfs_datasets_py/logic/legal_ir/extended_compiler.py": "3c30f4ffb90199b11293bedc9b8e468ce286cfce",
+    "ipfs_datasets_py/logic/legal_ir/extended_contracts.py": "b4c41063d5c3aa0ce680ec5b448d97e0c1bd9b38",
+    "ipfs_datasets_py/logic/legal_ir/extended_decompiler.py": "bfca7a6f7a03a1f26ff5322dae81b11aa216b17f",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py": "9dbd1c45ede27e34652cf872fb9aebfc06b996b8",
+    "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py": "41bf5a658264cd8b5ee11b4f94236bd0aa8bfc20"
+  },
+  "all_other_index_entries_and_paths_and_gitlinks_preserved": true,
+  "exact_committed_files": {
+    "ipfs_datasets_py/logic/autoformal/legal_calendar_lake.py": {
+      "bytes": 11292,
+      "full9": {
+        "st_ctime_ns": "1795637571565853173",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042573",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795637571260440964",
+        "st_nlink": "1",
+        "st_size": "11292",
+        "st_uid": "1000"
+      },
+      "git_blob": "445df67173a755ed15b60866aedb90e16af8ff0a",
+      "mode": "100644",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_calendar_lake.py",
+      "prior_blob": "e53514cab6825d373f0ecdb1a52cc95fc7e43c5d",
+      "sha256": "2d7e37f84562ddfed17de5cdc95d91fe3a1301be32e693961147644f35edd702",
+      "stage0_blob": "445df67173a755ed15b60866aedb90e16af8ff0a"
+    },
+    "ipfs_datasets_py/logic/autoformal/legal_canonical_calendar.py": {
+      "bytes": 29974,
+      "full9": {
+        "st_ctime_ns": "1795637571852856692",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042575",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795637571263656347",
+        "st_nlink": "1",
+        "st_size": "29974",
+        "st_uid": "1000"
+      },
+      "git_blob": "90c4357511dfb11ce18297c9d0d0e1abae57ac48",
+      "mode": "100644",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_canonical_calendar.py",
+      "prior_blob": "9f8f5a740dfff16ea67dd07b8208eed97ce64aaa",
+      "sha256": "b45d0ad9329e90e4b007885e201adf5b2602b2d789127555b35fdbe5b65bc1b5",
+      "stage0_blob": "90c4357511dfb11ce18297c9d0d0e1abae57ac48"
+    },
+    "tests/unit/logic/autoformal/test_legal_canonical_calendar.py": {
+      "bytes": 31449,
+      "full9": {
+        "st_ctime_ns": "1795637572171860603",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042576",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795637571267859743",
+        "st_nlink": "1",
+        "st_size": "31449",
+        "st_uid": "1000"
+      },
+      "git_blob": "f611b86c860d75c2231131ca28702bb93bcb889a",
+      "mode": "100644",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_legal_canonical_calendar.py",
+      "prior_blob": "490b7c31a9edaa7f6259302367e14f07faadd15b",
+      "sha256": "eefdf25291245045690f70570fec7238d76d0bca931ef3eef2b47e32f0b20a73",
+      "stage0_blob": "f611b86c860d75c2231131ca28702bb93bcb889a"
+    }
+  },
+  "hold_frozen_for_READ4_normal69_and_separate_Native": true,
+  "local_origin_main_tracking_unchanged": "43414c90daa8ba3c891e2aad635d211ddd5e5133",
+  "ordinary69_or_Native_not_run_by_publisher": true,
+  "other_roots_preserved": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "index": {
+        "bytes": 4412225,
+        "full9": {
+          "st_ctime_ns": "1795500785295142737",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342879",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795500785294142725",
+          "st_nlink": "1",
+          "st_size": "4412225",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/index"
+      },
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "hallucinate": {
+      "HEAD": "98916baa350d9e6a9d1a702fd6c8b6a08f5b38ee",
+      "index": {
+        "bytes": 138750,
+        "full9": {
+          "st_ctime_ns": "1795631097450543196",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342837",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795631097449607992",
+          "st_nlink": "1",
+          "st_size": "138750",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate/.git/index"
+      },
+      "tree": "767cc44fe5e0c2afebb6258a69ed1ea9617e875d"
+    },
+    "root": {
+      "HEAD": "7b25f95ea9b2b0914c67e82cddc8e01812812738",
+      "index": {
+        "bytes": 7262222,
+        "full9": {
+          "st_ctime_ns": "1795631097761609339",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69387316",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795631097758609326",
+          "st_nlink": "1",
+          "st_size": "7262222",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/.git/index"
+      },
+      "tree": "74c4aa817c0d2d8057f41cec570103d39825f5ba"
+    }
+  },
+  "prior_Guide526_publication": {
+    "bytes": 10967,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide526-four-doc-three-FF-publication-small-v336.json",
+    "sha256": "b0b70d49db2d68218c57c5547cc58f122b6e73db9c641cc8e704ff53cc055632"
+  },
+  "private_controls": {
+    "bytes": 8231,
+    "path": "/tmp/Root-Phase3-effective-calendar-Source3-v338-oexc6swm/actual-calendar-same23-and-retained47-private-closeout.json",
+    "sha256": "4839e517d6cf6cf528e6f7c2d81f3eab01de928a335d5758afbf3f4fb3e75bff"
+  },
+  "pushed": false,
+  "remote_action": false,
+  "schema": "actual-Phase3-effective-calendar-exact-three-file-local-freeze/v339",
+  "source_closed_install": {
+    "bytes": 8839,
+    "path": "/tmp/Root-Phase3-effective-calendar-Source3-v339-b4dfj2ud/actual-effective-calendar-Source3-source-closed-small-v339.json",
+    "sha256": "fef2ea3a29e83f90138d1b38aa9792019b08a806048ecd8d8ef903fe52c45712"
+  }
+}

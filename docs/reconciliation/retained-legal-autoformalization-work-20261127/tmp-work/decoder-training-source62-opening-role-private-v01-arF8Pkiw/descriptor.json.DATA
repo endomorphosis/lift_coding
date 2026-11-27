@@ -1,0 +1,79 @@
+{
+  "closed_logs": {
+    "controls": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-source62-opening-role-private-v01-arF8Pkiw/controls.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1098,
+        "path": "/tmp/decoder-training-source62-opening-role-private-v01-arF8Pkiw/controls.stderr",
+        "sha256": "717614d87d6cb9afdb09708038c51c8c9e1c9db831ec74d2a37f5d4b90d95e36"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-source62-opening-role-private-v01-arF8Pkiw/controls.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "diagnostic-first": {
+      "json": {
+        "bytes": 11985,
+        "path": "/tmp/decoder-training-source62-opening-role-private-v01-arF8Pkiw/diagnostic-first.json",
+        "sha256": "c4281e7c7ee971b8bf79fce1313ffdf5f72735b5c0145312be55dfb9ca382500"
+      },
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-source62-opening-role-private-v01-arF8Pkiw/diagnostic-first.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-source62-opening-role-private-v01-arF8Pkiw/diagnostic-first.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "diagnostic-repeat": {
+      "json": {
+        "bytes": 11985,
+        "path": "/tmp/decoder-training-source62-opening-role-private-v01-arF8Pkiw/diagnostic-repeat.json",
+        "sha256": "c4281e7c7ee971b8bf79fce1313ffdf5f72735b5c0145312be55dfb9ca382500"
+      },
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-source62-opening-role-private-v01-arF8Pkiw/diagnostic-repeat.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-source62-opening-role-private-v01-arF8Pkiw/diagnostic-repeat.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "drivers": {
+    "replay.py": {
+      "bytes": 14650,
+      "path": "/tmp/decoder-training-source62-opening-role-private-v01-arF8Pkiw/replay.py",
+      "sha256": "6ba564450d29eb54467a6af999db317404b55cc998a44347ab4a85eeeda41299"
+    },
+    "test_replay.py": {
+      "bytes": 4182,
+      "path": "/tmp/decoder-training-source62-opening-role-private-v01-arF8Pkiw/test_replay.py",
+      "sha256": "8db39411ee1dc7c2ef0b87ff11d7569903a0177ece42b3847e90a8fb5a8c1afb"
+    }
+  },
+  "local_passing_cases": 6,
+  "measured_cost_saving": null,
+  "repeat_output_byte_identical": true,
+  "report": {
+    "bytes": 11985,
+    "path": "/tmp/decoder-training-source62-opening-role-private-v01-arF8Pkiw/diagnostic-first.json",
+    "sha256": "c4281e7c7ee971b8bf79fce1313ffdf5f72735b5c0145312be55dfb9ca382500"
+  },
+  "runtime_or_policy_changed": false,
+  "schema": "retained-source62-verified-opening-wire-diagnostic/v1",
+  "source_epoch": "Source62",
+  "uses_original_worker_and_compiled_codec_fingerprints": true
+}

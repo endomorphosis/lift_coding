@@ -1,0 +1,186 @@
+"""Exercise the old A0 suite and the explicit relocated handoff locally."""
+from copy import deepcopy
+from hashlib import sha256
+import json
+from pathlib import Path
+from runpy import run_path
+import unittest
+
+HERE = Path(__file__).resolve().parent
+ORIGINAL_TEST = Path('/tmp/decoder-training-stage-a-a0-archive-handoff-private-v01-UMiyG7nf/test_closed_archive_handoff.py')
+TEST_PIN = '58f578fded49ede1b3424a8c06b48756ee7ba4fd7141125f4601f37a456c8002'
+CANDIDATE_PIN = 'f37c2faba9ba57eaec6c71fa1065befe2f7e14b9c0e69f2d218003ea92c02555'
+assert sha256(ORIGINAL_TEST.read_bytes()).hexdigest() == TEST_PIN
+assert sha256((HERE / 'verify_rebind_capture.py').read_bytes()).hexdigest() == CANDIDATE_PIN
+LEGACY_TESTS = run_path(str(ORIGINAL_TEST))['ClosedArchiveHandoff']
+CANDIDATE = run_path(str(HERE / 'verify_rebind_capture.py'))
+
+
+class UnchangedA0Controls(LEGACY_TESTS):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.api = CANDIDATE
+
+
+class RelocatedA0Controls(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        UnchangedA0Controls.setUpClass()
+
+    def setUp(self):
+        case = UnchangedA0Controls()
+        case.setUp()
+        self.addCleanup(case.doCleanups)
+        self.case = case
+        rows = json.loads(case.outer)
+        self.roster = [row for row in rows if row['path'].endswith('.py')][-32:]
+        paths = {row['path'] for row in self.roster}
+        case.outer = CANDIDATE['_v214_compact_epoch']([row for row in rows if row['path'] not in paths] + self.roster)
+        case.archive = case.write_raw('relocated-verified-outer.LIST.json', case.outer)
+        stage = case.terminal['stage_a']
+        stage['outer_archive'] = dict(case.archive)
+        stage['logical_epochs']['outer_epoch'] = {key: case.archive[key] for key in ('bytes', 'sha256')}
+        self.legacy_selected = deepcopy(case.selected)
+        self.legacy_terminal = deepcopy(case.terminal)
+        partition = 'stage-a-source32-relocated-all-fresh/v1'
+        preview = {'path': str(case.original.root / 'preview.json'), 'bytes': 711, 'sha256': 'b' * 64}
+        case.selected.update(schema='selected-A0-existing-StageA-reader-archive/v2',
+                             capture_partition=partition, fresh_capture_roster=deepcopy(self.roster),
+                             relocation_preview=deepcopy(preview),
+                             relocation_owner_binding_sha256='4' * 64)
+        stage.update(body_capture_count=32, capture_partition=partition, relocation_preview=preview,
+                     relocation_owner_binding_sha256='4' * 64, paired_selector_observation_sha256='5' * 64,
+                     git_project_expectations_sha256='6' * 64)
+        stage['observed_counts'].update(reused_archives=0, fresh_bodies=32)
+        stage['retained_git_provenance']['closing_explicit_git_selector_metadata_checked'] = True
+        stage['fresh_captures'] = []
+        output_root = Path(case.archive['path']).parent
+        for ordinal, row in enumerate(self.roster):
+            readback = {key: deepcopy(row[key]) for key in ('bytes', 'sha256', 'full9')}
+            readback['full9']['st_mode'] = str(0o100400)
+            stage['fresh_captures'].append({
+                'canonical_path': row['path'],
+                'capture': {'actual_source_result': deepcopy(row),
+                            'source_parent_all_fields_equal': True,
+                            'private_output_integrity_and_owner_passed': True,
+                            'private_raw_readback': deepcopy(readback)},
+                'raw_reference': {'path': str(output_root / 'raw' / f'{ordinal}-stage-a.DATA'),
+                                  **readback},
+            })
+
+    def test_accepts_exact_32_fresh_handoff_in_existing_a0_owner(self):
+        p = self.case.original
+        expected = self.case.bind(selected=self.legacy_selected, terminal=self.legacy_terminal)
+        binding = self.case.bind()
+        self.assertEqual({k: v for k, v in binding.items() if k != 'paired_reader_close'},
+                         {k: v for k, v in expected.items() if k != 'paired_reader_close'})
+        p.source = p.write_json('selected-relocated-source', binding)
+        p.close = self.case.close_reference
+        control = json.loads(Path(p.control['path']).read_bytes())
+        control['source_epoch_reference'] = self.case.archive
+        p.control = p.write_json('selected-relocated-control', control)
+        launch = json.loads(Path(p.launch['path']).read_bytes())
+        launch.update(source_epoch_sha256=self.case.archive['sha256'], control_binding_sha256=p.control['sha256'])
+        p.launch = p.write_json('selected-relocated-launch', launch)
+        execution = p.selection | dict(source_binding=p.source, control_binding=p.control, launch_selection=p.launch)
+        p.execution = p.write_json('selected-relocated-input', execution)
+        ready = p.driver['prepare_isolated_parent'](execution, p.execution, p.owner)
+        self.assertEqual(ready['epoch'][-32:], self.roster)
+        self.assertEqual(ready['epoch_raw'], self.case.outer)
+        self.assertEqual(ready['paired_close'], self.case.close_reference)
+        self.assertEqual(p.events, ['verify-opening'])
+        self.assertEqual(p.exit_source, 0)
+        self.assertFalse(p.output.exists())
+
+    def test_old_and_new_capture_shapes_cannot_be_substituted(self):
+        with self.assertRaisesRegex(ValueError, 'capture roster'):
+            self.case.bind(selected=self.legacy_selected)
+        with self.assertRaisesRegex(ValueError, 'capture roster'):
+            self.case.bind(terminal=self.legacy_terminal)
+        altered = deepcopy(self.case.selected)
+        altered['schema'] = 'selected-A0-existing-StageA-reader-archive/v3'
+        with self.assertRaisesRegex(ValueError, 'expected independently selected'):
+            self.case.bind(selected=altered)
+        self.assertEqual(self.case.calls, [])
+
+    def test_roster_order_count_body_and_stamp_are_bound(self):
+        for key in ('order', 'count', 'hash', 'stamp'):
+            with self.subTest(key=key):
+                selected = deepcopy(self.case.selected)
+                roster = selected['fresh_capture_roster']
+                if key == 'order':
+                    roster[0], roster[1] = roster[1], roster[0]
+                elif key == 'count':
+                    roster.pop()
+                elif key == 'hash':
+                    roster[0]['sha256'] = '9' * 64
+                else:
+                    roster[0]['full9']['st_ino'] = '99'
+                with self.assertRaisesRegex(ValueError, 'selected relocated capture roster'):
+                    self.case.bind(selected=selected)
+        self.assertEqual(self.case.calls, [])
+
+    def test_capture_receipt_order_raw_readback_and_immutability_are_required(self):
+        def immutable_failure(stage):
+            entry = stage['fresh_captures'][0]
+            entry['raw_reference']['full9']['st_mode'] = str(0o100600)
+            entry['capture']['private_raw_readback']['full9']['st_mode'] = str(0o100600)
+
+        modifications = (
+            ('order or shape', lambda stage: stage['fresh_captures'].reverse()),
+            ('matching Source-end', lambda stage: stage['fresh_captures'][0]['capture'].pop('actual_source_result')),
+            ('matching Source-end', lambda stage: stage['fresh_captures'][0]['capture'].update(
+                source_parent_all_fields_equal=False)),
+            ('matching Source-end', lambda stage: stage['fresh_captures'][0]['capture']['private_raw_readback'].update(
+                sha256='0' * 64)),
+            ('matching Source-end', lambda stage: stage['fresh_captures'][0]['raw_reference'].update(
+                path=stage['fresh_captures'][1]['raw_reference']['path'])),
+            ('private raw capture is not immutable', immutable_failure),
+        )
+        for index, (message, alter) in enumerate(modifications):
+            with self.subTest(index=index):
+                terminal = deepcopy(self.case.terminal)
+                alter(terminal['stage_a'])
+                with self.assertRaisesRegex(ValueError, message):
+                    self.case.bind(terminal=terminal)
+        self.assertEqual(self.case.calls, [])
+
+    def test_selected_preview_and_selector_closure_are_bound(self):
+        altered = deepcopy(self.case.selected)
+        altered['relocation_preview']['sha256'] = '1' * 64
+        with self.assertRaisesRegex(ValueError, 'exact selected relocation preview'):
+            self.case.bind(selected=altered)
+        for field, invalid in (('capture_partition', 'unknown'), ('relocation_owner_binding_sha256', '2' * 64),
+                               ('paired_selector_observation_sha256', None), ('git_project_expectations_sha256', False),
+                               ('relocation_preview', {})):
+            with self.subTest(field=field):
+                terminal = deepcopy(self.case.terminal)
+                terminal['stage_a'][field] = invalid
+                with self.assertRaisesRegex(ValueError, 'verify selected preview, owner and selectors'):
+                    self.case.bind(terminal=terminal)
+        terminal = deepcopy(self.case.terminal)
+        terminal['stage_a']['retained_git_provenance']['closing_explicit_git_selector_metadata_checked'] = False
+        with self.assertRaisesRegex(ValueError, 'verify selected preview, owner and selectors'):
+            self.case.bind(terminal=terminal)
+        self.assertEqual(self.case.calls, [])
+
+    def test_actual_owner_refusal_and_mutation_keep_a0_unselected(self):
+        self.case.authorized = False
+        with self.assertRaisesRegex(ValueError, 'terminal ledger authority'):
+            self.case.bind()
+        self.assertEqual(len(self.case.calls), 1)
+
+        def change_selected(*args):
+            self.case.selected['fresh_capture_roster'].pop()
+            return True
+
+        with self.assertRaisesRegex(ValueError, 'changed during independent verification'):
+            self.case.bind(verify=change_selected)
+
+
+if __name__ == '__main__':
+    loader = unittest.TestLoader()
+    suite = unittest.TestSuite(loader.loadTestsFromTestCase(case)
+                               for case in (UnchangedA0Controls, RelocatedA0Controls))
+    raise SystemExit(0 if unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful() else 1)

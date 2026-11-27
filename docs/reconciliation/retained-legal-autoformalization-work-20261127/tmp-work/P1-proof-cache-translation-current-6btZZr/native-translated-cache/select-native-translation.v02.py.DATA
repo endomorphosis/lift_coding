@@ -1,0 +1,169 @@
+import sys,time,json,re
+from pathlib import Path
+W=Path(__file__).resolve().parent
+helper=W/'freeze-native-translation.py'
+selector_file=__file__;__file__=str(helper)
+exec(compile(helper.read_text().split('\nif __name__==')[0],str(helper),'exec'),globals())
+__file__=selector_file
+assert sys.argv[1:] in (['--verify-only'],['--bind-only'])
+
+def reader(path,size,digest):
+    pin=dict(path=str(path),bytes=size,sha256=digest);load(pin);return pin
+
+controls=reader('/tmp/P1-translated-cache-native-existing-owner-INERT-bwI7Tb3c/READY-existing-v597-translated-cache-Native2-INERT.json',
+    18066,'915bd7f66242794b21a0f8c818ab51b5de6a9bcf95186907e031d33420da8692')
+freeze_pin=reader(W/'actual-isolated-Phase1-native-translation-test-only-local-freeze.json',
+    5486,'8d66a2bd7bb7cd76bf90d9c333922fe61ec8832e885c498479adcb5feff4d930')
+read_pin=reader(W/'actual-isolated-Phase1-native-translated-cache-READ3-closed.json',
+    7505,'330a7c8ae65428dfe88998c913f7596fcb3a19e681232d8325b85825d776ce5c')
+epoch_pin=reader(W/'actual-live-reconciled-Source42-content-epoch-closed.json',
+    5799,'5c4346eeffea1e994da1243156f7e795db499124433897f6dcb696bfc3861688')
+old=Path('/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596')
+history_ref=reader(old/'Root-current-existing-Native2-binding.json',29541,'32a8fd78c39f75f3fa6c9f2560dcd5e094891afcb7b288a0fea62d57654f0ae0')
+history=json_ref(history_ref)
+ctrl,freeze,read,epoch=map(json_ref,(controls,freeze_pin,read_pin,epoch_pin))
+assert ctrl['immutable_current_guide578_head']==freeze['parent']==guide['HEAD']==BASE
+assert freeze['isolated_Source_context_closed'] and freeze['only_one_test_changed'] and freeze['local_clean']
+assert all(x['Source_closed'] and x['module_closed'] and x['terminal_returncode']==0 for x in (read,epoch))
+assert read['exact_local_freeze']==epoch['exact_local_freeze']==freeze_pin and read['actual_isolated_content_epoch']==epoch_pin
+assert epoch['previous_published_guide']==read['previous_published_guide']==guarded_guide
+assert read['full_charge']==epoch['full_charge'] and read['actual_ledger_after']==epoch['actual_ledger_after']
+assert json_ref(freeze['full_charge'])['previous_charge']==guide['full_charge']
+assert json_ref(read['full_charge'])['previous_charge']==freeze['full_charge']
+rows=json_ref(epoch['outer_epoch_reference'])
+python_rows=json_ref(epoch['python_epoch_reference'])
+current={r['path']:r for r in rows}
+assert len(current)==len(rows)==1618 and len(python_rows)==1605
+assert all(current[r['path']]==r and r['path'].endswith('.py') for r in python_rows)
+assert all(stamp(Path(r['path']).lstat())==r['full9'] for r in rows)
+guard=json_ref(read['named_metadata_recheck_reference'])
+assert len(guard['rows'])==1625 and all(stamp(Path(r['path']).lstat())==r['full9'] for r in guard['rows'])
+roots=read['projects']
+for repo,row in zip((D,A),roots,strict=True):
+    assert str(repo)==row['root'] and snapshot(repo)==b''
+    assert (rev(repo,'HEAD'),rev(repo,'HEAD^{tree}'))==(row['Git_HEAD'],row['Git_tree'])
+head=roots[0]['Git_HEAD']
+assert head==freeze['frozen']['HEAD'] and rev(D,'HEAD^')==BASE
+index=read['protected_index_reference']
+assert index==current[str(D/'.git/index')]==freeze['frozen']['index']
+assert read['actual_accelerate_index_metadata']==current[str(A/'.git/index')]==guide['A_index']
+captures={row['path']:row for row in read['individual_captures']}
+assert captures.keys()=={str(D/ROLE),str(D/FIXTURE),index['path']}
+for path,row in captures.items():
+    assert {k:row[k] for k in current[path]}==current[path] and load(row['raw_reference'])
+assert load(captures[str(D/ROLE)]['raw_reference'])==load(ctrl['owning_test_post'])
+assert load(captures[str(D/FIXTURE)]['raw_reference'])==load(ctrl['owning_cache_support_fixture'])
+assert load(ctrl['owning_test_post'])==load(POSTIMAGE)
+
+pins=ctrl['SDK_source_pins']
+assert len(pins)==8
+for name,(rel,digest) in pins.items():
+    row=current[str(D/rel)]
+    assert row['sha256']==digest,name
+    blob=git(D,'cat-file','blob','HEAD:'+rel)
+    assert (len(blob),sha256(blob).hexdigest())==(row['bytes'],digest)
+assert len(checked_protocol:=load(history['current_protocol_raw_source']))==57510
+assert sha256(checked_protocol).hexdigest()==current[str(D/'ipfs_datasets_py/logic/ir_core/protocols.py')]['sha256']
+load(history['Source42_raw']);assert history['Source42_raw']['sha256']==SOURCE['sha256']
+load(ctrl['v597_actual_operator'])
+host=json_ref(history['native_asset_content_review'])
+assert host['complete'] and host['all8_asset_FDs_closed'] and not host['errors']
+assert len(history['Native'])==len(host['assets'])==8
+for row in history['Native']:
+    path=Path(row['path']);before=path.lstat()
+    assert stat.S_ISREG(before.st_mode) and before.st_nlink==1 and before.st_size==row['bytes']
+    fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK)
+    try:
+        assert stamp(os.fstat(fd))==stamp(before)==stamp(path.lstat())==row['actual_full9']
+    finally:
+        os.close(fd)
+namespaces=[]
+old_d=Path(history['PROJECTS'][0]['root'])
+for row in history['normal_namespaces']:
+    path=D/Path(row['path']).relative_to(old_d); init=path/'__init__.py'
+    info=path.lstat()
+    assert stat.S_ISDIR(info.st_mode) and not os.path.lexists(init)
+    fd=os.open(path,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+    try:
+        assert stamp(info)==stamp(os.fstat(fd))==stamp(path.lstat())
+        assert not os.path.lexists(init)
+    finally:
+        os.close(fd)
+    namespaces.append(dict(row,path=str(path),initializer_path=str(init),full9=stamp(info),
+        device=info.st_dev,inode=info.st_ino,FD_closed=True))
+assert len(namespaces)==3
+resource=history['resource']
+state_ref,data=capture(Path(resource['state_path']))
+assert state_ref['bytes']<65536
+state=json.loads(data)
+assert state['config']==resource['expected_config'] and state['child_process_capacity']==resource['expected_capacity']
+assert resource['expected_capacity']['base_config_sha256']==resource['expected_policy_sha256']
+profile=ctrl['native_case_profile'];assert profile=='P1-native-cache-controlled-translation/v1'
+op_ref=ctrl['operator'];template=load(op_ref).decode()
+binder=ctrl['binder'];load(binder)
+assert all(len(re.findall(r'^'+name+' = None$',template,flags=re.M))==1 for name in ctrl['slots'])
+case=json_ref(GENERATION)
+assert not case['native_Lean_executed'] and case['generated']['theorem_identity']['statement']=='True'
+print(json.dumps(dict(D=head,outer=len(rows),Python=len(python_rows),supported_live_roles=len(pins),assets=len(history['Native']),
+    control_profile=profile,Native_selected=False)),flush=True)
+if sys.argv[1]=='--verify-only':
+    raise SystemExit(0)
+
+allowance=32*1024**2
+amount=128*1024**2+allowance
+output=W/'actual-native-output-v02'
+assert not output.exists()
+assert ctrl['actual_parent_resource_profile']==dict(cpu_slots=1,memory_mb=8192,child_process_slots=1,requires_gpu=False)
+assert ctrl['predicted_sdk_events']==[dict(argv_tail=tail,expected_rc=0,index=i,program='Lean4')
+    for i,tail in enumerate((['--version'],['--json','Main.lean'],['--json','Main.lean']))]
+assert ctrl['reuse_native_commands']==0
+first_charge=ref(W/'Source-only-Native-translated-cache-full-retained-cap.json')
+first_result=reader(W/'actual-native-output/complete-native3-direct-existing-owner-report.json',34395,
+    'b413e852c0ec43179c5103a23716da84cff6f55cea2bb925d5e514ee9eb5faf3')
+failure=json_ref(first_result)
+assert failure['Source_closed'] and failure['resource_cleanup_confirmed'] and failure['parent_home_cleanup_confirmed']
+assert not failure['actual_native_qualification'] and not failure['actual_test_function_entered'] and failure['native_attempts']==[]
+assert "row['device'], row['inode']" in failure['errors'][0]['traceback']
+assert json_ref(first_charge)['previous_charge']==read['full_charge']
+ledger=charge('Source-only-Native-translated-cache-full-retained-cap-v02.json',first_charge,amount)
+now=time.time_ns()
+clock=dict(kind='exact submission window for existing validation profile',not_before_utc_ns=now,
+    submit_deadline_utc_ns=now+180_000_000_000)
+selection=save('Root-selected-current-translated-cache-Native2-once-v02.json',dict(Root_selected=True,case_profile=profile,
+    clock_scope=clock,current_published_parent=guarded_guide,output_namespace=str(output),
+    current_Source_epoch=epoch['outer_epoch_reference'],current_Python_epoch=epoch['python_epoch_reference'],
+    exact_current_index_and_targets_READ3=read_pin,exact_local_freeze=freeze_pin,
+    prior_code_and_fixture_role_provenance=history_ref,existing_current_preflight_controls=controls,
+    independent_fixture_source_regeneration=GENERATION,current_expected_policy_binder=binder,
+    operator_template=op_ref,current_owning_test_source=captures[str(D/ROLE)]['raw_reference'],
+    no_statutory_or_model_qualification=True,cap_and_IO=ledger,retained_first_Native_failure=first_result,retained_first_Native_charge=first_charge,
+    allowed_real_commands=dict(Lean_version_observations=1,Lean_compile_calls=2,expected_compiler_statuses=[0,0]),
+    policy_and_state=state_ref,unchanged_exact_host_asset_metadata=history['Native']))
+binding=dict(history,native_case_profile=profile,Root_selection=selection['path'],W_INDEX=index,PROJECTS=roots,
+    Source_epoch=epoch['outer_epoch_reference'],clock_scope=clock,binder_raw=binder,normal_namespaces=namespaces,
+    current_SDK_source_pins=pins,owning_test_raw=captures[str(D/ROLE)]['raw_reference'],
+    owning_test_record=current[str(D/ROLE)],current_D_config=dict(status='config not a selected read role'),
+    Source_composition_proof=dict(current_prepared_scope=read_pin,exact_current_freeze=freeze_pin,
+        prior_direct_runtime=history_ref,current_translated_emitter_and_cache_roles_in_epoch=True,
+        current_proof_protocol_owner_binding=current[str(D/'ipfs_datasets_py/logic/ir_core/protocols.py')]),
+    Source42_current_owner_binding=dict(existing_Source42_binding_verified=True,current_published_parent=guarded_guide,
+        current_read_guard_pair=roots,actual_index_and_targets_READ3=read_pin),
+    Native_enrollment=dict(history['Native_enrollment'],Root_selection=selection,case_profile=profile,
+        current_toolchain_assets_exact=True,current_resource_state_observation=state_ref,clock_scope=clock,
+        authority='Root selected this exact admitted validation invocation'),
+    Source_IO_allocation=dict(history['Source_IO_allocation'],debit_bytes=amount,
+        explicit_ledger_increase_and_charge_reference=ledger,additional_private_readback_upper=allowance),
+    live_bindings_currently_unbound=False)
+bound=save('Root-current-existing-translated-cache-Native2-binding-v02.json',binding)
+path_scope='/home/barberb/.local/bin:/usr/lib/git-core'
+slots=dict(W=f'Path({str(D)!r})',A=f'Path({str(A)!r})',RUN_OUTPUT=f'Path({str(output)!r})',
+    PATH_SCOPE=repr(path_scope),ROOT_SELECTION=repr(selection['path']),CURRENT_BINDING_REF=repr(bound))
+assert set(slots)==set(ctrl['slots'])
+for name,value in slots.items():
+    template,n=re.subn(rf'(?m)^{name} = None$',lambda _: name+' = '+value,template)
+    assert n==1,name
+compile(template,'existing admitted Native translated-cache test operator','exec',dont_inherit=True)
+operator=save('Root-selected-existing-translated-cache-Native2-operator-v02.py',template.encode())
+assert now<=time.time_ns()<clock['submit_deadline_utc_ns']
+print(json.dumps(dict(operator=operator,selection=selection,binding=bound,charge=ledger,output=str(output),
+    run_argv=['/usr/bin/python3','-I','-B',operator['path']])),flush=True)

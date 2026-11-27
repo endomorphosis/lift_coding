@@ -1,0 +1,52 @@
+"""Use one selected Source42 lifecycle for the paired selector and Reader."""
+import ast
+import difflib
+from hashlib import sha256
+from pathlib import Path
+
+HERE=Path(__file__).resolve().parent
+PRIOR=HERE.parent/'decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/reader.py.DATA'
+data=PRIOR.read_bytes()
+assert (len(data),sha256(data).hexdigest())==(50631,'f20087d2ad4740b3b8b2d30ee1f70365b0aafdb44c416dda5e52cf18ca644bd5')
+before=data.decode()
+original=ast.parse(before)
+entry,=(node for node in original.body if getattr(node,'name',None)=='run_selected_relocated_stage_a_owner')
+reader=ast.get_source_segment(before,entry)
+marker='    if OUT.resolve() != OUT or os.path.lexists(OUT):'
+assert reader.count(marker)==1
+new_reader=reader[:reader.index(marker)].replace('    global source\n\n','',1)+"""    code,module_path = _stage_a_owner_code(chosen,roots)
+    business_bytes = picked['maximum_core_bytes']+picked['maximum_matrix_write_bytes']
+    _stage_a_owner_prepare(chosen,roots,expected_startup_sha256,business_bytes,code['bytes'],('raw','matrices'))
+    report['schema'] = 'actual-existing-StageA-v3-Reader-child/v1'
+
+    def capture():
+        result = read_selected_stage_a_epoch(plan,reader_selection=picked,
+            expected_selection_sha256=H(raw_reader),verify_reader_selection=verify_reader_selection,
+            verify_phase7_owner=None,verify_relocation_owner=verify_relocation_owner,epoch_api=epoch_api,
+            git_api=git_api,io=io,read_stage_zero=read_stage_zero,deadline=deadline)
+        if result['archive_committed'] is not True:
+            raise ValueError('Stage A Reader did not commit the selected outer archive')
+        return result
+
+    _,closed = _stage_a_owner_source42(roots,code,module_path,load_source,cleanup_source,in_window,capture)
+    if not closed:
+        return None
+    report['selected_stage_a_operator_envelope'] = chosen['Source_envelope']
+    report['explicit_IO_before_closeout'] = dict(spent)
+    report['full_Source_envelope_retained'] = chosen['Source_envelope']
+    return _stage_a_owner_child_receipt(chosen,encoded(report),
+        OUT/'actual-existing-StageA-v3-Reader-child.json','exact_stage_a_child_closeout_readback')"""
+after=before.replace(reader,(HERE/'shared.py.IN').read_text()+new_reader
+                     +(HERE/'selector.py.IN').read_text(),1)
+candidate=ast.parse(after)
+removed={'run_selected_relocated_stage_a_owner'}
+added={node.name for path in ('shared.py.IN','selector.py.IN')
+       for node in ast.parse((HERE/path).read_text()).body if isinstance(node,ast.FunctionDef)}
+assert [ast.dump(node) for node in original.body if getattr(node,'name',None) not in removed]==[
+    ast.dump(node) for node in candidate.body if getattr(node,'name',None) not in removed|added]
+(HERE/'reader.py.DATA').write_text(after)
+(HERE/'reader.py.DATA.diff').write_text(''.join(difflib.unified_diff(
+    before.splitlines(keepends=True),after.splitlines(keepends=True),
+    fromfile=str(PRIOR),tofile=str(HERE/'reader.py.DATA'))))
+print(len(after.encode()),sha256(after.encode()).hexdigest())
+print(*sorted(added))

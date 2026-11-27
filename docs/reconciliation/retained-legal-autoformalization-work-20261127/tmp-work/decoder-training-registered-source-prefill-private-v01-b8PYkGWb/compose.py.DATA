@@ -1,0 +1,13 @@
+"""Add the registered source-review entry beside the existing prefill owner."""
+from hashlib import sha256
+from pathlib import Path
+
+here = Path(__file__).resolve().parent
+prior = here.parent / "decoder-training-registered-dual-target-witness-private-v01-vbvuHts1/relational_assessment.py"
+body = prior.read_bytes()
+assert (len(body), sha256(body).hexdigest()) == (420756, "73adfd69c6d960ac5e95e274702fcb2f54d8e840ed8e1da64cbef6d63c8d6013")
+marker = b"@dataclass(frozen=True)\nclass QwenDevelopmentPrefill:"
+assert body.count(marker) == 1
+addition = (here / "addition.py.DATA").read_bytes()
+with (here / "relational_assessment.py").open("xb") as output:
+    output.write(body.replace(marker, addition + marker, 1))

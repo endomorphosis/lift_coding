@@ -1,0 +1,98 @@
+{
+  "Source_SDK_test_CI_model_Native_or_policy_action": false,
+  "all_checkouts_clean": true,
+  "all_gitlinks_unchanged": true,
+  "branch": "refs/heads/work/phase6-capacity-composition-20261123",
+  "closed_installation": {
+    "Source_module_stage_FDs_closed": true,
+    "bytes": 2043,
+    "full9": {
+      "st_ctime_ns": "1795555556443346693",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "41858808",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795555556443346693",
+      "st_nlink": "1",
+      "st_size": "2043",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-P7-typed-proof-sample-existing-Source2-selected-v227-kiid3ejh/Root-P7-typed-proof-sample-two-installed-Source-closed-small-v227.json",
+    "sha256": "bb49a35d7bc39c1caeb2738b017a05593185a20a43389aca2700d07e674a7a0c"
+  },
+  "diff_check_passed": true,
+  "exactly_two_modified_paths": true,
+  "frozen_for_ordinary72": true,
+  "head": "1538e52c22f12fcad6a22aef0a0e1a4d32dac5ae",
+  "index": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795555619520921130",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795555619519921121",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "0c056c967827a853f6dea913e6709b8daa5d149f8ef86b62ec47717ee628d422"
+  },
+  "ordinary72_executed_by_publisher": false,
+  "origin_main_tracking_ref_unchanged": "75b8c9c35297b2d69612868f457c4cd12542cf97",
+  "other_heads": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "hallucinate": "9e4daa10d7b063e0056069a56a83993df7a3ee5f",
+    "root": "6049d793fb5bbd5a603cc2ea19540ef959bb5c0a"
+  },
+  "other_roots_heads_indexes_refs_trees_and_links_unchanged": true,
+  "parent": "75b8c9c35297b2d69612868f457c4cd12542cf97",
+  "push": false,
+  "remote_contacted": false,
+  "schema": "actual-P7-typed-proof-sample-two-file-local-freeze/v227",
+  "selected_roles": [
+    {
+      "blob": "37265225393a19b2c58ee0ead946929090b51d23",
+      "bytes": 40652,
+      "full9": {
+        "st_ctime_ns": "1795555519854014831",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042541",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795555519241497018",
+        "st_nlink": "1",
+        "st_size": "40652",
+        "st_uid": "1000"
+      },
+      "mode": "100644",
+      "parent_blob": "2076e5c83eb68e94a6f1f0cee0539d12d69ae3a5",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "sha256": "5274253f346efe110c5a69eec161e5dcb51ce858fae5f3275c045528b32273a5"
+    },
+    {
+      "blob": "754d53a96072b21bcabb8a44a4fc615b4cf1152f",
+      "bytes": 37429,
+      "full9": {
+        "st_ctime_ns": "1795555520448020235",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042542",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795555519246307734",
+        "st_nlink": "1",
+        "st_size": "37429",
+        "st_uid": "1000"
+      },
+      "mode": "100644",
+      "parent_blob": "dce41c5d475c960d22e7d95830747b432dcc71a9",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+      "relative_path": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+      "sha256": "9ea38219594c8f5841fec7dbd2ad6da8925147eda44cb0ca9df2cff0fc5a2d7e"
+    }
+  ],
+  "tree": "c1a9370818ea8eccf59372600159dcaa3c51a31f"
+}

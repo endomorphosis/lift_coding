@@ -1,0 +1,233 @@
+{
+  "COLLECT_RUN_JUnit_exact_order": true,
+  "Source_SDK_resource_parent_closed": true,
+  "all_other_paths_Guide523_and_other_gitlinks_preserved": true,
+  "exact_Source_stage_committed_blob_joins": {
+    "ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py": {
+      "bytes": 130267,
+      "full9": {
+        "st_ctime_ns": "1795626392981734632",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042566",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795626392331588950",
+        "st_nlink": "1",
+        "st_size": "130267",
+        "st_uid": "1000"
+      },
+      "git_blob": "2faa76f3b111b3d68c814eb0eb0db7724a7a18f8",
+      "mode": "100644",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py",
+      "prior_blob": "e775815b7d9bc2570008792ca8316706add6ab9a",
+      "sha256": "44206e3e1f92594bc57534f8de756e4ff938600e40ab98c7f314f5da395359c1",
+      "stage0_blob": "2faa76f3b111b3d68c814eb0eb0db7724a7a18f8"
+    },
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py": {
+      "bytes": 214761,
+      "full9": {
+        "st_ctime_ns": "1795626393597728554",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042567",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795626392335396608",
+        "st_nlink": "1",
+        "st_size": "214761",
+        "st_uid": "1000"
+      },
+      "git_blob": "9dbd1c45ede27e34652cf872fb9aebfc06b996b8",
+      "mode": "100644",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+      "prior_blob": "a1999199145789efcaaad5a1afac766072e07527",
+      "sha256": "b02f62e724968f32c3a8df87a3998f7a26014764a04103bbdbc13898134e1371",
+      "stage0_blob": "9dbd1c45ede27e34652cf872fb9aebfc06b996b8"
+    }
+  },
+  "exact_freeze": {
+    "bytes": 7086,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-P8-V4-reviewed-graph-exact2-local-freeze-v330.json",
+    "sha256": "ccdbdb2ddbd08c18c4a23f1edd60ae54f2606a098fabc26e2da85d807afced37"
+  },
+  "failures_errors_skips_duplicates": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "function_case_vector": [
+    1,
+    2,
+    1,
+    1,
+    3,
+    1
+  ],
+  "initial_preflight_typing_correction": "Legacy index bytes field derived from existing full9 st_size; no effects on first attempt.",
+  "legal_admission_release_readiness_Native_model_claimed": false,
+  "new_cases": 4,
+  "no_test_CI_Source_replay": true,
+  "ordinary_functions": 6,
+  "ordinary_unique_pass": 9,
+  "prior_publication": {
+    "bytes": 9207,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide523-four-doc-three-FF-publication-small-v329.json",
+    "sha256": "beb86ded7a04035f9d2f402c02649ac1da7f5433108a4ec29f1054746c2e45c7"
+  },
+  "pushes_in_actual_order": [
+    {
+      "after": "2d83a8511601e85723a09b4c3529c1d430deabf3",
+      "before": "b9a1b16c240984baabd1a687328044669ab0135b",
+      "normal_fast_forward": true,
+      "porcelain": [
+        "To https://github.com/endomorphosis/ipfs_datasets_py.git",
+        " \tHEAD:refs/heads/main\tb9a1b16c24..2d83a85116",
+        "Done"
+      ],
+      "remote_messages": [
+        "remote: ",
+        "remote: GitHub found 150 vulnerabilities on endomorphosis/ipfs_datasets_py's default branch (8 critical, 77 high, 58 moderate, 7 low). To find out more, visit:        ",
+        "remote:      https://github.com/endomorphosis/ipfs_datasets_py/security/dependabot        ",
+        "remote:"
+      ],
+      "repository": "datasets"
+    },
+    {
+      "after": "1763dfa91f0c477b95f875b7ad16b9c805062191",
+      "before": "a2945b991f306c7e5dfd4c7cd6d351801c4ab7c6",
+      "normal_fast_forward": true,
+      "porcelain": [
+        "To https://github.com/endomorphosis/hallucinate_app.git",
+        " \tHEAD:refs/heads/main\ta2945b9..1763dfa",
+        "Done"
+      ],
+      "remote_messages": [],
+      "repository": "hallucinate"
+    },
+    {
+      "after": "d8ac847c70317c34c5ee4d0cd02858b77201d3c7",
+      "before": "096678d63c57e70cb81450b472dfdabaddf3d66d",
+      "normal_fast_forward": true,
+      "porcelain": [
+        "To https://github.com/endomorphosis/lift_coding.git",
+        " \tHEAD:refs/heads/main\t096678d63c..d8ac847c70",
+        "Done"
+      ],
+      "remote_messages": [],
+      "repository": "root"
+    }
+  ],
+  "qualification": {
+    "bytes": 3479,
+    "path": "/tmp/Root-P8-V4-reviewed-graph-existing-ordinary9-v331-l4ls_bm7/Root-P8-V4-reviewed-graph-package-ordinary9-qualified-small-v331.json",
+    "sha256": "70eb12e25edfad5852c9c1314c92d7779e5469716633d3bd69d32dd29a43729b"
+  },
+  "raw_JUnit": {
+    "bytes": 1801,
+    "logical_name": "junit.xml",
+    "path": "/tmp/Root-P8-V4-reviewed-graph-existing-ordinary9-v331-l4ls_bm7/actual-output/corpus-release-public-v4-reviewed-graph-ordinary9-run-result0-output1.bin",
+    "sha256": "695d216743ddd87fb68263460a94163d85ae06b05044f4a1452cb464076d2ae8"
+  },
+  "repositories": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {},
+      "index": {
+        "bytes": 4412225,
+        "full9": {
+          "st_ctime_ns": "1795500785295142737",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342879",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795500785294142725",
+          "st_nlink": "1",
+          "st_size": "4412225",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/index"
+      },
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+      "origin_main": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "HEAD": "2d83a8511601e85723a09b4c3529c1d430deabf3",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {},
+      "index": {
+        "bytes": 6991149,
+        "full9": {
+          "st_ctime_ns": "1795626506699758913",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "68338235",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795626506698758920",
+          "st_nlink": "1",
+          "st_size": "6991149",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index"
+      },
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+      "origin_main": "2d83a8511601e85723a09b4c3529c1d430deabf3",
+      "tree": "44fd40985caf3b5125407cee21d2d07f41a370ed"
+    },
+    "hallucinate": {
+      "HEAD": "1763dfa91f0c477b95f875b7ad16b9c805062191",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {
+        "ipfs_datasets_py": "2d83a8511601e85723a09b4c3529c1d430deabf3"
+      },
+      "index": {
+        "bytes": 138750,
+        "full9": {
+          "st_ctime_ns": "1795627239064214906",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342837",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795627239063806858",
+          "st_nlink": "1",
+          "st_size": "138750",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate/.git/index"
+      },
+      "origin": "https://github.com/endomorphosis/hallucinate_app.git",
+      "origin_main": "1763dfa91f0c477b95f875b7ad16b9c805062191",
+      "tree": "3f5d8aee4a81d1d941a5c6e654dcfe9d73daf7cb"
+    },
+    "root": {
+      "HEAD": "d8ac847c70317c34c5ee4d0cd02858b77201d3c7",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {
+        "external/ipfs_datasets": "2d83a8511601e85723a09b4c3529c1d430deabf3",
+        "hallucinate_app": "1763dfa91f0c477b95f875b7ad16b9c805062191"
+      },
+      "index": {
+        "bytes": 7262222,
+        "full9": {
+          "st_ctime_ns": "1795627239394806950",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69387316",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795627239393806950",
+          "st_nlink": "1",
+          "st_size": "7262222",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/.git/index"
+      },
+      "origin": "https://github.com/endomorphosis/lift_coding.git",
+      "origin_main": "d8ac847c70317c34c5ee4d0cd02858b77201d3c7",
+      "tree": "c80359d3afb8238c50230bacc02482d2c6f74e0b"
+    }
+  },
+  "retained_cases": 5,
+  "schema": "P8-V4-reviewed-graph-package-ordinary9-three-normal-FF-publication/v331",
+  "scope": "Fictional Parquet fixtures qualify V4 software checks only."
+}

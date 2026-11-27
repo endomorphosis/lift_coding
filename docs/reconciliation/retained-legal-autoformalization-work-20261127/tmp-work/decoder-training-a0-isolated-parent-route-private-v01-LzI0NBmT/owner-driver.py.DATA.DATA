@@ -1,0 +1,830 @@
+import contextlib,re,tempfile,time,shutil
+import os,sys,json,stat,types,hashlib,base64,zlib,subprocess,traceback,importlib.util,xml.etree.ElementTree as ET
+from pathlib import Path
+
+
+H=lambda b:hashlib.sha256(b).hexdigest()
+fields=('st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_uid', 'st_gid', 'st_size', 'st_mtime_ns', 'st_ctime_ns')
+f9=lambda s:{k:str(getattr(s,k))for k in fields}
+def exact_metadata(reference):
+ assert type(reference)is dict and set(reference)=={'path','bytes','sha256'}
+ assert type(reference['path'])is str and Path(reference['path']).is_absolute()and '..'not in Path(reference['path']).parts
+ assert type(reference['bytes'])is int and 0<reference['bytes']<=4194304
+ assert type(reference['sha256'])is str and re.fullmatch('[0-9a-f]{64}',reference['sha256'])is not None
+ p=Path(reference['path']);before=p.lstat();assert stat.S_ISREG(before.st_mode)and before.st_nlink==1 and before.st_uid==os.getuid()and before.st_size==reference['bytes']
+ fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+ try:
+  opened=os.fstat(fd);assert f9(before)==f9(opened);raw=b''
+  while True:
+   chunk=os.read(fd,min(1048576,reference['bytes']+1-len(raw)))
+   if not chunk:break
+   raw+=chunk;assert len(raw)<=reference['bytes']
+  ended=os.fstat(fd)
+ finally:os.close(fd)
+ assert f9(before)==f9(opened)==f9(ended)==f9(p.lstat())and len(raw)==reference['bytes']and H(raw)==reference['sha256']
+ return raw
+
+ISOLATED_PARENT_SCHEMA = "actual-selected-a0-isolated-existing-owner-parent/v1"
+ISOLATED_SOURCE_SCHEMA = "actual-selected-a0-paired-source-read-binding/v1"
+ISOLATED_RESERVATION_SCHEMA = "actual-selected-a0-original-resource-opening/v1"
+ISOLATED_PARENT_MODULES = ('ipfs_datasets_py.logic.backends.process',
+    'ipfs_datasets_py.logic.backends.resource_admission',
+    'ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler',
+    'ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_daemon_resources')
+
+def _selected_parent_path(value):
+ return type(value) is str and Path(value).is_absolute() and '..' not in Path(value).parts and str(Path(value)) == value
+
+def _selected_parent_digest(value):
+ return type(value) is str and re.fullmatch('[0-9a-f]{64}', value) is not None
+
+def _selected_parent_json(reference):
+ raw=exact_metadata(reference)
+ def unique(pairs):
+  result={}
+  for name,value in pairs:
+   if name in result:
+    raise ValueError("duplicate selected parent metadata key")
+   result[name]=value
+  return result
+ return json.loads(raw,object_pairs_hook=unique),raw
+
+def isolated_parent_fingerprint(selected, owner):
+ controls={key:value for key,value in selected.items() if key not in ('fingerprint','epoch_raw','launch_raw','root')}
+ return (H(json.dumps(controls,sort_keys=True,separators=(',',':')).encode()),
+         H(selected['epoch_raw']),H(selected['launch_raw']),str(selected['root']),
+         owner['origin_owner'].origin_commitment(owner['origin']),
+         id(owner['origin_owner']),id(owner['renderer']),id(owner['renderer']['run_relational_origin_first_use']),
+         id(owner['verify_opening']),id(owner['verify_control_binding']),id(owner['verify_launch_owner']))
+
+def prepare_isolated_parent(execution, execution_ref, owner):
+ """Authenticate parent inputs before the existing driver opens its live custody."""
+ from copy import deepcopy
+ if (type(execution) is not dict or set(execution) != {'schema','source_binding','control_binding',
+       'resource_opening','launch_selection','projects','charged_root','output_directory'}
+     or execution['schema'] != ISOLATED_PARENT_SCHEMA
+     or type(owner) is not dict or set(owner) != {'origin_owner','origin','renderer',
+           'verify_opening','verify_control_binding','verify_launch_owner'}
+     or any(not callable(owner[key]) for key in ('verify_opening','verify_control_binding','verify_launch_owner'))
+     or type(owner['renderer']) is not dict or not callable(owner['renderer'].get('run_relational_origin_first_use'))):
+  raise ValueError("explicit existing owner and exact isolated parent input required")
+ sealed_execution,execution_raw=_selected_parent_json(execution_ref)
+ if sealed_execution!=execution:
+  raise ValueError("selected isolated parent execution input changed")
+ source, _ = _selected_parent_json(execution['source_binding'])
+ control, _ = _selected_parent_json(execution['control_binding'])
+ opening, _ = _selected_parent_json(execution['resource_opening'])
+ launch, launch_raw = _selected_parent_json(execution['launch_selection'])
+ if (type(source) is not dict or source.get('schema') != ISOLATED_SOURCE_SCHEMA
+     or set(source) != {'schema','datasets_root','projects','outer_epoch','protected_index','absent_paths','paired_reader_close','parent_module_sha256'}
+     or not _selected_parent_path(source['datasets_root'])):
+  raise ValueError("exact current paired Source binding required")
+ projects=source['projects']
+ if (type(projects) is not list or len(projects)!=2 or projects!=execution['projects']
+     or any(type(p) is not dict or set(p)!={'root','Git_HEAD'} or not _selected_parent_path(p['root'])
+            or type(p['Git_HEAD']) is not str or re.fullmatch('[0-9a-f]{40}',p['Git_HEAD']) is None for p in projects)
+     or len({p['root'] for p in projects})!=2 or source['datasets_root'] not in {p['root'] for p in projects}):
+  raise ValueError("current paired project roots and Git HEADs differ")
+ roots={Path(p['root']) for p in projects}
+ if any(root.resolve(strict=True)!=root for root in roots):
+  raise ValueError("paired project roots must have their selected resolved identities")
+ if any(a != b and a.is_relative_to(b) for a in roots for b in roots):
+  raise ValueError("paired project roots must be separate")
+ for field in ('charged_root','output_directory'):
+  if (not _selected_parent_path(execution[field])
+      or Path(execution[field]).resolve()!=Path(execution[field])
+      or any(Path(execution[field]).is_relative_to(root) for root in roots)):
+   raise ValueError("private charged and output paths must be outside selected Source roots")
+ epoch, epoch_raw = _selected_parent_json(source['outer_epoch'])
+ _selected_parent_json(source['paired_reader_close'])
+ evidence=source['protected_index']
+ absent=source['absent_paths']
+ def row_stamp(full9):
+  return (type(full9) is dict and set(full9)==set(fields)
+          and all(type(value) is str and re.fullmatch('[0-9]+', value) is not None for value in full9.values()))
+ if (type(epoch) is not list or not 0<len(epoch)<=8192
+     or any(type(row) is not dict or not _selected_parent_path(row.get('path'))
+            or type(row.get('bytes')) is not int or row['bytes']<0 or not _selected_parent_digest(row.get('sha256'))
+            or not row_stamp(row.get('full9')) or row['full9']['st_size']!=str(row['bytes'])
+            or sum(Path(row['path']).is_relative_to(root) for root in roots)!=1 for row in epoch)
+     or len({row['path'] for row in epoch})!=len(epoch)
+     or type(evidence) is not dict or set(evidence)!={'path','full9','sha256'}
+     or not _selected_parent_path(evidence['path']) or not row_stamp(evidence['full9'])
+     or not _selected_parent_digest(evidence['sha256'])
+     or type(absent) is not list or any(not _selected_parent_path(path)
+          or not any(Path(path).is_relative_to(root) for root in roots) for path in absent)
+     or len(set(absent))!=len(absent) or set(absent).intersection(row['path'] for row in epoch)):
+  raise ValueError("current paired Source full9, protected index or absence roster differs")
+ parent_module_sha256=source['parent_module_sha256']
+ by_path={row['path']:row for row in epoch}
+ index_row=by_path.get(evidence['path'])
+ if index_row is not None and any(index_row[key]!=evidence[key] for key in ('sha256','full9')):
+  raise ValueError("protected index and paired Source row differ")
+ if (type(parent_module_sha256) is not dict or set(parent_module_sha256)!=set(ISOLATED_PARENT_MODULES)
+     or any(not _selected_parent_digest(digest)
+            or by_path.get(str(Path(source['datasets_root'])/(name.replace('.','/')+'.py')),{}).get('sha256')!=digest
+            for name,digest in parent_module_sha256.items())):
+  raise ValueError("exact current parent module pins must match the paired Source epoch")
+ numeric={'storage_bytes','storage_limit_bytes','memory_mb','cpu_slots','child_process_slots',
+          'timeout_seconds','ledger_lock_timeout_seconds'}
+ if (type(opening) is not dict or set(opening)!=(numeric | {'schema','state_path','resource_ledger',
+          'roots','expected_scheduler_policy_sha256','environment'})
+     or opening['schema'] != ISOLATED_RESERVATION_SCHEMA
+     or any(type(opening[field]) is not int or opening[field]<=0 for field in numeric)
+     or not all(_selected_parent_path(opening[key]) for key in ('state_path','resource_ledger'))
+     or not _selected_parent_digest(opening['expected_scheduler_policy_sha256'])
+     or type(opening['roots']) is not list or not opening['roots']
+     or any(not _selected_parent_path(root) for root in opening['roots'])
+     or len(set(opening['roots']))!=len(opening['roots'])
+     or opening['storage_bytes']>opening['storage_limit_bytes']
+     or not any(Path(execution['charged_root']).is_relative_to(Path(root)) for root in opening['roots'])):
+  raise ValueError("exact existing ledger, scheduler and charged reservation selection required")
+ environment=opening['environment']
+ if (type(environment) is not dict or any(type(key) is not str or type(value) is not str for key,value in environment.items())
+     or not all(environment.get(key) == value for key,value in {
+         'HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1','IPFS_DATASETS_PY_MINIMAL_IMPORTS':'1',
+         'IPFS_ACCEL_AUTO_INSTALL':'0','IPFS_ACCEL_SKIP_CORE':'1','IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS':'0',
+         'IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI':'0','PYTHONDONTWRITEBYTECODE':'1'}.items())
+     or environment.get('PYTHONOPTIMIZE','') not in ('','0')
+     or not set(map(str,roots)).issubset(environment.get('PYTHONPATH','').split(os.pathsep))):
+  raise ValueError("exact approved offline parent and renderer environment required")
+ origin_sha=owner['origin_owner'].origin_commitment(owner['origin'])
+ if (type(control) is not dict or control.get('origin_selection_sha256')!=origin_sha
+     or control.get('source_epoch_reference')!=source['outer_epoch']
+     or control.get('cwd')!=source['datasets_root']
+     or control.get('attempt_directory')!=str(Path(execution['charged_root'])/'attempt')
+     or not _selected_parent_path(control.get('python'))
+     or not _selected_parent_digest(control.get('owner_admission_sha256'))
+     or type(control.get('limits')) is not dict
+     or any(type(control['limits'].get(key)) is not int or not 0<control['limits'][key]<=bound
+            for key,bound in {'resident_memory_bytes':opening['memory_mb']*1024**2,
+                              'max_workspace_bytes':opening['storage_bytes']}.items())
+     or type(launch) is not dict or launch.get('origin_selection_sha256')!=origin_sha
+     or launch.get('source_epoch_sha256')!=source['outer_epoch']['sha256']
+     or launch.get('control_binding_sha256')!=execution['control_binding']['sha256']
+     or not all(_selected_parent_digest(launch.get(key)) for key in ('physical_request_sha256','clock_domain_sha256'))):
+  raise ValueError("selected control, launch, resource or origin does not bind the paired Source epoch")
+ selected={'root':Path(source['datasets_root']),'projects':projects,'environment':environment,
+     'epoch_reference':source['outer_epoch'],'epoch':epoch,'epoch_raw':epoch_raw,'control':control,
+     'evidence':{key:evidence[key] for key in ('path','full9')},'protected_index_sha256':evidence['sha256'],
+     'absent_paths':absent,'opening':opening,'paired_close':source['paired_reader_close'],'launch_raw':launch_raw,
+     'launch_reference':dict(execution['launch_selection']), 'parent_module_sha256':parent_module_sha256,
+     'control_reference':dict(execution['control_binding'])}
+ # The original verifier authenticates the paired reader close and the selected
+ # index path even when Git metadata is tracked outside the regular Source roster.
+ fingerprint=isolated_parent_fingerprint(selected, owner)
+ references=(dict(execution_ref),dict(execution['source_binding']),dict(execution['resource_opening']),
+             dict(source['paired_reader_close']),dict(execution['control_binding']),dict(execution['launch_selection']))
+ if owner['verify_opening'](*(ref['sha256'] for ref in references),control['owner_admission_sha256'],origin_sha) is not True:
+  raise ValueError("original owner refused the selected parent opening")
+ if (isolated_parent_fingerprint(selected,owner)!=fingerprint or exact_metadata(execution_ref)!=execution_raw
+     or execution!=sealed_execution):
+  raise ValueError("selected isolated parent opening changed during verification")
+ for ref in references[1:]:
+  exact_metadata(ref)
+ selected['fingerprint']=fingerprint
+ return selected
+
+def dispatch_isolated_parent(selected, execution, owner):
+ if (selected['fingerprint']!=isolated_parent_fingerprint(selected,owner)
+     or execution['launch_selection']!=selected['launch_reference']
+     or execution['control_binding']!=selected['control_reference']):
+  raise ValueError("selected isolated dispatch scope changed after parent admission")
+ report['isolated_origin_dispatch_attempted']=True
+ return run_selected_isolated_origin(owner['origin'],origin_owner=owner['origin_owner'],
+     actual_control_binding_reference=dict(selected['control_reference']),verify_control_binding=owner['verify_control_binding'],
+     launch_raw=selected['launch_raw'],expected_launch_sha256=selected['launch_reference']['sha256'],
+     verify_launch_owner=owner['verify_launch_owner'])
+
+source42={'bytes': 10375, 'encoding': 'zlib+base64', 'path': '/tmp/legal-ir-phase2-reviewed-admission-source-20261108-v01/resource-census-compatible-port-v01/runtime-owner-v4-trainer-compatibility-v01/current-published-cleanup71-original16MiB-input-v01/original42-frozen.py', 'raw_zlib_base64': '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', 'sha256': '42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9'}
+
+process={'afterFull9': {'st_ctime_ns': '1794440363922454714', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '57805342', 'st_mode': '33188', 'st_mtime_ns': '1794440363920001940', 'st_nlink': '1', 'st_size': '102792', 'st_uid': '1000'}, 'body_read_calls': 1, 'bytes': 102792, 'encoding': 'zlib+base64', 'full9': {'st_ctime_ns': '1794440363922454714', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '57805342', 'st_mode': '33188', 'st_mtime_ns': '1794440363920001940', 'st_nlink': '1', 'st_size': '102792', 'st_uid': '1000'}, 'path': '/home/barberb/lift_coding/external/ipfs_datasets/ipfs_datasets_py/logic/backends/process.py', 'pathAfterFull9': {'st_ctime_ns': '1794440363922454714', 'st_dev': '66306', 'st_gid': '1000', 'st_ino': '57805342', 'st_mode': '33188', 'st_mtime_ns': '1794440363920001940', 'st_nlink': '1', 'st_size': '102792', 'st_uid': '1000'}, 'raw_zlib_base64': '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', 'role': 'actual_spec_router_and_existing_public_process_seam', 'sha256': '4434f571e209c17165aa3ea941001bbeaad3efc10957a8dfe9c183f7531b44b6'}
+
+def load_cached_operational(record,name):
+ raw=zlib.decompress(base64.b64decode(record["raw_zlib_base64"]));assert(len(raw),H(raw))==(record["bytes"],record["sha256"])
+ spec=importlib.util.spec_from_file_location(name,record["path"]);assert spec is not None
+ mod=importlib.util.module_from_spec(spec);sys.modules[name]=mod
+ exec(compile(raw,record["path"],"exec"),mod.__dict__)
+ return mod
+
+def metadata_guard():
+ for path in ABSENT_PATHS:assert not os.path.lexists(path),("declared namespace absence changed",path)
+ out=[]
+ for row in EPOCH:
+  p=Path(row["path"]);a=os.lstat(p);assert stat.S_ISREG(a.st_mode)and a.st_nlink==1
+  fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+  try:
+   assert f9(a)==f9(os.fstat(fd))==f9(os.lstat(p))==row["full9"],("source metadata drift",str(p))
+  finally:os.close(fd)
+  out.append({"path":str(p),"bytes":row["bytes"],"sha256":row["sha256"],"full9":f9(a)})
+ heads={}
+ for project in PROJECTS:
+  git=subprocess.run(["/usr/bin/git","-C",project["root"],"rev-parse","HEAD"],capture_output=True,text=True,timeout=10,check=True).stdout.strip()
+  assert git==project["Git_HEAD"],("Git HEAD drift",project["root"])
+  heads[project["root"]]=git
+ p=Path(EVIDENCE["path"]);a=os.lstat(p);assert stat.S_ISREG(a.st_mode)and a.st_nlink==1
+ fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW)
+ try:
+  assert f9(a)==f9(os.fstat(fd))==f9(os.lstat(p))==EVIDENCE["full9"],"protected canonical evidence metadata changed"
+ finally:os.close(fd)
+ return {"Git_HEADS":heads,"records":out,"protected_evidence":{"path":str(p),"full9":f9(a)},"Source_body_read_bytes":0,"all_FDs_closed":True}
+
+def genuine(result):
+ d=result.to_dict()
+ assert not any(d[k]for k in("timed_out","cancelled","unavailable","output_truncated","workspace_limit_exceeded","resource_exhausted")),d
+ assert d["workspace_cleaned"] and not d["error"],d
+ assert d.get("native_lifecycle",{}).get("cleanup_confirmed") is True,d
+ return d
+
+def run_test_with_actual_custody(request, *, origin_owner=None, origin_selection=None,
+                                 expected_origin_request_sha256=None, first_use_attempt_raw=None,
+                                 expected_first_use_attempt_sha256=None, verify_first_use_dispatch=None,
+                                 observe_isolated_source_after_run=None):
+ origin_archive = (origin_owner, origin_selection, expected_origin_request_sha256)
+ attempt_options = (first_use_attempt_raw, expected_first_use_attempt_sha256, verify_first_use_dispatch)
+ if observe_isolated_source_after_run is not None:
+  if (not callable(observe_isolated_source_after_run) or any(value is None for value in (*origin_archive, *attempt_options))
+      or type(report.get("source_before")) is not dict or not report["source_before"]):
+   raise ValueError("isolated preclose requires selected first-use custody and the opening Source guard")
+  opening_source = origin_owner._wire(report["source_before"])
+ captured_attempt = None
+ if any(value is not None for value in attempt_options):
+  if any(value is None for value in (*attempt_options, *origin_archive)) or "origin_first_use_attempt" in report:
+   raise ValueError("one complete existing-owner first-use attempt selection required")
+  operator, _ = sdk._linux_owned_identity(os.getpid())
+  attempt = origin_owner.prepare_qwen_import_attempt_dispatch(origin_selection, request, sdk=sdk,
+      attempt_raw=first_use_attempt_raw, expected_attempt_sha256=expected_first_use_attempt_sha256,
+      operator_birth=(operator.pid, operator.birth_ticks), verify_dispatch_owner=verify_first_use_dispatch)
+  captured_attempt = {"dispatch": attempt, "dispatch_sha256": expected_first_use_attempt_sha256,
+                      "sdk_return_status": "unobserved", "original_result_sha256": None}
+ if any(value is not None for value in origin_archive):
+  if any(value is None for value in origin_archive):
+   raise ValueError("complete existing-owner origin capture selection required")
+  report["origin_capture_selected"] = True
+  dispatch = origin_owner.retain_origin_dispatch(origin_selection, request, sdk=sdk,
+      expected_request_sha256=expected_origin_request_sha256, retain=retain_origin_owner_bytes)
+  sync_origin_output_directory()
+  if origin_owner.origin_request_commitment(origin_selection, request, sdk=sdk) != expected_origin_request_sha256:
+   raise ValueError("selected SDK request changed while retaining dispatch evidence")
+  report["origin_dispatch"] = dispatch
+  if captured_attempt is not None:
+   report["origin_first_use_attempt"] = captured_attempt
+ try:
+  result=runner.run(request)
+  if origin_owner is None:
+   retain_actual_output_files("run",result)
+   report["run"]=result.to_dict()
+   return result
+ except BaseException as error:
+  # Only an actual owner supplied by this exact SDK call is usable.
+  handle=error.cleanup_handle if type(error)is sdk.OwnedToolCleanupError else None
+  report["owned_cleanup_pending"]={"owner":"existing SDK ordinary owned-process cleanup","SDK_returned_result":False,"observations":[],"attempts":0,"original_error_type":type(error).__name__}
+  current=error.__traceback__
+  while current is not None:
+   if current.tb_frame.f_code is sdk.BoundedToolRunner.run.__code__:
+    value=current.tb_frame.f_locals.get("result")
+    if type(value)is sdk.ToolRunResult:
+     try:retain_actual_output_files("run-exception",value)
+     except BaseException as raw_retention_error:report["raw_retention_error"]={"type":type(raw_retention_error).__name__,"message":str(raw_retention_error)}
+     report["run"]=value.to_dict()
+     report["owned_cleanup_pending"]["SDK_result_origin"]="actual SDK run traceback local before error; not a successful return"
+    candidate=current.tb_frame.f_locals.get("owned_handle")
+    if handle is None and type(candidate)is sdk.NativeToolCleanupHandle:
+     handle=candidate
+   current=current.tb_next
+  if handle is None:
+   # No proof that this exception happened before dispatch: retain both READs
+   # and this original caller instead of claiming cleanup or releasing them.
+   report["owned_cleanup_pending"]["ambiguous_without_actual_handle"]=True
+   while True:
+    try:
+     print(json.dumps({"event":"AMBIGUOUS_ORDINARY_CUSTODY_RETAINED","operator_pid":os.getpid(),"Source_READ_still_held":True,"new_test_dispatch":False}),flush=True)
+     time.sleep(5)
+    except BaseException as hold_error:
+     report["owned_cleanup_pending"]["last_hold_error_type"]=type(hold_error).__name__
+  while True:
+   report["owned_cleanup_pending"]["attempts"]+=1
+   confirmed=False
+   try:
+    observation=handle.retry_cleanup()
+    row=observation.to_dict()
+    report["owned_cleanup_pending"]["observations"]=(report["owned_cleanup_pending"]["observations"]+[row])[-32:]
+    confirmed=observation.cleanup_confirmed
+   except BaseException as retry_error:
+    # This includes the owner's own OwnedToolCleanupError: none is a release.
+    report["owned_cleanup_pending"]["last_retry_error_type"]=type(retry_error).__name__
+   if confirmed:
+    report["owned_cleanup_pending"]["confirmed_after_error"]=True
+    if captured_attempt is not None:
+     captured_attempt["sdk_return_status"] = "no_normal_return"
+    # Rethrow only OUTSIDE the retry handler after fresh actual confirmation.
+    raise error
+   try:
+    print(json.dumps({"event":"ACTUAL_ORDINARY_CUSTODY_RETAINED","operator_pid":os.getpid(),"attempts":report["owned_cleanup_pending"]["attempts"],"Source_READ_still_held":True,"new_test_dispatch":False}),flush=True)
+    time.sleep(1)
+   except BaseException as hold_error:
+    report["owned_cleanup_pending"]["last_hold_error_type"]=type(hold_error).__name__
+
+ # The SDK call returned. Retention errors belong to the ordinary owner failure
+ # path, outside the handler for an exception thrown by the actual SDK call.
+ retained = retain_actual_output_files("run", result)
+ report["run"] = result.to_dict()
+ captured = origin_owner.retain_origin_sdk_return(result, retained, sdk=sdk, retain=retain_origin_owner_bytes)
+ sync_origin_output_directory()
+ report["origin_return"] = captured
+ if captured_attempt is not None:
+  captured_attempt.update(sdk_return_status="returned", original_result_sha256=captured["result_manifest"]["sha256"])
+ if observe_isolated_source_after_run is not None:
+  after_run = observe_isolated_source_after_run()
+  if type(after_run) is not dict:
+   raise ValueError("isolated origin Source guard changed after the original SDK return")
+  after_run_raw = origin_owner._wire(after_run)
+  if after_run_raw != opening_source or origin_owner._wire(report["source_before"]) != opening_source:
+   raise ValueError("isolated origin Source guard changed after the original SDK return")
+  report["source_after_run"] = json.loads(after_run_raw)
+  report["isolated_origin_preclose"] = origin_owner.prepare_isolated_origin_preclose(
+      origin_selection, sdk=sdk, request=request, result=result,
+      expected_request_sha256=expected_origin_request_sha256,
+      expected_result_sha256=captured["result_manifest"]["sha256"])
+ return result
+
+
+def run_selected_isolated_origin(origin, *, origin_owner, actual_control_binding_reference,
+                                 verify_control_binding, launch_raw, expected_launch_sha256,
+                                 verify_launch_owner):
+ """Run the selected isolated import under the original parent and Source reads."""
+ render = factory_namespace.get("run_relational_origin_first_use")
+ before = report.get("source_before")
+ active_reads = report.get("actual_Source_context_closure")
+ parent = report.get("actual_parent_lease")
+ if (not callable(render) or not callable(metadata_guard) or not callable(verify_launch_owner)
+     or type(before) is not dict or before.get("all_FDs_closed") is not True
+     or type(active_reads) is not list or not active_reads
+     or any(type(row) is not dict or type(row.get("root")) is not str
+            or row.get("entered") is not True or row.get("exit_returned") is not False for row in active_reads)
+     or type(parent) is not dict or type(parent.get("lease_id")) is not str or not parent["lease_id"]
+     or report.get("run") is not None or any(key in report for key in (
+         "origin_dispatch", "origin_first_use_attempt", "origin_return", "isolated_origin_preclose"))):
+  raise ValueError("one isolated import needs the existing renderer, original opening Source guard and parent custody")
+ roots = {row["root"] for row in active_reads}
+ heads = before.get("Git_HEADS")
+ fields = ("path", "bytes", "sha256", "full9")
+ frozen_epoch = epoch_raw
+ if (type(frozen_epoch) is not bytes or len(frozen_epoch) != epoch_reference["bytes"]
+     or H(frozen_epoch) != epoch_reference["sha256"]):
+  raise ValueError("opening Source epoch bytes differ from the selected driver reference")
+ sealed_rows = json.loads(frozen_epoch)
+ epoch_rows = origin_owner._wire(sealed_rows)
+ expected_rows = [{key: row[key] for key in fields} for row in sealed_rows]
+ if (origin_owner._wire(EPOCH) != epoch_rows
+     or len(roots) != len(active_reads) or type(heads) is not dict or set(heads) != roots
+     or origin_owner._wire(before.get("records")) != origin_owner._wire(expected_rows)):
+  raise ValueError("opening Source rows or entered lease roots differ from the selected driver epoch")
+ opening_raw = origin_owner._wire(before)
+ lease_scope = origin_owner._wire(active_reads)
+ parent_scope = origin_owner._wire(parent)
+ epoch_scope = origin_owner._wire(epoch_reference)
+ charged = str(CHARGED_ROOT)
+
+ def current():
+  if (origin_owner._wire(report.get("source_before")) != opening_raw
+      or origin_owner._wire(report.get("actual_Source_context_closure")) != lease_scope
+      or origin_owner._wire(report.get("actual_parent_lease")) != parent_scope
+      or origin_owner._wire(epoch_reference) != epoch_scope or epoch_raw != frozen_epoch
+      or origin_owner._wire(EPOCH) != epoch_rows or str(CHARGED_ROOT) != charged):
+   raise ValueError("isolated import opening Source or parent scope changed before dispatch")
+
+ def verify_selected_launch(*offered):
+  allowed = verify_launch_owner(*offered)
+  current()
+  if origin_owner._wire(report.get("source_epoch_binding")) != epoch_scope:
+   raise ValueError("isolated import epoch binding changed before dispatch")
+  return allowed
+
+ def dispatch_selected(request, **custody):
+  # The renderer authenticated these original bytes against the selected launch.
+  binding = json.loads(request.input_files["control-binding.json"])
+  selection = json.loads(request.input_files["request.json"])
+  epoch = binding["source_epoch_reference"]
+  prior = report.get("source_epoch_binding")
+  current()
+  if (origin_owner._wire(epoch) != epoch_scope
+      or (prior is not None and origin_owner._wire(prior) != epoch_scope)
+      or selection["source_sha256"] != {row["path"]: row["sha256"] for row in expected_rows}
+      or selection["cwd"] not in roots or str(Path(selection["attempt_directory"]).parent) != charged
+      or custody.get("observe_isolated_source_after_run") is not metadata_guard):
+   raise ValueError("selected isolated request, Source epoch, charged root or return guard differs")
+  report["source_epoch_binding"] = dict(epoch)
+  return run_test_with_actual_custody(request, **custody)
+
+ return render(origin, origin_owner=origin_owner, sdk=sdk, python=PY, environment=FLAGS,
+     actual_control_binding_reference=actual_control_binding_reference, verify_control_binding=verify_control_binding,
+     launch_raw=launch_raw, expected_launch_sha256=expected_launch_sha256, verify_launch_owner=verify_selected_launch,
+     run_with_actual_custody=dispatch_selected, observe_isolated_source_after_run=metadata_guard)
+
+
+def retain_origin_owner_bytes(name, raw):
+ if type(name) is not str or not re.fullmatch(r"origin\.[a-z0-9.-]+", name) or type(raw) is not bytes:
+  raise ValueError("exact owner origin artifact name and bytes required")
+ path = RUN_OUTPUT / name
+ fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o400)
+ with os.fdopen(fd, "wb") as stream:
+  stream.write(raw)
+  stream.flush()
+  os.fsync(stream.fileno())
+ return {"path": str(path), "bytes": len(raw), "sha256": H(raw)}
+
+
+def sync_origin_output_directory():
+ fd = os.open(RUN_OUTPUT, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW)
+ try:
+  os.fsync(fd)
+ finally:
+  os.close(fd)
+
+
+def origin_retained_external_bytes():
+ # Storage finalization includes incomplete writes and exception outputs.
+ total = 0
+ with os.scandir(RUN_OUTPUT) as records:
+  for record in records:
+   if record.name.startswith("origin.") or re.fullmatch(r"run(?:-exception)?\.output\.[0-9]+\.bin", record.name):
+    info = record.stat(follow_symlinks=False)
+    if not stat.S_ISREG(info.st_mode) or info.st_nlink != 1:
+     raise ValueError("origin evidence storage requires single-link regular files")
+    total += info.st_size
+ return total
+
+
+def retain_actual_output_files(phase, result):
+ from collections.abc import Mapping
+ outputs=result.output_files
+ if not isinstance(outputs, Mapping):
+  raise TypeError("SDK output_files must preserve the actual bytes mapping")
+ retained=[]
+ for index,(logical_name,raw) in enumerate(outputs.items()):
+  if type(logical_name)is not str or type(raw)is not bytes:
+   raise TypeError("SDK output file names and exact bytes required")
+  path=RUN_OUTPUT/(phase+".output."+str(index)+".bin")
+  fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)
+  with os.fdopen(fd,"wb")as stream:stream.write(raw);stream.flush();os.fsync(stream.fileno())
+  retained.append({"logical_name":logical_name,"path":str(path),"bytes":len(raw),"sha256":H(raw),"origin":"actual ToolRunResult.output_files bytes; not to_dict decoded text"})
+ report[phase+"_raw_output_files"]=retained
+ return retained
+
+import importlib
+
+def observe_control_and_CAS_metadata(database,artifact_root):
+ pool=disk._inventory([artifact_root],strict=True)
+ observed=database.lstat();assert stat.S_ISREG(observed.st_mode)and observed.st_nlink==1
+ return {'database':{'path':str(database),'bytes':observed.st_size,'full9':f9(observed)},
+  'artifact_root':str(artifact_root),'pool_inventory':pool,'content_bodies_read':False}
+
+def observe_state():
+ for attempt in range(5):
+  before=STATE.lstat();assert stat.S_ISREG(before.st_mode)and before.st_size<65536
+  fd=os.open(STATE,os.O_RDONLY|os.O_NOFOLLOW)
+  try:
+   opened=os.fstat(fd);raw=os.read(fd,65537);end=os.fstat(fd)
+  finally:os.close(fd)
+  after=STATE.lstat()
+  if f9(before)==f9(opened)==f9(end)==f9(after)and len(raw)==before.st_size:
+   return {'full9':f9(after),'bytes':len(raw),'sha256':H(raw),'state':json.loads(raw)}
+ raise RuntimeError('bounded resource snapshot identity changed')
+
+def run_existing_owner(execution_reference, *, isolated_owner=None):
+ if __debug__ is not True:
+  raise RuntimeError("the existing driver requires Python assertions")
+ global report, RUN_OUTPUT, CHARGED_ROOT, ABSENT_PATHS, STATE, EPOCH, PROJECTS, EVIDENCE
+ global epoch_raw, epoch_reference, factory_namespace, sdk, disk, runner, result
+ global PY, FLAGS, _owner_invoked
+ if globals().get('_owner_invoked') is True:
+  raise RuntimeError("one existing owner attempt per birth parent")
+ _owner_invoked=True
+ EXECUTION_REFERENCE=execution_reference
+ EXECUTION=json.loads(exact_metadata(EXECUTION_REFERENCE))
+ isolated = EXECUTION.get('schema') == ISOLATED_PARENT_SCHEMA
+ if isolated:
+  selected = prepare_isolated_parent(EXECUTION, EXECUTION_REFERENCE, isolated_owner)
+  PY=selected['control']['python']
+  FLAGS=selected['environment']
+ else:
+  if isolated_owner is not None:
+   raise ValueError("isolated owner callbacks require explicit isolated parent selection")
+  assert set(EXECUTION)=={'schema','source_binding','control_binding','import_request','resource_opening','projects','charged_root','output_directory'}
+  assert EXECUTION['schema']=='actual-currentcopy-v11-vendor-import-existing-owner-driver-input/v1'
+  ROOT_SELECTION='Root selected SAME existing-owner fresh current-copy v11 vendor import; explicit digest-omitted objective, empty Adam0/new lineage, no old numeric parent or physical-launcher gate'
+  assert 'PENDING'not in ROOT_SELECTION
+  ACTUAL_BINDING_REFERENCE=EXECUTION['source_binding'];ACTUAL_BINDING=json.loads(exact_metadata(ACTUAL_BINDING_REFERENCE))
+  assert ACTUAL_BINDING['schema']=='actual-closed-world-six-file-legalmath-law-postCAS-binding/v1'and ACTUAL_BINDING['Root_selected']is True and ACTUAL_BINDING['actual_install_Source_WRITE_closed']is True
+
+  ROOT=Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01')
+  CONTROL_DIR=Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01')
+  PY='/home/barberb/.local/bin/python'
+  FLAGS={'HF_HUB_OFFLINE': '1', 'IPFS_ACCEL_AUTO_INSTALL': '0', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS': '0', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS_SIMULATED': '0', 'IPFS_ACCEL_SKIP_CORE': '1', 'IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS': '0', 'IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI': '0', 'IPFS_DATASETS_PY_MINIMAL_IMPORTS': '1', 'IPFS_TEST_PROOF_REUSE_AUTO_INSTALL': '0', 'PYTEST_DISABLE_PLUGIN_AUTOLOAD': '1', 'PYTHONDONTWRITEBYTECODE': '1', 'PYTHONPATH': '/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_accelerate:/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/ipfs_datasets-lir14-consumer-regression-v01:/home/barberb/.local/lib/python3.12/site-packages', 'PYTHONUSERBASE': '/home/barberb/.local', 'RUN_HEAVY_TESTS': '0', 'RUN_LLM_TESTS': '0', 'RUN_LONG_TESTS': '0', 'RUN_NETWORK_TESTS': '0', 'TRANSFORMERS_OFFLINE': '1', 'GIT_CONFIG_GLOBAL': '/dev/null', 'GIT_CONFIG_NOSYSTEM': '1', 'BLIS_NUM_THREADS': '4', 'CUDA_VISIBLE_DEVICES': '', 'MKL_NUM_THREADS': '4', 'NUMEXPR_NUM_THREADS': '4', 'OMP_NUM_THREADS': '4', 'OMP_THREAD_LIMIT': '4', 'OPENBLAS_NUM_THREADS': '4', 'TOKENIZERS_PARALLELISM': 'false', 'VECLIB_MAXIMUM_THREADS': '4'}
+ PATH_SCOPE='/home/barberb/.local/bin:/usr/lib/git-core'
+ RUN_OUTPUT=Path(EXECUTION['output_directory']);CHARGED_ROOT=Path(EXECUTION['charged_root'])
+ for p in(RUN_OUTPUT,CHARGED_ROOT):assert p.is_absolute()and '..'not in p.parts and not os.path.lexists(p),'fresh actual owned output and charged roots required'
+ assert RUN_OUTPUT!=CHARGED_ROOT and CHARGED_ROOT not in RUN_OUTPUT.parents and RUN_OUTPUT not in CHARGED_ROOT.parents
+ RUN_OUTPUT.mkdir(mode=0o700);PARENT_HOME=RUN_OUTPUT/'parent-home';PARENT_HOME.mkdir(mode=0o700)
+ os.environ.clear();os.environ.update({'PATH':PATH_SCOPE,'LANG':'C.UTF-8','HOME':str(PARENT_HOME),'XDG_CONFIG_HOME':str(PARENT_HOME/'xdg-config'),'XDG_CACHE_HOME':str(PARENT_HOME/'xdg-cache'),'XDG_DATA_HOME':str(PARENT_HOME/'xdg-data'),'GH_CONFIG_DIR':str(PARENT_HOME/'gh-config'),'GIT_CONFIG_GLOBAL':'/dev/null','GIT_CONFIG_NOSYSTEM':'1'});os.environ.update(FLAGS)
+
+ if isolated:
+  ROOT=selected['root']
+  PROJECTS=selected['projects']
+  epoch_reference=selected['epoch_reference']
+  epoch_raw=selected['epoch_raw']
+  EPOCH=selected['epoch']
+  epoch_by_path={row['path']:row for row in EPOCH}
+  EVIDENCE=selected['evidence']
+  ABSENT_PATHS=selected['absent_paths']
+  opening=selected['opening']
+  report={'marker':'ACTUAL_SELECTED_A0_ISOLATED_IMPORT_EXISTING_OWNER_V1',
+          'selection':'original owner-selected isolated source-only import',
+          'run':None,'collection':None,'errors':[],'tests_dispatched':[],
+          'source_epoch':epoch_reference,'source_epoch_binding':epoch_reference,
+          'actual_driver_input_reference':EXECUTION_REFERENCE,
+          'actual_paired_Source_close_reference':selected['paired_close'],
+          'protected_index_sha256':selected['protected_index_sha256'],
+          'resource_cleanup_confirmed':False,'Source_closed':False,
+          'statutory_or_modelquality_or_convergence_authority':False}
+ else:
+  epoch_reference=ACTUAL_BINDING['outer_epoch'];epoch_raw=exact_metadata(epoch_reference);EPOCH=json.loads(epoch_raw)
+  assert type(EPOCH)is list and 4192<=len(EPOCH)<=8192 and len(EPOCH)==ACTUAL_BINDING['outer_record_count']
+  python_reference=ACTUAL_BINDING['python_epoch'];python_epoch_raw=exact_metadata(python_reference);python_rows=json.loads(python_epoch_raw);epoch_by_path={row['path']:row for row in EPOCH}
+  assert len(epoch_by_path)==len(EPOCH)and len(python_rows)==ACTUAL_BINDING['python_record_count']and all(epoch_by_path.get(row['path'])==row for row in python_rows)
+  PROJECTS=EXECUTION['projects'];assert type(PROJECTS)is list and len(PROJECTS)==2 and all(set(project)=={'root','Git_HEAD'}and re.fullmatch('[0-9a-f]{40}',project['Git_HEAD'])for project in PROJECTS)
+  assert{project['root']for project in PROJECTS}=={str(ROOT),str(ROOT.parent/'ipfs_accelerate')}
+  EVIDENCE={key:ACTUAL_BINDING['protected_index'][key]for key in('path','full9')}
+  ABSENT_PATHS=[]
+  report={'marker':'ACTUAL_CURRENTCOPY_DIGEST_OMITTED_VENDOR_IMPORT_EXISTING_OWNER_V1','selection':ROOT_SELECTION,'scope':'Fresh local vendor bits, same current-copy T3 DATA ancestry, explicit digest-omitted v11 objective, BF16/new Adam0/new lineage; no forward, training, generation or model-quality claim.','node':'Fresh digest-omitted current-copy vendor initialization','run':None,'collection':None,'errors':[],'tests_dispatched':[],'source_epoch':ACTUAL_BINDING['outer_epoch'],'source_epoch_binding':ACTUAL_BINDING['outer_epoch'],'Python_source_epoch_binding':ACTUAL_BINDING['python_epoch'],'protected_index_sha256':ACTUAL_BINDING['protected_index']['sha256'],'actual_postCAS_binding_reference':ACTUAL_BINDING_REFERENCE,'source_install_receipt':ACTUAL_BINDING['source_install_receipt'],'actual_driver_input_reference':EXECUTION_REFERENCE,'resource_cleanup_confirmed':False,'Source_closed':False,'actual_sdk_results_retained_before_assertions':True,'input_file_manifest':[],'statutory_or_modelquality_or_convergence_authority':False,'large_vendor_initialization_requested':True,'training_requested':False,'no_old_numeric_parent':True,'preexisting_orphan_or_old_unknown_wrapper_requalified':False}
+ source=load_cached_operational(source42,'selected_ordinary_source42_owner')
+
+ STATE=Path(opening['state_path']) if isolated else Path('/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase2-whole-norm-source-use-onebuild-preparation-v01/selected-whole-norm-source-use-Native-output-v01/native-resource-scheduler.json')
+ report['actual_resource_state_path']=str(STATE);report['actual_parent_lease']=None
+ parent=None;reservation=None
+
+ if isolated:
+  factory_namespace=isolated_owner['renderer']
+  if selected['fingerprint'] != isolated_parent_fingerprint(selected, isolated_owner):
+   raise ValueError("selected isolated parent inputs changed before Source entry")
+ else:
+  OBJECTIVE={'evaluation_request_schema': 'reviewed-source-evaluation-request/v11', 'generation_policy_schema': 'reviewed-decoder-digest-omitted-generation-policy/v1', 'recipe_schema': 'reviewed-local-digest-omitted-decoder-recipe/v1', 'runtime_profile': 'builtin-qwen2-bfloat16/v1', 'target_codec': 'complete-reviewed-norm-digest-omitted-json/v1', 'training_conditioning_profile': 'qwen2-chatml-digest-omitted-legal-ir/v1'}
+
+  ACTUAL_IDS={'experiment_id': 'qwen25-digest-omitted-T3-lr1e-5-v01', 'base_version_id': 'qwen25-digest-omitted-vendor-pristine-v01', 'checkpoint_lineage_id': 'qwen25-digest-omitted-T3-three-updates-v01', 'evaluation_request_id': 'qwen25-digest-omitted-Q3-matched-v01'}
+
+  SELECTED_SOURCE5={'worker': '65d55a34f097a4b673464ef59b87942274e65eb5083ea79d01759f8df16372f2', 'inputs': '7fbcfeb40e6f0d68537d0601169fbc208c3b6ca36273d786a85d876720323afb', 'consumer': 'ff8b61f71280f4c5d1d413feab33d5f9498f3cf560755492eafbbb0348d0bc82', 'admission': '1249dc93b2a6208f152c08f3bab5706acc272fa93663a58f0f87924e80d172be', 'splits': '7963ebcb291c0476f0cccc4123e28a519187970f02dbd9059fce78e661287c3c'}
+
+  FACTORY_REFERENCE={'bytes': 17859, 'path': '/tmp/digest-omitted-v11-vendor-import-current-registry-join-private-v04/bind-existing-owner-explicit-objective-request.after.py.DATA', 'sha256': 'd7454c7ea9f6f6e55f4c1ead26df72672aed143efb0e869ed02eb7b2ffd618c0'}
+
+  PROGRAM_REFERENCE={'bytes': 40143, 'path': '/tmp/digest-omitted-v11-vendor-import-current-registry-join-private-v04/import.after.py.DATA', 'sha256': '4a7d50a9c2a66abf93459c6db6a09094792ba0948f4be0f339ceb817a0a79848'}
+
+  ENTRY_REFERENCE={'bytes': 1997, 'path': '/tmp/digest-omitted-v11-vendor-import-current-registry-join-private-v04/import.entry.after.py.DATA', 'sha256': 'ea413ae7114e120123548966703907ac431fff740ca05b4334aa146e15bcb3b6'}
+
+  MANIFEST_REFERENCE={'bytes': 5075, 'path': '/tmp/digest-omitted-v11-vendor-import-current-registry-join-private-v04/fresh-import-program-entry-manifest.after.json', 'sha256': 'fdca1b4dd828f013da144df9049585745df487653ebada4f5e4e8ea5a09463c5'}
+
+  # COMPLETE caller-selected metadata setup is performed before Daemon entry.
+  common_raw=exact_metadata(EXECUTION['control_binding']);common=json.loads(common_raw)
+  request_data=json.loads(exact_metadata(EXECUTION['import_request']));opening=json.loads(exact_metadata(EXECUTION['resource_opening']))
+  assert common['schema']=='actual-selected-existing-owner-fresh-digest-omitted-control-binding/v1'and common['objective']==OBJECTIVE and request_data['objective']==OBJECTIVE
+  assert all(common[key]==request_data[key]==value for key,value in ACTUAL_IDS.items())
+  assert common['actual_complete_Source_epoch_reference']==ACTUAL_BINDING['outer_epoch']and common['actual_protected_index_metadata']==ACTUAL_BINDING['protected_index']
+  assert common['actual_selected_Source5']==SELECTED_SOURCE5
+  assert common['actual_selected_inference_sha256']==common['expected_inference_source_sha256']==request_data['expected_inference_source_sha256']=='413cabdaae3c28321215fe418b450013fdd07ac94dde6e0c39d08de5cde3c6f3'
+  assert common['attempt_directory']==request_data['attempt_directory']==str(CHARGED_ROOT/'attempt')
+  assert request_data['cwd']==str(ROOT)and request_data['lineage_mode']=='fresh-vendor-empty-adam-no-parent/v1'
+  paths={'worker':'ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py','inputs':'ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py','consumer':'ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py','admission':'ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py','splits':'ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py'}
+  assert all(epoch_by_path[str(ROOT/path)]['sha256']==SELECTED_SOURCE5[name]for name,path in paths.items())
+  assert epoch_by_path[str(ROOT/'ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_process_worker.py')]['sha256']=='080f42aa310e2aede90b95c8e4a98564cf1885c27c46ba12a7d6e45e955df71a'
+  factory_raw=exact_metadata(FACTORY_REFERENCE);program_raw=exact_metadata(PROGRAM_REFERENCE);exact_metadata(ENTRY_REFERENCE);exact_metadata(MANIFEST_REFERENCE)
+  factory_namespace={'__name__':'existing_v11_import_request_substitution','__file__':FACTORY_REFERENCE['path']};exec(compile(factory_raw,FACTORY_REFERENCE['path'],'exec'),factory_namespace)
+  assert factory_namespace['_select_fresh_objective'](OBJECTIVE)==OBJECTIVE
+  # Only selected bounded metadata refs are read; model/tokenizer/license/weight bodies are not preflighted here.
+  metadata_cache={};metadata_references=[]
+  def load_operation_metadata(reference):
+   raw=exact_metadata(reference);value=json.loads(raw);metadata_cache[(reference['path'],reference['bytes'],reference['sha256'])]=value;metadata_references.append(reference);return value
+  for key,value in request_data.items():
+   if key.endswith('_artifact')and value is not None:load_operation_metadata(value)
+  closed=load_operation_metadata(common['closed_registry_artifact']);controlled_before=load_operation_metadata(common['controlled_registry_artifact'])
+  closed_database_reference=closed['database'];assert controlled_before['database_artifact_after_close']==closed_database_reference and controlled_before['closed_owner_generation']==closed['closed_owner_generation']
+  assert type(closed['closed_owner_generation'])is int and closed['closed_owner_generation']>=9
+  stage=load_operation_metadata(common['T3_stage_witness_artifact']);assert stage['stage_source_pins']==SELECTED_SOURCE5
+  import ast as _ast
+  _program_ast=_ast.parse(program_raw.decode());_current_copy=next(n for n in _program_ast.body if isinstance(n,_ast.FunctionDef)and n.name=='_validate_current_copy_restaging')
+  _current_namespace={'Path':Path};exec(compile(_ast.Module(body=[_current_copy],type_ignores=[]),PROGRAM_REFERENCE['path'],'exec'),_current_namespace)
+  report['actual_current_copy_metadata_preflight']=_current_namespace['_validate_current_copy_restaging'](request_data,load_operation_metadata)
+  qualified=load_operation_metadata(request_data['original_asset_qualification_artifact']);qualified_close=load_operation_metadata(qualified['closeout']);asset_receipt=load_operation_metadata(qualified['asset_receipt'])
+  assert qualified['whole_payload_digest_matches_immutable_LFS']and qualified['header_matches_closed_metadata']and qualified['storage_released_and_durable']
+  assert qualified_close['source_closed']is True and qualified_close['original_owner_custody']['returncode']==0 and not qualified_close['original_owner_custody']['errors']
+  assert asset_receipt['repository']=='Qwen/Qwen2.5-0.5B-Instruct'and asset_receipt['revision']=='7ae557604adf67be50417f59c2c2f167def9a775'
+  assert {'model.safetensors','config.json','tokenizer_config.json','tokenizer.json','LICENSE'}.issubset(asset_receipt['assets'])
+  growth_database=Path(closed_database_reference['path']);growth_pool=Path(controlled_before['artifact_root'])
+  assert all(any(path==Path(root)or Path(root)in path.parents for root in opening['roots'])for path in(growth_database,growth_pool))
+  report['actual_selected_Source5']=SELECTED_SOURCE5;report['objective_selection']=OBJECTIVE;report['actual_ids']=ACTUAL_IDS
+  report['selected_small_metadata_preflight']={'references':metadata_references,'reference_count':len(metadata_references),'all_selected_references_byte_SHA_F9_authenticated':True,'operational_JSON_ordinary_parse':True,'no_asset_weight_or_DB_body_read':True,'same_factory_and_current_copy_program_helper':True,'complete_caller_metadata_setup_before_Daemon':True,'scope':'Caller-selected bounded metadata and exact rendered factory setup only; not a claim every later numerical-owner branch has executed.'}
+
+  opening=dict(opening, state_path=str(STATE), storage_bytes=12884901888,
+               memory_mb=12288, cpu_slots=4, child_process_slots=1,
+               timeout_seconds=600, ledger_lock_timeout_seconds=180, storage_limit_bytes=280000000000)
+ @contextlib.contextmanager
+ def tracked_source_read(project):
+     manager = source.source_lease(project['root'], mode='read', timeout_seconds=30)
+     lease = manager.__enter__()
+     observation = {'root': project['root'], 'entered': True, 'exit_returned': False}
+     report.setdefault('actual_Source_context_closure', []).append(observation)
+     try:
+         yield lease
+     except BaseException:
+         suppressed = manager.__exit__(*sys.exc_info())
+         observation['exit_returned'] = True
+         if not suppressed:
+             raise
+     else:
+         manager.__exit__(None, None, None)
+         observation['exit_returned'] = True
+
+ try:
+  with contextlib.ExitStack()as stack:
+   leases=[stack.enter_context(tracked_source_read(project))for project in sorted(PROJECTS,key=lambda q:str(source.canonical_source_root(q['root'])))]
+   report['Source_leases']=[lease.to_dict()for lease in leases]
+   try:
+    report['source_before']=metadata_guard()
+    sys.path[:0]=FLAGS['PYTHONPATH'].split(os.pathsep)
+    sdk=importlib.import_module('ipfs_datasets_py.logic.backends.process')
+    admitted=importlib.import_module('ipfs_datasets_py.logic.backends.resource_admission')
+    resources=importlib.import_module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler')
+    disk=importlib.import_module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_daemon_resources')
+    assert sdk.ToolRunRequest is admitted.ToolRunRequest and sdk.ToolRunResult is admitted.ToolRunResult
+    assert admitted.GlobalResourceScheduler is resources.GlobalResourceScheduler
+    module_pins={'ipfs_datasets_py.logic.backends.process':('ipfs_datasets_py/logic/backends/process.py','4434f571e209c17165aa3ea941001bbeaad3efc10957a8dfe9c183f7531b44b6'),'ipfs_datasets_py.logic.backends.resource_admission':('ipfs_datasets_py/logic/backends/resource_admission.py','5fcddd981835a7fa618c202f8de4c52a41777af74aae8a7f65fb4cb8b275edc9'),'ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler':('ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py','7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3'),'ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_daemon_resources':('ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py','278cdfbc3d33a21caef7ee71eb7141574e7c409ac802ae8998e3cb2db67c32c0')}
+    if isolated:
+     module_pins={name:(name.replace('.','/')+'.py',selected['parent_module_sha256'][name]) for name in ISOLATED_PARENT_MODULES}
+    report['canonical_module_bindings']={}
+    for name,(relative,digest)in module_pins.items():
+     mod=sys.modules[name];path=ROOT/relative;row=epoch_by_path[str(path)]
+     assert Path(mod.__file__).resolve()==path.resolve()and row['sha256']==digest and f9(path.lstat())==row['full9']
+     report['canonical_module_bindings'][name]={'path':str(path),'epoch_sha256':digest,'full9':row['full9']}
+
+    if isolated:
+     report['isolated_control_reference']=dict(EXECUTION['control_binding'])
+     report['isolated_launch_reference']=dict(EXECUTION['launch_selection'])
+    else:
+     request=factory_namespace['make_low_lr_control_request']('import',request_data,sdk=sdk,python=PY,environment=FLAGS,actual_control_binding_reference=EXECUTION['control_binding'],objective=OBJECTIVE)
+     import dataclasses as _request_dataclasses
+     factory_limits=_request_dataclasses.asdict(request.limits)
+     request=_request_dataclasses.replace(request,limits=_request_dataclasses.replace(request.limits,resident_memory_bytes=12884901888))
+     actual_limits=_request_dataclasses.asdict(request.limits)
+     assert factory_limits['resident_memory_bytes']==34359738368 and actual_limits['resident_memory_bytes']==12884901888
+     assert{key:value for key,value in factory_limits.items()if key!='resident_memory_bytes'}=={key:value for key,value in actual_limits.items()if key!='resident_memory_bytes'}
+     report['explicit_initializer_resource_adjustment']={'factory_limits':factory_limits,'actual_SDK_limits':actual_limits,'parent_memory_mb':12288,'parent_CPU_slots':4,'parent_child_process_slots':1,'same_ledger_storage_limit_bytes':280000000000,'same_storage_promise_bytes':12884901888,'same_prewrite_external_growth_charge_bytes':67108864,'scheduler_wait_seconds_after_census':600,'ledger_lock_timeout_seconds':180,'total_admission_wall_bound_claimed':False,'scope':'Constructor600 bounds post-census scheduler wait; the separate SAME public resource_admission_deadline bounds productive reservation entry600 including census, with original180 cleanup allowance. Context ends before SDK. Nonpreemptible OS IO is not hard realtime.'}
+     actual_rendered_request=json.loads(request.input_files['request.json'])
+     assert actual_rendered_request['objective']==OBJECTIVE and actual_rendered_request['source_sha256']=={row['path']:row['sha256']for row in EPOCH}
+     report['input_file_manifest']=[{'path':name,'bytes':len(raw),'sha256':H(raw)}for name,raw in request.input_files.items()]
+     report['actual_rendered_operation_request']=actual_rendered_request
+     report['metadata_and_actual_factory_setup_completed_before_Daemon']=True
+    report['resource_before']=observe_state()
+    if not isolated:
+     config=resources.ResourceSchedulerConfig(state_path=str(STATE),**report['resource_before']['state']['config'])
+     scheduler=resources.get_global_resource_scheduler(config=config)
+    reservation=disk.DaemonResourceReservation(opening['resource_ledger'],roots=opening['roots'],
+        storage_bytes=opening['storage_bytes'],memory_mb=opening['memory_mb'],cpu_slots=opening['cpu_slots'],
+        child_process_slots=opening['child_process_slots'],timeout_seconds=opening['timeout_seconds'],
+        ledger_lock_timeout_seconds=opening['ledger_lock_timeout_seconds'],scheduler_state_path=str(STATE),
+        expected_scheduler_policy_sha256=opening['expected_scheduler_policy_sha256'],require_existing_ledger=True,
+        storage_limit_bytes=opening['storage_limit_bytes'])
+    print(json.dumps({'event':'ACTUAL_EXISTING_DAEMON_ADMISSION_BEGIN','operator_pid':os.getpid(),'state_path':str(STATE),'charged_root':str(CHARGED_ROOT),'explicit_same_ledger_storage_limit_bytes':opening['storage_limit_bytes']}),flush=True)
+    admission_started=time.monotonic()
+    admission_work_deadline=admission_started+float(opening['timeout_seconds'])
+    admission_native_deadline=admission_work_deadline+float(opening['ledger_lock_timeout_seconds'])
+    inherited_admission_deadline=resources.resource_operation_deadline()
+    if inherited_admission_deadline is not None:
+     admission_work_deadline=min(admission_work_deadline,inherited_admission_deadline.work_deadline_monotonic)
+     admission_native_deadline=min(admission_native_deadline,inherited_admission_deadline.native_deadline_monotonic)
+    report['resource_admission_clock']={'scope':'reservation entry only; context ends before SDK','start_monotonic':admission_started,'work_deadline_monotonic':admission_work_deadline,'native_deadline_monotonic':admission_native_deadline,'constructor_native_wait_ceiling_seconds':opening['timeout_seconds'],'productive_budget_seconds':opening['timeout_seconds'],'cleanup_allowance_seconds':opening['ledger_lock_timeout_seconds'],'inherited_deadline_clipped':inherited_admission_deadline is not None,'hard_realtime_bound':False}
+    try:
+     with resources.resource_admission_deadline(work_deadline_monotonic=admission_work_deadline,native_deadline_monotonic=admission_native_deadline):
+      stack.enter_context(reservation)
+    finally:
+     admission_elapsed=time.monotonic()-admission_started
+     observed_native_wait=reservation._lease.to_dict()['wait_seconds']if reservation._lease is not None else None
+     report['resource_admission_timing']={'reservation_entry_elapsed_seconds':admission_elapsed,'scheduler_native_wait_seconds':observed_native_wait,'exact_census_elapsed_seconds':None,'non_native_wait_entry_elapsed_seconds':max(0.0,admission_elapsed-observed_native_wait)if observed_native_wait is not None else None,'non_native_wait_scope':'includes census, ledger IO and reservation bookkeeping; not an exact census measurement','failure_without_lease_has_no_measured_native_wait':reservation._lease is None}
+    parent=reservation._lease
+    CHARGED_ROOT.mkdir(parents=True,mode=0o700);(CHARGED_ROOT/'attempt'/'exports').mkdir(parents=True,mode=0o700)
+    report['actual_disk_reservation']=reservation.to_dict()
+    try:report['initial_persistent_usage']=reservation.check_usage(CHARGED_ROOT,child_pid=None)
+    except disk.DaemonResourceError as error:
+     observed=disk._bounded_cleanup_failure_observation('failure_retention',error,reservation.lock_path,origin_owner=reservation)
+     if type(error)is not disk.DaemonResourceError or observed['reason_code']!='ledger_lock_unavailable' or observed['lock_observation_status']!='accepted':raise
+     report['initial_usage_original_owner_lock_timeout_retry_once']=observed;report['initial_persistent_usage']=reservation.check_usage(CHARGED_ROOT,child_pid=None)
+    if not isolated:
+     def retained_artifact(reference,snapshot_to=None):
+         path=Path(reference['path']);before=path.lstat();assert stat.S_ISREG(before.st_mode)and before.st_nlink==1 and before.st_uid==os.getuid()and before.st_size==reference['bytes']
+         fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW);digest=hashlib.sha256();count=0;snapshot=None
+         try:
+          opened=os.fstat(fd);assert f9(before)==f9(opened)
+          if snapshot_to is not None:snapshot=open(snapshot_to,'xb')
+          while True:
+           chunk=os.read(fd,1024**2)
+           if not chunk:break
+           count+=len(chunk);digest.update(chunk)
+           if snapshot is not None:snapshot.write(chunk)
+          ended=os.fstat(fd)
+          if snapshot is not None:snapshot.flush();os.fsync(snapshot.fileno())
+         finally:
+          os.close(fd)
+          if snapshot is not None:snapshot.close()
+         after=path.lstat();assert f9(before)==f9(opened)==f9(ended)==f9(after)and count==reference['bytes']and digest.hexdigest()==reference['sha256']
+         result={'artifact':reference,'full9':f9(after),'path_FD_after_stable':True}
+         if snapshot_to is not None:
+          os.chmod(snapshot_to,0o400);result['immutable_actual_pre_import_database_snapshot']={'path':str(snapshot_to),'bytes':count,'sha256':digest.hexdigest(),'full9':f9(Path(snapshot_to).lstat())}
+         return result
+     report['actual_current_database_before_fresh_vendor_import']=retained_artifact(closed_database_reference,CHARGED_ROOT/'closed-pre-import-control.duckdb')
+     report['external_control_and_CAS_growth_before']=observe_control_and_CAS_metadata(growth_database,growth_pool)
+     report['prewrite_external_control_and_CAS_growth_allowance']=reservation.account_external_bytes('current-control-and-CAS-growth-allowance-v1',64*1024**2)
+
+    report['actual_parent_lease']=parent.to_dict()
+    runner=admitted.ResourceAdmittedToolRunner(parent_lease=parent,cpu_slots=opening['cpu_slots'],
+        child_process_slots=opening['child_process_slots'],base_environment={'PATH':PATH_SCOPE,'LANG':'C.UTF-8'},
+        executable_roots=('/usr/bin','/home/barberb/.local/bin'))
+    if isolated:
+     result=dispatch_isolated_parent(selected, EXECUTION, isolated_owner)
+     genuine(result)
+     report['isolated_origin_preclose_completed']=True
+    else:
+     print(json.dumps({'event':'ACTUAL_CURRENTCOPY_V11_VENDOR_IMPORT_START','operator_pid':os.getpid(),'actual_parent_lease_id':parent.lease_id}),flush=True)
+     report['tests_dispatched'].append('one fresh current-copy digest-omitted v11 vendor initialization through existing numerical owner')
+     result=run_test_with_actual_custody(request)
+     report['external_control_and_CAS_growth_after']=observe_control_and_CAS_metadata(growth_database,growth_pool)
+     growth_before=report['external_control_and_CAS_growth_before'];growth_after=report['external_control_and_CAS_growth_after']
+     database_growth=max(0,growth_after['database']['bytes']-growth_before['database']['bytes']);pool_growth=max(0,growth_after['pool_inventory']['apparent_bytes']-growth_before['pool_inventory']['apparent_bytes'])
+     report['measured_external_control_and_CAS_growth']={'database_positive_growth_bytes':database_growth,'pool_positive_growth_bytes':pool_growth,'total_positive_growth_bytes':database_growth+pool_growth,'prewrite_allowance_bytes':64*1024**2,'within_prewrite_allowance':database_growth+pool_growth<=64*1024**2,'full_prewrite_charge_retained_no_refund':True,'scope':'bounded metadata only; no extra model/weight/object body reads'}
+     assert report['measured_external_control_and_CAS_growth']['within_prewrite_allowance'],'external current-control/CAS growth exceeds selected prewrite allowance'
+     report['source_after_run']=metadata_guard();genuine(result)
+     assert result.returncode==0,('actual fresh current-copy v11 vendor import refused or failed',result.returncode)
+     outputs={key:json.loads(value)for key,value in result.output_files.items()if key.endswith('.json')}
+     assert set(result.output_files)=={'source-observation.json','config.json','license-apache2.txt','recipe.json','tokenizer.json','retention.json','explicit-ChatML-source-lineage.json','authored-admission-transport.json','current-reviewed-source-request.json','controlled-registry.json','prepared-pair.json'}
+     imported=outputs['prepared-pair.json'];record=outputs['controlled-registry.json'];correspondence=imported['tensor_correspondence']
+     assert imported['parameters_imported']==494032768 and imported['stored_tensor_count']==len(correspondence)==290
+     assert all(row['bit_equal']is True for row in correspondence)and imported['all_stored_parameters_bit_equal']is True and imported['tied_output_embedding_preserved']is True
+     assert imported['optimizer_steps']==0 and imported['fresh_Adam_state_empty']is True and imported['configuration_identity']['optimizer_groups'][0]['lr']==.00001
+     assert imported['schema']=='actual-pinned-Qwen25-digest-omitted-pristine-checkpoint-pair/v1'and imported['expected_source_sha256']==SELECTED_SOURCE5 and imported['objective_selection']==OBJECTIVE
+     assert all(imported[name]==value for name,value in ACTUAL_IDS.items()if name!='evaluation_request_id')
+     assert imported['numeric_parent_checkpoint_accepted']is False and imported['historical_pair_and_baseline_are_DATA_only']is True
+     assert not any(imported[name]for name in('model_forward_executed','model_weights_downloaded','training_performed','model_or_legal_quality_qualified'))
+     assert record['closed_owner_generation']==closed['closed_owner_generation']+1 and record['models_staged_in_registry']is False
+     current_request=outputs['current-reviewed-source-request.json'];assert current_request['schema']==OBJECTIVE['evaluation_request_schema']and current_request['generation_policy']['schema']==OBJECTIVE['generation_policy_schema']and current_request['generation_policy']['target_codec']==OBJECTIVE['target_codec']and current_request['generation_policy']['conditioning_profile']==OBJECTIVE['training_conditioning_profile']
+     assert current_request['request_id']==ACTUAL_IDS['evaluation_request_id']and current_request['generation_policy']['max_generation_seconds']==1200.0 and current_request['max_output_tokens']==16384
+     report['actual_pristine_import_pair']=imported;report['actual_current_controlled_registry']=record;report['actual_source_observation']=outputs['source-observation.json'];report['actual_fresh_vendor_import_completed']=True
+   finally:
+    if parent is None and reservation is not None and getattr(reservation,'_lease',None)is not None and not reservation._lease.released:
+     parent=reservation._lease
+    if parent is not None:
+     attempt=0
+     while True:
+      attempt+=1
+      try:
+       snapshot=observe_state();rows=snapshot['state']['leases'];descendants={parent.lease_id};changed=True
+       while changed:
+        changed=False
+        for leaseid,row in rows.items():
+         if row.get('parent_lease_id')in descendants and leaseid not in descendants:descendants.add(leaseid);changed=True
+       if descendants.intersection(rows)-{parent.lease_id}:raise RuntimeError('actual managed descendant claims remain; retain original custody')
+       report['resource_before_parent_release']=snapshot
+       if reservation is not None and not parent.released:
+        if report.get('origin_capture_selected') is True:
+         report['origin_archive_external_bytes'] = origin_retained_external_bytes()
+         reservation.account_external_bytes('actual-relational-origin-SDK-and-archive-v1', report['origin_archive_external_bytes'])
+        elif not isolated:
+         reservation.account_external_bytes('actual-currentcopy-v11-vendor-import-SDK-outputs',sum(len(v)for v in result.output_files.values())if 'result'in globals()else 0)
+        if CHARGED_ROOT.exists():
+         report['actual_reservation_finalized']=reservation.finalize(CHARGED_ROOT,artifacts_durable=True)
+        else:
+         assert not report['tests_dispatched'],'no target or SDK was dispatched before this admission failure'
+         report['actual_reservation_predispatch_release']=reservation.release(artifacts_durable=True)
+        report['actual_parent_release_return']=parent.released
+       elif not parent.released:report['actual_parent_release_return']=parent.release()
+       snapshot=observe_state();assert not descendants.intersection(snapshot['state']['leases'])
+       report['resource_after_parent_release']=snapshot;report['resource_cleanup_confirmed']=True
+       break
+      except BaseException as cleanup_error:
+       report['resource_cleanup_last_error']={'type':type(cleanup_error).__name__,'message':str(cleanup_error),'attempt':attempt}
+       try:print(json.dumps({'event':'ACTUAL_RESOURCE_CUSTODY_RETAINED','operator_pid':os.getpid(),'attempt':attempt,'Source_READ_held':True}),flush=True);time.sleep(1)
+       except BaseException as hold_error:report['resource_hold_error']=repr(hold_error)
+    else:report['resource_after_predispatch']=observe_state();report['resource_cleanup_confirmed']=True
+    report['source_after']=metadata_guard()
+ except BaseException as error:
+  report['errors'].append({'type':type(error).__name__,'message':str(error),'traceback':traceback.format_exc()});raise
+ finally:
+  contexts=report.get('actual_Source_context_closure',[]);report['Source_closed']=bool(contexts)and all(row['exit_returned']is True for row in contexts)
+  raw=json.dumps(report,sort_keys=True,separators=(',',':'),default=str).encode();path=RUN_OUTPUT/('complete-selected-A0-isolated-existing-owner-report.json' if isolated else 'complete-fresh-currentcopy-v11-vendor-import-existing-owner-report.json')
+  fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)
+  with os.fdopen(fd,'wb')as stream:stream.write(raw);stream.flush();os.fsync(stream.fileno())
+  shutil.rmtree(PARENT_HOME)
+  print(json.dumps({'event':('ACTUAL_SELECTED_A0_ISOLATED_IMPORT_CLOSED' if isolated else 'ACTUAL_CURRENTCOPY_V11_VENDOR_IMPORT_CLOSED'),'report':{'path':str(path),'bytes':len(raw),'sha256':H(raw)},'Source_closed':report['Source_closed'],'resource_cleanup_confirmed':report['resource_cleanup_confirmed'],'errors':report['errors']},sort_keys=True),flush=True)
+
+ return report
+
+
+if __name__ == '__main__':
+ assert len(sys.argv)==4,'one authenticated actual metadata binding CLI required'
+ run_existing_owner({'path':sys.argv[1],'bytes':int(sys.argv[2]),'sha256':sys.argv[3]})

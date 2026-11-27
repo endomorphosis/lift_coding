@@ -1,0 +1,51 @@
+--- prior/study.py
++++ candidate/study.py
+@@ -1441,6 +1441,10 @@
+                      and all(_pin(pin) for pin in request_pins),
+                      "Qwen2 experiment requires the exact selected request commitment for each seed")
+             route["request_selection_sha256s"] = tuple(request_pins)
++        if "original_prelaunch_bound_releases" in comparison:
++            _require("request_selection_sha256s" in route and comparison["original_prelaunch_bound_releases"] is True,
++                     "prelaunch-bound Qwen2 experiment requires the selected requests and release evidence")
++            route["original_prelaunch_bound_releases"] = True
+     wall = snapshot.get("enclosing_wall")
+     if wall is not None:
+         _require(type(wall) is dict and set(wall) == {"clock_domain_sha256", "start_ns", "end_ns", "receipt_sha256", "elapsed_ns"}
+@@ -12543,7 +12547,7 @@
+         assessment_reports, expected_assessment_report_sha256s, verify_assessment_owner,
+         terminal_reports, expected_terminal_report_sha256s, arm_return_closes, expected_evidence_kind,
+         verify_terminal_owner, evaluation_event_sha256s, cost_evidence, expected_cost_evidence_sha256, verify_cost_owner,
+-        expected_request_selection_sha256s=None):
++        expected_request_selection_sha256s=None, require_prelaunch_bound_releases=False):
+     """Check Qwen2 review and paid evaluations against original direct releases."""
+     _study(validator, study, expected_study_sha256)
+     _require(type(expected_evidence_kind) is str and expected_evidence_kind in _QWEN2_PROJECTOR_PHYSICAL_SCOPES
+@@ -12554,6 +12558,9 @@
+              and type(terminal_reports) is type(expected_terminal_report_sha256s) is type(arm_return_closes) is tuple
+              and len(terminal_reports) == len(expected_terminal_report_sha256s) == len(arm_return_closes) == len(study.seeds),
+              "original Qwen2 terminal, evaluation and evidence-class owners required")
++    _require(type(require_prelaunch_bound_releases) is bool
++             and (not require_prelaunch_bound_releases or expected_request_selection_sha256s is not None),
++             "prelaunch-bound Qwen2 comparison requires independently selected paid requests")
+     if expected_request_selection_sha256s is not None:
+         _require(type(expected_request_selection_sha256s) is tuple
+                  and len(expected_request_selection_sha256s) == len(study.seeds)
+@@ -12575,6 +12582,9 @@
+         _require(("request_selection_sha256" in terminal) == (request_pin is not None)
+                  and terminal.get("request_selection_sha256") == request_pin,
+                  "original Qwen2 paid report differs from the selected request commitment")
++        _require(("original_prelaunch_bound_releases" in terminal) == require_prelaunch_bound_releases
++                 and (not require_prelaunch_bound_releases or terminal["original_prelaunch_bound_releases"] is True),
++                 "Qwen2 paid report differs from the selected prelaunch-bound release requirement")
+         proof, history = terminal.get("physical_proof"), terminal.get("attempts")
+         _require(terminal.get("legal_scoring_or_dispatch_authority") is False
+                  and terminal.get("all_four_available") is True
+@@ -12647,6 +12657,8 @@
+         expected_cost_evidence_sha256=expected_cost_evidence_sha256, verify_cost_owner=verify_cost_owner)
+     if expected_request_selection_sha256s is not None:
+         comparison["request_selection_sha256s"] = expected_request_selection_sha256s
++    if require_prelaunch_bound_releases:
++        comparison["original_prelaunch_bound_releases"] = True
+     return {**comparison, "original_projector_evidence_kind": expected_evidence_kind}
+ 
+ 

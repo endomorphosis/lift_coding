@@ -1,0 +1,145 @@
+{
+  "actual_Source42": {
+    "bytes": 10375,
+    "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/actual-doc-owner-approved-Source42-control-code.py.DATA",
+    "sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9"
+  },
+  "actual_isolated_write_lease": {
+    "canonical_root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+    "cooperative": true,
+    "lock_path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/workspace/control-plane/source-leases/source.lock",
+    "mode": "write",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 6.369780749082565e-05
+  },
+  "additional_A_index": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "candidate": {
+    "bytes": 2161,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/SEALED-native-translated-cache-one-test-owner.json",
+    "sha256": "39f57f4ae76767c50b57d049aebb8aa39b1c23cf62bd16cfdc1dbb07fd836406"
+  },
+  "canonical_Source_write_claimed": false,
+  "committed": {
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "bytes": 128091,
+      "full9": {
+        "st_ctime_ns": "1795749391104284263",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514039",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795749391104284263",
+        "st_nlink": "1",
+        "st_size": "128091",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "005655a32c50d14e20a4a65b1bc7d3773d8061d6",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+      "sha256": "b706ba0dddc5795055be378d8393c831e65fb7fbaf73a574fcee51227d3676b5",
+      "stage0_and_committed_blob": "a05d6360be0fcf61a75861c5f0ac8cd63a9d3533"
+    }
+  },
+  "fixture_owner": {
+    "bytes": 102758,
+    "full9": {
+      "st_ctime_ns": "1795741449323712303",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72514356",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795741449323712303",
+      "st_nlink": "1",
+      "st_size": "102758",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+    "sha256": "23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab"
+  },
+  "frozen": {
+    "HEAD": "948bd49e5e182abf1c8f8398b70d45095c1923a9",
+    "branch": "refs/heads/isolated/phase1-native-translated-proof-cache",
+    "branch_file": {
+      "bytes": 41,
+      "full9": {
+        "st_ctime_ns": "1795749391308615353",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72515290",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795749391308615353",
+        "st_nlink": "1",
+        "st_size": "41",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/refs/heads/isolated/phase1-native-translated-proof-cache",
+      "sha256": "893a09a8af92736a548e1cd011242d1f0d177d0f49ece10a397aaf1db128cfe0"
+    },
+    "index": {
+      "bytes": 7070589,
+      "full9": {
+        "st_ctime_ns": "1795749391307995071",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514901",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795749391306615321",
+        "st_nlink": "1",
+        "st_size": "7070589",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+      "sha256": "cff038ef7a5197f1e4e47f9aff985d92dd632a0973e3701c180642098c35a15c"
+    },
+    "tree": "f232c0faca97c32297c2af9d0cf186e1e8b8c21d"
+  },
+  "full_charge": {
+    "bytes": 1287,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/Source-only-Phase1-native-translated-cache-WRITE-full-retained.json",
+    "sha256": "87e23a9f88bcf140a8d801a9559d1ed95212c2afedfb23d520eb419c4e315d5a"
+  },
+  "isolated_Source_context_closed": true,
+  "local_clean": true,
+  "only_one_test_changed": true,
+  "ordinary_qualified": false,
+  "parent": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+  "prior_targets": {
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "bytes": 123945,
+      "full9": {
+        "st_ctime_ns": "1795741365216154197",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514039",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365216154197",
+        "st_nlink": "1",
+        "st_size": "123945",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+      "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945"
+    }
+  },
+  "pushed": false,
+  "qualified_native": false,
+  "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+  "schema": "actual-isolated-native-translated-cache-test-only-Git-freeze/v1",
+  "shared_source_or_Git_mutation": false,
+  "terminal_returncode": 0
+}

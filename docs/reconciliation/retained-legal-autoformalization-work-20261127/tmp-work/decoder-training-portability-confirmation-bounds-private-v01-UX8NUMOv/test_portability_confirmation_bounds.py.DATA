@@ -1,0 +1,196 @@
+"""Join the real Stage G and paid STUDY owners on retained modeled inputs."""
+
+from copy import deepcopy
+from hashlib import sha256
+import json
+from pathlib import Path
+import runpy
+from tempfile import TemporaryDirectory
+import unittest
+
+
+HERE = Path(__file__).resolve().parent
+HELD = HERE.parent / "decoder-training-matched-matrix-private-v01"
+CURRENT = HERE / "study.py"
+PRIOR = HERE.parent / "decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/study.py"
+WALL = "wall_seconds"
+REPORT = {}
+
+
+def exact(path, pin):
+    raw = path.read_bytes()
+    assert sha256(raw).hexdigest() == pin, path
+    return raw
+
+
+def retained(file, pin, changes, **bindings):
+    path = HELD / file
+    raw = exact(path, pin)
+    for before, after in changes:
+        assert raw.count(before) == 1, before
+        raw = raw.replace(before, after)
+    namespace = {"__name__": "retained_" + path.stem, "__file__": str(path), **bindings}
+    exec(compile(raw, str(path), "exec"), namespace)
+    return namespace
+
+
+cost = retained("test_cost_evidence.py", "cca0a3e70e81120d83fda480f7a591a92968f07a81f3ce940c8acd470ac02862",
+    ((b'runpy.run_path(str(HERE / "study.py"))', b'runpy.run_path(str(SELECTED_STUDY_PATH))'),),
+    SELECTED_STUDY_PATH=CURRENT)
+development = retained("test_development_cost.py", "65d118a6d0a9966d4c8d46dfcdc18987187c3b8f21707fe46ce316b7571f941a",
+    ((b'fixtures = runpy.run_path(str(HERE / "test_cost_evidence.py"))', b'fixtures = SELECTED_COST_FIXTURE'),),
+    SELECTED_COST_FIXTURE=cost)
+matrix = retained("test_matched_matrix.py", "f6ece45e2078802ff066295b20ac182efe7f1d5b76755b031db17301a89af4c9", (
+    (b'fixture = runpy.run_path(str(HERE / "test_development_cost.py"))', b'fixture = SELECTED_DEVELOPMENT_FIXTURE'),
+    (b'elapsed = None if failed else wall + int(stage == "close")',
+     b'entry = tuple(cell[key] for key in ("seed", "variant", "teacher", "native_arm"))\n'
+     b'                no_sample = entry in MISSING_WALL and stage != "close"\n'
+     b'                elapsed = None if failed or no_sample else wall + int(stage == "close")'),
+    (b'verify_development_owner=lambda x, y: (x, y) == (design_sha, receipts_sha))',
+     b'verify_development_owner=lambda x, y: (x, y) == (design_sha, receipts_sha),\n'
+     b'            include_confirmation_cost_bounds=True)'),
+), SELECTED_DEVELOPMENT_FIXTURE=development,
+    MISSING_WALL={('alpha', 'qwen', 'spacy', 'relational'), ('alpha', 'wider-t5', 'gte-small', 'relational')})
+S = matrix["S"]
+pin = S.commitment
+
+
+class PortabilityConfirmationBounds(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        directory = TemporaryDirectory(dir=HERE, prefix="modeled-portability-")
+        cls.addClassCleanup(directory.cleanup)
+        cls.case = matrix["Case"](Path(directory.name))
+        case = cls.case
+        plan = S.ObjectivePortabilityPlan(pin(case.matrix), (S.VariantObjectiveContrast("qwen", "t5", "spacy", WALL),
+            S.VariantObjectiveContrast("t5", "wider-t5", "gte-small", WALL)))
+        plan_pin = S.objective_portability_plan_commitment(plan)
+        paid_pin = pin(case.comparison)
+        projected_pin = pin(case.project())
+        cls.original = S.project_objective_portability(matrix["validator"], plan=plan, expected_plan_sha256=plan_pin,
+            matrix=case.matrix, study=case.study, contrasts=case.contrasts, comparison=case.comparison,
+            expected_comparison_sha256=paid_pin, development_receipts=case.receipts,
+            verify_projection_owner=lambda *pins: pins == (plan.matrix_sha256, paid_pin),
+            verify_portability_owner=lambda *pins: pins == (plan_pin, plan.matrix_sha256, projected_pin))
+
+    def setUp(self):
+        self.report = deepcopy(self.original)
+        self.paid = deepcopy(self.case.comparison)
+        self.owner_calls = []
+
+    def summarize(self, *, include=True, mutate=None, refuse=False):
+        report_pin = pin(self.report)
+        expected = (report_pin, self.report["plan_sha256"], self.report["paid_development_comparison_sha256"])
+
+        def owner(*pins):
+            self.owner_calls.append(pins)
+            if mutate is not None:
+                mutate()
+            return not refuse and pins == expected
+
+        return S.summarize_objective_portability_restricted_confirmation(self.report,
+            expected_development_sha256=report_pin, verify_original_development_owner=owner,
+            **({"paid_comparison": self.paid} if include else {}))
+
+    def test_paid_cohort_tightens_cross_profile_and_within_size(self):
+        result = self.summarize()
+        cross, within = result["meter_bounded_comparisons"]
+        old_cross, old_within = result["comparisons"]
+        self.assertEqual(result["selected_seeds"], ("alpha", "beta"))
+        self.assertEqual(result["paid_confirmation_bounds_sha256"], pin(self.paid["confirmation_cost_bounds"]))
+        self.assertEqual(cross["mean_interaction_bounds_seconds"], ((-28, 1), (45, 1)))
+        self.assertEqual(old_cross["mean_interaction_bounds_seconds"], ((-55, 1), (45, 1)))
+        self.assertEqual(within["mean_interaction_bounds_seconds"], ((-155, 2), (-109, 2)))
+        self.assertEqual(old_within["mean_interaction_bounds_seconds"], ((-155, 2), (-55, 2)))
+        alpha, beta = cross["seed_intervals"]
+        self.assertEqual(alpha["bounds_seconds"], ((-1, 1), (45, 1)))
+        self.assertEqual(beta["bounds_seconds"], ((-55, 1), (45, 1)))
+        self.assertEqual(alpha["attainment_interaction_bounds"], (0, 0))
+        self.assertEqual(cross["mean_attainment_interaction_bounds"], ((0, 1), (1, 2)))
+        self.assertEqual(within["mean_attainment_interaction_bounds"], ((1, 1), (1, 1)))
+        ref = alpha["reference_pair"]["candidate"]
+        self.assertEqual((ref["attainment"], ref["upper_seconds"], ref["observed_confirmation_seconds"]), (1, 46.0, None))
+        self.assertIsNone(ref["lower_meter_sha256"])
+        attempt = next(row for row in self.paid["attempts"] if row["attempt_sha256"] == alpha["reference_candidate_attempt_sha256"])
+        self.assertEqual(ref["upper_meter_sha256"], attempt["cost_evidence"]["closing_meter"]["record_sha256"])
+        self.assertEqual(len(self.owner_calls), 1)
+        REPORT.update(cross_profile_bounds_seconds=cross["mean_interaction_bounds_seconds"],
+                      within_t5_size_bounds_seconds=within["mean_interaction_bounds_seconds"], modeled_owner_evidence=True)
+
+    def test_unknown_paid_failure_and_exact_late_confirmation_are_retained(self):
+        cross, within = self.summarize()["meter_bounded_comparisons"]
+        beta = cross["seed_intervals"][1]["reference_pair"]
+        failure = beta["candidate"]
+        self.assertEqual(failure["restricted_confirmation_seconds"], (0.0, 100.0))
+        self.assertIsNone(failure["attainment"])
+        self.assertTrue(all(failure[key] is None for key in ("lower_seconds", "upper_seconds", "observed_confirmation_seconds")))
+        failed, = (row for row in self.paid["attempts"] if row["attempt_sha256"] == beta["candidate_attempt_sha256"])
+        self.assertEqual(failed["decision"]["status"], "integrity_failure")
+        self.assertTrue(any(event["disposition"] == "failed" for event in self.paid["physical_paid_events"]))
+        late = within["seed_intervals"][0]["reference_pair"]["candidate"]
+        self.assertEqual((late["observed_confirmation_seconds"], late["attainment"]), (110.0, 0))
+        self.assertEqual(late["restricted_confirmation_seconds"], (100.0, 100.0))
+        self.assertEqual((late["lower_seconds"], late["upper_seconds"]), (110.0, 110.0))
+
+    def test_wrong_paid_digest_refuses(self):
+        self.paid["cost_evidence_sha256"] = "f" * 64
+        with self.assertRaisesRegex(ValueError, "exact paid DEVELOPMENT comparison"):
+            self.summarize()
+        self.assertEqual(self.owner_calls, [])
+
+    def test_resealed_bounds_cannot_manufacture_an_earlier_confirmation(self):
+        self.paid["confirmation_cost_bounds"]["pairs"][0]["candidate"]["restricted_confirmation_seconds"] = (0.0, 1.0)
+        self.report["paid_development_comparison_sha256"] = pin(self.paid)
+        with self.assertRaisesRegex(ValueError, "bounds must reproduce from the original attempt meters"):
+            self.summarize()
+        self.assertEqual(self.owner_calls, [])
+
+    def test_resealed_boolean_attainment_does_not_equal_integer(self):
+        side = next(row["candidate"] for row in self.paid["confirmation_cost_bounds"]["pairs"] if row["candidate"]["attainment"] == 1)
+        self.assertIs(type(side["attainment"]), int)
+        side["attainment"] = True
+        self.report["paid_development_comparison_sha256"] = pin(self.paid)
+        with self.assertRaisesRegex(ValueError, "bounds must reproduce from the original attempt meters"):
+            self.summarize()
+
+    def test_changed_paid_pair_is_rejected_even_after_reselecting_stage_g(self):
+        side = self.report["comparisons"][0]["pairs"][0]["comparison_pair"]
+        self.assertEqual(side["observed_candidate_confirmation"], 45.0)
+        side["observed_candidate_confirmation"] = 44.0
+        with self.assertRaisesRegex(ValueError, "both exact original paid pairs"):
+            self.summarize()
+        self.assertEqual(self.owner_calls, [])
+
+    def test_original_owner_refusal_or_paid_mutation_blocks_result(self):
+        with self.assertRaisesRegex(ValueError, "original paid development owner refused"):
+            self.summarize(refuse=True)
+
+        def mutate():
+            self.paid["confirmation_cost_bounds"]["pairs"][0]["candidate"]["upper_seconds"] = 1.0
+
+        with self.assertRaisesRegex(ValueError, "restricted-time inputs changed"):
+            self.summarize(mutate=mutate)
+        self.assertEqual(len(self.owner_calls), 2)
+
+    def test_legacy_opt_out_and_json_round_trip_preserve_original_verdict(self):
+        exact(PRIOR, "0db05161d43713375a0a9b4db8d359b6b5d50f08f5a7481f2b804b97add778b1")
+        before = runpy.run_path(str(PRIOR))
+        report_pin = pin(self.report)
+        pins = (report_pin, self.report["plan_sha256"], self.report["paid_development_comparison_sha256"])
+        expected = before["summarize_objective_portability_restricted_confirmation"](self.report,
+            expected_development_sha256=report_pin, verify_original_development_owner=lambda *offered: offered == pins)
+        self.assertEqual(self.summarize(include=False), expected)
+        new = self.summarize()
+        self.assertEqual({key: value for key, value in new.items() if key not in (
+            "paid_confirmation_bounds_sha256", "meter_bounded_comparisons")}, expected)
+        self.report = json.loads(json.dumps(self.report, allow_nan=False))
+        self.paid = json.loads(json.dumps(self.paid, allow_nan=False))
+        self.assertEqual(self.summarize(), new)
+
+
+if __name__ == "__main__":
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(PortabilityConfirmationBounds)
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    if result.wasSuccessful():
+        print(json.dumps(REPORT, sort_keys=True))
+    raise SystemExit(not result.wasSuccessful())

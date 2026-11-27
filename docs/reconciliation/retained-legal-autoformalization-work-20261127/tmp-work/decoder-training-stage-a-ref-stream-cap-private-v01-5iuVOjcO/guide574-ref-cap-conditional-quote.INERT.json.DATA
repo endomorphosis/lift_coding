@@ -1,0 +1,80 @@
+{
+  "candidate": {
+    "bytes": 47245,
+    "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/verify_standalone_git.py",
+    "sha256": "b6bda714fa95411b84fc0333f5348bc05a307bb44fe0e4fb9ecf38c6e3b85b5d"
+  },
+  "current_ref_stream_sizes": null,
+  "exact_reservation_inputs": {
+    "bytes": 4109,
+    "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/reservation_preview.py",
+    "sha256": "c0338d5750e16d30c0f051c03dbd89527a63c5cf9b22d1481f91d2a3163b9c6b"
+  },
+  "execution_selected": false,
+  "independent_index_read": null,
+  "legacy": {
+    "Reader_core": {
+      "control_probe_bytes": 560810,
+      "direct_source_bytes": 21630256,
+      "epoch_output_allowance_bytes": 1063993,
+      "git_output_allowance_bytes": 1425458,
+      "logical_selected_bytes": 24680517
+    },
+    "git_output_maximum": 8192,
+    "git_ref_output_maximum": 262144,
+    "joint_payload_floor_gap": 27515037,
+    "joint_with_historical_independent_readback_floor_gap": 34585634,
+    "paired_gap": 20444439,
+    "paired_subtotal": 26801431,
+    "selector_Git_stream_allowance": 704536,
+    "selector_raw_stream_archive_allowance": 1048578
+  },
+  "prior": {
+    "bytes": 1668,
+    "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/guide574-pair-conditional-quote.INERT.json",
+    "sha256": "f2d1eddd72043557699ffb84bc628152956ce7ee640482bc9d0ea454d5b26fa3"
+  },
+  "read_and_capture_floor": {
+    "fresh_capture_archive_write_and_readback": 4244758,
+    "guide_requests": 5844383,
+    "index_and_exclude_requests": 11541115
+  },
+  "reader_allocation": null,
+  "ref_64_KiB": {
+    "Reader_core": {
+      "control_probe_bytes": 560810,
+      "direct_source_bytes": 21630256,
+      "epoch_output_allowance_bytes": 1063993,
+      "git_output_allowance_bytes": 639026,
+      "logical_selected_bytes": 23894085
+    },
+    "git_output_maximum": 8192,
+    "git_ref_output_maximum": 65536,
+    "joint_payload_floor_gap": 25548957,
+    "joint_with_historical_independent_readback_floor_gap": 32619554,
+    "paired_gap": 18478359,
+    "paired_subtotal": 24835351,
+    "selector_Git_stream_allowance": 311320,
+    "selector_raw_stream_archive_allowance": 262146
+  },
+  "ref_64_KiB_short_4_KiB": {
+    "Reader_core": {
+      "control_probe_bytes": 560810,
+      "direct_source_bytes": 21630256,
+      "epoch_output_allowance_bytes": 1063993,
+      "git_output_allowance_bytes": 450610,
+      "logical_selected_bytes": 23705669
+    },
+    "git_output_maximum": 4096,
+    "git_ref_output_maximum": 65536,
+    "joint_payload_floor_gap": 25270429,
+    "joint_with_historical_independent_readback_floor_gap": 32341026,
+    "paired_gap": 18199831,
+    "paired_subtotal": 24556823,
+    "selector_Git_stream_allowance": 221208,
+    "selector_raw_stream_archive_allowance": 262146
+  },
+  "retained_headroom": 6356992,
+  "schema": "private-guide574-stage-a-ref-cap-conditional-quotes/v1",
+  "selector_allocation": null
+}

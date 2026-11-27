@@ -1,0 +1,16 @@
+import ast
+from hashlib import sha256
+from pathlib import Path
+
+here = Path(__file__).parent
+original = Path('/tmp/decoder-training-stage-a-a0-archive-handoff-private-v01-UMiyG7nf/verify_rebind_capture.py')
+before = original.read_bytes()
+assert (len(before), sha256(before).hexdigest()) == (
+    127443, 'b81d390abb0b2972b70268a16ddace18ed370f54ed90d1693dc00b93587cd9be')
+after = before + (here / 'relocation.py.IN').read_bytes()
+previous_ast = ast.parse(before)
+current_ast = ast.parse(after)
+assert [ast.dump(node) for node in previous_ast.body] == [
+    ast.dump(node) for node in current_ast.body[:len(previous_ast.body)]]
+(here / 'verify_rebind_capture.py').write_bytes(after)
+print(len(after), sha256(after).hexdigest(), len(previous_ast.body))

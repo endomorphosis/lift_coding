@@ -1,0 +1,287 @@
+import ast
+from collections import Counter
+import hashlib
+import json
+from pathlib import Path
+import re
+import subprocess
+import sys
+from xml.etree import ElementTree as ET
+
+out = Path(sys.argv[1])
+private = Path("/tmp/Phase2-V3-recursive-definition-private-dE9srJIA")
+base = Path("/tmp/P2-checked-native-CLI-existing-v581-ordinary33-controls-INERT-eoay3f4v")
+latest = Path("/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t")
+historic = Path("/tmp/Root-P2-composed-ordinary40-selected-v247-qrabqcgd")
+current = Path("/tmp/P1-proof-cache-translation-current-6btZZr")
+D = current / "datasets"
+G = "reviewed-mixed-v3-definition-self-reference-ordinary37"
+old_group = "corpus-release-physical-v4-retained-type-current-review-ordinary33"
+T = "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py"
+M = "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py"
+H = lambda b: hashlib.sha256(b).hexdigest()
+def ref(path):
+    raw = path.read_bytes()
+    return dict(path=str(path), bytes=len(raw), sha256=H(raw))
+def data(path):
+    return json.loads(path.read_bytes())
+def save(name, value):
+    raw = value if type(value) is bytes else (json.dumps(value, indent=2, sort_keys=True) + "\n").encode()
+    path = out / name
+    with path.open("xb") as stream:
+        stream.write(raw)
+    return ref(path)
+def exact_ref(pin):
+    path = Path(pin["path"])
+    assert ref(path) == {k: pin[k] for k in ("path","bytes","sha256")}
+    return path
+def git(*args):
+    return subprocess.check_output(["git", "--no-optional-locks", "-C", str(D), *args], text=True).strip()
+
+sv = private / "SEALED-existing-V3-governing-definition-self-reference-exact-two-private37.json"
+assert ref(sv)["sha256"] == "fc120ae02ae95550da45067dc22d3cceb04a8056b614d7a397cd8fb2f09377be"
+candidate = data(sv)
+posts = {row["path"]: row for row in candidate["roles"]}
+assert set(posts) == {T, M}
+for row in posts.values():
+    assert git("rev-parse", f"HEAD:{row['path']}") == row["before_git_blob"]
+    exact_ref(row["before"])
+    exact_ref(row["after"])
+
+# Independently expand the literal pytest declarations in source order.
+test_tree = ast.parse(exact_ref(posts[T]["after"]).read_bytes())
+roster, selectors, counts = [], [], {}
+for fn in test_tree.body:
+    if not isinstance(fn, ast.FunctionDef) or not fn.name.startswith("test_"):
+        continue
+    node = f"{T}::{fn.name}"
+    selectors.append(node)
+    roster.append(node)
+    if fn.decorator_list:
+        (mark,) = fn.decorator_list
+        assert ast.unparse(mark.func) == "pytest.mark.parametrize" and len(mark.args) == 2
+        names = [part.strip() for part in ast.literal_eval(mark.args[0]).split(",")]
+        values = ast.literal_eval(mark.args[1])
+        if mark.keywords:
+            (keyword,) = mark.keywords
+            assert keyword.arg == "ids"
+            ids = ast.literal_eval(keyword.value)
+        elif len(names) == 1:
+            ids = values
+        else:
+            ids = ["-".join(row) for row in values]
+        assert len(set(ids)) == len(ids) == len(values) and all(type(key) is str for key in ids)
+        roster.pop()
+        roster.extend(node + "[" + key + "]" for key in ids)
+        counts[node] = len(values)
+    else:
+        counts[node] = 1
+vector = tuple(counts[node] for node in selectors)
+assert len(selectors) == len(counts) == 15
+assert len(roster) == len(set(roster)) == sum(vector) == 37
+assert roster == candidate["retained_and_new_same_owning_roster"]
+# Bind the independent source expansion to actual raw private RED and GREEN XML.
+test_class = T[:-3].replace("/", ".")
+for phase in ("red-owning", "green-owning"):
+    path = exact_ref(candidate["evidence"][phase]["retained_artifacts"]["result.xml"])
+    cases = ET.parse(path).getroot().findall("./testsuite/testcase")
+    assert {(case.get("classname")) for case in cases} == {test_class}
+    assert [T + "::" + case.get("name") for case in cases] == roster
+hsmall = historic / "Root-P2-composed-ordinary40-qualified-Source-resource-closed-small-v247.json"
+hsummary = data(hsmall)
+hjunit = exact_ref(hsummary["raw_JUnit"])
+hselected = [T + "::" + case.get("name") for case in ET.parse(hjunit).getroot().findall("./testsuite/testcase")
+             if case.get("classname") == test_class]
+assert len(hselected) == len(set(hselected)) == 20 and set(hselected) <= set(roster[:-2])
+roster_ref = save("exact-15-function-37-case-static-roster.json", dict(
+    definition=ref(sv), function_selectors=selectors, expected_function_case_counts=counts,
+    vector=vector, literal_expected_nodeids=roster, current_actual_ordinary=None,
+    independently_expanded_from_literal_AST=True, actual_private_RED_and_GREEN_JUnit_match=True,
+    historical_actual_ordinary_v247_V3_retained20=hselected,
+    actual_collect_controls_RUN_order=True))
+
+# All current role facts are historical snapshots, never future Source inputs.
+old_epoch = current / "actual-live-reconciled-Source42-content-epoch-closed.json"
+epoch = data(old_epoch)
+assert epoch["Source_closed"] is epoch["module_closed"] is True
+outer_pin = current / "actual-live-reconciled-outer1614-epoch.json"
+python_pin = current / "actual-live-reconciled-Python1601-epoch.json"
+outer, py = data(outer_pin), data(python_pin)
+outer_paths = {row["path"]: row for row in outer}
+assert len(outer_paths) == len(outer) == 1614 and len(py) == 1601
+assert all(outer_paths[row["path"]] == row for row in py)
+current_D = {Path(row["path"]).relative_to(D).as_posix():row for row in outer if Path(row["path"]).is_relative_to(D)}
+projection_pin = exact_ref(candidate["private_projection"]["role_map"])
+projection = data(projection_pin)["roles"]
+assert len(projection) == 277
+assert all(k in current_D and all(current_D[k][field] == row[field] for field in ("bytes","sha256"))
+           for k, row in projection.items())
+
+historical_guard_path = "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/"
+hscope = {}
+for phase in ("collect","run"):
+    archive_binding = historic / "actual-output" / f"reviewed-v2-v3-version40-{phase}-result0-output0.bin"
+    archive = data(archive_binding)
+    compiled = {k.removeprefix(historical_guard_path):sha for k,sha in archive["actual_compiled_current_Source"].items()}
+    assert set(compiled) <= current_D.keys()
+    drift = {k: {"historical_sha256": sha, "current_row":current_D[k]} for k,sha in compiled.items()
+             if sha != current_D[k]["sha256"]}
+    hscope[phase] = dict(binding=ref(archive_binding), role_count=len(compiled), current_drift=drift)
+actual_v589_fixture = latest / "actual-live-ordinary33-exact-six-fixture-wire.json"
+old_fixture = data(actual_v589_fixture)
+old_D = Path(old_fixture["pytest_inifile"]).parent
+absent_rels = [Path(p).relative_to(old_D).as_posix() for p in old_fixture["required_absent_paths"]]
+conf_rels = [Path(p).relative_to(old_D).as_posix() for p in old_fixture["required_normal_conftests"]]
+assert len(set(absent_rels)) == len(absent_rels) == 9
+assert all(not (D / rel).exists() and not (D / rel).is_symlink() for rel in absent_rels)
+assert conf_rels == ["conftest.py","tests/conftest.py","tests/unit/conftest.py"]
+support_tests = ["tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py",
+                 "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py"]
+fixture_rels = [*conf_rels, "pytest.ini", T, *support_tests]
+assert set(fixture_rels) <= current_D.keys()
+live_P1_head, live_P1_tree = git("rev-parse","HEAD","HEAD^{tree}").splitlines()
+historical_scope_ref = save("ordinary37-currentness-and-normal-role-map-RootNULL.json", dict(
+    comparison_only=dict(D_root=str(D), D_HEAD=live_P1_head, D_tree=live_P1_tree,
+                         A_HEAD=epoch["current_A_HEAD"], closed_epoch=ref(old_epoch),
+                         outer=ref(outer_pin), python=ref(python_pin)),
+    known_private_projection_roles_all_match_current_D_outer=277,
+    private_projection=ref(projection_pin), known_role_rows={k:current_D[k] for k in sorted(projection)},
+    historical_same_owner_v247_compilation=hscope,
+    known_required_observed_normal_configuration=dict(
+        late_absence_recheck_relative_paths=absent_rels, conftest_relative_paths=conf_rels,
+        ini_relative_path="pytest.ini",
+        actual_same_directory_ordinary33_fixture_ancestor=ref(actual_v589_fixture),
+        exact_fixture_relative_paths=fixture_rels,
+        expected_current_unchanged_rows={k:current_D[k] for k in fixture_rels if k!=T}),
+    Source_READ3_relative_paths=[M,T,".git/index"],
+    future_bootstrap_module_roles={k[:-3].replace("/", "."):dict(relative_path=k,read_from_actual_postfreeze=True)
+                                   for k in (M,T)},
+    Source_WRITE_receipt=None, future_local_freeze=None, future_Source42_content_epoch=None,
+    future_closed_READ3=None, future_paired_A_provenance=None,
+    future_ordinary_runtime_selection=None, changed_only_after_observed_role_join=True))
+
+# Adapt the existing lazy-owner normal test route. Keep SDK, read ABI, custody and finalizer.
+base_ready = base / "READY-current-Guide571-existing-v581-ordinary33-controls-INERT.json"
+base_data = data(base_ready)
+old_controls = {role:exact_ref(base_data["controls"][role]) for role in ("operator","bootstrap","factory")}
+mod, testmod = M[:-3].replace("/", "."), T[:-3].replace("/", ".")
+test_modules = {T:testmod}
+old_T = "tests/unit/logic/autoformal/test_corpus_release_cli.py"
+old_mod = "ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1"
+selection = dict(actual_collect_is_roster_and_order_authority=True,
+                 expected_function_case_counts=counts, function_count=len(selectors),
+                 function_selectors=selectors, literal_expected_cases=len(roster),
+                 literal_expected_nodeids=roster, owning_files=[T])
+lazy_policy = dict(schema="phase6-existing-modern-lazy-owner-visibility/v1",
+                   selection_group=G, lazy_owner_names=[mod], force_imports=False,
+                   early_absence="record-not-loaded", run_terminal="require-loaded-and-compiled")
+lazy_ref = save("ordinary37-existing-lazy-V3-owner-policy.json",lazy_policy)
+
+def change(source, old, new):
+    assert source.count(old) == 1, old
+    return source.replace(old, new)
+def assign(source, name, value):
+    source, edits = re.subn("^" + name + r" = .*?$", lambda ignored:name + " = " + repr(value), source, flags=re.M)
+    assert edits == 1, (name, edits)
+    return source
+def transform_common(source):
+    return (source.replace(old_group,G)
+            .replace(old_T,T).replace(old_T[:-3].replace("/","."),testmod)
+            .replace(old_mod,mod).replace("ordered15-selector case vector/33","ordered15-selector case vector/37")
+            .replace("independent literal33 nodeid set","independent literal37 nodeid set")
+            .replace("independently selected public-function counts/33 cases","independently selected public-function counts/37 cases")
+            .replace("!= 33","!= 37").replace("== 33","== 37"))
+
+factory = transform_common(old_controls["factory"].read_text())
+factory_ref = save("existing-ordinary37-factory.INERT.py.DATA",factory.encode())
+bootstrap = transform_common(old_controls["bootstrap"].read_text())
+bootstrap = assign(bootstrap,"EXPECTED_ORDERED_CASE_COUNTS",vector)
+bootstrap = assign(bootstrap,"EXPECTED_CASES",37)
+bootstrap = assign(bootstrap,"FUNCTION_SELECTORS",selectors)
+bootstrap = assign(bootstrap,"EXPECTED_FUNCTION_CASE_COUNTS",counts)
+bootstrap = assign(bootstrap,"MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE",lazy_ref)
+bootstrap_ref = save("existing-ordinary37-bootstrap.INERT.py.DATA",bootstrap.encode())
+
+operator = transform_common(old_controls["operator"].read_text())
+operator = assign(operator,"EXPECTED_BRIDGE27_CASE_VECTOR",vector)
+operator = assign(operator,"SELECTION",selection)
+operator = assign(operator,"MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE",lazy_ref)
+operator = assign(operator,"FACTORY_REFERENCE",factory_ref)
+operator = change(operator,
+    """    if expected_request['operation'] == 'run':
+        cli_path = str(ROOT / 'scripts/ops/legal_ir/validate_uscode_corpus_release.py')
+        assert fixture['script_required_fixture'] == outer_rows[cli_path]
+        assert binding['actual_compiled_current_Source'].get(cli_path) == outer_rows[cli_path]['sha256'], 'updated CLI lacks guarded RUN compile witness'
+""","")
+match = re.search(r"^ABSENT_PATHS = .*?$",operator,re.M)
+assert match
+operator = change(operator,match.group(),f"ABSENT_PATHS = [str(ROOT / rel) for rel in {tuple(absent_rels)!r}]\nassert fixture['required_absent_paths'] == ABSENT_PATHS")
+# Require the normal config and the two imported support modules as well as the maintained test.
+operator = change(operator, "for row in fixture['required_fixture_closure']:\n",
+    f"assert type(fixture['required_fixture_closure']) is list\n"
+    f"assert {{r['path'] for r in fixture['required_fixture_closure']}} == {{str(ROOT / rel) for rel in {tuple(fixture_rels)!r}}}\n"
+    f"assert len(fixture['required_fixture_closure']) == {len(fixture_rels)}\n"
+    "for row in fixture['required_fixture_closure']:\n")
+operator_ref = save("existing-ordinary37-operator.INERT.py.DATA",operator.encode())
+
+def literals(tree):
+    vals={}
+    for a in tree.body:
+        if isinstance(a,ast.Assign) and len(a.targets)==1 and isinstance(a.targets[0],ast.Name):
+            try:
+                vals[a.targets[0].id]=ast.literal_eval(a.value)
+            except (ValueError,TypeError):
+                pass
+    return vals
+changed_ast, null_slots = {}, {}
+for role, source in (("operator",operator), ("bootstrap",bootstrap), ("factory",factory)):
+    compile(source, f"existing-ordinary37-{role}", "exec", dont_inherit=True)
+    assert all(needle not in source for needle in (old_group,old_mod,old_T,"independent literal33","updated CLI"))
+    tree, old_tree = ast.parse(source), ast.parse(old_controls[role].read_bytes())
+    val, old_val = literals(tree),literals(old_tree)
+    null_slots[role] = sorted(k for k,v in val.items() if v is None)
+    assert null_slots[role] == sorted(k for k,v in old_val.items() if v is None)
+    changed_ast[role] = [
+        n.name for old,n in zip([f for f in old_tree.body if isinstance(f,ast.FunctionDef)],
+                               [f for f in tree.body if isinstance(f,ast.FunctionDef)], strict=True)
+        if ast.dump(old) != ast.dump(n)]
+    if role != "factory":
+        assert val["MAINTAINED_OWNER_VISIBILITY_POLICY"] == lazy_policy
+        assert val["MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE"] == lazy_ref
+        assert val["MAINTAINED_OWNER_NAMES"] == [mod] and val["SELECTED_TEST_MODULES"] == test_modules
+        assert val["SELECTED_TEST_REWRITE_POLICY"]["selected_test_binding_names"] == [testmod]
+        assert val["ROOT_RUNTIME_SELECTION"] is None
+    if role == "bootstrap":
+        assert val["EXPECTED_CASES"] == 37 and val["EXPECTED_ORDERED_CASE_COUNTS"] == vector
+        assert val["FUNCTION_SELECTORS"] == selectors and val["EXPECTED_FUNCTION_CASE_COUNTS"] == counts
+    if role == "operator":
+        assert val["SELECTION"] == selection and val["EXPECTED_BRIDGE27_CASE_VECTOR"] == vector
+        assert val["D_READ_BINDING_ABI"] == old_val["D_READ_BINDING_ABI"] and val["BOOTSTRAP_REFERENCE"] is None
+assert changed_ast == {"operator":["validate_owner_visibility_policy","verify_binding"],
+                       "bootstrap":["validate_owner_visibility_policy"], "factory":["continuation_request"]}, changed_ast
+assert "_lazy_owner_names" in bootstrap and "run_terminal" in bootstrap and "no cpu" not in factory
+# The only factory literals changed are route, case count and associated diagnostics.
+assert "limits=sdk.ToolRunLimits" in factory
+assert next(line for line in factory.splitlines() if "limits=sdk.ToolRunLimits" in line) == next(
+    line for line in old_controls["factory"].read_text().splitlines() if "limits=sdk.ToolRunLimits" in line)
+bound_limits = dict(collect_wall_cpu_seconds=[120,110], run_wall_cpu_seconds=[600,540],
+                    SDK_address_space_bytes=8589934592, SDK_resident_memory_bytes=4294967296,
+                    SDK_input_bytes=4194304,SDK_output_bytes=16777216,SDK_workspace_bytes=67108864,
+                    native_or_CLI_child_selected=False, child_slots_existing_parent_reservation=1)
+ready=save("READY-existing-v581-v589-Phase2-V3-ordinary37-INERT.json",dict(
+    schema="private-existing-R2-Phase2-V3-mixed-governing-definition-ordinary37-control-preparation/v1",
+    candidate=ref(sv), exact_private_posts=posts, independent_roster=roster_ref, current_role_map=historical_scope_ref,
+    controls=dict(operator=operator_ref,bootstrap=bootstrap_ref,factory=factory_ref),
+    private_no_Native_actual37=candidate["evidence"]["green-owning"]["retained_artifacts"]["result.xml"],
+    historical_same_directory_R2=ref(base_ready), historical_current_live_R2_fixture_profile=ref(actual_v589_fixture),
+    historical_v247_reviewed_V3_ordinary20=ref(hsmall),
+    selection_group=G, static_selection=selection, ordered_case_vector=vector,
+    owner_visibility_policy=lazy_ref, future_guarded_bootstrap_module_names=[mod,testmod],
+    exact_late_slots_unchanged=null_slots, compile_only=True, operators_bootstrap_factory_executed=False,
+    current_source_freeze_read3_profile_bindings=None, fresh_runtime_clock_effect_io_output_bindings=None,
+    resource_envelope_unchanged_from_existing_R2=bound_limits,
+    changed_top_level_function_ASTs=changed_ast,
+    intentional_change="Retarget normal R2 to the V3 owning test and its fixture-time import. Recheck the normal configuration, owning file, and its two imported fixture helpers. Retain exact V3 RUN-terminal import provenance instead of a CLI-specific compile assertion.",
+    qualification_status="UNRUN. Known retained roles match the comparison epoch. Whole-file COLLECT and RUN still must establish normal dependency coverage and synced captured epoch.",
+    actual_authority=False))
+print(json.dumps(ready,sort_keys=True))

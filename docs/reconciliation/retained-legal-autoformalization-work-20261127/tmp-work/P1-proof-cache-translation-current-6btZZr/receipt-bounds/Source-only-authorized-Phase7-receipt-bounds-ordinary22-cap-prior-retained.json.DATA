@@ -1,0 +1,58 @@
+{
+  "added_Source_only_envelope": 134217728,
+  "after_full_retained_precharge": {
+    "captures": 543410,
+    "capturesComplete": false,
+    "global_cap": 58384205834,
+    "internal_cap": 58193613960,
+    "internal_used": 58187256968,
+    "used": 58377848842
+  },
+  "combined_epoch_READ3_full_retained_charge": {
+    "bytes": 1306,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/Source-only-Phase7-receipt-bounds-READ-overlay-full-retained.json",
+    "sha256": "e91bb2057d41075fbd168c0ed1df3eb8e85971ce7261e8e09dc0cb921f0a316f"
+  },
+  "exact_human_affirmation": {
+    "bytes": 2960,
+    "path": "/tmp/Main-source-cap-human-provenance-v01-g9hs_s_q/Root-original-human-Source-cap-approval.record.jsonl",
+    "sha256": "8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda"
+  },
+  "no_policy_capacity_or_model_change": true,
+  "prior": {
+    "captures": 543409,
+    "capturesComplete": false,
+    "global_cap": 58249988106,
+    "internal_cap": 58059396232,
+    "internal_used": 58053039240,
+    "used": 58243631114
+  },
+  "protected_Guide577_Source_full_charge": {
+    "bytes": 1325,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/Source-only-Guide577-full-retained-cap.json",
+    "sha256": "fa3a21c2b99ea7636616808bf9b60742b977bbf6c77513df9b12351349eeb99b"
+  },
+  "protected_Guide577_publication": {
+    "bytes": 2700,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Guide577-four-docs-three-FF-publication.json",
+    "sha256": "22ad68b457d362a51ab947499b84e868c52bff4396123d79756ec26a53dc572d"
+  },
+  "retained_first_write_charge": {
+    "bytes": 1294,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/Source-only-Phase7-receipt-bounds-WRITE-full-retained.json",
+    "sha256": "48b153a723382c43c88a849ac2518a3136640450024b0dd61f47468572211db7"
+  },
+  "selected": {
+    "captures": 543409,
+    "capturesComplete": false,
+    "global_cap": 58384205834,
+    "internal_cap": 58193613960,
+    "internal_used": 58053039240,
+    "used": 58243631114
+  },
+  "successor_write_charge": {
+    "bytes": 1302,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/Source-only-Phase7-receipt-bounds-WRITE-full-retained-v02.json",
+    "sha256": "629d9670c6f88b3d948a05b4037b075971c20962c22fbf5f70fbbca51106a5ea"
+  }
+}

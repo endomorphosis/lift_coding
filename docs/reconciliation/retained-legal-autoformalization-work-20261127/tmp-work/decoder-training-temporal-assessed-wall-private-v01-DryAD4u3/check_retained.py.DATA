@@ -1,0 +1,19 @@
+"""Exercise the unchanged T5 and Qwen fixtures through the default entry point."""
+from hashlib import sha256
+from pathlib import Path
+import sys
+
+HERE = Path(__file__).resolve().parent
+retained = HERE.parent/'decoder-training-temporal-qwen-two-round-execution-private-v01-Ys8mtLxs/check_two_rounds.py'
+raw = retained.read_bytes()
+assert sha256(raw).hexdigest()=='fae6833daa6facf2120e3fea5ee8c7938511549c4198531f7f0cbc5dccffbf2a'
+source=raw.decode()
+old='    projection = ASSEMBLY / "projection.py"'
+assert source.count(old)==1
+source=source.replace(old,'    projection = HERE / "projection.py"',1)
+old='46669123c8dbedeb95e2f8973f23de48d4dc24a3dd225798de40848574a96cc9'
+assert source.count(old)==1
+source=source.replace(old,'30ac6bca0216d480948cfda4b2eb87d4b59876b92f35b79c0f0d87844152fc1a',1)
+sys.argv=[retained.name]
+__file__=str(HERE/retained.name)
+exec(compile(source,str(retained),'exec'),globals())

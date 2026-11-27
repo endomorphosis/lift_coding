@@ -1,0 +1,68 @@
+{
+  "Source_binding": {
+    "bytes": 1887,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-ordinary10-D27-read-binding.json",
+    "sha256": "7eeb60ab86e1f1c94fdff9fc320c3cda12df1424a4a474a5107d90fbfd34b269"
+  },
+  "Source_lease_and_resource_cleanup_closed": true,
+  "actual_ordinary_counts": {
+    "errors": 0,
+    "failures": 0,
+    "functions": 6,
+    "passed": 10,
+    "skipped": 0,
+    "tests": 10
+  },
+  "actual_report": {
+    "bytes": 468710,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/ordinary10-retry-v02/actual-output/complete-frozen-local-D-phase1-proof-cache-atomic-put10-existing-owner-report.json",
+    "sha256": "42ee4869003c35d1c4403576f0601a0d95b5fe10a933ceeb3295c18ee3d29470"
+  },
+  "exact_freeze": {
+    "bytes": 8716,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-Phase1-cache-atomic-put-exact-three-local-freeze.json",
+    "sha256": "0d94fff7376374123441e0a52da3fb11b06f315125051e030660c48d571b5725"
+  },
+  "held_case_selector": {
+    "bytes": 10316,
+    "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/SEALED-private-Phase1-proof-cache-atomic-record-exact-three.json",
+    "sha256": "1057bbcde6ed22f67da2603060f467d1a320a79bb24046b4e6ad2311b935bd20"
+  },
+  "large_model_fit_or_Native_or_statutory_qualification": false,
+  "ordered_cases": [
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[both-absent]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[exact-match]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[request-only]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[receipt-only]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[different-digest]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_record_v2_disk_round_trip_and_explicit_context",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_proof_binding_normalizes_protocol_frozen_kernel_payload_to_canonical_wire",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_current_lean_verification_profile_survives_bound_cache_wire_replay",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_proof_reuse_refuses_an_installed_older_kernel_profile",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_failed_record_replace_preserves_committed_cache_indexes"
+  ],
+  "ordinary_raw_JUnit": {
+    "bytes": 1835,
+    "logical_name": "junit.xml",
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/ordinary10-retry-v02/actual-output/phase1-proof-cache-atomic-put10-run-result0-output1.bin",
+    "sha256": "894cbaa8c40219ec657cd5e90e6dd5fbda963668b06f5b790d5d7edac9ac380d"
+  },
+  "published": false,
+  "raw_phase_bindings": {
+    "collect": {
+      "bytes": 81795,
+      "logical_name": "binding.json",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/ordinary10-retry-v02/actual-output/phase1-proof-cache-atomic-put10-collect-result0-output0.bin",
+      "sha256": "0402cf41210bb2e2da5f6a8dd423511ccf2d5ab76f28e86aba80a53736de4415"
+    },
+    "run": {
+      "bytes": 85454,
+      "logical_name": "binding.json",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/ordinary10-retry-v02/actual-output/phase1-proof-cache-atomic-put10-run-result0-output0.bin",
+      "sha256": "392d62d8096952a00fedd99d272bcaff936308fc02c258100845b1764cc791be"
+    }
+  },
+  "schema": "actual-Phase1-current-cache-atomic-put-ordinary10-closed/v1",
+  "terminal_returncode": 0,
+  "terminal_session": 28958
+}

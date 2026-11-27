@@ -1,0 +1,83 @@
+{
+  "accelerate_published_head_preserved": true,
+  "actual_code_publication": {
+    "bytes": 14833,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-Phase1-native-translated-cache-test-only-three-FF-publication.json",
+    "sha256": "6f35d57062044bf9689d11a2d8f53dd837c3016e629cd5d5ea7f2e5938d9b3f1"
+  },
+  "actual_doc_Source_closed": {
+    "bytes": 6210,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-Guide579-four-docs-Source-closed-and-frozen.json",
+    "sha256": "bcf4c64afb6398d4806d069376786074fb1e82fbb09b059ba9e4ace968598ddf"
+  },
+  "actual_native_translated_cache": {
+    "bytes": 7503,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-Phase1-native-translated-proof-cache-closed.json",
+    "sha256": "7c612a24bf24486fad3245ccb5ac319412a8dea07b1649a83dec697c913bd0f2"
+  },
+  "evidence_ordinal": 579,
+  "live_main_after": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "4bd600b83d5b9abd0a3f5c466677d40e42efddf3",
+    "hallucinate": "c84b51fcc6a0e6c1894e08fa8e4bd52e963bcecf",
+    "root": "79814de01181f0fd5a8776ba8268f7c9d4bcb972"
+  },
+  "live_main_before": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "948bd49e5e182abf1c8f8398b70d45095c1923a9",
+    "hallucinate": "5c582e548fd91572f473209c232a3f2f20a2703e",
+    "root": "167d1cf6d09421f82c87ae41fab217d8df0f43a5"
+  },
+  "only_four_docs": [
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json"
+  ],
+  "original_publisher": {
+    "effects": "all three fast-forwards completed and were verified in the journal",
+    "error": "post-push status read used subscription instead of path selection",
+    "original_events": {
+      "bytes": 3600,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/guide579-transport/actual-Guide579-publication-events.jsonl",
+      "sha256": "8a3a26249e8972b0977a776630e7fd3d595b482d052d939534ed85eceefac1c5"
+    },
+    "terminal_returncode": 1
+  },
+  "prior_values_preserved": {
+    "components": 126,
+    "evidence_records": 578,
+    "tasks": 24
+  },
+  "pushes_in_actual_order": [
+    {
+      "after": "4bd600b83d5b9abd0a3f5c466677d40e42efddf3",
+      "before": "948bd49e5e182abf1c8f8398b70d45095c1923a9",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "c84b51fcc6a0e6c1894e08fa8e4bd52e963bcecf",
+      "before": "5c582e548fd91572f473209c232a3f2f20a2703e",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "79814de01181f0fd5a8776ba8268f7c9d4bcb972",
+      "before": "167d1cf6d09421f82c87ae41fab217d8df0f43a5",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "recovery": {
+    "pushes_repeated": 0,
+    "read_only_Git_verification": true,
+    "verified_after_all_three_pushes": true
+  },
+  "schema": "actual-Guide579-four-docs-live-native-translated-cache-three-FF-publication/v1",
+  "shared_checkouts_preserved": true,
+  "terminal_returncode": 0
+}

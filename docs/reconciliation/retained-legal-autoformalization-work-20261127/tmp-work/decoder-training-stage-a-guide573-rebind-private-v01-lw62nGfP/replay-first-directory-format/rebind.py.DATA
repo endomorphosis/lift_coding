@@ -1,0 +1,211 @@
+"""Rebuild Guide573 from authenticated detached artifacts."""
+import ast
+from hashlib import sha1, sha256
+import json
+from pathlib import Path
+import struct
+
+HERE = Path(__file__).resolve().parent
+TMP = HERE.parent
+PREV = TMP/'decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa'
+RES = TMP/'decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy'
+PREV_PREVIEW = TMP/'decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI'
+LIVE = TMP/'Root-P1-Lean-live-ordinary92-reconcile-v596'
+READ = TMP/'P1-Lean92-live-READ3-controls-XYXyet7M'
+DOCS = TMP/'P1-Lean92-Native2-guide573-existing-composer-INERT-kVMIQxSz'
+PARSER = TMP/'decoder-training-stage-a-v292-frozen-reader-private-v01-ORhtLOea'
+RECON = TMP/'decoder-training-guide535-index-reconstruction-private-v01-XLNnRqmJ'
+ALLOWED = {PREV, RES, PREV_PREVIEW, LIVE, LIVE/'guide573-transport', READ, READ/'actual-output'/'raw',
+           DOCS, PARSER, RECON, HERE}
+
+
+def ref(path, size, sha):
+    return dict(path=str(path),bytes=size,sha256=sha)
+
+
+def digest(raw):
+    return sha256(raw).hexdigest()
+
+
+def archive(reference):
+    path = Path(reference['path'])
+    assert path.parent in ALLOWED and '..' not in path.parts and '.git' not in path.parts
+    raw = path.read_bytes()
+    assert (len(raw),digest(raw)) == (reference['bytes'],reference['sha256']), path
+    return raw
+
+
+def load(reference):
+    return json.loads(archive(reference))
+
+
+def compact(value):
+    return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()
+
+
+def save(path, raw):
+    if path.exists():
+        assert path.read_bytes() == raw
+    else:
+        with path.open('xb') as result:
+            result.write(raw)
+    return ref(path,len(raw),digest(raw))
+
+
+def extract(reference, names, scope):
+    tree = ast.parse(archive(reference),reference['path'])
+    chosen = [node for node in tree.body if isinstance(node,ast.FunctionDef) and node.name in names]
+    assert {node.name for node in chosen} == names
+    exec(compile(ast.Module(chosen,type_ignores=[]),reference['path'],'exec'),scope)
+    return scope
+
+
+PRIOR_INDEX = ref(PREV/'guide572-publisher-matched-index.DATA',7070597,
+    '2266f4d1c12dfa62b7e87a5078a49a578134ea0150752e9db42a566ad810dca5')
+PRIOR_PREVIEW = ref(PREV_PREVIEW/'guide572-all-fresh-preview.INERT.json',556438,
+    'e682f614e50a3e97af25fdf532df48607dbc52085571a9b84d494bbd46ff4cfb')
+HELPERS = ref(PREV/'rebind.py',18000,'8f17a3968c58c9b87475365e8f663a65a5dece119b0b99ae29de3542a9d1f56b')
+PARSER_REF = ref(PARSER/'replay_index.py',7058,'ee28ee6fc23643b06c2f6cc213223fd61226172c9ce4f299ae2285f5c8b2ed35')
+RECON_REF = ref(RECON/'reconstruct_index.py',11222,'a0ee242b0cb573b04c6d70c071315c6efde66cfc50ecf1eefef02a800f490a23')
+METADATA = ref(RES/'guide573-metadata.INERT.json',4692,'1087aa3f70cfca94faa20116155465a5fdc6a0dd7cf0dfeeb78122c1abf7ffa9')
+EVENTS = ref(LIVE/'guide573-transport'/'actual-Guide573-publication-events.jsonl',3600,
+             '248bf1b2a4aba75066bca72195df289601cc1592fd7d30897a78d0408e9ac1b3')
+
+
+def replay():
+    metadata = load(METADATA)
+    refs = metadata['retained_refs']
+    pub,writer,code,closed,observed = (load(refs[key]) for key in
+        ('publication','write_close','code_publication','read_close','metadata'))
+    events = [json.loads(line) for line in archive(EVENTS).splitlines()]
+    verified = [row for row in events if 'fast_forward_verified' in row]
+    assert [row['fast_forward_verified'] for row in verified] == ['datasets','hallucinate','root']
+    assert verified[-1]['live_readback'] == pub['live_main_after']
+    read = load(code['READ3'])
+    base = read['protected_index_reference']
+    captured, = [row for row in read['individual_captures'] if row['path']==base['path']]
+    assert {key:captured[key] for key in base}==base==code['D_index']
+    assert read['Source_closed'] is read['module_closed'] is True and read['terminal_returncode']==0
+    d,a = read['projects']
+    assert d['Git_HEAD']==code['live_main_after']['datasets']==writer['prior_D']
+    assert a['Git_HEAD']==code['live_main_after']['accelerate']==writer['A']
+    assert read['actual_accelerate_index_metadata']==closed['actual_A_index']==writer['A_index']
+    assert base['path']==writer['index']['path']==str(Path(d['root'])/'.git/index')
+    raw = archive(captured['raw_reference'])
+    companion = closed['actual_A_index_raw_reference']
+    companion_raw = archive(companion)
+    assert companion['sha256']==writer['A_index']['sha256']
+    helpers = extract(HELPERS,{'changed','replay_parser','rows','restore_entries'},
+                      {'ast':ast,'archive':archive,'struct':struct})
+    parse = helpers['replay_parser'](PARSER_REF,3,41250,237573)
+    rows = helpers['rows']
+    old, pre = rows(parse,archive(PRIOR_INDEX)),rows(parse,raw)
+    assert len(rows(helpers['replay_parser'](PARSER_REF,3,29607,146025),companion_raw))==29607
+    assert len(old)==len(pre)==41250 and old.keys()==pre.keys()
+    changes=code['exact_two_changes']
+    assert {name for name in pre if pre[name]!=old[name]}==changes.keys()
+    assert all((old[name][0],pre[name][0])==tuple(change[:2])
+               and old[name][1:3]==pre[name][1:3]==(0o100644,0)
+               for name,change in changes.items())
+    reconstruct = extract(RECON_REF,
+        {'require','git_hash','parse_cache_tree','linux_stat_fields','rewrite_tree'},{'sha1':sha1})
+    composer = load(writer['composer_READY'])
+    assert (composer['expected_current_D_HEAD'],composer['expected_current_D_tree'])==(d['Git_HEAD'],d['Git_tree'])
+    assert (composer['expected_current_A_HEAD'],composer['expected_current_A_tree'])==(a['Git_HEAD'],a['Git_tree'])
+    assert composer['actual_live_code_publication']==refs['code_publication']
+    docs = {row['relative_path']:row for row in composer['files']}
+    assert docs.keys()==writer['committed_docs'].keys()==set(pub['only_four_docs'])
+    entries,extension = helpers['restore_entries'](raw,len(pre),pre)
+    assert raw[extension:extension+4]==b'TREE'
+    cache = reconstruct['parse_cache_tree'](raw,extension+8)
+    replacements, output = {}, bytearray(raw)
+    for name,witness in writer['committed_docs'].items():
+        edit=docs[name]
+        key=name.encode()
+        offset,stats,blob=entries[key]
+        assert witness['path']==str(Path(d['root'])/name) and blob.hex()==edit['before_Git_blob_oid']
+        assert reconstruct['git_hash']('blob',archive(edit['before_private']))==blob
+        body=archive(edit['post_private'])
+        oid=reconstruct['git_hash']('blob',body)
+        assert (len(body),digest(body),oid.hex())==(witness['bytes'],witness['sha256'],witness['committed_blob'])
+        replacements[key]=oid
+        output[offset:offset+40]=struct.pack('>10I',*reconstruct['linux_stat_fields'](witness['full9'],stats[6]))
+        output[offset+40:offset+60]=oid
+    before,after,dirs=reconstruct['rewrite_tree'](raw,output,entries,cache,replacements)
+    assert before.hex()==d['Git_tree'] and after.hex()==writer['tree']
+    output[-20:]=sha1(output[:-20]).digest()
+    output=bytes(output)
+    assert (len(output),digest(output))==(writer['index']['bytes'],writer['index']['sha256'])
+    final=rows(parse,output)
+    assert final.keys()==pre.keys() and {path for path in final if pre[path]!=final[path]}==docs.keys()
+    return build_preview(metadata,writer,observed,d,a,old,pre,final,output,dirs,captured['raw_reference'],companion)
+
+
+def build_preview(metadata, writer, observed, d, a, old, pre, final, raw, directories, base_ref, companion):
+    prior = load(PRIOR_PREVIEW)
+    inputs = prior['reader_inputs']
+    roots = dict(inputs['current_roots'])
+    assert roots['A']['root']==a['root'] and roots['A']['HEAD']==a['Git_HEAD'] and roots['A']['tree']==a['Git_tree']
+    old_d = roots['D']['root']
+    assert d['root'] != old_d and metadata['datasets_root']==d['root']
+    roots['D'] = dict(roots['D'],root=d['root'],HEAD=writer['HEAD'],tree=writer['tree'])
+
+    def relocated(path):
+        prior_path = Path(path)
+        if prior_path.is_relative_to(old_d):
+            return str(Path(d['root']) / prior_path.relative_to(old_d))
+        assert prior_path.is_relative_to(a['root'])
+        return path
+
+    rows = {row['path']:row for row in observed}
+    assert len(rows)==1610
+    rows[writer['index']['path']]=writer['index']
+    retained = [rows[relocated(row['path'])] for row in prior['relocated_retained_outer']]
+    changed = [dict(previous=previous,relocated=current,index_role=current==writer['index'])
+        for previous,current in zip(prior['relocated_retained_outer'],retained,strict=True)
+        if (previous['bytes'],previous['sha256']) != (current['bytes'],current['sha256'])]
+    assert {Path(row['relocated']['path']).relative_to(d['root']).as_posix():row['relocated'] for row in changed} == (
+        metadata['changed_retained_bodies'])
+    scope=dict(inputs['historical_origin_scope_recheck'])
+    for key in ('fresh_32_paths','retained_92_paths'):
+        scope[key]=[relocated(path) for path in scope[key]]
+    assert {row['relocated']['path'] for row in changed}.isdisjoint(scope['retained_92_paths']+scope['fresh_32_paths'])
+    fresh, roles = [],[]
+    for row in inputs['fresh_Source_body_targets']:
+        updated = rows[relocated(row['path'])]
+        name = Path(updated['path']).relative_to(d['root']).as_posix()
+        expected=(row['expected_Git_blob_oid'],int(row['expected_Git_mode'],8),0)
+        assert old[name][:3]==pre[name][:3]==final[name][:3]==expected
+        assert (updated['bytes'],updated['sha256'])==(row['bytes'],row['sha256'])
+        assert updated['full9']!=row['full9']
+        fresh.append(dict(row,path=updated['path'],full9=updated['full9']))
+        roles.append(dict(relative_path=name,bytes=updated['bytes'],sha256=updated['sha256'],
+                          Git_oid=expected[0],Git_mode=row['expected_Git_mode'],Git_stage=0))
+    docs = writer['committed_docs']
+    guides=[]
+    for row in inputs['four_guide_post_candidates_for_current_owner_recheck']:
+        name = Path(row['path']).relative_to(old_d).as_posix()
+        guides.append({key:docs[name][key] for key in ('path','bytes','sha256','full9')})
+    assert len({row['path'] for row in retained+guides+fresh})==1254 and len(roles)==32
+    assert scope['fresh_32_paths']==[row['path'] for row in fresh]
+    assert len(set(scope['retained_92_paths']))==92
+    assert set(scope['retained_92_paths']) <= {row['path'] for row in retained if row['path'].endswith('.py')}
+    index_reference=save(HERE/'guide573-writer-matched-index.DATA',raw)
+    proof=dict(schema='private-stage-a-guide573-writer-index-and-body-roles/v1',
+               before_index=base_ref,prior_guide_index=PRIOR_INDEX,guide573_metadata=METADATA,prior_preview=PRIOR_PREVIEW,
+               writer_matched_index=index_reference,frozen_A_index=companion,publisher_events=EVENTS,
+               published_roots=roots,writer_expected_index=writer['index'],Git_index_entries=41250,
+               publisher_document_paths=sorted(docs),rewritten_cache_tree_directories=directories,
+               protected_roles=roles,independent_current_index_read=None,paired_selection=None,dispatch_authority=False)
+    proof_ref=save(HERE/'guide573-replay.INERT.json',compact(proof))
+    preview=dict(prior,reader_inputs=dict(inputs,current_roots=roots,current_index=writer['index'],
+                    historical_origin_scope_recheck=scope,fresh_Source_body_targets=fresh,
+                    four_guide_post_candidates_for_current_owner_recheck=guides),
+                 relocation_proof=proof_ref,relocated_retained_outer=retained,changed_retained_content=changed)
+    assert preview['historical_phase7']==prior['historical_phase7']
+    output=save(HERE/'guide573-all-fresh-preview.INERT.json',compact(preview))
+    return dict(index=index_reference,proof=proof_ref,preview=output)
+
+
+if __name__=='__main__':
+    print(json.dumps(replay(),sort_keys=True))

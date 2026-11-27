@@ -1,0 +1,31 @@
+{
+  "actual_pyarrow_loaded": true,
+  "controls": [
+    {
+      "detail": "HF package graph differs from the independently reviewed graph",
+      "exception": "ReleaseCoordinatorError",
+      "name": "blank-legal-id",
+      "passed": false,
+      "traceback": "Traceback (most recent call last):\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-V4-packaged-reviewed-graph-private-8455u_cu/run-private-v4-existing-guard-with-overlay-v03.py.DATA\", line 72, in <module>\n    module.test_physical_v4_reviewed_hf_graph_allows_optional_legal_id(material)\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py\", line 3525, in test_physical_v4_reviewed_hf_graph_allows_optional_legal_id\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py\", line 2940, in reviewed_physical_whole_norm_control_v2\n    manifest = c[\"preparation\"].to_dict()\n                  ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_corpus_shared_lake.py\", line 2974, in prepare_reviewed_physical_definition_realization_corpus_v2\n    return _reviewed_definition_realization_operation(preservation, graph, admission, args, kwargs,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_corpus_shared_lake.py\", line 2093, in _reviewed_definition_realization_operation\n    physical_context = getattr(physical_owner, physical_validator_name)(\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py\", line 1786, in validate_reviewed_physical_realization_context_v2\n    preservation_sha256=pins[\"preservation\"], crosswalk_artifact_id=crosswalk_id,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py\", line 1750, in validate_uscode_release_closure_v4\n    expected_request_sha256=expected_request_sha256)\n       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py\", line 928, in _validate_uscode_release_physical_closure\n    integer(selected[\"law_row_ordinal\"], 0, 10_000_000, \"physical law row ordinal\")\n             ^^^^^^^^^^^^^\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py\", line 826, in core_replay\n    and law_artifact.sha256 == law_selection[\"file_sha256\"]\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py\", line 1742, in _validate_uscode_release_byte_closure_v4\n    request = wire.decode_parent_replay_value_v1(request_raw,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py\", line 459, in _validate_uscode_release_byte_closure\n    native_report = receipt_validator(receipt_raw,\n  File \"/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_release_coordinator_v1.py\", line 205, in _require_hf_reviewed_graph_v4\n    parent_callback_states = (_release_callback_states_v3((_release_original_parent_context_v3,\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1.ReleaseCoordinatorError: HF package graph differs from the independently reviewed graph\n"
+    }
+  ],
+  "guard_events": [],
+  "lightweight_private_scope": true,
+  "overlays": [
+    {
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-V4-packaged-reviewed-graph-private-8455u_cu/owning-test.after-v02.py.DATA",
+      "module": "tests.unit.logic.autoformal._private_v4_current_revocation"
+    },
+    {
+      "actual_bytes": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P8-V4-packaged-reviewed-graph-private-8455u_cu/legal_release_coordinator_v1.after.py.DATA",
+      "module": "ipfs_datasets_py.logic.autoformal.legal_release_coordinator_v1"
+    }
+  ],
+  "permitted_ctypes_self_handles": [
+    "self_process_handle"
+  ],
+  "physical_fixture_constructed": true,
+  "test_module_origin": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+  "test_source_sha256": "b02f62e724968f32c3a8df87a3998f7a26014764a04103bbdbc13898134e1371",
+  "torch_duckdb_loaded": false
+}

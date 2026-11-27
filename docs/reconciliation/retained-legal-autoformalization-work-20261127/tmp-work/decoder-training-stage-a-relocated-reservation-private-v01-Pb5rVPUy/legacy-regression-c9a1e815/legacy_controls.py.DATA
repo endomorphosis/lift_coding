@@ -1,0 +1,101 @@
+"""Run the pinned, unchanged legacy test methods against the detached Reader."""
+
+from hashlib import sha256
+from pathlib import Path
+import sys
+import unittest
+
+HERE = Path(__file__).resolve().parent
+OLD = Path('/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF')
+CANDIDATE = HERE.parent / 'reader.py.DATA'
+CANDIDATE_PIN = (42325, 'c9a1e81533834ba39fbed94f64da61fcde171259976703513168c230eb377e55')
+ORIGINAL_PIN = (37935, '981dfd120c28cca772edf9382be5d7ea237869f8724075816a4625f265fe7e34')
+BASE = OLD / 'retained_reader_projection.py'
+BASE_PIN = (21218, 'd72afb4a261e329a185fc7064c82a00232434d5d368e8870a33c3c61a9ab6da5')
+PAIR = OLD / 'test_selected_pair_reader.py'
+PAIR_PIN = (9999, 'a989cebd1a165b4fbae417e503fd354caf8b82761ae4b6f386c1e0bb43d6306a')
+CONSTANTS = "('STAGE_A_RELOCATED_PARTITION', 'STAGE_A_RELOCATED_SELECTION')"
+
+
+def exact(path, pin):
+    raw = path.read_bytes()
+    if (len(raw), sha256(raw).hexdigest()) != pin:
+        raise ValueError(f'private evidence pin changed: {path}')
+    return raw
+
+
+def replace_once(source, before, after):
+    if source.count(before) != 1:
+        raise ValueError(f'original harness interface changed: {before}')
+    return source.replace(before, after)
+
+
+def allow_only_private_artifacts(event, args):
+    if event in ('subprocess.Popen', 'os.system', 'os.exec', 'os.posix_spawn', 'socket.__new__'):
+        raise RuntimeError(f'process or network access refused in local control: {event}')
+    if event == 'open' and not isinstance(args[0], int):
+        path = Path(args[0].decode() if isinstance(args[0], bytes) else args[0])
+        # Keep canonical worktrees out even though their literal paths occur in fixtures.
+        if path.is_absolute() and (path.is_relative_to('/home') or 'repositories' in path.parts
+                                   or '.git' in path.parts
+                                   or path.is_relative_to('/tmp/A21d7-A4-existing-qualifier-sparse-companion-odzgyALT')):
+            raise RuntimeError(f'live path refused in retained legacy control: {path}')
+
+
+def base_fixture(path, pin, candidate, candidate_pin):
+    source = exact(path, pin).decode()
+    source = replace_once(source, "path=HERE/'reader.py.DATA'", f'path=Path({str(candidate)!r})')
+    source = replace_once(source, f"OWNER_PIN='{ORIGINAL_PIN[1]}'", f"OWNER_PIN='{candidate_pin[1]}'")
+    source = replace_once(source,
+        "'acquire_current_sources','read_selected_stage_a_epoch')]",
+        ("'acquire_current_sources','read_selected_stage_a_epoch') or isinstance(node, ast.Assign) "
+         f"and len(node.targets) == 1 and getattr(node.targets[0], 'id', None) in {CONSTANTS}]"))
+    module = {'__file__': str(path), '__name__': 'legacy_projection'}
+    exec(compile(source, str(path), 'exec'), module)
+    module['HERE'] = HERE
+    module['GUARD'] = OLD / 'verify_standalone_git.py'
+    return module
+
+
+def pair_fixture(base_module, candidate, candidate_pin):
+    source = exact(PAIR, PAIR_PIN).decode()
+    source = replace_once(source, "READER = HERE / 'reader.py.DATA'", f'READER = Path({str(candidate)!r})')
+    source = replace_once(source, f'READER_PIN = {ORIGINAL_PIN!r}', f'READER_PIN = {candidate_pin!r}')
+    source = replace_once(source, 'fixture_module = {\'__file__\': str(FIXTURE), \'__name__\': \'_retained_stage_a_reader_fixture\'}\n'
+        "exec(compile(exact(FIXTURE, FIXTURE_PIN), str(FIXTURE), 'exec'), fixture_module)",
+        'fixture_module = fixture_with_candidate')
+    source = replace_once(source, "        cls.reader = compile(ast.Module(body=[entry], type_ignores=[]), str(READER), 'exec')",
+        ("        constants = [node for node in tree.body if isinstance(node, ast.Assign)\n"
+         f"                     and len(node.targets) == 1 and getattr(node.targets[0], 'id', None) in {CONSTANTS}]\n"
+         "        cls.reader = compile(ast.Module(body=constants + [entry], type_ignores=[]), str(READER), 'exec')"))
+    module = {'__file__': str(PAIR), '__name__': 'legacy_selected_pair', 'fixture_with_candidate': base_module}
+    exec(compile(source, str(PAIR), 'exec'), module)
+    module['HERE'] = HERE
+    module['GIT'] = OLD / 'verify_standalone_git.py'
+    return module
+
+
+def main():
+    if sys.argv[1:] == ['baseline']:
+        candidate, pin = OLD / 'reader.py.DATA', ORIGINAL_PIN
+    elif sys.argv[1:] == ['candidate']:
+        candidate, pin = CANDIDATE, CANDIDATE_PIN
+    else:
+        raise SystemExit('expected baseline or candidate')
+    sys.addaudithook(allow_only_private_artifacts)
+    exact(candidate, pin)
+    base = base_fixture(BASE, BASE_PIN, candidate, pin)
+    pair = pair_fixture(base, candidate, pin)
+    loader = unittest.defaultTestLoader
+    suite = unittest.TestSuite((loader.loadTestsFromTestCase(base['ExistingStageAOwner']),
+                                pair['load_tests'](loader, None, None)))
+    if suite.countTestCases() != 16:
+        raise ValueError('legacy test roster changed')
+    outcome = unittest.TextTestRunner(verbosity=2).run(suite)
+    exact(candidate, pin)
+    print(f'{len(outcome.failures)} failures, {len(outcome.errors)} errors, {outcome.testsRun} cases')
+    return 0 if outcome.wasSuccessful() else 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

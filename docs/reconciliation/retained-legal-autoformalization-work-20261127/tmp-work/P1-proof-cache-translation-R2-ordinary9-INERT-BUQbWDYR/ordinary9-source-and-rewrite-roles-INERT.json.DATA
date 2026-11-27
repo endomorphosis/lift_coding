@@ -1,0 +1,38 @@
+{
+  "actual_Source_Git_auxiliary_fixture_clock_and_IO": null,
+  "actual_results": null,
+  "exact_proposed_test_source": {
+    "bytes": 102758,
+    "path": "/tmp/P1-proof-cache-translation-agreement-private-tsXoF9ev/test_proof_cache.translation-agreement.after.py.DATA",
+    "sha256": "23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab"
+  },
+  "fixture_scope": "existing v597 normal configuration and no-model/no-Native authored proof fixtures",
+  "maintained_owner_names": [
+    "ipfs_datasets_py.logic.legal_ir.proof_cache",
+    "ipfs_datasets_py.logic.backends.kernel.lean"
+  ],
+  "normal_conftest_candidates": [
+    "conftest.py",
+    "tests/conftest.py",
+    "tests/unit/conftest.py"
+  ],
+  "pytest_ini_relative_path": "pytest.ini",
+  "roles": {
+    "ipfs_datasets_py.logic.backends.kernel.lean": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+    "ipfs_datasets_py.logic.legal_ir.proof_cache": "ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+    "tests/unit/logic/legal_ir/test_proof_cache.py": "tests.unit.logic.legal_ir.test_proof_cache"
+  },
+  "selected_test_modules": {
+    "tests/unit/logic/legal_ir/test_proof_cache.py": "tests.unit.logic.legal_ir.test_proof_cache"
+  },
+  "selected_test_rewrite_policy": {
+    "cache_policy": "bypass-read-only-for-selected-owning-test",
+    "required_compile_and_execution_witness": true,
+    "rewrite_policy": "normal-pytest-assertion-rewrite",
+    "schema": "selected-test-normal-pytest-source-AST-code-observation/v1",
+    "selected_test_binding_names": [
+      "tests.unit.logic.legal_ir.test_proof_cache"
+    ],
+    "unobserved_or_cached_only_route": "REFUSE"
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "D_clean_index_worktree": true,
+  "D_index_before": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795594398208518929",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795594398207518921",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "45623ae5570e01384a43e10b91c7524c2dcf86bb21d13b0065862c8bf836bf4f"
+  },
+  "D_index_frozen": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795596557577456081",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795596557567455991",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "4a56e23282e4628e278cb99d32a488661b672a09e809eba92bc95dbb543a035d"
+  },
+  "D_local_branch": "refs/heads/work/phase6-capacity-composition-20261123",
+  "D_local_parent": "8aebc34eb1e430b00c2b941cb256e853fe2adc02",
+  "actual_D_HEAD": "68e3739ffd64e54016133d3d1e0304c6302da1b1",
+  "actual_D_tree": "754fd9f796439076c1bb71e14ec6430f505f3b99",
+  "all_158_original_top_level_ASTS_unchanged": true,
+  "all_other_product_code_and_gitlinks_preserved": true,
+  "exact_unchanged_byte_prefix": 208493,
+  "freeze_for_actual_ordinary5": true,
+  "installed_Source_closed": {
+    "bytes": 3027,
+    "full9": {
+      "st_ctime_ns": "1795596462066386238",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "64274029",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795596462066386238",
+      "st_nlink": "1",
+      "st_size": "3027",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-P2-V4-revoked-key-Source1-selected-v302-jd75862z/Root-V4-revoked-key-one-test-installed-Source-closed-small-v302.json",
+    "sha256": "b933c745e8babc35c17a22bf667285e86c46d9b50cccadba4a30c7fcf8a21fbf"
+  },
+  "local_origin_main_tracking_ref_unchanged": "8aebc34eb1e430b00c2b941cb256e853fe2adc02",
+  "new_test_append": 3410,
+  "new_test_function": "test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer",
+  "no_push_remote_checkout_Source_test_or_resource_actions": true,
+  "only_committed_target": {
+    "bytes": 211903,
+    "full9": {
+      "st_ctime_ns": "1795596420782218036",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "70042555",
+      "st_mode": "33188",
+      "st_mtime_ns": "1795596420158612785",
+      "st_nlink": "1",
+      "st_size": "211903",
+      "st_uid": "1000"
+    },
+    "git_mode": "100644",
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+    "previous_git_blob": "5800ee664e2c4bb2562da0e43eaef774545669b1",
+    "relative_path": "tests/unit/logic/autoformal/test_corpus_release_cli.py",
+    "sha256": "65db8d66896bf1a6dd999fb9a262c68e65384642a4267f87c90900aa4d57457f",
+    "stage0_and_committed_blob": "a1999199145789efcaaad5a1afac766072e07527"
+  },
+  "ordinary5": "UNRUN",
+  "other_repo_readbacks": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "clean_worktree_and_index": true,
+      "index_full9": {
+        "st_ctime_ns": "1795500785295142737",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69342879",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795500785294142725",
+        "st_nlink": "1",
+        "st_size": "4412225",
+        "st_uid": "1000"
+      },
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "hallucinate": {
+      "HEAD": "2a9aabdcf78695630446e08235f48a6e8ec90c18",
+      "clean_worktree_and_index": true,
+      "index_full9": {
+        "st_ctime_ns": "1795595674951811749",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69342837",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795595674950158964",
+        "st_nlink": "1",
+        "st_size": "138750",
+        "st_uid": "1000"
+      },
+      "tree": "ac7a09aa940c3744a16f33e36b3d5fb8bb378929"
+    },
+    "root": {
+      "HEAD": "fe7a01f5fd350f6ba425b0a463f80025a3404b59",
+      "clean_worktree_and_index": true,
+      "index_full9": {
+        "st_ctime_ns": "1795595766637072662",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69387327",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795595766635072642",
+        "st_nlink": "1",
+        "st_size": "7262222",
+        "st_uid": "1000"
+      },
+      "tree": "f54292dddac8f9fcb202e0518b79ce0055612c4c"
+    }
+  },
+  "schema": "local-unpublished-public-V4-revoked-key-one-test-freeze/v302"
+}

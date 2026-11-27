@@ -1,0 +1,147 @@
+"""Run retained startup fixtures against both optional cap handoffs."""
+from hashlib import sha256
+import ast
+import json
+from pathlib import Path
+import sys
+import unittest
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parent
+OWNER = HERE/'reader.py.DATA'
+GIT = HERE/'verify_standalone_git.py'
+OWNER_PIN = '42029942e6308be6b2eb99157486aa8947db9db287a3252d010744f571339903'
+GIT_PIN = 'b6bda714fa95411b84fc0333f5348bc05a307bb44fe0e4fb9ecf38c6e3b85b5d'
+CAP = 65536
+
+
+def held(path, pin):
+    raw = path.read_bytes()
+    assert sha256(raw).hexdigest() == pin, path
+    return raw
+
+
+def fixture(path, pin, replacements):
+    raw = held(path,pin).decode()
+    for before, after in replacements:
+        assert raw.count(before) == 1, before
+        raw = raw.replace(before,after,1)
+    ns = {'__name__': 'held_tests', '__file__': str(path)}
+    exec(compile(raw,str(path),'exec'),ns)
+    ns['HERE'] = HERE
+    return ns
+
+
+selector = fixture(
+    ROOT/'decoder-training-stage-a-selector-controls-private-v01-pjiF8CHj/test_selector_startup.py',
+    '6b4082d9c9d8382112728ead63234b6eacb180294bf5dbb442e7438e4e3791b7', [
+    ("GIT = Path('/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/verify_standalone_git.py')",
+     f'GIT = Path({str(GIT)!r})'),
+    ("46075, '9fe6b3cfd9876c0e7d03019a9ace59b6daad54744bf2270bd5239cf2f217b527'", f"47245, '{GIT_PIN}'"),
+    ("262144 if args[0] == 'for-each-ref' else 8192",
+     "self.startup.get('git_ref_output_maximum', 262144) if args[0] == 'for-each-ref' else 8192"),
+])
+Selector = selector['SelectorStartup']
+Selector.candidate, Selector.candidate_count, Selector.candidate_sha = OWNER, 59887, OWNER_PIN
+sys.addaudithook(selector['fence'])
+
+
+class SelectedSelector(Selector):
+    def test_new_startup_preserves_streams_and_original_binder(self):
+        self.startup.update(schema='selected-existing-StageA-selector-owner-startup/v2',
+                            git_ref_output_maximum=CAP)
+        self.test_exact_success_and_independent_binder_accept_or_refuse()
+        self.assertEqual(self.allowances.count(CAP+1),2)
+        self.assertEqual(self.report['selected_selector_git_stream_bound'],22*8193+2*(CAP+1))
+        self.assertEqual(self.report['selected_selector_stream_archive_bound'],2*(2*CAP+1))
+        self.assertEqual(self.report['git_ref_output_maximum'],CAP)
+
+    def test_malformed_cap_and_legacy_extra_key_refuse_pre_source(self):
+        self.startup['git_ref_output_maximum'] = CAP
+        with self.assertRaisesRegex(ValueError,'unentered paired selector owner'):
+            self.run_owner()
+        self.startup.update(schema='selected-existing-StageA-selector-owner-startup/v2',
+                            git_ref_output_maximum=True)
+        with self.assertRaisesRegex(ValueError,'positive'):
+            self.run_owner()
+        self.assertFalse(self.output.exists())
+        self.assertEqual(self.events,[])
+
+reader = fixture(
+    ROOT/'decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/test_startup.py',
+    '1e12baf3e608535bb7b303b8183586519626e4b12268e93061d43c33faed543b', [
+    ('decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP',
+     'decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK'),
+    ("guide573-all-fresh-preview.INERT.json',556332", "guide574-all-fresh-preview.INERT.json',560809"),
+    ('72b538ab80ac6610b75f64d74c1d474ae8beb651b54a8b740495941b0c6fbb4a',
+     'd72596ec7d7ddf69a34143699659302499f92c5cdb73414b5159a4197442100f'),
+    ('guide573-writer-matched-index.DATA', 'guide574-writer-matched-index.DATA'),
+    ('c3be915a700050787e42001811b05aab2edebf0737fd3c207f23674b862cbee0',
+     '26afaa8c5a756128d11917a2f700bf866fcedd1ce4c933440dfa74413c4b5477'),
+    ("50631,'f20087d2ad4740b3b8b2d30ee1f70365b0aafdb44c416dda5e52cf18ca644bd5'",
+     f"59887,'{OWNER_PIN}'"),
+])
+wire, digest = reader['wire'],reader['digest']
+
+
+class SelectedReader(reader['OwnerStartup']):
+    def setUp(self):
+        super().setUp()
+        old = self.git['verify_standalone_git'].__globals__
+        git_scope = {name:old[name] for name in ('Path','R','A')}
+        exec(compile(held(GIT,GIT_PIN),str(GIT),'exec'),git_scope)
+        self.git.update({name:git_scope[name] for name in (
+            'verify_standalone_git','_stage_a_git_ref_capture_allowance','source32_paired_reader_reservation')})
+        tree = ast.parse(held(OWNER,OWNER_PIN),str(OWNER))
+        functions = {'read_selected_stage_a_epoch','_stage_a_owner_code','_stage_a_owner_prepare',
+                     '_stage_a_owner_error','_stage_a_owner_source42','_stage_a_owner_archive',
+                     '_stage_a_owner_child_receipt'}
+        nodes = [n for n in tree.body
+                 if (isinstance(n,ast.Assign) and getattr(n.targets[0],'id',None)=='STAGE_A_REF_CAP_SELECTION')
+                 or (isinstance(n,ast.FunctionDef) and n.name in functions)]
+        assert len(nodes)==1+len(functions)
+        exec(compile(ast.Module(body=nodes,type_ignores=[]), str(OWNER), 'exec'),self.h.owner)
+
+    def select_ref_cap(self, cap=CAP):
+        self.reader.update(schema='existing-stage-a-retained-controls-outer-only/v4',git_ref_output_maximum=cap)
+        self.startup['reader_selection_sha256'] = digest(wire(self.reader))
+
+    def test_selected_cap_reaches_reservation_endpoints_and_receipt(self):
+        self.select_ref_cap()
+        selected = []
+        endpoint = self.git['verify_stage_a_git_with_retained_controls']
+
+        def capture_cap(*args, **kwargs):
+            selected.append(kwargs['git_ref_output_maximum'])
+            return endpoint(*args, **kwargs)
+
+        self.git['verify_stage_a_git_with_retained_controls'] = capture_cap
+        terminal = json.loads(Path(self.run_owner()['path']).read_bytes())
+        self.assertEqual(selected,[CAP])
+        self.assertTrue(terminal['Source_closed'] and terminal['owned_module_closed'])
+        stage = terminal['stage_a']
+        self.assertEqual(stage['git_ref_output_maximum'],CAP)
+        self.assertTrue(stage['archive_committed'])
+        self.assertEqual(stage['reservation']['git_output_allowance_bytes'],
+                         46*(self.reader['git_output_maximum']+1)+4*(CAP+1))
+
+    def test_stale_digest_and_malformed_cap_refuse_before_effects(self):
+        self.select_ref_cap()
+        self.reader['git_ref_output_maximum'] += 1
+        with self.assertRaisesRegex(ValueError,'exact original Stage A startup'):
+            self.run_owner()
+        self.select_ref_cap(False)
+        with self.assertRaisesRegex(ValueError,'positive'):
+            self.run_owner()
+        self.assertFalse(self.h.output.exists())
+        self.assertEqual(self.load_calls,[])
+
+    def test_selected_cap_preserves_original_independent_a0_handoff(self):
+        self.select_ref_cap()
+        self.test_child_receipt_bytes_require_independent_A0_owner_approval()
+
+
+if __name__ == '__main__':
+    suite = unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromTestCase(test)
+                               for test in (SelectedSelector,SelectedReader))
+    raise SystemExit(not unittest.TextTestRunner(verbosity=2).run(suite).wasSuccessful())

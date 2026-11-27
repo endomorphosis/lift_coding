@@ -1,0 +1,56 @@
+{
+  "Root_selected": true,
+  "Source_WRITE_claimed": false,
+  "Source_closed": true,
+  "actual_compact": {
+    "bytes": 6441,
+    "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json",
+    "sha256": "ec734f472ed71729bdbdc1827e4f76e9a235eda5d00d1ca7e5caed8af4996351"
+  },
+  "actual_isolated_content_epoch": {
+    "bytes": 6319,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "3fb04725ccfc2b5c4a5fc0a60392bfed468b38adeec9b9a67dad8266d113351e"
+  },
+  "actual_report": {
+    "bytes": 1349781,
+    "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-closed-report.json",
+    "sha256": "a27761b0d541ce4abb3e0b49d6414b2ac7445737adbb44b0865ec1cfaa56d2e5"
+  },
+  "exact_local_freeze": {
+    "bytes": 5801,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-isolated-exact-two-local-freeze.json",
+    "sha256": "afa47b34b755f9bd2c53bb36d68b10c069dd005d4e0b66a7b4338ebf6bb1d9de"
+  },
+  "outer_epoch_record_count": 1610,
+  "outer_epoch_reference": {
+    "bytes": 850463,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-live-reconciled-outer1610-epoch.json",
+    "sha256": "9af3058e7567f9e7e19ce70c6c30d33ee4dfe9d50bbfe0c05aedfe84eec56bd8"
+  },
+  "owned_module_closed": true,
+  "promotion_selected": false,
+  "protected_index_reference": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795735927425184003",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "1086707",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795735927424183995",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/.git/index",
+    "sha256": "ed76a1509714a8f9f2d4bd7b3da9b6a1b2671127c310f198406516407a759c78"
+  },
+  "python_epoch_record_count": 1597,
+  "python_epoch_reference": {
+    "bytes": 843881,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-live-reconciled-Python1597-epoch.json",
+    "sha256": "e4184b418963a4dfc8f54ac38c70d737c2346d5f4d8451383fac4c5af8ebefac"
+  },
+  "schema": "actual-D27-observed-D-root-initializer-READ-small-closeout/v1"
+}

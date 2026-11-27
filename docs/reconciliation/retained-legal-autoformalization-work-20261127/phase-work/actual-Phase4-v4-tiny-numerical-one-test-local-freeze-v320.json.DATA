@@ -1,0 +1,237 @@
+{
+  "D_branch_ref_before": {
+    "bytes": 41,
+    "full9": {
+      "st_ctime_ns": "1795609514536910262",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862935",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795609514536910262",
+      "st_nlink": "1",
+      "st_size": "41",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/refs/heads/work/phase6-capacity-composition-20261123",
+    "sha256": "68936f51d6ea8f1262cfa75103dc2b49392f47623310a09686e32f6516e0780a"
+  },
+  "D_branch_ref_frozen": {
+    "bytes": 41,
+    "full9": {
+      "st_ctime_ns": "1795612890105595912",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862937",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795612890105595912",
+      "st_nlink": "1",
+      "st_size": "41",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/refs/heads/work/phase6-capacity-composition-20261123",
+    "sha256": "40480eba9cb9dea4527a4b535da4eb5ede26b553752a650d8cc9ed693d41930f"
+  },
+  "D_clean_worktree_and_index": true,
+  "D_index_before": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795609514534903984",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795609514533903973",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "94045f1ce471de3695c9b85ba0ba379320fa6ff68311e040ff3120fcb24601a3"
+  },
+  "D_index_frozen": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795612890103595896",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795612890093595818",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "b53d9672ad8a74e88c3390e4a7bf9d159413be8d0d901aa1e2152933d8dac6d0"
+  },
+  "D_local_HEAD": "7a1e4cafd278fe10f1b4d6b65a98134d298b5f4b",
+  "D_parent": "dbc2e90e45fd090c8d850ba989194fbb2b71617d",
+  "D_symbolic_HEAD": "refs/heads/work/phase6-capacity-composition-20261123",
+  "D_tree": "a43805f8a96ef67a87ed8cd3cc6f47dcd5d859d4",
+  "all_other_paths_index_entries_and_gitlinks_preserved": true,
+  "exact_append": {
+    "both_cases_UNRUN": true,
+    "cases": [
+      0,
+      3
+    ],
+    "old_prefix_bytes": 65766,
+    "old_prefix_sha256": "163d81acf27e16b6d31145b3d78133578fa65646bacf2a83a4c9898a6124ccc5",
+    "old_top_level_AST_preserved": 61,
+    "selector": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_joint_retrieval.py::test_reviewed_v4_tiny_joint_updates_restore_and_rank_current_index",
+    "suffix_bytes": 9745,
+    "suffix_sha256": "d576929ead70931a01759b20bffe293dbdf3f0d8967e1d3ab03ecad7ec69f1c3"
+  },
+  "exact_committed_file": {
+    "bytes": 75511,
+    "committed_blob": "264860bb40e54497864982b549ca009ca8c9df5a",
+    "full9": {
+      "st_ctime_ns": "1795612675796931707",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "70042557",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795612675163562469",
+      "st_nlink": "1",
+      "st_size": "75511",
+      "st_uid": "1000"
+    },
+    "git_mode": "100644",
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_joint_retrieval.py",
+    "previous_blob": "07dd3bf1fcb2bd6b005f64e2b4e16f76e38f214a",
+    "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_joint_retrieval.py",
+    "sha256": "450286faa445a358d512fb0e57c80f194d31ef545c0342832ee6edeedce28f3e",
+    "stage0_blob": "264860bb40e54497864982b549ca009ca8c9df5a"
+  },
+  "hold_frozen": true,
+  "local_origin_main_tracking_unchanged": "dbc2e90e45fd090c8d850ba989194fbb2b71617d",
+  "no_Source_test_Torch_CI_Native_or_model_execution": true,
+  "other_roots_preserved": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "branch": "refs/heads/reconcile/accelerator-autonomy-eight-files-20261123",
+      "clean": true,
+      "gitlinks": [
+        "160000 commit 5dd8cde2f9e5d9423fbaf2e6eb2e500693399cc4\tdocs/fastmcp",
+        "160000 commit 0da9a074d09267a927d72faa58c26d828f0f8edb\tdocs/mcp-python-sdk",
+        "160000 commit 628bb6e7b01867f3bc252a3c276c0e6ef6acd5b0\tipfs_accelerate_py/mcplusplus",
+        "160000 commit 311e2d12699bb3c051a88bec0535a6e1581421ca\tipfs_datasets_py",
+        "160000 commit a1f4b23332a4e22d97d6c4e441fb5795e3eba2c8\tipfs_kit_py",
+        "160000 commit 4f99e470d12f45f3918128dec2610e1685564ffb\tipfs_model_manager_py",
+        "160000 commit b397988ed9e3e656475c1cf4417b84efdb95daf3\tipfs_transformers_py",
+        "160000 commit 057fde0083b864ba617eed617e45c1e4d599e5e7\ttest/doc-builder",
+        "160000 commit 057fde0083b864ba617eed617e45c1e4d599e5e7\ttest/huggingface_doc_builder",
+        "160000 commit 6c4710bdef6b0db127d40704d8ee2f82c551b27f\ttest/huggingface_transformers"
+      ],
+      "index": {
+        "bytes": 4412225,
+        "full9": {
+          "st_ctime_ns": "1795500785295142737",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342879",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795500785294142725",
+          "st_nlink": "1",
+          "st_size": "4412225",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/index",
+        "sha256": "cb683f5552a5c4aecc54a7fb2fb0ea75dfb369fe1c7fe52d13dbf8b3ced751de"
+      },
+      "origin_main_tracking": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "hallucinate": {
+      "HEAD": "2ccba75fe9c70af693c20eac0f0c1d66bc26e682",
+      "branch": "refs/heads/reconcile/all-work-app-main-20261123",
+      "clean": true,
+      "gitlinks": [
+        "160000 commit 88c0d9f82f66aaddbb01344c9f85236e92a5dc88\tipfs_accelerate_py",
+        "160000 commit dbc2e90e45fd090c8d850ba989194fbb2b71617d\tipfs_datasets_py",
+        "160000 commit b15442e490dc39d046a911ea663c73c99ed3c755\tipfs_kit_py",
+        "160000 commit 453a30b01e62b6acdd1c54070821dbacfbf7908e\tswissknife"
+      ],
+      "index": {
+        "bytes": 138750,
+        "full9": {
+          "st_ctime_ns": "1795610674361657304",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69342837",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795610674360736112",
+          "st_nlink": "1",
+          "st_size": "138750",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate/.git/index",
+        "sha256": "f691b6669c59ece1ab72fc8add4fe31658e48f6937e639afce8b550b3f3bb6b5"
+      },
+      "origin_main_tracking": "2ccba75fe9c70af693c20eac0f0c1d66bc26e682",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate",
+      "tree": "584300f68a45a5fd98ca89d07ddf48299cd53fdb"
+    },
+    "root": {
+      "HEAD": "a4f6eba9fadf27e4dbde646e6f0c1a2fac61b379",
+      "branch": "refs/heads/reconcile/all-work-parent-main-20261123",
+      "clean": true,
+      "gitlinks": [
+        "160000 commit 810e8bd91b14fd945e086840ccd0e2874a7910c3\tJevOps",
+        "160000 commit 33c0c56e9423e11945837657e3a82fe865c60f91\tMcp-Plus-Plus",
+        "160000 commit 88c0d9f82f66aaddbb01344c9f85236e92a5dc88\texternal/ipfs_accelerate",
+        "160000 commit dbc2e90e45fd090c8d850ba989194fbb2b71617d\texternal/ipfs_datasets",
+        "160000 commit b15442e490dc39d046a911ea663c73c99ed3c755\texternal/ipfs_kit",
+        "160000 commit f4371bc9f90249d51eb07d7f8a61e8d829294f16\texternal/meta-wearables-dat-android",
+        "160000 commit bbae597cd1c748cd29b9375a1624a8d75b1c9e14\texternal/meta-wearables-dat-ios",
+        "160000 commit 2ccba75fe9c70af693c20eac0f0c1d66bc26e682\thallucinate_app",
+        "160000 commit 453a30b01e62b6acdd1c54070821dbacfbf7908e\tswissknife"
+      ],
+      "index": {
+        "bytes": 7262222,
+        "full9": {
+          "st_ctime_ns": "1795610676891757696",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "69387327",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795610676890757688",
+          "st_nlink": "1",
+          "st_size": "7262222",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/.git/index",
+        "sha256": "4ded5ddbeb2ad6559b66bcc1b1a8126203d2cd3904fa53a62612bad94fc01d41"
+      },
+      "origin_main_tracking": "a4f6eba9fadf27e4dbde646e6f0c1a2fac61b379",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root",
+      "tree": "15b3632f67e5fd30f77b0e0d10884623640c8d08"
+    }
+  },
+  "pushed": false,
+  "runtime_or_fit_grant": false,
+  "schema": "actual-Phase4-v4-tiny-numerical-exact-one-file-local-freeze/v320",
+  "source_closed_install": {
+    "bytes": 4101,
+    "full9": {
+      "st_ctime_ns": "1795612737250348109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72108147",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795612737250348109",
+      "st_nlink": "1",
+      "st_size": "4101",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-Phase4-numerical-test-append-only-Source1-selected-v320-f4nedkch/Root-Phase4-one-test-installed-Source-closed-no-fit-grant-small-v320.json",
+    "sha256": "8a481a015068fef8d5cffb2cca8834c414b4dc24e1b3d16f4c53d15b13fd4c17"
+  },
+  "unchanged_SUT": {
+    "blob": "c15582df34f21c148d22bf93e07dd59044bb66b4",
+    "bytes": 74852,
+    "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_joint_retrieval.py",
+    "sha256": "b60874c3e8260f926cbd5eab18018c183417b594b9937a167854dbe45fcf9bac"
+  }
+}

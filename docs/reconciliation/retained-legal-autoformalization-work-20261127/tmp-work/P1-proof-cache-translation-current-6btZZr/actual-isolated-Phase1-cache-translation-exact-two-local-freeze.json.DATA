@@ -1,0 +1,163 @@
+{
+  "actual_Source42": {
+    "bytes": 10375,
+    "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/actual-doc-owner-approved-Source42-control-code.py.DATA",
+    "sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9"
+  },
+  "actual_isolated_write_lease": {
+    "canonical_root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+    "cooperative": true,
+    "lock_path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/workspace/control-plane/source-leases/source.lock",
+    "mode": "write",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 3.713555634021759e-05
+  },
+  "additional_A_index": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "candidate": {
+    "bytes": 3969,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/SEALED-P1-cache-translation-exact-two.json",
+    "sha256": "c73d2362f0414fcbad3a6b3d0552f4f0f231163ea41503328e7e9936ecb63592"
+  },
+  "canonical_Source_write_claimed": false,
+  "committed": {
+    "ipfs_datasets_py/logic/legal_ir/proof_cache.py": {
+      "bytes": 62783,
+      "full9": {
+        "st_ctime_ns": "1795741449323712303",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513518",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741449323712303",
+        "st_nlink": "1",
+        "st_size": "62783",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "5f4b9e8eedf00c89d31ff9fa68559dc3584126e1",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+      "sha256": "704ccf09ba9d7d3c32d107c9cd8e07f6f32933d5f5fdcfe404b641f847c30743",
+      "stage0_and_committed_blob": "e74f30f960193827687b9f28faf07ccb20a38a06"
+    },
+    "tests/unit/logic/legal_ir/test_proof_cache.py": {
+      "bytes": 102758,
+      "full9": {
+        "st_ctime_ns": "1795741449323712303",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514356",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741449323712303",
+        "st_nlink": "1",
+        "st_size": "102758",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "03ea849ebdb3c818af1e56d8ee44add38af030ee",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+      "sha256": "23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab",
+      "stage0_and_committed_blob": "5ff29423462c009bc5c8f4541b78842411c59e96"
+    }
+  },
+  "frozen": {
+    "HEAD": "4cc1311f12a317b8a0a0aa92c950011cd09399f0",
+    "branch": "refs/heads/isolated/phase1-proof-cache-translation-agreement",
+    "branch_file": {
+      "bytes": 41,
+      "full9": {
+        "st_ctime_ns": "1795741449713387231",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514442",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741449713106829",
+        "st_nlink": "1",
+        "st_size": "41",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/refs/heads/isolated/phase1-proof-cache-translation-agreement",
+      "sha256": "065ff8a4a44031e2f0b11084cf4a8afa9042e2ba876cf878a07c451819cac381"
+    },
+    "index": {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795741449710387210",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514406",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741449706387182",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+      "sha256": "a5d9497fe854dfaa4e40ba174393b221ba2f095db09579baa34de10364b99245"
+    },
+    "tree": "971b75a5ba8da2c688631ea814709d91d75a5720"
+  },
+  "full_charge": {
+    "bytes": 1277,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/Source-only-cache-translation-WRITE-full-retained.json",
+    "sha256": "20e629ca537e5f91639c0eb789e7d548b9e249378ff19ea6253aa07862acdd6e"
+  },
+  "isolated_Source_context_closed": true,
+  "local_clean": true,
+  "only_two_D_tree_entries_changed": true,
+  "ordinary_qualified": false,
+  "parent": "6106a4633ec6504ee8c004cc5a9c7fe348ff38bf",
+  "prior_targets": {
+    "ipfs_datasets_py/logic/legal_ir/proof_cache.py": {
+      "bytes": 62643,
+      "full9": {
+        "st_ctime_ns": "1795741365157799267",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513518",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365157799267",
+        "st_nlink": "1",
+        "st_size": "62643",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+      "sha256": "9b05a2f890f2df62931273f2448182af8a2d99af73248c5c67ef2ec3d04b0c3c"
+    },
+    "tests/unit/logic/legal_ir/test_proof_cache.py": {
+      "bytes": 98509,
+      "full9": {
+        "st_ctime_ns": "1795741365244416568",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514356",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365244416568",
+        "st_nlink": "1",
+        "st_size": "98509",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+      "sha256": "087c587b4f35f61f08f2c8f9bba768893dfa1e57f3645976faa38e7927e02414"
+    }
+  },
+  "pushed": false,
+  "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+  "schema": "isolated-live-Phase1-cache-translation-exact-two-Git-freeze/v1",
+  "shared_source_or_Git_mutation": false,
+  "terminal_returncode": 0
+}

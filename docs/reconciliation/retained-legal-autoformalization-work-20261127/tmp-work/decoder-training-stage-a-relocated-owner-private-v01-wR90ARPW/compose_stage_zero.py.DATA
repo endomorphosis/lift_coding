@@ -1,0 +1,45 @@
+"""Render only the existing held parser with the selected Guide573 index geometry."""
+import ast
+from hashlib import sha256
+import json
+from pathlib import Path
+
+HERE=Path(__file__).resolve().parent
+FILE=Path('/tmp/decoder-training-stage-a-v292-frozen-reader-private-v01-ORhtLOea/replay_index.py')
+raw=FILE.read_bytes()
+assert (len(raw),sha256(raw).hexdigest())==(7058,'ee28ee6fc23643b06c2f6cc213223fd61226172c9ce4f299ae2285f5c8b2ed35')
+text=raw.decode()
+function,=(node for node in ast.parse(text).body if getattr(node,'name',None)=='read_index')
+parser=ast.get_source_segment(text,function)
+for old,new in (
+    ("expected_trailer='2f7076fa7173c755979724776302ee9a9398e3de'",
+     "expected_trailer='eb0d0a5698ce183bf6bd8d343697462f9c7520f4'"),
+    ("(b'DIRC', 2, 41249)","(b'DIRC', 3, 41250)"),
+    ("""        assert not flags & 0x4000
+        stage = (flags & 0x3000) >> 12
+        nul = index.index(0, offset + 62, end)
+        path = index[offset + 62:nul]""",
+     """        path_start = offset + 62
+        if flags & 0x4000:
+            assert struct.unpack_from('>H', index, path_start)[0] == 0x4000
+            path_start += 2
+        stage = (flags & 0x3000) >> 12
+        nul = index.index(0, path_start, end)
+        path = index[path_start:nul]"""),
+):
+    assert parser.count(old)==1
+    parser=parser.replace(old,new,1)
+output=('import hashlib\nimport struct\n\n'+parser+"""
+
+def read_stage_zero(index, paths):
+    if (not __debug__ or type(index) is not bytes or len(index) != 7070597
+            or hashlib.sha256(index).hexdigest() !=
+                    'c3be915a700050787e42001811b05aab2edebf0737fd3c207f23674b862cbee0'
+            or type(paths) is not list or len(paths) != 32 or len(set(paths)) != 32):
+        raise ValueError('exact selected Guide573 D index and 32 tracked targets required')
+    return read_index(index, paths)
+""").encode()
+path=HERE/'guide573_stage_zero.py'
+with path.open('xb') as stream:
+    stream.write(output)
+print(json.dumps(dict(path=str(path),bytes=len(output),sha256=sha256(output).hexdigest()),sort_keys=True))

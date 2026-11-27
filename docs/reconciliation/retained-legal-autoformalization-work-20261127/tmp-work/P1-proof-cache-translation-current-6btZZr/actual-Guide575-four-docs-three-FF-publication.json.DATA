@@ -1,0 +1,68 @@
+{
+  "accelerate_published_head_preserved": true,
+  "actual_code_publication": {
+    "bytes": 15468,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-Phase1-cache-translation-ordinary9-three-FF-publication.json",
+    "sha256": "d7ca14c392c0fdc91c3bdab15d027929cff6d699e214d89f9bb82cecc8a07c65"
+  },
+  "actual_doc_Source_closed": {
+    "bytes": 6070,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-Guide575-four-docs-Source-closed-and-frozen.json",
+    "sha256": "15d02b2702846d19fa3fc20c25349d4df8c4c8749f300c58b586e5087bc74851"
+  },
+  "actual_ordinary9": {
+    "bytes": 3616,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-Phase1-current-cache-translation-ordinary9-closed.json",
+    "sha256": "3514c4fd3f0067b6c11378d22bdc9f54689522cba38bbadfcfef74bf20f09d57"
+  },
+  "evidence_ordinal": 575,
+  "live_main_after": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "099cf857240915394deced81eff5e5dfcf5e96c6",
+    "hallucinate": "7d64241af469d91afa4573819851c75f803cf66d",
+    "root": "fc8adf2f4f8101e3966874be5ad64383df23e7d6"
+  },
+  "live_main_before": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "4cc1311f12a317b8a0a0aa92c950011cd09399f0",
+    "hallucinate": "b541951e2c9a9615bbee28d207974d6d2f33ee13",
+    "root": "bc3bbff05e905aca222f5a546d1cdd77ede3a1b5"
+  },
+  "only_four_docs": [
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json"
+  ],
+  "prior_values_preserved": {
+    "components": 126,
+    "evidence_records": 574,
+    "tasks": 24
+  },
+  "pushes_in_actual_order": [
+    {
+      "after": "099cf857240915394deced81eff5e5dfcf5e96c6",
+      "before": "4cc1311f12a317b8a0a0aa92c950011cd09399f0",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "7d64241af469d91afa4573819851c75f803cf66d",
+      "before": "b541951e2c9a9615bbee28d207974d6d2f33ee13",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "fc8adf2f4f8101e3966874be5ad64383df23e7d6",
+      "before": "bc3bbff05e905aca222f5a546d1cdd77ede3a1b5",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "schema": "actual-Guide575-four-docs-live-cache-translation-ordinary9-three-FF-publication/v1",
+  "shared_checkouts_preserved": true,
+  "terminal_returncode": 0
+}

@@ -1,0 +1,68 @@
+{
+  "accelerate_published_head_preserved": true,
+  "actual_code_publication": {
+    "bytes": 15625,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-Phase2-V3-definition-ordinary37-three-FF-publication.json",
+    "sha256": "f8a95f45ec7dddfd707e7892972dbb7926e2c8307b56e0d41ca0c97b4d335325"
+  },
+  "actual_doc_Source_closed": {
+    "bytes": 6152,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-Guide576-four-docs-Source-closed-and-frozen.json",
+    "sha256": "a03796043cdbe29f5f57b58ca8b6ade34a8e0dbc8374304803f770e379a7250e"
+  },
+  "actual_ordinary37": {
+    "bytes": 8952,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-Phase2-current-V3-definition-ordinary37-closed.json",
+    "sha256": "2f8d049d7d3bf5b38fc6bfc8736d2e0c2867458dc74e707307f898af7810b74e"
+  },
+  "evidence_ordinal": 576,
+  "live_main_after": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "8a902502e1a82d3da05b9c31a42db8c39ea8a9e1",
+    "hallucinate": "e1e217010f50fa8581d5d6ba8ff201d052ebf6af",
+    "root": "02b6f32d879269349406fcf7029725ad54c057ad"
+  },
+  "live_main_before": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "c5a72c90394d86a54cb93cc3a2187da954a2677f",
+    "hallucinate": "366721c37dc0464566281c9e35cab2f2861e7b6e",
+    "root": "ae83850646eb729a53a1ed67c8f2029dca630db5"
+  },
+  "only_four_docs": [
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json"
+  ],
+  "prior_values_preserved": {
+    "components": 126,
+    "evidence_records": 575,
+    "tasks": 24
+  },
+  "pushes_in_actual_order": [
+    {
+      "after": "8a902502e1a82d3da05b9c31a42db8c39ea8a9e1",
+      "before": "c5a72c90394d86a54cb93cc3a2187da954a2677f",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "e1e217010f50fa8581d5d6ba8ff201d052ebf6af",
+      "before": "366721c37dc0464566281c9e35cab2f2861e7b6e",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "02b6f32d879269349406fcf7029725ad54c057ad",
+      "before": "ae83850646eb729a53a1ed67c8f2029dca630db5",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "schema": "actual-Guide576-four-docs-live-reviewed-definition-ordinary37-three-FF-publication/v1",
+  "shared_checkouts_preserved": true,
+  "terminal_returncode": 0
+}

@@ -1,0 +1,306 @@
+"""Exercise the relocated Stage A preview from pinned detached receipts."""
+
+from copy import deepcopy
+from hashlib import sha256
+import json
+from pathlib import Path
+import unittest
+
+import verify_rebind_capture as owner
+
+
+TMP = Path('/tmp')
+OLD = TMP / 'decoder-training-stage-a-guide571-preflight-private-v01-Wq3c45Ui'
+RELOCATION = TMP / 'decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa'
+LIVE_EVIDENCE = TMP / 'Root-V4-CLI-live-main-reconcile-EsXXzUG0'
+PLAN = (OLD / 'reader.INERT.json', 38545,
+        '19ddd53efbac5974270088032ad6af1ffd6b432f7e0ff8a35eb479202ed66fe8')
+RELOCATION_PROOF = (RELOCATION / 'stage-a-guide572-rebind.INERT.json', 59154,
+                    '6474b8bf0b2691df499adaff30143c6becd2f610ad2acdee1b82f8658cff81f5')
+PREPUBLICATION_OUTER = (
+    LIVE_EVIDENCE / 'actual-live-reconciled-outer1610-epoch.json', 846652,
+    'fb7b6f9b1dacdb57a47c9d7d72b9e1a969ae76796ac4732706eaaa7676c4a1ec',
+)
+GUIDE_CLOSE = (
+    LIVE_EVIDENCE / 'actual-Guide572-four-docs-Source-closed-and-frozen.json', 6056,
+    '47e7638b5b32c03728e1ffa648d8d08d529d863223d7f7f8020016f3b526faed',
+)
+PUBLISHED_INDEX = (
+    RELOCATION / 'guide572-publisher-matched-index.DATA', 7070597,
+    '2266f4d1c12dfa62b7e87a5078a49a578134ea0150752e9db42a566ad810dca5',
+)
+
+
+def wire(value):
+    return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False,
+                      allow_nan=False).encode()
+
+
+def digest(value):
+    return sha256(value).hexdigest()
+
+
+def pinned(path, size, expected_sha):
+    if path.parent not in (OLD, RELOCATION, LIVE_EVIDENCE):
+        raise ValueError(f'Unexpected detached evidence location: {path}')
+    raw = path.read_bytes()
+    if (len(raw), digest(raw)) != (size, expected_sha):
+        raise ValueError(f'Detached evidence bytes differ: {path}')
+    return raw
+
+
+def reference(path, raw):
+    return dict(path=str(path), bytes=len(raw), sha256=digest(raw))
+
+
+class RelocatedSource32(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.plan_raw = pinned(*PLAN)
+        cls.proof_raw = pinned(*RELOCATION_PROOF)
+        cls.migrated_outer_raw = pinned(*PREPUBLICATION_OUTER)
+        cls.guide_close_raw = pinned(*GUIDE_CLOSE)
+        cls.plan = json.loads(cls.plan_raw)
+        cls.proof = json.loads(cls.proof_raw)
+        cls.guide_close = json.loads(cls.guide_close_raw)
+        cls.retained = {}
+        for kind in ('outer', 'python'):
+            ref = cls.plan['current_retained_epochs'][kind]
+            path = OLD / f'{kind}.INERT.json'
+            if Path(ref['path']) != path:
+                raise ValueError('Guide571 retained epoch path changed')
+            cls.retained[kind] = pinned(path, ref['bytes'], ref['sha256'])
+
+    def preview(self, *, plan=None, proof=None, **overrides):
+        chosen = deepcopy(self.plan if plan is None else plan)
+        raw = self.proof_raw if proof is None else wire(proof)
+        arguments = dict(
+            expected_plan_sha256=digest(wire(chosen)),
+            relocation_raw=raw,
+            expected_relocation=reference(RELOCATION_PROOF[0], raw),
+            retained_outer_raw=self.retained['outer'],
+            retained_python_raw=self.retained['python'],
+            relocated_outer_raw=self.migrated_outer_raw,
+            guide_close_raw=self.guide_close_raw,
+        )
+        return owner.preview_phase7_relocated_source32_inputs(chosen, **(arguments | overrides))
+
+    def test_real_pinned_roster_moves_all_32_roles_without_issuing_archive_reuse(self):
+        preview = self.preview()
+        inputs = preview['reader_inputs']
+        self.assertIs(preview['execution_selected'], False)
+        self.assertEqual(preview['archive_historical_count'], 20)
+        self.assertEqual(preview['source_body_reads'], 32)
+        self.assertEqual(inputs['current_index'], self.proof['Guide572_protected_D_expected_index'])
+        self.assertEqual(len(preview['changed_retained_content']), 7)
+        retained = preview['relocated_retained_outer']
+        self.assertEqual(len(retained), 1218)
+        self.assertEqual(sum(row['path'].endswith('.py') for row in retained), 1213)
+        self.assertEqual(len({row['path'] for row in retained}), 1218)
+        for role in ('D', 'A'):
+            old = self.plan['current_roots'][role]
+            published = self.proof['current_published_candidate_protected_roots'][role]
+            current = inputs['current_roots'][role]
+            self.assertNotEqual(current['root'], old['root'])
+            self.assertEqual(
+                (current['root'], current['HEAD'], current['tree']),
+                (published['root'], published['Git_HEAD'], published['Git_tree']),
+            )
+        migrated = {row['path']: row for row in json.loads(self.migrated_outer_raw)}
+        retained_mapping = []
+        for prior, current in zip(json.loads(self.retained['outer']), retained, strict=True):
+            old = Path(prior['path'])
+            project, = [role for role in ('D', 'A')
+                        if old.is_relative_to(self.plan['current_roots'][role]['root'])]
+            relative = old.relative_to(self.plan['current_roots'][project]['root'])
+            retained_mapping.append(str(Path(inputs['current_roots'][project]['root']) / relative))
+            self.assertEqual(current['path'], retained_mapping[-1])
+            if current['path'] != inputs['current_index']['path']:
+                self.assertEqual(current, migrated[current['path']])
+        self.assertEqual(len(set(retained_mapping)), 1218)
+        old_root = Path(self.plan['current_roots']['D']['root'])
+        new_root = Path(inputs['current_roots']['D']['root'])
+        self.assertNotEqual(old_root, new_root)
+        roles = inputs['fresh_Source_body_targets']
+        self.assertEqual(len(roles), 32)
+        self.assertEqual(inputs['historical_origin_scope_recheck']['fresh_32_paths'],
+                         [role['path'] for role in roles])
+        self.assertEqual(len(inputs['historical_origin_scope_recheck']['retained_92_paths']), 92)
+        guides = inputs['four_guide_post_candidates_for_current_owner_recheck']
+        self.assertEqual({row['path'] for row in guides},
+                         {row['path'] for row in self.guide_close['committed_docs'].values()})
+        self.assertEqual(len(guides), 4)
+        for prior, new, checked in zip(self.plan['fresh_Source_body_targets'], roles,
+                                       self.proof['protected_body_roles'], strict=True):
+            relative = Path(prior['path']).relative_to(old_root)
+            self.assertEqual(relative.as_posix(), checked['relative_path'])
+            self.assertEqual(new['path'], str(new_root / relative))
+            for key in ('sha256', 'bytes', 'expected_Git_blob_oid', 'expected_Git_mode'):
+                self.assertEqual(new[key], prior[key], str(relative))
+            self.assertEqual(new['sha256'], checked['closed_ordinary_epoch']['sha256'])
+            self.assertEqual(new['full9'], checked['closed_ordinary_epoch']['full9'])
+        old_index = self.plan['current_index']
+        self.assertNotIn(old_index['path'], {row['path'] for row in retained})
+        self.assertNotEqual(inputs['current_index']['full9'], old_index['full9'])
+        self.assertEqual(json.loads(self.plan_raw), self.plan)
+        self.assertEqual(self.proof_raw, pinned(*RELOCATION_PROOF))
+        self.assertEqual(self.retained['outer'], pinned(
+            OLD / 'outer.INERT.json', 679135,
+            'a0b2b93070651410dea39a96b6a2b2865da91fa48d2d2a3a00c7a59903f02ff3'))
+        self.assertEqual(self.migrated_outer_raw, pinned(*PREPUBLICATION_OUTER))
+        self.assertEqual(self.guide_close_raw, pinned(*GUIDE_CLOSE))
+        self.assertEqual(self.preview(), preview)
+
+    def test_digests_bind_plan_and_original_evidence_inputs(self):
+        bad = 'f' * 64
+        with self.assertRaises(ValueError):
+            self.preview(expected_plan_sha256=bad)
+        with self.assertRaises(ValueError):
+            self.preview(expected_relocation=reference(RELOCATION_PROOF[0], self.proof_raw + b' '))
+        for name, raw in (
+            ('relocated_outer_raw', self.migrated_outer_raw),
+            ('guide_close_raw', self.guide_close_raw),
+            ('retained_outer_raw', self.retained['outer']),
+            ('retained_python_raw', self.retained['python']),
+        ):
+            with self.subTest(name=name), self.assertRaises(ValueError):
+                self.preview(**{name: raw + b' '})
+
+    def test_resealed_wrong_body_oid_and_role_swap_refuse(self):
+        for case in ('body', 'oid', 'swapped_roles', 'relocated_path', 'companion_root'):
+            with self.subTest(case=case):
+                proof = deepcopy(self.proof)
+                selected = proof['protected_body_roles']
+                if case == 'body':
+                    selected[0]['closed_ordinary_epoch']['sha256'] = '5' * 64
+                elif case == 'oid':
+                    selected[0]['Git']['oid'] = '6' * 40
+                elif case == 'swapped_roles':
+                    selected[0], selected[1] = selected[1], selected[0]
+                elif case == 'relocated_path':
+                    selected[0]['closed_ordinary_epoch']['path'] = selected[1]['closed_ordinary_epoch']['path']
+                else:
+                    proof['current_published_candidate_protected_roots']['A']['root'] = (
+                        self.plan['current_roots']['A']['root'])
+                with self.assertRaises(ValueError):
+                    self.preview(proof=proof)
+
+    def modeled_compose_input(self):
+        preview = self.preview()
+        inputs = preview['reader_inputs']
+        targets = inputs['fresh_Source_body_targets']
+        index = inputs['current_index']
+        guides = inputs['four_guide_post_candidates_for_current_owner_recheck']
+        opening = {
+            'roots': deepcopy(inputs['current_roots']),
+            'index': deepcopy(index),
+            'git': [],
+            'full9': {
+                row['path']: deepcopy(row['full9'])
+                for row in preview['relocated_retained_outer'] + guides + [index]
+            },
+        }
+        captures = []
+        for ordinal, target in enumerate(targets):
+            raw = f'# Detached Stage A fresh body {ordinal}\n'.encode()
+            previous = self.proof['protected_body_roles'][ordinal]['closed_ordinary_epoch']['full9']
+            stamp = deepcopy(previous)
+            stamp.update(st_size=str(len(raw)), st_ino=str(98_000_000 + ordinal))
+            oid = owner.blob_oid(raw)
+            commit = digest(raw)
+            target.update(bytes=len(raw), sha256=commit, expected_Git_blob_oid=oid)
+            if target.get('full9') is not None:
+                target['full9'] = stamp
+            opening['full9'][target['path']] = stamp
+            opening['git'].append({
+                'path': target['path'],
+                'mode': target['expected_Git_mode'],
+                'Git_blob_oid': oid,
+            })
+            captures.append((dict(
+                path=f'/tmp/stage-a-detached-modeled-output/{ordinal}.DATA',
+                canonical_path=target['path'], canonical_full9=stamp,
+                bytes=len(raw), sha256=commit, Git_blob_oid=oid,
+            ), raw))
+        return preview, dict(
+            expected_preview_sha256=digest(wire(preview)),
+            endpoint_before=opening,
+            endpoint_after=deepcopy(opening),
+            index_body=pinned(*PUBLISHED_INDEX),
+            guide_observations=deepcopy(guides),
+            captures=tuple(captures),
+        )
+
+    def test_modeled_all_fresh_composer_retains_order_and_authority(self):
+        preview, args = self.modeled_compose_input()
+        calls = []
+
+        def verify(offered):
+            calls.append(offered)
+            return True
+
+        result = owner.compose_phase7_relocated_source32_epochs(
+            preview, **args, verify_relocation_owner=verify)
+        self.assertEqual(len(calls), 1)
+        self.assertRegex(calls[0], r'^[0-9a-f]{64}$')
+        self.assertEqual((len(result['outer_epoch']), len(result['python_epoch'])), (1250, 1245))
+        expected_index = preview['reader_inputs']['current_index']
+        self.assertEqual([row for row in result['outer_epoch'] if row['path'] == expected_index['path']],
+                         [expected_index])
+        self.assertEqual(
+            [row['path'] for row in result['outer_epoch'][-32:]],
+            [row['path'] for row in preview['reader_inputs']['fresh_Source_body_targets']],
+        )
+        self.assertEqual(
+            [row['full9'] for row in result['outer_epoch'][-32:]],
+            [metadata['canonical_full9'] for metadata, _ in args['captures']],
+        )
+
+    def test_modeled_composer_rejects_drift_bad_body_and_owner_refusal(self):
+        preview, args = self.modeled_compose_input()
+        args_before = deepcopy(args)
+
+        def compose(chosen=preview, **changes):
+            supplied = deepcopy(args_before)
+            supplied.update(changes)
+            supplied.setdefault('verify_relocation_owner', lambda *pins: True)
+            return owner.compose_phase7_relocated_source32_epochs(chosen, **supplied)
+
+        with self.assertRaises(ValueError):
+            compose(verify_relocation_owner=lambda *pins: False)
+        endpoint = deepcopy(args_before['endpoint_after'])
+        stamp = next(iter(endpoint['full9'].values()))
+        stamp['st_ctime_ns'] = str(int(stamp['st_ctime_ns']) + 1)
+        with self.assertRaises(ValueError):
+            compose(endpoint_after=endpoint)
+        captures = list(args_before['captures'])
+        captured, raw = captures[0]
+        captures[0] = captured, raw[:-1] + b'!'
+        with self.assertRaises(ValueError):
+            compose(captures=tuple(captures))
+        with self.assertRaises(ValueError):
+            compose(index_body=args_before['index_body'][:-1] + b'!')
+
+    def test_modeled_composer_rechecks_nested_evidence_after_callback(self):
+        for source in ('guide', 'capture'):
+            with self.subTest(source=source):
+                preview, args = self.modeled_compose_input()
+                if source == 'guide':
+                    row = args['guide_observations'][0]
+                else:
+                    row = args['captures'][0][0]
+                calls = []
+
+                def mutate(offered):
+                    calls.append(offered)
+                    row['sha256'] = '0' * 64
+                    return True
+
+                with self.assertRaises(ValueError):
+                    owner.compose_phase7_relocated_source32_epochs(preview, **args,
+                                                                   verify_relocation_owner=mutate)
+                self.assertEqual(len(calls), 1)
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

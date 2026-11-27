@@ -1,0 +1,178 @@
+"""Seal the joined modeled Reader and the distinct current publication frontier."""
+from copy import deepcopy
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+from runpy import run_path
+from stat import S_IMODE
+from tempfile import mkstemp
+
+HERE = Path(__file__).resolve().parent
+TMP = HERE.parent
+OLD = TMP / 'decoder-training-experiment-manifest-v390.json'
+NEW = TMP / 'decoder-training-experiment-manifest-v391.json'
+KEY = 'private_relocated_reader_to_existing_A0'
+FRONTIER = 'guide573_published_stage_a_body_metadata'
+LEGACY = HERE / 'legacy-regression-c9a1e815'
+
+
+def ref(path, expected=None):
+    raw = path.read_bytes()
+    digest = sha256(raw).hexdigest()
+    assert expected is None or digest == expected, path
+    return dict(path=str(path), bytes=len(raw), sha256=digest)
+
+
+def save(path, data):
+    raw = data.encode() if type(data) is str else (json.dumps(data, indent=2, sort_keys=True) + '\n').encode()
+    with path.open('xb') as stream:
+        stream.write(raw)
+    return ref(path)
+
+
+def logs(path, cases):
+    stderr = (path.parent / (path.name + '.stderr')).read_text()
+    assert (path.parent / (path.name + '.rc')).read_bytes() == b'0\n'
+    assert sum(line.endswith(' ... ok') for line in stderr.splitlines()) == cases and stderr.endswith('\nOK\n')
+    return {part:ref(path.parent / (path.name + '.' + part)) for part in ('stdout','stderr','rc')}
+
+
+old_ref = ref(OLD,'dc0ffb235c1a4ab53a805bdcd48369223e6e9287b8bdbf03d63b19d6cf1ae868')
+old = json.loads(OLD.read_bytes())
+old_checker = Path(old['advisory_operator_readiness_checker']['path'])
+assert ref(old_checker) == old['advisory_operator_readiness_checker']
+frontier = ref(HERE/'guide573-metadata.INERT.json',
+               '1087aa3f70cfca94faa20116155465a5fdc6a0dd7cf0dfeeb78122c1abf7ffa9')
+a0 = ref(TMP/'decoder-training-stage-a-relocated-a0-private-v01-eAKKpyUX/descriptor.json',
+         'd90ce5a5fb582eea45da6f35742eb8bee4a048333ba09ce3ab99fa3ecf19229f')
+description = HERE/'reader-A0-descriptor.json'
+descriptor = dict(
+    schema='private-existing-stage-a-relocated-reader-A0-controls/v1',
+    candidate=ref(HERE/'reader.py.DATA','c9a1e81533834ba39fbed94f64da61fcde171259976703513168c230eb377e55'),
+    diff=ref(HERE/'reader.py.DATA.diff','705bbc5463082af4e27431300ef290d650d42beed6a57c826fa03313157eb786'),
+    test=ref(HERE/'test_reader_v3.py','607a232c5f51d317da7eec43e726349b04e7680e69da1f26802edc67b411fac2'),
+    reader_v3_joined_controls=logs(HERE/'reader-v3-final',7),
+    legacy_baseline_controls=logs(LEGACY/'baseline',16),legacy_candidate_controls=logs(LEGACY/'candidate',16),
+    prior_modeled_logs=logs(HERE/'reader-v3-joined',6),
+    legacy_driver=ref(LEGACY/'legacy_controls.py'), A0_descriptor=a0,
+    guide573_detached_metadata=frontier,
+    drivers={name:ref(HERE/name) for name in ('compose_reader.py','guide573_metadata.py','seal_reader.py')},
+    local_reader_v3_cases=7, local_preserved_legacy_cases=16, local_A0_controls=13,
+    modeled_reader_result_consumed_by_actual_A0_binder=True, live_reader=None, live_A0=None,
+    selected_current_startup_and_terminal_owner=None, dispatch_authority=False)
+source = old_checker.read_text()
+at_def = 'def report(manifest):\n'
+at_result = '        "stage_a_coordination": coordination,'
+at_return = '    return {\n        "schema": "decoder-training-advisory-design-check/v1",'
+assert all(source.count(token)==1 for token in (at_def,at_result,at_return))
+projection = '''def project_relocated_reader_a0(reference):
+    item = retained_json(reference)
+    a0 = retained_json(item["A0_descriptor"])
+    require(item["schema"] == "private-existing-stage-a-relocated-reader-A0-controls/v1"
+            and (item["local_reader_v3_cases"], item["local_preserved_legacy_cases"], item["local_A0_controls"])
+                == (7, 16, 13)
+            and item["modeled_reader_result_consumed_by_actual_A0_binder"] is True
+            and a0["candidate_owner"]["sha256"] ==
+                "f37c2faba9ba57eaec6c71fa1065befe2f7e14b9c0e69f2d218003ea92c02555"
+            and item["live_reader"] is item["live_A0"] is item["selected_current_startup_and_terminal_owner"] is None
+            and item["dispatch_authority"] is False, "modeled relocated Reader to existing A0 evidence required")
+    return {key:item[key] for key in ("local_reader_v3_cases","local_preserved_legacy_cases","local_A0_controls",
+            "modeled_reader_result_consumed_by_actual_A0_binder","selected_current_startup_and_terminal_owner",
+            "live_reader","live_A0","dispatch_authority")}
+
+
+def guide573_stage_a_metadata(reference, prior):
+    item = retained_json(reference)
+    pub = retained_json(item["retained_refs"]["publication"])
+    writer = retained_json(item["retained_refs"]["write_close"])
+    paid = retained_json(item["retained_refs"]["cap"])
+    ledger = paid["after_full_retained_precharge"]
+    gap = min(ledger["global_cap"]-ledger["used"],ledger["internal_cap"]-ledger["internal_used"])
+    index = item["writer_expected_D_index"]
+    require(item["schema"] == "private-guide573-stage-a-metadata-reconciliation/v1"
+            and prior["observed_guide"] == 572 and item["prior_D"] == prior["last_verified_published_datasets_sha"]
+            and item["published_D"] == pub["live_main_after"]["datasets"] == writer["HEAD"]
+            and item["published_A"] == pub["live_main_after"]["accelerate"] == writer["A"]
+            and index == writer["index"] and pub["actual_doc_Source_closed"] == item["retained_refs"]["write_close"]
+            and writer["full_charge"] == item["retained_refs"]["cap"] and paid["all_prior_costs_retained"] is True
+            and gap == item["headroom_after_retained_guide573_bytes"]
+            and index["bytes"]+1-gap == item["independent_D_index_payload_gap"]
+            and item["retained_rows_mapped"] == 1218 and item["protected_body_sha256_and_size_matches"] == 32
+            and item["protected_body_full9_changes"] == 32 and len(item["changed_retained_bodies"]) == 3
+            and item["current_Git_stage0_and_HEAD_role_join"] is item["current_independent_D_index_read"]
+                is item["paired_allocation"] is item["current_pair_quote"] is None
+            and item["dispatch_authority"] is False, "exact Guide573 detached body reconciliation required")
+    return prior | {"observed_guide":573,"source_frontier":"published_checkout_pending_current_Git_roles_and_independent_index",
+        "recorded_publication":item["retained_refs"]["publication"],"Guide573_detached_metadata":reference,
+        "last_verified_published_datasets_sha":item["published_D"],"last_verified_published_accelerate_sha":item["published_A"],
+        "recorded_published_datasets_index":index,"recorded_published_accelerate_index":writer["A_index"],
+        "recorded_headroom_bytes":gap,"latest_retained_capture_floor":ledger["captures"],
+        "current_publication_retained_precharge":item["retained_refs"]["cap"],"publisher_preflight":None,
+        "verified_relocated_body_roles":None,"verified_direct_bytes_delta":None,
+        "detached_body_content_matches":32,"quote_basis":"Guide573 current selector and Reader reservation are pending",
+        "standalone_independent_index_payload_floor_excluded_from_quote":index["bytes"]+1,
+        "standalone_independent_index_payload_shortfall":item["independent_D_index_payload_gap"]}
+
+
+'''
+source = source.replace(at_def,projection+at_def,1)
+source = source.replace(at_return, f'''    if "{FRONTIER}" in design:
+        predecessor["prior_publisher_guide572_stage_a"] = coordination
+        coordination = guide573_stage_a_metadata(design["{FRONTIER}"], coordination)
+'''+at_return,1)
+source = source.replace(at_result,at_result+f'''
+        **({{"{KEY}": project_relocated_reader_a0(design["{KEY}"])}}
+           if "{KEY}" in design else {{}}),''',1)
+plan = TMP/'decoder-training-integration-plan.md'
+info = plan.stat()
+before = plan.read_bytes()
+assert sha256(before).hexdigest() == '8ca7f65e4a001f3d124a19cadf50a96e1e9a70fab74d7c726624333a21b9398e'
+body = before.decode()
+addition = f"""## 828. Pass the relocated Reader result into the existing A0 binder
+
+The detached Reader can take a versioned selection for 32 fresh captures. It verifies the selected preview, checks both Git endpoints and each live metadata expectation, and uses the original capture and raw readback path. It writes the outer epoch after both Source exits. The corresponding A0 selection checks the exact archived tail, capture order, Source stamps and private readbacks, and still requires independent approval of the Reader wait, custody and terminal ledger. The established A0 binding format remains compatible with its existing consumer. [Reader implementation and evidence]({description}) · [A0 implementation and evidence]({a0['path']})
+
+Seven relocated Reader checks passed. One passes the actual result from the modeled Reader run into the existing A0 binder. Both the baseline Reader and the candidate passed the same 16 legacy checks. The A0 test suite passed 13 checks, including seven legacy controls. Source, Git and terminal authority were modeled in these checks. The normal owner startup still needs to select this function and provide genuine terminal custody.
+
+Guide573 published Datasets `78b3466e` and preserved Accelerate `219ba3da`. The detached capture resolves all 1,218 retained paths. All 32 protected bodies still match by SHA-256 and size, and all 32 have new file metadata. The Datasets index and two Lean backend files changed. The older Guide572 quote belongs to its earlier checkout. The new index still costs at least 7,070,598 bytes, a 713,606-byte payload gap against the retained headroom. The current Git role verification, independent index read, selector and Reader allocation, and model work remain pending. [Guide573 detached reconciliation]({frontier['path']})
+
+"""
+for was, now in (
+    (str(OLD),str(NEW)),
+    ('Version 3.536. Updated 2026-11-26 with a conditional reservation for the relocated Stage A capture.',
+     'Version 3.537. Updated 2026-11-26 with the detached Reader to A0 handoff and Guide573 publication.'),
+    ('## Primary research references',addition+'## Primary research references'),
+):
+    assert body.count(was)==1
+    body = body.replace(was,now,1)
+new = deepcopy(old)
+new['manifest_schema_version']='0.391.0'
+new['previous_manifest']=old_ref
+# Verify both projections before writing versioned milestone references.
+namespace = {'__name__':'private_readback','__file__':str(HERE/'check_design_v391.py')}
+exec(compile(source,namespace['__file__'],'exec'),namespace)
+prior = run_path(str(old_checker))['report'](old)
+assert namespace['report'](old)==prior
+stage = namespace['guide573_stage_a_metadata'](frontier,prior['stage_a_coordination'])
+assert stage['standalone_independent_index_payload_shortfall']==713_606
+assert stage['conditional_shortfall_bytes_before_overhead'] is None
+new['typed_execution_design'].update({KEY:save(description,descriptor),FRONTIER:frontier})
+new['advisory_operator_readiness_checker']=save(HERE/'check_design_v391.py',source)
+result = run_path(str(HERE/'check_design_v391.py'))['report'](new)
+assert result['stage_a_coordination']==stage
+assert result[KEY]['local_reader_v3_cases']==7 and result[KEY]['dispatch_authority'] is False
+manifest_ref=save(NEW,new)
+ready=save(HERE/'verified-readiness-v391.json',result)
+fd,name=mkstemp(dir=TMP,prefix=plan.name+'.')
+staged=Path(name)
+try:
+    with os.fdopen(fd,'w') as stream:
+        stream.write(body)
+    staged.chmod(S_IMODE(info.st_mode))
+    assert plan.stat().st_ino==info.st_ino and plan.read_bytes()==before
+    os.replace(staged,plan)
+finally:
+    if staged.exists():
+        staged.unlink()
+print(json.dumps(dict(manifest=manifest_ref,readiness=ready,plan=ref(plan),descriptor=ref(description)),sort_keys=True))

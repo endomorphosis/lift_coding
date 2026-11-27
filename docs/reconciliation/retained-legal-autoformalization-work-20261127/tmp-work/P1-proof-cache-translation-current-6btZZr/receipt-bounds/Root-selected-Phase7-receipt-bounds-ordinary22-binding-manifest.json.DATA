@@ -1,0 +1,116 @@
+{
+  "A_provenance": {
+    "HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+    "actual_closed_Source_READ": {
+      "bytes": 7440,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-isolated-Phase7-receipt-bounds-READ3-closed.json",
+      "sha256": "a42ea50783db60b9036538108d96d855220efaac776ee54e63a34a38c998d3f5"
+    },
+    "clean_index_provenance_reference": {
+      "bytes": 2142,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-ordinary22-clean-D-A-index-provenance.json",
+      "sha256": "d665c99bbca3cb402da9a12914584aa347b40166aad4756f8350c5f040663483"
+    },
+    "clean_worktree_and_index": true,
+    "local_frozen_Git_metadata_reference": {
+      "bytes": 2142,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-ordinary22-clean-D-A-index-provenance.json",
+      "sha256": "d665c99bbca3cb402da9a12914584aa347b40166aad4756f8350c5f040663483"
+    },
+    "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tree": "c670052e6e12473d974382e455c7aef4adb6aebe"
+  },
+  "D_provenance": {
+    "HEAD": "0cf525e0d3070135547f145e87726dade3d70a1f",
+    "actual_closed_Source_READ": {
+      "bytes": 7440,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-isolated-Phase7-receipt-bounds-READ3-closed.json",
+      "sha256": "a42ea50783db60b9036538108d96d855220efaac776ee54e63a34a38c998d3f5"
+    },
+    "clean_index_provenance_reference": {
+      "bytes": 2142,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-ordinary22-clean-D-A-index-provenance.json",
+      "sha256": "d665c99bbca3cb402da9a12914584aa347b40166aad4756f8350c5f040663483"
+    },
+    "clean_worktree_and_index": true,
+    "local_frozen_Git_metadata_reference": {
+      "bytes": 9962,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-isolated-Phase7-receipt-bounds-exact-two-local-freeze.json",
+      "sha256": "29802789293f7af8358cbb2437753ade2a10873310b19eed1855dd4d77e024c6"
+    },
+    "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tree": "1b619e41010b1a68fda2c0125fdc1dd787b9f57d"
+  },
+  "Root_selected": true,
+  "Source_WRITE_claimed": false,
+  "admitted_io_plan_reference": {
+    "bytes": 727,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/Root-selected-IO.json",
+    "sha256": "07cf214d53f9614e4e317dd764a7dd78441fd046a846856f2b9936471c537f3f"
+  },
+  "effect_decision_reference": {
+    "bytes": 548,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/Root-selected-effect.json",
+    "sha256": "740faafe3b2b4f8a3b98c6f83f352bc094fc7e642aea50c4a84e39f2fe1f1ade"
+  },
+  "fixture_closure_reference": {
+    "bytes": 4809,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-ordinary22-six-role-fixture-wire.json",
+    "sha256": "1c4966a5890dcb6172769a1483b3307bd8ec3e14cf95e523c436e3a649f7e0c8"
+  },
+  "frozen_Git_candidates": true,
+  "modules": {
+    "ipfs_datasets_py.logic.bridge.proof_receipt_attestation": {
+      "bytes": 63254,
+      "full9": {
+        "st_ctime_ns": "1795743985154598006",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514740",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743985154598006",
+        "st_nlink": "1",
+        "st_size": "63254",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py",
+      "sha256": "c350097f9425ce916997b1e116297e9497716ae13747719e722b36fe92f38921"
+    },
+    "tests.integration.logic.test_proof_receipt_attestation": {
+      "bytes": 27851,
+      "full9": {
+        "st_ctime_ns": "1795743985154598006",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514902",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743985154598006",
+        "st_nlink": "1",
+        "st_size": "27851",
+        "st_uid": "1000"
+      },
+      "relative_path": "tests/integration/logic/test_proof_receipt_attestation.py",
+      "sha256": "e6cc137379fb50e0aec6e6ae9a1b315344190652ff51fd0ca250f57acf3ab861"
+    }
+  },
+  "ordinary_execution_or_qualification": null,
+  "projects": [
+    {
+      "Git_HEAD": "0cf525e0d3070135547f145e87726dade3d70a1f",
+      "Git_tree": "1b619e41010b1a68fda2c0125fdc1dd787b9f57d",
+      "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets"
+    },
+    {
+      "Git_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+      "Git_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate"
+    }
+  ],
+  "source_read_binding_reference": {
+    "bytes": 1875,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-isolated-ordinary22-D27-read-binding.json",
+    "sha256": "a1d8ed81de5e4d76d47474924f4a501ddaa0d4735bbf6e4f445fe2980af33fb3"
+  }
+}

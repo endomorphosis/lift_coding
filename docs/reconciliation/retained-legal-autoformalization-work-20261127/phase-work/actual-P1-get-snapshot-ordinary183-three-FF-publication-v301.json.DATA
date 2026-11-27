@@ -1,0 +1,132 @@
+{
+  "Source_resource_cleanup_verified": true,
+  "all_other_paths_and_gitlinks_preserved": true,
+  "committed_blobs": {
+    "ipfs_datasets_py/logic/common/duckdb_proof_store.py": {
+      "blob_oid": "08cfbf5a1ba36fca739215062b120464f5640379",
+      "bytes": 111908,
+      "sha256": "5a614b0a1e3ee3b9f3dbc10e80950aff9ed5f19754e45f0cb5ceac5acdcfc400"
+    },
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "blob_oid": "e18eec7a0b92a20d02a672559713a0923f3ad7a5",
+      "bytes": 111809,
+      "sha256": "5b57349bce86ec8d308f87802f9dc96195d56da15ec849a705f0b5b2a5ad1549"
+    },
+    "tests/unit/logic/legal_ir/test_proof_cache.py": {
+      "blob_oid": "4525114941200e1d74adf6b45449e03b2dd2c1a2",
+      "bytes": 97545,
+      "sha256": "4e012101e4400324175c02d296b51abde97d065c76abfddef1b51d16329f639d"
+    }
+  },
+  "elapsed_seconds": 11.89079731889069,
+  "historical_retained_cases": 178,
+  "independently_verified_JUnit": {
+    "bytes": 29719,
+    "logical_name": "junit.xml",
+    "path": "/tmp/Root-P1-get-snapshot-ordinary183-v301-bknpttsl/actual-output/P1-get-checked-snapshot183-run-result0-output1.bin",
+    "sha256": "9dc5f03761790f897d5c9991ee40cea965f7f88fcc84df3561ec14f6cb711962"
+  },
+  "local_freeze": {
+    "bytes": 6819,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-P1-get-snapshot-three-code-local-freeze-v300.json",
+    "sha256": "2e73a82388fedbc74e58e94754692d74d3b4cec3d64cd52464711914f2241e94"
+  },
+  "new_cases": 5,
+  "no_force_new_tests_CI_dispatch_Source_model_policy_action": true,
+  "ordinary_unique_pass": 183,
+  "prepublication_recoveries": [
+    "The first outer update-index invocation rejected an extra bare cacheinfo argument before any index effect or push. The existing first parent commit was reused and the outer two paths were staged together with index-info.",
+    "The first datasets push attempt stopped in credential startup under a process-only address-space limit. Fresh origin readbacks confirmed no remote change. The normal ordered pushes used the same credential configuration without that temporary limit."
+  ],
+  "pushes_in_actual_order": [
+    {
+      "after": "8aebc34eb1e430b00c2b941cb256e853fe2adc02",
+      "before": "3ff7a0b738e96295d030711a2fceb06374110713",
+      "normal_fast_forward": true,
+      "porcelain": " \t8aebc34eb1e430b00c2b941cb256e853fe2adc02:refs/heads/main\t3ff7a0b738..8aebc34eb1",
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "2a9aabdcf78695630446e08235f48a6e8ec90c18",
+      "before": "90c3214a34f69f9e82aeda19424717a823ba3797",
+      "normal_fast_forward": true,
+      "porcelain": " \t2a9aabdcf78695630446e08235f48a6e8ec90c18:refs/heads/main\t90c3214..2a9aabd",
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "fe7a01f5fd350f6ba425b0a463f80025a3404b59",
+      "before": "f20cd2c8d057e20e952f3f1c9d041ee1fe322a67",
+      "normal_fast_forward": true,
+      "porcelain": " \tfe7a01f5fd350f6ba425b0a463f80025a3404b59:refs/heads/main\tf20cd2c8d0..fe7a01f5fd",
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "qualification": {
+    "bytes": 3725,
+    "path": "/tmp/Root-P1-get-snapshot-ordinary183-v301-bknpttsl/Root-P1-get-checked-snapshot-ordinary183-qualified-small-v301.json",
+    "sha256": "a91378b44a708e3bffe7307fc0fd8b09c75ead0d600e89c1f22991c470da25f2"
+  },
+  "repositories": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "all_other_gitlinks_preserved": true,
+      "before": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {},
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "origin_main": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "HEAD": "8aebc34eb1e430b00c2b941cb256e853fe2adc02",
+      "all_other_gitlinks_preserved": true,
+      "before": "3ff7a0b738e96295d030711a2fceb06374110713",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {},
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "origin_main": "8aebc34eb1e430b00c2b941cb256e853fe2adc02",
+      "tree": "00cef1abedbef0ae383dc07df5f5efb22f5253bd"
+    },
+    "hallucinate": {
+      "HEAD": "2a9aabdcf78695630446e08235f48a6e8ec90c18",
+      "all_other_gitlinks_preserved": true,
+      "before": "90c3214a34f69f9e82aeda19424717a823ba3797",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {
+        "ipfs_datasets_py": "8aebc34eb1e430b00c2b941cb256e853fe2adc02"
+      },
+      "origin": "https://github.com/endomorphosis/hallucinate_app",
+      "origin_main": "2a9aabdcf78695630446e08235f48a6e8ec90c18",
+      "tree": "ac7a09aa940c3744a16f33e36b3d5fb8bb378929"
+    },
+    "root": {
+      "HEAD": "fe7a01f5fd350f6ba425b0a463f80025a3404b59",
+      "all_other_gitlinks_preserved": true,
+      "before": "f20cd2c8d057e20e952f3f1c9d041ee1fe322a67",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {
+        "external/ipfs_datasets": "8aebc34eb1e430b00c2b941cb256e853fe2adc02",
+        "hallucinate_app": "2a9aabdcf78695630446e08235f48a6e8ec90c18"
+      },
+      "origin": "https://github.com/endomorphosis/lift_coding",
+      "origin_main": "fe7a01f5fd350f6ba425b0a463f80025a3404b59",
+      "tree": "f54292dddac8f9fcb202e0518b79ce0055612c4c"
+    }
+  },
+  "schema": "P1-get-snapshot-ordinary183-exact-three-true-FF-publication/v301",
+  "scope_nonpooling": {
+    "Finalizer_two_parents_six_fictional_subcases": "separate",
+    "Native_run": false,
+    "Private_same_five": "separate",
+    "SQL51_tests": 0,
+    "SQL_get_branch_run": false
+  },
+  "source_closed_install": {
+    "bytes": 4996,
+    "path": "/tmp/Root-P1-get-checked-snapshot-Source3-selected-v300-ns14glqj/Root-P1-get-snapshot-three-installed-Source-closed-small-v300.json",
+    "sha256": "bee1145054757a6292b28b7b02ea262c32497ed9b83025b7d7745984415dba17"
+  }
+}

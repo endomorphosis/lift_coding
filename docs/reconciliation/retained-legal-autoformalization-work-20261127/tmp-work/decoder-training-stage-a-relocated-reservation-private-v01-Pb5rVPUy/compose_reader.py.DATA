@@ -1,0 +1,149 @@
+"""Compose an opt-in private Reader v3 using the original owner methods."""
+import ast
+import difflib
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+PRIOR = Path('/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/reader.py.DATA')
+raw = PRIOR.read_bytes()
+assert (len(raw), sha256(raw).hexdigest()) == (
+    37935, '981dfd120c28cca772edf9382be5d7ea237869f8724075816a4625f265fe7e34')
+before = raw.decode()
+after = before
+
+
+def replace(old, new):
+    global after
+    assert after.count(old) == 1, old
+    after = after.replace(old, new)
+
+
+replace('def checked_read(path,limit,kind,*,stage_a_fresh=None):', """STAGE_A_RELOCATED_PARTITION = 'stage-a-source32-relocated-all-fresh/v1'
+STAGE_A_RELOCATED_SELECTION = 'existing-stage-a-retained-controls-outer-only/v3'
+
+
+def checked_read(path,limit,kind,*,stage_a_fresh=None):""")
+replace("""        if type(stage_a_fresh) is not dict or len(stage_a_fresh) != 12:
+            raise ValueError('exact twelve Stage A fresh Source paths required')
+""", """        relocated = report.get('stage_a', {}).get('capture_partition') == STAGE_A_RELOCATED_PARTITION
+        count, label = (32, 'thirty-two') if relocated else (12, 'twelve')
+        if type(stage_a_fresh) is not dict or len(stage_a_fresh) != count:
+            raise ValueError(f'exact {label} Stage A fresh Source paths required')
+""")
+replace("""        verify_reader_selection, verify_phase7_owner, epoch_api, git_api, io, read_stage_zero, deadline):
+""", """        verify_reader_selection, verify_phase7_owner, epoch_api, git_api, io, read_stage_zero, deadline,
+        verify_relocation_owner=None):
+""")
+replace("""    explicit_selectors = schema == 'existing-stage-a-retained-controls-outer-only/v2'
+    if explicit_selectors:
+""", """    relocated = schema == STAGE_A_RELOCATED_SELECTION
+    explicit_selectors = relocated or schema == 'existing-stage-a-retained-controls-outer-only/v2'
+    if relocated:
+        fields.add('relocation_preview')
+    if explicit_selectors:
+""")
+replace("""                                               'existing-stage-a-retained-controls-outer-only/v2')
+""", """                                               'existing-stage-a-retained-controls-outer-only/v2',
+                                               STAGE_A_RELOCATED_SELECTION)
+""")
+replace("""            or not callable(verify_reader_selection) or not callable(verify_phase7_owner)
+""", """            or not callable(verify_reader_selection)
+            or not callable(verify_relocation_owner if relocated else verify_phase7_owner)
+""")
+replace("""    plan = json.loads(encoded(plan))
+    roots = tuple(plan['current_roots'][key]['root'] for key in ('D', 'A'))
+""", """    candidate = json.loads(encoded(plan))
+    if relocated:
+        if (candidate.get('schema') != 'private-stage-a-source32-relocated-all-fresh-preview/v1'
+                or candidate['execution_selected'] is not False or candidate['source_body_reads'] != 32
+                or candidate['archive_historical_count'] != 20):
+            raise ValueError('expected detached preview for the selected Stage A relocation')
+        plan = candidate['reader_inputs']
+    else:
+        plan = candidate
+    roots = tuple(plan['current_roots'][key]['root'] for key in ('D', 'A'))
+    if relocated:
+        ref = chosen['relocation_preview']
+        if (type(ref) is not dict or set(ref) != {'path','bytes','sha256'}
+                or type(ref['path']) is not str or not Path(ref['path']).is_absolute()
+                or str(Path(ref['path'])) != ref['path'] or '..' in Path(ref['path']).parts
+                or any(Path(ref['path']).is_relative_to(root) for root in roots)
+                or type(ref['bytes']) is not int or ref['bytes'] != len(encoded(candidate))
+                or ref['sha256'] != chosen['plan_sha256']):
+            raise ValueError('exact private relocation preview reference required')
+""")
+start = after.index("    control_refs = [plan['phase7_request']")
+end = after.index("    reserve = git_api", start)
+old_controls = after[start:end]
+legacy = ''.join('    ' + line + '\n' for line in old_controls.splitlines()
+                 if line not in ("    plan_pin = chosen['plan_sha256']",
+                                 "    guides = plan['four_guide_post_candidates_for_current_owner_recheck']"))
+replace(old_controls, """    guides = plan['four_guide_post_candidates_for_current_owner_recheck']
+    plan_pin = chosen['plan_sha256']
+    reservation_options = {}
+    if relocated:
+        control_refs = [chosen['relocation_preview']]
+        reference, = control_refs
+        if read_before_deadline(reference,'selected_stage_a_relocation_preview') != encoded(candidate):
+            raise ValueError('relocation preview readback differs from the selected plan')
+        retained = candidate['relocated_retained_outer']
+        retained_python = [row for row in retained if row['path'].endswith('.py')]
+        fresh = plan['fresh_Source_body_targets']
+        if (len(retained) != 1218 or len(retained_python) != 1213 or len(guides) != 4 or len(fresh) != 32
+                or any(type(row['full9']) is not dict for row in retained + guides + fresh)):
+            raise ValueError('exact fully-stamped relocated Stage A roster required')
+        rows = [{key: row[key] for key in ('path','bytes','full9')} for row in retained + guides + fresh]
+        if len({row['path'] for row in rows}) != 1254:
+            raise ValueError('duplicate path in the relocated Stage A roster')
+        archive_refs = []
+        reservation_options['capture_partition'] = STAGE_A_RELOCATED_PARTITION
+        attempt.update(capture_partition=STAGE_A_RELOCATED_PARTITION, relocation_preview=reference)
+    else:
+""" + legacy)
+replace("""        persist_python_epoch=False,retain_terminal_git_controls=True)
+""", """        persist_python_epoch=False,retain_terminal_git_controls=True,**reservation_options)
+""")
+start = after.index("        legacy_python,planned = epoch_api")
+end = after.index("        for guide in guides:", start)
+legacy = after[start:end]
+replace(legacy, """        if relocated:
+            endpoint = dict(opening_git,full9=before)
+            epoch_api['_verify_phase7_endpoint'](plan,endpoint)
+            planned = epoch_api['_plan_compact_archive_sizes'](
+                plan,retained,retained_python,{row['path']:before[row['path']] for row in fresh})
+            if any(planned[name] > chosen['epoch_output_maximums'][name] for name in planned):
+                raise ValueError('relocated Stage A compact epoch would exceed its selected bound')
+            legacy_python = None
+        else:
+""" + ''.join('    ' + line + '\n' for line in legacy.splitlines()))
+start = after.index("            epoch = epoch_api['compose_phase7_reused_source32_epochs']")
+end = after.index("            raw, commitments", start)
+legacy = after[start:end]
+replace(legacy, """            if relocated:
+                def approve_binding(binding):
+                    check_deadline()
+                    approved = verify_relocation_owner(binding)
+                    check_deadline()
+                    if approved is True:
+                        attempt['relocation_owner_binding_sha256'] = binding
+                    return approved
+
+                epoch = epoch_api['compose_phase7_relocated_source32_epochs'](
+                    candidate,expected_preview_sha256=plan_pin,endpoint_before=dict(opening[0],full9=before),
+                    endpoint_after=dict(closing[0],full9=after),index_body=opening[1],
+                    guide_observations=guides,captures=captures,verify_relocation_owner=approve_binding)
+            else:
+""" + ''.join('    ' + line + '\n' for line in legacy.splitlines()))
+baseline = ast.parse(before)
+candidate = ast.parse(after)
+changed = {'read_selected_stage_a_epoch','checked_read'}
+assert [ast.dump(n) for n in baseline.body if getattr(n,'name', None) not in changed] == [
+    ast.dump(n) for n in candidate.body if getattr(n,'name',None) not in changed
+    and not (type(n) is ast.Assign and type(n.targets[0]) is ast.Name
+             and n.targets[0].id in {'STAGE_A_RELOCATED_PARTITION','STAGE_A_RELOCATED_SELECTION'})]
+(HERE / 'reader.py.DATA').write_text(after)
+(HERE / 'reader.py.DATA.diff').write_text(''.join(difflib.unified_diff(
+    before.splitlines(keepends=True), after.splitlines(keepends=True),
+    fromfile=str(PRIOR), tofile=str(HERE / 'reader.py.DATA'))))
+print(len(after.encode()), sha256(after.encode()).hexdigest())

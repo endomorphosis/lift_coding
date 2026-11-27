@@ -1,0 +1,35 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.3, pytest-8.3.4, pluggy-1.6.0
+rootdir: /tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-backend-routing-private-v01/dataset
+configfile: pytest.ini
+asyncio: mode=Mode.STRICT
+collected 92 items
+
+tests/integration/logic/backends/test_kernel_backends.py ............... [ 16%]
+........................................................................ [ 94%]
+.FFFF                                                                    [100%]
+
+=================================== FAILURES ===================================
+_ test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[satisfiability] _
+tests/integration/logic/backends/test_kernel_backends.py:2231: in test_lean_outcome_rejects_non_theorem_request_after_complete_rebind
+    with pytest.raises(LeanKernelError, match="outcome request .*theorem_proof"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>
+_ test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[runtime_monitor] _
+tests/integration/logic/backends/test_kernel_backends.py:2231: in test_lean_outcome_rejects_non_theorem_request_after_complete_rebind
+    with pytest.raises(LeanKernelError, match="outcome request .*theorem_proof"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>
+_ test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[evidence_readiness] _
+tests/integration/logic/backends/test_kernel_backends.py:2231: in test_lean_outcome_rejects_non_theorem_request_after_complete_rebind
+    with pytest.raises(LeanKernelError, match="outcome request .*theorem_proof"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>
+_ test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[policy_approval] _
+tests/integration/logic/backends/test_kernel_backends.py:2231: in test_lean_outcome_rejects_non_theorem_request_after_complete_rebind
+    with pytest.raises(LeanKernelError, match="outcome request .*theorem_proof"):
+E   Failed: DID NOT RAISE <class 'ipfs_datasets_py.logic.backends.kernel.lean.LeanKernelError'>
+- generated xml file: /tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/before/result.xml -
+=========================== short test summary info ============================
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[satisfiability]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[runtime_monitor]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[evidence_readiness]
+FAILED tests/integration/logic/backends/test_kernel_backends.py::test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[policy_approval]
+========================= 4 failed, 88 passed in 1.22s =========================

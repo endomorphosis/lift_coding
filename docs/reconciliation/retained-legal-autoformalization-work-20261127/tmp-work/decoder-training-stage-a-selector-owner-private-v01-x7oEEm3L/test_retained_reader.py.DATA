@@ -1,0 +1,19 @@
+"""Replay the nine existing Reader owner tests with the shared lifecycle."""
+from hashlib import sha256
+from pathlib import Path
+
+HERE=Path(__file__).resolve().parent
+PRIOR=HERE.parent/'decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/test_startup.py'
+raw=PRIOR.read_bytes()
+assert (len(raw),sha256(raw).hexdigest())==(10576,'1e12baf3e608535bb7b303b8183586519626e4b12268e93061d43c33faed543b')
+text=raw.decode()
+for old,new in (
+    ("(owner,50631,'f20087d2ad4740b3b8b2d30ee1f70365b0aafdb44c416dda5e52cf18ca644bd5')",
+     "(owner,58650,'9880656f4c4f273f25aab90ee11324a6809f0336367736a8bfe9e7092f1b2b09')"),
+    ("and node.name in ('admit','run_selected_relocated_stage_a_owner')]",
+     "and (node.name in ('admit','run_selected_relocated_stage_a_owner') or node.name.startswith('_stage_a_owner_'))]"),
+    ("self.assertEqual(len(functions),2)","self.assertEqual(len(functions),8)"),
+):
+    assert text.count(old)==1,old
+    text=text.replace(old,new,1)
+exec(compile(text,str(PRIOR),'exec'),{'__name__':'__main__','__file__':__file__})

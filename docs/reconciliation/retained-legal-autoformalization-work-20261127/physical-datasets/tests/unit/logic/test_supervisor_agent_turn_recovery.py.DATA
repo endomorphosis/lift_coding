@@ -1,0 +1,542 @@
+"""Adversarial contracts for metadata-only agent-turn recovery."""
+from __future__ import annotations
+
+from contextlib import ExitStack, redirect_stderr, redirect_stdout
+from copy import deepcopy
+import hashlib
+import importlib.util
+import io
+import json
+from pathlib import Path
+import socket
+import subprocess
+import tempfile
+import unittest
+from unittest.mock import patch
+import urllib.request
+
+from ipfs_datasets_py.logic.autoformal import supervisor_loop
+from ipfs_datasets_py.logic.autoformal.supervisor_loop import plan_agent_turn_recovery_v1
+
+
+def task(task_id, *, operation=None, dependencies=(), keys=(), ready=True,
+         authorized=True, used=0, limit=2):
+    return {
+        "task_id": task_id, "operation_key": operation or "operation:" + task_id,
+        "depends_on": list(dependencies), "exclusive_keys": list(keys),
+        "ready": ready, "authorized": authorized,
+        "attempts_used": used, "max_attempts": limit,
+    }
+
+
+def observation(task_id, *, status="failed", error=None, cleanup=True,
+                accepted=False, thread=None, turn=None):
+    return {
+        "task_id": task_id, "thread_id": thread or "original-thread:" + task_id,
+        "turn_id": turn or "original-turn:" + task_id, "status": status,
+        "error": deepcopy(error), "cleanup_confirmed": cleanup, "accepted": accepted,
+        "evidence_refs": [{"path": "evidence/" + task_id + ".json", "sha256": "a" * 64}],
+    }
+
+
+def frontier(tasks, observations=(), *, holds=(), width=2):
+    return {
+        "schema": "legal-ir-agent-turn-frontier/v1", "frontier_id": "frontier:original",
+        "max_parallel": width, "tasks": list(tasks), "observations": list(observations),
+        "policy_holds": deepcopy(list(holds)),
+    }
+
+
+def decision(result, task_id):
+    return next(row for row in result["task_decisions"] if row["task_id"] == task_id)
+
+
+POLICY_ERROR = {
+    "code": "policy_refusal", "type": "safety_refusal",
+    "message": "Original provider refusal; preserve this text verbatim.",
+    "details": {"request_id": "provider-request:original", "evidence": ["original"]},
+}
+
+
+class AgentTurnRecoveryTests(unittest.TestCase):
+    def assert_metadata_only(self, result):
+        for key in ("dispatch_authorized", "retries_authorized", "attempt_budgets_reset",
+                    "workers_started", "goal_complete", "admitted"):
+            self.assertIs(result[key], False, key)
+        self.assertIs(result["requires_existing_atomic_claim_and_admission"], True)
+
+    def test_policy_refusal_preserves_original_evidence_and_selects_independent_work(self):
+        stopped = observation("refused", error=POLICY_ERROR)
+        snapshot = frontier([
+            task("refused", keys=["source:refused"], used=1),
+            task("dependent", dependencies=["refused"]),
+            task("independent", keys=["source:independent"]),
+        ], [stopped])
+        result = plan_agent_turn_recovery_v1(snapshot)
+        self.assertEqual(result["status"], "continue_independent")
+        self.assertEqual(result["selected_task_ids"], ["independent"])
+        self.assertEqual(result["poll_targets"], [])
+        self.assertEqual(result["policy_holds"], [{
+            "operation_key": "operation:refused", "task_id": "refused",
+            "thread_id": stopped["thread_id"], "turn_id": stopped["turn_id"],
+            "error": POLICY_ERROR, "evidence_refs": stopped["evidence_refs"],
+        }])
+        self.assertIn("policy_refusal_requires_review", decision(result, "refused")["reasons"])
+        self.assertEqual(decision(result, "dependent")["unaccepted_dependencies"], ["refused"])
+        self.assert_metadata_only(result)
+
+    def test_explicit_structured_policy_codes_and_types_are_terminal(self):
+        for selector in ("code", "type"):
+            for value in ("policy_refusal", "content_filter", "safety_refusal"):
+                with self.subTest(selector=selector, value=value):
+                    error = {selector: value, "message": "original refusal"}
+                    result = plan_agent_turn_recovery_v1(frontier(
+                        [task("stopped")], [observation("stopped", error=error)]))
+                    self.assertEqual(result["selected_task_ids"], [])
+                    self.assertEqual(result["policy_holds"][0]["error"], error)
+
+    def test_explicit_policy_stop_is_retained_for_every_terminal_status(self):
+        for status in ("failed", "interrupted", "completed"):
+            with self.subTest(status=status):
+                result = plan_agent_turn_recovery_v1(frontier(
+                    [task("stopped"), task("renamed", operation="operation:stopped")],
+                    [observation("stopped", status=status, error=POLICY_ERROR)]))
+                self.assertEqual(len(result["policy_holds"]), 1)
+                self.assertEqual(result["policy_holds"][0]["error"], POLICY_ERROR)
+                self.assertEqual(result["selected_task_ids"], [])
+                self.assertIn("policy_refusal_requires_review", decision(result, "renamed")["reasons"])
+
+    def test_policy_error_keeps_live_or_unknown_original_owner_polled(self):
+        for status in ("inProgress", "observation_unavailable"):
+            with self.subTest(status=status):
+                original = observation("original", status=status, error=POLICY_ERROR, cleanup=False)
+                result = plan_agent_turn_recovery_v1(frontier([
+                    task("original", keys=["shared"], used=1),
+                    task("alias", operation="operation:original"),
+                    task("overlap", keys=["shared"]), task("independent"),
+                ], [original], width=2))
+                self.assertEqual(result["selected_task_ids"], ["independent"])
+                self.assertEqual(result["poll_targets"], [{key: original[key] for key in
+                                 ("task_id", "thread_id", "turn_id", "status")}])
+                self.assertEqual(result["policy_holds"][0]["error"], POLICY_ERROR)
+                self.assertIn("policy_refusal_requires_review", decision(result, "alias")["reasons"])
+                self.assertIn("exclusive_scope_held", decision(result, "overlap")["reasons"])
+
+    def test_renaming_task_does_not_retry_held_operation(self):
+        first = plan_agent_turn_recovery_v1(frontier(
+            [task("original")], [observation("original", error=POLICY_ERROR)]))
+        second = plan_agent_turn_recovery_v1(frontier([
+            task("renamed", operation="operation:original"), task("disjoint"),
+        ], holds=first["policy_holds"]))
+        self.assertEqual(second["selected_task_ids"], ["disjoint"])
+        self.assertEqual(second["policy_holds"], first["policy_holds"])
+        self.assertIn("policy_refusal_requires_review", decision(second, "renamed")["reasons"])
+
+    def test_retained_policy_hold_survives_without_current_observation(self):
+        first = plan_agent_turn_recovery_v1(frontier(
+            [task("original")], [observation("original", error=POLICY_ERROR)]))
+        result = plan_agent_turn_recovery_v1(frontier(
+            [task("original")], holds=first["policy_holds"]))
+        self.assertEqual(result["status"], "review_required")
+        self.assertEqual(result["selected_task_ids"], [])
+        self.assertEqual(result["policy_holds"], first["policy_holds"])
+
+    def test_later_accepted_completion_cannot_bypass_prior_policy_hold(self):
+        first = plan_agent_turn_recovery_v1(frontier(
+            [task("original")], [observation("original", error=POLICY_ERROR)]))
+        result = plan_agent_turn_recovery_v1(frontier([
+            task("renamed", operation="operation:original", used=1),
+            task("dependent", dependencies=["renamed"]), task("independent"),
+        ], [observation("renamed", status="completed", accepted=True, turn="later-turn")],
+            holds=first["policy_holds"]))
+        self.assertEqual(result["selected_task_ids"], ["independent"])
+        self.assertIn("policy_refusal_requires_review", decision(result, "renamed")["reasons"])
+        self.assertIn("dependencies_not_accepted", decision(result, "dependent")["reasons"])
+        self.assertEqual(result["policy_holds"], first["policy_holds"])
+
+    def test_repeated_observation_does_not_duplicate_original_policy_hold(self):
+        snapshot = frontier([task("stopped")], [observation("stopped", error=POLICY_ERROR)])
+        first = plan_agent_turn_recovery_v1(snapshot)
+        snapshot["policy_holds"] = first["policy_holds"]
+        result = plan_agent_turn_recovery_v1(snapshot)
+        self.assertEqual(result["policy_holds"], first["policy_holds"])
+        self.assertEqual(len(result["policy_holds"]), 1)
+
+    def test_live_turn_is_polled_by_original_ids_and_never_restarted(self):
+        live = observation("live", status="inProgress", cleanup=False,
+                           thread="thread:keep-exact", turn="turn:keep-exact")
+        result = plan_agent_turn_recovery_v1(frontier(
+            [task("live", keys=["scope:live"], used=1), task("other")], [live], width=2))
+        self.assertEqual(result["poll_targets"], [{key: live[key] for key in
+                         ("task_id", "thread_id", "turn_id", "status")}])
+        self.assertEqual(result["selected_task_ids"], ["other"])
+        self.assertIn("poll_existing_owner", decision(result, "live")["reasons"])
+        self.assert_metadata_only(result)
+
+    def test_unavailable_observation_polls_original_owner_and_keeps_scope(self):
+        unknown = observation("unknown", status="observation_unavailable", cleanup=False)
+        result = plan_agent_turn_recovery_v1(frontier([
+            task("unknown", keys=["scope:shared"], used=1),
+            task("overlap", keys=["scope:shared"]), task("independent"),
+        ], [unknown], width=2))
+        self.assertEqual(result["poll_targets"][0]["thread_id"], unknown["thread_id"])
+        self.assertEqual(result["poll_targets"][0]["turn_id"], unknown["turn_id"])
+        self.assertEqual(result["selected_task_ids"], ["independent"])
+        self.assertIn("exclusive_scope_held", decision(result, "overlap")["reasons"])
+
+    def test_live_status_keeps_scope_even_if_cleanup_flag_claims_true(self):
+        result = plan_agent_turn_recovery_v1(frontier([
+            task("live", keys=["shared"]), task("overlap", keys=["shared"]),
+        ], [observation("live", status="inProgress", cleanup=True)]))
+        self.assertEqual(result["selected_task_ids"], [])
+        self.assertEqual(len(result["poll_targets"]), 1)
+        self.assertIn("exclusive_scope_held", decision(result, "overlap")["reasons"])
+
+    def test_terminal_owner_keeps_shared_scope_until_explicit_cleanup(self):
+        result = plan_agent_turn_recovery_v1(frontier([
+            task("failed", keys=["shared"]), task("overlap", keys=["shared"]),
+            task("disjoint", keys=["other"]),
+        ], [observation("failed", cleanup=False)], width=2))
+        self.assertEqual(result["selected_task_ids"], ["disjoint"])
+        self.assertIn("exclusive_scope_held", decision(result, "overlap")["reasons"])
+        self.assertEqual(result["poll_targets"], [])
+
+    def test_unclean_terminal_owner_also_consumes_parallel_capacity(self):
+        for status in ("failed", "interrupted", "completed"):
+            with self.subTest(status=status):
+                result = plan_agent_turn_recovery_v1(frontier([
+                    task("original", keys=["original-scope"]), task("independent", keys=["other"]),
+                ], [observation("original", status=status, cleanup=False)], width=1))
+                self.assertEqual(result["selected_task_ids"], [])
+                self.assertIn("parallel_capacity_full", decision(result, "independent")["reasons"])
+
+    def test_confirmed_cleanup_releases_scope_for_different_operation(self):
+        result = plan_agent_turn_recovery_v1(frontier([
+            task("failed", keys=["shared"], used=1), task("next", keys=["shared"]),
+        ], [observation("failed", cleanup=True)], width=1))
+        self.assertEqual(result["selected_task_ids"], ["next"])
+        self.assertIn("terminal_attempt_preserved", decision(result, "failed")["reasons"])
+
+    def test_parallel_width_includes_live_and_unavailable_owners(self):
+        result = plan_agent_turn_recovery_v1(frontier([
+            task("live"), task("unknown"), task("first"), task("second"),
+        ], [observation("live", status="inProgress", cleanup=False),
+            observation("unknown", status="observation_unavailable", cleanup=False)], width=3))
+        self.assertEqual(len(result["poll_targets"]), 2)
+        self.assertEqual(result["selected_task_ids"], ["first"])
+        self.assertIn("parallel_capacity_full", decision(result, "second")["reasons"])
+
+    def test_parallel_selection_has_disjoint_keys_and_unique_operations(self):
+        tasks = [task("one", operation="same-operation", keys=["shared"]),
+                 task("overlap", keys=["shared"]),
+                 task("alias", operation="same-operation", keys=["unrelated"]),
+                 task("two", keys=["other"]), task("three", keys=["last"])]
+        result = plan_agent_turn_recovery_v1(frontier(tasks, width=2))
+        self.assertEqual(result["selected_task_ids"], ["one", "two"])
+        self.assertIn("exclusive_scope_held", decision(result, "overlap")["reasons"])
+        self.assertIn("operation_already_selected", decision(result, "alias")["reasons"])
+        self.assertIn("parallel_capacity_full", decision(result, "three")["reasons"])
+        chosen = [row for row in tasks if row["task_id"] in result["selected_task_ids"]]
+        self.assertFalse(set(chosen[0]["exclusive_keys"]) & set(chosen[1]["exclusive_keys"]))
+
+    def test_unready_unauthorized_and_exhausted_tasks_are_never_selected(self):
+        result = plan_agent_turn_recovery_v1(frontier([
+            task("unready", ready=False), task("unauthorized", authorized=False),
+            task("exhausted", used=2, limit=2), task("available"),
+        ], width=4))
+        self.assertEqual(result["selected_task_ids"], ["available"])
+        for task_id, reason in (("unready", "not_ready"), ("unauthorized", "not_authorized"),
+                                ("exhausted", "attempt_budget_exhausted")):
+            self.assertIn(reason, decision(result, task_id)["reasons"])
+
+    def test_spent_attempt_without_observation_requires_reconciliation(self):
+        result = plan_agent_turn_recovery_v1(frontier([
+            task("unreconciled", used=1, limit=5), task("fresh"),
+        ]))
+        self.assertEqual(result["selected_task_ids"], ["fresh"])
+        self.assertFalse(decision(result, "unreconciled")["selected"])
+        self.assertEqual(result["preserved_snapshot"]["tasks"][0]["attempts_used"], 1)
+        self.assertIs(result["retries_authorized"], False)
+
+    def test_terminal_attempts_are_preserved_despite_remaining_budget(self):
+        for status in ("failed", "interrupted", "completed"):
+            with self.subTest(status=status):
+                result = plan_agent_turn_recovery_v1(frontier([
+                    task("original", used=1, limit=10),
+                    task("renamed", operation="operation:original"),
+                ], [observation("original", status=status)]))
+                self.assertEqual(result["selected_task_ids"], [])
+                self.assertIn("terminal_attempt_preserved", decision(result, "original")["reasons"])
+                self.assertIn("operation_has_existing_attempt", decision(result, "renamed")["reasons"])
+
+    def test_only_accepted_completed_closed_owner_unlocks_dependency(self):
+        result = plan_agent_turn_recovery_v1(frontier([
+            task("complete", used=1), task("dependent", dependencies=["complete"]),
+        ], [observation("complete", status="completed", accepted=True)]))
+        self.assertEqual(result["selected_task_ids"], ["dependent"])
+        self.assertIn("completed", decision(result, "complete")["reasons"])
+        self.assert_metadata_only(result)
+
+    def test_unaccepted_completed_turn_does_not_unlock_dependencies(self):
+        result = plan_agent_turn_recovery_v1(frontier([
+            task("complete"), task("dependent", dependencies=["complete"]),
+        ], [observation("complete", status="completed", accepted=False)]))
+        self.assertEqual(result["selected_task_ids"], [])
+        self.assertIn("dependencies_not_accepted", decision(result, "dependent")["reasons"])
+        self.assertIs(result["goal_complete"], False)
+
+    def test_acceptance_requires_completed_closed_error_free_owner(self):
+        invalid = [observation("original", status="failed", accepted=True),
+                   observation("original", status="interrupted", accepted=True),
+                   observation("original", status="inProgress", accepted=True),
+                   observation("original", status="completed", cleanup=False, accepted=True),
+                   observation("original", status="completed", accepted=True, error={"code": "runtime_error"}),
+                   observation("original", status="completed", accepted=True, error=POLICY_ERROR)]
+        for item in invalid:
+            with self.subTest(observation=item), self.assertRaises(ValueError):
+                plan_agent_turn_recovery_v1(frontier([task("original")], [item]))
+
+    def test_generic_runtime_error_mentioning_policy_is_not_a_refusal(self):
+        error = {"code": "runtime_error", "type": "worker_error",
+                 "message": "Policy cache failed while parsing content_filter configuration; retry not attempted."}
+        result = plan_agent_turn_recovery_v1(frontier(
+            [task("original"), task("independent")], [observation("original", error=error)]))
+        self.assertEqual(result["policy_holds"], [])
+        self.assertEqual(result["selected_task_ids"], ["independent"])
+        self.assertEqual(result["preserved_snapshot"]["observations"][0]["error"], error)
+
+    def test_snapshot_and_attempt_budgets_are_unchanged_and_detached(self):
+        snapshot = frontier([task("stopped", used=1, limit=7), task("fresh", limit=9)],
+                            [observation("stopped", error=POLICY_ERROR)])
+        before = deepcopy(snapshot)
+        expected_sha = hashlib.sha256(json.dumps(before, sort_keys=True, separators=(",", ":"),
+                                                allow_nan=False).encode()).hexdigest()
+        result = plan_agent_turn_recovery_v1(snapshot)
+        self.assertEqual(snapshot, before)
+        self.assertEqual(result["preserved_snapshot"], before)
+        self.assertEqual(result["snapshot_sha256"], expected_sha)
+        snapshot["tasks"][0]["max_attempts"] = 1000
+        snapshot["observations"][0]["error"]["details"]["evidence"].append("changed")
+        self.assertEqual(result["preserved_snapshot"], before)
+        self.assertEqual(result["policy_holds"][0]["error"], POLICY_ERROR)
+        result["preserved_snapshot"]["tasks"][1]["attempts_used"] = 1000
+        self.assertEqual(snapshot["tasks"][1]["attempts_used"], 0)
+        self.assert_metadata_only(result)
+
+    def test_unknown_dependencies_and_cycles_fail_closed(self):
+        for tasks in ([task("unknown", dependencies=["not-in-frontier"])],
+                      [task("self", dependencies=["self"])],
+                      [task("one", dependencies=["two"]), task("two", dependencies=["one"])]):
+            with self.subTest(tasks=tasks):
+                result = plan_agent_turn_recovery_v1(frontier(tasks))
+                self.assertEqual(result["selected_task_ids"], [])
+                self.assertTrue(all("dependencies_not_accepted" in row["reasons"]
+                                    for row in result["task_decisions"]))
+
+    def test_malformed_frontier_fields_fail_closed(self):
+        original = frontier([task("one")])
+        changes = [("schema", "unknown/v1"), ("frontier_id", ""), ("max_parallel", True),
+                   ("max_parallel", 0), ("max_parallel", 65), ("tasks", {}),
+                   ("observations", {}), ("policy_holds", None)]
+        for key, value in changes:
+            snapshot = deepcopy(original)
+            snapshot[key] = value
+            with self.subTest(key=key, value=value), self.assertRaises(ValueError):
+                plan_agent_turn_recovery_v1(snapshot)
+
+    def test_malformed_task_fields_fail_closed(self):
+        changes = [("task_id", "\x00bad"), ("operation_key", ""), ("depends_on", "one"),
+                   ("depends_on", ["one", "one"]), ("exclusive_keys", ["same", "same"]),
+                   ("ready", 1), ("authorized", None), ("attempts_used", True),
+                   ("attempts_used", -1), ("max_attempts", False), ("max_attempts", 0)]
+        for key, value in changes:
+            item = task("one")
+            item[key] = value
+            with self.subTest(key=key, value=value), self.assertRaises(ValueError):
+                plan_agent_turn_recovery_v1(frontier([item]))
+
+    def test_malformed_observation_fields_fail_closed(self):
+        changes = [("task_id", "unknown-task"), ("thread_id", ""), ("turn_id", None),
+                   ("status", "running"), ("status", []), ("error", "policy_refusal"),
+                   ("cleanup_confirmed", "yes"), ("accepted", 1), ("evidence_refs", "not-a-list")]
+        for key, value in changes:
+            item = observation("one")
+            item[key] = value
+            with self.subTest(key=key, value=value), self.assertRaises(ValueError):
+                plan_agent_turn_recovery_v1(frontier([task("one")], [item]))
+        item = observation("one")
+        del item["error"]
+        with self.assertRaises(ValueError):
+            plan_agent_turn_recovery_v1(frontier([task("one")], [item]))
+
+    def test_duplicate_task_observation_and_job_identities_fail_closed(self):
+        snapshots = [frontier([task("one"), task("one")]),
+                     frontier([task("one")], [observation("one"), observation("one")]),
+                     frontier([task("one"), task("two")], [
+                         observation("one", thread="same-thread", turn="same-turn"),
+                         observation("two", thread="same-thread", turn="same-turn")])]
+        for snapshot in snapshots:
+            with self.subTest(snapshot=snapshot), self.assertRaises(ValueError):
+                plan_agent_turn_recovery_v1(snapshot)
+
+    def test_malformed_or_duplicate_retained_policy_holds_fail_closed(self):
+        valid = {"operation_key": "operation:one", "task_id": "one", "thread_id": "thread:one",
+                 "turn_id": "turn:one", "error": deepcopy(POLICY_ERROR), "evidence_refs": []}
+        invalid = [{**valid, "operation_key": ""}, {**valid, "turn_id": None},
+                   {**valid, "error": "refused"}, {**valid, "evidence_refs": "not-a-list"},
+                   {**valid, "error": {"code": []}}]
+        for item in invalid:
+            with self.subTest(hold=item), self.assertRaises(ValueError):
+                plan_agent_turn_recovery_v1(frontier([task("one")], holds=[item]))
+        with self.assertRaises(ValueError):
+            plan_agent_turn_recovery_v1(frontier([task("one")], holds=[valid, deepcopy(valid)]))
+
+    def test_malformed_known_error_selectors_fail_closed(self):
+        for key in ("code", "type", "message"):
+            for value in ([], {}, 1, True):
+                error = {key: value}
+                with self.subTest(key=key, value=value), self.assertRaises(ValueError):
+                    plan_agent_turn_recovery_v1(frontier(
+                        [task("one")], [observation("one", error=error)]))
+
+    def test_nonfinite_nonjson_and_oversized_metadata_fail_closed(self):
+        for value in (float("nan"), float("inf"), {"not-json"}, object(), "x" * (4 * 1024 * 1024)):
+            snapshot = frontier([task("one")])
+            snapshot["evidence"] = value
+            with self.subTest(value_type=type(value).__name__), self.assertRaises(ValueError):
+                plan_agent_turn_recovery_v1(snapshot)
+
+
+class AgentTurnRecoveryCliTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        root = Path(supervisor_loop.__file__).resolve().parents[3]
+        path = root / "scripts/ops/legal_ir/run_autoformal_supervisor.py"
+        spec = importlib.util.spec_from_file_location("agent_turn_recovery_cli_test", path)
+        if spec is None or spec.loader is None:
+            raise AssertionError("canonical supervisor CLI cannot be loaded")
+        cls.cli = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cls.cli)
+
+    def invoke(self, argv):
+        stdout, stderr = io.StringIO(), io.StringIO()
+        with ExitStack() as stack:
+            guards = [stack.enter_context(patch.object(subprocess, name,
+                      side_effect=AssertionError("runtime process call: " + name)))
+                      for name in ("Popen", "run", "call", "check_call", "check_output")]
+            guards.append(stack.enter_context(patch.object(socket, "create_connection",
+                          side_effect=AssertionError("network call"))))
+            guards.append(stack.enter_context(patch.object(urllib.request, "urlopen",
+                          side_effect=AssertionError("provider call"))))
+            guards.append(stack.enter_context(patch.object(supervisor_loop, "submit_discrepancies",
+                          side_effect=AssertionError("task mutation"))))
+            guards.append(stack.enter_context(patch.object(self.cli, "parser",
+                          side_effect=AssertionError("native CLI dispatch"))))
+            stack.enter_context(redirect_stdout(stdout))
+            stack.enter_context(redirect_stderr(stderr))
+            code = self.cli.main(argv)
+            for guard in guards:
+                guard.assert_not_called()
+        return code, stdout.getvalue(), stderr.getvalue()
+
+    def write_input(self, root, snapshot=None):
+        path = root / "frontier.json"
+        path.write_text(json.dumps(snapshot if snapshot is not None else frontier([task("independent")])) + "\n")
+        return path
+
+    def test_main_writes_json_metadata_without_task_or_runtime_calls(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = self.write_input(root)
+            before = source.read_bytes()
+            output = root / "plan.json"
+            code, stdout, stderr = self.invoke(["agent-turn-recovery", "--inputs", str(source),
+                                                "--output", str(output)])
+            result = json.loads(output.read_bytes())
+            self.assertEqual((code, stdout, stderr), (0, "", ""))
+            self.assertEqual(result["schema"], "legal-ir-agent-turn-recovery/v1")
+            self.assertEqual(result["selected_task_ids"], ["independent"])
+            self.assertIs(result["workers_started"], False)
+            self.assertIs(result["dispatch_authorized"], False)
+            self.assertEqual(source.read_bytes(), before)
+
+    def test_main_emits_json_to_stdout_when_no_output_requested(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = self.write_input(Path(directory))
+            code, stdout, stderr = self.invoke(["agent-turn-recovery", "--inputs", str(source)])
+            self.assertEqual((code, stderr), (0, ""))
+            self.assertEqual(json.loads(stdout)["selected_task_ids"], ["independent"])
+
+    def test_existing_output_is_never_overwritten(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = self.write_input(root)
+            output = root / "plan.json"
+            original = b"original evidence must survive\n"
+            output.write_bytes(original)
+            code, stdout, stderr = self.invoke(["agent-turn-recovery", "--inputs", str(source),
+                                                "--output", str(output)])
+            self.assertEqual((code, stdout), (2, ""))
+            self.assertEqual(output.read_bytes(), original)
+            self.assertEqual(json.loads(stderr)["schema"], "legal-ir-agent-turn-recovery-error/v1")
+
+    def test_same_input_output_is_rejected_without_changing_input(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = self.write_input(Path(directory))
+            original = source.read_bytes()
+            with redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as stopped:
+                self.cli.main(["agent-turn-recovery", "--inputs", str(source), "--output", str(source)])
+            self.assertEqual(stopped.exception.code, 2)
+            self.assertEqual(source.read_bytes(), original)
+
+    def test_duplicate_json_keys_fail_closed_without_creating_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = root / "frontier.json"
+            source.write_text('{"schema":"legal-ir-agent-turn-frontier/v1","schema":"other"}')
+            output = root / "plan.json"
+            code, stdout, stderr = self.invoke(["agent-turn-recovery", "--inputs", str(source),
+                                                "--output", str(output)])
+            self.assertEqual((code, stdout), (2, ""))
+            self.assertFalse(output.exists())
+            self.assertIn("duplicate", json.loads(stderr)["error"])
+
+    def test_invalid_frontier_reports_json_error_without_creating_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = self.write_input(root, {"schema": "unknown-frontier/v1"})
+            output = root / "plan.json"
+            code, stdout, stderr = self.invoke(["agent-turn-recovery", "--inputs", str(source),
+                                                "--output", str(output)])
+            error = json.loads(stderr)
+            self.assertEqual((code, stdout), (2, ""))
+            self.assertFalse(output.exists())
+            self.assertIs(error["workers_started"], False)
+            self.assertIs(error["retries_authorized"], False)
+
+    def test_symlink_input_and_output_are_rejected_without_touching_targets(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source = self.write_input(root)
+            original = source.read_bytes()
+            input_link = root / "input-link.json"
+            input_link.symlink_to(source)
+            output = root / "plan.json"
+            code, stdout, stderr = self.invoke(["agent-turn-recovery", "--inputs", str(input_link),
+                                                "--output", str(output)])
+            self.assertEqual((code, stdout), (2, ""))
+            self.assertTrue(json.loads(stderr)["error"])
+            self.assertFalse(output.exists())
+            target = root / "existing.json"
+            target.write_bytes(b"retained output evidence")
+            output.symlink_to(target)
+            code, stdout, stderr = self.invoke(["agent-turn-recovery", "--inputs", str(source),
+                                                "--output", str(output)])
+            self.assertEqual((code, stdout), (2, ""))
+            self.assertTrue(json.loads(stderr)["error"])
+            self.assertEqual(target.read_bytes(), b"retained output evidence")
+            self.assertEqual(source.read_bytes(), original)
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -1,0 +1,84 @@
+"""Bind the newer published frontier from the original owner's detached receipts."""
+from pathlib import Path
+import json
+from reservation_preview import PREVIEW, checked, TMP
+
+BASE = TMP / 'Root-P1-Lean-live-ordinary92-reconcile-v596'
+INPUTS = {
+    'publication': ('actual-Guide573-four-docs-three-FF-publication.json', 3117,
+                    '1a83a7c66b2e726b4f6605039fbd5bad4296f6cb3f008e965436c68a9e89e8c7'),
+    'write_close': ('actual-Guide573-four-docs-Source-closed-and-frozen.json', 6558,
+                    'd38bd70d2b0fd73526cd606bdd36fbd4eada351b1c22bbd1185363cadafc2139'),
+    'code_publication': ('actual-P1-Lean-ordinary92-and-Native2-three-FF-publication.json', 14753,
+                         '1f52975ebd4cc8572b2a0da750a173d1ca5596c643f21e8dd2b5c1de0a02b5d6'),
+    'read_close': ('actual-live-reconciled-Source42-content-epoch-closed.json', 6319,
+                   '3fb04725ccfc2b5c4a5fc0a60392bfed468b38adeec9b9a67dad8266d113351e'),
+    'metadata': ('actual-live-reconciled-outer1610-epoch.json', 850463,
+                 '9af3058e7567f9e7e19ce70c6c30d33ee4dfe9d50bbfe0c05aedfe84eec56bd8'),
+    'cap': ('Source-only-Guide573-full-retained-cap.json', 1276,
+            '60ec66c0cc0476a13565f961f1e6b0d09a80c55b6b783b85745700fafc22ce6d')}
+
+
+def report():
+    refs = {name:dict(path=str(BASE/file),bytes=size,sha256=digest)
+            for name,(file,size,digest) in INPUTS.items()}
+    values = {name:json.loads(checked((BASE/file,size,digest))) for name,(file,size,digest) in INPUTS.items()}
+    pub, write, code, read, metadata, cap = (values[key] for key in INPUTS)
+    prior = json.loads(checked(PREVIEW))
+    plan = prior['reader_inputs']
+    root_d, root_a = (plan['current_roots'][role]['root'] for role in ('D','A'))
+    index = write['index']
+    new_d = str(Path(index['path']).parent.parent)
+    assert index['path'] == new_d+'/.git/index' and new_d != root_d
+    assert pub['actual_doc_Source_closed'] == refs['write_close']
+    assert pub['actual_code_publication'] == write['code_publication'] == refs['code_publication']
+    assert pub['terminal_returncode'] == write['terminal_returncode'] == code['terminal_returncode'] == 0
+    assert all(row['normal_fast_forward'] is True and row['push_returncode'] == 0
+               for row in pub['pushes_in_actual_order']) and len(pub['pushes_in_actual_order']) == 3
+    assert pub['live_main_before'] == code['live_main_after']
+    assert pub['live_main_after']['datasets'] == write['HEAD']
+    assert pub['live_main_after']['accelerate'] == write['A'] == plan['current_roots']['A']['HEAD']
+    assert code['live_main_before']['datasets'] == read['prior_published_D'] == plan['current_roots']['D']['HEAD']
+    assert all(r['Source_closed'] is r['module_closed'] is True for r in (read,write))
+    assert read['outer_epoch_reference'] == refs['metadata']
+    assert write['full_charge'] == refs['cap'] and cap['all_prior_costs_retained'] is True
+    headroom = cap['after_full_retained_precharge']
+    headroom_bytes = min(headroom['global_cap']-headroom['used'],headroom['internal_cap']-headroom['internal_used'])
+    source = {row['path']:row for row in metadata}
+    assert len(source) == read['outer_epoch_record_count'] == 1610
+    assert source[index['path']] == code['D_index']
+    assert source[write['A_index']['path']] == read['actual_A_index'] == write['A_index']
+    source[index['path']] = index
+
+    def locate(row):
+        previous = row['path']
+        reloc = new_d + previous[len(root_d):] if previous.startswith(root_d+'/') else previous
+        assert reloc.startswith(new_d+'/') or reloc.startswith(root_a+'/')
+        found = source[reloc]
+        assert set(found) == {'path','bytes','sha256','full9'}
+        return found
+
+    retained = [(row, locate(row)) for row in prior['relocated_retained_outer']]
+    fresh = [(row, locate(row)) for row in plan['fresh_Source_body_targets']]
+    assert len(retained) == 1218 and len(fresh) == 32
+    assert all((old['bytes'],old['sha256']) == (new['bytes'],new['sha256']) for old,new in fresh)
+    changed = [(old,new) for old,new in retained if (old['bytes'],old['sha256']) != (new['bytes'],new['sha256'])]
+    changed_by_relative = {str(Path(new['path']).relative_to(new_d)): new for _,new in changed}
+    assert set(changed_by_relative) == {'.git/index', *code['exact_two_changes']}
+    assert all(changed_by_relative[path]['sha256'] == pin[2] for path,pin in code['exact_two_changes'].items())
+    assert set(write['committed_docs']) == set(pub['only_four_docs']) and write['only_four_Git_changes'] is True
+    return dict(schema='private-guide573-stage-a-metadata-reconciliation/v1', retained_refs=refs,
+        published_D=write['HEAD'],published_D_tree=write['tree'], published_A=write['A'],datasets_root=new_d,
+        prior_D=code['live_main_before']['datasets'], writer_expected_D_index=index,
+        retained_rows_mapped=1218, protected_body_sha256_and_size_matches=32,
+        protected_body_full9_changes=sum(old['full9']!=new['full9'] for old,new in fresh),
+        retained_full9_changes=sum(old['full9']!=new['full9'] for old,new in retained),
+        changed_retained_bodies=changed_by_relative, headroom_after_retained_guide573_bytes=headroom_bytes,
+        independent_D_index_payload_floor=index['bytes']+1,
+        independent_D_index_payload_gap=index['bytes']+1-headroom_bytes,
+        current_Git_stage0_and_HEAD_role_join=None,current_independent_D_index_read=None,
+        paired_allocation=None,current_pair_quote=None,dispatch_authority=False)
+
+
+if __name__ == '__main__':
+    print(json.dumps(report(), indent=2, sort_keys=True))

@@ -1,0 +1,68 @@
+{
+  "accelerate_published_head_preserved": true,
+  "actual_code_publication": {
+    "bytes": 27474,
+    "path": "/tmp/P2-V4-CLI-live-reconciled-ordinary33-publisher-INERT-UHtLMQQb/actual-live-reconciled-V4-CLI-ordinary33-three-FF-publication.json",
+    "sha256": "0b8f452fcedbe7f44befed897d5445558b68afb1ef1c4404262bf82eb71f265a"
+  },
+  "actual_doc_Source_closed": {
+    "bytes": 6056,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-Guide572-four-docs-Source-closed-and-frozen.json",
+    "sha256": "47e7638b5b32c03728e1ffa648d8d08d529d863223d7f7f8020016f3b526faed"
+  },
+  "actual_ordinary33": {
+    "bytes": 15020,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-live-reconciled-V4-CLI-ordinary33-closed.json",
+    "sha256": "7a9f1b31bbe71eba1e2bc4253d3fd9d0180a13045c171c76d803be6b6ffcdb09"
+  },
+  "evidence_ordinal": 572,
+  "live_main_after": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "8996e160d2628b0fd35f1166a6dae6957582c243",
+    "hallucinate": "80c472a8aa28db5f0f6a148ecd41dec34b16c6e4",
+    "root": "5165641659bf96e1cc696c54a65eb14a74db3276"
+  },
+  "live_main_before": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "cbc43a5f365502265d1e64d7bce3281f2871ef01",
+    "hallucinate": "950cf34959b658dc62dd4df853256ec24cfe9e19",
+    "root": "fb10d3325954472503d44bc27ca7393868577996"
+  },
+  "only_four_docs": [
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json"
+  ],
+  "prior_values_preserved": {
+    "components": 126,
+    "evidence_records": 571,
+    "tasks": 24
+  },
+  "pushes_in_actual_order": [
+    {
+      "after": "8996e160d2628b0fd35f1166a6dae6957582c243",
+      "before": "cbc43a5f365502265d1e64d7bce3281f2871ef01",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "80c472a8aa28db5f0f6a148ecd41dec34b16c6e4",
+      "before": "950cf34959b658dc62dd4df853256ec24cfe9e19",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "5165641659bf96e1cc696c54a65eb14a74db3276",
+      "before": "fb10d3325954472503d44bc27ca7393868577996",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "schema": "actual-Guide572-four-docs-live-ordinary33-three-FF-publication/v1",
+  "shared_checkouts_preserved": true,
+  "terminal_returncode": 0
+}

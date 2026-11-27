@@ -1,0 +1,46 @@
+{
+  "Root_selected": true,
+  "Source_WRITE_claimed": false,
+  "Source_closed": true,
+  "actual_isolated_content_epoch": {
+    "bytes": 6236,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "44e3761cedbc50ed9967e330f4c35f4b7d39269257acbe9e41cb7f2e69407783"
+  },
+  "exact_local_freeze": {
+    "bytes": 6190,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-isolated-Phase1-cache-translation-exact-two-local-freeze.json",
+    "sha256": "38999ef02d990f6bfb348c01a80455b00b58fed94283c153011bc3afbcf50b4a"
+  },
+  "outer_epoch_record_count": 1614,
+  "outer_epoch_reference": {
+    "bytes": 850358,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-live-reconciled-outer1614-epoch.json",
+    "sha256": "44af55564659e96cfe9e3c7ead9336203f51bb37c6117ab108238b5d3b69bb05"
+  },
+  "owned_module_closed": true,
+  "promotion_selected": false,
+  "protected_index_reference": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795741449710387210",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72514406",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795741449706387182",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "sha256": "a5d9497fe854dfaa4e40ba174393b221ba2f095db09579baa34de10364b99245"
+  },
+  "python_epoch_record_count": 1601,
+  "python_epoch_reference": {
+    "bytes": 843788,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-live-reconciled-Python1601-epoch.json",
+    "sha256": "da7f473f29fe4a57f8e8388c15d72cd7ba69c61168add0993b5116e4237e6dd9"
+  },
+  "schema": "actual-D27-observed-D-root-initializer-READ-small-closeout/v1"
+}

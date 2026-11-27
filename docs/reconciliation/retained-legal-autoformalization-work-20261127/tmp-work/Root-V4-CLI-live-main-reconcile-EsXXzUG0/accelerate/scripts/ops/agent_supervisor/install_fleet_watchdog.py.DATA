@@ -1,0 +1,2447 @@
+#!/usr/bin/env python3
+"""Install the fleet watchdog with an immutable, stdlib-only runtime release."""
+from __future__ import annotations
+import argparse
+import hashlib
+import json
+import os
+import re
+import shutil
+import subprocess
+import stat
+import sys
+import tempfile
+import time
+from pathlib import Path
+
+
+MODULES = ('fleet_watchdog', 'fleet_repair', 'fleet_completion', 'fleet_heals', 'fleet_holds', 'live_board_probe', 'canonical_writer_custody', 'diagnostic_handoff', 'storage_diagnostics', 'service_fleet_probe', 'native_catalogue_probe', 'recovery_policy', 'runtime_assets', 'systemd_heartbeat', 'repair_candidate', 'repair_candidate_runtime', 'native_executor_health', 'repair_authorization', 'repair_candidate_owners', 'repair_validation_worker')
+REPAIR_PROFILE = "legal-ir"
+
+PACKAGE_MODULES = {
+    'agent_implementation_route': 'ipfs_accelerate_py/agent_implementation_route.py',
+    'ipfs_accelerate_py.agent_supervisor.control': 'ipfs_accelerate_py/agent_supervisor/control/__init__.py',
+    'ipfs_accelerate_py.agent_supervisor.control.control_contracts': 'ipfs_accelerate_py/agent_supervisor/control/control_contracts.py',
+    'ipfs_accelerate_py.agent_supervisor.core': 'ipfs_accelerate_py/agent_supervisor/core/__init__.py',
+    'ipfs_accelerate_py.agent_supervisor.core.wrapper_utils': 'ipfs_accelerate_py/agent_supervisor/core/wrapper_utils.py',
+    'ipfs_accelerate_py.agent_supervisor.git_environment': 'ipfs_accelerate_py/agent_supervisor/git_environment.py',
+    'ipfs_accelerate_py.agent_supervisor.merge': 'ipfs_accelerate_py/agent_supervisor/merge/__init__.py',
+    'ipfs_accelerate_py.agent_supervisor.merge.checkout_lock': 'ipfs_accelerate_py/agent_supervisor/merge/checkout_lock.py',
+    'ipfs_accelerate_py.agent_supervisor.merge.quarantine_validation': 'ipfs_accelerate_py/agent_supervisor/merge/quarantine_validation.py',
+    'ipfs_accelerate_py.agent_supervisor.merge.workspace_quarantine': 'ipfs_accelerate_py/agent_supervisor/merge/workspace_quarantine.py',
+    'ipfs_accelerate_py.agent_supervisor.merge.worktree_lifecycle': 'ipfs_accelerate_py/agent_supervisor/merge/worktree_lifecycle.py',
+    'ipfs_accelerate_py.agent_supervisor.proof': 'ipfs_accelerate_py/agent_supervisor/proof/__init__.py',
+    'ipfs_accelerate_py.agent_supervisor.proof.formal_verification_contracts': 'ipfs_accelerate_py/agent_supervisor/proof/formal_verification_contracts.py',
+    'ipfs_accelerate_py.agent_supervisor.runtime': 'ipfs_accelerate_py/agent_supervisor/runtime/__init__.py',
+    'ipfs_accelerate_py.agent_supervisor.runtime.event_log': 'ipfs_accelerate_py/agent_supervisor/runtime/event_log.py',
+    'ipfs_accelerate_py.agent_supervisor.self_improvement': 'ipfs_accelerate_py/agent_supervisor/self_improvement/__init__.py',
+    'ipfs_accelerate_py.agent_supervisor.self_improvement.supervisor_v2_contracts': 'ipfs_accelerate_py/agent_supervisor/self_improvement/supervisor_v2_contracts.py',
+    'ipfs_accelerate_py.agent_supervisor.task_sources': 'ipfs_accelerate_py/agent_supervisor/task_sources/__init__.py',
+    'ipfs_accelerate_py.agent_supervisor.task_sources.control_plane_contracts': 'ipfs_accelerate_py/agent_supervisor/task_sources/control_plane_contracts.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/__init__.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.app': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/app.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.artifacts': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/artifacts.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.auto_commit': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/auto_commit.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.cli': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/cli.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.context': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/context.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.core': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/core.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.deterministic_fallback': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/deterministic_fallback.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.diagnostics': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/diagnostics.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.engine': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/engine.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.file_replacement': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/file_replacement.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.git_utils': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/git_utils.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.history': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/history.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.lifecycle_wrapper': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/lifecycle_wrapper.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.llm': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/llm.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.llm_defaults': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/llm_defaults.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.plans': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/plans.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.registry': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/registry.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.runner': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/runner.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.specs': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/specs.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.status': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/status.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/supervisor.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_loop': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/supervisor_loop.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.supervisor_runtime': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/supervisor_runtime.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.task_board': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/task_board.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.typescript': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/typescript.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.worktrees': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/worktrees.py',
+    'ipfs_accelerate_py.agent_supervisor.todo_daemon.wrapper': 'ipfs_accelerate_py/agent_supervisor/todo_daemon/wrapper.py',
+    'ipfs_accelerate_py.agent_supervisor.validation': 'ipfs_accelerate_py/agent_supervisor/validation/__init__.py',
+    'ipfs_accelerate_py.agent_supervisor.validation.validation_commands': 'ipfs_accelerate_py/agent_supervisor/validation/validation_commands.py',
+    'ipfs_accelerate_py.agent_supervisor.validation.validation_runtime': 'ipfs_accelerate_py/agent_supervisor/validation/validation_runtime.py',
+}
+
+
+def unit_directory(value: str) -> str:
+    # Unlike ExecStart and Environment, WorkingDirectory does not unquote its
+    # value; surrounding quotes turn an absolute path into an invalid one.
+    if not Path(value).is_absolute() or any(c in value for c in "\n\r\0"):
+        raise ValueError("unit working directory must be a single absolute path")
+    return value.replace("%", "%%")
+
+
+def atomic_write(path: Path, data: bytes, *, mode: int = 0o600) -> None:
+    descriptor, temporary = tempfile.mkstemp(prefix=f".{path.name}.", dir=path.parent)
+    try:
+        with os.fdopen(descriptor, "wb") as handle:
+            os.fchmod(handle.fileno(), mode)
+            handle.write(data)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temporary, path)
+    finally:
+        if os.path.exists(temporary):
+            os.unlink(temporary)
+
+
+def encoded_json(value: dict) -> bytes:
+    return (json.dumps(value, indent=2) + "\n").encode()
+
+
+def unit_quote(value: str) -> str:
+    return '"' + value.replace('\\', '\\\\').replace('"', '\\"').replace('%', '%%').replace('$', '$$').replace('\n', '\\n').replace('\r', '\\r') + '"'
+
+
+def validate_inventory(inventory: dict, repair_cwd: Path) -> None:
+    if not repair_cwd.is_absolute() or not repair_cwd.is_dir():
+        raise ValueError("repair checkout must be an existing absolute directory")
+    boards = inventory.get("boards")
+    if not isinstance(boards, list) or not boards:
+        raise ValueError("inventory requires a nonempty boards list")
+    identifiers = set()
+    for entry in boards:
+        if not isinstance(entry, dict):
+            raise ValueError("inventory boards must be objects")
+        identifier = entry.get("id")
+        if not isinstance(identifier, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", identifier) or identifier in identifiers:
+            raise ValueError("inventory board ids must be unique safe names")
+        identifiers.add(identifier)
+        for field in ("cwd", "config_path", "runtime_root"):
+            value = entry.get(field)
+            if not isinstance(value, str) or not Path(value).is_absolute():
+                raise ValueError(f"{identifier}: {field} must be an absolute path")
+        holds = entry.get("hold_paths", [])
+        if not isinstance(holds, list) or any(not isinstance(p, str) or not Path(p).is_absolute() for p in holds):
+            raise ValueError(f"{identifier}: hold paths must be absolute paths")
+        unavailable = not Path(entry["cwd"]).is_dir() or not Path(entry["config_path"]).is_file()
+        if unavailable and not any(Path(hold).is_file() for hold in holds):
+            raise ValueError(f"{identifier}: board checkout and configuration must exist unless explicitly held")
+        for field in ("ensure_argv", "status_argv"):
+            argv = entry.get(field, [])
+            if not isinstance(argv, list) or any(not isinstance(arg, str) or not arg for arg in argv):
+                raise ValueError(f"{identifier}: {field} must be a string list")
+
+
+def generic_service_unit(python: str, source: Path, release: Path, config_path: Path,
+                         suffix: str, module: str, mode: list[str], *,
+                         description: str | None = None) -> bytes:
+    """Render immutable-runtime prerequisites without requiring its old checkout."""
+    module_path = release / "ipfs_accelerate_py/agent_supervisor/rescue" / f"{module}.py"
+    argv = [python, "-P", "-m", f"ipfs_accelerate_py.agent_supervisor.rescue.{module}",
+            *mode, "--config", str(config_path)]
+    description = description or f"IPFS taskboard fleet {suffix} (SPAR SAWM ASEH PCTDD PCPR DOEP)"
+    return f"""[Unit]
+Description={description}
+After=network-online.target
+Wants=network-online.target
+StartLimitIntervalSec=0
+ConditionPathIsDirectory={unit_directory(str(release))}
+ConditionFileNotEmpty={unit_directory(str(module_path))}
+ConditionFileNotEmpty={unit_directory(str(config_path))}
+
+[Service]
+Type=simple
+NotifyAccess=main
+WatchdogSec=300
+WorkingDirectory={unit_directory(str(release))}
+Environment={unit_quote('PYTHONPATH=' + str(source.resolve()) + ':' + str(release))}
+Environment=PYTHONUNBUFFERED=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+ExecStart={' '.join(unit_quote(arg) for arg in argv)}
+Restart=always
+RestartSec=30
+TimeoutStopSec=330
+KillMode=control-group
+UMask=0077
+Nice=10
+CPUWeight=20
+MemoryHigh=512M
+MemoryMax=2G
+
+[Install]
+WantedBy=default.target
+""".encode()
+
+
+def _enrollment_boards(value: dict, label: str) -> dict[str, dict]:
+    if not isinstance(value, dict) or not isinstance(value.get("boards"), list):
+        raise ValueError(f"{label} must contain a boards list")
+    result = {}
+    for entry in value["boards"]:
+        identifier = entry.get("id") if isinstance(entry, dict) else None
+        if (not isinstance(identifier, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", identifier)
+                or identifier in result):
+            raise ValueError(f"{label} board ids must be unique safe names")
+        result[identifier] = entry
+    return result
+
+
+def _enrollment_runtime(source: Path, home: Path) -> tuple[Path, dict[str, bytes]]:
+    modules = source / "ipfs_accelerate_py/agent_supervisor/rescue"
+    contents = {name: (modules / f"{name}.py").read_bytes() for name in MODULES}
+    contents.update({name: (source / path).read_bytes()
+                     for name, path in PACKAGE_MODULES.items()})
+    for name, data in contents.items():
+        compile(data, f"{name}.py", "exec")
+    digest = hashlib.sha256(b"".join(contents.values())).hexdigest()[:20]
+    release = home / ".local/lib/ipfs-taskboard-watchdog/releases" / digest
+    return release, contents
+
+
+def _materialize_enrollment_release(release: Path, contents: dict[str, bytes], source: Path) -> None:
+    # Reuse the installer's immutable standalone-release protocol. This mode
+    # never rewrites a global unit or switches its existing runtime binding.
+    package = release
+    package.mkdir(parents=True, exist_ok=True, mode=0o700)
+    for component in ("ipfs_accelerate_py", "agent_supervisor", "rescue"):
+        package /= component
+        package.mkdir(exist_ok=True)
+        initial = package / "__init__.py"
+        if not initial.exists():
+            atomic_write(initial, b'"""Standalone fleet watchdog runtime."""\n')
+    for name, data in contents.items():
+        target = release / PACKAGE_MODULES[name] if name in PACKAGE_MODULES else package / f"{name}.py"
+        target.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+        if target.exists() and target.read_bytes() != data:
+            raise ValueError(f"existing immutable release is inconsistent: {name}")
+        if not target.exists():
+            atomic_write(target, data)
+    if not (release / "release.json").exists():
+        atomic_write(release / "release.json", encoded_json(
+            {"source": str(source), "sha256": release.name}))
+
+
+def _service_fleet_enrollment(entry: dict, release: Path, config_path: Path) -> dict:
+    if entry.get("probe_kind") != "service_fleet_report":
+        raise ValueError("enroll-only requires the explicit service_fleet_report probe")
+    if entry.get("ensure_argv"):
+        raise ValueError("enroll-only preserves external launchers; ensure_argv must be empty")
+    if "publication" in entry or "completion_gate" in entry:
+        raise ValueError("a service-fleet diagnostic cannot acquire publication or completion authority")
+    report = entry.get("report_path")
+    namespace = entry.get("board_namespace")
+    age = entry.get("report_max_age_seconds", 180)
+    lanes = entry.get("expected_units")
+    if (not isinstance(report, str) or not Path(report).is_absolute()
+            or any(c in report for c in "\n\r\0")):
+        raise ValueError("service-fleet report_path must be an absolute single path")
+    if not isinstance(namespace, str) or not re.fullmatch(r"[a-z0-9][a-z0-9._-]{2,127}", namespace):
+        raise ValueError("service-fleet board_namespace must be a canonical identifier")
+    if not isinstance(age, int) or isinstance(age, bool) or not 1 <= age <= 3600:
+        raise ValueError("service-fleet report_max_age_seconds must be in 1..3600")
+    if (not isinstance(lanes, dict) or not lanes or len(lanes) > 32
+            or any(not isinstance(k, str) or not re.fullmatch(r"[A-Za-z0-9_-]+", k)
+                   or not isinstance(v, str) or not re.fullmatch(r"[A-Za-z0-9_.@:-]+\.service", v)
+                   for k, v in lanes.items())
+            or len(set(lanes.values())) != len(lanes)):
+        raise ValueError("service-fleet expected_units must bind explicit lane ids to service units")
+    env = {"PYTHONPATH": str(release), "PYTHONUNBUFFERED": "1",
+           "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}
+    argv = [sys.executable, "-P", "-m",
+            "ipfs_accelerate_py.agent_supervisor.rescue.service_fleet_probe",
+            "--board", entry["id"], "--report", report, "--namespace", namespace,
+            "--max-age-seconds", str(age)]
+    for lane, unit in lanes.items():
+        argv.extend(["--expected-unit", f"{lane}={unit}"])
+    holds = set(entry.get("hold_paths", []))
+    holds.update(str(Path(entry["runtime_root"]) / name) for name in ("OPERATOR_STOP", "HOLD"))
+    return {"id": entry["id"], "cwd": entry["cwd"], "config": entry["config_path"],
+            "hold_files": sorted(holds), "stall_seconds": 900,
+            "failure_grace_seconds": 60, "blocked_grace_seconds": 300,
+            "cooldown_seconds": 180, "max_backoff_seconds": 3600,
+            "max_repair_attempts": 3,
+            "service_fleet_binding": {"board_namespace": namespace, "max_age_seconds": age,
+                                      "lanes": dict(lanes)},
+            "probe": {"argv": argv, "env": env, "timeout_seconds": 90},
+            "repair": {"argv": [sys.executable, "-P", "-m",
+                                 "ipfs_accelerate_py.agent_supervisor.rescue.fleet_repair",
+                                 "enqueue", "--config", str(config_path)],
+                       "env": dict(env), "timeout_seconds": 15}}
+
+
+def enroll(source: Path, inventory_path: Path, *, dry_run: bool = False,
+           activate_runtime: bool = False) -> dict:
+    """Append one diagnostic board without upgrading any existing fleet binding.
+
+    The caller owns source custody. Both daemons reload this configuration, so
+    enrollment never invokes systemctl or touches budgets or queue history.
+    Units change only with explicit runtime activation, before root-owned cutover.
+    Inventory is published first; a second-file failure leaves the prior fleet
+    usable and is not an atomic two-file transaction or automatic retry grant.
+    """
+    home = Path.home()
+    config_path = home / ".config/ipfs-taskboard-watchdog/fleet.json"
+    installed_inventory = config_path.with_name("inventory.json")
+    if (not config_path.is_file() or config_path.is_symlink()
+            or not installed_inventory.is_file() or installed_inventory.is_symlink()):
+        raise ValueError("enroll-only requires an existing regular fleet configuration and inventory")
+    config_before = config_path.read_bytes()
+    inventory_before = installed_inventory.read_bytes()
+    old = json.loads(config_before)
+    prior_inventory = json.loads(inventory_before)
+    incoming = json.loads(inventory_path.read_bytes())
+    prior = _enrollment_boards(prior_inventory, "existing inventory")
+    fleet = _enrollment_boards(old, "existing fleet")
+    selected = _enrollment_boards(incoming, "selected inventory")
+    if (old.get("schema") != "agent-supervisor/fleet-watchdog-config@1"
+            or not prior or set(prior) != set(fleet)
+            or not isinstance(old.get("repair_worker"), dict)):
+        raise ValueError("enroll-only requires consistent existing fleet/inventory bindings")
+    for key, value in incoming.items():
+        if key != "boards" and (key not in prior_inventory or prior_inventory[key] != value):
+            raise ValueError(f"enroll-only cannot change inventory field: {key}")
+    for identifier, entry in selected.items():
+        if identifier in prior and entry != prior[identifier]:
+            raise ValueError(f"enroll-only cannot change existing inventory board: {identifier}")
+    added = [entry for identifier, entry in selected.items() if identifier not in prior]
+    if len(added) != 1:
+        raise ValueError("enroll-only requires exactly one genuinely new board")
+    entry = added[0]
+    repair_cwd = old["repair_worker"].get("cwd")
+    if not isinstance(repair_cwd, str):
+        raise ValueError("existing repair worker requires its original checkout")
+    validate_inventory({"boards": [entry]}, Path(repair_cwd))
+    release, contents = _enrollment_runtime(source, home)
+    board = _service_fleet_enrollment(entry, release, config_path)
+    inventory_after = dict(prior_inventory, boards=[*prior_inventory["boards"], entry])
+    config_after = dict(old, boards=[*old["boards"], board])
+    if activate_runtime:
+        config_after["runtime_release"] = str(release)
+    inventory_bytes = encoded_json(inventory_after)
+    config_bytes = encoded_json(config_after)
+
+    def descriptor(path: Path, payload: bytes) -> dict:
+        return {"path": str(path), "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}
+
+    unit_updates = []
+    if activate_runtime:
+        for suffix, module, mode in (("watchdog", "fleet_watchdog", ["--apply"]),
+                                     ("repair", "fleet_repair", ["run"])):
+            target = home / ".config/systemd/user" / f"ipfs-taskboard-{suffix}.service"
+            if target.is_symlink() or not target.is_file():
+                raise ValueError("runtime activation requires existing regular generic service units")
+            unit_updates.append((target, target.read_bytes(), generic_service_unit(
+                sys.executable, source, release, config_path, suffix, module, mode)))
+
+    plan = {"schema": "agent-supervisor/fleet-watchdog-enrollment-plan@1",
+            "dry_run": dry_run, "applied": False, "board_id": entry["id"],
+            "release": str(release), "activate_runtime": activate_runtime,
+            "global_runtime_release_before": old.get("runtime_release"),
+            "global_runtime_release_after": config_after.get("runtime_release"),
+            "global_runtime_release_preserved": not activate_runtime,
+            "files": [{"before": descriptor(installed_inventory, inventory_before),
+                       "after": descriptor(installed_inventory, inventory_bytes),
+                       "append": {"path": "/boards/-", "value": entry}},
+                      {"before": descriptor(config_path, config_before),
+                       "after": descriptor(config_path, config_bytes),
+                       "append": {"path": "/boards/-", "value": board}}],
+            "unrelated_board_ids_preserved": list(fleet),
+            "repair_worker_preserved": True,
+            "all_existing_top_level_values_preserved": not activate_runtime,
+            "explicit_top_level_changes": ["runtime_release"] if activate_runtime else [],
+            "unit_changes": [{"before": descriptor(path, before),
+                              "after": descriptor(path, after), "postimage_utf8": after.decode()}
+                             for path, before, after in unit_updates],
+            "service_commands": [], "state_history_changes": [],
+            "two_file_atomicity_claimed": False,
+            "runtime_modules": {name: {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()}
+                                for name, data in contents.items()}}
+    if dry_run:
+        return plan
+
+    def compare(path: Path, expected: bytes) -> None:
+        if path.is_symlink() or path.read_bytes() != expected:
+            raise ValueError(f"enrollment preimage changed: {path}")
+
+    compare(installed_inventory, inventory_before)
+    compare(config_path, config_before)
+    for path, before, _after in unit_updates:
+        compare(path, before)
+    _materialize_enrollment_release(release, contents, source)
+    compare(installed_inventory, inventory_before)
+    compare(config_path, config_before)
+    for path, before, after in unit_updates:
+        compare(path, before)
+        atomic_write(path, after)
+    atomic_write(installed_inventory, inventory_bytes)
+    compare(config_path, config_before)
+    compare(installed_inventory, inventory_bytes)
+    atomic_write(config_path, config_bytes)
+    compare(installed_inventory, inventory_bytes)
+    compare(config_path, config_bytes)
+    for path, _before, after in unit_updates:
+        compare(path, after)
+    plan["applied"] = True
+    return plan
+
+
+def install_profile(source: Path, inventory_path: Path, repair_cwd: Path, *,
+                    profile: str = "legal-ir", dry_run: bool = False,
+                    enable: bool = False) -> dict:
+    """Stage a separately named diagnostic fleet, never the existing global one.
+
+    Even --enable only stages these unit postimages. The operator performs
+    reviewed service activation; no daemon or repair process is touched here.
+    Existing profiles must be byte-identical, otherwise a separate CAS upgrade
+    is required. Existing global state, units and inventory are not rewritten.
+    """
+    if profile != "legal-ir":
+        raise ValueError("only the explicit legal-ir profile is supported")
+    home = Path.home()
+    config_dir = home / ".config/ipfs-taskboard-watchdog" / profile
+    config_path = config_dir / "fleet.json"
+    installed_inventory = config_dir / "inventory.json"
+    state_dir = home / ".local/state/ipfs-taskboard-watchdog" / profile
+    if config_dir.is_symlink() or state_dir.is_symlink():
+        raise ValueError("profile configuration and history must not be aliased")
+    incoming = json.loads(inventory_path.read_bytes())
+    selected = _enrollment_boards(incoming, "profile inventory")
+    if len(selected) != 1:
+        raise ValueError("the legal-ir profile requires exactly one explicit diagnostic board")
+    validate_inventory(incoming, repair_cwd)
+    entry = next(iter(selected.values()))
+    if entry.get("publication") not in (None, False) or entry.get("completion_gate") not in (None, False):
+        raise ValueError("a diagnostic profile cannot acquire publication or completion authority")
+    diagnostic_entry = dict(entry)
+    diagnostic_entry.pop("publication", None)
+    diagnostic_entry.pop("completion_gate", None)
+
+    global_config = home / ".config/ipfs-taskboard-watchdog/fleet.json"
+    global_before = None
+    previous_policy = {}
+    if global_config.exists():
+        if global_config.is_symlink() or not global_config.is_file():
+            raise ValueError("the global repair policy must come from a regular configuration")
+        global_before = global_config.read_bytes()
+        existing = json.loads(global_before)
+        if not isinstance(existing, dict) or not isinstance(existing.get("repair_worker", {}), dict):
+            raise ValueError("the existing global repair worker policy is invalid")
+        previous_policy = existing.get("repair_worker", {})
+    coder = shutil.which("codex")
+    repair_argv = previous_policy.get("argv") or ([coder, "exec", "--sandbox", "danger-full-access",
+                                                 "-c", 'approval_policy="never"', "--json"] if coder else [])
+    if (not isinstance(repair_argv, list) or not repair_argv
+            or any(not isinstance(arg, str) or not arg for arg in repair_argv)
+            or not shutil.which(repair_argv[0])):
+        raise ValueError("a working codex repair executable is required before profile installation")
+    release, contents = _enrollment_runtime(source, home)
+    board = _service_fleet_enrollment(diagnostic_entry, release, config_path)
+    config = {"schema": "agent-supervisor/fleet-watchdog-config@1", "poll_seconds": 60,
+              "state_dir": str(state_dir), "boards": [board], "runtime_release": str(release),
+              "repair_worker": {"timeout_seconds": 2400, "retry_seconds": 1800,
+                                "max_backoff_seconds": 21600, **previous_policy,
+                                "cwd": str(repair_cwd), "argv": repair_argv,
+                                "job_unit": f"ipfs-taskboard-{profile}-repair-job.service"}}
+    updates = [(installed_inventory, encoded_json(incoming)), (config_path, encoded_json(config))]
+    for suffix, module, mode in (("watchdog", "fleet_watchdog", ["--apply"]),
+                                 ("repair", "fleet_repair", ["run"])):
+        unit = home / ".config/systemd/user" / f"ipfs-taskboard-{profile}-{suffix}.service"
+        updates.append((unit, generic_service_unit(
+            sys.executable, source, release, config_path, f"{profile}-{suffix}", module, mode,
+            description=f"IPFS {profile} diagnostic fleet {suffix}")))
+
+    present = []
+    for path, payload in updates:
+        if path.is_symlink():
+            raise ValueError(f"profile target must not be aliased: {path}")
+        exists = path.exists()
+        present.append(exists)
+        if exists and (not path.is_file() or path.read_bytes() != payload):
+            raise ValueError(f"existing profile differs; explicit CAS upgrade required: {path}")
+    if any(present) and not all(present):
+        raise ValueError("partial existing profile requires explicit reconciliation")
+    idempotent = all(present)
+    if not idempotent:
+        if config_dir.exists() and any(config_dir.iterdir()):
+            raise ValueError("unrecognized existing profile configuration requires reconciliation")
+        if state_dir.exists() and any(state_dir.iterdir()):
+            raise ValueError("existing profile history requires explicit reconciliation")
+
+    def descriptor(path: Path, payload: bytes) -> dict:
+        return {"path": str(path), "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}
+
+    plan = {"schema": "agent-supervisor/fleet-watchdog-profile-plan@1", "profile": profile,
+            "dry_run": dry_run, "applied": False, "existing_identical_profile": idempotent,
+            "enable_requested": enable, "manual_service_activation_required": True,
+            "config": str(config_path), "state": str(state_dir), "release": str(release),
+            "repair_job_unit": config["repair_worker"]["job_unit"],
+            "global_policy_source": descriptor(global_config, global_before) if global_before is not None else None,
+            "global_configuration_inventory_units_and_history_untouched": True,
+            "repair_model_and_argv_preserved": bool(previous_policy.get("argv")),
+            "files": [{"before": descriptor(path, payload) if idempotent else None,
+                       "after": descriptor(path, payload), "postimage_utf8": payload.decode()}
+                      for path, payload in updates],
+            "service_commands": [], "two_file_atomicity_claimed": False,
+            "runtime_modules": {name: {"bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()}
+                                for name, data in contents.items()}}
+    if dry_run:
+        return plan
+
+    def compare_targets() -> None:
+        for path, payload in updates:
+            if path.is_symlink() or (path.exists() and (not idempotent or path.read_bytes() != payload)):
+                raise ValueError(f"profile target changed during preparation: {path}")
+            if idempotent and not path.exists():
+                raise ValueError(f"profile target disappeared during preparation: {path}")
+        if global_before is None:
+            if global_config.exists() or global_config.is_symlink():
+                raise ValueError("global repair policy appeared during profile preparation")
+        elif global_config.is_symlink() or global_config.read_bytes() != global_before:
+            raise ValueError("global repair policy changed during profile preparation")
+
+    compare_targets()
+    _materialize_enrollment_release(release, contents, source)
+    compare_targets()
+    if not idempotent:
+        config_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
+        state_dir.mkdir(parents=True, exist_ok=True, mode=0o700)
+        (home / ".config/systemd/user").mkdir(parents=True, exist_ok=True)
+        # Configuration is staged last. No service action accompanies this
+        # non-atomic first installation; partial files refuse a blind retry.
+        for path, payload in [*updates[2:], updates[0], updates[1]]:
+            if path.exists() or path.is_symlink():
+                raise ValueError(f"profile target appeared before publication: {path}")
+            atomic_write(path, payload)
+    for path, payload in updates:
+        if path.is_symlink() or path.read_bytes() != payload:
+            raise ValueError(f"profile postimage mismatch: {path}")
+    plan["applied"] = True
+    return plan
+
+
+def install(source: Path, inventory_path: Path, repair_cwd: Path, *, enable: bool,
+            defer_repair_restart: bool = False) -> dict:
+    home = Path.home()
+    config_dir = home / ".config/ipfs-taskboard-watchdog"
+    state_dir = home / ".local/state/ipfs-taskboard-watchdog"
+    library = home / ".local/lib/ipfs-taskboard-watchdog"
+    config_path = config_dir / "fleet.json"
+    inventory = json.loads(inventory_path.read_text())
+    if not isinstance(inventory, dict):
+        raise ValueError("inventory must be a JSON object")
+    validate_inventory(inventory, repair_cwd)
+    old = json.loads(config_path.read_text()) if config_path.exists() else {}
+    if not isinstance(old, dict) or not isinstance(old.get("boards", []), list):
+        raise ValueError("existing fleet configuration is invalid")
+    prior = {b["id"]: b for b in old.get("boards", [])}
+    previous_policy = old.get("repair_worker", {})
+    if not isinstance(previous_policy, dict):
+        raise ValueError("existing repair worker policy must be an object")
+    coder = shutil.which("codex")
+    repair_argv = previous_policy.get("argv") or ([coder, "exec", "--sandbox", "danger-full-access",
+                                                 "-c", 'approval_policy="never"', "--json"] if coder else [])
+    if (not isinstance(repair_argv, list) or not repair_argv
+            or any(not isinstance(arg, str) or not arg for arg in repair_argv)
+            or not shutil.which(repair_argv[0])):
+        raise ValueError("a working codex repair executable is required before installation")
+    release, contents = _enrollment_runtime(source, home)
+    for directory in (config_dir, state_dir, release):
+        directory.mkdir(parents=True, exist_ok=True, mode=0o700)
+    _materialize_enrollment_release(release, contents, source)
+    installed_inventory = config_dir / "inventory.json"
+    atomic_write(installed_inventory, encoded_json(inventory))
+    python = sys.executable
+    env = {"PYTHONPATH": str(release), "PYTHONUNBUFFERED": "1",
+           "OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}
+    unit_dir = home / ".config/systemd/user"
+    unit_dir.mkdir(parents=True, exist_ok=True)
+    ensure_units = []
+    boards = []
+    for entry in inventory["boards"]:
+        board_id = entry["id"]
+        holds = set(entry.get("hold_paths", []))
+        holds.update(prior.get(board_id, {}).get("hold_files", []))
+        holds.update(str(Path(entry["runtime_root"]) / name) for name in ("OPERATOR_STOP", "HOLD"))
+        board = {"id": board_id, "cwd": entry["cwd"], "config": entry["config_path"],
+                 "hold_files": sorted(holds), "stall_seconds": 900,
+                 "failure_grace_seconds": 60, "blocked_grace_seconds": 300,
+                 "cooldown_seconds": 180, "max_backoff_seconds": 3600,
+                 "probe": {"argv": [python, "-P", "-m", "ipfs_accelerate_py.agent_supervisor.rescue.live_board_probe",
+                                    "--inventory", str(installed_inventory), "--board", board_id],
+                           "env": env, "timeout_seconds": 90},
+                 "repair": {"argv": [python, "-P", "-m", "ipfs_accelerate_py.agent_supervisor.rescue.fleet_repair",
+                                     "enqueue", "--config", str(config_path)],
+                            "env": env, "timeout_seconds": 15}}
+        if entry.get("ensure_argv"):
+            ensure_argv = entry["ensure_argv"]
+            if Path(ensure_argv[0]).name == "systemctl":
+                board["ensure"] = {"argv": ensure_argv, "timeout_seconds": 30}
+            else:
+                # A detached owner inherits its launcher's cgroup even after
+                # setsid(). Run native ensure outside the watchdog cgroup so
+                # upgrading/restarting the watchdog cannot kill board workers.
+                ensure_unit = f"ipfs-taskboard-{board_id}-ensure.service"
+                native_unit = f"""[Unit]
+Description=IPFS {board_id} native supervisor ensure
+After=network-online.target
+Wants=network-online.target
+ConditionPathIsDirectory={unit_directory(entry['cwd'])}
+ConditionFileNotEmpty={unit_directory(entry['config_path'])}
+
+[Service]
+Type=oneshot
+WorkingDirectory={unit_directory(entry['cwd'])}
+ExecStart={' '.join(unit_quote(arg) for arg in ensure_argv)}
+TimeoutStartSec=360
+TimeoutStopSec=30
+KillMode=process
+UMask=0077
+Nice=10
+CPUWeight=20
+Environment=OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+"""
+                atomic_write(unit_dir / ensure_unit, native_unit.encode())
+                ensure_units.append(ensure_unit)
+                board["ensure"] = {"argv": ["systemctl", "--user", "start", "--no-block", ensure_unit],
+                                   "timeout_seconds": 15}
+        boards.append(board)
+    config = {"schema": "agent-supervisor/fleet-watchdog-config@1", "poll_seconds": 60,
+              "state_dir": str(state_dir), "boards": boards, "runtime_release": str(release),
+              "repair_worker": {"timeout_seconds": 2400,
+                                "retry_seconds": 1800, "max_backoff_seconds": 21600,
+                                **previous_policy, "cwd": str(repair_cwd), "argv": repair_argv}}
+    if config_path.exists():
+        # Preserve publication manifests and operator tuning on runtime upgrades.
+        for board in boards:
+            for key in ("publication", "stall_seconds", "blocked_grace_seconds", "failure_grace_seconds",
+                        "cooldown_seconds", "max_backoff_seconds", "max_ensure_attempts",
+                        "launch_only_hold_files", "diagnostic_handoff", "storage_checks"):
+                if key in prior.get(board["id"], {}):
+                    board[key] = prior[board["id"]][key]
+        shutil.copy2(config_path, config_path.with_suffix(".json.previous"))
+    if "poll_seconds" in old:
+        config["poll_seconds"] = old["poll_seconds"]
+    atomic_write(config_path, encoded_json(config))
+    installed_units = []
+    for suffix, module, mode in (("watchdog", "fleet_watchdog", ["--apply"]),
+                                 ("repair", "fleet_repair", ["run"])):
+        unit_name = f"ipfs-taskboard-{suffix}.service"
+        atomic_write(unit_dir / unit_name, generic_service_unit(
+            python, source, release, config_path, suffix, module, mode))
+        installed_units.append(unit_name)
+    if enable:
+        subprocess.run(["systemctl", "--user", "daemon-reload"], check=True)
+        subprocess.run(["systemctl", "--user", "enable", *installed_units], check=True)
+        if defer_repair_restart:
+            subprocess.run(["systemctl", "--user", "restart", installed_units[0]], check=True)
+            subprocess.run(["systemctl", "--user", "start", installed_units[1]], check=True)
+        else:
+            subprocess.run(["systemctl", "--user", "restart", *installed_units], check=True)
+    return {"config": str(config_path), "state": str(state_dir), "release": str(release),
+            "services": installed_units, "ensure_services": ensure_units, "enabled": enable}
+
+
+
+def _finite_repair_release(source: Path, home: Path, relatives: list[str]):
+    """Populate the exact selected normal package, including real initializers.
+
+    Reuses original release writes; adds no synthetic namespace/initializer and
+    never falls back to the previous mutable rescue tree for selected modules.
+    """
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import ordinary_bytes
+    _, original = _enrollment_runtime(source, home)
+    files = {PACKAGE_MODULES[name] if name in PACKAGE_MODULES else
+             "ipfs_accelerate_py/agent_supervisor/rescue/" + name + ".py": data
+             for name, data in original.items()}
+    if type(relatives) is not list or not 0 < len(relatives) <= 4096:
+        raise ValueError("finite selected source population required")
+    for rel in relatives:
+        path = Path(rel)
+        if path.is_absolute() or ".." in path.parts:
+            raise ValueError("relative selected source path required")
+        files[rel] = ordinary_bytes(source / rel, 4 * 1024**2)
+    for rel in ("ipfs_accelerate_py/__init__.py", "ipfs_accelerate_py/agent_supervisor/__init__.py",
+                "ipfs_accelerate_py/agent_supervisor/rescue/__init__.py"):
+        if rel not in files:
+            raise ValueError("genuine selected package initializers required")
+    material = b"".join(name.encode() + b"\0" + data for name, data in sorted(files.items()))
+    release = home / ".local/lib/ipfs-taskboard-watchdog/releases" / hashlib.sha256(material).hexdigest()[:20]
+    fresh = not release.exists()
+    _materialize_enrollment_release(release, original, source)
+    for rel, data in files.items():
+        target = release / rel
+        target.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+        if fresh:
+            # Original materializer creates its generic initializer before the
+            # unpublished release is complete. Replace only in this NEW release
+            # with the exact real selected initializer, before any config CAS.
+            atomic_write(target, data, mode=0o400)
+        elif ordinary_bytes(target, 4 * 1024**2) != data:
+            raise ValueError("existing immutable selected release differs")
+    expected = set(files) | {"release.json", "repair-source-commitment.json"}
+    observed_entries = 0
+    for directory, names, leaves in os.walk(release, followlinks=False):
+        for name in (*names, *leaves):
+            observed_entries += 1
+            path = Path(directory) / name
+            info = path.lstat()
+            if (observed_entries > len(files) * 8 + 128 or info.st_uid != os.getuid()
+                    or not (stat.S_ISDIR(info.st_mode) or stat.S_ISREG(info.st_mode))):
+                raise ValueError("immutable repair release contains an unowned/aliased/unbounded entry")
+            if stat.S_ISREG(info.st_mode) and (info.st_nlink != 1 or path.relative_to(release).as_posix() not in expected):
+                raise ValueError("immutable repair release contains an undeclared file or bytecode")
+    return release, original, files
+
+
+def render_control_owner_commands(policy_pin: dict, *, validation_timeout_seconds: int,
+                                  adoption_timeout_seconds: int) -> dict:
+    """Render fixed nested owners from a separately authenticated control root.
+
+    Top-level runtime sources may advance through the same-epoch successor
+    chain. These original owner controls and policy deliberately remain exact.
+    This is a pure renderer: no release materialization, grants, or commands.
+    """
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import (
+        checked_descriptor, checked_control_release, checked_policy, descriptor, need)
+    policy = checked_policy(Path(policy_pin["path"]), policy_pin["sha256"], current_owner=False)
+    need(descriptor(Path(policy_pin["path"])) == policy_pin, "exact original owner policy descriptor required")
+    control = checked_control_release(policy, current_owner=False)
+    pins = {pin["path"]: pin for pin in [*policy["source_descriptors"], policy_pin, control["manifest"]]}
+    need(len(pins) <= 128, "nested owner control population exceeds its unchanged finite bound")
+    for pin in pins.values():
+        checked_descriptor(pin)
+    arguments = ["--policy", policy_pin["path"], "--policy-sha256", policy_pin["sha256"],
+        "--candidate-root", "{candidate_root}", "--freeze-path", "{freeze_path}",
+        "--receipt-path", "{receipt_path}", "--source-commitment", "{source_commitment}",
+        "--invocation-root", "{invocation_root}"]
+    prefix = [policy["python"], "-I", "-B", str(control["owner"])]
+    result = {}
+    for name, action, seconds in (("validation_owner", "validate", validation_timeout_seconds),
+            ("adoption_owner", "adopt", adoption_timeout_seconds)):
+        need(type(seconds) is int and 0 < seconds <= 1200, "finite original nested owner deadline required")
+        selected = [*arguments, *(["--validation-path", "{validation_path}"] if action == "adopt" else [])]
+        result[name] = {"argv": [*prefix, action, *selected],
+            "verify_argv": [*prefix, "verify-validation" if action == "validate" else "verify-adoption", *selected],
+            "source_descriptors": [pins[key] for key in sorted(pins)], "timeout_seconds": seconds}
+    if "validation_admission_retry" in policy["validation"]:
+        profile = policy["validation"]["validation_admission_retry"]
+        need(validation_timeout_seconds >= profile["source_probe_timeout_seconds"] + policy["validation"]["timeout_seconds"] + 60,
+             "original owner deadline cannot accommodate the explicit pre-D source probe and cleanup")
+        result["validation_admission_retry"] = profile
+    return result
+def _repair_upgrade_board_id(old: dict, contract: dict, initial_bindings: dict | None) -> str:
+    """Select one existing board from its explicit retained-job path.
+
+    The original single engineering board and the existing engineering/science
+    pair are supported in either order. An initial finite epoch must name the
+    same selected board. Selection grants no epoch, retry or task authority.
+    """
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need
+    boards = old.get("boards")
+    need(type(boards) is list and 1 <= len(boards) <= 2
+         and all(type(board) is dict and type(board.get("id")) is str for board in boards),
+         "existing legal-ir board population required")
+    identifiers = [board["id"] for board in boards]
+    need(len(set(identifiers)) == len(identifiers)
+         and (identifiers == ["legal-ir"] or set(identifiers) == {"legal-ir", "legal-ir-scientific"}),
+         "exact existing legal-ir namespaces required")
+    state = Path(old["state_dir"])
+    prior = contract.get("prior_job")
+    need(type(prior) is dict and type(prior.get("path")) is str,
+         "explicit retained board job required")
+    selected = [identifier for identifier in identifiers
+                if prior["path"] == str(state / "repairs" / identifier / "job.json")]
+    need(len(selected) == 1, "retained job does not select an exact configured board")
+    board_id = selected[0]
+    if initial_bindings is not None:
+        epoch = initial_bindings.get("authorization_epoch") if type(initial_bindings) is dict else None
+        need(type(epoch) is dict and type(epoch.get("board_id")) is str
+             and epoch["board_id"] == board_id, "finite epoch and retained job select different boards")
+    return board_id
+
+
+def _repair_initial_configuration(old: dict, board_id: str, bindings: dict) -> dict:
+    """Bind shared repair owners and only the selected board's finite epoch.
+
+    Candidate policy/runtime remain fleet-wide, as in the existing worker.
+    Both board observations, holds, namespace bindings and spent history stay
+    exact; only the selected board receives the supplied explicit epoch.
+    The original authorization and runtime parsers still validate the result.
+    """
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need
+    need(type(bindings) is dict and set(bindings) == {
+        "candidate_policy", "candidate_runtime", "authorization_epoch", "source_snapshot"},
+        "one explicit initial policy/runtime/epoch binding required")
+    worker = old.get("repair_worker")
+    need(type(worker) is dict and "candidate_policy" not in worker and "candidate_runtime" not in worker,
+         "existing productive authority requires a separate reviewed transition")
+    selected = [board for board in old["boards"] if board["id"] == board_id]
+    epoch = bindings["authorization_epoch"]
+    need(len(selected) == 1 and "repair_authorization_epoch" not in selected[0]
+         and type(epoch) is dict and epoch.get("board_id") == board_id,
+         "existing or crossed selected epoch requires a separate reviewed transition")
+    config = json.loads(json.dumps(old))
+    config["repair_worker"]["candidate_policy"] = json.loads(json.dumps(bindings["candidate_policy"]))
+    config["repair_worker"]["candidate_runtime"] = json.loads(json.dumps(bindings["candidate_runtime"]))
+    for board in config["boards"]:
+        if board["id"] == board_id:
+            board["repair_authorization_epoch"] = json.loads(json.dumps(epoch))
+    need([board["id"] for board in config["boards"]] == [board["id"] for board in old["boards"]],
+         "repair binding changed board order or population")
+    for before, after in zip(old["boards"], config["boards"]):
+        expected = dict(before)
+        if before["id"] == board_id:
+            expected["repair_authorization_epoch"] = epoch
+        need(encoded_json(after) == encoded_json(expected), "repair binding changed unrelated board data")
+    return config
+
+
+
+def _repair_release_command_environments(config: dict, release: Path, source: Path) -> dict:
+    """Bind declared board commands to the selected immutable package first."""
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need
+    need(all(path.is_absolute() and ".." not in path.parts for path in (release, source)),
+         "absolute selected release/source roots required")
+    value = json.loads(json.dumps(config))
+    need(type(value.get("boards")) is list, "declared board command population required")
+    need(type(value.get("repair_worker")) is dict, "declared repair worker required")
+    value["repair_worker"]["cwd"] = str(release)
+    pythonpath = os.pathsep.join((str(release), str(source)))
+    for board in value["boards"]:
+        for key in ("probe", "repair"):
+            if key not in board:
+                continue
+            command = board[key]
+            need(type(command) is dict and type(command.get("argv")) is list
+                 and command["argv"] and all(type(arg) is str for arg in command["argv"]),
+                 "ordinary declared board command required")
+            env = command.get("env", {})
+            need(type(env) is dict and all(type(k) is str and type(v) is str for k, v in env.items()),
+                 "ordinary declared board command environment required")
+            command["env"] = {**env, "PYTHONPATH": pythonpath}
+    return value
+
+
+
+def _repair_release_liveness_identity(config: dict, release: Path, watchdog_source: dict) -> dict:
+    """Keep an existing liveness declaration bound to its selected release."""
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import checked_descriptor
+    value = json.loads(json.dumps(config))
+    if "liveness_identity" not in value:
+        return value
+    identity = value["liveness_identity"]
+    need(type(identity) is dict and set(identity) == {"schema", "deployment_id", "source_sha256"} and identity.get("schema") == "agent-supervisor/watchdog-liveness-profile@1",
+         "supported existing liveness identity required")
+    need(type(watchdog_source) is dict and set(watchdog_source) == {"path", "bytes", "sha256"}
+         and watchdog_source["path"] == str(release / "ipfs_accelerate_py/agent_supervisor/rescue/fleet_watchdog.py")
+         and type(watchdog_source["bytes"]) is int and type(watchdog_source["sha256"]) is str
+         and re.fullmatch(r"[0-9a-f]{64}", watchdog_source["sha256"]),
+         "exact selected immutable watchdog source required")
+    need(len(checked_descriptor(watchdog_source)) <= 4 * 1024**2, "finite immutable watchdog Python source required")
+    value["liveness_identity"] = {**identity, "deployment_id": release.name,
+                                 "source_sha256": watchdog_source["sha256"]}
+    return value
+
+
+SCIENTIFIC_GIT_BINDING_SCHEMA = "agent-supervisor/scientific-git-executor-binding@1"
+SCIENTIFIC_PRODUCER_GIT_BINDING_SCHEMA = "agent-supervisor/scientific-git-executor-binding@2"
+SCIENTIFIC_CATALOGUE_PRODUCER_GIT_BINDING_SCHEMA = "agent-supervisor/scientific-git-executor-binding@3"
+SCIENTIFIC_NATIVE_OWNER_POLICY_SOURCE_COMMITMENT_SCHEMA = "agent-supervisor/scientific-native-owner-policy-source-commitment@1"
+SCIENTIFIC_PRIOR_SCHEDULER_POLICY_SHA256 = "4662bd8fe6caf6f2c048e3d7cff7abb4d80e5c875b21e02e204b1b89371b8286"
+SCIENTIFIC_SCHEDULER_POLICY_SHA256 = "f07cb14289fcb6275e4497dcc36be0dcf8bfc3dc87531ff7a9537eb85fdcc661"
+
+
+def _repair_scientific_separate_source_git_generation(root, head, tree, rows, selected, metadata_refs, label):
+    """Existing bounded genuine Git reader shared by closed producer/owner roles."""
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import checked_descriptor
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need, git_command
+    need(label in ("producer", "native owner"), "closed separate scientific source role required")
+    environment = {key: value for key, value in os.environ.items() if not key.startswith("GIT_")}
+    environment.update(GIT_CONFIG_NOSYSTEM="1", GIT_CONFIG_GLOBAL=os.devnull, GIT_OPTIONAL_LOCKS="0",
+                       GIT_TERMINAL_PROMPT="0", GIT_NO_LAZY_FETCH="1")
+    def git(*args):
+        return git_command(root, ["-c", "core.fsmonitor=false", "-c", "core.hooksPath=" + os.devnull, *args],
+                           timeout=3, environment=environment)
+    def generation():
+        need(git("rev-parse", "--show-toplevel").strip() == str(root)
+             and git("rev-parse", "--verify", "HEAD").strip() == head
+             and git("rev-parse", head + "^{tree}").strip() == tree
+             and git("status", "--porcelain=v1", "-z", "--untracked-files=all") == "",
+             label + " genuine Git root/HEAD/tree/clean state differs")
+    generation()
+    entries = git("ls-tree", "-r", "-z", "--full-tree", head)
+    need(len(entries.encode()) <= 4 * 1024**2, "finite " + label + " Git tree required")
+    actual = {}
+    for entry in entries.split("\0"):
+        if entry:
+            header, rel = entry.split("\t", 1); mode, kind, blob = header.split(" ")
+            need(kind in ("blob", "commit") and rel not in actual, "bounded " + label + " Git tree required")
+            actual[rel] = (kind, int(mode, 8) & 0o777, blob)
+    need(all(actual.get(rel) == ("blob", 0o755 if row["mode"] & 0o111 else 0o644, row["git_blob"])
+             for rel, row in rows.items()), label + " selected genuine Git inventory differs")
+    def close():
+        for pin in selected:
+            checked_descriptor(pin)
+            row = rows[Path(pin["path"]).relative_to(root).as_posix()]
+            need(stat.S_IMODE(Path(pin["path"]).lstat().st_mode) == row["mode"], label + " source mode changed during read")
+        for pin in metadata_refs:
+            checked_descriptor(pin)
+        generation()
+    return close
+
+
+def _repair_scientific_producer_git_binding(typed: dict, profile: dict, native_root: Path):
+    """Authenticate one separate producer Git generation; preserve native roots.
+
+    Version @2 retains the producer entrypoint and three genuine package
+    initializer descriptors. Explicit @3 also binds its single catalogue-parser
+    sibling through a source-only @2 commitment and exact CLI descriptor pair.
+    These descriptors are metadata evidence; no producer body is executed.
+    """
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import checked_descriptor, json_object
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need, git_command
+    def document(ref):
+        raw = checked_descriptor(ref)
+        need(len(raw) <= 4 * 1024**2, "finite producer Git metadata required")
+        return json_object(raw)
+    ref = typed["producer_source_commitment"]
+    commitment = document(ref)
+    catalogue_producer = typed.get("schema") == SCIENTIFIC_CATALOGUE_PRODUCER_GIT_BINDING_SCHEMA
+    commitment_keys = {"schema", "source_root", "source_commit", "source_tree", "source_inventory",
+        "source_operation_plan", "source_qualification", "runtime_activation_or_task_authority"}
+    if catalogue_producer:
+        commitment_keys.add("catalogue_parser")
+    need(set(commitment) == commitment_keys
+         and commitment["schema"] == ("agent-supervisor/scientific-producer-source-commitment@2"
+             if catalogue_producer else "agent-supervisor/scientific-producer-source-commitment@1")
+         and commitment["runtime_activation_or_task_authority"] is False,
+         "closed source-only producer Git commitment required")
+    root = Path(commitment["source_root"])
+    head, tree = commitment["source_commit"], commitment["source_tree"]
+    need(root.is_absolute() and ".." not in root.parts and root.resolve() == root
+         and root != native_root and root not in native_root.parents and native_root not in root.parents
+         and type(head) is str and re.fullmatch(r"[0-9a-f]{40}", head)
+         and type(tree) is str and re.fullmatch(r"[0-9a-f]{40}", tree),
+         "separate genuine producer Git root/HEAD/tree required")
+    inventory = document(commitment["source_inventory"])
+    document(commitment["source_operation_plan"])
+    document(commitment["source_qualification"])
+    need(set(inventory) == {"schema", "source_root", "source_commit", "source_tree", "file_count", "source_bytes", "files"}
+         and inventory["schema"] == "legal-ir-scientific-source-inventory/v1"
+         and all(inventory[key] == commitment[key] for key in ("source_root", "source_commit", "source_tree"))
+         and type(inventory["files"]) is list and 0 < len(inventory["files"]) <= 8192,
+         "producer inventory generation differs")
+    rows = {}
+    for row in inventory["files"]:
+        need(type(row) is dict and set(row) == {"path", "relative_path", "bytes", "sha256", "mode", "git_blob"},
+             "closed producer inventory row required")
+        rel = row["relative_path"]
+        need(type(rel) is str and rel and not Path(rel).is_absolute() and ".." not in Path(rel).parts
+             and Path(rel).as_posix() == rel and rel not in rows and row["path"] == str(root / rel)
+             and type(row["bytes"]) is int and 0 <= row["bytes"] <= 4 * 1024**2
+             and type(row["mode"]) is int and 0 <= row["mode"] <= 0o777 and not row["mode"] & 0o002
+             and type(row["sha256"]) is str and re.fullmatch(r"[0-9a-f]{64}", row["sha256"])
+             and type(row["git_blob"]) is str and re.fullmatch(r"[0-9a-f]{40}", row["git_blob"]),
+             "producer inventory path/body/mode identity differs")
+        rows[rel] = row
+    need(type(inventory["file_count"]) is int and inventory["file_count"] == len(rows)
+         and type(inventory["source_bytes"]) is int and inventory["source_bytes"] == sum(row["bytes"] for row in rows.values()),
+         "producer complete inventory population differs")
+    relatives = {"ipfs_accelerate_py/__init__.py", "ipfs_accelerate_py/agent_supervisor/__init__.py",
+        "ipfs_accelerate_py/agent_supervisor/rescue/__init__.py",
+        "ipfs_accelerate_py/agent_supervisor/rescue/scientific_executor.py"}
+    if catalogue_producer:
+        parser_relative = "ipfs_accelerate_py/agent_supervisor/rescue/native_catalogue_probe.py"
+        relatives.add(parser_relative)
+        parser = commitment["catalogue_parser"]
+        need(set(rows) == relatives and len(rows) == 5
+             and type(parser) is dict and set(parser) == {"path", "bytes", "sha256"}
+             and parser == {key: rows[parser_relative][key] for key in ("path", "bytes", "sha256")},
+             "exact five-file producer inventory and catalogue parser descriptor required")
+        argv = profile["unit"]["argv"]
+        need(argv.count("--catalogue-parser-source") == argv.count("--catalogue-parser-sha256") == 1,
+             "explicit catalogue parser CLI source and SHA pair required")
+        source_index, sha_index = argv.index("--catalogue-parser-source") + 1, argv.index("--catalogue-parser-sha256") + 1
+        need(source_index < len(argv) and sha_index < len(argv)
+             and argv[source_index] == parser["path"] and argv[sha_index] == parser["sha256"],
+             "catalogue parser CLI pair differs from producer commitment")
+    pins = profile["source_descriptors"]
+    selected = [pin for pin in pins if Path(pin["path"]).is_relative_to(root)]
+    need(len(selected) == len(relatives) and {Path(pin["path"]).relative_to(root).as_posix() for pin in selected} == relatives
+         and profile["main_entrypoint"] in selected
+         and profile["main_entrypoint"]["path"] == str(root / "ipfs_accelerate_py/agent_supervisor/rescue/scientific_executor.py")
+         and all(Path(profile[role]["path"]).is_relative_to(native_root) for role in
+             (("health_module", "driver_source") if catalogue_producer else ("health_module", "owner_source", "driver_source"))),
+         "exact separate producer entrypoint/parents and retained native roles required")
+    need(profile["unit"].get("environment", {}).get("PYTHONPATH") == str(native_root) + os.pathsep + profile["unit"]["working_directory"]
+         and profile["unit"]["argv"].count(profile["main_entrypoint"]["path"]) == 1,
+         "separate producer must preserve native-only Python search roots and exact entrypoint")
+    for pin in selected:
+        row = rows.get(Path(pin["path"]).relative_to(root).as_posix())
+        need(row is not None and pin == {key: row[key] for key in ("path", "bytes", "sha256")},
+             "producer profile source snapshot differs")
+        raw = checked_descriptor(pin)
+        need(stat.S_IMODE(Path(pin["path"]).lstat().st_mode) == row["mode"]
+             and hashlib.sha1(b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest() == row["git_blob"],
+             "producer physical source/mode differs from its committed Git blob")
+    return _repair_scientific_separate_source_git_generation(root, head, tree, rows, selected,
+        (ref, commitment["source_inventory"], commitment["source_operation_plan"], commitment["source_qualification"]), "producer")
+
+
+def _repair_scientific_native_owner_git_binding(typed: dict, profile: dict, native_root: Path):
+    """Read the one explicit separate native-owner successor; execute no body."""
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import checked_descriptor, json_object
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need
+    def document(ref):
+        raw = checked_descriptor(ref)
+        need(len(raw) <= 4 * 1024**2, "finite native owner Git metadata required")
+        return json_object(raw)
+    ref = typed["native_owner_source_commitment"]; commitment = document(ref)
+    transition = commitment.get("scheduler_policy_transition")
+    need(type(SCIENTIFIC_NATIVE_OWNER_POLICY_SOURCE_COMMITMENT_SCHEMA) is str
+         and set(commitment) == {"schema", "source_root", "source_commit", "source_tree", "source_inventory",
+             "source_operation_plan", "source_qualification", "owner_source", "prior_owner_source",
+             "native_backend_source", "scheduler_policy_transition", "runtime_activation_or_task_authority"}
+         and commitment["schema"] == SCIENTIFIC_NATIVE_OWNER_POLICY_SOURCE_COMMITMENT_SCHEMA
+         and commitment["runtime_activation_or_task_authority"] is False
+         and type(transition) is dict and set(transition) == {"prior_sha256", "target_sha256"}
+         and transition["prior_sha256"] == SCIENTIFIC_PRIOR_SCHEDULER_POLICY_SHA256
+         and transition["target_sha256"] == SCIENTIFIC_SCHEDULER_POLICY_SHA256,
+         "closed explicit known-policy native owner commitment required")
+    root = Path(commitment["source_root"]); head, tree = commitment["source_commit"], commitment["source_tree"]
+    producer_root = Path(document(typed["producer_source_commitment"])["source_root"])
+    need(root.is_absolute() and ".." not in root.parts and root.resolve() == root
+         and all(root != other and root not in other.parents and other not in root.parents for other in (native_root, producer_root))
+         and type(head) is str and re.fullmatch(r"[0-9a-f]{40}", head)
+         and type(tree) is str and re.fullmatch(r"[0-9a-f]{40}", tree),
+         "separate genuine native owner Git root/HEAD/tree required")
+    inventory = document(commitment["source_inventory"])
+    document(commitment["source_operation_plan"]); document(commitment["source_qualification"])
+    need(set(inventory) == {"schema", "source_root", "source_commit", "source_tree", "file_count", "source_bytes", "files"}
+         and inventory["schema"] == "legal-ir-scientific-source-inventory/v1"
+         and all(inventory[key] == commitment[key] for key in ("source_root", "source_commit", "source_tree"))
+         and type(inventory["files"]) is list and len(inventory["files"]) == 4,
+         "exact four-file native owner inventory generation required")
+    rows = {}
+    for row in inventory["files"]:
+        need(type(row) is dict and set(row) == {"path", "relative_path", "bytes", "sha256", "mode", "git_blob"},
+             "closed native owner inventory row required")
+        relative = row["relative_path"]
+        need(type(relative) is str and relative and not Path(relative).is_absolute() and ".." not in Path(relative).parts
+             and Path(relative).as_posix() == relative and relative not in rows and row["path"] == str(root / relative)
+             and type(row["bytes"]) is int and 0 <= row["bytes"] <= 4 * 1024**2
+             and type(row["mode"]) is int and 0 <= row["mode"] <= 0o777 and not row["mode"] & 0o002
+             and type(row["sha256"]) is str and re.fullmatch(r"[0-9a-f]{64}", row["sha256"])
+             and type(row["git_blob"]) is str and re.fullmatch(r"[0-9a-f]{40}", row["git_blob"]),
+             "native owner inventory path/body/mode identity differs")
+        rows[relative] = row
+    relative = "ipfs_accelerate_py/agent_supervisor/rescue/original_embedded_observation_owner.py"
+    relatives = {"ipfs_accelerate_py/__init__.py", "ipfs_accelerate_py/agent_supervisor/__init__.py",
+        "ipfs_accelerate_py/agent_supervisor/rescue/__init__.py", relative}
+    selected = [pin for pin in profile["source_descriptors"] if Path(pin["path"]).is_relative_to(root)]
+    owner = commitment["owner_source"]; prior = commitment["prior_owner_source"]
+    backend = commitment["native_backend_source"]
+    need(type(backend) is dict and set(backend) == {"path", "bytes", "sha256"}
+         and backend == profile["driver_source"]
+         and backend["path"] == str(native_root / "ipfs_accelerate_py/agent_supervisor/rescue/native_embedded_observation_driver.py")
+         and backend in profile["source_descriptors"], "retained native backend descriptor and source role required")
+    checked_descriptor(backend)
+    need(set(rows) == relatives and type(inventory["file_count"]) is int and inventory["file_count"] == 4
+         and type(inventory["source_bytes"]) is int and inventory["source_bytes"] == sum(row["bytes"] for row in rows.values())
+         and len(selected) == 4 and {Path(pin["path"]).relative_to(root).as_posix() for pin in selected} == relatives
+         and owner == profile["owner_source"] and owner in selected and owner["path"] == str(root / relative)
+         and type(prior) is dict and set(prior) == {"path", "bytes", "sha256"}
+         and prior["path"] == str(native_root / relative)
+         and prior in profile["source_descriptors"],
+         "exact separate native owner and retained prior native source roles required")
+    checked_descriptor(prior)
+    for pin in selected:
+        row = rows[Path(pin["path"]).relative_to(root).as_posix()]
+        need(pin == {key: row[key] for key in ("path", "bytes", "sha256")}, "native owner profile source snapshot differs")
+        raw = checked_descriptor(pin)
+        need(stat.S_IMODE(Path(pin["path"]).lstat().st_mode) == row["mode"]
+             and hashlib.sha1(b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest() == row["git_blob"],
+             "native owner physical source/mode differs from its committed Git blob")
+    close = _repair_scientific_separate_source_git_generation(root, head, tree, rows, selected,
+        (ref, commitment["source_inventory"], commitment["source_operation_plan"], commitment["source_qualification"], prior, backend), "native owner")
+    return close, commitment
+
+
+def _repair_scientific_git_binding(binding: dict, git_binding: dict, profile: dict, release: Path) -> None:
+    """Authenticate an explicit existing Git executor; grant no source repair authority.
+
+    The unchanged Release parser executes below. This function reads metadata,
+    hashes sources and issues fixed read-only Git commands through the existing
+    owner, reusing only the trusted original metadata parser without importing
+    the external SDK, invoking main or executing an observer.
+    """
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import checked_descriptor, json_object
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need, git_command
+    def document(ref):
+        raw = checked_descriptor(ref)
+        need(len(raw) <= 4 * 1024**2, "finite scientific Git metadata required")
+        return json_object(raw)
+    typed = document(git_binding)
+    separate_native_owner = (set(typed) == {"schema", "profile", "source_commitment", "observer_plan",
+                                 "producer_source_commitment", "native_owner_source_commitment"}
+                             and typed["schema"] == SCIENTIFIC_CATALOGUE_PRODUCER_GIT_BINDING_SCHEMA)
+    separate_producer = ((set(typed) == {"schema", "profile", "source_commitment", "observer_plan", "producer_source_commitment"}
+                          and typed["schema"] == SCIENTIFIC_PRODUCER_GIT_BINDING_SCHEMA) or separate_native_owner)
+    need(((set(typed) == {"schema", "profile", "source_commitment", "observer_plan"}
+           and typed["schema"] == SCIENTIFIC_GIT_BINDING_SCHEMA) or separate_producer)
+         and typed["profile"] == binding,
+         "closed explicit scientific Git/profile binding required")
+    commitment = document(typed["source_commitment"])
+    need(set(commitment) == {"schema", "source_root", "source_commit", "source_tree", "source_inventory",
+         "original_import_Git_binding", "capsule_DATA", "source_operation_plan", "source_qualification",
+         "source_qualification_successors", "runtime_activation_or_task_authority"}
+         and commitment["schema"] == "legal-ir-scientific-source-commitment/v1"
+         and commitment["runtime_activation_or_task_authority"] is False,
+         "scientific source-only Git commitment required")
+    root = Path(commitment["source_root"])
+    head, tree = commitment["source_commit"], commitment["source_tree"]
+    need(root.is_absolute() and ".." not in root.parts and root.resolve() == root
+         and type(head) is str and re.fullmatch(r"[0-9a-f]{40}", head)
+         and type(tree) is str and re.fullmatch(r"[0-9a-f]{40}", tree),
+         "exact genuine scientific Git root/HEAD/tree required")
+    producer_close = _repair_scientific_producer_git_binding(typed, profile, root) if separate_producer else None
+    owner_close, owner_commitment = (_repair_scientific_native_owner_git_binding(typed, profile, root)
+        if separate_native_owner else (None, None))
+    inventory = document(commitment["source_inventory"])
+    capsule = document(commitment["capsule_DATA"])
+    original = document(commitment["original_import_Git_binding"])
+    document(commitment["source_operation_plan"])
+    need(set(inventory) == {"schema", "source_root", "source_commit", "source_tree", "file_count", "source_bytes", "files"}
+         and inventory["schema"] == "legal-ir-scientific-source-inventory/v1"
+         and set(capsule) == {"schema", "source_root", "source_commit", "source_tree", "source_count", "source_bytes", "sources", "DATA_not_import_or_execution_credit"}
+         and capsule["schema"] == "legal-ir-scientific-capsule-DATA-scope/v1"
+         and capsule["DATA_not_import_or_execution_credit"] is True
+         and all(value[key] == commitment[key] for value in (inventory, capsule)
+                 for key in ("source_root", "source_commit", "source_tree")),
+         "scientific inventory/capsule generation differs")
+    def population(rows):
+        need(type(rows) is list and 0 < len(rows) <= 8192, "finite scientific source population required")
+        result = {}
+        for row in rows:
+            need(type(row) is dict and set(row) == {"path", "relative_path", "bytes", "sha256", "mode", "git_blob"},
+                 "closed scientific inventory row required")
+            rel = row["relative_path"]
+            need(type(rel) is str and rel and not Path(rel).is_absolute() and ".." not in Path(rel).parts
+                 and Path(rel).as_posix() == rel and rel not in result and row["path"] == str(root / rel)
+                 and type(row["bytes"]) is int and 0 <= row["bytes"] <= 4 * 1024**2
+                 and type(row["mode"]) is int and row["mode"] in (0o644, 0o755)
+                 and type(row["sha256"]) is str and re.fullmatch(r"[0-9a-f]{64}", row["sha256"])
+                 and type(row["git_blob"]) is str and re.fullmatch(r"[0-9a-f]{40}", row["git_blob"]),
+                 "scientific inventory path/body identity differs")
+            result[rel] = row
+        return result
+    rows = population(inventory["files"]); archived = population(capsule["sources"])
+    need(type(inventory["file_count"]) is int and inventory["file_count"] == len(rows)
+         and type(inventory["source_bytes"]) is int and inventory["source_bytes"] == sum(r["bytes"] for r in rows.values())
+         and type(capsule["source_count"]) is int and capsule["source_count"] == len(archived)
+         and type(capsule["source_bytes"]) is int and capsule["source_bytes"] == sum(r["bytes"] for r in archived.values())
+         and all(rows.get(rel) == row for rel, row in archived.items()),
+         "scientific complete inventory/capsule population differs")
+    # The qualified original driver owns closed CLI2/capsule parsing below.
+    # Here the archived selection is joined to the explicit inventory only.
+    need(original.get("source_root") == str(root) and original.get("source_head") == head,
+         "scientific original capsule generation differs")
+    need(type(original.get("blobs")) is list and len(original["blobs"]) == len(archived)
+         and {row["relative_path"] for row in original["blobs"]} == set(archived)
+         and all(row == {"relative_path": rel, "bytes": archived[rel]["bytes"],
+                        "object_id": archived[rel]["git_blob"]}
+                 for row in original["blobs"] for rel in (row["relative_path"],)),
+         "scientific original capsule/inventory selection differs")
+    plan = document(typed["observer_plan"])
+    need(plan.get("accelerate_root") == str(root) and plan.get("task_scope") == profile["task_scope"],
+         "scientific observer plan/root/scope differs")
+    cli = plan["native_metadata_cli"]
+    need(cli.get("runtime_root") == str(root) and cli.get("import_head_capsule_Git") == original,
+         "scientific CLI2 source/capsule differs")
+    project = cli["project_import_plan"]; observation = cli["observation_binding"]
+    need(type(project) is dict and project.get("accelerate_root") == str(root)
+         and project.get("datasets_root") == cli["cwd"] == profile["unit"]["working_directory"]
+         and project.get("publication_root") == cli["cwd"]
+         and type(observation) is dict and observation.get("task_scope") == profile["task_scope"]
+         and all(observation.get(k) == profile["catalogue"][k] for k in ("plan_root_cid", "repository_tree_id")),
+         "scientific producer cwd/catalogue/observation scope differs")
+    roles = {"main_entrypoint": "rescue/scientific_executor.py", "health_module": "rescue/native_executor_health.py",
+             "owner_source": "rescue/original_embedded_observation_owner.py", "driver_source": "rescue/native_embedded_observation_driver.py"}
+    if separate_producer:
+        del roles["main_entrypoint"]
+    if separate_native_owner:
+        del roles["owner_source"]
+    pins = {pin["path"]: pin for pin in profile["source_descriptors"]}
+    critical = [(profile[role], "ipfs_accelerate_py/agent_supervisor/" + rel) for role, rel in roles.items()]
+    if separate_native_owner:
+        critical.append((owner_commitment["prior_owner_source"], "ipfs_accelerate_py/agent_supervisor/rescue/original_embedded_observation_owner.py"))
+    critical += [(cli["pre_body_guard"], "ipfs_accelerate_py/agent_supervisor/rescue/project_import_source_guard.py"),
+                 (observation["observer_source"], "ipfs_accelerate_py/agent_supervisor/todo_daemon/native_owner_bootstrap.py"),
+                 (original["route_source"], "ipfs_accelerate_py/agent_implementation_route.py")]
+    def body_matches_Git(pin, row):
+        raw = checked_descriptor(pin)
+        need(hashlib.sha1(b"blob " + str(len(raw)).encode("ascii") + b"\0" + raw).hexdigest() == row["git_blob"],
+             "scientific physical source differs from its committed Git blob")
+    for pin, rel in critical:
+        row = rows.get(rel)
+        need(type(pin) is dict and row is not None and pin == {key: row[key] for key in ("path", "bytes", "sha256")}
+             and pins.get(pin["path"]) == pin and pin in project["source_pins"]
+             and cli["source_sha256"].get(pin["path"]) == pin["sha256"],
+             "scientific source role/inventory/import-plan differs")
+        body_matches_Git(pin, row)
+    for pin in profile["source_descriptors"]:
+        if Path(pin["path"]).is_relative_to(root):
+            row = rows.get(Path(pin["path"]).relative_to(root).as_posix())
+            need(row is not None and pin == {key: row[key] for key in ("path", "bytes", "sha256")},
+                 "scientific profile source snapshot differs")
+            body_matches_Git(pin, row)
+    argv = profile["unit"]["argv"]
+    need(argv.count("--config") == argv.count("--config-sha256") == 1,
+         "scientific producer service configuration required")
+    config_path = argv[argv.index("--config") + 1]; config_hash = argv[argv.index("--config-sha256") + 1]
+    need(config_path in pins and pins[config_path]["sha256"] == config_hash,
+         "scientific producer configuration source differs")
+    config = document(pins[config_path]); template = document(config["idle_template_ref"])
+    need(config["schema"] == "agent-supervisor/scientific-executor-service@1"
+         and config["profile_path"] == binding["path"]
+         and config["catalogue"].get("board_id") == "legal-ir-scientific"
+         and all(config["catalogue"].get(k) == profile["catalogue"][k] for k in
+                 ("board_namespace", "plan_root_cid", "repository_tree_id", "population_sha256"))
+         and template["schema"] == "agent-supervisor/scientific-executor-cycle-template@1"
+         and template["kind"] == "genuine_scoped_idle" and template["plan_ref"] == typed["observer_plan"],
+         "scientific profile/config/template/observer-plan chain differs")
+    request = document(template["request_ref"])
+    need(request["schema"] == "legal-ir-original-native-control-request/v1" and request["cwd"] == cli["cwd"]
+         and request["source_roots"][0] == cli["cwd"]
+         and all(request["source_sha256"].get(pin["path"]) == pin["sha256"] for pin, _ in critical),
+         "scientific original observer request source/cwd differs")
+    if separate_native_owner:
+        need(request.get("expected_scheduler_policy_sha256") == owner_commitment["scheduler_policy_transition"]["target_sha256"]
+             and all(type(request.get(key)) is int and request[key] == value for key, value in
+                 {"cpu_slots":1, "memory_mb":1536, "child_process_slots":8,
+                  "storage_bytes":384 * 1024**2, "timeout_seconds":300}.items())
+             and request["source_sha256"].get(profile["owner_source"]["path"]) == profile["owner_source"]["sha256"],
+             "native owner request policy/source or finite envelope differs")
+    environment = {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+    environment.update(GIT_CONFIG_NOSYSTEM="1", GIT_CONFIG_GLOBAL=os.devnull, GIT_OPTIONAL_LOCKS="0",
+                       GIT_TERMINAL_PROMPT="0", GIT_NO_LAZY_FETCH="1")
+    def git(*args):
+        return git_command(root, ["-c", "core.fsmonitor=false", "-c", "core.hooksPath=" + os.devnull, *args],
+                           timeout=3, environment=environment)
+    def generation():
+        need(git("rev-parse", "--show-toplevel").strip() == str(root)
+             and git("rev-parse", "--verify", "HEAD").strip() == head
+             and git("rev-parse", head + "^{tree}").strip() == tree
+             and git("status", "--porcelain=v1", "-z", "--untracked-files=all") == "",
+             "scientific genuine Git root/HEAD/tree/clean state differs")
+    generation()
+    entries = git("ls-tree", "-r", "-z", "--full-tree", head)
+    need(len(entries.encode()) <= 4 * 1024**2, "finite scientific Git tree required")
+    actual = {}
+    for entry in entries.split("\0"):
+        if not entry:
+            continue
+        header, rel = entry.split("\t", 1); mode, kind, blob = header.split(" ")
+        need(kind in ("blob", "commit") and rel not in actual, "bounded scientific Git tree required")
+        actual[rel] = (kind, int(mode, 8) & 0o777, blob)
+    # The public inventory is a selected source population, not the full repo.
+    # Unselected README/docs/gitlinks grant no import or execution authority.
+    need(all(actual.get(rel) == ("blob", row["mode"], row["git_blob"]) for rel, row in rows.items()),
+         "scientific selected genuine Git inventory differs")
+    # Reuse the already qualified original metadata API at its genuine role
+    # path, after authenticating all declared physical bodies against Git. Its
+    # stdlib-only module body does not call main, import the SDK, open the DB,
+    # create a process, reserve resources or execute an observation.
+    import types
+    driver = profile["driver_source"]; driver_raw = checked_descriptor(driver)
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import ordinary_bytes
+    trusted_driver = release / "ipfs_accelerate_py/agent_supervisor/rescue/native_embedded_observation_driver.py"
+    need(ordinary_bytes(trusted_driver, 4 * 1024**2) == driver_raw,
+         "scientific Git parser differs from the trusted selected immutable component")
+    name = "_ipfs_repair_Git_driver_" + driver["sha256"]
+    need(name not in sys.modules, "scientific driver metadata namespace is already occupied")
+    module = types.ModuleType(name); module.__file__ = driver["path"]; module.__package__ = ""
+    sys.modules[name] = module
+    try:
+        exec(compile(driver_raw, driver["path"], "exec", dont_inherit=True), module.__dict__)
+        parsed = module.configuration(plan)
+        need(type(parsed) is dict and parsed == cli, "original scientific CLI2 metadata parser differs")
+    except RuntimeError as error:
+        raise ValueError("original scientific CLI2 metadata parser rejected plan") from error
+    finally:
+        if sys.modules.get(name) is module:
+            del sys.modules[name]
+    # Close metadata and live generation after all reads; no database is opened.
+    for ref in (binding, git_binding, typed["source_commitment"], typed["observer_plan"], commitment["source_inventory"],
+                commitment["capsule_DATA"], commitment["original_import_Git_binding"], pins[config_path],
+                config["idle_template_ref"], template["request_ref"]):
+        checked_descriptor(ref)
+    generation()
+    if producer_close is not None:
+        producer_close()
+    if owner_close is not None:
+        owner_close()
+
+
+def _repair_scientific_profile(binding: dict, release: Path, git_binding: dict | None = None) -> dict:
+    """Call the existing metadata parser from its actual immutable release file."""
+    import hashlib
+    import types
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import checked_descriptor, json_object
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need
+    profile = json_object(checked_descriptor(binding))
+    roles = {"main_entrypoint": "scientific_executor.py", "health_module": "native_executor_health.py",
+             "owner_source": "original_embedded_observation_owner.py",
+             "driver_source": "native_embedded_observation_driver.py"}
+    if git_binding is not None:
+        _repair_scientific_git_binding(binding, git_binding, profile, release)
+    for role, name in roles.items():
+        pin = profile.get(role)
+        need(type(pin) is dict and (git_binding is not None or pin.get("path") == str(
+            release / "ipfs_accelerate_py/agent_supervisor/rescue" / name)),
+            "scientific profile role must use the selected immutable release")
+        raw = checked_descriptor(pin)
+        need(len(raw) <= 4 * 1024**2, "finite scientific Python source required")
+    pin = profile["health_module"]
+    if git_binding is not None:
+        from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import descriptor
+        verifier = descriptor(release / "ipfs_accelerate_py/agent_supervisor/rescue/native_executor_health.py")
+        need((verifier["bytes"], verifier["sha256"]) == (pin["bytes"], pin["sha256"]),
+             "selected immutable scientific verifier differs from the pinned producer")
+        pin = verifier
+    raw = checked_descriptor(pin)
+    name = "_ipfs_repair_release_health_" + hashlib.sha256(raw).hexdigest()
+    need(name not in sys.modules, "scientific metadata parser namespace is already occupied")
+    module = types.ModuleType(name)
+    module.__file__ = pin["path"]
+    module.__package__ = ""
+    sys.modules[name] = module
+    try:
+        exec(compile(raw, pin["path"], "exec", dont_inherit=True), module.__dict__)
+        parsed = module._profile(binding)
+        need(type(parsed) is dict and parsed == profile, "canonical scientific profile parser differs")
+        if git_binding is not None:
+            _repair_scientific_git_binding(binding, git_binding, parsed, release)
+        return parsed
+    finally:
+        if sys.modules.get(name) is module:
+            del sys.modules[name]
+
+
+def _repair_scientific_configuration(config: dict, binding: dict, release: Path, git_binding: dict | None = None) -> dict:
+    """Compose one explicit scientific profile without granting runtime authority."""
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need
+    profile = _repair_scientific_profile(binding, release, git_binding)
+    value = json.loads(json.dumps(config))
+    boards = value.get("boards")
+    need(type(boards) is list and len(boards) == 2
+         and all(type(board) is dict and type(board.get("id")) is str for board in boards)
+         and {board.get("id") for board in boards} == {"legal-ir", "legal-ir-scientific"},
+         "the two exact existing boards are required for a scientific profile")
+    board = next(board for board in boards if board["id"] == "legal-ir-scientific")
+    declared_git = board.get("native_executor_git_binding")
+    need(declared_git is None or declared_git == git_binding,
+         "existing scientific Git binding cannot be silently changed or removed")
+    if git_binding is not None:
+        need(board.get("native_executor_binding") in (None, binding),
+             "scientific Git binding cannot replace another producer profile")
+        board["native_executor_git_binding"] = json.loads(json.dumps(git_binding))
+    catalogue = board.get("native_catalogue_binding")
+    fields = ("board_namespace", "plan_root_cid", "repository_tree_id", "population_sha256")
+    need(type(catalogue) is dict and all(profile["catalogue"].get(k) == catalogue.get(k)
+         and k in catalogue for k in fields), "scientific profile belongs to another catalogue")
+    probe = board.get("probe")
+    need(type(probe) is dict and type(probe.get("argv")) is list
+         and all(type(arg) is str for arg in probe["argv"]), "declared scientific probe required")
+    argv = probe["argv"]
+    need(argv.count("-m") == 1 and argv[argv.index("-m") + 1:] and
+         argv[argv.index("-m") + 1] == "ipfs_accelerate_py.agent_supervisor.rescue.native_catalogue_probe",
+         "existing canonical scientific probe required")
+    for flag, expected in (("--board", board["id"]), ("--namespace", catalogue["board_namespace"]),
+            ("--plan-root-cid", catalogue["plan_root_cid"]),
+            ("--repository-tree-id", catalogue["repository_tree_id"]),
+            ("--population-sha256", catalogue["population_sha256"])):
+        need(argv.count(flag) == 1 and argv.index(flag) + 1 < len(argv)
+             and argv[argv.index(flag) + 1] == expected, "scientific probe catalogue binding differs")
+    options = ("--executor-profile", "--executor-profile-bytes", "--executor-profile-sha256")
+    old = board.get("native_executor_binding")
+    remove = set()
+    if old is not None:
+        need(type(old) is dict and set(old) == {"path", "bytes", "sha256"}
+             and type(old["path"]) is str and type(old["bytes"]) is int
+             and type(old["sha256"]) is str, "existing scientific descriptor must remain closed")
+        expected = (old["path"], str(old["bytes"]), old["sha256"])
+        for flag, argument in zip(options, expected):
+            need(argv.count(flag) == 1 and argv.index(flag) + 1 < len(argv)
+                 and argv[argv.index(flag) + 1] == argument, "existing scientific probe/profile join differs")
+            index = argv.index(flag)
+            remove.update((index, index + 1))
+    else:
+        need(not any(flag in argv for flag in options), "unbound scientific profile arguments refused")
+    probe["argv"] = [arg for index, arg in enumerate(argv) if index not in remove]
+    for flag, argument in zip(options, (binding["path"], str(binding["bytes"]), binding["sha256"])):
+        probe["argv"].extend((flag, argument))
+    board["native_executor_binding"] = json.loads(json.dumps(binding))
+    return value
+
+
+def prepare_existing_repair_configuration(source: Path, contract: dict, bindings: dict, *, scientific_executor_binding: dict | None = None, scientific_executor_git_binding: dict | None = None) -> dict:
+    """Explicit operator grant for the existing profile; never mint an epoch.
+
+    The caller provides the complete finite epoch and policy. This function
+    proves the real selected commit/tree/files under the public source owner,
+    then reuses the same exact profile CAS renderer as autonomous source-only
+    successors. It does not touch the legacy job or start/stop a service.
+    """
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import (
+        checked_policy, public_source_lease, git_command, need)
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import descriptor, digest, ordinary_bytes
+    need(type(bindings) is dict and set(bindings) == {"candidate_policy", "candidate_runtime", "authorization_epoch", "source_snapshot"}
+         and bindings["source_snapshot"] is None, "explicit initial bindings and no supplied snapshot required")
+    selected = bindings["candidate_policy"]
+    need(Path(selected["repository_root"]) == source, "initial source root differs from the explicit policy")
+    argv = bindings["candidate_runtime"]["validation_owner"]["argv"]
+    need(argv.count("--policy") == argv.count("--policy-sha256") == 1, "maintained public owner profile binding required")
+    owner_policy = checked_policy(Path(argv[argv.index("--policy") + 1]), argv[argv.index("--policy-sha256") + 1], current_owner=False)
+    owner_pin = {"path": str(Path(argv[argv.index("--policy") + 1])),
+        "bytes": len(ordinary_bytes(Path(argv[argv.index("--policy") + 1]))), "sha256": argv[argv.index("--policy-sha256") + 1]}
+    nested = render_control_owner_commands(owner_pin,
+        validation_timeout_seconds=bindings["candidate_runtime"]["validation_owner"]["timeout_seconds"],
+        adoption_timeout_seconds=bindings["candidate_runtime"]["adoption_owner"]["timeout_seconds"])
+    need(("validation_admission_retry" in bindings["candidate_runtime"]) == ("validation_admission_retry" in nested),
+         "initial validation retry owner/runtime authority differs")
+    need(all(bindings["candidate_runtime"][key] == value for key, value in nested.items()),
+         "initial nested owners differ from the immutable control renderer")
+    control_root = Path(owner_policy["control_release"]["root"])
+    need(source != control_root and source not in control_root.parents and control_root not in source.parents,
+         "mutable selected source and trusted control release must be separate")
+    if "external_fixture_profile" in owner_policy["validation"]:
+        control_root = Path(owner_policy["control_release"]["root"])
+        for trusted in owner_policy["validation"]["trusted_tests"]:
+            relative = Path(trusted["path"]).relative_to(control_root).as_posix()
+            need(relative in selected["source_paths"] and relative not in selected["allowed_paths"],
+                 "initial Git source policy must already include unchanged trusted tests outside provider writes")
+            actual = descriptor(source / relative)
+            need((actual["bytes"], actual["sha256"]) == (trusted["bytes"], trusted["sha256"]),
+                 "initial active test generation differs from immutable control inputs")
+    with public_source_lease(owner_policy)(source, mode="read", timeout_seconds=selected["git_timeout_seconds"]):
+        need(git_command(source, ["rev-parse", "--verify", "HEAD"], timeout=selected["git_timeout_seconds"]).strip()
+             == selected["base_commit"], "initial source HEAD is not the declared genuine snapshot")
+        tree = git_command(source, ["rev-parse", selected["base_commit"] + "^{tree}"], timeout=selected["git_timeout_seconds"]).strip()
+        manifest = {}
+        for rel in selected["source_paths"]:
+            pin = descriptor(source / rel)
+            raw = git_command(source, ["show", selected["base_commit"] + ":" + rel], timeout=selected["git_timeout_seconds"]).encode("utf-8")
+            need(raw == ordinary_bytes(source / rel, 4 * 1024**2), "initial selected source differs from its real Git object")
+            manifest[rel] = {"bytes": pin["bytes"], "sha256": pin["sha256"],
+                             "executable": bool((source / rel).lstat().st_mode & 0o111)}
+        commitment = digest({"base_commit": selected["base_commit"], "manifest": manifest})
+    snapshot = {"prior_policy": selected, "new_commit": selected["base_commit"], "new_tree": tree,
+                "source_commitment": commitment, "manifest": manifest}
+    concrete = {**bindings, "source_snapshot": snapshot}
+    optional = {}
+    if scientific_executor_binding is not None or scientific_executor_git_binding is not None:
+        optional = {"scientific_executor_binding": scientific_executor_binding,
+                    "scientific_executor_git_binding": scientific_executor_git_binding}
+    return prepare_repair_upgrade(source, contract, commitment, initial_bindings=concrete, **optional)
+
+
+def prepare_repair_upgrade(source: Path, contract: dict, source_commitment: str, *, initial_bindings: dict | None = None, scientific_executor_binding: dict | None = None, scientific_executor_git_binding: dict | None = None) -> dict:
+    """One existing profile, exact beforeimages, immutable source population.
+
+    This only stages files. The separate activation owner, after the original
+    repair job closes, applies the reviewed CAS and bounded service commands.
+    """
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import (
+        checked_descriptor, descriptor, digest, json_object, ordinary_bytes)
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need
+    fields = {"schema", "profile", "config", "inventory", "units", "prior_job",
+              "expected_loaded_before", "job_unit", "source_successor", "initial_release"}
+    need(type(contract) is dict and set(contract) == fields
+         and contract["schema"] == "agent-supervisor/repair-profile-upgrade-contract@1"
+         and contract["profile"] == REPAIR_PROFILE, "one explicit existing profile contract required")
+    raw = checked_descriptor(contract["config"]); old = json_object(raw)
+    checked_descriptor(contract["inventory"]); checked_descriptor(contract["prior_job"])
+    boards = old["boards"]
+    need(type(boards) is list and bool(boards) and all(type(board) is dict and type(board.get("id")) is str for board in boards)
+         and len({board["id"] for board in boards}) == len(boards), "existing uniquely named fleet boards required")
+    selected = [index for index, board in enumerate(boards) if board["id"] == REPAIR_PROFILE]
+    need(len(selected) == 1, "one existing legal-ir board must be selected")
+    board_index = selected[0]
+    state = Path(old["state_dir"])
+    need(contract["prior_job"]["path"] == str(state / "repairs/legal-ir/job.json"), "legacy history binding differs")
+    need(set(contract["units"]) == {"watchdog", "repair"}, "two exact existing units required")
+    for suffix, pin in contract["units"].items():
+        checked_descriptor(pin)
+        need(Path(pin["path"]).name == "ipfs-taskboard-" + REPAIR_PROFILE + "-" + suffix + ".service", "foreign unit target")
+    successor = contract["source_successor"]
+    config = json.loads(json.dumps(old))
+    if initial_bindings is None:
+        need(successor is not None and successor["source_commitment"] == source_commitment,
+             "source successor belongs to another freeze")
+        need(old["repair_worker"]["candidate_policy"] == successor["prior_policy"], "profile source preimage differs")
+        config["repair_worker"]["candidate_policy"] = successor["successor_policy"]
+        config["repair_worker"]["candidate_runtime"]["source_descriptors"] = successor["successor_source_descriptors"]
+        need(old["boards"] == config["boards"], "source upgrade cannot mint an epoch")
+        render = successor
+    else:
+        need(successor is None and set(initial_bindings) == {"candidate_policy", "candidate_runtime", "authorization_epoch", "source_snapshot"},
+             "one explicit initial policy/runtime/epoch binding required")
+        need("candidate_policy" not in old["repair_worker"] and "candidate_runtime" not in old["repair_worker"]
+             and "repair_authorization_epoch" not in old["boards"][board_index], "existing productive authority requires a separate reviewed transition")
+        config["repair_worker"]["candidate_policy"] = initial_bindings["candidate_policy"]
+        config["repair_worker"]["candidate_runtime"] = initial_bindings["candidate_runtime"]
+        config["boards"][board_index]["repair_authorization_epoch"] = initial_bindings["authorization_epoch"]
+        render = initial_bindings["source_snapshot"]
+        need(render["source_commitment"] == source_commitment and render["prior_policy"] == initial_bindings["candidate_policy"],
+             "initial source snapshot differs from explicit source policy")
+        from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import require_current_authorization
+        from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate import parse_candidate_policy
+        from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_runtime import parse_runtime_policy
+        require_current_authorization(config, config["boards"][board_index])
+        parsed = parse_candidate_policy(config["repair_worker"])
+        need(parsed is not None, "initial selected candidate policy missing")
+        parse_runtime_policy(config["repair_worker"], parsed)
+    need(len(config["boards"]) == len(boards)
+         and [board["id"] for board in config["boards"]] == [board["id"] for board in boards]
+         and all(config["boards"][index] == board for index, board in enumerate(boards) if index != board_index),
+         "every other existing board must remain exactly unchanged")
+    expected_board = boards[board_index] if initial_bindings is None else {
+        **boards[board_index], "repair_authorization_epoch": initial_bindings["authorization_epoch"]}
+    need(config["boards"][board_index] == expected_board, "selected board changes exceed the explicit finite epoch grant")
+    need(old["repair_worker"]["job_unit"] == contract["job_unit"], "original job unit differs")
+    home = Path(contract["config"]["path"]).parents[3]
+    need(home / ".config/ipfs-taskboard-watchdog" / REPAIR_PROFILE / "fleet.json" == Path(contract["config"]["path"]), "canonical existing profile layout required")
+    science = next((board for board in config["boards"] if board["id"] == "legal-ir-scientific"), {})
+    if scientific_executor_binding is None and science.get("native_executor_git_binding") is not None:
+        need(scientific_executor_git_binding in (None, science["native_executor_git_binding"]),
+             "explicit scientific Git binding differs from the existing producer")
+        scientific_executor_binding = science.get("native_executor_binding")
+        scientific_executor_git_binding = science["native_executor_git_binding"]
+    need(scientific_executor_git_binding is None or scientific_executor_binding is not None,
+         "scientific Git binding requires its exact profile")
+    release, contents, selected_files = _finite_repair_release(source, home, render["prior_policy"]["source_paths"])
+    config["runtime_release"] = str(release)
+    if scientific_executor_binding is not None:
+        config = _repair_scientific_configuration(config, scientific_executor_binding, release, scientific_executor_git_binding)
+    sources = {name: descriptor(release / PACKAGE_MODULES[name] if name in PACKAGE_MODULES else
+        release / "ipfs_accelerate_py/agent_supervisor/rescue" / (name + ".py")) for name in contents}
+    config = _repair_release_liveness_identity(config, release, sources["fleet_watchdog"])
+    commitment_path = release / "repair-source-commitment.json"
+    commitment = encoded_json({"schema": "agent-supervisor/repair-source-release@1",
+        "source_commitment": source_commitment, "sources": sources,
+        "snapshot_commit": render["new_commit"], "snapshot_tree": render["new_tree"],
+        "selected_sources": {rel: descriptor(release / rel) for rel in selected_files}})
+    if commitment_path.exists():
+        need(ordinary_bytes(commitment_path) == commitment, "immutable source commitment differs")
+    else:
+        atomic_write(commitment_path, commitment, mode=0o400)
+    if initial_bindings is not None:
+        need(descriptor(commitment_path) == contract["initial_release"],
+             "initial immutable release commitment differs from the explicit grant")
+    updates = []
+    for suffix, module, mode in (("watchdog", "fleet_watchdog", ["--apply"]), ("repair", "fleet_repair", ["run"])):
+        pin = contract["units"][suffix]
+        data = generic_service_unit(sys.executable, Path(render["prior_policy"]["repository_root"]), release,
+            Path(contract["config"]["path"]), REPAIR_PROFILE + "-" + suffix, module, mode)
+        text = data.decode()
+        lines = text.splitlines()
+        argv = [sys.executable, "-P", "-B", str(release / "ipfs_accelerate_py/agent_supervisor/rescue/repair_candidate_owners.py"),
+                "serve", "--service", suffix, "--config", contract["config"]["path"]]
+        lines = [("ExecStart=" + " ".join(unit_quote(a) for a in argv)) if line.startswith("ExecStart=") else
+                 ("Environment=" + unit_quote("PYTHONPATH=" + str(release) + ":" + render["prior_policy"]["repository_root"]))
+                 if line.startswith("Environment=") and "PYTHONPATH=" in line else line for line in lines]
+        updates.append({"before": pin, "postimage_utf8": "\n".join(lines) + "\n",
+                        "mode": stat.S_IMODE(Path(pin["path"]).lstat().st_mode)})
+    updates.append({"before": contract["config"], "postimage_utf8": encoded_json(config).decode(),
+                    "mode": stat.S_IMODE(Path(contract["config"]["path"]).lstat().st_mode)})
+    plan = {"schema": "agent-supervisor/repair-profile-upgrade-stage@1", "source_commitment": source_commitment,
+        "contract": contract, "files": updates, "release": str(release), "release_sources": sources,
+        "release_commitment": descriptor(commitment_path), "selected_release_sources": {rel: descriptor(release / rel) for rel in selected_files}, "state_dir": str(state),
+        "source_successor": successor, "initial_bindings": initial_bindings, "manual_activation_required": True,
+        "staged_only": True, "service_actions": 0, "legacy_history_preserved": True}
+    if scientific_executor_binding is not None:
+        plan["scientific_executor_binding"] = json.loads(json.dumps(scientific_executor_binding))
+    if scientific_executor_git_binding is not None:
+        plan["scientific_executor_git_binding"] = json.loads(json.dumps(scientific_executor_git_binding))
+    verify_repair_upgrade(plan)
+    return plan
+
+
+HELD_SCIENTIFIC_RETENTION_SCHEMA = "agent-supervisor/held-scientific-profile-source-only-retention@1"
+
+
+def _repair_retained_policy_rebinding_history(plan, raw, before, old_anchor):
+    """Authenticate bounded prior closed code-only transitions as historical DATA.
+
+    These integrity/custody joins neither recreate a Popen wait nor constitute
+    cryptographic execution attestation. Historical policies are never rendered
+    against today's mutable source files. Current-policy validation remains in
+    the ordinary owner after the complete original maintenance checks.
+    """
+    import math
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import canonical, checked_descriptor, json_object
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need, _bootstrap_config_projection
+    cache, seen, total = {}, set(), 0
+    def same(a, b): return canonical(a) == canonical(b)
+    def blob(reference):
+        nonlocal total
+        need(type(reference) is dict and set(reference) == {'path', 'bytes', 'sha256'}
+             and type(reference['path']) is str and type(reference['bytes']) is int
+             and 0 < reference['bytes'] <= 8 * 1024**2 and type(reference['sha256']) is str,
+             'exact bounded prior policy-rebinding descriptor required')
+        key = (reference['path'], reference['bytes'], reference['sha256'])
+        if key not in cache:
+            need(total + reference['bytes'] <= 8 * 1024**2,
+                 'prior policy-rebinding history exceeds aggregate byte bound')
+            cache[key] = checked_descriptor(reference); total += reference['bytes']
+        return cache[key]
+    def obj(reference): return json_object(blob(reference))
+    def commands(config, selected, value):
+        """Authenticate the fixed historical v1 ABI without rereading old external sources."""
+        control = value.get('control_release')
+        need(type(control) is dict and set(control) == {'root', 'manifest'}
+             and type(control['root']) is str, 'closed historical control release required')
+        root = Path(control['root']); manifest = obj(control['manifest'])
+        need(root.is_absolute() and '..' not in root.parts and Path(control['manifest']['path']).parent == root
+             and not Path(control['manifest']['path']).lstat().st_mode & 0o222
+             and set(manifest) == {'schema', 'root', 'files', 'namespace_profiles'}
+             and manifest['schema'] == 'agent-supervisor/repair-control-source-release@1'
+             and manifest['root'] == str(root), 'historical immutable control manifest differs')
+        rows = manifest['files']
+        need(type(rows) is list and 0 < len(rows) <= 4096
+             and all(type(r) is dict and set(r) == {'path', 'bytes', 'sha256'} and type(r['path']) is str for r in rows)
+             and [r['path'] for r in rows] == sorted({r['path'] for r in rows})
+             and all(root in Path(r['path']).parents for r in rows), 'historical control source population differs')
+        owner = root / 'ipfs_accelerate_py/agent_supervisor/rescue/repair_candidate_owners.py'
+        owned = [r for r in rows if r['path'] == str(owner)]
+        need(len(owned) == 1, 'historical immutable control owner missing')
+        blob(owned[0]); need(not owner.lstat().st_mode & 0o222, 'historical control owner must be immutable')
+        pins = value.get('source_descriptors')
+        need(type(pins) is list and 0 < len(pins) <= 128
+             and all(type(r) is dict and set(r) == {'path', 'bytes', 'sha256'}
+                 and type(r['path']) is str and type(r['bytes']) is int and 0 <= r['bytes'] <= 4 * 1024**2
+                 and type(r['sha256']) is str and re.fullmatch(r'[0-9a-f]{64}', r['sha256']) for r in pins)
+             and len({r['path'] for r in pins}) == len(pins)
+             and owned[0] in pins, 'historical declared owner/source roles differ')
+        merged = {r['path']: r for r in [*pins, selected, control['manifest']]}
+        need(len(merged) <= 128 and type(value.get('python')) is str,
+             'bounded historical owner command inputs required')
+        expected_pins = [merged[path] for path in sorted(merged)]
+        prefix = [value['python'], '-I', '-B', str(owner)]
+        arguments = ['--policy', selected['path'], '--policy-sha256', selected['sha256'],
+            '--candidate-root', '{candidate_root}', '--freeze-path', '{freeze_path}',
+            '--receipt-path', '{receipt_path}', '--source-commitment', '{source_commitment}',
+            '--invocation-root', '{invocation_root}']
+        for role, action, verify in (('validation_owner', 'validate', 'verify-validation'),
+                                    ('adoption_owner', 'adopt', 'verify-adoption')):
+            row = config['repair_worker']['candidate_runtime'][role]
+            args = arguments + (['--validation-path', '{validation_path}'] if action == 'adopt' else [])
+            need(type(row) is dict and set(row) == {'argv', 'verify_argv', 'source_descriptors', 'timeout_seconds'}
+                 and same(row['argv'], prefix + [action] + args)
+                 and same(row['verify_argv'], prefix + [verify] + args)
+                 and same(row['source_descriptors'], expected_pins)
+                 and type(row['timeout_seconds']) is int and 0 < row['timeout_seconds'] <= 1200,
+                 'historical v1 executable/arguments/source-role map differs')
+    def policy(config):
+        selected = None
+        for role in ('validation_owner', 'adoption_owner'):
+            row = config['repair_worker']['candidate_runtime'][role]
+            for command in ('argv', 'verify_argv'):
+                argv = row[command]
+                need(type(argv) is list and all(type(v) is str for v in argv)
+                     and argv.count('--policy') == argv.count('--policy-sha256') == 1
+                     and not any(v.startswith(('--policy=', '--policy-sha256=')) for v in argv),
+                     'four exact historical policy command references required')
+                pi, hi = argv.index('--policy') + 1, argv.index('--policy-sha256') + 1
+                need(pi < len(argv) and hi < len(argv), 'historical policy argument missing')
+                path = Path(argv[pi]); info = path.lstat()
+                reference = {'path': str(path), 'bytes': info.st_size, 'sha256': argv[hi]}
+                blob(reference)
+                need(not info.st_mode & 0o222 and (selected is None or selected == reference),
+                     'historical policy must be one immutable exact artifact')
+                selected = reference
+        value = obj(selected); anchor = obj(value['adoption'])
+        need(not Path(value['adoption']['path']).lstat().st_mode & 0o222,
+             'historical bootstrap must be immutable')
+        need(anchor.get('schema') == 'agent-supervisor/repair-initial-profile-bootstrap@1'
+             and anchor.get('owner_policy_path') == selected['path'],
+             'historical bootstrap/policy path differs')
+        commands(config, selected, value)
+        return selected, value, anchor
+    def source_roles(rows, root):
+        need(type(rows) is list and len(rows) <= 128, 'finite historical source roles required')
+        result = []
+        for row in rows:
+            need(type(row) is dict and type(row.get('path')) is str, 'typed historical source role required')
+            path = Path(row['path'])
+            result.append(('control', path.relative_to(root).as_posix()) if root in path.parents else ('external', str(path)))
+        need(len(result) == len(set(result)), 'duplicate historical source roles')
+        return result
+    def relative_tests(value, root, checks=False):
+        result = []
+        for row in value:
+            spelling = row if checks else row['path']; path, sep, node = spelling.partition('::')
+            target = Path(path); need(root in target.parents, 'historical trusted test escaped control')
+            result.append(target.relative_to(root).as_posix() + sep + node if checks else
+                          {'relative_path': target.relative_to(root).as_posix(), 'bytes': row['bytes'], 'sha256': row['sha256']})
+        return result
+    original_raw, original_before = raw, before
+    current_plan, current_raw, current_anchor = plan, raw, old_anchor
+    maintenance_copy = None
+    for depth in range(8):
+        scope = current_plan.get('retained_policy_rebinding')
+        need(type(scope) is dict and set(scope) == {'schema', 'maintenance_config_copy', 'prior_cutover', 'prior_readback'}
+             and scope['schema'] == 'agent-supervisor/retained-policy-rebinding-history@1',
+             'closed explicit retained policy-rebinding history required')
+        need(current_anchor['expected_config_projection']['runtime_release'] == current_plan['release'],
+             'prior policy-rebinding history requires an already maintained anchor')
+        copy_raw = blob(scope['maintenance_config_copy'])
+        need(not Path(scope['maintenance_config_copy']['path']).lstat().st_mode & 0o222,
+             'maintenance configuration copy must be immutable')
+        need(maintenance_copy is None or maintenance_copy == copy_raw,
+             'prior policy-rebinding histories disagree on original maintenance bytes')
+        maintenance_copy = copy_raw
+        blob(scope['prior_cutover'])
+        key = (scope['prior_cutover']['path'], scope['prior_cutover']['sha256'])
+        need(key not in seen, 'prior policy-rebinding history cycle'); seen.add(key)
+        actual, retired = obj(scope['prior_cutover']), obj(scope['prior_readback'])
+        need(actual.get('schema') == 'held-scientific-existing-owner-code-only-cutover/v1'
+             and all(actual.get(k) is True for k in ('completed', 'source_READ_closed', 'installer_apply_observe_completed'))
+             and actual.get('error') is None
+             and all(type(actual.get(k)) is int and actual[k] == 0 for k in ('native_admissions', 'scientific_commands', 'productive_epoch_budget_attempt_route_expiry_changes'))
+             and all(actual.get(k) is False for k in ('V5_selector_enabled', 'automatic_preparer_enabled', 'live_top_runtime_changed'))
+             and actual.get('original_external_owner_exit_not_yet_observed') is True,
+             'prior original code-only cutover did not close without authority changes')
+        selection = obj(actual['selection'])
+        need(selection.get('schema') == 'held-scientific-code-only-cutover-exact-selection/v1'
+             and selection.get('Root_selected') is True
+             and all(selection.get(k) is False for k in ('future_V5_selector_enabled', 'automatic_preparer_enabled', 'productive_repair_renewal_or_dispatch_granted')),
+             'prior original code-only selection differs')
+        need(actual.get('nested_consumer_generation_sha256') == selection['normal_canonical_sources']['consumer']['sha256'],
+             'prior cutover consumer generation differs from selected owner')
+        prior = obj(selection['full_stage'])
+        need(prior.get('schema') == 'agent-supervisor/repair-profile-upgrade-stage@1'
+             and prior.get('source_successor') is None and prior.get('initial_bindings') is None
+             and type(prior.get('files')) is list and len(prior['files']) == 3
+             and all(same(prior.get(k), current_plan.get(k)) for k in ('release', 'source_commitment', 'release_commitment', 'release_sources', 'selected_release_sources', 'state_dir', 'scientific_executor_binding', 'scientific_executor_git_binding')),
+             'prior stage changed retained release/science/source generation')
+        contract, earlier = current_plan['contract'], prior['contract']
+        need(set(earlier) == set(contract) and earlier['schema'] == contract['schema'] and earlier['profile'] == contract['profile']
+             and earlier['source_successor'] is None and earlier['initial_release'] == contract['initial_release']
+             and earlier['job_unit'] == contract['job_unit'] and earlier['config']['path'] == contract['config']['path']
+             and earlier['inventory'] == contract['inventory'] and earlier['prior_job']['path'] == contract['prior_job']['path'],
+             'prior stage changed base grant or state/job/config targets')
+        hold = prior['held_scientific_profile_retention']
+        need(set(hold) == set(current_plan['held_scientific_profile_retention']) and all(same(hold[k], current_plan['held_scientific_profile_retention'][k]) for k in ('schema', 'profile', 'git_binding', 'hold')),
+             'prior stage changed full scientific hold/profile')
+        earlier_raw = blob(hold['config_preimage']); earlier_before = json_object(earlier_raw)
+        need(not Path(hold['config_preimage']['path']).lstat().st_mode & 0o222,
+             'prior complete config copy must be immutable')
+        old_config_ref = {'path': earlier['config']['path'], 'bytes': len(earlier_raw), 'sha256': hashlib.sha256(earlier_raw).hexdigest()}
+        need(old_config_ref == earlier['config'] == prior['files'][-1]['before']
+             and type(prior['files'][-1]['mode']) is int and prior['files'][-1]['mode'] == current_plan['files'][-1]['mode']
+             and type(prior['files'][-1]['postimage_utf8']) is str
+             and prior['files'][-1]['postimage_utf8'].encode() == current_raw,
+             'prior original config before/postimage does not join current bytes')
+        current = json_object(current_raw)
+        new_pin, new_policy, new_anchor = policy(current)
+        old_pin, old_policy, historical_anchor = policy(earlier_before)
+        need(same(new_anchor, current_anchor) and same(new_anchor['original_contract'], earlier)
+             and same(new_anchor['source_snapshot'], historical_anchor['source_snapshot'])
+             and historical_anchor['original_contract']['initial_release'] == contract['initial_release'],
+             'prior/current policy bootstrap or genuine source snapshot differs')
+        need(set(earlier_before) == set(current) and all(same(earlier_before[k], current[k]) for k in earlier_before if k != 'repair_worker')
+             and earlier_before['runtime_release'] == current['runtime_release'] == prior['release'],
+             'prior transition changed boards/epochs/top runtime')
+        ow, nw = earlier_before['repair_worker'], current['repair_worker']
+        need(set(ow) == set(nw) and all(same(ow[k], nw[k]) for k in ow if k != 'candidate_runtime'),
+             'prior transition changed worker route/budget')
+        ot, nt = ow['candidate_runtime'], nw['candidate_runtime']; roles = {'validation_owner', 'adoption_owner'}
+        need(set(ot) == set(nt) and roles <= set(ot) and all(same(ot[k], nt[k]) for k in ot if k not in roles),
+             'prior transition changed outer runtime authority')
+        need(set(old_policy) == set(new_policy)
+             and all(same(old_policy[k], new_policy[k]) for k in old_policy if k not in {'control_release', 'source_descriptors', 'validation', 'adoption'}),
+             'prior policy changed schema/python/datasets root')
+        ov, nv = old_policy['validation'], new_policy['validation']; sf = {'import_sources', 'trusted_tests', 'selected_checks'}
+        need(set(ov) == set(nv) and all(same(ov[k], nv[k]) for k in ov if k not in sf),
+             'prior policy changed validation budgets or authority')
+        oc, nc = Path(old_policy['control_release']['root']), Path(new_policy['control_release']['root'])
+        need(source_roles(old_policy['source_descriptors'], oc) == source_roles(new_policy['source_descriptors'], nc)
+             and source_roles(ov['import_sources'], oc) == source_roles(nv['import_sources'], nc)
+             and same(relative_tests(ov['trusted_tests'], oc), relative_tests(nv['trusted_tests'], nc))
+             and relative_tests(ov['selected_checks'], oc, True) == relative_tests(nv['selected_checks'], nc, True),
+             'prior policy changed source roles or trusted checks')
+        for role in roles:
+            need(set(ot[role]) == set(nt[role]) and all(same(ot[role][k], nt[role][k]) for k in ot[role] if k not in {'argv', 'verify_argv', 'source_descriptors'}),
+                 'prior nested owner timeout or extra authority changed')
+        expected_units = {}
+        for row in prior['files'][:-1]:
+            unit = row['before']; body = row['postimage_utf8'].encode()
+            need(unit in earlier['units'].values() and len(body) == unit['bytes'] and hashlib.sha256(body).hexdigest() == unit['sha256']
+                 and any(unit == p for p in contract['units'].values())
+                 and any(r['before']['path'] == unit['path'] and type(row['mode']) is int and row['mode'] == r['mode'] for r in current_plan['files'][:-1]),
+                 'prior policy-only transition changed unit bytes/roles')
+            expected_units[next(k for k, v in earlier['units'].items() if v == unit)] = {**unit, 'mode': row['mode']}
+        need(len(expected_units) == 2 and same(new_anchor['expected_unit_postimages'], expected_units),
+             'prior current bootstrap unit images/modes differ')
+        projected = _bootstrap_config_projection(current, new_policy, new_pin, new_pin['path'])
+        need(same(new_anchor['expected_config_projection'], projected), 'prior current bootstrap config projection differs')
+        install, observed = actual['installation'], actual['observed']
+        need(install.get('schema') == 'agent-supervisor/repair-profile-upgrade-installation@1'
+             and all(install.get(k) is True for k in ('completed', 'source_WRITE_closed', 'postwrite_source_READ_closed', 'config_units_CAS_closed'))
+             and install['source_successor'].get('source_WRITE_entered') is False
+             and all(install['source_successor'].get(k) is True for k in ('completed', 'source_WRITE_closed', 'postwrite_source_READ_closed'))
+             and same(install['commands'], [dict(argv=a, returncode=0) for a in (
+                 ['systemctl', '--user', 'daemon-reload'], ['systemctl', '--user', 'restart', 'ipfs-taskboard-legal-ir-watchdog.service'],
+                 ['systemctl', '--user', 'restart', 'ipfs-taskboard-legal-ir-repair.service'])])
+             and observed.get('runtime_unit_config_CAS_closed') is True and observed.get('read_only_readiness_wait_closed') is True,
+             'prior original installation/readiness did not close')
+        clock, envelope = actual['cutover_clock'], actual['outer_envelope']
+        unit = actual['original_external_unit']; group = envelope['control_group']
+        need(type(unit) is str and re.fullmatch(r'ipfs-taskboard-legal-ir-cutover-[A-Za-z0-9_-]+\.service', unit)
+             and selection.get('original_external_unit') == unit and type(group) is str
+             and Path(group).is_absolute() and '..' not in Path(group).parts and str(Path(group)) == group
+             and Path(group).name == unit and envelope['cgroup_root'] == str(Path('/sys/fs/cgroup') / group.lstrip('/')),
+             'prior selected unit/cgroup identity differs')
+        need(type(clock['existing_kernel_runtime_seconds']) is int and clock['existing_kernel_runtime_seconds'] == 120
+             and all(type(x) in (int, float) and math.isfinite(x) for x in (clock['started_monotonic'], clock['deadline_monotonic'], actual['completed_monotonic']))
+             and clock['deadline_monotonic'] - clock['started_monotonic'] == 120
+             and clock['started_monotonic'] <= actual['completed_monotonic'] <= clock['deadline_monotonic']
+             and envelope['unit'] == actual['original_external_unit'] and envelope['invocation_id'] == clock['invocation_id']
+             and type(envelope['runtime_max_seconds']) in (int, float) and math.isfinite(envelope['runtime_max_seconds'])
+             and 0 < envelope['runtime_max_seconds'] <= 120 and type(envelope['memory_max_bytes']) is int
+             and 0 < envelope['memory_max_bytes'] <= 256 * 1024**2 and type(envelope['tasks_max']) is int
+             and 0 < envelope['tasks_max'] <= 32 and type(envelope['cpu_max']) is list and len(envelope['cpu_max']) == 2
+             and all(type(x) is int for x in envelope['cpu_max']) and 0 < envelope['cpu_max'][0] <= envelope['cpu_max'][1]
+             and type(clock['owner']['pid']) is int and clock['owner']['pid'] > 0 and type(clock['owner']['birth']) is str
+             and clock['owner']['birth'].isdigit() and type(clock['invocation_id']) is str
+             and re.fullmatch(r'[0-9a-f]{32}', clock['invocation_id'])
+             and type(envelope['active_enter_monotonic_usec']) is int and envelope['active_enter_monotonic_usec'] > 0
+             and clock['started_monotonic'] <= envelope['active_enter_monotonic_usec'] / 1000000 <= actual['completed_monotonic']
+             and type(observed['readiness_deadline_monotonic']) in (int, float) and math.isfinite(observed['readiness_deadline_monotonic'])
+             and actual['completed_monotonic'] <= observed['readiness_deadline_monotonic'] == clock['deadline_monotonic']
+             and actual['completed_monotonic'] <= envelope['active_enter_monotonic_usec'] / 1000000 + envelope['runtime_max_seconds'],
+             'prior original clock/envelope identity differs')
+        need(retired.get('schema') == 'independent-actual-runtime-cutover-original-cgroup-retirement-readback/v1'
+             and retired['actual_runtime'] == scope['prior_cutover']
+             and all(retired.get(k) is True for k in ('verified_apply_and_readiness', 'Source_READs_closed', 'same_invocation_manager_terminal_success',
+                 'original_PID_proc_entry_independently_absent', 'original_cgroup_root_independently_absent', 'scientific_full_stop_full9_unchanged',
+                 'all_boards_epochs_attempts_budgets_routes_and_other_config_unchanged', 'prior_job_inventory_initial_release_and_all_live_top_source_refs_unchanged',
+                 'original_immutable_preexit_owner_exit_not_yet_observed_flag_preserved'))
+             and all(retired.get(k) is False for k in ('external_genuine_wait_or_returncode_invented', 'TasksCurrent_coerced_to_zero',
+                 'canonical_strict_TasksCurrent_zero_validator_claimed_pass', 'productive_authorization_or_V5_selector_renewed', 'future_admin_hook_qualified',
+                 'reviewer_Source_Product_API_service_Native_test_or_process_actions'))
+             and same(retired['original_clock'], clock) and same(retired['exact_original_envelope'], envelope)
+             and same(retired['completed_monotonic'], actual['completed_monotonic'])
+             and same(retired['elapsed_seconds'], actual['completed_monotonic'] - clock['started_monotonic']),
+             'independent prior external closeout differs or invents authority')
+        manager = obj(retired['exact_Root_manager_observation']); props = manager['manager_properties_exact']
+        lines = manager['manager_stdout'].splitlines()
+        fields = {'MainPID', 'InvocationID', 'Result', 'ExecMainStatus', 'SubState', 'ControlGroup', 'TasksCurrent', 'KillMode'}
+        need(len(lines) == len(fields) and all('=' in line for line in lines)
+             and {line.split('=', 1)[0] for line in lines} == fields,
+             'one exact raw terminal observation per property required')
+        parsed = dict(line.split('=', 1) for line in lines)
+        need(manager.get('schema') == 'Root-original-runtime-manager-kernel-terminal-observation/v1'
+             and manager['actual_runtime'] == scope['prior_cutover'] and type(manager['manager_returncode']) is int and manager['manager_returncode'] == 0
+             and manager.get('manager_argv') == ['systemctl', '--user', 'show', actual['original_external_unit'],
+                 '--property=MainPID,InvocationID,Result,ExecMainStatus,SubState,ControlGroup,TasksCurrent,KillMode']
+             and manager.get('manager_stderr') == ''
+             and type(manager.get('Source_Native_service_or_budget_actions')) is int and manager['Source_Native_service_or_budget_actions'] == 0
+             and same(parsed, props) and same(props, retired['exact_manager_properties'])
+             and props.get('SubState') in ('exited', 'dead') and props.get('ControlGroup') in ('', envelope['control_group'])
+             and props.get('TasksCurrent') in ('0', '[not set]')
+             and props.get('MainPID') == '0' and props.get('Result') == 'success' and props.get('ExecMainStatus') == '0'
+             and props.get('InvocationID') == clock['invocation_id'] and props.get('KillMode') == 'control-group'
+             and manager.get('observed_process') is None and manager.get('original_pid_birth_absent') is True
+             and manager.get('original_cgroup_path_exists') is False and manager.get('TasksCurrent_coerced_to_zero') is False
+             and manager.get('canonical_strict_TasksCurrent_zero_validator_claimed_pass') is False
+             and manager['recorded_original_cgroup_root'] == envelope['cgroup_root']
+             and manager['external_owner'] == {'unit': actual['original_external_unit'], 'owner': clock['owner'], 'invocation_id': clock['invocation_id']},
+             'prior raw terminal/PID/cgroup observation differs')
+        post_ref = {'path': earlier['config']['path'], 'bytes': len(current_raw), 'sha256': hashlib.sha256(current_raw).hexdigest()}
+        rows = retired['exact_three_current_postimages']
+        need(type(rows) is list and len(rows) == 3 and len({r['current']['path'] for r in rows}) == 3,
+             'three exact prior current postimages required')
+        expected_posts = {r['before']['path']: {'path': r['before']['path'], 'bytes': len(r['postimage_utf8'].encode()),
+                         'sha256': hashlib.sha256(r['postimage_utf8'].encode()).hexdigest()} for r in prior['files']}
+        need({r['current']['path']: r['current'] for r in rows} == expected_posts
+             and all(r['exact_selected_stage_postimage'] is True and r['full9']['st_size'] == r['current']['bytes']
+                     and set(r['full9']) == {'st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_uid', 'st_gid', 'st_size', 'st_mtime_ns', 'st_ctime_ns'}
+                     and all(type(x) is int for x in r['full9'].values()) and stat.S_ISREG(r['full9']['st_mode'])
+                     and r['full9']['st_nlink'] == 1 and r['full9']['st_uid'] == os.getuid()
+                     and r['full9']['st_dev'] > 0 and r['full9']['st_ino'] > 0
+                     and all(r['full9'][k] >= 0 for k in ('st_gid', 'st_size', 'st_mtime_ns', 'st_ctime_ns')) and stat.S_IMODE(r['full9']['st_mode']) == next(x['mode'] for x in prior['files'] if x['before']['path'] == r['current']['path']) for r in rows),
+             'prior independent stage postimage identity differs')
+        ready = retired['actual_two_new_loaded_readiness']; need(set(ready) == set(observed['loaded_runtime']) == {'watchdog', 'repair'},
+             'both original loaded receipt roles required')
+        loaded_identities, loaded_invocations = set(), set()
+        for role, reference in observed['loaded_runtime'].items():
+            loaded = obj(reference); row = ready[role]
+            identity = loaded['owner']; invocation = loaded['invocation_id']
+            need(type(identity) is dict and set(identity) == {'pid', 'birth'} and type(identity['pid']) is int and identity['pid'] > 0
+                 and type(identity['birth']) is str and identity['birth'].isdigit() and type(invocation) is str
+                 and re.fullmatch(r'[0-9a-f]{32}', invocation)
+                 and reference['path'] == str(Path(prior['state_dir']) / 'runtime-loaded' / (invocation + '-' + role + '.json'))
+                 and not Path(reference['path']).lstat().st_mode & 0o222
+                 and (identity['pid'], identity['birth']) not in loaded_identities and invocation not in loaded_invocations,
+                 'prior loaded receipt path/owner/invocation identity differs')
+            loaded_identities.add((identity['pid'], identity['birth'])); loaded_invocations.add(invocation)
+            need(loaded.get('schema') == 'agent-supervisor/repair-actual-activation@1' and loaded['service'] == role
+                 and loaded['release'] == prior['release'] and loaded['source_commitment'] == prior['source_commitment']
+                 and loaded['config'] == post_ref and loaded['loaded_module'] == prior['release_sources']['fleet_' + role]
+                 and row['receipt'] == reference and row['current_birth_matches'] is True and row['owner'] == loaded['owner']
+                 and row['invocation_id'] == loaded['invocation_id'] and row['exact_new_config'] == post_ref
+                 and row['exact_live_top_module'] == loaded['loaded_module'], 'prior original loaded config/module/owner receipt differs')
+        if 'retained_policy_rebinding' not in prior:
+            need(earlier_raw == maintenance_copy, 'prior history did not terminate at exact maintenance config bytes')
+            base_root = str(Path(contract['initial_release']['path']).parent)
+            token = json.dumps(prior['release']).encode(); replacement = json.dumps(base_root).encode()
+            need(earlier_raw.count(token) == 1, 'one original maintenance release token required')
+            historical_before = json_object(earlier_raw.replace(token, replacement, 1))
+            need(same(historical_anchor['expected_config_projection'], _bootstrap_config_projection(
+                historical_before, old_policy, old_pin, old_pin['path'])), 'original base bootstrap projection differs')
+            return earlier_raw, earlier_before, historical_anchor, original_before
+        need(same(historical_anchor['expected_config_projection'], _bootstrap_config_projection(
+            earlier_before, old_policy, old_pin, old_pin['path'])), 'prior maintained bootstrap projection differs')
+        current_plan, current_raw, current_anchor = prior, earlier_raw, historical_anchor
+    need(False, 'prior policy-rebinding history exceeds finite depth bound')
+
+
+def _repair_retained_runtime_projection(plan: dict, raw: bytes, before: dict, old_anchor: dict) -> dict:
+    """Join a retained initial release to its exact prior code-only maintenance.
+
+    Historical config/unit bytes are reconstructed only by the authenticated
+    release-root token substitution. No past receipt becomes current health,
+    a new source snapshot, productive enrollment, or a repair grant.
+    """
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import canonical, checked_descriptor, json_object
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need
+    release = Path(plan["release"])
+    current_ref = plan["release_commitment"]
+    need(Path(current_ref["path"]) == release / "repair-source-commitment.json",
+         "current retained release commitment path differs")
+    current = json_object(checked_descriptor(current_ref))
+    need(current.get("source_commitment") == plan["source_commitment"]
+         and canonical(current.get("sources")) == canonical(plan["release_sources"])
+         and canonical(current.get("selected_sources")) == canonical(plan["selected_release_sources"]),
+         "retained current release source generation differs")
+    expected_units = {role: {**pin, "mode": row["mode"]}
+        for role, pin in plan["contract"]["units"].items()
+        for row in plan["files"][:-1] if row["before"] == pin}
+    need(len(expected_units) == 2, "two retained existing unit images required")
+    before_rebinding = None
+    if 'retained_policy_rebinding' in plan:
+        need(current.get('schema') == 'agent-supervisor/operator-runtime-maintenance-release@1',
+             'policy-rebinding history is only valid for a retained maintenance release')
+        raw, before, old_anchor, before_rebinding = _repair_retained_policy_rebinding_history(plan, raw, before, old_anchor)
+    if current.get("schema") == "agent-supervisor/repair-source-release@1":
+        need(current_ref == plan["contract"]["initial_release"]
+             and old_anchor["expected_config_projection"]["runtime_release"] == str(release)
+             and canonical(old_anchor["expected_unit_postimages"]) == canonical(expected_units),
+             "ordinary retained initial release/unit generation differs")
+        return before
+    need(set(current) == {"schema", "source_commitment", "sources", "selected_sources", "operator_maintenance"}
+         and current["schema"] == "agent-supervisor/operator-runtime-maintenance-release@1",
+         "unsupported retained runtime release history")
+    maintenance = current["operator_maintenance"]
+    need(type(maintenance) is dict and set(maintenance) == {"basis", "source_peer", "actual18_peer", "actual18_root_closeout", "published_patch", "published_patch_commit", "base_release_commitment", "base_genuine_snapshot_commit", "base_genuine_snapshot_tree", "new84_file_Git_snapshot_claimed", "productive_repair_enrollment_or_successor_or_new_grant"}
+         and maintenance["new84_file_Git_snapshot_claimed"] is False
+         and maintenance["productive_repair_enrollment_or_successor_or_new_grant"] is False,
+         "maintenance history cannot grant source snapshots/enrollment/repair")
+    base_ref = maintenance["base_release_commitment"]
+    need(base_ref == plan["contract"]["initial_release"] == old_anchor["original_contract"]["initial_release"],
+         "maintenance history belongs to another initial source grant")
+    base = json_object(checked_descriptor(base_ref)); base_root = Path(base_ref["path"]).parent
+    need(base.get("schema") == "agent-supervisor/repair-source-release@1"
+         and base_root != release
+         and old_anchor["expected_config_projection"]["runtime_release"] == str(base_root)
+         and maintenance["base_genuine_snapshot_commit"] == base.get("snapshot_commit") == old_anchor["source_snapshot"]["new_commit"]
+         and maintenance["base_genuine_snapshot_tree"] == base.get("snapshot_tree") == old_anchor["source_snapshot"]["new_tree"]
+         and base["source_commitment"] == old_anchor["source_snapshot"]["source_commitment"],
+         "maintenance historical genuine snapshot identity differs")
+    documents = {key: json_object(checked_descriptor(maintenance[key])) for key in
+        ("basis", "source_peer", "actual18_peer", "actual18_root_closeout", "published_patch")}
+    basis, peer, actual, closure, publication = (documents[key] for key in
+        ("basis", "source_peer", "actual18_peer", "actual18_root_closeout", "published_patch"))
+    need(basis.get("schema") == "operator-runtime-maintenance-stage-basis/v1"
+         and basis.get("source_only") is True and basis.get("expected_release") == str(release)
+         and basis.get("expected_source_commitment") == current["source_commitment"]
+         and basis.get("old_release_commitment") == base_ref
+         and basis.get("actual18_peer") == maintenance["actual18_peer"]
+         and basis.get("actual18_root_closeout") == maintenance["actual18_root_closeout"]
+         and basis.get("publication") == maintenance["published_patch"],
+         "maintenance source-only basis/ref chain differs")
+    need(peer.get("schema") == "independent-operator-code-only-maintenance-stage-SOURCE-peer/v1"
+         and peer.get("basis") == maintenance["basis"]
+         and peer.get("accepted_for_metadata_stage_preparation") is True
+         and peer.get("blocking_findings") == [], "maintenance source peer did not accept this exact basis")
+    need(actual.get("schema") == "independent-actual-normal82-scope18-source-qualification-acceptance/v1"
+         and actual.get("root_closeout") == maintenance["actual18_root_closeout"]
+         and actual.get("accepted_actual_source_qualification") is True
+         and type(actual.get("selected_cases")) is int and actual["selected_cases"] == 18
+         and type(actual.get("pytest_testcase_rows")) is int and actual["pytest_testcase_rows"] == 18
+         and all(type(actual.get(key)) is int and actual[key] == 0 for key in ("errors", "failures", "skipped"))
+         and all(actual.get(key) is True for key in ("actual18collection_matches_sealed_scope", "original_Native_compute_closed", "original_R_A_READ_closed", "original_processes_reaped_and_absent", "storage_released_and_artifacts_durable"))
+         and actual.get("live_runtime_upgrade_or_SCI_recovery_or_legal_Lean_authority") is False,
+         "maintenance exact original source qualification closure differs")
+    need(closure.get("schema") == "legal-ir-native-executor-health-original-capture/v1"
+         and closure.get("completed") is True and type(closure.get("returncode")) is int and closure["returncode"] == 0
+         and all(closure.get(key) is True for key in ("child_reaped", "original_CLI_exit_observed", "original_native_compute_closed", "source_READ_closed", "source_custody_closed", "source_pins_unchanged"))
+         and closure.get("cleanup_errors") == [] and closure.get("received_signals") == []
+         and closure.get("native_task_or_service_mutations") is False
+         and closure.get("automatic_retry_or_storage_cleanup") is False,
+         "maintenance original owner did not close without task/runtime mutation")
+    need(publication.get("schema") == "Root-qualified18-existing-PR321-actual-readback-publication/v2"
+         and publication.get("completed") is True and type(publication.get("cases")) is int and publication["cases"] == 18
+         and all(type(publication.get(key)) is int and publication[key] == 0 for key in ("errors", "failures", "skipped"))
+         and publication.get("commit") == maintenance["published_patch_commit"]
+         and type(publication["commit"]) is str and re.fullmatch(r"[0-9a-f]{40}", publication["commit"])
+         and publication.get("forced_update") is False
+         and publication.get("no_local_checkout_or_live_service_or_epoch_or_hold_or_task_mutations") is True,
+         "maintenance publication/source-only history differs")
+    substitutions = basis.get("substitutions")
+    need(type(substitutions) is dict and 0 < len(substitutions) <= 128
+         and set(actual.get("qualified_source_hashes", {})) == set(substitutions),
+         "finite exact qualified maintenance source population required")
+    for field in ("sources", "selected_sources"):
+        old_rows, new_rows = base.get(field), current.get(field)
+        need(type(old_rows) is dict and type(new_rows) is dict and set(old_rows) == set(new_rows)
+             and 0 < len(new_rows) <= 4096
+             and sum(row["bytes"] for row in new_rows.values()) <= 128 * 1024**2,
+             "maintenance retained source role population differs")
+        changed = set()
+        for key, row in new_rows.items():
+            old_row = old_rows[key]; path, old_path = Path(row["path"]), Path(old_row["path"])
+            need(release in path.parents and base_root in old_path.parents
+                 and path.relative_to(release) == old_path.relative_to(base_root),
+                 "maintenance source role escaped its original release")
+            checked_descriptor(row); checked_descriptor(old_row)
+            if (row["bytes"], row["sha256"]) != (old_row["bytes"], old_row["sha256"]):
+                relative = path.relative_to(release).as_posix(); changed.add(relative)
+                expected = substitutions.get(relative)
+                need(type(expected) is dict and (expected.get("bytes"), expected.get("sha256")) == (row["bytes"], row["sha256"])
+                     and actual["qualified_source_hashes"].get(relative) == row["sha256"],
+                     "maintenance changed source lacks exact original qualification")
+        need(changed == set(substitutions), "maintenance changed source population differs from qualified substitutions")
+    current_config = {"path": plan["contract"]["config"]["path"], "bytes": len(raw), "sha256": hashlib.sha256(raw).hexdigest()}
+    token = json.dumps(str(release)).encode(); replacement = json.dumps(str(base_root)).encode()
+    need(raw.count(token) == 1, "one exact historical runtime-release config slot required")
+    historical_raw = raw.replace(token, replacement, 1)
+    historical_ref = {"path": current_config["path"], "bytes": len(historical_raw), "sha256": hashlib.sha256(historical_raw).hexdigest()}
+    need(basis.get("exact_raw_config_postimage") == current_config and basis.get("config") == historical_ref,
+         "maintenance changed config outside the exact historical runtime-release token")
+    historical = json_object(historical_raw)
+    for role, row in expected_units.items():
+        unit_raw = checked_descriptor({key: row[key] for key in ("path", "bytes", "sha256")})
+        need(unit_raw.count(str(release).encode()) > 0
+             and peer.get("unit_postimages", {}).get(role) == {"bytes": row["bytes"], "sha256": row["sha256"]},
+             "maintenance current unit differs from its reviewed source-only stage")
+        old_raw = unit_raw.replace(str(release).encode(), str(base_root).encode())
+        old_unit = {"path": row["path"], "bytes": len(old_raw), "sha256": hashlib.sha256(old_raw).hexdigest(), "mode": row["mode"]}
+        need(old_anchor["expected_unit_postimages"].get(role) == old_unit,
+             "maintenance old unit changed outside exact release-root tokens")
+    return before_rebinding if before_rebinding is not None else historical
+
+
+def _repair_held_scientific_profile(plan: dict) -> dict:
+    """Authenticate unchanged historical science during one code-only cutover.
+
+    This explicit route never claims current scientific health. The normal
+    profile parser and every execution/dispatch path remain unchanged.
+    """
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import canonical, checked_descriptor, descriptor, json_object
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need
+    value = plan.get("held_scientific_profile_retention")
+    need(type(value) is dict and set(value) == {"schema", "config_preimage", "profile", "git_binding", "hold"}
+         and value["schema"] == HELD_SCIENTIFIC_RETENTION_SCHEMA,
+         "closed explicit held-scientific retention binding required")
+    need(plan.get("source_successor") is None and plan.get("initial_bindings") is None
+         and plan.get("schema") == "agent-supervisor/repair-profile-upgrade-stage@1"
+         and type(plan.get("files")) is list and len(plan["files"]) == 3,
+         "held scientific retention is code/config-only, not a source or epoch grant")
+    contract = plan["contract"]
+    need(type(contract) is dict and set(contract) == {"schema", "profile", "config", "inventory", "units", "prior_job", "expected_loaded_before", "job_unit", "source_successor", "initial_release"}
+         and contract["schema"] == "agent-supervisor/repair-profile-upgrade-contract@1"
+         and contract["profile"] == REPAIR_PROFILE and contract["source_successor"] is None,
+         "exact original legal-ir source-only contract required")
+    copy_ref = value["config_preimage"]
+    raw = checked_descriptor(copy_ref)
+    need(copy_ref["path"] != contract["config"]["path"]
+         and (copy_ref["bytes"], copy_ref["sha256"]) == (contract["config"]["bytes"], contract["config"]["sha256"])
+         and not Path(copy_ref["path"]).lstat().st_mode & 0o222,
+         "immutable complete original config preimage required")
+    before = json_object(raw)
+    need(type(before.get("boards")) is list and len(before["boards"]) == 2
+         and all(type(board) is dict for board in before["boards"])
+         and {board.get("id") for board in before["boards"]} == {"legal-ir", "legal-ir-scientific"},
+         "two exact original boards required for held-profile source-only retention")
+    def same(a, b):
+        return canonical(a) == canonical(b)
+    need(plan["files"][-1]["before"] == contract["config"], "original config CAS target differs")
+    post = json_object(plan["files"][-1]["postimage_utf8"].encode())
+    need(set(before) == set(post) and all(same(before[k], post[k]) for k in before if k != "repair_worker")
+         and before["runtime_release"] == post["runtime_release"] == plan["release"],
+         "held source-only transition changed boards/epoch/runtime/other config")
+    old_worker, new_worker = before["repair_worker"], post["repair_worker"]
+    need(set(old_worker) == set(new_worker)
+         and all(same(old_worker[k], new_worker[k]) for k in old_worker if k != "candidate_runtime"),
+         "held source-only transition changed worker route/policy/budget")
+    old_runtime, new_runtime = old_worker["candidate_runtime"], new_worker["candidate_runtime"]
+    roles = {"validation_owner", "adoption_owner"}
+    need(set(old_runtime) == set(new_runtime) and roles <= set(old_runtime)
+         and all(same(old_runtime[k], new_runtime[k]) for k in old_runtime if k not in roles),
+         "held source-only transition changed runtime authority outside nested owners")
+    def owner_policy(runtime):
+        found = None
+        for role in ("validation_owner", "adoption_owner"):
+            row = runtime[role]
+            for command in ("argv", "verify_argv"):
+                argv = row[command]
+                need(type(argv) is list and all(type(v) is str for v in argv)
+                     and argv.count("--policy") == argv.count("--policy-sha256") == 1
+                     and not any(v.startswith(("--policy=", "--policy-sha256=")) for v in argv),
+                     "four separate exact owner-policy command references required")
+                pi, hi = argv.index("--policy") + 1, argv.index("--policy-sha256") + 1
+                need(pi < len(argv) and hi < len(argv), "owner-policy argument missing")
+                pin = descriptor(Path(argv[pi]))
+                need(pin["sha256"] == argv[hi] and (found is None or found == pin),
+                     "four nested commands disagree on immutable owner policy")
+                found = pin
+        return found, json_object(checked_descriptor(found))
+    old_pin, old_policy = owner_policy(old_runtime)
+    new_pin, new_policy = owner_policy(new_runtime)
+    mutable_policy_fields = {"control_release", "source_descriptors", "validation", "adoption"}
+    need(set(old_policy) == set(new_policy)
+         and all(same(old_policy[k], new_policy[k]) for k in old_policy if k not in mutable_policy_fields),
+         "held source-only transition changed policy schema/python/datasets root")
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import (
+        _bootstrap_config_projection, INITIAL_PROFILE_BOOTSTRAP_SCHEMA)
+    anchor_keys = {"schema", "owner_policy_path", "original_contract", "source_snapshot", "expected_config_projection", "expected_unit_postimages"}
+    anchors = []
+    for policy in (old_policy, new_policy):
+        anchor_ref = policy["adoption"]
+        anchor = json_object(checked_descriptor(anchor_ref))
+        need(type(anchor) is dict and set(anchor) == anchor_keys
+             and anchor["schema"] == INITIAL_PROFILE_BOOTSTRAP_SCHEMA
+             and not Path(anchor_ref["path"]).lstat().st_mode & 0o222,
+             "immutable original/new bootstrap source-only DATA required")
+        anchors.append(anchor)
+    old_anchor, new_anchor = anchors
+    need(old_anchor["owner_policy_path"] == old_pin["path"] and new_anchor["owner_policy_path"] == new_pin["path"]
+         and same(old_anchor["source_snapshot"], new_anchor["source_snapshot"])
+         and type(new_anchor["source_snapshot"]) is dict
+         and set(new_anchor["source_snapshot"]) == {"prior_policy", "new_commit", "new_tree", "source_commitment", "manifest"},
+         "bootstrap source generation/owner-policy target changed")
+    historical_before = _repair_retained_runtime_projection(plan, raw, before, old_anchor)
+    need(same(old_anchor["expected_config_projection"], _bootstrap_config_projection(historical_before, old_policy, old_pin, old_pin["path"]))
+         and same(new_anchor["expected_config_projection"], _bootstrap_config_projection(post, new_policy, new_pin, new_pin["path"])),
+         "bootstrap projection changed boards/authority or differs from exact nested-command transition")
+    old_contract, new_contract = old_anchor["original_contract"], new_anchor["original_contract"]
+    refresh = {"config", "units", "prior_job", "expected_loaded_before"}
+    need(type(old_contract) is dict and type(new_contract) is dict
+         and set(old_contract) == set(new_contract) == set(contract)
+         and same(new_contract, contract)
+         and all(same(old_contract[k], new_contract[k]) for k in old_contract if k not in refresh)
+         and old_contract["config"]["path"] == contract["config"]["path"]
+         and old_contract["prior_job"]["path"] == contract["prior_job"]["path"]
+         and set(old_contract["units"]) == set(contract["units"]) == {"watchdog", "repair"}
+         and all(old_contract["units"][role]["path"] == contract["units"][role]["path"] for role in contract["units"]),
+         "bootstrap contract changed authority/state/job/unit targets")
+    expected_units = {role: {**pin, "mode": row["mode"]}
+        for role, pin in contract["units"].items()
+        for row in plan["files"][:-1] if row["before"] == pin}
+    need(len(expected_units) == 2 and same(new_anchor["expected_unit_postimages"], expected_units),
+         "bootstrap unit postimages differ from the unchanged two units")
+    need(plan["state_dir"] == before["state_dir"] and contract["job_unit"] == old_worker["job_unit"],
+         "source-only stage changed original state/job custody target")
+    old_validation, new_validation = old_policy["validation"], new_policy["validation"]
+    source_fields = {"import_sources", "trusted_tests", "selected_checks"}
+    need(set(old_validation) == set(new_validation)
+         and all(same(old_validation[k], new_validation[k]) for k in old_validation if k not in source_fields),
+         "held source-only transition changed validation selector/budget/expiry")
+    old_control = Path(old_policy["control_release"]["root"])
+    new_control = Path(new_policy["control_release"]["root"])
+    def trusted(policy, control):
+        result = []
+        for pin in policy["validation"]["trusted_tests"]:
+            path = Path(pin["path"])
+            need(control in path.parents, "trusted test escaped immutable control root")
+            result.append({"relative_path": path.relative_to(control).as_posix(), "bytes": pin["bytes"], "sha256": pin["sha256"]})
+        return result
+    def checks(policy, control):
+        result = []
+        for node in policy["validation"]["selected_checks"]:
+            path, separator, test = node.partition("::")
+            selected = Path(path)
+            need(control in selected.parents, "selected check escaped immutable control root")
+            result.append(selected.relative_to(control).as_posix() + (separator + test if separator else ""))
+        return result
+    def source_paths(rows, control):
+        need(type(rows) is list and len(rows) <= 128, "finite original source-descriptor population required")
+        result = []
+        for row in rows:
+            need(type(row) is dict and type(row.get("path")) is str, "typed source descriptor required")
+            path = Path(row["path"])
+            result.append(("control", path.relative_to(control).as_posix()) if control in path.parents else ("external", str(path)))
+        need(len(result) == len(set(result)), "duplicate source-descriptor population")
+        return result
+    need(same(source_paths(old_policy.get("source_descriptors", []), old_control), source_paths(new_policy.get("source_descriptors", []), new_control))
+         and same(source_paths(old_validation["import_sources"], old_control), source_paths(new_validation["import_sources"], new_control)),
+         "held source-only transition changed declared source roles/population")
+    need(same(trusted(old_policy, old_control), trusted(new_policy, new_control))
+         and same(checks(old_policy, old_control), checks(new_policy, new_control)),
+         "held source-only transition changed trusted checks or acceptance")
+    for role in roles:
+        need(same(old_runtime[role]["timeout_seconds"], new_runtime[role]["timeout_seconds"]),
+             "held source-only transition changed nested owner deadline")
+    rendered = render_control_owner_commands(new_pin,
+        validation_timeout_seconds=new_runtime["validation_owner"]["timeout_seconds"],
+        adoption_timeout_seconds=new_runtime["adoption_owner"]["timeout_seconds"])
+    need(roles <= set(rendered) <= roles | {"validation_admission_retry"}
+         and all(same(new_runtime.get(key), row) for key, row in rendered.items()),
+         "new nested commands/source descriptors differ from actual immutable renderer")
+    units = contract["units"]
+    need(set(units) == {"watchdog", "repair"}
+         and {row["before"]["path"] for row in plan["files"][:-1]} == {pin["path"] for pin in units.values()},
+         "held source-only transition requires exact two existing units")
+    for row in plan["files"][:-1]:
+        need(row["before"] in units.values()
+             and descriptor(Path(row["before"]["path"])) == row["before"]
+             and checked_descriptor(row["before"]) == row["postimage_utf8"].encode()
+             and stat.S_IMODE(Path(row["before"]["path"]).lstat().st_mode) == row["mode"],
+             "held source-only transition changed an existing unit")
+    old_science = [b for b in before["boards"] if b.get("id") == "legal-ir-scientific"]
+    need(len(old_science) == 1, "one original scientific board required")
+    board = old_science[0]
+    need(value["profile"] == board.get("native_executor_binding") == plan.get("scientific_executor_binding")
+         and value["git_binding"] == board.get("native_executor_git_binding") == plan.get("scientific_executor_git_binding")
+         and type(value["profile"]) is dict and type(value["git_binding"]) is dict,
+         "held scientific profile/Git binding changed")
+    hold = value["hold"]
+    keys = {"st_dev", "st_ino", "st_mode", "st_nlink", "st_uid", "st_gid", "st_size", "st_mtime_ns", "st_ctime_ns"}
+    need(type(hold) is dict and set(hold) == {"file", "identity"}
+         and type(hold["identity"]) is dict and set(hold["identity"]) == keys
+         and all(type(value) is int for value in hold["identity"].values()),
+         "exact existing full-stop hold identity required")
+    path = Path(hold["file"]["path"])
+    need(str(path) in board.get("hold_files", [])
+         and str(path) not in board.get("launch_only_hold_files", []),
+         "scientific retention requires a configured full-stop, not launch-only hold")
+    def held():
+        try:
+            checked_descriptor(hold["file"])
+            info = path.lstat()
+        except FileNotFoundError as error:
+            raise ValueError("original full-stop hold is missing") from error
+        need({key: getattr(info, key) for key in keys} == hold["identity"],
+             "original full-stop hold changed or was replaced")
+    held()
+    profile = json_object(checked_descriptor(value["profile"]))
+    _repair_scientific_git_binding(value["profile"], value["git_binding"], profile, Path(plan["release"]))
+    roles = {"main_entrypoint": "scientific_executor.py", "health_module": "native_executor_health.py",
+             "owner_source": "original_embedded_observation_owner.py", "driver_source": "native_embedded_observation_driver.py"}
+    for role in roles:
+        checked_descriptor(profile[role])
+    verifier = descriptor(Path(plan["release"]) / "ipfs_accelerate_py/agent_supervisor/rescue/native_executor_health.py")
+    need((verifier["bytes"], verifier["sha256"]) == (profile["health_module"]["bytes"], profile["health_module"]["sha256"]),
+         "held scientific verifier differs from retained original release")
+    held()
+    need(checked_descriptor(copy_ref) == raw, "original config preimage changed during retention read")
+    return profile
+
+
+def verify_repair_upgrade(plan: dict, *, installed: bool = False) -> None:
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import checked_descriptor, descriptor, json_object
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need, proc_identity
+    need(plan["schema"] == "agent-supervisor/repair-profile-upgrade-stage@1" and len(plan["files"]) == 3,
+         "exact two-unit and configuration CAS required")
+    checked_descriptor(plan["contract"]["prior_job"]); checked_descriptor(plan["contract"]["inventory"])
+    checked_descriptor(plan["contract"]["initial_release"])
+    checked_descriptor(plan["release_commitment"])
+    for pin in [*plan["release_sources"].values(), *plan["selected_release_sources"].values()]:
+        checked_descriptor(pin)
+    post = json_object(plan["files"][-1]["postimage_utf8"].encode())
+    science = next((board for board in post["boards"] if board["id"] == "legal-ir-scientific"), {})
+    if "held_scientific_profile_retention" in plan:
+        _repair_held_scientific_profile(plan)
+    else:
+        need(science.get("native_executor_git_binding") == plan.get("scientific_executor_git_binding")
+             and (plan.get("scientific_executor_git_binding") is None or
+                  science.get("native_executor_binding") == plan.get("scientific_executor_binding")),
+             "staged scientific Git/profile binding differs from the full configuration")
+        if plan.get("scientific_executor_binding") is not None:
+            need(_repair_scientific_configuration(post, plan["scientific_executor_binding"], Path(plan["release"]),
+                 plan.get("scientific_executor_git_binding")) == post, "staged scientific profile/probe join differs")
+    for row in plan["files"]:
+        path = Path(row["before"]["path"])
+        if installed:
+            need(path.read_bytes() == row["postimage_utf8"].encode()
+                 and stat.S_IMODE(path.lstat().st_mode) == row["mode"], "profile postimage differs")
+            descriptor(path)  # Ordinary identity/noalias check, not just equal bytes.
+        else:
+            checked_descriptor(row["before"])
+            need(stat.S_IMODE(path.lstat().st_mode) == row["mode"], "profile mode preimage differs")
+    if not installed:
+        for identity in plan["contract"]["expected_loaded_before"].values():
+            need(proc_identity(identity["pid"]) == identity, "original live fleet identity changed")
+
+
+def apply_repair_upgrade(plan: dict, runner, *, deadline=None) -> dict:
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import (
+        need, install_source_successor, verify_original_job_closed, cutover_remaining)
+    deadline = time.monotonic() + 120 if deadline is None else deadline
+    cutover_remaining(deadline)
+    verify_repair_upgrade(plan)
+    verify_original_job_closed(plan["contract"]["job_unit"], runner, deadline=deadline)
+    source_result = install_source_successor(plan["source_successor"], deadline=deadline) if plan["source_successor"] is not None else {
+        "completed": True, "source_WRITE_entered": False, "source_WRITE_closed": True, "postwrite_source_READ_closed": True}
+    # The old owner job is now closed. This external process is neither of the
+    # two units below and cannot stop its own supervising repair invocation.
+    for row in plan["files"]:
+        cutover_remaining(deadline)
+        from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import checked_descriptor
+        checked_descriptor(row["before"])
+        if "held_scientific_profile_retention" in plan:
+            _repair_held_scientific_profile(plan)
+        elif plan.get("scientific_executor_binding") is not None:
+            _repair_scientific_profile(plan["scientific_executor_binding"], Path(plan["release"]),
+                plan.get("scientific_executor_git_binding"))
+        cutover_remaining(deadline)
+        atomic_write(Path(row["before"]["path"]), row["postimage_utf8"].encode(), mode=row["mode"])
+    verify_repair_upgrade(plan, installed=True)
+    commands = []
+    for argv in (["systemctl", "--user", "daemon-reload"],
+                 ["systemctl", "--user", "restart", "ipfs-taskboard-" + REPAIR_PROFILE + "-watchdog.service"],
+                 ["systemctl", "--user", "restart", "ipfs-taskboard-" + REPAIR_PROFILE + "-repair.service"]):
+        result = runner({"argv": argv}, cwd="/", timeout=min(45, cutover_remaining(deadline)))
+        commands.append({"argv": argv, "returncode": result["returncode"]})
+        need(type(result["returncode"]) is int and result["returncode"] == 0, "profile service action failed; no replay")
+    verify_repair_upgrade(plan, installed=True)
+    return {"schema": "agent-supervisor/repair-profile-upgrade-installation@1", "completed": True,
+        "commands": commands, "source_successor": source_result, "source_WRITE_closed": True,
+        "postwrite_source_READ_closed": True, "config_units_CAS_closed": True}
+
+
+def observe_repair_upgrade(plan: dict, runner, *, deadline=None) -> dict:
+    """Bounded read-only readiness; restarting never repeats during this wait."""
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_authorization import descriptor, json_object, ordinary_bytes
+    from ipfs_accelerate_py.agent_supervisor.rescue.repair_candidate_owners import need, proc_identity, cutover_remaining
+    deadline = time.monotonic() + 10 if deadline is None else deadline
+    cutover_remaining(deadline)
+    verify_repair_upgrade(plan, installed=True)
+    observed = {}; identities = {}
+    for suffix in ("watchdog", "repair"):
+        unit = "ipfs-taskboard-" + REPAIR_PROFILE + "-" + suffix + ".service"
+        while True:
+            if "held_scientific_profile_retention" in plan:
+                _repair_held_scientific_profile(plan)
+            left = cutover_remaining(deadline)
+            result = runner({"argv": ["systemctl", "--user", "show", unit,
+                "--property=MainPID,InvocationID,ActiveState,Result"]}, cwd="/", timeout=min(10, left))
+            need(type(result["returncode"]) is int and result["returncode"] == 0, "actual fleet unit observation failed")
+            props = dict(line.split("=", 1) for line in result["stdout"].splitlines() if "=" in line)
+            need(props.get("ActiveState") not in {"failed", "inactive"}
+                 and props.get("Result") == "success", "new fleet unit failed while awaiting source readiness")
+            ready = (props.get("ActiveState") == "active" and props.get("MainPID", "").isdecimal()
+                and int(props["MainPID"]) > 0 and re.fullmatch(r"[0-9a-f]{32}", props.get("InvocationID", "")))
+            if ready:
+                owner = proc_identity(int(props["MainPID"]))
+                need(owner is not None, "new fleet PID disappeared during readiness")
+                identity = {"owner": owner, "invocation_id": props["InvocationID"]}
+                if suffix in identities:
+                    need(identities[suffix] == identity, "fleet owner/invocation changed during readiness; no restart replay")
+                else:
+                    identities[suffix] = identity
+                path = Path(plan["state_dir"]) / "runtime-loaded" / (props["InvocationID"] + "-" + suffix + ".json")
+                try:
+                    info = path.lstat()
+                except FileNotFoundError:
+                    pass  # Type=simple may be active before serve publishes its attestation.
+                else:
+                    need(stat.S_ISREG(info.st_mode) and info.st_uid == os.getuid() and info.st_nlink == 1
+                         and not info.st_mode & 0o222, "source attestation has an unsafe file identity")
+                    try:
+                        value = json_object(ordinary_bytes(path)); pin = descriptor(path)
+                    except json.JSONDecodeError:
+                        # The original O_EXCL writer may still be completing this
+                        # exact invocation's first file; do not accept partial JSON.
+                        value = None
+                    except ValueError as error:
+                        if str(error) != "repair metadata changed while read":
+                            raise
+                        value = None
+                    if value is not None:
+                        need(value["owner"] == owner and value["invocation_id"] == props["InvocationID"]
+                             and value["source_commitment"] == plan["source_commitment"]
+                             and value["release"] == plan["release"]
+                             and value["loaded_module"] == plan["release_sources"]["fleet_" + suffix]
+                             and value["config"] == descriptor(Path(plan["contract"]["config"]["path"]))
+                             and proc_identity(owner["pid"]) == owner,
+                             "actual loaded source/config/PID birth differs")
+                        observed[suffix] = pin
+                        break
+            time.sleep(min(0.05, cutover_remaining(deadline)))
+    # One service cannot restart unnoticed while the other finishes readiness.
+    for suffix, identity in identities.items():
+        if "held_scientific_profile_retention" in plan:
+            _repair_held_scientific_profile(plan)
+        unit = "ipfs-taskboard-" + REPAIR_PROFILE + "-" + suffix + ".service"
+        result = runner({"argv": ["systemctl", "--user", "show", unit,
+            "--property=MainPID,InvocationID,ActiveState,Result"]}, cwd="/", timeout=min(10, cutover_remaining(deadline)))
+        props = dict(line.split("=", 1) for line in result["stdout"].splitlines() if "=" in line)
+        need(type(result["returncode"]) is int and result["returncode"] == 0
+             and props.get("MainPID") == str(identity["owner"]["pid"])
+             and props.get("InvocationID") == identity["invocation_id"] and props.get("ActiveState") == "active"
+             and props.get("Result") == "success" and proc_identity(identity["owner"]["pid"]) == identity["owner"],
+             "actual fleet identity changed before readiness closed")
+        need(descriptor(Path(observed[suffix]["path"])) == observed[suffix], "readiness attestation changed")
+    if "held_scientific_profile_retention" in plan:
+        _repair_held_scientific_profile(plan)
+    return {"loaded_runtime": observed, "runtime_unit_config_CAS_closed": True,
+            "read_only_readiness_wait_closed": True, "readiness_deadline_monotonic": deadline}
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--inventory", type=Path, required=True)
+    parser.add_argument("--repair-cwd", type=Path)
+    parser.add_argument("--profile", choices=["legal-ir"],
+                        help="Stage an isolated LegalIR diagnostic fleet without changing the global fleet")
+    parser.add_argument("--enroll-only", action="store_true",
+                        help="Append one new diagnostic board, preserving the existing fleet and units")
+    parser.add_argument("--activate-runtime", action="store_true",
+                        help="With --enroll-only, stage only the two generic units and new runtime binding")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="With --enroll-only or --profile, print the plan without any home mutations")
+    parser.add_argument("--enable", action="store_true")
+    parser.add_argument("--defer-repair-restart", action="store_true",
+                        help="Let a running repair finish before its dispatcher adopts this release")
+    args = parser.parse_args()
+    source = Path(__file__).resolve().parents[3]
+    if args.profile:
+        if args.enroll_only or args.activate_runtime or args.defer_repair_restart:
+            parser.error("--profile cannot enroll or upgrade the global fleet")
+        if args.repair_cwd is None:
+            parser.error("--profile requires an explicit --repair-cwd")
+        result = install_profile(source, args.inventory.resolve(), args.repair_cwd.resolve(),
+                                 profile=args.profile, dry_run=args.dry_run, enable=args.enable)
+    elif args.enroll_only:
+        if args.enable or args.defer_repair_restart or args.repair_cwd is not None:
+            parser.error("--enroll-only cannot change services or the repair checkout")
+        result = enroll(source, args.inventory.resolve(), dry_run=args.dry_run,
+                        activate_runtime=args.activate_runtime)
+    else:
+        if args.dry_run or args.activate_runtime:
+            parser.error("--dry-run and --activate-runtime require --enroll-only")
+        if args.repair_cwd is None:
+            parser.error("--repair-cwd is required for a full installation")
+        result = install(source, args.inventory.resolve(), args.repair_cwd.resolve(),
+                         enable=args.enable, defer_repair_restart=args.defer_repair_restart)
+    print(json.dumps(result, indent=2))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

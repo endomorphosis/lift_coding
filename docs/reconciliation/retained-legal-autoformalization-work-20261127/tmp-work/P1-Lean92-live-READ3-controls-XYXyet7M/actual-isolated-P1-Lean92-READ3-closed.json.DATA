@@ -1,0 +1,247 @@
+{
+  "Source_WRITE_claimed": false,
+  "Source_closed": true,
+  "actual_accelerate_index_metadata": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "actual_compact": {
+    "bytes": 6441,
+    "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json",
+    "sha256": "ec734f472ed71729bdbdc1827e4f76e9a235eda5d00d1ca7e5caed8af4996351"
+  },
+  "actual_isolated_content_epoch": {
+    "bytes": 6319,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "3fb04725ccfc2b5c4a5fc0a60392bfed468b38adeec9b9a67dad8266d113351e"
+  },
+  "actual_ledger_after": {
+    "captures": 539143,
+    "capturesComplete": false,
+    "global_cap": 55414638602,
+    "internal_cap": 55224046728,
+    "internal_used": 55208065650,
+    "used": 55398657524
+  },
+  "actual_report": {
+    "bytes": 1349781,
+    "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-closed-report.json",
+    "sha256": "a27761b0d541ce4abb3e0b49d6414b2ac7445737adbb44b0865ec1cfaa56d2e5"
+  },
+  "exact_local_freeze": {
+    "bytes": 5801,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-isolated-exact-two-local-freeze.json",
+    "sha256": "afa47b34b755f9bd2c53bb36d68b10c069dd005d4e0b66a7b4338ebf6bb1d9de"
+  },
+  "exact_private_candidate": {
+    "bytes": 9386,
+    "path": "/tmp/P1-Guide571-Lean-routing-query-kind-native-composed-private-RXZkJ57d/SEALED-private-Lean-routing-query-kind-native-namespaced-exact-two.json",
+    "sha256": "d07b254324a63bb6c35ff9ee56d5f6f478fb69c4c91a668446e9eed66e3e0f32"
+  },
+  "full_charge": {
+    "bytes": 1268,
+    "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/Source-only-isolated-P1-Lean92-READ3-full-retained.json",
+    "sha256": "d0602f2f7ce9df73898793cd667054d41673c99f77c921f1fe41c61f78a6cf3e"
+  },
+  "individual_captures": [
+    {
+      "bytes": 104341,
+      "full9": {
+        "st_ctime_ns": "1795735927039492753",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2796373",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735927039492753",
+        "st_nlink": "1",
+        "st_size": "104341",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_P1_Lean92_role",
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "raw_reference": {
+        "bytes": 104341,
+        "full9": {
+          "st_ctime_ns": "1795735993401546036",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "33865619",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795735993401546036",
+          "st_nlink": "1",
+          "st_size": "104341",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/actual-output/raw/00-lean.py.DATA",
+        "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "root": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets",
+      "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+    },
+    {
+      "bytes": 123945,
+      "full9": {
+        "st_ctime_ns": "1795735927039492753",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "48802439",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735927039492753",
+        "st_nlink": "1",
+        "st_size": "123945",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_P1_Lean92_role",
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+      "raw_reference": {
+        "bytes": 123945,
+        "full9": {
+          "st_ctime_ns": "1795735993424031292",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "33865620",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795735993424031292",
+          "st_nlink": "1",
+          "st_size": "123945",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/actual-output/raw/01-test_kernel_backends.py.DATA",
+        "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945"
+      },
+      "relative_path": "tests/integration/logic/backends/test_kernel_backends.py",
+      "root": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets",
+      "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945"
+    },
+    {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795735927425184003",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "1086707",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735927424183995",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_Git_index",
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/.git/index",
+      "raw_reference": {
+        "bytes": 7070597,
+        "full9": {
+          "st_ctime_ns": "1795735993450427939",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "33865621",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795735993450427939",
+          "st_nlink": "1",
+          "st_size": "7070597",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/actual-output/raw/02-index.DATA",
+        "sha256": "ed76a1509714a8f9f2d4bd7b3da9b6a1b2671127c310f198406516407a759c78"
+      },
+      "relative_path": ".git/index",
+      "root": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets",
+      "sha256": "ed76a1509714a8f9f2d4bd7b3da9b6a1b2671127c310f198406516407a759c78"
+    }
+  ],
+  "live_reconciled_git_baselines": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "8996e160d2628b0fd35f1166a6dae6957582c243",
+    "hallucinate": "80c472a8aa28db5f0f6a148ecd41dec34b16c6e4",
+    "root": "5165641659bf96e1cc696c54a65eb14a74db3276"
+  },
+  "module_closed": true,
+  "named_metadata_count": 1621,
+  "no_runtime_clock_IO_or_SDK_binding_selected": true,
+  "operator_pid": 45809,
+  "ordinary_phase_qualified": false,
+  "ordinary_read_binding_abi": {
+    "bytes": 2353,
+    "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/actual-isolated-ordinary92-D27-read-binding.json",
+    "sha256": "453f5320013daaac283c7360ff01d2832966bcfc53ad5568e55a9bd7c33e2f49"
+  },
+  "outer_epoch_record_count": 1610,
+  "outer_epoch_reference": {
+    "bytes": 850463,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-live-reconciled-outer1610-epoch.json",
+    "sha256": "9af3058e7567f9e7e19ce70c6c30d33ee4dfe9d50bbfe0c05aedfe84eec56bd8"
+  },
+  "previous_published_guide": {
+    "bytes": 2632,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-Guide572-four-docs-three-FF-publication.json",
+    "sha256": "8812bb7dc362d7a2815d4e438a972b1eef0d29034b9349a7c87dee4d7add083b"
+  },
+  "projects": [
+    {
+      "Git_HEAD": "30e1f2f81538b1e472a858a7984f1fba64fc6836",
+      "Git_tree": "1604d49d2a8c2fe85b450890a3ceb1cfa5fd2fb7",
+      "root": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets"
+    },
+    {
+      "Git_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+      "Git_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate"
+    }
+  ],
+  "promotion_selected": false,
+  "protected_index_reference": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795735927425184003",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "1086707",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795735927424183995",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/.git/index",
+    "sha256": "ed76a1509714a8f9f2d4bd7b3da9b6a1b2671127c310f198406516407a759c78"
+  },
+  "python_epoch_record_count": 1597,
+  "python_epoch_reference": {
+    "bytes": 843881,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-live-reconciled-Python1597-epoch.json",
+    "sha256": "e4184b418963a4dfc8f54ac38c70d737c2346d5f4d8451383fac4c5af8ebefac"
+  },
+  "request": {
+    "bytes": 12515,
+    "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/Root-bound-isolated-P1-Lean92-READ3-request.json",
+    "sha256": "c54cfaf4b92ea8d845841af2d605eaa0fbe6d3986828eabcb95c2e90a734be11"
+  },
+  "schema": "actual-Phase1-isolated-Lean92-postfreeze-READ3-and-ordinary92-nonclock/v1",
+  "selected": {
+    "bytes": 922,
+    "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/Root-selected-isolated-P1-Lean92-READ3.json",
+    "sha256": "1d8408ecb7ee3fd936fc9a09459e25da6a0744bb9ef8bd70204afffdbe20cd92"
+  },
+  "shared_canonical_mutation": false,
+  "terminal_evidence": {
+    "chunk_id": "6e269f",
+    "kind": "synchronous_exec_terminal",
+    "operator_pid": 45809,
+    "returncode": 0
+  },
+  "terminal_returncode": 0,
+  "terminal_session": null
+}

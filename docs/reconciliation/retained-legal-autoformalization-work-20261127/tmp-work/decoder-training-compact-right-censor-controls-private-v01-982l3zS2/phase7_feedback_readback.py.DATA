@@ -1,0 +1,101 @@
+"""Verify the retained feedback failure and reproduce the held nudger on scalar fixtures."""
+import ast
+from hashlib import sha256
+import json
+import math
+from pathlib import Path
+from types import SimpleNamespace
+import xml.etree.ElementTree as ET
+
+HERE=Path(__file__).resolve().parent
+OLD=Path('/tmp/P7-checked-feedback-ordinary26-retry-owner-order-5D1JveT6/actual-output')
+READ=Path('/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/raw')
+NEW=Path('/tmp/P7-checked-feedback-revalidated-final-LadvXFyf')
+REREAD=Path('/tmp/P7-Guide573-successor-live-READ10-controls-JedG5GQ0')
+
+
+def exact(path,size,digest):
+    raw=path.read_bytes()
+    assert (len(raw),sha256(raw).hexdigest())==(size,digest),path
+    return dict(path=str(path),bytes=size,sha256=digest),raw
+
+
+def replay():
+    junit, raw=exact(OLD/'phase7-checked-feedback26-run-result0-output1.bin',12076,
+        '8cd57f5d4f97c5655fc1fd6a58b3bf396c3f0d3c1d18568a51bf9f081dd0efa8')
+    cases=list(ET.fromstring(raw).iter('testcase'))
+    failures={row.get('name'):row.find('failure') for row in cases if row.find('failure') is not None}
+    assert len(cases)==26 and len(failures)==2
+    assert set(failures)=={f'test_typed_nested_feedback_matching_envelope_preserves_weight_updates[{key}]'
+                           for key in ('guidance','feedback')}
+    assert all('KeyError' in str(failure.text) and 'legal_ir_view_logits' in str(failure.text) for failure in failures.values())
+    assert not any(row.find('error') is not None or row.find('skipped') is not None for row in cases)
+    report, raw=exact(OLD/'complete-frozen-local-D-phase7-checked-feedback26-existing-owner-report.json',1014563,
+        '7e5ffa7f6ec5e2e003d90fd30417a3002c8b22f39fb6ccae52c7b3151c3ed8c1')
+    result=json.loads(raw)
+    assert result['Source_closed'] is result['resource_cleanup_confirmed'] is True
+    assert result['qualification_complete'] is False
+    assert 'returncode=1' in result['phases']['phase7-checked-feedback26-run']['error']['message']
+
+    original, source=exact(READ/'01-modal_autoencoder.py.DATA',1429059,
+        '3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447')
+    tree=ast.parse(source,original['path'])
+    functions={'_normalized_distribution','_float_or_zero','_clamp_learning_rate','_unique_preserve_order','_softmax'}
+    methods={'_nudge_legal_ir_view_global_logits_toward_distribution','_is_legal_ir_view_family',
+             '_legal_ir_view_family_candidates','_invalidate_legal_ir_view_family_candidates'}
+    code=[node for node in tree.body if type(node) is ast.FunctionDef and node.name in functions]
+    owned=[node for node in ast.walk(tree) if type(node) is ast.FunctionDef and node.name in methods]
+    assert len(code)==len(functions) and len(owned)==len(methods)
+    prefix=ast.parse('from __future__ import annotations').body
+    ns={'math':math}
+    exec(compile(ast.Module(prefix+code+owned,type_ignores=[]),original['path'],'exec'),ns)
+    get_families=next(node for node in owned if node.name=='_legal_ir_view_family_candidates')
+    attrs={node.attr for node in ast.walk(get_families) if type(node) is ast.Attribute
+           and type(node.value) is ast.Attribute and node.value.attr=='state'}
+    head=type('ScalarHeldNudger',(),{name:ns[name] for name in methods})
+    outcomes={}
+    for label,initial in (('singleton',{}),('competing_view',{'CEC.native':0.0})):
+        self=head()
+        self.state=SimpleNamespace(**dict.fromkeys(attrs))
+        for name in attrs:
+            setattr(self.state,name,{})
+        self.state.legal_ir_view_logits.update(initial)
+        self._legal_ir_view_family_candidates_cache=None
+        self.modal_families=()
+        accepted=self._nudge_legal_ir_view_global_logits_toward_distribution({'deontic.ir':1.},learning_rate=0.05)
+        assert accepted is True
+        outcomes[label]=dict(applied=accepted,global_logits=self.state.legal_ir_view_logits)
+    assert outcomes['singleton']['global_logits']=={'deontic.ir':0.}
+    assert outcomes['competing_view']['global_logits']=={'CEC.native':-.025,'deontic.ir':.025}
+    assert b'if abs(delta) <= 0.0:\n            continue' in source
+    fix, raw=exact(NEW/'exact-nine-current-forward.patch',79733,
+        '5f0718af7a0e1f7bbf89ba846e97fc73974e999b5c5784209e4b4dc31c046d2e')
+    assert b'+    autoencoder.state.legal_ir_view_logits["CEC.native"] = 0.0' in raw
+    assert b'+    assert direct.update_norms_by_head == report.update_norms_by_head' in raw
+    seal, raw=exact(NEW/'SEALED-Phase7-checked-legal-proof-current-exact-nine-private-v02.json',9930,
+        '2dbbfdd8888a86b26e4ff54a5918d5617e7182793b3e5ebea2a270f2ee3e9d67')
+    assert json.loads(raw)['ordinary_qualification_pending'] is True
+    read10, raw=exact(REREAD/'actual-isolated-Phase7-READ10-closed.json',19732,
+        '0acb3ae07ff8631e511cdc08fac91f7ffc7deafa1ba4481100763bf004eb4c7c')
+    receipt=json.loads(raw)
+    assert receipt['terminal_returncode']==0 and receipt['Source_closed'] is receipt['module_closed'] is True
+    assert receipt['ordinary_phase_qualified'] is receipt['promotion_selected'] is False
+    published=receipt['live_reconciled_git_baselines']['datasets']
+    isolated=receipt['projects'][0]['Git_HEAD']
+    assert published=='78b3466e3259bece28ccf9edc03dc7609efa22fd' and isolated!=published
+    charge=receipt['full_charge']
+    _, raw=exact(Path(charge['path']),charge['bytes'],charge['sha256'])
+    ledger=json.loads(raw)['after_full_retained_precharge']
+    headroom=min(ledger['global_cap']-ledger['used'],ledger['internal_cap']-ledger['internal_used'])
+    assert headroom==6_356_992
+    return dict(schema='private-current-Phase7-feedback-fixture-and-isolated-readback/v1',
+        original_FAILED_junit=junit,original_FAILED_owner=report,retained_modal_source=original,
+        cases=26,passes=24,failed_nodes=sorted(failures),qualification_complete=False,
+        modeled_held_global_view_update=outcomes,successor_test_fixture_patch=fix,successor_local_seal=seal,
+        successor_isolated_READ10_closed=read10,latest_retained_precharge=charge,retained_headroom_bytes=headroom,
+        successor_local_D=isolated,published_D=published,successor_ordinary_result=None,
+        contributes_current_Stage_A_index_or_model_qualification=False)
+
+
+if __name__=='__main__':
+    print(json.dumps(replay(),sort_keys=True,indent=2))

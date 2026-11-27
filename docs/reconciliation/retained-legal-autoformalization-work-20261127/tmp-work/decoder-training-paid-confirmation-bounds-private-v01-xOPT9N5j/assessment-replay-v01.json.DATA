@@ -1,0 +1,49 @@
+{
+  "actual_legal_review_or_paid_training": false,
+  "comparison_sha256": "213729805a5f6837a96565b671b0c04c761185c39876e47d54a76c8e7ff5c31a",
+  "fictional_arms": 2,
+  "legacy_final_checkpoint_frozen": false,
+  "paired_development_looks": 2,
+  "physical_paid_events_fixture": 8,
+  "refusals": [
+    {
+      "case": "same split with different TRAIN roster across arms",
+      "reason": "matched compact arms must retain the same ordered TRAIN cohort, runtime and budgets"
+    },
+    {
+      "case": "physical training close omitted from proper paid stage",
+      "reason": "every scored compact look must charge its completed training and evaluation closes"
+    },
+    {
+      "case": "physical evaluation close omitted from proper paid stage",
+      "reason": "every scored compact look must charge its completed training and evaluation closes"
+    },
+    {
+      "case": "completed training paid only at terminal, not at confirming look",
+      "reason": "retrospective look must charge its completed training and evaluation closes"
+    },
+    {
+      "case": "duplicate physical close under another event ID",
+      "reason": "one physical close cannot be charged under multiple pilot event identities"
+    },
+    {
+      "case": "independent development owner denial",
+      "reason": "independent owner refused compact development selection, receipts or physical terminal cells"
+    },
+    {
+      "case": "development callback mutated selected cell",
+      "reason": "selected compact study, development design, receipts or terminal cells changed"
+    },
+    {
+      "case": "unscored attempt with uncharged terminal close",
+      "reason": "compact terminal ledger must charge the exact attempt close, including unscored failures"
+    },
+    {
+      "case": "legacy freeze rejects distinct compact comparison",
+      "reason": "exact verified development comparison required"
+    }
+  ],
+  "schema": "private-two-arm-compact-study-controls/v1",
+  "status": "passed",
+  "unscored_failed_attempt_retained": true
+}

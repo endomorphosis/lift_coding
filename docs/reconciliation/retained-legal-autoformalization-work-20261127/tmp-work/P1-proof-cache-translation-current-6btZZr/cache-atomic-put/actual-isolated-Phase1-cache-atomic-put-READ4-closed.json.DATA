@@ -1,0 +1,208 @@
+{
+  "Source_WRITE_claimed": false,
+  "Source_closed": true,
+  "actual_accelerate_index_metadata": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "actual_closed_Source_read_leases": [
+    {
+      "canonical_root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+      "cooperative": true,
+      "lock_path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/workspace/control-plane/source-leases/source.lock",
+      "mode": "read",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 3.4304335713386536e-05
+    },
+    {
+      "canonical_root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+      "cooperative": true,
+      "lock_path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/workspace/control-plane/source-leases/source.lock",
+      "mode": "read",
+      "schema_version": "autoencoder-source-lease/v1",
+      "waited_seconds": 6.542447954416275e-05
+    }
+  ],
+  "actual_isolated_content_epoch": {
+    "bytes": 6382,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "747a2492f0d6ce993c1208fb74b71c330bd53bd87a676370d3e3b570134ced37"
+  },
+  "actual_ledger_after": {
+    "captures": 543418,
+    "capturesComplete": false,
+    "global_cap": 59155957770,
+    "internal_cap": 58965365896,
+    "internal_used": 58959008904,
+    "used": 59149600778
+  },
+  "exact_local_freeze": {
+    "bytes": 8716,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-Phase1-cache-atomic-put-exact-three-local-freeze.json",
+    "sha256": "0d94fff7376374123441e0a52da3fb11b06f315125051e030660c48d571b5725"
+  },
+  "full_charge": {
+    "bytes": 1305,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/Source-only-Phase1-cache-atomic-put-READ-overlay-full-retained.json",
+    "sha256": "adc7cb0909e09256db3e203a9a2e85a8b412ea639bf3b30e07b1bc78b62df072"
+  },
+  "individual_captures": [
+    {
+      "bytes": 7070589,
+      "full9": {
+        "st_ctime_ns": "1795750532478310693",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72519186",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795750532468310578",
+        "st_nlink": "1",
+        "st_size": "7070589",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+      "raw_reference": {
+        "bytes": 7070589,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/retained-Source-index.DATA",
+        "sha256": "8c9ad3eb981d669bc1d98bf5e6f2448d4fd3246a50818bc6d406b6c572adf7c7"
+      },
+      "sha256": "8c9ad3eb981d669bc1d98bf5e6f2448d4fd3246a50818bc6d406b6c572adf7c7"
+    },
+    {
+      "bytes": 62783,
+      "full9": {
+        "st_ctime_ns": "1795750532276434201",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513518",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795750532276434201",
+        "st_nlink": "1",
+        "st_size": "62783",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+      "raw_reference": {
+        "bytes": 62783,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/retained-Source-proof_cache.py.DATA",
+        "sha256": "cf414d3c4bfb858741a8423508d7e70d26db7f3b0a61959c9d594c39ddee23de"
+      },
+      "sha256": "cf414d3c4bfb858741a8423508d7e70d26db7f3b0a61959c9d594c39ddee23de"
+    },
+    {
+      "bytes": 128091,
+      "full9": {
+        "st_ctime_ns": "1795750532276434201",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514356",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795750532276434201",
+        "st_nlink": "1",
+        "st_size": "128091",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+      "raw_reference": {
+        "bytes": 128091,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/retained-Source-test_kernel_backends.py.DATA",
+        "sha256": "eac1d213b16ff2ef79f18269352648768d4e145b2b65fbb8c75c308bced98ea2"
+      },
+      "sha256": "eac1d213b16ff2ef79f18269352648768d4e145b2b65fbb8c75c308bced98ea2"
+    },
+    {
+      "bytes": 105531,
+      "full9": {
+        "st_ctime_ns": "1795750532276434201",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514039",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795750532276434201",
+        "st_nlink": "1",
+        "st_size": "105531",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+      "raw_reference": {
+        "bytes": 105531,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/retained-Source-test_proof_cache.py.DATA",
+        "sha256": "1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460"
+      },
+      "sha256": "1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460"
+    }
+  ],
+  "module_closed": true,
+  "named_metadata_count": 1625,
+  "named_metadata_recheck_reference": {
+    "bytes": 907991,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-1625-named-metadata-guard.json",
+    "sha256": "94a95a51b26600dbbe0d940457af87e673c6fb147e9dccb99b5b65209751b79e"
+  },
+  "ordinary_phase_qualified": false,
+  "ordinary_read_binding_abi": {
+    "bytes": 1887,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-ordinary10-D27-read-binding.json",
+    "sha256": "7eeb60ab86e1f1c94fdff9fc320c3cda12df1424a4a474a5107d90fbfd34b269"
+  },
+  "outer_epoch_record_count": 1618,
+  "outer_epoch_reference": {
+    "bytes": 852469,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-live-reconciled-outer1618-epoch.json",
+    "sha256": "a250df914df7b03b8362891c3013cce373e2a65e7a083a1f1521d7e9279b165d"
+  },
+  "previous_published_guide": {
+    "bytes": 3363,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/actual-Guide579-four-docs-three-FF-publication.json",
+    "sha256": "1e4dcdba8ad65453fbf82291927814b584ae4c7e2183509a175f4aca876d0811"
+  },
+  "projects": [
+    {
+      "Git_HEAD": "6fcdbfbb6ce6d5885ad98275cbc989a8d0e4ba8e",
+      "Git_tree": "39113c1884bcaa9fac455fb92667661af8241670",
+      "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets"
+    },
+    {
+      "Git_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+      "Git_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate"
+    }
+  ],
+  "promotion_selected": false,
+  "protected_index_reference": {
+    "bytes": 7070589,
+    "full9": {
+      "st_ctime_ns": "1795750532478310693",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72519186",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795750532468310578",
+      "st_nlink": "1",
+      "st_size": "7070589",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "sha256": "8c9ad3eb981d669bc1d98bf5e6f2448d4fd3246a50818bc6d406b6c572adf7c7"
+  },
+  "python_epoch_record_count": 1605,
+  "python_epoch_reference": {
+    "bytes": 845899,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-live-reconciled-Python1605-epoch.json",
+    "sha256": "bf7a6ba977ede10974c16d506304f67492e14b168dff1d9651d1d465d24c7934"
+  },
+  "schema": "actual-closed-Source42-epoch-and-exact-four-retained-reads/v1",
+  "terminal_returncode": 0
+}

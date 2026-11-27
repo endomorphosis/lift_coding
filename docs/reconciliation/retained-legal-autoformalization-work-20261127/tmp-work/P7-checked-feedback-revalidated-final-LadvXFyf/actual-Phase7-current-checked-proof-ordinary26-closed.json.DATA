@@ -1,0 +1,84 @@
+{
+  "Source_binding": {
+    "bytes": 2404,
+    "path": "/tmp/P7-Guide573-successor-live-READ10-controls-JedG5GQ0/actual-isolated-Phase7-ordinary-D27-read-binding.json",
+    "sha256": "78d7bcc6d10f18c434c0abed0c34717ab0d18f57e8b3a85f6f99df7e411db0b1"
+  },
+  "Source_lease_and_resource_cleanup_closed": true,
+  "actual_ordinary_counts": {
+    "errors": 0,
+    "failures": 0,
+    "functions": 13,
+    "passed": 26,
+    "skipped": 0,
+    "tests": 26
+  },
+  "actual_report": {
+    "bytes": 1266518,
+    "path": "/tmp/P7-checked-feedback-terminal-final-bind-INERT-D0xVtGlC/actual-output/complete-frozen-local-D-phase7-checked-feedback26-existing-owner-report.json",
+    "sha256": "3722cc430567e1e735b30eac626515cbc977f509e424cfb8af673c4d5b0b1aa7"
+  },
+  "exact_freeze": {
+    "bytes": 17143,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-isolated-Phase7-exact-nine-local-freeze.json",
+    "sha256": "825edad923817a395ca1040b5f0633d053f3ea24faf777372294ae3bd322f9c6"
+  },
+  "held_case_selector": {
+    "bytes": 6887,
+    "path": "/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/exact-13-function-26-case-static-roster.json",
+    "sha256": "243e5537dce417ee0097fb78d5dbdde5dd8cf72a9b638b51d61e8b1ab1d8a4dc"
+  },
+  "large_model_fit_or_Native_or_statutory_qualification": false,
+  "ordered_cases": [
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence[selected-None]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence[same_receipt_id-exact checked receipt and formal obligation]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence[stale_raw_source-checked obligation does not bind the current sample source]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence[changed_interpretation-failed current receipt replay]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence[changed_dependency-failed current receipt replay]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence[unreviewed_source-requires a reviewed sample source]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence[missing_modal_binding-does not bind the current modal interpretation]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_current_target_metadata_without_checked_receipt_never_reaches_update",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_uses_current_semantic_target_before_update[matching]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_uses_current_semantic_target_before_update[legacy]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_uses_current_semantic_target_before_update[sample]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_uses_current_semantic_target_before_update[interpretation]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_uses_current_semantic_target_before_update[dependency]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_refuses_substituted_record_with_same_target[other_receipt]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_refuses_substituted_record_with_same_target[other_label_same_receipt]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_current_target_requires_independent_id_and_canonical_feedback[copied_id]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_current_target_requires_independent_id_and_canonical_feedback[unselected_id]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_proof_nested_guidance_cannot_redirect_primary_update",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_content_addressed_proof_feedback_updates_primary_and_auxiliary_heads",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_nested_feedback_matching_envelope_preserves_weight_updates[guidance]",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_nested_feedback_matching_envelope_preserves_weight_updates[feedback]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py::test_ablation_refuses_unmatched_typed_feedback_before_cloning",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py::test_trusted_version_matched_feedback_trains_every_head_and_reports_family_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py::test_proof_updates_cannot_override_primary_objective_parameters",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py::test_proof_head_training_reports_finite_nonzero_proof_norms",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_record_v2_disk_round_trip_and_explicit_context"
+  ],
+  "ordinary_raw_JUnit": {
+    "bytes": 5448,
+    "logical_name": "junit.xml",
+    "path": "/tmp/P7-checked-feedback-terminal-final-bind-INERT-D0xVtGlC/actual-output/phase7-checked-feedback26-run-result0-output1.bin",
+    "sha256": "323a58b724cc565571c35cb709f3afbe609a65ae5d3caaf857341df6b205ffaf"
+  },
+  "published": false,
+  "raw_phase_bindings": {
+    "collect": {
+      "bytes": 264398,
+      "logical_name": "binding.json",
+      "path": "/tmp/P7-checked-feedback-terminal-final-bind-INERT-D0xVtGlC/actual-output/phase7-checked-feedback26-collect-result0-output0.bin",
+      "sha256": "10a56d25b9788cf3ebfbf0820ca19d26920890c62b8a5a5cb12a76e8edc4ebac"
+    },
+    "run": {
+      "bytes": 277274,
+      "logical_name": "binding.json",
+      "path": "/tmp/P7-checked-feedback-terminal-final-bind-INERT-D0xVtGlC/actual-output/phase7-checked-feedback26-run-result0-output0.bin",
+      "sha256": "293612b6162120220b5b9f52fda0e6ee6ef0f8ffea216573b6098eb6856ca881"
+    }
+  },
+  "schema": "actual-Phase7-current-checked-proof-ordinary26-closed/v1",
+  "terminal_returncode": 0,
+  "terminal_session": 50919
+}

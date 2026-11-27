@@ -1,0 +1,58 @@
+{
+  "added_Source_only_envelope": 134217728,
+  "after_full_retained_precharge": {
+    "captures": 543397,
+    "capturesComplete": false,
+    "global_cap": 57293686794,
+    "internal_cap": 57103094920,
+    "internal_used": 57096737928,
+    "used": 57287329802
+  },
+  "combined_epoch_READ3_full_retained_charge": {
+    "bytes": 1292,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/Source-only-P1-cache-translation-READ-epoch-full-retained-v02.json",
+    "sha256": "1846053f8ec3457b8b2f39e03807f52734eddb8ccb6d0e00585763c522bfedf9"
+  },
+  "exact_human_affirmation": {
+    "bytes": 2960,
+    "path": "/tmp/Main-source-cap-human-provenance-v01-g9hs_s_q/Root-original-human-Source-cap-approval.record.jsonl",
+    "sha256": "8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda"
+  },
+  "no_policy_capacity_or_model_change": true,
+  "prior": {
+    "captures": 543396,
+    "capturesComplete": false,
+    "global_cap": 57159469066,
+    "internal_cap": 56968877192,
+    "internal_used": 56962520200,
+    "used": 57153112074
+  },
+  "protected_Guide574_Source_full_charge": {
+    "bytes": 1314,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/Source-only-Guide574-full-retained-cap.json",
+    "sha256": "ceffb184cc31806d15edcc6fb06583d92994e4c8f1506966cd8cce9039da4c69"
+  },
+  "protected_Guide574_publication": {
+    "bytes": 2647,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-Guide574-four-docs-three-FF-publication.json",
+    "sha256": "84d3364b66b4990a14a687417fb17ae38bc1fdb85131c51bfda55d34a0a1e84d"
+  },
+  "retained_first_READ_attempt_full_charge": {
+    "bytes": 1284,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/Source-only-P1-cache-translation-READ-epoch-full-retained.json",
+    "sha256": "b213ee1e5fb90e16f515dec1d3aaeccf9dc48aa59c413e80dc7c780066cf4ad8"
+  },
+  "selected": {
+    "captures": 543396,
+    "capturesComplete": false,
+    "global_cap": 57293686794,
+    "internal_cap": 57103094920,
+    "internal_used": 56962520200,
+    "used": 57153112074
+  },
+  "successor_write_charge": {
+    "bytes": 1277,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/Source-only-cache-translation-WRITE-full-retained.json",
+    "sha256": "20e629ca537e5f91639c0eb789e7d548b9e249378ff19ea6253aa07862acdd6e"
+  }
+}

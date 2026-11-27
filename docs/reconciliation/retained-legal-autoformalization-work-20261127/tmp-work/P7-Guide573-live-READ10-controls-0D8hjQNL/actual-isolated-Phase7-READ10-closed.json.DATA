@@ -1,0 +1,492 @@
+{
+  "Source_WRITE_claimed": false,
+  "Source_closed": true,
+  "actual_accelerate_index_metadata": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "actual_compact": {
+    "bytes": 16528,
+    "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json",
+    "sha256": "090b103794b87bcfe4973079be2c8fa316aa939cb586a543c0fc42143315d881"
+  },
+  "actual_isolated_content_epoch": {
+    "bytes": 9018,
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-Phase7-current-Source42-content-epoch-closed.json",
+    "sha256": "a7eeb8e165f48322a1c1680b1ec70ec8af3a4b6424ccadbe23a0d1ad831a651f"
+  },
+  "actual_ledger_after": {
+    "captures": 541267,
+    "capturesComplete": false,
+    "global_cap": 56068950026,
+    "internal_cap": 55878358152,
+    "internal_used": 55865524332,
+    "used": 56056116206
+  },
+  "actual_report": {
+    "bytes": 1505483,
+    "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-closed-report.json",
+    "sha256": "53ce516df71efb40d20312278c50efc9dc5e6eb25b7c0c6a5db37a190d0f4a18"
+  },
+  "exact_local_freeze": {
+    "bytes": 17276,
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-isolated-Phase7-exact-nine-local-freeze.json",
+    "sha256": "63b1bc7bc60db45147d2bc0f0d3a3fab908b19fa17f530d00ced408f5fa88da3"
+  },
+  "exact_private_candidate": {
+    "bytes": 9061,
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/SEALED-Phase7-checked-legal-proof-current-exact-nine-private.json",
+    "sha256": "31caccf483e6ac1e10772854a4281ba19844832e1f1141c89f5d5b4618e66976"
+  },
+  "full_charge": {
+    "bytes": 1282,
+    "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/Source-only-isolated-Phase7-READ10-full-retained.json",
+    "sha256": "5984159afb047ac2ff4b24ce6e2a974b11adb448b2e43b749fe784c3008a11c7"
+  },
+  "individual_captures": [
+    {
+      "bytes": 74557,
+      "full9": {
+        "st_ctime_ns": "1795738495873935389",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "67552106",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495873935389",
+        "st_nlink": "1",
+        "st_size": "74557",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "raw_reference": {
+        "bytes": 74557,
+        "full9": {
+          "st_ctime_ns": "1795738779924838089",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "9487389",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795738779924838089",
+          "st_nlink": "1",
+          "st_size": "74557",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/raw/00-legal_ir_proof_feedback.py.DATA",
+        "sha256": "5c44d695c17fab26d6bba70d544e57a7bd0b5fd5b2434f810c9656db13926478"
+      },
+      "relative_path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "5c44d695c17fab26d6bba70d544e57a7bd0b5fd5b2434f810c9656db13926478"
+    },
+    {
+      "bytes": 1429059,
+      "full9": {
+        "st_ctime_ns": "1795738495873935389",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510188",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495873935389",
+        "st_nlink": "1",
+        "st_size": "1429059",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "raw_reference": {
+        "bytes": 1429059,
+        "full9": {
+          "st_ctime_ns": "1795738779947236160",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "9487393",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795738779947236160",
+          "st_nlink": "1",
+          "st_size": "1429059",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/raw/01-modal_autoencoder.py.DATA",
+        "sha256": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447"
+    },
+    {
+      "bytes": 41765,
+      "full9": {
+        "st_ctime_ns": "1795738495874624995",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510208",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874624995",
+        "st_nlink": "1",
+        "st_size": "41765",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+      "raw_reference": {
+        "bytes": 41765,
+        "full9": {
+          "st_ctime_ns": "1795738779977535560",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "9487397",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795738779977535560",
+          "st_nlink": "1",
+          "st_size": "41765",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/raw/02-proof_feedback_ablation.py.DATA",
+        "sha256": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc"
+    },
+    {
+      "bytes": 42453,
+      "full9": {
+        "st_ctime_ns": "1795738495874668851",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510763",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874668851",
+        "st_nlink": "1",
+        "st_size": "42453",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "raw_reference": {
+        "bytes": 42453,
+        "full9": {
+          "st_ctime_ns": "1795738779999953519",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "9487401",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795738779999953519",
+          "st_nlink": "1",
+          "st_size": "42453",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/raw/03-trusted_feedback_trainer.py.DATA",
+        "sha256": "cd37964aa4a497e8d778ae0e6a90fe87f3362ead8c9a3751a5a3288b7370ed2e"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/trusted_feedback_trainer.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "cd37964aa4a497e8d778ae0e6a90fe87f3362ead8c9a3751a5a3288b7370ed2e"
+    },
+    {
+      "bytes": 61378,
+      "full9": {
+        "st_ctime_ns": "1795738495874668851",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510768",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874668851",
+        "st_nlink": "1",
+        "st_size": "61378",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+      "raw_reference": {
+        "bytes": 61378,
+        "full9": {
+          "st_ctime_ns": "1795738780019455935",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "9487405",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795738780019455935",
+          "st_nlink": "1",
+          "st_size": "61378",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/raw/04-test_trusted_feedback_weight_updates.py.DATA",
+        "sha256": "f15cc994ea8a8ae5f8d34c1c16572481ff7c73398fce068af4a3ec5bced9915b"
+      },
+      "relative_path": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "f15cc994ea8a8ae5f8d34c1c16572481ff7c73398fce068af4a3ec5bced9915b"
+    },
+    {
+      "bytes": 98509,
+      "full9": {
+        "st_ctime_ns": "1795738495874668851",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510819",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874668851",
+        "st_nlink": "1",
+        "st_size": "98509",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+      "raw_reference": {
+        "bytes": 98509,
+        "full9": {
+          "st_ctime_ns": "1795738780039223985",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "9487409",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795738780039223985",
+          "st_nlink": "1",
+          "st_size": "98509",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/raw/05-test_proof_cache.py.DATA",
+        "sha256": "087c587b4f35f61f08f2c8f9bba768893dfa1e57f3645976faa38e7927e02414"
+      },
+      "relative_path": "tests/unit/logic/legal_ir/test_proof_cache.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "087c587b4f35f61f08f2c8f9bba768893dfa1e57f3645976faa38e7927e02414"
+    },
+    {
+      "bytes": 16426,
+      "full9": {
+        "st_ctime_ns": "1795738495874668851",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510820",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874668851",
+        "st_nlink": "1",
+        "st_size": "16426",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py",
+      "raw_reference": {
+        "bytes": 16426,
+        "full9": {
+          "st_ctime_ns": "1795738780061863194",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "9487413",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795738780061863194",
+          "st_nlink": "1",
+          "st_size": "16426",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/raw/06-test_modal_autoencoder_proof_heads.py.DATA",
+        "sha256": "892386e52414fda1b3eac441aaa900630ffaf755140739d053df29ce75c2ed4a"
+      },
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "892386e52414fda1b3eac441aaa900630ffaf755140739d053df29ce75c2ed4a"
+    },
+    {
+      "bytes": 9778,
+      "full9": {
+        "st_ctime_ns": "1795738495874818820",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510821",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874818820",
+        "st_nlink": "1",
+        "st_size": "9778",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py",
+      "raw_reference": {
+        "bytes": 9778,
+        "full9": {
+          "st_ctime_ns": "1795738780082552979",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "9487426",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795738780082552979",
+          "st_nlink": "1",
+          "st_size": "9778",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/raw/07-test_proof_feedback_ablation.py.DATA",
+        "sha256": "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414"
+      },
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414"
+    },
+    {
+      "bytes": 9648,
+      "full9": {
+        "st_ctime_ns": "1795738495874839828",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72510822",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738495874839828",
+        "st_nlink": "1",
+        "st_size": "9648",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_frozen_Phase7_role",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py",
+      "raw_reference": {
+        "bytes": 9648,
+        "full9": {
+          "st_ctime_ns": "1795738780101652959",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "9487430",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795738780101652959",
+          "st_nlink": "1",
+          "st_size": "9648",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/raw/08-test_trainable_legal_ir_objective.py.DATA",
+        "sha256": "ead71235b234846d6444678459d3fdd03bd10c0955783dcbd8f2f7d3cdf503a6"
+      },
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "ead71235b234846d6444678459d3fdd03bd10c0955783dcbd8f2f7d3cdf503a6"
+    },
+    {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795738496101937191",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "49196736",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795738496100937183",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "kind": "selected_actual_Git_index",
+      "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/.git/index",
+      "raw_reference": {
+        "bytes": 7070597,
+        "full9": {
+          "st_ctime_ns": "1795738780126557931",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "9487434",
+          "st_mode": "33024",
+          "st_mtime_ns": "1795738780126557931",
+          "st_nlink": "1",
+          "st_size": "7070597",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/raw/09-index.DATA",
+        "sha256": "5a332cba66adba6051bb6f25c460fd4f7cc33fb831cbde164843e5b6e32aa53d"
+      },
+      "relative_path": ".git/index",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets",
+      "sha256": "5a332cba66adba6051bb6f25c460fd4f7cc33fb831cbde164843e5b6e32aa53d"
+    }
+  ],
+  "live_reconciled_git_baselines": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+    "hallucinate": "662108f395fd434f93032bcbd1f13750a2aeb5a2",
+    "root": "38502eb5d6d9f3987f8a398c78b43ae2a3d7f54d"
+  },
+  "module_closed": true,
+  "named_metadata_count": 1625,
+  "no_runtime_clock_IO_or_SDK_binding_selected": true,
+  "operator_pid": 540883,
+  "ordinary_phase_qualified": false,
+  "ordinary_read_binding_abi": {
+    "bytes": 2419,
+    "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-isolated-Phase7-ordinary-D27-read-binding.json",
+    "sha256": "4f0bdc68c96dfe39cac0cdb11452897a4d56ec74443ee202a889753c0126ff63"
+  },
+  "outer_epoch_record_count": 1614,
+  "outer_epoch_reference": {
+    "bytes": 868428,
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-live-reconciled-outer1614-epoch.json",
+    "sha256": "f50f863d865ae2a8ad64429396fbb2c7f52e04b25408d586163bec7f8fe73e60"
+  },
+  "previous_published_guide": {
+    "bytes": 3117,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-Guide573-four-docs-three-FF-publication.json",
+    "sha256": "1a83a7c66b2e726b4f6605039fbd5bad4296f6cb3f008e965436c68a9e89e8c7"
+  },
+  "projects": [
+    {
+      "Git_HEAD": "de261f458ef5a73e2fe5683de01382f817fae9ed",
+      "Git_tree": "b766976844ccdb7404198e8d2e87f7a74f95c50f",
+      "root": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets"
+    },
+    {
+      "Git_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+      "Git_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate"
+    }
+  ],
+  "promotion_selected": false,
+  "protected_index_reference": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795738496101937191",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "49196736",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795738496100937183",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/.git/index",
+    "sha256": "5a332cba66adba6051bb6f25c460fd4f7cc33fb831cbde164843e5b6e32aa53d"
+  },
+  "python_epoch_record_count": 1601,
+  "python_epoch_reference": {
+    "bytes": 861738,
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-live-reconciled-Python1601-epoch.json",
+    "sha256": "e2b4425d640faef5f4157bd0a94ff9ae9ba3daeb942953dba25545aeef859f24"
+  },
+  "request": {
+    "bytes": 29831,
+    "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/Root-bound-isolated-Phase7-READ10-request.json",
+    "sha256": "2f68340821d9cf1b1223b9ca2ca43261f1640279ee5b923f0f7e84848bd885ad"
+  },
+  "schema": "actual-Phase7-isolated-exact-nine-postfreeze-READ10-and-ordinary-nonclock/v1",
+  "selected": {
+    "bytes": 927,
+    "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/Root-selected-isolated-Phase7-READ10.json",
+    "sha256": "e98f4fdaa026f09b44d32c80a3543879082a4380608e25733ef207222f9f4b40"
+  },
+  "shared_canonical_mutation": false,
+  "terminal_evidence": {
+    "kind": "owned_exec_session_terminal",
+    "operator_pid": 540883,
+    "returncode": 0,
+    "session_id": 47178
+  },
+  "terminal_returncode": 0,
+  "terminal_session": 47178
+}

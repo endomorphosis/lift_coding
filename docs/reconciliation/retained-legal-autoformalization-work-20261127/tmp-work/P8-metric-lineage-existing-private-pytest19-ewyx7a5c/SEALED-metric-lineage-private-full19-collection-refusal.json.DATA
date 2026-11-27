@@ -1,0 +1,66 @@
+{
+  "Native_or_model_or_network_effect": false,
+  "actual_case_bodies": 0,
+  "actual_green": false,
+  "actual_new_final_guards": false,
+  "attempts": 1,
+  "candidate": {
+    "bytes": 11446,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/SEALED-private-metric-lineage-cache-recovery-two-file-v01.json",
+    "sha256": "ed2b7f020d68c7564a99dc6e65857bf92ccb97f80204b3b2e8da53e3c9161e9d"
+  },
+  "canonical_Source_or_Git_write": false,
+  "cap_or_import_exception_change": false,
+  "collection_refusal": {
+    "file": "uscode_modal_daemon_runner.py",
+    "line": 38,
+    "module": "huggingface_hub",
+    "reason": "Unchanged V3 pytest wrapper refuses blocked model backend dependency at module import",
+    "type": "ImportError"
+  },
+  "current_git_head": "8a902502e1a82d3da05b9c31a42db8c39ea8a9e1",
+  "diagnostics": {
+    "pytest.log": {
+      "bytes": 0,
+      "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/green/pytest.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "result.xml": {
+      "bytes": 1286,
+      "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/green/result.xml",
+      "sha256": "524dd7e1556971567330d9eb6fb97f7529216797626ab8d3a2dffe4de3ed96f3"
+    },
+    "stderr.log": {
+      "bytes": 0,
+      "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/green/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout.log": {
+      "bytes": 1783,
+      "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/green/stdout.log",
+      "sha256": "1bb8782feaaaa751d3ed6e0bc04d2b8f289fbe3638b0dc19b81190c5ab1b39e5"
+    },
+    "terminal.json": {
+      "bytes": 24,
+      "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/green/terminal.json",
+      "sha256": "4c69b5ed2aef2fa5eab5270cd02b72893254ff210c67d53c8da3a71a3f679826"
+    }
+  },
+  "original_wrapper": {
+    "bytes": 2733,
+    "path": "/tmp/P2-V4-current-admission-withdrawal-test-only-private-EFrOMQn8/invoke-existing-pytest-private-v02-one-selector.py.DATA",
+    "sha256": "03df45a40b9e5d51ba9d8ac97a11a9f7833560393fe33a1706312144ae2ec571"
+  },
+  "project_bytes": 18597877,
+  "projection": {
+    "bytes": 152168,
+    "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/exact-current-private-projection.json",
+    "sha256": "f76882a2e0a69ea724d78bd08c53126c2ff687c5245aea027a49ea5639c8657f"
+  },
+  "raw_junit_reports_one_collection_error": true,
+  "schema": "actual-existing-private-pytest-metric-lineage-collection-refusal/v1",
+  "selected_file": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py",
+  "static_expected_case_count": 19,
+  "terminal": 2,
+  "tracked_project_roles": 335
+}

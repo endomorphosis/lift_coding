@@ -1,0 +1,77 @@
+{
+  "actual_Stage_A_current_index": null,
+  "actual_compact_followup_authority": null,
+  "artifacts": {
+    "assessment-replay-v01.json": {
+      "bytes": 795,
+      "path": "/tmp/decoder-training-compact-right-censor-controls-private-v01-982l3zS2/assessment-replay-v01.json",
+      "sha256": "3b3b64f8bcd3f0ed8a8ed1a919b54f352a19e2de6862408c603e3104c3206549"
+    },
+    "capped-compact-censor-followup.json": {
+      "bytes": 3024,
+      "path": "/tmp/decoder-training-compact-right-censor-controls-private-v01-982l3zS2/capped-compact-censor-followup.json",
+      "sha256": "06881363d649bf904a0e694a4357229fd84b37f944422f3a838936baf1e87ca9"
+    },
+    "capped-compact-paid-comparison.json": {
+      "bytes": 21965,
+      "path": "/tmp/decoder-training-compact-right-censor-controls-private-v01-982l3zS2/capped-compact-paid-comparison.json",
+      "sha256": "7d5c8cbda2c5015d5b07fdd3ec90482531f811960ff82636209aed6b9293fc2e"
+    },
+    "compact.rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-compact-right-censor-controls-private-v01-982l3zS2/compact.rc",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "compact.stderr": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-compact-right-censor-controls-private-v01-982l3zS2/compact.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "compact.stdout": {
+      "bytes": 659,
+      "path": "/tmp/decoder-training-compact-right-censor-controls-private-v01-982l3zS2/compact.stdout",
+      "sha256": "71598b47b6c426f2be80e5f421520c6eb5eb86f6d60b83b12342c714eae8d6bc"
+    },
+    "phase7-feedback-readback.rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-compact-right-censor-controls-private-v01-982l3zS2/phase7-feedback-readback.rc",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    }
+  },
+  "compact_control": {
+    "bytes": 795,
+    "path": "/tmp/decoder-training-compact-right-censor-controls-private-v01-982l3zS2/assessment-replay-v01.json",
+    "sha256": "3b3b64f8bcd3f0ed8a8ed1a919b54f352a19e2de6862408c603e3104c3206549"
+  },
+  "current_reader_allocation": null,
+  "dispatch_authority": false,
+  "drivers": {
+    "check_compact_censoring.py": {
+      "bytes": 8727,
+      "path": "/tmp/decoder-training-compact-right-censor-controls-private-v01-982l3zS2/check_compact_censoring.py",
+      "sha256": "bf7a605ffb5cf367bdc0308b175a1496c193bce396e00ae3aea4edb440520382"
+    },
+    "phase7_feedback_readback.py": {
+      "bytes": 6341,
+      "path": "/tmp/decoder-training-compact-right-censor-controls-private-v01-982l3zS2/phase7_feedback_readback.py",
+      "sha256": "f9adaa4a57e6d073924314d83ac9777d0eb067244ae5faf3c8b80ff60db01ed3"
+    },
+    "seal.py": {
+      "bytes": 9463,
+      "path": "/tmp/decoder-training-compact-right-censor-controls-private-v01-982l3zS2/seal.py",
+      "sha256": "438915d22ab45a6f08f810dcc7ba2d37858ac9a772d0e06308029d4966d737f3"
+    }
+  },
+  "isolated_phase7": {
+    "bytes": 2780,
+    "path": "/tmp/decoder-training-compact-right-censor-controls-private-v01-982l3zS2/phase7-feedback-readback.json",
+    "sha256": "b68490159046c6eec0c0a25529f2b0e0420b7e21d166f0a945963c925b7bad6c"
+  },
+  "measured_new_model_arm": null,
+  "owner": {
+    "bytes": 921348,
+    "path": "/tmp/decoder-training-paid-censor-followup-private-v01-9bUvEI8h/study.py",
+    "sha256": "c462caa0fffb73f74549013d0272d224dada01e9e33620329b5b3f5ffb920915"
+  },
+  "schema": "private-compact-censor-followup-plus-feedback-frontier/v1"
+}

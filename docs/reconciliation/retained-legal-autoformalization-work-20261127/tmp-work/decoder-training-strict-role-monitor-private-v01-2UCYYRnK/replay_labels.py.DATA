@@ -1,0 +1,39 @@
+"""Pass exact historical TRAIN labels through the strict monitor."""
+from hashlib import sha256
+import json
+from pathlib import Path
+import sys
+
+HERE=Path(__file__).resolve().parent
+sys.path.insert(0,str(HERE))
+from replay_archive import check_open, load, owners
+
+
+def replay():
+    selected=load(HERE/'train_labels.py','2775fced48cd083a5d25c45ccbacaf6e84a7a5887a58c43f9008115b9bfd06fa')
+    labels,provenance=selected['load_train_labels']()
+    assert len(labels)==3
+    candidate,watch=owners()
+    expected=candidate['_CANONICAL_FIRST_ROLE_MEMBER']
+    rows={}
+    for row,body in labels.items():
+        assert body.startswith(expected)
+        for split in range(len(expected)+1):
+            observer=watch(body)
+            pieces=(body,) if split==0 else (body[:split],body[split:])
+            assert all(observer.observe(piece)=='watching' for piece in pieces)
+            report=observer.result()
+            assert report['consumed_body_bytes']==len(body)
+            assert report['charged_strict_role_prefix_bytes']==len(expected)
+            assert report['obstruction'] is None
+        rows[row]=dict(bytes=len(body),sha256=sha256(body).hexdigest(),
+                       checked_chunk_schedules=len(expected)+1)
+    return dict(schema='retained-source62-strict-monitor-train-positive-controls/v1',
+                train_labels=rows,provenance=provenance,
+                evidence_scope='original_teacher_forced_TRAIN_labels_with_controlled_byte_chunk_boundaries',
+                checked_original_generated_valid_rows=0,new_Q3_target_reads=0,model_calls=0)
+
+
+if __name__=='__main__':
+    sys.addaudithook(check_open)
+    print(json.dumps(replay(),sort_keys=True,indent=2))

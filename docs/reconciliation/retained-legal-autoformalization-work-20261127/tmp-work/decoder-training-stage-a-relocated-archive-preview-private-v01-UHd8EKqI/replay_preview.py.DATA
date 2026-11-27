@@ -1,0 +1,40 @@
+"""Replay the relocated preview and explicit cost arithmetic from held inputs."""
+from pathlib import Path
+from runpy import run_path
+import json
+from test_relocated_source32 import RelocatedSource32, digest, wire
+
+HERE = Path(__file__).resolve().parent
+GIT = Path('/tmp/decoder-training-stage-a-selector-observer-private-v01-CKyIGens/verify_standalone_git.py')
+raw = GIT.read_bytes()
+assert (len(raw), digest(raw)) == (44991, '2cf502a37fceafbd50a3610172dadbee282823460ce33a808512f843df25a5e4')
+fixture = RelocatedSource32()
+fixture.setUpClass()
+preview = fixture.preview()
+inputs = preview['reader_inputs']
+retained = {row['path']: row for row in preview['relocated_retained_outer']}
+roots = inputs['current_roots']
+a = Path(roots['A']['root']) / '.git/index'
+excludes = [retained[str(Path(roots[role]['root']) / '.git/info/exclude')] for role in ('D', 'A')]
+# The detached function fragment resolves Path from its enclosing caller.
+pricing = run_path(str(GIT), init_globals={'Path': Path})
+costs = pricing['source32_explicit_byte_demand'](
+    dict(D_index=inputs['current_index'], A_index=retained[str(a)], exact_exclude_pins=excludes),
+    inputs['four_guide_post_candidates_for_current_owner_recheck'], inputs['fresh_Source_body_targets'])
+costs['one_guard_explicit_requests_and_raw_outputs_bytes'] = (
+    costs['explicit_read_requests_and_raw_outputs_bytes'] - costs['git_guard_requests_per_pass_bytes'])
+costs['one_guard_explicit_request_bytes'] = (
+    costs['explicit_read_requests_bytes'] - costs['git_guard_requests_per_pass_bytes'])
+assert costs['explicit_read_requests_bytes'] == 31_735_309
+assert costs['explicit_read_requests_and_raw_outputs_bytes'] == 33_150_207
+assert costs['one_guard_explicit_requests_and_raw_outputs_bytes'] == 21_609_092
+assert preview['historical_phase7']['capture_epoch'] == fixture.plan['phase7_capture_epoch']
+for name, payload in (('guide572-all-fresh-preview.INERT.json', preview),
+                      ('guide572-explicit-cost-subtotal.INERT.json', costs)):
+    encoded = wire(payload)
+    path = HERE / name
+    if path.exists():
+        assert path.read_bytes() == encoded
+    else:
+        path.write_bytes(encoded)
+    print(json.dumps(dict(path=str(path), bytes=len(encoded), sha256=digest(encoded))))

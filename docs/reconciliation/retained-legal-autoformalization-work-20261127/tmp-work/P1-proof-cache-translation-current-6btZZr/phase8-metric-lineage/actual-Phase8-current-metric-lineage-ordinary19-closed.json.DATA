@@ -1,0 +1,77 @@
+{
+  "Source_binding": {
+    "bytes": 1903,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-isolated-ordinary19-D27-read-binding.json",
+    "sha256": "a52d8fd5999a5d9098598c517f1e058e6b7b77d6486e65bff98c52334fc920e5"
+  },
+  "Source_lease_and_resource_cleanup_closed": true,
+  "actual_ordinary_counts": {
+    "errors": 0,
+    "failures": 0,
+    "functions": 10,
+    "passed": 19,
+    "skipped": 0,
+    "tests": 19
+  },
+  "actual_report": {
+    "bytes": 1054537,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-output/complete-frozen-local-D-Phase8-metric-lineage-cache-recovery-ordinary19-existing-owner-report.json",
+    "sha256": "6c4f0da1a917ac1894b1c7325c761af2466fd46698a8eaff37934f1c7076654a"
+  },
+  "exact_freeze": {
+    "bytes": 7762,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-isolated-Phase8-metric-lineage-exact-two-local-freeze.json",
+    "sha256": "8611c18407c338ca365cae4c14737e9fb029332618ad81f8f70cab7508e9f309"
+  },
+  "held_case_selector": {
+    "bytes": 3894,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/metric-lineage-owning19-INERT-selection-DATA.json",
+    "sha256": "ec53d773b839984893f8f38fa9fa9c3c22717c0057ba3b5db9ef1c9f13f776c2"
+  },
+  "large_model_fit_or_Native_or_statutory_qualification": false,
+  "ordered_cases": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_learned_head_perturbation_moves_only_learned_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_deterministic_compiler_mutation_moves_only_compiler_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_unexplained_invariant_metrics_across_material_states_are_rejected",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_stale_or_cross_path_cache_reuse_is_prevented",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_is_a_cache_miss[stale-schema]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_is_a_cache_miss[empty-identity]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_is_a_cache_miss[newline-identity]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_is_a_cache_miss[noniterable-hashes]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_uses_typed_cache_reuse_error[stale-schema]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_uses_typed_cache_reuse_error[empty-identity]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_uses_typed_cache_reuse_error[newline-identity]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_uses_typed_cache_reuse_error[noniterable-hashes]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_valid_metric_lineage_remains_reusable",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_metric_lineage_constructor_still_rejects_stale_schema",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_metric_lineage_matcher_preserves_unexpected_programming_errors",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_persistent_metric_lineage_recomputes_with_existing_codec[stale-schema]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_persistent_metric_lineage_recomputes_with_existing_codec[empty-identity]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_persistent_metric_lineage_recomputes_with_existing_codec[newline-identity]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_persistent_metric_lineage_recomputes_with_existing_codec[noniterable-hashes]"
+  ],
+  "ordinary_raw_JUnit": {
+    "bytes": 3967,
+    "logical_name": "junit.xml",
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-output/Phase8-metric-lineage-cache-recovery-ordinary19-run-result0-output1.bin",
+    "sha256": "db03a1b672d2a61473625f433ce7d83f9ca9ba693f23c486f5943891f8fb9fbb"
+  },
+  "published": false,
+  "raw_phase_bindings": {
+    "collect": {
+      "bytes": 217674,
+      "logical_name": "binding.json",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-output/Phase8-metric-lineage-cache-recovery-ordinary19-collect-result0-output0.bin",
+      "sha256": "fdf609ce68d39f9e55c50e09cbd00b52d3481002d68583bc890eb580bcb4312e"
+    },
+    "run": {
+      "bytes": 226649,
+      "logical_name": "binding.json",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-output/Phase8-metric-lineage-cache-recovery-ordinary19-run-result0-output0.bin",
+      "sha256": "4bb13792a035b1c4e429ac023e270016cebe2299085789535800f45cb19fbf74"
+    }
+  },
+  "schema": "actual-Phase8-current-metric-lineage-ordinary19-closed/v1",
+  "terminal_returncode": 0,
+  "terminal_session": 16369
+}

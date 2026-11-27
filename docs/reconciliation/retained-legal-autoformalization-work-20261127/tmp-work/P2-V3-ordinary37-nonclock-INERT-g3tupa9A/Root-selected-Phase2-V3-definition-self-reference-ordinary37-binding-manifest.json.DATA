@@ -1,0 +1,116 @@
+{
+  "A_provenance": {
+    "HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+    "actual_closed_Source_READ": {
+      "bytes": 7523,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-isolated-Phase2-V3-definition-READ3-closed.json",
+      "sha256": "2fd517b04dd4863601e510455e95ca9b3a6ea0cf150943aa0c434fa2731a9e95"
+    },
+    "clean_index_provenance_reference": {
+      "bytes": 2156,
+      "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/actual-ordinary37-clean-D-A-index-provenance.json",
+      "sha256": "4f0594d76e4c8d721d8d274f6285ea7f24ea4e733c64aaf4a0974a663648604c"
+    },
+    "clean_worktree_and_index": true,
+    "local_frozen_Git_metadata_reference": {
+      "bytes": 2156,
+      "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/actual-ordinary37-clean-D-A-index-provenance.json",
+      "sha256": "4f0594d76e4c8d721d8d274f6285ea7f24ea4e733c64aaf4a0974a663648604c"
+    },
+    "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tree": "c670052e6e12473d974382e455c7aef4adb6aebe"
+  },
+  "D_provenance": {
+    "HEAD": "c5a72c90394d86a54cb93cc3a2187da954a2677f",
+    "actual_closed_Source_READ": {
+      "bytes": 7523,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-isolated-Phase2-V3-definition-READ3-closed.json",
+      "sha256": "2fd517b04dd4863601e510455e95ca9b3a6ea0cf150943aa0c434fa2731a9e95"
+    },
+    "clean_index_provenance_reference": {
+      "bytes": 2156,
+      "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/actual-ordinary37-clean-D-A-index-provenance.json",
+      "sha256": "4f0594d76e4c8d721d8d274f6285ea7f24ea4e733c64aaf4a0974a663648604c"
+    },
+    "clean_worktree_and_index": true,
+    "local_frozen_Git_metadata_reference": {
+      "bytes": 6414,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-isolated-Phase2-V3-definition-exact-two-local-freeze.json",
+      "sha256": "4451d305186b343a67388d8a637e40abd21473e69c2c27ca41f6b8a7c6ffc1d6"
+    },
+    "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tree": "5c7e0f349a06fa1ea1567cceca726bfa58121f12"
+  },
+  "Root_selected": true,
+  "Source_WRITE_claimed": false,
+  "admitted_io_plan_reference": {
+    "bytes": 725,
+    "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/Root-selected-IO.json",
+    "sha256": "709343d152b761c99c9b945c5ddf81e61414d9f87a1bac66ebea4565453320a1"
+  },
+  "effect_decision_reference": {
+    "bytes": 544,
+    "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/Root-selected-effect.json",
+    "sha256": "c219ce3dce16d1f947befa47d099182a272fa10661598ca24c868b938eee220b"
+  },
+  "fixture_closure_reference": {
+    "bytes": 5899,
+    "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/actual-ordinary37-seven-role-fixture-wire.json",
+    "sha256": "1507f8db776bc0d06a94f37b8d5a2ddcd2a8fd18cfeb9671707a21fba3d6f772"
+  },
+  "frozen_Git_candidates": true,
+  "modules": {
+    "ipfs_datasets_py.logic.autoformal.legal_reviewed_norm_admission_v3": {
+      "bytes": 35250,
+      "full9": {
+        "st_ctime_ns": "1795742359700337484",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513161",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795742359700337484",
+        "st_nlink": "1",
+        "st_size": "35250",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py",
+      "sha256": "1b294d2d896f715c7fe667cf194e2a04bc681705af558a535d55210b4cacf917"
+    },
+    "tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3": {
+      "bytes": 34149,
+      "full9": {
+        "st_ctime_ns": "1795742359700337484",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514236",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795742359700337484",
+        "st_nlink": "1",
+        "st_size": "34149",
+        "st_uid": "1000"
+      },
+      "relative_path": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py",
+      "sha256": "b33ec128970c9601583df4cf9b8c78744a7def25af3a497eb6bed7194c183a91"
+    }
+  },
+  "ordinary_execution_or_qualification": null,
+  "projects": [
+    {
+      "Git_HEAD": "c5a72c90394d86a54cb93cc3a2187da954a2677f",
+      "Git_tree": "5c7e0f349a06fa1ea1567cceca726bfa58121f12",
+      "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets"
+    },
+    {
+      "Git_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+      "Git_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate"
+    }
+  ],
+  "source_read_binding_reference": {
+    "bytes": 1902,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-isolated-ordinary37-D27-read-binding.json",
+    "sha256": "7f22ec78360aa9992d5c14474b65137083cf07ca7164f570c7c7672887471ec9"
+  }
+}

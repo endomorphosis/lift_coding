@@ -1,0 +1,218 @@
+"""Seal the prelaunch-to-release evidence and retained local validation."""
+
+from copy import deepcopy
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+from runpy import run_path
+from stat import S_IMODE
+from tempfile import mkstemp
+
+from compose import PAIRS
+
+HERE = Path(__file__).resolve().parent
+TMP = HERE.parent
+PREVIOUS = TMP / "decoder-training-experiment-manifest-v383.json"
+CURRENT = TMP / "decoder-training-experiment-manifest-v384.json"
+KEY = "private_qwen2_prelaunch_selected_release"
+ISOLATED = "guide571_later_isolated_read_charge"
+
+
+def ref(path, pin=None):
+    raw = path.read_bytes()
+    digest = sha256(raw).hexdigest()
+    assert pin is None or digest == pin, path
+    return {"path": str(path), "bytes": len(raw), "sha256": digest}
+
+
+def save(path, value):
+    raw = (json.dumps(value, indent=2, sort_keys=True) + "\n").encode() if type(value) is dict else value.encode()
+    with path.open("xb") as output:
+        output.write(raw)
+    return ref(path)
+
+
+def logs(stem, count):
+    err = (HERE / (stem + ".stderr")).read_text()
+    assert (HERE / (stem + ".rc")).read_bytes() == b"0\n"
+    assert f"Ran {count} tests in " in err and err.endswith("\nOK\n")
+    assert sum(line.startswith("test_") and line.endswith(" ... ok") for line in err.splitlines()) == count
+    return {kind: ref(HERE / f"{stem}.{kind}") for kind in ("rc", "stdout", "stderr")}
+
+
+previous = ref(PREVIOUS, "15163b7223a46142be76710d20bc2766a977053ad4ef598622da4516850fd6b4")
+old = json.loads(PREVIOUS.read_bytes())
+postimages = dict(zip((pair[0] for pair in PAIRS), (
+    "0a3729f232bd3d94eb6224a59020bcff6e57015b690537b2a5361f5e4eeac5a0",
+    "76a1b2cbde9444fb13946bdcd1d3b3e285236d4c2a8ca9e3a7724355adfa43b0",
+    "09afd1fd3f35f3c1612eecb84a5b5d091cf7edb2455526b8e9a9c02064b36f44",
+), strict=True))
+sources = {name: {"candidate": ref(HERE / name, postimages[name]), "before": ref(base, pin),
+                  "diff": ref(HERE / (name + ".diff")), "changed_existing_definitions": sorted(definitions)}
+           for name, base, pin, _, definitions in PAIRS}
+inventory = json.loads((HERE / "staged-roles.json").read_bytes())
+for role, row in inventory.items():
+    assert ref(HERE / "stage" / role, row["sha256"])["bytes"] == row["bytes"]
+for role, data in sources.items():
+    module = "autoencoder_inference.py" if role == "launcher.py.DATA" else role
+    relative = "ipfs_datasets_py/optimizers/logic_theorem_optimizer/" + module
+    assert inventory[relative]["sha256"] == data["candidate"]["sha256"]
+
+counts = {"selected_release": 10, "retained_release": 6, "strict_and_retained_selected_readback": 15,
+          "legacy_terminal": 8, "legacy_paid": 8}
+stems = ("selected-release-first", "selected-release-legacy", "paid-first", "legacy-terminal", "legacy-paid")
+release, paid = (json.loads((HERE / (stem + ".stdout")).read_bytes()) for stem in (stems[0], stems[2]))
+assert release["actual_model_processes"] == 0 and release["modeled_source_and_daemon"] is True
+assert set(release["launch_selection"]) == {"request_sha256", "source_epoch_sha256"}
+assert release["tested_original_approval_stages"] == ["prelaunch", "selection", "prefill"]
+assert paid == {"actual_model_execution": False, "experiment_events": 6, "failed_retry_count": 1,
+                "scripted_paid_cpu_ns": 20_000_000, "successful_release_count": 4}
+for name in ("fixture-comparison.json", "fixture-experiment.json"):
+    model = json.loads((HERE / name).read_bytes())
+    assert model["original_prelaunch_bound_releases"] is True and len(model["request_selection_sha256s"]) == 1
+    assert model["original_projector_evidence_kind"] == "scripted_fixture"
+archive = TMP / "decoder-training-projector-request-paid-join-private-v01-OXrJ2XDz"
+historical = {name: ref(HERE / name, ref(archive / name)["sha256"]) for name in ("qwen-comparison.json", "experiment.json")}
+
+isolated_root = TMP / "P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f"
+isolated = ref(isolated_root / "actual-isolated-Source42-content-epoch-closed.json",
+               "e4c0629a49442081d0adc2df61fbc1234e114505379578c86b9160ed60eaa7c7")
+descriptor = {
+    "schema": "reviewed-qwen2-projector-prelaunch-selected-release-private-controls/v1",
+    "owners": sources,
+    "release_schema": "reviewed-qwen2-projector-direct-owner-release/v3",
+    "explicit_opt_in_field": "verify_projector_launch",
+    "local_passing_cases": counts,
+    "logs": {role: logs(stem, count) for (role, count), stem in zip(counts.items(), stems, strict=True)},
+    "modeled_release_receipt_summary": release,
+    "modeled_paid_summary": paid,
+    "modeled_paid_artifacts": {name: ref(HERE / name) for name in ("fixture-comparison.json", "fixture-experiment.json")},
+    "byte_identical_legacy_artifacts": historical,
+    "stage_inventory": ref(HERE / "staged-roles.json"),
+    "drivers": {name: ref(HERE / name) for name in ("compose.py", "test_release.py", "test_selected_paid.py",
+        "run_legacy.py", "seal.py")},
+    "maintained_adoption": None, "current_owner_selection": None, "actual_native_or_model_operation": None,
+    "actual_legal_fidelity_or_convergence": None, "dispatch_authority": False,
+}
+profile_projection = f'''def project_prelaunch_selected_release(reference):
+    record = retained_json(reference)
+    require(record["schema"] == "reviewed-qwen2-projector-prelaunch-selected-release-private-controls/v1"
+            and record["local_passing_cases"] == {counts!r}
+            and record["modeled_release_receipt_summary"]["actual_model_processes"] == 0
+            and record["modeled_paid_summary"]["actual_model_execution"] is False
+            and record["maintained_adoption"] is record["current_owner_selection"]
+                 is record["actual_native_or_model_operation"] is record["actual_legal_fidelity_or_convergence"] is None
+            and record["dispatch_authority"] is False,
+            "verified detached release/readback controls without actual operation authority required")
+    fields = ("owners", "release_schema", "local_passing_cases", "modeled_release_receipt_summary",
+              "modeled_paid_summary", "current_owner_selection", "actual_native_or_model_operation",
+              "actual_legal_fidelity_or_convergence", "dispatch_authority")
+    return {{field: record[field] for field in fields}}
+
+
+'''
+ledger_projection = '''def retain_guide571_isolated_charge(reference, prior):
+    receipt = retained_json(reference)
+    charge = retained_json(receipt["full_charge"])
+    freeze = retained_json(receipt["exact_local_freeze"])
+    basis = retained_json(prior["current_source_funding_inputs"])
+    index = retained_json(prior["recorded_publication"])["index_readback"]["datasets"]["after"]
+    after, before = charge["after_full_retained_precharge"], charge["prior"]
+    isolated_index = freeze["frozen"]["index"]
+    require(receipt["schema"] == "isolated-frozen-ordinary-current-epoch-Source42/v1"
+            and receipt["terminal_returncode"] == 0 and receipt["Source_closed"] is receipt["module_closed"] is True
+            and receipt["shared_canonical_mutation"] is freeze["pushed"] is False
+            and receipt["previous_published_guide"] == prior["recorded_publication"]
+            and freeze["parent"] == prior["last_verified_published_datasets_sha"]
+            and freeze["frozen"]["HEAD"] != freeze["parent"] and isolated_index["sha256"] != index["sha256"]
+            and receipt["actual_ledger_after"] == after and charge["all_prior_costs_retained"] is True
+            and charge["prior_cap"] == basis["full_retained_precharge"]
+            and before["captures"] == basis["observed_source_capture_count_floor"] == 532859
+            and after["captures"] == before["captures"] + 1
+            and all(after[key] - before[key] == charge["added_Source_only_envelope"]
+                    for key in ("global_cap", "internal_cap", "internal_used", "used"))
+            and min(after["global_cap"] - after["used"], after["internal_cap"] - after["internal_used"])
+                 == prior["recorded_headroom_bytes"]
+            and prior["current_independent_read_join"] is prior["actual_paired_selection"]
+                 is prior["actual_reader_allocation"] is None,
+            "Guide571 isolated charge must preserve the published index gate and net headroom")
+    return prior | {"later_isolated_read_receipt": reference, "latest_retained_capture_floor": after["captures"]}
+
+
+'''
+prior_checker = old["advisory_operator_readiness_checker"]
+path = Path(prior_checker["path"])
+assert ref(path, prior_checker["sha256"]) == prior_checker
+checker = HERE / "check_design.py"
+source = path.read_text()
+at_def = "def report(manifest):\n"
+at_return = '    return {\n        "schema": "decoder-training-advisory-design-check/v1",'
+at_result = '        "stage_a_coordination": coordination,'
+for anchor in (at_def, at_return, at_result):
+    assert source.count(anchor) == 1
+source = source.replace(at_def, profile_projection + ledger_projection + at_def, 1)
+source = source.replace(at_return, f'''    if "{ISOLATED}" in design:
+        coordination = retain_guide571_isolated_charge(design["{ISOLATED}"], coordination)
+''' + at_return, 1)
+source = source.replace(at_result, at_result + f'''
+        **({{"{KEY}": project_prelaunch_selected_release(design["{KEY}"])}}
+           if "{KEY}" in design else {{}}),''', 1)
+
+next_manifest = deepcopy(old)
+next_manifest["manifest_schema_version"] = "0.384.0"
+next_manifest["previous_manifest"] = previous
+next_manifest["typed_execution_design"][ISOLATED] = isolated
+context = {"__name__": "readiness_preview", "__file__": str(checker)}
+exec(compile(source, str(checker), "exec"), context)
+before, preview = map(context["report"], (old, next_manifest))
+delta = {
+    name: value for name, value in preview["stage_a_coordination"].items()
+    if name not in before["stage_a_coordination"]}
+assert delta == {"later_isolated_read_receipt": isolated, "latest_retained_capture_floor": 532860}
+assert {name: value for name, value in preview["stage_a_coordination"].items() if name not in delta} == before["stage_a_coordination"]
+assert preview["stage_a_coordination"]["conditional_shortfall_bytes_before_overhead"] == 20_934_571
+
+plan = TMP / "decoder-training-integration-plan.md"
+initial_stat = plan.stat()
+initial = plan.read_bytes()
+assert sha256(initial).hexdigest() == "467321c6d281be71aa3ac303e75625796d745573c7797c374da398edadee2ec3"
+descriptor_path = HERE / "descriptor.json"
+addition = f"""## 821. Carry prelaunch request and Source approval into the paid comparison
+
+The existing owner can opt in to approve the exact request digest and Source epoch together before Source or resource entry. The normal prelaunch, selection and prefill approvals still run. After the original child wait, finalization and Source closure, a v3 receipt records the approved pair beside the retained request bytes and observed fence. Strict readback independently verifies that pair and keeps the same scheduler and artifact checks. It carries the requirement through the per-seed comparison and experiment accounting. Completed arms need v3 proof in strict mode. Failed retries stay charged from their original terminal and physical evidence. Historical v1 and v2 receipts keep their existing readback scope. [Code and evidence]({descriptor_path})
+
+Forty-seven local tests passed against the detached candidate. They include a v3 receipt emitted by the original launcher with modeled Source, daemon and child behavior. The readback rejects a wrong request or epoch and refuses to treat a matching legacy receipt as prelaunch approval. A separate scripted strict comparison retained four successful releases and one failed retry across six charged events including shared preparation. Historical comparison and experiment reports still match their prior bytes. Actual model and held-out legal-fidelity evidence remain pending.
+
+The later isolated Source read closed on an unpublished successor. Its prepaid scope carried the retained capture count to 532,860 while preserving 6,356,992 bytes of net headroom. The independent published Guide571 index read still has a 634,158-byte payload shortfall before owner overhead. The Stage A paired selector and reader still have a separate 20,934,571-byte shortfall. [Isolated read receipt]({isolated["path"]}) · [Readiness]({HERE / "verified-readiness.json"})
+
+"""
+plan_text = initial.decode()
+for was, now in (
+    (str(PREVIOUS), str(CURRENT)),
+    ("Version 3.529. Updated 2026-11-26 with original-owner request binding before Qwen2 launch.",
+     "Version 3.530. Updated 2026-11-26 with prelaunch selection evidence through Qwen2 release and cost readback."),
+    ("## Primary research references", addition + "## Primary research references"),
+):
+    assert plan_text.count(was) == 1, was
+    plan_text = plan_text.replace(was, now, 1)
+
+next_manifest["typed_execution_design"][KEY] = save(descriptor_path, descriptor)
+next_manifest["advisory_operator_readiness_checker"] = save(checker, source)
+state = run_path(str(checker))["report"](next_manifest)
+assert {name: value for name, value in state.items() if name != KEY} == preview
+manifest = save(CURRENT, next_manifest)
+readiness = save(HERE / "verified-readiness.json", state)
+fd, name = mkstemp(dir=TMP, prefix=plan.name + ".")
+temp = Path(name)
+try:
+    with os.fdopen(fd, "w") as output:
+        output.write(plan_text)
+    temp.chmod(S_IMODE(initial_stat.st_mode))
+    assert plan.read_bytes() == initial and plan.stat().st_ino == initial_stat.st_ino
+    os.replace(temp, plan)
+finally:
+    if temp.exists():
+        temp.unlink()
+print(json.dumps({"descriptor": ref(descriptor_path), "manifest": manifest,
+                  "readiness": readiness, "plan": ref(plan)}, sort_keys=True))

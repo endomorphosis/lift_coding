@@ -1,0 +1,68 @@
+{
+  "accelerate_published_head_preserved": true,
+  "actual_code_publication": {
+    "bytes": 21352,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-Phase7-ordinary26-check-feedback-three-FF-publication.json",
+    "sha256": "dbb00c0b498d16c52246142aaefa2ed8dbdc58782ad03112e4d8ab97ff66afa6"
+  },
+  "actual_doc_Source_closed": {
+    "bytes": 6121,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-Guide574-four-docs-Source-closed-and-frozen.json",
+    "sha256": "3a46e6cca1aade9f1253fee15de9151c6eb59f1b2c6adb0c15e08de1b57ddafd"
+  },
+  "actual_ordinary26": {
+    "bytes": 6769,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-Phase7-current-checked-proof-ordinary26-closed.json",
+    "sha256": "d7869ec2129071491a627ed7313aae19851ff39a5b18afa8478f13e714619ca9"
+  },
+  "evidence_ordinal": 574,
+  "live_main_after": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "6106a4633ec6504ee8c004cc5a9c7fe348ff38bf",
+    "hallucinate": "d196ab977e061645f761a7317f7a14c5d755b009",
+    "root": "754bcecd9039110018b28aad015a229eab516fce"
+  },
+  "live_main_before": {
+    "accelerate": "219ba3da0f62f772801d71715e22c506faa21126",
+    "datasets": "4449d6a62a607cded94db3822b39033ed4850c26",
+    "hallucinate": "5233d4ce8cf384ac78c702bf7f522f6680d090b2",
+    "root": "53a8b13c73dddf555093063077d89f0bc0e220aa"
+  },
+  "only_four_docs": [
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json"
+  ],
+  "prior_values_preserved": {
+    "components": 126,
+    "evidence_records": 573,
+    "tasks": 24
+  },
+  "pushes_in_actual_order": [
+    {
+      "after": "6106a4633ec6504ee8c004cc5a9c7fe348ff38bf",
+      "before": "4449d6a62a607cded94db3822b39033ed4850c26",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "d196ab977e061645f761a7317f7a14c5d755b009",
+      "before": "5233d4ce8cf384ac78c702bf7f522f6680d090b2",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "754bcecd9039110018b28aad015a229eab516fce",
+      "before": "53a8b13c73dddf555093063077d89f0bc0e220aa",
+      "normal_fast_forward": true,
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "schema": "actual-Guide574-four-docs-live-checked-proof-ordinary26-three-FF-publication/v1",
+  "shared_checkouts_preserved": true,
+  "terminal_returncode": 0
+}

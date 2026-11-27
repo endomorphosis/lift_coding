@@ -1,0 +1,798 @@
+def _stage_a_read_only_git_command(root, args):
+    env = dict(os.environ, GIT_OPTIONAL_LOCKS='0', GIT_NO_LAZY_FETCH='1', GIT_TERMINAL_PROMPT='0')
+    command = ['/usr/bin/git', '-c', 'core.preloadIndex=false', '-c', 'core.fscache=false',
+               '-c', 'index.threads=1', '-c', 'core.packedGitWindowSize=1m',
+               '-c', 'core.packedGitLimit=16m', '-C', root, *args]
+    return command, env
+
+
+_STAGE_A_GIT_STREAM_LIMIT = 262144
+
+
+def _stage_a_git_capture_allowance(git_output_maximum):
+    if type(git_output_maximum) is not int or not 0 <= git_output_maximum <= _STAGE_A_GIT_STREAM_LIMIT:
+        raise ValueError('Stage A Git output maximum must be within the existing stream bound')
+    return git_output_maximum + 1
+
+
+def _stage_a_git_ref_capture_allowance(git_ref_output_maximum):
+    if type(git_ref_output_maximum) is not int or not 0 < git_ref_output_maximum <= _STAGE_A_GIT_STREAM_LIMIT:
+        raise ValueError('Stage A Git ref output maximum must be positive and within the existing stream bound')
+    return git_ref_output_maximum + 1
+
+
+def _run_accounted_stage_a_git(command, *, env, timeout, admit_git_output, record_git_output, deadline=None,
+                               git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT):
+    """Capture the selected Git command's binary streams with one shared read limit."""
+    import selectors
+
+    # A single charged byte distinguishes exact-limit output from overflow.
+    unread = _stage_a_git_capture_allowance(git_output_maximum)
+    capture_deadline = time.monotonic() + timeout
+    if deadline is not None:
+        capture_deadline = min(capture_deadline, deadline)
+    admit_git_output(unread)
+    stdout, stderr = bytearray(), bytearray()
+    returncode = None
+    process_started = False
+    disposition = 'process_error'
+
+    def remaining_time():
+        remaining = capture_deadline - time.monotonic()
+        if remaining <= 0:
+            raise subprocess.TimeoutExpired(command, timeout)
+        return remaining
+
+    try:
+        remaining_time()
+        with subprocess.Popen(command, env=env, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                              bufsize=0) as process:
+            process_started = True
+            try:
+                with selectors.DefaultSelector() as selector:
+                    for stream, buffer in ((process.stdout, stdout), (process.stderr, stderr)):
+                        os.set_blocking(stream.fileno(), False)
+                        selector.register(stream, selectors.EVENT_READ, buffer)
+                    while selector.get_map():
+                        for key, _ in selector.select(remaining_time()):
+                            remaining_time()
+                            try:
+                                data = os.read(key.fd, min(unread, 16384))
+                            except BlockingIOError:
+                                continue
+                            if not data:
+                                selector.unregister(key.fileobj)
+                                continue
+                            key.data.extend(data)
+                            unread -= len(data)
+                            if unread == 0:
+                                disposition = 'output_limit'
+                                raise ValueError('standalone Git guard output exceeds bound')
+                returncode = process.wait(timeout=remaining_time())
+            except BaseException as error:
+                if isinstance(error, subprocess.TimeoutExpired):
+                    disposition = 'timeout'
+                try:
+                    process.kill()
+                finally:
+                    process.wait()
+                raise
+        remaining_time()
+    except subprocess.TimeoutExpired as error:
+        disposition = 'timeout'
+        raise subprocess.TimeoutExpired(command, timeout, output=bytes(stdout), stderr=bytes(stderr)) from error
+    else:
+        disposition = 'returned'
+    finally:
+        record_git_output(tuple(command), {'stdout_bytes': len(stdout), 'stderr_bytes': len(stderr),
+            'returncode': returncode if disposition == 'returned' else None,
+            'output_complete': disposition == 'returned', 'disposition': disposition,
+            'process_started': process_started})
+    result = subprocess.CompletedProcess(command, returncode, bytes(stdout), bytes(stderr))
+    result.check_returncode()
+    return result.stdout
+
+
+def stage_a_git_owner_callbacks(admit, spent, report):
+    """Bind the two Git callbacks to the current Source owner's capture ledger."""
+    pending = 0
+
+    def admit_git_output(allowance):
+        nonlocal pending
+        if pending:
+            raise RuntimeError('a Stage A Git capture is already admitted')
+        admit(allowance)
+        pending = allowance
+
+    def record_git_output(command, observation):
+        nonlocal pending
+        if not pending:
+            raise RuntimeError('Stage A Git output has no preceding admission')
+        observed_bytes = observation['stdout_bytes'] + observation['stderr_bytes']
+        started = observation['process_started']
+        if not 0 <= observed_bytes <= pending or (not started and observed_bytes):
+            raise ValueError('Stage A Git output accounting exceeds its admission')
+        root_at = command.index('-C')
+        spent['bytes'] += observed_bytes
+        spent['captures'] += int(started)
+        report.setdefault('Git_calls', []).append({**observation,
+            'root': command[root_at + 1], 'args': command[root_at + 2:]})
+        pending = 0
+
+    return admit_git_output, record_git_output
+
+
+def stage_a_git_output_allowance(*, git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT,
+                                 git_ref_output_maximum=_STAGE_A_GIT_STREAM_LIMIT):
+    """Reserve both endpoints from the bound for 46 short calls and four ref scans."""
+    short_capture = _stage_a_git_capture_allowance(git_output_maximum)
+    ref_capture = _stage_a_git_ref_capture_allowance(git_ref_output_maximum)
+    return 46 * short_capture + 4 * ref_capture
+
+
+def stage_a_paired_git_expectations(project_expectations, roots):
+    """Snapshot the exact Git selector rows offered by the original paired owner."""
+    from copy import deepcopy
+
+    if (type(roots) is not tuple or len(roots) != 2
+            or any(type(root) is not str or not Path(root).is_absolute()
+                   or str(Path(root)) != root or '..' in Path(root).parts for root in roots)
+            or roots[0] == roots[1] or type(project_expectations) is not dict
+            or set(project_expectations) != set(roots)):
+        raise ValueError('exact two original paired Git roots required')
+    selected = deepcopy(project_expectations)
+    project_keys = {'HEAD','tree','branch_ref','refs_sha256','Git_selector_metadata'}
+    stat_keys = {'st_dev','st_ino','st_mode','st_uid','st_gid','st_nlink',
+                 'st_size','st_mtime_ns','st_ctime_ns'}
+    identities = set()
+
+    def hex_pin(value, length):
+        return type(value) is str and len(value) == length and all(x in '0123456789abcdef' for x in value)
+
+    for root in roots:
+        entry = selected[root]
+        if (type(entry) is not dict or set(entry) != project_keys
+                or not hex_pin(entry['HEAD'],40) or not hex_pin(entry['tree'],40)
+                or not hex_pin(entry['refs_sha256'],64)):
+            raise ValueError('exact original Git HEAD, tree and ref-stream pins required')
+        branch, metadata = entry['branch_ref'], entry['Git_selector_metadata']
+        if (type(branch) is not str or not branch.startswith('refs/heads/')
+                or any(part in ('','.','..') for part in branch.split('/'))
+                or any(ord(char) <= 32 or ord(char) == 127 for char in branch)
+                or type(metadata) is not dict or set(metadata) != {'HEAD','ref','config'}):
+            raise ValueError('exact original symbolic branch and Git selector rows required')
+        git_dir = Path(root)/'.git'
+        for key, leaf in (('HEAD','HEAD'),('ref',branch),('config','config')):
+            pin = metadata[key]
+            if type(pin) is not dict or set(pin) != {'path','full9'} or pin['path'] != str(git_dir/leaf):
+                raise ValueError('Git selector path must bind its original HEAD, loose ref or config role')
+            stamp = pin['full9']
+            if type(stamp) is not dict or set(stamp) != stat_keys:
+                raise ValueError('exact original Git selector full9 required')
+            try:
+                canonical = all(type(value) is str and value == str(int(value)) for value in stamp.values())
+            except ValueError as error:
+                raise ValueError('exact original Git selector full9 required') from error
+            if (not canonical or not stat.S_ISREG(int(stamp['st_mode']))
+                    or stamp['st_nlink'] != '1' or int(stamp['st_size']) < 0):
+                raise ValueError('exact regular single-link Git selector full9 required')
+            identity = (stamp['st_dev'],stamp['st_ino'])
+            if identity in identities:
+                raise ValueError('Git selector file identity aliases another selected role')
+            identities.add(identity)
+    return selected
+
+
+def verify_standalone_git(io, record, deadline, *, retain_d_index=False, control_read=None,
+                          stage_a_targets=None, read_stage_zero=None, admit_git_output=None, record_git_output=None,
+                          git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT,
+                          git_ref_output_maximum=_STAGE_A_GIT_STREAM_LIMIT, project_expectations=None):
+    """Recheck selected roots and index/exclude bytes under the existing Source contexts.
+
+    Keep the D index bytes from this pass for a downstream reader when selected.
+    Before and after calls still perform their own reads and Git checks.
+    The selected parent may supply its existing size-bound control reader.
+    With the exact Stage A roster and its existing index parser, also return
+    the endpoint inputs for the reuse composer, except the Source full9 map.
+    The Stage A owner may select smaller combined stdout and stderr maxima
+    for short calls and ref scans, using the same values in both Reader
+    calls and in the whole-operation reservation.
+    """
+    if type(retain_d_index) is not bool:
+        raise ValueError('explicit boolean index retention required')
+    if control_read is not None and not callable(control_read):
+        raise ValueError('existing accounted control reader must be callable')
+    if stage_a_targets is not None and (not retain_d_index or control_read is None or not callable(read_stage_zero)):
+        raise ValueError('Stage A requires the retained D index and the existing accounted reader and index parser')
+    if stage_a_targets is None and read_stage_zero is not None:
+        raise ValueError('Stage A index parser requires the selected roster')
+    git_accounting = callable(admit_git_output) and callable(record_git_output)
+    if (stage_a_targets is not None or admit_git_output is not None or record_git_output is not None) and not git_accounting:
+        raise ValueError('Stage A requires the existing Git output admission and accounting owner')
+    _stage_a_git_capture_allowance(git_output_maximum)
+    _stage_a_git_ref_capture_allowance(git_ref_output_maximum)
+    if stage_a_targets is None and (git_output_maximum != _STAGE_A_GIT_STREAM_LIMIT
+                                    or git_ref_output_maximum != _STAGE_A_GIT_STREAM_LIMIT):
+        raise ValueError('a smaller Git output maximum requires the selected Stage A roster')
+    stage_a_pins = []
+    relative_paths = []
+    endpoint_roots = {}
+    if stage_a_targets is not None:
+        if type(stage_a_targets) is not list or len(stage_a_targets) != 32:
+            raise ValueError('exact ordered Stage A 32-target roster required')
+        for target in stage_a_targets:
+            target_path = target['path']
+            path = Path(target_path)
+            if (not path.is_absolute() or not path.is_relative_to(R) or str(path) != target_path
+                    or '..' in path.parts or path == R or path.is_relative_to(R / '.git')):
+                raise ValueError('Stage A target must be a literal file path under D')
+            mode, oid = (target[k] for k in ('expected_Git_mode', 'expected_Git_blob_oid'))
+            if (mode != '100644' or type(oid) is not str or len(oid) != 40 or oid == '0' * 40
+                    or any(char not in '0123456789abcdef' for char in oid)):
+                raise ValueError('Stage A target must have the selected regular mode and blob ID')
+            relative_paths.append(path.relative_to(R).as_posix())
+            stage_a_pins.append({'path': target_path, 'mode': mode, 'Git_blob_oid': oid})
+        if len(set(relative_paths)) != 32:
+            raise ValueError('duplicate Stage A target path')
+    d_index_capture = None
+    def full9(value):
+        return {key: str(getattr(value, key)) for key in (
+            'st_dev', 'st_ino', 'st_mode', 'st_uid', 'st_gid', 'st_nlink', 'st_size', 'st_mtime_ns', 'st_ctime_ns')}
+
+    def git(root, *args):
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise ValueError('initial total420 expired during standalone Git guards')
+        command, env = _stage_a_read_only_git_command(root,args)
+        if git_accounting:
+            capture_maximum = git_ref_output_maximum if args[0] == 'for-each-ref' else git_output_maximum
+            return _run_accounted_stage_a_git(command, env=env, timeout=min(remaining, 10),
+                admit_git_output=admit_git_output, record_git_output=record_git_output, deadline=deadline,
+                git_output_maximum=capture_maximum)
+        result = subprocess.run(command, env=env, capture_output=True, check=True,
+                                timeout=min(remaining, 10))
+        if len(result.stdout) + len(result.stderr) > 262144:
+            raise ValueError('standalone Git guard output exceeds bound')
+        return result.stdout
+
+    def check_pin(pin, *, retain_body=False):
+        path = Path(pin['path'])
+        begin = path.lstat()
+        if (not stat.S_ISREG(begin.st_mode) or begin.st_nlink != 1
+                or full9(begin) != pin['full9'] or begin.st_size != pin['bytes']):
+            raise ValueError(f'standalone Git metadata changed: {path}')
+        if control_read is None:
+            raw = io.read(path)
+        else:
+            reference = {key: pin[key] for key in ('path', 'bytes', 'sha256')}
+            raw = control_read(reference, 'standalone_git_guard')
+        if (time.monotonic() >= deadline or len(raw) != pin['bytes']
+                or hashlib.sha256(raw).hexdigest() != pin['sha256']
+                or full9(path.lstat()) != pin['full9']):
+            raise ValueError(f'standalone Git pin changed or guard expired: {path}')
+        return raw if retain_body else None
+
+    excludes = {row['path']: row for row in record['exact_exclude_pins']}
+    roots = (str(R), str(A))
+    expectations = (STANDALONE_PROJECT_EXPECTATIONS if project_expectations is None
+                    else stage_a_paired_git_expectations(project_expectations, roots))
+    def selector_matches(pin):
+        path = Path(pin['path'])
+        return ((project_expectations is None or path.resolve(strict=True) == path)
+                and full9(path.lstat()) == pin['full9'])
+
+    for root, index_key in ((roots[0], 'D_index'), (roots[1], 'A_index')):
+        expected = expectations[root]
+        git_dir = Path(root) / '.git'
+        selector_pins = expected['Git_selector_metadata']
+        if set(selector_pins) != {'HEAD', 'ref', 'config'}:
+            raise ValueError('exact standalone Git selector metadata required')
+        for pin in selector_pins.values():
+            path = Path(pin['path'])
+            if not path.is_relative_to(git_dir) or not selector_matches(pin):
+                raise ValueError(f'standalone Git selector metadata changed: {path}')
+        actual_index = git(root, 'rev-parse', '--path-format=absolute', '--git-path', 'index').decode().strip()
+        actual_exclude = git(root, 'rev-parse', '--path-format=absolute', '--git-path',
+                             'info/exclude').decode().strip()
+        if actual_index != record[index_key]['path'] or actual_exclude != str(git_dir / 'info/exclude'):
+            raise ValueError(f'standalone Git index or exclude path changed: {root}')
+        branch = git(root, 'symbolic-ref', 'HEAD').decode().strip()
+        if (not stat.S_ISDIR(git_dir.lstat().st_mode) or os.path.lexists(git_dir / 'commondir')
+                or git(root, 'rev-parse', '--absolute-git-dir').decode().strip() != str(git_dir)
+                or git(root, 'rev-parse', '--path-format=absolute', '--git-common-dir').decode().strip()
+                    != str(git_dir)
+                or branch != expected['branch_ref']
+                or git(root, 'rev-parse', branch).decode().strip() != expected['HEAD']
+                or git(root, 'rev-parse', 'HEAD').decode().strip() != expected['HEAD']
+                or git(root, 'rev-parse', 'HEAD^{tree}').decode().strip() != expected['tree']
+                or hashlib.sha256(git(root, 'for-each-ref', '--format=%(refname) %(objectname)')).hexdigest()
+                    != expected['refs_sha256']
+                or git(root, 'status', '--porcelain=v1', '-z', '--untracked-files=normal') != b''):
+            raise ValueError(f'standalone Git root, branch, refs, tree or cleanliness changed: {root}')
+        git(root, 'diff', '--cached', '--quiet', 'HEAD', '--')
+        git(root, 'diff', '--quiet', '--')
+        index = record[index_key]
+        exclude = excludes[str(git_dir / 'info/exclude')]
+        raw = check_pin(index, retain_body=retain_d_index and index_key == 'D_index')
+        check_pin(exclude)
+        if raw is not None:
+            captured_index = {key: index[key] for key in ('path', 'bytes', 'sha256')}
+            captured_index['full9'] = dict(index['full9'])
+            d_index_capture = captured_index, raw
+            if stage_a_pins:
+                # Reuse these independently verified bytes. No extra index open.
+                stage_zero = read_stage_zero(raw, list(relative_paths))
+                relative_bytes = [os.fsencode(path) for path in relative_paths]
+                if type(stage_zero) is not dict or set(stage_zero) != set(relative_bytes):
+                    raise ValueError('Stage A D index roster differs')
+                for relative, pin in zip(relative_bytes, stage_a_pins, strict=True):
+                    matches = stage_zero[relative]
+                    if (type(matches) is not list or len(matches) != 1 or type(matches[0]) is not tuple
+                            or len(matches[0]) != 4 or matches[0][:3] != (pin['Git_blob_oid'], 0o100644, 0)):
+                        raise ValueError('Stage A D stage-zero blob, mode or stage differs')
+                tree_rows = git(root, '--literal-pathspecs', 'ls-tree', '-z', '--full-tree',
+                                'HEAD', '--', *relative_paths).split(b'\0')
+                expected_rows = [b'100644 blob ' + pin['Git_blob_oid'].encode('ascii') + b'\t' + relative
+                                 for relative, pin in zip(relative_bytes, stage_a_pins, strict=True)]
+                if tree_rows[-1] != b'' or sorted(tree_rows[:-1]) != sorted(expected_rows):
+                    raise ValueError('Stage A D HEAD tree paths, kinds, modes or blobs differ')
+        if any(not selector_matches(pin) for pin in selector_pins.values()):
+            raise ValueError(f'standalone Git selector changed during verification: {root}')
+        if stage_a_pins:
+            endpoint_roots[index_key[0]] = {'root': root, 'HEAD': expected['HEAD'], 'tree': expected['tree'],
+                                            'clean_worktree_and_index': True,
+                                            'status_sha256': hashlib.sha256(b'').hexdigest()}
+    if time.monotonic() >= deadline:
+        raise ValueError('initial total420 expired after standalone Git guards')
+    if retain_d_index:
+        pin, raw = d_index_capture
+        if full9(Path(pin['path']).lstat()) != pin['full9'] or time.monotonic() >= deadline:
+            raise ValueError('checked D index changed before the retained bytes were returned')
+        if stage_a_pins:
+            return {'roots': endpoint_roots, 'index': pin, 'git': stage_a_pins}, raw
+        return d_index_capture
+
+
+def verify_stage_a_git_with_retained_controls(
+        io, record, deadline, *, between_endpoints, control_read, stage_a_targets,
+        read_stage_zero, admit_git_output, record_git_output,
+        expected_owner_scope_sha256, verify_continuous_owner_scope,
+        git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT, git_ref_output_maximum=_STAGE_A_GIT_STREAM_LIMIT,
+        project_expectations=None):
+    """Use retained Git control bytes under one selected continuous paired Source READ.
+
+    The existing owner must hold both READ contexts through this call. Its
+    verifier authenticates this exact proof mode and the continuous scope before
+    and after both endpoints. The closing Git checks are fresh. The closing
+    file evidence comes from the opening bytes and the continuous descriptors.
+    """
+    from contextlib import ExitStack
+    from copy import deepcopy
+
+    if (type(expected_owner_scope_sha256) is not str or len(expected_owner_scope_sha256) != 64
+            or any(char not in '0123456789abcdef' for char in expected_owner_scope_sha256)
+            or not all(callable(value) for value in (between_endpoints, control_read,
+                                                     verify_continuous_owner_scope))):
+        raise ValueError('independent continuous Source owner authorization required')
+    selected = deepcopy(record)
+    targets = deepcopy(stage_a_targets)
+    roots = (str(R), str(A))
+    pid = os.getpid()
+    scope_kind = 'paired-git-continuous-read-retained-controls/v1'
+    git_options = {} if project_expectations is None else {
+        'project_expectations':stage_a_paired_git_expectations(project_expectations, roots)}
+
+    def verify_scope(phase):
+        if (os.getpid() != pid or (str(R), str(A)) != roots or time.monotonic() >= deadline
+                or verify_continuous_owner_scope(expected_owner_scope_sha256, scope_kind,
+                                                 pid, roots, phase) is not True
+                or time.monotonic() >= deadline):
+            raise ValueError('existing continuous paired READ scope refused or expired')
+
+    d_root, a_root = map(Path, roots)
+    ordered_paths = tuple(str(root / '.git' / leaf) for root in (d_root, a_root)
+                          for leaf in ('index', 'info/exclude'))
+    pins = [selected['D_index'], selected['A_index'], *selected['exact_exclude_pins']]
+    pin_map = {row['path']: row for row in pins}
+    if (len(pins) != 4 or set(pin_map) != set(ordered_paths) or d_root == a_root
+            or any(not root.is_absolute() for root in (d_root, a_root))
+            or selected['D_index']['path'] != ordered_paths[0]
+            or selected['A_index']['path'] != ordered_paths[2]):
+        raise ValueError('exact D and A index and exclude pins required')
+
+    def full9(info):
+        return {key: str(getattr(info, key)) for key in (
+            'st_dev', 'st_ino', 'st_mode', 'st_uid', 'st_gid', 'st_nlink', 'st_size',
+            'st_mtime_ns', 'st_ctime_ns')}
+
+    def check_descriptor(pin, fd):
+        path = Path(pin['path'])
+        before = path.lstat()
+        opened = os.fstat(fd)
+        after = path.lstat()
+        if (path.resolve(strict=True) != path or not stat.S_ISREG(opened.st_mode)
+                or opened.st_nlink != 1 or opened.st_size != pin['bytes']
+                or not full9(before) == full9(opened) == full9(after) == pin['full9']
+                or time.monotonic() >= deadline):
+            raise ValueError(f'retained Git control path or descriptor changed: {path}')
+
+    cached = {}
+    terminal_paths = []
+    with ExitStack() as descriptors:
+        def select_reference(reference, kind, expected_reads):
+            path = reference.get('path')
+            if (kind != 'standalone_git_guard' or path not in pin_map
+                    or len(expected_reads) >= len(ordered_paths) or path != ordered_paths[len(expected_reads)]
+                    or reference != {key: pin_map[path][key] for key in ('path', 'bytes', 'sha256')}):
+                raise ValueError('unexpected retained Git control read or order')
+            return pin_map[path]
+
+        def opening_read(reference, kind):
+            pin = select_reference(reference, kind, cached)
+            if Path(pin['path']).resolve(strict=True) != Path(pin['path']):
+                raise ValueError('retained Git control requires its literal resolved path')
+            retained = []
+
+            def retain_open_descriptor(fd):
+                if retained or os.getpid() != pid:
+                    raise ValueError('one opening descriptor per selected Git control required')
+                check_descriptor(pin, fd)
+                duplicate = os.dup(fd)
+                descriptors.callback(os.close, duplicate)
+                check_descriptor(pin, duplicate)
+                retained.append(duplicate)
+
+            raw = control_read(reference, kind, retain_fd=retain_open_descriptor)
+            if (len(retained) != 1 or type(raw) is not bytes or len(raw) != pin['bytes']
+                    or hashlib.sha256(raw).hexdigest() != pin['sha256']):
+                raise ValueError('original owner did not retain the authenticated Git control')
+            fd, = retained
+            check_descriptor(pin, fd)
+            cached[pin['path']] = (fd, raw)
+            return raw
+
+        def closing_read(reference, kind):
+            pin = select_reference(reference, kind, terminal_paths)
+            fd, raw = cached[pin['path']]
+            check_descriptor(pin, fd)
+            terminal_paths.append(pin['path'])
+            return raw
+
+        def observe_endpoint(read_bytes):
+            return verify_standalone_git(
+                io, selected, deadline, retain_d_index=True, control_read=read_bytes,
+                stage_a_targets=targets, read_stage_zero=read_stage_zero,
+                admit_git_output=admit_git_output, record_git_output=record_git_output,
+                git_output_maximum=git_output_maximum, git_ref_output_maximum=git_ref_output_maximum,
+                **git_options)
+
+        verify_scope('before-opening')
+        opening = observe_endpoint(opening_read)
+        if tuple(cached) != ordered_paths:
+            raise ValueError('opening endpoint did not capture the exact Git control roster')
+        verify_scope('opening-complete')
+        opening_snapshot = deepcopy(opening)
+        middle = between_endpoints(opening_snapshot)
+        if opening_snapshot != opening:
+            raise ValueError('opening Git endpoint changed while reading selected bodies')
+        verify_scope('before-closing')
+        for path in ordered_paths:
+            check_descriptor(pin_map[path], cached[path][0])
+        closing = observe_endpoint(closing_read)
+        if tuple(terminal_paths) != ordered_paths or closing != opening:
+            raise ValueError('closing Git endpoint differs from the opening endpoint')
+        verify_scope('closing-complete')
+        if git_options and any(Path(pin['path']).resolve(strict=True) != Path(pin['path'])
+                               or full9(Path(pin['path']).lstat()) != pin['full9']
+                               for entry in git_options['project_expectations'].values()
+                               for pin in entry['Git_selector_metadata'].values()):
+            raise ValueError('selected Git selector changed after final owner verification')
+        for path in ordered_paths:
+            check_descriptor(pin_map[path], cached[path][0])
+        receipt = {
+            'schema': scope_kind, 'owner_scope_sha256': expected_owner_scope_sha256,
+            'operator_pid': pid, 'roots': list(roots),
+            'opening_controls': [deepcopy(pin_map[path]) for path in ordered_paths],
+            'closing_git_endpoint_checked': True,
+            'closing_original_descriptor_identity_checked': True,
+            'closing_fresh_control_body_read': False,
+            'closing_control_body_read_bytes': 0,
+        }
+    receipt['retained_descriptors_closed'] = True
+    if git_options:
+        receipt['closing_explicit_git_selector_metadata_checked'] = True
+    return opening, middle, closing, receipt
+
+
+def source32_explicit_byte_demand(git_guard_record, guides, sources):
+    """Compute the explicit two-pass requests and raw output bytes.
+
+    Each selected reader call requests the planned size plus one growth byte.
+    Count the source-body capture and its own archive readback separately.
+    Git subprocess work, controls, and epoch/receipt artifacts need their own
+    selected bounds.
+    """
+    excludes = git_guard_record["exact_exclude_pins"]
+    if len(excludes) != 2 or len(guides) != 4 or len(sources) != 32:
+        raise ValueError("exact Git pins, four guides and 32 body sizes required")
+    git_pins = [git_guard_record["D_index"], git_guard_record["A_index"], *excludes]
+    rows = [*git_pins, *guides, *sources]
+    paths = [row["path"] for row in rows]
+    if not all(type(path) is str and Path(path).is_absolute() for path in paths) or len(set(paths)) != len(paths):
+        raise ValueError("distinct absolute paths required for explicit Source costs")
+    if not all(type(row["bytes"]) is int and 0 <= row["bytes"] <= 16 * 1024**2 for row in rows):
+        raise ValueError("exact bounded plain-integer file sizes required for Source costs")
+
+    def requests(records):
+        return sum(row["bytes"] + 1 for row in records)
+
+    one_pass = requests(git_pins)
+    body_requests = requests(sources)
+    body_writes = sum(row["bytes"] for row in sources)
+    total_requests = 2 * one_pass + requests(guides) + 2 * body_requests
+    return {
+        "git_guard_requests_per_pass_bytes": one_pass,
+        "git_guard_passes": 2,
+        "source_body_requests_bytes": body_requests,
+        "raw_body_readback_requests_bytes": body_requests,
+        "guide_requests_bytes": requests(guides),
+        "explicit_read_requests_bytes": total_requests,
+        "raw_body_output_bytes": body_writes,
+        "explicit_read_requests_and_raw_outputs_bytes": total_requests + body_writes,
+        "avoided_additional_index_request_bytes": git_guard_record["D_index"]["bytes"] + 1,
+    }
+
+STAGE_A_RELOCATED_ALL_FRESH_RESERVATION = 'stage-a-source32-relocated-all-fresh/v1'
+
+
+def source32_paired_reader_reservation(git_guard_record, guides, fresh_sources, archived_sources, control_reads,
+                                       *, epoch_output_maximums,
+                                       git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT,
+                                       git_ref_output_maximum=_STAGE_A_GIT_STREAM_LIMIT,
+                                       persist_python_epoch=True,
+                                       retain_terminal_git_controls=False, capture_partition=None):
+    """Price selected logical operations before the existing owner enters Source.
+
+    Use selected maximum output lengths for the two epoch lists. The current
+    reader still checks exact lengths under custody before capturing bodies.
+    Captured Git streams are accounted separately from its unmeasured internal I/O.
+    The opt-in outer-only storage still checks both logical maxima before
+    capture. Select it together with the existing owner's projected archive
+    encoder and replay, and budget its retained receipts separately.
+    """
+    if capture_partition is None:
+        if len(fresh_sources) != 12 or len(archived_sources) != 20:
+            raise ValueError('exact Stage A partition of 12 fresh and 20 archived bodies required')
+    elif type(capture_partition) is not str or capture_partition != STAGE_A_RELOCATED_ALL_FRESH_RESERVATION:
+        raise ValueError('unknown Stage A capture partition')
+    elif len(fresh_sources) != 32 or len(archived_sources) != 0:
+        raise ValueError('relocated Stage A requires exactly 32 fresh captures and zero archives')
+    legacy = source32_explicit_byte_demand(git_guard_record, guides, [*fresh_sources, *archived_sources])
+    if (type(epoch_output_maximums) is not dict or set(epoch_output_maximums) != {'outer_epoch', 'python_epoch'}
+            or any(type(value) is not int or value < 1 for value in epoch_output_maximums.values())):
+        raise ValueError('selected positive maximum lengths for both epoch outputs required')
+    if type(persist_python_epoch) is not bool:
+        raise ValueError('Explicit Python LIST persistence selection required')
+    if type(retain_terminal_git_controls) is not bool:
+        raise ValueError('Explicit same-owner terminal Git control selection required')
+    paths = [row['path'] for row in control_reads]
+    if (len(set(paths)) != len(paths) or
+            any(type(row['bytes']) is not int or row['bytes'] < 0 or not Path(row['path']).is_absolute()
+                for row in control_reads)):
+        raise ValueError('exact distinct bounded control reads required')
+    if capture_partition is not None:
+        pins = [git_guard_record['D_index'], git_guard_record['A_index'],
+                *git_guard_record['exact_exclude_pins'], *guides, *fresh_sources, *control_reads]
+        literal_paths = [row['path'] for row in pins]
+        if (len(set(literal_paths)) != len(literal_paths) or
+                any(type(path) is not str or str(Path(path)) != path or '..' in Path(path).parts
+                    or path.startswith('//') for path in literal_paths)):
+            raise ValueError('relocated Stage A requires distinct literal Source and control paths')
+    control_passes = 1 if retain_terminal_git_controls else 2
+    file_guards = control_passes * legacy['git_guard_requests_per_pass_bytes']
+    fresh_io = sum(3 * row['bytes'] + 2 for row in fresh_sources)
+    archive_io = sum(row['bytes'] + 1 for row in archived_sources)
+    direct = file_guards + legacy['guide_requests_bytes'] + fresh_io + archive_io
+    controls = sum(row['bytes'] + 1 for row in control_reads)
+    stored_epoch_names = ('outer_epoch', 'python_epoch') if persist_python_epoch else ('outer_epoch',)
+    epoch_io = sum(2 * epoch_output_maximums[name] + 1 for name in stored_epoch_names)
+    git_allowance = stage_a_git_output_allowance(git_output_maximum=git_output_maximum,
+                                                 git_ref_output_maximum=git_ref_output_maximum)
+    return {'logical_selected_bytes': direct + controls + epoch_io + git_allowance,
+            'git_output_allowance_bytes': git_allowance, 'direct_source_bytes': direct,
+            'control_probe_bytes': controls, 'epoch_output_allowance_bytes': epoch_io}
+
+
+
+STAGE_A_SELECTOR_OBSERVATION_SCHEMA = 'stage-a-paired-git-selector-source-observation/v1'
+STAGE_A_SELECTOR_TERMINAL_SCHEMA = 'stage-a-paired-git-selector-terminal/v1'
+
+
+def stage_a_git_selector_output_allowance(*, git_output_maximum=8192,
+                                          git_ref_output_maximum=_STAGE_A_GIT_STREAM_LIMIT):
+    """Combined stream reservation for one selected observation of both roots."""
+    return (22 * _stage_a_git_capture_allowance(git_output_maximum)
+            + 2 * _stage_a_git_ref_capture_allowance(git_ref_output_maximum))
+
+
+def _stage_a_selector_source_roots(expected):
+    from copy import deepcopy
+
+    def pin(value, length):
+        return type(value) is str and len(value) == length and all(char in '0123456789abcdef' for char in value)
+
+    if (type(expected) is not dict or set(expected) != {'D','A'}
+            or any(type(row) is not dict or set(row) != {'root','HEAD','tree','clean_worktree_and_index','status_sha256'}
+                   or type(row['root']) is not str or str(Path(row['root'])) != row['root']
+                   or not Path(row['root']).is_absolute() or '..' in Path(row['root']).parts
+                   or not pin(row['HEAD'],40) or not pin(row['tree'],40)
+                   or row['clean_worktree_and_index'] is not True
+                   or row['status_sha256'] != hashlib.sha256(b'').hexdigest()
+                   for row in expected.values())):
+        raise ValueError('exact preselected clean Datasets and Accelerate roots required')
+    roots = tuple(expected[role]['root'] for role in ('D','A'))
+    left,right = map(Path,roots)
+    if left == right or left.is_relative_to(right) or right.is_relative_to(left):
+        raise ValueError('the original paired Git roots must be separate')
+    return deepcopy(expected),roots
+
+
+def _stage_a_selector_pin(value):
+    return type(value) is str and len(value) == 64 and all(char in '0123456789abcdef' for char in value)
+
+
+def _stage_a_selector_stream_reference(root, branch, head, raw):
+    if (type(raw) is not bytes or not raw or len(raw) > _STAGE_A_GIT_STREAM_LIMIT
+            or not raw.endswith(b'\n')
+            or raw.splitlines().count(branch.encode() + b' ' + head.encode('ascii')) != 1):
+        raise ValueError('raw Git ref stream must contain its exact selected branch OID once')
+    return {'root':root,'bytes':len(raw),'sha256':hashlib.sha256(raw).hexdigest()}
+
+
+def observe_stage_a_paired_git_selectors(expected_roots, *, expected_owner_scope_sha256, deadline,
+        verify_continuous_owner_scope, admit_git_output, record_git_output, git_output_maximum=8192,
+        git_ref_output_maximum=_STAGE_A_GIT_STREAM_LIMIT):
+    """Capture exact selector evidence while the existing owner holds both Source READs.
+
+    Return an observation and its two raw streams. The owner seals the raw output
+    and independently verifies live terminal custody before the Reader uses it.
+    """
+    from math import isfinite
+
+    expected,roots = _stage_a_selector_source_roots(expected_roots)
+    if (not _stage_a_selector_pin(expected_owner_scope_sha256) or type(deadline) not in (int,float)
+            or not isfinite(deadline)
+            or not all(callable(callback) for callback in (
+                verify_continuous_owner_scope,admit_git_output,record_git_output))):
+        raise ValueError('existing paired selector scope and Git accounting required')
+    stage_a_git_selector_output_allowance(git_output_maximum=git_output_maximum,
+                                          git_ref_output_maximum=git_ref_output_maximum)
+    kind = STAGE_A_SELECTOR_OBSERVATION_SCHEMA
+    pid = os.getpid()
+
+    def verify_scope(phase):
+        if (time.monotonic() >= deadline or expected_roots != expected or os.getpid() != pid
+                or verify_continuous_owner_scope(expected_owner_scope_sha256,kind,pid,roots,phase) is not True
+                or time.monotonic() >= deadline or os.getpid()!=pid or expected_roots!=expected):
+            raise ValueError('existing continuous paired selector scope refused, changed or expired')
+
+    def timestamp(path):
+        stamp = path.lstat()
+        if (path.resolve(strict=True) != path or not stat.S_ISREG(stamp.st_mode) or stamp.st_nlink != 1
+                or time.monotonic() >= deadline):
+            raise ValueError(f'expected original literal regular Git selector: {path}')
+        fields = ('st_dev','st_ino','st_mode','st_uid','st_gid','st_nlink','st_size','st_mtime_ns','st_ctime_ns')
+        return {'path':str(path),'full9':{field:str(getattr(stamp,field)) for field in fields}}
+
+    def git(root,*args):
+        remaining = deadline-time.monotonic()
+        if remaining <= 0:
+            raise ValueError('paired Git selector observation expired')
+        command, env = _stage_a_read_only_git_command(root,args)
+        max_output = git_ref_output_maximum if args[0]=='for-each-ref' else git_output_maximum
+        return _run_accounted_stage_a_git(command,env=env,timeout=min(remaining,10),deadline=deadline,
+            admit_git_output=admit_git_output,record_git_output=record_git_output,git_output_maximum=max_output)
+
+    def normalize_line(raw):
+        if not raw.endswith(b'\n') or raw.count(b'\n')!=1:
+            raise ValueError('exact single Git selector line required')
+        return raw[:-1].decode()
+
+    verify_scope('before-observation')
+    projects, streams, references = {},{},[]
+    for role,root in zip(('D','A'),roots,strict=True):
+        git_dir = Path(root)/'.git'
+        if (not stat.S_ISDIR(git_dir.lstat().st_mode) or git_dir.resolve(strict=True)!=git_dir
+                or os.path.lexists(git_dir/'commondir')
+                or normalize_line(git(root,'rev-parse','--absolute-git-dir'))!=str(git_dir)
+                or normalize_line(git(root,'rev-parse','--path-format=absolute','--git-common-dir'))!=str(git_dir)):
+            raise ValueError('exact standalone Git directory required for the selector observation')
+        if (normalize_line(git(root,'rev-parse','--show-toplevel'))!=root
+                or normalize_line(git(root,'rev-parse','--path-format=absolute','--git-path','index'))!=str(git_dir/'index')):
+            raise ValueError('paired selector effective worktree or index path differs')
+        head_file,config = timestamp(git_dir/'HEAD'),timestamp(git_dir/'config')
+        branch = normalize_line(git(root,'symbolic-ref','HEAD'))
+        if (not branch.startswith('refs/heads/') or any(part in ('','.','..') for part in branch.split('/'))
+                or any(ord(char)<=32 or ord(char)==127 for char in branch)):
+            raise ValueError('selected symbolic HEAD must name the literal loose branch')
+        branch_file = timestamp(git_dir/branch)
+        head = normalize_line(git(root,'rev-parse','HEAD'))
+        if (normalize_line(git(root,'rev-parse',branch))!=head or head!=expected[role]['HEAD']
+                or normalize_line(git(root,'rev-parse','HEAD^{tree}'))!=expected[role]['tree']
+                or git(root,'status','--porcelain=v1','-z','--untracked-files=normal')!=b''):
+            raise ValueError('paired selector HEAD, tree, branch OID or clean state differs')
+        git(root,'diff','--cached','--quiet','HEAD','--')
+        git(root,'diff','--quiet','--')
+        raw = git(root,'for-each-ref','--format=%(refname) %(objectname)')
+        stream = _stage_a_selector_stream_reference(root,branch,head,raw)
+        streams[root] = raw
+        references.append(stream)
+        projects[root] = {'HEAD':head,'tree':expected[role]['tree'],'branch_ref':branch,'refs_sha256':stream['sha256'],
+                          'Git_selector_metadata':{'HEAD':head_file,'ref':branch_file,'config':config}}
+    projects = stage_a_paired_git_expectations(projects,roots)
+    verify_scope('after-observation')
+    if any(timestamp(Path(pin['path']))!=pin for row in projects.values() for pin in row['Git_selector_metadata'].values()):
+        raise ValueError('paired Git selector file changed during the observation')
+    result = {'schema':kind,'owner_scope_sha256':expected_owner_scope_sha256,'operator_pid':pid,
+              'git_project_expectations':projects,'stream_observations':references,
+              'roots':expected,'requires_original_terminal_custody':True}
+    return result, streams
+
+
+def bind_closed_stage_a_paired_selector(expected_roots, *, receipt_raw, expected_receipt_sha256,
+        expected_owner_scope_sha256, raw_ref_streams, verify_original_owner_close):
+    """Verify original terminal custody and emit the existing Reader v2 inputs."""
+    import json
+
+    expected,roots = _stage_a_selector_source_roots(expected_roots)
+    if (type(receipt_raw) is not bytes or not _stage_a_selector_pin(expected_receipt_sha256)
+            or hashlib.sha256(receipt_raw).hexdigest()!=expected_receipt_sha256
+            or not _stage_a_selector_pin(expected_owner_scope_sha256)
+            or type(raw_ref_streams) is not dict or set(raw_ref_streams)!=set(roots)
+            or not callable(verify_original_owner_close)):
+        raise ValueError('exact original paired-selector terminal bytes and both raw streams required')
+    offered_raw = dict(raw_ref_streams)
+
+    def unique(pairs):
+        result = {}
+        for key,value in pairs:
+            if key in result:
+                raise ValueError('duplicate original selector terminal field')
+            result[key] = value
+        return result
+
+    receipt = json.loads(receipt_raw,object_pairs_hook=unique)
+    if (type(receipt) is not dict or set(receipt)!={'schema','observation','Source_contexts','Source_closed','owned_module_closed','errors'}
+            or receipt['schema']!=STAGE_A_SELECTOR_TERMINAL_SCHEMA or receipt['Source_closed'] is not True
+            or receipt['owned_module_closed'] is not True or receipt['errors']!=[]):
+        raise ValueError('the original paired selector READ and module custody must be terminal')
+    contexts = receipt['Source_contexts']
+    if (type(contexts) is not list or len(contexts)!=len(roots)
+            or any(type(context) is not dict or set(context)!={'root','mode','entered','exit_returned'}
+                   or context['root']!=root or context['mode']!='read'
+                   or context['entered'] is not True or context['exit_returned'] is not True
+                   for context,root in zip(contexts,sorted(roots),strict=True))):
+        raise ValueError('the original paired selector READ and module custody must be terminal')
+    observation = receipt['observation']
+    if (type(observation) is not dict or set(observation)!={'schema','owner_scope_sha256','operator_pid',
+            'git_project_expectations','stream_observations','roots','requires_original_terminal_custody'}
+            or observation['schema']!=STAGE_A_SELECTOR_OBSERVATION_SCHEMA
+            or observation['owner_scope_sha256']!=expected_owner_scope_sha256
+            or type(observation['operator_pid']) is not int or observation['operator_pid']<=0
+            or observation['roots']!=expected or observation['requires_original_terminal_custody'] is not True):
+        raise ValueError('terminal receipt changed the exact originally selected observation')
+    projects = stage_a_paired_git_expectations(observation['git_project_expectations'],roots)
+    seen = []
+    for role,root in zip(('D','A'),roots,strict=True):
+        row = projects[root]
+        stream = _stage_a_selector_stream_reference(root,row['branch_ref'],row['HEAD'],offered_raw[root])
+        if ((row['HEAD'],row['tree'])!=(expected[role]['HEAD'],expected[role]['tree'])
+                or stream['sha256']!=row['refs_sha256']):
+            raise ValueError('original terminal selector or raw ref stream differs from the selected root')
+        seen.append(stream)
+    if observation['stream_observations']!=seen:
+        raise ValueError('original terminal selector does not record both exact raw streams')
+    if (verify_original_owner_close(expected_receipt_sha256,expected_owner_scope_sha256,roots,observation['operator_pid']) is not True
+            or expected_roots!=expected or raw_ref_streams!=offered_raw):
+        raise ValueError('independent owner refused terminal selector custody or evidence changed')
+    return {'git_project_expectations':projects,'paired_selector_observation_sha256':expected_receipt_sha256}

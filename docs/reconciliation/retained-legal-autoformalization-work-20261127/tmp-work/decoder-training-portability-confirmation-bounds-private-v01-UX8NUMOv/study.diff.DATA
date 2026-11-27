@@ -1,0 +1,112 @@
+--- prior/study.py
++++ candidate/study.py
+@@ -8062,14 +8062,80 @@
+                              "one original attainment and confirmation reading per attempt and clock required")
+ 
+ 
++def _portability_confirmation_pair_key(row):
++    values = tuple(row.get(key) for key in ("contrast_id", "seed", "clock", "horizon",
++                                            "baseline_attempt_sha256", "candidate_attempt_sha256"))
++    contrast, seed, clock, horizon, baseline, candidate = values
++    _require(_name(contrast) and _name(seed) and type(clock) is str and clock in COVERED_CLOCKS
++             and type(horizon) is float and isfinite(horizon) and horizon > 0
++             and _pin(baseline) and _pin(candidate) and baseline != candidate,
++             "exact original contrast, seed, horizon, clock and attempt identities required")
++    return values
++
++
++def _portability_paid_confirmation_pairs(development, paid_comparison):
++    selected = development["paid_development_comparison_sha256"]
++    fields = ("study_sha256", "cost_evidence_sha256", "cost_basis")
++    _require(type(paid_comparison) is dict and paid_comparison.get("schema") == VERIFIED_DEVELOPMENT_SCHEMA
++             and all(paid_comparison.get(field) == development[field] for field in fields)
++             and commitment(paid_comparison) == selected
++             and type(paid_comparison.get("confirmation_cost_bounds")) is dict
++             and type(paid_comparison.get("pairs")) in (tuple, list)
++             and all(type(row) is dict for row in paid_comparison["pairs"]),
++             "exact paid DEVELOPMENT comparison with authenticated confirmation meters required")
++    declared = paid_comparison["confirmation_cost_bounds"]
++    recomputed = _verified_confirmation_cost_bounds(paid_comparison)
++    _require(commitment(declared) == commitment(recomputed),
++             "paid confirmation bounds must reproduce from the original attempt meters")
++    paired = {}
++    for original, bounded in zip(paid_comparison["pairs"], recomputed["pairs"], strict=True):
++        key = _portability_confirmation_pair_key(original)
++        _require(key == _portability_confirmation_pair_key(bounded) and key not in paired,
++                 "unique original paid comparison pairs required")
++        paired[key] = (commitment(original), bounded)
++    return paired, commitment(declared)
++
++
++def _portability_meter_interactions(comparison, original, paid_pairs):
++    rows = []
++    for pair, legacy in zip(original["pairs"], comparison["seed_intervals"], strict=True):
++        sides = []
++        for side in ("reference_pair", "comparison_pair"):
++            offered = pair[side]
++            key = _portability_confirmation_pair_key(offered)
++            entry = paid_pairs.get(key)
++            _require(entry is not None and entry[0] == commitment(offered),
++                     "each Stage G quartet must retain both exact original paid pairs")
++            sides.append(entry[1])
++        reference, alternative = sides
++        clock = "restricted_candidate_minus_baseline_seconds_bounds"
++        left, right = (tuple(Fraction(*value) for value in row[clock]) for row in sides)
++        interval = (right[0] - left[1], right[1] - left[0])
++        key = "candidate_minus_baseline_attainment_bounds"
++        ref_attain, other_attain = reference[key], alternative[key]
++        attainment = (other_attain[0] - ref_attain[1], other_attain[1] - ref_attain[0])
++        rows.append(({**legacy, "reference_pair": reference, "comparison_pair": alternative,
++                      "bounds_seconds": _wire(interval), "attainment_interaction_bounds": attainment},
++                     interval, attainment))
++    count = len(rows)
++    intervals, times, attainment = zip(*rows, strict=True)
++    return {**comparison, "seed_intervals": intervals,
++            "mean_interaction_bounds_seconds": _wire(tuple(sum(values) / count for values in zip(*times, strict=True))),
++            "mean_attainment_interaction_bounds": _wire(tuple(Fraction(sum(values), count)
++                                                            for values in zip(*attainment, strict=True)))}
++
++
+ def summarize_objective_portability_restricted_confirmation(development, *, expected_development_sha256,
+-                                                            verify_original_development_owner):
++                                                            verify_original_development_owner, paid_comparison=None):
+     """Read per-clock finite-panel confirmation bounds from an original paid Stage G report.
+ 
+     Each arm contributes the scheduled confirmation clock clipped at the existing
+     horizon. A known absence uses the horizon. An unknown contributes its full
+     interval. The average gives equal weight to every selected seed and does not
+     infer a failed run's resource use or make a population-level claim.
++
++    Optional paid comparison evidence adds independently authenticated
++    meter bounds without altering the original restricted result.
+     """
+     _require(type(development) is dict and development.get("schema") == OBJECTIVE_PORTABILITY_SCHEMA
+              and _pin(expected_development_sha256) and callable(verify_original_development_owner)
+@@ -8087,9 +8153,17 @@
+              "all declared comparisons must preserve the same original ordered seed roster")
+     comparisons = tuple(row for _, _, row in rows)
+     _restricted_confirmation_validate_shared_subjects(comparisons, development["comparisons"])
++    meter_readback = {}
++    if paid_comparison is not None:
++        paid_pairs, meter_pin = _portability_paid_confirmation_pairs(development, paid_comparison)
++        meter_readback = {"paid_confirmation_bounds_sha256": meter_pin,
++            "meter_bounded_comparisons": tuple(_portability_meter_interactions(row, original, paid_pairs)
++                for row, original in zip(comparisons, development["comparisons"], strict=True))}
+     _require(verify_original_development_owner(expected_development_sha256, development["plan_sha256"],
+                     development["paid_development_comparison_sha256"]) is True
+-             and commitment(development) == expected_development_sha256,
++             and commitment(development) == expected_development_sha256
++             and (paid_comparison is None or
++                  commitment(paid_comparison) == development["paid_development_comparison_sha256"]),
+              "original paid development owner refused or restricted-time inputs changed")
+     return {"schema": OBJECTIVE_RESTRICTED_CONFIRMATION_SCHEMA,
+             "original_development_sha256": expected_development_sha256,
+@@ -8098,7 +8172,7 @@
+             "selected_seeds": seeds, "comparisons": comparisons,
+             "estimand": "(comparison_relational - comparison_tap) - (reference_relational - reference_tap)",
+             "scope": "finite_selected_seed_scheduled_confirmation_clipped_at_each_original_clock_horizon",
+-            "changes_paid_or_final_evidence": False}
++            "changes_paid_or_final_evidence": False, **meter_readback}
+ 
+ 
+ FINAL_OBJECTIVE_PORTABILITY_ROSTER_SCHEMA = "reviewed-final-objective-portability-roster/v1"

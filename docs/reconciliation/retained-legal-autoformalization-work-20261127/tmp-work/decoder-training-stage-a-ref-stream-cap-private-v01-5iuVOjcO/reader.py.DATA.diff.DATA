@@ -1,0 +1,146 @@
+--- retained/reader.py.DATA
++++ candidate/reader.py.DATA
+@@ -130,6 +130,7 @@
+ 
+ STAGE_A_RELOCATED_PARTITION = 'stage-a-source32-relocated-all-fresh/v1'
+ STAGE_A_RELOCATED_SELECTION = 'existing-stage-a-retained-controls-outer-only/v3'
++STAGE_A_REF_CAP_SELECTION = 'existing-stage-a-retained-controls-outer-only/v4'
+ 
+ 
+ def checked_read(path,limit,kind,*,stage_a_fresh=None):
+@@ -273,7 +274,10 @@
+     fields = {'schema', 'plan_sha256', 'git_record', 'output_root', 'maximum_core_bytes',
+               'maximum_matrix_write_bytes', 'epoch_output_maximums', 'git_output_maximum','maximum_run_seconds'}
+     schema = chosen.get('schema')
+-    relocated = schema == STAGE_A_RELOCATED_SELECTION
++    ref_cap_selected = schema == STAGE_A_REF_CAP_SELECTION
++    relocated = ref_cap_selected or schema == STAGE_A_RELOCATED_SELECTION
++    if ref_cap_selected:
++        fields.add('git_ref_output_maximum')
+     explicit_selectors = relocated or schema == 'existing-stage-a-retained-controls-outer-only/v2'
+     if relocated:
+         fields.add('relocation_preview')
+@@ -281,7 +285,7 @@
+         fields |= {'git_project_expectations','paired_selector_observation_sha256'}
+     if (set(chosen) != fields or schema not in ('existing-stage-a-retained-controls-outer-only/v1',
+                                                'existing-stage-a-retained-controls-outer-only/v2',
+-                                               STAGE_A_RELOCATED_SELECTION)
++                                               STAGE_A_RELOCATED_SELECTION, STAGE_A_REF_CAP_SELECTION)
+             or H(encoded(chosen)) != expected_selection_sha256
+             or H(encoded(plan)) != chosen['plan_sha256'] or chosen['output_root'] != str(OUT)
+             or any(type(chosen[key]) is not int or chosen[key] <= 0 for key in
+@@ -290,6 +294,11 @@
+             or not callable(verify_relocation_owner if relocated else verify_phase7_owner)
+             or not callable(read_stage_zero) or report.get('Source_contexts') or 'stage_a' in report):
+         raise ValueError('exact existing paired Reader selection and unentered custody required')
++    ref_options = {}
++    if ref_cap_selected:
++        maximum = chosen['git_ref_output_maximum']
++        git_api['_stage_a_git_ref_capture_allowance'](maximum)
++        ref_options['git_ref_output_maximum'] = maximum
+     candidate = json.loads(encoded(plan))
+     if relocated:
+         if (candidate.get('schema') != 'private-stage-a-source32-relocated-all-fresh-preview/v1'
+@@ -314,7 +323,7 @@
+             or OUT.resolve(strict=True) != OUT or any(OUT.is_relative_to(Path(root)) for root in roots)
+             or any((OUT / part).resolve(strict=True) != OUT / part for part in ('raw','matrices'))):
+         raise ValueError('selected paired Source READ roots or original output directories differ')
+-    selector_provenance, git_options = {}, {}
++    selector_provenance, git_options = dict(ref_options), dict(ref_options)
+     if explicit_selectors:
+         observation = chosen['paired_selector_observation_sha256']
+         bind_expectations = git_api.get('stage_a_paired_git_expectations')
+@@ -330,8 +339,8 @@
+             expected = selected_gits[selected_root['root']]
+             if (expected['HEAD'],expected['tree']) != (selected_root['HEAD'],selected_root['tree']):
+                 raise ValueError('selected paired Git HEAD or tree differs from the exact Reader plan')
+-        selector_provenance = {'paired_selector_observation_sha256':observation,
+-                               'git_project_expectations_sha256':H(encoded(selected_gits))}
++        selector_provenance.update(paired_selector_observation_sha256=observation,
++                                   git_project_expectations_sha256=H(encoded(selected_gits)))
+         git_options['project_expectations'] = selected_gits
+     if (type(deadline) not in (int,float) or not 0 < deadline-time.monotonic() <= chosen['maximum_run_seconds']
+             or verify_reader_selection(expected_selection_sha256,roots,chosen['plan_sha256'],deadline) is not True
+@@ -388,7 +397,7 @@
+     reserve = git_api['source32_paired_reader_reservation'](
+         chosen['git_record'],guides,fresh,archive_refs,control_refs,
+         epoch_output_maximums=chosen['epoch_output_maximums'],git_output_maximum=chosen['git_output_maximum'],
+-        persist_python_epoch=False,retain_terminal_git_controls=True,**reservation_options)
++        persist_python_epoch=False,retain_terminal_git_controls=True,**reservation_options,**ref_options)
+     if reserve['logical_selected_bytes'] > chosen['maximum_core_bytes']:
+         raise ValueError('current Stage A reader envelope is too small')
+     attempt['reservation'] = dict(reserve)
+@@ -653,7 +662,7 @@
+             or chosen['schema'] != 'selected-existing-StageA-Reader-owner-startup/v1'
+             or H(raw_startup) != expected_startup_sha256 or chosen['reader_selection_sha256'] != H(raw_reader)
+             or chosen['preview_sha256'] != H(raw_plan) or picked.get('plan_sha256') != H(raw_plan)
+-            or picked.get('schema') != STAGE_A_RELOCATED_SELECTION):
++            or picked.get('schema') not in (STAGE_A_RELOCATED_SELECTION, STAGE_A_REF_CAP_SELECTION)):
+         raise ValueError('exact original Stage A startup, Reader selection and preview required')
+     integer_fields = ('Source_envelope','terminal_receipt_max_bytes','not_before_utc_ns','deadline_utc_ns')
+     if (any(type(chosen[key]) is not int or chosen[key] <= 0 for key in integer_fields)
+@@ -678,6 +687,8 @@
+             or not in_window() or encoded(startup) != raw_startup or encoded(reader_selection) != raw_reader
+             or encoded(preview) != raw_plan):
+         raise ValueError('original owner refused exact startup or selection changed')
++    if picked['schema'] == STAGE_A_REF_CAP_SELECTION:
++        git_api['_stage_a_git_ref_capture_allowance'](picked.get('git_ref_output_maximum'))
+     code,module_path = _stage_a_owner_code(chosen,roots)
+     business_bytes = picked['maximum_core_bytes']+picked['maximum_matrix_write_bytes']
+     _stage_a_owner_prepare(chosen,roots,expected_startup_sha256,business_bytes,code['bytes'],('raw','matrices'))
+@@ -717,8 +728,13 @@
+               'source_code','source_original_module_path'}
+     integer_fields = ('Source_envelope','terminal_receipt_max_bytes','not_before_utc_ns',
+                       'deadline_utc_ns','maximum_run_seconds')
++    ref_cap_selected = (type(chosen) is dict
++                        and chosen.get('schema') == 'selected-existing-StageA-selector-owner-startup/v2')
++    if ref_cap_selected:
++        fields.add('git_ref_output_maximum')
+     if (not __debug__ or type(chosen) is not dict or set(chosen) != fields
+-            or chosen['schema'] != 'selected-existing-StageA-selector-owner-startup/v1'
++            or (not ref_cap_selected
++                and chosen['schema'] != 'selected-existing-StageA-selector-owner-startup/v1')
+             or H(raw_startup) != expected_startup_sha256 or chosen['expected_roots_sha256'] != H(raw_roots)
+             or any(type(chosen[key]) is not int or chosen[key] <= 0 for key in integer_fields)
+             or type(deadline) not in (int,float) or not 0 < deadline-time.monotonic() <= chosen['maximum_run_seconds']
+@@ -730,8 +746,10 @@
+             or not all(callable(fn) for fn in (verify_startup,load_source,cleanup_source))):
+         raise ValueError('exact unentered paired selector owner, selected budget and launch window required')
+     expected,roots = git_api['_stage_a_selector_source_roots'](selected_roots)
+-    bound = git_api['stage_a_git_selector_output_allowance'](git_output_maximum=chosen['git_output_maximum'])
+-    ref_maximum = git_api['_STAGE_A_GIT_STREAM_LIMIT']
++    ref_options = ({'git_ref_output_maximum': chosen['git_ref_output_maximum']} if ref_cap_selected else {})
++    bound = git_api['stage_a_git_selector_output_allowance'](
++        git_output_maximum=chosen['git_output_maximum'], **ref_options)
++    ref_maximum = ref_options.get('git_ref_output_maximum', git_api['_STAGE_A_GIT_STREAM_LIMIT'])
+     stream_archive_bound = 2*(2*ref_maximum+1)
+     if ((request['root'],request['additional_A']['root']) != roots
+             or request['actual_modes'] != dict.fromkeys(roots,'read')
+@@ -741,7 +759,8 @@
+     code,module_path = _stage_a_owner_code(chosen,roots)
+     _stage_a_owner_prepare(chosen,roots,expected_startup_sha256,bound+stream_archive_bound,code['bytes'])
+     report.update(schema='actual-existing-StageA-selector-owner-accounting/v1',
+-                  selected_selector_git_stream_bound=bound,selected_selector_stream_archive_bound=stream_archive_bound)
++                  selected_selector_git_stream_bound=bound,selected_selector_stream_archive_bound=stream_archive_bound,
++                  **ref_options)
+     started,charged = git_api['stage_a_git_owner_callbacks'](admit,spent,report)
+     pid = os.getpid()
+ 
+@@ -756,7 +775,7 @@
+             return git_api['observe_stage_a_paired_git_selectors'](
+                 expected,expected_owner_scope_sha256=expected_startup_sha256,deadline=deadline,
+                 verify_continuous_owner_scope=scope,admit_git_output=started,record_git_output=charged,
+-                git_output_maximum=chosen['git_output_maximum'])
++                git_output_maximum=chosen['git_output_maximum'], **ref_options)
+ 
+     result,closed = _stage_a_owner_source42(
+         roots,code,module_path,load_source,cleanup_source,in_window,observe)
+@@ -777,7 +796,7 @@
+                 project = observation['git_project_expectations'][root]
+                 seen.append(git_api['_stage_a_selector_stream_reference'](
+                     root,project['branch_ref'],project['HEAD'],streams[root]))
+-            if seen != observation['stream_observations']:
++            if seen != observation['stream_observations'] or any(row['bytes'] > ref_maximum for row in seen):
+                 raise ValueError('selected paired selector raw stream witnesses differ')
+             admit(sum(2*len(streams[root])+1 for root in roots))
+             for role,root in roles:

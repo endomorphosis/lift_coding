@@ -1,0 +1,62 @@
+{
+  "A": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "A_index_metadata_verified_against_current_epoch": true,
+  "A_raw_Source_index_capture_claimed": false,
+  "D": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795743194586798892",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72514738",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795743194585798881",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "sha256": "cb184f68de5967221dc90be405937e4997dea80b644f02482bf38d433f6cc076"
+  },
+  "actual_paired_D_A_READ3": {
+    "bytes": 7560,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-isolated-Phase8-metric-lineage-READ3-closed.json",
+    "sha256": "78c8f4b2bff2097ed74567a59d8bd26805bc21273ee7f9682ca4f2a9578c90d6"
+  },
+  "branch": {
+    "bytes": 41,
+    "full9": {
+      "st_ctime_ns": "1795743194588884595",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72514759",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795743194588884595",
+      "st_nlink": "1",
+      "st_size": "41",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/refs/heads/isolated/phase8-metric-lineage-cache-recovery",
+    "sha256": "81856f49c927d2784db15615f74d85f621bb6c172766d5606aa9ef591f84bd1a"
+  },
+  "frozen": {
+    "bytes": 7762,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-isolated-Phase8-metric-lineage-exact-two-local-freeze.json",
+    "sha256": "8611c18407c338ca365cae4c14737e9fb029332618ad81f8f70cab7508e9f309"
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "added_Source_only_envelope": 134217728,
+  "after_full_retained_precharge": {
+    "captures": 541269,
+    "capturesComplete": false,
+    "global_cap": 56337385482,
+    "internal_cap": 56146793608,
+    "internal_used": 56140436616,
+    "used": 56331028490
+  },
+  "exact_human_affirmation": {
+    "bytes": 2960,
+    "path": "/tmp/Main-source-cap-human-provenance-v01-g9hs_s_q/Root-original-human-Source-cap-approval.record.jsonl",
+    "sha256": "8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda"
+  },
+  "first_failed_ordinary_full_retained_charge": {
+    "bytes": 1215,
+    "path": "/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/Source-only-authorized-P7-checked-feedback-ordinary26-cap-prior-retained.json",
+    "sha256": "f7322716aa4783ac2228167afa5b9df833ad65aa6f3a59f8d40967b538ab22e1"
+  },
+  "first_failed_ordinary_report": {
+    "bytes": 118215,
+    "path": "/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/actual-output/complete-frozen-local-D-phase7-checked-feedback26-existing-owner-report.json",
+    "sha256": "c781091f9ff18b5b736d6418fdc957f0d6b0fd8bff4272989c8636e0f6a8568e"
+  },
+  "no_policy_capacity_or_model_change": true,
+  "prior": {
+    "captures": 541268,
+    "capturesComplete": false,
+    "global_cap": 56203167754,
+    "internal_cap": 56012575880,
+    "internal_used": 56006218888,
+    "used": 56196810762
+  },
+  "protected_Guide573_publication": {
+    "bytes": 3117,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-Guide573-four-docs-three-FF-publication.json",
+    "sha256": "1a83a7c66b2e726b4f6605039fbd5bad4296f6cb3f008e965436c68a9e89e8c7"
+  },
+  "read10_full_retained_charge": {
+    "bytes": 1282,
+    "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/Source-only-isolated-Phase7-READ10-full-retained.json",
+    "sha256": "5984159afb047ac2ff4b24ce6e2a974b11adb448b2e43b749fe784c3008a11c7"
+  },
+  "selected": {
+    "captures": 541268,
+    "capturesComplete": false,
+    "global_cap": 56337385482,
+    "internal_cap": 56146793608,
+    "internal_used": 56006218888,
+    "used": 56196810762
+  }
+}

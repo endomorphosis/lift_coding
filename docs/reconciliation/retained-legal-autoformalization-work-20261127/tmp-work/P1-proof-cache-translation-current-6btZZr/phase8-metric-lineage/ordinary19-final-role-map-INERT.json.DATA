@@ -1,0 +1,134 @@
+{
+  "actual_exact_two_candidate": {
+    "bytes": 3262,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/SEALED-Phase8-metric-lineage-cache-recovery-exact-two.json",
+    "sha256": "dd42c46f650f828c8195819beac1ca03fd4120e4173069762c95da07813b5b09"
+  },
+  "actual_freeze_correspondence_only": {
+    "bytes": 7762,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-isolated-Phase8-metric-lineage-exact-two-local-freeze.json",
+    "sha256": "8611c18407c338ca365cae4c14737e9fb029332618ad81f8f70cab7508e9f309"
+  },
+  "candidate_roles": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_metric_lineage.py": {
+      "postimage": {
+        "bytes": 20259,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/legal_ir_metric_lineage.after.py.DATA",
+        "sha256": "fd476d9372ae92cd37b9e8f7f8e7415a5f383227fc6d533ab611ee7c4ed6274d"
+      },
+      "postimage_git_blob": "29f2ff8ba693812e4fea7a798f0da21ead56c1cf",
+      "preimage": {
+        "bytes": 20234,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/legal_ir_metric_lineage.published574.py.DATA",
+        "sha256": "df157497e17936216cd4e1faf8b813fefd389733049edd60a7b5f87da911d0fb"
+      },
+      "preimage_git_blob": "d23063de3430b77a843fc159a79ec279cd3e5403"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py": {
+      "postimage": {
+        "bytes": 13043,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/test_legal_ir_metric_responsiveness.after.py.DATA",
+        "sha256": "8a1aa33563b0b60d69d34cec9d8e48c1e1f0f1b3d33ead3609e5ee075e8e84e4"
+      },
+      "postimage_git_blob": "de3144b88fdc62f398fdb041e55449be22c6bcb8",
+      "preimage": {
+        "bytes": 8117,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/tests__unit__optimizers__logic_theorem_optimizer__test_legal_ir_metric_responsiveness.py.DATA",
+        "sha256": "24a9d4a7396f628d089bf8367551665fb7937153feef7f9971ae7466deffb3dd"
+      },
+      "preimage_git_blob": "e181d4fbaa5dd55e92e3636e39fc5aa98541a8d1"
+    }
+  },
+  "expected_absent_relative_paths": [
+    "ipfs_datasets_py/conftest.py",
+    "ipfs_datasets_py/optimizers/conftest.py",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/conftest.py",
+    "tests/unit/logic/__init__.py",
+    "tests/unit/logic/conftest.py",
+    "tests/unit/logic/integration/__init__.py",
+    "tests/unit/logic/integration/conftest.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/__init__.py"
+  ],
+  "expected_current_A_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+  "expected_normal_conftests": [
+    "conftest.py",
+    "tests/conftest.py",
+    "tests/unit/conftest.py",
+    "tests/unit/optimizers/conftest.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/conftest.py"
+  ],
+  "fixture_relative_paths": [
+    "pytest.ini",
+    "conftest.py",
+    "tests/conftest.py",
+    "tests/unit/conftest.py",
+    "tests/unit/optimizers/conftest.py",
+    "tests/unit/optimizers/logic_theorem_optimizer/conftest.py"
+  ],
+  "guarded_module_roles": {
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.legal_ir_metric_lineage": {
+      "prospective_postimage": {
+        "bytes": 20259,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/legal_ir_metric_lineage.after.py.DATA",
+        "sha256": "fd476d9372ae92cd37b9e8f7f8e7415a5f383227fc6d533ab611ee7c4ed6274d"
+      },
+      "published_preimage": {
+        "bytes": 20234,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/legal_ir_metric_lineage.published574.py.DATA",
+        "sha256": "df157497e17936216cd4e1faf8b813fefd389733049edd60a7b5f87da911d0fb"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_metric_lineage.py"
+    },
+    "ipfs_datasets_py.optimizers.logic_theorem_optimizer.uscode_modal_daemon_runner": {
+      "published_preimage": {
+        "bytes": 998965,
+        "full9": {
+          "st_ctime_ns": "1795741365196799536",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "72513795",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795741365196799536",
+          "st_nlink": "1",
+          "st_size": "998965",
+          "st_uid": "1000"
+        },
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/uscode_modal_daemon_runner.py",
+        "sha256": "9e1043f39507cd3be06cf1131f9be5f4787b2a71da5f7ccbe5ae76762482fbd1"
+      },
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/uscode_modal_daemon_runner.py"
+    },
+    "tests.unit.optimizers.logic_theorem_optimizer.test_legal_ir_metric_responsiveness": {
+      "prospective_postimage": {
+        "bytes": 13043,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/test_legal_ir_metric_responsiveness.after.py.DATA",
+        "sha256": "8a1aa33563b0b60d69d34cec9d8e48c1e1f0f1b3d33ead3609e5ee075e8e84e4"
+      },
+      "published_preimage": {
+        "bytes": 8117,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/tests__unit__optimizers__logic_theorem_optimizer__test_legal_ir_metric_responsiveness.py.DATA",
+        "sha256": "24a9d4a7396f628d089bf8367551665fb7937153feef7f9971ae7466deffb3dd"
+      },
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py"
+    }
+  },
+  "prior_outer": {
+    "bytes": 850358,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-live-reconciled-outer1614-epoch.json",
+    "sha256": "ce5954ea16ad993e247d3cff6fd3b93d0d7e130905f144f8e6351a5a1bc146d6"
+  },
+  "prior_python": {
+    "bytes": 843788,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-live-reconciled-Python1601-epoch.json",
+    "sha256": "4218f2134bd9e1c8ec039be13be567c6f6c7ad476002cba369442b3e84c26c8a"
+  },
+  "replaced_outer_paths": [
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_metric_lineage.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py"
+  ]
+}

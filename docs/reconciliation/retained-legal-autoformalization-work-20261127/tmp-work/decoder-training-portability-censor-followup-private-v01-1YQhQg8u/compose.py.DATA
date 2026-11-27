@@ -1,0 +1,89 @@
+"""Add original censor follow-up evidence to the existing Stage G reducer."""
+import ast
+from difflib import unified_diff
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+PRIOR = HERE.parent/'decoder-training-paid-censor-followup-private-v01-9bUvEI8h/study.py'
+raw = PRIOR.read_bytes()
+assert (len(raw), sha256(raw).hexdigest()) == (921348,
+    'c462caa0fffb73f74549013d0272d224dada01e9e33620329b5b3f5ffb920915')
+before = after = raw.decode()
+
+
+def replace(old, new):
+    global after
+    assert after.count(old) == 1, old
+    after = after.replace(old, new, 1)
+
+
+replace('''    paired = {}
+    for original, bounded in zip(paid_comparison["pairs"], recomputed["pairs"], strict=True):''',
+        '''    return _portability_confirmation_pair_index(paid_comparison["pairs"], recomputed["pairs"]), commitment(declared)
+
+
+def _portability_confirmation_pair_index(originals, bounds):
+    paired = {}
+    for original, bounded in zip(originals, bounds, strict=True):''')
+replace('    return paired, commitment(declared)', '    return paired')
+replace('''                                                            verify_original_development_owner, paid_comparison=None):
+    """Read per-clock''',
+        '''                                                            verify_original_development_owner, paid_comparison=None,
+                                                            censor_followups=(), expected_censor_followups_sha256=None,
+                                                            verify_original_followup_owner=None):
+    """Read per-clock''')
+replace('''    meter bounds without altering the original restricted result.
+    """
+    _require(type(development) is dict''',
+        '''    meter bounds without altering the original restricted result.
+    Optional censor evidence separately tightens the selected original quartets.
+    """
+    _require(type(censor_followups) is tuple and (
+                 not censor_followups and expected_censor_followups_sha256 is None
+                 and verify_original_followup_owner is None
+                 or bool(censor_followups) and paid_comparison is not None
+                 and all(type(row) is CensorFollowup for row in censor_followups)
+                 and _pin(expected_censor_followups_sha256)
+                 and callable(verify_original_followup_owner)),
+             "Stage G follow-up requires the original paid comparison, exact selected roster and original owner")
+    _require(type(development) is dict''')
+replace('''    _require(verify_original_development_owner(expected_development_sha256, development["plan_sha256"],
+                    development["paid_development_comparison_sha256"]) is True''',
+        '''    if censor_followups:
+        covered = {(pair[f"{arm}_attempt_sha256"], pair["clock"])
+                   for original in development["comparisons"] for row in original["pairs"]
+                   for pair in (row["reference_pair"], row["comparison_pair"])
+                   for arm in ("baseline", "candidate")}
+        _require(all(_pin(row.attempt_sha256) and type(row.clock) is str
+                     and (row.attempt_sha256, row.clock) in covered for row in censor_followups),
+                 "each follow-up must belong to an exact attempt and clock in the selected Stage G quartets")
+        followup = verify_censored_confirmation_cost_bounds(paid_comparison,
+            expected_paid_report_sha256=development["paid_development_comparison_sha256"],
+            followups=censor_followups, expected_followups_sha256=expected_censor_followups_sha256,
+            verify_original_followup_owner=verify_original_followup_owner)
+        _require(commitment(development) == expected_development_sha256,
+                 "selected Stage G report changed during original follow-up verification")
+        pairs_with_followup = _portability_confirmation_pair_index(paid_comparison["pairs"], followup["pairs"])
+        meter_readback.update(
+            censor_followup_selection_sha256=expected_censor_followups_sha256,
+            paid_censor_followup_bounds_sha256=commitment(followup),
+            followup_meter_bounded_comparisons=tuple(_portability_meter_interactions(row, original, pairs_with_followup)
+                for row, original in zip(comparisons, development["comparisons"], strict=True)))
+    _require(verify_original_development_owner(expected_development_sha256, development["plan_sha256"],
+                    development["paid_development_comparison_sha256"]) is True''')
+replace('''                  commitment(paid_comparison) == development["paid_development_comparison_sha256"]),
+             "original paid development owner refused or restricted-time inputs changed")''',
+        '''                  commitment(paid_comparison) == development["paid_development_comparison_sha256"])
+             and (not censor_followups or commitment(censor_followups) == expected_censor_followups_sha256),
+             "original paid development owner refused or restricted-time inputs changed")''')
+original, successor = map(ast.parse,(before,after))
+changed = {'_portability_paid_confirmation_pairs','_portability_confirmation_pair_index',
+           'summarize_objective_portability_restricted_confirmation'}
+assert [ast.dump(node) for node in original.body if getattr(node,'name',None) not in changed] == [
+    ast.dump(node) for node in successor.body if getattr(node,'name',None) not in changed]
+compile(after, str(HERE/'study.py'), 'exec')
+(HERE/'study.py').write_text(after)
+(HERE/'study.diff').write_text(''.join(unified_diff(before.splitlines(keepends=True), after.splitlines(keepends=True),
+    fromfile=str(PRIOR),tofile=str(HERE/'study.py'))))
+print(len(after.encode()),sha256(after.encode()).hexdigest())

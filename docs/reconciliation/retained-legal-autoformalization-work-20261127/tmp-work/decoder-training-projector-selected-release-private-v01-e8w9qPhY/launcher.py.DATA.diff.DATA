@@ -1,0 +1,33 @@
+--- prior/launcher.py.DATA
++++ candidate/launcher.py.DATA
+@@ -1479,6 +1479,7 @@
+     observe_source: object
+     verify_projector: object
+     expected_request_sha256: str | None = None
++    verify_projector_launch: object = None
+ 
+ 
+ def _reviewed_projector_source_bytes(profile, guard, worker):
+@@ -1569,6 +1570,12 @@
+     if expected is not None and (type(expected) is not str or expected != selected.sha256):
+         raise ValueError("configured Qwen2 projector request differs from the independently selected request")
+     config["reviewed_evaluation_request"] = {"path": selected.path, "sha256": selected.sha256, "bytes": selected.bytes}
++    launch_selection = None
++    if profile.verify_projector_launch is not None:
++        if (expected is None or not callable(profile.verify_projector_launch)
++                or profile.verify_projector_launch(expected, profile.source_epoch_sha256) is not True):
++            raise ValueError("original Qwen2 owner refused the selected request and Source epoch")
++        launch_selection = {"request_sha256": expected, "source_epoch_sha256": profile.source_epoch_sha256}
+     roots = tuple(sorted(str(canonical_source_root(root)) for root in profile.source_roots))
+     if len(set(roots)) != len(roots) or set(roots) != set(profile.source_roots):
+         raise ValueError("exact original canonical Qwen2 Source roots required")
+@@ -1678,6 +1685,9 @@
+               "source_after_run": worker._parse_json(after_run), "source_after": worker._parse_json(closing),
+               "actual_parent_lease": lease, "actual_reservation_finalized": released,
+               "resource_after_parent_release": absent, "retained_artifacts": retained}
++    if launch_selection is not None:
++        report["schema"] = "reviewed-qwen2-projector-direct-owner-release/v3"
++        report["launch_selection"] = launch_selection
+     raw = worker._json_bytes(report)
+     if len(raw) > profile.maximum_receipt_bytes:
+         raise ValueError("original Qwen2 release receipt exceeds its precharged byte bound")

@@ -1,0 +1,68 @@
+{
+  "cases": [
+    {
+      "failure": "closed legal-corpus-source-review-request/v1 fields required",
+      "reached_answer_validation": false,
+      "request_cid": "baguqeera3itqv7mggmeil5zzyd7sl45bcfdp3zq2pz2lv4z5crkz3jigi7wa",
+      "request_passed_official_shape_check": true
+    },
+    {
+      "failure": "closed legal-corpus-source-review-request/v1 fields required",
+      "reached_answer_validation": false,
+      "request_cid": "baguqeerawv3ejtoxc7img2m2nufbv23b4ojpwkqtlmdnm2ovtrat5pm74fla",
+      "request_passed_official_shape_check": true
+    },
+    {
+      "failure": "closed legal-corpus-source-review-request/v1 fields required",
+      "reached_answer_validation": false,
+      "request_cid": "baguqeeray5mpftk5d4qemysuyby2qzvmetlgljpickeyq7zulgv4ea2ddooa",
+      "request_passed_official_shape_check": true
+    },
+    {
+      "failure": "closed legal-corpus-source-review-request/v1 fields required",
+      "reached_answer_validation": false,
+      "request_cid": "baguqeeraunwr4mwexk3hpkehl5oows7ygslumczbq2npwurallgz5e7tsptq",
+      "request_passed_official_shape_check": true
+    }
+  ],
+  "compiled_module_origins": {
+    "ipfs_datasets_py/logic/autoformal/corpus_source_review.py": {
+      "git_blob": "04dd9c44facba2a2ac0346c76a3b4e10ff71467d",
+      "sha256": "eca8f8aaad0ca02a7ac12f64ab2db24f4c0c857fde6600d6cf322602ec6bdcd8",
+      "size": 66620
+    },
+    "ipfs_datasets_py/logic/autoformal/corpus_source_review_responses.py": {
+      "git_blob": "f48770f68e72fc55f2bdf9bd0226dcc4e5af361c",
+      "sha256": "519f91a39f0f6f3fb0b7226042fe75642833588f31af8eeea9c5a488d603c7e9",
+      "size": 31940
+    }
+  },
+  "exact_saved_inputs": [
+    {
+      "bytes": 157823,
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/pilot-official-pending-PAV-output-v06/run.output.0.bin",
+      "sha256": "f207e00e0a7fc3a31689fb4349dd42b3491b8f117c80ef60de56759ebe10a9ad"
+    },
+    {
+      "bytes": 31452,
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/pilot-official-pending-PAV-output-v06/run.output.1.bin",
+      "sha256": "175b991c1b6631b523acd8b70bec26d3599d1417bb069ba82330d863a0ec1471"
+    },
+    {
+      "bytes": 31452,
+      "path": "/tmp/codex-origin-main-reconciliation-20261118-gytue816/ordinary-main-epoch-v01/Phase4-current-source-owner-review-v01/continuation-20261120-policy-and-current-metadata-v01/pilot-official-pending-PAV-output-v06/run.output.2.bin",
+      "sha256": "175b991c1b6631b523acd8b70bec26d3599d1417bb069ba82330d863a0ec1471"
+    }
+  ],
+  "no_response_was_supplied_or_written": true,
+  "published_tip": "81ee859cd2bbd4872b0a2e3bc75e2994c14140fe",
+  "real_review_or_admission": false,
+  "retained_group_counts": {
+    "authenticated_evidence": 0,
+    "deferred_questions": 28,
+    "groups": 4,
+    "pending_groups": 4,
+    "source_evidence_prerequisites_under_selected_trust": 0
+  },
+  "schema": "official-pilot-typed-intake-legacy-gate-reproduction/v1"
+}

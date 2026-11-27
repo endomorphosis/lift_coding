@@ -1,0 +1,1470 @@
+"""Content-addressed Legal IR proof cache (LegalProofCache@1).
+
+Persists Legal formalization artifacts and optional theorem proof receipts so a
+gate or corpus loader can retrieve a fragment by CID without re-running
+formalization or provers when integrity holds.
+
+Integrity is fail-closed:
+
+* every on-disk envelope is rehashed on load and rejected on digest mismatch;
+* formalization artifact identity is recomputed from the stored payload and
+  must match the recorded artifact digest and CID;
+* source digest is bound to the artifact declaration digest;
+* theorem receipts, when present, must carry ``theorem_proof`` authority and
+  ``proved`` status, and must bind the same declaration id. V1 associated headers are retained as
+  archival data only. Reusable v2 proofs require a complete replayed evidence
+  chain, a canonical checked current Lean receipt, and caller-selected exact context.
+
+Secondary indexes support lookup by **profile** and **source digest**
+(optionally disambiguated by profile when multiple profiles share a source).
+
+Offline rebuild: load golden fixtures under
+``tests/fixtures/legal_ir/proof_cache`` via
+:meth:`LegalProofRecord.from_dict` + :meth:`LegalProofCache.put`, or call
+:func:`rebuild_offline_from_fixture_dir`.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import re
+import tempfile
+import threading
+from collections.abc import Iterable, Mapping, Sequence
+from dataclasses import dataclass, field
+from pathlib import Path
+from types import MappingProxyType
+from typing import Any, Final
+
+from ..formalization.compiler import FormalizationArtifact
+from ..ir_core.identity import cid_v1_from_digest
+from ..ir_core.claims import FrozenMap, IRClaim, stable_digest
+from ..ir_core.protocols import (
+    AuthorityKind,
+    BackendAttempt,
+    BackendRequest,
+    ProofReceipt,
+    ProofResult,
+    ResultStatus,
+)
+
+
+LEGAL_PROOF_CACHE_INTERFACE: Final = "LegalProofCache@1"
+LEGAL_PROOF_CACHE_SCHEMA_VERSION: Final = "legal-proof-cache/v1"
+LEGAL_PROOF_RECORD_SCHEMA_VERSION: Final = "legal-proof-record/v1"
+LEGAL_BOUND_PROOF_RECORD_SCHEMA_VERSION: Final = "legal-proof-record/v2"
+LEGAL_PROOF_BINDING_SCHEMA_VERSION: Final = "legal-proof-binding/v1"
+LEGAL_PROOF_CONTEXT_SCHEMA_VERSION: Final = "legal-proof-reuse-context/v1"
+LEGAL_PROOF_INDEX_SCHEMA_VERSION: Final = "legal-proof-index/v1"
+
+_PROFILE_RE: Final = re.compile(r"^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$")
+_DIGEST_RE: Final = re.compile(r"^sha256:[0-9a-f]{64}$")
+_JURISDICTION_RE: Final = re.compile(r"^[a-z][a-z0-9]*(?:-[a-z0-9]+)*$")
+
+_RECORD_FIELDS: Final[frozenset[str]] = frozenset(
+    {
+        "artifact",
+        "artifact_cid",
+        "artifact_digest",
+        "content_cid",
+        "content_digest",
+        "jurisdiction",
+        "profile",
+        "schema_version",
+        "source_digest",
+        "source_id",
+        "theorem_receipts",
+        "proof_bindings",
+    }
+)
+
+
+class LegalProofCacheError(ValueError):
+    """Raised when a legal proof cache operation cannot proceed safely."""
+
+
+class LegalProofIntegrityError(LegalProofCacheError):
+    """Raised when a stored envelope fails integrity verification."""
+
+
+def _canonical_bytes(value: Any) -> bytes:
+    return json.dumps(
+        value,
+        ensure_ascii=False,
+        allow_nan=False,
+        separators=(",", ":"),
+        sort_keys=True,
+    ).encode("utf-8")
+
+
+def _sha256_digest(data: bytes) -> str:
+    return "sha256:" + hashlib.sha256(data).hexdigest()
+
+
+def _require_text(value: Any, field_name: str) -> str:
+    if not isinstance(value, str) or not value.strip() or value != value.strip():
+        raise LegalProofCacheError(
+            f"{field_name} must be a non-empty trimmed string"
+        )
+    return value
+
+
+def _require_profile(value: Any) -> str:
+    profile = _require_text(value, "profile")
+    if not _PROFILE_RE.fullmatch(profile):
+        raise LegalProofCacheError(
+            "profile must be a lowercase hyphenated identifier"
+        )
+    return profile
+
+
+def _require_jurisdiction(value: Any) -> str:
+    if value is None or value == "":
+        return ""
+    jurisdiction = _require_text(value, "jurisdiction")
+    if not _JURISDICTION_RE.fullmatch(jurisdiction):
+        raise LegalProofCacheError(
+            "jurisdiction must be a lowercase hyphenated identifier"
+        )
+    return jurisdiction
+
+
+def _require_digest(value: Any, field_name: str) -> str:
+    digest = _require_text(value, field_name)
+    if not _DIGEST_RE.fullmatch(digest):
+        raise LegalProofCacheError(
+            f"{field_name} must be a sha256:<hex> digest"
+        )
+    return digest
+
+
+def _as_mapping(value: Any, label: str) -> Mapping[str, Any]:
+    if not isinstance(value, Mapping):
+        raise LegalProofCacheError(f"{label} must be a mapping")
+    return value
+
+
+def _json_ready(value: Any) -> Any:
+    if value is None or isinstance(value, (bool, int, float, str)):
+        return value
+    if isinstance(value, Mapping):
+        return {
+            str(key): _json_ready(item)
+            for key, item in sorted(value.items(), key=lambda pair: str(pair[0]))
+        }
+    if isinstance(value, Sequence) and not isinstance(value, (str, bytes, bytearray)):
+        return [_json_ready(item) for item in value]
+    to_dict = getattr(value, "to_dict", None)
+    if callable(to_dict):
+        return _json_ready(to_dict())
+    raise LegalProofCacheError(
+        f"value of type {type(value).__name__} is not JSON-serializable for the cache"
+    )
+
+
+def _atomic_write_json(path: Path, payload: Mapping[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    encoded = _canonical_bytes(payload)
+    fd, tmp_name = tempfile.mkstemp(
+        prefix=f".{path.name}.",
+        suffix=".tmp",
+        dir=str(path.parent),
+    )
+    try:
+        with os.fdopen(fd, "wb") as handle:
+            handle.write(encoded)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp_name, path)
+    except Exception:
+        try:
+            os.unlink(tmp_name)
+        except OSError:
+            pass
+        raise
+
+
+def _normalize_artifact(
+    artifact: FormalizationArtifact | Mapping[str, Any],
+) -> tuple[FormalizationArtifact, dict[str, Any]]:
+    if isinstance(artifact, FormalizationArtifact):
+        produced = artifact
+    else:
+        try:
+            produced = FormalizationArtifact.from_dict(
+                _as_mapping(artifact, "artifact")
+            )
+        except (TypeError, ValueError) as exc:
+            raise LegalProofCacheError(
+                f"invalid formalization artifact: {exc}"
+            ) from exc
+    if produced.domain != "legal":
+        raise LegalProofCacheError(
+            "legal proof cache only accepts legal-domain formalization artifacts"
+        )
+    return produced, produced.to_dict()
+
+
+def _normalize_theorem_receipt(value: Any) -> dict[str, Any]:
+    """Normalize a theorem receipt; only affirmative theorem proofs are stored."""
+
+    if isinstance(value, ProofReceipt):
+        receipt = value
+    elif isinstance(value, Mapping):
+        try:
+            receipt = ProofReceipt.from_dict(value)
+        except (TypeError, ValueError) as exc:
+            raise LegalProofCacheError(
+                f"invalid theorem proof receipt: {exc}"
+            ) from exc
+    else:
+        raise LegalProofCacheError(
+            "theorem receipt must be a ProofReceipt or mapping"
+        )
+    if receipt.proof_authority is not AuthorityKind.THEOREM_PROOF:
+        raise LegalProofCacheError(
+            "theorem receipt proof_authority must be theorem_proof"
+        )
+    if receipt.status is not ResultStatus.PROVED:
+        raise LegalProofCacheError(
+            "theorem receipt status must be proved (no proof authority without receipt)"
+        )
+    return receipt.to_dict()
+
+
+
+_CONTEXT_FIELDS: Final = frozenset({
+    "schema_version", "jurisdiction", "interpretation_digest", "dependency_versions",
+    "backend_id", "backend_version", "toolchain", "expected_declaration",
+    "expected_proposition", "axiom_policy_digest",
+})
+_BINDING_FIELDS: Final = frozenset({
+    "schema_version", "receipt_digest", "artifact_digest", "source_digest",
+    "claim", "request", "attempt", "result", "context",
+})
+
+
+def _proof_context(value: Any) -> dict[str, Any]:
+    """Normalize identities only; this never grants legal interpretation approval."""
+    raw = dict(_as_mapping(value, "proof reuse context"))
+    if set(raw) != _CONTEXT_FIELDS:
+        raise LegalProofIntegrityError("complete closed proof reuse context is required")
+    if raw["schema_version"] != LEGAL_PROOF_CONTEXT_SCHEMA_VERSION:
+        raise LegalProofIntegrityError("unsupported proof reuse context schema")
+    for name in ("backend_id", "backend_version", "expected_declaration", "expected_proposition",
+                 "interpretation_digest", "axiom_policy_digest"):
+        _require_text(raw[name], name)
+    _require_jurisdiction(raw["jurisdiction"])
+    dependencies = _as_mapping(raw["dependency_versions"], "dependency versions")
+    for name, version in dependencies.items():
+        _require_text(name, "dependency name")
+        _require_text(version, "immutable dependency version")
+    if not _as_mapping(raw["toolchain"], "toolchain profile"):
+        raise LegalProofIntegrityError("an explicit toolchain profile is required")
+    normalized = _json_ready(raw)
+    _canonical_bytes(normalized)  # Reject non-finite or non-JSON context data.
+    return normalized
+
+
+def _wire(value: Any, label: str) -> dict[str, Any]:
+    method = getattr(value, "to_dict", None)
+    return _json_ready(_as_mapping(method() if callable(method) else value, label))
+
+
+def _validate_proof_binding(
+    artifact: FormalizationArtifact,
+    receipt: ProofReceipt,
+    value: Any,
+    *,
+    jurisdiction: str,
+) -> dict[str, Any]:
+    """Replay the existing protocol and canonical Lean receipt owner, without a prover call."""
+    binding = _wire(value, "proof binding")
+    if set(binding) != _BINDING_FIELDS or binding["schema_version"] != LEGAL_PROOF_BINDING_SCHEMA_VERSION:
+        raise LegalProofIntegrityError("complete closed proof binding is required")
+    if (binding["receipt_digest"] != receipt.digest
+            or binding["artifact_digest"] != artifact.digest
+            or binding["source_digest"] != artifact.declaration_digest):
+        raise LegalProofIntegrityError("proof binding source/artifact/receipt identity differs")
+    context = _proof_context(binding["context"])
+    if context["jurisdiction"] != jurisdiction:
+        raise LegalProofIntegrityError("proof jurisdiction context differs")
+    try:
+        claim = IRClaim.from_dict(binding["claim"])
+        request = BackendRequest.from_dict(binding["request"])
+        attempt = BackendAttempt.from_dict(binding["attempt"])
+        result = ProofResult.from_dict(binding["result"])
+        reissued = ProofReceipt.issue(claim, request, attempt, result,
+                                     receipt_id=receipt.receipt_id, verifier=receipt.verifier)
+    except (TypeError, ValueError, KeyError) as exc:
+        raise LegalProofIntegrityError("proof claim/request/attempt/result replay failed") from exc
+    if reissued != receipt:
+        raise LegalProofIntegrityError("theorem receipt does not match its complete evidence chain")
+    if claim.declaration_id != artifact.declaration_id or claim.domain != "legal":
+        raise LegalProofIntegrityError("proof claim declaration/domain differs from artifact")
+    if (claim.metadata.get("artifact_digest") != artifact.digest
+            or claim.metadata.get("source_digest") != artifact.declaration_digest
+            or claim.metadata.get("proof_context_digest") != stable_digest(context)):
+        raise LegalProofIntegrityError("claim does not bind the artifact/source/reuse context")
+    if _canonical_bytes(_json_ready(request.payload.get("legal_proof_context"))) != _canonical_bytes(context):
+        raise LegalProofIntegrityError("backend request does not bind the exact reuse context")
+    obligations = {item.obligation_id: item for item in artifact.proof_obligations}
+    if receipt.obligation_id not in obligations:
+        raise LegalProofIntegrityError("proved obligation is not declared by the artifact")
+    for item in claim.obligations:
+        if (item.obligation_id not in obligations
+                or _canonical_bytes(item.to_dict()) != _canonical_bytes(obligations[item.obligation_id].to_dict())):
+            raise LegalProofIntegrityError("claim obligation differs from the artifact obligation")
+    expected_assumptions = sorted((item.to_dict() for item in artifact.assumptions), key=lambda x: x["assumption_id"])
+    actual_assumptions = sorted((item.to_dict() for item in claim.assumptions), key=lambda x: x["assumption_id"])
+    if _canonical_bytes(expected_assumptions) != _canonical_bytes(actual_assumptions):
+        raise LegalProofIntegrityError("formal assumption content differs from the artifact")
+    obligation = obligations[receipt.obligation_id]
+    if (receipt.obligation_digest != obligation.digest
+            or receipt.assumption_ids != obligation.assumption_ids
+            or request.payload.get("expected_declaration") != context["expected_declaration"]
+            or request.payload.get("expected_proposition") != context["expected_proposition"]
+            or obligation.statement != context["expected_proposition"]):
+        raise LegalProofIntegrityError("exact declaration/proposition/assumptions are not bound")
+    if (receipt.backend_id != context["backend_id"]
+            or receipt.backend_version != context["backend_version"]):
+        raise LegalProofIntegrityError("proof backend profile differs")
+    # One canonical validator owns Lean dependencies, typecheck and axiom policy.
+    # A v1 source-only receipt cannot become proof of an opaque IR obligation.
+    try:
+        from ..backends.kernel.lean import (
+            LEAN_KERNEL_RECEIPT_VERSION, LEAN_KERNEL_VERIFICATION_PROFILE, LeanKernelReceipt,
+            content_digest, instrument_lean_source_for_axioms,
+            _payload_source,
+        )
+        if (LEAN_KERNEL_RECEIPT_VERSION != "lean-kernel-receipt/v3"
+                or type(LEAN_KERNEL_VERIFICATION_PROFILE) is not str
+                or LEAN_KERNEL_VERIFICATION_PROFILE != "lean-kernel-verification/v2"):
+            raise ValueError("the canonical Lean v3 current verification profile is required")
+        kernel = LeanKernelReceipt.from_dict(result.to_dict()["payload"]["kernel_receipt"])
+    except (ImportError, TypeError, ValueError, KeyError, AttributeError) as exc:
+        raise LegalProofIntegrityError("a canonical checked Lean v3 receipt is required") from exc
+    if (kernel.schema_version != LEAN_KERNEL_RECEIPT_VERSION or not kernel.accepted
+            or not kernel.expected_proposition_checked
+            or kernel.request_digest != request.digest
+            or kernel.theorem_name != context["expected_declaration"]
+            or kernel.expected_proposition != context["expected_proposition"]
+            or kernel.toolchain.metadata.get("verification_profile") != LEAN_KERNEL_VERIFICATION_PROFILE
+            or kernel.axiom_policy_digest != context["axiom_policy_digest"]
+            or _canonical_bytes(kernel.toolchain.to_dict()) != _canonical_bytes(context["toolchain"])
+            or kernel.toolchain.kernel_id != receipt.backend_id):
+        raise LegalProofIntegrityError("checked kernel receipt does not match the proof context")
+    if (kernel.native_identity is None
+            or receipt.backend_version != kernel.native_identity.actual_version
+            or receipt.backend_version != kernel.toolchain.version):
+        raise LegalProofIntegrityError(
+            "proved backend version differs from checked native/toolchain version"
+        )
+    # Replay the same source-alias and encoding policy as a fresh backend run;
+    # an archival receipt cannot bypass a stricter current request boundary.
+    try:
+        source, _, translation = _payload_source(request)
+    except (TypeError, ValueError, AttributeError) as exc:
+        raise LegalProofIntegrityError(
+            "one unambiguous checked Lean source is required by the current backend"
+        ) from exc
+    if (not isinstance(source, str) or kernel.submitted_source != source
+            or kernel.theorem_digest != content_digest(source)):
+        raise LegalProofIntegrityError("checked Lean source identity differs from request")
+    if kernel.translation != translation:
+        raise LegalProofIntegrityError("checked Lean translation differs from request")
+    if kernel.source_binding.source_digest != kernel.theorem_digest:
+        raise LegalProofIntegrityError("kernel source binding differs from checked source")
+    compiled = instrument_lean_source_for_axioms(
+        source, context["expected_declaration"],
+        expected_proposition=context["expected_proposition"],
+    )
+    if kernel.compiled_source_digest != content_digest(compiled):
+        raise LegalProofIntegrityError("instrumented compiler input identity differs")
+    binding["context"] = context
+    return binding
+
+
+def build_legal_proof_binding(
+    artifact: FormalizationArtifact | Mapping[str, Any],
+    receipt: ProofReceipt | Mapping[str, Any],
+    *,
+    claim: Any,
+    request: Any,
+    attempt: Any,
+    result: Any,
+    context: Mapping[str, Any],
+) -> dict[str, Any]:
+    """Bind a producer's complete checked evidence; this performs no native execution.
+
+    Interpretation/dependency identities are explicit inputs, not legal review
+    decisions. Actual statutory admission remains the semantic admission owner's job.
+    """
+    produced, _ = _normalize_artifact(artifact)
+    proof = ProofReceipt.from_dict(_normalize_theorem_receipt(receipt))
+    normalized_context = _proof_context(context)
+    value = dict(schema_version=LEGAL_PROOF_BINDING_SCHEMA_VERSION,
+                 receipt_digest=proof.digest, artifact_digest=produced.digest,
+                 source_digest=produced.declaration_digest, claim=_wire(claim, "claim"),
+                 request=_wire(request, "request"), attempt=_wire(attempt, "attempt"),
+                 result=_wire(result, "result"), context=normalized_context)
+    return _validate_proof_binding(produced, proof, value, jurisdiction=normalized_context["jurisdiction"])
+
+
+@dataclass(frozen=True, slots=True)
+class LegalProofRecord:
+    """One content-addressed legal formal artifact (+ optional theorem receipts)."""
+
+    source_id: str
+    source_digest: str
+    profile: str
+    artifact: Mapping[str, Any]
+    artifact_digest: str = ""
+    artifact_cid: str = ""
+    theorem_receipts: tuple[Mapping[str, Any], ...] = ()
+    proof_bindings: tuple[Mapping[str, Any], ...] = field(default=(), kw_only=True)
+    jurisdiction: str = ""
+    content_digest: str = ""
+    content_cid: str = ""
+    schema_version: str = LEGAL_PROOF_RECORD_SCHEMA_VERSION
+
+    def __post_init__(self) -> None:
+        object.__setattr__(
+            self, "source_id", _require_text(self.source_id, "source_id")
+        )
+        object.__setattr__(
+            self,
+            "source_digest",
+            _require_digest(self.source_digest, "source_digest"),
+        )
+        object.__setattr__(self, "profile", _require_profile(self.profile))
+        object.__setattr__(
+            self, "jurisdiction", _require_jurisdiction(self.jurisdiction)
+        )
+        artifact_map = dict(_as_mapping(self.artifact, "artifact"))
+        object.__setattr__(self, "artifact", MappingProxyType(artifact_map))
+
+        receipts = tuple(
+            MappingProxyType(dict(_as_mapping(item, "theorem_receipt")))
+            for item in self.theorem_receipts
+        )
+        object.__setattr__(self, "theorem_receipts", receipts)
+
+        bindings = tuple(FrozenMap(_wire(item, "proof binding")) for item in self.proof_bindings)
+        object.__setattr__(self, "proof_bindings", bindings)
+        if self.schema_version not in {LEGAL_PROOF_RECORD_SCHEMA_VERSION, LEGAL_BOUND_PROOF_RECORD_SCHEMA_VERSION}:
+            raise LegalProofCacheError(
+                f"unsupported legal proof record schema: {self.schema_version!r}"
+            )
+
+        # Bind artifact identity from stored payload.
+        produced, _ = _normalize_artifact(dict(self.artifact))
+        object.__setattr__(self, "artifact", MappingProxyType(produced.to_dict()))
+        art_digest = produced.digest
+        art_cid = produced.artifact_id
+        if self.artifact_digest:
+            recorded = _require_digest(self.artifact_digest, "artifact_digest")
+            if recorded != art_digest:
+                raise LegalProofIntegrityError(
+                    "artifact_digest does not match recomputed formalization identity"
+                )
+        if self.artifact_cid:
+            recorded_cid = _require_text(self.artifact_cid, "artifact_cid")
+            if recorded_cid != art_cid:
+                raise LegalProofIntegrityError(
+                    "artifact_cid does not match recomputed formalization identity"
+                )
+        object.__setattr__(self, "artifact_digest", art_digest)
+        object.__setattr__(self, "artifact_cid", art_cid)
+
+        if produced.declaration_digest != self.source_digest:
+            raise LegalProofIntegrityError(
+                "source_digest does not match artifact declaration_digest"
+            )
+        # Allow either declaration_id or sample_id as the source_id label.
+        if self.source_id not in {produced.declaration_id, produced.sample_id}:
+            raise LegalProofIntegrityError(
+                "source_id does not match artifact declaration_id or sample_id"
+            )
+
+        body = self._identity_payload()
+        digest = _sha256_digest(_canonical_bytes(body))
+        cid = cid_v1_from_digest(bytes.fromhex(digest.removeprefix("sha256:")))
+        if self.content_digest:
+            recorded = _require_digest(self.content_digest, "content_digest")
+            if recorded != digest:
+                raise LegalProofIntegrityError(
+                    "legal proof record content_digest does not match payload"
+                )
+        if self.content_cid:
+            recorded_cid = _require_text(self.content_cid, "content_cid")
+            if recorded_cid != cid:
+                raise LegalProofIntegrityError(
+                    "legal proof record content_cid does not match payload"
+                )
+        object.__setattr__(self, "content_digest", digest)
+        object.__setattr__(self, "content_cid", cid)
+
+        self.verify_integrity()
+
+    def _identity_payload(self) -> dict[str, Any]:
+        payload = {
+            "artifact": _json_ready(dict(self.artifact)),
+            "artifact_cid": self.artifact_cid,
+            "artifact_digest": self.artifact_digest,
+            "jurisdiction": self.jurisdiction,
+            "profile": self.profile,
+            "schema_version": self.schema_version,
+            "source_digest": self.source_digest,
+            "source_id": self.source_id,
+            "theorem_receipts": [
+                _json_ready(dict(item)) for item in self.theorem_receipts
+            ],
+        }
+        if self.schema_version == LEGAL_BOUND_PROOF_RECORD_SCHEMA_VERSION:
+            payload["proof_bindings"] = [_json_ready(item) for item in self.proof_bindings]
+        return payload
+
+    def to_dict(self) -> dict[str, Any]:
+        payload = self._identity_payload()
+        payload["content_cid"] = self.content_cid
+        payload["content_digest"] = self.content_digest
+        return payload
+
+    def formalization_artifact(self) -> FormalizationArtifact:
+        """Return the stored formalization artifact."""
+
+        try:
+            return FormalizationArtifact.from_dict(dict(self.artifact))
+        except (TypeError, ValueError) as exc:
+            raise LegalProofIntegrityError(
+                f"stored artifact is not a valid FormalizationArtifact: {exc}"
+            ) from exc
+
+    def _theorem_receipt_headers(self) -> tuple[ProofReceipt, ...]:
+        """Decode archival headers without granting proof reuse."""
+
+        results: list[ProofReceipt] = []
+        for item in self.theorem_receipts:
+            try:
+                results.append(ProofReceipt.from_dict(dict(item)))
+            except (TypeError, ValueError) as exc:
+                raise LegalProofIntegrityError(
+                    f"stored theorem receipt is invalid: {exc}"
+                ) from exc
+        return tuple(results)
+
+    def theorem_receipt_results(
+        self, *, expected_context: Mapping[str, Any] | None = None,
+        obligation_id: str | None = None,
+    ) -> tuple[ProofReceipt, ...]:
+        """Return only proofs matching the caller's exact current reuse context.
+
+        V1 associated headers remain readable in ``theorem_receipts`` for
+        historical custody; they are never reusable proof authority.
+        """
+        self.verify_integrity()
+        headers = self._theorem_receipt_headers()
+        if not headers:
+            return ()
+        if self.schema_version != LEGAL_BOUND_PROOF_RECORD_SCHEMA_VERSION:
+            raise LegalProofIntegrityError("legacy associated receipts are unbound archival evidence")
+        if expected_context is None:
+            raise LegalProofCacheError("proof reuse requires an explicit expected_context")
+        context = _proof_context(expected_context)
+        bindings = {item["receipt_digest"]: item for item in self.proof_bindings}
+        matches = tuple(receipt for receipt in headers
+                        if (obligation_id is None or receipt.obligation_id == obligation_id)
+                        and _canonical_bytes(_json_ready(bindings[receipt.digest]["context"])) == _canonical_bytes(context))
+        if not matches:
+            raise LegalProofIntegrityError("no proved obligation matches the expected reuse context")
+        return matches
+
+    def _formal_obligation_coverage(self) -> dict[str, Any]:
+        """Project complete contexts from an already verified bound record."""
+        from ..common.duckdb_proof_store import LEGAL_FORMAL_OBLIGATION_COVERAGE
+
+        required = {obligation.obligation_id for obligation in self.formalization_artifact().proof_obligations}
+        obligation_by_receipt = {receipt.digest: receipt.obligation_id for receipt in self._theorem_receipt_headers()}
+        coverage: dict[bytes, set[str]] = {}
+        for binding in self.proof_bindings:
+            # The declaration and proposition are checked per receipt. All
+            # other context identities must agree for their proofs to combine.
+            context = _json_ready(binding["context"])
+            del context["expected_declaration"], context["expected_proposition"]
+            coverage.setdefault(_canonical_bytes(context), set()).add(
+                obligation_by_receipt[binding["receipt_digest"]]
+            )
+        complete_contexts = [
+            json.loads(context) for context, covered in sorted(coverage.items())
+            if required and required <= covered
+        ]
+        return dict(property=LEGAL_FORMAL_OBLIGATION_COVERAGE,
+                    required_obligation_ids=sorted(required),
+                    complete_proof_contexts=complete_contexts,
+                    source_admission=False, legal_admission=False, corpus_admission=False)
+
+    def verify_integrity(self) -> "LegalProofRecord":
+        """Recompute the full envelope, artifact and all proof bindings."""
+        digest = _sha256_digest(_canonical_bytes(self._identity_payload()))
+        cid = cid_v1_from_digest(bytes.fromhex(digest.removeprefix("sha256:")))
+        if digest != self.content_digest or cid != self.content_cid:
+            raise LegalProofIntegrityError("proof record envelope mutated after identity was assigned")
+        artifact = self.formalization_artifact()
+        if artifact.domain != "legal":
+            raise LegalProofIntegrityError(
+                "stored artifact domain is not legal"
+            )
+        if artifact.digest != self.artifact_digest:
+            raise LegalProofIntegrityError(
+                "stored artifact_digest does not match recomputed identity"
+            )
+        if artifact.artifact_id != self.artifact_cid:
+            raise LegalProofIntegrityError(
+                "stored artifact_cid does not match recomputed identity"
+            )
+        if artifact.declaration_digest != self.source_digest:
+            raise LegalProofIntegrityError(
+                "source_digest drifted from artifact declaration_digest"
+            )
+        if (
+            artifact.declaration_id != self.source_id
+            and artifact.sample_id != self.source_id
+        ):
+            raise LegalProofIntegrityError(
+                "source_id drifted from artifact declaration/sample identity"
+            )
+        headers = self._theorem_receipt_headers()
+        for receipt in headers:
+            if receipt.proof_authority is not AuthorityKind.THEOREM_PROOF:
+                raise LegalProofIntegrityError(
+                    "theorem receipt lost theorem_proof authority under reload"
+                )
+            if receipt.status is not ResultStatus.PROVED:
+                raise LegalProofIntegrityError(
+                    "theorem receipt lost proved status under reload"
+                )
+            if receipt.declaration_id and receipt.declaration_id not in {
+                self.source_id,
+                artifact.declaration_id,
+            }:
+                raise LegalProofIntegrityError(
+                    "theorem receipt declaration_id does not match proof record"
+                )
+        if self.schema_version == LEGAL_PROOF_RECORD_SCHEMA_VERSION:
+            if self.proof_bindings:
+                raise LegalProofIntegrityError("v1 records cannot carry v2 proof authority")
+        else:
+            if not headers or len(headers) != len(self.proof_bindings):
+                raise LegalProofIntegrityError("every bound-record v2 theorem header requires exactly one proof binding")
+            by_digest = {item["receipt_digest"]: item for item in self.proof_bindings}
+            if len(by_digest) != len(headers) or set(by_digest) != {item.digest for item in headers}:
+                raise LegalProofIntegrityError("proof bindings contain duplicate, missing or unrelated receipts")
+            for receipt in headers:
+                _validate_proof_binding(artifact, receipt, by_digest[receipt.digest], jurisdiction=self.jurisdiction)
+        return self
+
+    @classmethod
+    def from_dict(cls, value: Mapping[str, Any]) -> "LegalProofRecord":
+        value = _as_mapping(value, "legal proof record")
+        unknown = sorted(set(value) - _RECORD_FIELDS)
+        if unknown:
+            raise LegalProofCacheError(
+                "unknown legal proof record field(s): " + ", ".join(unknown)
+            )
+        return cls(
+            source_id=value.get("source_id", ""),
+            source_digest=value.get("source_digest", ""),
+            profile=value.get("profile", ""),
+            artifact=value.get("artifact", {}),
+            artifact_digest=value.get("artifact_digest", ""),
+            artifact_cid=value.get("artifact_cid", ""),
+            theorem_receipts=tuple(value.get("theorem_receipts", ())),
+            proof_bindings=tuple(value.get("proof_bindings", ())),
+            jurisdiction=value.get("jurisdiction", "") or "",
+            content_digest=value.get("content_digest", ""),
+            content_cid=value.get("content_cid", ""),
+            schema_version=value.get(
+                "schema_version", LEGAL_PROOF_RECORD_SCHEMA_VERSION
+            ),
+        )
+
+    @classmethod
+    def build(
+        cls,
+        artifact: FormalizationArtifact | Mapping[str, Any],
+        *,
+        profile: str,
+        source_id: str | None = None,
+        source_digest: str | None = None,
+        jurisdiction: str = "",
+        theorem_receipts: Sequence[Any] = (),
+        proof_bindings: Sequence[Any] = (),
+    ) -> "LegalProofRecord":
+        """Build a verified record from a legal formalization artifact."""
+
+        produced, artifact_payload = _normalize_artifact(artifact)
+        resolved_source_id = source_id or produced.declaration_id or produced.sample_id
+        resolved_source_digest = source_digest or produced.declaration_digest
+        if source_digest is not None:
+            resolved_source_digest = _require_digest(
+                source_digest, "source_digest"
+            )
+            if resolved_source_digest != produced.declaration_digest:
+                raise LegalProofCacheError(
+                    "source_digest does not match artifact declaration_digest"
+                )
+        if theorem_receipts and not proof_bindings:
+            raise LegalProofCacheError("new theorem receipts require complete proof_bindings; legacy headers are archival only")
+        if proof_bindings and not theorem_receipts:
+            raise LegalProofCacheError("proof_bindings require theorem receipts")
+        receipt_payloads = tuple(
+            _normalize_theorem_receipt(item) for item in theorem_receipts
+        )
+        for receipt in receipt_payloads:
+            declaration_id = receipt.get("declaration_id", "")
+            if declaration_id and declaration_id not in {
+                resolved_source_id,
+                produced.declaration_id,
+            }:
+                raise LegalProofCacheError(
+                    "theorem receipt declaration_id does not match proof record"
+                )
+        return cls(
+            source_id=_require_text(resolved_source_id, "source_id"),
+            source_digest=_require_digest(
+                resolved_source_digest, "source_digest"
+            ),
+            profile=_require_profile(profile),
+            artifact=artifact_payload,
+            artifact_digest=produced.digest,
+            artifact_cid=produced.artifact_id,
+            theorem_receipts=receipt_payloads,
+            proof_bindings=tuple(proof_bindings),
+            schema_version=(LEGAL_BOUND_PROOF_RECORD_SCHEMA_VERSION if receipt_payloads else LEGAL_PROOF_RECORD_SCHEMA_VERSION),
+            jurisdiction=_require_jurisdiction(jurisdiction),
+        )
+
+
+@dataclass
+class LegalProofCache:
+    """Filesystem- or memory-backed Legal proof cache.
+
+    Records are content-addressed by their envelope digest.  Secondary indexes
+    support lookup by profile and by source digest (with optional profile
+    disambiguation).  Statistics track hit/miss counts for get paths.
+    """
+
+    root: Path | None = None
+    _records: dict[str, LegalProofRecord] = field(
+        default_factory=dict, init=False, repr=False
+    )
+    _profile_index: dict[str, str] = field(
+        default_factory=dict, init=False, repr=False
+    )
+    # source_digest -> profile -> content_cid
+    _source_index: dict[str, dict[str, str]] = field(
+        default_factory=dict, init=False, repr=False
+    )
+    _hits: int = field(default=0, init=False, repr=False)
+    _misses: int = field(default=0, init=False, repr=False)
+    _lock: threading.RLock = field(
+        default_factory=threading.RLock, init=False, repr=False
+    )
+    _shadow_repository: Any = field(default=None, init=False, repr=False)
+    _shadow_backend: str = field(default="legal_ir", init=False, repr=False)
+
+    def __post_init__(self) -> None:
+        if self.root is not None:
+            object.__setattr__(self, "root", Path(self.root))
+            self.root.mkdir(parents=True, exist_ok=True)
+            self.reload()
+
+    def bind_shadow_repository(
+        self, repository: Any, *, backend: str = "legal_ir"
+    ) -> None:
+        """Bind this legal proof cache to the unified shadow repository (DQK-065)."""
+
+        object.__setattr__(self, "_shadow_repository", repository)
+        object.__setattr__(self, "_shadow_backend", backend)
+        if repository is not None:
+            repository.register_backend(backend)
+
+    def bind_authority_repository(self, repository, *, backend: str = "legal_ir") -> None:
+        """Bind to dual/promoted DuckDB proof authority (DQK-066)."""
+
+        self.bind_shadow_repository(repository, backend=backend)
+
+
+    def _shadow_write(self, record: "LegalProofRecord") -> None:
+        repo = self._shadow_repository
+        if repo is None:
+            try:
+                from ..common.proof_cache import get_shadow_repository
+                repo = get_shadow_repository(create=False)
+            except Exception:
+                repo = None
+        if repo is None:
+            return
+        try:
+            # The writer runs after put's lock is released. Reconstruct a
+            # detached canonical snapshot before inspecting or publishing it;
+            # shallow nested mutations must not retain an earlier verified CID.
+            record = LegalProofRecord.from_dict(record.to_dict())
+            envelope_bytes = _canonical_bytes(record.to_dict())
+            bound = record.schema_version == LEGAL_BOUND_PROOF_RECORD_SCHEMA_VERSION
+            scope = record._formal_obligation_coverage() if bound else {}
+            proved = bool(scope.get("complete_proof_contexts"))
+            # Preserve the v1 artifact projection exactly. Only new bound v2
+            # entries add their actual contexts and formal-obligation scope.
+            key_args = dict(
+                formula=record.source_id, cid=record.content_cid, prover_name="legal_ir",
+                solver_identities={"profile": record.profile},
+                toolchain={"legal_ir": True},
+                policy={"profile": record.profile, "jurisdiction": record.jurisdiction},
+                theorem_registry=record.source_digest,
+                ir={"source_id": record.source_id, "source_digest": record.source_digest,
+                    "artifact_cid": record.artifact_cid},
+            )
+            if bound:
+                from ..common.duckdb_proof_store import LEGAL_FORMAL_COVERAGE_VERSION
+
+                key_args["backend_version"] = LEGAL_FORMAL_COVERAGE_VERSION
+                key_args["toolchain"] = {"legal_ir": True, "bound_contexts": [
+                    _json_ready(item["context"]) for item in record.proof_bindings]}
+                key_args["ir"]["artifact_digest"] = record.artifact_digest
+                key_args["property_value"] = scope
+            key = repo.project_key(self._shadow_backend, **key_args)
+            payload = dict(content_cid=record.content_cid, content_digest=record.content_digest,
+                           profile=record.profile)
+            if bound:
+                payload.update(scope)
+            repo.write(
+                self._shadow_backend, key=key, result_payload=payload,
+                status="proved" if proved else "unknown",
+                trust_level="independently_checkable" if proved else "none",
+                kernel_accepted=proved, envelope_bytes=envelope_bytes,
+                envelope_content_id=record.content_cid,
+                legacy_payload=record.to_dict(), result_id=record.content_cid,
+            )
+        except Exception:
+            pass
+
+    @property
+    def interface(self) -> str:
+        return LEGAL_PROOF_CACHE_INTERFACE
+
+    @property
+    def schema_version(self) -> str:
+        return LEGAL_PROOF_CACHE_SCHEMA_VERSION
+
+    @property
+    def hits(self) -> int:
+        return self._hits
+
+    @property
+    def misses(self) -> int:
+        return self._misses
+
+    def stats(self) -> dict[str, int]:
+        with self._lock:
+            return {
+                "hits": self._hits,
+                "misses": self._misses,
+                "size": len(self._records),
+            }
+
+    def _records_dir(self) -> Path | None:
+        if self.root is None:
+            return None
+        path = self.root / "records"
+        path.mkdir(parents=True, exist_ok=True)
+        return path
+
+    def _index_path(self) -> Path | None:
+        if self.root is None:
+            return None
+        return self.root / "index.json"
+
+    def _record_path(self, content_cid: str) -> Path | None:
+        records_dir = self._records_dir()
+        if records_dir is None:
+            return None
+        safe = content_cid.replace("/", "_")
+        return records_dir / f"{safe}.json"
+
+    def _index_record(self, record: LegalProofRecord) -> None:
+        self._records[record.content_cid] = record
+        self._profile_index[record.profile] = record.content_cid
+        by_source = self._source_index.setdefault(record.source_digest, {})
+        by_source[record.profile] = record.content_cid
+
+    def put(
+        self,
+        artifact: FormalizationArtifact
+        | Mapping[str, Any]
+        | LegalProofRecord,
+        *,
+        profile: str | None = None,
+        source_id: str | None = None,
+        source_digest: str | None = None,
+        jurisdiction: str = "",
+        theorem_receipts: Sequence[Any] = (),
+        proof_bindings: Sequence[Any] = (),
+    ) -> LegalProofRecord:
+        """Store a legal formal artifact and return the verified cache record."""
+
+        with self._lock:
+            if isinstance(artifact, LegalProofRecord):
+                if profile is not None and artifact.profile != _require_profile(
+                    profile
+                ):
+                    raise LegalProofCacheError(
+                        "profile argument conflicts with the supplied record"
+                    )
+                if theorem_receipts or proof_bindings:
+                    raise LegalProofCacheError(
+                        "theorem_receipts cannot be supplied with a finished record"
+                    )
+                if source_id is not None and source_id != artifact.source_id:
+                    raise LegalProofCacheError(
+                        "source_id argument conflicts with the supplied record"
+                    )
+                if (
+                    source_digest is not None
+                    and source_digest != artifact.source_digest
+                ):
+                    raise LegalProofCacheError(
+                        "source_digest argument conflicts with the supplied record"
+                    )
+                if jurisdiction and jurisdiction != artifact.jurisdiction:
+                    raise LegalProofCacheError(
+                        "jurisdiction argument conflicts with the supplied record"
+                    )
+                record = artifact.verify_integrity()
+            else:
+                if profile is None:
+                    raise LegalProofCacheError(
+                        "profile is required when putting an artifact"
+                    )
+                record = LegalProofRecord.build(
+                    artifact,
+                    profile=profile,
+                    source_id=source_id,
+                    source_digest=source_digest,
+                    jurisdiction=jurisdiction,
+                    theorem_receipts=theorem_receipts,
+                    proof_bindings=proof_bindings,
+                )
+
+            self._index_record(record)
+            self._persist_record(record)
+            # DQK-067: skip mutable index.json when export-only/promoted;
+            # in-memory + DuckDB authority remain sufficient.
+            try:
+                from ..common.proof_cache import legacy_json_persistence_allowed
+
+                repo = self._shadow_repository
+                if repo is None:
+                    from ..common.proof_cache import get_shadow_repository
+
+                    repo = get_shadow_repository(create=False)
+                if legacy_json_persistence_allowed(repo):
+                    self._persist_index()
+            except Exception:
+                # Fail open to dual-write when guard import fails (legacy).
+                try:
+                    self._persist_index()
+                except Exception:
+                    pass
+        self._shadow_write(record)
+        return record
+
+    def get(self, content_cid: str) -> LegalProofRecord:
+        """Load one proof record by content CID (memory first, then disk)."""
+
+        cid = _require_text(content_cid, "content_cid")
+        with self._lock:
+            record = self._records.get(cid)
+            if record is not None:
+                self._hits += 1
+                return record.verify_integrity()
+            path = self._record_path(cid)
+            if path is None or not path.is_file():
+                self._misses += 1
+                raise LegalProofCacheError(
+                    f"proof record not found for content_cid={cid!r}"
+                )
+            record = self._load_record_file(path)
+            if record.content_cid != cid:
+                raise LegalProofIntegrityError(
+                    "on-disk proof record CID does not match requested CID"
+                )
+            self._index_record(record)
+            self._hits += 1
+            return record
+
+    def get_by_profile(self, profile: str) -> LegalProofRecord:
+        """Return the proof record currently indexed for *profile*."""
+
+        profile = _require_profile(profile)
+        with self._lock:
+            cid = self._profile_index.get(profile)
+            if cid is None:
+                self._misses += 1
+                raise LegalProofCacheError(
+                    f"no proof record indexed for profile={profile!r}"
+                )
+            return self.get(cid)
+
+    def get_by_source_digest(
+        self,
+        source_digest: str,
+        *,
+        profile: str | None = None,
+    ) -> LegalProofRecord:
+        """Return a cached proof record for a source digest.
+
+        When *profile* is provided the source+profile index is preferred.
+        Otherwise the sole matching record is returned; multiple profiles for
+        one source require an explicit profile.
+        """
+
+        source_digest = _require_digest(source_digest, "source_digest")
+        with self._lock:
+            by_profile = self._source_index.get(source_digest)
+            if not by_profile:
+                # Fall back to scanning disk / re-verify.
+                self.reload()
+                by_profile = self._source_index.get(source_digest)
+            if not by_profile:
+                self._misses += 1
+                raise LegalProofCacheError(
+                    f"no proof record for source_digest={source_digest!r}"
+                )
+            if profile is not None:
+                profile = _require_profile(profile)
+                cid = by_profile.get(profile)
+                if cid is None:
+                    self._misses += 1
+                    raise LegalProofCacheError(
+                        f"no proof record for source_digest={source_digest!r} "
+                        f"profile={profile!r}"
+                    )
+                return self.get(cid)
+            if len(by_profile) > 1:
+                profiles = ", ".join(sorted(by_profile))
+                raise LegalProofCacheError(
+                    "multiple proof records for source_digest="
+                    f"{source_digest!r}; specify profile (candidates: {profiles})"
+                )
+            cid = next(iter(by_profile.values()))
+            return self.get(cid)
+
+    def contains(self, content_cid: str) -> bool:
+        """Return True on cache hit without raising; does not count as get hit."""
+
+        try:
+            cid = _require_text(content_cid, "content_cid")
+        except LegalProofCacheError:
+            return False
+        with self._lock:
+            if cid in self._records:
+                return True
+            path = self._record_path(cid)
+            return path is not None and path.is_file()
+
+    def profiles(self) -> tuple[str, ...]:
+        with self._lock:
+            return tuple(sorted(self._profile_index))
+
+    def source_digests(self) -> tuple[str, ...]:
+        with self._lock:
+            return tuple(sorted(self._source_index))
+
+    def cids(self) -> tuple[str, ...]:
+        with self._lock:
+            return tuple(sorted(self._records))
+
+    def __len__(self) -> int:
+        with self._lock:
+            return len(self._records)
+
+    def reload(self) -> int:
+        """Reload all on-disk records with full integrity verification.
+
+        Corrupt or digest-mismatched records fail closed and prevent the cache
+        from accepting the damaged tree.  Returns the number of records loaded.
+        """
+
+        with self._lock:
+            if self.root is None:
+                for cid, record in list(self._records.items()):
+                    verified = record.verify_integrity()
+                    self._records[cid] = verified
+                return len(self._records)
+
+            records_dir = self._records_dir()
+            assert records_dir is not None
+            loaded: dict[str, LegalProofRecord] = {}
+            profile_index: dict[str, str] = {}
+            source_index: dict[str, dict[str, str]] = {}
+
+            for path in sorted(records_dir.glob("*.json")):
+                record = self._load_record_file(path)
+                if record.content_cid in loaded:
+                    raise LegalProofIntegrityError(
+                        f"duplicate proof content_cid on disk: {record.content_cid}"
+                    )
+                loaded[record.content_cid] = record
+                profile_index[record.profile] = record.content_cid
+                source_index.setdefault(record.source_digest, {})[
+                    record.profile
+                ] = record.content_cid
+
+            index_path = self._index_path()
+            if index_path is not None and index_path.is_file():
+                try:
+                    index_payload = json.loads(
+                        index_path.read_text(encoding="utf-8")
+                    )
+                except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+                    raise LegalProofIntegrityError(
+                        f"legal proof cache index is unreadable: {exc}"
+                    ) from exc
+                index_payload = _as_mapping(index_payload, "legal proof cache index")
+                if (
+                    index_payload.get("schema_version")
+                    != LEGAL_PROOF_INDEX_SCHEMA_VERSION
+                ):
+                    raise LegalProofIntegrityError(
+                        "unsupported legal proof cache index schema: "
+                        f"{index_payload.get('schema_version')!r}"
+                    )
+                profiles = index_payload.get("profiles", {})
+                if not isinstance(profiles, Mapping):
+                    raise LegalProofIntegrityError(
+                        "legal proof cache index profiles must be a mapping"
+                    )
+                for profile, cid in profiles.items():
+                    profile = _require_profile(profile)
+                    cid = _require_text(cid, "index content_cid")
+                    if cid not in loaded:
+                        raise LegalProofIntegrityError(
+                            f"index references missing proof record {cid!r}"
+                        )
+                    if loaded[cid].profile != profile:
+                        raise LegalProofIntegrityError(
+                            f"index profile {profile!r} points at record for "
+                            f"{loaded[cid].profile!r}"
+                        )
+                    profile_index[profile] = cid
+
+                sources = index_payload.get("source_digests", {})
+                if sources is None:
+                    sources = {}
+                if not isinstance(sources, Mapping):
+                    raise LegalProofIntegrityError(
+                        "legal proof cache index source_digests must be a mapping"
+                    )
+                for source_digest, profile_map in sources.items():
+                    source_digest = _require_digest(
+                        source_digest, "index source_digest"
+                    )
+                    if not isinstance(profile_map, Mapping):
+                        raise LegalProofIntegrityError(
+                            "source_digests entries must map profiles to CIDs"
+                        )
+                    for profile, cid in profile_map.items():
+                        profile = _require_profile(profile)
+                        cid = _require_text(cid, "index content_cid")
+                        if cid not in loaded:
+                            raise LegalProofIntegrityError(
+                                f"source index references missing proof record {cid!r}"
+                            )
+                        if loaded[cid].source_digest != source_digest:
+                            raise LegalProofIntegrityError(
+                                "source index digest does not match record"
+                            )
+                        if loaded[cid].profile != profile:
+                            raise LegalProofIntegrityError(
+                                "source index profile does not match record"
+                            )
+                        source_index.setdefault(source_digest, {})[profile] = cid
+
+            self._records = loaded
+            self._profile_index = profile_index
+            self._source_index = source_index
+            return len(loaded)
+
+    def clear(self) -> None:
+        """Drop in-memory state (does not delete on-disk files)."""
+
+        with self._lock:
+            self._records.clear()
+            self._profile_index.clear()
+            self._source_index.clear()
+            self._hits = 0
+            self._misses = 0
+
+    def _persist_record(self, record: LegalProofRecord) -> None:
+        path = self._record_path(record.content_cid)
+        if path is None:
+            return
+        _atomic_write_json(path, record.to_dict())
+
+    def _persist_index(self) -> None:
+        path = self._index_path()
+        if path is None:
+            return
+        # DQK-067: after promotion/export-only, mutable index.json is not
+        # authority.  Runtime path refuses whole-file rewrites; use explicit
+        # export_index_json_compat for compatibility dumps.
+        repo = self._shadow_repository
+        if repo is None:
+            try:
+                from ..common.proof_cache import get_shadow_repository
+
+                repo = get_shadow_repository(create=False)
+            except Exception:
+                repo = None
+        try:
+            from ..common.proof_cache import (
+                assert_direct_json_persistence_forbidden,
+                legacy_json_persistence_allowed,
+            )
+
+            if not legacy_json_persistence_allowed(repo):
+                assert_direct_json_persistence_forbidden(
+                    repo,
+                    path=str(path),
+                    backend=self._shadow_backend,
+                    family="legal_ir",
+                )
+        except ImportError:
+            if repo is not None and getattr(repo, "is_promoted", False):
+                if hasattr(repo, "assert_json_rewrite_allowed"):
+                    repo.assert_json_rewrite_allowed(
+                        "legal_ir", path=str(path), backend=self._shadow_backend
+                    )
+        payload = {
+            "interface": LEGAL_PROOF_CACHE_INTERFACE,
+            "profiles": {
+                profile: cid
+                for profile, cid in sorted(self._profile_index.items())
+            },
+            "record_cids": sorted(self._records),
+            "schema_version": LEGAL_PROOF_INDEX_SCHEMA_VERSION,
+            "source_digests": {
+                digest: {
+                    profile: cid
+                    for profile, cid in sorted(profiles.items())
+                }
+                for digest, profiles in sorted(self._source_index.items())
+            },
+        }
+        _atomic_write_json(path, payload)
+
+    def export_index_json_compat(self, path: Path | str | None = None) -> dict[str, Any]:
+        """Explicit legacy index.json export (DQK-067 compatibility only)."""
+
+        target = Path(path) if path is not None else self._index_path()
+        if target is None:
+            raise LegalProofCacheError(
+                "export_index_json_compat requires a path or cache root"
+            )
+        payload = {
+            "interface": LEGAL_PROOF_CACHE_INTERFACE,
+            "profiles": {
+                profile: cid
+                for profile, cid in sorted(self._profile_index.items())
+            },
+            "record_cids": sorted(self._records),
+            "schema_version": LEGAL_PROOF_INDEX_SCHEMA_VERSION,
+            "source_digests": {
+                digest: {
+                    profile: cid
+                    for profile, cid in sorted(profiles.items())
+                }
+                for digest, profiles in sorted(self._source_index.items())
+            },
+            "export_only": True,
+            "legacy_file_authoritative": False,
+            "owner_task_id": "DQK-067",
+        }
+        _atomic_write_json(Path(target), payload)
+        return {
+            "path": str(target),
+            "operation": "export_index_json_compat",
+            "record_count": len(self._records),
+            "legacy_file_authoritative": False,
+        }
+
+    def _load_record_file(self, path: Path) -> LegalProofRecord:
+        try:
+            raw = path.read_bytes()
+        except OSError as exc:
+            raise LegalProofIntegrityError(
+                f"unable to read proof record {path}: {exc}"
+            ) from exc
+        try:
+            payload = json.loads(raw.decode("utf-8"))
+        except (UnicodeError, json.JSONDecodeError) as exc:
+            raise LegalProofIntegrityError(
+                f"proof record {path.name} is not valid JSON: {exc}"
+            ) from exc
+        try:
+            record = LegalProofRecord.from_dict(
+                _as_mapping(payload, "legal proof record")
+            )
+        except LegalProofCacheError as exc:
+            raise LegalProofIntegrityError(
+                f"proof record {path.name} failed validation: {exc}"
+            ) from exc
+        recomputed = _sha256_digest(_canonical_bytes(record._identity_payload()))
+        if recomputed != record.content_digest:
+            raise LegalProofIntegrityError(
+                f"proof record {path.name} failed content rehash"
+            )
+        return record.verify_integrity()
+
+
+# Architecture-plan / interface shorthand.
+LegalProofCacheV1 = LegalProofCache
+
+
+def put_legal_proof(
+    cache: LegalProofCache,
+    artifact: FormalizationArtifact | Mapping[str, Any],
+    *,
+    profile: str,
+    source_id: str | None = None,
+    source_digest: str | None = None,
+    jurisdiction: str = "",
+    theorem_receipts: Sequence[Any] = (),
+    proof_bindings: Sequence[Any] = (),
+) -> LegalProofRecord:
+    """Functional put wrapper for LegalProofCache@1."""
+
+    return cache.put(
+        artifact,
+        profile=profile,
+        source_id=source_id,
+        source_digest=source_digest,
+        jurisdiction=jurisdiction,
+        theorem_receipts=theorem_receipts,
+        proof_bindings=proof_bindings,
+    )
+
+
+def get_legal_proof(
+    cache: LegalProofCache,
+    content_cid: str,
+) -> LegalProofRecord:
+    """Functional get wrapper for LegalProofCache@1."""
+
+    return cache.get(content_cid)
+
+
+def rebuild_offline_from_fixture_dir(
+    fixture_dir: str | Path,
+    *,
+    root: str | Path | None = None,
+) -> LegalProofCache:
+    """Rebuild a cache from golden fixture records (offline, no provers).
+
+    Expects a directory containing ``manifest.json`` and the record files it
+    references.  Each sample record is put into a new
+    :class:`LegalProofCache` with integrity rehash on load and store.
+    """
+
+    fixture_dir = Path(fixture_dir)
+    manifest_path = fixture_dir / "manifest.json"
+    if not manifest_path.is_file():
+        raise LegalProofCacheError(
+            f"fixture manifest not found: {manifest_path}"
+        )
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+        raise LegalProofCacheError(
+            f"unable to read fixture manifest: {exc}"
+        ) from exc
+    if not isinstance(manifest, Mapping):
+        raise LegalProofCacheError("fixture manifest must be a mapping")
+    if manifest.get("interface") != LEGAL_PROOF_CACHE_INTERFACE:
+        raise LegalProofCacheError(
+            "fixture manifest interface is not LegalProofCache@1"
+        )
+    cache = LegalProofCache(root=Path(root) if root is not None else None)
+    samples = manifest.get("samples", {})
+    if not isinstance(samples, Mapping):
+        raise LegalProofCacheError("fixture manifest samples must be a mapping")
+    for _name, sample in samples.items():
+        if not isinstance(sample, Mapping):
+            raise LegalProofCacheError("fixture sample entry must be a mapping")
+        record_path = fixture_dir / str(sample.get("record_path", ""))
+        try:
+            payload = json.loads(record_path.read_text(encoding="utf-8"))
+        except (OSError, UnicodeError, json.JSONDecodeError) as exc:
+            raise LegalProofCacheError(
+                f"unable to read fixture record {record_path}: {exc}"
+            ) from exc
+        record = LegalProofRecord.from_dict(payload)
+        cache.put(record)
+    return cache
+
+
+from ..common.proof_cache import (  # noqa: E402
+    LEGACY_PROOF_BACKENDS,
+    LegacyProofBackend,
+    ProofAuthorityJSONRewriteError,
+    ProofJSONCompatibilityError,
+    ProofPublicationPolicyError,
+    UnifiedProofAuthorityRepository,
+    UnifiedProofShadowRepository,
+    assert_compatibility_shims_import_unified_repository,
+    assert_direct_json_persistence_forbidden,
+    build_proof_authority_repository,
+    build_proof_shadow_repository,
+    get_authority_repository,
+    get_shadow_repository,
+    legacy_json_persistence_allowed,
+    set_authority_repository,
+    set_shadow_repository,
+)
+
+LEGAL_IR_LEGACY_BACKEND = LegacyProofBackend.LEGAL_IR
+
+
+__all__ = [
+    "LEGAL_IR_LEGACY_BACKEND",
+    "LEGAL_PROOF_CACHE_INTERFACE",
+    "LEGAL_PROOF_CACHE_SCHEMA_VERSION",
+    "LEGAL_PROOF_INDEX_SCHEMA_VERSION",
+    "LEGAL_PROOF_RECORD_SCHEMA_VERSION",
+    "LEGAL_BOUND_PROOF_RECORD_SCHEMA_VERSION",
+    "LEGAL_PROOF_BINDING_SCHEMA_VERSION",
+    "LEGAL_PROOF_CONTEXT_SCHEMA_VERSION",
+    "build_legal_proof_binding",
+    "LEGACY_PROOF_BACKENDS",
+    "LegacyProofBackend",
+    "LegalProofCache",
+    "LegalProofCacheError",
+    "LegalProofCacheV1",
+    "LegalProofIntegrityError",
+    "LegalProofRecord",
+    "UnifiedProofAuthorityRepository",
+    "UnifiedProofShadowRepository",
+    "build_proof_authority_repository",
+    "build_proof_shadow_repository",
+    "get_legal_proof",
+    "get_authority_repository",
+    "get_shadow_repository",
+    "put_legal_proof",
+    "rebuild_offline_from_fixture_dir",
+    "set_authority_repository",
+    "set_shadow_repository",
+]

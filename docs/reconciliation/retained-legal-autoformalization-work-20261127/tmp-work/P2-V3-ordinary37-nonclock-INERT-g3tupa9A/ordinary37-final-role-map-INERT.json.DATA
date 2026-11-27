@@ -1,0 +1,115 @@
+{
+  "actual_exact_two_candidate": {
+    "bytes": 6997,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/SEALED-Phase2-V3-definition-self-reference-exact-two.json",
+    "sha256": "f59623dc0c5f5ca71ba2897a8a8d1b49240298b214389d49bccbbf0e50ed6082"
+  },
+  "actual_freeze_correspondence_only": {
+    "bytes": 6414,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-isolated-Phase2-V3-definition-exact-two-local-freeze.json",
+    "sha256": "4451d305186b343a67388d8a637e40abd21473e69c2c27ca41f6b8a7c6ffc1d6"
+  },
+  "candidate_roles": {
+    "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py": {
+      "postimage": {
+        "bytes": 35250,
+        "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/legal_reviewed_norm_admission_v3.after.py.DATA",
+        "sha256": "1b294d2d896f715c7fe667cf194e2a04bc681705af558a535d55210b4cacf917"
+      },
+      "postimage_git_blob": "d2959d73378a870453c48775692fa6462d154a5d",
+      "preimage": {
+        "bytes": 34912,
+        "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/legal_reviewed_norm_admission_v3.py.before.DATA",
+        "sha256": "30f9e1f2554b030241aeb8ec8ffc1f6c98816eee2732c83e59dbf3c0b36de50e"
+      },
+      "preimage_git_blob": "66a763ea5d49f4e850100e4dee77e9b35e68b457"
+    },
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py": {
+      "postimage": {
+        "bytes": 34149,
+        "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/test_legal_reviewed_norm_admission_v3.after.py.DATA",
+        "sha256": "b33ec128970c9601583df4cf9b8c78744a7def25af3a497eb6bed7194c183a91"
+      },
+      "postimage_git_blob": "57cba9cbfe55bf91fa8377808cd853d7d39c9059",
+      "preimage": {
+        "bytes": 31445,
+        "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/test_legal_reviewed_norm_admission_v3.py.before.DATA",
+        "sha256": "5bc57fed43f80f84c8a61bf2588158c97f150d745165c6ef7d544acc7e3fbe0c"
+      },
+      "preimage_git_blob": "848ed2ce4479399a652d2760c734eacd67d0c040"
+    }
+  },
+  "expected_absent_relative_paths": [
+    "ipfs_datasets_py/conftest.py",
+    "ipfs_datasets_py/optimizers/conftest.py",
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/conftest.py",
+    "tests/unit/logic/__init__.py",
+    "tests/unit/logic/conftest.py",
+    "tests/unit/logic/integration/__init__.py",
+    "tests/unit/logic/integration/conftest.py",
+    "tests/unit/logic/autoformal/__init__.py",
+    "tests/unit/logic/autoformal/conftest.py"
+  ],
+  "expected_current_A_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+  "expected_normal_conftests": [
+    "conftest.py",
+    "tests/conftest.py",
+    "tests/unit/conftest.py"
+  ],
+  "fixture_relative_paths": [
+    "conftest.py",
+    "tests/conftest.py",
+    "tests/unit/conftest.py",
+    "pytest.ini",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py",
+    "tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py",
+    "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py"
+  ],
+  "guarded_module_roles": {
+    "ipfs_datasets_py.logic.autoformal.legal_reviewed_norm_admission_v3": {
+      "prospective_postimage": {
+        "bytes": 35250,
+        "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/legal_reviewed_norm_admission_v3.after.py.DATA",
+        "sha256": "1b294d2d896f715c7fe667cf194e2a04bc681705af558a535d55210b4cacf917"
+      },
+      "published_preimage": {
+        "bytes": 34912,
+        "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/legal_reviewed_norm_admission_v3.py.before.DATA",
+        "sha256": "30f9e1f2554b030241aeb8ec8ffc1f6c98816eee2732c83e59dbf3c0b36de50e"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py"
+    },
+    "tests.unit.logic.autoformal.test_legal_reviewed_norm_admission_v3": {
+      "prospective_postimage": {
+        "bytes": 34149,
+        "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/test_legal_reviewed_norm_admission_v3.after.py.DATA",
+        "sha256": "b33ec128970c9601583df4cf9b8c78744a7def25af3a497eb6bed7194c183a91"
+      },
+      "published_preimage": {
+        "bytes": 31445,
+        "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/test_legal_reviewed_norm_admission_v3.py.before.DATA",
+        "sha256": "5bc57fed43f80f84c8a61bf2588158c97f150d745165c6ef7d544acc7e3fbe0c"
+      },
+      "relative_path": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py"
+    }
+  },
+  "prior_outer": {
+    "bytes": 850358,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-live-reconciled-outer1614-epoch.json",
+    "sha256": "44af55564659e96cfe9e3c7ead9336203f51bb37c6117ab108238b5d3b69bb05"
+  },
+  "prior_python": {
+    "bytes": 843788,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-live-reconciled-Python1601-epoch.json",
+    "sha256": "da7f473f29fe4a57f8e8388c15d72cd7ba69c61168add0993b5116e4237e6dd9"
+  },
+  "replaced_outer_paths": [
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py"
+  ]
+}

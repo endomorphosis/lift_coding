@@ -1,0 +1,115 @@
+{
+  "CLI_private_candidate_imported": false,
+  "accelerate_fence_unchanged": true,
+  "all_other_gitlinks_unchanged": true,
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "a5c3f972d0245f760e239ef9a7e92d899cea061c",
+        "to": "bb982846f24cc116d5d86ac93f1533f94cae4389"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "a5c3f972d0245f760e239ef9a7e92d899cea061c",
+        "to": "bb982846f24cc116d5d86ac93f1533f94cae4389"
+      },
+      "hallucinate_app": {
+        "from": "d6f881f9cd0c2599edaaaa6b27b100018822464c",
+        "to": "274d49e4ed2abba1e3c414cd5d0eadff4b7f4f56"
+      }
+    }
+  },
+  "local_after": {
+    "accelerate": {
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "index_and_worktree_clean": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "head": "bb982846f24cc116d5d86ac93f1533f94cae4389",
+      "index_and_worktree_clean": true,
+      "tree": "95d2447cbb1d53cd722e96b1de19d783738a75ca"
+    },
+    "hallucinate": {
+      "head": "274d49e4ed2abba1e3c414cd5d0eadff4b7f4f56",
+      "index_and_worktree_clean": true,
+      "tree": "aeffa43843cc588f35d143fc2e27b04ead7f0068"
+    },
+    "root": {
+      "head": "996d25a8d9b59b1ad747588e823e6a8ef56b4d24",
+      "index_and_worktree_clean": true,
+      "tree": "02884252c77bab9a1b422c7ae9e0c4380e03dfac"
+    }
+  },
+  "no_force_or_tag_push": true,
+  "no_new_Source_SDK_test_model_or_CI_invocation": true,
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "bb982846f24cc116d5d86ac93f1533f94cae4389",
+    "hallucinate": "274d49e4ed2abba1e3c414cd5d0eadff4b7f4f56",
+    "root": "996d25a8d9b59b1ad747588e823e6a8ef56b4d24"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "a5c3f972d0245f760e239ef9a7e92d899cea061c",
+    "hallucinate": "d6f881f9cd0c2599edaaaa6b27b100018822464c",
+    "root": "31536e9fa6a380dc6e615fc5e74bfe185bb3ccbc"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "pushes": {
+    "datasets": {
+      "from": "a5c3f972d0245f760e239ef9a7e92d899cea061c",
+      "push_porcelain_status": " \tbb982846f24cc116d5d86ac93f1533f94cae4389:refs/heads/main\ta5c3f972d0..bb982846f2",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "bb982846f24cc116d5d86ac93f1533f94cae4389"
+    },
+    "hallucinate": {
+      "from": "d6f881f9cd0c2599edaaaa6b27b100018822464c",
+      "push_porcelain_status": " \t274d49e4ed2abba1e3c414cd5d0eadff4b7f4f56:refs/heads/main\td6f881f..274d49e",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "274d49e4ed2abba1e3c414cd5d0eadff4b7f4f56"
+    },
+    "root": {
+      "from": "31536e9fa6a380dc6e615fc5e74bfe185bb3ccbc",
+      "push_porcelain_status": " \t996d25a8d9b59b1ad747588e823e6a8ef56b4d24:refs/heads/main\t31536e9fa6..996d25a8d9",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "996d25a8d9b59b1ad747588e823e6a8ef56b4d24"
+    }
+  },
+  "qualification": {
+    "bytes": 2775,
+    "errors": 0,
+    "failures": 0,
+    "owner_reaped": true,
+    "path": "/tmp/Root-ordinary48-complete-import-closure-actual-v117/Root-D3-ordinary48-qualified-Source-resource-closed-small-v119.json",
+    "raw_XML": {
+      "bytes": 15065,
+      "path": "/tmp/Root-ordinary48-complete-import-closure-actual-v117/actual-output/statutory-source48-run-result0-output1.bin",
+      "sha256": "4d830502b62c0539ce44acacfc645b10d55d31d4d4c45fc3959822f7c67b69dc"
+    },
+    "resource_and_Source_closed": true,
+    "sha256": "cc6ac234542388f33de6fa7794e5557cda23c72c2871cae4a6d41274ee1c09a3",
+    "skips": 0,
+    "unique_passed": 48
+  },
+  "schema": "D3-ordinary48-GitHub-publication/v119",
+  "selected_D3_blobs": {
+    "ipfs_datasets_py/logic/autoformal/legal_statutory_context.py": "38b5299431c32f50acced2cf2fd06cc8abad4e0d",
+    "tests/unit/logic/autoformal/test_legal_span_cache_intake.py": "d69118f4f6861f2b33e12e2e07148d5c0ae502f7",
+    "tests/unit/logic/autoformal/test_legal_statutory_context.py": "c87f1896f3a65097fcf44e0311b4442a7272f0f9"
+  }
+}

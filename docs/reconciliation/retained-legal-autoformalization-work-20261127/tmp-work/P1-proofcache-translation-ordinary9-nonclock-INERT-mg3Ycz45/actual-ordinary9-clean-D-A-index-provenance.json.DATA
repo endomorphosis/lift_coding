@@ -1,0 +1,62 @@
+{
+  "A": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "A_index_metadata_verified_against_current_epoch": true,
+  "A_raw_Source_index_capture_claimed": false,
+  "D": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795741449710387210",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72514406",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795741449706387182",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "sha256": "a5d9497fe854dfaa4e40ba174393b221ba2f095db09579baa34de10364b99245"
+  },
+  "actual_paired_D_A_READ3": {
+    "bytes": 7227,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-isolated-P1-cache-translation-READ3-closed.json",
+    "sha256": "b643b0dfdf6e32d47e2b55cff1eb77bc409f09c52c55a36bcd2cb76fe4a82bbf"
+  },
+  "branch": {
+    "bytes": 41,
+    "full9": {
+      "st_ctime_ns": "1795741449713387231",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72514442",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795741449713106829",
+      "st_nlink": "1",
+      "st_size": "41",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/refs/heads/isolated/phase1-proof-cache-translation-agreement",
+    "sha256": "065ff8a4a44031e2f0b11084cf4a8afa9042e2ba876cf878a07c451819cac381"
+  },
+  "frozen": {
+    "bytes": 6190,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-isolated-Phase1-cache-translation-exact-two-local-freeze.json",
+    "sha256": "38999ef02d990f6bfb348c01a80455b00b58fed94283c153011bc3afbcf50b4a"
+  }
+}

@@ -1,0 +1,54 @@
+"""Add a versioned partition to the retained Reader cost function only."""
+import ast
+import difflib
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+PRIOR = Path('/tmp/decoder-training-stage-a-selector-observer-private-v01-CKyIGens/verify_standalone_git.py')
+raw = PRIOR.read_bytes()
+assert (len(raw), sha256(raw).hexdigest()) == (
+    44991, '2cf502a37fceafbd50a3610172dadbee282823460ce33a808512f843df25a5e4')
+before = raw.decode()
+after = before
+changes = (
+    ("def source32_paired_reader_reservation(",
+     "STAGE_A_RELOCATED_ALL_FRESH_RESERVATION = 'stage-a-source32-relocated-all-fresh/v1'\n\n\n"
+     "def source32_paired_reader_reservation("),
+    ('                                       retain_terminal_git_controls=False):\n',
+     '                                       retain_terminal_git_controls=False, capture_partition=None):\n'),
+    ("    if len(fresh_sources) != 12 or len(archived_sources) != 20:\n"
+     "        raise ValueError('exact Stage A partition of 12 fresh and 20 archived bodies required')\n",
+     "    if capture_partition is None:\n"
+     "        if len(fresh_sources) != 12 or len(archived_sources) != 20:\n"
+     "            raise ValueError('exact Stage A partition of 12 fresh and 20 archived bodies required')\n"
+     "    elif type(capture_partition) is not str or capture_partition != STAGE_A_RELOCATED_ALL_FRESH_RESERVATION:\n"
+     "        raise ValueError('unknown Stage A capture partition')\n"
+     "    elif len(fresh_sources) != 32 or len(archived_sources) != 0:\n"
+     "        raise ValueError('relocated Stage A requires exactly 32 fresh captures and zero archives')\n"),
+    ("    control_passes = 1 if retain_terminal_git_controls else 2\n",
+     "    if capture_partition is not None:\n"
+     "        pins = [git_guard_record['D_index'], git_guard_record['A_index'],\n"
+     "                *git_guard_record['exact_exclude_pins'], *guides, *fresh_sources, *control_reads]\n"
+     "        literal_paths = [row['path'] for row in pins]\n"
+     "        if (len(set(literal_paths)) != len(literal_paths) or\n"
+     "                any(type(path) is not str or str(Path(path)) != path or '..' in Path(path).parts\n"
+     "                    or path.startswith('//') for path in literal_paths)):\n"
+     "            raise ValueError('relocated Stage A requires distinct literal Source and control paths')\n"
+     "    control_passes = 1 if retain_terminal_git_controls else 2\n"),
+)
+for old, new in changes:
+    assert after.count(old) == 1, old
+    after = after.replace(old, new)
+new_ast = ast.parse(after)
+old_ast = ast.parse(before)
+old_helpers = [node for node in old_ast.body if getattr(node, 'name', '') != 'source32_paired_reader_reservation']
+new_helpers = [node for node in new_ast.body if getattr(node, 'name', '') != 'source32_paired_reader_reservation'
+               and not (isinstance(node, ast.Assign) and isinstance(node.targets[0], ast.Name)
+                        and node.targets[0].id == 'STAGE_A_RELOCATED_ALL_FRESH_RESERVATION')]
+assert [ast.dump(node) for node in old_helpers] == [ast.dump(node) for node in new_helpers]
+(HERE / 'verify_standalone_git.py').write_text(after)
+(HERE / 'verify_standalone_git.diff').write_text(''.join(difflib.unified_diff(
+    before.splitlines(keepends=True), after.splitlines(keepends=True),
+    fromfile=str(PRIOR), tofile=str(HERE / 'verify_standalone_git.py'))))
+print(len(after.encode()), sha256(after.encode()).hexdigest())

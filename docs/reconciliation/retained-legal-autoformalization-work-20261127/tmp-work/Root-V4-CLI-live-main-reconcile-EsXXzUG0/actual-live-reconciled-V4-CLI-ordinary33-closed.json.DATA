@@ -1,0 +1,301 @@
+{
+  "Source_READ3": {
+    "bytes": 2446,
+    "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/actual-live-ordinary33-Source-binding-ABI.json",
+    "sha256": "40e8efe6a05838d015075c47614d3e81626e855aa0f63541e6ce238ef3cfb873"
+  },
+  "Source_and_resource_and_parent_closed": true,
+  "actual_raw_JUnit": {
+    "bytes": 6106,
+    "logical_name": "junit.xml",
+    "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/actual-output/corpus-release-physical-v4-retained-type-current-review-ordinary33-run-result0-output1.bin",
+    "sha256": "d1ba609e94c9a4d10217fa2c6a4d3deee2aa9f3e68116b58f6310691dbfab06e"
+  },
+  "actual_report": {
+    "bytes": 996010,
+    "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/actual-output/complete-frozen-local-D-corpus-release-physical-v4-retained-type-current-review-ordinary33-existing-owner-report.json",
+    "sha256": "eecfe9703987364d818a9fe6448e1aa66da01efb9f9c17d6700274fbe417e297"
+  },
+  "canonical_adoption_or_publication": false,
+  "cli_normal_RUN_source_compile_sha256": "62ef7981b8cc8bfe3c04867aba88d2db3f735aaa57340fcddeb18ebca9502220",
+  "counts": {
+    "errors": 0,
+    "failures": 0,
+    "functions": 15,
+    "passed": 33,
+    "skipped": 0,
+    "tests": 33
+  },
+  "isolated_freeze": {
+    "bytes": 6102,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-live-reconciled-index-refreshed-freeze.json",
+    "sha256": "55a3b16ae1e00c7df30146a03cdde8ad98eda319ee2c3af386662dc4aabbb37a"
+  },
+  "ordered_cases": [
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_replay_refuses_genuinely_revoked_reviewer",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v3_existing_release_projects_declared_graph_eligibility",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_cli_projects_current_graph_eligibility_without_native_credit",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_declared_eligibility_keeps_native_refusal",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_projects_independently_observed_current_review",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_refuses_stale_wire_against_independent_current_review[revoked-registry]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_refuses_stale_wire_against_independent_current_review[changed-policy]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_refuses_stale_wire_against_independent_current_review[expiry]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_refuses_stale_wire_against_independent_current_review[dependency]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_refuses_stale_wire_against_independent_current_review[rollback]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_current_review_selection_preserves_legacy_default",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_checked_native_requires_independent_current_review_first",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_checked_native_requires_closed_selection_before_plan[missing-field]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_checked_native_requires_closed_selection_before_plan[unexpected-field]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_checked_native_fences_plan_and_handle_before_wire[missing-plan]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_checked_native_fences_plan_and_handle_before_wire[serialized-plan]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_checked_native_fences_plan_and_handle_before_wire[wrong-plan-digest]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_checked_native_refuses_unissued_exact_class_handle_before_wire",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_applies_selected_current_trust_to_original_signed_review[original]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_applies_selected_current_trust_to_original_signed_review[healthy]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_applies_selected_current_trust_to_original_signed_review[revoked]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_applies_selected_current_trust_to_original_signed_review[wrong-pin]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_cli_consumes_only_the_reloaded_retained_handoff[exact]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_cli_consumes_only_the_reloaded_retained_handoff[other-physical-request]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_cli_consumes_only_the_reloaded_retained_handoff[sibling-unit]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_cli_consumes_only_the_reloaded_retained_handoff[repinned-saved-bytes]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_cli_reassesses_current_trust_before_attaching_retained_type[healthy]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_physical_v4_cli_reassesses_current_trust_before_attaching_retained_type[revoked]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_current_review_cli_rejects_invalid_observation_before_physical_replay[missing-path]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_current_review_cli_rejects_invalid_observation_before_physical_replay[missing-digest]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_current_review_cli_rejects_invalid_observation_before_physical_replay[wrong-profile]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_current_review_cli_rejects_invalid_observation_before_physical_replay[wrong-digest]",
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py::test_current_review_cli_rejects_invalid_observation_before_physical_replay[duplicate-key]"
+  ],
+  "owned_terminal_session": 1314,
+  "schema": "actual-live-reconciled-V4-CLI-ordinary33-closed/v1",
+  "statutory_admission_or_model_or_Native_qualification": false,
+  "terminal_returncode": 0,
+  "witnesses": {
+    "collect": {
+      "lifecycle": {
+        "cleanup_confirmed": true,
+        "descendant_tracking_complete": true,
+        "group_scan_complete": true,
+        "kernel_containment_attested": false,
+        "leader": {
+          "birth_ticks": 475313970,
+          "parent_pid": 4076278,
+          "pid": 4076530,
+          "process_group_id": 4076530,
+          "session_id": 4076530
+        },
+        "leader_reaped": true,
+        "observation_errors": [],
+        "observed_descendants": [
+          {
+            "birth_ticks": 475313988,
+            "parent_pid": 4076530,
+            "pid": 4076636,
+            "process_group_id": 4076530,
+            "session_id": 4076530
+          }
+        ],
+        "ownership_is_sampled": true,
+        "parent": {
+          "birth_ticks": 475313946,
+          "pid": 4076278
+        },
+        "readers": {
+          "joined": 2,
+          "started": 2
+        },
+        "remaining_group_members": [],
+        "remaining_tracked_descendants": [],
+        "schema": "native-owned-tool-lifecycle@1",
+        "stdin_writer": {
+          "joined": 0,
+          "started": 0
+        },
+        "workspace": {
+          "device": 66306,
+          "inode": 1080986,
+          "removed": true
+        }
+      },
+      "raw_binding": {
+        "bytes": 165362,
+        "logical_name": "binding.json",
+        "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/actual-output/corpus-release-physical-v4-retained-type-current-review-ordinary33-collect-result0-output0.bin",
+        "sha256": "efbbff0fc621a9ea4ed0ea47879d14f1415aba8aaa1cc10fc634d8a214fae602"
+      },
+      "tests": {
+        "AST_to_code_observed": true,
+        "cache_policy": "bypass-read-only-for-selected-owning-test",
+        "code_execution_observed": true,
+        "code_filename": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+        "code_sha256": "7303e76a64c53b4d8ea730351d971ee5be7cc7256b3e4f238a796ac337c4dc75",
+        "compile_source_full9": {
+          "st_ctime_ns": "1795734594584760061",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "15909928",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734594584760061",
+          "st_nlink": "1",
+          "st_size": "294620",
+          "st_uid": "1000"
+        },
+        "compile_source_sha256": "f61a83b403b7d253b34b473d74d6411e7151f4ad26cf5075584c51c31b4780cb",
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+        "returned_code_identity_matches": true,
+        "schema": "actual-selected-test-source-AST-code-witness/v1",
+        "selected_cache_reads_bypassed": 1,
+        "source_after": {
+          "bytes": 294620,
+          "full9": {
+            "st_ctime_ns": "1795734594584760061",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "15909928",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795734594584760061",
+            "st_nlink": "1",
+            "st_size": "294620",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+          "sha256": "f61a83b403b7d253b34b473d74d6411e7151f4ad26cf5075584c51c31b4780cb",
+          "stable_FD_path_before_after": true
+        },
+        "source_before": {
+          "bytes": 294620,
+          "full9": {
+            "st_ctime_ns": "1795734594584760061",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "15909928",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795734594584760061",
+            "st_nlink": "1",
+            "st_size": "294620",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+          "sha256": "f61a83b403b7d253b34b473d74d6411e7151f4ad26cf5075584c51c31b4780cb",
+          "stable_FD_path_before_after": true
+        },
+        "source_bytes": 294620,
+        "source_sha256": "f61a83b403b7d253b34b473d74d6411e7151f4ad26cf5075584c51c31b4780cb",
+        "source_to_AST_observed": true
+      }
+    },
+    "run": {
+      "lifecycle": {
+        "cleanup_confirmed": true,
+        "descendant_tracking_complete": true,
+        "group_scan_complete": true,
+        "kernel_containment_attested": false,
+        "leader": {
+          "birth_ticks": 475314058,
+          "parent_pid": 4076278,
+          "pid": 4077089,
+          "process_group_id": 4077089,
+          "session_id": 4077089
+        },
+        "leader_reaped": true,
+        "observation_errors": [],
+        "observed_descendants": [
+          {
+            "birth_ticks": 475314079,
+            "parent_pid": 4077089,
+            "pid": 4077282,
+            "process_group_id": 4077089,
+            "session_id": 4077089
+          }
+        ],
+        "ownership_is_sampled": true,
+        "parent": {
+          "birth_ticks": 475313946,
+          "pid": 4076278
+        },
+        "readers": {
+          "joined": 2,
+          "started": 2
+        },
+        "remaining_group_members": [],
+        "remaining_tracked_descendants": [],
+        "schema": "native-owned-tool-lifecycle@1",
+        "stdin_writer": {
+          "joined": 0,
+          "started": 0
+        },
+        "workspace": {
+          "device": 66306,
+          "inode": 1080986,
+          "removed": true
+        }
+      },
+      "raw_binding": {
+        "bytes": 250072,
+        "logical_name": "binding.json",
+        "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/actual-output/corpus-release-physical-v4-retained-type-current-review-ordinary33-run-result0-output0.bin",
+        "sha256": "8c88887abdf785237f7d72cad9aabb6c12a41280926abe1d0eba66027b941bbf"
+      },
+      "tests": {
+        "AST_to_code_observed": true,
+        "cache_policy": "bypass-read-only-for-selected-owning-test",
+        "code_execution_observed": true,
+        "code_filename": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+        "code_sha256": "7303e76a64c53b4d8ea730351d971ee5be7cc7256b3e4f238a796ac337c4dc75",
+        "compile_source_full9": {
+          "st_ctime_ns": "1795734594584760061",
+          "st_dev": "66306",
+          "st_gid": "1000",
+          "st_ino": "15909928",
+          "st_mode": "33204",
+          "st_mtime_ns": "1795734594584760061",
+          "st_nlink": "1",
+          "st_size": "294620",
+          "st_uid": "1000"
+        },
+        "compile_source_sha256": "f61a83b403b7d253b34b473d74d6411e7151f4ad26cf5075584c51c31b4780cb",
+        "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+        "returned_code_identity_matches": true,
+        "schema": "actual-selected-test-source-AST-code-witness/v1",
+        "selected_cache_reads_bypassed": 1,
+        "source_after": {
+          "bytes": 294620,
+          "full9": {
+            "st_ctime_ns": "1795734594584760061",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "15909928",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795734594584760061",
+            "st_nlink": "1",
+            "st_size": "294620",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+          "sha256": "f61a83b403b7d253b34b473d74d6411e7151f4ad26cf5075584c51c31b4780cb",
+          "stable_FD_path_before_after": true
+        },
+        "source_before": {
+          "bytes": 294620,
+          "full9": {
+            "st_ctime_ns": "1795734594584760061",
+            "st_dev": "66306",
+            "st_gid": "1000",
+            "st_ino": "15909928",
+            "st_mode": "33204",
+            "st_mtime_ns": "1795734594584760061",
+            "st_nlink": "1",
+            "st_size": "294620",
+            "st_uid": "1000"
+          },
+          "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+          "sha256": "f61a83b403b7d253b34b473d74d6411e7151f4ad26cf5075584c51c31b4780cb",
+          "stable_FD_path_before_after": true
+        },
+        "source_bytes": 294620,
+        "source_sha256": "f61a83b403b7d253b34b473d74d6411e7151f4ad26cf5075584c51c31b4780cb",
+        "source_to_AST_observed": true
+      }
+    }
+  }
+}

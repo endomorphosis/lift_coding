@@ -1,0 +1,185 @@
+"""Paid confirmation bounds using pinned original cost and threshold fixtures."""
+
+from dataclasses import replace
+from hashlib import sha256
+import json
+from pathlib import Path
+import sys
+from types import SimpleNamespace
+import unittest
+
+
+HERE = Path(__file__).resolve().parent
+RETAINED = HERE.parent / "decoder-training-threshold-cost-evidence-private-v01/test_cost_evidence.py"
+BEFORE = HERE.parent / "decoder-training-projector-selected-release-private-v01-e8w9qPhY/study.py"
+POST = HERE / "study.py"
+WALL = "wall_seconds"
+REPORT = {}
+
+
+def load_fixture(study_path):
+    raw = RETAINED.read_bytes()
+    assert sha256(raw).hexdigest() == "cca0a3e70e81120d83fda480f7a591a92968f07a81f3ce940c8acd470ac02862"
+    expression = b'runpy.run_path(str(HERE / "study.py"))'
+    assert raw.count(expression) == 1
+    adapted = raw.replace(expression, b"runpy.run_path(str(SELECTED_STUDY_PATH))")
+    namespace = {"__name__": "retained_cost_fixture", "__file__": str(RETAINED),
+                 "SELECTED_STUDY_PATH": study_path}
+    exec(compile(adapted, str(RETAINED), "exec"), namespace)
+    return namespace
+
+
+held = load_fixture(POST)
+study_owner, gate, Case = (held[name] for name in ("module", "gate", "Case"))
+
+
+def reframed(case, owner, **changes):
+    """Recommit the original typed fixture under a new selected horizon or cap."""
+    case.study = replace(case.study, **changes)
+    study_pin = owner.commitment(case.study)
+    case.plan = replace(case.plan, study_sha256=study_pin)
+    case.base = tuple(replace(attempt, study_sha256=study_pin) for attempt in case.base)
+    by_id = {attempt.attempt_sha256: attempt for attempt in case.base}
+    observations = []
+    for interval, charge in case.observations:
+        attempt = by_id[interval.attempt_sha256]
+        look = None if interval.stage == "close" else next(row for row in attempt.assessments if row.look == interval.stage)
+        observations.append((replace(interval, subject_sha256=owner.meter_subject(attempt, look)), charge))
+    case.observations = observations
+    return case
+
+
+def compare(case, attempts, evidence, *, bounds=True, verify=None, validator=gate):
+    pin = study_owner.commitment
+    selected = pin(evidence)
+    return study_owner.compare_verified_contrasts(validator, study=case.study, expected_study_sha256=pin(case.study),
+        attempts=attempts, expected_attempts_sha256=pin(attempts), contrast_plan=case.plan,
+        expected_contrast_plan_sha256=pin(case.plan), cost_evidence=evidence,
+        expected_cost_evidence_sha256=selected, verify_cost_owner=verify or (lambda offered: offered == selected),
+        include_confirmation_cost_bounds=bounds)
+
+
+def wall_output(report):
+    return held["only"](report["confirmation_cost_bounds"], "pairs", clock=WALL)
+
+
+def make_look_two_confirm(case):
+    baseline, candidate = case.base
+    first, succeeding, *remaining = candidate.assessments
+    case.base = baseline, replace(candidate, assessments=(replace(first, gates=dict(succeeding.gates)),
+                                                           succeeding, *remaining))
+
+
+class ConfirmationBoundControls(unittest.TestCase):
+    def test_missing_confirmation_bracket_controls_common_horizon(self):
+        for horizon, attainment in ((29.0, 0), (30.0, None), (40.0, None), (48.0, 1), (100.0, 1)):
+            with self.subTest(horizon=horizon):
+                case = reframed(Case(), study_owner, horizons=(horizon, 150.0, 10.0))
+                case.with_interval(1, "look-3", wall=None)
+                attempts, evidence = case.seal()
+                report = compare(case, attempts, evidence)
+                pair = wall_output(report)
+                self.assertEqual(pair["horizon"], horizon)
+                candidate = pair["candidate"]
+                self.assertEqual(candidate["attainment"], attainment)
+                self.assertEqual(candidate["confirming_look"], "look-3")
+                self.assertIsNone(candidate["observed_confirmation_seconds"])
+                self.assertEqual((candidate["lower_seconds"], candidate["upper_seconds"]), (30.0, 48.0))
+                self.assertEqual(candidate["lower_meter_sha256"], attempts[1].assessments[1].meter.record_sha256)
+                self.assertEqual(candidate["upper_meter_sha256"], attempts[1].closing_meter.record_sha256)
+                old = held["only"](report, "pairs", clock=WALL)
+                self.assertIsNone(old["observed_candidate_confirmation"])
+                self.assertIsNone(old["candidate_minus_baseline_seconds_if_both_observed"])
+                if horizon == 48.0:
+                    REPORT["wall_bound_evidence"] = candidate
+
+    def test_exact_confirmation_is_retained_even_after_the_horizon(self):
+        case = reframed(Case(), study_owner, horizons=(40.0, 150.0, 10.0))
+        attempts, evidence = case.seal()
+        candidate = wall_output(compare(case, attempts, evidence))["candidate"]
+        self.assertEqual(candidate["attainment"], 0)
+        self.assertEqual(candidate["observed_confirmation_seconds"], 45.0)
+        self.assertEqual((candidate["lower_seconds"], candidate["upper_seconds"]), (45.0, 45.0))
+        meter = attempts[1].assessments[2].meter.record_sha256
+        self.assertEqual((candidate["lower_meter_sha256"], candidate["upper_meter_sha256"]), (meter, meter))
+
+    def test_nearest_later_look_supplies_upper_bound_before_close(self):
+        case = reframed(Case(), study_owner, horizons=(45.0, 150.0, 10.0))
+        make_look_two_confirm(case)
+        case.with_interval(1, "look-2", wall=None)
+        attempts, evidence = case.seal()
+        candidate = wall_output(compare(case, attempts, evidence))["candidate"]
+        self.assertEqual(candidate["attainment"], 1)
+        self.assertEqual(candidate["confirming_look"], "look-2")
+        self.assertIsNone(candidate["observed_confirmation_seconds"])
+        self.assertEqual((candidate["lower_seconds"], candidate["upper_seconds"]), (10.0, 45.0))
+        self.assertEqual(candidate["upper_meter_sha256"], attempts[1].assessments[2].meter.record_sha256)
+        self.assertNotEqual(candidate["upper_meter_sha256"], attempts[1].closing_meter.record_sha256)
+
+    def test_missing_all_wall_keeps_unbounded_confirmation_cost(self):
+        case = Case()
+        for stage in (*case.study.schedule, "close"):
+            case.with_interval(1, stage, wall=None)
+        candidate = wall_output(compare(case, *case.seal()))["candidate"]
+        self.assertEqual(candidate["confirming_look"], "look-3")
+        for name in ("attainment", "observed_confirmation_seconds", "lower_seconds", "upper_seconds",
+                     "lower_meter_sha256", "upper_meter_sha256"):
+            self.assertIsNone(candidate[name], name)
+
+    def test_passing_look_without_limiting_clock_remains_cap_blocked(self):
+        case = Case(capped=True)
+        make_look_two_confirm(case)
+        case.with_interval(1, "look-2", wall=None)
+        report = compare(case, *case.seal())
+        candidate = wall_output(report)["candidate"]
+        self.assertIsNone(candidate["attainment"])
+        old = held["only"](report, "attempts", arm=case.study.arms[1][0])
+        self.assertEqual(old["confirmation_budget_block"], (WALL, 100.0, "confirmation_limiting_clock_unavailable"))
+
+    def test_terminal_nonattainment_keeps_raw_confirmation_cost_absent(self):
+        case = Case(capped=True)
+        candidate = wall_output(compare(case, *case.seal()))["candidate"]
+        self.assertEqual(candidate["attainment"], 0)
+        for name in ("confirming_look", "observed_confirmation_seconds", "lower_seconds", "upper_seconds",
+                     "lower_meter_sha256", "upper_meter_sha256"):
+            self.assertIsNone(candidate[name], name)
+
+    def test_owner_refusal_precedes_any_threshold_evaluation(self):
+        case = Case()
+        attempts, evidence = case.seal()
+        offered = []
+
+        def refuse(expected):
+            offered.append(expected)
+            return False
+
+        def no_evaluation(**_):
+            self.fail("owner refusal reached threshold evaluation")
+
+        validator = SimpleNamespace(**(vars(gate) | {"evaluate_threshold": no_evaluation}))
+        with self.assertRaisesRegex(ValueError, "resource owner refused"):
+            compare(case, attempts, evidence, verify=refuse, validator=validator)
+        self.assertEqual(offered, [study_owner.commitment(evidence)])
+
+    def test_default_and_false_reports_equal_the_exact_prior_owner(self):
+        assert sha256(BEFORE.read_bytes()).hexdigest() == "09afd1fd3f35f3c1612eecb84a5b5d091cf7edb2455526b8e9a9c02064b36f44"
+        before = load_fixture(BEFORE)
+        prior, current = before["Case"](), Case()
+        for case in (prior, current):
+            case.with_interval(1, "look-3", wall=None)
+        expected = prior.compare(*prior.seal())
+        attempts, evidence = current.seal()
+        self.assertEqual(current.compare(attempts, evidence), expected)
+        self.assertEqual(compare(current, attempts, evidence, bounds=False), expected)
+        added = compare(current, attempts, evidence)
+        self.assertTrue(added["confirmation_cost_bounds"]["schema"])
+        self.assertTrue(added["confirmation_cost_bounds"]["contrasts"])
+        self.assertEqual({key: value for key, value in added.items() if key != "confirmation_cost_bounds"}, expected)
+
+
+if __name__ == "__main__":
+    controls = held["CostEvidenceControls"] if sys.argv[1:] == ["--retained"] else ConfirmationBoundControls
+    result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(controls))
+    if result.wasSuccessful():
+        print(json.dumps(REPORT, sort_keys=True))
+    raise SystemExit(not result.wasSuccessful())

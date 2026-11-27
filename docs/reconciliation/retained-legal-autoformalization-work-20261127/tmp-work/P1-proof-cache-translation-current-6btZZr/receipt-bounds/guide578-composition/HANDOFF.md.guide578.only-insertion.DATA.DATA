@@ -1,0 +1,5 @@
+
+
+## Evidence578 — Typed execution bounds in new proof receipts
+
+New proof receipts now carry the typed execution bounds when the result metadata omits the bounds field. Explicit values, including partial, empty and null values, retain their existing meaning. Stored receipt identities and the default translation ceiling are preserved. All 22 ordinary software cases passed, including the 15 retained cases and seven new cases. The qualification used in-memory attestation callbacks. [Ordinary qualification](/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-Phase7-current-receipt-bounds-ordinary22-closed.json) · [Code publication](/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-Phase7-receipt-bounds-ordinary22-three-FF-publication.json)

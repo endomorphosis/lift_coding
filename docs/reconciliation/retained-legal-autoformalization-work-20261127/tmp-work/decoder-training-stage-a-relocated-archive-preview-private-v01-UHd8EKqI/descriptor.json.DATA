@@ -1,0 +1,127 @@
+{
+  "actual_detached_python_rows": 1213,
+  "actual_detached_retained_rows": 1218,
+  "candidate": {
+    "bytes": 137453,
+    "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/verify_rebind_capture.py",
+    "sha256": "a5c1527b72f47c92e71a3a4ce81f8d027aca9ec2aaaac0df32ff5e9c95e37c8f"
+  },
+  "composed_captures_were_modelled": true,
+  "current_independent_index_read": null,
+  "diff": {
+    "bytes": 10447,
+    "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/verify_rebind_capture.diff",
+    "sha256": "f7162b4f14a5e051c366a154cf751cb854aa25ce6b162e65ff681146f6f05a5b"
+  },
+  "dispatch_authority": false,
+  "drivers": {
+    "compose.py": {
+      "bytes": 751,
+      "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/compose.py",
+      "sha256": "522dcbb3a591498a8de51f53abefabc2e6a474ce56df05fbe44e38693840f934"
+    },
+    "relocation.py.IN": {
+      "bytes": 10010,
+      "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/relocation.py.IN",
+      "sha256": "9853162ca30160238b8c78230b5c7d4a917685961e4df6c5dcbcbd1329a6f387"
+    },
+    "replay_preview.py": {
+      "bytes": 2254,
+      "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/replay_preview.py",
+      "sha256": "04cd244bb20b44a87326c8197addc2642c465bcb4eab19b73af816a64663443f"
+    },
+    "seal.py": {
+      "bytes": 10580,
+      "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/seal.py",
+      "sha256": "2886b01c92d0269887c9225b9d904dd9a9c878a95b2a742d4292dd69356f094e"
+    }
+  },
+  "earlier_modelled_run": {
+    "first-run.py.DATA": {
+      "bytes": 14814,
+      "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/test_relocated_source32.first-run.py.DATA",
+      "sha256": "7815c9f67ac8c672bf98af3da94fabfd6b2e9b74b321b2f872e381d897f45bce"
+    },
+    "stderr": {
+      "bytes": 1034,
+      "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/test_relocated_source32.stderr",
+      "sha256": "54206c9759e04d0f72036a1a7c0d261340e7e84a52992966a3f7bc12c0634c27"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/test_relocated_source32.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "execution_selected": false,
+  "explicit_partial_costs": {
+    "bytes": 460,
+    "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/guide572-explicit-cost-subtotal.INERT.json",
+    "sha256": "7d5cceb3c2a4692350bf34583715954d766f86e6db71fc15db2696ec779feb12"
+  },
+  "historical_archive_count": 20,
+  "live_owner_selection": null,
+  "local_passing_cases": 6,
+  "logs": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/test_relocated_source32.final.rc",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 1034,
+      "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/test_relocated_source32.final.stderr",
+      "sha256": "71f1c9df336f0f1705fee8f2932db4194f65f77e09b990f0b6342988c5cc3da4"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/test_relocated_source32.final.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "non_index_content_changes_for_owner_recheck": {
+    "A": [
+      ".git/info/exclude"
+    ],
+    "D": [
+      ".git/info/exclude",
+      "tests/unit/logic/autoformal/test_corpus_release_cli.py",
+      "ipfs_datasets_py/logic/autoformal/supervisor_loop.py",
+      "scripts/ops/legal_ir/run_autoformal_supervisor.py"
+    ]
+  },
+  "paired_reservation": null,
+  "planned_current_body_reads": 32,
+  "preview": {
+    "bytes": 556438,
+    "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/guide572-all-fresh-preview.INERT.json",
+    "sha256": "e682f614e50a3e97af25fdf532df48607dbc52085571a9b84d494bbd46ff4cfb"
+  },
+  "prior_owner": {
+    "bytes": 127443,
+    "path": "/tmp/decoder-training-stage-a-a0-archive-handoff-private-v01-UMiyG7nf/verify_rebind_capture.py",
+    "sha256": "b81d390abb0b2972b70268a16ddace18ed370f54ed90d1693dc00b93587cd9be"
+  },
+  "published_expected_roots": {
+    "A": {
+      "HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+      "clean_worktree_and_index": true,
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tree": "c670052e6e12473d974382e455c7aef4adb6aebe"
+    },
+    "D": {
+      "HEAD": "8996e160d2628b0fd35f1166a6dae6957582c243",
+      "clean_worktree_and_index": true,
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets",
+      "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tree": "07d8b2b6ef184443fb7b851cf252f5c78c4a8a69"
+    }
+  },
+  "schema": "private-stage-a-relocated-all-fresh-candidate/v1",
+  "test": {
+    "bytes": 15281,
+    "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/test_relocated_source32.py",
+    "sha256": "a6fc9a9c82c05907660844f7efa654ca8dabf27c77e2b0fef5f861ddbdf22bcd"
+  }
+}

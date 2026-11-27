@@ -1,0 +1,118 @@
+{
+  "changed_retained_bodies": {
+    ".git/index": {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795736943626072478",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "1086707",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795736943625072468",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/.git/index",
+      "sha256": "c3be915a700050787e42001811b05aab2edebf0737fd3c207f23674b862cbee0"
+    },
+    "ipfs_datasets_py/logic/backends/kernel/lean.py": {
+      "bytes": 104341,
+      "full9": {
+        "st_ctime_ns": "1795735927039492753",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "2796373",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735927039492753",
+        "st_nlink": "1",
+        "st_size": "104341",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+    },
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "bytes": 123945,
+      "full9": {
+        "st_ctime_ns": "1795735927039492753",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "48802439",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795735927039492753",
+        "st_nlink": "1",
+        "st_size": "123945",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/tests/integration/logic/backends/test_kernel_backends.py",
+      "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945"
+    }
+  },
+  "current_Git_stage0_and_HEAD_role_join": null,
+  "current_independent_D_index_read": null,
+  "current_pair_quote": null,
+  "datasets_root": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets",
+  "dispatch_authority": false,
+  "headroom_after_retained_guide573_bytes": 6356992,
+  "independent_D_index_payload_floor": 7070598,
+  "independent_D_index_payload_gap": 713606,
+  "paired_allocation": null,
+  "prior_D": "8996e160d2628b0fd35f1166a6dae6957582c243",
+  "protected_body_full9_changes": 32,
+  "protected_body_sha256_and_size_matches": 32,
+  "published_A": "219ba3da0f62f772801d71715e22c506faa21126",
+  "published_D": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+  "published_D_tree": "8b2d09183375036dba868e4607646ee407007fc5",
+  "retained_full9_changes": 1131,
+  "retained_refs": {
+    "cap": {
+      "bytes": 1276,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/Source-only-Guide573-full-retained-cap.json",
+      "sha256": "60ec66c0cc0476a13565f961f1e6b0d09a80c55b6b783b85745700fafc22ce6d"
+    },
+    "code_publication": {
+      "bytes": 14753,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-P1-Lean-ordinary92-and-Native2-three-FF-publication.json",
+      "sha256": "1f52975ebd4cc8572b2a0da750a173d1ca5596c643f21e8dd2b5c1de0a02b5d6"
+    },
+    "metadata": {
+      "bytes": 850463,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-live-reconciled-outer1610-epoch.json",
+      "sha256": "9af3058e7567f9e7e19ce70c6c30d33ee4dfe9d50bbfe0c05aedfe84eec56bd8"
+    },
+    "publication": {
+      "bytes": 3117,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-Guide573-four-docs-three-FF-publication.json",
+      "sha256": "1a83a7c66b2e726b4f6605039fbd5bad4296f6cb3f008e965436c68a9e89e8c7"
+    },
+    "read_close": {
+      "bytes": 6319,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-live-reconciled-Source42-content-epoch-closed.json",
+      "sha256": "3fb04725ccfc2b5c4a5fc0a60392bfed468b38adeec9b9a67dad8266d113351e"
+    },
+    "write_close": {
+      "bytes": 6558,
+      "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-Guide573-four-docs-Source-closed-and-frozen.json",
+      "sha256": "d38bd70d2b0fd73526cd606bdd36fbd4eada351b1c22bbd1185363cadafc2139"
+    }
+  },
+  "retained_rows_mapped": 1218,
+  "schema": "private-guide573-stage-a-metadata-reconciliation/v1",
+  "writer_expected_D_index": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795736943626072478",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "1086707",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795736943625072468",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/datasets/.git/index",
+    "sha256": "c3be915a700050787e42001811b05aab2edebf0737fd3c207f23674b862cbee0"
+  }
+}

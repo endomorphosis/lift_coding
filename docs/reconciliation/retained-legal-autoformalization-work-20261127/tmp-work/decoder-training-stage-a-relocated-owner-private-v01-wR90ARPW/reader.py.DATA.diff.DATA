@@ -1,0 +1,144 @@
+--- /tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/reader.py.DATA
++++ /tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW/reader.py.DATA
+@@ -22,7 +22,7 @@
+ output_created=False
+ 
+ def admit(n):
+-    if type(n) is not int or n<0 or spent['bytes']+n>100663296:
++    if type(n) is not int or n<0 or spent['bytes']+n>report.get('selected_stage_a_operator_envelope',100663296):
+         raise RuntimeError('selected READ envelope insufficient before read')
+     if before['used']+spent['bytes']+n>before['global_cap'] or before['internal_used']+spent['bytes']+n>before['internal_cap']:
+         raise RuntimeError('shared Source allowance insufficient before read')
+@@ -539,6 +539,132 @@
+                    logical_epochs=commitments,archive_committed=True)
+     return deepcopy(attempt)
+ 
++
++
++def run_selected_relocated_stage_a_owner(preview, *, startup, expected_startup_sha256,
++        reader_selection, verify_startup, verify_reader_selection, verify_relocation_owner,
++        load_source, cleanup_source, epoch_api, git_api, io, read_stage_zero, deadline):
++    """Run the original Reader in its selected owner scope and report child closeout."""
++    global source
++
++    def encoded(value):
++        return json.dumps(value,sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False).encode()
++
++    def in_window():
++        return chosen['not_before_utc_ns'] <= time.time_ns() < chosen['deadline_utc_ns'] and time.monotonic() < deadline
++
++    raw_startup, raw_reader, raw_plan = map(encoded,(startup,reader_selection,preview))
++    chosen,picked,plan = map(json.loads,(raw_startup,raw_reader,raw_plan))
++    fields = {'schema','reader_selection_sha256','preview_sha256','ledger_before','Source_envelope',
++              'terminal_receipt_max_bytes','output_root','not_before_utc_ns','deadline_utc_ns',
++              'source_code','source_original_module_path'}
++    if (not __debug__ or type(chosen) is not dict or set(chosen) != fields
++            or chosen['schema'] != 'selected-existing-StageA-Reader-owner-startup/v1'
++            or H(raw_startup) != expected_startup_sha256 or chosen['reader_selection_sha256'] != H(raw_reader)
++            or chosen['preview_sha256'] != H(raw_plan) or picked.get('plan_sha256') != H(raw_plan)
++            or picked.get('schema') != STAGE_A_RELOCATED_SELECTION):
++        raise ValueError('exact original Stage A startup, Reader selection and preview required')
++    integer_fields = ('Source_envelope','terminal_receipt_max_bytes','not_before_utc_ns','deadline_utc_ns')
++    if (any(type(chosen[key]) is not int or chosen[key] <= 0 for key in integer_fields)
++            or any(type(picked.get(key)) is not int or picked[key] <= 0 for key in
++                   ('maximum_core_bytes','maximum_matrix_write_bytes','maximum_run_seconds'))
++            or type(deadline) not in (int,float) or not 0 < deadline-time.monotonic() <= picked['maximum_run_seconds']
++            or not in_window() or chosen['ledger_before'] != before
++            or chosen['Source_envelope'] != request['Source_envelope']
++            or source is not None or report.get('Source_contexts') != [] or report.get('errors') != []
++            or 'stage_a_owner_startup_sha256' in report or 'stage_a' in report
++            or not all(callable(fn) for fn in (verify_startup,verify_reader_selection,verify_relocation_owner,
++                                               load_source,cleanup_source,read_stage_zero))):
++        raise ValueError('unentered Stage A owner, selected budget and active launch window required')
++    roots = tuple(plan['reader_inputs']['current_roots'][role]['root'] for role in ('D','A'))
++    git_scope = git_api['verify_standalone_git'].__globals__
++    if (len(set(roots)) != 2 or (request['root'],request['additional_A']['root']) != roots
++            or request['actual_modes'] != dict.fromkeys(roots,'read')
++            or (git_scope.get('R'),git_scope.get('A')) != tuple(map(Path,roots))
++            or chosen['output_root'] != picked['output_root'] or chosen['output_root'] != str(OUT)
++            or not OUT.is_absolute() or '..' in OUT.parts or any(OUT.is_relative_to(root) for root in roots)
++            or verify_startup(expected_startup_sha256,H(raw_reader),roots,deadline) is not True
++            or not in_window() or encoded(startup) != raw_startup or encoded(reader_selection) != raw_reader
++            or encoded(preview) != raw_plan):
++        raise ValueError('original owner refused exact startup or selection changed')
++    if OUT.resolve() != OUT or os.path.lexists(OUT):
++        raise ValueError('fresh literal private Stage A output required')
++    code = chosen['source_code']
++    source_path = chosen['source_original_module_path']
++    if (type(code) is not dict or set(code) != {'path','bytes','sha256','full9'}
++            or code['bytes'] != 10375 or code['sha256'] !=
++                '42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9'
++            or type(source_path) is not str or not Path(source_path).is_absolute()
++            or type(code['path']) is not str or not Path(code['path']).is_absolute()
++            or any(Path(code['path']).is_relative_to(root) for root in roots)
++            or Path(code['path']).resolve(strict=True) != Path(code['path'])):
++        raise ValueError('exact approved Source42 control and module path required')
++    cap = chosen['Source_envelope']
++    terminal_max = chosen['terminal_receipt_max_bytes']
++    reserve_terminal = 2*terminal_max+1
++    report['selected_stage_a_operator_envelope'] = cap
++    admit(picked['maximum_core_bytes']+picked['maximum_matrix_write_bytes']+code['bytes']+1+reserve_terminal)
++    report.update(stage_a_owner_startup_sha256=expected_startup_sha256,
++                  selected_stage_a_operator_envelope=cap-reserve_terminal,
++                  selected_stage_a_terminal_reservation=reserve_terminal,
++                  Root_selected=True,operator_pid=os.getpid(),read_complete=False,owned_module_closed=False,
++                  schema='actual-existing-StageA-v3-Reader-child/v1')
++    parents(OUT)
++    OUT.mkdir(mode=0o700)
++    (OUT/'raw').mkdir(mode=0o700)
++    (OUT/'matrices').mkdir(mode=0o700)
++    try:
++        leaf(code)
++        raw = control_read(code,'approved_existing_Source42_code')
++        leaf(code)
++        if len(raw) != code['bytes'] or H(raw) != code['sha256'] or not in_window():
++            raise ValueError('Source42 pin or owner startup deadline changed')
++        source = load_source(raw,source_path)
++        if tuple(str(source.canonical_source_root(root)) for root in roots) != roots or not in_window():
++            raise ValueError('Source42 root or deadline changed before Stage A')
++        result = read_selected_stage_a_epoch(plan,reader_selection=picked,
++            expected_selection_sha256=H(raw_reader),verify_reader_selection=verify_reader_selection,
++            verify_phase7_owner=None,verify_relocation_owner=verify_relocation_owner,epoch_api=epoch_api,
++            git_api=git_api,io=io,read_stage_zero=read_stage_zero,deadline=deadline)
++        report['read_complete'] = result['archive_committed'] is True and in_window()
++        if not report['read_complete']:
++            raise ValueError('Stage A Reader did not commit within the original launch window')
++    except Exception as error:
++        report['errors'].append(dict(type=type(error).__name__,message=str(error),traceback=traceback.format_exc()))
++    finally:
++        contexts = report['Source_contexts']
++        exited = all(row['exit_returned'] is True for row in contexts)
++        report['Source_closed'] = contexts == [
++            {'root':root,'mode':'read','entered':True,'exit_returned':True} for root in sorted(roots)]
++        if source is not None and exited:
++            try:
++                report['owned_module_closed'] = cleanup_source(source) is True
++            except Exception as error:
++                report['errors'].append(dict(type=type(error).__name__,phase='owned_module_cleanup',
++                                             message=str(error),traceback=traceback.format_exc()))
++            if report['owned_module_closed']:
++                source = None
++    if not exited or source is not None:
++        return None
++
++    report['selected_stage_a_operator_envelope'] = cap
++    report['explicit_IO_before_closeout'] = dict(spent)
++    report['full_Source_envelope_retained'] = cap
++    terminal_body = encoded(report)
++    if len(terminal_body)>terminal_max:
++        raise ValueError('selected Stage A terminal receipt exceeds its reserved bound')
++    admit(2*len(terminal_body)+1)
++    spent['bytes'] += len(terminal_body)
++    receipt = seal(OUT/'actual-existing-StageA-v3-Reader-child.json',terminal_body)
++    if control_read(receipt,'exact_stage_a_child_closeout_readback') != terminal_body:
++        raise ValueError('selected Stage A child receipt differs after private readback')
++    for directory in (OUT, OUT.parent):
++        fd = os.open(directory,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
++        try:
++            os.fsync(fd)
++        finally:
++            os.close(fd)
++    return receipt
+ 
+ try:
+     selection=json.loads(control_read(SEL,'Root_Source_READ_selection'))

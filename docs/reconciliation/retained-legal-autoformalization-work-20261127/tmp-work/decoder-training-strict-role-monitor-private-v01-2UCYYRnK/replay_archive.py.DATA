@@ -1,0 +1,87 @@
+"""Replay retained generator outputs with no checkout or runtime access."""
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import sys
+
+HERE=Path(__file__).resolve().parent
+ROOT=HERE.parent
+OLD=ROOT/'decoder-training-selective-prefix-inspection-private-v01-PV9ezANr'
+DIAG=ROOT/'decoder-training-source62-opening-role-private-v01-arF8Pkiw'
+
+
+def check_open(event,args):
+    if event=='open' and isinstance(args[0],(str,bytes)):
+        path=Path(os.fsdecode(args[0]))
+        if any(role in path.parts for role in ('.git','datasets','accelerate')) or path.is_relative_to('/home/barberb/lift_coding'):
+            raise AssertionError(f'checkout content excluded from replay: {path}')
+    if event.startswith('socket.') or event in ('subprocess.Popen','os.system','os.exec','os.posix_spawn'):
+        raise AssertionError(f'external work excluded from replay: {event}')
+
+
+def exact(path,pin):
+    raw=path.read_bytes()
+    assert sha256(raw).hexdigest()==pin,path
+    return raw
+
+
+def load(path,pin):
+    scope={'__name__':'retained_monitor_replay','__file__':str(path)}
+    exec(compile(exact(path,pin),str(path),'exec'),scope)
+    return scope
+
+
+def owners():
+    candidate=load(HERE/'readback.py','507a250561a39112b82352da5f5b3e58e8d1829d00d960063a931289d2187e57')
+    archived=candidate['load'](candidate['QWEN_SOURCE'])
+    fields,shape=archived['selected_contracts']({p:archived['read'](p,n,h) for p,n,h in archived['PRIORS'][2:]})
+
+    def watch(body):
+        return candidate['AppendOnlyCodecPrefixMonitor'](archived['structural_prefix'],fields,shape,
+            max_body_bytes=len(body),max_inspected_bytes=65536,wire_profile=candidate['STRICT_ROLE_ORDER_WIRE_PROFILE'])
+
+    return candidate,watch
+
+
+def replay():
+    candidate,watch=owners()
+    previous=exact(OLD/'final-archive.stdout','4a049df9680fb32536dc771d6f933c5f176281052afc86f0b39c2939948e8482')
+    assert candidate['verify_append_only_monitor']()==json.loads(previous)
+    diag=load(DIAG/'replay.py','6ba564450d29eb54467a6af999db317404b55cc998a44347ab4a85eeeda41299')
+    expected=json.loads(exact(DIAG/'diagnostic-first.json','c4281e7c7ee971b8bf79fce1313ffdf5f72735b5c0145312be55dfb9ca382500'))
+    grouped,_,_,original=diag['collect']()
+    original_cases={row['row']:row for row in expected['rows']}
+    outputs={}
+    later_tokens=0
+    for arm,rows in grouped.items():
+        outputs[arm]=[]
+        for row in rows:
+            body,ends=row['body'],row['ends']
+            watcher=watch(body)
+            for start,end in zip((0,*ends[:-1]),ends,strict=True):
+                state=watcher.observe(body[start:end])
+                if state!='watching':
+                    break
+            reading=watcher.result()
+            saved=original_cases[row['row']]['arms'][arm]['strict_wire_witness']
+            event=reading['obstruction']
+            assert state=='irreversible_codec_prefix' and event['issue']==saved['issue']
+            assert event['body_token_position']==5==saved['body_token_position']
+            assert event['byte_end']==22==saved['first_mismatching_byte_zero_based']+1
+            assert event['prefix_sha256']==sha256(body[:ends[4]]).hexdigest()
+            assert reading['charged_strict_role_prefix_bytes']==22
+            later=len(ends)-5
+            later_tokens+=later
+            outputs[arm].append(dict(row=row['row'],observation=reading,original_outcome=row['original_outcome'],
+                                     original_eos=row['original_eos'],retained_later_body_tokens=later))
+    assert later_tokens==expected['observed_body_positions_after_strict_wire_obstruction']==4433
+    return dict(schema='retained-source62-strict-role-observer-replay/v1',outputs=outputs,
+                same_default_legacy_report=True,retained_later_body_tokens=later_tokens,
+                original_exact_by_arm=original['counts']['original_exact_by_arm'],
+                model_calls=0,new_q3_target_reads=0,measured_runtime_savings=None,dispatch_authority=False)
+
+
+if __name__=='__main__':
+    sys.addaudithook(check_open)
+    print(json.dumps(replay(),sort_keys=True,indent=2))

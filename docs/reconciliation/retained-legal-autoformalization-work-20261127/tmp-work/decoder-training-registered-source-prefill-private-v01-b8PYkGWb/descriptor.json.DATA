@@ -1,0 +1,102 @@
+{
+  "addition": {
+    "bytes": 11744,
+    "path": "/tmp/decoder-training-registered-source-prefill-private-v01-b8PYkGWb/addition.py.DATA",
+    "sha256": "33aa86921a387e62c10c7a27943de96b4d82aa386cfea4554a23a9dc5fe9a6e3"
+  },
+  "archived_fictional_prefill_report_shape": {
+    "bytes": 2042,
+    "path": "/tmp/decoder-training-shared-development-issuer-private-v02-z24PJEgV/fixture-readback.json",
+    "sha256": "d6de47b6b5029d6c6552d056a66af2aa8b59b7f8a5c2766692f2415234cd90cf"
+  },
+  "builder": {
+    "bytes": 715,
+    "path": "/tmp/decoder-training-registered-source-prefill-private-v01-b8PYkGWb/compose.py",
+    "sha256": "d2cae29cce31e7a39a198685e2e36cbe7594ce9632742eccbd0db9c6e5982b58"
+  },
+  "candidate_assessor": {
+    "bytes": 432500,
+    "path": "/tmp/decoder-training-registered-source-prefill-private-v01-b8PYkGWb/relational_assessment.py",
+    "sha256": "5ffc69dc064600279bf47c468c4ab06e42ac0bf9d715eac8779383f9b2325aeb"
+  },
+  "canonical_adopted": false,
+  "composition": {
+    "added_top_level_nodes": 4,
+    "original_top_level_ast_nodes_preserved": 307
+  },
+  "diff": {
+    "bytes": 12300,
+    "path": "/tmp/decoder-training-registered-source-prefill-private-v01-b8PYkGWb/relational_assessment.diff",
+    "sha256": "97f738c626fa9ecfd597ee7b573a667174e8f32d590d0a700b8dfeff3d5fc050"
+  },
+  "dispatch_authority": false,
+  "local_checks": {
+    "driver": {
+      "bytes": 17868,
+      "path": "/tmp/decoder-training-registered-source-prefill-private-v01-b8PYkGWb/check_registered_prefill.py",
+      "sha256": "9a5e7dfff340a3b6a7a945f78739f3053e646410c955d8f50f32c79cade78e07"
+    },
+    "focused_passed": 6,
+    "modeled_Qwen_positions_with_reservation": 7140,
+    "modeled_T5_positions_with_reservation": 6400,
+    "protected_fictional_rows": 4,
+    "result": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-registered-source-prefill-private-v01-b8PYkGWb/check.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 7629,
+        "path": "/tmp/decoder-training-registered-source-prefill-private-v01-b8PYkGWb/check.stderr",
+        "sha256": "28070d8556c3012e98ee40f75a72ef47fcec8f3ee42372509f495c6f81282ff2"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-registered-source-prefill-private-v01-b8PYkGWb/check.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "retained_passed": 39,
+    "separate_source_and_target_role_calls": 4
+  },
+  "native_source_or_target_close_observed": false,
+  "normalized_worker_policy_source": {
+    "bytes": 611799,
+    "path": "/tmp/decoder-training-stage-a-direct-open-leaf-private-v01-e9gEx19d/autoencoder_training_worker.py",
+    "sha256": "5dc058f9943e28be30bb148f0d870413f5d85f802d4b1e1bc12482013f98d5de"
+  },
+  "previous_assessor": {
+    "bytes": 420756,
+    "path": "/tmp/decoder-training-registered-dual-target-witness-private-v01-vbvuHts1/relational_assessment.py",
+    "sha256": "73adfd69c6d960ac5e95e274702fcb2f54d8e840ed8e1da64cbef6d63c8d6013"
+  },
+  "schema": "private-registered-source-prefill-handoff-descriptor/v1",
+  "stage_a_published_frontier_gap": {
+    "actual_changed_inference_publication": {
+      "bytes": 19071,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase5-v11-measurement-exact2-ordinary50-three-FF-publication-v471.json",
+      "sha256": "595d640004632225b90724c6c3f8076df942970690a1e48ba6a07f8ee98f37c0"
+    },
+    "full_retained_precharge_basis": {
+      "bytes": 1467,
+      "path": "/tmp/Root-Phase2-live-request-observation-existing-Source2-v478-jNWmWKj5/Source-only-Phase2-live-request-observation-exact2-full-retained.json",
+      "sha256": "c87de1db35399f8358f79174ff48d47d8f2d26b51bf921d992ca7409190fe80c"
+    },
+    "historical_quote": {
+      "bytes": 11141,
+      "path": "/tmp/decoder-training-stage-a-guide545-reconstruction-private-v01-SQgYnGt2/descriptor.json",
+      "sha256": "048aef58baaab8cb1a7e27fc21e73513ee33f7bb78373e203aade3f60e3d4dac"
+    },
+    "inference_postimage_blob": "2ca172903507b0b6ea6d93ab5ebee78c469601cc",
+    "inference_postimage_bytes": 92465,
+    "inference_postimage_sha256": "944e2fd0e0ddd922858941a5b99002ddc205a2e738114eece8dcf7aa5c69ded4",
+    "latest_named_published_pair": {
+      "bytes": 12720,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide548-four-doc-three-FF-publication-small-v477.json",
+      "sha256": "7ead6732cd5300edae1016e7d038a2893b826054ab9a3998a3629513d7469d1c"
+    },
+    "new_selection_or_quote": null
+  },
+  "training_or_fidelity_measured": false
+}

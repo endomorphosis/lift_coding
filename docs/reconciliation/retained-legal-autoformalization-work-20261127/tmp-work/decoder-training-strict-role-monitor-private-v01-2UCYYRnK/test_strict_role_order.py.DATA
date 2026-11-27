@@ -1,0 +1,200 @@
+"""Focused local controls for the opt-in canonical first argument role prefix."""
+from hashlib import sha256
+import json
+from pathlib import Path
+import runpy
+import unittest
+
+
+HERE = Path(__file__).resolve().parent
+OLD = HERE.parent / "decoder-training-selective-prefix-inspection-private-v01-PV9ezANr" / "readback.py"
+CODEC = HERE.parent / "decoder-training-source62-codec-readback-private-v01-vt7J9Uqt" / "readback.py"
+OLD_SHA = "7be27aa995f70a7557ad65e728d2a013c20fbbe96729bd230a265e86e7ba948c"
+CODEC_SHA = "18d2288f6066ac1d0bc97cd6d4ebb2b7844c2000b2b5ec7f03af30ef666cd749"
+STRICT = "complete-reviewed-norm-digest-omitted-json/v1"
+LEAD = b'{"argument_roles":[{'
+WATCH = "watching"
+STOP = "irreversible_codec_prefix"
+ISSUE = "first_role_key_is_not_the_canonical_roles_member"
+CHARGES = ("charged_inspection_bytes", "charged_role_precheck_bytes", "charged_strict_role_prefix_bytes")
+OPT_IN_FIELDS = {"wire_profile", "charged_strict_role_prefix_bytes"}
+DEFAULT_FIELDS = {"status", "charged_inspection_bytes", "role_prechecks", "charged_role_precheck_bytes",
+                  "inspected_prefixes", "consumed_body_tokens", "consumed_body_bytes", "obstruction"}
+
+
+def retained_module(path, expected):
+    raw = path.read_bytes()
+    if sha256(raw).hexdigest() != expected:
+        raise AssertionError("retained fixture source differs")
+    scope = {"__name__": "retained_local_fixture", "__file__": str(path)}
+    exec(compile(raw, str(path), "exec"), scope)
+    return scope
+
+
+class StrictRoleOrderControls(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        new = runpy.run_path(str(HERE / "readback.py"))
+        cls.new_monitor = new["AppendOnlyCodecPrefixMonitor"]
+        cls.profile = new["STRICT_ROLE_ORDER_WIRE_PROFILE"]
+        cls.old_monitor = retained_module(OLD, OLD_SHA)["AppendOnlyCodecPrefixMonitor"]
+        codec = retained_module(CODEC, CODEC_SHA)
+        cls.check = staticmethod(codec["structural_prefix"])
+        cls.fields, role = codec["selected_contracts"]({
+            path: codec["read"](path, length, digest) for path, length, digest in codec["PRIORS"][2:]
+        })
+        cls.role = staticmethod(role)
+
+    def monitor(self, *, previous=False, strict=True, fields=None, body=2048, inspected=4096):
+        options = {"wire_profile": STRICT} if strict else {}
+        builder = self.old_monitor if previous else self.new_monitor
+        return builder(self.check, self.fields if fields is None else fields, self.role,
+                       max_body_bytes=body, max_inspected_bytes=inspected, **options)
+
+    def test_default_adds_no_fields_and_retains_previous_stop(self):
+        self.assertEqual(self.profile, STRICT)
+        fragments = (LEAD, b'"symbol":"x","roles":[]}', b']}')
+
+        for explicit_default in (False, True):
+            with self.subTest(explicit_default=explicit_default):
+                previous = self.monitor(previous=True, strict=False)
+                options = {"wire_profile": None} if explicit_default else {}
+                offered = self.new_monitor(self.check, self.fields, self.role, max_body_bytes=2048,
+                                           max_inspected_bytes=4096, **options)
+                for piece in fragments:
+                    self.assertEqual(offered.observe(piece), previous.observe(piece))
+                    self.assertEqual(offered.result(), previous.result())
+                    self.assertEqual(set(offered.result()), DEFAULT_FIELDS)
+
+    def test_sorted_role_key_and_partial_token_splits_remain_watching(self):
+        monitor = self.monitor()
+        for piece in (LEAD[:8], LEAD[8:], b'"r', b'ol', b'es"', b':', b'[],"symbol":"x"}'):
+            with self.subTest(piece=piece):
+                self.assertEqual(monitor.observe(piece), WATCH)
+                self.assertIsNone(monitor.result()["obstruction"])
+        result = monitor.result()
+        self.assertEqual(set(result) - DEFAULT_FIELDS, OPT_IN_FIELDS)
+        self.assertEqual(result["wire_profile"], STRICT)
+        self.assertGreater(result["charged_strict_role_prefix_bytes"], 0)
+
+        candidate = {"argument_roles": [{"roles": ["agent"], "symbol": "x"}],
+                     "assumptions": [], "cross_references": [], "definition_uses": [],
+                     "governing_context": {}, "interpretation_id": "fixture", "profile": "fixture",
+                     "source_binding": {}, "typed_expression": {}}
+        body = json.dumps(candidate, sort_keys=True, separators=(",", ":")).encode()
+        self.assertEqual(self.monitor().observe(body), WATCH)
+
+    def test_first_mismatch_uses_body_byte_endpoint_and_whole_witness_token(self):
+        bad = LEAD + b'"symbol":"x"'
+        variants = ((bad,), (LEAD, b'"', b'symbol":"x"'), tuple(bytes((byte,)) for byte in bad))
+        strict_charges = []
+        for pieces in variants:
+            with self.subTest(token_lengths=tuple(map(len, pieces))):
+                monitor = self.monitor()
+                consumed = b""
+                for token_position, piece in enumerate(pieces, 1):
+                    consumed += piece
+                    if len(consumed) < 22:
+                        self.assertEqual(monitor.observe(piece), WATCH)
+                        self.assertIsNone(monitor.result()["obstruction"])
+                        continue
+                    self.assertEqual(monitor.observe(piece), STOP)
+                    break
+                result = monitor.result()
+                self.assertEqual(result["obstruction"], {"issue": ISSUE, "body_token_position": token_position,
+                    "byte_end": 22, "prefix_sha256": sha256(consumed).hexdigest()})
+                self.assertEqual(result["consumed_body_tokens"], token_position)
+                self.assertEqual(result["consumed_body_bytes"], len(consumed))
+                strict_charges.append(result["charged_strict_role_prefix_bytes"])
+                self.assertEqual(monitor.observe(b'"roles":[]}]}'), STOP)
+                self.assertEqual(monitor.result(), result)
+        self.assertEqual(strict_charges, [22] * len(variants))
+
+    def test_empty_and_unanchored_arrays_use_the_existing_classifier(self):
+        examples = ((b'{"argument_roles":[]}', "closed_top_level_object_missing_required_fields"),
+                    (b' {"argument_roles":[{"symbol":"x","roles":[]}]}' ,
+                     "closed_top_level_object_missing_required_fields"),
+                    (b'{"argument_roles": [{"symbol":"x","roles":0}', "closed_argument_role_violates_shape"))
+        for body, issue in examples:
+            with self.subTest(body=body):
+                previous = self.monitor(previous=True, strict=False)
+                active = self.monitor()
+                self.assertEqual(active.observe(body), previous.observe(body))
+                before, after = previous.result(), active.result()
+                self.assertEqual({key: after[key] for key in DEFAULT_FIELDS}, before)
+                self.assertEqual(after["obstruction"]["issue"], issue)
+
+    def test_strict_matching_does_not_generalize_to_later_roles(self):
+        monitor = self.monitor()
+        self.assertEqual(monitor.observe(LEAD + b'"roles":[],"symbol":"x"},{'), WATCH)
+        self.assertEqual(monitor.observe(b'"symbol":"y","roles":[]}'), WATCH)
+        self.assertIsNone(monitor.result()["obstruction"])
+
+    def test_shared_inspection_limit_and_body_limit_refuse_the_diagnostic(self):
+        pieces = (LEAD, b'"s')
+        supported = self.monitor()
+        self.assertEqual(supported.observe(pieces[0]), WATCH)
+        self.assertEqual(supported.observe(pieces[1]), STOP)
+        needed = sum(supported.result()[key] for key in CHARGES)
+        self.assertGreater(needed, 1)
+
+        exact = self.monitor(inspected=needed)
+        self.assertEqual(exact.observe(pieces[0]), WATCH)
+        self.assertEqual(exact.observe(pieces[1]), STOP)
+        self.assertEqual(sum(exact.result()[key] for key in CHARGES), needed)
+        limited = self.monitor(inspected=needed - 1)
+        self.assertEqual(limited.observe(pieces[0]), WATCH)
+        self.assertEqual(limited.observe(pieces[1]), "diagnostic_inspection_budget_exhausted")
+        self.assertIsNone(limited.result()["obstruction"])
+        self.assertLessEqual(sum(limited.result()[key] for key in CHARGES), needed - 1)
+
+        body = self.monitor(body=21)
+        self.assertEqual(body.observe(pieces[0]), WATCH)
+        self.assertEqual(body.observe(pieces[1]), "diagnostic_body_budget_exhausted")
+        self.assertIsNone(body.result()["obstruction"])
+
+    def test_role_shape_work_and_strict_matching_share_inspection_cap(self):
+        pieces = (LEAD + b'"roles":[', b'],"symbol":"x"},')
+        monitor = self.monitor()
+        for piece in pieces:
+            self.assertEqual(monitor.observe(piece), WATCH)
+        counts = monitor.result()
+        self.assertTrue(all(counts[key] > 0 for key in CHARGES))
+        self.assertEqual(counts["role_prechecks"], 1)
+        needed = sum(counts[key] for key in CHARGES)
+
+        limited = self.monitor(inspected=needed - 1)
+        self.assertEqual(limited.observe(pieces[0]), WATCH)
+        self.assertEqual(limited.observe(pieces[1]), "diagnostic_inspection_budget_exhausted")
+        self.assertIsNone(limited.result()["obstruction"])
+        self.assertLessEqual(sum(limited.result()[key] for key in CHARGES), needed - 1)
+
+    def test_invalid_utf8_in_witness_token_cannot_report_order_obstruction(self):
+        monitor = self.monitor()
+        self.assertEqual(monitor.observe(LEAD), WATCH)
+        self.assertEqual(monitor.observe(b'"s\xff'), "stable_utf8_unavailable")
+        self.assertIsNone(monitor.result()["obstruction"])
+
+        monitor = self.monitor()
+        self.assertEqual(monitor.observe(LEAD + b'"s\xe2'), WATCH)
+        self.assertEqual(monitor.observe(b'\x82\xac'), WATCH)
+        self.assertIsNone(monitor.result()["obstruction"])
+
+        monitor = self.monitor()
+        self.assertEqual(monitor.observe(LEAD + b'"roles":[],"symbol":"\xe2'), WATCH)
+        self.assertEqual(monitor.observe(b'#'), "stable_utf8_unavailable")
+        self.assertIsNone(monitor.result()["obstruction"])
+
+    def test_profile_and_exact_field_roster_are_required(self):
+        for profile in ("complete-reviewed-norm-json/v2", "", True, 42):
+            with self.subTest(profile=profile), self.assertRaises(ValueError):
+                self.new_monitor(self.check, self.fields, self.role, wire_profile=profile,
+                                 max_body_bytes=2048, max_inspected_bytes=4096)
+        for fields in ({"argument_roles"}, self.fields - {"assumptions"} | {"different"}):
+            with self.subTest(fields=fields), self.assertRaises(ValueError):
+                self.monitor(fields=fields)
+        self.assertEqual(self.monitor(strict=False, fields={"argument_roles"}).observe(b"{"), WATCH)
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)

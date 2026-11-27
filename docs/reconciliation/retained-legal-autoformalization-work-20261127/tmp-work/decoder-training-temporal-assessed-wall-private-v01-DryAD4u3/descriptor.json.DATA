@@ -1,0 +1,138 @@
+{
+  "candidate": {
+    "bytes": 106187,
+    "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/projection.py",
+    "sha256": "30ac6bca0216d480948cfda4b2eb87d4b59876b92f35b79c0f0d87844152fc1a"
+  },
+  "closed_logs": {
+    "retained": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/retained.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 19083,
+        "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/retained.stderr",
+        "sha256": "d36c2e34cb4855d32e143ac994b5f51da3fbab20b0df26a781a1902c68c4ad7e"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/retained.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "whole-wall": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/whole-wall.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 9906,
+        "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/whole-wall.stderr",
+        "sha256": "03c6d55c0e403f4af3bc3ad1dd8c6ac03bb3cd0a301f18e8acb988206d1bb9f7"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/whole-wall.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "whole-wall-extra": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/whole-wall-extra.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 9396,
+        "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/whole-wall-extra.stderr",
+        "sha256": "30721dd4956d2e664cc6ee5b81667388d7a2609da59be794af3b7056df94ae78"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/whole-wall-extra.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "diff": {
+    "bytes": 9536,
+    "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/projection.diff",
+    "sha256": "9049969b5f585d1e43485fcc928044019eb4cc41edcd9b17128f193c014252ea"
+  },
+  "dispatch_authority": false,
+  "drivers": {
+    "check_retained.py": {
+      "bytes": 905,
+      "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/check_retained.py",
+      "sha256": "5d0511b242fb8b90851daf2a64ec5ab413ba8fc7c3e8241cf1c237810e977f47"
+    },
+    "compose.py": {
+      "bytes": 4214,
+      "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/compose.py",
+      "sha256": "01e4b535c7a10cf3c237e6199685097ca7d5a4adde726e80da581d5cc63099c7"
+    },
+    "test_whole_wall.py": {
+      "bytes": 12160,
+      "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/test_whole_wall.py",
+      "sha256": "574bd78e42cf37737e88b675ffec0571d44daa97cec01dc02c145c4dd9c7e599"
+    },
+    "whole_wall.py.IN": {
+      "bytes": 5250,
+      "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/whole_wall.py.IN",
+      "sha256": "d40be14218818602fefdd242f7dbe764c591bdadee51c445162771b6f3841755"
+    }
+  },
+  "eligibility_unchanged": true,
+  "first_test_source": {
+    "bytes": 9707,
+    "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/test_whole_wall.first-run.py.DATA",
+    "sha256": "b27131cb2082c41bd9c8aed7a9e7e8e254f38f39a3a5b1e0790c47140a5eb767"
+  },
+  "hosted_ci_allowed": false,
+  "model_work_selected": false,
+  "modeled_cases": {
+    "qwen2": {
+      "elapsed_ns": 1100,
+      "paid_events": 19,
+      "reviewed_arms": 3
+    },
+    "t5": {
+      "elapsed_ns": 1100,
+      "paid_events": 22,
+      "reviewed_arms": 4
+    }
+  },
+  "native_elapsed_evidence": null,
+  "passing_local_cases": {
+    "retained": 6,
+    "whole-wall": 5,
+    "whole-wall-extra": 2
+  },
+  "physical_additive_work_unchanged": true,
+  "prior_owner": {
+    "bytes": 99542,
+    "path": "/tmp/decoder-training-temporal-assessed-continuation-private-v01-L30pSB8r/projection.py",
+    "sha256": "46669123c8dbedeb95e2f8973f23de48d4dc24a3dd225798de40848574a96cc9"
+  },
+  "retained_harness_failure": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/retained-first/retained.rc",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "stderr": {
+      "bytes": 2141,
+      "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/retained-first/retained.stderr",
+      "sha256": "7834d1a344e19a3ec186a9897fc0c14826b5465ff0ebafd767ba3dee5549faa7"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/retained-first/retained.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "schema": "private-temporal-assessed-history-enclosing-clock/v1"
+}

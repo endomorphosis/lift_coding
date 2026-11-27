@@ -1,0 +1,165 @@
+--- 
++++ 
+@@ -28,7 +28,7 @@
+ PATH_SCOPE = None
+ ROOT_SELECTION = None
+ CURRENT_BINDING_REF = None
+-NATIVE_CASE_PROFILE = 'P1-native3-expected-type-dependency/v1'
++NATIVE_CASE_PROFILE = 'P1-native-namespaced-expected-declaration/v1'
+ MAX_DIAGNOSTIC_BYTES = 16 * 1024 ** 2
+ FIELDS = ('st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_uid', 'st_gid', 'st_size', 'st_mtime_ns', 'st_ctime_ns')
+ f9 = lambda value: {key: str(getattr(value, key)) for key in FIELDS}
+@@ -91,19 +91,22 @@
+     test_record = _binding['owning_test_record']
+     _ref = _binding['owning_test_raw']
+     test_raw = read_private(_ref['path'], _ref['bytes'], _ref['sha256'])
+-    assert len(test_raw) == 115566 and H(test_raw) == '99e00363bbd1ea23d450af0912374fdbf4d30ab3b1802371fb8d237dccbf7da5'
+-    assert next((row for row in EPOCH if row['path'] == test_record['path']))['sha256'] == H(test_raw)
++    assert len(test_raw) == 123945 and H(test_raw) == 'ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945'
++    assert test_record['path'] == str(W / 'tests/integration/logic/backends/test_kernel_backends.py')
++    epoch_test = next(row for row in EPOCH if row['path'] == test_record['path'])
++    assert all(epoch_test[key] == test_record[key] for key in ('bytes', 'sha256', 'full9'))
++    assert test_record['sha256'] == H(test_raw) and test_record['bytes'] == len(test_raw)
+     _ref = _binding['binder_raw']
+     binder_path = Path(_ref['path'])
+     binder_raw = read_private(binder_path, _ref['bytes'], _ref['sha256'])
+-    assert len(binder_raw) == 5298 and H(binder_raw) == '5e2259b4b6bd6ce4129be265383fc84594e5a3be3aa8e4c5177cc1f22ed3d7db'
++    assert len(binder_raw) == 5314 and H(binder_raw) == '6683b105998cba123ff7029cba67ab153d2622467b02eec30cc0e275ff9329d3'
+     assert not RUN_OUTPUT.exists(), 'distinct selected Native3 output must be absent'
+     RUN_OUTPUT.mkdir(mode=448)
+     PARENT_HOME = RUN_OUTPUT / 'parent-home'
+     PARENT_HOME.mkdir(mode=448)
+     TMP = RUN_OUTPUT / 'original-test-temp'
+     TMP.mkdir(mode=448)
+-    FLAGS = {'IPFS_DATASETS_PY_MINIMAL_IMPORTS': '1', 'IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS': '0', 'IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI': '0', 'IPFS_TEST_PROOF_REUSE_AUTO_INSTALL': '0', 'IPFS_ACCEL_AUTO_INSTALL': '0', 'IPFS_ACCEL_SKIP_CORE': '1', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS': '0', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS_SIMULATED': '0', 'PYTEST_DISABLE_PLUGIN_AUTOLOAD': '1', 'PYTHONDONTWRITEBYTECODE': '1', 'RUN_HEAVY_TESTS': '0', 'RUN_LLM_TESTS': '0', 'RUN_LONG_TESTS': '0', 'RUN_NETWORK_TESTS': '0', 'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1', 'CUDA_VISIBLE_DEVICES': '', 'IPFS_DATASETS_RUN_NATIVE_LEAN': '1', 'IPFS_DATASETS_LEAN_EXECUTABLE': LEAN, 'IPFS_DATASETS_LEAN_VERSION': '4.34.1', 'IPFS_DATASETS_NATIVE_LEAN_REPORT': str(TMP / 'native-lean-v2-result.json'), 'PYTHONPATH': str(A) + ':' + str(W) + ':/home/barberb/.local/lib/python3.12/site-packages', 'PYTHONUSERBASE': '/home/barberb/.local'}
++    FLAGS = {'IPFS_DATASETS_PY_MINIMAL_IMPORTS': '1', 'IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS': '0', 'IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI': '0', 'IPFS_TEST_PROOF_REUSE_AUTO_INSTALL': '0', 'IPFS_ACCEL_AUTO_INSTALL': '0', 'IPFS_ACCEL_SKIP_CORE': '1', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS': '0', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS_SIMULATED': '0', 'PYTEST_DISABLE_PLUGIN_AUTOLOAD': '1', 'PYTHONDONTWRITEBYTECODE': '1', 'RUN_HEAVY_TESTS': '0', 'RUN_LLM_TESTS': '0', 'RUN_LONG_TESTS': '0', 'RUN_NETWORK_TESTS': '0', 'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1', 'CUDA_VISIBLE_DEVICES': '', 'IPFS_DATASETS_RUN_NATIVE_LEAN': '1', 'IPFS_DATASETS_LEAN_EXECUTABLE': LEAN, 'IPFS_DATASETS_LEAN_VERSION': '4.34.1', 'IPFS_DATASETS_NATIVE_LEAN_REPORT': str(TMP / 'native-lean-v3-namespaced-declaration-result.json'), 'PYTHONPATH': str(A) + ':' + str(W) + ':/home/barberb/.local/lib/python3.12/site-packages', 'PYTHONUSERBASE': '/home/barberb/.local'}
+     os.environ.clear()
+     os.environ.update({'PATH': PATH_SCOPE, 'LANG': 'C.UTF-8', 'HOME': str(PARENT_HOME), 'XDG_CONFIG_HOME': str(PARENT_HOME / 'xdg-config'), 'XDG_CACHE_HOME': str(PARENT_HOME / 'xdg-cache'), 'XDG_DATA_HOME': str(PARENT_HOME / 'xdg-data'), 'GH_CONFIG_DIR': str(PARENT_HOME / 'gh-config'), 'GIT_CONFIG_GLOBAL': '/dev/null', 'GIT_CONFIG_NOSYSTEM': '1'})
+     os.environ.update(FLAGS)
+@@ -358,6 +361,7 @@
+                 assert sdk.ToolRunRequest is admitted.ToolRunRequest and sdk.ToolRunResult is admitted.ToolRunResult
+                 assert admitted.GlobalResourceScheduler is resources.GlobalResourceScheduler
+                 pins = _binding['current_SDK_source_pins']
++                assert pins['ipfs_datasets_py.logic.backends.kernel.lean'] == ['ipfs_datasets_py/logic/backends/kernel/lean.py', '18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800']
+                 report['canonical_module_bindings'] = {}
+                 for name, (relative, digest) in pins.items():
+                     module = sys.modules[name]
+@@ -369,7 +373,7 @@
+                 current_path = str(Path(current_protocol.__file__).resolve())
+                 held_protocol = _binding['current_protocol_raw_source']
+                 protocol_bytes = read_private(held_protocol['path'], held_protocol['bytes'], held_protocol['sha256'])
+-                assert current_path == '/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/ir_core/protocols.py' and H(protocol_bytes) == 'e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336'
++                assert current_path == str(W / 'ipfs_datasets_py/logic/ir_core/protocols.py') and H(protocol_bytes) == 'e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336'
+                 protocol_body = compile(protocol_bytes, current_path, 'exec', dont_inherit=True, optimize=0)
+                 compared_protocol_methods = []
+                 for class_name, method_names in {'ExecutionBounds': ('to_dict',), 'ResourceUsage': ('exceeds',), 'BackendRequest': ('to_dict',), 'BackendAttempt': ('__post_init__',), 'ResultAuthority': ('__post_init__',), 'BoundedResult': ('__post_init__', 'to_dict'), 'ProofReceipt': ('__post_init__', 'issue', 'from_dict')}.items():
+@@ -392,7 +396,7 @@
+                 assert report['resource_before']['state']['child_process_capacity'] == EXPECTED_CAPACITY
+                 config = resources.ResourceSchedulerConfig(state_path=str(STATE), **report['resource_before']['state']['config'])
+                 scheduler = resources.get_global_resource_scheduler(config=config)
+-                parent = scheduler.try_acquire('validation', cpu_slots=1, memory_mb=8192, child_process_slots=1, requires_gpu=False, gpu_memory_mb=0, unified_memory_mb=0, parent_lease=None, request_id='phase1:native3:expected-type-dependency')
++                parent = scheduler.try_acquire('validation', cpu_slots=1, memory_mb=8192, child_process_slots=1, requires_gpu=False, gpu_memory_mb=0, unified_memory_mb=0, parent_lease=None, request_id='phase1:native:namespaced-expected-declaration')
+                 if parent is None:
+                     report['admission_refused'] = True
+                     raise RuntimeError('Existing shared namespace refused genuine validation CPU1/memory8192/child1 admission; no Native dispatch')
+@@ -411,6 +415,7 @@
+                 binder_namespace = {'__name__': 'selected_existing_native3_caller_binding', '__file__': str(binder_path)}
+                 exec(compile(binder_raw, str(binder_path), 'exec'), binder_namespace)
+                 bound = binder_namespace['bind_existing_native_expected_policy'](test_namespace, owning_test_source_bytes=test_raw, caller_owned_runner=runner)
++                assert bound.__name__ == 'test_lean_native_v3_expected_declaration_distinguishes_namespaced_decoy'
+                 report['actual_test_function_entered'] = True
+                 print(json.dumps({'event': 'ACTUAL_NATIVE3_EXISTING_TEST_START', 'operator_pid': os.getpid(), 'parent_lease_id': parent.lease_id, 'test': bound.__name__}), flush=True)
+                 try:
+@@ -446,35 +451,75 @@
+                 versions = [row for row in attempts if row['request']['argv'][-1:] == ['--version']]
+                 compiled = [row for row in attempts if '--json' in row['request']['argv']]
+                 report['actual_command_counts'] = {'all': len(attempts), 'version': len(versions), 'compiler': len(compiled), 'unclassified': len(attempts) - len(versions) - len(compiled)}
+-                assert len(compiled) == 3 and len(versions) >= 1 and report['actual_command_counts']['unclassified'] == 0
++                assert [row['index'] for row in attempts] == [0, 1, 2]
++                assert versions + compiled == attempts and len(versions) == 1 and len(compiled) == 2
++                assert report['actual_command_counts']['unclassified'] == 0
+                 for row in attempts:
+                     value = row['result']
+                     assert row['SDK_returned_result'] is True
+                     assert value['workspace_cleaned'] and value.get('native_lifecycle', {}).get('cleanup_confirmed') is True
+                     assert not any(value[key] for key in ('timed_out', 'cancelled', 'unavailable', 'output_truncated', 'workspace_limit_exceeded', 'resource_exhausted'))
+-                assert original['schema'] == 'native-lean-v2-proof-binding-check/v1'
++                assert original['schema'] == 'native-lean-v3-namespaced-declaration-check/v1'
+                 assert original['native_Lean_executed'] is True
+                 assert original['toolchain_version'] == FLAGS['IPFS_DATASETS_LEAN_VERSION']
+                 assert original['statutory_or_source_semantic_admission'] is False
+-                assert any(original['version_probe'] == row['result'] for row in versions), 'test version probe is not an actual retained result'
++                version, = versions
++                assert version['request']['argv'] == [LEAN, '--version'] and version['request']['input_files'] == []
++                result = version['result']
++                assert type(result['returncode']) is int and result['returncode'] == 0
++                assert result['command'] == version['request']['argv'] and not result['stderr']
+                 cases = original['cases']
+-                assert [row['case'] for row in cases] == ['positive', 'wrong_type', 'unapproved_dependency']
+-                for row, command in zip(cases, compiled, strict=True):
+-                    receipt = row['outcome']['receipt']
+-                    assert receipt['theorem_name'] == 'wanted' and receipt['native_identity'] is not None
++                assert [row['case'] for row in cases] == ['root_positive', 'namespaced_wrong_type']
++                expected_source = 'theorem wanted : True := by trivial\nnamespace Law\ntheorem wanted : False → False := fun h => h\nend Law\n'
++                declarations = []
++                evidence = []
++                executable, = [asset for asset in NATIVE if asset['path'] == LEAN]
++                for row, command, declaration, accepted, rc in zip(
++                        cases, compiled, ('wanted', 'Law.wanted'), (True, False), (0, 1), strict=True):
++                    outcome = row['outcome']
++                    receipt = outcome['receipt']
++                    identity = receipt['native_identity']
++                    assert receipt['theorem_name'] == declaration and receipt['submitted_source'] == expected_source
++                    assert receipt['expected_proposition'] == 'True' and receipt['accepted'] is accepted
+                     assert receipt['native_identity_checked_after_compile'] is True and receipt['approved_axioms'] == []
+-                    if row['case'] == 'positive':
+-                        assert command['result']['returncode'] == 0 and receipt['accepted'] is True and receipt['expected_proposition_checked'] is True
+-                        assert receipt['axiom_report']['axioms'] == []
+-                    elif row['case'] == 'wrong_type':
+-                        assert command['result']['returncode'] != 0 and receipt['accepted'] is False
+-                        diagnostics = lean._lean_error_diagnostics(command['result']['stdout'], command['result']['stderr'])
++                    assert receipt['expected_proposition_checked'] is accepted
++                    assert identity['observation_kind'] == 'bounded_native_version_probe'
++                    assert identity['resolved_executable'] == LEAN and identity['actual_version'] == original['toolchain_version']
++                    assert identity['executable_sha256'] == executable['sha256'] and identity['executable_bytes'] == executable['bytes']
++                    assert identity['version_command'] == result['command'] and identity['version_returncode'] == result['returncode']
++                    assert identity['version_stdout'] == result['stdout'].strip() and identity['version_stderr'] == result['stderr']
++                    actual = command['result']
++                    assert type(actual['returncode']) is int and actual['returncode'] == rc
++                    assert command['request']['argv'] == actual['command']
++                    assert actual['command'][0] == LEAN and actual['command'][-2:] == ['--json', 'Main.lean']
++                    source_ref, = command['request']['input_files']
++                    assert source_ref['logical_name'] == 'Main.lean' and source_ref['original_type'] == 'str'
++                    actual_input = read_private(source_ref['path'], source_ref['bytes'], source_ref['sha256']).decode('utf-8')
++                    goal = receipt['expected_obligation_declaration']
++                    assert goal == lean.lean_expected_obligation_declaration(expected_source, declaration, 'True')
++                    expected_input = (expected_source.rstrip() + "\n\nset_option pp.fullNames true\n"
++                        + "set_option autoImplicit false in\n"
++                        + f"theorem {goal} : (True) := _root_.{declaration}\n\n"
++                        + f"#print axioms _root_.{goal}\n")
++                    assert actual_input == expected_input and receipt['compiled_source_digest'] == lean.content_digest(actual_input)
++                    declarations.append(goal)
++                    if accepted:
++                        assert outcome['result']['status'] == 'proved'
++                        axiom_report = receipt['axiom_report']
++                        assert axiom_report['axioms'] == [] and axiom_report['declaration'] == goal
++                    else:
++                        assert outcome['result']['status'] == 'error' and receipt['axiom_report'] is None
++                        diagnostics = lean._lean_error_diagnostics(actual['stdout'], actual['stderr'])
+                         assert any('type mismatch' in value.lower() for value in diagnostics), diagnostics
+-                    else:
+-                        assert command['result']['returncode'] == 0 and receipt['accepted'] is False
+-                        assert receipt['axiom_report']['axioms'] and receipt['axiom_report']['declaration'] == receipt['expected_obligation_declaration']
++                        assert any('type mismatch' in value.lower() for value in receipt['diagnostics'])
++                    evidence.append(dict(case=row['case'], declaration=declaration, compiler_returncode=rc,
++                        expected_obligation_declaration=goal, accepted=accepted,
++                        version_event_index=version['index'], compiler_event_index=command['index'],
++                        compiler_input_sha256=source_ref['sha256']))
++                assert len(set(declarations)) == 2
++                report['actual_namespaced_cases'] = evidence
+                 report['actual_native_qualification'] = True
+-                report['qualification_scope'] = 'Existing actual positive expected type and wrong-type/dependency controls only; no quoted-screen/compiler, cache fixture, namespaced-decoy, legal-meaning or full-Phase1 credit'
++                report['qualification_scope'] = 'Actual root expected-declaration proof accepted and fully qualified Law.wanted wrong type rejected on identical source and proposition'
+             finally:
+                 if parent is not None:
+                     attempt = 0

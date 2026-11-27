@@ -1,0 +1,184 @@
+{
+  "actual_model_or_native_execution": null,
+  "actual_wall_owner_evidence": null,
+  "diff": {
+    "bytes": 6638,
+    "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/final_physical_union.diff",
+    "sha256": "5766ada8064738e1df9c2ecfe70260d283aec1c08b4feaf896da902283eaf425"
+  },
+  "dispatch_authority": false,
+  "distinct_actual_ordinary33": {
+    "A": "219ba3da0f62f772801d71715e22c506faa21126",
+    "D": "cbc43a5f365502265d1e64d7bce3281f2871ef01",
+    "junit": {
+      "bytes": 6106,
+      "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/actual-output/corpus-release-physical-v4-retained-type-current-review-ordinary33-run-result0-output1.bin",
+      "sha256": "d1ba609e94c9a4d10217fa2c6a4d3deee2aa9f3e68116b58f6310691dbfab06e"
+    },
+    "passed": 33,
+    "report": {
+      "bytes": 996010,
+      "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/actual-output/complete-frozen-local-D-corpus-release-physical-v4-retained-type-current-review-ordinary33-existing-owner-report.json",
+      "sha256": "eecfe9703987364d818a9fe6448e1aa66da01efb9f9c17d6700274fbe417e297"
+    },
+    "scope": "software_qualification_on_the_frozen_local_candidate",
+    "source_and_resource_closed": true
+  },
+  "drivers": {
+    "compose.py": {
+      "bytes": 3976,
+      "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/compose.py",
+      "sha256": "6bbef57218e165e0b5c9e40bb9be5ef06f7b20ce694282b63c50c5ad375dd74d"
+    },
+    "first_use_wall.py.IN": {
+      "bytes": 3051,
+      "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/first_use_wall.py.IN",
+      "sha256": "0ec1bf62609d55da077d13c32f996fb6acb5b5b805843ff04cdbd866c6eab1fc"
+    },
+    "retained_all_paid.py": {
+      "bytes": 759,
+      "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/retained_all_paid.py",
+      "sha256": "4f5213cdcc73b02697d4c12763334e4160626434b11b7a2c6235e8acbee7a5c1"
+    },
+    "seal.py": {
+      "bytes": 11480,
+      "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/seal.py",
+      "sha256": "d17f3e93d7363ad069a14623b5dc3cb4715422e3e3089942a0eb373eb2a03443"
+    },
+    "test_first_use_wall.py": {
+      "bytes": 11539,
+      "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/test_first_use_wall.py",
+      "sha256": "d47b90824aec8d32ba2f76e7f9af62ea5cd9e462e9037fa8f11854ac16dae040"
+    }
+  },
+  "legal_quality_threshold_from_wall": false,
+  "local_passing_cases": {
+    "new_elapsed_verification": 8,
+    "retained_all_paid": 8,
+    "retained_final": 11
+  },
+  "logs": {
+    "new_elapsed_verification": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/first-use-wall-final.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1436,
+        "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/first-use-wall-final.stderr",
+        "sha256": "957486b045897f3a91e281a77b67b7bb7a247c95472f7738a9f853ccef227db1"
+      },
+      "stdout": {
+        "bytes": 935,
+        "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/first-use-wall-final.stdout",
+        "sha256": "d03d3b9e5733d275965063ec39b60f7e0b14d3d15fd068cd0057092b3592870a"
+      }
+    },
+    "retained_all_paid": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/retained-complete.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1310,
+        "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/retained-complete.stderr",
+        "sha256": "d1b2eaecdad4c345b6e74908362c53a12f1c85e8fba61b1cbf14d3745c420894"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/retained-complete.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "retained_final": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/retained-final.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 2087,
+        "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/retained-final.stderr",
+        "sha256": "3081bae7e85deacf7dcfec22630ed05e550aac353a51b982599ac9313efb24f2"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/retained-final.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "maintained_adoption": null,
+  "modeled_default_exclusive_cost_ns": {
+    "cpu_ns": 168000000000,
+    "gpu_ns": null
+  },
+  "modeled_paid_and_wall_summary": {
+    "first_use_wall": {
+      "clock_domain_sha256": "10260d8aafea18c83f08c4e68a428db759f6b2a6f2fc2154874d695f6c46fd13",
+      "covered_paid_events": 39,
+      "elapsed_ns": 42000000000,
+      "end_ns": 43000000000,
+      "opening_receipt_sha256": "eeef9e0b1fd421ae545ca779ba0fe32ec8a79a417649726b50da916e79adda13",
+      "physical_clock_windows_sha256": "995fab5e9111ad468c0fb5493d985305c2e4474bbb6e7987523aad1b2a42bb39",
+      "receipt_sha256": "b9f028ed29b205e47312baabcbdbc74b7d03735ea9954e2b3d3347af5772ba8c",
+      "schema": "reviewed-teacher-pilot-first-use-wall/v1",
+      "scope": "whole_pilot_opening_through_independently_authenticated_terminal_evidence",
+      "selection_sha256": "cac64ffb03652739a45b733f6ac2c00dc57f8a337e294c53c5b434af141657a9",
+      "start_ns": 1000000000,
+      "terminal_evidence_receipt_sha256": "23d3315d6638eb26fe51f155975af772a0c6793534a260dc0aaf0bf821846d12"
+    },
+    "observed_model_or_native_execution": false,
+    "original_event_count": 39,
+    "paid_failed_event_retained": true
+  },
+  "owner": {
+    "bytes": 30009,
+    "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/final_physical_union.py",
+    "sha256": "ccb4f816f07211f380d97a09cee2181da359882b17698f881deadc65ea2cc825"
+  },
+  "preparation_only_stops_included": false,
+  "prior_owner": {
+    "bytes": 25672,
+    "path": "/tmp/decoder-training-teacher-pilot-all-paid-phases-private-v01-AL5vbJYA/final_physical_union.py",
+    "sha256": "38b33cd83f400ce26730ad275a6fa906f76b2176c252011d371bf9a45454a1ec"
+  },
+  "retained_default_report": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/retained-all-paid.rc",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 231,
+      "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/retained-all-paid.stderr",
+      "sha256": "714a189d807f4f81868c6afc04f86081d5583fc61efd723ed3ddc85aca2b2c9b"
+    },
+    "stdout": {
+      "bytes": 14443,
+      "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/retained-all-paid.stdout",
+      "sha256": "36d30e341693d374e39d980d22843c47c53c859246eb2ed126a0a1fb399b04ac"
+    }
+  },
+  "retained_first_fixture_adapter_failure": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/first-use-wall-first.rc",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "stderr": {
+      "bytes": 3112,
+      "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/first-use-wall-first.stderr",
+      "sha256": "16e58ff49f1a8e621465622c3cabd6b276b5b1b02d7e9c3f78ed648cdd382ac1"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/first-use-wall-first.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "schema": "reviewed-teacher-pilot-first-use-wall-private-controls/v1",
+  "scope": "paid_preparation_and_development_and_final_with_independent_clock_endpoint_approval"
+}

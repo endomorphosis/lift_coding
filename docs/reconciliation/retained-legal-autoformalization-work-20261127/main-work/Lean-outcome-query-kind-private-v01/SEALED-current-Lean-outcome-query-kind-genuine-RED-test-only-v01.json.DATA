@@ -1,0 +1,90 @@
+{
+  "actual_Source_Native_SDK_Git_SQL_or_model": false,
+  "actual_private_92": {
+    "errors": 0,
+    "failed": 4,
+    "failed_ids": [
+      "test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[satisfiability]",
+      "test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[runtime_monitor]",
+      "test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[evidence_readiness]",
+      "test_lean_outcome_rejects_non_theorem_request_after_complete_rebind[policy_approval]"
+    ],
+    "passed": 88,
+    "raw_XML": {
+      "bytes": 19294,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/before/result.xml",
+      "sha256": "8cd0495d93ef7d77232c0ac258c54068f64572629a7564a4c300eadba1e7d57f"
+    },
+    "skips": 0,
+    "stderr": {
+      "bytes": 0,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/before/stderr.DATA",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "bytes": 3228,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/before/stdout.DATA",
+      "sha256": "e980ee29805233d6d06f4e71549ccd8c9c592c221094f79e11e59add89bff19c"
+    },
+    "termination": {
+      "bytes": 3441,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/before/termination.json",
+      "sha256": "da8c793f7c39b7f21defc8ccad49bdb3c8f4f4e9c57dad39015954b820624b19"
+    },
+    "unique": 92
+  },
+  "all_prior_costs_failures_and_receipts_preserved": true,
+  "append": {
+    "bytes": 1967,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/owning-query-kind.append.py.DATA",
+    "sha256": "08cad9e4d0953f01d6977cd26d3ceec8eeea8bce1edc8855463839f33372f2b9"
+  },
+  "current_captured_protocol_e2dd_used_in_private_graph": true,
+  "current_composed_owner": {
+    "bytes": 104191,
+    "path": "/tmp/P1-Guide571-Lean-routing-namespaced-composed-private-v02-pltcow1x/lean.composed.py.DATA",
+    "sha256": "c46d745caa68bae79fb828e734cfaeb874e21a16c76b9edbdf6f05d2d30ac090"
+  },
+  "current_namespaced_Native_test_unchanged_and_unexecuted": true,
+  "existing_product_owner": "Root p1_combo; completed target-routing/namespaced composition remains exact and untouched",
+  "existing_runner": {
+    "bytes": 2734,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/existing-private-runner-nineteen-selectors.py.DATA",
+    "sha256": "fdd6efc3f5b344b2de059dcee188081321ba7a832da9fdf7df5631dd51507653"
+  },
+  "forward": {
+    "bytes": 2360,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/owning-test-query-kind.forward.diff",
+    "sha256": "bfef512f8759df03f6c0688abe48ca0362c9089086bff1e81a0f9cc0300a6032"
+  },
+  "full_goal_complete": false,
+  "future_actual_Source_ordinary_runtime_clock_enrollment_and_publication": null,
+  "inverse": {
+    "bytes": 2360,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/owning-test-query-kind.inverse.diff",
+    "sha256": "92acc46706c7e78b0ff6074f56a3c8cf0e8a43ff9dc6a2f1689029bb1fbe1332"
+  },
+  "literal_existing88_plus_four_new_cases": true,
+  "logic_family_not_hardcoded": "logic_families is an explicit backend constructor option; no new default-family restriction is proposed.",
+  "minimal_correction_for_existing_owner": "In LeanKernelOutcome.__post_init__, reject request.query_kind not QueryKind.THEOREM_PROOF, matching the non-configurable public dispatch contract. Reuse same tests unchanged for GREEN.",
+  "no_SUT_product_patch_by_Main": true,
+  "only_runner18_to19_literal_change": true,
+  "owning_test_postimage": {
+    "bytes": 123945,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/test_kernel_backends.query_kind.after.py.DATA",
+    "sha256": "ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945"
+  },
+  "owning_test_preimage": {
+    "bytes": 121978,
+    "path": "/tmp/P1-Guide571-Lean-routing-namespaced-composed-private-v02-pltcow1x/test_kernel_backends.composed.py.DATA",
+    "sha256": "b61516a155434f2595b891befcf3f8ef066da3c01e9985aa47716c4688e90860"
+  },
+  "schema": "private-current-Lean-outcome-query-kind-genuine-RED-test-only/v1",
+  "scope": "Constructor reconstruction accepted complete evidence for non-theorem requests; direct public dispatch correctly refused before callbacks. This is not a proven legal-admission bypass or false Lean theorem.",
+  "test_inputs": {
+    "bytes": 5022,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Lean-outcome-query-kind-private-v01/private-query-kind-test-inputs-v01.json",
+    "sha256": "165e693e694aead0d06db5ca04e93553b910110d2ad8a6c3de602a1b5326249d"
+  },
+  "whole_current_composed_prefix_and_AST_unchanged": true
+}

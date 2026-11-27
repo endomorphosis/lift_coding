@@ -1,0 +1,123 @@
+{
+  "Native_cache_run": false,
+  "all_other_gitlinks_preserved": true,
+  "datasets_before_tree": "e053a1041e4249b869065c3a00f5be8d91ff2243",
+  "datasets_changed_paths": [
+    "ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+    "ipfs_datasets_py/logic/common/duckdb_proof_migration.py",
+    "ipfs_datasets_py/logic/common/duckdb_proof_store.py",
+    "tests/unit/logic/legal_ir/test_proof_cache.py",
+    "tests/integration/logic/backends/test_kernel_backends.py",
+    "tests/unit/logic/test_duckdb_proof_store_persistence.py"
+  ],
+  "forced_push": false,
+  "full_Phase1_complete": false,
+  "full_goal_complete": false,
+  "gitlink_joins": {
+    "A_preserved": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "H:ipfs_datasets_py": "35e56b6b34c5cd363935e5377c1946a1a53e32b1",
+    "Root:external/ipfs_datasets": "35e56b6b34c5cd363935e5377c1946a1a53e32b1",
+    "Root:hallucinate_app": "f0e54b50279efb57a40dc3b7cb46314fe08f55e3"
+  },
+  "inputs": {
+    "freeze": {
+      "bytes": 10063,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P1-proof-context-aggregation-private-v01-6eRrVF/local-freeze-SourceSIX-v279/P1-six-file-local-freeze-receipt-v01.json",
+      "sha256": "f8ba1930c9803b74f4a4f36f3e9af8761d86f5c9cad9298cd6f020e3777de53c"
+    },
+    "ordinary": {
+      "bytes": 1587,
+      "path": "/tmp/Root-P1-local-coherent-cache-ordinary166-READ1-final-v285-vylkm1fy/Root-P1-coherent-cache-ordinary166-qualified-small-v285.json",
+      "sha256": "03b09e1183d2cb1415a82daae2e9de6e30db71cf58924b1e838356a15101b5de"
+    },
+    "sql_refusal": {
+      "bytes": 1800,
+      "path": "/tmp/Root-P1-SQL51-actual-source-resource-selection-v287-6h9nx_q8/Root-SQL51-no-grant-original-refusal-custody-recovered-small-v287.json",
+      "sha256": "eec454b13b27a9c5fd06bc96cc7ad4fa67e48c86a92068d7f257d197463cbb02"
+    }
+  },
+  "maintenance_records_preserved": true,
+  "ordered_fast_forwards": [
+    {
+      "after": "35e56b6b34c5cd363935e5377c1946a1a53e32b1",
+      "before": "9f938e46a507322d2f35b717b0c14de7b9978a43",
+      "fast_forward": true,
+      "local_clean": true,
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "remote_main_readback": "35e56b6b34c5cd363935e5377c1946a1a53e32b1",
+      "repository": "D",
+      "tree": "6be75ed4c9a6448a59ab035cdaed746af66d6d7e"
+    },
+    {
+      "after": "f0e54b50279efb57a40dc3b7cb46314fe08f55e3",
+      "before": "54dab3e6fb34719b7c6c3cd00fae3c67412f7d69",
+      "fast_forward": true,
+      "local_clean": true,
+      "origin": "https://github.com/endomorphosis/hallucinate_app",
+      "remote_main_readback": "f0e54b50279efb57a40dc3b7cb46314fe08f55e3",
+      "repository": "H",
+      "tree": "92e988aaa21a86f3626090d585d227624eb7f1de"
+    },
+    {
+      "after": "b02a2183f3664a3bd2563792b70ff170190ed25f",
+      "before": "45ae62ab24f620a388d571a0b7dc7f616f22097a",
+      "fast_forward": true,
+      "local_clean": true,
+      "origin": "https://github.com/endomorphosis/lift_coding",
+      "remote_main_readback": "b02a2183f3664a3bd2563792b70ff170190ed25f",
+      "repository": "Root",
+      "tree": "f819eee338ea1ab96705adc121f2bada0a820471"
+    }
+  ],
+  "ordinary_counts": {
+    "errors": 0,
+    "failed": 0,
+    "passed": 166,
+    "skips": 0
+  },
+  "repositories": {
+    "A": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "clean": true,
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "remote_main": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "D": {
+      "HEAD": "35e56b6b34c5cd363935e5377c1946a1a53e32b1",
+      "clean": true,
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "remote_main": "35e56b6b34c5cd363935e5377c1946a1a53e32b1",
+      "tree": "6be75ed4c9a6448a59ab035cdaed746af66d6d7e"
+    },
+    "H": {
+      "HEAD": "f0e54b50279efb57a40dc3b7cb46314fe08f55e3",
+      "clean": true,
+      "origin": "https://github.com/endomorphosis/hallucinate_app",
+      "remote_main": "f0e54b50279efb57a40dc3b7cb46314fe08f55e3",
+      "tree": "92e988aaa21a86f3626090d585d227624eb7f1de"
+    },
+    "Root": {
+      "HEAD": "b02a2183f3664a3bd2563792b70ff170190ed25f",
+      "clean": true,
+      "origin": "https://github.com/endomorphosis/lift_coding",
+      "remote_main": "b02a2183f3664a3bd2563792b70ff170190ed25f",
+      "tree": "f819eee338ea1ab96705adc121f2bada0a820471"
+    }
+  },
+  "schema": "P1-six-file-ordinary166-fast-forward-publication/v1",
+  "sql51": {
+    "Source_FDs_released": true,
+    "admission": false,
+    "ledger_scheduler_unchanged": true,
+    "refusal": "configured 250 GB versus persisted 280 GB",
+    "test_cases_run": 0
+  },
+  "this_operation_ran_tests": false,
+  "verified_before_remote_main": {
+    "A": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "D": "9f938e46a507322d2f35b717b0c14de7b9978a43",
+    "H": "54dab3e6fb34719b7c6c3cd00fae3c67412f7d69",
+    "Root": "45ae62ab24f620a388d571a0b7dc7f616f22097a"
+  }
+}

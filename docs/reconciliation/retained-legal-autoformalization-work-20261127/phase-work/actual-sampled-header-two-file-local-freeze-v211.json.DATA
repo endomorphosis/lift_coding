@@ -1,0 +1,98 @@
+{
+  "all_gitlinks_unchanged": true,
+  "branch": "refs/heads/work/phase6-capacity-composition-20261123",
+  "diff_check_passed": true,
+  "exactly_two_modified_paths": true,
+  "frozen_for_ordinary16": true,
+  "head": "e3ffb26c42f0d5e4fe69354b299b874987073acc",
+  "index": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795551603577445395",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795551603567445310",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "d235f1a455625ced227a20d69e0717aa0ab8afe0ed3a48706d482ec0801756bc"
+  },
+  "installation": {
+    "Source_and_module_closed": true,
+    "bytes": 2653,
+    "full9": {
+      "st_ctime_ns": "1795551488417467000",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "18662205",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795551488417467000",
+      "st_nlink": "1",
+      "st_size": "2653",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-sampled-header-existing-Source2-actual-selected-v211-664t2yzd/Root-sampled-header-two-installed-Source-closed-small-v211.json",
+    "sha256": "73b1b5abeffa34e2016dfb82b71ee695c008a1250a53fdb3785499e3dd9c1985"
+  },
+  "ordinary16_executed": false,
+  "origin_main_tracking_ref": "0d71c0d82b2dfc1ed3c7f236009e467e4c201c88",
+  "other_heads": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "hallucinate": "7e97bf92592900dc05d07ec1bc9d8663b8242d68",
+    "root": "c40b39e3431abfc7c2f7a288e4780bdba20349de"
+  },
+  "other_heads_trees_indexes_refs_and_links_verified_unchanged": true,
+  "parent": "0d71c0d82b2dfc1ed3c7f236009e467e4c201c88",
+  "pushed": false,
+  "remote_contacted": false,
+  "schema": "sampled-header-two-file-local-freeze/v211",
+  "selected_roles": [
+    {
+      "blob": "d42f7b75fe0940ede1990f081c871721610193f9",
+      "bytes": 264567,
+      "full9": {
+        "st_ctime_ns": "1795551403099747897",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042532",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795551402485966792",
+        "st_nlink": "1",
+        "st_size": "264567",
+        "st_uid": "1000"
+      },
+      "mode": "100644",
+      "parent_blob": "eb6388cac544c9e9fb6340cef53cca26ff0fafab",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_resource_recovery.py",
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_resource_recovery.py",
+      "sha256": "ae5c1f9ada1d786e73568e948aacd17745603c2d0f3eab1b48243c933705ca3b"
+    },
+    {
+      "blob": "de6057ebc122d81e1f5104ebaa58346fbbd0d8dd",
+      "bytes": 291607,
+      "full9": {
+        "st_ctime_ns": "1795551403694752893",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042536",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795551402489581430",
+        "st_nlink": "1",
+        "st_size": "291607",
+        "st_uid": "1000"
+      },
+      "mode": "100644",
+      "parent_blob": "e251b1332ee9f9f8467f033b0e709cce5cb4f315",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_retained_validation_capacity_recovery.py",
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_retained_validation_capacity_recovery.py",
+      "sha256": "693012bd11bef613cf0f0beba8133103f235eff1008e0607e6431b90051f7fab"
+    }
+  ],
+  "source_sdk_test_model_native_CI_or_policy_invoked": false,
+  "tree": "908878d10c3b86f583c260bbbc103dbf3243207c",
+  "worktrees_clean": true
+}

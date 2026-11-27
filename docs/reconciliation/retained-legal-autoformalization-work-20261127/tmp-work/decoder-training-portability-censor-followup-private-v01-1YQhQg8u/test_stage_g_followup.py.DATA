@@ -1,0 +1,175 @@
+"""Exercise original-owner censor evidence through the selected Stage G cells."""
+from copy import deepcopy
+from dataclasses import replace
+from fractions import Fraction
+from hashlib import sha256
+import json
+from pathlib import Path
+from runpy import run_path
+import sys
+from tempfile import TemporaryDirectory
+import unittest
+
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0,str(HERE))
+from fixture import make_fixture, CENSORED_CELL, UNUSED_CENSORED_CELL
+
+WALL, CPU = 'wall_seconds','cpu_seconds'
+SUMMARY = {}
+
+
+def rational(value):
+    return tuple(Fraction(*number) for number in value)
+
+
+class StageGFollowup(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        path = TemporaryDirectory(dir=HERE,prefix='matrix-')
+        cls.addClassCleanup(path.cleanup)
+        cls.fixture = make_fixture(Path(path.name))
+        cls.S, cls.pin = cls.fixture.S, staticmethod(cls.fixture.pin)
+
+    def setUp(self):
+        self.report = deepcopy(self.fixture.report)
+        self.paid = deepcopy(self.fixture.paid)
+        self.calls = []
+
+    def selection(self, cell=CENSORED_CELL, clock=WALL):
+        attempt = self.fixture.attempt(cell)
+        closing = attempt['cost_evidence']['closing_meter']
+        return self.S.CensorFollowup(attempt['attempt_sha256'],clock,attempt['closing_meter_sha256'],
+            closing['clock_receipts'][self.S.COVERED_CLOCKS.index(clock)],
+            attempt['closeout_receipt_sha256'],self.pin((cell,clock,'model-free no confirmation through close')))
+
+    def follow(self, *selected, after_followup=None, after_development=None, **extra):
+        development_pin, paid_pin, proof_pin = map(self.pin,(self.report,self.paid,selected))
+        plan_pin = self.report['plan_sha256']
+        cost_pin = self.paid['cost_evidence_sha256']
+
+        def approve_followup(*pins):
+            self.calls.append(('followup',pins))
+            if after_followup is not None:
+                return after_followup()
+            return pins == (paid_pin,cost_pin,proof_pin)
+
+        def approve_g(*pins):
+            self.calls.append(('portability',pins))
+            if after_development is not None:
+                return after_development()
+            return pins == (development_pin,plan_pin,paid_pin)
+
+        options = dict(censor_followups=selected,expected_censor_followups_sha256=proof_pin,
+                       verify_original_followup_owner=approve_followup) if selected else {}
+        options.update(extra)
+        return self.S.summarize_objective_portability_restricted_confirmation(self.report,
+            expected_development_sha256=development_pin,verify_original_development_owner=approve_g,
+            paid_comparison=self.paid,**options)
+
+    def preliminary(self, selected):
+        return self.S.verify_censored_confirmation_cost_bounds(self.paid,
+            expected_paid_report_sha256=self.pin(self.paid),followups=(selected,),
+            expected_followups_sha256=self.pin((selected,)),verify_original_followup_owner=lambda *_:True)
+
+    def test_original_paid_followup_tightens_only_selected_interaction(self):
+        selection = self.selection()
+        original, enhanced = self.follow(),self.follow(selection)
+        new_fields = ('censor_followup_selection_sha256','paid_censor_followup_bounds_sha256',
+                      'followup_meter_bounded_comparisons')
+        self.assertEqual({k:v for k,v in enhanced.items() if k not in new_fields}, original)
+        self.assertEqual(enhanced['censor_followup_selection_sha256'],self.pin((selection,)))
+        self.assertEqual(enhanced['paid_censor_followup_bounds_sha256'],self.pin(self.preliminary(selection)))
+
+        old, old_size = original['meter_bounded_comparisons']
+        new, new_size = enhanced['followup_meter_bounded_comparisons']
+        self.assertEqual(old_size,new_size)
+        before, after = (rational(row['mean_interaction_bounds_seconds']) for row in (old,new))
+        self.assertEqual(after,(before[0]+23,before[1]))
+        self.assertEqual(new['mean_attainment_interaction_bounds'],old['mean_attainment_interaction_bounds'])
+        alpha,beta = new['seed_intervals']
+        self.assertEqual(beta,old['seed_intervals'][1])
+        self.assertEqual(beta['reference_pair']['candidate']['restricted_confirmation_seconds'],(0.,100.))
+        window = alpha['comparison_pair']['candidate']
+        self.assertEqual(window['restricted_confirmation_seconds'],(46.,100.))
+        self.assertEqual(window['censor_followup']['closing_meter_sha256'],selection.closing_meter_sha256)
+        self.assertIsNone(window['attainment'])
+        self.assertIsNone(window['observed_confirmation_seconds'])
+        self.assertFalse(enhanced['changes_paid_or_final_evidence'])
+        self.assertEqual([kind for kind,_ in self.calls],['portability','followup','portability'])
+        self.assertEqual(self.report,self.fixture.report)
+        self.assertEqual(self.paid,self.fixture.paid)
+        SUMMARY.update(original=rational_wire(before),followup=rational_wire(after),
+                       horizon_seconds=100,closing_wall_seconds=46,mean_lower_gain_seconds=23,
+                       seed_count=len(enhanced['selected_seeds']))
+
+    def test_paid_cpu_proof_outside_selected_wall_clock_refuses(self):
+        selected = self.selection(clock=CPU)
+        self.preliminary(selected)
+        with self.assertRaisesRegex(ValueError,'selected Stage G quartets'):
+            self.follow(selected)
+        self.assertEqual(self.calls,[])
+
+    def test_paid_but_unselected_teacher_cell_refuses(self):
+        unused = self.selection(UNUSED_CENSORED_CELL)
+        self.preliminary(unused)
+        with self.assertRaisesRegex(ValueError,'selected Stage G quartets'):
+            self.follow(self.selection(),unused)
+        self.assertEqual(self.calls,[])
+
+    def test_owner_refusal_and_changed_paid_meter_do_not_authorize_followup(self):
+        with self.assertRaisesRegex(ValueError,'original follow-up owner refused'):
+            self.follow(self.selection(),after_followup=lambda:False)
+        self.assertEqual([kind for kind,_ in self.calls],['followup'])
+        self.calls.clear()
+        forged = replace(self.selection(),closing_meter_sha256=self.pin('other meter'))
+        with self.assertRaisesRegex(ValueError,'unaliased meter'):
+            self.follow(forged)
+        self.assertEqual(self.calls,[])
+
+    def test_followup_owner_cannot_mutate_stage_g_before_next_owner(self):
+        def mutate():
+            self.report['plan_sha256'] = self.pin('changed Stage G plan')
+            return True
+
+        with self.assertRaisesRegex(ValueError,'Stage G report changed'):
+            self.follow(self.selection(),after_followup=mutate)
+        self.assertEqual([kind for kind,_ in self.calls],['followup'])
+
+    def test_development_owner_cannot_change_previously_approved_typed_proof(self):
+        selected = self.selection()
+
+        def mutate():
+            object.__setattr__(selected,'no_confirmation_through_close_receipt_sha256',self.pin('substituted disposition'))
+            return True
+
+        with self.assertRaisesRegex(ValueError,'restricted-time inputs changed'):
+            self.follow(selected,after_development=mutate)
+        self.assertEqual([kind for kind,_ in self.calls],['followup','portability'])
+
+    def test_unselected_partial_proof_arguments_fail_before_callbacks(self):
+        for args in (dict(expected_censor_followups_sha256=self.pin('empty')),
+                     dict(verify_original_followup_owner=lambda *_:True),
+                     dict(censor_followups=[self.selection()])):
+            with self.subTest(args=tuple(args)),self.assertRaisesRegex(ValueError,'exact selected roster'):
+                self.follow(**args)
+        self.assertEqual(self.calls,[])
+
+    def test_default_meter_readback_matches_predecessor_byte_for_byte(self):
+        prior = HERE.parent/'decoder-training-paid-censor-followup-private-v01-9bUvEI8h/study.py'
+        assert sha256(prior.read_bytes()).hexdigest()=='c462caa0fffb73f74549013d0272d224dada01e9e33620329b5b3f5ffb920915'
+        before = run_path(str(prior))['summarize_objective_portability_restricted_confirmation']
+        expected = before(self.report,expected_development_sha256=self.pin(self.report),
+                          verify_original_development_owner=lambda *_:True,paid_comparison=self.paid)
+        self.assertEqual(self.pin(self.follow()),self.pin(expected))
+
+
+def rational_wire(values):
+    return [(value.numerator,value.denominator) for value in values]
+
+
+if __name__=='__main__':
+    suite = unittest.defaultTestLoader.loadTestsFromTestCase(StageGFollowup)
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    if result.wasSuccessful():
+        print(json.dumps(SUMMARY,sort_keys=True))
+    raise SystemExit(not result.wasSuccessful())

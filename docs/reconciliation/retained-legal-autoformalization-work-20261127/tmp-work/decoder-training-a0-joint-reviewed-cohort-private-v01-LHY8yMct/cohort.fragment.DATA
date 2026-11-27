@@ -1,0 +1,173 @@
+A0_REVIEWED_COHORT_SCHEMA: Final = "legal-ir-a0-joint-reviewed-cohort-readback/v1"
+
+
+def _a0_reviewed_train_occurrences(receipt, train_members, split_sha, consumer):
+    """Check the original TRAIN receipt's metadata ahead of owner authentication."""
+    def require(ok, message):
+        if not ok:
+            raise ValueError(message)
+
+    profiles = (
+        ("reviewed-decoder-training-input-receipt/v4", "mixed-sort-admission-component-decoder-training-inputs/v4"),
+        ("reviewed-decoder-digest-omitted-training-input-receipt/v1", "complete-reviewed-mixed-digest-omitted-training-inputs/v1"),
+    )
+    require((receipt.get("schema"), receipt.get("profile")) in profiles
+            and receipt.get("admission_profile") == "complete-reviewed-mixed-sort-norm-admission/v3"
+            and receipt.get("split_manifest_sha256") == split_sha
+            and receipt.get("production_training_eligible") is receipt.get("current_reviewed_training_permitted") is True
+            and receipt.get("fixture_only") is receipt.get("training_executed") is receipt.get("backend_execution_authorized") is False
+            and receipt.get("provenance_kind") == "statutory"
+            and type(receipt.get("training_mask")) is int and receipt["training_mask"] == 1,
+            "current statutory TRAIN receipt with exact split and training permission required")
+    ordered = receipt.get("training_record_ids")
+    require(type(ordered) is list and all(type(row) is str and row for row in ordered)
+            and 1 <= len(ordered) <= 4096 and len(set(ordered)) == len(ordered) == len(train_members)
+            and set(ordered) == set(train_members)
+            and type(receipt.get("record_count")) is int and receipt["record_count"] == len(ordered),
+            "TRAIN receipt must exhaust the exact selected TRAIN partition")
+    aggregate = receipt.get("current_consumer_receipt")
+    require(type(aggregate) is dict and set(aggregate) == {"schema", "row_count", "components"}
+            and aggregate["schema"] == "reviewed-cycle-component-consumer-receipts/v2"
+            and type(aggregate["row_count"]) is int and aggregate["row_count"] == len(ordered)
+            and type(aggregate["components"]) is list and 1 <= len(aggregate["components"]) <= len(ordered),
+            "complete original V3 TRAIN consumer aggregate required")
+    positions = {row_id: i for i, row_id in enumerate(ordered)}
+    commitments = receipt.get("row_commitments")
+    require(type(commitments) is list and len(commitments) == len(ordered)
+            and all(type(row) is dict and row.get("id") == identifier
+                    for row, identifier in zip(commitments, ordered, strict=True)),
+            "original TRAIN row commitments must cover the ordered roster")
+    assessments = receipt.get("admission_assessment_sha256")
+    split_guards = receipt.get("component_split_guard")
+    custody = receipt.get("current_admission_custody")
+    require(all(type(item) is dict for item in (assessments, split_guards, custody)),
+            "original aggregate TRAIN assessment, split and custody evidence required")
+    used, seen_components, occurrences = set(), set(), set()
+    for component in aggregate["components"]:
+        require(type(component) is dict and type(component.get("component_id")) is str and component["component_id"]
+                and component["component_id"] not in seen_components and type(component.get("row_ids")) is list
+                and bool(component["row_ids"]), "unique original TRAIN component receipt required")
+        rows = component["row_ids"]
+        require(all(type(row) is str and row in positions and row not in used for row in rows)
+                and len(set(rows)) == len(rows) and rows == sorted(rows, key=positions.__getitem__),
+                "TRAIN components must exhaust the ordered TRAIN records without aliases")
+        original = component.get("receipt")
+        key = component["component_id"]
+        require(type(original) is dict and original.get("schema") == consumer.REVIEWED_V3_SCHEMA
+                and original.get("profile") == consumer.REVIEWED_V3_PROFILE and original.get("operation") == TRAINING_OPERATION
+                and original.get("status") == "ready" and original.get("semantic_admission_replayed") is True
+                and original.get("semantic_use_eligible") is True and original.get("blockers") == []
+                and original.get("provenance_kind") == "statutory" and original.get("fictional_fixture_allowed") is False
+                and type(original.get("permitted_uses")) is list and TRAINING_OPERATION in original["permitted_uses"]
+                and type(original.get("training_mask")) is int and original["training_mask"] == 1
+                and type(original.get("row_count")) is type(original.get("ready_row_count")) is int
+                and original["row_count"] == original["ready_row_count"] == len(rows)
+                and type(original.get("input_sha256s")) is dict and original["input_sha256s"].get("split_manifest") == split_sha
+                and original.get("admission_inputs_sha256") == component.get("admission_inputs_sha256")
+                and all(type(original.get(key)) is str and re.fullmatch(r"[0-9a-f]{64}", original[key])
+                        for key in ("admission_inputs_sha256", "admission_assessment_sha256"))
+                and assessments.get(key) == original["admission_assessment_sha256"]
+                and type(component.get("component_split_guard")) is dict
+                and component["component_split_guard"] == split_guards.get(key)
+                and component["component_split_guard"].get("schema") == "reviewed-decoder-component-split-guard/v1"
+                and component["component_split_guard"].get("passed") is True
+                and component["component_split_guard"].get("corpus_wide_dependency_isolation_proved") is False
+                and type(custody.get(key)) is dict
+                and type(original.get("rows")) is list and len(original["rows"]) == len(rows),
+                "every TRAIN component needs the original ready V3 training admission in the selected split")
+        for index, (identifier, row) in enumerate(zip(rows, original["rows"], strict=True)):
+            require(type(row) is dict and row.get("id") == identifier and type(row.get("row_index")) is int
+                    and row["row_index"] == index and row.get("status") == "ready" and row.get("blockers") == []
+                    and all(type(row.get(field)) is str and row[field] == commitments[positions[identifier]].get(field)
+                            for field in ("unit_id", "source_text_sha256", "canonical_ir_sha256"))
+                    and type(row.get("occurrence_cid")) is str and row["occurrence_cid"] and row["occurrence_cid"] not in occurrences,
+                    "TRAIN row receipt changes an ordered record or duplicates a source occurrence")
+            occurrences.add(row["occurrence_cid"])
+        used.update(rows)
+        seen_components.add(component["component_id"])
+    require(used == set(ordered) and set(assessments) == set(split_guards) == set(custody) == seen_components,
+            "TRAIN consumer aggregate omitted selected records or component evidence")
+    return occurrences
+
+
+def project_a0_joint_reviewed_cohort(development_scope, training_receipt, *,
+        expected_training_receipt_sha256, current_source_epoch_sha256,
+        admission_producer_path, admission_producer_sha256, verify_original_training_owner,
+        verify_development_owner):
+    """Join original TRAIN consent to the existing private DEVELOPMENT replay.
+
+    The TRAIN owner authenticates the exact receipt and all constituent V3
+    admission replays under the supplied current producer and Source epoch.
+    The caller still needs the separate original FINAL and launch authorities.
+    """
+    def require(ok, message):
+        if not ok:
+            raise ValueError(message)
+
+    pins = (expected_training_receipt_sha256, current_source_epoch_sha256, admission_producer_sha256)
+    require(all(type(pin) is str and re.fullmatch(r"[0-9a-f]{64}", pin) for pin in pins)
+            and type(admission_producer_path) is str and admission_producer_path.startswith("/")
+            and admission_producer_path.endswith("/ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py")
+            and not {"", ".", ".."}.intersection(admission_producer_path.split("/")[1:])
+            and callable(verify_original_training_owner) and callable(verify_development_owner),
+            "exact current source, V3 admission producer and existing cohort owners required")
+    consumer = development_scope["consumer"]
+    selected = dict(development_scope)
+    split = development_scope["split_manifest"]
+    split_sha = development_scope["expected_split_manifest_sha256"]
+    require(type(split) is dict and _digest(split) == split_sha, "exact independently selected split required")
+    try:
+        resolved = LegalIRSplitManifest.from_mapping(split)
+    except (ValueError, TypeError, KeyError, AttributeError):
+        resolved = None
+    require(resolved is not None, "selected complete split manifest is invalid")
+    require(type(training_receipt) is dict and _digest(training_receipt) == expected_training_receipt_sha256,
+            "exact independent TRAIN receipt pin required")
+    training = json.loads(_canonical_json(training_receipt))
+    occurrences = _a0_reviewed_train_occurrences(training, resolved.samples_by_split[TRAIN_SPLIT], split_sha, consumer)
+    admission = development_scope["admission_inputs"]
+    admission_pin = consumer.reviewed_admission_inputs_sha256(admission)
+    require(admission["preparation"]["producer_pins"].get(admission_producer_path) == admission_producer_sha256,
+            "DEVELOPMENT preparation uses a different admission producer")
+    development = project_a0_disclosure_safe_split(**development_scope)
+    require(development["development"]["scope"] == "statutory_v3_replayed"
+            and development["train_member_count"] == len(occurrences),
+            "current statutory DEVELOPMENT replay for the same split is required")
+    binding = development_scope["development_binding"]
+    require(occurrences.isdisjoint(row["occurrence_cid"] for row in binding.receipt()["rows"]),
+            "TRAIN and DEVELOPMENT reuse an exact reviewed source occurrence")
+    proof = {"schema": A0_REVIEWED_COHORT_SCHEMA,
+             "source_epoch_sha256": current_source_epoch_sha256, "split_manifest_sha256": split_sha,
+             "population_sha256": development["population_sha256"],
+             "admission_producer": {"path": admission_producer_path, "sha256": admission_producer_sha256},
+             "training": {"operation": TRAINING_OPERATION, "receipt_sha256": expected_training_receipt_sha256,
+                          "member_count": len(occurrences)},
+             "development": development["development"], "split_projection_sha256": _digest(development),
+             "final_reservation_sha256": development["final"]["reservation_sha256"],
+             "final_access_granted": False, "execution_selected": False}
+    scope_sha = _digest(proof)
+    try:
+        validated_development = verify_development_owner(proof["split_projection_sha256"], split_sha,
+            proof["population_sha256"], proof["development"]["ordered_rows_sha256"],
+            proof["development"]["v3_receipt_sha256"]) is True
+    except Exception:
+        validated_development = False
+    require(validated_development, "existing DEVELOPMENT owner refused the exact original projection")
+    try:
+        approved = verify_original_training_owner(expected_training_receipt_sha256, scope_sha) is True
+    except Exception:
+        approved = False
+    require(approved, "original TRAIN owner refused the exact current joint cohort")
+    require(development_scope.keys() == selected.keys()
+            and all(development_scope[key] == value if key.startswith("expected_")
+                    else development_scope[key] is value for key, value in selected.items())
+            and _digest(training_receipt) == expected_training_receipt_sha256
+            and _digest(development_scope["split_manifest"]) == split_sha
+            and consumer.reviewed_admission_inputs_sha256(development_scope["admission_inputs"]) == admission_pin
+            and _digest(development_scope["development_rows"]) == development["development"]["ordered_rows_sha256"]
+            and _digest(development_scope["development_binding"].receipt()) == development["development"]["v3_receipt_sha256"]
+            and _digest(development_scope["exposure_records"]) == binding.receipt()["input_sha256s"]["exposure"]
+            and development_scope["reservation_owner"].fixed_stage_final_reservation_commitment(
+                development_scope["final_reservation"]) == proof["final_reservation_sha256"],
+            "joint cohort inputs changed during original TRAIN approval")
+    return dict(proof, scope_sha256=scope_sha)

@@ -1,0 +1,151 @@
+{
+  "D_clean_worktree_and_index": true,
+  "D_index_before": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795598996156799793",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795598996155799785",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "a394e7b28860b3222ce475cde131737288aacfe599f9e95c06405448d0741b5c"
+  },
+  "D_index_frozen": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795599571719292315",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795599571718292305",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "c0753e50bc82c5bed19ace9ac98d96e34ac294b34e791eb65bafadd9ee5b39c1"
+  },
+  "D_local_HEAD": "a79b4ef9a8b9a4aee2e53a975832784e694b5e33",
+  "D_parent": "64744f61c80f452b8395db41289c2b1dcafba9d6",
+  "D_tree": "4dc7b0aca19c557eab81ff6014c9cb4463b96f3c",
+  "actual_frozen_for_READ6_and_ordinary21": true,
+  "exact_committed_files": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py": {
+      "bytes": 37725,
+      "full9": {
+        "st_ctime_ns": "1795599435126841171",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042551",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795599434495784462",
+        "st_nlink": "1",
+        "st_size": "37725",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_external_benchmark.py",
+      "previous_blob": "a7f4498dc98e26740a49c3865bc329cd10505f66",
+      "sha256": "1a7d55434d9c89ac22c6cc7dc53f30ded964ab0846e0a35c84efe8d760495f98",
+      "stage0_and_committed_blob": "fe181984a79a0088faa46010bd2d60e155d27b0a"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py": {
+      "bytes": 12917,
+      "full9": {
+        "st_ctime_ns": "1795599435735847783",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042552",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795599434499223044",
+        "st_nlink": "1",
+        "st_size": "12917",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py",
+      "previous_blob": "078599a90c5cf003b8252f63ba0a9f04dc81b69a",
+      "sha256": "e64e9f8fa947d15ffbd3196eaf4b9a0b4df99492e6f95bdbb167bfe54ae4fb75",
+      "stage0_and_committed_blob": "939c3d60a7bb13f021679de702d760d0c19f30aa"
+    }
+  },
+  "guide519_and_all_other_tree_entries_preserved": true,
+  "installed_Source_closed": {
+    "bytes": 4543,
+    "full9": {
+      "st_ctime_ns": "1795599495514786683",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "28459302",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795599495514786683",
+      "st_nlink": "1",
+      "st_size": "4543",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-P8-benchmark-exact-Source2-selected-v306-ene6i7ym/Root-P8-benchmark-two-installed-Source-closed-small-v306.json",
+    "sha256": "aa054444cee38da24fe76e3dd681c0a9c5ae4609ebbba2b4932c5cb5abe5dd66"
+  },
+  "local_origin_main_tracking_unchanged": "64744f61c80f452b8395db41289c2b1dcafba9d6",
+  "no_push_new_benchmark_tests_Source_CI_Native_model_action": true,
+  "ordinary21": "UNRUN",
+  "other_roots_preserved": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "clean_worktree_and_index": true,
+      "index_full9": {
+        "st_ctime_ns": "1795500785295142737",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69342879",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795500785294142725",
+        "st_nlink": "1",
+        "st_size": "4412225",
+        "st_uid": "1000"
+      },
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "hallucinate": {
+      "HEAD": "fb0ea773e0baa2499378d91883e9041798b10636",
+      "clean_worktree_and_index": true,
+      "index_full9": {
+        "st_ctime_ns": "1795599000178304267",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69342837",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795599000177833463",
+        "st_nlink": "1",
+        "st_size": "138750",
+        "st_uid": "1000"
+      },
+      "tree": "6e8e7e2c33d1e20d285293b290f7a703c227d294"
+    },
+    "root": {
+      "HEAD": "3cec152cc741a41d920978e8526c91dbc17ebdb6",
+      "clean_worktree_and_index": true,
+      "index_full9": {
+        "st_ctime_ns": "1795599002895856223",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69387327",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795599002894856214",
+        "st_nlink": "1",
+        "st_size": "7262222",
+        "st_uid": "1000"
+      },
+      "tree": "4e9ee00baa783c5d35735e69a4ad40620c9a0b71"
+    }
+  },
+  "private21_remains_separate": true,
+  "schema": "P8-benchmark-exact2-local-only-freeze/v306"
+}

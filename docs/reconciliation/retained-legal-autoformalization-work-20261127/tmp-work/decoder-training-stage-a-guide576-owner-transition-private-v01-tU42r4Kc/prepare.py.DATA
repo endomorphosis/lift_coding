@@ -1,0 +1,227 @@
+"""Prepare a detached Guide576 evidence projection for the existing Stage A owner."""
+from hashlib import sha1, sha256
+import json
+from pathlib import Path
+import sys
+
+HERE = Path(__file__).absolute().parent
+TMP = HERE.parent
+REPLAY = TMP / 'decoder-training-stage-a-guide576-rebind-private-v01-HW7T7zkk'
+PRIOR = TMP / 'decoder-training-stage-a-guide575-rebind-private-v01-9K6ruUs7'
+EPOCH = TMP / 'decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI'
+BOUNDARY = TMP / 'decoder-training-strict-role-monitor-private-v01-2UCYYRnK' / 'guide576-frontier.json'
+PREIMAGE = TMP / 'Phase2-V3-recursive-definition-private-dE9srJIA' / 'legal_reviewed_norm_admission_v3.py.before.DATA'
+ROLE = 'ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py'
+TEST = 'tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py'
+STAMP_FIELDS = ('path', 'bytes', 'full9', 'sha256')
+
+
+def wire(value):
+    return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode()
+
+
+def require(ok, message):
+    if not ok:
+        raise ValueError(message)
+
+
+def detached(path):
+    return (path.is_absolute() and path.is_relative_to(TMP) and
+            not {'.git', 'datasets', 'accelerate', 'repositories', '..'} & set(path.parts) and
+            not any(item.is_symlink() for item in (path, *path.parents)))
+
+
+def audit(event, args):
+    if event == 'open' and isinstance(args[0], (str, bytes, Path)):
+        path = Path(args[0].decode() if isinstance(args[0], bytes) else args[0])
+        stdlib = Path(sys.base_prefix) / 'lib' / f'python{sys.version_info.major}.{sys.version_info.minor}'
+        if path.is_relative_to(stdlib) and not {'site-packages', 'dist-packages', '..'} & set(path.parts):
+            require(not args[2] & 0o3 and not any(p.is_symlink() for p in (path, *path.parents)),
+                    'Only regular standard-library reads are allowed')
+        else:
+            require(detached(path), f'Only detached archive paths are allowed: {path}')
+            if args[2] & 0o3:
+                require(path.is_relative_to(HERE), f'Write outside the new private artifact: {path}')
+    if event.startswith(('socket.', 'subprocess.')) or event in ('os.system', 'os.exec', 'os.posix_spawn', 'os.fork'):
+        raise ValueError('No network or subprocess inside detached replay')
+
+
+def pin(path, size, digest):
+    return {'path': str(path), 'bytes': size, 'sha256': digest}
+
+
+def archive(reference):
+    path = Path(reference['path'])
+    require(detached(path) and path.is_file(), 'Expected a detached regular file')
+    with path.open('rb') as stream:
+        raw = stream.read(reference['bytes'] + 1)
+    require((len(raw), sha256(raw).hexdigest()) == (reference['bytes'], reference['sha256']),
+            f'Detached evidence differs: {path}')
+    return raw
+
+
+def load(reference):
+    return json.loads(archive(reference))
+
+
+def namespace(reference):
+    scope = {'__name__': 'detached_guide576_projection', '__file__': reference['path']}
+    exec(compile(archive(reference), reference['path'], 'exec'), scope)
+    return scope
+
+
+def save(name, value):
+    raw = wire(value)
+    path = HERE / name
+    require(detached(path), 'Expected a detached output path')
+    if path.exists():
+        require(archive(pin(path, len(raw), sha256(raw).hexdigest())) == raw, 'Existing output differs')
+    else:
+        with path.open('xb') as stream:
+            stream.write(raw)
+    return pin(path, len(raw), sha256(raw).hexdigest())
+
+
+def stamp(row):
+    return {key: row[key] for key in STAMP_FIELDS}
+
+
+def git_blob(raw):
+    return sha1(f'blob {len(raw)}\0'.encode() + raw).hexdigest()
+
+
+def project(prior, rows, replay, writer, proof, role, owning_test):
+    """Create the current metadata projection, with prior receipts unchanged."""
+    old_inputs = prior['reader_inputs']
+    old_roots = old_inputs['current_roots']
+    index = writer['index']
+    require(index == replay['writer_expected_index'] and
+            old_roots['D']['root'] == str(Path(index['path']).parent.parent) and
+            writer['A'] == old_roots['A']['HEAD'] == replay['A'] and
+            writer['HEAD'] == replay['D'] and writer['tree'] == replay['D_tree'],
+            'Guide576 endpoint must match the observed writer freeze')
+    by_path = {row['path']: stamp(row) for row in rows}
+    require(len(by_path) == len(rows) == 1614 and index['path'] in by_path, 'Exact pre-doc outer epoch required')
+    by_path[index['path']] = index
+    old_retained = prior['relocated_retained_outer']
+    retained = [by_path[row['path']] for row in old_retained]
+    require(len(retained) == len({row['path'] for row in retained}) == 1218 and
+            sum(row['path'].endswith('.py') for row in retained) == 1213,
+            'Exact Stage A retained roster required')
+    scope = old_inputs['historical_origin_scope_recheck']
+    historical = set(scope['retained_92_paths'])
+    require(len(historical) == 92 and historical <= {row['path'] for row in retained if row['path'].endswith('.py')}
+            and scope['retained_92_paths'][35] == role['current']['path']
+            and owning_test['current']['path'] not in historical | set(scope['fresh_32_paths']),
+            'Exact historical role order and disjoint owning test required')
+    changed = [(old, new) for old, new in zip(old_retained, retained, strict=True) if old != new]
+    expected = [(old_inputs['current_index'], index), (role['previous'], role['current']),
+                (owning_test['previous'], owning_test['current'])]
+    require(len(changed) == 3 and all(pair in changed for pair in expected),
+            'Only the final index, retained owner and its disjoint owning test may differ')
+    targets = old_inputs['fresh_Source_body_targets']
+    require([row['path'] for row in targets] == scope['fresh_32_paths'] and len(targets) == 32 and
+            all(stamp(row) == by_path[row['path']] for row in targets), 'Exact ordered fresh targets required')
+    docs = {row['path']: stamp(row) for row in writer['committed_docs'].values()}
+    old_guides = old_inputs['four_guide_post_candidates_for_current_owner_recheck']
+    require(len(docs) == len(old_guides) == 4 and set(docs) == {row['path'] for row in old_guides},
+            'Exact guide postimage roster required')
+    guides = [docs[row['path']] for row in old_guides]
+    require(len({row['path'] for row in retained + guides + targets}) == 1254,
+            'Current proof paths must remain disjoint')
+    latest_roots = dict(old_roots, D=dict(old_roots['D'], HEAD=writer['HEAD'], tree=writer['tree']))
+    return dict(prior, reader_inputs=dict(old_inputs, current_roots=latest_roots, current_index=index,
+                four_guide_post_candidates_for_current_owner_recheck=guides),
+                relocation_proof=proof, relocated_retained_outer=retained,
+                changed_retained_content=[dict(previous=old, relocated=new, index_role=new == index)
+                                           for old, new in changed])
+
+
+def prepare():
+    before = pin(REPLAY/'descriptor.json', 7934, '77cf11cd150a9dad850c164fc2760b5e8659e3a39fcda43fafddde28327b85b8')
+    evidence = load(before)
+    driver = namespace(evidence['detached_driver'])
+    index, old, pre, final, rows, replay = driver['reconstruct']()
+    require(replay == evidence['replay'] and index == archive(evidence['writer_matched_index']),
+            'Exact published writer-index replay required')
+    historical_refusal = driver['verify_scope'](old, pre, final, rows, replay)
+    require(historical_refusal == evidence['role_continuity'] and historical_refusal['retained_import_scope_accepted'] is False,
+            'Original refusal must stay intact')
+    prior = load(replay['prior_preview'])
+    writer = load(replay['writer'])
+    pub = load(replay['publication'])
+    code = load(replay['code_publication'])
+    read = load(replay['closed_pre_doc_READ3'])
+    qualification = load(code['qualification'])
+    require(pub['live_main_before']['datasets'] == code['live_main_after']['datasets'] == writer['prior_D'] and
+            code['live_main_before']['datasets'] == prior['reader_inputs']['current_roots']['D']['HEAD'] and
+            read['terminal_returncode'] == qualification['terminal_returncode'] == 0 and
+            read['Source_closed'] is read['module_closed'] is qualification['Source_lease_and_resource_cleanup_closed'] is True
+            and len(qualification['ordered_cases']) == 37
+            and qualification['actual_ordinary_counts'] == dict(errors=0, failures=0, functions=15, passed=37, skipped=0, tests=37)
+            and qualification['large_model_fit_or_Native_or_statutory_qualification'] is False,
+            'Exact closed predecessor chain and engineering suite required')
+    require(set(replay['stage_zero_code_changes']) == {ROLE, TEST} and
+            len(replay['publisher_document_paths']) == 4 and old[ROLE] != pre[ROLE] == final[ROLE],
+            'Exact changed owner, disjoint test and four guides required')
+    code_row = code['exact_two_changes'][ROLE]
+    prior_row, current_row = (historical_refusal[key] for key in ('prior_retained_role', 'new_retained_role'))
+    capture, = (row for row in read['individual_captures'] if row['path'] == current_row['path'])
+    old_ref = pin(PREIMAGE, 34912, '30f9e1f2554b030241aeb8ec8ffc1f6c98816eee2732c83e59dbf3c0b36de50e')
+    prior_raw, new_raw = archive(old_ref), archive(capture['raw_reference'])
+    require(stamp(capture) == current_row == stamp(code_row) and
+            (prior_row['bytes'], prior_row['sha256']) == (len(prior_raw), sha256(prior_raw).hexdigest()) and
+            old[ROLE][:3] == (git_blob(prior_raw), 0o100644, 0) and
+            final[ROLE][:3] == (git_blob(new_raw), 0o100644, 0), 'Old/new retained owner body pins differ')
+    guard = dict(previous=prior_row, current=current_row, ordinal=36, old_raw=old_ref,
+                 current_closed_capture=capture, old_Git_blob=old[ROLE][0], current_Git_blob=final[ROLE][0])
+    test_row = code['exact_two_changes'][TEST]
+    test_capture, = (row for row in read['individual_captures'] if row['path'] == test_row['path'])
+    test_prior, = (row for row in prior['relocated_retained_outer'] if row['path'] == test_capture['path'])
+    require(stamp(test_capture) == stamp(test_row) and
+            old[TEST][:3] == (test_row['parent_blob'], 0o100644, 0) and
+            pre[TEST] == final[TEST] and final[TEST][:3] == (git_blob(archive(test_capture['raw_reference'])), 0o100644, 0),
+            'Disjoint owning test changed outside the observed stage-zero transition')
+    test = dict(previous=test_prior, current=stamp(test_capture), current_closed_capture=test_capture,
+                old_Git_blob=old[TEST][0], current_Git_blob=final[TEST][0])
+    proof = save('retained-owner-evidence-v02.INERT.json', dict(
+        schema='private-guide576-stage-a-retained-owner-transition/v1',
+        historical_refusal=before, retained_owner=guard, disjoint_owning_test=test, previous_preview=replay['prior_preview'],
+        previous_index=replay['prior_guide_index'], current_writer_index=evidence['writer_matched_index'],
+        current_index=replay['writer_expected_index'], current_writer=replay['writer'],
+        pre_doc_READ3=replay['closed_pre_doc_READ3'], code_publication=replay['code_publication'],
+        publication=replay['publication'], ordinary37=code['qualification'],
+        historical_scope_transferred=False, current_owner_closure=None, cohort_use_selected=False,
+        selection=None, dispatch_authority=False))
+    projected = project(prior, rows, replay, writer, proof, guard, test)
+    preview = save('guide576-conditional-preview.INERT.json', projected)
+    boundary = load(pin(BOUNDARY, BOUNDARY.stat().st_size,
+                        '7ed65da7ceecdfd17d2c38d56c45c893728cd8e8d0a6f72f2824a99658451110'))
+    ledger = writer['full_charge']
+    accounting = load(ledger)
+    paid = accounting['after_full_retained_precharge']
+    headroom = min(paid['global_cap']-paid['used'], paid['internal_cap']-paid['internal_used'])
+    require(headroom == boundary['retained_headroom_bytes'] == 6356992 and paid['captures'] == 543402 and
+            accounting['all_prior_costs_retained'] is True, 'Original charges must be retained')
+    pricing = namespace(evidence['original_guide575_driver'])
+    pricing['ALLOWED'].add(HERE)
+    pricing['archive'] = archive
+    pricing['save'] = lambda _name, price: save('conditional-cost.INERT.json', dict(
+        price, schema='private-guide576-stage-a-conditional-cost/v1',
+        current_owner_closure=None, current_cohort_selection=None, funding_allocation=None,
+        conditions=['existing owner accepts exact changed retained module and Reader tuple',
+                    'independent postpublication index and paired owner closure',
+                    'existing budget owners select exact control ceilings']))
+    quote = pricing['quotes'](preview, ledger, headroom)
+    return save('descriptor.json', dict(schema='private-guide576-stage-a-nonexecuting-owner-handoff/v1',
+        original_refusal=before, exact_transition=proof, conditional_reader_preview=preview, conditional_cost=quote,
+        unchanged_fresh=32, unchanged_historical=91, changed_historical=1, original_historical_archive_preserved=20,
+        current_independent_index=None, selection=None, owner_acceptance=None,
+        current_TRAIN_consumer=None, current_DEVELOPMENT_hparam_selection_consumer=None,
+        first_new_legal_requirement='Regenerate the exact subject and bind its independent legal/formal signatures before current cohort receipts.',
+        execution_selected=False, dispatch_authority=False))
+
+
+if __name__ == '__main__':
+    sys.addaudithook(audit)
+    print(wire(prepare()).decode())

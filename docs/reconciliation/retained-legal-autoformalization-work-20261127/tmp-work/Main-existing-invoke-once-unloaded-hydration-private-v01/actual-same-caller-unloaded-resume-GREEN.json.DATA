@@ -1,0 +1,39 @@
+{
+  "Git": 0,
+  "Native": 0,
+  "SDK": 0,
+  "SQL": 0,
+  "Source": 0,
+  "actual_function": "same invoke_once and exact pinned existing function exports",
+  "boundary": "actual source-verifying loader executed once per cohort, pinned real function objects reused; only _open_codex_app_connection bound to fictional transport; real metadata parser/artifact writer/reader/sender validators retained",
+  "charged_reads_at_cohort_close": 3990680,
+  "errors": [],
+  "failures": [],
+  "label": "after",
+  "model": 0,
+  "parents": 24,
+  "real_RPC": 0,
+  "root_cause": [
+    {
+      "methods": [
+        "initialize",
+        "initialized",
+        "thread/read",
+        "thread/turns/list",
+        "initialize",
+        "initialized",
+        "thread/read",
+        "thread/turns/list",
+        "thread/resume",
+        "thread/read",
+        "thread/turns/list",
+        "turn/start"
+      ],
+      "read_snapshot": null,
+      "reason": "turn_start_enqueue_ack",
+      "result": "accepted_enqueue_only"
+    }
+  ],
+  "skipped": [],
+  "transcript": "test_accepted_enqueue_is_not_replayed (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_accepted_enqueue_is_not_replayed) ... ok\ntest_actual_unloaded_terminal_root_cause_then_same_caller_can_enqueue (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_actual_unloaded_terminal_root_cause_then_same_caller_can_enqueue) ... ok\ntest_after_resume_thread_turn_and_capability_drift_never_dispatches (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_after_resume_thread_turn_and_capability_drift_never_dispatches) ... ok\ntest_all_three_original_terminal_statuses_can_hydrate (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_all_three_original_terminal_statuses_can_hydrate) ... ok\ntest_before_resume_identity_or_terminal_drift_never_mutates (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_before_resume_identity_or_terminal_drift_never_mutates) ... ok\ntest_changed_message_or_unknown_after_resume_prevents_start (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_changed_message_or_unknown_after_resume_prevents_start) ... ok\ntest_existing_loaded_active_steers_without_resume_or_start (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_existing_loaded_active_steers_without_resume_or_start) ... ok\ntest_existing_loaded_terminal_starts_without_resume (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_existing_loaded_terminal_starts_without_resume) ... ok\ntest_existing_unknown_namespace_is_not_delivery_proof_or_retry_permission (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_existing_unknown_namespace_is_not_delivery_proof_or_retry_permission) ... ok\ntest_explicit_resume_refusal_never_dispatches_or_replays (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_explicit_resume_refusal_never_dispatches_or_replays) ... ok\ntest_loaded_thread_refusing_input_is_not_hydrated (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_loaded_thread_refusing_input_is_not_hydrated) ... ok\ntest_metadata_only_resume_has_exact_two_params_and_durable_unknown (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_metadata_only_resume_has_exact_two_params_and_durable_unknown) ... ok\ntest_post_resume_duplicate_json_fails_without_message (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_post_resume_duplicate_json_fails_without_message) ... ok\ntest_resume_lost_ack_is_unknown_and_never_replayed (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_resume_lost_ack_is_unknown_and_never_replayed) ... ok\ntest_resume_response_caps_fail_closed_without_dispatch (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_resume_response_caps_fail_closed_without_dispatch) ... ok\ntest_resume_response_id_and_duplicate_json_refuse (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_resume_response_id_and_duplicate_json_refuse) ... ok\ntest_resume_send_error_is_unknown_and_never_replayed (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_resume_send_error_is_unknown_and_never_replayed) ... ok\ntest_resume_wrong_identity_and_malformed_ack_are_unknown (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_resume_wrong_identity_and_malformed_ack_are_unknown) ... ok\ntest_root_unselected_and_oversized_message_create_no_output_or_rpc (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_root_unselected_and_oversized_message_create_no_output_or_rpc) ... ok\ntest_start_lost_ack_after_resume_is_unknown_and_never_replayed (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_start_lost_ack_after_resume_is_unknown_and_never_replayed) ... ok\ntest_unknown_reservation_race_prevents_resume_send (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_unknown_reservation_race_prevents_resume_send) ... ok\ntest_unloaded_active_is_not_resumed_or_dispatched (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_unloaded_active_is_not_resumed_or_dispatched) ... ok\ntest_unsupported_original_terminal_status_is_not_hydrated (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_unsupported_original_terminal_status_is_not_hydrated) ... ok\ntest_wrong_initial_thread_and_bad_schema_never_mutate (_private_same_invoke_once_tests_after.ExistingCallerHydrationTests.test_wrong_initial_thread_and_bad_schema_never_mutate) ... ok\n\n----------------------------------------------------------------------\nRan 24 tests in 0.628s\n\nOK\n"
+}

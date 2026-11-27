@@ -1,0 +1,74 @@
+"""Add the optional original elapsed clock to the existing continuation owner."""
+import ast
+from difflib import unified_diff
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+PRIOR = HERE.parent/'decoder-training-temporal-assessed-continuation-private-v01-L30pSB8r/projection.py'
+raw = PRIOR.read_bytes()
+assert (len(raw),sha256(raw).hexdigest())==(99542,'46669123c8dbedeb95e2f8973f23de48d4dc24a3dd225798de40848574a96cc9')
+before = after = raw.decode()
+
+
+def replace(old,new):
+    global after
+    assert after.count(old)==1,old
+    after = after.replace(old,new,1)
+
+
+replace('def read_temporal_assessed_continuation(study_owner,',
+        (HERE/'whole_wall.py.IN').read_text()+'def read_temporal_assessed_continuation(study_owner,')
+replace('''        verify_original_continuation, verify_assessed_history_owner):
+    """Read two DEVELOPMENT''',
+        '''        verify_original_continuation, verify_assessed_history_owner,
+        whole_wall=None, expected_whole_wall_sha256=None, verify_whole_wall_owner=None):
+    """Read two DEVELOPMENT''')
+replace('''    no elapsed time for the other round and no cross-round training trajectory.
+    """
+    need''','''    no elapsed time for the other round and no cross-round training trajectory.
+    An optional original enclosing wall reports elapsed time for the whole history.
+    """
+    need''')
+replace('''         "two independently selected assessment and resource scopes required")
+
+    def current():''','''         "two independently selected assessment and resource scopes required")
+    need((whole_wall is None and expected_whole_wall_sha256 is None and verify_whole_wall_owner is None)
+         or (type(whole_wall) is TemporalAssessedWall and study_owner._pin(expected_whole_wall_sha256)
+             and callable(verify_whole_wall_owner)),
+         "enclosing elapsed requires an exact selected wall and independent clock owner")
+
+    def current():
+        if whole_wall is not None:
+            need(temporal_assessed_wall_commitment(study_owner, expected_assessed_continuation_sha256,
+                 whole_wall) == expected_whole_wall_sha256,
+                 "selected original enclosing wall changed")''')
+replace('''         "original history owner refused the assessed continuation or paid cost union")
+    current()
+    return {"schema": TEMPORAL_ASSESSED_CONTINUATION''','''         "original history owner refused the assessed continuation or paid cost union")
+    current()
+    elapsed = None
+    if whole_wall is not None:
+        selected_pins = {expected_assessed_continuation_sha256, expected_parent_projection_sha256, training_pin,
+                         *(value for pin_row in pins for value in pin_row)}
+        elapsed = _temporal_assessed_enclosing_wall(
+            study_owner, original=expected_assessed_continuation_sha256, rounds=rounds, assessed=assessed,
+            physical=physical, reserved=selected_pins | receipt_sets[0] | receipt_sets[1],
+            witness=whole_wall, expected=expected_whole_wall_sha256, approve=verify_whole_wall_owner)
+        current()
+    return {"schema": TEMPORAL_ASSESSED_CONTINUATION''')
+replace('''"whole_study_elapsed_wall": None, "cost_to_heldout_threshold_established": False,''',
+        '''"whole_study_elapsed_wall": elapsed, "cost_to_heldout_threshold_established": False,''')
+old_tree,new_tree = map(ast.parse,(before,after))
+names = {'read_temporal_assessed_continuation','TemporalPaidEventWindow','TemporalAssessedWall',
+         '_temporal_assessed_enclosing_wall','temporal_assessed_wall_commitment'}
+def retained(tree):
+    return [ast.dump(node) for node in tree.body if getattr(node,'name',None) not in names
+            and not (isinstance(node,ast.Assign)
+                     and getattr(node.targets[0],'id',None)=='TEMPORAL_ASSESSED_WALL')]
+assert retained(old_tree)==retained(new_tree)
+compile(after,str(HERE/'projection.py'),'exec')
+(HERE/'projection.py').write_text(after)
+(HERE/'projection.diff').write_text(''.join(unified_diff(before.splitlines(keepends=True),after.splitlines(keepends=True),
+    fromfile=str(PRIOR),tofile=str(HERE/'projection.py'))))
+print(len(after.encode()),sha256(after.encode()).hexdigest())

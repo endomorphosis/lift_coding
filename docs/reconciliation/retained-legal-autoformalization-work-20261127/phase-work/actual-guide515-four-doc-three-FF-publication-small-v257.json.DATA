@@ -1,0 +1,195 @@
+{
+  "actual_push_outputs": {
+    "datasets": {
+      "observed_exit_code": 0,
+      "stderr": "remote: \nremote: GitHub found 150 vulnerabilities on endomorphosis/ipfs_datasets_py's default branch (8 critical, 77 high, 58 moderate, 7 low). To find out more, visit:        \nremote:      https://github.com/endomorphosis/ipfs_datasets_py/security/dependabot        \nremote:",
+      "stdout": "To https://github.com/endomorphosis/ipfs_datasets_py.git\n \tb5d5b5eaa71c97c43a3f421340c179b613b83191:refs/heads/main\tc023a6cb0d..b5d5b5eaa7\nDone"
+    },
+    "hallucinate": {
+      "observed_exit_code": 0,
+      "stderr": "",
+      "stdout": "To https://github.com/endomorphosis/hallucinate_app.git\n \tceec89fd6c684d380e9441efa1b4bb518c9b7817:refs/heads/main\te820946..ceec89f\nDone"
+    },
+    "root": {
+      "observed_exit_code": 0,
+      "stderr": "",
+      "stdout": "To https://github.com/endomorphosis/lift_coding.git\n \tc174f6db1c8df4ce6ad3fb0d6a69c32c513d0aa8:refs/heads/main\t56c5a3cb1f..c174f6db1c\nDone"
+    }
+  },
+  "all_checkouts_clean": true,
+  "all_other_gitlinks_and_accelerate_preserved": true,
+  "force_or_tag_push": false,
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "c023a6cb0d7b18e42e80ad0d82bedfc75e4fd8ae",
+        "to": "b5d5b5eaa71c97c43a3f421340c179b613b83191"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "c023a6cb0d7b18e42e80ad0d82bedfc75e4fd8ae",
+        "to": "b5d5b5eaa71c97c43a3f421340c179b613b83191"
+      },
+      "hallucinate_app": {
+        "from": "e8209466cf7062005d3386eda4750f5067de0572",
+        "to": "ceec89fd6c684d380e9441efa1b4bb518c9b7817"
+      }
+    }
+  },
+  "guide_blobs": {
+    "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json": {
+      "blob": "a226ecc51fa27c156b9ad4e6cc6b3bdd1e77ef00",
+      "bytes": 1464982,
+      "full9": {
+        "st_ctime_ns": "1795565882414862037",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042509",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795565881773303578",
+        "st_nlink": "1",
+        "st_size": "1464982",
+        "st_uid": "1000"
+      },
+      "inserted_bytes": 9268,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+      "previous_blob": "6438c4475e68a1a3c6cb832496dbe848a8e195e4",
+      "sha256": "6743352c4a11603d4f7a486cad3e41c996d604b241a4c797981273916c340ae6"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md": {
+      "blob": "729d7f78253a1fd49ca3b168b048713974e68334",
+      "bytes": 962189,
+      "full9": {
+        "st_ctime_ns": "1795565883625872841",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042548",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795565881783772695",
+        "st_nlink": "1",
+        "st_size": "962189",
+        "st_uid": "1000"
+      },
+      "inserted_bytes": 5141,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+      "previous_blob": "da52644099051cab5f2578757e12f92bd66bb4c8",
+      "sha256": "fb4adb636de5a4ce36f402d267e654e63b938cac004e1dcb737303325a713433"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md": {
+      "blob": "1ab231b002cb89b272f1a3d2365886691a644424",
+      "bytes": 722174,
+      "full9": {
+        "st_ctime_ns": "1795565884231878248",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042549",
+        "st_mode": "33188",
+        "st_mtime_ns": "1795565881788508353",
+        "st_nlink": "1",
+        "st_size": "722174",
+        "st_uid": "1000"
+      },
+      "inserted_bytes": 5141,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+      "previous_blob": "b596fba42fb11ee0039e7403ac01b37a99719e59",
+      "sha256": "08ac37c1d82a0fd254d2840c9f480df9b6b3242864cedb1c6066d89c09f372ea"
+    },
+    "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json": {
+      "blob": "a226337b21537423657dca786e4b101f23db0c3e",
+      "bytes": 1719249,
+      "full9": {
+        "st_ctime_ns": "1795565883023867471",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042547",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795565881777855666",
+        "st_nlink": "1",
+        "st_size": "1719249",
+        "st_uid": "1000"
+      },
+      "inserted_bytes": 10561,
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+      "previous_blob": "9b527023356be8b508fc3d4fd1dd6e303bf8a48f",
+      "sha256": "6260648a7b6ce04d1d5576733e9d38951b64736536289a19d6305a1ace20bc76"
+    }
+  },
+  "installation": {
+    "Source_module_and_stages_closed": true,
+    "bytes": 5716,
+    "full9": {
+      "st_ctime_ns": "1795565932867986903",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72100336",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795565932867986903",
+      "st_nlink": "1",
+      "st_size": "5716",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-one-guide515-four-Source-CAS-selected-v257-o1dbgh1r/Root-one515-four-installed-Source-closed-small-v257.json",
+    "sha256": "1d5c2ed6fbcb404225b1aa317b5018dfebc661f6c82f4eb62d72f17a58aa7f18"
+  },
+  "local_after": {
+    "accelerate": {
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "index_and_worktree_clean": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "head": "b5d5b5eaa71c97c43a3f421340c179b613b83191",
+      "index_and_worktree_clean": true,
+      "tree": "873de32f122ad303687e5509c960ec468c90ee66"
+    },
+    "hallucinate": {
+      "head": "ceec89fd6c684d380e9441efa1b4bb518c9b7817",
+      "index_and_worktree_clean": true,
+      "tree": "a05cec190c9e56083b78d2e16eb77aaa3ccedbd4"
+    },
+    "root": {
+      "head": "c174f6db1c8df4ce6ad3fb0d6a69c32c513d0aa8",
+      "index_and_worktree_clean": true,
+      "tree": "847a08d008f23588046f2d69b481577925518892"
+    }
+  },
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "b5d5b5eaa71c97c43a3f421340c179b613b83191",
+    "hallucinate": "ceec89fd6c684d380e9441efa1b4bb518c9b7817",
+    "root": "c174f6db1c8df4ce6ad3fb0d6a69c32c513d0aa8"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "c023a6cb0d7b18e42e80ad0d82bedfc75e4fd8ae",
+    "hallucinate": "e8209466cf7062005d3386eda4750f5067de0572",
+    "root": "56c5a3cb1fc95d187e62fd7eb815bd2b113ed63c"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "preservation": {
+    "added_backlog_key": "current_user_goal_reviewed_dependency_versions_inverse16_software_evidence515_20261125",
+    "added_evidence_id": "reviewed-dependency-version40-real-inverse16-software-evidence515-20261125",
+    "added_evidence_ordinal": 515,
+    "all_code_paths_preserved": true,
+    "component_count": 126,
+    "exact_old_Markdown_byte_prefixes": true,
+    "no_status_changed": true,
+    "prior_evidence_values_preserved": 514,
+    "public40_public16_private12_separate": true,
+    "task_count": 24
+  },
+  "publisher_replayed_Source_SDK_test_CI_model_or_Native": false,
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "schema": "actual-guide515-four-document-three-fast-forward-publication/v257",
+  "scope": "One documentation milestone with no status or qualification promotion."
+}

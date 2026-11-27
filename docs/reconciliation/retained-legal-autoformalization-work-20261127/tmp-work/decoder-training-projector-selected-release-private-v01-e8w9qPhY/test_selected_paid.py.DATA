@@ -1,0 +1,159 @@
+"""Check selected release provenance through real comparison code with modeled meters."""
+
+from dataclasses import replace
+from hashlib import sha256
+import json
+from pathlib import Path
+import unittest
+
+HERE = Path(__file__).resolve().parent
+PREVIOUS = HERE.parent / "decoder-training-projector-request-paid-join-private-v01-OXrJ2XDz"
+path = PREVIOUS / "test_paid_request_join.py"
+raw = path.read_bytes()
+assert sha256(raw).hexdigest() == "6883e2588816969e0c32414b7001d6390fca2509d6374b6bce6b1ae70a503c1f"
+scope = {"__name__": "retained_paid_selection", "__file__": str(HERE / path.name)}
+for old, new in (
+    (b'{"relational_assessment.py": ASSESS, "study.py": STUDY}', b'{"relational_assessment.py": ASSESS, "study.py": STUDY,\n                   "autoencoder_inference.py": HERE / "launcher.py.DATA"}'),
+    (b'expected_request_selection_sha256=self.selection_pin)"',
+     b'expected_request_selection_sha256=self.selection_pin, require_prelaunch_bound_releases=getattr(self, \'require_bound\', False))"'),
+    (b"expected_request_selection_sha256s=getattr(self, 'request_pins', None))",
+     b"expected_request_selection_sha256s=getattr(self, 'request_pins', None), require_prelaunch_bound_releases=getattr(self, 'require_bound', False))"),
+):
+    assert raw.count(old) == 1, old
+    raw = raw.replace(old, new, 1)
+exec(compile(raw, str(path), "exec"), scope)
+BoundDirect, BoundComparison, Assessment = (scope[name] for name in ("BoundDirect", "BoundComparison", "Assessment"))
+wire = scope["wire"]
+COMPLETE = (0, 2, 3, 4)
+report = {}
+
+
+def replace_release(obj, index, *, bound=True):
+    def amend(doc):
+        lease = doc["actual_parent_lease"]
+        lease["lane"] = "modeled-local-decoder"
+        doc["resource_after_parent_release"] = {"schema": "exact-resource-lease-inspection/v1",
+            "read_only": True, "status": "absent", "lease": None, "descendants": [],
+            "lease_id": lease["lease_id"], "expected_owner_pid": lease["owner_pid"],
+            "expected_lane": lease["lane"],
+            "expected_request_id": "daemon:" + doc["actual_reservation_finalized"]["reservation_id"]}
+        doc["schema"] = "reviewed-qwen2-projector-direct-owner-release/v3" if bound else (
+            "reviewed-qwen2-projector-direct-owner-release/v2")
+        if bound:
+            doc["launch_selection"] = {"request_sha256": obj.attempts[index].original_request_sha256,
+                                       "source_epoch_sha256": obj.bound_epoch}
+        else:
+            doc.pop("launch_selection", None)
+    obj.edit_release(index, amend)
+
+
+class SelectedReleasePaidControls(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        BoundDirect.setUpClass()
+        cls.addClassCleanup(BoundDirect.doClassCleanups)
+        Assessment.setUpClass()
+        cls.addClassCleanup(Assessment.doClassCleanups)
+
+    def opening(self, *, selected=True):
+        obj = BoundDirect()
+        obj.require_bound = selected
+        obj.setUp()
+        obj.closes = {key: replace(value, start_ns=value.start_ns + 20_000_000, end_ns=value.end_ns + 20_000_000)
+                      for key, value in obj.closes.items()}
+        for index in COMPLETE:
+            replace_release(obj, index, bound=selected)
+        return obj
+
+    def comparison(self):
+        original = self.opening()
+        comparison = BoundComparison(original, Assessment())
+        comparison.prepare()
+        comparison.request_pins = (original.selection_pin,)
+        comparison.require_bound = True
+        return original, comparison
+
+    def test_selected_v3_mode_preserves_failed_paid_attempt_through_final_reconciliation(self):
+        original, comparison = self.comparison()
+        terminal = comparison.terminal
+        self.assertIs(terminal["original_prelaunch_bound_releases"], True)
+        failed = [item for item in terminal["attempts"] if item["disposition"] == "failed"]
+        self.assertEqual(len(failed), 1)
+        self.assertIsNone(failed[0]["release_report_sha256"])
+        compared = comparison.compare()
+        result = comparison.reconcile(compared, comparison.snapshot())
+        for value in (compared, result):
+            self.assertIs(value["original_prelaunch_bound_releases"], True)
+            self.assertEqual(value["request_selection_sha256s"], (original.selection_pin,))
+        self.assertEqual(result["unique_physical_event_count"], 6)
+        self.assertEqual(result["exclusive_attempt_work_ns"], {"cpu_ns": 15_000_000, "gpu_ns": 0})
+        self.assertEqual(result["experiment_work_ns"], {"cpu_ns": 20_000_000, "gpu_ns": 0})
+        for filename, value in (("fixture-comparison.json", compared), ("fixture-experiment.json", result)):
+            (HERE / filename).write_bytes(wire(value))
+        report.update(experiment_events=6, failed_retry_count=1, successful_release_count=4,
+                      scripted_paid_cpu_ns=20_000_000, actual_model_execution=False)
+
+    def test_same_bytes_legacy_receipt_passes_historical_mode_without_proving_prelaunch(self):
+        original = self.opening(selected=False)
+        terminal, pairs, _ = original.offered()
+        self.assertNotIn("original_prelaunch_bound_releases", terminal)
+        self.assertEqual(len(pairs), 4)
+        original.require_bound = True
+        with self.assertRaisesRegex(ValueError, "prelaunch-bound release required"):
+            original.offered()
+
+    def test_strict_mode_rejects_one_missing_release_marker_even_with_other_v3_receipts(self):
+        obj = self.opening()
+        replace_release(obj, 2, bound=False)
+        with self.assertRaisesRegex(ValueError, "prelaunch-bound release required"):
+            obj.offered()
+
+    def test_resealed_marker_must_match_request_and_observed_source(self):
+        for field in ("request_sha256", "source_epoch_sha256"):
+            with self.subTest(field=field):
+                obj = self.opening()
+                obj.edit_release(2, lambda doc: doc["launch_selection"].update({field: "a" * 64}))
+                with self.assertRaisesRegex(ValueError, "prelaunch selection differs"):
+                    obj.offered()
+
+    def test_v3_still_requires_exact_scheduler_absence(self):
+        obj = self.opening()
+        obj.edit_release(2, lambda doc: doc["resource_after_parent_release"].update({"descendants": ["still live"]}))
+        with self.assertRaisesRegex(ValueError, "scheduler inspection differs"):
+            obj.offered()
+
+    def test_strict_paid_mode_requires_independent_digest_and_epoch_before_replay(self):
+        obj = self.opening()
+        obj.selection = obj.selection_pin = None
+        with self.assertRaisesRegex(ValueError, "require an independent paid request selection"):
+            obj.offered()
+        self.assertEqual(obj.replay_calls, [])
+
+    def test_study_cannot_drop_or_infer_prelaunch_provenance(self):
+        _, comparison = self.comparison()
+        without = json.loads(comparison.terminal_raw)
+        del without["original_prelaunch_bound_releases"]
+        with self.assertRaisesRegex(ValueError, "differs from the selected prelaunch-bound"):
+            comparison.compare(terminal=wire(without))
+        comparison.require_bound = False
+        with self.assertRaisesRegex(ValueError, "differs from the selected prelaunch-bound"):
+            comparison.compare()
+        self.assertEqual(comparison.calls, [])
+
+    def test_final_reconciliation_refuses_prelaunch_claim_without_selection(self):
+        _, comparison = self.comparison()
+        compared = comparison.compare()
+        snapshot = comparison.snapshot()
+        del compared["request_selection_sha256s"]
+        with self.assertRaisesRegex(ValueError, "requires the selected requests and release evidence"):
+            comparison.reconcile(compared, snapshot)
+
+
+if __name__ == "__main__":
+    # Keep the seven earlier optional-path cases in this same composed package.
+    suite = unittest.TestSuite(unittest.defaultTestLoader.loadTestsFromTestCase(cls)
+        for cls in (SelectedReleasePaidControls, scope["SelectedPaidControls"]))
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    if result.wasSuccessful():
+        print(json.dumps(report, sort_keys=True))
+    raise SystemExit(not result.wasSuccessful())

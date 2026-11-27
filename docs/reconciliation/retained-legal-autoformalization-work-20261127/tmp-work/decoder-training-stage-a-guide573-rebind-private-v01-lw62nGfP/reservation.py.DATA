@@ -1,0 +1,46 @@
+"""Replay the existing cost and selector contracts on the exact Guide573 preview."""
+import json
+from pathlib import Path
+from rebind import HERE, RES, METADATA, archive, compact, load, ref, save
+
+REPRICE = ref(RES/'reservation_preview.py',4109,
+    'c0338d5750e16d30c0f051c03dbd89527a63c5cf9b22d1481f91d2a3163b9c6b')
+PREVIEW = ref(HERE/'guide573-all-fresh-preview.INERT.json',556332,
+    '72b538ab80ac6610b75f64d74c1d474ae8beb651b54a8b740495941b0c6fbb4a')
+
+
+def calculate():
+    namespace = {'__name__':'private_reprice','__file__':REPRICE['path']}
+    exec(compile(archive(REPRICE),REPRICE['path'],'exec'),namespace)
+    namespace['PREVIEW'] = (Path(PREVIEW['path']),PREVIEW['bytes'],PREVIEW['sha256'])
+    preview = load(PREVIEW)
+    roots = preview['reader_inputs']['current_roots']
+    api = namespace['load'](namespace['CANDIDATE'])
+    api['_stage_a_selector_source_roots'].__globals__['hashlib'] = __import__('hashlib')
+    expectations,root_order = api['_stage_a_selector_source_roots'](roots)
+    assert root_order==tuple(roots[role]['root'] for role in ('D','A'))
+    selector_input = {
+        'schema':'private-stage-a-guide573-expected-existing-selector-roots/v1',
+        'expected_roots':expectations,'root_order':list(root_order),
+        'paired_selector_observation_sha256':None,'git_project_expectations':None,
+        'owner_scope':None,'actual_selector_close':None,'execution_selected':False,
+    }
+    selector = save(HERE/'guide573-selector-expectations.INERT.json',compact(selector_input))
+    price = namespace['price']()
+    subtotal = price['selector_Reader_conditional_subtotal']
+    assert price['Reader_epoch_LIST_sizes']==dict(outer_epoch=527953,python_epoch=526086)
+    assert price['Reader_parent_matrix_allowance']==366126
+    assert subtotal==26_220_968+PREVIEW['bytes']==26_777_300
+    meta = load(METADATA)
+    headroom = meta['headroom_after_retained_guide573_bytes']
+    assert headroom==6_356_992 and subtotal-headroom==20_420_308
+    report = dict(price,schema='private-guide573-all-fresh-conditional-reservation/v1',
+                  basis_preview=PREVIEW,expected_selector_roots=selector,
+                  retained_headroom_bytes=headroom,conditional_pair_gap_before_owner_overhead=subtotal-headroom,
+                  independent_index_payload_gap=meta['independent_D_index_payload_gap'],
+                  independent_index_read_included=False,actual_owner_startup_and_closeout=None)
+    return save(HERE/'guide573-pair-conditional-quote.INERT.json',compact(report))
+
+
+if __name__=='__main__':
+    print(json.dumps(calculate(),sort_keys=True))

@@ -1,0 +1,526 @@
+{
+  "attempts": [
+    {
+      "arm": "supervised",
+      "attempt_sha256": "7e4bfdb0e2fa69825efade7a95b457ecb65f554161d87460a6fab982c2d17ee9",
+      "closeout_receipt_sha256": "24075b6cec55e8be9a2ab81cb00b36118b5dee9b59ec682e983ceae08a2d2c90",
+      "closing_meter_sha256": "3f8ffedeadefff695c1cadd94722a107f21e244b82e2d568c7f7b8cd7bbf7e18",
+      "confirmation_budget_block": null,
+      "cost_evidence": {
+        "closing_meter": {
+          "attempt_sha256": "7e4bfdb0e2fa69825efade7a95b457ecb65f554161d87460a6fab982c2d17ee9",
+          "charge_manifest_sha256": "c0bd750e32f27c01982edf106823879899b25e034b9d304e109e06e718c67d7a",
+          "clock_receipts": [
+            "97dc7d585ed6e2205ec2f23a89904241925728e6ecec0f002d386e099e1a7911",
+            "393740f3f036c54ac29087facc9cac1b69cf3d242b41a2abe2d72b9aa9080a18",
+            null
+          ],
+          "cost_policy_sha256": "7a8e9d1c5f804eecb4ff49d25112009899b137f2abe0fd9564c5a52f8d7753b5",
+          "costs": {
+            "cpu_seconds": 4.0,
+            "gpu_seconds": null,
+            "wall_seconds": 6.0
+          },
+          "includes_failed_attempts": true,
+          "interval_manifest_sha256": "82133a4c24b335dd05dff0f03bd308effa9097b0b5bf22b85eb3bd39e4f7ab60",
+          "record_sha256": "3f8ffedeadefff695c1cadd94722a107f21e244b82e2d568c7f7b8cd7bbf7e18",
+          "scope": "whole-arm-from-start-through-closed-observation/v1",
+          "stage": "close"
+        },
+        "looks": [
+          {
+            "look": "look-1",
+            "meter": {
+              "attempt_sha256": "7e4bfdb0e2fa69825efade7a95b457ecb65f554161d87460a6fab982c2d17ee9",
+              "charge_manifest_sha256": "40c0db2dfe361ebcc02d4c44fc8aec03db7fa6fe5bed43d151c028c78fd9959d",
+              "clock_receipts": [
+                "39d9fb926d7ce625bd6ff84deab764e22deb5e1a36f31f133ea79efeef93de6f",
+                "7f0d80faf4aebb1a5a65aa91a2f860ce644ab32b01ace4e74f6499269f379f87",
+                null
+              ],
+              "cost_policy_sha256": "7a8e9d1c5f804eecb4ff49d25112009899b137f2abe0fd9564c5a52f8d7753b5",
+              "costs": {
+                "cpu_seconds": 3.0,
+                "gpu_seconds": null,
+                "wall_seconds": 5.0
+              },
+              "includes_failed_attempts": true,
+              "interval_manifest_sha256": "0d9ac3a68e4e81f104719e30256cc8a39ffe46e18922f3d44dee6dd3721fd20d",
+              "record_sha256": "862291de18294d3f3cf0f1143eb6ca14470f678ebac99926fdd68d7d33922a39",
+              "scope": "whole-arm-from-start-through-closed-observation/v1",
+              "stage": "look-1"
+            }
+          }
+        ]
+      },
+      "decision": {
+        "closing_costs": {
+          "cpu_seconds": 4.0,
+          "gpu_seconds": null,
+          "wall_seconds": 6.0
+        },
+        "confirming_checkpoint": null,
+        "confirming_costs": null,
+        "looks": [
+          [
+            "look-1",
+            [
+              {
+                "name": "source_fidelity",
+                "rate": [
+                  0,
+                  1
+                ],
+                "status": "fail"
+              },
+              {
+                "name": "formal_validity",
+                "rate": [
+                  0,
+                  1
+                ],
+                "status": "fail"
+              },
+              {
+                "name": "retention",
+                "rate": [
+                  0,
+                  1
+                ],
+                "status": "fail"
+              },
+              {
+                "name": "coverage",
+                "rate": [
+                  0,
+                  1
+                ],
+                "status": "fail"
+              },
+              {
+                "name": "abstention",
+                "rate": [
+                  0,
+                  1
+                ],
+                "status": "pass"
+              }
+            ]
+          ]
+        ],
+        "scope": "synthetic_reference_only",
+        "status": "closed_without_reach",
+        "streak_start": null
+      },
+      "look_evidence": [
+        {
+          "checkpoint_sha256": "693776684014d983569736f454d1bc1a677b76d6830df56432e11921fd21b9cb",
+          "evaluation_receipt_sha256": "2a0da75691a4a20f54315448acd06e3b5f3a040dd50db894f38defc056db8648",
+          "gate_counts": {
+            "abstention": {
+              "denominator": 1,
+              "numerator": 0,
+              "verified": true
+            },
+            "coverage": {
+              "denominator": 1,
+              "numerator": 0,
+              "verified": true
+            },
+            "formal_validity": {
+              "denominator": 1,
+              "numerator": 0,
+              "verified": true
+            },
+            "retention": {
+              "denominator": 1,
+              "numerator": 0,
+              "verified": true
+            },
+            "source_fidelity": {
+              "denominator": 1,
+              "numerator": 0,
+              "verified": true
+            }
+          },
+          "look": "look-1",
+          "meter_record_sha256": "862291de18294d3f3cf0f1143eb6ca14470f678ebac99926fdd68d7d33922a39"
+        }
+      ],
+      "seed": "1729"
+    },
+    {
+      "arm": "relational",
+      "attempt_sha256": "e83753aef08c001c9f58273b41f111c086f3e9cd1b14916a4c9555438c46153a",
+      "closeout_receipt_sha256": "62affe64e6683b3bb43151315c0471f2c3bc8a6a2163ee4a96c3e4622ac7e51f",
+      "closing_meter_sha256": "49dc80e60840773fcba2fe2aa7d50c6ca1000a3cb2ae52579652f5fa24415be3",
+      "confirmation_budget_block": null,
+      "cost_evidence": {
+        "closing_meter": {
+          "attempt_sha256": "e83753aef08c001c9f58273b41f111c086f3e9cd1b14916a4c9555438c46153a",
+          "charge_manifest_sha256": "2a58b6ce9d4bc69cff94207d29c967bb85a7000c28b1dab02c284743786233e8",
+          "clock_receipts": [
+            "70d193eabb06b17c739d3c12753105e5fed754cec4479362d4dfeb8ee9410cfa",
+            "b365f3636b8e95389f01fe4a2cb560b2fc12cc0614060c55a65e60458515b97c",
+            null
+          ],
+          "cost_policy_sha256": "7a8e9d1c5f804eecb4ff49d25112009899b137f2abe0fd9564c5a52f8d7753b5",
+          "costs": {
+            "cpu_seconds": 4.0,
+            "gpu_seconds": null,
+            "wall_seconds": 4.0
+          },
+          "includes_failed_attempts": true,
+          "interval_manifest_sha256": "6f0d166ae722b5df1bff1d0dd06baa275eab2f8602319a15d00248eeab1caa58",
+          "record_sha256": "49dc80e60840773fcba2fe2aa7d50c6ca1000a3cb2ae52579652f5fa24415be3",
+          "scope": "whole-arm-from-start-through-closed-observation/v1",
+          "stage": "close"
+        },
+        "looks": [
+          {
+            "look": "look-1",
+            "meter": {
+              "attempt_sha256": "e83753aef08c001c9f58273b41f111c086f3e9cd1b14916a4c9555438c46153a",
+              "charge_manifest_sha256": "7ac5452f025c01a3b6c5f860a1cea48fcb96a9c2b5c54c8e87f0a820ee42fc9d",
+              "clock_receipts": [
+                "5c7099460b3cdd6624d6ec5e1f7b9df762307d15eee176824448761d6c161078",
+                "1bd1d37caf005919310973a5c7989af257eb837c635e0d7674222e3e8e221401",
+                null
+              ],
+              "cost_policy_sha256": "7a8e9d1c5f804eecb4ff49d25112009899b137f2abe0fd9564c5a52f8d7753b5",
+              "costs": {
+                "cpu_seconds": 3.0,
+                "gpu_seconds": null,
+                "wall_seconds": 3.0
+              },
+              "includes_failed_attempts": true,
+              "interval_manifest_sha256": "248d3cce2d651a38ea5877b9a6e75f377c2a773a71456fb302a8a47ade82c298",
+              "record_sha256": "256dac513fc5d78c114a703a1348dd8a5baac2b18dc216268583513593c1017e",
+              "scope": "whole-arm-from-start-through-closed-observation/v1",
+              "stage": "look-1"
+            }
+          }
+        ]
+      },
+      "decision": {
+        "closing_costs": {
+          "cpu_seconds": 4.0,
+          "gpu_seconds": null,
+          "wall_seconds": 4.0
+        },
+        "confirming_checkpoint": "look-1",
+        "confirming_costs": {
+          "cpu_seconds": 3.0,
+          "gpu_seconds": null,
+          "wall_seconds": 3.0
+        },
+        "looks": [
+          [
+            "look-1",
+            [
+              {
+                "name": "source_fidelity",
+                "rate": [
+                  1,
+                  1
+                ],
+                "status": "pass"
+              },
+              {
+                "name": "formal_validity",
+                "rate": [
+                  1,
+                  1
+                ],
+                "status": "pass"
+              },
+              {
+                "name": "retention",
+                "rate": [
+                  1,
+                  1
+                ],
+                "status": "pass"
+              },
+              {
+                "name": "coverage",
+                "rate": [
+                  1,
+                  1
+                ],
+                "status": "pass"
+              },
+              {
+                "name": "abstention",
+                "rate": [
+                  0,
+                  1
+                ],
+                "status": "pass"
+              }
+            ]
+          ]
+        ],
+        "scope": "synthetic_reference_only",
+        "status": "reached",
+        "streak_start": "look-1"
+      },
+      "look_evidence": [
+        {
+          "checkpoint_sha256": "e5efe5647b674eb3cf49f544a6a2ec4894b138ad9d4108e5eff09624d200618a",
+          "evaluation_receipt_sha256": "bddf9cd28b0f18cefd8c63f57a382380270ee157720d36a6fb220495b9d91a19",
+          "gate_counts": {
+            "abstention": {
+              "denominator": 1,
+              "numerator": 0,
+              "verified": true
+            },
+            "coverage": {
+              "denominator": 1,
+              "numerator": 1,
+              "verified": true
+            },
+            "formal_validity": {
+              "denominator": 1,
+              "numerator": 1,
+              "verified": true
+            },
+            "retention": {
+              "denominator": 1,
+              "numerator": 1,
+              "verified": true
+            },
+            "source_fidelity": {
+              "denominator": 1,
+              "numerator": 1,
+              "verified": true
+            }
+          },
+          "look": "look-1",
+          "meter_record_sha256": "256dac513fc5d78c114a703a1348dd8a5baac2b18dc216268583513593c1017e"
+        }
+      ],
+      "seed": "1729"
+    }
+  ],
+  "attempts_sha256": "99c14c7ec8f5ff9d042c7b50bb6622c228f174817c1683ad70c8e695402e1f6f",
+  "contrast_plan_sha256": "e6b54da47a1ef60bdd62ec3823bed286b5b76ac45f823c78e073c72cd68d708b",
+  "contrasts": [
+    {
+      "baseline": "supervised",
+      "candidate": "relational",
+      "identifier": "fixture compact two-arm study",
+      "role": "primary"
+    }
+  ],
+  "cost_accounting_scope": "original_cumulative_attempt_meters_no_cross_contrast_sum",
+  "cost_basis": "first_use",
+  "cost_evidence_sha256": "a008df7854a6cc1df95bb5ebecb35b59613c4a6281fd44e77b5479a0887352f4",
+  "dependency_components": 1,
+  "development_design_sha256": "d2235c2c547521d714994d194d39cacb43ca82788413c3f35568303271af3210",
+  "development_looks": [
+    {
+      "attempt_sha256": "7e4bfdb0e2fa69825efade7a95b457ecb65f554161d87460a6fab982c2d17ee9",
+      "checkpoint_sha256": "693776684014d983569736f454d1bc1a677b76d6830df56432e11921fd21b9cb",
+      "component_owner_close_sha256": "4d8ff840a8229653f5316e95a4d11cd5ed7ad1633a56e5b15dc2f7a7450ec480",
+      "evaluation_receipt_sha256": "2a0da75691a4a20f54315448acd06e3b5f3a040dd50db894f38defc056db8648",
+      "look": "look-1",
+      "meter_record_sha256": "862291de18294d3f3cf0f1143eb6ca14470f678ebac99926fdd68d7d33922a39",
+      "optimizer_steps": 1,
+      "owner_close_sha256": "3b8edbd63eea481d8f3378c10d0918824586b9bc2cc547df31bc3ccfd1b9b443",
+      "selection_sha256": "867b0c210212de0e6d278bf5205742892b72016d0809f3d23154e0b3509e7868",
+      "terminal_owner_close_sha256": "49a6fae010524821948334886a412e2aa6b977401b3f24f882ae354f0651a674",
+      "terminal_selection_sha256": "3c66e161fe43df367ccfae2abe6b1b0d2e853a41fbca732a3feba6f9f0722e06"
+    },
+    {
+      "attempt_sha256": "e83753aef08c001c9f58273b41f111c086f3e9cd1b14916a4c9555438c46153a",
+      "checkpoint_sha256": "e5efe5647b674eb3cf49f544a6a2ec4894b138ad9d4108e5eff09624d200618a",
+      "component_owner_close_sha256": "982c8653f37ea1f58ed6554b8046dc63c5e8096cd27c32e1957ac19e14ed72ba",
+      "evaluation_receipt_sha256": "bddf9cd28b0f18cefd8c63f57a382380270ee157720d36a6fb220495b9d91a19",
+      "look": "look-1",
+      "meter_record_sha256": "256dac513fc5d78c114a703a1348dd8a5baac2b18dc216268583513593c1017e",
+      "optimizer_steps": 1,
+      "owner_close_sha256": "4f5e1e409e2c49642c009da8168ee6a2967ca0ed245fda3b704dffb2c1eb1468",
+      "selection_sha256": "02f967a142332a4776c918e29af4a40c4fa75c35dc0696e271ad236263842327",
+      "terminal_owner_close_sha256": "31c1e3a83d3c42edc101bc6ca4d7a6f596e251a836344772ba27690097b7cfd6",
+      "terminal_selection_sha256": "f1036c7d4817124ea25e9368731d12567f14d28c5a2ab76eb4d75080ef3aa6d7"
+    }
+  ],
+  "development_receipts_sha256": "ef397d45d1e9c8a80e98e4792b5d783febf35f83b2f00831044a76c9f1cf650a",
+  "fixed_horizon_attainment": [
+    {
+      "baseline": "supervised",
+      "candidate": "relational",
+      "clock": "wall_seconds",
+      "confirmed_baseline": 0,
+      "confirmed_candidate": 1,
+      "contrast_id": "fixture compact two-arm study",
+      "horizon": 100.0,
+      "known_baseline": 1,
+      "known_candidate": 1,
+      "observed_time_pairs": 0,
+      "paired_attainment_delta_bounds": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "paired_seeds": 1,
+      "role": "primary"
+    }
+  ],
+  "languages": [
+    "en"
+  ],
+  "observed_elapsed_wall": [
+    {
+      "attempt_sha256": "7e4bfdb0e2fa69825efade7a95b457ecb65f554161d87460a6fab982c2d17ee9",
+      "stage": "look-1",
+      "wall": {
+        "clock_domain_sha256": "910a0bfbde04df48cc24e7ecb9f114524e6cb2b2e427a081ec4d98d407aa7806",
+        "end_ns": 6000000000,
+        "receipt_sha256": "39d9fb926d7ce625bd6ff84deab764e22deb5e1a36f31f133ea79efeef93de6f",
+        "start_ns": 1000000000
+      }
+    },
+    {
+      "attempt_sha256": "7e4bfdb0e2fa69825efade7a95b457ecb65f554161d87460a6fab982c2d17ee9",
+      "stage": "close",
+      "wall": {
+        "clock_domain_sha256": "910a0bfbde04df48cc24e7ecb9f114524e6cb2b2e427a081ec4d98d407aa7806",
+        "end_ns": 7000000000,
+        "receipt_sha256": "97dc7d585ed6e2205ec2f23a89904241925728e6ecec0f002d386e099e1a7911",
+        "start_ns": 1000000000
+      }
+    },
+    {
+      "attempt_sha256": "e83753aef08c001c9f58273b41f111c086f3e9cd1b14916a4c9555438c46153a",
+      "stage": "look-1",
+      "wall": {
+        "clock_domain_sha256": "31c600239ffe1e60c5762bef76f0a281c01ee3729c1cd886d4c447dcb0c0d5f6",
+        "end_ns": 4000000000,
+        "receipt_sha256": "5c7099460b3cdd6624d6ec5e1f7b9df762307d15eee176824448761d6c161078",
+        "start_ns": 1000000000
+      }
+    },
+    {
+      "attempt_sha256": "e83753aef08c001c9f58273b41f111c086f3e9cd1b14916a4c9555438c46153a",
+      "stage": "close",
+      "wall": {
+        "clock_domain_sha256": "31c600239ffe1e60c5762bef76f0a281c01ee3729c1cd886d4c447dcb0c0d5f6",
+        "end_ns": 5000000000,
+        "receipt_sha256": "70d193eabb06b17c739d3c12753105e5fed754cec4479362d4dfeb8ee9410cfa",
+        "start_ns": 1000000000
+      }
+    }
+  ],
+  "optimizer_step_grid_sha256": "c43f28887266010bd555ce890b9d855e2c528628b42f324c28f89d20637bc8d1",
+  "optimizer_step_schedule": [
+    [
+      "look-1",
+      1
+    ]
+  ],
+  "pairs": [
+    {
+      "baseline": "supervised",
+      "baseline_attained": 0,
+      "baseline_attempt_sha256": "7e4bfdb0e2fa69825efade7a95b457ecb65f554161d87460a6fab982c2d17ee9",
+      "baseline_reason": "complete_grid_without_confirmation",
+      "candidate": "relational",
+      "candidate_attained": 1,
+      "candidate_attempt_sha256": "e83753aef08c001c9f58273b41f111c086f3e9cd1b14916a4c9555438c46153a",
+      "candidate_minus_baseline_seconds_if_both_observed": null,
+      "candidate_reason": "confirmed_within_horizon",
+      "clock": "wall_seconds",
+      "contrast_id": "fixture compact two-arm study",
+      "horizon": 100.0,
+      "observed_baseline_confirmation": null,
+      "observed_candidate_confirmation": 3.0,
+      "role": "primary",
+      "seed": "1729"
+    }
+  ],
+  "panel_rows": 1,
+  "panel_sha256": "e086de13f1470e1a662285520b71481049b030b556e4964a5aee0913ed30d939",
+  "physical_paid_events": [
+    {
+      "close_receipt_sha256": "b0dfdf45e5cd8e79cae0f2f153116b8a7e8598ed3c5cf0380d58b12c0b0967a4",
+      "cpu_ns": 1000000000,
+      "disposition": "failed",
+      "event_sha256": "110a9132cf54c22d8733b83e3c38be04145b302ad4c9274d9f4818c41f6bc4b5",
+      "gpu_ns": null,
+      "kind": "training"
+    },
+    {
+      "close_receipt_sha256": "4d8ff840a8229653f5316e95a4d11cd5ed7ad1633a56e5b15dc2f7a7450ec480",
+      "cpu_ns": 1000000000,
+      "disposition": "complete",
+      "event_sha256": "15339dc6975c10efdaeb23d20deecb3ff787c29c0211ad6790e1f5c4ddca9dc2",
+      "gpu_ns": null,
+      "kind": "evaluation"
+    },
+    {
+      "close_receipt_sha256": "62affe64e6683b3bb43151315c0471f2c3bc8a6a2163ee4a96c3e4622ac7e51f",
+      "cpu_ns": 1000000000,
+      "disposition": "complete",
+      "event_sha256": "223fb0ebbd07c0fc40cc92bd6fc3dc73b1d09c48552b1e023d7519a020cd7af4",
+      "gpu_ns": null,
+      "kind": "closeout"
+    },
+    {
+      "close_receipt_sha256": "24075b6cec55e8be9a2ab81cb00b36118b5dee9b59ec682e983ceae08a2d2c90",
+      "cpu_ns": 1000000000,
+      "disposition": "complete",
+      "event_sha256": "64e5c50a2769b4190dfd680eed0b3cb28bd131b66d482189f4d308f9ab254a4d",
+      "gpu_ns": null,
+      "kind": "closeout"
+    },
+    {
+      "close_receipt_sha256": "31c1e3a83d3c42edc101bc6ca4d7a6f596e251a836344772ba27690097b7cfd6",
+      "cpu_ns": 1000000000,
+      "disposition": "complete",
+      "event_sha256": "c14cd331ff336f00336bf6e089e5c1ad8dbcd9ba0abb21b8a04fcb2f7150db6e",
+      "gpu_ns": null,
+      "kind": "training"
+    },
+    {
+      "close_receipt_sha256": "982c8653f37ea1f58ed6554b8046dc63c5e8096cd27c32e1957ac19e14ed72ba",
+      "cpu_ns": 1000000000,
+      "disposition": "complete",
+      "event_sha256": "d3c4f0361c86dee359e9b2ba891a88c2f85e93eeefd02a20cd9383ec4c54ee72",
+      "gpu_ns": null,
+      "kind": "evaluation"
+    },
+    {
+      "close_receipt_sha256": "78975817dbf40f7dda9185332436ac63208c961470edbb517bbcbbd733b3a465",
+      "cpu_ns": 1000000000,
+      "disposition": "failed",
+      "event_sha256": "d8e15db974e4a7dfd0a7f3348c98afb64c17c0ad045ad1e12be49392e2ec1102",
+      "gpu_ns": null,
+      "kind": "training"
+    },
+    {
+      "close_receipt_sha256": "49a6fae010524821948334886a412e2aa6b977401b3f24f882ae354f0651a674",
+      "cpu_ns": 1000000000,
+      "disposition": "complete",
+      "event_sha256": "daa18eb1d971802b3bf31495df10d1608920466bafa198192127700d6ef55749",
+      "gpu_ns": null,
+      "kind": "training"
+    }
+  ],
+  "physical_work_ns": {
+    "cpu_ns": 8000000000,
+    "gpu_ns": null
+  },
+  "reuse_count": null,
+  "schema": "paired-cost-to-confirmed-compact-development-threshold-verified/v1",
+  "seed_count": 1,
+  "study_sha256": "8df98ddc3f1f5bc97cd3ee15ccd54b32b8fbccf6419674a6ac142e7438fd590d",
+  "terminal_cells_sha256": "ee3e545d41266b296b1aa751dccceb3b0da79e1279c1f5bef70f5fe1ec489a7e",
+  "uncertainty_scope": "bounds_over_unknown_observations_only"
+}

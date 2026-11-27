@@ -1,0 +1,192 @@
+--- /tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/reader.py.DATA
++++ /tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/reader.py.DATA
+@@ -128,6 +128,10 @@
+     p=Path(t['path']);s=p.lstat();assert stat.S_ISREG(s.st_mode)and s.st_nlink==1
+     assert f9(s)==t['full9']and s.st_size==t['bytes']
+ 
++STAGE_A_RELOCATED_PARTITION = 'stage-a-source32-relocated-all-fresh/v1'
++STAGE_A_RELOCATED_SELECTION = 'existing-stage-a-retained-controls-outer-only/v3'
++
++
+ def checked_read(path,limit,kind,*,stage_a_fresh=None):
+     path=Path(path)
+     assert path.is_absolute()
+@@ -137,8 +141,10 @@
+         reference = {'path':str(path), 'bytes':limit}
+         selected = None
+     else:
+-        if type(stage_a_fresh) is not dict or len(stage_a_fresh) != 12:
+-            raise ValueError('exact twelve Stage A fresh Source paths required')
++        relocated = report.get('stage_a', {}).get('capture_partition') == STAGE_A_RELOCATED_PARTITION
++        count, label = (32, 'thirty-two') if relocated else (12, 'twelve')
++        if type(stage_a_fresh) is not dict or len(stage_a_fresh) != count:
++            raise ValueError(f'exact {label} Stage A fresh Source paths required')
+         selected = stage_a_fresh.get(str(path))
+         roots = sorted((request['root'],request['additional_A']['root']))
+         active_reads = [{'root':root,'mode':'read','entered':True,'exit_returned':False} for root in roots]
+@@ -255,7 +261,8 @@
+         raise
+ 
+ def read_selected_stage_a_epoch(plan, *, reader_selection, expected_selection_sha256,
+-        verify_reader_selection, verify_phase7_owner, epoch_api, git_api, io, read_stage_zero, deadline):
++        verify_reader_selection, verify_phase7_owner, epoch_api, git_api, io, read_stage_zero, deadline,
++        verify_relocation_owner=None):
+     """Use the authorized existing Reader for one retained-control, outer-only epoch capture."""
+     from copy import deepcopy
+ 
+@@ -266,20 +273,42 @@
+     fields = {'schema', 'plan_sha256', 'git_record', 'output_root', 'maximum_core_bytes',
+               'maximum_matrix_write_bytes', 'epoch_output_maximums', 'git_output_maximum','maximum_run_seconds'}
+     schema = chosen.get('schema')
+-    explicit_selectors = schema == 'existing-stage-a-retained-controls-outer-only/v2'
++    relocated = schema == STAGE_A_RELOCATED_SELECTION
++    explicit_selectors = relocated or schema == 'existing-stage-a-retained-controls-outer-only/v2'
++    if relocated:
++        fields.add('relocation_preview')
+     if explicit_selectors:
+         fields |= {'git_project_expectations','paired_selector_observation_sha256'}
+     if (set(chosen) != fields or schema not in ('existing-stage-a-retained-controls-outer-only/v1',
+-                                               'existing-stage-a-retained-controls-outer-only/v2')
++                                               'existing-stage-a-retained-controls-outer-only/v2',
++                                               STAGE_A_RELOCATED_SELECTION)
+             or H(encoded(chosen)) != expected_selection_sha256
+             or H(encoded(plan)) != chosen['plan_sha256'] or chosen['output_root'] != str(OUT)
+             or any(type(chosen[key]) is not int or chosen[key] <= 0 for key in
+                    ('maximum_core_bytes', 'maximum_matrix_write_bytes','maximum_run_seconds'))
+-            or not callable(verify_reader_selection) or not callable(verify_phase7_owner)
++            or not callable(verify_reader_selection)
++            or not callable(verify_relocation_owner if relocated else verify_phase7_owner)
+             or not callable(read_stage_zero) or report.get('Source_contexts') or 'stage_a' in report):
+         raise ValueError('exact existing paired Reader selection and unentered custody required')
+-    plan = json.loads(encoded(plan))
++    candidate = json.loads(encoded(plan))
++    if relocated:
++        if (candidate.get('schema') != 'private-stage-a-source32-relocated-all-fresh-preview/v1'
++                or candidate['execution_selected'] is not False or candidate['source_body_reads'] != 32
++                or candidate['archive_historical_count'] != 20):
++            raise ValueError('expected detached preview for the selected Stage A relocation')
++        plan = candidate['reader_inputs']
++    else:
++        plan = candidate
+     roots = tuple(plan['current_roots'][key]['root'] for key in ('D', 'A'))
++    if relocated:
++        ref = chosen['relocation_preview']
++        if (type(ref) is not dict or set(ref) != {'path','bytes','sha256'}
++                or type(ref['path']) is not str or not Path(ref['path']).is_absolute()
++                or str(Path(ref['path'])) != ref['path'] or '..' in Path(ref['path']).parts
++                or any(Path(ref['path']).is_relative_to(root) for root in roots)
++                or type(ref['bytes']) is not int or ref['bytes'] != len(encoded(candidate))
++                or ref['sha256'] != chosen['plan_sha256']):
++            raise ValueError('exact private relocation preview reference required')
+     if (len(set(roots)) != 2 or (request['root'], request['additional_A']['root']) != roots
+             or request['actual_modes'] != {root: 'read' for root in roots}
+             or OUT.resolve(strict=True) != OUT or any(OUT.is_relative_to(Path(root)) for root in roots)
+@@ -325,22 +354,41 @@
+         check_deadline()
+         return raw
+ 
+-    control_refs = [plan['phase7_request'], plan['phase7_receipt'], plan['current_retained_epochs']['outer']]
+-    request_raw, receipt_raw, outer_raw = (read_before_deadline(ref,'selected_stage_a_input') for ref in control_refs)
++    guides = plan['four_guide_post_candidates_for_current_owner_recheck']
+     plan_pin = chosen['plan_sha256']
+-    rows, archive_refs = epoch_api['prepare_phase7_stage_a_read_inputs'](
+-        plan, expected_plan_sha256=plan_pin, phase7_request_raw=request_raw,
+-        phase7_receipt_raw=receipt_raw, retained_outer_raw=outer_raw, verify_phase7_owner=verify_phase7_owner)
+-    pending = rows[-32:]
+-    fresh = [dict(target) for target, row in zip(plan['fresh_Source_body_targets'], pending, strict=True)
+-             if row['full9'] is None]
+-    if len(fresh) != 12 or len(archive_refs) != 20:
+-        raise ValueError('exact Stage A twelve fresh and twenty retained captures required')
+-    guides = plan['four_guide_post_candidates_for_current_owner_recheck']
++    reservation_options = {}
++    if relocated:
++        control_refs = [chosen['relocation_preview']]
++        reference, = control_refs
++        if read_before_deadline(reference,'selected_stage_a_relocation_preview') != encoded(candidate):
++            raise ValueError('relocation preview readback differs from the selected plan')
++        retained = candidate['relocated_retained_outer']
++        retained_python = [row for row in retained if row['path'].endswith('.py')]
++        fresh = plan['fresh_Source_body_targets']
++        if (len(retained) != 1218 or len(retained_python) != 1213 or len(guides) != 4 or len(fresh) != 32
++                or any(type(row['full9']) is not dict for row in retained + guides + fresh)):
++            raise ValueError('exact fully-stamped relocated Stage A roster required')
++        rows = [{key: row[key] for key in ('path','bytes','full9')} for row in retained + guides + fresh]
++        if len({row['path'] for row in rows}) != 1254:
++            raise ValueError('duplicate path in the relocated Stage A roster')
++        archive_refs = []
++        reservation_options['capture_partition'] = STAGE_A_RELOCATED_PARTITION
++        attempt.update(capture_partition=STAGE_A_RELOCATED_PARTITION, relocation_preview=reference)
++    else:
++        control_refs = [plan['phase7_request'], plan['phase7_receipt'], plan['current_retained_epochs']['outer']]
++        request_raw, receipt_raw, outer_raw = (read_before_deadline(ref,'selected_stage_a_input') for ref in control_refs)
++        rows, archive_refs = epoch_api['prepare_phase7_stage_a_read_inputs'](
++            plan, expected_plan_sha256=plan_pin, phase7_request_raw=request_raw,
++            phase7_receipt_raw=receipt_raw, retained_outer_raw=outer_raw, verify_phase7_owner=verify_phase7_owner)
++        pending = rows[-32:]
++        fresh = [dict(target) for target, row in zip(plan['fresh_Source_body_targets'], pending, strict=True)
++                 if row['full9'] is None]
++        if len(fresh) != 12 or len(archive_refs) != 20:
++            raise ValueError('exact Stage A twelve fresh and twenty retained captures required')
+     reserve = git_api['source32_paired_reader_reservation'](
+         chosen['git_record'],guides,fresh,archive_refs,control_refs,
+         epoch_output_maximums=chosen['epoch_output_maximums'],git_output_maximum=chosen['git_output_maximum'],
+-        persist_python_epoch=False,retain_terminal_git_controls=True)
++        persist_python_epoch=False,retain_terminal_git_controls=True,**reservation_options)
+     if reserve['logical_selected_bytes'] > chosen['maximum_core_bytes']:
+         raise ValueError('current Stage A reader envelope is too small')
+     attempt['reservation'] = dict(reserve)
+@@ -405,9 +453,18 @@
+     def between(opening):
+         opening_git, _ = opening
+         before = verify_full_metadata_guard(stage_a_rows=rows)
+-        legacy_python,planned = epoch_api['prepare_phase7_epoch_archive'](
+-            plan,expected_plan_sha256=plan_pin,retained_outer_raw=outer_raw,
+-            endpoint_before=dict(opening_git,full9=before),epoch_output_maximums=chosen['epoch_output_maximums'])
++        if relocated:
++            endpoint = dict(opening_git,full9=before)
++            epoch_api['_verify_phase7_endpoint'](plan,endpoint)
++            planned = epoch_api['_plan_compact_archive_sizes'](
++                plan,retained,retained_python,{row['path']:before[row['path']] for row in fresh})
++            if any(planned[name] > chosen['epoch_output_maximums'][name] for name in planned):
++                raise ValueError('relocated Stage A compact epoch would exceed its selected bound')
++            legacy_python = None
++        else:
++            legacy_python,planned = epoch_api['prepare_phase7_epoch_archive'](
++                plan,expected_plan_sha256=plan_pin,retained_outer_raw=outer_raw,
++                endpoint_before=dict(opening_git,full9=before),epoch_output_maximums=chosen['epoch_output_maximums'])
+         for guide in guides:
+             leaf(guide)
+             read_before_deadline(guide,'selected_stage_a_guide')
+@@ -433,12 +490,26 @@
+             before,legacy_python,planned,shared,captures = middle
+             endpoint_rows = [dict(row,full9=before[row['path']]) for row in rows]
+             after = verify_full_metadata_guard(stage_a_rows=endpoint_rows)
+-            epoch = epoch_api['compose_phase7_reused_source32_epochs'](
+-                plan,expected_plan_sha256=plan_pin,phase7_request_raw=request_raw,phase7_receipt_raw=receipt_raw,
+-                verify_phase7_owner=verify_phase7_owner,endpoint_before=dict(opening[0],full9=before),
+-                endpoint_after=dict(closing[0],full9=after),index_body=opening[1],
+-                retained_outer_raw=outer_raw,retained_python_raw=legacy_python,
+-                guide_observations=guides,shared_archives=shared,fresh_captures=captures)
++            if relocated:
++                def approve_binding(binding):
++                    check_deadline()
++                    approved = verify_relocation_owner(binding)
++                    check_deadline()
++                    if approved is True:
++                        attempt['relocation_owner_binding_sha256'] = binding
++                    return approved
++
++                epoch = epoch_api['compose_phase7_relocated_source32_epochs'](
++                    candidate,expected_preview_sha256=plan_pin,endpoint_before=dict(opening[0],full9=before),
++                    endpoint_after=dict(closing[0],full9=after),index_body=opening[1],
++                    guide_observations=guides,captures=captures,verify_relocation_owner=approve_binding)
++            else:
++                epoch = epoch_api['compose_phase7_reused_source32_epochs'](
++                    plan,expected_plan_sha256=plan_pin,phase7_request_raw=request_raw,phase7_receipt_raw=receipt_raw,
++                    verify_phase7_owner=verify_phase7_owner,endpoint_before=dict(opening[0],full9=before),
++                    endpoint_after=dict(closing[0],full9=after),index_body=opening[1],
++                    retained_outer_raw=outer_raw,retained_python_raw=legacy_python,
++                    guide_observations=guides,shared_archives=shared,fresh_captures=captures)
+             raw, commitments = epoch_api['encode_v214_outer_only_epoch_archive'](epoch,planned_bytes=planned)
+     finally:
+         attempt['Source_closed'] = report['Source_contexts'] == [

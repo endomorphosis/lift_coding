@@ -1,0 +1,36 @@
+{
+  "Git_mutations": 0,
+  "SDK": false,
+  "Source": false,
+  "all_prior_costs_retained": true,
+  "body_reads": 0,
+  "current_HEAD_not_adopted": true,
+  "existing_private_proposal_sha256": "3aecbf5629c3500baac63beffd701c8e50d02783e93d7cf93c50d702967ac6d9",
+  "fresh_remote_lookup": false,
+  "future_writer_must_compare_actual_selected_preimages": true,
+  "immutable_Git_store": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+  "ordinary22_unrun": true,
+  "published_revision_from_closed_Guide576_receipt": "8a902502e1a82d3da05b9c31a42db8c39ea8a9e1",
+  "records": [
+    {
+      "actual_git_blob": "9a52c4a11642edb0cb62b5c00b02ad67a9983e53",
+      "bytes": 63071,
+      "expected_git_blob": "9a52c4a11642edb0cb62b5c00b02ad67a9983e53",
+      "kind": "blob",
+      "matches": true,
+      "mode": "100644",
+      "repo_path": "ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py"
+    },
+    {
+      "actual_git_blob": "2de37c1db9c3c5808a087e5ed1ed8a23ab8f672f",
+      "bytes": 22905,
+      "expected_git_blob": "2de37c1db9c3c5808a087e5ed1ed8a23ab8f672f",
+      "kind": "blob",
+      "matches": true,
+      "mode": "100644",
+      "repo_path": "tests/integration/logic/test_proof_receipt_attestation.py"
+    }
+  ],
+  "runtime_authority": null,
+  "status": "BOTH_EXACT_PREIMAGES_STILL_MATCH"
+}

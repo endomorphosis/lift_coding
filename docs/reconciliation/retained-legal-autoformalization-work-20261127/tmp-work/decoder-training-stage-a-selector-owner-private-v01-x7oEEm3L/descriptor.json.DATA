@@ -1,0 +1,99 @@
+{
+  "actual_Source_lease_authority_in_tests": false,
+  "actual_git_subprocess_authority_in_tests": false,
+  "actual_original_wait_or_ledger_confirmation": null,
+  "candidate": {
+    "bytes": 58650,
+    "path": "/tmp/decoder-training-stage-a-selector-owner-private-v01-x7oEEm3L/reader.py.DATA",
+    "sha256": "9880656f4c4f273f25aab90ee11324a6809f0336367736a8bfe9e7092f1b2b09"
+  },
+  "current_independent_index_read": null,
+  "diff": {
+    "bytes": 18098,
+    "path": "/tmp/decoder-training-stage-a-selector-owner-private-v01-x7oEEm3L/reader.py.DATA.diff",
+    "sha256": "cae434a706ee794344ae931fed28b2c126d77d52994a91fb49427ebcdac00514"
+  },
+  "dispatch_authority": false,
+  "drivers": {
+    "compose.py": {
+      "bytes": 3094,
+      "path": "/tmp/decoder-training-stage-a-selector-owner-private-v01-x7oEEm3L/compose.py",
+      "sha256": "31494f518ed3e7a4294b37b259c3608750b72edc387a1d88865448a150ae1cad"
+    },
+    "seal.py": {
+      "bytes": 8754,
+      "path": "/tmp/decoder-training-stage-a-selector-owner-private-v01-x7oEEm3L/seal.py",
+      "sha256": "73fd432f59a9623a6293cd5e69e09c630706011602ff1584d33f9102c0bc0e60"
+    },
+    "selector.py.IN": {
+      "bytes": 6881,
+      "path": "/tmp/decoder-training-stage-a-selector-owner-private-v01-x7oEEm3L/selector.py.IN",
+      "sha256": "ed86712cbdc4ce9f99857b6a8a3f3121b66f727d5dc156c552501cf41ba471ac"
+    },
+    "shared.py.IN": {
+      "bytes": 4345,
+      "path": "/tmp/decoder-training-stage-a-selector-owner-private-v01-x7oEEm3L/shared.py.IN",
+      "sha256": "f7150599b162478012a991123b8b1095ec2c19a2c58de62116d02ced89c8075a"
+    },
+    "test_retained_reader.py": {
+      "bytes": 1049,
+      "path": "/tmp/decoder-training-stage-a-selector-owner-private-v01-x7oEEm3L/test_retained_reader.py",
+      "sha256": "e4b547f80616bcfe839bac5b268debfbcbad8d4a297cbdfca19122577838e464"
+    }
+  },
+  "exact_terminal_fields": 6,
+  "exact_terminal_schema": "stage-a-paired-git-selector-terminal/v1",
+  "live_selector_selection": null,
+  "live_selector_terminal": null,
+  "retained_reader_logs": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-stage-a-selector-owner-private-v01-x7oEEm3L/reader.rc",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 1397,
+      "path": "/tmp/decoder-training-stage-a-selector-owner-private-v01-x7oEEm3L/reader.stderr",
+      "sha256": "22405404f72776f9d415482f70d0d0a142b852720eab4bf266fee5e0d57aaf89"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-stage-a-selector-owner-private-v01-x7oEEm3L/reader.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "schema": "private-stage-a-paired-selector-owner-controls/v1",
+  "selected_Source42_read_probe_bound_bytes": 10376,
+  "selector_bound_before_terminal_and_other_startup_bytes": 1763490,
+  "selector_git_and_ref_stream_bound_bytes": 1753114,
+  "selector_logs": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-stage-a-selector-controls-private-v01-pjiF8CHj/tests.rc",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 1180,
+      "path": "/tmp/decoder-training-stage-a-selector-controls-private-v01-pjiF8CHj/tests.stderr",
+      "sha256": "3cb094ecfc1beaacae921f221df4b1829eccd5cc708f59ad5ea8f0583c20bd07"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-stage-a-selector-controls-private-v01-pjiF8CHj/tests.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "selector_test": {
+    "bytes": 19607,
+    "path": "/tmp/decoder-training-stage-a-selector-controls-private-v01-pjiF8CHj/test_selector_startup.py",
+    "sha256": "6b4082d9c9d8382112728ead63234b6eacb180294bf5dbb442e7438e4e3791b7"
+  },
+  "shared_Source42_owner_lifecycle": true,
+  "successful_child_accounted_captures_without_extra_owner_reads": 28,
+  "terminal_reservation_formula": "2 * terminal_receipt_max_bytes + 1",
+  "test_counts": {
+    "retained_reader": 9,
+    "selector": 7
+  },
+  "uses_original_selector_observer_and_binder": true
+}

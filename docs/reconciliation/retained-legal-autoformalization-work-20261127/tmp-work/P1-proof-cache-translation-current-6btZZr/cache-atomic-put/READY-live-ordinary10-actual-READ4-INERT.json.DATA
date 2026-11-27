@@ -1,0 +1,174 @@
+{
+  "A_prov": {
+    "HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+    "actual_closed_Source_READ": {
+      "bytes": 8248,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-Phase1-cache-atomic-put-READ4-closed.json",
+      "sha256": "759f5100682a32e5fe2a9a81dbb0a33946d8ff658df1fbfd1f3f338295b5b148"
+    },
+    "clean_index_provenance_reference": {
+      "bytes": 2158,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-ordinary10-clean-D-A-index-provenance.json",
+      "sha256": "5dab8f5d09e7bbe42b6808177d1f35fe1bf3936a2dcacf64ac738674a47b8619"
+    },
+    "clean_worktree_and_index": true,
+    "local_frozen_Git_metadata_reference": {
+      "bytes": 2158,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-ordinary10-clean-D-A-index-provenance.json",
+      "sha256": "5dab8f5d09e7bbe42b6808177d1f35fe1bf3936a2dcacf64ac738674a47b8619"
+    },
+    "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tree": "c670052e6e12473d974382e455c7aef4adb6aebe"
+  },
+  "D_prov": {
+    "HEAD": "6fcdbfbb6ce6d5885ad98275cbc989a8d0e4ba8e",
+    "actual_closed_Source_READ": {
+      "bytes": 8248,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-Phase1-cache-atomic-put-READ4-closed.json",
+      "sha256": "759f5100682a32e5fe2a9a81dbb0a33946d8ff658df1fbfd1f3f338295b5b148"
+    },
+    "clean_index_provenance_reference": {
+      "bytes": 2158,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-ordinary10-clean-D-A-index-provenance.json",
+      "sha256": "5dab8f5d09e7bbe42b6808177d1f35fe1bf3936a2dcacf64ac738674a47b8619"
+    },
+    "clean_worktree_and_index": true,
+    "local_frozen_Git_metadata_reference": {
+      "bytes": 8716,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-Phase1-cache-atomic-put-exact-three-local-freeze.json",
+      "sha256": "0d94fff7376374123441e0a52da3fb11b06f315125051e030660c48d571b5725"
+    },
+    "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tree": "39113c1884bcaa9fac455fb92667661af8241670"
+  },
+  "canonical_source_application": false,
+  "controls": {
+    "bytes": 4668,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/READY-ordinary10-final-static-INERT.json",
+    "sha256": "dcc37b21f285901359b1cc75bf1f642204c3efb74ea930a82051997b5a09c2f2"
+  },
+  "epoch_and_READ4_share_one_actual_charge": true,
+  "expected_absent_paths": [
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/__init__.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/conftest.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/legal_ir/__init__.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/legal_ir/conftest.py"
+  ],
+  "final_ordinary_runtime_qualification_eligibility_authority": null,
+  "fixture": {
+    "bytes": 6347,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-ordinary10-nine-role-fixture-wire.json",
+    "sha256": "54d590f4e9334af75b67230f10beff0f3f882e49838cf9f7f5f2f259aeeb3f63"
+  },
+  "freeze": {
+    "bytes": 8716,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-Phase1-cache-atomic-put-exact-three-local-freeze.json",
+    "sha256": "0d94fff7376374123441e0a52da3fb11b06f315125051e030660c48d571b5725"
+  },
+  "isolated_frozen_local_git_candidate": true,
+  "latest_closed_Source_full_precharge": {
+    "bytes": 1305,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/Source-only-Phase1-cache-atomic-put-READ-overlay-full-retained.json",
+    "sha256": "adc7cb0909e09256db3e203a9a2e85a8b412ea639bf3b30e07b1bc78b62df072"
+  },
+  "modules": {
+    "ipfs_datasets_py.logic.backends.kernel.lean": {
+      "bytes": 104341,
+      "full9": {
+        "st_ctime_ns": "1795741365135834572",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513274",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365135834572",
+        "st_nlink": "1",
+        "st_size": "104341",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+    },
+    "ipfs_datasets_py.logic.legal_ir.proof_cache": {
+      "bytes": 62783,
+      "full9": {
+        "st_ctime_ns": "1795750532276434201",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513518",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795750532276434201",
+        "st_nlink": "1",
+        "st_size": "62783",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+      "sha256": "cf414d3c4bfb858741a8423508d7e70d26db7f3b0a61959c9d594c39ddee23de"
+    },
+    "tests.unit.logic.legal_ir.test_proof_cache": {
+      "bytes": 105531,
+      "full9": {
+        "st_ctime_ns": "1795750532276434201",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514039",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795750532276434201",
+        "st_nlink": "1",
+        "st_size": "105531",
+        "st_uid": "1000"
+      },
+      "relative_path": "tests/unit/logic/legal_ir/test_proof_cache.py",
+      "sha256": "1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460"
+    }
+  },
+  "named_metadata_count": 1625,
+  "outer": {
+    "bytes": 852469,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-live-reconciled-outer1618-epoch.json",
+    "sha256": "a250df914df7b03b8362891c3013cce373e2a65e7a083a1f1521d7e9279b165d"
+  },
+  "prior_closed_guide_source_charge": {
+    "bytes": 1310,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/native-translated-cache/Source-only-Guide579-full-retained-cap.json",
+    "sha256": "cec009c16d322937592dbf0447551813dd7848ddd72ecddb487e4909ad6a4d5b"
+  },
+  "python": {
+    "bytes": 845899,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-live-reconciled-Python1605-epoch.json",
+    "sha256": "bf7a6ba977ede10974c16d506304f67492e14b168dff1d9651d1d465d24c7934"
+  },
+  "read": {
+    "bytes": 1887,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-ordinary10-D27-read-binding.json",
+    "sha256": "7eeb60ab86e1f1c94fdff9fc320c3cda12df1424a4a474a5107d90fbfd34b269"
+  },
+  "read4_named_metadata_guard": {
+    "bytes": 907991,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-1625-named-metadata-guard.json",
+    "sha256": "94a95a51b26600dbbe0d940457af87e673c6fb147e9dccb99b5b65209751b79e"
+  },
+  "read_close": {
+    "bytes": 8248,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-Phase1-cache-atomic-put-READ4-closed.json",
+    "sha256": "759f5100682a32e5fe2a9a81dbb0a33946d8ff658df1fbfd1f3f338295b5b148"
+  },
+  "runtime_clock_IO_effect_and_result": null,
+  "schema": "actual-READ4-live-Phase1-proof-cache-ordinary10-nonclock/v1",
+  "successor_epoch": {
+    "bytes": 6382,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "747a2492f0d6ce993c1208fb74b71c330bd53bd87a676370d3e3b570134ced37"
+  },
+  "successor_epoch_charge": {
+    "bytes": 1305,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/Source-only-Phase1-cache-atomic-put-READ-overlay-full-retained.json",
+    "sha256": "adc7cb0909e09256db3e203a9a2e85a8b412ea639bf3b30e07b1bc78b62df072"
+  },
+  "successor_write_charge": {
+    "bytes": 1296,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/Source-only-proof-cache-atomic-put-WRITE-full-retained.json",
+    "sha256": "6e6420d3a74a195ace7f3c9cc2c6d49479f63a337368d601c7b2e40637c80d76"
+  }
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/existing-rebased-projection-runner-one-consumer-case.v02.py.DATA", line 296, in main
+    data = manifest(args, prior)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/existing-rebased-projection-runner-one-consumer-case.v02.py.DATA", line 120, in manifest
+    raw = pinned_file(args.projection_manifest, args.projection_bytes, args.projection_sha256, 65536)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/existing-rebased-projection-runner-one-consumer-case.v02.py.DATA", line 77, in pinned_file
+    raise ValueError(f"noncanonical or unbounded input: {path}")
+ValueError: noncanonical or unbounded input: /tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/projection-one-consumer-case.v02.json

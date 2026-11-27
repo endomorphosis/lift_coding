@@ -1,0 +1,56 @@
+{
+  "actual_bindings": null,
+  "exact_two_roles": {
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_metric_lineage.py": {
+      "postimage": {
+        "bytes": 20259,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/legal_ir_metric_lineage.after.py.DATA",
+        "sha256": "fd476d9372ae92cd37b9e8f7f8e7415a5f383227fc6d533ab611ee7c4ed6274d"
+      },
+      "postimage_git_blob": "29f2ff8ba693812e4fea7a798f0da21ead56c1cf",
+      "preimage": {
+        "bytes": 20234,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/legal_ir_metric_lineage.published574.py.DATA",
+        "sha256": "df157497e17936216cd4e1faf8b813fefd389733049edd60a7b5f87da911d0fb"
+      },
+      "preimage_git_blob": "d23063de3430b77a843fc159a79ec279cd3e5403"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py": {
+      "postimage": {
+        "bytes": 13043,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/test_legal_ir_metric_responsiveness.after.py.DATA",
+        "sha256": "8a1aa33563b0b60d69d34cec9d8e48c1e1f0f1b3d33ead3609e5ee075e8e84e4"
+      },
+      "postimage_git_blob": "de3144b88fdc62f398fdb041e55449be22c6bcb8",
+      "preimage": {
+        "bytes": 8117,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/tests__unit__optimizers__logic_theorem_optimizer__test_legal_ir_metric_responsiveness.py.DATA",
+        "sha256": "24a9d4a7396f628d089bf8367551665fb7937153feef7f9971ae7466deffb3dd"
+      },
+      "preimage_git_blob": "e181d4fbaa5dd55e92e3636e39fc5aa98541a8d1"
+    }
+  },
+  "forward": {
+    "bytes": 5912,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/exact-two-current-forward.patch",
+    "sha256": "4d62d81068ef2a22dac27e0510cdf0ad7f396949a2f2601359c7711be0e38916"
+  },
+  "inverse": {
+    "bytes": 5912,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/exact-two-current-inverse.patch",
+    "sha256": "39b325f446a5d8e7994873bb9bb13ff7d0c21df85f53b6516ff3d250ce86fff1"
+  },
+  "private_actual11": {
+    "bytes": 11446,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase8-evaluation-lineage-current-v01/SEALED-private-metric-lineage-cache-recovery-two-file-v01.json",
+    "sha256": "ed2b7f020d68c7564a99dc6e65857bf92ccb97f80204b3b2e8da53e3c9161e9d"
+  },
+  "published_D_HEAD": "8a902502e1a82d3da05b9c31a42db8c39ea8a9e1",
+  "retained_private19_collection_refusal": {
+    "bytes": 2886,
+    "path": "/tmp/P8-metric-lineage-existing-private-pytest19-ewyx7a5c/SEALED-metric-lineage-private-full19-collection-refusal.json",
+    "sha256": "f6bff267051a701fc91012c38953fd5adf540aedcbebc2f3ce1e62b8c1e81560"
+  },
+  "schema": "Phase8-metric-lineage-private-exact-two/v1",
+  "sparse_pattern_to_add": "/tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py"
+}

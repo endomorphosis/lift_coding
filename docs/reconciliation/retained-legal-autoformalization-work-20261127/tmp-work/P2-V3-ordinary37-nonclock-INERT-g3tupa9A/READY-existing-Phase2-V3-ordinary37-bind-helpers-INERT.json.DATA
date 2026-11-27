@@ -1,0 +1,99 @@
+{
+  "Guide575_actual_closed_reference": {
+    "bytes": 2639,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-Guide575-four-docs-three-FF-publication.json",
+    "sha256": "c04197de963678c357e0f2b97f0a501b343f3f468d4a6a50a7d15ba22a9d568a"
+  },
+  "Phase2_v589_interpreter_and_path_profile": {
+    "bytes": 77324,
+    "path": "/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/Root-selected-Phase2-physical-v4-current-trust-existing-ordinary33-operator.py",
+    "sha256": "61cfe3acd8b736f52f685a91acbaba17b68d66de4085e92bbc0ebbafb54c0a4f"
+  },
+  "actual_source_receipts_as_input_only": {
+    "epoch": {
+      "bytes": 6082,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-live-reconciled-Source42-content-epoch-closed.json",
+      "sha256": "fddf54e04ee967901d3b39750859addb90e7d86fe75f9d5b4bdb495c3beca0ef"
+    },
+    "freeze": {
+      "bytes": 6414,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-isolated-Phase2-V3-definition-exact-two-local-freeze.json",
+      "sha256": "4451d305186b343a67388d8a637e40abd21473e69c2c27ca41f6b8a7c6ffc1d6"
+    },
+    "read": {
+      "bytes": 7523,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-isolated-Phase2-V3-definition-READ3-closed.json",
+      "sha256": "2fd517b04dd4863601e510455e95ca9b3a6ea0cf150943aa0c434fa2731a9e95"
+    }
+  },
+  "added_private_cases": 2,
+  "compile_only": true,
+  "later_clock_IO_runtime_and_output": null,
+  "materializer": {
+    "bytes": 17726,
+    "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/materialize-live-ordinary37.py.DATA",
+    "sha256": "2c0e0fea0d79062f29d2fd3dbc2ac819dfec894ef0a614bb6a35b092e04bf2db"
+  },
+  "materializer_argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-B",
+    "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/materialize-live-ordinary37.py.DATA",
+    "--freeze",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-isolated-Phase2-V3-definition-exact-two-local-freeze.json",
+    "6414",
+    "4451d305186b343a67388d8a637e40abd21473e69c2c27ca41f6b8a7c6ffc1d6",
+    "--epoch",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "6082",
+    "fddf54e04ee967901d3b39750859addb90e7d86fe75f9d5b4bdb495c3beca0ef",
+    "--read-closed",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-isolated-Phase2-V3-definition-READ3-closed.json",
+    "7523",
+    "2fd517b04dd4863601e510455e95ca9b3a6ea0cf150943aa0c434fa2731a9e95"
+  ],
+  "materializer_invoked": false,
+  "ordinary9_resources_and_policy_historical_source": {
+    "bytes": 65462,
+    "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/Root-selected-existing-Phase1-proof-cache-translation-ordinary9-operator.py",
+    "sha256": "889efcf7f485a3b6fc38daca36c57f36036ab2fd32bf1a613063e6dd64a2f694"
+  },
+  "previous_static": {
+    "bytes": 21123,
+    "path": "/tmp/P2-V3-existing-ordinary37-controls-INERT-nauXr2ty/READY-existing-v581-v589-Phase2-V3-ordinary37-INERT.json",
+    "sha256": "1906bb8b432fba5edf3b69e94d77da5d9f34957d94f26bfad68a464e40dea802"
+  },
+  "prior_outer_for_exact_overlay": {
+    "bytes": 850358,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-live-reconciled-outer1614-epoch.json",
+    "sha256": "44af55564659e96cfe9e3c7ead9336203f51bb37c6117ab108238b5d3b69bb05"
+  },
+  "prior_python_for_exact_overlay": {
+    "bytes": 843788,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-live-reconciled-Python1601-epoch.json",
+    "sha256": "da7f473f29fe4a57f8e8388c15d72cd7ba69c61168add0993b5116e4237e6dd9"
+  },
+  "qualified_ordinary": false,
+  "retained_existing_cases": 35,
+  "schema": "private-existing-R2-Phase2-V3-ordinary37-nonclock-and-final-helpers/v1",
+  "selector": {
+    "bytes": 18655,
+    "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/select-live-ordinary37.py.DATA",
+    "sha256": "7f1b94dbbc8f33242c0eb71038e2d50141baa1a211464fdbecb802d1ca8d29c6"
+  },
+  "selector_cli": [
+    "NONCLOCK_PATH",
+    "BYTES",
+    "SHA256",
+    "FINAL_STATIC_PATH",
+    "BYTES",
+    "SHA256",
+    "--verify-only|--bind-only"
+  ],
+  "selector_invoked": false,
+  "static_controls": {
+    "bytes": 21519,
+    "path": "/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/READY-existing-Phase2-V3-ordinary37-v02-INERT.json",
+    "sha256": "504b74a1ec2bc20235c2e1a5cddd9f02a6ae61ff861d304606448809d18f04d8"
+  }
+}

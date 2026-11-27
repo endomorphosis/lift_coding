@@ -1,0 +1,209 @@
+--- b/tests/unit/logic/integration/test_trusted_feedback_weight_updates.py
++++ a/tests/unit/logic/integration/test_trusted_feedback_weight_updates.py
+@@ -1269,206 +1269,3 @@
+         expectation = {key: value for key, value in expectation.items() if key != field}
+     with pytest.raises(ProofFeedbackError):
+         replace(target, checked_proof_receipt=offered, checked_proof_expectation=expectation)
+-
+-
+-def _generated_formula_exception_obligation(train):
+-    from ipfs_datasets_py.logic.integration.reasoning.legal_ir_obligations import (
+-        generate_legal_ir_proof_obligations,
+-    )
+-
+-    # Contract coverage can share this kind; select the actual formula obligation.
+-    obligations = [item for item in generate_legal_ir_proof_obligations(train)
+-                   if item.kind == "exception_scope_precedence"
+-                   and item.formula_id and item.metadata.get("exception_count", 0) > 0
+-                   and item.statement.startswith("exception_scope_precedes_norm(")]
+-    assert obligations
+-    obligation = obligations[0]
+-    assert obligation.sample_id == train.sample_id
+-    assert obligation.obligation_id != train.sample_id
+-    assert obligation.legal_ir_view == "deontic.ir"
+-    assert obligation.logic_family == "conditional_normative"
+-    return obligation
+-
+-
+-def _generated_checked_producer_fixture(train):
+-    """Fresh fictional evidence commits the actual generated obligation."""
+-    from ipfs_datasets_py.logic.backends.results import ResultAuthority, ResultStatus, TheoremResult
+-    from ipfs_datasets_py.logic.bridge.proof_receipt_attestation import (
+-        build_trusted_receipt_from_backend_result,
+-    )
+-    from ipfs_datasets_py.logic.families.models import EvidenceAuthority
+-    from ipfs_datasets_py.logic.ir_core.claims import FrozenMap
+-    from ipfs_datasets_py.logic.ir_core.protocols import ExecutionBounds
+-
+-    obligation = _generated_formula_exception_obligation(train)
+-    sample_sha256 = proof_feedback_sample_digest(train)
+-    formal_sha256 = proof_feedback_content_digest(obligation.to_dict())
+-    reviewed_sha256 = proof_feedback_content_digest({
+-        "fixture": "fictional-generated-obligation-selected-review",
+-        "sample_sha256": sample_sha256,
+-    })
+-    dependency_sha256 = proof_feedback_content_digest({
+-        "fictional-generated-exception-definition": "revision-1",
+-    })
+-    # Authored engineering data, not an actual prover execution or legal review.
+-    result = TheoremResult(
+-        result_id="fictional-generated-feedback-result",
+-        backend_id="fictional-generated-independent-checker", backend_version="fictional-v1",
+-        authority=ResultAuthority.THEOREM, status=ResultStatus.PROVED,
+-        assumptions=("fictional-generated-reviewed-assumption",),
+-        bounds=ExecutionBounds(timeout_ms=1000, max_steps=100),
+-        translation_ceiling=EvidenceAuthority.INDEPENDENTLY_CHECKABLE,
+-        metadata=FrozenMap({
+-            "bounds": {"timeout_ms": 1000, "max_steps": 100},
+-            "formal_obligation_sha256": formal_sha256,
+-            "reviewed_target_sha256": reviewed_sha256,
+-            "dependency_manifest_sha256": dependency_sha256,
+-            "raw_proof_source": "Fictional private proof text; never a training target.",
+-        }),
+-    )
+-    receipt = build_trusted_receipt_from_backend_result(
+-        result, theorem_id="fictional-generated-feedback-theorem",
+-        property_id="fictional-generated-feedback-property",
+-        translation_receipt_id="fictional-generated-feedback-translation",
+-        tree_id="fictional-generated-feedback-tree", policy_id="fictional-generated-feedback-policy",
+-        receipt_id="fictional-generated-feedback-receipt",
+-    )
+-    expectation = {
+-        "receipt_id": "fictional-generated-feedback-receipt", "content_id": receipt.content_id,
+-        "source_result_digest": result.digest, "property_id": "fictional-generated-feedback-property",
+-        "tree_id": "fictional-generated-feedback-tree", "backend_id": "fictional-generated-independent-checker",
+-        "authority": "theorem", "assumptions": ["fictional-generated-reviewed-assumption"],
+-        "bounds": {"timeout_ms": 1000, "max_steps": 100}, "sample_sha256": sample_sha256,
+-        "formal_obligation_sha256": formal_sha256, "reviewed_target_sha256": reviewed_sha256,
+-        "dependency_manifest_sha256": dependency_sha256,
+-    }
+-    target = ProofFeedbackTrainingTarget(
+-        sample_id=train.sample_id, sample_sha256=sample_sha256,
+-        obligation_id=obligation.obligation_id, obligation_type=obligation.kind,
+-        legal_ir_view=obligation.legal_ir_view, formal_obligation_sha256=formal_sha256,
+-        reviewed_target_sha256=reviewed_sha256, dependency_manifest_sha256=dependency_sha256,
+-        checked_proof_receipt=receipt, checked_proof_expectation=expectation,
+-    )
+-    return obligation, target
+-
+-
+-def test_checked_target_uses_actual_feedback_builder_before_both_consumers(samples, monkeypatch):
+-    import json
+-    from dataclasses import replace
+-
+-    from ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback import (
+-        build_legal_ir_proof_feedback_record,
+-    )
+-
+-    train, holdout = samples
+-    versions = _versions()
+-    obligation, preselected = _generated_checked_producer_fixture(train)
+-    record = build_legal_ir_proof_feedback_record(
+-        obligation, current_target=preselected, versions=versions,
+-        semantic_slots={"exception": "present"}, partition_key=train.sample_id,
+-        partition_policy=ProofFeedbackPartitionPolicy(holdout_fraction=0.0),
+-    )
+-    assert record.obligation_digest == preselected.obligation_digest
+-    assert preselected.checked_proof_receipt.receipt_id in record.receipt_ids
+-    assert record.record_id == record.expected_record_id
+-    assert record.positive and record.eligible_for_training
+-    wire = record.to_dict()
+-    encoded = json.dumps(wire, sort_keys=True)
+-    assert "raw_proof_source" not in encoded
+-    assert "Fictional private proof text; never a training target." not in encoded
+-    restored = LegalIRProofFeedbackRecord.from_dict(wire)
+-    assert restored.to_dict() == wire
+-    selected = replace(preselected, expected_feedback_record_id=record.record_id)
+-    assert selected.matches(restored)
+-
+-    encoder = AdaptiveModalAutoencoder(compute_device="python")
+-    before = encoder.state.to_dict()
+-    trainer = TrustedFeedbackTrainer(
+-        encoder, expected_versions=versions,
+-        config=TrustedFeedbackTrainerConfig(production_weight_writes_enabled=True),
+-    )
+-    updates = []
+-
+-    def stop_before_update(*args, **kwargs):
+-        updates.append(True)
+-        return False
+-
+-    monkeypatch.setitem(trainer.train.__globals__, "_apply_bounded_sample_update", stop_before_update)
+-    targets = {selected.obligation_id: selected}
+-    report = trainer.train(
+-        [wire], {train.sample_id: train},
+-        ablation_evidence=_ablation(train.sample_id, holdout.sample_id),
+-        current_proof_targets=targets,
+-    )
+-    auxiliary = encoder.train_proof_auxiliary_heads(
+-        [restored], expected_versions=versions,
+-        current_proof_targets=targets, learning_rate=0,
+-    )
+-    assert len(updates) == auxiliary["eligible_count"] == 1
+-    assert report.applied_count == 0
+-    assert encoder.state.to_dict() == before
+-
+-
+-@pytest.mark.parametrize("change", ["statement", "metadata"])
+-def test_actual_feedback_builder_refuses_same_id_changed_obligation(samples, change):
+-    from copy import deepcopy
+-
+-    from ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback import (
+-        ProofFeedbackTrustError, build_legal_ir_proof_feedback_record,
+-    )
+-
+-    train, _ = samples
+-    obligation, target = _generated_checked_producer_fixture(train)
+-    changed = deepcopy(obligation.to_dict())
+-    if change == "statement":
+-        changed["statement"] += " This is a different fictional obligation."
+-    else:
+-        changed["metadata"] = {**changed["metadata"], "fictional_definition_revision": "revision-2"}
+-    assert changed["obligation_id"] == obligation.obligation_id
+-    assert proof_feedback_content_digest(changed) != target.formal_obligation_sha256
+-    with pytest.raises(ProofFeedbackTrustError):
+-        build_legal_ir_proof_feedback_record(
+-            changed, current_target=target, versions=_versions(),
+-            semantic_slots={"exception": "present"}, partition_key=train.sample_id,
+-            partition_policy=ProofFeedbackPartitionPolicy(holdout_fraction=0.0),
+-        )
+-
+-
+-def test_actual_feedback_builder_refuses_unmatched_checked_receipt(samples):
+-    from dataclasses import replace
+-
+-    from ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback import (
+-        ProofFeedbackTrustError, build_legal_ir_proof_feedback_record,
+-    )
+-
+-    train, _ = samples
+-    obligation, target = _generated_checked_producer_fixture(train)
+-    offered = replace(target.checked_proof_receipt, tree_id="fictional-other-generated-tree")
+-    selected = replace(target, checked_proof_receipt=offered)
+-    with pytest.raises(ProofFeedbackTrustError):
+-        build_legal_ir_proof_feedback_record(
+-            obligation, current_target=selected, versions=_versions(),
+-            semantic_slots={"exception": "present"}, partition_key=train.sample_id,
+-            partition_policy=ProofFeedbackPartitionPolicy(holdout_fraction=0.0),
+-        )
+-
+-
+-def test_actual_feedback_builder_preserves_legacy_obligation_digest_without_target(samples):
+-    import hashlib
+-
+-    from ipfs_datasets_py.logic.integration.reasoning.legal_ir_proof_feedback import (
+-        build_legal_ir_proof_feedback_record,
+-    )
+-
+-    train, _ = samples
+-    obligation = _generated_formula_exception_obligation(train)
+-    record = build_legal_ir_proof_feedback_record(
+-        obligation, versions=_versions(), semantic_slots={"exception": "present"},
+-        partition_key=train.sample_id,
+-        partition_policy=ProofFeedbackPartitionPolicy(holdout_fraction=0.0),
+-    )
+-    assert record.obligation_digest == proof_feedback_content_digest({
+-        "obligation_id": obligation.obligation_id,
+-        "statement_sha256": hashlib.sha256(obligation.statement.encode("utf-8")).hexdigest(),
+-        "type": obligation.kind,
+-    })

@@ -1,0 +1,127 @@
+"""Local controls for the detached projection and the existing Reader's owner boundary."""
+from copy import deepcopy
+from hashlib import sha256
+from pathlib import Path
+from runpy import run_path
+import sys
+import unittest
+
+HERE = Path(__file__).absolute().parent
+p = run_path(str(HERE / 'prepare.py'))
+sys.addaudithook(p['audit'])
+
+
+class Transition(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.handoff = p['load'](p['prepare']())
+        cls.proof = p['load'](cls.handoff['exact_transition'])
+        cls.detached = p['load'](cls.handoff['original_refusal'])
+        cls.replay = cls.detached['replay']
+        cls.writer = p['load'](cls.replay['writer'])
+        cls.rows = p['load'](cls.replay['pre_doc_outer_epoch'])
+        cls.prior = p['load'](cls.replay['prior_preview'])
+        cls.projected = p['load'](cls.handoff['conditional_reader_preview'])
+        cls.actual_index = p['archive'](cls.proof['current_writer_index'])
+        api = p['namespace'](p['pin'](p['EPOCH'] / 'verify_rebind_capture.py', 137453,
+            'a5c1527b72f47c92e71a3a4ce81f8d027aca9ec2aaaac0df32ff5e9c95e37c8f'))
+        cls.compose = staticmethod(api['compose_phase7_relocated_source32_epochs'])
+        cls.binding = staticmethod(api['_relocation_digest'])
+
+    def modeled_observations(self):
+        preview = deepcopy(self.projected)
+        plan = preview['reader_inputs']
+        captures = []
+        for i, row in enumerate(plan['fresh_Source_body_targets']):
+            raw = f'# modeled fresh reader body {i}\n'.encode()
+            body_sha = sha256(raw).hexdigest()
+            oid = p['git_blob'](raw)
+            stamp = dict(row['full9'],st_size=str(len(raw)))
+            row.update(bytes=len(raw),sha256=body_sha,full9=stamp,expected_Git_blob_oid=oid)
+            captures.append((dict(Git_blob_oid=oid,bytes=len(raw),canonical_full9=stamp,
+                    canonical_path=row['path'],path=str(HERE / f'modeled-{i}.DATA'),sha256=body_sha), raw))
+        guides = plan['four_guide_post_candidates_for_current_owner_recheck']
+        all_stamps = {row['path']:row['full9'] for row in preview['relocated_retained_outer'] +
+                      guides + plan['fresh_Source_body_targets']}
+        endpoint = dict(roots=plan['current_roots'],index=plan['current_index'],full9=all_stamps,
+                        git=[dict(path=row['path'],mode=row['expected_Git_mode'],Git_blob_oid=row['expected_Git_blob_oid'])
+                             for row in plan['fresh_Source_body_targets']])
+        return preview, deepcopy(endpoint), deepcopy(endpoint), guides, captures
+
+    def invoke(self, inputs, callback, *, expected=None, index=None):
+        preview, before, after, guides, captures = inputs
+        return self.compose(preview, expected_preview_sha256=expected or self.binding(preview),
+            endpoint_before=before, endpoint_after=after, index_body=self.actual_index if index is None else index,
+            guide_observations=guides, captures=captures, verify_relocation_owner=callback)
+
+    def test_exact_current_scope_preserves_old_archive_and_orders(self):
+        current, old = (row['reader_inputs'] for row in (self.projected, self.prior))
+        self.assertEqual(current['fresh_Source_body_targets'], old['fresh_Source_body_targets'])
+        self.assertEqual(current['historical_origin_scope_recheck'], old['historical_origin_scope_recheck'])
+        self.assertEqual(self.projected['historical_phase7'], self.prior['historical_phase7'])
+        self.assertEqual(len(self.projected['changed_retained_content']), 3)
+        self.assertFalse(self.detached['role_continuity']['retained_import_scope_accepted'])
+        self.assertIsNone(self.handoff['owner_acceptance'])
+
+    def test_extra_retained_change_refuses(self):
+        changed = deepcopy(self.rows)
+        retained = self.prior['reader_inputs']['historical_origin_scope_recheck']['retained_92_paths'][0]
+        next(row for row in changed if row['path'] == retained)['sha256'] = '0'*64
+        with self.assertRaisesRegex(ValueError, 'retained owner and its disjoint owning test'):
+            p['project'](self.prior, changed, self.replay, self.writer, self.handoff['exact_transition'],
+                         self.proof['retained_owner'], self.proof['disjoint_owning_test'])
+
+    def test_changed_owner_body_metadata_cannot_be_replaced(self):
+        changed = deepcopy(self.rows)
+        retained = self.proof['retained_owner']['current']['path']
+        next(row for row in changed if row['path'] == retained)['sha256'] = self.proof['retained_owner']['previous']['sha256']
+        with self.assertRaisesRegex(ValueError, 'retained owner and its disjoint owning test'):
+            p['project'](self.prior, changed, self.replay, self.writer, self.handoff['exact_transition'],
+                         self.proof['retained_owner'], self.proof['disjoint_owning_test'])
+
+    def test_exact_composer_output_requires_modeled_owner_binding(self):
+        inputs = self.modeled_observations()
+        preview, before, after, guides, captures = inputs
+        wanted = self.binding((preview, before, after, guides, [(row,sha256(raw).hexdigest()) for row,raw in captures]))
+        offers = []
+        def review(value):
+            offers.append(value)
+            return value == wanted
+        result = self.invoke(inputs,review)
+        self.assertEqual(offers,[wanted])
+        self.assertEqual((len(result['outer_epoch']),len(result['python_epoch'])),(1250,1245))
+        path = self.proof['retained_owner']['current']['path']
+        self.assertEqual(next(row for row in result['python_epoch'] if row['path']==path),
+                         self.proof['retained_owner']['current'])
+
+    def test_owner_refusal_and_nonboolean_truth_reject(self):
+        for decision in (False, None, 1, 'true'):
+            with self.subTest(decision=decision), self.assertRaisesRegex(ValueError, 'Independent owner closure'):
+                self.invoke(self.modeled_observations(),lambda _: decision)
+
+    def test_crossed_previous_index_and_selected_preview_refuse_before_owner(self):
+        inputs = self.modeled_observations()
+        never = lambda _: self.fail('Owner callback must not run on a crossed input')
+        with self.assertRaisesRegex(ValueError, 'detached relocation preview'):
+            self.invoke(inputs, never, expected=self.binding(self.prior))
+        with self.assertRaisesRegex(ValueError, 'protected index differs'):
+            self.invoke(inputs, never, index=p['archive'](self.replay['before_index']))
+
+    def test_mutation_during_owner_callback_refuses(self):
+        inputs = self.modeled_observations()
+        def mutate(_):
+            inputs[0]['relocation_proof'] = self.handoff['original_refusal']
+            return True
+        with self.assertRaisesRegex(ValueError, 'unmodified input tuple'):
+            self.invoke(inputs,mutate)
+
+    def test_owner_bound_to_other_epoch_cannot_accept_transition(self):
+        inputs = self.modeled_observations()
+        _, before, after, guides, captures = inputs
+        wrong = self.binding((self.prior,before,after,guides,[(row,sha256(raw).hexdigest()) for row,raw in captures]))
+        with self.assertRaisesRegex(ValueError, 'Independent owner closure'):
+            self.invoke(inputs,lambda offered: offered==wrong)
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

@@ -1,0 +1,38 @@
+"""Run the compact DEVELOPMENT owner and preserve its original paid checks."""
+
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+RETAINED = HERE.parent / "decoder-training-compact-verified-development-private-v01-6EivFNn5"
+driver = RETAINED / "check_compact_development.py"
+body = driver.read_bytes()
+assert sha256(body).hexdigest() == "dc3f5fdffdc42ca7c8bd2ea04d07f5bba95045bbc015e67a50422dd8d4107025"
+for original, candidate in (
+    (b'STUDY=HERE/"study.after.py.DATA"', b'STUDY=HERE/"study.py"'),
+    (b'STUDY:"2ff022bf800001f9a904840b12dba12b67fede1ebbb0ed29183b4a321e47bad3"',
+     b'STUDY:"0db05161d43713375a0a9b4db8d359b6b5d50f08f5a7481f2b804b97add778b1"'),
+    (b'HERE/"fixtures/', b'RETAINED/"fixtures/'),
+    (b'    result=compare(threshold,**args)\n',
+     b'''    result=compare(threshold,**args)
+    bounded=compare(threshold,**args,include_confirmation_cost_bounds=True)
+    assert {key:value for key,value in bounded.items() if key!="confirmation_cost_bounds"} == result
+    candidate_bounds=[row["candidate"] for row in bounded["confirmation_cost_bounds"]["pairs"]]
+    observed=[row for row in candidate_bounds if row["observed_confirmation_seconds"] is not None]
+    assert observed and all(row["lower_seconds"]==row["upper_seconds"]==row["observed_confirmation_seconds"]
+                            and row["lower_meter_sha256"]==row["upper_meter_sha256"] for row in observed)
+    assert bounded["confirmation_cost_bounds"]["cost_evidence_sha256"]==args["expected_cost_evidence_sha256"]
+    assert [row[0] for row in fixture["fictional_owner_calls"]]==[
+        "fictional compact development owner","fictional cost owner"]*2
+    fixture["fictional_owner_calls"].clear()
+    assert compare(threshold,**args)==result
+'''),
+):
+    if original == b'HERE/"fixtures/':
+        assert body.count(original) == 2
+        body = body.replace(original, candidate)
+    else:
+        assert body.count(original) == 1, original
+        body = body.replace(original, candidate, 1)
+exec(compile(body, str(driver), "exec"),
+     {"__name__": "__main__", "__file__": str(HERE / driver.name), "RETAINED": RETAINED})

@@ -1,0 +1,265 @@
+{
+  "actual_Source42": {
+    "bytes": 10375,
+    "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/actual-doc-owner-approved-Source42-control-code.py.DATA",
+    "sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9"
+  },
+  "actual_isolated_write_lease": {
+    "canonical_root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+    "cooperative": true,
+    "lock_path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/workspace/control-plane/source-leases/source.lock",
+    "mode": "write",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 6.876885890960693e-05
+  },
+  "additional_A_index": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "candidate": {
+    "bytes": 3116,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/SEALED-Phase7-receipt-bounds-exact-two.json",
+    "sha256": "75c25b343072e543f36652328d45e924420bd083dc8a31bd2c25d586dd075e0d"
+  },
+  "canonical_Source_write_claimed": false,
+  "committed": {
+    "ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py": {
+      "bytes": 63254,
+      "full9": {
+        "st_ctime_ns": "1795743985154598006",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514740",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743985154598006",
+        "st_nlink": "1",
+        "st_size": "63254",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "9a52c4a11642edb0cb62b5c00b02ad67a9983e53",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py",
+      "sha256": "c350097f9425ce916997b1e116297e9497716ae13747719e722b36fe92f38921",
+      "stage0_and_committed_blob": "362660beaea798069c5fe9c7af73ef424d7704b9"
+    },
+    "tests/integration/logic/test_proof_receipt_attestation.py": {
+      "bytes": 27851,
+      "full9": {
+        "st_ctime_ns": "1795743985154598006",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514902",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743985154598006",
+        "st_nlink": "1",
+        "st_size": "27851",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "2de37c1db9c3c5808a087e5ed1ed8a23ab8f672f",
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/test_proof_receipt_attestation.py",
+      "sha256": "e6cc137379fb50e0aec6e6ae9a1b315344190652ff51fd0ca250f57acf3ab861",
+      "stage0_and_committed_blob": "ff318f57469d6be81b76f7e2e12ec9db46b25306"
+    }
+  },
+  "frozen": {
+    "HEAD": "0cf525e0d3070135547f145e87726dade3d70a1f",
+    "branch": "refs/heads/isolated/phase7-proof-receipt-typed-bounds",
+    "branch_file": {
+      "bytes": 41,
+      "full9": {
+        "st_ctime_ns": "1795743985315605837",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514924",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743985315605837",
+        "st_nlink": "1",
+        "st_size": "41",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/refs/heads/isolated/phase7-proof-receipt-typed-bounds",
+      "sha256": "55951d0b090060eef4ed23c87a524284939bdc6600c3934e311e17e9a0617583"
+    },
+    "index": {
+      "bytes": 7070589,
+      "full9": {
+        "st_ctime_ns": "1795743985314605828",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514901",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743985313605818",
+        "st_nlink": "1",
+        "st_size": "7070589",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+      "sha256": "ce5bfbf2fc6a5a7041928ddac359e475af8487d80ffbb004aa5a4463bc98e252"
+    },
+    "tree": "1b619e41010b1a68fda2c0125fdc1dd787b9f57d"
+  },
+  "full_charge": {
+    "bytes": 1302,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/Source-only-Phase7-receipt-bounds-WRITE-full-retained-v02.json",
+    "sha256": "629d9670c6f88b3d948a05b4037b075971c20962c22fbf5f70fbbca51106a5ea"
+  },
+  "isolated_Source_context_closed": true,
+  "local_clean": true,
+  "only_two_D_tree_entries_changed": true,
+  "ordinary_qualified": false,
+  "parent": "254ba85016cb9dba03ac6aa96b8aa411aeeb465a",
+  "prewrite_D_index_metadata": {
+    "current_same_bytes": {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795743939845182673",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514897",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743939844182664",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+      "sha256": "fc6af9c82580830cf737852f184a66b90008332376b528a083f08e33eff03ad7"
+    },
+    "prior_published": {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795743658407514638",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514738",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743658397514541",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+      "sha256": "fc6af9c82580830cf737852f184a66b90008332376b528a083f08e33eff03ad7"
+    }
+  },
+  "prior_targets": {
+    "ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py": {
+      "bytes": 63071,
+      "full9": {
+        "st_ctime_ns": "1795743985086603710",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514902",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743985086603710",
+        "st_nlink": "1",
+        "st_size": "63071",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py",
+      "sha256": "61296f095b933730ea24b070d2eaaf4202da9714c274a605bd5e18c6f4df49a7"
+    },
+    "tests/integration/logic/test_proof_receipt_attestation.py": {
+      "bytes": 22905,
+      "full9": {
+        "st_ctime_ns": "1795743985087603720",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514904",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743985087603720",
+        "st_nlink": "1",
+        "st_size": "22905",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/test_proof_receipt_attestation.py",
+      "sha256": "452ebaa2e016cc7393a892c2f0bdd8cb2e331bde307c064b9ac5404b3313a096"
+    }
+  },
+  "pushed": false,
+  "retained_failed_first_write": {
+    "bytes": 911,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-first-write-failure-before-sparse.json",
+    "sha256": "d8a1bd12207e9ce1f4bfa23ef6c1cc2db3b3708686b36425177478a9829aa770"
+  },
+  "retained_first_write_charge": {
+    "bytes": 1294,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/Source-only-Phase7-receipt-bounds-WRITE-full-retained.json",
+    "sha256": "48b153a723382c43c88a849ac2518a3136640450024b0dd61f47468572211db7"
+  },
+  "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+  "schema": "isolated-Phase7-receipt-bounds-exact-two-Git-freeze/v1",
+  "shared_source_or_Git_mutation": false,
+  "sparse_configuration_transition": {
+    "after": {
+      "bytes": 94791,
+      "full9": {
+        "st_ctime_ns": "1795743985103603868",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514900",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743985103603868",
+        "st_nlink": "1",
+        "st_size": "94791",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/info/sparse-checkout",
+      "sha256": "00ce0e3a34ebdd0d5c63247e0e69edfbf75a7c141f2a79d257342f7c69d2db8f"
+    },
+    "before": {
+      "bytes": 94628,
+      "full9": {
+        "st_ctime_ns": "1795743194375796603",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514737",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743194375796603",
+        "st_nlink": "1",
+        "st_size": "94628",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/info/sparse-checkout",
+      "sha256": "eab7642382cb9503fef04f626a1f8ae45a969c27f99c2f75619456a17ab28b1e"
+    }
+  },
+  "sparse_materialized": [
+    "ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py",
+    "tests/integration/logic/test_proof_receipt_attestation.py",
+    "ipfs_datasets_py/logic/verification_api.py"
+  ],
+  "terminal_returncode": 0,
+  "untouched_support": {
+    "ipfs_datasets_py/logic/verification_api.py": {
+      "bytes": 303308,
+      "full9": {
+        "st_ctime_ns": "1795743985087603720",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514903",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743985087603720",
+        "st_nlink": "1",
+        "st_size": "303308",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/verification_api.py",
+      "sha256": "37a8c4ac10610b877dd4eb0dd22fc1466b35b429fa4c4f02c76a43eb427284c0",
+      "stage0_and_committed_blob": "41133c0b54b7dbcf6dee56caa9dd9957de8fe8bd"
+    }
+  }
+}

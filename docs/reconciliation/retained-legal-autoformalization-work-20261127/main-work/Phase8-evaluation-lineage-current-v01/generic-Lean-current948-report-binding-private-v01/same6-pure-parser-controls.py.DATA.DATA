@@ -1,0 +1,34 @@
+import json
+import sys
+import unittest
+
+class ExistingLeanJSONFailureControls(unittest.TestCase):
+    def deep(self):
+        return '[' * (sys.getrecursionlimit() + 32) + '0' + ']' * (sys.getrecursionlimit() + 32)
+
+    def test_decoder_returns_controlled_invalid_json_error(self):
+        with self.assertRaises(ValueError):
+            scope['_load_lean_json_line'](self.deep())
+
+    def test_deep_diagnostic_is_rejected_on_both_streams(self):
+        for stream in ('stdout', 'stderr'):
+            with self.subTest(stream=stream):
+                args = (self.deep(), '') if stream == 'stdout' else ('', self.deep())
+                self.assertTrue(scope['_lean_error_diagnostics'](*args))
+
+    def test_collector_skips_deep_record_and_keeps_real_warning(self):
+        warning = {'severity': 'warning', 'data': 'fictional harmless diagnostic'}
+        self.assertEqual(scope['parse_lean_json_messages'](self.deep() + '\n' + json.dumps(warning)), [warning])
+
+    def test_existing_duplicate_and_nonfinite_rejections_remain(self):
+        for line in ('{"severity":"error","severity":"warning"}', '{"severity":"warning","data":NaN}'):
+            with self.subTest(line=line), self.assertRaises(ValueError):
+                scope['_load_lean_json_line'](line)
+
+    def test_ordinary_nested_message_roundtrips(self):
+        value = {'severity': 'warning', 'data': 'fictional text', 'extra': {'items': [{'nested': [1, 2]}]}}
+        self.assertEqual(scope['_load_lean_json_line'](json.dumps(value)), value)
+
+    def test_existing_plain_error_and_warning_classification_remains(self):
+        self.assertTrue(scope['_lean_error_diagnostics']('Main.lean:1:0: error: fictional problem', ''))
+        self.assertEqual(scope['_lean_error_diagnostics']('', 'warning: the word error is harmless'), ())

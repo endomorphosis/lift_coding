@@ -1,0 +1,153 @@
+--- a/verify_standalone_git.py
++++ b/verify_standalone_git.py
+@@ -13,6 +13,12 @@
+     if type(git_output_maximum) is not int or not 0 <= git_output_maximum <= _STAGE_A_GIT_STREAM_LIMIT:
+         raise ValueError('Stage A Git output maximum must be within the existing stream bound')
+     return git_output_maximum + 1
++
++
++def _stage_a_git_ref_capture_allowance(git_ref_output_maximum):
++    if type(git_ref_output_maximum) is not int or not 0 < git_ref_output_maximum <= _STAGE_A_GIT_STREAM_LIMIT:
++        raise ValueError('Stage A Git ref output maximum must be positive and within the existing stream bound')
++    return git_ref_output_maximum + 1
+ 
+ 
+ def _run_accounted_stage_a_git(command, *, env, timeout, admit_git_output, record_git_output, deadline=None,
+@@ -116,10 +122,11 @@
+     return admit_git_output, record_git_output
+ 
+ 
+-def stage_a_git_output_allowance(*, git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT):
++def stage_a_git_output_allowance(*, git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT,
++                                 git_ref_output_maximum=_STAGE_A_GIT_STREAM_LIMIT):
+     """Reserve both endpoints from the bound for 46 short calls and four ref scans."""
+     short_capture = _stage_a_git_capture_allowance(git_output_maximum)
+-    ref_capture = _stage_a_git_capture_allowance(_STAGE_A_GIT_STREAM_LIMIT)
++    ref_capture = _stage_a_git_ref_capture_allowance(git_ref_output_maximum)
+     return 46 * short_capture + 4 * ref_capture
+ 
+ 
+@@ -178,7 +185,8 @@
+ 
+ def verify_standalone_git(io, record, deadline, *, retain_d_index=False, control_read=None,
+                           stage_a_targets=None, read_stage_zero=None, admit_git_output=None, record_git_output=None,
+-                          git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT, project_expectations=None):
++                          git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT,
++                          git_ref_output_maximum=_STAGE_A_GIT_STREAM_LIMIT, project_expectations=None):
+     """Recheck selected roots and index/exclude bytes under the existing Source contexts.
+ 
+     Keep the D index bytes from this pass for a downstream reader when selected.
+@@ -186,9 +194,9 @@
+     The selected parent may supply its existing size-bound control reader.
+     With the exact Stage A roster and its existing index parser, also return
+     the endpoint inputs for the reuse composer, except the Source full9 map.
+-    The Stage A owner may select a smaller combined stream maximum using the
+-    same value in both reader calls and the whole-operation reservation. The
+-    full ref scans always retain the original allowance.
++    The Stage A owner may select smaller combined stdout and stderr maxima
++    for short calls and ref scans, using the same values in both Reader
++    calls and in the whole-operation reservation.
+     """
+     if type(retain_d_index) is not bool:
+         raise ValueError('explicit boolean index retention required')
+@@ -202,7 +210,9 @@
+     if (stage_a_targets is not None or admit_git_output is not None or record_git_output is not None) and not git_accounting:
+         raise ValueError('Stage A requires the existing Git output admission and accounting owner')
+     _stage_a_git_capture_allowance(git_output_maximum)
+-    if git_output_maximum != _STAGE_A_GIT_STREAM_LIMIT and stage_a_targets is None:
++    _stage_a_git_ref_capture_allowance(git_ref_output_maximum)
++    if stage_a_targets is None and (git_output_maximum != _STAGE_A_GIT_STREAM_LIMIT
++                                    or git_ref_output_maximum != _STAGE_A_GIT_STREAM_LIMIT):
+         raise ValueError('a smaller Git output maximum requires the selected Stage A roster')
+     stage_a_pins = []
+     relative_paths = []
+@@ -235,7 +245,7 @@
+             raise ValueError('initial total420 expired during standalone Git guards')
+         command, env = _stage_a_read_only_git_command(root,args)
+         if git_accounting:
+-            capture_maximum = _STAGE_A_GIT_STREAM_LIMIT if args[0] == 'for-each-ref' else git_output_maximum
++            capture_maximum = git_ref_output_maximum if args[0] == 'for-each-ref' else git_output_maximum
+             return _run_accounted_stage_a_git(command, env=env, timeout=min(remaining, 10),
+                 admit_git_output=admit_git_output, record_git_output=record_git_output, deadline=deadline,
+                 git_output_maximum=capture_maximum)
+@@ -347,7 +357,8 @@
+         io, record, deadline, *, between_endpoints, control_read, stage_a_targets,
+         read_stage_zero, admit_git_output, record_git_output,
+         expected_owner_scope_sha256, verify_continuous_owner_scope,
+-        git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT, project_expectations=None):
++        git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT, git_ref_output_maximum=_STAGE_A_GIT_STREAM_LIMIT,
++        project_expectations=None):
+     """Use retained Git control bytes under one selected continuous paired Source READ.
+ 
+     The existing owner must hold both READ contexts through this call. Its
+@@ -452,7 +463,8 @@
+                 io, selected, deadline, retain_d_index=True, control_read=read_bytes,
+                 stage_a_targets=targets, read_stage_zero=read_stage_zero,
+                 admit_git_output=admit_git_output, record_git_output=record_git_output,
+-                git_output_maximum=git_output_maximum, **git_options)
++                git_output_maximum=git_output_maximum, git_ref_output_maximum=git_ref_output_maximum,
++                **git_options)
+ 
+         verify_scope('before-opening')
+         opening = observe_endpoint(opening_read)
+@@ -536,6 +548,7 @@
+ def source32_paired_reader_reservation(git_guard_record, guides, fresh_sources, archived_sources, control_reads,
+                                        *, epoch_output_maximums,
+                                        git_output_maximum=_STAGE_A_GIT_STREAM_LIMIT,
++                                       git_ref_output_maximum=_STAGE_A_GIT_STREAM_LIMIT,
+                                        persist_python_epoch=True,
+                                        retain_terminal_git_controls=False, capture_partition=None):
+     """Price selected logical operations before the existing owner enters Source.
+@@ -583,7 +596,8 @@
+     controls = sum(row['bytes'] + 1 for row in control_reads)
+     stored_epoch_names = ('outer_epoch', 'python_epoch') if persist_python_epoch else ('outer_epoch',)
+     epoch_io = sum(2 * epoch_output_maximums[name] + 1 for name in stored_epoch_names)
+-    git_allowance = stage_a_git_output_allowance(git_output_maximum=git_output_maximum)
++    git_allowance = stage_a_git_output_allowance(git_output_maximum=git_output_maximum,
++                                                 git_ref_output_maximum=git_ref_output_maximum)
+     return {'logical_selected_bytes': direct + controls + epoch_io + git_allowance,
+             'git_output_allowance_bytes': git_allowance, 'direct_source_bytes': direct,
+             'control_probe_bytes': controls, 'epoch_output_allowance_bytes': epoch_io}
+@@ -594,10 +608,11 @@
+ STAGE_A_SELECTOR_TERMINAL_SCHEMA = 'stage-a-paired-git-selector-terminal/v1'
+ 
+ 
+-def stage_a_git_selector_output_allowance(*, git_output_maximum=8192):
++def stage_a_git_selector_output_allowance(*, git_output_maximum=8192,
++                                          git_ref_output_maximum=_STAGE_A_GIT_STREAM_LIMIT):
+     """Combined stream reservation for one selected observation of both roots."""
+     return (22 * _stage_a_git_capture_allowance(git_output_maximum)
+-            + 2 * _stage_a_git_capture_allowance(_STAGE_A_GIT_STREAM_LIMIT))
++            + 2 * _stage_a_git_ref_capture_allowance(git_ref_output_maximum))
+ 
+ 
+ def _stage_a_selector_source_roots(expected):
+@@ -635,7 +650,8 @@
+ 
+ 
+ def observe_stage_a_paired_git_selectors(expected_roots, *, expected_owner_scope_sha256, deadline,
+-        verify_continuous_owner_scope, admit_git_output, record_git_output, git_output_maximum=8192):
++        verify_continuous_owner_scope, admit_git_output, record_git_output, git_output_maximum=8192,
++        git_ref_output_maximum=_STAGE_A_GIT_STREAM_LIMIT):
+     """Capture exact selector evidence while the existing owner holds both Source READs.
+ 
+     Return an observation and its two raw streams. The owner seals the raw output
+@@ -649,7 +665,8 @@
+             or not all(callable(callback) for callback in (
+                 verify_continuous_owner_scope,admit_git_output,record_git_output))):
+         raise ValueError('existing paired selector scope and Git accounting required')
+-    stage_a_git_selector_output_allowance(git_output_maximum=git_output_maximum)
++    stage_a_git_selector_output_allowance(git_output_maximum=git_output_maximum,
++                                          git_ref_output_maximum=git_ref_output_maximum)
+     kind = STAGE_A_SELECTOR_OBSERVATION_SCHEMA
+     pid = os.getpid()
+ 
+@@ -672,7 +689,7 @@
+         if remaining <= 0:
+             raise ValueError('paired Git selector observation expired')
+         command, env = _stage_a_read_only_git_command(root,args)
+-        max_output = _STAGE_A_GIT_STREAM_LIMIT if args[0]=='for-each-ref' else git_output_maximum
++        max_output = git_ref_output_maximum if args[0]=='for-each-ref' else git_output_maximum
+         return _run_accounted_stage_a_git(command,env=env,timeout=min(remaining,10),deadline=deadline,
+             admit_git_output=admit_git_output,record_git_output=record_git_output,git_output_maximum=max_output)
+ 

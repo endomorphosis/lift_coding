@@ -1,0 +1,166 @@
+{
+  "alternative_cap": 65536,
+  "candidate": {
+    "core": {
+      "bytes": 47245,
+      "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/verify_standalone_git.py",
+      "sha256": "b6bda714fa95411b84fc0333f5348bc05a307bb44fe0e4fb9ecf38c6e3b85b5d"
+    },
+    "owner": {
+      "bytes": 59887,
+      "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/reader.py.DATA",
+      "sha256": "42029942e6308be6b2eb99157486aa8947db9db287a3252d010744f571339903"
+    }
+  },
+  "canonical_or_live_Source_read": false,
+  "closed_logs": {
+    "core": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/core.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1282,
+        "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/core.stderr",
+        "sha256": "f0104e7c45a806051863732fafe96c7612cd2547dcf04224f3a7dd3ea93d8611"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/core.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "startup": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/owner.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 3256,
+        "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/owner.stderr",
+        "sha256": "7eaee265e5a765689ffeb9457e748db45b72edac47804abc51d0a25ba977ccf9"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/owner.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "diffs": {
+    "reader.py.DATA.diff": {
+      "bytes": 10070,
+      "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/reader.py.DATA.diff",
+      "sha256": "7d2fecc9058809bbc38ec5d1af401dfed9b11fdff50d5f4b9a1f8159bac738e3"
+    },
+    "verify_standalone_git.py.diff": {
+      "bytes": 9467,
+      "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/verify_standalone_git.py.diff",
+      "sha256": "04d3a44a09a6b05a863a8875bb715fa8ea5a7217c2e178863da4840f0672ed17"
+    }
+  },
+  "execution_selected": false,
+  "existing_Reader_selection": "existing-stage-a-retained-controls-outer-only/v4",
+  "existing_owner_startup": "selected-existing-StageA-selector-owner-startup/v2",
+  "github_actions_used": false,
+  "historical_index_reads": [
+    [
+      "canonical_current_working_file",
+      6991149
+    ],
+    [
+      "immutable_raw_complete_readback",
+      6991149
+    ]
+  ],
+  "historical_receipts": {
+    "Accelerate_refs": {
+      "bytes": 66375,
+      "path": "/tmp/Root-A-CLI111-existing-Source2-v430-e5uezx7r/actual-output/actual-existing-two-Python-code-CAS-receipt.json",
+      "sha256": "bf0e45e7f9bb8560d078a26b9425f4c6a0086ac12a106eeba75b0961e10f7291"
+    },
+    "Datasets_refs": {
+      "bytes": 175468,
+      "path": "/tmp/Root-P1-coherent-context-six-SourceCAS-corrected-v279-cfgpmp2c/actual-output/actual-existing-four-Python-code-CAS-receipt.json",
+      "sha256": "3beea18fdb22bb230748adb08d367f7ecf85e0e5794f54e0751e48d80a2dd545"
+    },
+    "Guide568_index": {
+      "bytes": 1487078,
+      "path": "/tmp/Root-Guide568-existing-index-SourceREAD1-v584-voqjc3xx/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-closed-report.json",
+      "sha256": "fb7e25aaecd4996fa804a7e37fad7cdce79efb8876bd2405951bdfcba6f2b523"
+    }
+  },
+  "historical_ref_sizes": {
+    "Accelerate_refs": {
+      "calls": 4,
+      "combined_bytes_each": 16348
+    },
+    "Datasets_refs": {
+      "calls": 8,
+      "combined_bytes_each": 33175
+    }
+  },
+  "legacy_default_cap": 262144,
+  "model_work": false,
+  "modeled_Source_and_Git_controls": true,
+  "passing_cases": {
+    "core": 7,
+    "startup": 21
+  },
+  "previous_failed_control_attempts": {
+    "owner-first": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/owner-first.rc",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "stderr": {
+        "bytes": 13253,
+        "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/owner-first.stderr",
+        "sha256": "7c05bd387d9d4a4853f42ba58868e9ea0d9293e41d31f2dd11dc78b61bca7538"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/owner-first.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "owner-second": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/owner-second.rc",
+        "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+      },
+      "stderr": {
+        "bytes": 3922,
+        "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/owner-second.stderr",
+        "sha256": "20698e485375d067842fff4baf7e29c756a29b89ca8e156747bf2ada45ac6300"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/owner-second.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  },
+  "quote": {
+    "bytes": 2954,
+    "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/guide574-ref-cap-conditional-quote.INERT.json",
+    "sha256": "51ab34f243a91ad6a27696500a9289bcce3d53f3cb0676a437b7af3d92eb3a8c"
+  },
+  "schema": "private-stage-a-optional-ref-stream-cap-and-price/v1",
+  "tests": {
+    "test_core_ref_cap.py": {
+      "bytes": 13411,
+      "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/test_core_ref_cap.py",
+      "sha256": "0a86b4ff5a69695e388386aea00d3e159cc6bc0066367098531606af14cba422"
+    },
+    "test_owner_ref_cap.py": {
+      "bytes": 7116,
+      "path": "/tmp/decoder-training-stage-a-ref-stream-cap-private-v01-5iuVOjcO/test_owner_ref_cap.py",
+      "sha256": "7c35d9cc58185243fada57e35deacb9ebe1d2afa0d9c23c9a2f986dacfa14f6b"
+    }
+  }
+}

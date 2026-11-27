@@ -1,0 +1,124 @@
+"""Bind the original owner's request/Source selection through v3 release and paid readback."""
+
+import ast
+from difflib import unified_diff
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+PREVIOUS_LAUNCHER = HERE.parent / "decoder-training-projector-original-request-binding-private-v01-GTZmjlB7"
+PREVIOUS_PAID = HERE.parent / "decoder-training-projector-request-paid-join-private-v01-OXrJ2XDz"
+
+
+def change(body, old, new):
+    assert body.count(old) == 1, old
+    return body.replace(old, new, 1)
+
+
+def launcher(body):
+    body = change(body, "    expected_request_sha256: str | None = None\n",
+        "    expected_request_sha256: str | None = None\n"
+        "    verify_projector_launch: object = None\n")
+    at = '    config["reviewed_evaluation_request"] = {"path": selected.path, "sha256": selected.sha256, "bytes": selected.bytes}\n'
+    body = change(body, at, at + '''    launch_selection = None
+    if profile.verify_projector_launch is not None:
+        if (expected is None or not callable(profile.verify_projector_launch)
+                or profile.verify_projector_launch(expected, profile.source_epoch_sha256) is not True):
+            raise ValueError("original Qwen2 owner refused the selected request and Source epoch")
+        launch_selection = {"request_sha256": expected, "source_epoch_sha256": profile.source_epoch_sha256}
+''')
+    at = '              "resource_after_parent_release": absent, "retained_artifacts": retained}\n'
+    return change(body, at, at + '''    if launch_selection is not None:
+        report["schema"] = "reviewed-qwen2-projector-direct-owner-release/v3"
+        report["launch_selection"] = launch_selection
+''')
+
+
+def assessment(body):
+    body = change(body, "        expected_source_epoch_sha256=None):\n",
+        "        expected_source_epoch_sha256=None, expected_prelaunch_request_sha256=None):\n")
+    body = change(body, '''                                                          "reviewed-qwen2-projector-direct-owner-release/v2")''',
+        '''                                                          "reviewed-qwen2-projector-direct-owner-release/v2",
+                                                          "reviewed-qwen2-projector-direct-owner-release/v3")''')
+    at = '    if outer["schema"] == "reviewed-qwen2-projector-direct-owner-release/v2":\n'
+    body = change(body, at, '''    bound = outer["schema"] == "reviewed-qwen2-projector-direct-owner-release/v3"
+    if bound:
+        request_pin = captured["reviewed-evaluation-request.json"]["sha256"]
+        _need(outer.get("launch_selection") == {"request_sha256": request_pin,
+                    "source_epoch_sha256": _commit(outer["source_before"])},
+              "original Qwen2 prelaunch selection differs from its retained request or Source fence")
+    if expected_prelaunch_request_sha256 is not None:
+        _need(bound and _pin(expected_source_epoch_sha256)
+              and outer["launch_selection"]["request_sha256"] == expected_prelaunch_request_sha256,
+              "original Qwen2 prelaunch-bound release required for the selected request and Source epoch")
+    if outer["schema"] in ("reviewed-qwen2-projector-direct-owner-release/v2",
+                           "reviewed-qwen2-projector-direct-owner-release/v3"):
+''')
+    body = change(body, "        request_selection=None, expected_request_selection_sha256=None):\n",
+        "        request_selection=None, expected_request_selection_sha256=None, require_prelaunch_bound_releases=False):\n")
+    at = '    selected_requests = request_selection is not None or expected_request_selection_sha256 is not None\n'
+    body = change(body, at, at + '''    _need(type(require_prelaunch_bound_releases) is bool and (not require_prelaunch_bound_releases or selected_requests),
+          "prelaunch-bound Qwen2 releases require an independent paid request selection")
+''')
+    at = '                expected_source_epoch_sha256=request_selection.source_epoch_sha256 if selected_requests else None)\n'
+    body = change(body, at, '''                expected_source_epoch_sha256=request_selection.source_epoch_sha256 if selected_requests else None,
+                expected_prelaunch_request_sha256=attempt.original_request_sha256 if require_prelaunch_bound_releases else None)
+''')
+    at = '        report["request_selection_sha256"] = expected_request_selection_sha256\n'
+    return change(body, at, at + '''    if require_prelaunch_bound_releases:
+        report["original_prelaunch_bound_releases"] = True
+''')
+
+
+def study(body):
+    body = change(body, "        expected_request_selection_sha256s=None):\n",
+        "        expected_request_selection_sha256s=None, require_prelaunch_bound_releases=False):\n")
+    at = '''    if expected_request_selection_sha256s is not None:
+        _require(type(expected_request_selection_sha256s) is tuple
+'''
+    body = change(body, at, '''    _require(type(require_prelaunch_bound_releases) is bool
+             and (not require_prelaunch_bound_releases or expected_request_selection_sha256s is not None),
+             "prelaunch-bound Qwen2 comparison requires independently selected paid requests")
+''' + at)
+    at = '                 "original Qwen2 paid report differs from the selected request commitment")\n'
+    body = change(body, at, at + '''        _require(("original_prelaunch_bound_releases" in terminal) == require_prelaunch_bound_releases
+                 and (not require_prelaunch_bound_releases or terminal["original_prelaunch_bound_releases"] is True),
+                 "Qwen2 paid report differs from the selected prelaunch-bound release requirement")
+''')
+    at = '        comparison["request_selection_sha256s"] = expected_request_selection_sha256s\n'
+    body = change(body, at, at + '''    if require_prelaunch_bound_releases:
+        comparison["original_prelaunch_bound_releases"] = True
+''')
+    at = '            route["request_selection_sha256s"] = tuple(request_pins)\n'
+    return change(body, at, at + '''        if "original_prelaunch_bound_releases" in comparison:
+            _require("request_selection_sha256s" in route and comparison["original_prelaunch_bound_releases"] is True,
+                     "prelaunch-bound Qwen2 experiment requires the selected requests and release evidence")
+            route["original_prelaunch_bound_releases"] = True
+''')
+
+
+PAIRS = (
+    ("launcher.py.DATA", PREVIOUS_LAUNCHER / "launcher.py.DATA",
+     "b44dbfb908df7272254ec9090638fc531e41454d00b4a3e840547af835afbc2f", launcher,
+     {"ReviewedQwen2ProjectorRelease", "run_reviewed_qwen2_projector_owner_cycle"}),
+    ("relational_assessment.py", PREVIOUS_PAID / "relational_assessment.py",
+     "36e5e8895518984a4062a10a4b861837e7b0f74e047d4b04282f2c833bb73857", assessment,
+     {"_qwen2_projector_released_parent", "read_qwen2_projector_paid_attempts"}),
+    ("study.py", PREVIOUS_PAID / "study.py",
+     "dc070ebd5a46b7e029579c714153613c01915595cff8091f175b18ca6baaad53", study,
+     {"compare_verified_qwen2_external_projector", "_reconcile_external_projector_experiment"}),
+)
+
+if __name__ == "__main__":
+    for name, path, pin, transform, expected_changes in PAIRS:
+        raw = path.read_bytes()
+        assert sha256(raw).hexdigest() == pin
+        before, after = raw.decode(), transform(raw.decode())
+        left, right = (ast.parse(source).body for source in (before, after))
+        changes = {getattr(old, "name", None) for old, new in zip(left, right, strict=True) if ast.dump(old) != ast.dump(new)}
+        assert changes == expected_changes, changes
+        (HERE / name).write_text(after)
+        diff = unified_diff(before.splitlines(keepends=True), after.splitlines(keepends=True),
+                            "prior/" + name, "candidate/" + name)
+        (HERE / (name + ".diff")).write_text("".join(diff))
+        print(name, len(after.encode()), sha256(after.encode()).hexdigest())

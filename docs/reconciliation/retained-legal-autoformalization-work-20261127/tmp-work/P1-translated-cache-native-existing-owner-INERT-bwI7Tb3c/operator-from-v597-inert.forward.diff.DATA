@@ -1,0 +1,235 @@
+--- 
++++ 
+@@ -8,6 +8,7 @@
+ import importlib
+ import json
+ import os
++import re
+ from pathlib import Path
+ import shutil
+ import stat
+@@ -28,7 +29,7 @@
+ PATH_SCOPE = None
+ ROOT_SELECTION = None
+ CURRENT_BINDING_REF = None
+-NATIVE_CASE_PROFILE = 'P1-native-namespaced-expected-declaration/v1'
++NATIVE_CASE_PROFILE = 'P1-native-cache-controlled-translation/v1'
+ MAX_DIAGNOSTIC_BYTES = 16 * 1024 ** 2
+ FIELDS = ('st_dev', 'st_ino', 'st_mode', 'st_nlink', 'st_uid', 'st_gid', 'st_size', 'st_mtime_ns', 'st_ctime_ns')
+ f9 = lambda value: {key: str(getattr(value, key)) for key in FIELDS}
+@@ -91,7 +92,7 @@
+     test_record = _binding['owning_test_record']
+     _ref = _binding['owning_test_raw']
+     test_raw = read_private(_ref['path'], _ref['bytes'], _ref['sha256'])
+-    assert len(test_raw) == 123945 and H(test_raw) == 'ab3718e38b87756b07be9052614d16171171d2a7c7217b6e17405895c21ac945'
++    assert len(test_raw) == 128091 and H(test_raw) == 'b706ba0dddc5795055be378d8393c831e65fb7fbaf73a574fcee51227d3676b5'
+     assert test_record['path'] == str(W / 'tests/integration/logic/backends/test_kernel_backends.py')
+     epoch_test = next(row for row in EPOCH if row['path'] == test_record['path'])
+     assert all(epoch_test[key] == test_record[key] for key in ('bytes', 'sha256', 'full9'))
+@@ -99,14 +100,16 @@
+     _ref = _binding['binder_raw']
+     binder_path = Path(_ref['path'])
+     binder_raw = read_private(binder_path, _ref['bytes'], _ref['sha256'])
+-    assert len(binder_raw) == 5314 and H(binder_raw) == '6683b105998cba123ff7029cba67ab153d2622467b02eec30cc0e275ff9329d3'
++    assert len(binder_raw) == 5646 and H(binder_raw) == 'd33e4a9d60d42ae645aff13174cfa6f57043477ca81886739b8f75adee33fcf9'
++    cache_fixture = next(row for row in EPOCH if row['path'] == str(W / 'tests/unit/logic/legal_ir/test_proof_cache.py'))
++    assert (cache_fixture['bytes'], cache_fixture['sha256']) == (102758, '23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab')
+     assert not RUN_OUTPUT.exists(), 'distinct selected Native3 output must be absent'
+     RUN_OUTPUT.mkdir(mode=448)
+     PARENT_HOME = RUN_OUTPUT / 'parent-home'
+     PARENT_HOME.mkdir(mode=448)
+     TMP = RUN_OUTPUT / 'original-test-temp'
+     TMP.mkdir(mode=448)
+-    FLAGS = {'IPFS_DATASETS_PY_MINIMAL_IMPORTS': '1', 'IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS': '0', 'IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI': '0', 'IPFS_TEST_PROOF_REUSE_AUTO_INSTALL': '0', 'IPFS_ACCEL_AUTO_INSTALL': '0', 'IPFS_ACCEL_SKIP_CORE': '1', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS': '0', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS_SIMULATED': '0', 'PYTEST_DISABLE_PLUGIN_AUTOLOAD': '1', 'PYTHONDONTWRITEBYTECODE': '1', 'RUN_HEAVY_TESTS': '0', 'RUN_LLM_TESTS': '0', 'RUN_LONG_TESTS': '0', 'RUN_NETWORK_TESTS': '0', 'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1', 'CUDA_VISIBLE_DEVICES': '', 'IPFS_DATASETS_RUN_NATIVE_LEAN': '1', 'IPFS_DATASETS_LEAN_EXECUTABLE': LEAN, 'IPFS_DATASETS_LEAN_VERSION': '4.34.1', 'IPFS_DATASETS_NATIVE_LEAN_REPORT': str(TMP / 'native-lean-v3-namespaced-declaration-result.json'), 'PYTHONPATH': str(A) + ':' + str(W) + ':/home/barberb/.local/lib/python3.12/site-packages', 'PYTHONUSERBASE': '/home/barberb/.local'}
++    FLAGS = {'IPFS_DATASETS_PY_MINIMAL_IMPORTS': '1', 'IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS': '0', 'IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI': '0', 'IPFS_TEST_PROOF_REUSE_AUTO_INSTALL': '0', 'IPFS_ACCEL_AUTO_INSTALL': '0', 'IPFS_ACCEL_SKIP_CORE': '1', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS': '0', 'IPFS_ACCEL_RUN_INTEGRATION_TESTS_SIMULATED': '0', 'PYTEST_DISABLE_PLUGIN_AUTOLOAD': '1', 'PYTHONDONTWRITEBYTECODE': '1', 'RUN_HEAVY_TESTS': '0', 'RUN_LLM_TESTS': '0', 'RUN_LONG_TESTS': '0', 'RUN_NETWORK_TESTS': '0', 'HF_HUB_OFFLINE': '1', 'TRANSFORMERS_OFFLINE': '1', 'CUDA_VISIBLE_DEVICES': '', 'IPFS_DATASETS_RUN_NATIVE_LEAN': '1', 'IPFS_DATASETS_LEAN_EXECUTABLE': LEAN, 'IPFS_DATASETS_LEAN_VERSION': '4.34.1', 'IPFS_DATASETS_NATIVE_LEAN_REPORT': str(TMP / 'native-lean-proof-cache-v3.json'), 'PYTHONPATH': str(A) + ':' + str(W) + ':/home/barberb/.local/lib/python3.12/site-packages', 'PYTHONUSERBASE': '/home/barberb/.local'}
+     os.environ.clear()
+     os.environ.update({'PATH': PATH_SCOPE, 'LANG': 'C.UTF-8', 'HOME': str(PARENT_HOME), 'XDG_CONFIG_HOME': str(PARENT_HOME / 'xdg-config'), 'XDG_CACHE_HOME': str(PARENT_HOME / 'xdg-cache'), 'XDG_DATA_HOME': str(PARENT_HOME / 'xdg-data'), 'GH_CONFIG_DIR': str(PARENT_HOME / 'gh-config'), 'GIT_CONFIG_GLOBAL': '/dev/null', 'GIT_CONFIG_NOSYSTEM': '1'})
+     os.environ.update(FLAGS)
+@@ -358,10 +361,15 @@
+                 admitted = importlib.import_module('ipfs_datasets_py.logic.backends.resource_admission')
+                 resources = importlib.import_module('ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler')
+                 lean = importlib.import_module('ipfs_datasets_py.logic.backends.kernel.lean')
++                kernel_targets = importlib.import_module('ipfs_datasets_py.logic.parsers.kernel_targets')
++                importlib.import_module('ipfs_datasets_py.logic.legal_ir.proof_cache')
+                 assert sdk.ToolRunRequest is admitted.ToolRunRequest and sdk.ToolRunResult is admitted.ToolRunResult
+                 assert admitted.GlobalResourceScheduler is resources.GlobalResourceScheduler
+                 pins = _binding['current_SDK_source_pins']
+                 assert pins['ipfs_datasets_py.logic.backends.kernel.lean'] == ['ipfs_datasets_py/logic/backends/kernel/lean.py', '18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800']
++                assert pins['ipfs_datasets_py.logic.parsers'] == ['ipfs_datasets_py/logic/parsers/__init__.py', 'e75f0c2ffea0f0706a3d1768a794849e6c013b6647dc59ba331f44797c233386']
++                assert pins['ipfs_datasets_py.logic.parsers.kernel_targets'] == ['ipfs_datasets_py/logic/parsers/kernel_targets.py', '8b4db56f36dd4fc3a459421b546bdb98d6d6d299cd3fe6ce17e5d01ee3e9b748']
++                assert pins['ipfs_datasets_py.logic.legal_ir.proof_cache'] == ['ipfs_datasets_py/logic/legal_ir/proof_cache.py', '704ccf09ba9d7d3c32d107c9cd8e07f6f32933d5f5fdcfe404b641f847c30743']
+                 report['canonical_module_bindings'] = {}
+                 for name, (relative, digest) in pins.items():
+                     module = sys.modules[name]
+@@ -396,7 +404,7 @@
+                 assert report['resource_before']['state']['child_process_capacity'] == EXPECTED_CAPACITY
+                 config = resources.ResourceSchedulerConfig(state_path=str(STATE), **report['resource_before']['state']['config'])
+                 scheduler = resources.get_global_resource_scheduler(config=config)
+-                parent = scheduler.try_acquire('validation', cpu_slots=1, memory_mb=8192, child_process_slots=1, requires_gpu=False, gpu_memory_mb=0, unified_memory_mb=0, parent_lease=None, request_id='phase1:native:namespaced-expected-declaration')
++                parent = scheduler.try_acquire('validation', cpu_slots=1, memory_mb=8192, child_process_slots=1, requires_gpu=False, gpu_memory_mb=0, unified_memory_mb=0, parent_lease=None, request_id='phase1:native-cache:controlled-translation')
+                 if parent is None:
+                     report['admission_refused'] = True
+                     raise RuntimeError('Existing shared namespace refused genuine validation CPU1/memory8192/child1 admission; no Native dispatch')
+@@ -414,8 +422,8 @@
+                 exec(compile(test_raw, test_record['path'], 'exec'), test_namespace)
+                 binder_namespace = {'__name__': 'selected_existing_native3_caller_binding', '__file__': str(binder_path)}
+                 exec(compile(binder_raw, str(binder_path), 'exec'), binder_namespace)
+-                bound = binder_namespace['bind_existing_native_expected_policy'](test_namespace, owning_test_source_bytes=test_raw, caller_owned_runner=runner)
+-                assert bound.__name__ == 'test_lean_native_v3_expected_declaration_distinguishes_namespaced_decoy'
++                bound = binder_namespace['bind_existing_native_cache_exact_reuse'](test_namespace, owning_test_source_bytes=test_raw, caller_owned_runner=runner, caller_owned_processes=cache_processes, executable=LEAN, version=FLAGS['IPFS_DATASETS_LEAN_VERSION'])
++                assert bound.__name__ == 'existing_native_cache_exact_reuse_caller'
+                 report['actual_test_function_entered'] = True
+                 print(json.dumps({'event': 'ACTUAL_NATIVE3_EXISTING_TEST_START', 'operator_pid': os.getpid(), 'parent_lease_id': parent.lease_id, 'test': bound.__name__}), flush=True)
+                 try:
+@@ -445,81 +453,95 @@
+                 report['diagnostic_bytes_written'] += len(original_raw)
+                 assert report['diagnostic_bytes_written'] <= MAX_DIAGNOSTIC_BYTES
+                 original = json.loads(original_raw)
+-                assert test_return is None, 'maintained Native3 test must return None; saved report is read independently'
++                assert test_return == original, 'maintained cache helper return differs from the saved report'
+                 report['original_test_report'] = {'path': str(original_path), 'bytes': len(original_raw), 'sha256': H(original_raw)}
+                 attempts = report['native_attempts']
+                 versions = [row for row in attempts if row['request']['argv'][-1:] == ['--version']]
+                 compiled = [row for row in attempts if '--json' in row['request']['argv']]
+                 report['actual_command_counts'] = {'all': len(attempts), 'version': len(versions), 'compiler': len(compiled), 'unclassified': len(attempts) - len(versions) - len(compiled)}
+-                assert [row['index'] for row in attempts] == [0, 1, 2]
+-                assert versions + compiled == attempts and len(versions) == 1 and len(compiled) == 2
+-                assert report['actual_command_counts']['unclassified'] == 0
++                assert versions + compiled == attempts and [row['index'] for row in attempts] == [0, 1, 2]
++                assert len(versions) == 1 and len(compiled) == 2 and report['actual_command_counts']['unclassified'] == 0
+                 for row in attempts:
+                     value = row['result']
+                     assert row['SDK_returned_result'] is True
+                     assert value['workspace_cleaned'] and value.get('native_lifecycle', {}).get('cleanup_confirmed') is True
+                     assert not any(value[key] for key in ('timed_out', 'cancelled', 'unavailable', 'output_truncated', 'workspace_limit_exceeded', 'resource_exhausted'))
+-                assert original['schema'] == 'native-lean-v3-namespaced-declaration-check/v1'
+-                assert original['native_Lean_executed'] is True
+-                assert original['toolchain_version'] == FLAGS['IPFS_DATASETS_LEAN_VERSION']
+-                assert original['statutory_or_source_semantic_admission'] is False
++                    assert type(value['returncode']) is int and value['returncode'] == 0
++                    assert value['command'] == row['request']['argv']
++                assert original['schema'] == 'native-lean-v3-proof-cache-integration/v1'
++                assert original['native_Lean_executed'] is True and original['compiler_output_mocked'] is False
++                assert original['actual_process_results'] == cache_processes == [row['result'] for row in attempts]
++                assert original['actual_cache_native_command_count'] == 3
++                assert original['disk_round_trip_and_exact_reuse_passed'] is True
++                assert original['cache_source_profile_and_obligation_mismatches_rejected'] is True
++                assert original['native_processes_during_reuse_or_mismatch_checks'] == 0
++                assert original['actual_native_commands_for_version_mutation_controls'] == 0
++                assert original['version_mutation_controls_are_new_native_results'] is False
++                assert original['software_reissued_backend_version_control_count'] == len(original['backend_version_mutation_controls']) == 2
++                assert original['fictional_source_fixture_only'] is True
++                assert original['statutory_meaning_or_corpus_admission'] is False
++                assert original['pytest_case_credit_claimed_by_helper'] == 0
++
++                controlled = original['controlled_translation']
++                assert set(controlled) == {'target_theory', 'generated_source', 'request_translation'}
++                theory = kernel_targets.TargetTheoryModel.from_dict(controlled['target_theory'])
++                generated = kernel_targets.KernelGeneratedSource.from_dict(controlled['generated_source'])
++                assert theory.to_dict() == controlled['target_theory'] and generated.to_dict() == controlled['generated_source']
++                assert not generated.kernel_accepted and generated.theory_document_id == theory.document_id
++                bound_request = current_protocol.BackendRequest.from_dict(original['request'])
++                payload = bound_request.payload.to_dict()
++                assert payload['translation'] == controlled['request_translation']
++                source, _, translation = lean._payload_source(bound_request)
++                assert translation is not None and translation.translation_digest == lean.stable_digest(generated.to_dict())
++                declaration = generated.theorem_identity.theorem_name
++                proposition = generated.theorem_identity.statement
++                assert (source, declaration, proposition) == (generated.source, payload['expected_declaration'], payload['expected_proposition'])
++                bound_receipt = original['bound_outcome']['receipt']
++                assert bound_receipt['translation'] == translation.to_dict()
++                assert bound_receipt['request_digest'] == bound_request.digest == original['receipt']['request_digest']
++                assert original['proof_binding']['request'] == original['request']
++                assert original['proof_binding']['result'] == original['result']
++                assert original['result']['payload']['kernel_receipt'] == bound_receipt
++                assert payload['legal_proof_context']['toolchain'] == bound_receipt['toolchain']
++                assert payload['legal_proof_context']['dependency_versions']['fictional-translation'] == translation.translation_digest
++                assert payload['translation']['proof_obligation_digest'] == original['receipt']['obligation_digest']
++                assert payload['translation']['formal_artifact_digest'] == original['proof_binding']['artifact_digest']
++                assert re.fullmatch(r'b[a-z2-7]+', original['cache_record_cid'])
++
+                 version, = versions
+                 assert version['request']['argv'] == [LEAN, '--version'] and version['request']['input_files'] == []
+-                result = version['result']
+-                assert type(result['returncode']) is int and result['returncode'] == 0
+-                assert result['command'] == version['request']['argv'] and not result['stderr']
+-                cases = original['cases']
+-                assert [row['case'] for row in cases] == ['root_positive', 'namespaced_wrong_type']
+-                expected_source = 'theorem wanted : True := by trivial\nnamespace Law\ntheorem wanted : False → False := fun h => h\nend Law\n'
+-                declarations = []
+-                evidence = []
++                assert not version['result']['stderr']
+                 executable, = [asset for asset in NATIVE if asset['path'] == LEAN]
+-                for row, command, declaration, accepted, rc in zip(
+-                        cases, compiled, ('wanted', 'Law.wanted'), (True, False), (0, 1), strict=True):
+-                    outcome = row['outcome']
++                expected_input = lean.instrument_lean_source_for_axioms(source, declaration, expected_proposition=proposition)
++                for outcome, command, has_translation in zip(
++                        (original['profile_discovery_outcome'], original['bound_outcome']), compiled, (False, True), strict=True):
+                     receipt = outcome['receipt']
++                    assert outcome['result']['status'] == 'proved' and receipt['accepted'] is True
++                    assert receipt['theorem_name'] == declaration and receipt['expected_proposition'] == proposition
++                    assert receipt['submitted_source'] == source
++                    assert receipt['expected_proposition_checked'] is True and receipt['approved_axioms'] == []
++                    assert receipt['native_identity_checked_after_compile'] is True
++                    assert receipt['translation'] == (translation.to_dict() if has_translation else None)
++                    assert receipt['axiom_report']['axioms'] == []
++                    assert receipt['axiom_report']['declaration'] == receipt['expected_obligation_declaration']
+                     identity = receipt['native_identity']
+-                    assert receipt['theorem_name'] == declaration and receipt['submitted_source'] == expected_source
+-                    assert receipt['expected_proposition'] == 'True' and receipt['accepted'] is accepted
+-                    assert receipt['native_identity_checked_after_compile'] is True and receipt['approved_axioms'] == []
+-                    assert receipt['expected_proposition_checked'] is accepted
+                     assert identity['observation_kind'] == 'bounded_native_version_probe'
+-                    assert identity['resolved_executable'] == LEAN and identity['actual_version'] == original['toolchain_version']
++                    assert identity['resolved_executable'] == LEAN and identity['actual_version'] == FLAGS['IPFS_DATASETS_LEAN_VERSION']
+                     assert identity['executable_sha256'] == executable['sha256'] and identity['executable_bytes'] == executable['bytes']
+-                    assert identity['version_command'] == result['command'] and identity['version_returncode'] == result['returncode']
+-                    assert identity['version_stdout'] == result['stdout'].strip() and identity['version_stderr'] == result['stderr']
+-                    actual = command['result']
+-                    assert type(actual['returncode']) is int and actual['returncode'] == rc
+-                    assert command['request']['argv'] == actual['command']
+-                    assert actual['command'][0] == LEAN and actual['command'][-2:] == ['--json', 'Main.lean']
+-                    source_ref, = command['request']['input_files']
+-                    assert source_ref['logical_name'] == 'Main.lean' and source_ref['original_type'] == 'str'
+-                    actual_input = read_private(source_ref['path'], source_ref['bytes'], source_ref['sha256']).decode('utf-8')
+-                    goal = receipt['expected_obligation_declaration']
+-                    assert goal == lean.lean_expected_obligation_declaration(expected_source, declaration, 'True')
+-                    expected_input = (expected_source.rstrip() + "\n\nset_option pp.fullNames true\n"
+-                        + "set_option autoImplicit false in\n"
+-                        + f"theorem {goal} : (True) := _root_.{declaration}\n\n"
+-                        + f"#print axioms _root_.{goal}\n")
++                    assert identity['version_command'] == version['result']['command'] and identity['version_returncode'] == version['result']['returncode']
++                    assert identity['version_stdout'] == version['result']['stdout'].strip() and identity['version_stderr'] == version['result']['stderr']
++                    assert command['request']['argv'][0] == LEAN and command['request']['argv'][-2:] == ['--json', 'Main.lean']
++                    input_ref, = command['request']['input_files']
++                    assert input_ref['logical_name'] == 'Main.lean' and input_ref['original_type'] == 'str'
++                    actual_input = read_private(input_ref['path'], input_ref['bytes'], input_ref['sha256']).decode('utf-8')
+                     assert actual_input == expected_input and receipt['compiled_source_digest'] == lean.content_digest(actual_input)
+-                    declarations.append(goal)
+-                    if accepted:
+-                        assert outcome['result']['status'] == 'proved'
+-                        axiom_report = receipt['axiom_report']
+-                        assert axiom_report['axioms'] == [] and axiom_report['declaration'] == goal
+-                    else:
+-                        assert outcome['result']['status'] == 'error' and receipt['axiom_report'] is None
+-                        diagnostics = lean._lean_error_diagnostics(actual['stdout'], actual['stderr'])
+-                        assert any('type mismatch' in value.lower() for value in diagnostics), diagnostics
+-                        assert any('type mismatch' in value.lower() for value in receipt['diagnostics'])
+-                    evidence.append(dict(case=row['case'], declaration=declaration, compiler_returncode=rc,
+-                        expected_obligation_declaration=goal, accepted=accepted,
+-                        version_event_index=version['index'], compiler_event_index=command['index'],
+-                        compiler_input_sha256=source_ref['sha256']))
+-                assert len(set(declarations)) == 2
+-                report['actual_namespaced_cases'] = evidence
++                report['cache_case_counts'] = {'version': 1, 'compiler': 2, 'reuse_or_refusal': 0}
++                report['controlled_translation'] = {
++                    'theory_document_id': theory.document_id, 'translation_digest': translation.translation_digest,
++                    'submitted_source_digest': lean.content_digest(source), 'theorem_name': declaration,
++                    'expected_proposition': proposition, 'cache_record_cid': original['cache_record_cid']}
+                 report['actual_native_qualification'] = True
+-                report['qualification_scope'] = 'Actual root expected-declaration proof accepted and fully qualified Law.wanted wrong type rejected on identical source and proposition'
++                report['qualification_scope'] = 'Existing admitted Lean owner, exact generated fictional obligation and translation, bounded cache round-trip and reuse controls'
+             finally:
+                 if parent is not None:
+                     attempt = 0

@@ -1,0 +1,1944 @@
+"""Check supplied reader observations, with no Source, Git, or runner entry point."""
+
+from copy import deepcopy
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import tempfile
+import unittest
+
+
+FULL9 = (
+    'st_ctime_ns', 'st_dev', 'st_gid', 'st_ino', 'st_mode',
+    'st_mtime_ns', 'st_nlink', 'st_size', 'st_uid',
+)
+
+
+def sha256(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def blob_oid(raw):
+    return hashlib.sha1(f'blob {len(raw)}\0'.encode('ascii') + raw).hexdigest()
+
+
+def require(condition, message):
+    if not condition:
+        raise ValueError(message)
+
+
+def validate_full9(stamp, length):
+    require(type(stamp) is dict and set(stamp) == set(FULL9) and
+            all(type(stamp[key]) is str and str(int(stamp[key])) == stamp[key] for key in FULL9),
+            'Expected complete decimal full9')
+    require(stat.S_ISREG(int(stamp['st_mode'])) and stamp['st_nlink'] == '1',
+            'Expected regular single-link file')
+    require(stamp['st_size'] == str(length), 'Observed size differs from captured bytes')
+
+
+V192_REBIND_SCHEMA = 'private-stage-a-source32-existing-reader-v192-index-bound-input/v2'
+V204_REBIND_SCHEMA = 'private-stage-a-source32-existing-reader-v204-published-index-bound-input/v3'
+V209_REBIND_SCHEMA = 'private-stage-a-source32-existing-reader-v209-post-guide513-index-bound-input/v4'
+V214_LOCAL_REBIND_SCHEMA = 'private-stage-a-source32-existing-reader-v214-local-index-bound-input/v5'
+V214_LOCAL_D_HEAD = 'e3ffb26c42f0d5e4fe69354b299b874987073acc'
+PUBLISHED_REBIND_EPOCHS = {V204_REBIND_SCHEMA: 'v204', V209_REBIND_SCHEMA: 'v209'}
+
+
+def verify_rebound_index(plan, *, roots_before, roots_after, index_before, index_after, index_body):
+    """Check the proposed epoch tuple using original-owner supplied observations."""
+    schema = plan.get('schema')
+    if schema == V214_LOCAL_REBIND_SCHEMA:
+        expected = plan['local_root_expectations']
+        require(expected['D']['HEAD'] == V214_LOCAL_D_HEAD and expected['D']['clean'] is True
+                and expected['A']['clean'] is True, 'Exact clean local v214 D/A roots required')
+    else:
+        expected = plan['new_published_root_expectations']
+    require(roots_before == expected == roots_after, 'Current D/A HEAD, tree or clean status differs')
+    require(type(index_before) is dict and set(index_before) == {'path', 'bytes', 'sha256', 'full9'}
+            and index_before == index_after, 'Current protected index observation drifted')
+    pinned_epochs = {V192_REBIND_SCHEMA: 'v192', **PUBLISHED_REBIND_EPOCHS, V214_LOCAL_REBIND_SCHEMA: 'v214 local'}
+    pinned = schema in pinned_epochs
+    expected_index = plan['protected_D_index_expected_under_next_reader'] if pinned else plan['fresh_D_index_capture_required']
+    require(index_before['path'] == expected_index['path'], 'Protected index path differs')
+    require(type(index_body) is bytes and len(index_body) > 0
+            and type(index_before['bytes']) is int and index_before['bytes'] == len(index_body)
+            and index_before['sha256'] == sha256(index_body), 'Captured protected index bytes differ')
+    validate_full9(index_before['full9'], len(index_body))
+    stale = plan['prior_epoch_refused']['protected_D_index']
+    require(index_before['sha256'] != stale['sha256'] and index_before['full9'] != stale['full9'],
+            'Pre-publication protected index cannot bind the selected tree')
+    if pinned:
+        epoch = pinned_epochs[schema]
+        require(index_before == expected_index, f'Protected index identity differs from the exact {epoch} capture')
+
+
+def _verify_tracked_body(target, captured, body, *, full9_before, full9_after):
+    require(type(captured) is dict and set(captured) == {
+                'Git_blob_oid', 'bytes', 'canonical_full9', 'canonical_path', 'path', 'sha256'},
+            'Expected retained existing-reader capture shape')
+    require(captured['canonical_path'] == target['path'] and target['expected_Git_mode'] == '100644',
+            'Captured tracked path or selected Git mode differs')
+    require(type(body) is bytes and type(captured['bytes']) is int and len(body) == captured['bytes'],
+            'Captured body length differs')
+    require(full9_before == full9_after == captured['canonical_full9'],
+            'Current before/after full9 observations differ from the captured file')
+    validate_full9(full9_before, len(body))
+    require(body is not None and blob_oid(body) == target['expected_Git_blob_oid'] == captured['Git_blob_oid'],
+            'Body differs from the selected tracked Git blob')
+    require(captured['sha256'] == sha256(body), 'Retained raw body SHA256 differs')
+    for key in ('bytes', 'sha256', 'full9'):
+        actual = captured['canonical_full9'] if key == 'full9' else captured[key]
+        require(target[key] is None or target[key] == actual, f'Selected live target {key} differs')
+    return dict(path=captured['canonical_path'], bytes=captured['bytes'],
+                sha256=captured['sha256'], full9=captured['canonical_full9'])
+
+
+def verify_tracked_capture(target, captured, body, *, full9_before, full9_fd_before, full9_fd_after, full9_after):
+    """Verify already captured IO733 result data for one exact tracked path."""
+    require(full9_before == full9_fd_before == full9_fd_after == full9_after,
+            'Current stable FD full9 observations differ')
+    return _verify_tracked_body(target, captured, body, full9_before=full9_before, full9_after=full9_after)
+
+
+def _epoch_rows(raw, reference, count, *, wrapped):
+    require(type(raw) is bytes and len(raw) == reference['bytes'] and sha256(raw) == reference['sha256'],
+            'Retained epoch bytes differ from the selected reference')
+    decoded = json.loads(raw)
+    if wrapped:
+        require(type(decoded) is dict and set(decoded) == {'rows'}, 'Retained epoch roster differs')
+        decoded = decoded['rows']
+    require(type(decoded) is list and len(decoded) == count, 'Retained epoch roster differs')
+    return decoded
+
+
+def _retained_source32_rows(plan, index, retained_outer_raw, retained_python_raw):
+    is_local_v214 = plan['schema'] == V214_LOCAL_REBIND_SCHEMA
+    current = is_local_v214 or plan['schema'] in PUBLISHED_REBIND_EPOCHS
+    if current:
+        outer_ref, python_ref = (plan['current_retained_epochs'][kind] for kind in ('outer', 'python'))
+        retained_index = index
+    else:
+        outer_ref, python_ref = plan['historical_outer_fences'], plan['historical_Python_fences']
+        retained_index = plan['prior_epoch_refused']['protected_D_index']
+    outer_count, python_count = (1218, 1213) if is_local_v214 else (1216, 1211)
+    outer = _epoch_rows(retained_outer_raw, outer_ref, outer_count, wrapped=not current)
+    python = _epoch_rows(retained_python_raw, python_ref, python_count, wrapped=not current)
+    require(python == [row for row in outer if row['path'].endswith('.py')],
+            'Retained outer/Python epoch projection differs')
+    existing = {row['path']: row for row in outer}
+    require(len(existing) == len(outer) and existing.get(index['path']) == retained_index,
+            'Retained protected index or row identity differs')
+    return outer, python, existing
+
+
+def verify_v204_retained_source32_inputs(plan, *, roots_before, roots_after, index_before, index_after,
+        index_body, retained_outer_raw, retained_python_raw):
+    """Check the exact retained LIST views with the protected current index.
+
+    The caller supplies the existing owner's before and after observations for
+    a live invocation. Replaying held observations alone grants no authority.
+    """
+    require(plan.get('schema') in PUBLISHED_REBIND_EPOCHS, 'Exact v204 or v209 published source handoff required')
+    verify_rebound_index(plan, roots_before=roots_before, roots_after=roots_after, index_before=index_before,
+                         index_after=index_after, index_body=index_body)
+    return _retained_source32_rows(plan, index_before, retained_outer_raw, retained_python_raw)
+
+
+def verify_v214_retained_source32_inputs(plan, *, roots_before, roots_after, index_before, index_after,
+        index_body, retained_outer_raw, retained_python_raw):
+    """Check the separately pinned local v214 lists and protected index."""
+    require(plan.get('schema') == V214_LOCAL_REBIND_SCHEMA, 'Exact local v214 source handoff required')
+    verify_rebound_index(plan, roots_before=roots_before, roots_after=roots_after, index_before=index_before,
+                         index_after=index_after, index_body=index_body)
+    return _retained_source32_rows(plan, index_before, retained_outer_raw, retained_python_raw)
+
+
+def compose_v192_source32_epochs(plan, *, roots_before, roots_after, index_before, index_after, index_body,
+        retained_outer_raw, retained_python_raw, full9_before, full9_after, guide_observations, captures):
+    """Compose the existing epoch ABI from actual parent-supplied read observations.
+
+    The owner holds D/A READ and uses its existing tracked-body reader. The two
+    full9 maps are the owner's external before/after observations. IO733 owns
+    the internal stable-file test; the output grants no process closure or
+    execution authority.
+    """
+    require(plan.get('schema') == V192_REBIND_SCHEMA, 'Exact v192 source handoff required')
+    verify_rebound_index(plan, roots_before=roots_before, roots_after=roots_after, index_before=index_before,
+                         index_after=index_after, index_body=index_body)
+    retained = _retained_source32_rows(plan, index_before, retained_outer_raw, retained_python_raw)
+    return _compose_source32_epochs(plan, index_before, retained, full9_before, full9_after,
+                                    guide_observations, captures)
+
+
+def compose_v204_source32_epochs(plan, *, roots_before, roots_after, index_before, index_after, index_body,
+        retained_outer_raw, retained_python_raw, full9_before, full9_after, guide_observations, captures):
+    """Join approved-source observations into the unchanged epoch consumer ABI."""
+    retained = verify_v204_retained_source32_inputs(
+        plan, roots_before=roots_before, roots_after=roots_after, index_before=index_before,
+        index_after=index_after, index_body=index_body, retained_outer_raw=retained_outer_raw,
+        retained_python_raw=retained_python_raw,
+    )
+    return _compose_source32_epochs(plan, index_before, retained, full9_before, full9_after,
+                                    guide_observations, captures)
+
+
+def compose_v214_source32_epochs(plan, *, roots_before, roots_after, index_before, index_after, index_body,
+        retained_outer_raw, retained_python_raw, full9_before, full9_after, guide_observations, captures):
+    """Join the same tracked-capture ABI to the exact local v214 lists."""
+    retained = verify_v214_retained_source32_inputs(
+        plan, roots_before=roots_before, roots_after=roots_after, index_before=index_before,
+        index_after=index_after, index_body=index_body, retained_outer_raw=retained_outer_raw,
+        retained_python_raw=retained_python_raw,
+    )
+    return _compose_source32_epochs(plan, index_before, retained, full9_before, full9_after,
+                                    guide_observations, captures)
+
+
+def _compose_source32_epochs(plan, index_before, retained, full9_before, full9_after, guide_observations, captures):
+    outer, python, existing = retained
+    retained_origin = plan['historical_origin_scope_recheck']['retained_92_paths']
+    require(len(retained_origin) == len(set(retained_origin)) == 92
+            and set(retained_origin) <= {row['path'] for row in python},
+            'Retained historical origin roster differs')
+    guides = plan['four_guide_post_candidates_for_current_owner_recheck']
+    require(type(guide_observations) is list and len(guide_observations) == len(guides) == 4
+            and guide_observations == guides and len({row['path'] for row in guides}) == 4
+            and not existing.keys() & {row['path'] for row in guides},
+            'Current independently checked guide postimages differ from the handoff')
+
+    targets = plan['fresh_Source_body_targets']
+    pending_paths = [target['path'] for target in targets]
+    require(len(targets) == len(set(pending_paths)) == 32 and all(path.endswith('.py') for path in pending_paths)
+            and pending_paths == plan['historical_origin_scope_recheck']['fresh_32_paths']
+            and not set(pending_paths) & existing.keys()
+            and not set(pending_paths) & {row['path'] for row in guides},
+            'Fresh tracked body roster differs or overlaps a retained file')
+    require(type(captures) in (list, tuple) and len(captures) == len(targets),
+            'All original 32 tracked captures are required')
+    require(type(full9_before) is type(full9_after) is dict and full9_before == full9_after,
+            'Current before/after metadata fence drifted')
+    fresh = []
+    for target, observed in zip(targets, captures, strict=True):
+        require(type(observed) is tuple and len(observed) == 2,
+                'Expected original tracked capture metadata and body')
+        captured, body = observed
+        stamp_before = full9_before.get(target['path'])
+        stamp_after = full9_after.get(target['path'])
+        fresh.append(_verify_tracked_body(target, captured, body, full9_before=stamp_before,
+                                          full9_after=stamp_after))
+    rows = [index_before if row['path'] == index_before['path'] else row for row in outer] + fresh
+    stamps = {row['path']: row['full9'] for row in rows + guides}
+    require(full9_before == stamps, 'Exact current full9 roster differs from retained and captured rows')
+    python_rows = [row for row in rows if row['path'].endswith('.py')]
+    require(len(rows) == len(outer) + 32 and len(python_rows) == len(python) + 32,
+            'Composed outer/Python epoch counts differ')
+    return {'outer_epoch': rows, 'python_epoch': python_rows}
+
+
+PHASE7_REUSE_SCHEMA = 'private-stage-a-source32-phase7-shared-input/v1'
+PHASE7_GUIDE_SUCCESSOR_SCHEMA = 'private-stage-a-source32-phase7-guide-successor-input/v2'
+PHASE7_PROGRAM_SUCCESSOR_SCHEMA = 'private-stage-a-source32-phase7-compatible-program-successor-input/v3'
+
+
+def _verified_phase7_plan(plan, expected_sha256):
+    require(plan.get('schema') in (PHASE7_REUSE_SCHEMA, PHASE7_GUIDE_SUCCESSOR_SCHEMA, PHASE7_PROGRAM_SUCCESSOR_SCHEMA),
+            'Expected versioned Phase 7 reuse plan')
+    encoded = json.dumps(plan, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode()
+    require(sha256(encoded) == expected_sha256, 'Stage A Phase 7 plan differs from its external digest')
+    return json.loads(encoded)
+
+
+def _verify_phase7_endpoint(plan, endpoint):
+    git = [{'path': target['path'], 'mode': target['expected_Git_mode'], 'Git_blob_oid': target['expected_Git_blob_oid']}
+           for target in plan['fresh_Source_body_targets']]
+    require(type(endpoint) is dict and set(endpoint) == {'roots', 'index', 'git', 'full9'} and
+            endpoint['roots'] == plan['current_roots'] and endpoint['index'] == plan['current_index'] and
+            endpoint['git'] == git, 'Stage A current root, index or stage-zero and HEAD roster differs')
+    if plan['schema'] == PHASE7_PROGRAM_SUCCESSOR_SCHEMA:
+        for row in plan['selected_program_role_postimages']:
+            require(endpoint['full9'].get(row['path']) == row['full9'],
+                    'Current Stage A program role full9 differs from the confirmed installation')
+
+
+def _pinned_phase7_json(raw, reference, label):
+    require(type(raw) is bytes and len(raw) == reference['bytes'] and sha256(raw) == reference['sha256'],
+            f'Phase 7 {label} differs from its selected bytes')
+    payload = json.loads(raw)
+    require(type(payload) is dict, f'Expected a Phase 7 {label} object')
+    return payload
+
+
+def _sha_pin(value):
+    return type(value) is str and len(value) == 64 and all(char in '0123456789abcdef' for char in value)
+
+
+def _render_phase7_retained_lists(outer, roots, retained_output_paths):
+    python = [row for row in outer if row['path'].endswith('.py')]
+    require(len(python) == 1213 and set(retained_output_paths) == {'outer', 'python'} and
+            len(set(retained_output_paths.values())) == 2 and
+            all(Path(path).is_absolute() and str(Path(path)) == path and '..' not in Path(path).parts and
+                all(not Path(path).is_relative_to(root['root']) for root in roots.values())
+                for path in retained_output_paths.values()), 'Separate private retained LIST output paths required')
+    bodies = {name: (json.dumps(rows, sort_keys=True, indent=2, allow_nan=False) + '\n').encode()
+              for name, rows in (('outer', outer), ('python', python))}
+    return {name: {'path': retained_output_paths[name], 'bytes': len(raw), 'sha256': sha256(raw)}
+            for name, raw in bodies.items()}, bodies
+
+
+def rebind_phase7_published_phase2_predecessor(plan, *, expected_plan_sha256, retained_outer_raw,
+        evidence, expected_evidence_sha256s, retained_output_paths, verify_publication_owner):
+    """Prepare the expected retained LISTs after the four-file Phase 2 publication.
+
+    The evidence is the exact write/freeze crosswalk, closed five-file readback,
+    original LIST preview, and the existing owner's qualified publication binding.
+    The result is an expectation. The Stage A reader observes the full current
+    fence and closes its own custody before it may use either LIST.
+    """
+    plan = _verified_phase7_plan(plan, expected_plan_sha256)
+    names = ('crosswalk', 'readback', 'preview', 'publication')
+    require(plan['schema'] == PHASE7_GUIDE_SUCCESSOR_SCHEMA and set(evidence) == set(expected_evidence_sha256s) == set(names)
+            and all(type(evidence[k]) is bytes and sha256(evidence[k]) == expected_evidence_sha256s[k]
+                    for k in names), 'Exact Phase 2 predecessor evidence and approved digests required')
+    crosswalk, readback, preview, published = (json.loads(evidence[k]) for k in names)
+    require(crosswalk['schema'] == 'private-stage-a-v244-phase2-retained-fences/v1' and
+            readback['schema'] == 'private-stage-a-v245-readback-confirmed-local-retained-rows/v1' and
+            preview['schema'] == 'private-stage-a-expected-local-v244-retained-list-preview/v1' and
+            published['schema'] == 'existing-stage-a-qualified-Phase2-predecessor-publication/v1' and
+            crosswalk['original_stage_a_predecessor']['sha256'] == expected_plan_sha256 == published['predecessor_plan_sha256'] and
+            readback['v244_closed_write_and_freeze_crosswalk']['sha256'] == preview['sealed_replacement_evidence']['sha256'] ==
+            expected_evidence_sha256s['crosswalk'] and
+            readback['v244_expected_retained_list_fingerprints']['sha256'] == expected_evidence_sha256s['preview'] and
+            published['five_file_Source_close_sha256'] == readback['actual_closed_v245_reader']['sha256'] and
+            published['local_freeze_sha256'] == crosswalk['clean_local_freeze']['sha256'] and
+            all(_sha_pin(published[k]) for k in ('local_qualification_sha256', 'publication_readback_sha256')) and
+            type(published['local_tests_passed']) is int and published['local_tests_passed'] == 40,
+            'Phase 2 receipts must bind one verified retained-code predecessor and its ordinary qualification')
+    prior_roots, roots = plan['current_roots'], published['current_roots']
+    head, tree = crosswalk['local_clean_datasets_HEAD'], crosswalk['local_clean_datasets_tree']
+    index = crosswalk['local_index_reported_by_freezer']
+    require(readback['all_five_match_frozen_metadata'] is True and set(roots) == {'D', 'A'} and
+            readback['local_datasets_HEAD'] == preview['local_head'] == head and
+            readback['local_datasets_tree'] == preview['local_tree'] == tree and
+            head != prior_roots['D']['HEAD'] and tree != prior_roots['D']['tree'] and
+            roots['A'] == prior_roots['A'] and roots['D'] == {**prior_roots['D'], 'HEAD': head, 'tree': tree} and
+            roots['D']['clean_worktree_and_index'] is True and roots['D']['status_sha256'] == sha256(b'') and
+            published['current_index'] == index and index['path'] == plan['current_index']['path'] and
+            index['sha256'] != plan['current_index']['sha256'] and index['full9'] != plan['current_index']['full9'],
+            'Phase 2 publication must preserve the exact five-file readback on the new clean paired roots')
+    validate_full9(index['full9'], index['bytes'])
+    changes = crosswalk['exact_retained_row_replacements_pending_owner_qualification']
+    paths = [row['before']['path'] for row in changes]
+    require(len(paths) == len(set(paths)) == 4 and published['changed_paths'] == paths and
+            published['selected_role_blobs'] == [{'path': row['after']['path'], 'blob': row['blob'], 'mode': '100644'}
+                                                 for row in changes] and
+            all(change['before']['path'] == change['after']['path'] for change in changes) and
+            not set(paths) & ({index['path']} | {r['path'] for r in plan['fresh_Source_body_targets']} |
+                {r['path'] for r in plan['four_guide_post_candidates_for_current_owner_recheck']}),
+            'Phase 2 changes must be the exact four retained code roles, separate from Stage A targets and guides')
+    observed = {row['path']: row for row in readback['read_back_frozen_role_rows_and_index']}
+    require(len(readback['read_back_frozen_role_rows_and_index']) == len(observed) == 5 and
+            observed == {index['path']: index, **{row['after']['path']: row['after'] for row in changes}},
+            'Phase 2 close does not contain the reported postimages and protected index')
+    outer, _, _ = _compact_archive_base(plan, retained_outer_raw)
+    positions = {row['path']: ordinal for ordinal, row in enumerate(outer)}
+    require(len(positions) == len(outer) and
+            all(path in positions for path in (*paths, index['path'])) and
+            all(outer[positions[row['before']['path']]] == row['before'] for row in changes) and
+            outer[positions[index['path']]] == plan['retained_base_index'] and
+            preview['positions_of_four_role_substitutions'] == {path: positions[path] for path in paths} and
+            preview['position_of_index_substitution'] == positions[index['path']],
+            'Original retained preimages and LIST ordinals differ')
+    for change in changes:
+        slot = change['after']
+        validate_full9(slot['full9'], slot['bytes'])
+        outer[positions[slot['path']]] = slot
+    outer[positions[index['path']]] = index
+    planned, bodies = _render_phase7_retained_lists(outer, roots, retained_output_paths)
+    require(all(planned[name]['bytes'] == preview[f'planned_only_{name}']['expected_bytes'] and
+                planned[name]['sha256'] == preview[f'planned_only_{name}']['expected_sha256'] for name in planned),
+            'Restamped retained LIST bytes differ from the approved preview')
+    selection = {'predecessor_plan_sha256': expected_plan_sha256,
+                 'phase2_evidence_sha256s': dict(expected_evidence_sha256s), 'retained_LIST_output_references': planned}
+    selected_sha = sha256(json.dumps(selection, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode())
+    require(verify_publication_owner(selected_sha) is True,
+            'Independent Phase 2 qualification and publication owner required')
+    plan.update(current_roots=roots, current_index=index, retained_base_index=index, current_retained_epochs=planned,
+                phase2_predecessor_selection_sha256=selected_sha, phase2_predecessor_evidence_sha256s=selection['phase2_evidence_sha256s'])
+    return plan, bodies
+
+
+def rebind_phase7_published_phase6_predecessor(plan, *, expected_plan_sha256, retained_outer_raw,
+        source_close_raw, expected_source_close_sha256, source_receipt_raw, local_freeze_raw, publication_raw,
+        expected_publication_sha256, retained_output_paths, verify_publication_owner):
+    """Project expected LISTs after a qualified, disjoint Phase 6 test publication.
+
+    The owner independently verifies the actual freeze, ordinary qualification,
+    normal remote readback, and protected-index receipt. This pure projection
+    neither opens Source nor establishes the next Stage A reader's custody.
+    """
+    plan = _verified_phase7_plan(plan, expected_plan_sha256)
+    require(plan['schema'] == PHASE7_GUIDE_SUCCESSOR_SCHEMA and plan['execution_selected'] is False and
+            plan['Stage_A_owner_selection'] is None and
+            _sha_pin(plan.get('phase2_predecessor_selection_sha256')) and
+            type(source_close_raw) is bytes and sha256(source_close_raw) == expected_source_close_sha256 and
+            type(publication_raw) is bytes and sha256(publication_raw) == expected_publication_sha256,
+            'Exact published Phase 2 predecessor, installed test and Phase 6 publication required')
+    close, published = json.loads(source_close_raw), json.loads(publication_raw)
+    require(close['schema'] == 'Root-Phase6-two-inverse-controls-one-test-installed-Source-closed/v1' and
+            type(close['actual_parent_exit_code']) is int and close['actual_parent_exit_code'] == 0 and
+            close['Source_closed'] is close['module_closed'] is close['no_product_owner_change'] is
+            close['all1_staged_fsynced_readback_before_effect'] is True and close['errors'] == [],
+            'Closed Phase 6 test-only installation required')
+    receipt = _pinned_phase7_json(source_receipt_raw, close['actual_source_receipt'], 'Phase 6 Source receipt')
+    prior_roots = plan['current_roots']
+    d_root = Path(prior_roots['D']['root'])
+    relative = 'tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py'
+    path = str(d_root / relative)
+    installed = close['installed']
+    require(receipt['schema'] == 'actual-existing-one-Python-code-CAS/v1' and
+            receipt['Source_closed'] is receipt['module_closed'] is receipt['write_complete'] is True and
+            receipt['errors'] == receipt['remaining_own_stages'] == receipt['uncertain_stage_FDs'] == [] and
+            receipt['installed'] == receipt['separate_post_readbacks'] == installed and
+            receipt['unchanged_fences_before'] == receipt['unchanged_fences_after'] and
+            receipt['only_worktree_deltas'] == close['only_worktree_deltas'] == [relative] and
+            len(installed) == 1 and set(installed[0]) == {'path', 'bytes', 'sha256', 'full9'} and
+            installed[0]['path'] == path and _sha_pin(installed[0]['sha256']),
+            'Expected exactly the closed Phase 6 test and its original readback')
+    validate_full9(installed[0]['full9'], installed[0]['bytes'])
+    for row in (receipt['before_root'], receipt['after_root']):
+        require((row['HEAD'], row['tree']) == (prior_roots['D']['HEAD'], prior_roots['D']['tree']),
+                'Phase 6 write must retain its exact published predecessor')
+    a = receipt['additional_A_before']
+    require(a == receipt['additional_A_after'] and
+            (a['HEAD'], a['tree']) == (prior_roots['A']['HEAD'], prior_roots['A']['tree']),
+            'Phase 6 write must preserve paired Accelerate identity')
+
+    ordinary = published['ordinary_result']
+    require(published['schema'] == 'existing-stage-a-qualified-Phase6-predecessor-publication/v1' and
+            published['predecessor_plan_sha256'] == expected_plan_sha256 and
+            published['source_close_sha256'] == expected_source_close_sha256 and
+            all(_sha_pin(published[k]) for k in ('local_freeze_sha256', 'local_qualification_sha256',
+                                                'publication_readback_sha256', 'current_index_receipt_sha256')) and
+            ordinary == {'passed': 16, 'failures': 0, 'errors': 0, 'skipped': 0} and
+            all(type(count) is int for count in ordinary.values()) and
+            published['changed_paths'] == [path], 'Exact qualified publication of the single Phase 6 test required')
+    test = published['selected_test']
+    require(set(test) == {*installed[0], 'mode', 'blob'} and
+            {k: test[k] for k in installed[0]} == installed[0] and test['mode'] == '100644' and
+            type(test['blob']) is str and len(test['blob']) == 40 and all(c in '0123456789abcdef' for c in test['blob']),
+            'Published Phase 6 test must match exact installed bytes and full9')
+    roots, index = published['current_roots'], published['current_index']
+    old_index = plan['current_index']
+    require(set(roots) == {'D', 'A'} and roots['A'] == prior_roots['A'] and
+            roots['D'] == {**prior_roots['D'], 'HEAD': roots['D']['HEAD'], 'tree': roots['D']['tree']} and
+            all(type(oid) is str and len(oid) == 40 and all(c in '0123456789abcdef' for c in oid)
+                for oid in (roots['D']['HEAD'], roots['D']['tree'])) and
+            roots['D']['HEAD'] != prior_roots['D']['HEAD'] and roots['D']['tree'] != prior_roots['D']['tree'] and
+            roots['D']['clean_worktree_and_index'] is True and roots['D']['status_sha256'] == sha256(b'') and
+            published['parent_D_HEAD'] == prior_roots['D']['HEAD'],
+            'Phase 6 requires a clean direct successor at the selected paired roots')
+    require(set(index) == {'path', 'bytes', 'sha256', 'full9'} and index['path'] == old_index['path'] and
+            type(index['bytes']) is int and index['bytes'] > 0 and _sha_pin(index['sha256']) and
+            index['sha256'] != old_index['sha256'] and index['full9'] != old_index['full9'],
+            'A separately observed protected index is required after Phase 6 publication')
+    validate_full9(index['full9'], index['bytes'])
+    require(type(local_freeze_raw) is bytes and sha256(local_freeze_raw) == published['local_freeze_sha256'],
+            'Exact local Phase 6 freeze is required')
+    frozen = json.loads(local_freeze_raw)
+    require(frozen['schema'] == 'actual-Phase6-inverse-one-test-local-freeze/v249' and
+            frozen['closed_installation']['sha256'] == expected_source_close_sha256 and
+            frozen['closed_installation']['Source_module_and_stage_closed'] is True and
+            frozen['all_checkouts_clean'] is frozen['exactly_one_test_path_modified'] is
+            frozen['product_paths_unchanged'] is frozen['all_gitlinks_unchanged'] is
+            frozen['frozen_for_ordinary16'] is True and frozen['push'] is frozen['remote_contacted'] is False and
+            (frozen['parent'], frozen['head'], frozen['tree'], frozen['index']) ==
+            (published['parent_D_HEAD'], roots['D']['HEAD'], roots['D']['tree'], index) and
+            frozen['other_heads']['accelerate'] == roots['A']['HEAD'] and len(frozen['selected_roles']) == 1 and
+            {k: frozen['selected_roles'][0][k] for k in test} == test,
+            'Phase 6 publication or index differs from the one-file local freeze')
+    outer, _, _ = _compact_archive_base(plan, retained_outer_raw)
+    positions = {row['path']: i for i, row in enumerate(outer)}
+    require(len(positions) == len(outer) and path not in positions and
+            path not in plan['phase7_shared_paths'] and
+            not any(r['path'] == path for r in plan['fresh_Source_body_targets'] +
+                    plan['four_guide_post_candidates_for_current_owner_recheck']) and
+            outer[positions[index['path']]] == plan['retained_base_index'],
+            'Phase 6 test overlaps retained, guide or fresh roles, or the protected index slot differs')
+    outer[positions[index['path']]] = index
+    refs, bodies = _render_phase7_retained_lists(outer, roots, retained_output_paths)
+    require(sha256(bodies['python']) == plan['current_retained_epochs']['python']['sha256'],
+            'The Phase 6 transition must preserve the retained Python LIST exactly')
+    selection = {'predecessor_plan_sha256': expected_plan_sha256, 'source_close_sha256': expected_source_close_sha256,
+                 'publication_sha256': expected_publication_sha256, 'retained_LIST_output_references': refs}
+    selection_sha = sha256(json.dumps(selection, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode())
+    require(callable(verify_publication_owner) and verify_publication_owner(selection_sha) is True,
+            'Independent Phase 6 qualification, publication and index owner required')
+    plan.update(current_roots=roots, current_index=index, retained_base_index=index, current_retained_epochs=refs,
+                phase6_predecessor_selection_sha256=selection_sha, phase6_predecessor_publication_sha256=expected_publication_sha256)
+    return plan, bodies
+
+
+def prepare_phase7_alias_successor(plan, *, expected_plan_sha256, retained_outer_raw,
+        evidence, expected_evidence_sha256s, retained_output_paths):
+    """Preview the retained LISTs from the closed alias write and frozen Source readback."""
+    return _prepare_phase7_two_file_successor(plan, expected_plan_sha256=expected_plan_sha256,
+        retained_outer_raw=retained_outer_raw, evidence=evidence, expected_evidence_sha256s=expected_evidence_sha256s,
+        retained_output_paths=retained_output_paths, phase8_cli=False)
+
+
+def prepare_phase8_corpus_cli_v4_successor(plan, *, expected_plan_sha256, retained_outer_raw,
+        evidence, expected_evidence_sha256s, retained_output_paths):
+    """Preview the two retained CLI V4 LIST substitutions after the frozen Source readback."""
+    return _prepare_phase7_two_file_successor(plan, expected_plan_sha256=expected_plan_sha256,
+        retained_outer_raw=retained_outer_raw, evidence=evidence, expected_evidence_sha256s=expected_evidence_sha256s,
+        retained_output_paths=retained_output_paths, phase8_cli=True)
+
+
+def _prepare_phase7_two_file_successor(plan, *, expected_plan_sha256, retained_outer_raw,
+        evidence, expected_evidence_sha256s, retained_output_paths, phase8_cli):
+    require(_sha_pin(expected_plan_sha256) and type(evidence) is type(expected_evidence_sha256s) is dict,
+            'Exact inert Stage A predecessor and original alias freeze evidence required')
+    plan = _verified_phase7_plan(plan, expected_plan_sha256)
+    names = ('install', 'source', 'freeze', 'read_selection', 'read_close')
+    require(plan['schema'] == PHASE7_GUIDE_SUCCESSOR_SCHEMA and plan['execution_selected'] is False
+            and plan['Stage_A_owner_selection'] is None and plan['current_canonical_full9_for_new_reads_observed'] is False
+            and set(evidence) == set(expected_evidence_sha256s) == set(names)
+            and all(_sha_pin(expected_evidence_sha256s[name]) and type(evidence[name]) is bytes
+                    and sha256(evidence[name]) == expected_evidence_sha256s[name] for name in names),
+            'Exact inert Stage A predecessor and original alias freeze evidence required')
+    install, source, frozen, read_selection, read_close = (json.loads(evidence[name]) for name in names)
+    if phase8_cli:
+        installation_schema = 'Root-Phase8-public-corpus-V4-two-installed-Source-closed/v264'
+        freeze_schema = 'actual-Phase8-corpus-CLI-V4-two-file-local-freeze/v264'
+        relative = ['scripts/ops/legal_ir/validate_uscode_corpus_release.py',
+                    'tests/unit/logic/autoformal/test_corpus_release_cli.py']
+        read_selection_operation = 'existing_frozen_Phase8_corpus_CLI_V4_two_posts_and_index_SourceREAD3'
+        read_close_operation = 'existing_exact_frozen_Phase8_CLI_V4_two_posts_index_Source_READ3'
+    else:
+        installation_schema = 'Root-P7-alias-two-files-installed-Source-closed/v1'
+        freeze_schema = 'actual-P7-alias-two-file-local-freeze/v260'
+        relative = ['ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py',
+                    'tests/unit/logic/integration/test_legal_ir_proof_feedback.py']
+        read_selection_operation = 'existing_frozen_P7_alias_two_posts_and_index_SourceREAD3'
+        read_close_operation = 'existing_exact_frozen_P7_alias_two_posts_index_Source_READ3'
+    require(install['schema'] == installation_schema and frozen['schema'] == freeze_schema,
+            'Exact installation and freeze schemas are required for the selected two-file successor')
+    if phase8_cli:
+        install_ref, install_contexts, install_rows = install['full_report'], install['actual_Source_contexts'], install['actual_installed']
+        install_complete = (install['module_and_stage2_closed'] is install['write_complete'] is
+                            install['all2_staged_before_first_effect'] is install['additional_A_unchanged'] is True
+                            and install['remaining_stages'] == install['uncertain_FDs'] == []
+                            and install['separate_post_readbacks'] == install_rows)
+        stage_closed = frozen['closed_installation']['Source_module_and_two_stages_closed']
+        other_paths_preserved = frozen['P7_guides515_and_all_other_paths_preserved']
+        frozen_for_ordinary, run_by_publisher = frozen['frozen_for_ordinary4'], frozen['ordinary4_executed_by_publisher']
+        require(_sha_pin(plan.get('phase7_alias_predecessor_selection_sha256'))
+                and (install['D_before_after_HEAD'], install['D_before_after_tree']) ==
+                    (plan['current_roots']['D']['HEAD'], plan['current_roots']['D']['tree']),
+                'The CLI V4 install must preserve the published Phase 7 alias predecessor')
+    else:
+        install_ref, install_contexts, install_rows = install['actual_source_receipt'], install['Source_contexts'], install['installed']
+        install_complete = (install['module_closed'] is True and type(install['actual_parent_exit_code']) is int
+                            and install['actual_parent_exit_code'] == 0)
+        stage_closed = frozen['closed_installation']['Source_module_and_stages_closed']
+        other_paths_preserved = frozen['guide515_and_all_other_paths_preserved']
+        frozen_for_ordinary, run_by_publisher = frozen['frozen_for_ordinary52'], frozen['ordinary52_executed_by_publisher']
+    require(source['schema'] == 'actual-existing-two-Python-code-CAS/v1'
+            and install_ref['sha256'] == expected_evidence_sha256s['source']
+            and install_ref['bytes'] == len(evidence['source'])
+            and frozen['closed_installation']['sha256'] == expected_evidence_sha256s['install']
+            and frozen['closed_installation']['bytes'] == len(evidence['install'])
+            and stage_closed is install['Source_closed'] is install_complete is True
+            and source['Source_closed'] is source['module_closed'] is source['write_complete'] is True
+            and source['all2_posts_staged_fsynced_and_readback_before_first_effect'] is True
+            and install['errors'] == source['errors'] == source['remaining_own_stages'] == source['uncertain_stage_FDs'] == []
+            and source['unchanged_fences_before'] == source['unchanged_fences_after'],
+            'The local alias successor must bind the original closed two-file Source write')
+    roots, old_index = plan['current_roots'], plan['current_index']
+    d_root = Path(roots['D']['root'])
+    paths = [str(d_root / path) for path in relative]
+    require(source['Source_contexts'] == install_contexts == [
+                {'root': roots[role]['root'], 'mode': mode, 'entered': True, 'exit_returned': True}
+                for role, mode in (('A', 'read'), ('D', 'write'))]
+            and all((source[name]['HEAD'], source[name]['tree']) == (roots['D']['HEAD'], roots['D']['tree'])
+                    for name in ('before_root', 'after_root'))
+            and source['before_root']['status_sha256'] == roots['D']['status_sha256']
+            and source['additional_A_before'] == source['additional_A_after']
+            and (source['additional_A_before']['HEAD'], source['additional_A_before']['tree'])
+                == (roots['A']['HEAD'], roots['A']['tree']), 'Alias Source write is from a different paired predecessor')
+    require(source['only_worktree_deltas'] == install['only_worktree_deltas'] == relative
+            and frozen['exactly_two_modified_paths'] is frozen['all_checkouts_clean'] is
+                frozen['all_gitlinks_unchanged'] is other_paths_preserved is True
+            and frozen_for_ordinary is True
+            and frozen['push'] is frozen['remote_contacted'] is run_by_publisher is False
+            and frozen['parent'] == roots['D']['HEAD'] and frozen['other_heads']['accelerate'] == roots['A']['HEAD']
+            and frozen['head'] != roots['D']['HEAD'] and frozen['tree'] != roots['D']['tree'],
+            'The clean local freeze must be the exact two-path child, with the other root and guides preserved')
+    installed = source['installed']
+    preimages = [row['capture']['actual_source_result'] for row in source['actual_before_captures']]
+    roles = frozen['selected_roles']
+    require(len(preimages) == len(installed) == len(roles) == 2
+            and install_rows == source['separate_post_readbacks'] == installed,
+            'The exact two original preimages and frozen postimages are required')
+    for before, after, role, path, relative_path in zip(preimages, installed, roles, paths, relative, strict=True):
+        require(set(before) == set(after) == {'path', 'bytes', 'sha256', 'full9'}
+                and before['path'] == after['path'] == path and role['relative_path'] == relative_path
+                and {key: role[key] for key in after} == after and role['mode'] == '100644'
+                and before['sha256'] != after['sha256'] and before['full9'] != after['full9']
+                and role['blob'] != role['parent_blob']
+                and all(type(oid) is str and len(oid) == 40 and all(c in '0123456789abcdef' for c in oid)
+                        for oid in (role['blob'], role['parent_blob'], frozen['head'], frozen['tree'])),
+                'The closed alias Source rows and frozen Git blobs differ')
+        for row in (before, after):
+            require(type(row['bytes']) is int and row['bytes'] > 0 and _sha_pin(row['sha256']),
+                    'The exact retained alias row digest and length are required')
+            validate_full9(row['full9'], row['bytes'])
+    index = frozen['index']
+    require(set(index) == {'path', 'bytes', 'sha256', 'full9'} and index['path'] == old_index['path']
+            and type(index['bytes']) is int and index['bytes'] > 0 and _sha_pin(index['sha256'])
+            and index['sha256'] != old_index['sha256'] and index['full9'] != old_index['full9'],
+            'A separate frozen successor protected index row is required')
+    validate_full9(index['full9'], index['bytes'])
+    new_roots = {**roots, 'D': {**roots['D'], 'HEAD': frozen['head'], 'tree': frozen['tree']}}
+    require(read_selection['Root_selected'] is read_close['Root_selected'] is read_close['Source_closed'] is True
+            and read_selection['operation'] == read_selection_operation
+            and read_close['operation'] == read_close_operation
+            and read_selection['actual_localfreeze_reference']['sha256'] == expected_evidence_sha256s['freeze']
+            and read_selection['actual_localfreeze_reference']['bytes'] == len(evidence['freeze'])
+            and (read_selection['frozen_D_HEAD'], read_selection['frozen_D_tree']) == (frozen['head'], frozen['tree'])
+            and read_selection['no_Git_or_code_write_or_SDK_or_Native'] is True
+            and read_close['canonical_or_Git_write'] is read_close['test_Torch_or_model'] is False
+            and read_close['errors'] == [] and len(read_close['Source_contexts']) == 2
+            and {row['canonical_root'] for row in read_close['Source_contexts']} == {root['root'] for root in roots.values()}
+            and all(row['mode'] == 'read' and row['cooperative'] is True for row in read_close['Source_contexts'])
+            and read_selection['Source_envelope'] == read_close['full_Source_envelope_retained'],
+            'Frozen alias rows require the existing separately selected and closed SourceREAD3')
+    captures = read_close['raw_refs']
+    require([{'path': row['canonical_path'], 'bytes': row['bytes'], 'sha256': row['sha256'],
+              'full9': row['canonical_full9']} for row in captures] == [*installed, index]
+            and len({row['path'] for row in captures}) == 3
+            and all(Path(row['path']).parent == Path(read_selection['output']) for row in captures),
+            'The closed SourceREAD3 must retain both ordered postimages and the distinct frozen index')
+    outer, _, _ = _compact_archive_base(plan, retained_outer_raw)
+    positions = {row['path']: ordinal for ordinal, row in enumerate(outer)}
+    retained_ordinal = 1 if phase8_cli else 0
+    retained_path, disjoint_path = paths[retained_ordinal], paths[1 - retained_ordinal]
+    require(len(positions) == len(outer) and retained_path in positions and disjoint_path not in positions
+            and not set(paths).intersection(row['path'] for row in plan['fresh_Source_body_targets'] +
+                plan['four_guide_post_candidates_for_current_owner_recheck'])
+            and outer[positions[retained_path]] == preimages[retained_ordinal]
+            and outer[positions[index['path']]] == plan['retained_base_index'],
+            'CLI V4 successor must change only the retained test and index, with the implementation outside Stage A'
+            if phase8_cli else 'Alias successor must change only the retained owner and index, with the owning test outside Stage A')
+    outer[positions[retained_path]], outer[positions[index['path']]] = installed[retained_ordinal], index
+    refs, bodies = _render_phase7_retained_lists(outer, new_roots, retained_output_paths)
+    schema = ('private-stage-a-phase8-corpus-cli-v4-retained-preview/v1' if phase8_cli
+              else 'private-stage-a-phase7-alias-retained-preview/v1')
+    qualification_status = 'ordinary4_or_publication_granted' if phase8_cli else 'ordinary52_or_publication_granted'
+    return {'schema': schema, 'predecessor_plan_sha256': expected_plan_sha256,
+            'local_evidence_sha256s': dict(expected_evidence_sha256s), 'frozen_roots': new_roots, 'frozen_index': index,
+            'frozen_role_blobs': roles, 'ordered_frozen_capture_rows': [*installed, index], 'retained_epochs': refs,
+            'outer_changed_ordinals': sorted((positions[retained_path], positions[index['path']])),
+            'execution_selected': False, qualification_status: False}, bodies
+
+
+def rebind_phase7_published_alias_successor(plan, *, expected_plan_sha256, retained_outer_raw,
+        evidence, expected_evidence_sha256s, retained_output_paths,
+        publication_raw, expected_publication_sha256, verify_publication_owner):
+    """Rebind only when the existing owner authenticates the read, qualification and publication."""
+    return _rebind_phase7_published_two_file_successor(plan, expected_plan_sha256=expected_plan_sha256,
+        retained_outer_raw=retained_outer_raw, evidence=evidence, expected_evidence_sha256s=expected_evidence_sha256s,
+        retained_output_paths=retained_output_paths, publication_raw=publication_raw,
+        expected_publication_sha256=expected_publication_sha256, verify_publication_owner=verify_publication_owner,
+        phase8_cli=False)
+
+
+def rebind_phase8_published_corpus_cli_v4_successor(plan, *, expected_plan_sha256, retained_outer_raw,
+        evidence, expected_evidence_sha256s, retained_output_paths,
+        publication_raw, expected_publication_sha256, verify_publication_owner):
+    """Project the qualified CLI V4 successor under the independent owner proof."""
+    return _rebind_phase7_published_two_file_successor(plan, expected_plan_sha256=expected_plan_sha256,
+        retained_outer_raw=retained_outer_raw, evidence=evidence, expected_evidence_sha256s=expected_evidence_sha256s,
+        retained_output_paths=retained_output_paths, publication_raw=publication_raw,
+        expected_publication_sha256=expected_publication_sha256, verify_publication_owner=verify_publication_owner,
+        phase8_cli=True)
+
+
+def _rebind_phase7_published_two_file_successor(plan, *, expected_plan_sha256, retained_outer_raw,
+        evidence, expected_evidence_sha256s, retained_output_paths, publication_raw, expected_publication_sha256,
+        verify_publication_owner, phase8_cli):
+    preview, bodies = _prepare_phase7_two_file_successor(plan, expected_plan_sha256=expected_plan_sha256,
+        retained_outer_raw=retained_outer_raw, evidence=evidence, expected_evidence_sha256s=expected_evidence_sha256s,
+        retained_output_paths=retained_output_paths, phase8_cli=phase8_cli)
+    require(type(publication_raw) is bytes and _sha_pin(expected_publication_sha256)
+            and sha256(publication_raw) == expected_publication_sha256 and callable(verify_publication_owner),
+            'Independently selected qualified alias publication required')
+    published = json.loads(publication_raw)
+    preview_sha = sha256(json.dumps(preview, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode())
+    ordinary = published['ordinary_result']
+    original = published['original_receipt_sha256s']
+    schema = ('existing-stage-a-qualified-Phase8-corpus-CLI-V4-publication/v1' if phase8_cli
+              else 'existing-stage-a-qualified-Phase7-alias-publication/v1')
+    ordinary_key, passed = ('ordinary4', 4) if phase8_cli else ('ordinary52', 52)
+    require(published['schema'] == schema
+            and published['predecessor_plan_sha256'] == expected_plan_sha256
+            and published['approved_retained_preview_sha256'] == preview_sha
+            and published['current_roots'] == preview['frozen_roots'] and published['current_index'] == preview['frozen_index']
+            and published['published_role_blobs'] == preview['frozen_role_blobs']
+            and published['closed_READ3_observations'] == preview['ordered_frozen_capture_rows']
+            and published['postpublication_frozen_index_verified_unchanged'] is True
+            and ordinary == {'passed': passed, 'failures': 0, 'errors': 0, 'skipped': 0}
+            and all(type(count) is int for count in ordinary.values())
+            and set(original) == {'closed_READ3', ordinary_key, 'normal_publication'}
+            and all(_sha_pin(pin) for pin in original.values()) and len(set(original.values())) == 3
+            and original['closed_READ3'] == expected_evidence_sha256s['read_close'],
+            f'The publication must bind the exact readback, {ordinary_key} qualification, and clean frozen successor')
+    selection = {'predecessor_plan_sha256': expected_plan_sha256, 'retained_preview_sha256': preview_sha,
+                 'publication_sha256': expected_publication_sha256, 'retained_LIST_output_references': preview['retained_epochs']}
+    pin = sha256(json.dumps(selection, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode())
+    successor = _verified_phase7_plan(plan, expected_plan_sha256)
+    require(verify_publication_owner(pin) is True, 'Independent Phase 7 read, qualification and publication owner required')
+    index = preview['frozen_index']
+    successor.update(current_roots=preview['frozen_roots'], current_index=index, retained_base_index=index,
+        current_retained_epochs=preview['retained_epochs'])
+    if phase8_cli:
+        successor.update(phase8_cli_v4_predecessor_selection_sha256=pin,
+                         phase8_cli_v4_predecessor_publication_sha256=expected_publication_sha256)
+    else:
+        successor.update(phase7_alias_predecessor_selection_sha256=pin,
+                         phase7_alias_predecessor_publication_sha256=expected_publication_sha256)
+    return successor, bodies
+
+
+def rebind_phase7_compatible_program_successor(plan, *, expected_plan_sha256, migration_raw,
+        expected_migration_sha256, transition_raw, expected_transition_sha256, verify_transition_owner):
+    """Bind a verified two-file install and publication to the Stage A reader input.
+
+    The existing owner authenticates the actual write, clean publication and
+    current protected-index receipts behind the exact transition bytes. Current
+    Stage A read custody remains separate. No callback is invoked on a mismatch.
+    """
+    plan = _verified_phase7_plan(plan, expected_plan_sha256)
+    require(plan['schema'] == PHASE7_GUIDE_SUCCESSOR_SCHEMA and type(migration_raw) is bytes and
+            sha256(migration_raw) == expected_migration_sha256 and type(transition_raw) is bytes and
+            sha256(transition_raw) == expected_transition_sha256, 'Exact approved program transition inputs required')
+    migration, transition = json.loads(migration_raw), json.loads(transition_raw)
+    require(migration['schema'] == 'private-stage-a-compatible-two-role-adoption-preflight/v1' and
+            migration['current_published_stage_a_input']['sha256'] == expected_plan_sha256 and
+            transition['schema'] == 'existing-stage-a-compatible-two-role-publication-transition/v1' and
+            transition['predecessor_plan_sha256'] == expected_plan_sha256 and
+            transition['migration_sha256'] == expected_migration_sha256 and
+            all(_sha_pin(transition[field]) for field in ('Source_write_close_sha256',
+                    'publication_readback_sha256', 'current_index_receipt_sha256')),
+            'Transition must bind the exact program selection and original owner close receipts')
+    roles = migration['roles']
+    require([row['role'] for row in roles] == ['worker', 'inputs'] and
+            [row['source32_partition'] for row in roles] == ['new_body_targets', 'retained_origin_epoch'],
+            'Exact worker and retained input role order required')
+    paths = [row['canonical_path'] for row in roles]
+    require(len(set(paths)) == 2 and not set(paths) & set(plan['phase7_shared_paths']) and
+            transition['changed_paths'] == paths, 'Program publication must change only the two selected roles')
+    preimages, postimages = transition['preimages'], transition['postimages']
+    git_pins = transition['postimage_stage_zero_and_HEAD']
+    require(len(preimages) == len(postimages) == len(git_pins) == 2,
+            'Both original Source role preimages and installed postimages are required')
+    for role, before, after, git in zip(roles, preimages, postimages, git_pins, strict=True):
+        path = role['canonical_path']
+        require(set(before) == set(after) == {'path', 'bytes', 'sha256', 'full9'} and
+                before['path'] == after['path'] == path and
+                all(type(row['bytes']) is int and row['bytes'] > 0 and _sha_pin(row['sha256'])
+                    for row in (before, after)) and
+                all(before[k] == role['held_preimage'][k] and after[k] == role['private_postimage'][k]
+                    for k in ('bytes', 'sha256')) and before['sha256'] != after['sha256'] and
+                before['full9'] != after['full9'] and git == {
+                    'path': path, 'mode': '100644', 'Git_blob_oid': role['expected_Git_blob_if_adopted']},
+                'Installed or prior program role differs from the exact compatible pair')
+        validate_full9(before['full9'], before['bytes'])
+        validate_full9(after['full9'], after['bytes'])
+    targets = plan['fresh_Source_body_targets']
+    matching = [row for row in targets if row['path'] == paths[0]]
+    require(matching == [roles[0]['snapshot_before']] and not any(row['path'] == paths[1] for row in targets) and
+            preimages[1] == roles[1]['snapshot_before'], 'Stage A program roles moved or their original epoch differs')
+    old_roots, old_index = plan['current_roots'], plan['current_index']
+    roots, index = transition['published_roots'], transition['current_index']
+    require(set(roots) == {'D', 'A'} and roots['A'] == old_roots['A'] and
+            roots['D']['root'] == old_roots['D']['root'] and roots['D']['HEAD'] != old_roots['D']['HEAD'] and
+            roots['D']['tree'] != old_roots['D']['tree'] and roots['D']['clean_worktree_and_index'] is True and
+            roots['D']['status_sha256'] == sha256(b''), 'Compatible program requires a new clean paired publication')
+    require(set(index) == {'path', 'bytes', 'sha256', 'full9'} and index['path'] == old_index['path'] and
+            type(index['bytes']) is int and index['bytes'] > 0 and _sha_pin(index['sha256']) and
+            index['sha256'] != old_index['sha256'] and index['full9'] != old_index['full9'],
+            'A current protected index with the installed program is required')
+    validate_full9(index['full9'], index['bytes'])
+    require(verify_transition_owner(expected_transition_sha256, expected_plan_sha256, expected_migration_sha256) is True,
+            'Independent compatible program Source, publication and index owner required')
+    matching[0].update(bytes=postimages[0]['bytes'], sha256=postimages[0]['sha256'],
+                       expected_Git_blob_oid=git_pins[0]['Git_blob_oid'])
+    plan.update(schema=PHASE7_PROGRAM_SUCCESSOR_SCHEMA, current_roots=roots, current_index=index,
+                selected_program_role_postimages=postimages,
+                retained_input_role_replacement={'before': preimages[1], 'after': postimages[1]},
+                compatible_program_transition_sha256=expected_transition_sha256,
+                compatible_program_migration_sha256=expected_migration_sha256)
+    return plan
+
+
+def _phase7_current_retained_roles(plan, outer):
+    if plan['schema'] != PHASE7_PROGRAM_SUCCESSOR_SCHEMA:
+        return outer
+    change = plan['retained_input_role_replacement']
+    path = change['before']['path']
+    prior = [row for row in outer if row['path'] == path]
+    require(prior == [change['before']] and change['after']['path'] == path,
+            'Exact retained input-owner preimage required at its original ordinal')
+    return [change['after'] if row['path'] == path else row for row in outer]
+
+
+def _repeated_guide_publication(plan, evidence, references):
+    """Join the exact original guide write and normal publication receipts."""
+    names = ('before_docs', 'installation', 'source_receipt', 'publication')
+    before_docs, installation, source, publication = (
+        _pinned_phase7_json(evidence[name], references[name], f'guide {name}') for name in names)
+    roots = plan['current_roots']
+    d_root = Path(roots['D']['root'])
+    prior = plan['four_guide_post_candidates_for_current_owner_recheck']
+    paths = [row['path'] for row in prior]
+    relative = [Path(path).relative_to(d_root).as_posix() for path in paths]
+    require(len(paths) == len(set(paths)) == 4 and not set(paths).intersection(
+                row['path'] for row in plan['fresh_Source_body_targets']),
+            'Four distinct guide paths disjoint from the Stage A targets required')
+    git_before = before_docs['rows']
+    require(before_docs['schema'] == 'Root-guide515-current-four-doc-Source-metadata-and-Git-blobs/v1'
+            and before_docs['canonical_bodies_read'] is False
+            and (before_docs['D_HEAD'], before_docs['D_tree']) == (roots['D']['HEAD'], roots['D']['tree'])
+            and len(git_before) == 4 and all(
+                all(git[key] == row[key] for key in ('path', 'bytes', 'full9'))
+                and git['expected_prior_authenticated_Source_SHA256'] == row['sha256']
+                for git, row in zip(git_before, prior, strict=True)),
+            'Original same-path guide Git and Source preimages differ')
+    published_installation = publication['installation']
+    require(installation['schema'] == 'Root-one515-four-guides-installed-Source-closed/v1'
+            and source['schema'] == 'actual-existing-four-maintained-document-CAS/v1'
+            and publication['schema'] == 'actual-guide515-four-document-three-fast-forward-publication/v257'
+            and installation['Source_closed'] is installation['module_closed'] is True
+            and type(installation['actual_parent_exit_code']) is int and installation['actual_parent_exit_code'] == 0
+            and source['Source_closed'] is source['module_closed'] is source['write_complete'] is True
+            and source['all4_posts_staged_fsynced_and_readback_before_first_effect'] is True
+            and installation['errors'] == source['errors'] == source['remaining_own_stages'] == source['uncertain_stage_FDs'] == []
+            and all(installation['actual_Source_receipt'][k] == references['source_receipt'][k]
+                    and published_installation[k] == references['installation'][k] for k in ('bytes', 'sha256', 'path'))
+            and published_installation['Source_module_and_stages_closed'] is True,
+            'The original four-guide Source closure must match the selected publication')
+    require(source['Source_contexts'] == installation['Source_contexts'] == [
+                {'root': roots[role]['root'], 'mode': mode, 'entered': True, 'exit_returned': True}
+                for role, mode in (('A', 'read'), ('D', 'write'))]
+            and [target['capture']['actual_source_result'] for target in source['actual_before_captures']] == prior
+            and installation['only_worktree_deltas'] == source['only_worktree_deltas'] == relative,
+            'Current guide preimages, closed Source roots or exact changed paths differ')
+    for role, names_by_time in (('D', ('before_root', 'after_root')), ('A', ('additional_A_before', 'additional_A_after'))):
+        require(all((source[name]['HEAD'], source[name]['tree']) == (roots[role]['HEAD'], roots[role]['tree'])
+                    for name in names_by_time)
+                and source[names_by_time[0]]['status_sha256'] == roots[role]['status_sha256'],
+                'The closed guide write is from a different Stage A predecessor')
+
+    guides = source['installed']
+    require(type(guides) is list and len(guides) == 4 and [row['path'] for row in guides] == paths
+            and installation['installed'] == source['separate_post_readbacks'] == guides
+            and set(publication['guide_blobs']) == set(relative), 'Exact four guide postimage readbacks required')
+    for before, after, git, relative_path in zip(prior, guides, git_before, relative, strict=True):
+        published = publication['guide_blobs'][relative_path]
+        require(set(after) == {'path', 'bytes', 'sha256', 'full9'} and type(after['bytes']) is int and after['bytes'] > 0
+                and _sha_pin(after['sha256']) and before['sha256'] != after['sha256'] and before['full9'] != after['full9']
+                and all(published[k] == after[k] for k in after)
+                and published['previous_blob'] == git['current_samepath_Git_blob']
+                and published['previous_blob'] != published['blob']
+                and all(type(oid) is str and len(oid) == 40 and all(c in '0123456789abcdef' for c in oid)
+                        for oid in (published['previous_blob'], published['blob'])),
+                'Original installation and published guide postimages differ')
+        validate_full9(after['full9'], after['bytes'])
+
+    old_main, main, local = (publication[name] for name in ('origin_main_before', 'origin_main_after', 'local_after'))
+    pushes = publication['actual_push_outputs']
+    require(publication['all_checkouts_clean'] is True and publication['all_other_gitlinks_and_accelerate_preserved'] is True
+            and publication['force_or_tag_push'] is False and publication['preservation']['all_code_paths_preserved'] is True
+            and publication['push_order'] == ['datasets', 'hallucinate', 'root'] and set(pushes) == set(publication['push_order'])
+            and all(type(push['observed_exit_code']) is int and push['observed_exit_code'] == 0 for push in pushes.values())
+            and all(row['index_and_worktree_clean'] is True for row in local.values())
+            and main == {name: row['head'] for name, row in local.items()}
+            and old_main['datasets'] == roots['D']['HEAD'] and main['datasets'] != roots['D']['HEAD']
+            and old_main['accelerate'] == main['accelerate'] == roots['A']['HEAD']
+            and local['accelerate']['tree'] == roots['A']['tree'],
+            'Guide publication must retain the clean paired roots and exact predecessor')
+    return {**roots, 'D': {**roots['D'], 'HEAD': main['datasets'], 'tree': local['datasets']['tree']}}, guides
+
+
+def _repeated_guide_current_index(roots, index, evidence, references):
+    """Check separate clean Git metadata and one closed read of its protected index."""
+    names = ('index_metadata', 'index_selection', 'index_close')
+    metadata, selection, close = (
+        _pinned_phase7_json(evidence[name], references[name], f'successor {name}') for name in names)
+    require(metadata['schema'] == 'Root-post515-current-four-repo-Git-and-Dindex-metadata/v1'
+            and metadata['canonical_bodies_read'] is False
+            and all(metadata['repos'][name] == {
+                'HEAD': roots[role]['HEAD'], 'tree': roots[role]['tree'], 'clean': True, 'status': ''}
+                for name, role in (('datasets', 'D'), ('accelerate', 'A'))),
+            'Current protected index metadata must bind the exact published roots')
+    require(selection['Root_selected'] is close['Root_selected'] is close['Source_closed'] is True
+            and selection['operation'] == 'existing_current_Git_index_Source_READ'
+            and close['operation'] == 'existing_one_exact_current_D_index_Source_READ'
+            and selection['no_Git_or_code_write_or_SDK_or_Native'] is True
+            and close['canonical_or_Git_write'] is close['test_Torch_or_model'] is False
+            and close['errors'] == [] and len(close['raw_refs']) == 1
+            and len(close['Source_contexts']) == 2
+            and {row['canonical_root'] for row in close['Source_contexts']} == {root['root'] for root in roots.values()}
+            and all(row['mode'] == 'read' and row['cooperative'] is True for row in close['Source_contexts'])
+            and selection['Source_envelope'] == close['full_Source_envelope_retained'],
+            'The exact original index-only Source observation must be selected and closed')
+    capture, = close['raw_refs']
+    require(metadata['D_index'] == selection['expected_index_metadata'] == {k: index[k] for k in ('path', 'bytes', 'full9')}
+            and index == {'path': capture['canonical_path'], 'bytes': capture['bytes'],
+                          'sha256': capture['sha256'], 'full9': capture['canonical_full9']}
+            and Path(capture['path']).parent == Path(selection['output']),
+            'The current index row must match the original closed protected capture')
+
+
+def _guide516_successor_candidate(prior_plan_raw, *, expected_prior_plan_sha256,
+                                  index_preview_raw, expected_index_preview_sha256):
+    """Translate the exact separately reviewed Guide 516 preview to the existing plan wire."""
+    require(type(prior_plan_raw) is type(index_preview_raw) is bytes and
+            _sha_pin(expected_prior_plan_sha256) and _sha_pin(expected_index_preview_sha256),
+            'Exact original Guide 516 predecessor and index preview required')
+    plan = _pinned_phase7_json(prior_plan_raw,
+        {'bytes': len(prior_plan_raw), 'sha256': expected_prior_plan_sha256}, 'Guide 516 predecessor')
+    preview = _pinned_phase7_json(index_preview_raw,
+        {'bytes': len(index_preview_raw), 'sha256': expected_index_preview_sha256}, 'Guide 516 index preview')
+    require(plan.get('schema') == PHASE7_GUIDE_SUCCESSOR_SCHEMA
+            and plan.get('execution_selected') is False
+            and plan.get('current_canonical_full9_for_new_reads_observed') is False
+            and plan['Stage_A_owner_selection'] is None
+            and preview.get('schema') == 'private-stage-a-guide516-closed-index-expected-list-preview/v1'
+            and preview.get('execution_selected') is False
+            and preview['Stage_A_reader_selection_or_allocation'] is None
+            and preview['independent_owner_approval'] is None
+            and preview['simultaneous_current_clean_D_A_Git_frontier_in_READ1'] is False
+            and preview['prior_stage_A_plan']['sha256'] == expected_prior_plan_sha256
+            and preview['prior_stage_A_plan']['bytes'] == len(prior_plan_raw)
+            and preview['prior_retained_lists'] == plan['current_retained_epochs']
+            and preview['historical_archive_capture_epoch_and_refs_unchanged'] is True
+            and preview['two_Stage_A_live_guard_endpoints_still_required'] is True,
+            'Guide 516 index preview must retain its unselected predecessor and archive')
+    index = preview['protected_index_actual_canonical_row']
+    roots = preview['published_clean_D_A_frontier_observed_during_separate_publication']
+    old_roots, old_index = plan['current_roots'], plan['current_index']
+    require(set(roots) == {'D', 'A'} and roots['A'] == old_roots['A']
+            and roots['D']['root'] == old_roots['D']['root']
+            and all(roots['D'][key] != old_roots['D'][key] for key in ('HEAD', 'tree'))
+            and roots['D']['clean_worktree_and_index'] is True and roots['D']['status_sha256'] == sha256(b'')
+            and set(index) == {'path', 'bytes', 'sha256', 'full9'}
+            and index['path'] == old_index['path'] == str(Path(roots['D']['root']) / '.git/index')
+            and type(index['bytes']) is int and index['bytes'] > 0 and _sha_pin(index['sha256'])
+            and all(index[key] != old_index[key] for key in ('sha256', 'full9')),
+            'Guide 516 requires its distinct captured index and published root expectations')
+    validate_full9(index['full9'], index['bytes'])
+    guides = preview['current_guide_recheck_postimages']
+    previous_guides = plan['four_guide_post_candidates_for_current_owner_recheck']
+    require(type(guides) is list and len(guides) == len(previous_guides) == 4
+            and len({row['path'] for row in guides}) == 4
+            and all(set(after) == {'path', 'bytes', 'sha256', 'full9'} and _sha_pin(after['sha256'])
+                    and type(after['bytes']) is int and after['bytes'] > 0
+                    and after['path'] == before['path'] and after['sha256'] != before['sha256']
+                    and after['full9'] != before['full9']
+                    for before, after in zip(previous_guides, guides, strict=True)),
+            'Exact four published Guide 516 postimages required')
+    for guide in guides:
+        validate_full9(guide['full9'], guide['bytes'])
+    proof = {'roots': roots, 'index': index, 'transition_sha256': expected_index_preview_sha256}
+    proof_sha = sha256(json.dumps(proof, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode())
+    plan.update(current_roots=roots, current_index=index,
+                four_guide_post_candidates_for_current_owner_recheck=guides,
+                guide_successor_transition_sha256=expected_index_preview_sha256,
+                successor_index_commitment_sha256=proof_sha)
+    return plan, proof_sha
+
+
+def rebind_phase7_guide516_successor(prior_plan_raw, *, expected_prior_plan_sha256,
+                                    index_preview_raw, expected_index_preview_sha256,
+                                    verify_current_index_owner):
+    """Require the existing owner to join the index preview to current clean D/A Git evidence."""
+    require(callable(verify_current_index_owner), 'Independent successor protected index owner required')
+    plan, proof_sha = _guide516_successor_candidate(prior_plan_raw,
+        expected_prior_plan_sha256=expected_prior_plan_sha256, index_preview_raw=index_preview_raw,
+        expected_index_preview_sha256=expected_index_preview_sha256)
+    require(verify_current_index_owner(proof_sha) is True, 'Independent successor protected index owner required')
+    return plan
+
+
+def rebind_phase7_published_p1_predecessor(prior_plan_raw, *, expected_prior_plan_sha256,
+        index_preview_raw, expected_index_preview_sha256, retained_outer_raw, source_close_raw,
+        expected_source_close_sha256, successor_raw, expected_successor_sha256, postimage_bytes,
+        retained_output_paths, verify_publication_owner):
+    """Bind the closed P1 install, current readback, and independently qualified publication.
+
+    The owner selects the normalized successor and verifies its original
+    qualification, publication, and full reader receipts. This returns an
+    input expectation, leaving the two live Stage A endpoints to their owner.
+    """
+    require(callable(verify_publication_owner) and _sha_pin(expected_source_close_sha256)
+            and _sha_pin(expected_successor_sha256) and type(source_close_raw) is type(successor_raw) is bytes,
+            'Independent P1 publication owner and exact retained receipt pins required')
+    plan, _ = _guide516_successor_candidate(prior_plan_raw,
+        expected_prior_plan_sha256=expected_prior_plan_sha256, index_preview_raw=index_preview_raw,
+        expected_index_preview_sha256=expected_index_preview_sha256)
+    close = _pinned_phase7_json(source_close_raw,
+        {'bytes': len(source_close_raw), 'sha256': expected_source_close_sha256}, 'P1 Source close')
+    successor = _pinned_phase7_json(successor_raw,
+        {'bytes': len(successor_raw), 'sha256': expected_successor_sha256}, 'P1 qualified publication')
+    previous, prior_index = plan['current_roots'], plan['current_index']
+    require(close.get('schema') == 'actual-existing-four-Python-code-CAS/v1'
+            and all(close[key] is True for key in ('Source_closed', 'module_closed', 'write_complete',
+                                                   'all6_posts_staged_fsynced_and_readback_before_first_effect'))
+            and close['errors'] == close['remaining_own_stages'] == close['uncertain_stage_FDs'] == []
+            and close['Source_contexts'] == [
+                {'root': previous[role]['root'], 'mode': mode, 'entered': True, 'exit_returned': True}
+                for role, mode in (('A', 'read'), ('D', 'write'))]
+            and close['additional_A_before'] == close['additional_A_after']
+            and all(close[key]['HEAD'] == previous['D']['HEAD'] and close[key]['tree'] == previous['D']['tree']
+                    for key in ('before_root', 'after_root'))
+            and close['before_root']['status_sha256'] == previous['D']['status_sha256']
+            and all(close['additional_A_after'][key] == previous['A'][key] for key in ('HEAD', 'tree','status_sha256')),
+            'Exact six-file P1 Source close on the Guide 516 predecessor required')
+    published_fields = {'schema','source_close_sha256','index_preview_sha256','D_parent',
+                        'current_roots','current_index','published_path_blobs','read_back_relevant_rows',
+                        'publication_sha256','readback_sha256','qualification_sha256s'}
+    require(set(successor) == published_fields
+            and successor['schema'] == 'existing-stage-a-p1-qualified-publication/v1'
+            and successor['source_close_sha256'] == expected_source_close_sha256
+            and successor['index_preview_sha256'] == expected_index_preview_sha256
+            and successor['D_parent'] == previous['D']['HEAD'],
+            'P1 successor must bind the exact original Source close and published predecessor')
+    qualifications = successor['qualification_sha256s']
+    require(type(qualifications) is dict and set(qualifications) == {'ordinary166', 'sql51', 'native'},
+            'Original P1 qualification receipts required')
+    pins = (successor['publication_sha256'], successor['readback_sha256'], *qualifications.values(),
+            expected_source_close_sha256, expected_index_preview_sha256)
+    require(all(_sha_pin(pin) for pin in pins) and len(set(pins)) == len(pins),
+            'Distinct P1 qualification, publication, and readback receipts required')
+    roots,index = successor['current_roots'],successor['current_index']
+    require(set(roots) == {'D','A'} and roots['A'] == previous['A']
+            and roots['D'] == {**previous['D'], 'HEAD': roots['D']['HEAD'], 'tree': roots['D']['tree']}
+            and all(type(roots['D'][key]) is str and len(roots['D'][key]) == 40
+                    and roots['D'][key] not in ('0' * 40, previous['D'][key])
+                    and all(c in '0123456789abcdef' for c in roots['D'][key]) for key in ('HEAD','tree'))
+            and set(index) == {'path','bytes','sha256','full9'} and index['path'] == prior_index['path']
+            and type(index['bytes']) is int and index['bytes'] > 0 and _sha_pin(index['sha256'])
+            and all(index[key] != historical[key]
+                    for key in ('sha256', 'full9')
+                    for historical in (prior_index, plan['retained_base_index'], plan['phase7_capture_epoch']['index'])),
+            'P1 successor requires a new clean D frontier and newly observed paired index')
+    validate_full9(index['full9'], index['bytes'])
+    installed = close['installed']
+    require(type(installed) is list and len(installed) == 6 and installed == close['separate_post_readbacks']
+            and all(type(row) is dict and set(row) == {'path','bytes','sha256','full9'} for row in installed),
+            'Exact six installed P1 rows and post-write readbacks required')
+    paths = [row['path'] for row in installed]
+    d_root = Path(previous['D']['root'])
+    require(len(set(paths)) == 6 and all(type(p) is str and Path(p).is_relative_to(d_root)
+                                         and p.endswith('.py') and '..' not in Path(p).parts for p in paths)
+            and close['only_worktree_deltas'] == [Path(p).relative_to(d_root).as_posix() for p in paths]
+            and type(postimage_bytes) is dict and set(postimage_bytes) == set(paths)
+            and successor['read_back_relevant_rows'] == [*installed,index],
+            'P1 publication readback must contain the exact six installed paths and new index')
+    expected_blobs = []
+    for row in installed:
+        body = postimage_bytes[row['path']]
+        require(type(body) is bytes and len(body) == row['bytes'] and sha256(body) == row['sha256'],
+                'P1 postimage body differs from the installed readback')
+        validate_full9(row['full9'], row['bytes'])
+        require(not int(row['full9']['st_mode']) & 0o111, 'P1 postimage must retain ordinary Python file mode')
+        expected_blobs.append({'path':row['path'],'mode':'100644','Git_blob_oid':blob_oid(body)})
+    require(successor['published_path_blobs'] == expected_blobs,
+            'Published P1 path blobs differ from exact installed bodies')
+
+    outer, _, _ = _compact_archive_base(plan, retained_outer_raw)
+    positions = {row['path']: i for i,row in enumerate(outer)}
+    installed_before = [item['capture']['actual_source_result'] for item in close['actual_before_captures']]
+    protected_paths = {row['path'] for row in plan['fresh_Source_body_targets'] +
+                       plan['four_guide_post_candidates_for_current_owner_recheck']}
+    protected_paths.update(plan['historical_origin_scope_recheck']['retained_92_paths'])
+    require([row['path'] for row in installed_before] == paths and len(positions) == len(outer)
+            and not set(paths) & protected_paths and len(set(paths) & positions.keys()) == 3
+            and outer[positions[index['path']]] == plan['retained_base_index']
+            and all(outer[positions[row['path']]] == row for row in installed_before if row['path'] in positions),
+            'Original Stage A retained P1 preimages and protected paths differ')
+    for row in installed:
+        if row['path'] in positions:
+            outer[positions[row['path']]] = row
+    outer[positions[index['path']]] = index
+    retained, bodies = _render_phase7_retained_lists(outer, roots, retained_output_paths)
+    approval = {'predecessor_plan_sha256': expected_prior_plan_sha256,
+        'index_preview_sha256': expected_index_preview_sha256, 'source_close_sha256': expected_source_close_sha256,
+        'successor_sha256': expected_successor_sha256, 'retained_LIST_output_references': retained}
+    pin = sha256(json.dumps(approval, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode())
+    require(verify_publication_owner(pin) is True, 'Independent P1 qualification and publication owner required')
+    plan.update(current_roots=roots, current_index=index, retained_base_index=index, current_retained_epochs=retained,
+                p1_predecessor_selection_sha256=pin, p1_predecessor_evidence=approval)
+    return plan, bodies
+
+
+def rebind_phase7_guide_successor(plan, *, expected_plan_sha256, transition_raw,
+                                 expected_transition_sha256, current_index, verify_current_index_owner,
+                                 repeated_evidence=None):
+    """Keep the archive epoch and bind a separately observed successor index.
+
+    The exact transition is the sealed writer/publication crosswalk. The existing
+    index owner must approve the new roots and protected index independently.
+    The result is a selected-input candidate for separate live Stage A custody.
+    """
+    plan = _verified_phase7_plan(plan, expected_plan_sha256)
+    require(plan['schema'] in (PHASE7_REUSE_SCHEMA, PHASE7_GUIDE_SUCCESSOR_SCHEMA) and type(transition_raw) is bytes and
+            sha256(transition_raw) == expected_transition_sha256, 'Exact guide-only transition required')
+    transition = json.loads(transition_raw)
+    roots, prior_index = plan['current_roots'], plan['current_index']
+    if plan['schema'] == PHASE7_REUSE_SCHEMA:
+        archive_epoch = {'roots': roots, 'index': prior_index}
+        require(repeated_evidence is None and transition['schema'] == 'private-stage-a-published-guide514-transition-evidence/v1'
+                and transition['verified_guide_only_transition_metadata'] is True,
+                'Exact first guide-only transition required')
+        new_roots = transition['successor_publication_root_expectations']
+        guides = transition['four_exact_guide_postimages']
+    else:
+        archive_epoch = plan['phase7_capture_epoch']
+        require(transition['schema'] == 'private-stage-a-published-repeated-guide-transition-evidence/v1'
+                and _sha_pin(expected_plan_sha256) and _sha_pin(expected_transition_sha256)
+                and plan['execution_selected'] is False and plan['Stage_A_owner_selection'] is None
+                and plan['current_canonical_full9_for_new_reads_observed'] is False
+                and transition['prior_current_epoch'] == {'roots': roots, 'protected_index': prior_index}
+                and transition['prior_guide_transition_sha256'] == plan['guide_successor_transition_sha256']
+                and transition['prior_archive_request_sha256'] == plan['phase7_request']['sha256']
+                and transition['prior_archive_receipt_sha256'] == plan['phase7_receipt']['sha256']
+                and _sha_pin(transition['current_index_receipt_sha256']),
+                'Repeated guide transition must retain current predecessor and original archive authority')
+        references = transition['original_guide_receipts']
+        names = {'before_docs', 'installation', 'source_receipt', 'publication', 'index_metadata', 'index_selection', 'index_close'}
+        require(type(repeated_evidence) is dict and type(references) is dict
+                and set(repeated_evidence) == set(references) == names
+                and references['index_close']['sha256'] == transition['current_index_receipt_sha256'],
+                'Exact repeated guide publication and independently closed index receipts required')
+        new_roots, guides = _repeated_guide_publication(plan, repeated_evidence, references)
+        require(transition['successor_publication_root_expectations'] == new_roots
+                and transition['four_exact_guide_postimages'] == guides
+                and transition['current_index'] == current_index,
+                'Repeated guide publication, postimages or index differ from their selected evidence')
+    require(transition['prior_stage_a_input']['sha256'] == expected_plan_sha256 and
+            transition['prior_phase7_archive_epoch'] == {'roots': archive_epoch['roots'],
+                'protected_index': archive_epoch['index'], 'read_only_scope': True},
+            'Guide transition differs from the selected archive epoch')
+    require(set(new_roots) == {'D', 'A'} and new_roots['A'] == roots['A'] and
+            new_roots['D']['root'] == roots['D']['root'] and new_roots['D']['HEAD'] != roots['D']['HEAD'] and
+            new_roots['D']['tree'] != roots['D']['tree'] and new_roots['D']['clean_worktree_and_index'] is True and
+            new_roots['D']['status_sha256'] == sha256(b''), 'Guide successor must retain the clean paired root scope')
+    prior_guides = plan['four_guide_post_candidates_for_current_owner_recheck']
+    require(len(guides) == len(prior_guides) == 4 and [r['path'] for r in guides] == [r['path'] for r in prior_guides] and
+            all(new['sha256'] != old['sha256'] and new['full9'] != old['full9']
+                for new, old in zip(guides, prior_guides, strict=True)), 'Expected the exact four successor guide postimages')
+    require(type(current_index) is dict and set(current_index) == {'path', 'bytes', 'sha256', 'full9'} and
+            current_index['path'] == prior_index['path'] and type(current_index['bytes']) is int and current_index['bytes'] > 0 and
+            type(current_index['sha256']) is str and len(current_index['sha256']) == 64 and
+            all(char in '0123456789abcdef' for char in current_index['sha256']) and
+            current_index['sha256'] != prior_index['sha256'] and current_index['full9'] != prior_index['full9'],
+            'A newly observed successor protected index is required')
+    validate_full9(current_index['full9'], current_index['bytes'])
+    current_index = deepcopy(current_index)
+    if repeated_evidence is not None:
+        _repeated_guide_current_index(new_roots, current_index, repeated_evidence, references)
+    proof = {'roots': new_roots, 'index': current_index, 'transition_sha256': expected_transition_sha256}
+    proof_sha = sha256(json.dumps(proof, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode())
+    require(verify_current_index_owner(proof_sha) is True, 'Independent successor protected index owner required')
+    plan.update(schema=PHASE7_GUIDE_SUCCESSOR_SCHEMA, phase7_capture_epoch=archive_epoch,
+                current_roots=new_roots, current_index=current_index,
+                four_guide_post_candidates_for_current_owner_recheck=guides,
+                guide_successor_transition_sha256=expected_transition_sha256, successor_index_commitment_sha256=proof_sha)
+    return plan
+
+
+def _phase7_archive_reference(target, captured, selected, ordinal, output, owner_uid):
+    actual = {key: selected[key] for key in ('path', 'bytes', 'sha256', 'full9')}
+    require(selected['Git_blob_oid'] == target['expected_Git_blob_oid'] and target['expected_Git_mode'] == '100644',
+            'Phase 7 Git blob or mode differs')
+    for key, value in actual.items():
+        require(target[key] is None or target[key] == value, f'Selected Phase 7 target {key} differs')
+    reference = captured['raw_reference']
+    require(type(reference) is dict and set(reference) == {'path', 'bytes', 'sha256', 'full9'} and
+            reference['path'] == str(output / 'raw' / f"{ordinal}-{Path(actual['path']).name}.DATA"),
+            'Phase 7 archive path or reference differs')
+    stamp = reference['full9']
+    validate_full9(stamp, actual['bytes'])
+    require(stamp['st_uid'] == owner_uid and
+            stat.S_IMODE(int(stamp['st_mode'])) == 0o400, 'Phase 7 archive identity or ownership drifted')
+    capture = captured['capture']
+    before = capture['parent_full9_before_source']
+    require(type(before) is list and bool(before) and before == capture['parent_full9_immediately_after_source'] and
+            capture['source_parent_all_fields_equal'] is True and capture['private_output_integrity_and_owner_passed'] is True,
+            'Phase 7 Source parent fence or private integrity check did not pass')
+    require(capture['actual_source_result'] == actual and reference['bytes'] == actual['bytes'] and
+            reference['sha256'] == actual['sha256'] and
+            capture['written_raw_reference'] == {k: reference[k] for k in ('path', 'bytes', 'sha256')} and
+            capture['private_raw_readback'] == {k: reference[k] for k in ('bytes', 'sha256', 'full9')},
+            'Phase 7 Source or private archive receipt differs')
+    return reference
+
+
+def _phase7_archive_capture(target, captured, selected, ordinal, output, owner_uid, observed):
+    expected_reference = _phase7_archive_reference(target, captured, selected, ordinal, output, owner_uid)
+    require(type(observed) is tuple and len(observed) == 3, 'Expected archived body and four file observations')
+    reference, raw, stamps = observed
+    require(reference == expected_reference, 'Phase 7 archive path or reference differs')
+    require(type(stamps) is tuple and stamps == (reference['full9'],) * 4,
+            'Phase 7 archive identity or ownership drifted')
+    normalized = {'Git_blob_oid': selected['Git_blob_oid'], 'bytes': selected['bytes'],
+                  'canonical_full9': selected['full9'], 'canonical_path': selected['path'],
+                  'path': reference['path'], 'sha256': selected['sha256']}
+    return normalized, raw
+
+
+def _bound_phase7_captures(plan, phase7_request_raw, phase7_receipt_raw):
+    request_ref, receipt_ref = plan['phase7_request'], plan['phase7_receipt']
+    request = _pinned_phase7_json(phase7_request_raw, request_ref, 'request')
+    receipt = _pinned_phase7_json(phase7_receipt_raw, receipt_ref, 'receipt')
+    validate_full9(receipt_ref['full9'], receipt_ref['bytes'])
+    require(request['schema'] == 'Root-existing-Source42-three-exact-frozen-sampled-header-READ-INERT/v1' and
+            request['Root_selected'] is True and request['canonical_write_selected'] is False,
+            'Expected a selected Phase 7 read-only request')
+    require(receipt['schema'] == 'actual-existing-Source42-frozen-P7-declared70-READ/v1' and
+            all(receipt[k] is True for k in ('Root_selected', 'read_complete', 'Source_closed',
+                                           'owned_module_closed', 'only70_fresh_body_reads')) and
+            all(receipt[k] is False for k in ('all1291_fresh_body_reads_claimed', 'canonical_or_Git_or_managedledger_write',
+                                            'SDK_or_test_or_Native_or_model_execution')) and
+            receipt['errors'] == [] and receipt['metadata_guard_count'] == 1303 and
+            (receipt['outer_epoch_record_count'], receipt['python_epoch_record_count']) == (1291, 1286),
+            'Phase 7 receipt lacks the exact clean read-only closure')
+    require([row for row in receipt['inputs'] if row['kind'] == 'Root_bound_frozen_sampled_header_READ3_request'] ==
+            [{'kind': 'Root_bound_frozen_sampled_header_READ3_request', 'path': request_ref['path'],
+              'actual_bytes': request_ref['bytes']}], 'Phase 7 closure differs from the bound request')
+
+    if plan['schema'] != PHASE7_REUSE_SCHEMA:
+        roots, index = (plan['phase7_capture_epoch'][field] for field in ('roots', 'index'))
+    else:
+        roots, index = plan['current_roots'], plan['current_index']
+    require(set(roots) == {'D', 'A'} and roots == receipt['roots_before'] == receipt['roots_after'],
+            'Phase 7 D/A endpoints differ from the selected Stage A epoch')
+    d_root, a_root = roots['D']['root'], roots['A']['root']
+    root_names = sorted((d_root, a_root))
+    require(d_root != a_root and request['root'] == d_root and request['additional_A']['root'] == a_root and
+            request['actual_modes'] == dict.fromkeys(root_names, 'read'), 'Phase 7 read root selection differs')
+    for role, selected_root in (('D', request['root_expected']), ('A', request['additional_A'])):
+        root = roots[role]
+        require(root['clean_worktree_and_index'] is True and root['status_sha256'] == sha256(b'') and
+                (root['HEAD'], root['tree']) == (selected_root['Git_HEAD'], selected_root['Git_tree']),
+                'Phase 7 selected HEAD, tree or clean state differs')
+    require(receipt['Source_contexts'] == [{'root': root, 'mode': 'read', 'entered': True, 'exit_returned': True}
+                                          for root in root_names], 'Phase 7 Source contexts did not close')
+    require(type(index['bytes']) is int and index['bytes'] > 0 and set(index) == {'path', 'bytes', 'sha256', 'full9'} and
+            index == receipt['protected_index_reference'] and index['path'] == str(Path(d_root) / '.git/index'),
+            'Current protected index differs from the closed Phase 7 capture')
+    validate_full9(index['full9'], index['bytes'])
+
+    output = Path(request['fresh_output_namespace'])
+    require(output.is_absolute() and '..' not in output.parts and
+            all(not output.is_relative_to(Path(root)) for root in root_names) and
+            Path(receipt_ref['path']).parent == output,
+            'Phase 7 archive namespace differs from the selected private output')
+    selected_rows, captures = request['targets'], receipt['fresh_body_reads']
+    require(len(selected_rows) == len(captures) == len({r['path'] for r in selected_rows}) == 70 and
+            receipt['fresh_body_bytes'] == sum(row['bytes'] for row in selected_rows),
+            'Phase 7 requires the complete ordered capture roster')
+    phase7 = {}
+    for ordinal, (selected, captured) in enumerate(zip(selected_rows, captures, strict=True)):
+        relative = Path(selected['relative_path'])
+        require(not relative.is_absolute() and '..' not in relative.parts and
+                selected['path'] == str(Path(d_root) / relative) == captured['canonical_path'] and
+                selected['full9'] == captured['canonical_full9'], 'Phase 7 capture order or identity differs')
+        phase7[selected['path']] = (selected, captured, ordinal)
+    index_target, index_capture, _ = phase7[index['path']]
+    require(index_target['relative_path'] == '.git/index' and index_target['Git_blob_oid'] is None and
+            {key: index_target[key] for key in index} == index and
+            index_capture['capture']['actual_source_result'] == index,
+            'Phase 7 receipt does not contain the selected protected index')
+    return phase7, output
+
+
+def _ordered_phase7_shared_targets(plan, phase7):
+    targets = plan['fresh_Source_body_targets']
+    paths = [target['path'] for target in targets]
+    shared_targets = [target for target in targets if target['path'] in phase7]
+    require(len(paths) == len(set(paths)) == 32 and all(path.endswith('.py') for path in paths) and
+            paths == plan['historical_origin_scope_recheck']['fresh_32_paths'] and len(shared_targets) == 20 and
+            [target['path'] for target in shared_targets] == plan['phase7_shared_paths'],
+            'Expected the exact Stage A partition of 20 reused and 12 fresh bodies')
+    return shared_targets
+
+
+def _phase7_read_references(plan, phase7, output):
+    shared = _ordered_phase7_shared_targets(plan, phase7)
+    uid = plan['phase7_receipt']['full9']['st_uid']
+    refs = []
+    for target in shared:
+        selected, captured, ordinal = phase7[target['path']]
+        refs.append(_phase7_archive_reference(target, captured, selected, ordinal, output, uid))
+    return tuple(refs)
+
+
+def prepare_phase7_shared_archive_reads(plan, *, expected_plan_sha256, phase7_request_raw,
+                                        phase7_receipt_raw, verify_phase7_owner):
+    """Select the 20 exact archive references for the existing bounded reader.
+
+    Binding the original closed receipt and owner does not grant a current
+    Source lease or read budget. The reader still checks actual file custody.
+    """
+    plan = _verified_phase7_plan(plan, expected_plan_sha256)
+    phase7, output = _bound_phase7_captures(plan, phase7_request_raw, phase7_receipt_raw)
+    refs = _phase7_read_references(plan, phase7, output)
+    require(verify_phase7_owner(plan['phase7_request']['sha256'], plan['phase7_receipt']['sha256']) is True,
+            'Independent Phase 7 owner closure verification is required')
+    return refs
+
+
+def prepare_phase7_stage_a_read_inputs(plan, *, expected_plan_sha256, phase7_request_raw,
+                                      phase7_receipt_raw, retained_outer_raw, verify_phase7_owner):
+    """Bind exact archive references and the existing owner's pre-read metadata roster.
+
+    Authenticated archived file stamps are expectations for 20 canonical paths.
+    Twelve other paths have only size and content pins before live observation.
+    A current paired Source/Git reader must independently observe every stamp.
+    """
+    plan = _verified_phase7_plan(plan, expected_plan_sha256)
+    rows, references = _phase7_stage_a_read_inputs(plan, phase7_request_raw, phase7_receipt_raw, retained_outer_raw)
+    require(verify_phase7_owner(plan['phase7_request']['sha256'], plan['phase7_receipt']['sha256']) is True,
+            'Independent Phase 7 owner closure verification is required')
+    return rows, references
+
+
+def preview_phase7_guide516_read_inputs(prior_plan_raw, *, expected_prior_plan_sha256,
+                                       index_preview_raw, expected_index_preview_sha256,
+                                       phase7_request_raw, phase7_receipt_raw, retained_outer_raw):
+    """Prepare ordered inputs for the existing reader without producing an approved plan."""
+    plan, proof_sha = _guide516_successor_candidate(prior_plan_raw,
+        expected_prior_plan_sha256=expected_prior_plan_sha256, index_preview_raw=index_preview_raw,
+        expected_index_preview_sha256=expected_index_preview_sha256)
+    rows, references = _phase7_stage_a_read_inputs(plan, phase7_request_raw, phase7_receipt_raw, retained_outer_raw)
+    return {'schema': 'private-stage-a-guide516-reader-input-preview/v1',
+            'pre_read_metadata_rows': rows, 'archive_reference_expectations': references,
+            'successor_index_commitment_sha256': proof_sha,
+            'Stage_A_owner_selection': None, 'execution_selected': False}
+
+
+def _phase7_stage_a_read_inputs(plan, phase7_request_raw, phase7_receipt_raw, retained_outer_raw):
+    phase7, output = _bound_phase7_captures(plan, phase7_request_raw, phase7_receipt_raw)
+    references = _phase7_read_references(plan, phase7, output)
+    index, predecessor = plan['current_index'], plan['retained_base_index']
+    outer = _epoch_rows(retained_outer_raw, plan['current_retained_epochs']['outer'], 1218, wrapped=False)
+    outer = _phase7_current_retained_roles(plan, outer)
+    old_indexes = [row for row in outer if row['path'] == index['path']]
+    require(old_indexes == [predecessor], 'Exact retained Stage A protected index required')
+    guides = plan['four_guide_post_candidates_for_current_owner_recheck']
+    require(type(guides) is list and len(guides) == 4, 'Exact four Stage A guide postimages required')
+    current = [index if row['path'] == index['path'] else row for row in outer]
+    rows = [{k: row[k] for k in ('path', 'bytes', 'full9')} for row in current + guides]
+    for target in plan['fresh_Source_body_targets']:
+        path = target['path']
+        require(type(target['bytes']) is int and 0 < target['bytes'] <= 16 * 1024**2 and
+                type(target['sha256']) is str and len(target['sha256']) == 64 and
+                all(char in '0123456789abcdef' for char in target['sha256']),
+                'Stage A reader requires exact bounded body sizes and SHA-256 pins')
+        full9 = phase7[path][0]['full9'] if path in phase7 else None
+        require(target['full9'] is None or target['full9'] == full9,
+                'Stage A source target stamp differs from the selected capture expectation')
+        rows.append({'path': path, 'bytes': target['bytes'], 'full9': full9})
+    require(len(rows) == len({row['path'] for row in rows}) == 1254 and
+            sum(row['full9'] is None for row in rows) == 12,
+            'Stage A retained and target metadata rows must form the exact ordered roster')
+    return rows, references
+
+
+def compose_phase7_reused_source32_epochs(plan, *, expected_plan_sha256, phase7_request_raw,
+        phase7_receipt_raw, verify_phase7_owner, endpoint_before, endpoint_after, index_body,
+        retained_outer_raw, retained_python_raw, guide_observations, shared_archives, fresh_captures):
+    """Combine 20 closed Phase 7 archives with 12 captures from the current Stage A owner.
+
+    The caller supplies independently verified request and receipt authority, current
+    Source and Git endpoints, and archive path/FD before and after observations.
+    A replay of these inputs grants no live authority. The paired Git rosters bind
+    stage-zero and HEAD mode/blob identities. The existing composer verifies every
+    body and emits the unchanged epoch LIST format.
+    """
+    plan = _verified_phase7_plan(plan, expected_plan_sha256)
+    phase7, output = _bound_phase7_captures(plan, phase7_request_raw, phase7_receipt_raw)
+    index = plan['current_index']
+    require(type(index_body) is bytes and len(index_body) == index['bytes'] and sha256(index_body) == index['sha256'],
+            'Current protected index differs from the closed Phase 7 capture')
+    for endpoint in (endpoint_before, endpoint_after):
+        _verify_phase7_endpoint(plan, endpoint)
+    shared_targets = _ordered_phase7_shared_targets(plan, phase7)
+    require(len(shared_targets) == len(shared_archives) == 20 and len(fresh_captures) == 12,
+            'Expected the exact Stage A partition of 20 reused and 12 fresh bodies')
+    receipt_ref = plan['phase7_receipt']
+    archived, fresh = iter(shared_archives), iter(fresh_captures)
+    joined = []
+    for target in plan['fresh_Source_body_targets']:
+        path = target['path']
+        if path in phase7:
+            selected, captured, ordinal = phase7[path]
+            joined.append(_phase7_archive_capture(target, captured, selected, ordinal, output,
+                                                  receipt_ref['full9']['st_uid'], next(archived)))
+        else:
+            joined.append(next(fresh))
+
+    prior_index = plan['retained_base_index']
+    require(prior_index['path'] == index['path'], 'Retained Stage A and current protected index paths differ')
+    base_plan = dict(plan, schema=V214_LOCAL_REBIND_SCHEMA)
+    retained = _retained_source32_rows(base_plan, prior_index, retained_outer_raw, retained_python_raw)
+    if plan['schema'] == PHASE7_PROGRAM_SUCCESSOR_SCHEMA:
+        outer = _phase7_current_retained_roles(plan, retained[0])
+        retained = (outer, [row for row in outer if row['path'].endswith('.py')], {row['path']: row for row in outer})
+    # Check the authorized owner against a result detached from caller data. The
+    # callback can observe closure, but cannot change the checked plan or fences.
+    composed = deepcopy(_compose_source32_epochs(plan, index, retained, endpoint_before['full9'],
+                                                 endpoint_after['full9'], guide_observations, joined))
+    require(verify_phase7_owner(plan['phase7_request']['sha256'], receipt_ref['sha256']) is True,
+            'Independent Phase 7 owner closure verification is required')
+    return composed
+
+
+def stamp(value):
+    return {key: str(getattr(value, key)) for key in FULL9}
+
+
+def synthetic_capture(path, raw):
+    with path.open('xb') as fh:
+        fh.write(raw)
+    before = stamp(path.lstat())
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    try:
+        fd_before = stamp(os.fstat(fd))
+        observed = os.read(fd, len(raw) + 1)
+        fd_after = stamp(os.fstat(fd))
+    finally:
+        os.close(fd)
+    after = stamp(path.lstat())
+    assert observed == raw
+    return observed, dict(full9_before=before, full9_fd_before=fd_before, full9_fd_after=fd_after, full9_after=after)
+
+
+class RebindControl(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.plan = json.loads(Path(__file__).with_name('source32-existing-reader-input.INERT.json').read_bytes())
+
+    def setUp(self):
+        path = tempfile.TemporaryDirectory(prefix='source32-synthetic-fixture-', dir=Path(__file__).resolve().parent)
+        self.addCleanup(path.cleanup)
+        self.private = Path(path.name)
+
+    def synthetic_index(self, body):
+        observed, stamps = synthetic_capture(self.private / 'retained-index.DATA', body)
+        return dict(path=self.plan['fresh_D_index_capture_required']['path'], bytes=len(observed),
+                    sha256=sha256(observed), full9=stamps['full9_after']), observed
+
+    def test_pending_handoff_keeps_unknowns_and_32_exact_paths(self):
+        self.assertEqual(len(self.plan['fresh_Source_body_targets']), 32)
+        self.assertEqual(len(self.plan['historical_origin_scope_recheck']['retained_92_paths']), 92)
+        self.assertIsNone(self.plan['Root_selection'])
+        self.assertIsNone(self.plan['ledger_before'])
+        self.assertIsNone(self.plan['finite_admitted_IO_plan'])
+        self.assertIsNone(self.plan['actual_reader_process_reaped'])
+        for item in self.plan['fresh_Source_body_targets']:
+            self.assertTrue(all(item[key] is None for key in ('bytes', 'sha256', 'full9')))
+
+    def test_rebound_root_and_protected_index_shape(self):
+        after = self.plan['new_published_root_expectations']
+        index, body = self.synthetic_index(b'synthetic independently captured new index')
+        verify_rebound_index(self.plan, roots_before=after, roots_after=after,
+                             index_before=index, index_after=index, index_body=body)
+
+    def test_old_head_tuple_is_rejected_even_with_fresh_index_shape(self):
+        old = self.plan['prior_epoch_refused']['roots']
+        index, body = self.synthetic_index(b'synthetic independently captured new index')
+        with self.assertRaisesRegex(ValueError, 'HEAD, tree'):
+            verify_rebound_index(self.plan, roots_before=old, roots_after=old,
+                                 index_before=index, index_after=index, index_body=body)
+
+    def test_same_index_identity_cannot_be_rebound_to_new_heads(self):
+        after = self.plan['new_published_root_expectations']
+        old = self.plan['prior_epoch_refused']['protected_D_index']
+        # Local retained artifact, never the canonical path embedded in the receipt.
+        path = Path('/tmp/Root-LIR23-fresh18-existing-SourceREAD-actual-v183-huy_olqh/18-index.DATA')
+        body = path.read_bytes()
+        self.assertEqual(sha256(body), old['sha256'])
+        with self.assertRaisesRegex(ValueError, 'Pre-publication protected index'):
+            verify_rebound_index(self.plan, roots_before=after, roots_after=after,
+                                 index_before=old, index_after=old, index_body=body)
+
+    def test_index_after_or_raw_rewrite_refuses(self):
+        after = self.plan['new_published_root_expectations']
+        index, body = self.synthetic_index(b'synthetic index')
+        with self.assertRaisesRegex(ValueError, 'index observation drifted'):
+            verify_rebound_index(self.plan, roots_before=after, roots_after=after, index_before=index,
+                                 index_after={**index, 'sha256': 'f' * 64}, index_body=body)
+        with self.assertRaisesRegex(ValueError, 'index bytes differ'):
+            verify_rebound_index(self.plan, roots_before=after, roots_after=after, index_before=index,
+                                 index_after=index, index_body=body.upper())
+
+    def test_real_synthetic_file_body_and_owner_capture_shape(self):
+        raw, observations = synthetic_capture(self.private / 'retained.py.DATA', b'example = 17\n')
+        target = {**self.plan['fresh_Source_body_targets'][0], 'expected_Git_blob_oid': blob_oid(raw)}
+        captured = dict(Git_blob_oid=blob_oid(raw), bytes=len(raw), canonical_full9=observations['full9_after'],
+                        canonical_path=target['path'], path=str(self.private / 'retained.py.DATA'), sha256=sha256(raw))
+        checked = verify_tracked_capture(target, captured, raw, **observations)
+        self.assertEqual(checked, dict(path=target['path'], bytes=len(raw), full9=observations['full9_after'], sha256=sha256(raw)))
+        with self.assertRaisesRegex(ValueError, 'tracked Git blob'):
+            verify_tracked_capture(target, captured, raw.upper(), **observations)
+        with self.assertRaisesRegex(ValueError, 'raw body SHA256'):
+            verify_tracked_capture(target, {**captured, 'sha256': 'f' * 64}, raw, **observations)
+        with self.assertRaisesRegex(ValueError, 'stable FD full9'):
+            verify_tracked_capture(target, captured, raw, **{**observations, 'full9_after': {**observations['full9_after'], 'st_ino': '1'}})
+        with self.assertRaisesRegex(ValueError, 'target bytes differs'):
+            verify_tracked_capture({**target, 'bytes': len(raw) + 1}, captured, raw, **observations)
+
+
+def _v214_compact_epoch(rows):
+    return (json.dumps(rows, sort_keys=True, separators=(',', ':')) + '\n').encode('utf-8')
+
+
+def prepare_v214_epoch_archive(plan, *, retained_outer_raw, pending_full9):
+    """Authenticate the retained projection and size both prospective LIST outputs.
+
+    The existing reader supplies the pending rows' exact pre-read fingerprints.
+    The body digests can be filled in after capture because their UTF-8 width is
+    fixed. Run before admitting the bodies. The existing composer still owns
+    paired Git/Source and body authentication.
+    """
+    require(plan.get('schema') == V214_LOCAL_REBIND_SCHEMA, 'Exact local v214 source handoff required')
+    outer, python, legacy_python = _compact_archive_base(plan, retained_outer_raw)
+    return legacy_python, _plan_compact_archive_sizes(plan, outer, python, pending_full9)
+
+
+def prepare_phase7_epoch_archive(plan, *, expected_plan_sha256, retained_outer_raw, endpoint_before,
+                                 epoch_output_maximums=None):
+    """Size both LIST outputs from the current owner's pre-read endpoint and fences.
+
+    Reconstruct the old Python LIST in memory under its independent digest.
+    Plan using the current protected index at its existing outer LIST position.
+    The paired composer still authenticates the closed receipt and every body.
+    The selected owner may check its committed output maxima before capture.
+    """
+    plan = _verified_phase7_plan(plan, expected_plan_sha256)
+    _verify_phase7_endpoint(plan, endpoint_before)
+    roots, index, prior_index = (plan[k] for k in ('current_roots', 'current_index', 'retained_base_index'))
+    require(set(roots) == {'D', 'A'} and roots['D']['root'] != roots['A']['root'] and
+            all(Path(row['root']).is_absolute() and row['clean_worktree_and_index'] is True
+                and row['status_sha256'] == sha256(b'') for row in roots.values()),
+            'Expected exact clean Stage A D/A root identities')
+    require(set(index) == {'path', 'bytes', 'sha256', 'full9'} and
+            index['path'] == prior_index['path'] == str(Path(roots['D']['root']) / '.git/index') and
+            type(index['bytes']) is int and index['bytes'] > 0 and
+            type(index['sha256']) is str and len(index['sha256']) == 64 and
+            all(char in '0123456789abcdef' for char in index['sha256']),
+            'Expected the exact Stage A protected index identity')
+    validate_full9(index['full9'], index['bytes'])
+    outer, python, legacy_python = _compact_archive_base(plan, retained_outer_raw)
+    if plan['schema'] == PHASE7_PROGRAM_SUCCESSOR_SCHEMA:
+        outer = _phase7_current_retained_roles(plan, outer)
+        python = [row for row in outer if row['path'].endswith('.py')]
+    positions = [number for number, row in enumerate(outer) if row['path'] == index['path']]
+    require(len({row['path'] for row in outer}) == len(outer) and len(positions) == 1 and
+            outer[positions[0]] == prior_index, 'Retained Stage A protected index or origin roster differs')
+    outer[positions[0]] = index
+
+    targets = plan['fresh_Source_body_targets']
+    paths = [target['path'] for target in targets]
+    require(paths == plan['historical_origin_scope_recheck']['fresh_32_paths'] and
+            all(target['expected_Git_mode'] == '100644' for target in targets),
+            'Stage A must retain original target order and regular Git modes')
+    guides = plan['four_guide_post_candidates_for_current_owner_recheck']
+    retained_stamps = {row['path']: row['full9'] for row in outer + guides}
+    stamps = endpoint_before['full9']
+    require(len(guides) == 4 and len(retained_stamps) == len(outer) + 4 and
+            not retained_stamps.keys() & set(paths) and type(stamps) is dict and
+            stamps.keys() == retained_stamps.keys() | set(paths) and
+            all(stamps[path] == value for path, value in retained_stamps.items()),
+            'Exact current full9 roster differs from retained and pending archive rows')
+    pending_full9 = {path: stamps[path] for path in paths}
+    sizes = _plan_compact_archive_sizes(plan, outer, python, pending_full9)
+    if epoch_output_maximums is not None:
+        require(type(epoch_output_maximums) is dict and set(epoch_output_maximums) == set(sizes)
+                and all(type(bound) is int and bound > 0 for bound in epoch_output_maximums.values()),
+                'Exact selected maximum sizes for both Stage A epoch outputs required')
+        require(all(size <= epoch_output_maximums[name] for name, size in sizes.items()),
+                'Current Stage A epoch output exceeds the selected pre-capture allowance')
+    return legacy_python, sizes
+
+
+def _compact_archive_base(plan, retained_outer_raw):
+    references = plan['current_retained_epochs']
+    outer = _epoch_rows(retained_outer_raw, references['outer'], 1218, wrapped=False)
+    python = [row for row in outer if row['path'].endswith('.py')]
+    pretty_python = (json.dumps(python, sort_keys=True, indent=2) + '\n').encode('utf-8')
+    reference = references['python']
+    matching_wires = [raw for raw in (pretty_python, _v214_compact_epoch(python))
+                      if len(raw) == reference['bytes'] and sha256(raw) == reference['sha256']]
+    require(len(matching_wires) == 1, 'Retained Python LIST bytes differ from the selected reference')
+    selected_python, = matching_wires
+    _epoch_rows(selected_python, reference, 1213, wrapped=False)
+    return outer, python, selected_python
+
+
+def _plan_compact_archive_sizes(plan, outer, python, pending_full9):
+    targets = plan['fresh_Source_body_targets']
+    paths = [target['path'] for target in targets]
+    require(len(paths) == len(set(paths)) == 32 and all(path.endswith('.py') for path in paths)
+            and not set(paths) & {row['path'] for row in outer}
+            and type(pending_full9) is dict and pending_full9.keys() == set(paths),
+            'Exact pending body fingerprints required for the epoch archive')
+    new_rows = []
+    for target in targets:
+        path = target['path']
+        stamp = pending_full9[path]
+        require(type(stamp) is dict and type(stamp.get('st_size')) is str,
+                'Expected complete pending full9 for the epoch archive')
+        observed_bytes = int(stamp['st_size'])
+        validate_full9(stamp, observed_bytes)
+        require(0 <= observed_bytes <= 16 * 1024**2, 'Pending epoch body size exceeds admitted bounds')
+        require((target['bytes'] is None or target['bytes'] == observed_bytes)
+                and (target['full9'] is None or target['full9'] == stamp),
+                'Pending epoch fingerprint differs from the selected target')
+        new_rows.append(dict(path=path, bytes=observed_bytes, full9=stamp, sha256='0' * 64))
+    return {'outer_epoch': len(_v214_compact_epoch(outer + new_rows)),
+            'python_epoch': len(_v214_compact_epoch(python + new_rows))}
+
+
+def encode_v214_epoch_archive(epoch, *, planned_bytes):
+    """Seal the existing composer's two LIST payloads before any archive write."""
+    outer, python = epoch['outer_epoch'], epoch['python_epoch']
+    require(type(outer) is type(python) is list and len(outer) == 1250 and len(python) == 1245
+            and len({row['path'] for row in outer}) == 1250
+            and python == [row for row in outer if row['path'].endswith('.py')],
+            'Composed Source32 LIST projection or counts differ')
+    payloads = {name: _v214_compact_epoch(epoch[name]) for name in ('outer_epoch', 'python_epoch')}
+    require(type(planned_bytes) is dict and all(type(value) is int for value in planned_bytes.values())
+            and planned_bytes == {name: len(raw) for name, raw in payloads.items()},
+            'Composed Source32 LIST payload exceeds or differs from its pre-read archive plan')
+    return payloads
+
+
+def encode_v214_outer_only_epoch_archive(epoch, *, planned_bytes):
+    """Keep one physical LIST and seal both original logical LIST commitments."""
+    payloads = encode_v214_epoch_archive(epoch, planned_bytes=planned_bytes)
+    commitments = {name: {'bytes': len(raw), 'sha256': sha256(raw)}
+                   for name, raw in payloads.items()}
+    return payloads['outer_epoch'], commitments
+
+
+def replay_v214_outer_only_epoch_archive(outer_raw, *, expected_commitments):
+    """Recover the original wire for both LISTs using independently held commitments.
+
+    The original reader reads back the stored outer bytes. Its independently
+    authenticated owner receipt supplies the two commitments, including the
+    expected Python commitment. The regenerated Python bytes may be passed
+    directly to consumers that already accept the original raw LIST.
+    """
+    require(type(expected_commitments) is dict and
+            set(expected_commitments) == {'outer_epoch', 'python_epoch'} and
+            all(type(ref) is dict and set(ref) == {'bytes', 'sha256'} and
+                type(ref['bytes']) is int and 0 < ref['bytes'] <= 16 * 1024**2 and
+                _sha_pin(ref['sha256']) for ref in expected_commitments.values()),
+            'Independent commitments for both original Stage A LISTs are required')
+    outer = _epoch_rows(outer_raw, expected_commitments['outer_epoch'], 1250, wrapped=False)
+    require(all(type(row) is dict and type(row.get('path')) is str for row in outer),
+            'Invalid Stage A outer LIST row')
+    python = [row for row in outer if row['path'].endswith('.py')]
+    sizes = {name: ref['bytes'] for name, ref in expected_commitments.items()}
+    payloads = encode_v214_epoch_archive({'outer_epoch': outer, 'python_epoch': python},
+                                        planned_bytes=sizes)
+    require(payloads['outer_epoch'] == outer_raw and
+            sha256(payloads['python_epoch']) == expected_commitments['python_epoch']['sha256'],
+            'Canonical outer wire or independently selected Python LIST commitment differs')
+    return payloads
+
+
+def bind_closed_stage_a_archive_for_a0(selected, *, expected_selection_sha256, terminal_reference,
+                                       terminal_raw, outer_raw, verify_original_reader_close):
+    """Project the already authorized Reader proof into the existing isolated A0 Source binding."""
+    def encode(value):
+        return json.dumps(value,sort_keys=True,separators=(',', ':'),ensure_ascii=False,allow_nan=False).encode()
+
+    def path_ok(value):
+        return (type(value) is str and Path(value).is_absolute() and '..' not in Path(value).parts
+                and str(Path(value)) == value)
+
+    def file_ref(value):
+        return (type(value) is dict and set(value) == {'path','bytes','sha256'} and path_ok(value['path'])
+                and type(value['bytes']) is int and 0 < value['bytes'] <= 4*1024**2 and _sha_pin(value['sha256']))
+
+    def strict_pairs(pairs):
+        result = {}
+        for key,value in pairs:
+            require(key not in result,'duplicate Stage A terminal receipt field')
+            result[key] = value
+        return result
+
+    fields = {'schema','reader_selection_sha256','reader_plan_sha256','roots','protected_index',
+              'parent_module_sha256','absent_paths'}
+    require(type(selected) is dict and set(selected) == fields and
+            selected['schema'] == 'selected-A0-existing-StageA-reader-archive/v1' and
+            all(_sha_pin(selected[key]) for key in ('reader_selection_sha256','reader_plan_sha256')) and
+            _sha_pin(expected_selection_sha256) and sha256(encode(selected)) == expected_selection_sha256 and
+            file_ref(terminal_reference) and callable(verify_original_reader_close),
+            'expected independently selected Stage A archive and terminal reference')
+    picked = json.loads(encode(selected))
+    selected_terminal = dict(terminal_reference)
+    require(type(terminal_raw) is bytes and len(terminal_raw) == selected_terminal['bytes'] and
+            sha256(terminal_raw) == selected_terminal['sha256'],'Stage A terminal receipt bytes differ')
+    receipt = json.loads(terminal_raw,object_pairs_hook=strict_pairs)
+    roots = picked['roots']
+    require(type(roots) is dict and set(roots) == {'D','A'} and
+            all(type(row) is dict and set(row) == {'root','HEAD','tree','clean_worktree_and_index','status_sha256'}
+                and path_ok(row['root']) and row['clean_worktree_and_index'] is True
+                and row['status_sha256'] == sha256(b'')
+                and all(type(row[key]) is str and len(row[key]) == 40 and
+                        all(c in '0123456789abcdef' for c in row[key]) for key in ('HEAD','tree'))
+                for row in roots.values()),'exact selected D and A roots, HEADs and clean trees required')
+    root_paths = tuple(Path(roots[role]['root']) for role in ('D','A'))
+    require(root_paths[0] != root_paths[1] and
+            all(not path.is_relative_to(other) for path,other in (root_paths,root_paths[::-1])),
+            'Stage A project roots must be separate')
+    require(type(receipt) is dict and all(receipt.get(key) is True for key in
+               ('Root_selected','Source_closed','owned_module_closed','read_complete')) and
+            receipt.get('errors') == [] and receipt.get('Source_contexts') ==
+            [{'root':name,'mode':'read','entered':True,'exit_returned':True}
+             for name in sorted(map(str,root_paths))],
+            'original Stage A Reader did not close both READs and its module normally')
+    stage = receipt.get('stage_a')
+    require(type(stage) is dict and stage.get('Source_closed') is True and
+            stage.get('archive_committed') is True and
+            stage.get('selection_sha256') == picked['reader_selection_sha256'] and
+            stage.get('plan_sha256') == picked['reader_plan_sha256'] and
+            stage.get('closing_roots') == roots and
+            stage.get('closing_protected_index') == picked['protected_index'] and
+            type(stage.get('body_capture_count')) is int and stage['body_capture_count'] == 12 and
+            stage.get('observed_counts') == {'opening_full9':1254,'closing_full9':1254,
+                                             'guides':4,'reused_archives':20,'fresh_bodies':12},
+            'Stage A terminal does not match the selected roots, index or capture roster')
+    provenance = stage.get('retained_git_provenance')
+    require(type(provenance) is dict and provenance.get('schema') == 'paired-git-continuous-read-retained-controls/v1'
+            and provenance.get('owner_scope_sha256') == stage['selection_sha256']
+            and provenance.get('roots') == list(map(str,root_paths))
+            and all(provenance.get(key) is True for key in ('closing_git_endpoint_checked',
+                 'closing_original_descriptor_identity_checked','retained_descriptors_closed'))
+            and provenance.get('closing_fresh_control_body_read') is False,
+            'retained Git controls did not close with the selected paired Reader')
+    observed = receipt.get('explicit_IO_before_closeout')
+    envelope = receipt.get('full_Source_envelope_retained')
+    require(type(envelope) is int and envelope > 0 and type(observed) is dict and
+            set(observed) == {'bytes','captures'} and
+            type(observed['bytes']) is type(observed['captures']) is int and
+            0 < observed['bytes'] <= envelope and observed['captures'] > 0,
+            'original Stage A observed I/O and retained envelope required')
+    archive = stage.get('outer_archive')
+    index = picked['protected_index']
+    require(file_ref(archive) and archive['path'] != selected_terminal['path'] and
+            all(not Path(ref['path']).is_relative_to(project)
+                for ref in (archive,selected_terminal) for project in root_paths) and
+            type(index) is dict and set(index) == {'path','bytes','full9','sha256'} and
+            index['path'] == str(root_paths[0]/'.git'/'index') and
+            type(index['bytes']) is int and index['bytes'] > 0 and _sha_pin(index['sha256']),
+            'selected private archive and protected datasets index required')
+    validate_full9(index['full9'],index['bytes'])
+    require(type(outer_raw) is bytes and len(outer_raw) == archive['bytes'] and
+            sha256(outer_raw) == archive['sha256'],'paired Reader outer archive bytes differ')
+    outputs = replay_v214_outer_only_epoch_archive(outer_raw,expected_commitments=stage.get('logical_epochs'))
+    rows = {row['path']:row for row in json.loads(outputs['outer_epoch'])}
+    require(rows.get(index['path']) == index and
+            all(path_ok(path) and sum(Path(path).is_relative_to(project) for project in root_paths) == 1
+                for path in rows),'archived outer LIST differs from its protected index or project roots')
+    modules = picked['parent_module_sha256']
+    absent = picked['absent_paths']
+    require(type(modules) is dict and bool(modules) and
+            all(type(name) is str and name and all(part.isidentifier() for part in name.split('.'))
+                and _sha_pin(pin) and
+                rows.get(str(root_paths[0]/(name.replace('.','/')+'.py')),{}).get('sha256') == pin
+                for name,pin in modules.items()) and
+            type(absent) is list and all(path_ok(path) and path not in rows and
+               any(Path(path).is_relative_to(project) for project in root_paths) for path in absent) and
+            len(set(absent)) == len(absent),'selected A0 module identities or absence expectations differ')
+    require(verify_original_reader_close(selected_terminal['sha256'], expected_selection_sha256,
+              picked['reader_selection_sha256'], archive['sha256']) is True,
+            'original Reader wait, custody and terminal ledger authority required')
+    require(sha256(encode(selected)) == expected_selection_sha256 and terminal_reference == selected_terminal,
+            'selected A0 terminal or opening evidence changed during independent verification')
+    return {'schema':'actual-selected-a0-paired-source-read-binding/v1',
+            'datasets_root':str(root_paths[0]),'projects':[{'root':roots[role]['root'],'Git_HEAD':roots[role]['HEAD']}
+                 for role in ('D','A')],
+            'outer_epoch':dict(archive),'protected_index':{key:index[key] for key in ('path','full9','sha256')},
+            'absent_paths':absent,'paired_reader_close':selected_terminal,'parent_module_sha256':modules}
+
+
+if __name__ == '__main__':
+    unittest.main()
+
+
+RELOCATED_SOURCE32_PREVIEW = 'private-stage-a-source32-relocated-all-fresh-preview/v1'
+
+
+def _relocation_digest(value):
+    return sha256(json.dumps(value, sort_keys=True, separators=(',', ':'),
+                             ensure_ascii=False, allow_nan=False).encode())
+
+
+def _relocated_path(value, prior_roots, roots):
+    path = Path(value)
+    require(path.is_absolute() and str(path) == value and '..' not in path.parts,
+            'Expected a normalized absolute Stage A path')
+    matches = [role for role, prior in prior_roots.items()
+               if path.is_relative_to(prior['root']) and path != Path(prior['root'])]
+    require(len(matches) == 1, 'Expected exactly one historical Stage A root')
+    role, = matches
+    return str(Path(roots[role]['root']) / path.relative_to(prior_roots[role]['root']))
+
+
+def preview_phase7_relocated_source32_inputs(plan, *, expected_plan_sha256, relocation_raw,
+        expected_relocation, retained_outer_raw, retained_python_raw, relocated_outer_raw,
+        guide_close_raw):
+    """Project the detached published candidate onto the existing all-fresh roster."""
+    plan = _verified_phase7_plan(plan, expected_plan_sha256)
+    require(plan['schema'] == PHASE7_GUIDE_SUCCESSOR_SCHEMA and plan['execution_selected'] is False,
+            'Only an inert historical guide plan may seed relocation')
+    proof = _pinned_phase7_json(relocation_raw, expected_relocation, 'relocation proof')
+    require(proof['schema'] == 'private-retained-stage-a-guide572-publication-reconciliation/v1'
+            and proof['dispatch_authority'] is False and proof['paired_selection'] is None,
+            'Expected the detached Guide572 publication proof')
+    close = _pinned_phase7_json(guide_close_raw, proof['Guide572_source_close'], 'Guide572 Source close')
+    require(close['terminal_returncode'] == 0 and close['Source_closed'] is True and
+            close['module_closed'] is True and close['only_four_Git_changes'] is True,
+            'The exact Guide572 writer closure is required')
+
+    prior_roots = plan['current_roots']
+    candidate = proof['current_published_candidate_protected_roots']
+    require(set(prior_roots) == set(candidate) == {'D', 'A'} and
+            (close['HEAD'], close['tree'], close['A']) ==
+            (candidate['D']['Git_HEAD'], candidate['D']['Git_tree'], candidate['A']['Git_HEAD']),
+            'Published D/A closure does not bind these roots')
+    roots = {role: dict(prior_roots[role], root=row['root'], HEAD=row['Git_HEAD'], tree=row['Git_tree'])
+             for role, row in candidate.items()}
+    require(all(Path(roots[role]['root']).is_absolute() and
+                str(Path(roots[role]['root'])) == roots[role]['root'] and
+                '..' not in Path(roots[role]['root']).parts and
+                roots[role]['root'] != prior_roots[role]['root'] for role in roots),
+            'Expected two distinct relocated roots')
+    index = close['index']
+    require(index == proof['Guide572_protected_D_expected_index'] and
+            index['path'] == _relocated_path(plan['current_index']['path'], prior_roots, roots),
+            'Published D index differs from the relocated writer observation')
+    base = plan['retained_base_index']
+    outer, _, _ = _retained_source32_rows(dict(plan, schema=V214_LOCAL_REBIND_SCHEMA), base,
+                                          retained_outer_raw, retained_python_raw)
+    observed_rows = _epoch_rows(relocated_outer_raw, proof['migrated_body_metadata_epoch'],
+                               1610, wrapped=False)
+    observed = {row['path']: row for row in observed_rows}
+    require(len(observed) == len(observed_rows) and index['path'] in observed and
+            close['A_index']['path'] == str(Path(roots['A']['root']) / '.git/index') and
+            observed.get(close['A_index']['path']) == close['A_index'],
+            'Expected exact relocated ordinary epoch and unchanged A writer index')
+    observed[index['path']] = index
+
+    retained, changed = [], []
+    for old in outer:
+        new = observed.get(_relocated_path(old['path'], prior_roots, roots))
+        require(new is not None and new['full9'] != old['full9'],
+                'Original retained row did not map to a new file observation')
+        validate_full9(new['full9'], new['bytes'])
+        retained.append(new)
+        if (new['bytes'], new['sha256']) != (old['bytes'], old['sha256']):
+            changed.append(dict(previous=old, relocated=new,
+                                index_role=new['path'] in (index['path'], close['A_index']['path'])))
+
+    roles = proof['protected_body_roles']
+    targets = []
+    require(len(roles) == len(plan['fresh_Source_body_targets']) == 32,
+            'Expected the exact protected Stage A roster')
+    for old, role in zip(plan['fresh_Source_body_targets'], roles, strict=True):
+        current = role['closed_ordinary_epoch']
+        path = _relocated_path(old['path'], prior_roots, roots)
+        relative = Path(path).relative_to(roots['D']['root']).as_posix()
+        require(role['protected_old'] == old and role['relative_path'] == relative and
+                current == observed.get(path) and
+                (old['bytes'], old['sha256']) == (current['bytes'], current['sha256']) and
+                role['Git'] == {'mode': '100644', 'oid': old['expected_Git_blob_oid'], 'stage': 0} and
+                old['expected_Git_mode'] == '100644',
+                'Relocated exact tracked body, order or stage-zero identity differs')
+        validate_full9(current['full9'], current['bytes'])
+        targets.append(dict(old, path=path, full9=current['full9']))
+
+    old_guides = plan['four_guide_post_candidates_for_current_owner_recheck']
+    guide_paths = [_relocated_path(row['path'], prior_roots, roots) for row in old_guides]
+    posts = {row['path']: row for row in close['committed_docs'].values()}
+    require(len(posts) == len(guide_paths) == 4 and set(posts) == set(guide_paths),
+            'Published writer guide roster differs')
+    guides = [{key: posts[path][key] for key in ('path', 'bytes', 'sha256', 'full9')} for path in guide_paths]
+    for guide in guides:
+        validate_full9(guide['full9'], guide['bytes'])
+    scope = deepcopy(plan['historical_origin_scope_recheck'])
+    for key in ('fresh_32_paths', 'retained_92_paths'):
+        scope[key] = [_relocated_path(path, prior_roots, roots) for path in scope[key]]
+    bound_paths = [row['path'] for row in retained + guides + targets]
+    target_paths = [row['path'] for row in targets]
+    shared = plan['phase7_shared_paths']
+    require(len(bound_paths) == len(set(bound_paths)) == 1254 and
+            len(scope['retained_92_paths']) == len(set(scope['retained_92_paths'])) == 92 and
+            set(scope['retained_92_paths']) <= {row['path'] for row in retained if row['path'].endswith('.py')} and
+            target_paths == scope['fresh_32_paths'] and len(shared) == len(set(shared)) == 20 and
+            set(shared) <= {row['path'] for row in plan['fresh_Source_body_targets']},
+            'Relocated current and historical path rosters differ')
+    inputs = dict(schema=RELOCATED_SOURCE32_PREVIEW, current_roots=roots, current_index=index,
+                  historical_origin_scope_recheck=scope, fresh_Source_body_targets=targets,
+                  four_guide_post_candidates_for_current_owner_recheck=guides)
+    return dict(schema=RELOCATED_SOURCE32_PREVIEW, reader_inputs=inputs, execution_selected=False,
+                relocated_retained_outer=retained, changed_retained_content=changed,
+                historical_plan_sha256=expected_plan_sha256, relocation_proof=expected_relocation,
+                historical_phase7={'capture_epoch': plan['phase7_capture_epoch'], 'paths': shared,
+                                   'request': plan['phase7_request'],
+                                   'receipt': plan['phase7_receipt']},
+                archive_historical_count=20, source_body_reads=32)
+
+
+def compose_phase7_relocated_source32_epochs(preview, *, expected_preview_sha256, endpoint_before,
+        endpoint_after, index_body, guide_observations, captures, verify_relocation_owner):
+    """Use the unchanged epoch composer with 32 current owner-supplied captures."""
+    require(preview.get('schema') == RELOCATED_SOURCE32_PREVIEW and
+            preview['execution_selected'] is False and preview['archive_historical_count'] == 20 and
+            preview['source_body_reads'] == 32 and
+            _relocation_digest(preview) == expected_preview_sha256,
+            'Expected the exact detached relocation preview')
+    plan = preview['reader_inputs']
+    index = plan['current_index']
+    require(type(index_body) is bytes and len(index_body) == index['bytes'] and sha256(index_body) == index['sha256'],
+            'Current protected index differs from the selected candidate')
+    validate_full9(index['full9'], len(index_body))
+    for endpoint in (endpoint_before, endpoint_after):
+        _verify_phase7_endpoint(plan, endpoint)
+    outer = preview['relocated_retained_outer']
+    python = [row for row in outer if row['path'].endswith('.py')]
+    existing = {row['path']: row for row in outer}
+    require(len(outer) == len(existing) == 1218 and len(python) == 1213 and existing.get(index['path']) == index,
+            'Exact relocated retained roster and D index are required')
+    result = deepcopy(_compose_source32_epochs(plan, index, (outer, python, existing), endpoint_before['full9'],
+                                               endpoint_after['full9'], guide_observations, captures))
+
+    def ownership_digest():
+        return _relocation_digest((preview, endpoint_before, endpoint_after, guide_observations,
+                                   [(capture, sha256(body)) for capture, body in captures]))
+
+    binding = ownership_digest()
+    require(verify_relocation_owner(binding) is True and ownership_digest() == binding,
+            'Independent owner closure for the exact unmodified input tuple is required')
+    return result

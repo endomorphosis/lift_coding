@@ -1,0 +1,78 @@
+--- prior/relational_assessment.py
++++ candidate/relational_assessment.py
+@@ -7655,7 +7655,7 @@
+ 
+ 
+ def _qwen2_projector_released_parent(raw, *, captured, reservation_id, child, owner_pid,
+-        expected_source_epoch_sha256=None):
++        expected_source_epoch_sha256=None, expected_prelaunch_request_sha256=None):
+     """Join the same local parent reservation after child wait, finalization and Source exit."""
+     def unique(pairs):
+         result = dict(pairs)
+@@ -7667,7 +7667,8 @@
+ 
+     outer = json.loads(raw, object_pairs_hook=unique, parse_constant=invalid_number)
+     _need(type(outer) is dict and outer.get("schema") in ("reviewed-qwen2-projector-direct-owner-release/v1",
+-                                                          "reviewed-qwen2-projector-direct-owner-release/v2")
++                                                          "reviewed-qwen2-projector-direct-owner-release/v2",
++                                                          "reviewed-qwen2-projector-direct-owner-release/v3")
+           and outer.get("errors") == []
+           and all(outer.get(flag) is True for flag in ("Source_closed", "resource_cleanup_confirmed", "actual_parent_release_return"))
+           and outer.get("owned_cleanup_pending") is None,
+@@ -7692,7 +7693,18 @@
+           "original Qwen2 Source and parent release readbacks must confirm the same owner closed")
+     _need(expected_source_epoch_sha256 is None or _commit(outer["source_before"]) == expected_source_epoch_sha256,
+           "original Qwen2 release Source fence differs from the selected request epoch")
+-    if outer["schema"] == "reviewed-qwen2-projector-direct-owner-release/v2":
++    bound = outer["schema"] == "reviewed-qwen2-projector-direct-owner-release/v3"
++    if bound:
++        request_pin = captured["reviewed-evaluation-request.json"]["sha256"]
++        _need(outer.get("launch_selection") == {"request_sha256": request_pin,
++                    "source_epoch_sha256": _commit(outer["source_before"])},
++              "original Qwen2 prelaunch selection differs from its retained request or Source fence")
++    if expected_prelaunch_request_sha256 is not None:
++        _need(bound and _pin(expected_source_epoch_sha256)
++              and outer["launch_selection"]["request_sha256"] == expected_prelaunch_request_sha256,
++              "original Qwen2 prelaunch-bound release required for the selected request and Source epoch")
++    if outer["schema"] in ("reviewed-qwen2-projector-direct-owner-release/v2",
++                           "reviewed-qwen2-projector-direct-owner-release/v3"):
+         _need(state.get("schema") == "exact-resource-lease-inspection/v1" and state.get("read_only") is True
+               and state.get("status") == "absent" and state.get("lease") is None and state.get("descendants") == []
+               and (state.get("lease_id"), state.get("expected_request_id"), state.get("expected_owner_pid"),
+@@ -7804,7 +7816,7 @@
+ def read_qwen2_projector_paid_attempts(binding, attempts, *, expected_binding_sha256, source_sha256, prefill_sha256,
+         preparation_sha256, expected_attempts_sha256, events, physical_owner, study, physical_roster_raw,
+         expected_physical_roster_sha256, replay_close, verify_original_owner,
+-        request_selection=None, expected_request_selection_sha256=None):
++        request_selection=None, expected_request_selection_sha256=None, require_prelaunch_bound_releases=False):
+     """Join exact launcher outputs to existing original terminal and physical owners.
+ 
+     A declined/failed attempt stays in paid work. Only a final successful
+@@ -7829,6 +7841,8 @@
+     arms = {arm["role"]: arm for arm in binding["arms"]}
+     _need(tuple(arms) == _EXTERNAL_PROJECTOR_ARMS, "ordered four-arm Qwen2 projector selection required")
+     selected_requests = request_selection is not None or expected_request_selection_sha256 is not None
++    _need(type(require_prelaunch_bound_releases) is bool and (not require_prelaunch_bound_releases or selected_requests),
++          "prelaunch-bound Qwen2 releases require an independent paid request selection")
+     if selected_requests:
+         _check_qwen2_projector_request_selection(request_selection, expected_request_selection_sha256,
+             attempts, arms=arms, custody_pins={"binding_sha256": expected_binding_sha256,
+@@ -7932,7 +7946,8 @@
+                 "reviewed-evaluation-request.json": {"bytes": len(attempt.request_raw), "sha256": _sha(attempt.request_raw)}})
+             lease = _qwen2_projector_released_parent(attempt.release_raw, captured=captured, child=child,
+                 owner_pid=owner_pid, reservation_id=parent["original_owner_reservation_id"],
+-                expected_source_epoch_sha256=request_selection.source_epoch_sha256 if selected_requests else None)
++                expected_source_epoch_sha256=request_selection.source_epoch_sha256 if selected_requests else None,
++                expected_prelaunch_request_sha256=attempt.original_request_sha256 if require_prelaunch_bound_releases else None)
+             _need(lease not in leases, "each Qwen2 projector arm needs its distinct original released lease")
+             leases.add(lease)
+             item.update(return_sha256=refs["projector"]["sha256"], parent_sha256=_sha(attempt.parent_raw))
+@@ -7963,6 +7978,8 @@
+               "all_four_available": pairs is not None, "legal_scoring_or_dispatch_authority": False}
+     if selected_requests:
+         report["request_selection_sha256"] = expected_request_selection_sha256
++    if require_prelaunch_bound_releases:
++        report["original_prelaunch_bound_releases"] = True
+     return report, pairs, verify_return
+ 
+ 

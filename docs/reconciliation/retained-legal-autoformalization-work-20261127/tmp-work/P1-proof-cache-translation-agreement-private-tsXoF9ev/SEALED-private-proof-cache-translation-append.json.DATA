@@ -1,0 +1,40 @@
+{
+  "actual_test_runtime": false,
+  "all_prior_prefix_and_AST_preserved": true,
+  "append": {
+    "bytes": 4249,
+    "path": "/tmp/P1-proof-cache-translation-agreement-private-tsXoF9ev/translation-agreement.append.py.DATA",
+    "sha256": "9e254e10c0f7f4040c351cb5b1ffc1bc54bfb7eba541ea4d27bb286b46d9156d"
+  },
+  "before": {
+    "bytes": 98509,
+    "git_blob": "03ea849ebdb3c818af1e56d8ee44add38af030ee",
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+    "sha256": "087c587b4f35f61f08f2c8f9bba768893dfa1e57f3645976faa38e7927e02414"
+  },
+  "cases": [
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[both-absent]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[exact-match]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[request-only]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[receipt-only]",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_cache_requires_checked_lean_translation_agreement[different-digest]"
+  ],
+  "compile_only": true,
+  "forward": {
+    "bytes": 4693,
+    "path": "/tmp/P1-proof-cache-translation-agreement-private-tsXoF9ev/translation-agreement.forward.diff",
+    "sha256": "0b5d65097673c8dee63aca4332bad9c85a667f0ee11c803c12fb38d6d89ec4be"
+  },
+  "inverse": {
+    "bytes": 4693,
+    "path": "/tmp/P1-proof-cache-translation-agreement-private-tsXoF9ev/translation-agreement.inverse.diff",
+    "sha256": "5e093ca76a2d0de0469abe91adfd523a1fde2c846f401955d3d08cbbb04b60db"
+  },
+  "owner": "tests/unit/logic/legal_ir/test_proof_cache.py",
+  "post": {
+    "bytes": 102758,
+    "path": "/tmp/P1-proof-cache-translation-agreement-private-tsXoF9ev/test_proof_cache.translation-agreement.after.py.DATA",
+    "sha256": "23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab"
+  },
+  "schema": "legal-proof-cache-translation-agreement-one-owning-test-private/v1"
+}

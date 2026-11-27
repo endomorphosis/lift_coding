@@ -1,0 +1,244 @@
+"""Exercise explicit paired selector binding using the retained simulated Git owner."""
+from copy import deepcopy
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import runpy
+import stat
+import subprocess
+import sys
+import tempfile
+import time
+from types import SimpleNamespace
+import unittest
+from unittest.mock import patch
+
+HERE = Path(__file__).resolve().parent
+ORIGINAL = HERE.parent / 'decoder-training-stage-a-retained-git-controls-private-v01-kNzLC76L'
+FIXTURE_PIN = (14706, 'e3cddf650d3ca243e3a72e1bf849c4488478aa7bb568c883e945149a7c8ba38b')
+
+
+def exact(path, pin):
+    raw = path.read_bytes()
+    if (len(raw), sha256(raw).hexdigest()) != pin:
+        raise ValueError(f'private fixture or selected Git guard differs: {path}')
+    return raw
+
+
+def donor_fixture():
+    path = ORIGINAL / 'test_retained_controls.py'
+    exact(path, FIXTURE_PIN)
+    return runpy.run_path(str(path))['RetainedControls']
+
+
+def require_simulated_process(*args, **kwargs):
+    raise AssertionError('private selector control attempted an actual subprocess')
+
+
+def configured():
+    size,digest = os.environ['SELECTED_GIT_GUARD_PIN'].split(':',1)
+    path = HERE / 'verify_standalone_git.py'
+    raw = exact(path,(int(size),digest))
+    process = SimpleNamespace(run=require_simulated_process,Popen=require_simulated_process,
+        PIPE=subprocess.PIPE,DEVNULL=subprocess.DEVNULL,TimeoutExpired=subprocess.TimeoutExpired,
+        CalledProcessError=subprocess.CalledProcessError)
+    guard = dict(Path=Path,os=os,stat=stat,time=time,subprocess=process,hashlib=__import__('hashlib'))
+    exec(compile(raw,str(path),'exec',dont_inherit=True),guard)
+    return guard
+
+
+class SelectedPairGit(donor_fixture()):
+    def setUp(self):
+        original = super().setUp
+        temporary = SimpleNamespace(TemporaryDirectory=lambda *,dir: tempfile.TemporaryDirectory(dir=HERE))
+        with patch.dict(original.__func__.__globals__,configured=configured,tempfile=temporary):
+            original()
+        self.roots_literal = tuple(str(root) for root in self.roots)
+        self.selected = deepcopy(self.guard['STANDALONE_PROJECT_EXPECTATIONS'])
+        for row in self.selected.values():
+            row['Git_selector_metadata'] = {
+                kind:{k:pin[k] for k in ('path','full9')} for kind,pin in row['Git_selector_metadata'].items()}
+        self.working = self.selected[self.roots_literal[0]]
+        # Keep an intentionally incompatible ambient roster as a negative control.
+        ambient = deepcopy(self.selected)
+        for row in ambient.values():
+            row['HEAD'] = 'f'*40
+            row['branch_ref'] = 'refs/heads/wrong-ambient'
+        self.guard['STANDALONE_PROJECT_EXPECTATIONS'] = ambient
+
+    def paired(self, between=None, *, expectations=None):
+        options = {'project_expectations':self.selected if expectations is None else expectations}
+        if between is None:
+            return self.run_paired(**options)
+        return self.run_paired(between,**options)
+
+    def emit(self, label, **values):
+        print(json.dumps({'label':label,'scope':'private simulated Git owner','actual_git_called':False,**values},
+                         sort_keys=True))
+
+    def strict_control_calls(self):
+        per_root = [
+            ('rev-parse','--path-format=absolute','--git-path','index'),
+            ('rev-parse','--path-format=absolute','--git-path','info/exclude'),
+            ('symbolic-ref','HEAD'),
+            ('rev-parse','--absolute-git-dir'),
+            ('rev-parse','--path-format=absolute','--git-common-dir'),
+            ('rev-parse',self.working['branch_ref']),
+            ('rev-parse','HEAD'),
+            ('rev-parse','HEAD^{tree}'),
+            ('for-each-ref','--format=%(refname) %(objectname)'),
+            ('status','--porcelain=v1','-z','--untracked-files=normal'),
+            ('diff','--cached','--quiet','HEAD','--'),
+            ('diff','--quiet','--'),
+        ]
+        d_root,a_root = self.roots_literal
+        ls_tree = ('--literal-pathspecs','ls-tree','-z','--full-tree','HEAD','--',*self.names)
+        endpoint = [(d_root,args) for args in [*per_root,ls_tree]] + [(a_root,args) for args in per_root]
+        actual = [(r['root'],tuple(r['args'])) for r in self.report['Git_calls']]
+        self.assertEqual(actual,endpoint+endpoint)
+        self.assertEqual(len(self.git_calls),50)
+        self.assertEqual(len(self.report['inputs']),4)
+        self.assertEqual(self.spent['captures'],54)
+        self.assertTrue(all(r['process_started'] is True for r in self.report['Git_calls']))
+
+    def test_explicit_selected_pair_overrides_incompatible_ambient_without_new_git_calls(self):
+        offered = deepcopy(self.selected)
+        calls = []
+        standalone = self.guard['verify_standalone_git']
+
+        def observe(*args, **kwargs):
+            selected = kwargs.get('project_expectations')
+            self.assertEqual(selected,offered)
+            self.assertIsNot(selected,self.selected)
+            calls.append(deepcopy(selected))
+            return standalone(*args, **kwargs)
+
+        def between(_):
+            self.selected[self.roots_literal[1]]['refs_sha256'] = 'c'*64
+            return 'original read body result'
+
+        self.guard['verify_standalone_git'] = observe
+        before,body,after,receipt = self.paired(between)
+        self.assertEqual(calls,[offered,offered])
+        self.assertEqual(before,after)
+        self.assertEqual(body,'original read body result')
+        self.assertEqual(self.phases,['before-opening','opening-complete','before-closing','closing-complete'])
+        self.assertEqual(len(self.parser_calls),2)
+        self.assertIs(self.parser_calls[0],self.parser_calls[1])
+        self.assertTrue(receipt['retained_descriptors_closed'])
+        self.assertFalse(receipt['closing_fresh_control_body_read'])
+        self.strict_control_calls()
+        self.closing_fds_are_closed()
+        self.emit('explicit pair overrides incompatible ambient globals',git_calls=len(self.git_calls),
+                  original_control_captures=len(self.report['inputs']),original_authority_phases=self.phases)
+
+    def test_expected_root_branch_and_selector_inode_rosters_are_exact(self):
+        helper = self.guard['stage_a_paired_git_expectations']
+        detached = helper(self.selected,self.roots_literal)
+        self.assertEqual(detached,self.selected)
+        detached[self.roots_literal[0]]['Git_selector_metadata']['HEAD']['full9']['st_size'] = '999'
+        self.assertNotEqual(detached,self.selected)
+        cases = {}
+        cases['extra root'] = (self.selected | {str(HERE/'third'):deepcopy(self.working)},
+                              'exact two original paired Git roots')
+        wrong_path = deepcopy(self.selected)
+        wrong_path[self.roots_literal[0]]['Git_selector_metadata']['ref']['path'] = str(self.roots[0]/'.git/refs/heads/other')
+        cases['wrong loose ref path'] = (wrong_path,'Git selector path must bind its original')
+        alias = deepcopy(self.selected)
+        metadata = alias[self.roots_literal[0]]['Git_selector_metadata']
+        metadata['config']['full9'] = deepcopy(metadata['HEAD']['full9'])
+        cases['aliased selected identities'] = (alias,'identity aliases another selected role')
+        failures = {}
+        for label,(offered,match) in cases.items():
+            with self.subTest(label=label),self.assertRaisesRegex(ValueError,match) as raised:
+                self.paired(expectations=offered)
+            failures[label] = str(raised.exception)
+            self.assertEqual(self.git_calls,[])
+            self.assertEqual(self.report['inputs'],[])
+        self.emit('invalid selected selector roster',errors=failures)
+
+    def test_actual_symbolic_branch_drift_refuses_before_opening_body_read(self):
+        self.branch = 'refs/heads/foreign-actual'
+        with self.assertRaisesRegex(ValueError,'root, branch, refs, tree or cleanliness changed') as raised:
+            self.paired()
+        self.assertIn(('symbolic-ref','HEAD'),self.git_calls)
+        self.assertEqual(self.report['inputs'],[])
+        self.assertEqual(self.phases,['before-opening'])
+        self.emit('actual symbolic branch drift',error=str(raised.exception),git_calls=len(self.git_calls))
+
+    def test_actual_opening_ref_stream_drift_refuses_before_body_read(self):
+        self.changed_refs = True
+        with self.assertRaisesRegex(ValueError,'root, branch, refs, tree or cleanliness changed') as raised:
+            self.paired()
+        self.assertIn(('for-each-ref','--format=%(refname) %(objectname)'),self.git_calls)
+        self.assertEqual(self.report['inputs'],[])
+        self.assertEqual(self.phases,['before-opening'])
+        self.emit('actual opening ref stream drift',error=str(raised.exception),git_calls=len(self.git_calls))
+
+    def test_closing_ref_stream_drift_refuses_after_unchanged_original_control_capture(self):
+        def between(_):
+            self.changed_refs = True
+
+        with self.assertRaisesRegex(ValueError,'root, branch, refs, tree or cleanliness changed') as raised:
+            self.paired(between)
+        self.assertLess(25,len(self.git_calls))
+        self.assertLess(len(self.git_calls),50)
+        self.assertEqual(len(self.report['inputs']),4)
+        self.assertEqual(self.phases,['before-opening','opening-complete','before-closing'])
+        self.closing_fds_are_closed()
+        self.emit('actual closing ref stream drift',error=str(raised.exception),git_calls=len(self.git_calls))
+
+    def test_closing_selector_metadata_changed_during_body_callback_refuses(self):
+        loose_ref = Path(self.selected[self.roots_literal[0]]['Git_selector_metadata']['ref']['path'])
+
+        def between(_):
+            loose_ref.write_bytes(b'changed selected selector file in middle')
+
+        with self.assertRaisesRegex(ValueError,'selector metadata changed|selector.*changed') as raised:
+            self.paired(between)
+        self.assertEqual(len(self.git_calls),25)
+        self.assertEqual(len(self.report['inputs']),4)
+        self.closing_fds_are_closed()
+        self.emit('literal selected ref changed between endpoints',error=str(raised.exception),git_calls=len(self.git_calls))
+
+    def test_literal_loose_ref_ancestor_alias_with_same_leaf_full9_refuses(self):
+        ref = self.selected[self.roots_literal[0]]['Git_selector_metadata']['ref']
+        path = Path(ref['path'])
+        parent = path.parent
+        moved = parent.with_name('heads-redirect-target')
+        leaf_before = path.lstat()
+        parent.rename(moved)
+        parent.symlink_to(moved,target_is_directory=True)
+        leaf_after = path.lstat()
+        self.assertEqual(stat.S_ISREG(leaf_after.st_mode),True)
+        self.assertEqual(leaf_before,leaf_after)
+        self.assertNotEqual(path.resolve(strict=True),path)
+        with self.assertRaisesRegex(ValueError,'standalone Git selector metadata changed') as raised:
+            self.paired()
+        self.assertEqual(self.git_calls,[])
+        self.assertEqual(self.report['inputs'],[])
+        self.emit('literal ref ancestor alias with same leaf inode',error=str(raised.exception))
+
+    def test_terminal_authority_callback_cannot_change_selected_selector_metadata(self):
+        config = Path(self.selected[self.roots_literal[1]]['Git_selector_metadata']['config']['path'])
+
+        def drift(phase):
+            if phase == 'closing-complete':
+                config.write_bytes(b'changed selected config after both Git endpoints')
+            return True
+
+        self.scope_allowed = drift
+        with self.assertRaisesRegex(ValueError,'selector metadata changed|selector.*changed') as raised:
+            self.paired()
+        self.assertEqual(self.phases,['before-opening','opening-complete','before-closing','closing-complete'])
+        self.strict_control_calls()
+        self.closing_fds_are_closed()
+        self.emit('terminal owner changed selected config',error=str(raised.exception),git_calls=len(self.git_calls))
+
+
+if __name__ == '__main__':
+    names = sys.argv[1:] or [n for n in unittest.defaultTestLoader.getTestCaseNames(SelectedPairGit)
+                            if n in SelectedPairGit.__dict__]
+    result = unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(SelectedPairGit(name) for name in names))
+    sys.exit(not result.wasSuccessful())

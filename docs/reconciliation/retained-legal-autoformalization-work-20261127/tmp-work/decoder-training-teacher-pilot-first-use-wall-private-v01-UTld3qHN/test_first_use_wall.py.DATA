@@ -1,0 +1,205 @@
+"""Replay complete first-use wall evidence through the original modeled paid owner."""
+
+from dataclasses import replace
+from hashlib import sha256
+import json
+from pathlib import Path
+import sys
+import unittest
+
+
+HERE = Path(__file__).resolve().parent
+BASE = HERE.parent / "decoder-training-teacher-pilot-all-paid-phases-private-v01-AL5vbJYA"
+CANDIDATE_SHA = "ccb4f816f07211f380d97a09cee2181da359882b17698f881deadc65ea2cc825"
+BASE_SHA = "38b33cd83f400ce26730ad275a6fa906f76b2176c252011d371bf9a45454a1ec"
+NS = 10**9
+REPORT = {}
+
+
+raw = (BASE / "check_all_paid.py").read_bytes()
+assert sha256(raw).hexdigest() == "0c2228b19e7c97172b277695f2f3091760758b3813c6ce85790ec3ed563411e6"
+assignment = b'AFTER_SHA = "' + BASE_SHA.encode() + b'"'
+assert raw.count(assignment) == 1
+raw = raw.replace(assignment, b'AFTER_SHA = "' + CANDIDATE_SHA.encode() + b'"')
+fixture = {"__name__": "retained_all_paid", "__file__": str(HERE / "check_all_paid.py")}
+exec(compile(raw, str(BASE / "check_all_paid.py"), "exec"), fixture)
+AllPaid, program = fixture["AllPaid"], fixture["program"]
+
+
+class FirstUseWallControls(AllPaid):
+    def selected(self, *, unknown_cpu=False):
+        f = self.f
+        args, shared, sunk, prep_leaves = self.all_args(unknown_cpu=unknown_cpu)
+        # Move the original modeled clocks together so the opening receipt can
+        # precede the first recorded paid preparation window.
+        def shifted(close):
+            return replace(close, start_ns=close.start_ns + 2 * NS, end_ns=close.end_ns + 2 * NS)
+
+        def replay(original):
+            def read(row):
+                return shifted(original(row))
+            return read
+
+        for key in ("replay_preparation_close", "replay_close"):
+            args[key] = replay(args[key])
+        closes = {event: shifted(close) for event, close in (self.observed_closes | prep_leaves).items()}
+        self.assertEqual(len(closes), 39)
+        self.assertEqual(len({close.clock_domain_sha256 for close in closes.values()}), 1)
+        windows = tuple((event, close.request_sha256, close.close_sha256, close.clock_domain_sha256,
+                         close.start_ns, close.end_ns) for event, close in sorted(closes.items()))
+        self.earliest = min(closes.values(), key=lambda close: close.start_ns)
+        self.latest = max(closes.values(), key=lambda close: close.end_ns)
+        self.assertEqual(self.earliest.close_sha256, sunk.close_receipt_sha256)
+        span = f.S.WallSpan(self.earliest.clock_domain_sha256, self.earliest.start_ns - NS,
+                            self.latest.end_ns + 2 * NS, f.pin("modeled original whole pilot clock receipt"))
+        witness = program.TeacherPilotFirstUseWall(span, f.pin("modeled independently issued pilot opening"),
+                                                 f.pin("modeled independently issued pilot terminal evidence"))
+        phase = args["preparation_development"]
+        self.binding = f.pin((program.ALL_PAID_PHASES_SCHEMA, self._offered(self.cells),
+            args["expected_preparation_development_sha256"], phase["preparation_roster_sha256"],
+            args["expected_development_roster_sha256"], args["expected_joint_roster_sha256"]))
+        self.windows = f.pin(windows)
+        self.sunk, self.shared = sunk, shared
+        self.wall_calls = []
+        return args, witness
+
+    def wall_arguments(self, args, witness, *, approve=None):
+        selected = program.teacher_pilot_first_use_wall_commitment(self.f.S, self.binding, witness)
+        wanted = (selected, self.binding, witness.opening_receipt_sha256,
+                  witness.terminal_evidence_receipt_sha256, self.windows)
+
+        def approve_wall(*offered):
+            self.wall_calls.append(offered)
+            signatures = {key for kind, key in self.calls if kind in ("leaf", "prep_leaf")}
+            self.assertEqual(len(signatures), 39)
+            self.assertIn(self.sunk.event_sha256, signatures)
+            self.assertIn(self.shared.event_sha256, signatures)
+            self.assertEqual(offered, wanted)
+            return True if approve is None else approve()
+
+        return args | {"first_use_wall": witness, "expected_first_use_wall_sha256": selected,
+                       "verify_first_use_wall_owner": approve_wall}
+
+    def test_independent_opening_and_later_terminal_enclose_every_paid_phase(self):
+        args, witness = self.selected()
+        verified = self.wall_arguments(args, witness)
+        proof = self.verify_all(verified)
+        span = witness.span
+        result = proof["first_use_wall"]
+        self.assertLess(span.start_ns, self.earliest.start_ns)
+        self.assertGreater(span.end_ns, self.latest.end_ns)
+        self.assertEqual(result, {
+            "schema": "reviewed-teacher-pilot-first-use-wall/v1",
+            "selection_sha256": verified["expected_first_use_wall_sha256"],
+            "clock_domain_sha256": span.clock_domain_sha256, "receipt_sha256": span.receipt_sha256,
+            "start_ns": span.start_ns, "end_ns": span.end_ns, "elapsed_ns": span.end_ns - span.start_ns,
+            "opening_receipt_sha256": witness.opening_receipt_sha256,
+            "terminal_evidence_receipt_sha256": witness.terminal_evidence_receipt_sha256,
+            "physical_clock_windows_sha256": self.windows, "covered_paid_events": 39,
+            "scope": "whole_pilot_opening_through_independently_authenticated_terminal_evidence"})
+        self.assertEqual(len(self.wall_calls), 1)
+        self.assertEqual(proof["observed_exclusive_physical_work_ns"], {"cpu_ns": 168 * NS, "gpu_ns": None})
+        self.assertEqual(sum(row["event_sha256"] == self.shared.event_sha256 for row in proof["physical_paid_events"]), 1)
+        self.assertIn(self.f.S._wire(self.sunk), proof["physical_paid_events"])
+        old = fixture["load"]("_wall_retained_preimage", BASE / "final_physical_union.py", BASE_SHA)
+
+        def prior_component(*scope):
+            actual = args["replay_component"](*scope)
+            return old.ComponentClose(actual.close_sha256, actual.process_identities)
+
+        prior = old.verify_all_paid_phases(self.f.S, self.f.threshold, self.f.plans, self.comparison, self.cells,
+            self.receipts, self.f.base.cost_evidence, self._offered(self.cells),
+            **(args | {"replay_component": prior_component}))
+        self.assertEqual(self.verify_all(args), prior)
+        self.assertEqual({key: value for key, value in proof.items() if key != "first_use_wall"}, prior)
+        REPORT.update(first_use_wall=result, original_event_count=proof["original_event_count"],
+                      paid_failed_event_retained=True, observed_model_or_native_execution=False)
+
+    def test_shifted_witness_cannot_exclude_sunk_preparation_or_terminal_work(self):
+        for bound in ("start_ns", "end_ns"):
+            with self.subTest(bound=bound):
+                self.setUp()
+                args, witness = self.selected()
+                wrong = self.earliest.end_ns if bound == "start_ns" else self.latest.end_ns - 1
+                changed = replace(witness, span=replace(witness.span, **{bound: wrong}))
+                with self.assertRaisesRegex(ValueError, "must enclose every original paid event"):
+                    self.verify_all(self.wall_arguments(args, changed))
+                self.assertEqual(self.wall_calls, [])
+
+    def test_same_witness_cannot_merge_distinct_actual_clock_domains(self):
+        args, witness = self.selected()
+        prior = args["replay_preparation_close"]
+
+        def changed(row):
+            close = prior(row)
+            if row["event_sha256"] == self.sunk.event_sha256:
+                return replace(close, clock_domain_sha256=self.f.pin("foreign preparation clock"))
+            return close
+
+        with self.assertRaisesRegex(ValueError, "must enclose every original paid event in its clock domain"):
+            self.verify_all(self.wall_arguments(args | {"replay_preparation_close": changed}, witness))
+        self.assertEqual(self.wall_calls, [])
+
+    def test_original_cost_refusal_precedes_replay_and_clock_refusal_follows_replay(self):
+        args, witness = self.selected()
+        with self.assertRaisesRegex(ValueError, "original resource owner refused"):
+            self.verify_all(self.wall_arguments(args | {"verify_whole_study_cost_owner": lambda *_: False}, witness))
+        self.assertEqual(self.calls, [])
+        self.assertEqual(self.wall_calls, [])
+        with self.assertRaisesRegex(ValueError, "original clock owner refused"):
+            self.verify_all(self.wall_arguments(args, witness, approve=lambda: False))
+        self.assertEqual(len(self.wall_calls), 1)
+
+    def test_alias_of_original_sunk_close_or_between_endpoints_refuses(self):
+        args, witness = self.selected()
+        valid = self.wall_arguments(args, witness)
+        repeated = replace(witness, opening_receipt_sha256=witness.terminal_evidence_receipt_sha256)
+        with self.assertRaisesRegex(ValueError, "distinct original wall endpoints"):
+            self.verify_all(valid | {"first_use_wall": repeated})
+        self.assertEqual(self.calls, [])
+        alias = replace(witness, terminal_evidence_receipt_sha256=self.sunk.close_receipt_sha256)
+        with self.assertRaisesRegex(ValueError, "must not alias original paid scope"):
+            self.verify_all(self.wall_arguments(args, alias))
+        self.assertEqual(self.wall_calls, [])
+
+    def test_original_clock_owner_cannot_mutate_selected_witness(self):
+        args, witness = self.selected()
+
+        def mutate():
+            object.__setattr__(witness.span, "end_ns", witness.span.end_ns + 1)
+            return True
+
+        with self.assertRaisesRegex(ValueError, "exact selected first-use wall witness"):
+            self.verify_all(self.wall_arguments(args, witness, approve=mutate))
+        self.assertEqual(len(self.wall_calls), 1)
+
+    def test_missing_clock_owner_or_original_preparation_cannot_supply_wall(self):
+        args, witness = self.selected()
+        supplied = self.wall_arguments(args, witness)
+        with self.assertRaisesRegex(ValueError, "exact selected first-use wall witness and original clock owner"):
+            self.verify_all(supplied | {"verify_first_use_wall_owner": None})
+        self.assertEqual(self.calls, [])
+        prior = args["replay_preparation_close"]
+
+        def missing(row):
+            return None if row["event_sha256"] == self.sunk.event_sha256 else prior(row)
+
+        with self.assertRaisesRegex(ValueError, "original typed physical close required"):
+            self.verify_all(supplied | {"replay_preparation_close": missing})
+        self.assertEqual(self.wall_calls, [])
+
+    def test_wall_does_not_impute_unmeasured_earlier_cpu(self):
+        args, witness = self.selected(unknown_cpu=True)
+        proof = self.verify_all(self.wall_arguments(args, witness))
+        self.assertEqual(proof["first_use_wall"]["covered_paid_events"], 39)
+        self.assertEqual(proof["observed_exclusive_physical_work_ns"], {"cpu_ns": None, "gpu_ns": None})
+        self.assertEqual(proof["development_and_final_physical_proof"]["exclusive_paid_work"]["cpu_ns"], 161 * NS)
+
+
+if __name__ == "__main__":
+    controls = AllPaid if sys.argv[1:] == ["--retained"] else FirstUseWallControls
+    names = tuple(name for name in vars(controls) if name.startswith("test_"))
+    result = unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(controls(name) for name in names))
+    if result.wasSuccessful():
+        print(json.dumps(REPORT, sort_keys=True))
+    raise SystemExit(not result.wasSuccessful())

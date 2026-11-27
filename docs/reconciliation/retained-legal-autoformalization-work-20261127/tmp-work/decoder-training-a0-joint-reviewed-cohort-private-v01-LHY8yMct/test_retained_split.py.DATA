@@ -1,0 +1,29 @@
+"""Reuse the nine retained split behavior controls with the new postimage."""
+from pathlib import Path
+from runpy import run_path
+import sys
+import unittest
+
+HERE = Path(__file__).absolute().parent
+guard = run_path('/tmp/decoder-training-stage-a-guide576-owner-transition-private-v01-tU42r4Kc/prepare.py')
+sys.addaudithook(guard['audit'])
+prior = Path('/tmp/decoder-training-a0-world-v2-opaque-bound-private-v01/test_world_v2_a0_projection.py')
+body = guard['archive'](guard['pin'](prior,7088,'9b3f4d6ee30e4528ee1817e749d864feae1e0e63f07b3ed96ffece242d3ffce6')).decode()
+old = '83995ca68ccb20c3d4ac6e056f147eb0874003b4555acac8182faa2df71cf417'
+assert body.count(old) == 1
+body = body.replace(old, 'e139cc75d42846fad28ef009e1f6e5fc4c47f5fe350f7323942664908dca3457', 1)
+anchor = 'if direct:\n    source = source.replace('
+assert body.count(anchor) == 1
+body = body.replace(anchor, 
+    'source = source.replace(\'filename, digest = "legal_ir_eval_splits.py", CANDIDATE\',\n'
+    '                        \'filename, digest = "legal_ir_eval_splits.v02.py", CANDIDATE\')\n'
+    + anchor, 1)
+loaded = {'__name__':'held_world_split_test','__file__':str(HERE/prior.name)}
+exec(compile(body,str(prior),'exec'),loaded)
+# The historical AST test is tied to an earlier before-image and allowed roster.
+# build.py checks all AST nodes against the exact predecessor of this candidate.
+excluded = {'test_prior_public_split_functions_preserved'}
+tests = [cls(name) for cls in (loaded['Base'],loaded['WorldV2Projection']) for name in cls.__dict__
+         if name.startswith('test_') and name not in excluded]
+assert len(tests) == 9
+raise SystemExit(int(not unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite(tests)).wasSuccessful()))

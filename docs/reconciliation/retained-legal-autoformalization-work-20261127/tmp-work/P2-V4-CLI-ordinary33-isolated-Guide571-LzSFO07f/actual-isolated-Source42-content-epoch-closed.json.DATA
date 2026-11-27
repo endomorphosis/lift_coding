@@ -1,0 +1,64 @@
+{
+  "Source_closed": true,
+  "actual_D_role_body_bytes": 72954191,
+  "actual_Source42": {
+    "bytes": 10375,
+    "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/actual-doc-owner-approved-Source42-control-code.py.DATA",
+    "sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9"
+  },
+  "actual_ledger_after": {
+    "captures": 532860,
+    "capturesComplete": false,
+    "global_cap": 54491891722,
+    "internal_cap": 54301299848,
+    "internal_used": 54294942856,
+    "used": 54485534730
+  },
+  "actual_source_read": {
+    "canonical_root": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/datasets",
+    "cooperative": true,
+    "lock_path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/datasets/workspace/control-plane/source-leases/source.lock",
+    "mode": "read",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 3.388803452253342e-05
+  },
+  "exact_local_freeze": {
+    "bytes": 5779,
+    "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/actual-isolated-exact-two-local-freeze.json",
+    "sha256": "6590d0cb8b762e0ada43e77288571fff74e720bc6ed13058e6a9a9cd906ae9ed"
+  },
+  "full_charge": {
+    "bytes": 1330,
+    "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/Source-only-isolated-content-epoch-retained-cap.json",
+    "sha256": "5a76d2b3264fe6dc851224272064f2c0fc7edd62e78d115f5d681e0fc8967e87"
+  },
+  "module_closed": true,
+  "ordinary_phase_qualified": false,
+  "outer_epoch_record_count": 1610,
+  "outer_epoch_reference": {
+    "bytes": 858586,
+    "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/actual-isolated-outer1610-epoch.json",
+    "sha256": "e2656607d2fce16949660867ee5446283f3ea5dd78e151dd3cb3996d2411fd8a"
+  },
+  "physical_IO_accounting_complete": false,
+  "previous_outer_epoch": {
+    "bytes": 896136,
+    "path": "/tmp/Root-P1-Guide570-existing-Native3-expected-policy-v594-ichhgq4e/current-published-Guide570-Native3-outer-epoch.json",
+    "sha256": "5a7deff9bfd6c7ed24455e7e7d4d550c11e36d120e2b63bba737d7c790523b9b"
+  },
+  "previous_published_guide": {
+    "bytes": 14878,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-guide571-four-doc-three-FF-publication-small-v595.json",
+    "sha256": "e801a745c72ca6597179134be541d3751bcb4bf1f529ad5360e0e981ab36bc9b"
+  },
+  "python_epoch_record_count": 1597,
+  "python_epoch_reference": {
+    "bytes": 851919,
+    "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/actual-isolated-Python1597-epoch.json",
+    "sha256": "ac30b009d40fa7bc3eb5170901cb4e1a4c357ed2f5cc70bf527e91aca485e308"
+  },
+  "schema": "isolated-frozen-ordinary-current-epoch-Source42/v1",
+  "shared_canonical_mutation": false,
+  "terminal_returncode": 0,
+  "unchanged_A_rows_retained": true
+}

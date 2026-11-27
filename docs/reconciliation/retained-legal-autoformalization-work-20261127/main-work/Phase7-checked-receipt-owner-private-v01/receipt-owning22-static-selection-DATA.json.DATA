@@ -1,0 +1,154 @@
+{
+  "Source_binding": null,
+  "Source_epoch": null,
+  "actual_collection": null,
+  "actual_collection_order": null,
+  "actual_native_or_crypto_execution": false,
+  "actual_results": null,
+  "case_count": 22,
+  "clock": null,
+  "current_HEAD": null,
+  "current_tree": null,
+  "factory_post_bytes": 63254,
+  "factory_post_sha256": "c350097f9425ce916997b1e116297e9497716ae13747719e722b36fe92f38921",
+  "function_count": 20,
+  "functions": [
+    {
+      "name": "test_interface_and_schema_versions_are_pinned",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_public_inputs_bind_all_required_dimensions",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_each_public_input_dimension_change_produces_distinct_digest",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_trusted_receipt_rejects_non_conclusive_and_attestation_authority",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_private_witness_never_serializes",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_cryptographic_execution_succeeds_and_projects_attestation_authority",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_attestation_does_not_raise_underlying_semantic_authority",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_simulated_backend_fails_production_gates",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_circuit_mismatch_fails_closed",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_stale_attestation_fails",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_revoked_material_fails",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_rejected_and_error_verdicts_are_non_authoritative",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_malformed_prover_output_fails_closed",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_statement_and_record_round_trip",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_request_repr_redacts_witness",
+      "old": true,
+      "static_cases": 1
+    },
+    {
+      "name": "test_receipt_factory_preserves_typed_execution_bounds_without_metadata_copy",
+      "old": false,
+      "static_cases": 1
+    },
+    {
+      "name": "test_receipt_factory_preserves_explicit_metadata_bounds_exactly",
+      "old": false,
+      "static_cases": 3
+    },
+    {
+      "name": "test_declared_conflicting_bounds_are_not_rewritten_into_valid_evidence",
+      "old": false,
+      "static_cases": 1
+    },
+    {
+      "name": "test_adding_execution_bounds_does_not_upgrade_missing_translation_authority",
+      "old": false,
+      "static_cases": 1
+    },
+    {
+      "name": "test_old_receipt_without_bounds_keeps_its_serialized_content_identity",
+      "old": false,
+      "static_cases": 1
+    }
+  ],
+  "independent_literal_nodeids": [
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_interface_and_schema_versions_are_pinned",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_public_inputs_bind_all_required_dimensions",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_each_public_input_dimension_change_produces_distinct_digest",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_trusted_receipt_rejects_non_conclusive_and_attestation_authority",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_private_witness_never_serializes",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_cryptographic_execution_succeeds_and_projects_attestation_authority",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_attestation_does_not_raise_underlying_semantic_authority",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_simulated_backend_fails_production_gates",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_circuit_mismatch_fails_closed",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_stale_attestation_fails",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_revoked_material_fails",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_rejected_and_error_verdicts_are_non_authoritative",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_malformed_prover_output_fails_closed",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_statement_and_record_round_trip",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_request_repr_redacts_witness",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_typed_execution_bounds_without_metadata_copy",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_explicit_metadata_bounds_exactly[empty]",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_explicit_metadata_bounds_exactly[null]",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_receipt_factory_preserves_explicit_metadata_bounds_exactly[partial]",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_declared_conflicting_bounds_are_not_rewritten_into_valid_evidence",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_adding_execution_bounds_does_not_upgrade_missing_translation_authority",
+    "tests/integration/logic/test_proof_receipt_attestation.py::test_old_receipt_without_bounds_keeps_its_serialized_content_identity"
+  ],
+  "instructions": "Use existing ordinary package qualification owner. Bind current import/fixture/conftest closure and Source/runtime constraints there. Verify actual collected membership equals these 22 literal node IDs and execute actual collected order. This DATA grants no execution and creates no runner.",
+  "new_cases": 7,
+  "new_functions": 5,
+  "normal_entry": "tests/integration/logic/test_proof_receipt_attestation.py",
+  "ordinary_operator": null,
+  "original_prefix_and_function_AST_preserved": true,
+  "owning_test_post_bytes": 27851,
+  "owning_test_post_sha256": "e6cc137379fb50e0aec6e6ae9a1b315344190652ff51fd0ca250f57acf3ab861",
+  "qualification_complete": false,
+  "repo_relative_test": "tests/integration/logic/test_proof_receipt_attestation.py",
+  "retained_old_functions": 15,
+  "runtime_authority": null,
+  "status": "INERT_STATIC_SELECTION_ONLY"
+}

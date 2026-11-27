@@ -1,0 +1,505 @@
+{
+  "GREEN_runner": {
+    "bytes": 17059,
+    "full9": [
+      66306,
+      72511767,
+      33024,
+      1,
+      1000,
+      1000,
+      17059,
+      1795740343790421443,
+      1795740343790421443
+    ],
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-rebased-receipt-owning22-GREEN-runner.py.DATA",
+    "sha256": "1d68e99ba226f6ec4931269c3e2e180f448b720a9c00b6efcfb61354614ff311"
+  },
+  "Git_mutations": 0,
+  "Native": 0,
+  "Root_Source_ledger_changed": false,
+  "SDK": 0,
+  "SQL": 0,
+  "Source_epoch": null,
+  "actual_current_canonical_HEAD": null,
+  "actual_engineering": {
+    "SAME_owning22_GREEN": {
+      "compile_bytes": 7966957,
+      "compiled_paths": 122,
+      "errors": 0,
+      "executed": 22,
+      "failures": 0,
+      "new_cases": 7,
+      "old_cases": 15,
+      "passed": 22,
+      "worker_rc": 0
+    },
+    "actual_cryptographic_proof_qualification": false,
+    "cohorts_not_summed_as_one_qualification": true,
+    "normal_pytest_qualification": false,
+    "owning22_RED": {
+      "errors": 0,
+      "executed": 22,
+      "failures": 1,
+      "passed": 21,
+      "worker_rc": 2
+    },
+    "prototype_RED_then_SAME_GREEN": true,
+    "separate_feedback31_compatibility": {
+      "compiled_paths": 121,
+      "passed": 31,
+      "worker_rc": 0
+    }
+  },
+  "all_prior_costs_failures_retained": true,
+  "canonical_Source_reads": 0,
+  "canonical_writes": 0,
+  "clock_binding": null,
+  "controls_RED": {
+    "all_old_prefix_and_AST_exact": true,
+    "append": {
+      "bytes": 4946,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-bounds-owningtests.append.py.DATA",
+      "sha256": "db4c6d62a5c0c68d892e04fb635bee47b61ee4810843e02abc9bc46c24dee751"
+    },
+    "cases": [
+      "test_interface_and_schema_versions_are_pinned",
+      "test_public_inputs_bind_all_required_dimensions",
+      "test_each_public_input_dimension_change_produces_distinct_digest",
+      "test_trusted_receipt_rejects_non_conclusive_and_attestation_authority",
+      "test_private_witness_never_serializes",
+      "test_cryptographic_execution_succeeds_and_projects_attestation_authority",
+      "test_attestation_does_not_raise_underlying_semantic_authority",
+      "test_simulated_backend_fails_production_gates",
+      "test_circuit_mismatch_fails_closed",
+      "test_stale_attestation_fails",
+      "test_revoked_material_fails",
+      "test_rejected_and_error_verdicts_are_non_authoritative",
+      "test_malformed_prover_output_fails_closed",
+      "test_statement_and_record_round_trip",
+      "test_request_repr_redacts_witness",
+      "test_receipt_factory_preserves_typed_execution_bounds_without_metadata_copy",
+      "test_receipt_factory_preserves_explicit_metadata_bounds_exactly[empty]",
+      "test_receipt_factory_preserves_explicit_metadata_bounds_exactly[null]",
+      "test_receipt_factory_preserves_explicit_metadata_bounds_exactly[partial]",
+      "test_declared_conflicting_bounds_are_not_rewritten_into_valid_evidence",
+      "test_adding_execution_bounds_does_not_upgrade_missing_translation_authority",
+      "test_old_receipt_without_bounds_keeps_its_serialized_content_identity"
+    ],
+    "control": {
+      "bytes": 6881,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-maintained-receipt-owning22-controls.py.DATA",
+      "sha256": "57647a9f1a68d417021b46f417f73d3643c8a818a2a7fc503d583b091a6e3693"
+    },
+    "new_cases": 7,
+    "old_cases": 15,
+    "overlay": {
+      "bytes": 350,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/same-consumer-v02-overlay.json",
+      "sha256": "843d9cc96eb21b3565589bbb64e7a42de29256e5cd11a07c1d65ba442b1a135a"
+    },
+    "projection": {
+      "bytes": 64046,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-owning22-projection.json",
+      "sha256": "92c893d8e9381124538ee1472733b044b91d17b70e496b62e1715d282c7da40c"
+    },
+    "runner": {
+      "bytes": 16734,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-rebased-receipt-owning22-RED-runner.py.DATA",
+      "sha256": "640c5ca5a4008b592495a2fe36126242e9bbabe0589c09c9dbd7a3dba84cdea2"
+    },
+    "test": {
+      "bytes": 27851,
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_proof_receipt_attestation.bounds.after.py.DATA",
+      "sha256": "e6cc137379fb50e0aec6e6ae9a1b315344190652ff51fd0ca250f57acf3ab861"
+    }
+  },
+  "evidence": {
+    "actual-feedback31-with-bounds-factory.stdout.json": {
+      "bytes": 39281,
+      "full9": [
+        66306,
+        72511771,
+        33024,
+        1,
+        1000,
+        1000,
+        39281,
+        1795740410210919451,
+        1795740410210919451
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-feedback31-with-bounds-factory.stdout.json",
+      "sha256": "9e8a13e5ab8e774053b22a892ef1cea1e5d108744c30ee202dc374c7c0c2db5f"
+    },
+    "actual-receipt-bounds-probe-RED.stdout.json": {
+      "bytes": 33500,
+      "full9": [
+        66306,
+        72511710,
+        33024,
+        1,
+        1000,
+        1000,
+        33500,
+        1795739788446687166,
+        1795739788446687166
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-receipt-bounds-probe-RED.stdout.json",
+      "sha256": "92bf857426c913cdbabe6354734847a894fff168caba71cac11e238648c07513"
+    },
+    "actual-receipt-bounds-probe-SAME-GREEN.stdout.json": {
+      "bytes": 34202,
+      "full9": [
+        66306,
+        72511730,
+        33024,
+        1,
+        1000,
+        1000,
+        34202,
+        1795739947738043036,
+        1795739947738043036
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-receipt-bounds-probe-SAME-GREEN.stdout.json",
+      "sha256": "6b4c9781357306f38f2630209c25ee2ae2bf19cd67cf1d65786b29aea8084b64"
+    },
+    "actual-receipt-owning22-RED.stdout.json": {
+      "bytes": 34865,
+      "full9": [
+        66306,
+        72511765,
+        33024,
+        1,
+        1000,
+        1000,
+        34865,
+        1795740321150228126,
+        1795740321150228126
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-receipt-owning22-RED.stdout.json",
+      "sha256": "1bf2ea92ca90fb80973a3d00b68e0b1165ae1a7b581eb2ced8ed2bfb92eb738e"
+    },
+    "actual-receipt-owning22-SAME-GREEN.stdout.json": {
+      "bytes": 37835,
+      "full9": [
+        66306,
+        72511768,
+        33024,
+        1,
+        1000,
+        1000,
+        37835,
+        1795740346043440682,
+        1795740346043440682
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-receipt-owning22-SAME-GREEN.stdout.json",
+      "sha256": "2a061cb644d553fa77ae75f6737d3ccd0fb5e042e1e3dbe4ac50f81f45c2d749"
+    }
+  },
+  "existing_core_conversion_API": {
+    "actual_core_conversion_runtime_tested_in_this_unit": false,
+    "default_translation_ceiling": "EvidenceAuthority.NONE",
+    "name": "ResultAuthorityNormalization.from_core",
+    "new_converter_authored": false,
+    "normalized_digest_is_receipt_source_result_digest": true,
+    "original_core_digest_location": "metadata.core_result.result_digest"
+  },
+  "full_goal_complete": false,
+  "guard": {
+    "address_space_bytes": 536870912,
+    "cpu_affinity": [
+      0
+    ],
+    "cpu_seconds": 25,
+    "kernel_probes": [
+      "socket",
+      "clone3",
+      "write-open"
+    ],
+    "landlock_abi": 7,
+    "stdout_stderr_each_max_bytes": 131072,
+    "syscall_denylist": [
+      "socket",
+      "socketpair",
+      "connect",
+      "accept",
+      "accept4",
+      "bind",
+      "listen",
+      "clone",
+      "clone3",
+      "execve",
+      "execveat",
+      "io_uring_setup",
+      "io_uring_enter",
+      "io_uring_register",
+      "pidfd_getfd",
+      "ptrace",
+      "process_vm_writev",
+      "setns",
+      "unshare",
+      "mount",
+      "umount2",
+      "truncate",
+      "ftruncate",
+      "fchmod",
+      "fchmodat",
+      "fchmodat2",
+      "fchown",
+      "fchownat",
+      "utimensat",
+      "setxattr",
+      "lsetxattr",
+      "fsetxattr",
+      "removexattr",
+      "lremovexattr",
+      "fremovexattr"
+    ]
+  },
+  "guide_fragment": {
+    "bytes": 1334,
+    "full9": [
+      66306,
+      72511776,
+      33024,
+      1,
+      1000,
+      1000,
+      1334,
+      1795740547118273774,
+      1795740547118273774
+    ],
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/maintained-guide-private-receipt-bounds-fragment.txt",
+    "sha256": "d3e0132abe1ae64d75443c07caac6a21c19d8019ff66314179dbbb9acb4a6cba"
+  },
+  "model_fits": 0,
+  "physical_IO_completeness_claimed": false,
+  "precise_gap": "TypedBackendResult.bounds is not copied by the old receipt factory when metadata has no bounds, so canonical receipt verification against the actual typed caps falsely rejects. Existing Core-result normalization has this shape.",
+  "product_preservation": {
+    "explicit_bounds_values_unchanged": true,
+    "new_absent_bounds_issuance_content_ID_changes_intentionally": true,
+    "no_existing_stored_receipt_rewritten": true,
+    "no_translation_ceiling_upgrade": true,
+    "normalized_source_result_digest_unchanged": true,
+    "old_decoder_and_serializer_AST_unchanged": true,
+    "old_wire_content_identity_preserved": true,
+    "only_changed_method": "TrustedProofReceipt.from_backend_result metadata argument",
+    "receipt_id_derivation_unchanged": true
+  },
+  "real_RPC": 0,
+  "review": {
+    "agent": "/root/frontier_caller_map",
+    "new_runtime_qualification": false,
+    "result": "Finite clear on exact590-byte conditional diff; preserve declared partial/empty/null values, no authority upgrade."
+  },
+  "roles": [
+    {
+      "Git_object_stored": false,
+      "base": {
+        "bytes": 63071,
+        "full9": [
+          66306,
+          72509860,
+          33024,
+          1,
+          1000,
+          1000,
+          63071,
+          1795737109659656524,
+          1795737109659656524
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/ipfs_datasets_py__logic__bridge__proof_receipt_attestation.py.DATA",
+        "sha256": "61296f095b933730ea24b070d2eaaf4202da9714c274a605bd5e18c6f4df49a7"
+      },
+      "computed_git_blob_sha1": "362660beaea798069c5fe9c7af73ef424d7704b9",
+      "forward": {
+        "bytes": 590,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-bounds.forward.diff",
+        "sha256": "1b7eddc3914b8db959a171b3b813f6eb1da4f7552c919d2a5ee3d129bbb45b27"
+      },
+      "inverse": {
+        "bytes": 590,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-bounds.inverse.diff",
+        "sha256": "b04d6a98f25dbd73a1fae3bbb8cf101947c9703fb66fe91d71f14bf9f6532a26"
+      },
+      "post": {
+        "bytes": 63254,
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/proof_receipt_attestation.bounds.after.py.DATA",
+        "sha256": "c350097f9425ce916997b1e116297e9497716ae13747719e722b36fe92f38921"
+      },
+      "repo_relative_path": "ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py"
+    },
+    {
+      "Git_object_stored": false,
+      "base": {
+        "bytes": 22905,
+        "full9": [
+          66306,
+          72511713,
+          33024,
+          1,
+          1000,
+          1000,
+          22905,
+          1795739807874852413,
+          1795739807874852413
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_proof_receipt_attestation.integration-published-6d1b.py.DATA",
+        "sha256": "452ebaa2e016cc7393a892c2f0bdd8cb2e331bde307c064b9ac5404b3313a096"
+      },
+      "computed_git_blob_sha1": "ff318f57469d6be81b76f7e2e12ec9db46b25306",
+      "forward": {
+        "bytes": 5325,
+        "full9": [
+          66306,
+          72511774,
+          33024,
+          1,
+          1000,
+          1000,
+          5325,
+          1795740547106273735,
+          1795740547106273735
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-bounds-owningtest.forward.diff",
+        "sha256": "b448f9072ed0922915fdee751580d1cf34481e8e0d3973400387d0d9951d0305"
+      },
+      "inverse": {
+        "bytes": 5325,
+        "full9": [
+          66306,
+          72511775,
+          33024,
+          1,
+          1000,
+          1000,
+          5325,
+          1795740547113273758,
+          1795740547113273758
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/receipt-bounds-owningtest.inverse.diff",
+        "sha256": "3601e273a8cef9f920baec6fe3207b057261c615a9e356a25dd65df7d659cd1e"
+      },
+      "post": {
+        "bytes": 27851,
+        "full9": [
+          66306,
+          72511757,
+          33024,
+          1,
+          1000,
+          1000,
+          27851,
+          1795740276051843091,
+          1795740276051843091
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_proof_receipt_attestation.bounds.after.py.DATA",
+        "sha256": "e6cc137379fb50e0aec6e6ae9a1b315344190652ff51fd0ca250f57acf3ab861"
+      },
+      "repo_relative_path": "tests/integration/logic/test_proof_receipt_attestation.py"
+    }
+  ],
+  "runtime_authority": null,
+  "schema": "private-existing-canonical-receipt-typed-bounds-two-file-proposal/v1",
+  "scope_limits": [
+    "All evidence is private exact-Git-source execution with declared overlays and authored fixtures, not current canonical Source epoch qualification.",
+    "Cryptographic integration tests use their existing controlled callbacks; no production cryptographic backend is qualified.",
+    "No Native execution, model fitting, legal review/admission, new provider/registry/controller or runtime-cap grant.",
+    "Explicitly conflicting metadata bounds are retained and independently verified against actual typed caps; they are not silently repaired into valid evidence.",
+    "Actual producer-to-current-target join remains Root owned and unimplemented in the held builder."
+  ],
+  "status": "PRIVATE_GREEN_NOT_CANONICALLY_ADOPTED",
+  "stderr": {
+    "actual-feedback31-with-bounds-factory.stderr.txt": {
+      "bytes": 0,
+      "full9": [
+        66306,
+        72511772,
+        33024,
+        1,
+        1000,
+        1000,
+        0,
+        1795740406955913460,
+        1795740406955913460
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-feedback31-with-bounds-factory.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-receipt-bounds-probe-RED.stderr.txt": {
+      "bytes": 1450,
+      "full9": [
+        66306,
+        72511711,
+        33024,
+        1,
+        1000,
+        1000,
+        1450,
+        1795739788446687166,
+        1795739788446687166
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-receipt-bounds-probe-RED.stderr.txt",
+      "sha256": "0f249360d97675d5c3db9016ec499f50280f22747c5a4c57e48a96b0089cb6b1"
+    },
+    "actual-receipt-bounds-probe-SAME-GREEN.stderr.txt": {
+      "bytes": 0,
+      "full9": [
+        66306,
+        72511731,
+        33024,
+        1,
+        1000,
+        1000,
+        0,
+        1795739945499023963,
+        1795739945499023963
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-receipt-bounds-probe-SAME-GREEN.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-receipt-owning22-RED.stderr.txt": {
+      "bytes": 1704,
+      "full9": [
+        66306,
+        72511766,
+        33024,
+        1,
+        1000,
+        1000,
+        1704,
+        1795740321150228126,
+        1795740321150228126
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-receipt-owning22-RED.stderr.txt",
+      "sha256": "724120cda66af4089e7450651d53e72ba2ad68b73432ee0635eda31cfd50cd9f"
+    },
+    "actual-receipt-owning22-SAME-GREEN.stderr.txt": {
+      "bytes": 0,
+      "full9": [
+        66306,
+        72511769,
+        33024,
+        1,
+        1000,
+        1000,
+        0,
+        1795740343795421486,
+        1795740343795421486
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-receipt-owning22-SAME-GREEN.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "test_preservation": {
+    "all_old_AST_assertions_ids_exact": true,
+    "new_expanded_cases": 7,
+    "new_methods": 5,
+    "new_param_ids": [
+      "empty",
+      "null",
+      "partial"
+    ],
+    "old22905_byte_prefix_exact": true
+  }
+}

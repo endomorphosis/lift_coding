@@ -1,0 +1,202 @@
+"""Existing Reader controls with modeled Git and Source custody only."""
+
+import ast
+from copy import deepcopy
+from hashlib import sha256
+import json
+from pathlib import Path
+import stat
+import tempfile
+import time
+from types import SimpleNamespace
+import unittest
+
+
+HERE = Path(__file__).resolve().parent
+FIXTURE = Path('/tmp/decoder-training-stage-a-a0-archive-handoff-private-v01-UMiyG7nf/test_reader_projection.py')
+FIXTURE_PIN = (21292, '8be8f78ffa264fb576d3a55cbb646389301b015e750fac332528c0ad4ef78ecf')
+READER = HERE / 'reader.py.DATA'
+GIT = HERE / 'verify_standalone_git.py'
+READER_PIN = (37935, '981dfd120c28cca772edf9382be5d7ea237869f8724075816a4625f265fe7e34')
+GIT_PIN = (32812, 'f1256c8de08535861aee3c189fb6d3a79786ba81303e307bc41c3a8e757d2e0a')
+
+
+def exact(path, pin):
+    raw = path.read_bytes()
+    if (len(raw), sha256(raw).hexdigest()) != pin:
+        raise ValueError(f'fixture or candidate bytes differ: {path.name}')
+    return raw
+
+
+def canonical_sha(value):
+    return sha256(json.dumps(value, sort_keys=True, separators=(',', ':'),
+                             ensure_ascii=False, allow_nan=False).encode()).hexdigest()
+
+
+def private_directory(*args, **kwargs):
+    kwargs['dir'] = HERE
+    return tempfile.TemporaryDirectory(*args, **kwargs)
+
+
+fixture_module = {'__file__': str(FIXTURE), '__name__': '_retained_stage_a_reader_fixture'}
+exec(compile(exact(FIXTURE, FIXTURE_PIN), str(FIXTURE), 'exec'), fixture_module)
+fixture_module['tempfile'] = SimpleNamespace(TemporaryDirectory=private_directory)
+
+
+class SelectedPairReader(fixture_module['ExistingStageAOwner']):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        tree = ast.parse(exact(READER, READER_PIN))
+        entry, = [node for node in tree.body if isinstance(node, ast.FunctionDef)
+                  and node.name == 'read_selected_stage_a_epoch']
+        cls.reader = compile(ast.Module(body=[entry], type_ignores=[]), str(READER), 'exec')
+        cls.candidate_git = {'Path': Path, 'stat': stat}
+        exec(compile(exact(GIT, GIT_PIN), str(GIT), 'exec'), cls.candidate_git)
+
+    def setUp(self):
+        super().setUp()
+        exec(self.reader, self.owner)
+        self.git_api = dict(self.candidate_git, verify_stage_a_git_with_retained_controls=self.paired_git)
+        self.admissions = []
+        admit = self.owner['admit']
+
+        def record_admission(amount):
+            self.admissions.append(amount)
+            return admit(amount)
+
+        self.owner['admit'] = record_admission
+        self.selected_projects = None
+        self.forwarded_projects = []
+
+    def project_expectations(self):
+        projects = {}
+        for ordinal, (role, root) in enumerate(zip(('D', 'A'), self.roots, strict=True)):
+            branch = f'refs/heads/fixture-stage-a-{role.lower()}'
+            metadata = {}
+            for offset, (name, leaf) in enumerate((('HEAD', 'HEAD'), ('ref', branch), ('config', 'config'))):
+                metadata[name] = {
+                    'path': str(Path(root) / '.git' / leaf),
+                    'full9': {
+                        'st_dev': '9000', 'st_ino': str(100 + 3 * ordinal + offset),
+                        'st_mode': '33188', 'st_nlink': '1', 'st_uid': '1000', 'st_gid': '1000',
+                        'st_size': '41', 'st_mtime_ns': '1000000001', 'st_ctime_ns': '1000000002',
+                    },
+                }
+            current = self.plan_raw['current_roots'][role]
+            projects[root] = {
+                'HEAD': current['HEAD'], 'tree': current['tree'], 'branch_ref': branch,
+                'refs_sha256': sha256(f'modeled ref stream {role}'.encode()).hexdigest(),
+                'Git_selector_metadata': metadata,
+            }
+        return projects
+
+    def v2_selection(self):
+        return dict(self.selection, schema='existing-stage-a-retained-controls-outer-only/v2',
+                    git_project_expectations=self.project_expectations(),
+                    paired_selector_observation_sha256=sha256(b'modeled independent selector observation').hexdigest())
+
+    def run_v2(self, selected, *, expected_selection_sha256=None):
+        expected = expected_selection_sha256 or canonical_sha(selected)
+        self.selected_projects = deepcopy(selected['git_project_expectations'])
+
+        def approve(offered, roots, plan_pin, deadline):
+            self.assertEqual((offered, roots, plan_pin), (expected, self.roots, selected['plan_sha256']))
+            self.assertGreater(deadline, time.monotonic())
+            self.events.append(('selection', 'checked'))
+            return True
+
+        return self.owner['read_selected_stage_a_epoch'](
+            self.plan_raw, reader_selection=selected, expected_selection_sha256=expected,
+            verify_reader_selection=approve, verify_phase7_owner=self.plan_args['verify_phase7_owner'],
+            epoch_api=self.epoch, git_api=self.git_api, io=None,
+            read_stage_zero=lambda *_: None, deadline=time.monotonic() + 5)
+
+    def paired_git(self, io, record, deadline, **options):
+        if self.selected_projects is None:
+            self.assertNotIn('project_expectations', options)
+        else:
+            self.assertIn('project_expectations', options)
+            offered = options['project_expectations']
+            self.assertEqual(offered, self.selected_projects)
+            self.forwarded_projects.append(deepcopy(offered))
+        return super().paired_git(io, record, deadline, **options)
+
+    def assert_no_custody_or_effects(self):
+        self.assertEqual(self.admissions, [])
+        self.assertEqual(self.report, {'inputs': [], 'Source_contexts': []})
+        self.assertEqual(self.body_reads, [])
+        self.assertEqual(self.forwarded_projects, [])
+        self.assertEqual(self.spent, {'bytes': 0, 'captures': 0})
+        self.assertEqual(list((self.output / 'raw').iterdir()), [])
+        self.assertEqual(list((self.output / 'matrices').iterdir()), [])
+        self.assertFalse((self.output / 'stage-a-outer-epoch.json').exists())
+
+    def test_selected_v2_projects_reach_existing_paired_git_and_closed_archive(self):
+        selected = self.v2_selection()
+        existing_plan = deepcopy(self.plan_raw)
+        result = self.run_v2(selected)
+        self.assertEqual(self.forwarded_projects, [selected['git_project_expectations']])
+        self.assertEqual(result['paired_selector_observation_sha256'], selected['paired_selector_observation_sha256'])
+        self.assertEqual(result['git_project_expectations_sha256'], canonical_sha(selected['git_project_expectations']))
+        self.assertEqual(result['selection_sha256'], canonical_sha(selected))
+        self.assertEqual(self.plan_raw, existing_plan)
+        self.assertTrue(result['Source_closed'] and result['archive_committed'])
+        self.assertEqual(result['observed_counts'], {'opening_full9': 1254, 'closing_full9': 1254,
+                         'guides': 4, 'reused_archives': 20, 'fresh_bodies': 12})
+        raw = (self.output / 'stage-a-outer-epoch.json').read_bytes()
+        lists = self.epoch['replay_v214_outer_only_epoch_archive'](raw, expected_commitments=result['logical_epochs'])
+        self.assertEqual([len(json.loads(lists[k])) for k in ('outer_epoch', 'python_epoch')], [1250, 1245])
+        self.assertLess(self.events.index(('Source', 'exit checked')),
+                        self.events.index(('write', 'stage-a-outer-epoch.json')))
+
+    def test_selected_changed_observation_hash_cannot_reuse_original_selection(self):
+        selected = self.v2_selection()
+        old_selection_pin = canonical_sha(selected)
+        selected['paired_selector_observation_sha256'] = 'b' * 64
+        self.assertNotEqual(canonical_sha(selected), old_selection_pin)
+        with self.assertRaisesRegex(ValueError, 'exact existing paired Reader selection'):
+            self.run_v2(selected, expected_selection_sha256=old_selection_pin)
+        self.assertEqual(self.events, [])
+        self.assert_no_custody_or_effects()
+
+    def test_selected_resealed_cross_root_selector_inode_alias_refuses(self):
+        selected = self.v2_selection()
+        d, a = (selected['git_project_expectations'][root] for root in self.roots)
+        original_pin = canonical_sha(selected)
+        d_head, a_head = (row['Git_selector_metadata']['HEAD'] for row in (d, a))
+        self.assertNotEqual(d_head['path'], a_head['path'])
+        a_head['full9'] = deepcopy(d_head['full9'])
+        self.assertNotEqual(canonical_sha(selected), original_pin)
+        with self.assertRaisesRegex(ValueError, 'file identity aliases another selected role'):
+            self.run_v2(selected)
+        self.assertEqual(self.events, [])
+        self.assert_no_custody_or_effects()
+
+    def test_selected_resealed_project_head_mismatch_refuses(self):
+        selected = self.v2_selection()
+        d = selected['git_project_expectations'][self.roots[0]]
+        wrong_head = 'c' * 40 if d['HEAD'] != 'c' * 40 else 'd' * 40
+        d['HEAD'] = wrong_head
+        self.assertNotEqual(d['HEAD'], self.plan_raw['current_roots']['D']['HEAD'])
+        with self.assertRaisesRegex(ValueError, 'Git HEAD or tree differs from the exact Reader plan'):
+            self.run_v2(selected)
+        self.assertEqual(self.events, [])
+        self.assert_no_custody_or_effects()
+
+    def test_legacy_v1_archive_uses_unchanged_interface(self):
+        super().test_original_composer_two_endpoints_both_commitments_and_one_physical_archive()
+        result = self.report['stage_a']
+        self.assertNotIn('git_project_expectations_sha256', result)
+        self.assertNotIn('paired_selector_observation_sha256', result)
+        self.assertEqual(self.forwarded_projects, [])
+
+
+def load_tests(loader, _standard, _pattern):
+    names = [name for name in loader.getTestCaseNames(SelectedPairReader)
+             if name.startswith(('test_selected_', 'test_legacy_'))]
+    return unittest.TestSuite(SelectedPairReader(name) for name in names)
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

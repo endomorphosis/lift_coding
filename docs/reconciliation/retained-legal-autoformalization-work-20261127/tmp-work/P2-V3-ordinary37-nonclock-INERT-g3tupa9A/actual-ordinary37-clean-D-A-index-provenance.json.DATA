@@ -1,0 +1,62 @@
+{
+  "A": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "A_index_metadata_verified_against_current_epoch": true,
+  "A_raw_Source_index_capture_claimed": false,
+  "D": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795742359901155808",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72514406",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795742359900155800",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "sha256": "22327c64578797db42c4553e862a6d3c452227865fe8991915256791ef943116"
+  },
+  "actual_paired_D_A_READ3": {
+    "bytes": 7523,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-isolated-Phase2-V3-definition-READ3-closed.json",
+    "sha256": "2fd517b04dd4863601e510455e95ca9b3a6ea0cf150943aa0c434fa2731a9e95"
+  },
+  "branch": {
+    "bytes": 41,
+    "full9": {
+      "st_ctime_ns": "1795742359903671139",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72514616",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795742359903671139",
+      "st_nlink": "1",
+      "st_size": "41",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/refs/heads/isolated/phase2-v3-definition-self-reference",
+    "sha256": "18e0db2745465998ff42c8a6bcbba072c7ea157dc3203abd32582286b9a2c264"
+  },
+  "frozen": {
+    "bytes": 6414,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase2-self-reference/actual-isolated-Phase2-V3-definition-exact-two-local-freeze.json",
+    "sha256": "4451d305186b343a67388d8a637e40abd21473e69c2c27ca41f6b8a7c6ffc1d6"
+  }
+}

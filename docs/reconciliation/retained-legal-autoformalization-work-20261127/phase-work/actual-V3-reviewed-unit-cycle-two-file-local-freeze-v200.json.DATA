@@ -1,0 +1,103 @@
+{
+  "branch": "refs/heads/work/phase6-capacity-composition-20261123",
+  "diff_check_passed": true,
+  "frozen_for_ordinary28": true,
+  "head": "5fae066b5871d3fdf0b63dfbc4339c199ca6ffc1",
+  "index": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795548336819840288",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795548336818452442",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "2758930d867d02b5cb3c3a5d7fcc1b262a255a5fe71fec8bbb5a737cbd42d66e"
+  },
+  "installation": {
+    "Source_and_module_closed": true,
+    "bytes": 3324,
+    "full9": {
+      "st_ctime_ns": "1795548234648833449",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "29803251",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795548234648833449",
+      "st_nlink": "1",
+      "st_size": "3324",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V3-reviewed-unit-cycles-Source2-actual-v200-l2t8uzvy/Root-V3-two-installed-Source-closed-small-v200.json",
+    "sha256": "d047f3d40a05b926ba0c20d2d1038a982e3344fdd3b40e8d82099e96fd800f25"
+  },
+  "ordinary28_executed": false,
+  "origin_main_tracking_ref": "017fb546935826d4e8f13d314395f6053cee4d3f",
+  "other_heads": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "hallucinate": "229da710403f3373f0e32d9427ed0225badcb5d8",
+    "root": "b6f6bac06249bbcfecbc10d13d0d105e89a3b349"
+  },
+  "other_heads_trees_tracking_index_and_gitlinks_verified_unchanged_by_initial_commit_call": true,
+  "parent": "017fb546935826d4e8f13d314395f6053cee4d3f",
+  "pushed": false,
+  "receipt_recovery": {
+    "failure": "After successful Git commit and postchecks, the first receipt open omitted O_CREAT and returned ENOENT.",
+    "initial_commit_call": "42213/7b8b82",
+    "recovery": "Verified the existing commit with read-only checks and created only this receipt. No repeat Git write."
+  },
+  "remote_contacted": false,
+  "schema": "V3-reviewed-unit-cycle-two-file-local-freeze/v200",
+  "selected_gitlinks_unchanged": true,
+  "selected_roles": [
+    {
+      "blob": "d700c6af5d4e1f91c9965763fc71347ea2236f3d",
+      "bytes": 30293,
+      "full9": {
+        "st_ctime_ns": "1795547923868938756",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042528",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795547922596377826",
+        "st_nlink": "1",
+        "st_size": "30293",
+        "st_uid": "1000"
+      },
+      "mode": "100644",
+      "parent_blob": "b136aff35d34632657d111f647657dc0c9022707",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py",
+      "relative_path": "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py",
+      "sha256": "65e8182c945669b0f891b03ab12b1d3bee27697d4443bd8df32861af7a931b05"
+    },
+    {
+      "blob": "6169507dd3bc8813c24501829f044235c509a207",
+      "bytes": 28883,
+      "full9": {
+        "st_ctime_ns": "1795547925074965303",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042529",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795547922600637008",
+        "st_nlink": "1",
+        "st_size": "28883",
+        "st_uid": "1000"
+      },
+      "mode": "100644",
+      "parent_blob": "de47a249167d03c819329d8d64d3b90bd6f4bd52",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py",
+      "relative_path": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py",
+      "sha256": "6982e1f557db2ff140804287d9be4ba1ba0b72242038d058b9fcbdce3a009a05"
+    }
+  ],
+  "source_sdk_test_model_native_CI_or_policy_invoked": false,
+  "tree": "60d337fdefb53e7f8d47bd08eafafbc963316d9f",
+  "two_selected_paths_only": true,
+  "worktrees_clean": true
+}

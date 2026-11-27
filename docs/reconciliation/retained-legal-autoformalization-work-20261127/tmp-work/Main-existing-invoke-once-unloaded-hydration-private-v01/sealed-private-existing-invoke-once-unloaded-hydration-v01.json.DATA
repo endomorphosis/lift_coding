@@ -1,0 +1,69 @@
+{
+  "active_steer_and_loaded_idle_start_preserved": true,
+  "actual_GREEN": {
+    "bytes": 5742,
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/actual-same-caller-unloaded-resume-GREEN.json",
+    "sha256": "d061938578707060b3110ce778fe18b7f10d8e7d44cac4d8e175bc69ded51d9d"
+  },
+  "actual_RED": {
+    "bytes": 45424,
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/actual-same-caller-unloaded-resume-RED-v02-corrected-fictional-cap.json",
+    "sha256": "827725309be7a746c22dc9b260e8da1c17f0480a2ff0bb0c299e219bfdc7d141"
+  },
+  "all_other_caller_AST_and_globals_unchanged": true,
+  "allowed_resume_params": [
+    "threadId",
+    "excludeTurns=true"
+  ],
+  "before": {
+    "bytes": 15730,
+    "sha256": "cf78dacd03150efba5cd7e2d6d4eeb7c61d58e850a47319d98298fac34c3dd81"
+  },
+  "changed_top_level_AST": [
+    "invoke_once"
+  ],
+  "closed_P1_unit_2074871_retained_separately": true,
+  "conservative_other_private_IO_reserve": 1048576,
+  "earlier_scoping_and_reads_retained": true,
+  "elapsed_seconds": 1.2680129557847977,
+  "explicit_reads_and_prior_conservative_debits": 4017668,
+  "failed_after": 0,
+  "failed_before": 24,
+  "forward": {
+    "bytes": 10623,
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/invoke-once-hydration.forward.patch",
+    "sha256": "103beeb1674b1c9aa8afb6ba4b53e1b439e69c4a0f3a2be7f183d9f84a1bd802"
+  },
+  "inverse": {
+    "bytes": 10623,
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/invoke-once-hydration.inverse.patch",
+    "sha256": "87d23a37715447962475607c72e1871da705e41f851b57f78dac3cd09076d17d"
+  },
+  "metadata_resume_and_message_enqueue_are_distinct": true,
+  "new_provider_controller_thread_or_authority": false,
+  "no_replay": true,
+  "owning_regressions": {
+    "bytes": 20569,
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/test_existing_invoke_once_hydration.py",
+    "sha256": "f32c6dcd0f192dbdbe291f719749a233a9e1f682220e162a66065ae4543f2127"
+  },
+  "parent_methods": 24,
+  "phase_charged_upper_bound_before_final_readback": 5066244,
+  "phase_limit": 8388608,
+  "post": {
+    "bytes": 19593,
+    "path": "/tmp/Main-existing-invoke-once-unloaded-hydration-private-v01/invoke-existing-durable-handoff.unloaded-hydration.after.py.DATA",
+    "sha256": "00d26e75f8e84fe03364101fbbe1a88c32e4d4b02bd24dd92fd263adbc1da9ca"
+  },
+  "pre_mutation_durable_UNKNOWN_and_reauth_preserved": true,
+  "prior_failed_cohort_conservative_debit": 3145728,
+  "production_CLI_source_unchanged": true,
+  "profile": {
+    "address_space_bytes": 536870912,
+    "cpu_count": 1,
+    "cpu_seconds": 60,
+    "wall_seconds": 60
+  },
+  "real_RPC_Source_Git_SQL_SDK_model_Native": 0,
+  "status": "PRIVATE implemented existing-caller workaround; fictional transport only"
+}

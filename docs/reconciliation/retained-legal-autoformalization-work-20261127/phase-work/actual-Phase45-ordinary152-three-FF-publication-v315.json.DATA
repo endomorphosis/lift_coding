@@ -1,0 +1,306 @@
+{
+  "D_frozen_index_preserved_through_push": true,
+  "Source_resource_and_parent_closed": true,
+  "elapsed_seconds": 13.40365515369922,
+  "exact_committed_files": {
+    "ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py": {
+      "bytes": 179170,
+      "previous_blob": "303422a4cc76266c4659085685854c26efd64af1",
+      "sha256": "c172218316d2add710f45f3c0cd99f78fbc4a4f70616cfb875eb07930bea1b28",
+      "stage0_and_committed_blob": "29fd3b0b8a197a2674231ffc64cd1f3790307cd6"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py": {
+      "bytes": 61991,
+      "previous_blob": "ad21acae2a3420e8c560fd26006504fcfb6849df",
+      "sha256": "e652c79842323fec40f3e5d8f6a23620c9b4ce4a2d1043c597176a13de3f4acd",
+      "stage0_and_committed_blob": "07b499a1263becd7bd5c6d2755dc81c24cbe6f56"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py": {
+      "bytes": 59243,
+      "previous_blob": "6fff65035cf9183b2e2c234621f4e6189551fae5",
+      "sha256": "5bb6c1c1d627d65d7e0d98a00d5f646c7519f0c3a73a21492db1936445ecdd4f",
+      "stage0_and_committed_blob": "bf07881f4139104a12eeae766fa7890cfd49097f"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_structured_retrieval.py": {
+      "bytes": 83929,
+      "previous_blob": "1cbc3ac04f83a4415dcf53073a76639a7f9fcba3",
+      "sha256": "8dab91f632a4293395ce45b0b7ca276ea87ec0fb44f44db188525fa038898c91",
+      "stage0_and_committed_blob": "305520ff096af44b584558cc348238b077ec65cd"
+    },
+    "tests/unit/logic/test_autoformal_campaign_training_inputs.py": {
+      "bytes": 213705,
+      "previous_blob": "877afc441a7bd77e7b39b0727bb6a6ceedbd26ef",
+      "sha256": "b53eab310892692a7d21b9e8ea02c3e409187836210f89ab6804ab510ab50826",
+      "stage0_and_committed_blob": "cde693ab8a31447436e1546d098c97c86456e5d7"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py": {
+      "bytes": 285095,
+      "previous_blob": "8df5f4025dbcd36c5f36840a393c7e2eefa319ef",
+      "sha256": "b97a56402ac386f4eb58df6d625fac15b5a1b4c9e93adaeb6335ea306b42d5ae",
+      "stage0_and_committed_blob": "688da55d9247d187814e39d57c231933d4f7d143"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py": {
+      "bytes": 15510,
+      "previous_blob": "6f7d2c26d617b3224f665f9319979398b23ada05",
+      "sha256": "ff6d5189c29527b9c280c3b8372fb9d3f37ad30d3f097691f5f1957b358708be",
+      "stage0_and_committed_blob": "c5fa8cab0cc701074acc5da8a5812af22792f5a7"
+    },
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py": {
+      "bytes": 68690,
+      "previous_blob": "08f31273edcae660520d10f13eab680621df978e",
+      "sha256": "d9fbbd2e465bf170675617af1fd4376efc9de545ded4ad843a76aae938055445",
+      "stage0_and_committed_blob": "821aea7ed0e62bd3fbadec4abc080fea46832872"
+    }
+  },
+  "file_case_counts": {
+    "tests/unit/logic/test_autoformal_campaign_training_inputs.py": 10,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_evaluation_artifacts.py": 6,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_external_benchmark.py": 21,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_split_membership.py": 110,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_span_consumer_binding.py": 5
+  },
+  "function_count": 43,
+  "function_count_vector": [
+    4,
+    36,
+    4,
+    16,
+    8,
+    8,
+    4,
+    4,
+    1,
+    4,
+    4,
+    4,
+    10,
+    1,
+    1,
+    1,
+    1,
+    3,
+    1,
+    2,
+    1,
+    3,
+    2,
+    1,
+    1,
+    3,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    4,
+    1,
+    1,
+    1,
+    2,
+    2,
+    2,
+    1,
+    1
+  ],
+  "guide520_P8_other_code_and_unrelated_links_preserved": true,
+  "independent_raw_JUnit": {
+    "bytes": 31193,
+    "logical_name": "junit.xml",
+    "path": "/tmp/Root-Phase45-grouped-Unicode-ordinary152-v315-0zy06y6l/actual-output/Phase45-eight-plus-P8-152-run-result0-output1.bin",
+    "sha256": "de0af3c2623e57c2b932b82c1c090aaac660d49c1f96d69d6a76106c3f594c5b"
+  },
+  "indices_readback": {
+    "accelerate": {
+      "bytes": 4412225,
+      "full9": {
+        "st_ctime_ns": "1795500785295142737",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69342879",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795500785294142725",
+        "st_nlink": "1",
+        "st_size": "4412225",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate/.git/index",
+      "sha256": "cb683f5552a5c4aecc54a7fb2fb0ea75dfb369fe1c7fe52d13dbf8b3ced751de"
+    },
+    "datasets": {
+      "bytes": 6991149,
+      "full9": {
+        "st_ctime_ns": "1795602507101832903",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "68338235",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795602507100947950",
+        "st_nlink": "1",
+        "st_size": "6991149",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+      "sha256": "71561fa44b0b2aa6e26a76481ddd974e3e5c05224233400bc65cc7b115659f1e"
+    },
+    "hallucinate": {
+      "bytes": 138750,
+      "full9": {
+        "st_ctime_ns": "1795607060736206090",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69342837",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795607060735477253",
+        "st_nlink": "1",
+        "st_size": "138750",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/hallucinate/.git/index",
+      "sha256": "6f59fcf6d2cf0527241d6ad0257e089e9e5b1c2e684a857dbf89dfc945b49fd4"
+    },
+    "root": {
+      "bytes": 7262222,
+      "full9": {
+        "st_ctime_ns": "1795607063567850883",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69387327",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795607063566495578",
+        "st_nlink": "1",
+        "st_size": "7262222",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/root/.git/index",
+      "sha256": "12df5f08f1f08a75cdd3b1929e02c41fdffc270d3b97c25e81bbe4a07c35eab4"
+    }
+  },
+  "installed_Source8": {
+    "bytes": 8857,
+    "path": "/tmp/Root-Phase45-eight-exact-Source8-selected-v310-r_6aa92r/Root-Phase45-eight-installed-Source-closed-small-v310.json",
+    "sha256": "73e578f925c8269222752e1447e8cfe41cc317fb08c27ed3a20813952be22762"
+  },
+  "local_freeze": {
+    "bytes": 11335,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase45-exact8-local-freeze-v310.json",
+    "sha256": "3aab8e704cbd494fd0aa10c745abb1b638eb5c2ef294cdb54c54f7f44ee750a0"
+  },
+  "ordinary_unique_pass": 152,
+  "private131_and_old_public_P8_21_separate": true,
+  "pushes_in_actual_order": [
+    {
+      "after": "e28f7f0de5d6ca4beb71326f035011638158748f",
+      "before": "7d2b59d4baf797f494a5312ff196c6a0b048616b",
+      "normal_fast_forward": true,
+      "porcelain": " \te28f7f0de5d6ca4beb71326f035011638158748f:refs/heads/main\t7d2b59d4ba..e28f7f0de5",
+      "push_returncode": 0,
+      "repository": "datasets"
+    },
+    {
+      "after": "30f77622060155c6f4070fcdc4e957cedfaae3ef",
+      "before": "3f4e5ca38f95056eb47376da725c759d531894f4",
+      "normal_fast_forward": true,
+      "porcelain": " \t30f77622060155c6f4070fcdc4e957cedfaae3ef:refs/heads/main\t3f4e5ca..30f7762",
+      "push_returncode": 0,
+      "repository": "hallucinate"
+    },
+    {
+      "after": "f5ccc9972ff8e84ba274edca4e0e4945dba8ba05",
+      "before": "ec06becea01a4d973c7a80d9421ceff55dee9c4c",
+      "normal_fast_forward": true,
+      "porcelain": " \tf5ccc9972ff8e84ba274edca4e0e4945dba8ba05:refs/heads/main\tec06becea0..f5ccc9972f",
+      "push_returncode": 0,
+      "repository": "root"
+    }
+  ],
+  "qualification": {
+    "bytes": 6423,
+    "path": "/tmp/Root-Phase45-grouped-Unicode-ordinary152-v315-0zy06y6l/Root-Phase45-eight-plus-P8-ordinary152-qualified-small.json",
+    "sha256": "8610fb81762a9896f961eb878dae90428cfc3b98f770f6ea227c3d16b8851ecf"
+  },
+  "repositories": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {},
+      "origin": "https://github.com/endomorphosis/ipfs_accelerate_py",
+      "origin_main": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "HEAD": "e28f7f0de5d6ca4beb71326f035011638158748f",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {},
+      "origin": "https://github.com/endomorphosis/ipfs_datasets_py",
+      "origin_main": "e28f7f0de5d6ca4beb71326f035011638158748f",
+      "tree": "c92d7efbf480401be88e8e8a5eb3eb4370f03150"
+    },
+    "hallucinate": {
+      "HEAD": "30f77622060155c6f4070fcdc4e957cedfaae3ef",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {
+        "ipfs_datasets_py": "e28f7f0de5d6ca4beb71326f035011638158748f"
+      },
+      "origin": "https://github.com/endomorphosis/hallucinate_app",
+      "origin_main": "30f77622060155c6f4070fcdc4e957cedfaae3ef",
+      "tree": "5f76c56ad88855a67189d1fdaeec4a24c4785223"
+    },
+    "root": {
+      "HEAD": "f5ccc9972ff8e84ba274edca4e0e4945dba8ba05",
+      "clean_worktree_and_index": true,
+      "gitlinks_updated": {
+        "external/ipfs_datasets": "e28f7f0de5d6ca4beb71326f035011638158748f",
+        "hallucinate_app": "30f77622060155c6f4070fcdc4e957cedfaae3ef"
+      },
+      "origin": "https://github.com/endomorphosis/lift_coding",
+      "origin_main": "f5ccc9972ff8e84ba274edca4e0e4945dba8ba05",
+      "tree": "0c0a410bce4d6efa2e64e234856416854dfbb4b3"
+    }
+  },
+  "retained_failed_normal_attempts": [
+    {
+      "attempt": "v311",
+      "full_Source128_retained": true,
+      "report": {
+        "bytes": 94751,
+        "path": "/tmp/Root-Phase45-grouped-Unicode-ordinary152-v311-llt6wzcq/actual-output/complete-frozen-local-D-P8-external-benchmark21-existing-owner-report.json",
+        "sha256": "d6e1f9139d2f84e0e56c1086e09a84ffd3c0aae49c11953f7a08fef995581728"
+      }
+    },
+    {
+      "attempt": "v312",
+      "full_Source128_retained": true,
+      "report": {
+        "bytes": 147969,
+        "path": "/tmp/Root-Phase45-grouped-Unicode-ordinary152-v312-qd76zb_7/actual-output/complete-frozen-local-D-Phase45-eight-plus-P8-152-existing-owner-report.json",
+        "sha256": "b27a262c6000e4a27e221c7464ff97a21d669da755878d6890a35773988ff968"
+      }
+    },
+    {
+      "attempt": "v313",
+      "full_Source128_retained": true,
+      "report": {
+        "bytes": 150316,
+        "path": "/tmp/Root-Phase45-grouped-Unicode-ordinary152-v313-gkzpu28l/actual-output/complete-frozen-local-D-Phase45-eight-plus-P8-152-existing-owner-report.json",
+        "sha256": "6422e9ade137038bd1ea0b49d8540d49f1b9f0caffb8c811e4fad5be89e0030b"
+      }
+    },
+    {
+      "Source_and_SDK_never_started": true,
+      "attempt": "v314",
+      "exit_code": 1,
+      "full_Source128_retained": true,
+      "operator": {
+        "bytes": 118840,
+        "path": "/tmp/Root-Phase45-grouped-Unicode-ordinary152-v314-gzruwex1/Root-selected-operator.py",
+        "sha256": "7f3e41234210b1a3e62951743b2e2b4e6cc58549c1377630b82e9645ec3fad1b"
+      }
+    }
+  ],
+  "schema": "Phase45-ordinary152-exact-eight-three-FF-publication/v315",
+  "scope": "Software and signed fictional fixtures only. No Source, test, CI, Native, SQL, model, training, legal review or replay.",
+  "whole_eight_phase_goal_complete": false
+}

@@ -1,0 +1,114 @@
+{
+  "accelerate_unchanged": true,
+  "all_other_gitlinks_preserved": true,
+  "force_or_tag_push": false,
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "bb982846f24cc116d5d86ac93f1533f94cae4389",
+        "to": "0f13cbc9b6c76926015e0b00d976e81f67397e0c"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "bb982846f24cc116d5d86ac93f1533f94cae4389",
+        "to": "0f13cbc9b6c76926015e0b00d976e81f67397e0c"
+      },
+      "hallucinate_app": {
+        "from": "274d49e4ed2abba1e3c414cd5d0eadff4b7f4f56",
+        "to": "e91c6b2a54f7d5f6bb00c78c235d4b4f8ee4ebdc"
+      }
+    }
+  },
+  "local_after": {
+    "accelerate": {
+      "clean_index_worktree": true,
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "clean_index_worktree": true,
+      "head": "0f13cbc9b6c76926015e0b00d976e81f67397e0c",
+      "tree": "fd52d1c69beead40d498ffe7936abd5554e1cbe4"
+    },
+    "hallucinate": {
+      "clean_index_worktree": true,
+      "head": "e91c6b2a54f7d5f6bb00c78c235d4b4f8ee4ebdc",
+      "tree": "1e4011de7427f85563aac8e130e046eb3c7bd493"
+    },
+    "root": {
+      "clean_index_worktree": true,
+      "head": "fcae986b1e8c89cf339462d9c3cf9af5e5b241cf",
+      "tree": "1440de6801ba41ab0ca5cd947f3ae41caa64c4d7"
+    }
+  },
+  "new_Source_test_model_CI_invocation": false,
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "0f13cbc9b6c76926015e0b00d976e81f67397e0c",
+    "hallucinate": "e91c6b2a54f7d5f6bb00c78c235d4b4f8ee4ebdc",
+    "root": "fcae986b1e8c89cf339462d9c3cf9af5e5b241cf"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "bb982846f24cc116d5d86ac93f1533f94cae4389",
+    "hallucinate": "274d49e4ed2abba1e3c414cd5d0eadff4b7f4f56",
+    "root": "996d25a8d9b59b1ad747588e823e6a8ef56b4d24"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "policy_or_cap_changes": false,
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "pushes": {
+    "datasets": {
+      "from": "bb982846f24cc116d5d86ac93f1533f94cae4389",
+      "porcelain": " \t0f13cbc9b6c76926015e0b00d976e81f67397e0c:refs/heads/main\tbb982846f2..0f13cbc9b6",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "0f13cbc9b6c76926015e0b00d976e81f67397e0c"
+    },
+    "hallucinate": {
+      "from": "274d49e4ed2abba1e3c414cd5d0eadff4b7f4f56",
+      "porcelain": " \te91c6b2a54f7d5f6bb00c78c235d4b4f8ee4ebdc:refs/heads/main\t274d49e..e91c6b2",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "e91c6b2a54f7d5f6bb00c78c235d4b4f8ee4ebdc"
+    },
+    "root": {
+      "from": "996d25a8d9b59b1ad747588e823e6a8ef56b4d24",
+      "porcelain": " \tfcae986b1e8c89cf339462d9c3cf9af5e5b241cf:refs/heads/main\t996d25a8d9..fcae986b1e",
+      "rc": 0,
+      "ref": "refs/heads/main",
+      "to": "fcae986b1e8c89cf339462d9c3cf9af5e5b241cf"
+    }
+  },
+  "qualification": {
+    "Source_and_resource_closed": true,
+    "bytes": 2253,
+    "errors": 0,
+    "failures": 0,
+    "path": "/tmp/Root-CLI27-complete-ancestor-ordinary-actual-v128/Root-actual-public-CLI27-qualified-Source-resource-closed-small-v129.json",
+    "public_cases_passed": 27,
+    "raw_XML": {
+      "bytes": 5492,
+      "path": "/tmp/Root-CLI27-complete-ancestor-ordinary-actual-v128/actual-output/CLI-pre-resource-entry27-run-result0-output1.bin",
+      "sha256": "0f230f50581eea21d39832e7280abc85064cc600aa20c481fc8b22a11bd434e0"
+    },
+    "reaped_pid": 281582,
+    "sha256": "1e2d1aec4c318aa9185408719cf775d888a53e9caaa5fe174789d2455e3d43b2",
+    "skips": 0
+  },
+  "schema": "CLI2-ordinary27-GitHub-publication/v129",
+  "selected_CLI2_blobs": {
+    "scripts/ops/legal_ir/run_owned_validation.py": "32330c7bcb04fe13223755290e094a6fcea3352b",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_validation_run_resources.py": "4f5182cc6cc0a1364fba5d9edbcd44f0417ba17f"
+  }
+}

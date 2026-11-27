@@ -1,0 +1,153 @@
+"""Seal verified portability timing against exact original paid pairs."""
+
+from copy import deepcopy
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+import re
+from runpy import run_path
+from stat import S_IMODE
+from tempfile import mkstemp
+
+HERE = Path(__file__).resolve().parent
+TMP = HERE.parent
+PREVIOUS = TMP / "decoder-training-experiment-manifest-v385.json"
+CURRENT = TMP / "decoder-training-experiment-manifest-v386.json"
+KEY = "private_paid_meter_portability_confirmation_bounds"
+
+
+def ref(path, expected=None):
+    raw = path.read_bytes()
+    digest = sha256(raw).hexdigest()
+    assert expected is None or expected == digest, path
+    return {"path": str(path), "bytes": len(raw), "sha256": digest}
+
+
+def save(path, value):
+    raw = (json.dumps(value, indent=2, sort_keys=True) + "\n").encode() if type(value) is dict else value.encode()
+    with path.open("xb") as output:
+        output.write(raw)
+    return ref(path)
+
+
+def logs(stem, count=None):
+    err = (HERE / (stem + ".stderr")).read_text()
+    assert (HERE / (stem + ".rc")).read_bytes() == b"0\n"
+    measured, = re.findall(r"^Ran ([0-9]+) tests? in ", err, re.MULTILINE)
+    measured = int(measured)
+    assert (count is None or count == measured) and err.endswith("\nOK\n")
+    assert sum(line.startswith("test_") and line.endswith(" ... ok") for line in err.splitlines()) == measured
+    return measured, {name: ref(HERE / f"{stem}.{name}") for name in ("rc", "stdout", "stderr")}
+
+
+prior = ref(PREVIOUS, "5df2ea08182486f9cc13c3f4c47d6fe8394979c9caa37d9f0e28f35568890dae")
+old = json.loads(PREVIOUS.read_bytes())
+focused = "portability-confirmation-first"
+count, cases = logs(focused)
+summary = json.loads((HERE / (focused + ".stdout")).read_bytes())
+assert count == 8 and summary == {"modeled_owner_evidence": True,
+    "cross_profile_bounds_seconds": [[-28, 1], [45, 1]],
+    "within_t5_size_bounds_seconds": [[-155, 2], [-109, 2]]}
+rows = [("meter_bounded_portability", count, cases)]
+for name, stem, n in (("retained_restricted", "retained-restricted-final", 5),
+                      ("retained_paid_projection_and_final", "retained-projectors-final", 10)):
+    validated, receipts = logs(stem, n)
+    rows.append((name, validated, receipts))
+counts = {name: count for name, count, _ in rows}
+retained_result = ref(HERE / "retained-restricted-final.stdout",
+    "71afaadf88883e5529f9876c122f70e26e50d37616fd3db9c9569f62e2bb921b")
+assert count > 1
+n = sum(counts.values())
+
+descriptor = {
+    "schema": "reviewed-paid-meter-portability-confirmation-private-controls/v1",
+    "study_owner": ref(HERE / "study.py", "0ed2b796854574708184a132303054d780048a78da5031f9c4d7e1c074da3a3d"),
+    "prior_study_owner": ref(TMP / "decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j" / "study.py",
+                            "0db05161d43713375a0a9b4db8d359b6b5d50f08f5a7481f2b804b97add778b1"),
+    "owner_diff": ref(HERE / "study.diff", "8b26a1f53f270bbe749cb5c217d13fd4475c7c902a7a25b5685105de8e5ee888"),
+    "case_counts": counts, "logs": {name: value for name, _, value in rows},
+    "modeled_case_summary": summary, "retained_restricted_fixture_byte_identical": retained_result,
+    "tools": {name: ref(HERE / name) for name in ("compose.py", "meter_portability.py.IN",
+        "test_portability_confirmation_bounds.py", "retained_stage_g.py", "seal.py")},
+    "maintained_adoption": None, "actual_paid_model_evidence": None,
+    "actual_legal_fidelity_or_convergence": None, "dispatch_authority": False,
+}
+projection = f'''def project_paid_meter_portability_confirmation(reference):
+    record = retained_json(reference)
+    require(record["schema"] == "reviewed-paid-meter-portability-confirmation-private-controls/v1"
+            and record["case_counts"] == {counts!r}
+            and record["maintained_adoption"] is record["actual_paid_model_evidence"]
+                 is record["actual_legal_fidelity_or_convergence"] is None
+            and record["dispatch_authority"] is False,
+            "verified detached Stage G paid meter evidence only")
+    fields = ("study_owner", "case_counts", "modeled_case_summary", "maintained_adoption",
+              "actual_paid_model_evidence", "actual_legal_fidelity_or_convergence", "dispatch_authority")
+    return {{field: record[field] for field in fields}}
+
+
+'''
+checker_path = HERE / "check_design.py"
+previous_checker = old["advisory_operator_readiness_checker"]
+p = Path(previous_checker["path"])
+assert ref(p, previous_checker["sha256"]) == previous_checker
+source = p.read_text()
+at_definition = "def report(manifest):\n"
+at_result = '        "stage_a_coordination": coordination,'
+assert source.count(at_definition) == source.count(at_result) == 1
+source = source.replace(at_definition, projection + at_definition, 1)
+source = source.replace(at_result, at_result + f'''
+        **({{"{KEY}": project_paid_meter_portability_confirmation(design["{KEY}"])}}
+           if "{KEY}" in design else {{}}),''', 1)
+preview = {"__name__": "private_readback", "__file__": str(checker_path)}
+exec(compile(source, str(checker_path), "exec"), preview)
+previous_report = preview["report"](old)
+assert previous_report["stage_a_coordination"]["conditional_shortfall_bytes_before_overhead"] == 20_934_571
+assert previous_report["stage_a_coordination"]["current_independent_read_join"] is None
+
+plan = TMP / "decoder-training-integration-plan.md"
+status = plan.stat()
+initial = plan.read_bytes()
+assert sha256(initial).hexdigest() == "b75a992b0f29e946c23a7c264044013dcde29ae121efe4e9614b44c8ae8e8a9e"
+descriptor_path = HERE / "descriptor.json"
+addition = f"""## 823. Reuse the original paid meters across decoder configurations
+
+The Stage G summary can now read the exact paid DEVELOPMENT report that its original owner approved. It recomputes the confirmation intervals from that report's recorded meters, verifies the retained interval report, and matches both paired rows by original contrast, seed, clock, horizon and attempt identity. It reports how the relational objective's restricted confirmation cost and attainment difference change across the two configurations. The new intervals preserve every registered seed and the original unknowns for failed attempts. Existing point readings, paid histories and FINAL eligibility stay intact. [Implementation and local evidence]({descriptor_path})
+
+{n} local tests passed, including the paid matrix fixture with a missing confirmation reading and the retained portability and FINAL controls. The fixture exercises T5, Qwen2 and a wider T5 configuration with the existing four teacher profiles. In the missing-clock fixture, the cross-profile interval narrows from −55 to 45 seconds to −28 to 45 seconds. The size contrast narrows from −77.5 to −27.5 seconds to −77.5 to −54.5 seconds. These are modeled timing differences. Actual model portability, independent legal fidelity and cost-to-threshold improvement remain open. Stage A still awaits an independent Guide571 index read and funding for the selector and Reader. [Readiness]({HERE / "verified-readiness.json"})
+
+"""
+plan_text = initial.decode()
+for was, now in (
+    (str(PREVIOUS), str(CURRENT)),
+    ("Version 3.531. Updated 2026-11-26 with authenticated bounds for missing confirmation clocks.",
+     "Version 3.532. Updated 2026-11-26 with paid confirmation bounds across decoder configurations."),
+    ("## Primary research references", addition + "## Primary research references"),
+):
+    assert plan_text.count(was) == 1, was
+    plan_text = plan_text.replace(was, now, 1)
+
+next_manifest = deepcopy(old)
+next_manifest["manifest_schema_version"] = "0.386.0"
+next_manifest["previous_manifest"] = prior
+assert KEY not in next_manifest["typed_execution_design"]
+next_manifest["typed_execution_design"][KEY] = save(descriptor_path, descriptor)
+next_manifest["advisory_operator_readiness_checker"] = save(checker_path, source)
+report = run_path(str(checker_path))["report"](next_manifest)
+assert {name: value for name, value in report.items() if name not in (KEY, "manifest_schema_version")} == {
+    name: value for name, value in previous_report.items() if name != "manifest_schema_version"}
+manifest = save(CURRENT, next_manifest)
+readiness = save(HERE / "verified-readiness.json", report)
+fd, name = mkstemp(dir=TMP, prefix=plan.name + ".")
+temp = Path(name)
+try:
+    with os.fdopen(fd, "w") as output:
+        output.write(plan_text)
+    temp.chmod(S_IMODE(status.st_mode))
+    assert plan.read_bytes() == initial and plan.stat().st_ino == status.st_ino
+    os.replace(temp, plan)
+finally:
+    if temp.exists():
+        temp.unlink()
+print(json.dumps({"descriptor": ref(descriptor_path), "manifest": manifest,
+                  "readiness": readiness, "plan": ref(plan)}, sort_keys=True))

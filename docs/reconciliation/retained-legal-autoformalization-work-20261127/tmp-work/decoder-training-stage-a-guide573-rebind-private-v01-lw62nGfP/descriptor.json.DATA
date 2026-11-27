@@ -1,0 +1,113 @@
+{
+  "Source_Git_and_owner_authority_modeled_in_reader_controls": true,
+  "dispatch_authority": false,
+  "drivers": {
+    "exercise_current_reader.py": {
+      "bytes": 1331,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/exercise_current_reader.py",
+      "sha256": "80876d7f8172a795da1afa00627d5a6354ed538c48c1abe34a06a4f569ba71aa"
+    },
+    "rebind.py": {
+      "bytes": 11960,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/rebind.py",
+      "sha256": "3db7035d5989a45eac95c6e58d6f76040517f91f819f549d3ed5f4efaead8f20"
+    },
+    "reservation.py": {
+      "bytes": 2592,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/reservation.py",
+      "sha256": "c6e5101cfe11d3f217c480450a34bd4f4f4690182b7c12d66e12192de861328c"
+    },
+    "seal.py": {
+      "bytes": 9992,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/seal.py",
+      "sha256": "c63954e2e388b772c8600360768ea075440a1c337d516b71c8b28018804b1739"
+    }
+  },
+  "first_replay_driver": {
+    "bytes": 11932,
+    "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/replay-first-directory-format/rebind.py",
+    "sha256": "d45a7f0778b1450e48ff033d90deb13c4bb6f5496506d1f72dd4a60b93600193"
+  },
+  "first_replay_serialization_diagnostic": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/replay-first-directory-format/replay.rc",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "stderr": {
+      "bytes": 1715,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/replay-first-directory-format/replay.stderr",
+      "sha256": "7fd5f1e12c386c4bff78bfd12adf710654983eb58b95d2a6f8d4c99ed9963038"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/replay-first-directory-format/replay.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "independent_current_index_read": null,
+  "index_replay": {
+    "bytes": 11743,
+    "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-replay.INERT.json",
+    "sha256": "65858f594f49c27bf1526d661adc47f98749da4db9e18680c58497b474402b46"
+  },
+  "live_reader_allocation": null,
+  "local_reader_controls": 7,
+  "model_or_training_execution": null,
+  "paired_selection": null,
+  "quote": {
+    "bytes": 1590,
+    "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-pair-conditional-quote.INERT.json",
+    "sha256": "0233b3a3379469767120fbda67e6eea6a89298a56839981c1e201d565be69f9f"
+  },
+  "reader_control_logs": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/reader-controls.rc",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 1078,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/reader-controls.stderr",
+      "sha256": "20024de3d002296c8351a601b8f2853b87df5645d54cff8ba938ad6f75ec4529"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/reader-controls.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "reader_preview": {
+    "bytes": 556332,
+    "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-all-fresh-preview.INERT.json",
+    "sha256": "72b538ab80ac6610b75f64d74c1d474ae8beb651b54a8b740495941b0c6fbb4a"
+  },
+  "replay_logs": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/replay.rc",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/replay.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "bytes": 655,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/replay.stdout",
+      "sha256": "c8c9a27ec0e82c120ff4884a9006e329f20b4f26dae4224a187142e528d2bd52"
+    }
+  },
+  "schema": "private-guide573-stage-a-exact-replay-and-price/v1",
+  "selector_basis": {
+    "bytes": 950,
+    "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-selector-expectations.INERT.json",
+    "sha256": "b156d8ee754c0ab23945874af435c0aaa06237ef2f54e8feb37722eae58d2a92"
+  },
+  "writer_matched_index": {
+    "bytes": 7070597,
+    "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-writer-matched-index.DATA",
+    "sha256": "c3be915a700050787e42001811b05aab2edebf0737fd3c207f23674b862cbee0"
+  }
+}

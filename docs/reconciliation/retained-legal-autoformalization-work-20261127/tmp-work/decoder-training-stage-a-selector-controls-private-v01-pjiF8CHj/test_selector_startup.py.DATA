@@ -1,0 +1,370 @@
+"""Offline controls for the paired selector owner and its unchanged binder.
+
+Source lease and Git process effects are modeled. Private writes, no-follow
+readback, accounting callbacks, observatory logic and binder are exercised.
+"""
+import argparse
+import ast
+import contextlib
+from copy import deepcopy
+import hashlib
+import json
+import os
+from pathlib import Path
+import stat
+import sys
+from tempfile import TemporaryDirectory
+import time
+import traceback
+import unittest
+
+HERE = Path(__file__).resolve().parent
+OWNER = Path('/tmp/decoder-training-stage-a-relocated-owner-private-v01-wR90ARPW')
+GIT = Path('/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/verify_standalone_git.py')
+SOURCE_BINDING = Path('/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/'
+                      'actual-Source42-doc-owner-current-control-binding-v01.json')
+BRANCH = 'refs/heads/fixture/paired-selector'
+TERMINAL = 'actual-existing-StageA-selector-child.json'
+TERMINAL_FIELDS = {'schema', 'observation', 'Source_contexts', 'Source_closed', 'owned_module_closed', 'errors'}
+ENTRY = 'run_selected_stage_a_selector_owner'
+
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def wire(value):
+    return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False,
+                      allow_nan=False).encode()
+
+
+def exact(path, count, sha256):
+    raw = path.read_bytes()
+    assert (len(raw), digest(raw)) == (count, sha256), path
+    return raw
+
+
+def fence(event, args):
+    if event.startswith('socket.') or event in ('subprocess.Popen', 'os.system', 'os.exec', 'os.posix_spawn'):
+        raise AssertionError(f'no external execution in modeled selector tests: {event}')
+    if event == 'open' and isinstance(args[0], (str, bytes)):
+        path = Path(os.fsdecode(args[0]))
+        if path.is_absolute() and (path.is_relative_to('/home') or
+                                   '.git' in path.parts and not path.is_relative_to(HERE)):
+            raise AssertionError(f'no canonical path reads in modeled selector tests: {path}')
+
+
+def extract(raw, path, names):
+    module = ast.parse(raw, str(path))
+    funcs = [n for n in module.body if isinstance(n, ast.FunctionDef) and n.name in names]
+    assert {n.name for n in funcs} == names
+    return compile(ast.Module(body=funcs, type_ignores=[]), str(path), 'exec')
+
+
+class FixtureSource:
+    DEFAULT_TIMEOUT_SECONDS = 6
+
+    def __init__(self, fixture):
+        self.fixture = fixture
+
+    def canonical_source_root(self, root):
+        self.fixture.assertIn(root, self.fixture.roots)
+        return root if root != self.fixture.bad_canonical_root else '/fixture-unapproved'
+
+    @contextlib.contextmanager
+    def source_lease(self, root, *, mode, timeout_seconds):
+        fixture = self.fixture
+        fixture.assertEqual(mode, 'read')
+        fixture.assertGreater(timeout_seconds, 0)
+        fixture.events.append(('lease_enter', root))
+        try:
+            yield
+        finally:
+            fixture.events.append(('lease_exit_attempt', root))
+            if root == fixture.bad_exit_root:
+                raise RuntimeError('modeled lease exit unconfirmed')
+            fixture.events.append(('lease_exit', root))
+
+
+class SelectorStartup(unittest.TestCase):
+    candidate = None
+    candidate_count = None
+    candidate_sha = None
+
+    def setUp(self):
+        temporary = TemporaryDirectory(prefix='fixture-', dir=HERE)
+        self.addCleanup(temporary.cleanup)
+        self.top = Path(temporary.name)
+        self.output = self.top / 'selected-output'
+        self.projects = {}
+        self.streams = {}
+        self.events = []
+        self.allowances = []
+        self.bad_exit_root = self.bad_canonical_root = self.bad_tree_root = None
+        self.cleanup_approved = True
+
+        for role, root_name, head, tree in (('D', 'datasets', '1' * 40, '2' * 40),
+                                            ('A', 'accelerate', 'a' * 40, 'b' * 40)):
+            root = self.top / root_name
+            git = root / '.git'
+            loose = git / BRANCH
+            loose.parent.mkdir(parents=True)
+            loose.write_text(head + '\n')
+            (git / 'HEAD').write_text('ref: ' + BRANCH + '\n')
+            (git / 'config').write_text('[core]\n\tbare = false\n')
+            self.projects[role] = {'root': str(root), 'HEAD': head, 'tree': tree,
+                                   'clean_worktree_and_index': True, 'status_sha256': digest(b'')}
+            self.streams[str(root)] = (BRANCH + ' ' + head + '\nrefs/heads/other ' + '3' * 40 + '\n').encode()
+
+        self.roots = tuple(self.projects[role]['root'] for role in ('D', 'A'))
+        self.ledger_before = {'used': 4096, 'internal_used': 4096, 'global_cap': 1 << 28,
+                              'internal_cap': 1 << 28}
+        self.spent = {'bytes': 0, 'captures': 0}
+        self.report = {'inputs': [], 'errors': [], 'Source_contexts': [], 'Source_closed': False,
+                       'owned_module_closed': False, 'read_complete': False, 'fresh_body_reads': [],
+                       'canonical_or_Git_or_managedledger_write': False,
+                       'SDK_or_test_or_Native_or_model_execution': False,
+                       'physical_IO_accounting_complete': False}
+        self.request = {'root': self.roots[0], 'additional_A': {'root': self.roots[1]},
+                        'actual_modes': dict.fromkeys(self.roots, 'read'), 'Source_envelope': 4 << 20}
+        binding = json.loads(exact(SOURCE_BINDING, 2297,
+                             '43c18000562ed03baf5df2d0cea8260682063078822ed7ff23208ba47c4ea674'))
+        code_ref = binding['code_reference']
+        local_code = self.top / 'approved-source-fixture'
+        local_code.write_bytes(exact(Path(code_ref['path']), 10375,
+                                     '42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9'))
+
+        before_path = OWNER / 'reader.py.DATA'
+        retained_owner = exact(before_path, 50631, 'f20087d2ad4740b3b8b2d30ee1f70365b0aafdb44c416dda5e52cf18ca644bd5')
+        candidate = exact(self.candidate, self.candidate_count, self.candidate_sha)
+        fields = ('st_dev', 'st_ino', 'st_mode', 'st_uid', 'st_gid', 'st_nlink', 'st_size', 'st_mtime_ns', 'st_ctime_ns')
+        self.ns = {'__name__': 'isolated_selector_startup', 'Path': Path, 'os': os, 'stat': stat,
+                   'time': time, 'json': json, 'traceback': traceback, 'contextlib': contextlib,
+                   'sys': sys, 'OUT': self.output, 'request': self.request,
+                   'f9': lambda value: {key: str(getattr(value, key)) for key in fields}, 'H': digest,
+                   'before': self.ledger_before, 'spent': self.spent, 'report': self.report, 'source': None}
+        owner_helpers = {'control_read', 'seal', 'parents', 'leaf', 'acquire_current_sources'}
+        exec(extract(retained_owner, before_path, owner_helpers), self.ns)
+        candidate_helpers = {'admit', ENTRY, '_stage_a_owner_archive', '_stage_a_owner_child_receipt',
+                             '_stage_a_owner_code', '_stage_a_owner_error', '_stage_a_owner_prepare',
+                             '_stage_a_owner_source42'}
+        exec(extract(candidate, self.candidate, candidate_helpers), self.ns)
+        self.instrument()
+
+        self.git_api = dict(Path=Path, os=os, stat=stat, time=time, hashlib=hashlib)
+        exec(compile(exact(GIT, 46075, '9fe6b3cfd9876c0e7d03019a9ace59b6daad54744bf2270bd5239cf2f217b527'),
+                     str(GIT), 'exec'), self.git_api)
+        self.git_api['_run_accounted_stage_a_git'] = self.mock_git
+        start = time.time_ns()
+        self.startup = {
+            'schema': 'selected-existing-StageA-selector-owner-startup/v1',
+            'expected_roots_sha256': digest(wire(self.projects)), 'ledger_before': deepcopy(self.ledger_before),
+            'Source_envelope': self.request['Source_envelope'], 'terminal_receipt_max_bytes': 64 << 10,
+            'git_output_maximum': 8192, 'output_root': str(self.output),
+            'not_before_utc_ns': start - 10**9, 'deadline_utc_ns': start + 10**10, 'maximum_run_seconds': 10,
+            'source_code': {'path': str(local_code), 'bytes': 10375, 'sha256': code_ref['sha256'],
+                            'full9': self.ns['f9'](local_code.lstat())},
+            'source_original_module_path': str(self.top / 'modeled-original-module.py'),
+        }
+        self.fixture_source = FixtureSource(self)
+
+    def instrument(self):
+        original_admit, original_read, original_seal = (self.ns[name] for name in ('admit', 'control_read', 'seal'))
+
+        def admit(count):
+            self.allowances.append(count)
+            return original_admit(count)
+
+        def read(ref, kind='private_control', **kwargs):
+            self.events.append(('read', Path(ref['path']).name, kind, ref['bytes']))
+            return original_read(ref, kind, **kwargs)
+
+        def seal(path, raw):
+            self.events.append(('seal', Path(path).name, len(raw)))
+            return original_seal(path, raw)
+
+        self.ns.update(admit=admit, control_read=read, seal=seal)
+
+    def mock_git(self, command, *, env, timeout, deadline, admit_git_output, record_git_output, git_output_maximum):
+        root_idx = command.index('-C')
+        root, args = command[root_idx+1], tuple(command[root_idx+2:])
+        self.assertIn(root, self.roots)
+        self.assertEqual([item[0] for item in self.events if item[0] in ('lease_enter', 'lease_exit')],
+                         ['lease_enter', 'lease_enter'])
+        self.assertGreater(timeout, 0)
+        self.assertGreater(deadline, time.monotonic())
+        self.assertEqual(env['GIT_OPTIONAL_LOCKS'], '0')
+        self.events.append(('git', root, args))
+        project, = (p for p in self.projects.values() if p['root'] == root)
+        if args[0] == 'rev-parse':
+            leaf = args[-1]
+            values = {'--absolute-git-dir': root + '/.git', '--git-common-dir': root + '/.git',
+                      '--show-toplevel': root, 'index': root + '/.git/index', 'HEAD': project['HEAD'],
+                      BRANCH: project['HEAD'], 'HEAD^{tree}': 'e'*40 if root == self.bad_tree_root else project['tree']}
+            raw = (values[leaf] + '\n').encode()
+        elif args[0] == 'symbolic-ref':
+            self.assertEqual(args, ('symbolic-ref', 'HEAD'))
+            raw = (BRANCH + '\n').encode()
+        elif args[0] in ('status', 'diff'):
+            raw = b''
+        else:
+            self.assertEqual(args, ('for-each-ref', '--format=%(refname) %(objectname)'))
+            raw = self.streams[root]
+        self.assertEqual(git_output_maximum, 262144 if args[0] == 'for-each-ref' else 8192)
+        admit_git_output(git_output_maximum+1)
+        record_git_output(tuple(command), {'stdout_bytes':len(raw), 'stderr_bytes':0, 'returncode':0,
+                                           'output_complete':True, 'disposition':'returned', 'process_started':True})
+        return raw
+
+    def verify_startup(self, startup_sha256, roots_sha256, roots, deadline):
+        self.assertEqual((startup_sha256, roots_sha256, roots),
+                         (digest(wire(self.startup)), digest(wire(self.projects)), self.roots))
+        self.assertGreater(deadline, time.monotonic())
+        self.events.append(('startup_verified',))
+        return True
+
+    def load_source(self, raw, path):
+        self.events.append(('load',))
+        self.assertEqual((len(raw), digest(raw), path), (10375, self.startup['source_code']['sha256'],
+                                                         self.startup['source_original_module_path']))
+        return self.fixture_source
+
+    def cleanup_source(self, source):
+        self.assertIs(source, self.fixture_source)
+        self.events.append(('cleanup',))
+        return self.cleanup_approved
+
+    def run_owner(self, verify=None):
+        return self.ns[ENTRY](self.projects, startup=self.startup, expected_startup_sha256=digest(wire(self.startup)),
+                              verify_startup=self.verify_startup if verify is None else verify,
+                              load_source=self.load_source, cleanup_source=self.cleanup_source,
+                              git_api=self.git_api, deadline=time.monotonic()+8)
+
+    def contents(self, reference, expected_name):
+        self.assertEqual(set(reference), {'path', 'bytes', 'sha256'})
+        path = Path(reference['path'])
+        self.assertEqual(path, self.output / expected_name)
+        self.assertEqual(stat.S_IMODE(path.stat().st_mode), 0o400)
+        return exact(path, reference['bytes'], reference['sha256'])
+
+    def issue(self, raw, streams, verification):
+        return self.git_api['bind_closed_stage_a_paired_selector'](
+            self.projects, receipt_raw=raw, expected_receipt_sha256=digest(raw),
+            expected_owner_scope_sha256=digest(wire(self.startup)), raw_ref_streams=streams,
+            verify_original_owner_close=verification)
+
+    def test_exact_success_and_independent_binder_accept_or_refuse(self):
+        result = self.run_owner()
+        self.assertEqual(set(result), {'terminal_receipt', 'raw_ref_streams'})
+        receipt = self.contents(result['terminal_receipt'], TERMINAL)
+        terminal = json.loads(receipt)
+        self.assertEqual(set(terminal), TERMINAL_FIELDS)
+        self.assertEqual(terminal['schema'], 'stage-a-paired-git-selector-terminal/v1')
+        self.assertEqual(terminal['errors'], [])
+        self.assertIs(terminal['Source_closed'], True)
+        self.assertIs(terminal['owned_module_closed'], True)
+        self.assertEqual(terminal['Source_contexts'],
+                         [{'root': r, 'mode':'read', 'entered':True, 'exit_returned':True} for r in sorted(self.roots)])
+        streams = {root:self.contents(result['raw_ref_streams'][root], f'stage-a-selector-{role}-ref-stream.DATA')
+                   for role, root in zip(('D', 'A'), self.roots, strict=True)}
+        self.assertEqual(streams, self.streams)
+
+        def owner(receipt_pin, startup_pin, roots, pid):
+            self.assertEqual((receipt_pin, startup_pin, roots, pid),
+                             (digest(receipt), digest(wire(self.startup)), self.roots, os.getpid()))
+            return True
+
+        binding = self.issue(receipt, streams, owner)
+        self.assertEqual(binding['paired_selector_observation_sha256'], digest(receipt))
+        self.assertEqual(binding['git_project_expectations'], terminal['observation']['git_project_expectations'])
+        with self.assertRaisesRegex(ValueError, 'independent owner refused'):
+            self.issue(receipt, streams, lambda *_: False)
+
+    def test_capture_ledger_and_durable_stream_then_terminal_cadence(self):
+        result = self.run_owner()
+        calls = self.report['Git_calls']
+        self.assertEqual(len(calls), 24)
+        observed = sum(row['stdout_bytes']+row['stderr_bytes'] for row in calls)
+        self.assertEqual(self.spent['captures'], 28)
+        self.assertEqual(self.spent['bytes'], 10375 + observed + 2 * (
+            result['terminal_receipt']['bytes'] + sum(ref['bytes'] for ref in result['raw_ref_streams'].values())))
+        before_receipt = self.report['explicit_IO_before_closeout']
+        self.assertEqual(self.spent['bytes'] - before_receipt['bytes'], 2 * result['terminal_receipt']['bytes'])
+        self.assertEqual(self.spent['captures'] - before_receipt['captures'], 1)
+        self.assertIn(704536 + 2 * (2 * 262144 + 1) + (2 * self.startup['terminal_receipt_max_bytes'] + 1)
+                      + 10376, self.allowances)
+        disk_events = [event[:2] for event in self.events if event[0] in ('seal','read')]
+        self.assertEqual(disk_events[0], ('read', 'approved-source-fixture'))
+        self.assertEqual(disk_events[-2:], [('seal', TERMINAL), ('read', TERMINAL)])
+        close_index = self.events.index(('cleanup',))
+        self.assertTrue(all(self.events.index(('lease_exit', r)) < close_index for r in self.roots))
+        for role in ('D', 'A'):
+            name = f'stage-a-selector-{role}-ref-stream.DATA'
+            self.assertEqual([event for event in disk_events if event[1] == name], [('seal', name), ('read', name)])
+        self.assertLess(close_index, next(i for i, e in enumerate(self.events) if e[:2] == ('seal', TERMINAL)))
+
+    def test_unconfirmed_exit_returns_no_terminal_and_retains_source(self):
+        self.bad_exit_root = sorted(self.roots)[0]
+        self.assertIsNone(self.run_owner())
+        self.assertIs(self.ns['source'], self.fixture_source)
+        self.assertNotIn(('cleanup',), self.events)
+        self.assertFalse((self.output / TERMINAL).exists())
+        self.assertFalse(self.report['Source_closed'])
+        self.assertEqual(len([e for e in self.events if e[0] == 'lease_exit_attempt']), 2)
+
+    def test_unconfirmed_cleanup_withholds_terminal(self):
+        self.cleanup_approved = False
+        self.assertIsNone(self.run_owner())
+        self.assertIs(self.ns['source'], self.fixture_source)
+        self.assertIn(('cleanup',), self.events)
+        self.assertFalse((self.output / TERMINAL).exists())
+        self.assertIs(self.report['Source_closed'], True)
+
+    def test_confirmed_observer_failure_keeps_negative_six_field_receipt(self):
+        self.bad_tree_root = self.roots[1]
+        result = self.run_owner()
+        receipt = self.contents(result['terminal_receipt'], TERMINAL)
+        terminal = json.loads(receipt)
+        self.assertEqual(set(terminal), TERMINAL_FIELDS)
+        self.assertIs(terminal['Source_closed'], True)
+        self.assertIs(terminal['owned_module_closed'], True)
+        self.assertTrue(terminal['errors'])
+        self.assertFalse(result['raw_ref_streams'])
+        with self.assertRaisesRegex(ValueError, 'module custody must be terminal'):
+            self.issue(receipt, self.streams, lambda *_:True)
+
+    def test_prelease_failure_cleans_loaded_module_without_claiming_source_close(self):
+        self.bad_canonical_root = self.roots[0]
+        result = self.run_owner()
+        terminal = json.loads(self.contents(result['terminal_receipt'], TERMINAL))
+        self.assertEqual(set(terminal), TERMINAL_FIELDS)
+        self.assertIs(terminal['Source_closed'], False)
+        self.assertEqual(terminal['Source_contexts'], [])
+        self.assertIs(terminal['owned_module_closed'], True)
+        self.assertTrue(terminal['errors'])
+        self.assertIn(('cleanup',), self.events)
+        self.assertFalse(any(event[0] in ('lease_enter', 'git') for event in self.events))
+
+    def test_startup_refusal_or_budget_check_has_no_output_or_load(self):
+        with self.assertRaises(ValueError):
+            self.run_owner(verify=lambda *_:False)
+        self.assertFalse(self.output.exists())
+        self.assertFalse(self.events)
+        self.request['Source_envelope'] = self.startup['Source_envelope'] = 1 << 20
+        with self.assertRaises(RuntimeError):
+            self.run_owner()
+        self.assertFalse(self.output.exists())
+        self.assertFalse(any(e[0] in ('load', 'read', 'seal', 'git', 'lease_enter') for e in self.events))
+
+
+if __name__ == '__main__':
+    cli = argparse.ArgumentParser()
+    cli.add_argument('--candidate', type=Path, required=True)
+    cli.add_argument('--candidate-bytes', type=int, required=True)
+    cli.add_argument('--candidate-sha256', required=True)
+    args = cli.parse_args()
+    SelectorStartup.candidate = args.candidate
+    SelectorStartup.candidate_count = args.candidate_bytes
+    SelectorStartup.candidate_sha = args.candidate_sha256
+    sys.addaudithook(fence)
+    unittest.main(argv=[sys.argv[0]], verbosity=2)

@@ -1,0 +1,283 @@
+"""INERT exact-three READ specialization of the existing Source42/IO733 custody route."""
+import contextlib,hashlib,json,os,stat,subprocess,sys,time,traceback
+from pathlib import Path
+SEL = {'path': '/tmp/Root-P7-declared70-existing-SourceREAD-selected-v231-92qcixdn/Root-selected-P7-declared70-SourceREAD.json', 'bytes': 804, 'sha256': '4185ce2b75e8675f5a925b55aa6d7701aff613e20d3d1d30c61a620f8c6239fb'}
+REQ = {'path': '/tmp/Root-P7-declared70-existing-SourceREAD-selected-v231-92qcixdn/Root-bound-P7-declared70-SourceREAD-request.json', 'bytes': 65401, 'sha256': '6566765ecf7a263e08e500496b683d7d92c088498e3bba23528b566474ab3acb'}
+PREBOUND_OUTPUT_NAMESPACE = '/tmp/Root-P7-declared70-existing-SourceREAD-selected-v231-92qcixdn/actual-output'
+before = {'captures': 105377, 'capturesComplete': False, 'global_cap': 17230200832, 'internal_cap': 16961765376, 'internal_used': 16853963531, 'used': 17044555405}
+CARRIED_OPERATOR_BYTES = 1048576
+CARRIED_OPERATOR_CAPTURES = 14
+if any(value is None for value in (SEL,REQ,PREBOUND_OUTPUT_NAMESPACE,before,CARRIED_OPERATOR_BYTES,CARRIED_OPERATOR_CAPTURES)):
+    raise RuntimeError("INERT: exact Root selection, request, ledger, clock and fresh private output required")
+FIELDS=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+f9=lambda s:{k:str(getattr(s,k)) for k in FIELDS}
+H=lambda raw:hashlib.sha256(raw).hexdigest()
+assert type(CARRIED_OPERATOR_BYTES) is int and 0<=CARRIED_OPERATOR_BYTES<=1048576
+assert type(CARRIED_OPERATOR_CAPTURES) is int and CARRIED_OPERATOR_CAPTURES>=0
+spent={'bytes':SEL['bytes']+CARRIED_OPERATOR_BYTES,'captures':1+CARRIED_OPERATOR_CAPTURES}
+report={'schema':'actual-existing-Source42-frozen-P7-declared70-READ/v1','inputs':[],'errors':[],'Source_contexts':[],'Source_closed':False,'owned_module_closed':False,'read_complete':False,'fresh_body_reads':[],'canonical_or_Git_or_managedledger_write':False,'SDK_or_test_or_Native_or_model_execution':False,'physical_IO_accounting_complete':False}
+source=None
+cleanup_owned_source42_module=None
+OUT=Path(PREBOUND_OUTPUT_NAMESPACE)
+output_created=False
+
+def admit(n):
+    if type(n) is not int or n<0 or spent['bytes']+n>100663296:
+        raise RuntimeError('selected READ envelope insufficient before read')
+    if before['used']+spent['bytes']+n>before['global_cap'] or before['internal_used']+spent['bytes']+n>before['internal_cap']:
+        raise RuntimeError('shared Source allowance insufficient before read')
+
+def control_read(ref,kind='private_control',*,retain_fd=None):
+    if retain_fd is not None and not callable(retain_fd):
+        raise ValueError('original owner descriptor callback must be callable')
+    p=Path(ref['path']);a=p.lstat()
+    assert stat.S_ISREG(a.st_mode) and a.st_nlink==1 and a.st_uid==os.getuid()
+    assert a.st_size==ref['bytes'];admit(ref['bytes']+1)
+    fd=os.open(p,os.O_RDONLY|os.O_NOFOLLOW|(os.O_NONBLOCK if retain_fd is not None else 0));parts=[];total=0
+    report['inputs'].append({'path':str(p),'kind':kind,'actual_bytes':0});row=report['inputs'][-1]
+    try:
+        assert f9(os.fstat(fd))==f9(a);spent['captures']+=1
+        while total <= ref['bytes']:
+            part=os.read(fd,min(1048576,ref['bytes']+1-total));total+=len(part)
+            spent['bytes']+=len(part);row['actual_bytes']+=len(part)
+            if not part:break
+            parts.append(part)
+        assert f9(a)==f9(os.fstat(fd))==f9(p.lstat())
+        raw=b''.join(parts);assert len(raw)==ref['bytes']
+        assert 'sha256'not in ref or H(raw)==ref['sha256']
+        if retain_fd is not None:
+            retain_fd(fd)
+        return raw
+    finally:os.close(fd)
+
+def seal(path,raw):
+    assert type(raw)is bytes
+    p=Path(path);fd=os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)
+    with os.fdopen(fd,'wb')as stream:
+        stream.write(raw);stream.flush();os.fsync(stream.fileno())
+    return {'path':str(p),'bytes':len(raw),'sha256':H(raw)}
+
+def js(path,obj):
+    return seal(path,(json.dumps(obj,sort_keys=True,indent=2)+'\n').encode())
+
+def git(root,*args,allow_nonzero=False):
+    env=dict(os.environ,GIT_OPTIONAL_LOCKS='0',GIT_NO_LAZY_FETCH='1',GIT_TERMINAL_PROMPT='0')
+    admit(262144)
+    p=subprocess.run(['/usr/bin/git','-C',root,*args],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=20)
+    spent['captures']+=1;spent['bytes']+=len(p.stdout)+len(p.stderr)
+    assert len(p.stdout)+len(p.stderr)<=262144
+    report.setdefault('Git_calls',[]).append({'root':root,'args':args,'returncode':p.returncode,'stdout_bytes':len(p.stdout),'stderr_bytes':len(p.stderr)})
+    if not allow_nonzero and p.returncode:raise RuntimeError(('read-only Git failed',root,args,p.returncode,p.stderr.decode(errors='replace')))
+    return p
+
+def parents(path):
+    out=[]
+    for p in reversed(Path(path).parents):
+        s=p.lstat();assert stat.S_ISDIR(s.st_mode) and not stat.S_ISLNK(s.st_mode)
+        fd=os.open(p,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+        try:assert f9(s)==f9(os.fstat(fd))==f9(p.lstat())
+        finally:os.close(fd)
+        out.append({'path':str(p),'full9':f9(s)})
+    return out
+
+def leaf(t):
+    p=Path(t['path']);s=p.lstat();assert stat.S_ISREG(s.st_mode)and s.st_nlink==1
+    assert f9(s)==t['full9']and s.st_size==t['bytes']
+
+def checked_read(path,limit,kind):
+    path=Path(path)
+    assert path.is_absolute()
+    allowed=path.is_relative_to(OUT) or any(str(path)==r['path'] for r in request['targets']+request['protected_completed_targets']+request.get('unchanged_fences',[])) or any(str(path)==r['temporary_path'] for r in report.get('staged',[]))
+    assert allowed,('unselected file read',str(path),kind)
+    a=f9(path.lstat());raw=control_read({'path':str(path),'bytes':limit},kind);b=f9(path.lstat())
+    assert a==b
+    return raw,b
+
+
+def clock_ok():
+    assert int(selection['launch_not_before_utc_ns'])<=time.time_ns()<int(selection['launch_deadline_utc_ns'])
+
+def root_facts_clean(root,expected):
+    head=git(root,'rev-parse','HEAD').stdout.decode().strip()
+    tree=git(root,'rev-parse','HEAD^{tree}').stdout.decode().strip()
+    assert (head,tree)==(expected['Git_HEAD'],expected['Git_tree'])
+    status=git(root,'status','--porcelain=v1','-z','--untracked-files=normal').stdout
+    assert status==b''
+    assert git(root,'diff','--cached','--quiet','HEAD','--',allow_nonzero=True).returncode==0
+    assert git(root,'diff','--quiet','--',allow_nonzero=True).returncode==0
+    return {'root':root,'HEAD':head,'tree':tree,'clean_worktree_and_index':True,'status_sha256':H(status)}
+
+def verify_full_metadata_guard():
+    assert len(guard_rows)==1303 and len({r['path'] for r in guard_rows})==1303
+    for row in guard_rows:
+        path=Path(row['path']);parents(path)
+        expected=row['full9']
+        s=path.lstat()
+        assert stat.S_ISREG(s.st_mode) and s.st_nlink==1 and f9(s)==expected
+        fd=os.open(path,os.O_RDONLY|os.O_NOFOLLOW)
+        try:assert f9(os.fstat(fd))==expected==f9(path.lstat())
+        finally:os.close(fd)
+
+def verify_absences():
+    for name in request['expected_absent_paths']:
+        parents(name)
+        try:Path(name).lstat()
+        except FileNotFoundError:continue
+        raise AssertionError(('expected unchanged namespace/fixture absence',name))
+
+def acquire_current_sources():
+    stack=contextlib.ExitStack()
+    try:
+        for root in sorted([request['root'],request['additional_A']['root']]):
+            cm=source.source_lease(root,mode='read')
+            cm.__enter__()
+            row={'root':root,'mode':'read','entered':True,'exit_returned':False}
+            report['Source_contexts'].append(row)
+            def close_owned(cm=cm,row=row):
+                result=cm.__exit__(*sys.exc_info())
+                row['exit_returned']=True
+                return result
+            stack.callback(close_owned)
+        return stack
+    except BaseException:
+        stack.close()
+        raise
+
+try:
+    selection=json.loads(control_read(SEL,'Root_Source_READ_selection'))
+    assert selection['Root_selected'] is True and selection['request']==REQ
+    assert selection['ledger_before']==before and selection['Source_operation_max_bytes']==100663296
+    assert selection['fresh_output_namespace']==str(OUT)
+    clock_ok()
+    request=json.loads(control_read(REQ,'Root_bound_frozen_sampled_header_READ3_request'))
+    assert request['ledger_before']==before and request['Source_envelope']==100663296
+    assert request['canonical_write_selected'] is False
+    assert len(request['targets'])==70 and len({r['path'] for r in request['targets']})==70
+    assert set(request['actual_modes'].values())=={'read'}
+    assert OUT.is_absolute() and str(OUT).startswith('/tmp/Root-') and not OUT.exists()
+    assert not any(OUT.is_relative_to(Path(r)) for r in request['actual_modes'])
+    parents(OUT)
+    OUT.mkdir(mode=0o700);output_created=True
+    (OUT/'raw').mkdir(mode=0o700);(OUT/'matrices').mkdir(mode=0o700)
+    guard_rows=json.loads(control_read(request['full_metadata_guard'],'retained_current1303_metadata_guard'))['rows']
+    assert len(guard_rows)==1303
+    by_guard={r['path']:dict(r) for r in guard_rows}
+    assert len(by_guard)==1303 and set(r['path'] for r in request['targets'])<=set(by_guard)
+    for row in request['targets']:
+        by_guard[row['path']].update({k:row[k] for k in ('bytes','sha256','full9')})
+    guard_rows=list(by_guard.values())
+    outer_payload=json.loads(control_read(request['base_outer_epoch_reference'],'prior_authenticated1291_outer_epoch'))
+    outer=outer_payload['rows'] if type(outer_payload) is dict else outer_payload
+    assert type(outer) is list and len(outer)==1291 and len({r['path'] for r in outer})==1291
+    new_by_path={r['path']:dict(r) for r in outer}
+    assert set(r['path'] for r in request['targets'])<=set(new_by_path)
+    for target in request['targets']:
+        new_by_path[target['path']].update({k:target[k] for k in ('bytes','sha256','full9')})
+    new_outer=[new_by_path[r['path']] for r in outer]
+    for row in new_outer:
+        guard=by_guard[row['path']]
+        assert row['full9']==guard['full9'] and row['bytes']==guard['bytes']
+        assert set(row)>=set(('path','bytes','sha256','full9'))
+    fixture=json.loads(control_read(request['ordinary_fixture_closure'],'ordinary72_declared_fixture_closure'))
+    for row in fixture['required_fixture_closure']:
+        assert all(row[k]==new_by_path[row['path']][k] for k in ('path','bytes','sha256','full9'))
+    for ref in [request['approved_loader'],request['approved_IO_end_boundary']]:
+        exec(compile(control_read(ref,'existing_Source42_IO733_private_control'),ref['path'],'exec'),globals())
+    approved=json.loads(control_read(request['approved_Source42_binding'],'approved_Source42_binding'))
+    assert f9(Path(approved['code_reference']['path']).lstat())==approved['code_reference']['full9']
+    source_raw=control_read(approved['code_reference'],'approved_Source42_code')
+    assert len(source_raw)==10375 and H(source_raw)=='42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9'
+    assert f9(Path(approved['code_reference']['path']).lstat())==approved['code_reference']['full9']
+    source=load_owned_source42_module(source_raw,approved['original_module_path'])
+    assert all(str(source.canonical_source_root(root))==root for root in request['actual_modes'])
+    clock_ok()
+    cm=acquire_current_sources()
+    try:
+        report['roots_before']={
+            'D':root_facts_clean(request['root'],request['root_expected']),
+            'A':root_facts_clean(request['additional_A']['root'],request['additional_A'])}
+        verify_full_metadata_guard();verify_absences();clock_ok()
+        index=next(r for r in request['targets'] if r['relative_path']=='.git/index')
+        assert git(request['root'],'rev-parse','--path-format=absolute','--git-path','index').stdout.decode().strip()==index['path']
+        for i,target in enumerate(request['targets']):
+            if target['Git_blob_oid'] is not None:
+                record=git(request['root'],'ls-tree','-z','HEAD','--',target['relative_path']).stdout
+                fields=record.rstrip(b'\0').split(b'\t')
+                assert len(fields)==2 and fields[1].decode()==target['relative_path']
+                mode,kind,oid=fields[0].decode().split()
+                assert mode=='100644' and kind=='blob' and oid==target['Git_blob_oid']
+                assert int(git(request['root'],'cat-file','-s',oid).stdout)==target['bytes']
+            capture={}
+            def archive_matrix(label,value):
+                return js(OUT/'matrices'/(str(i)+'-'+label+'.json'),value)
+            raw_ref,actual9=capture_one_at_source_IO_end(target,OUT/'raw'/(str(i)+'-'+Path(target['path']).name+'.DATA'),capture,
+                parents_fn=parents,leaf_fn=leaf,
+                read_fn=lambda row,kind:checked_read(row['path'],row['bytes'],kind),
+                seal_fn=seal,archive_matrix_fn=archive_matrix,caller_uid=os.getuid())
+            assert actual9==target['full9'] and raw_ref['bytes']==target['bytes'] and raw_ref['sha256']==target['sha256']
+            report['fresh_body_reads'].append({'canonical_path':target['path'],'canonical_full9':actual9,'raw_reference':raw_ref,'capture':capture})
+        assert git(request['root'],'rev-parse','--path-format=absolute','--git-path','index').stdout.decode().strip()==index['path']
+        verify_full_metadata_guard();verify_absences();clock_ok()
+        report['roots_after']={
+            'D':root_facts_clean(request['root'],request['root_expected']),
+            'A':root_facts_clean(request['additional_A']['root'],request['additional_A'])}
+        assert report['roots_after']==report['roots_before']
+        report['metadata_guard_count']=len(guard_rows)
+        report['only70_fresh_body_reads']=True
+        report['retained_other_body_identities_under_fresh_full9']=1221
+        report['all1291_fresh_body_reads_claimed']=False
+        report['fresh_body_bytes']=sum(r['bytes'] for r in request['targets'])
+        report['read_complete']=len(report['fresh_body_reads'])==70
+    finally:
+        cm.close()
+except BaseException as error:
+    report['errors'].append({'type':type(error).__name__,'message':str(error),'traceback':traceback.format_exc()})
+finally:
+    report['Source_closed']=bool(report['Source_contexts']) and all(r['exit_returned'] for r in report['Source_contexts'])
+    if source is not None and report['Source_closed']:
+        try:report['owned_module_closed']=cleanup_owned_source42_module(source)
+        except BaseException as error:report['errors'].append({'type':type(error).__name__,'phase':'owned_module_cleanup','message':str(error)})
+    elif source is None:report['owned_module_closed']=True
+    if output_created:
+        if report['read_complete'] and report['Source_closed'] and report['owned_module_closed'] and not report['errors']:
+            outer_ref=js(OUT/'actual-current1291-READ-bound-outer-epoch.LIST.DATA.json',new_outer)
+            python_rows=[r for r in new_outer if r['path'].endswith('.py')]
+            assert len(python_rows)==1286
+            python_ref=js(OUT/'actual-current1286-READ-bound-Python-epoch.LIST.DATA.json',python_rows)
+            for r,expected in [(outer_ref,new_outer),(python_ref,python_rows)]:
+                assert json.loads(control_read(r,'actual_epoch_LIST_complete_readback'))==expected
+            fixture['source_read_pending']=[]
+            fixture['Root_selected']=True;fixture['Source_closed']=True
+            fixture['outer_epoch_reference']=outer_ref
+            fixture_ref=js(OUT/'actual-ordinary72-fixture-closure.READ.json',fixture)
+            assert json.loads(control_read(fixture_ref,'actual_fixture_complete_readback'))==fixture
+            report.update({'Root_selected':True,'outer_epoch_reference':outer_ref,'python_epoch_reference':python_ref,
+                'outer_epoch_record_count':len(new_outer),'python_epoch_record_count':len(python_rows),
+                'protected_index_reference':{k:index[k] for k in ('path','bytes','sha256','full9')},
+                'actual_fixture_reference':fixture_ref})
+            report['D_provenance']={**report['roots_after']['D'],'actual_closed_Source_READ':True}
+            report['A_provenance']={**report['roots_after']['A'],'actual_closed_Source_READ':True}
+        report['explicit_IO_before_closeout']=dict(spent)
+        report['full_Source_envelope_retained']=100663296
+        report['ledger_after']={**before,'captures':before['captures']+spent['captures'],'used':before['used']+spent['bytes'],'internal_used':before['internal_used']+spent['bytes']}
+        report['Root_ordinary_execution_selection']=None
+        report['Root_ordinary_execution_clock']=None
+        report['Root_ordinary_execution_IO']=None
+        report['Root_ordinary_execution_results']=None
+        result=js(OUT/'actual-existing-P7-declared70-Source-closed.json',report)
+        if report.get('read_complete') and report['Source_closed'] and report['owned_module_closed'] and not report['errors']:
+            abi={'schema':'actual-D27-observed-D-root-initializer-READ-small-closeout/v1','Root_selected':True,
+                 'Source_closed':True,'owned_module_closed':True,
+                 'outer_epoch_reference':report['outer_epoch_reference'],'python_epoch_reference':report['python_epoch_reference'],
+                 'outer_epoch_record_count':1291,'python_epoch_record_count':1286,
+                 'protected_index_reference':report['protected_index_reference'],
+                 'actual_fixture_reference':report['actual_fixture_reference'],'actual_source_closeout_reference':result,
+                 'D_provenance':report['D_provenance'],'A_provenance':report['A_provenance'],
+                 'all1291_fresh_body_reads_claimed':False,'fresh_read_body_count':70,'physical_IO_accounting_complete':False}
+            binding=js(OUT/'Root-actual-P7-declared70-READ-bound-ordinary72-small.json',abi)
+        else:binding=None
+        print(json.dumps({'event':'ACTUAL_EXISTING_SOURCE42_P7_DECLARED70_READ_CLOSED','receipt':result,'ordinary_binding':binding,
+            'Source_closed':report['Source_closed'],'owned_module_closed':report['owned_module_closed'],'errors':report['errors']},sort_keys=True),flush=True)
+    else:
+        print(json.dumps({'event':'ROOT_SOURCE_READ_SELECTION_REFUSED_BEFORE_OUTPUT','errors':report['errors']}),flush=True)
+if report['errors']:sys.exit(1)

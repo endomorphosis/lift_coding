@@ -1,0 +1,174 @@
+{
+  "actual_closed_Source_READ_reference": {
+    "bytes": 8248,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-Phase1-cache-atomic-put-READ4-closed.json",
+    "sha256": "759f5100682a32e5fe2a9a81dbb0a33946d8ff658df1fbfd1f3f338295b5b148"
+  },
+  "actual_isolated_content_epoch": {
+    "bytes": 6382,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "747a2492f0d6ce993c1208fb74b71c330bd53bd87a676370d3e3b570134ced37"
+  },
+  "final_ordinary_runtime_qualification_eligibility_authority": null,
+  "pytest_inifile": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/pytest.ini",
+  "required_current_namespace_absences": [
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/__init__.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/conftest.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/legal_ir/__init__.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/legal_ir/conftest.py"
+  ],
+  "required_fixture_closure": [
+    {
+      "bytes": 2054,
+      "full9": {
+        "st_ctime_ns": "1795741365081121780",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72512816",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365081121780",
+        "st_nlink": "1",
+        "st_size": "2054",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/conftest.py",
+      "sha256": "2eab130f3effda3737f25a1770ccd5f9d4955ba42c3d692d659801ffdc1035cf"
+    },
+    {
+      "bytes": 20716,
+      "full9": {
+        "st_ctime_ns": "1795741365215907811",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514029",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365215907811",
+        "st_nlink": "1",
+        "st_size": "20716",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/conftest.py",
+      "sha256": "0a255dc653799cb980d7edbb1d7b2e3c8f0d81b091d4986aa712e1e8e12b7f10"
+    },
+    {
+      "bytes": 1204,
+      "full9": {
+        "st_ctime_ns": "1795741365216540104",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514042",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365216540104",
+        "st_nlink": "1",
+        "st_size": "1204",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/conftest.py",
+      "sha256": "2abb4618add06f636ab71406c19ccd828084a48ecf75448397ddb6cd2bca53a2"
+    },
+    {
+      "bytes": 1536,
+      "full9": {
+        "st_ctime_ns": "1795741365213708628",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514015",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365213708628",
+        "st_nlink": "1",
+        "st_size": "1536",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/pytest.ini",
+      "sha256": "01737eaafcd2b7e7e1a8db2368a93d4a28053ba44e611a10b1c87d2155dc65ff"
+    },
+    {
+      "bytes": 20,
+      "full9": {
+        "st_ctime_ns": "1795741365214799660",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514028",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365214799660",
+        "st_nlink": "1",
+        "st_size": "20",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/__init__.py",
+      "sha256": "89588b0c2be9d872060e78aa68ccf95f94ca27ea6bcb79a43509d66c296c73ce"
+    },
+    {
+      "bytes": 26,
+      "full9": {
+        "st_ctime_ns": "1795741365216154197",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514041",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365216154197",
+        "st_nlink": "1",
+        "st_size": "26",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/__init__.py",
+      "sha256": "9d566025eaa21543b52722147774afc45981154f677dcc38078a2632e5b52947"
+    },
+    {
+      "bytes": 104341,
+      "full9": {
+        "st_ctime_ns": "1795741365135834572",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513274",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365135834572",
+        "st_nlink": "1",
+        "st_size": "104341",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+    },
+    {
+      "bytes": 62783,
+      "full9": {
+        "st_ctime_ns": "1795750532276434201",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513518",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795750532276434201",
+        "st_nlink": "1",
+        "st_size": "62783",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+      "sha256": "cf414d3c4bfb858741a8423508d7e70d26db7f3b0a61959c9d594c39ddee23de"
+    },
+    {
+      "bytes": 105531,
+      "full9": {
+        "st_ctime_ns": "1795750532276434201",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514039",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795750532276434201",
+        "st_nlink": "1",
+        "st_size": "105531",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/logic/legal_ir/test_proof_cache.py",
+      "sha256": "1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460"
+    }
+  ],
+  "required_normal_conftests": [
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/conftest.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/conftest.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/unit/conftest.py"
+  ],
+  "role_count": 9,
+  "schema": "actual-existing-Phase1-proof-cache-ordinary10-protected-fixture-closure/v1",
+  "whole_fixture_fresh_body_read_claimed": false
+}

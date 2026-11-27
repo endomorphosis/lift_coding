@@ -1,0 +1,16 @@
+"""Run the twelve original monitor cases on the candidate's default mode."""
+from hashlib import sha256
+from pathlib import Path
+import sys
+
+HERE=Path(__file__).resolve().parent
+ROOT=HERE.parent
+sys.path.insert(0,str(HERE))
+from replay_archive import check_open
+
+sys.addaudithook(check_open)
+held=ROOT/'decoder-training-selective-prefix-inspection-private-v01-PV9ezANr/check_monitor.py'
+code=held.read_bytes()
+assert sha256(code).hexdigest()=='d92bb92c2195eb64b841fcd6e3b38eed92a4de4e94449f590a233473886da062'
+sys.argv=[held.name,'507a250561a39112b82352da5f5b3e58e8d1829d00d960063a931289d2187e57']
+exec(compile(code,str(held),'exec'),{'__name__':'__main__','__file__':str(HERE/held.name)})

@@ -1,0 +1,127 @@
+{
+  "actual_closed_Source_READ_reference": {
+    "bytes": 7440,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-isolated-Phase7-receipt-bounds-READ3-closed.json",
+    "sha256": "a42ea50783db60b9036538108d96d855220efaac776ee54e63a34a38c998d3f5"
+  },
+  "actual_isolated_content_epoch": {
+    "bytes": 6569,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "071a277ff541b7fa9303677ec5b87378735e6fff5d9d921a973299de97941bb8"
+  },
+  "final_ordinary_runtime_qualification_eligibility_authority": null,
+  "pytest_inifile": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/pytest.ini",
+  "required_absent_paths": [
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/conftest.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/conftest.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/__init__.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/AGENTS.md",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/AGENTS.md",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/logic/AGENTS.md"
+  ],
+  "required_fixture_closure": [
+    {
+      "bytes": 1536,
+      "full9": {
+        "st_ctime_ns": "1795741365213708628",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514015",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365213708628",
+        "st_nlink": "1",
+        "st_size": "1536",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/pytest.ini",
+      "sha256": "01737eaafcd2b7e7e1a8db2368a93d4a28053ba44e611a10b1c87d2155dc65ff"
+    },
+    {
+      "bytes": 2054,
+      "full9": {
+        "st_ctime_ns": "1795741365081121780",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72512816",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365081121780",
+        "st_nlink": "1",
+        "st_size": "2054",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/conftest.py",
+      "sha256": "2eab130f3effda3737f25a1770ccd5f9d4955ba42c3d692d659801ffdc1035cf"
+    },
+    {
+      "bytes": 20716,
+      "full9": {
+        "st_ctime_ns": "1795741365215907811",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514029",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365215907811",
+        "st_nlink": "1",
+        "st_size": "20716",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/conftest.py",
+      "sha256": "0a255dc653799cb980d7edbb1d7b2e3c8f0d81b091d4986aa712e1e8e12b7f10"
+    },
+    {
+      "bytes": 20,
+      "full9": {
+        "st_ctime_ns": "1795741365214799660",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514028",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365214799660",
+        "st_nlink": "1",
+        "st_size": "20",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/__init__.py",
+      "sha256": "89588b0c2be9d872060e78aa68ccf95f94ca27ea6bcb79a43509d66c296c73ce"
+    },
+    {
+      "bytes": 46,
+      "full9": {
+        "st_ctime_ns": "1795741365215990004",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514036",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365215990004",
+        "st_nlink": "1",
+        "st_size": "46",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/integration/__init__.py",
+      "sha256": "f81488e329268d54e4267e9728e98a864c6a626c8cce0aa055512e1de3d156c9"
+    },
+    {
+      "bytes": 303308,
+      "full9": {
+        "st_ctime_ns": "1795743985087603720",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514903",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743985087603720",
+        "st_nlink": "1",
+        "st_size": "303308",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/ipfs_datasets_py/logic/verification_api.py",
+      "sha256": "37a8c4ac10610b877dd4eb0dd22fc1466b35b429fa4c4f02c76a43eb427284c0"
+    }
+  ],
+  "required_normal_conftests": [
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/conftest.py",
+    "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/tests/conftest.py"
+  ],
+  "role_count": 6,
+  "schema": "actual-existing-Phase7-receipt-bounds-ordinary22-protected-fixture-closure/v1",
+  "whole_fixture_fresh_body_read_claimed": false
+}

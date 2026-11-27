@@ -1,0 +1,126 @@
+{
+  "A0_descriptor": {
+    "bytes": 4359,
+    "path": "/tmp/decoder-training-stage-a-relocated-a0-private-v01-eAKKpyUX/descriptor.json",
+    "sha256": "d90ce5a5fb582eea45da6f35742eb8bee4a048333ba09ce3ab99fa3ecf19229f"
+  },
+  "candidate": {
+    "bytes": 42325,
+    "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/reader.py.DATA",
+    "sha256": "c9a1e81533834ba39fbed94f64da61fcde171259976703513168c230eb377e55"
+  },
+  "diff": {
+    "bytes": 12843,
+    "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/reader.py.DATA.diff",
+    "sha256": "705bbc5463082af4e27431300ef290d650d42beed6a57c826fa03313157eb786"
+  },
+  "dispatch_authority": false,
+  "drivers": {
+    "compose_reader.py": {
+      "bytes": 8535,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/compose_reader.py",
+      "sha256": "f6b411c098a3ca54dc1140c92b4c1c275a51ee2638e23883967249f851e9d19b"
+    },
+    "guide573_metadata.py": {
+      "bytes": 5606,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/guide573_metadata.py",
+      "sha256": "bf3756fd656e582bbd0024f43b0a950a84eb717feb94e90bf87549ec6d380d79"
+    },
+    "seal_reader.py": {
+      "bytes": 11797,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/seal_reader.py",
+      "sha256": "122a2ab53644b3c8b3c9fa147dcad340767910ed0cabe3db95a89fd6ebef21ba"
+    }
+  },
+  "guide573_detached_metadata": {
+    "bytes": 4692,
+    "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/guide573-metadata.INERT.json",
+    "sha256": "1087aa3f70cfca94faa20116155465a5fdc6a0dd7cf0dfeeb78122c1abf7ffa9"
+  },
+  "legacy_baseline_controls": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/legacy-regression-c9a1e815/baseline.rc",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 2987,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/legacy-regression-c9a1e815/baseline.stderr",
+      "sha256": "b3aa2526ab733104e71efd84743d5fb8d817f9bd0be0c7b937997bb284738472"
+    },
+    "stdout": {
+      "bytes": 31,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/legacy-regression-c9a1e815/baseline.stdout",
+      "sha256": "bbe25e9d44fb636c1bb34f70c4e41545926d66e43ad606a70000b6d843f6758f"
+    }
+  },
+  "legacy_candidate_controls": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/legacy-regression-c9a1e815/candidate.rc",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 2987,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/legacy-regression-c9a1e815/candidate.stderr",
+      "sha256": "e5dbd798c5a7d92c639af770b8ec960f366aecf5dca5fd126370c8a2210e9649"
+    },
+    "stdout": {
+      "bytes": 31,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/legacy-regression-c9a1e815/candidate.stdout",
+      "sha256": "bbe25e9d44fb636c1bb34f70c4e41545926d66e43ad606a70000b6d843f6758f"
+    }
+  },
+  "legacy_driver": {
+    "bytes": 5239,
+    "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/legacy-regression-c9a1e815/legacy_controls.py",
+    "sha256": "db929a7e0f8ef4f4952f8f4d1edb7c0a5e5319f0c975d1d126c9ea79f55730e9"
+  },
+  "live_A0": null,
+  "live_reader": null,
+  "local_A0_controls": 13,
+  "local_preserved_legacy_cases": 16,
+  "local_reader_v3_cases": 7,
+  "modeled_reader_result_consumed_by_actual_A0_binder": true,
+  "prior_modeled_logs": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/reader-v3-joined.rc",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 918,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/reader-v3-joined.stderr",
+      "sha256": "1edcb6446c1b411c6fa407524e8caed2efb88a49dfee1d6997966eb21fa9614e"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/reader-v3-joined.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "reader_v3_joined_controls": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/reader-v3-final.rc",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 1078,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/reader-v3-final.stderr",
+      "sha256": "b24bd6daf7690bafb404ae348e11d29997fc3e25714f90ca29754f7724753912"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/reader-v3-final.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "schema": "private-existing-stage-a-relocated-reader-A0-controls/v1",
+  "selected_current_startup_and_terminal_owner": null,
+  "test": {
+    "bytes": 13362,
+    "path": "/tmp/decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy/test_reader_v3.py",
+    "sha256": "607a232c5f51d317da7eec43e726349b04e7680e69da1f26802edc67b411fac2"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "IO_reference": {
+    "bytes": 713,
+    "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/Root-selected-IO.json",
+    "sha256": "eb00c4c58d1fd708dd613f61ba5c36cd42fe74fd6d4af12e41af3a0aca70725e"
+  },
+  "Root_selected": true,
+  "Source_READ_binding": {
+    "bytes": 2353,
+    "path": "/tmp/P1-Lean92-live-READ3-controls-XYXyet7M/actual-isolated-ordinary92-D27-read-binding.json",
+    "sha256": "453f5320013daaac283c7360ff01d2832966bcfc53ad5568e55a9bd7c33e2f49"
+  },
+  "Source_envelope_bytes": 134217728,
+  "actual_COLLECT_supplies_order": true,
+  "actual_nonclock_handoff": {
+    "bytes": 11360,
+    "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/READY-live-ordinary92-actual-READ3-INERT.json",
+    "sha256": "2e913e0bf0f1f49602383ea45c57560c24a37bf65df78c6101ce1972775d7cce"
+  },
+  "case_hint": 92,
+  "effect_reference": {
+    "bytes": 547,
+    "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/Root-selected-effect.json",
+    "sha256": "d2afdb6eddf56a75849b452785351446e98843bf73819b04e16b8c82d043a381"
+  },
+  "frozen_D_HEAD": "30e1f2f81538b1e472a858a7984f1fba64fc6836",
+  "frozen_D_tree": "1604d49d2a8c2fe85b450890a3ceb1cfa5fd2fb7",
+  "launch_deadline_utc_ns": 1795737051739468709,
+  "launch_not_before_utc_ns": 1795736211739468709,
+  "ledger_before": {
+    "captures": 539143,
+    "capturesComplete": false,
+    "global_cap": 55548856330,
+    "internal_cap": 55358264456,
+    "internal_used": 55217689736,
+    "used": 55408281610
+  },
+  "output_namespace": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/actual-output",
+  "schema": "Root-selected-existing-P1-combined-Lean-frozen-local-ordinary92/v1"
+}

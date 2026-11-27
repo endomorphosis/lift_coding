@@ -1,0 +1,15 @@
+--- a/ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py
++++ b/ipfs_datasets_py/logic/bridge/proof_receipt_attestation.py
+@@ -478,7 +478,11 @@
+             backend_version=result.backend_version,
+             assumptions=result.assumptions,
+             translation_ceiling=result.translation_ceiling,
+-            metadata=result.metadata,
++            metadata=(
++                result.metadata if "bounds" in result.metadata else FrozenMap({
++                    **result.metadata.to_dict(), "bounds": result.bounds.to_dict(),
++                })
++            ),
+         )
+ 
+ 

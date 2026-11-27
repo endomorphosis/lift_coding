@@ -1,0 +1,15 @@
+.FF............                                                          [100%]
+=================================== FAILURES ===================================
+____ test_reviewed_v2_requires_nonrecursive_governing_definition[identity] _____
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:2167: in test_reviewed_v2_requires_nonrecursive_governing_definition
+    pytest.fail(f"Recursive {shape} passed real V2 typed preparation and was assessed as semantic_use_eligible={observed['semantic_use_eligible']} under exact fictional signatures.")
+E   Failed: Recursive identity passed real V2 typed preparation and was assessed as semantic_use_eligible=True under exact fictional signatures.
+_ test_reviewed_v2_requires_nonrecursive_governing_definition[nested-self-use] _
+tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py:2167: in test_reviewed_v2_requires_nonrecursive_governing_definition
+    pytest.fail(f"Recursive {shape} passed real V2 typed preparation and was assessed as semantic_use_eligible={observed['semantic_use_eligible']} under exact fictional signatures.")
+E   Failed: Recursive nested-self-use passed real V2 typed preparation and was assessed as semantic_use_eligible=True under exact fictional signatures.
+- generated xml file: /tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/P2-V2-governing-definition-current-private-3XJmqSnf/red/result.xml -
+=========================== short test summary info ============================
+FAILED tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_requires_nonrecursive_governing_definition[identity]
+FAILED tests/unit/logic/autoformal/test_legal_norm_content_adjudication_v1.py::test_reviewed_v2_requires_nonrecursive_governing_definition[nested-self-use]
+2 failed, 13 passed in 19.80s

@@ -1,0 +1,176 @@
+{
+  "CLI_subprocess_selected": false,
+  "actual_READ3_reference": {
+    "bytes": 9832,
+    "path": "/tmp/P2-V4-CLI33-live-reconciled-READ3-controls-46ECQFly/actual-isolated-CLI33-READ3-closed.json",
+    "sha256": "0b9c361b49fa8918e1bf5b760ee9fc2eed6bafadf447ea775afccfd7d14c9eba"
+  },
+  "late_Root_verify_current_physical_absence": true,
+  "private_saved_wire_used": false,
+  "prospective_parent_RUN_compile_rows": [
+    {
+      "bytes": 28555,
+      "full9": {
+        "st_ctime_ns": "1795734594584760061",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5685338",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734594584760061",
+        "st_nlink": "1",
+        "st_size": "28555",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/scripts/ops/legal_ir/validate_uscode_corpus_release.py",
+      "sha256": "62ef7981b8cc8bfe3c04867aba88d2db3f735aaa57340fcddeb18ebca9502220"
+    },
+    {
+      "bytes": 12405,
+      "full9": {
+        "st_ctime_ns": "1795734574972049534",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "48770624",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734574972049534",
+        "st_nlink": "1",
+        "st_size": "12405",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/logic/autoformal/corpus_qualification.py",
+      "sha256": "e1a8540a6dd2889803138c510aa1f297316b64329e6e155eee4d90c250a12eae"
+    }
+  ],
+  "pytest_inifile": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/pytest.ini",
+  "required_absent_paths": [
+    "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/conftest.py",
+    "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/optimizers/conftest.py",
+    "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/conftest.py",
+    "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/__init__.py",
+    "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/conftest.py",
+    "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/integration/__init__.py",
+    "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/integration/conftest.py",
+    "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/autoformal/__init__.py",
+    "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/autoformal/conftest.py"
+  ],
+  "required_fixture_closure": [
+    {
+      "bytes": 2054,
+      "full9": {
+        "st_ctime_ns": "1795734574957669175",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "3421893",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734574957669175",
+        "st_nlink": "1",
+        "st_size": "2054",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/conftest.py",
+      "sha256": "2eab130f3effda3737f25a1770ccd5f9d4955ba42c3d692d659801ffdc1035cf"
+    },
+    {
+      "bytes": 20716,
+      "full9": {
+        "st_ctime_ns": "1795734575090064450",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5947549",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734575090064450",
+        "st_nlink": "1",
+        "st_size": "20716",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/conftest.py",
+      "sha256": "0a255dc653799cb980d7edbb1d7b2e3c8f0d81b091d4986aa712e1e8e12b7f10"
+    },
+    {
+      "bytes": 1204,
+      "full9": {
+        "st_ctime_ns": "1795734575090690774",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "10142589",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734575090690774",
+        "st_nlink": "1",
+        "st_size": "1204",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/conftest.py",
+      "sha256": "2abb4618add06f636ab71406c19ccd828084a48ecf75448397ddb6cd2bca53a2"
+    },
+    {
+      "bytes": 1536,
+      "full9": {
+        "st_ctime_ns": "1795734575087937014",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "3421894",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734575087937014",
+        "st_nlink": "1",
+        "st_size": "1536",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/pytest.ini",
+      "sha256": "01737eaafcd2b7e7e1a8db2368a93d4a28053ba44e611a10b1c87d2155dc65ff"
+    },
+    {
+      "bytes": 28555,
+      "full9": {
+        "st_ctime_ns": "1795734594584760061",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5685338",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734594584760061",
+        "st_nlink": "1",
+        "st_size": "28555",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/scripts/ops/legal_ir/validate_uscode_corpus_release.py",
+      "sha256": "62ef7981b8cc8bfe3c04867aba88d2db3f735aaa57340fcddeb18ebca9502220"
+    },
+    {
+      "bytes": 294620,
+      "full9": {
+        "st_ctime_ns": "1795734594584760061",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "15909928",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734594584760061",
+        "st_nlink": "1",
+        "st_size": "294620",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+      "sha256": "f61a83b403b7d253b34b473d74d6411e7151f4ad26cf5075584c51c31b4780cb"
+    }
+  ],
+  "required_normal_conftests": [
+    "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/conftest.py",
+    "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/conftest.py",
+    "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/conftest.py"
+  ],
+  "schema": "physical-v4-checked-native-ordinary18-fixture-wire/v1",
+  "script_required_fixture": {
+    "bytes": 28555,
+    "full9": {
+      "st_ctime_ns": "1795734594584760061",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "5685338",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734594584760061",
+      "st_nlink": "1",
+      "st_size": "28555",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/scripts/ops/legal_ir/validate_uscode_corpus_release.py",
+    "sha256": "62ef7981b8cc8bfe3c04867aba88d2db3f735aaa57340fcddeb18ebca9502220"
+  }
+}

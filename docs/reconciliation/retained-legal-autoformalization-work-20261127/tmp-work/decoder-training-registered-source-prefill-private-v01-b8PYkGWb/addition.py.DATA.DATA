@@ -1,0 +1,153 @@
+REGISTERED_DEVELOPMENT_SOURCE_PREFILL_SCHEMA = "reviewed-registered-development-source-prefill/v1"
+
+
+@dataclass(frozen=True)
+class RegisteredDevelopmentPrefillComponent:
+    scope: dict
+    report: dict
+    source_contexts: dict
+    expected_report_sha256: str
+    original_close_sha256: str
+    evidence_kind: str
+
+
+def registered_development_source_prefill_commitment(*, registered_scope_sha256, prefill_close_sha256,
+        issuer_source_sha256s, components):
+    """Select the ordered original prefill results and their source-only context pins."""
+    _need(_pin(registered_scope_sha256) and _pin(prefill_close_sha256)
+          and type(issuer_source_sha256s) is tuple and len(issuer_source_sha256s) == 2
+          and all(type(row) is tuple and len(row) == 2 and row[0] == role and _pin(row[1])
+                  for row, role in zip(issuer_source_sha256s, ("inputs", "worker"), strict=True))
+          and type(components) is tuple and 1 <= len(components) <= 4096
+          and all(type(row) is RegisteredDevelopmentPrefillComponent
+                  and _pin(row.expected_report_sha256) and _pin(row.original_close_sha256)
+                  and type(row.scope) is type(row.source_contexts) is type(row.report) is dict
+                  and row.evidence_kind in ("native_reviewed", "fictional_fixture")
+                  for row in components),
+          "exact registered scope, selected prefill issuer and original component close pins required")
+    original = tuple((_commit(row.scope), row.expected_report_sha256, row.original_close_sha256, row.evidence_kind)
+                     for row in components)
+    return _commit((REGISTERED_DEVELOPMENT_SOURCE_PREFILL_SCHEMA, registered_scope_sha256, prefill_close_sha256,
+                    issuer_source_sha256s, original))
+
+
+def verify_registered_development_source_prefill(study_owner, inputs, worker, *, route, registration, matrix,
+        study, design, step_grid, policy, split, configuration, lane, components, issuer_source_sha256s,
+        expected_selection_sha256, verify_close):
+    """Verify a paired study's source role from detached original reports, without retokenizing.
+
+    The existing close owner authenticates the aggregate and each original
+    issuance, including the selected inputs/framer, report, context, and resource
+    custody. Hashes and observations here do not replace original closes.
+    """
+    _need(type(lane) is study_owner.DecoderTransportEvidence and _pin(expected_selection_sha256)
+          and callable(verify_close), "closed source prefill for a selected decoder lane required")
+
+    def current():
+        registered = registered_development_target_witness_scope(study_owner, route=route,
+            registration=registration, matrix=matrix, variant=lane.variant, study=study, design=design,
+            step_grid=step_grid, policy=policy, split=split, configuration=configuration,
+            max_output_tokens=lane.max_output_tokens)
+        split_scope, _, _, _, _ = _development_population_scope(split.manifest, split.population,
+            split.case_aliases, policy, expected_development_sha256=registered["development_split_sha256"],
+            manifest_sha256=design.global_split_sha256)
+        _need((split_scope["population_sha256"], split_scope["reserved_final_count"])
+              == (design.population_sha256, design.reserved_final_count),
+              "source prefill differs from registered population or reserved FINAL count")
+        _need((lane.configuration_sha256, lane.tokenizer_pipeline_sha256, lane.target_codec, lane.max_sequence_tokens)
+              == tuple(registered[key] for key in ("configuration_sha256", "tokenizer_pipeline_sha256",
+                                                   "target_codec", "max_sequence_tokens")),
+              "source prefill differs from the selected configuration, tokenizer, codec or context window")
+        registered_pin = _commit(registered)
+        selected = registered_development_source_prefill_commitment(registered_scope_sha256=registered_pin,
+            prefill_close_sha256=lane.source_prefill_close_sha256, issuer_source_sha256s=issuer_source_sha256s,
+            components=components)
+        _need(selected == expected_selection_sha256, "source prefill selection changed or belongs to another lane")
+        _need(type(lane.rows) is tuple and all(type(row) is study_owner.DecoderTransportRow for row in lane.rows)
+              and tuple((row.row_id, row.unit_id, row.source_wire_sha256, row.source_binding_sha256) for row in lane.rows)
+              == tuple((case.row_id, case.unit_id, case.source_wire_sha256, case.source_binding_sha256) for case in policy.cases),
+              "source prefill requires the complete ordered registered source roster")
+        rows = {row.row_id: row for row in lane.rows}
+        original_reports = []
+        proof_rows = []
+        for component in components:
+            scope, report, contexts = component.scope, component.report, component.source_contexts
+            _need(component.evidence_kind == registered["evidence_kind"]
+                  and set(scope) == {"schema", "geometry", "source_arguments_sha256", "source_contexts_sha256"}
+                  and scope["schema"] == DEVELOPMENT_PREFILL_SCHEMA
+                  and all(_pin(scope[key]) for key in ("source_arguments_sha256", "source_contexts_sha256"))
+                  and _commit(scope) == report.get("scope_sha256")
+                  and _commit(report) == component.expected_report_sha256,
+                  "source prefill requires matching evidence kind and exact original scope and report")
+            geometry = scope["geometry"]
+            _need(type(geometry) is dict and set(geometry) == {"route", "configuration_sha256", "tokenizer_pipeline_sha256",
+                  "generation_policy", "max_sequence_tokens", "max_source_tokens", "max_output_tokens"}
+                  and (geometry["route"], geometry["configuration_sha256"], geometry["tokenizer_pipeline_sha256"],
+                       geometry["max_sequence_tokens"], geometry["max_output_tokens"])
+                      == (route, lane.configuration_sha256, lane.tokenizer_pipeline_sha256,
+                          lane.max_sequence_tokens, lane.max_output_tokens)
+                  and type(geometry["max_source_tokens"]) is int and 3 <= geometry["max_source_tokens"] <= 65536
+                  and _commit(geometry) == report.get("geometry_sha256"),
+                  "source prefill geometry differs from the selected decoder variant")
+            if route == QWEN:
+                generation = worker._reviewed_decoder_generation_policy(geometry["generation_policy"])
+                _need(generation == geometry["generation_policy"]
+                      and generation.get("schema") == worker.REVIEWED_DIGEST_OMITTED_TERMINAL_POLICY_SCHEMA
+                      and generation.get("conditioning_profile") == worker.REVIEWED_DIGEST_OMITTED_CHATML_PROFILE,
+                      "source prefill requires the original Qwen terminal policy and ChatML framing")
+            else:
+                _need(geometry["generation_policy"] is None, "source prefill requires the original T5 default policy")
+            _need(set(contexts) == {"profile", "selection_context", "rows"}
+                  and contexts["profile"] == inputs.REVIEWED_DECODER_SOURCE_PROFILE
+                  and type(contexts["selection_context"]) is dict
+                  and set(contexts["selection_context"]) == {"schema", "interpretation_id", "selection_mode"}
+                  and contexts["selection_context"]["schema"] == "caller-known-interpretation-selection/v1"
+                  and contexts["selection_context"]["selection_mode"] == "identifier_only"
+                  and type(contexts["selection_context"]["interpretation_id"]) is str
+                  and bool(contexts["selection_context"]["interpretation_id"])
+                  and _sha(inputs._reviewed_wire(contexts)) == scope["source_contexts_sha256"]
+                  and type(contexts["rows"]) is list and type(report.get("rows")) is list
+                  and 1 <= len(contexts["rows"]) == len(report["rows"]) <= 32,
+                  "source prefill requires the original detached source-only contexts")
+            for context, observed in zip(contexts["rows"], report["rows"], strict=True):
+                _need(type(context) is dict and set(context) == {"id", "unit_id", "governing_context", "source_binding"}
+                      and type(context["id"]) is str and context["id"] in rows
+                      and type(context["source_binding"]) is dict
+                      and set(context["source_binding"]) == {"source_version_cid", "occurrence_cid", "document_revision"}
+                      and all(type(value) is str and value for value in context["source_binding"].values())
+                      and type(context["governing_context"]) is dict
+                      and set(context["governing_context"]) == {"jurisdiction", "instrument_id", "governing_edition",
+                                                               "legal_as_of_utc", "valid_from_utc", "valid_until_utc"}
+                      and all(type(value) is str and value or key == "valid_until_utc" and value is None
+                              for key, value in context["governing_context"].items())
+                      and type(observed) is dict, "exact original source-only prefill row and binding required")
+                row = rows[context["id"]]
+                _need((context["id"], context["unit_id"], _sha(inputs._reviewed_wire(context["source_binding"])),
+                        observed.get("id"), observed.get("unit_id"), observed.get("source_wire_sha256"), observed.get("prefill_positions"))
+                      == (row.row_id, row.unit_id, row.source_binding_sha256, row.row_id, row.unit_id, row.source_wire_sha256,
+                          row.prefill_positions),
+                      "prefill positions or source binding differ from the registered occurrence")
+                prefill = observed.get("prefill_positions")
+                _need(type(prefill) is int and prefill > 0 and (
+                      prefill + lane.max_output_tokens - 1 <= lane.max_sequence_tokens if route == QWEN else
+                      prefill <= min(geometry["max_source_tokens"], lane.max_sequence_tokens)),
+                      "successful source prefill exceeds its original route capacity")
+            original_reports.append(report)
+            proof_rows.append((report["scope_sha256"], component.expected_report_sha256, report.get("source_receipt_sha256"),
+                               scope["source_contexts_sha256"], component.original_close_sha256))
+        split_pin = registered["development_split_sha256"]
+        digest = _commit((DEVELOPMENT_EXACT_INPUT_SCHEMA, split_pin, registered["evaluation_policy_sha256"],
+                          tuple(component.expected_report_sha256 for component in components)))
+        # Check the existing complete-roster rules structurally. Actual custody
+        # for that roster is authenticated by verify_close below.
+        audit = audit_development_exact_inputs(policy, development_split_sha256=split_pin,
+            prefills=tuple(original_reports), expected_scope_sha256=digest,
+            verify_development_owner=lambda split, scope: (split, scope) == (split_pin, digest))
+        return registered_pin, selected, lane.source_prefill_close_sha256, issuer_source_sha256s, tuple(proof_rows), audit["scope_sha256"]
+
+    bound = current()
+    _need(verify_close(*bound) is True, "independent source prefill owner refused the original reports and close")
+    _need(current() == bound, "source prefill changed during original close verification")
+    return True
+
+

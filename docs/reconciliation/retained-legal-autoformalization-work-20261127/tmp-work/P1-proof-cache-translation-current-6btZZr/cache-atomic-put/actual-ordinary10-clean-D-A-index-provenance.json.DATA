@@ -1,0 +1,62 @@
+{
+  "A": {
+    "bytes": 4469929,
+    "full9": {
+      "st_ctime_ns": "1795734671233647109",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "48763139",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795734671232647103",
+      "st_nlink": "1",
+      "st_size": "4469929",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate/.git/index",
+    "sha256": "8b777ee97314c4f0712b10b2fae9cc75a71901327a01a9d77a5be0c03a76441c"
+  },
+  "A_index_metadata_verified_against_current_epoch": true,
+  "A_raw_Source_index_capture_claimed": false,
+  "D": {
+    "bytes": 7070589,
+    "full9": {
+      "st_ctime_ns": "1795750532478310693",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72519186",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795750532468310578",
+      "st_nlink": "1",
+      "st_size": "7070589",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/index",
+    "sha256": "8c9ad3eb981d669bc1d98bf5e6f2448d4fd3246a50818bc6d406b6c572adf7c7"
+  },
+  "actual_paired_D_A_READ4": {
+    "bytes": 8248,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-Phase1-cache-atomic-put-READ4-closed.json",
+    "sha256": "759f5100682a32e5fe2a9a81dbb0a33946d8ff658df1fbfd1f3f338295b5b148"
+  },
+  "branch": {
+    "bytes": 41,
+    "full9": {
+      "st_ctime_ns": "1795750532480310716",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72519976",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795750532479310705",
+      "st_nlink": "1",
+      "st_size": "41",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets/.git/refs/heads/isolated/phase1-proof-cache-persist-before-index",
+    "sha256": "747fe2f0d9831dbdf7da9d416476d641dce7afd6ea2360e33f5903e34050033e"
+  },
+  "frozen": {
+    "bytes": 8716,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/cache-atomic-put/actual-isolated-Phase1-cache-atomic-put-exact-three-local-freeze.json",
+    "sha256": "0d94fff7376374123441e0a52da3fb11b06f315125051e030660c48d571b5725"
+  }
+}

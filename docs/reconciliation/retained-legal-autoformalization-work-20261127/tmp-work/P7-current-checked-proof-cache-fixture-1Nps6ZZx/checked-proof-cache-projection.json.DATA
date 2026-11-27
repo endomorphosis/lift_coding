@@ -1,0 +1,763 @@
+{
+  "discovery_only": {
+    "ipfs_datasets_py/ipfs_backend_router.py": {
+      "bytes": 35292,
+      "full9": [
+        66306,
+        48806426,
+        35292,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737452201414953,
+        1795737452201414953
+      ],
+      "git_blob_sha1": "99e0217a261e86fdc38298ea181960bedafbd9b5",
+      "prior_status": "missing",
+      "sha256": "d57898ceb7a5be0d8776f81ecb08cf96144afa03f55090d5f33b41baed3e8b0d"
+    }
+  },
+  "git_head": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+  "git_tree": "8b2d09183375036dba868e4607646ee407007fc5",
+  "prior_projection": {
+    "bytes": 61071,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/projection-manifest-replay.json",
+    "sha256": "3f645d4c6737c212742b8d04ab6db63bc730043b02dd7f15c43e3da9af921263"
+  },
+  "projection": "/tmp/P7-current-checked-proof-cache-fixture-1Nps6ZZx/project",
+  "schema": "existing-phase7-no-fit-check-proof-cache-Git-projection/v1",
+  "sources": {
+    "ipfs_datasets_py/__init__.py": {
+      "bytes": 56829,
+      "full9": [
+        66306,
+        48806323,
+        56829,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451096940129,
+        1795737451096940129
+      ],
+      "git_blob_sha1": "7d8b29b674206355ec12a84f69920a819338e43c",
+      "prior_status": "exact_held",
+      "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+    },
+    "ipfs_datasets_py/logic/__init__.py": {
+      "bytes": 4434,
+      "full9": [
+        66306,
+        48806326,
+        4434,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451117249769,
+        1795737451117249769
+      ],
+      "git_blob_sha1": "950f95b6c859021bbd76326adcf602bdd4d19482",
+      "prior_status": "exact_held",
+      "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+    },
+    "ipfs_datasets_py/logic/backends/kernel/lean.py": {
+      "bytes": 104341,
+      "full9": [
+        66306,
+        48806400,
+        104341,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451921676926,
+        1795737451921676926
+      ],
+      "git_blob_sha1": "7ee0cdb71958b052038fa467230dbf86dd0c3fb2",
+      "prior_status": "missing",
+      "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+    },
+    "ipfs_datasets_py/logic/backends/kernel/wasm.py": {
+      "bytes": 24933,
+      "full9": [
+        66306,
+        48806424,
+        24933,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737452142413601,
+        1795737452142413601
+      ],
+      "git_blob_sha1": "452f7d2fa0d285ae213abdc4a7b9ea83875b8c1b",
+      "prior_status": "exact_held",
+      "sha256": "49cfdbc0108b43d45ab9f567b4153f384985563b075f369b32e37f855252d6cc"
+    },
+    "ipfs_datasets_py/logic/backends/process.py": {
+      "bytes": 109707,
+      "full9": [
+        66306,
+        48806404,
+        109707,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451988058680,
+        1795737451988058680
+      ],
+      "git_blob_sha1": "1650b31bd0aa342f3614bf9999e9b6010fba17ee",
+      "prior_status": "exact_held",
+      "sha256": "370ba355be1da87814be4a117d2ce2a1cbc255064958d9ec64ada8e54521a7d7"
+    },
+    "ipfs_datasets_py/logic/backends/resource_admission.py": {
+      "bytes": 19806,
+      "full9": [
+        66306,
+        48806407,
+        19806,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737452047553332,
+        1795737452047553332
+      ],
+      "git_blob_sha1": "4ec4a57c8fb7e058cf92e9b0a42cd1940290fb4f",
+      "prior_status": "exact_held",
+      "sha256": "fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8"
+    },
+    "ipfs_datasets_py/logic/backends/results.py": {
+      "bytes": 27160,
+      "full9": [
+        66306,
+        48806406,
+        27160,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737452005861770,
+        1795737452005861770
+      ],
+      "git_blob_sha1": "7ffdc5b4019faa80749df5fb0bb7d1f06379573f",
+      "prior_status": "exact_held",
+      "sha256": "afda793472d3a6ba13f20bee13a992bfce68177388bdf338548157a5aa201458"
+    },
+    "ipfs_datasets_py/logic/common/__init__.py": {
+      "bytes": 2438,
+      "full9": [
+        66306,
+        48806373,
+        2438,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451821922853,
+        1795737451821922853
+      ],
+      "git_blob_sha1": "c06c400f28c7a07e5c0ce719a7e3d3227a3bef0f",
+      "prior_status": "exact_held",
+      "sha256": "e574c74067e7059cc506b32c780bc0444de89c63b55dade3df00ae9fd563431e"
+    },
+    "ipfs_datasets_py/logic/common/bounded_cache.py": {
+      "bytes": 6656,
+      "full9": [
+        66306,
+        48806379,
+        6656,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451845676828,
+        1795737451845676828
+      ],
+      "git_blob_sha1": "9d37b6c2c22299cc433b565e2ff5148808f9790e",
+      "prior_status": "exact_held",
+      "sha256": "29a450b5fc08c5577964774035717dc5d7be85c159cfd502fba5252c4ec9c9fa"
+    },
+    "ipfs_datasets_py/logic/common/converters.py": {
+      "bytes": 13962,
+      "full9": [
+        66306,
+        48806378,
+        13962,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451838009431,
+        1795737451838009431
+      ],
+      "git_blob_sha1": "f2ed787161b6303057d125c3149cb1df5f4b8c9b",
+      "prior_status": "exact_held",
+      "sha256": "f530c453775f2c1a4a2f8a26aa647df1f725be109078df258288eab33a427fde"
+    },
+    "ipfs_datasets_py/logic/common/errors.py": {
+      "bytes": 2268,
+      "full9": [
+        66306,
+        48806374,
+        2268,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451828764435,
+        1795737451828764435
+      ],
+      "git_blob_sha1": "c84a797f91f8a512178527e66ddc7bdfe06b4948",
+      "prior_status": "exact_held",
+      "sha256": "10d21acd8d0fd6049297a1b36d10db1fcc09146095f1dabfe5a686b887f4b8cf"
+    },
+    "ipfs_datasets_py/logic/common/feature_detection.py": {
+      "bytes": 4875,
+      "full9": [
+        66306,
+        48806382,
+        4875,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451858834212,
+        1795737451858834212
+      ],
+      "git_blob_sha1": "227753dce0379026054a44604ac65361f7108031",
+      "prior_status": "exact_held",
+      "sha256": "a285d84f9b13ee3c2c54023e07ccf9da94ce93e6736362c1881421db9e509d76"
+    },
+    "ipfs_datasets_py/logic/common/proof_cache.py": {
+      "bytes": 168205,
+      "full9": [
+        66306,
+        48806386,
+        168205,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451872475855,
+        1795737451872475855
+      ],
+      "git_blob_sha1": "ebfe06198a3634ae0812dd7e2d997909a9fb978d",
+      "prior_status": "exact_held",
+      "sha256": "b68c36ff934ba6ee7a308162ee7035c78f4c522a5483e85e536b428db8485b36"
+    },
+    "ipfs_datasets_py/logic/common/utility_monitor.py": {
+      "bytes": 6398,
+      "full9": [
+        66306,
+        48806380,
+        6398,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451852269016,
+        1795737451852269016
+      ],
+      "git_blob_sha1": "bbb296dcc09ca863536e40a7503a061fdc4f6c50",
+      "prior_status": "exact_held",
+      "sha256": "ef23631a622dfd555cefcdf69793e78a7c64a115c7451aea4dfff5389b014985"
+    },
+    "ipfs_datasets_py/logic/common/validators.py": {
+      "bytes": 8374,
+      "full9": [
+        66306,
+        48806384,
+        8374,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451865124797,
+        1795737451865124797
+      ],
+      "git_blob_sha1": "121b08d093b79f6dc2298b5fa799e7b15b2e682a",
+      "prior_status": "exact_held",
+      "sha256": "e58dbba7d3f346545e2ff572928ed9c7bb9adc71b20e8cc8dc816a7fc060e0c7"
+    },
+    "ipfs_datasets_py/logic/families/models.py": {
+      "bytes": 36277,
+      "full9": [
+        66306,
+        48806402,
+        36277,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451945104883,
+        1795737451945104883
+      ],
+      "git_blob_sha1": "053af9eaf293ba268c2dc8155844f2e3dc5355ce",
+      "prior_status": "exact_held",
+      "sha256": "1a92305ef498812e3757147179907d4ddf4a4518371034fc2363922d5d5fed3f"
+    },
+    "ipfs_datasets_py/logic/families/namespaces.py": {
+      "bytes": 34262,
+      "full9": [
+        66306,
+        48806362,
+        34262,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451516564225,
+        1795737451516564225
+      ],
+      "git_blob_sha1": "2ff6102d93759b4bfd30e2d0054353db733e6e2b",
+      "prior_status": "missing",
+      "sha256": "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+    },
+    "ipfs_datasets_py/logic/formalization/__init__.py": {
+      "bytes": 2073,
+      "full9": [
+        66306,
+        48806334,
+        2073,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451142442574,
+        1795737451142442574
+      ],
+      "git_blob_sha1": "59375db940cfdcfb95cff7548630628821ac4bae",
+      "prior_status": "missing",
+      "sha256": "91c60c1dfbf9038b8271ae6b1495dbbaf0be8d6ce438524c33f4f7a586f17266"
+    },
+    "ipfs_datasets_py/logic/formalization/compiler.py": {
+      "bytes": 35152,
+      "full9": [
+        66306,
+        48806335,
+        35152,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451148354739,
+        1795737451148354739
+      ],
+      "git_blob_sha1": "85f27c5708fd5ebd43f616de7895b4a99bac2f13",
+      "prior_status": "missing",
+      "sha256": "2d4c63025e3d0004774c3a1d688193187f115b181085d7825d46c9d72581b03c"
+    },
+    "ipfs_datasets_py/logic/formalization/samples.py": {
+      "bytes": 13082,
+      "full9": [
+        66306,
+        48806350,
+        13082,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451413933150,
+        1795737451413933150
+      ],
+      "git_blob_sha1": "1de7e2d32651cb0193789604cbef0b0f31bf4e49",
+      "prior_status": "missing",
+      "sha256": "90b5efa905eb9d3fb980cb628d32a180d37fa9097fb252b3aad006a3eb628695"
+    },
+    "ipfs_datasets_py/logic/formalization/views.py": {
+      "bytes": 29888,
+      "full9": [
+        66306,
+        48806352,
+        29888,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451459621420,
+        1795737451459621420
+      ],
+      "git_blob_sha1": "82a93e24033046426629310b7f8a65ba9260f5e0",
+      "prior_status": "missing",
+      "sha256": "509fdf2d7334559c7ef176d504d5a6a9d8645c99c00c779d14cb3d08c51f9ae2"
+    },
+    "ipfs_datasets_py/logic/ir_core/__init__.py": {
+      "bytes": 6942,
+      "full9": [
+        66306,
+        48806337,
+        6942,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451156425853,
+        1795737451156425853
+      ],
+      "git_blob_sha1": "71c13cae5d6ffc38d9b1ec4bee8ee90b255b3d0a",
+      "prior_status": "exact_held",
+      "sha256": "4c0070482e009dd7cb9875e91124d48683da37d53f691cccb306ec50f23c946c"
+    },
+    "ipfs_datasets_py/logic/ir_core/canonical.py": {
+      "bytes": 14098,
+      "full9": [
+        66306,
+        48806347,
+        14098,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451372735432,
+        1795737451372735432
+      ],
+      "git_blob_sha1": "fa63fd302dad6340556a937b73883a25376f5f6b",
+      "prior_status": "missing",
+      "sha256": "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0"
+    },
+    "ipfs_datasets_py/logic/ir_core/claims.py": {
+      "bytes": 16176,
+      "full9": [
+        66306,
+        48806338,
+        16176,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451161807421,
+        1795737451161807421
+      ],
+      "git_blob_sha1": "63af5a987404010aa0ec69fb827722afc9b53b81",
+      "prior_status": "exact_held",
+      "sha256": "282cdd3a6ba18a90079886337d360bae44da172748faa3ad2715d2071070de3b"
+    },
+    "ipfs_datasets_py/logic/ir_core/diagnostics.py": {
+      "bytes": 20110,
+      "full9": [
+        66306,
+        48806339,
+        20110,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451182286903,
+        1795737451182286903
+      ],
+      "git_blob_sha1": "4d3ab85d061a8d0d44e945af44dcf8ed23c9fcc9",
+      "prior_status": "missing",
+      "sha256": "508fd3c2dce94a1eb1e2dff19f8f578ccec2d1e94eb1db2742f75783e23ff198"
+    },
+    "ipfs_datasets_py/logic/ir_core/evidence.py": {
+      "bytes": 12653,
+      "full9": [
+        66306,
+        48806341,
+        12653,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451193440973,
+        1795737451193440973
+      ],
+      "git_blob_sha1": "fa2e4dadbd6e96e8502165f9c418fcc42c0ec484",
+      "prior_status": "missing",
+      "sha256": "826743829d2964b97e13720b5ea52907de77f6b18e8886e5a3c0fb6a977fdeff"
+    },
+    "ipfs_datasets_py/logic/ir_core/identity.py": {
+      "bytes": 8911,
+      "full9": [
+        66306,
+        48806343,
+        8911,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451363994440,
+        1795737451363994440
+      ],
+      "git_blob_sha1": "69d77e91f4ec671c6355b0f035017b1fed2b38d0",
+      "prior_status": "missing",
+      "sha256": "606bffc1f938c59f44651eeb65cb9c0738e16e465aabba0ad82ef05e3b5b3b0e"
+    },
+    "ipfs_datasets_py/logic/ir_core/protocols.py": {
+      "bytes": 57510,
+      "full9": [
+        66306,
+        48806370,
+        57510,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451778376921,
+        1795737451778376921
+      ],
+      "git_blob_sha1": "09b5536bf3269b6eb54f62cfa83e8dceed53d49e",
+      "prior_status": "exact_held",
+      "sha256": "e2dd1dc93d1efa15c7c4088145d32c52636c72e9230b16ade77ca6c6a0c2c336"
+    },
+    "ipfs_datasets_py/logic/ir_core/provenance.py": {
+      "bytes": 31891,
+      "full9": [
+        66306,
+        48806342,
+        31891,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451201252292,
+        1795737451201252292
+      ],
+      "git_blob_sha1": "9f2e8425894c8287ae0046153ac081734cb77d8d",
+      "prior_status": "missing",
+      "sha256": "16eaf7c258550e5625bc19e6e7468c94133aedd1e85e64075f057ab4e52c3efe"
+    },
+    "ipfs_datasets_py/logic/legal_ir/__init__.py": {
+      "bytes": 2708,
+      "full9": [
+        66306,
+        48806329,
+        2708,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451124317897,
+        1795737451124317897
+      ],
+      "git_blob_sha1": "049082bd3528682a395698fea6ae778421ddf156",
+      "prior_status": "missing",
+      "sha256": "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1"
+    },
+    "ipfs_datasets_py/logic/legal_ir/proof_cache.py": {
+      "bytes": 62643,
+      "full9": [
+        66306,
+        48806330,
+        62643,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451133456652,
+        1795737451133456652
+      ],
+      "git_blob_sha1": "5f4b9e8eedf00c89d31ff9fa68559dc3584126e1",
+      "prior_status": "missing",
+      "sha256": "9b05a2f890f2df62931273f2448182af8a2d99af73248c5c67ef2ec3d04b0c3c"
+    },
+    "ipfs_datasets_py/logic/syntax_core/__init__.py": {
+      "bytes": 8285,
+      "full9": [
+        66306,
+        48806356,
+        8285,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451487727019,
+        1795737451487727019
+      ],
+      "git_blob_sha1": "9d0f887ec3d4d8b559d7cd546b39f4c6c6de3ee7",
+      "prior_status": "missing",
+      "sha256": "20dd418d90360cdb42c64ba8b87bedcdb640228b460ef6c6ae60312365130e81"
+    },
+    "ipfs_datasets_py/logic/syntax_core/ast.py": {
+      "bytes": 56966,
+      "full9": [
+        66306,
+        48806357,
+        56966,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451497482100,
+        1795737451497482100
+      ],
+      "git_blob_sha1": "129c5c4079d2ef05924bcf62c76fb7d3fd22d5e7",
+      "prior_status": "missing",
+      "sha256": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+    },
+    "ipfs_datasets_py/logic/syntax_core/contracts.py": {
+      "bytes": 75291,
+      "full9": [
+        66306,
+        48806366,
+        75291,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451535799440,
+        1795737451535799440
+      ],
+      "git_blob_sha1": "09d79a0e6ae23d8e71f31fbba9bbebfdb84f4546",
+      "prior_status": "missing",
+      "sha256": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+    },
+    "ipfs_datasets_py/logic/syntax_core/signatures.py": {
+      "bytes": 30488,
+      "full9": [
+        66306,
+        48806368,
+        30488,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451648917458,
+        1795737451648917458
+      ],
+      "git_blob_sha1": "ce8eb3447fdb9ed57c348e0cb16fe60528d440b6",
+      "prior_status": "missing",
+      "sha256": "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+    },
+    "ipfs_datasets_py/optimizers/__init__.py": {
+      "bytes": 957,
+      "full9": [
+        66306,
+        48806410,
+        957,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737452061194912,
+        1795737452061194912
+      ],
+      "git_blob_sha1": "7ba70fc5215c797c6b3be4f27ca0c74c6d705491",
+      "prior_status": "exact_held",
+      "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py": {
+      "bytes": 69336,
+      "full9": [
+        66306,
+        48806412,
+        69336,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737452066973285,
+        1795737452066973285
+      ],
+      "git_blob_sha1": "ba048421b90e32e87300c10b13e199da350b6207",
+      "prior_status": "exact_held",
+      "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py": {
+      "bytes": 15543,
+      "full9": [
+        66306,
+        48806420,
+        15543,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737452128421762,
+        1795737452128421762
+      ],
+      "git_blob_sha1": "ab690a0e50ac4fd66037d3281eb4a859af4806ff",
+      "prior_status": "exact_held",
+      "sha256": "3655923785cb99409171caaba8c523354f03dbe8d82b6deb45a7b46db8394633"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py": {
+      "bytes": 151350,
+      "full9": [
+        66306,
+        48806414,
+        151350,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737452081423560,
+        1795737452081423560
+      ],
+      "git_blob_sha1": "54dc1effc87deb3fba782f1b9df4db460ffb4f1a",
+      "prior_status": "exact_held",
+      "sha256": "7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3"
+    },
+    "ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py": {
+      "bytes": 53075,
+      "full9": [
+        66306,
+        48806416,
+        53075,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737452111852652,
+        1795737452111852652
+      ],
+      "git_blob_sha1": "f9f476b8af6dafab5606c349cfb30546c0ba7a29",
+      "prior_status": "exact_held",
+      "sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63"
+    },
+    "ipfs_datasets_py/router_deps.py": {
+      "bytes": 5845,
+      "full9": [
+        66306,
+        48806324,
+        5845,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451110209273,
+        1795737451110209273
+      ],
+      "git_blob_sha1": "906a415bac365db7ba03b2be71f1086edb0fd926",
+      "prior_status": "exact_held",
+      "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+    },
+    "ipfs_datasets_py/utils/__init__.py": {
+      "bytes": 175,
+      "full9": [
+        66306,
+        48806390,
+        175,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451901073155,
+        1795737451901073155
+      ],
+      "git_blob_sha1": "dd98bbea10f2938d6f040b8aa5c4377bbb14beb9",
+      "prior_status": "exact_held",
+      "sha256": "78f4cd7f8e14b4fff482c0c91ada5c49f8b9edf707bffd9cd58840b5503e66c2"
+    },
+    "ipfs_datasets_py/utils/cid_utils.py": {
+      "bytes": 4428,
+      "full9": [
+        66306,
+        48806392,
+        4428,
+        33204,
+        1000,
+        1000,
+        1,
+        1795737451906784087,
+        1795737451906784087
+      ],
+      "git_blob_sha1": "36944fb73c85e541b0b9c47531ebfd7b79791534",
+      "prior_status": "exact_held",
+      "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+    }
+  }
+}

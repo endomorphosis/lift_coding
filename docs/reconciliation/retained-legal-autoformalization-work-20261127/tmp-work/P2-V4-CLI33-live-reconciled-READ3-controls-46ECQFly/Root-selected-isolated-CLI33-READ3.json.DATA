@@ -1,0 +1,25 @@
+{
+  "Root_selected": true,
+  "Source_operation_max_bytes": 33554432,
+  "cap": {
+    "bytes": 1266,
+    "path": "/tmp/P2-V4-CLI33-live-reconciled-READ3-controls-46ECQFly/Source-only-isolated-CLI33-READ3-full-retained.json",
+    "sha256": "d41459ae66e8957fe4edeacc69b9212bb683f64a3604736c57d2c2646b88b3d8"
+  },
+  "fresh_output_namespace": "/tmp/P2-V4-CLI33-live-reconciled-READ3-controls-46ECQFly/actual-output",
+  "launch_deadline_utc_ns": 1795735095626490885,
+  "launch_not_before_utc_ns": 1795735035626490885,
+  "ledger_before": {
+    "captures": 534956,
+    "capturesComplete": false,
+    "global_cap": 54961653770,
+    "internal_cap": 54771061896,
+    "internal_used": 54731150472,
+    "used": 54921742346
+  },
+  "request": {
+    "bytes": 13537,
+    "path": "/tmp/P2-V4-CLI33-live-reconciled-READ3-controls-46ECQFly/Root-bound-isolated-CLI33-READ3-request.json",
+    "sha256": "324c8472e29fec8197242e4ac5f243f8f7375ea34d982e390ce9cfee7aa5332b"
+  }
+}

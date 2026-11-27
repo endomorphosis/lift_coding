@@ -1,0 +1,351 @@
+from contextlib import contextmanager
+from hashlib import sha256
+from pathlib import Path
+from types import SimpleNamespace
+import importlib
+import json
+import os
+import sys
+import tempfile
+import unittest
+from unittest.mock import patch
+
+HERE = Path(__file__).resolve().parent
+AFTER = HERE / 'owner-driver.py.DATA'
+BEFORE = HERE / 'owner-driver.before.py.DATA'
+
+def compiled_driver(path):
+    globals_for_driver = {'__name__': 'private_original_owner_controls'}
+    exec(compile(path.read_bytes(),str(path),'exec'),globals_for_driver)
+    return globals_for_driver
+
+class OriginalParentRoute(unittest.TestCase):
+    def setUp(self):
+        self.addCleanup(self.restore_globals)
+        self.original_path = list(sys.path)
+        self.original_env = dict(os.environ)
+        self.temp = tempfile.TemporaryDirectory(dir=HERE)
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name)
+        self.dataset = self.root/'datasets'
+        self.accelerate = self.root/'accelerate'
+        self.output = self.root/'reports'
+        self.charged = self.root/'charged'
+        self.state = self.root/'owned-resource-state'
+        self.driver = compiled_driver(AFTER)
+        self.events = []
+        self.tool_calls = []
+        self.exit_source = 0
+        self.parent = None
+        self.reservation = None
+        self.project_rows = [{'root':str(root),'Git_HEAD':digit*40} for root,digit in [(self.dataset,'3'),(self.accelerate,'a')]]
+        self.module_rows = []
+        self.modules = {}
+        pins = {
+            'ipfs_datasets_py.logic.backends.process':'4434f571e209c17165aa3ea941001bbeaad3efc10957a8dfe9c183f7531b44b6',
+            'ipfs_datasets_py.logic.backends.resource_admission':'fda64e02042355fd0a0a3b75934b3d1c4ccb5efb42f0fe861876275ff8a5e1a8',
+            'ipfs_datasets_py.optimizers.logic_theorem_optimizer.resource_scheduler':'7a0dac2d13b4be7775e278054e1a57808f5629d3c58952164b91514e6e2ae2d3',
+            'ipfs_datasets_py.optimizers.logic_theorem_optimizer.autoencoder_daemon_resources':'51bec0e627e266595229dee298f22c7bdcf82bb5876eb2da1efd5f3655fbe585',
+        }
+        for name, digest in pins.items():
+            path=self.dataset/Path(name.replace('.','/')+'.py')
+            path.parent.mkdir(parents=True,exist_ok=True)
+            path.write_bytes(b'modeled project module identity')
+            stamp = self.driver['f9'](path.lstat())
+            self.module_rows.append({'path':str(path),'bytes':int(stamp['st_size']),'sha256':digest,'full9':stamp})
+            self.modules[name]=SimpleNamespace(__file__=str(path))
+        self.accelerate.mkdir()
+        accel_file=self.accelerate/'modeled-source.py'
+        accel_file.write_bytes(b'modeled paired source')
+        stamp=self.driver['f9'](accel_file.lstat())
+        self.module_rows.append({'path':str(accel_file),'bytes':int(stamp['st_size']),'sha256':'e'*64,'full9':stamp})
+        self.epoch=self.write_json('epoch',self.module_rows)
+        protected=self.root/'index'
+        protected.write_bytes(b'protected fixture')
+        self.close=self.write_json('paired-close',{'fixture_only':True})
+        self.source=self.write_json('paired-source',{'schema':self.driver['ISOLATED_SOURCE_SCHEMA'],
+            'datasets_root':str(self.dataset),'projects':self.project_rows,'outer_epoch':self.epoch,
+            'protected_index':{'path':str(protected),'sha256':sha256(protected.read_bytes()).hexdigest(),
+                               'full9':self.driver['f9'](protected.lstat())},
+            'absent_paths':[str(self.dataset/'absent')],'paired_reader_close':self.close,'parent_module_sha256':pins})
+        self.control=self.write_json('control',{'origin_selection_sha256':'a'*64,'source_epoch_reference':self.epoch,
+            'cwd':str(self.dataset),'attempt_directory':str(self.charged/'attempt'),'python':'/usr/bin/python3',
+            'owner_admission_sha256':'b'*64,'limits':{'resident_memory_bytes':16*1024**2,'max_workspace_bytes':1024**2}})
+        self.launch=self.write_json('launch',{'origin_selection_sha256':'a'*64,'source_epoch_sha256':self.epoch['sha256'],
+            'control_binding_sha256':self.control['sha256'],'physical_request_sha256':'e'*64,'clock_domain_sha256':'f'*64})
+        self.opening=self.write_json('opening',{'schema':self.driver['ISOLATED_RESERVATION_SCHEMA'],
+            'state_path':str(self.state),'resource_ledger':str(self.root/'ledger'),'roots':[str(self.root)],
+            'storage_bytes':1024**2,'memory_mb':16,'cpu_slots':2,'child_process_slots':1,'timeout_seconds':21,
+            'ledger_lock_timeout_seconds':8,'storage_limit_bytes':10*1024**2,'expected_scheduler_policy_sha256':'8'*64,
+            'environment':{'HF_HUB_OFFLINE':'1','TRANSFORMERS_OFFLINE':'1','IPFS_DATASETS_PY_MINIMAL_IMPORTS':'1',
+                'IPFS_ACCEL_AUTO_INSTALL':'0','IPFS_ACCEL_SKIP_CORE':'1','IPFS_DATASETS_AUTO_INSTALL_TEST_DEPS':'0',
+                'IPFS_DATASETS_PY_LAZY_INSTALL_ERGOAI':'0','PYTHONDONTWRITEBYTECODE':'1',
+                'PYTHONPATH':os.pathsep.join([str(self.dataset),str(self.accelerate)])}})
+        self.selection={'schema':self.driver['ISOLATED_PARENT_SCHEMA'],'source_binding':self.source,
+            'resource_opening':self.opening,'control_binding':self.control,'launch_selection':self.launch,
+            'projects':self.project_rows,'charged_root':str(self.charged),'output_directory':str(self.output)}
+        self.source_manager = SimpleNamespace(source_lease=self.tracked_model_source,canonical_source_root=Path)
+        self.driver.update(load_cached_operational=lambda *_: self.source_manager, metadata_guard=self.source_guard,
+            observe_state=self.scheduler_snapshot,run_selected_isolated_origin=self.selected_entry,
+            observe_control_and_CAS_metadata=self.forbid_legacy,genuine=lambda result:self.events.append('validate-sdk'))
+        self.owner={'origin_owner':SimpleNamespace(origin_commitment=lambda value:'a'*64),'origin':object(),
+            'renderer':{'run_relational_origin_first_use':lambda:None},'verify_opening':self.verify_opening,
+            'verify_control_binding':lambda *_:False,'verify_launch_owner':lambda *_:False}
+        self.reservation_constructor = self.make_reservation
+        self.returned = SimpleNamespace(output_files={'test':b'double'})
+
+    def restore_globals(self):
+        sys.path[:] = self.original_path
+        os.environ.clear()
+        os.environ.update(self.original_env)
+
+    def forbid_legacy(self,*_):
+        self.fail('legacy database observation on isolated route')
+
+    def write_json(self,name,value):
+        path=self.root/name
+        raw=json.dumps(value,sort_keys=True,separators=(',',':')).encode()
+        path.write_bytes(raw)
+        return {'path':str(path),'bytes':len(raw),'sha256':sha256(raw).hexdigest()}
+
+    def verify_opening(self,*pins):
+        self.assertEqual(pins,(self.execution['sha256'],self.source['sha256'],self.opening['sha256'],
+             self.close['sha256'],self.control['sha256'],self.launch['sha256'],'b'*64,'a'*64))
+        self.assertFalse(self.output.exists())
+        self.events.append('verify-opening')
+        return True
+
+    @contextmanager
+    def tracked_model_source(self,root,**kwargs):
+        self.events.append('read-enter')
+        self.assertEqual(kwargs,{'mode':'read','timeout_seconds':30})
+        try:
+            yield SimpleNamespace(to_dict=lambda:{'root':root})
+        finally:
+            self.exit_source+=1
+            self.events.append('read-exit')
+
+    def source_guard(self):
+        self.assertTrue(self.events.count('read-enter')==2 and self.exit_source==0)
+        self.events.append('source-guard')
+        return {'records':self.module_rows,'Git_HEADS':{p['root']:p['Git_HEAD'] for p in self.project_rows},
+                'all_FDs_closed':True}
+
+    def scheduler_snapshot(self):
+        rows={}
+        if self.parent and not self.parent.released: rows[self.parent.lease_id]={}
+        return {'state':{'leases':rows,'config':{}}}
+
+    def make_reservation(self,ledger,**kwargs):
+        self.events.append('reserve')
+        self.assertEqual(ledger,str(self.root/'ledger'))
+        self.assertEqual((kwargs['scheduler_state_path'],kwargs['storage_limit_bytes'],kwargs['memory_mb']),
+                         (str(self.state),10*1024**2,16))
+        self.assertEqual((kwargs['timeout_seconds'],kwargs['ledger_lock_timeout_seconds']),(21,8))
+        owner = self
+
+        class Reservation:
+            _lease = None
+            def __enter__(self):
+                self._lease = owner.parent = SimpleNamespace(lease_id='actual-fixture-parent',released=False,
+                             to_dict=lambda:{'lease_id':'actual-fixture-parent','wait_seconds':0})
+                owner.events.append('parent-enter')
+                return self
+            def __exit__(self,*_):
+                owner.events.append('reservation-exit')
+            def to_dict(self):
+                return {'fixture':True}
+            def check_usage(self,path,*,child_pid):
+                owner.events.append('initial-usage')
+                assert path == owner.charged and child_pid is None
+                return {'fixture':True}
+            def account_external_bytes(self,label,count):
+                owner.assertEqual(label,'actual-relational-origin-SDK-and-archive-v1')
+                owner.assertEqual(count,len(b'captured original fixture'))
+                owner.events.append('charge')
+            def finalize(self,path,*,artifacts_durable):
+                owner.assertTrue(path == owner.charged and artifacts_durable)
+                self._lease.released=True
+                owner.events.append('finalize')
+                return {'fixture':True}
+
+        self.reservation=Reservation()
+        return self.reservation
+
+    def selected_entry(self, origin, **kwargs):
+        self.events.append('dispatch')
+        self.tool_calls.append(origin)
+        self.assertIs(origin,self.owner['origin'])
+        self.assertIs(kwargs['verify_control_binding'],self.owner['verify_control_binding'])
+        self.assertIs(kwargs['verify_launch_owner'],self.owner['verify_launch_owner'])
+        self.assertEqual(kwargs['actual_control_binding_reference'],self.control)
+        self.assertEqual(kwargs['launch_raw'],Path(self.launch['path']).read_bytes())
+        self.assertEqual(kwargs['expected_launch_sha256'],self.launch['sha256'])
+        self.assertEqual(self.driver['report']['actual_parent_lease']['lease_id'],'actual-fixture-parent')
+        self.assertEqual(self.exit_source,0)
+        self.driver['report']['origin_capture_selected']=True
+        (self.output/'origin.fixture').write_bytes(b'captured original fixture')
+        return self.returned
+
+    def runtime_mocks(self):
+        sdk,admitted,resources,disk=self.modules.values()
+        sdk.ToolRunRequest=admitted.ToolRunRequest=type('ToolRunRequest',(),{})
+        sdk.ToolRunResult=admitted.ToolRunResult=type('ToolRunResult',(),{})
+        resources.GlobalResourceScheduler=admitted.GlobalResourceScheduler=type('GlobalResourceScheduler',(),{})
+        resources.ResourceSchedulerConfig=lambda **kwargs:kwargs
+        resources.get_global_resource_scheduler=lambda **kwargs:self.fail('legacy scheduler initialization on isolated route')
+        resources.resource_operation_deadline=lambda:None
+        @contextmanager
+        def deadline(**kwargs):
+            self.assertGreaterEqual(kwargs['native_deadline_monotonic']-kwargs['work_deadline_monotonic'],8)
+            self.events.append('admission-clock-enter')
+            try:
+                yield
+            finally:
+                self.events.append('admission-clock-exit')
+        resources.resource_admission_deadline=deadline
+        disk.DaemonResourceReservation=self.reservation_constructor
+        disk.DaemonResourceError=type('DaemonResourceError',(Exception,),{})
+        def runner(**kwargs):
+            self.assertIs(kwargs['parent_lease'],self.parent)
+            self.assertEqual(kwargs['cpu_slots'],2)
+            self.events.append('runner')
+            return object()
+        admitted.ResourceAdmittedToolRunner=runner
+        return patch.dict(sys.modules,self.modules),patch.object(importlib,'import_module',self.modules.__getitem__)
+
+    def run_driver(self, owner=True):
+        self.execution=self.write_json('selection',self.selection)
+        p1,p2=self.runtime_mocks()
+        with p1,p2:
+            return self.driver['run_existing_owner'](self.execution,isolated_owner=self.owner if owner else None)
+
+    def test_selected_run_uses_shared_resource_flow_and_only_isolated_dispatch(self):
+        report=self.run_driver()
+        self.assertEqual(self.events,['verify-opening','read-enter','read-enter','source-guard',
+            'reserve','admission-clock-enter','parent-enter','admission-clock-exit','initial-usage',
+            'runner','dispatch','validate-sdk','charge','finalize','source-guard','reservation-exit','read-exit','read-exit'])
+        self.assertEqual(self.tool_calls,[self.owner['origin']])
+        self.assertTrue(report['Source_closed'])
+        self.assertTrue(report['resource_cleanup_confirmed'])
+        self.assertTrue(report['isolated_origin_preclose_completed'])
+        self.assertEqual(report['source_epoch_binding'],self.epoch)
+        self.assertEqual(report['actual_paired_Source_close_reference'],self.close)
+        self.assertFalse(report['statutory_or_modelquality_or_convergence_authority'])
+        self.assertNotIn('actual_current_database_before_fresh_vendor_import',report)
+        self.assertFalse((self.output/'parent-home').exists())
+        self.assertTrue((self.output/'complete-selected-A0-isolated-existing-owner-report.json').is_file())
+
+    def test_no_callback_never_dispatches_or_creates_output(self):
+        with self.assertRaisesRegex(ValueError,'explicit existing owner'):
+            self.run_driver(owner=False)
+        self.assertEqual(self.events,[])
+        self.assertFalse(self.output.exists())
+
+    def test_owner_refusal_never_opens_source_or_reservation(self):
+        self.owner['verify_opening']=lambda *args:'truthy but not authorized'
+        with self.assertRaisesRegex(ValueError,'refused'):
+            self.run_driver()
+        self.assertEqual(self.events,[])
+        self.assertFalse(self.output.exists())
+
+    def test_launch_epoch_substitution_refused_before_opening(self):
+        launch=json.loads(Path(self.launch['path']).read_bytes())
+        launch['source_epoch_sha256']='9'*64
+        self.selection['launch_selection']=self.write_json('other-launch',launch)
+        with self.assertRaisesRegex(ValueError,'bind the paired Source'):
+            self.run_driver()
+        self.assertEqual(self.events,[])
+
+    def test_callback_drift_refused_before_output(self):
+        def drift(*args):
+            self.owner['verify_control_binding']=lambda *_:True
+            return True
+        self.owner['verify_opening']=drift
+        with self.assertRaisesRegex(ValueError,'during verification'):
+            self.run_driver()
+        self.assertEqual(self.events,[])
+        self.assertFalse(self.output.exists())
+
+    def test_alias_output_under_Source_refused_before_opening(self):
+        alias=self.root/'outside-alias'
+        alias.symlink_to(self.dataset,target_is_directory=True)
+        self.selection['output_directory']=str(alias/'private-output')
+        with self.assertRaisesRegex(ValueError,'charged and output paths'):
+            self.run_driver()
+        self.assertEqual(self.events,[])
+        self.assertFalse((self.dataset/'private-output').exists())
+
+    def test_origin_owner_swap_refused_during_opening(self):
+        def drift(*pins):
+            self.owner['origin_owner']=SimpleNamespace(origin_commitment=lambda value:'a'*64)
+            return True
+        self.owner['verify_opening']=drift
+        with self.assertRaisesRegex(ValueError,'changed during verification'):
+            self.run_driver()
+        self.assertEqual(self.events,[])
+        self.assertFalse(self.output.exists())
+
+    def test_current_module_pin_must_match_paired_epoch_before_import(self):
+        source=json.loads(Path(self.source['path']).read_bytes())
+        name='ipfs_datasets_py.logic.backends.resource_admission'
+        source['parent_module_sha256'][name]='5fcddd981835a7fa618c202f8de4c52a41777af74aae8a7f65fb4cb8b275edc9'
+        self.selection['source_binding']=self.write_json('stale-parent-sdk',source)
+        with self.assertRaisesRegex(ValueError,'current parent module pins'):
+            self.run_driver()
+        self.assertEqual(self.events,[])
+        self.assertFalse(self.output.exists())
+
+    def test_current_parent_caps_enforced_before_admission(self):
+        opening=json.loads(Path(self.opening['path']).read_bytes())
+        opening['memory_mb']=15
+        self.selection['resource_opening']=self.write_json('smaller-reservation',opening)
+        with self.assertRaisesRegex(ValueError,'bind the paired Source'):
+            self.run_driver()
+        self.assertEqual(self.events,[])
+
+    def test_launch_refusal_before_capture_has_no_sdk_or_legacy_charge(self):
+        def reject(*args,**kwargs):
+            self.events.append('launch-refusal')
+            raise ValueError('fixture original launch refused')
+        self.driver['run_selected_isolated_origin']=reject
+        with self.assertRaisesRegex(ValueError,'original launch refused'):
+            self.run_driver()
+        report=self.driver['report']
+        self.assertTrue(report['isolated_origin_dispatch_attempted'])
+        self.assertEqual(report['tests_dispatched'],[])
+        self.assertFalse(self.tool_calls)
+        self.assertTrue(report['Source_closed'])
+        self.assertTrue(report['resource_cleanup_confirmed'])
+        self.assertNotIn('charge',self.events)
+        self.assertEqual(self.events[-6:],['launch-refusal','finalize','source-guard','reservation-exit','read-exit','read-exit'])
+
+    def test_sdk_route_error_keeps_same_charge_finalize_and_Source_close(self):
+        def fail_before_preclose(origin,**options):
+            self.selected_entry(origin,**options)
+            raise ValueError('fixture retained SDK refusal')
+        self.driver['run_selected_isolated_origin']=fail_before_preclose
+        with self.assertRaisesRegex(ValueError,'fixture retained SDK refusal'):
+            self.run_driver()
+        report=self.driver['report']
+        self.assertTrue(report['Source_closed'])
+        self.assertTrue(report['resource_cleanup_confirmed'])
+        self.assertNotIn('isolated_origin_preclose_completed',report)
+        self.assertEqual(self.events[-6:],['charge','finalize','source-guard','reservation-exit','read-exit','read-exit'])
+        self.assertEqual(report['errors'][0]['message'],'fixture retained SDK refusal')
+
+    def test_live_entry_is_explicit_and_one_attempt_per_birth_parent(self):
+        self.run_driver()
+        with self.assertRaisesRegex(RuntimeError,'one existing owner attempt'):
+            self.driver['run_existing_owner'](self.execution,isolated_owner=self.owner)
+        self.assertEqual(len(self.tool_calls),1)
+
+    def test_unmodified_cli_schema_still_refuses_alternate_fields(self):
+        self.selection['schema']='actual-currentcopy-v11-vendor-import-existing-owner-driver-input/v1'
+        with self.assertRaises(AssertionError):
+            self.run_driver(owner=False)
+        self.assertEqual(self.events,[])
+        self.assertFalse(self.output.exists())
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

@@ -1,0 +1,226 @@
+{
+  "Native": false,
+  "SQL": false,
+  "Source": false,
+  "actual_controls": {
+    "caller_error_preserved": true,
+    "cold_reopen_and_successful_retry_verified": true,
+    "exact_forward_and_inverse_byte_readback": true,
+    "exact_replacement_path_tested": true,
+    "failed_replacement_temp_file_cleaned": true,
+    "index_file_and_prior_record_bytes_preserved": true,
+    "only_I_O_boundary": "replace",
+    "real_cache": true,
+    "real_fixture_builder": true
+  },
+  "actual_private_same_suite": {
+    "green": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 10,
+      "result": {
+        "bytes": 1815,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/green/result.xml",
+        "sha256": "ee8411ca8e65d033d9b86f390a7ca01a44baff27ea30f533ee679949dd01f814"
+      },
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/green/stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 550,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/green/stdout.log",
+        "sha256": "83d3d2c8abdd5f4a1c44b3b070244b24e4ba5eeae3a7ceed33aa81bfe5455849"
+      },
+      "terminal": {
+        "bytes": 24,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/green/terminal.json",
+        "sha256": "a583519ae991581a8d2aec66e5dd60ef75df71d5d2411bbf4e42c541751eb8e2"
+      }
+    },
+    "red": {
+      "errors": 0,
+      "failures": 1,
+      "passed": 9,
+      "result": {
+        "bytes": 2752,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/red/result.xml",
+        "sha256": "9bd642fd8db4ca8152db53fea9f473305f4904a565aab630d68dba2f0d52a5d6"
+      },
+      "skipped": 0,
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/red/stderr.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 1461,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/red/stdout.log",
+        "sha256": "f64379b91ddb38246e665cfb64dbdce0a08431c0bf4d98d7e89744083ae4fa3f"
+      },
+      "terminal": {
+        "bytes": 24,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/red/terminal.json",
+        "sha256": "a95e2f804b1a2a69f226812ad41d797eb07c98a71762654d80bfef5e63a1697a"
+      }
+    }
+  },
+  "baseline_HEAD": "4bd600b83d5b9abd0a3f5c466677d40e42efddf3",
+  "baseline_tree": "785934607087239616a627ca533f97826a3fa35d",
+  "canonical_Git_mutation": false,
+  "changes": {
+    "native_pin": "A single whole-fixture SHA256 literal follows the appended unit test. Native replay remains unrun.",
+    "product": "Persist the record under the existing lock before updating the content, profile, or source index.",
+    "test": "Preserve the prior durable and live record after an atomic record replacement fails. Verify cold reopen and retry."
+  },
+  "core_two_forward_patch": {
+    "bytes": 3573,
+    "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/exact-two.forward.patch",
+    "sha256": "f88c93d21109e3c60ca5ac476045eb71c3584af63a707d8ae7b50d5943696393"
+  },
+  "core_two_inverse_patch": {
+    "bytes": 3571,
+    "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/exact-two.inverse.patch",
+    "sha256": "c6fd36fb3fc4b0f0076bc0750eab6011e86bd84769ed36786343f858471ed461"
+  },
+  "current_Source_or_clock_or_runtime_selection": null,
+  "exact_current_git_projection": {
+    "bytes": 104242,
+    "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/exact-current-Git-projection.json",
+    "sha256": "38885af210113035a09ea642fc789550975386e61f4654358e04bf01f9cbaac7"
+  },
+  "exact_owning_count": 10,
+  "exact_owning_function_count": 6,
+  "exact_regression_nodeid": "tests/unit/logic/legal_ir/test_proof_cache.py::test_failed_record_replace_preserves_committed_cache_indexes",
+  "forward_patch": {
+    "bytes": 4230,
+    "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/exact-all-three.forward.patch",
+    "sha256": "f5ee28db4d32bba4a39007a251450ad98e07655c0e03e4ac2e7766a77083e3f0"
+  },
+  "guarded_invocation": {
+    "bytes": 1275,
+    "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/run-private.sh",
+    "sha256": "97b90c8a5164d5e4f45774970c9ebaf2e6d89b285260da44921b07c1e58b2726"
+  },
+  "guarded_runner": {
+    "bytes": 2825,
+    "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/invoke.py",
+    "sha256": "ed0a7cdde4a4392b64ac9bbccd99291c67df77106db0ec6a9c533394f3b077d6"
+  },
+  "inverse_patch": {
+    "bytes": 4228,
+    "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/exact-all-three.inverse.patch",
+    "sha256": "ae0e8911645dd4e2ab6b922fa0e75915f9ddff9daf5c3673061801c5985a35c3"
+  },
+  "native_fixture_pin_revalidated_by_Native": false,
+  "normal_qualification": false,
+  "ordered_cases": [
+    "test_bound_cache_requires_checked_lean_translation_agreement[both-absent]",
+    "test_bound_cache_requires_checked_lean_translation_agreement[exact-match]",
+    "test_bound_cache_requires_checked_lean_translation_agreement[request-only]",
+    "test_bound_cache_requires_checked_lean_translation_agreement[receipt-only]",
+    "test_bound_cache_requires_checked_lean_translation_agreement[different-digest]",
+    "test_bound_record_v2_disk_round_trip_and_explicit_context",
+    "test_bound_proof_binding_normalizes_protocol_frozen_kernel_payload_to_canonical_wire",
+    "test_current_lean_verification_profile_survives_bound_cache_wire_replay",
+    "test_bound_proof_reuse_refuses_an_installed_older_kernel_profile",
+    "test_failed_record_replace_preserves_committed_cache_indexes"
+  ],
+  "raw_GREEN_JUnit": {
+    "bytes": 1815,
+    "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/green/result.xml",
+    "sha256": "ee8411ca8e65d033d9b86f390a7ca01a44baff27ea30f533ee679949dd01f814"
+  },
+  "raw_RED_JUnit": {
+    "bytes": 2752,
+    "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/red/result.xml",
+    "sha256": "9bd642fd8db4ca8152db53fea9f473305f4904a565aab630d68dba2f0d52a5d6"
+  },
+  "retained_owning_cases": 9,
+  "roles": {
+    "ipfs_datasets_py/logic/legal_ir/proof_cache.py": {
+      "after": {
+        "bytes": 62783,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/proof_cache.py.after.DATA",
+        "sha256": "cf414d3c4bfb858741a8423508d7e70d26db7f3b0a61959c9d594c39ddee23de"
+      },
+      "after_git_blob": "ac9a60101a19f1c13fdebb7925ac8b23846fb561",
+      "before": {
+        "bytes": 62783,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/proof_cache.py.before.DATA",
+        "sha256": "704ccf09ba9d7d3c32d107c9cd8e07f6f32933d5f5fdcfe404b641f847c30743"
+      },
+      "before_git_blob": "e74f30f960193827687b9f28faf07ccb20a38a06",
+      "forward_patch": {
+        "bytes": 479,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/proof_cache.py.forward.patch",
+        "sha256": "d9ccdc99b6616dc52bae1770701b111d1b3482f1fa91ecfc8554194ba1302168"
+      },
+      "git_mode": "100644",
+      "inverse_patch": {
+        "bytes": 477,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/proof_cache.py.inverse.patch",
+        "sha256": "3616a2cb54738695544c0a7dfdb542db1a91ba242a6add57c0c7ecfdae50cd65"
+      },
+      "parent_blob": "e74f30f960193827687b9f28faf07ccb20a38a06",
+      "private_only": true
+    },
+    "tests/integration/logic/backends/test_kernel_backends.py": {
+      "after": {
+        "bytes": 128091,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_kernel_backends.py.after.DATA",
+        "sha256": "eac1d213b16ff2ef79f18269352648768d4e145b2b65fbb8c75c308bced98ea2"
+      },
+      "after_git_blob": "20f612f6c6a241804cdf71b09dc9a0a4f0c2e923",
+      "before": {
+        "bytes": 128091,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_kernel_backends.py.before.DATA",
+        "sha256": "b706ba0dddc5795055be378d8393c831e65fb7fbaf73a574fcee51227d3676b5"
+      },
+      "before_git_blob": "a05d6360be0fcf61a75861c5f0ac8cd63a9d3533",
+      "forward_patch": {
+        "bytes": 657,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_kernel_backends.py.forward.patch",
+        "sha256": "1eca09bff4938fd2b669ff20e9d6743f1b60f493243e8e24e520a973a3784502"
+      },
+      "git_mode": "100644",
+      "inverse_patch": {
+        "bytes": 657,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_kernel_backends.py.inverse.patch",
+        "sha256": "229595cf34d32e509f1d73bd13a76fed1623d85327469cea272894cc92e3f64f"
+      },
+      "parent_blob": "a05d6360be0fcf61a75861c5f0ac8cd63a9d3533",
+      "private_only": true
+    },
+    "tests/unit/logic/legal_ir/test_proof_cache.py": {
+      "after": {
+        "bytes": 105531,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_proof_cache.py.after.DATA",
+        "sha256": "1d0e6bdb9da812904bc0b812385d1aa5b68267f1084a6fcf379652a05104b460"
+      },
+      "after_git_blob": "8d3a1e52040ea8497a74ec1f47c420141de1b9bf",
+      "before": {
+        "bytes": 102758,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_proof_cache.py.before.DATA",
+        "sha256": "23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab"
+      },
+      "before_git_blob": "5ff29423462c009bc5c8f4541b78842411c59e96",
+      "forward_patch": {
+        "bytes": 3094,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_proof_cache.py.forward.patch",
+        "sha256": "d21ffe09246135170adcb2fc0031f715945554c8cb6b1ca3f8354d1619e23083"
+      },
+      "git_mode": "100644",
+      "inverse_patch": {
+        "bytes": 3094,
+        "path": "/tmp/P1-legal-proof-cache-atomic-record-private-tOuxSXE5/test_proof_cache.py.inverse.patch",
+        "sha256": "8341b3e2b57f076ed0acfe2b70ae9e0404b59daf8943048f8c6d8e5396b1f44b"
+      },
+      "parent_blob": "5ff29423462c009bc5c8f4541b78842411c59e96",
+      "private_only": true
+    }
+  },
+  "schema": "private-Phase1-legal-proof-cache-record-persistence-exact-three/v1"
+}

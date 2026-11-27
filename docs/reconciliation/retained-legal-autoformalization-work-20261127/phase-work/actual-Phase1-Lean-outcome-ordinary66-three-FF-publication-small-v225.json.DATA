@@ -1,0 +1,157 @@
+{
+  "accelerate_head_tree_index_and_refs_unchanged": true,
+  "actual_push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "actual_push_outputs": {
+    "datasets": {
+      "observed_exit_code": 0,
+      "stderr": "remote: \nremote: GitHub found 150 vulnerabilities on endomorphosis/ipfs_datasets_py's default branch (8 critical, 77 high, 58 moderate, 7 low). To find out more, visit:        \nremote:      https://github.com/endomorphosis/ipfs_datasets_py/security/dependabot        \nremote:",
+      "stdout": "To https://github.com/endomorphosis/ipfs_datasets_py.git\n \t75b8c9c35297b2d69612868f457c4cd12542cf97:refs/heads/main\te3ffb26c42..75b8c9c352\nDone"
+    },
+    "hallucinate": {
+      "observed_exit_code": 0,
+      "stderr": "",
+      "stdout": "To https://github.com/endomorphosis/hallucinate_app.git\n \t9e4daa10d7b063e0056069a56a83993df7a3ee5f:refs/heads/main\t67ffacb..9e4daa1\nDone"
+    },
+    "root": {
+      "observed_exit_code": 0,
+      "stderr": "",
+      "stdout": "To https://github.com/endomorphosis/lift_coding.git\n \t6049d793fb5bbd5a603cc2ea19540ef959bb5c0a:refs/heads/main\t1d976d404c..6049d793fb\nDone"
+    }
+  },
+  "all_checkouts_clean": true,
+  "all_other_gitlinks_preserved": true,
+  "force_or_tags": false,
+  "frozen_D_index_unchanged": true,
+  "frozen_candidate": {
+    "bytes": 3742,
+    "full9": {
+      "st_ctime_ns": "1795554298735506039",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862881",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795554298735506039",
+      "st_nlink": "1",
+      "st_size": "3742",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase1-Lean-outcome-two-file-local-freeze-v223.json",
+    "sha256": "ddae3f8acf9cb501b6e1d87bd8eb4b7cb3b57f232eb688af4283ccb6db708e72"
+  },
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "e3ffb26c42f0d5e4fe69354b299b874987073acc",
+        "to": "75b8c9c35297b2d69612868f457c4cd12542cf97"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "e3ffb26c42f0d5e4fe69354b299b874987073acc",
+        "to": "75b8c9c35297b2d69612868f457c4cd12542cf97"
+      },
+      "hallucinate_app": {
+        "from": "67ffacba428c66b5e6af0baf7c6ff723240c1364",
+        "to": "9e4daa10d7b063e0056069a56a83993df7a3ee5f"
+      }
+    }
+  },
+  "local_after": {
+    "accelerate": {
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "index_and_worktree_clean": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "head": "75b8c9c35297b2d69612868f457c4cd12542cf97",
+      "index_and_worktree_clean": true,
+      "tree": "425983eae30db4a2e1d53e3e5ac2ec3bf2272c85"
+    },
+    "hallucinate": {
+      "head": "9e4daa10d7b063e0056069a56a83993df7a3ee5f",
+      "index_and_worktree_clean": true,
+      "tree": "6cbf4e028b61a6a3f2b5e5f02bd8312b5041db3e"
+    },
+    "root": {
+      "head": "6049d793fb5bbd5a603cc2ea19540ef959bb5c0a",
+      "index_and_worktree_clean": true,
+      "tree": "18ab940ba480995b55e656064833193e43e2c449"
+    }
+  },
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "75b8c9c35297b2d69612868f457c4cd12542cf97",
+    "hallucinate": "9e4daa10d7b063e0056069a56a83993df7a3ee5f",
+    "root": "6049d793fb5bbd5a603cc2ea19540ef959bb5c0a"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "e3ffb26c42f0d5e4fe69354b299b874987073acc",
+    "hallucinate": "67ffacba428c66b5e6af0baf7c6ff723240c1364",
+    "root": "1d976d404cf114fb64a54868132316f6b8374612"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "qualification": {
+    "Native_kernel_proof_qualification": false,
+    "bytes": 6020,
+    "error": 0,
+    "failure": 0,
+    "full9": {
+      "st_ctime_ns": "1795554928133669365",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "37532530",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795554928133669365",
+      "st_nlink": "1",
+      "st_size": "6020",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-Phase1-Lean-outcome66-selected-v225-csqemsg0/Root-Phase1-Lean-outcome-ordinary66-qualified-Source-resource-closed-small-v225.json",
+    "raw_JUnit": {
+      "bytes": 12937,
+      "full9": {
+        "st_ctime_ns": "1795554841899935376",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "38438089",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795554841899935376",
+        "st_nlink": "1",
+        "st_size": "12937",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-Phase1-Lean-outcome66-selected-v225-csqemsg0/actual-output/phase1-lean-outcome66-run-result0-output1.bin",
+      "sha256": "27e86ac9c250916cd736b3695286c168ba6baad8abeac3fd5261a6fb68cd8e84"
+    },
+    "sha256": "11416dbf31205cdbaba4faaa24196a0e86a07ca9a37c307ffa6ba4762f74c2f2",
+    "skip": 0,
+    "source_parent_runtime_and_workspaces_closed": true,
+    "unique_cases": 66
+  },
+  "schema": "actual-Phase1-Lean-outcome-ordinary66-three-FF-publication/v225",
+  "selected_role_blobs": [
+    {
+      "blob": "1e1b75b74da8740b5808fb3dd77671eab5673f35",
+      "bytes": 103060,
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "sha256": "1b250246f6ecea6a75b75da8a46f77abac1d5a02a5eba4cd2c1ec0e978e4efc9"
+    },
+    {
+      "blob": "238bda4cc8502210242ee32aa5cd0259a55b9649",
+      "bytes": 111809,
+      "relative_path": "tests/integration/logic/backends/test_kernel_backends.py",
+      "sha256": "1405d01db7bf3462a46fcc8213b055de7604970a4bfb33a6c51424555b5a973c"
+    }
+  ],
+  "tests_Source_CI_Native_or_model_replayed": false
+}

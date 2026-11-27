@@ -1,0 +1,40 @@
+--- test_kernel_backends.composed.before
++++ test_kernel_backends.query-kind.after
+@@ -2198,3 +2198,37 @@
+     destination = Path(os.environ.get("IPFS_DATASETS_NATIVE_LEAN_REPORT",
+         str(tmp_path / "native-lean-v3-namespaced-declaration-result.json")))
+     destination.write_text(json.dumps(report, sort_keys=True, indent=2) + "\n", encoding="utf-8")
++
++
++@pytest.mark.parametrize("query_kind", [
++    "satisfiability", "runtime_monitor", "evidence_readiness", "policy_approval",
++])
++def test_lean_outcome_rejects_non_theorem_request_after_complete_rebind(query_kind):
++    from dataclasses import replace
++
++    from ipfs_datasets_py.logic.backends.kernel import lean
++    from ipfs_datasets_py.logic.ir_core.protocols import QueryKind
++
++    outcome, calls, original_request = _bound_lean_outcome()
++    assert outcome.receipt.accepted and len(calls) == 1
++    request = replace(original_request, query_kind=QueryKind(query_kind))
++    assert request.digest != original_request.digest
++    assert request.query_kind is not QueryKind.THEOREM_PROOF
++    binding = lean.LeanSourceBinding.bind(request, outcome.receipt.submitted_source)
++    receipt = replace(outcome.receipt, request_digest=request.digest, source_binding=binding)
++    assert lean.LeanKernelReceipt.from_dict(receipt.to_dict()) == receipt
++    metadata = outcome.result.metadata.to_dict()
++    metadata.update(kernel_receipt=receipt.to_dict(), source_binding=binding.to_dict())
++    result = replace(outcome.result, result_id=lean._result_id("lean", request),
++                     metadata=metadata, witness=receipt._theorem_witness())
++    runner, direct_calls = _process_runner("")
++    backend = LeanKernelBackend(runner=runner, native_identity_probe=_fictional_native_identity,
++        native_probe=lambda: _available_native("lean", "fixture-not-an-executed-compiler"))
++    with pytest.raises(LeanKernelError, match="does not support|only answers theorem_proof"):
++        backend.run(request)
++    assert direct_calls == []
++    # Constructor scope only: this fixture supplies no policy, review or admission authority.
++    with pytest.raises(LeanKernelError, match="outcome request .*theorem_proof"):
++        replace(outcome, request=request, request_digest=request.digest,
++                source_binding=binding, receipt=receipt, result=result)
++    assert len(calls) == 1

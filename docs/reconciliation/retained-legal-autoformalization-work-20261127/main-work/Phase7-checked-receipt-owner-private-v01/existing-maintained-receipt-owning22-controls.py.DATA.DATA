@@ -1,0 +1,116 @@
+from pathlib import Path
+from types import ModuleType
+import hashlib
+import importlib.util
+import json
+import sys
+import traceback
+
+
+stage = Path('/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_')
+path = stage / "no-fit-current-obligation-bound-feedback-adapter-v02.py"
+raw = path.read_bytes()
+assert len(raw) == 20480
+assert hashlib.sha256(raw).hexdigest() == "43ad9ed1524e541998646663dc67baea01cacce87769666d4afa12cd6252abf7"
+adapter = ModuleType("_authentic_probe_adapter")
+adapter.__file__ = str(path)
+sys.modules[adapter.__name__] = adapter
+exec(compile(raw, str(path), "exec"), adapter.__dict__)
+prior = adapter.load_prior()
+
+
+def load_fixture(relative, name):
+    path = prior.ROOT / relative
+    spec = importlib.util.spec_from_file_location(name, path, loader=prior.BoundSource(name, str(path)))
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def run():
+    prior.install_kernel_guards()
+    manifest = {
+        "record": ["record.current-v408-plus-exact-after-v04.DATA", 65270, "aee18c5265e4874bd6074637eef5bd4ae6701449cc0876e899abf56d1fb71896"],
+        "trainer": ["trainer.after-v04.DATA", 42271, "630398501836dc7bba1b213dbd93b2e93a18c593747f52467f325c5033d7fa94"],
+        "autoencoder": ["modal.after.DATA", 1429059, "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447"],
+    }
+    adapter.prepare_loader(prior, manifest)
+    ablation_test = "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py"
+    ablation_code = "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_feedback_ablation.py"
+    exact = {
+        prior.FIXTURE: ('/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/test_trusted_feedback_weight_updates.after.py.DATA', 47859,
+            'c10a304565f6607da918ac2d0c2afa103a9fb39bf07ebac9871fcc473a970fe4', prior.EXPECTED[prior.FIXTURE]),
+        ablation_test: ("test_proof_feedback_ablation.test.after.DATA", 9778,
+            "bf195465dab79f259c87243eb66553286f2bd32084c80ca97cd4c56660191414", "dd11af058186d651fbe94588395494a09a72828c"),
+        ablation_code: ("ablation.after-v02.DATA", 41765,
+            "01dc8c506d30d3348712d1547e46bf801109818aadab77e94c2ded8188f90bbc", "3e08a06029424257f8aa9df72a4a12d29c0d9547"),
+    }
+    overlays = {}
+    for rel, (name, size, sha256, git_oid) in exact.items():
+        path = stage / name
+        overlays[rel] = adapter.pinned_file(path, size, sha256)
+        prior.EXPECTED[rel] = git_oid
+
+    class RegressionOverlay(prior.BoundSource):
+        def get_code(self, fullname):
+            baseline = super().get_code(fullname)
+            path = Path(self.path).absolute()
+            relative = path.relative_to(prior.ROOT).as_posix()
+            if relative not in overlays:
+                return baseline
+            body = overlays[relative]
+            prior.compiled_total += len(body)
+            assert prior.compiled_total <= prior.MAX_MODULE_BYTES
+            prior.compiled[relative]["overlay_executed"] = {
+                "path": str(stage / exact[relative][0]), "bytes": len(body), "sha256": exact[relative][2]
+            }
+            return compile(body, str(path), "exec", dont_inherit=True)
+
+    prior.BoundSource = RegressionOverlay
+    source = adapter.import_fixture(prior)
+    ablation = load_fixture(ablation_test, "_phase7_real_ablation_test_candidate")
+    import json
+    import unittest
+    integration = load_fixture("tests/integration/logic/test_proof_receipt_attestation.py", "_canonical_receipt_integration")
+    selectors = [('test_interface_and_schema_versions_are_pinned', None), ('test_public_inputs_bind_all_required_dimensions', None), ('test_each_public_input_dimension_change_produces_distinct_digest', None), ('test_trusted_receipt_rejects_non_conclusive_and_attestation_authority', None), ('test_private_witness_never_serializes', None), ('test_cryptographic_execution_succeeds_and_projects_attestation_authority', None), ('test_attestation_does_not_raise_underlying_semantic_authority', None), ('test_simulated_backend_fails_production_gates', None), ('test_circuit_mismatch_fails_closed', None), ('test_stale_attestation_fails', None), ('test_revoked_material_fails', None), ('test_rejected_and_error_verdicts_are_non_authoritative', None), ('test_malformed_prover_output_fails_closed', None), ('test_statement_and_record_round_trip', None), ('test_request_repr_redacts_witness', None), ('test_receipt_factory_preserves_typed_execution_bounds_without_metadata_copy', None), ('test_receipt_factory_preserves_explicit_metadata_bounds_exactly', 'empty'), ('test_receipt_factory_preserves_explicit_metadata_bounds_exactly', 'null'), ('test_receipt_factory_preserves_explicit_metadata_bounds_exactly', 'partial'), ('test_declared_conflicting_bounds_are_not_rewritten_into_valid_evidence', None), ('test_adding_execution_bounds_does_not_upgrade_missing_translation_authority', None), ('test_old_receipt_without_bounds_keeps_its_serialized_content_identity', None)]
+    suite = unittest.TestSuite()
+    names = []
+    for name, parameter in selectors:
+        case = getattr(integration, name)
+        label = name + ("[" + parameter + "]" if parameter is not None else "")
+        def invoke(case=case, parameter=parameter):
+            if parameter is None:
+                case()
+            else:
+                declared = {"empty": {}, "null": None, "partial": {"timeout_ms": 1000, "max_steps": 100}}[parameter]
+                case(declared)
+        invoke.__name__ = label
+        suite.addTest(unittest.FunctionTestCase(invoke, description=label))
+        names.append(label)
+    result = unittest.TestResult()
+    suite.run(result)
+    if not result.wasSuccessful():
+        failures = [{"case": case.id(), "traceback": error} for case, error in result.failures]
+        errors = [{"case": case.id(), "traceback": error} for case, error in result.errors]
+        raise AssertionError(json.dumps({"executed": result.testsRun,
+            "passed": result.testsRun - len(failures) - len(errors),
+            "failures": failures, "errors": errors}, sort_keys=True))
+    assert not prior.denied
+    cases = names
+    return cases
+
+
+outcome = {}
+code = 2
+try:
+    outcome["passes"] = run()
+    code = 0
+except (Exception, BaseException) as error:
+    traceback.print_exc()
+    outcome["failure"] = repr(error)
+finally:
+    outcome.update(worker_rc=code, denied=prior.denied, guard=prior.guard, compiled=prior.compiled,
+                   project_body_bytes=prior.compiled_total, fit=False)
+    print(json.dumps(outcome, sort_keys=True))
+raise SystemExit(code)

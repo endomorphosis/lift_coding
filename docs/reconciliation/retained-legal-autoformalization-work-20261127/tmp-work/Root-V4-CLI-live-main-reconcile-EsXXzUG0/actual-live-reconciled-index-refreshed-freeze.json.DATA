@@ -1,0 +1,151 @@
+{
+  "actual_Source42": {
+    "bytes": 10375,
+    "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/actual-doc-owner-approved-Source42-control-code.py.DATA",
+    "sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9"
+  },
+  "actual_isolated_write_lease": {
+    "canonical_root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets",
+    "cooperative": true,
+    "lock_path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/workspace/control-plane/source-leases/source.lock",
+    "mode": "write",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 3.2065436244010925e-05
+  },
+  "candidate": {
+    "bytes": 10578,
+    "path": "/tmp/P2-physical-V4-retained-handoff-current-trust-CLI-private-cy1j1i4x/SEALED-current-V4-CLI-current-review-retained-handoff-exact-two-private.json",
+    "sha256": "d4ec744a8454e4781a2804e6ec0cdf197a844d95fccef8e1f82ec3a14568596a"
+  },
+  "canonical_Source_write_claimed": false,
+  "committed": {
+    "scripts/ops/legal_ir/validate_uscode_corpus_release.py": {
+      "bytes": 28555,
+      "full9": {
+        "st_ctime_ns": "1795734594584760061",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5685338",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734594584760061",
+        "st_nlink": "1",
+        "st_size": "28555",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "3cfc8fe117d8c3490169f09894e141c6e2fc16fd",
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/scripts/ops/legal_ir/validate_uscode_corpus_release.py",
+      "sha256": "62ef7981b8cc8bfe3c04867aba88d2db3f735aaa57340fcddeb18ebca9502220",
+      "stage0_and_committed_blob": "532ed0ad76bccb52a3e52fe62066ef1c0e6e6aea"
+    },
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py": {
+      "bytes": 294620,
+      "full9": {
+        "st_ctime_ns": "1795734594584760061",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "15909928",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734594584760061",
+        "st_nlink": "1",
+        "st_size": "294620",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "ee46a5ac88429283b8d778993783edc456f1b2c4",
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+      "sha256": "f61a83b403b7d253b34b473d74d6411e7151f4ad26cf5075584c51c31b4780cb",
+      "stage0_and_committed_blob": "770c9a612e7f35fc6fd16ed79dc5a011ed93b674"
+    }
+  },
+  "frozen": {
+    "HEAD": "cbc43a5f365502265d1e64d7bce3281f2871ef01",
+    "branch": "refs/heads/isolated/phase2-v4-cli-live-reconciled",
+    "branch_file": {
+      "bytes": 41,
+      "full9": {
+        "st_ctime_ns": "1795734594899604555",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "48777413",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734594899604555",
+        "st_nlink": "1",
+        "st_size": "41",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/.git/refs/heads/isolated/phase2-v4-cli-live-reconciled",
+      "sha256": "3bf942c0ab32d6bf2a3aa3db7c36455230c83a23faa273d809a12ad5b50471ac"
+    },
+    "index": {
+      "bytes": 7070597,
+      "full9": {
+        "st_ctime_ns": "1795734671195646866",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "3561340",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734671194646859",
+        "st_nlink": "1",
+        "st_size": "7070597",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/.git/index",
+      "sha256": "52160bc3ee19a11de6ef4f1fdfd517ca44d814a775e7b0c6237503169deff577"
+    },
+    "tree": "195a3725baeb792ef7952aabfd40866c6c8b568b"
+  },
+  "index_metadata_reobserved_same_exact_bytes": true,
+  "isolated_Source_context_closed": true,
+  "local_clean": true,
+  "only_two_D_tree_entries_changed": true,
+  "ordinary_qualified": false,
+  "parent": "9143ad4daa5b8728ac806d0cfba18561081800fd",
+  "previous_exact_isolated_freeze": {
+    "bytes": 5800,
+    "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/actual-isolated-exact-two-local-freeze.json",
+    "sha256": "95e618da3abfef98467baa4681cefc326d226a137d9585cc72c430446fb5635e"
+  },
+  "prior_targets": {
+    "scripts/ops/legal_ir/validate_uscode_corpus_release.py": {
+      "bytes": 27195,
+      "full9": {
+        "st_ctime_ns": "1795734575089050236",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "5685338",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734575089050236",
+        "st_nlink": "1",
+        "st_size": "27195",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/scripts/ops/legal_ir/validate_uscode_corpus_release.py",
+      "sha256": "395b83986a3cb6b119ab49526d9be51e4713a78f7a9fb75035034db8fdad84e3"
+    },
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py": {
+      "bytes": 289075,
+      "full9": {
+        "st_ctime_ns": "1795734575093050260",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "15909928",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795734575093050260",
+        "st_nlink": "1",
+        "st_size": "289075",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+      "sha256": "72e1d37fcd47fa63271561b8fceb6dbda94f42599ab722a818a31dcb41bc0501"
+    }
+  },
+  "private_red_green_base": "6d1b200341ae62d6dc0aa6db27f3955c50483fa7",
+  "pushed": false,
+  "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/datasets",
+  "schema": "isolated-private-exact-two-V4-CLI-Git-freeze/v1",
+  "shared_source_or_Git_mutation": false,
+  "shared_status_after_sha256": "6e07703a6a150fc2147a54da5bb083934d44353019b5c97e8493ac868b79464e",
+  "shared_status_before_sha256": "6e07703a6a150fc2147a54da5bb083934d44353019b5c97e8493ac868b79464e",
+  "terminal_returncode": 0
+}

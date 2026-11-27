@@ -1,0 +1,156 @@
+"""Exercise paid compact DEVELOPMENT with original detached owners and a selected fixture cap."""
+from copy import deepcopy
+from hashlib import sha256
+import json
+from pathlib import Path
+import runpy
+
+HERE = Path(__file__).resolve().parent
+BASE = HERE.parent/'decoder-training-compact-verified-development-private-v01-6EivFNn5'
+CHECK = BASE/'check_compact_development.py'
+FIXTURE = BASE/'fixtures/two_arm_compact_fixture.py'
+CURRENT = HERE.parent/'decoder-training-paid-censor-followup-private-v01-9bUvEI8h/study.py'
+
+
+def exact(path, size, digest):
+    raw = path.read_bytes()
+    assert (len(raw),sha256(raw).hexdigest()) == (size,digest), path
+    return raw
+
+
+def replace_once(text, before, after):
+    assert text.count(before) == 1, before
+    return text.replace(before,after,1)
+
+
+def fixture_with_cap():
+    text=exact(FIXTURE,14369,'33886391121c26fc6335072536aabb47ae3bac0d2907c27cda534551f0a3e60e').decode()
+    text=replace_once(text,
+        '    source = read_exact(*FIXTURE)\n',
+        '    source = capped_study_fixture_source(*FIXTURE)\n')
+    original='        subject = study_owner.Attempt(arm, plan.seed, recipe, run_id, plan.study_sha256, (), "complete", None, physical_close)\n'
+    text=replace_once(text,original,original+'''        if position == 0:
+            subject = replace(subject, closeout_status="budget_limit", budget_clock="wall_seconds",
+                              cap_receipt_sha256=pin(("fictional declared compact cap close", run_id)))
+''')
+    original='''    assert owner._commit(candidate["report"]) == owner._commit(golden["look_report"])
+    assert owner.prepared_look_commitment(candidate["prepared"]) == golden["look_sha256"]
+'''
+    text=replace_once(text,original,'''    assert study_owner.commitment(replace(study, horizons=(100.0,None,None), budget_caps=(None,None,None))) == (
+        golden["look_report"]["study_sha256"])
+    expected = deepcopy(golden["look_report"])
+    expected.update(selection_sha256=selected["expected_plan_sha256"],
+                    study_sha256=primary["expected_study_sha256"],
+                    development_design_sha256=selected["plan"].development_design_sha256,
+                    optimizer_step_grid_sha256=selected["plan"].optimizer_step_grid_sha256,
+                    review_sha256=selected["expected_review_sha256"])
+    assert owner._commit(candidate["report"]) == owner._commit(expected)
+    prepared = replace(candidate["prepared"], study_sha256=golden["look_report"]["study_sha256"],
+                       evaluation_receipt_sha256=owner._commit(golden["look_report"]))
+    assert owner.prepared_look_commitment(prepared) == golden["look_sha256"]
+''')
+    scope={'__name__':'capped_two_arm_fixture','__file__':str(FIXTURE),
+           'capped_study_fixture_source':capped_study_fixture_source}
+    exec(compile(text,str(FIXTURE),'exec'),scope)
+    return scope['make_two_arm_fixture']
+
+
+def capped_study_fixture_source(path,size,digest):
+    assert (size,digest)==(9588,'c156234abf8da4272b06c5ddcae9bee524cafc4bbf64619df6f5041644ef8e32')
+    text=exact(path,size,digest).decode()
+    return replace_once(text,
+        '        1, (100.0, None, None), (None, None, None), "first_use", None, False)',
+        '        1, (10.0, None, None), (6.0, None, None), "first_use", None, False)').encode()
+
+
+def save(name,value):
+    data=(json.dumps(value,sort_keys=True,indent=2)+'\n').encode()
+    with (HERE/name).open('xb') as stream:
+        stream.write(data)
+
+
+def wall(report):
+    selected,=(row for row in report['pairs'] if row['clock']=='wall_seconds')
+    return selected
+
+
+def controls(assessment,scores,_cache,_splits):
+    base={'__file__':str(CHECK),'__name__':'original_compact_compare'}
+    code=exact(CHECK,12170,'dc3f5fdffdc42ca7c8bd2ea04d07f5bba95045bbc015e67a50422dd8d4107025')
+    exec(compile(code,str(CHECK),'exec'),base)
+    raw=exact(CURRENT,921348,'c462caa0fffb73f74549013d0272d224dada01e9e33620329b5b3f5ffb920915')
+    study=base['SimpleNamespace'](**runpy.run_path(str(CURRENT)))
+    threshold=base['module'](base['THRESHOLD'])
+    prior=base['module'](FIXTURE).make_two_arm_fixture(assessment,study,threshold,scores)
+    compare=study.compare_verified_compact_development_contrasts
+    unchanged=compare(threshold,**prior['arguments'],include_confirmation_cost_bounds=True)
+    assert [row['decision']['status'] for row in unchanged['attempts']]==['closed_without_reach','reached']
+    assert [item[0] for item in prior['fictional_owner_calls']]==[
+        'fictional compact development owner','fictional cost owner']
+    case=fixture_with_cap()(assessment,study,threshold,scores)
+    report=compare(threshold,**case['arguments'],include_confirmation_cost_bounds=True)
+    assert report['schema']==study.VERIFIED_COMPACT_DEVELOPMENT_SCHEMA
+    assert [item[0] for item in case['fictional_owner_calls']]==[
+        'fictional compact development owner','fictional cost owner']
+    assert len(report['physical_paid_events'])==8 and sum(e['disposition']=='failed' for e in report['physical_paid_events'])==2
+    assert report['optimizer_step_schedule']==(('look-1',1),)
+    baseline,candidate=report['attempts']
+    assert (baseline['decision']['status'],candidate['decision']['status'])==('right_censored','reached')
+    original=wall(report['confirmation_cost_bounds'])
+    assert original['baseline']['restricted_confirmation_seconds']==(0.,10.)
+    assert original['candidate']['restricted_confirmation_seconds']==(3.,3.)
+    assert original['restricted_candidate_minus_baseline_seconds_bounds']==((-7,1),(3,1))
+    pin=study.commitment
+    meter=baseline['cost_evidence']['closing_meter']
+    assert meter['costs']['wall_seconds']==6.
+    selected=(study.CensorFollowup(baseline['attempt_sha256'],'wall_seconds',baseline['closing_meter_sha256'],
+        meter['clock_receipts'][0],baseline['closeout_receipt_sha256'],
+        pin(('fictional independently reviewed no scheduled confirmation through compact close',pin(baseline)))),)
+    pins=(pin(report),report['cost_evidence_sha256'],pin(selected))
+    offered=[]
+    def approved(*args):
+        offered.append(args)
+        return args==pins
+    evidence=dict(expected_paid_report_sha256=pins[0],followups=selected,expected_followups_sha256=pins[2])
+    followup=study.verify_censored_confirmation_cost_bounds(report,**evidence,
+                                                            verify_original_followup_owner=approved)
+    refined=wall(followup)
+    assert refined['baseline']['restricted_confirmation_seconds']==(6.,10.)
+    assert refined['candidate']==original['candidate']
+    assert refined['baseline']['attainment'] is None and refined['baseline']['observed_confirmation_seconds'] is None
+    assert refined['restricted_candidate_minus_baseline_seconds_bounds']==((-7,1),(-3,1))
+    assert refined['candidate_minus_baseline_attainment_bounds']==original['candidate_minus_baseline_attainment_bounds']==(0,1)
+    assert offered==[pins] and pin(report)==pins[0]
+    try:
+        study.verify_censored_confirmation_cost_bounds(
+            report,**evidence,verify_original_followup_owner=lambda *_:False)
+    except ValueError as error:
+        assert 'original follow-up owner refused' in str(error)
+    else:
+        raise AssertionError('compact terminal evidence advanced without selected follow-up owner')
+    save('capped-compact-paid-comparison.json',report)
+    save('capped-compact-censor-followup.json',followup)
+    return dict(schema='private-positive-compact-censor-followup-controls/v1',
+                actual_study_owner_code_sha256=sha256(raw).hexdigest(),
+                unchanged_fixture_both_golden_hashes_verified=True,
+                capped_fixture_only_five_authority_fields_rebound=True,
+                actual_paid_arm_meter_or_legal_review=False,
+                legacy_restricted_candidate_minus_baseline=original['restricted_candidate_minus_baseline_seconds_bounds'],
+                refined_restricted_candidate_minus_baseline=refined['restricted_candidate_minus_baseline_seconds_bounds'],
+                baseline_followup=refined['baseline']['restricted_confirmation_seconds'],
+                candidate_confirmation=refined['candidate']['observed_confirmation_seconds'],
+                baseline_attainment=refined['baseline']['attainment'],original_followup_owner_refusal_verified=True,
+                paid_event_count=8,retained_failed_events=2)
+
+
+def main():
+    driver={'__file__':str(CHECK),'__name__':'compact_fixture_launcher'}
+    code=exact(CHECK,12170,'dc3f5fdffdc42ca7c8bd2ea04d07f5bba95045bbc015e67a50422dd8d4107025')
+    exec(compile(code,str(CHECK),'exec'),driver)
+    driver['HERE']=HERE
+    driver['controls']=controls
+    driver['main']()
+
+
+if __name__=='__main__':
+    main()

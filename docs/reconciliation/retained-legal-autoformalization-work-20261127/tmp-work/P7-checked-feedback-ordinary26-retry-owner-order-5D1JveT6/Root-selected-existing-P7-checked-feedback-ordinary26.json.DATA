@@ -1,0 +1,40 @@
+{
+  "IO_reference": {
+    "bytes": 726,
+    "path": "/tmp/P7-checked-feedback-ordinary26-retry-owner-order-5D1JveT6/Root-selected-IO.json",
+    "sha256": "7de61090da99aa999abf0f2bdb6bab2ceafa5522323674870396262e3b82dd08"
+  },
+  "Root_selected": true,
+  "Source_READ_binding": {
+    "bytes": 2419,
+    "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-isolated-Phase7-ordinary-D27-read-binding.json",
+    "sha256": "4f0bdc68c96dfe39cac0cdb11452897a4d56ec74443ee202a889753c0126ff63"
+  },
+  "Source_envelope_bytes": 134217728,
+  "actual_COLLECT_supplies_order": true,
+  "actual_nonclock_handoff": {
+    "bytes": 20410,
+    "path": "/tmp/P7-checked-feedback-ordinary26-retry-owner-order-5D1JveT6/READY-live-ordinary26-retry-actual-READ10-INERT.json",
+    "sha256": "666c9d5984a9bee1016f1f65b5351965a1e1a7c45d54072b2218b396c6655d5e"
+  },
+  "case_hint": 26,
+  "effect_reference": {
+    "bytes": 634,
+    "path": "/tmp/P7-checked-feedback-ordinary26-retry-owner-order-5D1JveT6/Root-selected-effect.json",
+    "sha256": "a6af2f3f7385ded3a71e7f051077eb70b0b84b439de20ce70c1bc2b343a82e20"
+  },
+  "frozen_D_HEAD": "de261f458ef5a73e2fe5683de01382f817fae9ed",
+  "frozen_D_tree": "b766976844ccdb7404198e8d2e87f7a74f95c50f",
+  "launch_deadline_utc_ns": 1795739939197787136,
+  "launch_not_before_utc_ns": 1795739099197787136,
+  "ledger_before": {
+    "captures": 541268,
+    "capturesComplete": false,
+    "global_cap": 56337385482,
+    "internal_cap": 56146793608,
+    "internal_used": 56006218888,
+    "used": 56196810762
+  },
+  "output_namespace": "/tmp/P7-checked-feedback-ordinary26-retry-owner-order-5D1JveT6/actual-output",
+  "schema": "Root-selected-existing-P7-checked-feedback-frozen-local-ordinary26/v1"
+}

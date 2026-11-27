@@ -1,0 +1,53 @@
+{
+  "actual_collect_is_roster_and_order_authority": true,
+  "expected_function_case_counts": {
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_deterministic_compiler_mutation_moves_only_compiler_metrics": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_learned_head_perturbation_moves_only_learned_metrics": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_is_a_cache_miss": 4,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_uses_typed_cache_reuse_error": 4,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_persistent_metric_lineage_recomputes_with_existing_codec": 4,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_metric_lineage_constructor_still_rejects_stale_schema": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_metric_lineage_matcher_preserves_unexpected_programming_errors": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_stale_or_cross_path_cache_reuse_is_prevented": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_unexplained_invariant_metrics_across_material_states_are_rejected": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_valid_metric_lineage_remains_reusable": 1
+  },
+  "function_count": 10,
+  "function_selectors": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_learned_head_perturbation_moves_only_learned_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_deterministic_compiler_mutation_moves_only_compiler_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_unexplained_invariant_metrics_across_material_states_are_rejected",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_stale_or_cross_path_cache_reuse_is_prevented",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_is_a_cache_miss",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_uses_typed_cache_reuse_error",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_valid_metric_lineage_remains_reusable",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_metric_lineage_constructor_still_rejects_stale_schema",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_metric_lineage_matcher_preserves_unexpected_programming_errors",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_persistent_metric_lineage_recomputes_with_existing_codec"
+  ],
+  "literal_expected_cases": 19,
+  "literal_expected_nodeids": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_learned_head_perturbation_moves_only_learned_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_deterministic_compiler_mutation_moves_only_compiler_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_unexplained_invariant_metrics_across_material_states_are_rejected",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_stale_or_cross_path_cache_reuse_is_prevented",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_is_a_cache_miss[stale-schema]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_is_a_cache_miss[empty-identity]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_is_a_cache_miss[newline-identity]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_is_a_cache_miss[noniterable-hashes]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_uses_typed_cache_reuse_error[stale-schema]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_uses_typed_cache_reuse_error[empty-identity]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_uses_typed_cache_reuse_error[newline-identity]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_metric_lineage_uses_typed_cache_reuse_error[noniterable-hashes]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_valid_metric_lineage_remains_reusable",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_metric_lineage_constructor_still_rejects_stale_schema",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_metric_lineage_matcher_preserves_unexpected_programming_errors",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_persistent_metric_lineage_recomputes_with_existing_codec[stale-schema]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_persistent_metric_lineage_recomputes_with_existing_codec[empty-identity]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_persistent_metric_lineage_recomputes_with_existing_codec[newline-identity]",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py::test_malformed_persistent_metric_lineage_recomputes_with_existing_codec[noniterable-hashes]"
+  ],
+  "owning_files": [
+    "tests/unit/optimizers/logic_theorem_optimizer/test_legal_ir_metric_responsiveness.py"
+  ]
+}

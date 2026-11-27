@@ -1,0 +1,56 @@
+{
+  "Root_selected": true,
+  "Source_WRITE_claimed": false,
+  "Source_closed": true,
+  "actual_compact": {
+    "bytes": 16528,
+    "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json",
+    "sha256": "090b103794b87bcfe4973079be2c8fa316aa939cb586a543c0fc42143315d881"
+  },
+  "actual_isolated_content_epoch": {
+    "bytes": 9018,
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-Phase7-current-Source42-content-epoch-closed.json",
+    "sha256": "a7eeb8e165f48322a1c1680b1ec70ec8af3a4b6424ccadbe23a0d1ad831a651f"
+  },
+  "actual_report": {
+    "bytes": 1505483,
+    "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-closed-report.json",
+    "sha256": "53ce516df71efb40d20312278c50efc9dc5e6eb25b7c0c6a5db37a190d0f4a18"
+  },
+  "exact_local_freeze": {
+    "bytes": 17276,
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-isolated-Phase7-exact-nine-local-freeze.json",
+    "sha256": "63b1bc7bc60db45147d2bc0f0d3a3fab908b19fa17f530d00ced408f5fa88da3"
+  },
+  "outer_epoch_record_count": 1614,
+  "outer_epoch_reference": {
+    "bytes": 868428,
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-live-reconciled-outer1614-epoch.json",
+    "sha256": "f50f863d865ae2a8ad64429396fbb2c7f52e04b25408d586163bec7f8fe73e60"
+  },
+  "owned_module_closed": true,
+  "promotion_selected": false,
+  "protected_index_reference": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795738496101937191",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "49196736",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795738496100937183",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/datasets/.git/index",
+    "sha256": "5a332cba66adba6051bb6f25c460fd4f7cc33fb831cbde164843e5b6e32aa53d"
+  },
+  "python_epoch_record_count": 1601,
+  "python_epoch_reference": {
+    "bytes": 861738,
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-live-reconciled-Python1601-epoch.json",
+    "sha256": "e2b4425d640faef5f4157bd0a94ff9ae9ba3daeb942953dba25545aeef859f24"
+  },
+  "schema": "actual-D27-observed-D-root-initializer-READ-small-closeout/v1"
+}

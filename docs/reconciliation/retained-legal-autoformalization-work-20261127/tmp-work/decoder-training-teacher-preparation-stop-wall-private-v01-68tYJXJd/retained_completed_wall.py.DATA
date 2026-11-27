@@ -1,0 +1,13 @@
+"""Run the prior completed-pilot checks against the current shared wall helper."""
+
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+driver = HERE.parent / "decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN" / "test_first_use_wall.py"
+raw = driver.read_bytes()
+assert sha256(raw).hexdigest() == "d47b90824aec8d32ba2f76e7f9af62ea5cd9e462e9037fa8f11854ac16dae040"
+old = b'CANDIDATE_SHA = "ccb4f816f07211f380d97a09cee2181da359882b17698f881deadc65ea2cc825"'
+new = b'CANDIDATE_SHA = "c5e490402f1093b9cce28c7461f18d6811c2d8914fabb2e7f7dda145af7df1bf"'
+assert raw.count(old) == 1
+exec(compile(raw.replace(old, new), str(driver), "exec"), {"__file__": str(HERE / driver.name), "__name__": "__main__"})

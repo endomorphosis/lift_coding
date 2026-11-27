@@ -1,0 +1,84 @@
+{
+  "equal_record_delta": -0.22161062558492026,
+  "expected_positions_total": 5845,
+  "fit_updates": 0,
+  "heldout_original": {
+    "after_exact": 0,
+    "baseline_exact": 0,
+    "cases": 3,
+    "dependency_components": 1,
+    "retention_rate": null,
+    "scope": "paired_full_nine_payload_exactness_on_one_declared_frozen_heldout_component"
+  },
+  "leave_one_row_out_deltas": [
+    -0.2168160080909729,
+    -0.20923444628715515,
+    -0.2387814223766327
+  ],
+  "references": {
+    "TRAIN3": {
+      "capacity": {
+        "bytes": 1905,
+        "path": "/tmp/current-cache-fixed-fit-and-matched-Q3-existing-owner-continuation-private-v01/current-request-source-map-ordering-correction-private-v01/v02-historical-failure-current-Source-separated/actual-current-Source-binding-ae2f82c4a3bd6ae2-v01/actual-TRAIN3-fit-Q3-output-v01/run.output.12.bin",
+        "sha256": "042c8b3362632fc382413b493adca06f883c8b44f8369338999aaf82b59144c2"
+      },
+      "closure": {
+        "bytes": 64705,
+        "path": "/tmp/current-cache-fixed-fit-and-matched-Q3-existing-owner-continuation-private-v01/current-request-source-map-ordering-correction-private-v01/v02-historical-failure-current-Source-separated/actual-current-Source-binding-ae2f82c4a3bd6ae2-v01/actual-TRAIN3-fit-Q3-output-v01/actual-closed-Source62-TRAIN3-fixed-TRAIN-fit-and-Q3-GREEN-authenticated-readback-v01.json",
+        "sha256": "33a9a3e274a49a39535afb975b4ee187dedd939c8a32f9a33de17b77db7b5ccf"
+      },
+      "fit": {
+        "bytes": 74486,
+        "path": "/tmp/current-cache-fixed-fit-and-matched-Q3-existing-owner-continuation-private-v01/current-request-source-map-ordering-correction-private-v01/v02-historical-failure-current-Source-separated/actual-current-Source-binding-ae2f82c4a3bd6ae2-v01/actual-TRAIN3-fit-Q3-output-v01/run.output.13.bin",
+        "sha256": "605884efd86ceee0a813935979e1feffd2827370ad9a55d94be361b0890176e6"
+      }
+    },
+    "pristine0": {
+      "capacity": {
+        "bytes": 1903,
+        "path": "/tmp/current-cache-fixed-fit-and-matched-Q3-existing-owner-continuation-private-v01/current-request-source-map-ordering-correction-private-v01/v02-historical-failure-current-Source-separated/actual-current-Source-binding-ae2f82c4a3bd6ae2-v01/actual-pristine0-fit-Q3-output-v01/run.output.12.bin",
+        "sha256": "5f9b380ba6fe507c65f1188768351cb67f092a78c6151f7fc617e89a30f495a3"
+      },
+      "closure": {
+        "bytes": 64622,
+        "path": "/tmp/current-cache-fixed-fit-and-matched-Q3-existing-owner-continuation-private-v01/current-request-source-map-ordering-correction-private-v01/v02-historical-failure-current-Source-separated/actual-current-Source-binding-ae2f82c4a3bd6ae2-v01/actual-pristine0-fit-Q3-output-v01/actual-closed-Source62-pristine0-fixed-TRAIN-fit-and-Q3-GREEN-authenticated-readback-v03-compiled-map.json",
+        "sha256": "74bf5cb1485ccc845551f8c00dfbd4deeaeb7ef227f1405e3e6992b91f59e24a"
+      },
+      "fit": {
+        "bytes": 74503,
+        "path": "/tmp/current-cache-fixed-fit-and-matched-Q3-existing-owner-continuation-private-v01/current-request-source-map-ordering-correction-private-v01/v02-historical-failure-current-Source-separated/actual-current-Source-binding-ae2f82c4a3bd6ae2-v01/actual-pristine0-fit-Q3-output-v01/run.output.13.bin",
+        "sha256": "aea0f6ae2a5e13f41a6e9d5323cc55098748fc574846608e247738b697862622"
+      }
+    }
+  },
+  "rows": [
+    {
+      "after": 0.7298250794410706,
+      "before": 0.9610249400138855,
+      "change": -0.23119986057281494,
+      "positions": 1575,
+      "unit_id": "fixture:mixed-act-v1/unit-1"
+    },
+    {
+      "after": 0.5412313938140869,
+      "before": 0.7875943779945374,
+      "change": -0.24636298418045044,
+      "positions": 1884,
+      "unit_id": "fixture:mixed-act-v1/unit-2"
+    },
+    {
+      "after": 0.4978315830230713,
+      "before": 0.6851006150245667,
+      "change": -0.18726903200149536,
+      "positions": 2386,
+      "unit_id": "fixture:mixed-act-v1/unit-3"
+    }
+  ],
+  "schema": "source62-authenticated-fixed-train-model-scalar-descriptive-sensitivity/v1",
+  "source_fidelity_or_convergence_measured": false,
+  "target_length_weighted_record_scalar": {
+    "after": 0.5743337216695422,
+    "before": 0.7924879651175696,
+    "change": -0.2181542434480274
+  }
+}

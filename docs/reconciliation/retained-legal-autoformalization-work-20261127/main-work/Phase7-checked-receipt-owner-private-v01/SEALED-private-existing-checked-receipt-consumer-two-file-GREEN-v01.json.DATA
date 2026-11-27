@@ -1,0 +1,528 @@
+{
+  "Git_mutations": 0,
+  "Native_runs": 0,
+  "Root_Source_ledger_changed": false,
+  "SDK_runs": 0,
+  "actual_no_fit": {
+    "actual_normal_pytest_qualification": false,
+    "all_pass": true,
+    "case_count": 31,
+    "compiled_paths": 121,
+    "exact_names": [
+      "test_typed_feedback_uses_current_semantic_target_before_update[matching]",
+      "test_typed_feedback_uses_current_semantic_target_before_update[legacy]",
+      "test_typed_feedback_uses_current_semantic_target_before_update[sample]",
+      "test_typed_feedback_uses_current_semantic_target_before_update[interpretation]",
+      "test_typed_feedback_uses_current_semantic_target_before_update[dependency]",
+      "test_ablation_refuses_unmatched_typed_feedback_before_cloning",
+      "test_typed_feedback_refuses_substituted_record_with_same_target[other_receipt]",
+      "test_typed_feedback_refuses_substituted_record_with_same_target[other_label_same_receipt]",
+      "test_current_target_requires_independent_id_and_canonical_feedback[copied_id]",
+      "test_current_target_requires_independent_id_and_canonical_feedback[unselected_id]",
+      "test_current_target_metadata_without_checked_receipt_never_reaches_update",
+      "test_checked_current_receipt_gates_both_existing_consumers[matching]",
+      "test_checked_current_receipt_gates_both_existing_consumers[tree]",
+      "test_checked_current_receipt_gates_both_existing_consumers[property]",
+      "test_checked_current_receipt_gates_both_existing_consumers[source_result]",
+      "test_checked_current_receipt_gates_both_existing_consumers[content]",
+      "test_checked_current_receipt_gates_both_existing_consumers[assumptions]",
+      "test_checked_current_receipt_gates_both_existing_consumers[bounds]",
+      "test_checked_current_receipt_gates_both_existing_consumers[status]",
+      "test_checked_current_receipt_gates_both_existing_consumers[expired]",
+      "test_checked_current_receipt_gates_both_existing_consumers[formal_binding]",
+      "test_checked_current_receipt_gates_both_existing_consumers[review_binding]",
+      "test_checked_current_receipt_gates_both_existing_consumers[dependency_binding]",
+      "test_checked_current_receipt_gates_both_existing_consumers[sample_binding]",
+      "test_checked_current_receipt_gates_both_existing_consumers[input_mutation]",
+      "test_checked_current_target_refuses_incomplete_receipt_selection[missing_receipt]",
+      "test_checked_current_target_refuses_incomplete_receipt_selection[mapping_receipt]",
+      "test_checked_current_target_refuses_incomplete_receipt_selection[empty_expectation]",
+      "test_checked_current_target_refuses_incomplete_receipt_selection[missing_source_result]",
+      "test_checked_current_target_refuses_incomplete_receipt_selection[missing_formal]",
+      "test_checked_current_target_refuses_incomplete_receipt_selection[missing_as_of]"
+    ],
+    "existing_cases": 10,
+    "explicit_denials": [],
+    "guard": {
+      "address_space_bytes": 536870912,
+      "cpu_affinity": [
+        0
+      ],
+      "cpu_seconds": 25,
+      "kernel_probes": [
+        "socket",
+        "clone3",
+        "write-open"
+      ],
+      "landlock_abi": 7,
+      "stdout_stderr_each_max_bytes": 131072,
+      "syscall_denylist": [
+        "socket",
+        "socketpair",
+        "connect",
+        "accept",
+        "accept4",
+        "bind",
+        "listen",
+        "clone",
+        "clone3",
+        "execve",
+        "execveat",
+        "io_uring_setup",
+        "io_uring_enter",
+        "io_uring_register",
+        "pidfd_getfd",
+        "ptrace",
+        "process_vm_writev",
+        "setns",
+        "unshare",
+        "mount",
+        "umount2",
+        "truncate",
+        "ftruncate",
+        "fchmod",
+        "fchmodat",
+        "fchmodat2",
+        "fchown",
+        "fchownat",
+        "utimensat",
+        "setxattr",
+        "lsetxattr",
+        "fsetxattr",
+        "removexattr",
+        "lremovexattr",
+        "fremovexattr"
+      ]
+    },
+    "model_fits": 0,
+    "new_cases": 21,
+    "numerical_update_spy": true,
+    "project_compile_bytes": 7852947,
+    "report": {
+      "bytes": 38487,
+      "full9": [
+        66306,
+        72510808,
+        33024,
+        1,
+        1000,
+        1000,
+        38487,
+        1795738040798073552,
+        1795738040798073552
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-original10-plus-new21.stdout.json",
+      "sha256": "18796fa71b38e8fd81d8eaeb11616d5420dc34096e29a4447a17a8170bc3ccbe"
+    },
+    "verifier_stubs": false,
+    "worker_rc": 0
+  },
+  "all_prior_costs_failures_preserved": true,
+  "canonical_Source_contexts_opened": 0,
+  "canonical_checkout_body_reads": 0,
+  "canonical_writes": 0,
+  "compatibility": {
+    "all_old_test_assertions_and_ids_preserved": true,
+    "all_other_product_top_level_AST_exact": true,
+    "changed_private_fixture_calls": [
+      "test_typed_feedback_uses_current_semantic_target_before_update",
+      "test_typed_feedback_refuses_substituted_record_with_same_target",
+      "test_current_target_requires_independent_id_and_canonical_feedback"
+    ],
+    "legacy_metadata_fixture_preserved_for_negative": true,
+    "negative_feedback_routes_unchanged": true,
+    "positive_without_checked_context_intentionally_refused": true,
+    "producer_builder_AST_exact": true,
+    "target_obligation_digest_AST_exact": true
+  },
+  "full_eight_phase_goal_complete": false,
+  "future_binding": {
+    "Source_epoch": null,
+    "actual_collection": null,
+    "clock": null,
+    "current_Git_HEAD": null,
+    "new_case_counts": {
+      "test_checked_current_receipt_gates_both_existing_consumers": 14,
+      "test_checked_current_target_refuses_incomplete_receipt_selection": 6,
+      "test_current_target_metadata_without_checked_receipt_never_reaches_update": 1
+    },
+    "ordinary_result": null,
+    "path": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py",
+    "runtime_authority": null
+  },
+  "guide_fragment": {
+    "bytes": 1623,
+    "full9": [
+      66306,
+      72510815,
+      33024,
+      1,
+      1000,
+      1000,
+      1623,
+      1795738256197971549,
+      1795738256197971549
+    ],
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/maintained-guide-private-checked-receipt-fragment.txt",
+    "sha256": "604825910b626f1d026de860ae412fc13cb9be18ada48558a81771407f373752"
+  },
+  "legal_review_or_admission_granted": false,
+  "metadata_only_RED_packet": {
+    "bytes": 11106,
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-unattested-current-target-consumer-regression-v01/SEALED-private-existing-consumer-unattested-current-target-RED-v01.json",
+    "sha256": "d0756eaf57cca75e969f486c13ec2fb8dd45042b887d2e83c7319bfae63d8419"
+  },
+  "next_existing_owner_action": "Compose this target/test delta with the existing actual producer join, preserve independent binding inputs, then use the existing writer and Source-bound normal qualification. No new registry, trainer, provider or queue.",
+  "physical_IO_completeness_claimed": false,
+  "preserved_evidence": {
+    "actual-SAME-consumer-GREEN.stdout.json": {
+      "bytes": 29666,
+      "full9": [
+        66306,
+        72509872,
+        33024,
+        1,
+        1000,
+        1000,
+        29666,
+        1795737242289894194,
+        1795737242289894194
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-SAME-consumer-GREEN.stdout.json",
+      "sha256": "fe21eadace24dd57546d55f18b89291ada10e1158fcdbc4541e61fe322c103b5"
+    },
+    "actual-canonical-expanded21.stderr.txt": {
+      "bytes": 1832,
+      "full9": [
+        66306,
+        72510047,
+        33024,
+        1,
+        1000,
+        1000,
+        1832,
+        1795737801313950975,
+        1795737801313950975
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-canonical-expanded21.stderr.txt",
+      "sha256": "1c70d2644ca4975eb557b52aa73a285515966325e092642389fee62f761d2dce"
+    },
+    "actual-canonical-expanded21.stdout.json": {
+      "bytes": 33199,
+      "full9": [
+        66306,
+        72510046,
+        33024,
+        1,
+        1000,
+        1000,
+        33199,
+        1795737801314950984,
+        1795737801314950984
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-canonical-expanded21.stdout.json",
+      "sha256": "1a6068d55a6fa27fc1a2e54fcad3de2ea4e45baa621f4088726e409cc721241b"
+    },
+    "actual-canonical-expanded21.v02.stdout.json": {
+      "bytes": 36797,
+      "full9": [
+        66306,
+        72510056,
+        33024,
+        1,
+        1000,
+        1000,
+        36797,
+        1795737863603504658,
+        1795737863603504658
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-canonical-expanded21.v02.stdout.json",
+      "sha256": "249a9658ccf384a5374b5e319ee063a8de4aea9316d5c94c27f6a9c5faf18f11"
+    },
+    "actual-canonical-positive-RED.stderr.txt": {
+      "bytes": 2006,
+      "full9": [
+        66306,
+        72510033,
+        33024,
+        1,
+        1000,
+        1000,
+        2006,
+        1795737657441666604,
+        1795737657441666604
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-canonical-positive-RED.stderr.txt",
+      "sha256": "fe8ed0cf506841a33067472bcc1e9fbe42834abdec909dd682b2af5f46206d41"
+    },
+    "actual-canonical-positive-RED.stdout.json": {
+      "bytes": 33063,
+      "full9": [
+        66306,
+        72510032,
+        33024,
+        1,
+        1000,
+        1000,
+        33063,
+        1795737657441666604,
+        1795737657441666604
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-canonical-positive-RED.stdout.json",
+      "sha256": "6b6e1e97fcab51d6c8b347f551c05d01648e2b605652dec85ad6769c3b288e19"
+    },
+    "actual-canonical-positive-SAME-GREEN.stdout.json": {
+      "bytes": 33404,
+      "full9": [
+        66306,
+        72510039,
+        33024,
+        1,
+        1000,
+        1000,
+        33404,
+        1795737701570061454,
+        1795737701570061454
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-canonical-positive-SAME-GREEN.stdout.json",
+      "sha256": "cbb1a6dd10d191b5a03816180ca9a2ffc60fbf3867390291949ad312eeacdab0"
+    },
+    "actual-original10-plus-new21.stderr.txt": {
+      "bytes": 0,
+      "full9": [
+        66306,
+        72510809,
+        33024,
+        1,
+        1000,
+        1000,
+        0,
+        1795738037577045103,
+        1795738037577045103
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-original10-plus-new21.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "actual-original10-plus-new21.stdout.json": {
+      "bytes": 38487,
+      "full9": [
+        66306,
+        72510808,
+        33024,
+        1,
+        1000,
+        1000,
+        38487,
+        1795738040798073552,
+        1795738040798073552
+      ],
+      "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/actual-original10-plus-new21.stdout.json",
+      "sha256": "18796fa71b38e8fd81d8eaeb11616d5420dc34096e29a4447a17a8170bc3ccbe"
+    }
+  },
+  "public_API": {
+    "existing_owner": "ProofFeedbackTrainingTarget",
+    "expectation_required": [
+      "receipt_id",
+      "content_id",
+      "source_result_digest",
+      "property_id",
+      "tree_id",
+      "backend_id",
+      "authority",
+      "assumptions",
+      "bounds",
+      "sample_sha256",
+      "formal_obligation_sha256",
+      "reviewed_target_sha256",
+      "dependency_manifest_sha256"
+    ],
+    "feedback_record_schema_changed": false,
+    "independent_fields_never_filled_by_product": true,
+    "new_optional_fields": [
+      "checked_proof_receipt",
+      "checked_proof_expectation"
+    ],
+    "receipt_id_must_already_be_in_record": true,
+    "receipt_to_target_mapping_inferred": false,
+    "receipt_type": "ipfs_datasets_py.logic.bridge.proof_receipt_attestation.TrustedProofReceipt",
+    "temporal_receipt_requires_explicit_now_or_as_of": true,
+    "verifier": "ipfs_datasets_py.logic.verification_api.LogicVerificationAPI.verify_receipt"
+  },
+  "real_RPC": 0,
+  "review": {
+    "agent": "/root/frontier_caller_map",
+    "new_qualification_claim": false,
+    "result": "Finite clear; MappingProxyType bug reproduced then fixed; final owner SHA authenticated"
+  },
+  "roles": [
+    {
+      "Git_object_stored": false,
+      "base_private": {
+        "bytes": 65270,
+        "full9": [
+          66306,
+          72502857,
+          33024,
+          1,
+          1000,
+          1000,
+          65270,
+          1795733170108070568,
+          1795733170120097990
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/record.current-v408-plus-exact-after-v04.DATA",
+        "sha256": "aee18c5265e4874bd6074637eef5bd4ae6701449cc0876e899abf56d1fb71896"
+      },
+      "forward": {
+        "bytes": 5853,
+        "full9": [
+          66306,
+          72510810,
+          33024,
+          1,
+          1000,
+          1000,
+          5853,
+          1795738256135971004,
+          1795738256135971004
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/record-final.forward.diff",
+        "sha256": "183a59af90545b01b9f274312f6e0320c761d52f95bc029faecc8ff03b9d35c5"
+      },
+      "forward_inverse_exact": true,
+      "git_mode_expected": "100644",
+      "inverse": {
+        "bytes": 5853,
+        "full9": [
+          66306,
+          72510811,
+          33024,
+          1,
+          1000,
+          1000,
+          5853,
+          1795738256139971039,
+          1795738256139971039
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/record-final.inverse.diff",
+        "sha256": "eba9eb74b1e046adda0d972a19436a60ac5725705ed5e15c148dd1480c0390c8"
+      },
+      "post": {
+        "bytes": 69860,
+        "computed_git_blob_sha1": "501fb622f81c917a73debf9cb0ab72173bdf13ed",
+        "full9": [
+          66306,
+          72510034,
+          33024,
+          1,
+          1000,
+          1000,
+          69860,
+          1795737680099869453,
+          1795737680099869453
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/legal_ir_proof_feedback.after-v02.py.DATA",
+        "sha256": "7c575350ee3152b77a4374a1358b0973c3efefdfd69f4955129aae736deec7dd"
+      },
+      "repo_relative_path": "ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py"
+    },
+    {
+      "Git_object_stored": false,
+      "base_private": {
+        "bytes": 46285,
+        "full9": [
+          66306,
+          72502861,
+          33024,
+          1,
+          1000,
+          1000,
+          46285,
+          1795733170417203849,
+          1795733170420101128
+        ],
+        "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/Phase7-Guide571-exact-eight-current-producer-private-heuvytq_/test_trusted_feedback_weight_updates.test.after-v05.DATA",
+        "sha256": "78f1f42f172367e8bb932721b0ef01011b8ff9a7b5821ee2942a4f5254eaa9e3"
+      },
+      "forward": {
+        "bytes": 11095,
+        "full9": [
+          66306,
+          72510812,
+          33024,
+          1,
+          1000,
+          1000,
+          11095,
+          1795738256145971092,
+          1795738256145971092
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/owningtest-final.forward.diff",
+        "sha256": "975a3227747130f673bb995479cb481b645135e102f4e78ef300bd4585d184a7"
+      },
+      "forward_inverse_exact": true,
+      "git_mode_expected": "100644",
+      "inverse": {
+        "bytes": 11095,
+        "full9": [
+          66306,
+          72510813,
+          33024,
+          1,
+          1000,
+          1000,
+          11095,
+          1795738256149971127,
+          1795738256149971127
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/owningtest-final.inverse.diff",
+        "sha256": "a158ec6bb30f9ae0cf5a804d708c5b1cfc0ccfd7f6acd98293c3bfa10939f1ca"
+      },
+      "post": {
+        "bytes": 55601,
+        "computed_git_blob_sha1": "96f756a62853ac2228ef270a76a323c886d5d714",
+        "full9": [
+          66306,
+          72510058,
+          33024,
+          1,
+          1000,
+          1000,
+          55601,
+          1795737945276228823,
+          1795737945276228823
+        ],
+        "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/test_trusted_feedback_weight_updates.checked-receipt.after-v03.py.DATA",
+        "sha256": "7726114eca83166b7a45973ad9839ce5f80782172d6f10cf521f069541b20b34"
+      },
+      "repo_relative_path": "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py"
+    }
+  ],
+  "schema": "private-existing-Phase7-checked-receipt-consumer-two-file-proposal/v1",
+  "scope_limits": [
+    "Canonical verification checks supplied receipt/bindings; it does not execute or externally authenticate a prover.",
+    "Caller owns independent current receipt-to-formal-target association.",
+    "Frozen expectation is a selection snapshot, not automatic current-clock freshness or revocation lookup.",
+    "Producer builder still uses legacy digest until its separate owner joins actual formal target and receipt; this unit does not invent that mapping.",
+    "Private source overlays are exact tracked-object baselines plus declared proposals, not a current canonical Source epoch.",
+    "Traceback displayed source lines can originate from baseline files; executed overlay hashes, not those displayed lines, identify this private run."
+  ],
+  "selector": {
+    "bytes": 495,
+    "full9": [
+      66306,
+      72510814,
+      33024,
+      1,
+      1000,
+      1000,
+      495,
+      1795738256193971514,
+      1795738256193971514
+    ],
+    "path": "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/new-owning-case-selector-INERT.json",
+    "sha256": "e2c1a1c1bc0de18607210d5817b20abc974a0f290fa078b9c847573602629b71"
+  },
+  "status": "PRIVATE_SOFTWARE_UNIT_GREEN_NOT_ADOPTED"
+}

@@ -1,0 +1,228 @@
+{
+  "schema": "private-stage-a-selector-v2-replay/v1",
+  "previous_manifest": {
+    "path": "/tmp/decoder-training-experiment-manifest-v149.json",
+    "bytes": 440735,
+    "sha256": "7e10201d5a7bd3b5c8db1ab7acfb6af8b10be06f213b8292f97e8ee3f073bb27"
+  },
+  "previous_plan": {
+    "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/integration-plan-v3.292.md",
+    "bytes": 1297439,
+    "sha256": "78d1279d3b5f57f85682d81cfc6600fc4f958c2a93ea22f46c51a2aa7d7905f2"
+  },
+  "predecessors": {
+    "reader": {
+      "path": "/tmp/decoder-training-stage-a-a0-archive-handoff-private-v01-UMiyG7nf/reader.py.DATA",
+      "bytes": 36219,
+      "sha256": "b5edbfbf7054b9e7451d50fa89e674323af0d865c021e92b0c59b581c51465b8"
+    },
+    "git": {
+      "path": "/tmp/decoder-training-stage-a-retained-git-controls-private-v01-kNzLC76L/verify_standalone_git.py",
+      "bytes": 28531,
+      "sha256": "4c79c0caa54f08f3e6a13d220cd6aee717774c8de98989ff2b3f78f43808a239"
+    }
+  },
+  "candidates": {
+    "reader": {
+      "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/reader.py.DATA",
+      "bytes": 37935,
+      "sha256": "981dfd120c28cca772edf9382be5d7ea237869f8724075816a4625f265fe7e34"
+    },
+    "git": {
+      "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/verify_standalone_git.py",
+      "bytes": 32812,
+      "sha256": "f1256c8de08535861aee3c189fb6d3a79786ba81303e307bc41c3a8e757d2e0a"
+    }
+  },
+  "source_diffs": {
+    "reader.py.DATA.diff": {
+      "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/reader.py.DATA.diff",
+      "bytes": 4120,
+      "sha256": "10ae6a9fa34a4bbd7a205b84f382a801876e4d736e9477c045c08ead9842ed2e"
+    },
+    "verify_standalone_git.py.diff": {
+      "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/verify_standalone_git.py.diff",
+      "bytes": 8743,
+      "sha256": "fb015e7fdd09f86cbc34095038b55c7976af649df076dd35adfd0fc65a84d100"
+    }
+  },
+  "build": {
+    "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/build_explicit_selectors.py",
+    "bytes": 11307,
+    "sha256": "a018ca2e12f20431b2227e067ab36072468129d401ac542dcb56d20b637c50ca"
+  },
+  "build_stdout": {
+    "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/build-v04.stdout",
+    "bytes": 182,
+    "sha256": "4d59c55f65a26a1927846ed2038c0c27b361c7f13719742a1ee46c72b611884e"
+  },
+  "archived_build_refinement": {
+    "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/build-failed-v01/build_explicit_selectors.py",
+    "bytes": 9413,
+    "sha256": "f32f3732d8ea1e3c2176e5b05e8401b8f98557a98845409c4c4eaefee4357717"
+  },
+  "control_bodies": {
+    "test_selected_pair_reader.py": {
+      "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/test_selected_pair_reader.py",
+      "bytes": 9999,
+      "sha256": "a989cebd1a165b4fbae417e503fd354caf8b82761ae4b6f386c1e0bb43d6306a"
+    },
+    "test_selected_pair_git.py": {
+      "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/test_selected_pair_git.py",
+      "bytes": 12327,
+      "sha256": "1d23d0d9dbe1039dce97ac6d0667b756e7f273076f26eb88274fd945feaf4bb8"
+    },
+    "retained_reader_projection.py": {
+      "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/retained_reader_projection.py",
+      "bytes": 21218,
+      "sha256": "d72afb4a261e329a185fc7064c82a00232434d5d368e8870a33c3c61a9ab6da5"
+    },
+    "retained_git_controls.py": {
+      "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/retained_git_controls.py",
+      "bytes": 14706,
+      "sha256": "92956291aada901012320ae74f09bda1134252950671fc8f1248b4400bcfeb4e"
+    },
+    "owner.py.DATA": {
+      "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/owner.py.DATA",
+      "bytes": 18412,
+      "sha256": "fbdbfdec2b2d87bc960940bb06349e3fa7a8b5fd5a6c041343824f21185ced57"
+    }
+  },
+  "actual_private_suite_records": {
+    "selected-pair-reader-v01": {
+      "distinct_methods": 5,
+      "logs": {
+        "stdout": {
+          "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/selected-pair-reader-v01.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/selected-pair-reader-v01.stderr",
+          "bytes": 895,
+          "sha256": "e8e894dfd424a1b541e04f3295df3807503b5555b6e04996fc4962107a1f65b9"
+        },
+        "exit": {
+          "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/selected-pair-reader-v01.exit",
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        }
+      }
+    },
+    "selected-pair-git-v01": {
+      "distinct_methods": 8,
+      "logs": {
+        "stdout": {
+          "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/selected-pair-git-v01.stdout",
+          "bytes": 2391,
+          "sha256": "8fdebd5861d878c5b83fc0dced164b42f7081c41d6aaf3ef09fd570a04eadd7c"
+        },
+        "stderr": {
+          "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/selected-pair-git-v01.stderr",
+          "bytes": 1492,
+          "sha256": "b898091cda2ca33d01e34edc723a740a086c87785b719aabb259c3d1a759747a"
+        },
+        "exit": {
+          "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/selected-pair-git-v01.exit",
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        }
+      }
+    },
+    "retained-reader": {
+      "distinct_methods": 11,
+      "logs": {
+        "stdout": {
+          "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/retained-reader.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/retained-reader.stderr",
+          "bytes": 2031,
+          "sha256": "2ba171d485a8543fd390991c23ac4652f98026b40ac4cc956a07c49287beacc2"
+        },
+        "exit": {
+          "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/retained-reader.exit",
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        }
+      }
+    },
+    "retained-git": {
+      "distinct_methods": 11,
+      "logs": {
+        "stdout": {
+          "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/retained-git.stdout",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stderr": {
+          "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/retained-git.stderr",
+          "bytes": 1780,
+          "sha256": "f07b31901050a32deb676ae66941487c7628ac545c8a9380e5407293a7e02bde"
+        },
+        "exit": {
+          "path": "/tmp/decoder-training-stage-a-selected-pair-custody-private-v01-O5m7IGYF/retained-git.exit",
+          "bytes": 2,
+          "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+        }
+      }
+    }
+  },
+  "distinct_controls_passed": 35,
+  "active_ordinary_publication": {
+    "path": "/tmp/decoder-training-stage-a-v315-reader-replay-private-v01-wLL2xOBq/descriptor.json",
+    "bytes": 4132,
+    "sha256": "47fa1b3eb6f63af193c5392c40137b0ce3a6c3361129efe4ca21bcdedbdf3807"
+  },
+  "existing_plan_shape_replayed": {
+    "path": "/tmp/decoder-training-stage-a-v315-reader-replay-private-v01-wLL2xOBq/reader-handoff-readback.INERT.json",
+    "bytes": 29465,
+    "sha256": "12dfedd7b9d876fe3ee86e7f134b9264b579d6d8bac291aca5906b429dd58f31"
+  },
+  "owner_plan_bytes": {
+    "path": "/tmp/decoder-training-stage-a-v315-reader-replay-private-v01-wLL2xOBq/existing-reader-plan.INERT.json",
+    "bytes": 42956,
+    "sha256": "c7e3f0ee0e1c043694653a3c1b7807dd8b81d994427642ef1ee19a69b2da75e0"
+  },
+  "guide521_owner_checkpoint_at_capture": {
+    "path": "/tmp/Root-guide521-ready-reviewed-Source4-controls-pending-uxt_4cmx/current-checkpoint.json",
+    "bytes": 6078,
+    "sha256": "2f54e120308064e2a2be745237ef01722c8e358cefbd611b0550a7282406f730"
+  },
+  "next_existing_owner_selection": {
+    "schema": "existing-stage-a-retained-controls-outer-only/v2",
+    "expected_D_A_candidate_when_unchanged": {
+      "A": {
+        "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+        "clean_worktree_and_index": true,
+        "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/accelerate",
+        "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+      },
+      "D": {
+        "HEAD": "e28f7f0de5d6ca4beb71326f035011638158748f",
+        "clean_worktree_and_index": true,
+        "root": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets",
+        "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "tree": "c92d7efbf480401be88e8e8a5eb3eb4370f03150"
+      }
+    },
+    "additional_digest_covered_fields": {
+      "git_project_expectations": null,
+      "paired_selector_observation_sha256": null
+    },
+    "required_per_root_observation": [
+      "literal standalone .git HEAD, live symbolic loose ref and config with full9",
+      "exact raw untransformed for-each-ref stdout and its measured SHA-256",
+      "current named local branch OID, HEAD, tree, clean worktree and index"
+    ],
+    "capture_fresh_again_after_any_ref_or_guide_change": true,
+    "scope_receipt_and_archive": null,
+    "local_compute_allocation": null
+  },
+  "private_fixture_scope_only": true,
+  "actual_live_reader_deployed_or_selected": null,
+  "scientific_baseline": null
+}

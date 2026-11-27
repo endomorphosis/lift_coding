@@ -1,0 +1,132 @@
+{
+  "A_provenance": {
+    "HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+    "actual_closed_Source_READ": {
+      "bytes": 7227,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-isolated-P1-cache-translation-READ3-closed.json",
+      "sha256": "b643b0dfdf6e32d47e2b55cff1eb77bc409f09c52c55a36bcd2cb76fe4a82bbf"
+    },
+    "clean_index_provenance_reference": {
+      "bytes": 2121,
+      "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/actual-ordinary9-clean-D-A-index-provenance.json",
+      "sha256": "93d6c84b2be6abdd0af0ac60f25be9179aeaaba6dae88c6e2df8b25c9e83ead2"
+    },
+    "clean_worktree_and_index": true,
+    "local_frozen_Git_metadata_reference": {
+      "bytes": 2121,
+      "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/actual-ordinary9-clean-D-A-index-provenance.json",
+      "sha256": "93d6c84b2be6abdd0af0ac60f25be9179aeaaba6dae88c6e2df8b25c9e83ead2"
+    },
+    "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate",
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tree": "c670052e6e12473d974382e455c7aef4adb6aebe"
+  },
+  "D_provenance": {
+    "HEAD": "4cc1311f12a317b8a0a0aa92c950011cd09399f0",
+    "actual_closed_Source_READ": {
+      "bytes": 7227,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-isolated-P1-cache-translation-READ3-closed.json",
+      "sha256": "b643b0dfdf6e32d47e2b55cff1eb77bc409f09c52c55a36bcd2cb76fe4a82bbf"
+    },
+    "clean_index_provenance_reference": {
+      "bytes": 2121,
+      "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/actual-ordinary9-clean-D-A-index-provenance.json",
+      "sha256": "93d6c84b2be6abdd0af0ac60f25be9179aeaaba6dae88c6e2df8b25c9e83ead2"
+    },
+    "clean_worktree_and_index": true,
+    "local_frozen_Git_metadata_reference": {
+      "bytes": 6190,
+      "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-isolated-Phase1-cache-translation-exact-two-local-freeze.json",
+      "sha256": "38999ef02d990f6bfb348c01a80455b00b58fed94283c153011bc3afbcf50b4a"
+    },
+    "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets",
+    "status_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tree": "971b75a5ba8da2c688631ea814709d91d75a5720"
+  },
+  "Root_selected": true,
+  "Source_WRITE_claimed": false,
+  "admitted_io_plan_reference": {
+    "bytes": 738,
+    "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/Root-selected-IO.json",
+    "sha256": "f2bfedf029336a1538c3b0836d2f40b0c13811d2ca6c3dbbb1d2441957a8e253"
+  },
+  "effect_decision_reference": {
+    "bytes": 517,
+    "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/Root-selected-effect.json",
+    "sha256": "97284890655baec1619698e67e232f41b9b36a365c3cd971ab090cf12ff9b398"
+  },
+  "fixture_closure_reference": {
+    "bytes": 6309,
+    "path": "/tmp/P1-proofcache-translation-ordinary9-nonclock-INERT-mg3Ycz45/actual-ordinary9-nine-role-fixture-wire.json",
+    "sha256": "c88d98053224af6bb157b68b067ac31b7c6af55bbe9c3886d97fb4700f466a20"
+  },
+  "frozen_Git_candidates": true,
+  "modules": {
+    "ipfs_datasets_py.logic.backends.kernel.lean": {
+      "bytes": 104341,
+      "full9": {
+        "st_ctime_ns": "1795741365135834572",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513274",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741365135834572",
+        "st_nlink": "1",
+        "st_size": "104341",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/backends/kernel/lean.py",
+      "sha256": "18bfc81d7dc74363df731baf3cc066185c300e8606a325953ffe30cf84e83800"
+    },
+    "ipfs_datasets_py.logic.legal_ir.proof_cache": {
+      "bytes": 62783,
+      "full9": {
+        "st_ctime_ns": "1795741449323712303",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513518",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741449323712303",
+        "st_nlink": "1",
+        "st_size": "62783",
+        "st_uid": "1000"
+      },
+      "relative_path": "ipfs_datasets_py/logic/legal_ir/proof_cache.py",
+      "sha256": "704ccf09ba9d7d3c32d107c9cd8e07f6f32933d5f5fdcfe404b641f847c30743"
+    },
+    "tests.unit.logic.legal_ir.test_proof_cache": {
+      "bytes": 102758,
+      "full9": {
+        "st_ctime_ns": "1795741449323712303",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72514356",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795741449323712303",
+        "st_nlink": "1",
+        "st_size": "102758",
+        "st_uid": "1000"
+      },
+      "relative_path": "tests/unit/logic/legal_ir/test_proof_cache.py",
+      "sha256": "23543784354ebcc0c3b58860d14c80cc7171b0ed9e3f86a5b5ddcc70e63423ab"
+    }
+  },
+  "ordinary_execution_or_qualification": null,
+  "projects": [
+    {
+      "Git_HEAD": "4cc1311f12a317b8a0a0aa92c950011cd09399f0",
+      "Git_tree": "971b75a5ba8da2c688631ea814709d91d75a5720",
+      "root": "/tmp/P1-proof-cache-translation-current-6btZZr/datasets"
+    },
+    {
+      "Git_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+      "Git_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+      "root": "/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate"
+    }
+  ],
+  "source_read_binding_reference": {
+    "bytes": 1818,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/actual-isolated-ordinary9-D27-read-binding.json",
+    "sha256": "cde6c95b52d38f8035c0c784bba5845204512178ac4a574410822141851883f5"
+  }
+}

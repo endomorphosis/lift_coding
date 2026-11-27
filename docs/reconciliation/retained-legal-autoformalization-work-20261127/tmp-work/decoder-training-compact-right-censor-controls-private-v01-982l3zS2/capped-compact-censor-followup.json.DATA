@@ -1,0 +1,95 @@
+{
+  "contrasts": [
+    {
+      "clock": "wall_seconds",
+      "contrast_id": "fixture compact two-arm study",
+      "horizon": 10.0,
+      "mean_candidate_minus_baseline_attainment_bounds": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "paired_seeds": 1,
+      "restricted_mean_candidate_minus_baseline_seconds_bounds": [
+        [
+          -7,
+          1
+        ],
+        [
+          -3,
+          1
+        ]
+      ]
+    }
+  ],
+  "cost_basis": "first_use",
+  "cost_evidence_sha256": "e0ced64e5d5b19fe02214eec883c6fe8b1e71223f6801695e81a7ab53183d1ae",
+  "followups_sha256": "702ee454a196ae7536b7f2925b9dc35f0574abd2960373be5f4eb6006b743051",
+  "paid_report_sha256": "5cf7b152e61e1024744a675b6357aa281c81d2ecdafff73c7eee1a2c6d8e4c1e",
+  "pairs": [
+    {
+      "baseline": {
+        "attainment": null,
+        "censor_followup": {
+          "closeout_receipt_sha256": "24075b6cec55e8be9a2ab81cb00b36118b5dee9b59ec682e983ceae08a2d2c90",
+          "closing_clock_receipt_sha256": "97dc7d585ed6e2205ec2f23a89904241925728e6ecec0f002d386e099e1a7911",
+          "closing_meter_sha256": "3f8ffedeadefff695c1cadd94722a107f21e244b82e2d568c7f7b8cd7bbf7e18",
+          "no_confirmation_through_close_receipt_sha256": "06219fd1d271a015ca5b0d00fc5d85043fc045c588a73b5a848746b78aaab20a",
+          "through_seconds": 6.0
+        },
+        "confirming_look": null,
+        "lower_meter_sha256": null,
+        "lower_seconds": null,
+        "observed_confirmation_seconds": null,
+        "reason": "censored_before_this_clock_horizon",
+        "restricted_confirmation_seconds": [
+          6.0,
+          10.0
+        ],
+        "upper_meter_sha256": null,
+        "upper_seconds": null
+      },
+      "baseline_attempt_sha256": "7e4bfdb0e2fa69825efade7a95b457ecb65f554161d87460a6fab982c2d17ee9",
+      "candidate": {
+        "attainment": 1,
+        "confirming_look": "look-1",
+        "lower_meter_sha256": "256dac513fc5d78c114a703a1348dd8a5baac2b18dc216268583513593c1017e",
+        "lower_seconds": 3.0,
+        "observed_confirmation_seconds": 3.0,
+        "reason": "confirmed_within_horizon",
+        "restricted_confirmation_seconds": [
+          3.0,
+          3.0
+        ],
+        "upper_meter_sha256": "256dac513fc5d78c114a703a1348dd8a5baac2b18dc216268583513593c1017e",
+        "upper_seconds": 3.0
+      },
+      "candidate_attempt_sha256": "e83753aef08c001c9f58273b41f111c086f3e9cd1b14916a4c9555438c46153a",
+      "candidate_minus_baseline_attainment_bounds": [
+        0,
+        1
+      ],
+      "clock": "wall_seconds",
+      "contrast_id": "fixture compact two-arm study",
+      "horizon": 10.0,
+      "restricted_candidate_minus_baseline_seconds_bounds": [
+        [
+          -7,
+          1
+        ],
+        [
+          -3,
+          1
+        ]
+      ],
+      "seed": "1729"
+    }
+  ],
+  "schema": "reviewed-scheduled-confirmation-cost-bounds-with-censor-followup/v1",
+  "scope": "finite_registered_seed_pairs_and_scheduled_confirmation_clocks"
+}

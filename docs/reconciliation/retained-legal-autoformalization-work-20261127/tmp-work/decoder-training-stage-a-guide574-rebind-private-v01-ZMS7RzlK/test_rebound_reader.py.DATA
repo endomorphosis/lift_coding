@@ -1,0 +1,23 @@
+"""Replay the retained seven Reader-to-A0 checks with the Guide574 tuple."""
+from hashlib import sha256
+from pathlib import Path
+import sys
+
+HERE=Path(__file__).resolve().parent
+RES=HERE.parent/'decoder-training-stage-a-relocated-reservation-private-v01-Pb5rVPUy'
+DRIVER=RES/'test_reader_v3.py'
+data=DRIVER.read_bytes()
+assert (len(data),sha256(data).hexdigest())==(13362,'607a232c5f51d317da7eec43e726349b04e7680e69da1f26802edc67b411fac2')
+sys.path.insert(0,str(RES))
+import reservation_preview as prior
+prior.PREVIEW=(HERE/'guide574-all-fresh-preview.INERT.json',560809,
+               'd72596ec7d7ddf69a34143699659302499f92c5cdb73414b5159a4197442100f')
+text=data.decode()
+old_path=('/tmp/decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa/'
+          "'\n                                  'guide572-publisher-matched-index.DATA")
+for old,new in ((old_path,str(HERE/'guide574-writer-matched-index.DATA')),
+                ('2266f4d1c12dfa62b7e87a5078a49a578134ea0150752e9db42a566ad810dca5',
+                 '26afaa8c5a756128d11917a2f700bf866fcedd1ce4c933440dfa74413c4b5477')):
+    assert text.count(old)==1
+    text=text.replace(old,new,1)
+exec(compile(text,str(DRIVER),'exec'),{'__name__':'__main__','__file__':str(DRIVER)})

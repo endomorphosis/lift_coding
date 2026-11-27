@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-rebased-checked-receipt-positive-RED-runner.py.DATA", line 276, in main
+    outcome = run_cases(args.mode, adapter, prior)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-rebased-checked-receipt-positive-RED-runner.py.DATA", line 243, in run_cases
+    return {"passes": scope["run"]()}
+                      ^^^^^^^^^^^^^^
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/existing-maintained-checked-receipt-positive-RED-controls.py.DATA", line 77, in run
+    case(source.samples.__wrapped__(), patches, change)
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/project/tests/unit/logic/integration/test_trusted_feedback_weight_updates.py", line 1216, in test_checked_current_receipt_gates_both_existing_consumers
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/project/ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py", line 1138, in matches
+    resolved_receipts = list(receipt_ids)
+                                        ^^
+  File "/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01/project/ipfs_datasets_py/logic/integration/reasoning/legal_ir_proof_feedback.py", line 1169, in _checked_positive_receipt_matches
+    return LegalIRProofFeedbackRecord.create(
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'mappingproxy' object has no attribute 'to_dict'

@@ -1,0 +1,56 @@
+{
+  "Root_selected": true,
+  "Source_WRITE_claimed": false,
+  "Source_closed": true,
+  "actual_compact": {
+    "bytes": 16494,
+    "path": "/tmp/P7-Guide573-successor-live-READ10-controls-JedG5GQ0/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-small-closeout.json",
+    "sha256": "84ba3d215a9f3d775e7d3885116567ae2444287e82cd9f17d17c6e78412f8c11"
+  },
+  "actual_isolated_content_epoch": {
+    "bytes": 8878,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-Phase7-current-Source42-content-epoch-closed.json",
+    "sha256": "3bd61ef0c79698fc9e3c5cf7bafce9e857b954048b17fd4f28c3063d432e72c0"
+  },
+  "actual_report": {
+    "bytes": 1482892,
+    "path": "/tmp/P7-Guide573-successor-live-READ10-controls-JedG5GQ0/actual-output/actual-D27-observed-D-root-initializer-Source-READ-v01-closed-report.json",
+    "sha256": "4d434797c66fa16ed8519829c1594d02018f1114621209a44a559fd4fbe7504e"
+  },
+  "exact_local_freeze": {
+    "bytes": 17143,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-isolated-Phase7-exact-nine-local-freeze.json",
+    "sha256": "825edad923817a395ca1040b5f0633d053f3ea24faf777372294ae3bd322f9c6"
+  },
+  "outer_epoch_record_count": 1614,
+  "outer_epoch_reference": {
+    "bytes": 857886,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-live-reconciled-outer1614-epoch.json",
+    "sha256": "63c831957e262a5d59a2b9ddce2dc95a30b179570a88e9959b50895aef09ced9"
+  },
+  "owned_module_closed": true,
+  "promotion_selected": false,
+  "protected_index_reference": {
+    "bytes": 7070597,
+    "full9": {
+      "st_ctime_ns": "1795739320534723386",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "16956758",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795739320524723302",
+      "st_nlink": "1",
+      "st_size": "7070597",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/datasets/.git/index",
+    "sha256": "3b42d81cab5c448918beb4c638ccdc0a5f5b562f4fdf12658054299be42e1d20"
+  },
+  "python_epoch_record_count": 1601,
+  "python_epoch_reference": {
+    "bytes": 851266,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/actual-live-reconciled-Python1601-epoch.json",
+    "sha256": "b27bf9d687973fb82b5ac1d122fd5753b4266854254ee7fce21bb1845989c0cd"
+  },
+  "schema": "actual-D27-observed-D-root-initializer-READ-small-closeout/v1"
+}

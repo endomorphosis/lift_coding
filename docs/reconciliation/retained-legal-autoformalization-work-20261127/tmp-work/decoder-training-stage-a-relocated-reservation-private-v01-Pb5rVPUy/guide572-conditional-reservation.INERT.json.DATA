@@ -1,0 +1,30 @@
+{
+  "Reader_core": {
+    "control_probe_bytes": 556439,
+    "direct_source_bytes": 21609092,
+    "epoch_output_allowance_bytes": 1050019,
+    "git_output_allowance_bytes": 1425458,
+    "logical_selected_bytes": 24641008
+  },
+  "Reader_epoch_LIST_sizes": {
+    "outer_epoch": 525009,
+    "python_epoch": 523151
+  },
+  "Reader_parent_matrix_allowance": 364452,
+  "Reader_selected_control_reads": [
+    {
+      "bytes": 556438,
+      "path": "/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/guide572-all-fresh-preview.INERT.json",
+      "sha256": "e682f614e50a3e97af25fdf532df48607dbc52085571a9b84d494bbd46ff4cfb"
+    }
+  ],
+  "additional_owner_control_roster": null,
+  "capture_partition": "stage-a-source32-relocated-all-fresh/v1",
+  "dispatch_authority": false,
+  "execution_selected": false,
+  "live_reservation": null,
+  "schema": "private-stage-a-relocated-reservation-scenario/v1",
+  "selector_Reader_conditional_subtotal": 26758574,
+  "selector_git_stream_allowance": 704536,
+  "selector_raw_stream_write_readback_allowance": 1048578
+}

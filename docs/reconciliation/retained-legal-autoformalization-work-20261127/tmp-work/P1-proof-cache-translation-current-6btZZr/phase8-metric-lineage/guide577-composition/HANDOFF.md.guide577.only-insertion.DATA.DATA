@@ -1,0 +1,5 @@
+
+
+## Evidence577 — Evaluation metric-cache lineage recovery
+
+Malformed or stale metric-cache lineage now takes the existing cache-miss and recomputation path. The published candidate passed all 19 ordinary software cases across 10 functions. Those cases cover the retained checks, invalid lineage fields, and recomputation through the real daemon using authored codec and cache hooks. The ordinary run used the existing offline import profile and disabled real metric-cache disk writes in the parent and worker. Source and resource custody closed. [Ordinary qualification](/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Phase8-current-metric-lineage-ordinary19-closed.json) · [Code publication](/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Phase8-metric-lineage-ordinary19-three-FF-publication.json)

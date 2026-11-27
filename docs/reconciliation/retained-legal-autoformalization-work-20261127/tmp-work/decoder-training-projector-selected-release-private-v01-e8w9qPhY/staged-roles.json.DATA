@@ -1,0 +1,950 @@
+{
+  "ipfs_datasets_py/__init__.py": {
+    "bytes": 56829,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "f258f8eada774251feacd8e2ee2048efe56c89a8ee88efd50e4271ea41d43dc9"
+  },
+  "ipfs_datasets_py/duckdb_control/autoencoder_registry.py": {
+    "bytes": 63678,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/duckdb_control/autoencoder_registry.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "f6e782db575b3b645439082bb244449152c55cd82bdf1f8787fce9a1381fab7f"
+  },
+  "ipfs_datasets_py/duckdb_control/connections.py": {
+    "bytes": 57884,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/duckdb_control/connections.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "8d3cc05a89f2b337e584708e7c6dbc8d7d4deccef442265ccbd5ca848821a872"
+  },
+  "ipfs_datasets_py/duckdb_control/contracts.py": {
+    "bytes": 19957,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/duckdb_control/contracts.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "7ef4df9216ecaef4a415afffbb353b9b091120a4faaf702d3c243d43ceb6c199"
+  },
+  "ipfs_datasets_py/ipfs_backend_router.py": {
+    "bytes": 35292,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/ipfs_backend_router.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "d57898ceb7a5be0d8776f81ecb08cf96144afa03f55090d5f33b41baed3e8b0d"
+  },
+  "ipfs_datasets_py/logic/CEC/__init__.py": {
+    "bytes": 3407,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/CEC/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "8f4f1468b80c29eb7f6af4c02907adccc6bad5df1c7f22de5be7731a52b04b6b"
+  },
+  "ipfs_datasets_py/logic/CEC/native/__init__.py": {
+    "bytes": 14271,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/CEC/native/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "ba830d1ab93bea301ead1b31a827878478c89d6c428dba4d0063ca4c6e69e947"
+  },
+  "ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py": {
+    "bytes": 9131,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/CEC/native/dcec_cleaning.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "06517ecd30e4889d2a54db6732279e61a53945906860ef66378b5d707cca04b0"
+  },
+  "ipfs_datasets_py/logic/CEC/native/dcec_core.py": {
+    "bytes": 57189,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/CEC/native/dcec_core.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "bb977f411605fc1f0715ed23c988102d55fa012029053c21c8fc5b14aea17e14"
+  },
+  "ipfs_datasets_py/logic/CEC/native/dcec_integration.py": {
+    "bytes": 18642,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/CEC/native/dcec_integration.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "f039af934dba224d6c4984e8840fd8a4de00fe5e69837b0678d1d670dc26ac82"
+  },
+  "ipfs_datasets_py/logic/CEC/native/dcec_parsing.py": {
+    "bytes": 14204,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/CEC/native/dcec_parsing.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "2756e3c94acf902579bfc54d469e01ddd25b72f53d177b88921829d71df7da70"
+  },
+  "ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py": {
+    "bytes": 15038,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/CEC/native/dcec_prototypes.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "0e0b231ed68c39054cfd2fd674780cb736fd258cde7570881cb3a41cb5d2680e"
+  },
+  "ipfs_datasets_py/logic/CEC/native/exceptions.py": {
+    "bytes": 10095,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/CEC/native/exceptions.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "cbbbafacf70d1c7355d7c930f48c5f71fc711765aa4789a817e5c229c8e60622"
+  },
+  "ipfs_datasets_py/logic/TDFOL/__init__.py": {
+    "bytes": 11004,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/TDFOL/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "42c252ba4fb85301b649bc3afe497a2799d27460b9556e57c7398b5441ba13e8"
+  },
+  "ipfs_datasets_py/logic/TDFOL/compiler_repairs.py": {
+    "bytes": 8043,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/TDFOL/compiler_repairs.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "4d3844ca3b76e57a9cedd9c5b0ee0657eca7a8255de5fa0d0ca84f457dafe553"
+  },
+  "ipfs_datasets_py/logic/TDFOL/tdfol_core.py": {
+    "bytes": 28721,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/TDFOL/tdfol_core.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "67be350d1fb0422a64ab040349b2d51c4008fbeeb8b59a99b8901d681d7d71c7"
+  },
+  "ipfs_datasets_py/logic/TDFOL/tdfol_parser.py": {
+    "bytes": 29788,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/TDFOL/tdfol_parser.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "8e1f8885be6dc2a7d692ecdf0364ccc4d01692c38c81137775d9d222d8b8d9d3"
+  },
+  "ipfs_datasets_py/logic/__init__.py": {
+    "bytes": 4434,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "f25a9702ddc282092dbae1bc1731afdcc35576c10745487dccedaa531ccc9e79"
+  },
+  "ipfs_datasets_py/logic/autoformal/__init__.py": {
+    "bytes": 61853,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "375049ac8658847ef08a411660a3a0f7f452d211fb78df1399a387db4e0c065b"
+  },
+  "ipfs_datasets_py/logic/autoformal/corpus_contracts.py": {
+    "bytes": 27024,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/corpus_contracts.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "0279ad9f7afeb2843aba5c1e0c5b9dd85da8037bd46fd90497f987b613d05982"
+  },
+  "ipfs_datasets_py/logic/autoformal/corpus_source.py": {
+    "bytes": 16185,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/corpus_source.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "6e4be77cfc27a750b11aa57bb92baa92617c57d5c4a26316e25563aa715ec257"
+  },
+  "ipfs_datasets_py/logic/autoformal/family_qualification.py": {
+    "bytes": 37698,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/family_qualification.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "4db56c904cce8a030e5889b5d14687f01e9348842093480dd699649ad96dc1a8"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_canonical_calendar.py": {
+    "bytes": 16905,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_canonical_calendar.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "6e5275dbd1f15d58bc7c0e1480b2af68fae11b08c03a8fe6a1c0e3d97c959501"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_canonical_qualified.py": {
+    "bytes": 19295,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_canonical_qualified.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "580544f2bf329c54832eee9b66042794bab2e6938bad142952aca9f4438f5902"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_context_obligations.py": {
+    "bytes": 4026,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_context_obligations.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "8b637a6c1947c152abefef3396b86b95739e214dde80e17739ad3f483e2c0482"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_family_routes.py": {
+    "bytes": 7838,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_family_routes.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "5e997e84596c1875d0140573b33a08ff9c12902b003ed3669e1f7bf51aee7c2d"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_graph_dependencies.py": {
+    "bytes": 19638,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_graph_dependencies.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "eba3bc49bf9f88a660ce9d0d6947f99c603c44a8fc3379d001d31cfe77f98afa"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_graph_review.py": {
+    "bytes": 30521,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_graph_review.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "32abecbf17bc3d10b59d1bd08fde3e8b6bfa58f73b17e31e817fe0f4e910af9e"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py": {
+    "bytes": 88512,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_norm_content_adjudication_v1.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "7350235f02340d2d2f0925d25399f614861c59b6faabcb1ebd427e2682a4f1fd"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_norm_content_responses_v1.py": {
+    "bytes": 30767,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_norm_content_responses_v1.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "c6f53e87191a417b2551233fca11b4324e7bb2a060fb540fa029048462fe25a1"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_norm_interpretation_review_v1.py": {
+    "bytes": 61235,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_norm_interpretation_review_v1.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "bdb61ffa938b6d6b26fe81507f54f55263a81c8e38720d027c8d97ea754927b6"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_norm_scope_correspondence_v1.py": {
+    "bytes": 44109,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_norm_scope_correspondence_v1.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "731d4b6fa766ccf30f05339dc6d487c96a2e84a25dfbf0f995df647086591fa1"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_official_document_views.py": {
+    "bytes": 51449,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_official_document_views.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "e43e7e19c6d58ec179224128d9ceabe6a9bf0963db6b42e0c738419a110f00cb"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_official_source_custody.py": {
+    "bytes": 19956,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_official_source_custody.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "876bb6618fd76f6be33b995e9597796e4a5b4d95fa6689129beb3fb918b796e7"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_paired_manifest_inventory_v1.py": {
+    "bytes": 17742,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_paired_manifest_inventory_v1.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "f5778bbb6f2fef41a45057ce45ca2f409f0f27647c39e538b21909dd38a1990b"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py": {
+    "bytes": 61444,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_relational_norm_v1.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "e3fb0941e123672f4c280f282b0bce80937dab6cdc56ca607ffd5d3713ae9adf"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py": {
+    "bytes": 29667,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "1249dc93b2a6208f152c08f3bab5706acc272fa93663a58f0f87924e80d172be"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_semantic_graph.py": {
+    "bytes": 37209,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_semantic_graph.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "b198d58209f5151081588fab914bedc7f15bbbd5d1a1717af98711aed031464c"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_source_norm_scope_v1.py": {
+    "bytes": 39753,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_source_norm_scope_v1.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "9131a433da50e564412b73f77b36502fe43c72f46858c21a56f2c57cd178141d"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_source_sampling.py": {
+    "bytes": 13827,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_source_sampling.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "bdf8a76c13e5e3dd67e5cd2b18230726063d65a97c6db5a018c26dcadefc2489"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_source_sampling_review.py": {
+    "bytes": 37589,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_source_sampling_review.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "0434ee6773f68365598394a02d4130d89f18d5c822ea521fcfd5d381e2375e46"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_source_sampling_review_context.py": {
+    "bytes": 18433,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_source_sampling_review_context.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "d5422415f3311451259818f89928d62e69f0bbd9df70648290dbe4a84d4e0645"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_statutory_context.py": {
+    "bytes": 24172,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_statutory_context.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "7ee890a13a67d219c044b32fe43c7609437bd5751c56d60f87b159eef98335fa"
+  },
+  "ipfs_datasets_py/logic/autoformal/legal_statutory_context_v2.py": {
+    "bytes": 20005,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/legal_statutory_context_v2.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "2f4e2895e29d6a7fcefdb240c73b732b8e0504b918af62994a04964bc572a13e"
+  },
+  "ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py": {
+    "bytes": 177467,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/training_cycle_inputs.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "88125051a7b1d0dcc887f772faa750fa13b8a2141693679a62e2bd5e97e92db3"
+  },
+  "ipfs_datasets_py/logic/autoformal/tree_pin.py": {
+    "bytes": 2052,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/autoformal/tree_pin.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "ec43fd9379f3c9198451e8d62d98db53826dcf115e6858039a73c3da7d72a1c2"
+  },
+  "ipfs_datasets_py/logic/families/namespaces.py": {
+    "bytes": 34262,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/families/namespaces.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "ba097e653158a812d66ead978d6405d61adaa293521305333579b19bd69a432d"
+  },
+  "ipfs_datasets_py/logic/formalization/__init__.py": {
+    "bytes": 2073,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/formalization/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "91c60c1dfbf9038b8271ae6b1495dbbaf0be8d6ce438524c33f4f7a586f17266"
+  },
+  "ipfs_datasets_py/logic/formalization/autoencoder/__init__.py": {
+    "bytes": 97,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/formalization/autoencoder/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "82206d6ca08b8626b2afd37534679ac3ea001005f934ed211aa0f1f4eb81f073"
+  },
+  "ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py": {
+    "bytes": 39438,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/formalization/autoencoder/native_family_lean_emitters.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "dab6bbd4e17eef888f4181aab0c6ce3f087a717edc83a55befb7742fd1f598b1"
+  },
+  "ipfs_datasets_py/logic/formalization/autoencoder/native_legal_qualified_lean.py": {
+    "bytes": 16858,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/formalization/autoencoder/native_legal_qualified_lean.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "5407ba7299b002048ff8f45dbea7295d3b210f41904f28a98684042d055d0b2a"
+  },
+  "ipfs_datasets_py/logic/formalization/autoencoder/native_qualified_lean.py": {
+    "bytes": 18936,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/formalization/autoencoder/native_qualified_lean.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "645d38508004833092cd5fd9870f29fdae34aa0e262471888973cb3203121408"
+  },
+  "ipfs_datasets_py/logic/intent_ir/__init__.py": {
+    "bytes": 2386,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/intent_ir/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "acf68a7215af95b4a7d4e4dc883cb7577e2129e7bbadf49c1fc2c404848bc641"
+  },
+  "ipfs_datasets_py/logic/intent_ir/autoencoder.py": {
+    "bytes": 1006,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/intent_ir/autoencoder.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "ff944970bd24db83b6851fe4b84db62fe00128ed6ee0019c17cd941f2feb2e91"
+  },
+  "ipfs_datasets_py/logic/intent_ir/canonicalize.py": {
+    "bytes": 1495,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/intent_ir/canonicalize.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "3609047cc8c99437d77461b4f7ea0e05d193a31bf0d20a7e80b7b0c10a8cff87"
+  },
+  "ipfs_datasets_py/logic/intent_ir/decoder.py": {
+    "bytes": 24220,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/intent_ir/decoder.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "7bab5781c07e00b54b0283d3a2962926f75935caedc80eceb23264cb388be257"
+  },
+  "ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py": {
+    "bytes": 22238,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/intent_ir/formalize/modal_projections.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "7337b9266ed4f171ec7ee763828f8b637bf57930d8b89fa0d47139650996a14d"
+  },
+  "ipfs_datasets_py/logic/intent_ir/protocols.py": {
+    "bytes": 1693,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/intent_ir/protocols.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "adb0ae8eaf2e55bf587ac76baa90d8303b61e0df246c03c30b56cb31a9643780"
+  },
+  "ipfs_datasets_py/logic/intent_ir/schema.py": {
+    "bytes": 27163,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/intent_ir/schema.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "93d38e4724c5f34aab7f39f050742e98ef0c8d80e2ff70459d2401541505fc56"
+  },
+  "ipfs_datasets_py/logic/ir_core/__init__.py": {
+    "bytes": 6942,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/ir_core/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "4c0070482e009dd7cb9875e91124d48683da37d53f691cccb306ec50f23c946c"
+  },
+  "ipfs_datasets_py/logic/ir_core/canonical.py": {
+    "bytes": 14098,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/ir_core/canonical.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "339b5778581c19525a7685edf432aaf124cd12e02d37cd0eca88cb25ab86c0d0"
+  },
+  "ipfs_datasets_py/logic/ir_core/provenance.py": {
+    "bytes": 31891,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/ir_core/provenance.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "16eaf7c258550e5625bc19e6e7468c94133aedd1e85e64075f057ab4e52c3efe"
+  },
+  "ipfs_datasets_py/logic/ir_core/schema_registry.py": {
+    "bytes": 31823,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/ir_core/schema_registry.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "1b214ea190a41c6a451377a03bc71ea84f6703314293ef78c5f269082eee4fbe"
+  },
+  "ipfs_datasets_py/logic/legal_ir/__init__.py": {
+    "bytes": 2708,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/legal_ir/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "53ce51e56a292ea3210010fa17b352e9d40eb5b59cf15c5e732147000b40fee1"
+  },
+  "ipfs_datasets_py/logic/legal_ir/canonical_contracts.py": {
+    "bytes": 109257,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/legal_ir/canonical_contracts.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "d66ecfaa2c967cda40a1cf4b82936a34039e38ccdb3044468697a4f90af2844b"
+  },
+  "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py": {
+    "bytes": 29993,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "5b90021bffd9a29327490788e9a9eee9ba1788679c5adae6a02e84be9a718c6a"
+  },
+  "ipfs_datasets_py/logic/legal_ir/canonical_statement_scope_bridge.py": {
+    "bytes": 4214,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/legal_ir/canonical_statement_scope_bridge.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "7e74f5ea2230549165fd0cb0230b2b8baaa0016cc2352d5a422c70c20f5e4da8"
+  },
+  "ipfs_datasets_py/logic/parsers/__init__.py": {
+    "bytes": 8980,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/parsers/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "e75f0c2ffea0f0706a3d1768a794849e6c013b6647dc59ba331f44797c233386"
+  },
+  "ipfs_datasets_py/logic/parsers/event_calculus.py": {
+    "bytes": 59003,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/parsers/event_calculus.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "8bd7217febef6daf86f76bae7e03ab0cbf7eb22a1b64f3040fd26a3d2ebfc390"
+  },
+  "ipfs_datasets_py/logic/parsers/legacy_modal.py": {
+    "bytes": 71642,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/parsers/legacy_modal.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "7b18812ea6fcba8b65ed7dc5c3407e0ad06ac9760c5c66441e9677463f9eb66e"
+  },
+  "ipfs_datasets_py/logic/parsers/modal.py": {
+    "bytes": 99829,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/parsers/modal.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "3131ff1dd516ebdf52071215c2c7983f9cf317d86bb138ff9437faae9b227942"
+  },
+  "ipfs_datasets_py/logic/profile_g.py": {
+    "bytes": 54035,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/profile_g.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "4ca5dcc601f30c723467f425a6a03a7c5b1f644c2239a0f4a489705f1b715f03"
+  },
+  "ipfs_datasets_py/logic/syntax_core/__init__.py": {
+    "bytes": 8285,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/syntax_core/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "20dd418d90360cdb42c64ba8b87bedcdb640228b460ef6c6ae60312365130e81"
+  },
+  "ipfs_datasets_py/logic/syntax_core/algebra.py": {
+    "bytes": 45735,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/syntax_core/algebra.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "d3587e2270943167ebef226e03cbd70cfc8888d936647670a21cfa514240e6b7"
+  },
+  "ipfs_datasets_py/logic/syntax_core/ast.py": {
+    "bytes": 56966,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/syntax_core/ast.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "4709513f18ab270858fe9595d88a847ddc52092606c52c7802947abed1ab9ac4"
+  },
+  "ipfs_datasets_py/logic/syntax_core/contracts.py": {
+    "bytes": 75291,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/syntax_core/contracts.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "ce6d49e05ca2b09a84a3125ed6ad4c4aae4adf2c5943d3a4fd4eeeb057b444a8"
+  },
+  "ipfs_datasets_py/logic/syntax_core/diagnostics.py": {
+    "bytes": 10752,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/syntax_core/diagnostics.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "a291db3c2cea04ae8dd9221a5e5ddbebd419679c02a5a008034e3755e7650d8f"
+  },
+  "ipfs_datasets_py/logic/syntax_core/lexer.py": {
+    "bytes": 27534,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/syntax_core/lexer.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "f666e9759323508f4e90964c0d71164645af9ce1de60bed778e5f64f7f4a3aea"
+  },
+  "ipfs_datasets_py/logic/syntax_core/registry.py": {
+    "bytes": 27560,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/syntax_core/registry.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "eff5ca12d748eff1e9463b737a8243c97d89cac51e1b604fe2c765aed885cb44"
+  },
+  "ipfs_datasets_py/logic/syntax_core/signatures.py": {
+    "bytes": 30488,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/logic/syntax_core/signatures.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "49dd4fb0096661a05a15f056eb57248349e2b4e0b02e83239f36db36788c75bf"
+  },
+  "ipfs_datasets_py/optimizers/__init__.py": {
+    "bytes": 957,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "a12bab3724da07be67b447719ace42fc1f480cb5635581f320a99a372f02f450"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py": {
+    "bytes": 69336,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "9d693fa576f00dc36899faad75ef3044c437e2bfec5c62306f7031236725bb0e"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_job_inputs.py": {
+    "bytes": 27296,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_job_inputs.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "3017c6c6e6e700fc64b2d21b0624a521765801deb79816b57611209b76f9046a"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_process.py": {
+    "bytes": 33939,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_process.py",
+    "role": "supplement_from_historical_detached_lifecycle",
+    "sha256": "c951dfb1ba1bf23c7b9a5d0b47ea535cab53bdc69f604053290f814f313d8eea"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_process_worker.py": {
+    "bytes": 28847,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_campaign_process_worker.py",
+    "role": "supplement_from_historical_detached_lifecycle",
+    "sha256": "527acb5161660f2a70f8f70caac39c38518d90313cef9f41ff15db888930e527"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_candidate_qualification.py": {
+    "bytes": 32164,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_candidate_qualification.py",
+    "role": "supplement_from_historical_detached_lifecycle",
+    "sha256": "7ef775f99bb66be537ce4c0b5996ae484b76465dd51ec77f800aeefe8478b133"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_index.py": {
+    "bytes": 21099,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_index.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "f4b71d03e6341602631387262d0efffb61c95bca40ad5307ecfcda3eb1d169b9"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py": {
+    "bytes": 27947,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_corpus_manifest.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "b067f05b3cfc28cb213a83519530f7148b2a5fa7d5b25809e87e1f7c286f9a5d"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_invocation.py": {
+    "bytes": 27136,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_invocation.py",
+    "role": "supplement_from_historical_direct_owner_imports",
+    "sha256": "6a1216687e23e26f81a743fe887f9c7f5ae7d7d7d41fd49ed87377eb108691af"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_invocation_contracts.py": {
+    "bytes": 15567,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_invocation_contracts.py",
+    "role": "supplement_from_historical_detached_lifecycle",
+    "sha256": "34682aedf9bf565ff4a65ea79c9beb7fa2f3854c94cc5f0db18451e6fb0ba714"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_invocation_worker.py": {
+    "bytes": 82125,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_invocation_worker.py",
+    "role": "supplement_from_historical_detached_lifecycle",
+    "sha256": "38b496bf74f80b477d91af98f2ffb7559b0cdde6983a8b3d0672eae5990f6a26"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_operation_journal.py": {
+    "bytes": 23673,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_operation_journal.py",
+    "role": "supplement_from_historical_direct_owner_imports",
+    "sha256": "8008b2cf10e7dab119ee703a84a84b0bd2c72931615969170002230e224036e3"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py": {
+    "bytes": 62034,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_daemon_resources.py",
+    "role": "supplement_from_historical_detached_lifecycle",
+    "sha256": "ff56d3c02148fbcd2aeffcd603232edde831be12218fa1e2765694aa71d03b1f"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py": {
+    "bytes": 34371,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_production.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "9a269fab7e5f65cd34e45132e23fa15dbae133b28d605575fdfd9b8dfe1bc048"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_receipt_set.py": {
+    "bytes": 23050,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_embedding_receipt_set.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "7ed4aeff1bec961690b31e2f2ea17975aa6523d947ce12a1c1ee24517bc1475c"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_incremental_training.py": {
+    "bytes": 22784,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_incremental_training.py",
+    "role": "supplement_from_historical_detached_lifecycle",
+    "sha256": "0f76f56a53d67867f2447ef97f63d05db2cce80aaf32c46ef662b64cff398fd2"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_inference.py": {
+    "bytes": 120458,
+    "path": "/tmp/decoder-training-projector-request-materialization-private-v01-tMT106br/launcher.py.DATA",
+    "role": "private_request_materialization_candidate",
+    "sha256": "0a3729f232bd3d94eb6224a59020bcff6e57015b690537b2a5361f5e4eeac5a0"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py": {
+    "bytes": 7896,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_native_pool.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "04f29da03f937dfee7ecfcb621980240c014754abe55f71a2c1ef8338ba715bb"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_produced_record_projection.py": {
+    "bytes": 17358,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_produced_record_projection.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "3e91b71b7d364113fb7728c381f614e7a71872b2c207b32ca766bd73d4455e2a"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_lease.py": {
+    "bytes": 10375,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_lease.py",
+    "role": "supplement_from_historical_detached_lifecycle",
+    "sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_partitions.py": {
+    "bytes": 17973,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_source_partitions.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "d696c3af565d09be1825a00bdbf979ff97c12bb1a6ab1054564a9946b824875a"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_coordinator.py": {
+    "bytes": 78534,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_coordinator.py",
+    "role": "supplement_from_historical_detached_lifecycle",
+    "sha256": "8a08373adbc84a3382ded6a05e1ce67a42ba6969bcc31a99cbdf10d49bc45528"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_training_worker.py": {
+    "bytes": 842621,
+    "path": "/tmp/decoder-training-projector-request-materialization-private-v01-tMT106br/worker.py.DATA",
+    "role": "private_request_materialization_candidate",
+    "sha256": "de424df72892525387f10ca99d7e05053e1454320817241228f03ab73b63da6c"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_uscode_import.py": {
+    "bytes": 31233,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_uscode_import.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "3ead6dbe0014be69a11c1a9f6c203d62c012a3dd5f5913aa9471eda91574bb70"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_uscode_inventory.py": {
+    "bytes": 33754,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_uscode_inventory.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "6aa7330cd20a2eb256561382b78bc4465d3b7607827f53d0b644d9e89afb1f21"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/checkpoint_content_guard.py": {
+    "bytes": 6387,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/checkpoint_content_guard.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "5461672516b4a60938b036d558192e8db328fdd00d20cda76b7448dea09c706c"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/existing_resource_scheduler.py": {
+    "bytes": 24518,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/existing_resource_scheduler.py",
+    "role": "supplement_from_historical_detached_lifecycle",
+    "sha256": "d654ab5ed2fec314ea5ac07a662784ab20843b0b2feb56f13989ce1504607776"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/frame_bm25_selector.py": {
+    "bytes": 79321,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/frame_bm25_selector.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "feb8d74a8a87783408025f1a341500b734a396b99c757f1e65026e4abb26b437"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/grouped_policy.py": {
+    "bytes": 174160,
+    "path": "/tmp/decoder-training-unified-grouped-policy-private-v01-ZdWBre07/grouped_policy.py",
+    "role": "exact_private_overlay",
+    "sha256": "0e49dd946039c46e93094bf62b72277d3f7ef65cab38ee632b034c034a20b99f"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py": {
+    "bytes": 58133,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_eval_splits.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "7963ebcb291c0476f0cccc4123e28a519187970f02dbd9059fce78e661287c3c"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py": {
+    "bytes": 42137,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_family_evaluator.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "3b6cd3a6fade78fed275a478f010329e5d030a250b914c4b46ab0f0d77b9d5ab"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py": {
+    "bytes": 146870,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_ir_grammar_decoder.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "0b1eae24b00157ae74a2700f23ca95c7f9957dc755078caaf179e64070fdeffd"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_modal_parser.py": {
+    "bytes": 160181,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_modal_parser.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "5415bf565171b17db1d4a03c715e974645a59018addb852cf67fc3c71d462406"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_samples.py": {
+    "bytes": 6258,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_samples.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "e46d794d38971343d8f3aed68fb224e5b44292cf9f4b8c973dedc20db5651b87"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py": {
+    "bytes": 58356,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/legal_span_consumer_binding.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "ff8b61f71280f4c5d1d413feab33d5f9498f3cf560755492eafbbb0348d0bc82"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py": {
+    "bytes": 1428524,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "4b44bb723709be5b4606d497935b245723231df8ec19b24f1bd329fd8932ad24"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py": {
+    "bytes": 21228,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_adaptive_optimizer.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "dcd3a885820e7985ebec458a80325fe00d4d50656cf5827a828dd9cb45eb2524"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_arrow_weights.py": {
+    "bytes": 32722,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_arrow_weights.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "3f126b4ab9903f95b74522fff08d4b43df44ba4efa41f20fb15f24354e181948"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_transaction.py": {
+    "bytes": 17051,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_transaction.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "c4da0ecd5ebb0ba83d91a3683f049b163662211afb216cacacf86bdd7a4b48d3"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_version.py": {
+    "bytes": 22278,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_state_version.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "136756e14822dcec8158fb2718417972096842de74c4e841f08df28f1c7a028e"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_view_diagnostic.py": {
+    "bytes": 8430,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_autoencoder_view_diagnostic.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "1937169c7d49409b89b00c2b2c9d1d9e955ab3f37f15122931b79be9bb0c36ba"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_ir.py": {
+    "bytes": 7283,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_ir.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "697b8e183fb966f01a0b81e4241154c38d2785277739518cbdfcc8db37695743"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_registry.py": {
+    "bytes": 519367,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/modal_registry.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "e8a79d5612f50d3a842b72e618fc1903094dc4dd225688d9cb2d67bb4b0cb00a"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/projection_profiler.py": {
+    "bytes": 10801,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/projection_profiler.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "c5c5179cce6df49f694523b999f61cc8a842fa71424af956893400d574e3b4e8"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py": {
+    "bytes": 15543,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_resource_safety.py",
+    "role": "supplement_from_historical_direct_owner_imports",
+    "sha256": "3655923785cb99409171caaba8c523354f03dbe8d82b6deb45a7b46db8394633"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/proof_scoped_credit.py": {
+    "bytes": 56476,
+    "path": "/tmp/decoder-training-unified-grouped-policy-private-v01-ZdWBre07/proof_scoped_credit.py",
+    "role": "exact_private_overlay",
+    "sha256": "43d7bbb4be6192df93e60c69674ab36b6c14ab8e4c149673461b6448108dfc54"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/relational_arming.py": {
+    "bytes": 56534,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/relational_arming.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "2213d5a5719f01ed6ce87b608a958751db26bfe9908d3fc4acc86ff57d2f2cf8"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/relational_assessment.py": {
+    "bytes": 575468,
+    "path": "/tmp/decoder-training-projector-shared-assessment-private-v01-xWNzxF6a/relational_assessment.py",
+    "role": "exact_private_overlay",
+    "sha256": "76a1b2cbde9444fb13946bdcd1d3b3e285236d4c2a8ca9e3a7724355adfa43b0"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/relational_origin.py": {
+    "bytes": 47872,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/relational_origin.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "5baa349f888320acabec5fa66a6e955a98388812a18e45b4a7b2f9b1de4fc6c6"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/relational_sources.py": {
+    "bytes": 16376,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/relational_sources.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "7bcaf792769a4f96c9ee4cfd45e22fe0dbfcf330150b716371e2e7c93a48418b"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/relational_trial.py": {
+    "bytes": 142050,
+    "path": "/tmp/decoder-training-unified-grouped-policy-private-v01-ZdWBre07/relational_trial.py",
+    "role": "exact_private_overlay",
+    "sha256": "be4488a3e1d17f221a76082e8cd2696be134b73863e8aaf68ff2ce939851aa28"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py": {
+    "bytes": 144291,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/resource_scheduler.py",
+    "role": "supplement_from_historical_detached_lifecycle",
+    "sha256": "2c00683202b4a783b5050329caa24a411f83788010baba86d9380123bae7d083"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py": {
+    "bytes": 53075,
+    "path": "/tmp/legal-rich-heldout-cli.KHpVTEEJ/tree/ipfs_datasets_py/optimizers/logic_theorem_optimizer/runtime_telemetry.py",
+    "role": "supplement_from_historical_direct_owner_imports",
+    "sha256": "542f705867b93fcb138a117e1f5c97a144ad6635dc92c37bc5034eee5065ef63"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/sampled_action.py": {
+    "bytes": 77243,
+    "path": "/tmp/decoder-training-unified-grouped-policy-private-v01-ZdWBre07/sampled_action.py",
+    "role": "exact_private_overlay",
+    "sha256": "da91e31c392e095700366ad53037412635bf8fc2af08f6e72d5b8339faa9ac97"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py": {
+    "bytes": 38995,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/snapshot_evaluator.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "1aa122f14dc52a4a5cb161bc2c40862334f7b216210bfcdb42fd5989b69761e6"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/study.py": {
+    "bytes": 905879,
+    "path": "/tmp/decoder-training-qwen-projector-paid-comparison-private-v01-a3jOl79B/study.py",
+    "role": "exact_private_overlay",
+    "sha256": "09afd1fd3f35f3c1612eecb84a5b5d091cf7edb2455526b8e9a9c02064b36f44"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/teacher_prefix.py": {
+    "bytes": 52410,
+    "path": "/tmp/decoder-training-unified-grouped-policy-private-v01-ZdWBre07/teacher_prefix.py",
+    "role": "exact_private_overlay",
+    "sha256": "b7e46d7f5df3783cb2904a67cacc3273d5e82e987d1740afb085c3a76a97f5cd"
+  },
+  "ipfs_datasets_py/optimizers/logic_theorem_optimizer/teacher_relational.py": {
+    "bytes": 8372,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/teacher_relational.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "b8500369705bd85fbe2a301bb1da4681e91fc34e22a2c150bb811472a4b4e965"
+  },
+  "ipfs_datasets_py/processors/__init__.py": {
+    "bytes": 13495,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "ad900d235b175e021f0fb679ede5ce5f810dbdca29bc488a2f10bc06b0a17047"
+  },
+  "ipfs_datasets_py/processors/core/__init__.py": {
+    "bytes": 1660,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/core/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "35a86c358c1b2acdf5390a864df857978cd82eedde7ca096c293d417939aa6d5"
+  },
+  "ipfs_datasets_py/processors/core/input_detector.py": {
+    "bytes": 14806,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/core/input_detector.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "80a5cecad4308023febcda895d6cd3ac984fb7167f942281db5425547e090746"
+  },
+  "ipfs_datasets_py/processors/core/protocol.py": {
+    "bytes": 13576,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/core/protocol.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "ad0198f49eb31a5d764cbf828c74080070ade6ed16d202ac6dd735bc423cc7c8"
+  },
+  "ipfs_datasets_py/processors/core/registry.py": {
+    "bytes": 22036,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/core/registry.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "cc89d69c1886b762867d3dc991a2129d5fadfb0663bff7dda933c4591be59be0"
+  },
+  "ipfs_datasets_py/processors/core/universal_processor.py": {
+    "bytes": 18503,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/core/universal_processor.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "450e0926c6596b11e24d0ae5181bdfa1bd45f575f26de30eab0acf83027914b8"
+  },
+  "ipfs_datasets_py/processors/infrastructure/__init__.py": {
+    "bytes": 934,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/infrastructure/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "e73c6dbd4706b81daad0648b6d16b3184ea5db8c57c6fc1ee5362cff604f7b70"
+  },
+  "ipfs_datasets_py/processors/infrastructure/caching.py": {
+    "bytes": 10731,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/infrastructure/caching.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "49b8586a3c4921bf72d7d46e34d94af1a039deedaa3be95e94e1ac20984c5ae7"
+  },
+  "ipfs_datasets_py/processors/infrastructure/error_handling.py": {
+    "bytes": 12161,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/infrastructure/error_handling.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "3b223f9943f16f6312ae4712999818c21c3cadcfa88085936236e8ac56b340dd"
+  },
+  "ipfs_datasets_py/processors/infrastructure/monitoring.py": {
+    "bytes": 19076,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/infrastructure/monitoring.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "ec3502a6c677cc46d2d5942f3ef5c5345d32a7e23febe1203d6d71a1b16bd1a7"
+  },
+  "ipfs_datasets_py/processors/input_detection.py": {
+    "bytes": 15062,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/input_detection.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "08cd2e1ec4033eb82b40380e93f80e85e08593981296ed7b0a5eed9d3caac727"
+  },
+  "ipfs_datasets_py/processors/legal_data/__init__.py": {
+    "bytes": 42578,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/legal_data/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "c591d799ad6e2468fd3d211bc3028b135dc45f48f21c4f0f01f10fe9069f251f"
+  },
+  "ipfs_datasets_py/processors/legal_data/uscode_identity.py": {
+    "bytes": 45650,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/legal_data/uscode_identity.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "2c9efbbd7c477c88b6cdd4a97ce4bbfdc2b2a733ac1f856662711aab3f79a224"
+  },
+  "ipfs_datasets_py/processors/protocol.py": {
+    "bytes": 16179,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/protocol.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "18293ad803f137d5aea1498528eac5f43dcb67481739f1f46027053257b3bdde"
+  },
+  "ipfs_datasets_py/processors/retrieval.py": {
+    "bytes": 21686,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/retrieval.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "3111cd77eb800c5534b42e765c971577f7b8ea4bc720ec938222b273cc90ac82"
+  },
+  "ipfs_datasets_py/processors/universal_processor.py": {
+    "bytes": 25111,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/processors/universal_processor.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "5da3068aa1733eeea1b948da98323b9ed6834eb8efeceb66d26c80a03e3cb3f5"
+  },
+  "ipfs_datasets_py/router_deps.py": {
+    "bytes": 5845,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/router_deps.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "56f66dfff183d9d0ee7977a314c49adbaa181e6fe0087c8f1c581a7d2973bf4c"
+  },
+  "ipfs_datasets_py/utils/__init__.py": {
+    "bytes": 175,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/utils/__init__.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "78f4cd7f8e14b4fff482c0c91ada5c49f8b9edf707bffd9cd58840b5503e66c2"
+  },
+  "ipfs_datasets_py/utils/cid_utils.py": {
+    "bytes": 4428,
+    "path": "/tmp/decoder-training-worker-integration-candidate-bound-private-v01-g1EHzBHH/stage/ipfs_datasets_py/utils/cid_utils.py",
+    "role": "previous_detached_import_tree",
+    "sha256": "190fa0c6958b212d3c7b55dec9c92056c9b73259da6d8e576c4f5b70928cc1bf"
+  },
+  "scripts/ops/legal_ir/run_incremental_autoencoders.py": {
+    "bytes": 49878,
+    "path": "/tmp/decoder-training-qwen-projector-release-issuer-private-v01-kPP47yqu/run_incremental_autoencoders.py.DATA",
+    "role": "exact_private_overlay",
+    "sha256": "b0bc92bdf9d0670376d8c4c43f3b0fd36e3f98e402a257b28aae819042d65a2b"
+  }
+}

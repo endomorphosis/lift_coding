@@ -1,0 +1,256 @@
+"""Exercise ref stream capacity with a private fixture and no Git invocation."""
+import hashlib
+import json
+import os
+import stat
+import subprocess
+import sys
+import tempfile
+import time
+import unittest
+from pathlib import Path
+from unittest.mock import patch
+
+
+HERE = Path(__file__).resolve().parent
+GUIDE = HERE.parent / 'decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK'
+OLD_MAXIMUM = 262144
+NEW_MAXIMUM = 1024
+SHORT_MAXIMUM = 8192
+FULL9_FIELDS = (
+    'st_dev', 'st_ino', 'st_mode', 'st_uid', 'st_gid', 'st_nlink', 'st_size',
+    'st_mtime_ns', 'st_ctime_ns',
+)
+
+
+def digest(raw):
+    return hashlib.sha256(raw).hexdigest()
+
+
+def load_held_json(name, size, expected_sha256):
+    raw = (GUIDE / name).read_bytes()
+    if (len(raw), digest(raw)) != (size, expected_sha256):
+        raise ValueError(f'Unexpected retained test input {name}')
+    return json.loads(raw)
+
+
+def load_candidate():
+    path = HERE / 'verify_standalone_git.py'
+    namespace = dict(os=os, stat=stat, subprocess=subprocess, time=time, Path=Path, hashlib=hashlib)
+    exec(compile(path.read_bytes(), str(path), 'exec'), namespace)
+    return namespace
+
+
+def pin(path):
+    raw = path.read_bytes()
+    info = path.lstat()
+    return dict(path=str(path), bytes=len(raw), sha256=digest(raw),
+                full9={key: str(getattr(info, key)) for key in FULL9_FIELDS})
+
+
+class RefStreamPrices(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.api = load_candidate()
+        cls.quote = load_held_json(
+            'guide574-pair-conditional-quote.INERT.json', 1668,
+            'f2d1eddd72043557699ffb84bc628152956ce7ee640482bc9d0ea454d5b26fa3',
+        )
+        preview = load_held_json(
+            'guide574-all-fresh-preview.INERT.json', 560809,
+            'd72596ec7d7ddf69a34143699659302499f92c5cdb73414b5159a4197442100f',
+        )
+        plan = preview['reader_inputs']
+        roots = {role: Path(row['root']) for role, row in plan['current_roots'].items()}
+        retained = {row['path']: row for row in preview['relocated_retained_outer']}
+        guard = dict(D_index=plan['current_index'], A_index=retained[str(roots['A'] / '.git/index')],
+                     exact_exclude_pins=[retained[str(root / '.git/info/exclude')] for root in roots.values()])
+        cls.args = (guard, plan['four_guide_post_candidates_for_current_owner_recheck'],
+                    plan['fresh_Source_body_targets'], [], cls.quote['Reader_selected_control_reads'])
+        cls.options = dict(
+            epoch_output_maximums=cls.quote['Reader_epoch_LIST_sizes'], git_output_maximum=SHORT_MAXIMUM,
+            persist_python_epoch=False, retain_terminal_git_controls=True,
+            capture_partition=cls.api['STAGE_A_RELOCATED_ALL_FRESH_RESERVATION'],
+        )
+
+    def reader_price(self, **options):
+        return self.api['source32_paired_reader_reservation'](*self.args, **(self.options | options))
+
+    def test_default_reproduces_guide574_conditional_quote(self):
+        self.assertEqual(self.reader_price(), self.quote['Reader_core'])
+        self.assertEqual(self.reader_price(git_ref_output_maximum=OLD_MAXIMUM), self.quote['Reader_core'])
+        reserve = self.api['stage_a_git_selector_output_allowance']
+        self.assertEqual(reserve(git_output_maximum=SHORT_MAXIMUM), self.quote['selector_git_stream_allowance'])
+        self.assertEqual(reserve(git_output_maximum=SHORT_MAXIMUM, git_ref_output_maximum=OLD_MAXIMUM),
+                         self.quote['selector_git_stream_allowance'])
+
+    def test_smaller_cap_changes_only_four_reader_and_two_selector_ref_reservations(self):
+        small = self.reader_price(git_ref_output_maximum=NEW_MAXIMUM)
+        delta_per_scan = OLD_MAXIMUM - NEW_MAXIMUM
+        self.assertEqual(small, self.quote['Reader_core'] | {
+            key: self.quote['Reader_core'][key] - 4 * delta_per_scan
+            for key in ('logical_selected_bytes', 'git_output_allowance_bytes')
+        })
+        reserve = self.api['stage_a_git_selector_output_allowance']
+        self.assertEqual(reserve(git_output_maximum=SHORT_MAXIMUM, git_ref_output_maximum=NEW_MAXIMUM),
+                         self.quote['selector_git_stream_allowance'] - 2 * delta_per_scan)
+
+    def test_cap_requires_positive_plain_integer_within_existing_limit(self):
+        allowance = self.api['_stage_a_git_ref_capture_allowance']
+        self.assertEqual(allowance(1), 2)
+        self.assertEqual(allowance(OLD_MAXIMUM), OLD_MAXIMUM + 1)
+        for value in (True, False, 0, -1, 1.0, '1', None, OLD_MAXIMUM + 1):
+            with self.subTest(cap=value):
+                with self.assertRaises(ValueError):
+                    allowance(value)
+                with self.assertRaises(ValueError):
+                    self.reader_price(git_ref_output_maximum=value)
+                with self.assertRaises(ValueError):
+                    self.api['stage_a_git_selector_output_allowance'](git_ref_output_maximum=value)
+
+
+class RefStreamDispatch(unittest.TestCase):
+    def setUp(self):
+        self.api = load_candidate()
+        temp = tempfile.TemporaryDirectory(prefix='core-ref-cap-fixture-', dir=HERE)
+        self.addCleanup(temp.cleanup)
+        self.roots = tuple(Path(temp.name) / name for name in ('D', 'A'))
+        self.expected = {}
+        self.commands = []
+        self.branch = 'refs/heads/main'
+        self.targets = [{'path': str(self.roots[0] / f'target{index}.py'), 'expected_Git_mode': '100644',
+                         'expected_Git_blob_oid': f'{index + 1:040x}'} for index in range(32)]
+        for index, (role, root) in enumerate(zip(('D', 'A'), self.roots, strict=True)):
+            head = f'{index + 10:040x}'
+            tree = f'{index + 20:040x}'
+            for name, raw in {'HEAD': f'ref: {self.branch}\n'.encode(), 'config': b'fixture config\n',
+                              self.branch: (head + '\n').encode(), 'index': b'fixture index\x00',
+                              'info/exclude': b'fixture excludes\n'}.items():
+                path = root / '.git' / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(raw)
+            self.expected[role] = dict(root=str(root), HEAD=head, tree=tree,
+                                       clean_worktree_and_index=True, status_sha256=digest(b''))
+        self.git_targets = {Path(target['path']).name.encode(): target['expected_Git_blob_oid']
+                            for target in self.targets}
+        self.record = dict(D_index=pin(self.roots[0] / '.git/index'),
+                           A_index=pin(self.roots[1] / '.git/index'),
+                           exact_exclude_pins=[pin(root / '.git/info/exclude') for root in self.roots])
+
+    def fixture_git(self, command, *, git_output_maximum, **_):
+        root_at = command.index('-C')
+        root = Path(command[root_at + 1])
+        args = tuple(command[root_at + 2:])
+        self.commands.append((root, args, git_output_maximum))
+        project = self.expected[root.name]
+        git_dir = root / '.git'
+        responses = {
+            ('rev-parse', '--absolute-git-dir'): str(git_dir),
+            ('rev-parse', '--path-format=absolute', '--git-common-dir'): str(git_dir),
+            ('rev-parse', '--show-toplevel'): str(root),
+            ('rev-parse', '--path-format=absolute', '--git-path', 'index'): str(git_dir / 'index'),
+            ('rev-parse', '--path-format=absolute', '--git-path', 'info/exclude'): str(git_dir / 'info/exclude'),
+            ('symbolic-ref', 'HEAD'): self.branch,
+            ('rev-parse', 'HEAD'): project['HEAD'],
+            ('rev-parse', self.branch): project['HEAD'],
+            ('rev-parse', 'HEAD^{tree}'): project['tree'],
+            ('for-each-ref', '--format=%(refname) %(objectname)'): f'{self.branch} {project["HEAD"]}',
+        }
+        if args in responses:
+            return (responses[args] + '\n').encode()
+        if args in (('status', '--porcelain=v1', '-z', '--untracked-files=normal'),
+                    ('diff', '--cached', '--quiet', 'HEAD', '--'), ('diff', '--quiet', '--')):
+            return b''
+        if args[:6] == ('--literal-pathspecs', 'ls-tree', '-z', '--full-tree', 'HEAD', '--'):
+            return b''.join(b'100644 blob ' + self.git_targets[name.encode()].encode() + b'\t' +
+                            name.encode() + b'\x00' for name in args[6:])
+        raise AssertionError(f'Unexpected fixture command {args}')
+
+    def observe(self, **limits):
+        return self.api['observe_stage_a_paired_git_selectors'](
+            self.expected, expected_owner_scope_sha256='e' * 64, deadline=time.monotonic() + 10,
+            verify_continuous_owner_scope=lambda *args: True,
+            admit_git_output=lambda *args: None, record_git_output=lambda *args: None,
+            git_output_maximum=SHORT_MAXIMUM, **limits,
+        )
+
+    def assert_stream_caps(self, expected_short_count, expected_ref_count, cap):
+        self.assertEqual([maximum for _, args, maximum in self.commands if args[0] != 'for-each-ref'],
+                         [SHORT_MAXIMUM] * expected_short_count)
+        self.assertEqual([maximum for _, args, maximum in self.commands if args[0] == 'for-each-ref'],
+                         [cap] * expected_ref_count)
+
+    def test_selector_routes_only_ref_scans_to_new_cap_without_changing_observation(self):
+        with patch.dict(self.api, _run_accounted_stage_a_git=self.fixture_git):
+            default_observation = self.observe()
+            self.assert_stream_caps(22, 2, OLD_MAXIMUM)
+            self.commands.clear()
+            smaller_observation = self.observe(git_ref_output_maximum=NEW_MAXIMUM)
+            self.assert_stream_caps(22, 2, NEW_MAXIMUM)
+        self.assertEqual(smaller_observation, default_observation)
+
+    def test_paired_reader_routes_both_endpoints_to_new_cap_and_reuses_opening_bytes(self):
+        opened = []
+
+        def control_read(reference, kind, *, retain_fd):
+            self.assertEqual(kind, 'standalone_git_guard')
+            with Path(reference['path']).open('rb') as stream:
+                raw = stream.read()
+                self.assertEqual((len(raw), digest(raw)), (reference['bytes'], reference['sha256']))
+                retain_fd(stream.fileno())
+            opened.append(reference['path'])
+            return raw
+
+        def stage_zero(raw, paths):
+            self.assertEqual(raw, b'fixture index\x00')
+            return {name.encode(): [(self.git_targets[name.encode()], 0o100644, 0, 0)] for name in paths}
+
+        with patch.dict(self.api, _run_accounted_stage_a_git=self.fixture_git,
+                        R=self.roots[0], A=self.roots[1]):
+            observed, _ = self.observe(git_ref_output_maximum=NEW_MAXIMUM)
+            self.commands.clear()
+            opening, middle, closing, provenance = self.api['verify_stage_a_git_with_retained_controls'](
+                None, self.record, time.monotonic() + 10, between_endpoints=lambda _: 'fixture',
+                control_read=control_read, stage_a_targets=self.targets, read_stage_zero=stage_zero,
+                admit_git_output=lambda *args: None, record_git_output=lambda *args: None,
+                expected_owner_scope_sha256='f' * 64, verify_continuous_owner_scope=lambda *args: True,
+                project_expectations=observed['git_project_expectations'], git_output_maximum=SHORT_MAXIMUM,
+                git_ref_output_maximum=NEW_MAXIMUM,
+            )
+        self.assert_stream_caps(46, 4, NEW_MAXIMUM)
+        self.assertEqual(opened, [str(root / '.git' / path) for root in self.roots
+                                  for path in ('index', 'info/exclude')])
+        self.assertEqual(opening, closing)
+        self.assertEqual(middle, 'fixture')
+        self.assertTrue(provenance['retained_descriptors_closed'])
+        self.assertEqual(provenance['closing_control_body_read_bytes'], 0)
+
+
+class RefStreamSubprocess(unittest.TestCase):
+    def run_binary_stream(self, script, cap, admissions, reports):
+        command = [sys.executable, '-I', '-B', '-S', '-c', script]
+        return load_candidate()['_run_accounted_stage_a_git'](
+            command, env={}, timeout=10, admit_git_output=admissions.append,
+            record_git_output=lambda _, facts: reports.append(facts), git_output_maximum=cap,
+        )
+
+    def test_exact_limit_accepts_nul_stdout_and_shared_stderr_budget(self):
+        admissions, reports = [], []
+        self.assertEqual(self.run_binary_stream(
+            "import os; os.write(1, b'\\x00\\xffab'); os.write(2, b'fail'[:4])", 8, admissions, reports,
+        ), b'\x00\xffab')
+        self.assertEqual(admissions, [9])
+        self.assertEqual(reports, [dict(stdout_bytes=4, stderr_bytes=4, returncode=0, output_complete=True,
+                                        disposition='returned', process_started=True)])
+
+    def test_overflow_spends_only_the_growth_probe_and_reports_failure(self):
+        admissions, reports = [], []
+        with self.assertRaisesRegex(ValueError, 'output exceeds bound'):
+            self.run_binary_stream("import os; os.write(1, b'\\x00' * 21)", 8, admissions, reports)
+        self.assertEqual(admissions, [9])
+        self.assertEqual(reports, [dict(stdout_bytes=9, stderr_bytes=0, returncode=None, output_complete=False,
+                                        disposition='output_limit', process_started=True)])
+
+
+if __name__ == '__main__':
+    unittest.main(verbosity=2)

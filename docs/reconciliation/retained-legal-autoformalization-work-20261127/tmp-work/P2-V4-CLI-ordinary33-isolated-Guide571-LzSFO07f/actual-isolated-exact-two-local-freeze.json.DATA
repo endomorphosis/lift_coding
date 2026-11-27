@@ -1,0 +1,144 @@
+{
+  "actual_Source42": {
+    "bytes": 10375,
+    "path": "/tmp/Reader-P1-current-published-Source-and-assets-read-preparation-private-v01/actual-doc-owner-approved-Source42-control-code.py.DATA",
+    "sha256": "42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9"
+  },
+  "actual_isolated_write_lease": {
+    "canonical_root": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/datasets",
+    "cooperative": true,
+    "lock_path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/datasets/workspace/control-plane/source-leases/source.lock",
+    "mode": "write",
+    "schema_version": "autoencoder-source-lease/v1",
+    "waited_seconds": 9.763240814208984e-05
+  },
+  "candidate": {
+    "bytes": 10578,
+    "path": "/tmp/P2-physical-V4-retained-handoff-current-trust-CLI-private-cy1j1i4x/SEALED-current-V4-CLI-current-review-retained-handoff-exact-two-private.json",
+    "sha256": "d4ec744a8454e4781a2804e6ec0cdf197a844d95fccef8e1f82ec3a14568596a"
+  },
+  "canonical_Source_write_claimed": false,
+  "committed": {
+    "scripts/ops/legal_ir/validate_uscode_corpus_release.py": {
+      "bytes": 28555,
+      "full9": {
+        "st_ctime_ns": "1795733773923981988",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72504386",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795733773923981988",
+        "st_nlink": "1",
+        "st_size": "28555",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "3cfc8fe117d8c3490169f09894e141c6e2fc16fd",
+      "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/datasets/scripts/ops/legal_ir/validate_uscode_corpus_release.py",
+      "sha256": "62ef7981b8cc8bfe3c04867aba88d2db3f735aaa57340fcddeb18ebca9502220",
+      "stage0_and_committed_blob": "532ed0ad76bccb52a3e52fe62066ef1c0e6e6aea"
+    },
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py": {
+      "bytes": 294620,
+      "full9": {
+        "st_ctime_ns": "1795733773923981988",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72504434",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795733773923981988",
+        "st_nlink": "1",
+        "st_size": "294620",
+        "st_uid": "1000"
+      },
+      "git_mode": "100644",
+      "parent_blob": "ee46a5ac88429283b8d778993783edc456f1b2c4",
+      "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+      "sha256": "f61a83b403b7d253b34b473d74d6411e7151f4ad26cf5075584c51c31b4780cb",
+      "stage0_and_committed_blob": "770c9a612e7f35fc6fd16ed79dc5a011ed93b674"
+    }
+  },
+  "frozen": {
+    "HEAD": "f347383434c9518972823a68c3201010aae47663",
+    "branch": "refs/heads/isolated/phase2-v4-cli-guide571",
+    "branch_file": {
+      "bytes": 41,
+      "full9": {
+        "st_ctime_ns": "1795733774136010383",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72505166",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795733774136010383",
+        "st_nlink": "1",
+        "st_size": "41",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/datasets/.git/refs/heads/isolated/phase2-v4-cli-guide571",
+      "sha256": "82babdda45414c6a52b76c9d346d64f95f75fe3333fce0ae671bb05d6666d974"
+    },
+    "index": {
+      "bytes": 7070477,
+      "full9": {
+        "st_ctime_ns": "1795733774134010364",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "47104795",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795733774133010355",
+        "st_nlink": "1",
+        "st_size": "7070477",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/datasets/.git/index",
+      "sha256": "a830c9502ce18e89333db894020fc3c7d6569ea8f9437e6621f06064c7db6e07"
+    },
+    "tree": "cf27d012a6f7e700f94d92e959d583b0b554fe3a"
+  },
+  "isolated_Source_context_closed": true,
+  "local_clean": true,
+  "only_two_D_tree_entries_changed": true,
+  "ordinary_qualified": false,
+  "parent": "6d1b200341ae62d6dc0aa6db27f3955c50483fa7",
+  "prior_targets": {
+    "scripts/ops/legal_ir/validate_uscode_corpus_release.py": {
+      "bytes": 27195,
+      "full9": {
+        "st_ctime_ns": "1795733637012720440",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72504386",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795733637012720440",
+        "st_nlink": "1",
+        "st_size": "27195",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/datasets/scripts/ops/legal_ir/validate_uscode_corpus_release.py",
+      "sha256": "395b83986a3cb6b119ab49526d9be51e4713a78f7a9fb75035034db8fdad84e3"
+    },
+    "tests/unit/logic/autoformal/test_corpus_release_cli.py": {
+      "bytes": 289075,
+      "full9": {
+        "st_ctime_ns": "1795733637015720469",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72504434",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795733637015720469",
+        "st_nlink": "1",
+        "st_size": "289075",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/datasets/tests/unit/logic/autoformal/test_corpus_release_cli.py",
+      "sha256": "72e1d37fcd47fa63271561b8fceb6dbda94f42599ab722a818a31dcb41bc0501"
+    }
+  },
+  "pushed": false,
+  "root": "/tmp/P2-V4-CLI-ordinary33-isolated-Guide571-LzSFO07f/datasets",
+  "schema": "isolated-private-exact-two-V4-CLI-Git-freeze/v1",
+  "shared_source_or_Git_mutation": false,
+  "shared_status_after_sha256": "6e07703a6a150fc2147a54da5bb083934d44353019b5c97e8493ac868b79464e",
+  "shared_status_before_sha256": "6e07703a6a150fc2147a54da5bb083934d44353019b5c97e8493ac868b79464e",
+  "terminal_returncode": 0
+}

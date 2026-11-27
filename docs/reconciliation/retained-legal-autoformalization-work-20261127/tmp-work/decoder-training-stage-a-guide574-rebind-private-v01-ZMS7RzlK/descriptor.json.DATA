@@ -1,0 +1,138 @@
+{
+  "closed_logs": {
+    "reader": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/reader.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1078,
+        "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/reader.stderr",
+        "sha256": "15c66391e70eb725b4bb95351b0ccba3d26929dafad72856c4981ddfd463380f"
+      },
+      "stdout": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/reader.stdout",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "replay": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/replay.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/replay.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 1359,
+        "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/replay.stdout",
+        "sha256": "faf2dcf3b86b0a3fc1d2b3779da61f467b43245628c6e34be5006b35d23fcfb9"
+      }
+    },
+    "stage-zero": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/stage-zero.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 0,
+        "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/stage-zero.stderr",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stdout": {
+        "bytes": 281,
+        "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/stage-zero.stdout",
+        "sha256": "87b7cdcbe03a1ca6071a3beb4b519e2e9dcefb64cf99a3d2c9981c31ffe7e8e3"
+      }
+    }
+  },
+  "dispatch_authority": false,
+  "drivers": {
+    "bind_stage_zero.py": {
+      "bytes": 2690,
+      "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/bind_stage_zero.py",
+      "sha256": "64e890d3a1cad40c3515eafc7a149f55ab24b454b74f1b9660441d8674153242"
+    },
+    "rebind.py": {
+      "bytes": 4650,
+      "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/rebind.py",
+      "sha256": "fb2b6e2a5ebebdef020cbd4d0b4200b9d3360fd995652e1973fab34502e23288"
+    },
+    "reservation.py": {
+      "bytes": 2984,
+      "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/reservation.py",
+      "sha256": "0f2d37a79a441621d6c43f8d6d072e1fcd8056f519ab1b099db7f71aef52ab10"
+    },
+    "seal.py": {
+      "bytes": 10543,
+      "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/seal.py",
+      "sha256": "69e4300b0c45e3b98bf49c0c7801a653d913bc47694d575859a47b142d026c51"
+    },
+    "test_rebound_reader.py": {
+      "bytes": 1247,
+      "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/test_rebound_reader.py",
+      "sha256": "62cc0c4fa24070ca670fa83edad5f0d81d14b9db70b6947602e8b8275a60bdb8"
+    }
+  },
+  "guide573_retained_preimages_match": {
+    "index": {
+      "bytes": 7070597,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-writer-matched-index.DATA",
+      "sha256": "c3be915a700050787e42001811b05aab2edebf0737fd3c207f23674b862cbee0"
+    },
+    "preview": {
+      "bytes": 556332,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-all-fresh-preview.INERT.json",
+      "sha256": "72b538ab80ac6610b75f64d74c1d474ae8beb651b54a8b740495941b0c6fbb4a"
+    },
+    "proof": {
+      "bytes": 11743,
+      "path": "/tmp/decoder-training-stage-a-guide573-rebind-private-v01-lw62nGfP/guide573-replay.INERT.json",
+      "sha256": "65858f594f49c27bf1526d661adc47f98749da4db9e18680c58497b474402b46"
+    }
+  },
+  "independent_index_live_read": null,
+  "index_replay": {
+    "bytes": 11748,
+    "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/guide574-replay.INERT.json",
+    "sha256": "5ad76cb41eed69a40c2a843603a30bac98f7822ded7c9b7bb124e515e9bcec1b"
+  },
+  "live_reader_allocation": null,
+  "modeled_Source_Git_owner_in_reader_checks": true,
+  "original_paired_selector_allocation": null,
+  "quote": {
+    "bytes": 1668,
+    "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/guide574-pair-conditional-quote.INERT.json",
+    "sha256": "f2d1eddd72043557699ffb84bc628152956ce7ee640482bc9d0ea454d5b26fa3"
+  },
+  "reader_local_passing_cases": 7,
+  "reader_preview": {
+    "bytes": 560809,
+    "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/guide574-all-fresh-preview.INERT.json",
+    "sha256": "d72596ec7d7ddf69a34143699659302499f92c5cdb73414b5159a4197442100f"
+  },
+  "rebound_stage_zero_parser": {
+    "bytes": 2611,
+    "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/guide574_stage_zero.py",
+    "sha256": "0f5d359dda67168617f5fb7495f2c1842fb8c57a5bcec87ff750bf17c1fe68be"
+  },
+  "schema": "private-guide574-stage-a-exact-replay-and-price/v1",
+  "stage_zero_controls": {
+    "duplicate_paths_rejected": true,
+    "exact_positions": 32,
+    "parser_path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/guide574_stage_zero.py",
+    "parser_sha256": "0f5d359dda67168617f5fb7495f2c1842fb8c57a5bcec87ff750bf17c1fe68be",
+    "wrong_index_rejected": true
+  },
+  "writer_matched_index": {
+    "bytes": 7070597,
+    "path": "/tmp/decoder-training-stage-a-guide574-rebind-private-v01-ZMS7RzlK/guide574-writer-matched-index.DATA",
+    "sha256": "26afaa8c5a756128d11917a2f700bf866fcedd1ce4c933440dfa74413c4b5477"
+  }
+}

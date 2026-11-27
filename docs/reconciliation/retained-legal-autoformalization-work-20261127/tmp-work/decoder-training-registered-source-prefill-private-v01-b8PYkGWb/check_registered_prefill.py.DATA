@@ -1,0 +1,275 @@
+"""Exercise the paired source-close adapter on the retained technology fixture."""
+import ast
+from copy import deepcopy
+from dataclasses import dataclass, replace
+from fractions import Fraction
+from hashlib import sha256
+import json
+import math
+from pathlib import Path
+from types import SimpleNamespace
+import unittest
+
+HERE = Path(__file__).resolve().parent
+ROOT = HERE.parent
+PRIOR = ROOT / "decoder-training-registered-dual-target-witness-private-v01-vbvuHts1"
+WORKER = ROOT / "decoder-training-stage-a-direct-open-leaf-private-v01-e9gEx19d/autoencoder_training_worker.py"
+
+
+def exact(path, digest):
+    assert path.resolve() == path
+    raw = path.read_bytes()
+    assert sha256(raw).hexdigest() == digest, path
+    return raw
+
+
+pre = exact(PRIOR / "check_dual_witness.py", "2d88e153bf6eb16e509f73be68a7e21a6671c1dde12f35534c34d3ae9f5386ed").decode()
+baseline = "73adfd69c6d960ac5e95e274702fcb2f54d8e840ed8e1da64cbef6d63c8d6013"
+candidate = "5ffc69dc064600279bf47c468c4ab06e42ac0bf9d715eac8779383f9b2325aeb"
+assert pre.count(baseline) == 1
+base = {"__name__": "_retained_dual_witness", "__file__": str(HERE / "check_dual_witness.py")}
+exec(compile(pre.replace(baseline, candidate), str(PRIOR / "check_dual_witness.py"), "exec"), base)
+study, pin, strict = (base[name] for name in ("study", "pin", "strict"))
+duo = base["DualRegisteredChecks"]
+
+body = exact(HERE / "relational_assessment.py", candidate)
+addition = exact(HERE / "addition.py.DATA", "33aa86921a387e62c10c7a27943de96b4d82aa386cfea4554a23a9dc5fe9a6e3")
+assert body.count(addition) == 1
+scope_names = {"audit_development_exact_inputs", "_development_prefill_scope", "development_prefill_scope"}
+retained_source_names = {"DEVELOPMENT_PREFILL_SCHEMA", "DEVELOPMENT_EXACT_INPUT_SCHEMA"}
+tree = ast.parse(body)
+nodes = [node for node in tree.body if getattr(node, "name", None) in scope_names
+         or isinstance(node, ast.Assign) and any(getattr(target, "id", None) in retained_source_names for target in node.targets)]
+assert len(nodes) == 5
+program = compile(ast.Module(nodes + ast.parse(addition).body, type_ignores=[]),
+                  str(HERE / "relational_assessment.py"), "exec")
+
+worker_names = {"REVIEWED_DIGEST_OMITTED_TERMINAL_POLICY_SCHEMA", "REVIEWED_DIGEST_OMITTED_GENERATION_POLICY_SCHEMA",
+    "REVIEWED_DIGEST_OMITTED_TARGET_CODEC", "REVIEWED_DIGEST_OMITTED_CHATML_PROFILE", "REVIEWED_DECODER_CANONICAL_TERMINAL_PROFILE",
+    "REVIEWED_QWEN2_CONTEXT_BUDGET_PROFILE", "REVIEWED_QWEN2_EXPANDED_CONTEXT_BUDGET_PROFILE", "_REVIEWED_QWEN2_CHATML_PROFILES",
+    "REVIEWED_QWEN2_FIELD_LAYOUTS_PROFILE"}
+worker_body = exact(WORKER, "5dc058f9943e28be30bb148f0d870413f5d85f802d4b1e1bc12482013f98d5de")
+worker_decls = [node for node in ast.parse(worker_body).body if getattr(node, "name", None) == "_reviewed_decoder_generation_policy"
+                or isinstance(node, ast.Assign) and any(getattr(target, "id", None) in worker_names for target in node.targets)]
+assert len(worker_decls) == 10
+namespace = {"TrainingJobValidationError": ValueError, "math": math, "_json_bytes": strict._reviewed_wire,
+             "_parse_json": json.loads}
+exec(compile(ast.Module(worker_decls, type_ignores=[]), str(WORKER), "exec"), namespace)
+worker = SimpleNamespace(**namespace)
+
+inputs = SimpleNamespace(REVIEWED_DECODER_SOURCE_PROFILE="reviewed-source-selection-context/v2",
+                         _reviewed_wire=strict._reviewed_wire)
+issuer_pins = (("inputs", pin("selected original inputs")), ("worker", sha256(worker_body).hexdigest()))
+
+
+class SourcePrefillChecks(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        duo.setUpClass()
+
+    def fixture(self):
+        helper = duo(methodName="test_preserved_qwen_report_is_byte_identical")
+        self.addCleanup(helper.doCleanups)
+        harness, f, t5 = helper.fixture()
+        env = {**vars(harness.issuer(f)), "dataclass": dataclass}
+        exec(program, env)
+        return helper, harness, f, t5, SimpleNamespace(**env)
+
+    def prepare_components(self, f, assessor, witness, route, position):
+        policy = f.args["policy"]
+        groups, _ = assessor._policy_groups(policy)
+        config = f.args["configuration"] if route == assessor.QWEN else f.t5_configuration
+        witnesses = {row["row_id"]: row for row in witness["rows"]}
+        parts = []
+        for group, membership in groups.items():
+            source_rows = f.components[group]["rows"]
+            selection = {"schema": "caller-known-interpretation-selection/v1", "interpretation_id": "fixture-fixed-id",
+                         "selection_mode": "identifier_only"}
+            contexts = {"profile": inputs.REVIEWED_DECODER_SOURCE_PROFILE, "selection_context": selection,
+                "rows": [{"id": row["id"], "unit_id": row["unit_id"],
+                          "source_binding": row["canonical_ir"]["source_binding"],
+                          "governing_context": row["canonical_ir"]["governing_context"]} for row in source_rows]}
+            arguments = [{"id": row["id"], "source_text": row["source_text"], "context": {"permitted": [], "retrieved": []}}
+                         for row in source_rows]
+            condition = None if route == assessor.T5 else {
+                "schema": worker.REVIEWED_DIGEST_OMITTED_TERMINAL_POLICY_SCHEMA, "generation_profile": "builtin-qwen2-dynamic-kv/v1",
+                "conditioning_profile": worker.REVIEWED_DIGEST_OMITTED_CHATML_PROFILE,
+                "context_budget_profile": worker.REVIEWED_QWEN2_CONTEXT_BUDGET_PROFILE,
+                "target_codec": worker.REVIEWED_DIGEST_OMITTED_TARGET_CODEC, "max_generation_seconds": 2.5,
+                "terminal_profile": worker.REVIEWED_DECODER_CANONICAL_TERMINAL_PROFILE,
+            }
+            scope = assessor.development_prefill_scope(inputs, worker, route=route, configuration=config,
+                generation_policy=condition, source_arguments=arguments,
+                source_contexts_sha256=sha256(inputs._reviewed_wire(contexts)).hexdigest(),
+                max_source_tokens=position if route == assessor.T5 else 512, max_output_tokens=witness["max_output_tokens"])
+            report = {"schema": assessor.DEVELOPMENT_PREFILL_SCHEMA, "scope_sha256": pin(scope),
+                "geometry_sha256": pin(scope["geometry"]), "source_receipt_sha256": pin((route, group, "modeled receipt")),
+                "rows": [{"id": row.row_id, "unit_id": row.unit_id, "source_wire_sha256": row.source_wire_sha256,
+                          "prefill_sha256": pin((route, row.row_id, "modeled prefill")), "prefill_positions": position}
+                         for row in membership]}
+            parts.append(assessor.RegisteredDevelopmentPrefillComponent(scope, report, contexts, pin(report),
+                         pin((route, group, "modeled individual close")), "fictional_fixture"))
+        keys = ("row_id", "unit_id", "source_wire_sha256", "source_binding_sha256", "reference_sha256", "target_wire_sha256")
+        lane = study.DecoderTransportEvidence(witness["variant"], witness["configuration_sha256"],
+            pin((route, "modeled checkpoint")), witness["tokenizer_pipeline_sha256"], witness["target_codec"],
+            witness["max_sequence_tokens"], witness["max_output_tokens"], pin((route, "modeled aggregate source close")),
+            pin((route, "modeled target close")), tuple(study.DecoderTransportRow(
+                *(witnesses[case.row_id][key] for key in keys), position, witnesses[case.row_id]["encoded_tokens_including_bos_eos"])
+                for case in policy.cases))
+        return lane, tuple(parts)
+
+    def bind(self, f, assessor, route, lane, components, *, expected=None, verify=None, issuer=issuer_pins):
+        configuration = f.t5_configuration if route == assessor.T5 else f.args["configuration"]
+        scope_args = {**f.args, "route": route, "variant": lane.variant, "configuration": configuration,
+                      "max_output_tokens": lane.max_output_tokens, "allow_fictional_tokenizer": False}
+        register = pin(assessor.registered_development_target_witness_scope(**scope_args))
+        chosen = assessor.registered_development_source_prefill_commitment(registered_scope_sha256=register,
+            prefill_close_sha256=lane.source_prefill_close_sha256, issuer_source_sha256s=issuer, components=components)
+        f.owner_calls = []
+        def owner(scope, selection, close, roles, reports, split_audit):
+            f.owner_calls.append((scope, selection, close, roles, reports, split_audit))
+            return ((scope, selection, close, roles) == (register, chosen, lane.source_prefill_close_sha256, issuer_pins)
+                and tuple(row[-1] for row in reports) == tuple(comp.original_close_sha256 for comp in components))
+        for key in ("variant", "max_output_tokens", "allow_fictional_tokenizer", "study_owner"):
+            scope_args.pop(key)
+        return assessor.verify_registered_development_source_prefill(study, inputs, worker, **scope_args,
+            lane=lane, components=components, issuer_source_sha256s=issuer, expected_selection_sha256=chosen if expected is None else expected,
+            verify_close=owner if verify is None else verify)
+
+    def two_lanes(self):
+        helper, harness, f, t5, assessor = self.fixture()
+        f.t5_configuration = t5
+        by_family = {}
+        for route, label, config, pos in ((assessor.QWEN, "qwen", f.args["configuration"], 741),
+                                          (assessor.T5, "t5", t5, 887)):
+            target = helper.issue(harness, f, route, config, label, 6400)
+            lane, components = self.prepare_components(f, assessor, target, route, pos)
+            by_family[route] = SimpleNamespace(lane=lane, components=components, report=target, configuration=config)
+        f.lanes = by_family
+        return f, assessor
+
+    def test_real_pair_uses_both_detached_roles_and_separate_geometry(self):
+        f, owner = self.two_lanes()
+        by_route = f.lanes
+        config = tuple(record.configuration for record in by_route.values())
+        lanes = tuple(record.lane for record in by_route.values())
+        pair = study.DecoderCapacityPair(pin(f.args["matrix"]), "cross_family_parameters", tuple(row.variant for row in lanes),
+                                        total_ratio_limit=Fraction(11, 10), trainable_ratio_limit=Fraction(11, 10))
+        inv = tuple(study.DecoderCapacityEvidence(row.variant, row.configuration_sha256, row.initial_checkpoint_sha256,
+                    pin((row.variant, "modeled inventory close")), pin("init"), pin("execution")) for row in lanes)
+        expected_pair = study.decoder_capacity_pair_commitment(pair, inv)
+        registration = f.args["registration"]
+        selected = study.decoder_transport_pair_commitment(expected_pair, registration["registration_sha256"], lanes)
+        roles = []
+        def verify_role(role, scope, lane, close):
+            self.assertEqual(scope, selected)
+            roles.append((lane.variant, role))
+            route = owner.QWEN if lane.variant == "qwen" else owner.T5
+            chosen = by_route[route]
+            if role == "source_prefill":
+                self.assertEqual(close, lane.source_prefill_close_sha256)
+                return self.bind(f, owner, route, lane, chosen.components)
+            return owner.verify_registered_development_target_witness(study, route=route,
+                registration=registration, report=chosen.report, expected_report_sha256=pin(chosen.report), lane=lane,
+                verify_close=lambda s, r, c: (s, r, c) == (chosen.report["scope_sha256"], pin(chosen.report), close))
+        selection = study.DecoderTransportSelection(owner, f.args["policy"], registration, lanes, selected,
+            lambda auth, scope: auth == registration["registration_sha256"] and all(registration[k] == v for k, v in scope.items()),
+            verify_role)
+        joined = study.compare_reviewed_decoder_capacity(matrix=f.args["matrix"], pair=pair, configurations=config,
+            evidence=inv, expected_pair_sha256=expected_pair, verify_capacity_owner=lambda p, row: p == expected_pair and row in inv,
+            verify_pair_owner=lambda p, m: (p, m) == (expected_pair, pin(f.args["matrix"])), transport=selection)["transport"]
+        self.assertEqual(roles, [("qwen", "source_prefill"), ("qwen", "target_review"),
+                                 ("t5", "source_prefill"), ("t5", "target_review")])
+        self.assertTrue(joined["all_selected_variants_fit_witnessed"])
+        self.assertFalse(joined["same_target_codec"])
+        self.assertEqual(joined["evidence_kind"], "fictional_fixture")
+        self.assertFalse(joined["dispatch_authority"])
+        self.assertEqual([row["max_reserved_positions"] for row in joined["variants"]], [7140, 6400])
+        self.assertEqual(f.fixture.fixture.visits, [])
+
+    def test_resealed_other_lane_or_reported_position_refuses(self):
+        f, owner = self.two_lanes()
+        left, right = f.lanes[owner.QWEN], f.lanes[owner.T5]
+        with self.assertRaisesRegex(ValueError, "geometry differs"):
+            self.bind(f, owner, owner.T5, right.lane, left.components)
+        rows = right.lane.rows
+        changed = replace(right.lane, rows=(replace(rows[0], prefill_positions=1), *rows[1:]))
+        with self.assertRaisesRegex(ValueError, "positions or source binding"):
+            self.bind(f, owner, owner.T5, changed, right.components)
+        self.assertEqual(f.owner_calls, [])
+
+    def test_resealed_context_binding_and_target_fields_refuse(self):
+        f, owner = self.two_lanes()
+        lane = f.lanes[owner.QWEN]
+        head, *rest = lane.components
+        for key, replacement, error in (("source_binding", {"source_version_cid": "other", "occurrence_cid": "c",
+                                              "document_revision": "r"}, "positions or source binding"),
+                                        ("canonical_ir", {"fixture": "should never reach source"}, "prefill row and binding")):
+            with self.subTest(key=key):
+                contexts, scope, report = deepcopy(head.source_contexts), deepcopy(head.scope), deepcopy(head.report)
+                contexts["rows"][0][key] = replacement
+                scope["source_contexts_sha256"] = sha256(inputs._reviewed_wire(contexts)).hexdigest()
+                report["scope_sha256"] = pin(scope)
+                bad = replace(head, scope=scope, source_contexts=contexts, report=report, expected_report_sha256=pin(report))
+                with self.assertRaisesRegex(ValueError, error):
+                    self.bind(f, owner, owner.QWEN, lane.lane, (bad, *rest))
+                self.assertEqual(f.owner_calls, [])
+
+    def test_incomplete_duplicate_or_relabelled_roster_refuses(self):
+        f, owner = self.two_lanes()
+        lane = f.lanes[owner.T5]
+        head, *_ = lane.components
+        with self.assertRaisesRegex(ValueError, "complete|full DEVELOPMENT"):
+            self.bind(f, owner, owner.T5, lane.lane, (head,))
+        with self.assertRaisesRegex(ValueError, "unique"):
+            self.bind(f, owner, owner.T5, lane.lane, (head, head))
+        with self.assertRaisesRegex(ValueError, "evidence kind"):
+            self.bind(f, owner, owner.T5, lane.lane, (replace(head, evidence_kind="native_reviewed"), *lane.components[1:]))
+        self.assertEqual(f.owner_calls, [])
+
+    def test_close_owner_refusal_issuer_drift_and_reread(self):
+        f, owner = self.two_lanes()
+        lane = f.lanes[owner.T5]
+        with self.assertRaisesRegex(ValueError, "owner refused"):
+            self.bind(f, owner, owner.T5, lane.lane, lane.components, issuer=(issuer_pins[0], ("worker", pin("old worker"))))
+        def mutate(*_):
+            lane.components[0].report["rows"][0]["prefill_positions"] += 1
+            return True
+        with self.assertRaisesRegex(ValueError, "original scope and report"):
+            self.bind(f, owner, owner.T5, lane.lane, lane.components, verify=mutate)
+
+    def test_t5_observed_source_cap_and_retained_qwen_report_shape(self):
+        f, owner = self.two_lanes()
+        lane = f.lanes[owner.T5]
+        changed_components = []
+        for comp in lane.components:
+            updated = deepcopy(comp.report)
+            for row in updated["rows"]:
+                row["prefill_positions"] += 1
+            changed_components.append(replace(comp, report=updated, expected_report_sha256=pin(updated)))
+        changed_lane = replace(lane.lane, rows=tuple(replace(row, prefill_positions=row.prefill_positions + 1) for row in lane.lane.rows))
+        with self.assertRaisesRegex(ValueError, "original route capacity"):
+            self.bind(f, owner, owner.T5, changed_lane, tuple(changed_components))
+        original = ROOT / "decoder-training-shared-development-issuer-private-v02-z24PJEgV/fixture-readback.json"
+        raw = exact(original, "d6de47b6b5029d6c6552d056a66af2aa8b59b7f8a5c2766692f2415234cd90cf")
+        expected = set(lane.components[0].report)
+        def collect(value):
+            if isinstance(value, dict):
+                if value.get("schema") == owner.DEVELOPMENT_PREFILL_SCHEMA:
+                    yield value
+                for item in value.values():
+                    yield from collect(item)
+            if isinstance(value, list):
+                for item in value:
+                    yield from collect(item)
+        reports = list(collect(json.loads(raw)))
+        self.assertGreaterEqual(len(reports), 2)
+        self.assertTrue(all(set(report) == expected for report in reports))
+
+
+if __name__ == "__main__":
+    loader = unittest.defaultTestLoader
+    suite = unittest.TestSuite(loader.loadTestsFromTestCase(cls) for cls in (
+        SourcePrefillChecks, duo, base["prior"], base["retained"]["Legacy"]))
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    raise SystemExit(not result.wasSuccessful())

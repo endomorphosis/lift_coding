@@ -1,0 +1,32 @@
+--- prior-bootstrap
++++ retry-bootstrap
+@@ -130,10 +130,10 @@
+         or len(maintained_owner_names) != len(set(maintained_owner_names))
+         or type(expected_test_modules) is not dict or not expected_test_modules):
+     raise RuntimeError("finite explicit owner and selected-test bindings required")
+-test_names = list(expected_test_modules.values())
+-if (len(test_names) != len(set(test_names))
+-        or set(maintained_owner_names).intersection(test_names)
+-        or set(modules) != set(maintained_owner_names) | set(test_names)):
++test_name_set = set(expected_test_modules.values())
++if (len(expected_test_modules) != len(test_name_set)
++        or set(maintained_owner_names).intersection(test_name_set)
++        or set(modules) != set(maintained_owner_names) | test_name_set):
+     raise RuntimeError("disjoint exact maintained-owner/test role partition required")
+ module_order = list(modules)
+ bound_paths = {}
+@@ -164,9 +164,13 @@
+         or sum(expected_counts.values()) != EXPECTED_CASES):
+     raise RuntimeError('exact ordered13-selector case vector/26 required')
+ owning_files = request["owning_files"]
+-if (type(owning_files) is not list or owning_files != list(expected_test_modules)
++if (type(owning_files) is not list
++        or any(type(path) is not str for path in owning_files)
++        or len(owning_files) != len(expected_test_modules)
++        or set(owning_files) != set(expected_test_modules)
+         or {node.split("::", 1)[0] for node in function_selectors} != set(owning_files)):
+     raise RuntimeError("exact future-bound D owning files required")
++test_names = [expected_test_modules[path] for path in owning_files]
+ policy = request["selected_test_rewrite_policy"]
+ if (type(policy) is not dict
+         or policy != {

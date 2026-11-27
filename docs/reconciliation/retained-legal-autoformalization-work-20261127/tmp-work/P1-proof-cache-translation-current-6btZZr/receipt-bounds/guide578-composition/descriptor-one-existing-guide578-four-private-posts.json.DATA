@@ -1,0 +1,354 @@
+{
+  "Root_Source_clock_selection_ledger_IO_output_effect_authority": null,
+  "actual_live_code_publication": {
+    "bytes": 15579,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-Phase7-receipt-bounds-ordinary22-three-FF-publication.json",
+    "sha256": "77d888220bff3b11a0781a314c78feb6151f9d89981150c5b2ca95fe10bb5004"
+  },
+  "actual_live_ordinary22": {
+    "bytes": 5236,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-Phase7-current-receipt-bounds-ordinary22-closed.json",
+    "sha256": "c02ca0f02e331cef5a94b0cfa115fa01ed05405619026b37185d4b6096f7fa0c"
+  },
+  "actual_live_ordinary22_raw_JUnit": {
+    "bytes": 3640,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-output/Phase7-receipt-bounds-ordinary22-run-result0-output1.bin",
+    "sha256": "730c6d493fa393a72cd266c8e4a45b4c3c0ca3e006ee14abe9779b2128656e37"
+  },
+  "actual_live_reconciled_Source42_READ3": {
+    "bytes": 7440,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-isolated-Phase7-receipt-bounds-READ3-closed.json",
+    "sha256": "a42ea50783db60b9036538108d96d855220efaac776ee54e63a34a38c998d3f5"
+  },
+  "actual_live_reconciled_Source42_epoch": {
+    "bytes": 6569,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-live-reconciled-Source42-content-epoch-closed.json",
+    "sha256": "071a277ff541b7fa9303677ec5b87378735e6fff5d9d921a973299de97941bb8"
+  },
+  "all24_tasks126_components577_old_records_and_all_other_JSON_values_preserved": true,
+  "all4_post_and_fragment_full_readbacks_complete": true,
+  "canonical_adoption_or_publication_performed": false,
+  "entire_Markdown_prefixes_and_EOF_preserved": true,
+  "evidence_ordinal": 578,
+  "exact_all4_forward_and_inverse_unified_application_complete": true,
+  "exact_all4_inverse_removal_complete": true,
+  "exact_candidate": {
+    "bytes": 3116,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/SEALED-Phase7-receipt-bounds-exact-two.json",
+    "sha256": "75c25b343072e543f36652328d45e924420bd083dc8a31bd2c25d586dd075e0d"
+  },
+  "exact_six_key_joint_facts_shape_preserved": true,
+  "exactly_one576_record_and_migration_key_added": true,
+  "expected_current_A_HEAD": "219ba3da0f62f772801d71715e22c506faa21126",
+  "expected_current_A_tree": "c670052e6e12473d974382e455c7aef4adb6aebe",
+  "expected_current_D_HEAD": "0cf525e0d3070135547f145e87726dade3d70a1f",
+  "expected_current_D_tree": "1b619e41010b1a68fda2c0125fdc1dd787b9f57d",
+  "facts": {
+    "bytes": 4956,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/current-Phase7-receipt-bounds-ordinary22-scoped-facts.json",
+    "sha256": "e62ff840ef95412addc5e39d5f7d85b127eeb406b011b823aaa73460bae24e95"
+  },
+  "files": [
+    {
+      "before_Git_blob_oid": "281e90ed1eb8c011d741d1462678ffd36f6be84e",
+      "before_full9": {
+        "st_ctime_ns": "1795743658093342690",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513030",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743658093342690",
+        "st_nlink": "1",
+        "st_size": "1553693",
+        "st_uid": "1000"
+      },
+      "before_metadata_lineage": {
+        "Source42_current_documentary_epoch": {
+          "bytes": 6569,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-live-reconciled-Source42-content-epoch-closed.json",
+          "sha256": "071a277ff541b7fa9303677ec5b87378735e6fff5d9d921a973299de97941bb8"
+        },
+        "actual_live_code_publication": {
+          "bytes": 15579,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-Phase7-receipt-bounds-ordinary22-three-FF-publication.json",
+          "sha256": "77d888220bff3b11a0781a314c78feb6151f9d89981150c5b2ca95fe10bb5004"
+        },
+        "current_documentary_HEAD": "0cf525e0d3070135547f145e87726dade3d70a1f",
+        "ordinal_ancestry": {
+          "bytes": 2700,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Guide577-four-docs-three-FF-publication.json",
+          "sha256": "22ad68b457d362a51ab947499b84e868c52bff4396123d79756ec26a53dc572d"
+        }
+      },
+      "before_private": {
+        "bytes": 1553693,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/BACKLOG.json.captured-current-parent.DATA",
+        "sha256": "846160d2adf0cdf8aca087089dd7de82ebac2d1fa99a9bc3cef59e5650fa89c6"
+      },
+      "file_name": "BACKLOG.json",
+      "forward_patch": {
+        "bytes": 1494,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/BACKLOG.json.guide578.forward.patch",
+        "sha256": "6947ce0deb56f756964101c553bbb3a66d9b8ae882b171a3b87c10f62987b738"
+      },
+      "inverse_patch": {
+        "bytes": 1494,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/BACKLOG.json.guide578.inverse.patch",
+        "sha256": "be84d3a7f2c708e818b4d369b5efe0c3319746db153f22d1d17e3e8dcdc8fe8a"
+      },
+      "post_private": {
+        "bytes": 1554779,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/BACKLOG.json.guide578.after.DATA",
+        "sha256": "8d07181c0f2bf5cf995575628a6ca656ad3bfc2555b6e5182ac19f0fea2366c0"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/docs/BACKLOG.json",
+      "surgical_insertion": {
+        "fragment_reference": {
+          "bytes": 1086,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/BACKLOG.json.guide578.only-insertion.DATA",
+          "sha256": "ccf881460f49d77ee3550b14dc6bf1c380091cd1905259e8fc7485ac2d321b71"
+        },
+        "inserted_bytes": 1086,
+        "inserted_sha256": "ccf881460f49d77ee3550b14dc6bf1c380091cd1905259e8fc7485ac2d321b71",
+        "inverse_removal_recovers_entire_old_file": true,
+        "offset": 287515
+      }
+    },
+    {
+      "before_Git_blob_oid": "3aa558d279eb1cfc3b7e0422d4ee491362b8ee67",
+      "before_full9": {
+        "st_ctime_ns": "1795743658093606308",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513031",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743658093606308",
+        "st_nlink": "1",
+        "st_size": "2367147",
+        "st_uid": "1000"
+      },
+      "before_metadata_lineage": {
+        "Source42_current_documentary_epoch": {
+          "bytes": 6569,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-live-reconciled-Source42-content-epoch-closed.json",
+          "sha256": "071a277ff541b7fa9303677ec5b87378735e6fff5d9d921a973299de97941bb8"
+        },
+        "actual_live_code_publication": {
+          "bytes": 15579,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-Phase7-receipt-bounds-ordinary22-three-FF-publication.json",
+          "sha256": "77d888220bff3b11a0781a314c78feb6151f9d89981150c5b2ca95fe10bb5004"
+        },
+        "current_documentary_HEAD": "0cf525e0d3070135547f145e87726dade3d70a1f",
+        "ordinal_ancestry": {
+          "bytes": 2700,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Guide577-four-docs-three-FF-publication.json",
+          "sha256": "22ad68b457d362a51ab947499b84e868c52bff4396123d79756ec26a53dc572d"
+        }
+      },
+      "before_private": {
+        "bytes": 2367147,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/work_catalog.json.captured-current-parent.DATA",
+        "sha256": "313ae4357fdd9a1001892e71f96b2caaafc877ed7ce8e3cab78b11ee44bbba22"
+      },
+      "file_name": "work_catalog.json",
+      "forward_patch": {
+        "bytes": 6850,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/work_catalog.json.guide578.forward.patch",
+        "sha256": "0f91a459c6712657bfbbc71157ed87792a161dd95a920083bf4078face4f5389"
+      },
+      "inverse_patch": {
+        "bytes": 6850,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/work_catalog.json.guide578.inverse.patch",
+        "sha256": "be96236658c1d8e28207450a155941d6d3594e4ab910c69d614c328b03450cda"
+      },
+      "post_private": {
+        "bytes": 2373500,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/work_catalog.json.guide578.after.DATA",
+        "sha256": "6b3956acea0f5c2759c51373624a34b1ce49c0fbe514ebe62f9d593b48f1cf13"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/docs/work_catalog.json",
+      "surgical_insertion": {
+        "fragment_reference": {
+          "bytes": 6353,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/work_catalog.json.guide578.only-insertion.DATA",
+          "sha256": "ed17e4591f6ad1c5a76022b952c574fcaa9e2df840d8ad45712a0ade6017c152"
+        },
+        "inserted_bytes": 6353,
+        "inserted_sha256": "ed17e4591f6ad1c5a76022b952c574fcaa9e2df840d8ad45712a0ade6017c152",
+        "inverse_removal_recovers_entire_old_file": true,
+        "offset": 2367140
+      }
+    },
+    {
+      "before_Git_blob_oid": "6041222b457a30f5c760f2fde242fd7007a7277a",
+      "before_full9": {
+        "st_ctime_ns": "1795743658093929543",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513032",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743658093929543",
+        "st_nlink": "1",
+        "st_size": "1096093",
+        "st_uid": "1000"
+      },
+      "before_metadata_lineage": {
+        "Source42_current_documentary_epoch": {
+          "bytes": 6569,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-live-reconciled-Source42-content-epoch-closed.json",
+          "sha256": "071a277ff541b7fa9303677ec5b87378735e6fff5d9d921a973299de97941bb8"
+        },
+        "actual_live_code_publication": {
+          "bytes": 15579,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-Phase7-receipt-bounds-ordinary22-three-FF-publication.json",
+          "sha256": "77d888220bff3b11a0781a314c78feb6151f9d89981150c5b2ca95fe10bb5004"
+        },
+        "current_documentary_HEAD": "0cf525e0d3070135547f145e87726dade3d70a1f",
+        "ordinal_ancestry": {
+          "bytes": 2700,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Guide577-four-docs-three-FF-publication.json",
+          "sha256": "22ad68b457d362a51ab947499b84e868c52bff4396123d79756ec26a53dc572d"
+        }
+      },
+      "before_private": {
+        "bytes": 1096093,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/HANDOFF.md.captured-current-parent.DATA",
+        "sha256": "bcd91daa08bc8a50b24c6c80a854629f9fcdb7f7f28e64ad6214a6cbeb607766"
+      },
+      "file_name": "HANDOFF.md",
+      "forward_patch": {
+        "bytes": 1789,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/HANDOFF.md.guide578.forward.patch",
+        "sha256": "d729b0c1b002469bf7dff47afeaf0a0e1316746e2899b5fe2585088a21902e15"
+      },
+      "inverse_patch": {
+        "bytes": 1789,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/HANDOFF.md.guide578.inverse.patch",
+        "sha256": "a2a8f8d38858f5b5f77ceb94027f200f8259244f0266b722876b99d8943f7fd4"
+      },
+      "post_private": {
+        "bytes": 1096879,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/HANDOFF.md.guide578.after.DATA",
+        "sha256": "0211a54b7467d8549fc83e53610f0f5a63f623c53bdf032d3f0fbfd3f93f3072"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/docs/HANDOFF.md",
+      "surgical_insertion": {
+        "fragment_reference": {
+          "bytes": 786,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/HANDOFF.md.guide578.only-insertion.DATA",
+          "sha256": "6e3c9be33cb5cc6dbc806bbba0a2ccd7c1d662e746cb57573a3f013bdcec3cb3"
+        },
+        "inserted_bytes": 786,
+        "inserted_sha256": "6e3c9be33cb5cc6dbc806bbba0a2ccd7c1d662e746cb57573a3f013bdcec3cb3",
+        "inverse_removal_recovers_entire_old_file": true,
+        "offset": 1096093
+      }
+    },
+    {
+      "before_Git_blob_oid": "580abd945ef2827ade4ceaa2a82d7c7bfadd10a4",
+      "before_full9": {
+        "st_ctime_ns": "1795743658094100409",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "72513033",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795743658094100409",
+        "st_nlink": "1",
+        "st_size": "853791",
+        "st_uid": "1000"
+      },
+      "before_metadata_lineage": {
+        "Source42_current_documentary_epoch": {
+          "bytes": 6569,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-live-reconciled-Source42-content-epoch-closed.json",
+          "sha256": "071a277ff541b7fa9303677ec5b87378735e6fff5d9d921a973299de97941bb8"
+        },
+        "actual_live_code_publication": {
+          "bytes": 15579,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/actual-Phase7-receipt-bounds-ordinary22-three-FF-publication.json",
+          "sha256": "77d888220bff3b11a0781a314c78feb6151f9d89981150c5b2ca95fe10bb5004"
+        },
+        "current_documentary_HEAD": "0cf525e0d3070135547f145e87726dade3d70a1f",
+        "ordinal_ancestry": {
+          "bytes": 2700,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Guide577-four-docs-three-FF-publication.json",
+          "sha256": "22ad68b457d362a51ab947499b84e868c52bff4396123d79756ec26a53dc572d"
+        }
+      },
+      "before_private": {
+        "bytes": 853791,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/TRAINING_HISTORY.md.captured-current-parent.DATA",
+        "sha256": "c6436fbb7b752a742eb6371527af8fa0ec1a5a236c411017b605586f7fd537af"
+      },
+      "file_name": "TRAINING_HISTORY.md",
+      "forward_patch": {
+        "bytes": 1807,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/TRAINING_HISTORY.md.guide578.forward.patch",
+        "sha256": "17069c4161432eb1875d151bbf204981fe258ff2a328742b6e8023671ec6bc36"
+      },
+      "inverse_patch": {
+        "bytes": 1807,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/TRAINING_HISTORY.md.guide578.inverse.patch",
+        "sha256": "0d1211b9a57d76a8a4ea1e8f1551381e151ae9766c84d28f65abb347c93ae062"
+      },
+      "post_private": {
+        "bytes": 854577,
+        "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/TRAINING_HISTORY.md.guide578.after.DATA",
+        "sha256": "51a7932650b79950af7b51b4599183fd4d7254a025ef2cc66f02eba9d8e1c6f3"
+      },
+      "relative_path": "ipfs_datasets_py/logic/autoformal/docs/TRAINING_HISTORY.md",
+      "surgical_insertion": {
+        "fragment_reference": {
+          "bytes": 786,
+          "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/TRAINING_HISTORY.md.guide578.only-insertion.DATA",
+          "sha256": "6e3c9be33cb5cc6dbc806bbba0a2ccd7c1d662e746cb57573a3f013bdcec3cb3"
+        },
+        "inserted_bytes": 786,
+        "inserted_sha256": "6e3c9be33cb5cc6dbc806bbba0a2ccd7c1d662e746cb57573a3f013bdcec3cb3",
+        "inverse_removal_recovers_entire_old_file": true,
+        "offset": 853791
+      }
+    }
+  ],
+  "forward_patch": {
+    "bytes": 11940,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/guide578-four-insertions.forward.patch",
+    "sha256": "4129f093c57f5636b48a079bce6d3af4ff5b4e0c02bc21c3e2d240c5651f4414"
+  },
+  "full_eight_phase_goal_complete": false,
+  "inverse_patch": {
+    "bytes": 11940,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/guide578-four-insertions.inverse.patch",
+    "sha256": "e813a1034845f0c623f3fab6278e843115f7186ca8b012817d4b2d72f62c8676"
+  },
+  "joint_facts": {
+    "bytes": 7400,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/guide578-existing-actuator-six-key-joint-facts.json",
+    "sha256": "f32c22de4af0e461eab9283117fac298d6e770851254a98a92c6af6c05ee6ec3"
+  },
+  "migration_key": "phase7_receipt_typed_bounds_ordinary22_20261127",
+  "preservation_proof": {
+    "bytes": 2316,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/guide578-four-guides-preservation-and-inverse-proof.json",
+    "sha256": "9ccfe6a9755cb9a29460461173a8e53749dddeeb7ad02b60c3e8c9bc000b61c9"
+  },
+  "prior_author_READY": {
+    "bytes": 18740,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/guide577-composition/READY-one-existing-guide577-four-guides.json",
+    "sha256": "90ead17306212f3dd5ad2bf3826c5836485c12780282bd346acc54f32d6c2c8e"
+  },
+  "prior_verified_guide577_publication": {
+    "bytes": 2700,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Guide577-four-docs-three-FF-publication.json",
+    "sha256": "22ad68b457d362a51ab947499b84e868c52bff4396123d79756ec26a53dc572d"
+  },
+  "record_id": "phase2-reviewed-governing-definition-self-reference-ordinary22-evidence576-20261127",
+  "schema": "one-existing-guide578-four-private-posts/v1",
+  "shared_Markdown_append": {
+    "bytes": 786,
+    "path": "/tmp/P1-proof-cache-translation-current-6btZZr/receipt-bounds/guide578-composition/guide578-shared-Markdown-append.DATA",
+    "sha256": "6e3c9be33cb5cc6dbc806bbba0a2ccd7c1d662e746cb57573a3f013bdcec3cb3"
+  },
+  "total_four_post_bytes": 5879735,
+  "total_inserted_bytes": 9011
+}

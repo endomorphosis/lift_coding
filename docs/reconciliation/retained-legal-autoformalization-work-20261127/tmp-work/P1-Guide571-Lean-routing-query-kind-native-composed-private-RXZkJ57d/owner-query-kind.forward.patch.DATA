@@ -1,0 +1,11 @@
+--- a/ipfs_datasets_py/logic/backends/kernel/lean.py
++++ b/ipfs_datasets_py/logic/backends/kernel/lean.py
+@@ -640,6 +640,8 @@
+             raise LeanKernelError(
+                 f"outcome request targets {self.request.requested_backend_id!r}, not {LeanKernelBackend.backend_id!r}"
+             )
++        if self.request.query_kind is not QueryKind.THEOREM_PROOF:
++            raise LeanKernelError("outcome request must be a theorem_proof query")
+         if self.receipt.accepted:
+             source, _, translation = _payload_source(self.request)
+             payload = self.request.payload

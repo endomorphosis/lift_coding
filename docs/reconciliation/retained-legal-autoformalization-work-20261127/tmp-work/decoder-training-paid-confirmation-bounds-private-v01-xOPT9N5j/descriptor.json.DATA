@@ -1,0 +1,223 @@
+{
+  "actual_held_out_legal_fidelity": null,
+  "actual_paid_or_model_evidence": null,
+  "compact_development_replay": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/compact-final.rc",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    "stderr": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/compact-final.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "stdout": {
+      "bytes": 1792,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/compact-final.stdout",
+      "sha256": "9dfa270778e6456744fb090546e68a19773e6226cb1adc732829ada40208ce86"
+    }
+  },
+  "compact_owner_controls": {
+    "actual_legal_review_or_paid_training": false,
+    "paired_development_looks": 2,
+    "physical_paid_events_fixture": 8,
+    "refusals": [
+      {
+        "case": "same split with different TRAIN roster across arms",
+        "reason": "matched compact arms must retain the same ordered TRAIN cohort, runtime and budgets"
+      },
+      {
+        "case": "physical training close omitted from proper paid stage",
+        "reason": "every scored compact look must charge its completed training and evaluation closes"
+      },
+      {
+        "case": "physical evaluation close omitted from proper paid stage",
+        "reason": "every scored compact look must charge its completed training and evaluation closes"
+      },
+      {
+        "case": "completed training paid only at terminal, not at confirming look",
+        "reason": "retrospective look must charge its completed training and evaluation closes"
+      },
+      {
+        "case": "duplicate physical close under another event ID",
+        "reason": "one physical close cannot be charged under multiple pilot event identities"
+      },
+      {
+        "case": "independent development owner denial",
+        "reason": "independent owner refused compact development selection, receipts or physical terminal cells"
+      },
+      {
+        "case": "development callback mutated selected cell",
+        "reason": "selected compact study, development design, receipts or terminal cells changed"
+      },
+      {
+        "case": "unscored attempt with uncharged terminal close",
+        "reason": "compact terminal ledger must charge the exact attempt close, including unscored failures"
+      },
+      {
+        "case": "legacy freeze rejects distinct compact comparison",
+        "reason": "exact verified development comparison required"
+      }
+    ],
+    "unscored_failed_attempt_retained": true
+  },
+  "convergence_established": false,
+  "dispatch_authority": false,
+  "drivers": {
+    "check_compact_bounds.py": {
+      "bytes": 2161,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/check_compact_bounds.py",
+      "sha256": "1ffb9940eab1062494390af8ea294c867748fb3b889d6ee57d5d00070e95c9bf"
+    },
+    "compose.py": {
+      "bytes": 4911,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/compose.py",
+      "sha256": "6e4b35260b03d8eae21c85e92073612df563b3c98975758284916c6b8244ec8c"
+    },
+    "confirmation_bounds.py.IN": {
+      "bytes": 4804,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/confirmation_bounds.py.IN",
+      "sha256": "0a39ce99e13b3f0c23045fb82fe3495ed5a8b0ca83bef041436e8aa3e6097772"
+    },
+    "seal.py": {
+      "bytes": 10489,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/seal.py",
+      "sha256": "94c179f747e2897ef1f34e6717a661b23375a8072f9101894b1b22bc55228e31"
+    },
+    "test_confirmation_bounds.py": {
+      "bytes": 9698,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/test_confirmation_bounds.py",
+      "sha256": "58c7aece811f4ad2bdac1fce0f5ee67a45bd7e5c48f227f50ae546d1c3c2aae4"
+    },
+    "test_registered_development.py": {
+      "bytes": 5076,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/test_registered_development.py",
+      "sha256": "53dc7aa783c076b1e910983a835e880bb1880112d25f0a385c5c4820a346532f"
+    }
+  },
+  "fictional_reports": {
+    "assessment-replay-v01.json": {
+      "bytes": 2016,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/assessment-replay-v01.json",
+      "sha256": "61c85f75fe2720bc6d3fe403e54d0ec5a6e4721f5707a8b82cd00a6549e70072"
+    },
+    "fictional-compact-comparison-v01.json": {
+      "bytes": 19466,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/fictional-compact-comparison-v01.json",
+      "sha256": "8110202574613de816dfe3709e4f7cb7e7353d23ba6abdda09821d2d089fe817"
+    },
+    "registered-development-fixture.json": {
+      "bytes": 32178,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/registered-development-fixture.json",
+      "sha256": "6a18980e8399f6236569f005f3c897ca2011fcd95f4ea008dcd62b114927f372"
+    }
+  },
+  "fictional_wall_bound": {
+    "attainment": 1,
+    "confirming_look": "look-3",
+    "lower_meter_sha256": "8e2c8afe53db832b6b79f33026654ab73c4f653bf77fabac6670686dbd9ccf48",
+    "lower_seconds": 30.0,
+    "observed_confirmation_seconds": null,
+    "reason": "confirmed_by_later_authenticated_meter",
+    "restricted_confirmation_seconds": [
+      30.0,
+      48.0
+    ],
+    "upper_meter_sha256": "0c41143e74ac83dae776d39719543d662e94a699536719c68cf74ee6eacc4911",
+    "upper_seconds": 48.0
+  },
+  "local_passing_cases": {
+    "focused_confirmation_bounds": 8,
+    "registered_development_and_freeze": 3,
+    "retained_paid_comparator": 14
+  },
+  "logs": {
+    "focused_confirmation_bounds": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/confirmation-bounds-first.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 1384,
+        "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/confirmation-bounds-first.stderr",
+        "sha256": "6300bdeeecb98e2ae88590993c1648bf46e08ce99e14cdd6f4864c22053907e0"
+      },
+      "stdout": {
+        "bytes": 438,
+        "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/confirmation-bounds-first.stdout",
+        "sha256": "5377111749b83b56ebdf60a1528c8a60c607ccdc4ddbfb5555544f0d235d1111"
+      }
+    },
+    "registered_development_and_freeze": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/development-first.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 620,
+        "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/development-first.stderr",
+        "sha256": "a4ab25fec5dc1f56bf6b3dc3758adf25639661f470bda29d7d848df012c07d06"
+      },
+      "stdout": {
+        "bytes": 183,
+        "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/development-first.stdout",
+        "sha256": "9577471d0859d44ec71e5cdee38342de2270ac79014769b2aa75f00313d35d97"
+      }
+    },
+    "retained_paid_comparator": {
+      "rc": {
+        "bytes": 2,
+        "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/confirmation-bounds-retained.rc",
+        "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+      },
+      "stderr": {
+        "bytes": 2581,
+        "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/confirmation-bounds-retained.stderr",
+        "sha256": "2b3917e1012eaf36535d9779af2ecbb945605bb558db46fdae5b7836e52d28d6"
+      },
+      "stdout": {
+        "bytes": 3,
+        "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/confirmation-bounds-retained.stdout",
+        "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+      }
+    }
+  },
+  "maintained_adoption": null,
+  "owner": {
+    "bytes": 911399,
+    "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/study.py",
+    "sha256": "0db05161d43713375a0a9b4db8d359b6b5d50f08f5a7481f2b804b97add778b1"
+  },
+  "owner_diff": {
+    "bytes": 10697,
+    "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/study.diff",
+    "sha256": "505069d18fe44ef8c894644732beaa7889f110767ed4cdb3c82711c6c75d0e94"
+  },
+  "prior_opt_out_identical": true,
+  "prior_owner": {
+    "bytes": 905879,
+    "path": "/tmp/decoder-training-projector-selected-release-private-v01-e8w9qPhY/study.py",
+    "sha256": "09afd1fd3f35f3c1612eecb84a5b5d091cf7edb2455526b8e9a9c02064b36f44"
+  },
+  "retained_compact_setup_failure": {
+    "rc": {
+      "bytes": 2,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/compact-first.rc",
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    "stderr": {
+      "bytes": 800,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/compact-first.stderr",
+      "sha256": "c30e5cb7ae302229be0c4e617343094ccd5713fa5445b048f38aea3e5c06961f"
+    },
+    "stdout": {
+      "bytes": 0,
+      "path": "/tmp/decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/compact-first.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "schema": "reviewed-authenticated-confirmation-cost-bounds-private-controls/v1"
+}

@@ -1,0 +1,162 @@
+"""Seal the preparation-stop controls and the relocated Guide572 Stage A basis."""
+
+from copy import deepcopy
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+from runpy import run_path
+from stat import S_IMODE
+from tempfile import mkstemp
+
+HERE = Path(__file__).resolve().parent
+TMP = HERE.parent
+PREVIOUS = TMP / "decoder-training-experiment-manifest-v387.json"
+CURRENT = TMP / "decoder-training-experiment-manifest-v388.json"
+KEY = "private_teacher_preparation_stop_wall"
+STAGE = "guide572_published_new_checkout_pending_reader"
+
+
+def ref(path, expected=None):
+    raw = path.read_bytes()
+    digest = sha256(raw).hexdigest()
+    assert expected is None or expected == digest, path
+    return {"path": str(path), "bytes": len(raw), "sha256": digest}
+
+
+def save(path, value):
+    raw = (json.dumps(value, indent=2, sort_keys=True) + "\n").encode() if type(value) is dict else value.encode()
+    with path.open("xb") as output:
+        output.write(raw)
+    return ref(path)
+
+
+def logs(stem, count, rc=0):
+    err = (HERE / (stem + ".stderr")).read_text()
+    assert (HERE / (stem + ".rc")).read_bytes() == f"{rc}\n".encode()
+    assert f"Ran {count} tests in " in err
+    if rc == 0:
+        assert err.endswith("\nOK\n")
+        assert sum(line.startswith("test_") and line.endswith(" ... ok") for line in err.splitlines()) == count
+    else:
+        assert "FAILED (errors=1)" in err and "Fraction" in err
+    return {kind: ref(HERE / (stem + "." + kind)) for kind in ("rc", "stdout", "stderr")}
+
+
+old_ref = ref(PREVIOUS, "cddd0d1d75bc8fea3b6e37a5db31a9d5769f3819be536e4a9db814e41128c096")
+old = json.loads(PREVIOUS.read_bytes())
+counts = {"terminal_preparation_wall": 7, "retained_completed_wall": 8}
+stems = ("preparation-stop-wall-final", "retained-completed")
+measured = json.loads((HERE / (stems[0] + ".stdout")).read_bytes())
+assert {key: (row["covered_paid_events"], row["elapsed_ns"]) for key, row in measured.items()} == {
+    "paid_wall": (3, 40), "recovered_wall": (3, 40), "zero_paid_wall": (0, 20)}
+completed = json.loads((HERE / (stems[1] + ".stdout")).read_bytes())
+assert completed["first_use_wall"]["covered_paid_events"] == 39
+assert completed["first_use_wall"]["elapsed_ns"] == 42_000_000_000
+replay = ref(TMP / "decoder-training-stage-a-guide572-reconciliation-private-v01-kjKtsfCa/stage-a-guide572-rebind.INERT.json",
+             "6474b8bf0b2691df499adaff30143c6becd2f610ad2acdee1b82f8658cff81f5")
+descriptor = {
+    "schema": "reviewed-teacher-preparation-stop-wall-private-controls/v1",
+    "owner": ref(HERE / "final_physical_union.py", "c5e490402f1093b9cce28c7461f18d6811c2d8914fabb2e7f7dda145af7df1bf"),
+    "prior_owner": ref(TMP / "decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN/final_physical_union.py",
+                       "ccb4f816f07211f380d97a09cee2181da359882b17698f881deadc65ea2cc825"),
+    "diff": ref(HERE / "final_physical_union.diff", "d87385829931895eb717ececceea222c1d5a3443a851c71f061801b4c21fbc21"),
+    "local_passing_cases": counts,
+    "logs": {role: logs(stem, count) for (role, count), stem in zip(counts.items(), stems, strict=True)},
+    "retained_initial_fixture_adapter_failure": logs("preparation-stop-wall-first", 7, 1),
+    "modeled_preparation_stop_wall_summary": measured, "retained_completed_pilot_modeled_wall": completed,
+    "all_original_decoder_arms_independently_unstarted_required": True,
+    "actual_model_or_native_execution": None, "actual_wall_owner_evidence": None,
+    "maintained_adoption": None, "dispatch_authority": False,
+    "drivers": {name: ref(HERE / name) for name in ("compose.py", "preparation_stop_wall.py.IN",
+        "guide572_projection.py.IN", "test_preparation_stop_wall.py", "retained_completed_wall.py", "seal.py")},
+}
+projection = f'''def project_teacher_preparation_stop_wall(reference):
+    recorded = retained_json(reference)
+    require(recorded["schema"] == "reviewed-teacher-preparation-stop-wall-private-controls/v1"
+            and recorded["local_passing_cases"] == {counts!r}
+            and recorded["all_original_decoder_arms_independently_unstarted_required"] is True
+            and recorded["actual_model_or_native_execution"] is recorded["actual_wall_owner_evidence"]
+                is recorded["maintained_adoption"] is None and recorded["dispatch_authority"] is False,
+            "exact modeled terminal preparation wall verification required")
+    fields = ("owner", "local_passing_cases", "modeled_preparation_stop_wall_summary",
+              "all_original_decoder_arms_independently_unstarted_required", "actual_wall_owner_evidence", "dispatch_authority")
+    return {{field: recorded[field] for field in fields}}
+
+
+'''
+checker_path = HERE / "check_design.py"
+old_checker = old["advisory_operator_readiness_checker"]
+path = Path(old_checker["path"])
+assert ref(path, old_checker["sha256"]) == old_checker
+source = path.read_text()
+at_def, at_result = "def report(manifest):\n", '        "stage_a_coordination": coordination,'
+at_return = '    return {\n        "schema": "decoder-training-advisory-design-check/v1",'
+for literal in (at_def, at_result, at_return):
+    assert source.count(literal) == 1
+source = source.replace(at_def, (HERE / "guide572_projection.py.IN").read_text() + projection + at_def, 1)
+source = source.replace(at_return, f'''    if "{STAGE}" in design:
+        predecessor["prior_publisher_guide571_stage_a"] = coordination
+        coordination = guide572_stage_a_frontier(design["{STAGE}"], coordination)
+''' + at_return, 1)
+source = source.replace(at_result, at_result + f'''
+        **({{"{KEY}": project_teacher_preparation_stop_wall(design["{KEY}"])}}
+           if "{KEY}" in design else {{}}),''', 1)
+namespace = {"__name__": "private_readback", "__file__": str(checker_path)}
+exec(compile(source, str(checker_path), "exec"), namespace)
+new = deepcopy(old)
+new["manifest_schema_version"] = "0.388.0"
+new["previous_manifest"] = old_ref
+new["typed_execution_design"][STAGE] = replay
+preview = namespace["report"](new)
+stage = preview["stage_a_coordination"]
+assert stage["observed_guide"] == 572
+assert stage["recorded_headroom_bytes"] == 6_356_992
+assert stage["standalone_independent_index_payload_shortfall"] == 713_606
+assert stage["conditional_shortfall_bytes_before_overhead"] is stage["current_independent_read_join"] is None
+assert stage["verified_relocated_body_roles"] == 32 and stage["verified_direct_bytes_delta"] == 93_705
+assert stage["historical_prior_checkout_paired_quote"]["conditional_shortfall_bytes_before_overhead"] == 20_934_571
+
+plan = TMP / "decoder-training-integration-plan.md"
+status = plan.stat()
+initial = plan.read_bytes()
+assert sha256(initial).hexdigest() == "6c0ce6c644c48c5e90ad7be49a9909cc28aef1ea1aa02a93dd34d8d2d1df5510"
+descriptor_path = HERE / "descriptor.json"
+addition = f"""## 825. Retain first-use elapsed time when teacher preparation stops
+
+The existing preparation-stop verifier can now use the same enclosing wall contract as the completed pilot. It replays the original stop, authenticates every original decoder arm as unstarted, and checks both dispatch closes when the stop follows a replacement attempt. The original clock owner binds the opening and terminal receipts to all paid preparation events. A verified empty roster can retain elapsed time with CPU and GPU counters still unavailable. The original stop report and its costs carry through unchanged. [Candidate and local controls]({descriptor_path})
+
+Fifteen local tests passed. They cover the original paid stop, zero-paid stop, one-hop recovery and retained completed-pilot path. Actual paid preparation and clock-owner evidence remain pending. A longer retry chain still needs an original dispatch close that covers its terminal scope before this readback can certify a preparation-only stop.
+
+Guide572 published Datasets `8996e160` and preserved Accelerate `219ba3da`. The offline replay matched the published Datasets index and preserved all 32 protected body roles. The checkout move increased verified direct inputs by 93,705 bytes. The independent index read alone has a 7,070,598-byte payload floor and a 713,606-byte gap against 6,356,992 bytes of retained headroom. A new paired total requires the original owner to bind archive admissions to the new absolute paths. Current independent read, paired selection and Reader allocation remain pending. [Guide572 replay]({replay["path"]}) · [Readiness]({HERE / "verified-readiness.json"})
+
+"""
+body = initial.decode()
+for was, now in (
+    (str(PREVIOUS), str(CURRENT)),
+    ("Version 3.533. Updated 2026-11-26 with end-to-end elapsed readback for the paid teacher pilot.",
+     "Version 3.534. Updated 2026-11-26 with preparation-stop elapsed readback and the Guide572 publication."),
+    ("## Primary research references", addition + "## Primary research references"),
+):
+    assert body.count(was) == 1, was
+    body = body.replace(was, now, 1)
+
+new["typed_execution_design"][KEY] = save(descriptor_path, descriptor)
+new["advisory_operator_readiness_checker"] = save(checker_path, source)
+checked = run_path(str(checker_path))["report"](new)
+assert {name: value for name, value in checked.items() if name != KEY} == preview
+manifest = save(CURRENT, new)
+readiness = save(HERE / "verified-readiness.json", checked)
+fd, name = mkstemp(dir=TMP, prefix=plan.name + ".")
+file = Path(name)
+try:
+    with os.fdopen(fd, "w") as output:
+        output.write(body)
+    file.chmod(S_IMODE(status.st_mode))
+    assert plan.read_bytes() == initial and plan.stat().st_ino == status.st_ino
+    os.replace(file, plan)
+finally:
+    if file.exists():
+        file.unlink()
+print(json.dumps({"descriptor": ref(descriptor_path), "manifest": manifest, "readiness": readiness,
+                  "plan": ref(plan)}, sort_keys=True))

@@ -1,0 +1,91 @@
+"""Add the canonical first-role check to the retained monitor."""
+import ast
+from difflib import unified_diff
+from hashlib import sha256
+from pathlib import Path
+
+HERE=Path(__file__).resolve().parent
+PRIOR=HERE.parent/'decoder-training-selective-prefix-inspection-private-v01-PV9ezANr/readback.py'
+raw=PRIOR.read_bytes()
+assert (len(raw),sha256(raw).hexdigest())==(24208,'7be27aa995f70a7557ad65e728d2a013c20fbbe96729bd230a265e86e7ba948c')
+before=after=raw.decode()
+
+
+def replace(old,new):
+    global after
+    assert after.count(old)==1,old
+    after=after.replace(old,new,1)
+
+
+replace('''class AppendOnlyCodecPrefixMonitor:''','''STRICT_ROLE_ORDER_WIRE_PROFILE = "complete-reviewed-norm-digest-omitted-json/v1"
+_STRICT_ROLE_FIELDS = frozenset({
+    "argument_roles", "assumptions", "cross_references", "definition_uses",
+    "governing_context", "interpretation_id", "profile", "source_binding", "typed_expression",
+})
+_FIRST_ROLE_OBJECT = b'{"argument_roles":[{'
+_CANONICAL_FIRST_ROLE_MEMBER = _FIRST_ROLE_OBJECT + b'"roles":'
+
+
+class AppendOnlyCodecPrefixMonitor:''')
+replace('''    uncertainty disables the monitor and leaves the ordinary decoder in charge.
+    """
+
+    def __init__(self, structural_prefix, fields, role_validator, *, max_body_bytes, max_inspected_bytes):''',
+'''    uncertainty disables the monitor and leaves the ordinary decoder in charge.
+    The optional strict profile requires the original canonical serializer,
+    exact role shape and a byte-stable tokenizer path, verified by the caller.
+    """
+
+    def __init__(self, structural_prefix, fields, role_validator, *, max_body_bytes, max_inspected_bytes,
+                 wire_profile=None):''')
+replace('''        self._fields = frozenset(fields)
+        self._role_validator''','''        self._fields = frozenset(fields)
+        if wire_profile is not None and (type(wire_profile) is not str
+                or wire_profile != STRICT_ROLE_ORDER_WIRE_PROFILE or self._fields != _STRICT_ROLE_FIELDS):
+            raise ValueError("strict wire profile requires its original nine fields and exact codec")
+        self._wire_profile = wire_profile
+        self._strict_role_offset = 0 if wire_profile is not None else None
+        self._strict_role_bytes = 0
+        self._role_validator''')
+replace('''    def _closed_role_needs_full_check(self):''',
+        (HERE/'strict_first_role.py.IN').read_text()+'\n    def _closed_role_needs_full_check(self):')
+replace('''self._role_bytes + self._inspected + size > self._max_inspected_bytes''',
+        '''self._strict_role_bytes + self._role_bytes + self._inspected + size > self._max_inspected_bytes''')
+replace('''        self._parts.append(stable)
+        if not self._inspect_boundary''','''        self._check_strict_first_role(emitted)
+        if self._status != "watching":
+            return self._status
+        self._parts.append(stable)
+        if not self._inspect_boundary''')
+replace('''self._role_bytes + self._inspected + self._bytes > self._max_inspected_bytes''',
+        '''self._strict_role_bytes + self._role_bytes + self._inspected + self._bytes > self._max_inspected_bytes''')
+replace('''        return {"status": self._status, "charged_inspection_bytes": self._inspected,''',
+        '''        result = {"status": self._status, "charged_inspection_bytes": self._inspected,''')
+replace('''                "obstruction": None if self._obstruction is None else dict(self._obstruction)}
+
+
+def verify_append_only_monitor''','''                "obstruction": None if self._obstruction is None else dict(self._obstruction)}
+        if self._wire_profile is not None:
+            result.update(wire_profile=self._wire_profile,
+                          charged_strict_role_prefix_bytes=self._strict_role_bytes)
+        return result
+
+
+def verify_append_only_monitor''')
+
+old_tree,new_tree=map(ast.parse,(before,after))
+modified={'AppendOnlyCodecPrefixMonitor','STRICT_ROLE_ORDER_WIRE_PROFILE','_STRICT_ROLE_FIELDS',
+          '_FIRST_ROLE_OBJECT','_CANONICAL_FIRST_ROLE_MEMBER'}
+
+
+def other_nodes(tree):
+    return [ast.dump(node) for node in tree.body if getattr(node,'name',None) not in modified
+            and not (isinstance(node,ast.Assign) and getattr(node.targets[0],'id',None) in modified)]
+
+
+assert other_nodes(old_tree)==other_nodes(new_tree)
+compile(after,str(HERE/'readback.py'),'exec')
+(HERE/'readback.py').write_text(after)
+(HERE/'readback.diff').write_text(''.join(unified_diff(before.splitlines(keepends=True),after.splitlines(keepends=True),
+    fromfile=str(PRIOR),tofile=str(HERE/'readback.py'))))
+print(len(after.encode()),sha256(after.encode()).hexdigest())

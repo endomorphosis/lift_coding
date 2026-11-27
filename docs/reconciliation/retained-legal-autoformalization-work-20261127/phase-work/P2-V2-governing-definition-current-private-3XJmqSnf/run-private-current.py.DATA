@@ -1,0 +1,56 @@
+from pathlib import Path
+import hashlib,json,os,subprocess,sys
+
+w=Path(__file__).resolve().parent
+epoch=json.loads((w/"current-fixture-epoch.json").read_bytes())
+stage,=sys.argv[1:]
+d=w/"dataset"
+is_v3=stage=="v3-retention"
+assert stage in {"red","green","v3-retention"}
+selectors=epoch["same_v2_selectors"]
+if is_v3:
+    tests=[
+        "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate",
+        "test_full_fictional_definition_object_use_and_mixed_use_replay",
+        "test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load",
+        "test_old_generation_source_pin_cannot_be_rehashed_into_current_v2_preparation",
+        "test_v3_sibling_preserves_v2_source_and_binds_current_producers",
+        "test_reviewed_v3_refuses_cyclic_unit_dependencies",
+        "test_reviewed_v3_cross_reference_version_consistency",
+        "test_current_trust_controls_reject_even_genuine_signatures[revoked-key-key_revoked]",
+    ]
+    selectors=[epoch["v3_test"]+"::"+test for test in tests]
+auth={}
+for rel,pin in epoch["roles"].items():
+    if rel==epoch["test"]:
+        expect=(w/"test.after.py.DATA").read_bytes()
+    elif rel==epoch["owner"] and stage!="red":
+        expect=(w/"owner.after.py.DATA").read_bytes()
+    else:
+        expect=None
+    raw=(d/rel).read_bytes()
+    h=hashlib.sha256(raw).hexdigest()
+    if expect is not None:
+        assert raw==expect,rel
+    else:
+        assert (len(raw),h)==(pin["bytes"],pin["sha256"]),rel
+    auth[rel]=h
+for rel,pin in epoch["private_config"].items():
+    raw=(d/rel).read_bytes()
+    assert (len(raw),hashlib.sha256(raw).hexdigest())==(pin["bytes"],pin["sha256"])
+runner=w/"existing-runner.py.DATA"
+assert hashlib.sha256(runner.read_bytes()).hexdigest()==epoch["runner_sha256"]
+out=w/stage
+out.mkdir(mode=0o700)
+args=["/home/barberb/lift_coding/.venv/bin/python","-I","-B",str(runner),str(out),str(d),
+      *epoch["protected_roots"],*selectors]
+with (out/"stdout.DATA").open("xb") as stdout,(out/"stderr.DATA").open("xb") as stderr:
+    process=subprocess.run(args,stdout=stdout,stderr=stderr,
+                           env={**os.environ,"PYTEST_DISABLE_PLUGIN_AUTOLOAD":"1"},timeout=60)
+record={"returncode":process.returncode,"argv":args,"published_HEAD":epoch["head"],
+        "stage":stage,"V2_owner_sha256":auth[epoch["owner"]],"V2_test_sha256":auth[epoch["test"]],
+        "V3_owner_sha256":auth[epoch["v3_owner"]],"V3_test_sha256":auth[epoch["v3_test"]]}
+(out/"run.json").write_text(json.dumps(record,indent=2)+"\n")
+print("\n".join((out/"stdout.DATA").read_text().splitlines()[-9:]))
+print((out/"stderr.DATA").read_text())
+sys.exit(process.returncode)

@@ -1,0 +1,13 @@
+"""Run the original Stage G point and interval controls on the composed owner."""
+
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+old = HERE.parent / "decoder-training-stage-g-restricted-confirmation-private-v01-vFPX83nf" / "test_restricted_confirmation.py"
+body = old.read_bytes()
+assert sha256(body).hexdigest() == "09bd202c964b6392150b827a3fc33aedf84635e1ef275b3df9f1a53d0f6ef094"
+pin = b'(513382, "44926343c73e6faa9de5795c767f08936639e16cb7ffea6ca016de64349b750b")'
+assert body.count(pin) == 1
+body = body.replace(pin, b'(916062, "0ed2b796854574708184a132303054d780048a78da5031f9c4d7e1c074da3a3d")', 1)
+exec(compile(body, str(old), "exec"), {"__file__": str(HERE / old.name), "__name__": "__main__"})

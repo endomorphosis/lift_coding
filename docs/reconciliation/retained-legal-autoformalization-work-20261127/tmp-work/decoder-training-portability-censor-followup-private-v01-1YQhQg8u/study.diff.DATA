@@ -1,0 +1,84 @@
+--- /tmp/decoder-training-paid-censor-followup-private-v01-9bUvEI8h/study.py
++++ /tmp/decoder-training-portability-censor-followup-private-v01-1YQhQg8u/study.py
+@@ -8167,13 +8167,17 @@
+     recomputed = _verified_confirmation_cost_bounds(paid_comparison)
+     _require(commitment(declared) == commitment(recomputed),
+              "paid confirmation bounds must reproduce from the original attempt meters")
++    return _portability_confirmation_pair_index(paid_comparison["pairs"], recomputed["pairs"]), commitment(declared)
++
++
++def _portability_confirmation_pair_index(originals, bounds):
+     paired = {}
+-    for original, bounded in zip(paid_comparison["pairs"], recomputed["pairs"], strict=True):
++    for original, bounded in zip(originals, bounds, strict=True):
+         key = _portability_confirmation_pair_key(original)
+         _require(key == _portability_confirmation_pair_key(bounded) and key not in paired,
+                  "unique original paid comparison pairs required")
+         paired[key] = (commitment(original), bounded)
+-    return paired, commitment(declared)
++    return paired
+ 
+ 
+ def _portability_meter_interactions(comparison, original, paid_pairs):
+@@ -8206,7 +8210,9 @@
+ 
+ 
+ def summarize_objective_portability_restricted_confirmation(development, *, expected_development_sha256,
+-                                                            verify_original_development_owner, paid_comparison=None):
++                                                            verify_original_development_owner, paid_comparison=None,
++                                                            censor_followups=(), expected_censor_followups_sha256=None,
++                                                            verify_original_followup_owner=None):
+     """Read per-clock finite-panel confirmation bounds from an original paid Stage G report.
+ 
+     Each arm contributes the scheduled confirmation clock clipped at the existing
+@@ -8216,7 +8222,16 @@
+ 
+     Optional paid comparison evidence adds independently authenticated
+     meter bounds without altering the original restricted result.
++    Optional censor evidence separately tightens the selected original quartets.
+     """
++    _require(type(censor_followups) is tuple and (
++                 not censor_followups and expected_censor_followups_sha256 is None
++                 and verify_original_followup_owner is None
++                 or bool(censor_followups) and paid_comparison is not None
++                 and all(type(row) is CensorFollowup for row in censor_followups)
++                 and _pin(expected_censor_followups_sha256)
++                 and callable(verify_original_followup_owner)),
++             "Stage G follow-up requires the original paid comparison, exact selected roster and original owner")
+     _require(type(development) is dict and development.get("schema") == OBJECTIVE_PORTABILITY_SCHEMA
+              and _pin(expected_development_sha256) and callable(verify_original_development_owner)
+              and all(_pin(development.get(key)) for key in ("plan_sha256", "matrix_sha256", "study_sha256",
+@@ -8239,11 +8254,32 @@
+         meter_readback = {"paid_confirmation_bounds_sha256": meter_pin,
+             "meter_bounded_comparisons": tuple(_portability_meter_interactions(row, original, paid_pairs)
+                 for row, original in zip(comparisons, development["comparisons"], strict=True))}
++    if censor_followups:
++        covered = {(pair[f"{arm}_attempt_sha256"], pair["clock"])
++                   for original in development["comparisons"] for row in original["pairs"]
++                   for pair in (row["reference_pair"], row["comparison_pair"])
++                   for arm in ("baseline", "candidate")}
++        _require(all(_pin(row.attempt_sha256) and type(row.clock) is str
++                     and (row.attempt_sha256, row.clock) in covered for row in censor_followups),
++                 "each follow-up must belong to an exact attempt and clock in the selected Stage G quartets")
++        followup = verify_censored_confirmation_cost_bounds(paid_comparison,
++            expected_paid_report_sha256=development["paid_development_comparison_sha256"],
++            followups=censor_followups, expected_followups_sha256=expected_censor_followups_sha256,
++            verify_original_followup_owner=verify_original_followup_owner)
++        _require(commitment(development) == expected_development_sha256,
++                 "selected Stage G report changed during original follow-up verification")
++        pairs_with_followup = _portability_confirmation_pair_index(paid_comparison["pairs"], followup["pairs"])
++        meter_readback.update(
++            censor_followup_selection_sha256=expected_censor_followups_sha256,
++            paid_censor_followup_bounds_sha256=commitment(followup),
++            followup_meter_bounded_comparisons=tuple(_portability_meter_interactions(row, original, pairs_with_followup)
++                for row, original in zip(comparisons, development["comparisons"], strict=True)))
+     _require(verify_original_development_owner(expected_development_sha256, development["plan_sha256"],
+                     development["paid_development_comparison_sha256"]) is True
+              and commitment(development) == expected_development_sha256
+              and (paid_comparison is None or
+-                  commitment(paid_comparison) == development["paid_development_comparison_sha256"]),
++                  commitment(paid_comparison) == development["paid_development_comparison_sha256"])
++             and (not censor_followups or commitment(censor_followups) == expected_censor_followups_sha256),
+              "original paid development owner refused or restricted-time inputs changed")
+     return {"schema": OBJECTIVE_RESTRICTED_CONFIRMATION_SCHEMA,
+             "original_development_sha256": expected_development_sha256,

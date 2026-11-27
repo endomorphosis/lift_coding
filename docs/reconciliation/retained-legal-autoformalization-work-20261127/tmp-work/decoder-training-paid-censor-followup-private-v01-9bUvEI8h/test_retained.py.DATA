@@ -1,0 +1,19 @@
+"""Replay either unchanged legacy paid report suite with the new study owner."""
+from hashlib import sha256
+from pathlib import Path
+import sys
+
+HERE=Path(__file__).resolve().parent
+ROOT=HERE.parent
+PARTS={
+    'bounds':('decoder-training-paid-confirmation-bounds-private-v01-xOPT9N5j/test_confirmation_bounds.py',
+              9698,'58c7aece811f4ad2bdac1fce0f5ee67a45bd7e5c48f227f50ae546d1c3c2aae4'),
+    'stage-g':('decoder-training-portability-confirmation-bounds-private-v01-UX8NUMOv/test_portability_confirmation_bounds.py',
+               11077,'420a5aa4fa4dae13183121ba03ecc34836f8fdc1157b38418cc9119e34f9fbe6')}
+choice,=sys.argv[1:]
+name,size,digest=PARTS[choice]
+path=ROOT/name
+raw=path.read_bytes()
+assert (len(raw),sha256(raw).hexdigest())==(size,digest)
+sys.argv=[str(path)]
+exec(compile(raw,str(path),'exec'),{'__name__':'__main__','__file__':str(HERE/path.name)})

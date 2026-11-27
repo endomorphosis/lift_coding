@@ -1,0 +1,37 @@
+"""Apply the two-definition extension to the exact retained split owner."""
+import ast
+import difflib
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).absolute().parent
+BASE = HERE / 'legal_ir_eval_splits.before.py.DATA'
+assert all(not x.is_symlink() for x in (BASE,*BASE.parents))
+raw = BASE.read_bytes()
+assert (len(raw),sha256(raw).hexdigest()) == (78029,
+    '83995ca68ccb20c3d4ac6e056f147eb0874003b4555acac8182faa2df71cf417')
+fragment = (HERE / 'cohort.fragment').read_bytes()
+marker = b'\n\n__all__ = [\n'
+export = b'    "A0_DISCLOSURE_SAFE_SPLIT_SCHEMA",\n'
+assert raw.count(marker) == raw.count(export) == 1
+post = raw.replace(marker,b'\n\n'+fragment+marker,1).replace(export,export +
+    b'    "A0_REVIEWED_COHORT_SCHEMA",\n    "project_a0_joint_reviewed_cohort",\n',1)
+compile(post,str(HERE / 'legal_ir_eval_splits.v02.py'),'exec')
+
+def prior_nodes(data):
+    extras = {'A0_REVIEWED_COHORT_SCHEMA','project_a0_joint_reviewed_cohort','_a0_reviewed_train_occurrences','__all__'}
+    return [ast.dump(node) for node in ast.parse(data).body if
+            (getattr(node,'name',None) or getattr(getattr(node,'target',None),'id',None) or
+             (getattr(node.targets[0],'id',None) if isinstance(node,ast.Assign) else None)) not in extras]
+
+assert prior_nodes(raw) == prior_nodes(post)
+delta = ''.join(difflib.unified_diff(raw.decode().splitlines(keepends=True),post.decode().splitlines(keepends=True),
+                 fromfile='legal_ir_eval_splits.py (retained)',tofile='legal_ir_eval_splits.py (detached candidate)')).encode()
+for name,data in [('legal_ir_eval_splits.v02.py',post),('candidate-v02.diff',delta)]:
+    output = HERE / name
+    if output.exists():
+        assert output.read_bytes() == data
+    else:
+        with output.open('xb') as f:
+            f.write(data)
+    print(name,len(data),sha256(data).hexdigest())

@@ -1,0 +1,869 @@
+{
+  "cases": [
+    {
+      "case": "root_positive",
+      "outcome": {
+        "capability": {
+          "browser": {
+            "availability": "unavailable",
+            "available": false,
+            "executable": "",
+            "kernel_id": "lean",
+            "metadata": {
+              "explicit_absence": true,
+              "requested_module_id": "lean4-wasm"
+            },
+            "module_id": "lean4-wasm",
+            "plane": "browser",
+            "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+            "schema_version": "kernel-capability-state/v1",
+            "version": ""
+          },
+          "interface_version": "dual-plane-kernel-capability/v1",
+          "kernel_id": "lean",
+          "native": {
+            "availability": "available",
+            "available": true,
+            "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "kernel_id": "lean",
+            "metadata": {
+              "configured_version_label": "4.34.1",
+              "native_version_observed": false
+            },
+            "module_id": "",
+            "plane": "native",
+            "reason": "",
+            "schema_version": "kernel-capability-state/v1",
+            "version": ""
+          },
+          "native_available": true,
+          "wasm": {
+            "availability": "unavailable",
+            "available": false,
+            "executable": "",
+            "kernel_id": "lean",
+            "metadata": {
+              "explicit_absence": true,
+              "requested_module_id": "lean4-wasm"
+            },
+            "module_id": "lean4-wasm",
+            "plane": "wasm",
+            "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+            "schema_version": "kernel-capability-state/v1",
+            "version": ""
+          },
+          "wasm_available": false
+        },
+        "interface_version": "LeanKernelBackend@1",
+        "receipt": {
+          "accepted": true,
+          "approved_axioms": [],
+          "approved_imports": [
+            "Init",
+            "Init.Classical",
+            "Init.Prelude"
+          ],
+          "authority_disposition": "reject",
+          "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+          "axiom_report": {
+            "axioms": [],
+            "contains_sorry_ax": false,
+            "declaration": "_ipfs_expected_obligation_38fe5fbf5354b782717b02a98bed9cf74490f8a4e397bc3a08d214b1610de01d",
+            "report_text": "'_ipfs_expected_obligation_38fe5fbf5354b782717b02a98bed9cf74490f8a4e397bc3a08d214b1610de01d' does not depend on any axioms",
+            "schema_version": "lean-axiom-report/v2",
+            "source_column": 0,
+            "source_line": 10,
+            "source_path": "Main.lean"
+          },
+          "compiled_source_digest": "3ced334c49e5b80406cc81cdedc0cc3fea027dd87b4f3b722d2899c2b672050e",
+          "diagnostics": [],
+          "expected_obligation_declaration": "_ipfs_expected_obligation_38fe5fbf5354b782717b02a98bed9cf74490f8a4e397bc3a08d214b1610de01d",
+          "expected_proposition": "True",
+          "expected_proposition_checked": true,
+          "expected_proposition_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+          "generated_proof": "theorem wanted : True := by trivial\nnamespace Law\ntheorem wanted : False \u2192 False := fun h => h\nend Law",
+          "generated_proof_digest": "fba27573b5015b381e68509abfe349ecc2348c01a8e8e616dbaee73ac8895b00",
+          "imports": [],
+          "native_identity": {
+            "actual_version": "4.34.1",
+            "executable_bytes": 13824,
+            "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+            "executable_stat_after": {
+              "ctime_ns": 1790376166615972340,
+              "device": 66306,
+              "inode": 6721251,
+              "mtime_ns": 1790273308000000000,
+              "size": 13824
+            },
+            "executable_stat_before": {
+              "ctime_ns": 1790376166615972340,
+              "device": 66306,
+              "inode": 6721251,
+              "mtime_ns": 1790273308000000000,
+              "size": 13824
+            },
+            "library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+            "observation_kind": "bounded_native_version_probe",
+            "resolved_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "schema_version": "lean-native-identity/v1",
+            "version_command": [
+              "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+              "--version"
+            ],
+            "version_returncode": 0,
+            "version_stderr": "",
+            "version_stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+          },
+          "native_identity_checked_after_compile": true,
+          "plane": "native",
+          "receipt_id": "lean-kernel-receipt:8449bdbdc4626eb0e08433b40513cd66a99d492961dc468328402500ceff12bf",
+          "request_digest": "e844ea6d4b0007b63ce06ab17423fc38e97030baa7641a56060856be7ff07d11",
+          "schema_version": "lean-kernel-receipt/v3",
+          "source_binding": {
+            "request_digest": "e844ea6d4b0007b63ce06ab17423fc38e97030baa7641a56060856be7ff07d11",
+            "schema_version": "lean-source-binding/v1",
+            "source_digest": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b",
+            "source_format": "lean4"
+          },
+          "source_tree": {
+            "files": {
+              "Main.lean": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b"
+            },
+            "primary_path": "Main.lean",
+            "root_digest": "7cdd62e9adf622e9b7835a8cbaed7444b5ff175a9c0cb7d8f3267601d0f77fac",
+            "tree_id": "source-tree:7cdd62e9adf622e9b7835a8c"
+          },
+          "submitted_source": "theorem wanted : True := by trivial\nnamespace Law\ntheorem wanted : False \u2192 False := fun h => h\nend Law\n",
+          "theorem_digest": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b",
+          "theorem_name": "wanted",
+          "toolchain": {
+            "command_template": "{lean} -s65536 -j1 --json {source_file}",
+            "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "kernel_id": "lean",
+            "metadata": {
+              "approved_axioms": [],
+              "approved_imports": [
+                "Init",
+                "Init.Classical",
+                "Init.Prelude"
+              ],
+              "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+              "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+              "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+              "native_resource_profile": {
+                "address_space_bytes": 4294967296,
+                "child_process_slots": 1,
+                "cpu_slots": 1,
+                "environment": {
+                  "LEAN_MAIN_USE_THREAD": "0",
+                  "LEAN_NUM_THREADS": "1",
+                  "LEAN_STACK_SIZE_KB": "65536"
+                },
+                "resident_memory_bytes": 536870912,
+                "resident_memory_enforcement": "sampled_process_tree_rss"
+              },
+              "verification_profile": "lean-kernel-verification/v2"
+            },
+            "module_id": "",
+            "plane": "native",
+            "toolchain_id": "toolchain:lean:native:4.34.1",
+            "version": "4.34.1"
+          },
+          "translation": null
+        },
+        "request_digest": "e844ea6d4b0007b63ce06ab17423fc38e97030baa7641a56060856be7ff07d11",
+        "result": {
+          "assumptions": [
+            "assumption:reviewed"
+          ],
+          "authority": "theorem",
+          "backend_id": "lean",
+          "backend_version": "4.34.1",
+          "bounds": {
+            "max_memory_bytes": 536870912,
+            "max_output_bytes": 65536,
+            "max_steps": 100,
+            "timeout_ms": 30000
+          },
+          "diagnostics": [],
+          "metadata": {
+            "adapter_interface": "LeanKernelBackend@1",
+            "capability": {
+              "browser": {
+                "availability": "unavailable",
+                "available": false,
+                "executable": "",
+                "kernel_id": "lean",
+                "metadata": {
+                  "explicit_absence": true,
+                  "requested_module_id": "lean4-wasm"
+                },
+                "module_id": "lean4-wasm",
+                "plane": "browser",
+                "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+                "schema_version": "kernel-capability-state/v1",
+                "version": ""
+              },
+              "interface_version": "dual-plane-kernel-capability/v1",
+              "kernel_id": "lean",
+              "native": {
+                "availability": "available",
+                "available": true,
+                "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+                "kernel_id": "lean",
+                "metadata": {
+                  "configured_version_label": "4.34.1",
+                  "native_version_observed": false
+                },
+                "module_id": "",
+                "plane": "native",
+                "reason": "",
+                "schema_version": "kernel-capability-state/v1",
+                "version": ""
+              },
+              "native_available": true,
+              "wasm": {
+                "availability": "unavailable",
+                "available": false,
+                "executable": "",
+                "kernel_id": "lean",
+                "metadata": {
+                  "explicit_absence": true,
+                  "requested_module_id": "lean4-wasm"
+                },
+                "module_id": "lean4-wasm",
+                "plane": "wasm",
+                "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+                "schema_version": "kernel-capability-state/v1",
+                "version": ""
+              },
+              "wasm_available": false
+            },
+            "kernel_receipt": {
+              "accepted": true,
+              "approved_axioms": [],
+              "approved_imports": [
+                "Init",
+                "Init.Classical",
+                "Init.Prelude"
+              ],
+              "authority_disposition": "reject",
+              "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+              "axiom_report": {
+                "axioms": [],
+                "contains_sorry_ax": false,
+                "declaration": "_ipfs_expected_obligation_38fe5fbf5354b782717b02a98bed9cf74490f8a4e397bc3a08d214b1610de01d",
+                "report_text": "'_ipfs_expected_obligation_38fe5fbf5354b782717b02a98bed9cf74490f8a4e397bc3a08d214b1610de01d' does not depend on any axioms",
+                "schema_version": "lean-axiom-report/v2",
+                "source_column": 0,
+                "source_line": 10,
+                "source_path": "Main.lean"
+              },
+              "compiled_source_digest": "3ced334c49e5b80406cc81cdedc0cc3fea027dd87b4f3b722d2899c2b672050e",
+              "diagnostics": [],
+              "expected_obligation_declaration": "_ipfs_expected_obligation_38fe5fbf5354b782717b02a98bed9cf74490f8a4e397bc3a08d214b1610de01d",
+              "expected_proposition": "True",
+              "expected_proposition_checked": true,
+              "expected_proposition_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+              "generated_proof": "theorem wanted : True := by trivial\nnamespace Law\ntheorem wanted : False \u2192 False := fun h => h\nend Law",
+              "generated_proof_digest": "fba27573b5015b381e68509abfe349ecc2348c01a8e8e616dbaee73ac8895b00",
+              "imports": [],
+              "native_identity": {
+                "actual_version": "4.34.1",
+                "executable_bytes": 13824,
+                "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+                "executable_stat_after": {
+                  "ctime_ns": 1790376166615972340,
+                  "device": 66306,
+                  "inode": 6721251,
+                  "mtime_ns": 1790273308000000000,
+                  "size": 13824
+                },
+                "executable_stat_before": {
+                  "ctime_ns": 1790376166615972340,
+                  "device": 66306,
+                  "inode": 6721251,
+                  "mtime_ns": 1790273308000000000,
+                  "size": 13824
+                },
+                "library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+                "observation_kind": "bounded_native_version_probe",
+                "resolved_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+                "schema_version": "lean-native-identity/v1",
+                "version_command": [
+                  "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+                  "--version"
+                ],
+                "version_returncode": 0,
+                "version_stderr": "",
+                "version_stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+              },
+              "native_identity_checked_after_compile": true,
+              "plane": "native",
+              "receipt_id": "lean-kernel-receipt:8449bdbdc4626eb0e08433b40513cd66a99d492961dc468328402500ceff12bf",
+              "request_digest": "e844ea6d4b0007b63ce06ab17423fc38e97030baa7641a56060856be7ff07d11",
+              "schema_version": "lean-kernel-receipt/v3",
+              "source_binding": {
+                "request_digest": "e844ea6d4b0007b63ce06ab17423fc38e97030baa7641a56060856be7ff07d11",
+                "schema_version": "lean-source-binding/v1",
+                "source_digest": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b",
+                "source_format": "lean4"
+              },
+              "source_tree": {
+                "files": {
+                  "Main.lean": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b"
+                },
+                "primary_path": "Main.lean",
+                "root_digest": "7cdd62e9adf622e9b7835a8cbaed7444b5ff175a9c0cb7d8f3267601d0f77fac",
+                "tree_id": "source-tree:7cdd62e9adf622e9b7835a8c"
+              },
+              "submitted_source": "theorem wanted : True := by trivial\nnamespace Law\ntheorem wanted : False \u2192 False := fun h => h\nend Law\n",
+              "theorem_digest": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b",
+              "theorem_name": "wanted",
+              "toolchain": {
+                "command_template": "{lean} -s65536 -j1 --json {source_file}",
+                "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+                "kernel_id": "lean",
+                "metadata": {
+                  "approved_axioms": [],
+                  "approved_imports": [
+                    "Init",
+                    "Init.Classical",
+                    "Init.Prelude"
+                  ],
+                  "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+                  "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+                  "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+                  "native_resource_profile": {
+                    "address_space_bytes": 4294967296,
+                    "child_process_slots": 1,
+                    "cpu_slots": 1,
+                    "environment": {
+                      "LEAN_MAIN_USE_THREAD": "0",
+                      "LEAN_NUM_THREADS": "1",
+                      "LEAN_STACK_SIZE_KB": "65536"
+                    },
+                    "resident_memory_bytes": 536870912,
+                    "resident_memory_enforcement": "sampled_process_tree_rss"
+                  },
+                  "verification_profile": "lean-kernel-verification/v2"
+                },
+                "module_id": "",
+                "plane": "native",
+                "toolchain_id": "toolchain:lean:native:4.34.1",
+                "version": "4.34.1"
+              },
+              "translation": null
+            },
+            "source_binding": {
+              "request_digest": "e844ea6d4b0007b63ce06ab17423fc38e97030baa7641a56060856be7ff07d11",
+              "schema_version": "lean-source-binding/v1",
+              "source_digest": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b",
+              "source_format": "lean4"
+            }
+          },
+          "reason": "",
+          "result_id": "result:lean:e844ea6d4b0007b63ce06ab1",
+          "result_type": "theorem",
+          "schema_version": "typed-backend-result/v1",
+          "status": "proved",
+          "translation_ceiling": "independently_checkable",
+          "usage": {
+            "elapsed_ms": 301,
+            "output_bytes": 423,
+            "peak_memory_bytes": 0,
+            "steps": 0
+          },
+          "witness": {
+            "axiom_report": {
+              "axioms": [],
+              "contains_sorry_ax": false,
+              "declaration": "_ipfs_expected_obligation_38fe5fbf5354b782717b02a98bed9cf74490f8a4e397bc3a08d214b1610de01d",
+              "report_text": "'_ipfs_expected_obligation_38fe5fbf5354b782717b02a98bed9cf74490f8a4e397bc3a08d214b1610de01d' does not depend on any axioms",
+              "schema_version": "lean-axiom-report/v2",
+              "source_column": 0,
+              "source_line": 10,
+              "source_path": "Main.lean"
+            },
+            "generated_proof_digest": "fba27573b5015b381e68509abfe349ecc2348c01a8e8e616dbaee73ac8895b00",
+            "receipt_id": "lean-kernel-receipt:8449bdbdc4626eb0e08433b40513cd66a99d492961dc468328402500ceff12bf",
+            "source_tree": {
+              "files": {
+                "Main.lean": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b"
+              },
+              "primary_path": "Main.lean",
+              "root_digest": "7cdd62e9adf622e9b7835a8cbaed7444b5ff175a9c0cb7d8f3267601d0f77fac",
+              "tree_id": "source-tree:7cdd62e9adf622e9b7835a8c"
+            },
+            "theorem_digest": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b",
+            "theorem_name": "wanted",
+            "toolchain": {
+              "command_template": "{lean} -s65536 -j1 --json {source_file}",
+              "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+              "kernel_id": "lean",
+              "metadata": {
+                "approved_axioms": [],
+                "approved_imports": [
+                  "Init",
+                  "Init.Classical",
+                  "Init.Prelude"
+                ],
+                "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+                "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+                "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+                "native_resource_profile": {
+                  "address_space_bytes": 4294967296,
+                  "child_process_slots": 1,
+                  "cpu_slots": 1,
+                  "environment": {
+                    "LEAN_MAIN_USE_THREAD": "0",
+                    "LEAN_NUM_THREADS": "1",
+                    "LEAN_STACK_SIZE_KB": "65536"
+                  },
+                  "resident_memory_bytes": 536870912,
+                  "resident_memory_enforcement": "sampled_process_tree_rss"
+                },
+                "verification_profile": "lean-kernel-verification/v2"
+              },
+              "module_id": "",
+              "plane": "native",
+              "toolchain_id": "toolchain:lean:native:4.34.1",
+              "version": "4.34.1"
+            },
+            "translation": null
+          }
+        },
+        "source_binding": {
+          "request_digest": "e844ea6d4b0007b63ce06ab17423fc38e97030baa7641a56060856be7ff07d11",
+          "schema_version": "lean-source-binding/v1",
+          "source_digest": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b",
+          "source_format": "lean4"
+        }
+      }
+    },
+    {
+      "case": "namespaced_wrong_type",
+      "outcome": {
+        "capability": {
+          "browser": {
+            "availability": "unavailable",
+            "available": false,
+            "executable": "",
+            "kernel_id": "lean",
+            "metadata": {
+              "explicit_absence": true,
+              "requested_module_id": "lean4-wasm"
+            },
+            "module_id": "lean4-wasm",
+            "plane": "browser",
+            "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+            "schema_version": "kernel-capability-state/v1",
+            "version": ""
+          },
+          "interface_version": "dual-plane-kernel-capability/v1",
+          "kernel_id": "lean",
+          "native": {
+            "availability": "available",
+            "available": true,
+            "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "kernel_id": "lean",
+            "metadata": {
+              "configured_version_label": "4.34.1",
+              "native_version_observed": false
+            },
+            "module_id": "",
+            "plane": "native",
+            "reason": "",
+            "schema_version": "kernel-capability-state/v1",
+            "version": ""
+          },
+          "native_available": true,
+          "wasm": {
+            "availability": "unavailable",
+            "available": false,
+            "executable": "",
+            "kernel_id": "lean",
+            "metadata": {
+              "explicit_absence": true,
+              "requested_module_id": "lean4-wasm"
+            },
+            "module_id": "lean4-wasm",
+            "plane": "wasm",
+            "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+            "schema_version": "kernel-capability-state/v1",
+            "version": ""
+          },
+          "wasm_available": false
+        },
+        "interface_version": "LeanKernelBackend@1",
+        "receipt": {
+          "accepted": false,
+          "approved_axioms": [],
+          "approved_imports": [
+            "Init",
+            "Init.Classical",
+            "Init.Prelude"
+          ],
+          "authority_disposition": "reject",
+          "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+          "axiom_report": null,
+          "compiled_source_digest": "69a03012d64368b35a086f444dbd7ace9ed932909deaee9ea11612c4e567e751",
+          "diagnostics": [
+            "lean reported error diagnostics: Type mismatch\n Law.wanted\nhas type\n False \u2192 False\nbut is expected to have type\n True"
+          ],
+          "expected_obligation_declaration": "_ipfs_expected_obligation_b6a407a8075451a3040b103c5da2c04dd1e1ef4fce0bdc45db5ccbe17777a304",
+          "expected_proposition": "True",
+          "expected_proposition_checked": false,
+          "expected_proposition_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+          "generated_proof": "theorem wanted : False \u2192 False := fun h => h\nend Law",
+          "generated_proof_digest": "9757fcdf3a4781a94ca84223c2961ac0b7f7207df9f601ae8b66db129784b7f4",
+          "imports": [],
+          "native_identity": {
+            "actual_version": "4.34.1",
+            "executable_bytes": 13824,
+            "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+            "executable_stat_after": {
+              "ctime_ns": 1790376166615972340,
+              "device": 66306,
+              "inode": 6721251,
+              "mtime_ns": 1790273308000000000,
+              "size": 13824
+            },
+            "executable_stat_before": {
+              "ctime_ns": 1790376166615972340,
+              "device": 66306,
+              "inode": 6721251,
+              "mtime_ns": 1790273308000000000,
+              "size": 13824
+            },
+            "library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+            "observation_kind": "bounded_native_version_probe",
+            "resolved_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "schema_version": "lean-native-identity/v1",
+            "version_command": [
+              "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+              "--version"
+            ],
+            "version_returncode": 0,
+            "version_stderr": "",
+            "version_stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+          },
+          "native_identity_checked_after_compile": true,
+          "plane": "native",
+          "receipt_id": "lean-kernel-receipt:fb02a6a0240d759eb553c81462d0778a700854bf52ac4555b34e0d47178ee191",
+          "request_digest": "b98202399a7af706f09f61ae3af534f6c1d0ed0d4de82f86ab778c027c2b28b5",
+          "schema_version": "lean-kernel-receipt/v3",
+          "source_binding": {
+            "request_digest": "b98202399a7af706f09f61ae3af534f6c1d0ed0d4de82f86ab778c027c2b28b5",
+            "schema_version": "lean-source-binding/v1",
+            "source_digest": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b",
+            "source_format": "lean4"
+          },
+          "source_tree": {
+            "files": {
+              "Main.lean": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b"
+            },
+            "primary_path": "Main.lean",
+            "root_digest": "7cdd62e9adf622e9b7835a8cbaed7444b5ff175a9c0cb7d8f3267601d0f77fac",
+            "tree_id": "source-tree:7cdd62e9adf622e9b7835a8c"
+          },
+          "submitted_source": "theorem wanted : True := by trivial\nnamespace Law\ntheorem wanted : False \u2192 False := fun h => h\nend Law\n",
+          "theorem_digest": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b",
+          "theorem_name": "Law.wanted",
+          "toolchain": {
+            "command_template": "{lean} -s65536 -j1 --json {source_file}",
+            "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "kernel_id": "lean",
+            "metadata": {
+              "approved_axioms": [],
+              "approved_imports": [
+                "Init",
+                "Init.Classical",
+                "Init.Prelude"
+              ],
+              "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+              "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+              "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+              "native_resource_profile": {
+                "address_space_bytes": 4294967296,
+                "child_process_slots": 1,
+                "cpu_slots": 1,
+                "environment": {
+                  "LEAN_MAIN_USE_THREAD": "0",
+                  "LEAN_NUM_THREADS": "1",
+                  "LEAN_STACK_SIZE_KB": "65536"
+                },
+                "resident_memory_bytes": 536870912,
+                "resident_memory_enforcement": "sampled_process_tree_rss"
+              },
+              "verification_profile": "lean-kernel-verification/v2"
+            },
+            "module_id": "",
+            "plane": "native",
+            "toolchain_id": "toolchain:lean:native:4.34.1",
+            "version": "4.34.1"
+          },
+          "translation": null
+        },
+        "request_digest": "b98202399a7af706f09f61ae3af534f6c1d0ed0d4de82f86ab778c027c2b28b5",
+        "result": {
+          "assumptions": [
+            "assumption:reviewed"
+          ],
+          "authority": "theorem",
+          "backend_id": "lean",
+          "backend_version": "4.34.1",
+          "bounds": {
+            "max_memory_bytes": 536870912,
+            "max_output_bytes": 65536,
+            "max_steps": 100,
+            "timeout_ms": 30000
+          },
+          "diagnostics": [
+            "lean reported error diagnostics: Type mismatch\n Law.wanted\nhas type\n False \u2192 False\nbut is expected to have type\n True"
+          ],
+          "metadata": {
+            "adapter_interface": "LeanKernelBackend@1",
+            "capability": {
+              "browser": {
+                "availability": "unavailable",
+                "available": false,
+                "executable": "",
+                "kernel_id": "lean",
+                "metadata": {
+                  "explicit_absence": true,
+                  "requested_module_id": "lean4-wasm"
+                },
+                "module_id": "lean4-wasm",
+                "plane": "browser",
+                "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+                "schema_version": "kernel-capability-state/v1",
+                "version": ""
+              },
+              "interface_version": "dual-plane-kernel-capability/v1",
+              "kernel_id": "lean",
+              "native": {
+                "availability": "available",
+                "available": true,
+                "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+                "kernel_id": "lean",
+                "metadata": {
+                  "configured_version_label": "4.34.1",
+                  "native_version_observed": false
+                },
+                "module_id": "",
+                "plane": "native",
+                "reason": "",
+                "schema_version": "kernel-capability-state/v1",
+                "version": ""
+              },
+              "native_available": true,
+              "wasm": {
+                "availability": "unavailable",
+                "available": false,
+                "executable": "",
+                "kernel_id": "lean",
+                "metadata": {
+                  "explicit_absence": true,
+                  "requested_module_id": "lean4-wasm"
+                },
+                "module_id": "lean4-wasm",
+                "plane": "wasm",
+                "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+                "schema_version": "kernel-capability-state/v1",
+                "version": ""
+              },
+              "wasm_available": false
+            },
+            "kernel_receipt": {
+              "accepted": false,
+              "approved_axioms": [],
+              "approved_imports": [
+                "Init",
+                "Init.Classical",
+                "Init.Prelude"
+              ],
+              "authority_disposition": "reject",
+              "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+              "axiom_report": null,
+              "compiled_source_digest": "69a03012d64368b35a086f444dbd7ace9ed932909deaee9ea11612c4e567e751",
+              "diagnostics": [
+                "lean reported error diagnostics: Type mismatch\n Law.wanted\nhas type\n False \u2192 False\nbut is expected to have type\n True"
+              ],
+              "expected_obligation_declaration": "_ipfs_expected_obligation_b6a407a8075451a3040b103c5da2c04dd1e1ef4fce0bdc45db5ccbe17777a304",
+              "expected_proposition": "True",
+              "expected_proposition_checked": false,
+              "expected_proposition_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+              "generated_proof": "theorem wanted : False \u2192 False := fun h => h\nend Law",
+              "generated_proof_digest": "9757fcdf3a4781a94ca84223c2961ac0b7f7207df9f601ae8b66db129784b7f4",
+              "imports": [],
+              "native_identity": {
+                "actual_version": "4.34.1",
+                "executable_bytes": 13824,
+                "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+                "executable_stat_after": {
+                  "ctime_ns": 1790376166615972340,
+                  "device": 66306,
+                  "inode": 6721251,
+                  "mtime_ns": 1790273308000000000,
+                  "size": 13824
+                },
+                "executable_stat_before": {
+                  "ctime_ns": 1790376166615972340,
+                  "device": 66306,
+                  "inode": 6721251,
+                  "mtime_ns": 1790273308000000000,
+                  "size": 13824
+                },
+                "library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+                "observation_kind": "bounded_native_version_probe",
+                "resolved_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+                "schema_version": "lean-native-identity/v1",
+                "version_command": [
+                  "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+                  "--version"
+                ],
+                "version_returncode": 0,
+                "version_stderr": "",
+                "version_stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+              },
+              "native_identity_checked_after_compile": true,
+              "plane": "native",
+              "receipt_id": "lean-kernel-receipt:fb02a6a0240d759eb553c81462d0778a700854bf52ac4555b34e0d47178ee191",
+              "request_digest": "b98202399a7af706f09f61ae3af534f6c1d0ed0d4de82f86ab778c027c2b28b5",
+              "schema_version": "lean-kernel-receipt/v3",
+              "source_binding": {
+                "request_digest": "b98202399a7af706f09f61ae3af534f6c1d0ed0d4de82f86ab778c027c2b28b5",
+                "schema_version": "lean-source-binding/v1",
+                "source_digest": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b",
+                "source_format": "lean4"
+              },
+              "source_tree": {
+                "files": {
+                  "Main.lean": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b"
+                },
+                "primary_path": "Main.lean",
+                "root_digest": "7cdd62e9adf622e9b7835a8cbaed7444b5ff175a9c0cb7d8f3267601d0f77fac",
+                "tree_id": "source-tree:7cdd62e9adf622e9b7835a8c"
+              },
+              "submitted_source": "theorem wanted : True := by trivial\nnamespace Law\ntheorem wanted : False \u2192 False := fun h => h\nend Law\n",
+              "theorem_digest": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b",
+              "theorem_name": "Law.wanted",
+              "toolchain": {
+                "command_template": "{lean} -s65536 -j1 --json {source_file}",
+                "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+                "kernel_id": "lean",
+                "metadata": {
+                  "approved_axioms": [],
+                  "approved_imports": [
+                    "Init",
+                    "Init.Classical",
+                    "Init.Prelude"
+                  ],
+                  "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+                  "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+                  "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+                  "native_resource_profile": {
+                    "address_space_bytes": 4294967296,
+                    "child_process_slots": 1,
+                    "cpu_slots": 1,
+                    "environment": {
+                      "LEAN_MAIN_USE_THREAD": "0",
+                      "LEAN_NUM_THREADS": "1",
+                      "LEAN_STACK_SIZE_KB": "65536"
+                    },
+                    "resident_memory_bytes": 536870912,
+                    "resident_memory_enforcement": "sampled_process_tree_rss"
+                  },
+                  "verification_profile": "lean-kernel-verification/v2"
+                },
+                "module_id": "",
+                "plane": "native",
+                "toolchain_id": "toolchain:lean:native:4.34.1",
+                "version": "4.34.1"
+              },
+              "translation": null
+            },
+            "source_binding": {
+              "request_digest": "b98202399a7af706f09f61ae3af534f6c1d0ed0d4de82f86ab778c027c2b28b5",
+              "schema_version": "lean-source-binding/v1",
+              "source_digest": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b",
+              "source_format": "lean4"
+            }
+          },
+          "reason": "lean reported error diagnostics: Type mismatch\n Law.wanted\nhas type\n False \u2192 False\nbut is expected to have type\n True",
+          "result_id": "result:lean:b98202399a7af706f09f61ae",
+          "result_type": "theorem",
+          "schema_version": "typed-backend-result/v1",
+          "status": "error",
+          "translation_ceiling": "bounded",
+          "usage": {
+            "elapsed_ms": 227,
+            "output_bytes": 599,
+            "peak_memory_bytes": 0,
+            "steps": 0
+          },
+          "witness": {
+            "axiom_report": null,
+            "generated_proof_digest": "9757fcdf3a4781a94ca84223c2961ac0b7f7207df9f601ae8b66db129784b7f4",
+            "receipt_id": "lean-kernel-receipt:fb02a6a0240d759eb553c81462d0778a700854bf52ac4555b34e0d47178ee191",
+            "source_tree": {
+              "files": {
+                "Main.lean": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b"
+              },
+              "primary_path": "Main.lean",
+              "root_digest": "7cdd62e9adf622e9b7835a8cbaed7444b5ff175a9c0cb7d8f3267601d0f77fac",
+              "tree_id": "source-tree:7cdd62e9adf622e9b7835a8c"
+            },
+            "theorem_digest": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b",
+            "theorem_name": "Law.wanted",
+            "toolchain": {
+              "command_template": "{lean} -s65536 -j1 --json {source_file}",
+              "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+              "kernel_id": "lean",
+              "metadata": {
+                "approved_axioms": [],
+                "approved_imports": [
+                  "Init",
+                  "Init.Classical",
+                  "Init.Prelude"
+                ],
+                "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+                "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+                "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+                "native_resource_profile": {
+                  "address_space_bytes": 4294967296,
+                  "child_process_slots": 1,
+                  "cpu_slots": 1,
+                  "environment": {
+                    "LEAN_MAIN_USE_THREAD": "0",
+                    "LEAN_NUM_THREADS": "1",
+                    "LEAN_STACK_SIZE_KB": "65536"
+                  },
+                  "resident_memory_bytes": 536870912,
+                  "resident_memory_enforcement": "sampled_process_tree_rss"
+                },
+                "verification_profile": "lean-kernel-verification/v2"
+              },
+              "module_id": "",
+              "plane": "native",
+              "toolchain_id": "toolchain:lean:native:4.34.1",
+              "version": "4.34.1"
+            },
+            "translation": null
+          }
+        },
+        "source_binding": {
+          "request_digest": "b98202399a7af706f09f61ae3af534f6c1d0ed0d4de82f86ab778c027c2b28b5",
+          "schema_version": "lean-source-binding/v1",
+          "source_digest": "4b3c19e4f71f89df4702ed4fb97e0ef6116da4cd6ba927784e0972da9c93255b",
+          "source_format": "lean4"
+        }
+      }
+    }
+  ],
+  "native_Lean_executed": true,
+  "schema": "native-lean-v3-namespaced-declaration-check/v1",
+  "statutory_or_source_semantic_admission": false,
+  "toolchain_version": "4.34.1"
+}

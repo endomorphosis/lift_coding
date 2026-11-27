@@ -1,0 +1,37 @@
+"""Reuse the original elapsed verifier for the existing preparation stop owner."""
+
+import ast
+from difflib import unified_diff
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+BASE = HERE.parent / "decoder-training-teacher-pilot-first-use-wall-private-v01-UTld3qHN" / "final_physical_union.py"
+PIN = "ccb4f816f07211f380d97a09cee2181da359882b17698f881deadc65ea2cc825"
+
+
+def replace(body, old, new):
+    assert body.count(old) == 1, old
+    return body.replace(old, new, 1)
+
+
+before = BASE.read_bytes()
+assert sha256(before).hexdigest() == PIN
+prior = before.decode()
+source = replace(prior,
+    "def _teacher_pilot_first_use_wall(ledger, binding_pin, witness, expected, seen, reserved_pins, approve):\n",
+    '''def _teacher_pilot_first_use_wall(ledger, binding_pin, witness, expected, seen, reserved_pins, approve, *,
+        allow_empty=False, scope="whole_pilot_opening_through_independently_authenticated_terminal_evidence"):
+''')
+source = replace(source, "    require(bool(original_windows)\n", "    require((allow_empty or bool(original_windows))\n")
+source = replace(source, '            "scope": "whole_pilot_opening_through_independently_authenticated_terminal_evidence"}\n',
+                 '            "scope": scope}\n')
+source += "\n\n" + (HERE / "preparation_stop_wall.py.IN").read_text()
+names = {getattr(left, "name", None) for left, right in zip(ast.parse(prior).body, ast.parse(source).body[:-2], strict=True)
+         if ast.dump(left) != ast.dump(right)}
+assert names == {"_teacher_pilot_first_use_wall"}
+(HERE / "final_physical_union.py").write_text(source)
+diff = unified_diff(prior.splitlines(keepends=True), source.splitlines(keepends=True),
+                    "prior/final_physical_union.py", "candidate/final_physical_union.py")
+(HERE / "final_physical_union.diff").write_text("".join(diff))
+print(len(source.encode()), sha256(source.encode()).hexdigest())

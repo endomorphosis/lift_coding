@@ -1,0 +1,109 @@
+{
+  "schema": "existing-v237-Phase7-checked-feedback-ordinary26-INERT/v1",
+  "controls": {
+    "factory": {
+      "path": "/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/existing-ordinary26-factory.INERT.py.DATA",
+      "bytes": 3076,
+      "sha256": "66589f791b3938b530b9ada25447eacee081d476905f4590960858b0aa208ae0"
+    },
+    "bootstrap": {
+      "path": "/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/existing-ordinary26-bootstrap.INERT.py.DATA",
+      "bytes": 40117,
+      "sha256": "524de0445122a919938698815c099bd17b06cfd7d7c4266cbb97696eb1ed6a37"
+    },
+    "operator": {
+      "path": "/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/existing-ordinary26-operator.INERT.py.DATA",
+      "bytes": 55765,
+      "sha256": "75423b77817cc105a5c0da9fb6780c66036fc6e4f59c6572ea7724bcdd6ae650"
+    }
+  },
+  "selector_roster": {
+    "path": "/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/exact-13-function-26-case-static-roster.json",
+    "bytes": 6887,
+    "sha256": "243e5537dce417ee0097fb78d5dbdde5dd8cf72a9b638b51d61e8b1ab1d8a4dc"
+  },
+  "role_plan": {
+    "path": "/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/ordinary26-candidate-and-guarded-role-map-INERT-v02.json",
+    "bytes": 31940,
+    "sha256": "a06d4ead1f7518d8c5f11d7f6e6e6fffbad1636819286ff080259e3a5441cd8f"
+  },
+  "private_nofit_18_reference": {
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-final-maintained-checked-branches.json",
+    "bytes": 36484,
+    "sha256": "7533e6804838f2efb9ad4d60a48f28b528129d292bed25e68fbc306704d5621b"
+  },
+  "existing_v237_inert_ancestors": {
+    "operator": {
+      "path": "/tmp/Phase7-typed-feedback72-existing-modern-ordinary-INERT-v228-_4x1iyk0/same-existing-P7-typed-feedback72-operator.INERT.py.DATA",
+      "bytes": 54247,
+      "sha256": "0f96d70b7381c3d313472dd6c7dc2620836debf3d3e53c2f21b25b0c7004d6fb"
+    },
+    "bootstrap": {
+      "path": "/tmp/Phase7-typed-feedback72-existing-modern-ordinary-INERT-v228-_4x1iyk0/same-existing-P7-typed-feedback72-bootstrap.INERT.py.DATA",
+      "bytes": 39779,
+      "sha256": "6e8727b0faf9213455f6fad26fe06e5f8552f2773aaad93edf787faf9ea9aa8e"
+    },
+    "factory": {
+      "path": "/tmp/Phase7-typed-feedback72-existing-modern-ordinary-INERT-v228-_4x1iyk0/same-existing-P7-typed-feedback72-factory.INERT.py.DATA",
+      "bytes": 3062,
+      "sha256": "7807307fdd3b2303af39acb21ad491999647a3258527f3fcf2edfd9c032986ed"
+    }
+  },
+  "existing_v237_actual_qualification": {
+    "path": "/tmp/Root-P7-typed-feedback72-modal-closed-selected-v237-llscaxax/Root-P7-ordinary72-qualified-Source-resource-closed-small-v237.json",
+    "bytes": 6488,
+    "sha256": "f1ca7ff8b21f304d679f6e7397af6c0773a8696931ca4d6791e3dc36e12f7aba"
+  },
+  "existing_v237_actual_operator": {
+    "path": "/tmp/Root-P7-typed-feedback72-modal-closed-selected-v237-llscaxax/Root-selected-operator.py",
+    "bytes": 81547,
+    "sha256": "371661baed40c54f8bc6ec4a66464050be0b32d39b494c71afb6c129d4ca3938"
+  },
+  "finalized_cleanup_lineage_from_actual_lean92_engine": {
+    "path": "/tmp/P1-Lean-live-ordinary92-controls-INERT-31cgkog4/existing-ordinary92-operator.INERT.py.DATA",
+    "bytes": 54713,
+    "sha256": "0155eec999b5c6c1365f194ed7813941c05d2cf84c772ee6007d3afb2944ab77"
+  },
+  "actual_python": "/home/barberb/.local/bin/python",
+  "original_v237_resource_limits": {
+    "collect_wall_seconds": 120,
+    "collect_cpu_seconds": 110,
+    "run_wall_seconds": 600,
+    "run_cpu_seconds": 540,
+    "cpu_slots": 1,
+    "child_process_slots": 1,
+    "address_space_bytes": 8589934592,
+    "resident_memory_bytes": 4294967296,
+    "max_input_bytes": 4194304,
+    "max_output_bytes": 16777216,
+    "max_workspace_bytes": 67108864
+  },
+  "runtime_scope": {
+    "controlled_head_updates": true,
+    "local_torch_import_possible": true,
+    "actual_external_or_epoch_model_fit": false,
+    "actual_Native_or_SQL_selected": false,
+    "workspace_temp_only": true
+  },
+  "expected_outer_python_counts_are_plan": [
+    1614,
+    1601
+  ],
+  "cases": 26,
+  "functions": 13,
+  "all_actual_bindings": null,
+  "selected_root_clock": null,
+  "selected_runtime": null,
+  "ordinary_result": null,
+  "actual_Git_Source_or_runtime_effects": false,
+  "superseded_reference": {
+    "path": "/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/READY-existing-v237-Phase7-ordinary26-INERT.json",
+    "bytes": 4203,
+    "sha256": "7d126454ac1cb53ef03be3e76431279186efa2725d1a6ab978d1755ce6b780fe"
+  },
+  "observed_local_freeze_reference_only": {
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-isolated-Phase7-exact-nine-local-freeze.json",
+    "bytes": 17276,
+    "sha256": "63b1bc7bc60db45147d2bc0f0d3a3fab908b19fa17f530d00ced408f5fa88da3"
+  }
+}

@@ -1,0 +1,77 @@
+"""Compose the detached A0 rollover against the exact prior verifier."""
+from hashlib import sha256
+from pathlib import Path
+import ast
+import difflib
+
+HERE = Path(__file__).resolve().parent
+PRIOR = Path('/tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/verify_rebind_capture.py')
+raw = PRIOR.read_bytes()
+assert (len(raw), sha256(raw).hexdigest()) == (
+    137453, 'a5c1527b72f47c92e71a3a4ce81f8d027aca9ec2aaaac0df32ff5e9c95e37c8f')
+before = raw.decode()
+after = before
+changes = (
+    ("""    require(type(selected) is dict and set(selected) == fields and
+            selected['schema'] == 'selected-A0-existing-StageA-reader-archive/v1' and
+""", """    schema = selected.get('schema') if type(selected) is dict else None
+    relocated = schema == 'selected-A0-existing-StageA-reader-archive/v2'
+    if relocated:
+        fields |= {'capture_partition', 'relocation_preview', 'relocation_owner_binding_sha256',
+                   'fresh_capture_roster'}
+    require(type(selected) is dict and set(selected) == fields and
+            (schema == 'selected-A0-existing-StageA-reader-archive/v1' or relocated) and
+"""),
+    ("""    selected_terminal = dict(terminal_reference)
+    require(type(terminal_raw) is bytes""", """    selected_terminal = dict(terminal_reference)
+    if relocated:
+        preview = picked['relocation_preview']
+        require(picked['capture_partition'] == 'stage-a-source32-relocated-all-fresh/v1' and
+                file_ref(preview) and preview['sha256'] == picked['reader_plan_sha256'] and
+                _sha_pin(picked['relocation_owner_binding_sha256']),
+                'exact selected relocation preview and independent Reader binding required')
+    require(type(terminal_raw) is bytes"""),
+    ("""    stage = receipt.get('stage_a')
+    require(type(stage) is dict""", """    stage = receipt.get('stage_a')
+    fresh_count, reused_count = (32, 0) if relocated else (12, 20)
+    require(type(stage) is dict"""),
+    ("""            type(stage.get('body_capture_count')) is int and stage['body_capture_count'] == 12 and
+            stage.get('observed_counts') == {'opening_full9':1254,'closing_full9':1254,
+                                             'guides':4,'reused_archives':20,'fresh_bodies':12},""",
+     """            type(stage.get('body_capture_count')) is int and stage['body_capture_count'] == fresh_count and
+            stage.get('observed_counts') == {'opening_full9':1254,'closing_full9':1254,
+                                             'guides':4,'reused_archives':reused_count,'fresh_bodies':fresh_count},"""),
+    ("""    modules = picked['parent_module_sha256']
+    absent = picked['absent_paths']
+""", """    if relocated:
+        require(all(stage.get(key) == picked[key] for key in (
+                    'capture_partition', 'relocation_preview', 'relocation_owner_binding_sha256')) and
+                provenance.get('closing_explicit_git_selector_metadata_checked') is True and
+                all(_sha_pin(stage.get(key)) for key in ('paired_selector_observation_sha256',
+                                                        'git_project_expectations_sha256')) and
+                preview['path'] not in (archive['path'], selected_terminal['path']) and
+                all(not Path(preview['path']).is_relative_to(root) for root in root_paths),
+                'relocated Reader terminal did not verify selected preview, owner and selectors')
+        _verify_relocated_a0_capture_roster(picked['fresh_capture_roster'],
+                                           stage.get('fresh_captures'), tuple(rows.values())[-32:],
+                                           root_paths[0], Path(archive['path']).parent)
+    modules = picked['parent_module_sha256']
+    absent = picked['absent_paths']
+"""),
+)
+for old, new in changes:
+    assert after.count(old) == 1, old
+    after = after.replace(old, new, 1)
+function = (HERE / 'roster.py.IN').read_text()
+at = 'def bind_closed_stage_a_archive_for_a0('
+assert after.count(at) == 1
+after = after.replace(at, function + at, 1)
+old_ast, new_ast = ast.parse(before), ast.parse(after)
+fns = {'bind_closed_stage_a_archive_for_a0', '_verify_relocated_a0_capture_roster'}
+assert [ast.dump(node) for node in old_ast.body if getattr(node, 'name', None) not in fns] == [
+        ast.dump(node) for node in new_ast.body if getattr(node, 'name', None) not in fns]
+(HERE / 'verify_rebind_capture.py').write_text(after)
+(HERE / 'verify_rebind_capture.diff').write_text(''.join(difflib.unified_diff(
+    before.splitlines(keepends=True), after.splitlines(keepends=True),
+    fromfile=str(PRIOR), tofile=str(HERE / 'verify_rebind_capture.py'))))
+print(len(after.encode()), sha256(after.encode()).hexdigest())

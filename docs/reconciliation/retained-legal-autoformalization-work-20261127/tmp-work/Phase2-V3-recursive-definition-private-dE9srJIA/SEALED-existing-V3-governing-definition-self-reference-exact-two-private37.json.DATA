@@ -1,0 +1,369 @@
+{
+  "base_git_commit": "6106a4633ec6504ee8c004cc5a9c7fe348ff38bf",
+  "effects": {
+    "actual_review": false,
+    "admission_authority": false,
+    "canonical_source": false,
+    "git_mutation": false,
+    "lean_or_native": false,
+    "model_fit": false,
+    "public_ordinary_qualification": false
+  },
+  "evidence": {
+    "green-owning": {
+      "exact_failures": [],
+      "result": {
+        "errors": 0,
+        "failures": 0,
+        "passed": 37,
+        "skipped": 0,
+        "tests": 37
+      },
+      "retained_artifacts": {
+        "pytest.log": {
+          "bytes": 0,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/green-owning/pytest.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "result.xml": {
+          "bytes": 7874,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/green-owning/result.xml",
+          "sha256": "0fbb8dfb53fd3db081caea079b63d98d76c2d74e0d98b699f4dc670129745f4f"
+        },
+        "stderr.log": {
+          "bytes": 0,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/green-owning/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout.log": {
+          "bytes": 623,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/green-owning/stdout.log",
+          "sha256": "1ae896910fea175bbcc591cea4afd65b6a372502807736dc3efd9a1d91279ed3"
+        },
+        "terminal.json": {
+          "bytes": 24,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/green-owning/terminal.json",
+          "sha256": "a583519ae991581a8d2aec66e5dd60ef75df71d5d2411bbf4e42c541751eb8e2"
+        }
+      },
+      "terminal_returncode": 0
+    },
+    "red": {
+      "exact_failures": [
+        {
+          "id": "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[direct]",
+          "message": "ValueError: every declared predicate must be used"
+        },
+        {
+          "id": "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[nested]",
+          "message": "Failed: DID NOT RAISE <class 'ValueError'>"
+        }
+      ],
+      "result": {
+        "errors": 0,
+        "failures": 2,
+        "passed": 4,
+        "skipped": 0,
+        "tests": 6
+      },
+      "retained_artifacts": {
+        "pytest.log": {
+          "bytes": 0,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red/pytest.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "result.xml": {
+          "bytes": 2501,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red/result.xml",
+          "sha256": "17b688fb39f529e383490766764bc350728c875dafeae12abe1685a2a16f61c8"
+        },
+        "stderr.log": {
+          "bytes": 0,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout.log": {
+          "bytes": 2255,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red/stdout.log",
+          "sha256": "98825141af87d03724c58aac3a28277f7abc587b14dbb19f42334523d8ff8f2f"
+        },
+        "terminal.json": {
+          "bytes": 24,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red/terminal.json",
+          "sha256": "a95e2f804b1a2a69f226812ad41d797eb07c98a71762654d80bfef5e63a1697a"
+        }
+      },
+      "terminal_returncode": 1
+    },
+    "red-exact": {
+      "exact_failures": [
+        {
+          "id": "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[direct]",
+          "message": "Failed: DID NOT RAISE <class 'ValueError'>"
+        },
+        {
+          "id": "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[nested]",
+          "message": "Failed: DID NOT RAISE <class 'ValueError'>"
+        }
+      ],
+      "result": {
+        "errors": 0,
+        "failures": 2,
+        "passed": 4,
+        "skipped": 0,
+        "tests": 6
+      },
+      "retained_artifacts": {
+        "pytest.log": {
+          "bytes": 0,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red-exact/pytest.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "result.xml": {
+          "bytes": 2070,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red-exact/result.xml",
+          "sha256": "ae4036118c9628e4ff93b69ba433a39871b57fb93bbc3c3a1926c562958b0bc0"
+        },
+        "stderr.log": {
+          "bytes": 0,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red-exact/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout.log": {
+          "bytes": 1825,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red-exact/stdout.log",
+          "sha256": "6446b861280ad73c9d8e8226199ddb472221592a183078547efd7bc8d1850fb0"
+        },
+        "terminal.json": {
+          "bytes": 24,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red-exact/terminal.json",
+          "sha256": "a95e2f804b1a2a69f226812ad41d797eb07c98a71762654d80bfef5e63a1697a"
+        }
+      },
+      "terminal_returncode": 1
+    },
+    "red-owning": {
+      "exact_failures": [
+        {
+          "id": "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[direct]",
+          "message": "Failed: DID NOT RAISE <class 'ValueError'>"
+        },
+        {
+          "id": "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[nested]",
+          "message": "Failed: DID NOT RAISE <class 'ValueError'>"
+        }
+      ],
+      "result": {
+        "errors": 0,
+        "failures": 2,
+        "passed": 35,
+        "skipped": 0,
+        "tests": 37
+      },
+      "retained_artifacts": {
+        "pytest.log": {
+          "bytes": 0,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red-owning/pytest.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "result.xml": {
+          "bytes": 8634,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red-owning/result.xml",
+          "sha256": "be0ccdc8fec3e7632fca88bf0068876db90789b4aca0c7a41fcf8bcfa35f5a36"
+        },
+        "stderr.log": {
+          "bytes": 0,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red-owning/stderr.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "stdout.log": {
+          "bytes": 1827,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red-owning/stdout.log",
+          "sha256": "bdcc5d11dacba83af6decd9fdb6aa00aeb4e83d76e05b296e7342ea71aade9db"
+        },
+        "terminal.json": {
+          "bytes": 24,
+          "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/red-owning/terminal.json",
+          "sha256": "a95e2f804b1a2a69f226812ad41d797eb07c98a71762654d80bfef5e63a1697a"
+        }
+      },
+      "terminal_returncode": 1
+    }
+  },
+  "exact_two_and_zero_fuzz_apply_inverse": {
+    "bytes": 2725,
+    "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/exact-two-and-forward-inverse.json",
+    "sha256": "58f7adaa7e1cff4db0928f2ef308a9f53c891ab020dc23ffb3eb7c7fe61f3f76"
+  },
+  "function_counts": {
+    "test_current_trust_controls_reject_even_genuine_signatures": 4,
+    "test_full_fictional_definition_object_use_and_mixed_use_replay": 1,
+    "test_governing_definition_rejects_implication_instead_of_complete_equivalence": 1,
+    "test_independently_valid_signatures_cannot_cross_domains": 2,
+    "test_old_generation_source_pin_cannot_be_rehashed_into_current_v2_preparation": 1,
+    "test_resealed_complete_transport_cannot_hide_semantic_contract_damage": 4,
+    "test_reviewed_v3_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness": 1,
+    "test_reviewed_v3_cross_reference_version_consistency": 4,
+    "test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive": 5,
+    "test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies": 1,
+    "test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses": 6,
+    "test_reviewed_v3_refuses_cyclic_unit_dependencies": 3,
+    "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate": 2,
+    "test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load": 1,
+    "test_v3_sibling_preserves_v2_source_and_binds_current_producers": 1
+  },
+  "gate_or_adoption_selected": false,
+  "known_mutual_boundary": {
+    "explicit_parents": "The current graph maps all unit IDs and explicit parent dependencies, including definition-to-definition edges. Existing mixed explicit-cycle controls are retained.",
+    "implicit_names": "The current definition_uses contract restricts targets to norms, and the conflict key is target/path, not symbol globally. Unit signatures declare local symbols. Inferring which other definition owns a RHS symbol would require an additional applicability binding. The new check compares within the same verified signature only."
+  },
+  "patches": {
+    "forward": {
+      "patch_stdout": "patching file ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py\npatching file tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py\n",
+      "pin": {
+        "bytes": 4797,
+        "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/exact-two.forward.patch",
+        "sha256": "32572cab9e979c935946a4cac8d3c5cb49e2bb722ab1103b15e3b95e234256ce"
+      }
+    },
+    "inverse": {
+      "patch_stdout": "patching file ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py\npatching file tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py\n",
+      "pin": {
+        "bytes": 4797,
+        "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/exact-two.inverse.patch",
+        "sha256": "5d6882ce69375266751e559827ff8e7488ad66432c60982e15eb1fb363764721"
+      }
+    }
+  },
+  "private_projection": {
+    "no_canonical_checkout_body_reads_by_guarded_sut": true,
+    "projected_original_bytes": 11053505,
+    "role_map": {
+      "bytes": 67465,
+      "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/immutable-Git-role-map.json",
+      "sha256": "04f873654b2653b8812951691c759e1424401fc5ccdcb0be6b6ae5e47bc0b8f5"
+    },
+    "roles": 277
+  },
+  "proof_boundary": "Existing actual fictional mixed V3 preparation, covering strict source/IR replay and refreshed acyclic manifest. This tests shape and dependency completeness before any authority. The positive retained case exercises genuine signed fixture replay.",
+  "proposed_refusal": "cyclic or unresolved reviewed governing dependency: predicate occurs in its own definition",
+  "retained_and_new_same_owning_roster": [
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_full_fictional_definition_object_use_and_mixed_use_replay",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_saved_v2_preparation_signatures_and_assessment_survive_sibling_load",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_independently_valid_signatures_cannot_cross_domains[v2-claims-in-v3]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_independently_valid_signatures_cannot_cross_domains[v3-claims-in-v2]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[typed-node-coverage-complete typed-node source correspondence required]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[definition-use-target-complete ordered predicate definition-use targets required]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[valid-mixed-sort-drift-governing predicate argument sorts differ]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_resealed_complete_transport_cannot_hide_semantic_contract_damage[overlapping-use-overlapping interpretations are not two distinct normative uses]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[stale-policy-signature-signed_policy_sha256_differs]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[expired-policy-policy_not_current]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[revoked-key-key_revoked]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_current_trust_controls_reject_even_genuine_signatures[revoked-principal-principal_revoked]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_v3_sibling_preserves_v2_source_and_binds_current_producers",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_governing_definition_rejects_implication_instead_of_complete_equivalence",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[duplicate_repackage-logical source occurrence]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[overlapping_repackage-overlapping logical source]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[document_revision_label-logical source occurrence]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_unaligned_view-unsupported source-view alignment]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[different_view_and_document_revision_label-unsupported source-view alignment]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_raw_repackaging_and_artifact_labels_do_not_create_legal_uses[physical_alias-physical occurrence]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_provision]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_release]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[different_edition]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_distinct_legal_identities_and_nonoverlapping_uses_survive[nonoverlapping_paragraphs_different_source_id]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_old_generation_source_pin_cannot_be_rehashed_into_current_v2_preparation",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_alternate_view_of_same_raw_paragraph_requires_distinct_use_witness",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[parent-definition-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_cyclic_unit_dependencies[longer-mixed-cycle]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_preserves_acyclic_overlapping_unit_dependencies",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-forward-conflict]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-reverse-conflict]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[shared-equal]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_cross_reference_version_consistency[distinct-identities]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[direct]",
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py::test_reviewed_v3_refuses_governing_definition_reusing_its_predicate[nested]"
+  ],
+  "roles": [
+    {
+      "added_functions": [],
+      "after": {
+        "bytes": 35250,
+        "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/legal_reviewed_norm_admission_v3.after.py.DATA",
+        "sha256": "1b294d2d896f715c7fe667cf194e2a04bc681705af558a535d55210b4cacf917"
+      },
+      "after_git_blob": "d2959d73378a870453c48775692fa6462d154a5d",
+      "before": {
+        "bytes": 34912,
+        "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/legal_reviewed_norm_admission_v3.py.before.DATA",
+        "sha256": "30f9e1f2554b030241aeb8ec8ffc1f6c98816eee2732c83e59dbf3c0b36de50e"
+      },
+      "before_git_blob": "66a763ea5d49f4e850100e4dee77e9b35e68b457",
+      "changed_function_asts": [
+        "_reviewed_body"
+      ],
+      "mode": "100644",
+      "path": "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py"
+    },
+    {
+      "added_functions": [
+        "test_reviewed_v3_refuses_governing_definition_reusing_its_predicate"
+      ],
+      "after": {
+        "bytes": 34149,
+        "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/test_legal_reviewed_norm_admission_v3.after.py.DATA",
+        "sha256": "b33ec128970c9601583df4cf9b8c78744a7def25af3a497eb6bed7194c183a91"
+      },
+      "after_git_blob": "57cba9cbfe55bf91fa8377808cd853d7d39c9059",
+      "before": {
+        "bytes": 31445,
+        "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/test_legal_reviewed_norm_admission_v3.py.before.DATA",
+        "sha256": "5bc57fed43f80f84c8a61bf2588158c97f150d745165c6ef7d544acc7e3fbe0c"
+      },
+      "before_git_blob": "848ed2ce4479399a652d2760c734eacd67d0c040",
+      "changed_function_asts": [],
+      "mode": "100644",
+      "path": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py"
+    }
+  ],
+  "runtime": {
+    "address_space_bytes": 536870912,
+    "cpu_seconds_soft_hard": [
+      55,
+      56
+    ],
+    "exact_existing_runner": {
+      "bytes": 2733,
+      "path": "/tmp/P2-V4-current-admission-withdrawal-test-only-private-EFrOMQn8/invoke-existing-pytest-private-v02-one-selector.py.DATA",
+      "sha256": "03df45a40b9e5d51ba9d8ac97a11a9f7833560393fe33a1706312144ae2ec571"
+    },
+    "notes": "No pytest plugin autoload or conftests, no bytecode writes, projectile roots pinned by offline immutable Git copy. Runner blocks sockets, process launches, model imports and writes outside the selected fixture report directory.",
+    "one_affinity_cpu": true,
+    "owning_command": {
+      "bytes": 950,
+      "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/run-owning-file.sh",
+      "sha256": "ed56df3850e966420f4c6b708eedd08d4442e4deaa77ef461fd941688d51a4b5"
+    },
+    "setup_and_targeted_runner": {
+      "bytes": 2733,
+      "path": "/tmp/P2-V4-current-admission-withdrawal-test-only-private-EFrOMQn8/invoke-existing-pytest-private-v02-three-selectors.py.DATA",
+      "sha256": "cdcbb6ab8c27b9e5c61f795eceee7f6543eacc98d1acfa09527692275d6b55c4"
+    }
+  },
+  "schema": "private-existing-v3-reviewed-governing-definition-self-reference-two-file-cohort/v1",
+  "setup_lineage": {
+    "final_exact_append": {
+      "bytes": 2704,
+      "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/test-append.py.DATA",
+      "sha256": "0cad63582a755a448f41d8f52ffc15ce75c566486ffe52437f93bccbfeb48389"
+    },
+    "initial_append": {
+      "bytes": 2258,
+      "path": "/tmp/Phase2-V3-recursive-definition-private-dE9srJIA/test-append.initial-red.py.DATA",
+      "sha256": "84da4bbf0a41edd7299b81ce06447f24f0d12785c78043816d42cac9b18da155"
+    },
+    "initial_direct_retained": "The first direct probe was rejected for an unused RHS predicate declaration before the V3 branch. The exact scored cohort drops that unused declaration and its argument roles."
+  }
+}

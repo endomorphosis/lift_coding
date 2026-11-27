@@ -1,0 +1,65 @@
+{
+  "cases": 26,
+  "contributes_current_Stage_A_index_or_model_qualification": false,
+  "failed_nodes": [
+    "test_typed_nested_feedback_matching_envelope_preserves_weight_updates[feedback]",
+    "test_typed_nested_feedback_matching_envelope_preserves_weight_updates[guidance]"
+  ],
+  "latest_retained_precharge": {
+    "bytes": 1275,
+    "path": "/tmp/P7-Guide573-successor-live-READ10-controls-JedG5GQ0/Source-only-isolated-Phase7-READ10-full-retained.json",
+    "sha256": "7b3e154ab48ef42567a758075c797d4da9b1e1b860055821c3a4e47bff55d217"
+  },
+  "modeled_held_global_view_update": {
+    "competing_view": {
+      "applied": true,
+      "global_logits": {
+        "CEC.native": -0.025,
+        "deontic.ir": 0.025
+      }
+    },
+    "singleton": {
+      "applied": true,
+      "global_logits": {
+        "deontic.ir": 0.0
+      }
+    }
+  },
+  "original_FAILED_junit": {
+    "bytes": 12076,
+    "path": "/tmp/P7-checked-feedback-ordinary26-retry-owner-order-5D1JveT6/actual-output/phase7-checked-feedback26-run-result0-output1.bin",
+    "sha256": "8cd57f5d4f97c5655fc1fd6a58b3bf396c3f0d3c1d18568a51bf9f081dd0efa8"
+  },
+  "original_FAILED_owner": {
+    "bytes": 1014563,
+    "path": "/tmp/P7-checked-feedback-ordinary26-retry-owner-order-5D1JveT6/actual-output/complete-frozen-local-D-phase7-checked-feedback26-existing-owner-report.json",
+    "sha256": "7e5ffa7f6ec5e2e003d90fd30417a3002c8b22f39fb6ccae52c7b3151c3ed8c1"
+  },
+  "passes": 24,
+  "published_D": "78b3466e3259bece28ccf9edc03dc7609efa22fd",
+  "qualification_complete": false,
+  "retained_headroom_bytes": 6356992,
+  "retained_modal_source": {
+    "bytes": 1429059,
+    "path": "/tmp/P7-Guide573-live-READ10-controls-0D8hjQNL/actual-output/raw/01-modal_autoencoder.py.DATA",
+    "sha256": "3440fef3ee319f780f49ae6fb1b61aacfc3d47ea64e2f95b9c795cfc7c81b447"
+  },
+  "schema": "private-current-Phase7-feedback-fixture-and-isolated-readback/v1",
+  "successor_isolated_READ10_closed": {
+    "bytes": 19732,
+    "path": "/tmp/P7-Guide573-successor-live-READ10-controls-JedG5GQ0/actual-isolated-Phase7-READ10-closed.json",
+    "sha256": "0acb3ae07ff8631e511cdc08fac91f7ffc7deafa1ba4481100763bf004eb4c7c"
+  },
+  "successor_local_D": "4449d6a62a607cded94db3822b39033ed4850c26",
+  "successor_local_seal": {
+    "bytes": 9930,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/SEALED-Phase7-checked-legal-proof-current-exact-nine-private-v02.json",
+    "sha256": "2dbbfdd8888a86b26e4ff54a5918d5617e7182793b3e5ebea2a270f2ee3e9d67"
+  },
+  "successor_ordinary_result": null,
+  "successor_test_fixture_patch": {
+    "bytes": 79733,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/exact-nine-current-forward.patch",
+    "sha256": "5f0718af7a0e1f7bbf89ba846e97fc73974e999b5c5784209e4b4dc31c046d2e"
+  }
+}

@@ -1,0 +1,185 @@
+"""Seal whole-pilot elapsed readback and the distinct local Ordinary33 qualification."""
+
+from copy import deepcopy
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+from runpy import run_path
+from stat import S_IMODE
+from tempfile import mkstemp
+from xml.etree import ElementTree
+
+HERE = Path(__file__).resolve().parent
+TMP = HERE.parent
+PREVIOUS = TMP / "decoder-training-experiment-manifest-v386.json"
+CURRENT = TMP / "decoder-training-experiment-manifest-v387.json"
+KEY = "private_teacher_pilot_first_use_wall"
+
+
+def ref(path, expected=None):
+    raw = path.read_bytes()
+    digest = sha256(raw).hexdigest()
+    assert expected is None or digest == expected, path
+    return {"path": str(path), "bytes": len(raw), "sha256": digest}
+
+
+def save(path, value):
+    raw = (json.dumps(value, indent=2, sort_keys=True) + "\n").encode() if type(value) is dict else value.encode()
+    with path.open("xb") as output:
+        output.write(raw)
+    return ref(path)
+
+
+def logs(stem, count, rc=0):
+    assert (HERE / (stem + ".rc")).read_bytes() == f"{rc}\n".encode()
+    err = (HERE / (stem + ".stderr")).read_text()
+    assert f"Ran {count} tests in " in err or f"Ran {count} test in " in err
+    if rc == 0:
+        assert err.endswith("\nOK\n")
+        assert sum(line.startswith("test_") and line.endswith(" ... ok") for line in err.splitlines()) == count
+    else:
+        assert "original component process is absent from its paid physical scope" in err and "FAILED (errors=1)" in err
+    return {name: ref(HERE / (stem + "." + name)) for name in ("rc", "stdout", "stderr")}
+
+
+prior = ref(PREVIOUS, "a11ca0b9d04d0e3eaca4d7274a33486a41e7e418e497c7220d98491ddab1b2a7")
+old = json.loads(PREVIOUS.read_bytes())
+model = json.loads((HERE / "first-use-wall-final.stdout").read_bytes())
+wall = model["first_use_wall"]
+assert wall["covered_paid_events"] == model["original_event_count"] == 39
+assert wall["end_ns"] - wall["start_ns"] == wall["elapsed_ns"] == 42_000_000_000
+assert model["paid_failed_event_retained"] is True and model["observed_model_or_native_execution"] is False
+archived = json.loads((HERE / "retained-all-paid.stdout").read_bytes())
+assert archived["proof"]["original_event_count"] == 39
+assert archived["proof"]["observed_exclusive_physical_work_ns"] == {"cpu_ns": 168_000_000_000, "gpu_ns": None}
+assert "first_use_wall" not in archived["proof"]
+counts = {"new_elapsed_verification": 8, "retained_all_paid": 8, "retained_final": 11}
+
+ordinary_dir = TMP / "P2-V4-CLI-ordinary33-live-bind-rtsfpb6t" / "actual-output"
+prefix = "corpus-release-physical-v4-retained-type-current-review-ordinary33"
+ordinary_report = ref(ordinary_dir / f"complete-frozen-local-D-{prefix}-existing-owner-report.json",
+    "eecfe9703987364d818a9fe6448e1aa66da01efb9f9c17d6700274fbe417e297")
+ordinary_junit = ref(ordinary_dir / f"{prefix}-run-result0-output1.bin",
+    "d1ba609e94c9a4d10217fa2c6a4d3deee2aa9f3e68116b58f6310691dbfab06e")
+ordinary = json.loads(Path(ordinary_report["path"]).read_bytes())
+junit = ElementTree.parse(ordinary_junit["path"]).getroot()
+suite, = junit.findall("testsuite")
+assert {key: suite.attrib[key] for key in ("tests", "failures", "errors", "skipped")} == {
+    "tests": "33", "failures": "0", "errors": "0", "skipped": "0"}
+assert len(suite.findall("testcase")) == 33
+assert all(ordinary[key] is True for key in ("qualification_complete", "software_sequence_accepted", "Source_closed",
+    "resource_cleanup_confirmed", "actual_parent_release_return", "frozen_local_D_Git_READ_application"))
+assert ordinary["canonical_Source_application"] is ordinary["Source_WRITE_claimed"] is False
+assert ordinary["errors"] == [] and len(ordinary["actual_Source_context_closure"]) == 2
+assert all(row["entered"] is row["exit_returned"] is True for row in ordinary["actual_Source_context_closure"])
+d_head, a_head = (ordinary[key]["HEAD"] for key in ("git_candidate_provenance", "additional_A_provenance"))
+assert (d_head, a_head) == ("cbc43a5f365502265d1e64d7bce3281f2871ef01", "219ba3da0f62f772801d71715e22c506faa21126")
+
+descriptor = {
+    "schema": "reviewed-teacher-pilot-first-use-wall-private-controls/v1",
+    "owner": ref(HERE / "final_physical_union.py", "ccb4f816f07211f380d97a09cee2181da359882b17698f881deadc65ea2cc825"),
+    "prior_owner": ref(TMP / "decoder-training-teacher-pilot-all-paid-phases-private-v01-AL5vbJYA/final_physical_union.py",
+                       "38b33cd83f400ce26730ad275a6fa906f76b2176c252011d371bf9a45454a1ec"),
+    "diff": ref(HERE / "final_physical_union.diff", "5766ada8064738e1df9c2ecfe70260d283aec1c08b4feaf896da902283eaf425"),
+    "local_passing_cases": counts,
+    "logs": {name: logs(stem, count) for (name, count), stem in zip(counts.items(),
+        ("first-use-wall-final", "retained-complete", "retained-final"), strict=True)},
+    "retained_first_fixture_adapter_failure": logs("first-use-wall-first", 8, 1),
+    "retained_default_report": logs("retained-all-paid", 1),
+    "modeled_paid_and_wall_summary": model,
+    "modeled_default_exclusive_cost_ns": archived["proof"]["observed_exclusive_physical_work_ns"],
+    "distinct_actual_ordinary33": {"report": ordinary_report, "junit": ordinary_junit, "D": d_head, "A": a_head,
+                                   "passed": 33, "source_and_resource_closed": True,
+                                   "scope": "software_qualification_on_the_frozen_local_candidate"},
+    "drivers": {name: ref(HERE / name) for name in ("compose.py", "first_use_wall.py.IN",
+        "retained_all_paid.py", "test_first_use_wall.py", "seal.py")},
+    "scope": "paid_preparation_and_development_and_final_with_independent_clock_endpoint_approval",
+    "preparation_only_stops_included": False, "legal_quality_threshold_from_wall": False,
+    "actual_model_or_native_execution": None, "actual_wall_owner_evidence": None,
+    "maintained_adoption": None, "dispatch_authority": False,
+}
+
+projection = f'''def project_teacher_pilot_first_use_wall(reference):
+    result = retained_json(reference)
+    require(result["schema"] == "reviewed-teacher-pilot-first-use-wall-private-controls/v1"
+            and result["local_passing_cases"] == {counts!r}
+            and result["modeled_paid_and_wall_summary"]["original_event_count"] == 39
+            and result["modeled_paid_and_wall_summary"]["first_use_wall"]["elapsed_ns"] == 42000000000
+            and result["actual_model_or_native_execution"] is result["actual_wall_owner_evidence"]
+                 is result["maintained_adoption"] is None
+            and result["dispatch_authority"] is result["legal_quality_threshold_from_wall"]
+                 is result["preparation_only_stops_included"] is False,
+            "exact detached whole-pilot wall controls required")
+    fields = ("owner", "local_passing_cases", "modeled_paid_and_wall_summary", "distinct_actual_ordinary33",
+              "scope", "preparation_only_stops_included", "legal_quality_threshold_from_wall",
+              "actual_wall_owner_evidence", "dispatch_authority")
+    return {{field: result[field] for field in fields}}
+
+
+'''
+checker = HERE / "check_design.py"
+prior_checker = old["advisory_operator_readiness_checker"]
+path = Path(prior_checker["path"])
+assert ref(path, prior_checker["sha256"]) == prior_checker
+source = path.read_text()
+at_def, at_result = "def report(manifest):\n", '        "stage_a_coordination": coordination,'
+assert source.count(at_def) == source.count(at_result) == 1
+source = source.replace(at_def, projection + at_def, 1)
+source = source.replace(at_result, at_result + f'''
+        **({{"{KEY}": project_teacher_pilot_first_use_wall(design["{KEY}"])}}
+           if "{KEY}" in design else {{}}),''', 1)
+preview = {"__name__": "private_readback", "__file__": str(checker)}
+exec(compile(source, str(checker), "exec"), preview)
+before = preview["report"](old)
+assert before["stage_a_coordination"]["current_independent_read_join"] is None
+assert before["stage_a_coordination"]["conditional_shortfall_bytes_before_overhead"] == 20_934_571
+
+plan = TMP / "decoder-training-integration-plan.md"
+status = plan.stat()
+initial = plan.read_bytes()
+assert sha256(initial).hexdigest() == "635558a8469daede9ce823d4c43400899a329c6d9ecb514470fab7cf8afaaf69"
+descriptor_path = HERE / "descriptor.json"
+addition = f"""## 824. Verify continuous elapsed time for the four-teacher pilot
+
+The existing paid pilot verifier accepts a separately authenticated span from its original first-use opening through availability of its terminal evidence. The span must enclose every verified paid close in one comparable clock domain, including failed preparation events and shared work counted once. Both endpoints and the exhaustive paid window roster need approval from the original clock owner. This reports continuous elapsed time for the paid pilot that reaches DEVELOPMENT and FINAL. Preparation-only stops require their own enclosing evidence. Timing alone supplies no legal gate decision. It leaves original CPU and GPU work, packet allocation and FINAL verdicts intact. [Implementation and local controls]({descriptor_path})
+
+Twenty-seven local tests passed. The modeled interval is 42 seconds across 39 paid events, including earlier failed preparation. The prior default fixture verified 168 modeled CPU-seconds and unavailable GPU work. The new interval remains a distinct clock measurement. Controllers reject a missing event, a foreign clock, shifted boundaries, aliased receipts and changes during owner verification. The actual pilot, original clock-owner evidence and measured convergence remain open.
+
+The frozen local Ordinary33 candidate at Datasets `cbc43a5f` passed all 33 tests and recorded Source and resource closure. Its bound index and checkout differ from the published Guide571 index. The original Stage A read, allocation and funding decisions remain pending. [Ordinary33 report]({ordinary_report["path"]}) · [Readiness]({HERE / "verified-readiness.json"})
+
+"""
+body = initial.decode()
+for was, now in (
+    (str(PREVIOUS), str(CURRENT)),
+    ("Version 3.532. Updated 2026-11-26 with paid confirmation bounds across decoder configurations.",
+     "Version 3.533. Updated 2026-11-26 with end-to-end elapsed readback for the paid teacher pilot."),
+    ("## Primary research references", addition + "## Primary research references"),
+):
+    assert body.count(was) == 1, was
+    body = body.replace(was, now, 1)
+
+new = deepcopy(old)
+new["manifest_schema_version"] = "0.387.0"
+new["previous_manifest"] = prior
+assert KEY not in new["typed_execution_design"]
+new["typed_execution_design"][KEY] = save(descriptor_path, descriptor)
+new["advisory_operator_readiness_checker"] = save(checker, source)
+report = run_path(str(checker))["report"](new)
+assert {name: value for name, value in report.items() if name not in (KEY, "manifest_schema_version")} == {
+    name: value for name, value in before.items() if name != "manifest_schema_version"}
+manifest = save(CURRENT, new)
+readiness = save(HERE / "verified-readiness.json", report)
+fd, name = mkstemp(dir=TMP, prefix=plan.name + ".")
+temp = Path(name)
+try:
+    with os.fdopen(fd, "w") as output:
+        output.write(body)
+    temp.chmod(S_IMODE(status.st_mode))
+    assert plan.read_bytes() == initial and plan.stat().st_ino == status.st_ino
+    os.replace(temp, plan)
+finally:
+    if temp.exists():
+        temp.unlink()
+print(json.dumps({"descriptor": ref(descriptor_path), "manifest": manifest,
+                  "readiness": readiness, "plan": ref(plan)}, sort_keys=True))

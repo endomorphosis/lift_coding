@@ -1,0 +1,41 @@
+{
+  "added_Source_only_envelope": 100663296,
+  "after_full_retained_precharge": {
+    "captures": 532860,
+    "capturesComplete": false,
+    "global_cap": 54491891722,
+    "internal_cap": 54301299848,
+    "internal_used": 54294942856,
+    "used": 54485534730
+  },
+  "all_prior_costs_retained": true,
+  "exact_human_affirmation": {
+    "bytes": 2960,
+    "path": "/tmp/Main-source-cap-human-provenance-v01-g9hs_s_q/Root-original-human-Source-cap-approval.record.jsonl",
+    "sha256": "8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda"
+  },
+  "physical_IO_accounting_complete": false,
+  "prior": {
+    "captures": 532859,
+    "capturesComplete": false,
+    "global_cap": 54391228426,
+    "internal_cap": 54200636552,
+    "internal_used": 54194279560,
+    "used": 54384871434
+  },
+  "prior_cap": {
+    "bytes": 1287,
+    "path": "/tmp/Root-one-guide571-existing-Source4-v595-xnyan2px/Source-only-Guide571-cap-keep-prior.json",
+    "sha256": "fe7a5289771e6ac2bfce1dde0bea26960dd5d49b1279ee07d67c142235c52817"
+  },
+  "qualification_scope": "isolated frozen Git clone only",
+  "resource_policy_capacity_unchanged": true,
+  "selected": {
+    "captures": 532859,
+    "capturesComplete": false,
+    "global_cap": 54491891722,
+    "internal_cap": 54301299848,
+    "internal_used": 54194279560,
+    "used": 54384871434
+  }
+}

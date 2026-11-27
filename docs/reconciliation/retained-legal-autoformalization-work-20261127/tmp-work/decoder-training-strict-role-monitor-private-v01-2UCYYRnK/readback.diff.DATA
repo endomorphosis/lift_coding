@@ -1,0 +1,118 @@
+--- /tmp/decoder-training-selective-prefix-inspection-private-v01-PV9ezANr/readback.py
++++ /tmp/decoder-training-strict-role-monitor-private-v01-2UCYYRnK/readback.py
+@@ -203,15 +203,27 @@
+ APPEND_ONLY_MONITOR_SCHEMA = "private-source-only-append-stable-codec-prefix-monitor/v2"
+ 
+ 
++STRICT_ROLE_ORDER_WIRE_PROFILE = "complete-reviewed-norm-digest-omitted-json/v1"
++_STRICT_ROLE_FIELDS = frozenset({
++    "argument_roles", "assumptions", "cross_references", "definition_uses",
++    "governing_context", "interpretation_id", "profile", "source_binding", "typed_expression",
++})
++_FIRST_ROLE_OBJECT = b'{"argument_roles":[{'
++_CANONICAL_FIRST_ROLE_MEMBER = _FIRST_ROLE_OBJECT + b'"roles":'
++
++
+ class AppendOnlyCodecPrefixMonitor:
+     """Observe stable, raw payload bytes after the original framing is removed.
+ 
+     The selected tokenizer must authorize byte concatenation. This monitor is
+     independent of model/architecture internals. A diagnostic budget or decode
+     uncertainty disables the monitor and leaves the ordinary decoder in charge.
++    The optional strict profile requires the original canonical serializer,
++    exact role shape and a byte-stable tokenizer path, verified by the caller.
+     """
+ 
+-    def __init__(self, structural_prefix, fields, role_validator, *, max_body_bytes, max_inspected_bytes):
++    def __init__(self, structural_prefix, fields, role_validator, *, max_body_bytes, max_inspected_bytes,
++                 wire_profile=None):
+         from codecs import getincrementaldecoder
+ 
+         if type(max_body_bytes) is not int or max_body_bytes <= 0:
+@@ -220,6 +232,12 @@
+             raise ValueError("positive cumulative prefix-inspection byte limit required")
+         self._check = structural_prefix
+         self._fields = frozenset(fields)
++        if wire_profile is not None and (type(wire_profile) is not str
++                or wire_profile != STRICT_ROLE_ORDER_WIRE_PROFILE or self._fields != _STRICT_ROLE_FIELDS):
++            raise ValueError("strict wire profile requires its original nine fields and exact codec")
++        self._wire_profile = wire_profile
++        self._strict_role_offset = 0 if wire_profile is not None else None
++        self._strict_role_bytes = 0
+         self._role_validator = role_validator
+         self._max_body_bytes = max_body_bytes
+         self._max_inspected_bytes = max_inspected_bytes
+@@ -238,11 +256,40 @@
+         self._status = "watching"
+         self._obstruction = None
+ 
++    def _check_strict_first_role(self, emitted):
++        offset = self._strict_role_offset
++        if offset is None:
++            return
++        # An undecoded suffix cannot provide the opted-in stable ASCII witness.
++        if self._decoder.getstate()[0]:
++            self._strict_role_offset = None
++            return
++        expected = _CANONICAL_FIRST_ROLE_MEMBER
++        for byte in emitted[:len(expected) - offset]:
++            if self._strict_role_bytes + self._role_bytes + self._inspected >= self._max_inspected_bytes:
++                self._status = "diagnostic_inspection_budget_exhausted"
++                return
++            self._strict_role_bytes += 1
++            if byte != expected[offset]:
++                self._strict_role_offset = None
++                if offset >= len(_FIRST_ROLE_OBJECT):
++                    self._obstruction = {
++                        "issue": "first_role_key_is_not_the_canonical_roles_member",
++                        "body_token_position": self._count,
++                        "byte_end": offset + 1,
++                        "prefix_sha256": self._hash.hexdigest(),
++                    }
++                    self._status = "irreversible_codec_prefix"
++                return
++            offset += 1
++        self._strict_role_offset = offset if offset < len(expected) else None
++
++
+     def _closed_role_needs_full_check(self):
+         """A valid direct role cannot itself introduce a new shape obstruction."""
+         text = "".join(self._role_chars)
+         size = len(text.encode("utf-8"))
+-        if self._role_bytes + self._inspected + size > self._max_inspected_bytes:
++        if self._strict_role_bytes + self._role_bytes + self._inspected + size > self._max_inspected_bytes:
+             return True
+         self._role_bytes += size
+         self._role_prechecks += 1
+@@ -331,10 +378,13 @@
+         except UnicodeDecodeError:
+             self._status = "stable_utf8_unavailable"
+             return self._status
++        self._check_strict_first_role(emitted)
++        if self._status != "watching":
++            return self._status
+         self._parts.append(stable)
+         if not self._inspect_boundary(stable):
+             return self._status
+-        if self._role_bytes + self._inspected + self._bytes > self._max_inspected_bytes:
++        if self._strict_role_bytes + self._role_bytes + self._inspected + self._bytes > self._max_inspected_bytes:
+             self._status = "diagnostic_inspection_budget_exhausted"
+             return self._status
+ 
+@@ -357,11 +407,15 @@
+         return self._status
+ 
+     def result(self):
+-        return {"status": self._status, "charged_inspection_bytes": self._inspected,
++        result = {"status": self._status, "charged_inspection_bytes": self._inspected,
+                 "role_prechecks": self._role_prechecks, "charged_role_precheck_bytes": self._role_bytes,
+                 "inspected_prefixes": self._calls, "consumed_body_tokens": self._count,
+                 "consumed_body_bytes": self._bytes,
+                 "obstruction": None if self._obstruction is None else dict(self._obstruction)}
++        if self._wire_profile is not None:
++            result.update(wire_profile=self._wire_profile,
++                          charged_strict_role_prefix_bytes=self._strict_role_bytes)
++        return result
+ 
+ 
+ def verify_append_only_monitor():

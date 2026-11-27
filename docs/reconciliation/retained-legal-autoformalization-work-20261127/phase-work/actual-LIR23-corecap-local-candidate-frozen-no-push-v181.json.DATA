@@ -1,0 +1,115 @@
+{
+  "all_gitlinks_and_other_repo_metadata_preserved": true,
+  "branch": "refs/heads/work/phase6-capacity-composition-20261123",
+  "diff_check_passed": true,
+  "frozen_for_ordinary21": true,
+  "head": "e1f27b2f6a19e3a56b1624babbf57b0a7b15b152",
+  "index": {
+    "bytes": 6991149,
+    "clean": true,
+    "full9": {
+      "st_ctime_ns": "1795539317670750927",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795539317660750827",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index"
+  },
+  "installation": {
+    "Source_module_stages_FDs_closed": true,
+    "actual_IO": {
+      "bytes": 23331059,
+      "captures": 89
+    },
+    "bytes": 3512,
+    "full9": {
+      "st_ctime_ns": "1795539212822704162",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "49196678",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795539212822704162",
+      "st_nlink": "1",
+      "st_size": "3512",
+      "st_uid": "1000"
+    },
+    "full_Root_Source_envelope_retained": 100663296,
+    "path": "/tmp/Root-LIR23-existing-core-cap-Source2-CAS-actual-v181-g_j0myxq/Root-LIR23-two-installed-Source-closed-small-v181.json",
+    "sha256": "88762506ab1958d83c22525a19b505a765629f25cbae34e301aad552cf4e9403"
+  },
+  "new_Source_test_model_or_CI_invocation": false,
+  "origin_main_tracking_ref": "0749418e5229f410b82db97c269250d3e044472c",
+  "other_heads": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "hallucinate": "80be21a8004aa7856cf0f6b8ec0749ac973d8f10",
+    "root": "698e4cabbcf755f249768a873a7aacda5cb3c59a"
+  },
+  "parent": "0749418e5229f410b82db97c269250d3e044472c",
+  "pushed": false,
+  "schema": "LIR23-corecap-two-file-local-candidate/v181",
+  "scope": {
+    "ordinary_qualification": false,
+    "prior_private_validation": {
+      "actual_new_methods": 21,
+      "bytes": 6997,
+      "failed": 0,
+      "path": "/tmp/LIR23-retained-capacity-existing-owner-source-v180-x3rt52pr/actual-existing-core-cap-RED-GREEN-and-preservation.json",
+      "scope": "actual daemon/core function/class ASTs, explicit fictional process/deadline/unselected scheduler boundaries; no project imports or Native",
+      "sha256": "a8836262942492aa88388ab42b9f1e3adef3fe6e9ca3042c7166bb71d9d5aa01"
+    },
+    "real_managed_ledger_claim_cap_operation": false,
+    "real_row_eligibility_or_Native_admission": false
+  },
+  "selected_roles": [
+    {
+      "blob": "eb6388cac544c9e9fb6340cef53cca26ff0fafab",
+      "bytes": 263400,
+      "full9": {
+        "st_ctime_ns": "1795539178742363086",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042524",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795539178127388207",
+        "st_nlink": "1",
+        "st_size": "263400",
+        "st_uid": "1000"
+      },
+      "mode": "100644",
+      "parent_blob": "c22fe24352c9f2e8c7cabfa792c2f69cdb7939ae",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_resource_recovery.py",
+      "relative_path": "ipfs_datasets_py/optimizers/logic_theorem_optimizer/autoencoder_resource_recovery.py",
+      "role": "resource recovery owner",
+      "sha256": "d2b7abf195e1e9d656392b477ebad25d28963669e6f1b0fac1e1ad0bade9dfed"
+    },
+    {
+      "blob": "8359394ca1be95b9fb2bfccb8633b5ad060ae2c4",
+      "bytes": 648256,
+      "full9": {
+        "st_ctime_ns": "1795539179337369045",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042525",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795539178131017380",
+        "st_nlink": "1",
+        "st_size": "648256",
+        "st_uid": "1000"
+      },
+      "mode": "100644",
+      "parent_blob": "c183df5b076c33035e84b5a4f725e74070e91908",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_resource_recovery.py",
+      "relative_path": "tests/unit/optimizers/logic_theorem_optimizer/test_autoencoder_resource_recovery.py",
+      "role": "resource recovery owning tests",
+      "sha256": "ed337607e173ea972bd00bee74d9e1bcfa5ee98954504212c67cbedbc0ce3384"
+    }
+  ],
+  "tree": "c730faca8a6e568a78af044781b036f969879e86",
+  "two_selected_paths_only": true,
+  "worktrees_clean": true
+}

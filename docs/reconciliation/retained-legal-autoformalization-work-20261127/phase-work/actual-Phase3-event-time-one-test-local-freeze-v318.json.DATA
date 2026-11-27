@@ -1,0 +1,191 @@
+{
+  "D_branch_ref_before": {
+    "OID": "353d06b87123f1edaf3685f197f2454c31ba1911",
+    "bytes": 41,
+    "full9": {
+      "st_ctime_ns": "1795608418244290954",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862934",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795608418244290954",
+      "st_nlink": "1",
+      "st_size": "41",
+      "st_uid": "1000"
+    },
+    "name": "refs/heads/work/phase6-capacity-composition-20261123",
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/refs/heads/work/phase6-capacity-composition-20261123",
+    "sha256": "50d7323d3225ebeb0643b045633a7c310176a486647734013d26b36fbf8dec37"
+  },
+  "D_branch_ref_frozen": {
+    "OID": "dbc2e90e45fd090c8d850ba989194fbb2b71617d",
+    "bytes": 41,
+    "full9": {
+      "st_ctime_ns": "1795609514536910262",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862935",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795609514536910262",
+      "st_nlink": "1",
+      "st_size": "41",
+      "st_uid": "1000"
+    },
+    "name": "refs/heads/work/phase6-capacity-composition-20261123",
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/refs/heads/work/phase6-capacity-composition-20261123",
+    "sha256": "68936f51d6ea8f1262cfa75103dc2b49392f47623310a09686e32f6516e0780a"
+  },
+  "D_clean_worktree_and_index": true,
+  "D_index_before": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795608418244097193",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795608418242290938",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "288d784f95044a1564892e3ebc50974e9e6fe78f8e57595143f9e2da4118bea2"
+  },
+  "D_index_frozen": {
+    "bytes": 6991149,
+    "full9": {
+      "st_ctime_ns": "1795609514534903984",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68338235",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795609514533903973",
+      "st_nlink": "1",
+      "st_size": "6991149",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/index",
+    "sha256": "94045f1ce471de3695c9b85ba0ba379320fa6ff68311e040ff3120fcb24601a3"
+  },
+  "D_local_HEAD": "dbc2e90e45fd090c8d850ba989194fbb2b71617d",
+  "D_parent": "353d06b87123f1edaf3685f197f2454c31ba1911",
+  "D_symbolic_HEAD_frozen": {
+    "file": {
+      "bytes": 58,
+      "full9": {
+        "st_ctime_ns": "1795421817209629985",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "68338411",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795421817209629985",
+        "st_nlink": "1",
+        "st_size": "58",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/.git/HEAD",
+      "sha256": "633d4b3d5604d54947816497188e2b631576bbd7c3c2986bee21e5d45c8a8147"
+    },
+    "name": "refs/heads/work/phase6-capacity-composition-20261123"
+  },
+  "D_tree": "482b819d49ca48399e41e0e29af125fff3bb672c",
+  "exact_committed_file": {
+    "bytes": 78756,
+    "full9": {
+      "st_ctime_ns": "1795609363436170370",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "70042500",
+      "st_mode": "33204",
+      "st_mtime_ns": "1795609362801305807",
+      "st_nlink": "1",
+      "st_size": "78756",
+      "st_uid": "1000"
+    },
+    "git_mode": "100644",
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_legal_relational_norm_v1.py",
+    "previous_blob": "2c2f9662b7d79393a1b5d5aa684cf6e047820cb5",
+    "relative_path": "tests/unit/logic/autoformal/test_legal_relational_norm_v1.py",
+    "sha256": "b682b68029459bfb66ca6d09e2fb88269705b77cfd0296ca7ee46f8f96b135ef",
+    "stage0_and_committed_blob": "f8fbe28c07a156a8f67e6d6501706d3abe6c206f"
+  },
+  "exact_test_append": {
+    "append_bytes": 1930,
+    "new_test": "test_mixed_cap_permission_counts_each_event_time_pair",
+    "old_top_level_ASTs_preserved": 97,
+    "unchanged_byte_prefix": 76826
+  },
+  "freeze_for_existing_Source_only_ordinary5": true,
+  "guide521_Source8_and_other_tree_entries_gitlinks_preserved": true,
+  "local_origin_main_tracking_unchanged": "353d06b87123f1edaf3685f197f2454c31ba1911",
+  "no_push_Source_test_compiler_Native_CI_model_review": true,
+  "ordinary5": "UNRUN",
+  "other_roots_preserved": {
+    "accelerate": {
+      "HEAD": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "clean_worktree_and_index": true,
+      "index_full9": {
+        "st_ctime_ns": "1795500785295142737",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69342879",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795500785294142725",
+        "st_nlink": "1",
+        "st_size": "4412225",
+        "st_uid": "1000"
+      },
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "hallucinate": {
+      "HEAD": "6dd543a803739ac955af5297e8f267ba1846f403",
+      "clean_worktree_and_index": true,
+      "index_full9": {
+        "st_ctime_ns": "1795608422413401642",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69342837",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795608422412750869",
+        "st_nlink": "1",
+        "st_size": "138750",
+        "st_uid": "1000"
+      },
+      "tree": "9d09aa56f7d8352e1391145b02a0040251cd8123"
+    },
+    "root": {
+      "HEAD": "a64685bd679b3f16567938bd40af26ac5ed21c93",
+      "clean_worktree_and_index": true,
+      "index_full9": {
+        "st_ctime_ns": "1795608425033346884",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "69387327",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795608425032346876",
+        "st_nlink": "1",
+        "st_size": "7262222",
+        "st_uid": "1000"
+      },
+      "tree": "932aa068febdc653a0949403573ce27680d378b2"
+    }
+  },
+  "schema": "Phase3-event-time-one-test-local-only-freeze/v318",
+  "source_closed_install": {
+    "bytes": 3996,
+    "full9": {
+      "st_ctime_ns": "1795609426536803745",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "72107974",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795609426536803745",
+      "st_nlink": "1",
+      "st_size": "3996",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/Root-Phase3-event-time-one-test-Source1-selected-v318-rktavf_3/Root-Phase3-one-test-installed-Source-closed-small-v318.json",
+    "sha256": "fc7f1069e150b926473649f15b8fe07bd040a4fff05571aa5de697320714b98d"
+  }
+}

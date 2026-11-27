@@ -1,0 +1,3305 @@
+{
+  "actual_cache_native_command_count": 3,
+  "actual_native_commands_for_version_mutation_controls": 0,
+  "actual_process_results": [
+    {
+      "cancelled": false,
+      "command": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "--version"
+      ],
+      "elapsed_seconds": 0.09478734713047743,
+      "error": "",
+      "interface_version": "bounded-tool-runner/v1",
+      "native_lifecycle": {
+        "cleanup_confirmed": true,
+        "descendant_tracking_complete": true,
+        "group_scan_complete": true,
+        "kernel_containment_attested": false,
+        "leader": {
+          "birth_ticks": 476770906,
+          "parent_pid": 2435203,
+          "pid": 2435613,
+          "process_group_id": 2435613,
+          "session_id": 2435613
+        },
+        "leader_reaped": true,
+        "observation_errors": [],
+        "observed_descendants": [],
+        "ownership_is_sampled": true,
+        "parent": {
+          "birth_ticks": 476770821,
+          "pid": 2435203
+        },
+        "readers": {
+          "joined": 2,
+          "started": 2
+        },
+        "remaining_group_members": [],
+        "remaining_tracked_descendants": [],
+        "schema": "native-owned-tool-lifecycle@1",
+        "stdin_writer": {
+          "joined": 0,
+          "started": 0
+        },
+        "workspace": {
+          "device": 66306,
+          "inode": 5816556,
+          "removed": true
+        }
+      },
+      "output_files": {},
+      "output_truncated": false,
+      "pid": 2435613,
+      "process_tree_terminated": false,
+      "resource_exhausted": false,
+      "resource_observation": {
+        "admission": {
+          "ambient_operation_present": false,
+          "requested_limits": {
+            "cpu_hard_seconds": 10,
+            "cpu_seconds_configured": 10.0,
+            "cpu_soft_seconds": 10,
+            "file_bytes": 131072,
+            "input_bytes": 65536,
+            "output_bytes": 65536,
+            "output_files": 64,
+            "resident_memory_bytes": 4294967296,
+            "rlimit_as_enabled": true,
+            "rlimit_cpu_enabled": true,
+            "rlimit_fsize_enabled": true,
+            "termination_grace_seconds": 0.25,
+            "virtual_memory_bytes": 4294967296,
+            "wall_seconds": 10.0,
+            "workspace_bytes": 131072,
+            "workspace_depth": 64,
+            "workspace_entries": 16384
+          },
+          "shared_deadline_monotonic": 4767719.053373813
+        },
+        "cause_known": true,
+        "dispatched": true,
+        "effective_limits": {
+          "cpu_hard_seconds": 10,
+          "cpu_seconds_configured": 10.0,
+          "cpu_soft_seconds": 10,
+          "file_bytes": 131072,
+          "input_bytes": 65536,
+          "output_bytes": 65536,
+          "output_files": 64,
+          "resident_memory_bytes": 4294967296,
+          "rlimit_as_enabled": true,
+          "rlimit_cpu_enabled": true,
+          "rlimit_fsize_enabled": true,
+          "termination_grace_seconds": 0.25,
+          "virtual_memory_bytes": 4294967296,
+          "wall_seconds": 9.990637357346714,
+          "workspace_bytes": 131072,
+          "workspace_depth": 64,
+          "workspace_entries": 16384
+        },
+        "limits_basis": "computed from final invocation; not an independent getrlimit measurement",
+        "observed_trigger": "completed",
+        "rss": {
+          "cap_bytes": 4294967296,
+          "current_bytes": 1368064,
+          "peak_sampled_bytes": 1368064
+        },
+        "schema": "native-tool-resource-observation/v1",
+        "signal_number": null,
+        "trigger_stage": "process_exit"
+      },
+      "returncode": 0,
+      "runtime": "native",
+      "stderr": "",
+      "stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)\n",
+      "termination_reason": "completed",
+      "timed_out": false,
+      "unavailable": false,
+      "workspace_cleaned": true,
+      "workspace_limit_exceeded": false
+    },
+    {
+      "cancelled": false,
+      "command": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "-s65536",
+        "-j1",
+        "--json",
+        "Main.lean"
+      ],
+      "elapsed_seconds": 0.2089814431965351,
+      "error": "",
+      "interface_version": "bounded-tool-runner/v1",
+      "native_lifecycle": {
+        "cleanup_confirmed": true,
+        "descendant_tracking_complete": true,
+        "group_scan_complete": true,
+        "kernel_containment_attested": false,
+        "leader": {
+          "birth_ticks": 476770916,
+          "parent_pid": 2435203,
+          "pid": 2435656,
+          "process_group_id": 2435656,
+          "session_id": 2435656
+        },
+        "leader_reaped": true,
+        "observation_errors": [],
+        "observed_descendants": [],
+        "ownership_is_sampled": true,
+        "parent": {
+          "birth_ticks": 476770821,
+          "pid": 2435203
+        },
+        "readers": {
+          "joined": 2,
+          "started": 2
+        },
+        "remaining_group_members": [],
+        "remaining_tracked_descendants": [],
+        "schema": "native-owned-tool-lifecycle@1",
+        "stdin_writer": {
+          "joined": 0,
+          "started": 0
+        },
+        "workspace": {
+          "device": 66306,
+          "inode": 5816556,
+          "removed": true
+        }
+      },
+      "output_files": {},
+      "output_truncated": false,
+      "pid": 2435656,
+      "process_tree_terminated": false,
+      "resource_exhausted": false,
+      "resource_observation": {
+        "admission": {
+          "ambient_operation_present": false,
+          "requested_limits": {
+            "cpu_hard_seconds": 15,
+            "cpu_seconds_configured": 14.9,
+            "cpu_soft_seconds": 15,
+            "file_bytes": 131072,
+            "input_bytes": 65536,
+            "output_bytes": 65429,
+            "output_files": 64,
+            "resident_memory_bytes": 4294967296,
+            "rlimit_as_enabled": true,
+            "rlimit_cpu_enabled": true,
+            "rlimit_fsize_enabled": true,
+            "termination_grace_seconds": 0.25,
+            "virtual_memory_bytes": 4294967296,
+            "wall_seconds": 14.9,
+            "workspace_bytes": 131072,
+            "workspace_depth": 64,
+            "workspace_entries": 16384
+          },
+          "shared_deadline_monotonic": 4767724.052229505
+        },
+        "cause_known": true,
+        "dispatched": true,
+        "effective_limits": {
+          "cpu_hard_seconds": 15,
+          "cpu_seconds_configured": 14.9,
+          "cpu_soft_seconds": 15,
+          "file_bytes": 131072,
+          "input_bytes": 65536,
+          "output_bytes": 65429,
+          "output_files": 64,
+          "resident_memory_bytes": 4294967296,
+          "rlimit_as_enabled": true,
+          "rlimit_cpu_enabled": true,
+          "rlimit_fsize_enabled": true,
+          "termination_grace_seconds": 0.25,
+          "virtual_memory_bytes": 4294967296,
+          "wall_seconds": 14.890574253164232,
+          "workspace_bytes": 131072,
+          "workspace_depth": 64,
+          "workspace_entries": 16384
+        },
+        "limits_basis": "computed from final invocation; not an independent getrlimit measurement",
+        "observed_trigger": "completed",
+        "rss": {
+          "cap_bytes": 4294967296,
+          "current_bytes": 424804352,
+          "peak_sampled_bytes": 424804352
+        },
+        "schema": "native-tool-resource-observation/v1",
+        "signal_number": null,
+        "trigger_stage": "process_exit"
+      },
+      "returncode": 0,
+      "runtime": "native",
+      "stderr": "",
+      "stdout": "{\"caption\":\"\",\"data\":\"'_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f' does not depend on any axioms\",\"endPos\":{\"column\":6,\"line\":12},\"fileName\":\"Main.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"[anonymous]\",\"pos\":{\"column\":0,\"line\":12},\"severity\":\"information\"}\n",
+      "termination_reason": "completed",
+      "timed_out": false,
+      "unavailable": false,
+      "workspace_cleaned": true,
+      "workspace_limit_exceeded": false
+    },
+    {
+      "cancelled": false,
+      "command": [
+        "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "-s65536",
+        "-j1",
+        "--json",
+        "Main.lean"
+      ],
+      "elapsed_seconds": 0.22338401060551405,
+      "error": "",
+      "interface_version": "bounded-tool-runner/v1",
+      "native_lifecycle": {
+        "cleanup_confirmed": true,
+        "descendant_tracking_complete": true,
+        "group_scan_complete": true,
+        "kernel_containment_attested": false,
+        "leader": {
+          "birth_ticks": 476770938,
+          "parent_pid": 2435203,
+          "pid": 2435664,
+          "process_group_id": 2435664,
+          "session_id": 2435664
+        },
+        "leader_reaped": true,
+        "observation_errors": [],
+        "observed_descendants": [],
+        "ownership_is_sampled": true,
+        "parent": {
+          "birth_ticks": 476770821,
+          "pid": 2435203
+        },
+        "readers": {
+          "joined": 2,
+          "started": 2
+        },
+        "remaining_group_members": [],
+        "remaining_tracked_descendants": [],
+        "schema": "native-owned-tool-lifecycle@1",
+        "stdin_writer": {
+          "joined": 0,
+          "started": 0
+        },
+        "workspace": {
+          "device": 66306,
+          "inode": 5816556,
+          "removed": true
+        }
+      },
+      "output_files": {},
+      "output_truncated": false,
+      "pid": 2435664,
+      "process_tree_terminated": false,
+      "resource_exhausted": false,
+      "resource_observation": {
+        "admission": {
+          "ambient_operation_present": false,
+          "requested_limits": {
+            "cpu_hard_seconds": 15,
+            "cpu_seconds_configured": 15.0,
+            "cpu_soft_seconds": 15,
+            "file_bytes": 131072,
+            "input_bytes": 65536,
+            "output_bytes": 65536,
+            "output_files": 64,
+            "resident_memory_bytes": 4294967296,
+            "rlimit_as_enabled": true,
+            "rlimit_cpu_enabled": true,
+            "rlimit_fsize_enabled": true,
+            "termination_grace_seconds": 0.25,
+            "virtual_memory_bytes": 4294967296,
+            "wall_seconds": 15.0,
+            "workspace_bytes": 131072,
+            "workspace_depth": 64,
+            "workspace_entries": 16384
+          },
+          "shared_deadline_monotonic": 4767724.374330442
+        },
+        "cause_known": true,
+        "dispatched": true,
+        "effective_limits": {
+          "cpu_hard_seconds": 15,
+          "cpu_seconds_configured": 15.0,
+          "cpu_soft_seconds": 15,
+          "file_bytes": 131072,
+          "input_bytes": 65536,
+          "output_bytes": 65536,
+          "output_files": 64,
+          "resident_memory_bytes": 4294967296,
+          "rlimit_as_enabled": true,
+          "rlimit_cpu_enabled": true,
+          "rlimit_fsize_enabled": true,
+          "termination_grace_seconds": 0.25,
+          "virtual_memory_bytes": 4294967296,
+          "wall_seconds": 14.990250600501895,
+          "workspace_bytes": 131072,
+          "workspace_depth": 64,
+          "workspace_entries": 16384
+        },
+        "limits_basis": "computed from final invocation; not an independent getrlimit measurement",
+        "observed_trigger": "completed",
+        "rss": {
+          "cap_bytes": 4294967296,
+          "current_bytes": 398077952,
+          "peak_sampled_bytes": 398077952
+        },
+        "schema": "native-tool-resource-observation/v1",
+        "signal_number": null,
+        "trigger_stage": "process_exit"
+      },
+      "returncode": 0,
+      "runtime": "native",
+      "stderr": "",
+      "stdout": "{\"caption\":\"\",\"data\":\"'_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f' does not depend on any axioms\",\"endPos\":{\"column\":6,\"line\":12},\"fileName\":\"Main.lean\",\"isSilent\":false,\"keepFullRange\":false,\"kind\":\"[anonymous]\",\"pos\":{\"column\":0,\"line\":12},\"severity\":\"information\"}\n",
+      "termination_reason": "completed",
+      "timed_out": false,
+      "unavailable": false,
+      "workspace_cleaned": true,
+      "workspace_limit_exceeded": false
+    }
+  ],
+  "attempt": {
+    "artifact_digests": [],
+    "attempt_id": "attempt:fictional-native-cache",
+    "backend_id": "lean",
+    "backend_version": "4.34.1",
+    "bounds": {
+      "max_memory_bytes": 4294967296,
+      "max_output_bytes": 65536,
+      "max_steps": 100,
+      "timeout_ms": 15000
+    },
+    "diagnostics": [],
+    "output_digest": "b781068a87c827c02fd13439b0154fca070d5c0ee81437da1e3cc9fd93a6d883",
+    "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+    "schema_version": "proof-backend-attempt/v1",
+    "status": "succeeded",
+    "usage": {
+      "elapsed_ms": 234,
+      "output_bytes": 316,
+      "peak_memory_bytes": 0,
+      "steps": 0
+    }
+  },
+  "backend_version_mutation_controls": [
+    {
+      "actual_native_version": "4.34.1",
+      "advertised_backend_version": "other-version",
+      "attempt": {
+        "artifact_digests": [],
+        "attempt_id": "attempt:software-reissued-native-cache-version:other-version",
+        "backend_id": "lean",
+        "backend_version": "other-version",
+        "bounds": {
+          "max_memory_bytes": 4294967296,
+          "max_output_bytes": 65536,
+          "max_steps": 100,
+          "timeout_ms": 15000
+        },
+        "diagnostics": [
+          "Software-reissued mutation; no corresponding Native execution."
+        ],
+        "output_digest": "b746a6b79d3d618abf70701001f541a2a40dcb34440a1eaade4cbb3a6e28c702",
+        "request_digest": "058d5b119863d29f0542bc607e33334f1f7895c4513a7b4e9abe48c1b44e0a74",
+        "schema_version": "proof-backend-attempt/v1",
+        "status": "succeeded",
+        "usage": {
+          "elapsed_ms": 0,
+          "output_bytes": 0,
+          "peak_memory_bytes": 0,
+          "steps": 0
+        }
+      },
+      "cache_binding_rejected": true,
+      "claim": {
+        "assumptions": [
+          {
+            "assumption_id": "assumption:fictional-native-cache",
+            "metadata": {},
+            "schema_version": "ir-assumption/v1",
+            "source_refs": [
+              "source:fictional-native-cache-provision"
+            ],
+            "statement": "True"
+          }
+        ],
+        "claim_id": "claim:fictional-native-cache",
+        "declaration_id": "fictional-native-cache-provision",
+        "domain": "legal",
+        "metadata": {
+          "artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+          "proof_context_digest": "bff9c65397475cb4b8ec1578ef061c8bfaccaeef41754282ab1e08f1e06c2a72",
+          "source_digest": "sha256:a6216c1677a844638b881e4d3aae07b6eac8ba34bb66ed0ebd409e0bdb5fddc4"
+        },
+        "obligations": [
+          {
+            "assumption_ids": [
+              "assumption:fictional-native-cache"
+            ],
+            "logic_family": "lean4",
+            "metadata": {
+              "fixture_only": true,
+              "statutory_meaning_claimed": false
+            },
+            "obligation_id": "obligation:fictional-native-cache",
+            "schema_version": "ir-proof-obligation/v1",
+            "source_refs": [
+              "source:fictional-native-cache-provision"
+            ],
+            "statement": "True"
+          }
+        ],
+        "schema_version": "ir-claim/v1",
+        "source_refs": [
+          "source:fictional-native-cache-provision"
+        ],
+        "statement": "True"
+      },
+      "context": {
+        "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+        "backend_id": "lean",
+        "backend_version": "other-version",
+        "dependency_versions": {
+          "fictional-definition": "aec51d835deabda7aa70ad07f0e55b41d042c8fa2634cfb52d19f4862c2f1f4b",
+          "fictional-translation": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f"
+        },
+        "expected_declaration": "cache_native_fixture",
+        "expected_proposition": "True",
+        "interpretation_digest": "365b499344b7cd85c7667cc6d1a63e4db5aa50ff2119d63026589f3a75f97bb1",
+        "jurisdiction": "fictional",
+        "schema_version": "legal-proof-reuse-context/v1",
+        "toolchain": {
+          "command_template": "{lean} -s65536 -j1 --json {source_file}",
+          "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+          "kernel_id": "lean",
+          "metadata": {
+            "approved_axioms": [],
+            "approved_imports": [
+              "Init",
+              "Init.Classical",
+              "Init.Prelude"
+            ],
+            "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+            "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+            "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+            "native_resource_profile": {
+              "address_space_bytes": 4294967296,
+              "child_process_slots": 1,
+              "cpu_slots": 1,
+              "environment": {
+                "LEAN_MAIN_USE_THREAD": "0",
+                "LEAN_NUM_THREADS": "1",
+                "LEAN_STACK_SIZE_KB": "65536"
+              },
+              "resident_memory_bytes": 4294967296,
+              "resident_memory_enforcement": "sampled_process_tree_rss"
+            },
+            "verification_profile": "lean-kernel-verification/v2"
+          },
+          "module_id": "",
+          "plane": "native",
+          "toolchain_id": "toolchain:lean:native:4.34.1",
+          "version": "4.34.1"
+        }
+      },
+      "kernel_receipt": {
+        "accepted": true,
+        "approved_axioms": [],
+        "approved_imports": [
+          "Init",
+          "Init.Classical",
+          "Init.Prelude"
+        ],
+        "authority_disposition": "reject",
+        "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+        "axiom_report": {
+          "axioms": [],
+          "contains_sorry_ax": false,
+          "declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+          "report_text": "'_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f' does not depend on any axioms",
+          "schema_version": "lean-axiom-report/v2",
+          "source_column": 0,
+          "source_line": 12,
+          "source_path": "Main.lean"
+        },
+        "compiled_source_digest": "976c6259f718a4c53c75947b8b0f5b91f3c8b86d9ec728ad0abb99366fb01390",
+        "diagnostics": [],
+        "expected_obligation_declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+        "expected_proposition": "True",
+        "expected_proposition_checked": true,
+        "expected_proposition_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+        "generated_proof": "theorem cache_native_fixture : True := by\n  exact True.intro",
+        "generated_proof_digest": "c46e2990727860d15ab5089901d067bab30b072cf593abc1fab6e6cd05155d2a",
+        "imports": [
+          "Init"
+        ],
+        "native_identity": {
+          "actual_version": "4.34.1",
+          "executable_bytes": 13824,
+          "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+          "executable_stat_after": {
+            "ctime_ns": 1790376166615972340,
+            "device": 66306,
+            "inode": 6721251,
+            "mtime_ns": 1790273308000000000,
+            "size": 13824
+          },
+          "executable_stat_before": {
+            "ctime_ns": 1790376166615972340,
+            "device": 66306,
+            "inode": 6721251,
+            "mtime_ns": 1790273308000000000,
+            "size": 13824
+          },
+          "library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+          "observation_kind": "bounded_native_version_probe",
+          "resolved_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+          "schema_version": "lean-native-identity/v1",
+          "version_command": [
+            "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "--version"
+          ],
+          "version_returncode": 0,
+          "version_stderr": "",
+          "version_stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+        },
+        "native_identity_checked_after_compile": true,
+        "plane": "native",
+        "receipt_id": "lean-kernel-receipt:1c832acef2a6bf45dd8f09ca930fd9008a50fac4b05a812684edc7b3180f297f",
+        "request_digest": "058d5b119863d29f0542bc607e33334f1f7895c4513a7b4e9abe48c1b44e0a74",
+        "schema_version": "lean-kernel-receipt/v3",
+        "source_binding": {
+          "request_digest": "058d5b119863d29f0542bc607e33334f1f7895c4513a7b4e9abe48c1b44e0a74",
+          "schema_version": "lean-source-binding/v1",
+          "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+          "source_format": "lean4"
+        },
+        "source_tree": {
+          "files": {
+            "Main.lean": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842"
+          },
+          "primary_path": "Main.lean",
+          "root_digest": "2705625a01845475014ebd2486df73c4f5cb8638cf2a50f94acc2ef9ec76d496",
+          "tree_id": "source-tree:2705625a01845475014ebd24"
+        },
+        "submitted_source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+        "theorem_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+        "theorem_name": "cache_native_fixture",
+        "toolchain": {
+          "command_template": "{lean} -s65536 -j1 --json {source_file}",
+          "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+          "kernel_id": "lean",
+          "metadata": {
+            "approved_axioms": [],
+            "approved_imports": [
+              "Init",
+              "Init.Classical",
+              "Init.Prelude"
+            ],
+            "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+            "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+            "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+            "native_resource_profile": {
+              "address_space_bytes": 4294967296,
+              "child_process_slots": 1,
+              "cpu_slots": 1,
+              "environment": {
+                "LEAN_MAIN_USE_THREAD": "0",
+                "LEAN_NUM_THREADS": "1",
+                "LEAN_STACK_SIZE_KB": "65536"
+              },
+              "resident_memory_bytes": 4294967296,
+              "resident_memory_enforcement": "sampled_process_tree_rss"
+            },
+            "verification_profile": "lean-kernel-verification/v2"
+          },
+          "module_id": "",
+          "plane": "native",
+          "toolchain_id": "toolchain:lean:native:4.34.1",
+          "version": "4.34.1"
+        },
+        "translation": {
+          "fidelity": "exact",
+          "metadata": {
+            "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+            "generated_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+            "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+            "target_theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq"
+          },
+          "source_family": "target_theory",
+          "target_family": "lean4",
+          "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f",
+          "translation_id": "translation:fictional-native-cache"
+        }
+      },
+      "kind": "software_reissued_actual_native_base",
+      "native_processes_added": 0,
+      "new_native_execution": false,
+      "original_native_receipt_id": "lean-kernel-receipt:8527bfebb7c7ef5ec7247e48513d1fb7f5897d1d5ad226b6e4f76c514c4ca99c",
+      "receipt": {
+        "assumption_ids": [
+          "assumption:fictional-native-cache"
+        ],
+        "attempt_digest": "0836fb8bc616bf7f82529b1fcbbb51ccfcb6845a1980c7a8b4c1185de83bd9c0",
+        "backend_id": "lean",
+        "backend_version": "other-version",
+        "bounds_digest": "14d226d68abffef3a0039ced67655cad0b08d69f52cd546d320afea4f01fc083",
+        "claim_digest": "7d8887493a4b5617241c6d76155805ad6a868070ba45362485c715d3d36c5053",
+        "claim_id": "claim:fictional-native-cache",
+        "declaration_id": "fictional-native-cache-provision",
+        "obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+        "obligation_id": "obligation:fictional-native-cache",
+        "output_digest": "b746a6b79d3d618abf70701001f541a2a40dcb34440a1eaade4cbb3a6e28c702",
+        "proof_authority": "theorem_proof",
+        "receipt_id": "receipt:software-reissued-native-cache-version:other-version",
+        "request_digest": "058d5b119863d29f0542bc607e33334f1f7895c4513a7b4e9abe48c1b44e0a74",
+        "result_digest": "44483672223492237500c7e5115ff731de6f489d12d3f7ca27b7806e81b3e71c",
+        "result_type": "proof",
+        "schema_version": "theorem-proof-receipt/v1",
+        "status": "proved",
+        "verifier": "software-mutation-control"
+      },
+      "rejection": "proved backend version differs from checked native/toolchain version",
+      "request": {
+        "assumption_ids": [
+          "assumption:fictional-native-cache"
+        ],
+        "bounds": {
+          "max_memory_bytes": 4294967296,
+          "max_output_bytes": 65536,
+          "max_steps": 100,
+          "timeout_ms": 15000
+        },
+        "claim_digest": "7d8887493a4b5617241c6d76155805ad6a868070ba45362485c715d3d36c5053",
+        "claim_id": "claim:fictional-native-cache",
+        "declaration_id": "fictional-native-cache-provision",
+        "logic_family": "lean4",
+        "obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+        "obligation_id": "obligation:fictional-native-cache",
+        "payload": {
+          "encoding": "lean4",
+          "expected_declaration": "cache_native_fixture",
+          "expected_proposition": "True",
+          "legal_proof_context": {
+            "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+            "backend_id": "lean",
+            "backend_version": "other-version",
+            "dependency_versions": {
+              "fictional-definition": "aec51d835deabda7aa70ad07f0e55b41d042c8fa2634cfb52d19f4862c2f1f4b",
+              "fictional-translation": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f"
+            },
+            "expected_declaration": "cache_native_fixture",
+            "expected_proposition": "True",
+            "interpretation_digest": "365b499344b7cd85c7667cc6d1a63e4db5aa50ff2119d63026589f3a75f97bb1",
+            "jurisdiction": "fictional",
+            "schema_version": "legal-proof-reuse-context/v1",
+            "toolchain": {
+              "command_template": "{lean} -s65536 -j1 --json {source_file}",
+              "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+              "kernel_id": "lean",
+              "metadata": {
+                "approved_axioms": [],
+                "approved_imports": [
+                  "Init",
+                  "Init.Classical",
+                  "Init.Prelude"
+                ],
+                "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+                "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+                "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+                "native_resource_profile": {
+                  "address_space_bytes": 4294967296,
+                  "child_process_slots": 1,
+                  "cpu_slots": 1,
+                  "environment": {
+                    "LEAN_MAIN_USE_THREAD": "0",
+                    "LEAN_NUM_THREADS": "1",
+                    "LEAN_STACK_SIZE_KB": "65536"
+                  },
+                  "resident_memory_bytes": 4294967296,
+                  "resident_memory_enforcement": "sampled_process_tree_rss"
+                },
+                "verification_profile": "lean-kernel-verification/v2"
+              },
+              "module_id": "",
+              "plane": "native",
+              "toolchain_id": "toolchain:lean:native:4.34.1",
+              "version": "4.34.1"
+            }
+          },
+          "source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+          "translation": {
+            "fidelity": "exact",
+            "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+            "generated_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+            "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+            "source_family": "target_theory",
+            "target_family": "lean4",
+            "target_theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq",
+            "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f",
+            "translation_id": "translation:fictional-native-cache"
+          }
+        },
+        "query_kind": "theorem_proof",
+        "request_id": "request:software-reissued-native-cache-version:other-version",
+        "requested_backend_id": "lean",
+        "schema_version": "proof-backend-request/v1"
+      },
+      "result": {
+        "assumption_ids": [
+          "assumption:fictional-native-cache"
+        ],
+        "attempt_digest": "0836fb8bc616bf7f82529b1fcbbb51ccfcb6845a1980c7a8b4c1185de83bd9c0",
+        "authority": {
+          "configuration_digest": "bff9c65397475cb4b8ec1578ef061c8bfaccaeef41754282ab1e08f1e06c2a72",
+          "evidence_digests": [],
+          "issuer": "software-mutation-control",
+          "kind": "theorem_proof",
+          "method": "software-reissued-actual-native-base/no-new-execution",
+          "schema_version": "result-authority/v1",
+          "scope_digest": "058d5b119863d29f0542bc607e33334f1f7895c4513a7b4e9abe48c1b44e0a74"
+        },
+        "backend_id": "lean",
+        "backend_version": "other-version",
+        "bounds": {
+          "max_memory_bytes": 4294967296,
+          "max_output_bytes": 65536,
+          "max_steps": 100,
+          "timeout_ms": 15000
+        },
+        "claim_digest": "7d8887493a4b5617241c6d76155805ad6a868070ba45362485c715d3d36c5053",
+        "declaration_id": "fictional-native-cache-provision",
+        "diagnostics": [],
+        "obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+        "obligation_id": "obligation:fictional-native-cache",
+        "output_digest": "b746a6b79d3d618abf70701001f541a2a40dcb34440a1eaade4cbb3a6e28c702",
+        "payload": {
+          "kernel_receipt": {
+            "accepted": true,
+            "approved_axioms": [],
+            "approved_imports": [
+              "Init",
+              "Init.Classical",
+              "Init.Prelude"
+            ],
+            "authority_disposition": "reject",
+            "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+            "axiom_report": {
+              "axioms": [],
+              "contains_sorry_ax": false,
+              "declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+              "report_text": "'_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f' does not depend on any axioms",
+              "schema_version": "lean-axiom-report/v2",
+              "source_column": 0,
+              "source_line": 12,
+              "source_path": "Main.lean"
+            },
+            "compiled_source_digest": "976c6259f718a4c53c75947b8b0f5b91f3c8b86d9ec728ad0abb99366fb01390",
+            "diagnostics": [],
+            "expected_obligation_declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+            "expected_proposition": "True",
+            "expected_proposition_checked": true,
+            "expected_proposition_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+            "generated_proof": "theorem cache_native_fixture : True := by\n  exact True.intro",
+            "generated_proof_digest": "c46e2990727860d15ab5089901d067bab30b072cf593abc1fab6e6cd05155d2a",
+            "imports": [
+              "Init"
+            ],
+            "native_identity": {
+              "actual_version": "4.34.1",
+              "executable_bytes": 13824,
+              "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+              "executable_stat_after": {
+                "ctime_ns": 1790376166615972340,
+                "device": 66306,
+                "inode": 6721251,
+                "mtime_ns": 1790273308000000000,
+                "size": 13824
+              },
+              "executable_stat_before": {
+                "ctime_ns": 1790376166615972340,
+                "device": 66306,
+                "inode": 6721251,
+                "mtime_ns": 1790273308000000000,
+                "size": 13824
+              },
+              "library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+              "observation_kind": "bounded_native_version_probe",
+              "resolved_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+              "schema_version": "lean-native-identity/v1",
+              "version_command": [
+                "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+                "--version"
+              ],
+              "version_returncode": 0,
+              "version_stderr": "",
+              "version_stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+            },
+            "native_identity_checked_after_compile": true,
+            "plane": "native",
+            "receipt_id": "lean-kernel-receipt:1c832acef2a6bf45dd8f09ca930fd9008a50fac4b05a812684edc7b3180f297f",
+            "request_digest": "058d5b119863d29f0542bc607e33334f1f7895c4513a7b4e9abe48c1b44e0a74",
+            "schema_version": "lean-kernel-receipt/v3",
+            "source_binding": {
+              "request_digest": "058d5b119863d29f0542bc607e33334f1f7895c4513a7b4e9abe48c1b44e0a74",
+              "schema_version": "lean-source-binding/v1",
+              "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+              "source_format": "lean4"
+            },
+            "source_tree": {
+              "files": {
+                "Main.lean": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842"
+              },
+              "primary_path": "Main.lean",
+              "root_digest": "2705625a01845475014ebd2486df73c4f5cb8638cf2a50f94acc2ef9ec76d496",
+              "tree_id": "source-tree:2705625a01845475014ebd24"
+            },
+            "submitted_source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+            "theorem_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+            "theorem_name": "cache_native_fixture",
+            "toolchain": {
+              "command_template": "{lean} -s65536 -j1 --json {source_file}",
+              "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+              "kernel_id": "lean",
+              "metadata": {
+                "approved_axioms": [],
+                "approved_imports": [
+                  "Init",
+                  "Init.Classical",
+                  "Init.Prelude"
+                ],
+                "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+                "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+                "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+                "native_resource_profile": {
+                  "address_space_bytes": 4294967296,
+                  "child_process_slots": 1,
+                  "cpu_slots": 1,
+                  "environment": {
+                    "LEAN_MAIN_USE_THREAD": "0",
+                    "LEAN_NUM_THREADS": "1",
+                    "LEAN_STACK_SIZE_KB": "65536"
+                  },
+                  "resident_memory_bytes": 4294967296,
+                  "resident_memory_enforcement": "sampled_process_tree_rss"
+                },
+                "verification_profile": "lean-kernel-verification/v2"
+              },
+              "module_id": "",
+              "plane": "native",
+              "toolchain_id": "toolchain:lean:native:4.34.1",
+              "version": "4.34.1"
+            },
+            "translation": {
+              "fidelity": "exact",
+              "metadata": {
+                "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+                "generated_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+                "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+                "target_theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq"
+              },
+              "source_family": "target_theory",
+              "target_family": "lean4",
+              "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f",
+              "translation_id": "translation:fictional-native-cache"
+            }
+          },
+          "new_native_execution": false,
+          "original_native_receipt_id": "lean-kernel-receipt:8527bfebb7c7ef5ec7247e48513d1fb7f5897d1d5ad226b6e4f76c514c4ca99c",
+          "software_reissued_mutation_only": true
+        },
+        "request_digest": "058d5b119863d29f0542bc607e33334f1f7895c4513a7b4e9abe48c1b44e0a74",
+        "result_id": "result:software-reissued-native-cache-version:other-version",
+        "result_type": "proof",
+        "schema_version": "bounded-result/v1",
+        "status": "proved",
+        "usage": {
+          "elapsed_ms": 0,
+          "output_bytes": 0,
+          "peak_memory_bytes": 0,
+          "steps": 0
+        }
+      }
+    },
+    {
+      "actual_native_version": "4.34.1",
+      "advertised_backend_version": "lean4",
+      "attempt": {
+        "artifact_digests": [],
+        "attempt_id": "attempt:software-reissued-native-cache-version:lean4",
+        "backend_id": "lean",
+        "backend_version": "lean4",
+        "bounds": {
+          "max_memory_bytes": 4294967296,
+          "max_output_bytes": 65536,
+          "max_steps": 100,
+          "timeout_ms": 15000
+        },
+        "diagnostics": [
+          "Software-reissued mutation; no corresponding Native execution."
+        ],
+        "output_digest": "0cb51d728b8968d143479a6cbf4cff0750e1067f5cee9fb659e41b8e2b1c4921",
+        "request_digest": "0953b5a4743bb29b3ef50b7c7b671e5fc9344d188f56e80983240ad715630936",
+        "schema_version": "proof-backend-attempt/v1",
+        "status": "succeeded",
+        "usage": {
+          "elapsed_ms": 0,
+          "output_bytes": 0,
+          "peak_memory_bytes": 0,
+          "steps": 0
+        }
+      },
+      "cache_binding_rejected": true,
+      "claim": {
+        "assumptions": [
+          {
+            "assumption_id": "assumption:fictional-native-cache",
+            "metadata": {},
+            "schema_version": "ir-assumption/v1",
+            "source_refs": [
+              "source:fictional-native-cache-provision"
+            ],
+            "statement": "True"
+          }
+        ],
+        "claim_id": "claim:fictional-native-cache",
+        "declaration_id": "fictional-native-cache-provision",
+        "domain": "legal",
+        "metadata": {
+          "artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+          "proof_context_digest": "fd52d3af9e3675d06802f8bd833ff64a87a2e53baab85922d08146bb685593f1",
+          "source_digest": "sha256:a6216c1677a844638b881e4d3aae07b6eac8ba34bb66ed0ebd409e0bdb5fddc4"
+        },
+        "obligations": [
+          {
+            "assumption_ids": [
+              "assumption:fictional-native-cache"
+            ],
+            "logic_family": "lean4",
+            "metadata": {
+              "fixture_only": true,
+              "statutory_meaning_claimed": false
+            },
+            "obligation_id": "obligation:fictional-native-cache",
+            "schema_version": "ir-proof-obligation/v1",
+            "source_refs": [
+              "source:fictional-native-cache-provision"
+            ],
+            "statement": "True"
+          }
+        ],
+        "schema_version": "ir-claim/v1",
+        "source_refs": [
+          "source:fictional-native-cache-provision"
+        ],
+        "statement": "True"
+      },
+      "context": {
+        "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+        "backend_id": "lean",
+        "backend_version": "lean4",
+        "dependency_versions": {
+          "fictional-definition": "aec51d835deabda7aa70ad07f0e55b41d042c8fa2634cfb52d19f4862c2f1f4b",
+          "fictional-translation": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f"
+        },
+        "expected_declaration": "cache_native_fixture",
+        "expected_proposition": "True",
+        "interpretation_digest": "365b499344b7cd85c7667cc6d1a63e4db5aa50ff2119d63026589f3a75f97bb1",
+        "jurisdiction": "fictional",
+        "schema_version": "legal-proof-reuse-context/v1",
+        "toolchain": {
+          "command_template": "{lean} -s65536 -j1 --json {source_file}",
+          "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+          "kernel_id": "lean",
+          "metadata": {
+            "approved_axioms": [],
+            "approved_imports": [
+              "Init",
+              "Init.Classical",
+              "Init.Prelude"
+            ],
+            "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+            "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+            "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+            "native_resource_profile": {
+              "address_space_bytes": 4294967296,
+              "child_process_slots": 1,
+              "cpu_slots": 1,
+              "environment": {
+                "LEAN_MAIN_USE_THREAD": "0",
+                "LEAN_NUM_THREADS": "1",
+                "LEAN_STACK_SIZE_KB": "65536"
+              },
+              "resident_memory_bytes": 4294967296,
+              "resident_memory_enforcement": "sampled_process_tree_rss"
+            },
+            "verification_profile": "lean-kernel-verification/v2"
+          },
+          "module_id": "",
+          "plane": "native",
+          "toolchain_id": "toolchain:lean:native:4.34.1",
+          "version": "4.34.1"
+        }
+      },
+      "kernel_receipt": {
+        "accepted": true,
+        "approved_axioms": [],
+        "approved_imports": [
+          "Init",
+          "Init.Classical",
+          "Init.Prelude"
+        ],
+        "authority_disposition": "reject",
+        "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+        "axiom_report": {
+          "axioms": [],
+          "contains_sorry_ax": false,
+          "declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+          "report_text": "'_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f' does not depend on any axioms",
+          "schema_version": "lean-axiom-report/v2",
+          "source_column": 0,
+          "source_line": 12,
+          "source_path": "Main.lean"
+        },
+        "compiled_source_digest": "976c6259f718a4c53c75947b8b0f5b91f3c8b86d9ec728ad0abb99366fb01390",
+        "diagnostics": [],
+        "expected_obligation_declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+        "expected_proposition": "True",
+        "expected_proposition_checked": true,
+        "expected_proposition_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+        "generated_proof": "theorem cache_native_fixture : True := by\n  exact True.intro",
+        "generated_proof_digest": "c46e2990727860d15ab5089901d067bab30b072cf593abc1fab6e6cd05155d2a",
+        "imports": [
+          "Init"
+        ],
+        "native_identity": {
+          "actual_version": "4.34.1",
+          "executable_bytes": 13824,
+          "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+          "executable_stat_after": {
+            "ctime_ns": 1790376166615972340,
+            "device": 66306,
+            "inode": 6721251,
+            "mtime_ns": 1790273308000000000,
+            "size": 13824
+          },
+          "executable_stat_before": {
+            "ctime_ns": 1790376166615972340,
+            "device": 66306,
+            "inode": 6721251,
+            "mtime_ns": 1790273308000000000,
+            "size": 13824
+          },
+          "library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+          "observation_kind": "bounded_native_version_probe",
+          "resolved_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+          "schema_version": "lean-native-identity/v1",
+          "version_command": [
+            "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "--version"
+          ],
+          "version_returncode": 0,
+          "version_stderr": "",
+          "version_stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+        },
+        "native_identity_checked_after_compile": true,
+        "plane": "native",
+        "receipt_id": "lean-kernel-receipt:a18f4fa584ea45bec2e0cce8f2b2542946febccf0b3e82756259688b0bf00182",
+        "request_digest": "0953b5a4743bb29b3ef50b7c7b671e5fc9344d188f56e80983240ad715630936",
+        "schema_version": "lean-kernel-receipt/v3",
+        "source_binding": {
+          "request_digest": "0953b5a4743bb29b3ef50b7c7b671e5fc9344d188f56e80983240ad715630936",
+          "schema_version": "lean-source-binding/v1",
+          "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+          "source_format": "lean4"
+        },
+        "source_tree": {
+          "files": {
+            "Main.lean": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842"
+          },
+          "primary_path": "Main.lean",
+          "root_digest": "2705625a01845475014ebd2486df73c4f5cb8638cf2a50f94acc2ef9ec76d496",
+          "tree_id": "source-tree:2705625a01845475014ebd24"
+        },
+        "submitted_source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+        "theorem_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+        "theorem_name": "cache_native_fixture",
+        "toolchain": {
+          "command_template": "{lean} -s65536 -j1 --json {source_file}",
+          "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+          "kernel_id": "lean",
+          "metadata": {
+            "approved_axioms": [],
+            "approved_imports": [
+              "Init",
+              "Init.Classical",
+              "Init.Prelude"
+            ],
+            "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+            "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+            "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+            "native_resource_profile": {
+              "address_space_bytes": 4294967296,
+              "child_process_slots": 1,
+              "cpu_slots": 1,
+              "environment": {
+                "LEAN_MAIN_USE_THREAD": "0",
+                "LEAN_NUM_THREADS": "1",
+                "LEAN_STACK_SIZE_KB": "65536"
+              },
+              "resident_memory_bytes": 4294967296,
+              "resident_memory_enforcement": "sampled_process_tree_rss"
+            },
+            "verification_profile": "lean-kernel-verification/v2"
+          },
+          "module_id": "",
+          "plane": "native",
+          "toolchain_id": "toolchain:lean:native:4.34.1",
+          "version": "4.34.1"
+        },
+        "translation": {
+          "fidelity": "exact",
+          "metadata": {
+            "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+            "generated_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+            "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+            "target_theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq"
+          },
+          "source_family": "target_theory",
+          "target_family": "lean4",
+          "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f",
+          "translation_id": "translation:fictional-native-cache"
+        }
+      },
+      "kind": "software_reissued_actual_native_base",
+      "native_processes_added": 0,
+      "new_native_execution": false,
+      "original_native_receipt_id": "lean-kernel-receipt:8527bfebb7c7ef5ec7247e48513d1fb7f5897d1d5ad226b6e4f76c514c4ca99c",
+      "receipt": {
+        "assumption_ids": [
+          "assumption:fictional-native-cache"
+        ],
+        "attempt_digest": "8a260cd5cf9f98631c693e479755f9c770da7a75ff683836586253ffdc86d3b3",
+        "backend_id": "lean",
+        "backend_version": "lean4",
+        "bounds_digest": "14d226d68abffef3a0039ced67655cad0b08d69f52cd546d320afea4f01fc083",
+        "claim_digest": "19b9766465cbaa98da8cc0ede3ae2c334e8ffbbcde2891129d8ec409a4266eca",
+        "claim_id": "claim:fictional-native-cache",
+        "declaration_id": "fictional-native-cache-provision",
+        "obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+        "obligation_id": "obligation:fictional-native-cache",
+        "output_digest": "0cb51d728b8968d143479a6cbf4cff0750e1067f5cee9fb659e41b8e2b1c4921",
+        "proof_authority": "theorem_proof",
+        "receipt_id": "receipt:software-reissued-native-cache-version:lean4",
+        "request_digest": "0953b5a4743bb29b3ef50b7c7b671e5fc9344d188f56e80983240ad715630936",
+        "result_digest": "b0ae64d5470a16efa670afc8b1599d93c2ca759be6dcacc6ec89235b207e102d",
+        "result_type": "proof",
+        "schema_version": "theorem-proof-receipt/v1",
+        "status": "proved",
+        "verifier": "software-mutation-control"
+      },
+      "rejection": "proved backend version differs from checked native/toolchain version",
+      "request": {
+        "assumption_ids": [
+          "assumption:fictional-native-cache"
+        ],
+        "bounds": {
+          "max_memory_bytes": 4294967296,
+          "max_output_bytes": 65536,
+          "max_steps": 100,
+          "timeout_ms": 15000
+        },
+        "claim_digest": "19b9766465cbaa98da8cc0ede3ae2c334e8ffbbcde2891129d8ec409a4266eca",
+        "claim_id": "claim:fictional-native-cache",
+        "declaration_id": "fictional-native-cache-provision",
+        "logic_family": "lean4",
+        "obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+        "obligation_id": "obligation:fictional-native-cache",
+        "payload": {
+          "encoding": "lean4",
+          "expected_declaration": "cache_native_fixture",
+          "expected_proposition": "True",
+          "legal_proof_context": {
+            "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+            "backend_id": "lean",
+            "backend_version": "lean4",
+            "dependency_versions": {
+              "fictional-definition": "aec51d835deabda7aa70ad07f0e55b41d042c8fa2634cfb52d19f4862c2f1f4b",
+              "fictional-translation": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f"
+            },
+            "expected_declaration": "cache_native_fixture",
+            "expected_proposition": "True",
+            "interpretation_digest": "365b499344b7cd85c7667cc6d1a63e4db5aa50ff2119d63026589f3a75f97bb1",
+            "jurisdiction": "fictional",
+            "schema_version": "legal-proof-reuse-context/v1",
+            "toolchain": {
+              "command_template": "{lean} -s65536 -j1 --json {source_file}",
+              "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+              "kernel_id": "lean",
+              "metadata": {
+                "approved_axioms": [],
+                "approved_imports": [
+                  "Init",
+                  "Init.Classical",
+                  "Init.Prelude"
+                ],
+                "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+                "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+                "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+                "native_resource_profile": {
+                  "address_space_bytes": 4294967296,
+                  "child_process_slots": 1,
+                  "cpu_slots": 1,
+                  "environment": {
+                    "LEAN_MAIN_USE_THREAD": "0",
+                    "LEAN_NUM_THREADS": "1",
+                    "LEAN_STACK_SIZE_KB": "65536"
+                  },
+                  "resident_memory_bytes": 4294967296,
+                  "resident_memory_enforcement": "sampled_process_tree_rss"
+                },
+                "verification_profile": "lean-kernel-verification/v2"
+              },
+              "module_id": "",
+              "plane": "native",
+              "toolchain_id": "toolchain:lean:native:4.34.1",
+              "version": "4.34.1"
+            }
+          },
+          "source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+          "translation": {
+            "fidelity": "exact",
+            "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+            "generated_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+            "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+            "source_family": "target_theory",
+            "target_family": "lean4",
+            "target_theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq",
+            "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f",
+            "translation_id": "translation:fictional-native-cache"
+          }
+        },
+        "query_kind": "theorem_proof",
+        "request_id": "request:software-reissued-native-cache-version:lean4",
+        "requested_backend_id": "lean",
+        "schema_version": "proof-backend-request/v1"
+      },
+      "result": {
+        "assumption_ids": [
+          "assumption:fictional-native-cache"
+        ],
+        "attempt_digest": "8a260cd5cf9f98631c693e479755f9c770da7a75ff683836586253ffdc86d3b3",
+        "authority": {
+          "configuration_digest": "fd52d3af9e3675d06802f8bd833ff64a87a2e53baab85922d08146bb685593f1",
+          "evidence_digests": [],
+          "issuer": "software-mutation-control",
+          "kind": "theorem_proof",
+          "method": "software-reissued-actual-native-base/no-new-execution",
+          "schema_version": "result-authority/v1",
+          "scope_digest": "0953b5a4743bb29b3ef50b7c7b671e5fc9344d188f56e80983240ad715630936"
+        },
+        "backend_id": "lean",
+        "backend_version": "lean4",
+        "bounds": {
+          "max_memory_bytes": 4294967296,
+          "max_output_bytes": 65536,
+          "max_steps": 100,
+          "timeout_ms": 15000
+        },
+        "claim_digest": "19b9766465cbaa98da8cc0ede3ae2c334e8ffbbcde2891129d8ec409a4266eca",
+        "declaration_id": "fictional-native-cache-provision",
+        "diagnostics": [],
+        "obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+        "obligation_id": "obligation:fictional-native-cache",
+        "output_digest": "0cb51d728b8968d143479a6cbf4cff0750e1067f5cee9fb659e41b8e2b1c4921",
+        "payload": {
+          "kernel_receipt": {
+            "accepted": true,
+            "approved_axioms": [],
+            "approved_imports": [
+              "Init",
+              "Init.Classical",
+              "Init.Prelude"
+            ],
+            "authority_disposition": "reject",
+            "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+            "axiom_report": {
+              "axioms": [],
+              "contains_sorry_ax": false,
+              "declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+              "report_text": "'_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f' does not depend on any axioms",
+              "schema_version": "lean-axiom-report/v2",
+              "source_column": 0,
+              "source_line": 12,
+              "source_path": "Main.lean"
+            },
+            "compiled_source_digest": "976c6259f718a4c53c75947b8b0f5b91f3c8b86d9ec728ad0abb99366fb01390",
+            "diagnostics": [],
+            "expected_obligation_declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+            "expected_proposition": "True",
+            "expected_proposition_checked": true,
+            "expected_proposition_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+            "generated_proof": "theorem cache_native_fixture : True := by\n  exact True.intro",
+            "generated_proof_digest": "c46e2990727860d15ab5089901d067bab30b072cf593abc1fab6e6cd05155d2a",
+            "imports": [
+              "Init"
+            ],
+            "native_identity": {
+              "actual_version": "4.34.1",
+              "executable_bytes": 13824,
+              "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+              "executable_stat_after": {
+                "ctime_ns": 1790376166615972340,
+                "device": 66306,
+                "inode": 6721251,
+                "mtime_ns": 1790273308000000000,
+                "size": 13824
+              },
+              "executable_stat_before": {
+                "ctime_ns": 1790376166615972340,
+                "device": 66306,
+                "inode": 6721251,
+                "mtime_ns": 1790273308000000000,
+                "size": 13824
+              },
+              "library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+              "observation_kind": "bounded_native_version_probe",
+              "resolved_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+              "schema_version": "lean-native-identity/v1",
+              "version_command": [
+                "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+                "--version"
+              ],
+              "version_returncode": 0,
+              "version_stderr": "",
+              "version_stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+            },
+            "native_identity_checked_after_compile": true,
+            "plane": "native",
+            "receipt_id": "lean-kernel-receipt:a18f4fa584ea45bec2e0cce8f2b2542946febccf0b3e82756259688b0bf00182",
+            "request_digest": "0953b5a4743bb29b3ef50b7c7b671e5fc9344d188f56e80983240ad715630936",
+            "schema_version": "lean-kernel-receipt/v3",
+            "source_binding": {
+              "request_digest": "0953b5a4743bb29b3ef50b7c7b671e5fc9344d188f56e80983240ad715630936",
+              "schema_version": "lean-source-binding/v1",
+              "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+              "source_format": "lean4"
+            },
+            "source_tree": {
+              "files": {
+                "Main.lean": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842"
+              },
+              "primary_path": "Main.lean",
+              "root_digest": "2705625a01845475014ebd2486df73c4f5cb8638cf2a50f94acc2ef9ec76d496",
+              "tree_id": "source-tree:2705625a01845475014ebd24"
+            },
+            "submitted_source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+            "theorem_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+            "theorem_name": "cache_native_fixture",
+            "toolchain": {
+              "command_template": "{lean} -s65536 -j1 --json {source_file}",
+              "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+              "kernel_id": "lean",
+              "metadata": {
+                "approved_axioms": [],
+                "approved_imports": [
+                  "Init",
+                  "Init.Classical",
+                  "Init.Prelude"
+                ],
+                "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+                "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+                "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+                "native_resource_profile": {
+                  "address_space_bytes": 4294967296,
+                  "child_process_slots": 1,
+                  "cpu_slots": 1,
+                  "environment": {
+                    "LEAN_MAIN_USE_THREAD": "0",
+                    "LEAN_NUM_THREADS": "1",
+                    "LEAN_STACK_SIZE_KB": "65536"
+                  },
+                  "resident_memory_bytes": 4294967296,
+                  "resident_memory_enforcement": "sampled_process_tree_rss"
+                },
+                "verification_profile": "lean-kernel-verification/v2"
+              },
+              "module_id": "",
+              "plane": "native",
+              "toolchain_id": "toolchain:lean:native:4.34.1",
+              "version": "4.34.1"
+            },
+            "translation": {
+              "fidelity": "exact",
+              "metadata": {
+                "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+                "generated_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+                "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+                "target_theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq"
+              },
+              "source_family": "target_theory",
+              "target_family": "lean4",
+              "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f",
+              "translation_id": "translation:fictional-native-cache"
+            }
+          },
+          "new_native_execution": false,
+          "original_native_receipt_id": "lean-kernel-receipt:8527bfebb7c7ef5ec7247e48513d1fb7f5897d1d5ad226b6e4f76c514c4ca99c",
+          "software_reissued_mutation_only": true
+        },
+        "request_digest": "0953b5a4743bb29b3ef50b7c7b671e5fc9344d188f56e80983240ad715630936",
+        "result_id": "result:software-reissued-native-cache-version:lean4",
+        "result_type": "proof",
+        "schema_version": "bounded-result/v1",
+        "status": "proved",
+        "usage": {
+          "elapsed_ms": 0,
+          "output_bytes": 0,
+          "peak_memory_bytes": 0,
+          "steps": 0
+        }
+      }
+    }
+  ],
+  "bound_outcome": {
+    "capability": {
+      "browser": {
+        "availability": "unavailable",
+        "available": false,
+        "executable": "",
+        "kernel_id": "lean",
+        "metadata": {
+          "explicit_absence": true,
+          "requested_module_id": "lean4-wasm"
+        },
+        "module_id": "lean4-wasm",
+        "plane": "browser",
+        "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+        "schema_version": "kernel-capability-state/v1",
+        "version": ""
+      },
+      "interface_version": "dual-plane-kernel-capability/v1",
+      "kernel_id": "lean",
+      "native": {
+        "availability": "available",
+        "available": true,
+        "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "kernel_id": "lean",
+        "metadata": {
+          "configured_version_label": "4.34.1",
+          "native_version_observed": false
+        },
+        "module_id": "",
+        "plane": "native",
+        "reason": "",
+        "schema_version": "kernel-capability-state/v1",
+        "version": ""
+      },
+      "native_available": true,
+      "wasm": {
+        "availability": "unavailable",
+        "available": false,
+        "executable": "",
+        "kernel_id": "lean",
+        "metadata": {
+          "explicit_absence": true,
+          "requested_module_id": "lean4-wasm"
+        },
+        "module_id": "lean4-wasm",
+        "plane": "wasm",
+        "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+        "schema_version": "kernel-capability-state/v1",
+        "version": ""
+      },
+      "wasm_available": false
+    },
+    "interface_version": "LeanKernelBackend@1",
+    "receipt": {
+      "accepted": true,
+      "approved_axioms": [],
+      "approved_imports": [
+        "Init",
+        "Init.Classical",
+        "Init.Prelude"
+      ],
+      "authority_disposition": "reject",
+      "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+      "axiom_report": {
+        "axioms": [],
+        "contains_sorry_ax": false,
+        "declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+        "report_text": "'_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f' does not depend on any axioms",
+        "schema_version": "lean-axiom-report/v2",
+        "source_column": 0,
+        "source_line": 12,
+        "source_path": "Main.lean"
+      },
+      "compiled_source_digest": "976c6259f718a4c53c75947b8b0f5b91f3c8b86d9ec728ad0abb99366fb01390",
+      "diagnostics": [],
+      "expected_obligation_declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+      "expected_proposition": "True",
+      "expected_proposition_checked": true,
+      "expected_proposition_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+      "generated_proof": "theorem cache_native_fixture : True := by\n  exact True.intro",
+      "generated_proof_digest": "c46e2990727860d15ab5089901d067bab30b072cf593abc1fab6e6cd05155d2a",
+      "imports": [
+        "Init"
+      ],
+      "native_identity": {
+        "actual_version": "4.34.1",
+        "executable_bytes": 13824,
+        "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+        "executable_stat_after": {
+          "ctime_ns": 1790376166615972340,
+          "device": 66306,
+          "inode": 6721251,
+          "mtime_ns": 1790273308000000000,
+          "size": 13824
+        },
+        "executable_stat_before": {
+          "ctime_ns": 1790376166615972340,
+          "device": 66306,
+          "inode": 6721251,
+          "mtime_ns": 1790273308000000000,
+          "size": 13824
+        },
+        "library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+        "observation_kind": "bounded_native_version_probe",
+        "resolved_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "schema_version": "lean-native-identity/v1",
+        "version_command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+          "--version"
+        ],
+        "version_returncode": 0,
+        "version_stderr": "",
+        "version_stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+      },
+      "native_identity_checked_after_compile": true,
+      "plane": "native",
+      "receipt_id": "lean-kernel-receipt:8527bfebb7c7ef5ec7247e48513d1fb7f5897d1d5ad226b6e4f76c514c4ca99c",
+      "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+      "schema_version": "lean-kernel-receipt/v3",
+      "source_binding": {
+        "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+        "schema_version": "lean-source-binding/v1",
+        "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+        "source_format": "lean4"
+      },
+      "source_tree": {
+        "files": {
+          "Main.lean": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842"
+        },
+        "primary_path": "Main.lean",
+        "root_digest": "2705625a01845475014ebd2486df73c4f5cb8638cf2a50f94acc2ef9ec76d496",
+        "tree_id": "source-tree:2705625a01845475014ebd24"
+      },
+      "submitted_source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+      "theorem_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+      "theorem_name": "cache_native_fixture",
+      "toolchain": {
+        "command_template": "{lean} -s65536 -j1 --json {source_file}",
+        "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "kernel_id": "lean",
+        "metadata": {
+          "approved_axioms": [],
+          "approved_imports": [
+            "Init",
+            "Init.Classical",
+            "Init.Prelude"
+          ],
+          "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+          "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+          "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+          "native_resource_profile": {
+            "address_space_bytes": 4294967296,
+            "child_process_slots": 1,
+            "cpu_slots": 1,
+            "environment": {
+              "LEAN_MAIN_USE_THREAD": "0",
+              "LEAN_NUM_THREADS": "1",
+              "LEAN_STACK_SIZE_KB": "65536"
+            },
+            "resident_memory_bytes": 4294967296,
+            "resident_memory_enforcement": "sampled_process_tree_rss"
+          },
+          "verification_profile": "lean-kernel-verification/v2"
+        },
+        "module_id": "",
+        "plane": "native",
+        "toolchain_id": "toolchain:lean:native:4.34.1",
+        "version": "4.34.1"
+      },
+      "translation": {
+        "fidelity": "exact",
+        "metadata": {
+          "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+          "generated_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+          "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+          "target_theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq"
+        },
+        "source_family": "target_theory",
+        "target_family": "lean4",
+        "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f",
+        "translation_id": "translation:fictional-native-cache"
+      }
+    },
+    "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+    "result": {
+      "assumptions": [
+        "assumption:fictional-native-cache"
+      ],
+      "authority": "theorem",
+      "backend_id": "lean",
+      "backend_version": "4.34.1",
+      "bounds": {
+        "max_memory_bytes": 4294967296,
+        "max_output_bytes": 65536,
+        "max_steps": 100,
+        "timeout_ms": 15000
+      },
+      "diagnostics": [],
+      "metadata": {
+        "adapter_interface": "LeanKernelBackend@1",
+        "capability": {
+          "browser": {
+            "availability": "unavailable",
+            "available": false,
+            "executable": "",
+            "kernel_id": "lean",
+            "metadata": {
+              "explicit_absence": true,
+              "requested_module_id": "lean4-wasm"
+            },
+            "module_id": "lean4-wasm",
+            "plane": "browser",
+            "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+            "schema_version": "kernel-capability-state/v1",
+            "version": ""
+          },
+          "interface_version": "dual-plane-kernel-capability/v1",
+          "kernel_id": "lean",
+          "native": {
+            "availability": "available",
+            "available": true,
+            "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "kernel_id": "lean",
+            "metadata": {
+              "configured_version_label": "4.34.1",
+              "native_version_observed": false
+            },
+            "module_id": "",
+            "plane": "native",
+            "reason": "",
+            "schema_version": "kernel-capability-state/v1",
+            "version": ""
+          },
+          "native_available": true,
+          "wasm": {
+            "availability": "unavailable",
+            "available": false,
+            "executable": "",
+            "kernel_id": "lean",
+            "metadata": {
+              "explicit_absence": true,
+              "requested_module_id": "lean4-wasm"
+            },
+            "module_id": "lean4-wasm",
+            "plane": "wasm",
+            "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+            "schema_version": "kernel-capability-state/v1",
+            "version": ""
+          },
+          "wasm_available": false
+        },
+        "kernel_receipt": {
+          "accepted": true,
+          "approved_axioms": [],
+          "approved_imports": [
+            "Init",
+            "Init.Classical",
+            "Init.Prelude"
+          ],
+          "authority_disposition": "reject",
+          "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+          "axiom_report": {
+            "axioms": [],
+            "contains_sorry_ax": false,
+            "declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+            "report_text": "'_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f' does not depend on any axioms",
+            "schema_version": "lean-axiom-report/v2",
+            "source_column": 0,
+            "source_line": 12,
+            "source_path": "Main.lean"
+          },
+          "compiled_source_digest": "976c6259f718a4c53c75947b8b0f5b91f3c8b86d9ec728ad0abb99366fb01390",
+          "diagnostics": [],
+          "expected_obligation_declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+          "expected_proposition": "True",
+          "expected_proposition_checked": true,
+          "expected_proposition_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+          "generated_proof": "theorem cache_native_fixture : True := by\n  exact True.intro",
+          "generated_proof_digest": "c46e2990727860d15ab5089901d067bab30b072cf593abc1fab6e6cd05155d2a",
+          "imports": [
+            "Init"
+          ],
+          "native_identity": {
+            "actual_version": "4.34.1",
+            "executable_bytes": 13824,
+            "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+            "executable_stat_after": {
+              "ctime_ns": 1790376166615972340,
+              "device": 66306,
+              "inode": 6721251,
+              "mtime_ns": 1790273308000000000,
+              "size": 13824
+            },
+            "executable_stat_before": {
+              "ctime_ns": 1790376166615972340,
+              "device": 66306,
+              "inode": 6721251,
+              "mtime_ns": 1790273308000000000,
+              "size": 13824
+            },
+            "library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+            "observation_kind": "bounded_native_version_probe",
+            "resolved_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "schema_version": "lean-native-identity/v1",
+            "version_command": [
+              "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+              "--version"
+            ],
+            "version_returncode": 0,
+            "version_stderr": "",
+            "version_stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+          },
+          "native_identity_checked_after_compile": true,
+          "plane": "native",
+          "receipt_id": "lean-kernel-receipt:8527bfebb7c7ef5ec7247e48513d1fb7f5897d1d5ad226b6e4f76c514c4ca99c",
+          "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+          "schema_version": "lean-kernel-receipt/v3",
+          "source_binding": {
+            "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+            "schema_version": "lean-source-binding/v1",
+            "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+            "source_format": "lean4"
+          },
+          "source_tree": {
+            "files": {
+              "Main.lean": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842"
+            },
+            "primary_path": "Main.lean",
+            "root_digest": "2705625a01845475014ebd2486df73c4f5cb8638cf2a50f94acc2ef9ec76d496",
+            "tree_id": "source-tree:2705625a01845475014ebd24"
+          },
+          "submitted_source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+          "theorem_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+          "theorem_name": "cache_native_fixture",
+          "toolchain": {
+            "command_template": "{lean} -s65536 -j1 --json {source_file}",
+            "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "kernel_id": "lean",
+            "metadata": {
+              "approved_axioms": [],
+              "approved_imports": [
+                "Init",
+                "Init.Classical",
+                "Init.Prelude"
+              ],
+              "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+              "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+              "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+              "native_resource_profile": {
+                "address_space_bytes": 4294967296,
+                "child_process_slots": 1,
+                "cpu_slots": 1,
+                "environment": {
+                  "LEAN_MAIN_USE_THREAD": "0",
+                  "LEAN_NUM_THREADS": "1",
+                  "LEAN_STACK_SIZE_KB": "65536"
+                },
+                "resident_memory_bytes": 4294967296,
+                "resident_memory_enforcement": "sampled_process_tree_rss"
+              },
+              "verification_profile": "lean-kernel-verification/v2"
+            },
+            "module_id": "",
+            "plane": "native",
+            "toolchain_id": "toolchain:lean:native:4.34.1",
+            "version": "4.34.1"
+          },
+          "translation": {
+            "fidelity": "exact",
+            "metadata": {
+              "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+              "generated_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+              "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+              "target_theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq"
+            },
+            "source_family": "target_theory",
+            "target_family": "lean4",
+            "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f",
+            "translation_id": "translation:fictional-native-cache"
+          }
+        },
+        "source_binding": {
+          "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+          "schema_version": "lean-source-binding/v1",
+          "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+          "source_format": "lean4"
+        }
+      },
+      "reason": "",
+      "result_id": "result:lean:09424c2d3ba494d29d50a803",
+      "result_type": "theorem",
+      "schema_version": "typed-backend-result/v1",
+      "status": "proved",
+      "translation_ceiling": "independently_checkable",
+      "usage": {
+        "elapsed_ms": 234,
+        "output_bytes": 316,
+        "peak_memory_bytes": 0,
+        "steps": 0
+      },
+      "witness": {
+        "axiom_report": {
+          "axioms": [],
+          "contains_sorry_ax": false,
+          "declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+          "report_text": "'_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f' does not depend on any axioms",
+          "schema_version": "lean-axiom-report/v2",
+          "source_column": 0,
+          "source_line": 12,
+          "source_path": "Main.lean"
+        },
+        "generated_proof_digest": "c46e2990727860d15ab5089901d067bab30b072cf593abc1fab6e6cd05155d2a",
+        "receipt_id": "lean-kernel-receipt:8527bfebb7c7ef5ec7247e48513d1fb7f5897d1d5ad226b6e4f76c514c4ca99c",
+        "source_tree": {
+          "files": {
+            "Main.lean": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842"
+          },
+          "primary_path": "Main.lean",
+          "root_digest": "2705625a01845475014ebd2486df73c4f5cb8638cf2a50f94acc2ef9ec76d496",
+          "tree_id": "source-tree:2705625a01845475014ebd24"
+        },
+        "theorem_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+        "theorem_name": "cache_native_fixture",
+        "toolchain": {
+          "command_template": "{lean} -s65536 -j1 --json {source_file}",
+          "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+          "kernel_id": "lean",
+          "metadata": {
+            "approved_axioms": [],
+            "approved_imports": [
+              "Init",
+              "Init.Classical",
+              "Init.Prelude"
+            ],
+            "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+            "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+            "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+            "native_resource_profile": {
+              "address_space_bytes": 4294967296,
+              "child_process_slots": 1,
+              "cpu_slots": 1,
+              "environment": {
+                "LEAN_MAIN_USE_THREAD": "0",
+                "LEAN_NUM_THREADS": "1",
+                "LEAN_STACK_SIZE_KB": "65536"
+              },
+              "resident_memory_bytes": 4294967296,
+              "resident_memory_enforcement": "sampled_process_tree_rss"
+            },
+            "verification_profile": "lean-kernel-verification/v2"
+          },
+          "module_id": "",
+          "plane": "native",
+          "toolchain_id": "toolchain:lean:native:4.34.1",
+          "version": "4.34.1"
+        },
+        "translation": {
+          "fidelity": "exact",
+          "metadata": {
+            "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+            "generated_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+            "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+            "target_theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq"
+          },
+          "source_family": "target_theory",
+          "target_family": "lean4",
+          "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f",
+          "translation_id": "translation:fictional-native-cache"
+        }
+      }
+    },
+    "source_binding": {
+      "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+      "schema_version": "lean-source-binding/v1",
+      "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+      "source_format": "lean4"
+    }
+  },
+  "cache_record_cid": "bafkreienwrw5shilwcmvuvrrb3gvyzkuz5a5cutsoskkvnlxtcmtqztkam",
+  "cache_source_profile_and_obligation_mismatches_rejected": true,
+  "claim": {
+    "assumptions": [
+      {
+        "assumption_id": "assumption:fictional-native-cache",
+        "metadata": {},
+        "schema_version": "ir-assumption/v1",
+        "source_refs": [
+          "source:fictional-native-cache-provision"
+        ],
+        "statement": "True"
+      }
+    ],
+    "claim_id": "claim:fictional-native-cache",
+    "declaration_id": "fictional-native-cache-provision",
+    "domain": "legal",
+    "metadata": {
+      "artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+      "proof_context_digest": "2a6da73b810c71958c6ca86f57ee0364b84e003ce9da67158d5250590c362cb8",
+      "source_digest": "sha256:a6216c1677a844638b881e4d3aae07b6eac8ba34bb66ed0ebd409e0bdb5fddc4"
+    },
+    "obligations": [
+      {
+        "assumption_ids": [
+          "assumption:fictional-native-cache"
+        ],
+        "logic_family": "lean4",
+        "metadata": {
+          "fixture_only": true,
+          "statutory_meaning_claimed": false
+        },
+        "obligation_id": "obligation:fictional-native-cache",
+        "schema_version": "ir-proof-obligation/v1",
+        "source_refs": [
+          "source:fictional-native-cache-provision"
+        ],
+        "statement": "True"
+      }
+    ],
+    "schema_version": "ir-claim/v1",
+    "source_refs": [
+      "source:fictional-native-cache-provision"
+    ],
+    "statement": "True"
+  },
+  "compiler_output_mocked": false,
+  "controlled_translation": {
+    "generated_source": {
+      "attributes": {},
+      "axioms": [],
+      "encoding": "lean4",
+      "environment": {
+        "architecture": "",
+        "attributes": {},
+        "environment_id": "env:fictional-native-cache-lean",
+        "kernel_target": "lean",
+        "os_name": "",
+        "schema_version": "kernel-environment-identity/v1",
+        "session_or_package": "",
+        "source_tree_digest": "",
+        "toolchain_id": "lean",
+        "toolchain_version": "4.34.1"
+      },
+      "environment_identity_digest": "c2b1f369a15f6be5af0982373c91166c7433850ca55ba3b45a84ce00c89f82a6",
+      "imports": [
+        "Init"
+      ],
+      "interface": "KernelTargetGenerator@1",
+      "kernel_accepted": false,
+      "kernel_target": "lean",
+      "proof_authority": "official_kernel",
+      "result_authority_ceiling": "theorem",
+      "schema_version": "kernel-generated-source/v1",
+      "source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+      "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+      "theorem_identity": {
+        "attributes": {
+          "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+          "generated_encoding": "lean4",
+          "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251"
+        },
+        "kernel_target": "lean",
+        "schema_version": "kernel-theorem-identity/v1",
+        "source_maps": [
+          {
+            "attributes": {},
+            "end_byte": 52,
+            "owner_id": "theorem:fictional-native-cache",
+            "schema_version": "target-theory-source-map/v1",
+            "source_ref_id": "source:fictional-native-cache-provision",
+            "span_id": "span:fictional-native-cache-provision:document",
+            "start_byte": 0
+          },
+          {
+            "attributes": {},
+            "end_byte": 52,
+            "owner_id": "theorem:fictional-native-cache",
+            "schema_version": "target-theory-source-map/v1",
+            "source_ref_id": "source:fictional-native-cache-provision",
+            "span_id": "span:fictional-native-cache-provision:f0001",
+            "start_byte": 0
+          }
+        ],
+        "source_surface": "kernel_native",
+        "statement": "True",
+        "statement_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+        "theorem_id": "theorem:fictional-native-cache",
+        "theorem_name": "cache_native_fixture",
+        "theory_id": "theory:fictional-native-cache"
+      },
+      "theorem_identity_digest": "e1f5c57b83817897b65bc69e61b880095ac78293c72fb3d7cf33a560ca424b10",
+      "theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq",
+      "theory_id": "theory:fictional-native-cache",
+      "trust_escapes_rejected": [
+        "sorry",
+        "admit",
+        "oops",
+        "abort",
+        "trusted",
+        "unsafe",
+        "axiomatization",
+        "cheat",
+        "prove_false"
+      ]
+    },
+    "request_translation": {
+      "fidelity": "exact",
+      "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+      "generated_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+      "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+      "source_family": "target_theory",
+      "target_family": "lean4",
+      "target_theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq",
+      "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f",
+      "translation_id": "translation:fictional-native-cache"
+    },
+    "target_theory": {
+      "attributes": {},
+      "axioms": [],
+      "declarations": [],
+      "document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq",
+      "environment": {
+        "architecture": "",
+        "attributes": {},
+        "environment_id": "env:fictional-native-cache-lean",
+        "kernel_target": "lean",
+        "os_name": "",
+        "schema_version": "kernel-environment-identity/v1",
+        "session_or_package": "",
+        "source_tree_digest": "",
+        "toolchain_id": "lean",
+        "toolchain_version": "4.34.1"
+      },
+      "family_id": "target_theory",
+      "imports": [
+        "Init"
+      ],
+      "interface": "TargetTheoryModel@1",
+      "name": "cache_native_fixture",
+      "profile_id": "controlled_kernel_target",
+      "schema_version": "target-theory-model/v1",
+      "source_maps": [
+        {
+          "attributes": {},
+          "end_byte": 52,
+          "owner_id": "theorem:fictional-native-cache",
+          "schema_version": "target-theory-source-map/v1",
+          "source_ref_id": "source:fictional-native-cache-provision",
+          "span_id": "span:fictional-native-cache-provision:document",
+          "start_byte": 0
+        },
+        {
+          "attributes": {},
+          "end_byte": 52,
+          "owner_id": "theorem:fictional-native-cache",
+          "schema_version": "target-theory-source-map/v1",
+          "source_ref_id": "source:fictional-native-cache-provision",
+          "span_id": "span:fictional-native-cache-provision:f0001",
+          "start_byte": 0
+        }
+      ],
+      "source_surface": "kernel_native",
+      "theorems": [
+        {
+          "attributes": {
+            "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+            "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251"
+          },
+          "kernel_target": "lean",
+          "schema_version": "kernel-theorem-identity/v1",
+          "source_maps": [
+            {
+              "attributes": {},
+              "end_byte": 52,
+              "owner_id": "theorem:fictional-native-cache",
+              "schema_version": "target-theory-source-map/v1",
+              "source_ref_id": "source:fictional-native-cache-provision",
+              "span_id": "span:fictional-native-cache-provision:document",
+              "start_byte": 0
+            },
+            {
+              "attributes": {},
+              "end_byte": 52,
+              "owner_id": "theorem:fictional-native-cache",
+              "schema_version": "target-theory-source-map/v1",
+              "source_ref_id": "source:fictional-native-cache-provision",
+              "span_id": "span:fictional-native-cache-provision:f0001",
+              "start_byte": 0
+            }
+          ],
+          "source_surface": "kernel_native",
+          "statement": "True",
+          "statement_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+          "theorem_id": "theorem:fictional-native-cache",
+          "theorem_name": "cache_native_fixture",
+          "theory_id": "theory:fictional-native-cache"
+        }
+      ],
+      "theory_id": "theory:fictional-native-cache",
+      "trust_receipt": {
+        "allows_theorem_authority": true,
+        "assumptions": [],
+        "attributes": {},
+        "authority_role": "official_kernel",
+        "axioms": [],
+        "disposition": "kernel_required",
+        "notes": "",
+        "receipt_id": "trust:theory:fictional-native-cache",
+        "result_authority": "theorem",
+        "schema_version": "target-theory-trust-receipt/v1",
+        "surface": "kernel_native",
+        "trust_escapes_rejected": []
+      }
+    }
+  },
+  "disk_round_trip_and_exact_reuse_passed": true,
+  "fictional_source_fixture_only": true,
+  "native_Lean_executed": true,
+  "native_processes_during_reuse_or_mismatch_checks": 0,
+  "outer_resource_closure_asserted": false,
+  "profile_discovery_outcome": {
+    "capability": {
+      "browser": {
+        "availability": "unavailable",
+        "available": false,
+        "executable": "",
+        "kernel_id": "lean",
+        "metadata": {
+          "explicit_absence": true,
+          "requested_module_id": "lean4-wasm"
+        },
+        "module_id": "lean4-wasm",
+        "plane": "browser",
+        "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+        "schema_version": "kernel-capability-state/v1",
+        "version": ""
+      },
+      "interface_version": "dual-plane-kernel-capability/v1",
+      "kernel_id": "lean",
+      "native": {
+        "availability": "available",
+        "available": true,
+        "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "kernel_id": "lean",
+        "metadata": {
+          "configured_version_label": "4.34.1",
+          "native_version_observed": false
+        },
+        "module_id": "",
+        "plane": "native",
+        "reason": "",
+        "schema_version": "kernel-capability-state/v1",
+        "version": ""
+      },
+      "native_available": true,
+      "wasm": {
+        "availability": "unavailable",
+        "available": false,
+        "executable": "",
+        "kernel_id": "lean",
+        "metadata": {
+          "explicit_absence": true,
+          "requested_module_id": "lean4-wasm"
+        },
+        "module_id": "lean4-wasm",
+        "plane": "wasm",
+        "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+        "schema_version": "kernel-capability-state/v1",
+        "version": ""
+      },
+      "wasm_available": false
+    },
+    "interface_version": "LeanKernelBackend@1",
+    "receipt": {
+      "accepted": true,
+      "approved_axioms": [],
+      "approved_imports": [
+        "Init",
+        "Init.Classical",
+        "Init.Prelude"
+      ],
+      "authority_disposition": "reject",
+      "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+      "axiom_report": {
+        "axioms": [],
+        "contains_sorry_ax": false,
+        "declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+        "report_text": "'_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f' does not depend on any axioms",
+        "schema_version": "lean-axiom-report/v2",
+        "source_column": 0,
+        "source_line": 12,
+        "source_path": "Main.lean"
+      },
+      "compiled_source_digest": "976c6259f718a4c53c75947b8b0f5b91f3c8b86d9ec728ad0abb99366fb01390",
+      "diagnostics": [],
+      "expected_obligation_declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+      "expected_proposition": "True",
+      "expected_proposition_checked": true,
+      "expected_proposition_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+      "generated_proof": "theorem cache_native_fixture : True := by\n  exact True.intro",
+      "generated_proof_digest": "c46e2990727860d15ab5089901d067bab30b072cf593abc1fab6e6cd05155d2a",
+      "imports": [
+        "Init"
+      ],
+      "native_identity": {
+        "actual_version": "4.34.1",
+        "executable_bytes": 13824,
+        "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+        "executable_stat_after": {
+          "ctime_ns": 1790376166615972340,
+          "device": 66306,
+          "inode": 6721251,
+          "mtime_ns": 1790273308000000000,
+          "size": 13824
+        },
+        "executable_stat_before": {
+          "ctime_ns": 1790376166615972340,
+          "device": 66306,
+          "inode": 6721251,
+          "mtime_ns": 1790273308000000000,
+          "size": 13824
+        },
+        "library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+        "observation_kind": "bounded_native_version_probe",
+        "resolved_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "schema_version": "lean-native-identity/v1",
+        "version_command": [
+          "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+          "--version"
+        ],
+        "version_returncode": 0,
+        "version_stderr": "",
+        "version_stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+      },
+      "native_identity_checked_after_compile": true,
+      "plane": "native",
+      "receipt_id": "lean-kernel-receipt:b012bd944502f3cac0ef08bd9ef5fb00ea0581d50127426adb2a85f01f52d3fd",
+      "request_digest": "57c1e9aa2ae99a34ae23761fdeb799056b08690ed805b33b1175d884aba6fd5d",
+      "schema_version": "lean-kernel-receipt/v3",
+      "source_binding": {
+        "request_digest": "57c1e9aa2ae99a34ae23761fdeb799056b08690ed805b33b1175d884aba6fd5d",
+        "schema_version": "lean-source-binding/v1",
+        "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+        "source_format": "lean4"
+      },
+      "source_tree": {
+        "files": {
+          "Main.lean": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842"
+        },
+        "primary_path": "Main.lean",
+        "root_digest": "2705625a01845475014ebd2486df73c4f5cb8638cf2a50f94acc2ef9ec76d496",
+        "tree_id": "source-tree:2705625a01845475014ebd24"
+      },
+      "submitted_source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+      "theorem_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+      "theorem_name": "cache_native_fixture",
+      "toolchain": {
+        "command_template": "{lean} -s65536 -j1 --json {source_file}",
+        "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "kernel_id": "lean",
+        "metadata": {
+          "approved_axioms": [],
+          "approved_imports": [
+            "Init",
+            "Init.Classical",
+            "Init.Prelude"
+          ],
+          "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+          "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+          "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+          "native_resource_profile": {
+            "address_space_bytes": 4294967296,
+            "child_process_slots": 1,
+            "cpu_slots": 1,
+            "environment": {
+              "LEAN_MAIN_USE_THREAD": "0",
+              "LEAN_NUM_THREADS": "1",
+              "LEAN_STACK_SIZE_KB": "65536"
+            },
+            "resident_memory_bytes": 4294967296,
+            "resident_memory_enforcement": "sampled_process_tree_rss"
+          },
+          "verification_profile": "lean-kernel-verification/v2"
+        },
+        "module_id": "",
+        "plane": "native",
+        "toolchain_id": "toolchain:lean:native:4.34.1",
+        "version": "4.34.1"
+      },
+      "translation": null
+    },
+    "request_digest": "57c1e9aa2ae99a34ae23761fdeb799056b08690ed805b33b1175d884aba6fd5d",
+    "result": {
+      "assumptions": [
+        "assumption:reviewed"
+      ],
+      "authority": "theorem",
+      "backend_id": "lean",
+      "backend_version": "4.34.1",
+      "bounds": {
+        "max_memory_bytes": 4294967296,
+        "max_output_bytes": 65536,
+        "max_steps": 100,
+        "timeout_ms": 15000
+      },
+      "diagnostics": [],
+      "metadata": {
+        "adapter_interface": "LeanKernelBackend@1",
+        "capability": {
+          "browser": {
+            "availability": "unavailable",
+            "available": false,
+            "executable": "",
+            "kernel_id": "lean",
+            "metadata": {
+              "explicit_absence": true,
+              "requested_module_id": "lean4-wasm"
+            },
+            "module_id": "lean4-wasm",
+            "plane": "browser",
+            "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+            "schema_version": "kernel-capability-state/v1",
+            "version": ""
+          },
+          "interface_version": "dual-plane-kernel-capability/v1",
+          "kernel_id": "lean",
+          "native": {
+            "availability": "available",
+            "available": true,
+            "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "kernel_id": "lean",
+            "metadata": {
+              "configured_version_label": "4.34.1",
+              "native_version_observed": false
+            },
+            "module_id": "",
+            "plane": "native",
+            "reason": "",
+            "schema_version": "kernel-capability-state/v1",
+            "version": ""
+          },
+          "native_available": true,
+          "wasm": {
+            "availability": "unavailable",
+            "available": false,
+            "executable": "",
+            "kernel_id": "lean",
+            "metadata": {
+              "explicit_absence": true,
+              "requested_module_id": "lean4-wasm"
+            },
+            "module_id": "lean4-wasm",
+            "plane": "wasm",
+            "reason": "WASM module 'lean4-wasm' is explicitly absent: no bundled or injected module was resolvable for this runtime",
+            "schema_version": "kernel-capability-state/v1",
+            "version": ""
+          },
+          "wasm_available": false
+        },
+        "kernel_receipt": {
+          "accepted": true,
+          "approved_axioms": [],
+          "approved_imports": [
+            "Init",
+            "Init.Classical",
+            "Init.Prelude"
+          ],
+          "authority_disposition": "reject",
+          "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+          "axiom_report": {
+            "axioms": [],
+            "contains_sorry_ax": false,
+            "declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+            "report_text": "'_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f' does not depend on any axioms",
+            "schema_version": "lean-axiom-report/v2",
+            "source_column": 0,
+            "source_line": 12,
+            "source_path": "Main.lean"
+          },
+          "compiled_source_digest": "976c6259f718a4c53c75947b8b0f5b91f3c8b86d9ec728ad0abb99366fb01390",
+          "diagnostics": [],
+          "expected_obligation_declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+          "expected_proposition": "True",
+          "expected_proposition_checked": true,
+          "expected_proposition_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+          "generated_proof": "theorem cache_native_fixture : True := by\n  exact True.intro",
+          "generated_proof_digest": "c46e2990727860d15ab5089901d067bab30b072cf593abc1fab6e6cd05155d2a",
+          "imports": [
+            "Init"
+          ],
+          "native_identity": {
+            "actual_version": "4.34.1",
+            "executable_bytes": 13824,
+            "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+            "executable_stat_after": {
+              "ctime_ns": 1790376166615972340,
+              "device": 66306,
+              "inode": 6721251,
+              "mtime_ns": 1790273308000000000,
+              "size": 13824
+            },
+            "executable_stat_before": {
+              "ctime_ns": 1790376166615972340,
+              "device": 66306,
+              "inode": 6721251,
+              "mtime_ns": 1790273308000000000,
+              "size": 13824
+            },
+            "library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+            "observation_kind": "bounded_native_version_probe",
+            "resolved_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "schema_version": "lean-native-identity/v1",
+            "version_command": [
+              "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+              "--version"
+            ],
+            "version_returncode": 0,
+            "version_stderr": "",
+            "version_stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+          },
+          "native_identity_checked_after_compile": true,
+          "plane": "native",
+          "receipt_id": "lean-kernel-receipt:b012bd944502f3cac0ef08bd9ef5fb00ea0581d50127426adb2a85f01f52d3fd",
+          "request_digest": "57c1e9aa2ae99a34ae23761fdeb799056b08690ed805b33b1175d884aba6fd5d",
+          "schema_version": "lean-kernel-receipt/v3",
+          "source_binding": {
+            "request_digest": "57c1e9aa2ae99a34ae23761fdeb799056b08690ed805b33b1175d884aba6fd5d",
+            "schema_version": "lean-source-binding/v1",
+            "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+            "source_format": "lean4"
+          },
+          "source_tree": {
+            "files": {
+              "Main.lean": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842"
+            },
+            "primary_path": "Main.lean",
+            "root_digest": "2705625a01845475014ebd2486df73c4f5cb8638cf2a50f94acc2ef9ec76d496",
+            "tree_id": "source-tree:2705625a01845475014ebd24"
+          },
+          "submitted_source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+          "theorem_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+          "theorem_name": "cache_native_fixture",
+          "toolchain": {
+            "command_template": "{lean} -s65536 -j1 --json {source_file}",
+            "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "kernel_id": "lean",
+            "metadata": {
+              "approved_axioms": [],
+              "approved_imports": [
+                "Init",
+                "Init.Classical",
+                "Init.Prelude"
+              ],
+              "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+              "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+              "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+              "native_resource_profile": {
+                "address_space_bytes": 4294967296,
+                "child_process_slots": 1,
+                "cpu_slots": 1,
+                "environment": {
+                  "LEAN_MAIN_USE_THREAD": "0",
+                  "LEAN_NUM_THREADS": "1",
+                  "LEAN_STACK_SIZE_KB": "65536"
+                },
+                "resident_memory_bytes": 4294967296,
+                "resident_memory_enforcement": "sampled_process_tree_rss"
+              },
+              "verification_profile": "lean-kernel-verification/v2"
+            },
+            "module_id": "",
+            "plane": "native",
+            "toolchain_id": "toolchain:lean:native:4.34.1",
+            "version": "4.34.1"
+          },
+          "translation": null
+        },
+        "source_binding": {
+          "request_digest": "57c1e9aa2ae99a34ae23761fdeb799056b08690ed805b33b1175d884aba6fd5d",
+          "schema_version": "lean-source-binding/v1",
+          "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+          "source_format": "lean4"
+        }
+      },
+      "reason": "",
+      "result_id": "result:lean:57c1e9aa2ae99a34ae23761f",
+      "result_type": "theorem",
+      "schema_version": "typed-backend-result/v1",
+      "status": "proved",
+      "translation_ceiling": "independently_checkable",
+      "usage": {
+        "elapsed_ms": 317,
+        "output_bytes": 423,
+        "peak_memory_bytes": 0,
+        "steps": 0
+      },
+      "witness": {
+        "axiom_report": {
+          "axioms": [],
+          "contains_sorry_ax": false,
+          "declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+          "report_text": "'_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f' does not depend on any axioms",
+          "schema_version": "lean-axiom-report/v2",
+          "source_column": 0,
+          "source_line": 12,
+          "source_path": "Main.lean"
+        },
+        "generated_proof_digest": "c46e2990727860d15ab5089901d067bab30b072cf593abc1fab6e6cd05155d2a",
+        "receipt_id": "lean-kernel-receipt:b012bd944502f3cac0ef08bd9ef5fb00ea0581d50127426adb2a85f01f52d3fd",
+        "source_tree": {
+          "files": {
+            "Main.lean": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842"
+          },
+          "primary_path": "Main.lean",
+          "root_digest": "2705625a01845475014ebd2486df73c4f5cb8638cf2a50f94acc2ef9ec76d496",
+          "tree_id": "source-tree:2705625a01845475014ebd24"
+        },
+        "theorem_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+        "theorem_name": "cache_native_fixture",
+        "toolchain": {
+          "command_template": "{lean} -s65536 -j1 --json {source_file}",
+          "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+          "kernel_id": "lean",
+          "metadata": {
+            "approved_axioms": [],
+            "approved_imports": [
+              "Init",
+              "Init.Classical",
+              "Init.Prelude"
+            ],
+            "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+            "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+            "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+            "native_resource_profile": {
+              "address_space_bytes": 4294967296,
+              "child_process_slots": 1,
+              "cpu_slots": 1,
+              "environment": {
+                "LEAN_MAIN_USE_THREAD": "0",
+                "LEAN_NUM_THREADS": "1",
+                "LEAN_STACK_SIZE_KB": "65536"
+              },
+              "resident_memory_bytes": 4294967296,
+              "resident_memory_enforcement": "sampled_process_tree_rss"
+            },
+            "verification_profile": "lean-kernel-verification/v2"
+          },
+          "module_id": "",
+          "plane": "native",
+          "toolchain_id": "toolchain:lean:native:4.34.1",
+          "version": "4.34.1"
+        },
+        "translation": null
+      }
+    },
+    "source_binding": {
+      "request_digest": "57c1e9aa2ae99a34ae23761fdeb799056b08690ed805b33b1175d884aba6fd5d",
+      "schema_version": "lean-source-binding/v1",
+      "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+      "source_format": "lean4"
+    }
+  },
+  "proof_binding": {
+    "artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+    "attempt": {
+      "artifact_digests": [],
+      "attempt_id": "attempt:fictional-native-cache",
+      "backend_id": "lean",
+      "backend_version": "4.34.1",
+      "bounds": {
+        "max_memory_bytes": 4294967296,
+        "max_output_bytes": 65536,
+        "max_steps": 100,
+        "timeout_ms": 15000
+      },
+      "diagnostics": [],
+      "output_digest": "b781068a87c827c02fd13439b0154fca070d5c0ee81437da1e3cc9fd93a6d883",
+      "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+      "schema_version": "proof-backend-attempt/v1",
+      "status": "succeeded",
+      "usage": {
+        "elapsed_ms": 234,
+        "output_bytes": 316,
+        "peak_memory_bytes": 0,
+        "steps": 0
+      }
+    },
+    "claim": {
+      "assumptions": [
+        {
+          "assumption_id": "assumption:fictional-native-cache",
+          "metadata": {},
+          "schema_version": "ir-assumption/v1",
+          "source_refs": [
+            "source:fictional-native-cache-provision"
+          ],
+          "statement": "True"
+        }
+      ],
+      "claim_id": "claim:fictional-native-cache",
+      "declaration_id": "fictional-native-cache-provision",
+      "domain": "legal",
+      "metadata": {
+        "artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+        "proof_context_digest": "2a6da73b810c71958c6ca86f57ee0364b84e003ce9da67158d5250590c362cb8",
+        "source_digest": "sha256:a6216c1677a844638b881e4d3aae07b6eac8ba34bb66ed0ebd409e0bdb5fddc4"
+      },
+      "obligations": [
+        {
+          "assumption_ids": [
+            "assumption:fictional-native-cache"
+          ],
+          "logic_family": "lean4",
+          "metadata": {
+            "fixture_only": true,
+            "statutory_meaning_claimed": false
+          },
+          "obligation_id": "obligation:fictional-native-cache",
+          "schema_version": "ir-proof-obligation/v1",
+          "source_refs": [
+            "source:fictional-native-cache-provision"
+          ],
+          "statement": "True"
+        }
+      ],
+      "schema_version": "ir-claim/v1",
+      "source_refs": [
+        "source:fictional-native-cache-provision"
+      ],
+      "statement": "True"
+    },
+    "context": {
+      "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+      "backend_id": "lean",
+      "backend_version": "4.34.1",
+      "dependency_versions": {
+        "fictional-definition": "aec51d835deabda7aa70ad07f0e55b41d042c8fa2634cfb52d19f4862c2f1f4b",
+        "fictional-translation": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f"
+      },
+      "expected_declaration": "cache_native_fixture",
+      "expected_proposition": "True",
+      "interpretation_digest": "365b499344b7cd85c7667cc6d1a63e4db5aa50ff2119d63026589f3a75f97bb1",
+      "jurisdiction": "fictional",
+      "schema_version": "legal-proof-reuse-context/v1",
+      "toolchain": {
+        "command_template": "{lean} -s65536 -j1 --json {source_file}",
+        "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+        "kernel_id": "lean",
+        "metadata": {
+          "approved_axioms": [],
+          "approved_imports": [
+            "Init",
+            "Init.Classical",
+            "Init.Prelude"
+          ],
+          "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+          "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+          "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+          "native_resource_profile": {
+            "address_space_bytes": 4294967296,
+            "child_process_slots": 1,
+            "cpu_slots": 1,
+            "environment": {
+              "LEAN_MAIN_USE_THREAD": "0",
+              "LEAN_NUM_THREADS": "1",
+              "LEAN_STACK_SIZE_KB": "65536"
+            },
+            "resident_memory_bytes": 4294967296,
+            "resident_memory_enforcement": "sampled_process_tree_rss"
+          },
+          "verification_profile": "lean-kernel-verification/v2"
+        },
+        "module_id": "",
+        "plane": "native",
+        "toolchain_id": "toolchain:lean:native:4.34.1",
+        "version": "4.34.1"
+      }
+    },
+    "receipt_digest": "7ef12d85cf939141507d890efa013a0da5c075a1b9f378bdea824ea76e7e37f4",
+    "request": {
+      "assumption_ids": [
+        "assumption:fictional-native-cache"
+      ],
+      "bounds": {
+        "max_memory_bytes": 4294967296,
+        "max_output_bytes": 65536,
+        "max_steps": 100,
+        "timeout_ms": 15000
+      },
+      "claim_digest": "eb6256da855626147a21494dcab2a39b35461ad9a817b04fd91eb186e50afea4",
+      "claim_id": "claim:fictional-native-cache",
+      "declaration_id": "fictional-native-cache-provision",
+      "logic_family": "lean4",
+      "obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+      "obligation_id": "obligation:fictional-native-cache",
+      "payload": {
+        "encoding": "lean4",
+        "expected_declaration": "cache_native_fixture",
+        "expected_proposition": "True",
+        "legal_proof_context": {
+          "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+          "backend_id": "lean",
+          "backend_version": "4.34.1",
+          "dependency_versions": {
+            "fictional-definition": "aec51d835deabda7aa70ad07f0e55b41d042c8fa2634cfb52d19f4862c2f1f4b",
+            "fictional-translation": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f"
+          },
+          "expected_declaration": "cache_native_fixture",
+          "expected_proposition": "True",
+          "interpretation_digest": "365b499344b7cd85c7667cc6d1a63e4db5aa50ff2119d63026589f3a75f97bb1",
+          "jurisdiction": "fictional",
+          "schema_version": "legal-proof-reuse-context/v1",
+          "toolchain": {
+            "command_template": "{lean} -s65536 -j1 --json {source_file}",
+            "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "kernel_id": "lean",
+            "metadata": {
+              "approved_axioms": [],
+              "approved_imports": [
+                "Init",
+                "Init.Classical",
+                "Init.Prelude"
+              ],
+              "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+              "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+              "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+              "native_resource_profile": {
+                "address_space_bytes": 4294967296,
+                "child_process_slots": 1,
+                "cpu_slots": 1,
+                "environment": {
+                  "LEAN_MAIN_USE_THREAD": "0",
+                  "LEAN_NUM_THREADS": "1",
+                  "LEAN_STACK_SIZE_KB": "65536"
+                },
+                "resident_memory_bytes": 4294967296,
+                "resident_memory_enforcement": "sampled_process_tree_rss"
+              },
+              "verification_profile": "lean-kernel-verification/v2"
+            },
+            "module_id": "",
+            "plane": "native",
+            "toolchain_id": "toolchain:lean:native:4.34.1",
+            "version": "4.34.1"
+          }
+        },
+        "source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+        "translation": {
+          "fidelity": "exact",
+          "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+          "generated_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+          "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+          "source_family": "target_theory",
+          "target_family": "lean4",
+          "target_theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq",
+          "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f",
+          "translation_id": "translation:fictional-native-cache"
+        }
+      },
+      "query_kind": "theorem_proof",
+      "request_id": "request:fictional-native-cache",
+      "requested_backend_id": "lean",
+      "schema_version": "proof-backend-request/v1"
+    },
+    "result": {
+      "assumption_ids": [
+        "assumption:fictional-native-cache"
+      ],
+      "attempt_digest": "6e2b69c6f07e9f9e2693d3a72ac6cdeb837c668d2388734b7d71eeba3444a2f4",
+      "authority": {
+        "configuration_digest": "2a6da73b810c71958c6ca86f57ee0364b84e003ce9da67158d5250590c362cb8",
+        "evidence_digests": [],
+        "issuer": "native-cache-integration",
+        "kind": "theorem_proof",
+        "method": "actual-Lean-kernel/v3",
+        "schema_version": "result-authority/v1",
+        "scope_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc"
+      },
+      "backend_id": "lean",
+      "backend_version": "4.34.1",
+      "bounds": {
+        "max_memory_bytes": 4294967296,
+        "max_output_bytes": 65536,
+        "max_steps": 100,
+        "timeout_ms": 15000
+      },
+      "claim_digest": "eb6256da855626147a21494dcab2a39b35461ad9a817b04fd91eb186e50afea4",
+      "declaration_id": "fictional-native-cache-provision",
+      "diagnostics": [],
+      "obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+      "obligation_id": "obligation:fictional-native-cache",
+      "output_digest": "b781068a87c827c02fd13439b0154fca070d5c0ee81437da1e3cc9fd93a6d883",
+      "payload": {
+        "fictional_source_fixture_only": true,
+        "kernel_receipt": {
+          "accepted": true,
+          "approved_axioms": [],
+          "approved_imports": [
+            "Init",
+            "Init.Classical",
+            "Init.Prelude"
+          ],
+          "authority_disposition": "reject",
+          "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+          "axiom_report": {
+            "axioms": [],
+            "contains_sorry_ax": false,
+            "declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+            "report_text": "'_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f' does not depend on any axioms",
+            "schema_version": "lean-axiom-report/v2",
+            "source_column": 0,
+            "source_line": 12,
+            "source_path": "Main.lean"
+          },
+          "compiled_source_digest": "976c6259f718a4c53c75947b8b0f5b91f3c8b86d9ec728ad0abb99366fb01390",
+          "diagnostics": [],
+          "expected_obligation_declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+          "expected_proposition": "True",
+          "expected_proposition_checked": true,
+          "expected_proposition_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+          "generated_proof": "theorem cache_native_fixture : True := by\n  exact True.intro",
+          "generated_proof_digest": "c46e2990727860d15ab5089901d067bab30b072cf593abc1fab6e6cd05155d2a",
+          "imports": [
+            "Init"
+          ],
+          "native_identity": {
+            "actual_version": "4.34.1",
+            "executable_bytes": 13824,
+            "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+            "executable_stat_after": {
+              "ctime_ns": 1790376166615972340,
+              "device": 66306,
+              "inode": 6721251,
+              "mtime_ns": 1790273308000000000,
+              "size": 13824
+            },
+            "executable_stat_before": {
+              "ctime_ns": 1790376166615972340,
+              "device": 66306,
+              "inode": 6721251,
+              "mtime_ns": 1790273308000000000,
+              "size": 13824
+            },
+            "library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+            "observation_kind": "bounded_native_version_probe",
+            "resolved_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "schema_version": "lean-native-identity/v1",
+            "version_command": [
+              "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+              "--version"
+            ],
+            "version_returncode": 0,
+            "version_stderr": "",
+            "version_stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+          },
+          "native_identity_checked_after_compile": true,
+          "plane": "native",
+          "receipt_id": "lean-kernel-receipt:8527bfebb7c7ef5ec7247e48513d1fb7f5897d1d5ad226b6e4f76c514c4ca99c",
+          "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+          "schema_version": "lean-kernel-receipt/v3",
+          "source_binding": {
+            "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+            "schema_version": "lean-source-binding/v1",
+            "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+            "source_format": "lean4"
+          },
+          "source_tree": {
+            "files": {
+              "Main.lean": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842"
+            },
+            "primary_path": "Main.lean",
+            "root_digest": "2705625a01845475014ebd2486df73c4f5cb8638cf2a50f94acc2ef9ec76d496",
+            "tree_id": "source-tree:2705625a01845475014ebd24"
+          },
+          "submitted_source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+          "theorem_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+          "theorem_name": "cache_native_fixture",
+          "toolchain": {
+            "command_template": "{lean} -s65536 -j1 --json {source_file}",
+            "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "kernel_id": "lean",
+            "metadata": {
+              "approved_axioms": [],
+              "approved_imports": [
+                "Init",
+                "Init.Classical",
+                "Init.Prelude"
+              ],
+              "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+              "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+              "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+              "native_resource_profile": {
+                "address_space_bytes": 4294967296,
+                "child_process_slots": 1,
+                "cpu_slots": 1,
+                "environment": {
+                  "LEAN_MAIN_USE_THREAD": "0",
+                  "LEAN_NUM_THREADS": "1",
+                  "LEAN_STACK_SIZE_KB": "65536"
+                },
+                "resident_memory_bytes": 4294967296,
+                "resident_memory_enforcement": "sampled_process_tree_rss"
+              },
+              "verification_profile": "lean-kernel-verification/v2"
+            },
+            "module_id": "",
+            "plane": "native",
+            "toolchain_id": "toolchain:lean:native:4.34.1",
+            "version": "4.34.1"
+          },
+          "translation": {
+            "fidelity": "exact",
+            "metadata": {
+              "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+              "generated_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+              "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+              "target_theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq"
+            },
+            "source_family": "target_theory",
+            "target_family": "lean4",
+            "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f",
+            "translation_id": "translation:fictional-native-cache"
+          }
+        }
+      },
+      "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+      "result_id": "result:fictional-native-cache",
+      "result_type": "proof",
+      "schema_version": "bounded-result/v1",
+      "status": "proved",
+      "usage": {
+        "elapsed_ms": 234,
+        "output_bytes": 316,
+        "peak_memory_bytes": 0,
+        "steps": 0
+      }
+    },
+    "schema_version": "legal-proof-binding/v1",
+    "source_digest": "sha256:a6216c1677a844638b881e4d3aae07b6eac8ba34bb66ed0ebd409e0bdb5fddc4"
+  },
+  "pytest_case_credit_claimed_by_helper": 0,
+  "receipt": {
+    "assumption_ids": [
+      "assumption:fictional-native-cache"
+    ],
+    "attempt_digest": "6e2b69c6f07e9f9e2693d3a72ac6cdeb837c668d2388734b7d71eeba3444a2f4",
+    "backend_id": "lean",
+    "backend_version": "4.34.1",
+    "bounds_digest": "14d226d68abffef3a0039ced67655cad0b08d69f52cd546d320afea4f01fc083",
+    "claim_digest": "eb6256da855626147a21494dcab2a39b35461ad9a817b04fd91eb186e50afea4",
+    "claim_id": "claim:fictional-native-cache",
+    "declaration_id": "fictional-native-cache-provision",
+    "obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+    "obligation_id": "obligation:fictional-native-cache",
+    "output_digest": "b781068a87c827c02fd13439b0154fca070d5c0ee81437da1e3cc9fd93a6d883",
+    "proof_authority": "theorem_proof",
+    "receipt_id": "receipt:fictional-native-cache",
+    "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+    "result_digest": "fdc06358adc887d664e0fe5ee11b8e58c9f2522cd93462d600dd24bf65224387",
+    "result_type": "proof",
+    "schema_version": "theorem-proof-receipt/v1",
+    "status": "proved",
+    "verifier": "native-cache-integration"
+  },
+  "rejected_artifact_facets": [
+    "source",
+    "obligation",
+    "assumptions"
+  ],
+  "rejected_context_facets": [
+    "declaration",
+    "proposition",
+    "toolchain",
+    "backend-profile",
+    "interpretation",
+    "dependency"
+  ],
+  "request": {
+    "assumption_ids": [
+      "assumption:fictional-native-cache"
+    ],
+    "bounds": {
+      "max_memory_bytes": 4294967296,
+      "max_output_bytes": 65536,
+      "max_steps": 100,
+      "timeout_ms": 15000
+    },
+    "claim_digest": "eb6256da855626147a21494dcab2a39b35461ad9a817b04fd91eb186e50afea4",
+    "claim_id": "claim:fictional-native-cache",
+    "declaration_id": "fictional-native-cache-provision",
+    "logic_family": "lean4",
+    "obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+    "obligation_id": "obligation:fictional-native-cache",
+    "payload": {
+      "encoding": "lean4",
+      "expected_declaration": "cache_native_fixture",
+      "expected_proposition": "True",
+      "legal_proof_context": {
+        "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+        "backend_id": "lean",
+        "backend_version": "4.34.1",
+        "dependency_versions": {
+          "fictional-definition": "aec51d835deabda7aa70ad07f0e55b41d042c8fa2634cfb52d19f4862c2f1f4b",
+          "fictional-translation": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f"
+        },
+        "expected_declaration": "cache_native_fixture",
+        "expected_proposition": "True",
+        "interpretation_digest": "365b499344b7cd85c7667cc6d1a63e4db5aa50ff2119d63026589f3a75f97bb1",
+        "jurisdiction": "fictional",
+        "schema_version": "legal-proof-reuse-context/v1",
+        "toolchain": {
+          "command_template": "{lean} -s65536 -j1 --json {source_file}",
+          "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+          "kernel_id": "lean",
+          "metadata": {
+            "approved_axioms": [],
+            "approved_imports": [
+              "Init",
+              "Init.Classical",
+              "Init.Prelude"
+            ],
+            "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+            "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+            "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+            "native_resource_profile": {
+              "address_space_bytes": 4294967296,
+              "child_process_slots": 1,
+              "cpu_slots": 1,
+              "environment": {
+                "LEAN_MAIN_USE_THREAD": "0",
+                "LEAN_NUM_THREADS": "1",
+                "LEAN_STACK_SIZE_KB": "65536"
+              },
+              "resident_memory_bytes": 4294967296,
+              "resident_memory_enforcement": "sampled_process_tree_rss"
+            },
+            "verification_profile": "lean-kernel-verification/v2"
+          },
+          "module_id": "",
+          "plane": "native",
+          "toolchain_id": "toolchain:lean:native:4.34.1",
+          "version": "4.34.1"
+        }
+      },
+      "source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+      "translation": {
+        "fidelity": "exact",
+        "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+        "generated_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+        "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+        "source_family": "target_theory",
+        "target_family": "lean4",
+        "target_theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq",
+        "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f",
+        "translation_id": "translation:fictional-native-cache"
+      }
+    },
+    "query_kind": "theorem_proof",
+    "request_id": "request:fictional-native-cache",
+    "requested_backend_id": "lean",
+    "schema_version": "proof-backend-request/v1"
+  },
+  "resource_admission_scope": "caller_owned_not_established_by_this_helper",
+  "result": {
+    "assumption_ids": [
+      "assumption:fictional-native-cache"
+    ],
+    "attempt_digest": "6e2b69c6f07e9f9e2693d3a72ac6cdeb837c668d2388734b7d71eeba3444a2f4",
+    "authority": {
+      "configuration_digest": "2a6da73b810c71958c6ca86f57ee0364b84e003ce9da67158d5250590c362cb8",
+      "evidence_digests": [],
+      "issuer": "native-cache-integration",
+      "kind": "theorem_proof",
+      "method": "actual-Lean-kernel/v3",
+      "schema_version": "result-authority/v1",
+      "scope_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc"
+    },
+    "backend_id": "lean",
+    "backend_version": "4.34.1",
+    "bounds": {
+      "max_memory_bytes": 4294967296,
+      "max_output_bytes": 65536,
+      "max_steps": 100,
+      "timeout_ms": 15000
+    },
+    "claim_digest": "eb6256da855626147a21494dcab2a39b35461ad9a817b04fd91eb186e50afea4",
+    "declaration_id": "fictional-native-cache-provision",
+    "diagnostics": [],
+    "obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+    "obligation_id": "obligation:fictional-native-cache",
+    "output_digest": "b781068a87c827c02fd13439b0154fca070d5c0ee81437da1e3cc9fd93a6d883",
+    "payload": {
+      "fictional_source_fixture_only": true,
+      "kernel_receipt": {
+        "accepted": true,
+        "approved_axioms": [],
+        "approved_imports": [
+          "Init",
+          "Init.Classical",
+          "Init.Prelude"
+        ],
+        "authority_disposition": "reject",
+        "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+        "axiom_report": {
+          "axioms": [],
+          "contains_sorry_ax": false,
+          "declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+          "report_text": "'_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f' does not depend on any axioms",
+          "schema_version": "lean-axiom-report/v2",
+          "source_column": 0,
+          "source_line": 12,
+          "source_path": "Main.lean"
+        },
+        "compiled_source_digest": "976c6259f718a4c53c75947b8b0f5b91f3c8b86d9ec728ad0abb99366fb01390",
+        "diagnostics": [],
+        "expected_obligation_declaration": "_ipfs_expected_obligation_dcb3daa7685cf2588ff9ceae66c192da727cd0c30508943203a2991a2942321f",
+        "expected_proposition": "True",
+        "expected_proposition_checked": true,
+        "expected_proposition_digest": "d25de1569786f1fa447c9c1932711f6fa9afe315ea25913ed836848e7f6a79cf",
+        "generated_proof": "theorem cache_native_fixture : True := by\n  exact True.intro",
+        "generated_proof_digest": "c46e2990727860d15ab5089901d067bab30b072cf593abc1fab6e6cd05155d2a",
+        "imports": [
+          "Init"
+        ],
+        "native_identity": {
+          "actual_version": "4.34.1",
+          "executable_bytes": 13824,
+          "executable_sha256": "79fb1d26fa5a39385d59fdc48a711a14b0710ca6480271acce99b4d177cea085",
+          "executable_stat_after": {
+            "ctime_ns": 1790376166615972340,
+            "device": 66306,
+            "inode": 6721251,
+            "mtime_ns": 1790273308000000000,
+            "size": 13824
+          },
+          "executable_stat_before": {
+            "ctime_ns": 1790376166615972340,
+            "device": 66306,
+            "inode": 6721251,
+            "mtime_ns": 1790273308000000000,
+            "size": 13824
+          },
+          "library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+          "observation_kind": "bounded_native_version_probe",
+          "resolved_executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+          "schema_version": "lean-native-identity/v1",
+          "version_command": [
+            "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+            "--version"
+          ],
+          "version_returncode": 0,
+          "version_stderr": "",
+          "version_stdout": "Lean (version 4.34.1, aarch64-unknown-linux-gnu, commit 5045d0056413266e57c625dcd7c365b10e377c52, Release)"
+        },
+        "native_identity_checked_after_compile": true,
+        "plane": "native",
+        "receipt_id": "lean-kernel-receipt:8527bfebb7c7ef5ec7247e48513d1fb7f5897d1d5ad226b6e4f76c514c4ca99c",
+        "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+        "schema_version": "lean-kernel-receipt/v3",
+        "source_binding": {
+          "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+          "schema_version": "lean-source-binding/v1",
+          "source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+          "source_format": "lean4"
+        },
+        "source_tree": {
+          "files": {
+            "Main.lean": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842"
+          },
+          "primary_path": "Main.lean",
+          "root_digest": "2705625a01845475014ebd2486df73c4f5cb8638cf2a50f94acc2ef9ec76d496",
+          "tree_id": "source-tree:2705625a01845475014ebd24"
+        },
+        "submitted_source": "import Init\n\n-- theory: theory:fictional-native-cache\n-- surface: kernel_native\ntheorem cache_native_fixture : True := by\n  exact True.intro\n",
+        "theorem_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+        "theorem_name": "cache_native_fixture",
+        "toolchain": {
+          "command_template": "{lean} -s65536 -j1 --json {source_file}",
+          "executable": "/home/barberb/.elan/toolchains/leanprover--lean4---v4.34.1/bin/lean",
+          "kernel_id": "lean",
+          "metadata": {
+            "approved_axioms": [],
+            "approved_imports": [
+              "Init",
+              "Init.Classical",
+              "Init.Prelude"
+            ],
+            "axiom_policy_digest": "2b85825f9ddb6d40b55c22df20c9fcf9da9056c3bd89db235c15bfbb550d61e2",
+            "native_identity_digest": "1da6b3ec68873d685307ac2e341aa13f3de39161c621b830c4213330301d7af9",
+            "native_library_scope": "installed runtime and approved imports are trusted; transitive libraries are not independently authenticated",
+            "native_resource_profile": {
+              "address_space_bytes": 4294967296,
+              "child_process_slots": 1,
+              "cpu_slots": 1,
+              "environment": {
+                "LEAN_MAIN_USE_THREAD": "0",
+                "LEAN_NUM_THREADS": "1",
+                "LEAN_STACK_SIZE_KB": "65536"
+              },
+              "resident_memory_bytes": 4294967296,
+              "resident_memory_enforcement": "sampled_process_tree_rss"
+            },
+            "verification_profile": "lean-kernel-verification/v2"
+          },
+          "module_id": "",
+          "plane": "native",
+          "toolchain_id": "toolchain:lean:native:4.34.1",
+          "version": "4.34.1"
+        },
+        "translation": {
+          "fidelity": "exact",
+          "metadata": {
+            "formal_artifact_digest": "sha256:fc420376e82a45a78e15dcc843c815a9bd2c71e4c9e6f9a9a4da647c4791e67a",
+            "generated_source_digest": "33fb5ff79680c9190185e0adb3e62f350c0caa6639c9c83f4578dae6c83c9842",
+            "proof_obligation_digest": "fdf005dd056ec5becea64e641baeea9bcc7c77e9a02a1375ab962e90b58f7251",
+            "target_theory_document_id": "bafkreifgf4s4cicvlb3vhgrkznhfmof32m76uzkexljyxhvpkkfutftlsq"
+          },
+          "source_family": "target_theory",
+          "target_family": "lean4",
+          "translation_digest": "838f1cb93835ac65523b38aae28490fb28f0919edbef20a5bea2063bff40ff4f",
+          "translation_id": "translation:fictional-native-cache"
+        }
+      }
+    },
+    "request_digest": "09424c2d3ba494d29d50a8033beed0cc5ce5f516782a152ff11f90b715207ffc",
+    "result_id": "result:fictional-native-cache",
+    "result_type": "proof",
+    "schema_version": "bounded-result/v1",
+    "status": "proved",
+    "usage": {
+      "elapsed_ms": 234,
+      "output_bytes": 316,
+      "peak_memory_bytes": 0,
+      "steps": 0
+    }
+  },
+  "schema": "native-lean-v3-proof-cache-integration/v1",
+  "software_reissued_backend_version_control_count": 2,
+  "statutory_meaning_or_corpus_admission": false,
+  "version_mutation_controls_are_new_native_results": false
+}

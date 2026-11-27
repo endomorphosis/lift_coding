@@ -1,0 +1,113 @@
+{
+  "literal_function_selectors": [
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_current_target_metadata_without_checked_receipt_never_reaches_update",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_uses_current_semantic_target_before_update",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_refuses_substituted_record_with_same_target",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_current_target_requires_independent_id_and_canonical_feedback",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_proof_nested_guidance_cannot_redirect_primary_update",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_content_addressed_proof_feedback_updates_primary_and_auxiliary_heads",
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_nested_feedback_matching_envelope_preserves_weight_updates",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py::test_ablation_refuses_unmatched_typed_feedback_before_cloning",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py::test_trusted_version_matched_feedback_trains_every_head_and_reports_family_metrics",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py::test_proof_updates_cannot_override_primary_objective_parameters",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py::test_proof_head_training_reports_finite_nonzero_proof_norms",
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_record_v2_disk_round_trip_and_explicit_context"
+  ],
+  "literal_function_case_counts": {
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence": 7,
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_current_target_metadata_without_checked_receipt_never_reaches_update": 1,
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_uses_current_semantic_target_before_update": 5,
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_refuses_substituted_record_with_same_target": 2,
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_current_target_requires_independent_id_and_canonical_feedback": 2,
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_proof_nested_guidance_cannot_redirect_primary_update": 1,
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_content_addressed_proof_feedback_updates_primary_and_auxiliary_heads": 1,
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_nested_feedback_matching_envelope_preserves_weight_updates": 2,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py::test_ablation_refuses_unmatched_typed_feedback_before_cloning": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py::test_trusted_version_matched_feedback_trains_every_head_and_reports_family_metrics": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py::test_proof_updates_cannot_override_primary_objective_parameters": 1,
+    "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py::test_proof_head_training_reports_finite_nonzero_proof_norms": 1,
+    "tests/unit/logic/legal_ir/test_proof_cache.py::test_bound_record_v2_disk_round_trip_and_explicit_context": 1
+  },
+  "ordered_count_vector": [
+    7,
+    1,
+    5,
+    2,
+    2,
+    1,
+    1,
+    2,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "static_param_values": {
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_checked_legal_proof_producer_and_consumers_bind_exact_current_evidence": [
+      [
+        "selected",
+        null
+      ],
+      [
+        "same_receipt_id",
+        "exact checked receipt and formal obligation"
+      ],
+      [
+        "stale_raw_source",
+        "checked obligation does not bind the current sample source"
+      ],
+      [
+        "changed_interpretation",
+        "failed current receipt replay"
+      ],
+      [
+        "changed_dependency",
+        "failed current receipt replay"
+      ],
+      [
+        "unreviewed_source",
+        "requires a reviewed sample source"
+      ],
+      [
+        "missing_modal_binding",
+        "does not bind the current modal interpretation"
+      ]
+    ],
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_uses_current_semantic_target_before_update": [
+      "matching",
+      "legacy",
+      "sample",
+      "interpretation",
+      "dependency"
+    ],
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_feedback_refuses_substituted_record_with_same_target": [
+      "other_receipt",
+      "other_label_same_receipt"
+    ],
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_current_target_requires_independent_id_and_canonical_feedback": [
+      "copied_id",
+      "unselected_id"
+    ],
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py::test_typed_nested_feedback_matching_envelope_preserves_weight_updates": [
+      "guidance",
+      "feedback"
+    ]
+  },
+  "private_nofit18": {
+    "path": "/tmp/Phase7-verified-legal-proof-training-private-Qbzuh2mo/actual-final-maintained-checked-branches.json",
+    "bytes": 36484,
+    "sha256": "7533e6804838f2efb9ad4d60a48f28b528129d292bed25e68fbc306704d5621b"
+  },
+  "expected_case_count": 26,
+  "exact_five_selected_rewrites": {
+    "tests/unit/logic/integration/test_trusted_feedback_weight_updates.py": "tests.unit.logic.integration.test_trusted_feedback_weight_updates",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_proof_feedback_ablation.py": "tests.unit.optimizers.logic_theorem_optimizer.test_proof_feedback_ablation",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_modal_autoencoder_proof_heads.py": "tests.unit.optimizers.logic_theorem_optimizer.test_modal_autoencoder_proof_heads",
+    "tests/unit/optimizers/logic_theorem_optimizer/test_trainable_legal_ir_objective.py": "tests.unit.optimizers.logic_theorem_optimizer.test_trainable_legal_ir_objective",
+    "tests/unit/logic/legal_ir/test_proof_cache.py": "tests.unit.logic.legal_ir.test_proof_cache"
+  },
+  "actual_pytest_collect_supplies_run_order": true,
+  "actual_pytest_nodeids": null
+}

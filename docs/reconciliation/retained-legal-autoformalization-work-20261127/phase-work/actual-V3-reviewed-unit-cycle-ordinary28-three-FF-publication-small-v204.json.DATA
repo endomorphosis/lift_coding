@@ -1,0 +1,149 @@
+{
+  "V2_follow_up_adopted": false,
+  "actual_push_outputs": {
+    "datasets": "To https://github.com/endomorphosis/ipfs_datasets_py.git\n \t5fae066b5871d3fdf0b63dfbc4339c199ca6ffc1:refs/heads/main\t017fb54693..5fae066b58\nDone",
+    "hallucinate": "To https://github.com/endomorphosis/hallucinate_app.git\n \teb981c0201aaed687b37668c6e88c642cc71b39a:refs/heads/main\t229da71..eb981c0\nDone",
+    "root": "To https://github.com/endomorphosis/lift_coding.git\n \tb2f400bbd4c804e84d7fedc7da6134575ff1e93b:refs/heads/main\tb6f6bac062..b2f400bbd4\nDone"
+  },
+  "force_or_tag_push": false,
+  "frozen_local_candidate": {
+    "bytes": 4103,
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-V3-reviewed-unit-cycle-two-file-local-freeze-v200.json",
+    "sha256": "9ee2df6809913d4234ccd6f9963607870d6e00cef1ba84c4f195b5a1ab4fa5ff"
+  },
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "017fb546935826d4e8f13d314395f6053cee4d3f",
+        "to": "5fae066b5871d3fdf0b63dfbc4339c199ca6ffc1"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "017fb546935826d4e8f13d314395f6053cee4d3f",
+        "to": "5fae066b5871d3fdf0b63dfbc4339c199ca6ffc1"
+      },
+      "hallucinate_app": {
+        "from": "229da710403f3373f0e32d9427ed0225badcb5d8",
+        "to": "eb981c0201aaed687b37668c6e88c642cc71b39a"
+      }
+    }
+  },
+  "guide513_installed": false,
+  "local_after": {
+    "accelerate": {
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "index_and_worktree_clean": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "head": "5fae066b5871d3fdf0b63dfbc4339c199ca6ffc1",
+      "index_and_worktree_clean": true,
+      "tree": "60d337fdefb53e7f8d47bd08eafafbc963316d9f"
+    },
+    "hallucinate": {
+      "head": "eb981c0201aaed687b37668c6e88c642cc71b39a",
+      "index_and_worktree_clean": true,
+      "tree": "12bf3f11f9c9a439e72d54d42eb3956d1ed42cd7"
+    },
+    "root": {
+      "head": "b2f400bbd4c804e84d7fedc7da6134575ff1e93b",
+      "index_and_worktree_clean": true,
+      "tree": "27b14423cacdc810fcd74f471c9dcce6edf74dd4"
+    }
+  },
+  "new_Source_test_CI_model_or_Lean_invocation": false,
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "5fae066b5871d3fdf0b63dfbc4339c199ca6ffc1",
+    "hallucinate": "eb981c0201aaed687b37668c6e88c642cc71b39a",
+    "root": "b2f400bbd4c804e84d7fedc7da6134575ff1e93b"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "017fb546935826d4e8f13d314395f6053cee4d3f",
+    "hallucinate": "229da710403f3373f0e32d9427ed0225badcb5d8",
+    "root": "b6f6bac06249bbcfecbc10d13d0d105e89a3b349"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "other_gitlinks_and_accelerate_preserved": true,
+  "published_product_and_test": {
+    "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py": {
+      "blob": "d700c6af5d4e1f91c9965763fc71347ea2236f3d",
+      "bytes": 30293,
+      "full9": {
+        "st_ctime_ns": "1795547923868938756",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042528",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795547922596377826",
+        "st_nlink": "1",
+        "st_size": "30293",
+        "st_uid": "1000"
+      },
+      "mode": "100644",
+      "parent_blob": "b136aff35d34632657d111f647657dc0c9022707",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py",
+      "relative_path": "ipfs_datasets_py/logic/autoformal/legal_reviewed_norm_admission_v3.py",
+      "sha256": "65e8182c945669b0f891b03ab12b1d3bee27697d4443bd8df32861af7a931b05"
+    },
+    "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py": {
+      "blob": "6169507dd3bc8813c24501829f044235c509a207",
+      "bytes": 28883,
+      "full9": {
+        "st_ctime_ns": "1795547925074965303",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "70042529",
+        "st_mode": "33204",
+        "st_mtime_ns": "1795547922600637008",
+        "st_nlink": "1",
+        "st_size": "28883",
+        "st_uid": "1000"
+      },
+      "mode": "100644",
+      "parent_blob": "de47a249167d03c819329d8d64d3b90bd6f4bd52",
+      "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/repositories/datasets/tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py",
+      "relative_path": "tests/unit/logic/autoformal/test_legal_reviewed_norm_admission_v3.py",
+      "sha256": "6982e1f557db2ff140804287d9be4ba1ba0b72242038d058b9fcbdce3a009a05"
+    }
+  },
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "qualification": {
+    "actual_F9_custody_and_resources_closed": true,
+    "bytes": 3768,
+    "errors": 0,
+    "failures": 0,
+    "passed": 28,
+    "path": "/tmp/Root-V3-ordinary28-matching-bootstrap-manifest-selected-v204-k4jibidt/Root-V3-ordinary28-qualified-Source-resource-closed-small-v204.json",
+    "physical_unique_tests": 28,
+    "prior_setup_failure": {
+      "full_Source_cost_retained": 134217728,
+      "report": {
+        "bytes": 87026,
+        "path": "/tmp/Root-V3-ordinary28-actual-READ-selected-v203-bb5q91ja/actual-output/complete-published-D-reviewed-v2-v3-unit-dependencies28-existing-owner-report.json",
+        "sha256": "a15a18cb4c61c300333b60a2a04fc5db8a16bed4850a523dcc1b1d5086b2e755"
+      },
+      "v203": "Root bootstrap manifest DATA mismatch before collection;0tests;fullyclosed"
+    },
+    "raw_JUnit": {
+      "bytes": 6390,
+      "path": "/tmp/Root-V3-ordinary28-matching-bootstrap-manifest-selected-v204-k4jibidt/actual-output/reviewed-v2-v3-unit-dependencies28-run-result0-output1.bin",
+      "sha256": "61b55e6b635add1bb1c75b98d7bd676d3292ec0b6a7e10efc58dfc02436fbfac"
+    },
+    "sha256": "ea6e11eb31ef94cfbd30569e30efa7a2e6ce95a5268b89f98a34cfefc8b35378",
+    "skips": 0
+  },
+  "schema": "actual-reviewed-V3-ordinary28-three-fast-forward-publication/v204",
+  "statutory_training_native_or_corpus_admission_claimed": false
+}

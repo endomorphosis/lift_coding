@@ -1,0 +1,609 @@
+"""INERT exact-three READ specialization of the existing Source42/IO733 custody route."""
+import contextlib,hashlib,json,os,stat,subprocess,sys,time,traceback
+from pathlib import Path
+SEL = {'path': '/tmp/Root-P7-declared70-existing-SourceREAD-selected-v231-92qcixdn/Root-selected-P7-declared70-SourceREAD.json', 'bytes': 804, 'sha256': '4185ce2b75e8675f5a925b55aa6d7701aff613e20d3d1d30c61a620f8c6239fb'}
+REQ = {'path': '/tmp/Root-P7-declared70-existing-SourceREAD-selected-v231-92qcixdn/Root-bound-P7-declared70-SourceREAD-request.json', 'bytes': 65401, 'sha256': '6566765ecf7a263e08e500496b683d7d92c088498e3bba23528b566474ab3acb'}
+PREBOUND_OUTPUT_NAMESPACE = '/tmp/Root-P7-declared70-existing-SourceREAD-selected-v231-92qcixdn/actual-output'
+before = {'captures': 105377, 'capturesComplete': False, 'global_cap': 17230200832, 'internal_cap': 16961765376, 'internal_used': 16853963531, 'used': 17044555405}
+CARRIED_OPERATOR_BYTES = 1048576
+CARRIED_OPERATOR_CAPTURES = 14
+if any(value is None for value in (SEL,REQ,PREBOUND_OUTPUT_NAMESPACE,before,CARRIED_OPERATOR_BYTES,CARRIED_OPERATOR_CAPTURES)):
+    raise RuntimeError("INERT: exact Root selection, request, ledger, clock and fresh private output required")
+FIELDS=('st_dev','st_ino','st_mode','st_nlink','st_uid','st_gid','st_size','st_mtime_ns','st_ctime_ns')
+f9=lambda s:{k:str(getattr(s,k)) for k in FIELDS}
+H=lambda raw:hashlib.sha256(raw).hexdigest()
+assert type(CARRIED_OPERATOR_BYTES) is int and 0<=CARRIED_OPERATOR_BYTES<=1048576
+assert type(CARRIED_OPERATOR_CAPTURES) is int and CARRIED_OPERATOR_CAPTURES>=0
+spent={'bytes':SEL['bytes']+CARRIED_OPERATOR_BYTES,'captures':1+CARRIED_OPERATOR_CAPTURES}
+report={'schema':'actual-existing-Source42-frozen-P7-declared70-READ/v1','inputs':[],'errors':[],'Source_contexts':[],'Source_closed':False,'owned_module_closed':False,'read_complete':False,'fresh_body_reads':[],'canonical_or_Git_or_managedledger_write':False,'SDK_or_test_or_Native_or_model_execution':False,'physical_IO_accounting_complete':False}
+source=None
+cleanup_owned_source42_module=None
+OUT=Path(PREBOUND_OUTPUT_NAMESPACE)
+output_created=False
+
+def admit(n):
+    if type(n) is not int or n<0 or spent['bytes']+n>100663296:
+        raise RuntimeError('selected READ envelope insufficient before read')
+    if before['used']+spent['bytes']+n>before['global_cap'] or before['internal_used']+spent['bytes']+n>before['internal_cap']:
+        raise RuntimeError('shared Source allowance insufficient before read')
+
+def control_read(ref, kind='private_control', *, return_file_observations=False, retain_fd=None):
+    if type(return_file_observations) is not bool:
+        raise ValueError('explicit boolean archive observation selection required')
+    if retain_fd is not None and (not callable(retain_fd) or return_file_observations):
+        raise ValueError('existing owner requires one explicit control observation mode')
+    if return_file_observations:
+        if (type(ref) is not dict or set(ref) != {'path', 'bytes', 'sha256', 'full9'}
+                or type(ref['path']) is not str or type(ref['bytes']) is not int or ref['bytes'] < 0
+                or type(ref['sha256']) is not str or len(ref['sha256']) != 64
+                or any(char not in '0123456789abcdef' for char in ref['sha256'])):
+            raise ValueError('exact archived path, size, SHA-256 and full9 required')
+    p = Path(ref['path'])
+    if return_file_observations:
+        if not p.is_absolute() or '..' in p.parts or str(p) != ref['path']:
+            raise ValueError('literal absolute archived path required')
+        parents_before = parents(p)
+    a = p.lstat()
+    path_before = f9(a)
+    regular_owned = stat.S_ISREG(a.st_mode) and a.st_nlink == 1 and a.st_uid == os.getuid()
+    if return_file_observations:
+        if (not regular_owned or a.st_size != ref['bytes'] or path_before != ref['full9']
+                or stat.S_IMODE(a.st_mode) != 0o400):
+            raise ValueError('selected immutable archive full9, size or ownership differs')
+    else:
+        assert regular_owned and a.st_size == ref['bytes']
+    admit(ref['bytes'] + 1)
+    parts = []
+    total = 0
+    fd = os.open(p, os.O_RDONLY | os.O_NOFOLLOW | (os.O_NONBLOCK if retain_fd is not None else 0))
+    try:
+        row = {'path': str(p), 'kind': kind, 'actual_bytes': 0}
+        report['inputs'].append(row)
+        fd_before = f9(os.fstat(fd))
+        if return_file_observations and fd_before != path_before:
+            raise ValueError('archive changed before the opened FD was verified')
+        assert fd_before == path_before
+        spent['captures'] += 1
+        while total <= ref['bytes']:
+            part = os.read(fd, min(1048576, ref['bytes'] + 1 - total))
+            total += len(part)
+            spent['bytes'] += len(part)
+            row['actual_bytes'] += len(part)
+            if not part:
+                break
+            parts.append(part)
+        fd_after = f9(os.fstat(fd))
+        path_after = f9(p.lstat())
+        stable = path_before == fd_after == path_after
+        if return_file_observations and not stable:
+            raise ValueError('archive FD or path identity drifted during the read')
+        assert stable
+        if retain_fd is not None:
+            raw = b''.join(parts)
+            assert len(raw) == ref['bytes'] and H(raw) == ref['sha256']
+            retain_fd(fd)
+            return raw
+    finally:
+        os.close(fd)
+    raw = b''.join(parts)
+    if return_file_observations:
+        if len(raw) != ref['bytes'] or H(raw) != ref['sha256'] or parents(p) != parents_before:
+            raise ValueError('selected archive bytes, digest or parent identities differ')
+        return raw, (path_before, fd_before, fd_after, path_after)
+    assert len(raw) == ref['bytes']
+    assert 'sha256' not in ref or H(raw) == ref['sha256']
+    return raw
+
+def seal(path,raw):
+    assert type(raw)is bytes
+    p=Path(path);fd=os.open(p,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW,0o400)
+    with os.fdopen(fd,'wb')as stream:
+        stream.write(raw);stream.flush();os.fsync(stream.fileno())
+    return {'path':str(p),'bytes':len(raw),'sha256':H(raw)}
+
+def js(path,obj):
+    return seal(path,(json.dumps(obj,sort_keys=True,indent=2)+'\n').encode())
+
+def git(root,*args,allow_nonzero=False):
+    env=dict(os.environ,GIT_OPTIONAL_LOCKS='0',GIT_NO_LAZY_FETCH='1',GIT_TERMINAL_PROMPT='0')
+    admit(262144)
+    p=subprocess.run(['/usr/bin/git','-C',root,*args],env=env,stdout=subprocess.PIPE,stderr=subprocess.PIPE,timeout=20)
+    spent['captures']+=1;spent['bytes']+=len(p.stdout)+len(p.stderr)
+    assert len(p.stdout)+len(p.stderr)<=262144
+    report.setdefault('Git_calls',[]).append({'root':root,'args':args,'returncode':p.returncode,'stdout_bytes':len(p.stdout),'stderr_bytes':len(p.stderr)})
+    if not allow_nonzero and p.returncode:raise RuntimeError(('read-only Git failed',root,args,p.returncode,p.stderr.decode(errors='replace')))
+    return p
+
+def parents(path):
+    out=[]
+    for p in reversed(Path(path).parents):
+        s=p.lstat();assert stat.S_ISDIR(s.st_mode) and not stat.S_ISLNK(s.st_mode)
+        fd=os.open(p,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+        try:assert f9(s)==f9(os.fstat(fd))==f9(p.lstat())
+        finally:os.close(fd)
+        out.append({'path':str(p),'full9':f9(s)})
+    return out
+
+def leaf(t):
+    p=Path(t['path']);s=p.lstat();assert stat.S_ISREG(s.st_mode)and s.st_nlink==1
+    assert f9(s)==t['full9']and s.st_size==t['bytes']
+
+def checked_read(path,limit,kind,*,stage_a_fresh=None):
+    path=Path(path)
+    assert path.is_absolute()
+    if stage_a_fresh is None:
+        allowed=path.is_relative_to(OUT) or any(str(path)==r['path'] for r in request['targets']+request['protected_completed_targets']+request.get('unchanged_fences',[])) or any(str(path)==r['temporary_path'] for r in report.get('staged',[]))
+        assert allowed,('unselected file read',str(path),kind)
+        reference = {'path':str(path), 'bytes':limit}
+        selected = None
+    else:
+        if type(stage_a_fresh) is not dict or len(stage_a_fresh) != 12:
+            raise ValueError('exact twelve Stage A fresh Source paths required')
+        selected = stage_a_fresh.get(str(path))
+        roots = sorted((request['root'],request['additional_A']['root']))
+        active_reads = [{'root':root,'mode':'read','entered':True,'exit_returned':False} for root in roots]
+        if (type(selected) is not dict or kind != 'canonical_current_working_file'
+                or 'stage_a' not in report or report['Source_contexts'] != active_reads
+                or selected['bytes'] != limit or path.resolve(strict=True) != path):
+            raise ValueError('unselected Stage A fresh Source read')
+        reference = {key:selected[key] for key in ('path','bytes','sha256')}
+        if reference['path'] != str(path):
+            raise ValueError('unselected Stage A fresh Source read')
+    a = f9(path.lstat())
+    if selected is not None and a != selected['full9']:
+        raise ValueError('Stage A fresh Source stamp changed before the read')
+    raw = control_read(reference,kind)
+    b = f9(path.lstat())
+    assert a == b
+    return raw,b
+
+
+def clock_ok():
+    assert int(selection['launch_not_before_utc_ns'])<=time.time_ns()<int(selection['launch_deadline_utc_ns'])
+
+def root_facts_clean(root,expected):
+    head=git(root,'rev-parse','HEAD').stdout.decode().strip()
+    tree=git(root,'rev-parse','HEAD^{tree}').stdout.decode().strip()
+    assert (head,tree)==(expected['Git_HEAD'],expected['Git_tree'])
+    status=git(root,'status','--porcelain=v1','-z','--untracked-files=normal').stdout
+    assert status==b''
+    assert git(root,'diff','--cached','--quiet','HEAD','--',allow_nonzero=True).returncode==0
+    assert git(root,'diff','--quiet','--',allow_nonzero=True).returncode==0
+    return {'root':root,'HEAD':head,'tree':tree,'clean_worktree_and_index':True,'status_sha256':H(status)}
+
+def verify_full_metadata_guard(*, stage_a_rows=None):
+    """Retain actual path/FD/path stamps for the separately selected Stage A roster."""
+    selected = stage_a_rows is not None
+    if selected:
+        if (type(stage_a_rows) is not list or len(stage_a_rows) != 1254
+                or any(type(row) is not dict or set(row) != {'path', 'bytes', 'full9'}
+                       or type(row['path']) is not str or not Path(row['path']).is_absolute()
+                       or str(Path(row['path'])) != row['path'] or '..' in Path(row['path']).parts
+                       or type(row['bytes']) is not int or row['bytes'] < 0
+                       or row['full9'] is not None and type(row['full9']) is not dict
+                       for row in stage_a_rows)
+                or len({row['path'] for row in stage_a_rows}) != 1254
+                or sum(row['full9'] is None for row in stage_a_rows) not in (0, 12)):
+            raise ValueError('exact 1254 Stage A metadata rows with zero or twelve unobserved stamps required')
+        rows = stage_a_rows
+    else:
+        assert len(guard_rows) == len({r['path'] for r in guard_rows}) == 1303
+        rows = guard_rows
+    observed = {}
+    for row in rows:
+        path = Path(row['path'])
+        parents(path)
+        expected = row['full9']
+        s = path.lstat()
+        path_before = f9(s)
+        regular = stat.S_ISREG(s.st_mode) and s.st_nlink == 1
+        if selected:
+            if not regular or s.st_size != row['bytes'] or (expected is not None and path_before != expected):
+                raise ValueError(f'Stage A metadata differs before FD observation: {path}')
+        else:
+            assert regular and path_before == expected
+        flags = os.O_RDONLY | os.O_NOFOLLOW
+        if selected:
+            flags |= os.O_NONBLOCK
+        fd = os.open(path, flags)
+        try:
+            fd_full9 = f9(os.fstat(fd))
+            stable = fd_full9 == path_before == f9(path.lstat())
+            if selected and not stable:
+                raise ValueError(f'Stage A path or FD metadata changed during observation: {path}')
+            assert stable
+        finally:
+            os.close(fd)
+        if selected:
+            observed[str(path)] = fd_full9
+    if selected:
+        return observed
+
+
+def verify_absences():
+    for name in request['expected_absent_paths']:
+        parents(name)
+        try:Path(name).lstat()
+        except FileNotFoundError:continue
+        raise AssertionError(('expected unchanged namespace/fixture absence',name))
+
+def acquire_current_sources(*,deadline=None):
+    stack=contextlib.ExitStack()
+    try:
+        for root in sorted([request['root'],request['additional_A']['root']]):
+            if deadline is None:
+                lease_options = {}
+            else:
+                remaining = deadline-time.monotonic()
+                if remaining <= 0:
+                    raise ValueError('Stage A Source deadline expired before lease acquisition')
+                lease_options = {'timeout_seconds':min(source.DEFAULT_TIMEOUT_SECONDS,remaining)}
+            cm=source.source_lease(root,mode='read',**lease_options)
+            cm.__enter__()
+            row={'root':root,'mode':'read','entered':True,'exit_returned':False}
+            report['Source_contexts'].append(row)
+            def close_owned(cm=cm,row=row):
+                result=cm.__exit__(*sys.exc_info())
+                row['exit_returned']=True
+                return result
+            stack.callback(close_owned)
+            if deadline is not None and time.monotonic() >= deadline:
+                raise ValueError('Stage A Source deadline expired while acquiring a lease')
+        return stack
+    except BaseException:
+        stack.close()
+        raise
+
+def read_selected_stage_a_epoch(plan, *, reader_selection, expected_selection_sha256,
+        verify_reader_selection, verify_phase7_owner, epoch_api, git_api, io, read_stage_zero, deadline):
+    """Use the authorized existing Reader for one retained-control, outer-only epoch capture."""
+    from copy import deepcopy
+
+    def encoded(value):
+        return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False).encode()
+
+    chosen = json.loads(encoded(reader_selection))
+    fields = {'schema', 'plan_sha256', 'git_record', 'output_root', 'maximum_core_bytes',
+              'maximum_matrix_write_bytes', 'epoch_output_maximums', 'git_output_maximum','maximum_run_seconds'}
+    schema = chosen.get('schema')
+    explicit_selectors = schema == 'existing-stage-a-retained-controls-outer-only/v2'
+    if explicit_selectors:
+        fields |= {'git_project_expectations','paired_selector_observation_sha256'}
+    if (set(chosen) != fields or schema not in ('existing-stage-a-retained-controls-outer-only/v1',
+                                               'existing-stage-a-retained-controls-outer-only/v2')
+            or H(encoded(chosen)) != expected_selection_sha256
+            or H(encoded(plan)) != chosen['plan_sha256'] or chosen['output_root'] != str(OUT)
+            or any(type(chosen[key]) is not int or chosen[key] <= 0 for key in
+                   ('maximum_core_bytes', 'maximum_matrix_write_bytes','maximum_run_seconds'))
+            or not callable(verify_reader_selection) or not callable(verify_phase7_owner)
+            or not callable(read_stage_zero) or report.get('Source_contexts') or 'stage_a' in report):
+        raise ValueError('exact existing paired Reader selection and unentered custody required')
+    plan = json.loads(encoded(plan))
+    roots = tuple(plan['current_roots'][key]['root'] for key in ('D', 'A'))
+    if (len(set(roots)) != 2 or (request['root'], request['additional_A']['root']) != roots
+            or request['actual_modes'] != {root: 'read' for root in roots}
+            or OUT.resolve(strict=True) != OUT or any(OUT.is_relative_to(Path(root)) for root in roots)
+            or any((OUT / part).resolve(strict=True) != OUT / part for part in ('raw','matrices'))):
+        raise ValueError('selected paired Source READ roots or original output directories differ')
+    selector_provenance, git_options = {}, {}
+    if explicit_selectors:
+        observation = chosen['paired_selector_observation_sha256']
+        bind_expectations = git_api.get('stage_a_paired_git_expectations')
+        if (type(observation) is not str or len(observation) != 64
+                or any(char not in '0123456789abcdef' for char in observation)
+                or not callable(bind_expectations)):
+            raise ValueError('original paired Git selector observation and verifier required')
+        # The existing owner approves the entire selection digest, which binds
+        # this observation reference and the per-root expectations together.
+        selected_gits = bind_expectations(chosen['git_project_expectations'], roots)
+        for role in ('D','A'):
+            selected_root = plan['current_roots'][role]
+            expected = selected_gits[selected_root['root']]
+            if (expected['HEAD'],expected['tree']) != (selected_root['HEAD'],selected_root['tree']):
+                raise ValueError('selected paired Git HEAD or tree differs from the exact Reader plan')
+        selector_provenance = {'paired_selector_observation_sha256':observation,
+                               'git_project_expectations_sha256':H(encoded(selected_gits))}
+        git_options['project_expectations'] = selected_gits
+    if (type(deadline) not in (int,float) or not 0 < deadline-time.monotonic() <= chosen['maximum_run_seconds']
+            or verify_reader_selection(expected_selection_sha256,roots,chosen['plan_sha256'],deadline) is not True
+            or time.monotonic() >= deadline):
+        raise ValueError('original Reader selection refused or expired')
+    admit(chosen['maximum_core_bytes'] + chosen['maximum_matrix_write_bytes'])
+    attempt = {'selection_sha256': expected_selection_sha256, 'archive_committed': False,
+               'Source_closed': False, 'body_capture_count': 0,
+               'matrix_write_bytes_debited': 0, 'private_write_debits': [], 'fresh_captures': []}
+    attempt.update(selector_provenance)
+    report['stage_a'] = attempt
+
+    def check_deadline():
+        if time.monotonic() >= deadline:
+            raise ValueError('selected Stage A operation deadline expired')
+
+    def read_before_deadline(reference,kind,**options):
+        check_deadline()
+        raw = control_read(reference,kind,**options)
+        check_deadline()
+        return raw
+
+    control_refs = [plan['phase7_request'], plan['phase7_receipt'], plan['current_retained_epochs']['outer']]
+    request_raw, receipt_raw, outer_raw = (read_before_deadline(ref,'selected_stage_a_input') for ref in control_refs)
+    plan_pin = chosen['plan_sha256']
+    rows, archive_refs = epoch_api['prepare_phase7_stage_a_read_inputs'](
+        plan, expected_plan_sha256=plan_pin, phase7_request_raw=request_raw,
+        phase7_receipt_raw=receipt_raw, retained_outer_raw=outer_raw, verify_phase7_owner=verify_phase7_owner)
+    pending = rows[-32:]
+    fresh = [dict(target) for target, row in zip(plan['fresh_Source_body_targets'], pending, strict=True)
+             if row['full9'] is None]
+    if len(fresh) != 12 or len(archive_refs) != 20:
+        raise ValueError('exact Stage A twelve fresh and twenty retained captures required')
+    guides = plan['four_guide_post_candidates_for_current_owner_recheck']
+    reserve = git_api['source32_paired_reader_reservation'](
+        chosen['git_record'],guides,fresh,archive_refs,control_refs,
+        epoch_output_maximums=chosen['epoch_output_maximums'],git_output_maximum=chosen['git_output_maximum'],
+        persist_python_epoch=False,retain_terminal_git_controls=True)
+    if reserve['logical_selected_bytes'] > chosen['maximum_core_bytes']:
+        raise ValueError('current Stage A reader envelope is too small')
+    attempt['reservation'] = dict(reserve)
+
+    def write_accounted(path, raw, *, matrix=False):
+        check_deadline()
+        size = len(raw)
+        if matrix and attempt['matrix_write_bytes_debited'] + size > chosen['maximum_matrix_write_bytes']:
+            raise ValueError('selected Stage A parent-matrix write allowance is exhausted')
+        admit(size)
+        # Debit before the write so a partial private artifact keeps its charge.
+        spent['bytes'] += size
+        if matrix:
+            attempt['matrix_write_bytes_debited'] += size
+        entry = {'path':str(path), 'bytes':size, 'parent_matrix':matrix, 'completed':False}
+        attempt['private_write_debits'].append(entry)
+        reference = seal(path,raw)
+        if reference != {'path':str(path),'bytes':size,'sha256':H(raw)}:
+            raise ValueError('existing private writer returned a different archive reference')
+        entry['completed'] = True
+        return reference
+
+    def acquire_fresh(target, permits, ordinal):
+        source_stamp = permits[target['path']]['full9']
+        canonical = dict(target, full9=source_stamp, Git_blob_oid=target['expected_Git_blob_oid'])
+        raw_path = OUT/'raw'/f'{ordinal}-stage-a.DATA'
+        append_capture = {}
+        readbacks = []
+
+        def read_owned(ref, kind):
+            check_deadline()
+            mode = {'stage_a_fresh':permits} if kind == 'canonical_current_working_file' else {}
+            raw, stamp = checked_read(ref['path'],ref['bytes'],kind,**mode)
+            check_deadline()
+            if kind == 'canonical_current_working_file' and (stamp != source_stamp or H(raw) != target['sha256']):
+                raise ValueError('fresh Source body differs from its selected hash or opening stamp')
+            if kind == 'immutable_raw_complete_readback':
+                readbacks.append(raw)
+            return raw, stamp
+
+        reference, actual9 = capture_one_at_source_IO_end(canonical,raw_path,append_capture,
+            parents_fn=parents,leaf_fn=leaf,read_fn=read_owned,seal_fn=write_accounted,
+            archive_matrix_fn=lambda label,value:write_accounted(
+                OUT/'matrices'/f'{ordinal}-{label}.json',encoded(value)+b'\n',matrix=True),
+            caller_uid=os.getuid())
+        if len(readbacks) != 1 or actual9 != source_stamp:
+            raise ValueError('original fresh capture lost its completed readback or Source stamp')
+        metadata = {key:reference[key] for key in ('path','bytes','sha256')}
+        metadata.update(canonical_path=target['path'],canonical_full9=actual9,
+                        Git_blob_oid=target['expected_Git_blob_oid'])
+        attempt['fresh_captures'].append({'canonical_path':target['path'],'capture':append_capture,
+                                          'raw_reference':reference})
+        attempt['body_capture_count'] += 1
+        return metadata,readbacks[0]
+
+    def active_scope(digest, kind, pid, offered_roots, phase):
+        return (digest == expected_selection_sha256 and offered_roots == roots and os.getpid() == pid
+                and kind == 'paired-git-continuous-read-retained-controls/v1'
+                and report['Source_contexts'] ==
+                [{'root':root,'mode':'read','entered':True,'exit_returned':False} for root in sorted(roots)])
+
+    def between(opening):
+        opening_git, _ = opening
+        before = verify_full_metadata_guard(stage_a_rows=rows)
+        legacy_python,planned = epoch_api['prepare_phase7_epoch_archive'](
+            plan,expected_plan_sha256=plan_pin,retained_outer_raw=outer_raw,
+            endpoint_before=dict(opening_git,full9=before),epoch_output_maximums=chosen['epoch_output_maximums'])
+        for guide in guides:
+            leaf(guide)
+            read_before_deadline(guide,'selected_stage_a_guide')
+            leaf(guide)
+        shared = []
+        for reference in archive_refs:
+            raw,stamps = read_before_deadline(reference,'selected_stage_a_retained_archive',return_file_observations=True)
+            shared.append((deepcopy(reference),raw,stamps))
+        permits = {target['path']:{**{key:target[key] for key in ('path','bytes','sha256')},
+                                   'full9':before[target['path']]} for target in fresh}
+        captures = tuple(acquire_fresh(target,permits,index) for index,target in enumerate(fresh))
+        return before, legacy_python, planned, tuple(shared), captures
+
+    accept_git, record_git = git_api['stage_a_git_owner_callbacks'](admit,spent,report)
+    try:
+        with acquire_current_sources(deadline=deadline):
+            opening,middle,closing,provenance = git_api['verify_stage_a_git_with_retained_controls'](
+                io,chosen['git_record'],deadline,between_endpoints=between,control_read=read_before_deadline,
+                stage_a_targets=plan['fresh_Source_body_targets'],read_stage_zero=read_stage_zero,
+                admit_git_output=accept_git,record_git_output=record_git,
+                expected_owner_scope_sha256=expected_selection_sha256,verify_continuous_owner_scope=active_scope,
+                git_output_maximum=chosen['git_output_maximum'], **git_options)
+            before,legacy_python,planned,shared,captures = middle
+            endpoint_rows = [dict(row,full9=before[row['path']]) for row in rows]
+            after = verify_full_metadata_guard(stage_a_rows=endpoint_rows)
+            epoch = epoch_api['compose_phase7_reused_source32_epochs'](
+                plan,expected_plan_sha256=plan_pin,phase7_request_raw=request_raw,phase7_receipt_raw=receipt_raw,
+                verify_phase7_owner=verify_phase7_owner,endpoint_before=dict(opening[0],full9=before),
+                endpoint_after=dict(closing[0],full9=after),index_body=opening[1],
+                retained_outer_raw=outer_raw,retained_python_raw=legacy_python,
+                guide_observations=guides,shared_archives=shared,fresh_captures=captures)
+            raw, commitments = epoch_api['encode_v214_outer_only_epoch_archive'](epoch,planned_bytes=planned)
+    finally:
+        attempt['Source_closed'] = report['Source_contexts'] == [
+            {'root':root,'mode':'read','entered':True,'exit_returned':True} for root in sorted(roots)]
+    if not attempt['Source_closed']:
+        raise ValueError('both original Stage A Source context exits are required')
+    if time.monotonic() >= deadline:
+        raise ValueError('Stage A Reader deadline expired before the private archive write')
+    admit(2*len(raw)+1)
+    stored = write_accounted(OUT/'stage-a-outer-epoch.json',raw)
+    readback = read_before_deadline(stored,'selected_stage_a_outer_epoch_readback')
+    epoch_api['replay_v214_outer_only_epoch_archive'](readback,expected_commitments=commitments)
+    for directory in (OUT/'raw', OUT/'matrices', OUT, OUT.parent):
+        fd = os.open(directory,os.O_RDONLY|os.O_DIRECTORY|os.O_NOFOLLOW)
+        try:
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+    if time.monotonic() >= deadline:
+        raise ValueError('Stage A Reader deadline expired after the private archive readback')
+    attempt.update(plan_sha256=plan_pin,closing_roots=deepcopy(closing[0]['roots']),
+                   closing_protected_index=deepcopy(closing[0]['index']),
+                   observed_counts={'opening_full9':len(before),'closing_full9':len(after),
+                                    'guides':len(guides),'reused_archives':len(shared),
+                                    'fresh_bodies':len(captures)},
+                   retained_git_provenance=provenance,outer_archive=stored,
+                   logical_epochs=commitments,archive_committed=True)
+    return deepcopy(attempt)
+
+
+try:
+    selection=json.loads(control_read(SEL,'Root_Source_READ_selection'))
+    assert selection['Root_selected'] is True and selection['request']==REQ
+    assert selection['ledger_before']==before and selection['Source_operation_max_bytes']==100663296
+    assert selection['fresh_output_namespace']==str(OUT)
+    clock_ok()
+    request=json.loads(control_read(REQ,'Root_bound_frozen_sampled_header_READ3_request'))
+    assert request['ledger_before']==before and request['Source_envelope']==100663296
+    assert request['canonical_write_selected'] is False
+    assert len(request['targets'])==70 and len({r['path'] for r in request['targets']})==70
+    assert set(request['actual_modes'].values())=={'read'}
+    assert OUT.is_absolute() and str(OUT).startswith('/tmp/Root-') and not OUT.exists()
+    assert not any(OUT.is_relative_to(Path(r)) for r in request['actual_modes'])
+    parents(OUT)
+    OUT.mkdir(mode=0o700);output_created=True
+    (OUT/'raw').mkdir(mode=0o700);(OUT/'matrices').mkdir(mode=0o700)
+    guard_rows=json.loads(control_read(request['full_metadata_guard'],'retained_current1303_metadata_guard'))['rows']
+    assert len(guard_rows)==1303
+    by_guard={r['path']:dict(r) for r in guard_rows}
+    assert len(by_guard)==1303 and set(r['path'] for r in request['targets'])<=set(by_guard)
+    for row in request['targets']:
+        by_guard[row['path']].update({k:row[k] for k in ('bytes','sha256','full9')})
+    guard_rows=list(by_guard.values())
+    outer_payload=json.loads(control_read(request['base_outer_epoch_reference'],'prior_authenticated1291_outer_epoch'))
+    outer=outer_payload['rows'] if type(outer_payload) is dict else outer_payload
+    assert type(outer) is list and len(outer)==1291 and len({r['path'] for r in outer})==1291
+    new_by_path={r['path']:dict(r) for r in outer}
+    assert set(r['path'] for r in request['targets'])<=set(new_by_path)
+    for target in request['targets']:
+        new_by_path[target['path']].update({k:target[k] for k in ('bytes','sha256','full9')})
+    new_outer=[new_by_path[r['path']] for r in outer]
+    for row in new_outer:
+        guard=by_guard[row['path']]
+        assert row['full9']==guard['full9'] and row['bytes']==guard['bytes']
+        assert set(row)>=set(('path','bytes','sha256','full9'))
+    fixture=json.loads(control_read(request['ordinary_fixture_closure'],'ordinary72_declared_fixture_closure'))
+    for row in fixture['required_fixture_closure']:
+        assert all(row[k]==new_by_path[row['path']][k] for k in ('path','bytes','sha256','full9'))
+    for ref in [request['approved_loader'],request['approved_IO_end_boundary']]:
+        exec(compile(control_read(ref,'existing_Source42_IO733_private_control'),ref['path'],'exec'),globals())
+    approved=json.loads(control_read(request['approved_Source42_binding'],'approved_Source42_binding'))
+    assert f9(Path(approved['code_reference']['path']).lstat())==approved['code_reference']['full9']
+    source_raw=control_read(approved['code_reference'],'approved_Source42_code')
+    assert len(source_raw)==10375 and H(source_raw)=='42e9f07d0d458177079269d9f495f0b70512180c1adc2f7fe0bfdb05518a12f9'
+    assert f9(Path(approved['code_reference']['path']).lstat())==approved['code_reference']['full9']
+    source=load_owned_source42_module(source_raw,approved['original_module_path'])
+    assert all(str(source.canonical_source_root(root))==root for root in request['actual_modes'])
+    clock_ok()
+    cm=acquire_current_sources()
+    try:
+        report['roots_before']={
+            'D':root_facts_clean(request['root'],request['root_expected']),
+            'A':root_facts_clean(request['additional_A']['root'],request['additional_A'])}
+        verify_full_metadata_guard();verify_absences();clock_ok()
+        index=next(r for r in request['targets'] if r['relative_path']=='.git/index')
+        assert git(request['root'],'rev-parse','--path-format=absolute','--git-path','index').stdout.decode().strip()==index['path']
+        for i,target in enumerate(request['targets']):
+            if target['Git_blob_oid'] is not None:
+                record=git(request['root'],'ls-tree','-z','HEAD','--',target['relative_path']).stdout
+                fields=record.rstrip(b'\0').split(b'\t')
+                assert len(fields)==2 and fields[1].decode()==target['relative_path']
+                mode,kind,oid=fields[0].decode().split()
+                assert mode=='100644' and kind=='blob' and oid==target['Git_blob_oid']
+                assert int(git(request['root'],'cat-file','-s',oid).stdout)==target['bytes']
+            capture={}
+            def archive_matrix(label,value):
+                return js(OUT/'matrices'/(str(i)+'-'+label+'.json'),value)
+            raw_ref,actual9=capture_one_at_source_IO_end(target,OUT/'raw'/(str(i)+'-'+Path(target['path']).name+'.DATA'),capture,
+                parents_fn=parents,leaf_fn=leaf,
+                read_fn=lambda row,kind:checked_read(row['path'],row['bytes'],kind),
+                seal_fn=seal,archive_matrix_fn=archive_matrix,caller_uid=os.getuid())
+            assert actual9==target['full9'] and raw_ref['bytes']==target['bytes'] and raw_ref['sha256']==target['sha256']
+            report['fresh_body_reads'].append({'canonical_path':target['path'],'canonical_full9':actual9,'raw_reference':raw_ref,'capture':capture})
+        assert git(request['root'],'rev-parse','--path-format=absolute','--git-path','index').stdout.decode().strip()==index['path']
+        verify_full_metadata_guard();verify_absences();clock_ok()
+        report['roots_after']={
+            'D':root_facts_clean(request['root'],request['root_expected']),
+            'A':root_facts_clean(request['additional_A']['root'],request['additional_A'])}
+        assert report['roots_after']==report['roots_before']
+        report['metadata_guard_count']=len(guard_rows)
+        report['only70_fresh_body_reads']=True
+        report['retained_other_body_identities_under_fresh_full9']=1221
+        report['all1291_fresh_body_reads_claimed']=False
+        report['fresh_body_bytes']=sum(r['bytes'] for r in request['targets'])
+        report['read_complete']=len(report['fresh_body_reads'])==70
+    finally:
+        cm.close()
+except BaseException as error:
+    report['errors'].append({'type':type(error).__name__,'message':str(error),'traceback':traceback.format_exc()})
+finally:
+    report['Source_closed']=bool(report['Source_contexts']) and all(r['exit_returned'] for r in report['Source_contexts'])
+    if source is not None and report['Source_closed']:
+        try:report['owned_module_closed']=cleanup_owned_source42_module(source)
+        except BaseException as error:report['errors'].append({'type':type(error).__name__,'phase':'owned_module_cleanup','message':str(error)})
+    elif source is None:report['owned_module_closed']=True
+    if output_created:
+        if report['read_complete'] and report['Source_closed'] and report['owned_module_closed'] and not report['errors']:
+            outer_ref=js(OUT/'actual-current1291-READ-bound-outer-epoch.LIST.DATA.json',new_outer)
+            python_rows=[r for r in new_outer if r['path'].endswith('.py')]
+            assert len(python_rows)==1286
+            python_ref=js(OUT/'actual-current1286-READ-bound-Python-epoch.LIST.DATA.json',python_rows)
+            for r,expected in [(outer_ref,new_outer),(python_ref,python_rows)]:
+                assert json.loads(control_read(r,'actual_epoch_LIST_complete_readback'))==expected
+            fixture['source_read_pending']=[]
+            fixture['Root_selected']=True;fixture['Source_closed']=True
+            fixture['outer_epoch_reference']=outer_ref
+            fixture_ref=js(OUT/'actual-ordinary72-fixture-closure.READ.json',fixture)
+            assert json.loads(control_read(fixture_ref,'actual_fixture_complete_readback'))==fixture
+            report.update({'Root_selected':True,'outer_epoch_reference':outer_ref,'python_epoch_reference':python_ref,
+                'outer_epoch_record_count':len(new_outer),'python_epoch_record_count':len(python_rows),
+                'protected_index_reference':{k:index[k] for k in ('path','bytes','sha256','full9')},
+                'actual_fixture_reference':fixture_ref})
+            report['D_provenance']={**report['roots_after']['D'],'actual_closed_Source_READ':True}
+            report['A_provenance']={**report['roots_after']['A'],'actual_closed_Source_READ':True}
+        report['explicit_IO_before_closeout']=dict(spent)
+        report['full_Source_envelope_retained']=100663296
+        report['ledger_after']={**before,'captures':before['captures']+spent['captures'],'used':before['used']+spent['bytes'],'internal_used':before['internal_used']+spent['bytes']}
+        report['Root_ordinary_execution_selection']=None
+        report['Root_ordinary_execution_clock']=None
+        report['Root_ordinary_execution_IO']=None
+        report['Root_ordinary_execution_results']=None
+        result=js(OUT/'actual-existing-P7-declared70-Source-closed.json',report)
+        if report.get('read_complete') and report['Source_closed'] and report['owned_module_closed'] and not report['errors']:
+            abi={'schema':'actual-D27-observed-D-root-initializer-READ-small-closeout/v1','Root_selected':True,
+                 'Source_closed':True,'owned_module_closed':True,
+                 'outer_epoch_reference':report['outer_epoch_reference'],'python_epoch_reference':report['python_epoch_reference'],
+                 'outer_epoch_record_count':1291,'python_epoch_record_count':1286,
+                 'protected_index_reference':report['protected_index_reference'],
+                 'actual_fixture_reference':report['actual_fixture_reference'],'actual_source_closeout_reference':result,
+                 'D_provenance':report['D_provenance'],'A_provenance':report['A_provenance'],
+                 'all1291_fresh_body_reads_claimed':False,'fresh_read_body_count':70,'physical_IO_accounting_complete':False}
+            binding=js(OUT/'Root-actual-P7-declared70-READ-bound-ordinary72-small.json',abi)
+        else:binding=None
+        print(json.dumps({'event':'ACTUAL_EXISTING_SOURCE42_P7_DECLARED70_READ_CLOSED','receipt':result,'ordinary_binding':binding,
+            'Source_closed':report['Source_closed'],'owned_module_closed':report['owned_module_closed'],'errors':report['errors']},sort_keys=True),flush=True)
+    else:
+        print(json.dumps({'event':'ROOT_SOURCE_READ_SELECTION_REFUSED_BEFORE_OUTPUT','errors':report['errors']}),flush=True)
+if report['errors']:sys.exit(1)

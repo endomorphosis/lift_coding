@@ -1,0 +1,163 @@
+"""Seal the authenticated confirmation-cost bounds and their local fixture evidence."""
+
+from copy import deepcopy
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+from runpy import run_path
+from stat import S_IMODE
+from tempfile import mkstemp
+
+HERE = Path(__file__).resolve().parent
+TMP = HERE.parent
+PREVIOUS = TMP / "decoder-training-experiment-manifest-v384.json"
+CURRENT = TMP / "decoder-training-experiment-manifest-v385.json"
+KEY = "private_authenticated_confirmation_cost_bounds"
+
+
+def ref(path, expected=None):
+    raw = path.read_bytes()
+    digest = sha256(raw).hexdigest()
+    assert expected is None or digest == expected, path
+    return {"path": str(path), "bytes": len(raw), "sha256": digest}
+
+
+def save(path, body):
+    raw = (json.dumps(body, indent=2, sort_keys=True) + "\n").encode() if type(body) is dict else body.encode()
+    with path.open("xb") as output:
+        output.write(raw)
+    return ref(path)
+
+
+def logs(stem, *, count=None, rc=0):
+    status, out, err = (HERE / (stem + "." + name) for name in ("rc", "stdout", "stderr"))
+    assert status.read_bytes() == f"{rc}\n".encode()
+    if count is not None:
+        error = err.read_text()
+        assert error.endswith("\nOK\n") and f"Ran {count} tests in " in error
+        assert sum(line.startswith("test_") and line.endswith(" ... ok") for line in error.splitlines()) == count
+    return {name: ref(path) for name, path in zip(("rc", "stdout", "stderr"), (status, out, err), strict=True)}
+
+
+prior = ref(PREVIOUS, "6fed470eefb29b9840b8baf38f56cf06eaa2be35122249baa6246fea4ab41fe6")
+old = json.loads(PREVIOUS.read_bytes())
+model = json.loads((HERE / "registered-development-fixture.json").read_bytes())
+assert model["confirmation_cost_bounds"]["cost_evidence_sha256"] == model["cost_evidence_sha256"]
+assert len(model["physical_paid_events"]) == 10
+assert sum(event["disposition"] == "failed" for event in model["physical_paid_events"]) == 2
+bounded, = (row["candidate"] for row in model["confirmation_cost_bounds"]["pairs"] if row["clock"] == "wall_seconds")
+assert (bounded["attainment"], bounded["lower_seconds"], bounded["upper_seconds"],
+        bounded["observed_confirmation_seconds"]) == (1, 30.0, 48.0, None)
+base, = (row for row in model["pairs"] if row["clock"] == "wall_seconds")
+assert base["candidate_attained"] is base["observed_candidate_confirmation"] is None
+assert base["candidate_minus_baseline_seconds_if_both_observed"] is None
+compact = json.loads((HERE / "compact-final.stdout").read_bytes())
+assert compact["status"] == "passed" and compact["actual_legal_review_or_paid_training"] is False
+assert compact["paired_development_looks"] == 2 and len(compact["refusals"]) == 9
+assert compact["unscored_failed_attempt_retained"] is True
+assert 'KeyError: \'IPFS_DATASETS_PY_MINIMAL_IMPORTS\'' in (HERE / "compact-first.stderr").read_text()
+
+counts = {"focused_confirmation_bounds": 8, "retained_paid_comparator": 14, "registered_development_and_freeze": 3}
+descriptor = {
+    "schema": "reviewed-authenticated-confirmation-cost-bounds-private-controls/v1",
+    "owner": ref(HERE / "study.py", "0db05161d43713375a0a9b4db8d359b6b5d50f08f5a7481f2b804b97add778b1"),
+    "prior_owner": ref(TMP / "decoder-training-projector-selected-release-private-v01-e8w9qPhY" / "study.py",
+                       "09afd1fd3f35f3c1612eecb84a5b5d091cf7edb2455526b8e9a9c02064b36f44"),
+    "owner_diff": ref(HERE / "study.diff", "505069d18fe44ef8c894644732beaa7889f110767ed4cdb3c82711c6c75d0e94"),
+    "local_passing_cases": counts,
+    "logs": {name: logs(stem, count=count) for (name, count), stem in zip(counts.items(), (
+        "confirmation-bounds-first", "confirmation-bounds-retained", "development-first"), strict=True)},
+    "compact_development_replay": logs("compact-final"),
+    "retained_compact_setup_failure": logs("compact-first", rc=1),
+    "compact_owner_controls": {key: compact[key] for key in ("paired_development_looks",
+        "physical_paid_events_fixture", "unscored_failed_attempt_retained", "refusals", "actual_legal_review_or_paid_training")},
+    "fictional_reports": {name: ref(HERE / name) for name in (
+        "registered-development-fixture.json", "fictional-compact-comparison-v01.json", "assessment-replay-v01.json")},
+    "fictional_wall_bound": bounded, "prior_opt_out_identical": True,
+    "drivers": {name: ref(HERE / name) for name in ("compose.py", "confirmation_bounds.py.IN",
+        "test_confirmation_bounds.py", "test_registered_development.py", "check_compact_bounds.py", "seal.py")},
+    "maintained_adoption": None, "actual_paid_or_model_evidence": None,
+    "actual_held_out_legal_fidelity": None, "convergence_established": False, "dispatch_authority": False,
+}
+projection = f'''def project_authenticated_confirmation_cost_bounds(reference):
+    record = retained_json(reference)
+    require(record["schema"] == "reviewed-authenticated-confirmation-cost-bounds-private-controls/v1"
+            and record["local_passing_cases"] == {counts!r}
+            and record["prior_opt_out_identical"] is True
+            and record["fictional_wall_bound"]["observed_confirmation_seconds"] is None
+            and record["maintained_adoption"] is record["actual_paid_or_model_evidence"]
+                 is record["actual_held_out_legal_fidelity"] is None
+            and record["convergence_established"] is record["dispatch_authority"] is False,
+            "confirmed detached interpretation of missing meter evidence required")
+    fields = ("owner", "local_passing_cases", "fictional_wall_bound", "compact_owner_controls",
+              "actual_paid_or_model_evidence", "actual_held_out_legal_fidelity", "convergence_established", "dispatch_authority")
+    return {{field: record[field] for field in fields}}
+
+
+'''
+checker_path = HERE / "check_design.py"
+prior_checker = old["advisory_operator_readiness_checker"]
+owner_path = Path(prior_checker["path"])
+assert ref(owner_path, prior_checker["sha256"]) == prior_checker
+checker = owner_path.read_text()
+at_def = "def report(manifest):\n"
+at_result = '        "stage_a_coordination": coordination,'
+assert checker.count(at_def) == checker.count(at_result) == 1
+checker = checker.replace(at_def, projection + at_def, 1)
+checker = checker.replace(at_result, at_result + f'''
+        **({{"{KEY}": project_authenticated_confirmation_cost_bounds(design["{KEY}"])}}
+           if "{KEY}" in design else {{}}),''', 1)
+context = {"__name__": "private_readiness", "__file__": str(checker_path)}
+exec(compile(checker, str(checker_path), "exec"), context)
+prior_report = context["report"](old)
+assert prior_report["stage_a_coordination"]["conditional_shortfall_bytes_before_overhead"] == 20_934_571
+assert prior_report["stage_a_coordination"]["current_independent_read_join"] is None
+
+plan = TMP / "decoder-training-integration-plan.md"
+initial_stat = plan.stat()
+initial = plan.read_bytes()
+assert sha256(initial).hexdigest() == "13b8245d8958b4c477afda76c8de46a62f0fa1664c12bb278dee1eb4e31af379"
+descriptor_path = HERE / "descriptor.json"
+addition = f"""## 822. Compare cost to scheduled confirmation when one clock reading is missing
+
+The existing verified study now has an optional report for incomplete confirmation clocks. A confirmed look can use the nearest earlier and later authenticated cumulative meters on its own attempt to bound cost. The later meter can establish attainment by the common horizon. The earlier meter can establish that confirmation fell beyond it. A missing exact reading stays unknown, and the report preserves both meter digests, the original paid event ledger, the original cap decisions, and the original confirmation and FINAL eligibility fields. It computes paired restricted-time and attainment differences across every registered seed. [Code and complete local evidence]({descriptor_path})
+
+Twenty-five unit tests passed, and the retained compact DEVELOPMENT replay passed separately. The registered fixture used step counts 2, 4, and 6. Its candidate confirmed at the last look and has a missing wall reading there. The neighboring authenticated interval is 30 to 48 seconds. Attainment by 48 is provable while the exact confirmation and exact paired time difference remain unknown. The original FINAL freeze still refuses to use this inferred interval as an exact measurement. Independent owner refusal, cap blocks, and the paid failure history are preserved. The fixture bounds qualify software behavior. Actual costs, legal fidelity and convergence remain open.
+
+Guide571 remains the current Stage A basis. Twelve bodies still need the original Reader's fresh capture. Historical matching bytes preserve expectations for their content. The independent index observation and paired selector and Reader allocation remain pending. [Verified readiness]({HERE / "verified-readiness.json"})
+
+"""
+plan_text = initial.decode()
+for before, after in (
+    (str(PREVIOUS), str(CURRENT)),
+    ("Version 3.530. Updated 2026-11-26 with prelaunch selection evidence through Qwen2 release and cost readback.",
+     "Version 3.531. Updated 2026-11-26 with authenticated bounds for missing confirmation clocks."),
+    ("## Primary research references", addition + "## Primary research references"),
+):
+    assert plan_text.count(before) == 1, before
+    plan_text = plan_text.replace(before, after, 1)
+
+successor = deepcopy(old)
+successor["manifest_schema_version"] = "0.385.0"
+successor["previous_manifest"] = prior
+assert KEY not in successor["typed_execution_design"]
+successor["typed_execution_design"][KEY] = save(descriptor_path, descriptor)
+successor["advisory_operator_readiness_checker"] = save(checker_path, checker)
+report = run_path(str(checker_path))["report"](successor)
+assert {key: value for key, value in report.items() if key not in (KEY, "manifest_schema_version")} == {
+    key: value for key, value in prior_report.items() if key != "manifest_schema_version"}
+manifest = save(CURRENT, successor)
+readiness = save(HERE / "verified-readiness.json", report)
+fd, name = mkstemp(dir=TMP, prefix=plan.name + ".")
+temp = Path(name)
+try:
+    with os.fdopen(fd, "w") as output:
+        output.write(plan_text)
+    temp.chmod(S_IMODE(initial_stat.st_mode))
+    assert initial == plan.read_bytes() and initial_stat.st_ino == plan.stat().st_ino
+    os.replace(temp, plan)
+finally:
+    if temp.exists():
+        temp.unlink()
+print(json.dumps({"descriptor": ref(descriptor_path), "manifest": manifest, "readiness": readiness, "plan": ref(plan)}, sort_keys=True))

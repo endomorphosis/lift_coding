@@ -1,0 +1,141 @@
+"""Record the tested relocated pricing candidate and preserve prior readiness."""
+from copy import deepcopy
+from hashlib import sha256
+import json
+import os
+from pathlib import Path
+from runpy import run_path
+from stat import S_IMODE
+from tempfile import mkstemp
+
+HERE = Path(__file__).resolve().parent
+TMP = HERE.parent
+OLD = TMP / 'decoder-training-experiment-manifest-v389.json'
+NEW = TMP / 'decoder-training-experiment-manifest-v390.json'
+KEY = 'private_stage_a_relocated_reservation'
+
+
+def ref(path, expected=None):
+    raw = path.read_bytes()
+    digest = sha256(raw).hexdigest()
+    assert expected is None or digest == expected, path
+    return dict(path=str(path), bytes=len(raw), sha256=digest)
+
+
+def save(path, data):
+    raw = data.encode() if type(data) is str else (json.dumps(data, indent=2, sort_keys=True) + '\n').encode()
+    with path.open('xb') as stream:
+        stream.write(raw)
+    return ref(path)
+
+
+assert (HERE / 'controls.rc').read_bytes() == b'0\n'
+stderr = (HERE / 'controls.stderr').read_text()
+assert sum(line.endswith(' ... ok') for line in stderr.splitlines()) == 7 and stderr.endswith('\nOK\n')
+prior = ref(OLD, 'cae6072cb37aa7bf05b2836d08ad2a196a652d9f9b71a195b50a6b318ccb5671')
+old = json.loads(OLD.read_bytes())
+old_checker = Path(old['advisory_operator_readiness_checker']['path'])
+assert ref(old_checker) == old['advisory_operator_readiness_checker']
+quote_path = HERE / 'guide572-conditional-reservation.INERT.json'
+quote = json.loads(quote_path.read_bytes())
+assert quote['selector_Reader_conditional_subtotal'] == 26_758_574
+assert quote['Reader_core']['logical_selected_bytes'] == 24_641_008
+assert quote['Reader_parent_matrix_allowance'] == 364_452
+assert quote['additional_owner_control_roster'] is quote['live_reservation'] is None
+desc_path = HERE / 'descriptor.json'
+descriptor = {
+    'schema': 'private-stage-a-relocated-reservation-controls/v1',
+    'candidate': ref(HERE / 'verify_standalone_git.py',
+                     '9fe6b3cfd9876c0e7d03019a9ace59b6daad54744bf2270bd5239cf2f217b527'),
+    'before': ref(TMP / 'decoder-training-stage-a-selector-observer-private-v01-CKyIGens/verify_standalone_git.py',
+                  '2cf502a37fceafbd50a3610172dadbee282823460ce33a808512f843df25a5e4'),
+    'diff': ref(HERE / 'verify_standalone_git.diff'),
+    'local_passing_cases': 7,
+    'artifacts': {name: ref(HERE / name) for name in ('compose.py', 'test_reservation.py', 'reservation_preview.py',
+                 'controls.rc', 'controls.stdout', 'controls.stderr', 'seal.py')},
+    'quote_scenario': ref(quote_path),
+    'relocated_preview': quote['Reader_selected_control_reads'][0],
+    'historical_pair_prices_equal': True,
+    'headroom_basis_bytes': 6_356_992,
+    'conditional_subtotal_gap_before_owner_overhead': 20_401_582,
+    'independent_index_read_included': False,
+    'additional_owner_controls_included': False,
+    'reader_dispatch_and_A0_closure_adopted': False,
+    'live_reader': None, 'dispatch_authority': False,
+}
+source = old_checker.read_text()
+at_def, at_out = 'def report(manifest):\n', '        "stage_a_coordination": coordination,'
+assert source.count(at_def) == source.count(at_out) == 1
+projection = '''def project_relocated_stage_a_reservation(reference):
+    record = retained_json(reference)
+    require(record["schema"] == "private-stage-a-relocated-reservation-controls/v1"
+            and record["local_passing_cases"] == 7 and record["historical_pair_prices_equal"] is True
+            and record["reader_dispatch_and_A0_closure_adopted"] is False
+            and record["live_reader"] is None and record["dispatch_authority"] is False,
+            "exact detached relocated reservation controls are required")
+    quote = retained_json(record["quote_scenario"])
+    require(quote["selector_Reader_conditional_subtotal"] == 26_758_574
+            and quote["Reader_parent_matrix_allowance"] == 364_452
+            and quote["additional_owner_control_roster"] is quote["live_reservation"] is None
+            and quote["dispatch_authority"] is False
+            and record["headroom_basis_bytes"] == 6_356_992
+            and (quote["selector_Reader_conditional_subtotal"] - record["headroom_basis_bytes"])
+                == record["conditional_subtotal_gap_before_owner_overhead"]
+            and record["independent_index_read_included"] is record["additional_owner_controls_included"] is False,
+            "exact conditional subtotal and owner boundaries required")
+    return {"local_passing_cases": record["local_passing_cases"], "quote": quote,
+            "headroom_basis_bytes": record["headroom_basis_bytes"],
+            "conditional_subtotal_gap_before_owner_overhead":
+                record["conditional_subtotal_gap_before_owner_overhead"],
+            "live_reader": None, "dispatch_authority": False}
+
+
+'''
+source = source.replace(at_def, projection + at_def, 1)
+source = source.replace(at_out, at_out + f'''
+        **({{"{KEY}": project_relocated_stage_a_reservation(design["{KEY}"])}}
+           if "{KEY}" in design else {{}}),''', 1)
+plan = TMP / 'decoder-training-integration-plan.md'
+info = plan.stat()
+before = plan.read_bytes()
+assert sha256(before).hexdigest() == '2cc3af504395eee5f2116fec49c71013bcaec935b744155febb8a65794b84065'
+body = before.decode()
+addition = f"""## 827. Price the 32-file capture through the existing reservation code
+
+The detached reservation code has an explicit version for 32 fresh captures. The original split of 12 fresh and 20 archived captures keeps its existing pricing and remains the default. Both paths account for the two Git verification endpoints. The new version also rejects duplicated Source and control paths and nonliteral path aliases. Seven local checks passed, including every legacy cost component under both Git-control and epoch-storage options. [Code and local checks]({desc_path})
+
+The conditional selector and Reader subtotal is 26,758,574 bytes. It prices one read of the sealed preview, one retained Git file-control sweep, both Git command endpoints, 96 parent-matrix writes, and write and readback of the outer epoch. The modeled settings leave a 20,401,582-byte gap before any additional owner controls or overhead. The independent Datasets index read remains a separate operation. The original Reader still needs an explicit capture branch for the 32 pinned targets and A0 must accept the corresponding verified closeout. Current owner selection and a live reservation remain pending. [Exact conditional calculation]({quote_path})
+
+"""
+for old_text, new_text in (
+    (str(OLD), str(NEW)),
+    ('Version 3.535. Updated 2026-11-26 with a fresh capture candidate for the relocated Stage A inputs.',
+     'Version 3.536. Updated 2026-11-26 with a conditional reservation for the relocated Stage A capture.'),
+    ('## Primary research references', addition + '## Primary research references'),
+):
+    assert body.count(old_text) == 1
+    body = body.replace(old_text, new_text, 1)
+manifest = deepcopy(old)
+manifest['manifest_schema_version'] = '0.390.0'
+manifest['previous_manifest'] = prior
+manifest['typed_execution_design'][KEY] = save(desc_path, descriptor)
+manifest['advisory_operator_readiness_checker'] = save(HERE / 'check_design.py', source)
+checked = run_path(str(HERE / 'check_design.py'))['report'](manifest)
+prior_checked = run_path(str(old_checker))['report'](old)
+prior_checked['manifest_schema_version'] = manifest['manifest_schema_version']
+assert {key: value for key, value in checked.items() if key != KEY} == prior_checked
+refs = {'descriptor': ref(desc_path), 'manifest': save(NEW, manifest),
+        'readiness': save(HERE / 'verified-readiness.json', checked)}
+fd, name = mkstemp(dir=TMP, prefix=plan.name + '.')
+staged = Path(name)
+try:
+    with os.fdopen(fd, 'w') as stream:
+        stream.write(body)
+    staged.chmod(S_IMODE(info.st_mode))
+    assert plan.stat().st_ino == info.st_ino and plan.read_bytes() == before
+    os.replace(staged, plan)
+finally:
+    if staged.exists():
+        staged.unlink()
+refs['plan'] = ref(plan)
+print(json.dumps(refs, sort_keys=True))

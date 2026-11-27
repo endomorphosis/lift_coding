@@ -1,0 +1,151 @@
+--- /tmp/decoder-training-temporal-assessed-continuation-private-v01-L30pSB8r/projection.py
++++ /tmp/decoder-training-temporal-assessed-wall-private-v01-DryAD4u3/projection.py
+@@ -1409,14 +1409,107 @@
+     return receipts
+ 
+ 
++TEMPORAL_ASSESSED_WALL = "reviewed-temporal-assessed-continuation-enclosing-wall/v1"
++
++
++@dataclass(frozen=True)
++class TemporalPaidEventWindow:
++    event_sha256: str
++    close_receipt_sha256: str
++    span: object
++
++
++@dataclass(frozen=True)
++class TemporalAssessedWall:
++    span: object
++    opening_receipt_sha256: str
++    terminal_evidence_receipt_sha256: str
++    paid_windows: tuple
++
++
++def temporal_assessed_wall_commitment(study_owner, assessed_continuation_sha256, witness):
++    need(study_owner._pin(assessed_continuation_sha256) and type(witness) is TemporalAssessedWall
++         and type(witness.span) is study_owner.WallSpan
++         and type(witness.paid_windows) is tuple and bool(witness.paid_windows)
++         and all(type(row) is TemporalPaidEventWindow and type(row.span) is study_owner.WallSpan
++                 and study_owner._pin(row.event_sha256) and study_owner._pin(row.close_receipt_sha256)
++                 for row in witness.paid_windows)
++         and study_owner._pin(witness.opening_receipt_sha256)
++         and study_owner._pin(witness.terminal_evidence_receipt_sha256),
++         "exact typed enclosing wall, endpoints and original paid event windows required")
++    return study_owner.commitment((TEMPORAL_ASSESSED_WALL, assessed_continuation_sha256, witness))
++
++
++def _temporal_assessed_enclosing_wall(study_owner, *, original, rounds, assessed, physical, reserved,
++                                      witness, expected, approve):
++    span = study_owner._t5_fusion_certification_span(witness.span)
++    evidence = [span.receipt_sha256, witness.opening_receipt_sha256, witness.terminal_evidence_receipt_sha256]
++    need(span.start_ns < span.end_ns
++         and tuple(row.event_sha256 for row in witness.paid_windows) == tuple(physical),
++         "enclosing wall must bind every original paid event in its canonical order")
++
++    def enclosed(window):
++        window = study_owner._t5_fusion_certification_span(window)
++        need(window.clock_domain_sha256 == span.clock_domain_sha256
++             and span.start_ns <= window.start_ns <= window.end_ns <= span.end_ns,
++             "enclosing wall must cover all original activity windows in one clock domain")
++        return window
++
++    paid = []
++    for row in witness.paid_windows:
++        need(row.close_receipt_sha256 == physical[row.event_sha256].close_receipt_sha256,
++             "enclosing wall must bind the exact original paid event close")
++        window = enclosed(row.span)
++        evidence.append(window.receipt_sha256)
++        paid.append((row.event_sha256, row.close_receipt_sha256, asdict(window)))
++    need(len(set(evidence)) == len(evidence) and reserved.isdisjoint(evidence),
++         "enclosing wall and per-event times require distinct original clock receipts")
++
++    arms, reviews = [], []
++    for scope, cut in zip(rounds, assessed, strict=True):
++        paid_cut = cut["paid_development"]
++        for (interval, _), result, observed in zip(scope.training.cost_evidence.observations,
++                paid_cut["arm_results"], cut["arm_review_clocks"], strict=True):
++            attempt = result["attempt_sha256"]
++            need(interval.attempt_sha256 == observed["attempt_sha256"] == attempt
++                 and type(interval.wall) is study_owner.WallSpan,
++                 "enclosing wall requires the original training close span for every attempt")
++            window = enclosed(interval.wall)
++            arms.append((paid_cut["paid_cut_sha256"], attempt, asdict(window), result["assessment_status"]))
++            if result["assessment_status"] == "reviewed":
++                clock = observed["original_review_clock"]
++                need(type(clock) is dict and clock["status"] == "authenticated_common_clock",
++                     "enclosing wall requires original review availability for every reviewed attempt")
++                evaluation = enclosed(clock["evaluation_wall"])
++                need(evaluation.start_ns <= clock["review_available_ns"] <= span.end_ns,
++                     "enclosing wall must cover original review availability")
++                reviews.append((attempt, clock["review_report_sha256"], clock["review_available_ns"],
++                                clock["review_availability_receipt_sha256"], asdict(evaluation)))
++
++    paid_pin = study_owner.commitment(tuple(paid))
++    evidence_pin = study_owner.commitment((tuple(arms), tuple(reviews)))
++    need(approve(expected, original, paid_pin, evidence_pin) is True,
++         "original elapsed clock owner refused opening, terminal evidence or activity windows")
++    return {"schema": TEMPORAL_ASSESSED_WALL, "selection_sha256": expected,
++            "clock_domain_sha256": span.clock_domain_sha256, "receipt_sha256": span.receipt_sha256,
++            "start_ns": span.start_ns, "end_ns": span.end_ns, "elapsed_ns": span.end_ns - span.start_ns,
++            "opening_receipt_sha256": witness.opening_receipt_sha256,
++            "terminal_evidence_receipt_sha256": witness.terminal_evidence_receipt_sha256,
++            "paid_windows_sha256": paid_pin, "arm_and_review_windows_sha256": evidence_pin,
++            "covered_paid_events": len(paid), "covered_reviews": len(reviews),
++            "scope": "owned_continuation_start_through_last_authenticated_development_evidence"}
++
++
+ def read_temporal_assessed_continuation(study_owner, trial_owner, validator, *, study, parent_projection_raw,
+         expected_parent_projection_sha256, rounds, expected_assessed_continuation_sha256, owners,
+-        verify_original_continuation, verify_assessed_history_owner):
++        verify_original_continuation, verify_assessed_history_owner,
++        whole_wall=None, expected_whole_wall_sha256=None, verify_whole_wall_owner=None):
+     """Read two DEVELOPMENT cuts and all unique paid work under one continued checkpoint lineage.
+ 
+     Each round retains a separate conditional comparison at its own common
+     start. The first review may finish during the continued round. It supplies
+     no elapsed time for the other round and no cross-round training trajectory.
++    An optional original enclosing wall reports elapsed time for the whole history.
+     """
+     need(type(rounds) is type(owners) is tuple and len(rounds) == len(owners) == 2
+          and all(type(row) is TemporalAssessedRound for row in rounds)
+@@ -1427,8 +1520,16 @@
+                                                         expected_assessed_continuation_sha256))
+          and callable(verify_original_continuation) and callable(verify_assessed_history_owner),
+          "two independently selected assessment and resource scopes required")
++    need((whole_wall is None and expected_whole_wall_sha256 is None and verify_whole_wall_owner is None)
++         or (type(whole_wall) is TemporalAssessedWall and study_owner._pin(expected_whole_wall_sha256)
++             and callable(verify_whole_wall_owner)),
++         "enclosing elapsed requires an exact selected wall and independent clock owner")
+ 
+     def current():
++        if whole_wall is not None:
++            need(temporal_assessed_wall_commitment(study_owner, expected_assessed_continuation_sha256,
++                 whole_wall) == expected_whole_wall_sha256,
++                 "selected original enclosing wall changed")
+         need(type(parent_projection_raw) is bytes and 0 < len(parent_projection_raw) <= 2 * 1024**2
+              and hash_bytes(parent_projection_raw) == expected_parent_projection_sha256
+              and temporal_assessed_continuation_commitment(study_owner, trial_owner, study=study,
+@@ -1484,6 +1585,15 @@
+                  training_pin, joins, event_ids) is True,
+          "original history owner refused the assessed continuation or paid cost union")
+     current()
++    elapsed = None
++    if whole_wall is not None:
++        selected_pins = {expected_assessed_continuation_sha256, expected_parent_projection_sha256, training_pin,
++                         *(value for pin_row in pins for value in pin_row)}
++        elapsed = _temporal_assessed_enclosing_wall(
++            study_owner, original=expected_assessed_continuation_sha256, rounds=rounds, assessed=assessed,
++            physical=physical, reserved=selected_pins | receipt_sets[0] | receipt_sets[1],
++            witness=whole_wall, expected=expected_whole_wall_sha256, approve=verify_whole_wall_owner)
++        current()
+     return {"schema": TEMPORAL_ASSESSED_CONTINUATION, "assessed_continuation_sha256": expected_assessed_continuation_sha256,
+             "parent_projection_sha256": expected_parent_projection_sha256, "training_history_sha256": training_pin,
+             "selected_shared_parent_checkpoint_sha256": training["parent_candidate_sha256"],
+@@ -1493,5 +1603,5 @@
+             "evaluation_physical_work_ns": study_owner._physical_work_ns(evaluation_events),
+             "physical_work_ns": study_owner._physical_work_ns(physical),
+             "comparison_scope": "separate_DEVELOPMENT_cuts_each_with_a_common_start",
+-            "whole_study_elapsed_wall": None, "cost_to_heldout_threshold_established": False,
++            "whole_study_elapsed_wall": elapsed, "cost_to_heldout_threshold_established": False,
+             "convergence_established": False, "FINAL_selected": False, "dispatch_authority": False}

@@ -1,0 +1,155 @@
+{
+  "accelerate_head_tree_index_and_refs_preserved": true,
+  "actual_push_outputs": {
+    "datasets": {
+      "observed_exit_code": 0,
+      "stderr": "remote: \nremote: GitHub found 150 vulnerabilities on endomorphosis/ipfs_datasets_py's default branch (8 critical, 77 high, 58 moderate, 7 low). To find out more, visit:        \nremote:      https://github.com/endomorphosis/ipfs_datasets_py/security/dependabot        \nremote:",
+      "stdout": "To https://github.com/endomorphosis/ipfs_datasets_py.git\n \tc023a6cb0d7b18e42e80ad0d82bedfc75e4fd8ae:refs/heads/main\t3409f499d7..c023a6cb0d\nDone"
+    },
+    "hallucinate": {
+      "observed_exit_code": 0,
+      "stderr": "",
+      "stdout": "To https://github.com/endomorphosis/hallucinate_app.git\n \te8209466cf7062005d3386eda4750f5067de0572:refs/heads/main\ta805959..e820946\nDone"
+    },
+    "root": {
+      "observed_exit_code": 0,
+      "stderr": "",
+      "stdout": "To https://github.com/endomorphosis/lift_coding.git\n \t56c5a3cb1fc95d187e62fd7eb815bd2b113ed63c:refs/heads/main\t55cc38eac2..56c5a3cb1f\nDone"
+    }
+  },
+  "all_checkouts_clean": true,
+  "all_other_gitlinks_preserved": true,
+  "collect_not_loaded_run_four_owners_loaded_and_compiled": true,
+  "force_or_tags": false,
+  "frozen_D_index_unchanged": true,
+  "frozen_candidate": {
+    "bytes": 2987,
+    "full9": {
+      "st_ctime_ns": "1795562228913771232",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "68862893",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795562228913771232",
+      "st_nlink": "1",
+      "st_size": "2987",
+      "st_uid": "1000"
+    },
+    "path": "/tmp/codex-all-work-github-main-reconciliation-20261123-etm066qn/Phase8-existing-native-CI-trigger-repair-private-v01/coordination-full-goal-v02/actual-Phase6-inverse-one-test-local-freeze-v249.json",
+    "sha256": "cbda2f51c8ce66b2fc18d0d6ce63f666c36e0879c7df7ab1e738486db61fd5b1"
+  },
+  "gitlink_updates": {
+    "hallucinate": {
+      "ipfs_datasets_py": {
+        "from": "3409f499d7cf3b08f3fbda71f6e7e066e9c57117",
+        "to": "c023a6cb0d7b18e42e80ad0d82bedfc75e4fd8ae"
+      }
+    },
+    "root": {
+      "external/ipfs_datasets": {
+        "from": "3409f499d7cf3b08f3fbda71f6e7e066e9c57117",
+        "to": "c023a6cb0d7b18e42e80ad0d82bedfc75e4fd8ae"
+      },
+      "hallucinate_app": {
+        "from": "a8059595e144a3bcff20593f11a29801c131f59f",
+        "to": "e8209466cf7062005d3386eda4750f5067de0572"
+      }
+    }
+  },
+  "local_after": {
+    "accelerate": {
+      "head": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+      "index_and_worktree_clean": true,
+      "tree": "416a953630c9ba7ef521fd87bf821f075b052efc"
+    },
+    "datasets": {
+      "head": "c023a6cb0d7b18e42e80ad0d82bedfc75e4fd8ae",
+      "index_and_worktree_clean": true,
+      "tree": "fb88f59586144ce167347f1e198a14bc69562b0d"
+    },
+    "hallucinate": {
+      "head": "e8209466cf7062005d3386eda4750f5067de0572",
+      "index_and_worktree_clean": true,
+      "tree": "31af8394c86c5f41895fe01bb858484e49a6ec8e"
+    },
+    "root": {
+      "head": "56c5a3cb1fc95d187e62fd7eb815bd2b113ed63c",
+      "index_and_worktree_clean": true,
+      "tree": "ded0897d4e07a1b4487a189f6876efd2b16566ab"
+    }
+  },
+  "origin_main_after": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "c023a6cb0d7b18e42e80ad0d82bedfc75e4fd8ae",
+    "hallucinate": "e8209466cf7062005d3386eda4750f5067de0572",
+    "root": "56c5a3cb1fc95d187e62fd7eb815bd2b113ed63c"
+  },
+  "origin_main_before": {
+    "accelerate": "88c0d9f82f66aaddbb01344c9f85236e92a5dc88",
+    "datasets": "3409f499d7cf3b08f3fbda71f6e7e066e9c57117",
+    "hallucinate": "a8059595e144a3bcff20593f11a29801c131f59f",
+    "root": "55cc38eac26f13ed5f11c0b2659444dc82d47a9a"
+  },
+  "origin_urls": {
+    "accelerate": "https://github.com/endomorphosis/ipfs_accelerate_py.git",
+    "datasets": "https://github.com/endomorphosis/ipfs_datasets_py.git",
+    "hallucinate": "https://github.com/endomorphosis/hallucinate_app.git",
+    "root": "https://github.com/endomorphosis/lift_coding.git"
+  },
+  "prior_v252_index_v253_init_refusals_and_Source128_predebits_retained": true,
+  "private_metadata12_not_pooled": true,
+  "product_paths_unchanged": true,
+  "publisher_replayed_Source_SDK_tests": false,
+  "push_order": [
+    "datasets",
+    "hallucinate",
+    "root"
+  ],
+  "qualification": {
+    "Source_parent_resources_and_workspaces_closed": true,
+    "bytes": 5986,
+    "errors": 0,
+    "failures": 0,
+    "full9": {
+      "st_ctime_ns": "1795564618702088643",
+      "st_dev": "66306",
+      "st_gid": "1000",
+      "st_ino": "21677045",
+      "st_mode": "33024",
+      "st_mtime_ns": "1795564618702088643",
+      "st_nlink": "1",
+      "st_size": "5986",
+      "st_uid": "1000"
+    },
+    "new_cases": 2,
+    "path": "/tmp/Root-Phase6-real-inverse16-selected-v255-upsjl7mk/Root-Phase6-real-inverse-ordinary16-qualified-Source-resource-closed-small-v255.json",
+    "raw_JUnit": {
+      "bytes": 4119,
+      "full9": {
+        "st_ctime_ns": "1795564489758777577",
+        "st_dev": "66306",
+        "st_gid": "1000",
+        "st_ino": "24035132",
+        "st_mode": "33024",
+        "st_mtime_ns": "1795564489758777577",
+        "st_nlink": "1",
+        "st_size": "4119",
+        "st_uid": "1000"
+      },
+      "path": "/tmp/Root-Phase6-real-inverse16-selected-v255-upsjl7mk/actual-output/phase6-real-relational-inverse16-run-result0-output1.bin",
+      "sha256": "37c26eb7f04c2a914953dfc34f7271be499ea6980e8d1b4eb54a95a579cbea31"
+    },
+    "retained_cases": 14,
+    "sha256": "3535d863db12c6b19c74cbb79eaa5b4bc2bb81973548fe9f2ecc9f5767b65cc8",
+    "skips": 0,
+    "unique_cases": 16
+  },
+  "schema": "actual-Phase6-inverse-ordinary16-three-FF-publication/v255",
+  "scope": "Published one test file. Ordinary software and fixture evidence only; no Native, legal, statutory, model or training qualification.",
+  "test_blob": {
+    "blob": "31c949b5b573be357f2c5fbe4d3eb78b05e6e224",
+    "bytes": 58044,
+    "relative_path": "tests/unit/logic/formalization/autoencoder/test_ir_legal_text_roundtrip.py",
+    "sha256": "f918c5c29396beccf9119d41a4017763511a3abb737c4ce79f1f33c3eda50c72"
+  }
+}

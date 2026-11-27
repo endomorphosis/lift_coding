@@ -1,0 +1,81 @@
+"""Recompute descriptive statistics from two authenticated read-only fit exports."""
+from hashlib import sha256
+import json
+from math import isclose, isfinite
+from pathlib import Path
+from statistics import mean
+
+EVIDENCE=Path('/tmp/decoder-training-source62-baseline-cost-readback-private-v01-7pooc6g5/verified-evidence.json')
+PINS={
+    'pristine0':'aea0f6ae2a5e13f41a6e9d5323cc55098748fc574846608e247738b697862622',
+    'TRAIN3':'605884efd86ceee0a813935979e1feffd2827370ad9a55d94be361b0890176e6',
+}
+
+
+def read(reference):
+    raw=Path(reference['path']).read_bytes()
+    assert (len(raw),sha256(raw).hexdigest())==(reference['bytes'],reference['sha256'])
+    return json.loads(raw)
+
+
+def replay():
+    evidence=read(dict(path=str(EVIDENCE),bytes=4604,
+                       sha256='15596e093a6caaca4540725a26b1c47f1fbda8425b3d90b9bf67d9927dc749d0'))
+    fits=[]
+    references={}
+    capacity=[]
+    for label in ('pristine0','TRAIN3'):
+        root=evidence['observed_arms'][label]['close']
+        close=read(root)
+        assert close['Source_closed'] is close['resource_cleanup_confirmed'] is True
+        assert close['actual_SDK_returncode']==close['actual_outer_returncode']==0
+        assert close['new_model_updates']==0
+        refs=close['actual_saved_raw_outputs']
+        fit_ref=refs['fixed-TRAIN-fit-at-current-cache-checkpoint.json']
+        cap_ref=refs['fixed-TRAIN-fit-complete-capacity.json']
+        assert fit_ref['sha256']==PINS[label]
+        fit=read(fit_ref)
+        cap=read(cap_ref)
+        assert fit['schema']=='fixed-fictional-TRAIN-model-scalar-loss-at-checkpoint/v1'
+        assert fit['measurement_mode']=='existing-teacher_forced_fit_batch/model.eval/torch.no_grad/fixed-ordered-TRAIN-only'
+        assert fit['readonly_state_restoration_verified'] is fit['checkpoint_matched_before_and_after'] is True
+        assert fit['readonly_optimizer_updates']==cap['optimizer_updates']==0
+        assert fit['heldout_targets_accessed'] is cap['heldout_targets_accessed'] is False
+        assert fit['cohort']['fixture_only'] and cap['all_complete_rows_fit']
+        fits.append(fit)
+        capacity.append(cap['rows'])
+        references[label]=dict(closure=root,fit=fit_ref,capacity=cap_ref)
+    before,after=fits
+    assert (before['optimizer_steps'],after['optimizer_steps'])==(0,3)
+    assert before['cohort']==after['cohort'] and capacity[0]==capacity[1]
+    assert before['expected_position_counts']==after['expected_position_counts']
+    assert before['objective']==after['objective'] and before['loss_semantics']==after['loss_semantics']
+    assert ({key:value for key,value in before['configuration'].items() if key!='cache_source_epoch_marker'}==
+            {key:value for key,value in after['configuration'].items() if key!='cache_source_epoch_marker'})
+    left,right=before['results'],after['results']
+    assert len(left)==len(right)==3
+    delta, rows = [], []
+    for a,b in zip(left,right,strict=True):
+        assert {k:v for k,v in a.items() if k!='model_scalar_loss'}=={k:v for k,v in b.items() if k!='model_scalar_loss'}
+        assert all(type(r['model_scalar_loss']) is float and isfinite(r['model_scalar_loss']) for r in (a,b))
+        weight=a['expected_aligned_nonignored_positions']
+        assert type(weight) is int and weight>0
+        change=b['model_scalar_loss']-a['model_scalar_loss']
+        delta.append(change)
+        rows.append(dict(unit_id=a['unit_id'],positions=weight,before=a['model_scalar_loss'],after=b['model_scalar_loss'],change=change))
+    assert isclose(mean(row['before'] for row in rows),before['equal_record_model_scalar_loss_mean'])
+    assert isclose(mean(row['after'] for row in rows),after['equal_record_model_scalar_loss_mean'])
+    count=sum(row['positions'] for row in rows)
+    weights={key:sum(row[key]*row['positions'] for row in rows)/count for key in ('before','after','change')}
+    dropped=[mean(value for k,value in enumerate(delta) if k!=index) for index in range(len(delta))]
+    assert all(value<0 for value in delta) and count==5845
+    heldout=evidence['heldout']
+    assert (heldout['baseline_exact'],heldout['after_exact'],heldout['cases'],heldout['retention_rate'])==(0,0,3,None)
+    return dict(schema='source62-authenticated-fixed-train-model-scalar-descriptive-sensitivity/v1',
+        references=references,rows=rows,equal_record_delta=mean(delta),leave_one_row_out_deltas=dropped,
+        target_length_weighted_record_scalar=weights,expected_positions_total=count,heldout_original=heldout,
+        fit_updates=0,source_fidelity_or_convergence_measured=False)
+
+
+if __name__=='__main__':
+    print(json.dumps(replay(),sort_keys=True,indent=2))

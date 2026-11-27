@@ -1,0 +1,230 @@
+import ast
+import hashlib
+import json
+import os
+from pathlib import Path
+import re
+import stat
+import sys
+import time
+
+assert __debug__ and len(sys.argv)==8 and sys.argv[7] in ("--verify-only","--bind-only")
+out=Path(__file__).resolve().parent
+controls=Path(sys.argv[4])
+prior_runtime_profile={'path': '/tmp/P1-proofcache-translation-ordinary37-nonclock-INERT-mg3Ycz45/Root-selected-existing-Phase2-V3-definition-self-reference-ordinary37-operator.py', 'bytes': 65462, 'sha256': '889efcf7f485a3b6fc38daca36c57f36036ab2fd32bf1a613063e6dd64a2f694'}
+phase2_venv_profile={'path': '/tmp/P2-V4-CLI-ordinary33-live-bind-rtsfpb6t/Root-selected-Phase2-physical-v4-current-trust-existing-ordinary33-operator.py', 'bytes': 77324, 'sha256': '61cfe3acd8b736f52f685a91acbaba17b68d66de4085e92bbc0ebbafb54c0a4f'}
+
+H=lambda b:hashlib.sha256(b).hexdigest()
+f9=lambda s:tuple(getattr(s,k) for k in ("st_dev","st_ino","st_mode","st_nlink","st_uid","st_gid","st_size","st_mtime_ns","st_ctime_ns"))
+
+def read(ref):
+ p=Path(ref["path"]); s=p.lstat()
+ assert stat.S_ISREG(s.st_mode) and s.st_nlink==1
+ raw=p.read_bytes()
+ assert f9(s)==f9(p.lstat()) and len(raw)==ref["bytes"] and H(raw)==ref["sha256"]
+ return raw
+
+def identify(p):
+ raw=p.read_bytes()
+ return dict(path=str(p),bytes=len(raw),sha256=H(raw))
+
+def seal(name,value):
+ p=out/name
+ b=value if type(value) is bytes else (json.dumps(value,sort_keys=True,indent=2)+"\n").encode()
+ with p.open("xb") as stream: stream.write(b);stream.flush();os.fsync(stream.fileno())
+ p.chmod(0o400)
+ return dict(path=str(p),bytes=len(b),sha256=H(b))
+
+def literal_assignments(raw):
+ vals={}
+ for item in ast.parse(raw).body:
+  if isinstance(item,ast.Assign) and len(item.targets)==1 and isinstance(item.targets[0],ast.Name):
+   name=item.targets[0].id
+   try: vals[name]=ast.literal_eval(item.value)
+   except (TypeError,ValueError): pass
+ return vals
+
+def bind(raw,slots):
+ values=literal_assignments(raw)
+ assert all(name in values and values[name] is None for name in slots)
+ assert {name for name,value in values.items() if value is None and name not in {"parent","rewrite_observer"}}==set(slots)
+ source=raw.decode()
+ for name,value in slots.items():
+  source,n=re.subn(r"^"+name+r" = None$",lambda _:name+" = "+repr(value),source,flags=re.M)
+  assert n==1
+ compile(source,"phase2_reviewed_v3_ordinary37_operator_bootstrap","exec",dont_inherit=True)
+ for name,value in slots.items():
+  assert literal_assignments(source)[name]==value
+ return source.encode()
+
+# All arguments are actual closed nonclock references. Reconcile role values from the caller's data partitions.
+descriptor=json.loads(read(dict(path=str(controls), bytes=int(sys.argv[5]), sha256=sys.argv[6])))
+s={"controls":{name:descriptor["controls"][name] for name in ("operator","bootstrap","factory")}}
+plan=json.loads(read(descriptor["role_plan"]))
+role_plan=plan["guarded_module_roles"]
+assert descriptor["static_selection"]["function_count"]==15 and descriptor["static_selection"]["literal_expected_cases"]==37
+static_ref={'path': '/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/READY-existing-Phase2-V3-ordinary37-v02-INERT.json', 'bytes': 21519, 'sha256': '504b74a1ec2bc20235c2e1a5cddd9f02a6ae61ff861d304606448809d18f04d8'}
+assert descriptor["prior_static_controls"]==static_ref
+static=json.loads(read(static_ref))
+assert all(descriptor[k]==static[k] for k in ("controls","independent_roster","static_selection","owner_visibility_policy"))
+assert all(read(pin) for pin in s["controls"].values())
+assert descriptor["ordinary_result"] is descriptor["all_actual_bindings"] is descriptor["selected_runtime"] is None
+inherit=literal_assignments(read(prior_runtime_profile))
+p2_profile=literal_assignments(read(phase2_venv_profile))
+for key in ('FINAL_SDK_BINDINGS', 'FINAL_RESOURCE_STATE_PATH', 'FINAL_EXPECTED_RESOURCE_CONFIG', 'FINAL_EXPECTED_CAPACITY', 'FINAL_ADDITIONAL_IMPORT_ROOTS', 'source42', 'D_READ_BINDING_ABI'):
+ assert inherit[key]==p2_profile[key],key
+role_ref=dict(path=sys.argv[1],bytes=int(sys.argv[2]),sha256=sys.argv[3])
+role=json.loads(read(role_ref))
+abi_ref=role["read"]
+abi=json.loads(read(abi_ref))
+fixture_ref=role["fixture"]
+fixture=json.loads(read(fixture_ref))
+assert type(fixture["required_fixture_closure"]) is list and len(fixture["required_fixture_closure"]) == 7
+modules=role["modules"]
+D_prov,A_prov=role["D_prov"],role["A_prov"]
+D,A=D_prov["root"],A_prov["root"]
+head,tree=D_prov["HEAD"],D_prov["tree"]
+projects=[dict(root=p["root"],Git_HEAD=p["HEAD"],Git_tree=p["tree"]) for p in (D_prov,A_prov)]
+frozen=json.loads(read(role["freeze"]))
+assert (head,tree)==(frozen["frozen"]["HEAD"],frozen["frozen"]["tree"]) and frozen["pushed"] is False
+assert abi["Root_selected"] and abi["Source_closed"]
+controls_ref=dict(path=str(controls),bytes=int(sys.argv[5]),sha256=sys.argv[6])
+assert role["schema"]=="actual-READ3-live-Phase2-V3-ordinary37-nonclock/v1" and role["runtime_clock_IO_effect_and_result"] is None
+assert role["controls"]==controls_ref and role["isolated_frozen_local_git_candidate"] is True
+assert role["canonical_source_application"] is False and role["final_ordinary_runtime_qualification_eligibility_authority"] is None
+assert role["freeze"]==plan["actual_freeze_correspondence_only"]
+assert D==frozen["root"]=="/tmp/P1-proof-cache-translation-current-6btZZr/datasets" and A=="/tmp/Root-V4-CLI-live-main-reconcile-EsXXzUG0/accelerate"
+assert A_prov["HEAD"]==plan["expected_current_A_HEAD"] and A_prov["tree"]=="c670052e6e12473d974382e455c7aef4adb6aebe"
+assert role["freeze"]==abi["exact_local_freeze"] and fixture["actual_closed_Source_READ_reference"]==role["read_close"]
+assert role["outer"]==abi["outer_epoch_reference"] and role["python"]==abi["python_epoch_reference"]
+guard_payload=json.loads(read(role["read3_named_metadata_guard"]))
+guard=guard_payload["rows"] if type(guard_payload) is dict else guard_payload
+guard_by_path={row["path"]:row for row in guard}
+assert len(guard)==len(guard_by_path)==role["named_metadata_count"]==1621
+for row in guard:
+ observed=Path(row["path"]).lstat()
+ assert all(str(getattr(observed,k))==v for k,v in row["full9"].items()),row["path"]
+abi_shape=inherit["D_READ_BINDING_ABI"]
+assert abi["schema"]==abi_shape["schema"] and all(abi[key] is True for key in abi_shape["required_true_keys"])
+outer_count=abi[abi_shape["outer_count_key"]]
+python_count=abi[abi_shape["python_count_key"]]
+assert outer_count==1614 and python_count==1601
+outer_ref=abi[abi_shape["outer_epoch_key"]]
+outer=json.loads(read(outer_ref)); physical={r["path"]:r for r in outer}
+assert len(physical)==len(outer)==outer_count and len(modules)==2 and set(modules)==set(role_plan)
+assert all(guard_by_path[path]==row for path,row in physical.items())
+for name,row in modules.items():
+ assert row["relative_path"]==role_plan[name]["relative_path"]
+ assert {k:row[k] for k in ("bytes","sha256")}=={k:role_plan[name].get("prospective_postimage",role_plan[name]["published_preimage"])[k] for k in ("bytes","sha256")}
+ check=physical[str(Path(D)/row["relative_path"])]
+ assert all(check[k]==row[k] for k in ("bytes","full9","sha256"))
+assert fixture["required_normal_conftests"]==[str(Path(D)/name) for name in plan["expected_normal_conftests"]]
+assert fixture["pytest_inifile"]==str(Path(D)/"pytest.ini")
+assert len({r["path"] for r in fixture["required_fixture_closure"]})==7
+assert {str(Path(D)/rel) for rel in plan["fixture_relative_paths"]}=={r["path"] for r in fixture["required_fixture_closure"]}
+for row in fixture["required_fixture_closure"]:
+ assert all(row[k]==physical[row["path"]][k] for k in ("path","bytes","sha256","full9"))
+
+state_path=inherit["FINAL_RESOURCE_STATE_PATH"]
+config=inherit["FINAL_EXPECTED_RESOURCE_CONFIG"]
+capacity=inherit["FINAL_EXPECTED_CAPACITY"]
+state=Path(state_path)
+before=state.lstat(); assert before.st_size<65536 and stat.S_ISREG(before.st_mode) and before.st_nlink==1
+raw=state.read_bytes(); assert f9(before)==f9(state.lstat())
+state_obv=json.loads(raw)
+assert state_obv["config"]==config and state_obv["child_process_capacity"]==capacity
+for name,(rel,sha) in inherit["FINAL_SDK_BINDINGS"].items(): assert physical[str(Path(D)/rel)]["sha256"]==sha
+absences=role["expected_absent_paths"]
+assert len(absences)==len(set(absences))==9 and absences==fixture["required_absent_paths"]
+assert absences==[str(Path(D)/rel) for rel in plan["expected_absent_relative_paths"]]
+assert all(type(p) is str and p.startswith(D+"/") and not os.path.lexists(p) for p in absences)
+cap_ref_before=role["latest_closed_Source_full_precharge"]
+charge=Path(cap_ref_before["path"])
+source_only=json.loads(read(cap_ref_before))
+prior_read=json.loads(read(role["read_close"]))
+affirmation=source_only["exact_human_affirmation"]
+assert affirmation["sha256"]=="8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda"
+read(affirmation)
+ledger0=source_only["after_full_retained_precharge"]
+ledger0=dict(ledger0,captures=max(ledger0["captures"],prior_read["actual_ledger_after"]["captures"]))
+assert source_only["all_prior_costs_retained"] is source_only["resource_policy_capacity_unchanged"] is True
+assert prior_read["full_charge"]==cap_ref_before and prior_read["ordinary_read_binding_abi"]==abi_ref
+assert all(ledger0[k]>=prior_read["actual_ledger_after"][k] for k in ("used","internal_used","captures"))
+assert role["epoch_and_READ3_share_one_actual_charge"] is True
+assert role["successor_epoch_charge"]==cap_ref_before
+epoch_ref=role["successor_epoch"]
+epoch=json.loads(read(epoch_ref))
+assert epoch["Source_closed"] is epoch["module_closed"] is True and epoch["terminal_returncode"]==0
+assert epoch["exact_local_freeze"]==role["freeze"] and prior_read["actual_isolated_content_epoch"]==epoch_ref
+assert epoch["full_charge"]==cap_ref_before and epoch["actual_ledger_after"]==prior_read["actual_ledger_after"]
+assert epoch["outer_epoch_reference"]==outer_ref and epoch["python_epoch_reference"]==role["python"]
+guide_ref={'path': '/tmp/P1-proof-cache-translation-current-6btZZr/actual-Guide575-four-docs-three-FF-publication.json', 'bytes': 2639, 'sha256': 'c04197de963678c357e0f2b97f0a501b343f3f468d4a6a50a7d15ba22a9d568a'}
+guide=json.loads(read(guide_ref))
+guide_install=json.loads(read(guide["actual_doc_Source_closed"]))
+assert guide_ref==prior_read["previous_published_guide"]==epoch["previous_published_guide"]==role["protected_Guide575_publication"]
+assert guide["terminal_returncode"]==guide_install["terminal_returncode"]==0 and guide["evidence_ordinal"]==575
+assert guide_install["Source_closed"] is guide_install["module_closed"] is True
+assert guide["live_main_after"]["datasets"]==guide_install["HEAD"]==frozen["parent"]
+assert guide["live_main_after"]["accelerate"]==A_prov["HEAD"]
+guide_charge_ref=guide_install["full_charge"]
+write_ref=role["successor_write_charge"]
+assert guide_charge_ref==role["prior_closed_guide_source_charge"] and write_ref==frozen["full_charge"]
+assert epoch.get("retained_first_READ_attempt_full_charge") is None
+guide_charge,write=(json.loads(read(ref)) for ref in (guide_charge_ref,write_ref))
+assert write["previous_charge"]==guide_charge_ref and source_only["previous_charge"]==write_ref
+assert all(v["exact_human_affirmation"]==affirmation for v in (guide_charge,write))
+for previous,next_item in ((guide_charge,write),(write,source_only)):
+ after_old,prior_new=previous["after_full_retained_precharge"],next_item["prior"]
+ assert all(after_old[k]==prior_new[k] for k in ("global_cap","internal_cap","used","internal_used"))
+ assert prior_new["captures"]>=after_old["captures"] and prior_new["capturesComplete"] is after_old["capturesComplete"] is False
+ assert next_item["all_prior_costs_retained"] is next_item["resource_policy_capacity_unchanged"] is True
+assert ledger0["used"]==source_only["after_full_retained_precharge"]["used"]
+assert s["controls"]["bootstrap"]=={'path': '/tmp/P2-V3-ordinary37-nonclock-INERT-g3tupa9A/existing-ordinary37-bootstrap-report37.INERT.py.DATA', 'bytes': 45161, 'sha256': 'c472ffaf80ec9a7cc552efb2c1d903b2a06da29bb8b2891ae8eee2ceb75d738f'}
+
+if sys.argv[7]=="--verify-only":
+ print(json.dumps(dict(D=head,outer=outer_count,python=python_count,cases=37,selected=False,guide_source_charge=guide_charge_ref,successor_write_charge=write_ref,epoch_and_READ3_shared_charge=cap_ref_before,final_ordinary_ledger_prior=ledger0)))
+ raise SystemExit(0)
+envelope=134217728
+ledger=ledger0.copy()
+for k in ("global_cap","internal_cap"): ledger[k]+=envelope
+after=ledger.copy()
+for k in ("used","internal_used"): after[k]+=envelope
+after["captures"]+=1
+assert ledger["internal_cap"]-ledger["internal_used"]>=envelope
+cap_ref=seal("Source-only-authorized-Phase2-V3-definition-self-reference-ordinary37-cap-prior-retained.json",dict(prior=ledger0,selected=ledger,after_full_retained_precharge=after,added_Source_only_envelope=envelope,combined_epoch_READ3_full_retained_charge=cap_ref_before,successor_write_charge=write_ref,protected_Guide575_Source_full_charge=guide_charge_ref,protected_Guide575_publication=guide_ref,exact_human_affirmation=source_only["exact_human_affirmation"],no_policy_capacity_or_model_change=True))
+effect=dict(Root_selected=True,ordinary_SDK_execution_selected=True,temporary_workspace_only=True,scope="Exact 37 V3 reviewed admission software cases. Fictional source, signature and dependency fixtures with workspace-only temporary outputs.", no_actual_DuckDB_SQL_or_Native_Lean_selected=True,bounded_authored_in_memory_updates_selected=False,no_epoch_fit_external_models_or_prover_selected=True,no_legal_or_training_admission=True,no_live_managed_ledger_reconciliation_or_cap_change_selected=True)
+effect_ref=seal("Root-selected-effect.json",effect)
+io=seal("Root-selected-IO.json",dict(Root_selected=True,Source_envelope_bytes=envelope,admitted=True,all_prior_failed_attempts_and_Source_costs_retained=True,ledger_before=ledger,original_limits_and_guards_unchanged=True,physical_IO_accounting_complete=False,cap_reference=cap_ref))
+manifest=dict(Root_selected=True,frozen_Git_candidates=True,Source_WRITE_claimed=False,ordinary_execution_or_qualification=None,projects=projects,D_provenance=D_prov,A_provenance=A_prov,modules=modules,source_read_binding_reference=abi_ref,fixture_closure_reference=fixture_ref,effect_decision_reference=effect_ref,admitted_io_plan_reference=io)
+manifest_ref=seal("Root-selected-Phase2-V3-definition-self-reference-ordinary37-binding-manifest.json",manifest)
+output=str(out/"actual-output"); assert not Path(output).exists()
+now=time.time_ns()
+deadline=now+840_000_000_000
+selection=seal("Root-selected-existing-Phase2-V3-definition-self-reference-ordinary37.json",dict(schema="Root-selected-existing-Phase2-V3-definition-self-reference-frozen-local-ordinary37/v1",Root_selected=True,Source_READ_binding=abi_ref,IO_reference=io,effect_reference=effect_ref,Source_envelope_bytes=envelope,case_hint=37,actual_COLLECT_supplies_order=True,frozen_D_HEAD=head,frozen_D_tree=tree,launch_not_before_utc_ns=now,launch_deadline_utc_ns=deadline,ledger_before=ledger,output_namespace=output,actual_nonclock_handoff=role_ref))
+runtime=dict(schema="Root-selected-normal-HOME-rescue-launch-authority/v1",root_selection=selection,launch_not_before_utc_ns=now,launch_deadline_utc_ns=deadline)
+bootstrap=bind(read(s["controls"]["bootstrap"]),dict(ROOT=D,ADDITIONAL_A_ROOT=A,EXPECTED_MODULES={k:dict(v,scope="frozen_local_git_D_source") for k,v in modules.items()},REQUIRED_CANONICAL_CONFTESTS=fixture["required_normal_conftests"],PYTEST_INIFILE=fixture["pytest_inifile"],ROOT_RUNTIME_SELECTION=runtime,GIT_CANDIDATE_PROVENANCE=D_prov,ADDITIONAL_A_PROVENANCE=A_prov,BINDING_MANIFEST_REFERENCE=manifest_ref,SOURCE_READ_BINDING_REFERENCE=abi_ref,ADMITTED_IO_PLAN_REFERENCE=io,EFFECT_DECISION_REFERENCE=effect_ref,SOURCE_EPOCH_SHA256=outer_ref["sha256"],SOURCE_EPOCH_RECORD_COUNT=outer_count))
+bootstrap_ref=seal("Root-selected-bootstrap.py",bootstrap)
+old_keys=("FINAL_SDK_BINDINGS","FINAL_RESOURCE_STATE_PATH","FINAL_EXPECTED_RESOURCE_CONFIG","FINAL_EXPECTED_CAPACITY","FINAL_ADDITIONAL_IMPORT_ROOTS","source42")
+op_slots={k:inherit[k] for k in old_keys}
+op_slots["PREP"]=str(controls.parent)
+op_slots.update(ROOT_SELECTION=selection,ROOT_RUNTIME_SELECTION=runtime,FINAL_OUTPUT_PATH=output,FINAL_D_ROOT=D,FINAL_D_HEAD=head,FINAL_D_TREE=tree,FINAL_A_ROOT=A,FINAL_A_HEAD=A_prov["HEAD"],FINAL_A_TREE=A_prov["tree"],D_READ_BINDING_REFERENCE=abi_ref,FINAL_BINDING_MANIFEST_REFERENCE=manifest_ref,FINAL_BINDING_MANIFEST=manifest,FINAL_MODULE_BINDINGS=modules,FINAL_D_PROVENANCE=D_prov,FINAL_A_PROVENANCE=A_prov,FINAL_SOURCE_PROJECTS=projects,FINAL_FIXTURE_CLOSURE_REFERENCE=fixture_ref,FINAL_EFFECT_DECISION_REFERENCE=effect_ref,FINAL_EFFECT_DECISION=effect,FINAL_ADMITTED_IO_PLAN_REFERENCE=io,BOOTSTRAP_REFERENCE=bootstrap_ref)
+op_template=read(s["controls"]["operator"])
+current_assignments=literal_assignments(op_template)
+assert current_assignments["BOOTSTRAP_REFERENCE"] is current_assignments["source42"] is None
+assert current_assignments["D_READ_BINDING_ABI"]==abi_shape and current_assignments["SELECTION"]==static["static_selection"]
+assert current_assignments["PY"]==p2_profile["PY"]=="/home/barberb/lift_coding/.venv/bin/python"
+assert current_assignments["PATH_SCOPE"]==p2_profile["PATH_SCOPE"]
+bootstrap_assignments=literal_assignments(read(s["controls"]["bootstrap"]))
+for name in ("MAINTAINED_OWNER_VISIBILITY_POLICY","MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE","SELECTED_TEST_REWRITE_POLICY"):
+ assert current_assignments[name]==bootstrap_assignments[name]
+assert current_assignments["MAINTAINED_OWNER_VISIBILITY_POLICY_REFERENCE"]==static["owner_visibility_policy"]
+assert current_assignments["MAINTAINED_OWNER_VISIBILITY_POLICY"]==json.loads(read(static["owner_visibility_policy"]))
+selected_operator=bind(op_template,op_slots)
+compile(selected_operator,"Phase2 existing V3 governing self-reference ordinary37","exec",dont_inherit=True)
+op=seal("Root-selected-existing-Phase2-V3-definition-self-reference-ordinary37-operator.py",selected_operator)
+binding=seal("actual-Phase2-V3-definition-self-reference-ordinary37-binding.json",dict(
+ operator=op,bootstrap=bootstrap_ref,factory=s["controls"]["factory"],controls=controls_ref,
+ manifest=manifest_ref,selection=selection,read_abi=abi_ref,full_charge=cap_ref,
+ exact_local_freeze=role["freeze"], exact_postfreeze_READ3=role["read_close"],actual_nonclock_handoff=role_ref,protected_Guide575_publication=guide_ref,combined_epoch_READ3_full_retained_charge=cap_ref_before))
+print(json.dumps(dict(exact_operator=op,actual_selected=selection,bound_bootstrap=bootstrap_ref,output=output,
+ binding=binding,run_argv=["/usr/bin/python3","-I","-B",op["path"],abi_ref["path"],str(abi_ref["bytes"]),abi_ref["sha256"]])),flush=True)

@@ -1,0 +1,1607 @@
+"""Replay and read back sampled field eligibility and emitted byte geometry."""
+from dataclasses import asdict, dataclass
+from hashlib import sha256
+import json
+from pathlib import Path
+import sys
+from types import ModuleType
+
+TMP = Path("/tmp")
+T5 = TMP / "decoder-training-t5-matched-policy-dispatch-private-v01-2L3h2QJD"
+QWEN = TMP / "decoder-training-sampled-proof-close-binding-private-v02-XwmwJ3Xg"
+DIAGNOSTIC = TMP / "decoder-training-structural-credit-diagnostic-private-v01-yxFx7tqd"
+SAMPLER_PATH = Path("stage/ipfs_datasets_py/optimizers/logic_theorem_optimizer/sampled_action.py")
+MASK = TMP / "decoder-training-masked-action-score-reference-v01.py"
+QWEN_TOOL_PIN = "68abb30e42b2bbb62cca08e909aba83f91e1934a52951975758ec79808ff1c06"
+
+
+def need(ok, explanation):
+    if not ok:
+        raise ValueError(explanation)
+
+
+def hash_bytes(raw):
+    return sha256(raw).hexdigest()
+
+
+def wire(value):
+    return json.dumps(value, ensure_ascii=True, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("ascii")
+
+
+def pin(value):
+    return hash_bytes(wire(value))
+
+
+def exact(path, expected, size=None):
+    need(path.is_relative_to(TMP) and not path.is_symlink(), "held private artifact required")
+    raw = path.read_bytes()
+    need(hash_bytes(raw) == expected and (size is None or len(raw) == size), "held artifact identity differs")
+    return raw
+
+
+def read_ref(ref):
+    return exact(Path(ref["path"]), ref["sha256"], ref["bytes"])
+
+
+def load(path, digest):
+    raw = exact(path, digest)
+    name = "_held_sampled_geometry_" + digest[:12]
+    module = ModuleType(name)
+    module.__file__ = str(path)
+    sys.modules[name] = module
+    try:
+        exec(compile(raw,str(path),"exec"), vars(module))
+    finally:
+        del sys.modules[name]
+    return module
+
+
+def typed(cls, raw, arrays):
+    return cls(**{key: tuple(value) if key in arrays else value for key,value in raw.items()})
+
+
+def replay_step(sampler, mask, item, trajectory, position, earlier, arch, policy):
+    if arch == "T5":
+        frame = typed(sampler.EncoderDecoderPrefixFrame,item["frame"],
+                      {"encoder_input_ids","encoder_attention_mask","generated_body_ids"})
+        observed = typed(sampler.EncoderDecoderObservation,item["observation"],
+                         {"encoder_input_ids","encoder_attention_mask","decoder_input_ids"})
+        need(observed.encoder_input_ids == frame.encoder_input_ids
+             and observed.encoder_attention_mask == frame.encoder_attention_mask
+             and observed.decoder_input_ids == (frame.decoder_bos_token_id,*earlier)
+             and observed.frame_sha256 == frame.digest()
+             and observed.owner_forward_receipt_sha256 == frame.behavior_forward_receipt_sha256
+             and observed.policy_sha256 == policy
+             and observed.native_unprojected_head is True and observed.cache_reused is False,
+             "retained T5 forward or prefix differs")
+    elif arch == "Qwen2":
+        frame = typed(sampler.CachedQwenBehaviorFrame,item["frame"],{"framed_prompt_ids","generated_body_ids"})
+        observed = typed(sampler.CachedQwenObservation,item["observation"],
+                         {"forward_keywords","attention_mask","input_ids","position_ids"})
+        sampler._validate_cached_qwen_observation(observed,frame)
+        need(observed.policy_sha256 == policy, "retained Qwen behavior policy differs")
+    else:
+        raise ValueError("unexpected archived architecture")
+    need(frame.generated_body_ids == tuple(earlier) and observed.digest() == item["observation_sha256"],
+         "original prefix or forward observation differs")
+    offered = item["support"]
+    support = mask.bind_support(mask.PolicyBinding(**offered["policy"]),offered["ordered_actions"],offered["allowed"])
+    need(support.sha256 == offered["sha256"], "original support differs")
+    columns = typed(sampler.ActionColumns,item["columns"],{"ordered_columns"})
+    raw = item["sample"]
+    sample = sampler.Sample(**{**raw,"rng_event":sampler.DrawIdentity(**raw["rng_event"])})
+    need(sample.trajectory_id == trajectory and sample.action_position == position
+         and sample.rng_event.ordinal == position and sample.profile == sampler.SAMPLER
+         and sample.behavior_policy_sha256 == policy and sample.prefix_sha256 == frame.digest(),
+         "original sampled row position or committed prefix differs")
+    actual = sampler.replay_behavior(mask,receipt=sample,expected_receipt_sha256=item["sample_sha256"],
+        frame=frame,expected_prefix_sha256=frame.digest(),columns=columns,
+        expected_action_columns_sha256=columns.digest(support),support=support,expected_support_sha256=support.sha256,
+        ordered_logits=tuple(item["ordered_logits"]),trajectory_id=trajectory,behavior_policy_sha256=policy,
+        behavior_logit_dtype=sample.behavior_logit_dtype,rng_event=sample.rng_event)
+    need(actual == sample, "original policy draw was not reproduced")
+    return frame,sample
+
+
+def replay_tape(sampler, mask, tape, arch):
+    row, = tape["rows"]
+    close = row["close"]
+    policy = row["samples"][0]["sample"]["behavior_policy_sha256"]
+    need(row["outcome"] == "complete" and row["reason"] is None
+         and close["attempt_sha256"] == tape["attempt_sha256"] and close["row_id"] == row["row_id"],
+         "actual complete archived tape required")
+    emitted, frames, samples = [], [], []
+    for index,item in enumerate(row["samples"]):
+        frame,sample = replay_step(sampler,mask,item,close["trajectory_id"],index,emitted,arch,policy)
+        frames.append(frame)
+        samples.append(sample)
+        emitted.append(sample.output_column)
+    ordered_samples = pin([sample.digest() for sample in samples])
+    need(ordered_samples == close["ordered_sample_digests_sha256"] and len(set(sample.digest() for sample in samples)) == len(samples),
+         "retained close and sample geometry differ")
+    if arch == "T5":
+        bos,eos = close["bos_token_id"],close["eos_token_id"]
+        common = (close["source_record_sha256"],close["tokenizer_sha256"],close["ordered_frame_digests_sha256"])
+        need((frames[0].source_record_sha256,frames[0].tokenizer_sha256,pin([frame.digest() for frame in frames])) == common
+             and all((frame.source_record_sha256,frame.tokenizer_sha256,frame.decoder_bos_token_id,
+                      frame.encoder_input_ids,frame.encoder_attention_mask,frame.forward_profile_sha256) ==
+                     (*common[:2],bos,frames[0].encoder_input_ids,frames[0].encoder_attention_mask,frames[0].forward_profile_sha256)
+                     for frame in frames)
+             and close["behavior_policy_sha256"] == policy
+             and close["closure"] == "nonempty-observed-eos-and-strict-complete-codec"
+             and close["profile"] == sampler.T5_OWNER_ROLLOUT_PROFILE,"retained T5 completion closure differs")
+        roster = [[close["trajectory_id"],close["ordered_frame_digests_sha256"],ordered_samples,pin(close)]]
+        need(tape["t5_rollout_closes"] == roster and pin(roster) == tape["t5_rollout_closes_sha256"],
+             "retained T5 close roster differs")
+    else:
+        bos,eos = 0,2
+        need(tape["profile"] == close["profile"] == "reviewed-qwen2-cached-sampled-rollout/v1"
+             and close["closure"] == "nonempty-observed-eos-and-structural-codec"
+             and all(frame.cache_session_sha256 == close["cache_session_sha256"] for frame in frames)
+             and all(frames[i].input_cache_revision_sha256 == frames[i-1].output_cache_revision_sha256
+                     for i in range(1,len(frames)))
+             and frames[-1].output_cache_revision_sha256 == close["last_cache_revision_sha256"],
+             "retained Qwen cache chain differs")
+        roster = [[close["trajectory_id"],close["cache_session_sha256"],ordered_samples,pin(close)]]
+        need(tape["cached_rollout_closes"] == roster and pin(roster) == tape["cached_rollout_closes_sha256"],
+             "retained Qwen close roster differs")
+    need(len(emitted) >= 2 and emitted[-1] == eos and not {bos,eos}.intersection(emitted[:-1])
+         and pin([bos,*emitted]) == close["generated_token_ids_sha256"],
+         "retained actual sampled EOS or generated ID close differs")
+    return row,samples
+
+
+def t5_pieces(tokenizer, body_ids, contract):
+    need(tokenizer["decoder"]["type"] == "ByteLevel" and tokenizer["model"]["type"] == "BPE"
+         and tokenizer["truncation"] is None and tokenizer["padding"] is None,
+         "exact retained T5 fixture tokenizer route required")
+    added = {item["id"]:item for item in tokenizer["added_tokens"]}
+    need(len(added) == len(tokenizer["added_tokens"])
+         and all(contract[k] in added and added[contract[k]]["special"] is True
+                 for k in ("bos_token_id","eos_token_id")), "original tokenizer closure IDs differ")
+    need(all(i in added and added[i]["special"] is False and added[i]["normalized"] is False for i in body_ids),
+         "selected T5 emitted pieces are not exact literal fixture additions")
+    return tuple(added[i]["content"].encode("ascii") for i in body_ids)
+
+
+def replay_inputs(row):
+    return [{"receipt":item["sample"],"frame":item["frame"],"columns":item["columns"],
+             "support":item["support"],"behavior_ordered_logits":item["ordered_logits"]}
+            for item in row["samples"]]
+
+
+def closed_body_geometry(pieces, candidate_sha256, *, maximum_body_bytes):
+    """Project exact canonical emitted bytes to action and root-value intervals."""
+    need(type(pieces) is tuple and pieces and all(type(part) is bytes and part for part in pieces),
+         "one nonempty original byte piece per body action required")
+    need(type(maximum_body_bytes) is int and 0 < sum(map(len, pieces)) <= maximum_body_bytes,
+         "emitted body exceeds selected byte budget")
+    body = b"".join(pieces)
+    need(hash_bytes(body) == candidate_sha256, "emitted body differs from the owner-closed candidate")
+    try:
+        parsed = json.loads(body)
+        canonical = wire(parsed)
+    except (ValueError, RecursionError) as error:
+        raise ValueError("canonical complete JSON body required") from error
+    need(type(parsed) is dict and parsed and canonical == body, "canonical complete JSON object required")
+    # Canonical serialization fixes the byte length of keys, values and framing.
+    intervals = {}
+    offset = 1
+    for field, value in parsed.items():
+        first = offset + len(wire(field)) + 1
+        end = first + len(wire(value))
+        intervals[field] = (first, end)
+        offset = end + 1
+    need(offset == len(body), "root value intervals differ from the canonical body extent")
+    spans = []
+    first = 0
+    for part in pieces:
+        end = first + len(part)
+        spans.append((first, end))
+        first = end
+    return body, tuple(spans), intervals
+
+
+def emission_body(sample_pieces):
+    need(type(sample_pieces) is tuple and len(sample_pieces) >= 2
+         and all(type(entry) is tuple and len(entry) == 2 and type(entry[0]) is str
+                 for entry in sample_pieces)
+         and all(type(piece) is bytes and piece for _, piece in sample_pieces[:-1])
+         and sample_pieces[-1][1] is None,
+         "closed emission needs a nonempty piece for each body action and a byte-free terminal")
+    return tuple(piece for _, piece in sample_pieces[:-1])
+
+
+def closed_emission_digest(case, tokenizer_sha256, sample_pieces):
+    """Commit the output owner's detached per-action byte pieces, including EOS."""
+    emission_body(sample_pieces)
+    return pin(("closed-canonical-sample-emission/v1", case.trajectory_id, case.assembled_target_sha256,
+                case.assembly_receipt_sha256, tokenizer_sha256,
+                tuple((sample, (len(piece), hash_bytes(piece)) if piece is not None else None)
+                      for sample, piece in sample_pieces)))
+
+
+def field_review_digest(proof, case, span, tokenizer_sha256, field, occurrence_review_sha256):
+    """Bind the independent review's explicitly chosen field to this row and decision."""
+    need(type(field) is str and bool(field) and proof._pin(occurrence_review_sha256),
+         "reviewed root field and source-occurrence evidence required")
+    # The alignment evidence is derived below, so it cannot be in this preimage.
+    return pin(("reviewed-canonical-sample-field/v1", proof.digest(proof.asdict(case)),
+                (span.trajectory_id, span.decision_id, span.entries), tokenizer_sha256,
+                field, occurrence_review_sha256))
+
+
+def field_alignment_digest(review_sha256, emission_sha256):
+    return pin(("reviewed-canonical-field-alignment/v1", review_sha256, emission_sha256))
+
+
+def derive_field_span_evidence(proof, trace, case, span, group_binding, *, sample_pieces,
+                               expected_emission_sha256, field, occurrence_review_sha256,
+                               expected_review_sha256, maximum_body_bytes):
+    """Produce the existing proof owner's typed field row from two selected receipts.
+
+    The original owners authenticate the expected digests. This projection
+    checks their bindings and derives geometry. The proof caller still
+    replays the independently selected close.
+    """
+    need(type(case) is proof.Completion and case.outcome == "complete"
+         and type(span) is proof.SelectedDecisionSpan and trace.frames
+         and trace.trajectory_id == case.trajectory_id == span.trajectory_id,
+         "same owner-closed completion and selected decision required")
+    proof._verify_completion(trace, case, group_binding)
+    tokenizer = trace.frames[0].tokenizer_sha256
+    need(type(sample_pieces) is tuple and len(sample_pieces) == len(trace.samples) >= 2,
+         "complete original sample roster required")
+    need(proof._pin(expected_review_sha256) and
+         field_review_digest(proof, case, span, tokenizer, field, occurrence_review_sha256) == expected_review_sha256,
+         "selected source-occurrence and decision review differs")
+    body, spans, fields = closed_body_geometry(emission_body(sample_pieces), case.assembled_target_sha256,
+                                               maximum_body_bytes=maximum_body_bytes)
+    need(proof._pin(expected_emission_sha256) and
+         closed_emission_digest(case, tokenizer, sample_pieces) == expected_emission_sha256,
+         "selected owner emission differs")
+    need(span.alignment_evidence_sha256 == field_alignment_digest(expected_review_sha256, expected_emission_sha256),
+         "selected alignment must commit both the review and the emitted tape")
+    sample_ids = tuple(sample.digest() for sample in trace.samples)
+    need(tuple(entry[0] for entry in sample_pieces) == sample_ids,
+         "owner emission differs from the ordered sampled actions")
+    evidence = proof.FieldSpanEvidence(trace.trajectory_id, span.decision_id, span.alignment_evidence_sha256,
+        case.assembled_target_sha256, case.assembly_receipt_sha256, tokenizer, len(body), field,
+        tuple(zip(sample_ids, (*spans, None), strict=True)), tuple(fields.items()))
+    proof._require_exclusive_field_span(evidence, span, trace, case)
+    return evidence
+
+
+def field_opportunity_panel_sha256(panel):
+    """Commit every separately selected field disposition in schedule order."""
+    return pin(("sampled-field-opportunity-panel/v1", panel))
+
+
+def read_field_comparison_coverage(proof, group, credit, *, selection, prepared,
+                                   expected_pair_sha256, expected_observations_sha256,
+                                   opportunities, expected_opportunities_sha256):
+    """Read back one matched credit comparison with its entire scheduled roster.
+
+    The proof owner authenticates the paired allocation. A separate review
+    owner selects the opportunity dispositions, including reasons for rows
+    without geometry. This readback does not infer a reason from a failed
+    invocation or confer approval on a missing field, source or proof.
+    """
+    pair = prepared["decision_span_comparison_pair"]
+    candidate_slots = group.decision_span_comparison_workload(pair, expected_pair_sha256=expected_pair_sha256)
+    field_rows = selection["field_span_evidence"]
+    need(selection["decision_span_profile"] == proof.DECISION_SPAN_PROFILE
+         and proof.field_span_evidence_sha256(field_rows) == selection["expected_field_span_evidence_sha256"]
+         == prepared["field_span_evidence_sha256"]
+         and proof.group_evidence_sha256(**selection) == prepared["selected_evidence_sha256"]
+         == pair.proof_evidence_sha256 and pair.scoped == prepared["plan"],
+         "readback must bind the complete field-selected proof pair")
+    cases = selection["completions"]
+    ids = tuple(trace.trajectory_id for trace in selection["trajectories"])
+    observations = prepared["reward_observations"]
+    need(type(observations) is tuple and all(type(row) is credit.RewardObservation for row in observations)
+         and proof._pin(expected_observations_sha256)
+         and pin(tuple(asdict(row) for row in observations)) == expected_observations_sha256,
+         "independently selected raw reward observations differ")
+    estimated = credit.estimate_group_credit(observations, expected_binding=selection["group_binding"],
+        expected_trajectory_ids=ids, constant_reward_treatment=selection["policy"].constant_reward_treatment)
+    need(estimated == prepared["group_credit"] and pin(asdict(estimated)) == pair.scoped.credit_sha256,
+         "retained observations do not reproduce the shared signal")
+    need(type(opportunities) is tuple and len(opportunities) == len(ids)
+         and all(type(row) is dict and set(row) == {"trajectory_id", "completion_sha256", "field",
+                                                   "disposition", "evidence_sha256"} for row in opportunities)
+         and tuple(row["trajectory_id"] for row in opportunities) == ids
+         and proof._pin(expected_opportunities_sha256)
+         and field_opportunity_panel_sha256(opportunities) == expected_opportunities_sha256,
+         "complete ordered field opportunity panel required")
+    need(tuple(case.trajectory_id for case in cases) == ids
+         and tuple(cover[0] for cover in pair.outcome.coverage) == ids
+         and tuple(cover[0] for cover in pair.scoped.coverage) == ids,
+         "proof and optimizer coverage must retain every scheduled trajectory")
+    spans = {row.trajectory_id: row for row in field_rows}
+    need(tuple(spans) == tuple(row.trajectory_id for row in selection["actions"])
+         and len(spans) == len(field_rows), "each selected span needs exactly one field witness")
+    proof_rows = {row.trajectory_id: row for row in selection["proofs"]}
+    scores = {row.trajectory_id: row for row in selection["scores"]}
+    slots = {row.trajectory_id: row.advantage for row in candidate_slots}
+    nonexclusive = {"boundary_crossing", "field_absent", "emission_unavailable", "review_unavailable"}
+    records = []
+    for raw, case, reward, signal, cover in zip(opportunities, cases, observations, estimated.rows,
+                                                 pair.outcome.coverage, strict=True):
+        field, disposition = raw["field"], raw["disposition"]
+        need(type(field) is str and bool(field) and proof._pin(raw["evidence_sha256"])
+             and raw["completion_sha256"] == proof.digest(asdict(case))
+             and cover[1:3] == (signal.eligibility, signal.reason),
+             "field disposition must bind completion and unchanged credit coverage")
+        need(pin(slots.get(case.trajectory_id)) == pin(signal.signal),
+             "paired candidate slots must match the reconstructed shared advantage")
+        witness = spans.get(case.trajectory_id)
+        if reward.status == "eligible":
+            item = proof_rows.get(case.trajectory_id)
+            score = scores.get(case.trajectory_id)
+            if selection["policy"].profile == proof.POLICIES[0]:
+                value = 1.0
+            else:
+                value = score.value if score is not None else None
+            need(witness is not None and item is not None and item.semantic_target_sha256 == case.assembled_target_sha256
+                 and type(value) is float and reward.observed_reward == value,
+                 "raw eligible reward differs from the selected proof or decision score")
+        if witness is not None:
+            need(disposition == "exclusive" and field == witness.selected_field
+                 and raw["evidence_sha256"] == proof.digest(asdict(witness)),
+                 "exclusive field must bind the exact selected witness")
+        else:
+            reason = "unresolved_decision_action" if case.outcome == "complete" else "completion_" + case.outcome
+            need((disposition in nonexclusive if case.outcome == "complete" else disposition == "completion_unavailable")
+                 and reward.observed_reward is None and signal.signal is None
+                 and reward.exclusion_reason == reason and case.trajectory_id not in slots,
+                 "unavailable field must retain its original row without reward or scoring slots")
+        records.append({**raw, "reward_status": reward.status, "observed_reward": reward.observed_reward,
+                        "reward_exclusion_reason": reward.exclusion_reason, "advantage": signal.signal,
+                        "signal_reason": signal.reason, "candidate_replay_on_both_arms": case.trajectory_id in slots})
+    return {"schema": "sampled-field-matched-comparison-coverage/v1",
+            "pair_sha256": expected_pair_sha256, "opportunity_panel_sha256": expected_opportunities_sha256,
+            "raw_observations_sha256": expected_observations_sha256, "rows": tuple(records),
+            "scheduled_trajectories": len(ids), "exclusive_field_trajectories": len(spans),
+            "observed_reward_trajectories": estimated.eligible_count, "shared_scoring_trajectories": len(slots),
+            "nonzero_advantage_trajectories": sum(row.signal is not None and row.signal != 0.0 for row in estimated.rows),
+            "group_signal_status": estimated.status, "broadcast_slots": len(candidate_slots),
+            "scoped_slots": len(pair.scoped.slots)}
+
+
+@dataclass(frozen=True)
+class FieldPreparationCharge:
+    event_sha256: str
+    role: str
+    opportunities: tuple[tuple[str, str], ...]
+
+
+def field_preparation_commitment(study_owner, coverage_sha256, events, charges):
+    return study_owner.commitment(("sampled-field-preparation-paid-roster/v1", coverage_sha256, events, charges))
+
+
+def read_field_preparation_work(study_owner, *, coverage, expected_coverage_sha256, events, charges,
+                                expected_preparation_sha256, verify_original_preparation):
+    """Read paid preparation for the entire schedule, even with no valid policy attempt.
+
+    The independent resource owner authenticates the original events and their
+    association to these scheduled opportunities. Scope does not allocate an
+    event to every row it touches. The whole event is counted exactly once.
+    """
+    need(callable(verify_original_preparation), "independent preparation cost owner required")
+
+    def current():
+        need(type(coverage) is dict and coverage.get("schema") == "sampled-field-matched-comparison-coverage/v1"
+             and study_owner._pin(expected_coverage_sha256) and pin(coverage) == expected_coverage_sha256
+             and study_owner._pin(expected_preparation_sha256)
+             and field_preparation_commitment(study_owner, expected_coverage_sha256, events, charges)
+             == expected_preparation_sha256, "selected field coverage or original preparation commitment differs")
+
+    current()
+    by_event = study_owner._event_roster(events)
+    closes = {event.close_receipt_sha256 for event in events}
+    need(len(closes) == len(events) and closes.isdisjoint(by_event),
+         "each preparation event requires its own original physical close identity")
+    rows = tuple((row["trajectory_id"], row["completion_sha256"]) for row in coverage["rows"])
+    ids = {item[0] for item in rows}
+    need(rows and len(ids) == coverage["scheduled_trajectories"] == len(rows)
+         and all(type(identifier) is str and identifier and study_owner._pin(completion)
+                 for identifier, completion in rows), "exact scheduled opportunity roster required")
+    need(type(charges) is tuple and all(type(row) is FieldPreparationCharge for row in charges)
+         and tuple(row.event_sha256 for row in charges) == tuple(by_event),
+         "every original preparation event must have one ordered scope record")
+    selected, shareable = set(), []
+    for charge in charges:
+        covered = charge.opportunities
+        need(type(covered) is tuple and covered and len(set(covered)) == len(covered)
+             and covered == tuple(row for row in rows if row in covered),
+             "preparation event must bind the original scheduled opportunity identities in order")
+        event = by_event[charge.event_sha256]
+        if charge.role == "selected_rollout":
+            need(event.kind == "behavior_rollout" and event.disposition == "complete"
+                 and selected.isdisjoint(covered),
+                 "one completed original behavior rollout must define each selected opportunity")
+            selected.update(covered)
+            shareable.append(event.event_sha256)
+        else:
+            need((charge.role == "prior_rollout" and event.kind == "behavior_rollout")
+                 or (charge.role == "other_preparation" and event.kind != "behavior_rollout"),
+                 "preparation close must retain its original work kind")
+    need(selected == set(rows), "completed rollout scopes must retain every scheduled opportunity")
+    need(verify_original_preparation(expected_preparation_sha256, expected_coverage_sha256) is True,
+         "original preparation cost owner refused the selected paid work")
+    current()
+    return {"schema": "sampled-field-preparation-paid-readback/v1", "preparation_sha256": expected_preparation_sha256,
+            "coverage_sha256": expected_coverage_sha256, "decision_span_pair_sha256": coverage["pair_sha256"],
+            "scheduled_trajectories": len(rows), "shared_scoring_trajectories": coverage["shared_scoring_trajectories"],
+            "physical_paid_events": tuple(asdict(event) for event in events),
+            "physical_work_ns": study_owner._physical_work_ns(by_event), "scope_by_event": tuple(asdict(row) for row in charges),
+            "completed_rollout_events": tuple(shareable), "observed_elapsed_wall": None}
+
+
+def bind_field_preparation_to_policy_attempts(study_owner, trial_owner, group, *, preparation,
+                                             expected_preparation_readback_sha256, pair,
+                                             attempts, expected_attempt_sha256s):
+    """Project only selected completed rollouts to the existing shared cost policy."""
+    need(type(preparation) is dict and preparation.get("schema") == "sampled-field-preparation-paid-readback/v1"
+         and study_owner._pin(expected_preparation_readback_sha256)
+         and pin(preparation) == expected_preparation_readback_sha256,
+         "independently selected original preparation readback required")
+    pair_sha = preparation["decision_span_pair_sha256"]
+    common = tuple(row.sample_sha256 for row in group.decision_span_comparison_workload(pair, expected_pair_sha256=pair_sha))
+    need(common and type(attempts) is tuple and len(attempts) == 2
+         and all(type(row) is trial_owner.DecisionSpanPolicyAttempt for row in attempts)
+         and tuple(row.arm for row in attempts) == trial_owner.DECISION_SPAN_POLICY_ARMS
+         and attempts[0].owner_request_sha256 != attempts[1].owner_request_sha256
+         and tuple(trial_owner.policy_attempt_commitment(row) for row in attempts) == expected_attempt_sha256s
+         and trial_owner.decision_span_policy_cohort_commitment(attempts[0])
+         == trial_owner.decision_span_policy_cohort_commitment(attempts[1]),
+         "typed independently selected matched attempts require a nonempty common scoring cut")
+    contributors = len({slot.trajectory_id for slot in pair.outcome.slots})
+    need(contributors == preparation["shared_scoring_trajectories"]
+         and all((attempt.allocation_pair_sha256, attempt.selected_proof_evidence_sha256, attempt.plan_sha256,
+                  attempt.replay_sha256, attempt.configuration_sha256, attempt.tokenizer_sha256,
+                  attempt.starting_pair_sha256, attempt.ordered_sample_sha256s, attempt.scored_sample_sha256s,
+                  attempt.contributing_trajectories) == (pair_sha, pair.proof_evidence_sha256, plan.digest(),
+                    pair.replay_sha256, pair.configuration_sha256, pair.tokenizer_sha256, pair.starting_pair_sha256,
+                    common, tuple(slot.sample_sha256 for slot in plan.slots), contributors)
+                 for attempt, plan in zip(attempts, (pair.outcome, pair.scoped), strict=True)),
+         "paid arms must bind the exact field-selected pair, proof and scoring rosters")
+    ids = tuple(row.attempt_sha256 for row in attempts)
+    shared = dict.fromkeys(preparation["completed_rollout_events"], ids)
+    pin_shared = study_owner.first_use_shared_work_commitment(shared)
+    return {"schema": "sampled-field-preparation-shared-rollout-selection/v1",
+            "prep_readback_sha256": expected_preparation_readback_sha256, "allocation_pair_sha256": pair_sha,
+            "attempts": expected_attempt_sha256s, "first_use_shared_work": shared,
+            "first_use_shared_work_sha256": pin_shared,
+            "remaining_preparation_event_sha256s": tuple(event["event_sha256"]
+                for event in preparation["physical_paid_events"] if event["event_sha256"] not in shared)}
+
+
+def field_cost_union_commitment(study_owner, *, preparation_sha256, handoff_sha256, study_sha256,
+                                attempts_sha256, cost_evidence_sha256):
+    return study_owner.commitment(("sampled-field-first-use-cost-union/v1", preparation_sha256, handoff_sha256,
+                                   study_sha256, attempts_sha256, cost_evidence_sha256))
+
+
+def read_field_first_use_cost_union(study_owner, trial_owner, group, validator, *, preparation,
+                                    expected_preparation_readback_sha256, pair, policy_attempts,
+                                    expected_policy_attempt_sha256s, study, attempts, cost_evidence,
+                                    expected_union_sha256, verify_original_consumer):
+    """Reconcile the selected preparation with a settled paired first-use ledger.
+
+    Equal rollout records may occur in both ledgers. They are one physical
+    event. Other preparation is kept outside the paired allocation. The
+    original resource owner authenticates the original close, counters and
+    availability of preparation by each arm's first covered cut. Summing
+    additive work does not establish a whole-experiment wall-clock span.
+    """
+    need(callable(verify_original_consumer), "independent resource owner for the original cost union required")
+    handoff = bind_field_preparation_to_policy_attempts(study_owner, trial_owner, group,
+        preparation=preparation, expected_preparation_readback_sha256=expected_preparation_readback_sha256,
+        pair=pair, attempts=policy_attempts, expected_attempt_sha256s=expected_policy_attempt_sha256s)
+    handoff_sha = pin(handoff)
+    study_sha, attempts_sha, evidence_sha = map(study_owner.commitment, (study, attempts, cost_evidence))
+
+    def current():
+        need(pin(preparation) == expected_preparation_readback_sha256 and pin(handoff) == handoff_sha
+             and pair.digest() == handoff["allocation_pair_sha256"]
+             and tuple(trial_owner.policy_attempt_commitment(row) for row in policy_attempts)
+             == expected_policy_attempt_sha256s
+             and tuple(map(study_owner.commitment, (study, attempts, cost_evidence)))
+             == (study_sha, attempts_sha, evidence_sha)
+             and study_owner._pin(expected_union_sha256)
+             and field_cost_union_commitment(study_owner, preparation_sha256=expected_preparation_readback_sha256,
+                    handoff_sha256=handoff_sha, study_sha256=study_sha, attempts_sha256=attempts_sha,
+                    cost_evidence_sha256=evidence_sha) == expected_union_sha256,
+             "selected preparation, paired attempts or cost-union evidence differs")
+
+    current()
+    need(type(study) is study_owner.Study and study.cost_basis == "first_use"
+         and type(attempts) is tuple and len(attempts) == len(policy_attempts)
+         and type(cost_evidence) is study_owner.CostEvidence
+         and all(type(paid) is study_owner.Attempt and type(paid.closeout_status) is str
+                 and paid.closeout_status in study_owner.CLOSED_EVENT_OUTCOMES
+                 and (policy.attempt_sha256, policy.study_sha256, policy.arm, str(policy.seed), policy.arm_recipe_sha256)
+                 == (paid.attempt_sha256, study_sha, paid.arm, paid.seed, paid.recipe_sha256)
+                 for policy, paid in zip(policy_attempts, attempts, strict=True))
+         and len({paid.closeout_receipt_sha256 for paid in attempts}) == len(attempts),
+         "consumer must retain both original typed policy attempts and distinct paid terminal closes")
+    need(type(study.schedule) is tuple and all(type(look) is str and look and look != "close"
+                                             for look in study.schedule)
+         and len(set(study.schedule)) == len(study.schedule)
+         and all(type(paid.assessments) is tuple and all(type(look) is study_owner.Assessment for look in paid.assessments)
+                 and tuple(look.look for look in paid.assessments) == study.schedule[:len(paid.assessments)]
+                 for paid in attempts), "paid looks must retain the exact registered assessment prefix")
+    preparation_events = study_owner._event_roster(tuple(study_owner.PaidEvent(**row)
+                                                          for row in preparation["physical_paid_events"]))
+    consumer_events = study_owner._event_roster(cost_evidence.events)
+    shared = handoff["first_use_shared_work"]
+    overlap = preparation_events.keys() & consumer_events.keys()
+    need(overlap == shared.keys() and all(preparation_events[key] == consumer_events[key] for key in overlap),
+         "only exact original selected rollout events can recur in the consumer ledger")
+    union = dict(sorted((preparation_events | consumer_events).items()))
+    closes = {event.close_receipt_sha256 for event in union.values()}
+    need(len(closes) == len(union) and closes.isdisjoint(union),
+         "preparation and policy ledgers cannot alias an original event or physical close identity")
+    elapsed, policy_work = study_owner._cost_roster(validator, study, study_sha, attempts, attempts_sha,
+        cost_evidence, evidence_sha, exclusive_non_teacher_work=True, require_original_terminal_event=True,
+        first_use_shared_work=shared)
+    terminal_closes = {paid.closeout_receipt_sha256 for paid in attempts}
+    terminal_positions = tuple(position for paid in attempts
+                               for position in (False,) * len(paid.assessments) + (True,))
+    need(not any(consumer_events[key].close_receipt_sha256 in terminal_closes
+                 for terminal, (_, charge) in zip(terminal_positions, cost_evidence.observations, strict=True)
+                 if not terminal
+                 for key, _ in charge.entries), "an original terminal event cannot be charged at an earlier look")
+    paid_joins = tuple((policy.attempt_sha256, native_pin, policy.owner_request_sha256,
+                       paid.closeout_status, paid.closeout_receipt_sha256)
+                       for policy, native_pin, paid in zip(policy_attempts, expected_policy_attempt_sha256s,
+                                                           attempts, strict=True))
+    need(verify_original_consumer(expected_union_sha256, evidence_sha, paid_joins) is True,
+         "original resource owner refused the exact preparation-to-consumer cost union")
+    current()
+    return {"schema": "sampled-field-first-use-cost-union/v1", "union_sha256": expected_union_sha256,
+            "preparation_sha256": expected_preparation_readback_sha256, "handoff_sha256": handoff_sha,
+            "consumer_cost_evidence_sha256": evidence_sha, "original_paid_attempts": paid_joins,
+            "preparation_only_event_sha256s": tuple(sorted(preparation_events.keys() - overlap)),
+            "shared_rollout_event_sha256s": tuple(sorted(overlap)),
+            "consumer_only_event_sha256s": tuple(sorted(consumer_events.keys() - overlap)),
+            "physical_paid_events": tuple(asdict(event) for event in union.values()),
+            "physical_work_ns": study_owner._physical_work_ns(union),
+            "consumer_ledger_physical_work_ns": policy_work,
+            "consumer_observed_elapsed_wall": elapsed, "whole_experiment_elapsed_wall": None}
+
+
+def project(arch, row, samples, pieces, field_owner, originally_selected):
+    body, spans, intervals = closed_body_geometry(pieces, row["close"]["candidate_sha256"],
+                                               maximum_body_bytes=sum(map(len, pieces)))
+    need(len(samples) == len(pieces)+1, "one original sample per append-stable body piece required")
+    need(len(intervals) == 9 and "argument_roles" in intervals and
+         all(field_owner.original_object_value_bytes(body, field) == span for field, span in intervals.items()),
+         "complete root-value geometry differs from the original readback")
+    windows = []
+    for position, (sample, (first, limit)) in enumerate(zip(samples[:-1], spans, strict=True)):
+        fields = sorted(field for field,(start,end) in intervals.items() if first < end and start < limit)
+        windows.append({"action_position":position,"action_receipt_sha256":sample.digest(),
+                        "support_sha256":sample.support_sha256,"body_byte_interval":[first,limit],
+                        "root_value_fields_overlapped":fields,
+                        "originally_scoped_fixture_action":sample.digest() in originally_selected})
+    sample = samples[-1]
+    windows.append({"action_position":len(pieces),"action_receipt_sha256":sample.digest(),
+                    "support_sha256":sample.support_sha256,"body_byte_interval":None,
+                    "root_value_fields_overlapped":[],"originally_scoped_fixture_action":sample.digest() in originally_selected})
+    return {"architecture":arch,"trajectory_id":row["close"]["trajectory_id"],
+            "original_candidate_sha256":hash_bytes(body),"original_close_sha256":pin(row["close"]),
+            "parsed_root_field_value_byte_intervals":intervals,"action_windows":windows,
+            "new_legal_or_policy_credit":None}
+
+
+def report():
+    mask = load(MASK,"c8b49c73254945f8a10b0b8bda3d43fdf475d2c8c9ee5da2e8382af68aa1c4eb")
+    field_owner = load(DIAGNOSTIC/"readback.py","fa785889f63c2cdf836f7f7a09ce34db5a5b1b6a26098a607f5eea342d096ae6")
+    t5_sampler = load(T5/SAMPLER_PATH,"66cfc848f068aed0f965d689b60991acf5967cc7b55753892566f56587c87607")
+    archived = json.loads(exact(T5/"independent-matched-dispatch-post-terminal-v01.json",
+                      "ce328d5494c561bc82d9de47f5f6946a53c34f182cf2f79aacdaa1ee8104e6af"))
+    close = archived["process_close"]
+    need(archived["fixture_only"] is True and archived["production_admission"] is False
+         and close["lifecycle"]["cleanup_confirmed"] is True and close["root_terminal"]["returncode"] == 0
+         and pin(close) == archived["process_close_sha256"],"exact closed T5 fixture receipt required")
+    fixture = json.loads(read_ref(close["fixture_receipt"]))
+    need(fixture["fixture_only"] is fixture["scripted_token_support_and_draws"] is True
+         and fixture["actual_legal_proof_or_convergence"] is False,"fictional T5 fixture scope differs")
+    tokenizer_ref, = (ref for ref in fixture["asset_refs"] if Path(ref["path"]).name == "tokenizer.json")
+    tokenizer = json.loads(read_ref(tokenizer_ref))
+    contract = fixture["configuration"]["tokenizer"]
+    need(pin(fixture["configuration"]) == fixture["configuration_sha256"]
+         and contract["pipeline_sha256"] == fixture["tokenizer_sha256"], "retained T5 tokenizer binding differs")
+    t5_scoped = fixture["arms"]["policy_t5_scoped_matched"]["candidate_report"]
+    t5_selected = t5_scoped["credited_sample_sha256s"]
+    t5_windows, ordered, closures, t5_samples, t5_common = [], [], [], [], []
+    pieces = None
+    for tape in fixture["completed_rollouts"]:
+        row,samples = replay_tape(t5_sampler,mask,tape,"T5")
+        chunks = t5_pieces(tokenizer,[sample.output_column for sample in samples[:-1]],contract)
+        need(pieces is None or pieces == chunks, "retained T5 fixture pieces differ")
+        pieces = chunks
+        ordered.extend(sample.digest() for sample in samples)
+        t5_samples.append(samples)
+        closures.append(row["close"])
+        t5_common.extend(replay_inputs(row))
+        t5_windows.append(project("T5",row,samples,chunks,field_owner,t5_selected))
+    need(len(t5_windows) == 2 and ordered == fixture["ordered_sample_sha256s"]
+         and pin(closures) == fixture["proof_binding"]["close_bodies_sha256"]
+         and pin(t5_common) == fixture["common_replay_sha256"]
+         and len(set(t5_selected)) == len(t5_selected) == 2 and set(t5_selected) <= set(ordered)
+         and t5_scoped["normalizer"] == len(ordered)
+         and t5_scoped["credit_localization_pair_sha256"] == fixture["credit_localization_pair_sha256"]
+         and t5_scoped["replay_sha256"] == fixture["common_replay_sha256"],
+         "original T5 plan or complete sample roster differs")
+
+    qwen_sampler = load(QWEN/SAMPLER_PATH,"4df51bffb9404b63f929e89eabdaa5b9dc5bcb4ee6f08d6e1c643fc45e3fecc0")
+    descriptor = json.loads(exact(QWEN/"descriptor.json","71a9a4282be1fb4241248a31de74228eca791aee97aeee006201a159fdf37739"))
+    receipt = json.loads(read_ref(descriptor["exact_result"]))
+    trace_ref = descriptor["full_actual_trace"]
+    trace = json.loads(read_ref(trace_ref))
+    need(receipt["exact_trace"] == {"name":Path(trace_ref["path"]).name,"bytes":trace_ref["bytes"],"sha256":trace_ref["sha256"]}
+         and receipt["actual_lean_called"] is receipt["pretrained_or_legal_quality"] is False,
+         "exact Qwen fixture trace scope required")
+    qwen_tool = exact(QWEN/"test_qwen_sampled_proof_close.py",QWEN_TOOL_PIN)
+    need(b"chunk = (len(target) + 3) // 4" in qwen_tool
+         and b"assert tokenizer.decode(list(body)) == target" in qwen_tool,
+         "exact retained Qwen test chunk construction differs")
+    common = b"".join(pieces)
+    limit = (len(common)+3)//4
+    reconstructed = tuple(common[i:i+limit] for i in range(0,len(common),limit))
+    plan = trace["allocation_pair"]["scoped"]
+    linkage = trace["credit_localization_pair_sha256"]
+    need(pin(("reviewed-common-replay-credit-localization-pair/v1",trace["allocation_pair"])) == linkage
+         and pin(trace["reduced_credit"]) == plan["credit_sha256"]
+         and pin(trace["common_candidate_replay"]) == trace["allocation_pair"]["replay_sha256"],
+         "original Qwen sample plan or credit binding differs")
+    qwen_selected = [slot["sample_sha256"] for slot in plan["slots"]]
+    archived_qwen = receipt["arms"]["pruned"]["report"]
+    need(archived_qwen["credit_localization_pair_sha256"] == linkage and archived_qwen["plan_sha256"] == pin(plan)
+         and [value[0] for value in archived_qwen["credited_observations"]] == qwen_selected,
+         "original Qwen scoped dispositions changed")
+    qwen_windows, qwen_common, qwen_closes = [], [], []
+    for tape in trace["behavior_rollouts"]:
+        row,samples = replay_tape(qwen_sampler,mask,tape,"Qwen2")
+        need(tuple(sample.output_column for sample in samples[:-1]) == (260,261,262,263)
+             and len(reconstructed) == receipt["selected_inputs"]["complete_fixture_body_parts"] == 4,
+             "retained Qwen sample columns do not match the exact fixture construction")
+        qwen_windows.append(project("Qwen2",row,samples,reconstructed,field_owner,qwen_selected))
+        qwen_common.extend(replay_inputs(row))
+        qwen_closes.extend(tape["cached_rollout_closes"])
+    need(len(qwen_windows) == 2 and qwen_closes == receipt["closed_rollouts"]
+         and len({close[1] for close in qwen_closes}) == 2
+         and qwen_common == trace["common_candidate_replay"]
+         and len(set(qwen_selected)) == len(qwen_selected) == 2
+         and set(qwen_selected) <= {pin(item["receipt"]) for item in qwen_common}
+         and descriptor["verified_sample_count"] == 10 and descriptor["verified_close_count"] == 2,
+         "retained Qwen projected tape no longer binds the same-prefix scorer")
+    t5_behavior_different = [i for i,(left,right) in enumerate(zip(*t5_samples,strict=True))
+                             if left.selected_mass*right.total_mass != right.selected_mass*left.total_mass]
+    return {
+        "schema":"private-sampled-structural-overlap-readback/v1","tapes":t5_windows+qwen_windows,
+        "T5_original_behavior_probability_differences_at_positions":t5_behavior_different,
+        "original_scoped_plan_sha256":{"T5":t5_scoped["plan_sha256"],"Qwen2":pin(plan)},
+        "t5_body_source":"exact retained tokenizer added-token asset",
+        "qwen_body_source":"exact whole-body close and held fixture-code split; independent Qwen tokenizer archive unavailable",
+        "replayed_original_sample_receipts":sum(len(w["action_windows"]) for w in t5_windows+qwen_windows),
+        "retained_scripted_engineering_scope":True,"new_candidate_scores":0,"new_reward_or_credit_events":0,
+        "legal_or_convergence_claimed":False,"model_or_optimizer_state_read":False,
+    }
+
+
+if __name__ == "__main__":
+    print(json.dumps(report(),sort_keys=True,indent=2,allow_nan=False))
+
+
+TEMPORAL_ROUND_COST = "reviewed-temporal-policy-first-use-round-cost/v1"
+TEMPORAL_CONTINUED_COST = "reviewed-temporal-policy-continued-first-use-cost/v1"
+
+
+@dataclass(frozen=True)
+class TemporalPaidRound:
+    """Original zero-look paired policy receipts and their independent paid ledger."""
+
+    policy_attempts: tuple
+    terminal_readbacks: tuple
+    paid_attempts: tuple
+    cost_evidence: object
+    shared_rollouts: dict | None
+
+
+def temporal_paid_round_commitment(study_owner, trial_owner, study, round_data):
+    need(type(round_data) is TemporalPaidRound, "original temporal round cost input required")
+    matched = trial_owner.temporal_policy_attempts_commitment(round_data.policy_attempts)
+    shared = round_data.shared_rollouts
+    shared_sha = None if shared is None else study_owner.first_use_shared_work_commitment(shared)
+    return study_owner.commitment((TEMPORAL_ROUND_COST, study_owner.commitment(study), matched,
+        pin(round_data.terminal_readbacks), study_owner.commitment(round_data.paid_attempts),
+        study_owner.commitment(round_data.cost_evidence), shared_sha))
+
+
+def read_temporal_paid_round(study_owner, trial_owner, validator, *, study, round_data,
+                             expected_round_sha256, verify_original_cost_owner):
+    """Read paid cuts for both completed native arms, including unchanged arms.
+
+    The independent resource owner checks the original native-to-paid joins,
+    closed roster and counters, and readiness of rollout work before charge.
+    """
+    def current():
+        need(temporal_paid_round_commitment(study_owner, trial_owner, study, round_data) == expected_round_sha256,
+             "selected temporal round or cost evidence changed")
+
+    need(study_owner._pin(expected_round_sha256) and callable(verify_original_cost_owner),
+         "independent temporal round cost selection and verification required")
+    current()
+    policies = round_data.policy_attempts
+    attempts = round_data.paid_attempts
+    reports = round_data.terminal_readbacks
+    evidence = round_data.cost_evidence
+    study_sha = study_owner.commitment(study)
+    matched = trial_owner.temporal_policy_attempts_commitment(policies)
+    need(type(study) is study_owner.Study and study.cost_basis == "first_use"
+         and type(evidence) is study_owner.CostEvidence and type(attempts) is tuple and len(attempts) == 2
+         and type(reports) is tuple and len(reports) == 2
+         and all(type(row) is study_owner.Attempt and row.assessments == () and row.closeout_status == "complete"
+                 and row.budget_clock is None and row.cap_receipt_sha256 is None for row in attempts),
+         "both original normally closed temporal attempts and zero-look first-use costs are required")
+
+    joins = []
+    for policy, paid, report in zip(policies, attempts, reports, strict=True):
+        native_pin = trial_owner.policy_attempt_commitment(policy)
+        need((policy.attempt_sha256, policy.study_sha256, policy.arm, str(policy.seed), policy.arm_recipe_sha256)
+             == (paid.attempt_sha256, study_sha, paid.arm, paid.seed, paid.recipe_sha256)
+             and type(report) is dict and report.get("attempt_sha256") == policy.attempt_sha256
+             and report.get("policy_attempt_sha256") == native_pin and "candidate" in report
+             and report.get("whole_arm_cost_required") is True and report.get("qualified") is False
+             and all(study_owner._pin(report.get(key))
+                     for key in ("terminal_close_sha256", "owner_execution_record_sha256")),
+             "native and paid rows must bind the same original attempt and terminal readback")
+        candidate = report["candidate"]
+        if candidate is None:
+            need(report.get("matched_attempts_sha256") == matched
+                 and report.get("temporal_update_selection_sha256") == policy.temporal_update_selection_sha256
+                 and study_owner._pin(report.get("outcome_sha256")) and type(report.get("update")) is dict,
+                 "unchanged arm must retain its original matched no-candidate readback")
+        else:
+            binding = report.get("temporal_binding")
+            need(type(candidate) is dict and study_owner._pin(candidate.get("sha256"))
+                 and type(binding) is dict and binding.get("matched_attempts_sha256") == matched
+                 and binding.get("temporal_update_selection_sha256") == policy.temporal_update_selection_sha256,
+                 "candidate arm must retain its original matched candidate readback")
+        joins.append((policy.attempt_sha256, native_pin, policy.owner_request_sha256, report["terminal_close_sha256"],
+                      report["owner_execution_record_sha256"], paid.closeout_status, paid.closeout_receipt_sha256,
+                      None if candidate is None else candidate["sha256"]))
+    joins = tuple(joins)
+    need(all(len({row[index] for row in joins}) == 2 for index in (3, 4, 6)),
+         "each arm needs distinct original native close, execution and paid close identities")
+
+    events = study_owner._event_roster(evidence.events)
+    shared = round_data.shared_rollouts
+    consumers = tuple(row.attempt_sha256 for row in attempts)
+    need(shared is None or all(key in events and events[key].kind == "behavior_rollout"
+             and events[key].disposition == "complete" and arms == consumers for key, arms in shared.items()),
+         "only completed original rollout work may be shared in a temporal round")
+    elapsed, work = study_owner._cost_roster(validator, study, study_sha, attempts,
+        study_owner.commitment(attempts), evidence, study_owner.commitment(evidence),
+        exclusive_non_teacher_work=True, require_original_terminal_event=True,
+        first_use_shared_work=shared)
+    need(set(events).isdisjoint(event.close_receipt_sha256 for event in events.values()),
+         "paid event and physical close namespaces cannot alias")
+    need(verify_original_cost_owner(expected_round_sha256, joins) is True,
+         "original resource owner refused the temporal terminal joins or paid work")
+    current()
+    return {"schema": TEMPORAL_ROUND_COST, "round_sha256": expected_round_sha256,
+            "matched_attempts_sha256": matched, "paid_attempt_joins": joins,
+            "native_terminal_readbacks": json.loads(wire(reports)),
+            "observed_elapsed_wall": elapsed, "physical_work_ns": work,
+            "physical_paid_events": tuple(asdict(event) for event in events.values()),
+            "shared_rollout_event_sha256s": tuple(sorted(shared or ())), "dispatch_authority": False}
+
+
+def temporal_continued_cost_commitment(study_owner, *, parent_projection_sha256, first_round_sha256,
+                                        continued_round_sha256):
+    return study_owner.commitment((TEMPORAL_CONTINUED_COST, parent_projection_sha256,
+                                   first_round_sha256, continued_round_sha256))
+
+
+def read_temporal_continued_cost(study_owner, trial_owner, validator, *, study, first, continued,
+                                 parent_projection_raw, expected_parent_projection_sha256,
+                                 expected_first_round_sha256, expected_continued_round_sha256,
+                                 expected_continued_cost_sha256, verify_original_cost_owners,
+                                 verify_original_continuation):
+    """Reconcile original rounds and authenticate that continuation follows both prior closes.
+
+    The continuation owner verifies the selected combined cut and original
+    ordering, including when meter clock domains cannot be compared here.
+    """
+    def current():
+        need(type(parent_projection_raw) is bytes and 0 < len(parent_projection_raw) <= 2 * 1024**2
+             and hash_bytes(parent_projection_raw) == expected_parent_projection_sha256
+             and temporal_paid_round_commitment(study_owner, trial_owner, study, first) == expected_first_round_sha256
+             and temporal_paid_round_commitment(study_owner, trial_owner, study, continued) == expected_continued_round_sha256
+             and temporal_continued_cost_commitment(study_owner, parent_projection_sha256=expected_parent_projection_sha256,
+                 first_round_sha256=expected_first_round_sha256,
+                 continued_round_sha256=expected_continued_round_sha256) == expected_continued_cost_sha256,
+             "selected two-round cost or prior continuation evidence changed")
+
+    need(all(study_owner._pin(value) for value in (expected_parent_projection_sha256,
+             expected_first_round_sha256, expected_continued_round_sha256, expected_continued_cost_sha256))
+         and expected_first_round_sha256 != expected_continued_round_sha256
+         and callable(verify_original_continuation) and type(verify_original_cost_owners) is tuple
+         and len(verify_original_cost_owners) == 2 and all(callable(callback) for callback in verify_original_cost_owners),
+         "distinct independently selected rounds and original cost and continuation owners required")
+    current()
+    prior, next_pair = first.policy_attempts, continued.policy_attempts
+    projection = json.loads(parent_projection_raw)
+    studypin = study_owner.commitment(study)
+    need(type(projection) is dict and wire(projection) == parent_projection_raw
+         and projection.get("schema") == "reviewed-temporal-continuation-parent-projection/v1"
+         and projection.get("study_sha256") == studypin
+         and projection.get("previous_attempts") == json.loads(wire(tuple(asdict(row) for row in prior)))
+         and projection.get("prior_terminal_costs_required") is True
+         and projection.get("promotion_performed") is False and projection.get("dispatch_authorized") is False
+         and projection.get("selected_parent_arm") in trial_owner.TEMPORAL_POLICY_ARMS
+         and study_owner._pin(projection.get("continuation_sha256")),
+         "original same-study temporal parent projection required")
+
+    reports = []
+    for data, expected, verify in zip((first, continued), (expected_first_round_sha256, expected_continued_round_sha256),
+                                       verify_original_cost_owners, strict=True):
+        reports.append(read_temporal_paid_round(study_owner, trial_owner, validator, study=study, round_data=data,
+                        expected_round_sha256=expected, verify_original_cost_owner=verify))
+        current()
+    before, after = reports
+    before_closes = tuple(row[3] for row in before["paid_attempt_joins"])
+    after_closes = tuple(row[3] for row in after["paid_attempt_joins"])
+    need(projection.get("previous_matched_attempts_sha256") == before["matched_attempts_sha256"]
+         and projection.get("previous_terminal_close_sha256s") == list(before_closes),
+         "parent projection must retain both original paid native terminal links")
+    chosen = before["native_terminal_readbacks"][trial_owner.TEMPORAL_POLICY_ARMS.index(projection["selected_parent_arm"])]
+    candidate = chosen["candidate"]
+    steps = projection.get("optimizer_steps")
+    need(candidate is not None and candidate["sha256"] == projection.get("parent_sha256")
+         and type(steps) is int and steps == prior[0].initial_optimizer_steps + 1
+         and all(type(chosen.get(role)) is dict and study_owner._pin(chosen[role].get("sha256"))
+                 for role in ("model_checkpoint", "optimizer_checkpoint"))
+         and all((row.parent_manifest_sha256, row.initial_optimizer_steps, row.base_model_sha256, row.base_optimizer_sha256)
+                 == (candidate["sha256"], steps, chosen["model_checkpoint"]["sha256"], chosen["optimizer_checkpoint"]["sha256"])
+                 for row in next_pair)
+         and next_pair[0].replay_sha256 != prior[0].replay_sha256 and next_pair[0].allocation_pair_sha256 != prior[0].allocation_pair_sha256,
+         "both fresh arms must start at the same original candidate, restored optimizer and fresh rollout")
+    need(all({begun[index] for begun in before["paid_attempt_joins"]}.isdisjoint(
+              ended[index] for ended in after["paid_attempt_joins"]) for index in (0, 1, 2, 4))
+         and set(before_closes).isdisjoint(after_closes),
+         "continued cost cannot reuse an original attempt, request, execution or native close")
+    events = [study_owner._event_roster(tuple(study_owner.PaidEvent(**row) for row in record["physical_paid_events"]))
+              for record in reports]
+    combined = dict(sorted((events[0] | events[1]).items()))
+    physical_closes = {event.close_receipt_sha256 for event in combined.values()}
+    need(len(combined) == sum(map(len, events)) == len(physical_closes) and set(combined).isdisjoint(physical_closes),
+         "continued cost cannot recharge an original physical event or close")
+    need(all(prior["end_ns"] <= new["start_ns"]
+             for prior in (span["wall"] for span in before["observed_elapsed_wall"])
+             for new in (span["wall"] for span in after["observed_elapsed_wall"])
+             if prior is not None and new is not None and prior["clock_domain_sha256"] == new["clock_domain_sha256"]),
+         "same-clock continued arms cannot start before an original terminal close")
+    need(verify_original_continuation(projection["continuation_sha256"], expected_parent_projection_sha256,
+             before_closes, after["matched_attempts_sha256"], candidate["sha256"],
+             expected_continued_cost_sha256) is True,
+         "original continuation owner refused the prior-to-new matched link and ordering")
+    current()
+    return {"schema": TEMPORAL_CONTINUED_COST, "continued_cost_sha256": expected_continued_cost_sha256,
+            "parent_projection_sha256": expected_parent_projection_sha256,
+            "parent_candidate_sha256": candidate["sha256"], "rounds": reports,
+            "physical_paid_events": tuple(asdict(event) for event in combined.values()),
+            "physical_work_ns": study_owner._physical_work_ns(combined), "whole_study_elapsed_wall": None,
+            "cost_scope": "two_original_zero_look_first_use_pairs",
+            "cost_to_held_out_threshold_established": False, "dispatch_authority": False}
+
+
+TEMPORAL_DEVELOPMENT_CUT = "reviewed-temporal-development-paid-cut/v1"
+TEMPORAL_DEVELOPMENT_SELECTION = "reviewed-temporal-development-cut-selection/v1"
+TEMPORAL_DEVELOPMENT_REPORT = "reviewed-decoder-temporal-policy-validation-threshold-look/v1"
+
+
+@dataclass(frozen=True)
+class TemporalDevelopmentCut:
+    """One registered comparison of paired updates at a common starting checkpoint."""
+
+    study_sha256: str
+    matched_attempts_sha256: str
+    development_split_sha256: str
+    optimizer_step_grid_sha256: str
+    look: str
+    optimizer_steps: int
+    fidelity_eligible: tuple[str, ...]
+
+
+@dataclass(frozen=True)
+class TemporalDevelopmentPaidArm:
+    attempt_sha256: str
+    evaluation_close_event_sha256: str | None
+    component_event_sha256s: tuple[str, ...]
+    other_event_sha256s: tuple[str, ...]
+    no_dispatch_receipt_sha256: str | None = None
+    gate_report: dict | None = None
+
+
+def temporal_development_cut_commitment(study_owner, selection):
+    need(type(selection) is TemporalDevelopmentCut, "typed registered temporal DEVELOPMENT cut required")
+    return study_owner.commitment((TEMPORAL_DEVELOPMENT_SELECTION, selection))
+
+
+def temporal_development_paid_commitment(study_owner, *, selection_sha256, round_sha256, settlements, events):
+    return study_owner.commitment((TEMPORAL_DEVELOPMENT_CUT, selection_sha256, round_sha256, settlements, events))
+
+
+def _temporal_development_report(study_owner, validator, selection, study, seed, policy, native, report, component_events):
+    report_fields = ("arm", "seed", "attempt_sha256", "look", "candidate_sha256", "trial_terminal_close_sha256")
+    shard = report.get("development_split")
+    need(report.get("schema") == TEMPORAL_DEVELOPMENT_REPORT
+         and type(shard) is dict and shard.get("selection_sha256") == selection.development_split_sha256
+         and (report.get("study_sha256"), report.get("arm"), report.get("seed"),
+              report.get("panel_sha256"), report.get("evaluation_policy_sha256"),
+              report.get("retention_reference_sha256"), report.get("optimizer_step_grid_sha256"),
+              report.get("optimizer_steps"), report.get("temporal_matched_attempts_sha256"))
+             == (selection.study_sha256, policy.arm, seed.identifier,
+                 study_owner.commitment(study.panel), study.evaluation_policy_sha256,
+                 seed.retention_reference_sha256, selection.optimizer_step_grid_sha256,
+                 selection.optimizer_steps, selection.matched_attempts_sha256)
+         and type(report["optimizer_steps"]) is int and study_owner._pin(report.get("review_sha256"))
+         and report.get("policy_candidate_sha256") == pin(native)
+         and type(report.get("native_identity")) is dict and type(report["native_identity"].get("seed")) is int
+         and tuple(report["native_identity"].get(key) for key in report_fields)
+             == (policy.arm, policy.seed, policy.attempt_sha256, selection.look, native["candidate"]["sha256"],
+                 native["terminal_close_sha256"]),
+         "DEVELOPMENT report must retain its original matched checkpoint, step, panel and policy")
+    closes = report.get("component_closes")
+    groups = tuple(dict.fromkeys(group for _, group, _ in study.panel))
+    need(type(closes) in (tuple, list) and len(closes) == len(groups) == len(component_events)
+         and all(type(close) is dict and set(close) == {"owner_close_sha256", "observation_sha256", "artifact_sha256"}
+                 and all(study_owner._pin(value) for value in close.values())
+                 and (event.kind, event.disposition) == ("evaluation", "complete")
+                 for close, event in zip(closes, component_events, strict=True)),
+         "every reviewed DEVELOPMENT component requires its original paid evaluation close")
+    component_joins = tuple((close["owner_close_sha256"], event.close_receipt_sha256)
+                            for close, event in zip(closes, component_events, strict=True))
+
+    rows, counts = report.get("rows"), report.get("counts")
+    need(type(rows) in (tuple, list)
+         and all(type(row) is dict and type(row.get("review_eligible")) is bool and "source_fidelity" in row
+                 and (row["source_fidelity"] is None or type(row["source_fidelity"]) is bool) for row in rows)
+         and tuple(row.get("row_id") for row in rows) == tuple(ref[0] for ref in study.panel)
+         and tuple(row["row_id"] for row in rows if row["review_eligible"]) == selection.fidelity_eligible
+         and type(counts) is dict and set(counts) == set(validator.GATES),
+         "DEVELOPMENT report must retain every selected row and gate, including unavailable findings")
+    need(all(type(counts[gate]) is dict and set(counts[gate]) == {"numerator", "denominator", "verified"}
+             and type(counts[gate]["denominator"]) is int and counts[gate]["denominator"] == denominator
+             and type(counts[gate]["numerator"]) is int and 0 <= counts[gate]["numerator"] <= denominator
+             and type(counts[gate]["verified"]) is bool
+             for gate, denominator in zip(validator.GATES, seed.gate_denominators, strict=True)),
+         "DEVELOPMENT gate denominators must match the original seed design")
+    values = tuple(row["source_fidelity"] for row in rows if row["review_eligible"])
+    need(counts["source_fidelity"] == {"numerator": sum(value is True for value in values),
+                                     "denominator": len(values), "verified": all(value is not None for value in values)},
+         "grouped source-fidelity evidence disagrees with its independent gate counts")
+    return values, {name: validator.Counts(**counts[name]) for name in validator.GATES}, component_joins
+
+
+def _temporal_development_settlement(study_owner, settlement, native, events):
+    need(type(settlement) is TemporalDevelopmentPaidArm
+         and settlement.attempt_sha256 == native["attempt_sha256"]
+         and type(settlement.component_event_sha256s) is type(settlement.other_event_sha256s) is tuple
+         and all(study_owner._pin(value) for value in (*settlement.component_event_sha256s, *settlement.other_event_sha256s))
+         and tuple(sorted(set(settlement.other_event_sha256s))) == settlement.other_event_sha256s,
+         "ordered original per-arm evaluation settlement required")
+    root = settlement.evaluation_close_event_sha256
+    components, other = settlement.component_event_sha256s, settlement.other_event_sha256s
+    if root is None:
+        need(not components and not other and settlement.gate_report is None
+             and ((settlement.no_dispatch_receipt_sha256 is None) if native["candidate"] is None
+                  else study_owner._pin(settlement.no_dispatch_receipt_sha256)),
+             "an unavailable arm cannot carry findings or unclosed evaluation work")
+        status = "checkpoint_unavailable" if native["candidate"] is None else "evaluation_not_started"
+        return status, None, (), {}
+    event_ids = (root, *components, *other)
+    need(native["candidate"] is not None and settlement.no_dispatch_receipt_sha256 is None
+         and study_owner._pin(root) and len(set(event_ids)) == len(event_ids)
+         and set(event_ids) <= events.keys() and events[root].kind == "closeout"
+         and all(events[key].kind == "evaluation" for key in components)
+         and (settlement.gate_report is None
+              or (type(settlement.gate_report) is dict and events[root].disposition == "complete")),
+         "paid evaluation needs its distinct original activity and component terminal events")
+    status = "reviewed" if settlement.gate_report is not None else "paid_review_unavailable"
+    return status, events[root], tuple(events[key] for key in components), {key: events[key] for key in event_ids}
+
+
+def read_temporal_paid_development(study_owner, trial_owner, validator, *, study, round_data,
+        expected_round_sha256, verify_original_cost_owner, selection, expected_selection_sha256,
+        verify_registered_development, settlements, evaluation_events, expected_paid_cut_sha256,
+        verify_assessment_owner, verify_evaluation_cost_owner):
+    """Bind one registered DEVELOPMENT look while preserving the original training ledger.
+
+    The registered design precedes dispatch. The independent assessment owner
+    authenticates the original finding records. The evaluation resource owner
+    authenticates exclusive work and availability after the training closes.
+    """
+    from fractions import Fraction
+    from types import SimpleNamespace
+
+    def current():
+        need(temporal_development_cut_commitment(study_owner, selection) == expected_selection_sha256
+             and temporal_paid_round_commitment(study_owner, trial_owner, study, round_data) == expected_round_sha256
+             and temporal_development_paid_commitment(study_owner, selection_sha256=expected_selection_sha256,
+                    round_sha256=expected_round_sha256, settlements=settlements, events=evaluation_events)
+                    == expected_paid_cut_sha256,
+             "selected temporal DEVELOPMENT, training or evaluation evidence changed")
+
+    need(all(study_owner._pin(value) for value in (expected_selection_sha256, expected_round_sha256,
+             expected_paid_cut_sha256))
+         and all(callable(verify) for verify in (verify_registered_development, verify_assessment_owner,
+                                                 verify_evaluation_cost_owner)),
+         "independent registered, assessment and evaluation resource owners required")
+    current()
+    paid_round = read_temporal_paid_round(study_owner, trial_owner, validator, study=study, round_data=round_data,
+        expected_round_sha256=expected_round_sha256, verify_original_cost_owner=verify_original_cost_owner)
+    current()
+    policies = round_data.policy_attempts
+    seed, = study.seeds
+    need(type(selection.look) is str and selection.look != "final" and study.schedule == (selection.look,)
+         and type(study.required_streak) is int and study.required_streak == 1
+         and selection.study_sha256 == study_owner.commitment(study)
+         and selection.matched_attempts_sha256 == paid_round["matched_attempts_sha256"]
+         and all(study_owner._pin(value) for value in (selection.development_split_sha256,
+                                                     selection.optimizer_step_grid_sha256))
+         and type(selection.optimizer_steps) is int and selection.optimizer_steps == policies[0].initial_optimizer_steps + 1
+         and type(selection.fidelity_eligible) is tuple and bool(selection.fidelity_eligible)
+         and all(type(row) is str for row in selection.fidelity_eligible)
+         and selection.fidelity_eligible == tuple(row for row, _, _ in study.panel if row in selection.fidelity_eligible)
+         and len(selection.fidelity_eligible) == seed.gate_denominators[validator.GATES.index("source_fidelity")]
+         and type(settlements) is tuple and len(settlements) == 2,
+         "original single DEVELOPMENT look, prepared gate roster and complete matched temporal pair required")
+    need(verify_registered_development(expected_selection_sha256, expected_round_sha256) is True,
+         "original study owner refused the prospectively registered DEVELOPMENT cut")
+    current()
+
+    evaluation = study_owner._event_roster(evaluation_events)
+    training = study_owner._event_roster(round_data.cost_evidence.events)
+    physical = dict(sorted((training | evaluation).items()))
+    physical_closes = {event.close_receipt_sha256 for event in physical.values()}
+    native_closes = {join[index] for join in paid_round["paid_attempt_joins"] for index in (3, 4)}
+    need(len(physical) == len(training) + len(evaluation) == len(physical_closes)
+         and set(physical).isdisjoint(physical_closes)
+         and native_closes.isdisjoint(evaluation.keys() | {event.close_receipt_sha256 for event in evaluation.values()}),
+         "DEVELOPMENT must not recharge an original training or already paid evaluation event or close")
+    rows, values, cost_joins, component_joins, missing_activity, used = [], [], [], [], [], set()
+    thresholds = dict(zip(validator.GATES, study.gates, strict=True))
+    for policy, paid, outcome, settlement, (_, original_charges) in zip(
+            policies, round_data.paid_attempts, paid_round["native_terminal_readbacks"], settlements,
+            round_data.cost_evidence.observations, strict=True):
+        status, eval_close, components, scoped = _temporal_development_settlement(
+            study_owner, settlement, outcome, evaluation)
+        need(used.isdisjoint(scoped), "DEVELOPMENT paid work cannot be charged to two arms")
+        used.update(scoped)
+        if settlement.no_dispatch_receipt_sha256 is not None:
+            missing_activity.append(settlement.no_dispatch_receipt_sha256)
+        charges = dict(original_charges.entries) | dict.fromkeys(scoped, Fraction(1))
+        arm_cost = validator.Costs(None, *(study_owner._charged_seconds(physical, charges, field)
+                                           for field in ("cpu_ns", "gpu_ns")))
+        row = {"arm": policy.arm, "attempt_sha256": policy.attempt_sha256, "assessment_status": status,
+               "checkpoint_sha256": None if outcome["candidate"] is None else outcome["candidate"]["sha256"],
+               "evaluation_report_sha256": None,
+               "evaluation_close_sha256": None if eval_close is None else eval_close.close_receipt_sha256,
+               "evaluation_close_disposition": None if eval_close is None else eval_close.disposition,
+               "observed_allocated_work": asdict(arm_cost), "threshold_confirmed_at_this_cut": None,
+               "gate_decisions": None}
+        report, logical_component_joins = settlement.gate_report, ()
+        if report is None:
+            values.append((None,) * len(selection.fidelity_eligible))
+        else:
+            fidelity, gates, logical_component_joins = _temporal_development_report(
+                study_owner, validator, selection, study, seed, policy, outcome, report, components)
+            component_joins.extend(logical_component_joins)
+            report_sha = pin(report)
+            need(verify_assessment_owner(expected_selection_sha256, policy.attempt_sha256, report_sha,
+                                         tuple(join[0] for join in logical_component_joins)) is True,
+                 "independent assessor refused the original DEVELOPMENT review")
+            current()
+            decision = validator.evaluate_threshold(schedule=study.schedule, thresholds=thresholds, required_streak=1,
+                observed=(validator.Look(selection.look, gates, arm_cost),), closeout=validator.Closeout("complete", arm_cost))
+            gate_decisions = decision.looks[0][1]
+            flags = {gate.status for gate in gate_decisions}
+            row.update(evaluation_report_sha256=report_sha,
+                       threshold_confirmed_at_this_cut=(True if flags == {"pass"} else False if "fail" in flags else None),
+                       gate_decisions=study_owner._wire(gate_decisions))
+            values.append(fidelity)
+        rows.append(row)
+        cost_joins.append((policy.attempt_sha256, paid.closeout_receipt_sha256, row["evaluation_close_sha256"],
+                           settlement.no_dispatch_receipt_sha256, tuple(scoped), logical_component_joins))
+    logical_closes = {logical for logical, _ in component_joins}
+    need(used == evaluation.keys() and len(set(missing_activity)) == len(missing_activity)
+         and set(missing_activity).isdisjoint(physical.keys() | physical_closes | logical_closes | native_closes)
+         and native_closes.isdisjoint(logical_closes)
+         and len(logical_closes) == len(component_joins)
+         and all(logical == paid or logical not in physical_closes | physical.keys() for logical, paid in component_joins),
+         "every original evaluation event, component close or no-dispatch receipt requires one exact arm")
+    need(verify_evaluation_cost_owner(expected_paid_cut_sha256, expected_round_sha256, tuple(cost_joins)) is True,
+         "evaluation resource owner refused the exact DEVELOPMENT paid joins or activity ordering")
+    current()
+    pair = SimpleNamespace(panel=study.panel, fidelity_eligible=selection.fidelity_eligible)
+    fidelity = study_owner._paired_group_bounds(pair, (seed.identifier,), values)
+    return {"schema": TEMPORAL_DEVELOPMENT_CUT, "paid_cut_sha256": expected_paid_cut_sha256,
+            "selection_sha256": expected_selection_sha256, "round_sha256": expected_round_sha256,
+            "matched_attempts_sha256": selection.matched_attempts_sha256,
+            "starting_parent_sha256": policies[0].parent_manifest_sha256,
+            "starting_optimizer_steps": policies[0].initial_optimizer_steps, "registered_look": selection.look,
+            "decision_scope": "separate_matched_DEVELOPMENT_endpoint_at_one_common_start",
+            "arm_results": tuple(rows), "grouped_fidelity": fidelity,
+            "original_training_physical_work_ns": paid_round["physical_work_ns"],
+            "evaluation_physical_work_ns": study_owner._physical_work_ns(evaluation),
+            "physical_work_ns": study_owner._physical_work_ns(physical),
+            "evaluation_cost_joins": tuple(cost_joins),
+            "new_evaluation_paid_events": tuple(asdict(event) for event in evaluation.values()),
+            "whole_elapsed_wall": None, "convergence_established": False, "FINAL_selected": False,
+            "dispatch_authority": False}
+
+
+TEMPORAL_DEVELOPMENT_WALL = "reviewed-temporal-development-review-availability-wall/v1"
+
+
+@dataclass(frozen=True)
+class TemporalDevelopmentReviewWall:
+    """One original evaluation span and observation of review availability."""
+
+    attempt_sha256: str
+    training_wall_receipt_sha256: str | None
+    evaluation_close_sha256: str
+    evaluation_wall: object
+    review_report_sha256: str
+    review_available_ns: int
+    review_availability_receipt_sha256: str
+
+
+def temporal_development_review_walls_commitment(study_owner, paid_cut_sha256, walls, paired_wall=None):
+    need(study_owner._pin(paid_cut_sha256)
+         and type(walls) is tuple and all(type(row) is TemporalDevelopmentReviewWall for row in walls)
+         and (paired_wall is None or type(paired_wall) is study_owner.WallSpan),
+         "exact optional original review wall roster required")
+    return study_owner.commitment((TEMPORAL_DEVELOPMENT_WALL, paid_cut_sha256, walls, paired_wall))
+
+
+def _read_temporal_review_wall(study_owner, witness, endpoint_arm, interval, seen):
+    need(endpoint_arm["assessment_status"] == "reviewed"
+         and (witness.attempt_sha256, witness.evaluation_close_sha256, witness.review_report_sha256)
+             == (endpoint_arm["attempt_sha256"], endpoint_arm["evaluation_close_sha256"],
+                 endpoint_arm["evaluation_report_sha256"])
+         and type(witness.evaluation_wall) is study_owner.WallSpan
+         and study_owner._pin(witness.review_availability_receipt_sha256),
+         "original evaluation wall must close the exact reviewed DEVELOPMENT activity")
+    evaluation = study_owner._t5_fusion_certification_span(witness.evaluation_wall)
+    trained = interval.wall
+    need(witness.training_wall_receipt_sha256 == (None if trained is None else trained.receipt_sha256),
+         "review wall cannot substitute the original training wall receipt")
+    new_receipts = {evaluation.receipt_sha256, witness.review_availability_receipt_sha256}
+    need(len(new_receipts) == 2 and seen.isdisjoint(new_receipts),
+         "review availability and evaluation wall need distinct original receipts")
+    seen.update(new_receipts)
+    available = witness.review_available_ns
+    need(type(available) is int and evaluation.start_ns <= available,
+         "first review availability cannot precede its authenticated evaluation start")
+
+    elapsed = None
+    if trained is None:
+        status = "training_wall_unavailable"
+    elif trained.clock_domain_sha256 != evaluation.clock_domain_sha256:
+        status = "incomparable_clock_domains"
+    else:
+        need(trained.end_ns <= evaluation.start_ns,
+             "same-clock DEVELOPMENT observation cannot start before the original training close")
+        status, elapsed = "authenticated_common_clock", available - trained.start_ns
+    return {"attempt_sha256": witness.attempt_sha256, "status": status,
+            "training_start_to_review_available_ns": elapsed,
+            "evaluation_start_to_review_available_ns": available - evaluation.start_ns,
+            "evaluation_activity_elapsed_ns": evaluation.end_ns - evaluation.start_ns,
+            "training_wall": None if trained is None else asdict(trained),
+            "evaluation_wall": asdict(evaluation), "review_available_ns": available,
+            "review_availability_receipt_sha256": witness.review_availability_receipt_sha256,
+            "review_report_sha256": witness.review_report_sha256}
+
+
+def read_temporal_paid_development_with_wall(study_owner, trial_owner, validator, *,
+        walls, expected_walls_sha256, verify_review_clock_owner, paired_wall=None, **endpoint_arguments):
+    """Read the original work and optional elapsed time through review availability.
+
+    The independent clock owner authenticates the offered original spans,
+    receipt domains and the timestamp when all findings for the exact report
+    were first available in the evaluation clock domain.
+    Durations cover the selected training-arm origin through review availability.
+    """
+    study, original = endpoint_arguments["study"], endpoint_arguments["round_data"]
+    cut = endpoint_arguments["expected_paid_cut_sha256"]
+    selection = endpoint_arguments["selection"]
+
+    def current():
+        need(temporal_development_review_walls_commitment(study_owner, cut, walls, paired_wall) == expected_walls_sha256
+             and temporal_development_cut_commitment(study_owner, selection)
+                    == endpoint_arguments["expected_selection_sha256"]
+             and temporal_paid_round_commitment(study_owner, trial_owner, study, original)
+                    == endpoint_arguments["expected_round_sha256"]
+             and temporal_development_paid_commitment(study_owner,
+                    selection_sha256=endpoint_arguments["expected_selection_sha256"],
+                    round_sha256=endpoint_arguments["expected_round_sha256"], settlements=endpoint_arguments["settlements"],
+                    events=endpoint_arguments["evaluation_events"]) == cut,
+             "selected review wall or original paid endpoint changed")
+
+    need(study_owner._pin(expected_walls_sha256)
+         and ((not walls and paired_wall is None) or callable(verify_review_clock_owner)),
+         "independently selected original review availability records required")
+    current()
+    endpoint = read_temporal_paid_development(study_owner, trial_owner, validator, **endpoint_arguments)
+    current()
+
+    roster = {row["attempt_sha256"]: row for row in endpoint["arm_results"]}
+    order = tuple(witness.attempt_sha256 for witness in walls)
+    need(all(study_owner._pin(value) for value in order) and len(order) == len(set(order))
+         and order == tuple(attempt for attempt in roster if attempt in order),
+         "one reviewed wall per original attempt in registered order required")
+    original_events = (*original.cost_evidence.events, *endpoint_arguments["evaluation_events"])
+    pinned_receipts = {value for event in original_events
+                       for value in (event.event_sha256, event.close_receipt_sha256)}
+    pinned_receipts.update((cut, selection.study_sha256, endpoint["selection_sha256"], endpoint["round_sha256"]))
+    for report, paid, (interval, _) in zip(original.terminal_readbacks, original.paid_attempts,
+                                           original.cost_evidence.observations, strict=True):
+        pinned_receipts.update(value for value in (
+            report["attempt_sha256"], report["terminal_close_sha256"], report["owner_execution_record_sha256"],
+            paid.closing_meter.record_sha256, paid.closing_meter.interval_manifest_sha256,
+            paid.closing_meter.charge_manifest_sha256, interval.scope_receipt_sha256, *paid.closing_meter.clock_receipts)
+            if value is not None)
+    for row, join in zip(endpoint["arm_results"], endpoint["evaluation_cost_joins"], strict=True):
+        pinned_receipts.update(value for value in (row["evaluation_report_sha256"], join[3]) if value is not None)
+        pinned_receipts.update(logical for logical, _ in join[-1])
+    for settlement in endpoint_arguments["settlements"]:
+        report = settlement.gate_report
+        if report is not None:
+            pinned_receipts.add(report["review_sha256"])
+            for component in report["component_closes"]:
+                pinned_receipts.update(component.values())
+    by_attempt = {interval.attempt_sha256: interval for interval, _ in original.cost_evidence.observations}
+
+    measured = {}
+    for witness in walls:
+        attempt = witness.attempt_sha256
+        measured[attempt] = _read_temporal_review_wall(study_owner, witness, roster[attempt],
+                                                       by_attempt[attempt], pinned_receipts)
+    paired_span = None
+    if paired_wall is not None:
+        paired = study_owner._t5_fusion_certification_span(paired_wall)
+        observed = tuple(measured.values())
+        need(len(observed) == len(roster)
+             and all(item["status"] == "authenticated_common_clock"
+                     and item["training_wall"]["clock_domain_sha256"] == paired.clock_domain_sha256 for item in observed)
+             and paired.start_ns == min(item["training_wall"]["start_ns"] for item in observed)
+             and paired.end_ns == max(item["review_available_ns"] for item in observed)
+             and paired.receipt_sha256 not in pinned_receipts,
+             "paired elapsed requires an independent original span from the earliest arm start to both reviews")
+        paired_span = asdict(paired)
+    clock_joins = tuple((witness.attempt_sha256, study_owner.commitment(by_attempt[witness.attempt_sha256]),
+        witness.training_wall_receipt_sha256, witness.evaluation_close_sha256, asdict(witness.evaluation_wall),
+        witness.review_report_sha256, witness.review_available_ns, witness.review_availability_receipt_sha256)
+        for witness in walls)
+    if walls:
+        need(verify_review_clock_owner(expected_walls_sha256, cut, clock_joins,
+                                      None if paired_span is None else dict(paired_span)) is True,
+             "clock owner refused the original review spans or availability records")
+        current()
+
+    results = []
+    horizon = study.horizons[validator.CLOCKS.index("wall_seconds")]
+    for arm in endpoint["arm_results"]:
+        elapsed = measured.get(arm["attempt_sha256"])
+        duration = None if elapsed is None else elapsed["training_start_to_review_available_ns"]
+        confirmed_ns = duration if arm["threshold_confirmed_at_this_cut"] is True else None
+        results.append({"arm": arm["arm"], "attempt_sha256": arm["attempt_sha256"],
+                        "review_clock_status": elapsed["status"] if elapsed else "review_wall_unavailable",
+                        "original_review_clock": elapsed,
+                        "wall_ns_at_confirmed_development_cut": confirmed_ns,
+                        "confirmed_within_declared_wall_horizon":
+                             None if confirmed_ns is None or horizon is None else confirmed_ns / 1_000_000_000 <= horizon})
+    return {"schema": TEMPORAL_DEVELOPMENT_WALL, "review_walls_sha256": expected_walls_sha256,
+            "paid_development": endpoint, "arm_review_clocks": tuple(results),
+            "paired_review_wall": paired_span,
+            "earliest_arm_start_to_both_reviews_available_ns":
+                 None if paired_span is None else paired_span["end_ns"] - paired_span["start_ns"],
+            "clock_coverage": "registered_arm_starts_through_first_available_development_reviews",
+            "whole_study_elapsed_wall": None, "convergence_established": False,
+            "FINAL_selected": False, "dispatch_authority": False}
+
+
+TEMPORAL_ASSESSED_CONTINUATION = "reviewed-temporal-policy-assessed-continuation/v1"
+
+
+@dataclass(frozen=True)
+class TemporalAssessedRound:
+    training: TemporalPaidRound
+    registered_cut: TemporalDevelopmentCut
+    evaluation_settlements: tuple
+    evaluation_events: tuple
+    review_walls: tuple = ()
+    paired_review_wall: object = None
+
+
+@dataclass(frozen=True)
+class TemporalAssessedRoundOwners:
+    training_cost: object
+    registration: object
+    assessment: object
+    evaluation_cost: object
+    review_clock: object = None
+
+
+def _temporal_assessed_round_pins(study_owner, trial_owner, study, round_data):
+    need(type(round_data) is TemporalAssessedRound, "typed assessed temporal round required")
+    training = temporal_paid_round_commitment(study_owner, trial_owner, study, round_data.training)
+    selection = temporal_development_cut_commitment(study_owner, round_data.registered_cut)
+    paid = temporal_development_paid_commitment(study_owner, selection_sha256=selection, round_sha256=training,
+                 settlements=round_data.evaluation_settlements, events=round_data.evaluation_events)
+    return (training, selection, paid,
+            temporal_development_review_walls_commitment(study_owner, paid, round_data.review_walls,
+                                                          round_data.paired_review_wall))
+
+
+def _temporal_assessed_continuation_pin(study_owner, parent, cuts):
+    return study_owner.commitment((TEMPORAL_ASSESSED_CONTINUATION, parent, cuts))
+
+
+def temporal_assessed_continuation_commitment(study_owner, trial_owner, *, study, parent_projection_sha256, rounds):
+    need(type(rounds) is tuple and len(rounds) == 2 and study_owner._pin(parent_projection_sha256),
+         "exact parent projection and two assessed temporal rounds required")
+    pins = tuple(_temporal_assessed_round_pins(study_owner, trial_owner, study, row) for row in rounds)
+    return _temporal_assessed_continuation_pin(study_owner, parent_projection_sha256, pins)
+
+
+def _temporal_verify_training_once(verify):
+    checked = None
+
+    def original_owner(cut, joins):
+        nonlocal checked
+        offered = (cut, joins)
+        if checked is None and verify(cut, joins) is True:
+            checked = offered
+        return checked == offered
+
+    return original_owner
+
+
+def _temporal_round_receipts(round_data, report, training):
+    """Collect physical and per-run receipt identities without including shared policy or input references."""
+    endpoint = report["paid_development"]
+    receipts = {value for row in (*training["physical_paid_events"], *endpoint["new_evaluation_paid_events"])
+                for value in (row["event_sha256"], row["close_receipt_sha256"])}
+    for join in training["paid_attempt_joins"]:
+        receipts.update(join[index] for index in (0, 1, 2, 3, 4, 6))
+    for native in training["native_terminal_readbacks"]:
+        receipts.update(native[key] for key in ("worker_receipt_sha256", "outcome_sha256") if key in native)
+    for paid, (interval, _) in zip(round_data.training.paid_attempts,
+                                   round_data.training.cost_evidence.observations, strict=True):
+        meter = paid.closing_meter
+        receipts.update(value for value in (meter.record_sha256, meter.interval_manifest_sha256,
+            meter.charge_manifest_sha256, interval.scope_receipt_sha256, *meter.clock_receipts) if value is not None)
+    for row, settlement, result in zip(endpoint["arm_results"], round_data.evaluation_settlements,
+                                       report["arm_review_clocks"], strict=True):
+        receipts.update(value for value in (row["evaluation_report_sha256"], settlement.no_dispatch_receipt_sha256)
+                        if value is not None)
+        gate = settlement.gate_report
+        if gate is not None:
+            receipts.add(gate["review_sha256"])
+            for component in gate["component_closes"]:
+                receipts.update(component.values())
+        wall = result["original_review_clock"]
+        if wall is not None:
+            receipts.update((wall["evaluation_wall"]["receipt_sha256"], wall["review_availability_receipt_sha256"]))
+    pair = report["paired_review_wall"]
+    if pair is not None:
+        receipts.add(pair["receipt_sha256"])
+    return receipts
+
+
+TEMPORAL_ASSESSED_WALL = "reviewed-temporal-assessed-continuation-enclosing-wall/v1"
+
+
+@dataclass(frozen=True)
+class TemporalPaidEventWindow:
+    event_sha256: str
+    close_receipt_sha256: str
+    span: object
+
+
+@dataclass(frozen=True)
+class TemporalAssessedWall:
+    span: object
+    opening_receipt_sha256: str
+    terminal_evidence_receipt_sha256: str
+    paid_windows: tuple
+
+
+def temporal_assessed_wall_commitment(study_owner, assessed_continuation_sha256, witness):
+    need(study_owner._pin(assessed_continuation_sha256) and type(witness) is TemporalAssessedWall
+         and type(witness.span) is study_owner.WallSpan
+         and type(witness.paid_windows) is tuple and bool(witness.paid_windows)
+         and all(type(row) is TemporalPaidEventWindow and type(row.span) is study_owner.WallSpan
+                 and study_owner._pin(row.event_sha256) and study_owner._pin(row.close_receipt_sha256)
+                 for row in witness.paid_windows)
+         and study_owner._pin(witness.opening_receipt_sha256)
+         and study_owner._pin(witness.terminal_evidence_receipt_sha256),
+         "exact typed enclosing wall, endpoints and original paid event windows required")
+    return study_owner.commitment((TEMPORAL_ASSESSED_WALL, assessed_continuation_sha256, witness))
+
+
+def _temporal_assessed_enclosing_wall(study_owner, *, original, rounds, assessed, physical, reserved,
+                                      witness, expected, approve):
+    span = study_owner._t5_fusion_certification_span(witness.span)
+    evidence = [span.receipt_sha256, witness.opening_receipt_sha256, witness.terminal_evidence_receipt_sha256]
+    need(span.start_ns < span.end_ns
+         and tuple(row.event_sha256 for row in witness.paid_windows) == tuple(physical),
+         "enclosing wall must bind every original paid event in its canonical order")
+
+    def enclosed(window):
+        window = study_owner._t5_fusion_certification_span(window)
+        need(window.clock_domain_sha256 == span.clock_domain_sha256
+             and span.start_ns <= window.start_ns <= window.end_ns <= span.end_ns,
+             "enclosing wall must cover all original activity windows in one clock domain")
+        return window
+
+    paid = []
+    for row in witness.paid_windows:
+        need(row.close_receipt_sha256 == physical[row.event_sha256].close_receipt_sha256,
+             "enclosing wall must bind the exact original paid event close")
+        window = enclosed(row.span)
+        evidence.append(window.receipt_sha256)
+        paid.append((row.event_sha256, row.close_receipt_sha256, asdict(window)))
+    need(len(set(evidence)) == len(evidence) and reserved.isdisjoint(evidence),
+         "enclosing wall and per-event times require distinct original clock receipts")
+
+    arms, reviews = [], []
+    for scope, cut in zip(rounds, assessed, strict=True):
+        paid_cut = cut["paid_development"]
+        for (interval, _), result, observed in zip(scope.training.cost_evidence.observations,
+                paid_cut["arm_results"], cut["arm_review_clocks"], strict=True):
+            attempt = result["attempt_sha256"]
+            need(interval.attempt_sha256 == observed["attempt_sha256"] == attempt
+                 and type(interval.wall) is study_owner.WallSpan,
+                 "enclosing wall requires the original training close span for every attempt")
+            window = enclosed(interval.wall)
+            arms.append((paid_cut["paid_cut_sha256"], attempt, asdict(window), result["assessment_status"]))
+            if result["assessment_status"] == "reviewed":
+                clock = observed["original_review_clock"]
+                need(type(clock) is dict and clock["status"] == "authenticated_common_clock",
+                     "enclosing wall requires original review availability for every reviewed attempt")
+                evaluation = enclosed(clock["evaluation_wall"])
+                need(evaluation.start_ns <= clock["review_available_ns"] <= span.end_ns,
+                     "enclosing wall must cover original review availability")
+                reviews.append((attempt, clock["review_report_sha256"], clock["review_available_ns"],
+                                clock["review_availability_receipt_sha256"], asdict(evaluation)))
+
+    paid_pin = study_owner.commitment(tuple(paid))
+    evidence_pin = study_owner.commitment((tuple(arms), tuple(reviews)))
+    need(approve(expected, original, paid_pin, evidence_pin) is True,
+         "original elapsed clock owner refused opening, terminal evidence or activity windows")
+    return {"schema": TEMPORAL_ASSESSED_WALL, "selection_sha256": expected,
+            "clock_domain_sha256": span.clock_domain_sha256, "receipt_sha256": span.receipt_sha256,
+            "start_ns": span.start_ns, "end_ns": span.end_ns, "elapsed_ns": span.end_ns - span.start_ns,
+            "opening_receipt_sha256": witness.opening_receipt_sha256,
+            "terminal_evidence_receipt_sha256": witness.terminal_evidence_receipt_sha256,
+            "paid_windows_sha256": paid_pin, "arm_and_review_windows_sha256": evidence_pin,
+            "covered_paid_events": len(paid), "covered_reviews": len(reviews),
+            "scope": "owned_continuation_start_through_last_authenticated_development_evidence"}
+
+
+def read_temporal_assessed_continuation(study_owner, trial_owner, validator, *, study, parent_projection_raw,
+        expected_parent_projection_sha256, rounds, expected_assessed_continuation_sha256, owners,
+        verify_original_continuation, verify_assessed_history_owner,
+        whole_wall=None, expected_whole_wall_sha256=None, verify_whole_wall_owner=None):
+    """Read two DEVELOPMENT cuts and all unique paid work under one continued checkpoint lineage.
+
+    Each round retains a separate conditional comparison at its own common
+    start. The first review may finish during the continued round. It supplies
+    no elapsed time for the other round and no cross-round training trajectory.
+    An optional original enclosing wall reports elapsed time for the whole history.
+    """
+    need(type(rounds) is type(owners) is tuple and len(rounds) == len(owners) == 2
+         and all(type(row) is TemporalAssessedRound for row in rounds)
+         and all(type(row) is TemporalAssessedRoundOwners
+                 and all(callable(check) for check in (row.training_cost, row.registration,
+                                                        row.assessment, row.evaluation_cost)) for row in owners)
+         and all(study_owner._pin(value) for value in (expected_parent_projection_sha256,
+                                                        expected_assessed_continuation_sha256))
+         and callable(verify_original_continuation) and callable(verify_assessed_history_owner),
+         "two independently selected assessment and resource scopes required")
+    need((whole_wall is None and expected_whole_wall_sha256 is None and verify_whole_wall_owner is None)
+         or (type(whole_wall) is TemporalAssessedWall and study_owner._pin(expected_whole_wall_sha256)
+             and callable(verify_whole_wall_owner)),
+         "enclosing elapsed requires an exact selected wall and independent clock owner")
+
+    def current():
+        if whole_wall is not None:
+            need(temporal_assessed_wall_commitment(study_owner, expected_assessed_continuation_sha256,
+                 whole_wall) == expected_whole_wall_sha256,
+                 "selected original enclosing wall changed")
+        need(type(parent_projection_raw) is bytes and 0 < len(parent_projection_raw) <= 2 * 1024**2
+             and hash_bytes(parent_projection_raw) == expected_parent_projection_sha256
+             and temporal_assessed_continuation_commitment(study_owner, trial_owner, study=study,
+                    parent_projection_sha256=expected_parent_projection_sha256, rounds=rounds)
+                    == expected_assessed_continuation_sha256,
+             "selected assessed continuation or original paid records changed")
+
+    current()
+    pins = tuple(_temporal_assessed_round_pins(study_owner, trial_owner, study, row) for row in rounds)
+    first, later = (scope.registered_cut for scope in rounds)
+    need((first.development_split_sha256, first.fidelity_eligible, first.look)
+             == (later.development_split_sha256, later.fidelity_eligible, later.look)
+         and first.optimizer_step_grid_sha256 != later.optimizer_step_grid_sha256
+         and type(first.optimizer_steps) is type(later.optimizer_steps) is int
+         and later.optimizer_steps == first.optimizer_steps + 1,
+         "assessed continuation requires one original DEVELOPMENT panel and distinct consecutive registered steps")
+    training_owners = tuple(_temporal_verify_training_once(owner.training_cost) for owner in owners)
+    training_pin = temporal_continued_cost_commitment(study_owner,
+        parent_projection_sha256=expected_parent_projection_sha256, first_round_sha256=pins[0][0],
+        continued_round_sha256=pins[1][0])
+    training = read_temporal_continued_cost(study_owner, trial_owner, validator, study=study,
+        first=rounds[0].training, continued=rounds[1].training, parent_projection_raw=parent_projection_raw,
+        expected_parent_projection_sha256=expected_parent_projection_sha256, expected_first_round_sha256=pins[0][0],
+        expected_continued_round_sha256=pins[1][0], expected_continued_cost_sha256=training_pin,
+        verify_original_cost_owners=training_owners, verify_original_continuation=verify_original_continuation)
+    current()
+
+    assessed = []
+    for scope, checks, verify_training, (round_pin, selection_pin, paid_pin, wall_pin) in zip(
+            rounds, owners, training_owners, pins, strict=True):
+        assessed.append(read_temporal_paid_development_with_wall(study_owner, trial_owner, validator,
+            study=study, round_data=scope.training, expected_round_sha256=round_pin,
+            verify_original_cost_owner=verify_training, selection=scope.registered_cut,
+            expected_selection_sha256=selection_pin, verify_registered_development=checks.registration,
+            settlements=scope.evaluation_settlements, evaluation_events=scope.evaluation_events,
+            expected_paid_cut_sha256=paid_pin, verify_assessment_owner=checks.assessment,
+            verify_evaluation_cost_owner=checks.evaluation_cost, walls=scope.review_walls, expected_walls_sha256=wall_pin,
+            verify_review_clock_owner=checks.review_clock, paired_wall=scope.paired_review_wall))
+        current()
+    receipt_sets = tuple(_temporal_round_receipts(scope, assessment, native)
+                         for scope, assessment, native in zip(rounds, assessed, training["rounds"], strict=True))
+    need(receipt_sets[0].isdisjoint(receipt_sets[1]),
+         "an assessed continuation cannot reuse a prior physical, native, assessment, or timing receipt")
+    training_events = study_owner._event_roster(tuple(study_owner.PaidEvent(**row) for row in training["physical_paid_events"]))
+    original_evaluations = tuple(event for scope in rounds for event in scope.evaluation_events)
+    evaluation_events = study_owner._event_roster(tuple(sorted(original_evaluations, key=lambda event: event.event_sha256)))
+    need(training_events.keys().isdisjoint(evaluation_events),
+         "original cost work cannot be repaid as assessment")
+    physical = dict(sorted((training_events | evaluation_events).items()))
+    event_ids = tuple(physical)
+    joins = tuple((cut["paid_development"]["paid_cut_sha256"], cut["review_walls_sha256"]) for cut in assessed)
+    need(verify_assessed_history_owner(expected_assessed_continuation_sha256, expected_parent_projection_sha256,
+                 training_pin, joins, event_ids) is True,
+         "original history owner refused the assessed continuation or paid cost union")
+    current()
+    elapsed = None
+    if whole_wall is not None:
+        selected_pins = {expected_assessed_continuation_sha256, expected_parent_projection_sha256, training_pin,
+                         *(value for pin_row in pins for value in pin_row)}
+        elapsed = _temporal_assessed_enclosing_wall(
+            study_owner, original=expected_assessed_continuation_sha256, rounds=rounds, assessed=assessed,
+            physical=physical, reserved=selected_pins | receipt_sets[0] | receipt_sets[1],
+            witness=whole_wall, expected=expected_whole_wall_sha256, approve=verify_whole_wall_owner)
+        current()
+    return {"schema": TEMPORAL_ASSESSED_CONTINUATION, "assessed_continuation_sha256": expected_assessed_continuation_sha256,
+            "parent_projection_sha256": expected_parent_projection_sha256, "training_history_sha256": training_pin,
+            "selected_shared_parent_checkpoint_sha256": training["parent_candidate_sha256"],
+            "round_results": tuple(assessed), "paid_event_count": len(physical),
+            "physical_paid_events": tuple(asdict(event) for event in physical.values()),
+            "original_training_physical_work_ns": training["physical_work_ns"],
+            "evaluation_physical_work_ns": study_owner._physical_work_ns(evaluation_events),
+            "physical_work_ns": study_owner._physical_work_ns(physical),
+            "comparison_scope": "separate_DEVELOPMENT_cuts_each_with_a_common_start",
+            "whole_study_elapsed_wall": elapsed, "cost_to_heldout_threshold_established": False,
+            "convergence_established": False, "FINAL_selected": False, "dispatch_authority": False}

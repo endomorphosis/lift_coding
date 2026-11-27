@@ -1,0 +1,163 @@
+--- /tmp/decoder-training-stage-a-a0-archive-handoff-private-v01-UMiyG7nf/verify_rebind_capture.py
++++ /tmp/decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI/verify_rebind_capture.py
+@@ -1785,3 +1785,160 @@
+ 
+ if __name__ == '__main__':
+     unittest.main()
++
++
++RELOCATED_SOURCE32_PREVIEW = 'private-stage-a-source32-relocated-all-fresh-preview/v1'
++
++
++def _relocation_digest(value):
++    return sha256(json.dumps(value, sort_keys=True, separators=(',', ':'),
++                             ensure_ascii=False, allow_nan=False).encode())
++
++
++def _relocated_path(value, prior_roots, roots):
++    path = Path(value)
++    require(path.is_absolute() and str(path) == value and '..' not in path.parts,
++            'Expected a normalized absolute Stage A path')
++    matches = [role for role, prior in prior_roots.items()
++               if path.is_relative_to(prior['root']) and path != Path(prior['root'])]
++    require(len(matches) == 1, 'Expected exactly one historical Stage A root')
++    role, = matches
++    return str(Path(roots[role]['root']) / path.relative_to(prior_roots[role]['root']))
++
++
++def preview_phase7_relocated_source32_inputs(plan, *, expected_plan_sha256, relocation_raw,
++        expected_relocation, retained_outer_raw, retained_python_raw, relocated_outer_raw,
++        guide_close_raw):
++    """Project the detached published candidate onto the existing all-fresh roster."""
++    plan = _verified_phase7_plan(plan, expected_plan_sha256)
++    require(plan['schema'] == PHASE7_GUIDE_SUCCESSOR_SCHEMA and plan['execution_selected'] is False,
++            'Only an inert historical guide plan may seed relocation')
++    proof = _pinned_phase7_json(relocation_raw, expected_relocation, 'relocation proof')
++    require(proof['schema'] == 'private-retained-stage-a-guide572-publication-reconciliation/v1'
++            and proof['dispatch_authority'] is False and proof['paired_selection'] is None,
++            'Expected the detached Guide572 publication proof')
++    close = _pinned_phase7_json(guide_close_raw, proof['Guide572_source_close'], 'Guide572 Source close')
++    require(close['terminal_returncode'] == 0 and close['Source_closed'] is True and
++            close['module_closed'] is True and close['only_four_Git_changes'] is True,
++            'The exact Guide572 writer closure is required')
++
++    prior_roots = plan['current_roots']
++    candidate = proof['current_published_candidate_protected_roots']
++    require(set(prior_roots) == set(candidate) == {'D', 'A'} and
++            (close['HEAD'], close['tree'], close['A']) ==
++            (candidate['D']['Git_HEAD'], candidate['D']['Git_tree'], candidate['A']['Git_HEAD']),
++            'Published D/A closure does not bind these roots')
++    roots = {role: dict(prior_roots[role], root=row['root'], HEAD=row['Git_HEAD'], tree=row['Git_tree'])
++             for role, row in candidate.items()}
++    require(all(Path(roots[role]['root']).is_absolute() and
++                str(Path(roots[role]['root'])) == roots[role]['root'] and
++                '..' not in Path(roots[role]['root']).parts and
++                roots[role]['root'] != prior_roots[role]['root'] for role in roots),
++            'Expected two distinct relocated roots')
++    index = close['index']
++    require(index == proof['Guide572_protected_D_expected_index'] and
++            index['path'] == _relocated_path(plan['current_index']['path'], prior_roots, roots),
++            'Published D index differs from the relocated writer observation')
++    base = plan['retained_base_index']
++    outer, _, _ = _retained_source32_rows(dict(plan, schema=V214_LOCAL_REBIND_SCHEMA), base,
++                                          retained_outer_raw, retained_python_raw)
++    observed_rows = _epoch_rows(relocated_outer_raw, proof['migrated_body_metadata_epoch'],
++                               1610, wrapped=False)
++    observed = {row['path']: row for row in observed_rows}
++    require(len(observed) == len(observed_rows) and index['path'] in observed and
++            close['A_index']['path'] == str(Path(roots['A']['root']) / '.git/index') and
++            observed.get(close['A_index']['path']) == close['A_index'],
++            'Expected exact relocated ordinary epoch and unchanged A writer index')
++    observed[index['path']] = index
++
++    retained, changed = [], []
++    for old in outer:
++        new = observed.get(_relocated_path(old['path'], prior_roots, roots))
++        require(new is not None and new['full9'] != old['full9'],
++                'Original retained row did not map to a new file observation')
++        validate_full9(new['full9'], new['bytes'])
++        retained.append(new)
++        if (new['bytes'], new['sha256']) != (old['bytes'], old['sha256']):
++            changed.append(dict(previous=old, relocated=new,
++                                index_role=new['path'] in (index['path'], close['A_index']['path'])))
++
++    roles = proof['protected_body_roles']
++    targets = []
++    require(len(roles) == len(plan['fresh_Source_body_targets']) == 32,
++            'Expected the exact protected Stage A roster')
++    for old, role in zip(plan['fresh_Source_body_targets'], roles, strict=True):
++        current = role['closed_ordinary_epoch']
++        path = _relocated_path(old['path'], prior_roots, roots)
++        relative = Path(path).relative_to(roots['D']['root']).as_posix()
++        require(role['protected_old'] == old and role['relative_path'] == relative and
++                current == observed.get(path) and
++                (old['bytes'], old['sha256']) == (current['bytes'], current['sha256']) and
++                role['Git'] == {'mode': '100644', 'oid': old['expected_Git_blob_oid'], 'stage': 0} and
++                old['expected_Git_mode'] == '100644',
++                'Relocated exact tracked body, order or stage-zero identity differs')
++        validate_full9(current['full9'], current['bytes'])
++        targets.append(dict(old, path=path, full9=current['full9']))
++
++    old_guides = plan['four_guide_post_candidates_for_current_owner_recheck']
++    guide_paths = [_relocated_path(row['path'], prior_roots, roots) for row in old_guides]
++    posts = {row['path']: row for row in close['committed_docs'].values()}
++    require(len(posts) == len(guide_paths) == 4 and set(posts) == set(guide_paths),
++            'Published writer guide roster differs')
++    guides = [{key: posts[path][key] for key in ('path', 'bytes', 'sha256', 'full9')} for path in guide_paths]
++    for guide in guides:
++        validate_full9(guide['full9'], guide['bytes'])
++    scope = deepcopy(plan['historical_origin_scope_recheck'])
++    for key in ('fresh_32_paths', 'retained_92_paths'):
++        scope[key] = [_relocated_path(path, prior_roots, roots) for path in scope[key]]
++    bound_paths = [row['path'] for row in retained + guides + targets]
++    target_paths = [row['path'] for row in targets]
++    shared = plan['phase7_shared_paths']
++    require(len(bound_paths) == len(set(bound_paths)) == 1254 and
++            len(scope['retained_92_paths']) == len(set(scope['retained_92_paths'])) == 92 and
++            set(scope['retained_92_paths']) <= {row['path'] for row in retained if row['path'].endswith('.py')} and
++            target_paths == scope['fresh_32_paths'] and len(shared) == len(set(shared)) == 20 and
++            set(shared) <= {row['path'] for row in plan['fresh_Source_body_targets']},
++            'Relocated current and historical path rosters differ')
++    inputs = dict(schema=RELOCATED_SOURCE32_PREVIEW, current_roots=roots, current_index=index,
++                  historical_origin_scope_recheck=scope, fresh_Source_body_targets=targets,
++                  four_guide_post_candidates_for_current_owner_recheck=guides)
++    return dict(schema=RELOCATED_SOURCE32_PREVIEW, reader_inputs=inputs, execution_selected=False,
++                relocated_retained_outer=retained, changed_retained_content=changed,
++                historical_plan_sha256=expected_plan_sha256, relocation_proof=expected_relocation,
++                historical_phase7={'capture_epoch': plan['phase7_capture_epoch'], 'paths': shared,
++                                   'request': plan['phase7_request'],
++                                   'receipt': plan['phase7_receipt']},
++                archive_historical_count=20, source_body_reads=32)
++
++
++def compose_phase7_relocated_source32_epochs(preview, *, expected_preview_sha256, endpoint_before,
++        endpoint_after, index_body, guide_observations, captures, verify_relocation_owner):
++    """Use the unchanged epoch composer with 32 current owner-supplied captures."""
++    require(preview.get('schema') == RELOCATED_SOURCE32_PREVIEW and
++            preview['execution_selected'] is False and preview['archive_historical_count'] == 20 and
++            preview['source_body_reads'] == 32 and
++            _relocation_digest(preview) == expected_preview_sha256,
++            'Expected the exact detached relocation preview')
++    plan = preview['reader_inputs']
++    index = plan['current_index']
++    require(type(index_body) is bytes and len(index_body) == index['bytes'] and sha256(index_body) == index['sha256'],
++            'Current protected index differs from the selected candidate')
++    validate_full9(index['full9'], len(index_body))
++    for endpoint in (endpoint_before, endpoint_after):
++        _verify_phase7_endpoint(plan, endpoint)
++    outer = preview['relocated_retained_outer']
++    python = [row for row in outer if row['path'].endswith('.py')]
++    existing = {row['path']: row for row in outer}
++    require(len(outer) == len(existing) == 1218 and len(python) == 1213 and existing.get(index['path']) == index,
++            'Exact relocated retained roster and D index are required')
++    result = deepcopy(_compose_source32_epochs(plan, index, (outer, python, existing), endpoint_before['full9'],
++                                               endpoint_after['full9'], guide_observations, captures))
++
++    def ownership_digest():
++        return _relocation_digest((preview, endpoint_before, endpoint_after, guide_observations,
++                                   [(capture, sha256(body)) for capture, body in captures]))
++
++    binding = ownership_digest()
++    require(verify_relocation_owner(binding) is True and ownership_digest() == binding,
++            'Independent owner closure for the exact unmodified input tuple is required')
++    return result

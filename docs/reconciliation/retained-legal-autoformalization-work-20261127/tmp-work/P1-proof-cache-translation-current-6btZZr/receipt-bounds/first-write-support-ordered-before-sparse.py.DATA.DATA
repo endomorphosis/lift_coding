@@ -1,0 +1,135 @@
+from pathlib import Path
+import sys,json
+W=Path(__file__).resolve().parent
+prior=W.parent/'phase8-metric-lineage'
+helper=prior/'freeze-metric-lineage.py'
+receipt_entry_file=__file__
+__file__=str(helper)
+exec(compile(helper.read_text().split('\nif __name__==')[0],str(helper),'exec'),globals())
+__file__=receipt_entry_file
+W=Path(__file__).resolve().parent
+BASE='254ba85016cb9dba03ac6aa96b8aa411aeeb465a'
+P=Path('/tmp/Main-board-stall-evidence-refresh-private-v01/owner-wait-consumer-integration-private-v01/Phase7-checked-receipt-owner-private-v01')
+PRIVATE=dict(path=str(P/'SEALED-private-existing-receipt-bounds-two-file-GREEN-v01.json'),
+    bytes=18741,sha256='3aecbf5629c3500baac63beffd701c8e50d02783e93d7cf93c50d702967ac6d9')
+SUPPORT='ipfs_datasets_py/logic/verification_api.py'
+SUPPORT_BLOB='41133c0b54b7dbcf6dee56caa9dd9957de8fe8bd'
+SUPPORT_SHA='37a8c4ac10610b877dd4eb0dd22fc1466b35b429fa4c4f02c76a43eb427284c0'
+guide_freeze={'path': '/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Guide577-four-docs-Source-closed-and-frozen.json', 'bytes': 6154, 'sha256': 'd27876c5d8801f49721153981e8e63369349bb5f40fc8159b31793996946bf13'}
+guarded_guide={'path': '/tmp/P1-proof-cache-translation-current-6btZZr/phase8-metric-lineage/actual-Guide577-four-docs-three-FF-publication.json', 'bytes': 2700, 'sha256': '22ad68b457d362a51ab947499b84e868c52bff4396123d79756ec26a53dc572d'}
+guide=json_ref(guide_freeze);live=json_ref(guarded_guide)
+branch='refs/heads/isolated/phase7-proof-receipt-typed-bounds'
+
+def main():
+    assert sys.argv[1:] in (['--seal'],['--freeze'])
+    assert live['terminal_returncode']==0 and live['evidence_ordinal']==577 and live['actual_doc_Source_closed']==guide_freeze
+    assert guide['Source_closed'] and guide['module_closed'] and guide['HEAD']==live['live_main_after']['datasets']==BASE
+    assert all(snapshot(repo)==b'' for repo in (D,A)) and rev(D,'HEAD')==BASE
+    assert capture(D/'.git/index')[0]==guide['index'] and capture(A/'.git/index')[0]==guide['A_index']
+    p=json_ref(PRIVATE)
+    assert not any(p[key] for key in ('Git_mutations','Native','SDK','SQL','canonical_Source_reads','canonical_writes','model_fits','real_RPC'))
+    assert p['actual_current_canonical_HEAD'] is p['runtime_authority'] is None
+    engineering=p['actual_engineering']
+    assert engineering['owning22_RED']['passed']==21 and engineering['owning22_RED']['failures']==1
+    assert engineering['SAME_owning22_GREEN']['passed']==22 and engineering['SAME_owning22_GREEN']['failures']==0
+    assert len(p['roles'])==2
+    for name in ('actual-receipt-owning22-RED.stdout.json','actual-receipt-owning22-SAME-GREEN.stdout.json'):
+        load(p['evidence'][name])
+    forward=b''.join(load(row['forward']) for row in p['roles'])
+    inverse=b''.join(load(row['inverse']) for row in p['roles'])
+    support=git(D,'cat-file','blob',SUPPORT_BLOB)
+    assert oid(support)==rev(D,'HEAD:'+SUPPORT)==SUPPORT_BLOB and sha256(support).hexdigest()==SUPPORT_SHA
+    assert not os.path.lexists(D/SUPPORT) and git(D,'ls-files','-v','--',SUPPORT).startswith(b'S ')
+    chosen={}
+    states={}
+    absent=[]
+    for row in p['roles']:
+        role=row['repo_relative_path']
+        prior_blob=rev(D,'HEAD:'+role)
+        actual=git(D,'cat-file','blob',prior_blob)
+        assert actual==load(row['base']) and oid(actual)==prior_blob
+        assert oid(load(row['post']))==row['computed_git_blob_sha1']
+        mode=git(D,'ls-files','-v','--',role).decode()
+        if mode.startswith('S '):
+            assert not os.path.lexists(D/role)
+            absent.append(role)
+        else:
+            state,raw=capture(D/role)
+            assert mode.startswith('H ') and raw==actual
+            states[role]=state
+        chosen[role]=dict(preimage=pinned_small(row['base']),postimage=pinned_small(row['post']),
+            preimage_git_blob=prior_blob,postimage_git_blob=row['computed_git_blob_sha1'])
+    assert set(absent)==set(chosen) and len(absent)==2
+    materialize_paths=[*absent,SUPPORT]
+    path=W/'SEALED-Phase7-receipt-bounds-exact-two.json'
+    sparse_meta,sparse_raw=capture(D/'.git/info/sparse-checkout')
+    patterns=[('/'+rel).encode() for rel in materialize_paths]
+    assert set(patterns).isdisjoint(sparse_raw.splitlines())
+    if sys.argv[1]=='--seal':
+        patch=save('exact-two-current-forward.patch',forward)
+        reverse=save('exact-two-current-inverse.patch',inverse)
+        candidate=save(path.name,dict(schema='Phase7-receipt-bounds-private-exact-two/v1',published_D_HEAD=BASE,
+            exact_two_roles=chosen,forward=patch,inverse=reverse,private_actual22=PRIVATE,
+            sparse_patterns_to_add=[r.decode() for r in patterns],untouched_support_Git_blob=SUPPORT_BLOB,
+            actual_bindings=None))
+        print(json.dumps(candidate));return
+    candidate=ref(path)
+    packet=json_ref(candidate)
+    assert (packet['published_D_HEAD'],packet['exact_two_roles'],packet['sparse_patterns_to_add'])==(BASE,chosen,[r.decode() for r in patterns])
+    assert load(packet['forward'])==forward and load(packet['inverse'])==inverse
+    assert rev(D,'refs/remotes/live-observation/main')==BASE and not (D/'.git'/branch).exists()
+    shared=snapshot(SHARED)
+    write=charge('Source-only-Phase7-receipt-bounds-WRITE-full-retained.json',guide['full_charge'],32*1024**2)
+    source=source_control()
+    with source.source_lease(D,mode='write',timeout_seconds=30) as lease:
+        support_meta,support_raw=capture(D/SUPPORT)
+        assert support_raw==support and rev(D,'HEAD:'+SUPPORT)==SUPPORT_BLOB
+        assert snapshot(D)==b'' and all(capture(D/rel)[0]==row for rel,row in states.items())
+        git(D,'sparse-checkout','add','--skip-checks',*(r.decode() for r in patterns))
+        attached,current_patterns=capture(D/'.git/info/sparse-checkout')
+        assert set(current_patterns.splitlines())==set(sparse_raw.splitlines())|set(patterns)
+        for entry in absent:
+            state,raw=capture(D/entry)
+            assert raw==load(chosen[entry]['preimage'])
+            states[entry]=state
+        support_meta,support_raw=capture(D/SUPPORT)
+        assert support_raw==support and rev(D,'HEAD:'+SUPPORT)==SUPPORT_BLOB
+        assert snapshot(D)==b'' and all(capture(D/rel)[0]==row for rel,row in states.items())
+        git(D,'apply','--check',packet['forward']['path'])
+        git(D,'switch','-c',branch.removeprefix('refs/heads/'))
+        git(D,'apply',packet['forward']['path'])
+        git(D,'apply','--check',packet['inverse']['path'])
+        assert read_names('diff','--name-only','-z')==set(chosen)
+        installed={}
+        for rel,row in chosen.items():
+            meta,body=capture(D/rel)
+            assert body==load(row['postimage']) and oid(body)==row['postimage_git_blob']
+            installed[rel]=meta|dict(stage0_and_committed_blob=oid(body),parent_blob=row['preimage_git_blob'],git_mode='100644')
+        git(D,'add','--',*sorted(chosen))
+        assert read_names('diff','--cached','--name-only','-z')==set(chosen)
+        git(D,'diff','--cached','--check','--',*sorted(chosen))
+        git(D,'commit','-m','Carry typed execution bounds into new proof receipts')
+        head=rev(D,'HEAD');tree=rev(D,'HEAD^{tree}')
+        assert rev(D,'HEAD^')==BASE and read_names('diff','--name-only','-z','HEAD^','HEAD')==set(chosen)
+        for rel,row in installed.items():
+            blob=row['stage0_and_committed_blob']
+            assert rev(D,'HEAD:'+rel)==blob and git(D,'ls-files','--stage','--',rel).decode().startswith('100644 '+blob+' 0'+chr(9))
+            assert capture(D/rel)[0]['full9']==row['full9']
+        index=capture(D/'.git/index')[0];branch_row,body=capture(D/'.git'/branch)
+        assert body.decode().strip()==head and snapshot(D)==b''
+    assert snapshot(SHARED)==shared and capture(A/'.git/index')[0]==guide['A_index']
+    result=save('actual-isolated-Phase7-receipt-bounds-exact-two-local-freeze.json',dict(
+        schema='isolated-Phase7-receipt-bounds-exact-two-Git-freeze/v1',root=str(D),parent=BASE,
+        frozen=dict(HEAD=head,tree=tree,index=index,branch=branch,branch_file=branch_row),candidate=candidate,
+        actual_Source42=SOURCE,isolated_Source_context_closed=True,actual_isolated_write_lease=lease.to_dict(),
+        prior_targets=states,committed=installed,terminal_returncode=0,only_two_D_tree_entries_changed=True,
+        additional_A_index=guide['A_index'],full_charge=write,local_clean=True,shared_source_or_Git_mutation=False,
+        sparse_materialized=materialize_paths,untouched_support={SUPPORT:support_meta|dict(stage0_and_committed_blob=SUPPORT_BLOB)},sparse_configuration_transition=dict(before=sparse_meta,after=attached),
+        pushed=False,ordinary_qualified=False,canonical_Source_write_claimed=False))
+    print(json.dumps(result))
+
+def pinned_small(item):
+    return {k:item[k] for k in ('path','bytes','sha256')}
+
+if __name__=='__main__':
+    main()

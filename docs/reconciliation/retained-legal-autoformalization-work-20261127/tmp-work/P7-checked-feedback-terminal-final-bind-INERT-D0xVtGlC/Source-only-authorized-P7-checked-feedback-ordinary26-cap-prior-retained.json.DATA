@@ -1,0 +1,68 @@
+{
+  "added_Source_only_envelope": 134217728,
+  "after_full_retained_precharge": {
+    "captures": 543392,
+    "capturesComplete": false,
+    "global_cap": 56706484234,
+    "internal_cap": 56515892360,
+    "internal_used": 56509535368,
+    "used": 56700127242
+  },
+  "exact_human_affirmation": {
+    "bytes": 2960,
+    "path": "/tmp/Main-source-cap-human-provenance-v01-g9hs_s_q/Root-original-human-Source-cap-approval.record.jsonl",
+    "sha256": "8fdf2d6c57542b3ce8e8a06773645487c39a3cb2a8a9929426cc785d3fc78dda"
+  },
+  "first_failed_COLLECT_full_retained_charge": {
+    "bytes": 1215,
+    "path": "/tmp/P7-checked-feedback-ordinary26-INERT-D8rOVMxo/Source-only-authorized-P7-checked-feedback-ordinary26-cap-prior-retained.json",
+    "sha256": "f7322716aa4783ac2228167afa5b9df833ad65aa6f3a59f8d40967b538ab22e1"
+  },
+  "no_policy_capacity_or_model_change": true,
+  "prior": {
+    "captures": 543391,
+    "capturesComplete": false,
+    "global_cap": 56572266506,
+    "internal_cap": 56381674632,
+    "internal_used": 56375317640,
+    "used": 56565909514
+  },
+  "protected_Guide573_publication": {
+    "bytes": 3117,
+    "path": "/tmp/Root-P1-Lean-live-ordinary92-reconcile-v596/actual-Guide573-four-docs-three-FF-publication.json",
+    "sha256": "1a83a7c66b2e726b4f6605039fbd5bad4296f6cb3f008e965436c68a9e89e8c7"
+  },
+  "read10_full_retained_charge": {
+    "bytes": 1275,
+    "path": "/tmp/P7-Guide573-successor-live-READ10-controls-JedG5GQ0/Source-only-isolated-Phase7-READ10-full-retained.json",
+    "sha256": "7b3e154ab48ef42567a758075c797d4da9b1e1b860055821c3a4e47bff55d217"
+  },
+  "retained_abandoned_write_full_charge": {
+    "bytes": 1322,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/Source-only-Phase7-checked-exact9-guarded-write-full-retained-cap.json",
+    "sha256": "77b638e78933482b97a56a3ef479eec12d14f1e41f4640019e81712033b695c8"
+  },
+  "second_failed_RUN_full_retained_charge": {
+    "bytes": 2073,
+    "path": "/tmp/P7-checked-feedback-ordinary26-retry-owner-order-5D1JveT6/Source-only-authorized-P7-checked-feedback-ordinary26-cap-prior-retained.json",
+    "sha256": "b9a673cd433f63b66876a81c62f3344a3c513abf806628ff5eb4fb4588f186c5"
+  },
+  "selected": {
+    "captures": 543391,
+    "capturesComplete": false,
+    "global_cap": 56706484234,
+    "internal_cap": 56515892360,
+    "internal_used": 56375317640,
+    "used": 56565909514
+  },
+  "successor_epoch_charge": {
+    "bytes": 1303,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/Source-only-Phase7-ordinary26-content-epoch-full-retained-cap.json",
+    "sha256": "5734c5e00c26e36c3844e0dac298c039c59a094a01404be6049bad70b10ed447"
+  },
+  "successor_write_charge": {
+    "bytes": 1304,
+    "path": "/tmp/P7-checked-feedback-revalidated-final-LadvXFyf/Source-only-Phase7-checked-exact9-guarded-write-full-retained-cap-v02.json",
+    "sha256": "3a6b26b8bd39c3783596efd8b395bef88b1f16024579df8e869c04b1490324f3"
+  }
+}

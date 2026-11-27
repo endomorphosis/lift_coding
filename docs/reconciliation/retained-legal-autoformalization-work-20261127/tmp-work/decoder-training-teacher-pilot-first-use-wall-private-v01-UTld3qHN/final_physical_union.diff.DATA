@@ -1,0 +1,111 @@
+--- prior/final_physical_union.py
++++ candidate/final_physical_union.py
+@@ -240,13 +240,61 @@
+     return closes
+ 
+ 
++TEACHER_PILOT_FIRST_USE_WALL_SCHEMA = "reviewed-teacher-pilot-first-use-wall/v1"
++
++
++@dataclass(frozen=True)
++class TeacherPilotFirstUseWall:
++    span: object
++    opening_receipt_sha256: str
++    terminal_evidence_receipt_sha256: str
++
++
++def teacher_pilot_first_use_wall_commitment(ledger, all_paid_phases_sha256, witness):
++    require(type(witness) is TeacherPilotFirstUseWall and type(witness.span) is ledger.WallSpan,
++            "typed teacher pilot first-use wall and original endpoints required")
++    span = witness.span
++    identities = (all_paid_phases_sha256, span.receipt_sha256, witness.opening_receipt_sha256,
++                  witness.terminal_evidence_receipt_sha256)
++    require(all(ledger._pin(pin) for pin in (*identities, span.clock_domain_sha256))
++            and len(set(identities)) == len(identities)
++            and type(span.start_ns) is type(span.end_ns) is int and 0 <= span.start_ns < span.end_ns,
++            "distinct original wall endpoints and one bounded clock domain required")
++    return ledger.commitment((TEACHER_PILOT_FIRST_USE_WALL_SCHEMA, all_paid_phases_sha256, witness))
++
++
++def _teacher_pilot_first_use_wall(ledger, binding_pin, witness, expected, seen, reserved_pins, approve):
++    span = witness.span
++    original_windows = tuple((event, row["request_sha256"], leaf.close_sha256,
++        leaf.clock_domain_sha256, leaf.start_ns, leaf.end_ns) for event, (row, leaf) in sorted(seen.items()))
++    evidence = (span.receipt_sha256, witness.opening_receipt_sha256, witness.terminal_evidence_receipt_sha256)
++    require({pin for row in original_windows for pin in row[:3]}.union(reserved_pins).isdisjoint(evidence),
++            "first-use wall receipts must not alias original paid scope, request, event or close identities")
++    require(bool(original_windows)
++            and all(domain == span.clock_domain_sha256 and span.start_ns <= start <= end <= span.end_ns
++                    for _, _, _, domain, start, end in original_windows),
++            "first-use wall must enclose every original paid event in its clock domain")
++    clock_roster_sha256 = ledger.commitment(original_windows)
++    require(approve(expected, binding_pin, witness.opening_receipt_sha256, witness.terminal_evidence_receipt_sha256,
++                    clock_roster_sha256) is True,
++            "original clock owner refused the selected first-use endpoints or paid event windows")
++    return {"schema": TEACHER_PILOT_FIRST_USE_WALL_SCHEMA, "selection_sha256": expected,
++            "clock_domain_sha256": span.clock_domain_sha256, "receipt_sha256": span.receipt_sha256,
++            "start_ns": span.start_ns, "end_ns": span.end_ns, "elapsed_ns": span.end_ns - span.start_ns,
++            "opening_receipt_sha256": witness.opening_receipt_sha256,
++            "terminal_evidence_receipt_sha256": witness.terminal_evidence_receipt_sha256,
++            "physical_clock_windows_sha256": clock_roster_sha256, "covered_paid_events": len(original_windows),
++            "scope": "whole_pilot_opening_through_independently_authenticated_terminal_evidence"}
++
++
+ def verify_all_paid_phases(
+         ledger, validator, plans, comparison, cells, development_receipts, development_cost_evidence, offered, *,
+         physical_owner, preparation_development, expected_preparation_development_sha256, preparation_history,
+         preparation_roster_raw, development_roster_raw, expected_development_roster_sha256,
+         joint_roster_raw, expected_joint_roster_sha256, replay_preparation_close, replay_close,
+         replay_final_activity, replay_component, verify_whole_study_cost_owner,
+-        teacher_roster, replay_teacher_aggregate, teacher_request_binding=None):
++        teacher_roster, replay_teacher_aggregate, teacher_request_binding=None, first_use_wall=None,
++        expected_first_use_wall_sha256=None, verify_first_use_wall_owner=None):
+     """Carry the approved preparation and DEVELOPMENT costs through the existing FINAL cost owner.
+ 
+     This readback preserves the original FINAL plan, evidence and independent
+@@ -341,11 +389,23 @@
+     binding = (ALL_PAID_PHASES_SCHEMA, chosen, expected_preparation_development_sha256, prep_roster_pin,
+                expected_development_roster_sha256, expected_joint_roster_sha256)
+     binding_pin = ledger.commitment(binding)
++    has_wall = any(value is not None for value in (
++        first_use_wall, expected_first_use_wall_sha256, verify_first_use_wall_owner))
++
++    def current_wall():
++        if has_wall:
++            require(callable(verify_first_use_wall_owner)
++                    and teacher_pilot_first_use_wall_commitment(ledger, binding_pin, first_use_wall)
++                    == expected_first_use_wall_sha256,
++                    "exact selected first-use wall witness and original clock owner required")
++
++    current_wall()
+ 
+     def guarded(owner):
+         def checked(*args):
+             result = owner(*args)
+             current()
++            current_wall()
+             return result
+         return checked
+ 
+@@ -387,6 +447,15 @@
+     physical_owner._replay_physical_event_leaves(ledger, union, rows, expected_scope=physical_owner.PILOT,
+         replay_close=lambda row: seen[row["event_sha256"]][1])
+     current()
++    wall = {}
++    if has_wall:
++        selected_scope = {*chosen, expected_preparation_development_sha256, prep_roster_pin,
++                          expected_development_roster_sha256, expected_joint_roster_sha256,
++                          preparation_history["preparation_history_sha256"],
++                          comparison["cost_evidence_sha256"], teacher_roster_pin}
++        selected_scope.update(preparation_ids | final_ids)
++        wall["first_use_wall"] = _teacher_pilot_first_use_wall(ledger, binding_pin, first_use_wall,
++            expected_first_use_wall_sha256, seen, selected_scope, guarded(verify_first_use_wall_owner))
+     return {"schema": ALL_PAID_PHASES_SCHEMA, "all_paid_phases_sha256": binding_pin,
+             "preparation_development_sha256": expected_preparation_development_sha256,
+             "preparation_only_event_count": len(prep_only), "shared_producer_event_count": len(shared),
+@@ -394,4 +463,4 @@
+             "original_event_count": len(union),
+             "physical_paid_events": tuple(ledger._wire(union[key]) for key in sorted(union)),
+             "observed_exclusive_physical_work_ns": ledger._physical_work_ns(union),
+-            "dispatch_authority": False}
++            "dispatch_authority": False, **wall}

@@ -1,0 +1,81 @@
+"""Price exact detached inputs with the existing Reader arithmetic."""
+import json
+from hashlib import sha256
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+TMP = HERE.parent
+CANDIDATE = (HERE / 'verify_standalone_git.py', 46075,
+             '9fe6b3cfd9876c0e7d03019a9ace59b6daad54744bf2270bd5239cf2f217b527')
+PRIOR = (TMP / 'decoder-training-stage-a-selector-observer-private-v01-CKyIGens/verify_standalone_git.py',
+         44991, '2cf502a37fceafbd50a3610172dadbee282823460ce33a808512f843df25a5e4')
+RELOCATED = TMP / 'decoder-training-stage-a-relocated-archive-preview-private-v01-UHd8EKqI'
+PREVIEW = (RELOCATED / 'guide572-all-fresh-preview.INERT.json', 556438,
+           'e682f614e50a3e97af25fdf532df48607dbc52085571a9b84d494bbd46ff4cfb')
+EPOCH_OWNER = (RELOCATED / 'verify_rebind_capture.py', 137453,
+               'a5c1527b72f47c92e71a3a4ce81f8d027aca9ec2aaaac0df32ff5e9c95e37c8f')
+
+
+def checked(reference):
+    path, size, expected = reference
+    raw = path.read_bytes()
+    if (len(raw), sha256(raw).hexdigest()) != (size, expected):
+        raise ValueError(f'Detached input differs: {path}')
+    return raw
+
+
+def load(reference):
+    raw = checked(reference)
+    namespace = {'Path': Path}
+    exec(compile(raw, str(reference[0]), 'exec'), namespace)
+    return namespace
+
+
+def fixture():
+    preview = json.loads(checked(PREVIEW))
+    assert preview['execution_selected'] is False and preview['source_body_reads'] == 32
+    plan = preview['reader_inputs']
+    retained = preview['relocated_retained_outer']
+    source = plan['fresh_Source_body_targets']
+    index = plan['current_index']
+    sizes = load(EPOCH_OWNER)['_plan_compact_archive_sizes'](
+        plan, retained, [row for row in retained if row['path'].endswith('.py')],
+        {row['path']: row['full9'] for row in source})
+    known = {row['path']: row for row in retained}
+    roots = {role: Path(row['root']) for role, row in plan['current_roots'].items()}
+    guard = {'D_index': index, 'A_index': known[str(roots['A'] / '.git/index')],
+             'exact_exclude_pins': [known[str(roots[role] / '.git/info/exclude')] for role in ('D', 'A')]}
+    args = (guard, plan['four_guide_post_candidates_for_current_owner_recheck'], source, [],
+            [{'path': str(PREVIEW[0]), 'bytes': PREVIEW[1], 'sha256': PREVIEW[2]}])
+    limits = {'epoch_output_maximums': sizes, 'git_output_maximum': 8192,
+              'persist_python_epoch': False, 'retain_terminal_git_controls': True}
+    return args, limits
+
+
+def price():
+    api = load(CANDIDATE)
+    args, limits = fixture()
+    reserve = api['source32_paired_reader_reservation'](
+        *args, **limits, capture_partition=api['STAGE_A_RELOCATED_ALL_FRESH_RESERVATION'])
+    # Three persisted parent observations, with decimal field width bounds.
+    limit_stamp = dict.fromkeys(args[0]['D_index']['full9'], '9' * 32)
+    matrices = sum(3 * len((json.dumps(
+        [{'path': str(path), 'full9': limit_stamp} for path in reversed(Path(row['path']).parents)],
+        separators=(',', ':'), sort_keys=True, ensure_ascii=False) + '\n').encode())
+                   for row in args[2])
+    ref_maximum = api['_STAGE_A_GIT_STREAM_LIMIT']
+    selector = api['stage_a_git_selector_output_allowance'](git_output_maximum=limits['git_output_maximum'])
+    selector_raw = 2 * (2 * ref_maximum + 1)
+    return dict(
+        schema='private-stage-a-relocated-reservation-scenario/v1',
+        capture_partition=api['STAGE_A_RELOCATED_ALL_FRESH_RESERVATION'],
+        Reader_core=reserve, Reader_epoch_LIST_sizes=limits['epoch_output_maximums'],
+        Reader_parent_matrix_allowance=matrices, Reader_selected_control_reads=args[4],
+        selector_git_stream_allowance=selector, selector_raw_stream_write_readback_allowance=selector_raw,
+        selector_Reader_conditional_subtotal=reserve['logical_selected_bytes'] + matrices + selector + selector_raw,
+        additional_owner_control_roster=None, live_reservation=None,
+        execution_selected=False, dispatch_authority=False)
+
+
+if __name__ == '__main__':
+    print(json.dumps(price(), indent=2, sort_keys=True))
